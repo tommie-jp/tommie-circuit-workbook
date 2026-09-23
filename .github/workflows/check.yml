@@ -1,0 +1,26 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# 読むだけ。既定の token の権限に頼らない。
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      # フェンスの道具は tommie-fence の Release の tgz (package.json の URL)。
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      # 置き場・front matter・フェンス名・フェンスの読めない行・目次の古さ。
+      - run: npm run check

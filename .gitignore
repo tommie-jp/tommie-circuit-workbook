@@ -1,0 +1,6 @@
+node_modules/
+
+# npm run render の書き出し先。図はフェンスの版で変わる生成物なのでコミットしない
+out/
+
+.DS_Store
