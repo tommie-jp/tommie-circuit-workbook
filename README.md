@@ -1,5 +1,9 @@
 # tommie-circuit-workbook
 
+> [!WARNING]
+> この 4 冊は AI (Claude) が書いたもので、人間の専門家の校正を受けていない。
+> 回路・数値・手順が間違っている可能性がある。組む前に自分で確かめてほしい。
+
 回路・Analog Discovery・NanoVNA・電験三種の 4 冊の実験帳。回路図と実体配線図は
 [tommie-fence](https://github.com/tommie-jp/tommie-fence) の Markdown フェンス
 (` ```circuit ` / ` ```breadboard ` / ` ```perfboard `) で書く。
