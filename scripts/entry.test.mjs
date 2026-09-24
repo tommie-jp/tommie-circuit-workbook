@@ -90,6 +90,25 @@ ${extra}---
     .some((error) => /device/.test(error)));
 });
 
+test('accepts an entry in the fourth book, which takes no device', () => {
+  const power = (extra) => check('04-denken/03-ac-circuits/07-power-factor.md', `---
+book: denken
+chapter: 3
+id: 3-7
+title: 力率改善
+tier: 50
+source: 自作
+board: BB
+${extra}---
+
+# 3-7 力率改善
+`).errors;
+
+  assert.deepEqual(power(''), []);
+  assert.ok(power('device: AD3\n').some((error) => /device/.test(error)));
+  assert.ok(power('era: 今\n').some((error) => /era/.test(error)));
+});
+
 test('requires the first heading to be the id and the title', () => {
   const errors = check('01-circuits/01-basics/01-led.md', LED.replace('# 1-1 LED を点ける', '# LED を点ける')).errors;
 

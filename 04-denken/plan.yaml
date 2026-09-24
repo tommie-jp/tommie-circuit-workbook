@@ -1,0 +1,201 @@
+# 04-denken の計画 — 必須 50 ⊂ 入門 100 ⊂ 中級 200 の 200 題。目次 (README) はここと題のファイルから npm run toc が組む。
+- { id: 0-1, tier: 50, board: —, title: 安全の約束 — 商用電源に触れない。低圧の交流の作り方と電流の上限 }
+- { id: 0-2, tier: 50, board: BB, title: テスターの直流と交流 — 平均値形と真の実効値形で方形波の読みが違う }
+- { id: 0-3, tier: 50, board: BB, title: 電圧と電流を同時に見る — シャント抵抗で電流を電圧に、AD の 2 ch }
+- { id: 0-4, tier: 100, board: BB, title: 低圧の交流電源を作る — AD の波形発生器を OP アンプとプッシュプルで受ける }
+- { id: 0-5, tier: 100, board: BB, title: AC 出力の AC アダプタ — 無負荷と負荷で二次電圧が変わる }
+- { id: 0-6, tier: 100, board: BB, title: ヒューズと電流制限 — シャントの発熱も測る }
+- { id: 0-7, tier: 200, board: —, title: 電験の図記号と tommie-fence の記号の対応 — 1 枚の図に並べる }
+- { id: 0-8, tier: 200, board: —, title: データロガー — 長い時間の変化を記録 (電池の放電・温度上昇) }
+- { id: 0-9, tier: 200, board: BB, title: 人体の抵抗を 3 V で測る — 乾いた手と濡れた手 }
+- { id: 0-10, tier: 200, board: —, title: 測った値のまとめ方 — 有効数字、表とグラフ、式との突き合わせ }
+- { id: 1-1, tier: 50, board: BB, title: オームの法則 — 電圧・電流・抵抗を同時に測る }
+- { id: 1-2, tier: 50, board: BB, title: 直列・並列の合成抵抗と分圧・分流 }
+- { id: 1-3, tier: 50, board: BB, title: キルヒホッフの法則 — 2 電源の回路で節点の電流と閉路の電圧 }
+- { id: 1-4, tier: 50, board: BB, title: 重ね合わせの理 — 電源を 1 つずつ残して足す }
+- { id: 1-5, tier: 50, board: BB, title: テブナンの定理 — 開放電圧と内部抵抗を測って等価回路を作る }
+- { id: 1-6, tier: 50, board: BB, title: ホイートストンブリッジの平衡条件 }
+- { id: 1-7, tier: 100, board: BB, title: 電池の内部抵抗 — 負荷を変えて端子電圧の直線を引く }
+- { id: 1-8, tier: 100, board: BB, title: 最大電力の伝達 — 負荷抵抗 = 内部抵抗 }
+- { id: 1-9, tier: 100, board: BB, title: 電線の電圧降下 — 細く長い電線で負荷の電圧が下がる }
+- { id: 1-10, tier: 100, board: BB, title: Δ-Y 変換 — 端子間の抵抗が同じになることを測る }
+- { id: 1-11, tier: 200, board: BB, title: ミルマンの定理 — 並列の電源の電圧 }
+- { id: 1-12, tier: 200, board: BB, title: ノートンの定理 — 電流源と電圧源の等価変換 }
+- { id: 1-13, tier: 200, board: BB, title: はしご回路 — R-2R で電圧が半分ずつ }
+- { id: 1-14, tier: 200, board: BB, title: 抵抗の温度係数 — 銅線と電球 }
+- { id: 1-15, tier: 200, board: BB, title: ジュールの法則 — 抵抗の発熱と温度上昇 }
+- { id: 1-16, tier: 200, board: BB, title: 補償の定理 — 抵抗を 1 本変えたときの電流の変化 }
+- { id: 1-17, tier: 200, board: PF, title: 対称な回路 — 立方体に組んだ抵抗 12 本の合成抵抗 }
+- { id: 1-18, tier: 200, board: BB, title: 非線形抵抗の動作点 — 電球と抵抗の直列を負荷線で }
+- { id: 2-1, tier: 50, board: BB, title: コンデンサの直列・並列 — 合成容量と分担電圧 }
+- { id: 2-2, tier: 50, board: —, title: 平行平板コンデンサ — アルミ箔の面積・間隔・誘電体で容量が変わる }
+- { id: 2-3, tier: 50, board: —, title: 電磁誘導 — 磁石をコイルに出し入れして起電力 (レンツの法則) }
+- { id: 2-4, tier: 50, board: —, title: 電流が作る磁界 — 電線の周りの方位磁針 (右ねじの法則) }
+- { id: 2-5, tier: 50, board: —, title: 電磁力 — 磁石の間の電線が動く (フレミングの左手) }
+- { id: 2-6, tier: 100, board: —, title: 自己インダクタンス — 巻数と鉄心でコイルの L が変わる }
+- { id: 2-7, tier: 100, board: —, title: 相互インダクタンスと結合係数 — 2 つのコイルの距離 }
+- { id: 2-8, tier: 100, board: BB, title: 和動接続と差動接続 — コイルの直列で極性を変える }
+- { id: 2-9, tier: 100, board: —, title: 電磁石の吸引力 — 電流と巻数で変わる }
+- { id: 2-10, tier: 100, board: BB, title: ホール効果 — ホール素子で磁束密度を測る }
+- { id: 2-11, tier: 200, board: —, title: 磁気回路 — 鉄心のすき間で磁束が減る }
+- { id: 2-12, tier: 200, board: BB, title: ヒステリシス — 鉄心の B-H 曲線を XY 表示で }
+- { id: 2-13, tier: 200, board: —, title: うず電流 — 磁石がアルミ管の中をゆっくり落ちる }
+- { id: 2-14, tier: 200, board: —, title: 静電誘導と静電遮へい — 誘導電圧が金網で消える }
+- { id: 2-15, tier: 200, board: BB, title: コンデンサの蓄えるエネルギー — 充電して LED を何秒光らせるか }
+- { id: 2-16, tier: 200, board: —, title: 比誘電率 — 同じ電極で空気・紙・プラスチック }
+- { id: 2-17, tier: 200, board: —, title: ファラデーの法則 — 磁石を落とす速さと起電力 }
+- { id: 2-18, tier: 200, board: BB, title: コイルの蓄えるエネルギー — 切った瞬間の逆起電力 }
+- { id: 3-1, tier: 50, board: BB, title: 正弦波の最大値・実効値・平均値 — √2 と 2/π を測る }
+- { id: 3-2, tier: 50, board: BB, title: R・L・C の電圧と電流の位相 }
+- { id: 3-3, tier: 50, board: BB, title: RL 直列 — インピーダンスとベクトル図 }
+- { id: 3-4, tier: 50, board: BB, title: RC 直列 — 電圧の和はベクトルの和 }
+- { id: 3-5, tier: 50, board: BB, title: RLC 直列共振 — 共振周波数で電流が最大 }
+- { id: 3-6, tier: 50, board: BB, title: 有効電力・無効電力・皮相電力と力率 }
+- { id: 3-7, tier: 50, board: BB, title: 力率改善 — コンデンサを並列にして線電流を減らす }
+- { id: 3-8, tier: 100, board: BB, title: RLC 並列共振 — 共振で電流が最小 }
+- { id: 3-9, tier: 100, board: BB, title: リアクタンスの周波数特性 — X_L は f に比例、X_C は反比例 }
+- { id: 3-10, tier: 100, board: BB, title: 記号法を測って確かめる — RL と C の並列の合成インピーダンス }
+- { id: 3-11, tier: 100, board: BB, title: Q と帯域幅 — 共振の鋭さを R で変える }
+- { id: 3-12, tier: 100, board: BB, title: 瞬時電力 — v × i の波形は 2 倍の周波数で脈打つ }
+- { id: 3-13, tier: 100, board: BB, title: ひずみ波 — 方形波を FFT で基本波と高調波に分ける }
+- { id: 3-14, tier: 200, board: BB, title: ひずみ波の実効値 — 各調波の実効値の二乗和の平方根 }
+- { id: 3-15, tier: 200, board: BB, title: 高調波電流 — コンデンサ入力の整流の電流はひずむ }
+- { id: 3-16, tier: 200, board: BB, title: 直列共振の電圧拡大 — L と C の電圧が電源より大きい }
+- { id: 3-17, tier: 200, board: BB, title: 直流と交流の重ね合わせ — 実効値の合成 }
+- { id: 3-18, tier: 200, board: BB, title: 相互誘導回路の等価回路 — T 形に置き換える }
+- { id: 3-19, tier: 200, board: BB, title: 位相の進み遅れをリサジュー図形で }
+- { id: 3-20, tier: 200, board: BB, title: 50 Hz と 60 Hz — 同じ負荷でリアクタンスと力率が変わる }
+- { id: 3-21, tier: 200, board: BB, title: 移相回路 — RC で位相を 90° ずらす }
+- { id: 3-22, tier: 200, board: BB, title: ベクトル軌跡 — R を変えたときの電流の先端は円を描く }
+- { id: 4-1, tier: 50, board: BB, title: 三相の信号を作る — AD の 2 ch (位相 120°) と OP アンプで 3 相目 }
+- { id: 4-2, tier: 50, board: BB, title: Y 結線 — 線間電圧は相電圧の √3 倍、位相は 30° 進む }
+- { id: 4-3, tier: 50, board: BB, title: Δ 負荷 — 線電流は相電流の √3 倍 }
+- { id: 4-4, tier: 50, board: BB, title: 平衡負荷の中性線 — 平衡なら中性線の電流は 0 }
+- { id: 4-5, tier: 100, board: BB, title: 三相電力 — P = √3 VI cos θ }
+- { id: 4-6, tier: 100, board: BB, title: 不平衡負荷 — 中性線の電流 }
+- { id: 4-7, tier: 100, board: BB, title: 負荷の Y-Δ 変換 — 同じ線電流になる抵抗 }
+- { id: 4-8, tier: 100, board: BB, title: 二電力計法 — 2 つの読みの和が三相電力 }
+- { id: 4-9, tier: 200, board: BB, title: 相順 — コンデンサと 2 つのランプで相回転を見分ける }
+- { id: 4-10, tier: 200, board: BB, title: V 結線 — 2 台で三相を作る、出力は Δ の 1/√3 }
+- { id: 4-11, tier: 200, board: —, title: 回転磁界 — 3 つのコイルと方位磁針 }
+- { id: 4-12, tier: 200, board: —, title: 三相交流を発電する — 小型 BLDC を回して 3 つの波形 }
+- { id: 4-13, tier: 200, board: BB, title: 欠相 — 1 線が切れたときの各相の電圧 }
+- { id: 4-14, tier: 200, board: BB, title: 中性点の移動 — 中性線を外した不平衡 Y }
+- { id: 4-15, tier: 200, board: BB, title: 三相の瞬時電力は一定 — 3 つの v × i の和 }
+- { id: 4-16, tier: 200, board: BB, title: 三相の力率改善 — Δ に入れたコンデンサ }
+- { id: 5-1, tier: 50, board: BB, title: RC の充電 — 時定数 τ = CR で 63 % }
+- { id: 5-2, tier: 50, board: BB, title: RC の放電 — τ で 37 % }
+- { id: 5-3, tier: 50, board: BB, title: RL の電流の立ち上がり — τ = L / R }
+- { id: 5-4, tier: 100, board: BB, title: 方形波で繰り返し見る — 時定数と周期の比 }
+- { id: 5-5, tier: 100, board: BB, title: RLC の過渡 — R で減衰振動・臨界・過制動 }
+- { id: 5-6, tier: 100, board: BB, title: 切り替えの瞬間 — C の電圧と L の電流は急に変わらない }
+- { id: 5-7, tier: 200, board: BB, title: 微分回路と積分回路 }
+- { id: 5-8, tier: 200, board: BB, title: 充電したコンデンサ同士をつなぐ — エネルギーの半分が消える }
+- { id: 5-9, tier: 200, board: BB, title: 突入電流 — コンデンサ入力の整流で電源を入れた瞬間 }
+- { id: 5-10, tier: 200, board: BB, title: LC の自由振動 — 周波数と減衰 }
+- { id: 6-1, tier: 50, board: BB, title: ダイオードの電圧電流特性 }
+- { id: 6-2, tier: 50, board: BB, title: トランジスタの静特性 — I_C-V_CE と h_FE }
+- { id: 6-3, tier: 50, board: BB, title: エミッタ接地増幅 — 電圧増幅度とバイアス }
+- { id: 6-4, tier: 50, board: BB, title: OP アンプの反転・非反転増幅 — 仮想短絡 }
+- { id: 6-5, tier: 100, board: BB, title: FET の伝達特性 — V_GS と I_D }
+- { id: 6-6, tier: 100, board: BB, title: ツェナーダイオードの定電圧 }
+- { id: 6-7, tier: 100, board: BB, title: トランジスタのスイッチ — 飽和と遮断 }
+- { id: 6-8, tier: 100, board: BB, title: エミッタフォロア — 入出力インピーダンス }
+- { id: 6-9, tier: 100, board: BB, title: 負帰還 — 増幅度と帯域の交換 }
+- { id: 6-10, tier: 200, board: BB, title: デシベル — 増幅度と減衰を dB で }
+- { id: 6-11, tier: 200, board: BB, title: 差動増幅と同相除去 }
+- { id: 6-12, tier: 200, board: BB, title: 発振の条件 — RC 3 段の移相発振 }
+- { id: 6-13, tier: 200, board: BB, title: 光電効果 — フォトダイオードの電流は光の強さに比例 }
+- { id: 6-14, tier: 200, board: —, title: 熱電効果 — 熱電対の起電力 (ゼーベック効果) }
+- { id: 6-15, tier: 200, board: BB, title: OP アンプの加算・積分・微分 }
+- { id: 6-16, tier: 200, board: BB, title: 半導体の温度特性 — ダイオードの順電圧は約 −2 mV/℃ }
+- { id: 7-1, tier: 50, board: BB, title: 分流器 — 電流計の測定範囲を広げる }
+- { id: 7-2, tier: 50, board: BB, title: 倍率器 — 電圧計の測定範囲を広げる }
+- { id: 7-3, tier: 50, board: BB, title: 電圧計と電流計のつなぎ方で誤差が変わる (電圧計が先 / 電流計が先) }
+- { id: 7-4, tier: 50, board: BB, title: 誤差率と補正率 — 1 % の抵抗を測って計算する }
+- { id: 7-5, tier: 100, board: BB, title: 電力計の結線 — 単相の電力を測る }
+- { id: 7-6, tier: 100, board: BB, title: 整流形の計器 — 平均値を測って実効値を表示する (波形率 1.11) }
+- { id: 7-7, tier: 100, board: —, title: 計器用変流器 (CT) — 二次を開放しない理由 }
+- { id: 7-8, tier: 100, board: BB, title: 交流ブリッジで C と L を測る }
+- { id: 7-9, tier: 200, board: BB, title: 電位差計法 — 電流を流さずに電圧を測る }
+- { id: 7-10, tier: 200, board: BB, title: 低い抵抗の測定 — 4 端子法 }
+- { id: 7-11, tier: 200, board: BB, title: 位相差の測定 — 時間差とリサジュー }
+- { id: 7-12, tier: 200, board: BB, title: 周波数の測定 — カウンタと周期 }
+- { id: 7-13, tier: 200, board: —, title: 電力量計の原理 — 電力を時間で積算する }
+- { id: 7-14, tier: 200, board: BB, title: 零位法と偏位法 }
+- { id: 7-15, tier: 200, board: BB, title: 高い抵抗の測定 — 絶縁抵抗計の原理 (µA を測る) }
+- { id: 7-16, tier: 200, board: —, title: ディジタル計器の分解能と確度 — 桁と ±digit }
+- { id: 8-1, tier: 50, board: BB, title: 巻数比と電圧比・電流比 }
+- { id: 8-2, tier: 50, board: BB, title: 無負荷試験 — 励磁電流と鉄損 }
+- { id: 8-3, tier: 50, board: BB, title: 短絡試験 — 銅損とインピーダンス電圧 }
+- { id: 8-4, tier: 100, board: BB, title: 効率 — 負荷を変えて最大効率 (鉄損 = 銅損) }
+- { id: 8-5, tier: 100, board: BB, title: 電圧変動率 — 負荷をつなぐと二次電圧が下がる }
+- { id: 8-6, tier: 100, board: BB, title: 極性試験 — 減極性と加極性 }
+- { id: 8-7, tier: 200, board: BB, title: 単巻変圧器 — 分路巻線と直列巻線 }
+- { id: 8-8, tier: 200, board: BB, title: 並行運転 — 巻数比がずれると循環電流 }
+- { id: 8-9, tier: 200, board: BB, title: 三相の結線 — Y-Δ で位相が 30° ずれる }
+- { id: 8-10, tier: 200, board: BB, title: 励磁突入電流と鉄心の飽和 }
+- { id: 8-11, tier: 200, board: BB, title: 計器用変成器の比誤差 — 負担を変える }
+- { id: 8-12, tier: 200, board: —, title: 等価回路を組む — 8-2・8-3 の値から一次換算 }
+- { id: 9-1, tier: 50, board: BB, title: 直流モータの逆起電力 — 回転数に比例する }
+- { id: 9-2, tier: 50, board: BB, title: 直流モータを発電機に — 回す速さと起電力 }
+- { id: 9-3, tier: 50, board: —, title: アラゴの円板 — 回る磁石にアルミ円板がついて回る (誘導機の原理) }
+- { id: 9-4, tier: 100, board: BB, title: 直流モータの速度制御 — 電圧 (PWM) で速さが変わる }
+- { id: 9-5, tier: 100, board: BB, title: トルクと電流 — 負荷を掛けると電流が増える }
+- { id: 9-6, tier: 100, board: BB, title: 同期速度 — BLDC を三相で回して N = 120 f / p }
+- { id: 9-7, tier: 100, board: BB, title: ステッピングモータ — パルスの数と回転角 }
+- { id: 9-8, tier: 200, board: —, title: すべり — 回転磁界の中のアルミ缶は磁界より遅く回る }
+- { id: 9-9, tier: 200, board: BB, title: 直流発電機の外部特性 — 負荷で端子電圧が下がる }
+- { id: 9-10, tier: 200, board: BB, title: 発電ブレーキ — モータの端子を抵抗で閉じると早く止まる }
+- { id: 9-11, tier: 200, board: —, title: 同期発電機の周波数 — f = pN / 120 }
+- { id: 9-12, tier: 200, board: BB, title: 同期発電機の負荷特性 — 同期インピーダンス }
+- { id: 9-13, tier: 200, board: BB, title: ブラシレスモータの転流 — ホール素子で相を切り替える }
+- { id: 9-14, tier: 200, board: —, title: モータの効率 — 入力電力とおもりを持ち上げる仕事 }
+- { id: 9-15, tier: 200, board: BB, title: サーボ機構 — 位置のフィードバック }
+- { id: 9-16, tier: 200, board: BB, title: 始動電流 — モータを入れた瞬間の電流 }
+- { id: 10-1, tier: 50, board: BB, title: 単相の半波整流と全波整流 — 平均値は 0.45 V と 0.9 V }
+- { id: 10-2, tier: 50, board: BB, title: 平滑コンデンサとリップル }
+- { id: 10-3, tier: 50, board: BB, title: 降圧チョッパ — 出力電圧 = デューティ比 × 入力 }
+- { id: 10-4, tier: 100, board: BB, title: 昇圧チョッパ — 出力電圧 = 入力 / (1 − デューティ比) }
+- { id: 10-5, tier: 100, board: BB, title: サイリスタの位相制御 — 点弧角で平均電圧 (低圧 AC) }
+- { id: 10-6, tier: 100, board: BB, title: 単相インバータ — H ブリッジで直流から交流 }
+- { id: 10-7, tier: 200, board: BB, title: 三相全波整流 — 6 パルスとリップル }
+- { id: 10-8, tier: 200, board: BB, title: PWM インバータ — 正弦波 PWM と LC フィルタ }
+- { id: 10-9, tier: 200, board: BB, title: トライアックの交流電力制御 }
+- { id: 10-10, tier: 200, board: BB, title: 還流ダイオード — 誘導負荷の電流が途切れない }
+- { id: 10-11, tier: 200, board: BB, title: 昇降圧チョッパ — 出力の極性が反転する }
+- { id: 10-12, tier: 200, board: BB, title: スイッチング損失 — MOSFET の発熱と周波数 }
+- { id: 10-13, tier: 200, board: BB, title: VVVF — 周波数と電圧を一緒に変えて BLDC を回す }
+- { id: 10-14, tier: 200, board: BB, title: 整流回路の力率 — 電流のひずみで力率が下がる }
+- { id: 11-1, tier: 50, board: BB, title: 照度の逆二乗則 — LED からの距離とフォトダイオードの電流 }
+- { id: 11-2, tier: 50, board: BB, title: オン・オフ制御 — 温度を一定に保つ (サーミスタ + 比較器 + ヒータ) }
+- { id: 11-3, tier: 100, board: BB, title: 一次遅れ系のステップ応答 — RC で模す }
+- { id: 11-4, tier: 100, board: BB, title: ボード線図 — 折れ点で −3 dB、−20 dB/dec }
+- { id: 11-5, tier: 100, board: BB, title: 論理回路 — AND・OR・NOT と真理値表 }
+- { id: 11-6, tier: 200, board: —, title: 電気分解 — 流した電荷と発生した気体の量 (ファラデーの法則) }
+- { id: 11-7, tier: 200, board: —, title: 電池の起電力と内部抵抗 — ボルタ電池・ダニエル電池 }
+- { id: 11-8, tier: 200, board: —, title: ペルチェ素子 — 電流の向きで冷える側が入れ替わる }
+- { id: 11-9, tier: 200, board: —, title: 電熱 — セメント抵抗でアルミ塊を温め、電力量と温度上昇 (比熱) }
+- { id: 11-10, tier: 200, board: BB, title: PID 制御 — モータの速さを一定に (Pico) }
+- { id: 11-11, tier: 200, board: BB, title: フリップフロップとカウンタ — 2 進数 }
+- { id: 11-12, tier: 200, board: BB, title: シーケンス制御 — リレーの自己保持回路 }
+- { id: 11-13, tier: 200, board: BB, title: 光源の効率 — 電球と LED を同じ照度にしたときの電力 }
+- { id: 11-14, tier: 200, board: BB, title: A-D 変換 — 分解能と量子化誤差 }
+- { id: 12-1, tier: 50, board: BB, title: 太陽電池の I-V 特性と最大電力点 }
+- { id: 12-2, tier: 50, board: BB, title: 送電線の模型 — R と L の線路で電圧降下と電力損失 }
+- { id: 12-3, tier: 100, board: BB, title: 力率と送電損失 — 同じ電力を運ぶ電流が力率で変わる }
+- { id: 12-4, tier: 100, board: BB, title: 単相 3 線式 — 中性線が切れると電圧が偏る }
+- { id: 12-5, tier: 200, board: BB, title: フェランチ効果 — 軽負荷で受電端の電圧が上がる (π 形の模型) }
+- { id: 12-6, tier: 200, board: BB, title: 調相 — 受電端のコンデンサで電圧を保つ }
+- { id: 12-7, tier: 200, board: BB, title: 短絡電流と % インピーダンス }
+- { id: 12-8, tier: 200, board: BB, title: 過電流継電器 — 設定を超えると遮断する (比較器 + リレー) }
+- { id: 12-9, tier: 200, board: —, title: 地絡と零相電流 — 零相変流器で漏れを見つける }
+- { id: 12-10, tier: 200, board: —, title: 風力・水力の模型 — 小さな発電機の回転と出力 }
+- { id: 12-11, tier: 200, board: BB, title: 蓄電池の充放電と効率 — 蓄電所の小さな模型 }
+- { id: 12-12, tier: 200, board: BB, title: 電源の並列運転と負荷の分担 — 内部抵抗の違い }
+- { id: 13-1, tier: 50, board: BB, title: 接地の効果 — 漏電した機器に触れたときの電圧 (抵抗の模型、5 V) }
+- { id: 13-2, tier: 100, board: —, title: 漏電遮断器の原理 — 往きと帰りの電流の差 }
+- { id: 13-3, tier: 200, board: BB, title: 絶縁抵抗の測定の原理 — 高い抵抗を µA で }
+- { id: 13-4, tier: 200, board: —, title: 接地抵抗の測定の原理 — 電位降下法 (水槽の模型、AD の低い交流) }
+- { id: 13-5, tier: 200, board: BB, title: 電線の太さ — 電圧降下と発熱 (許容電流の考え方) }
+- { id: 13-6, tier: 200, board: —, title: 需要率と負荷率 — 1 日の電力をロガーで記録する }

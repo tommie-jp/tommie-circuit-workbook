@@ -1,10 +1,10 @@
 # tommie-circuit-workbook
 
-回路・Analog Discovery・NanoVNA の 3 冊の実験帳。回路図と実体配線図は
+回路・Analog Discovery・NanoVNA・電験三種の 4 冊の実験帳。回路図と実体配線図は
 [tommie-fence](https://github.com/tommie-jp/tommie-fence) の Markdown フェンス
 (` ```circuit ` / ` ```breadboard ` / ` ```perfboard `) で書く。
 
-## 3 冊
+## 4 冊
 
 <!-- toc:start -->
 
@@ -13,6 +13,7 @@
 | [回路の教科書](01-circuits/README.md) | 直流の基本から実用回路まで。回路図と実体配線図を並べて組む | 50 | 100 | 200 | 1 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | Analog Discovery 2 / 3 と WaveForms で DC〜10 MHz を測る | 50 | 100 | 200 | 1 |
 | [NanoVNA の教科書](03-nanovna/README.md) | NanoVNA-H4 / V2 で 10 kHz〜4.4 GHz を測る。治具・部品・フィルタ・アンテナ・GHz 帯 | 50 | 100 | 200 | 1 |
+| [電験三種の教科書](04-denken/README.md) | 理論・機械・電力・法規の範囲を、低い電圧の実験で測って式を確かめる | 50 | 100 | 200 | 1 |
 
 <!-- toc:end -->
 
@@ -36,7 +37,7 @@
 
 ```yaml
 ---
-book: circuits          # circuits / analog-discovery / nanovna (置き場の冊から番号を除いた名前)
+book: circuits          # circuits / analog-discovery / nanovna / denken (置き場の冊から番号を除いた名前)
 chapter: 1              # 置き場の章の番号
 id: 1-1                 # 章-番号 (ファイル名の番号と同じ)
 title: LED を点ける — 抵抗で電流を決める

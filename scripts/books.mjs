@@ -1,5 +1,5 @@
 /**
- * 3 冊の冊と章の表。**ディレクトリ名・目次・front matter の検査がここを見る。**
+ * 4 冊の冊と章の表。**ディレクトリ名・目次・front matter の検査がここを見る。**
  *
  * 冊のディレクトリも章のディレクトリも `NN-slug` (2 桁の番号 + 英語の短い名前)。
  * front matter には番号を書かず、冊は `book: <slug>`、章は `chapter: <番号>` で書く。
@@ -81,6 +81,30 @@ export const BOOKS = [
       [8, 'amplifiers', 'アンプと能動回路の S パラメータ'],
       [9, 'ghz', 'GHz 帯の作法'],
       [10, 'automation', '自動化'],
+    ],
+  },
+  {
+    number: 4,
+    slug: 'denken',
+    title: '電験三種の教科書',
+    summary: '理論・機械・電力・法規の範囲を、低い電圧の実験で測って式を確かめる',
+    columns: ['board'],
+    // 章の名前の頭は試験の科目。科目合格で 1 科目だけ読む人が目次で境を見つけられるように
+    chapters: [
+      [0, 'tools', '道具と安全'],
+      [1, 'dc-circuits', '理論 — 直流回路'],
+      [2, 'electromagnetism', '理論 — 静電気と電磁気'],
+      [3, 'ac-circuits', '理論 — 交流回路'],
+      [4, 'three-phase', '理論 — 三相交流'],
+      [5, 'transients', '理論 — 過渡現象'],
+      [6, 'electronics', '理論 — 電子回路'],
+      [7, 'measurement', '理論 — 電気計測'],
+      [8, 'transformers', '機械 — 変圧器'],
+      [9, 'rotating-machines', '機械 — 回転機'],
+      [10, 'power-electronics', '機械 — パワーエレクトロニクス'],
+      [11, 'applications', '機械 — 照明・電熱・電気化学・制御・情報'],
+      [12, 'power-systems', '電力 — 発電・送配電・蓄電'],
+      [13, 'regulations', '法規 — 保安と施設管理'],
     ],
   },
 ].map((book) => ({

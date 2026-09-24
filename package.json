@@ -2,7 +2,7 @@
   "name": "tommie-circuit-workbook",
   "version": "0.0.0",
   "private": true,
-  "description": "回路・Analog Discovery・NanoVNA の実験帳。回路図と実体配線図を tommie-fence のフェンスで書く",
+  "description": "回路・Analog Discovery・NanoVNA・電験三種の実験帳。回路図と実体配線図を tommie-fence のフェンスで書く",
   "license": "CC-BY-4.0",
   "type": "module",
   "engines": {

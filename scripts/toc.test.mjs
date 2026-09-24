@@ -79,6 +79,20 @@ test('summarises every book at the root', () => {
   assert.match(toc, /\| 冊 \| 内容 \| 必須 \| 入門 \| 中級 \| 済 \|/);
   assert.match(toc, /\| \[回路の教科書\]\(01-circuits\/README\.md\) \| .* \| 1 \| 1 \| 2 \| 1 \|/);
   assert.match(toc, /\| \[NanoVNA の教科書\]\(03-nanovna\/README\.md\) \| .* \| 0 \| 0 \| 0 \| 0 \|/);
+  assert.match(toc, /\| \[電験三種の教科書\]\(04-denken\/README\.md\) \| .* \| 0 \| 0 \| 0 \| 0 \|/);
+});
+
+test('names each chapter of the fourth book after its exam subject', () => {
+  const denken = BOOKS.find((book) => book.slug === 'denken');
+  const toc = bookToc(denken, [written(denken, 3, 7, { board: 'BB' })]);
+
+  assert.equal(denken.dir, '04-denken');
+  assert.equal(denken.chapters.length, 14);
+  assert.ok(denken.chapters.slice(1, 8).every((chapter) => chapter.title.startsWith('理論 — ')));
+  assert.equal(denken.chapters.at(-1).title.split(' — ')[0], '法規');
+  // 目次の欄は板だけ (科目は章の名前で分かる)。
+  assert.match(toc, /\| # \| 題 \| 段 \| 板 \|/);
+  assert.ok(toc.includes('## 第 3 章 理論 — 交流回路'));
 });
 
 test('replaces only the text between the markers', () => {

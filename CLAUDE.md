@@ -1,13 +1,13 @@
 # tommie-circuit-workbook
 
-回路・Analog Discovery・NanoVNA の 3 冊の実験帳。本文は日本語、ライセンスは
+回路・Analog Discovery・NanoVNA・電験三種の 4 冊の実験帳。本文は日本語、ライセンスは
 CC BY 4.0。回路図と実体配線図は tommie-fence のフェンス
 (` ```circuit ` / ` ```breadboard ` / ` ```perfboard `) で書く。
 
 ## 置き場と書き方
 
 - 1 題 1 ファイル: `<NN-冊>/<NN-章>/<NN-題>.md` (冊は 01-circuits / 02-analog-discovery /
-  03-nanovna)。冊と章の表は `scripts/books.mjs`。front matter の `book` は番号を除いた名前
+  03-nanovna / 04-denken)。冊と章の表は `scripts/books.mjs`。front matter の `book` は番号を除いた名前
 - 頭に front matter (鍵と値の決まりは README の「書き方」と `scripts/entry.mjs`)。
   本文の最初の見出しは `# <id> <title>`
 - 本文の順: 説明 → 回路図 → 実体配線図 → 計器の設定 → 見るべき値 → 出典
@@ -18,6 +18,8 @@ CC BY 4.0。回路図と実体配線図は tommie-fence のフェンス
   (印の外の前書きは手で書く)。書いた題は link、まだの題は字だけ
 - 借りた回路は `source` と本文の出典に出所を書く。図と文は写さず描き直す
 - 扱わないもの: 真空管、商用電源 (AC 100 V) に直に繋ぐ回路
+- 電験三種の冊は過去問を写さない (問題文・数値・図とも)。試験の範囲の単元から実験を起こす。
+  回路図は `style:` に `standard: european` (試験の図と同じ四角い抵抗)
 
 ## フェンスを書くとき
 
