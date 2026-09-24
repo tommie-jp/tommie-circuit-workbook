@@ -41,3 +41,17 @@ test('does not close a fence with a shorter or different run', () => {
 
   assert.deepEqual(fencesIn(text).misspelled, []);
 });
+
+test('finds the vna fence (the NanoVNA screen)', () => {
+  const { found, misspelled } = fencesIn('```vna\nsweep: 1M-300M\n```\n');
+
+  assert.deepEqual([...found], ['vna']);
+  assert.deepEqual(misspelled, []);
+});
+
+test('flags a near miss of vna, but not short names of other languages', () => {
+  // 3 字の vna に 2 字違いまでを許すと、ini や png まで書き間違いに見える。
+  const text = ['```VNA', '```', '```vnaa', '```', '```ini', '```', '```png', '```', '```lua', '```', '```vue', '```'].join('\n');
+
+  assert.deepEqual(fencesIn(text).misspelled.map((fence) => fence.name), ['VNA', 'vnaa']);
+});

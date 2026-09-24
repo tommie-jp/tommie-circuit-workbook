@@ -2,13 +2,13 @@
  * 題のファイルが使うフェンスと、それを描く道具の所在。
  *
  * **フェンス名の書き間違いはここで拾う。** `bread` や `perf` と書くと、
- * 3 つの道具はどれも黙って素通りし、検査が「通った」ことになるため。
+ * 道具はどれも黙って素通りし、検査が「通った」ことになるため。
  */
 
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
-export const FENCES = ['circuit', 'breadboard', 'perfboard'];
+export const FENCES = ['circuit', 'breadboard', 'perfboard', 'vna'];
 
 /** フェンスの道具 (`dist/cli.cjs`)。依存に入れた tgz の中にある。 */
 export function cliPath(root, fence) {
@@ -31,15 +31,19 @@ function distance(a, b) {
 }
 
 /**
- * 3 つのどれかを書こうとした名前。**頭の 4 文字以上が合う** (`bread` `perf`) か、
+ * どれかを書こうとした名前。**頭の 4 文字以上が合う** (`bread` `perf`) か、
  * **2 文字以内の違い** (`breadbord` `Circuit`)。`circuitikz` のような別の言語は外れる。
+ *
+ * **短いフェンス名では違いの許しを縮める** (名前の長さ − 2 まで)。3 字の `vna` に
+ * 2 字違いを許すと、`ini` や `png` まで書き間違いに見える。
  */
 const MIN_PREFIX = 4;
 const MAX_DISTANCE = 2;
+const allowedDistance = (fence) => Math.min(MAX_DISTANCE, fence.length - 2);
 const looksLikeFence = (name) => {
   const lower = name.toLowerCase();
   return FENCES.some((fence) =>
-    (lower.length >= MIN_PREFIX && fence.startsWith(lower)) || distance(lower, fence) <= MAX_DISTANCE);
+    (lower.length >= MIN_PREFIX && fence.startsWith(lower)) || distance(lower, fence) <= allowedDistance(fence));
 };
 
 /**

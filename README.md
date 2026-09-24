@@ -6,7 +6,7 @@
 
 回路・Analog Discovery・NanoVNA・電験三種の 4 冊の実験帳。回路図と実体配線図は
 [tommie-fence](https://github.com/tommie-jp/tommie-fence) の Markdown フェンス
-(` ```circuit ` / ` ```breadboard ` / ` ```perfboard `) で書く。
+(` ```circuit ` / ` ```breadboard ` / ` ```perfboard `)、NanoVNA の画面は ` ```vna ` で書く。
 
 ## 4 冊
 
@@ -55,7 +55,7 @@ tools: [AD, VNA]        # 任意。2 つの計器を両方使う題
 ```
 
 本文は **説明 → 回路図 (circuit) → 実体配線図 (breadboard / perfboard) →
-計器の設定 → 見るべき値 → 出典** の順。
+計器の設定 (NanoVNA の本は画面の図 `vna` も) → 見るべき値 → 出典** の順。
 
 200 題の計画は各冊の `plan.yaml` (1 行 1 題: `id` `tier` `title` と印)。題を書くときは
 計画の `id` と `title` と `tier` をそのまま front matter に写す。題を書き換えたら

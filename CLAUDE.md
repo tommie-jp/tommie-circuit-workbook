@@ -2,7 +2,7 @@
 
 回路・Analog Discovery・NanoVNA・電験三種の 4 冊の実験帳。本文は日本語、ライセンスは
 CC BY 4.0。回路図と実体配線図は tommie-fence のフェンス
-(` ```circuit ` / ` ```breadboard ` / ` ```perfboard `) で書く。
+(` ```circuit ` / ` ```breadboard ` / ` ```perfboard `)、NanoVNA の画面は ` ```vna ` で書く。
 
 ## 置き場と書き方
 
@@ -29,6 +29,8 @@ CC BY 4.0。回路図と実体配線図は tommie-fence のフェンス
 - 字の重なりや配線の見え方は check では分からない。`npm run render` の SVG か、
   VS Code 拡張のプレビューで見る
 - Analog Discovery と NanoVNA は板の外の機器 (`type: device`) で描き、足の名前で配線する
+- NanoVNA の本の題は、計器の設定の下に ` ```vna ` で**見えるはずの画面** (`dut:` の理想の模型) を
+  描く。測ったら Touchstone を題のファイルの隣に置いて `data:` で重ねる (`.s2p` はコミットする)
 
 ## コミットの前に
 

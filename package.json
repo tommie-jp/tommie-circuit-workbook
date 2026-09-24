@@ -2,7 +2,7 @@
   "name": "tommie-circuit-workbook",
   "version": "0.0.0",
   "private": true,
-  "description": "回路・Analog Discovery・NanoVNA・電験三種の実験帳。回路図と実体配線図を tommie-fence のフェンスで書く",
+  "description": "回路・Analog Discovery・NanoVNA・電験三種の実験帳。回路図・実体配線図・NanoVNA の画面を tommie-fence のフェンスで書く",
   "license": "CC-BY-4.0",
   "type": "module",
   "engines": {
@@ -21,6 +21,7 @@
     "circuit-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/circuit-fence-v0.10.0/circuit-fence-0.10.0.tgz",
     "markdownlint-cli": "^0.49.1",
     "perfboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/perfboard-fence-v0.10.1/perfboard-fence-0.10.1.tgz",
+    "vna-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/vna-fence-v0.1.0/vna-fence-0.1.0.tgz",
     "yaml": "^2.9.0"
   }
 }

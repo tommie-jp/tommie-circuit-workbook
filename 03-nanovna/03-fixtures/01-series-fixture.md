@@ -73,6 +73,27 @@ wires:
 | 校正 | SOLT。ケーブルの先 (治具の SMA に挿す手前) で Open / Short / Load / Thru |
 | 表示 | S21 の Log Mag、S11 の Log Mag と Smith チャート |
 
+100 Ω を入れたときに**見えるはずの画面** (理想の模型から計算した破線)。
+
+```vna
+device: h4
+sweep: 1M-300M 101
+title: 図3 100 Ω を直列に入れたときの画面 (理想)
+dut: series R 100
+traces:
+  - S21 logmag
+  - S11 logmag
+  - S11 smith
+markers:
+  - 10M
+  - 300M
+```
+
+- S21 と S11 はどちらも −6.02 dB で重なる。Smith では実軸の r = 3 (150 Ω) の 1 点
+- 測ったら NanoVNA-Saver で Touchstone (`.s2p`) に保存してこのファイルの隣に置き、
+  フェンスに `data: <ファイル名>.s2p` を書き足すと**実測が実線で重なる**
+  (読み値の表も実測の値になる)。300 MHz へ向かって破線から離れた所が治具の限界
+
 ## 見るべき値
 
 50 Ω 系に直列に Z を入れると、S21 = 2·50 / (2·50 + Z)、S11 = Z / (2·50 + Z)。
