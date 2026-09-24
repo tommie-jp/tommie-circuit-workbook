@@ -10,9 +10,9 @@
 
 | 冊 | 内容 | 必須 | 入門 | 中級 |
 | --- | --- | --- | --- | --- |
-| [回路の教科書](circuits/README.md) | 直流の基本から実用回路まで。回路図と実体配線図を並べて組む | 1 | 1 | 1 |
-| [Analog Discovery の教科書](analog-discovery/README.md) | Analog Discovery 2 / 3 と WaveForms で DC〜10 MHz を測る | 1 | 1 | 1 |
-| [NanoVNA の教科書](nanovna/README.md) | NanoVNA-H4 / V2 で 10 kHz〜4.4 GHz を測る。治具・部品・フィルタ・アンテナ・GHz 帯 | 1 | 1 | 1 |
+| [回路の教科書](01-circuits/README.md) | 直流の基本から実用回路まで。回路図と実体配線図を並べて組む | 1 | 1 | 1 |
+| [Analog Discovery の教科書](02-analog-discovery/README.md) | Analog Discovery 2 / 3 と WaveForms で DC〜10 MHz を測る | 1 | 1 | 1 |
+| [NanoVNA の教科書](03-nanovna/README.md) | NanoVNA-H4 / V2 で 10 kHz〜4.4 GHz を測る。治具・部品・フィルタ・アンテナ・GHz 帯 | 1 | 1 | 1 |
 
 <!-- toc:end -->
 
@@ -29,13 +29,13 @@
 
 ## 書き方
 
-1 題 1 ファイル。置き場は `<冊>/<NN-章>/<NN-題>.md` (章と題の番号は 2 桁、
+1 題 1 ファイル。置き場は `<NN-冊>/<NN-章>/<NN-題>.md` (冊・章・題の番号は 2 桁、
 名前は英小文字とハイフン)。頭に front matter を書き、本文の最初の見出しは
 `# <id> <title>` にする。
 
 ```yaml
 ---
-book: circuits          # circuits / analog-discovery / nanovna (置き場の冊と同じ)
+book: circuits          # circuits / analog-discovery / nanovna (置き場の冊から番号を除いた名前)
 chapter: 1              # 置き場の章の番号
 id: 1-1                 # 章-番号 (ファイル名の番号と同じ)
 title: LED を点ける — 抵抗で電流を決める

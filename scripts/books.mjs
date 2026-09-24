@@ -1,11 +1,17 @@
 /**
  * 3 冊の冊と章の表。**ディレクトリ名・目次・front matter の検査がここを見る。**
  *
- * 章のディレクトリは `NN-slug` (2 桁の章番号 + 英語の短い名前)。
+ * 冊のディレクトリも章のディレクトリも `NN-slug` (2 桁の番号 + 英語の短い名前)。
+ * front matter には番号を書かず、冊は `book: <slug>`、章は `chapter: <番号>` で書く。
  * 章を足すときはここに 1 行足す (ディレクトリは題を置いたときに作る)。
  *
  * `columns` は目次の表に出す front matter の欄。冊ごとに意味のある欄だけ出す。
  */
+
+/** `NN-slug`。冊と章のディレクトリ名。 */
+function numbered(number, slug) {
+  return `${String(number).padStart(2, '0')}-${slug}`;
+}
 
 export const TIERS = /** @type {const} */ ([50, 100, 200]);
 
@@ -14,7 +20,8 @@ export const TIER_NAMES = { 50: '必須', 100: '入門', 200: '中級' };
 
 export const BOOKS = [
   {
-    dir: 'circuits',
+    number: 1,
+    slug: 'circuits',
     title: '回路の教科書',
     summary: '直流の基本から実用回路まで。回路図と実体配線図を並べて組む',
     columns: ['era', 'board'],
@@ -35,7 +42,8 @@ export const BOOKS = [
     ],
   },
   {
-    dir: 'analog-discovery',
+    number: 2,
+    slug: 'analog-discovery',
     title: 'Analog Discovery の教科書',
     summary: 'Analog Discovery 2 / 3 と WaveForms で DC〜10 MHz を測る',
     columns: ['board', 'device'],
@@ -56,7 +64,8 @@ export const BOOKS = [
     ],
   },
   {
-    dir: 'nanovna',
+    number: 3,
+    slug: 'nanovna',
     title: 'NanoVNA の教科書',
     summary: 'NanoVNA-H4 / V2 で 10 kHz〜4.4 GHz を測る。治具・部品・フィルタ・アンテナ・GHz 帯',
     columns: ['device', 'board'],
@@ -76,11 +85,12 @@ export const BOOKS = [
   },
 ].map((book) => ({
   ...book,
+  dir: numbered(book.number, book.slug),
   chapters: book.chapters.map(([number, slug, title]) => ({
     number,
     slug,
     title,
-    dir: `${String(number).padStart(2, '0')}-${slug}`,
+    dir: numbered(number, slug),
   })),
 }));
 

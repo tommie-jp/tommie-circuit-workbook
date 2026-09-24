@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { BOOKS } from './books.mjs';
 import { bookToc, fillMarkers, rootToc } from './toc.mjs';
 
-const circuits = BOOKS.find((book) => book.dir === 'circuits');
-const nanovna = BOOKS.find((book) => book.dir === 'nanovna');
+const circuits = BOOKS.find((book) => book.slug === 'circuits');
+const nanovna = BOOKS.find((book) => book.slug === 'nanovna');
 
 const entry = (book, chapterNumber, number, extra = {}) => ({
   book,
@@ -63,8 +63,8 @@ test('escapes a pipe in a title', () => {
 test('summarises the three books at the root', () => {
   const toc = rootToc(new Map([[circuits.dir, [entry(circuits, 1, 1)]]]));
 
-  assert.match(toc, /\| \[回路の教科書\]\(circuits\/README\.md\) \| .* \| 1 \| 1 \| 1 \|/);
-  assert.match(toc, /\| \[NanoVNA の教科書\]\(nanovna\/README\.md\) \| .* \| 0 \| 0 \| 0 \|/);
+  assert.match(toc, /\| \[回路の教科書\]\(01-circuits\/README\.md\) \| .* \| 1 \| 1 \| 1 \|/);
+  assert.match(toc, /\| \[NanoVNA の教科書\]\(03-nanovna\/README\.md\) \| .* \| 0 \| 0 \| 0 \|/);
 });
 
 test('replaces only the text between the markers', () => {

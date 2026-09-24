@@ -11,7 +11,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
   インピーダンスなど)。本文に AD2 での代わりのやり方を書く。印の無い題は AD2 でも AD3 でも同じ
 - **安全**: 入力は ±25 V まで。電源は USB 給電で 1 系統 250 mW まで。
   商用電源は扱わない
-- 10 MHz より上 (数 GHz まで) は [NanoVNA の教科書](../nanovna/README.md) で測る
+- 10 MHz より上 (数 GHz まで) は [NanoVNA の教科書](../03-nanovna/README.md) で測る
 
 <!-- toc:start -->
 

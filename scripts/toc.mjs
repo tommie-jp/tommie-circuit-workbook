@@ -80,7 +80,7 @@ export function bookToc(book, entries) {
   ].join('\n');
 }
 
-/** 直下の README に載せる 3 冊の一覧。 */
+/** 直下の README に載せる冊の一覧。 */
 export function rootToc(entriesByBook) {
   return [
     row(['冊', '内容', ...TIERS.map((tier) => TIER_NAMES[tier])]),

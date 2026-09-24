@@ -6,7 +6,8 @@ CC BY 4.0。回路図と実体配線図は tommie-fence のフェンス
 
 ## 置き場と書き方
 
-- 1 題 1 ファイル: `<冊>/<NN-章>/<NN-題>.md`。冊と章の表は `scripts/books.mjs`
+- 1 題 1 ファイル: `<NN-冊>/<NN-章>/<NN-題>.md` (冊は 01-circuits / 02-analog-discovery /
+  03-nanovna)。冊と章の表は `scripts/books.mjs`。front matter の `book` は番号を除いた名前
 - 頭に front matter (鍵と値の決まりは README の「書き方」と `scripts/entry.mjs`)。
   本文の最初の見出しは `# <id> <title>`
 - 本文の順: 説明 → 回路図 → 実体配線図 → 計器の設定 → 見るべき値 → 出典

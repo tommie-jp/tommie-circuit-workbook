@@ -12,7 +12,7 @@ GHz 帯の作法をまとめる。
 - **安全**: CH1 に入れてよい電力を超えない (アンプの出力にはアッテネータを挟む)。
   アンテナは放電してから繋ぐ。SMA は締めすぎない
 - 10 MHz より下の時間波形・FFT・ボード線図は
-  [Analog Discovery の教科書](../analog-discovery/README.md) で測る
+  [Analog Discovery の教科書](../02-analog-discovery/README.md) で測る
 
 <!-- toc:start -->
 

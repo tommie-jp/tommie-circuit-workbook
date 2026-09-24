@@ -1,5 +1,5 @@
 /**
- * 1 題のファイル (`<冊>/<NN-章>/<NN-題>.md`) を読み、front matter を検査する。
+ * 1 題のファイル (`<NN-冊>/<NN-章>/<NN-題>.md`) を読み、front matter を検査する。
  *
  * **置き場と front matter と見出しが食い違わないこと**を見る。ファイルを別の章へ
  * 動かしたのに `chapter` を直し忘れる、番号を振り直したのに `id` が古い、
@@ -18,7 +18,7 @@ const TOOLS = new Set(['AD', 'VNA']);
 const ERAS = new Set(['古', '今', '古/今']);
 
 /**
- * 冊ごとの機種 (`device`)。NanoVNA は必ず書く (1.5 GHz より上は V2 が要る)。
+ * 冊ごとの機種 (`device`)。鍵は冊の slug。NanoVNA は必ず書く (1.5 GHz より上は V2 が要る)。
  * Analog Discovery は AD3 でしかできない題にだけ書く。回路の冊には無い。
  */
 const DEVICES = {
@@ -55,7 +55,7 @@ export function validateEntry({ path, text }) {
   const errors = [
     ...checkKeys(data),
     ...checkPlace(data, place),
-    ...checkValues(data, place.book.dir),
+    ...checkValues(data, place.book.slug),
     ...checkHeading(text.slice(matter[0].length), data),
   ];
   const entry = {
@@ -93,11 +93,11 @@ export function duplicateIds(entries) {
 /** 置き場から冊・章・番号を読む。読めなければ理由の文字列。 */
 function locate(path) {
   const parts = path.split('/');
-  if (parts.length !== 3) return `置き場は <冊>/<NN-章>/<NN-題>.md です (${path})`;
+  if (parts.length !== 3) return `置き場は <NN-冊>/<NN-章>/<NN-題>.md です (${path})`;
 
   const [bookDir, chapterDir, fileName] = parts;
   const book = findBook(bookDir);
-  if (book === null) return `知らない冊です: ${bookDir}`;
+  if (book === null) return `知らない冊です: ${bookDir} (scripts/books.mjs の表を見る)`;
   const chapter = findChapter(book, chapterDir);
   if (chapter === null) return `${book.dir} に無い章です: ${chapterDir} (scripts/books.mjs の表を見る)`;
   const name = FILE_NAME.exec(fileName);
@@ -112,7 +112,7 @@ function checkKeys(data) {
 
 function checkPlace(data, place) {
   const errors = [];
-  if (data.book !== place.book.dir) errors.push(`book は置き場の冊 (${place.book.dir}) と同じにします`);
+  if (data.book !== place.book.slug) errors.push(`book は置き場の冊の番号を除いた名前 (${place.book.slug}) にします`);
   if (data.chapter !== place.chapter.number) {
     errors.push(`chapter は置き場の章 (${place.chapter.number}) と同じにします`);
   }
@@ -126,7 +126,7 @@ function checkPlace(data, place) {
   return errors;
 }
 
-function checkValues(data, bookDir) {
+function checkValues(data, bookSlug) {
   const errors = [];
   if (!isText(data.title)) errors.push('title を書きます');
   if (!TIERS.includes(data.tier)) errors.push(`tier は ${TIERS.join(' / ')} のどれかです`);
@@ -138,11 +138,11 @@ function checkValues(data, bookDir) {
   if (data.tools !== undefined && !(Array.isArray(data.tools) && data.tools.every((tool) => TOOLS.has(tool)))) {
     errors.push(`tools は [${[...TOOLS].join(', ')}] から選んだ並びです`);
   }
-  if (data.era !== undefined && (bookDir !== 'circuits' || !ERAS.has(data.era))) {
+  if (data.era !== undefined && (bookSlug !== 'circuits' || !ERAS.has(data.era))) {
     errors.push(`era は回路の冊だけに書き、${[...ERAS].join(' / ')} のどれかです`);
   }
 
-  const device = DEVICES[bookDir];
+  const device = DEVICES[bookSlug];
   if (data.device === undefined) {
     if (device.required) errors.push(`device (${[...device.values].join(' / ')}) を書きます`);
   } else if (!device.values.has(data.device)) {
