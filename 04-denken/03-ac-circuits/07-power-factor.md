@@ -31,7 +31,7 @@ Analog Discovery (AD) の波形発生器を電源にし、2 ch のオシロス�
 ```circuit
 title: 図1 遅れ力率の負荷とコンデンサ
 style:
-  standard: european
+  standard: jis
 parts:
   V1: sine c1 g1 l=$\mathrm{W1}$
   Rs: resistor c1 c5 10 i=I

@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.12.1/breadboard-fence-0.12.1.tgz",
-    "circuit-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/circuit-fence-v0.10.0/circuit-fence-0.10.0.tgz",
+    "circuit-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/circuit-fence-v0.11.0/circuit-fence-0.11.0.tgz",
     "markdownlint-cli": "^0.49.1",
     "perfboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/perfboard-fence-v0.10.1/perfboard-fence-0.10.1.tgz",
     "vna-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/vna-fence-v0.1.0/vna-fence-0.1.0.tgz",
