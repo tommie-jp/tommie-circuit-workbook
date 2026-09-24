@@ -4,7 +4,8 @@
  *   1. 置き場と front matter と最初の見出し (`entry.mjs`)
  *   2. フェンス名の書き間違い (`fences.mjs`)
  *   3. 3 つのフェンスを道具の `check` に掛ける (読めない行があれば落ちる)
- *   4. 目次が front matter と合っている (`toc.mjs --check` と同じ)
+ *   4. 計画 (`plan.yaml`) が読め、書いた題が計画と合っている (`plan.mjs`)
+ *   5. 目次が計画と front matter と合っている (`toc.mjs --check` と同じ)
  *
  *   node scripts/check.mjs            落ちた所だけ出す
  *   node scripts/check.mjs --verbose  ネットリストも出す (意図した回路と突き合わせる)
@@ -17,7 +18,8 @@ import { spawnSync } from 'node:child_process';
 import { ROOT, readEntries } from './collect.mjs';
 import { duplicateIds } from './entry.mjs';
 import { FENCES, cliPath, fencesIn } from './fences.mjs';
-import { plannedReadmes } from './toc.mjs';
+import { PLAN_FILE } from './plan.mjs';
+import { mergedRows, plannedReadmes } from './toc.mjs';
 
 const runCheck = (fence, paths) =>
   spawnSync(process.execPath, [cliPath(ROOT, fence), 'check', ...paths], { cwd: ROOT, encoding: 'utf8' });
@@ -60,6 +62,10 @@ function main(args) {
       console.error(`--- ${fence}: ${path}\n${one.stderr.trimEnd()}`);
       problems.push(`${path}: ${fence} フェンスに読めない行があります (上の出力)`);
     }
+  }
+
+  for (const [dir, { errors }] of mergedRows()) {
+    for (const error of errors) problems.push(`${dir}/${PLAN_FILE}: ${error}`);
   }
 
   const stale = plannedReadmes().filter(({ current, next }) => current !== next).map(({ path }) => path);

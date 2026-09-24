@@ -1,0 +1,201 @@
+# 02-analog-discovery の計画 — 必須 50 ⊂ 入門 100 ⊂ 中級 200 の 200 題。目次 (README) はここと題のファイルから npm run toc が組む。
+- { id: 0-1, tier: 50, board: BB, title: 接続と極性 — ワイヤの色、1+ / 1- の差動入力、GND を共通に }
+- { id: 0-2, tier: 50, board: —, title: 入力範囲 ±25 V と電源の限界 — 電源ツールで電流を制限する }
+- { id: 0-3, tier: 50, board: —, title: ループバック — W1 を 1+ に直結して発生器とオシロを確かめる }
+- { id: 0-4, tier: 50, board: —, title: ワークスペースの保存、CSV と画像の書き出し }
+- { id: 0-5, tier: 100, board: —, title: BNC アダプタと 10:1 プローブ — 帯域 9 MHz と 30 MHz の違い }
+- { id: 0-6, tier: 100, board: BB, title: 付属ワイヤと同軸で同じ 5 MHz の方形波を見比べる }
+- { id: 0-7, tier: 200, board: BB, title: 外部電源で電源ツールを 700 mA まで使う }
+- { id: 0-8, tier: 200, board: —, title: トリガ入出力 (T1 / T2) で 2 台を同期する }
+- { id: 0-9, tier: 200, board: BB, title: AD2 と AD3 を同じ実験で比べる (帯域・バッファ長) }
+- { id: 0-10, tier: 200, board: —, title: デバイスの校正 (WaveForms の Calibration) }
+- { id: 1-1, tier: 50, board: BB, title: Supplies — +5 V と −5 V を出して電圧計で読む }
+- { id: 1-2, tier: 50, board: BB, title: 1 kHz の正弦波を出してオシロで見る (最初の 1 本) }
+- { id: 1-3, tier: 50, board: BB, title: 電圧計とデータロガー — 分圧回路を 1 分記録する }
+- { id: 1-4, tier: 50, board: BB, title: Static I/O — LED とボタンを DIO で }
+- { id: 1-5, tier: 50, board: BB, title: Script の最初の 1 行 — 波形を出し、測り、表にする }
+- { id: 1-6, tier: 50, board: —, title: 画面の構成 — 計器の窓、Run / Stop / Single、Help }
+- { id: 1-7, tier: 100, board: —, title: 波形発生器 2 ch の同期と位相差 }
+- { id: 1-8, tier: 100, board: BB, title: 電源の電流制限で LED を守る }
+- { id: 1-9, tier: 100, board: BB, title: データロガーで温度 (LM35) を 10 分 }
+- { id: 1-10, tier: 100, board: —, device: AD3, title: デバイスマネージャ — バッファ長と ch 数の構成を切り替える }
+- { id: 1-11, tier: 200, board: BB, device: AD3, title: Supplies のトラッキング (± 対称) }
+- { id: 1-12, tier: 200, board: BB, title: 電圧計の AC / DC / True RMS }
+- { id: 1-13, tier: 200, board: BB, title: ロガーを Script から回して CSV に追記する }
+- { id: 1-14, tier: 200, board: BB, title: 計器を同時に走らせる (Scope + Spectrum + Logger) }
+- { id: 1-15, tier: 200, board: —, title: プロジェクトとプリセットで設定を使い回す }
+- { id: 1-16, tier: 200, board: —, title: Raspberry Pi で WaveForms を動かす (Linux 版) }
+- { id: 2-1, tier: 50, board: BB, title: トリガの基本 — エッジ・レベル・ホールドオフ }
+- { id: 2-2, tier: 50, board: BB, title: 測定 (Measurements) — Vpp・RMS・周波数・デューティ }
+- { id: 2-3, tier: 50, board: BB, title: カーソルで RC の時定数を読む }
+- { id: 2-4, tier: 50, board: BB, title: 差動入力で電流を測る — 1 Ω の両端 }
+- { id: 2-5, tier: 50, board: —, title: XY 表示 — リサージュ図形 }
+- { id: 2-6, tier: 50, board: BB, title: Math チャネル — 差・積 (瞬時電力)・積分 }
+- { id: 2-7, tier: 50, board: BB, title: Persistence でノイズとジッタを見る }
+- { id: 2-8, tier: 50, board: BB, title: デジタル ch を並べる (MSO) — 555 の出力と 4017 の分周 }
+- { id: 2-9, tier: 100, board: BB, title: 10:1 プローブの補正と入力容量の影響 }
+- { id: 2-10, tier: 100, board: —, title: 帯域の違いを方形波の立ち上がりで見る (9 / 30 MHz) }
+- { id: 2-11, tier: 100, board: BB, title: Record モードで長時間 (ディスクへ) }
+- { id: 2-12, tier: 100, board: BB, title: "トリガ: パルス幅・ラント・タイムアウト" }
+- { id: 2-13, tier: 100, board: BB, title: ダイオードの順方向特性を XY で描く (Tracer の前段) }
+- { id: 2-14, tier: 100, board: BB, title: 平均化と 14 bit の分解能 }
+- { id: 2-15, tier: 100, board: —, title: 参照波形と重ねて比べる }
+- { id: 2-16, tier: 100, board: —, title: サンプリングとエイリアス — 1 MHz を 1.2 MS/s で見る }
+- { id: 2-17, tier: 200, board: BB, title: シュミットトリガのヒステリシスを XY で }
+- { id: 2-18, tier: 200, board: BB, title: 電源投入の突入電流 (Single トリガ) }
+- { id: 2-19, tier: 200, board: BB, title: リレーの接点バウンス }
+- { id: 2-20, tier: 200, board: BB, title: 充放電を Math の log で直線にする }
+- { id: 2-21, tier: 200, board: BB, device: AD3, title: FIR フィルタ ch でノイズを除く }
+- { id: 2-22, tier: 200, board: BB, device: AD3, title: ロックインアンプ ch で埋もれた信号を取り出す }
+- { id: 2-23, tier: 200, board: BB, title: デジタル ch (バスの値) でトリガする }
+- { id: 2-24, tier: 200, board: —, title: 立ち上がり時間から帯域を逆算する (tr = 0.35 / BW) }
+- { id: 2-25, tier: 200, board: BB, title: プローブの GND リードのリンギング }
+- { id: 2-26, tier: 200, board: BB, title: 2 ch の時間差 — ゲートの伝搬遅延 }
+- { id: 2-27, tier: 200, board: BB, title: 測定のヒストグラムと統計 }
+- { id: 2-28, tier: 200, board: PF, title: 30 MHz の正弦を BNC で見る (perfboard) }
+- { id: 3-1, tier: 50, board: —, title: 正弦・方形・三角・ノコギリ・DC と振幅・オフセット }
+- { id: 3-2, tier: 50, board: BB, title: 周波数掃引 (Sweep) をオシロで追う }
+- { id: 3-3, tier: 50, board: —, title: AM / FM 変調 }
+- { id: 3-4, tier: 50, board: —, title: カスタム波形 (CSV) と Play }
+- { id: 3-5, tier: 50, board: BB, title: 出力に 50 Ω を付けたときの落ち込み — 出力インピーダンス }
+- { id: 3-6, tier: 100, board: BB, title: バースト・トリガで単発パルス }
+- { id: 3-7, tier: 100, board: BB, title: ノイズ波形と RC フィルタ }
+- { id: 3-8, tier: 100, board: BB, title: 2 ch で差動信号 }
+- { id: 3-9, tier: 100, board: —, title: 音を出す (オーディオ出力) }
+- { id: 3-10, tier: 100, board: —, title: 数式で波形 (sin x + sin 3x) を作って FFT へ }
+- { id: 3-11, tier: 200, board: BB, title: PWM 波形で MOSFET 経由のモータ }
+- { id: 3-12, tier: 200, board: BB, title: 任意波形でステップ応答 (RC・RLC) }
+- { id: 3-13, tier: 200, board: —, title: 変調度と側波帯 (FFT と対) }
+- { id: 3-14, tier: 200, board: —, title: 位相変調と PSK }
+- { id: 3-15, tier: 200, board: —, title: 出力の帯域 (12 MHz) — 10 MHz の方形波はどう見えるか }
+- { id: 3-16, tier: 200, board: BB, title: DC オフセットでバイアス点を振る (トランジスタの動作点) }
+- { id: 3-17, tier: 200, board: BB, title: 波形発生器をシリアル信号源にする (Pattern の代替) }
+- { id: 3-18, tier: 200, board: —, title: 外部トリガ (T1) で同期する }
+- { id: 4-1, tier: 50, board: —, title: 正弦波の FFT — 基本波と高調波 }
+- { id: 4-2, tier: 50, board: —, title: 方形波の高調波 (奇数次) }
+- { id: 4-3, tier: 50, board: —, title: 窓関数 (矩形・Hann・Flat-top) の違い }
+- { id: 4-4, tier: 50, board: —, title: THD と SNR — 波形発生器自身の歪 }
+- { id: 4-5, tier: 50, board: —, title: ノイズフロアと平均化 }
+- { id: 4-6, tier: 100, board: —, device: AD3, title: CZT (ズーム) で狭帯域を見る }
+- { id: 4-7, tier: 100, board: —, title: AM 波のスペクトル — 搬送波と側波帯 }
+- { id: 4-8, tier: 100, board: —, title: FM 波のスペクトル }
+- { id: 4-9, tier: 100, board: BB, title: 555 の出力スペクトル }
+- { id: 4-10, tier: 100, board: BB, title: マイクの音のスペクトル }
+- { id: 4-11, tier: 200, board: —, title: 分解能帯域幅とサンプル数 }
+- { id: 4-12, tier: 200, board: —, title: SFDR }
+- { id: 4-13, tier: 200, board: BB, title: 抵抗の熱雑音と 1/f ノイズ (増幅して) }
+- { id: 4-14, tier: 200, board: BB, title: 2 トーンで相互変調 (IMD) の入口 }
+- { id: 4-15, tier: 200, board: BB, title: PWM のスペクトルとローパス }
+- { id: 4-16, tier: 200, board: BB, title: スイッチング電源のノイズのスペクトル }
+- { id: 4-17, tier: 200, board: —, title: ピークホールドとウォーターフォール }
+- { id: 4-18, tier: 200, board: BB, title: 位相雑音のまね (裾の広がり) }
+- { id: 4-19, tier: 200, board: BB, title: AM ラジオの IF 455 kHz を見る }
+- { id: 4-20, tier: 200, board: BB, title: マイクの周波数特性 (ピンクノイズ) }
+- { id: 5-1, tier: 50, board: BB, title: RC ローパスのボード線図 }
+- { id: 5-2, tier: 50, board: BB, title: RC ハイパス }
+- { id: 5-3, tier: 50, board: BB, title: RL と LC の共振 }
+- { id: 5-4, tier: 50, board: BB, title: 位相の読み方と −3 dB 点 }
+- { id: 5-5, tier: 50, board: —, title: 掃引の設定 — 開始・終了・ステップ・振幅・平均 }
+- { id: 5-6, tier: 50, board: BB, title: オペアンプ非反転増幅の利得と帯域 (GBW) }
+- { id: 5-7, tier: 100, board: BB, title: Nyquist / Nichols 表示 }
+- { id: 5-8, tier: 100, board: —, title: 9 MHz の壁 — スルーで NA 自身の特性を取る }
+- { id: 5-9, tier: 100, board: BB, title: 2 段 RC と −40 dB/dec }
+- { id: 5-10, tier: 100, board: BB, title: CR 発振器の帰還路をループを切って測る }
+- { id: 5-11, tier: 100, board: BB, title: ツイン T ノッチ }
+- { id: 5-12, tier: 100, board: —, title: 外部発振器モード (Wavegen を使わない) }
+- { id: 5-13, tier: 200, board: BB, title: 反転増幅の入力インピーダンスと周波数 }
+- { id: 5-14, tier: 200, board: BB, title: ボルテージフォロアの容量負荷とピーキング }
+- { id: 5-15, tier: 200, board: BB, title: サレンキー LPF の Q }
+- { id: 5-16, tier: 200, board: BB, title: 状態変数フィルタ }
+- { id: 5-17, tier: 200, board: BB, title: 位相余裕 (ループを切る) }
+- { id: 5-18, tier: 200, board: BB, title: トランスの周波数特性 }
+- { id: 5-19, tier: 200, board: —, title: ケーブル 1 m の 10 MHz まで }
+- { id: 5-20, tier: 200, board: BB, title: 10:1 プローブ込みの NA }
+- { id: 5-21, tier: 200, board: BB, title: バーアンテナ + バリコンの同調曲線 }
+- { id: 5-22, tier: 200, board: PF, title: 25 MHz まで (BNC、perfboard) }
+- { id: 6-1, tier: 50, board: BB, title: 抵抗の |Z| と位相 — 基準抵抗で測る仕組み }
+- { id: 6-2, tier: 50, board: BB, title: コンデンサの C と ESR }
+- { id: 6-3, tier: 50, board: BB, title: コイルの L と Q }
+- { id: 6-4, tier: 50, board: BB, title: 自己共振 (SRF) — 100 µH のコイルが容量になる所 }
+- { id: 6-5, tier: 100, board: —, title: インピーダンスアナライザアダプタ (自動レンジ) }
+- { id: 6-6, tier: 100, board: BB, title: 電解とセラミックの違い }
+- { id: 6-7, tier: 100, board: BB, title: Open / Short 補償 }
+- { id: 6-8, tier: 100, board: BB, title: バーアンテナの L と Q }
+- { id: 6-9, tier: 200, board: BB, title: セラミックの DC バイアス依存 (X7R) }
+- { id: 6-10, tier: 200, board: PF, device: AD3, title: 25 MHz まで — 0.1 µF の SRF }
+- { id: 6-11, tier: 200, board: BB, title: 水晶の fs / fp (10 MHz 以下) }
+- { id: 6-12, tier: 200, board: BB, title: フェライトビーズ (10 MHz まで) }
+- { id: 6-13, tier: 200, board: —, title: スピーカーのインピーダンス曲線 }
+- { id: 6-14, tier: 200, board: BB, title: 圧電ブザーの共振 }
+- { id: 6-15, tier: 200, board: —, title: 電池の内部抵抗 (AC) }
+- { id: 6-16, tier: 200, board: BB, title: サーミスタ・CdS のインピーダンス vs 温度・光 }
+- { id: 7-1, tier: 50, board: BB, title: ロジックアナライザで 555 と 4017 を見る }
+- { id: 7-2, tier: 50, board: BB, title: パターンジェネレータでカウンタを叩く }
+- { id: 7-3, tier: 50, board: BB, title: UART を見る (Pico) }
+- { id: 7-4, tier: 50, board: BB, title: I2C を見る・叩く (温度センサ) }
+- { id: 7-5, tier: 100, board: BB, title: SPI }
+- { id: 7-6, tier: 100, board: BB, title: プロトコルアナライザから送信する }
+- { id: 7-7, tier: 100, board: BB, title: バスの値でトリガする }
+- { id: 7-8, tier: 100, board: BB, title: セットアップ・ホールド時間を測る }
+- { id: 7-9, tier: 100, board: BB, title: チャタリングを捕まえる }
+- { id: 7-10, tier: 100, board: BB, title: PWM のデューティを測る }
+- { id: 7-11, tier: 200, board: BB, title: 74HC595 を叩いて 7 セグを点ける }
+- { id: 7-12, tier: 200, board: BB, title: ゲートの伝搬遅延を Pattern + Scope で }
+- { id: 7-13, tier: 200, board: BB, title: I2C のプルアップと立ち上がり (アナログ ch 併用) }
+- { id: 7-14, tier: 200, board: BB, title: 1-Wire (DS18B20) }
+- { id: 7-15, tier: 200, board: BB, title: ロジックのしきい値 (3.3 V / 5 V) と判定 }
+- { id: 7-16, tier: 200, board: BB, title: パターンで状態機械 (ROM もどき) }
+- { id: 7-17, tier: 200, board: BB, title: デバウンス回路の評価 (Static I/O + Scope) }
+- { id: 7-18, tier: 200, board: BB, title: マイコンの起動ログ (UART) を長時間 Record }
+- { id: 8-1, tier: 50, board: BB, title: ジャンパ 1 本のスルーの S21 を 100 kHz〜10 MHz }
+- { id: 8-2, tier: 50, board: BB, title: 隣の列との容量 (数 pF) を測る }
+- { id: 8-3, tier: 50, board: BB, title: ジャンパ線のインダクタンス }
+- { id: 8-4, tier: 50, board: BB, title: RC ローパスの理論と実測のずれ (1 MHz と 10 MHz) }
+- { id: 8-5, tier: 100, board: BB, title: クロストーク — 隣の列に何が漏れるか }
+- { id: 8-6, tier: 100, board: BB, title: レールの GND インピーダンス }
+- { id: 8-7, tier: 100, board: [ BB, PF ], title: 同じ回路を perfboard で作って比べる }
+- { id: 8-8, tier: 100, board: PF, title: 同じスルーを BNC で 25 MHz まで、NanoVNA で 1〜100 MHz }
+- { id: 8-9, tier: 200, board: BB, title: デカップリングの置き場所 (近い / 遠い) }
+- { id: 8-10, tier: 200, board: BB, title: GND の取り回し — 1 点接地とループ }
+- { id: 8-11, tier: 200, board: BB, title: 長いワイヤのアンテナ効果 (放送波の混入) }
+- { id: 8-12, tier: 200, board: BB, title: 電源レールのノイズ (スイッチング電源を載せる) }
+- { id: 8-13, tier: 200, board: PF, title: perfboard の GND 面 (銅テープ) の効果 }
+- { id: 8-14, tier: 200, board: BB, title: 10 MHz の方形波が届くジャンパの長さ }
+- { id: 9-1, tier: 50, board: BB, title: エミッタ接地の利得と帯域 (NA) }
+- { id: 9-2, tier: 50, board: BB, title: オペアンプの GBW とスルーレート }
+- { id: 9-3, tier: 100, board: BB, title: 1 dB 圧縮点 }
+- { id: 9-4, tier: 100, board: BB, title: 2 トーン IMD (Wavegen 2 ch + FFT) }
+- { id: 9-5, tier: 100, board: BB, title: THD vs 出力 }
+- { id: 9-6, tier: 100, board: BB, device: AD3, title: Tracer でトランジスタの Ic–Vce 曲線 }
+- { id: 9-7, tier: 200, board: BB, title: hFE の実測 }
+- { id: 9-8, tier: 200, board: BB, title: MOSFET の Id–Vgs }
+- { id: 9-9, tier: 200, board: BB, title: 位相余裕 (ループを切る) }
+- { id: 9-10, tier: 200, board: BB, title: 入力インピーダンス (直列抵抗法) }
+- { id: 9-11, tier: 200, board: BB, title: 出力インピーダンス (負荷法) }
+- { id: 9-12, tier: 200, board: BB, title: PSRR }
+- { id: 9-13, tier: 200, board: BB, title: CMRR (差動) }
+- { id: 9-14, tier: 200, board: BB, title: LM386 の周波数特性と歪 }
+- { id: 9-15, tier: 200, board: BB, title: プッシュプルのクロスオーバー歪を FFT で }
+- { id: 9-16, tier: 200, board: BB, title: 入力換算雑音 }
+- { id: 10-1, tier: 50, board: BB, title: リップルを FFT で }
+- { id: 10-2, tier: 100, board: BB, title: 負荷過渡応答 }
+- { id: 10-3, tier: 200, board: BB, title: レギュレータの PSRR }
+- { id: 10-4, tier: 200, board: BB, title: 出力インピーダンス vs 周波数 }
+- { id: 10-5, tier: 200, board: BB, title: デカップリングの効果 }
+- { id: 10-6, tier: 200, board: BB, title: スイッチングノイズ }
+- { id: 10-7, tier: 200, board: BB, title: LDO vs スイッチング }
+- { id: 10-8, tier: 200, board: BB, title: グラウンドループ }
+- { id: 11-1, tier: 50, board: —, title: Script で掃引と測定を自動化 (1-5 の続き) }
+- { id: 11-2, tier: 100, board: —, title: WaveForms SDK (Python) の最初 }
+- { id: 11-3, tier: 200, board: BB, title: 部品 10 個のバッチ測定 }
+- { id: 11-4, tier: 200, board: —, title: CSV をグラフにする (matplotlib) }
+- { id: 11-5, tier: 200, board: —, title: SDK でオシロを取り込み、FFT を自分で書く }
+- { id: 11-6, tier: 200, board: BB, title: Script で合否判定 (検査もどき) }
+- { id: 11-7, tier: 200, board: BB, title: ロガーの長期記録 (1 日) }
+- { id: 11-8, tier: 200, board: —, title: 測った値を tommie-fence の図に注釈で載せる }
+- { id: 12-1, tier: 200, board: BB, title: Pico の ADC の特性 (直線性・雑音) }
+- { id: 12-2, tier: 200, board: BB, title: PWM + RC で DAC }
+- { id: 12-3, tier: 200, board: BB, title: クロックのオーバーシュートとリンギング }
+- { id: 12-4, tier: 200, board: BB, title: ジッタ }
+- { id: 12-5, tier: 200, board: BB, title: アイパターンのまね }
+- { id: 12-6, tier: 200, board: BB, title: ADC のサンプリングとエイリアスを Pico で }

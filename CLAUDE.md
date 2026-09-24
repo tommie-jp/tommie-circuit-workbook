@@ -11,8 +11,11 @@ CC BY 4.0。回路図と実体配線図は tommie-fence のフェンス
 - 頭に front matter (鍵と値の決まりは README の「書き方」と `scripts/entry.mjs`)。
   本文の最初の見出しは `# <id> <title>`
 - 本文の順: 説明 → 回路図 → 実体配線図 → 計器の設定 → 見るべき値 → 出典
+- 各冊の 200 題の計画は `<NN-冊>/plan.yaml` (1 行 1 題)。題を書くときは計画の `id` `title`
+  `tier` を front matter に写し、題を書き換えたら計画も直す (ずれは `check` が言う)
 - 各冊の `README.md` の `<!-- toc:start -->` 〜 `<!-- toc:end -->` の間は
-  `npm run toc` が書く。**手で直さない** (印の外の前書きは手で書く)
+  `npm run toc` が `plan.yaml` と front matter から書く。**手で直さない**
+  (印の外の前書きは手で書く)。書いた題は link、まだの題は字だけ
 - 借りた回路は `source` と本文の出典に出所を書く。図と文は写さず描き直す
 - 扱わないもの: 真空管、商用電源 (AC 100 V) に直に繋ぐ回路
 

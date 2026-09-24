@@ -131,7 +131,12 @@ function checkValues(data, bookSlug) {
   if (!isText(data.title)) errors.push('title を書きます');
   if (!TIERS.includes(data.tier)) errors.push(`tier は ${TIERS.join(' / ')} のどれかです`);
   if (!isText(data.source)) errors.push('source (出典。自分で起こしたなら「自作」) を書きます');
+  return [...errors, ...checkMarks(data, bookSlug)];
+}
 
+/** 印 (board / tools / era / device) の値。計画 (`plan.mjs`) も同じ決まりで見る。 */
+export function checkMarks(data, bookSlug) {
+  const errors = [];
   if (data.board !== undefined && !listOf(data.board).every((board) => BOARDS.has(board))) {
     errors.push(`board は ${[...BOARDS].join(' / ')} (並べるなら [BB, PF]) です`);
   }
@@ -160,6 +165,6 @@ function checkHeading(body, data) {
   return first === expected ? [] : [`本文の最初の見出しは「${expected}」にします`];
 }
 
-const isText = (value) => typeof value === 'string' && value.trim() !== '';
+export const isText = (value) => typeof value === 'string' && value.trim() !== '';
 
 const listOf = (value) => (Array.isArray(value) ? value : [value]);

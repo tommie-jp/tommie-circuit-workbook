@@ -8,17 +8,18 @@
 
 <!-- toc:start -->
 
-| 冊 | 内容 | 必須 | 入門 | 中級 |
-| --- | --- | --- | --- | --- |
-| [回路の教科書](01-circuits/README.md) | 直流の基本から実用回路まで。回路図と実体配線図を並べて組む | 1 | 1 | 1 |
-| [Analog Discovery の教科書](02-analog-discovery/README.md) | Analog Discovery 2 / 3 と WaveForms で DC〜10 MHz を測る | 1 | 1 | 1 |
-| [NanoVNA の教科書](03-nanovna/README.md) | NanoVNA-H4 / V2 で 10 kHz〜4.4 GHz を測る。治具・部品・フィルタ・アンテナ・GHz 帯 | 1 | 1 | 1 |
+| 冊 | 内容 | 必須 | 入門 | 中級 | 済 |
+| --- | --- | --- | --- | --- | --- |
+| [回路の教科書](01-circuits/README.md) | 直流の基本から実用回路まで。回路図と実体配線図を並べて組む | 50 | 100 | 200 | 1 |
+| [Analog Discovery の教科書](02-analog-discovery/README.md) | Analog Discovery 2 / 3 と WaveForms で DC〜10 MHz を測る | 50 | 100 | 200 | 1 |
+| [NanoVNA の教科書](03-nanovna/README.md) | NanoVNA-H4 / V2 で 10 kHz〜4.4 GHz を測る。治具・部品・フィルタ・アンテナ・GHz 帯 | 50 | 100 | 200 | 1 |
 
 <!-- toc:end -->
 
 どの冊も **必須 50 ⊂ 入門 100 ⊂ 中級 200** の 3 段。段は入れ子で、
 「必須だけ」「入門まで」で止めても一通りになるように並べる。
-上の数は書き終えた題の数 (入れ子で数える)。
+必須・入門・中級は計画 (各冊の `plan.yaml`) の数で入れ子で数え、済 は書き終えた
+題の数。各冊の README に 200 題の目次があり、書き終えた題は link になっている。
 
 ## 読み方
 
@@ -51,6 +52,10 @@ tools: [AD, VNA]        # 任意。2 つの計器を両方使う題
 本文は **説明 → 回路図 (circuit) → 実体配線図 (breadboard / perfboard) →
 計器の設定 → 見るべき値 → 出典** の順。
 
+200 題の計画は各冊の `plan.yaml` (1 行 1 題: `id` `tier` `title` と印)。題を書くときは
+計画の `id` と `title` と `tier` をそのまま front matter に写す。題を書き換えたら
+`plan.yaml` も直す (計画が目次の元。ずれると `check` が言う)。
+
 ## 検査
 
 ```bash
@@ -61,7 +66,7 @@ npm run check -- --verbose   # ネットリストも出す。意図した回路�
 ```
 
 `check` は置き場と front matter の食い違い、フェンス名の書き間違い、フェンスの
-読めない行、古い目次で落ちる。ERC (つながっていない足など) は出すだけで落とさない。
+読めない行、`plan.yaml` とのずれ (計画に無い題、違う title や tier)、古い目次で落ちる。ERC (つながっていない足など) は出すだけで落とさない。
 
 ## ライセンス
 

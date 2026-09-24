@@ -1,11 +1,13 @@
 /**
- * 目次を front matter から組み、README の印 (`<!-- toc:start -->` 〜
- * `<!-- toc:end -->`) の間に書き込む。**印の外は手で書いた前書きなので触らない。**
+ * 目次を計画 (`plan.yaml`) と書いた題 (front matter) から組み、README の印
+ * (`<!-- toc:start -->` 〜 `<!-- toc:end -->`) の間に書き込む。
+ * **印の外は手で書いた前書きなので触らない。**
  *
  *   node scripts/toc.mjs          README を書き換える
  *   node scripts/toc.mjs --check  書き換えが要るなら 1 で終わる (CI)
  *
- * 数は**入れ子で数える** — 入門は必須を含み、中級は全部。
+ * 必須・入門・中級は計画の数で、**入れ子で数える** — 入門は必須を含み、中級は全部。
+ * 「済」は書いた題の数。書いた題は link になり、まだの題は字だけ。
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -13,6 +15,7 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { BOOKS, TIERS, TIER_NAMES } from './books.mjs';
 import { ROOT, readEntries } from './collect.mjs';
+import { mergePlan, readPlan } from './plan.mjs';
 
 const START = '<!-- toc:start -->';
 const END = '<!-- toc:end -->';
@@ -20,9 +23,14 @@ const END = '<!-- toc:end -->';
 /** front matter の欄 → 目次の表の見出し。 */
 const COLUMN_NAMES = { era: '印', board: '板', device: '機種' };
 
-/** 段ごとの数 (入れ子)。`[必須, 入門, 中級]`。 */
-function tierCounts(entries) {
-  return TIERS.map((limit) => entries.filter((entry) => entry.tier <= limit).length);
+const WRITTEN = '済';
+
+/** 段ごとの数 (入れ子) と書いた数。`[必須, 入門, 中級, 済]`。 */
+function counts(rows) {
+  return [
+    ...TIERS.map((limit) => rows.filter((row) => row.tier <= limit).length),
+    rows.filter((row) => row.path !== null).length,
+  ];
 }
 
 const cell = (value) => {
@@ -36,19 +44,29 @@ const row = (cells) => `|${cells.map((text) => (text === '' ? ' ' : ` ${text} `)
 
 const byNumber = (a, b) => a.chapter.number - b.chapter.number || a.number - b.number;
 
-/** 1 冊の目次。章の一覧 (数) と、題のある章ごとの表。 */
-export function bookToc(book, entries) {
-  const sorted = [...entries].sort(byNumber);
-  const [all50, all100, all200] = tierCounts(sorted);
+const COUNT_NAMES = [...TIERS.map((tier) => TIER_NAMES[tier]), WRITTEN];
+
+/** 題の欄。書いた題はファイルへの link、まだの題は字だけ。 */
+const titleCell = (book, entry) =>
+  (entry.path === null ? cell(entry.title) : `[${cell(entry.title)}](${entry.path.slice(book.dir.length + 1)})`);
+
+/**
+ * 1 冊の目次。章の一覧 (数) と、題のある章ごとの表。
+ *
+ * @param {object} book `books.mjs` の冊
+ * @param {object[]} rows `plan.mjs` の `mergePlan` が返す並び (書いた題は `path` を持つ)
+ */
+export function bookToc(book, rows) {
+  const sorted = [...rows].sort(byNumber);
 
   const overview = [
-    row(['章', '題名', ...TIERS.map((tier) => TIER_NAMES[tier])]),
-    row(['---', '---', ...TIERS.map(() => '---')]),
+    row(['章', '題名', ...COUNT_NAMES]),
+    row(['---', '---', ...COUNT_NAMES.map(() => '---')]),
     ...book.chapters.map((chapter) => {
-      const counts = tierCounts(sorted.filter((entry) => entry.chapter.number === chapter.number));
-      return row([String(chapter.number), chapter.title, ...counts.map(String)]);
+      const inChapter = sorted.filter((entry) => entry.chapter.number === chapter.number);
+      return row([String(chapter.number), chapter.title, ...counts(inChapter).map(String)]);
     }),
-    row(['**計**', '', ...[all50, all100, all200].map((count) => `**${count}**`)]),
+    row(['**計**', '', ...counts(sorted).map((count) => `**${count}**`)]),
   ];
 
   const header = ['#', '題', '段', ...book.columns.map((column) => COLUMN_NAMES[column])];
@@ -60,20 +78,17 @@ export function bookToc(book, entries) {
       '',
       row(header),
       row(header.map(() => '---')),
-      ...inChapter.map((entry) => {
-        const link = entry.path.slice(book.dir.length + 1);
-        const cells = [
-          entry.id,
-          `[${cell(entry.title)}](${link})`,
-          TIER_NAMES[entry.tier],
-          ...book.columns.map((column) => cell(entry[column])),
-        ];
-        return row(cells);
-      }),
+      ...inChapter.map((entry) => row([
+        entry.id,
+        titleCell(book, entry),
+        TIER_NAMES[entry.tier],
+        ...book.columns.map((column) => cell(entry[column])),
+      ])),
     ].join('\n'));
 
   return [
-    '数は入れ子で数える (入門は必須を含み、中級は全部)。',
+    `必須・入門・中級は計画の数で、入れ子で数える (入門は必須を含み、中級は全部)。
+${WRITTEN} は書き終えた題の数。書き終えた題は link になっている。`,
     '',
     overview.join('\n'),
     ...sections.flatMap((section) => ['', section]),
@@ -81,13 +96,13 @@ export function bookToc(book, entries) {
 }
 
 /** 直下の README に載せる冊の一覧。 */
-export function rootToc(entriesByBook) {
+export function rootToc(rowsByBook) {
   return [
-    row(['冊', '内容', ...TIERS.map((tier) => TIER_NAMES[tier])]),
-    row(['---', '---', ...TIERS.map(() => '---')]),
+    row(['冊', '内容', ...COUNT_NAMES]),
+    row(['---', '---', ...COUNT_NAMES.map(() => '---')]),
     ...BOOKS.map((book) => {
-      const counts = tierCounts(entriesByBook.get(book.dir) ?? []);
-      return row([`[${book.title}](${book.dir}/README.md)`, book.summary, ...counts.map(String)]);
+      const inBook = counts(rowsByBook.get(book.dir) ?? []);
+      return row([`[${book.title}](${book.dir}/README.md)`, book.summary, ...inBook.map(String)]);
     }),
   ].join('\n');
 }
@@ -102,13 +117,23 @@ export function fillMarkers(text, content) {
   return `${text.slice(0, start + START.length)}\n\n${content}\n\n${text.slice(end)}`;
 }
 
-/** 書き換えるべき README と中身の組。検査を通らなかった題は数えない。 */
-export function plannedReadmes(root = ROOT) {
+/**
+ * 冊ごとに計画と書いた題を合わせた並び。検査を通らなかった題は数えない。
+ * 計画の側の問題 (読めない・計画に無い題・ずれ) は `check.mjs` が言うので、ここでは集めるだけ。
+ */
+export function mergedRows(root = ROOT) {
   const entries = readEntries(root).filter((read) => read.entry !== null && read.errors.length === 0);
-  const byBook = new Map(BOOKS.map((book) => [
-    book.dir,
-    entries.filter((read) => read.entry.book.dir === book.dir).map((read) => read.entry),
-  ]));
+  return new Map(BOOKS.map((book) => {
+    const plan = readPlan(root, book);
+    const inBook = entries.filter((read) => read.entry.book.dir === book.dir).map((read) => read.entry);
+    const merged = mergePlan(plan.items, inBook);
+    return [book.dir, { rows: merged.rows, errors: [...plan.errors, ...merged.errors] }];
+  }));
+}
+
+/** 書き換えるべき README と中身の組。 */
+export function plannedReadmes(root = ROOT) {
+  const byBook = new Map([...mergedRows(root)].map(([dir, { rows }]) => [dir, rows]));
 
   return [
     { path: 'README.md', content: rootToc(byBook) },

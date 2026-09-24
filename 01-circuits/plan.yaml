@@ -1,0 +1,201 @@
+# 01-circuits の計画 — 必須 50 ⊂ 入門 100 ⊂ 中級 200 の 200 題。目次 (README) はここと題のファイルから npm run toc が組む。
+- { id: 0-1, tier: 50, board: BB, title: テスターで電圧・電流・抵抗を測る — 分圧回路を相手に }
+- { id: 0-2, tier: 50, board: BB, title: ブレッドボードの導通と回路図の読み方 — 同じ列、レール、ネット }
+- { id: 0-3, tier: 50, board: BB, era: 今, title: オシロスコープで波形を見る — 555 の出力を PC オシロ / AD2 で }
+- { id: 0-4, tier: 100, era: 古, title: 自作テスター — 分流器と倍率器 }
+- { id: 0-5, tier: 100, era: 古, title: hFE チェッカー }
+- { id: 0-6, tier: 100, era: 今, title: 安定化電源とファンクションジェネレータ — 電流制限を掛けて実験する }
+- { id: 0-7, tier: 200, title: テブナン等価を測って確かめる }
+- { id: 0-8, tier: 200, era: 古, title: コンデンサ容量計 — ブリッジで測る }
+- { id: 0-9, tier: 200, title: 周波数カウンタ (CMOS) }
+- { id: 0-10, tier: 200, era: 古, title: ロジックプローブと音で聞く検出器 }
+- { id: 1-1, tier: 50, board: BB, title: LED を点ける — 抵抗で電流を決める }
+- { id: 1-2, tier: 50, board: BB, title: 直列・並列と分圧 }
+- { id: 1-3, tier: 50, board: BB, title: コンデンサの充放電 — RC 時定数を LED で見る }
+- { id: 1-4, tier: 50, board: BB, title: ダイオードの向きと順方向電圧 — LED の色で比べる }
+- { id: 1-5, tier: 50, board: BB, title: RC ローパス・ハイパス }
+- { id: 1-6, tier: 100, title: ポテンショメータで分圧 (電位差計) }
+- { id: 1-7, tier: 100, era: 古, title: ホイートストンブリッジ }
+- { id: 1-8, tier: 100, title: コンデンサの直列・並列と時定数の比較 }
+- { id: 1-9, tier: 100, title: ダイオードのクリッパとクランパ }
+- { id: 1-10, tier: 200, era: 古, title: 倍電圧 — ダイオードとコンデンサで (コッククロフト) }
+- { id: 1-11, tier: 200, title: LC 共振 — 直列と並列 }
+- { id: 1-12, tier: 200, title: 保護素子 — ヒューズ・PTC・バリスタ }
+- { id: 1-13, tier: 200, title: ツェナーで基準電圧 }
+- { id: 1-14, tier: 200, era: 古, title: じゃがいも電池・レモン電池 }
+- { id: 1-15, tier: 200, era: 古, title: 熱電対 — 2 種の金属で電圧 }
+- { id: 1-16, tier: 200, title: 電球の非線形 — 抵抗の温度係数 }
+- { id: 2-1, tier: 50, board: BB, title: トランジスタスイッチ (LED) }
+- { id: 2-2, tier: 50, board: BB, title: エミッタフォロア }
+- { id: 2-3, tier: 50, board: BB, title: エミッタ接地増幅 (自己バイアス) }
+- { id: 2-4, tier: 50, board: BB, title: ダーリントン — 指で触れて点く }
+- { id: 2-5, tier: 50, board: BB, era: 今, title: MOSFET スイッチ (2N7000、ロジックレベル) }
+- { id: 2-6, tier: 50, board: BB, title: 差動増幅 }
+- { id: 2-7, tier: 100, title: カレントミラー }
+- { id: 2-8, tier: 100, title: コレクタ帰還バイアスと分圧バイアスの比較 }
+- { id: 2-9, tier: 100, title: JFET の定電流 }
+- { id: 2-10, tier: 100, title: プッシュプル (B 級) とクロスオーバー歪 }
+- { id: 2-11, tier: 100, title: PNP のハイサイドスイッチ }
+- { id: 2-12, tier: 200, title: カスコード }
+- { id: 2-13, tier: 200, era: 古, title: シュミットトリガ (Tr 2 石) }
+- { id: 2-14, tier: 200, title: 定電流源 — Tr + ツェナー / 2 石 }
+- { id: 2-15, tier: 200, title: 2 段増幅と負帰還 }
+- { id: 2-16, tier: 200, title: A 級パワーアンプ (スピーカーを鳴らす) }
+- { id: 2-17, tier: 200, era: 今, title: MOSFET のゲート駆動 — ゲート抵抗・プルダウン・ミラー容量 }
+- { id: 2-18, tier: 200, era: 今, title: IGBT スイッチ }
+- { id: 2-19, tier: 200, era: 今, title: フォトカプラで絶縁 }
+- { id: 2-20, tier: 200, era: 古, title: サイリスタ・トライアックの点弧 (低圧 AC) }
+- { id: 3-1, tier: 50, board: BB, era: 古, title: 非安定マルチバイブレータ — LED 交互点滅 }
+- { id: 3-2, tier: 50, board: BB, title: 555 非安定 — LED 点滅 }
+- { id: 3-3, tier: 50, board: BB, title: 555 単安定 — タイマー }
+- { id: 3-4, tier: 50, board: BB, era: 古, title: 弛張発振 — Tr 2 石でブザー }
+- { id: 3-5, tier: 50, board: BB, title: 水晶発振 — CMOS インバータ + 水晶 }
+- { id: 3-6, tier: 100, title: 555 の PWM — ボリュームで LED 調光 }
+- { id: 3-7, tier: 100, era: 古, title: ウィーンブリッジ — OP アンプで正弦波 }
+- { id: 3-8, tier: 100, title: シュミット CMOS (40106) の RC 発振 }
+- { id: 3-9, tier: 200, era: 古, title: 単安定 (Tr 2 石) }
+- { id: 3-10, tier: 200, era: 古, title: コルピッツ }
+- { id: 3-11, tier: 200, era: 古, title: 移相発振 (RC 3 段) }
+- { id: 3-12, tier: 200, title: 555 を 2 段 — サイレン }
+- { id: 3-13, tier: 200, title: VCO — 555 の 5 番ピン }
+- { id: 3-14, tier: 200, era: 古/今, title: LM3909 (古典) と自動点滅 LED (現代) を並べる }
+- { id: 3-15, tier: 200, title: リングオシレータ (インバータ 3 段) }
+- { id: 4-1, tier: 50, board: BB, title: ボルテージフォロア }
+- { id: 4-2, tier: 50, board: BB, title: 非反転増幅 }
+- { id: 4-3, tier: 50, board: BB, title: 反転増幅 }
+- { id: 4-4, tier: 50, board: BB, title: 比較器 — CdS でしきい値 }
+- { id: 4-5, tier: 50, board: BB, title: 加算 (ミキサー) }
+- { id: 4-6, tier: 100, title: 積分器 }
+- { id: 4-7, tier: 100, title: 差動増幅 }
+- { id: 4-8, tier: 100, title: シュミットトリガ (ヒステリシス) }
+- { id: 4-9, tier: 100, title: 微分器 }
+- { id: 4-10, tier: 100, title: アクティブ ローパス (サレンキー) }
+- { id: 4-11, tier: 100, era: 今, title: 単電源での使い方 — 仮想 GND、レール to レール }
+- { id: 4-12, tier: 200, title: 精密整流とピークホールド }
+- { id: 4-13, tier: 200, title: 計装アンプ (OP アンプ 3 つ) }
+- { id: 4-14, tier: 200, title: 電流→電圧 (トランスインピーダンス、フォトダイオード) }
+- { id: 4-15, tier: 200, title: 電圧→電流 (定電流 LED ドライバ) }
+- { id: 4-16, tier: 200, title: ハイパス・バンドパス }
+- { id: 4-17, tier: 200, era: 今, title: コンパレータ IC (LM393、オープンコレクタ) }
+- { id: 4-18, tier: 200, title: ウィンドウコンパレータ }
+- { id: 4-19, tier: 200, title: 三角波・方形波発生器 (積分 + シュミット) }
+- { id: 4-20, tier: 200, title: 帰還の安定性 — 容量負荷と位相補償 }
+- { id: 5-1, tier: 50, board: BB, title: 半波・全波・ブリッジ整流と平滑 (低圧 AC) }
+- { id: 5-2, tier: 50, board: BB, era: 古, title: ツェナー + Tr のシリーズレギュレータ }
+- { id: 5-3, tier: 50, board: BB, title: 3 端子レギュレータ (7805) }
+- { id: 5-4, tier: 50, board: BB, era: 今, title: LDO — USB 5V → 3.3V }
+- { id: 5-5, tier: 50, board: BB, era: 古, title: 昇圧 — Joule thief }
+- { id: 5-6, tier: 100, era: 今, title: 降圧スイッチング (MC34063 かモジュール) }
+- { id: 5-7, tier: 100, title: チャージポンプ — 555 で負電圧 }
+- { id: 5-8, tier: 100, era: 今, title: Li-ion 充電 (TP4056 モジュール) と保護 }
+- { id: 5-9, tier: 100, era: 今, title: 逆接続保護 — ダイオード / P-MOSFET }
+- { id: 5-10, tier: 200, title: 定電流 (LM317) }
+- { id: 5-11, tier: 200, era: 今, title: 昇圧スイッチング (MT3608) }
+- { id: 5-12, tier: 200, title: 電池残量チェッカー }
+- { id: 5-13, tier: 200, era: 今, title: ソーラー + スーパーキャパシタ }
+- { id: 5-14, tier: 200, title: リップルとデカップリングの実測 }
+- { id: 5-15, tier: 200, title: 電源の保護 — ヒューズ・PTC・TVS }
+- { id: 5-16, tier: 200, title: 負電源 (ICL7660) }
+- { id: 5-17, tier: 200, title: 電流制限 (フォールドバック) }
+- { id: 6-1, tier: 50, board: BB, title: トランスの基本 — 低圧 AC で昇圧・降圧・絶縁 }
+- { id: 6-2, tier: 50, board: BB, title: コイルの逆起電力 — 切った瞬間に LED が光る、フライバックダイオード }
+- { id: 6-3, tier: 100, era: 古, title: 自作トランス — 巻数比を測る }
+- { id: 6-4, tier: 100, title: センタータップと全波整流 }
+- { id: 6-5, tier: 100, era: 古, title: 磁界を聞く — コイル + 音 }
+- { id: 6-6, tier: 200, era: 今, title: フライバックコンバータ (小型) }
+- { id: 6-7, tier: 200, title: インダクタの飽和 }
+- { id: 6-8, tier: 200, title: 相互誘導と極性 (ドット) }
+- { id: 6-9, tier: 200, title: 電流トランス }
+- { id: 6-10, tier: 200, era: 今, title: ワイヤレス給電 — 共振コイルで LED }
+- { id: 7-1, tier: 50, board: BB, title: リレー駆動 — Tr + フライバックダイオード }
+- { id: 7-2, tier: 50, board: BB, era: 今, title: DC モータの PWM (MOSFET) }
+- { id: 7-3, tier: 50, board: BB, title: H ブリッジ — 正転・逆転 }
+- { id: 7-4, tier: 100, title: ステッピングモータ (ULN2003) }
+- { id: 7-5, tier: 100, era: 今, title: サーボ — パルス幅で角度 }
+- { id: 7-6, tier: 100, era: 今, title: パワー LED の定電流 }
+- { id: 7-7, tier: 100, title: ハイサイドとローサイド }
+- { id: 7-8, tier: 200, era: 今, title: ゲートドライバ IC }
+- { id: 7-9, tier: 200, era: 今, title: ブラシレスの原理 (3 相、簡略) }
+- { id: 7-10, tier: 200, title: ソレノイド }
+- { id: 7-11, tier: 200, title: 電子負荷 }
+- { id: 7-12, tier: 200, title: 熱設計 — 放熱と温度の実測 }
+- { id: 7-13, tier: 200, era: 古, title: トライアックの位相制御 (低圧 AC) }
+- { id: 7-14, tier: 200, era: 今, title: ソリッドステートリレー (フォトトライアック) }
+- { id: 8-1, tier: 50, board: BB, title: CdS で暗くなると点く }
+- { id: 8-2, tier: 50, board: BB, title: サーミスタで温度アラーム }
+- { id: 8-3, tier: 50, board: BB, era: 古, title: タッチスイッチ (人体) }
+- { id: 8-4, tier: 50, board: BB, title: マイクで音に反応 }
+- { id: 8-5, tier: 50, board: BB, title: 赤外線 LED とフォトトランジスタ — 遮光検出 }
+- { id: 8-6, tier: 100, era: 今, title: 人感 (PIR モジュール) }
+- { id: 8-7, tier: 100, era: 今, title: 超音波 (HC-SR04) }
+- { id: 8-8, tier: 100, title: ホール素子 (磁石) }
+- { id: 8-9, tier: 100, era: 古, title: 水位・土壌湿度 (電極) }
+- { id: 8-10, tier: 100, era: 今, title: 温度センサ IC (LM35 / TMP36) }
+- { id: 8-11, tier: 200, title: リードスイッチ }
+- { id: 8-12, tier: 200, title: 圧電 (ノック) }
+- { id: 8-13, tier: 200, era: 今, title: 加速度 (モジュール) }
+- { id: 8-14, tier: 200, era: 今, title: 静電容量タッチ — 発振周波数の変化 }
+- { id: 8-15, tier: 200, title: ロータリーエンコーダ }
+- { id: 8-16, tier: 200, era: 今, title: 湿度 (DHT) }
+- { id: 8-17, tier: 200, era: 今, title: 気圧 (I2C) }
+- { id: 8-18, tier: 200, title: 太陽電池を光センサに }
+- { id: 8-19, tier: 200, title: フォトダイオードの短絡電流 }
+- { id: 8-20, tier: 200, era: 古, title: LED を受光素子に }
+- { id: 9-1, tier: 50, board: BB, title: LC 同調 — 共振を LED で見る }
+- { id: 9-2, tier: 50, board: BB, era: 古, title: ゲルマラジオ }
+- { id: 9-3, tier: 50, board: BB, era: 古, title: 1 石ラジオ (トランジスタ検波) }
+- { id: 9-4, tier: 50, board: BB, era: 古, title: FM 送信機 (1 石) }
+- { id: 9-5, tier: 100, era: 古, title: 1 石レフレックスラジオ }
+- { id: 9-6, tier: 100, era: 古, title: 超再生 FM ラジオ }
+- { id: 9-7, tier: 100, title: AM 変調 — 555 の搬送波を音声で振る }
+- { id: 9-8, tier: 100, title: ラジオ IC (LMF501T / TA7642) }
+- { id: 9-9, tier: 200, era: 古, title: 2 石ラジオ — 高周波増幅 + 低周波増幅 }
+- { id: 9-10, tier: 200, era: 古, title: スーパーヘテロダイン (6 石、IF 455kHz) }
+- { id: 9-11, tier: 200, title: ダイオード検波とトランジスタ検波の比較 }
+- { id: 9-12, tier: 200, title: バランスドミキサー }
+- { id: 9-13, tier: 200, era: 古, title: FM 復調 — スロープ検波 }
+- { id: 9-14, tier: 200, era: 古, title: 27MHz の送受信 (トイラジコン) }
+- { id: 9-15, tier: 200, title: アンテナ — ダイポールとループ、SWR }
+- { id: 9-16, tier: 200, era: 今, title: DDS / SDR モジュール }
+- { id: 9-17, tier: 200, era: 今, title: 2.4GHz モジュール (nRF24) と Pico }
+- { id: 10-1, tier: 50, board: BB, title: ゲートの基本 — スイッチと LED で AND / OR / NOT }
+- { id: 10-2, tier: 50, board: BB, title: RS ラッチ (NAND) }
+- { id: 10-3, tier: 50, board: BB, title: 半加算器と全加算器 (XOR + AND) }
+- { id: 10-4, tier: 50, board: BB, title: バイナリカウンタ (4 bit、4040) }
+- { id: 10-5, tier: 100, title: D フリップフロップ (4013) と T フリップフロップ }
+- { id: 10-6, tier: 100, era: 今, title: シフトレジスタ (74HC595) }
+- { id: 10-7, tier: 100, title: 7 セグメントとデコーダ (4511) }
+- { id: 10-8, tier: 100, title: 4 bit 加算器 (74HC283) }
+- { id: 10-9, tier: 200, title: チャタリング除去 — RC + シュミット }
+- { id: 10-10, tier: 200, title: ジョンソンカウンタ (4017) — LED 順送り }
+- { id: 10-11, tier: 200, title: 4 bit ALU もどき — 加算と減算 (2 の補数) }
+- { id: 10-12, tier: 200, title: CPU もどき — レジスタ + 加算器 + クロック }
+- { id: 10-13, tier: 200, title: メモリ — フリップフロップ 4 bit }
+- { id: 10-14, tier: 200, title: プログラムカウンタ }
+- { id: 10-15, tier: 200, era: 古, title: トランジスタで作るゲート (RTL / DTL) }
+- { id: 10-16, tier: 200, title: オープンドレインと配線 AND、プルアップ }
+- { id: 10-17, tier: 200, era: 今, title: レベル変換 (3.3V ↔ 5V) }
+- { id: 10-18, tier: 200, era: 今, title: I2C バスの電気 — プルアップと容量 }
+- { id: 10-19, tier: 200, era: 古, title: 電子サイコロ (4017 + 555) }
+- { id: 11-1, tier: 50, board: BB, era: 今, title: Pico の L チカ }
+- { id: 11-2, tier: 50, board: BB, era: 今, title: ボタン入力とプルアップ }
+- { id: 11-3, tier: 100, era: 今, title: ADC で CdS を読む }
+- { id: 11-4, tier: 100, era: 今, title: PWM で LED 調光とサーボ }
+- { id: 11-5, tier: 100, era: 今, title: I2C センサー (温度) }
+- { id: 11-6, tier: 200, era: 今, title: SPI (シフトレジスタ / 表示) }
+- { id: 11-7, tier: 200, era: 今, title: UART — Pico 2 台で通信 }
+- { id: 11-8, tier: 200, era: 今, title: 割り込みとロータリーエンコーダ }
+- { id: 11-9, tier: 200, era: 今, title: モータドライバ (DRV8833) }
+- { id: 11-10, tier: 200, era: 今, title: Pico W で しきい値を通知 }
+- { id: 11-11, tier: 200, era: 今, title: USB 給電と電源設計 (VSYS / VBUS) }
+- { id: 11-12, tier: 200, era: 今, title: デカップリングとグラウンド }
+- { id: 12-1, tier: 50, board: [ BB, PF ], title: おやすみタイマー — 555 単安定 + MOSFET }
+- { id: 12-2, tier: 100, board: PF, era: 今, title: 人感ライト — PIR + CdS + MOSFET }
+- { id: 12-3, tier: 100, board: PF, title: 水漏れ・水位アラーム }
+- { id: 12-4, tier: 200, board: PF, title: 電子ホタル — フェードイン・アウト }
+- { id: 12-5, tier: 200, board: PF, era: 古, title: ドアチャイム / メロディ IC }
+- { id: 12-6, tier: 200, board: PF, title: インターホン (LM386) }
+- { id: 12-7, tier: 200, board: PF, title: 電池チェッカー }
+- { id: 12-8, tier: 200, board: PF, era: 古, title: 植物の水やりアラーム }
+- { id: 12-9, tier: 200, board: PF, title: LED イルミネーション (4017) }
+- { id: 12-10, tier: 200, board: PF, era: 今, title: ソーラーガーデンライト }
