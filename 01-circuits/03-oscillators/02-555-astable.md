@@ -19,27 +19,36 @@ board: BB
 ```circuit
 title: 図1 555 非安定
 parts:
-  V1: vsource vcc gnd 9
-  G1: ground gnd
-  U1: dip8 d3 NE555
-  Ra: resistor vcc b8 10k
-  Rb: resistor b8 c10 47k
-  C1: ecap c10 gnd 10u
-  Cc: capacitor d12 gnd 10n
-  R1: resistor d14 e14 680
-  D1: led e14 gnd red
-points:
-  vcc: a6
-  gnd: h6
+  V1: vsource c1 f1 9
+  VCC: vcc c1
+  G1: ground f1
+  U1: dip8 e6 NE555
+  G2: ground b6
+  VCC: vcc c7
+  Ra: resistor c8 d8 10k
+  Rb: resistor d8 d10 47k
+  C1: ecap d12 g12 10u
+  G3: ground g12
+  VCC: vcc g6
+  R1: resistor f3 g3 680
+  D1: led g3 i3 red
+  G4: ground i3
+  Cc: capacitor g7 i7 10n
+  G5: ground i7
 wires:
-  - b8 |- U1.7
-  - c10 |- U1.6
-  - c10 |- U1.2
-  - vcc |- U1.8
-  - vcc |- U1.4
-  - gnd |- U1.1
-  - d12 |- U1.5
-  - d14 |- U1.3
+  - U1.1 -| b5
+  - b5 -- b6
+  - U1.2 -| a4
+  - a4 -- a10 -- d10
+  - U1.8 -| c7
+  - c7 -- c8
+  - U1.7 -| d8
+  - U1.6 -| d10
+  - d10 -- d12
+  - U1.3 -| f3
+  - U1.4 -| g5
+  - g5 -- g6
+  - U1.5 -| g7
 style:
   grid: on
 ```

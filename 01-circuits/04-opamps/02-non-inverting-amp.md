@@ -18,25 +18,30 @@ board: BB
 ```circuit
 title: 図1 非反転増幅
 parts:
-  B1: battery vp mid 9
-  B2: battery mid vm 9
-  G1: ground mid
-  V1: sine a2 mid 0.1
-  C1: capacitor a2 b2 1u
-  Rb: resistor b2 mid 100k
-  U1: opamp b4 +up
-  R2: resistor c3 mid 1k
-  R3: resistor c3 c5 10k
-  OUT: port b6
+  B1: battery a1 c1 9
+  B2: battery c1 e1 9
+  G1: ground c2
+  V1: sine b4 d4 0.1
+  G2: ground d4
+  C1: capacitor b4 b6 1u
+  Rb: resistor b6 d6 100k
+  G3: ground d6
+  U1: opamp b9 +up
+  R2: resistor d8 f8 1k
+  G4: ground f8
+  R3: resistor d9 d11 10k
+  OUT: port b13
+wires:
+  - mid -- c2
+  - b6 |- U1.+
+  - d8 |- U1.-
+  - d8 -- d9
+  - U1.out -- b12 -- b13
+  - d11 -- d12 -- b12
 points:
   vp: a1
   vm: e1
   mid: c1
-wires:
-  - b2 |- U1.+
-  - c3 |- U1.-
-  - U1.out -- b5 -- b6
-  - c5 -- b5
 style:
   grid: on
 ```

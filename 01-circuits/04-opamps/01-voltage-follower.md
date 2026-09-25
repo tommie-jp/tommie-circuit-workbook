@@ -19,21 +19,26 @@ OP アンプの 5 つの基本形の最初の 1 つ。
 ```circuit
 title: 図1 ボルテージフォロア
 parts:
-  B1: battery vp mid 9
-  B2: battery mid vm 9
-  G1: ground mid
-  R1: resistor vp b4 100k
-  R2: resistor b4 vm 47k
+  B1: battery a1 c1 9
+  B2: battery c1 e1 9
+  G1: ground c2
+  R1: resistor a3 c3 100k
+  R2: resistor c3 e3 47k
   U1: opamp c6 +up
-  RL: resistor b8 mid 1k
+  RL: resistor c9 e9 1k
+  G2: ground e9
+wires:
+  - mid -- c2
+  - vp -- a3
+  - vm -- e3
+  - c3 |- U1.+
+  - U1.out -- c8 -- c9
+  - c8 -- d8 -- d5
+  - d5 |- U1.-
 points:
   vp: a1
   vm: e1
   mid: c1
-wires:
-  - b4 |- U1.+
-  - U1.out -| b7 -- b8
-  - b7 |- U1.-
 style:
   grid: on
 ```

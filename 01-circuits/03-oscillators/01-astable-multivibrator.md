@@ -20,29 +20,36 @@ era: 古
 ```circuit
 title: 図1 非安定マルチバイブレータ
 parts:
-  V1: vsource vcc gnd 5
-  G1: ground gnd
-  Q1: npn d3 2SC1815
-  Q2: npn d11 2SC1815
-  R1: resistor vcc b3 330
-  D1: led b3 c3 red
-  R2: resistor vcc b11 330
-  D2: led b11 c11 red
-  R4: resistor vcc d5 100k
-  R3: resistor vcc d9 100k
-  C2: ecap c11 d5 10u
-  C1: ecap c3 d9 10u
-points:
-  vcc: a7
-  gnd: h7
+  V1: vsource a1 i1 5
+  G1: ground i1
+  R1: resistor a3 c3 330
+  D1: led c3 e3 red
+  R4: resistor a5 c5 100k
+  R3: resistor a9 c9 100k
+  R2: resistor a11 c11 330
+  D2: led c11 e11 red
+  Q1: npn g3 mirror 2SC1815
+  Q2: npn g11 2SC1815
+  C1: ecap e4 e8 10u
+  C2: ecap d10 d6 10u
 wires:
-  - c3 |- Q1.C
-  - c11 |- Q2.C
+  - vcc -- a3 -- a5 -- a9 -- a11
+  - e3 |- Q1.C
+  - e11 |- Q2.C
+  - e3 -- e4
+  - e8 -- e9
+  - c9 -- e9
+  - e9 |- Q2.B
+  - e11 -- e10 -- d10
+  - d6 -- d5
+  - c5 -- d5
   - d5 |- Q1.B
-  - d9 |- Q2.B
-  - Q1.E -| h3
-  - Q2.E -| h11
-  - h3 -- h7 -- h11
+  - Q1.E |- i3
+  - Q2.E |- i11
+  - gnd -- i3 -- i11
+points:
+  vcc: a1
+  gnd: i1
 style:
   grid: on
 ```
