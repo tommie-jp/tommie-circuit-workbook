@@ -96,50 +96,58 @@ title: 図2 ブレッドボードに組む
 board: full
 parts:
   U555: dip8 @ e5 NE555
-  R1: resistor a12 a14 10k
-  R2: resistor c14 c17 47k
-  C1: capacitor/electrolytic a17 a19 10u
-  U40: dip16 @ e20 CD4040
-  RRST: resistor c35 c37 10k
-  SWRST: button @ e40
-  RQ1: resistor a45 a47 330
-  DQ1: led c47(A) c49(K) red
-  RQ2: resistor a52 a54 330
-  DQ2: led c54(A) c56(K) red
-  RQ3: resistor a59 a61 330
-  DQ3: led c61(A) c63(K) red
+  R1: resistor b6 b3 10k
+  R2: resistor c6 c10 47k
+  C1: capacitor/electrolytic d10 d12 10u
+  RRST: resistor c17 c14 10k
+  SWRST: button @ e17
+  U40: dip16 @ e22 CD4040
+  RQ1: resistor a32 a34 330
+  DQ1: led c34(A) c36(K) red
+  RQ2: resistor a38 a40 330
+  DQ2: led c40(A) c42(K) red
+  RQ3: resistor a44 a46 330
+  DQ3: led c46(A) c48(K) red
+  RQ4: resistor a50 a52 330
+  DQ4: led c52(A) c54(K) red
 wires:
-  - U555.8 -- b8
-  - b8 -- +t8
-  - U555.4 -- b8
-  - U555.1 -- b9
-  - b9 -- -t9
-  - U555.7 -- b12
-  - b17 -- U555.6
-  - U555.2 -- b17
-  - b19 -- -t19
-  - U555.3 -- U40.10
-  - U40.16 -- b20
-  - b20 -- +t20
-  - U40.8 -- b21
-  - b21 -- -t21
-  - c35 -- U40.11
-  - c37 -- b9
-  - d40 -- c35
-  - +b42 -- g42
-  - U40.9 -- b45
-  - U40.7 -- b52
-  - U40.6 -- b59
-  - c49 -- -t49
-  - c56 -- -t56
-  - c63 -- -t63
+  - -t1 -- -b1
+  - +t2 -- +b2
+  - a5 -- +t5
+  - a3 -- +t3
+  - b7 -- b10
+  - d7 -- g6
+  - c12 -- -t12
+  - j5 -- -b5
+  - j8 -- +b8
+  - g7 -- c28
+  - b14 -- -t14
+  - d27 -- d17
+  - j17 -- +b17
+  - a22 -- +t22
+  - j29 -- -b29
+  - d29 -- d32
+  - j28 -- e38
+  - i27 -- e44
+  - h26 -- e50
+  - b36 -- -t36
+  - b42 -- -t42
+  - b48 -- -t48
+  - b54 -- -t54
 ```
 
-- Q4 (5 番目の LED) は列が足りないので省略。Q1〜Q3 と同じ考え方で足4 (Q4)
-  から続ければ足せる
-- U555 (e5) の足8・4 を +t (Vcc) へ、足1 を GND へ。R1・R2・C1 で非安定回路
-- U40 (e20) の足16 を +t、足8 を GND へ。足10 に 555 の出力、足11 に
-  リセットボタン (押すと Vcc、離すと RRST で GND)
+- 上の赤レール = Vcc、青レール = GND。下のレールは 1・2 列で上のレールとつなぐ
+- U555 (NE555) は 5〜8 列、U40 (CD4040) は 22〜29 列。どちらも切り欠きが左で、
+  足1 が左下 (f 行)。U555 は足8 (5 列の上) が左上、U40 は足16 (22 列の上) が左上
+- U555: 足8 (5 列の上) と足4 (RESET、8 列の下) を Vcc へ、足1 (5 列の下) を GND へ。
+  R1 は足7 (6 列の上) から 3 列の Vcc へ、R2 は足7 から 10 列へ。10 列は b 行で
+  足6 (7 列の上) とつなぎ、C1 (+ が 10 列) を通して GND へ。足2 (6 列の下) は
+  足6 へ渡す (d7→g6)。足5 (CONT) は使わない
+- U40: 足16 (22 列の上) を Vcc、足8 (29 列の下) を GND へ。足10 (CLK、28 列の上)
+  に 555 の足3 (7 列の下)。足11 (RESET、27 列の上) は d 行で 17 列へ渡し、
+  RRST (10kΩ) で GND へ、SWRST (e17) を押すと Vcc へ
+- Q1 (足9、29 列の上)・Q2 (足7、28 列の下)・Q3 (足6、27 列の下)・Q4 (足5、
+  26 列の下) を 32・38・44・50 列へ渡し、330Ω と LED を通して GND へ
 
 ## 見るべき値
 
