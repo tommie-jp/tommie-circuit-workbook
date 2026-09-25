@@ -30,30 +30,31 @@ title: 図1 反転増幅と非反転増幅
 parts:
   V1: sine a1 c1 0.3 l=$\mathrm{W1}$
   G1: ground c1
-  Rin: resistor a1 a4 10k
-  U1: opamp c7 +up TL072
-  G2: ground c5
-  Rf1: resistor d9 d12 100k
-  OUT1: port c14
-  U2: opamp h7 +up
-  R2b: resistor i3 j3 10k
-  G3: ground j3
-  R3b: resistor i3 i6 90k
-  OUT2: port h14
+  Rin: resistor a3 a5 10k
+  Rf1: resistor a6 a9 100k
+  U1: opamp c7 +down TL072
+  G2: ground d6
+  OUT1: port c12
+  U2: opamp g7 +up
+  R3b: resistor i6 i9 90k
+  R2b: resistor i5 k5 10k
+  G3: ground k5
+  OUT2: port g12
 wires:
-  - a4 |- U1.-
-  - c5 |- U1.+
-  - d9 |- U1.-
-  - U1.out -- c12 -- c14
-  - d12 -- c12
-  - a1 -- h3
-  - h3 |- U2.+
-  - i3 |- U2.-
-  - U2.out -- h5 -- h14
-  - i6 -- h5
+  - a1 -- a3
+  - a5 -- a6
+  - a5 |- U1.-
+  - d6 |- U1.+
+  - a9 -- a10 -- c10
+  - U1.out -- c10 -- c12
+  - a2 |- U2.+
+  - i5 |- U2.-
+  - i5 -- i6
+  - i9 -- i10 -- g10
+  - U2.out -- g10 -- g12
 notes:
   - text c1h0 blue: 反転
-  - text h1h0 blue: 非反転
+  - text h3h0 blue: 非反転
 style:
   standard: jis
   grid: on
