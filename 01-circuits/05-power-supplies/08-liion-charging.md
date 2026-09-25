@@ -36,15 +36,14 @@ parts:
   BAT: battery e4 e6 3.7
   Rled: resistor d8 f8 390
   Dled: led f8 h8 red
-  GD: ground h8
 wires:
   - USB.VBUS -- M1.IN+
   - USB.GND -- M1.IN-
   - M1.B+ -| e4
   - M1.B- -| e6
   - M1.OUT+ -| d8
-  - M1.OUT- -| i9
-  - e6 |- i9
+  - M1.OUT- -| h9
+  - h9 -- h8
 style:
   grid: on
   pitch: 1.2
@@ -56,6 +55,10 @@ style:
   模している)。**保護 IC は OUT 側の経路にだけ入っている**ので、電池電圧が
   下がりすぎたり (過放電)、OUT 側で短絡や過電流が起きたりすると、
   OUT を電池から切り離して保護する
+- 負荷の輪は **OUT+ → Rled → Dled → OUT−** で閉じる。Dled の戻りは OUT− へ
+  つなぎ、B− (電池の − 側) や USB の GND へは直接つながない。保護 IC の
+  スイッチ (FS8205A) は B− と OUT− の間に入っているので、**B− と OUT− を外で
+  つなぐとスイッチを素通りして保護が効かなくなる**
 - 充電電流はモジュール基板上の抵抗 (多くは 1.2 kΩ で 1A 設定) で決まり、
   外からは変えられない。**電池の定格 (多くの 18650 は 0.5C〜1C、
   2000mAh なら 1〜2A まで) と充電電流が合っているか確認する**こと
