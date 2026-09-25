@@ -31,12 +31,12 @@ parts:
   VCC: vcc c3
   VCC: vcc b6
   VCC: vcc k16
-  U1: dip14 j13 CD4070
-  U2: dip14 j30 CD4081
-  U3: dip14 j22 CD4071
-  VCC: vcc h14i0
-  VCC: vcc h31i0
-  VCC: vcc h23i0
+  U1: dip14 j14 CD4070
+  U2: dip14 j31 CD4081
+  U3: dip14 j23 CD4071
+  VCC: vcc h15i0
+  VCC: vcc h32i0
+  VCC: vcc h24i0
   RS1: resistor o17 p17 330
   DS1: led p17 q17 red
   GS1: ground q17
@@ -49,6 +49,9 @@ parts:
   RCO: resistor k20 l20 330
   DCO: led l20 m20 red
   GCO: ground m20
+  GU1: ground l13
+  GU2: ground l30
+  GU3: ground l22
 wires:
   - e3 -- e12 -- e29
   - e12 |- U1.1
@@ -73,13 +76,16 @@ wires:
   - f27a8 -- f20a6
   - f20a6 |- U3.2
   - U3.3 -| k20
-  - U1.14 -| h14i0
-  - U2.14 -| h31i0
-  - U3.14 -| h23i0
+  - U1.14 -| h15i0
+  - U2.14 -| h32i0
+  - U3.14 -| h24i0
+  - U1.7 -| l13
+  - U2.7 -| l30
+  - U3.7 -| l22
 notes:
   - text n8a5 blue: S (合計)
   - text q18 blue: S1 (半加算の和)
-  - text j23a5 blue: C1 (半加算の桁上げ)
+  - text k24 blue: C1 (半加算の桁上げ)
   - text m21 blue: Cout (全加算の桁上げ)
 style:
   grid: on
@@ -90,7 +96,8 @@ style:
   足1・2→3) が C1 = A·B
 - **全加算器への拡張**: U1 ゲート2 (足5・6→4) が S = S1⊕Cin、U2 ゲート2
   (足5・6→4) が C2 = S1·Cin、U3 ゲート1 (OR、足1・2→3) が Cout = C1 + C2
-- 3 つの IC とも足14がVDD、足7がVSS (図では省略。実配線では必ずつなぐ)
+- 3 つの IC とも足14がVDD (VCC へ)、足7がVSS (GND へ)。どちらも図に描いてある。
+  つなぎ忘れると IC は動かない
 
 ## 実体配線図
 
@@ -104,63 +111,63 @@ parts:
   RpdB: resistor c12 c14 10k
   CIN: switch a17 a19
   RpdC: resistor c19 c21 10k
-  U1: dip14 @ e30 CD4070
-  U2: dip14 @ e40 CD4081
-  U3: dip14 @ e50 CD4071
-  RS1: resistor a32 a34 330
-  DS1: led c34(A) c36(K) red
-  RC1: resistor a42 a44 330
-  DC1: led c44(A) c46(K) red
-  RS: resistor a52 a54 330
-  DS: led c54(A) c56(K) red
-  RCO: resistor a58 a60 330
-  DCO: led c60(A) c62(K) red
+  U1: dip14 @ e24 CD4070
+  U2: dip14 @ e38 CD4081
+  U3: dip14 @ e52 CD4071
+  RS1: resistor a31 a33 330
+  DS1: led b33(A) b34(K) red
+  RS: resistor d32 d35 330
+  DS: led c35(A) c37(K) red
+  RC1: resistor a45 a47 330
+  DC1: led b47(A) b49(K) red
+  RCO: resistor a59 a61 330
+  DCO: led b61(A) b63(K) red
 wires:
   - +t3 -- b3
   - b7 -- -t7
-  - b5 -- U1.1
-  - b5 -- U2.1
   - +t10 -- b10
   - b14 -- -t14
-  - b12 -- U1.2
-  - b12 -- U2.2
   - +t17 -- b17
   - b21 -- -t21
-  - b19 -- U1.6
-  - b19 -- U2.6
-  - U1.3 -- b25
-  - b25 -- U1.5
-  - b25 -- U2.5
-  - U1.14 -- b30
-  - b30 -- +t30
-  - U1.7 -- b31
-  - b31 -- -t31
-  - U2.14 -- b40
-  - b40 -- +t40
-  - U2.7 -- b41
-  - b41 -- -t41
-  - U2.3 -- b45
-  - b45 -- U3.1
-  - U2.4 -- b47
-  - b47 -- U3.2
-  - U3.14 -- b50
-  - b50 -- +t50
-  - U3.7 -- b51
-  - b51 -- -t51
-  - U1.3 -- b32
-  - U1.4 -- b52
-  - U2.3 -- b42
-  - U3.3 -- b58
-  - b36 -- -t36
-  - b46 -- -t46
-  - b56 -- -t56
-  - b62 -- -t62
+  - -t1 -- -b1
+  - b5 -- g24
+  - d5 -- g38
+  - b12 -- g25
+  - d12 -- g39
+  - b19 -- g29
+  - d19 -- g43
+  - a24 -- +t24
+  - j30 -- -b30
+  - a38 -- +t38
+  - j44 -- -b44
+  - a52 -- +t52
+  - j58 -- -b58
+  - h26 -- h28
+  - i28 -- i42
+  - j28 -- e31
+  - j27 -- e32
+  - g40 -- g52
+  - h41 -- h53
+  - j40 -- e45
+  - j54 -- e59
+  - a34 -- -t34
+  - b37 -- -t37
+  - a49 -- -t49
+  - a63 -- -t63
 ```
 
-- A (5列)・B (12列) は U1 (CD4070, XOR) と U2 (CD4081, AND) の足1・2 に共通で入る
-- U1 の足3 (S1) は 25 列を経由して U1 の足5・U2 の足5 (2 段目の入力) へ戻る。
-  Cin (19列) は足6どうし (U1・U2) に共通で入る
-- U2 の足3・4 (C1・C2) は U3 (CD4071, OR) の足1・2 へ
+- U1 (CD4070, XOR) は 24〜30 列、U2 (CD4081, AND) は 38〜44 列、U3 (CD4071, OR)
+  は 52〜58 列。どれも切り欠きが左で、足1 が左下 (f 行)、足14 が左上 (e 行)
+- 電源: 各 IC の足14 (24・38・52 列の上) を上の + レールへ、足7 (30・44・58 列の
+  下) を下の − レールへ。下の − レールは 1 列で上の − レールとつなぐ
+- A (5列)・B (12列) は U1 と U2 の足1・2 (24・25 列と 38・39 列の下) に共通で入る。
+  Cin (19列) は足6どうし (29 列と 43 列の下) に共通で入る
+- U1 の足3 (S1、26 列) は h 行で足5 (28 列) へ、i 行で U2 の足5 (42 列) へ。
+  RS1・DS1 (S1 の LED) は 28 列から上のブロックの 31〜34 列へ渡す。
+  U1 の足4 (S、27 列) は 32 列へ渡して RS・DS へ
+- U2 の足3・4 (C1・C2、40・41 列) は U3 の足1・2 (52・53 列) へ。C1 の LED
+  (RC1・DC1) は 40 列から 45〜49 列へ、U3 の足3 (Cout、54 列) は 59〜63 列の
+  RCO・DCO へ
 
 ## 見るべき値
 
