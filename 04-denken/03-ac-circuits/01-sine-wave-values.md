@@ -29,16 +29,17 @@ AD のオシロスコープ 1 つで、この 3 つを実測して比を確か�
 title: 図1 正弦波を負荷抵抗で受ける
 style:
   standard: jis
+  pitch: 1.2
 parts:
   V1: sine c1 g1 l=$\mathrm{W1}$
-  R1: resistor c1 c5 1k
-  M1: voltmeter a1 a5 l=$\mathrm{CH1}$
+  R1: resistor c1 c3 1k
+  M1: voltmeter a1 a3 l=$\mathrm{CH1}$
   G1: ground g1
 wires:
   - a1 -- c1
-  - a5 -- c5
-  - c5 -- g5
-  - g5 -- g1
+  - a3 -- c3
+  - c3 -- g3
+  - g3 -- g1
 ```
 
 - V1 は AD の波形発生器 (W1)。R1 はただの負荷、M1 (CH1) が読み取り点

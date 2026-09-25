@@ -29,49 +29,38 @@ board: BB
 title: 図1 テブナンを求める回路 (R_L をつないだ状態)
 style:
   standard: jis
+  pitch: 1.2
 parts:
-  E1: battery a3 a1 9
-  R1: resistor a3 a7 1.5k
-  R2: resistor c7 e7 3k
-  S1: switch a13 a15
-  RL: resistor a15 a17 1k
-  A1: ammeter a17 c17
-  V1: voltmeter g9 g17
-  G1: ground i1
+  E1: battery a1 e1 9
+  R1: resistor a1 a3 1.5k
+  R2: resistor a3 e3 3k
+  V1: voltmeter a5 e5
+  S1: switch a5 a7
+  RL: resistor a7 a9 1k
+  A1: ammeter a9 e9
+  G1: ground e5
 wires:
-  - a7 -- c7
-  - a7 -- a9
-  - a9 -- a13
-  - a1 -- i1
-  - e7 -- e5
-  - e5 -- i5
-  - c17 -- i17
-  - i1 -- i5
-  - i5 -- i17
-  - a9 -- g9
-  - c17 -- g17
+  - a3 -- a5
+  - e1 -- e3
+  - e3 -- e5
+  - e5 -- e9
 ```
 
 ```circuit
 title: 図2 内部抵抗を測る (電源を短絡)
 style:
   standard: jis
+  pitch: 1.2
 parts:
-  SH1: short a3 a1
-  R1: resistor a3 a7 1.5k
-  R2: resistor c7 e7 3k
-  M1: ohmmeter g9 g17
-  G1: ground i1
+  SH1: short a1 e1
+  R1: resistor a1 a3 1.5k
+  R2: resistor a3 e3 3k
+  M1: ohmmeter a5 e5
+  G1: ground e5
 wires:
-  - a7 -- c7
-  - a7 -- a9
-  - a9 -- g9
-  - a1 -- i1
-  - e7 -- e5
-  - e5 -- i5
-  - i1 -- i5
-  - i5 -- i17
-  - g17 -- i17
+  - a3 -- a5
+  - e1 -- e3
+  - e3 -- e5
 ```
 
 - 図1: R1・R2 で分圧した後の端子 (V1 の所) に、スイッチ S1 と負荷 R_L をつなぐ

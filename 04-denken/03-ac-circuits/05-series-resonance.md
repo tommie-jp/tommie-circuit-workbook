@@ -28,22 +28,21 @@ board: BB
 title: 図1 RLC 直列
 style:
   standard: jis
+  pitch: 1.2
 parts:
   V1: sine c1 g1 l=$\mathrm{W1}$
-  R1: resistor c1 c5 150
-  L1: inductor c5 c9 100m
-  C1: capacitor c9 c13 100n
-  M1: voltmeter a1 a5 l=$\mathrm{CH1}$
-  M2: voltmeter e5 e13 l=$\mathrm{CH2}$
+  R1: resistor c1 c3 150
+  L1: inductor c3 c5 100m
+  C1: capacitor c5 c7 100n
+  M1: voltmeter a1 a3 l=$\mathrm{CH1}$
+  M2: voltmeter e3 e7 l=$\mathrm{CH2}$
   G1: ground g1
 wires:
   - a1 -- c1
-  - a5 -- c5
-  - e5 -- c5
-  - e13 -- c13
-  - c13 -- c17
-  - c17 -- g17
-  - g17 -- g1
+  - a3 -- c3
+  - c3 -- e3
+  - c7 -- e7 -- g7
+  - g1 -- g7
 ```
 
 - CH1 が R1 の両端 (÷ R で電流になる)、CH2 が L1 + C1 をまとめた両端

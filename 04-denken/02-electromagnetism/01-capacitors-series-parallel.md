@@ -29,44 +29,39 @@ board: BB
 title: 図1 直列つなぎ
 style:
   standard: jis
+  pitch: 1.2
 parts:
-  E1: battery a3 a1 9
-  R1: resistor a3 a7 10k
-  S1: switch a7 a9
-  C1: capacitor a9 a13 2.2u
-  C2: capacitor a13 a17 4.7u
-  V1: voltmeter e9 e13
-  V2: voltmeter g13 g17
-  G1: ground i1
+  E1: battery c1 e1 9
+  R1: resistor c1 c3 10k
+  S1: switch c3 c5
+  C1: capacitor c5 c7 2.2u
+  C2: capacitor c7 c9 4.7u
+  V1: voltmeter a5 a7
+  V2: voltmeter a7 a9
+  G1: ground e1
 wires:
-  - a1 -- i1
-  - a17 -- i17
-  - i1 -- i17
-  - a9 -- e9
-  - a13 -- e13
-  - a13 -- g13
-  - a17 -- g17
+  - a5 -- c5
+  - a7 -- c7
+  - a9 -- c9
+  - c9 -- e9
+  - e1 -- e9
 ```
 
 ```circuit
 title: 図2 並列つなぎ
 style:
   standard: jis
+  pitch: 1.2
 parts:
-  E1: battery a3 a1 9
-  R1: resistor a3 a7 10k
-  S1: switch a7 a9
-  C1: capacitor c9 e9 2.2u
-  C2: capacitor c13 e13 4.7u
-  G1: ground i1
+  E1: battery c1 e1 9
+  R1: resistor c1 c3 10k
+  S1: switch c3 c5
+  C1: capacitor c7 e7 2.2u
+  C2: capacitor c10 e10 4.7u
+  G1: ground e1
 wires:
-  - a1 -- i1
-  - a9 -- c9
-  - a9 -- c13
-  - e9 -- i9
-  - e13 -- i13
-  - i1 -- i9
-  - i9 -- i13
+  - c5 -- c7 -- c10
+  - e1 -- e7 -- e10
 ```
 
 - R1 (10 kΩ) は充電の突入電流を抑える電流制限抵抗。S1 を閉じるとコンデンサが

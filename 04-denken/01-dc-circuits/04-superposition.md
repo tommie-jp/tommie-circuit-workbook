@@ -27,44 +27,38 @@ board: BB
 title: 図1 E1 だけを残す (E2 は短絡)
 style:
   standard: jis
+  pitch: 1.2
 parts:
-  E1: battery a3 a1 9
-  R1: resistor a3 a7 400
-  R3: resistor c11 e11 100
-  R2: resistor a15 a19 200
-  SH1: short a19 a21
-  G1: ground g11
+  E1: battery a1 e1 9
+  R1: resistor a1 a3 400
+  R3: resistor a5 e5 100
+  R2: resistor a7 a9 200
+  SH1: short a9 e9
+  G1: ground e5
 wires:
-  - a1 -- g1
-  - a21 -- g21
-  - e11 -- g11
-  - g1 -- g11
-  - g11 -- g21
-  - a7 -- a11
-  - a11 -- c11
-  - a11 -- a15
+  - a3 -- a5
+  - a5 -- a7
+  - e1 -- e5
+  - e5 -- e9
 ```
 
 ```circuit
 title: 図2 E2 だけを残す (E1 は短絡)
 style:
   standard: jis
+  pitch: 1.2
 parts:
-  SH1: short a3 a1
-  R1: resistor a3 a7 400
-  R3: resistor c11 e11 100
-  R2: resistor a15 a19 200
-  E2: battery a19 a21 6
-  G1: ground g11
+  SH1: short a1 e1
+  R1: resistor a1 a3 400
+  R3: resistor a5 e5 100
+  R2: resistor a7 a9 200
+  E2: battery a9 e9 6
+  G1: ground e5
 wires:
-  - a1 -- g1
-  - a21 -- g21
-  - e11 -- g11
-  - g1 -- g11
-  - g11 -- g21
-  - a7 -- a11
-  - a11 -- c11
-  - a11 -- a15
+  - a3 -- a5
+  - a5 -- a7
+  - e1 -- e5
+  - e5 -- e9
 ```
 
 - 図1 は 1-3 の E2 (6 V) を短絡 (素の線 SH1) に置き換えた回路

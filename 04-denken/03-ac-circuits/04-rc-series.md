@@ -30,21 +30,20 @@ RL 直列 (3-3) と同じ考え方を、今度は抵抗とコンデンサの直�
 title: 図1 RC 直列
 style:
   standard: jis
+  pitch: 1.2
 parts:
   V1: sine c1 g1 l=$\mathrm{W1}$
-  R1: resistor c1 c5 1k
-  C1: capacitor c5 c9 100n
-  M1: voltmeter a1 a5 l=$\mathrm{CH1}$
-  M2: voltmeter e5 e9 l=$\mathrm{CH2}$
+  R1: resistor c1 c3 1k
+  C1: capacitor c3 c5 100n
+  M1: voltmeter a1 a3 l=$\mathrm{CH1}$
+  M2: voltmeter e3 e5 l=$\mathrm{CH2}$
   G1: ground g1
 wires:
   - a1 -- c1
-  - a5 -- c5
-  - e5 -- c5
-  - e9 -- c9
-  - c9 -- c13
-  - c13 -- g13
-  - g13 -- g1
+  - a3 -- c3
+  - c3 -- e3
+  - c5 -- e5 -- g5
+  - g1 -- g5
 ```
 
 - CH1 が R1 の両端 (電流と同位相)、CH2 が C1 の両端 (電流より 90° 遅れる)

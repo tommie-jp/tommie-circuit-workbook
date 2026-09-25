@@ -32,21 +32,22 @@ Analog Discovery (AD) の波形発生器を電源にし、2 ch のオシロス�
 title: 図1 遅れ力率の負荷とコンデンサ
 style:
   standard: jis
+  pitch: 1.2
 parts:
   V1: sine c1 g1 l=$\mathrm{W1}$
-  Rs: resistor c1 c5 10 i=I
-  M2: voltmeter a1 a5 l=$\mathrm{CH2}$
-  M1: voltmeter c5 g5 l=$\mathrm{CH1}$
+  Rs: resistor c1 c4 10 i=I
+  M2: voltmeter a1 a4 l=$\mathrm{CH2}$
+  M1: voltmeter c6 g6 l=$\mathrm{CH1}$
   R1: resistor c8 e8 47
   L1: inductor e8 g8 10m
-  S1: switch c11 e11
-  C1: capacitor e11 g11 1.5u i=IC
-  G1: ground g5
+  S1: switch c10 e10
+  C1: capacitor e10 g10 1.5u i=IC
+  G1: ground g6
 wires:
   - a1 -- c1
-  - a5 -- c5
-  - c5 -- c8 -- c11
-  - g1 -- g5 -- g8 -- g11
+  - a4 -- c4
+  - c4 -- c6 -- c8 -- c10
+  - g1 -- g6 -- g8 -- g10
 ```
 
 - V1 は AD の波形発生器 W1。1 kHz、振幅 0.5 V

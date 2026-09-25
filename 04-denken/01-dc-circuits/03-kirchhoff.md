@@ -28,22 +28,20 @@ board: BB
 title: 図1 2 電源とキルヒホッフの法則
 style:
   standard: jis
+  pitch: 1.2
 parts:
-  E1: battery a3 a1 9
-  R1: resistor a3 a7 400
-  A1: ammeter a7 a11
-  A3: ammeter a11 c11
-  R3: resistor c11 e11 100
-  A2: ammeter a11 a15
-  R2: resistor a15 a19 200
-  E2: battery a19 a21 6
-  G1: ground g11
+  E1: battery a1 e1 9
+  R1: resistor a1 a3 400
+  A1: ammeter a3 a5
+  A3: ammeter a5 c5
+  R3: resistor c5 e5 100
+  A2: ammeter a5 a7
+  R2: resistor a7 a9 200
+  E2: battery a9 e9 6
+  G1: ground e5
 wires:
-  - a1 -- g1
-  - a21 -- g21
-  - e11 -- g11
-  - g1 -- g11
-  - g11 -- g21
+  - e1 -- e5
+  - e5 -- e9
 ```
 
 - 節点 B (A1・A2・A3 が集まる所) に電流則を当てはめる: I1 + I2 = I3

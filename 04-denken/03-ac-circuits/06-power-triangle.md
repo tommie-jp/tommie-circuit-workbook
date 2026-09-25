@@ -30,19 +30,20 @@ board: BB
 title: 図1 遅れ力率の負荷 (R1 + L1)
 style:
   standard: jis
+  pitch: 1.2
 parts:
   V1: sine c1 g1 l=$\mathrm{W1}$
-  Rs: resistor c1 c5 10 i=I
-  M2: voltmeter a1 a5 l=$\mathrm{CH2}$
-  M1: voltmeter c5 g5 l=$\mathrm{CH1}$
+  Rs: resistor c1 c4 10 i=I
+  M2: voltmeter a1 a4 l=$\mathrm{CH2}$
+  M1: voltmeter c6 g6 l=$\mathrm{CH1}$
   R1: resistor c8 e8 47
   L1: inductor e8 g8 10m
-  G1: ground g5
+  G1: ground g6
 wires:
   - a1 -- c1
-  - a5 -- c5
-  - c5 -- c8
-  - g1 -- g5 -- g8
+  - a4 -- c4
+  - c4 -- c6 -- c8
+  - g1 -- g6 -- g8
 ```
 
 - V1 は AD の波形発生器 W1。Rs (10 Ω) は線電流 I を測るシャント。

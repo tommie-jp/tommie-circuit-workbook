@@ -29,18 +29,19 @@ board: BB
 title: 図1 DUT の電圧と電流を同時に見る (図は R のとき)
 style:
   standard: jis
+  pitch: 1.2
 parts:
   V1: sine c1 g1 l=$\mathrm{W1}$
-  Rs: resistor c1 c5 10 i=I
-  M2: voltmeter a1 a5 l=$\mathrm{CH2}$
-  M1: voltmeter c5 g5 l=$\mathrm{CH1}$
+  Rs: resistor c1 c4 10 i=I
+  M2: voltmeter a1 a4 l=$\mathrm{CH2}$
+  M1: voltmeter c6 g6 l=$\mathrm{CH1}$
   R1: resistor c8 g8 1k
-  G1: ground g5
+  G1: ground g6
 wires:
   - a1 -- c1
-  - a5 -- c5
-  - c5 -- c8
-  - g1 -- g5 -- g8
+  - a4 -- c4
+  - c4 -- c6 -- c8
+  - g1 -- g6 -- g8
 ```
 
 - CH1 が DUT (R1 の位置) の両端の電圧、CH2 が Rs (シャント、10 Ω) の両端
