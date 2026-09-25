@@ -26,7 +26,7 @@ parts:
   Rb: resistor b8 c10 47k
   C1: ecap c10 gnd 10u
   Cc: capacitor d12 gnd 10n
-  R1: resistor d14 e14 330
+  R1: resistor d14 e14 680
   D1: led e14 gnd red
 points:
   vcc: a6
@@ -64,7 +64,7 @@ parts:
   Rb: resistor c11 c12 47k
   C1: capacitor/electrolytic d12(+) d9(-) 10uF
   Cc: capacitor d13 d20 10n
-  R1: resistor g12 g16 330
+  R1: resistor g12 g16 680
   D1: led h16(A) h19(K) red
 wires:
   - +t1 -- +b1 red
@@ -95,7 +95,7 @@ wires:
 | Rb | 抵抗 | 47 kΩ |
 | C1 | 電解コンデンサ (タイミング) | 10 µF |
 | Cc | セラミックコンデンサ (CTRL のノイズ対策) | 0.01 µF |
-| R1 | 抵抗 (LED 電流制限) | 330 Ω |
+| R1 | 抵抗 (LED 電流制限) | 680 Ω |
 | D1 | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
 | — | 電源 | 9 V |
 
@@ -110,7 +110,7 @@ Low の時間は Rb × C × 0.693。
 | Low (LED 消灯) の時間 | 約 0.33 秒 | Rb × C1 × 0.693 |
 | High (LED 点灯) の時間 | 約 0.40 秒 | (Ra + Rb) × C1 × 0.693 |
 | デューティ比 (High の割合) | 約 55% | (Ra+Rb) / (Ra+2Rb)。**555 の非安定はきっちり 50% にならない** |
-| LED の電流 (点灯中) | 約 9.1 mA | (9 V − 出力の飽和 (約 0.5 V) − 2.0 V) ÷ 330 Ω |
+| LED の電流 (点灯中) | 約 9.6 mA | (9 V − 出力の飽和 (約 0.5 V) − 2.0 V) ÷ 680 Ω |
 
 Ra を 0 に近づけると デューティ比は 50% に近づくが、Ra が小さすぎると
 放電時に 7 番から Vcc へ大電流が流れて IC を痛める (下限は 1 kΩ 程度)。
