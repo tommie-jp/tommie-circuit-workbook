@@ -19,25 +19,25 @@ source: 自作
 ```circuit
 title: 図1 40106 の RC 発振
 parts:
-  U1: not d4 40106
-  U2: not d10 40106
-  Rf: resistor b3 b6 100k
-  C1: capacitor b1 d1 10n
-  GC1: ground d1
-  R2: resistor e13 f13 390
-  D1: led f13 h13 red
-  GD1: ground h13
+  U1: not d3 40106
+  U2: not d6 40106
+  Rf: resistor b2 b4 100k
+  C1: capacitor d2 f2 10n
+  GC1: ground f2
+  R2: resistor d7 d9 390
+  D1: led d9 f9 red
+  GD1: ground f9
 wires:
-  - b3 -- b1
-  - b3 |- U1.in
-  - b6 |- U1.out
-  - b6 |- U2.in
-  - U2.out -| e13
+  - b2 -- d2 -- U1.in
+  - b4 -- d4
+  - U1.out -- d4 -- U2.in
+  - U2.out -- d7
 style:
   grid: on
+  pitch: 1.2
 ```
 
-- **U1 の入力 (b3) と出力 (b6) を Rf (100 kΩ) でつなぎ、入力に C1 (10 nF) を
+- **U1 の入力 (b2) と出力 (b4) を Rf (100 kΩ) でつなぎ、入力に C1 (10 nF) を
   下げた**のがこの発振の全て。C1 の電圧が U1 の**上のしきい値 V<sub>T+</sub>**
   を超えると出力が反転して Low になり、Rf 経由で C1 を放電し始める。
   **下のしきい値 V<sub>T-</sub>** まで下がると再び出力が反転して充電に戻る

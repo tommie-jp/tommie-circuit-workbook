@@ -20,21 +20,22 @@ era: 古
 ```circuit
 title: 図1 電極間の抵抗が下がるとトランジスタが ON になる
 parts:
-  VCC: vcc a1
-  RS: resistor-var a1 a3
-  R1: resistor a3 a5 10k
-  G1: ground a5
-  Q1: npn d4
-  VCC: vcc f1
-  R2: resistor f1 f3 330
-  D1: led f3 f5
-  G2: ground g4
+  VCC: vcc c2
+  RS: resistor-var c2 e2
+  R1: resistor e2 g2 10k
+  G1: ground g2
+  Q1: npn e5
+  VCC: vcc b3
+  R2: resistor b3 b5 330
+  D1: led b5 d5
+  G2: ground f5
 wires:
-  - a3 -| Q1.B
-  - f5 -| Q1.C
-  - Q1.E -| g4
+  - e2 -- Q1.B
+  - d5 -- Q1.C
+  - Q1.E -- f5
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - RS が 2 本の電極間 (水や土) の抵抗。R1 (固定 10 kΩ) との分圧の中点が

@@ -22,20 +22,21 @@ title: 図1 PIR モジュールでインジケータを点ける
 parts:
   PIR:
     type: device
-    at: c6
+    at: c5
     label: HC-SR501
     pins: [VCC, GND, OUT]
-  VCC: vcc a1
-  G1: ground a2
-  R1: resistor e8 e10 150
-  D1: led e10 e12
-  G2: ground e12
+  VCC: vcc b3a5
+  G1: ground c2 r90
+  R1: resistor d3 f3 150
+  D1: led f3 h3
+  G2: ground h3
 wires:
-  - a1 |- PIR.VCC
-  - a2 |- PIR.GND
-  - PIR.OUT -| e8
+  - b3a5 |- PIR.VCC
+  - c2 -| PIR.GND
+  - PIR.OUT -| d3
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - PIR モジュールの OUT は、電源電圧によらず**3.3 V の TTL レベル**で出るのが

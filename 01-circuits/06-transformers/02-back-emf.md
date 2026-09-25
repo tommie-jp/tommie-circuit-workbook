@@ -19,25 +19,23 @@ board: BB
 ```circuit
 title: 図1 コイルを切った瞬間に LED が光る
 parts:
-  V1: battery a1 e1 5
-  S1: switch a3 a5
-  R1: resistor a7 a9 180 i=I
-  L1: inductor a11 e11 100m
-  D1: led e13 a13
-  G1: ground e1
+  V1: battery b2 d2 5
+  S1: switch b2 b4
+  R1: resistor b4 b7 180 i=I
+  L1: inductor b7 d7 100m
+  D1: led d9 b9
+  G1: ground d2
 wires:
-  - a1 -- a3
-  - a5 -- a7
-  - a9 -- a11
-  - e1 -- e11
-  - e11 -- e13
-  - a11 -- a13
+  - b7 -- b9
+  - d2 -- d7 -- d9
+style:
+  pitch: 1.2
 ```
 
 - S1 を閉じると、電源 (5 V) → R1 (180 Ω、電流を決める) → L1 (100 mH) →
   GND の道で一定の電流が流れる。**LED (D1) はこの間、逆向きに電圧が掛かるだけで
   光らない** (先に書いた番地が + 側で、D1 はカソードが L1 の上の番地に来る向き)
-- **S1 を開くと**、L1 は流れていた電流を保とうとして、L1 の上側 (a11) の電圧を
+- **S1 を開くと**、L1 は流れていた電流を保とうとして、L1 の上側 (b7) の電圧を
   一気に下げる (GND より低くなる)。これで D1 が順方向になり、L1 に残っていた
   電流が D1 を通って一瞬だけ流れ、**LED が一瞬光る**
 - 電源は 5 V までにする。LED は普通、逆方向に掛けられる電圧の上限 (逆耐圧) が

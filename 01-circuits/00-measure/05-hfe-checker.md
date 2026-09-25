@@ -20,22 +20,22 @@ era: 古
 ```circuit
 title: 図1 一定のベース電流でコレクタ電流を読む
 parts:
-  V1: vsource a1 g1 9
-  G0: ground g1
-  RB: resistor a3 c3 1M
-  A1: ammeter c3 e3
+  V1: vsource a2 c2 9
+  G0: ground c2
+  RB: resistor a4 c4 1M
+  A1: ammeter c4 e4
   RC: resistor a7 c7 1k
   A2: ammeter c7 e7
-  Q1: npn g5
-  G1: ground i5
+  Q1: npn f7
+  G1: ground g7
 wires:
-  - a1 -- a3
-  - a3 -- a7
-  - e3 -| Q1.B
-  - e7 -| Q1.C
-  - Q1.E -| i5
+  - a2 -- a4 -- a7
+  - e4 -- f4 -- Q1.B
+  - e7 -- Q1.C
+  - Q1.E -- g7
 style:
   grid: on
+  pitch: 1.2
 ```
 
 `RB` (1MΩ) がベース電流を、トランジスタの種類によらずほぼ一定に決める。

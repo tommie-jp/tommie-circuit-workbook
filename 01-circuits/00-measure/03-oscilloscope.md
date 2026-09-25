@@ -20,32 +20,34 @@ USB 接続の PC オシロか Analog Discovery (AD2) の Scope 機能で波形�
 ```circuit
 title: 図1 555 非安定でつくる方形波
 parts:
-  V1: vsource a1 j1 9
-  G1: ground j1
-  U1: dip8 f5 NE555
-  R1: resistor c9 e9 10k
-  R2: resistor e9 g9 10k
-  C1: capacitor g9 i9 10n
-  G2: ground i9
-  G3: ground d3
-  OUT: port g4
+  V1: vsource c2 f2 9
+  VCC: vcc c2
+  G1: ground f2
+  U1: dip8 e6 NE555
+  VCC: vcc c7
+  R1: resistor c9 d9i0 10k
+  R2: resistor d9i0 f9i0 10k
+  C1: capacitor f9i0 h9i0 10n
+  G2: ground h9i0
+  G3: ground b6
+  VCC: vcc h6
+  OUT: port f4a5
 wires:
-  - a1 -- a10
-  - a10 -- c10
-  - c10 -- c9
-  - U1.8 -| c10
-  - U1.7 -| e9
-  - U1.6 -| g9
-  - U1.1 -| d3
-  - U1.3 -| g4
-  - U1.4 -| b2
-  - b2 -- a2
-  - U1.2 -| i2
-  - i2 -- i8
-  - i8 -- g8
-  - g8 -- g9
+  - U1.8 -| c7
+  - c7 -- c9
+  - U1.7 -| d9i0
+  - U1.6 -| f7i5
+  - f7i5 -- f9i0
+  - U1.1 -| b5
+  - b5 -- b6
+  - U1.2 -| a4
+  - a4 -- a11 -- f11i0 -- f9i0
+  - U1.3 -| f4a5
+  - U1.4 -| h5
+  - h5 -- h6
 style:
   grid: on
+  pitch: 1.2
 ```
 
 555 の 2 番 (TRIG) と 6 番 (THR) をつなぐと**非安定**になる。8 番 (VCC) と

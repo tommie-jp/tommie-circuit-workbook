@@ -19,24 +19,25 @@ board: BB
 ```circuit
 title: 図1 マイクの音で LED が揺れる
 parts:
-  VCC: vcc a1
-  R1: resistor a1 a3 2.2k
-  MK1: mic a3 a5 l=$\mathrm{MK1}$
-  G1: ground a5
-  C1: capacitor a3 d3 1u
-  VCC: vcc d1
-  R2: resistor d1 d3 100k
-  Q1: npn f5
-  VCC: vcc h1
-  R3: resistor h1 h3 220
-  D1: led h3 h5
-  G2: ground f8
+  VCC: vcc a2
+  R1: resistor a2 c2 2.2k
+  MK1: mic c2 e2 l=$\mathrm{MK1}$
+  G1: ground e2
+  C1: capacitor c2 c4 1u
+  VCC: vcc a4
+  R2: resistor a4 c4 100k
+  Q1: npn e6
+  VCC: vcc a6
+  R3: resistor a6 c6 220
+  D1: led c6 d6
+  G2: ground f6
 wires:
-  - d3 |- Q1.B
-  - Q1.C -| h5
-  - Q1.E -| f8
+  - c4 |- Q1.B
+  - d6 -- Q1.C
+  - Q1.E -- f6
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - MK1 (マイク) は R1 (2.2 kΩ) で電源からバイアス電流をもらう、いちばん

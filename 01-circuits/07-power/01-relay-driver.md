@@ -20,28 +20,29 @@ board: BB
 ```circuit
 title: 図1 トランジスタでリレーを駆動する
 parts:
-  VCC: vcc a3
-  D1:  diode d2 b2 1N4148
-  K1:  relay c4 G5V-2
-  Q1:  npn f3
-  R1:  resistor f1 f2 1k
-  IN:  port f1
-  G1:  ground h3
-  R2:  resistor a7 b7 330
-  D2:  led b7 b6
-  G2:  ground e5
+  VCC: vcc b5
+  D1:  diode f3 c3 1N4148
+  K1:  relay e5a8a8 G5V-2
+  Q1:  npn h5
+  R1:  resistor h2 h4 1k
+  IN:  port h2
+  G1:  ground i5
+  VCC: vcc c11
+  R2:  resistor c11 c9 330
+  D2:  led c9 c7
+  G2:  ground g7
 wires:
-  - a3 -- b3 -- b2
-  - a3 -- a7
-  - K1.A1 |- b3
-  - K1.A2 |- d3
-  - d2 -- d3 -- Q1.C
-  - f2 -- Q1.B
-  - Q1.E -- h3
-  - K1.NO1 |- b6
-  - K1.COM1 |- e5
+  - b5 -- c5 -- c3
+  - K1.A1 |- c5
+  - K1.A2 |- f5
+  - f3 -- f5 -- Q1.C
+  - h4 -- Q1.B
+  - Q1.E -- i5
+  - K1.NO1 |- c7
+  - K1.COM1 |- g7
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - IN (GPIO など) が H になると、R1 (1 kΩ) を通してベース電流が流れ、

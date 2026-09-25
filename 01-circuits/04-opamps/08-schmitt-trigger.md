@@ -21,35 +21,37 @@ title: 図1 シュミットトリガ (CdS + ヒステリシス)
 parts:
   B1: battery vp mid 9
   B2: battery mid vm 9
-  G1: ground mid
-  RCDS: photoresistor a4 c4
-  RFIX: resistor c4 e4 10k
-  POT: potentiometer a7 e7 10k
-  Rref: resistor c8 c9 10k
-  Rh: resistor d9 c9 100k
-  U1: opamp c10 +up
+  G1: ground c2f0
+  RCDS: photoresistor a3 c3
+  RFIX: resistor d3 f3 10k
+  POT: potentiometer a5 c5 10k
+  Rref: resistor b6 b8 10k
+  Rh: resistor b11 b8 100k
+  U1: opamp d10 +up
   R1: resistor d12 d14 680
-  D1: led d14 g14 red
-  DP: diode g16 d16 1N4148
-  GD1: ground g14
+  D1: led d14 f14 red
+  DP: diode f17 d17 1N4148
+  GD1: ground f14
 points:
   vp: a1
-  vm: e1
-  mid: c1
+  vm: f1
+  mid: c1f0
 wires:
-  - a1 -- a4
-  - e1 -- e4
-  - c4 |- U1.-
-  - a1 -- a7
-  - e1 -- e7
-  - POT.w -| c8
-  - c9 |- U1.+
-  - U1.out -| d12
-  - d12 -- d9
-  - d14 -- d16
-  - g14 -- g16
+  - mid -- c2f0
+  - a1 -- a3 -- a5
+  - f1 -- f3
+  - f3 -- f5 -- c5
+  - c3 -- d3
+  - d3 -- d9 |- U1.-
+  - POT.w -- b6
+  - b8 |- U1.+
+  - U1.out -- d11 -- d12
+  - b11 -- d11
+  - d14 -- d17
+  - f14 -- f17
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - − 入力 (CdS・RFIX の分圧) は 4-4 と同じ。POT のワイパーはしきい値の基準電圧を

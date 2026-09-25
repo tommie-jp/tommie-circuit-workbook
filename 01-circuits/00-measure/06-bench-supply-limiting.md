@@ -23,17 +23,19 @@ title: 図1 安定化電源の CV / CC の切り替わり
 parts:
   PSU:
     type: device
-    at: c1
+    at: b2
     label: PSU
     pins: ["+", "-"]
     turn: mirror
-  RL: resistor-var g3 g5 100
-  G1: ground g5
+  RL: resistor-var b4 d4 100
+  G1: ground d4
+  G2: ground d3
 wires:
-  - PSU.+ -| g3
-  - PSU.- -| g5
+  - PSU.+ -| b4
+  - PSU.- -| d3
 style:
   grid: on
+  pitch: 1.2
 ```
 
 電源を **5V、電流制限 10mA** に設定し、負荷 `RL` の値を変えて出力を見る。
@@ -57,30 +59,34 @@ title: 図2 電流制限を掛けた電源 + ファンクションジェネレ�
 parts:
   PSU:
     type: device
-    at: c1
+    at: b2
     label: PSU
     pins: ["+", "-"]
     turn: mirror
-  R1: resistor e5 g5 330
-  D1: led g5 i5
-  Q1: npn k7
-  RB: resistor e9 g9 10k
+  R1: resistor b6 d6 330
+  D1: led d6 f6
+  Q1: npn g6
+  RB: resistor f3 f5 10k
   FG:
     type: device
-    at: c11
+    at: g1a5
     label: FuncGen
     pins: [OUT, GND]
-  G2: ground m7
+    turn: mirror
+  G2: ground h6
+  G3: ground c3
+  G4: ground h3
 wires:
-  - PSU.+ -| e5
-  - i5 -| Q1.C
-  - g9 -| Q1.B
-  - Q1.E -| m7
-  - FG.OUT -| e9
-  - PSU.- -| m7
-  - FG.GND -| m7
+  - PSU.+ -| b6
+  - f6 -- Q1.C
+  - f5 |- Q1.B
+  - Q1.E -- h6
+  - FG.OUT -| f3
+  - PSU.- -| c3
+  - FG.GND -| h3
 style:
   grid: on
+  pitch: 1.2
 ```
 
 回路の中身は 2-1 と同じ (`R1` = 330Ω、`RB` = 10kΩ、Q1 = 2SC1815)。

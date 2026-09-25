@@ -22,30 +22,31 @@ parts:
   B1: battery vp mid 9
   B2: battery mid vm 9
   G1: ground mid
-  RCDS: photoresistor a4 c4
-  RFIX: resistor c4 e4 10k
-  POT: potentiometer a7 e7 10k
-  U1: opamp c10 +up
-  R1: resistor d12 d14 680
-  D1: led d14 g14 red
-  DP: diode g16 d16 1N4148
-  GD1: ground g14
+  RCDS: photoresistor a3 c3
+  RFIX: resistor d3 f3 10k
+  POT: potentiometer a5 c5 10k
+  U1: opamp c8 +up
+  R1: resistor c9a5 c11a5 680
+  D1: led c11a5 e11a5 red
+  DP: diode e14a5 c14a5 1N4148
+  GD1: ground e11a5
 points:
   vp: a1
-  vm: e1
+  vm: f1
   mid: c1
 wires:
-  - a1 -- a4
-  - e1 -- e4
-  - c4 |- U1.-
-  - a1 -- a7
-  - e1 -- e7
-  - POT.w -| U1.+
-  - U1.out -| d12
-  - d14 -- d16
-  - g14 -- g16
+  - vp -- a3 -- a5
+  - vm -- f3 -- f5
+  - c3 -- d3
+  - c5 -- f5
+  - POT.w -- b6a5 |- U1.+
+  - d3 -- d6a5 |- U1.-
+  - U1.out -| c9a5
+  - c11a5 -- c14a5
+  - e11a5 -- e14a5
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - **RCDS・RFIX の分圧点が − 入力。** 明るいと RCDS は低抵抗 (約 1 kΩ)、

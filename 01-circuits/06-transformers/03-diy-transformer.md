@@ -20,17 +20,18 @@ era: 古
 ```circuit
 title: 図1 自作トランスで巻数比を確かめる
 parts:
-  V1: sine a1 c1 2
-  T1: transformer b5 15t-45t
-  G1: ground c1
-  VM1: voltmeter e9 e13
+  V1: sine a2c0f0 b2h0f0 2
+  T1: transformer b4 15t-45t
+  G1: ground b2h0f0
+  VM1: voltmeter a6c0f0 b6h0f0
 wires:
-  - a1 -| T1.A1
-  - c1 -| T1.A2
-  - T1.B1 -| e9
-  - T1.B2 -| e13
+  - a2c0f0 -| T1.A1
+  - b2h0f0 -| T1.A2
+  - T1.B1 -| a6c0f0
+  - T1.B2 -| b6h0f0
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - 1 次 (A1-A2) に **15 回**、2 次 (B1-B2) に **45 回** 巻く。フェライトコアは

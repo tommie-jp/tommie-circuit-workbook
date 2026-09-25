@@ -20,18 +20,20 @@ source: 自作
 ```circuit
 title: 図1 コレクタ帰還バイアス
 parts:
-  V1: vsource a1 g1 9
-  G0: ground g1
-  RC: resistor a3 c3 4.7k
+  V1: vsource a1 f1 9
+  G0: ground f1
+  RC: resistor a5 c5 4.7k
   RB: resistor c3 e3 680k
-  Q1: npn g5
+  Q1: npn e5
+  G1: ground f5
 wires:
-  - a1 -- a3
-  - c3 -| Q1.C
+  - a1 -- a5
+  - c3 -- c5 -- Q1.C
   - e3 -| Q1.B
-  - Q1.E -| g1
+  - Q1.E -- f5
 style:
   grid: on
+  pitch: 1.2
 ```
 
 分圧バイアス (2-3 と同じ形。抵抗 4 本要るが hFE に強い)。
@@ -39,23 +41,24 @@ style:
 ```circuit
 title: 図2 分圧バイアス (2-3 と同じ形)
 parts:
-  V1: vsource a1 j1 9
-  G0: ground j1
+  V1: vsource a1 e1 9
+  G0: ground e1
   R1: resistor a3 c3 68k
   R2: resistor c3 e3 15k
   G1: ground e3
-  RC: resistor a7 c7 4.7k
-  Q1: npn f9
-  RE: resistor f13 h13 1k
-  G2: ground h13
+  RC: resistor a6 c6 4.7k
+  Q1: npn d6
+  RE: resistor e6 g6 1k
+  G2: ground g6
 wires:
   - a1 -- a3
-  - a3 -- a7
+  - a3 -- a6
   - c3 -| Q1.B
-  - c7 -| Q1.C
-  - Q1.E -| f13
+  - c6 -- Q1.C
+  - Q1.E -- e6
 style:
   grid: on
+  pitch: 1.2
 ```
 
 どちらも `RC` = 4.7kΩ で揃え、2SC1815 の hFE の幅 (70〜700) を仮定して

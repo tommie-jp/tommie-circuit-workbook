@@ -22,12 +22,14 @@ PWM に変わるだけ。
 ```circuit
 title: 図1 GP15でLEDをPWM調光
 parts:
-  U1: pico b2
-  R1: resistor e10 e13 330
-  D1: led e13 g13 red
-  G1: ground g13
+  U1: pico e3c0 mirror
+  R1: resistor i6 i8 330
+  D1: led i8 k8 red
+  G1: ground k8
 wires:
-  - U1.GP15 -| e10
+  - U1.GP15 -| i6
+style:
+  pitch: 1.2
 ```
 
 サーボは **5V (VBUS) で電源を取り、信号線だけ Pico の GPIO** につなぐ。
@@ -35,16 +37,18 @@ wires:
 ```circuit
 title: 図2 GP14でサーボを回す
 parts:
-  U1: pico b2
+  U1: pico g4
   SV1:
     type: device
-    at: h2
+    at: d10
     label: Servo
     pins: [VCC, GND, SIG]
 wires:
-  - U1.VBUS |- SV1.VCC
-  - U1.GND38 -| SV1.GND
-  - U1.GP14 -| SV1.SIG
+  - U1.VBUS -| c6e0 |- SV1.VCC
+  - U1.GND38 -- SV1.GND
+  - U1.GP14 -| l2 -- l7 |- SV1.SIG
+style:
+  pitch: 1.2
 ```
 
 - **LED**: 11-1 と同じ 330Ω + 赤色 LED。GP15 を単純な H/L ではなく、

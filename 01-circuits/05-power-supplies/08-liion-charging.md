@@ -27,29 +27,27 @@ TP4056 モジュール。今回は保護回路つき (DW01A + FS8205A) の基板
 ```circuit
 title: 図1 TP4056 (保護回路つき) での Li-ion 充電
 parts:
-  USB: usb-c a3
+  USB: usb-c c2
   M1:
     type: device
-    at: d5
+    at: c11
     label: TP4056 + Protect
     pins: [IN+, IN-, B+, B-, OUT+, OUT-]
-  BAT: battery g5 g7 3.7
-  Rled: resistor g13 i13 390
-  Dled: led i13 k13 red
-  GD: ground k13
-points:
-  gnd: h3
+  BAT: battery e4 e6 3.7
+  Rled: resistor d8 f8 390
+  Dled: led f8 h8 red
+  GD: ground h8
 wires:
-  - USB.VBUS |- M1.IN+
-  - USB.GND -| gnd
-  - gnd |- M1.IN-
-  - M1.B+ -| g5
-  - M1.B- -| g7
-  - M1.OUT+ -| g13
-  - M1.OUT- -| g11
-  - g7 -- g11
+  - USB.VBUS -- M1.IN+
+  - USB.GND -- M1.IN-
+  - M1.B+ -| e4
+  - M1.B- -| e6
+  - M1.OUT+ -| d8
+  - M1.OUT- -| i9
+  - e6 |- i9
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - **BAT は保護回路つき (protected) の 18650 セルを想定**。モジュール側の

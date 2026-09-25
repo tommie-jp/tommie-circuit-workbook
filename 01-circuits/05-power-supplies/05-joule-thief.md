@@ -22,23 +22,25 @@ title: 図1 Joule thief
 parts:
   B1: battery vbat gnd 1.5
   G1: ground gnd
-  T1: transformer d5
-  D1: led f3 f6 white
+  T1: transformer c5 mirror
+  D1: led d6 d8 white
   Q1: npn f8 2N3904
-  Rb: resistor h5 h7 1k
+  Rb: resistor f5 f7 1k
+  G2: ground f8f6f0 r270
 points:
-  vbat: a1
-  gnd: e1
+  vbat: b2c0f0
+  gnd: d2
 wires:
-  - vbat |- T1.A1
   - vbat |- T1.B1
-  - T1.A2 -| f3
-  - f6 -| Q1.C
-  - T1.B2 -| h5
-  - h7 |- Q1.B
-  - Q1.E -| gnd
+  - T1.B1 -- T1.A1
+  - T1.A2 |- d6
+  - d8 -- Q1.C
+  - T1.B2 |- f5
+  - f7 -- Q1.B
+  - Q1.E -| f8f6f0
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - **T1 は同じ磁芯に 2 本の巻線を撚り合わせて巻いた (バイファイラ巻き) もの。**

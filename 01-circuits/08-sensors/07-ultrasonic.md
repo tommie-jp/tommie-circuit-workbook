@@ -21,24 +21,26 @@ title: 図1 HC-SR04 の ECHO を 3.3V に落とす
 parts:
   M1:
     type: device
-    at: c6
+    at: c3
     label: HC-SR04
     pins: [VCC, TRIG, ECHO, GND]
-  VCC: vcc a1
-  TRIG: port a3
-  G1: ground a5
-  R1: resistor e8 e10 1k
-  R2: resistor e10 e12 1.5k
-  ECHO: port g10
-  G2: ground e12
+    turn: mirror
+  VCC: vcc b4a5
+  TRIG: port b7
+  G1: ground d4a5
+  R1: resistor d5a5 f5a5 1k
+  R2: resistor f5a5 h5a5 1.5k
+  ECHO: port f7
+  G2: ground h5a5
 wires:
-  - a1 |- M1.VCC
-  - a3 |- M1.TRIG
-  - a5 |- M1.GND
-  - M1.ECHO -| e8
-  - e10 -- g10
+  - b4a5 |- M1.VCC
+  - b7 |- M1.TRIG
+  - M1.GND -| d4a5
+  - M1.ECHO -| d5a5
+  - f5a5 -- f7
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - TRIG に**10 µs 以上の H パルス**を送ると、モジュールが自動で 40 kHz の

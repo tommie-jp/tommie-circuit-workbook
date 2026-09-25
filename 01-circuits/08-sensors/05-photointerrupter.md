@@ -19,29 +19,31 @@ board: BB
 ```circuit
 title: 図1 光を遮るとインジケータが点く
 parts:
-  VCC: vcc a1
-  R1: resistor a1 a3 220
-  D1: led a3 a5
-  G1: ground a5
-  VCC: vcc d1
-  R2: resistor d1 d3 10k
-  Q1: phototransistor d5
-  G2: ground d7
-  R3: resistor d3 f3 10k
-  Q2: npn f5
-  VCC: vcc h1
-  R4: resistor h1 h3 330
-  D2: led h3 h5
-  G3: ground f8
+  VCC: vcc a2
+  R1: resistor a2 c2 220
+  D1: led c2 e2
+  G1: ground e2
+  VCC: vcc a4
+  R2: resistor a4 c4 10k
+  Q1: phototransistor d4
+  G2: ground e4
+  R3: resistor c4 c6 10k
+  Q2: npn d7
+  VCC: vcc a7
+  R4: resistor a7 c7 330
+  D2: led c9 e9
+  G3: ground e7
+  G4: ground e9
 wires:
-  - Q1.C -| d3
-  - Q1.E -| d7
-  - f3 |- Q2.B
-  - Q2.C -| h3
-  - Q2.E -| f8
-  - h5 -| f8
+  - c4 -- Q1.C
+  - Q1.E -- e4
+  - c6 |- Q2.B
+  - c7 -- Q2.C
+  - Q2.E -- e7
+  - c7 -- c9
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - D1 (赤外線 LED) は R1 (220 Ω) で決まる電流で光りっぱなし。人の目には見えない

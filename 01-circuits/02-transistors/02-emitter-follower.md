@@ -19,28 +19,28 @@ board: BB
 ```circuit
 title: 図1 エミッタフォロア
 parts:
-  V1: vsource a1 j1 9
-  G1: ground j1
-  R1: resistor a5 c5 22k
-  R2: resistor c5 e5 10k
-  G2: ground e5
-  Q1: npn g7
-  CIN: capacitor b7 d7 10u
-  IN: port b7
-  RE: resistor g9 g11 1k
-  G3: ground g11
-  COUT: capacitor g9 i9 10u
-  RL: resistor i9 i11 1k
-  G4: ground i11
-  OUT: port i9
+  V1: vsource b11 d11 9
+  G1: ground d11
+  R1: resistor b5 d5 22k
+  R2: resistor d5 f5 10k
+  G2: ground f5
+  Q1: npn d7
+  CIN: capacitor d2 d4 10u
+  IN: port d2
+  RE: resistor f7 h7 1k
+  G3: ground h7
+  COUT: capacitor f7 f10 10u
+  RL: resistor f10 h10 1k
+  G4: ground h10
+  OUT: port f10
 wires:
-  - a1 -- a9
-  - a9 -| Q1.C
-  - c5 -| Q1.B
-  - d7 -| Q1.B
-  - Q1.E -| g9
+  - b5 -- b7 -- b11
+  - b7 -- Q1.C
+  - d4 -- d5 -- Q1.B
+  - Q1.E -- f7
 style:
   grid: on
+  pitch: 1.2
 ```
 
 `R1` (22kΩ) と `R2` (10kΩ) でベースを分圧し、`RE` (1kΩ) がエミッタの電位を決める。

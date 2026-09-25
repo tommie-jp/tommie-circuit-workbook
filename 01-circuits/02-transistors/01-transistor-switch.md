@@ -19,21 +19,22 @@ board: BB
 ```circuit
 title: 図1 NPN トランジスタで LED をスイッチする
 parts:
-  V1: vsource a1 j1 5
-  G1: ground j1
-  R1: resistor a5 c5 330
-  D1: led c5 e5
-  Q1: npn g7
-  RB: resistor a9 c9 10k
-  IN: port a9
-  G2: ground j7
+  V1: vsource b2 d2 5
+  G1: ground d2
+  R1: resistor b5 d5 330
+  D1: led d5 f5
+  Q1: npn g5
+  RB: resistor g2 g4 10k
+  IN: port g2
+  G2: ground h5
 wires:
-  - a1 -- a5
-  - e5 -| Q1.C
-  - c9 -| Q1.B
-  - Q1.E -| j7
+  - b2 -- b5
+  - f5 -- Q1.C
+  - g4 -- Q1.B
+  - Q1.E -- h5
 style:
   grid: on
+  pitch: 1.2
 ```
 
 `IN` に 5V (スイッチや押しボタン) を入れるとベースに電流が流れ、

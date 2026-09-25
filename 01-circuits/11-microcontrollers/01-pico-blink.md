@@ -20,12 +20,14 @@ Raspberry Pi Pico の GPIO ピン 1 本に LED をつなぎ、MicroPython で点
 ```circuit
 title: 図1 PicoでLEDを点滅させる
 parts:
-  U1: pico b2
-  R1: resistor e10 e13 330
-  D1: led e13 g13 red
-  G1: ground g13
+  U1: pico e3c0 mirror
+  R1: resistor i6 i8 330
+  D1: led i8 k8 red
+  G1: ground k8
 wires:
-  - U1.GP15 -| e10
+  - U1.GP15 -| i6
+style:
+  pitch: 1.2
 ```
 
 - GP15 (汎用入出力) を出力に設定し、program で H (3.3V) / L (0V) を切り替える

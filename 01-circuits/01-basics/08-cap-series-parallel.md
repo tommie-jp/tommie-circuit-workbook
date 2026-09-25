@@ -21,20 +21,20 @@ source: 自作
 ```circuit
 title: 図1 並列にしたコンデンサを充電する
 parts:
-  V1: vsource a1 e1 9
-  G0: ground e1
-  S1: switch a3 c3
-  R1: resistor c3 e3 1k
-  C1: ecap e5 g5 100u
-  C2: ecap e7 g7 100u
-  G1: ground g5
+  V1: vsource b2 d2 9
+  G0: ground d2
+  S1: switch b3 b5
+  R1: resistor b5 b7 1k
+  C1: ecap b7 d7 100u
+  C2: ecap b10 d10 100u
+  G1: ground d7
 wires:
-  - a1 -- a3
-  - e3 -| e5
-  - e5 -- e7
-  - g5 -- g7
+  - b2 -- b3
+  - b7 -- b10
+  - d7 -- d10
 style:
   grid: on
+  pitch: 1.2
 ```
 
 直列 (C1 = C2 = 100µF を直列にすると 50µF)。
@@ -42,18 +42,18 @@ style:
 ```circuit
 title: 図2 直列にしたコンデンサを充電する
 parts:
-  V1: vsource a1 e1 9
-  G0: ground e1
-  S1: switch a3 c3
-  R2: resistor c3 e3 1k
-  C3: ecap e5 g5 100u
-  C4: ecap g5 i5 100u
-  G2: ground i5
+  V1: vsource b2 d2 9
+  G0: ground d2
+  S1: switch b3 b5
+  R2: resistor b5 b7 1k
+  C3: ecap b7 d7 100u
+  C4: ecap d7 f7 100u
+  G2: ground f7
 wires:
-  - a1 -- a3
-  - e3 -| e5
+  - b2 -- b3
 style:
   grid: on
+  pitch: 1.2
 ```
 
 `R1` = `R2` = 1kΩ (同じ抵抗を使う)。

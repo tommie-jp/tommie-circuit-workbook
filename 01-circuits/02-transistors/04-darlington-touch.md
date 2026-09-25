@@ -19,28 +19,27 @@ board: BB
 ```circuit
 title: 図1 ダーリントンで作る指タッチスイッチ
 parts:
-  V1: vsource a1 j1 9
-  G1: ground j1
-  TP1: port a3
-  TP2: port c5
-  RB: resistor c9 e9 1M
-  G2: ground e9
-  Q1: npn f11
-  Q2: npn f15
-  RC: resistor a13 c13 470
-  D1: led c13 e13
-  G3: ground h15
+  V1: vsource a2 c2 9
+  G1: ground c2
+  TP1: port a4
+  TP2: port f3
+  RB: resistor f4 h4 1M
+  G2: ground h4
+  Q1: npn f7
+  Q2: npn g9
+  RC: resistor a9 c9 470
+  D1: led c9 e9
+  G3: ground h9
 wires:
-  - a1 -- a3
-  - a1 -- a13
-  - c5 -- c9
-  - c9 -| Q1.B
-  - Q1.E -| Q2.B
-  - e13 -| Q1.C
-  - e13 -| Q2.C
-  - Q2.E -| h15
+  - a2 -- a4 -- a9
+  - f3 -- f4 -- Q1.B
+  - Q1.E |- Q2.B
+  - e9 -| Q1.C
+  - e9 -- Q2.C
+  - Q2.E -- h9
 style:
   grid: on
+  pitch: 1.2
 ```
 
 `TP1` と `TP2` が指で触れる 2 枚の金属板 (アルミ箔やねじの頭など)。

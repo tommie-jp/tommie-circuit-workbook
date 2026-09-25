@@ -19,39 +19,42 @@ CD4011 (4 回路入り 2 入力 NAND) の 2 つのゲートだけを使う。S̄
 ```circuit
 title: 図1 NANDたすき掛けのRSラッチ
 parts:
-  VCC: vcc a1
-  RS: resistor a1 a4 10k
-  SWS: button a4 c4
-  GSWS: ground c4
-  RR: resistor a8 a11 10k
-  SWR: button a11 c11
-  GSWR: ground c11
-  U1: dip14 f7 CD4011
-  RQ: resistor h5 h7 330
-  DQ: led h7 j7 red
-  GDQ: ground j7
-  RQb: resistor h11 h13 330
-  DQb: led h13 j13 red
-  GDQb: ground j13
+  VCC: vcc a9
+  RS: resistor a9 c9 10k
+  SWS: button c9 c7
+  GSWS: ground c7
+  VCC: vcc h3
+  RR: resistor h3 h5 10k
+  SWR: button h5 j5
+  GSWR: ground j5
+  U1: dip14 e10g0 CD4011
+  RQ: resistor h9 h11 330
+  DQ: led h11 j11 red
+  GDQ: ground j11
+  RQb: resistor d6i0 d3i0 330
+  DQb: led d3i0 e3i0 red
+  GDQb: ground e3i0
+  VCC: vcc c11
+  G1: ground g9
 wires:
-  - a1 |- b1
-  - b1 -- b8
-  - b8 |- a8
-  - a4 |- U1.1
-  - a11 |- U1.5
-  - U1.4 |- U1.2
-  - U1.3 |- U1.6
-  - U1.3 |- h5
-  - U1.4 |- h11
-  - U1.14 |- a1
-  - U1.7 |- c4
+  - U1.1 -| c9
+  - U1.2 -| d8i5
+  - U1.4 -| d8i5
+  - d8i5 -- d6i0
+  - U1.3 -| e8c0
+  - U1.6 -| f8e0
+  - e8c0 -- f8e0 -- h8 -- h9
+  - U1.5 -| h5
+  - U1.14 -| c11
+  - U1.7 -| g9
 notes:
-  - text e5 blue: "S (足1、Low で有効)"
-  - text e11 blue: "R (足5、Low で有効)"
-  - text g3 blue: "Q (足3)"
-  - text g9 blue: "Qバー (足4)"
+  - text b8 right blue: "S (足1、Low で有効)"
+  - text j4 right blue: "R (足5、Low で有効)"
+  - text g7 right blue: "Q (足3)"
+  - text d3 blue: "Qバー (足4)"
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - U1 の**ゲート1** (足1・2→3) が Q を出す NAND、**ゲート2** (足5・6→4) が Q̄ を
@@ -61,8 +64,8 @@ style:
   足5が 0 になり、Q̄ (足4) が 1 (= Q が 0) になる
 - 両方離しているあいだは、直前に決まった Q・Q̄ を**そのまま保持**する
   (だから「ラッチ」)
-- U1.7 (VSS) は SWS のボタン側 (c4、GND) と同じ点へ、U1.14 (VDD) は a1
-  (Vcc) へ。使わないゲート3・4 の入力は実機では GND へ落とす
+- U1.7 (VSS) は g9 の GND (SWS のボタン側と同じ GND) へ、U1.14 (VDD) は
+  c11 の Vcc へ。使わないゲート3・4 の入力は実機では GND へ落とす
 
 ## 実体配線図
 

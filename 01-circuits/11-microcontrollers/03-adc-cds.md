@@ -19,13 +19,15 @@ era: 今
 ```circuit
 title: 図1 CdS分圧をADC0(GP26)で読む
 parts:
-  U1: pico b2
-  CDS1: photoresistor e10 e13
-  R1: resistor e13 e16 10k
-  G1: ground e16
+  U1: pico d3
+  CDS1: photoresistor a6i0 c6i0
+  R1: resistor c6i0 e6i0 10k
+  G1: ground e6i0
 wires:
-  - U1.3V3 |- e10
-  - U1.GP26 -| e13
+  - U1.3V3 -| a5i0 -- a6i0
+  - U1.GP26 -| c6i0
+style:
+  pitch: 1.2
 ```
 
 - CdS を **3V3 側** (Pico 自身が出す 3.3V 基準電源)、固定抵抗 R1 (10kΩ) を

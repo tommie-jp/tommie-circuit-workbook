@@ -21,30 +21,30 @@ h<sub>FE</sub> の 2 乗まで稼げば、そのわずかな電流でも十分�
 ```circuit
 title: 図1 指で触れると LED が点く
 parts:
-  VCC: vcc a1
-  TPA: port a3
-  TPB: port a6
-  R1: resistor a6 a9 1M
-  G1: ground a9
-  Q1: npn d5
-  R3: resistor d9 d12 100k
-  G2: ground d12
-  Q2: npn g8
-  VCC: vcc e1
-  R4: resistor e1 e3 330
-  D1: led e3 e5
-  G3: ground i8
+  VCC: vcc a2
+  TPA: port c2
+  TPB: port c3
+  R1: resistor c4 e4 1M
+  G1: ground e4
+  Q1: npn c6
+  R3: resistor e6 g6 100k
+  G2: ground g6
+  Q2: npn e8
+  R4: resistor a10 c10 330
+  D1: led c10 e10
+  G3: ground e10
+  G4: ground g8
 wires:
-  - a1 -- a3
-  - a6 -| Q1.B
-  - Q1.C -| a1
-  - Q1.E -| d9
-  - d9 -| Q2.B
-  - Q2.C -| e3
-  - e5 -| i8
-  - Q2.E -| i8
+  - a2 -- c2
+  - a2 -- a6 -- a10
+  - c3 -- c4 -- Q1.B
+  - a6 -- Q1.C
+  - Q1.E -- e6 -- Q2.B
+  - c10 -- c8 -- Q2.C
+  - Q2.E -- g8
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - TPA (電源側の端子) と TPB (Q1 のベース側の端子) の間に指を置くと、肌の抵抗

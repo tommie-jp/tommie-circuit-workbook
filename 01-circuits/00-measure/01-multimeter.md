@@ -20,19 +20,19 @@ board: BB
 ```circuit
 title: 図1 分圧回路とテスターの当て方
 parts:
-  V1: vsource a1 c1 9
-  A1: ammeter a1 a3
-  R1: resistor a3 a5 10k
-  R2: resistor a5 a7 10k
-  V2: voltmeter e5 e7
-  G1: ground c1
+  V1: vsource b2 d2 9
+  A1: ammeter b2 b4
+  R1: resistor b4 b6 10k
+  R2: resistor b6 b8 10k
+  V2: voltmeter c6 c8
+  G1: ground d2
+  G2: ground d8
 wires:
-  - a7 -- c7
-  - c7 -- c1
-  - a5 -- e5
-  - a7 -- e7
+  - b8 -- c8 -- d8
+  - b6 -- c6
 style:
   grid: on
+  pitch: 1.2
 ```
 
 電流計 (`A1`) は電池と `R1` の間に**割り込ませて**直列に、電圧計 (`V2`) は

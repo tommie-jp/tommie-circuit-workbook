@@ -20,13 +20,15 @@ GPIO が確実に H (3.3V) になるようにする。Pico は内蔵プルアッ
 ```circuit
 title: 図1 プルアップ抵抗とボタン
 parts:
-  U1: pico b2
-  R1: resistor e8 e10 10k
-  SW1: button e10 g10
-  G1: ground g10
+  U1: pico e3c0
+  R1: resistor f6 i6 10k
+  SW1: button i6 k6
+  G1: ground k6
 wires:
-  - U1.3V3 -| e8
-  - U1.GP16 -| e10
+  - U1.3V3 -| f6
+  - U1.GP16 -| i5 -- i6
+style:
+  pitch: 1.2
 ```
 
 - R1 (10kΩ) が GP16 を 3V3 (Pico が出す 3.3V) へ引き上げる。ボタンを離している間、

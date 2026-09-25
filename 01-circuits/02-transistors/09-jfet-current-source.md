@@ -19,20 +19,21 @@ source: 自作
 ```circuit
 title: 図1 JFET のセルフバイアスで定電流を作る
 parts:
-  V1: vsource a1 g1 9
-  G0: ground g1
-  D1: led a3 c3
-  J1: njfet e5
-  G1: ground d2
-  RS: resistor g5 g7 1k
-  G2: ground g7
+  V1: vsource a1 d1 9
+  G0: ground d1
+  D1: led a4 c4
+  J1: njfet d4
+  G1: ground e3
+  RS: resistor e4 g4 1k
+  G2: ground g4
 wires:
-  - a1 -- a3
-  - c3 -| J1.D
-  - d2 -| J1.G
-  - J1.S -| g5
+  - a1 -- a4
+  - c4 -- J1.D
+  - e3 |- J1.G
+  - J1.S -- e4
 style:
   grid: on
+  pitch: 1.2
 ```
 
 `J1` のゲートは `G1` で直接 GND に落としてある。ソースが `RS` を通して

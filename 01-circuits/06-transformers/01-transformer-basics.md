@@ -19,17 +19,18 @@ board: BB
 ```circuit
 title: 図1 トランスで昇圧する
 parts:
-  V1: sine a1 c1 12
-  T1: transformer b5 12V/24V
-  R1: resistor a9 c9 1k
-  G1: ground c1
+  V1: sine b2 d2 12
+  T1: transformer c5 12V/24V
+  R1: resistor b8 d8 1k
+  G1: ground d2
 wires:
-  - a1 -| T1.A1
-  - c1 -| T1.A2
-  - a9 |- T1.B1
-  - c9 |- T1.B2
+  - b2 -| T1.A1
+  - d2 -| T1.A2
+  - b8 |- T1.B1
+  - d8 |- T1.B2
 style:
   grid: on
+  pitch: 0.9
 ```
 
 - V1 は AC アダプタの出力 (12 V、50/60 Hz)。T1 は 1 次 12 V・2 次 24 V の小さな

@@ -19,22 +19,22 @@ board: BB
 ```circuit
 title: 図1 充電と放電を切り替える
 parts:
-  V1: vsource a1 j1 9
-  G1: ground j1
-  S1: slide-switch e5
-  R1: resistor a9 c9 1k
-  C1: ecap e9 g9 1000u
-  G2: ground g9
-  R2: resistor c13 e13 1k
-  D1: led e13 g13
-  G3: ground g13
+  V1: vsource a1 d1 9
+  G1: ground d1
+  S1: slide-switch b5 mirror
+  R1: resistor a1 a4 1k
+  C1: ecap b7 d7 1000u
+  G2: ground d7
+  R2: resistor c3 d3 1k
+  D1: led d3 e3
+  G3: ground e3
 wires:
-  - a1 -- a9
-  - c9 -| S1.1
-  - S1.in -| e9
-  - S1.2 -| c13
+  - a4 |- S1.1
+  - S1.in -- b7
+  - S1.2 -| c3
 style:
   grid: on
+  pitch: 1.2
 ```
 
 スイッチを **1 (R1) 側**にすると、電池 → R1 → C1 の道だけがつながり、

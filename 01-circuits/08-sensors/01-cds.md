@@ -19,24 +19,25 @@ CdS セル (硫化カドミウムを使った光センサー) は、当たる光
 ```circuit
 title: 図1 CdS が暗いとトランジスタが ON になる
 parts:
-  VCC: vcc a1
-  R1: resistor a1 a3 10k
-  CDS1: photoresistor a3 a5 GL5528 l=$\mathrm{CDS1}$
-  G1: ground a5
-  Q1: npn d4
-  VCC: vcc f1
-  R2: resistor f1 f3 330
-  D1: led f3 f5
-  G2: ground g4
+  VCC: vcc e2
+  R1: resistor e2 g2 10k
+  CDS1: photoresistor g2 i2 GL5528 l=$\mathrm{CDS1}$
+  G1: ground i2
+  Q1: npn g5
+  VCC: vcc b5
+  R2: resistor b5 d5 330
+  D1: led d5 f5
+  G2: ground i5
 wires:
-  - a3 -| Q1.B
-  - f5 -| Q1.C
-  - Q1.E -| g4
+  - g2 -- Q1.B
+  - f5 -- Q1.C
+  - Q1.E -- i5
 style:
   grid: on
+  pitch: 1.2
 ```
 
-- R1 (固定 10 kΩ、上) と CDS1 (CdS、下) で分圧し、その中点 (a3) を Q1 の
+- R1 (固定 10 kΩ、上) と CDS1 (CdS、下) で分圧し、その中点 (g2) を Q1 の
   ベースに直結する。**CdS が暗くて抵抗が大きくなるほど、中点の電圧は VCC に
   近づく** — 上の R1 が固定なのに下の CDS1 の抵抗だけが上がるので、電圧の
   ほとんどが CDS1 側に掛かり、中点 (R1 と CDS1 の間) は VCC 寄りになる

@@ -23,24 +23,28 @@ SDA・SCL の 2 本だけで、複数のセンサを同じ 2 本にぶら下げ�
 ```circuit
 title: 図1 MCP9808をI2C0(GP0/GP1)で読む
 parts:
-  U1: pico b2
+  U1: pico k3 mirror
   SENS:
     type: device
-    at: h2
+    at: g12
     label: MCP9808
     pins: [VDD, GND, SDA, SCL]
-  Rsda: resistor e12 g12 4.7k
-  Rscl: resistor e15 g15 4.7k
+  Rsda: resistor e5 g5c0 4.7k
+  Rscl: resistor e7 g7g0 4.7k
+  G1: ground h6 r270
+  G2: ground f10i0 r90
 wires:
-  - U1.3V3 -| e10
-  - e10 -- e12
-  - e10 -- e15
-  - e10 -| SENS.VDD
-  - g12 |- SENS.SDA
-  - g15 |- SENS.SCL
-  - U1.GP0 -| SENS.SDA
-  - U1.GP1 -| SENS.SCL
-  - U1.GND3 |- SENS.GND
+  - U1.3V3 -| e1
+  - e1 -- e5 -- e7 -- e9
+  - e9 |- SENS.VDD
+  - U1.GP0 -| g5c0
+  - g5c0 |- SENS.SDA
+  - U1.GP1 -| g7g0
+  - g7g0 |- SENS.SCL
+  - U1.GND3 -| h6
+  - f10i0 |- SENS.GND
+style:
+  pitch: 1.2
 ```
 
 - **SDA (GP0) と SCL (GP1)** が I2C0。どちらも**プルアップ抵抗 (4.7kΩ)** で

@@ -25,38 +25,40 @@ parts:
   B1: battery vp mid 9
   B2: battery mid vm 9
   G1: ground mid
-  U1: opamp f6 +up
-  R1: resistor b8 b6 16k
-  C1: capacitor b6 b4 10n
-  R2: resistor f4 h4 16k
-  G2: ground h4
-  C2: capacitor f3 h3 10n
-  G3: ground h3
-  Rf: resistor g5 g7 330
-  RfT: resistor-var g7 g8 100
-  L1: lamp g5 i5
-  G4: ground i5
-  OUT: port f9
+  U1: opamp d9 +up
+  R1: resistor b10 b8 16k
+  C1: capacitor b8 b6 10n
+  R2: resistor d6 f6 16k
+  G2: ground f6
+  C2: capacitor d4 f4 10n
+  G3: ground f4
+  Rf: resistor f8 f10 330
+  RfT: resistor-var f10 f11 100
+  L1: lamp f8 h8
+  G4: ground h8
+  OUT: port d12
 points:
-  vp: a1
-  vm: e1
-  mid: c1
+  vp: a2
+  vm: e2
+  mid: c2
 wires:
-  - U1.out -- f8 -- f9
-  - f8 -- b8
-  - b4 -- f4
-  - f4 |- U1.+
-  - f4 -- f3
-  - g5 |- U1.-
-  - g8 -- f8
+  - U1.out -- d11 -- d12
+  - b10 -- b11 -- d11
+  - b6 -- d6
+  - d4 -- d6
+  - d6 -- d7
+  - d7 |- U1.+
+  - f8 |- U1.-
+  - f11 -- d11
 style:
   grid: on
+  pitch: 1.2
 ```
 
-- **並列 RC (R2・C2、f4 のノードから GND へ)** と **直列 RC (R1・C1、出力から
-  f4 へ)** が「ウィーンブリッジ」の周波数を決める部分。R1=R2=16 kΩ、
+- **並列 RC (R2・C2、d6 のノードから GND へ)** と **直列 RC (R1・C1、出力から
+  d6 へ)** が「ウィーンブリッジ」の周波数を決める部分。R1=R2=16 kΩ、
   C1=C2=10 nF が等しいとき、発振周波数は **f = 1 / (2πRC) ≈ 995 Hz**
-- +入力 (f4) の位相が出力とちょうど揃う周波数がこの f で、そこだけ
+- +入力 (d6) の位相が出力とちょうど揃う周波数がこの f で、そこだけ
   ループ利得が実数になる (バルクハウゼンの条件)。ほかの周波数は位相がずれて
   発振が育たない
 - **非反転アンプの利得を 3 倍にする**のがもう 1 つの条件 (1 + Rf/Rg = 3)。

@@ -64,19 +64,20 @@ R2 の両端を測る。
 ```circuit
 title: 図2 倍率器で作った電圧計 (0-1 と同じ分圧回路に当てる)
 parts:
-  V1: vsource a1 g1 9
-  G0: ground g1
-  R1: resistor a3 c3 10k
-  R2: resistor c3 e3 10k
-  G1: ground e3
-  GA: galvanometer c5 e5
-  RV: resistor e5 g5 10k
-  G2: ground g5
+  V1: vsource a2 c2 9
+  G0: ground c2
+  R1: resistor a4 c4 10k
+  R2: resistor c4 e4 10k
+  G1: ground e4
+  GA: galvanometer c6 d6f0
+  RV: resistor d6f0 f6 10k
+  G2: ground f6
 wires:
-  - a1 -- a3
-  - c3 -- c5
+  - a2 -- a4
+  - c4 -- c6
 style:
   grid: on
+  pitch: 1.2
 ```
 
 10V レンジに必要な倍率器の値は **R<sub>v</sub> = V<sub>max</sub>/I<sub>g</sub> − R<sub>g</sub>

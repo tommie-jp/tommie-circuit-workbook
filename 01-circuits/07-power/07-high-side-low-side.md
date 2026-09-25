@@ -19,37 +19,38 @@ source: 自作
 ```circuit
 title: 図1 ローサイド (左) とハイサイド (右) の比較
 parts:
-  VCC: vcc a4
-  R1: resistor a4 c4 330
-  D1: led c4 e4
-  Q1: nmos-e f4 2N7000
-  IN1: port f1
-  Rg1: resistor f1 f3 100
-  Rpd1: resistor f3 h3 10k
-  G1: ground h4
-  G2: ground h3
-  VCC: vcc a14
-  Q2: pmos-e c14 BSS84
-  R2: resistor e14 g14 330
-  D2: led g14 i14
-  IN2: port c11
-  Rg2: resistor c11 c13 100
-  Rpu2: resistor c13 a13 10k
-  VCC: vcc a13
-  G3: ground i14
+  VCC: vcc b6
+  R1: resistor b6 d6 330
+  D1: led d6 e6
+  Q1: nmos-e f6 2N7000
+  IN1: port f2
+  Rg1: resistor f2 f4 100
+  Rpd1: resistor f4 h4 10k
+  G1: ground g6
+  G2: ground h4
+  VCC: vcc b13
+  Q2: pmos-e d13 BSS84
+  R2: resistor e13 g13 330
+  D2: led g13 h13
+  IN2: port d10
+  Rg2: resistor d10 d12 100
+  Rpu2: resistor d12 b12 10k
+  VCC: vcc b12
+  G3: ground h13
 wires:
-  - e4 -- Q1.D
-  - Q1.S -- h4
-  - f3 -- Q1.G
-  - a14 -- Q2.S
-  - Q2.D -- e14
-  - c13 -- Q2.G
+  - e6 -- Q1.D
+  - Q1.S -- g6
+  - f4 |- Q1.G
+  - b13 -- Q2.S
+  - Q2.D -- e13
+  - d12 |- Q2.G
 notes:
-  - line a10 j10 ink
-  - text a2 center: ローサイド (N ch)
-  - text a12 center: ハイサイド (P ch)
+  - line a8 h8 ink
+  - text a3 center: ローサイド (N ch)
+  - text a11 center: ハイサイド (P ch)
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - **ローサイド (左)**: 負荷 (R1・D1) を VCC 側に固定し、GND 側を Q1 (N チャネル

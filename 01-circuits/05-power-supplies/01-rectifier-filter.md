@@ -19,29 +19,30 @@ board: BB
 ```circuit
 title: 図1 ブリッジ整流と平滑
 parts:
-  D1: diode acL dcP 1N4001
+  D1: diode acL b3 1N4001
   D2: diode acR dcP 1N4001
-  D3: diode dcN acL 1N4001
+  D3: diode f3 acL 1N4001
   D4: diode dcN acR 1N4001
-  V1: sine g3 g9 17
-  C1: ecap dcP dcN 1000u
-  RL: resistor a12 e12 220
+  V1: sine d4 d7 17
+  C1: ecap b10 f10 1000u
+  RL: resistor b13 f13 220
 points:
-  acL: c3
-  acR: c9
-  dcP: a6
-  dcN: e6
+  acL: d3
+  acR: d8
+  dcP: b8
+  dcN: f8
 wires:
-  - g3 -- acL
-  - g9 -- acR
-  - dcP -- a12
-  - dcN -- e12
+  - acL -- d4
+  - d7 -- acR
+  - b3 -- dcP -- b10 -- b13
+  - f3 -- dcN -- f10 -- f13
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - V1 は 12 V (実効値) の AC アダプタの出力。振幅 (ピーク) は 12 × √2 ≈ 17 V
-- **D1・D2 が上側 (+ へ)、D3・D4 が下側 (GND へ)** の菱形がブリッジ整流の形。
+- **D1・D2 が上側 (+ へ)、D3・D4 が下側 (GND へ)** がブリッジ整流の形 (よく見る菱形の図と同じつながりを、ダイオードを縦に並べて描いている)。
   交流のどちらの半周期でも、C1 の + 側には必ず電流が流れ込む
 - C1 (1000 µF) が平滑用。RL (220 Ω) は「電気を使う負荷」の代わり
 - RL に流れる電流は約 69 mA (下記)、消費電力は 15.1V² / 220Ω ≈ **1.0 W**。

@@ -19,30 +19,35 @@ source: 自作
 ```circuit
 title: 図1 センタータップ 2 本ダイオードの全波整流
 parts:
-  V1: sine b1 d1 17
-  G1: ground d1
-  T1: transformer c4 12V-6V
-  T2: transformer k4 12V-6V
-  D1: diode b8 b11 1N4001
-  D2: diode l8 l11 1N4001
-  C1: ecap g16 g14 1000u
-  RL: resistor i14 i16 220
+  V1: sine c2 e2 17
+  G1: ground e2
+  T1: transformer b6 12V-6V
+  T2: transformer g6 12V-6V
+  D1: diode a9c0f0 a11c0f0 1N4001
+  D2: diode g9h0f0 g11h0f0 1N4001
+  C1: ecap c13 c10 1000u
+  RL: resistor e10 e13 220
+  G2: ground c4
+  G3: ground h4
 points:
-  dcN: g3
+  dcN: d8
 wires:
-  - T1.A1 -| b1 -- b2 -- j2 |- T2.A1
-  - T1.A2 -| d1 -- l1 |- T2.A2
-  - T1.B1 -| b8
+  - T1.A1 -| a3c0f0
+  - T2.A1 -| f3c0f0
+  - a3c0f0 -- c3 -- f3c0f0
+  - c2 -- c3
+  - T1.A2 -| c4
+  - T2.A2 -| h4
+  - T1.B1 -| a9c0f0
+  - T2.B2 -| g9h0f0
   - T1.B2 -| dcN
   - T2.B1 -| dcN
-  - T2.B2 -| l8
-  - b11 -- b16 -- g16
-  - l11 -- l16 -- g16
-  - g16 -- i16
-  - dcN -- g14
-  - g14 -- i14
+  - dcN -- d10
+  - c10 -- d10 -- e10
+  - a11c0f0 -- a13c0f0 -- c13 -- e13 -- g13h0f0 -- g11h0f0
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - T1・T2 は**同じ巻数比の 1 個のトランス**のつもりで描いている。この記法には

@@ -20,28 +20,28 @@ PNP は「エミッタよりベースを下げる」と導通するので、ロ�
 ```circuit
 title: 図1 PNP ハイサイドスイッチ (NPN で駆動)
 parts:
-  V1: vsource a1 m1 9
-  G0: ground m1
-  RB1: resistor a3 c3 10k
-  RB2: resistor c3 e3 4.7k
-  Q1: pnp e7
-  Q2: npn i5
-  RB3: resistor a13 c13 10k
-  IN: port a13
-  RL: resistor g9 g11 470
-  D1: led g11 g13
-  G1: ground g13
-  G2: ground i9
+  V1: vsource a1 d1 9
+  G0: ground d1
+  RB1: resistor a4 c4 10k
+  RB2: resistor c4 e4 4.7k
+  Q1: pnp c6
+  Q2: npn f5
+  RB3: resistor f2 f4 10k
+  IN: port f2
+  RL: resistor d7 d9 470
+  D1: led d9 f9
+  G1: ground f9
+  G2: ground g5
 wires:
-  - a1 -- a7
-  - a7 -| Q1.E
-  - c3 -| Q1.B
-  - e3 -| Q2.C
-  - c13 -| Q2.B
-  - Q1.C -| g9
-  - Q2.E -| i9
+  - a1 -- a6 -- Q1.E
+  - c4 -- Q1.B
+  - e4 -| Q2.C
+  - f4 -- Q2.B
+  - Q1.C -- d6 -- d7
+  - Q2.E -- g5
 style:
   grid: on
+  pitch: 1.2
 ```
 
 `Q1` (PNP) のエミッタは +9V に直結。`RB1` (10kΩ) はベースをエミッタと

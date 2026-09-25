@@ -20,25 +20,26 @@ NPN と PNP を上下に積み、ベースを共通の入力に、エミッタ�
 ```circuit
 title: 図1 B 級プッシュプルとクロスオーバー歪
 parts:
-  V1: vsource a1 e1 9
-  V2: vsource e1 m1 9
-  G0: ground e1
-  IN: port c3
-  Q1: npn e5
-  Q2: pnp i5
-  RL: resistor g9 g11 100
-  G1: ground g11
+  V1: vsource a1 d1 9
+  V2: vsource d1 g1 9
+  G0: ground d2
+  IN: port d3
+  Q1: npn c5
+  Q2: pnp e5
+  RL: resistor d6 d8 100
+  G1: ground d8
 wires:
-  - a1 -- a5
-  - a5 -| Q1.C
-  - c3 -| Q1.B
-  - c3 -| Q2.B
-  - m1 -- m5
-  - m5 -| Q2.C
-  - Q1.E -| g9
-  - Q2.E -| g9
+  - d1 -- d2
+  - a1 -- a5 -- Q1.C
+  - g1 -- g5 -- Q2.C
+  - d3 -- d4
+  - d4 |- Q1.B
+  - d4 |- Q2.B
+  - Q1.E -- d5 -- Q2.E
+  - d5 -- d6
 style:
   grid: on
+  pitch: 1.2
 ```
 
 `V1`・`V2` で ±9V の 2 電源を作り (9V 電池 2 本を直列にして、真ん中を GND

@@ -20,27 +20,26 @@ duty 比で変える** (PWM = Pulse Width Modulation)。今どきのモータ制
 ```circuit
 title: 図1 モータを MOSFET で PWM 駆動する
 parts:
-  B1: battery a1 e1 6
+  B1: battery a9 c9 6
   M1: motor a5 c5
   D1: diode c7 a7 1N4001
-  Q1: nmos-e d5 2N7000
-  R1: resistor d2 d4 100
-  R2: resistor f4 h4 10k
-  PWM: square b2 b4 5 l=$\mathrm{PWM}$
-  G1: ground e5
-  G2: ground h4
-  G3: ground b4
+  Q1: nmos-e c5i0b0 2N7000
+  R1: resistor d1 d3 100
+  R2: resistor d3 f3 10k
+  PWM: square d1 f1 5 l=$\mathrm{PWM}$
+  G1: ground f5
+  G2: ground f3
+  G3: ground f1
+  G4: ground c9
 wires:
-  - a1 -- a5 -- a7
+  - a5 -- a7 -- a9
   - c5 -- c7
   - c5 -- Q1.D
-  - Q1.S -- e5
-  - d4 |- Q1.G
-  - e1 -- e5
-  - b2 -- d2
-  - d4 -- f4
+  - Q1.S -- f5
+  - d3 -| Q1.G
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - PWM は方形波電源 (0〜5 V、duty 可変) を表す。実際はファンクションジェネレータ

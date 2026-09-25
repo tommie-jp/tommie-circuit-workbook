@@ -20,29 +20,29 @@ NTC サーミスタは温度が上がるほど抵抗が下がる素子。CdS (8-
 ```circuit
 title: 図1 サーミスタが温まるとブザーが鳴る
 parts:
-  VCC: vcc a1
-  TH1: thermistor-ntc a1 a3 10k l=$\mathrm{TH1}$
-  R1: resistor a3 a5 2.2k
-  G1: ground a5
-  Q1: npn d3
-  R2: resistor d6 f6 100k
-  G2: ground f6
-  Q2: npn d8
-  VCC: vcc f1
-  BZ1: buzzer f1 f3 l=$\mathrm{BZ1}$
-  G3: ground g8
+  VCC: vcc a2
+  TH1: thermistor-ntc a2 c2 10k l=$\mathrm{TH1}$
+  R1: resistor c2 e2 2.2k
+  G1: ground e2
+  Q1: npn c4
+  R2: resistor e4 g4 100k
+  G2: ground g4
+  Q2: npn e6
+  BZ1: buzzer a6 c6 l=$\mathrm{BZ1}$
+  G3: ground g6
 wires:
-  - a3 -| Q1.B
-  - Q1.E -| d6
-  - Q1.C -| a1
-  - d6 -| Q2.B
-  - Q2.C -| f3
-  - Q2.E -| g8
+  - a2 -- a4 -- a6
+  - a4 -- Q1.C
+  - c2 -- Q1.B
+  - Q1.E -- e4 -- Q2.B
+  - c6 -- Q2.C
+  - Q2.E -- g6
 style:
   grid: on
+  pitch: 1.2
 ```
 
-- TH1 (NTC、上) と R1 (固定 2.2 kΩ、下) の分圧の中点 (a3) が Q1 のベース。
+- TH1 (NTC、上) と R1 (固定 2.2 kΩ、下) の分圧の中点 (c2) が Q1 のベース。
   **温度が上がると TH1 の抵抗が下がり、中点の電圧が上がる**
   (8-1 の CdS と上下が逆なだけで同じ考え方)
 - Q1・Q2 は**ダーリントン接続** (Q1 のエミッタが Q2 のベース)。R2 (100kΩ) は

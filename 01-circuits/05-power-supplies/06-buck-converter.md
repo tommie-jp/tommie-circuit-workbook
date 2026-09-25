@@ -25,25 +25,26 @@ parts:
   G1: ground gnd
   M1:
     type: device
-    at: c5
+    at: c7
     label: Buck DC-DC
     pins: [IN+, IN-, OUT+, OUT-]
-  Rload: resistor f3 f6 100
-  Rled: resistor f8 f11 330
-  Dled: led f11 h11 red
-  GD: ground h11
+  Rload: resistor e7 g7 100
+  Rled: resistor e9 g9 330
+  Dled: led g9 i9 red
+  GD: ground i9
+  G2: ground g7
 points:
-  vin: a1
-  gnd: h1
+  vin: b2
+  gnd: d2
 wires:
-  - vin |- M1.IN+
-  - gnd |- M1.IN-
-  - M1.OUT+ -| f3
-  - M1.OUT+ -| f8
-  - f6 -- h6
-  - h6 -- gnd
+  - vin -- b4a5 |- M1.IN+
+  - gnd -- d3a5 |- M1.IN-
+  - M1.OUT+ -| e5
+  - e5 -- e7
+  - e7 -- e9
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - M1 は市販の降圧 DC-DC モジュール基板 (MC34063 と周辺のコイル・

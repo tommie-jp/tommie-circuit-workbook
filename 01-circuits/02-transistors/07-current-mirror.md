@@ -19,25 +19,28 @@ source: 自作
 ```circuit
 title: 図1 カレントミラーで LED を定電流点灯する
 parts:
-  V1: vsource a1 g1 9
-  G0: ground g1
-  RREF: resistor a3 c3 8.2k
-  Q1: npn e5
+  V1: vsource a2 f2 9
+  G0: ground f2
+  RREF: resistor a4 c4 8.2k
+  Q1: npn e4 mirror
   Q2: npn e7
-  D1: led a9 e9
+  D1: led a7 c7
 wires:
-  - a1 -- a3
-  - a3 -- a9
-  - c3 -| Q1.C
-  - c3 -| Q1.B
-  - c3 -| Q2.B
-  - e9 -| Q2.C
-  - Q1.E -| g5
-  - Q2.E -| g7
-  - g1 -- g5
-  - g5 -- g7
+  - a2 -- a4
+  - a4 -- a7
+  - c4 -- Q1.C
+  - c4 -- c5
+  - c5 -- e5
+  - Q1.B -- e5
+  - e5 -- Q2.B
+  - c7 -- Q2.C
+  - Q1.E -- f4
+  - Q2.E -- f7
+  - f2 -- f4
+  - f4 -- f7
 style:
   grid: on
+  pitch: 1.2
 ```
 
 `Q1` はコレクタとベースを短絡した**ダイオード接続**で、`RREF` に流れる

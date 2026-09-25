@@ -22,19 +22,20 @@ title: 図1 サーボにパルス幅で角度を指示する
 parts:
   SV1:
     type: device
-    at: c6
+    at: c5
     label: SG90
     pins: [VCC, GND, SIG]
-  VCC: vcc a1
-  G1: ground a2
-  PWM: square e8 g8 5 l=$\mathrm{PWM}$
-  G2: ground g8
+  VCC: vcc b4
+  G1: ground c3 r90
+  PWM: square d2 f2 5 l=$\mathrm{PWM}$
+  G2: ground f2
 wires:
-  - a1 |- SV1.VCC
-  - a2 |- SV1.GND
-  - e8 |- SV1.SIG
+  - b4 |- SV1.VCC
+  - c3 -| SV1.GND
+  - d2 |- SV1.SIG
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - SV1 (SG90 マイクロサーボ) は VCC・GND・SIG の 3 本足。VCC は 5 V (USB や

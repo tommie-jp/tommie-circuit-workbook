@@ -18,22 +18,23 @@ source: 自作
 ```circuit
 title: 図1 磁石を近づけると LED が点く
 parts:
-  VCC: vcc a2
+  VCC: vcc c2
   U1:
     type: ic3
-    at: c4
+    at: d4
     label: A3144
     pins: [VCC, GND, OUT]
   G1: ground e4
-  VCC: vcc a8
-  R1: resistor a8 a10 330
-  D1: led a10 a12
+  VCC: vcc b5
+  R1: resistor b5 b7 330
+  D1: led b7 d7
 wires:
-  - a2 |- U1.VCC
+  - c2 |- U1.VCC
   - U1.GND -- e4
-  - a12 |- U1.OUT
+  - d7 -- U1.OUT
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - A3144 の OUT は**オープンコレクタ、負論理**。磁石の S 極を表の面に近づけると
