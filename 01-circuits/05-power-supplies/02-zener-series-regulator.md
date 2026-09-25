@@ -20,19 +20,21 @@ era: 古
 ```circuit
 title: 図1 ツェナー + Tr のシリーズレギュレータ
 parts:
-  V1: vsource vin gnd 12
-  G1: ground gnd
-  Rz: resistor vin b4 1.2k
-  DZ: zener b4 gnd 5V1
-  Q1: npn d4 2SC1815
-  RL: resistor d8 gnd 220
+  V1: vsource a1 f1 12
+  G1: ground f1
+  Rz: resistor a3 c3 1.2k
+  DZ: zener f3 c3 5V1
+  Q1: npn c6 2SC1815
+  RL: resistor d8 f8 220
+wires:
+  - vin -- a3 -- a6
+  - a6 |- Q1.C
+  - c3 -| Q1.B
+  - Q1.E |- d8
+  - gnd -- f3 -- f8
 points:
   vin: a1
-  gnd: e1
-wires:
-  - b4 |- Q1.B
-  - vin |- Q1.C
-  - Q1.E -| d8
+  gnd: f1
 style:
   grid: on
 ```
