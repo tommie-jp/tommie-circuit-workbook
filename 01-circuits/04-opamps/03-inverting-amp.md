@@ -21,22 +21,25 @@ title: 図1 反転増幅
 parts:
   B1: battery vp mid 9
   B2: battery mid vm 9
-  G1: ground mid
-  V1: sine a2 mid 0.1
-  Rin: resistor a2 c5 10k
-  Rf: resistor c5 c7 100k
-  U1: opamp b6 +up
-  OUT: port b8
+  G1: ground c2
+  V1: sine b3 d3 0.1
+  G2: ground d3
+  Rin: resistor b3 b6 10k
+  Rf: resistor a6 a9 100k
+  U1: opamp c8 +down
+  G3: ground d7
+  OUT: port c10
 points:
   vp: a1
   vm: e1
   mid: c1
 wires:
-  - b4 -- mid
-  - b4 |- U1.+
-  - c5 |- U1.-
-  - U1.out -- b7 -- b8
-  - c7 -- b7
+  - mid -- c2
+  - b6 |- U1.-
+  - d7 |- U1.+
+  - b6 -- a6
+  - a9 -- c9
+  - U1.out -- c9 -- c10
 style:
   grid: on
 ```

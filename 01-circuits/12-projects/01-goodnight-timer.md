@@ -19,34 +19,39 @@ board: [BB, PF]
 ```circuit
 title: 図1 555単安定(CMOS版)でMOSFETを約19分だけON
 parts:
-  VCC: vcc a1
-  U1: dip8 c10 TLC555
-  Gu1: ground b10
-  Rtrig: resistor c15 c17 100k
-  SWtrig: button c17 e17
-  Gtrig: ground e17
-  Rt: resistor c20 c23 4.7M
-  Ct: capacitor c23 e23 220u
-  Get: ground e23
-  Rg: resistor e35 e38 220
-  Q1: nmos-e h38
-  Gq1: ground h40
-  RLED: resistor a42 a44 470
-  DLED: led a44 c44 red
+  VCC: vcc b4
+  U1: dip8 d6 TLC555
+  Gu1: ground a6
+  Rtrig: resistor b4 c4 100k
+  SWtrig: button c4 c2
+  Gtrig: ground c2
+  VCC: vcc b7
+  Rt: resistor b8 c8 4.7M
+  Ct: capacitor c10 e10 220u
+  Get: ground e10
+  VCC: vcc f6
+  Rg: resistor g9 g11 220
+  Q1: nmos-e f12i0i0
+  Gq1: ground h12
+  VCC: vcc b12
+  RLED: resistor b12 d12 470
+  DLED: led d12 e12 red
 wires:
-  - U1.1 |- b10
-  - U1.8 |- a1
-  - U1.4 -| U1.8
-  - c15 |- a1
-  - U1.2 -| c17
-  - c20 |- a1
-  - U1.7 -| c23
-  - U1.6 -| c23
-  - U1.3 -| e35
-  - e38 -| Q1.G
-  - Q1.D -| c44
-  - Q1.S -| h40
-  - a42 -- a1
+  - U1.1 -| a5
+  - a5 -- a6
+  - c4 |- U1.2
+  - U1.8 -| b7
+  - b7 -- b8
+  - U1.7 -| c8
+  - c8 -- c9 -- c10
+  - U1.6 -| c9
+  - U1.4 -| f5
+  - f5 -- f6
+  - U1.3 -| g3
+  - g3 -- g9
+  - g11 |- Q1.G
+  - e12 -- Q1.D
+  - Q1.S -- h12
 style:
   grid: on
 ```

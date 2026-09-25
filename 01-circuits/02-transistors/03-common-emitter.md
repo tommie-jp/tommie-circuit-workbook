@@ -19,29 +19,28 @@ board: BB
 ```circuit
 title: 図1 自己バイアスのエミッタ接地増幅
 parts:
-  V1: vsource a1 j1 9
-  G1: ground j1
-  R1: resistor a3 c3 47k
-  R2: resistor c3 e3 10k
-  G2: ground e3
+  V1: vsource a1 h1 9
+  G1: ground h1
+  R1: resistor a5 d5 47k
+  R2: resistor d5 f5 10k
+  G2: ground f5
   RC: resistor a7 c7 2.2k
-  Q1: npn f9
-  CIN: capacitor b6 d6 1u
-  IN: port b6
-  RE: resistor f13 h13 1k
-  G3: ground h13
-  CE: capacitor f17 h17 100u
-  COUT: capacitor e8 e10 1u
-  OUT: port e10
+  Q1: npn d7
+  CIN: capacitor d3 d5 1u
+  IN: port d3
+  RE: resistor f7 h7 1k
+  G3: ground h7
+  CE: capacitor f9 h9 100u
+  COUT: capacitor c8 c10 1u
+  OUT: port c10
 wires:
-  - a1 -- a7
-  - c3 -| Q1.B
-  - d6 -| Q1.B
-  - c7 -| Q1.C
-  - c7 -- e8
-  - Q1.E -| f13
-  - f13 -- f17
-  - h13 -- h17
+  - a1 -- a5 -- a7
+  - d5 -- Q1.B
+  - c7 -- Q1.C
+  - c7 -- c8
+  - Q1.E -- f7
+  - f7 -- f9
+  - h7 -- h9
 style:
   grid: on
 ```

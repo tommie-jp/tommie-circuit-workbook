@@ -29,36 +29,41 @@ FM 放送は 76〜95MHz) で組み、
 ```circuit
 title: 図1 コルピッツ発振 + マイク直接FM
 parts:
-  VCC: vcc a1
-  L1: inductor a1 a5 260n
-  Cb: capacitor d1 d3 0.1u
-  GCb: ground d3
-  Cant: capacitor a5 a8 2p
-  ANT: port a10
+  VCC: vcc a2
+  L1: inductor a10 c10 260n
+  Cb: capacitor a4 c4 0.1u
+  GCb: ground c4
+  Cant: capacitor c13 c15 2p
+  ANT: port c16
   Q1: npn e10
-  C1: capacitor h6 h8 22p
-  C2: capacitor h11 h13 47p
-  GC2: ground h13
-  Re: resistor h11 j11 470
-  GRe: ground j11
-  Rb1: resistor g1 g6 10k
-  Rb2: resistor c9 c14 4.7k
-  GRb2: ground c14
-  MIC: mic e17 e19
-  GMIC: ground e19
-  Rmic: resistor k1 k6 2.2k
-  Cmic: capacitor e17 g25 0.1u
+  C1: capacitor d12 f12 22p
+  C2: capacitor g12 i12 47p
+  GC2: ground i12
+  Re: resistor g10 i10 470
+  GRe: ground i10
+  Rb1: resistor a8 c8 10k
+  Rb2: resistor e7 g7 4.7k
+  GRb2: ground g7
+  MIC: mic e2 g2
+  GMIC: ground g2
+  Rmic: resistor a2 c2 2.2k
+  Cmic: capacitor e3 e5 0.1u
 wires:
-  - a1 -- k1
-  - a8 -- a10
-  - a5 -| Q1.C
-  - h6 -| Q1.C
-  - h8 -| Q1.E
-  - h11 -| Q1.E
-  - c9 -| Q1.B
-  - g6 -| c9
-  - k6 -| e17
-  - g25 -| Q1.B
+  - a2 -- a10
+  - c10 -- Q1.C
+  - c10 -- c12
+  - c12 -- c13
+  - c12 -- d12
+  - c15 -- c16
+  - f12 -- g12
+  - Q1.E -- g10
+  - g10 -- g12
+  - c2 -- e2
+  - e2 -- e3
+  - e5 -- e7
+  - e7 -- e8
+  - e8 -- Q1.B
+  - c8 -- e8
 ```
 
 - **タンク**: L1 (260nH、実測でずれる。手巻きコイル) と C1・C2 (コルピッツの

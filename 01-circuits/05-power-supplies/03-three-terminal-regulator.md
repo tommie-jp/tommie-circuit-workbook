@@ -20,23 +20,20 @@ title: 図1 7805 で 5V を作る
 parts:
   V1: vsource vin gnd 9
   G1: ground gnd
-  U1: regulator c5 7805
-  Cin: capacitor b4 b6 0.33u
-  Cout: capacitor d8 e9 0.1u
-  RL: resistor d8 f9 100
-  Rled: resistor d8 f11 330
-  Dled: led f11 gnd red
+  U1: regulator b5 7805
+  Cin: capacitor b3 d3 0.33u
+  Cout: capacitor b7 d7 0.1u
+  RL: resistor b9 d9 100
+  Rled: resistor b11 c11 330
+  Dled: led c11 d11 red
 points:
-  vin: a1
-  gnd: e1
+  vin: b1
+  gnd: d1
 wires:
-  - vin |- U1.in
-  - gnd |- U1.gnd
-  - U1.out -| d8
-  - b4 -- vin
-  - b6 |- gnd
-  - e9 -| gnd
-  - f9 -| gnd
+  - vin -- b3 -- U1.in
+  - U1.out -- b7 -- b9 -- b11
+  - U1.gnd -- d5
+  - gnd -- d3 -- d5 -- d7 -- d9 -- d11
 style:
   grid: on
 ```

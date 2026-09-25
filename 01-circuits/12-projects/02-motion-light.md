@@ -22,52 +22,57 @@ PIR モジュールの出力は 3.3V 系なので、ロジック IC 側も 1-13 
 title: 図1 PIR+CdS(暗さ)をANDでMOSFETへ
 parts:
   VCC5: vcc a1
-  Rz: resistor a1 c1 330
-  Dz: zener e1 c1 3V3
-  GDz: ground e1
-  CDS1: photoresistor c6 e6
-  R1: resistor e6 g6 10k
-  GR1: ground g6
-  U1: dip14 j10 CD40106
-  GU1: ground k17
+  Rz: resistor a1 a3 330
+  Dz: zener c3 a3 3V3
+  GDz: ground c3
+  CDS1: photoresistor a5 c5
+  R1: resistor c5 e5 10k
+  GR1: ground e5
+  U1: dip14 f9 CD40106
+  GU1: ground g8
   PIR:
     type: device
-    at: d20
+    at: d15
     label: PIR module
     pins: [VCC, OUT, GND]
-  U2: dip14 j30 CD4081
-  GU2: ground k37
-  Rg: resistor m30 m33 220
-  Rgpd: resistor m33 o33 100k
-  GRgpd: ground o33
-  Q1: nmos-e q36
-  GQ1: ground q38
-  RLED: resistor a45 c45 330
-  DLED: led c45 e45 red
-  GPIR: ground k20
+  VCC5: vcc c14
+  U2: dip14 f18 CD4081
+  GU2: ground g17
+  Rg: resistor i19 i21 220
+  Rgpd: resistor i22 k22 100k
+  GRgpd: ground k22
+  Q1: nmos-e h24j0
+  GQ1: ground j24
+  VCC5: vcc c24
+  RLED: resistor c24 e24 330
+  DLED: led e24 g24 red
+  GPIR: ground d14c0f0 r90
 wires:
-  - a1 -- a20
-  - c1 -- c40
-  - e6 -| U1.1
-  - c25 -| U1.14
-  - U1.7 -| k17
-  - a20 -| PIR.VCC
-  - PIR.GND -| k20
-  - U1.2 -- U2.2
-  - PIR.OUT -| U2.1
-  - c40 -| U2.14
-  - U2.7 -| k37
-  - U2.3 -| m30
-  - m33 -- m36
-  - m36 -| Q1.G
-  - a45 -- a1
-  - e45 -| Q1.D
-  - Q1.S -| q38
+  - a3 -- a19
+  - c5 -- c6
+  - c6 |- U1.1
+  - U1.14 -| a10
+  - U1.7 -| g8
+  - U1.2 -| h7
+  - h7 -- h15
+  - h15 |- U2.2
+  - PIR.OUT -| e13
+  - e13 |- U2.1
+  - PIR.VCC -| c14
+  - PIR.GND -| d14c0f0
+  - U2.14 -| a19
+  - U2.7 -| g17
+  - U2.3 -| i16
+  - i16 -- i19
+  - i21 -- i22
+  - Q1.G -| i22
+  - Q1.S -- j24
+  - g24 -- Q1.D
 notes:
-  - text f1 blue: "VL 3.3V (ツェナー基準)"
-  - text f10 blue: "暗いとH"
-  - text f21 blue: "動いたらH"
-  - text l30 blue: "両方Hで点灯"
+  - text b7 blue: "VL 3.3V (ツェナー基準)"
+  - text d7 blue: "暗いとH"
+  - text d11a5 blue: "動いたらH"
+  - text j19 blue: "両方Hで点灯"
 ```
 
 - **VL (3.3V) を作る**: Rz (330Ω) と Dz (3.3V ツェナー、1-13 と同じ考え方) の

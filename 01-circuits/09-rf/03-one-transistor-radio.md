@@ -20,41 +20,42 @@ era: 古
 ```circuit
 title: 図1 1石ラジオ
 parts:
-  ANT: port a1
-  L1: inductor a5 c5 250u
-  GL: ground c5
+  ANT: port e1
+  L1: inductor e2 g2 250u
+  GL: ground g2
   VC1:
     type: device
-    at: a8
+    at: f5
     pins: [A, E]
-  GVC: ground c9
-  C1: capacitor a12 a15 0.01u
-  Q1: npn e15
-  VCC: vcc e10
-  Rc: resistor e10 e13 1.5k
-  Rb: resistor h12 h15 180k
-  GE: ground g17
-  D1: diode j13 j16 1N60
-  C3: capacitor j16 i16 0.001u
-  GC3: ground i16
-  R3: resistor j16 j19 100k
-  GR3: ground j19
+  GVC: ground g4
+  C1: capacitor e6 e7 0.01u
+  Q1: npn e10
+  VCC: vcc a10
+  Rc: resistor a10 c10 1.5k
+  Rb: resistor c10 c8 180k
+  GE: ground f10
+  D1: diode c11 c13 1N60
+  C3: capacitor c14 e14 0.001u
+  GC3: ground e14
+  R3: resistor c16 e16 100k
+  GR3: ground e16
   EAR:
     type: device
-    at: i22
+    at: d19
     pins: [A, B]
-  GEAR: ground k23
+  GEAR: ground f19
 wires:
-  - a1 -- a12
-  - VC1.A |- a8
-  - VC1.E -| c9
-  - a15 -| Q1.B
-  - e13 -| Q1.C
-  - Q1.E -| g17
-  - h12 -| Q1.C
-  - h15 -| Q1.B
-  - j13 -| Q1.C
-  - EAR.A -| j16
+  - e1 -- e6
+  - e3 |- VC1.A
+  - VC1.E -| g4
+  - e7 -- e8
+  - e8 -- Q1.B
+  - c8 -- e8
+  - c10 -- Q1.C
+  - Q1.E -- f10
+  - c10 -- c11
+  - c13 -- c17
+  - c17 |- EAR.A
 ```
 
 - **タンク → C1 → ベース**: L1・VC1 の並列タンクで選んだ電波を、結合コンデンサ

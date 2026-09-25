@@ -26,31 +26,31 @@ board: PF
 ```circuit
 title: 図1 水で橋渡しされるとダーリントンが導通しブザーが鳴る
 parts:
-  VCC: vcc a1
-  Rprobe: resistor a1 a5 10k
-  P1: port a8
-  Rwater: resistor-var a8 a12
-  P2: port a12
-  Rb: resistor a12 a16 1M
-  GRb: ground a16
-  Q1: npn e12
-  Q2: npn e18
-  Buzzer: buzzer h8 h12
-  RLED: resistor j8 j11 330
-  DLED: led j11 j14 red
+  VCC: vcc a2
+  Rprobe: resistor a2 d2 10k
+  P1: port d2
+  Rwater: resistor-var d2 g2
+  P2: port g2
+  Rb: resistor g4 i4 1M
+  GRb: ground i4
+  Q1: npn g7
+  Q2: npn i9
+  GQ2: ground j9
+  Buzzer: buzzer a11 c11
+  RLED: resistor a13 c13 330
+  DLED: led c13 e13 red
 wires:
-  - a5 -- a8
-  - a12 -| Q1.B
-  - Q1.E -| Q2.B
-  - Q1.C |- m30
-  - Q2.C |- m30
-  - Q2.E -| a16
-  - a1 |- c1
-  - c1 -- c20
-  - c8 -| h8
-  - c8 -| j8
-  - h12 -- m30
-  - j14 -- m30
+  - a2 -- a13
+  - g2 -- g4
+  - g4 -- Q1.B
+  - Q1.E |- Q2.B
+  - Q1.C -- e7
+  - Q2.C -- e9
+  - e7 -- e9
+  - e9 -- e11
+  - e11 -- e13
+  - c11 -- e11
+  - Q2.E -- j9
 ```
 
 - **P1・P2 が電極** (むき出しの導線の先や、金属のねじ)。乾いている間は

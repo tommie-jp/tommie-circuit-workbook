@@ -21,29 +21,33 @@ title: 図1 サレンキー ローパス (利得 1 倍)
 parts:
   B1: battery vp mid 9
   B2: battery mid vm 9
-  G1: ground mid
-  V1: sine a2 mid 0.1
-  R1: resistor a2 a5 10k
-  R2: resistor a5 c5 10k
-  C1: capacitor a8 c8 20n
-  C2: capacitor c5 mid 10n
-  U1: opamp c6 +up
-  OUT: port c9
+  G1: ground c2
+  V1: sine c3 e3 0.1
+  G2: ground e3
+  R1: resistor c3 c5 10k
+  R2: resistor c5 c7 10k
+  C1: capacitor c5 a5 20n
+  C2: capacitor c7 e7 10n
+  G3: ground e7
+  U1: opamp c9c0b0 +up
+  OUT: port c12c0b0
 points:
   vp: a1
   vm: e1
   mid: c1
 wires:
-  - a5 -- a8
-  - c5 |- U1.+
-  - U1.out -- c8 -- c9
-  - c8 |- U1.-
+  - mid -- c2
+  - c7 -| U1.+
+  - d8 |- U1.-
+  - d8 -- d10 -- c10c0b0
+  - a5 -- a11 -- c11c0b0
+  - U1.out -- c10c0b0 -- c11c0b0 -- c12c0b0
 style:
   grid: on
 ```
 
-- **R1・R2 が直列 (a2→a5→c5)、C2 が後段の R2 の先で GND へ**、
-  そして **C1 が前段の節点 (a5) から出力へ帰還**するのがサレンキーの骨格。
+- **R1・R2 が直列 (c3→c5→c7)、C2 が後段の R2 の先で GND へ**、
+  そして **C1 が前段の節点 (c5) から出力へ帰還**するのがサレンキーの骨格。
   出力 (交流的に低インピーダンス) から C1 を通して戻る正帰還が、
   ふつうの RC 2 段より急な特性を作る
 - U1 は**利得 1 倍のボルテージフォロア** (出力を − 入力に直結)。

@@ -21,30 +21,31 @@ title: 図1 ULN2003 ボードでステッピングモータを駆動する
 parts:
   U1:
     type: device
-    at: d6
+    at: d2
     label: ULN2003
     pins: [IN1, IN2, IN3, IN4, GND, V+, OUT1, OUT2, OUT3, OUT4]
     turn: mirror
   M1:
     type: device
-    at: d20
+    at: g10
     label: 28BYJ-48
     pins: [COM, A, B, C, D]
-  IN1: port a9
-  IN2: port a10
-  IN3: port a11
-  IN4: port a12
-  G1: ground a13
-  VCC: vcc a14
-  VCC: vcc a20
+    turn: r90
+  IN1: port a4
+  IN2: port a5
+  IN3: port a6
+  IN4: port a7
+  G1: ground b8 r180
+  VCC: vcc b9
+  VCC: vcc e11
 wires:
-  - a9 |- U1.IN1
-  - a10 |- U1.IN2
-  - a11 |- U1.IN3
-  - a12 |- U1.IN4
-  - a13 |- U1.GND
-  - a14 |- U1.V+
-  - a20 |- M1.COM
+  - a4 |- U1.IN1
+  - a5 |- U1.IN2
+  - a6 |- U1.IN3
+  - a7 |- U1.IN4
+  - b8 |- U1.GND
+  - b9 |- U1.V+
+  - e11 |- M1.COM
   - U1.OUT1 -| M1.A
   - U1.OUT2 -| M1.B
   - U1.OUT3 -| M1.C

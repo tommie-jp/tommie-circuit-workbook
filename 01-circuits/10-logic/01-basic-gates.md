@@ -19,52 +19,61 @@ LED が点いていれば出力は 1 (Hレベル)、消えていれば 0。
 ```circuit
 title: 図1 AND・OR・NOTを並べて比べる
 parts:
-  A: switch a1 c1
-  RpdA: resistor c1 e1 10k
-  GA: ground e1
-  B: switch a4 c4
-  RpdB: resistor c4 e4 10k
-  GB: ground e4
-  C: switch a8 c8
-  RpdC: resistor c8 e8 10k
-  GC: ground e8
-  U1: dip14 a12 CD4081
-  U2: dip14 a18 CD4071
-  U3: dip14 a24 CD4069
-  R1: resistor h12 h14 330
-  D1: led h14 j14 red
-  GD1: ground j14
-  R2: resistor h18 h20 330
-  D2: led h20 j20 red
-  GD2: ground j20
-  R3: resistor h24 h26 330
-  D3: led h26 j26 red
-  GD3: ground j26
-  GU1: ground b13
-  GU2: ground b19
-  GU3: ground b25
+  A: switch d3 f3
+  RpdA: resistor f3 f1 10k
+  GA: ground f1 r90
+  B: switch c6 e6
+  RpdB: resistor e6 e4 10k
+  GB: ground e4 r90
+  C: switch b9 d9
+  RpdC: resistor d9 d7 10k
+  GC: ground d7 r90
+  VCC: vcc d3
+  VCC: vcc c6
+  VCC: vcc b9
+  U1: dip14 i13 CD4081
+  U2: dip14 i18 CD4071
+  U3: dip14 i23 CD4069
+  VCC: vcc g14i0
+  VCC: vcc g19i0
+  VCC: vcc g24i0
+  R1: resistor l11 m11 330
+  D1: led m11 n11 red
+  GD1: ground n11
+  R2: resistor l16 m16 330
+  D2: led m16 n16 red
+  GD2: ground n16
+  R3: resistor l21 m21 330
+  D3: led m21 n21 red
+  GD3: ground n21
+  GU1: ground k12
+  GU2: ground k17
+  GU3: ground k22
 wires:
-  - a1 -- a4 -- a8
-  - c1 |- U1.1
-  - c1 |- U2.1
-  - c4 |- U1.2
-  - c4 |- U2.2
-  - c8 |- U3.1
-  - U1.3 |- h12
-  - U2.3 |- h18
-  - U3.2 |- h24
-  - U1.14 |- a1
-  - U2.14 |- a1
-  - U3.14 |- a1
-  - U1.7 |- b13
-  - U2.7 |- b19
-  - U3.7 |- b25
+  - f3 -- f12 -- f17
+  - e6 -- e11a5 -- e16a5
+  - d9 -- d22
+  - f12 |- U1.1
+  - e11a5 |- U1.2
+  - f17 |- U2.1
+  - e16a5 |- U2.2
+  - d22 |- U3.1
+  - U1.3 -| l11
+  - U2.3 -| l16
+  - U3.2 -| l21
+  - U1.14 -| g14i0
+  - U2.14 -| g19i0
+  - U3.14 -| g24i0
+  - U1.7 -| k12
+  - U2.7 -| k17
+  - U3.7 -| k22
 notes:
-  - text b12 blue: AND
-  - text b18 blue: OR
-  - text b24 blue: NOT
+  - text k13a5 blue: AND
+  - text k18a5 blue: OR
+  - text k23a5 blue: NOT
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - U1 (CD4081、AND) と U2 (CD4071、OR) は**同じ A・B** を入力にする。ゲート1

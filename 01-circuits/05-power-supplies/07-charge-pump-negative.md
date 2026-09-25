@@ -19,35 +19,44 @@ source: 自作
 ```circuit
 title: 図1 555 チャージポンプ (負電圧)
 parts:
-  V1: vsource vcc gnd 9
+  V1: vsource b3 gnd 9
+  vcc: vcc b3
   G1: ground gnd
-  U1: dip8 d3 NE555
-  Ra: resistor vcc b8 1k
-  Rb: resistor b8 c10 4k7
-  C1: capacitor c10 e10 10n
-  GC1: ground e10
-  Cc: capacitor d12 f12 10n
-  GCc: ground f12
-  Cp: capacitor d14 d16 1u
-  D1: diode d16 d19 1N4148
-  GD1: ground d19
-  D2: diode e16 d16 1N4148
-  Co: ecap e17 e16 10u
-  GCo: ground e17
-  RL: resistor e16 g17 1k
-  GRL: ground g17
+  U1: dip8 e8 NE555
+  G2: ground b8
+  vcc: vcc c9
+  Ra: resistor c10 d10 1k
+  Rb: resistor d10 d12 4k7
+  C1: capacitor d13 g13 10n
+  GC1: ground g13
+  Cc: capacitor g9 i9 10n
+  GCc: ground i9
+  vcc: vcc g8
+  Cp: capacitor f5 h5 1u
+  D1: diode h5 j5 1N4148
+  GD1: ground j5
+  D2: diode h3 h5 1N4148
+  Co: ecap j3 h3 10u
+  GCo: ground j3
+  RL: resistor h1 j1 1k
+  GRL: ground j1
 points:
-  vcc: a6
-  gnd: h6
+  gnd: e3
 wires:
-  - b8 |- U1.7
-  - c10 |- U1.6
-  - c10 |- U1.2
-  - vcc |- U1.8
-  - vcc |- U1.4
-  - gnd |- U1.1
-  - d12 |- U1.5
-  - d14 |- U1.3
+  - U1.1 -| b7
+  - b7 -- b8
+  - U1.2 -| a6
+  - a6 -- a12 -- d12
+  - U1.8 -| c9
+  - c9 -- c10
+  - U1.7 -| d10
+  - U1.6 -| d12
+  - d12 -- d13
+  - U1.5 -| g9
+  - U1.4 -| g7
+  - g7 -- g8
+  - U1.3 -| f5
+  - h1 -- h3
 style:
   grid: on
 ```

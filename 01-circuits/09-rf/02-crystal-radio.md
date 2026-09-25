@@ -21,28 +21,28 @@ LC 同調で選び、ゲルマニウムダイオードで検波して、クリ�
 title: 図1 ゲルマラジオ
 parts:
   ANT: port a1
-  L1: inductor a5 c5 250u
-  GL: ground c5
+  L1: inductor a3 c3 250u
+  GL: ground c3
   VC1:
     type: device
-    at: a8
+    at: b6
     pins: [A, E]
-  GVC: ground c9
-  D1: diode a12 a15 1N60
+  GVC: ground c5
+  D1: diode a8 a10 1N60
   EAR:
     type: device
-    at: a18
+    at: b14
     pins: [A, B]
-  GEAR: ground c19
-  C2: capacitor a21 c21 1n
-  GC2: ground c21
+  GEAR: ground c12
+  C2: capacitor a11 c11 1n
+  GC2: ground c11
 wires:
-  - a1 -- a12
-  - VC1.A |- a8
-  - VC1.E -| c9
-  - EAR.A |- a18
-  - EAR.B -| c19
-  - a15 -- a21
+  - a1 -- a8
+  - a4 |- VC1.A
+  - VC1.E -| c5
+  - a10 -- a13
+  - a13 |- EAR.A
+  - EAR.B -| c12
 ```
 
 - L1 と VC1 (ポリバリコン) が並列の同調回路。アンテナ〜アースの間に浮かぶこの

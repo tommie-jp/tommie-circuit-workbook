@@ -21,23 +21,26 @@ title: 図1 微分器
 parts:
   B1: battery vp mid 9
   B2: battery mid vm 9
-  G1: ground mid
-  V1: triangle a2 mid 1
-  Rs: resistor a2 a5 1k
-  Cin: capacitor a5 c5 100n
-  Rf: resistor c5 c7 10k
-  U1: opamp b6 +up
-  OUT: port b8
+  G1: ground c2
+  V1: triangle b3 d3 1
+  G2: ground d3
+  Rs: resistor b3 b5 1k
+  Cin: capacitor b5 b7 100n
+  Rf: resistor a7 a10 10k
+  U1: opamp c9 +down
+  G3: ground d8
+  OUT: port c11
 points:
   vp: a1
   vm: e1
   mid: c1
 wires:
-  - b4 -- mid
-  - b4 |- U1.+
-  - c5 |- U1.-
-  - U1.out -- b7 -- b8
-  - c7 -- b7
+  - mid -- c2
+  - b7 |- U1.-
+  - d8 |- U1.+
+  - b7 -- a7
+  - a10 -- c10
+  - U1.out -- c10 -- c11
 style:
   grid: on
 ```

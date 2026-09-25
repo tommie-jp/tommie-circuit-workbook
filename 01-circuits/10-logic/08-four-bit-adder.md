@@ -18,105 +18,102 @@ source: 自作
 ```circuit
 title: 図1 74HC283で4bit同士を足す
 parts:
-  VCC: vcc a1
-  GND: ground a50
-  SA1: switch a5 c5
-  RA1: resistor c6 e6 10k
-  GA1: ground e6
-  SA2: switch a10 c10
-  RA2: resistor c11 e11 10k
-  GA2: ground e11
-  SA3: switch a15 c15
-  RA3: resistor c16 e16 10k
-  GA3: ground e16
-  SA4: switch a20 c20
-  RA4: resistor c21 e21 10k
-  GA4: ground e21
-  SB1: switch a25 c25
-  RB1: resistor c26 e26 10k
-  GB1: ground e26
-  SB2: switch a30 c30
-  RB2: resistor c31 e31 10k
-  GB2: ground e31
-  SB3: switch a35 c35
-  RB3: resistor c36 e36 10k
-  GB3: ground e36
-  SB4: switch a40 c40
-  RB4: resistor c41 e41 10k
-  GB4: ground e41
-  U1: dip16 h6 CD74HC283
-  GU1: ground i2
-  RS1: resistor k45 m45 330
-  DS1: led m45 o45 red
-  GS1: ground o45
-  RS2: resistor k48 m48 330
-  DS2: led m48 o48 red
-  GS2: ground o48
-  RS3: resistor k51 m51 330
-  DS3: led m51 o51 red
-  GS3: ground o51
-  RS4: resistor k54 m54 330
-  DS4: led m54 o54 red
-  GS4: ground o54
-  RC4: resistor k57 m57 330
-  DC4: led m57 o57 red
-  GC4: ground o57
+  VCC: vcc j7
+  SA1: switch j7 l7
+  RA1: resistor l7 l5 10k
+  GA1: ground l5 r90
+  VCC: vcc d4
+  SA2: switch d4 f4
+  RA2: resistor f4 f2 10k
+  GA2: ground f2 r90
+  VCC: vcc d23
+  SA3: switch d23 f23
+  RA3: resistor f23 f25 10k
+  GA3: ground f25 r270
+  VCC: vcc j19
+  SA4: switch j19 l19
+  RA4: resistor l19 l21 10k
+  GA4: ground l21 r270
+  VCC: vcc k4
+  SB1: switch k4 m4
+  RB1: resistor m4 m2 10k
+  GB1: ground m2 r90
+  VCC: vcc c7
+  SB2: switch c7 e7
+  RB2: resistor e7 e5 10k
+  GB2: ground e5 r90
+  VCC: vcc c19
+  SB3: switch c19 e19
+  RB3: resistor e19 e21 10k
+  GB3: ground e21 r270
+  VCC: vcc k23
+  SB4: switch k23 m23
+  RB4: resistor m23 m25 10k
+  GB4: ground m25 r270
+  U1: dip16 h13 CD74HC283
+  VCC: vcc f14g0
+  GND: ground i12 r90
+  GU1: ground j11a6
+  RS1: resistor g9i0 h9i0 330
+  DS1: led h9i0 i9i0 red
+  GS1: ground i9i0
+  RS2: resistor b13a5 c13a5 330
+  DS2: led c13a5 d13a5 red
+  GS2: ground d13a5
+  RS3: resistor g17i0 h17i0 330
+  DS3: led h17i0 i17i0 red
+  GS3: ground i17i0
+  RS4: resistor n17 o17 330
+  DS4: led o17 p17 red
+  GS4: ground p17
+  RC4: resistor n11 o11 330
+  DC4: led o11 p11 red
+  GC4: ground p11
 wires:
-  - a1 -- a5
-  - a5 -- a10
-  - a10 -- a15
-  - a15 -- a20
-  - a20 -- a25
-  - a25 -- a30
-  - a30 -- a35
-  - a35 -- a40
-  - a1 |- U1.16
-  - a50 |- U1.7
-  - a50 |- U1.8
-  - c5 -- c6
-  - c5 -- f5
-  - f5 -| U1.5
-  - c10 -- c11
-  - c10 -- g10
-  - g10 -| U1.3
-  - c15 -- c16
-  - c15 -- h15
-  - h15 -| U1.14
-  - c20 -- c21
-  - c20 -- i20
-  - i20 -| U1.12
-  - c25 -- c26
-  - c25 -- j25
-  - j25 -| U1.6
-  - c30 -- c31
-  - c30 -- k30
-  - k30 -| U1.2
-  - c35 -- c36
-  - c35 -- l35
-  - l35 -| U1.15
-  - c40 -- c41
-  - c40 -- m40
-  - m40 -| U1.11
-  - U1.8 |- i2
-  - U1.4 -| k45
-  - U1.1 -| k48
-  - U1.13 -| k51
-  - U1.10 -| k54
-  - U1.9 -| k57
+  - U1.16 -| f14g0
+  - U1.7 -| i12
+  - U1.8 -| j11a6
+  - f4 -- f11a2
+  - f11a2 |- U1.3
+  - e7 -- e11a6
+  - e11a6 |- U1.2
+  - e19 -- e14a8
+  - e14a8 |- U1.15
+  - f23 -- f15a2
+  - f15a2 |- U1.14
+  - l7 -- l10a8
+  - l10a8 |- U1.5
+  - m4 -- m11a2
+  - m11a2 |- U1.6
+  - l19 -- l15a2
+  - l15a2 |- U1.12
+  - m23 -- m14a8
+  - m14a8 |- U1.11
+  - U1.4 -| g9i0
+  - U1.13 -| g17i0
+  - U1.1 -| b12
+  - b12 -- b13a5
+  - U1.9 -| n14
+  - n14 -- n11
+  - U1.10 -| n14a4
+  - n14a4 -- n17
 notes:
-  - text b7 blue: A1
-  - text b12 blue: A2
-  - text b17 blue: A3
-  - text b22 blue: A4
-  - text b27 blue: B1
-  - text b32 blue: B2
-  - text b37 blue: B3
-  - text b42 blue: B4
-  - text j44 blue: "和1"
-  - text j47 blue: "和2"
-  - text j50 blue: "和3"
-  - text j53 blue: "和4"
-  - text j56 blue: C4
+  - text j4a5 blue: A1
+  - text d1a5 blue: A2
+  - text d23a6 blue: A3
+  - text j19a6 blue: A4
+  - text k1a5 blue: B1
+  - text c4a5 blue: B2
+  - text c19a6 blue: B3
+  - text k23a6 blue: B4
+  - text i7a5 blue: "和1"
+  - text b14a6 blue: "和2"
+  - text i17a6 blue: "和3"
+  - text p17a6 blue: "和4"
+  - text p9a5 blue: C4
+style:
+  grid: on
+  pitch: 1.2
 ```
 
 - A1〜A4 (足5・3・14・12) と B1〜B4 (足6・2・15・11) がそれぞれ 4 bit の

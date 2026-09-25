@@ -25,40 +25,43 @@ LMF501T (三ツ美電機)。**どちらも今は製造が終わっているが�
 ```circuit
 title: 図1 TA7642系ラジオICの標準回路
 parts:
-  ANT: port a1
-  L1: inductor a5 c5 250u
-  GL: ground c5
+  ANT: port d1
+  L1: inductor d2 f2 250u
+  GL: ground f2
   VC1:
     type: device
-    at: a8
+    at: e5
     pins: [A, E]
-  GVC: ground c9
-  IC1: ic3 e15 TA7642
-  Rload: resistor h13 h16 5.6k
-  VCC: vcc h19
-  Cout: capacitor j13 j20 0.1u
+  GVC: ground f4
+  IC1: ic3 c9 TA7642
+  GIC1: ground c7 r90
+  Rload: resistor c12 a12 5.6k
+  VCC: vcc a12
+  Cout: capacitor e13 e15 0.1u
   EAR:
     type: device
-    at: l20
+    at: f18
     pins: [A, B]
-  Csup: capacitor h19 i19 10u
-  GCsup: ground i19
-  GEAR: ground j22
+  Csup: capacitor a15 c15 10u
+  GCsup: ground c15
+  GEAR: ground g17
 wires:
-  - a1 -- a12
-  - VC1.A |- a8
-  - VC1.E -| c9
-  - a12 -| IC1.2
-  - IC1.1 -| c9
-  - IC1.3 -| h13
-  - h16 -- h19
-  - h13 |- j13
-  - j20 -| EAR.A
-  - EAR.B -| j22
+  - d1 -- d8
+  - d3 |- VC1.A
+  - VC1.E -| f4
+  - d8 -| IC1.2
+  - IC1.1 -- c7
+  - IC1.3 -- c12
+  - c12 -- e12
+  - e12 -- e13
+  - a12 -- a15
+  - e15 -- e16
+  - e16 |- EAR.A
+  - EAR.B -| g17
 notes:
-  - text f13 blue: "1番 GND"
-  - text f15 blue: "2番 RF入力"
-  - text f17 blue: "3番 出力+電源"
+  - text b7 blue: "1番 GND"
+  - text d10 blue: "2番 RF入力"
+  - text d14 blue: "3番 出力+電源"
 ```
 
 - **タンク**: L1 (250µH) と VC1 (ポリバリコン、20〜260pF) は 9-2 と同じ

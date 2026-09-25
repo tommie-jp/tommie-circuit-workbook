@@ -22,15 +22,12 @@ title: 図1 ダイオード方式
 parts:
   V1: battery vin gnd 9
   G1: ground gnd
-  D1: schottky vin b3 1N5819
-  RL1: resistor b3 e3 100
-  G2: ground e3
+  D1: schottky vin a3 1N5819
+  RL1: resistor a3 c3 100
+  G2: ground c3
 points:
   vin: a1
-  gnd: h1
-wires:
-  - gnd -- h3
-  - h3 -- e3
+  gnd: c1
 style:
   grid: on
 ```
@@ -40,17 +37,17 @@ title: 図2 P-MOSFET 方式 (ゲート接地)
 parts:
   V2: battery vin2 gnd2 9
   G3: ground gnd2
-  Q1: pmos c5
-  RL2: resistor f3 f6 100
+  Q1: pmos a4 r270
+  RL2: resistor a6 c6 100
+  G4: ground c4
+  G5: ground c6
 points:
   vin2: a1
-  gnd2: h1
+  gnd2: c1
 wires:
-  - vin2 |- Q1.S
-  - Q1.D -| f3
-  - gnd2 -| Q1.G
-  - f6 -- h6
-  - h6 -- gnd2
+  - vin2 -- Q1.S
+  - Q1.D -- a6
+  - Q1.G -- c4
 style:
   grid: on
 ```

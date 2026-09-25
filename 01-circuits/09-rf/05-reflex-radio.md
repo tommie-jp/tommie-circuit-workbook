@@ -20,49 +20,56 @@ era: 古
 ```circuit
 title: 図1 検波した音声をベースへ戻す1石レフレックス
 parts:
-  ANT: port a1
-  L1: inductor a5 c5 250u
-  GL: ground c5
+  ANT: port g1
+  L1: inductor g2 i2 250u
+  GL: ground i2
   VC1:
     type: device
-    at: a8
+    at: h5
     pins: [A, E]
-  GVC: ground c9
-  C1: capacitor a12 a15 0.01u
-  Q1: npn e15
-  VCC: vcc e10
-  Rc: resistor e10 e13 1.5k
-  Rb: resistor h12 h15 180k
-  GE: ground g17
-  D1: diode j13 j16 1N60
-  C3: capacitor j16 i16 0.001u
-  GC3: ground i16
-  R3: resistor j16 j19 100k
-  GR3: ground j19
-  Cf: capacitor k45 h45 0.1u
-  Rf: resistor h45 a45 470k
-  C5: capacitor e13 e35 0.1u
+  GVC: ground i4
+  C1: capacitor g6 g7 0.01u
+  Q1: npn g10
+  VCC: vcc a10
+  Rc: resistor a10 c10 1.5k
+  Rb: resistor f10 f8 180k
+  GE: ground h10
+  D1: diode e11 e13 1N60
+  C3: capacitor e14 g14 0.001u
+  GC3: ground g14
+  R3: resistor e16 g16 100k
+  GR3: ground g16
+  Cf: capacitor i18 i16 0.1u
+  Rf: resistor i15 i11 470k
+  C5: capacitor c11 c13 0.1u
   EAR:
     type: device
-    at: g35
+    at: d23
     pins: [A, B]
-  C6: capacitor e35 g38 0.001u
-  GC6: ground g38
+  C6: capacitor c20 e20 0.001u
+  GC6: ground e20
 wires:
-  - a1 -- a12
-  - VC1.A |- a8
-  - VC1.E -| c9
-  - a15 -| Q1.B
-  - e13 -| Q1.C
-  - Q1.E -| g17
-  - h12 -| Q1.C
-  - h15 -| Q1.B
-  - j13 -| Q1.C
-  - j16 -- k16
-  - k16 -- k45
-  - a45 -- a15
-  - e35 -| EAR.A
-  - EAR.B -| g38
+  - g1 -- g6
+  - g3 |- VC1.A
+  - VC1.E -| i4
+  - g7 -- g8
+  - g8 -- Q1.B
+  - f8 -- g8
+  - Q1.C -- f10
+  - f10 -- e10
+  - e10 -- c10
+  - c10 -- c11
+  - e10 -- e11
+  - Q1.E -- h10
+  - e13 -- e18
+  - e18 -- i18
+  - i16 -- i15
+  - i11 -- i8
+  - i8 -- g8
+  - c13 -- c21
+  - c21 |- EAR.A
+  - EAR.B -| e22
+  - e22 -- e20
 ```
 
 - **前段は 9-3 と同じ**: L1・VC1 のタンクで選局し、C1 で Q1 のベースへ結合。

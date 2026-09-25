@@ -27,47 +27,53 @@ era: 古
 ```circuit
 title: 図1 コルピッツ発振+クエンチ回路のFM超再生受信機
 parts:
-  VCC: vcc a1
-  L1: inductor a1 a5 170n
-  Cb: capacitor d1 d3 0.1u
-  GCb: ground d3
-  Cant: capacitor a5 a8 2p
-  ANT: port a10
-  Q1: npn e10
-  C1: capacitor h6 h8 47p
-  C2: capacitor h11 h13 47p
-  GC2: ground h13
-  Re: resistor h11 j11 470
-  GRe: ground j11
-  Rb1: resistor g1 g6 10k
-  Rb2: resistor c9 c14 4.7k
-  GRb2: ground c14
-  Rq: resistor f9 f20 330k
-  Cq: capacitor f20 f22 100p
-  GCq: ground f22
-  Raf: resistor m4 m20 4.7k
-  Caf: capacitor m20 o20 0.01u
-  GCaf: ground o20
-  Cout: capacitor m20 m35 1u
+  VCC: vcc a2
+  L1: inductor a10 d10 170n
+  Cb: capacitor a3 c3 0.1u
+  GCb: ground c3
+  Cant: capacitor d13 d14 2p
+  ANT: port d15
+  Q1: npn f10
+  C1: capacitor e12 g12 47p
+  C2: capacitor h12 j12 47p
+  GC2: ground j12
+  Re: resistor h10 j10 470
+  GRe: ground j10
+  Rb1: resistor a5 d5 10k
+  Rb2: resistor f5 h5 4.7k
+  GRb2: ground h5
+  Rq: resistor f6 f8 330k
+  Cq: capacitor f8 h8 100p
+  GCq: ground h8
+  Raf: resistor b12 b15 4.7k
+  Caf: capacitor b17 e17 0.01u
+  GCaf: ground e17
+  Cout: capacitor b18 b20 1u
   EAR:
     type: device
-    at: m37
+    at: d23
     pins: [A, B]
-  GEAR: ground o37
+  GEAR: ground f22
 wires:
-  - a1 -- g1
-  - a8 -- a10
-  - a5 -| Q1.C
-  - h6 -| Q1.C
-  - h8 -| Q1.E
-  - h11 -| Q1.E
-  - g6 -| c9
-  - c9 -- f9
-  - f20 -| Q1.B
-  - h6 -- h4
-  - h4 -- m4
-  - m35 -| EAR.A
-  - EAR.B -| o37
+  - a2 -- a10
+  - d10 -- Q1.C
+  - d10 -- d11
+  - d11 -- d12
+  - d12 -- d13
+  - d12 -- e12
+  - d14 -- d15
+  - g12 -- h12
+  - Q1.E -- h10
+  - h10 -- h12
+  - d5 -- f5
+  - f5 -- f6
+  - f8 -- Q1.B
+  - d11 -- b11
+  - b11 -- b12
+  - b15 -- b18
+  - b20 -- b21
+  - b21 |- EAR.A
+  - EAR.B -| f22
 ```
 
 - **タンクと発振回路は 9-4 とほぼ同じ**: L1 (今回は 170nH) と C1・C2 (今回は

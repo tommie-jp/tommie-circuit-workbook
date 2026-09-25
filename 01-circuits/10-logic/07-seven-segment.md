@@ -19,63 +19,69 @@ IC が CD4511。10-4 のバイナリカウンタの出力をここへつなげ�
 ```circuit
 title: 図1 CD4511でBCDを7セグメントに変換する
 parts:
-  VCC: vcc a1
-  GND: ground a30
-  SWA: switch a5 c5
-  RpdA: resistor c6 e6 10k
-  GA: ground e6
-  SWB: switch a10 c10
-  RpdB: resistor c11 e11 10k
-  GB: ground e11
-  SWC: switch a15 c15
-  RpdC: resistor c16 e16 10k
-  GC: ground e16
-  SWD: switch a20 c20
-  RpdD: resistor c21 e21 10k
-  GD: ground e21
-  U1: dip16 h6 CD4511
-  GU1: ground i2
-  DS1: seg7 h25
+  VCC: vcc j5
+  SWA: switch j5 l5
+  RpdA: resistor l5 l3 10k
+  GA: ground l3 r90
+  VCC: vcc b8
+  SWB: switch b8 d8
+  RpdB: resistor d8 d6 10k
+  GB: ground d6 r90
+  VCC: vcc c5
+  SWC: switch c5 e5
+  RpdC: resistor e5 e3 10k
+  GC: ground e3 r90
+  VCC: vcc i8
+  SWD: switch i8 k8
+  RpdD: resistor k8 k6 10k
+  GD: ground k6 r90
+  U1: dip16 h13 CD4511
+  VCC: vcc g10e6
+  VCC: vcc f14g0
+  GND: ground h11c7 r90
+  GU1: ground j12
+  DS1: seg7 k19
+  GCOM: ground m17a5
 wires:
-  - a1 -- a5
-  - a5 -- a10
-  - a10 -- a15
-  - a15 -- a20
-  - a20 -- a25
-  - a1 |- U1.16
-  - a25 |- U1.3
-  - a25 |- U1.4
-  - a30 |- U1.8
-  - a30 |- U1.5
-  - c5 -- c6
-  - c5 -- f5
-  - f5 -| U1.7
-  - c10 -- c11
-  - c10 -- g10
-  - g10 -| U1.1
-  - c15 -- c16
-  - c15 -- h15
-  - h15 -| U1.2
-  - c20 -- c21
-  - c20 -- i20
-  - i20 -| U1.6
-  - U1.8 |- i2
-  - U1.13 -| DS1.a
-  - U1.12 -| DS1.b
-  - U1.11 -| DS1.c
-  - U1.10 -| DS1.d
-  - U1.9 -| DS1.e
-  - U1.15 -| DS1.f
-  - U1.14 -| DS1.g
-  - DS1.COM1 -| a30
-  - DS1.COM2 -| a30
+  - d8 -- d12
+  - d12 |- U1.1
+  - e5 -- e11a6
+  - e11a6 |- U1.2
+  - k8 -- k11
+  - k11 |- U1.6
+  - l5 -- l11a4
+  - l11a4 |- U1.7
+  - U1.3 -| g10e6
+  - U1.4 -| g10e6
+  - U1.5 -| h11c7
+  - U1.8 -| j12
+  - U1.16 -| f14g0
+  - U1.13 -| g15i8
+  - g15i8 |- DS1.a
+  - U1.12 -| h15c4
+  - h15c4 |- DS1.b
+  - U1.11 -| h15g0
+  - h15g0 |- DS1.c
+  - U1.10 -| i14a6
+  - i14a6 |- DS1.d
+  - U1.9 -| i14e2
+  - i14e2 |- DS1.e
+  - U1.14 -| n20a4
+  - n20a4 -- n17a1
+  - n17a1 |- DS1.g
+  - U1.15 -| o20a8
+  - o20a8 -- o16a7
+  - o16a7 |- DS1.f
+  - DS1.COM1 -| m17a5
+  - DS1.COM2 -| m17a5
 notes:
-  - text b7 blue: "A (足7、LSB)"
-  - text b12 blue: "B (足1)"
-  - text b17 blue: "C (足2)"
-  - text b22 blue: "D (足6、MSB)"
+  - text j1a5 blue: "A (足7、LSB)"
+  - text a9 blue: "B (足1)"
+  - text b2a5 blue: "C (足2)"
+  - text h4 blue: "D (足6、MSB)"
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - SWA〜SWD が BCD の A(LSB)〜D(MSB)。開けると 0、閉じると 1 (プルダウンで

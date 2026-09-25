@@ -25,38 +25,51 @@ source: 自作
 ```circuit
 title: 図1 555の電源に音声を混ぜてAM変調する
 parts:
-  VCC: vcc a1
-  Rmod: resistor a1 a5 220
+  VCC: vcc a15
+  Rmod: resistor a15 c15 220
   AFSRC:
     type: device
-    at: e1
+    at: d1
     label: Audio In
     pins: [OUT, GND]
-  Cmod: capacitor e7 e9 1u
-  U555: dip8 c10 TLC555
-  GU555: ground c5
-  R1: resistor c15 c18 1k
-  R2: resistor c20 c23 10k
-  C1: capacitor c25 d25 100p
-  GC1: ground d25
-  Cant: capacitor h10 h13 100p
-  ANT: port h16
+    turn: mirror
+  GAF: ground e3
+  Cmod: capacitor c4 c6 1u
+  U555: dip8 f10 TLC555
+  GU555: ground d8
+  R1: resistor e12 c12 1k
+  R2: resistor e13 e15 10k
+  C1: capacitor k11 m11 100p
+  GC1: ground m11
+  Cant: capacitor j9 j11 100p
+  ANT: port j12
 wires:
-  - U555.8 -| a5
-  - U555.4 -| U555.8
-  - c18 |- a5
-  - U555.7 -| c15
-  - U555.7 -| c20
-  - U555.6 -| c23
-  - U555.2 -| c23
-  - c23 -- c25
-  - U555.1 -| c5
-  - AFSRC.OUT -| e7
-  - e9 -- a9
-  - a9 -- a5
-  - AFSRC.GND -| c5
-  - U555.3 -| h10
-  - h13 -- h16
+  - AFSRC.OUT -| c4
+  - AFSRC.GND -| e3
+  - c6 -- c11
+  - c11 -- c12
+  - c12 -- c15
+  - c15 -- c16
+  - U555.8 -| c11
+  - U555.1 -| d9
+  - d9 -- d8
+  - U555.4 -| h8
+  - h8 -- h16
+  - h16 -- c16
+  - U555.7 -| e12
+  - e12 -- e13
+  - e15 -- g15
+  - U555.6 -| g14
+  - g14 -- g15
+  - U555.2 -| k6
+  - k6 -- k11
+  - k11 -- k14
+  - k14 -- g14
+  - U555.3 -| j7
+  - j7 -- j9
+  - j11 -- j12
+style:
+  pitch: 1.5
 ```
 
 - **搬送波**: R1 (1kΩ)・R2 (10kΩ)・C1 (100pF) の 555 非安定。

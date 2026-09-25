@@ -21,63 +21,64 @@ LED をたくさん光らせたいときや 7 セグを並べたいときによ�
 ```circuit
 title: 図1 74HC595に手動でビットを送り込む
 parts:
-  VCC: vcc a1
-  GND: ground a30
-  SER: switch a5 c5
-  RpdS: resistor c6 e6 10k
-  GS: ground e6
-  SRCLK: button a10 c10
-  RpdCLK: resistor c11 e11 10k
-  GCLK: ground e11
-  RCLK: button a15 c15
-  RpdRCLK: resistor c16 e16 10k
-  GRCLK: ground e16
-  U1: dip16 h6 74HC595
-  GU1: ground i2
-  RA: resistor k4 m4 330
-  DA: led m4 o4 red
-  GA: ground o4
-  RB: resistor k8 m8 330
-  DB: led m8 o8 red
-  GB: ground o8
-  RC: resistor k12 m12 330
-  DC: led m12 o12 red
-  GC: ground o12
-  RD: resistor k16 m16 330
-  DD: led m16 o16 red
-  GD: ground o16
+  VCC: vcc f15g0
+  GND: ground g15i3 r270
+  VCC: vcc e17e5
+  SER: switch e17e5 g17e5
+  RpdS: resistor g17e5 g19e5 10k
+  GS: ground g19e5 r270
+  VCC: vcc h26
+  SRCLK: button h26 j26
+  RpdCLK: resistor j26 j28 10k
+  GCLK: ground j28 r270
+  VCC: vcc f21c5
+  RCLK: button f21c5 h21c5
+  RpdRCLK: resistor h21c5 h23c5 10k
+  GRCLK: ground h23c5 r270
+  U1: dip16 h14 74HC595
+  GU1: ground i13e0 r90
+  VCC: vcc k14
+  RA: resistor c2 d2 330
+  DA: led d2 e2 red
+  GA: ground e2
+  RB: resistor c4a5 d4a5 330
+  DB: led d4a5 e4a5 red
+  GB: ground e4a5
+  RC: resistor c7 d7 330
+  DC: led d7 e7 red
+  GC: ground e7
+  RD: resistor c9a5 d9a5 330
+  DD: led d9a5 e9a5 red
+  GD: ground e9a5
 wires:
-  - a1 -- a5
-  - a5 -- a10
-  - a10 -- a15
-  - a15 -- a20
-  - a1 |- U1.16
-  - a20 |- U1.10
-  - a30 |- U1.13
-  - c5 -- c6
-  - c5 -- f5
-  - f5 -| U1.14
-  - c10 -- c11
-  - c10 -- g10
-  - g10 -| U1.11
-  - c15 -- c16
-  - c15 -- h15
-  - h15 -| U1.12
-  - U1.15 |- k4
-  - U1.1 -| k8
-  - U1.2 -| k12
-  - U1.3 -| k16
-  - U1.8 |- i2
+  - U1.16 -| f15g0
+  - U1.13 -| g15i3
+  - U1.10 -| k15
+  - k15 -- k14
+  - U1.14 -| g17e5
+  - U1.12 -| h21c5
+  - U1.11 -| j16a5
+  - j16a5 -- j26
+  - U1.15 -| a15f8
+  - a15f8 -- a2f0 -- c2
+  - U1.1 -| b13
+  - b13 -- b4a5 -- c4a5
+  - U1.2 -| b12f6
+  - b12f6 -- b7f0 -- c7
+  - U1.3 -| c12a2
+  - c12a2 -- c9a5
+  - U1.8 -| i13e0
 notes:
-  - text f4 blue: "SER (足14)"
-  - text f9 blue: "SRCLK (足11、シフトクロック)"
-  - text f19 blue: "RCLK (足12、ラッチクロック)"
-  - text j4 blue: "QA (足15)"
-  - text j8 blue: "QB (足1)"
-  - text j12 blue: "QC (足2)"
-  - text j16 blue: "QD (足3)"
+  - text c16a5 blue: "SER (足14)"
+  - text d19a8 blue: "RCLK (足12、ラッチクロック)"
+  - text f24a3 blue: "SRCLK (足11、シフトクロック)"
+  - text f1a3 blue: "QA (足15)"
+  - text f3a8 blue: "QB (足1)"
+  - text f6a3 blue: "QC (足2)"
+  - text f8a8 blue: "QD (足3)"
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - **SER (足14)** がシリアル入力の 1 ビット。SW を閉じておくと 1、開けておくと

@@ -20,25 +20,22 @@ USB の 5V から、今どきの定番 3.3V を作る。LDO (Low Drop Out) は�
 ```circuit
 title: 図1 USB 5V から 3.3V の LDO
 parts:
-  J1: usb-c a3
-  U1: regulator d6 AMS1117-3.3
-  Cin: capacitor b8 b10 10u
-  Cout: capacitor f8 g9 22u
-  Rled: resistor f8 g11 150
-  Dled: led g11 gnd red
+  J1: usb-c b2g0d0
+  U1: regulator b6 AMS1117-3.3
+  Cin: capacitor b4 d4 10u
+  Cout: capacitor b8 d8 22u
+  Rled: resistor b10 c10 150
+  Dled: led c10 d10 red
   G1: ground gnd
 points:
-  vin: a1
-  gnd: e1
+  gnd: d3
 wires:
-  - J1.VBUS -| vin
+  - J1.VBUS -| b4
   - J1.GND -| gnd
-  - vin |- U1.in
-  - gnd |- U1.gnd
-  - U1.out -| f8
-  - b8 |- U1.in
-  - b10 |- gnd
-  - g9 -| gnd
+  - b4 -- U1.in
+  - U1.out -- b8 -- b10
+  - U1.gnd -- d6
+  - gnd -- d4 -- d6 -- d8 -- d10
 style:
   grid: on
 ```

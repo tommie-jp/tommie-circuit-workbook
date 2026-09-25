@@ -22,29 +22,37 @@ title: 図1 弛張発振でブザー
 parts:
   V1: vsource vcc gnd 9
   G1: ground gnd
-  Q1: npn d3 2SC1815
-  Q2: npn d11 2SC1815
-  R1: resistor vcc b3 330
-  D1: led b3 c3 red
-  R2: resistor vcc b11 330
-  D2: led b11 c11 red
-  R5: resistor c11 d11 100
-  BZ1: buzzer d11 gnd
-  R4: resistor vcc d5 10k
-  R3: resistor vcc d9 10k
-  C2: ecap c11 d5 100n
-  C1: ecap c3 d9 100n
+  R1: resistor a3 c3 330
+  D1: led c3 e3 red
+  R4: resistor a5 c5 10k
+  R3: resistor a9 c9 10k
+  R2: resistor a11 c11 330
+  D2: led c11 e11 red
+  Q1: npn g3 mirror 2SC1815
+  Q2: npn g11 2SC1815
+  C1: ecap e4 e8 100n
+  C2: ecap d10 d6 100n
+  R5: resistor e13 g13 100
+  BZ1: buzzer g13 i13
 points:
-  vcc: a7
-  gnd: h7
+  vcc: a1
+  gnd: i1
 wires:
-  - c3 |- Q1.C
-  - c11 |- Q2.C
+  - vcc -- a3 -- a5 -- a9 -- a11
+  - e3 |- Q1.C
+  - e11 |- Q2.C
+  - e3 -- e4
+  - e8 -- e9
+  - c9 -- e9
+  - e9 |- Q2.B
+  - e10 -- e11 -- e13
+  - e10 -- d10
+  - d6 -- d5
+  - c5 -- d5
   - d5 |- Q1.B
-  - d9 |- Q2.B
-  - Q1.E -| h3
-  - Q2.E -| h11
-  - h3 -- h7 -- h11
+  - Q1.E |- i3
+  - Q2.E |- i11
+  - gnd -- i3 -- i11 -- i13
 style:
   grid: on
 ```

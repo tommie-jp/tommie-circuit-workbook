@@ -19,30 +19,30 @@ board: BB
 ```circuit
 title: 図1 差動対で電流を振り分ける
 parts:
-  V1: vsource a1 j1 9
-  G1: ground j1
-  R1: resistor a3 c3 10k
-  R2: resistor c3 e3 10k
-  G2: ground e3
-  VR1: potentiometer a7 c7 10k
-  G3: ground c7
-  RC1: resistor a13 c13 220
-  D1: led c13 e13
-  Q1: npn g13
-  RC2: resistor a17 c17 220
-  D2: led c17 e17
-  Q2: npn g17
-  RE: resistor i13 k13 1k
-  G4: ground k13
+  V1: vsource a1 i1 9
+  G1: ground i1
+  R1: resistor a4 d4 10k
+  R2: resistor f4 h4 10k
+  G2: ground h4
+  VR1: potentiometer a14 e14 10k
+  G3: ground e14
+  RC1: resistor a7 c7 220
+  D1: led c7 e7
+  Q1: npn f7
+  RC2: resistor a11 c11 220
+  D2: led c11 e11
+  Q2: npn f11 mirror
+  RE: resistor h9 j9 1k
+  G4: ground j9
 wires:
-  - a1 -- a17
-  - c3 -| Q1.B
-  - VR1.w -| Q2.B
-  - e13 -| Q1.C
-  - e17 -| Q2.C
-  - Q1.E -| i13
-  - Q2.E -| i17
-  - i13 -- i17
+  - a1 -- a4 -- a7 -- a11 -- a14
+  - d4 -- f4 -- Q1.B
+  - VR1.w |- Q2.B
+  - e7 -- Q1.C
+  - e11 -- Q2.C
+  - Q1.E -- h7
+  - Q2.E -- h11
+  - h7 -- h9 -- h11
 style:
   grid: on
 ```

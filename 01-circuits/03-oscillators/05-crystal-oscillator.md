@@ -19,22 +19,26 @@ CMOS インバータ 1 個を帰還抵抗で線形動作させ、水晶振動子
 ```circuit
 title: 図1 水晶発振 (ピアース)
 parts:
-  U1: not d4 74HC04
-  U2: not d10 74HC04
-  Rf: resistor b3 b6 1M
-  Rd: resistor b6 c11 330
-  X1: crystal b3 c11 4M
-  C1: capacitor b3 gnd 22p
-  C2: capacitor c11 gnd 22p
+  U1: not c3 74HC04
+  U2: not b8 74HC04
+  Rf: resistor b1 b5 1M
+  Rd: resistor c5 c7 330
+  X1: crystal d1 d7 4M
+  C1: capacitor d1 e1 22p
+  C2: capacitor d7 e7 22p
   G1: ground gnd
-  OUT: port e13
+  OUT: port b10
 points:
-  gnd: h6
+  gnd: e4
 wires:
-  - b3 |- U1.in
-  - b6 |- U1.out
-  - b6 |- U2.in
-  - U2.out -| e13
+  - b1 -- c1 -- d1
+  - c1 -- U1.in
+  - U1.out -- c5
+  - b5 -- c5
+  - c7 -- d7
+  - e1 -- gnd -- e7
+  - b5 -- U2.in
+  - U2.out -- b10
 style:
   grid: on
 ```

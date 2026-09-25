@@ -23,59 +23,62 @@ board: BB
 ```circuit
 title: 図1 555クロック + 4040バイナリカウンタ
 parts:
-  VCC: vcc a1
-  U555: dip8 c10 NE555
-  R1: resistor c15 c18 10k
-  R2: resistor c20 c23 47k
-  C1: capacitor c25 d25 10u
-  GC1: ground d25
-  U40: dip16 c30 CD4040
-  GU40: ground j34
-  GU555: ground c5
-  GRRST: ground j40
-  RRST: resistor h40 j40 10k
-  SWRST: button h40 a40
-  RQ1: resistor j43 h43 330
-  DQ1: led h43 f43 red
-  GQ1: ground f43
-  RQ2: resistor j46 h46 330
-  DQ2: led h46 f46 red
-  GQ2: ground f46
-  RQ3: resistor j49 h49 330
-  DQ3: led h49 f49 red
-  GQ3: ground f49
-  RQ4: resistor j52 h52 330
-  DQ4: led h52 f52 red
-  GQ4: ground f52
+  VCC: vcc b12
+  U555: dip8 i16i0 NE555
+  R1: resistor h19 g19 10k
+  R2: resistor h19 h21 47k
+  C1: capacitor h23 j23 10u
+  GC1: ground j23
+  U40: dip16 i10 CD4040
+  GU40: ground k9
+  GU555: ground i15c0 r90
+  GRRST: ground d14 r270
+  RRST: resistor d12 d14 10k
+  SWRST: button d12 b12
+  VCC: vcc f11
+  VCC: vcc g17
+  VCC: vcc l16
+  RQ1: resistor l11a2 m11a2 330
+  DQ1: led m11a2 n11a2 red
+  GQ1: ground n11a2
+  RQ2: resistor l8 m8 330
+  DQ2: led m8 n8 red
+  GQ2: ground n8
+  RQ3: resistor l5a5 m5a5 330
+  DQ3: led m5a5 n5a5 red
+  GQ3: ground n5a5
+  RQ4: resistor l3 m3 330
+  DQ4: led m3 n3 red
+  GQ4: ground n3
 wires:
-  - U555.8 -| a11
-  - a1 -- a11
-  - U555.4 -| U555.8
-  - U555.1 -| c5
-  - U555.7 -| c15
-  - U555.7 -| c20
-  - U555.6 -| c23
-  - U555.2 -| c23
-  - c23 -- c25
-  - U555.3 -| U40.10
-  - U40.16 -| a31
-  - a11 -- a31
-  - a31 -- a40
-  - a11 -- a18
-  - c18 -- a18
-  - U40.8 -| j34
-  - U40.11 -| h40
-  - U40.9 -| j43
-  - U40.7 -| j46
-  - U40.6 -| j49
-  - U40.5 -| j52
+  - U555.3 -- U40.10
+  - U40.16 -| f11
+  - U40.11 -| d12
+  - U555.1 -| i15c0
+  - U555.2 -| e14a2
+  - e14a2 -- e21 -- h21
+  - U555.8 -| g17
+  - g17 -- g19
+  - U555.7 -| h19
+  - U555.6 -| h21
+  - h21 -- h23
+  - U555.4 -| l15
+  - l15 -- l16
+  - U40.8 -| k9
+  - U40.9 -| l11a2
+  - U40.7 -| l8
+  - U40.6 -| k7a4
+  - k7a4 -- k5a5 -- l5a5
+  - U40.5 -| j6f8
+  - j6f8 -- j3f0 -- l3
 notes:
-  - text e43 blue: Q1 (LSB)
-  - text e46 blue: Q2
-  - text e49 blue: Q3
-  - text e52 blue: Q4 (MSB)
+  - text o10a6 blue: Q1 (LSB)
+  - text o7a6 blue: Q2
+  - text o5a1 blue: Q3
+  - text o2a6 blue: Q4 (MSB)
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - 555 は標準の非安定 (R1 10kΩ、R2 47kΩ、C1 10µF)。T ≈ 0.69×(10k+2×47k)×10µ

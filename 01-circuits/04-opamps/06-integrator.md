@@ -21,26 +21,27 @@ title: 図1 積分器
 parts:
   B1: battery vp mid 9
   B2: battery mid vm 9
-  G1: ground mid
-  V1: square a2 mid 1
-  Rin: resistor a2 c5 10k
-  Cf: capacitor c5 c7 100n
-  Rbleed: resistor a5 a7 1M
-  Rbias: resistor b4 d4 10k
-  GBias: ground d4
-  U1: opamp b6 +up
-  OUT: port b8
+  G1: ground c2
+  V1: square c3 e3 1
+  G2: ground e3
+  Rin: resistor c3 c6 10k
+  Cf: capacitor b6 b9 100n
+  Rbleed: resistor a6 a9 1M
+  Rbias: resistor e7 f7 10k
+  GBias: ground f7
+  U1: opamp d8 +down
+  OUT: port d10
 points:
   vp: a1
   vm: e1
   mid: c1
 wires:
-  - b4 |- U1.+
-  - c5 |- U1.-
-  - U1.out -- b7 -- b8
-  - c7 -- b7
-  - c5 -- a5
-  - a7 -- c7
+  - mid -- c2
+  - c6 |- U1.-
+  - e7 |- U1.+
+  - a6 -- b6 -- c6
+  - a9 -- b9 -- d9
+  - U1.out -- d9 -- d10
 style:
   grid: on
 ```

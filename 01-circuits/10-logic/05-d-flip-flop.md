@@ -19,46 +19,54 @@ IC (CD4013、2 回路入り) を使う。1 回路はそのまま **D-FF** (ク�
 ```circuit
 title: 図1 D-FFとQバー帰還のT-FF (CD4013)
 parts:
-  VCC: vcc a1
-  SWD: switch a5 c5
-  RpdD: resistor c5 e5 10k
-  GD: ground e5
-  SWC1: button a9 c9
-  RpdC1: resistor c9 e9 10k
-  GC1: ground e9
-  U1: dip14 h6 CD4013
-  GU1: ground i13
-  RQ1: resistor k5 m5 330
-  DQ1: led m5 o5 red
-  GQ1: ground o5
-  SWC2: button a19 c19
-  RpdC2: resistor c19 e19 10k
-  GC2: ground e19
-  RQ2: resistor k16 m16 330
-  DQ2: led m16 o16 red
-  GQ2: ground o16
+  VCC: vcc e4e0
+  SWD: switch e4e0 g4e0
+  RpdD: resistor g4e0 i4e0 10k
+  GD: ground i4e0
+  VCC: vcc d7g5
+  SWC1: button d7g5 f7g5
+  RpdC1: resistor f7g5 f5g5 10k
+  GC1: ground f5g5 r90
+  U1: dip14 g12 CD4013
+  VCC: vcc e13i0
+  GU1: ground i11
+  RQ1: resistor c9a5 d9a5 330
+  DQ1: led d9a5 e9a5 red
+  GQ1: ground e9a5
+  VCC: vcc e15a5
+  SWC2: button e15a5 g15a5
+  RpdC2: resistor g15a5 i15a5 10k
+  GC2: ground i15a5
+  RQ2: resistor c17a5 d17a5 330
+  DQ2: led d17a5 e17a5 red
+  GQ2: ground e17a5
+  GR1: ground g11 r90
+  GR2: ground g13e3 r270
+  GS2: ground i13
 wires:
-  - a1 -- a5
-  - a5 -- a9
-  - a9 -- a19
-  - a1 |- U1.14
-  - c5 -| U1.5
-  - c9 -| U1.3
-  - U1.4 |- e9
-  - U1.6 |- e9
-  - U1.1 |- k5
-  - U1.7 |- i13
-  - c19 -- c20 -- g20 -| U1.11
-  - U1.10 -| e19
-  - U1.8 -| e19
-  - U1.13 |- k16
-  - U1.12 -| U1.9
+  - U1.14 -| e13i0
+  - U1.5 -| g4e0
+  - U1.3 -| f7g5
+  - U1.4 -| g11
+  - U1.6 -| h11c0
+  - U1.7 -| h11c0
+  - h11c0 -- i11
+  - U1.1 -| c11
+  - c11 -- c9a5
+  - U1.11 -| g15a5
+  - U1.10 -| g13e3
+  - U1.8 -| i13
+  - U1.13 -| c13a8
+  - c13a8 -- c17a5
+  - U1.12 -| g14i2
+  - g14i2 |- U1.9
 notes:
-  - text f4 blue: "D1 (足5)"
-  - text f8 blue: "CLK1 (足3、立ち上がりでDをQへ)"
-  - text f18 blue: "CLK2 (足11、押すたびにQが反転)"
+  - text c2 blue: "D1 (足5)"
+  - text b5 blue: "CLK1 (足3、立ち上がりでDをQへ)"
+  - text b14 blue: "CLK2 (足11、押すたびにQが反転)"
 style:
   grid: on
+  pitch: 1.2
 ```
 
 - **FF1 (D-FF)**: SWD が D1 (足5)。SWC1 (CLK1、足3) を押すと GND から

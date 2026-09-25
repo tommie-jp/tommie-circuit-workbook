@@ -18,28 +18,40 @@ NE555 を単安定 (monostable) 接続にする。ボタンを 1 回押すと、
 ```circuit
 title: 図1 555 単安定
 parts:
-  V1: vsource vcc gnd 9
+  V1: vsource b1 gnd 9
+  vcc: vcc b1
   G1: ground gnd
-  U1: dip8 d3 NE555
-  R1: resistor vcc c10 100k
-  C1: ecap c10 gnd 10u
-  R2: resistor vcc b3 10k
-  SW1: button b3 gnd
-  Cc: capacitor d12 gnd 10n
-  R3: resistor d14 e14 330
-  D1: led e14 gnd red
+  U1: dip8 d6 NE555
+  G2: ground a6
+  vcc: vcc b4
+  R2: resistor b4 c4 10k
+  SW1: button c4 c2
+  G3: ground c2
+  vcc: vcc b7
+  R1: resistor b8 c8 100k
+  C1: ecap c10 f10 10u
+  G4: ground f10
+  Cc: capacitor f7 h7 10n
+  G5: ground h7
+  R3: resistor e3 f3 330
+  D1: led f3 h3 red
+  G6: ground h3
+  vcc: vcc f6
 points:
-  vcc: a6
-  gnd: h6
+  gnd: e1
 wires:
-  - b3 |- U1.2
-  - c10 |- U1.7
-  - c10 |- U1.6
-  - vcc |- U1.8
-  - vcc |- U1.4
-  - gnd |- U1.1
-  - d12 |- U1.5
-  - d14 |- U1.3
+  - U1.1 -| a5
+  - a5 -- a6
+  - c4 |- U1.2
+  - U1.3 -| e3
+  - U1.4 -| f5
+  - f5 -- f6
+  - U1.8 -| b7
+  - b7 -- b8
+  - U1.7 -| c8
+  - c8 -- c9 -- c10
+  - U1.6 -| c9
+  - U1.5 -| f7
 style:
   grid: on
 ```
