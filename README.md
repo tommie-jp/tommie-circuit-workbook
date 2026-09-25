@@ -16,7 +16,7 @@
 | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 直流の基本から実用回路まで。回路図と実体配線図を並べて組む | 50 | 100 | 200 | 100 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | Analog Discovery 2 / 3 と WaveForms で DC〜10 MHz を測る | 50 | 100 | 200 | 50 |
-| [NanoVNA の教科書](03-nanovna/README.md) | NanoVNA-H4 / V2 で 10 kHz〜4.4 GHz を測る。治具・部品・フィルタ・アンテナ・GHz 帯 | 50 | 100 | 200 | 50 |
+| [NanoVNA の教科書](03-nanovna/README.md) | NanoVNA-H4 / V2 で 10 kHz〜4.4 GHz を測る。治具・部品・フィルタ・アンテナ・GHz 帯 | 50 | 100 | 200 | 51 |
 | [電験三種の教科書](04-denken/README.md) | 理論・機械・電力・法規の範囲を、低い電圧の実験で測って式を確かめる | 50 | 100 | 200 | 50 |
 
 <!-- toc:end -->
