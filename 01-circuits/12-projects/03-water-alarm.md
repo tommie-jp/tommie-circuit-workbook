@@ -88,51 +88,59 @@ board:
   slots: on
 title: 図2 perfboardに組む
 points:
-  PWR: a1
-  GND: k1
+  PWR: b21
+  GND: n1
 parts:
-  Rprobe: resistor a3 c3 10k
+  P2:
+    type: device
+    at: -c2
+    label: Probe2
+    pins: [W]
   P1:
     type: device
     at: -c6
     label: Probe1
     pins: [W]
-  P2:
-    type: device
-    at: -c10
-    label: Probe2
-    pins: [W]
-  Rb: resistor c8 e8 1M
-  Q1: transistor g3 g4 g5 2SC1815
-  Q2: transistor g8 g9 g10 2SC1815
-  Buzzer: buzzer j3 j5
-  RLED: resistor j8 j10 330
-  DLED: led j12 j14 red
+  Rprobe: resistor b10 b6 10k
+  Rb: resistor i2 n2 1M
+  Q1: transistor i5 i4 i3 2SC1815
+  Q2: transistor i9 i8 i7 2SC1815
+  Buzzer: buzzer d14 g14
+  RLED: resistor b18 d18 330
+  DLED: led e18 g18 red
 wires:
-  - PWR -- a3
-  - c3 -- P1.W
-  - P2.W -- c8
-  - c8 -- g5
-  - e8 -- GND
-  - g3 -- g10
-  - g4 -- g9
-  - g4 -- j5
-  - g4 -- j14
-  - g8 -- GND
-  - PWR -- j3
-  - PWR -- j8
-  - j10 -- j12
+  - P1.W -- b6
+  - b10 -- b14
+  - b14 -- b18
+  - b18 -- PWR
+  - P2.W -- i2
+  - i2 -- i3
+  - i5 -- i7
+  - i4 -- g4
+  - i8 -- g8
+  - g4 -- g8
+  - g8 -- g14
+  - g14 -- g18
+  - b14 -- d14
+  - d18 -- e18
+  - i9 -- n9
+  - GND -- n2
+  - n2 -- n9
 ```
 
-- 2SC1815 は E-C-B の順 (東芝の実物の並び)。Q1 (g3=E, g4=C, g5=B)・
-  Q2 (g8=E, g9=C, g10=B) と揃えて置く
-- Rprobe の下端 (c3) から板の外の電極 P1 (`-c6`) へ。もう一方の電極 P2
-  (`-c10`) は c8 を経て Q1 のベース (g5) へ直接つなぐ。c8 には Rb の上端も
-  つなぎ、Rb の下端 (e8) を GND へ (図1 と同じプルダウン)。**電極 2 本は
-  水に浸すまでつながっていない**のが正しい状態
-- Q1 のエミッタ (g3) を Q2 のベース (g10) へ、Q1・Q2 のコレクタ
-  (g4・g9、配線で共通ネットにする) に Buzzer・RLED+DLED の帰り側をつなぐ。
-  Buzzer・RLED の反対側は両方 PWR (電源側のスイッチとして働く)
+- 2SC1815 は E-C-B の順 (東芝の実物の並び)。Q1 (i5=E, i4=C, i3=B)・
+  Q2 (i9=E, i8=C, i7=B) と、どちらも左右を返して (左から B・C・E) i 行に揃えて置く。
+  こうするとベースが左 (電極の側)、エミッタが右 (次の段の側) に来る
+- 配線は縦と横だけで、交差は無い。上の b 行が PWR、下の n 行が GND、
+  その間の g 行が Q1・Q2 の共通コレクタ
+- 板の外の電極 P1 (`-c6`) は Rprobe の左端 (b6) へ下ろし、Rprobe の右端 (b10) から
+  b 行を PWR へ。もう一方の電極 P2 (`-c2`) は 2 列をまっすぐ下りて Rb の上端 (i2) へ、
+  そこから隣の Q1 のベース (i3) へ。Rb の下端 (n2) は GND (図1 と同じプルダウン)。
+  **電極 2 本は水に浸すまでつながっていない**のが正しい状態
+- Q1 のエミッタ (i5) を Q2 のベース (i7) へ。Q1・Q2 のコレクタ (i4・i8) は
+  g 行へ上げて共通ネットにし、その先に Buzzer の下の足 (g14) と DLED の K (g18) を
+  つなぐ。Buzzer の上の足 (d14) と RLED の上端 (b18) は PWR の b 行へ
+  (電源側のスイッチとして働く)。Q2 のエミッタ (i9) は 9 列を下りて GND の n 行へ
 
 ## 見るべき値
 
