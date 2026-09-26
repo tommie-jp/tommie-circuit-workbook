@@ -50,39 +50,35 @@ wires:
 
 ```breadboard
 title: 図2 ブレッドボードでマイクアンプを組み AD で読む
-board: full
+board: half
 parts:
-  R1: resistor a3 a6 2.2k
-  MK1: mic a9 a12
-  C1: capacitor a16 a19 1u
-  R2: resistor a23 a26 100k
-  Q1: transistor e29(B) e30(C) e31(E) 2SC1815
-  RC: resistor a34 a37 470
-  C2: capacitor a40 a43 1u
+  R1: resistor b2 b5 2.2k
+  MK1: mic e5 e8
+  C1: capacitor c5 c10 1u
+  R2: resistor +t10 b10 100k
+  Q1: transistor e10(B) e12(C) e14(E) 2SC1815
+  RC: resistor +t16 b16 470
+  C2: capacitor d16 d21 1u
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [V+, GND, 1+, 1-]
 wires:
-  - AD.V+ -- +t2 red
-  - AD.GND -- -t2 black
-  - +t3 -- b3 red
-  - b6 -- b9
-  - -t12 -- b12 black
-  - b9 -- b16
-  - b19 -- b26
-  - +t23 -- b23 red
-  - b26 -- d29
-  - +t34 -- b34 red
-  - d30 -- c37
-  - c37 -- c40
-  - AD.1+ -- b43 yellow
-  - AD.1- -- -t44 black
-  - -t31 -- d31 black
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t12 black
+  - a2 -- +t2 red
+  - a8 -- -t8 black
+  - a14 -- -t14 black
+  - c12 -- c16 green
+  - AD.1+ -- b21 yellow
+  - AD.1- -- -t23 black
 ```
 
-8-4 の配線から LED を外し、コレクタ負荷 (RC) の先を C2 経由で AD の `1+` へ。
+8-4 の回路から LED を外し、コレクタ負荷 (RC) の先を C2 経由で AD の `1+` へ。
+板の上では 1 枚の上半分 (`a`〜`e` 行) に収めた: R2 と RC は + レールから直に
+挿し、Q1 は足を 1 穴ずつ広げて B・C・E を 10・12・14 列に置く。C (12 列) と
+RC (16 列) は緑のジャンパでつなぐ。
 
 ## 計器の設定
 

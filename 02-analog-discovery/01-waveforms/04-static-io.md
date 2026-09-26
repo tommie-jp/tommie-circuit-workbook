@@ -56,22 +56,21 @@ title: 図2 ブレッドボードで LED とボタンをつなぐ
 board: half
 parts:
   R1: resistor c3 c8 470
-  D1: led c12(A) c14(K) red
+  D1: led d8(A) d10(K) red
   SW1: button @ e20
   R2: resistor j20 j25 10k
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, DIO0, DIO1]
+    pins: [DIO0, GND, DIO1, V+]
 wires:
   - AD.DIO0 -- a3 yellow
-  - c8 -- c12 orange
-  - c14 -- -t14 black
+  - a10 -- -t10 black
+  - AD.GND -- -t13 black
   - AD.V+ -- a20 red
-  - AD.DIO1 -- h20 yellow
+  - AD.DIO1 -- h20 green
   - i25 -- -t25 black
-  - AD.GND -- -t30 black
 ```
 
 - SW1 (`@ e20`) は溝をまたぐタクトスイッチ。手前側 (20 列) に V+、

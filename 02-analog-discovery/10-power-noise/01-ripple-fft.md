@@ -57,30 +57,38 @@ parts:
     at: top
     label: AC アダプタ 9V
     pins: ["~1", "~2"]
-  D1: diode/do41 c5(A) c12(K)
-  D2: diode/do41 d8(A) d12(K)
-  D3: diode/do41 e3(A) e5(K)
-  D4: diode/do41 b3(A) b8(K)
-  Rload: resistor j12 j3 1k
-  Csmooth: capacitor/electrolytic i12(+) i3(-) 470uF
+  D1: diode/do41 c6(A) c10(K)
+  D2: diode/do41 d14(A) d10(K)
+  D3: diode/do41 b3(A) b6(K)
+  D4: diode/do41 b17(A) b14(K)
+  Rload: resistor i10 i6 1k
+  Csmooth: capacitor/electrolytic g10(+) g14(-) 470uF
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [GND, 1+, 1-]
 wires:
-  - ADP.~1 -- a5
-  - ADP.~2 -- a8
-  - d3 -- f3
-  - e12 -- f12
-  - AD.1+ -- g12
-  - AD.1- -- g3
-  - AD.GND -- h3
+  - ADP.~1 -- a6 orange
+  - ADP.~2 -- a14 yellow
+  - a3 -- -t3 black
+  - a17 -- -t17 black
+  - e10 -- f10 red
+  - j14 -- -b14 black
+  - j6 -- -b6 black
+  - -t16 -- -b16 black
+  - a10 -- +t10 red
+  - AD.GND -- -t19 black
+  - AD.1+ -- +t22 red
+  - AD.1- -- -t23 black
 ```
 
-- D1・D2 の向いた先 (12 列) が DC+、D3・D4 の元 (3 列) が DC−。4 つのダイオード
-  それぞれ**アノード側の帯の無い方**を図の向きに挿す
-- Rload・Csmooth は下ブロックへ渡し、AD で両端を読む
+- D1・D2 の向いた先 (10 列) が DC+、D3・D4 の元 (3 列・17 列) を上の − レールへ
+  落として DC− にする。4 つのダイオードそれぞれ**アノード側の帯の無い方**を図の向きに挿す
+- DC+ は `a10 -- +t10` で上の + レールへも出し、AD の 1+ はそのレールで読む。
+  1−・GND は上の − レールへ
+- Rload・Csmooth は溝越し (`e10 -- f10`) に下ブロックへ渡し、− 側を下の − レールへ
+  落とす (上下の − レールは 16 列で渡す)
 
 ## 計器の設定
 

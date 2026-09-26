@@ -65,37 +65,36 @@ style:
 title: 図2 ブレッドボードと Analog Discovery
 board: full
 parts:
-  R1: resistor c5 c9 39k
-  R2: resistor d9 d13 10k
-  RC: resistor c20 c24 2.2k
-  RE: resistor d30 d34 470
-  Cin: capacitor/electrolytic a9(+) a3 10u
-  Cout: capacitor/electrolytic b24(+) b28 10u
-  Q1: transistor e9(B) e10(C) e11(E) 2SC1815
+  R1: resistor b18 b22 39k
+  R2: resistor d22 d19 10k
+  RC: resistor b30 b23 2.2k
+  RE: resistor d24 d28 470
+  Cin: capacitor/electrolytic c22(+) c5 10u
+  Cout: capacitor/electrolytic c23(+) c38 10u
+  Q1: transistor e22(B) e23(C) e24(E) 2SC1815
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
+    pins: [W1, 1+, 1-, V+, GND, 2-, 2+]
 wires:
-  - AD.V+ -- +t5 red
-  - +t5 -- a5 red
-  - +t20 -- b20 red
-  - AD.W1 -- b3 yellow
-  - AD.1+ -- b3 yellow
-  - AD.1- -- AD.GND black
-  - AD.2+ -- a28 green
-  - AD.2- -- AD.GND black
-  - AD.GND -- -t2 black
-  - c13 -- -t13 black
-  - c34 -- -t34 black
-  - Q1.C -- a24 blue
-  - Q1.E -- a30 orange
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 yellow [h10]
+  - AD.1- -- -t15 black
+  - AD.V+ -- +t17 red
+  - AD.GND -- -t20 black
+  - AD.2- -- -t21 black
+  - AD.2+ -- a38 green
+  - +t18 -- a18 red
+  - a19 -- -t19 black
+  - +t30 -- a30 red
+  - a28 -- -t28 black
 ```
 
-- 列 9 が分圧の中点 (ベース)、列 24 がコレクタ、列 30 がエミッタ。
-  Q1 の足からは名前 (`Q1.C` `Q1.E`) で配線し、同じ穴を 2 度挿さないようにしている
-- Cin の + (9 列側) がベースの直流電位、Cout の + (24 列側) がコレクタの直流電位
+- 列 22 がベース (分圧の中点)、列 23 がコレクタ、列 24 がエミッタ。
+  R1・R2・Cin はベースの列、RC・Cout はコレクタの列、RE はエミッタの列に直に挿し、
+  同じ穴を 2 度挿さないように行を分けている
+- Cin の + (22 列側) がベースの直流電位、Cout の + (23 列側) がコレクタの直流電位
   (どちらも 0 V より高いので、電解コンデンサの + はそちら向き)
 
 ## 計器の設定

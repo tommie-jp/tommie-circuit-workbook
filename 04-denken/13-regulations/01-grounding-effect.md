@@ -61,31 +61,32 @@ wires:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  Rleak: resistor a3 a6 1000
-  Rbody: resistor a9 a13 1000
-  S1: switch b16 b19
-  Rground: resistor a22 a25 100
+  Rleak: resistor e3 e7 1000
+  Rbody: resistor c15 c19 1000
+  S1: switch e15 e20
+  Rground: resistor b20 b24 100
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [V+, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.V+ -- b3 red
-  - a6 -- c9 orange [h8]
-  - c9 -- c16 orange [h12]
-  - c19 -- c22 orange [h20]
-  - AD.GND -- c13 black [h30]
-  - d13 -- d25 black [h30]
-  - AD.1+ -- d9 orange
-  - AD.1- -- d13 black [h27]
-  - AD.2+ -- c3 orange [h29]
-  - AD.2- -- c6 black [h29]
+  - AD.V+ -- a3 red
+  - AD.GND -- -t5 black
+  - AD.1+ -- a7 orange
+  - AD.1- -- -t9 black
+  - AD.2+ -- a11 blue
+  - AD.2- -- a15 white
+  - c3 -- c11 red
+  - b7 -- b15 orange
+  - a19 -- -t19 black
+  - a24 -- -t24 black
 ```
 
-- Rleak (3〜6 列)、Rbody (9〜13 列) が直列。S1 + Rground (16〜25 列) は
-  9 列 (人体側の節点) から分かれて 25 列 (GND) へ戻る、Rbody と並列の枝。
-  S1 を挿すと接地ありになる
+- Rleak (3〜7 列)、Rbody (15〜19 列) が直列。7 列 (人体側の節点) は橙の線で
+  15 列へ、3 列 (V+) は赤の線で 11 列へ延ばし、AD の足の並びどおりに左から挿す
+- S1 + Rground (15〜24 列) は 15 列 (人体側の節点) から分かれて 24 列から
+  GND (青レール) へ戻る、Rbody と並列の枝。S1 を挿すと接地ありになる
 - CH1 (1+/1−) が Rbody の両端 (人体電圧)、CH2 (2+/2−) が Rleak の両端
 
 ## 計器の設定

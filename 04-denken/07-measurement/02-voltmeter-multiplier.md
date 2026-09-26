@@ -49,23 +49,22 @@ style:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  Rg: resistor c5 c9 1k
-  Rm: resistor c15 c19 9k1
+  Rg: resistor c5 c10 1k
+  Rm: resistor e10 e16 9k1
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [V+, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.V+ -- +t5 red
+  - AD.V+ -- +t4 red
   - +t5 -- a5 red
-  - a9 -- a15 green
-  - a19 -- -t19 black
-  - AD.GND -- -t2 black
-  - AD.1+ -- a5 red [h8]
-  - AD.1- -- a9 green [h8]
-  - AD.2+ -- a5 red [h10]
-  - AD.2- -- -t20 black
+  - AD.GND -- -t6 black
+  - AD.1+ -- +t8 red
+  - AD.1- -- a10 green
+  - AD.2+ -- +t12 red
+  - AD.2- -- -t14 black
+  - a16 -- -t16 black
 ```
 
 - Rg (1 kΩ) が電圧計の中身、Rm (9.1 kΩ、表記は `9k1`) が倍率器

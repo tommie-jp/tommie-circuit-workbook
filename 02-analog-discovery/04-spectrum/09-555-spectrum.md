@@ -53,33 +53,30 @@ CH1 (`1+`) で OUT (3 番) をそのまま Spectrum に送る。
 
 ```breadboard
 title: 図2 ブレッドボードで 555 を組む
-board: full
+board: half
 parts:
-  Ra: resistor a1 a2 1k
-  Rb: resistor c2 c3 10k
-  Ct: capacitor d3 d4 68n
-  Ccv: capacitor a6 a7 10n
   U1: dip8 @ e10 NE555
+  Ra: resistor +t11 b11 1k
+  Rb: resistor c11 c12 10k
+  Ct: capacitor i11 -b11 68n
+  Ccv: capacitor b13 -t13 10n
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, 1+, 1-]
+    pins: [GND, V+, 1+, 1-]
 wires:
-  - AD.V+ -- +t1 red
-  - AD.GND -- -t1 black
-  - a1 -- +t2 red
-  - e4 -- -t2 black
-  - a7 -- -t3 black
-  - U1.8 -- +t3 yellow
-  - U1.4 -- +t4 yellow
-  - U1.1 -- -t4 black
-  - U1.7 -- b2 orange
-  - U1.2 -- e3 orange
-  - U1.6 -- b3 orange
-  - U1.5 -- b6 green
-  - U1.3 -- AD.1+ yellow
-  - AD.1- -- -t8 black
+  - AD.V+ -- +t8 red
+  - AD.GND -- -t3 black
+  - +t1 -- +b1 red
+  - -t2 -- -b2 black
+  - a10 -- +t10 red
+  - d12 -- g11 purple
+  - j10 -- -b10 black
+  - j13 -- +b13 red
+  - i12 -- i16 yellow
+  - AD.1+ -- g16 orange
+  - AD.1- -- -t18 black
 ```
 
 2-8 の配線から 4017 (U2) を外しただけ。Ra・Rb・Ct が発振の CR 網、Ccv は 5 番

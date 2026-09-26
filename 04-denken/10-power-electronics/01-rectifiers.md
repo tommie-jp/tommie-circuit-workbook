@@ -61,46 +61,51 @@ wires:
 title: 図2 半波整流のブレッドボード
 board: half
 parts:
-  D1: diode a5(A) a10(K) 1N4148
-  RL1: resistor c10 c15 1500
+  D1: diode c4(A) c9(K) 1N4148
+  RL1: resistor e9 e14 1500
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-]
 wires:
-  - AD.W1 -- b5 yellow
-  - AD.GND -- b15 black
-  - AD.1+ -- b10 orange
-  - AD.1- -- b15 black [h22]
+  - AD.W1 -- a4 yellow
+  - AD.GND -- -t6 black
+  - AD.1+ -- a9 orange
+  - AD.1- -- -t11 black
+  - a14 -- -t14 black
 ```
 
 ```breadboard
 title: 図3 全波整流 (ブリッジ) のブレッドボード
 board: half
 parts:
-  D2: diode a5(A) a12(K) 1N4148
-  D3: diode c9(A) c12(K) 1N4148
-  D4: diode e16(A) e5(K) 1N4148
-  D5: diode d16(A) d9(K) 1N4148
-  RL2: resistor b12 b16 1500
+  D2: diode c4(A) c12(K) 1N4148
+  D3: diode -t12(A) a12(K) 1N4148
+  D4: diode g18(A) g4(K) 1N4148
+  D5: diode a18(A) -t18(K) 1N4148
+  RL2: resistor d12 d18 1500
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [W1, GND, 2+, 2-]
 wires:
-  - AD.W1 -- b5 yellow
-  - AD.GND -- b9 black
-  - AD.2+ -- d12 orange
-  - AD.2- -- c16 black
+  - AD.W1 -- a4 yellow
+  - AD.GND -- -t8 black
+  - AD.2+ -- b12 orange
+  - AD.2- -- b18 blue
+  - e4 -- f4 yellow
+  - e18 -- f18 blue
 ```
 
-- 半波整流 (図2) は D1 と RL1 だけ。CH1 (1+/1−) は RL1 の両端 (13・18 列)
-- 全波整流 (図3) は D2〜D5 の 4 本でブリッジを組む。5 列が AC の一方 (W1)、
-  9 列が AC の他方 (GND)、12 列が正、16 列が負。RL2 (12・16 列) が正負の間の
-  負荷。D4・D5 は列を逆に挿す (アノードが 16 列側)
-- CH2 (2+/2−) は RL2 の両端 (12 列側が正、16 列側が負) にあてる
+- 半波整流 (図2) は D1 と RL1 だけ。CH1 (1+/1−) は RL1 の両端 (9 列と青レール)
+- 全波整流 (図3) は D2〜D5 の 4 本でブリッジを組む。4 列が AC の一方 (W1)、
+  青レール (GND) が AC の他方、12 列が正、18 列が負。RL2 (12・18 列) が正負の間の
+  負荷。D3 (アノードが青レール、カソードが 12 列) と D5 (アノードが 18 列、
+  カソードが青レール) はレールと a 行の間に立てて挿す。D4 は下のブロックに挿し、
+  4 列・18 列を溝をまたぐ短い線で上下つなぐ
+- CH2 (2+/2−) は RL2 の両端 (12 列側が正、18 列側が負) にあてる
 
 ## 計器の設定
 

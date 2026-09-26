@@ -52,26 +52,26 @@ title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
   Rref: resistor c5 c10 1k
-  Rdut: resistor c15 c20 1k
+  Rdut: resistor d10 d14 1k
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [W1, 1+, 1-, 2+, 2-, GND]
 wires:
   - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 orange [h5]
-  - a10 -- a15 blue
-  - AD.1- -- b10 green [h5]
-  - AD.2+ -- b15 white [h5]
-  - AD.2- -- b20 gray [h5]
-  - a20 -- -t20 black
-  - AD.GND -- -t3 black
+  - AD.1+ -- b5 orange [h10]
+  - AD.1- -- a10 green
+  - AD.2+ -- b10 white [h10]
+  - AD.2- -- b14 gray
+  - a14 -- -t14 black
+  - AD.GND -- -t17 black
 ```
 
-- 5 列が W1 の節点、10=15 列が Rref と R<sub>DUT</sub> の中点、20 列が GND
-- 1+ (橙) と W1 (黄) は同じ 5 列に挿すので、半列ずらして重ねない ([h5])。
-  1−・2+・2− も同じ理由でずらしてある
+- 5 列が W1 の節点、10 列が Rref と R<sub>DUT</sub> の中点 (同じ列なので行が違ってもつながる)、
+  14 列が GND
+- 1+ (橙) と W1 (黄) は同じ 5 列に挿すので、1+ は半列右から回して重ねない ([h10])。
+  10 列の 1− と 2+ も同じ
 - R<sub>DUT</sub> は今回は既知の 1 kΩ。ほかの部品に差し替えれば同じ配線でその Z を測れる
 
 ## 計器の設定

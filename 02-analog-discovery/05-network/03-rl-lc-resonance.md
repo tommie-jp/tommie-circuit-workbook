@@ -49,27 +49,25 @@ title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
   L1: inductor/axial c5 c10 10m
-  C1: capacitor c12 c17 100n
-  S1: switch e12 e17
-  R1: resistor c19 c24 100
+  C1: capacitor d10 d15 100n
+  S1: switch b10 b15
+  R1: resistor c15 c19 100
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [GND, W1, 1+, 1-, 2+, 2-]
 wires:
-  - AD.GND -- -t2 black
+  - AD.GND -- -t3 black
   - AD.W1 -- a5 yellow
   - AD.1+ -- b5 orange [h10]
-  - AD.1- -- -t8 black
-  - a10 -- a12 green
-  - a17 -- a19 green
-  - AD.2+ -- b19 blue [h10]
-  - AD.2- -- -t22 black
-  - a24 -- -t24 black
+  - AD.1- -- -t10 black
+  - AD.2+ -- a15 blue
+  - AD.2- -- -t17 black
+  - a19 -- -t19 black
 ```
 
-S1 は C1 (12〜17 列) と**同じ 2 列**の別の行 (d 行) に挿すだけで並列になる
+S1 は C1 (10〜15 列) と**同じ 2 列**の別の行 (b 行) に挿すだけで並列になる
 (同じ列は内部でつながっているため)。
 
 ## 計器の設定

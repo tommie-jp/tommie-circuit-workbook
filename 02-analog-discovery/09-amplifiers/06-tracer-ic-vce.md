@@ -58,9 +58,9 @@ wires:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  Rb: resistor c5 c10 220k
-  Q1: transistor h9(B) h10(C) h11(E) 2SC1815
-  Rs: resistor d15 d20 100
+  Rb: resistor g6 g10 220k
+  Q1: transistor h10(B) h11(C) h12(E) 2SC1815
+  Rs: resistor c5 c11 100
   AD:
     type: device
     at: top
@@ -68,21 +68,24 @@ parts:
     pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
 wires:
   - AD.V+ -- +t2 red
-  - b5 -- +t5 red
   - AD.GND -- -t3 black
-  - -t25 -- -b25 black
-  - b10 -- g9 orange
-  - AD.W1 -- a15 yellow
-  - AD.1+ -- b15 orange [h5]
-  - c20 -- g10 gray
-  - AD.1- -- e20 white [h5]
-  - AD.2+ -- b20 purple [h5]
-  - AD.2- -- -t18 black
-  - i11 -- -b11 black
+  - AD.W1 -- a5 yellow [h-10]
+  - AD.1+ -- b5 orange [h10]
+  - AD.1- -- a11 white
+  - AD.2+ -- b11 purple [h10]
+  - AD.2- -- -t13 black
+  - e11 -- f11 gray
+  - j6 -- +b6 red
+  - g12 -- g14 black
+  - j14 -- -b14 black
+  - +t16 -- +b16 red
+  - -t17 -- -b17 black
 ```
 
-- Q1 の並びは平らな面を左に見て B・C・E (9-1 と同じ 2SC1815)。ベース (Rb 経由)、
-  コレクタ (Rs・W1 経由)、エミッタ (GND) の 3 本を橙・灰の線で上ブロックへ渡す
+- Q1 の並びは平らな面を左に見て B・C・E (9-1 と同じ 2SC1815)。Q1 (h10〜h12) と
+  Rb (g6〜g10、電源側を +b へ) は下ブロックに置き、コレクタ (11 列) だけを溝越しの
+  灰の線 (`e11 -- f11`) で上ブロックの Rs へ渡す。エミッタ (12 列) は `g12 -- g14` で
+  横へ逃がしてから −b へ落とす
 - Rb を差し替えるたびに、その先の配線はそのまま (220 k → 470 k → 100 k の
   順に挿し替えるだけでよい)
 

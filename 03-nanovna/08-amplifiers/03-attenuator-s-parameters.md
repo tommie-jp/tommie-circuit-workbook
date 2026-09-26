@@ -57,22 +57,23 @@ title: 図2 perfboard に組む (端面 SMA 2 つ)
 parts:
   J1: sma/female-edge e1 f0
   R1: resistor e3 g3 100
-  R2: resistor e4 e6 68
-  R3: resistor e7 g7 100
+  R2: resistor e5 e7 68
+  R3: resistor e9 g9 100
   J2: sma/female-edge e16 f17
 wires:
   - e1 -- e3
-  - e3 -- e4
-  - e6 -- e7
-  - e7 -- e16
+  - e3 -- e5
+  - e7 -- e9
+  - e9 -- e16
   - f0 -- f2 black
   - f2 -- h2 black
   - h2 -- h3 black
   - h3 -- g3 black
-  - h3 -- h7 black
-  - h7 -- g7 black
-  - h7 -- h15 black
-  - h15 -- f17 black
+  - h3 -- h9 black
+  - h9 -- g9 black
+  - h9 -- h15 black
+  - f17 -- f15 black
+  - f15 -- h15 black
 ```
 
 ## 掃引の設定

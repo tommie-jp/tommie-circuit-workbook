@@ -28,27 +28,28 @@ MOSFET を高い周波数でオン・オフし、コイルとコンデンサで�
 title: 図1 降圧チョッパ
 style:
   standard: jis
+  pitch: 1.2
 parts:
-  Vin: vsource c1 l1 5
-  D1: schottky h3 c3 1N5819
-  L1: inductor h5 f5 1m
-  Q1: nmos-e j5
-  Vg: square l3 k3 l=$\mathrm{PWM}$
-  Cout: ecap c7 f7 10u
-  RL: resistor f9 c9 100
-  M1: voltmeter c11 f11 l=$\mathrm{CH1}$
-  G1: ground l1
+  Vin: vsource b1 i1 5
+  D1: schottky f3 b3 1N5819
+  L1: inductor f5 d5 1m
+  Q1: nmos-e g5
+  Vg: square i3 h3 l=$\mathrm{PWM}$
+  Cout: ecap b7 d7 10u
+  RL: resistor d10 b10 100
+  M1: voltmeter b13 d13 l=$\mathrm{CH1}$
+  G1: ground i1
 wires:
-  - c1 -- c3 -- c7 -- c9 -- c11
-  - f5 -- f7 -- f9 -- f11
-  - h3 -- h5
-  - h5 -- Q1.D
-  - Q1.G -| k3
-  - Q1.S |- l5
-  - l1 -- l3 -- l5
+  - b1 -- b3 -- b7 -- b10 -- b13
+  - d5 -- d7 -- d10 -- d13
+  - f3 -- f5
+  - f5 -- Q1.D
+  - Q1.G -| h3
+  - Q1.S |- i5
+  - i1 -- i3 -- i5
 notes:
-  - text b7 blue: P (Vin の +)
-  - text g8 blue: X
+  - text a8 blue: P (Vin の +)
+  - text e9 blue: X
 ```
 
 - Vin は DC 5 V (AD の Supplies か電池)。Vg は AD の Wavegen で作る PWM
@@ -69,37 +70,44 @@ notes:
 
 ```breadboard
 title: 図2 ブレッドボードと Analog Discovery
-# 下の赤レール (+b) = 電源 (5 V) の +、青レール (-b) = GND。電源は AD の Supplies か電池
+# 上の赤レール (+t) = 電源 (5 V) の + (節点 P)、青レール (-t) = GND。電源は AD の Supplies (V+)
 board: half
 parts:
-  Q1: transistor h5(S) h6(G) h7(D) 2N7000
-  D1: schottky f7(A) f9(K) 1N5819
-  L1: inductor/axial g7 g12 1m
-  Cout: capacitor/electrolytic i15(+) i12(-) 10u
-  RL: resistor j12 j15 100
+  Q1: transistor c5(S) c6(G) c7(D) 2N7000
+  D1: schottky c9(A) c13(K) 1N5819
+  L1: inductor/axial g9 g17 1m
+  Cout: capacitor/electrolytic b13(+) b17(-) 10u
+  RL: resistor i17 i13 100
   AD:
     type: device
-    at: bottom
+    at: top
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-]
+    pins: [V+, W1, GND, 1+, 1-]
 wires:
-  - g5 -- -b5 black
-  - g9 -- +b9 red
-  - g15 -- +b15 red
-  - AD.W1 -- g6 yellow
-  - AD.GND -- -b3 black
-  - AD.1+ -- h15 orange
-  - AD.1- -- h12 black
+  - AD.V+ -- +t2 red
+  - AD.W1 -- a6 yellow
+  - a5 -- -t5 black
+  - AD.GND -- -t8 black
+  - b7 -- b9 green
+  - e9 -- f9 green
+  - a13 -- +t13 red
+  - AD.1+ -- +t15 orange
+  - AD.1- -- a17 blue
+  - e13 -- f13 red
+  - e17 -- f17 blue
 ```
 
+- 電源は AD の Supplies (V+ = 5 V) を上の赤レールへ入れる (電池でもよい)。
+  赤レールがそのまま節点 P になる
 - Q1 (2N7000) は平らな面を手前にして左から S・G・D (5・6・7 列)。S (5 列) を
   青レール (GND) へ、G (6 列) を AD の Wavegen (W1) へ
-- Q1.D (7 列) がスイッチの節点。D1 (ショットキー) の A を同じ 7 列に挿し、K (9 列) を
-  赤レール (+5 V) へ
-- L1 (7→12 列) がスイッチの節点から節点 X (12 列) へ。Cout (+ が 15 列、− が 12 列)
-  と RL (12・15 列) が出力の平滑と負荷で、15 列 (節点 P) を赤レールへつなぐ
-- 出力は GND 基準ではなく、**赤レール (P、15 列) と節点 X (12 列) の間**に出る。
-  CH1 は差動入力なので、1+ を 15 列、1− を 12 列にあてて Vout をそのまま読む
+- Q1.D (7 列) がスイッチの節点。短い線で 9 列へ延ばし、D1 (ショットキー) の A を
+  9 列に、K を 13 列に挿す。13 列は赤レール (+5 V、節点 P) へつなぐ
+- 9 列は溝をまたぐ線で下のブロックへ降ろし、L1 (9→17 列) がスイッチの節点から
+  節点 X (17 列) へ。13 列・17 列も溝をまたいで上下つないであり、Cout (+ が 13 列、
+  − が 17 列、上のブロック) と RL (13・17 列、下のブロック) が出力の平滑と負荷になる
+- 出力は GND 基準ではなく、**赤レール (P、13 列) と節点 X (17 列) の間**に出る。
+  CH1 は差動入力なので、1+ を赤レール、1− を 17 列にあてて Vout をそのまま読む
 
 ## 計器の設定
 

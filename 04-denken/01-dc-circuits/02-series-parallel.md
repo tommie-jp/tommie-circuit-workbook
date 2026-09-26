@@ -87,7 +87,7 @@ wires:
   - BAT.+ -- b5 red
   - b10 -- b12 orange
   - b17 -- -t17 black
-  - BAT.- -- -t2 black
+  - BAT.- -- -t7 black
 notes:
   - text: "R1 の両端 (5・10 列) と R2 の両端 (12・17 列) にテスターの電圧レンジを当てる"
   - text: "共通の電流を読むにはここ (10-12 列の橙の線) を外してテスターの電流レンジを挟む"
@@ -97,8 +97,8 @@ notes:
 title: 図4 並列のブレッドボード
 board: half
 parts:
-  R1: resistor c8 c13 1k
-  R2: resistor c16 c21 2k
+  R1: resistor b14 b19 1k
+  R2: resistor b23 b28 2k
   AM0:
     type: device
     at: top
@@ -118,22 +118,23 @@ parts:
     type: device
     at: top
     label: 電池 9V
-    pins: ["+", "-"]
+    pins: ["-", "+"]
 wires:
-  - BAT.+ -- b3 red
-  - AM0.+ -- c3 orange
-  - AM0.- -- b5 orange
-  - AM1.+ -- c5 orange
-  - AM1.- -- b8 orange
-  - AM2.+ -- d5 orange
-  - AM2.- -- b16 orange
-  - d13 -- -t13 black
-  - d21 -- -t21 black
   - BAT.- -- -t2 black
+  - BAT.+ -- b6 red [h-10]
+  - AM0.+ -- a6 orange
+  - AM0.- -- b12 orange
+  - d12 -- d21 orange
+  - AM1.+ -- e12 orange
+  - AM1.- -- e14 orange
+  - AM2.+ -- e21 orange
+  - AM2.- -- e23 orange
+  - a19 -- -t19 black
+  - a28 -- -t28 black
 ```
 
-- 図4 は 5 列が節点 (電池と AM0 の先)。AM1 を介して R1 が、AM2 を介して R2 が
-  それぞれ GND に落ちる。AM0 が全電流、AM1・AM2 が枝の電流をそのまま示す
+- 図4 は 12 列が節点 (電池と AM0 の先。d 行の橙の線で 21 列へ延ばす)。
+  AM1 を介して R1 が、AM2 を介して R2 がそれぞれ GND に落ちる。AM0 が全電流、AM1・AM2 が枝の電流をそのまま示す
 
 ## 計器の設定
 

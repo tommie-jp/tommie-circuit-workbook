@@ -53,25 +53,24 @@ style:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  Rlim: resistor c5 c9 4k
-  Ra: resistor c12 c16 8R
-  Rx: resistor c19 c23 1k
+  Rlim: resistor c3 c7 4k
+  Ra: resistor e7 e11 8R
+  Rx: resistor c11 c15 1k
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [V+, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.V+ -- +t5 red
-  - +t5 -- a5 red
-  - a9 -- a12 green
-  - a23 -- -t23 black
-  - AD.GND -- -t2 black
-  - a16 -- a19 orange
-  - AD.1+ -- a9 green [h9]
-  - AD.1- -- a16 green [h10]
-  - AD.2+ -- a9 green [h11]
-  - AD.2- -- -t20 black
+  - AD.V+ -- +t4 red
+  - +t3 -- a3 red
+  - AD.GND -- -t5 black
+  - AD.1+ -- a7 green
+  - AD.1- -- a11 green
+  - a15 -- -t15 black
+  - b7 -- b17 orange
+  - AD.2+ -- a17 orange
+  - AD.2- -- -t19 black
 ```
 
 - CH1 (差動) は R_a (8 Ω) の両端で電流を読む。CH2 は R_a + R_x の両端

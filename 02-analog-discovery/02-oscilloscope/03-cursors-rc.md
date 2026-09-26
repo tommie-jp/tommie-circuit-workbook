@@ -40,19 +40,19 @@ CH1 は W1 の出力そのもの (方形波)、CH2 は C1 の両端 (充放電�
 title: 図2 ブレッドボードで RC ローパスを測る
 board: half
 parts:
-  R1: resistor c5 c10 10k
+  R1: resistor c7 c10 10k
   C1: capacitor d10 d15 100n
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [1+, W1, 2+, 1-, GND, 2-]
 wires:
-  - AD.W1 -- a5 yellow
-  - AD.GND -- a15 black
-  - AD.1+ -- b5 yellow
-  - AD.1- -- b15 black
-  - AD.2+ -- b10 yellow
+  - AD.W1 -- b7 yellow
+  - AD.GND -- b15 black
+  - AD.1+ -- a7 orange
+  - AD.1- -- a15 black
+  - AD.2+ -- b10 blue
   - AD.2- -- c15 black
 ```
 

@@ -56,33 +56,29 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードと Analog Discovery
-board: full
+board: half
 parts:
-  Rlim: resistor c5 c9 2k
-  Ra: resistor c12 c16 10
-  Rx: resistor c19 c23 1k
-  SW1: slide-switch e12(1) e13(C) e14(2)
-  Rv: resistor c30 c34 10k
+  Rlim: resistor c3 c7 2k
+  Ra: resistor e7 e11 10
+  Rx: resistor d11 d15 1k
+  SW1: slide-switch e18(1) e19(C) e20(2)
+  Rv: resistor a19 -t19 10k
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [V+, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.V+ -- +t5 red
-  - +t5 -- a5 red
-  - a9 -- a12 green
-  - a16 -- a19 green
-  - a23 -- -t23 black
-  - AD.GND -- -t2 black
-  - SW1.1 -- b9 blue
-  - SW1.2 -- b16 blue
-  - SW1.C -- a30 orange
-  - a34 -- -t34 black
-  - AD.1+ -- d9 green [h9]
-  - AD.1- -- d16 green [h10]
-  - AD.2+ -- b30 orange [h11]
-  - AD.2- -- -t20 black
+  - AD.V+ -- +t4 red
+  - +t3 -- a3 red
+  - AD.GND -- -t5 black
+  - AD.1+ -- a7 green
+  - AD.1- -- a11 green
+  - a15 -- -t15 black
+  - b7 -- b18 blue
+  - c11 -- c20 blue
+  - AD.2+ -- b19 orange
+  - AD.2- -- -t22 black
 ```
 
 - SW1 はスライドスイッチで代用 (1 側が P = 電流計が先、2 側が Q = 電圧計が先)。

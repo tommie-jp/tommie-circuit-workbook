@@ -59,23 +59,26 @@ wires:
 title: 図2 ブレッドボードと Analog Discovery (2 次は開放)
 board: half
 parts:
-  Rs1: resistor a2 a5 4700
-  T1: transformer c5 c8 f5 f8 10kto8
+  Rs1: resistor e3 e7 4700
+  T1: transformer c15 c18 f15 f18 10kto8
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.W1 -- b2 yellow
-  - AD.GND -- b8 black
-  - AD.1+ -- d5 orange
-  - AD.1- -- d8 black
-  - AD.2+ -- c2 blue [h10]
-  - AD.2- -- e5 white [h10]
+  - AD.W1 -- a3 yellow
+  - AD.GND -- -t5 black
+  - AD.1+ -- a7 orange
+  - AD.1- -- -t9 black
+  - AD.2+ -- a11 blue
+  - AD.2- -- a15 white
+  - c3 -- c11 yellow
+  - b7 -- b15 orange
+  - a18 -- -t18 black
 ```
 
-- T1 の 2 次リード (下ブロックの 5 列・8 列) には**何も挿さない**。8-1 の図から
+- T1 の 2 次リード (下ブロックの 15 列・18 列) には**何も挿さない**。8-1 の図から
   RL を抜いただけの形
 - 配線は 8-1 と同じ。Rs1 の値だけ 100 Ω → 4.7 kΩ に変える
 

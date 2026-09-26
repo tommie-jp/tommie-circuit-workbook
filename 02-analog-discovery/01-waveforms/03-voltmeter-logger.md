@@ -42,16 +42,16 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, 1+, 1-]
+    pins: [V+, 1+, 1-, GND]
 wires:
   - AD.V+ -- a5 red
-  - AD.GND -- a15 black
-  - AD.1+ -- b10 yellow
-  - AD.1- -- b15 black
+  - AD.GND -- b15 black
+  - AD.1+ -- b10 orange
+  - AD.1- -- a15 black
 ```
 
 R1 と R2 は 10 列の穴 (c10 / d10) で中点を共有する。CH1 はその中点
-(b10) と GND (b15) から読む。
+(b10) と GND (a15) から読む。
 
 ## 計器の設定
 

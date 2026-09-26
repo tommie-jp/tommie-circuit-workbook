@@ -57,20 +57,20 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, W1, 1+, 1-, 2+, 2-]
+    pins: [GND, W1, 2+, 2-, 1+, 1-]
 wires:
-  - AD.W1 -- a5 yellow
-  - a10 -- a15 green
-  - a17 -- -t17 black
   - AD.GND -- -t2 black
-  - AD.1+ -- a15 green [h10]
-  - AD.1- -- -t18 black
-  - AD.2+ -- a5 yellow [h12]
-  - AD.2- -- a10 green [h12]
+  - AD.W1 -- a5 yellow
+  - AD.2+ -- b5 yellow [h10]
+  - AD.2- -- a10 green
+  - b10 -- b15 green
+  - AD.1+ -- a15 green
+  - a17 -- -t17 black
+  - AD.1- -- -t19 black
 ```
 
 - CH1 (1+/1−) はダイオードの両端 (a15 と GND)。CH2 は R1 の両端の差動
-  (2+ が a5、2− が a10) で、電流の代わりになる
+  (2+ が b5、2− が a10) で、電流の代わりになる
 - ダイオードは**足の長いほうがアノード (A)**。抵抗の側 (15 列) に挿す
 
 ## 計器の設定

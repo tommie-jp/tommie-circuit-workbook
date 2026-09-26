@@ -76,54 +76,60 @@ title: 図2 ブレッドボードと Analog Discovery
 board: full
 parts:
   U1: dip8 @ f5 LM358
-  Rin: resistor h6 h9 10k
+  Rin: resistor h6 h10 10k
   Rf: resistor i6 i5 300k
-  C1: capacitor g5 g16 10n
-  R1: resistor h16 h20 10k
-  C2: capacitor i16 i28 10n
-  R2: resistor h28 h32 10k
-  C3: capacitor g28 g40 10n
-  Rt: resistor h40 h44 10k
-  S1: switch j9 j40
+  C1: capacitor g5 g18 10n
+  R1: resistor i18 i21 10k
+  C2: capacitor h18 h28 10n
+  R2: resistor i28 i31 10k
+  C3: capacitor g28 g38 10n
+  Rt: resistor h38 h41 10k
+  S1: switch f10 f38
   AD:
     type: device
-    at: top
+    at: bottom
     label: Analog Discovery
-    pins: [GND, V+, V-, W1, 1+, 1-, 2+, 2-]
+    pins: [V+, V-, W1, 1+, GND, 1-, 2-, 2+]
 wires:
-  - AD.GND -- -t2 black
-  - -t1 -- -b1 black
-  - AD.V+ -- a5 red
-  - AD.V- -- h8 orange
+  - -b1 -- -t1 black
+  - +b2 -- +t2 red
+  - +t5 -- a5 red
   - a6 -- a7 green
   - a8 -- -t8 black
-  - g7 -- -b7 black
-  - AD.W1 -- i9 yellow
-  - AD.1+ -- g9 orange [h9]
-  - AD.1- -- -t11 black
-  - i20 -- -b20 black
-  - i32 -- -b32 black
-  - i44 -- -b44 black
-  - AD.2+ -- i40 blue
-  - AD.2- -- -t41 black
+  - j7 -- -b7 black
+  - i10 -- i12 yellow
+  - j21 -- -b21 black
+  - j31 -- -b31 black
+  - j41 -- -b41 black
+  - AD.V+ -- +b6 red
+  - AD.V- -- j8 purple
+  - AD.W1 -- j10 yellow
+  - AD.1+ -- j12 orange
+  - AD.GND -- -b14 black
+  - AD.1- -- -b16 black
+  - AD.2- -- -b18 black
+  - AD.2+ -- j38 blue
 ```
 
 - U1 (LM358) は 5-6 と同じ 1 回路目だけを使う配置。1=OUT1 (f5) が R<sub>f</sub> の
   帰還点、2=IN1− (f6) に R<sub>in</sub>・R<sub>f</sub>、3=IN1+ (f7) は GND へ。**使わない側**は
   5-6 と同じくフォロワにして固定 (`a6--a7`、`a8--(-t8)`)
-- IN1+ (g7)・R<sub>1</sub>・R<sub>2</sub> の GND は**下の − レール**に落とす。下の − レールは
-  1 列目の黒線 (`-t1--(-b1)`) で上の − レール (AD.GND) とつなぐ。これが無いと
-  3 つとも GND から浮いてしまう
-- R<sub>in</sub> (6〜9 列) の 9 列側が X (W1 の注入点・CH1・S1)。**R<sub>f</sub> (5〜6 列) は
-  IN1− と OUT1 を結ぶ**帰還抵抗。ここまでは 5-6 と同じ考え方
-- 移相回路は右へ大きく間隔を空けて 1 段ずつ並べる: C1 (5〜16 列) → ノード A
-  (16 列、R1 と C2 がここから分岐) → R1 (16〜20 列、20 列で下レールへ) →
-  C2 (16〜28 列) → ノード B (28 列、R2 と C3 がここから分岐) → R2 (28〜32 列、
-  32 列で下レールへ) → C3 (28〜40 列) → ノード C (40 列)。**同じ列なら
+- AD は下の帯に置いた (つなぐ先のほとんどが下のブロックにあるため)。V+ は下の + レールから
+  2 列目の赤線 (`+b2--(+t2)`) で上の + レールへ渡し、8 番 (`a5`) に入れる
+- IN1+ (j7)・R<sub>1</sub>・R<sub>2</sub>・R<sub>t</sub> の GND と AD の GND・1−・2− は**下の − レール**に落とす。
+  上の − レール (5 番の GND) は 1 列目の黒線 (`-t1--(-b1)`) で下の − レールとつなぐ。
+  これが無いと使わない側の 5 番が GND から浮いてしまう
+- R<sub>in</sub> (6〜10 列) の 10 列側が X (W1 の注入点・CH1・S1)。**R<sub>f</sub> (5〜6 列) は
+  IN1− と OUT1 を結ぶ**帰還抵抗。ここまでは 5-6 と同じ考え方。X には W1 と CH1 の 2 本を
+  挿すので、黄の短い線 (`i10--i12`) で 12 列へ延ばして CH1 (1+) をそちらに挿す
+- 移相回路は右へ間隔を空けて 1 段ずつ並べる: C1 (5〜18 列) → ノード A
+  (18 列、R1 と C2 がここから分岐) → R1 (18〜21 列、21 列で下レールへ) →
+  C2 (18〜28 列) → ノード B (28 列、R2 と C3 がここから分岐) → R2 (28〜31 列、
+  31 列で下レールへ) → C3 (28〜38 列) → ノード C (38 列)。**同じ列なら
   行が違ってもつながる**ので、分岐に配線は要らない
-- S1 (9〜40 列) が帰還路の切れ目。X (9 列) とノード C (40 列) を直接結ぶ
+- S1 (10〜38 列、f 行) が帰還路の切れ目。X (10 列) とノード C (38 列) を直接結ぶ
   1 本。**開いた状態で測定する** (閉じれば自励発振になる)
-- R<sub>t</sub> (40〜44 列、44 列で下レールへ) がノード C の負荷の身代わり
+- R<sub>t</sub> (38〜41 列、41 列で下レールへ) がノード C の負荷の身代わり
   (S1 を閉じて発振させるときは抜く)
 
 ## 計器の設定

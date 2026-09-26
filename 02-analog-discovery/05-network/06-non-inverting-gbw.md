@@ -47,34 +47,42 @@ wires:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  U1: dip8 @ f5 LM358
-  Rin: resistor h6 h9 1k
-  Rf: resistor i6 i5 10k
+  U1: dip8 @ f8 LM358
+  Rin: resistor i9 i4 1k
+  Rf: resistor g9 g8 10k
   AD:
     type: device
-    at: top
+    at: bottom
     label: Analog Discovery
-    pins: [GND, V+, V-, W1, 1+, 1-, 2+, 2-]
+    pins: [2+, 1+, V-, W1, GND, 1-, 2-, V+]
 wires:
-  - AD.GND -- -t2 black
-  - AD.V+ -- a5 red
-  - AD.V- -- h8 orange
-  - AD.W1 -- h7 yellow
-  - AD.1+ -- i7 orange [h10]
-  - AD.1- -- -t11 black
-  - AD.2+ -- j5 blue
-  - AD.2- -- -t12 black
-  - i9 -- -t9 black
-  - a8 -- -t8 black
-  - a6 -- a7 green
+  - -b1 -- -t1 black
+  - j4 -- -b4 black
+  - a9 -- a10 green
+  - a11 -- -t11 black
+  - +t8 -- a8 red
+  - AD.2+ -- j8 blue
+  - AD.1+ -- j10 orange
+  - AD.V- -- j11 purple
+  - i10 -- i12 yellow
+  - AD.W1 -- j12 yellow
+  - AD.GND -- -b14 black
+  - AD.1- -- -b15 black
+  - AD.2- -- -b16 black
+  - AD.V+ -- +b18 red
+  - +b20 -- +t20 red
 ```
 
 - U1 (LM358) は 2 回路入り。使うのは 1 回路目 (1 番 OUT・2 番 IN−・3 番 IN+・
   4 番 V−)、5〜8 番は 8 番が V+、5〜7 番が使わない側の回路 (5 番 IN2+・6 番 IN2−・7 番 OUT2)
 - **使わない側は 7 番 (OUT2) と 6 番 (IN2−) を短絡し、5 番 (IN2+) を GND に落とす**
-  (`a6 -- a7` と `a8 -- -t8`)。フォロワにして入力を固定し、発振や不定動作を防ぐ
+  (`a9 -- a10` と `a11 -- -t11`)。フォロワにして入力を固定し、発振や不定動作を防ぐ
 - 3 番 (IN1+、上の回路図の +) に W1 と CH1、1 番 (OUT1) に CH2、2 番 (IN1−) に
-  R<sub>in</sub>、1 番と 2 番の間に R<sub>f</sub> を渡す
+  R<sub>in</sub>、1 番と 2 番の間に R<sub>f</sub> を渡す。3 番 (10 列) は W1 と CH1 の 2 本を挿すので、
+  黄の短い線 (`i10 -- i12`) で 12 列へ延ばして W1 をそちらに挿す
+- AD は下の帯に置いた (つなぐ先の多くが下のブロックにあるため)。V+ は下の + レールから
+  20 列の赤線で上の + レールへ渡して 8 番 (`a8`) に入れる。GND は下の − レールに落とし、
+  1 列目の黒線 (`-b1 -- -t1`) で上の − レールとつなぐ (5 番の GND はこちら)
 
 ## 計器の設定
 

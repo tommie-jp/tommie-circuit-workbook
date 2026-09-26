@@ -48,18 +48,18 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, 1+, 1-, V-, 2+, 2-]
+    pins: [GND, V+, 1+, 1-, 2+, V-, 2-]
 wires:
-  - AD.V+ -- +t2 red
-  - AD.GND -- -t3 black
+  - AD.V+ -- +t6 red
+  - AD.GND -- -t4 black
   - +t5 -- a5 red
   - a10 -- -t10 black
   - AD.1+ -- +t7 yellow
   - AD.1- -- -t8 black
-  - AD.V- -- a15 orange
+  - AD.V- -- b15 orange
   - a20 -- -t20 black
-  - AD.2+ -- b15 blue [h10]     # 半列ずらして V− の線と重ねない
-  - AD.2- -- -t18 black
+  - AD.2+ -- a15 blue
+  - AD.2- -- -t17 black
 ```
 
 - −5 V は**赤いレールに出さない**。レールの色 (+) と中身 (−) が食い違い、

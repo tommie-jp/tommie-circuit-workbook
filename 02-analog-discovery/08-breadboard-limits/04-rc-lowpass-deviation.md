@@ -60,14 +60,14 @@ parts:
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 white [h5]
-  - a10 -- a15 blue
-  - AD.2+ -- b15 gray [h5]
-  - AD.1- -- -t8 black
+  - AD.W1 -- a5 yellow [h-10]
+  - AD.GND -- -t1 black
+  - AD.1+ -- b5 white [h10]
+  - e10 -- e15 blue
+  - AD.1- -- -t11 black
+  - AD.2+ -- a15 gray
   - AD.2- -- -t18 black
-  - c20 -- -t20 black
-  - AD.GND -- -t3 black
+  - a20 -- -t20 black
 ```
 
 - R1 (10 列) と C1 (15 列) の間を渡す配線が**そのまま 8-2 の「隣の列」**にもなる。

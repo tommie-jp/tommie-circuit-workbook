@@ -67,7 +67,7 @@ wires:
   - AM.+ -- c3 orange
   - AM.- -- b5 orange
   - b10 -- -t10 black
-  - BAT.- -- -t2 black
+  - BAT.- -- -t5 black
 notes:
   - text: "R1 の両端 (5 列・10 列) にテスター (電圧レンジ) を当てる"
 ```

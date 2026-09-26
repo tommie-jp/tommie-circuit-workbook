@@ -49,24 +49,23 @@ title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
   Rref: resistor c5 c10 680
-  Ldut: inductor/axial c15 c20 10mH
+  Ldut: inductor/axial d10 d14 10mH
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [W1, 1+, 1-, 2+, 2-, GND]
 wires:
   - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 orange [h5]
-  - a10 -- a15 blue
-  - AD.1- -- b10 green [h5]
-  - AD.2+ -- b15 white [h5]
-  - AD.2- -- b20 gray [h5]
-  - a20 -- -t20 black
-  - AD.GND -- -t3 black
+  - AD.1+ -- b5 orange [h10]
+  - AD.1- -- a10 green
+  - AD.2+ -- b10 white [h10]
+  - AD.2- -- b14 gray
+  - a14 -- -t14 black
+  - AD.GND -- -t17 black
 ```
 
-配線の考え方は 6-1・6-2 と同じ。10 = 15 列がコイルと Rref の中点。
+配線の考え方は 6-1・6-2 と同じ。10 列がコイルと Rref の中点。
 
 ## 計器の設定
 

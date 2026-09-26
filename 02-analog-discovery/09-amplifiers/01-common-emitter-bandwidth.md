@@ -56,40 +56,40 @@ wires:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  Q1: transistor h9(B) h10(C) h11(E) 2SC1815
-  Rc: resistor d3 d6 1k
-  R1: resistor d25 d20 39k
-  R2: resistor e20 e15 12k
-  Cin: capacitor/ceramic b17 b20 1u
-  Re: resistor j17 j22 220
+  Cin: capacitor/ceramic c16 c20 1u
+  R1: resistor b24 b20 39k
+  Rc: resistor d26 d21 1k
+  Q1: transistor g20(B) g21(C) g22(E) 2SC1815
+  R2: resistor h20 h15 12k
+  Re: resistor h22 h27 220
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
 wires:
-  - AD.V+ -- +t2 red
-  - AD.GND -- -t3 black
-  - c3 -- +t3 red
-  - c25 -- +t25 red
-  - a15 -- -t15 black
-  - i22 -- -b22 black
-  - c6 -- g10 gray
-  - c20 -- g9 orange
-  - i17 -- j11 blue
-  - AD.W1 -- a17 yellow
-  - AD.1+ -- c17 orange
-  - AD.2+ -- b6 gray
-  - AD.1- -- -t8 black
-  - AD.2- -- -t9 black
+  - AD.V+ -- +t12 red
+  - AD.GND -- -t13 black
+  - AD.W1 -- a16 yellow [h-10]
+  - AD.1+ -- b16 orange [h10]
+  - AD.1- -- -t18 black
+  - AD.2+ -- a21 gray
+  - AD.2- -- -t23 black
+  - a24 -- +t24 red
+  - a26 -- +t26 red
+  - e20 -- f20 orange
+  - e21 -- f21 gray
+  - j15 -- -b15 black
+  - j27 -- -b27 black
   - -t28 -- -b28 black
 ```
 
 - `Q1` の実際の足の並びは平らな面を見て E・C・B。図のとおり左から B・C・E
-  (h9・h10・h11) に挿すには**平らな面を奥 (a〜e 側) に向ける**
-- **トランジスタの胴は下ブロックの数列ぶんを占める**ので、分圧・負荷 (R1・R2・Rc・Cin)
-  は上ブロックへ逃がし、橙の線で下ブロックのベース (9 列)・コレクタ (10 列) へ橋渡しする。
-  エミッタ (11 列) だけは下ブロックのまま、青の線で遠い列の Re へ渡す
+  (g20・g21・g22) に挿すには**平らな面を奥 (a〜e 側) に向ける**
+- **トランジスタの胴は下ブロックの数列ぶんを占める**ので、結合・分圧・負荷 (Cin・R1・Rc)
+  は上ブロックに置き、ベース (20 列)・コレクタ (21 列) を溝を跨ぐ短い線
+  (`e20 -- f20`・`e21 -- f21`) で下ブロックの Q1 へ渡す。R2・Re は下ブロックの h 行で
+  Q1 の両脇に置き、GND 側を −b へ落とす (上下の − レールは 29 列で渡す)
 
 ## 計器の設定
 

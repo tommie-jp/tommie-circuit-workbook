@@ -71,43 +71,44 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードと Analog Discovery
-board: full
+board: half
 parts:
-  U1: dip8 @ f10 TL072
-  Rin: resistor c5 c9 10k
-  Rf1: resistor c14 c18 100k
-  R2b: resistor c22 c26 10k
-  R3b: resistor c30 c34 90k
+  U1: dip8 @ f14 r180 TL072
+  Rin: resistor c10 c16 10k
+  Rf1: resistor b16 b17 100k
+  R2b: resistor i11 i15 10k
+  R3b: resistor h15 h16 90k
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, V-, GND, W1, 1+, 1-, 2+, 2-]
+    pins: [V+, GND, W1, 1+, 1-, V-, 2+, 2-]
 wires:
-  - AD.W1 -- a5 yellow
-  - d9 -- U1.2 green
-  - c14 -- U1.2 green
-  - U1.1 -- c18 blue
-  - AD.GND -- U1.3 black
-  - AD.W1 -- U1.5 yellow
-  - c26 -- U1.6 green
-  - c30 -- U1.6 green
-  - U1.7 -- c34 blue
-  - c22 -- -t22 black
-  - AD.GND -- -t20 black
-  - AD.V- -- U1.4 black
-  - AD.V+ -- U1.8 red
-  - AD.1+ -- b5 yellow
-  - AD.1- -- AD.GND black
-  - AD.2+ -- U1.1 blue
-  - AD.2- -- AD.GND black
+  - AD.V+ -- +t6 red
+  - AD.GND -- -t8 black
+  - AD.W1 -- a10 yellow
+  - AD.1+ -- b10 yellow [h10]
+  - AD.1- -- -t12 black
+  - AD.V- -- a14 purple
+  - AD.2+ -- a17 blue
+  - AD.2- -- -t19 black
+  - a15 -- -t15 black
+  - e10 -- f10 yellow
+  - g10 -- g14 yellow
+  - j11 -- -b11 black
+  - j17 -- +b17 red
+  - -t2 -- -b2 black
+  - +t29 -- +b29 red
 notes:
   - text small: TL072 (1 回路目が反転、2 回路目が非反転)。1=OUT1 2=IN1- 3=IN1+ 4=V- 5=IN2+ 6=IN2- 7=OUT2 8=V+
   - text small: 2 回目の測定は AD.2+ を U1.7 (OUT2、非反転側) に挿し替える
 ```
 
-- Rin・Rf1 が 1 回路目 (反転)、R2b・R3b が 2 回路目 (非反転)。配線は足の名前
-  (`U1.2` など) で指しているので、同じ穴を 2 度挿す心配がない
+- Rin・Rf1 が 1 回路目 (反転)、R2b・R3b が 2 回路目 (非反転)。U1 は `r180` で置き、
+  上の段 (e14〜e17) が 4・3・2・1 番 (1 回路目の側)、下の段 (f14〜f17) が 5・6・7・8 番
+  (2 回路目の側)。帰還抵抗 Rf1 (2 番↔1 番) と R3b (6 番↔7 番) は隣り合う列に立てて挿す
+- 入力 (W1) は 10 列。黄色の線で溝を渡り、下の段の g 行で 5 番 (IN2+) へ運ぶ。
+  上の段は −t が GND、下の段は左端の黒い線で −b も GND、右端の赤い線で +b も V+ にしてある
 
 ## 計器の設定
 

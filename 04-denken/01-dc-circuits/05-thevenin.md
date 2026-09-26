@@ -92,12 +92,12 @@ parts:
     pins: ["+", "-"]
 wires:
   - E1.+ -- a5 red
-  - E1.- -- -t3 black
+  - E1.- -- -t7 black
   - a10 -- g10 green
   - g15 -- -b15 black
-  - -b16 -- -t16 black
+  - -b27 -- -t27 black
   - AM.+ -- b17 orange
-  - AM.- -- -t22 black
+  - AM.- -- -b22 black
 notes:
   - text: "S1 (スイッチ、10-12 列)"
   - text: "テスター (mA) を直列に。ここで電流を読む"

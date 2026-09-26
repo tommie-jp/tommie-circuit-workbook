@@ -49,29 +49,29 @@ title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
   R1: resistor c5 c10 1k
-  C1: capacitor a10 a12 100n
-  R2: resistor e10 e15 10k
-  C2: capacitor a15 a17 10n
+  C1: capacitor d10 d13 100n
+  R2: resistor b10 b15 10k
+  C2: capacitor d15 d18 10n
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [GND, W1, 1+, 1-, 2+, 2-]
 wires:
-  - AD.GND -- -t2 black
+  - AD.GND -- -t3 black
   - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 orange [h5]
-  - AD.1- -- -t8 black
-  - a12 -- -t12 black
-  - a17 -- -t17 black
-  - AD.2+ -- b15 blue [h5]
-  - AD.2- -- -t18 black
+  - AD.1+ -- b5 orange [h10]
+  - AD.1- -- -t9 black
+  - a13 -- -t13 black
+  - AD.2+ -- a15 blue
+  - AD.2- -- -t17 black
+  - a18 -- -t18 black
 ```
 
-- R1 (5〜10 列) の出口が 10 列 (ノード A)。**C1 (10〜12 列) はノード A から
+- R1 (5〜10 列) の出口が 10 列 (ノード A)。**C1 (10〜13 列) はノード A から
   GND へ落ちる枝**、R2 (10〜15 列) は同じ 10 列からそのまま 2 段目へ続く
   (列が同じなら行が違ってもつながる)。R2 の出口が 15 列 (ノード B) で、
-  **C2 (15〜17 列) が GND へ落ちる枝**、2+ (CH2) も同じ 15 列から読む
+  **C2 (15〜18 列) が GND へ落ちる枝**、2+ (CH2) も同じ 15 列から読む
 - 1+ (CH1) は 1 段目の入り口 (5 列)、2+ (CH2) は 2 段目の出口 (15 列)
 
 ## 計器の設定

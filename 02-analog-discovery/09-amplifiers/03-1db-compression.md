@@ -23,30 +23,38 @@ title: 図1 LM358 非反転増幅 (9-2 と同じ、利得 11 倍)
 parts:
   AD:
     type: device
-    at: a1
+    at: f2
     label: Analog Discovery
-    pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
-  R1: resistor c3 c6 100k
-  R2: resistor c6 c9 100k
-  Cin: capacitor f3 f6 1u
-  U1: opamp i6 LM358
-  Rf: resistor c14 f14 10k
-  Rg: resistor f14 f17 1k
-  Cg: capacitor f17 i17 10u
-  G1: ground i17
-  G2: ground c9
+    pins: [2+, V+, W1, 1+, 1-, 2-, GND]
+    turn: mirror
+  R1: resistor c11 e11 100k
+  R2: resistor e11 g11 100k
+  Cin: capacitor e6 e8 1u
+  U1: opamp e14d0f0 +up LM358
+  Rf: resistor g17 g13 10k
+  Rg: resistor g13 i13 1k
+  Cg: capacitor i13 k13 10u
+  G1: ground k13
+  G2: ground g11
+  G3: ground h5
 wires:
-  - AD.V+ -| c3
-  - AD.W1 |- f3
-  - f6 -- c6
-  - AD.1+ -| c6
-  - U1.+ |- c6
-  - U1.- |- f14
-  - U1.out |- c14
-  - AD.2+ -| c14
-  - AD.1- -| c9
-  - AD.2- -| c9
-  - AD.GND -| c9
+  - AD.V+ -| c5
+  - c5 -- c11
+  - AD.W1 -| e6
+  - e8 -- e9 -- e11
+  - AD.1+ -| e9
+  - e11 -| U1.+
+  - U1.- -| g13
+  - U1.out -| g17
+  - AD.2+ -| b4
+  - b4 -- b18 -- g18
+  - g17 -- g18
+  - AD.GND -| h4
+  - AD.2- -| h5
+  - AD.1- -| h6
+  - h4 -- h5 -- h6
+style:
+  pitch: 1.2
 ```
 
 9-2 と全く同じ回路 (交流利得 = 1 + Rf/Rg = 11 倍)。振幅だけを変えて何度も測る。
@@ -55,38 +63,41 @@ wires:
 
 ```breadboard
 title: 図2 ブレッドボードと Analog Discovery (9-2 と同じ配置)
-board: full
+board: half
 parts:
-  U1: dip8 @ e5 LM358
-  R1: resistor d35 d30 100k
-  R2: resistor e30 e25 100k
-  Cin: capacitor/ceramic b27 b30 1u
-  Rf: resistor j5 j6 10k
-  Rg: resistor i6 i9 1k
-  Cg: capacitor/electrolytic h9(+) h12(-) 10uF
+  U1: dip8 @ e12 r180 LM358
+  Cin: capacitor/ceramic a5 a8 1u
+  R1: resistor c3 c8 100k
+  R2: resistor d8 d12 100k
+  Rf: resistor h17 h20 10k
+  Rg: resistor i20 i24 1k
+  Cg: capacitor/electrolytic g24(+) g27(-) 10uF
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
 wires:
-  - AD.V+ -- +t2 red
-  - AD.GND -- -t3 black
-  - a5 -- +t5 red
-  - j8 -- -b8 black
-  - c35 -- +t35 red
-  - c25 -- -t25 black
-  - c30 -- g7 orange
-  - AD.W1 -- a27 yellow
-  - AD.1+ -- a30 orange
-  - AD.2+ -- i5 gray
-  - AD.1- -- -t8 black
-  - AD.2- -- -t9 black
-  - i12 -- -b12 black
-  - +t50 -- +b50 red
-  - -t50 -- -b50 black
-  - c6 -- c7 green
-  - a8 -- -t7 black
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t4 black
+  - AD.W1 -- b5 yellow
+  - AD.1+ -- a13 orange
+  - AD.1- -- -t10 black
+  - AD.2+ -- a17 gray
+  - AD.2- -- -t19 black
+  - a3 -- +t3 red
+  - b8 -- b13 orange
+  - a12 -- -t12 black
+  - b15 -- b17 gray
+  - c14 -- c20 green
+  - e17 -- f17 gray
+  - e20 -- f20 green
+  - j12 -- -b12 black
+  - g13 -- g14 green
+  - j15 -- +b15 red
+  - j27 -- -b27 black
+  - +t29 -- +b29 red
+  - -t30 -- -b30 black
 ```
 
 9-2 と同じ配置。9-2 の板をそのまま使い、振幅だけを Wavegen 側で変えていく。

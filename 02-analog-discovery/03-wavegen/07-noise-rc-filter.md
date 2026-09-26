@@ -41,20 +41,20 @@ V1 の記号は正弦だが、実際は Wavegen の Function を **Noise** に�
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  R1: resistor c5 c10 1k
+  R1: resistor c6 c10 1k
   C1: capacitor c15 c20 100n
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, W1, 1+, 1-, 2+, 2-]
+    pins: [GND, 1+, W1, 1-, 2+, 2-]
 wires:
   - AD.GND -- -t2 black
-  - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 orange [h10]
+  - AD.W1 -- a6 yellow
+  - AD.1+ -- b6 orange
   - AD.1- -- -t8 black
-  - a10 -- a15 green
-  - AD.2+ -- b15 blue [h10]
+  - b10 -- b15 green
+  - AD.2+ -- a15 blue
   - AD.2- -- -t18 black
   - a20 -- -t20 black
 ```

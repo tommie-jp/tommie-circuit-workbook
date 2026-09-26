@@ -58,28 +58,33 @@ wires:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  Rline: resistor a3 a6 10
-  Lline: inductor/axial a9 a13 10m
-  S1: switch b9 b13
-  Rload: resistor a16 a20 100
+  Rline: resistor c12 c16 10
+  Lline: inductor/axial g16 g8 10m
+  S1: switch i16 i8
+  Rload: resistor c8 c4 100
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.W1 -- b3 yellow
-  - a6 -- c9 orange [h10]
-  - a13 -- c16 orange [h15]
-  - AD.GND -- c20 black [h30]
-  - AD.1+ -- d16 orange
-  - AD.1- -- d20 black [h27]
-  - AD.2+ -- c3 orange [h29]
-  - AD.2- -- c6 black [h29]
+  - AD.W1 -- a3 yellow
+  - AD.GND -- -t6 black
+  - a4 -- -t4 black
+  - AD.1+ -- a8 orange
+  - AD.1- -- -t10 black
+  - b3 -- b12 yellow
+  - AD.2+ -- a12 yellow
+  - AD.2- -- a16 green
+  - e8 -- f8 orange
+  - e16 -- f16 green
 ```
 
-- Lline (10 mH、9・13 列) と S1 (9・13 列と同じ列、別の穴) は同じ 2 つの列を
-  共有する。S1 を挿すと L が短絡され、抜くと L だけを通る
+- W1 (3 列) は黄の線で 12 列へ延ばし、Rline (12・16 列) の入口にする。16 列と
+  8 列は溝をまたぐ短い線で下のブロックへ降ろしてある
+- Lline (10 mH、下のブロックの 8・16 列) と S1 (同じ 8・16 列、別の穴) は同じ
+  2 つの列を共有する。S1 を挿すと L が短絡され、抜くと L だけを通る
+- 8 列 (受電端) から Rload (100 Ω、4〜8 列) を通って 4 列から青レール (GND) へ戻る
 - CH1 (1+/1−) が Rload の両端 (受電端電圧)、CH2 (2+/2−) が Rline の両端 (線電流)
 
 ## 計器の設定

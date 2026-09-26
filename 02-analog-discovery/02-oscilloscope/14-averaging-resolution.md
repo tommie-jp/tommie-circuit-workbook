@@ -40,19 +40,18 @@ Rs の両端（≈ 9.1 mV、mV の値がそのまま mA の値）。
 title: 図2 ブレッドボードで LED の電流を測る (2-4 と同じ)
 board: half
 parts:
-  R1: resistor c5 c10 330
+  R1: resistor b8 b12 330
   D1: led c12(A) c14(K) red
-  Rs: resistor d14 d18 1R
+  Rs: resistor e14 e18 1R
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, 1+, 1-]
+    pins: [V+, 1+, 1-, GND]
 wires:
-  - AD.V+ -- a5 red
-  - c10 -- d12 orange
-  - AD.1+ -- e14 yellow
-  - c18 -- -t18 black
+  - AD.V+ -- a8 red
+  - AD.1+ -- a14 orange
+  - a18 -- -t18 black
   - AD.1- -- -t20 black
   - AD.GND -- -t22 black
 ```

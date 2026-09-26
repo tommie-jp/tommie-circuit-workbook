@@ -56,14 +56,14 @@ parts:
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 white [h5]
-  - a10 -- a15 blue
-  - AD.2+ -- b15 gray [h5]
-  - AD.1- -- -t8 black
+  - AD.W1 -- a5 yellow [h-10]
+  - AD.GND -- -t1 black
+  - AD.1+ -- b5 white [h10]
+  - e10 -- e15 blue
+  - AD.1- -- -t11 black
+  - AD.2+ -- a15 gray
   - AD.2- -- -t18 black
-  - c20 -- -t20 black
-  - AD.GND -- -t3 black
+  - a20 -- -t20 black
 ```
 
 8-4 と全く同じ配置 (R1 が 5〜10 列、C1 が 15〜20 列)。R1 と C1 の中点を渡す
@@ -75,30 +75,40 @@ wires:
 board: 16x10
 title: 図3 perfboard と Analog Discovery
 parts:
-  R1: resistor c3 c6 10k
-  C1: capacitor/ceramic c8 c11 10p
+  R1: resistor f3 f7 10k
+  C1: capacitor/ceramic f8 f11 10p
   AD:
     type: device
-    at: top
+    at: -c3
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.W1 -- a3
-  - a3 -- c3
-  - AD.1+ -- b3
-  - b3 -- c3
-  - c6 -- c8
-  - AD.2+ -- b8
-  - b8 -- c8
-  - AD.1- -- c11
-  - AD.2- -- c11
-  - AD.GND -- c11
+  - AD.W1 -- a3 yellow
+  - a3 -- d3 yellow
+  - d3 -- f3 yellow
+  - AD.1+ -- a5 white
+  - a5 -- d5 white
+  - d5 -- d3 white
+  - AD.2+ -- a7 gray
+  - a7 -- f7 gray
+  - f7 -- f8 gray
+  - AD.GND -- a4 black
+  - a4 -- b4 black
+  - b4 -- b6 black
+  - AD.1- -- a6 black
+  - a6 -- b6 black
+  - b6 -- b8 black
+  - AD.2- -- a8 black
+  - a8 -- b8 black
+  - b8 -- b11 black
+  - b11 -- f11 black
 ```
 
-- R1 (3〜6 列) と C1 (8〜11 列) の中点をつなぐ配線は 2 穴 (6 列→8 列) だけの
-  最短の 1 本。breadboard のように**長い金属レールと並走する区間が無い**ので、
-  隣に寄生が乗る心配がほとんど無い
-- GND (1−・2−・AD.GND) は全部 C1 のもう一方の足 (11 列) にまとめて配線する。
+- AD の足は板の真上 (3〜8 列) に並べ、それぞれ a 行へまっすぐ降ろす
+- R1 (f 行、3〜7 列) と C1 (f 行、8〜11 列) の中点をつなぐ配線は隣の穴へ渡す
+  (f7 → f8) だけの最短の 1 本。breadboard のように**長い金属レールと並走する区間が
+  無い**ので、隣に寄生が乗る心配がほとんど無い
+- GND (1−・2−・AD.GND) は b 行に束ねて、C1 のもう一方の足 (f11) へまとめて配線する。
   この板は穴どうしが独立しているので、配線を引かない限りどこもつながらない
   (breadboard のような「同じ列は自動でつながる」という前提が無い)
 

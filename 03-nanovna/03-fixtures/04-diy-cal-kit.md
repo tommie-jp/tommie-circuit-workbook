@@ -79,13 +79,15 @@ board:
   slots: on
 title: 図4 Load (50 Ω)
 points:
-  GND: g2
+  GND: g3
 parts:
   J3: sma/female-edge e1 d0 f0
-  R1: resistor e2 g2 50
+  R1: resistor e3 g3 50
 wires:
-  - e1 -- e2
-  - g2 -- f0
+  - e1 -- e3
+  - f0 -- f2 black
+  - f2 -- g2 black
+  - g2 -- g3 black
 ```
 
 - Short は**中心導体からシェルまでの線をできるだけ短く**する。長い線が

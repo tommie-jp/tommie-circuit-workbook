@@ -42,25 +42,25 @@ wires:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  R1: resistor c5 c10 1k
+  R1: resistor c6 c10 1k
   C1: capacitor c15 c20 100n
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, W1, 1+, 1-, 2+, 2-]
+    pins: [GND, 1+, W1, 1-, 2+, 2-]
 wires:
   - AD.GND -- -t2 black
-  - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 orange [h10]
+  - AD.W1 -- a6 yellow
+  - AD.1+ -- b6 orange
   - AD.1- -- -t8 black
-  - a10 -- a15 green
-  - AD.2+ -- b15 blue [h10]
+  - b10 -- b15 green
+  - AD.2+ -- a15 blue
   - AD.2- -- -t18 black
   - a20 -- -t20 black
 ```
 
-- 5 列が入力 (W1 と CH1)、10 列と 15 列を緑のジャンパでつなぎ R1 と C1 を直列にする、
+- 6 列が入力 (W1 と CH1)、10 列と 15 列を緑のジャンパでつなぎ R1 と C1 を直列にする、
   20 列が C1 の GND 側。CH2 (2+) は 15 列 (C1 の上側 = 出力) に挿す
 - CH1・CH2 の − 側 (1−・2−) と AD の GND は同じ青いレールにまとめる
 

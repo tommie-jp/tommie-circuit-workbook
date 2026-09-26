@@ -58,14 +58,14 @@ parts:
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 orange [h5]
-  - a10 -- a15 blue
-  - AD.1- -- b10 green [h5]
-  - AD.2+ -- b15 white [h5]
-  - AD.2- -- b20 gray [h5]
+  - AD.W1 -- a5 yellow [h-10]
+  - AD.GND -- -t2 black
+  - AD.1+ -- b5 orange [h10]
+  - e10 -- e15 blue
+  - AD.1- -- a10 green
+  - AD.2+ -- a15 white
+  - AD.2- -- b20 gray
   - a20 -- -t20 black
-  - AD.GND -- -t3 black
 ```
 
 図のインダクタ記号は**測る対象のジャンパ線そのもの**を指す (実物のインダクタは

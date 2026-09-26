@@ -45,19 +45,19 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, W1, W2, 1+, 1-, 2+, 2-]
+    pins: [GND, 1+, W1, 2+, 1-, W2, 2-]
 wires:
   - AD.GND -- -t2 black
-  - AD.W1 -- a5 yellow
+  - AD.W1 -- a7 yellow
   - AD.W2 -- a15 green
-  - AD.1+ -- b5 orange [h10]
-  - AD.1- -- b15 blue [h10]
-  - AD.2+ -- d5 orange
+  - AD.1+ -- b7 orange
+  - AD.1- -- b15 purple
+  - AD.2+ -- c7 blue
   - AD.2- -- -t18 black
 ```
 
-W1 (5 列)・W2 (15 列) をそれぞれ引き出し、`1+`/`1-` をこの 2 本に差動でつなぐ。
-`2+` は W1 と同じ 5 列 (別の穴) から取り、片側読みの比較用にする。
+W1 (7 列)・W2 (15 列) をそれぞれ引き出し、`1+`/`1-` をこの 2 本に差動でつなぐ。
+`2+` は W1 と同じ 7 列 (別の穴) から取り、片側読みの比較用にする。
 
 ## 計器の設定
 

@@ -46,26 +46,25 @@ W1（三角波、1.5 V の振幅・1.5 V のオフセットで 0〜3 V を往復
 title: 図2 ブレッドボードでダイオードの特性を測る
 board: half
 parts:
-  R1: resistor c5 c10 330
+  R1: resistor b8 b12 330
   D1: diode c12(A) c14(K) 1N4148
-  Rs: resistor d14 d18 22
+  Rs: resistor e14 e18 22
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [W1, 1+, 2+, 1-, 2-, GND]
 wires:
-  - AD.W1 -- a5 yellow
-  - c10 -- d12 orange
-  - AD.1+ -- b10 yellow
-  - AD.1- -- -t20 black
-  - AD.2+ -- e14 yellow
+  - AD.W1 -- a8 yellow
+  - AD.1+ -- a12 orange
+  - AD.2+ -- a14 blue
+  - a18 -- -t18 black
+  - AD.1- -- -t19 black
   - AD.2- -- -t20 black
-  - c18 -- -t18 black
   - AD.GND -- -t22 black
 ```
 
-CH1（`1+` / `1-`）は R1 の**先**（10・12 列＝D1 のアノード側）と GND の間——D1 と
+CH1（`1+` / `1-`）は R1 の**先**（12 列＝D1 のアノード側）と GND の間——D1 と
 Rs を合わせた電圧、すなわちダイオードの順電圧にほぼ等しい（Rs は小さいため）。
 CH2（`2+` / `2-`）は Rs の両端（14 列と GND）だけで、電流を mV の値として読む
 （2-4 と同じ考え方）。

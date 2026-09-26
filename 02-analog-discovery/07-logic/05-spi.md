@@ -55,38 +55,39 @@ wires:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  U1: dip16 @ f12 MCP3008
-  R1: resistor a3 a6 10k
-  R2: resistor b6 b9 10k
+  U1: dip16 @ f12 r180 MCP3008
+  R1: resistor b23 b20 10k
+  R2: resistor d20 d24 10k
   AD:
     type: device
-    at: top
+    at: bottom
     label: Analog Discovery
     pins: [V+, GND, DIO0, DIO1, DIO2, DIO3]
 wires:
-  - AD.V+ -- +t2 red
-  - AD.GND -- -t3 black
-  - d3 -- +t3 red
-  - d9 -- -t9 black
-  - d12 -- +t12 red
-  - d13 -- +t13 red
-  - d14 -- -t14 black
-  - d19 -- -t19 black
-  - AD.DIO0 -- a18 yellow
-  - AD.DIO1 -- a17 white
-  - AD.DIO2 -- a16 gray
-  - AD.DIO3 -- a15 purple
-  - c6 -- i12 orange
-  - +t22 -- +b22 red
-  - -t22 -- -b22 black
+  - AD.V+ -- +b9 red
+  - AD.GND -- -b10 black
+  - j12 -- -b12 black
+  - AD.DIO0 -- j13 yellow
+  - AD.DIO1 -- j14 white
+  - AD.DIO2 -- j15 gray
+  - AD.DIO3 -- j16 purple
+  - j17 -- -b17 black
+  - j18 -- +b18 red
+  - j19 -- +b19 red
+  - a19 -- a20 orange
+  - a23 -- +t23 red
+  - a24 -- -t24 black
+  - +t27 -- +b27 red
+  - -t28 -- -b28 black
 ```
 
-- U1 (MCP3008) は下ブロックが 1=CH0 (f12) 〜 8=CH7 (f19)、上ブロックが
-  9=DGND (e19) 〜 16=VDD (e12) (列が逆向きに並ぶ)。**16=VDD (d12)・15=VREF
-  (d13) を +t で 3.3 V へ**、14=AGND (d14)・9=DGND (d19) を -t で GND へ。
-  10=CS̄ (a18)〜13=CLK (a15) を AD の DIO0〜DIO3 へ
-- R1 (a3〜a6)・R2 (b6〜b9) で 3.3 V を分圧。中点 (6 列) を `b6--i12` で
-  1=CH0 (f12、下ブロック) へ渡す
+- U1 (MCP3008) は `r180` で置き、下ブロックに 9=DGND (f12) 〜 16=VDD (f19)、
+  上ブロックに 1=CH0 (e19) 〜 8=CH7 (e12) が並ぶ (列が逆向き)。こうすると
+  デジタル側の足がすべて下ブロックに揃い、板の下に置いた AD から短い線で届く。
+  **16=VDD (j19)・15=VREF (j18) を +b で 3.3 V へ**、14=AGND (j17)・9=DGND (j12)
+  を -b で GND へ。10=CS̄ (j13)〜13=CLK (j16) を AD の DIO0〜DIO3 へ
+- R1 (b20〜b23)・R2 (d20〜d24) で 3.3 V を分圧。中点 (20 列) を `a19 -- a20` で
+  1=CH0 (e19 の列) へ渡す。上下のレールは 27・28 列で渡す
 
 ## 計器の設定
 

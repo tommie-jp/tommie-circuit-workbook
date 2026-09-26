@@ -44,22 +44,21 @@ title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
   R1: resistor c5 c10 100
-  D1: led c12(A) c14(K) red
+  D1: led d10(A) d12(K) red
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, W1, 1+, 1-]
+    pins: [GND, 1+, W1, 1-]
 wires:
   - AD.GND -- -t2 black
   - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 orange [h10]
+  - AD.1+ -- b5 orange
   - AD.1- -- -t8 black
-  - c10 -- c12 green
-  - a14 -- -t14 black
+  - a12 -- -t12 black
 ```
 
-R1 (100 Ω) と LED を直列にして 5〜14 列に組む。CH1 (`1+`) は W1 と同じ 5 列の
+R1 (100 Ω) と LED を直列にして 5〜12 列に組む。CH1 (`1+`) は W1 と同じ 5 列の
 別の穴から取る。
 
 ## 計器の設定

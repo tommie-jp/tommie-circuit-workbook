@@ -53,31 +53,30 @@ style:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  RB: resistor c5 c10 470k
-  RC: resistor d20 d25 1k
+  RB: resistor b10 b15 470k
+  RC: resistor b24 b16 1k
   Q1: transistor e15(B) e16(C) e17(E) 2SC1815
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, 1+, 1-, 2+, 2-]
+    pins: [V+, 1+, GND, 1-, 2-, 2+]
 wires:
-  - AD.V+ -- +t3 red
-  - +t5 -- a5 red
-  - +t20 -- b20 red
-  - a10 -- d15 orange
-  - b25 -- d16 green
+  - AD.V+ -- +t6 red
+  - AD.1+ -- +t8 red
+  - AD.GND -- -t12 black
+  - +t10 -- a10 red
+  - +t24 -- a24 red
   - a17 -- -t17 black
-  - AD.GND -- -t2 black
-  - AD.1+ -- b5 red
-  - AD.1- -- b10 orange
-  - AD.2+ -- c20 red
-  - AD.2- -- c25 green
+  - AD.1- -- a15 orange
+  - AD.2- -- a16 green
+  - AD.2+ -- +t20 red
 ```
 
-- +t (赤レール) が +5 V。R_B・R_C ともここから取る (R_B は 5 列、R_C は 20 列から)
-- CH1 (1+/1−) は R_B の両端の差動 (5 列と 10 列)。CH2 は R_C の両端の差動
-  (20 列と 25 列)。Q1.E (17 列) は -t のレールへ
+- +t (赤レール) が +5 V。R_B・R_C ともここから取る (R_B は 10 列、R_C は 24 列から)。
+  もう片方の足はベース (15 列)・コレクタ (16 列) に直に挿す
+- CH1 (1+/1−) は R_B の両端の差動 (1+ は +t レール、1− は 15 列)。CH2 は R_C の両端の差動
+  (2+ は +t レール、2− は 16 列)。Q1.E (17 列) は -t のレールへ
 
 ## 計器の設定
 

@@ -36,18 +36,18 @@ wires:
 title: 図2 ブレッドボードで LED を V+ に直結する
 board: half
 parts:
-  D1: led c5(A) c8(K) red
+  D1: led d5(A) d8(K) red
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, 1+, 1-]
+    pins: [1+, V+, 1-, GND]
 wires:
-  - AD.V+ -- a5 red
-  - c8 -- -t8 black
-  - AD.GND -- -t10 black
-  - AD.1+ -- b5 yellow
-  - AD.1- -- b8 black
+  - AD.V+ -- b5 red
+  - AD.1+ -- a5 orange
+  - a8 -- -t8 black
+  - AD.1- -- -t10 black
+  - AD.GND -- -t12 black
 ```
 
 CH1（`1+` / `1-`）は LED の両端（順方向電圧）を読む。**Current Limit を設定して

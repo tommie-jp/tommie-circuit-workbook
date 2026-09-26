@@ -27,20 +27,20 @@ board: BB
 title: 図1 太陽電池と可変負荷
 style:
   standard: jis
+  pitch: 1.2
 parts:
   PV1: solar c1 g1 4.5
   Rs: resistor c1 c3 10 i=I
   M2: voltmeter a1 a3 l=$\mathrm{CH2}$
-  VR1: potentiometer c3 g3 1k
-  M1: voltmeter a5 a8 l=$\mathrm{CH1}$
+  VR1: potentiometer c5 g5 1k
+  M1: voltmeter c8 g8 l=$\mathrm{CH1}$
   G1: ground g1
 wires:
   - a1 -- c1
   - a3 -- c3
-  - a5 |- c3
-  - a8 |- g3
-  - g1 -- g3
-  - VR1.w -| g4
+  - c3 -- c5 -- c8
+  - g1 -- g5 -- g8
+  - VR1.w |- g5
 ```
 
 - PV1 (太陽電池、屋内の照明かランプで照らす) の + から Rs (10 Ω、電流検出用の
@@ -59,29 +59,32 @@ parts:
     at: top
     label: 太陽電池パネル 5V
     pins: ["+", "-"]
-  Rs: resistor a5 a9 10
-  VR1: potentiometer a13(1) a14(W) a15(3) 1k
+  Rs: resistor c3 c7 10
+  VR1: potentiometer e14(1) e15(W) e16(3) 1k
   AD:
     type: device
-    at: bottom
+    at: top
     label: Analog Discovery
     pins: [1+, 1-, 2+, 2-]
 wires:
-  - PV1.+ -- b5 red
-  - PV1.- -- -t2 black
-  - c9 -- a13 orange [h11]
-  - -t15 -- a15 black [h30]
-  - -t14 -- b14 black
-  - AD.1+ -- b9 orange
-  - AD.1- -- -t9 black [h27]
-  - AD.2+ -- c5 red [h29]
-  - AD.2- -- d9 orange [h29]
+  - PV1.+ -- a3 red
+  - PV1.- -- -t5 black
+  - AD.1+ -- a7 orange
+  - AD.1- -- -t9 black
+  - AD.2+ -- a11 red
+  - AD.2- -- a14 orange
+  - e3 -- e11 red
+  - b7 -- b14 orange
+  - a15 -- -t15 black
+  - a16 -- -t16 black
 ```
 
 - PV1 (太陽電池パネル) を板の外の機器として描く。Rs (10 Ω) で電流を検出し、
-  VR1 (1 kΩ) の摺動子で負荷を変える。VR1 は 13 列 (端 1) と 14 列 (摺動子) の間を
-  負荷にし、摺動子と 15 列 (端 3) をどちらも GND レールへつなぐ (0〜1 kΩ の
-  可変抵抗になる。両端 13・15 列だけを使うと 1 kΩ 固定になって負荷が変わらない)
+  VR1 (1 kΩ) の摺動子で負荷を変える。VR1 は 14 列 (端 1) と 15 列 (摺動子) の間を
+  負荷にし、摺動子と 16 列 (端 3) をどちらも GND レールへつなぐ (0〜1 kΩ の
+  可変抵抗になる。両端 14・16 列だけを使うと 1 kΩ 固定になって負荷が変わらない)
+- Rs は 3 列 (PV1 の +) と 7 列。3 列は赤の線で 11 列へ、7 列は橙の線で 14 列
+  (VR1 の端 1) へ延ばし、AD の足の並び (1+ 1− 2+ 2−) どおりに左から挿す
 - CH1 (1+/1−) が太陽電池の端子電圧、CH2 (2+/2−) が Rs の両端
 
 ## 計器の設定

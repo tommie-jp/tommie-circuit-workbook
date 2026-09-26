@@ -64,37 +64,38 @@ title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
   U1: dip8/sop @ e5 LM75
-  R1: resistor i5 i2 4.7k
-  R2: resistor j6 j9 4.7k
+  R1: resistor g5 g2 4.7k
+  R2: resistor h6 h9 4.7k
   AD:
     type: device
-    at: top
+    at: bottom
     label: Analog Discovery
     pins: [V+, GND, DIO0, DIO1]
 wires:
-  - AD.V+ -- +t2 red
-  - AD.GND -- -t3 black
+  - AD.V+ -- +b3 red
+  - AD.GND -- -b4 black
+  - AD.DIO0 -- j5 yellow
+  - AD.DIO1 -- j6 white
+  - j2 -- +b2 red
+  - j9 -- +b9 red
+  - j8 -- -b8 black
   - a5 -- +t5 red
   - a6 -- -t6 black
   - a7 -- -t7 black
   - a8 -- -t8 black
-  - j8 -- -b8 black
-  - h2 -- +t2 red
-  - h9 -- +t9 red
-  - AD.DIO0 -- j5 yellow
-  - AD.DIO1 -- i6 white
-  - +t20 -- +b20 red
-  - -t20 -- -b20 black
+  - +t12 -- +b12 red
+  - -t13 -- -b13 black
 ```
 
 **LM75 の実物は SO-8 (または MSOP-8) しか売っていない**ので、ブレッドボードには
 SOP を DIP 化する変換基板 (`dip8/sop`) に載せて挿す (置き方・足番号は DIP と同じ)。
 LM75 (`U1`) は 8=VDD (e5) が左端。1=SDA (f5)・2=SCL (f6) は下ブロックの空いた
-行 (i・j) からプルアップと AD へ。プルアップは R1 (i 行、2〜5 列) と R2 (j 行、
-6〜9 列) を**行をずらして**重ならないように置き、VCC 側 (2・9 列) を h 行から +t へ、
-SDA・SCL 側 (5・6 列) は足と同じ列でつなぐ。
+行からプルアップと AD へ。プルアップは R1 (g 行、2〜5 列) と R2 (h 行、6〜9 列) を
+**行をずらして**重ならないように置き、VCC 側 (2・9 列) を j 行から +b へ、
+SDA・SCL 側 (5・6 列) は足と同じ列でつなぐ。AD は板の下に置き、DIO0・DIO1 を
+j5・j6 へ、V+・GND を下のレールへ入れる。
 5=A2 (e8)・6=A1 (e7)・7=A0 (e6) (上ブロック) は -t で GND に落として 0x48 に固定。
-4=GND (f8) も -b で GND へ。
+4=GND (f8) は -b で GND へ。上下のレールは 12・13 列で渡す。
 
 ## 計器の設定
 

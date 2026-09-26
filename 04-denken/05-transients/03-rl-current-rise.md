@@ -54,25 +54,25 @@ style:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  R1: resistor c5 c10 1k
+  R1: resistor d5 d10 1k
   L1: inductor/axial c15 c20 10m
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, W1, 1+, 1-, 2+, 2-]
+    pins: [GND, W1, 1+, 2+, 2-, 1-]
 wires:
-  - AD.W1 -- a5 yellow
-  - a10 -- a15 green
-  - a20 -- -t20 black
   - AD.GND -- -t2 black
-  - AD.1+ -- a5 yellow [h10]
-  - AD.1- -- -t7 black
-  - AD.2+ -- a5 yellow [h12]
-  - AD.2- -- a10 green [h12]
+  - AD.W1 -- c5 yellow [h-10]
+  - AD.1+ -- a5 yellow
+  - AD.2+ -- b5 yellow [h10]
+  - AD.2- -- a10 green
+  - AD.1- -- -t12 black
+  - b10 -- b15 green
+  - a20 -- -t20 black
 ```
 
-- CH1 (1+) は入力、CH1− は GND。CH2 は R1 の両端の**差動** (2+ が入力側の a5、
+- CH1 (1+) は入力、CH1− は GND。CH2 は R1 の両端の**差動** (2+ が入力側の b5、
   2− が中間点の a10) — GND にはつながない
 - L1 は軸物のインダクタ (`inductor/axial`)。15〜20 列に差し込む
 

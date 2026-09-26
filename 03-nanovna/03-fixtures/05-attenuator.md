@@ -63,21 +63,22 @@ points:
   GND: h2
 parts:
   J1: sma/female-edge e1 d0 f0
-  R1: resistor e3 e5 27
-  R2: resistor f5 h5 36
-  R3: resistor e6 e9 27
+  R1: resistor e3 e6 27
+  R2: resistor e8 g8 36
+  R3: resistor e10 e13 27
   J2: sma/female-edge e16 f17
 wires:
   - e1 -- e3
-  - e5 -- f5
-  - e5 -- e6
-  - e9 -- e16
-  - h5 -- GND black
+  - e6 -- e8
+  - e8 -- e10
+  - e13 -- e16
+  - g8 -- h8 black
+  - h8 -- GND black
   - f0 -- f2 black
   - f2 -- GND black
   - f17 -- f15 black
   - f15 -- h15 black
-  - h15 -- GND black
+  - h15 -- h8 black
 ```
 
 - R1・R3 (27 Ω) は e 行を通る本線に、R2 (36 Ω) はそこから GND へ落ちる

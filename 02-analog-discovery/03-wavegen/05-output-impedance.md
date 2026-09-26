@@ -48,19 +48,18 @@ title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
   S1: switch c5 c8
-  RL: resistor c10 c15 50
+  RL: resistor b8 b13 50
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, W1, 1+, 1-]
+    pins: [GND, 1+, W1, 1-]
 wires:
   - AD.GND -- -t2 black
   - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 orange [h10]
+  - AD.1+ -- b5 orange
   - AD.1- -- -t8 black
-  - c8 -- c10 green
-  - a15 -- -t15 black
+  - a13 -- -t13 black
 ```
 
 S1 を抜いたまま (開放) 測ってから、挿して (短絡) もう一度測る。実際にスイッチを

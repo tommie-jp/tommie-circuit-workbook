@@ -45,9 +45,9 @@ parts:
   MCU: pico2 @ h5
   AD:
     type: device
-    at: top
+    at: bottom
     label: Analog Discovery
-    pins: [GND, DIO0]
+    pins: [DIO0, GND]
 wires:
   - AD.DIO0 -- j5 yellow
   - AD.GND -- j7 black

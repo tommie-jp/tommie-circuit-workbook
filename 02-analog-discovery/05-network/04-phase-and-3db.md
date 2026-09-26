@@ -42,21 +42,20 @@ title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
   R1: resistor c5 c10 2k2
-  C1: capacitor c15 c20 47n
+  C1: capacitor d10 d14 47n
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [GND, W1, 1+, 1-, 2+, 2-]
 wires:
-  - AD.GND -- -t2 black
+  - AD.GND -- -t3 black
   - AD.W1 -- a5 yellow
   - AD.1+ -- b5 orange [h10]
   - AD.1- -- -t8 black
-  - a10 -- a15 green
-  - AD.2+ -- b15 blue [h10]
-  - AD.2- -- -t18 black
-  - a20 -- -t20 black
+  - AD.2+ -- a10 blue
+  - AD.2- -- -t12 black
+  - a14 -- -t14 black
 ```
 
 ## 計器の設定

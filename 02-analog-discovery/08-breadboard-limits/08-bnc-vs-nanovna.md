@@ -24,29 +24,32 @@ title: 図1 SMA スルー治具を AD の BNC 入力へ
 parts:
   AD:
     type: device
-    at: a1
+    at: c2
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
-  J1: sma c5 mirror
-  J2: sma c10
-  G1: ground e5
-  G2: ground e10
-  G3: ground c14
+    pins: [2+, W1, 1+, GND, 1-, 2-]
+    turn: mirror
+  J1: sma h5 mirror
+  J2: sma h12
+  G1: ground i5
+  G2: ground i12
+  G3: ground e5
 notes:
-  - text a5 center: P1
-  - text a10 center: P2
+  - text g5 center: P1
+  - text g12 center: P2
 wires:
-  - AD.W1 -| c3
-  - AD.1+ -| c3
-  - c3 -- J1.1
-  - J1.1 -- J2.1
-  - J2.1 -- c12
-  - AD.2+ -| c12
-  - AD.1- -| c14
-  - AD.2- -| c14
-  - AD.GND -| c14
-  - J1.2 -- e5
-  - J2.2 -- e10
+  - AD.W1 -| h8
+  - AD.1+ -| h7
+  - J1.1 -- h7 -- h8 -- h11 -- J2.1
+  - AD.2+ -| a4
+  - a4 -- a11 -- h11
+  - AD.GND -| e6
+  - AD.1- -| e5
+  - AD.2- -| e4
+  - e4 -- e5 -- e6
+  - J1.2 -- i5
+  - J2.2 -- i12
+style:
+  pitch: 1.2
 ```
 
 - J1 (P1) が入力側、J2 (P2) が出力側。AD の BNC アダプタ経由の配線なので、

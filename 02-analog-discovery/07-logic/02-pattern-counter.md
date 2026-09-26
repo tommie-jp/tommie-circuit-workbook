@@ -53,27 +53,32 @@ parts:
   U2: dip16 @ e12 CD4017
   AD:
     type: device
-    at: top
+    at: bottom
     label: Analog Discovery
     pins: [V+, GND, DIO0, DIO1, DIO2, DIO3]
 wires:
-  - AD.V+ -- +t2 red
-  - AD.GND -- -t3 black
-  - a12 -- +t12 red
-  - a15 -- -t15 black
-  - a13 -- -t13 black
-  - j19 -- -b19 black
-  - AD.DIO0 -- a14 yellow
+  - AD.V+ -- +b8 red
+  - AD.GND -- -b9 black
+  - AD.DIO0 -- j10 yellow
+  - d10 -- g10 yellow
+  - b10 -- b14 yellow
   - AD.DIO1 -- j14 white
   - AD.DIO2 -- j13 gray
   - AD.DIO3 -- j15 purple
-  - -t25 -- -b25 black
+  - j19 -- -b19 black
+  - a12 -- +t12 red
+  - a13 -- -t13 black
+  - a15 -- -t15 black
+  - +t22 -- +b22 red
+  - -t23 -- -b23 black
 ```
 
 16=VDD (e12) の列を +t で電源へ。13=CE・15=MR (上ブロック) を -t で GND に固定、
-8=GND (下ブロック) は -b から -t へつないで共通にする。14=CLK は Pattern の
-DIO0 から直に、3=Q0・2=Q1・4=Q2 は下ブロックの空いた行 (j) から Logic の
-DIO1〜DIO3 へ。
+8=GND (下ブロック) は -b へ。AD は板の下に置き、V+・GND を下のレールへ入れて、
+上のレールとは 22・23 列で渡す。3=Q0・2=Q1・4=Q2 は下ブロックの空いた行 (j) から
+Logic の DIO1〜DIO3 へ。14=CLK (上ブロック) へは Pattern の DIO0 を空いた 10 列
+(j10) に入れ、溝を跨いで (`g10 -- d10`) `b10 -- b14` で渡す (DIP の胴を
+配線で覆わないため)。
 
 ## 計器の設定
 

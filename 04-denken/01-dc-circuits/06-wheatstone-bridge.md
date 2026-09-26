@@ -53,7 +53,7 @@ board: full
 parts:
   R1: resistor c5 c10 1k
   R2: resistor d10 d15 1k
-  Rx: resistor c33 c38 3300
+  Rx: resistor b33 b38 3300
   R3: potentiometer/trimmer d30(1) d33(W) d36(2) 5k
   GA:
     type: device
@@ -66,17 +66,17 @@ parts:
     label: "電池 9V"
     pins: ["+", "-"]
 wires:
-  - BAT.+ -- b5 red
-  - BAT.- -- -t2 black
-  - e15 -- -t15 black
-  - a5 -- a30
-  - e38 -- -t38 black
+  - BAT.+ -- a5 red
+  - BAT.- -- -t8 black
+  - b5 -- b30 red
+  - a15 -- -t15 black
+  - a38 -- -t38 black
   - GA.+ -- e10 orange
   - GA.- -- e33 orange
 ```
 
 - R1・R2 が上段〜中段で節点 B (10 列) を作る。R3 (半固定抵抗器) が節点 A
-  (30 列、電池の + 側から灰色の線で渡る) から分かれて節点 D (R3 のワイパー) を
+  (30 列、電池の + 側から b 行の赤い線で渡る) から分かれて節点 D (R3 のワイパー) を
   作り、Rx が節点 D から GND (38 列) へつながる
 - GA (検流計) は板の外の機器として描き、節点 B (10 列) と節点 D (R3 のワイパー、
   33 列) を直接つなぐ。ここが対角線

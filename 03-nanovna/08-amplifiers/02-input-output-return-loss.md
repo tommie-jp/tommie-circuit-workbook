@@ -89,7 +89,7 @@ parts:
   C1: capacitor e3 e5 100n
   R1: resistor c6 e6 27k
   R2: resistor e8 h8 4k7
-  BAT: battery c2 h2 9
+  BAT: battery c4 c1 9
   Q1: transistor f12 f11 f10
   Rc: resistor c11 e11 270
   Re: resistor g12 i12 620
@@ -102,8 +102,8 @@ wires:
   - e6 -- e8
   - e8 -- e10
   - e10 -- f10
-  - c6 -- c2
-  - c11 -- c2
+  - c4 -- c6 red
+  - c6 -- c11 red
   - e11 -- f11
   - e11 -- e15
   - e17 -- e20
@@ -111,6 +111,8 @@ wires:
   - g12 -- g13
   - i12 -- h12
   - h13 -- h12
+  - c1 -- d1 black
+  - d1 -- d0 black
   - f0 -- f2 black
   - f2 -- h2 black
   - h2 -- h8 black

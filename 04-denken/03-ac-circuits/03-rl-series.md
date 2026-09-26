@@ -62,12 +62,12 @@ parts:
     pins: [GND, W1, "1+", "1-", "2+", "2-"]
 wires:
   - AD.GND -- -t2 black
-  - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 blue [h10]
-  - AD.1- -- a10 orange
-  - AD.2+ -- b10 white [h10]
-  - AD.2- -- a15 green
-  - e15 -- -t15 black
+  - AD.W1 -- b5 yellow [h-10]
+  - AD.1+ -- a5 blue
+  - AD.1- -- b10 orange [h-10]
+  - AD.2+ -- a10 white
+  - AD.2- -- b15 green [h-10]
+  - a15 -- -t15 black
 ```
 
 ## 計器の設定

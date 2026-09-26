@@ -50,25 +50,24 @@ title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
   Rref: resistor c5 c10 33
-  Cdut: capacitor/electrolytic c15(+) c20(-) 4.7uF
+  Cdut: capacitor/electrolytic d10(+) d14(-) 4.7uF
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [W1, 1+, 1-, 2+, 2-, GND]
 wires:
   - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 orange [h5]
-  - a10 -- a15 blue
-  - AD.1- -- b10 green [h5]
-  - AD.2+ -- b15 white [h5]
-  - AD.2- -- b20 gray [h5]
-  - a20 -- -t20 black
-  - AD.GND -- -t3 black
+  - AD.1+ -- b5 orange [h10]
+  - AD.1- -- a10 green
+  - AD.2+ -- b10 white [h10]
+  - AD.2- -- b14 gray
+  - a14 -- -t14 black
+  - AD.GND -- -t17 black
 ```
 
-- 電解コンデンサは**帯のある側 (−) を 20 列 = GND 側**に挿す。逆に挿すと壊れる
-- 配線の考え方は 6-1 と同じ。10 = 15 列が Rref とコンデンサの中点
+- 電解コンデンサは**帯のある側 (−) を 14 列 = GND 側**に挿す。逆に挿すと壊れる
+- 配線の考え方は 6-1 と同じ。10 列が Rref とコンデンサの中点
 
 ## 計器の設定
 

@@ -73,46 +73,53 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードと Analog Discovery
-# 上のブロック (a〜e) に入力の抵抗と Y 結線の負荷、下のブロック (f〜j) に TL071
+# 上のブロック (a〜e) に TL071 の入力側と R1・R2、下のブロック (f〜j) に出力側と Rf
 board: full
 parts:
-  R1: resistor c7 c11 10k
-  R2: resistor c17 c21 10k
-  Rf: resistor c24 c28 10k
-  U1: dip8 @ f13 TL071
+  R1: resistor b17 b21 10k
+  R2: resistor c25 c21 10k
+  Rf: resistor i21 i14 10k
+  U1: dip8 @ f13 r180 TL071
+  R3: resistor b35 b39 1k
+  R4: resistor b42 b46 1k
+  R5: resistor b49 b53 1k
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, V-, GND, W1, W2, 1+, 1-, 2+, 2-]
-  R3: resistor b35 b39 1k
-  R4: resistor b42 b46 1k
-  R5: resistor b49 b53 1k
+    pins: [V+, GND, 1-, 2-, V-, W1, 1+, W2, 2+]
 wires:
-  - AD.W1 -- a7 yellow
-  - AD.W2 -- a17 orange
-  - a11 -- U1.2 green
-  - a21 -- U1.2 green
-  - a24 -- U1.2 green
-  - U1.6 -- a28 blue
-  - AD.GND -- U1.3 black
-  - AD.V- -- U1.4 black
-  - AD.V+ -- U1.7 red
-  - AD.1+ -- b7 yellow
-  - AD.1- -- AD.GND black
-  - AD.2+ -- b17 orange
-  - AD.2- -- AD.GND black
-  - a7 -- b35 yellow
-  - a17 -- b42 orange
-  - a28 -- b49 blue
-  - b39 -- b46 green
-  - b46 -- b53 green
+  - AD.V+ -- +t4 red
+  - AD.GND -- -t6 black
+  - AD.1- -- -t8 black
+  - AD.2- -- -t10 black
+  - AD.V- -- a13 purple
+  - AD.W1 -- c17 yellow [h-10]
+  - AD.1+ -- a17 yellow
+  - AD.W2 -- b25 orange [h-10]
+  - AD.2+ -- a25 orange
+  - a14 -- -t14 black
+  - d15 -- d21 green
+  - e21 -- f21 green
+  - +t2 -- +b2 red
+  - j15 -- +b15 red
+  - e17 -- f17 yellow
+  - g17 -- g35 yellow
+  - f35 -- e35 yellow
+  - e25 -- f25 orange
+  - j25 -- j42 orange
+  - f42 -- e42 orange
+  - h14 -- h49 blue
+  - f49 -- e49 blue
+  - d39 -- d46 -- d53 green
 notes:
   - text small: R3・R4・R5 (各 1k) が Y 結線。b53 (R5 の右) が中性点 N (浮かせたまま)
 ```
 
 - 1 相目 (R3) を b35 の列、2 相目 (R4) を b42 の列、3 相目 (R5) を b49 の列から
-  取り出し、右端 (b53) で 3 本を束ねて中性点 N にする
+  取り出し、d 行の緑の線で 39・46・53 列を束ねて中性点 N (53 列) にする。
+  3 つの相は下の段の g 行 (1 相目)・j 行 (2 相目)・h 行 (3 相目) で右へ運び、
+  短い線で溝を渡って e35・e42・e49 から上の段へ戻す
 - N は GND のレールにはつながない。テスターや AD の 2 番目の入力の − 側を
   N に挿すときは、GND とは別の場所だと確かめてから挿す
 

@@ -59,24 +59,23 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [W1, 1+, 1-, 2+, 2-, GND]
 wires:
   - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 orange [h5]
-  - a10 -- a15 blue
-  - AD.1- -- b10 green [h5]
-  - AD.2+ -- b15 white [h5]
-  - Lant.A -- c15 gray
-  - Lant.B -- c20 gray
-  - AD.2- -- b20 gray [h5]
-  - a20 -- -t20 black
-  - AD.GND -- -t3 black
+  - AD.1+ -- b5 orange [h10]
+  - AD.1- -- a10 green
+  - AD.2+ -- b10 white [h10]
+  - Lant.A -- e10 brown
+  - Lant.B -- e14 brown
+  - AD.2- -- b14 gray
+  - a14 -- -t14 black
+  - AD.GND -- -t17 black
 ```
 
 - バーアンテナは基板に載る 2 本足の部品ではないので、AD と同じ**板の外の
   機器**として下辺 (`at: bottom`) に描いた。2 本の巻線の端 (A・B) をワイヤで
-  15・20 列に渡す
-- 配線の考え方は 6-3 と同じ。10 = 15 列がコイルと Rref の中点
+  10・14 列に渡す
+- 配線の考え方は 6-3 と同じ。10 列がコイルと Rref の中点
 
 ## 計器の設定
 

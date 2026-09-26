@@ -23,39 +23,44 @@ title: 図1 W1・W2 を抵抗で足し合わせて増幅回路へ
 parts:
   AD:
     type: device
-    at: a1
+    at: f2
     label: Analog Discovery
-    pins: [V+, GND, W1, W2, 1+, 1-, 2+, 2-]
-  Rsuma: resistor c4 c7 10k
-  Rsumb: resistor c8 c15 10k
-  Cin: capacitor f8 f11 1u
-  R1: resistor i20 i23 100k
-  R2: resistor i23 i26 100k
-  U1: opamp l35 LM358
-  Rf: resistor i40 i43 10k
-  Rg: resistor i43 i46 1k
-  Cg: capacitor i46 i49 10u
-  G1: ground i49
-  G2: ground i26
+    pins: [2+, V+, W1, W2, 1+, 1-, 2-, GND]
+    turn: mirror
+  Rsuma: resistor e6 e8 10k
+  Rsumb: resistor g10 g8 10k
+  Cin: capacitor e10 e12 1u
+  R1: resistor c14 e14 100k
+  R2: resistor e14 g14 100k
+  U1: opamp e17d0f0 +up LM358
+  Rf: resistor g20 g16 10k
+  Rg: resistor g16 i16 1k
+  Cg: capacitor i16 k16 10u
+  G1: ground k16
+  G2: ground g14
+  G3: ground h5
 wires:
-  - AD.W1 -| c4
-  - AD.W2 -| c15
-  - c7 -- c8
-  - c8 -- f8
-  - f11 -- j11
-  - j11 -- j23
-  - j23 -- i23
-  - AD.V+ -| i20
-  - AD.1+ -| i23
-  - U1.+ |- k23
-  - k23 -- i23
-  - U1.- |- k43
-  - k43 -- i43
-  - U1.out |- i40
-  - AD.2+ -| i40
-  - AD.1- -| i26
-  - AD.2- -| i26
-  - AD.GND -| i26
+  - AD.W1 -| e6
+  - AD.W2 -| g8
+  - e8 -- e10
+  - g10 -- e10
+  - AD.V+ -| c5
+  - c5 -- c14
+  - e12 -- e13 -- e14
+  - AD.1+ -| i7
+  - i7 -- i13 -- e13
+  - e14 -| U1.+
+  - U1.- -| g16
+  - U1.out -| g20
+  - AD.2+ -| b4
+  - b4 -- b21 -- g21
+  - g20 -- g21
+  - AD.GND -| h4
+  - AD.2- -| h5
+  - AD.1- -| h6
+  - h4 -- h5 -- h6
+style:
+  pitch: 1.2
 ```
 
 - Rsuma・Rsumb (各 10 kΩ) が W1・W2 を足し合わせる抵抗。**足し合わせる時点で
@@ -68,51 +73,53 @@ wires:
 
 ```breadboard
 title: 図2 ブレッドボードと Analog Discovery
-board: full
+board: half
 parts:
-  Rsuma: resistor b40 b43 10k
-  Rsumb: resistor c48 c45 10k
-  Cin: capacitor/ceramic b27 b30 1u
-  U1: dip8 @ e5 LM358
-  R1: resistor d35 d30 100k
-  R2: resistor e30 e25 100k
-  Rf: resistor j5 j6 10k
-  Rg: resistor i6 i9 1k
-  Cg: capacitor/electrolytic h9(+) h12(-) 10uF
+  Rsuma: resistor b3 b7 10k
+  Rsumb: resistor d7 d4 10k
+  Cin: capacitor/ceramic a7 a10 1u
+  U1: dip8 @ e14 r180 LM358
+  R1: resistor e13 e10 100k
+  R2: resistor c10 c14 100k
+  Rf: resistor h19 h22 10k
+  Rg: resistor i22 i26 1k
+  Cg: capacitor/electrolytic g26(+) g29(-) 10uF
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [V+, GND, W1, W2, 1+, 1-, 2+, 2-]
 wires:
-  - AD.V+ -- +t2 red
-  - AD.GND -- -t3 black
-  - AD.W1 -- a40 yellow
-  - AD.W2 -- a45 green
-  - d43 -- d48 orange
-  - e48 -- c27 orange
-  - j8 -- -b8 black
-  - c35 -- +t35 red
-  - c25 -- -t25 black
-  - c30 -- g7 orange
-  - a5 -- +t5 red
-  - AD.1+ -- a30 orange
-  - AD.2+ -- i5 gray
-  - AD.1- -- -t8 black
-  - AD.2- -- -t9 black
-  - i12 -- -b12 black
-  - +t50 -- +b50 red
-  - -t50 -- -b50 black
-  - c6 -- c7 green
-  - a8 -- -t7 black
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
+  - AD.W1 -- a3 yellow
+  - AD.W2 -- a4 green
+  - AD.1+ -- a15 orange
+  - AD.1- -- -t12 black
+  - AD.2+ -- a19 gray
+  - AD.2- -- -t21 black
+  - a13 -- +t13 red
+  - a14 -- -t14 black
+  - b10 -- b15 orange
+  - b17 -- b19 gray
+  - c16 -- c22 blue
+  - e19 -- f19 gray
+  - e22 -- f22 blue
+  - j14 -- -b14 black
+  - g15 -- g16 green
+  - j17 -- +b17 red
+  - j29 -- -b29 black
+  - +t30 -- +b30 red
+  - -t1 -- -b1 black
 ```
 
-- Rsuma (W1 側、40 列) と Rsumb (W2 側、45 列) の先 (43 列・48 列) を橙の線で
-  合流させ、27 列 (Cin の左足) へ橋渡しする。ここが 2 つの正弦波を足した節点で、
-  Cin を通って 9-2 と同じバイアス点へ入る
-- 9-2・9-3 の板に Rsuma・Rsumb・その合流の配線だけを、空いている 40〜48 列に足した形
+- Rsuma (W1 側、3 列) と Rsumb (W2 側、4 列) の先を 7 列で合流させる。ここが
+  2 つの正弦波を足した節点で、Cin (7〜10 列) を通って 9-2 と同じバイアス点
+  (10 列、`b10 -- b15` で 3=IN1+ へ) へ入る
+- チップを `r180` で置き、帰還 (Rf・Rg・Cg) を右の下ブロックで組むのは 9-2 と同じ。
+  左に Rsuma・Rsumb を足したぶん、チップを 2 列右 (e14) へずらしてある
 - LM358 の使わない 2 回路目は 9-2 と同じくフォロワにして固定する (7=OUT2 と 6=IN2− を
-  `c6 -- c7` で短絡、5=IN2+ を `a8 -- -t7` で GND へ)
+  `g15 -- g16` で短絡、5=IN2+ を `j14 -- -b14` で GND へ)
 
 ## 計器の設定
 

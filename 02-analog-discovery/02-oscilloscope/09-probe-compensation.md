@@ -58,19 +58,19 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [W1, 1+, 2+, 1-, GND, 2-]
 wires:
   - AD.W1 -- b5 yellow
-  - AD.GND -- b20 black
-  - AD.1+ -- b10 yellow
-  - AD.1- -- c20 black
-  - AD.2+ -- b14 yellow
-  - AD.2- -- d20 black
+  - AD.GND -- -t18 black
+  - AD.1+ -- b10 orange
+  - AD.1- -- -t16 black
+  - AD.2+ -- b14 blue
+  - AD.2- -- -t20 black
 ```
 
 Rs は 5〜10 列の中点が信号源 TP（10 列）。CH1（`1+`）は TP と同じ 10 列（b10）に
 直結。Rp（`a` 行）と Cp（`e` 行）は 10〜14 列で上下に離して並べて並列にし、
-14 列側を CH2（`2+`）へ。GND はすべて 20 列（`a`〜`e` 行のブロック）にまとめる。
+14 列側を CH2（`2+`）へ。GND は `1-`・`2-` とともに上の − レール（16〜20 列）にまとめる。
 
 ## 計器の設定
 

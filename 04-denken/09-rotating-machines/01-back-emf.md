@@ -54,24 +54,31 @@ title: 図2 ブレッドボードとモータ
 # 上の赤レール = 電池 (1〜3本) の+、青レール = GND
 board: half
 parts:
-  S1: switch a3 a6
-  Rs1: resistor a9 a13 10
+  S1: switch c4 c7
+  Rs1: resistor b7 b11 10
+  BAT:
+    type: device
+    at: top
+    label: 電池 1〜3本
+    pins: ["+", "-"]
   MOT:
     type: device
-    at: bottom
+    at: top
     label: DCモータ
     pins: ["+", "-"]
 wires:
-  - +t3 -- a3 red
-  - b6 -- b9 orange
-  - MOT.+ -- d13 orange
-  - -t2 -- MOT.- black
+  - BAT.+ -- +t2 red
+  - BAT.- -- -t3 black
+  - +t4 -- a4 red
+  - MOT.+ -- a11 orange
+  - MOT.- -- -t13 black
 ```
 
 - S1 で電池を入り切りする。Rs1 (10 Ω) はモータの電流を電圧に変えるシャント
-- MOT (モータ) は板の外の機器として描く。+ 側が 13 列 (Rs1 の右) につながる
-- CH1 は 13 列 (モータの+) と GND (青レール) の間、CH2 は Rs1 の両端
-  (9 列と 13 列) にあてる (計器は図に描かず、AD のプローブを直接挿す)
+- 電池 (BAT) とモータ (MOT) は板の外の機器として描く。電池は上の赤・青レールへ、
+  モータの + 側は 11 列 (Rs1 の右)、− 側は青レールにつながる
+- CH1 は 11 列 (モータの+) と GND (青レール) の間、CH2 は Rs1 の両端
+  (7 列と 11 列) にあてる (計器は図に描かず、AD のプローブを直接挿す)
 
 ## 計器の設定
 

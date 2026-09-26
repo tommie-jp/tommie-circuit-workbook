@@ -79,50 +79,57 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードと Analog Discovery
-# 上のブロック: a 行に電源からの引き出し、b 行に線電流のシャント、c 行に元の回路、d・e 行に Δ の 3 辺
+# 上のブロック: TL071 の入力側と R1・R2、右に d 行の線電流シャントと a〜c 行の Δ の 3 辺。下のブロック: 出力側と Rf、g・h・j 行で 3 相を右へ運ぶ
 board: full
 parts:
-  R1: resistor c7 c11 10k
-  R2: resistor c17 c21 10k
-  Rf: resistor c24 c28 10k
-  U1: dip8 @ f13 TL071
+  R1: resistor b17 b21 10k
+  R2: resistor c25 c21 10k
+  Rf: resistor i21 i14 10k
+  U1: dip8 @ f13 r180 TL071
+  RLA: resistor d35 d38 20
+  RLB: resistor d41 d44 20
+  RLC: resistor d53 d56 20
+  RAB: resistor b38 b44 1k
+  RBC: resistor c44 c56 1k
+  RCA: resistor a38 a56 1k
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, V-, GND, W1, W2, 1+, 1-, 2+, 2-]
-  RLA: resistor b35 b38 20
-  RLB: resistor b42 b45 20
-  RLC: resistor b49 b52 20
-  RAB: resistor d38 d45 1k
-  RBC: resistor e45 e52 1k
-  RCA: resistor c38 c52 1k
+    pins: [V+, GND, 1-, 2-, V-, W1, 1+, W2, 2+]
 wires:
-  - AD.W1 -- a7 yellow
-  - AD.W2 -- a17 orange
-  - a11 -- U1.2 green
-  - a21 -- U1.2 green
-  - a24 -- U1.2 green
-  - U1.6 -- a28 blue
-  - AD.GND -- U1.3 black
-  - AD.V- -- U1.4 black
-  - AD.V+ -- U1.7 red
-  - AD.1+ -- b7 yellow
-  - AD.1- -- AD.GND black
-  - AD.2+ -- b17 orange
-  - AD.2- -- AD.GND black
-  - a7 -- a35 yellow
-  - a17 -- a42 orange
-  - a28 -- a49 blue
+  - AD.V+ -- +t4 red
+  - AD.GND -- -t6 black
+  - AD.1- -- -t8 black
+  - AD.2- -- -t10 black
+  - AD.V- -- a13 purple
+  - AD.W1 -- c17 yellow [h-10]
+  - AD.1+ -- a17 yellow
+  - AD.W2 -- b25 orange [h-10]
+  - AD.2+ -- a25 orange
+  - a14 -- -t14 black
+  - d15 -- d21 green
+  - e21 -- f21 green
+  - +t2 -- +b2 red
+  - j15 -- +b15 red
+  - e17 -- f17 yellow
+  - g17 -- g35 yellow
+  - e25 -- f25 orange
+  - j25 -- j41 orange
+  - h14 -- h53 blue
+  - f35 -- e35 yellow
+  - f41 -- e41 orange
+  - f53 -- e53 blue
 notes:
-  - text small: 列 38 が a 点、45 が b 点、52 が c 点 (どれも a〜e 行の同じ列は同じネット)
+  - text small: 列 38 が a 点、44 が b 点、56 が c 点 (どれも a〜e 行の同じ列は同じネット)
 ```
 
-- a35・a42・a49 は AD.W1・AD.W2・U1.6 (3 相目) の列をそのまま延ばしたもの。
-  b 行のシャント (RLA・RLB・RLC) を通って a・b・c の 3 点になる
-- **a〜e 行は同じ列なら同じネット**なので、a 点 (列 38) は RLA (b38)・RAB (d38)・
-  RCA (c38) の 3 つの穴に分かれて出る。別の行の穴を使うのは、実物のブレッドボードで
-  同じ穴に 2 本挿せないため。b 点は列 45、c 点は列 52 も同じ考え方
+- 35・41・53 列は AD.W1・AD.W2・U1.6 (3 相目) を下の段の g・j・h 行で右へ運び、
+  溝を渡る短い線 (e35・e41・e53) で上の段へ戻したもの。
+  d 行のシャント (RLA・RLB・RLC) を通って a・b・c の 3 点になる
+- **a〜e 行は同じ列なら同じネット**なので、a 点 (列 38) は RLA (d38)・RAB (b38)・
+  RCA (a38) の 3 つの穴に分かれて出る。別の行の穴を使うのは、実物のブレッドボードで
+  同じ穴に 2 本挿せないため。b 点は列 44、c 点は列 56 も同じ考え方
 
 ## 計器の設定
 

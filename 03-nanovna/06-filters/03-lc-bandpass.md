@@ -66,35 +66,38 @@ wires:
 
 ```perfboard
 board:
-  size: 20x10
+  size: 24x10
 title: 図2 perfboard に組む (端面 SMA 2 つ)
 parts:
   J1: sma/female-edge e1 f0
   L1: inductor e3 g3 39n
-  C1: capacitor e4 g4 1500p
-  L2: inductor e6 e10 7.5u
-  C2: capacitor e11 e13 7.5p
-  L3: inductor e14 g14 39n
-  C3: capacitor e15 g15 1500p
-  J2: sma/female-edge e20 f21
+  C1: capacitor e5 g5 1500p
+  L2: inductor e8 e12 7.5u
+  C2: capacitor e14 e16 7.5p
+  L3: inductor e18 g18 39n
+  C3: capacitor e20 g20 1500p
+  J2: sma/female-edge e24 f25
 wires:
   - e1 -- e3
-  - e3 -- e4
-  - e4 -- e6
-  - e10 -- e11
-  - e13 -- e14
-  - e14 -- e15
-  - e15 -- e20
-  - g3 -- g4
-  - g14 -- g15
+  - e3 -- e5
+  - e5 -- e8
+  - e12 -- e14
+  - e16 -- e18
+  - e18 -- e20
+  - e20 -- e24
   - f0 -- f2 black
   - f2 -- h2 black
   - h2 -- h3 black
   - h3 -- g3 black
-  - h3 -- h14 black
-  - h14 -- g14 black
-  - h14 -- h19 black
-  - h19 -- f21 black
+  - h3 -- h5 black
+  - h5 -- g5 black
+  - h5 -- h18 black
+  - h18 -- g18 black
+  - h18 -- h20 black
+  - h20 -- g20 black
+  - h20 -- h23 black
+  - f25 -- f23 black
+  - f23 -- h23 black
 ```
 
 - L1/C1 と L3/C3 はそれぞれ g 行で 1 本にまとめてから GND バス (h 行) へ落とす

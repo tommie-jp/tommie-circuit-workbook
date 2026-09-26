@@ -64,19 +64,19 @@ parts:
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.W1 -- a5 yellow
+  - AD.W1 -- a5 yellow [h-10]
   - AD.GND -- -t3 black
-  - AD.1+ -- b5 orange [h5]
-  - AD.1- -- d10 black [h5]
-  - AD.2+ -- b10 purple [h5]
-  - AD.2- -- -t13 black
+  - AD.1+ -- b5 orange [h10]
+  - AD.1- -- a10 black [h-10]
+  - AD.2+ -- b10 purple [h-10]
+  - AD.2- -- -t14 black
   - a11 -- -t11 black
 ```
 
 - Rref の先 (10 列、a〜e) には部品を**わざと何もつながない** (計器の 1− と 2+ だけ)。
   10 列と、GND に落とした隣の 11 列 (同じ a〜e の側。`a11 -- -t11`) だけが、
   板の中で近接している
-- 1− (d10) は Rref の先。CH1 は Rref の両端の電圧 (= 電流 × Rref) を測る
+- 1− (a10) は Rref の先。CH1 は Rref の両端の電圧 (= 電流 × Rref) を測る
 - 11 列から − レールへの黒線 (`a11 -- -t11`) は**抜き差しする線**。抜いた状態
   (11 列は浮き) と挿した状態 (11 列は GND) の 2 回測って差をとる
 - 2+ (10 列) は Rref の先にしかつながっていない。ERC は「他につながっていない」

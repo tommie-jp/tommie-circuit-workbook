@@ -95,7 +95,8 @@ wires:
   - h20 -- h28 black
   - h28 -- f28 black
   - h28 -- h33 black
-  - h33 -- f35 black
+  - f35 -- f33 black
+  - f33 -- h33 black
 ```
 
 - e 行が信号の通り道。4 つのコンデンサの下側の足 (f 行) を h 行の GND バスへ落とす

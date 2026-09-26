@@ -52,9 +52,9 @@ style:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  Rt: resistor c5 c10 1k
+  Rt: resistor c3 c8 1k
   Rg: resistor c15 c19 100
-  Rs: resistor c22 c26 50
+  Rs: resistor e15 e19 50
   AD:
     type: device
     at: top
@@ -62,16 +62,14 @@ parts:
     pins: [V+, GND, 1+, 1-, 2+, 2-]
 wires:
   - AD.V+ -- +t5 red
-  - +t5 -- a5 red
-  - a10 -- a15 green
-  - b15 -- b22 green
+  - +t3 -- a3 red
+  - AD.GND -- -t7 black
+  - AD.1+ -- a8 green
+  - b8 -- b15 green
+  - AD.1- -- -t11 black
+  - AD.2+ -- +t13 red
+  - AD.2- -- a15 blue
   - a19 -- -t19 black
-  - a26 -- -t26 black
-  - AD.GND -- -t2 black
-  - AD.1+ -- d15 green [h8]
-  - AD.1- -- -t20 black
-  - AD.2+ -- b5 red [h9]
-  - AD.2- -- b10 green [h9]
 ```
 
 - Rt (1 kΩ) の先で、Rg (100 Ω、検流計の模型) と Rs (50 Ω、分流器) が並列になる

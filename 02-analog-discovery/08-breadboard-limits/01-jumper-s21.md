@@ -57,14 +57,14 @@ parts:
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.W1 -- a5 yellow
-  - a5 -- a10 orange
-  - AD.1+ -- b5 white [h5]
-  - AD.2+ -- b10 gray [h5]
-  - AD.1- -- -t7 black
-  - AD.2- -- -t12 black
-  - c15 -- -t15 black
+  - AD.W1 -- a5 yellow [h-10]
+  - e5 -- e10 orange
+  - AD.1+ -- b5 white [h10]
+  - AD.2+ -- b10 gray
   - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+  - AD.2- -- -t12 black
+  - a15 -- -t15 black
 ```
 
 - 橙の線 (5 列 → 10 列、約 5 cm) が**測るジャンパそのもの**。ほかの配線は

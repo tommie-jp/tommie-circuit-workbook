@@ -60,35 +60,40 @@ wires:
 title: 図2 ブレッドボードと Analog Discovery
 board: full
 parts:
-  R1: resistor c5 c11 10k
-  R2: resistor d11 d20 10k
-  C3: capacitor e11 e13 20n
-  C1: capacitor a5 a14 10n
-  C2: capacitor b14 b20 10n
-  R3: resistor e14 e16 5k
+  R1: resistor c5 c12 10k
+  R2: resistor b12 b20 10k
+  C3: capacitor d12 d14 20n
+  C1: capacitor h5 h12 10n
+  C2: capacitor g12 g20 10n
+  R3: resistor i12 i16 5k
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, W1, 1+, 1-, 2+, 2-]
+    pins: [W1, 1+, GND, 1-, 2+, 2-]
 wires:
-  - AD.GND -- -t2 black
-  - AD.W1 -- b5 yellow
-  - AD.1+ -- d5 orange [h5]
-  - AD.1- -- -t8 black
-  - c13 -- -t13 black
-  - a16 -- -t16 black
-  - AD.2+ -- c20 blue [h5]
+  - AD.GND -- -t10 black
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange [h10]
+  - AD.1- -- -t12 black
+  - AD.2+ -- a20 blue
   - AD.2- -- -t22 black
+  - e5 -- f5 yellow
+  - e20 -- f20 blue
+  - a14 -- -t14 black
+  - j16 -- -b16 black
+  - -t1 -- -b1 black
 ```
 
-- **上の枝**: R1 (5〜11 列、行 c) → ノード A (11 列) → R2 (11〜20 列、行 d)。
-  ノード A から C3 (2C = 20 nF、11〜13 列、行 e) が上の − レール (AD.GND) へ
-- **下の枝**: C1 (5〜14 列、行 a) → ノード B (14 列) → C2 (14〜20 列、行 b)。
-  ノード B から R3 (R/2 = 5 kΩ、14〜16 列、行 e) が上の − レール (AD.GND) へ。**C3 と R3 は
-  同じ行 (e) だが列がずれている (11〜13 と 14〜16) ので別のノードのまま**
-- 入力 (5 列) は R1・C1 の左端が共有、出力 (20 列) は R2・C2 の右端が共有。
-  ノード A (R の中点) とノード B (C の中点) は**別の列**なので互いにつながらない
+- **上の枝 (上のブロック)**: R1 (5〜12 列、行 c) → ノード A (12 列) → R2 (12〜20 列、行 b)。
+  ノード A から C3 (2C = 20 nF、12〜14 列、行 d) が上の − レール (AD.GND) へ
+- **下の枝 (下のブロック)**: C1 (5〜12 列、行 h) → ノード B (12 列) → C2 (12〜20 列、行 g)。
+  ノード B から R3 (R/2 = 5 kΩ、12〜16 列、行 i) が下の − レールへ。下の − レールは
+  1 列目の黒線 (`-t1 -- -b1`) で上の − レール (AD.GND) とつなぐ
+- 入力 (5 列) と出力 (20 列) は、溝をまたぐ短い線 (`e5 -- f5` と `e20 -- f20`) で
+  上下のブロックをつなぎ、R1・C1 の左端と R2・C2 の右端を共有する。
+  ノード A (R の中点) とノード B (C の中点) は同じ 12 列だが、**溝で切れた上下の別の
+  ブロック**にあるので互いにつながらない
 
 ## 計器の設定
 

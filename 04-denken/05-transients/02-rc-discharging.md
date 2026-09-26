@@ -59,14 +59,14 @@ parts:
     label: Analog Discovery
     pins: [GND, W1, 1+, 1-, 2+, 2-]
 wires:
-  - AD.W1 -- a5 yellow
-  - a10 -- a15 green
-  - a20 -- -t20 black
   - AD.GND -- -t2 black
-  - AD.1+ -- a5 yellow [h10]
-  - AD.1- -- -t7 black
-  - AD.2+ -- a15 green [h10]
-  - AD.2- -- -t17 black
+  - AD.W1 -- b5 yellow [h-10]
+  - AD.1+ -- a5 yellow
+  - AD.1- -- -t9 black
+  - b10 -- b15 green
+  - AD.2+ -- a15 green
+  - AD.2- -- -t13 black
+  - a20 -- -t20 black
 ```
 
 - 配線は 5-1 と同じ。Wavegen の設定と、スコープで見る区間 (立ち下がりのあと) だけが違う

@@ -66,35 +66,43 @@ wires:
 title: 図2 ブレッドボードとヒータ
 board: half
 parts:
-  Rfix: resistor a3 a6 10000
-  NTC1: thermistor-ntc b6 b9
-  U1: dip8 @ e10 LM358
-  VR1: potentiometer a16(1) a17(W) a18(3) 10k
-  Rb: resistor h20 h22 4700
-  Q1: transistor h24(B) h25(C) h26(E) 2SC1815
-  Rh: resistor j25 j29 100
+  PWR:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: ["+", "-"]
+  Rfix: resistor d3 d6 10000
+  NTC1: thermistor-ntc a6 -t6
+  VR1: potentiometer e8(1) e9(W) e10(3) 10k
+  U1: dip8 @ e12 r180 LM358
+  Rb: resistor c15 c19 4700
+  Q1: transistor e19(B) e20(C) e21(E) 2SC1815
+  Rh: resistor b20 b25 100
 wires:
+  - PWR.+ -- +t1 red
+  - PWR.- -- -t2 black
   - +t3 -- a3 red
-  - c9 -- -t9 black
-  - a10 -- +t10 red [h30]
-  - g13 -- -t13 black [h30]
-  - c6 -- g12 orange [h20]
-  - a17 -- g11 yellow [h21]
-  - +t16 -- a16 red [h30]
-  - -t18 -- a18 black [h30]
-  - g10 -- h20 blue [h23]
-  - h22 -- h24 blue
-  - i29 -- +t29 red [h30]
-  - i26 -- -b26 black
-  - -t2 -- -b2 black
+  - b6 -- b13 orange
+  - +t8 -- a8 red
+  - c9 -- c14 yellow
+  - a10 -- -t10 black
+  - a12 -- -t12 black
+  - a21 -- -t21 black
+  - +t25 -- a25 red
+  - j15 -- +b15 red
+  - +t29 -- +b29 red
 ```
 
-- U1 (LM358) は 8 ピンの DIP (アンカー e10)。1 番 (OUT1、10 列の下側) を Rb へ、
-  2 番 (IN1−、11 列の下側) を VR1 の摺動子へ、3 番 (IN1+、12 列の下側) を
-  NTC1 と Rfix の分圧点へ、4 番 (V−、13 列の下側) を GND、8 番 (V+、10 列の
-  上側) を +5V に挿す
-- Rb (4.7 kΩ、20〜22 列) が Q1 のベース抵抗。Rh (100 Ω、25〜29 列、セメント抵抗
-  などヒータ役) が Q1 のコレクタ (25 列) から +5V (29 列) への負荷。100 Ω に
+- 電源 5 V (PWR) を上の赤・青レールへ入れる。U1 の V+ (8 番) だけが下のブロックに
+  出るので、右端 (29 列) の赤い線で下の赤レールにも 5 V を渡してある
+- U1 (LM358) は 8 ピンの DIP を 180° 回して置く (アンカー e12、`r180`)。1〜4 番が
+  上側に右から並ぶ。1 番 (OUT1、15 列の上側) を Rb へ、2 番 (IN1−、14 列の上側) を
+  VR1 の摺動子 (9 列) へ、3 番 (IN1+、13 列の上側) を NTC1 と Rfix の分圧点 (6 列) へ、
+  4 番 (V−、12 列の上側) を GND、8 番 (V+、15 列の下側) を +5V に挿す
+- Rfix (3〜6 列) と NTC1 (6 列と青レールの間に立てる) が分圧、VR1 (8〜10 列) の
+  摺動子がしきい値。信号は左から右へ、分圧・しきい値 → U1 → Rb → Q1 → Rh と流れる
+- Rb (4.7 kΩ、15〜19 列) が Q1 のベース抵抗。Rh (100 Ω、20〜25 列、セメント抵抗
+  などヒータ役) が Q1 のコレクタ (20 列) から +5V (25 列) への負荷。100 Ω に
   したのは、2SC1815 の I_C 定格 (150 mA) に対して余裕を持たせるため
   (Rh が小さすぎると、オンのときの電流が定格を超えてしまう)
 

@@ -54,29 +54,31 @@ wires:
 title: 図2 ブレッドボードと Analog Discovery (コンデンサ入り)
 board: half
 parts:
-  D2: diode a5(A) a12(K) 1N4148
-  D3: diode c9(A) c12(K) 1N4148
-  D4: diode e16(A) e5(K) 1N4148
-  D5: diode d16(A) d9(K) 1N4148
-  C1: capacitor/electrolytic b12(+) b16(-) 100u
-  RL: resistor a20 a25 1500
+  D2: diode c4(A) c12(K) 1N4148
+  D3: diode -t12(A) a12(K) 1N4148
+  D4: diode g18(A) g4(K) 1N4148
+  D5: diode a18(A) -t18(K) 1N4148
+  C1: capacitor/electrolytic d12(+) d18(-) 100u
+  RL: resistor i12 i18 1500
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-]
 wires:
-  - AD.W1 -- b5 yellow
-  - AD.GND -- b9 black
-  - AD.1+ -- d12 orange
-  - e12 -- a20 orange [h30]
-  - AD.1- -- c16 black
-  - a16 -- a25 black [h30]
+  - AD.W1 -- a4 yellow
+  - AD.GND -- -t8 black
+  - AD.1+ -- b12 orange
+  - AD.1- -- b18 blue
+  - e4 -- f4 yellow
+  - e12 -- f12 orange
+  - e18 -- f18 blue
 ```
 
-- 10-1 の図3 と同じブリッジ (D2〜D5)。12 列 (+) と 16 列 (−) の間に電解
-  コンデンサ C1 を足し、その先に負荷 RL (20・25 列) をつなぐ
-- CH1 (1+/1−) は 12 列・16 列 (C1 と RL の両端) にあてる
+- 10-1 の図3 と同じブリッジ (D2〜D5)。12 列 (+) と 18 列 (−) の間に電解
+  コンデンサ C1 を足し、負荷 RL は下のブロックの 12・18 列に挿す
+  (12 列・18 列は溝をまたぐ短い線で上下つないである)
+- CH1 (1+/1−) は 12 列・18 列 (C1 と RL の両端) にあてる
 
 ## 計器の設定
 

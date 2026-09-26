@@ -45,26 +45,24 @@ wires:
 title: 図2 ブレッドボードで LM35 を記録する
 board: half
 parts:
-  U1: ic3 f5(+Vs) f6(Vout) f7(GND) LM35
+  U1: ic3 e5(+Vs) e6(Vout) e7(GND) LM35
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, 1+, 1-]
+    pins: [V+, 1+, 1-, GND]
 wires:
-  - AD.V+ -- +t4 red
-  - +t4 -- j5 red
-  - AD.GND -- -t8 black
-  - -t8 -- j7 black
-  - AD.1+ -- i6 yellow
-  - AD.1- -- i7 black
+  - AD.V+ -- a5 red
+  - AD.1+ -- a6 orange
+  - AD.GND -- a7 black
+  - AD.1- -- b7 black
 ```
 
-LM35 は TO-92（`ic3` の既定の姿）で、5〜7 列の `f` 行（下半分のブロック）に足を
-置く。`+Vs`（5 列）を V+ のレールへ、`GND`（7 列）を GND のレールへ、`Vout`
-（6 列）を CH1 の `1+` へつなぐ。**5〜7 列は上半分（`a`〜`e` 行）と下半分
-（`f`〜`j` 行）が別のノードなので**、レールからの配線も `f`〜`j` 側の穴
-（`j5` `i6` `i7`）へ下ろす。`1-` は GND と同じ 7 列の別の穴（`i7`）から取る。
+LM35 は TO-92（`ic3` の既定の姿）で、5〜7 列の `e` 行（上半分のブロック）に足を
+置く。`+Vs`（5 列）を V+ へ、`GND`（7 列）を GND へ、`Vout`（6 列）を CH1 の
+`1+` へつなぐ。**5〜7 列は上半分（`a`〜`e` 行）と下半分（`f`〜`j` 行）が別の
+ノードなので**、Analog Discovery からの配線も `a`〜`e` 側の穴（`a5` `a6` `a7`）
+へ挿す。`1-` は GND と同じ 7 列の別の穴（`b7`）から取る。
 
 ## 計器の設定
 

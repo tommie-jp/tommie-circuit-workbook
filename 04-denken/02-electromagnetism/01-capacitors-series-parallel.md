@@ -85,8 +85,8 @@ parts:
     pins: ["+", "-"]
 wires:
   - BAT.+ -- a3 red
-  - BAT.- -- -t2 black
-  - e20 -- -t20 black
+  - BAT.- -- -t6 black
+  - a20 -- -t20 black
 notes:
   - text: "V1 (電圧レンジ) を C1 の両端 (10・15 列) に当てる"
   - text: "V2 (電圧レンジ) を C2 の両端 (15・20 列) に当てる"

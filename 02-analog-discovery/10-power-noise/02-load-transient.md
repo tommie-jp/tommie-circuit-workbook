@@ -62,54 +62,61 @@ wires:
 
 ```breadboard
 title: 図2 ブレッドボードと Analog Discovery (10-1 に追加負荷を足す)
-board: full
+board: half
 parts:
   ADP:
     type: device
     at: top
     label: AC アダプタ 9V
     pins: ["~1", "~2"]
-  D1: diode/do41 c5(A) c12(K)
-  D2: diode/do41 d8(A) d12(K)
-  D3: diode/do41 e3(A) e5(K)
-  D4: diode/do41 b3(A) b8(K)
-  Rload: resistor j12 j3 1k
-  Csmooth: capacitor/electrolytic i12(+) i3(-) 470uF
-  Radd: resistor f16 f20 470
-  Q1: transistor h22(S) h23(G) h24(D) 2N7000
-  Rg: resistor f28 f23 1k
-  Rgpd: resistor j23 j27 100k
+  D1: diode/do41 c6(A) c10(K)
+  D2: diode/do41 d14(A) d10(K)
+  D3: diode/do41 b3(A) b6(K)
+  D4: diode/do41 b17(A) b14(K)
+  Rload: resistor i10 i6 1k
+  Csmooth: capacitor/electrolytic g10(+) g14(-) 470uF
+  Radd: resistor b30 b26 470
+  Q1: transistor g24(S) g25(G) g26(D) 2N7000
+  Rg: resistor b21 b25 1k
+  Rgpd: resistor d25 d18 100k
   AD:
     type: device
-    at: bottom
+    at: top
     label: Analog Discovery
     pins: [GND, W2, 1+, 1-, 2+, 2-]
 wires:
-  - ADP.~1 -- a5
-  - ADP.~2 -- a8
-  - d3 -- f3
-  - e12 -- g12
-  - h3 -- -b3 black
-  - h12 -- g16
-  - g20 -- g24
-  - i22 -- -b22 black
-  - i27 -- -b27 black
-  - AD.1+ -- f12
-  - AD.1- -- g3
-  - AD.2+ -- g23
-  - AD.2- -- -b6
-  - AD.GND -- -b5
-  - AD.W2 -- g28
+  - ADP.~1 -- a6 orange
+  - ADP.~2 -- a14 yellow
+  - a3 -- -t3 black
+  - a17 -- -t17 black
+  - e10 -- f10 red
+  - a10 -- +t10 red
+  - j14 -- -b14 black
+  - j6 -- -b6 black
+  - -t16 -- -b16 black
+  - a30 -- +t30 red
+  - e24 -- f24 black
+  - e25 -- f25 blue
+  - e26 -- f26 purple
+  - a24 -- -t24 black
+  - a18 -- -t18 black
+  - AD.GND -- -t20 black
+  - AD.W2 -- a21 green
+  - AD.1+ -- +t22 red
+  - AD.1- -- -t23 black
+  - AD.2+ -- a25 blue
+  - AD.2- -- -t27 black
 ```
 
 - Q1 (2N7000) は TO-92、**平らな面を見て左から S・G・D** (01-circuits の
-  2-5 と同じ実物の並び) を 22・23・24 列に挿す。D (24 列) に Radd (16〜20 列)
-  の先 (20 列) を渡し、S (22 列) は下の − レールへ落とす。G (23 列) が Rg
-  (28 列から W2) と Rgpd (27 列から − レール) の節点で、2+ もここで読む
-- 整流部・Rload・Csmooth は 10-1 と同じ配置 (DC+ が 12 列、DC− が 3 列)。
-  DC− (3 列) を下の − レールにつなぎ、AD の GND・2− と Q1 の S をそこへ集める。
-  1+ は DC+ (12 列)、1− は DC− (3 列) で、10-1 と同じ極性
-- Radd と Q1 のぶんだけ下ブロックの右に足す
+  2-5 と同じ実物の並び) を g24・g25・g26 に挿し、3 本とも溝越しの短い線で
+  上ブロックへ上げる。D (26 列) に Radd (26〜30 列、DC+ 側は上の + レールへ) を渡し、
+  S (24 列) は上の − レールへ落とす。G (25 列) が Rg (21 列から W2) と Rgpd
+  (18 列から − レール) の節点で、2+ もここで読む
+- 整流部・Rload・Csmooth は 10-1 と同じ配置 (DC+ が 10 列から上の + レール、DC− が
+  上の − レール)。AD の GND・1−・2− と Q1 の S はその − レールへ集め、1+ は + レールで
+  DC+ を読む。10-1 と同じ極性
+- Radd・Q1・Rg・Rgpd のぶんだけ右 (18〜30 列) に足す
 
 ## 計器の設定
 

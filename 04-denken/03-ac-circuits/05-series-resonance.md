@@ -68,8 +68,8 @@ wires:
   - AD.1+ -- b5 blue [h10]
   - AD.1- -- a10 orange
   - AD.2+ -- b10 white [h10]
-  - AD.2- -- a20 green
-  - e20 -- -t20 black
+  - AD.2- -- b20 green [h-10]
+  - a20 -- -t20 black
 ```
 
 ## 計器の設定

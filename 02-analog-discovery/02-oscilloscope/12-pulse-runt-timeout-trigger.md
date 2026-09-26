@@ -47,24 +47,26 @@ board: half
 parts:
   R1: resistor c5 c10 1k
   SW1: button @ e15
-  R2: resistor j15 j20 330
+  R2: resistor i15 i20 330
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-]
+    pins: [W1, 1+, 1-, GND]
 wires:
   - AD.W1 -- a5 yellow
-  - AD.GND -- a20 black
-  - AD.1+ -- b10 yellow
-  - AD.1- -- b20 black
-  - a10 -- a15 orange
-  - i20 -- a20 black
+  - AD.1+ -- b10 orange
+  - a10 -- a15 purple
+  - AD.1- -- -t18 black
+  - AD.GND -- -t20 black
+  - j20 -- -b20 black
+  - -t25 -- -b25 black
 ```
 
 W1 は 5 列から R1 を通って 10 列へ。CH1 (1+) は R1 の後ろの 10 列で測る。
 SW1（`@ e15`、溝をまたぐタクトスイッチ）の上側（e15 の 15 列）が信号線、下側
-（f15 の 15 列。R2 の左端 j15）が R2 と i20–a20 のジャンパを介して AD.GND へ。ボタンを押すと 10 列（CH1 の節点）が
+（f15 の 15 列。R2 の左端 i15）が R2 を通って下の − レール（j20）へ。下の − レールは
+25 列のジャンパで上の − レールに渡し、AD.GND（と `1-`）につなぐ。ボタンを押すと 10 列（CH1 の節点）が
 330 Ω 経由で GND に引かれる。
 
 ## 計器の設定

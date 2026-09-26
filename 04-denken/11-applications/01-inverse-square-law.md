@@ -58,15 +58,15 @@ parts:
     at: top
     label: 電池 4.5V
     pins: ["+", "-"]
-  R1: resistor a3 a9 150
-  D1: led/5mm b9(A) b12(K)
+  R1: resistor d3 d8 150
+  D1: led/5mm b8(A) b10(K)
   SUP:
     type: device
     at: top
     label: AD Supplies 5V
     pins: ["+", "-"]
-  D2: photodiode f23(A) f20(K)
-  R2: resistor g23 g26 100k
+  D2: photodiode f20(A) e20(K)
+  R2: resistor h20 h24 100k
   AD:
     type: device
     at: bottom
@@ -74,11 +74,12 @@ parts:
     pins: [1+, 1-]
 wires:
   - BAT.+ -- a3 red
-  - BAT.- -- c12 black [h15]
-  - SUP.+ -- g20 red [h30]
-  - SUP.- -- i26 black [h30]
-  - AD.1+ -- h23 orange
-  - AD.1- -- h26 black
+  - BAT.- -- a10 black
+  - SUP.+ -- a20 red
+  - SUP.- -- a24 black
+  - e24 -- f24 black
+  - AD.1+ -- j20 orange
+  - AD.1- -- j24 black
 ```
 
 - 左 (BAT・R1・D1) が発光側。電池 4.5 V を R1 (150 Ω) で電流を決めて LED を光らせる

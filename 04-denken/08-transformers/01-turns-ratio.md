@@ -65,29 +65,34 @@ title: 図2 ブレッドボードと Analog Discovery
 # 上の各列は a〜e が 1 つのネット、f〜j が別のネット。T1 は溝をまたいで 1 次・2 次を配る
 board: half
 parts:
-  Rs1: resistor a2 a5 100
-  T1: transformer c5 c8 f5 f8 10kto8
-  RL: resistor h5 h8 8
+  Rs1: resistor e3 e7 100
+  T1: transformer c15 c18 f15 f18 10kto8
+  RL: resistor h15 h18 8
   AD:
     type: device
     at: top
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.W1 -- b2 yellow
-  - AD.GND -- b8 black
-  - AD.1+ -- d5 orange
-  - AD.1- -- d8 black
-  - AD.2+ -- c2 blue [h10]
-  - AD.2- -- e5 white [h10]
+  - AD.W1 -- a3 yellow
+  - AD.GND -- -t5 black
+  - AD.1+ -- a7 orange
+  - AD.1- -- -t9 black
+  - AD.2+ -- a11 blue
+  - AD.2- -- a15 white
+  - c3 -- c11 yellow
+  - b7 -- b15 orange
+  - a18 -- -t18 black
 ```
 
-- T1 の 1 次リード (10 kΩ側) を 5・8 列の上ブロック、2 次リード (8 Ω側) を同じ
-  5・8 列の下ブロックに挿す。上下は別ネットなので、4 本足がそのまま 1 次・2 次を分ける
-- RL は 5・8 列の下ブロックに挿すだけで T1 の 2 次と並列になる (列でつながる)
-- CH2 (2+/2−) は Rs1 の両端 (2 列と 5 列) にあて、I1 を読む。CH1 (1+/1−) は
-  T1 の 1 次 (5 列と 8 列) にあて、V1 を読む
-- 2 回目は 1+ を g5、1− を g8 (どちらも下ブロックの 5・8 列、RL と同じネット) へ
+- T1 の 1 次リード (10 kΩ側) を 15・18 列の上ブロック、2 次リード (8 Ω側) を同じ
+  15・18 列の下ブロックに挿す。上下は別ネットなので、4 本足がそのまま 1 次・2 次を分ける
+- RL は 15・18 列の下ブロックに挿すだけで T1 の 2 次と並列になる (列でつながる)
+- Rs1 は 3 列と 7 列。3 列 (W1 側) は黄の線で 11 列へ、7 列 (T1 側) は橙の線で
+  15 列 (T1 の 1 次) へ延ばし、AD の足の並びどおりに左から挿せるようにしてある
+- CH2 (2+/2−) は Rs1 の両端 (11 列と 15 列) にあて、I1 を読む。CH1 (1+/1−) は
+  T1 の 1 次 (7 列と − レール) にあて、V1 を読む
+- 2 回目は 1+ を g15、1− を g18 (どちらも下ブロックの 15・18 列、RL と同じネット) へ
   挿し替えて V2 を読む
 
 ## 計器の設定

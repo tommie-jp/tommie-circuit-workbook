@@ -94,7 +94,8 @@ wires:
   - h20 -- h28 black
   - h28 -- f28 black
   - h28 -- h33 black
-  - h33 -- f35 black
+  - f35 -- f33 black
+  - f33 -- h33 black
 ```
 
 ## 掃引の設定

@@ -74,7 +74,8 @@ wires:
   - h3 -- h10 black
   - h10 -- g10 black
   - h10 -- h17 black
-  - h17 -- f19 black
+  - f19 -- f17 black
+  - f17 -- h17 black
 ```
 
 ## 掃引の設定

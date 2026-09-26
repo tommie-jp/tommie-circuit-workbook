@@ -73,50 +73,55 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードと Analog Discovery
-# 上のブロック (a〜e) に入力の抵抗と Y 結線 + 中性線、下のブロック (f〜j) に TL071
+# 上のブロック: TL071 の入力側と R1・R2、右に Y 結線と中性線 RN。下のブロック: 出力側と Rf、g・h・j 行で 3 相を右へ運ぶ
 board: full
 parts:
-  R1: resistor c7 c11 10k
-  R2: resistor c17 c21 10k
-  Rf: resistor c24 c28 10k
-  U1: dip8 @ f13 TL071
-  AD:
-    type: device
-    at: top
-    label: Analog Discovery
-    pins: [V+, V-, GND, W1, W2, 1+, 1-, 2+, 2-]
+  R1: resistor b17 b21 10k
+  R2: resistor c25 c21 10k
+  Rf: resistor i21 i14 10k
+  U1: dip8 @ f13 r180 TL071
   R3: resistor b35 b39 1k
   R4: resistor b42 b46 1k
   R5: resistor b49 b53 1k
   RN: resistor d53 d57 10
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery
+    pins: [V+, GND, 1-, 2-, V-, W1, 2+, W2, 1+]
 wires:
-  - AD.W1 -- a7 yellow
-  - AD.W2 -- a17 orange
-  - a11 -- U1.2 green
-  - a21 -- U1.2 green
-  - a24 -- U1.2 green
-  - U1.6 -- a28 blue
-  - AD.GND -- U1.3 black
-  - AD.V- -- U1.4 black
-  - AD.V+ -- U1.7 red
-  - AD.1+ -- e53 orange
-  - AD.1- -- e57 black
-  - AD.2+ -- b7 yellow
-  - AD.2- -- AD.GND black
-  - d7 -- b35 yellow
-  - b17 -- b42 orange
-  - b28 -- c49 blue
-  - b39 -- b46 green
-  - c46 -- c53 green
-  - c57 -- AD.GND black
+  - AD.V+ -- +t6 red
+  - AD.GND -- -t8 black
+  - AD.1- -- -t10 black
+  - AD.2- -- -t12 black
+  - AD.V- -- a13 purple
+  - AD.W1 -- c17 yellow [h-10]
+  - AD.2+ -- a17 yellow
+  - AD.W2 -- b25 orange [h-10]
+  - a14 -- -t14 black
+  - d15 -- d21 green
+  - e21 -- f21 green
+  - +t2 -- +b2 red
+  - j15 -- +b15 red
+  - e17 -- f17 yellow
+  - g17 -- g35 yellow
+  - e25 -- f25 orange
+  - j25 -- j42 orange
+  - h14 -- h49 blue
+  - f35 -- e35 yellow
+  - f42 -- e42 orange
+  - f49 -- e49 blue
+  - a28 -- a39 -- a46 -- a53 green
+  - AD.1+ -- b28 pink
+  - c57 -- -t57 black
 notes:
-  - text small: R3・R4・R5 が Y 結線。列 53 が中性点 N。RN が N と AD.GND の間
+  - text small: R3・R4・R5 が Y 結線。列 53 が中性点 N。RN が N と GND (−t レール) の間
 ```
 
-- 中性点 N (列 53) から RN (10 Ω) を通って 57 列 (c57) へ、そこから AD.GND へつなぐ。
+- 中性点 N (列 53) から RN (10 Ω) を通って 57 列 (c57) へ、そこから GND レール (−t、AD.GND と同じ) へつなぐ。
   N を GND に直結せず、必ず RN を挟むことで電流を電圧として読める
-- Scope の CH1 は 1+ を N (e53)、1- を RN の GND 側 (e57) に当てて RN の両端を
-  差動で読む。CH2 (2+) は 1 相目 (W1、7 列) につなぐ
+- Scope の CH1 は 1+ を N (a 行の緑の線で 28 列まで延ばした b28)、1- を GND レール
+  (RN の GND 側とつながる) に当てて RN の両端を差動で読む。CH2 (2+) は 1 相目 (W1、17 列) につなぐ
 
 ## 計器の設定
 

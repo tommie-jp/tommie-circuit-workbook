@@ -69,11 +69,11 @@ parts:
     pins: ["+", "-"]
 wires:
   - E1.+ -- c3 red
-  - E1.- -- -t3 black
+  - E1.- -- -t6 black
   - b10 -- b13 orange
   - d13 -- f13 green
   - g20 -- -b20 black
-  - -b21 -- -t21 black
+  - -b27 -- -t27 black
   - E2.+ -- c20 red
   - E2.- -- -t22 black
 notes:

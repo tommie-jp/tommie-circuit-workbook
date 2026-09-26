@@ -113,7 +113,8 @@ wires:
   - h11 -- h19 black
   - h19 -- f19 black
   - h19 -- h25 black
-  - h25 -- f27 black
+  - f27 -- f25 black
+  - f25 -- h25 black
 ```
 
 ## 掃引の設定

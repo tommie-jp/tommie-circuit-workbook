@@ -65,12 +65,12 @@ parts:
     pins: [GND, W1, "2+", "1+", "2-", "1-"]
 wires:
   - AD.GND -- -t2 black
-  - AD.W1 -- a5 yellow
-  - AD.2+ -- b5 blue [h10]
-  - AD.1+ -- a10 orange
-  - AD.2- -- b10 white [h10]
+  - AD.W1 -- b5 yellow [h-10]
+  - AD.2+ -- a5 blue
+  - AD.1+ -- b10 orange [h-10]
+  - AD.2- -- a10 white
   - AD.1- -- -t12 black
-  - d15 -- -t15 black
+  - a15 -- -t15 black
 notes:
   - text: "DUT (10〜15 列)。R (1kΩ)・L (100mH)・C (100nF) を順に挿し替える"
 ```

@@ -57,13 +57,13 @@ parts:
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
 wires:
-  - AD.W1 -- a5 yellow
+  - AD.W1 -- b5 yellow [h-10]
   - AD.GND -- -t3 black
-  - AD.1+ -- b5 orange [h5]
+  - AD.1+ -- a5 orange
   - AD.1- -- -t8 black
-  - AD.2+ -- b6 purple [h5]
+  - AD.2+ -- b6 purple [h10]
   - AD.2- -- -t13 black
-  - c11 -- -t11 black
+  - a11 -- -t11 black
 ```
 
 - 5 列 (加害側) と 6 列 (被害側) は、8-2 (10 列と 11 列) と同じく隣り合った列
