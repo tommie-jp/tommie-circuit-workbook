@@ -70,10 +70,10 @@ parts:
 wires:
   - E1.+ -- c3 red
   - E1.- -- -t3 black
-  - c10 -- c13 orange
-  - c13 -- f13 green
+  - b10 -- b13 orange
+  - d13 -- f13 green
   - g20 -- -b20 black
-  - -b20 -- -t20 black
+  - -b21 -- -t21 black
   - E2.+ -- c20 red
   - E2.- -- -t22 black
 notes:

@@ -66,11 +66,10 @@ parts:
     label: "電池 9V"
     pins: ["+", "-"]
 wires:
-  - BAT.+ -- a5 red
+  - BAT.+ -- b5 red
   - BAT.- -- -t2 black
   - e15 -- -t15 black
   - a5 -- a30
-  - a30 -- c30
   - e38 -- -t38 black
   - GA.+ -- e10 orange
   - GA.- -- e33 orange

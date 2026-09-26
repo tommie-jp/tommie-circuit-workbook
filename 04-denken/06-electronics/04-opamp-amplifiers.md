@@ -85,7 +85,7 @@ parts:
     pins: [V+, V-, GND, W1, 1+, 1-, 2+, 2-]
 wires:
   - AD.W1 -- a5 yellow
-  - c9 -- U1.2 green
+  - d9 -- U1.2 green
   - c14 -- U1.2 green
   - U1.1 -- c18 blue
   - AD.GND -- U1.3 black
@@ -97,7 +97,7 @@ wires:
   - AD.GND -- -t20 black
   - AD.V- -- U1.4 black
   - AD.V+ -- U1.8 red
-  - AD.1+ -- a5 yellow
+  - AD.1+ -- b5 yellow
   - AD.1- -- AD.GND black
   - AD.2+ -- U1.1 blue
   - AD.2- -- AD.GND black

@@ -29,42 +29,53 @@ title: 図1 降圧チョッパ
 style:
   standard: jis
 parts:
-  Vin: vsource c1 g1 5
-  Vg: square a3 a5 l=$\mathrm{PWM}$
-  Q1: nmos-e e5
-  D1: schottky g7 e7 1N5819
-  L1: inductor e9 e13 1m
-  Cout: ecap e15 g15 10u
-  RL: resistor e17 g17 100
-  M1: voltmeter e19 g19 l=$\mathrm{CH1}$
-  G1: ground g1
+  Vin: vsource c1 l1 5
+  D1: schottky h3 c3 1N5819
+  L1: inductor h5 f5 1m
+  Q1: nmos-e j5
+  Vg: square l3 k3 l=$\mathrm{PWM}$
+  Cout: ecap c7 f7 10u
+  RL: resistor f9 c9 100
+  M1: voltmeter c11 f11 l=$\mathrm{CH1}$
+  G1: ground l1
 wires:
-  - c1 |- Q1.D
-  - a5 |- Q1.G
-  - g1 -- g3 -- g5 -- g7 -- g13 -- g15 -- g17 -- g19
-  - a3 -- g3
-  - Q1.S -| e7
-  - e7 -- e9
-  - e13 -- e15 -- e17 -- e19
+  - c1 -- c3 -- c7 -- c9 -- c11
+  - f5 -- f7 -- f9 -- f11
+  - h3 -- h5
+  - h5 -- Q1.D
+  - Q1.G -| k3
+  - Q1.S |- l5
+  - l1 -- l3 -- l5
+notes:
+  - text b7 blue: P (Vin の +)
+  - text g8 blue: X
 ```
 
 - Vin は DC 5 V (AD の Supplies か電池)。Vg は AD の Wavegen で作る PWM
   (方形波、100 kHz、デューティ比 50 %、0〜5 V の振幅)
-- Q1 (2N7000) が高速スイッチ。D1 (1N5819、ショットキー) は Q1 が切れた
-  瞬間にコイルの電流を逃がす還流ダイオード
-- L1 (1 mH) と Cout (10 µF) で平らにならし、RL (100 Ω) が負荷。CH1 は出力を読む
+- Q1 (2N7000、N チャネル) が高速スイッチ。**ソースを GND に置く (ローサイド)** ので、
+  0〜5 V の PWM でそのまま V_GS = 0 V / 5 V になり、確実にオン・オフする。
+  N チャネルを + 側 (ハイサイド) に置くとソースフォロワになり、出力は
+  ゲート電圧 − しきい値 (2 V 前後) までしか上がらず Vout = D × Vin にならない
+- そのかわり負荷 (Cout・RL) は GND 側ではなく **Vin の + 側 (節点 P) と節点 X の
+  間**に置く。Q1 がオンの間は P → 負荷 → L1 → Q1 → GND と流れて L1 に電流を
+  ためる。オフの間は L1 の電流が D1 (1N5819、ショットキー) → P → 負荷 → L1 と
+  回る (還流)。電流の流れ方はふつうの降圧チョッパと同じなので、
+  Vout (P と X の間) = D × Vin がそのまま成り立つ
+- L1 (1 mH) と Cout (10 µF) で平らにならし、RL (100 Ω) が負荷。CH1 は P と X の
+  間の電圧 (出力) を差動で読む
 
 ## 実体配線図
 
 ```breadboard
 title: 図2 ブレッドボードと Analog Discovery
-# 上下の赤レール = 電源 (5 V) の+、青レール = GND。電源は AD の Supplies か電池
+# 下の赤レール (+b) = 電源 (5 V) の +、青レール (-b) = GND。電源は AD の Supplies か電池
 board: half
 parts:
-  Q1: transistor h5(G) h6(D) h7(S) 2N7000
-  D1: schottky f9(A) f7(K) 1N5819
+  Q1: transistor h5(S) h6(G) h7(D) 2N7000
+  D1: schottky f7(A) f9(K) 1N5819
   L1: inductor/axial g7 g12 1m
-  Cout: capacitor/electrolytic i12(+) i15(-) 10u
+  Cout: capacitor/electrolytic i15(+) i12(-) 10u
   RL: resistor j12 j15 100
   AD:
     type: device
@@ -72,20 +83,23 @@ parts:
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-]
 wires:
-  - +b6 -- g6 red
-  - -b9 -- g9 black
-  - -b15 -- g15 black
-  - AD.W1 -- g5 yellow
-  - AD.GND -- h15 black
-  - AD.1+ -- h12 orange
-  - AD.1- -- i9 black [h20]
+  - g5 -- -b5 black
+  - g9 -- +b9 red
+  - g15 -- +b15 red
+  - AD.W1 -- g6 yellow
+  - AD.GND -- -b3 black
+  - AD.1+ -- h15 orange
+  - AD.1- -- h12 black
 ```
 
-- Q1 (2N7000) の D (6 列) を赤レールへ、S (7 列) を D1・L1 の側へ
-- D1 (ショットキー) の K (7 列) が Q1.S と同じ列。A (9 列) を青レールへ
-- L1 (7→12 列) がスイッチの節点から出力へ、Cout・RL (12・15 列) が出力の平滑と負荷
-- AD の Wavegen (W1) を Q1.G (5 列) に、GND を青レールに。CH1 (1+/1−) は
-  出力 (12 列) と GND (青レール) の間にあてる
+- Q1 (2N7000) は平らな面を手前にして左から S・G・D (5・6・7 列)。S (5 列) を
+  青レール (GND) へ、G (6 列) を AD の Wavegen (W1) へ
+- Q1.D (7 列) がスイッチの節点。D1 (ショットキー) の A を同じ 7 列に挿し、K (9 列) を
+  赤レール (+5 V) へ
+- L1 (7→12 列) がスイッチの節点から節点 X (12 列) へ。Cout (+ が 15 列、− が 12 列)
+  と RL (12・15 列) が出力の平滑と負荷で、15 列 (節点 P) を赤レールへつなぐ
+- 出力は GND 基準ではなく、**赤レール (P、15 列) と節点 X (12 列) の間**に出る。
+  CH1 は差動入力なので、1+ を 15 列、1− を 12 列にあてて Vout をそのまま読む
 
 ## 計器の設定
 
@@ -93,7 +107,7 @@ wires:
 | --- | --- |
 | 電源 | Vin = 5 V (AD の Supplies か電池) |
 | Wavegen | PWM: Square、100 kHz、Amplitude 2.5 V、Offset 2.5 V (Duty 50 %、0〜5 V を往復) |
-| Scope | CH1 = 出力 (Cout・RL の両端)。Time base は 5 µs/div 程度 |
+| Scope | CH1 = 出力 (Cout・RL の両端、1+ を P、1− を X にあてる差動)。Time base は 5 µs/div 程度 |
 | Measure | CH1 の Average (Vout) |
 
 ## 見るべき値
@@ -109,7 +123,9 @@ wires:
 | 出力電圧のリップル ΔVout | 約 1.6 mV | 100 kHz と 10 µF のおかげでとても平らになる (10-2 の整流の直後よりずっと小さい) |
 
 デューティ比を変えると、Vout はほぼそれに比例して変わる (D = 25 % なら約 1.03 V、
-D = 75 % なら約 3.68 V。どちらも D1 の順電圧の分だけ理想よりわずかに低い)。
+D = 75 % なら約 3.68 V。どちらも D1 の順電圧の分だけ理想よりわずかに低い。
+式にすると Vout ≒ D × Vin − (1 − D) × 0.3 V)。実物では Q1 のオン抵抗
+(2N7000 は V_GS = 5 V で数 Ω) の電圧降下も加わり、さらに数十 mV 低く出る。
 
 分かること:
 

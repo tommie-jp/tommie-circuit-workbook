@@ -64,14 +64,14 @@ wires:
   - AD.V+ -- +t5 red
   - +t5 -- a5 red
   - a10 -- a15 green
-  - a15 -- a22 green
+  - b15 -- b22 green
   - a19 -- -t19 black
   - a26 -- -t26 black
   - AD.GND -- -t2 black
-  - AD.1+ -- a15 green [h8]
+  - AD.1+ -- d15 green [h8]
   - AD.1- -- -t20 black
-  - AD.2+ -- a5 red [h9]
-  - AD.2- -- a10 green [h9]
+  - AD.2+ -- b5 red [h9]
+  - AD.2- -- b10 green [h9]
 ```
 
 - Rt (1 kΩ) の先で、Rg (100 Ω、検流計の模型) と Rs (50 Ω、分流器) が並列になる

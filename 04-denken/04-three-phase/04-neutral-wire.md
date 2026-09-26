@@ -99,22 +99,24 @@ wires:
   - AD.GND -- U1.3 black
   - AD.V- -- U1.4 black
   - AD.V+ -- U1.7 red
-  - AD.1+ -- b7 yellow
-  - AD.1- -- AD.GND black
-  - AD.2+ -- b17 orange
+  - AD.1+ -- e53 orange
+  - AD.1- -- e57 black
+  - AD.2+ -- b7 yellow
   - AD.2- -- AD.GND black
-  - a7 -- b35 yellow
-  - a17 -- b42 orange
-  - a28 -- b49 blue
+  - d7 -- b35 yellow
+  - b17 -- b42 orange
+  - b28 -- c49 blue
   - b39 -- b46 green
-  - b46 -- b53 green
-  - d57 -- AD.GND black
+  - c46 -- c53 green
+  - c57 -- AD.GND black
 notes:
   - text small: R3・R4・R5 が Y 結線。列 53 が中性点 N。RN が N と AD.GND の間
 ```
 
-- 中性点 N (列 53) から RN (10 Ω) を通って d57 へ、そこから AD.GND へつなぐ。
+- 中性点 N (列 53) から RN (10 Ω) を通って 57 列 (c57) へ、そこから AD.GND へつなぐ。
   N を GND に直結せず、必ず RN を挟むことで電流を電圧として読める
+- Scope の CH1 は 1+ を N (e53)、1- を RN の GND 側 (e57) に当てて RN の両端を
+  差動で読む。CH2 (2+) は 1 相目 (W1、7 列) につなぐ
 
 ## 計器の設定
 

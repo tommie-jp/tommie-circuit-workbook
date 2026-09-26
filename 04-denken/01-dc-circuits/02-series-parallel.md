@@ -84,9 +84,9 @@ parts:
     label: 電池 9V
     pins: ["+", "-"]
 wires:
-  - BAT.+ -- a3 red
-  - a10 -- a12 orange
-  - a17 -- -t17 black
+  - BAT.+ -- b5 red
+  - b10 -- b12 orange
+  - b17 -- -t17 black
   - BAT.- -- -t2 black
 notes:
   - text: "R1 の両端 (5・10 列) と R2 の両端 (12・17 列) にテスターの電圧レンジを当てる"

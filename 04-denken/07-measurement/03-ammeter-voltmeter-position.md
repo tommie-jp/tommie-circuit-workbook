@@ -75,13 +75,13 @@ wires:
   - a16 -- a19 green
   - a23 -- -t23 black
   - AD.GND -- -t2 black
-  - SW1.1 -- a9 blue
-  - SW1.2 -- a16 blue
+  - SW1.1 -- b9 blue
+  - SW1.2 -- b16 blue
   - SW1.C -- a30 orange
   - a34 -- -t34 black
-  - AD.1+ -- a9 green [h9]
-  - AD.1- -- a16 green [h10]
-  - AD.2+ -- a30 orange [h11]
+  - AD.1+ -- d9 green [h9]
+  - AD.1- -- d16 green [h10]
+  - AD.2+ -- b30 orange [h11]
   - AD.2- -- -t20 black
 ```
 
