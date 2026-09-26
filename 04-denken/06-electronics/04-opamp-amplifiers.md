@@ -94,6 +94,7 @@ wires:
   - c30 -- U1.6 green
   - U1.7 -- c34 blue
   - c22 -- -t22 black
+  - AD.GND -- -t20 black
   - AD.V- -- U1.4 black
   - AD.V+ -- U1.8 red
   - AD.1+ -- a5 yellow

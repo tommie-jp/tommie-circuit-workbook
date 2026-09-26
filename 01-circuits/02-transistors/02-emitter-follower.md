@@ -25,11 +25,11 @@ parts:
   R2: resistor d5 f5 10k
   G2: ground f5
   Q1: npn d7
-  CIN: capacitor d2 d4 10u
+  CIN: ecap d4 d2 10u
   IN: port d2
   RE: resistor f7 h7 1k
   G3: ground h7
-  COUT: capacitor f7 f10 10u
+  COUT: ecap f7 f10 10u
   RL: resistor f10 h10 1k
   G4: ground h10
   OUT: port f10
@@ -57,13 +57,13 @@ style:
 
 ```breadboard
 title: 図2 エミッタフォロア
-# 上のレール = +9V、下のレール = GND
+# 9V は上の +/− レールへ。下の + レールは 30 列で上の + レールとつなぐ
 board: half
 parts:
   R1: resistor a3 a8 22k
   R2: resistor b8 b13 10k
   Q1: transistor f16(B) f17(C) f18(E) 2SC1815
-  CIN: capacitor c11(-) c14(+) 10uF
+  CIN: capacitor/electrolytic c11(-) c14(+) 10uF
   RE: resistor a20 a23 1k
   COUT: capacitor/electrolytic b20(+) b26(-) 10uF
   RL: resistor c26 c29 1k
@@ -76,10 +76,12 @@ wires:
   - g18 -- d20 blue
   - d23 -- -t23 black
   - d29 -- -t29 black
+  - +t30 -- +b30 red
 ```
 
 `R1`・`R2` の分圧点 (列 8) がベース、`RE` の上端 (列 20) がエミッタ。
-`Q1` のコレクタ (`f17`) は直接 +9V レールへ。`CIN` の左端 (`c11`) が
+`Q1` のコレクタ (`f17`) は直接 +9V レールへ (下の + レール。30 列の赤線で上の
++9V レールとつなぐ)。`CIN` の左端 (`c11`) が
 信号の入り口 (音声入力など)。
 
 ## 部品
