@@ -33,6 +33,7 @@ parts:
   Rg: resistor f14 f17 1k
   Cg: capacitor f17 i17 10u
   G1: ground i17
+  G2: ground c9
 wires:
   - AD.V+ -| c3
   - AD.W1 |- f3
@@ -56,8 +57,8 @@ title: 図2 ブレッドボードと Analog Discovery (9-2・9-3 と同じ配置
 board: full
 parts:
   U1: dip8 @ e5 LM358
-  R1: resistor d30 d35 100k
-  R2: resistor e25 e30 100k
+  R1: resistor d35 d30 100k
+  R2: resistor e30 e25 100k
   Cin: capacitor/ceramic b27 b30 1u
   Rf: resistor j5 j6 10k
   Rg: resistor i6 i9 1k
@@ -83,6 +84,8 @@ wires:
   - i12 -- -b12 black
   - +t50 -- +b50 red
   - -t50 -- -b50 black
+  - c6 -- c7 green
+  - a8 -- -t7 black
 ```
 
 9-2・9-3 と同じ配置。振幅だけを Wavegen 側で変えていく。

@@ -50,7 +50,7 @@ wires:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  Rterm: resistor c10 c15 100
+  Rterm: resistor c6 c11 100
   AD:
     type: device
     at: top
@@ -61,13 +61,13 @@ wires:
   - AD.GND -- -t3 black
   - AD.1+ -- b5 orange [h5]
   - AD.1- -- -t8 black
-  - AD.2+ -- b10 purple [h5]
+  - AD.2+ -- b6 purple [h5]
   - AD.2- -- -t13 black
-  - c15 -- -t15 black
+  - c11 -- -t11 black
 ```
 
-- 5 列 (加害側) と 10 列 (被害側) は 8-2 と同じ隣り合った列。Rterm は 10 列から
-  GND レールへ (15 列を経由)。**外した状態も試すので、いったん挿さずに測ってから
+- 5 列 (加害側) と 6 列 (被害側) は、8-2 (10 列と 11 列) と同じく隣り合った列
+  (どちらも a〜e の側)。Rterm は 6 列から GND レールへ (11 列を経由)。**外した状態も試すので、いったん挿さずに測ってから
   追加する**
 
 ## 計器の設定
@@ -75,7 +75,7 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Sine、振幅 1 V。まず 1 kHz、次に 10 MHz |
-| Scope | CH1 = 加害側 (5 列)、CH2 = 被害側 (10 列)。どちらも Amplitude を測定 |
+| Scope | CH1 = 加害側 (5 列)、CH2 = 被害側 (6 列)。どちらも Amplitude を測定 |
 | Measure | CH2 / CH1 の比を電卓で計算 (dB 表示は無いので手計算) |
 
 ## 見るべき値

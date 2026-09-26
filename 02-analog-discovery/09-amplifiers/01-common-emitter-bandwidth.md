@@ -58,8 +58,8 @@ board: half
 parts:
   Q1: transistor h9(B) h10(C) h11(E) 2SC1815
   Rc: resistor d3 d6 1k
-  R1: resistor d20 d25 39k
-  R2: resistor e15 e20 12k
+  R1: resistor d25 d20 39k
+  R2: resistor e20 e15 12k
   Cin: capacitor/ceramic b17 b20 1u
   Re: resistor j17 j22 220
   AD:

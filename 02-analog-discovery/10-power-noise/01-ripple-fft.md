@@ -61,7 +61,7 @@ parts:
   D2: diode/do41 d8(A) d12(K)
   D3: diode/do41 e3(A) e5(K)
   D4: diode/do41 b3(A) b8(K)
-  Rload: resistor f3 f12 1k
+  Rload: resistor j12 j3 1k
   Csmooth: capacitor/electrolytic i12(+) i3(-) 470uF
   AD:
     type: device

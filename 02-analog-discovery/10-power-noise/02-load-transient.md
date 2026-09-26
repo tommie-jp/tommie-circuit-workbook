@@ -73,12 +73,12 @@ parts:
   D2: diode/do41 d8(A) d12(K)
   D3: diode/do41 e3(A) e5(K)
   D4: diode/do41 b3(A) b8(K)
-  Rload: resistor f3 f12 1k
+  Rload: resistor j12 j3 1k
   Csmooth: capacitor/electrolytic i12(+) i3(-) 470uF
   Radd: resistor f16 f20 470
   Q1: transistor h22(S) h23(G) h24(D) 2N7000
-  Rg: resistor d26 d30 1k
-  Rgpd: resistor d33 d36 100k
+  Rg: resistor f28 f23 1k
+  Rgpd: resistor j23 j27 100k
   AD:
     type: device
     at: bottom
@@ -89,24 +89,27 @@ wires:
   - ADP.~2 -- a8
   - d3 -- f3
   - e12 -- g12
-  - h12 -- f16
-  - g20 -- h24
-  - i23 -- d30
-  - d33 -- i23
-  - h22 -- i12
-  - AD.1+ -- g3
-  - AD.1- -- g12
-  - AD.2+ -- j26
-  - AD.2- -- j36
-  - AD.GND -- j36
-  - AD.W2 -- j36
-  - AD.W2 -- d26
+  - h3 -- -b3 black
+  - h12 -- g16
+  - g20 -- g24
+  - i22 -- -b22 black
+  - i27 -- -b27 black
+  - AD.1+ -- f12
+  - AD.1- -- g3
+  - AD.2+ -- g23
+  - AD.2- -- -b6
+  - AD.GND -- -b5
+  - AD.W2 -- g28
 ```
 
-- Q1 (2N7000) は TO-92、平らな面を左に見て **S・G・D の順** (01-circuits の
-  2-5 と同じ実物の並び)。Radd (16〜20 列) の先 (20 列) が S、G が Rg・Rgpd の
-  節点、D が Radd の続き
-- Rload・Csmooth・整流部は 10-1 と全く同じ配置。Radd と Q1 のぶんだけ下に足す
+- Q1 (2N7000) は TO-92、**平らな面を見て左から S・G・D** (01-circuits の
+  2-5 と同じ実物の並び) を 22・23・24 列に挿す。D (24 列) に Radd (16〜20 列)
+  の先 (20 列) を渡し、S (22 列) は下の − レールへ落とす。G (23 列) が Rg
+  (28 列から W2) と Rgpd (27 列から − レール) の節点で、2+ もここで読む
+- 整流部・Rload・Csmooth は 10-1 と同じ配置 (DC+ が 12 列、DC− が 3 列)。
+  DC− (3 列) を下の − レールにつなぎ、AD の GND・2− と Q1 の S をそこへ集める。
+  1+ は DC+ (12 列)、1− は DC− (3 列) で、10-1 と同じ極性
+- Radd と Q1 のぶんだけ下ブロックの右に足す
 
 ## 計器の設定
 

@@ -31,7 +31,7 @@ parts:
   J2: sma c10
   G1: ground e5
   G2: ground e10
-  G3: ground c12
+  G3: ground c14
 notes:
   - text a5 center: P1
   - text a10 center: P2
@@ -39,18 +39,20 @@ wires:
   - AD.W1 -| c3
   - AD.1+ -| c3
   - c3 -- J1.1
-  - J2.1 -- c8
-  - AD.2+ -| c8
-  - AD.1- -| c12
-  - AD.2- -| c12
-  - AD.GND -| c12
+  - J1.1 -- J2.1
+  - J2.1 -- c12
+  - AD.2+ -| c12
+  - AD.1- -| c14
+  - AD.2- -| c14
+  - AD.GND -| c14
   - J1.2 -- e5
   - J2.2 -- e10
 ```
 
 - J1 (P1) が入力側、J2 (P2) が出力側。AD の BNC アダプタ経由の配線なので、
   1+・2+ の名前は BNC を挟んでも変わらない (0-5 で確かめたとおり)
-- 中身は単なる導通 (スルー)。理想値は S21 = 0 dB
+- 中身は単なる導通 (スルー)。J1 と J2 の中心導体を結ぶ横線が治具の線 (実体配線図の
+  e 行)。理想値は S21 = 0 dB
 - NanoVNA へつなぎ替えるときは、この図の AD を外して NanoVNA の CH0 を P1、
   CH1 を P2 に直結する (SMA なのでアダプタ不要)
 
@@ -68,7 +70,7 @@ points:
   GND: h2
 parts:
   J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
+  J2: sma/female-edge e16 d17 f17
 wires:
   - e1 -- e16
   - f0 -- f2 black

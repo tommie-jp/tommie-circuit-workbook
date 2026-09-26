@@ -73,9 +73,17 @@ wires:
 
 | 計器 | 設定 |
 | --- | --- |
-| Wavegen | W1: Sine、1 kHz、Amplitude 0.4 V |
+| Wavegen | W1: Sine、1 kHz、Amplitude 0.4 V、**Offset 0.5 V** (電解に逆電圧をかけないため) |
 | Scope | CH1 = Rref の両端、CH2 = C<sub>DUT</sub> の両端。Range は両方 200 mV/div |
 | Measure | CH1・CH2 の Amplitude、CH2 の CH1 に対する Phase |
+
+**W1 にオフセットを足す理由。** オフセット無しの正弦波だと、C<sub>DUT</sub> の両端は
+0 V を中心に ±0.26 V 振れ、半周期ごとに電解の − 側が + 側より高くなる (逆電圧)。
+Offset 0.5 V を足すと、コンデンサは 0.5 V に充電された上で ±0.26 V 振れる
+(約 0.24〜0.76 V) ので、+ 側が常に高いまま測れる。Rref には直流が流れないので
+(充電は 33 Ω × 4.7 µF ≈ 0.16 ms で終わる) CH1 は 0 V 中心のまま、CH2 だけ
+0.5 V 持ち上がる。Amplitude と Phase は交流分だけを見るので、下の値は変わらない。
+セラミックに差し替えたときも同じ設定のまま測る (比べる条件を揃える)。
 
 ## 見るべき値
 

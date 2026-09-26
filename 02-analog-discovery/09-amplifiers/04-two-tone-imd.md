@@ -36,6 +36,7 @@ parts:
   Rg: resistor i43 i46 1k
   Cg: capacitor i46 i49 10u
   G1: ground i49
+  G2: ground i26
 wires:
   - AD.W1 -| c4
   - AD.W2 -| c15
@@ -70,11 +71,11 @@ title: 図2 ブレッドボードと Analog Discovery
 board: full
 parts:
   Rsuma: resistor b40 b43 10k
-  Rsumb: resistor c45 c48 10k
+  Rsumb: resistor c48 c45 10k
   Cin: capacitor/ceramic b27 b30 1u
   U1: dip8 @ e5 LM358
-  R1: resistor d30 d35 100k
-  R2: resistor e25 e30 100k
+  R1: resistor d35 d30 100k
+  R2: resistor e30 e25 100k
   Rf: resistor j5 j6 10k
   Rg: resistor i6 i9 1k
   Cg: capacitor/electrolytic h9(+) h12(-) 10uF
@@ -102,12 +103,16 @@ wires:
   - i12 -- -b12 black
   - +t50 -- +b50 red
   - -t50 -- -b50 black
+  - c6 -- c7 green
+  - a8 -- -t7 black
 ```
 
 - Rsuma (W1 側、40 列) と Rsumb (W2 側、45 列) の先 (43 列・48 列) を橙の線で
   合流させ、27 列 (Cin の左足) へ橋渡しする。ここが 2 つの正弦波を足した節点で、
   Cin を通って 9-2 と同じバイアス点へ入る
 - 9-2・9-3 の板に Rsuma・Rsumb・その合流の配線だけを、空いている 40〜48 列に足した形
+- LM358 の使わない 2 回路目は 9-2 と同じくフォロワにして固定する (7=OUT2 と 6=IN2− を
+  `c6 -- c7` で短絡、5=IN2+ を `a8 -- -t7` で GND へ)
 
 ## 計器の設定
 

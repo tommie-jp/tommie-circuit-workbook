@@ -36,8 +36,10 @@ parts:
   R2: resistor a19 c19 10k l=$\mathrm{R_2}$
   G5: ground c19
   C3: capacitor a19 a23 10n l=$\mathrm{C_3}$
-  M2: voltmeter a23 c23 l=$\mathrm{CH2}$
-  G6: ground c23
+  Rt: resistor a23 c23 10k l=$\mathrm{R_t}$
+  G7: ground c23
+  M2: voltmeter a25 c25 l=$\mathrm{CH2}$
+  G6: ground c25
   S1: switch f5 f7
 wires:
   - a1 -- a3
@@ -45,7 +47,7 @@ wires:
   - a7 |- U1.-
   - U1.+ -| e8
   - U1.out -| a11
-  - a23 -- a24
+  - a23 -- a24 -- a25
   - a24 -- f24
   - f24 -- f7
   - f5 -- a5
@@ -60,6 +62,12 @@ wires:
 - **S1 が帰還路の切れ目。** 閉じれば「U1 出力 → 移相回路 → R<sub>in</sub> → U1 入力」の
   ループが閉じて自励発振になる (この題では発振させない)。**開いて**、代わりに
   W1 (CH1 で監視) を R<sub>in</sub> 側に注入し、移相回路側の応答 (CH2) と比べる
+- **R<sub>t</sub> (10 kΩ) は切り口の負荷の身代わり。** ループが閉じているとき、ノード C
+  (C<sub>3</sub> の先) は R<sub>in</sub> を通して U1 の仮想接地 (0 V) へ電流を流している。
+  S1 を開くとこの負荷が消え、ノード C が開放になって移相回路の振幅も位相も
+  変わってしまう (649.7 Hz で ×0.11・+124° 程度になり、下の表と合わない)。そこで
+  R<sub>in</sub> と同じ 10 kΩ を GND へ落として、閉じたときと同じ負荷を再現する。
+  **実際に発振させるときは S1 を閉じ、R<sub>t</sub> は外す**
 
 ## 実体配線図
 
@@ -75,6 +83,7 @@ parts:
   C2: capacitor i16 i28 10n
   R2: resistor h28 h32 10k
   C3: capacitor g28 g40 10n
+  Rt: resistor h40 h44 10k
   S1: switch j9 j40
   AD:
     type: device
@@ -94,6 +103,7 @@ wires:
   - AD.1- -- -t11 black
   - i20 -- -b20 black
   - i32 -- -b32 black
+  - i44 -- -b44 black
   - AD.2+ -- i40 blue
   - AD.2- -- -t41 black
 ```
@@ -113,6 +123,8 @@ wires:
   行が違ってもつながる**ので、分岐に配線は要らない
 - S1 (9〜40 列) が帰還路の切れ目。X (9 列) とノード C (40 列) を直接結ぶ
   1 本。**開いた状態で測定する** (閉じれば自励発振になる)
+- R<sub>t</sub> (40〜44 列、44 列で下レールへ) がノード C の負荷の身代わり
+  (S1 を閉じて発振させるときは抜く)
 
 ## 計器の設定
 
@@ -124,7 +136,8 @@ wires:
 
 ## 見るべき値
 
-計算値。移相回路 (C = 10 nF、R = 10 kΩ、3 段、出力は開放) の伝達関数を
+計算値。移相回路 (C = 10 nF、R = 10 kΩ、3 段。3 段目の R は R<sub>in</sub>、測定中は
+その身代わりの R<sub>t</sub>) の伝達関数を
 回路方程式から求めると、**f₀ = 1/(2πRC√6) ≈ 649.7 Hz で位相がちょうど 180°
 遅れ、振幅は 1/29 になる**(教科書でよく見る CR 移相発振器の条件そのもの)。
 アンプの利得は −30 倍 (R<sub>f</sub>/R<sub>in</sub> = 30)。

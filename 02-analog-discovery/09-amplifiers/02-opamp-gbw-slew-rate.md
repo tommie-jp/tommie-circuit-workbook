@@ -33,6 +33,7 @@ parts:
   Rg: resistor f14 f17 1k
   Cg: capacitor f17 i17 10u
   G1: ground i17
+  G2: ground c9
 wires:
   - AD.V+ -| c3
   - AD.W1 |- f3
@@ -61,8 +62,8 @@ title: 図2 ブレッドボードと Analog Discovery
 board: full
 parts:
   U1: dip8 @ e5 LM358
-  R1: resistor d30 d35 100k
-  R2: resistor e25 e30 100k
+  R1: resistor d35 d30 100k
+  R2: resistor e30 e25 100k
   Cin: capacitor/ceramic b27 b30 1u
   Rf: resistor j5 j6 10k
   Rg: resistor i6 i9 1k
@@ -88,10 +89,15 @@ wires:
   - i12 -- -b12 black
   - +t50 -- +b50 red
   - -t50 -- -b50 black
+  - c6 -- c7 green
+  - a8 -- -t7 black
 ```
 
 - LM358 (`U1`) は 8=VCC (e5)・4=GND (f8)。1=OUT1 (f5)・2=IN1− (f6)・3=IN1+ (f7)
-  だけを使う (2 回路目は未使用)
+  だけを使う
+- 使わない 2 回路目は浮かせず**フォロワにして入力を固定する**: 7=OUT2 (e6) と
+  6=IN2− (e7) を緑の線で短絡し (`c6 -- c7`)、5=IN2+ (e8) を GND へ落とす
+  (`a8 -- -t7`)。浮いたままだと発振や余計な電流の元になる (9-3〜9-5 も同じ)
 - 分圧・結合コンデンサ (R1・R2・Cin) は**チップの胴に重ならないよう**上ブロックの
   遠い列へ逃がし、橙の線で 3=IN1+ へ橋渡しする (9-1 と同じ考え方)
 - 帰還 (Rf・Rg・Cg) はチップのすぐ下 (i・j 行) の空いた列で組む
