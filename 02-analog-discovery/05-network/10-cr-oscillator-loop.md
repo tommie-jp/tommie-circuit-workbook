@@ -26,8 +26,8 @@ parts:
   G1: ground c1
   G2: ground c3
   Rin: resistor a5 a7 10k l=$\mathrm{R_{in}}$
-  U1: opamp c9 +up
-  G3: ground e9
+  U1: opamp c9 +down
+  G3: ground e8
   Rf: resistor a7 a11 300k l=$\mathrm{R_f}$
   C1: capacitor a11 a15 10n l=$\mathrm{C_1}$
   R1: resistor a15 c15 10k l=$\mathrm{R_1}$
@@ -41,8 +41,9 @@ parts:
   S1: switch f5 f7
 wires:
   - a1 -- a3
+  - a3 -- a5
   - a7 |- U1.-
-  - e9 |- U1.+
+  - U1.+ -| e8
   - U1.out -| a11
   - a23 -- a24
   - a24 -- f24
@@ -82,6 +83,7 @@ parts:
     pins: [GND, V+, V-, W1, 1+, 1-, 2+, 2-]
 wires:
   - AD.GND -- -t2 black
+  - -t1 -- -b1 black
   - AD.V+ -- a5 red
   - AD.V- -- h8 orange
   - a6 -- a7 green
@@ -99,6 +101,9 @@ wires:
 - U1 (LM358) は 5-6 と同じ 1 回路目だけを使う配置。1=OUT1 (f5) が R<sub>f</sub> の
   帰還点、2=IN1− (f6) に R<sub>in</sub>・R<sub>f</sub>、3=IN1+ (f7) は GND へ。**使わない側**は
   5-6 と同じくフォロワにして固定 (`a6--a7`、`a8--(-t8)`)
+- IN1+ (g7)・R<sub>1</sub>・R<sub>2</sub> の GND は**下の − レール**に落とす。下の − レールは
+  1 列目の黒線 (`-t1--(-b1)`) で上の − レール (AD.GND) とつなぐ。これが無いと
+  3 つとも GND から浮いてしまう
 - R<sub>in</sub> (6〜9 列) の 9 列側が X (W1 の注入点・CH1・S1)。**R<sub>f</sub> (5〜6 列) は
   IN1− と OUT1 を結ぶ**帰還抵抗。ここまでは 5-6 と同じ考え方
 - 移相回路は右へ大きく間隔を空けて 1 段ずつ並べる: C1 (5〜16 列) → ノード A

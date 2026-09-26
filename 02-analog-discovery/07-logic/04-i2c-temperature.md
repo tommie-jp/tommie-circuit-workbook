@@ -21,28 +21,35 @@ title: 図1 LM75 を I2C で読む
 parts:
   AD:
     type: device
-    at: a1
+    at: c2c0f0
     label: Analog Discovery
-    pins: [V+, GND, DIO0, DIO1]
+    pins: [V+, DIO0, DIO1, GND]
+    turn: mirror
   U1:
     type: device
-    at: h3
+    at: d10
     label: LM75
-    pins: [SDA, SCL, OS, GND, A0, A1, A2, VDD]
-  R1: resistor m3 m5 4.7k
-  R2: resistor m9 m11 4.7k
+    pins: [SDA, SCL, OS, GND, A2, A1, A0, VDD]
+  R1: resistor a6 b6 4.7k
+  R2: resistor a8 b8 4.7k
+  G1: ground e5
 wires:
-  - AD.V+ -| m3
-  - AD.V+ -| m9
-  - AD.V+ -| U1.VDD
-  - m5 |- U1.SDA
-  - m5 |- AD.DIO0
-  - m11 |- U1.SCL
-  - m11 |- AD.DIO1
-  - AD.GND -| U1.GND
-  - AD.GND -| U1.A0
-  - AD.GND -| U1.A1
-  - AD.GND -| U1.A2
+  - AD.V+ -| a4
+  - a4 -- a6
+  - a6 -- a8
+  - a8 -- a12
+  - a12 -- f12
+  - f12 -- f9
+  - U1.VDD -| f9
+  - AD.DIO0 -| b6
+  - b6 |- U1.SDA
+  - AD.DIO1 -| b8
+  - b8 |- U1.SCL
+  - AD.GND -| e5
+  - U1.GND -| e5
+  - U1.A2 -| e5
+  - U1.A1 -| e5
+  - U1.A0 -| e5
 ```
 
 - R1・R2 は SDA・SCL の **プルアップ (4.7 kΩ)**。I2C はオープンドレインなので
@@ -83,9 +90,10 @@ wires:
 **LM75 の実物は SO-8 (または MSOP-8) しか売っていない**ので、ブレッドボードには
 SOP を DIP 化する変換基板 (`dip8/sop`) に載せて挿す (置き方・足番号は DIP と同じ)。
 LM75 (`U1`) は 8=VDD (e5) が左端。1=SDA (f5)・2=SCL (f6) は下ブロックの空いた
-行 (i・j) からプルアップと AD へ。プルアップは列 1〜2 (R1・R2 の VCC 側) と
-列 5〜6 (SDA・SCL 側) を、**行をずらして** (R1 は i 行、R2 は j 行) 重ならないように
-引いてある。5=A0・6=A1・7=A2 (上ブロック) は -t で GND に落として 0x48 に固定。
+行 (i・j) からプルアップと AD へ。プルアップは R1 (i 行、2〜5 列) と R2 (j 行、
+6〜9 列) を**行をずらして**重ならないように置き、VCC 側 (2・9 列) を h 行から +t へ、
+SDA・SCL 側 (5・6 列) は足と同じ列でつなぐ。
+5=A2 (e8)・6=A1 (e7)・7=A0 (e6) (上ブロック) は -t で GND に落として 0x48 に固定。
 4=GND (f8) も -b で GND へ。
 
 ## 計器の設定
