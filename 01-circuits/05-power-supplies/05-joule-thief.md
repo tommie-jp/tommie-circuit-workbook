@@ -20,32 +20,39 @@ era: 古
 ```circuit
 title: 図1 Joule thief
 parts:
-  B1: battery vbat gnd 1.5
-  G1: ground gnd
-  T1: transformer c5 mirror
-  D1: led d6 d8 white
-  Q1: npn f8 2N3904
-  Rb: resistor f5 f7 1k
-  G2: ground f8f6f0 r270
-points:
-  vbat: b2c0f0
-  gnd: d2
+  B1: battery b2c0f0 d2 1.5
+  G1: ground d2
+  VBAT: vcc b2c0f0
+  T1: transformer c5
+  D1: led e5 g5 white
+  G3: ground g5
+  Q1: npn g7 mirror 2N3904
+  G2: ground h7
+  Rb: resistor c8 e8 1k
+  VBAT: vcc d6
 wires:
-  - vbat |- T1.B1
-  - T1.B1 -- T1.A1
-  - T1.A2 |- d6
-  - d8 -- Q1.C
-  - T1.B2 |- f5
-  - f7 -- Q1.B
-  - Q1.E -| f8f6f0
+  - b2c0f0 |- T1.A1
+  - T1.A2 |- e5
+  - e5 -- e7 -- Q1.C
+  - T1.B2 -| d6
+  - T1.B1 -| c8
+  - e8 |- Q1.B
+  - Q1.E -- h7
 style:
   grid: on
   pitch: 1.2
 ```
 
 - **T1 は同じ磁芯に 2 本の巻線を撚り合わせて巻いた (バイファイラ巻き) もの。**
-  A 巻線・B 巻線とも巻き始め (A1・B1) を電池の + にまとめて結ぶ
-- **Q1 が ON→OFF を繰り返すたびに、A2 側にフライバック電圧が出る。**
+  A 巻線は**巻き始め (A1)**、B 巻線は**巻き終わり (B2)** を電池の + に結ぶ。
+  こうすると Q1 のコレクタ電流が増えるときに B 巻線のベース側 (B1) が持ち上がり、
+  ON を後押しする正帰還になる (両方の巻き始めを + にまとめると負帰還になって
+  発振しない)
+- **LED (D1) は Q1 のコレクタ-エミッタ間に並列。** Q1 が ON の間は LED に電圧が
+  ほとんど掛からず、A 巻線に電流が流れて磁芯にエネルギーがたまる。
+  LED をコレクタと直列に入れると、1.5 V では LED の V<sub>F</sub> (約 3 V) を
+  越えられず電流が流れ出さないので、発振が始まらない
+- **Q1 が ON→OFF を繰り返すたびに、A2 側 (コレクタ) にフライバック電圧が出る。**
   電池電圧 (1.5 V) より高い電圧が LED に加わり、光る
 - Rb (1 kΩ) は B 巻線からベースへの電流を軽く制限する保護抵抗。無くても
   発振はするが、Q1 のベース電流が大きくなりすぎることがある
@@ -57,9 +64,9 @@ title: 図2 ブレッドボードに組む
 board: half
 parts:
   T1: transformer f5(A1) f7(A2) f9(B1) f11(B2)
-  D1: led g7(A) g13(K) white
+  D1: led g15(A) g13(K) white
   Q1: transistor h15(C) h16(B) h17(E)
-  Rb: resistor i11 i16 1k
+  Rb: resistor i9 i16 1k
   BAT:
     type: device
     at: top
@@ -68,18 +75,20 @@ parts:
 wires:
   - BAT.+ -- a5 red
   - e5 -- g5 red
-  - BAT.+ -- a9 red
-  - e9 -- g9 red
-  - g13 -- i15 orange
+  - BAT.+ -- a11 red
+  - e11 -- g11 red
+  - j7 -- j15 orange
+  - f13 -- -t13 black
   - i17 -- -t17 black
   - BAT.- -- -t3 black
 ```
 
 - **T1 は同じ磁芯にエナメル線 2 本を一緒に (バイファイラで) 10 回ずつ巻いた
   自作トランス。** FT37-43 のようなフェライトトロイダルコアが定番
-- A1・B1 (5 列・9 列) をどちらも電池の + へ。A2 (7 列) は LED のアノードへ、
-  LED のカソード (13 列) を Q1 のコレクタへ、B2 (11 列) は Rb を通して
-  ベースへ、エミッタ (17 列) を GND へ
+- A1 (5 列) と B2 (11 列) を電池の + へ。A2 (7 列) は Q1 のコレクタ (15 列) へ、
+  B1 (9 列) は Rb を通してベース (16 列) へ、エミッタ (17 列) を GND へ。
+  LED はアノードをコレクタの列 (g15)、カソードを 13 列 (f13 から GND へ) に挿して、
+  C-E 間 (エミッタも GND) に並列に入れる
 
 ## 部品
 

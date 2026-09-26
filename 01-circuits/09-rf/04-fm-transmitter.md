@@ -30,7 +30,7 @@ FM 放送は 76〜95MHz) で組み、
 title: 図1 コルピッツ発振 + マイク直接FM
 parts:
   VCC: vcc a2
-  L1: inductor a10 c10 260n
+  L1: inductor c10 a10 260n
   Cb: capacitor a4 c4 0.1u
   GCb: ground c4
   Cant: capacitor c13 c15 2p
@@ -42,8 +42,10 @@ parts:
   Re: resistor g10 i10 470
   GRe: ground i10
   Rb1: resistor a8 c8 10k
-  Rb2: resistor e7 g7 4.7k
+  Rb2: resistor g7 e7 4.7k
   GRb2: ground g7
+  C3: capacitor e8 g8 0.001u
+  GC3: ground g8
   MIC: mic e2 g2
   GMIC: ground g2
   Rmic: resistor a2 c2 2.2k
@@ -71,6 +73,10 @@ wires:
   L1 は「タンクの一部」と「コレクタの負荷 (RFC 代わり)」を兼ねる
 - **帰還**: C1 と C2 の分圧点がエミッタ。C1・C2 の直列合成 C<sub>s</sub> と L1 で
   発振周波数が決まる: f<sub>0</sub> = 1 / (2π√(L1·C<sub>s</sub>))
+- **ベース接地**: C3 (0.001µF) がベースを高周波で GND に落とす (80MHz で約 2Ω)。
+  これでベース接地のコルピッツになり、C1・C2 の分圧でエミッタへ戻した帰還が
+  利く。音声の周波数 (1kHz で約 160kΩ) ではほとんど効かないので、マイクの音声は
+  ベースに残る。Cb (0.1µF) は電源のパスコンで、L1 の電源側を高周波で GND に落とす
 - **直接 FM**: MIC (エレクトレットマイク) の音声を Cmic でベースへ結合する。
   ベースの直流電位がわずかに揺れると、Q1 のベース-エミッタ間容量 (C<sub>be</sub>) も
   わずかに変わり、C2 と一緒にタンクの容量を揺らして周波数が動く
@@ -112,6 +118,7 @@ parts:
   Cmic: capacitor/ceramic e20 e22 0.1u
   C2: capacitor/ceramic c14 c17 47p
   Cb: capacitor/ceramic e25 e27 0.1u
+  C3: capacitor/ceramic e10 e7 0.001u
 wires:
   - +t6 -- b6
   - b10 -- g10
@@ -124,7 +131,7 @@ wires:
   - MIC.OUT -- b20
   - MIC.GND -- -t21
   - b17 -- -t17
-  - b22 -- b10
+  - b22 -- d10
   - +t25 -- b25
   - b27 -- -t27
 ```
@@ -134,7 +141,9 @@ wires:
   結合コンデンサ Cant (2pF) も指定どおりの小さい値で
 - L1 は太さ 0.6mm のエナメル線を直径 8mm の丸棒に 8 回巻き、両端をブレッド
   ボードの穴に合わせて曲げたもの (インダクタンスは目安。実測でずれる)
-- Q1 のベース (f10、10 列) に Rb1・Rb2 の分圧と Cmic からのマイク音声が集まる。
+- Q1 のベース (f10、10 列) に Rb1・Rb2 の分圧と Cmic からのマイク音声 (d10 へ渡す)、
+  ベースを高周波で GND に落とす C3 (e10 → 7 列の GND 側) が集まる。
+  1 つの穴には足か線を 1 本だけ挿す
   コレクタ (f12、12 列) に L1・Cant・C1 が、エミッタ (f14、14 列) に C1・C2・Re が集まる
 
 ## 見るべき値

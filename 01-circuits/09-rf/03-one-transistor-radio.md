@@ -31,8 +31,8 @@ parts:
   C1: capacitor e6 e7 0.01u
   Q1: npn e10
   VCC: vcc a10
-  Rc: resistor a10 c10 1.5k
-  Rb: resistor c10 c8 180k
+  Rc: resistor c10 a10 1.5k
+  Rb: resistor c8 c10 180k
   GE: ground f10
   D1: diode c11 c13 1N60
   C3: capacitor c14 e14 0.001u
@@ -105,31 +105,33 @@ parts:
   R3: resistor c41 c44 100k
 wires:
   - ANT.1 -- a3 yellow
-  - VC1.A -- a3 yellow
+  - VC1.A -- c3 yellow
   - VC1.E -- -t2 black
-  - b7 -- -t7 black
+  - a7 -- -t7 black
   - a9 -- g13 orange
-  - a20 -- a9 orange
-  - c24 -- a15 blue
+  - a20 -- c9 orange
+  - a24 -- b15 blue
   - a15 -- g15 blue
-  - a26 -- a15 blue
-  - c29 -- +t29 red
+  - a26 -- c15 blue
+  - a29 -- +t29 red
   - g17 -- -t17 black
-  - d32 -- a15 gray
+  - b32 -- d15 gray
   - b38 -- b41 green
   - a44 -- -t44 black
-  - c44 -- -t44 black
-  - EAR.A -- b38 green
+  - EAR.A -- a38 green
   - EAR.B -- -t48 black
   - -t50 -- -b50 black
 ```
 
 - 上の赤レール = +3V (単3 電池 2 本)、青レール = GND。50 列で上下の − レールを
   渡している
-- Q1 のベース (f13) は 9 列の橋渡し (a9) を通じて C1 の右足・Rb の上端とつながる。
-  コレクタ (f15) は 15 列の橋渡しを通じて Rc・Rb の下端・D1 のアノードとつながる
-- D1 のカソード (d38) から b38 → b41 へ渡し、41 列で C3・R3 の左足と、38 列で
-  EAR の A 端子が同じ検波出力のネットに並列に入る。C3・R3 の右足 (44 列) と
+- Q1 のベース (f13) は 9 列の橋渡し (a9・c9) を通じて C1 の右足・Rb の左足 (20 列) と
+  つながる。コレクタ (f15) は 15 列の橋渡し (a15〜d15) を通じて Rb の右足 (24 列)・
+  Rc の左足 (26 列)・D1 のアノード (32 列) とつながる
+- 1 つの穴には足か線を 1 本だけ挿す。部品の足がある列へは、同じ列の空いた穴から
+  線を出す (c24 の Rb の足には a24 から、など)
+- D1 のカソード (d38) から b38 → b41 へ渡し、41 列で C3・R3 の左足と、38 列 (a38) で
+  EAR の A 端子が同じ検波出力のネットに並列に入る。C3・R3 の右足 (44 列、a44 から) と
   EAR の B 端子は上の − レール (GND) へ
 
 ## 見るべき値

@@ -30,8 +30,8 @@ parts:
   D2: led c11 e11 red
   Q1: npn g3 mirror 2SC1815
   Q2: npn g11 2SC1815
-  C1: ecap e4 e8 100n
-  C2: ecap d10 d6 100n
+  C1: capacitor e4 e8 100n
+  C2: capacitor d10 d6 100n
   R5: resistor e13 g13 100
   BZ1: buzzer g13 i13
 points:
@@ -81,8 +81,8 @@ parts:
   R3: resistor g16 g21 10k
   R5: resistor g22 g25 100
   BZ1: buzzer i25 i28
-  C1: capacitor/electrolytic i5(+) i7(-) 100nF
-  C2: capacitor/electrolytic i15(+) i17(-) 100nF
+  C1: capacitor/ceramic i5 i7 100nF
+  C2: capacitor/ceramic i15 i17 100nF
 wires:
   - j7 -- j16 orange
   - j17 -- j6 orange
@@ -99,6 +99,7 @@ wires:
 - **R5・BZ1 は Q2 のコレクタ (15 列) から `j15--j22` で分けて GND へ落とす。**
   LED (D2) と並列に、音を出す枝が 1 本増えただけ
 - 圧電ブザーに極性は無い。どちら向きに挿してもよい
+- C1・C2 は 3-1 の電解コンデンサから積層セラミック (極性無し) に替える。挿す向きは自由
 
 ## 部品
 

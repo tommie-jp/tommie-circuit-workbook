@@ -66,17 +66,19 @@ parts:
     pins: [VBUS, GND]
 wires:
   - USB.VBUS -- a5 red
-  - e5 -- f5 red
-  - USB.GND -- -t3 black
-  - -t3 -- f3 black
+  - e5 -- h5 red
+  - USB.GND -- -t2 black
+  - j3 -- -b3 black
   - -t6 -- h6 black
   - g9 -- -t9 black
   - j14 -- -b14 black
-  - -t14 -- -b14 black
+  - -t16 -- -b16 black
 ```
 
 - USB-C の VBUS・GND だけを引き出す (D+/D−/CC は使わない)。実物では
   USB コネクタのモジュール基板を使うとよい
+- 1 つの穴には足か線を 1 本だけ挿す。Cin の足のある 3・5 列へは、同じ列の空いた穴
+  (j3・h5) から線を出す。上下の − レールは 16 列でつなぐ
 - **AMS1117 は実物では SOT-223 (面実装) のみで、DIP のように直接
   ブレッドボードへは挿せない。** 3 本足の THT 部品として描いているのは、
   ピン間隔を持たせて市販の「AMS1117 3.3V 固定出力モジュール」基板

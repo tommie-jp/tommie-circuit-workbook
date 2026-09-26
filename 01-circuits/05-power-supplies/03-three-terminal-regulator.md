@@ -63,19 +63,24 @@ parts:
     pins: ["+", "-"]
 wires:
   - BAT.+ -- a5 red
-  - e5 -- f5 red
-  - BAT.- -- -t3 black
-  - -t3 -- f3 black
+  - e5 -- h5 red
+  - BAT.- -- -t2 black
+  - j3 -- -b3 black
+  - j6 -- -b6 black
   - g9 -- -t9 black
   - i12 -- -t12 black
   - i18 -- -b18 black
-  - -t18 -- -b18 black
+  - -t20 -- -b20 black
 ```
 
 - **7805 (TO-220) は端子側を上にすると左から IN・GND・OUT。** 放熱板を後ろに
   向けて挿す
+- **GND の足 (6 列) は必ず − レールへ** (j6 から黒線)。ここが浮くと出力は 5 V に
+  ならない
 - Cin (5 列) は IN・GND の間、Cout (7 列) は OUT・GND の間。**リード線は
   短く、レギュレータのすぐ近くに**
+- 1 つの穴には足か線を 1 本だけ挿す。Cin の足のある 3・5 列へは、同じ列の空いた穴
+  (j3・h5) から線を出す。上下の − レールは 20 列でつなぐ
 
 ## 部品
 

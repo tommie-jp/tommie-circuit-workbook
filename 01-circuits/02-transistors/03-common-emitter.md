@@ -26,7 +26,7 @@ parts:
   G2: ground f5
   RC: resistor a7 c7 2.2k
   Q1: npn d7
-  CIN: capacitor d3 d5 1u
+  CIN: capacitor d5 d3 1u
   IN: port d3
   RE: resistor f7 h7 1k
   G3: ground h7
@@ -62,7 +62,7 @@ style:
 
 ```breadboard
 title: 図2 自己バイアスのエミッタ接地増幅
-# 上のレール = +9V、下のレール = GND
+# 上の + レール = +9V、上の − レール = GND (下のレールは使わない)
 board: half
 parts:
   R1: resistor a3 a8 47k
@@ -73,6 +73,11 @@ parts:
   RE: resistor a24 a27 1k
   CE: capacitor/electrolytic b24(+) b27(-) 100uF
   COUT: capacitor c21(+) c25(-) 1uF
+  IN:
+    type: device
+    at: bottom
+    label: IN
+    pins: [SIG]
   OUT:
     type: device
     at: bottom
@@ -82,15 +87,16 @@ wires:
   - +t3 -- d3 red
   - d13 -- -t13 black
   - d8 -- g19 orange
-  - d9 -- g19 yellow
+  - d9 -- h19 yellow
   - +t16 -- b16 red
   - g20 -- b21 blue
   - g21 -- d24 green
   - d27 -- -t27 black
+  - IN.SIG -- d6 gray
   - OUT.SIG -- d25 gray
 ```
 
-`R1`/`R2` の分圧点 (列 8) と `CIN` の出力 (列 9) をベースへ。`RC` の下端
+`R1`/`R2` の分圧点 (列 8) と `CIN` の出力 (列 9) をベースへ (同じ穴に 2 本は挿せないので g19 と h19 に分ける)。`CIN` の左側 (列 6) が入力の取り込み口。`RC` の下端
 (列 21) がコレクタ、`RE` の上端 (列 24) がエミッタ。`CE` は `RE` と並列
 (同じ列 24 と 27 のすぐ隣)。`COUT` の右側 (列 25) が出力の取り出し口。
 

@@ -22,24 +22,24 @@ title: 図1 トランジスタでリレーを駆動する
 parts:
   VCC: vcc b5
   D1:  diode f3 c3 1N4148
-  K1:  relay e5a8a8 G5V-2
+  K1:  relay e5a8a8 r180 mirror G5V-2
   Q1:  npn h5
   R1:  resistor h2 h4 1k
   IN:  port h2
   G1:  ground i5
-  VCC: vcc c11
-  R2:  resistor c11 c9 330
-  D2:  led c9 c7
-  G2:  ground g7
+  R2:  resistor g7 g9 330
+  D2:  led g9 g11
+  G2:  ground h11
 wires:
   - b5 -- c5 -- c3
-  - K1.A1 |- c5
-  - K1.A2 |- f5
+  - K1.A2 |- c5
+  - K1.A1 |- f5
   - f3 -- f5 -- Q1.C
   - h4 -- Q1.B
   - Q1.E -- i5
-  - K1.NO1 |- c7
-  - K1.COM1 |- g7
+  - K1.COM1 |- c5
+  - K1.NO1 |- g7
+  - g11 -- h11
 style:
   grid: on
   pitch: 1.2
@@ -50,7 +50,8 @@ style:
 - D1 はコイルと**並列に、電源側がカソード**の向き。コイルに電流が流れている間は
   逆向きの電圧しか掛からず (光らない・流れない)、Q1 が切れた瞬間だけコイルの
   逆起電力を吸い取って、Q1 のコレクタに高い電圧が掛かるのを防ぐ (6-2 と同じ理屈)
-- 接点 (COM1・NO1) はコイルとは別回路。ここでは同じ 5 V で LED (D2) を点けているが、
+- 接点 (COM1・NO1) はコイルとは別回路。ここでは COM1 を同じ 5 V につなぎ、
+  NO1 から R2 を通して LED (D2) を点けているが、
   実際は接点側にもっと高い電圧・電流の負荷 (モータ、AC 100 V の機器など) を
   つなぐためにリレーを使う
 
@@ -62,14 +63,14 @@ title: 図2 トランジスタでリレーを動かす
 board: half
 parts:
   K1: relay @ f10
-  Q1: transistor h6(E) h7(B) h8(C) 2SC1815
-  R1: resistor g2 g7 1k
+  Q1: transistor h6(E) h7(C) h8(B) 2SC1815
+  R1: resistor f2 f8 1k
   D1: diode i10(A) i12(K) 1N4148
   R2: resistor g17 g21 330
   L1: led h21(A) h22(K) red
 wires:
   - +t10 -- a10 red
-  - f8 -- g10
+  - g7 -- g10
   - j6 -- -b6 black
   - j12 -- +b12 red
   - j2 -- +b2 orange
@@ -83,8 +84,11 @@ notes:
 
 - リレーは胴の左端の列 (10 列) に置いた。足は切り欠きを左にした実物を上から見た
   並び (1 番の `A1` が左下の f10)
-- D1 (フライバックダイオード) はコイルの 2 本の足 (10 列・12 列) と同じ電源・GND の
-  レールに、コイルと逆向きに挿してある
+- Q1 (2SC1815) は平らな面を見て左から E・C・B。平らな面を手前 (j 行側) に向けて
+  6・7・8 列に挿す
+- D1 (フライバックダイオード) はアノードをコイルの `A1` と同じ 10 列 (Q1 のコレクタ側)、
+  カソードを 12 列から + レールへ渡して、コイルと並列・逆向きに挿してある
+  (コイルの `A2` は 10 列の上のブロックから + レールへ)
 - 使わない 2 回路目 (`COM2` `NC2` `NO2`) は空けたまま
 
 ## 部品

@@ -67,17 +67,17 @@ parts:
     pins: [V+, GND, V-]
 wires:
   - +t10 -- a10 red
-  - +t8 -- g8 red
-  - -t6 -- g6 black
+  - +t8 -- i8 red
+  - -t6 -- i6 black
   - BAT.V+ -- +t20 red
   - BAT.GND -- -t20 black
   - BAT.V- -- j16 orange
-  - h13 -- h16 orange
+  - i13 -- i16 orange
   - h10 -- h11 orange
 ```
 
 - **V− (負電源) は赤レールに乗せない。** BAT.V− を 16 列へ直に配線し、そこから
-  U1 の 4 番 (GND/V−、13 列) へ `h13--h16` で渡す
+  U1 の 4 番 (GND/V−、13 列) へ `i13--i16` で渡す
 - U1 は LM358 の片方だけ使う (1 番 OUT・2 番 IN−・3 番 IN+・4 番 GND(V−)・
   8 番 VCC(V+))。もう片方 (5〜7 番) は浮かせたまま
 - **フォロアは出力 (1 番、10 列) を IN− (2 番、11 列) へそのまま返す**だけ

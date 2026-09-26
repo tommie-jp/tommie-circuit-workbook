@@ -52,7 +52,7 @@ D1 (赤) と D2 (青) は向きをそろえて挿し、D3 (赤) だけ**わざ�
 
 ```breadboard
 title: 図2 色の違う LED と逆向きの LED
-# 上のレール = +5V、下のレール = GND
+# 上の + レール = +5V、上の − レール = GND (下のレールは使わない)
 board: half
 parts:
   R1: resistor a5 a8 330
@@ -60,7 +60,7 @@ parts:
   R2: resistor a12 a15 330
   D2: led b15(A) b16(K) blue
   R3: resistor a19 a22 330
-  D3: led b23(A) b22(K)
+  D3: led b23(A) b22(K) red
 wires:
   - +t5 -- c5 red
   - c9 -- -t9 black
@@ -70,7 +70,8 @@ wires:
   - c23 -- -t23 black
 ```
 
-D3 だけ **K (カソード) を上、A (アノード) を下**に挿してあるところに注目。
+D3 だけ **K (カソード) を抵抗の側 (22 列)、A (アノード) を GND の側 (23 列)** に挿してあるところに注目
+(D1・D2 は A が抵抗の側、K が GND の側)。
 他の 2 つと見比べると、どちらが逆かが分かる。
 
 ## 部品
