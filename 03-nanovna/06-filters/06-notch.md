@@ -85,7 +85,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-200M 201
-title: 図3 98 MHz ノッチの S21 (コイル Q 50)
+title: 図3 98 MHz ノッチの S21 (コイル Q 50) — FM 帯を 12 dB 以上落とす
 dut:
   - shunt C 56p esl 47n esr 0.58
 traces:
@@ -94,6 +94,9 @@ markers:
   - 88M
   - 98.1M
   - 108M
+  - 144M
+notes:
+  - band 88M 108M: FM 放送帯
 ```
 
 - ノッチの底は約 **−32.9 dB** (98.1 MHz)。FM 放送帯 (88〜108 MHz) の端でも

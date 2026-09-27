@@ -112,7 +112,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-30M 151
-title: 図2 通過帯域の S21・S11 (コイル Q 60)
+title: 図3 通過帯域の S21・S11 (コイル Q 60) — 端に近いほど S11 が上がる
 dut:
   - shunt C 47p
   - series L 330n esr 0.35
@@ -127,6 +127,7 @@ traces:
 markers:
   - 1M
   - 10M
+  - 20M
   - 25M
 ```
 

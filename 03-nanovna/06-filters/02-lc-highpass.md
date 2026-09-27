@@ -90,7 +90,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-100M 201
-title: 図3 3 次ハイパスの S21・S11 (E12/E24 丸め後)
+title: 図3 3 次ハイパス (E12/E24 丸め後) — −3 dB は 9.87 MHz
 dut:
   - shunt L 820n
   - series C 160p
@@ -102,6 +102,8 @@ markers:
   - 1M
   - 9.87M
   - 30M
+notes:
+  - band 9.87M 100M: 通過帯域 (−3 dB から上)
 ```
 
 - 丸めた値での実際のカットオフ (−3 dB) は**約 9.87 MHz** (設計は 10 MHz)

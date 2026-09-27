@@ -116,7 +116,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-100M 201
-title: 図3 7 次ローパスの S21・S11 (E12/E24 丸め後)
+title: 図3 7 次ローパス (E12/E24 丸め後) — −3 dB は 28.4 MHz
 dut:
   - shunt C 47p
   - series L 330n
@@ -129,14 +129,17 @@ traces:
   - S21 logmag
   - S11 logmag
 markers:
-  - 10M
+  - 20M
   - 28.4M
+  - 40M
   - 100M
+notes:
+  - band 1M 28.4M
 ```
 
 - 部品を E12/E24 系列に丸めたので、実際のカットオフ (−3 dB) は設計の 30 MHz より
   やや低い**約 28.4 MHz**になる (計算値)
-- マーカー 3 (100 MHz) では −74 dB まで落ちる。急峻さは次数の証
+- マーカー 4 (100 MHz) では −74 dB まで落ちる。急峻さは次数の証
 
 ## 見るべき値
 

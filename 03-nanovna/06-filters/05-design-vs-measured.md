@@ -131,7 +131,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-50M 301
-title: 図4 チェビシェフ 0.5 dB の S21 (E12/E24 丸め後)
+title: 図4 チェビシェフ 0.5 dB (丸め後) — 35 MHz で −10.5 dB。塗りは 30 MHz まで
 dut:
   - shunt C 180p
   - series L 330n
@@ -143,7 +143,10 @@ traces:
 markers:
   - 10M
   - 28M
+  - 30M
   - 35M
+notes:
+  - band 1M 30M
 ```
 
 バターワース (参考) の**計算だけの画面**。
@@ -151,7 +154,7 @@ markers:
 ```vna
 device: h4
 sweep: 1M-50M 301
-title: 図5 バターワースの S21 (計算のみ、比べる用)
+title: 図5 バターワース (計算のみ) — 35 MHz で −8.1 dB。塗りは 30 MHz まで
 dut:
   - shunt C 68p
   - series L 430n
@@ -163,7 +166,10 @@ traces:
 markers:
   - 10M
   - 28M
+  - 30M
   - 35M
+notes:
+  - band 1M 30M
 ```
 
 - チェビシェフは通過帯域 (1〜28 MHz あたり) に**0.5 dB 弱の波打ち**が見える

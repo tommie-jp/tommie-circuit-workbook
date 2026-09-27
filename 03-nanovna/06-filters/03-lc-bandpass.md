@@ -115,7 +115,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-60M 301
-title: 図3 バンドパスの S21・S11 (E12/E24 丸め後)
+title: 図3 バンドパスの全体 (1〜60 MHz) — 通過帯域の外を見る
 dut:
   - shunt L 39n
   - shunt C 1500p
@@ -127,9 +127,32 @@ traces:
   - S21 logmag
   - S11 logmag
 markers:
-  - 10M
-  - 21M
+  - 21.75M
   - 40M
+```
+
+通過帯域の中を見るには、掃引を 16〜26 MHz に狭める (帯域幅の約 5 倍)。
+
+```vna
+device: h4
+sweep: 16M-26M 201
+title: 図4 16〜26 MHz に狭めた S21 — 塗った所が −3 dB の帯域 (2.1 MHz)
+dut:
+  - shunt L 39n
+  - shunt C 1500p
+  - series L 7.5u
+  - series C 7.5p
+  - shunt L 39n
+  - shunt C 1500p
+traces:
+  - S21 logmag
+markers:
+  - 20.06M
+  - 21M
+  - 21.75M
+  - 22.17M
+notes:
+  - band 20.06M 22.17M
 ```
 
 - 丸めた値でのピークは**約 21.75 MHz** (ほぼ 0 dB)。−3 dB の帯域は
