@@ -82,7 +82,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-300M 101
-title: 図3 100 Ω を並列 (シャント) に入れたときの画面 (理想)
+title: 図3 100 Ω をシャントに入れた治具の理想 (平ら)
 dut:
   - shunt R 100
 traces:
@@ -91,6 +91,8 @@ traces:
 markers:
   - 10M
   - 300M
+notes:
+  - text 20M -40dB: S21 は −1.94 dB、S11 は −13.98 dB (直列の 3-1 と逆の出方)
 ```
 
 ## 見るべき値

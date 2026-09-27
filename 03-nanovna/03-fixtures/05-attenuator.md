@@ -100,7 +100,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-300M 101
-title: 図3 27 Ω・36 Ω・27 Ω の 10 dB パッドの画面 (理想)
+title: 図3 E24 (27・36・27 Ω) の 10 dB パッドは平ら
 dut:
   - series R 27
   - shunt R 36
@@ -111,6 +111,8 @@ traces:
 markers:
   - 10M
   - 300M
+notes:
+  - text 20M -55dB: S21 は −10.07 dB、S11 は E24 の丸めで −36.43 dB
 ```
 
 ## 見るべき値

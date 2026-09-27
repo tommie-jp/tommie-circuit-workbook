@@ -74,7 +74,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-300M 101
-title: 図3 治具だけの画面 (理想)
+title: 図3 治具だけの理想は平ら (実測のずれが治具の限界)
 dut: series R 0
 traces:
   - S21 logmag
@@ -82,6 +82,8 @@ traces:
 markers:
   - 1M
   - 300M
+notes:
+  - text 20M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
 
 ## 見るべき値

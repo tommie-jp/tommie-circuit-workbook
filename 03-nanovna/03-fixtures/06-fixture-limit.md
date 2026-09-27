@@ -77,7 +77,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-320M 101
-title: 図3 寄生インダクタンス 5 nH を足したスルーの画面 (理想)
+title: 図3 5 nH が残るスルー — S11 は 320 MHz で −20 dB
 dut:
   - series R 0 esl 5n
 traces:
@@ -86,6 +86,8 @@ traces:
 markers:
   - 100M
   - 320M
+notes:
+  - text 100M -60dB: S11 が −20 dB を超える所が限界の目安
 ```
 
 ## 見るべき値

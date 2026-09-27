@@ -78,7 +78,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-300M 101
-title: 図3 100 Ω を直列に入れたときの画面 (理想)
+title: 図3 100 Ω を直列に入れた治具の理想 (平らに −6.02 dB)
 dut: series R 100
 traces:
   - S21 logmag
@@ -87,6 +87,8 @@ traces:
 markers:
   - 10M
   - 300M
+notes:
+  - text 20M -20dB: S21 も S11 も −6.02 dB で重なる
 ```
 
 - S21 と S11 はどちらも −6.02 dB で重なる。Smith では実軸の r = 3 (150 Ω) の 1 点
