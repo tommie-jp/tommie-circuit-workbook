@@ -53,7 +53,7 @@ wires:
 ```vna
 device: h4
 sweep: 120M-170M 251
-title: 図2 144 MHz ダイポールの SWR (帯域幅を読む)
+title: 図2 144 MHz ダイポールの SWR — 塗った所が SWR 2 以下 (約 11.7 MHz)
 dut:
   - series R 70
   - series L 500n
@@ -65,6 +65,8 @@ markers:
   - 138.3M
   - 144M
   - 150M
+notes:
+  - band 138.3M 150M: SWR 2 の幅
 ```
 
 - SWR の最小は 144 MHz 付近で 1.40 (R = 70 Ω と 50 Ω の比)

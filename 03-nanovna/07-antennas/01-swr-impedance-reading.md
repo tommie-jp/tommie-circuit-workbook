@@ -54,7 +54,7 @@ wires:
 ```vna
 device: h4
 sweep: 10M-100M 101
-title: 図2 100 Ω 負荷の Smith と SWR
+title: 図2 100 Ω 負荷 — Smith は r = 2 の 1 点、SWR は 2.00 で平ら (枠の上端)
 dut:
   - series R 100
   - short

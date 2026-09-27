@@ -91,7 +91,7 @@ E12/E24 丸め後の**見えるはずの画面**。
 ```vna
 device: h4
 sweep: 30M-70M 201
-title: 図3 整合後の S11・SWR (E12/E24 丸め後)
+title: 図3 L 型整合後の S11・SWR (丸め後) — 最良は 49 MHz で SWR 1.05
 dut:
   - shunt C 62p
   - series L 130n
@@ -104,6 +104,9 @@ traces:
 markers:
   - 49M
   - 50M
+  - 60M
+notes:
+  - text 50M 2.22: 整合なしなら 2.22 (負荷単体)
 ```
 
 - 丸めた値での最良点は設計の 50 MHz よりわずかに低い**約 49 MHz** (S11 約 −33 dB、

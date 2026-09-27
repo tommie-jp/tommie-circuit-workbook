@@ -53,7 +53,7 @@ wires:
 ```vna
 device: h4
 sweep: 400M-460M 121
-title: 図2 やや長いホイップの Smith と SWR
+title: 図2 やや長いホイップ — 共振は 425 MHz、430 MHz では +jX (誘導性)
 dut:
   - series R 36
   - series L 80n

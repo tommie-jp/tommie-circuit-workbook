@@ -100,15 +100,15 @@ C = 100 pF (可変範囲のほぼ中間) の**見えるはずの画面**。
 ```vna
 device: h4
 sweep: 700k-1100k 201
-title: 図3 バリコン 100 pF での S11・SWR
+title: 図3 バリコン 100 pF — 876 kHz で SWR が 2.50 まで下がり、X が 0 を横切る
 dut:
   - series R 20
   - series L 330u
   - series C 100p
   - short
 traces:
-  - S11 logmag
   - S11 swr
+  - S11 x
 markers:
   - 850k
   - 876k

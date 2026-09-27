@@ -62,7 +62,7 @@ wires:
 ```vna
 device: h4
 sweep: 130M-160M 151
-title: 図2 長すぎるダイポールの Smith と SWR
+title: 図2 長すぎるダイポール — 共振は 140 MHz、144 MHz では +jX (誘導性)
 dut:
   - series R 70
   - series L 500n
