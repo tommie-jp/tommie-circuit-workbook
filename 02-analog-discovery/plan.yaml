@@ -1,6 +1,6 @@
 # 02-analog-discovery の計画 — 必須 50 ⊂ 入門 100 ⊂ 中級 200 の 200 題。目次 (README) はここと題のファイルから npm run toc が組む。
 - { id: 0-1, tier: 50, board: BB, title: 接続と極性 — ワイヤの色、1+ / 1- の差動入力、GND を共通に }
-- { id: 0-2, tier: 50, board: —, title: 入力範囲 ±25 V と電源の限界 — 電源ツールで電流を制限する }
+- { id: 0-2, tier: 50, board: —, title: 入力範囲 ±25 V と電源の限界 — 電流は直列抵抗で決める }
 - { id: 0-3, tier: 50, board: —, title: ループバック — W1 を 1+ に直結して発生器とオシロを確かめる }
 - { id: 0-4, tier: 50, board: —, title: ワークスペースの保存、CSV と画像の書き出し }
 - { id: 0-5, tier: 100, board: —, title: BNC アダプタと 10:1 プローブ — 帯域 9 MHz と 30 MHz の違い }
@@ -16,7 +16,7 @@
 - { id: 1-5, tier: 50, board: BB, title: Script の最初の 1 行 — 波形を出し、測り、表にする }
 - { id: 1-6, tier: 50, board: —, title: 画面の構成 — 計器の窓、Run / Stop / Single、Help }
 - { id: 1-7, tier: 100, board: —, title: 波形発生器 2 ch の同期と位相差 }
-- { id: 1-8, tier: 100, board: BB, title: 電源の電流制限で LED を守る }
+- { id: 1-8, tier: 100, board: BB, title: 電源の電圧と直列抵抗で LED の電流を決める }
 - { id: 1-9, tier: 100, board: BB, title: データロガーで温度 (LM35) を 10 分 }
 - { id: 1-10, tier: 100, board: —, device: AD3, title: デバイスマネージャ — バッファ長と ch 数の構成を切り替える }
 - { id: 1-11, tier: 200, board: BB, device: AD3, title: Supplies のトラッキング (± 対称) }
@@ -166,7 +166,7 @@
 - { id: 9-3, tier: 100, board: BB, title: 1 dB 圧縮点 }
 - { id: 9-4, tier: 100, board: BB, title: 2 トーン IMD (Wavegen 2 ch + FFT) }
 - { id: 9-5, tier: 100, board: BB, title: THD vs 出力 }
-- { id: 9-6, tier: 100, board: BB, device: AD3, title: Tracer でトランジスタの Ic–Vce 曲線 }
+- { id: 9-6, tier: 100, board: BB, title: Tracer でトランジスタの Ic–Vce 曲線 }
 - { id: 9-7, tier: 200, board: BB, title: hFE の実測 }
 - { id: 9-8, tier: 200, board: BB, title: MOSFET の Id–Vgs }
 - { id: 9-9, tier: 200, board: BB, title: 位相余裕 (ループを切る) }

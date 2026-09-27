@@ -11,7 +11,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 - **板の印**: BB = ブレッドボード (10 MHz まで)、PF = perfboard (それより上)、
   — = 板を使わない
-- **機種の印**: AD3 = Analog Discovery 3 でしかできない題 (Tracer・CZT・25 MHz の
+- **機種の印**: AD3 = Analog Discovery 3 でしかできない題 (CZT・25 MHz の
   インピーダンスなど)。本文に AD2 での代わりのやり方を書く。印の無い題は AD2 でも AD3 でも同じ
 - **安全**: 入力は ±25 V まで。電源は USB 給電で 1 系統 250 mW まで。
   商用電源は扱わない
@@ -31,20 +31,20 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 4 | FFT とスペクトラム | 5 | 10 | 20 | 10 |
 | 5 | ネットワークアナライザ | 6 | 12 | 22 | 12 |
 | 6 | インピーダンス測定 | 4 | 8 | 16 | 8 |
-| 7 | ロジックとプロトコル | 4 | 10 | 18 | 5 |
+| 7 | ロジックとプロトコル | 4 | 10 | 18 | 10 |
 | 8 | ブレッドボードの限界と perfboard | 4 | 8 | 14 | 8 |
 | 9 | アンプの特性 | 2 | 6 | 16 | 6 |
 | 10 | 電源と雑音 | 1 | 2 | 8 | 2 |
 | 11 | 自動化 | 1 | 2 | 8 | 2 |
 | 12 | デジタルと混合信号 | 0 | 0 | 6 | 0 |
-| **計** | | **50** | **100** | **200** | **95** |
+| **計** | | **50** | **100** | **200** | **100** |
 
 ## 第 0 章 道具と安全
 
 | # | 題 | 段 | 板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 0-1 | [接続と極性 — ワイヤの色、1+ / 1- の差動入力、GND を共通に](00-tools/01-connections.md) | 必須 | BB | |
-| 0-2 | [入力範囲 ±25 V と電源の限界 — 電源ツールで電流を制限する](00-tools/02-input-range-power-limits.md) | 必須 | — | |
+| 0-2 | [入力範囲 ±25 V と電源の限界 — 電流は直列抵抗で決める](00-tools/02-input-range-power-limits.md) | 必須 | — | |
 | 0-3 | [ループバック — W1 を 1+ に直結して発生器とオシロを確かめる](00-tools/03-loopback.md) | 必須 | — | |
 | 0-4 | [ワークスペースの保存、CSV と画像の書き出し](00-tools/04-workspace-save-export.md) | 必須 | — | |
 | 0-5 | [BNC アダプタと 10:1 プローブ — 帯域 9 MHz と 30 MHz の違い](00-tools/05-bnc-probe-bandwidth.md) | 入門 | — | |
@@ -65,7 +65,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 1-5 | [Script の最初の 1 行 — 波形を出し、測り、表にする](01-waveforms/05-script-basics.md) | 必須 | BB | |
 | 1-6 | [画面の構成 — 計器の窓、Run / Stop / Single、Help](01-waveforms/06-ui-layout.md) | 必須 | — | |
 | 1-7 | [波形発生器 2 ch の同期と位相差](01-waveforms/07-wavegen-2ch-phase.md) | 入門 | — | |
-| 1-8 | [電源の電流制限で LED を守る](01-waveforms/08-current-limit-led.md) | 入門 | BB | |
+| 1-8 | [電源の電圧と直列抵抗で LED の電流を決める](01-waveforms/08-current-limit-led.md) | 入門 | BB | |
 | 1-9 | [データロガーで温度 (LM35) を 10 分](01-waveforms/09-logger-lm35.md) | 入門 | BB | |
 | 1-10 | [デバイスマネージャ — バッファ長と ch 数の構成を切り替える](01-waveforms/10-device-manager-buffer.md) | 入門 | — | AD3 |
 | 1-11 | Supplies のトラッキング (± 対称) | 中級 | BB | AD3 |
@@ -213,11 +213,11 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 7-3 | [UART を見る (Pico)](07-logic/03-uart-pico.md) | 必須 | BB | |
 | 7-4 | [I2C を見る・叩く (温度センサ)](07-logic/04-i2c-temperature.md) | 必須 | BB | |
 | 7-5 | [SPI](07-logic/05-spi.md) | 入門 | BB | |
-| 7-6 | プロトコルアナライザから送信する | 入門 | BB | |
-| 7-7 | バスの値でトリガする | 入門 | BB | |
-| 7-8 | セットアップ・ホールド時間を測る | 入門 | BB | |
-| 7-9 | チャタリングを捕まえる | 入門 | BB | |
-| 7-10 | PWM のデューティを測る | 入門 | BB | |
+| 7-6 | [プロトコルアナライザから送信する](07-logic/06-uart-echo.md) | 入門 | BB | |
+| 7-7 | [バスの値でトリガする](07-logic/07-bus-trigger.md) | 入門 | BB | |
+| 7-8 | [セットアップ・ホールド時間を測る](07-logic/08-setup-hold.md) | 入門 | BB | |
+| 7-9 | [チャタリングを捕まえる](07-logic/09-switch-bounce.md) | 入門 | BB | |
+| 7-10 | [PWM のデューティを測る](07-logic/10-pwm-duty.md) | 入門 | BB | |
 | 7-11 | 74HC595 を叩いて 7 セグを点ける | 中級 | BB | |
 | 7-12 | ゲートの伝搬遅延を Pattern + Scope で | 中級 | BB | |
 | 7-13 | I2C のプルアップと立ち上がり (アナログ ch 併用) | 中級 | BB | |
@@ -255,7 +255,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 9-3 | [1 dB 圧縮点](09-amplifiers/03-1db-compression.md) | 入門 | BB | |
 | 9-4 | [2 トーン IMD (Wavegen 2 ch + FFT)](09-amplifiers/04-two-tone-imd.md) | 入門 | BB | |
 | 9-5 | [THD vs 出力](09-amplifiers/05-thd-vs-output.md) | 入門 | BB | |
-| 9-6 | [Tracer でトランジスタの Ic–Vce 曲線](09-amplifiers/06-tracer-ic-vce.md) | 入門 | BB | AD3 |
+| 9-6 | [Tracer でトランジスタの Ic–Vce 曲線](09-amplifiers/06-tracer-ic-vce.md) | 入門 | BB | |
 | 9-7 | hFE の実測 | 中級 | BB | |
 | 9-8 | MOSFET の Id–Vgs | 中級 | BB | |
 | 9-9 | 位相余裕 (ループを切る) | 中級 | BB | |
