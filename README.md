@@ -90,5 +90,6 @@ npm run check -- --verbose   # ネットリストも出す。意図した回路�
 ## ライセンス
 
 本文と図は [CC BY 4.0](LICENSE)。借りた回路は front matter の `source` と本文の
-出典に出所を書く。フェンスを描く道具 (tommie-fence) は MIT で、このリポジトリは
+出典に出所を書く。借りた写真は元のライセンスのままで、作者とライセンスを写真の下に書く。
+フェンスを描く道具 (tommie-fence) は MIT で、このリポジトリは
 その Release を使うだけ。

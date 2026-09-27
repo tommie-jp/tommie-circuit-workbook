@@ -121,6 +121,14 @@ wires:
 自作のパッドの代わりに、**SMA の固定アッテネータ** (50 Ω、10 / 20 / 30 dB など) を
 使ってもよい。中は同じ T 型 (か π 型) の抵抗で、筒の両端が SMA になっている。
 
+![市販の同軸アッテネータ 2 つ。左は放熱のひだの付いた大きな筒、右は両端が SMA の細い金属の筒](03-attenuators.jpg)
+
+写真1 市販のアッテネータの例。右の細い筒がこの題で使う形で、筒に DC〜18 GHz と
+書いてある。左は放熱のひだを付けて大きな電力に耐えるようにした品 (送信機の出力を
+直に受けるときなどに使う。この題では要らない)。
+写真: Gadi Vishne, [Attenuators.jpg](https://commons.wikimedia.org/wiki/File:Attenuators.jpg)
+(Wikimedia Commons), [CC BY 2.5](https://creativecommons.org/licenses/by/2.5/)。手を加えずに載せた。
+
 ```circuit
 title: 図3 市販の 30 dB アッテネータ (SMA) を tinySA の入力に付ける
 parts:
@@ -181,3 +189,4 @@ notes:
 [Level メニュー](https://tinysa.org/wiki/pmwiki.php?n=TinySA4.LEVEL)と
 [Frequency メニュー](https://tinysa.org/wiki/pmwiki.php?n=TinySA4.FREQ) (2026-09-27 に確認)。
 RBW とノイズフロアの関係 (10 log₁₀ の式) は掃引型スペアナの一般的な理論。
+写真1 は Wikimedia Commons から借りた (作者・ライセンスは写真の下に書いた)。
