@@ -99,10 +99,10 @@ parts:
     at: top
     label: 電源 5V
     pins: [V+, GND]
-  GEN:
+  V1:
     type: device
     at: bottom
-    label: 信号発生器
+    label: 信号発生器 V1
     pins: [OUT, GND]
 wires:
   - SCOPE.CH1 -- a3 orange
@@ -115,13 +115,12 @@ wires:
   - i17 -- -b19 black [h40]
   - PSU.V+ -- +t25 red
   - PSU.GND -- -t27 black
-  - GEN.OUT -- e3 yellow
-  - GEN.GND -- -b6 black
+  - V1.OUT -- e3 yellow
+  - V1.GND -- -b6 black
   - -t29 -- -b29 black
 ```
 
-- GEN (信号発生器) は正弦波 3V<sub>peak</sub> (6V<sub>pp</sub>) を出すファンクション
-  ジェネレータ。周波数を 2kHz〜32kHz の間で動かす
+- 信号発生器 V1 は図1 の V1。正弦波を出し、周波数を 2kHz〜32kHz の間で動かす (中身は部品表)
 - 上の半分が共振の輪。列 3 に発生器の出力 (e3)・CH1 (a3)・L1 の左の足、
   列 10 に C1・R1・CH2 (a10) が集まる。R1 の右の端 (列 14) は上の − レールへ
 - 列 10 の輪の電圧を青の線で下の半分へ渡し、R2 で Q1 のベース (列 15) に入れる。
@@ -136,6 +135,7 @@ wires:
 
 | 記号 | 部品 | 値 |
 | --- | --- | --- |
+| V1 | 信号発生器 (ファンクションジェネレータ) | 正弦波、6 V<sub>pp</sub> (図1 の 3 V は peak)、2 kHz〜32 kHz、出力抵抗 50 Ω (≈ 0 Ω の発生器でもよい。値は「見るべき値」の表の 2 列) |
 | L1 | インダクタ (アキシャル) | 10 mH |
 | C1 | セラミックコンデンサ | 10 nF (103)、耐圧 50 V |
 | R1 | 抵抗 (1/4 W) | 100 Ω |
