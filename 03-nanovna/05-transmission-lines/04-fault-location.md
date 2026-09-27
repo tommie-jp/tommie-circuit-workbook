@@ -49,7 +49,7 @@ notes:
 ```vna
 device: h4
 sweep: 1M-900M 401
-title: 図2 4 m の所で断線 (開放) した場合の TDR
+title: 図2 4 m で断線 (開放) — TDR の山は 4 m に立つ
 dut:
   - line 50 4m vf 0.66
   - open
@@ -62,7 +62,7 @@ traces:
 ```vna
 device: h4
 sweep: 1M-900M 401
-title: 図3 4 m の所で短絡した場合の TDR
+title: 図3 4 m で短絡 — 山は開放と同じ 4 m・同じ上向き
 dut:
   - line 50 4m vf 0.66
   - short

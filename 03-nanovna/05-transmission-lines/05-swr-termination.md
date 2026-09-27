@@ -45,12 +45,15 @@ RL の値を挿し替えて測る。短絡・開放は RL の代わりに直結�
 ```vna
 device: h4
 sweep: 10M-300M 101
-title: 図2 終端 50 Ω (整合) — SWR = 1
+title: 図2 終端 50 Ω (整合) — SWR = 1 で下端に乗る。Smith は中心
 dut:
   - series R 50
   - short
 traces:
   - S11 swr
+  - S11 smith
+markers:
+  - 155M
 ```
 
 終端 100 Ω — SWR = 2。
@@ -58,12 +61,15 @@ traces:
 ```vna
 device: h4
 sweep: 10M-300M 101
-title: 図3 終端 100 Ω — SWR = 2
+title: 図3 終端 100 Ω — SWR = 2 で平ら (枠の上端)。Smith は 2 の点
 dut:
   - series R 100
   - short
 traces:
   - S11 swr
+  - S11 smith
+markers:
+  - 155M
 ```
 
 終端を短絡 (0 Ω) — SWR は測れる上限までずっと大きい。
@@ -71,11 +77,14 @@ traces:
 ```vna
 device: h4
 sweep: 10M-300M 101
-title: 図4 終端を短絡 — SWR は上限に張り付く
+title: 図4 終端を短絡 — SWR は上限に張り付く。Smith は左端の 1 点
 dut:
   - short
 traces:
   - S11 swr
+  - S11 smith
+markers:
+  - 155M
 ```
 
 ## 見るべき値

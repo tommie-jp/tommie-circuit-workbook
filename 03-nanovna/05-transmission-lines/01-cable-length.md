@@ -50,13 +50,15 @@ notes:
 ```vna
 device: h4
 sweep: 1M-900M 401
-title: 図2 先を開放した 5 m のケーブルの TDR
+title: 図2 TDR の山が先端の 5 m に立つ (Log Mag は 0 dB で平ら)
 dut:
   - line 50 5m vf 0.66
   - open
 traces:
   - S11 tdr vf 0.66
   - S11 logmag
+notes:
+  - text 450M 0dB: 全反射で 0 dB (開放も短絡も同じ)
 ```
 
 ## 見るべき値
