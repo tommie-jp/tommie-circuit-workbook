@@ -90,7 +90,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-1000M 201
-title: 図3 π 型 10 dB アッテネータの S21・S11 (E24 丸め後)
+title: 図3 π 型 10 dB アッテネータ (E24 丸め後) — S21 −9.63 dB・S11 −49.6 dB で平ら
 dut:
   - shunt R 100
   - series R 68

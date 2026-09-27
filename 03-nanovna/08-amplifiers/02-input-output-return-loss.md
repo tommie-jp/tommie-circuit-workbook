@@ -140,13 +140,14 @@ wires:
 ```vna
 device: h4
 sweep: 1M-300M 201
-title: 図3 入力側の S11 (ベースの見かけの Z)
+title: 図3 入力側の S11 — ほぼ全反射で 0 dB 近く (枠の上端)。Smith で Z を読む
 dut:
   - shunt R 2.2k
   - shunt C 25p
   - open
 traces:
   - S11 logmag
+  - S11 smith
 markers:
   - 1M
   - 100M
@@ -158,13 +159,14 @@ markers:
 ```vna
 device: h4
 sweep: 1M-300M 201
-title: 図4 出力側の S11 (Rc の見かけの Z、基板を裏返して測る)
+title: 図4 出力側の S11 (基板を裏返して測る) — −3.2 dB 前後で平ら
 dut:
   - shunt R 270
   - shunt C 2p
   - open
 traces:
   - S11 logmag
+  - S11 smith
 markers:
   - 1M
   - 100M
@@ -173,7 +175,8 @@ markers:
 
 - 入力側は 1 MHz でほぼ 0 dB (ほぼ全反射)。2.2 kΩ が 50 Ω よりずっと大きいため
 - 出力側は 1 MHz で −3.25 dB とそこそこ反射する (270 Ω と 50 Ω の中間的な不整合)
-- どちらも周波数を上げると Cib・Cob の容量で見かけの Z が下がり、反射がやや減る
+- どちらも周波数を上げると Cib・Cob の容量で見かけの Z が下がるが、50 Ω には近づかず
+  容量性 (−jX) に寄るので、反射はかえってわずかに増える (S11 が 0 dB に近づく)
 
 ## 見るべき値
 
