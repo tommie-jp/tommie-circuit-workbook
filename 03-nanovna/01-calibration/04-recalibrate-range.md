@@ -29,7 +29,7 @@ device: H4
 ```vna
 device: h4
 sweep: 300M-900M 101
-title: 図1 300〜900 MHz を再校正した後の Thru
+title: 図1 300〜900 MHz で再校正した後の Thru は平ら
 dut: series R 0
 traces:
   - S21 logmag
@@ -37,6 +37,8 @@ traces:
 markers:
   - 300M
   - 900M
+notes:
+  - text 340M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
 
 - 再校正すれば、範囲が変わっても S21 = 0 dB・S11 は検出限界以下のまま

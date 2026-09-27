@@ -50,13 +50,15 @@ Open は理想どおり位相 0°。
 ```vna
 device: h4
 sweep: 99M-101M 3
-title: 図2 基準面がコネクタのときの Open (理想)
+title: 図2 基準面がコネクタのときの Open は位相 0° (右端)
 dut: open
 traces:
   - S11 phase
   - S11 smith
 markers:
   - 100M
+notes:
+  - text 99.1M 60deg: 基準面がコネクタなら 0° のまま
 ```
 
 **同じ Open を、30 cm のケーブルの先に置いた場合** (基準面を動かさずに測ると)。
@@ -64,7 +66,7 @@ markers:
 ```vna
 device: h4
 sweep: 99M-101M 3
-title: 図3 30 cm 先の Open (基準面を動かさないと)
+title: 図3 30 cm 先の Open — 基準面を動かさないと −109° 回る
 dut:
   - line 50 30cm vf 0.66
   - open
@@ -73,6 +75,8 @@ traces:
   - S11 smith
 markers:
   - 100M
+notes:
+  - text 99.1M -45deg: ケーブルのぶん 0° から −109.17° に回る
 ```
 
 - 図2 は位相 0°、Smith の右端ちょうど

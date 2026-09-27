@@ -44,7 +44,7 @@ NanoVNA は校正した補正係数を**複数のスロット**に保存でき�
 ```vna
 device: h4
 sweep: 130M-160M 101
-title: 図1 スロット 1 を呼び出した直後の Thru
+title: 図1 スロット 1 を呼び出した直後の Thru は平ら
 dut: series R 0
 traces:
   - S21 logmag
@@ -53,6 +53,8 @@ markers:
   - 130M
   - 144M
   - 160M
+notes:
+  - text 131M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
 
 ## 見るべき値

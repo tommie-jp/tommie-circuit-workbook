@@ -60,7 +60,7 @@ Thru の理想値は、`series R 0` (0 Ω の抵抗 = ただの導線) と同じ
 ```vna
 device: h4
 sweep: 1M-300M 101
-title: 図2 Thru の理想値
+title: 図2 Thru の理想は平ら (減衰も反射も無い基準)
 dut: series R 0
 traces:
   - S21 logmag
@@ -68,6 +68,8 @@ traces:
 markers:
   - 1M
   - 300M
+notes:
+  - text 20M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
 
 ## 見るべき値

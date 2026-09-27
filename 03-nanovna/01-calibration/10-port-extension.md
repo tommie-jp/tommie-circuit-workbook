@@ -64,19 +64,40 @@ S21 (通過) の遅れは片道ぶん (τ) だけ。
 ```vna
 device: h4
 sweep: 1M-1G 201
-title: 図1 先を開放した 10 cm のケーブル (VF 0.66)
+title: 図1 先を開放した 10 cm のケーブルは Smith の外周を回る
 dut:
   - line 50 10cm vf 0.66
   - open
 traces:
   - S11 smith
   - S11 phase
+markers:
+  - 100M
+  - 250M
+  - 500M
+  - 1G
+notes:
+  - text 530M -120deg: 印 3 (500 MHz) は短絡と同じ所
+```
+
+同じケーブルの群遅延 (図2) は周波数によらず一定になる。
+
+```vna
+device: h4
+sweep: 1M-1G 201
+title: 図2 同じケーブルの群遅延は一定の 1.01 ns (往復の 2τ)
+dut:
+  - line 50 10cm vf 0.66
+  - open
+traces:
   - S11 delay
 markers:
   - 100M
   - 250M
   - 500M
   - 1G
+notes:
+  - text 100M 1.4ns: 往復の遅延 2τ = 1.01 ns — ELECTRICAL DELAY に入れる値
 ```
 
 - Smith の点は外周に張り付いたまま時計回りに回り、250 MHz で 1/4 周 (下の端の −j50 Ω)、
