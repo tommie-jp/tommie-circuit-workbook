@@ -60,7 +60,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-300M 101
-title: 図2 正しく締めたスルーの理想値
+title: 図2 正しく締めたスルーの理想は平ら (ずれを見る基準)
 dut: series R 0
 traces:
   - S21 logmag
@@ -68,6 +68,8 @@ traces:
 markers:
   - 1M
   - 300M
+notes:
+  - text 20M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
 
 - 理想値は S21 = 0 dB、S11 は検出限界以下 (実用上 0)。**きちんと締めた

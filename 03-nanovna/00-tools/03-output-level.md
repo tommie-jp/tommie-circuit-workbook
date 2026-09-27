@@ -86,7 +86,7 @@ notes:
 ```vna
 device: h4
 sweep: 1M-1.5G 101
-title: 図2 20 dB パッドの理想値
+title: 図2 20 dB パッドは全域で平らに −20 dB
 dut:
   - series R 40.9
   - shunt R 10.1
@@ -96,6 +96,8 @@ traces:
   - S11 logmag
 markers:
   - 100M
+notes:
+  - text 100M -50dB: S21 は −20 dB で平ら、S11 は −80 dB (枠の下端)
 ```
 
 ## 見るべき値

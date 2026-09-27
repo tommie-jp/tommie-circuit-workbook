@@ -41,7 +41,7 @@ H4 の全域を 1 本のスルー (0 Ω) で見ると、**理想値は端から�
 ```vna
 device: h4
 sweep: 50k-1.5G 101
-title: 図1 H4 の全域 (0 Ω のスルー)
+title: 図1 H4 の全域 50 kHz〜1.5 GHz でスルーの理想は平ら
 dut: series R 0
 traces:
   - S21 logmag
@@ -49,6 +49,8 @@ traces:
 markers:
   - 50k
   - 1.5G
+notes:
+  - text 100M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
 
 - 50 kHz でも 1.5 GHz でも S21 は 0 dB、S11 は検出限界以下 (実用上 0)。
@@ -63,7 +65,7 @@ markers:
 ```vna
 device: h4
 sweep: 50k-3G 101
-title: 図2 H4 のまま 3 GHz まで広げると
+title: 図2 H4 で 3 GHz まで — 1.5 GHz より上は範囲の外
 dut: series R 0
 traces:
   - S21 logmag
@@ -71,6 +73,8 @@ traces:
 markers:
   - 50k
   - 3G
+notes:
+  - band 1.5G 3G: H4 の範囲の外
 ```
 
 - 図は出るが、**「NanoVNA-H4 は 1.5 GHz までです」**と言われる。実機でも
