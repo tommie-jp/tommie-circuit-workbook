@@ -199,3 +199,11 @@
 - { id: 12-8, tier: 200, board: PF, era: 古, title: 植物の水やりアラーム }
 - { id: 12-9, tier: 200, board: PF, title: LED イルミネーション (4017) }
 - { id: 12-10, tier: 200, board: PF, era: 今, title: ソーラーガーデンライト }
+- { id: 13-1, tier: 100, board: BB, title: 定電圧 (CV) で使う — 電圧を決めて電流制限を掛ける }
+- { id: 13-2, tier: 100, board: BB, title: 定電流 (CC) で使う — 抵抗なしで LED を光らせる }
+- { id: 13-3, tier: 100, board: BB, title: CV と CC の切り替わりを負荷で見る }
+- { id: 13-4, tier: 200, title: ±電源を作る — 2 ch の直列と GND の取り方 }
+- { id: 13-5, tier: 200, title: 並列と直列で電流・電圧を足す }
+- { id: 13-6, tier: 200, title: 出力の内部抵抗と負荷変動 }
+- { id: 13-7, tier: 200, title: 電流制限で回路を守る — 短絡・逆接続・起動時の突入電流 }
+- { id: 13-8, tier: 200, title: 定電流で充電する — NiMH と、やってはいけない Li-ion }

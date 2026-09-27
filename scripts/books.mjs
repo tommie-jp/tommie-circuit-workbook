@@ -39,6 +39,7 @@ export const BOOKS = [
       [10, 'logic', 'ロジック'],
       [11, 'microcontrollers', 'マイコンと現代の定番'],
       [12, 'projects', '実用回路 — 作品'],
+      [13, 'bench-supply', '電源装置 — 定電圧・定電流の使い方'],
     ],
   },
   {
@@ -67,7 +68,7 @@ export const BOOKS = [
     number: 3,
     slug: 'nanovna',
     title: 'NanoVNA の教科書',
-    summary: 'NanoVNA-H4 / V2 で 10 kHz〜4.4 GHz を測る。治具・部品・フィルタ・アンテナ・GHz 帯',
+    summary: 'NanoVNA-H4 / V2 で 10 kHz〜4.4 GHz を測る。治具・部品・フィルタ・アンテナ・GHz 帯。第 11 章でスペクトラムアナライザ (tinySA など)',
     columns: ['device', 'board'],
     chapters: [
       [0, 'tools', '道具と安全'],
@@ -81,6 +82,7 @@ export const BOOKS = [
       [8, 'amplifiers', 'アンプと能動回路の S パラメータ'],
       [9, 'ghz', 'GHz 帯の作法'],
       [10, 'automation', '自動化'],
+      [11, 'spectrum-analyzer', 'スペクトラムアナライザ — tinySA と同じ種類の計器'],
     ],
   },
   {

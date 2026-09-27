@@ -199,3 +199,16 @@
 - { id: 10-6, tier: 200, board: —, device: H4, title: シリアルコマンドで直接制御 (Python) }
 - { id: 10-7, tier: 200, board: PF, device: H4, title: AD 本の測定と突き合わせる (1〜10 MHz) }
 - { id: 10-8, tier: 200, board: —, device: H4, title: 測った値を tommie-fence の図に注釈で載せる }
+- { id: 11-1, tier: 100, board: —, device: SA, title: スペアナの種類 — 掃引型・FFT 型・SDR と、壊さない使い方 }
+- { id: 11-2, tier: 100, board: —, device: SA, title: 中心・スパン・RBW・基準レベル }
+- { id: 11-3, tier: 100, board: —, device: SA, title: ノイズフロアとアッテネータ — 小さい信号をどこまで見られるか }
+- { id: 11-4, tier: 100, board: —, device: SA, title: NanoVNA の出力を測る — 周波数と電力と高調波 }
+- { id: 11-5, tier: 100, board: BB, device: SA, title: 方形波の高調波 — 555 と CMOS の発振器 }
+- { id: 11-6, tier: 200, board: BB, device: SA, title: FM 送信機の出力と高調波 }
+- { id: 11-7, tier: 200, board: BB, device: SA, title: AM 変調の側波帯 }
+- { id: 11-8, tier: 200, board: PF, device: SA, title: フィルタの通過特性を信号発生器 + スペアナで (スカラー) }
+- { id: 11-9, tier: 200, board: —, device: SA, title: 信号発生器を兼ねる機種 — 出力の確かさ }
+- { id: 11-10, tier: 200, board: —, device: SA, title: スプリアスとイメージ — 見えている山は本物か }
+- { id: 11-11, tier: 200, board: BB, device: SA, title: ゼロスパン — 時間の軸で見る }
+- { id: 11-12, tier: 200, board: —, device: SA, title: アンテナで受ける — FM 放送帯と 430 MHz }
+- { id: 11-13, tier: 200, board: —, device: SA, title: PC から操作して記録する }
