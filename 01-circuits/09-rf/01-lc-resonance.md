@@ -226,10 +226,37 @@ f<sub>0</sub> = 15.9kHz で頂点になる山 (共振曲線) が描ければよ�
 
 ### 波形の形も見る
 
+出力 50Ω の発生器で見える画面。CH1 は発生器の出力、CH2 は R1 の電圧 (輪の電流 × 100Ω)。
+
+```scope
+title: 図3 共振点 (15.9kHz) — CH2 が最大になり、CH1 と位相が揃う
+time: 20us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 15.9kHz 4.23Vpp, range: 2V/div}
+ch2: {wave: sine 15.9kHz 3.52Vpp, range: 1V/div}
+measure: [vpp, freq, phase]
+```
+
+```scope
+title: 図4 共振より下 (12kHz) — CH2 は 1.01Vpp に下がり、CH1 より進む
+time: 20us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 12kHz 5.88Vpp, range: 2V/div}
+ch2: {wave: sine 12kHz 1.01Vpp phase 78deg, range: 200mV/div}
+measure: [vpp, freq, phase]
+```
+
 - **CH2 は、どの周波数でもきれいな正弦波になる。** 輪の中には L1・C1・R1 しか無いので、
   電流の形は発生器の電圧の形のまま
-- 出力 50Ω の発生器では、共振点で CH1 の振幅が下がる (6.0 → 約 4.2V<sub>pp</sub>)。
+- **共振点では CH1 と CH2 の位相が揃う (図3)。** L1 と C1 のリアクタンスが打ち消し合い、
+  輪が抵抗だけに見えるため
+- **共振より下では CH2 が CH1 より進む (図4、約 78°)。** C1 のリアクタンスが勝ち、輪がコンデンサのように
+  振る舞うため。共振より上では逆にコイルが勝ち、CH2 は遅れる (20kHz で約 75° の遅れ)。
+  位相は Measurements の Phase か、2 つの波の山の時間差 ÷ 周期 × 360° で読む
+- 出力 50Ω の発生器では、共振点で CH1 の振幅が下がる (6.0 → 約 4.2V<sub>pp</sub>、図3)。
   電流が増えた分だけ発生器の中の 50Ω で電圧が落ちるため。出力 ≈ 0Ω の発生器では下がらない
+- 図4 は CH2 を 200 mV/div に下げてあるので、画面では CH1 より大きく見える。1 V/div のままだと
+  1 目盛りほどにしかならない。大きさは目盛りではなく Vpp の読み値で比べる
 
 ## 出典
 
