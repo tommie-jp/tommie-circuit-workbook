@@ -85,6 +85,7 @@ ${extra}---
 
   assert.ok(vna('').some((error) => /device/.test(error)));
   assert.deepEqual(vna('device: V2\n'), []);
+  assert.deepEqual(vna('device: SA\n'), []); // スペクトラムアナライザ (第 11 章。例は tinySA Ultra)
   assert.ok(vna('device: AD3\n').some((error) => /device/.test(error)));
   assert.ok(check('01-circuits/01-basics/01-led.md', LED.replace('board: BB', 'device: H4')).errors
     .some((error) => /device/.test(error)));
