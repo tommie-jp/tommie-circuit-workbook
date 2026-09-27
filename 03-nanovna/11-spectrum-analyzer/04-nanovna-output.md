@@ -25,26 +25,28 @@ CH0 の出力を 0-3 と同じ 20 dB パッドで落として tinySA へ入れ�
 ```circuit
 title: 図1 CH0 の出力を 20 dB パッドで tinySA へ
 parts:
-  V1:
+  X1:
     type: device
-    at: b2
+    at: b1
     label: NanoVNA
-    pins: [CH0, CH1]
+    pins: [CH0, GND]
     turn: mirror
-  P1: resistor d2 d4 40.9
-  P3: resistor d4 d8 40.9
-  P2: resistor d4 f4 10.1
-  GP: ground f4
-  M1:
+  P1: resistor b5 b7 40.9
+  P2: resistor b7 d7 10.1
+  P3: resistor b7 b9 40.9
+  X2:
     type: device
-    at: f8
+    at: b11
     label: tinySA
     pins: [RF, GND]
-  GM: ground f11
+  GV: ground d4
+  GP: ground d7
+  GM: ground d10
 wires:
-  - V1.CH0 -| d2
-  - d8 -| M1.RF
-  - M1.GND -| f11
+  - X1.CH0 -| b5
+  - b9 -| X2.RF
+  - X1.GND -| d4
+  - X2.GND -| d10
 ```
 
 ## 計器の設定

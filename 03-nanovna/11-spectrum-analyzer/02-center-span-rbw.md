@@ -22,25 +22,25 @@ device: SA
 ```circuit
 title: 図1 Wavegen の 1 MHz 正弦波を抵抗で落として tinySA へ
 parts:
-  AD:
+  X1:
     type: device
-    at: b2
+    at: b1
     label: Analog Discovery
     pins: [W1, GND]
     turn: mirror
-  GA: ground b5
-  R1: resistor d2 d4 1k
-  M1:
+  R1: resistor b5 b7 1k
+  X2:
     type: device
-    at: f4
+    at: b9
     label: tinySA
     pins: [RF, GND]
-  GM: ground f7
+  GA: ground d4
+  GM: ground d8
 wires:
-  - AD.W1 -| d2
-  - AD.GND -| b5
-  - d4 -| M1.RF
-  - M1.GND -| f7
+  - X1.W1 -| b5
+  - b7 -| X2.RF
+  - X1.GND -| d4
+  - X2.GND -| d8
 ```
 
 - W1 を 1 MHz・振幅 1 V (peak) の正弦波にする。R1 (1 kΩ) を直列に入れて

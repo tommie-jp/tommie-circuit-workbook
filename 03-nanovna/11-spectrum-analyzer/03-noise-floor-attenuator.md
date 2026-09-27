@@ -26,29 +26,29 @@ E24 に丸めると 47 Ω・3.3 Ω・47 Ω になる (0-3 の 20 dB パッドと
 ```circuit
 title: 図1 30 dB パッドで信号をさらに落として tinySA へ
 parts:
-  AD:
+  X1:
     type: device
-    at: b2
+    at: b1
     label: Analog Discovery
     pins: [W1, GND]
     turn: mirror
-  GA: ground b5
-  R1: resistor d2 d4 1k
-  P1: resistor d4 d6 47
-  P3: resistor d6 d10 47
-  P2: resistor d6 f6 3.3
-  GP: ground f6
-  M1:
+  R1: resistor b5 b7 1k
+  P1: resistor b7 b9 47
+  P2: resistor b9 d9 3.3
+  P3: resistor b9 b11 47
+  X2:
     type: device
-    at: f10
+    at: b13
     label: tinySA
     pins: [RF, GND]
-  GM: ground f13
+  GA: ground d4
+  GP: ground d9
+  GM: ground d12
 wires:
-  - AD.W1 -| d2
-  - AD.GND -| b5
-  - d10 -| M1.RF
-  - M1.GND -| f13
+  - X1.W1 -| b5
+  - b11 -| X2.RF
+  - X1.GND -| d4
+  - X2.GND -| d12
 ```
 
 ## 計器の設定

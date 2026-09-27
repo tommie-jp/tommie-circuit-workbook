@@ -28,57 +28,39 @@ High のほうが長い)。**40106 のシュミット RC 発振はほぼ 50%** (
 **189.5 kHz**、デューティ D = (Ra+Rb)/(Ra+2Rb) ≈ **56.6%**。回路の教科書の 3-2 (1.4 Hz)
 と比べて Ra・Rb を 1/10、C を 1/10000 にして周波数を上げている。
 
+図 1 は発振器を 1 つの箱にまとめ、tinySA へつなぐ所を描く。**発振器の中は回路の教科書の
+3-2 の図 1 と同じ形**で、値だけ上のとおりに替え、LED (R1・D1) は外す。部品の配線は図 2。
+
 ```circuit
-title: 図1 555 非安定 (189.5 kHz) + 20 dB パッドで tinySA へ
+title: 図1 555 の発振器を 20 dB パッドで tinySA へ
 parts:
-  V1: vsource c1 f1 5
-  VCC: vcc c1
-  G1: ground f1
-  U1: dip8 e6 NE555
-  G2: ground b6
-  VCC: vcc c7
-  Ra: resistor c8 d8 1k
-  Rb: resistor d8 d10 3.3k
-  C1: capacitor d12 g12 1n
-  G3: ground g12
-  VCC: vcc g6
-  Cc: capacitor g7 i7 10n
-  G5: ground i7
-  A1:
+  X1:
     type: device
-    at: k3
-    label: ATT 20dB
-    pins: [IN, OUT]
-  M1:
+    at: b1
+    label: NE555 189.5 kHz
+    pins: [OUT, GND]
+    turn: mirror
+  P1: resistor b6 b8 40.9
+  P2: resistor b8 d8 10.1
+  P3: resistor b8 b10 40.9
+  X2:
     type: device
-    at: k7
+    at: b12
     label: tinySA
     pins: [RF, GND]
-  GM: ground k10
+  GO: ground d5
+  GP: ground d8
+  GM: ground d11
 wires:
-  - U1.1 -| b5
-  - b5 -- b6
-  - U1.2 -| a4
-  - a4 -- a10 -- d10
-  - U1.8 -| c7
-  - c7 -- c8
-  - U1.7 -| d8
-  - U1.6 -| d10
-  - d10 -- d12
-  - U1.3 -| f3
-  - f3 |- A1.IN
-  - A1.OUT -| M1.RF
-  - M1.GND -| k10
-  - U1.4 -| g5
-  - g5 -- g6
-  - U1.5 -| g7
-style:
-  grid: on
+  - X1.OUT -| b6
+  - b10 -| X2.RF
+  - X1.GND -| d5
+  - X2.GND -| d11
 ```
 
 - 555 の出力は 0〜5 V を往復する方形波で、直接 tinySA (50 Ω) につなぐと
   基本波だけで +20 dBm 近くになる (見るべき値で計算)。**0-3 と同じ 20 dB
-  T 型パッド (40.9 Ω・10.1 Ω・40.9 Ω) を必ず挟む** (`A1`)
+  T 型パッド (40.9 Ω・10.1 Ω・40.9 Ω) を必ず挟む** (図の P1〜P3)
 - `Cc` (5 番 CTRL のバイパス) は回路の教科書の 3-2 と同じ理由で残す
 
 40106 の版 (Rf 10 kΩ・C 470 pF、f = 1/(1.2×Rf×C) ≈ **177.3 kHz**、
@@ -88,32 +70,28 @@ style:
 ```circuit
 title: 図3 40106 の RC 発振 (177.3 kHz) + パッドで tinySA へ
 parts:
-  U1: not d3 40106
-  U2: not d6 40106
-  Rf: resistor b2 b4 10k
-  C1: capacitor d2 f2 470p
-  GC1: ground f2
-  A1:
+  U1: not c3
+  Rf: resistor a2 a4 10k
+  C1: capacitor c2 e2 470p
+  G1: ground e2
+  U2: not c6
+  P1: resistor c8 c10 40.9
+  P2: resistor c10 e10 10.1
+  P3: resistor c10 c12 40.9
+  X2:
     type: device
-    at: k3
-    label: ATT 20dB
-    pins: [IN, OUT]
-  M1:
-    type: device
-    at: k7
+    at: c14
     label: tinySA
     pins: [RF, GND]
-  GM: ground k10
+  GP: ground e10
+  GM: ground e13
 wires:
-  - b2 -- d2 -- U1.in
-  - b4 -- d4
-  - U1.out -- d4 -- U2.in
-  - U2.out -| A1.IN
-  - A1.OUT -| M1.RF
-  - M1.GND -| k10
-style:
-  grid: on
-  pitch: 1.2
+  - a2 -- c2 -- U1.in
+  - a4 -- c4
+  - U1.out -- c4 -- U2.in
+  - U2.out -- c8
+  - c12 -| X2.RF
+  - X2.GND -| e13
 ```
 
 ## 実体配線図
