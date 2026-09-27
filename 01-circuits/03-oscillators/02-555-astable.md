@@ -19,7 +19,7 @@ board: BB
 ```circuit
 title: 図1 555 非安定
 parts:
-  V1: vsource c1 f1 9
+  V1: vsource c1 f1 5
   VCC: vcc c1
   G1: ground f1
   U1: dip8 e6 NE555
@@ -30,7 +30,7 @@ parts:
   C1: ecap d12 g12 10u
   G3: ground g12
   VCC: vcc g6
-  R1: resistor f3 g3 680
+  R1: resistor f3 g3 220
   D1: led g3 i3 red
   G4: ground i3
   Cc: capacitor g7 i7 10n
@@ -65,7 +65,7 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上のレールは +9V/GND、下のレールも +9V/GND (1 列目で上下を渡している)
+# 上のレールは +5V/GND、下のレールも +5V/GND (1 列目で上下を渡している)
 board: half
 parts:
   U1: dip8 @ e10 NE555
@@ -73,7 +73,7 @@ parts:
   Rb: resistor c11 c12 47k
   C1: capacitor/electrolytic d12(+) d9(-) 10uF
   Cc: capacitor d13 d20 10n
-  R1: resistor g12 g16 680
+  R1: resistor g12 g16 220
   D1: led h16(A) h19(K) red
 wires:
   - +t1 -- +b1 red
@@ -92,7 +92,7 @@ wires:
   左上の e10。切り欠きを左に向ける
 - 2 番 (TRIG、f11) は下ブロックにあるので、板の上の 6 番 (THR、e12) へは
   `h11 -- c12` の 1 本で渡す
-- 4 番 (RESET) は使わないので +9V に固定 (`i13 -- +b13`)。浮かせておくと
+- 4 番 (RESET) は使わないので +5V に固定 (`i13 -- +b13`)。浮かせておくと
   誤動作することがある
 
 ## 部品
@@ -104,9 +104,9 @@ wires:
 | Rb | 抵抗 | 47 kΩ |
 | C1 | 電解コンデンサ (タイミング) | 10 µF |
 | Cc | セラミックコンデンサ (CTRL のノイズ対策) | 0.01 µF |
-| R1 | 抵抗 (LED 電流制限) | 680 Ω |
+| R1 | 抵抗 (LED 電流制限) | 220 Ω |
 | D1 | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
-| — | 電源 | 9 V |
+| — | 電源 | 5 V |
 
 ## 見るべき値
 
@@ -119,7 +119,7 @@ Low の時間は Rb × C × 0.693。
 | Low (LED 消灯) の時間 | 約 0.33 秒 | Rb × C1 × 0.693 |
 | High (LED 点灯) の時間 | 約 0.40 秒 | (Ra + Rb) × C1 × 0.693 |
 | デューティ比 (High の割合) | 約 55% | (Ra+Rb) / (Ra+2Rb)。**555 の非安定はきっちり 50% にならない** |
-| LED の電流 (点灯中) | 約 9.6 mA | (9 V − 出力の飽和 (約 0.5 V) − 2.0 V) ÷ 680 Ω |
+| LED の電流 (点灯中) | 約 6.8 mA | (5 V − 出力 High の飽和 (バイポーラ 555 は Vcc−1.5 V 程度) − 2.0 V) ÷ 220 Ω |
 
 Ra を 0 に近づけると デューティ比は 50% に近づくが、Ra が小さすぎると
 放電時に 7 番から Vcc へ大電流が流れて IC を痛める (下限は 1 kΩ 程度)。

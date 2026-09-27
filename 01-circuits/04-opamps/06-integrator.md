@@ -19,8 +19,8 @@ source: 自作
 ```circuit
 title: 図1 積分器
 parts:
-  B1: battery vp mid 9
-  B2: battery mid vm 9
+  B1: battery vp mid 5
+  B2: battery mid vm 5
   G1: ground c2
   V1: square c3 e3 1
   G2: ground e3
@@ -68,7 +68,7 @@ style:
 | Rbleed | 抵抗 (直流の漏れ、暴走防止) | 1 MΩ |
 | Rbias | 抵抗 (+入力のバイアス電流補償) | 10 kΩ |
 | — | 信号源 | 1 kHz、方形波、振幅 ±1 V |
-| — | 電源 | ±9 V (電池 2 個) |
+| — | 電源 | ±5 V (電池 2 個) |
 
 ## 見るべき値
 

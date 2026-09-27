@@ -19,8 +19,8 @@ source: 自作
 ```circuit
 title: 図1 サレンキー ローパス (利得 1 倍)
 parts:
-  B1: battery vp mid 9
-  B2: battery mid vm 9
+  B1: battery vp mid 5
+  B2: battery mid vm 5
   G1: ground c2
   V1: sine c3 e3 0.1
   G2: ground e3
@@ -66,7 +66,7 @@ style:
 | C1 | セラミックコンデンサ (正帰還、C2 の 2 倍) | 20 nF |
 | C2 | セラミックコンデンサ (2 次ローパス) | 10 nF |
 | — | 信号源 | 振幅 0.1 V、周波数を掃引 |
-| — | 電源 | ±9 V (電池 2 個) |
+| — | 電源 | ±5 V (電池 2 個) |
 
 ## 見るべき値
 

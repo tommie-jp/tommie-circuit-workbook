@@ -21,7 +21,7 @@ source: 自作
 ```circuit
 title: 図1 並列にしたコンデンサを充電する
 parts:
-  V1: vsource b2 d2 9
+  V1: vsource b2 d2 5
   G0: ground d2
   S1: switch b3 b5
   R1: resistor b5 b7 1k
@@ -42,7 +42,7 @@ style:
 ```circuit
 title: 図2 直列にしたコンデンサを充電する
 parts:
-  V1: vsource b2 d2 9
+  V1: vsource b2 d2 5
   G0: ground d2
   S1: switch b3 b5
   R2: resistor b5 b7 1k
@@ -75,7 +75,7 @@ style:
 | R1, R2 | 抵抗 (1/4 W) | 1 kΩ |
 | C1, C2, C3, C4 | 電解コンデンサ | 100 µF (16V 以上) |
 | S1 | スイッチ (押している間だけ充電) | — |
-| — | 電源 | 9V 電池 |
+| — | 電源 | 5V (USB) |
 
 ## 見るべき値
 

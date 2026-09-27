@@ -20,7 +20,7 @@ era: 古
 ```circuit
 title: 図1 弛張発振でブザー
 parts:
-  V1: vsource vcc gnd 9
+  V1: vsource vcc gnd 5
   G1: ground gnd
   R1: resistor a3 c3 330
   D1: led c3 e3 red
@@ -68,7 +68,7 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 下ブロック (f〜j 行) だけで組む。下の青レール = GND、下の赤レール = +9V
+# 下ブロック (f〜j 行) だけで組む。下の青レール = GND、下の赤レール = +5V
 board: half
 parts:
   Q1: transistor h4(E) h5(C) h6(B) 2SC1815
@@ -112,7 +112,7 @@ wires:
 | C1, C2 | 積層セラミックコンデンサ | 100 nF (0.1 µF) |
 | D1, D2 | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
 | BZ1 | 圧電ブザー素子 (アンプ無し) | — |
-| — | 電源 | 9 V |
+| — | 電源 | 5 V |
 
 ## 見るべき値
 

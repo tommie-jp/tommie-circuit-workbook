@@ -19,8 +19,8 @@ board: BB
 ```circuit
 title: 図1 加算アンプ
 parts:
-  B1: battery vp mid 9
-  B2: battery mid vm 9
+  B1: battery vp mid 5
+  B2: battery mid vm 5
   G1: ground c2
   V1: sine b3 d3 0.2
   G2: ground d3
@@ -57,7 +57,7 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上のレールは +9V/GND。V− は赤レールに乗せず、BAT から直配線する
+# 上のレールは +5V/GND。V− は赤レールに乗せず、BAT から直配線する
 board: half
 parts:
   U1: dip8 @ e10 LM358
@@ -72,7 +72,7 @@ parts:
   BAT:
     type: device
     at: bottom
-    label: 電源 ±9V
+    label: 電源 ±5V
     pins: [V+, GND, V-]
 wires:
   - GEN.OUT1 -- a5 yellow
@@ -99,7 +99,7 @@ wires:
 | R1, R2 | 抵抗 (入力) | 10 kΩ |
 | Rf | 抵抗 (帰還) | 10 kΩ |
 | — | 信号源 | 1 kHz 0.2V (CH1)、3 kHz 0.1V (CH2) |
-| — | 電源 | ±9 V (電池 2 個) |
+| — | 電源 | ±5 V (電池 2 個) |
 
 ## 見るべき値
 

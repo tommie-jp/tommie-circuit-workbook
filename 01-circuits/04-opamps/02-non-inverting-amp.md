@@ -18,8 +18,8 @@ board: BB
 ```circuit
 title: 図1 非反転増幅
 parts:
-  B1: battery a1 c1 9
-  B2: battery c1 e1 9
+  B1: battery a1 c1 5
+  B2: battery c1 e1 5
   G1: ground c2
   V1: sine b4 d4 0.1
   G2: ground d4
@@ -56,7 +56,7 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上のレールは +9V/GND。V− は赤レールに乗せず、BAT から直配線する
+# 上のレールは +5V/GND。V− は赤レールに乗せず、BAT から直配線する
 board: half
 parts:
   U1: dip8 @ e10 LM358
@@ -72,7 +72,7 @@ parts:
   BAT:
     type: device
     at: bottom
-    label: 電源 ±9V
+    label: 電源 ±5V
     pins: [V+, GND, V-]
 wires:
   - GEN.OUT -- a5 yellow
@@ -101,7 +101,7 @@ wires:
 | R2 | 抵抗 | 1 kΩ |
 | R3 | 抵抗 (帰還) | 10 kΩ |
 | — | 信号源 | 1 kHz、振幅 0.1 V |
-| — | 電源 | ±9 V (電池 2 個) |
+| — | 電源 | ±5 V (電池 2 個) |
 
 ## 見るべき値
 
