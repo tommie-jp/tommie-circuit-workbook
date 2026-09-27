@@ -140,6 +140,86 @@ notes:
 | Scope (1 回目) | CH1 = RLA の両端 (差動、線電流 a)、CH2 = RAB の両端 (差動、相電流 ab) |
 | Measure | CH1・CH2 の Amplitude と、CH1 に対する CH2 の Phase |
 
+### オシロスコープと発振器
+
+発振器・電源・プローブの読み替えは 4-1 と同じ ([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)・
+[0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。違うのは測り方と、線のシャントの値だ。
+AD 版は RLA と RAB の両端を差動で挟む。汎用オシロでは、どちらの端にも
+グランドクリップを当てられない (当てた点が GND に落ち、FG の出力か三相の 1 点を短絡する)。
+
+**線のシャント RLA・RLB・RLC を 20 Ω から 200 Ω に替え、回路はそのまま、両端を
+GND 基準で測って Math で引く** (図3)。20 Ω のままだと RLA の両端は 49 mV (計算値) で、
+a 点の電圧の 6 % しかない。2 本の先端で引くと、ch どうしの利得の差 (数 %) だけで
+同じくらいの誤差が出て読めない。シャントを GND 側へ移すこともできない。
+線電流 I_a は b・c の線を通って電源へ戻り、I_a だけが流れる GND 側の線が無いからだ。
+200 Ω なら RLA の両端は a 点の電圧の 6 割になる。線電流と相電流の比 √3 と
+位相の 30° は、シャントの値によらない (見るべき値の下の説明)。
+
+```circuit
+title: 図3 汎用オシロでの測り方
+parts:
+  U1: port a1
+  V1: sine e1 g1 1 l=$\mathrm{FG}_1$
+  G1: ground g1
+  V2: sine i1 k1 1 l=$\mathrm{FG}_2$
+  G2: ground k1
+  M2: voltmeter e4 g4 l=$\mathrm{CH2}$
+  G3: ground g4
+  RLC: resistor a6 a9 200
+  RLA: resistor e6 e9 200
+  RLB: resistor i6 i9 200
+  M1: voltmeter e11 g11 l=$\mathrm{CH1}$
+  G4: ground g11
+  M3: voltmeter i11 k11 l=$\mathrm{CH2}$
+  G5: ground k11
+  RCA: resistor a14 e14 1k
+  RAB: resistor e14 i14 1k
+  RBC: resistor a18 i18 1k
+wires:
+  - a1 -- a6
+  - a9 -- a14 -- a18
+  - e1 -- e4 -- e6
+  - e9 -- e11 -- e14
+  - i1 -- i6
+  - i9 -- i11 -- i14 -- i18
+notes:
+  - text a2f5 blue: 3 相目
+  - text e2f5 blue: 1 相目
+  - text i2f5 blue: 2 相目
+  - text a13d6 blue: c
+  - text e13d6 blue: a
+  - text i13d6 blue: b
+  - text f5 small: 1 回目
+  - text j12 small: 2 回目
+style:
+  standard: jis
+  pitch: 1.2
+```
+
+- U1 は図1 の OP アンプの出力 (3 相目)。FG₁・FG₂ は FG の CH1・CH2
+- ブレッドボードでは d35–d38・d41–d44・d53–d56 の 20 Ω を 200 Ω に挿し替えるだけ。
+  グランドクリップは 2 本とも GND のレール
+- CH1 は 2 回とも a 点 (38 列)。1 回目は CH2 を RLA の電源側 (35 列)、2 回目は b 点 (44 列) に当てる
+
+| 回 | CH1 | CH2 | Math | 求めるもの |
+| --- | --- | --- | --- | --- |
+| 1 回目 | a 点 | RLA の電源側 | CH2 − CH1 = RLA の両端 (引く順を選べない機種は CH1 − CH2 を読み、位相を 180° ずらす) | ÷ 200 Ω で線電流 I_a |
+| 2 回目 | a 点 | b 点 | CH1 − CH2 = RAB の両端 | ÷ 1 kΩ で相電流 I_ab |
+
+- 位相は、Math と CH1 のゼロ交差の時間差 Δt をカーソルで読み、θ = 360° × 1 kHz × Δt
+  で求める。CH1 (a 点) を 2 回とも同じにしたので、2 回の θ の差が線電流と相電流の
+  位相差になる。1 回目は約 0° (I_a は a 点の電圧と同相)、2 回目は約 +30° (83 µs 進み)
+- 測る前に 2 本の先端を同じ点に当て、Math が 0 V 近くになるかを見る
+
+**値が変わる** (計算値。FG の 50 Ω を含む)。
+
+| 測る所 | 200 Ω のシャントでの値 |
+| --- | --- |
+| FG の CH1 の端子 (RLA の電源側) の振幅 | 0.910 V |
+| RLA の両端 (1 回目の Math) | 341 mV → 線電流 1.71 mA |
+| RAB の両端 (2 回目の Math) | 0.985 V → 相電流 0.985 mA |
+| 線電流 ÷ 相電流、位相 | 1.73 (= √3)、−30° (見るべき値と同じ) |
+
 ## 見るべき値
 
 計算値。線のシャント (20 Ω) を含めて計算している。

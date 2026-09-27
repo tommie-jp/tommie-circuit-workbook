@@ -114,6 +114,57 @@ wires:
 | Wavegen | W1: Sine、50 Hz、Amplitude 5 V |
 | Scope | CH1 = 半波整流の出力。CH2 = 全波整流の出力。どちらも Measure で Average を読む |
 
+### オシロスコープと発振器
+
+W1 は FG の OUT (High-Z、50 Hz、振幅 5 V。Vpp で入れる機種なら 10 Vpp) に読み替える
+([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)、
+[0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。半波整流 (図2) は GND 基準で、
+CH1 の先端を 9 列、グランドクリップを青レールに当てる。
+
+全波整流 (図3) は差動。**ブリッジの − (18 列) は FG の GND ではない。** AD の 2− を当てていた 18 列に
+グランドクリップを当てると、18 列が大地を通って FG の GND (青レール) とつながる。D5 は両端が
+同じ GND になり、負の半周期には D4 が FG の出力を GND へじかに短絡する。電流を止めるのは FG の 50 Ω
+だけで、山で約 88 mA (計算値) が D4 と FG に流れ、全波整流でもなくなる。
+
+そこで**回路はそのままで、2 本の先端をブリッジの + と − に当て、CH1 − CH2 で引く** (図4)。
+差 (出力、山で約 3.8 V) は各点の振れ (約 5 V) の 7 割あり、8 bit でも埋もれない。
+2 ch はこれで使い切るので、半波と全波は別々に測る (4 ch のオシロなら同時に測れる)。
+
+```circuit
+title: 図4 汎用オシロでの測り方
+style:
+  standard: jis
+  pitch: 1.2
+parts:
+  V1: sine c1 g1 l=$\mathrm{FG}$
+  D2: diode e4 c7 1N4148
+  D3: diode e10 c7 1N4148
+  D4: diode g7 e4 1N4148
+  D5: diode g7 e10 1N4148
+  RL2: resistor c13 i13 1.5k
+  M2: voltmeter i11 k11 l=$\mathrm{CH2}$
+  M1: voltmeter c16 k16 l=$\mathrm{CH1}$
+  G1: ground g1
+  G2: ground g10
+  G3: ground k13
+wires:
+  - c1 -- a1 -- a4 -- e4
+  - e10 -- g10
+  - c7 -- c13 -- c16
+  - g7 -- i7 -- i11 -- i13
+  - k11 -- k13 -- k16
+```
+
+- ブリッジの右の角 (FG の GND) と FG の − は、どちらも大地につながった同じ GND
+  (図では 2 つの接地の記号)。ブリッジの − は GND ではなく、CH2 の先端だけを当てる
+- CH1 の先端は 12 列 (+)、CH2 の先端は 18 列 (−)、グランドクリップは 2 本とも青レール。
+  ブレッドボードの部品は図3 のまま動かさない
+- 全波の出力は Math の CH1 − CH2。平均は Math の Mean か、CH1 と CH2 の Mean の差 (平均は引き算と
+  順序を入れ替えられる)。CH1・CH2 はどちらも 1 V/div、DC 結合。
+  各点は約 5 V の幅で振れるので、はみ出すなら Offset で画面に収める
+- FG の 50 Ω で山がつぶれ、平均値は AD で測るより約 3 % 低く出る (計算値。図1 のように 2 つを
+  同時につなぐと約 5 %)
+
 ## 見るべき値
 
 計算値。ダイオードの順電圧 Vf ≒ 0.6 V (1N4148) とした。

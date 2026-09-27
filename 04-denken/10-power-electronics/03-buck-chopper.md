@@ -118,6 +118,55 @@ wires:
 | Scope | CH1 = 出力 (Cout・RL の両端、1+ を P、1− を X にあてる差動)。Time base は 5 µs/div 程度 |
 | Measure | CH1 の Average (Vout) |
 
+### オシロスコープと発振器
+
+AD の CH1 は出力を P (赤レール) と X (17 列) の間で差動に読む。汎用オシロのグランドクリップは
+大地につながっていて、FG の GND も同じ大地につながっている
+([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)、
+[0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。X にクリップを当てると X が GND に落ち、
+Cout と RL が電源の 5 V にじかに掛かって、チョッパとして働かなくなる。Vout (約 2.35 V) は
+P (5 V) の半分近くあり 8 bit でも埋もれないので、**回路はそのままで、2 本の先端を P と X に当て、
+CH1 − CH2 で引く** (図3)。
+
+```circuit
+title: 図3 汎用オシロでの測り方
+style:
+  standard: jis
+  pitch: 1.2
+parts:
+  Vin: vsource b1 i1 5
+  D1: schottky f3 b3 1N5819
+  L1: inductor f5 d5 1m
+  Q1: nmos-e g5
+  Vg: square i3 h3 l=$\mathrm{FG}$
+  Cout: ecap b7 d7 10u
+  RL: resistor d10 b10 100
+  M2: voltmeter d12 i12 l=$\mathrm{CH2}$
+  M1: voltmeter b14 i14 l=$\mathrm{CH1}$
+  G1: ground i1
+wires:
+  - b1 -- b3 -- b7 -- b10 -- b14
+  - d5 -- d7 -- d10 -- d12
+  - f3 -- f5
+  - f5 -- Q1.D
+  - Q1.G -| h3
+  - Q1.S |- i5
+  - i1 -- i3 -- i5 -- i12 -- i14
+notes:
+  - text a8 blue: P (Vin の +)
+  - text e9 blue: X
+```
+
+- Vin は安定化電源の 5 V。+ を赤レール (2 列)、− を青レールへ。電流制限は 100 mA
+  (ふだんは平均 12 mA ほど、D = 75 % でも 30 mA 足らず。Q1 がオンのまま止まっても 50 mA ほど)
+- PWM は FG の OUT (High-Z)。Square、100 kHz、Duty 50 %、High 5 V / Low 0 V
+  (Amplitude と Offset で入れる機種なら 5 Vpp・2.5 V)。ゲートの容量は小さく、50 Ω でも波形は崩れない
+- CH1 の先端は赤レール (15 列、P)、CH2 の先端は 17 列 (X)、グランドクリップは 2 本とも青レール
+- Vout は Math (CH1 − CH2) の Mean か、CH1 と CH2 の Mean の差 (平均は引き算と順序を入れ替えられる)
+- 出力のリップル (約 1.6 mV) は CH1 − CH2 では 8 bit の 1 段より小さく読めない。見たいときは CH2 だけを
+  AC 結合にして 2 mV/div まで上げる。P を揺れない直流とみなせば、X の揺れが出力のリップル
+  (P の揺れも混じる)
+
 ## 見るべき値
 
 計算値 (Vin = 5 V、D = 50 %、f = 100 kHz、L = 1 mH、C = 10 µF、R_L = 100 Ω)。

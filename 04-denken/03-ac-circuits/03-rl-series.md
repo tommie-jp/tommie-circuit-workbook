@@ -77,6 +77,41 @@ wires:
 | Wavegen | W1: Sine、1 kHz、Amplitude 0.7 V |
 | Scope | CH1・CH2 とも DC 結合。Measure で CH1・CH2 の Amplitude (振幅) と、CH1 に対する CH2 の Phase を読む |
 
+### オシロスコープと発振器
+
+AD の CH1 は R1 の両端を差動で挟む (1− が 10 列)。汎用オシロのグランドクリップは大地につながって
+いるので、10 列には当てられない ([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)、
+[0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。V_R (0.51 V) は振れ (0.7 V) の 7 割あり
+8 bit でも埋もれないので、**回路はそのままで 2 本の先端を当て、V_R を CH1 − CH2 で引く** (図3)。
+2 ch はこれで使い切る。
+
+```circuit
+title: 図3 汎用オシロでの測り方
+style:
+  standard: jis
+  pitch: 1.2
+parts:
+  V1: sine c1 g1 l=$\mathrm{FG}$
+  M1: voltmeter c3 g3 l=$\mathrm{CH1}$
+  R1: resistor c3 c6 100 i=I
+  L1: inductor c6 g6 15m
+  M2: voltmeter c9 g9 l=$\mathrm{CH2}$
+  G1: ground g1
+wires:
+  - c1 -- c3
+  - c6 -- c9
+  - g1 -- g3 -- g6 -- g9
+```
+
+- W1 は FG の OUT (High-Z)。CH1 の先端は FG の出力 (5 列)、CH2 の先端は R1 と L1 の間 (10 列)、
+  グランドクリップは 2 本とも GND のレール。ブレッドボードの部品は図2 のまま動かさない
+- CH1 は電源の電圧 V、CH2 は V_L (図1 と同じ)、V_R は Math の CH1 − CH2
+- Math の波形に Phase を当てられない機種は、CH1 に対する CH2 の位相を読む。V は V_R より θ 進み、
+  V_L は V_R より 90° 進むので、読みは 90° − θ = +47° (計算値)。θ = 43° が出る
+- FG の出力の 50 Ω が R1 に足される。負荷は 137 Ω と小さく、振幅 0.7 V の設定のままだと CH1 は 0.54 V、
+  電流は 3.95 mA に下がる (計算値)。**CH1 の振幅が 0.70 V になるまで FG の振幅を上げる**
+  (設定は約 0.90 V、Vpp で入れる機種なら 1.80 Vpp)。そうすれば見るべき値の表がそのまま使える
+
 ## 見るべき値
 
 計算値 (R = 100 Ω、L = 15 mH、f = 1 kHz、振幅 0.7 V)。

@@ -90,6 +90,44 @@ wires:
 | Scope | CH1 = 1 次巻線の両端 (V1)。CH2 = Rs1 の両端 (差動、I0 = 読み ÷ 4.7 kΩ) |
 | Measure | CH2 の CH1 に対する Phase (φ0)。Average を 16 回以上にして雑音を減らす |
 
+### オシロスコープと発振器
+
+汎用の計器での読み替えは[回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md) と
+[0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md)。
+
+AD の CH2 は Rs1 の両端を差動で挟んでいる。Rs1 の電圧 (47 mV) は振れ (2 V) の 2 % ほどしかないので、
+2 本の先端で引く方法は使えない。8-1 と同じく **Rs1 を 1 次巻線の GND 側へ移し**、CH2 の 1 本で
+直に読む (図3)。2 次は開放のままで、どこにもクリップを当てない (1 次の GND だけが大地につながる)。
+
+```circuit
+title: 図3 汎用オシロでの測り方
+style:
+  standard: jis
+parts:
+  FG: sine c1 g1 l=$\mathrm{FG}$
+  M1: voltmeter c3 g3 l=$\mathrm{CH1}$
+  T1: transformer d7 10kto8
+  M2: voltmeter e4 g4 l=$\mathrm{CH2}$
+  Rs1: resistor e6 g6 4.7k i=I0
+  G1: ground g1
+wires:
+  - c1 -- c3 -- c6 |- T1.A1
+  - e6 |- T1.A2
+  - e4 -- e6
+  - g1 -- g3 -- g4 -- g6
+```
+
+- ブレッドボードは 8-1 と同じ組み替え: Rs1 (e3–e7) を抜いて 3 列と 7 列を線でつなぎ、
+  18 列から − レールへの黒い線を Rs1 (4.7 kΩ) に替える
+- FG は High-Z、Sine、1 kHz、振幅 2 V (Vpp で入れる機種なら 4 Vpp)。負荷は数百 kΩ なので、FG の 50 Ω は効かない
+- CH1 の先端を 3 列 (FG の出力)、CH2 の先端を 18 列。グランドクリップはどちらも − レール。
+  CH2 は 20 mV/div (振れは約 94 mVpp で、10 mV/div では縦 8 div を超える)、Average を 16 回以上
+- 位相は Measure の Phase (CH1 に対する CH2)。掛け算の Math は要らない。P0 は V1・I0・cos φ0 から計算する
+
+CH1 は V1 に Rs1 の電圧が乗った値で、振幅はほぼ同じだが位相が少しずれる。CH1 に対する
+CH2 の遅れは約 83° (計算値、V1 に対しては約 84°)。1° の差を気にするなら、V1 を Math の
+CH1 − CH2 で作り、それに対する位相を読む (Math の位相を測れない機種もある)。
+
 ## 見るべき値
 
 計算値。励磁電流はごく小さいので、実測は AD のノイズフロアに近く、桁や位相の

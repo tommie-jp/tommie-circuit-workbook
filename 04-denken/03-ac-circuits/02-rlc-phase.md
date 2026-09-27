@@ -82,6 +82,42 @@ notes:
 | Wavegen | W1: Sine、1 kHz、Amplitude 1 V |
 | Scope | CH1・CH2 とも DC 結合。Measure で CH1 に対する CH2 の Phase を読む |
 
+### オシロスコープと発振器
+
+AD の CH2 は Rs の両端を差動で挟むが、汎用オシロのグランドクリップは大地につながっていて挟めない
+([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)、
+[0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。Rs の電圧は 6〜16 mV と小さく、
+CH1 − CH2 の引き算では 8 bit の分解能に埋もれるので、0-3 の図3 と同じく **Rs を GND 側へ移す** (図3)。
+
+```circuit
+title: 図3 汎用オシロでの測り方
+style:
+  standard: jis
+  pitch: 1.2
+parts:
+  V1: sine c1 g1 l=$\mathrm{FG}$
+  M1: voltmeter c3 g3 l=$\mathrm{CH1}$
+  R1: resistor c5 e5 1k
+  Rs: resistor e7 g7 10 i=I
+  M2: voltmeter e9 g9 l=$\mathrm{CH2}$
+  G1: ground g1
+wires:
+  - c1 -- c3 -- c5
+  - e5 -- e7 -- e9
+  - g1 -- g3 -- g7 -- g9
+```
+
+- W1 は FG の OUT (High-Z)。1 kHz、振幅 1 V は Vpp で入れる機種なら 2 Vpp。
+  CH1 の先端は FG の出力 (DUT の上)、CH2 の先端は Rs の上、グランドクリップは 2 本とも GND
+- ブレッドボードは図2 から、Rs を 5〜10 列から抜いて FG の芯を 10 列へ挿す。15 列から GND のレールへの
+  黒い線を外し、Rs を 15〜20 列 (c15–c20) に挿して、20 列から GND のレールへ黒い線を渡す。
+  DUT は 10〜15 列のまま差し替える。CH1 の先端は 10 列、CH2 の先端は 15 列
+- CH1 は DUT と Rs を合わせた電圧になる。DUT だけの電圧は Math の CH1 − CH2。CH1 をそのまま使うと、
+  位相差は L で −89.1°、C で +89.6° と読める (計算値)。90° を見る題なので、この 1° 弱のずれは気にしなくてよい
+- FG の出力の 50 Ω で、R (1 kΩ) のときは電流が 0.94 mA、DUT の電圧が 0.94 V に下がる (計算値)。
+  L と C では 1.58 mA、0.63 mA で表とほぼ同じ
+- CH2 は 5〜10 mV/div、Average を 16 回。プローブは ×1 のほうが読みやすい (0-3)
+
 ## 見るべき値
 
 計算値 (Wavegen 振幅 1 V、1 kHz、シャント Rs = 10 Ω)。

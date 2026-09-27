@@ -106,6 +106,25 @@ wires:
 | Scope | CH1 = 入力 (Cin の手前)、CH2 = 出力 (Cout の先) |
 | Measure | CH1・CH2 の Amplitude |
 
+### オシロスコープと発振器
+
+1− と 2− は GND のレールなので、測り方は GND 基準のままでよい
+([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)・
+[0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。
+
+| AD | 汎用の計器 |
+| --- | --- |
+| W1 | FG の OUT。Sine、1 kHz、**100 mVpp** (AD の Amplitude 50 mV は山の高さ)、Offset 0 V、出力は High-Z |
+| V+ | 安定化電源の 5 V。電流制限は 10 mA (I_C 0.89 mA と分圧の 0.1 mA に余裕を見た値) |
+| 1+ | CH1 の先端を 5 列 (Cin の手前)、グランドクリップを GND のレール |
+| 2+ | CH2 の先端を 38 列 (Cout の先)、グランドクリップを GND のレール |
+
+- 入力は 50 mV と小さい。CH1 は 10〜20 mV/div にし、ノイズが気になれば
+  トリガを CH1 にして Average を掛ける
+- FG の 50 Ω は、この回路の入力インピーダンス (R1 ∥ R2 ∥ h_FE R_E ≒ 7.5 kΩ) に
+  対して 0.7 % の電圧降下で、無視できる。CH1 は Cin の手前 (FG の端子) を測るので、
+  増幅度の読みにはそもそも入らない
+
 ## 見るべき値
 
 計算値。h_FE = 250 と仮定 (実測は個体差で変わるが、A_v は h_FE によらない)。

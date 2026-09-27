@@ -96,6 +96,53 @@ wires:
 | 電源 | AD の Supplies (V+) を 5 V に設定 |
 | Scope | CH1 = Rbody の両端 (Vbody)。CH2 = Rleak の両端 (Ileak = 読み ÷ 1 kΩ) |
 
+### オシロスコープと発振器
+
+AD の Supplies (V+) は安定化電源の 5 V に替え、電流制限は 10 mA にする (この回路は最大 4.6 mA)
+([回路の本の 0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。CH1 は GND 基準で、
+先端を 7 列 (人体側の節点)、グランドクリップを青レールに当てる。
+
+この題はそれ自体が接地の実験なので、**汎用オシロのグランドクリップも「接地線」になる**ことに気を付ける
+([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md))。クリップは大地につながっていて、
+当てた点をそのまま大地に落とす。
+
+- 青レール (電源の −) に当てるのは差し支えない。模型の「大地」は回路の GND で、Rground もそこへ戻る。
+  クリップはその GND を本物の大地に結ぶだけで、回路は変わらない
+- AD の 2− を当てていた 15 列 (人体側の節点) に当てると、クリップが**接地抵抗 0 Ω の接地線**になる。
+  Rbody と Rground の両方が短絡され、S1 を開いても閉じても Vbody = 0 V。電源から Rleak に 5 mA が
+  流れ続け、接地の効果を測るつもりが、オシロの接地を測ることになる
+- プローブの先端の入力抵抗 (×1 で 1 MΩ、×10 で 10 MΩ) も Rbody に並列の「接地」だが、1 kΩ の
+  1000 倍以上で、効きは 0.1 % 以下
+
+そこで CH2 は Rleak の両端でなく、**電源の + (11 列) に先端を当て、Rleak の電圧を CH2 − CH1 で引く**
+(図3)。Rleak の電圧 (2.50 V / 4.58 V) は 5 V の半分以上あり、8 bit でも埋もれない。
+
+```circuit
+title: 図3 汎用オシロでの測り方
+style:
+  standard: jis
+  pitch: 1.2
+parts:
+  V1: vsource c1 g1 5
+  M2: voltmeter c4 g4 l=$\mathrm{CH2}$
+  Rleak: resistor c4 c7 1k i=Ileak
+  Rbody: resistor c7 g7 1k
+  M1: voltmeter c9 g9 l=$\mathrm{CH1}$
+  S1: switch c11 e11
+  Rground: resistor e11 g11 100
+  G1: ground g1
+wires:
+  - c1 -- c4
+  - c7 -- c9 -- c11
+  - g1 -- g4 -- g7 -- g9 -- g11
+```
+
+- CH1 の先端は 7 列、CH2 の先端は 11 列 (電源の +)、グランドクリップは 2 本とも青レール。
+  ブレッドボードの部品は図2 のまま動かさない
+- Ileak は Math の (CH2 − CH1) ÷ 1 kΩ。直流なので Measure の Mean で読み、Math に Measure を当てられない
+  機種は CH2 と CH1 の Mean の差でよい。接地ありの Vbody (0.417 V) は CH1 を 0.1 V/div に絞り、
+  Offset で 0 V を下へ寄せて読む
+
 ## 見るべき値
 
 計算値。Rleak = Rbody = 1 kΩ、Rground = 100 Ω とした。

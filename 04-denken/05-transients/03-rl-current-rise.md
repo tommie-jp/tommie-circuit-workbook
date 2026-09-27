@@ -83,6 +83,47 @@ wires:
 | Wavegen | W1: Square、2 kHz、Amplitude 1 V、Offset 1 V (0 V〜2 V の方形波) |
 | Scope | CH1 = 入力、CH2 = R1 の両端 (差動、電流の代わり)。Time base は 10 µs/div 前後 |
 
+### オシロスコープと発振器
+
+AD 版は CH2 を R1 の両端に差動で当てる (2− は中間点)。汎用オシロでは
+中間点にグランドクリップを当てられない。当てると中間点が GND に落ち、
+L1 を短絡して回路が変わる ([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md) の落とし穴)。
+
+**回路はそのまま、入力と中間点を GND 基準で測り、Math の CH1 − CH2 で R1 の両端を
+読む** (図3)。R1 の両端は 0〜1.9 V で、振れ (2 V) のほぼ全部なので、8 bit でも
+埋もれない。
+
+```circuit
+title: 図3 汎用オシロでの測り方
+parts:
+  V1: square a1 d1 1 l=$\mathrm{FG}$
+  M1: voltmeter a4 d4 l=$\mathrm{CH1}$
+  R1: resistor a6 a9 1k i=I
+  M2: voltmeter a11 d11 l=$\mathrm{CH2}$
+  L1: inductor a14 d14 10m
+  G1: ground d8
+wires:
+  - a1 -- a4 -- a6
+  - a9 -- a11 -- a14
+  - d1 -- d4 -- d8 -- d11 -- d14
+style:
+  standard: jis
+  pitch: 1.2
+```
+
+- FG は Square、2 kHz、**2 Vpp、Offset 1 V** (AD の Amplitude 1 V は山の高さ)、出力は
+  High-Z ([0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))
+- CH1 の先端を 5 列 (入力)、CH2 の先端を 10 列 (中間点。AD の 2− の穴) に当てる。
+  グランドクリップは 2 本とも GND のレール。ブレッドボードの部品は動かさない
+- 測る前に 2 本の先端を同じ点 (5 列) に当て、Math が 0 V 近くになるかを見る
+
+**FG の 50 Ω で値が変わる** (計算値)。50 Ω が R1 に直列に足され、
+τ = 10 mH ÷ 1050 Ω = 9.5 µs、最終値は 2 V ÷ 1050 Ω = 1.90 mA になる。
+CH1 − CH2 の読みは、1 τ で 1.20 V、2 τ で 1.65 V、3 τ で 1.81 V、5 τ で 1.89 V
+(最終値に対する 63・86・95・99 % は変わらない)。CH1 の入力の波形も平らではなく、
+立ち上がりで 2 V まで跳ねてから、電流が増えるにつれて 1.90 V へ下がる
+(FG の 50 Ω の電圧降下)。
+
 ## 見るべき値
 
 計算値。τ = L / R = 10 mH ÷ 1 kΩ = 10 µs。方形波の半周期 250 µs は 25 τ ぶんある

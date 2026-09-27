@@ -94,6 +94,51 @@ wires:
 | Wavegen | W1: Sine、1 kHz、Amplitude 1 V |
 | Scope | CH1 = 受電端電圧。CH2 = Rline の両端 (I = 読み ÷ 10 Ω)。Measure で振幅と位相 |
 
+### オシロスコープと発振器
+
+W1 は FG の OUT (High-Z、1 kHz、振幅 1 V。Vpp で入れる機種なら 2 Vpp) に読み替える
+([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)、
+[0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。AD の CH2 は Rline の両端
+(12 列と 16 列) を差動で挟む。汎用オシロのグランドクリップは大地につながっていて、FG の GND も
+同じ大地につながっているので、16 列に当てると Lline と Rload が GND に落ち、12 列に当てると FG の
+出力を GND へ短絡する。Rline の電圧は 80〜90 mV で、振れ (1 V) の 1 割に満たず、CH1 − CH2 では
+8 bit の分解能に埋もれる。そこで **Rline を戻りの線 (Rload と GND の間) へ移す** (図3)。
+線路の抵抗は行きと帰りのどちらにあっても、直列なので電流と損失は変わらない。試験の図とは位置が変わる。
+
+```circuit
+title: 図3 汎用オシロでの測り方
+style:
+  standard: jis
+  pitch: 1.2
+parts:
+  V1: sine c1 g1 l=$\mathrm{FG}$
+  S1: switch a3 a6
+  Lline: inductor c3 c6 10m
+  Rload: resistor c8 e8 100
+  Rline: resistor e8 g8 10 i=I
+  M2: voltmeter e11 g11 l=$\mathrm{CH2}$
+  M1: voltmeter c14 g14 l=$\mathrm{CH1}$
+  G1: ground g1
+wires:
+  - c1 -- c3
+  - a3 -- c3
+  - a6 -- c6
+  - c6 -- c8 -- c14
+  - e8 -- e11
+  - g1 -- g8 -- g11 -- g14
+```
+
+- 板の変え方: Rline を 12〜16 列から抜き、3 列からの黄の線を 12 列でなく 16 列へ挿す。
+  4 列から青レールへの黒い線を抜き、代わりに Rline を 4 列と青レールの間に挿す
+- CH1 の先端は 8 列 (Rload の上)、CH2 の先端は 4 列 (Rline の上)。グランドクリップは 2 本とも青レール
+- I は CH2 ÷ 10 Ω (図1 と同じ)。受電端電圧 Vr は Math の CH1 − CH2。Rload も Rline も抵抗なので、
+  Vr と I は同じ位相になる
+- FG の 50 Ω が線路の R に足される。負荷は 110〜127 Ω と小さく、振幅 1 V のままだと I の振幅は
+  5.82 mA (S1 を開く) / 6.25 mA (閉じる) に下がる (計算値)。**FG の出力端 (3 列) の振幅が 1.00 V に
+  なるよう、FG の振幅を上げる**: 先に CH1 の先端を 3 列に当てて合わせ、8 列へ戻す。設定は S1 を
+  開いて約 1.36 V、閉じて約 1.45 V (Vpp の機種なら 2.71 / 2.91 Vpp)。S1 を切り替えるたびに合わせ直せば、
+  見るべき値の表がそのまま使える
+
 ## 見るべき値
 
 計算値。Rline = 10 Ω、Lline = 10 mH (X_L = 62.8 Ω、1 kHz)、Rload = 100 Ω とした。

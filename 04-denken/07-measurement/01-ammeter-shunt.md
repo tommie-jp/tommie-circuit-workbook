@@ -82,6 +82,44 @@ wires:
 | Supplies | V+ = 5 V |
 | Scope | CH1 = 並列部分の電圧 (GND 基準)、CH2 = Rt の両端 (差動、全電流) |
 
+### オシロスコープと発振器
+
+汎用の計器での読み替えは[回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md) と
+[0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md)。この題は直流なので発振器は使わない。
+
+AD の CH2 は Rt の両端を差動で挟んでいる。汎用オシロのグランドクリップを Rt の下の端
+(並列部分) に当てると、並列部分が GND に落ちる。Rt の電圧は 4.84 V と電源の 9 割を超えるので、
+**回路はそのまま**、2 本の先端を Rt の両端に当てて CH2 − CH1 で引く (図3)。
+
+```circuit
+title: 図3 汎用オシロでの測り方
+parts:
+  V1: vsource b2 d2 5
+  M2: voltmeter b4 d4 l=$\mathrm{CH2}$
+  Rt: resistor b4 b7 1k i=Itot
+  M1: voltmeter b8 d8 l=$\mathrm{CH1}$
+  Rs: resistor b10 d10 50 i=Is
+  Rg: resistor b10 b13 100 i=Ig
+  G1: galvanometer b13 d13
+  G2: ground d2
+wires:
+  - b2 -- b4
+  - b7 -- b8 -- b10
+  - d2 -- d4 -- d8 -- d10 -- d13
+style:
+  standard: jis
+```
+
+| AD | 汎用の計器 |
+| --- | --- |
+| V+ = 5 V | 安定化電源 5 V、電流制限 10 mA (流れるのは 4.84 mA) |
+| 1+ (8 列) / 1− (− レール) | CH1 の先端を 8 列、グランドクリップを − レール |
+| 2+ (+ レール) / 2− (15 列) | CH2 の先端を + レール、グランドクリップを − レール。15 列の 2− の線は外す |
+| Scope | 入力の結合は DC。Measure の Mean で読む。Rt の電圧は CH2 − CH1 (Math か、2 つの Mean の差) |
+
+CH2 は Rt の電圧ではなく電源の電圧 (5.00 V、計算値) を読む。引いた 4.84 V は
+振れの 9 割あるので、8 bit のオシロでも分解能に埋もれない。
+
 ## 見るべき値
 
 計算値。Rg (100 Ω) と Rs (50 Ω) の並列 = 33.3 Ω。

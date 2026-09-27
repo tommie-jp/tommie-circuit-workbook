@@ -78,6 +78,14 @@ wires:
 | Wavegen | W1: Square、100 Hz、Amplitude 1 V、Offset 1 V (5-1 と同じ) |
 | Scope | CH1 = 入力、CH2 = 出力。Trigger は CH1 の**立ち下がり**にする |
 
+### オシロスコープと発振器
+
+発振器とプローブのつなぎ方は 5-1 の「オシロスコープと発振器」と同じ
+([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)・
+[0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。
+違うのはトリガを CH1 の**立ち下がり**にすることだけ。FG の 50 Ω で τ が
+0.5 % 延びる (1.005 ms、計算値) のも 5-1 と同じで、見るべき値はそのまま使える。
+
 ## 見るべき値
 
 計算値。τ = CR = 1.0 ms。立ち下がり直前の電圧を 2 V (5-1 で 5 τ 待って

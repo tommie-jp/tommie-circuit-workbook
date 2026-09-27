@@ -78,6 +78,42 @@ wires:
 | Supplies | V+ = 3 V (V+ の出力を 3 V に設定する。5 V しか出せない機種は R_m を大きくして電流を減らし、比だけ確かめる) |
 | Scope | CH1 = Rg の両端 (差動)、CH2 = 全体の電圧 (GND 基準) |
 
+### オシロスコープと発振器
+
+汎用の計器での読み替えは[回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md) と
+[0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md)。この題は直流なので発振器は使わない。
+
+AD の CH1 は Rg の両端を差動で挟んでいる。汎用オシロでは Rg の下の端にグランドクリップを
+当てられない (当てると Rm が GND に落ちる)。Rg の電圧 0.297 V は電源 3 V の 1 割しかなく、
+2 本の先端で引くと 8 bit の分解能に埋もれやすい。そこで **Rg と Rm の順を入れ替え、
+Rg を GND 側に置く** (図3)。試験の図 (検流計が電源側) とは上下が逆になるが、直列なので
+電流 I も倍率も変わらない。CH1 の 1 本で Rg の電圧を直に読める。
+
+```circuit
+title: 図3 汎用オシロでの測り方
+parts:
+  V1: vsource b2 d2 3
+  M2: voltmeter b4 d4 l=$\mathrm{CH2}$
+  Rm: resistor b4 b7 9.1k i=I
+  Rg: resistor b7 d7 1k
+  M1: voltmeter b9 d9 l=$\mathrm{CH1}$
+  G1: ground d2
+wires:
+  - b2 -- b4
+  - b7 -- b9
+  - d2 -- d4 -- d7 -- d9
+style:
+  standard: jis
+```
+
+- ブレッドボードは 5〜10 列に Rm (9k1)、10〜16 列に Rg (1k) を挿し替える。
+  10 列が Rm と Rg のつなぎ目になる
+- AD の 1+ (+t8) と 1− (a10) の線を外し、CH1 の先端を 10 列、グランドクリップを − レールに当てる。
+  CH2 は先端を + レール (2+ の所)、グランドクリップを − レール
+- 電源は安定化電源を 3 V、電流制限 10 mA (流れるのは 0.3 mA)。3 V をそのまま出せるので、
+  AD の Supplies の注意書き (5 V しか出せない機種) は要らない
+- 入力の結合は DC、Measure の Mean で読む。CH1 と CH2 の読みは「見るべき値」の表と同じ
+
 ## 見るべき値
 
 計算値。n = (1k + 9.1k) / 1k = 10.1。

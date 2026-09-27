@@ -80,6 +80,49 @@ wires:
 | Wavegen | W1: Triangle、100 Hz、Amplitude 1.5 V、Offset 0.5 V |
 | Scope | CH1 = ダイオードの両端、CH2 = R1 の両端 (差動)。XY 表示で CH1 を X、CH2 (÷ 1 kΩ で電流) を Y にすると特性曲線が見える |
 
+### オシロスコープと発振器
+
+AD 版は CH2 を R1 の両端に差動で当てる (2− は 10 列)。10 列はダイオードの
+アノードで、GND ではない。汎用オシロのグランドクリップをそこへ当てると、
+アノードが GND に落ち、ダイオードが短絡される ([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md) の落とし穴)。
+
+**回路はそのまま、FG の出力とアノードを GND 基準で測り、Math の CH2 − CH1 で
+R1 の両端 (電流) を読む** (図3)。ダイオードの両端 (CH1) は 1 本の先端で直に読める。
+この題で大事なのは、電流が変わってもほとんど動かないダイオードの電圧のほうなので、
+そちらを引き算にしない。
+
+```circuit
+title: 図3 汎用オシロでの測り方
+parts:
+  V1: triangle a1 d1 1.5 l=$\mathrm{FG}$
+  M2: voltmeter a4 d4 l=$\mathrm{CH2}$
+  R1: resistor a6 a9 1k i=I
+  M1: voltmeter a11 d11 l=$\mathrm{CH1}$
+  D1: diode a14 d14 1N4148
+  G1: ground d8
+wires:
+  - a1 -- a4 -- a6
+  - a9 -- a11 -- a14
+  - d1 -- d4 -- d8 -- d11 -- d14
+style:
+  standard: jis
+  pitch: 1.2
+```
+
+- FG は Triangle、100 Hz、**3 Vpp、Offset 0.5 V** (AD の Amplitude 1.5 V は山の高さ)、
+  出力は High-Z ([0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))
+- CH1 の先端を 15 列 (アノード)、CH2 の先端を 5 列 (FG の出力) に当てる。
+  グランドクリップは 2 本とも GND のレール。ブレッドボードの部品は動かさない
+- **XY 表示の軸に Math を選べない機種が多い。** 選べる機種なら X = CH1、Y = Math で
+  特性曲線が出る。選べなければ、時間軸の表示で CH1 と Math をカーソルで読んで表の
+  5 点を拾うか、波形を CSV で保存して表計算で散布図にする
+- 立ち上がりの手前 (0.04 mA = Math で 40 mV) は Math の読みが粗い。
+  Average を掛け、2 本の先端を同じ点に当てて Math が 0 V 近くになるかを先に見る
+
+**FG の 50 Ω で値が変わる** (計算値)。表の「Wavegen の電圧」を CH2 (FG の端子の電圧)
+と読めば、表の行はそのまま使える。ただし FG の端子は電流の分だけ下がり、山は 2.0 V
+ではなく 1.93 V、そのときの電流は 1.31 mA (ダイオードの両端 0.62 V) で止まる。
+
 ## 見るべき値
 
 計算値 (1N4148 の代表的なモデル、I_S ≈ 4.4 nA、n ≈ 1.9 で計算)。

@@ -80,6 +80,21 @@ wires:
 | Wavegen | W1: Square、100 Hz、Amplitude 1 V、Offset 1 V (0 V〜2 V の方形波) |
 | Scope | CH1 = 入力、CH2 = 出力。Time base は 1 ms/div 前後、Trigger は CH1 の立ち上がり |
 
+### オシロスコープと発振器
+
+1− と 2− は GND のレールなので、測り方は GND 基準のままでよい
+([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)・
+[0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。
+
+| AD | 汎用の計器 |
+| --- | --- |
+| W1 | FG の OUT。Square、100 Hz、**2 Vpp、Offset 1 V** (AD の Amplitude 1 V は山の高さ。FG の多くは Vpp で決める)、出力は High-Z。High 2 V・Low 0 V で決められる機種はそれでよい |
+| 1+ | CH1 の先端を 5 列 (入力)、グランドクリップを GND のレール |
+| 2+ | CH2 の先端を 15 列 (C1 の上の端)、グランドクリップを GND のレール |
+
+FG の 50 Ω は R1 に直列に足される。τ = 100 nF × 10.05 kΩ = 1.005 ms (計算値) で、
+0.5 % の違いは部品の誤差に隠れる。見るべき値はそのまま使える。
+
 ## 見るべき値
 
 計算値。τ = CR = 10 kΩ × 100 nF = 1.0 ms。方形波の半周期 5 ms は 5τ ぶんあるので、
