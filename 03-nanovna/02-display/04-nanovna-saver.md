@@ -45,7 +45,7 @@ device: H4
 ```vna
 device: h4
 sweep: 1M-300M 401
-title: 図1 401 点 (Saver の分割掃引) で見た Thru
+title: 図1 Saver の 401 点で見た Thru — 理想は平ら
 dut: series R 0
 traces:
   - S21 logmag
@@ -53,6 +53,8 @@ traces:
 markers:
   - 1M
   - 300M
+notes:
+  - text 20M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
 
 ## 見るべき値

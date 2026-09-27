@@ -44,7 +44,7 @@ NanoVNA-Saver・NanoVNA-App、本体の SD カード保存のどれも同じ系�
 ```vna
 device: h4
 sweep: 1M-300M 101
-title: 図1 保存前の理想値 (100 Ω を直列に入れた治具)
+title: 図1 100 Ω を直列に入れた治具の理想 (保存前)
 dut: series R 100
 traces:
   - S21 logmag
@@ -53,6 +53,8 @@ traces:
 markers:
   - 10M
   - 300M
+notes:
+  - text 20M -20dB: S21 も S11 も −6.02 dB で重なる
 ```
 
 ## 見るべき値

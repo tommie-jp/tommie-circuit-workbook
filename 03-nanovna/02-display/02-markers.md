@@ -43,6 +43,10 @@ markers:
   - 69M
   - 90M
   - 150M
+notes:
+  - band 1M 69M
+  - text 5M -60dB: 通過域 (〜69 MHz)
+  - text 72M -40dB: 印 2 (69 MHz) が −3 dB の遮断
 ```
 
 - **マーカー 1 (30 MHz)** — 通過域。S21 はほぼ 0 dB

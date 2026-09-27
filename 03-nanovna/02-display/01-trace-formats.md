@@ -30,7 +30,7 @@ DUT は R 35 Ω・L 220 nH・C 6.2 pF の直列共振回路 (先を短絡して�
 ```vna
 device: h4
 sweep: 100M-180M 161
-title: 図1 4 つの形式 (Log Mag・位相・Smith・SWR)
+title: 図1 Log Mag と位相 — 136 MHz の共振で谷と位相の変わり目
 dut:
   - series R 35
   - series L 220n
@@ -39,10 +39,30 @@ dut:
 traces:
   - S11 logmag
   - S11 phase
+markers:
+  - 136M
+notes:
+  - text 140M -30dB: 共振 136 MHz の谷 (−15.06 dB)
+```
+
+同じ DUT を、残りの 2 つの形式 (Smith・SWR) で見る。
+
+```vna
+device: h4
+sweep: 100M-180M 161
+title: 図2 Smith と SWR — 共振しても SWR は 1.43 まで
+dut:
+  - series R 35
+  - series L 220n
+  - series C 6.2p
+  - short
+traces:
   - S11 smith
   - S11 swr
 markers:
   - 136M
+notes:
+  - text 124M 6: 共振でも 1.43 (R が 35 Ω)
 ```
 
 - **Log Mag** — 反射の大きさを dB で見る。共振点で谷になる (S11 が小さい
