@@ -78,61 +78,56 @@ V<sub>C</sub> ≈ 2.5V (電源のほぼ半分、安定に振れる余地があ�
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-board: full
+board: half
 parts:
+  VC1:
+    type: device
+    at: top
+    label: ポリバリコン 260pF
+    pins: [E, A]
   ANT:
     type: device
     at: top
     label: アンテナ
     pins: ["1"]
-  VC1:
-    type: device
-    at: top
-    label: ポリバリコン 260pF
-    pins: [A, E]
   EAR:
     type: device
-    at: top
+    at: bottom
     label: クリスタルイヤホン
     pins: [A, B]
-  L1: inductor/axial b3 b7 250u
-  C1: capacitor/ceramic d3 d9 0.01u
-  Q1: transistor f13(B) f15(C) f17(E) 2SC1815
-  Rb: resistor c20 c24 220k
-  Rc: resistor c26 c29 1.5k
-  D1: diode d32(A) d38(K) 1N60
-  C3: capacitor/ceramic d41 d44 0.001u
-  R3: resistor c41 c44 100k
+  L1: inductor/axial b8 b12 250u
+  C1: capacitor/ceramic d8 d14 0.01u
+  Q1: transistor j14(B) j18(C) j22(E) 2SC1815
+  Rb: resistor h14 h18 220k
+  Rc: resistor d18 d15 1.5k
+  D1: diode a18(A) a24(K) 1N60
+  C3: capacitor/ceramic b24 b28 0.001u
+  R3: resistor d24 d28 100k
 wires:
-  - ANT.1 -- a3 yellow
-  - VC1.A -- c3 yellow
-  - VC1.E -- -t2 black
-  - a7 -- -t7 black
-  - a9 -- g13 orange
-  - a20 -- c9 orange
-  - a24 -- b15 blue
-  - a15 -- g15 blue
-  - a26 -- c15 blue
-  - a29 -- +t29 red
-  - g17 -- -t17 black
-  - b32 -- d15 gray
-  - b38 -- b41 green
-  - a44 -- -t44 black
-  - EAR.A -- a38 green
-  - EAR.B -- -t48 black
-  - -t50 -- -b50 black
+  - ANT.1 -- c8 yellow
+  - VC1.A -- a8 yellow
+  - VC1.E -- -t6 black
+  - a12 -- -t12 black
+  - e14 -- f14 orange
+  - e18 -- f18 blue
+  - +t15 -- a15 red
+  - i22 -- i23 black
+  - j23 -- -b23 black
+  - e24 -- f24 green
+  - EAR.A -- j24 green
+  - EAR.B -- -b26 black
+  - a28 -- -t28 black
+  - -t30 -- -b30 black
 ```
 
-- 上の赤レール = +5V (USB や電池)、青レール = GND。50 列で上下の − レールを
-  渡している
-- Q1 のベース (f13) は 9 列の橋渡し (a9・c9) を通じて C1 の右足・Rb の左足 (20 列) と
-  つながる。コレクタ (f15) は 15 列の橋渡し (a15〜d15) を通じて Rb の右足 (24 列)・
-  Rc の左足 (26 列)・D1 のアノード (32 列) とつながる
-- 1 つの穴には足か線を 1 本だけ挿す。部品の足がある列へは、同じ列の空いた穴から
-  線を出す (c24 の Rb の足には a24 から、など)
-- D1 のカソード (d38) から b38 → b41 へ渡し、41 列で C3・R3 の左足と、38 列 (a38) で
-  EAR の A 端子が同じ検波出力のネットに並列に入る。C3・R3 の右足 (44 列、a44 から) と
-  EAR の B 端子は上の − レール (GND) へ
+- 上の赤レール = +5V (USB や電池)、青レール = GND。30 列で上下の − レールを渡している
+- 前段は 8 列にアンテナ・VC1・L1・C1 をまとめる。L1 の右足 (12 列) は上の − レールへ
+- Q1 は下のブロックの j 行 (14 列 B・18 列 C・22 列 E)。ベース (14 列) とコレクタ (18 列) は
+  e–f の短い線で上のブロックへも出し、足の多いネットを上下に分ける。
+  Rb はベースとコレクタの間 (h 行)、Rc はコレクタと 15 列 (+5V) の間
+- D1 のアノードはコレクタ (a18)、カソード (a24) が検波出力。24 列に C3・R3 の左足が並び、
+  e–f の線で下へ出して EAR の A 端子 (j24) へ。C3・R3 の右足 (28 列) と EAR の B 端子は GND へ
+- 1 つの穴には足か線を 1 本だけ挿す
 
 ## 見るべき値
 

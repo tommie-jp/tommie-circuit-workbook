@@ -104,56 +104,58 @@ Rb2 を 2.4kΩ に下げて I<sub>C</sub> を元とほぼ同じ (3V 時 ≈0.74m
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-board: full
+board: half
 parts:
+  MIC:
+    type: device
+    at: top
+    label: マイク
+    pins: [GND, OUT]
   ANT:
     type: device
     at: top
     label: アンテナ 20cm
     pins: ["1"]
-  MIC:
-    type: device
-    at: top
-    label: マイク
-    pins: [OUT, GND]
-  Q1: transistor f10(B) f12(C) f14(E) 2SC1815
-  Rb1: resistor a6 a10 10k
-  C1: capacitor/ceramic a12 a14 22p
-  Rb2: resistor c7 c10 2.4k
-  Cant: capacitor/ceramic c12 c13 2p
-  L1: inductor/axial d12 d16 260n
-  Rmic: resistor d18 d20 2.2k
-  Re: resistor e14 e17 470
-  Cmic: capacitor/ceramic e20 e22 0.1u
-  C2: capacitor/ceramic c14 c17 47p
-  Cb: capacitor/ceramic e25 e27 0.1u
-  C3: capacitor/ceramic e10 e7 0.001u
+  Rmic: resistor b2 b6 2.2k
+  Cmic: capacitor/ceramic d6 d14 0.1u
+  Rb1: resistor b10 b14 10k
+  Rb2: resistor g14 g10 2.4k
+  C3: capacitor/ceramic i14 i10 0.001u
+  Q1: transistor j14(B) j18(C) j22(E) 2SC1815
+  L1: inductor/axial c18 c15 260n
+  Cant: capacitor/ceramic b18 b22 2p
+  C1: capacitor/ceramic g18 g22 22p
+  Re: resistor f22 f26 470
+  C2: capacitor/ceramic h22 h26 47p
+  Cb: capacitor/ceramic b26 b28 0.1u
 wires:
-  - +t6 -- b6
-  - b10 -- g10
-  - +t16 -- b16
-  - b12 -- g12
-  - b7 -- -t7
-  - ANT.1 -- b13
-  - b14 -- g14
-  - +t18 -- b18
-  - MIC.OUT -- b20
-  - MIC.GND -- -t21
-  - b17 -- -t17
-  - b22 -- d10
-  - +t25 -- b25
-  - b27 -- -t27
+  - +t2 -- a2 red
+  - MIC.GND -- -t4 black
+  - MIC.OUT -- a6 green
+  - +t10 -- a10 red
+  - j10 -- -b10 black
+  - e14 -- f14 orange
+  - +t15 -- a15 red
+  - e18 -- f18 blue
+  - ANT.1 -- a22 yellow
+  - j26 -- -b26 black
+  - +t26 -- a26 red
+  - a28 -- -t28 black
+  - -t30 -- -b30 black
 ```
 
-- 赤レール = +5V (USB や電池)、青レール = GND
+- 上の赤レール = +5V (USB や電池)、青レール = GND。30 列で上下の − レールを渡している
 - **アンテナ線は 20cm ほど**にとどめる (伸ばすと電波法の範囲を超えやすい)。
   結合コンデンサ Cant (2pF) も指定どおりの小さい値で
 - L1 は太さ 0.6mm のエナメル線を直径 8mm の丸棒に 8 回巻き、両端をブレッド
   ボードの穴に合わせて曲げたもの (インダクタンスは目安。実測でずれる)
-- Q1 のベース (f10、10 列) に Rb1・Rb2 の分圧と Cmic からのマイク音声 (d10 へ渡す)、
-  ベースを高周波で GND に落とす C3 (e10 → 7 列の GND 側) が集まる。
-  1 つの穴には足か線を 1 本だけ挿す
-  コレクタ (f12、12 列) に L1・Cant・C1 が、エミッタ (f14、14 列) に C1・C2・Re が集まる
+- Q1 は下のブロックの j 行 (14 列 B・18 列 C・22 列 E)。ベース (14 列) とコレクタ (18 列) は
+  e–f の短い線で上のブロックへも出す
+- ベース (14 列) に Rb1 (上、10 列の +5V から)・Cmic (上)・Rb2 と C3 (下、10 列の GND へ) が集まる。
+  マイクの音声は 6 列 (Rmic の右足と MIC の OUT) から Cmic でベースへ
+- コレクタ (18 列) に L1 (15 列の +5V から)・Cant・C1、エミッタ (22 列) に C1・C2・Re が集まる。
+  C2 と Re の GND 側は 26 列から下の − レールへ。Cb は 26〜28 列で +5V と GND の間
+- 1 つの穴には足か線を 1 本だけ挿す
 
 ## 見るべき値
 
