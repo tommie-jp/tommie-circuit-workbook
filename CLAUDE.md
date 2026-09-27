@@ -32,6 +32,7 @@ CC BY 4.0。回路図と実体配線図は tommie-fence のフェンス
   (回路図は readable-schematic、ブレッドボードは breadboard-wiring、ユニバーサル基板は perfboard-wiring)。
   信号は左から右、電源は上・GND は下、線は箱や記号を横切らない、など。check はつながりしか見ないので、
   PNG にして点検表を 1 項目ずつ通す。既存の図を手本にするときも、先に点検表に通す
+  (図のフェンスを書き込むと、`.claude/hooks/drawing-skill-reminder.sh` が Claude にこれを思い出させる)
 - 字の重なりや配線の見え方は check では分からない。`npm run render` の SVG か、
   VS Code 拡張のプレビューで見る
 - Analog Discovery と NanoVNA は板の外の機器 (`type: device`) で描き、足の名前で配線する
