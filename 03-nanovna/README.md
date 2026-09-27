@@ -304,7 +304,7 @@ GHz 帯の作法をまとめる。
 | --- | --- | --- | --- | --- |
 | 11-1 | [スペアナの種類 — 掃引型・FFT 型・SDR と、壊さない使い方](11-spectrum-analyzer/01-kinds-and-safety.md) | 入門 | SA | — |
 | 11-2 | [中心・スパン・RBW・基準レベル](11-spectrum-analyzer/02-center-span-rbw.md) | 入門 | SA | — |
-| 11-3 | [ノイズフロアとアッテネータ — 小さい信号をどこまで見られるか](11-spectrum-analyzer/03-noise-floor-attenuator.md) | 入門 | SA | — |
+| 11-3 | [ノイズフロアとアッテネータ — 小さい信号をどこまで見られるか](11-spectrum-analyzer/03-noise-floor-attenuator.md) | 入門 | SA | BB |
 | 11-4 | [NanoVNA の出力を測る — 周波数と電力と高調波](11-spectrum-analyzer/04-nanovna-output.md) | 入門 | SA | — |
 | 11-5 | [方形波の高調波 — 555 と CMOS の発振器](11-spectrum-analyzer/05-square-wave-harmonics.md) | 入門 | SA | BB |
 | 11-6 | FM 送信機の出力と高調波 | 中級 | SA | BB |

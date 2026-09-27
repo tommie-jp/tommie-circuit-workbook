@@ -28,6 +28,10 @@ CC BY 4.0。回路図と実体配線図は tommie-fence のフェンス
 - 文法は tommie-fence の `packages/<x>-fence/docs/02-cheatsheet.md` と `01-syntax.md`。
   3 つは似ているが同じではない (番地、`board:`、注釈の種類、DIP の書き方)
 - 書いたら `npm run check -- --verbose` でネットリストを出し、意図した回路と突き合わせる
+- **図の配置は [electronics-drawing-skills](https://github.com/tommie-jp/electronics-drawing-skills) の流儀と点検表に従う**
+  (回路図は readable-schematic、ブレッドボードは breadboard-wiring、ユニバーサル基板は perfboard-wiring)。
+  信号は左から右、電源は上・GND は下、線は箱や記号を横切らない、など。check はつながりしか見ないので、
+  PNG にして点検表を 1 項目ずつ通す。既存の図を手本にするときも、先に点検表に通す
 - 字の重なりや配線の見え方は check では分からない。`npm run render` の SVG か、
   VS Code 拡張のプレビューで見る
 - Analog Discovery と NanoVNA は板の外の機器 (`type: device`) で描き、足の名前で配線する
