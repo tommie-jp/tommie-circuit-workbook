@@ -23,10 +23,7 @@ parts:
   ANT: port a1
   L1: inductor a3 c3 250u
   GL: ground c3
-  VC1:
-    type: device
-    at: b6
-    pins: [A, E]
+  VC1: capacitor-var a5 c5 l=$\mathrm{VC}_1$
   GVC: ground c5
   D1: diode a8 a10 1N60
   C2: capacitor a11 c11 1n
@@ -40,8 +37,6 @@ parts:
   GEAR: ground c16
 wires:
   - a1 -- a8
-  - a4 |- VC1.A
-  - VC1.E -| c5
   - a10 -- a15
   - a15 |- EAR.A
   - EAR.B -| c16
