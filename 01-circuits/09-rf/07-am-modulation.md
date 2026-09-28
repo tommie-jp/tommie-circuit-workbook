@@ -140,7 +140,7 @@ parts:
   R1: resistor c16 c21 1k
   R2: resistor a21 a25 10k
   C1: capacitor/ceramic d25 d29 100p
-  Cant: capacitor/ceramic i22 i28 100p
+  Cant: capacitor/ceramic i22 i27 100p
 wires:
   - GEN.OUT -- a10 green
   - GEN.GND -- -t8 black
@@ -154,7 +154,7 @@ wires:
   - a29 -- -t29 black
   - h20 -- h13 black
   - j13 -- -b13 black
-  - ANT.1 -- j28 yellow
+  - ANT.1 -- j27 yellow
   - -t30 -- -b30 black
 ```
 
@@ -166,7 +166,7 @@ wires:
   Cmod で発振器 (GEN) から入る
 - 足 7 (21 列) と 16 列の間に R1、足 7 と 25 列の間に R2。足 6 (c 行の線) と足 2
   (h 行の線) を 25 列にまとめ、C1 で GND へ
-- ループ線は足 3 (22 列) から Cant を通した 28 列 (下)
+- ループ線は足 3 (22 列) から Cant を通した 27 列 (下、j27)
 - 足 1 (20 列) は h 行の線で 13 列へ出し、そこから下の − レールへ落とす (j 行を計器のために空けておく)
 - 計器のつなぎ方は「計器の設定」の図3 (オシロ) と図4 (スペアナ)
 
@@ -196,13 +196,13 @@ wires:
 | --- | --- |
 | プローブ | 2 本とも 10:1。測る点は下の 4 つで、図ごとに付け替える |
 | 足 3 (搬送波) | 22 列の空き穴 (j22)。DC 結合 |
-| ANT (Cant の先) | 28 列の空き穴 (j28。ループ線は h28 に挿し替える)。DC 結合 |
+| ANT (Cant の先) | 27 列の空き穴 (j27。ループ線は g 行の短い線で 28 列へ延ばした j28 に挿し替える)。DC 結合 |
 | 音声 (発振器の端子) | Cmod の発振器側、10 列の空き穴 (c10)。DC 結合 |
 | 足 8 (555 の電源) | 16 列の空き穴 (j16)。AC 結合で音声の揺れだけを見る |
 | 搬送波を見るとき (図5・図7) | CH1 足 3 (2 V/div)、CH2 ANT (図5、1 V/div)。0.5 µs/div、トリガは CH1 の立ち上がり |
 | 音声を見るとき (図6) | CH1 音声、CH2 足 8。どちらも 200 mV/div、200 µs/div、トリガは CH1 の立ち上がり |
 | 変調の包絡線を見るとき | CH1 足 3 (1 V/div)、CH2 足 8。200 µs/div、トリガは CH2 (音声) の立ち上がり |
-| スペアナのつなぎ方 | 足 3 の空き穴 (j22) から **10 kΩ (Rsa) と 0.01 µF (Csa) を直列に**通して入力 (50 Ω) へ (図4。j22 → j19 の線 → Rsa → Csa → j10)。入力に届くのは搬送波で約 −27 dBm (計算値) で、入力の上限に十分収まる。**足 3 を直に入力へつながない** (4〜5 V の方形波は入力の上限を超える) |
+| スペアナのつなぎ方 | 足 3 の空き穴 (j22) から **10 kΩ (Rsa) と 0.01 µF (Csa) を直列に**通して入力 (50 Ω) へ (図4。j22 → j19 の線 → Rsa → Csa → h10)。入力に届くのは搬送波で約 −27 dBm (計算値) で、入力の上限に十分収まる。**足 3 を直に入力へつながない** (4〜5 V の方形波は入力の上限を超える) |
 | スペアナの掃引 | 無変調の高調波を見るとき: 開始 100 kHz・終了 4 MHz。側波を見るとき: 中心 686 kHz・スパン 10 kHz、RBW 300 Hz 以下 (tinySA Ultra は 200 Hz まで絞れる) |
 
 - 足 2・6 (25 列) にはプローブを当てない。プローブの容量 (10〜15 pF) が C1 (100 pF) に
@@ -238,7 +238,7 @@ parts:
   R1: resistor c16 c21 1k
   R2: resistor a21 a25 10k
   C1: capacitor/ceramic d25 d29 100p
-  Cant: capacitor/ceramic i22 i28 100p
+  Cant: capacitor/ceramic i22 i27 100p
 wires:
   - GEN.OUT -- a10 green
   - GEN.GND -- -t8 black
@@ -252,20 +252,23 @@ wires:
   - a29 -- -t29 black
   - h20 -- h13 black
   - j13 -- -b13 black
-  - ANT.1 -- h28 yellow
+  - g27 -- g28 yellow
+  - ANT.1 -- j28 yellow
   - -t30 -- -b30 black
   - SCOPE.CH1 -- j22 purple
-  - SCOPE.CH2 -- j28 pink
+  - SCOPE.CH2 -- j27 pink
   - SCOPE.GND -- -b17 black
 notes:
-  - box j22 j22 red solid
-  - box h28 j28 red solid
-  - box -b17 -b17 red solid
+  - circle j22
+  - circle j27
+  - circle -b17
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/07-am-modulation-2.svg)
 
-- 赤い枠は図2 から足した所 (プローブの穴と GND)。図は足 3 (CH1) と ANT (CH2) を見るとき (図5)。GND のクリップは下の − レールへ
+- 赤い丸はプローブを当てる穴と GND のクリップの所。図は足 3 (CH1) と ANT (CH2) を見るとき (図5)。GND のクリップは下の − レールへ
+- ループ線は g27〜g28 の短い線 (黄) で 28 列へ延ばして j28 に挿し替え、空いた j27 に CH2 を当てる。
+  プローブの線とループ線が同じ列に並んで触れないようにするため
 - 音声と足 8 を見るとき (図6) は、CH1 を c10、CH2 を j16 に付け替える
 
 ### スペアナのつなぎ方
@@ -295,7 +298,7 @@ parts:
   R1: resistor c16 c21 1k
   R2: resistor a21 a25 10k
   C1: capacitor/ceramic d25 d29 100p
-  Cant: capacitor/ceramic i22 i28 100p
+  Cant: capacitor/ceramic i22 i27 100p
   Rsa: resistor i19 i14 10k
   Csa: capacitor/ceramic f14 f10 0.01u
 wires:
@@ -311,21 +314,21 @@ wires:
   - a29 -- -t29 black
   - h20 -- h13 black
   - j13 -- -b13 black
-  - ANT.1 -- j28 yellow
+  - ANT.1 -- j27 yellow
   - -t30 -- -b30 black
   - j22 -- j19 purple
-  - SA.IN -- j10 purple
+  - SA.IN -- h10 purple
   - SA.GND -- -b12 black
 notes:
-  - box f10 g14 red solid
-  - box i14 j22 red solid
-  - box j10 j10 red solid
-  - box -b12 -b12 red solid
+  - circle j22
+  - circle h10
+  - circle -b12
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/07-am-modulation-3.svg)
 
-- 赤い枠は図2 から足した所。Rsa (10 kΩ) と Csa (0.01 µF) で足 3 の方形波を小さくし、直流を切ってから入力へ渡す。
+- 図2 から足したのは Rsa (i14〜i19)・Csa (f10〜f14)・紫の線 (j19〜j22) と、スペアナの 2 本。赤い丸は線をつなぐ穴
+  (足 3 の取り出し口 j22、入力の h10、GND の − レール)。Rsa (10 kΩ) と Csa (0.01 µF) で足 3 の方形波を小さくし、直流を切ってから入力へ渡す。
   **足 3 を直に入力へつながない**
 - オシロのプローブ (図3) を外してからつなぐ。どちらも足 3 の j22 を使う
 
