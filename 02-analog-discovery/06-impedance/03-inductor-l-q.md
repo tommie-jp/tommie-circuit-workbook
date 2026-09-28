@@ -38,6 +38,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/circuit/03-inductor-l-q.svg)
+
 - Rref は 680 Ω。1 kHz より高い**10 kHz** で測るので、XL (628 Ω) に近い値を選んだ
 - L<sub>DUT</sub> は 10 mH のリード付きインダクタ (小信号用)。巻線抵抗は数 Ω〜数十 Ω
   あり、データシートに無いことが多いので実測する
@@ -64,6 +66,8 @@ wires:
   - a14 -- -t14 black
   - AD.GND -- -t17 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/breadboard/03-inductor-l-q.svg)
 
 配線の考え方は 6-1・6-2 と同じ。10 列がコイルと Rref の中点。
 

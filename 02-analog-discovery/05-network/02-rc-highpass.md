@@ -31,6 +31,8 @@ wires:
   - a7 -- a9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/02-rc-highpass.svg)
+
 C1 = 100 nF、R1 = 1 kΩ → f<sub>c</sub> は 5-1 と同じ **≈ 1.59 kHz**
 (直列の RC で f<sub>c</sub> = 1/(2πRC) は R と C の順番によらない)。
 
@@ -56,6 +58,8 @@ wires:
   - AD.2- -- -t12 black
   - a14 -- -t14 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/breadboard/02-rc-highpass.svg)
 
 5-1 の R1 と C1 を入れ替えただけの配置。**5-1 のブレッドボードから部品を
 入れ替えるだけで作れる。**

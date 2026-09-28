@@ -32,6 +32,8 @@ wires:
   - a9 |- c5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/12-pulse-runt-timeout-trigger.svg)
+
 W1（2 kHz、0〜3.3 V の方形波）→ R1（1 kΩ、直列）→ CH1 の節点。SW1（ボタン）と
 R2（330 Ω）は CH1 の節点から GND への「わざと作る短絡経路」——普段は開いていて
 波形に影響しない (CH1 の入力は 1 MΩ なので R1 の電圧降下はほぼ 0) が、押すと
@@ -62,6 +64,8 @@ wires:
   - j20 -- -b20 black
   - -t25 -- -b25 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/12-pulse-runt-timeout-trigger.svg)
 
 W1 は 5 列から R1 を通って 10 列へ。CH1 (1+) は R1 の後ろの 10 列で測る。
 SW1（`@ e15`、溝をまたぐタクトスイッチ）の上側（e15 の 15 列）が信号線、下側

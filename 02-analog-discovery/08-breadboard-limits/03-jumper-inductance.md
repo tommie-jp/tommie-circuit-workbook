@@ -38,6 +38,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/03-jumper-inductance.svg)
+
 - L<sub>jumper</sub> は**部品ではなく、ジャンパ線 (約 5 cm) の自己インダクタンスの
   模型**。実際にはただの銅線 1 本
 - 経験式 L (nH) ≈ 0.2 l {ln(2l/d) − 0.75} (l, d は mm) で見積もると、
@@ -67,6 +69,8 @@ wires:
   - AD.2- -- b20 gray
   - a20 -- -t20 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/breadboard/03-jumper-inductance.svg)
 
 図のインダクタ記号は**測る対象のジャンパ線そのもの**を指す (実物のインダクタは
 使わない)。配線の考え方は 6-3 と同じ。

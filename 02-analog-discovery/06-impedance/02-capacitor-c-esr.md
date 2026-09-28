@@ -38,6 +38,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/circuit/02-capacitor-c-esr.svg)
+
 - C<sub>DUT</sub> は 4.7 µF の小型電解コンデンサ。**電解は極性がある**ので、
   帯 (−側) を GND 側に向ける
 - Rref は 33 Ω。ESR (数 Ω) と Xc (数十 Ω) を足した |Z| に近い値を選ぶと、
@@ -65,6 +67,8 @@ wires:
   - a14 -- -t14 black
   - AD.GND -- -t17 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/breadboard/02-capacitor-c-esr.svg)
 
 - 電解コンデンサは**帯のある側 (−) を 14 列 = GND 側**に挿す。逆に挿すと壊れる
 - 配線の考え方は 6-1 と同じ。10 列が Rref とコンデンサの中点

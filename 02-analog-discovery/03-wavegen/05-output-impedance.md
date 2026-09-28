@@ -36,6 +36,8 @@ wires:
   - a9 -- c9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/05-output-impedance.svg)
+
 - S1 を開けたままだと CH1 は開放電圧をそのまま読む (CH1 自身の入力抵抗は
   1 MΩ 以上あり、無視できる)
 - S1 を閉じると R<sub>L</sub> = 50 Ω が W1 の出力と GND の間に入る。ベンチの
@@ -61,6 +63,8 @@ wires:
   - AD.1- -- -t8 black
   - a13 -- -t13 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/breadboard/05-output-impedance.svg)
 
 S1 を抜いたまま (開放) 測ってから、挿して (短絡) もう一度測る。実際にスイッチを
 用意できないときはジャンパ線の抜き差しでよい。R<sub>L</sub> は 50 Ω に固定し、

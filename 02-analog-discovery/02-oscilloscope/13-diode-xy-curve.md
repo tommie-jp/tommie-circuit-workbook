@@ -35,6 +35,8 @@ wires:
   - c1 -- a7
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/13-diode-xy-curve.svg)
+
 W1（三角波、1.5 V の振幅・1.5 V のオフセットで 0〜3 V を往復）→ R1（330 Ω、電流
 制限）→ D1（1N4148）→ Rs（22 Ω、電流検出）→ GND。CH1 は R1 の**先**（D1 と Rs を
 合わせた両端＝ほぼダイオードの順電圧 V<sub>D</sub>）、CH2 は Rs の両端だけ
@@ -63,6 +65,8 @@ wires:
   - AD.2- -- -t20 black
   - AD.GND -- -t22 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/13-diode-xy-curve.svg)
 
 CH1（`1+` / `1-`）は R1 の**先**（12 列＝D1 のアノード側）と GND の間——D1 と
 Rs を合わせた電圧、すなわちダイオードの順電圧にほぼ等しい（Rs は小さいため）。

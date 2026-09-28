@@ -42,6 +42,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/04-rc-lowpass-deviation.svg)
+
 - C<sub>stray</sub> は 8-2 で測った**列間の寄生容量**。C1 (10 pF) と並列に乗るので、
   実際に効いている容量は 10 + 2.5 = 12.5 pF — **理論値より 25% も大きい**
 - 1+ が入力 (W1)、2+ が出力 (R と C の中点)。1−・2− は GND
@@ -69,6 +71,8 @@ wires:
   - AD.2- -- -t18 black
   - a20 -- -t20 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/breadboard/04-rc-lowpass-deviation.svg)
 
 - R1 (10 列) と C1 (15 列) の間を渡す配線が**そのまま 8-2 の「隣の列」**にもなる。
   この図に寄生容量は描かれていない — **描かなくても勝手に乗る**のがブレッドボードの

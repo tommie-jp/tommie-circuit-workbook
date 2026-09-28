@@ -29,6 +29,8 @@ wires:
   - c1 -- c3 -- c5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/05-sweep-settings.svg)
+
 板は使わない。W1 を CH1・CH2 の両方に直結する (5-8 で使うスルー基準と同じ考え方)。
 
 ## 計器の設定

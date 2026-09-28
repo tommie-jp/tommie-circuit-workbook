@@ -31,6 +31,8 @@ wires:
   - c1 -- c3 -- c5 -- c7
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/03-cursors-rc.svg)
+
 W1 (100 Hz、0〜3.3 V の方形波) を R1 (10 kΩ)・C1 (100 nF) の直列に通す。
 CH1 は W1 の出力そのもの (方形波)、CH2 は C1 の両端 (充放電カーブ)。
 
@@ -55,6 +57,8 @@ wires:
   - AD.2+ -- b10 blue
   - AD.2- -- c15 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/03-cursors-rc.svg)
 
 R1 と C1 は 10 列の穴で中点 (RC の接続点) を共有する。CH2 はその中点
 (b10) と GND (c15) から読む。

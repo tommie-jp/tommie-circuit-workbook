@@ -45,6 +45,8 @@ wires:
   - i9 -- i17
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/circuit/01-common-emitter-bandwidth.svg)
+
 - R1・R2 (39 kΩ・12 kΩ) がベースの分圧、Re (220 Ω、バイパスなし) がエミッタの
   負帰還。Rc (1 kΩ) がコレクタ負荷
 - 1+ は Cin の手前 (W1)、2+ はコレクタ (出力)。1−・2− は GND
@@ -83,6 +85,8 @@ wires:
   - j27 -- -b27 black
   - -t28 -- -b28 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/breadboard/01-common-emitter-bandwidth.svg)
 
 - `Q1` の実際の足の並びは平らな面を見て E・C・B。図のとおり左から B・C・E
   (g20・g21・g22) に挿すには**平らな面を奥 (a〜e 側) に向ける**

@@ -46,6 +46,8 @@ wires:
   - AD.1- -| a9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/09-555-spectrum.svg)
+
 2-8 と同じ 555 回路 (Ra 1 kΩ・Rb 10 kΩ・Ct 68 nF)。4017 の分周は使わず、
 CH1 (`1+`) で OUT (3 番) をそのまま Spectrum に送る。
 
@@ -78,6 +80,8 @@ wires:
   - AD.1+ -- g16 orange
   - AD.1- -- -t18 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/breadboard/09-555-spectrum.svg)
 
 2-8 の配線から 4017 (U2) を外しただけ。Ra・Rb・Ct が発振の CR 網、Ccv は 5 番
 (CV) の定番バイパス。

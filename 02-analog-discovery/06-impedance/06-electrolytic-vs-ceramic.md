@@ -40,6 +40,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/circuit/06-electrolytic-vs-ceramic.svg)
+
 ## 実体配線図
 
 6-2 と同じ配線。**電解 (帯を GND 側に) → セラミック (極性なし、向きは自由)**
@@ -65,6 +67,8 @@ wires:
   - a14 -- -t14 black
   - AD.GND -- -t17 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/breadboard/06-electrolytic-vs-ceramic.svg)
 
 セラミックに差し替えるときは `capacitor/ceramic` (極性なし。どちら向きでもよい)。
 

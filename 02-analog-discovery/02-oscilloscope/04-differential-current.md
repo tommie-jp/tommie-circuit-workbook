@@ -31,6 +31,8 @@ wires:
   - a7 -- e7
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/04-differential-current.svg)
+
 V+ (5 V) → R1 (330 Ω) → LED → Rs (1 Ω、電流検出用) → GND。CH1 (`1+` /
 `1-`) を Rs の両端につなぎ、差動で読む。
 
@@ -55,6 +57,8 @@ wires:
   - AD.1- -- -t20 black
   - AD.GND -- -t22 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/04-differential-current.svg)
 
 Rs (1 Ω) は LED のカソード (14 列) の続きに置く。CH1 (`1+`) は 14 列の
 別の穴 (a14) から取り、Rs の先 (18 列) と `1-` は GND レールへ落とす。

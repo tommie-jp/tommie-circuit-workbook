@@ -28,6 +28,8 @@ wires:
   - c1 -- c3 -- c5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/07-persistence.svg)
+
 2-1 と同じ、方形波 → 負荷抵抗 → CH1 の回路。
 
 ## 実体配線図
@@ -48,6 +50,8 @@ wires:
   - AD.1+ -- a5 orange
   - AD.1- -- a10 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/07-persistence.svg)
 
 ## 計器の設定
 

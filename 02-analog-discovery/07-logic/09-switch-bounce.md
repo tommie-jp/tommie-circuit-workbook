@@ -34,6 +34,8 @@ wires:
   - AD.GND -| n5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/09-switch-bounce.svg)
+
 - R1 (10 kΩ) は**プルアップ**。スイッチが離れている間、DIO0 は R1 を通じて
   H (3.3 V) に保たれる
 - SW1 を押すと n3 が GND (n5) に落ちて DIO0 は L になる。**このとき接点が
@@ -62,6 +64,8 @@ wires:
   - j9 -- +b21 red
   - AD.DIO0 -- i5 yellow
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/breadboard/09-switch-bounce.svg)
 
 - `button @ e5` は溝をまたぐタクトスイッチで、e5・e7・f5・f7 の 4 穴を占める。
   **e5 と e7 (上ブロック側) は内部でつながっていて 1 本の足、f5 と f7

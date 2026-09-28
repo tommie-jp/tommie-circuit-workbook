@@ -31,6 +31,8 @@ wires:
   - a7 -- a9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/07-noise-rc-filter.svg)
+
 V1 の記号は正弦だが、実際は Wavegen の Function を **Noise** にして使う (3-1 と
 同じ考え方)。R1 (1 kΩ)・C1 で 3-2 と同じ RC ローパス。CH1 が入力 (ノイズその
 もの)、CH2 が出力 (フィルタを通ったあと)。
@@ -58,6 +60,8 @@ wires:
   - AD.2- -- -t18 black
   - a20 -- -t20 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/breadboard/07-noise-rc-filter.svg)
 
 3-2 と同じ配線 (R1 1 kΩ、C1 100 nF)。この後の測定で C1 を 1 µF に差し替える。
 

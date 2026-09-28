@@ -63,6 +63,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/circuit/04-two-tone-imd.svg)
+
 - Rsuma・Rsumb (各 10 kΩ) が W1・W2 を足し合わせる抵抗。**足し合わせる時点で
   それぞれの振幅は半分になる** (等しい抵抗どうしの分圧) ので、Wavegen 側の
   振幅は狙う振幅の 2 倍にしておく
@@ -112,6 +114,8 @@ wires:
   - +t30 -- +b30 red
   - -t1 -- -b1 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/breadboard/04-two-tone-imd.svg)
 
 - Rsuma (W1 側、3 列) と Rsumb (W2 側、4 列) の先を 7 列で合流させる。ここが
   2 つの正弦波を足した節点で、Cin (7〜10 列) を通って 9-2 と同じバイアス点

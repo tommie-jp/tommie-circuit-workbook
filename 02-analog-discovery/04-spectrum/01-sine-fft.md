@@ -27,6 +27,8 @@ wires:
   - c1 -- c3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/01-sine-fft.svg)
+
 ## 計器の設定
 
 | 計器 | 設定 |

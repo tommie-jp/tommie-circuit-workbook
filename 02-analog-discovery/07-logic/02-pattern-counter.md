@@ -37,6 +37,8 @@ wires:
   - AD.DIO3 -| U2.4
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/02-pattern-counter.svg)
+
 - 16=VDD、8=GND、**13=CE・15=MR は GND に固定**して常時カウントさせる
 - 14=CLK に Pattern の DIO0、3=Q0・2=Q1・4=Q2 を Logic の DIO1〜DIO3 で観測
 - **VDD (16 番) は Supplies の V+ を 3.3 V にして受ける。** `DIO` の出力 High は
@@ -72,6 +74,8 @@ wires:
   - +t22 -- +b22 red
   - -t23 -- -b23 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/breadboard/02-pattern-counter.svg)
 
 16=VDD (e12) の列を +t で電源へ。13=CE・15=MR (上ブロック) を -t で GND に固定、
 8=GND (下ブロック) は -b へ。AD は板の下に置き、V+・GND を下のレールへ入れて、

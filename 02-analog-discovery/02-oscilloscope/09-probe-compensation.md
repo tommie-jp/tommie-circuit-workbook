@@ -38,6 +38,8 @@ wires:
   - c1 -- c7 -- c13
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/09-probe-compensation.svg)
+
 - W1（1 kHz、0〜3.3 V の方形波）→ Rs（10 kΩ、信号源の内部抵抗のつもり）→ 節点 TP。
 - CH1 は TP に**ワイヤで直結**（プローブなし）。AD の入力そのもの（1 MΩ ∥ 24 pF）が
   TP にぶら下がる。
@@ -67,6 +69,8 @@ wires:
   - AD.2+ -- b14 blue
   - AD.2- -- -t20 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/09-probe-compensation.svg)
 
 Rs は 5〜10 列の中点が信号源 TP（10 列）。CH1（`1+`）は TP と同じ 10 列（b10）に
 直結。Rp（`a` 行）と Cp（`e` 行）は 10〜14 列で上下に離して並べて並列にし、

@@ -31,6 +31,8 @@ wires:
   - a7 -- a9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/01-rc-lowpass-bode.svg)
+
 R1 = 1 kΩ、C1 = 100 nF → **f<sub>c</sub> = 1 / (2πRC) ≈ 1.59 kHz**。
 
 ## 実体配線図
@@ -55,6 +57,8 @@ wires:
   - AD.2- -- -t12 black
   - a14 -- -t14 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/breadboard/01-rc-lowpass-bode.svg)
 
 ## 計器の設定
 

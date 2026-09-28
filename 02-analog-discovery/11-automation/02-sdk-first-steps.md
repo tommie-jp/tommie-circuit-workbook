@@ -45,6 +45,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/11-automation/circuit/02-sdk-first-steps.svg)
+
 11-1 と全く同じ RC ローパス。1+ が入力 (W1)、2+ が出力 (R と C の中点)。
 
 ## 計器の設定

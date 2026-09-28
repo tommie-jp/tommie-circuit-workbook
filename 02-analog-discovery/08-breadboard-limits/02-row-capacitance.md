@@ -41,6 +41,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/02-row-capacitance.svg)
+
 - C<sub>stray</sub> は**部品ではない**。実装した部品ではなく、板の 2 つの列が
   近いことで生じる寄生容量を表す (実体配線図には現れない)
 - C<sub>in</sub> も部品ではない。**AD のオシロ入力の容量** (1 入力あたり約 24 pF、2-9)。
@@ -72,6 +74,8 @@ wires:
   - AD.2- -- -t14 black
   - a11 -- -t11 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/breadboard/02-row-capacitance.svg)
 
 - Rref の先 (10 列、a〜e) には部品を**わざと何もつながない** (計器の 1− と 2+ だけ)。
   10 列と、GND に落とした隣の 11 列 (同じ a〜e の側。`a11 -- -t11`) だけが、

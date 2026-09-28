@@ -38,6 +38,8 @@ wires:
   - AD.GND -| c12
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/05-crosstalk.svg)
+
 - 加害側 (c3) は W1 が直接駆動し、1+ でその振幅を確かめる
 - 被害側 (c9) は Cstray 経由でしかつながっていない。Rterm (100 Ω) は
   被害側を GND に軽く落とす**対策**の抵抗 — まずこれを外した状態 (被害側が
@@ -65,6 +67,8 @@ wires:
   - AD.2- -- -t13 black
   - a11 -- -t11 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/breadboard/05-crosstalk.svg)
 
 - 5 列 (加害側) と 6 列 (被害側) は、8-2 (10 列と 11 列) と同じく隣り合った列
   (どちらも a〜e の側)。Rterm は 6 列から GND レールへ (11 列を経由)。**外した状態も試すので、いったん挿さずに測ってから

@@ -29,6 +29,8 @@ wires:
   - c1 -- c3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/10-bandwidth-rise-time.svg)
+
 W1（100 kHz、0〜3.3 V の方形波）を CH1 に直結。周期 10 μs に対して立ち上がりは
 ずっと短いので、他のエッジと混ざらずに 1 つの立ち上がりだけを拡大して見られる。
 

@@ -42,6 +42,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/circuit/04-self-resonance.svg)
+
 - L<sub>DUT</sub> と並列に描いた **Cp (5 pF)** は実装した部品ではなく、コイルの巻線間に
   できる寄生容量。実物には無いラベルだが、SRF を計算するために書いてある
 - SRF = 1 / (2π√(L·Cp)) ≈ **7.12 MHz** (Cp は仮定値。実測の SRF から逆算もできる)
@@ -68,6 +70,8 @@ wires:
   - a14 -- -t14 black
   - AD.GND -- -t17 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/breadboard/04-self-resonance.svg)
 
 配線の考え方は 6-1〜6-3 と同じ。寄生容量は板の上には現れない (コイルの中の話)
 ので、実体配線図には出てこない。

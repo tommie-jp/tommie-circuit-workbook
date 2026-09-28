@@ -29,6 +29,8 @@ wires:
   - c1 -- c3 -- c5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/11-record-mode.svg)
+
 1-2 と同じ、正弦波 → 負荷抵抗 → CH1 の回路。
 
 ## 実体配線図
@@ -49,6 +51,8 @@ wires:
   - AD.1+ -- a5 orange
   - AD.1- -- a10 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/11-record-mode.svg)
 
 ## 計器の設定
 

@@ -33,6 +33,8 @@ wires:
   - c1 -- c5 -- c9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/06-czt-zoom.svg)
+
 W1・W2 を 1 kΩ ずつで足し合わせ、CH1 (1 MΩ、ほとんど電流を取らない) で
 読む。合成した電圧はほぼ (W1 + W2) ÷ 2 になる。
 

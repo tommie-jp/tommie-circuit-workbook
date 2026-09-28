@@ -42,6 +42,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/circuit/07-open-short-compensation.svg)
+
 - **Open**: R<sub>DUT</sub> の場所に**何も挿さない** (c9・c12 を空けたまま)
 - **Short**: R<sub>DUT</sub> の場所を**ジャンパ線 1 本**に差し替える (c9−c12 間を導線に)
 - **実測**: R<sub>DUT</sub> (10 kΩ) を挿す
@@ -71,6 +73,8 @@ wires:
   - a14 -- -t14 black
   - AD.GND -- -t17 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/breadboard/07-open-short-compensation.svg)
 
 R<sub>DUT</sub> (10〜14 列) を空ける・ジャンパにする・10 kΩ にする、の 3 通り。
 Open のとき、14 列 (2− 側) は浮くのではなく **6-2 と同様に基準側の配線には

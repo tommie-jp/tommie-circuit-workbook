@@ -28,6 +28,8 @@ wires:
   - c1 -- c3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/03-am-fm.svg)
+
 板は使わない。W1 の出力をそのまま 1+ で読む。
 
 ## 計器の設定

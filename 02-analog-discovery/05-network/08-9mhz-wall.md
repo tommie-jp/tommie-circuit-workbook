@@ -29,6 +29,8 @@ wires:
   - c1 -- c3 -- c5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/08-9mhz-wall.svg)
+
 板は使わない。5-5 と同じ結線 (W1 を CH1・CH2 の両方に直結) だが、掃引を
 10 MHz まで伸ばす。
 

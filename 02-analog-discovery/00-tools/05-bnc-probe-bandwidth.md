@@ -29,6 +29,8 @@ wires:
   - c1 -- c3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/circuit/05-bnc-probe-bandwidth.svg)
+
 0-3 と同じ配線。振幅 1 V（Vpp 2 V）を保ったまま、周波数だけを変える。
 
 ## 計器の設定

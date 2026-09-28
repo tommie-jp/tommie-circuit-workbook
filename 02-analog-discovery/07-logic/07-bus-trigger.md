@@ -39,6 +39,8 @@ wires:
   - AD.DIO3 -| U2.4
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/07-bus-trigger.svg)
+
 回路は 7-2 と同じ (**16=VDD・8=GND、13=CE・15=MR は GND に固定して常時
 カウント**。14=CLK に Pattern の DIO0、3=Q0・2=Q1・4=Q2 を DIO1〜DIO3 で
 観測)。**VDD は Supplies の V+ を 3.3 V にして受ける** (7-2 と同じ理由 —
@@ -72,6 +74,8 @@ wires:
   - +t22 -- +b22 red
   - -t23 -- -b23 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/breadboard/07-bus-trigger.svg)
 
 配線も 7-2 と同じ (16=VDD (e12) を +t で電源へ。13=CE・15=MR (上ブロック) を
 -t で GND に固定、8=GND (下ブロック) は -b へ。3=Q0・2=Q1・4=Q2 は下ブロック

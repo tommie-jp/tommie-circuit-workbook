@@ -31,6 +31,8 @@ wires:
   - a7 -- e7
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/14-averaging-resolution.svg)
+
 2-4 とまったく同じ回路。V+（5 V）→ R1（330 Ω）→ LED → Rs（1 Ω）→ GND。CH1 は
 Rs の両端（≈ 9.1 mV、mV の値がそのまま mA の値）。
 
@@ -55,6 +57,8 @@ wires:
   - AD.1- -- -t20 black
   - AD.GND -- -t22 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/14-averaging-resolution.svg)
 
 ## 計器の設定
 

@@ -52,6 +52,8 @@ wires:
   - U1.A0 -| e5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/04-i2c-temperature.svg)
+
 - R1・R2 は SDA・SCL の **プルアップ (4.7 kΩ)**。I2C はオープンドレインなので
   プルアップが無いと H が出ない
 - A0・A1・A2 を GND に落とすと 7 ビットアドレスは **0x48**。3 本とも浮かせたり
@@ -86,6 +88,8 @@ wires:
   - +t12 -- +b12 red
   - -t13 -- -b13 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/breadboard/04-i2c-temperature.svg)
 
 **LM75 の実物は SO-8 (または MSOP-8) しか売っていない**ので、ブレッドボードには
 SOP を DIP 化する変換基板 (`dip8/sop`) に載せて挿す (置き方・足番号は DIP と同じ)。

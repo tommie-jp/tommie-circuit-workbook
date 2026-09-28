@@ -42,6 +42,8 @@ wires:
   - AD.DIO3 -| U1.13
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/05-spi.svg)
+
 - MCP3008 (`U1`): **16=VDD・15=VREF を共に 3.3 V** (DIO の H レベルと合わせる。
   MCP3008 は 2.7〜5.5 V で動くので 3.3 V でも問題ない)、9=DGND・14=AGND は GND。
   10=CS̄・11=DIN・12=DOUT・13=CLK を AD の DIO0〜DIO3 へ
@@ -80,6 +82,8 @@ wires:
   - +t27 -- +b27 red
   - -t28 -- -b28 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/breadboard/05-spi.svg)
 
 - U1 (MCP3008) は `r180` で置き、下ブロックに 9=DGND (f12) 〜 16=VDD (f19)、
   上ブロックに 1=CH0 (e19) 〜 8=CH7 (e12) が並ぶ (列が逆向き)。こうすると

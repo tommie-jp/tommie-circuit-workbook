@@ -57,6 +57,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/circuit/03-1db-compression.svg)
+
 9-2 と全く同じ回路 (交流利得 = 1 + Rf/Rg = 11 倍)。振幅だけを変えて何度も測る。
 
 ## 実体配線図
@@ -99,6 +101,8 @@ wires:
   - +t29 -- +b29 red
   - -t30 -- -b30 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/breadboard/03-1db-compression.svg)
 
 9-2 と同じ配置。9-2 の板をそのまま使い、振幅だけを Wavegen 側で変えていく。
 

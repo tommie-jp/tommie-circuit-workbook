@@ -27,6 +27,8 @@ wires:
   - c1 -- c3 -- c5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/02-measurements.svg)
+
 W1 は振幅 1.65 V・オフセット 1.65 V (0〜3.3 V)、デューティ 30% の方形波。
 
 ## 実体配線図
@@ -47,6 +49,8 @@ wires:
   - AD.1+ -- a5 orange
   - AD.1- -- a10 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/02-measurements.svg)
 
 ## 計器の設定
 

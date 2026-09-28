@@ -29,6 +29,8 @@ wires:
   - c1 -- c3 -- c5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/circuit/06-wire-vs-coax-square-wave.svg)
+
 W1（5 MHz、振幅 1 V、オフセット 0 V の方形波）に負荷 R1（1 kΩ）をつなぎ、CH1 で
 その両端を読む。Wavegen の出力インピーダンスはほぼ 0 Ω なので、R1 は負荷を
 定義するためだけの抵抗（1-2 と同じ役目）。
@@ -51,6 +53,8 @@ wires:
   - AD.1+ -- a5 orange
   - AD.1- -- a10 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/breadboard/06-wire-vs-coax-square-wave.svg)
 
 図では付属ワイヤ（`yellow` / `black` の細いリード線）でつないである。BNC アダプタで
 測るときは、この同じ 5 列・10 列の点に同軸プローブのグラバーを挟むだけで、

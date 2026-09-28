@@ -27,6 +27,8 @@ wires:
   - c1 -- c3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/08-fm-spectrum.svg)
+
 板は使わない。3-3 と同じ FM 波を W1 から出し、CH1 で読む。
 
 ## 計器の設定

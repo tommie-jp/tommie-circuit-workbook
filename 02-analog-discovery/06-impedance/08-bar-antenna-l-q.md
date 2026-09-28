@@ -39,6 +39,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/circuit/08-bar-antenna-l-q.svg)
+
 - Rref は 220 Ω。**100 kHz** で測るので、XL (約 207 Ω) に近い値を選んだ
 - L<sub>ANT</sub> はバーアンテナの巻線 (代表的な値として 330 µH を使う。実物は
   タップ付きのことが多く、ここでは巻線全体の両端を測る)
@@ -71,6 +73,8 @@ wires:
   - a14 -- -t14 black
   - AD.GND -- -t17 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/breadboard/08-bar-antenna-l-q.svg)
 
 - バーアンテナは基板に載る 2 本足の部品ではないので、AD と同じ**板の外の
   機器**として下辺 (`at: bottom`) に描いた。2 本の巻線の端 (A・B) をワイヤで

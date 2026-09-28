@@ -32,6 +32,8 @@ wires:
   - c1 -- c3 -- c5 -- c6 -- c7 -- c9 -- c11
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/circuit/01-supplies.svg)
+
 - V1 が V+ (GND に対して +5 V)、V2 が V− (**GND に対して −5 V**。+ 側を GND に向けて描いてある)
 - 電圧計は**上の番地が + 側**。CH2 は −5 V を読む
 
@@ -61,6 +63,8 @@ wires:
   - AD.2+ -- a15 blue
   - AD.2- -- -t17 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/breadboard/01-supplies.svg)
 
 - −5 V は**赤いレールに出さない**。レールの色 (+) と中身 (−) が食い違い、
   挿し間違えの元になる。V− のワイヤを 15 列に直に挿す

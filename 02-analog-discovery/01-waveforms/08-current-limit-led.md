@@ -41,6 +41,8 @@ wires:
   - a5 -- c1
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/circuit/08-current-limit-led.svg)
+
 V+（Supplies）→ R1（330 Ω）→ LED → GND。R1 が無いと LED の順方向抵抗はごく
 小さいので大電流が流れ、LED か AD 自体を壊す恐れがある——**これは実機では
 試さない**。
@@ -65,6 +67,8 @@ wires:
   - AD.1- -- -t12 black
   - AD.GND -- -t14 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/breadboard/08-current-limit-led.svg)
 
 R1（5〜8 列）の先（8 列）が LED のアノード。CH1（`1+` / `1-`）は LED の両端
 （8 列と GND）を読み、LED の順方向電圧をそのまま示す。

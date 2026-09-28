@@ -56,6 +56,8 @@ wires:
   - c1 -- c3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/10-formula-waveform.svg)
+
 板は使わない。V1 の記号は正弦だが、実際は上の CSV を Custom で出す。
 
 ## 計器の設定

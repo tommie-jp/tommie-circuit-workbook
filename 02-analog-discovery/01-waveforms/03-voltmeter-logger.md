@@ -28,6 +28,8 @@ wires:
   - c1 -- c3 -- a5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/circuit/03-voltmeter-logger.svg)
+
 V+ (5 V) を R1 (2.2 kΩ) と R2 (1 kΩ) で分圧し、その中点を CH1 で読む。
 
 ## 実体配線図
@@ -49,6 +51,8 @@ wires:
   - AD.1+ -- b10 orange
   - AD.1- -- a15 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/breadboard/03-voltmeter-logger.svg)
 
 R1 と R2 は 10 列の穴 (c10 / d10) で中点を共有する。CH1 はその中点
 (b10) と GND (a15) から読む。

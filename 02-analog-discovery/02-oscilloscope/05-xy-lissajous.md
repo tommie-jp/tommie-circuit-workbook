@@ -30,6 +30,8 @@ wires:
   - c1 -- c3 -- c5 -- c7
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/05-xy-lissajous.svg)
+
 外部の部品は無く、`W1`→`1+`、`W2`→`2+`、GND 共通のループバック。
 
 ## 計器の設定

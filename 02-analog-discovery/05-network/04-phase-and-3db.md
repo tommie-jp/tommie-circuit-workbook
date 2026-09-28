@@ -33,6 +33,8 @@ wires:
   - a7 -- a9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/04-phase-and-3db.svg)
+
 f<sub>c</sub> = 1 / (2π × 2.2 kΩ × 47 nF) ≈ **1.539 kHz**。
 
 ## 実体配線図
@@ -57,6 +59,8 @@ wires:
   - AD.2- -- -t12 black
   - a14 -- -t14 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/breadboard/04-phase-and-3db.svg)
 
 ## 計器の設定
 

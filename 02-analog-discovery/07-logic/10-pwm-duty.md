@@ -33,6 +33,8 @@ wires:
   - AD.GND -| n5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/10-pwm-duty.svg)
+
 - R1 (1 kΩ) は LED の電流制限。DIO0 が H (3.3 V) のとき、赤 LED の順方向電圧を
   2.0 V とすると電流は (3.3 − 2.0) / 1 kΩ = **1.3 mA** — LED の上限 (20 mA) にも
   DIO の駆動能力 (AD2 の DIO は 4 mA 駆動) にも十分収まる
@@ -57,6 +59,8 @@ wires:
   - AD.GND -- -b6 black
   - j9 -- -b9 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/breadboard/10-pwm-duty.svg)
 
 R1 (f5〜f7) と D1 (g7〜g9) は列 7 で同じ下ブロックの列につながっているので、
 R1 の f7 側と D1 のアノード (g7) は追加の配線なしでそのまま同じ節点になる。

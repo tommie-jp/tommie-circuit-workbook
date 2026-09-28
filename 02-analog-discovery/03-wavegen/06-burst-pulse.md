@@ -31,6 +31,8 @@ wires:
   - a9 -- c9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/06-burst-pulse.svg)
+
 - V1 (W1) は Square、Idle は Offset の値。Repeat 1 にすると、山 (High) → 谷 (Low)
   の 1 組だけ出て Idle に戻る — 谷は Idle と同じ電圧なので、見えるのは**山 1 個の
   パルス**だけになる
@@ -57,6 +59,8 @@ wires:
   - AD.1- -- -t8 black
   - a12 -- -t12 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/breadboard/06-burst-pulse.svg)
 
 R1 (100 Ω) と LED を直列にして 5〜12 列に組む。CH1 (`1+`) は W1 と同じ 5 列の
 別の穴から取る。

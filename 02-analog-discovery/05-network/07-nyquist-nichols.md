@@ -34,6 +34,8 @@ wires:
   - a7 -- a9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/07-nyquist-nichols.svg)
+
 f<sub>c</sub> = 1 / (2πRC) ≈ 1.59 kHz (5-1 と同じ)。
 
 ## 実体配線図
@@ -60,6 +62,8 @@ wires:
   - AD.2- -- -t12 black
   - a14 -- -t14 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/breadboard/07-nyquist-nichols.svg)
 
 ## 計器の設定
 

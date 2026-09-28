@@ -35,6 +35,8 @@ wires:
   - c7 -- e7
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/circuit/09-logger-lm35.svg)
+
 `+Vs` を V+（5 V）、`GND` を GND につなぎ、`Vout` を CH1 で読む。LM35 は出力に
 負荷をほとんど流さない（オシロの 1 MΩ に対して LM35 の出力インピーダンスは
 十分低い）ので、分圧のような負荷計算は要らない。
@@ -57,6 +59,8 @@ wires:
   - AD.GND -- a7 black
   - AD.1- -- b7 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/breadboard/09-logger-lm35.svg)
 
 LM35 は TO-92（`ic3` の既定の姿）で、5〜7 列の `e` 行（上半分のブロック）に足を
 置く。`+Vs`（5 列）を V+ へ、`GND`（7 列）を GND へ、`Vout`（6 列）を CH1 の

@@ -32,6 +32,8 @@ wires:
   - a5 -- e5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/06-math-channel.svg)
+
 W1 (1 kHz、振幅 1 V) → R1 (100 Ω) → Rs (1 Ω) → GND。CH1 は W1 の出力
 そのもの、CH2 は Rs の両端 (= 電流を mV の値で表したもの)。
 
@@ -56,6 +58,8 @@ wires:
   - AD.2+ -- b10 blue
   - AD.2- -- c15 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/06-math-channel.svg)
 
 ## 計器の設定
 

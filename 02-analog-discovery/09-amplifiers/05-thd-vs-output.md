@@ -56,6 +56,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/circuit/05-thd-vs-output.svg)
+
 9-2・9-3 と全く同じ回路。振幅だけを変えて測る。
 
 ## 実体配線図
@@ -98,6 +100,8 @@ wires:
   - +t29 -- +b29 red
   - -t30 -- -b30 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/breadboard/05-thd-vs-output.svg)
 
 9-2・9-3 と同じ配置。振幅だけを Wavegen 側で変えていく。
 

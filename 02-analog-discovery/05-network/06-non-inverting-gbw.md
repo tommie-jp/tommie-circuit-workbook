@@ -37,6 +37,8 @@ wires:
   - c9 -- b9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/06-non-inverting-gbw.svg)
+
 利得 A<sub>v</sub> = 1 + R<sub>f</sub> / R<sub>in</sub>。図は R<sub>f</sub> = 10 kΩ
 (A<sub>v</sub> = 11) の状態。**R<sub>f</sub> を 100 kΩ に差し替えると A<sub>v</sub> = 101**
 になる。W1 の Amplitude は 20 mV に抑える (出力が電源レールに近づかないように)。
@@ -72,6 +74,8 @@ wires:
   - AD.V+ -- +b18 red
   - +b20 -- +t20 red
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/breadboard/06-non-inverting-gbw.svg)
 
 - U1 (LM358) は 2 回路入り。使うのは 1 回路目 (1 番 OUT・2 番 IN−・3 番 IN+・
   4 番 V−)、5〜8 番は 8 番が V+、5〜7 番が使わない側の回路 (5 番 IN2+・6 番 IN2−・7 番 OUT2)

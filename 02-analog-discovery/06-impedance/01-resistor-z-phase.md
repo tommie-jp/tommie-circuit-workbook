@@ -40,6 +40,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/circuit/01-resistor-z-phase.svg)
+
 - **1+/1− が Rref の両端**。読んだ電圧 V1 を Rref で割ると、直列に流れている電流
   I = V1 / Rref が分かる
 - **2+/2− が DUT の両端**。読んだ電圧 V2 と I から Z<sub>DUT</sub> = V2 / I = Rref × V2 / V1
@@ -67,6 +69,8 @@ wires:
   - a14 -- -t14 black
   - AD.GND -- -t17 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/breadboard/01-resistor-z-phase.svg)
 
 - 5 列が W1 の節点、10 列が Rref と R<sub>DUT</sub> の中点 (同じ列なので行が違ってもつながる)、
   14 列が GND

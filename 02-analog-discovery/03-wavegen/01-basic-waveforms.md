@@ -30,6 +30,8 @@ wires:
   - c1 -- c3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/01-basic-waveforms.svg)
+
 - V1 は波形の種類を切り替える W1 の代わり (図では正弦の記号を使うが、実際は
   Sine / Square / Triangle / Ramp Up / DC を Wavegen の画面で選ぶ)
 - 1− は GND に、W1 の GND (黒) も同じ GND に落とす。**GND を共通にしないと

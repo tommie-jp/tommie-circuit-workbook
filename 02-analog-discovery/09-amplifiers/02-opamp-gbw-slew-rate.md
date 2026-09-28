@@ -56,6 +56,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/circuit/02-opamp-gbw-slew-rate.svg)
+
 - R1・R2 (100 kΩ) が **Vcc/2 のバイアス**、Cin (1 µF) が W1 を交流だけ重ねる
   結合コンデンサ
 - Rg (1 kΩ) は Cg (10 µF) で交流だけ GND に落とす。直流の帰還利得は 1 倍
@@ -103,6 +105,8 @@ wires:
   - +t29 -- +b29 red
   - -t30 -- -b30 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/breadboard/02-opamp-gbw-slew-rate.svg)
 
 - LM358 (`U1`) は `r180` で置き、使う 1〜4 番を上ブロックに揃える:
   4=GND (e12)・3=IN1+ (e13)・2=IN1− (e14)・1=OUT1 (e15)。8=VCC (f15) は +b へ

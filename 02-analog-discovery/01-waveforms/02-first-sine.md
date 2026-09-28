@@ -28,6 +28,8 @@ wires:
   - c1 -- c3 -- c5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/circuit/02-first-sine.svg)
+
 W1 (Wavegen の `W1`) に負荷 R1 (1 kΩ) をつなぎ、CH1 で R1 の両端 (= W1 の
 出力そのもの) を読む。
 
@@ -49,6 +51,8 @@ wires:
   - AD.1+ -- a5 orange
   - AD.1- -- a10 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/breadboard/02-first-sine.svg)
 
 - R1 は W1 と GND の間の負荷。5 列が W1 側、10 列が GND 側
 - CH1 (`1+` / `1-`) は R1 の両端に、5 列・10 列の別の穴から挿す

@@ -27,6 +27,8 @@ wires:
   - c1 -- c3 -- c5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/01-trigger-basics.svg)
+
 W1 は振幅 1.65 V・オフセット 1.65 V の方形波 (0 V〜3.3 V を往復する)。
 R1 (1 kΩ) は負荷、CH1 で読む。
 
@@ -48,6 +50,8 @@ wires:
   - AD.1+ -- a5 orange
   - AD.1- -- a10 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/01-trigger-basics.svg)
 
 ## 計器の設定
 

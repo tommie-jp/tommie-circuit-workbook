@@ -39,6 +39,8 @@ wires:
   - AD.GND -| c11
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/01-jumper-s21.svg)
+
 - 1+ は W1 の節点 (ジャンパの手前)、2+ はジャンパの向こう側 (負荷抵抗の頭)。
   1−・2− はどちらも GND — 片側基準の測定
 - 負荷 1 kΩ は**オシロの入力インピーダンス (1 MΩ) だけに頼らない**ため。
@@ -66,6 +68,8 @@ wires:
   - AD.2- -- -t12 black
   - a15 -- -t15 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/breadboard/01-jumper-s21.svg)
 
 - 橙の線 (5 列 → 10 列、約 5 cm) が**測るジャンパそのもの**。ほかの配線は
   測定のための接続で、長さは気にしなくてよい

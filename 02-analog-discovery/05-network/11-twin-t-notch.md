@@ -40,6 +40,8 @@ wires:
   - a13 -- a15
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/11-twin-t-notch.svg)
+
 - **上の T (R・R と 2C)**: R1・R2 (各 10 kΩ) が入力から出力へ直列に並び、中点
   (a9) から 2C (C3 = 20 nF) が GND へ落ちる
 - **下の T (C・C と R/2)**: C1・C2 (各 10 nF) が入力から出力へ直列に並び、中点
@@ -84,6 +86,8 @@ wires:
   - j16 -- -b16 black
   - -t1 -- -b1 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/breadboard/11-twin-t-notch.svg)
 
 - **上の枝 (上のブロック)**: R1 (5〜12 列、行 c) → ノード A (12 列) → R2 (12〜20 列、行 b)。
   ノード A から C3 (2C = 20 nF、12〜14 列、行 d) が上の − レール (AD.GND) へ

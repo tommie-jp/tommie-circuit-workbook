@@ -41,6 +41,8 @@ wires:
   - U1.1 -| AD.DIO2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/08-setup-hold.svg)
+
 - CD4013B (`U1`) は 2 系統の D フリップフロップ入り。使うのは 1 系統目
   (3=CLOCK1・5=D1・1=Q1) だけ。**14=VDD は 3.3 V** (DIO の H レベルと合わせる。
   7-2 の CD4017 と同じ理由 — VDD を 5 V にすると VIH (目安 70% VDD ≈ 3.5 V)
@@ -80,6 +82,8 @@ wires:
   - +t20 -- +b20 red
   - -t21 -- -b21 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/breadboard/08-setup-hold.svg)
 
 - `dip14 @ e5` は 1=Q1 (f5) 〜 7=VSS (f11) が下ブロックを左から右へ、8=SET2
   (e11) 〜 14=VDD (e5) が上ブロックを右から左へ戻る

@@ -39,6 +39,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/07-perfboard-comparison.svg)
+
 R = 10 kΩ、C = 10 pF は 8-4 とまったく同じ値。1+ が入力 (W1)、2+ が出力
 (R と C の中点)。この回路自体は板に依らない。
 
@@ -65,6 +67,8 @@ wires:
   - AD.2- -- -t18 black
   - a20 -- -t20 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/breadboard/07-perfboard-comparison.svg)
 
 8-4 と全く同じ配置 (R1 が 5〜10 列、C1 が 15〜20 列)。R1 と C1 の中点を渡す
 配線 (10 列→15 列) が、そのまま隣の列との寄生容量を持ち込む。
@@ -103,6 +107,8 @@ wires:
   - b8 -- b11 black
   - b11 -- f11 black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/perfboard/07-perfboard-comparison.svg)
 
 - AD の足は板の真上 (3〜8 列) に並べ、それぞれ a 行へまっすぐ降ろす
 - R1 (f 行、3〜7 列) と C1 (f 行、8〜11 列) の中点をつなぐ配線は隣の穴へ渡す

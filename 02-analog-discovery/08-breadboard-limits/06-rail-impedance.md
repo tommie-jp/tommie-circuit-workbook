@@ -39,6 +39,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/06-rail-impedance.svg)
+
 - R1 (150 Ω) が電流を決める基準抵抗 (1-1〜8-3 と同じ考え方)
 - Z<sub>rail</sub> は**部品ではない**。GND レールの、電流の折り返し点までの区間
   (12 穴ぶん、約 3 cm) を、8-3 と同じ経験式で見積もった等価インダクタンスとして
@@ -68,6 +70,8 @@ wires:
   - AD.2- -- -t23 black
   - AD.GND -- -t24 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/breadboard/06-rail-impedance.svg)
 
 - R1 の先 (10 列) を黒いジャンパ (`a10 -- -t10`) で上の − レール (−t、青い線) に
   落とす。ここが電流がレールへ流れ込む点。1− は R1 の先 (b10) に挿し、CH1 で

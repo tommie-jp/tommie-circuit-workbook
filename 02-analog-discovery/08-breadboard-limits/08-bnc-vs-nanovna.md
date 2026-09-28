@@ -52,6 +52,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/08-bnc-vs-nanovna.svg)
+
 - J1 (P1) が入力側、J2 (P2) が出力側。AD の BNC アダプタ経由の配線なので、
   1+・2+ の名前は BNC を挟んでも変わらない (0-5 で確かめたとおり)
 - 中身は単なる導通 (スルー)。J1 と J2 の中心導体を結ぶ横線が治具の線 (実体配線図の
@@ -82,6 +84,8 @@ wires:
   - f15 -- h15 black
   - h15 -- GND black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/perfboard/08-bnc-vs-nanovna.svg)
 
 - J1 (P1) が e1、J2 (P2) が e16。中心導体どうしを e 行 1 本でつなぐだけの、
   部品を挟まない「素通し」の治具

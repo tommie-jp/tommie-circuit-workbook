@@ -29,6 +29,8 @@ wires:
   - c1 -- c3 -- c5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/circuit/01-connections.svg)
+
 - V1 は電源ツールの V+ (GND に対して +5 V)
 - M1 (CH1) は `1+` を V+、`1-` を GND につないだ**普通の向き**。+5.00 V を読む
 - M2 (CH2) は `2+` を GND、`2-` を V+ につないだ**逆向き**。同じ 2 点なのに
@@ -54,6 +56,8 @@ wires:
   - AD.2+ -- -t15 black
   - AD.2- -- +t15 red
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/breadboard/01-connections.svg)
 
 - CH1 は色の約束どおり (`1+` が赤レール、`1-` が黒 = GND レール)
 - CH2 は**色は約束どおりに挿してあるのに、+ / − の割り当てが逆** —

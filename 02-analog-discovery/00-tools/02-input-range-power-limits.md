@@ -37,6 +37,8 @@ wires:
   - a5 -- c1
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/circuit/02-input-range-power-limits.svg)
+
 V+（Supplies、5 V）→ R1（330 Ω）→ LED → GND。抵抗を入れずに LED を V+ に
 直結すると、LED の順方向抵抗はごく小さいので大電流が流れ、LED か AD 自体を
 壊す恐れがある——**これは実機では試さない**。

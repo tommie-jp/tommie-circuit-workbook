@@ -31,6 +31,8 @@ wires:
   - a9 -- c9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/09-audio-output.svg)
+
 板は使わない。ワニ口クリップで R1 とスピーカーを直列にし、W1・GND につなぐ。
 CH1 は W1 の出力 (R1 + スピーカーの両端) をそのまま読む。
 

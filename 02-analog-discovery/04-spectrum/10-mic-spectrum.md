@@ -40,6 +40,8 @@ wires:
   - Q1.E -| f8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/10-mic-spectrum.svg)
+
 - MK1・R1・C1・R2・Q1 は回路の教科書 8-4 と同じマイクバイアス+1 石増幅
   (エミッタ接地)。RC (470 Ω) が Q1 のコレクタ負荷 (8-4 の LED の代わり)
 - C2 (1 µF) は直流を止め、交流 (音の振動ぶん) だけを CH1 へ渡す**交流結合**。
@@ -74,6 +76,8 @@ wires:
   - AD.1+ -- b21 yellow
   - AD.1- -- -t23 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/breadboard/10-mic-spectrum.svg)
 
 8-4 の回路から LED を外し、コレクタ負荷 (RC) の先を C2 経由で AD の `1+` へ。
 板の上では 1 枚の上半分 (`a`〜`e` 行) に収めた: R2 と RC は + レールから直に

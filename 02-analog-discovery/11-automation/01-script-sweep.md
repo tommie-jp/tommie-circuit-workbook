@@ -40,6 +40,8 @@ wires:
   - AD.GND -| c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/11-automation/circuit/01-script-sweep.svg)
+
 R = 1 kΩ、C = 100 nF で、理論の折れ点 f<sub>c</sub> = 1/(2πRC) ≒ 1.59 kHz。
 1+ が入力 (W1)、2+ が出力 (R と C の中点)。
 

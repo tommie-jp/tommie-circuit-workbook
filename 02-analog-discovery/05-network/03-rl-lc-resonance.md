@@ -37,6 +37,8 @@ wires:
   - a10 -- a12
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/03-rl-lc-resonance.svg)
+
 - S1 は C1 と**並列** (バイパス)。**S1 を閉じると C1 が短絡され**、L1 (10 mH) と
   R1 (100 Ω) だけの RL 回路になる。**S1 を開くと** C1 (100 nF) が直列に効いて
   LC 共振回路になる
@@ -66,6 +68,8 @@ wires:
   - AD.2- -- -t17 black
   - a19 -- -t19 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/breadboard/03-rl-lc-resonance.svg)
 
 S1 は C1 (10〜15 列) と**同じ 2 列**の別の行 (b 行) に挿すだけで並列になる
 (同じ列は内部でつながっているため)。

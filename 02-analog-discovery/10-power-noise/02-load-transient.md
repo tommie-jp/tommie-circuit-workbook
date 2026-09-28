@@ -52,6 +52,8 @@ wires:
   - AD.GND -| q9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/10-power-noise/circuit/02-load-transient.svg)
+
 - Radd (470 Ω、**定格 1 W** — Q1 が on の間ほぼ V<sub>DC</sub> (11.3 V) が乗り、
   P ≒ V²/R ≒ 0.27 W になるため、1/4 W 品では足りない) と Q1 (2N7000) が直列で
   Rload と並列に入る、**切り替えられる追加負荷**。Q1 の G を W2 (0〜5 V の方形波)
@@ -111,6 +113,8 @@ wires:
   - AD.2+ -- a25 blue
   - AD.2- -- -t27 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/10-power-noise/breadboard/02-load-transient.svg)
 
 - Q1 (2N7000) は TO-92、**平らな面を見て左から S・G・D** (回路の教科書の
   2-5 と同じ実物の並び) を g24・g25・g26 に挿し、3 本とも溝越しの短い線で

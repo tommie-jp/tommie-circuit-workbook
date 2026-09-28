@@ -46,6 +46,8 @@ wires:
   - AD.GND -| f21
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/circuit/06-tracer-ic-vce.svg)
+
 - Rb (220 kΩ) がベース電流を決める。Vcc = 5 V、Vbe ≒ 0.7 V とすると
   Ib = (5 − 0.7) / 220 k ≒ 19.5 µA。**別の値に差し替えて Ib を数段階に振る**
   (下の表)
@@ -82,6 +84,8 @@ wires:
   - +t16 -- +b16 red
   - -t17 -- -b17 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/breadboard/06-tracer-ic-vce.svg)
 
 - Q1 の実際の足の並びは平らな面を見て E・C・B。図のとおり左から B・C・E
   (h10〜h12) に挿すには平らな面を奥 (a〜e 側) に向ける (9-1 と同じ 2SC1815)。

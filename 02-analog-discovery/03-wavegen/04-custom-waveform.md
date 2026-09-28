@@ -27,6 +27,8 @@ wires:
   - c1 -- c3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/04-custom-waveform.svg)
+
 板は使わない。V1 の記号は正弦だが、実際は下の CSV の波形が出る。
 
 ## 作る CSV

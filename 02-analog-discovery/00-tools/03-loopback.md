@@ -29,6 +29,8 @@ wires:
   - c1 -- c3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/circuit/03-loopback.svg)
+
 W1 (Wavegen の出力) と M1 (オシロの CH1) を直接つなぎ、GND も共通に
 する。他には何もつながない。
 

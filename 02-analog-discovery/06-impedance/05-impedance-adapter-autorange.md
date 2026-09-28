@@ -47,6 +47,8 @@ wires:
   - ADP.DUT- -| DUT.P2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/circuit/05-impedance-adapter-autorange.svg)
+
 - アダプタは AD の 2×15 コネクタにそのまま挿す (W1・GND・1±・2± の 6 本は
   基板内部で結線済み)。**DUT はアダプタの端子台 (J2) に挟むだけ**で、
   ブレッドボードは要らない

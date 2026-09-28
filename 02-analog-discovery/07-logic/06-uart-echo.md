@@ -35,6 +35,8 @@ wires:
   - AD.GND -| MCU.GND3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/06-uart-echo.svg)
+
 - Pico の **GP0 (UART0 TX)** を AD の DIO0 (Protocol の RX) へ、**GP1
   (UART0 RX)** を DIO1 (Protocol の TX) へつなぐ。7-3 は受信専用だったので
   GP1 (Pico 側の受信) は使っていなかった
@@ -58,6 +60,8 @@ wires:
   - AD.DIO1 -- j6 white
   - AD.GND -- j7 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/breadboard/06-uart-echo.svg)
 
 - `pico2 @ h5` は 7-3 と同じ向き (USB を左に)。下の行 (h) の左端が GP0 (h5)、
   2 番目が GP1 (h6)、3 番目が GND (h7)

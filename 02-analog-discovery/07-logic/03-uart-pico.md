@@ -31,6 +31,8 @@ wires:
   - AD.GND -| MCU.GND3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/03-uart-pico.svg)
+
 - Pico の **GP0 (UART0 TX)** を AD の DIO0 (Protocol の RX) につなぐだけ。
   受けるだけなので AD からは何も送らない
 - Pico は USB で給電する (この図には描かない)。**GND は USB 経由でも AD と
@@ -52,6 +54,8 @@ wires:
   - AD.DIO0 -- j5 yellow
   - AD.GND -- j7 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/breadboard/03-uart-pico.svg)
 
 - `pico2 @ h5` は USB を左に向けた向き。**下の行 (h) の左端がピン 1 = GP0**
   (h5)、3 番目が GND (h7)

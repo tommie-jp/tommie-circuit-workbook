@@ -35,6 +35,8 @@ wires:
   - a11 -- a13
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/09-two-stage-rc-40db.svg)
+
 - 1 段目: R1 = 1 kΩ、C1 = 100 nF → f<sub>c1</sub> = 1/(2πR1C1) ≈ 1.59 kHz
 - 2 段目: R2 = 10 kΩ、C2 = 10 nF → f<sub>c2</sub> = 1/(2πR2C2) ≈ 1.59 kHz
   (**同じ f<sub>c</sub>**。R2C2 = R1C1 になるように選んだ)
@@ -67,6 +69,8 @@ wires:
   - AD.2- -- -t17 black
   - a18 -- -t18 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/breadboard/09-two-stage-rc-40db.svg)
 
 - R1 (5〜10 列) の出口が 10 列 (ノード A)。**C1 (10〜13 列) はノード A から
   GND へ落ちる枝**、R2 (10〜15 列) は同じ 10 列からそのまま 2 段目へ続く

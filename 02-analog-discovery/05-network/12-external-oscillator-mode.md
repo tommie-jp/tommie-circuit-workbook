@@ -30,6 +30,8 @@ wires:
   - c1 -- c3 -- c5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/12-external-oscillator-mode.svg)
+
 板は使わない。5-5・5-8 と同じスルー (W1 を CH1・CH2 の両方に直結)。ここでは
 W1 を**「外部の信号源」に見立て**、Network からは操作しない (周波数を Network
 の掃引ではなく Wavegen 側で直接決める)。

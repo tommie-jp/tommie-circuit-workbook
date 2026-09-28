@@ -30,6 +30,8 @@ wires:
   - c1 -- c3 -- c5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/08-differential-signal.svg)
+
 - V1 (W1)・V2 (W2) は同じ GND を共有する 2 つの単独出力。CH2 (M2) は W1 を
   GND 基準で読む (ふつうの片側読み)
 - CH1 (M1) は **`1+` を W1 に、`1-` を W2 に**つないだ差動読み。W2 が W1 の
@@ -55,6 +57,8 @@ wires:
   - AD.2+ -- c7 blue
   - AD.2- -- -t18 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/breadboard/08-differential-signal.svg)
 
 W1 (7 列)・W2 (15 列) をそれぞれ引き出し、`1+`/`1-` をこの 2 本に差動でつなぐ。
 `2+` は W1 と同じ 7 列 (別の穴) から取り、片側読みの比較用にする。

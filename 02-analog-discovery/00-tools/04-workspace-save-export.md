@@ -27,6 +27,8 @@ wires:
   - c1 -- c3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/circuit/04-workspace-save-export.svg)
+
 0-3 と同じ配線。ここでは正弦波の代わりに**三角波**にして、CSV に
 書き出したときに値の変化が読み取りやすくしてある。
 

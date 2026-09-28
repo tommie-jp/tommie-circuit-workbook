@@ -40,6 +40,8 @@ wires:
   - AD.GND -| a9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/circuit/04-static-io.svg)
+
 - `DIO0` → R1 (470 Ω) → LED → GND。Static I/O で `DIO0` を **Output・High**
   にすると LED が点く。**`DIO` の High は Supplies の V+ (5 V) とは別物で、
   3.3 V (LVCMOS3V3) 固定**。既定の駆動能力 (4 mA) に収まるよう R1 は
@@ -72,6 +74,8 @@ wires:
   - AD.DIO1 -- h20 green
   - i25 -- -t25 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/breadboard/04-static-io.svg)
 
 - SW1 (`@ e20`) は溝をまたぐタクトスイッチ。手前側 (20 列) に V+、
   向こう側 (20 列の下ブロック。R2 の上端 j20 と同じ列) が `DIO1` の節点

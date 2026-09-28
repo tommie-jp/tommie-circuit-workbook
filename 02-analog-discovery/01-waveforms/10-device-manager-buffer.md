@@ -30,6 +30,8 @@ wires:
   - c1 -- c3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/circuit/10-device-manager-buffer.svg)
+
 配線は 0-3 のループバックのまま。ここで変えるのは配線ではなく、Device Manager
 の設定。
 

@@ -53,6 +53,8 @@ wires:
   - f5 -- a5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/10-cr-oscillator-loop.svg)
+
 - U1 は反転増幅 (R<sub>in</sub> = 10 kΩ、R<sub>f</sub> = 300 kΩ、利得 = −R<sub>f</sub>/R<sub>in</sub> = −30 倍)。
   U1.+ は GND
 - C1・R1・C2・R2・C3 は**移相回路**。すべて C = 10 nF、R = 10 kΩ (R<sub>1</sub>・R<sub>2</sub>・
@@ -110,6 +112,8 @@ wires:
   - AD.2- -- -b18 black
   - AD.2+ -- j38 blue
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/breadboard/10-cr-oscillator-loop.svg)
 
 - U1 (LM358) は 5-6 と同じ 1 回路目だけを使う配置。1=OUT1 (f5) が R<sub>f</sub> の
   帰還点、2=IN1− (f6) に R<sub>in</sub>・R<sub>f</sub>、3=IN1+ (f7) は GND へ。**使わない側**は

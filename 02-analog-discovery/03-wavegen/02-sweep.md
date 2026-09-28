@@ -32,6 +32,8 @@ wires:
   - a7 -- a9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/02-sweep.svg)
+
 - R1 (1 kΩ) と C1 (100 nF) で **f<sub>c</sub> = 1 / (2πRC) ≈ 1.59 kHz**
 - CH1 が入力 (W1 そのもの)、CH2 が C1 の両端 (出力)。掃引の間、CH2 の振幅が
   f<sub>c</sub> を境に小さくなっていく
@@ -59,6 +61,8 @@ wires:
   - AD.2- -- -t18 black
   - a20 -- -t20 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/breadboard/02-sweep.svg)
 
 - 6 列が入力 (W1 と CH1)、10 列と 15 列を緑のジャンパでつなぎ R1 と C1 を直列にする、
   20 列が C1 の GND 側。CH2 (2+) は 15 列 (C1 の上側 = 出力) に挿す

@@ -40,6 +40,8 @@ wires:
   - AD.GND -| h12
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/10-power-noise/circuit/01-ripple-fft.svg)
+
 - V1 は AC アダプタの二次側 (9 V<sub>rms</sub> ≒ 振幅 12.7 V、商用周波数を仮に
   60 Hz とする。50 Hz 地域では読み替える)
 - **電源は 5 V ではなく 9 V の AC アダプタ** — 整流と平滑のリップルを見る題なので、
@@ -84,6 +86,8 @@ wires:
   - AD.1+ -- +t22 red
   - AD.1- -- -t23 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/10-power-noise/breadboard/01-ripple-fft.svg)
 
 - D1・D2 の向いた先 (10 列) が DC+、D3・D4 の元 (3 列・17 列) を上の − レールへ
   落として DC− にする。4 つのダイオードそれぞれ**アノード側の帯の無い方**を図の向きに挿す
