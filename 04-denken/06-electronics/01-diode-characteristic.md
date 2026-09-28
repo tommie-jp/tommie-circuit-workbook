@@ -80,6 +80,21 @@ wires:
 | Wavegen | W1: Triangle、100 Hz、Amplitude 1.5 V、Offset 0.5 V |
 | Scope | CH1 = ダイオードの両端、CH2 = R1 の両端 (差動)。XY 表示で CH1 を X、CH2 (÷ 1 kΩ で電流) を Y にすると特性曲線が見える |
 
+XY 表示に出る曲線は、下の表の 5 点を通る (図3)。理想の曲線はダイオードの式を CH2 の行に書き、
+1 kΩ × I_S = 4.4 µV、nV_T = 1.9 × 25.9 mV = 49.21 mV とした。XY には時間軸が無いので、CH1 は
+ダイオードの両端が動く範囲 (−1.00〜0.62 V) を三角波で往復させている。
+
+```scope
+title: 図3 ダイオードの V–I — 0.5 V を越えると電流 (CH2) が急に立ち上がる
+view: xy
+ch1: {wave: triangle 100Hz 0.8114V offset -0.1886V, range: 250mV/div, position: 0div}
+ch2: {wave: = 4.4uV * (exp(ch1 / 49.21mV) - 1), range: 200mV/div, position: -4div}
+xy: ch1 ch2
+```
+
+CH1 の Vmin (−1.00 V) が逆方向の端、Vmax (0.62 V) が順方向の端。そのときの CH2 の Vmax は
+1.38 V で、÷ 1 kΩ で 1.38 mA になる。
+
 ### オシロスコープと発振器
 
 AD 版は CH2 を R1 の両端に差動で当てる (2− は 10 列)。10 列はダイオードの
@@ -87,12 +102,12 @@ AD 版は CH2 を R1 の両端に差動で当てる (2− は 10 列)。10 列�
 アノードが GND に落ち、ダイオードが短絡される ([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md) の落とし穴)。
 
 **回路はそのまま、FG の出力とアノードを GND 基準で測り、Math の CH2 − CH1 で
-R1 の両端 (電流) を読む** (図3)。ダイオードの両端 (CH1) は 1 本の先端で直に読める。
+R1 の両端 (電流) を読む** (図4)。ダイオードの両端 (CH1) は 1 本の先端で直に読める。
 この題で大事なのは、電流が変わってもほとんど動かないダイオードの電圧のほうなので、
 そちらを引き算にしない。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図4 汎用オシロでの測り方
 parts:
   V1: triangle a1 d1 1.5 l=$\mathrm{FG}$
   M2: voltmeter a4 d4 l=$\mathrm{CH2}$

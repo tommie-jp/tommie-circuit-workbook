@@ -105,23 +105,26 @@ wires:
 この本の目安 10 mA (0-1) に収める。
 
 C なしと C = 1.5 µF の 2 つの画面。電流 (CH2) は数十 mV なので、CH1 と違う V/div にしてある。
+赤の線は Math の瞬時電力 p で、その Avg が有効電力 P。Math も CH1・CH2 と同じく計算で描いた理想の線である。
 
 ```scope
-title: 図3 C なし — 線電流 (CH2、20 mV/div) は 5.9 mA、53° 遅れる
+title: 図3 C なし — 線電流 (CH2、20 mV/div) は 5.9 mA、53° 遅れる。P は Math の Avg
 time: 200us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1kHz 0.462V, range: 200mV/div}
 ch2: {wave: sine 1kHz 58.9mV phase -53.2deg, range: 20mV/div}
-measure: [vmax, rms, phase]
+math: {expr: ch1 * ch2 / 10, unit: W, range: 500uW/div, position: -2div}
+measure: [vmax, rms, avg, phase]
 ```
 
 ```scope
-title: 図4 C = 1.5 µF — 線電流 (CH2) は 3.6 mA に減り、遅れは 6°
+title: 図4 C = 1.5 µF — 線電流 (CH2) は 3.6 mA に減り、遅れは 6°。P は変わらない
 time: 200us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1kHz 0.465V, range: 200mV/div}
 ch2: {wave: sine 1kHz 35.6mV phase -5.8deg, range: 20mV/div}
-measure: [vmax, rms, phase]
+math: {expr: ch1 * ch2 / 10, unit: W, range: 500uW/div, position: -2div}
+measure: [vmax, rms, avg, phase]
 ```
 
 ### オシロスコープと発振器

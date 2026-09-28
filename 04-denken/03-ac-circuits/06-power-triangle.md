@@ -86,16 +86,20 @@ wires:
 **電流の上限**: AD の波形発生器は 30 mA まで (AD3 の仕様。AD2 はマニュアルに上限の
 記載が無い)。この回路の線電流は最大値で 5.9 mA で、この本の目安 10 mA (0-1) にも収まる。
 
-電流 (CH2) は数十 mV なので、CH1 と違う V/div にしてある。
+電流 (CH2) は数十 mV なので、CH1 と違う V/div にしてある。赤の線は Math の瞬時電力 p (単位 W)。
 
 ```scope
-title: 図3 線電流 (CH2、20 mV/div) が受電端の電圧 (CH1) より 53° 遅れる
+title: 図3 線電流 (CH2、20 mV/div) は 53° 遅れ、瞬時電力 (Math) の平均が P
 time: 200us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1kHz 0.462V, range: 200mV/div}
 ch2: {wave: sine 1kHz 58.9mV phase -53.2deg, range: 20mV/div}
-measure: [vmax, rms, phase]
+math: {expr: ch1 * ch2 / 10, unit: W, range: 500uW/div, position: -2div}
+measure: [vmax, rms, avg, phase]
 ```
+
+MATH の Avg (815 µW) が有効電力 P。p は電源の 2 倍の周波数で振れ、谷のあたりで負になる —
+コイルが蓄えた分を電源へ返す時間で、これが無効電力 Q の往復にあたる。
 
 ### オシロスコープと発振器
 

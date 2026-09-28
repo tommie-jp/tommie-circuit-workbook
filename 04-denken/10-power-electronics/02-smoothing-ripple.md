@@ -88,6 +88,29 @@ wires:
 | Scope | CH1 = C1・RL の両端。Time/div は 5 ms 程度でリップルの山谷が見える範囲に |
 | Measure | CH1 の Average (Vdc) と Peak-Peak (リップル Vpp) |
 
+リップルは Vdc に比べて小さいので拡大して見る。100 µF では CH1 の Offset を −3.7 V (画面の中央が 3.7 V)、
+Range を 50 mV/div にする。10 µF では Offset −3 V・500 mV/div (0 V はどちらも画面の外)。コンデンサは
+山の近くで一気に充電され、谷までは τ = RL·C (100 µF で 150 ms、10 µF で 15 ms) で放電する。
+
+```scope
+title: 図3 100 µF — 約 3.7 V の上に 0.22 Vpp のリップル (50 mV/div)
+time: 5ms/div
+trigger: ch1 rising 3.7V
+ch1: {wave: = 5V * abs(sin(2 * pi * 50Hz * t)) - 1.2V | clip 0V | peak 150ms, range: 50mV/div, position: -74div}
+measure: [vmax, avg, vpp, freq]
+```
+
+```scope
+title: 図4 10 µF — リップルは 1.46 Vpp に増える (500 mV/div)
+time: 5ms/div
+trigger: ch1 rising 3V
+ch1: {wave: = 5V * abs(sin(2 * pi * 50Hz * t)) - 1.2V | clip 0V | peak 15ms, range: 500mV/div, position: -6div}
+measure: [vmax, avg, vpp, freq]
+```
+
+どちらも山 (Vmax) は 3.80 V で同じ。容量を 1/10 にすると谷が深くなり、Vdc (Avg) は 3.69 V から
+3.11 V に下がる。リップルの周波数 (Freq) は電源の 2 倍の 100 Hz。
+
 ### オシロスコープと発振器
 
 W1 は FG の OUT (High-Z、50 Hz、振幅 5 V。Vpp で入れる機種なら 10 Vpp) に読み替える
@@ -96,10 +119,10 @@ W1 は FG の OUT (High-Z、50 Hz、振幅 5 V。Vpp で入れる機種なら 10
 **ブリッジの − (18 列) は FG の GND ではない。** AD の 1− を当てていた 18 列にグランドクリップを当てると、
 18 列が大地を通って FG の GND (青レール) とつながり、負の半周期に D4 が FG の出力を GND へじかに
 短絡する (10-1 と同じ)。そこで**回路はそのままで、2 本の先端を 12 列と 18 列に当て、CH1 − CH2 で引く**
-(図3)。出力 (約 3.3 V) は各点の振れ (約 4.5 V) の 7 割あり、Vdc は 8 bit でも埋もれない。
+(図5)。出力 (約 3.3 V) は各点の振れ (約 4.5 V) の 7 割あり、Vdc は 8 bit でも埋もれない。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図5 汎用オシロでの測り方
 style:
   standard: jis
   pitch: 1.2
