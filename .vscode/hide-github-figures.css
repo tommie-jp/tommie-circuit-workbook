@@ -1,0 +1,7 @@
+/*
+ * 本文の画像の行 (npm run figures) は GitHub で図を見せるためのもの。VS Code のプレビューでは
+ * tommie-fence 拡張がフェンスを図にするので、同じ図が 2 枚並ばないように隠す。
+ */
+img[src^="https://tommie-jp.github.io/tommie-circuit-workbook/"] {
+  display: none;
+}

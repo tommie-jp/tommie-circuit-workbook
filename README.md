@@ -28,9 +28,12 @@
 
 ## 読み方
 
-- GitHub ではフェンスは YAML の字のまま見える。**図にして読むには** VS Code 拡張
-  tommie-fence ([Release](https://github.com/tommie-jp/tommie-fence/releases) の
-  `.vsix`) を入れて Markdown のプレビューを開く
+- GitHub では、各フェンス (YAML の字) の直後に、その図が画像で出る。図は main に push するたびに
+  [GitHub Pages](https://tommie-jp.github.io/tommie-circuit-workbook/) へ描き直して載せる
+  (`.github/workflows/pages.yml`)。push の直後の数分は前の図が出る
+- 書きながら図を見るには VS Code 拡張 tommie-fence
+  ([Release](https://github.com/tommie-jp/tommie-fence/releases) の `.vsix`) を入れて
+  Markdown のプレビューを開く (プレビューでは画像の行を `.vscode/hide-github-figures.css` で隠す)
 - 手元で SVG に書き出すなら `npm ci && npm run render` (`out/` に出る。コミットしない)
 
 ## 書き方
@@ -81,11 +84,14 @@ USB アダプタやモバイルバッテリー、単 3 電池 3 本で用意で�
 npm ci
 npm run all    # 試験・Markdown の lint・全題の検査 (CI と同じ)
 npm run toc    # 題を足したら目次を書き直す (README の印の間だけ)
+npm run figures   # フェンスを足した・消した・動かしたら、GitHub で見せる画像の行を書き直す
 npm run check -- --verbose   # ネットリストも出す。意図した回路と突き合わせる
 ```
 
 `check` は置き場と front matter の食い違い、フェンス名の書き間違い、フェンスの
-読めない行、`plan.yaml` とのずれ (計画に無い題、違う title や tier)、古い目次で落ちる。ERC (つながっていない足など) は出すだけで落とさない。
+読めない行、`plan.yaml` とのずれ (計画に無い題、違う title や tier)、古い目次、
+フェンスの並びと合わない画像の行で落ちる。画像の行 (Pages の図を指す `![…](https://tommie-jp.github.io/…)`) は
+`npm run figures` が書くので手で直さない。ERC (つながっていない足など) は出すだけで落とさない。
 
 ## ライセンス
 

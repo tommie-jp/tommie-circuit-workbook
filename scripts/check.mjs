@@ -6,6 +6,7 @@
  *   3. フェンスを道具の `check` に掛ける (読めない行があれば落ちる)
  *   4. 計画 (`plan.yaml`) が読め、書いた題が計画と合っている (`plan.mjs`)
  *   5. 目次が計画と front matter と合っている (`toc.mjs --check` と同じ)
+ *   6. GitHub で図を見せる画像の行が、フェンスの並びと合っている (`figures.mjs`)
  *
  *   node scripts/check.mjs            落ちた所だけ出す
  *   node scripts/check.mjs --verbose  ネットリストも出す (意図した回路と突き合わせる)
@@ -18,8 +19,12 @@ import { spawnSync } from 'node:child_process';
 import { ROOT, readEntries } from './collect.mjs';
 import { duplicateIds } from './entry.mjs';
 import { FENCES, cliPath, fencesIn } from './fences.mjs';
+import { withFigures } from './figures.mjs';
 import { PLAN_FILE } from './plan.mjs';
 import { mergedRows, plannedReadmes } from './toc.mjs';
+
+/** 古い題を言うときに名前まで出す数。全部の題が古いと 300 行を超える。 */
+const SHOWN_PATHS = 5;
 
 const runCheck = (fence, paths) =>
   spawnSync(process.execPath, [cliPath(ROOT, fence), 'check', ...paths], { cwd: ROOT, encoding: 'utf8' });
@@ -70,6 +75,12 @@ function main(args) {
 
   const stale = plannedReadmes().filter(({ current, next }) => current !== next).map(({ path }) => path);
   if (stale.length > 0) problems.push(`目次が古い: ${stale.join(', ')} (npm run toc で書き直す)`);
+
+  const noFigures = reads.filter((read) => withFigures(read.path, read.text) !== read.text).map((read) => read.path);
+  if (noFigures.length > 0) {
+    const shown = noFigures.slice(0, SHOWN_PATHS).join(', ') + (noFigures.length > SHOWN_PATHS ? ' ほか' : '');
+    problems.push(`画像の行が古い題が ${noFigures.length} 題: ${shown} (npm run figures で書き直す)`);
+  }
 
   const counts = FENCES.map((fence) => `${fence} ${byFence.get(fence).length}`).join(' / ');
   if (problems.length > 0) {
