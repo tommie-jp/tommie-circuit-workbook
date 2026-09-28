@@ -20,23 +20,23 @@ device: H4
 ```circuit
 title: 図1 自作の Open・Short・Load
 parts:
-  J1: sma b2 mirror
-  J2: sma f2 mirror
-  G2: ground f6
-  J3: sma j2 mirror
-  R1: resistor j4 j6 50
-  G3: ground j8
+  J1: sma a1 mirror
+  J2: sma a4 mirror
+  G2: ground c5
+  J3: sma a8 mirror
+  R1: resistor a9 c9 100
+  R2: resistor a11 c11 100
+  G3: ground c11
 wires:
-  - J2.1 -- f4
-  - f4 -- f6
-  - J2.2 -- g2 -- g6 -- f6
-  - J3.1 -- j4
-  - j6 -- j8
-  - J3.2 -- k2 -- k8 -- j8
+  - J2.1 -- a5
+  - a5 -- c5
+  - J2.2 -- c4 -- c5
+  - J3.1 -- a9 -- a11
+  - J3.2 -- c8 -- c9 -- c11
 notes:
-  - text b2f0 blue center: Open
-  - text f2f0 blue center: Short
-  - text j2f0 blue center: Load
+  - text d1 blue center: Open
+  - text d4a5 blue center: Short
+  - text d9a5 blue center: "Load (50 Ω)"
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/04-diy-cal-kit.svg)
@@ -44,7 +44,9 @@ notes:
 - **Open** は中心導体をどこにもつながず、外皮 (シェル) だけの部品。
   ほかに何もつながる先が無いのは意図どおりで、ERC のお知らせは無視してよい
 - **Short** は中心導体を最短距離で外皮 (GND) へ落とす
-- **Load** は中心導体と外皮の間に 50 Ω を 1 本入れる
+- **Load** は中心導体と外皮の間に 50 Ω を入れる。50 Ω は E24 に無いので、
+  **100 Ω を 2 本並列**にする (R1 ∥ R2 = 50 Ω)。2 本を並べると、リード線の
+  インダクタンスも 2 本の並列で半分になり、1 本より高い周波数まで 50 Ω に近い
 
 ## 実体配線図
 
@@ -88,19 +90,22 @@ points:
   GND: g3
 parts:
   J3: sma/female-edge e1 d0 f0
-  R1: resistor e3 g3 50
+  R1: resistor e3 g3 100
+  R2: resistor e5 g5 100
 wires:
   - e1 -- e3
+  - e3 -- e5
   - f0 -- f2 black
   - f2 -- g2 black
   - g2 -- g3 black
+  - g3 -- g5 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/04-diy-cal-kit-3.svg)
 
 - Short は**中心導体からシェルまでの線をできるだけ短く**する。長い線が
   誘導性のオフセットになり、高い周波数ほど Smith の左端から回っていく
-- Load の 50 Ω は**リード線も短く**。部品の抵抗値そのものは DC で
+- Load の 100 Ω 2 本は**リード線も短く**。2 本並列の抵抗値 (50 Ω) は DC で
   テスターでも確かめられる (1-8)
 
 ## 掃引の設定
@@ -159,7 +164,7 @@ markers:
 | --- | --- | --- |
 | Open | 右端 (∞ Ω) | シェルと中心導体の間の浮遊容量 (パターンの容量、4-16) |
 | Short | 左端 (0 Ω) | 中心導体から GND までの線のインダクタンス (リード線 1 cm、4-7) |
-| Load (50 Ω) | 真ん中 | 抵抗のリード線のインダクタンスと実際の抵抗値のずれ |
+| Load (50 Ω) | 真ん中 | 抵抗のリード線のインダクタンスと実際の抵抗値のずれ (100 Ω 2 本の誤差の平均) |
 
 **300 MHz に近い周波数ほど、この自作キットは理想から離れていく。**
 市販キットとの違いや、どこまで信じてよいかは 1-7 と 3-6 で扱う。

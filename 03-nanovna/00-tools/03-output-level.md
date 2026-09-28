@@ -47,9 +47,9 @@ parts:
     label: DUT
     pins: [IN, OUT]
     turn: mirror
-  R1: resistor f4 f6 40.9
-  R2: resistor h6 h8 10.1
-  R3: resistor f6 f8 40.9
+  R1: resistor f4 f6 43
+  R2: resistor h6 h8 11
+  R3: resistor f6 f8 43
   G1: ground h9
   M1:
     type: device
@@ -69,8 +69,8 @@ notes:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/circuit/03-output-level.svg)
 
-- R1・R3 (40.9 Ω) と R2 (10.1 Ω) は 50 Ω 系の**20 dB T 型アッテネータ**。
-  実際に作るときは E24 の値に丸める (10 dB 版の丸め方は 3-5)
+- R1・R3 (43 Ω) と R2 (11 Ω) は 50 Ω 系の**20 dB T 型アッテネータ**。
+  理屈どおりの値 (40.9 Ω・10.1 Ω) を E24 に丸めた (10 dB 版の丸め方は 3-5)
 - CH0 はアンプの入力へ (今回の図には描いていない)。**CH1 の手前だけに
   パッドを入れれば足りる** — 反射で戻る分もこのパッドで一緒に減衰する
 
@@ -83,23 +83,23 @@ notes:
 | 校正 | パッドを含めて測るなら、パッドの先で校正し直す (1-4) |
 | 表示 | S21 の Log Mag、S11 の Log Mag |
 
-20 dB パッドだけを理想値で見ると、平らに 20 dB 落ちる。
+43 Ω・11 Ω・43 Ω のパッドだけを理想の模型で見ると、平らに約 20 dB 落ちる。
 
 ```vna
 device: h4
 sweep: 1M-1.5G 101
-title: 図2 20 dB パッドは全域で平らに −20 dB
+title: 図2 E24 (43・11・43 Ω) の 20 dB パッドは全域で平ら
 dut:
-  - series R 40.9
-  - shunt R 10.1
-  - series R 40.9
+  - series R 43
+  - shunt R 11
+  - series R 43
 traces:
   - S21 logmag
   - S11 logmag
 markers:
   - 100M
 notes:
-  - text 100M -50dB: S21 は −20 dB で平ら、S11 は −80 dB (枠の下端)
+  - text 100M -50dB: S21 は −19.76 dB で平ら、S11 は E24 の丸めで −31.19 dB
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/vna/03-output-level.svg)
@@ -108,8 +108,8 @@ notes:
 
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |
-| パッドの S21 | −20.0 dB (計算値) | 100 mW → 1 mW に落ちる |
-| パッドの S11 | −80.0 dB (計算値、実用上 0) | 50 Ω からほぼずれない (良いパッド) |
+| パッドの S21 | −19.76 dB (計算値) | 100 mW → 約 1 mW に落ちる (E24 に丸めた誤差で 20 dB よりわずかに少ない) |
+| パッドの S11 | −31.19 dB (計算値) | 50 Ω から少しだけずれる (入力側から見て 52.8 Ω)。理屈どおりの 40.9 Ω・10.1 Ω なら −80 dB まで下がる |
 | CH1 に届く電力 | アンプの出力 − 20 dB | この値が CH1 の上限を超えないことを確かめる |
 
 ## 出典

@@ -27,6 +27,7 @@ Q = 60 のコイル (330 nH・560 nH) の ESR は、周波数ごとに **ESR = 2
 ## 回路図
 
 6-1 と同じ 7 次ローパス (C1=C4=47 pF、L2=L6=330 nH、C3=C5=200 pF、L4=560 nH)。
+200 pF は 6-1 と同じく 100 pF を 2 個並列にする。
 コイルに Q = 60 の損失があるとみなす (回路図では理想の記号のまま、値だけ同じ)。
 
 ```circuit
@@ -60,7 +61,7 @@ wires:
 
 ## 実体配線図
 
-6-1 と同じ治具 (端面 SMA 2 つの perfboard)。
+6-1 と同じ治具 (端面 SMA 2 つの perfboard)。C2・C3 (200 pF) は 100 pF 2 個の並列 (C2a・C2b、C3a・C3b)。
 
 ```perfboard
 board:
@@ -70,30 +71,38 @@ parts:
   J1: sma/female-edge e1 f0
   C1: capacitor e3 f3 47p
   L1: inductor e5 e9 330n
-  C2: capacitor e11 f11 200p
+  C2a: capacitor e10 f10 100p
+  C2b: capacitor e12 f12 100p
   L2: inductor e13 e18 560n
-  C3: capacitor e20 f20 200p
+  C3a: capacitor e19 f19 100p
+  C3b: capacitor e21 f21 100p
   L3: inductor e22 e26 330n
   C4: capacitor e28 f28 47p
   J2: sma/female-edge e34 f35
 wires:
   - e1 -- e3
   - e3 -- e5
-  - e9 -- e11
-  - e11 -- e13
-  - e18 -- e20
-  - e20 -- e22
+  - e9 -- e10
+  - e10 -- e12
+  - e12 -- e13
+  - e18 -- e19
+  - e19 -- e21
+  - e21 -- e22
   - e26 -- e28
   - e28 -- e34
   - f0 -- f2 black
   - f2 -- h2 black
   - h2 -- h3 black
   - h3 -- f3 black
-  - h3 -- h11 black
-  - h11 -- f11 black
-  - h11 -- h20 black
-  - h20 -- f20 black
-  - h20 -- h28 black
+  - h3 -- h10 black
+  - h10 -- f10 black
+  - h10 -- h12 black
+  - h12 -- f12 black
+  - h12 -- h19 black
+  - h19 -- f19 black
+  - h19 -- h21 black
+  - h21 -- f21 black
+  - h21 -- h28 black
   - h28 -- f28 black
   - h28 -- h33 black
   - f35 -- f33 black

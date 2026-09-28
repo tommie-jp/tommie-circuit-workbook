@@ -18,20 +18,30 @@ CH0 の先につなぐ終端 (負荷) を変えて、SWR (定在波比) がど�
 ## 回路図
 
 ```circuit
-title: 図1 CH0 の先に終端
+title: 図1 CH0 の先に 50 Ω の終端 (100 Ω 2 本並列)
 parts:
   J1: sma b2 mirror
-  RL: resistor b4 d4 50
+  R1: resistor b4 d4 100
+  R2: resistor b6 d6 100
   G1: ground c2
-  G2: ground d4
+  G2: ground d6
 wires:
-  - J1.1 -- b4
+  - J1.1 -- b4 -- b6
   - J1.2 -- c2
+  - d4 -- d6
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/05-swr-termination.svg)
 
-RL の値を挿し替えて測る。短絡・開放は RL の代わりに直結・開放にする。
+図は 50 Ω の終端。50 Ω は E24 に無いので **100 Ω を 2 本並列**にする (R1 ∥ R2)。
+ほかの終端は R1・R2 の所を挿し替えて測る。
+
+| 終端 | 作り方 |
+| --- | --- |
+| 25 Ω | 12 Ω と 13 Ω を直列 (E24 の 2 本) |
+| 50 Ω | 100 Ω を 2 本並列 (図1) |
+| 75 Ω・100 Ω・150 Ω | 1 本 (E24 にある) |
+| 短絡・開放 | R1・R2 の代わりに直結・開放 |
 
 ## 掃引の設定
 

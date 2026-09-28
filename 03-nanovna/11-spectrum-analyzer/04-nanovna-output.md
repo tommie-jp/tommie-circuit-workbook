@@ -17,7 +17,7 @@ device: SA
 
 ## 回路図
 
-CH0 の出力を 0-3 と同じ 20 dB パッドで落として tinySA へ入れる。パッドを
+CH0 の出力を 0-3 と同じ 20 dB パッド (43 Ω・11 Ω・43 Ω) で落として tinySA へ入れる。パッドを
 通す理由は 0-3 と同じ — **CH0 の出力自体は小さいが、パッドを通すと反射も
 一緒に減衰するので、tinySA 側の入力インピーダンスの乱れが CH0 に戻る影響も
 減らせる**。
@@ -31,9 +31,9 @@ parts:
     label: NanoVNA
     pins: [CH0, GND]
     turn: mirror
-  P1: resistor b5 b7 40.9
-  P2: resistor b7 d7 10.1
-  P3: resistor b7 b9 40.9
+  P1: resistor b5 b7 43
+  P2: resistor b7 d7 11
+  P3: resistor b7 b9 43
   X2:
     type: device
     at: b11

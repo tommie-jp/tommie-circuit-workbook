@@ -27,7 +27,7 @@ Q が分かれば、比帯域の目安は **Δf / f₀ ≈ 1 / Q** (SWR 2 の全
 7-2 と同じ形の等価回路。今度は**ちょうど 144 MHz で共振**するように C を選ぶ。
 
 ```circuit
-title: 図1 144 MHz にちょうど合わせたダイポール
+title: 図1 144 MHz にちょうど合わせたダイポール (直列 RLC の等価回路)
 parts:
   J1: sma b2 mirror CH0
   R1: resistor b4 b6 70

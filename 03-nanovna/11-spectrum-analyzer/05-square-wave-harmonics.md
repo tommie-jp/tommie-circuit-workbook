@@ -40,9 +40,9 @@ parts:
     label: NE555 189.5 kHz
     pins: [OUT, GND]
     turn: mirror
-  P1: resistor b6 b8 40.9
-  P2: resistor b8 d8 10.1
-  P3: resistor b8 b10 40.9
+  P1: resistor b6 b8 43
+  P2: resistor b8 d8 11
+  P3: resistor b8 b10 43
   X2:
     type: device
     at: b12
@@ -62,7 +62,7 @@ wires:
 
 - 555 の出力は 0〜5 V を往復する方形波で、直接 tinySA (50 Ω) につなぐと
   基本波だけで +20 dBm 近くになる (見るべき値で計算)。**0-3 と同じ 20 dB
-  T 型パッド (40.9 Ω・10.1 Ω・40.9 Ω) を必ず挟む** (図の P1〜P3)
+  T 型パッド (43 Ω・11 Ω・43 Ω) を必ず挟む** (図の P1〜P3)
 - `Cc` (5 番 CTRL のバイパス) は回路の教科書の 3-2 と同じ理由で残す
 
 40106 の版 (Rf 10 kΩ・C 470 pF、f = 1/(1.2×Rf×C) ≈ **177.3 kHz**、
@@ -77,9 +77,9 @@ parts:
   C1: capacitor c2 e2 470p
   G1: ground e2
   U2: not c6
-  P1: resistor c8 c10 40.9
-  P2: resistor c10 e10 10.1
-  P3: resistor c10 c12 40.9
+  P1: resistor c8 c10 43
+  P2: resistor c10 e10 11
+  P3: resistor c10 c12 43
   X2:
     type: device
     at: c14
@@ -157,7 +157,8 @@ wires:
 
 計算値。0〜5 V の方形波の n 次高調波の振幅 (0-peak) は (2×5/(nπ))×\|sin(nπD)\|
 (Analog Discovery の教科書の 4-2・4-9 と同じ式)。50 Ω に直接乗せた電力から 20 dB パッドを
-引いた値。
+引いた値。555 の出力を電圧源と見ると、43 Ω・11 Ω・43 Ω のパッドの先の電圧は
+50 Ω に直接かけたときの 0.1001 倍 (−19.99 dB) なので、20 dB を引けばよい。
 
 **555 (D ≈ 56.6%)**:
 

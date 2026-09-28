@@ -23,8 +23,8 @@ device: H4
 
 **L = R / (2π f_c g)**、**C = 1 / (2π f_c R g)** (R = 50 Ω、f_c = 10 MHz)
 
-計算値: L1 = L3 = 795.8 nH、C2 = 159.2 pF。E12/E24 系列に丸めると
-L1 = L3 = 820 nH、C2 = 160 pF になる。
+計算値: L1 = L3 = 795.8 nH、C2 = 159.2 pF。E12 系列に丸めると
+L1 = L3 = 820 nH、C2 = 150 pF になる。
 
 ## 回路図
 
@@ -33,7 +33,7 @@ title: 図1 3 次 LC ハイパス (L-C-L)
 parts:
   J1: sma b2 mirror CH0
   L1: inductor b4 d4 820n
-  C1: capacitor b5 b7 160p
+  C1: capacitor b5 b7 150p
   L2: inductor b8 d8 820n
   J2: sma b10 CH1
   G1: ground c2
@@ -61,7 +61,7 @@ title: 図2 perfboard に組む (端面 SMA 2 つ)
 parts:
   J1: sma/female-edge e1 f0
   L1: inductor e3 g3 820n
-  C1: capacitor e5 e8 160p
+  C1: capacitor e5 e8 150p
   L2: inductor e10 g10 820n
   J2: sma/female-edge e18 f19
 wires:
@@ -94,26 +94,26 @@ wires:
 ```vna
 device: h4
 sweep: 1M-100M 201
-title: 図3 3 次ハイパス (E12/E24 丸め後) — −3 dB は 9.87 MHz
+title: 図3 3 次ハイパス (E12 丸め後) — −3 dB は 10.3 MHz
 dut:
   - shunt L 820n
-  - series C 160p
+  - series C 150p
   - shunt L 820n
 traces:
   - S21 logmag
   - S11 logmag
 markers:
   - 1M
-  - 9.87M
+  - 10.3M
   - 30M
 notes:
-  - band 9.87M 100M: 通過帯域 (−3 dB から上)
+  - band 10.3M 100M: 通過帯域 (−3 dB から上)
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/vna/02-lc-highpass.svg)
 
-- 丸めた値での実際のカットオフ (−3 dB) は**約 9.87 MHz** (設計は 10 MHz)
-- 1 MHz では −59 dB とよく落ちる。中波帯や短波の低い方を切り、それより上を通す
+- 丸めた値での実際のカットオフ (−3 dB) は**約 10.3 MHz** (設計は 10 MHz。C2 を 159 pF から 150 pF へ小さく丸めたぶん上がる)
+- 1 MHz では −60 dB とよく落ちる。中波帯や短波の低い方を切り、それより上を通す
   ような用途に向く
 
 ## 見るべき値
@@ -122,11 +122,11 @@ notes:
 
 | 周波数 | S21 (計算値) | 分かること |
 | --- | --- | --- |
-| 1 MHz | −59.4 dB | 阻止帯域。中波を強く落とす |
-| 5 MHz | −17.6 dB | 遷移域 |
-| 9.87 MHz | −3.0 dB | 実際のカットオフ |
-| 15 MHz | −0.36 dB | 通過帯域に入る |
-| 30 MHz | −0.01 dB | ほぼ 0 dB |
+| 1 MHz | −60.0 dB | 阻止帯域。中波を強く落とす |
+| 5 MHz | −18.3 dB | 遷移域 |
+| 10.3 MHz | −3.0 dB | 実際のカットオフ |
+| 15 MHz | −0.52 dB | 通過帯域に入る |
+| 30 MHz | −0.02 dB | ほぼ 0 dB |
 
 ローパス (6-1) と比べると、通過・阻止が周波数の高い低いで入れ替わっているだけで、
 次数と急峻さの考え方は同じ。

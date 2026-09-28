@@ -27,9 +27,10 @@ device: H4
 (直列共振、f₀ で共振)
 
 f₀ = 21 MHz、Δ = 0.10、R = 50 Ω での計算値: シャント L = 37.9 nH、C = 1516 pF、
-直列 L = 7.58 µH、C = 7.58 pF。E12/E24 系列に丸めると
-シャント L = 39 nH、C = 1500 pF、直列 L = 7.5 µH、C = 7.5 pF になる
-(どちらも 21.0 MHz ちょうどで共振する組み合わせ)。
+直列 L = 7.58 µH、C = 7.58 pF。E12 系列に丸めると
+シャント L = 39 nH、C = 1500 pF、直列 L = 6.8 µH、C = 8.2 pF になる。
+丸めたので共振は 21 MHz ちょうどにならない — シャント側は 20.8 MHz、
+直列側は 21.3 MHz で共振する。
 
 ## 回路図
 
@@ -39,8 +40,8 @@ parts:
   J1: sma b2 mirror CH0
   L1: inductor b4 d4 39n
   C1: capacitor b7 d7 1500p
-  L2: inductor b9 b11 7.5u
-  C2: capacitor b11 b13 7.5p
+  L2: inductor b9 b11 6.8u
+  C2: capacitor b11 b13 8.2p
   L3: inductor b16 d16 39n
   C3: capacitor b19 d19 1500p
   J2: sma b21 CH1
@@ -74,8 +75,8 @@ parts:
   J1: sma/female-edge e1 f0
   L1: inductor e3 g3 39n
   C1: capacitor e5 g5 1500p
-  L2: inductor e8 e12 7.5u
-  C2: capacitor e14 e16 7.5p
+  L2: inductor e8 e12 6.8u
+  C2: capacitor e14 e16 8.2p
   L3: inductor e18 g18 39n
   C3: capacitor e20 g20 1500p
   J2: sma/female-edge e24 f25
@@ -123,15 +124,15 @@ title: 図3 バンドパスの全体 (1〜60 MHz) — 通過帯域の外を見�
 dut:
   - shunt L 39n
   - shunt C 1500p
-  - series L 7.5u
-  - series C 7.5p
+  - series L 6.8u
+  - series C 8.2p
   - shunt L 39n
   - shunt C 1500p
 traces:
   - S21 logmag
   - S11 logmag
 markers:
-  - 21.75M
+  - 21.91M
   - 40M
 ```
 
@@ -142,31 +143,31 @@ markers:
 ```vna
 device: h4
 sweep: 16M-26M 201
-title: 図4 16〜26 MHz に狭めた S21 — 塗った所が −3 dB の帯域 (2.1 MHz)
+title: 図4 16〜26 MHz に狭めた S21 — 塗った所が −3 dB の帯域 (2.27 MHz)
 dut:
   - shunt L 39n
   - shunt C 1500p
-  - series L 7.5u
-  - series C 7.5p
+  - series L 6.8u
+  - series C 8.2p
   - shunt L 39n
   - shunt C 1500p
 traces:
   - S21 logmag
 markers:
-  - 20.06M
-  - 21M
-  - 21.75M
-  - 22.17M
+  - 20.04M
+  - 21.22M
+  - 21.91M
+  - 22.3M
 notes:
-  - band 20.06M 22.17M
+  - band 20.04M 22.3M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/vna/03-lc-bandpass-2.svg)
 
-- 丸めた値でのピークは**約 21.75 MHz** (ほぼ 0 dB)。−3 dB の帯域は
-  約 20.06 MHz〜22.17 MHz (帯域幅 約 2.12 MHz、比帯域 約 10%。計算値)
-- 2 つのシャント共振器の共振 (20.8 MHz) と直列共振器の共振 (21.2 MHz) が
-  E12/E24 丸めでわずかにずれ、通過帯域の中に小さな谷ができる (次項で読む)
+- 丸めた値でのピークは**約 21.91 MHz** (ほぼ 0 dB)。−3 dB の帯域は
+  約 20.04 MHz〜22.30 MHz (帯域幅 約 2.27 MHz、比帯域 約 11%。計算値)
+- 2 つのシャント共振器の共振 (20.8 MHz) と直列共振器の共振 (21.3 MHz) が
+  E12 の丸めでずれ、通過帯域の中 (21.22 MHz) に小さな谷ができる (次項で読む)
 
 ## 見るべき値
 
@@ -174,15 +175,15 @@ notes:
 
 | 周波数 | S21 (計算値) | 分かること |
 | --- | --- | --- |
-| 1 MHz | −138.9 dB | 阻止帯域 (下側) |
-| 20.06 MHz | −3.6 dB | 通過帯域の下端 (−3 dB) |
-| 21.0 MHz | −0.63 dB | 通過帯域内。2 つの共振周波数がわずかにずれた谷 |
-| 21.75 MHz | 約 0 dB | 通過帯域のピーク |
-| 22.17 MHz | −3.6 dB | 通過帯域の上端 (−3 dB) |
-| 40 MHz | −68.2 dB | 阻止帯域 (上側) |
+| 1 MHz | −138.1 dB | 阻止帯域 (下側) |
+| 20.04 MHz | −3.0 dB | 通過帯域の下端 (−3 dB) |
+| 21.22 MHz | −0.89 dB | 通過帯域内。2 つの共振周波数がずれてできた谷 |
+| 21.91 MHz | 約 0 dB | 通過帯域のピーク |
+| 22.30 MHz | −2.95 dB | 通過帯域の上端 (−3 dB) |
+| 40 MHz | −67.3 dB | 阻止帯域 (上側) |
 
-E12/E24 の丸めで理論どおりぴったり 1 点には共振しないので、通過帯域の中に
-0.6 dB ほどの小さな谷が出る。これは設計ミスではなく部品の丸め誤差。
+E12 の丸めで理論どおりぴったり 1 点には共振しないので、通過帯域の中に
+0.9 dB ほどの小さな谷が出る。これは設計ミスではなく部品の丸め誤差。
 
 ## 出典
 
