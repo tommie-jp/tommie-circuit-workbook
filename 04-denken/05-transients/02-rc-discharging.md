@@ -41,6 +41,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/circuit/02-rc-discharging.svg)
+
 - 回路は 5-1 と同じ (R1 = 10 kΩ、C1 = 100 nF、τ = 1.0 ms)。**方形波の立ち下がり**
   (2 V → 0 V) の直後を見る所だけが 5-1 と違う
 - Wavegen が 0 V に落ちると、コンデンサに溜まった電荷は R1 を通って抜けていく
@@ -69,6 +71,8 @@ wires:
   - a20 -- -t20 black
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/breadboard/02-rc-discharging.svg)
+
 - 配線は 5-1 と同じ。Wavegen の設定と、スコープで見る区間 (立ち下がりのあと) だけが違う
 
 ## 計器の設定
@@ -87,6 +91,8 @@ ch2: {wave: ch1 | rc 1ms, range: 500mV/div, position: -3div}
 cursors: [0, 1ms]
 measure: [vmax, vmin]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/scope/02-rc-discharging.svg)
 
 ### オシロスコープと発振器
 

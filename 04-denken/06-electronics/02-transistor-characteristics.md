@@ -42,6 +42,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/circuit/02-transistor-characteristics-1.svg)
+
 - R_B (470 kΩ) がベース電流を決め、R_C (1 kΩ) がコレクタ電流を電圧に変える
 - Q1 は 2SC1815 (GR ランク、h_FE は個体差があり 200〜400 程度)。ここでは
   代表値 h_FE = 250 として計算する
@@ -72,6 +74,8 @@ wires:
   - AD.2- -- a16 green
   - AD.2+ -- +t20 red
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/breadboard/02-transistor-characteristics.svg)
 
 - +t (赤レール) が +5 V。R_B・R_C ともここから取る (R_B は 10 列、R_C は 24 列から)。
   もう片方の足はベース (15 列)・コレクタ (16 列) に直に挿す
@@ -117,6 +121,8 @@ style:
   standard: jis
   pitch: 1.2
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/circuit/02-transistor-characteristics-2.svg)
 
 - V+ は安定化電源の 5 V。電流制限は 10 mA (飽和しても I_C は 5 V ÷ 1 kΩ = 5 mA まで)
   ([0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))

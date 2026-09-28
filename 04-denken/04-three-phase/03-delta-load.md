@@ -69,6 +69,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/03-delta-load-1.svg)
+
 - RLA・RLB・RLC (各 20 Ω) は**線電流を測るためのシャント**。値は小さく、
   電源の電圧をほとんど下げない
 - RAB・RBC・RCA (各 1 kΩ) が Δ 結線の負荷本体。a・b・c の 3 点を三角形につなぐ
@@ -126,6 +128,8 @@ notes:
   - text small: 列 38 が a 点、44 が b 点、56 が c 点 (どれも a〜e 行の同じ列は同じネット)
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/breadboard/03-delta-load.svg)
+
 - 35・41・53 列は AD.W1・AD.W2・U1.6 (3 相目) を下の段の g・j・h 行で右へ運び、
   溝を渡る短い線 (e35・e41・e53) で上の段へ戻したもの。
   d 行のシャント (RLA・RLB・RLC) を通って a・b・c の 3 点になる
@@ -160,6 +164,8 @@ ch1: {wave: sine 1kHz 56.6mV, range: 20mV/div}
 ch2: {wave: sine 1kHz 1.63V phase 30deg, range: 500mV/div}
 measure: [vmax, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/scope/03-delta-load.svg)
 
 ### オシロスコープと発振器
 
@@ -216,6 +222,8 @@ style:
   standard: jis
   pitch: 1.2
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/03-delta-load-2.svg)
 
 - U1 は図1 の OP アンプの出力 (3 相目)。FG₁・FG₂ は FG の CH1・CH2
 - ブレッドボードでは d35–d38・d41–d44・d53–d56 の 20 Ω を 200 Ω に挿し替えるだけ。

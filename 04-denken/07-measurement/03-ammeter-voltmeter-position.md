@@ -44,6 +44,8 @@ style:
   pitch: 1.3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/circuit/03-ammeter-voltmeter-position-1.svg)
+
 - R_x (1 kΩ) が測定物、R_a (51 Ω) が電流計の内部抵抗の模型、R_v (10 kΩ) が
   電圧計の内部抵抗の模型。実物の電流計の内部抵抗は 1 Ω に満たないが、
   つなぎ方による差を数 % の大きさで読めるように、模型はわざと大きくしてある
@@ -80,6 +82,8 @@ wires:
   - AD.2+ -- b19 orange
   - AD.2- -- -t22 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/breadboard/03-ammeter-voltmeter-position.svg)
 
 - SW1 はスライドスイッチで代用 (1 側が P = 電流計が先、2 側が Q = 電圧計が先)。
   実験では 1 と 2 の間で挿し替えてもよい
@@ -126,6 +130,8 @@ style:
   standard: jis
   pitch: 1.3
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/circuit/03-ammeter-voltmeter-position-2.svg)
 
 - 図3 の P は R_x の上、Q は R_x と R_a の間。図3 は電流計が先で、R_v は P と GND の間
   (電流計を通らない)。**電圧計を先にするには、R_v の下の端を GND から Q へ挿し替える**

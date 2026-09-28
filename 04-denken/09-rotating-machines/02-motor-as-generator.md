@@ -42,6 +42,8 @@ notes:
   - text d5: "指で軸を回す (発電機として使う)"
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/02-motor-as-generator.svg)
+
 - 電源は無く、モータの軸を指で回すことで起電力が生じる
 - CH1 はモータの両端をそのまま読む (開放電圧。負荷はつながない)
 
@@ -60,6 +62,8 @@ wires:
   - MOT.+ -- j5 orange
   - MOT.- -- j8 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/breadboard/02-motor-as-generator.svg)
 
 - MOT (モータ) だけを板の外の機器として描く。電源も他の部品も無い
 - CH1 (1+/1−) を下のブロックの 5 列・8 列にあて、モータの両端をそのまま読む

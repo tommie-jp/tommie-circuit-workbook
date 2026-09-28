@@ -52,6 +52,8 @@ wires:
   - T1.B2 -| d7f0
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/01-turns-ratio-1.svg)
+
 - W1 は AD の波形発生器 (Wavegen)。1 kHz、振幅 2 V
 - Rs1 (100 Ω) は 1 次電流 I1 を読むシャント。10 kΩ に反射した 2 次負荷に対して
   1 % ほどなので、電圧比・電流比の計算にはほぼ効かない
@@ -87,6 +89,8 @@ wires:
   - a18 -- -t18 black
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/breadboard/01-turns-ratio.svg)
+
 - T1 の 1 次リード (10 kΩ側) を 15・18 列の上ブロック、2 次リード (8 Ω側) を同じ
   15・18 列の下ブロックに挿す。上下は別ネットなので、4 本足がそのまま 1 次・2 次を分ける
 - RL は 15・18 列の下ブロックに挿すだけで T1 の 2 次と並列になる (列でつながる)
@@ -118,6 +122,8 @@ ch2: {wave: sine 1kHz 19.8mV, range: 10mV/div, position: -2div}
 measure: [vmax, freq, phase]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/scope/01-turns-ratio-1.svg)
+
 2 回目は CH1 を RL の両端へ挿し替える。V2 は I1 の分と同じ桁なので、2 本とも 20 mV/div で並べる。
 
 ```scope
@@ -128,6 +134,8 @@ ch1: {wave: sine 1kHz 56.0mV, range: 20mV/div}
 ch2: {wave: sine 1kHz 19.8mV, range: 20mV/div}
 measure: [vmax, freq]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/scope/01-turns-ratio-2.svg)
 
 ### オシロスコープと発振器
 
@@ -164,6 +172,8 @@ wires:
 notes:
   - text d11a4 left: (2回目)
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/01-turns-ratio-2.svg)
 
 - ブレッドボードは Rs1 (e3–e7) を抜いて 3 列と 7 列を線でつなぎ、18 列から − レールへの
   黒い線 (a18) を Rs1 (100 Ω) に替える。18 列が T1 の 1 次の下と Rs1 のつなぎ目になる

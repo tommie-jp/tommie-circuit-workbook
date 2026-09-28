@@ -51,6 +51,8 @@ wires:
   - e1 -- a1
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/circuit/01-safety-promise.svg)
+
 - V1 は AD の波形発生器 (W1)。振幅を決めて出力する
 - A1 はテスターの電流レンジ (交流)。R1 に流れる電流を直に読む
 - R1 = 100 Ω は**振幅 3 V のときの下限ぴったり**の値 (見るべき値で計算する)。

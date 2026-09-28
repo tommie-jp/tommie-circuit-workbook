@@ -47,6 +47,8 @@ wires:
   - g1 -- g3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/circuit/02-transmission-line-model-1.svg)
+
 - W1 は AD の波形発生器。1 kHz、振幅 1 V。Rline (10 Ω) が線路の抵抗を兼ねる
   電流検出用シャント、Lline (10 mH) が線路のリアクタンス
 - S1 を閉じると Lline が短絡され、R だけの線路になる (開けば R + L の線路)
@@ -80,6 +82,8 @@ wires:
   - e16 -- f16 green
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/breadboard/02-transmission-line-model.svg)
+
 - W1 (3 列) は黄の線で 12 列へ延ばし、Rline (12・16 列) の入口にする。16 列と
   8 列は溝をまたぐ短い線で下のブロックへ降ろしてある
 - Lline (10 mH、下のブロックの 8・16 列) と S1 (同じ 8・16 列、別の穴) は同じ
@@ -107,6 +111,8 @@ ch2: {wave: sine 1kHz 78.9mV, range: 50mV/div, position: -2div}
 measure: [vmax, freq, phase]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/scope/02-transmission-line-model-1.svg)
+
 ```scope
 title: 図4 S1 を閉じる (R だけの線路) — 同じ V/div で CH1・CH2 とも大きくなる
 time: 200us/div
@@ -115,6 +121,8 @@ ch1: {wave: sine 1kHz 0.909V, range: 500mV/div, position: 2div}
 ch2: {wave: sine 1kHz 90.9mV, range: 50mV/div, position: -2div}
 measure: [vmax, freq, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/scope/02-transmission-line-model-2.svg)
 
 ### オシロスコープと発振器
 
@@ -149,6 +157,8 @@ wires:
   - e8 -- e11
   - g1 -- g8 -- g11 -- g14
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/circuit/02-transmission-line-model-2.svg)
 
 - 板の変え方: Rline を 12〜16 列から抜き、3 列からの黄の線を 12 列でなく 16 列へ挿す。
   4 列から青レールへの黒い線を抜き、代わりに Rline を 4 列と青レールの間に挿す

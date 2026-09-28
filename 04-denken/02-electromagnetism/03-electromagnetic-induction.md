@@ -35,6 +35,8 @@ wires:
   - c3 -- c5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/03-electromagnetic-induction.svg)
+
 - L1 が実験用のコイル (巻線)。M1 は AD の Scope の CH1 (電圧を読むだけで、
   電流はほとんど流さない。コイルには抵抗負荷を追加しなくてよい)
 

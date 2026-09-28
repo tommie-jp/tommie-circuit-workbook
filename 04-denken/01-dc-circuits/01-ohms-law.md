@@ -41,6 +41,8 @@ wires:
   - a7 -- e7
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/01-ohms-law.svg)
+
 - B1 は 9 V の角形電池。先に書いた番地が + 側で、A1 (電流計) に直接つながる
 - A1 (テスターの電流レンジ) は R1 と**直列**。電流はどこで測っても同じ値
 - V1 (テスターの電圧レンジ) は R1 と**並列**。R1 の両端の電圧だけを読む
@@ -71,6 +73,8 @@ wires:
 notes:
   - text: "R1 の両端 (5 列・10 列) にテスター (電圧レンジ) を当てる"
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/01-ohms-law.svg)
 
 - AM (テスターの電流レンジ) を電池と R1 の間に直列に入れる。3 列 (電池側) と
   5 列 (R1 側) が離れているのは、テスターを挟むため

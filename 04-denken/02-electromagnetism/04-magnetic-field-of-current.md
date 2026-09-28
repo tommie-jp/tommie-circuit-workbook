@@ -38,6 +38,8 @@ wires:
   - a1 -- c1
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/04-magnetic-field-of-current.svg)
+
 - B1 は単 3 電池 2 本 (3 V)。S1 は押している間だけ通電する押しボタン
   (電池を長持ちさせ、R1 の発熱も短時間にとどめる)
 - R1 (10 Ω、1 W 以上のもの) が電流を約 0.27 A に制限する。導線 (R1 の先) を

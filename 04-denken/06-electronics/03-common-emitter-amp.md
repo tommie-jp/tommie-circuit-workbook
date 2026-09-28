@@ -54,6 +54,8 @@ style:
   pitch: 1.5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/circuit/03-common-emitter-amp.svg)
+
 - R1 (39 kΩ)・R2 (10 kΩ) が分圧バイアス、R_C (2.2 kΩ) がコレクタ抵抗、
   R_E (470 Ω) がエミッタ抵抗
 - Cin・Cout (各 10 µF) は直流を遮って交流だけを通す結合コンデンサ
@@ -91,6 +93,8 @@ wires:
   - a28 -- -t28 black
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/breadboard/03-common-emitter-amp.svg)
+
 - 列 22 がベース (分圧の中点)、列 23 がコレクタ、列 24 がエミッタ。
   R1・R2・Cin はベースの列、RC・Cout はコレクタの列、RE はエミッタの列に直に挿し、
   同じ穴を 2 度挿さないように行を分けている
@@ -116,6 +120,8 @@ ch1: {wave: sine 1kHz 50mV, range: 20mV/div}
 ch2: {wave: ch1 | gain -4.68, range: 100mV/div}
 measure: [vmax, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/scope/03-common-emitter-amp.svg)
 
 ### オシロスコープと発振器
 

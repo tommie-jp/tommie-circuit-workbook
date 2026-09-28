@@ -41,6 +41,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/circuit/01-rc-charging.svg)
+
 - R1 (10 kΩ) と C1 (100 nF) で τ = CR = 1.0 ms
 - 入力は AD の Wavegen (W1) の方形波。0 V と 2 V を行き来する
   (Amplitude 1 V、Offset 1 V)
@@ -70,6 +72,8 @@ wires:
   - a20 -- -t20 black
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/breadboard/01-rc-charging.svg)
+
 - 5〜10 列が R1、15〜20 列が C1。10 列と 15 列をつなぐ緑の線の所が出力の節点
 - CH1 (1+) は入力 (Wavegen の直後)、CH2 (2+) は出力 (C1 の両端) に挿す
 
@@ -89,6 +93,8 @@ ch2: {wave: ch1 | rc 1ms, range: 500mV/div, position: -3div}
 cursors: [0, 1ms]
 measure: [vmax, rise]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/scope/01-rc-charging.svg)
 
 ### オシロスコープと発振器
 

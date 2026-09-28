@@ -37,6 +37,8 @@ style:
   standard: jis
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/circuit/02-voltmeter-multiplier-1.svg)
+
 - Rg (1 kΩ、I_g = 1 mA でフルスケール) が電圧計の中身 (検流計) の模型。
   Rg の両端の電圧が、そのまま検流計の振れに対応する
 - Rm (9.1 kΩ、E24 系列) が倍率器。n = (1k + 9.1k) / 1k = 10.1 倍
@@ -65,6 +67,8 @@ wires:
   - AD.2- -- -t14 black
   - a16 -- -t16 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/breadboard/02-voltmeter-multiplier.svg)
 
 - Rg (1 kΩ) が電圧計の中身、Rm (9.1 kΩ、表記は `9k1`) が倍率器
 - CH1 は Rg の両端の差動 (検流計が読む電圧)。CH2 は V1 の電圧そのもの
@@ -104,6 +108,8 @@ wires:
 style:
   standard: jis
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/circuit/02-voltmeter-multiplier-2.svg)
 
 - ブレッドボードは 5〜10 列に Rm (9k1)、10〜16 列に Rg (1k) を挿し替える。
   10 列が Rm と Rg のつなぎ目になる

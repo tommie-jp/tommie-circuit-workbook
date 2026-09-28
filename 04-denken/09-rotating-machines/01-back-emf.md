@@ -41,6 +41,8 @@ wires:
   - g1 -- g3 -- g6
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/01-back-emf-1.svg)
+
 - B1 は単 3 電池 (1〜3 本) で 1.5 V / 3.0 V / 4.5 V の 3 段を作る
 - Rs1 (10 Ω) はモータの電流 I を読むシャント。CH2 はその両端 (差動)
 - CH1 はモータの端子電圧 V (Rs1 の後ろ、モータの両端そのもの)。電源電圧より
@@ -74,6 +76,8 @@ wires:
   - MOT.+ -- a11 orange
   - MOT.- -- -t13 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/breadboard/01-back-emf.svg)
 
 - S1 で電池を入り切りする。Rs1 (10 Ω) はモータの電流を電圧に変えるシャント
 - 電池 (BAT) とモータ (MOT) は板の外の機器として描く。電池は上の赤・青レールへ、
@@ -115,6 +119,8 @@ wires:
   - e4 -- e6
   - g1 -- g4 -- g6 -- g8
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/01-back-emf-2.svg)
 
 - 板の変え方: Rs1 を 7〜11 列から抜き、7 列と 11 列を線でつなぐ。MOT の − を青レールから
   空いた 15 列へ挿し替え、Rs1 を 15 列と青レールの間に挿す

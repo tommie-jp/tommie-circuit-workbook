@@ -49,6 +49,8 @@ wires:
   - a9 |- g3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/13-regulations/circuit/01-grounding-effect-1.svg)
+
 - Rleak (1 kΩ) が絶縁不良を模した「漏れ」の抵抗。Rbody (1 kΩ) が人体の抵抗
   (電気設備の安全計算でよく使う目安値)。Rground (100 Ω) が接地極の抵抗
   (D 種接地工事の上限 100 Ω を模した値)
@@ -82,6 +84,8 @@ wires:
   - a19 -- -t19 black
   - a24 -- -t24 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/13-regulations/breadboard/01-grounding-effect.svg)
 
 - Rleak (3〜7 列)、Rbody (15〜19 列) が直列。7 列 (人体側の節点) は橙の線で
   15 列へ、3 列 (V+) は赤の線で 11 列へ延ばし、AD の足の並びどおりに左から挿す
@@ -136,6 +140,8 @@ wires:
   - c7 -- c9 -- c11
   - g1 -- g4 -- g7 -- g9 -- g11
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/13-regulations/circuit/01-grounding-effect-2.svg)
 
 - CH1 の先端は 7 列、CH2 の先端は 11 列 (電源の +)、グランドクリップは 2 本とも青レール。
   ブレッドボードの部品は図2 のまま動かさない

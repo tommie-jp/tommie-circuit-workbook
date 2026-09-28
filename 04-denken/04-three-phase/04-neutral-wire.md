@@ -63,6 +63,8 @@ style:
   pitch: 1.4
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/04-neutral-wire.svg)
+
 - RN (10 Ω) が中性線のシャント。中性点 N と GND (G4) の間に入れ、両端の電圧を
   読めば中性線の電流が分かる (4-2 では N を浮かせたまま、ここでは GND に落とす
   のが違い)
@@ -118,6 +120,8 @@ notes:
   - text small: R3・R4・R5 が Y 結線。列 53 が中性点 N。RN が N と GND (−t レール) の間
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/breadboard/04-neutral-wire.svg)
+
 - 中性点 N (列 53) から RN (10 Ω) を通って 57 列 (c57) へ、そこから GND レール (−t、AD.GND と同じ) へつなぐ。
   N を GND に直結せず、必ず RN を挟むことで電流を電圧として読める
 - Scope の CH1 は 1+ を N (a 行の緑の線で 28 列まで延ばした b28)、1- を GND レール
@@ -144,6 +148,8 @@ ch1: {wave: sine 1kHz 4.88mV phase 180deg, range: 2mV/div}
 ch2: {wave: sine 1kHz 1V, range: 500mV/div}
 measure: [vmax, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/scope/04-neutral-wire.svg)
 
 ### オシロスコープと発振器
 

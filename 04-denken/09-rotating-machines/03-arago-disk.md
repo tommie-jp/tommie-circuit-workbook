@@ -43,6 +43,8 @@ notes:
   - text f2: "モータの軸に磁石を 2 個、極を向かい合わせて付ける"
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/03-arago-disk.svg)
+
 - モータの軸の先に小さな磁石を 2 個 (N・S を向かい合わせて) 固定し、回転する
   磁界を作る。電気的にはただの DC モータの駆動回路
 - S1 で入り切りする。速さを変えたいときは電池の本数を変える (1〜2 本)

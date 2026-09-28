@@ -47,6 +47,8 @@ wires:
   - e1 -- e9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/01-capacitors-series-parallel-1.svg)
+
 ```circuit
 title: 図2 並列つなぎ
 style:
@@ -63,6 +65,8 @@ wires:
   - c5 -- c7 -- c10
   - e1 -- e7 -- e10
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/01-capacitors-series-parallel-2.svg)
 
 - R1 (10 kΩ) は充電の突入電流を抑える電流制限抵抗。S1 を閉じるとコンデンサが
   充電される
@@ -91,6 +95,8 @@ notes:
   - text: "V1 (電圧レンジ) を C1 の両端 (10・15 列) に当てる"
   - text: "V2 (電圧レンジ) を C2 の両端 (15・20 列) に当てる"
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/breadboard/01-capacitors-series-parallel.svg)
 
 - S1 (スイッチ) を実際に挿す。閉じてから数秒待てば十分充電される
   (時定数は R1 × 合成容量で 15 ms ほど。過渡現象は 5 章で扱う)

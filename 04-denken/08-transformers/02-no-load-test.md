@@ -48,6 +48,8 @@ wires:
   - e1 -- e4
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/02-no-load-test-1.svg)
+
 - 2 次 (T1.B1 / T1.B2) は**わざと開放のまま**にする。8-1・8-3 と同じ 1 次側の
   配線に、2 次だけ何もつながない形。ERC が T1.B1 / T1.B2 の未接続を言うが、
   無負荷試験の条件そのものなので直さない
@@ -80,6 +82,8 @@ wires:
   - a18 -- -t18 black
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/breadboard/02-no-load-test.svg)
+
 - T1 の 2 次リード (下ブロックの 15 列・18 列) には**何も挿さない**。8-1 の図から
   RL を抜いただけの形
 - 配線は 8-1 と同じ。Rs1 の値だけ 100 Ω → 4.7 kΩ に変える
@@ -102,6 +106,8 @@ ch1: {wave: sine 1kHz 2V, range: 1V/div}
 ch2: {wave: sine 1kHz 47.2mV phase -84deg, range: 20mV/div}
 measure: [vmax, freq, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/scope/02-no-load-test.svg)
 
 ### オシロスコープと発振器
 
@@ -129,6 +135,8 @@ wires:
   - e4 -- e6
   - g1 -- g3 -- g4 -- g6
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/02-no-load-test-2.svg)
 
 - ブレッドボードは 8-1 と同じ組み替え: Rs1 (e3–e7) を抜いて 3 列と 7 列を線でつなぎ、
   18 列から − レールへの黒い線を Rs1 (4.7 kΩ) に替える

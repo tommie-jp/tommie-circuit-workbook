@@ -44,6 +44,8 @@ wires:
   - VR1.w |- g10
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/circuit/01-solar-iv-curve-1.svg)
+
 - PV1 (太陽電池、屋内の照明かランプで照らす) の + から Rs (10 Ω、電流検出用の
   シャント) を通って VR1 (1 kΩ、可変抵抗) へ。VR1 は摺動子を GND 側の端と
   つないで可変抵抗 (レオスタット、0〜1 kΩ) として使い、摺動子を回して負荷を変える
@@ -80,6 +82,8 @@ wires:
   - a15 -- -t15 black
   - a16 -- -t16 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/breadboard/01-solar-iv-curve.svg)
 
 - PV1 (太陽電池パネル) を板の外の機器として描く。Rs (10 Ω) で電流を検出し、
   VR1 (1 kΩ) の摺動子で負荷を変える。VR1 は 14 列 (端 1) と 15 列 (摺動子) の間を
@@ -126,6 +130,8 @@ wires:
   - e4 -- e7
   - g1 -- g4 -- g7 -- g10
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/circuit/01-solar-iv-curve-2.svg)
 
 - 板の変え方: Rs を 3〜7 列から抜き、3 列と 7 列を線でつなぐ (7 列 → 14 列の橙の線はそのまま)。
   15・16 列から青レールへの 2 本の黒い線を抜き、15 列と 16 列を短い線でつなぎ、

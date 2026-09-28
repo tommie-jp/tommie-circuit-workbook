@@ -38,6 +38,8 @@ wires:
   - a1 -- c1
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/05-electromagnetic-force.svg)
+
 - 2-4 と同じ回路 (電池 3 V、押しボタン S1、電流制限抵抗 R1 = 10 Ω 1 W 以上)。
   R1 から先の導線を、軽くて動きやすい細い電線に替える
 

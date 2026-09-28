@@ -44,6 +44,8 @@ wires:
   - g1 -- g6 -- g8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/02-rlc-phase-1.svg)
+
 - CH1 が DUT (R1 の位置) の両端の電圧、CH2 が Rs (シャント、10 Ω) の両端
   = 電流に比例した電圧。**CH1 と CH2 の位相差が DUT の位相差そのもの**
   (Rs は十分小さいので、電流の位相をほぼそのまま伝える)
@@ -75,6 +77,8 @@ notes:
   - text: "DUT (10〜15 列)。R (1kΩ)・L (100mH)・C (100nF) を順に挿し替える"
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/breadboard/02-rlc-phase.svg)
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -93,6 +97,8 @@ ch2: {wave: sine 1kHz 15.9mV phase -90deg, range: 5mV/div}
 measure: [vmax, phase]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/02-rlc-phase-1.svg)
+
 ```scope
 title: 図4 C — 電流 (CH2、2 mV/div) が電圧 (CH1) より 90° 進む
 time: 200us/div
@@ -101,6 +107,8 @@ ch1: {wave: sine 1kHz 1V, range: 500mV/div}
 ch2: {wave: sine 1kHz 6.28mV phase 90deg, range: 2mV/div}
 measure: [vmax, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/02-rlc-phase-2.svg)
 
 ### オシロスコープと発振器
 
@@ -126,6 +134,8 @@ wires:
   - e5 -- e7 -- e9
   - g1 -- g3 -- g7 -- g9
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/02-rlc-phase-2.svg)
 
 - W1 は FG の OUT (High-Z)。1 kHz、振幅 1 V は Vpp で入れる機種なら 2 Vpp。
   CH1 の先端は FG の出力 (DUT の上)、CH2 の先端は Rs の上、グランドクリップは 2 本とも GND

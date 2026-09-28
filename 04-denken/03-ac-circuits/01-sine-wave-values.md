@@ -42,6 +42,8 @@ wires:
   - g3 -- g1
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/01-sine-wave-values.svg)
+
 - V1 は AD の波形発生器 (W1)。R1 はただの負荷、M1 (CH1) が読み取り点
 
 ## 実体配線図
@@ -63,6 +65,8 @@ wires:
   - AD.1- -- -t8 black
   - c10 -- -t10 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/breadboard/01-sine-wave-values.svg)
 
 ## 計器の設定
 
@@ -87,6 +91,8 @@ ch1: {wave: sine 1kHz 1V, range: 500mV/div}
 cursors: [0, 250us]
 measure: [vmax, rms, avg, freq]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/01-sine-wave-values.svg)
 
 ### オシロスコープと発振器
 

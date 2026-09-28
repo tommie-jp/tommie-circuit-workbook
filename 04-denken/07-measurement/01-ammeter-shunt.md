@@ -40,6 +40,8 @@ style:
   standard: jis
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/circuit/01-ammeter-shunt-1.svg)
+
 - Rg (100 Ω) が検流計の内部抵抗の模型。実物の検流計の記号 (G1) は電流の道筋を
   示すためだけに置き、抵抗の値は Rg が持つ
 - Rs (50 Ω) が分流器。Rg と並列に入れる
@@ -70,6 +72,8 @@ wires:
   - AD.2- -- a15 blue
   - a19 -- -t19 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/breadboard/01-ammeter-shunt.svg)
 
 - Rt (1 kΩ) の先で、Rg (100 Ω、検流計の模型) と Rs (50 Ω、分流器) が並列になる
 - CH1 (1+) は Rg (= Rs) の両端 (GND 基準)。CH2 は Rt の両端の差動 (全電流)
@@ -108,6 +112,8 @@ wires:
 style:
   standard: jis
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/circuit/01-ammeter-shunt-2.svg)
 
 | AD | 汎用の計器 |
 | --- | --- |

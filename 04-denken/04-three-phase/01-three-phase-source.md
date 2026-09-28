@@ -55,6 +55,8 @@ style:
   pitch: 1.4
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/01-three-phase-source.svg)
+
 - V1 (W1) が 1 相目 (0°)、V2 (W2) が 2 相目 (−120°)。どちらも AD の Wavegen が
   そのまま出す — AD の Wavegen 出力インピーダンスは低いので、バッファなしで
   1 相目・2 相目として使ってよい
@@ -98,6 +100,8 @@ notes:
   - text small: 2 番 (IN-) に R1・R2・Rf が集まる。2 回目は AD.2+ を U1.6 に挿し替える
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/breadboard/01-three-phase-source.svg)
+
 - TL071 (dip8) は `r180` で置き、1 番が e16 に来る。上の段 (e13〜e16) が 4・3・2・1 番、
   下の段 (f13〜f16) が 5・6・7・8 番。ピン: 1 = NC、2 = IN−、3 = IN+、4 = V−、
   5 = NC、6 = OUT、7 = V+、8 = NC。**1・5・8 番はオフセット調整用**
@@ -129,6 +133,8 @@ ch2: {wave: sine 1kHz 1V phase -120deg, range: 500mV/div}
 measure: [vmax, phase]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/scope/01-three-phase-source-1.svg)
+
 ```scope
 title: 図4 2 回目 — 3 相目 (CH2) は 1 相目 (CH1) より 120° 進む
 time: 200us/div
@@ -137,6 +143,8 @@ ch1: {wave: sine 1kHz 1V, range: 500mV/div}
 ch2: {wave: sine 1kHz 1V phase 120deg, range: 500mV/div}
 measure: [vmax, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/scope/01-three-phase-source-2.svg)
 
 ### オシロスコープと発振器
 

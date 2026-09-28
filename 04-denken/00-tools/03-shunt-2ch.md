@@ -42,6 +42,8 @@ wires:
   - g1 -- g5 -- g8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/circuit/03-shunt-2ch-1.svg)
+
 - V1 は AD の Supplies (V+)。5 V を出す
 - Rs (10 Ω) が電流を測るシャント。CH2 は Rs の両端 (差動入力) で、読みを 10 で
   割ると電流になる (1 mV = 0.1 mA)
@@ -69,6 +71,8 @@ wires:
   - AD.1- -- -t12 black
   - d15 -- -t15 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/breadboard/03-shunt-2ch.svg)
 
 - Rs と R1 は 10 列でつながる直列 (Rs の右足と R1 の左足が同じ列)
 - CH2 (2+/2-) は Rs の両端 (5 列と 10 列) の差動入力。**GND にはつながない**
@@ -119,6 +123,8 @@ wires:
   - e5 -- e7 -- e9
   - g1 -- g3 -- g7 -- g9
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/circuit/03-shunt-2ch-2.svg)
 
 | 図1 (AD) | 図3 (汎用) |
 | --- | --- |

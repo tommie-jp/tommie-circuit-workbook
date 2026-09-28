@@ -50,6 +50,8 @@ wires:
   - g1 -- g6 -- g8 -- g10
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/07-power-factor-1.svg)
+
 - V1 は AD の波形発生器 W1。1 kHz、振幅 0.5 V
 - Rs (10 Ω) は線電流 I を測るシャント。同時に**線路の抵抗**の役もする。
   CH2 は Rs の両端 (差動入力) で、読みの 1/10 が線電流 (1 mV = 0.1 mA)
@@ -86,6 +88,8 @@ wires:
   - -t28 -- -b28 black
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/breadboard/07-power-factor.svg)
+
 - 10 列が受電端。Rs・R1・CH1 (1+)・CH2 (2−) と、下の段へ渡る緑の線が集まる
 - CH2 の 2+ と 2− を Rs の両端 (5 列と 10 列) に挿す。**2− を GND につながない**
   (つなぐと受電端が GND に落ちる)
@@ -117,6 +121,8 @@ math: {expr: ch1 * ch2 / 10, unit: W, range: 500uW/div, position: -2div}
 measure: [vmax, rms, avg, phase]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/07-power-factor-1.svg)
+
 ```scope
 title: 図4 C = 1.5 µF — 線電流 (CH2) は 3.6 mA に減り、遅れは 6°。P は変わらない
 time: 200us/div
@@ -126,6 +132,8 @@ ch2: {wave: sine 1kHz 35.6mV phase -5.8deg, range: 20mV/div}
 math: {expr: ch1 * ch2 / 10, unit: W, range: 500uW/div, position: -2div}
 measure: [vmax, rms, avg, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/07-power-factor-2.svg)
 
 ### オシロスコープと発振器
 
@@ -156,6 +164,8 @@ wires:
   - g5 -- g8 -- g10 -- g12
   - i1 -- i3 -- i10 -- i12
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/07-power-factor-2.svg)
 
 - W1 は FG の OUT (High-Z)。CH1 の先端は FG の出力 (受電端の上)、CH2 の先端は Rs の上、
   グランドクリップは 2 本とも GND

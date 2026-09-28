@@ -42,6 +42,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/circuit/03-rl-current-rise-1.svg)
+
 - R1 (1 kΩ) と L1 (10 mH) で τ = L / R = 10 µs
 - 電流 i は R1 の両端の電圧を 1 kΩ で割って求める (i = V_R1 / R1)。R1 の両端は
   **入力 (a1) と中間点 (a5) の差**なので、差動で測る
@@ -72,6 +74,8 @@ wires:
   - a20 -- -t20 black
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/breadboard/03-rl-current-rise.svg)
+
 - CH1 (1+) は入力、CH1− は GND。CH2 は R1 の両端の**差動** (2+ が入力側の b5、
   2− が中間点の a10) — GND にはつながない
 - L1 は軸物のインダクタ (`inductor/axial`)。15〜20 列に差し込む
@@ -94,6 +98,8 @@ ch2: {wave: ch1 | rc 10us, range: 500mV/div, position: -3div}
 cursors: [0, 10us]
 measure: [vmax, rise]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/scope/03-rl-current-rise.svg)
 
 ### オシロスコープと発振器
 
@@ -122,6 +128,8 @@ style:
   standard: jis
   pitch: 1.2
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/circuit/03-rl-current-rise-2.svg)
 
 - FG は Square、2 kHz、**2 Vpp、Offset 1 V** (AD の Amplitude 1 V は山の高さ)、出力は
   High-Z ([0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))

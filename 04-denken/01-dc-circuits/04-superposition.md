@@ -42,6 +42,8 @@ wires:
   - e5 -- e9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/04-superposition-1.svg)
+
 ```circuit
 title: 図2 E2 だけを残す (E1 は短絡)
 style:
@@ -60,6 +62,8 @@ wires:
   - e1 -- e5
   - e5 -- e9
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/04-superposition-2.svg)
 
 - 図1 は 1-3 の E2 (6 V) を短絡 (素の線 SH1) に置き換えた回路
 - 図2 は 1-3 の E1 (9 V) を短絡に置き換えた回路
@@ -96,6 +100,8 @@ notes:
   - text: "A2 (mA)。18 列と 20 列の間に直列に入れる (使わないときは線でつなぐ)"
   - text: "E2 を外し、20 列を GND レールへ直結した (最後の黒い線)"
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/04-superposition.svg)
 
 - E2 を板から外し、E2 がつながっていた 20 列を GND レール (−t) に直結する
   (最後の 1 行)。3〜5 列・13〜15 列 (下段)・18〜20 列の隙間には引き続きテスター

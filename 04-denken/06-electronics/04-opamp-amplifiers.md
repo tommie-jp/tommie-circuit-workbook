@@ -61,6 +61,8 @@ style:
   pitch: 1.3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/circuit/04-opamp-amplifiers.svg)
+
 - 上 (U1) が反転増幅。R_in (10 kΩ) を通して − へ、+ は GND。ゲイン = −R_f1/R_in
   = −100k/10k = **−10 倍**
 - 下 (U2) が非反転増幅。入力は直接 + へ (電流が流れ込まないので抵抗を挟まなくてよい)。
@@ -104,6 +106,8 @@ notes:
   - text small: 2 回目の測定は AD.2+ を U1.7 (OUT2、非反転側) に挿し替える
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/breadboard/04-opamp-amplifiers.svg)
+
 - Rin・Rf1 が 1 回路目 (反転)、R2b・R3b が 2 回路目 (非反転)。U1 は `r180` で置き、
   上の段 (e14〜e17) が 4・3・2・1 番 (1 回路目の側)、下の段 (f14〜f17) が 5・6・7・8 番
   (2 回路目の側)。帰還抵抗 Rf1 (2 番↔1 番) と R3b (6 番↔7 番) は隣り合う列に立てて挿す
@@ -135,6 +139,8 @@ ch2: {wave: ch1 | gain -10, range: 1V/div}
 measure: [vmax, phase]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/scope/04-opamp-amplifiers-1.svg)
+
 ```scope
 title: 図4 2 回目 — 非反転増幅の OUT2 (CH2) は 10 倍で同じ向き (2 ch とも 1 V/div)
 time: 200us/div
@@ -143,6 +149,8 @@ ch1: {wave: sine 1kHz 200mV, range: 1V/div}
 ch2: {wave: ch1 | gain 10, range: 1V/div}
 measure: [vmax, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/scope/04-opamp-amplifiers-2.svg)
 
 ### オシロスコープと発振器
 

@@ -53,6 +53,8 @@ wires:
   - c6f5 -- d6f5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/03-short-circuit-test-1.svg)
+
 - T1.B1 と T1.B2 を線でつないで 2 次を短絡する
 - Rs1 (100 Ω) は 1 次電流 I1 を読むシャント。短絡時のインピーダンス (約 970 Ω) に
   対して 1 割ほどなので、V1 は Rs1 の分を引いて読む
@@ -84,6 +86,8 @@ wires:
   - i15 -- i18 green
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/breadboard/03-short-circuit-test.svg)
+
 - T1 の 2 次リード (下ブロックの 15 列・18 列) と同じ列の空いた穴 (i15・i18) を
   緑の線 1 本でつなぎ、2 次を短絡する (足の穴そのものには線を挿せないため)
 - それ以外の配線は 8-1・8-2 と同じ。Rs1 は 8-3 用に 100 Ω に戻す
@@ -111,6 +115,8 @@ ch1: {wave: sine 1kHz 2.91V, range: 1V/div}
 ch2: {wave: sine 1kHz 300mV phase -18deg, range: 100mV/div}
 measure: [vmax, freq, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/scope/03-short-circuit-test.svg)
 
 ### オシロスコープと発振器
 
@@ -140,6 +146,8 @@ wires:
   - g1 -- g3 -- g4 -- g6
   - T1.B1 -- T1.B2
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/03-short-circuit-test-2.svg)
 
 - ブレッドボードは 8-1 と同じ組み替え: Rs1 (e3–e7) を抜いて 3 列と 7 列を線でつなぎ、
   18 列から − レールへの黒い線を Rs1 (100 Ω) に替える。2 次の短絡 (i15–i18) はそのまま

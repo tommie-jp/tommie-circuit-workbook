@@ -46,6 +46,8 @@ wires:
   - e5 -- e9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/05-thevenin-1.svg)
+
 ```circuit
 title: 図2 内部抵抗を測る (電源を短絡)
 style:
@@ -62,6 +64,8 @@ wires:
   - e1 -- e3
   - e3 -- e5
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/05-thevenin-2.svg)
 
 - 図1: R1・R2 で分圧した後の端子 (V1 の所) に、スイッチ S1 と負荷 R_L をつなぐ
 - 図2: 電池を短絡 (SH1) に置き換え、同じ端子をオームメータ (M1) で測る。
@@ -103,6 +107,8 @@ notes:
   - text: "テスター (mA) を直列に。ここで電流を読む"
   - text: "端子 X (V_th・V_load はここと GND レールの間)"
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/05-thevenin.svg)
 
 - R1 の右足 (10 列) が端子 X。R2 は緑の線で下段へ渡す
 - S1 (スイッチ) は 10 列と 12 列の間に実物のスイッチとして挿す。開けば V_th

@@ -50,6 +50,8 @@ wires:
   - g13 -- g15
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/01-rectifiers-1.svg)
+
 - W1 は AD の波形発生器 (Wavegen)。50 Hz、振幅 5 V
 - 左側 (D1 + RL1) が半波整流、右側 (D2〜D5 のブリッジ + RL2) が全波整流。
   同じ W1 から並列に取り出している
@@ -76,6 +78,8 @@ wires:
   - a14 -- -t14 black
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/breadboard/01-rectifiers-1.svg)
+
 ```breadboard
 title: 図3 全波整流 (ブリッジ) のブレッドボード
 board: half
@@ -98,6 +102,8 @@ wires:
   - e4 -- f4 yellow
   - e18 -- f18 blue
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/breadboard/01-rectifiers-2.svg)
 
 - 半波整流 (図2) は D1 と RL1 だけ。CH1 (1+/1−) は RL1 の両端 (9 列と青レール)
 - 全波整流 (図3) は D2〜D5 の 4 本でブリッジを組む。4 列が AC の一方 (W1)、
@@ -124,6 +130,8 @@ ch1: {wave: sine 50Hz 5V | offset -0.6V | clip 0V, range: 1V/div, position: -3di
 ch2: {wave: sine 50Hz 5V | abs | offset -1.2V | clip 0V, range: 1V/div, position: -3div}
 measure: [avg, vmax, freq]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/scope/01-rectifiers.svg)
 
 ### オシロスコープと発振器
 
@@ -165,6 +173,8 @@ wires:
   - g7 -- i7 -- i11 -- i13
   - k11 -- k13 -- k16
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/01-rectifiers-2.svg)
 
 - ブリッジの右の角 (FG の GND) と FG の − は、どちらも大地につながった同じ GND
   (図では 2 つの接地の記号)。ブリッジの − は GND ではなく、CH2 の先端だけを当てる

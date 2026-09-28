@@ -46,6 +46,8 @@ wires:
   - e5 -- g5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/circuit/02-tester-ac-dc.svg)
+
 - V1 は AD の波形発生器 (W1)。方形波、振幅 1 V、オフセット 0 V (±1 V を往復する)
 - R1 はただの負荷。値はテスターの入力インピーダンスより十分小さければよい
 - M1 が真の実効値形、M2 が平均値形のテスター。**同じ R1 の両端を同時に測る**
@@ -70,6 +72,8 @@ wires:
 notes:
   - text: "R1 の両端 (5・10 列) にテスターを当てる。実効値形と平均値形を順に 2 回読む"
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/breadboard/02-tester-ac-dc.svg)
 
 - R1 の両端 (5 列と 10 列) が測定点。テスターのリードをここに当てる
 - AD の GND とテスターの GND 側 (COM) は共通にする。別々の電源で浮かせない

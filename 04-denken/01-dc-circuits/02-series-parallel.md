@@ -47,6 +47,8 @@ wires:
   - a7 -- g7
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/02-series-parallel-1.svg)
+
 - B1 の電流は R1 → R2 と 1 本道を通る。V1 が R1 の両端、V2 が R2 の両端
 
 ```circuit
@@ -67,6 +69,8 @@ wires:
   - e1 -- e5
   - e5 -- e9
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/02-series-parallel-2.svg)
 
 - A0 が電池から出る全電流。A1・A2 がそれぞれの抵抗の枝を流れる電流
 
@@ -92,6 +96,8 @@ notes:
   - text: "R1 の両端 (5・10 列) と R2 の両端 (12・17 列) にテスターの電圧レンジを当てる"
   - text: "共通の電流を読むにはここ (10-12 列の橙の線) を外してテスターの電流レンジを挟む"
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/02-series-parallel-1.svg)
 
 ```breadboard
 title: 図4 並列のブレッドボード
@@ -132,6 +138,8 @@ wires:
   - a19 -- -t19 black
   - a28 -- -t28 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/02-series-parallel-2.svg)
 
 - 図4 は 12 列が節点 (電池と AM0 の先。d 行の橙の線で 21 列へ延ばす)。
   AM1 を介して R1 が、AM2 を介して R2 がそれぞれ GND に落ちる。AM0 が全電流、AM1・AM2 が枝の電流をそのまま示す

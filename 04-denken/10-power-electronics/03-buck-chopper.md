@@ -52,6 +52,8 @@ notes:
   - text e9 blue: X
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/03-buck-chopper-1.svg)
+
 - Vin は DC 5 V (AD の Supplies か電池)。Vg は AD の Wavegen で作る PWM
   (方形波、100 kHz、デューティ比 50 %、0〜5 V の振幅)
 - Q1 (2N7000、N チャネル) が高速スイッチ。**ソースを GND に置く (ローサイド)** ので、
@@ -96,6 +98,8 @@ wires:
   - e13 -- f13 red
   - e17 -- f17 blue
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/breadboard/03-buck-chopper.svg)
 
 - 電源は AD の Supplies (V+ = 5 V) を上の赤レールへ入れる (電池でもよい)。
   赤レールがそのまま節点 P になる
@@ -156,6 +160,8 @@ notes:
   - text a8 blue: P (Vin の +)
   - text e9 blue: X
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/03-buck-chopper-2.svg)
 
 - Vin は安定化電源の 5 V。+ を赤レール (2 列)、− を青レールへ。電流制限は 100 mA
   (ふだんは平均 12 mA ほど、D = 75 % でも 30 mA 足らず。Q1 がオンのまま止まっても 50 mA ほど)

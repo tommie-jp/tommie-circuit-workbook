@@ -46,6 +46,8 @@ wires:
   - g1 -- g6 -- g8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/06-power-triangle-1.svg)
+
 - V1 は AD の波形発生器 W1。Rs (10 Ω) は線電流 I を測るシャント。
   CH2 は Rs の両端 (差動)、CH1 は受電端 (R1 + L1) の電圧
 - R1 + L1 が遅れ力率の負荷。3-7 ではこの負荷にコンデンサを並列に足す
@@ -74,6 +76,8 @@ wires:
   - a20 -- -t20 black
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/breadboard/06-power-triangle.svg)
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -97,6 +101,8 @@ ch2: {wave: sine 1kHz 58.9mV phase -53.2deg, range: 20mV/div}
 math: {expr: ch1 * ch2 / 10, unit: W, range: 500uW/div, position: -2div}
 measure: [vmax, rms, avg, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/06-power-triangle.svg)
 
 MATH の Avg (815 µW) が有効電力 P。p は電源の 2 倍の周波数で振れ、谷のあたりで負になる —
 コイルが蓄えた分を電源へ返す時間で、これが無効電力 Q の往復にあたる。
@@ -127,6 +133,8 @@ wires:
   - g5 -- g7 -- g9
   - i1 -- i3 -- i7 -- i9
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/06-power-triangle-2.svg)
 
 - W1 は FG の OUT (High-Z)。CH1 の先端は FG の出力 (負荷の上)、CH2 の先端は Rs の上、
   グランドクリップは 2 本とも GND

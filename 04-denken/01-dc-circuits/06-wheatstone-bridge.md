@@ -41,6 +41,8 @@ wires:
   - g9 -| g1
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/06-wheatstone-bridge.svg)
+
 - R1・R2 (ともに 1 kΩ) が比較の基準の枝。R3 は 0〜5 kΩ の可変抵抗、
   Rx は値を知りたい抵抗 (ここでは 3.3 kΩ の実物を入れて確かめる)
 - 検流計 GA1 が対角線 (節点 B・D の間)。R3 を回して GA1 の針が 0 になる点を探す
@@ -74,6 +76,8 @@ wires:
   - GA.+ -- e10 orange
   - GA.- -- e33 orange
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/06-wheatstone-bridge.svg)
 
 - R1・R2 が上段〜中段で節点 B (10 列) を作る。R3 (半固定抵抗器) が節点 A
   (30 列、電池の + 側から b 行の赤い線で渡る) から分かれて節点 D (R3 のワイパー) を

@@ -41,6 +41,8 @@ style:
   pitch: 1.3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/circuit/04-error-correction-rate-1.svg)
+
 - R_x は公称 1 kΩ (1 % 級) の抵抗。あらかじめ精密な方法 (7-10 の 4 端子法など)
   で真の値を測ると **992 Ω** だったとする (公称の −0.8 %、1 % の規格内)
 - R_a (100 Ω) は電流計の内部抵抗の模型。実物は 1 Ω に満たないが、誤差率と補正率の
@@ -73,6 +75,8 @@ wires:
   - AD.2+ -- a17 orange
   - AD.2- -- -t19 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/breadboard/04-error-correction-rate.svg)
 
 - CH1 (差動) は R_a (100 Ω) の両端で電流を読む。CH2 は R_a + R_x の両端
   (GND 基準) で電圧計の読みになる
@@ -112,6 +116,8 @@ style:
   standard: jis
   pitch: 1.3
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/circuit/04-error-correction-rate-2.svg)
 
 - ブレッドボードは R_a (e7–e11) と R_x (c11–c15) を入れ替え、7〜11 列に R_x、11〜15 列に
   R_a を挿す。11 列が R_x と R_a の間になる

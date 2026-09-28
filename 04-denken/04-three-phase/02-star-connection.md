@@ -62,6 +62,8 @@ style:
   pitch: 1.4
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/02-star-connection-1.svg)
+
 - R3・R4・R5 (各 1 kΩ) が Y 結線の負荷。3 本が集まる点 (N) はどこにもつながず、
   浮かせたまま (**中性線なし**。中性線ありは 4-4)
 - 電源側 (V1・V2・U1 の出力) は電流を流しても電圧が下がらない理想の電源として
@@ -116,6 +118,8 @@ notes:
   - text small: R3・R4・R5 (各 1k) が Y 結線。b53 (R5 の右) が中性点 N (浮かせたまま)
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/breadboard/02-star-connection.svg)
+
 - 1 相目 (R3) を b35 の列、2 相目 (R4) を b42 の列、3 相目 (R5) を b49 の列から
   取り出し、d 行の緑の線で 39・46・53 列を束ねて中性点 N (53 列) にする。
   3 つの相は下の段の g 行 (1 相目)・j 行 (2 相目)・h 行 (3 相目) で右へ運び、
@@ -146,6 +150,8 @@ ch1: {wave: sine 1kHz 1V, range: 500mV/div}
 ch2: {wave: sine 1kHz 1.732V phase 30deg, range: 500mV/div}
 measure: [vmax, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/scope/02-star-connection.svg)
 
 ### オシロスコープと発振器
 
@@ -193,6 +199,8 @@ style:
   standard: jis
   pitch: 1.2
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/02-star-connection-2.svg)
 
 - U1 は図1 の OP アンプの出力 (3 相目)。FG₁・FG₂ は FG の CH1・CH2。
   グランドクリップは 2 本とも GND のレールに挟む

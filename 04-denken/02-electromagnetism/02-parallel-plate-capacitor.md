@@ -41,6 +41,8 @@ wires:
   - e5 -| DMM.-
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/02-parallel-plate-capacitor.svg)
+
 - C1 がアルミ箔 2 枚 (+ 誘電体)。DMM はテスターの静電容量レンジ
   (クリップリードで箔に直接挟む)
 

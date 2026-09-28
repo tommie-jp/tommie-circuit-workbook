@@ -44,6 +44,8 @@ wires:
   - e5 -- e9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/03-kirchhoff.svg)
+
 - 節点 B (A1・A2・A3 が集まる所) に電流則を当てはめる: I1 + I2 = I3
 - E1 と R1 の枝、E2 と R2 の枝、R3 の枝が節点 B で合流する。
   A1・A2・A3 はそれぞれの枝の電流を測る
@@ -81,6 +83,8 @@ notes:
   - text: "A3 (mA)。下段 13 列と 15 列の間に直列に入れる"
   - text: "A2 (mA)。18 列と 20 列の間に直列に入れる"
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/03-kirchhoff.svg)
 
 - 3 列と 5 列の間、13 列と 15 列の間 (下段)、18 列と 20 列の間は、
   それぞれ A1・A3・A2 (テスターの電流レンジ) を直列に入れる隙間

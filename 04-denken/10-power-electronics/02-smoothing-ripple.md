@@ -45,6 +45,8 @@ wires:
   - g13 -- g15 -- g17 -- g19
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/02-smoothing-ripple-1.svg)
+
 - 10-1 の全波整流ブリッジ (D2〜D5) と同じ形。出力に C1 (100 µF) を並列に足す
 - RL (1.5 kΩ) が負荷。CH1 (M1) は C1・RL の両端を読む
 
@@ -75,6 +77,8 @@ wires:
   - e18 -- f18 blue
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/breadboard/02-smoothing-ripple.svg)
+
 - 10-1 の図3 と同じブリッジ (D2〜D5)。12 列 (+) と 18 列 (−) の間に電解
   コンデンサ C1 を足し、負荷 RL は下のブロックの 12・18 列に挿す
   (12 列・18 列は溝をまたぐ短い線で上下つないである)
@@ -100,6 +104,8 @@ ch1: {wave: = 5V * abs(sin(2 * pi * 50Hz * t)) - 1.2V | clip 0V | peak 150ms, ra
 measure: [vmax, avg, vpp, freq]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/scope/02-smoothing-ripple-1.svg)
+
 ```scope
 title: 図4 10 µF — リップルは 1.46 Vpp に増える (500 mV/div)
 time: 5ms/div
@@ -107,6 +113,8 @@ trigger: ch1 rising 3V
 ch1: {wave: = 5V * abs(sin(2 * pi * 50Hz * t)) - 1.2V | clip 0V | peak 15ms, range: 500mV/div, position: -6div}
 measure: [vmax, avg, vpp, freq]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/scope/02-smoothing-ripple-2.svg)
 
 どちらも山 (Vmax) は 3.80 V で同じ。容量を 1/10 にすると谷が深くなり、Vdc (Avg) は 3.69 V から
 3.11 V に下がる。リップルの周波数 (Freq) は電源の 2 倍の 100 Hz。
@@ -146,6 +154,8 @@ wires:
   - g7 -- i7 -- i11 -- i13 -- i16
   - k11 -- k15 -- k19
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/02-smoothing-ripple-2.svg)
 
 - CH1 の先端は 12 列 (+)、CH2 の先端は 18 列 (−)、グランドクリップは 2 本とも青レール。
   ブレッドボードの部品は図2 のまま動かさない

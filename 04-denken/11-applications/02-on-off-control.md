@@ -53,6 +53,8 @@ wires:
   - j1 -- j3 -- j5 -- j11
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/11-applications/circuit/02-on-off-control.svg)
+
 - V1 (5 V) が電源。Rfix + NTC1 が温度センサーの分圧。VR1 (10 kΩ) の摺動子で
   しきい値 Vref を決める
 - U1 (LM358) が比較器。+ 入力が温度センサー、− 入力が Vref。出力が高いとき
@@ -92,6 +94,8 @@ wires:
   - j15 -- +b15 red
   - +t29 -- +b29 red
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/11-applications/breadboard/02-on-off-control.svg)
 
 - 電源 5 V (PWR) を上の赤・青レールへ入れる。U1 の V+ (8 番) だけが下のブロックに
   出るので、右端 (29 列) の赤い線で下の赤レールにも 5 V を渡してある

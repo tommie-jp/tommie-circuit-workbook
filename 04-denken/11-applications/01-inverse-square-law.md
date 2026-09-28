@@ -42,6 +42,8 @@ wires:
   - a9 -- a11
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/11-applications/circuit/01-inverse-square-law.svg)
+
 - 左側 (B1・R1・D1) が発光側。電池で LED を一定の電流 (約 10 mA) で光らせる
 - 右側 (V2・D2・R2) が受光側。D2 (フォトダイオード) を逆方向にバイアスし、
   光電流を R2 (100 kΩ) で電圧に変える。CH1 がその電圧
@@ -81,6 +83,8 @@ wires:
   - AD.1+ -- j20 orange
   - AD.1- -- j24 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/11-applications/breadboard/01-inverse-square-law.svg)
 
 - 左 (BAT・R1・D1) が発光側。電池 4.5 V を R1 (150 Ω) で電流を決めて LED を光らせる
 - 右 (SUP・D2・R2) が受光側。AD の Supplies 5 V で D2 (フォトダイオード) を

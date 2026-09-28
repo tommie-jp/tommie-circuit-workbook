@@ -46,6 +46,8 @@ wires:
   - g1 -- g5
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/04-rc-series-1.svg)
+
 - CH1 が R1 の両端 (電流と同位相)、CH2 が C1 の両端 (電流より 90° 遅れる)
 
 ## 実体配線図
@@ -71,6 +73,8 @@ wires:
   - a15 -- -t15 black
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/breadboard/04-rc-series.svg)
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -86,6 +90,8 @@ ch1: {wave: sine 1kHz 0.532V, range: 250mV/div}
 ch2: {wave: sine 1kHz 0.847V phase -90deg, range: 250mV/div}
 measure: [vmax, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/04-rc-series.svg)
 
 ### オシロスコープと発振器
 
@@ -112,6 +118,8 @@ wires:
   - c6 -- c9
   - g1 -- g3 -- g6 -- g9
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/04-rc-series-2.svg)
 
 - W1 は FG の OUT (High-Z)。振幅 1 V は Vpp で入れる機種なら 2 Vpp。CH1 の先端は FG の出力 (5 列)、
   CH2 の先端は R1 と C1 の間 (10 列)、グランドクリップは 2 本とも GND のレール。

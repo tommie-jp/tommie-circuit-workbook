@@ -39,6 +39,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/circuit/01-diode-characteristic-1.svg)
+
 - V1 は AD の Wavegen (三角波)。Offset 0.5 V、Amplitude 1.5 V なので、
   −1 V から +2 V までゆっくり動く
 - R1 (1 kΩ) は電流を電圧に変えるシャントであり、ダイオードを守る電流制限
@@ -69,6 +71,8 @@ wires:
   - AD.1- -- -t19 black
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/breadboard/01-diode-characteristic.svg)
+
 - CH1 (1+/1−) はダイオードの両端 (a15 と GND)。CH2 は R1 の両端の差動
   (2+ が b5、2− が a10) で、電流の代わりになる
 - ダイオードは**足の長いほうがアノード (A)**。抵抗の側 (15 列) に挿す
@@ -91,6 +95,8 @@ ch1: {wave: triangle 100Hz 0.8114V offset -0.1886V, range: 250mV/div, position: 
 ch2: {wave: = 4.4uV * (exp(ch1 / 49.21mV) - 1), range: 200mV/div, position: -4div}
 xy: ch1 ch2
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/scope/01-diode-characteristic.svg)
 
 CH1 の Vmin (−1.00 V) が逆方向の端、Vmax (0.62 V) が順方向の端。そのときの CH2 の Vmax は
 1.38 V で、÷ 1 kΩ で 1.38 mA になる。
@@ -123,6 +129,8 @@ style:
   standard: jis
   pitch: 1.2
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/circuit/01-diode-characteristic-2.svg)
 
 - FG は Triangle、100 Hz、**3 Vpp、Offset 0.5 V** (AD の Amplitude 1.5 V は山の高さ)、
   出力は High-Z ([0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))

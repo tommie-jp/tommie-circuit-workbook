@@ -45,6 +45,8 @@ wires:
   - g1 -- g7
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/05-series-resonance-1.svg)
+
 - CH1 が R1 の両端 (÷ R で電流になる)、CH2 が L1 + C1 をまとめた両端
   (共振ではここが 0 に近づく)
 
@@ -72,6 +74,8 @@ wires:
   - a20 -- -t20 black
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/breadboard/05-series-resonance.svg)
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -87,6 +91,8 @@ ch1: {wave: sine 1.59kHz 1V, range: 500mV/div}
 ch2: {wave: dc 0V, range: 500mV/div}
 measure: [vmax, freq]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/05-series-resonance.svg)
 
 ### オシロスコープと発振器
 
@@ -114,6 +120,8 @@ wires:
   - c7 -- c9 -- c12
   - g1 -- g3 -- g9 -- g12
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/05-series-resonance-2.svg)
 
 - W1 は FG の OUT (High-Z)。振幅 1 V は Vpp で入れる機種なら 2 Vpp。CH1 の先端は R1 の上
   (CH1 ÷ 150 Ω が電流で、表と同じ読み方)、CH2 の先端は FG の出力、グランドクリップは 2 本とも GND。
