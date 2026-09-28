@@ -122,6 +122,24 @@ wires:
 | Scope | CH1 = 出力 (Cout・RL の両端、1+ を P、1− を X にあてる差動)。Time base は 5 µs/div 程度 |
 | Measure | CH1 の Average (Vout) |
 
+図3 は見えるはずの画面。上の 2 本は同じ 2 V/div で、CH1 は Q1 のドレイン (スイッチの節点) を P から
+測った電圧 (オンで 5 V、オフで D1 の順電圧の −0.3 V)、CH2 がそれを L1・Cout で均した出力 (計器の設定の
+CH1 に当たる)。下の CH3 は出力から 2.35 V を引いて 400 µV/div に上げた、AC 結合で見るのと同じ画面で、
+リップルだけが 4 目盛ほどに広がる。振れ幅が 5.3 V あるぶん、リップルは 1.56 mV の 5.3/5 倍の 1.66 mV。
+実機なら 5 µs/div で 5 周期を見るが、図は LC の過渡が消えるまで回す都合で 20 µs/div (20 周期) にした。
+
+```scope
+title: 図3 出力 2.35 V に乗るリップルは 1.66 mVpp
+time: 20us/div
+trigger: ch1 rising 2.35V
+ch1: {wave: square 100kHz 2.65V offset 2.35V, range: 2V/div, position: 1div}
+ch2: {wave: ch1 | lc 1.59kHz 10, range: 2V/div, position: 1div}
+ch3: {wave: ch2 | offset -2.35V, range: 400uV/div, position: -1.6div}
+measure: [avg, vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/scope/03-buck-chopper.svg)
+
 ### オシロスコープと発振器
 
 AD の CH1 は出力を P (赤レール) と X (17 列) の間で差動に読む。汎用オシロのグランドクリップは
@@ -130,10 +148,10 @@ AD の CH1 は出力を P (赤レール) と X (17 列) の間で差動に読む
 [0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。X にクリップを当てると X が GND に落ち、
 Cout と RL が電源の 5 V にじかに掛かって、チョッパとして働かなくなる。Vout (約 2.35 V) は
 P (5 V) の半分近くあり 8 bit でも埋もれないので、**回路はそのままで、2 本の先端を P と X に当て、
-CH1 − CH2 で引く** (図3)。
+CH1 − CH2 で引く** (図4)。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図4 汎用オシロでの測り方
 style:
   standard: jis
   pitch: 1.2
