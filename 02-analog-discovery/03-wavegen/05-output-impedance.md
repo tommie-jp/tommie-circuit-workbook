@@ -42,6 +42,7 @@ wires:
   1 MΩ 以上あり、無視できる)
 - S1 を閉じると R<sub>L</sub> = 50 Ω が W1 の出力と GND の間に入る。ベンチの
   発生器なら電圧が半分になる負荷だが、W1 でどうなるかを測るのがこの実験
+- 50 Ω は E24 に無いので、**100 Ω を 2 本並列**にして作る (図2 の RL1・RL2)
 
 ## 実体配線図
 
@@ -50,7 +51,8 @@ title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
   S1: switch c5 c8
-  RL: resistor b8 b13 50
+  RL1: resistor b8 b13 100
+  RL2: resistor d8 d13 100
   AD:
     type: device
     at: top

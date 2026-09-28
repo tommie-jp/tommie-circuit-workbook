@@ -33,7 +33,7 @@ parts:
   L1: inductor c10 a10 260n
   Cb: capacitor a4 c4 0.1u
   GCb: ground c4
-  Cant: capacitor c13 c15 2p
+  Cant: capacitor c13 c15 2.2p
   ANT: antenna c16
   Q1: npn e10
   C1: capacitor d12 f12 22p
@@ -82,7 +82,7 @@ wires:
 - **直接 FM**: MIC (エレクトレットマイク) の音声を Cmic でベースへ結合する。
   ベースの直流電位がわずかに揺れると、Q1 のベース-エミッタ間容量 (C<sub>be</sub>) も
   わずかに変わり、C2 と一緒にタンクの容量を揺らして周波数が動く
-- **アンテナ**: Cant (2pF) の小さな結合でコレクタから取り出す。結合を弱くする
+- **アンテナ**: Cant (2.2pF) の小さな結合でコレクタから取り出す。結合を弱くする
   ほど発振回路への負荷が軽く保たれ、輻射も弱くなる (微弱無線の条件そのもの)
 
 **発振周波数の計算値**: C<sub>s</sub> = C1·C2/(C1+C2) = 22p·47p/69p ≈ 15pF。
@@ -125,7 +125,7 @@ parts:
   C3: capacitor/ceramic i14 i10 0.001u
   Q1: transistor j14(B) j18(C) j22(E) 2SC1815
   L1: inductor/axial c18 c15 260n
-  Cant: capacitor/ceramic b18 b22 2p
+  Cant: capacitor/ceramic b18 b22 2.2p
   C1: capacitor/ceramic g18 g22 22p
   Re: resistor f22 f26 470
   C2: capacitor/ceramic h22 h26 47p
@@ -150,7 +150,7 @@ wires:
 
 - 上の赤レール = +5V (USB や電池)、青レール = GND。30 列で上下の − レールを渡している
 - **アンテナ線は 20cm ほど**にとどめる (伸ばすと電波法の範囲を超えやすい)。
-  結合コンデンサ Cant (2pF) も指定どおりの小さい値で
+  結合コンデンサ Cant (2.2pF) も指定どおりの小さい値で
 - L1 は太さ 0.6mm のエナメル線を直径 8mm の丸棒に 8 回巻き、両端をブレッド
   ボードの穴に合わせて曲げたもの (インダクタンスは目安。実測でずれる)
 - Q1 は下のブロックの j 行 (14 列 B・18 列 C・22 列 E)。ベース (14 列) とコレクタ (18 列) は

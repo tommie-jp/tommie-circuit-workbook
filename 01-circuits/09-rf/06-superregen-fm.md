@@ -32,7 +32,7 @@ parts:
   L1: inductor a10 d10 100n
   Cb: capacitor a3 c3 0.1u
   GCb: ground c3
-  Cant: capacitor d14 d15 2p
+  Cant: capacitor d14 d15 2.2p
   ANT: antenna d16
   VC1: capacitor-var g13 i13 l=$\mathrm{VC}_1$
   GVC: ground j13
@@ -145,7 +145,7 @@ parts:
   Cq: capacitor/ceramic g14 g11 100p
   Q1: transistor j14(B) j18(C) j22(E) 2SC1815
   L1: inductor/axial c18 c15 100n
-  Cant: capacitor/ceramic b18 b22 2p
+  Cant: capacitor/ceramic b18 b22 2.2p
   Raf: resistor d18 d24 4.7k
   C1: capacitor/ceramic g18 g22 33p
   Re: resistor f22 f26 470
@@ -192,7 +192,7 @@ wires:
 | 無信号時にイヤホンを聞く | ザーッというクエンチ雑音 (計算値 30.3kHz 付近の漏れ) |
 | VC1 をゆっくり回して近くの FM 放送局に合わせる | 雑音が消えて放送が聞こえる |
 | VC1 を端から端まで回す | 受信できる周波数が約 79〜110MHz (計算値。浮遊容量で数 MHz 下がる) の間で動く |
-| Cant を大きくする (結合を強める) | 感度は上がるが、発振がタンクの外へ漏れやすくなる (微弱無線の範囲を超えやすい方向。既定の 2pF のままにする) |
+| Cant を大きくする (結合を強める) | 感度は上がるが、発振がタンクの外へ漏れやすくなる (微弱無線の範囲を超えやすい方向。既定の 2.2pF のままにする) |
 
 ## 出典
 

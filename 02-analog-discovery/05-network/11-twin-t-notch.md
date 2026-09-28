@@ -64,10 +64,12 @@ board: full
 parts:
   R1: resistor c5 c12 10k
   R2: resistor b12 b20 10k
-  C3: capacitor d12 d14 20n
+  C3a: capacitor d12 d14 10n
+  C3b: capacitor a12 -t12 10n
   C1: capacitor h5 h12 10n
   C2: capacitor g12 g20 10n
-  R3: resistor i12 i16 5k
+  R3a: resistor i12 i16 10k
+  R3b: resistor j12 -b12 10k
   AD:
     type: device
     at: top
@@ -77,7 +79,7 @@ wires:
   - AD.GND -- -t10 black
   - AD.W1 -- a5 yellow
   - AD.1+ -- b5 orange [h10]
-  - AD.1- -- -t12 black
+  - AD.1- -- -t13 black
   - AD.2+ -- a20 blue
   - AD.2- -- -t22 black
   - e5 -- f5 yellow
@@ -90,9 +92,11 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/breadboard/11-twin-t-notch.svg)
 
 - **上の枝 (上のブロック)**: R1 (5〜12 列、行 c) → ノード A (12 列) → R2 (12〜20 列、行 b)。
-  ノード A から C3 (2C = 20 nF、12〜14 列、行 d) が上の − レール (AD.GND) へ
+  ノード A から C3 (2C = 20 nF) が上の − レール (AD.GND) へ。C3 は 10 nF の 2 本の並列で、
+  C3a (12〜14 列、行 d) と、a12 と − レールの間に縦に立てた C3b
 - **下の枝 (下のブロック)**: C1 (5〜12 列、行 h) → ノード B (12 列) → C2 (12〜20 列、行 g)。
-  ノード B から R3 (R/2 = 5 kΩ、12〜16 列、行 i) が下の − レールへ。下の − レールは
+  ノード B から R3 (R/2 = 5 kΩ) が下の − レールへ。R3 は 10 kΩ の 2 本の並列で、R3a (12〜16 列、行 i) と、
+  j12 と − レールの間に縦に立てた R3b。下の − レールは
   1 列目の黒線 (`-t1 -- -b1`) で上の − レール (AD.GND) とつなぐ
 - 入力 (5 列) と出力 (20 列) は、溝をまたぐ短い線 (`e5 -- f5` と `e20 -- f20`) で
   上下のブロックをつなぎ、R1・C1 の左端と R2・C2 の右端を共有する。
