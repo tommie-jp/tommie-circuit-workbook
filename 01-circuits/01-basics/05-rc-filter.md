@@ -235,6 +235,9 @@ Network に見えるはずのボード線図 (計算値)。上が利得、下が
 ```graph
 title: 図6 Network のボード線図 — −3 dB の所が −45°
 x: 周波数 Hz log 10..100k
+y:
+  - 利得 dB
+  - 位相 deg
 lines:
   利得 dB: 20*log10(1/sqrt(1+(x/1.06k)^2))
   位相 deg: -deg(atan(x/1.06k))

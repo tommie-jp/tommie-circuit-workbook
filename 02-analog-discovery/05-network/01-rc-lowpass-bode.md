@@ -79,6 +79,24 @@ wires:
 | 10 kHz | −16.07 dB | −81.0° |
 | 100 kHz | −35.96 dB | −89.1° |
 
+```graph
+title: 図3 RC ローパスのボード線図 — −3 dB と −45° が同じ 1.59 kHz に来る
+x: 周波数 Hz log 100..100k
+y:
+  - 利得 dB
+  - 位相 deg
+lines:
+  利得 dB: 20*log10(1/sqrt(1+(x/1.59k)^2))
+  位相 deg: -deg(atan(x/1.59k))
+notes:
+  - level -3dB
+  - level -45deg
+  - mark 100
+  - mark 1.59k
+  - mark 10k
+  - mark 100k
+```
+
 分かること:
 
 - **f<sub>c</sub> を境に −20 dB/decade で下がる。** 10 kHz (f<sub>c</sub> の約 6.3 倍) で
