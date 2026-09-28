@@ -115,7 +115,7 @@ wires:
 
 | 項目 | 値 |
 | --- | --- |
-| 範囲 | 1 MHz〜30 MHz (通過帯域とその端に絞る) |
+| 範囲 | 1 MHz〜35 MHz (通過帯域とその端。S21 が落ち始める所まで入れる) |
 | 点数 | 151 |
 | 校正 | SOLT |
 | 表示 | S21 の Log Mag、S11 の Log Mag |
@@ -124,7 +124,7 @@ wires:
 
 ```vna
 device: h4
-sweep: 1M-30M 151
+sweep: 1M-35M 151
 title: 図3 通過帯域の S21・S11 (コイル Q 60) — 端に近いほど S11 が上がる
 dut:
   - shunt C 47p

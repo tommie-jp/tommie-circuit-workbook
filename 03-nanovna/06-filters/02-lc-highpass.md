@@ -86,14 +86,14 @@ wires:
 
 | 項目 | 値 |
 | --- | --- |
-| 範囲 | 1 MHz〜100 MHz |
+| 範囲 | 1 MHz〜50 MHz (遷移域の 1〜15 MHz が画面の左 3 割に入る) |
 | 点数 | 201 |
 | 校正 | SOLT |
 | 表示 | S21 の Log Mag、S11 の Log Mag |
 
 ```vna
 device: h4
-sweep: 1M-100M 201
+sweep: 1M-50M 201
 title: 図3 3 次ハイパス (E12 丸め後) — −3 dB は 10.3 MHz
 dut:
   - shunt L 820n
@@ -107,7 +107,8 @@ markers:
   - 10.3M
   - 30M
 notes:
-  - band 10.3M 100M: 通過帯域 (−3 dB から上)
+  - band 10.3M 50M
+  - text 48M -45dB: 帯は通過帯域 (−3 dB から上)
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/vna/02-lc-highpass.svg)

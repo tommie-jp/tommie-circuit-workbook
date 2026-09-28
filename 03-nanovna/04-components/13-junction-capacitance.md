@@ -105,7 +105,7 @@ wires:
 
 - D1 は帯 (カソード) を e6 (左) に向ける。1N5819 に替えるときも帯を左に
 - **D1 の足は e6〜e9 の幅に曲げて、短く**。足の長さがインダクタンスになり、
-  1N5819 のように容量の大きい物では 300 MHz より下に直列共振が出る (図4)
+  1N5819 のように容量の大きい物では 300 MHz より下に直列共振が出る (図5)
 
 | 部品 | 値 | 理由・注意 |
 | --- | --- | --- |
@@ -119,10 +119,10 @@ wires:
 
 | 項目 | 値 |
 | --- | --- |
-| 範囲 | 1 MHz〜300 MHz |
+| 範囲 | 1 MHz〜300 MHz (1N5819 の容量だけは 1 MHz〜50 MHz でも。図4) |
 | 点数 | 201 |
 | 校正 | SOLT。ケーブルの先 (治具の SMA) で Open / Short / Load / Thru |
-| 表示 | S21 の Log Mag と位相 |
+| 表示 | S21 の Log Mag と位相 (直列共振は S11 の Log Mag と S21 の位相。図5) |
 | 模型の仮定 | D1 の足と治具の線を 7 nH (4-7 の 1 cm) とする |
 
 **1N4007 (15 pF)** のときに見えるはずの画面。
@@ -145,13 +145,14 @@ markers:
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/13-junction-capacitance-1.svg)
 
-**1N5819 (110 pF)** のとき (同じ設定)。容量が大きいぶん低い周波数から通り、
-足の 7 nH との直列共振 (181 MHz) で S21 が 0 dB に届く。
+**1N5819 (110 pF)** のとき。容量が大きいぶん低い周波数から通り、1〜300 MHz の掃引では
+S21 の立ち上がりが左端の 10 MHz までに潰れる。**容量を読む図と、足の共振を見る図に分ける**。
+まず 1〜50 MHz で、10 MHz の S21 と X = 100 Ω の 14.5 MHz を読む。
 
 ```vna
 device: h4
-sweep: 1M-300M 201
-title: 図4 1N5819 (110 pF) — 10 MHz で −4.9 dB、181 MHz で直列共振
+sweep: 1M-50M 201
+title: 図4 1N5819 (110 pF) — 10 MHz で −4.9 dB (1〜50 MHz)
 dut:
   - series C 100n
   - series C 110p esl 7n
@@ -161,10 +162,33 @@ traces:
   - S21 phase
 markers:
   - 10M
-  - 181M
+  - 14.5M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/13-junction-capacitance-2.svg)
+
+次に図3 と同じ 1〜300 MHz で、足の 7 nH との直列共振 (181 MHz) を見る。S21 の大きさは
+このあたりでほぼ 0 dB のまま動かないので、**S11 (CH0 に返る反射) の谷と S21 の位相**で見る。
+共振で D1 の Z が 0 に近づくと、CH0 から見えるのは CH1 の 50 Ω だけになり S11 が深く落ちる。
+位相は 0° を横切り、その上では − (コイル) になる。
+
+```vna
+device: h4
+sweep: 1M-300M 201
+title: 図5 1N5819 の直列共振 — 181 MHz で S11 が谷、位相が 0°
+dut:
+  - series C 100n
+  - series C 110p esl 7n
+  - series C 100n
+traces:
+  - S11 logmag
+  - S21 phase
+markers:
+  - 10M
+  - 181M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/13-junction-capacitance-3.svg)
 
 ## 見るべき値
 
@@ -174,14 +198,14 @@ markers:
 | ダイオード | C (4 V、代表値) | 10 MHz の S21 | 10 MHz の位相 | 容量だけで X = 100 Ω | 直列共振 (7 nH と) |
 | --- | --- | --- | --- | --- | --- |
 | 1N4007 | 15 pF | −20.6 dB | +84.6° | 106 MHz (S21 は −2.8 dB、足の L のぶん −3 dB より上) | 491 MHz (掃引の外) |
-| 1N5819 | 110 pF | −4.9 dB | +55.3° | 14.5 MHz | 181 MHz (S21 は 0.00 dB) |
+| 1N5819 | 110 pF | −4.9 dB | +55.3° | 14.5 MHz (S21 は −3.0 dB。図4) | 181 MHz (S11 の谷 −65.9 dB、位相 0°。図5) |
 
 分かること:
 
 - **整流用のダイオードでも 15 pF、ショットキーの 1N5819 は 110 pF もある。**
   小信号用の 1N4148 はデータシートで 0 V でも 4 pF 以下。高い周波数の検波や
   切り替えには、接合の小さい小信号用を使う理由がこの差
-- 1N5819 は 181 MHz より上で**コイルに見える** (位相が + から − へ)。容量の大きい
+- 1N5819 は 181 MHz より上で**コイルに見える** (図5 の位相が + から − へ)。容量の大きい
   部品ほど、足の長さの影響が低い周波数に下りてくる (4-2 のセラミックコンデンサと同じ)
 - 電圧を 1 V・2 V…と変えて測ると、4-9 のバリキャップほどではないが容量が変わる。
   データシートの曲線 (Typical Junction Capacitance) と比べる

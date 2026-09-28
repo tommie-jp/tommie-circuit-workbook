@@ -86,7 +86,7 @@ wires:
 
 | 項目 | 値 |
 | --- | --- |
-| 範囲 | 低い側 50 kHz〜2 MHz、高い側 1 MHz〜300 MHz (2 回に分ける) |
+| 範囲 | 低い側 50 kHz〜1 MHz、高い側 1 MHz〜600 MHz (2 回に分ける) |
 | 点数 | 201 |
 | 校正 | SOLT。範囲を変えたら校正し直す (1-4) |
 | 表示 | S21 と S11 の Log Mag |
@@ -96,7 +96,7 @@ wires:
 
 ```vna
 device: h4
-sweep: 50k-2M 201
+sweep: 50k-1M 201
 title: 図3 低い側 — 178 kHz で −3 dB
 dut:
   - series L 50n
@@ -116,7 +116,7 @@ markers:
 
 ```vna
 device: h4
-sweep: 1M-300M 201
+sweep: 1M-600M 201
 title: 図4 高い側 — 漏れ 100 nH で 159 MHz あたりから落ちる
 dut:
   - series L 50n

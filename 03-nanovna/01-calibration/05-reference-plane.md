@@ -42,7 +42,7 @@ notes:
 
 | 項目 | 値 |
 | --- | --- |
-| 範囲 | 99 MHz〜101 MHz、3 点 (100 MHz 付近だけ見る) |
+| 範囲 | 50 MHz〜150 MHz、101 点 (読むのは 100 MHz のマーカー) |
 | 校正 | NanoVNA のコネクタ (ケーブルの手前) で SOLT |
 | 表示 | S11 の位相、S11 の Smith チャート |
 
@@ -51,7 +51,7 @@ Open は理想どおり位相 0°。
 
 ```vna
 device: h4
-sweep: 99M-101M 3
+sweep: 50M-150M 101
 title: 図2 基準面がコネクタのときの Open は位相 0° (右端)
 dut: open
 traces:
@@ -60,7 +60,7 @@ traces:
 markers:
   - 100M
 notes:
-  - text 99.1M 60deg: 基準面がコネクタなら 0° のまま
+  - text 55M 60deg: 基準面がコネクタなら 0° のまま
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/05-reference-plane-1.svg)
@@ -69,7 +69,7 @@ notes:
 
 ```vna
 device: h4
-sweep: 99M-101M 3
+sweep: 50M-150M 101
 title: 図3 30 cm 先の Open — 基準面を動かさないと −109° 回る
 dut:
   - line 50 30cm vf 0.66
@@ -80,14 +80,15 @@ traces:
 markers:
   - 100M
 notes:
-  - text 99.1M -45deg: ケーブルのぶん 0° から −109.17° に回る
+  - text 55M -20deg: ケーブルのぶん回り、周波数が高いほど大きく回る
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/05-reference-plane-2.svg)
 
 - 図2 は位相 0°、Smith の右端ちょうど
 - 図3 は 100 MHz で位相が **−109.17°** も回り、Smith 上では右端から
-  離れた点 (0.0 Ω − j35.6 Ω) に見える。**Open という同じ標準器なのに、
+  離れた点 (0.0 Ω − j35.6 Ω) に見える。回る量は周波数に比例し、
+  50 MHz では約 −55°、150 MHz では約 −164° になる (位相の線が右下がり)。**Open という同じ標準器なのに、
   ケーブルを足しただけで別の値に化ける**
 - ケーブルの先まで基準面を移したいなら、**その 30 cm のケーブルを
   つないだ状態で校正をやり直す** (ポート延長という道もある。1-10)

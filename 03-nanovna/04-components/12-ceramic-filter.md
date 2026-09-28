@@ -93,7 +93,7 @@ wires:
 
 | 項目 | 値 |
 | --- | --- |
-| 範囲 | 9.7 MHz〜11.7 MHz (中心 10.7 MHz、幅 2 MHz。3 dB 幅の約 7 倍) |
+| 範囲 | 10.3 MHz〜11.1 MHz (中心 10.7 MHz、幅 800 kHz。3 dB 幅の約 3 倍。これより広げると S11 の X の振れが目盛を決め、R の山が潰れる) |
 | 点数 | 401 |
 | 校正 | SOLT。ケーブルの先 (治具の SMA) で Open / Short / Load / Thru |
 | 表示 | S21 の Log Mag と S11 の R・X |
@@ -103,7 +103,7 @@ wires:
 
 ```vna
 device: h4
-sweep: 9.7M-11.7M 401
+sweep: 10.3M-11.1M 401
 title: 図3 セラミックフィルタの等価回路 — 中心 10.7 MHz で −16.1 dB、幅 280 kHz
 dut:
   - series R 270

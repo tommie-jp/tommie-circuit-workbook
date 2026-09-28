@@ -67,16 +67,17 @@ wires:
 
 | 項目 | 値 |
 | --- | --- |
-| 範囲 | 100 kHz〜40 MHz |
+| 範囲 | SRF のまわり 35.4 MHz〜35.8 MHz (図3)、SRF より下 100 kHz〜25 MHz (図4) |
 | 点数 | 401 |
 | 校正 | SOLT。ケーブルの先 (治具の SMA) で Open / Short / Load / Thru |
 | 表示 | S11 の R と X (Ω)。最後を短絡にして 1 端子の Z 測定にする |
 
-見えるはずの画面 (理想の模型)。
+見えるはずの画面 (理想の模型)。まず SRF のまわりだけを見る。この模型の共振はとても鋭く
+(幅は数十 kHz)、100 kHz〜40 MHz で掃引すると R の山が 1 本の針になって形が見えない。
 
 ```vna
 device: h4
-sweep: 100k-40M 401
+sweep: 35.4M-35.8M 401
 title: 図3 10 µH コイル — 35.6 MHz の SRF で X が符号を変える
 dut:
   - series L 10u esr 1.2 cp 2p
@@ -86,12 +87,12 @@ traces:
   - S11 x
 notes:
   - mark 35.6M 0Ω
-  - text 2M 20000Ω: SRF ≈ 35.6 MHz で X が + から − へ
+  - text 35.79M 1000000Ω: SRF 35.6 MHz で X が + から − へ
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/04-inductor-1.svg)
 
-SRF より下 (100 kHz〜25 MHz) だけを掃引し直すと、表の 3 点が読める。
+SRF より下 (100 kHz〜25 MHz) を掃引し直すと、表の 3 点が読める。
 
 ```vna
 device: h4

@@ -115,7 +115,7 @@ wires:
 | 範囲 | 1 MHz〜60 MHz |
 | 点数 | 301 |
 | 校正 | SOLT |
-| 表示 | S21 の Log Mag、S11 の Log Mag |
+| 表示 | S21 の Log Mag (S11 は帯域の中の 2 MHz ほどでしか動かず、1〜60 MHz の掃引では針になるので出さない) |
 
 ```vna
 device: h4
@@ -130,7 +130,6 @@ dut:
   - shunt C 1500p
 traces:
   - S21 logmag
-  - S11 logmag
 markers:
   - 21.91M
   - 40M
