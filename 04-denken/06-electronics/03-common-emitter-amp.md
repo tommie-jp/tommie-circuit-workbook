@@ -117,7 +117,7 @@ title: 図3 出力 (CH2) は入力 (CH1) の 4.68 倍で上下が逆 (V/div は�
 time: 200us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1kHz 50mV, range: 20mV/div}
-ch2: {wave: ch1 | gain -4.68, range: 100mV/div}
+ch2: {wave: ch1 | invert | gain 4.68, range: 100mV/div}
 measure: [vmax, phase]
 ```
 
