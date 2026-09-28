@@ -169,6 +169,8 @@ notes:
   - mark 0.6227
 ```
 
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/graph/01-diode-characteristic-1.svg)
+
 ```graph
 title: 図6 図5 の電流を対数の縦軸で — 立ち上がりの先はまっすぐ
 x: 両端の電圧 V 0.3..0.7
@@ -180,6 +182,8 @@ notes:
   - mark 0.5659
   - mark 0.6227
 ```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/graph/01-diode-characteristic-2.svg)
 
 分かること:
 

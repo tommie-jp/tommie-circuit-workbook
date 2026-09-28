@@ -28,6 +28,7 @@ const LABELS = {
   perfboard: 'ユニバーサル基板の実体配線図',
   vna: 'NanoVNA の画面',
   scope: 'オシロスコープの画面',
+  graph: 'グラフ',
 };
 
 /** このスクリプトが書いた画像の行。Pages の URL を指す画像だけの行。 */

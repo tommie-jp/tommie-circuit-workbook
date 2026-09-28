@@ -97,6 +97,8 @@ notes:
   - mark 100k
 ```
 
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/01-rc-lowpass-bode.svg)
+
 分かること:
 
 - **f<sub>c</sub> を境に −20 dB/decade で下がる。** 10 kHz (f<sub>c</sub> の約 6.3 倍) で

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { PAGES_URL, figurePaths, withFigures } from './figures.mjs';
-import { fencesIn } from './fences.mjs';
+import { FENCES, fencesIn } from './fences.mjs';
 
 const PATH = '01-circuits/01-basics/03-rc-charge.md';
 
@@ -41,4 +41,13 @@ test('rewriting twice changes nothing, and stale lines are replaced', () => {
 test('keeps the indent of a fence inside a list, and leaves an unclosed fence alone', () => {
   assert.match(withFigures(PATH, '- a\n\n  ```vna\n  ```\n'), /\n {2}!\[NanoVNA の画面\]/);
   assert.equal(withFigures(PATH, '```circuit\nparts:\n'), '```circuit\nparts:\n');
+});
+
+test('gives every fence a label for its image line, so none reads "undefined"', () => {
+  for (const fence of FENCES) {
+    const text = `# t\n\n\`\`\`${fence}\n\`\`\`\n`;
+    const line = withFigures(PATH, text).split('\n').find((row) => row.startsWith('!['));
+    assert.ok(line !== undefined, fence);
+    assert.doesNotMatch(line, /^!\[(undefined)?\]/, fence);
+  }
 });
