@@ -135,7 +135,7 @@ title: 図3 1 回目 — 反転増幅の OUT1 (CH2) は 10 倍で上下が逆 (V
 time: 200us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1kHz 200mV, range: 100mV/div}
-ch2: {wave: ch1 | invert | gain 10, range: 1V/div}
+ch2: {wave: ch1 | gain -10, range: 1V/div}
 measure: [vmax, phase]
 ```
 
