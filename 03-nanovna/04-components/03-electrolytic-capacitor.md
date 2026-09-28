@@ -74,17 +74,18 @@ ESR ≈ 0.8 Ω (汎用品の代表値)、ESL ≈ 8 nH と見積もる。
 ```vna
 device: h4
 sweep: 50k-50M 401
-title: 図3 100 µF 電解コンデンサの |Z| (理想)
+title: 図3 100 µF 電解の |Z| — ESR 0.8 Ω で平ら、15.9 MHz から ESL で上がる
 dut:
   - series C 100u esr 0.8 esl 8n
   - short
 traces:
   - S11 z
 markers:
-  - 178k
   - 1M
   - 15.9M
   - 50M
+notes:
+  - text 1M 0.4Ω: 178 kHz (SRF)〜1 MHz は ESR の 0.8 Ω で平ら
 ```
 
 ## 見るべき値

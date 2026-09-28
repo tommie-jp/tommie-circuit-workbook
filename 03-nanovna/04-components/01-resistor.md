@@ -84,7 +84,7 @@ Z = R + jωL が S11 から直接読める。
 ```vna
 device: h4
 sweep: 1M-1500M 301
-title: 図3 金属皮膜 100 Ω (ESL 15 nH) の R と X
+title: 図3 金属皮膜 100 Ω (ESL 15 nH) — R は平ら、X が伸びる
 dut:
   - series R 100 esl 15n
   - short
@@ -95,6 +95,8 @@ markers:
   - 300M
   - 1G
   - 1.4G
+notes:
+  - text 50M 140Ω: 1 GHz で |Z| = 137.4 Ω (公称から +37%)
 ```
 
 炭素皮膜 (ESL 6 nH) — 見えるはずの画面。
@@ -102,7 +104,7 @@ markers:
 ```vna
 device: h4
 sweep: 1M-1500M 301
-title: 図4 炭素皮膜 100 Ω (ESL 6 nH) の R と X
+title: 図4 炭素皮膜 100 Ω (ESL 6 nH) — X の伸びは金属皮膜の 4 割
 dut:
   - series R 100 esl 6n
   - short
@@ -113,6 +115,8 @@ markers:
   - 300M
   - 1G
   - 1.4G
+notes:
+  - text 50M 140Ω: 1 GHz で |Z| = 106.9 Ω (公称から +7%)
 ```
 
 ## 見るべき値

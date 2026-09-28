@@ -76,7 +76,26 @@ wires:
 ```vna
 device: h4
 sweep: 100k-50M 401
-title: 図3 フェライトビーズの R と X (理想、単純な L + R の模型)
+title: 図3 フェライトビーズ (L + R の模型) — X は伸び続け、R は 0.3 Ω
+dut:
+  - series R 0.3 esl 100n
+  - short
+traces:
+  - S11 r
+  - S11 x
+markers:
+  - 5M
+  - 50M
+notes:
+  - text 5M 20Ω: 交差 (477 kHz) は左端に潰れる — 図4 で広げる
+```
+
+交差のある低い側 (50 kHz〜1 MHz) だけを掃引し直すと、477 kHz の交差が真ん中に来る。
+
+```vna
+device: h4
+sweep: 50k-1M 401
+title: 図4 50 kHz〜1 MHz に広げる — 477 kHz で R と X が交差
 dut:
   - series R 0.3 esl 100n
   - short
@@ -86,8 +105,9 @@ traces:
 markers:
   - 100k
   - 477k
-  - 5M
-  - 50M
+notes:
+  - mark 477k 0.3Ω
+  - text 560k 0.2Ω: ωL = R (0.3 Ω) の交差
 ```
 
 ## 見るべき値

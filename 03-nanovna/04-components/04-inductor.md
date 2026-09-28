@@ -73,17 +73,36 @@ wires:
 ```vna
 device: h4
 sweep: 100k-40M 401
-title: 図3 10 µH コイルの R と X (理想)
+title: 図3 10 µH コイル — 35.6 MHz の SRF で X が符号を変える
 dut:
   - series L 10u esr 1.2 cp 2p
   - short
 traces:
   - S11 r
   - S11 x
+notes:
+  - mark 35.6M 0Ω
+  - text 2M 20000Ω: SRF ≈ 35.6 MHz で X が + から − へ
+```
+
+SRF より下 (100 kHz〜25 MHz) だけを掃引し直すと、表の 3 点が読める。
+
+```vna
+device: h4
+sweep: 100k-25M 401
+title: 図4 SRF より下を広げる — X は 20 MHz で 1.84 kΩ まで伸びる
+dut:
+  - series L 10u esr 1.2 cp 2p
+  - short
+traces:
+  - S11 x
 markers:
   - 1M
   - 10M
   - 20M
+notes:
+  - text 1M 3500Ω: R は印 1〜3 で 1.2 / 1.4 / 2.6 Ω (この目盛では 0 に重なる)
+  - text 1M 3000Ω: Q = X / R は約 52 / 480 / 716
 ```
 
 ## 見るべき値

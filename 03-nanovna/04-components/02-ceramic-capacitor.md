@@ -73,7 +73,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-300M 401
-title: 図3 0.1 µF セラミックコンデンサの SRF (理想)
+title: 図3 0.1 µF セラミックの |Z| — 11.25 MHz の SRF で谷、上は誘導性
 dut:
   - series C 100n esr 0.05 esl 2n
   - short
@@ -83,6 +83,26 @@ markers:
   - 1M
   - 11.25M
   - 100M
+notes:
+  - text 60M 0.2Ω: 谷の底 0.05 Ω (ESR) は枠の下端 0.1 Ω より下
+```
+
+SRF の近く (5〜17.5 MHz) を広げ、|Z| に X を重ねて線形の目盛で見る。
+
+```vna
+device: h4
+sweep: 5M-17.5M 401
+title: 図4 SRF の近くを広げる — X が 0 を横切り、|Z| は ESR まで下がる
+dut:
+  - series C 100n esr 0.05 esl 2n
+  - short
+traces:
+  - S11 z
+  - S11 x
+markers:
+  - 11.25M
+notes:
+  - text 9M -0.15Ω: SRF で X = 0、|Z| = ESR (0.05 Ω)
 ```
 
 ## 見るべき値

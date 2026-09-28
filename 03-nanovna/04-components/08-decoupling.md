@@ -86,7 +86,7 @@ e 行が CH0-CH1 の素通し線、h 行が GND のバス。C1・C2 とも e 行
 ```vna
 device: h4
 sweep: 100k-100M 401
-title: 図3 10 µF + 0.1 µF の合成インピーダンス (シャントスルー、理想)
+title: 図3 10 µF + 0.1 µF のシャントスルー — 谷 2 つと山は 20 MHz より下
 dut:
   - shunt C 10u esr 0.01 esl 3n
   - shunt C 100n esr 0.02 esl 1n
@@ -96,6 +96,27 @@ markers:
   - 919k
   - 8M
   - 15.9M
+notes:
+  - band 100k 20M: 図4 で広げる
+```
+
+2 つの SRF と反共振の山がある 100 kHz〜20 MHz を広げる。
+
+```vna
+device: h4
+sweep: 100k-20M 401
+title: 図4 100 kHz〜20 MHz に広げる — 2 つの SRF の間に反共振の山
+dut:
+  - shunt C 10u esr 0.01 esl 3n
+  - shunt C 100n esr 0.02 esl 1n
+traces:
+  - S21 logmag
+markers:
+  - 919k
+  - 8M
+  - 15.9M
+notes:
+  - text 1M -15dB: 反共振 (8 MHz) の |Z| は 10 µF の SRF の 75 倍
 ```
 
 ## 見るべき値

@@ -81,7 +81,7 @@ e6〜e11 (5 穴ぶん、2.54 mm 間隔で約 1.27 cm) を裸銅線でまたぐ�
 ```vna
 device: h4
 sweep: 10M-1500M 301
-title: 図3 1 cm の裸銅線 (L ≈ 7 nH) の X
+title: 図3 1 cm の裸銅線 (L ≈ 7 nH) の X は周波数に比例する
 dut:
   - series L 7n
   - short
@@ -92,6 +92,8 @@ markers:
   - 100M
   - 500M
   - 1G
+notes:
+  - text 100M 60Ω: ただの導線でも 1 GHz で 44 Ω
 ```
 
 ## 見るべき値

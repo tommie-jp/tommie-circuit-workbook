@@ -86,6 +86,8 @@ traces:
 markers:
   - 10.00203M
   - 10.01702M
+notes:
+  - band 10.00203M 10.01702M: fs と fp の間 15 kHz
 ```
 
 ## 見るべき値
