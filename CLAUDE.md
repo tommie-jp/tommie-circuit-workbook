@@ -56,23 +56,3 @@ npm run all   # 試験・lint・全題の検査 (CI と同じ)
   マージは fast-forward のみ
 - フェンスの版は `package.json` の Release の URL で固定している。上げるときは
   URL を書き換えて `npm install` し、`npm run all` が通ることを確かめる
-
-## ToDO
-
-- [△] GitHub：教科書：tommie-fence図を表示できるように
-- [ ] 全回路：新部品に変更： 可変コンデンサ、クリスタルイヤホン、アンテナ
-- [ ] PlayGround:新規フェンスを表示できるようにする。（編集はできなくてよい）
-
-- [ ] 全回路：新skillに合っているか、確認、修正
-- [ ] 全回路：vna, スペクトラムアナライザで調べると良い回路に項目を追加
-
-- [ ] QR-Note:新規tommie-fence取り込み
-- [ ] 全回路：LTspiceでシミュレートして正しいか確認、修正
-
-## done
-
-- [X] tommie-circuit-workbook/04-denken/06-electronics/01-diode-characteristic.md
-- [X] tommie-circuit-workbook/04-denken/10-power-electronics/02-smoothing-ripple.md
-- [X] 必要な回路：vna, spectrum、graphフェンスを追加する
-
-- [X] VSCode:新規tommie-fence取り込み
