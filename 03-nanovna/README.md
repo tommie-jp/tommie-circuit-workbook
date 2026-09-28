@@ -29,19 +29,19 @@ GHz 帯の作法をまとめる。
 
 | 章 | 題名 | 必須 | 入門 | 中級 | 済 |
 | --- | --- | --- | --- | --- | --- |
-| 0 | 道具と安全 | 3 | 5 | 8 | 3 |
-| 1 | 校正 | 6 | 10 | 16 | 7 |
-| 2 | 画面と PC ソフト | 5 | 10 | 16 | 5 |
-| 3 | 治具 | 6 | 10 | 18 | 6 |
-| 4 | 部品の周波数特性 | 8 | 16 | 28 | 8 |
-| 5 | 伝送線路 | 6 | 12 | 22 | 6 |
-| 6 | フィルタ | 6 | 12 | 24 | 6 |
-| 7 | アンテナ | 6 | 12 | 26 | 6 |
-| 8 | アンプと能動回路の S パラメータ | 3 | 8 | 18 | 3 |
-| 9 | GHz 帯の作法 | 1 | 5 | 16 | 1 |
+| 0 | 道具と安全 | 3 | 5 | 8 | 5 |
+| 1 | 校正 | 6 | 10 | 16 | 10 |
+| 2 | 画面と PC ソフト | 5 | 10 | 16 | 10 |
+| 3 | 治具 | 6 | 10 | 18 | 10 |
+| 4 | 部品の周波数特性 | 8 | 16 | 28 | 16 |
+| 5 | 伝送線路 | 6 | 12 | 22 | 12 |
+| 6 | フィルタ | 6 | 12 | 24 | 12 |
+| 7 | アンテナ | 6 | 12 | 26 | 12 |
+| 8 | アンプと能動回路の S パラメータ | 3 | 8 | 18 | 8 |
+| 9 | GHz 帯の作法 | 1 | 5 | 16 | 5 |
 | 10 | 自動化 | 0 | 0 | 8 | 0 |
 | 11 | スペクトラムアナライザ — tinySA と同じ種類の計器 | 0 | 5 | 13 | 5 |
-| **計** | | **50** | **105** | **213** | **56** |
+| **計** | | **50** | **105** | **213** | **105** |
 
 ## 第 0 章 道具と安全
 
@@ -50,8 +50,8 @@ GHz 帯の作法をまとめる。
 | 0-1 | [機種と範囲 — H4 (〜1.5 GHz) と V2 (〜3 / 4.4 GHz)、どちらで何が測れるか](00-tools/01-device-range.md) | 必須 | H4 | — |
 | 0-2 | [SMA の締め方・トルク・ケーブルの扱い](00-tools/02-sma-care.md) | 必須 | H4 | — |
 | 0-3 | [出力レベルと CH1 の最大入力 — アンプの出力にはアッテネータ](00-tools/03-output-level.md) | 必須 | H4 | — |
-| 0-4 | 静電気とアンテナの帯電 — 放電してから繋ぐ | 入門 | H4 | — |
-| 0-5 | 電池・充電・ファームウェアの更新 | 入門 | H4 | — |
+| 0-4 | [静電気とアンテナの帯電 — 放電してから繋ぐ](00-tools/04-esd-antenna-discharge.md) | 入門 | H4 | — |
+| 0-5 | [電池・充電・ファームウェアの更新](00-tools/05-battery-firmware.md) | 入門 | H4 | — |
 | 0-6 | ケーブルの種類 (RG316 / RG174 / セミリジッド) と GHz での差 | 中級 | V2 | — |
 | 0-7 | コネクタの種類 (SMA / RP-SMA / U.FL / BNC / N) と変換 | 中級 | H4 | — |
 | 0-8 | 測定の再現性 — 同じ物を 10 回測る | 中級 | H4 | — |
@@ -66,9 +66,9 @@ GHz 帯の作法をまとめる。
 | 1-4 | [範囲を変えたら再校正 — 変えずに測るとどう狂うか](01-calibration/04-recalibrate-range.md) | 必須 | H4 | — |
 | 1-5 | [ケーブルの先端で校正する意味 (基準面)](01-calibration/05-reference-plane.md) | 必須 | H4 | — |
 | 1-6 | [校正の保存スロットと呼び出し](01-calibration/06-cal-slots.md) | 必須 | H4 | — |
-| 1-7 | 校正キットの質 — 付属 / 自作 / 市販 | 入門 | H4 | — |
-| 1-8 | Load の 50 Ω を DC で測って確かめる | 入門 | H4 | — |
-| 1-9 | 校正の有効期間 — 温度と時間 | 入門 | H4 | — |
+| 1-7 | [校正キットの質 — 付属 / 自作 / 市販](01-calibration/07-cal-kit-quality.md) | 入門 | H4 | — |
+| 1-8 | [Load の 50 Ω を DC で測って確かめる](01-calibration/08-load-dc-check.md) | 入門 | H4 | — |
+| 1-9 | [校正の有効期間 — 温度と時間](01-calibration/09-cal-lifetime.md) | 入門 | H4 | — |
 | 1-10 | [ポート延長 (電気長)](01-calibration/10-port-extension.md) | 入門 | H4 | — |
 | 1-11 | GHz での校正 — 付属キットの限界 | 中級 | V2 | — |
 | 1-12 | 校正標準のオフセット (Open の容量・Short の誘導) と定義 | 中級 | V2 | — |
@@ -86,11 +86,11 @@ GHz 帯の作法をまとめる。
 | 2-3 | [掃引の設定 — 開始・終了・中心・スパン](02-display/03-sweep-settings.md) | 必須 | H4 | — |
 | 2-4 | [NanoVNA-Saver に繋ぐ](02-display/04-nanovna-saver.md) | 必須 | H4 | — |
 | 2-5 | [Touchstone (.s1p / .s2p) に保存する](02-display/05-touchstone.md) | 必須 | H4 | — |
-| 2-6 | R + jX と極表示 | 入門 | H4 | — |
-| 2-7 | TDR (時間領域) の設定 | 入門 | H4 | — |
-| 2-8 | 4 トレースの割り当て (S11 / S21 × 形式) | 入門 | H4 | — |
-| 2-9 | NanoVNA-Saver の校正と平均化 | 入門 | H4 | — |
-| 2-10 | スクリーンショットと記録 | 入門 | H4 | — |
+| 2-6 | [R + jX と極表示](02-display/06-rx-polar.md) | 入門 | H4 | — |
+| 2-7 | [TDR (時間領域) の設定](02-display/07-tdr-settings.md) | 入門 | H4 | — |
+| 2-8 | [4 トレースの割り当て (S11 / S21 × 形式)](02-display/08-four-traces.md) | 入門 | H4 | — |
+| 2-9 | [NanoVNA-Saver の校正と平均化](02-display/09-saver-calibration-averaging.md) | 入門 | H4 | — |
+| 2-10 | [スクリーンショットと記録](02-display/10-screenshot-records.md) | 入門 | H4 | — |
 | 2-11 | NanoVNA-QT | 中級 | V2 | — |
 | 2-12 | NanoVNA-App | 中級 | H4 | — |
 | 2-13 | Touchstone を Python (scikit-rf) で読む | 中級 | H4 | — |
@@ -108,10 +108,10 @@ GHz 帯の作法をまとめる。
 | 3-4 | [自作校正キット — Open / Short / Load (50 Ω) を perfboard で](03-fixtures/04-diy-cal-kit.md) | 必須 | H4 | PF |
 | 3-5 | [10 dB アッテネータの製作と S21 / S11](03-fixtures/05-attenuator.md) | 必須 | H4 | PF |
 | 3-6 | [治具の限界周波数 — どこまで信じるか](03-fixtures/06-fixture-limit.md) | 必須 | H4 | PF |
-| 3-7 | ポート延長で治具の電気長を除く | 入門 | H4 | PF |
-| 3-8 | De-embedding — 治具の S2P を引く | 入門 | H4 | PF |
-| 3-9 | SMA オス / メスとケーブルの再現性 | 入門 | H4 | PF |
-| 3-10 | 市販のテストボードと自作の比較 | 入門 | H4 | PF |
+| 3-7 | [ポート延長で治具の電気長を除く](03-fixtures/07-port-extension-fixture.md) | 入門 | H4 | PF |
+| 3-8 | [De-embedding — 治具の S2P を引く](03-fixtures/08-de-embedding.md) | 入門 | H4 | PF |
+| 3-9 | [SMA オス / メスとケーブルの再現性](03-fixtures/09-sma-repeatability.md) | 入門 | H4 | PF |
+| 3-10 | [市販のテストボードと自作の比較](03-fixtures/10-commercial-test-board.md) | 入門 | H4 | PF |
 | 3-11 | 銅張り基板に直付け (Manhattan 式) の治具 | 中級 | H4 | 銅 |
 | 3-12 | マイクロストリップの治具 — FR4 で 50 Ω の幅を計算して作る | 中級 | H4 | 銅 |
 | 3-13 | GHz の治具 — 端面 SMA + 短いマイクロストリップ | 中級 | V2 | 銅 |
@@ -133,14 +133,14 @@ GHz 帯の作法をまとめる。
 | 4-6 | [水晶 — fs / fp / Q / 等価回路](04-components/06-crystal.md) | 必須 | H4 | PF |
 | 4-7 | [リード線 1 cm のインダクタンス](04-components/07-lead-inductance.md) | 必須 | H4 | PF |
 | 4-8 | [デカップリングの並列 (0.1 µF + 10 µF)](04-components/08-decoupling.md) | 必須 | H4 | PF |
-| 4-9 | バリキャップの C vs 電圧 | 入門 | H4 | PF |
-| 4-10 | 小型トランスの周波数特性 | 入門 | H4 | PF |
-| 4-11 | コモンモードチョーク | 入門 | H4 | PF |
-| 4-12 | セラミックフィルタ / SAW (部品として) | 入門 | H4 | PF |
-| 4-13 | ダイオードの接合容量 | 入門 | H4 | PF |
-| 4-14 | トロイダルコアの材質比較 | 入門 | H4 | PF |
-| 4-15 | リレー・スイッチの S21 | 入門 | H4 | PF |
-| 4-16 | perfboard のパターンの容量 | 入門 | H4 | PF |
+| 4-9 | [バリキャップの C vs 電圧](04-components/09-varicap.md) | 入門 | H4 | PF |
+| 4-10 | [小型トランスの周波数特性](04-components/10-small-transformer.md) | 入門 | H4 | PF |
+| 4-11 | [コモンモードチョーク](04-components/11-common-mode-choke.md) | 入門 | H4 | PF |
+| 4-12 | [セラミックフィルタ / SAW (部品として)](04-components/12-ceramic-filter.md) | 入門 | H4 | PF |
+| 4-13 | [ダイオードの接合容量](04-components/13-junction-capacitance.md) | 入門 | H4 | PF |
+| 4-14 | [トロイダルコアの材質比較](04-components/14-toroid-materials.md) | 入門 | H4 | PF |
+| 4-15 | [リレー・スイッチの S21](04-components/15-relay-switch.md) | 入門 | H4 | PF |
+| 4-16 | [perfboard のパターンの容量](04-components/16-perfboard-capacitance.md) | 入門 | H4 | PF |
 | 4-17 | チップ部品 (0603 / 0805) の SRF を GHz で | 中級 | V2 | 銅 |
 | 4-18 | フェライトビーズの GHz 特性 | 中級 | V2 | 銅 |
 | 4-19 | 空芯コイルの Q を 1 GHz 手前まで | 中級 | H4 | 銅 |
@@ -164,12 +164,12 @@ GHz 帯の作法をまとめる。
 | 5-4 | [断線・短絡の位置 (TDR)](05-transmission-lines/04-fault-location.md) | 必須 | H4 | — |
 | 5-5 | [SWR と反射 — 終端を変えて](05-transmission-lines/05-swr-termination.md) | 必須 | H4 | — |
 | 5-6 | [50 Ω と 75 Ω の違い](05-transmission-lines/06-fifty-vs-seventy-five.md) | 必須 | H4 | — |
-| 5-7 | スタブ (開放・短絡) | 入門 | H4 | — |
-| 5-8 | λ/4 変成器 | 入門 | H4 | — |
-| 5-9 | コネクタの不連続 (TDR) | 入門 | H4 | — |
-| 5-10 | 特性インピーダンスの測定 (Zoc と Zsc から) | 入門 | H4 | — |
-| 5-11 | ケーブルの温度 | 入門 | H4 | — |
-| 5-12 | 平行 2 線 (ラダーライン) | 入門 | H4 | — |
+| 5-7 | [スタブ (開放・短絡)](05-transmission-lines/07-stub.md) | 入門 | H4 | — |
+| 5-8 | [λ/4 変成器](05-transmission-lines/08-quarter-wave-transformer.md) | 入門 | H4 | — |
+| 5-9 | [コネクタの不連続 (TDR)](05-transmission-lines/09-connector-discontinuity.md) | 入門 | H4 | — |
+| 5-10 | [特性インピーダンスの測定 (Zoc と Zsc から)](05-transmission-lines/10-z0-from-zoc-zsc.md) | 入門 | H4 | — |
+| 5-11 | [ケーブルの温度](05-transmission-lines/11-cable-temperature.md) | 入門 | H4 | — |
+| 5-12 | [平行 2 線 (ラダーライン)](05-transmission-lines/12-ladder-line.md) | 入門 | H4 | — |
 | 5-13 | GHz でのケーブル損失 (2.4 GHz) | 中級 | V2 | — |
 | 5-14 | U.FL ピグテールの損失 | 中級 | V2 | — |
 | 5-15 | マイクロストリップの Zo と FR4 の誘電率 | 中級 | V2 | 銅 |
@@ -191,12 +191,12 @@ GHz 帯の作法をまとめる。
 | 6-4 | [挿入損失と反射損失 (S21 と S11)](06-filters/04-insertion-return-loss.md) | 必須 | H4 | PF |
 | 6-5 | [設計と実測 — バターワース vs チェビシェフ](06-filters/05-design-vs-measured.md) | 必須 | H4 | PF |
 | 6-6 | [ノッチ](06-filters/06-notch.md) | 必須 | H4 | PF |
-| 6-7 | 水晶ラダーフィルタ | 入門 | H4 | PF |
-| 6-8 | 群遅延 | 入門 | H4 | PF |
-| 6-9 | ダイプレクサ | 入門 | H4 | PF |
-| 6-10 | π 型と T 型 | 入門 | H4 | PF |
-| 6-11 | 部品の許容差の影響 | 入門 | H4 | PF |
-| 6-12 | セラミックフィルタ 455 kHz / 10.7 MHz | 入門 | H4 | PF |
+| 6-7 | [水晶ラダーフィルタ](06-filters/07-crystal-ladder.md) | 入門 | H4 | PF |
+| 6-8 | [群遅延](06-filters/08-group-delay.md) | 入門 | H4 | PF |
+| 6-9 | [ダイプレクサ](06-filters/09-diplexer.md) | 入門 | H4 | PF |
+| 6-10 | [π 型と T 型](06-filters/10-pi-and-t.md) | 入門 | H4 | PF |
+| 6-11 | [部品の許容差の影響](06-filters/11-component-tolerance.md) | 入門 | H4 | PF |
+| 6-12 | [セラミックフィルタ 455 kHz / 10.7 MHz](06-filters/12-ceramic-filter.md) | 入門 | H4 | PF |
 | 6-13 | SAW フィルタ 433 / 915 MHz | 中級 | H4 | 銅 |
 | 6-14 | マイクロストリップ LPF (ステップインピーダンス、1 GHz) | 中級 | H4 | 銅 |
 | 6-15 | 2.4 GHz バンドパス (インターディジタル / ヘアピン) | 中級 | V2 | 銅 |
@@ -220,12 +220,12 @@ GHz 帯の作法をまとめる。
 | 7-4 | [L 型整合](07-antennas/04-l-network-matching.md) | 必須 | H4 | PF |
 | 7-5 | [バーアンテナ + バリコン (中波)](07-antennas/05-loopstick-varicap.md) | 必須 | H4 | PF |
 | 7-6 | [アンテナの帯域幅 (SWR 2 の幅)](07-antennas/06-antenna-bandwidth.md) | 必須 | H4 | — |
-| 7-7 | ループアンテナ | 入門 | H4 | — |
-| 7-8 | バランの有無 | 入門 | H4 | PF |
-| 7-9 | トラップ | 入門 | H4 | PF |
-| 7-10 | λ/4 グラウンドプレーン | 入門 | H4 | — |
-| 7-11 | 手・近くの物の影響 | 入門 | H4 | — |
-| 7-12 | 433 / 920 MHz のモジュール用アンテナ (LoRa) | 入門 | H4 | — |
+| 7-7 | [ループアンテナ](07-antennas/07-loop-antenna.md) | 入門 | H4 | — |
+| 7-8 | [バランの有無](07-antennas/08-balun.md) | 入門 | H4 | PF |
+| 7-9 | [トラップ](07-antennas/09-trap.md) | 入門 | H4 | PF |
+| 7-10 | [λ/4 グラウンドプレーン](07-antennas/10-ground-plane.md) | 入門 | H4 | — |
+| 7-11 | [手・近くの物の影響](07-antennas/11-hand-effect.md) | 入門 | H4 | — |
+| 7-12 | [433 / 920 MHz のモジュール用アンテナ (LoRa)](07-antennas/12-lora-module-antenna.md) | 入門 | H4 | — |
 | 7-13 | 2.4 GHz Wi-Fi / BLE ホイップ | 中級 | V2 | — |
 | 7-14 | 基板の逆 F アンテナ (PIFA) | 中級 | V2 | 銅 |
 | 7-15 | パッチアンテナ 2.4 GHz | 中級 | V2 | 銅 |
@@ -248,11 +248,11 @@ GHz 帯の作法をまとめる。
 | 8-1 | [アンプの S21 (利得 vs 周波数)](08-amplifiers/01-amplifier-s21.md) | 必須 | H4 | PF |
 | 8-2 | [入力・出力の S11 / S22](08-amplifiers/02-input-output-return-loss.md) | 必須 | H4 | PF |
 | 8-3 | [アッテネータの S パラメータ](08-amplifiers/03-attenuator-s-parameters.md) | 必須 | H4 | PF |
-| 8-4 | バイアス T でトランジスタの S パラメータ | 入門 | H4 | PF |
-| 8-5 | 安定性 (K 因子) | 入門 | H4 | PF |
-| 8-6 | LNA (MMIC) の S21 / S11 | 入門 | H4 | 銅 |
-| 8-7 | ミキサのポート間アイソレーション | 入門 | H4 | PF |
-| 8-8 | リレー / PIN スイッチのアイソレーション | 入門 | H4 | PF |
+| 8-4 | [バイアス T でトランジスタの S パラメータ](08-amplifiers/04-bias-tee-transistor.md) | 入門 | H4 | PF |
+| 8-5 | [安定性 (K 因子)](08-amplifiers/05-stability-k-factor.md) | 入門 | H4 | PF |
+| 8-6 | [LNA (MMIC) の S21 / S11](08-amplifiers/06-mmic-lna.md) | 入門 | H4 | 銅 |
+| 8-7 | [ミキサのポート間アイソレーション](08-amplifiers/07-mixer-isolation.md) | 入門 | H4 | PF |
+| 8-8 | [リレー / PIN スイッチのアイソレーション](08-amplifiers/08-switch-isolation.md) | 入門 | H4 | PF |
 | 8-9 | GHz の LNA モジュール (SPF5189Z など) | 中級 | V2 | 銅 |
 | 8-10 | 方向性結合器 | 中級 | H4 | 銅 |
 | 8-11 | ウィルキンソン分配器 (マイクロストリップ、2.4 GHz) | 中級 | V2 | 銅 |
@@ -269,10 +269,10 @@ GHz 帯の作法をまとめる。
 | # | 題 | 段 | 機種 | 板 |
 | --- | --- | --- | --- | --- |
 | 9-1 | [1.5 GHz より上へ — スルーで 3 GHz まで見る (ケーブルとコネクタで何 dB 落ちるか)](09-ghz/01-past-1-5ghz.md) | 必須 | H4 | — |
-| 9-2 | GHz の校正 — 付属キットの限界と基準面 | 入門 | V2 | — |
-| 9-3 | GND を面で取る — perfboard と銅張りの差を S21 で | 入門 | V2 | 銅 |
-| 9-4 | ダイナミックレンジの帯域依存 — H4 (70 / 60 / 40 dB) と V2 を測る | 入門 | V2 | — |
-| 9-5 | 手・体・机の影響 — 放射する物を測るとき | 入門 | V2 | — |
+| 9-2 | [GHz の校正 — 付属キットの限界と基準面](09-ghz/02-ghz-calibration.md) | 入門 | V2 | — |
+| 9-3 | [GND を面で取る — perfboard と銅張りの差を S21 で](09-ghz/03-ground-plane.md) | 入門 | V2 | 銅 |
+| 9-4 | [ダイナミックレンジの帯域依存 — H4 (70 / 60 / 40 dB) と V2 を測る](09-ghz/04-dynamic-range.md) | 入門 | V2 | — |
+| 9-5 | [手・体・机の影響 — 放射する物を測るとき](09-ghz/05-hand-body-desk.md) | 入門 | V2 | — |
 | 9-6 | コネクタの締め付け (トルク) と再現性 | 中級 | V2 | — |
 | 9-7 | FR4 の誘電率 — 長さの違う 2 本の線路で | 中級 | V2 | 銅 |
 | 9-8 | ケーブルの曲げ・温度で位相が動く | 中級 | V2 | — |

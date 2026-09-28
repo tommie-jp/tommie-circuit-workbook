@@ -99,7 +99,7 @@ markers:
   - 500M
   - 1G
 notes:
-  - text 100M 1.4ns: 往復の遅延 2τ = 1.01 ns — ELECTRICAL DELAY に入れる値
+  - text 100M 1.4ns: 往復の遅延 2τ = 1.01 ns — E-DELAY に入れる値
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/10-port-extension-2.svg)
@@ -113,11 +113,11 @@ notes:
 
 ## ポート延長を入れる
 
-H4 では DISPLAY → SCALE → ELECTRICAL DELAY に遅延を入れる (NanoVNA-Saver なら
+H4 (DiSlord 版) では DISPLAY → SCALE → E-DELAY (元のファームウェアでは ELECTRICAL DELAY) に遅延を入れる (NanoVNA-Saver なら
 校正の窓の Offset Delay)。
 
 1. 図1 の状態で S11 の群遅延を読む (約 1.01 ns)
-2. ELECTRICAL DELAY にその値を入れる。S11 では**往復の遅延**を入れる
+2. E-DELAY にその値を入れる。S11 では**往復の遅延**を入れる
 3. Smith の点が**右端 (開放) の 1 点に縮む**ことを確かめる。回りが逆に速くなったら
    符号が逆。縮み切らずに少し回るなら、値を少しずつ変えて点がいちばん小さく
    まとまる所を探す
