@@ -140,6 +140,18 @@ notes:
 | Scope (1 回目) | CH1 = RLA の両端 (差動、線電流 a)、CH2 = RAB の両端 (差動、相電流 ab) |
 | Measure | CH1・CH2 の Amplitude と、CH1 に対する CH2 の Phase |
 
+RLA の両端は数十 mV しかないので、CH1 は 20 mV/div、CH2 は 500 mV/div と
+V/div を分けてある。高さではなく位相を見る。
+
+```scope
+title: 図3 相電流 (CH2) は線電流 (CH1) より 30° 進む (V/div は別)
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 56.6mV, range: 20mV/div}
+ch2: {wave: sine 1kHz 1.63V phase 30deg, range: 500mV/div}
+measure: [vmax, phase]
+```
+
 ### オシロスコープと発振器
 
 発振器・電源・プローブの読み替えは 4-1 と同じ ([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)・
@@ -148,7 +160,7 @@ AD 版は RLA と RAB の両端を差動で挟む。汎用オシロでは、ど�
 グランドクリップを当てられない (当てた点が GND に落ち、FG の出力か三相の 1 点を短絡する)。
 
 **線のシャント RLA・RLB・RLC を 20 Ω から 200 Ω に替え、回路はそのまま、両端を
-GND 基準で測って Math で引く** (図3)。20 Ω のままだと RLA の両端は 49 mV (計算値) で、
+GND 基準で測って Math で引く** (図4)。20 Ω のままだと RLA の両端は 49 mV (計算値) で、
 a 点の電圧の 6 % しかない。2 本の先端で引くと、ch どうしの利得の差 (数 %) だけで
 同じくらいの誤差が出て読めない。シャントを GND 側へ移すこともできない。
 線電流 I_a は b・c の線を通って電源へ戻り、I_a だけが流れる GND 側の線が無いからだ。
@@ -156,7 +168,7 @@ a 点の電圧の 6 % しかない。2 本の先端で引くと、ch どうし�
 位相の 30° は、シャントの値によらない (見るべき値の下の説明)。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図4 汎用オシロでの測り方
 parts:
   U1: port a1
   V1: sine e1 g1 1 l=$\mathrm{FG}_1$

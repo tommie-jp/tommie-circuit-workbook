@@ -120,6 +120,28 @@ notes:
 | Scope (2 回目) | CH2 を OUT2 (非反転) に挿し替える |
 | Measure | CH1・CH2 の Amplitude と、CH1 に対する CH2 の Phase |
 
+図3 は CH1 を 100 mV/div、CH2 を 1 V/div と分け、上下が逆になるのを見やすくした
+(V/div が 10 倍違うので、2 本は同じ高さに見える)。図4 は 2 ch とも 1 V/div にそろえ、
+10 倍の差を高さのまま見せる。2 回の画面で CH2 の高さは同じで、向きだけが逆になる。
+
+```scope
+title: 図3 1 回目 — 反転増幅の OUT1 (CH2) は 10 倍で上下が逆 (V/div は別)
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 300mV, range: 100mV/div}
+ch2: {wave: ch1 | gain -10, range: 1V/div}
+measure: [vmax, phase]
+```
+
+```scope
+title: 図4 2 回目 — 非反転増幅の OUT2 (CH2) は 10 倍で同じ向き (2 ch とも 1 V/div)
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 300mV, range: 1V/div}
+ch2: {wave: ch1 | gain 10, range: 1V/div}
+measure: [vmax, phase]
+```
+
 ### オシロスコープと発振器
 
 1− と 2− は GND のレールなので、測り方は GND 基準のままでよい

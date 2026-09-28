@@ -132,6 +132,19 @@ notes:
 | Scope | CH1 = RN の両端 (差動)、CH2 = 1 相目 (AD.W1、GND 基準) |
 | Measure | CH1 の Amplitude (RMS でも可) |
 
+平衡のままなら CH1 は 0 V の平らな線のまま動かない。下の画面は R3 (1 相目) だけを
+2 kΩ に替えたときのもので、RN の両端に 4.88 mV (計算値) が 1 相目と逆向きに立つ。
+CH1 は 2 mV/div、CH2 は 500 mV/div と V/div を分けてある。
+
+```scope
+title: 図3 R3 を 2 kΩ にすると RN (CH1) に 1 相目と逆向きの電圧が立つ
+time: 200us/div
+trigger: ch2 rising 0V
+ch1: {wave: sine 1kHz 4.88mV phase 180deg, range: 2mV/div}
+ch2: {wave: sine 1kHz 1V, range: 500mV/div}
+measure: [vmax, phase]
+```
+
 ### オシロスコープと発振器
 
 RN の下の端は GND のレールなので、AD の 1− は GND で、測り方は GND 基準のままでよい。

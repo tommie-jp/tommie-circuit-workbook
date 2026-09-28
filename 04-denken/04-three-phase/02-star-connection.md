@@ -133,6 +133,17 @@ notes:
 | Scope (2 回目) | CH1 は同じ。CH2 の − 側だけ GND に挿し替え、N の電圧 (GND 基準) を読む |
 | Measure | CH1・CH2 の Amplitude と、CH1 に対する CH2 の Phase |
 
+1 回目の画面。CH1 が相電圧、CH2 が線間電圧で、2 つは同じ V/div にしてある。
+
+```scope
+title: 図3 線間電圧 (CH2) は相電圧 (CH1) の √3 倍で 30° 進む
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+ch2: {wave: sine 1kHz 1.732V phase 30deg, range: 500mV/div}
+measure: [vmax, phase]
+```
+
 ### オシロスコープと発振器
 
 発振器・電源・プローブの読み替えは 4-1 と同じ ([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)・
@@ -142,12 +153,12 @@ AD 版は CH1 を 1 相目と N の間、CH2 を 1 相目と 2 相目の間に�
 N が GND に落ちて中性線ありの 4-4 に変わり、2 相目に当てれば FG の CH2 の出力を
 GND と短絡する。
 
-**回路はそのまま、先端を当てる点を GND 基準で測り、Math の CH1 − CH2 で引く** (図3)。
+**回路はそのまま、先端を当てる点を GND 基準で測り、Math の CH1 − CH2 で引く** (図4)。
 引いて得る相電圧と線間電圧は振れと同じくらい大きいので、8 bit のオシロでも埋もれない。
 測る点は 1 相目・2 相目・N の 3 つで、2 ch では 2 回に分ける。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図4 汎用オシロでの測り方
 parts:
   U1: port a1
   V1: sine e1 g1 1 l=$\mathrm{FG}_1$

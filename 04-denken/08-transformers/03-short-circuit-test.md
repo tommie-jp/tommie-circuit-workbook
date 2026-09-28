@@ -96,6 +96,18 @@ wires:
 なので、I1 を 3 mA (振幅) にすると Vsc は Wavegen 側で約 3.2 V になる。
 上げすぎない (AD の Wavegen は 10 mA まで)。
 
+CH2 は CH1 の約 1/10 なので、CH2 だけ 100 mV/div に上げてある。Wavegen の 3.2 V のうち Rs1 に
+取られた残りが CH1 に出る。
+
+```scope
+title: 図3 I1 の分 (CH2、100 mV/div) は Vsc (CH1、1 V/div) より 18° 遅れる
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 2.91V, range: 1V/div}
+ch2: {wave: sine 1kHz 300mV phase -18deg, range: 100mV/div}
+measure: [vmax, freq, phase]
+```
+
 ### オシロスコープと発振器
 
 汎用の計器での読み替えは[回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md) と
@@ -103,11 +115,11 @@ wires:
 
 AD の CH2 は Rs1 の両端を差動で挟んでいる。Rs1 の電圧 (300 mV) は FG の出力 (3.2 V) の 1 割に
 満たないので、2 本の先端で引くと分解能に埋もれやすい。8-1 と同じく **Rs1 を 1 次巻線の GND 側へ
-移し**、CH2 の 1 本で直に読む (図3)。短絡した 2 次にはクリップを当てない
+移し**、CH2 の 1 本で直に読む (図4)。短絡した 2 次にはクリップを当てない
 (当てても 1 点だけなら害は無いが、測る物が無い)。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図4 汎用オシロでの測り方
 style:
   standard: jis
 parts:

@@ -103,6 +103,30 @@ wires:
 | Scope (1 回目) | CH1 = 1 次巻線の両端 (V1)。CH2 = Rs1 の両端 (差動、I1 = 読み ÷ 100 Ω) |
 | Scope (2 回目) | CH1 を RL の両端に挿し替え、V2 を読む |
 
+1 回目の画面。CH2 は CH1 の約 1/100 しかないので、CH2 だけ 20 mV/div に上げてある (図4 と同じ)。
+2 次の負荷は抵抗 (8 Ω) なので、I1 は V1 と同じ位相になる。V1 と I1 は Rs1 で 1 % 下がった値
+(1.98 V・19.8 mV) で描いた。
+
+```scope
+title: 図3 1 回目 — V1 (CH1、1 V/div) と I1 の分 (CH2、20 mV/div) は同じ位相
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1.98V, range: 1V/div}
+ch2: {wave: sine 1kHz 19.8mV, range: 20mV/div}
+measure: [vmax, freq, phase]
+```
+
+2 回目は CH1 を RL の両端へ挿し替える。V2 は I1 の分と同じ桁なので、2 本とも 20 mV/div で並べる。
+
+```scope
+title: 図4 2 回目 — V2 (CH1) は V1 の 1/35
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 56.0mV, range: 20mV/div}
+ch2: {wave: sine 1kHz 19.8mV, range: 20mV/div}
+measure: [vmax, freq]
+```
+
 ### オシロスコープと発振器
 
 汎用の計器での読み替えは[回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md) と
@@ -110,10 +134,10 @@ wires:
 
 AD の CH2 は Rs1 の両端を差動で挟み、1− は巻線の下の端 (GND) に当てている。Rs1 の電圧 (20 mV) は
 振れ (2 V) の 1 % しかないので、2 本の先端で引く方法は使えない。**Rs1 を 1 次巻線の GND 側へ
-移し**、CH2 の 1 本で直に読む (図3)。直列の順を入れ替えただけなので、I1 は変わらない。
+移し**、CH2 の 1 本で直に読む (図5)。直列の順を入れ替えただけなので、I1 は変わらない。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図5 汎用オシロでの測り方
 style:
   standard: jis
 parts:

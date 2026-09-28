@@ -90,6 +90,17 @@ wires:
 | Scope | CH1 = 1 次巻線の両端 (V1)。CH2 = Rs1 の両端 (差動、I0 = 読み ÷ 4.7 kΩ) |
 | Measure | CH2 の CH1 に対する Phase (φ0)。Average を 16 回以上にして雑音を減らす |
 
+CH2 は CH1 の約 1/40 しかないので、CH2 だけ 20 mV/div に上げてある。
+
+```scope
+title: 図3 励磁電流の分 (CH2、20 mV/div) は V1 (CH1、1 V/div) より 84° 遅れる
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 2V, range: 1V/div}
+ch2: {wave: sine 1kHz 47.2mV phase -84deg, range: 20mV/div}
+measure: [vmax, freq, phase]
+```
+
 ### オシロスコープと発振器
 
 汎用の計器での読み替えは[回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md) と
@@ -97,10 +108,10 @@ wires:
 
 AD の CH2 は Rs1 の両端を差動で挟んでいる。Rs1 の電圧 (47 mV) は振れ (2 V) の 2 % ほどしかないので、
 2 本の先端で引く方法は使えない。8-1 と同じく **Rs1 を 1 次巻線の GND 側へ移し**、CH2 の 1 本で
-直に読む (図3)。2 次は開放のままで、どこにもクリップを当てない (1 次の GND だけが大地につながる)。
+直に読む (図4)。2 次は開放のままで、どこにもクリップを当てない (1 次の GND だけが大地につながる)。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図4 汎用オシロでの測り方
 style:
   standard: jis
 parts:

@@ -82,15 +82,35 @@ notes:
 | Wavegen | W1: Sine、1 kHz、Amplitude 1 V |
 | Scope | CH1・CH2 とも DC 結合。Measure で CH1 に対する CH2 の Phase を読む |
 
+L と C の 2 つの画面。電流 (CH2) は mV の桁なので、CH1 と違う V/div で大きく見せている。
+
+```scope
+title: 図3 L — 電流 (CH2、5 mV/div) が電圧 (CH1) より 90° 遅れる
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+ch2: {wave: sine 1kHz 15.9mV phase -90deg, range: 5mV/div}
+measure: [vmax, phase]
+```
+
+```scope
+title: 図4 C — 電流 (CH2、2 mV/div) が電圧 (CH1) より 90° 進む
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+ch2: {wave: sine 1kHz 6.28mV phase 90deg, range: 2mV/div}
+measure: [vmax, phase]
+```
+
 ### オシロスコープと発振器
 
 AD の CH2 は Rs の両端を差動で挟むが、汎用オシロのグランドクリップは大地につながっていて挟めない
 ([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)、
 [0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。Rs の電圧は 6〜16 mV と小さく、
-CH1 − CH2 の引き算では 8 bit の分解能に埋もれるので、0-3 の図3 と同じく **Rs を GND 側へ移す** (図3)。
+CH1 − CH2 の引き算では 8 bit の分解能に埋もれるので、0-3 の図3 と同じく **Rs を GND 側へ移す** (図5)。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図5 汎用オシロでの測り方
 style:
   standard: jis
   pitch: 1.2

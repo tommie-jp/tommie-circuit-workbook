@@ -78,16 +78,25 @@ wires:
 | Wavegen | W1: Sine、1 kHz、Amplitude 1 V |
 | Scope | CH1・CH2 とも DC 結合。Measure で Amplitude と、CH1 に対する CH2 の Phase を読む |
 
+```scope
+title: 図3 V_R (CH1) 0.53 V に対して V_C (CH2) 0.85 V が 90° 遅れる
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.532V, range: 250mV/div}
+ch2: {wave: sine 1kHz 0.847V phase -90deg, range: 250mV/div}
+measure: [vmax, phase]
+```
+
 ### オシロスコープと発振器
 
 3-3 と同じ組み方になる。AD の CH1 は R1 の両端を差動で挟む (1− が 10 列) が、汎用オシロの
 グランドクリップは大地につながっていて 10 列には当てられない
 ([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)、
 [0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。V_R (0.53 V) は振れ (1 V) の半分あり
-8 bit でも埋もれないので、**回路はそのままで 2 本の先端を当て、V_R を CH1 − CH2 で引く** (図3)。
+8 bit でも埋もれないので、**回路はそのままで 2 本の先端を当て、V_R を CH1 − CH2 で引く** (図4)。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図4 汎用オシロでの測り方
 style:
   standard: jis
   pitch: 1.2
@@ -124,7 +133,8 @@ wires:
 | 電流の振幅 I = V / Z | 0.53 mA | 回路に流れる電流 |
 | CH1 (V_R = I × R) | 0.53 V | 電流と同位相 |
 | CH2 (V_C = I × X_C) | 0.85 V | 電流より 90° 遅れる |
-| CH2 の CH1 に対する位相 | −58° | ベクトル図の角度 θ (電圧が電流より遅れる) |
+| CH2 の CH1 に対する位相 | −90° | V_C は V_R (電流と同位相) より 90° 遅れる |
+| 電源電圧 V と電流の角 θ | −58° | ベクトル図の角度 (電圧が電流より遅れる)。V_R と V_C の振幅の比から求める |
 
 **ベクトルで確かめる**: √(V_R² + V_C²) = √(0.53² + 0.85²) ≈ 1.00 V。
 これが電源の振幅 (1 V) に一致する。テスターで V_R と V_C を測って単純に

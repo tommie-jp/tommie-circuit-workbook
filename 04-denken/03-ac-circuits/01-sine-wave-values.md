@@ -77,6 +77,17 @@ wires:
 半周期平均 = 2/π × V_m になる。1 周期まるごと表示すると Average は 0 に
 近づいてしまうので、必ず半周期に絞る。
 
+波形を丸ごと表示した画面。正の半周期は X1 (0) から 0.5 ms まで、X2 はその真ん中の山に置いてある。
+
+```scope
+title: 図3 最大値 1 V・実効値 0.707 V、1 周期の平均は 0
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+cursors: [0, 250us]
+measure: [vmax, rms, avg, freq]
+```
+
 ### オシロスコープと発振器
 
 W1 → FG の OUT (High-Z)、芯を 5 列、外皮を GND のレール。1+ → CH1 のプローブの先端を 5 列、

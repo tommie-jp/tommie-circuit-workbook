@@ -83,6 +83,18 @@ wires:
 | Wavegen | W1: Square、2 kHz、Amplitude 1 V、Offset 1 V (0 V〜2 V の方形波) |
 | Scope | CH1 = 入力、CH2 = R1 の両端 (差動、電流の代わり)。Time base は 10 µs/div 前後 |
 
+R1 の両端 (CH2) は電流 × 1 kΩ なので、RC の充電と同じ形で τ = L / R = 10 µs で立ち上がる。
+
+```scope
+title: 図3 立ち上がりから 1τ (10 µs) で電流 (CH2) は 63 % に届く
+time: 10us/div
+trigger: ch1 rising 1V
+ch1: {wave: square 2kHz 1V offset 1V, range: 500mV/div, position: -3div}
+ch2: {wave: ch1 | rc 10us, range: 500mV/div, position: -3div}
+cursors: [0, 10us]
+measure: [vmax, rise]
+```
+
 ### オシロスコープと発振器
 
 AD 版は CH2 を R1 の両端に差動で当てる (2− は中間点)。汎用オシロでは
@@ -90,11 +102,11 @@ AD 版は CH2 を R1 の両端に差動で当てる (2− は中間点)。汎用
 L1 を短絡して回路が変わる ([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md) の落とし穴)。
 
 **回路はそのまま、入力と中間点を GND 基準で測り、Math の CH1 − CH2 で R1 の両端を
-読む** (図3)。R1 の両端は 0〜1.9 V で、振れ (2 V) のほぼ全部なので、8 bit でも
+読む** (図4)。R1 の両端は 0〜1.9 V で、振れ (2 V) のほぼ全部なので、8 bit でも
 埋もれない。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図4 汎用オシロでの測り方
 parts:
   V1: square a1 d1 1 l=$\mathrm{FG}$
   M1: voltmeter a4 d4 l=$\mathrm{CH1}$

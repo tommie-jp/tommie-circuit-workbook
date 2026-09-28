@@ -94,6 +94,28 @@ wires:
 | Wavegen | W1: Sine、1 kHz、Amplitude 1 V |
 | Scope | CH1 = 受電端電圧。CH2 = Rline の両端 (I = 読み ÷ 10 Ω)。Measure で振幅と位相 |
 
+CH2 は CH1 のちょうど 1/10 なので、CH2 を 50 mV/div にすると 2 本が重なる。CH1 を上、CH2 を下へ
+2 div ずつずらして並べた。CH1 と CH2 はどちらも抵抗の両端で同じ電流を見ているので、位相はそろう。
+線路の L による遅れは W1 に対するもので、この 2 ch の間には出ない。
+
+```scope
+title: 図3 S1 を開く (R + L の線路) — CH1 は 500 mV/div、CH2 は 50 mV/div
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.789V, range: 500mV/div, position: 2div}
+ch2: {wave: sine 1kHz 78.9mV, range: 50mV/div, position: -2div}
+measure: [vmax, freq, phase]
+```
+
+```scope
+title: 図4 S1 を閉じる (R だけの線路) — 同じ V/div で CH1・CH2 とも大きくなる
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.909V, range: 500mV/div, position: 2div}
+ch2: {wave: sine 1kHz 90.9mV, range: 50mV/div, position: -2div}
+measure: [vmax, freq, phase]
+```
+
 ### オシロスコープと発振器
 
 W1 は FG の OUT (High-Z、1 kHz、振幅 1 V。Vpp で入れる機種なら 2 Vpp) に読み替える
@@ -102,11 +124,11 @@ W1 は FG の OUT (High-Z、1 kHz、振幅 1 V。Vpp で入れる機種なら 2 
 (12 列と 16 列) を差動で挟む。汎用オシロのグランドクリップは大地につながっていて、FG の GND も
 同じ大地につながっているので、16 列に当てると Lline と Rload が GND に落ち、12 列に当てると FG の
 出力を GND へ短絡する。Rline の電圧は 80〜90 mV で、振れ (1 V) の 1 割に満たず、CH1 − CH2 では
-8 bit の分解能に埋もれる。そこで **Rline を戻りの線 (Rload と GND の間) へ移す** (図3)。
+8 bit の分解能に埋もれる。そこで **Rline を戻りの線 (Rload と GND の間) へ移す** (図5)。
 線路の抵抗は行きと帰りのどちらにあっても、直列なので電流と損失は変わらない。試験の図とは位置が変わる。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図5 汎用オシロでの測り方
 style:
   standard: jis
   pitch: 1.2

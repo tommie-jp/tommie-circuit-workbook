@@ -86,16 +86,27 @@ wires:
 **電流の上限**: AD の波形発生器は 10 mA まで。この回路の線電流は最大値で
 5.9 mA なので余裕がある。
 
+電流 (CH2) は数十 mV なので、CH1 と違う V/div にしてある。
+
+```scope
+title: 図3 線電流 (CH2、20 mV/div) が受電端の電圧 (CH1) より 53° 遅れる
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.462V, range: 200mV/div}
+ch2: {wave: sine 1kHz 58.9mV phase -53.2deg, range: 20mV/div}
+measure: [vmax, rms, phase]
+```
+
 ### オシロスコープと発振器
 
 AD の CH2 は Rs の両端を差動で挟む (2− が 10 列)。汎用オシロのグランドクリップは大地につながって
 いるので、10 列には当てられない ([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)、
 [0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。Rs の電圧は最大 59 mV と小さく、
 CH1 − CH2 の引き算では 8 bit の分解能に埋もれるので、0-3 と同じく **Rs を GND 側 (戻りの線) へ移す**
-(図3)。Rs は戻りの線に入っても、線路の抵抗の役はそのまま。
+(図4)。Rs は戻りの線に入っても、線路の抵抗の役はそのまま。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図4 汎用オシロでの測り方
 style:
   standard: jis
   pitch: 1.2

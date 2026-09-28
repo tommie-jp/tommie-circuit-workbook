@@ -96,12 +96,32 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Sine、1 kHz、Amplitude 0.5 V、Offset 0 V |
-| Scope | CH1 = 受電端の電圧 v、CH2 = Rs の電圧 (= 10 Ω × i)。Range は CH1 が 100 mV/div、CH2 が 20 mV/div。Average を 16 回 |
+| Scope | CH1 = 受電端の電圧 v、CH2 = Rs の電圧 (= 10 Ω × i)。Range は CH1 が 200 mV/div、CH2 が 20 mV/div。Average を 16 回 |
 | Math | M1 = C1 × C2 / 10 (瞬時電力 p、単位 W)。Measure で M1 の Average が有効電力 P |
 | Measure | CH1 と CH2 の RMS、CH1 に対する CH2 の Phase (位相差 θ。cos θ が力率) |
 
 **電流の上限**: AD の波形発生器は 10 mA まで。この回路の線電流は最大値で 5.9 mA。
 振幅を上げるなら 0.8 V まで (9.4 mA)。
+
+C なしと C = 1.5 µF の 2 つの画面。電流 (CH2) は数十 mV なので、CH1 と違う V/div にしてある。
+
+```scope
+title: 図3 C なし — 線電流 (CH2、20 mV/div) は 5.9 mA、53° 遅れる
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.462V, range: 200mV/div}
+ch2: {wave: sine 1kHz 58.9mV phase -53.2deg, range: 20mV/div}
+measure: [vmax, rms, phase]
+```
+
+```scope
+title: 図4 C = 1.5 µF — 線電流 (CH2) は 3.6 mA に減り、遅れは 6°
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.465V, range: 200mV/div}
+ch2: {wave: sine 1kHz 35.6mV phase -5.8deg, range: 20mV/div}
+measure: [vmax, rms, phase]
+```
 
 ### オシロスコープと発振器
 
@@ -109,11 +129,11 @@ AD の CH2 は Rs の両端を差動で挟む (2− が 10 列)。汎用オシ�
 いるので、10 列には当てられない ([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)、
 [0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。Rs の電圧は最大 36〜59 mV で、
 受電端 (0.46 V) との差を 8 bit で引くと分解能に埋もれる。そこで 3-6 と同じく **Rs を GND 側
-(戻りの線) へ移す** (図3)。負荷の枝もコンデンサの枝も Rs を通って戻るので、Rs は線電流を測り、
+(戻りの線) へ移す** (図5)。負荷の枝もコンデンサの枝も Rs を通って戻るので、Rs は線電流を測り、
 線路の抵抗の役もそのまま。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図5 汎用オシロでの測り方
 style:
   standard: jis
   pitch: 1.2

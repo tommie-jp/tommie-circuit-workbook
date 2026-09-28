@@ -80,6 +80,16 @@ wires:
 | Wavegen | W1: Square、100 Hz、Amplitude 1 V、Offset 1 V (0 V〜2 V の方形波) |
 | Scope | CH1 = 入力、CH2 = 出力。Time base は 1 ms/div 前後、Trigger は CH1 の立ち上がり |
 
+```scope
+title: 図3 立ち上がりから 1τ (1 ms) で出力 (CH2) は 63 % に届く
+time: 1ms/div
+trigger: ch1 rising 1V
+ch1: {wave: square 100Hz 1V offset 1V, range: 500mV/div, position: -3div}
+ch2: {wave: ch1 | rc 1ms, range: 500mV/div, position: -3div}
+cursors: [0, 1ms]
+measure: [vmax, rise]
+```
+
 ### オシロスコープと発振器
 
 1− と 2− は GND のレールなので、測り方は GND 基準のままでよい

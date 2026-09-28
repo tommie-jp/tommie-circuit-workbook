@@ -78,6 +78,16 @@ wires:
 | Wavegen | W1: Square、100 Hz、Amplitude 1 V、Offset 1 V (5-1 と同じ) |
 | Scope | CH1 = 入力、CH2 = 出力。Trigger は CH1 の**立ち下がり**にする |
 
+```scope
+title: 図3 立ち下がりから 1τ (1 ms) で出力 (CH2) は 37 % まで下がる
+time: 1ms/div
+trigger: ch1 falling 1V
+ch1: {wave: square 100Hz 1V offset 1V, range: 500mV/div, position: -3div}
+ch2: {wave: ch1 | rc 1ms, range: 500mV/div, position: -3div}
+cursors: [0, 1ms]
+measure: [vmax, vmin]
+```
+
 ### オシロスコープと発振器
 
 発振器とプローブのつなぎ方は 5-1 の「オシロスコープと発振器」と同じ

@@ -79,16 +79,25 @@ wires:
 | Wavegen | W1: Sine、Amplitude 1 V。周波数を 500 Hz〜2 kHz の間で振る |
 | Scope | CH1・CH2 とも DC 結合。Measure で CH1 の Amplitude (÷ R1 で電流) を読む |
 
+```scope
+title: 図3 共振 (1.59 kHz) — V_R (CH1) が 1 V、L + C (CH2) は 0 V
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1.59kHz 1V, range: 500mV/div}
+ch2: {wave: dc 0V, range: 500mV/div}
+measure: [vmax, freq]
+```
+
 ### オシロスコープと発振器
 
 AD の CH1 は R1 の両端を差動で挟む (1− が 10 列)。汎用オシロのグランドクリップは大地につながって
 いるので、10 列には当てられない ([回路の本の 0-3](../../01-circuits/00-measure/03-oscilloscope.md)、
 [0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。共振から外れると V_R は 50 mV ほど
 (500 Hz) まで下がり、CH1 − CH2 で引くと 8 bit の分解能に埋もれる。そこで **R1 を GND 側へ移し**
-(図3)、電流を 1 本の先端で直に読む。直列なので並べる順を変えても電流は変わらない。
+(図4)、電流を 1 本の先端で直に読む。直列なので並べる順を変えても電流は変わらない。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図4 汎用オシロでの測り方
 style:
   standard: jis
   pitch: 1.2

@@ -106,6 +106,17 @@ wires:
 | Scope | CH1 = 入力 (Cin の手前)、CH2 = 出力 (Cout の先) |
 | Measure | CH1・CH2 の Amplitude |
 
+入力は 50 mV と小さいので、CH1 は 20 mV/div、CH2 は 100 mV/div と V/div を分けてある。
+
+```scope
+title: 図3 出力 (CH2) は入力 (CH1) の 4.68 倍で上下が逆 (V/div は別)
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 50mV, range: 20mV/div}
+ch2: {wave: ch1 | gain -4.68, range: 100mV/div}
+measure: [vmax, phase]
+```
+
 ### オシロスコープと発振器
 
 1− と 2− は GND のレールなので、測り方は GND 基準のままでよい

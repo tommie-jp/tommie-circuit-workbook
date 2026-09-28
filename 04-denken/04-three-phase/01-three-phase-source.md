@@ -118,6 +118,26 @@ notes:
 | Scope (2 回目) | CH2 を U1 の 6 番 (3 相目) に挿し替える。CH1 は 1 相目のまま |
 | Measure | CH1 に対する CH2 の Phase (位相差) と、CH1・CH2 の振幅 (Amplitude) |
 
+1 回目は 2 相目が 120° 遅れ、2 回目は 3 相目が 120° 進む。振幅はどれも 1 V のままだ。
+
+```scope
+title: 図3 1 回目 — 2 相目 (CH2) は 1 相目 (CH1) より 120° 遅れる
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+ch2: {wave: sine 1kHz 1V phase -120deg, range: 500mV/div}
+measure: [vmax, phase]
+```
+
+```scope
+title: 図4 2 回目 — 3 相目 (CH2) は 1 相目 (CH1) より 120° 進む
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+ch2: {wave: sine 1kHz 1V phase 120deg, range: 500mV/div}
+measure: [vmax, phase]
+```
+
 ### オシロスコープと発振器
 
 1− と 2− は GND のレールなので、測り方は GND 基準のままでよい。端子の読み替えは
