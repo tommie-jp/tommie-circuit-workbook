@@ -204,7 +204,7 @@ wires:
 | ANT (Cant の先) | 28 列の空き穴 (j28。ループ線は h28 に挿し替える)。DC 結合 |
 | 音声 (発振器の端子) | Cmod の発振器側、10 列の空き穴 (c10)。DC 結合 |
 | 足 8 (555 の電源) | 16 列の空き穴 (j16)。AC 結合で音声の揺れだけを見る |
-| 搬送波を見るとき (図5・図7) | CH1 足 3、CH2 ANT (図5)。2 V/div、0.5 µs/div、トリガは CH1 の立ち上がり |
+| 搬送波を見るとき (図5・図7) | CH1 足 3 (2 V/div)、CH2 ANT (図5、1 V/div)。0.5 µs/div、トリガは CH1 の立ち上がり |
 | 音声を見るとき (図6) | CH1 音声、CH2 足 8。どちらも 200 mV/div、200 µs/div、トリガは CH1 の立ち上がり |
 | 変調の包絡線を見るとき | CH1 足 3 (1 V/div)、CH2 足 8。200 µs/div、トリガは CH2 (音声) の立ち上がり |
 | スペアナのつなぎ方 | 足 3 の空き穴 (j22) から **10 kΩ (Rsa) と 0.01 µF (Csa) を直列に**通して入力 (50 Ω) へ (図4。j22 → j19 の線 → Rsa → Csa → j10)。入力に届くのは搬送波で約 −27 dBm (計算値) で、入力の上限に十分収まる。**足 3 を直に入力へつながない** (4〜5 V の方形波は入力の上限を超える) |
@@ -355,7 +355,7 @@ title: 図5 無変調の搬送波 — 足3 (CH1) と ANT (CH2)
 time: 0.5us/div
 trigger: ch1 rising 2.2V
 ch1: {wave: square 686kHz 2.2V offset 2.2V duty 52%, range: 2V/div, position: 0.5div}
-ch2: {wave: ch1 | gain 0.87 | offset -1.99V, range: 2V/div, position: -2.5div}
+ch2: {wave: ch1 | gain 0.87 | offset -1.99V, range: 1V/div, position: -2div}
 measure: [vpp, vmax, vmin, freq, duty]
 ```
 

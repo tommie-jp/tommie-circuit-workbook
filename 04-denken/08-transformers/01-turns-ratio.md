@@ -105,16 +105,16 @@ wires:
 | Scope (1 回目) | CH1 = 1 次巻線の両端 (V1)。CH2 = Rs1 の両端 (差動、I1 = 読み ÷ 100 Ω) |
 | Scope (2 回目) | CH1 を RL の両端に挿し替え、V2 を読む |
 
-1 回目の画面。CH2 は CH1 の約 1/100 しかないので、CH2 だけ 20 mV/div に上げてある (図4 と同じ)。
+1 回目の画面。CH2 は CH1 の約 1/100 しかないので、CH2 だけ 10 mV/div に上げ、2 本が重ならないよう CH1 を上、CH2 を下にずらしてある。
 2 次の負荷は抵抗 (8 Ω) なので、I1 は V1 と同じ位相になる。V1 と I1 は Rs1 で 1 % 下がった値
 (1.98 V・19.8 mV) で描いた。
 
 ```scope
-title: 図3 1 回目 — V1 (CH1、1 V/div) と I1 の分 (CH2、20 mV/div) は同じ位相
+title: 図3 1 回目 — V1 (CH1、1 V/div) と I1 の分 (CH2、10 mV/div) は同じ位相
 time: 200us/div
 trigger: ch1 rising 0V
-ch1: {wave: sine 1kHz 1.98V, range: 1V/div}
-ch2: {wave: sine 1kHz 19.8mV, range: 20mV/div}
+ch1: {wave: sine 1kHz 1.98V, range: 1V/div, position: 2div}
+ch2: {wave: sine 1kHz 19.8mV, range: 10mV/div, position: -2div}
 measure: [vmax, freq, phase]
 ```
 
