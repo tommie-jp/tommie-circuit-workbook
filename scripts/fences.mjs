@@ -8,7 +8,13 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
-export const FENCES = ['circuit', 'breadboard', 'perfboard', 'vna'];
+export const FENCES = ['circuit', 'breadboard', 'perfboard', 'vna', 'scope'];
+
+/**
+ * 短い綴り。breadboard-fence 0.13.0・perfboard-fence 0.11.0 からこちらが正で、長い綴りは
+ * 別名として動き続ける。検査では道具の名前 (長い綴り) に寄せて数える。
+ */
+const ALIASES = { bread: 'breadboard', perf: 'perfboard' };
 
 /** フェンスの道具 (`dist/cli.cjs`)。依存に入れた tgz の中にある。 */
 export function cliPath(root, fence) {
@@ -78,7 +84,8 @@ export function fencesIn(text) {
     open = { char: match[1][0], length: match[1].length };
 
     const name = info.split(/\s+/)[0];
-    if (FENCES.includes(name)) found.add(name);
+    const fence = Object.hasOwn(ALIASES, name) ? ALIASES[name] : name;
+    if (FENCES.includes(fence)) found.add(fence);
     else if (name !== '' && looksLikeFence(name)) misspelled.push({ name, line: index + 1 });
   });
 

@@ -10,11 +10,11 @@ test('finds the three fences a file uses', () => {
 });
 
 test('flags names the command line tools would silently skip', () => {
-  const { found, misspelled } = fencesIn('```bread\n```\n```perf\n```\n```Circuit\n```\n```yaml\n```\n```circuitikz\n```\n```breadbord\n```\n');
+  const { found, misspelled } = fencesIn('```Circuit\n```\n```yaml\n```\n```circuitikz\n```\n```breadbord\n```\n```scop\n```\n');
 
   assert.deepEqual([...found], []);
-  assert.deepEqual(misspelled.map((fence) => fence.name), ['bread', 'perf', 'Circuit', 'breadbord']);
-  assert.deepEqual(misspelled.map((fence) => fence.line), [1, 3, 5, 11]);
+  assert.deepEqual(misspelled.map((fence) => fence.name), ['Circuit', 'breadbord', 'scop']);
+  assert.deepEqual(misspelled.map((fence) => fence.line), [1, 7, 9]);
 });
 
 test('reads every fence form the command line tools read', () => {
@@ -54,4 +54,18 @@ test('flags a near miss of vna, but not short names of other languages', () => {
   const text = ['```VNA', '```', '```vnaa', '```', '```ini', '```', '```png', '```', '```lua', '```', '```vue', '```'].join('\n');
 
   assert.deepEqual(fencesIn(text).misspelled.map((fence) => fence.name), ['VNA', 'vnaa']);
+});
+
+test('finds the scope fence (the oscilloscope screen) and flags a near miss', () => {
+  const text = ['```scope', 'ch1: sine 1kHz 1V', '```', '```scop', '```'].join('\n');
+  const { found, misspelled } = fencesIn(text);
+  assert.deepEqual([...found], ['scope']);
+  assert.deepEqual(misspelled.map((fence) => fence.name), ['scop']);
+});
+
+test('reads the short names bread and perf as breadboard and perfboard', () => {
+  const text = ['```bread', '```', '```perf', '```'].join('\n');
+  const { found, misspelled } = fencesIn(text);
+  assert.deepEqual([...found].sort(), ['breadboard', 'perfboard']);
+  assert.deepEqual(misspelled, []);
 });
