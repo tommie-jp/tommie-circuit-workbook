@@ -50,6 +50,8 @@ wires:
   - e1 -- e4
   - T1.B1 -| c7f0
   - T1.B2 -| d7f0
+notes:
+  - text d7f0e5 left small: (16 Ω を 2 本並列)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/01-turns-ratio-1.svg)
@@ -59,7 +61,7 @@ wires:
   1 % ほどなので、電圧比・電流比の計算にはほぼ効かない
 - M1 (CH1) は 1 次巻線の両端、M2 (CH2) は Rs1 の両端 (差動)。1 回目はこの配線で
   V1 と I1 (= 読みの 1/100) を読む
-- RL (8 Ω) は 2 次巻線に合わせた負荷。2 回目は CH1 を RL の両端に挿し替えて V2 を読む
+- RL (8 Ω) は 2 次巻線に合わせた負荷。8 Ω は E24 に無いので、16 Ω を 2 本並列にして作る。2 回目は CH1 を RL の両端に挿し替えて V2 を読む
   (2 ch しか無いので 2 回に分けて測る)
 
 ## 実体配線図
@@ -71,7 +73,8 @@ board: half
 parts:
   Rs1: resistor e3 e7 100
   T1: transformer c15 c18 f15 f18 10kto8
-  RL: resistor h15 h18 8
+  RL1: resistor h15 h18 16
+  RL2: resistor j15 j18 16
   AD:
     type: device
     at: top
@@ -93,7 +96,8 @@ wires:
 
 - T1 の 1 次リード (10 kΩ側) を 15・18 列の上ブロック、2 次リード (8 Ω側) を同じ
   15・18 列の下ブロックに挿す。上下は別ネットなので、4 本足がそのまま 1 次・2 次を分ける
-- RL は 15・18 列の下ブロックに挿すだけで T1 の 2 次と並列になる (列でつながる)
+- RL は 16 Ω の 2 本 (RL1 を h 行、RL2 を j 行)。15・18 列の下ブロックに挿すだけで、
+  2 本が並列になり T1 の 2 次ともつながる (列でつながる)
 - Rs1 は 3 列と 7 列。3 列 (W1 側) は黄の線で 11 列へ、7 列 (T1 側) は橙の線で
   15 列 (T1 の 1 次) へ延ばし、AD の足の並びどおりに左から挿せるようにしてある
 - CH2 (2+/2−) は Rs1 の両端 (11 列と 15 列) にあて、I1 を読む。CH1 (1+/1−) は
@@ -171,6 +175,7 @@ wires:
   - e8 -- e9 -- e11
 notes:
   - text d11a4 left: (2回目)
+  - text d9e2 left small: (16 Ω を 2 本並列)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/01-turns-ratio-2.svg)

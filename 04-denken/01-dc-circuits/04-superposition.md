@@ -29,7 +29,7 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  E1: battery a1 e1 9
+  E1: battery a1 e1 5
   R1: resistor a1 a3 400
   R3: resistor a5 e5 100
   R2: resistor a7 a9 200
@@ -54,7 +54,7 @@ parts:
   R1: resistor a1 a3 400
   R3: resistor a5 e5 100
   R2: resistor a7 a9 200
-  E2: battery a9 e9 6
+  E2: battery a9 e9 3
   G1: ground e5
 wires:
   - a3 -- a5
@@ -65,8 +65,8 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/04-superposition-2.svg)
 
-- 図1 は 1-3 の E2 (6 V) を短絡 (素の線 SH1) に置き換えた回路
-- 図2 は 1-3 の E1 (9 V) を短絡に置き換えた回路
+- 図1 は 1-3 の E2 (3 V) を短絡 (素の線 SH1) に置き換えた回路
+- 図2 は 1-3 の E1 (5 V) を短絡に置き換えた回路
 - どちらも R1・R2 が節点で並列になり、そこに R3 がつながる形
 
 ## 実体配線図
@@ -78,18 +78,19 @@ wires:
 title: 図3 E1 だけを残す配線 (E2 の代わりに線)
 board: half
 parts:
-  R1: resistor c5 c10 400
+  R1a: resistor c5 c8 200
+  R1b: resistor e8 e11 200
   R2: resistor c13 c18 200
   R3: resistor f15 f20 100
   E1:
     type: device
     at: top
-    label: "電池 9V (E1)"
+    label: "電源 5V (E1)"
     pins: ["+", "-"]
 wires:
   - E1.+ -- c3 red
   - E1.- -- -t6 black
-  - b10 -- b13 orange
+  - b11 -- b13 orange
   - d13 -- f13 green
   - g20 -- -b20 black
   - -b27 -- -t27 black
@@ -103,6 +104,8 @@ notes:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/04-superposition.svg)
 
+- R1 (400 Ω) は 1-3 と同じく 200 Ω の 2 本 (R1a・R1b) の直列。電源と抵抗の値は
+  1-3 の部品の表のとおり (E1 = 5 V、E2 = 3 V)
 - E2 を板から外し、E2 がつながっていた 20 列を GND レール (−t) に直結する
   (最後の 1 行)。3〜5 列・13〜15 列 (下段)・18〜20 列の隙間には引き続きテスター
   (A1・A3・A2) を直列に入れる。18〜20 列は R2 の枝なので、A2 を入れないときも
@@ -116,17 +119,17 @@ notes:
 
 ## 見るべき値
 
-計算値。1-3 の値 (I1 = 15.0 mA、I2 = 15.0 mA、I3 = 30.0 mA) と比べる。
+計算値。1-3 の値 (I1 = 8.57 mA、I2 = 7.14 mA、I3 = 15.71 mA) と比べる。
 
 | 状態 | I1' (R1 の枝) | I2' (R2 の枝) | I3' (R3 の枝) |
 | --- | --- | --- | --- |
-| E1 だけ (図1) | 19.29 mA | −6.43 mA (E2 の枝を逆向きに流れる) | 12.86 mA |
-| E2 だけ (図2) | −4.29 mA (E1 の枝を逆向きに流れる) | 21.43 mA | 17.14 mA |
-| 足し合わせ | 19.29 − 4.29 = **15.0 mA** | 21.43 − 6.43 = **15.0 mA** | 12.86 + 17.14 = **30.0 mA** |
+| E1 だけ (図1) | 10.71 mA | −3.57 mA (E2 の枝を逆向きに流れる) | 7.14 mA |
+| E2 だけ (図2) | −2.14 mA (E1 の枝を逆向きに流れる) | 10.71 mA | 8.57 mA |
+| 足し合わせ | 10.71 − 2.14 = **8.57 mA** | 10.71 − 3.57 = **7.14 mA** | 7.14 + 8.57 = **15.71 mA** |
 
 分かること:
 
-- **足し合わせると 1-3 で測った値 (15.0 mA・15.0 mA・30.0 mA) にぴったり戻る。**
+- **足し合わせると 1-3 で測った値 (8.57 mA・7.14 mA・15.71 mA) にぴったり戻る。**
   重ね合わせの理が成り立つことが確かめられる
 - 一方の電源だけを残すと、もう一方の枝には**逆向きの電流**が流れる
   (マイナスの符号)。テスターで測るときは針の振れる向き (デジタルなら

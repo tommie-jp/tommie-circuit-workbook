@@ -41,6 +41,7 @@ wires:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/05-electromagnetic-force.svg)
 
 - 2-4 と同じ回路 (電池 3 V、押しボタン S1、電流制限抵抗 R1 = 10 Ω 1 W 以上)。
+  電源を 5 V でなく 3 V にする理由も 2-4 と同じ (R1 の発熱を小さくするため。2-4 の部品の表)。
   R1 から先の導線を、軽くて動きやすい細い電線に替える
 
 ## 手順

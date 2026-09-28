@@ -30,7 +30,7 @@ title: 図1 直列つなぎ (分圧)
 style:
   standard: jis
 parts:
-  B1: battery a3 a1 9
+  B1: battery a3 a1 5
   R1: resistor a3 a5 1k
   R2: resistor a5 a7 2k
   V1: voltmeter e3 e5
@@ -49,6 +49,7 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/02-series-parallel-1.svg)
 
+- B1 は 5 V の電源 (USB の 5 V か AD の Supplies。単 3 電池 3 本の 4.5 V でも可)
 - B1 の電流は R1 → R2 と 1 本道を通る。V1 が R1 の両端、V2 が R2 の両端
 
 ```circuit
@@ -56,7 +57,7 @@ title: 図2 並列つなぎ (分流)
 style:
   standard: jis
 parts:
-  B1: battery a1 c1 9
+  B1: battery a1 c1 5
   A0: ammeter a1 a3
   A1: ammeter a5 c5
   R1: resistor c5 e5 1k
@@ -72,7 +73,7 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/02-series-parallel-2.svg)
 
-- A0 が電池から出る全電流。A1・A2 がそれぞれの抵抗の枝を流れる電流
+- A0 が電源から出る全電流。A1・A2 がそれぞれの抵抗の枝を流れる電流
 
 ## 実体配線図
 
@@ -85,7 +86,7 @@ parts:
   BAT:
     type: device
     at: top
-    label: 電池 9V
+    label: 電源 5V
     pins: ["+", "-"]
 wires:
   - BAT.+ -- b5 red
@@ -123,7 +124,7 @@ parts:
   BAT:
     type: device
     at: top
-    label: 電池 9V
+    label: 電源 5V
     pins: ["-", "+"]
 wires:
   - BAT.- -- -t2 black
@@ -141,7 +142,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/02-series-parallel-2.svg)
 
-- 図4 は 12 列が節点 (電池と AM0 の先。d 行の橙の線で 21 列へ延ばす)。
+- 図4 は 12 列が節点 (電源と AM0 の先。d 行の橙の線で 21 列へ延ばす)。
   AM1 を介して R1 が、AM2 を介して R2 がそれぞれ GND に落ちる。AM0 が全電流、AM1・AM2 が枝の電流をそのまま示す
 
 ## 計器の設定
@@ -152,23 +153,23 @@ wires:
 
 ## 見るべき値
 
-計算値 (V = 9 V、R1 = 1 kΩ、R2 = 2 kΩ)。
+計算値 (V = 5 V、R1 = 1 kΩ、R2 = 2 kΩ)。単 3 電池 3 本 (4.5 V) なら電圧・電流とも 0.9 倍になる。
 
 | 配線 | 測る所 | 期待する値 |
 | --- | --- | --- |
 | 直列 | 合成抵抗 | 3 kΩ |
-| 直列 | 電流 (共通) | 3.0 mA |
-| 直列 | V1 (R1 の電圧) | 3.0 V |
-| 直列 | V2 (R2 の電圧) | 6.0 V (V1 + V2 = 9 V) |
+| 直列 | 電流 (共通) | 1.67 mA |
+| 直列 | V1 (R1 の電圧) | 1.67 V |
+| 直列 | V2 (R2 の電圧) | 3.33 V (V1 + V2 = 5 V) |
 | 並列 | 合成抵抗 | 667 Ω |
-| 並列 | 全電流 (A0) | 13.5 mA |
-| 並列 | R1 の電流 (A1) | 9.0 mA |
-| 並列 | R2 の電流 (A2) | 4.5 mA (A1 + A2 = 13.5 mA) |
+| 並列 | 全電流 (A0) | 7.5 mA |
+| 並列 | R1 の電流 (A1) | 5.0 mA |
+| 並列 | R2 の電流 (A2) | 2.5 mA (A1 + A2 = 7.5 mA) |
 
 分かること:
 
 - **直列では大きいほうの抵抗 (R2) に大きい電圧が掛かる。** 分圧の比は
-  抵抗の比そのもの (1 : 2 なら電圧も 1 : 2 で 3 V : 6 V)
+  抵抗の比そのもの (1 : 2 なら電圧も 1 : 2 で 1.67 V : 3.33 V)
 - **並列では小さいほうの抵抗 (R1) に大きい電流が流れる。** 分流の比は
   抵抗の比の**逆** (1 : 2 の抵抗に 2 : 1 の電流)
 - 並列の合成抵抗 (667 Ω) は、小さいほう (1 kΩ) よりさらに小さくなる

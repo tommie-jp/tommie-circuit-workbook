@@ -29,7 +29,7 @@ style:
   standard: jis
 parts:
   B1: battery a1 e1 4.5
-  R1: resistor a1 a3 150
+  R1: resistor a1 a3 240
   D1: led a3 e3
   G1: ground e1
   V2: vsource a7 e7 5
@@ -44,7 +44,8 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/11-applications/circuit/01-inverse-square-law.svg)
 
-- 左側 (B1・R1・D1) が発光側。電池で LED を一定の電流 (約 10 mA) で光らせる
+- 左側 (B1・R1・D1) が発光側。電池で赤色 LED (V_F ≈ 2.0 V) を一定の電流
+  (4.5 V で約 10 mA) で光らせる
 - 右側 (V2・D2・R2) が受光側。D2 (フォトダイオード) を逆方向にバイアスし、
   光電流を R2 (100 kΩ) で電圧に変える。CH1 がその電圧
 - D1 と D2 を一直線上に向かい合わせ、間の距離 d を変えて測る
@@ -60,7 +61,7 @@ parts:
     at: top
     label: 電池 4.5V
     pins: ["+", "-"]
-  R1: resistor d3 d8 150
+  R1: resistor d3 d8 240
   D1: led/5mm b8(A) b10(K)
   SUP:
     type: device
@@ -86,7 +87,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/11-applications/breadboard/01-inverse-square-law.svg)
 
-- 左 (BAT・R1・D1) が発光側。電池 4.5 V を R1 (150 Ω) で電流を決めて LED を光らせる
+- 左 (BAT・R1・D1) が発光側。電池 4.5 V を R1 (240 Ω) で電流を決めて LED を光らせる
 - 右 (SUP・D2・R2) が受光側。AD の Supplies 5 V で D2 (フォトダイオード) を
   逆バイアスし、光電流を R2 (100 kΩ) で電圧に変える
 - D1 と D2 を板の外で向かい合わせに固定し、間の距離を変える (板には距離は描けない)
@@ -96,7 +97,7 @@ wires:
 
 | 計器 | 設定 |
 | --- | --- |
-| 電源 | LED 側は電池 4.5 V。フォトダイオード側は AD の Supplies 5 V |
+| 電源 | LED 側は 5 V (単 3 電池 3 本の 4.5 V でも可。図は電池。5 V なら LED の電流は約 13 mA)。フォトダイオード側は AD の Supplies 5 V |
 | Scope | CH1 = R2 の両端の電圧。Average を取ってから読む |
 
 ### オシロスコープと発振器

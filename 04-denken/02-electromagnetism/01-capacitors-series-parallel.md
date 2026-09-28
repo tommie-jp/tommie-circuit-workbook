@@ -31,7 +31,7 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  E1: battery c1 e1 9
+  E1: battery c1 e1 5
   R1: resistor c1 c3 10k
   S1: switch c3 c5
   C1: capacitor c5 c7 2.2u
@@ -55,7 +55,7 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  E1: battery c1 e1 9
+  E1: battery c1 e1 5
   R1: resistor c1 c3 10k
   S1: switch c3 c5
   C1: capacitor c7 e7 2.2u
@@ -68,6 +68,7 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/01-capacitors-series-parallel-2.svg)
 
+- E1 は 5 V の電源 (USB の 5 V か AD の Supplies。単 3 電池 3 本の 4.5 V でも可)
 - R1 (10 kΩ) は充電の突入電流を抑える電流制限抵抗。S1 を閉じるとコンデンサが
   充電される
 - 図1 は C1・C2 が 1 本道 (直列)、図2 は両方とも電源に直接つながる (並列)
@@ -85,7 +86,7 @@ parts:
   BAT:
     type: device
     at: top
-    label: "電池 9V"
+    label: "電源 5V"
     pins: ["+", "-"]
 wires:
   - BAT.+ -- a3 red
@@ -112,17 +113,17 @@ notes:
 
 ## 見るべき値
 
-計算値 (V = 9 V、C1 = 2.2 µF、C2 = 4.7 µF)。
+計算値 (V = 5 V、C1 = 2.2 µF、C2 = 4.7 µF)。単 3 電池 3 本 (4.5 V) なら電圧・電荷とも 0.9 倍になる。
 
 | 配線 | 測る所 | 期待する値 |
 | --- | --- | --- |
 | 直列 | 合成容量 | 1.5 µF |
-| 直列 | V1 (C1 の電圧) | 6.13 V |
-| 直列 | V2 (C2 の電圧) | 2.87 V (V1 + V2 = 9.0 V) |
+| 直列 | V1 (C1 の電圧) | 3.41 V |
+| 直列 | V2 (C2 の電圧) | 1.59 V (V1 + V2 = 5.0 V) |
 | 並列 | 合成容量 | 6.9 µF |
-| 並列 | C1・C2 の電圧 | どちらも 9.0 V |
-| 並列 | C1 の電荷 Q1 = C1 V | 19.8 µC |
-| 並列 | C2 の電荷 Q2 = C2 V | 42.3 µC |
+| 並列 | C1・C2 の電圧 | どちらも 5.0 V |
+| 並列 | C1 の電荷 Q1 = C1 V | 11.0 µC |
+| 並列 | C2 の電荷 Q2 = C2 V | 23.5 µC |
 
 分かること:
 

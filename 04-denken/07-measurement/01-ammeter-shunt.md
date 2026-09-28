@@ -36,6 +36,8 @@ parts:
   G2: ground c1
 wires:
   - c1 -- c5 -- c8
+notes:
+  - text b5e2 left small: (100 Ω を 2 本並列)
 style:
   standard: jis
 ```
@@ -44,7 +46,8 @@ style:
 
 - Rg (100 Ω) が検流計の内部抵抗の模型。実物の検流計の記号 (G1) は電流の道筋を
   示すためだけに置き、抵抗の値は Rg が持つ
-- Rs (50 Ω) が分流器。Rg と並列に入れる
+- Rs (50 Ω) が分流器。Rg と並列に入れる。50 Ω は E24 に無いので、100 Ω を 2 本並列にして作る
+  (ブレッドボードの Rs1・Rs2)
 - Rt (1 kΩ) は回路の外側の抵抗 (負荷) の代わり。値そのものは分流の比に関係しない
 
 ## 実体配線図
@@ -55,7 +58,8 @@ board: half
 parts:
   Rt: resistor c3 c8 1k
   Rg: resistor c15 c19 100
-  Rs: resistor e15 e19 50
+  Rs1: resistor g15 g19 100
+  Rs2: resistor i15 i19 100
   AD:
     type: device
     at: top
@@ -71,11 +75,15 @@ wires:
   - AD.2+ -- +t13 red
   - AD.2- -- a15 blue
   - a19 -- -t19 black
+  - e15 -- f15 green
+  - e19 -- f19 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/breadboard/01-ammeter-shunt.svg)
 
-- Rt (1 kΩ) の先で、Rg (100 Ω、検流計の模型) と Rs (50 Ω、分流器) が並列になる
+- Rt (1 kΩ) の先で、Rg (100 Ω、検流計の模型) と Rs (50 Ω、分流器) が並列になる。
+  Rs は 100 Ω の 2 本 (Rs1・Rs2) を下のブロックに挿し、15 列 (緑) と 19 列 (黒、GND) の線で
+  上のブロックの Rg と同じ列につなぐ
 - CH1 (1+) は Rg (= Rs) の両端 (GND 基準)。CH2 は Rt の両端の差動 (全電流)
 
 ## 計器の設定
@@ -109,6 +117,8 @@ wires:
   - b2 -- b4
   - b7 -- b8 -- b10
   - d2 -- d4 -- d8 -- d10 -- d13
+notes:
+  - text c10e2 left small: (100 Ω を 2 本並列)
 style:
   standard: jis
 ```
@@ -139,7 +149,7 @@ CH2 は Rt の電圧ではなく電源の電圧 (5.00 V、計算値) を読む�
 
 分かること:
 
-- **分流器の抵抗が小さいほど、逃がせる電流の割合が増える。** R_s を半分 (25 Ω)
+- **分流器の抵抗が小さいほど、逃がせる電流の割合が増える。** R_s を半分 (25 Ω、100 Ω を 4 本並列)
   にすると n はさらに増える (n = 1 + r_g/R_s の関係)
 - 実際の分流器は、検流計の個体ごとの r_g に合わせて精密な抵抗 (シャント抵抗)
   を使う。電流計の切り替えレンジは、この分流器を切り替えて作る
