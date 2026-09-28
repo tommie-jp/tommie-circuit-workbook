@@ -52,3 +52,11 @@ npm run all   # 試験・lint・全題の検査 (CI と同じ)
   マージは fast-forward のみ
 - フェンスの版は `package.json` の Release の URL で固定している。上げるときは
   URL を書き換えて `npm install` し、`npm run all` が通ることを確かめる
+
+## ToDO
+
+- [ ] 全回路：新skillに合っているか、確認、修正
+- [ ] 全回路：vna, スペクトラムアナライザで調べると良い回路に項目を追加
+- [ ] 必要な回路：vna, spectrum、graphフェンスを追加する
+
+- [ ] 全回路：LTspiceでシミュレートして正しいか確認、修正
