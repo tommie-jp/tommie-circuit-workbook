@@ -133,17 +133,17 @@ style:
 title: 図2 ブレッドボードに組む
 board: full
 parts:
-  A: switch b2 b4
-  RpdA: resistor i4 i2 10k
-  B: switch b6 b8
-  RpdB: resistor i8 i6 10k
-  CIN: switch b10 b12
-  RpdC: resistor i12 i10 10k
+  A: switch d2 d4
+  RpdA: resistor a4 -t4 10k
+  B: switch d6 d8
+  RpdB: resistor a8 -t8 10k
+  CIN: switch d10 d12
+  RpdC: resistor a12 -t12 10k
   U1: dip14 @ e14 CD4070
-  RS1: resistor a22 a25 330
-  DS1: led b25(A) b26(K) red
-  RS: resistor a28 a31 330
-  DS: led b31(A) b32(K) red
+  RS1: resistor d21 d25 330
+  DS1: led e25(A) e26(K) red
+  RS: resistor d28 d32 330
+  DS: led e32(A) e33(K) red
   U2: dip14 @ e37 CD4081
   RC1: resistor a45 a48 330
   DC1: led b48(A) b49(K) red
@@ -159,20 +159,17 @@ wires:
   - +t14 -- a14 red
   - +t37 -- a37 red
   - +t51 -- a51 red
-  - j2 -- -b2 black
-  - j6 -- -b6 black
-  - j10 -- -b10 black
   - j20 -- -b20 black
   - j43 -- -b43 black
   - j57 -- -b57 black
-  # 入力: スイッチの列を溝の下へ下ろして U1 へ、上の d・c 行で U2 へ
+  # 入力: スイッチの列を溝の下へ下ろして U1 へ、上の b・c 行で U2 へ
   - e4 -- f4 yellow
   - e8 -- f8 green
   - e12 -- f12 blue
   - g4 -- g14 yellow
   - h8 -- h15 green
   - j12 -- j19 blue
-  - d4 -- d35 yellow
+  - b4 -- b35 yellow
   - c8 -- c34 green
   - e35 -- f35 yellow
   - e34 -- f34 green
@@ -180,14 +177,14 @@ wires:
   - h34 -- h38 green
   # U1: 足3 → 足5 (S1)、S1 と S を LED へ、S1 と Cin を U2 へ
   - g16 -- g18 orange
-  - i18 -- i22 orange
-  - f22 -- e22 orange
-  - j22 -- j41 orange
+  - i18 -- i21 orange
+  - f21 -- e21 orange
+  - j21 -- j41 orange
   - h17 -- h28
   - f28 -- e28
   - g19 -- g42 blue
   - a26 -- -t26 black
-  - a32 -- -t32 black
+  - a33 -- -t33 black
   # U2: 足3 (C1) を LED と U3 の足1 へ、足4 (C2) を U3 の足2 へ
   - h39 -- h45
   - f45 -- e45
@@ -221,17 +218,19 @@ wires:
   は 51〜57 列。どれも切り欠きが左で、足1 が左下 (f 行)、足14 が左上 (e 行)。
   左から入力 → U1・U2 → U3 → 出力 LED の順に並ぶ
 - 電源: 各 IC の足14 (14・37・51 列) は a 行から上の + レールへ (赤)、足7 (20・43・57
-  列) は j 行から下の − レールへ (黒)。LED は上の − レールへ落とすので、1 列で
+  列) は j 行から下の − レールへ (黒)。LED とプルダウン抵抗は上の − レールへ落とすので、1 列で
   上下の − レールをつなぐ
-- スイッチ A・B・Cin (2〜4・6〜8・10〜12 列の b 行) は上の + レールから入れ、
-  プルダウン抵抗は溝の下の i 行から下の − レールへ。スイッチ側の列 (4・8・12 列) を
+- スイッチ A・B・Cin (2〜4・6〜8・10〜12 列の d 行) は上の + レールから入れる。
+  プルダウン抵抗はスイッチ側の列 (4・8・12 列) の a 行と上の − レールのあいだに
+  縦に挿す。スイッチ側の列を
   e→f の短い線で溝の下へ下ろし、g・h・j 行で U1 の足1・2・6 (14・15・19 列) へ入れる
-- A (黄) と B (緑) は上のブロックの d 行・c 行を U1 の上を越えて 35・34 列まで運び、
+- A (黄) と B (緑) は上のブロックの b 行・c 行を U1 の上を越えて 35・34 列まで運び、
   そこで溝の下へ下ろして i・h 行で U2 の足1・2 (37・38 列) へ。Cin (青) は U1 の足6
   (19 列) から g 行でそのまま U2 の足6 (42 列) へ
-- U1 の足3 (S1、16 列) は g 行で足5 (18 列) へ。S1 (橙) は 22 列で上へ上げて
-  RS1・DS1 へ、同じ 22 列から j 行で U2 の足5 (41 列) へ。U1 の足4 (S、17 列) は
-  h 行で 28 列へ運び、上へ上げて RS・DS へ
+- U1 の足3 (S1、16 列) は g 行で足5 (18 列) へ。S1 (橙) は i 行で 21 列へ運び、
+  上へ上げて RS1・DS1 へ、同じ 21 列から j 行で U2 の足5 (41 列) へ。U1 の足4 (S、17 列) は
+  h 行で 28 列へ運び、上へ上げて RS・DS へ。RS1・RS は d 行、DS1・DS は e 行に置き、
+  b・c 行を通る A・B の線の下に並べる。LED のカソードは a 行から上の − レールへ
 - U2 の足3 (C1、39 列) は h 行で 45 列へ運び、上へ上げて RC1・DC1 へ、g 行で U3 の
   足1 (51 列) へ。足4 (C2、40 列) は i 行で U3 の足2 (52 列) へ。U3 の足3 (Cout、
   53 列) は g 行で 59 列へ運び、上へ上げて RCO・DCO へ
