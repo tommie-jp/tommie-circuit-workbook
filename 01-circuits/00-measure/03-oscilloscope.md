@@ -24,27 +24,35 @@ parts:
   VCC: vcc c2
   G1: ground f2
   U1: dip8 e6 NE555
-  VCC: vcc c7
+  VCC: vcc c7a3
   R1: resistor c9 d9i0 10k
   R2: resistor d9i0 f9i0 10k
   C1: capacitor f9i0 h9i0 10n
   G2: ground h9i0
-  G3: ground b6
-  VCC: vcc h6
+  G3: ground i3
+  VCC: vcc c3a5
   OUT: port f4a5
 wires:
-  - U1.8 -| c7
-  - c7 -- c9
+  - U1.8 -| c7a3
+  - c7a3 -- c9
   - U1.7 -| d9i0
   - U1.6 -| f7i5
   - f7i5 -- f9i0
-  - U1.1 -| b5
-  - b5 -- b6
+  - U1.1 -| i3
   - U1.2 -| a4
   - a4 -- a11 -- f11i0 -- f9i0
   - U1.3 -| f4a5
-  - U1.4 -| h5
-  - h5 -- h6
+  - U1.4 -| c3a5
+notes:
+  # dip8 の記号は足番号しか刷らないので、足の名前を添える
+  - text d5d3 tiny right: GND
+  - text d5h3 tiny right: TRIG
+  - text e5b3 tiny right: OUT
+  - text e5f3 tiny right: RESET
+  - text d6d7 tiny left: VCC
+  - text d6h7 tiny left: DIS
+  - text e6b7 tiny left: THR
+  - text e6f7 tiny left: CV
 style:
   grid: on
   pitch: 1.2
@@ -70,37 +78,46 @@ style:
 
 ```breadboard
 title: 図2 555 非安定をブレッドボードに組む
-# 上下とも赤レール = +5V、青レール = GND (上下の青レールは 28 列でつなぐ)
+# 上下とも赤レール = +5V、青レール = GND (上下のレールは 28・29 列でつなぐ)
 board: half
 parts:
   U1: dip8 @ e10 NE555
-  R1: resistor a15 a18 10k
-  R2: resistor b18 b21 10k
-  C1: capacitor/ceramic a21 a24 10n
+  R1: resistor b6 b11 10k
+  R2: resistor c11 c15 10k
+  C1: capacitor/ceramic h15 h18 10n
   SCOPE:
     type: device
     at: bottom
     label: PC オシロ / AD2 (Ch1)
     pins: [SIG, GND]
 wires:
-  - U1.8 -- b15 red
-  - U1.4 -- b15 orange
-  - c15 -- +t15 red
-  - U1.7 -- c18 yellow
-  - U1.6 -- c21 green
-  - U1.2 -- c21 blue
-  - U1.1 -- b24 black
-  - b24 -- -t24 black
-  - U1.3 -- SCOPE.SIG gray
-  - SCOPE.GND -- -b26 black
+  - +t6 -- a6 red
+  - +t10 -- a10 red
+  - a12 -- a15 green
+  - d15 -- g15 green
+  - g11 -- g15 green
+  - j10 -- -b10 black
+  - j13 -- +b13 red
+  - j18 -- -b18 black
+  - j12 -- SCOPE.SIG gray
+  - SCOPE.GND -- -b22 black
   - -t28 -- -b28 black
+  - +t29 -- +b29 red
 ```
 
-DIP8 の足は番号で配線した (`U1.8` が VCC、`U1.1` が GND)。抵抗 2 本とコンデンサは
-同じ列を使って直列につなぎ (`a18` と `b18` が同じ列 18 で導通)、プローブ
-(`SCOPE`) は 3 番ピンとグラウンドに当てる。8 番・4 番と R1 の上端が集まる列 15 は
-`+t15` で +5V レールへ、1 番の GND (`-t`) とプローブの GND (`-b`) は 28 列の
-黒線で上下の青レールをつないで同じ GND にする。
+555 の足は、それぞれが挿さった列の穴を使ってつなぐ。上の列 10〜13 が 8〜5 番、
+下の列 10〜13 が 1〜4 番 (1 番は左下)。
+
+- 8 番 (列 10) は `+t10` から、R1 の上端 (列 6) は `+t6` から赤線で +5V。
+  R1 の下端は 7 番の列 11 に挿す
+- R2 は 7 番の列 11 から列 15 へ。6 番 (列 12) を列 15 へ、列 15 を溝の向こうの
+  下の列 15 へ、そこから 2 番 (列 11) へ、緑の線 3 本で結ぶ (6 番と 2 番と
+  R2・C1 の間が 1 つのネット)
+- C1 は下の列 15 から列 18 へ。列 18 は黒線で下の青レール (GND)
+- 1 番 (列 10) は黒線で下の青レール、4 番 (列 13) は赤線で下の赤レール
+- プローブ (`SCOPE`) は 3 番 (列 12) と下の青レールに当てる
+- 上下のレールは右端の 28 列 (黒)・29 列 (赤) でつなぎ、どちらのレールに
+  電源を入れても同じにする
 
 ## 計器の設定
 

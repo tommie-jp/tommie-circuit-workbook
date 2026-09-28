@@ -21,7 +21,7 @@ era: 今
 ```circuit
 title: 図1 安定化電源の CV / CC の切り替わり
 parts:
-  PSU:
+  V1:
     type: device
     at: b2
     label: PSU
@@ -29,10 +29,10 @@ parts:
     turn: mirror
   RL: resistor-var b4 d4 100
   G1: ground d4
-  G2: ground d3
 wires:
-  - PSU.+ -| b4
-  - PSU.- -| d3
+  - V1.+ -| b4
+  - V1.- -| d3
+  - d3 -- d4
 style:
   grid: on
   pitch: 1.2
@@ -57,7 +57,7 @@ CC に入ると出力電圧が設定値より下がる、というのが**電流
 ```circuit
 title: 図2 電流制限を掛けた電源 + ファンクションジェネレータで 2-1 を動かす
 parts:
-  PSU:
+  V1:
     type: device
     at: b2
     label: PSU
@@ -67,7 +67,7 @@ parts:
   D1: led d6 f6
   Q1: npn g6
   RB: resistor f3 f5 10k
-  FG:
+  V2:
     type: device
     at: g1a5
     label: FuncGen
@@ -75,15 +75,15 @@ parts:
     turn: mirror
   G2: ground h6
   G3: ground c3
-  G4: ground h3
 wires:
-  - PSU.+ -| b6
+  - V1.+ -| b6
   - f6 -- Q1.C
   - f5 |- Q1.B
   - Q1.E -- h6
-  - FG.OUT -| f3
-  - PSU.- -| c3
-  - FG.GND -| h3
+  - V2.OUT -| f3
+  - V1.- -| c3
+  - V2.GND -| h3
+  - h3 -- h6
 style:
   grid: on
   pitch: 1.2

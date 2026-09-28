@@ -21,7 +21,6 @@ era: 古
 title: 図1 一定のベース電流でコレクタ電流を読む
 parts:
   V1: vsource a2 c2 5
-  G0: ground c2
   RB: resistor a4 c4 1M
   A1: ammeter c4 e4
   RC: resistor a7 c7 1k
@@ -33,6 +32,7 @@ wires:
   - e4 -- f4 -- Q1.B
   - e7 -- Q1.C
   - Q1.E -- g7
+  - c2 -- g2 -- g7
 style:
   grid: on
   pitch: 1.2

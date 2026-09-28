@@ -26,18 +26,17 @@ era: 古
 ```circuit
 title: 図1 分流器で作った電流計
 parts:
-  V1: vsource a1 e1 5
-  G0: ground e1
-  R1: resistor a1 a3 510
-  GA: galvanometer a3 e3
-  RS: resistor a5 e5 11
-  G1: ground e5
+  V1: vsource b2 d2 5
+  R1: resistor b2 b4 510
+  GA: galvanometer b4 d4
+  RS: resistor b6 d6 11
+  G1: ground d4
 wires:
-  - a3 -- a5
-  - e1 -- e3
-  - e3 -- e5
+  - b4 -- b6
+  - d2 -- d4 -- d6
 style:
   grid: on
+  pitch: 1.2
 ```
 
 10 mA レンジに必要な分流器の値は **R<sub>s</sub> = I<sub>g</sub>R<sub>g</sub> / (I<sub>max</sub> − I<sub>g</sub>)
@@ -64,17 +63,17 @@ R2 の両端を測る。
 ```circuit
 title: 図2 倍率器で作った電圧計 (0-1 と同じ分圧回路に当てる)
 parts:
-  V1: vsource a2 c2 5
-  G0: ground c2
-  R1: resistor a4 c4 10k
-  R2: resistor c4 e4 10k
-  G1: ground e4
-  GA: galvanometer c6 d6f0
-  RV: resistor d6f0 f6 4.7k
-  G2: ground f6
+  V1: vsource b2 e2 5
+  G1: ground e2
+  R1: resistor b4 b6 10k
+  R2: resistor b6 b9 10k
+  GA: galvanometer d6 d7a5
+  RV: resistor d7a5 d9 4.7k
 wires:
-  - a2 -- a4
-  - c4 -- c6
+  - b2 -- b4
+  - b6 -- d6
+  - b9 -- d9 -- e9
+  - e2 -- e9
 style:
   grid: on
   pitch: 1.2
