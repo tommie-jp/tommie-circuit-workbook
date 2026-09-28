@@ -129,7 +129,7 @@ style:
 CH1 で入力 (方形波)、CH2 で C1 の両端の電圧を見る。2 本のプローブの GND は
 どちらも図の下の GND (発振器の GND と同じ点) に当てる。
 
-```bread
+```breadboard
 title: 図4 R と C を 1 つずつ挿し、発振器とオシロをつなぐ
 board: half
 parts:
