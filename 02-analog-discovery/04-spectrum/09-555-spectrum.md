@@ -20,30 +20,44 @@ NE555 の標準的な非安定接続は**デューティ比が必ず 50% を超�
 ```circuit
 title: 図1 555 の非安定発振
 parts:
-  U1: dip8 j10 NE555
-  Ra: resistor a3 a5 1k
-  Rb: resistor a5 a7 10k
-  Ct: capacitor a7 a9 68n
-  G1: ground a9
-  Ccv: capacitor a11 a9 10n
+  U1: dip8 f6 NE555
+  G1: ground c6
+  VCC: vcc d7
+  Ra: resistor d8 e8 1k
+  Rb: resistor e8 e10 10k
+  Ct: capacitor e12 h12 68n
+  G2: ground h12
+  VCC: vcc h6
+  Ccv: capacitor h7 j7 10n
+  G3: ground j7
   AD:
     type: device
-    at: p20
+    at: f16
     label: Analog Discovery
-    pins: [V+, GND, 1+, 1-]
+    pins: [V+, 1+, 1-, GND]
+  VCC: vcc d15
+  G7: ground h15
 wires:
-  - AD.V+ -| a3
-  - AD.GND -| a9
-  - U1.8 -| a3
-  - U1.4 -| a3
-  - U1.7 -| a5
-  - U1.2 -| a7
-  - U1.6 -| a7
-  - U1.1 -| a9
-  - U1.5 -| a11
-  - U1.3 -| a13
-  - a13 -| AD.1+
-  - AD.1- -| a9
+  - U1.1 -| c5
+  - c5 -- c6
+  - U1.2 -| b4
+  - b4 -- b10 -- e10
+  - U1.8 -| d7
+  - d7 -- d8
+  - U1.7 -| e8
+  - U1.6 -| e10
+  - e10 -- e12
+  - U1.4 -| h5
+  - h5 -- h6
+  - U1.5 -| h7
+  - U1.3 -| a3
+  - a3 -- a14
+  - a14 |- AD.1+
+  - AD.V+ -| d15
+  - AD.1- -| h15
+  - AD.GND -| h15
+style:
+  grid: on
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/09-555-spectrum.svg)
@@ -58,10 +72,10 @@ title: 図2 ブレッドボードで 555 を組む
 board: half
 parts:
   U1: dip8 @ e10 NE555
-  Ra: resistor +t11 b11 1k
-  Rb: resistor c11 c12 10k
-  Ct: capacitor i11 -b11 68n
-  Ccv: capacitor b13 -t13 10n
+  Ra: resistor b7 b11 1k
+  Rb: resistor a11 a12 10k
+  Ct: capacitor i9 i6 68n
+  Ccv: capacitor d13 d17 10n
   AD:
     type: device
     at: top
@@ -73,7 +87,10 @@ wires:
   - +t1 -- +b1 red
   - -t2 -- -b2 black
   - a10 -- +t10 red
-  - d12 -- g11 purple
+  - d12 -- d9 -- h9 -- h11 purple
+  - j6 -- -b6 black
+  - +t7 -- a7 red
+  - c17 -- -t17 black
   - j10 -- -b10 black
   - j13 -- +b13 red
   - i12 -- i16 yellow

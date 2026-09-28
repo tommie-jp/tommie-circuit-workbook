@@ -55,13 +55,13 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上のレールは +5V/GND。V− は赤レールに乗せず、BAT から直配線する
+# 上下のレールは +5V/GND (1 列目で渡す)。V− は赤レールに乗せず、BAT から直配線する
 board: half
 parts:
   U1: dip8 @ e10 LM358
-  R1: resistor g8 g12 100k
-  R2: resistor h12 h16 47k
-  RL: resistor g10 g6 1k
+  R1: resistor g18 g12 100k
+  R2: resistor h12 h13 47k
+  RL: resistor i10 i6 1k
   BAT:
     type: device
     at: bottom
@@ -69,23 +69,24 @@ parts:
     pins: [V+, GND, V-]
 wires:
   - +t10 -- a10 red
-  - +t8 -- i8 red
-  - -t6 -- i6 black
-  - BAT.V+ -- +t20 red
-  - BAT.GND -- -t20 black
-  - BAT.V- -- j16 orange
-  - i13 -- i16 orange
-  - h10 -- h11 orange
+  - +t1 -- +b1 red
+  - -t1 -- -b1 black
+  - g10 -- g11 orange
+  - j18 -- +b18 red
+  - j6 -- -b6 black
+  - BAT.V+ -- +b8 red
+  - BAT.GND -- -b11 black
+  - BAT.V- -- j13 orange
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/01-voltage-follower.svg)
 
-- **V− (負電源) は赤レールに乗せない。** BAT.V− を 16 列へ直に配線し、そこから
-  U1 の 4 番 (GND/V−、13 列) へ `i13--i16` で渡す
+- **V− (負電源) は赤レールに乗せない。** BAT.V− を U1 の 4 番 (V−、13 列) へ
+  直に配線する。R2 (47 kΩ) は 12 列 (IN+) と 13 列に立てて挿す
 - U1 は LM358 の片方だけ使う (1 番 OUT・2 番 IN−・3 番 IN+・4 番 GND(V−)・
   8 番 VCC(V+))。もう片方 (5〜7 番) は浮かせたまま
 - **フォロアは出力 (1 番、10 列) を IN− (2 番、11 列) へそのまま返す**だけ
-  (`h10--h11`)。12 列が Vin (R1・R2 の分圧点、IN+ の 3 番)
+  (`g10--g11`)。12 列が Vin (R1・R2 の分圧点、IN+ の 3 番)
 
 ## 部品
 

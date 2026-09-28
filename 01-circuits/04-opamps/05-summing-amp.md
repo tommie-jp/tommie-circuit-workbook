@@ -59,12 +59,12 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上のレールは +5V/GND。V− は赤レールに乗せず、BAT から直配線する
+# 上下のレールは +5V/GND (1 列目で渡す)。V− は赤レールに乗せず、BAT から直配線する
 board: half
 parts:
   U1: dip8 @ e10 LM358
-  R1: resistor g5 g11 10k
-  R2: resistor h7 h11 10k
+  R1: resistor c4 c15 10k
+  R2: resistor h6 h11 10k
   Rf: resistor i11 i10 10k
   GEN:
     type: device
@@ -77,23 +77,26 @@ parts:
     label: 電源 ±5V
     pins: [V+, GND, V-]
 wires:
-  - GEN.OUT1 -- a5 yellow
-  - e5 -- f5 yellow
-  - GEN.OUT2 -- a7 green
-  - e7 -- f7 green
-  - GEN.GND -- -t3 black
-  - j12 -- -t12 black
+  - GEN.OUT1 -- a4 yellow
+  - GEN.OUT2 -- a6 green
+  - e6 -- g6 green
+  - GEN.GND -- -t9 black
+  - d15 -- g15 -- g11 orange
+  - j12 -- -b12 black
   - +t10 -- a10 red
-  - BAT.V+ -- +t20 red
-  - BAT.GND -- -t20 black
+  - +t1 -- +b1 red
+  - -t1 -- -b1 black
+  - BAT.V+ -- +b8 red
+  - BAT.GND -- -b10 black
   - BAT.V- -- j13 orange
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/05-summing-amp.svg)
 
-- **R1 (5→11 列) と R2 (7→11 列) が IN− (11 列、2 番) の 1 点に合流**。
+- **R1 (上ブロック 4→15 列、溝をまたいで 11 列へ) と R2 (6→11 列) が IN− (11 列、2 番) の
+  1 点に合流**。
   Rf (11→10 列) が出力 (10 列、1 番) へ帰還する
-- IN+ (12 列、3 番) は `j12--(-t12)` で GND に直結
+- IN+ (12 列、3 番) は `j12--(-b12)` で GND に直結
 
 ## 部品
 

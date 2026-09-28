@@ -72,8 +72,8 @@ board: half
 parts:
   U1: dip8 @ e10 NE555
   Ra: resistor b7 b11 10k
-  Rb: resistor c11 c12 47k
-  C1: capacitor/electrolytic d12(+) d9(-) 10uF
+  Rb: resistor a11 a12 47k
+  C1: capacitor/electrolytic i9(+) i5(-) 10uF
   Cc: capacitor d13 d20 10n
   R1: resistor g12 g16 220
   D1: led h16(A) h19(K) red
@@ -82,9 +82,9 @@ wires:
   - -t1 -- -b1 black
   - +t7 -- a7 red
   - +t10 -- a10 red
-  - c9 -- -t9 black
+  - d12 -- d9 -- h9 -- h11 orange
   - c20 -- -t20 black
-  - h11 -- c12 orange
+  - j5 -- -b5 black
   - j10 -- -b10 black
   - i13 -- +b13 red
   - j19 -- -b19 black
@@ -95,7 +95,7 @@ wires:
 - **DIP8 は溝をまたいで挿す** (e 行と f 行)。1 番 (GND) が左下の f10、8 番 (VCC) が
   左上の e10。切り欠きを左に向ける
 - 2 番 (TRIG、f11) は下ブロックにあるので、板の上の 6 番 (THR、e12) へは
-  `h11 -- c12` の 1 本で渡す
+  IC の左を回るオレンジの線 (`d12 -- d9 -- h9 -- h11`) で渡す。C1 の + はこの線の 9 列に挿す
 - 4 番 (RESET) は使わないので +5V に固定 (`i13 -- +b13`)。浮かせておくと
   誤動作することがある
 

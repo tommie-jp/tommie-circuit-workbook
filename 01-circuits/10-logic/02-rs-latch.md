@@ -31,7 +31,7 @@ parts:
   RQ: resistor h9 h11 330
   DQ: led h11 j11 red
   GDQ: ground j11
-  RQb: resistor d6i0 d3i0 330
+  RQb: resistor d7i0 d3i0 330
   DQb: led d3i0 e3i0 red
   GDQb: ground e3i0
   VCC: vcc c11
@@ -41,7 +41,7 @@ wires:
   - U1.1 -| c9
   - U1.2 -| d8i5
   - U1.4 -| d8i5
-  - d8i5 -- d6i0
+  - d8i5 -- d7i0
   - U1.3 -| e8c0
   - U1.6 -| f8e0
   - e8c0 -- f8e0 -- h8 -- h9
@@ -86,30 +86,29 @@ title: 図2 ブレッドボードに組む
 board: full
 parts:
   SWS: button @ e5
-  RS: resistor c3 c5 10k
-  SWR: button @ e12
-  RR: resistor c10 c12 10k
+  RS: resistor b3 b5 10k
+  SWR: button @ e32
+  RR: resistor b36 b34 10k
   U1: dip14 @ e20 CD4011
-  RQ: resistor g30 g32 330
-  DQ: led h32(A) h34(K) red
-  RQb: resistor i19 i17 330
-  DQb: led h17(A) h15(K) red
+  RQ: resistor h16 h11 330
+  DQ: led g11(A) g8(K) red
+  RQb: resistor h30 h35 330
+  DQb: led i35(A) i39(K) red
 wires:
-  - -t1 -- -b1
-  - +t3 -- b3
-  - b5 -- g20
-  - g7 -- -b7
-  - +t10 -- b10
-  - b12 -- g24
-  - g14 -- -b14
-  - a20 -- +t20
-  - g26 -- -b26
-  - g23 -- g21
-  - h22 -- h25
-  - i22 -- i30
-  - j23 -- j19
-  - j34 -- -b34
-  - j15 -- -b15
+  - -t1 -- -b1 black
+  - +t3 -- a3 red
+  - +t36 -- a36 red
+  - d7 -- d18 -- g18 -- g20 yellow
+  - d32 -- d28 -- i28 -- i24 green
+  - j7 -- -b7 black
+  - j32 -- -b32 black
+  - a20 -- +t20 red
+  - j26 -- -b26 black
+  - g21 -- g23 -- g30 orange
+  - h22 -- h25 orange
+  - i22 -- i16 blue
+  - j8 -- -b8 black
+  - j39 -- -b39 black
   # 使わない入力 (足8・9・12・13) を上の青レール (GND) へ
   - a21 -- -t21 black
   - a22 -- -t22 black
@@ -120,15 +119,16 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/02-rs-latch.svg)
 
 - 上の赤レール = +5V、青レール = GND。下の青レールは 1 列で上の青レールとつなぐ
-- SWS (e5)・SWR (e12) はタクトスイッチ。溝をまたぐ 4 本足の**手前側**
-  (1a・1b、e5/e7 か e12/e14) にプルアップの節点、**奥側** (2a・2b、f5/f7 か
-  f12/f14) に GND。押すと手前と奥がつながり、足が瞬間だけ 0 になる
+- SWS (e5)・SWR (e32) はタクトスイッチ。溝をまたぐ 4 本足の**手前側**
+  (1a・1b、e5/e7 か e32/e34) にプルアップの節点、**奥側** (2a・2b、f5/f7 か
+  f32/f34) に GND。押すと手前と奥がつながり、足が瞬間だけ 0 になる
 - U1 (CD4011) は 20〜26 列。切り欠きが左で、足1 が左下 (f 行)、足14 が左上
   (e 行)。足14 (20 列の上) を赤レールへ、足7 (26 列の下) を下の青レールへ
-- 足1 (20 列の下) に S、足5 (24 列の下) に R。たすき掛けは下のブロックで、
-  足4→足2 (23 列→21 列、g 行)、足3→足6 (22 列→25 列、h 行)
-- 足3 (Q、22 列) は i 行で 30 列へ渡して RQ・DQ (LED1) へ。足4 (Q バー、23 列)
-  は j 行で 19 列へ渡して RQb・DQb (LED2) へ
+- 足1 (20 列の下) に S (黄の線、7 列から)、足5 (24 列の下) に R (緑の線、32 列から)。
+  たすき掛けは下のブロックで、足4→足2 (23 列→21 列、g 行)、足3→足6 (22 列→25 列、h 行)
+- 足3 (Q、22 列) は i 行の青の線で 16 列へ渡して RQ・DQ (LED1) へ。足4 (Q バー、
+  23 列) は g 行のオレンジの線を 30 列まで延ばして RQb・DQb (LED2) へ。
+  この線と R の緑の線が 28 列で 1 回交わる (つながってはいない)
 - 使わないゲート3・4 の入力 (足13・12・9・8 = 21・22・25・26 列の上) は、a 行から
   黒の短い線で上の青レール (GND) へ。足11・10 (23・24 列の上) は出力なので開けておく
 

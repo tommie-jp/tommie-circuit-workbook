@@ -69,42 +69,48 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上のレールは +5V/GND。V− は赤レールに乗せず、BAT から直配線する
+# 上のレールは +5V/GND。下の赤レールは +5V (1 列目で渡す)、下の青レールは V− (BAT.V− を 28 列の青い線で下ろす)
 board: half
 parts:
   U1: dip8 @ e10 LM358
-  CDS: photoresistor g5 g11
+  CDS: photoresistor i14 i11
   RFIX: resistor h11 h7 10k
-  POT: potentiometer i2(1) i3(W) i4(3) 10k
-  R1: resistor i10 i16 150
-  D1: led h16(A) h19(K) red
-  DP: diode f19(A) f16(K) 1N4148
+  POT: potentiometer b26(1) b27(W) b28(3) 10k
+  R1: resistor c9 c6 150
+  D1: led b6(A) b3(K) red
+  DP: diode d3(A) d6(K) 1N4148
   BAT:
     type: device
-    at: bottom
+    at: top
     label: 電源 ±5V
     pins: [V+, GND, V-]
 wires:
-  - +t5 -- f5 red
-  - +t2 -- h2 red
   - +t10 -- a10 red
+  - +t1 -- +b1 red
   - BAT.V+ -- +t20 red
-  - BAT.GND -- -t20 black
-  - BAT.V- -- j7 orange
-  - BAT.V- -- j4 orange
-  - BAT.V- -- j13 orange
-  - j3 -- j12 orange
-  - j19 -- -t19 black
+  - BAT.GND -- -t22 black
+  - BAT.V- -- a28 blue
+  - e28 -- g28 blue
+  - j28 -- -b28 blue
+  - +t26 -- a26 red
+  - e27 -- g27 -- g12 orange
+  - j13 -- -b13 blue
+  - j7 -- -b7 blue
+  - j14 -- +b14 red
+  - g10 -- g9 -- d9 orange
+  - a3 -- -t3 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/04-comparator-cds.svg)
 
-- **CdS (11 列) と RFIX (11 列) の分圧点が IN− (2 番)。** POT のワイパ (3 列) は
-  `j3--j12` で IN+ (3 番、12 列) へ
-- 出力 (1 番、10 列) から R1 (150 Ω)、D1 (LED) を通って GND (19 列、青レール) へ。
-  **D1 と逆並列に DP (1N4148)。** DP は 16 列・19 列という D1 と同じ列を使う
-  だけで配線が要らない (16 列で D1 のアノード側、19 列でカソード側と自動的に
-  同じネットになる)。出力が −V に張り付いたときの逆電圧を DP の順方向降下
+- **CdS (11 列) と RFIX (11 列) の分圧点が IN− (2 番)。** POT (上ブロックの右端) の
+  ワイパ (27 列) は溝をまたぐオレンジの線で IN+ (3 番、12 列) へ
+- **V− は下の青レール。** GND (上の青レール) と取り違えない。4 番 (13 列)・RFIX・
+  POT の 3 番がここへつながる
+- 出力 (1 番、10 列) は 9 列の線で上ブロックへ上げ、R1 (150 Ω)、D1 (LED) を通って
+  GND (3 列、上の青レール) へ。**D1 と逆並列に DP (1N4148)。** DP は 3 列・6 列という
+  D1 と同じ列を使うだけで配線が要らない (6 列で D1 のアノード側、3 列でカソード側と
+  自動的に同じネットになる)。出力が −V に張り付いたときの逆電圧を DP の順方向降下
   (約 0.7 V) までクランプする。POT を回してしきい値の明るさを変える
 
 ## 部品

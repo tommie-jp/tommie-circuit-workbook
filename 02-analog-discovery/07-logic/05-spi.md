@@ -20,26 +20,35 @@ MISO (DOUT)・CS の 4 本で、クロックも AD 自身が出す。分圧で�
 ```circuit
 title: 図1 MCP3008 を SPI で読む
 parts:
+  VCC: vcc b2
+  R1: resistor b2 c2b0g0 10k
+  R2: resistor c2b0g0 e2 10k
+  G1: ground e2
+  U1: dip16 d6 MCP3008
+  VCC: vcc b7a5
+  G2: ground c8g0e0 r270
+  G3: ground e7a5
   AD:
     type: device
-    at: a1
+    at: d11c0f0
     label: Analog Discovery
-    pins: [V+, GND, DIO0, DIO1, DIO2, DIO3]
-  U1: dip16 h3 MCP3008
-  R1: resistor n3 n5 10k
-  R2: resistor n5 n7 10k
+    pins: [V+, DIO3, DIO2, DIO1, DIO0, GND]
+  VCC: vcc b10
+  G4: ground e10
 wires:
-  - AD.V+ -| U1.16
-  - AD.V+ -| U1.15
-  - AD.V+ -| n3
-  - AD.GND -| U1.9
-  - AD.GND -| U1.14
-  - AD.GND -| n7
-  - n5 |- U1.1
-  - AD.DIO0 -| U1.10
-  - AD.DIO1 -| U1.11
-  - AD.DIO2 -| U1.12
-  - AD.DIO3 -| U1.13
+  - U1.1 -| c2b0g0
+  - U1.16 -| b7a5
+  - U1.15 -| b7a5
+  - U1.14 -| c8g0e0
+  - U1.9 -| e7a5
+  - U1.13 -| AD.DIO3
+  - U1.12 -| AD.DIO2
+  - U1.11 -| AD.DIO1
+  - U1.10 -| AD.DIO0
+  - AD.V+ -| b10
+  - AD.GND -| e10
+style:
+  grid: on
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/05-spi.svg)

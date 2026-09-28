@@ -146,7 +146,7 @@ wires:
   - j52 -- -b52 black
   - j54 -- -b54 black
 notes:
-  - text small: 各 IC の 1 番のゲートを使う (74HC04 は 1 番が入力、2 番が出力)
+  - text small: 各 IC の 1 番のゲート (名前が 1 で始まる足) を使う
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/11-applications/breadboard/05-logic-gates.svg)

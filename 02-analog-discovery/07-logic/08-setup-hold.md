@@ -23,22 +23,36 @@ title: 図1 CD4013B に Pattern で Clock と Data を入れる
 parts:
   AD:
     type: device
-    at: a1
+    at: c3a0f0
     label: Analog Discovery
-    pins: [V+, GND, DIO0, DIO1, DIO2]
-  U1: dip14 h3 CD4013B
+    pins: [V+, DIO2, DIO0, DIO1, GND]
+    turn: mirror
+  VCC: vcc b4
+  G1: ground e4
+  U1: dip14 d10 CD4013B
+  G2: ground d9 r90
+  G3: ground d9e0i0 r90
+  VCC: vcc c11
+  G5: ground e12
 wires:
-  - AD.V+ -| U1.14
-  - AD.GND -| U1.7
-  - AD.GND -| U1.4
-  - AD.GND -| U1.6
-  - AD.GND -| U1.8
-  - AD.GND -| U1.9
-  - AD.GND -| U1.10
-  - AD.GND -| U1.11
-  - AD.DIO0 -| U1.3
-  - AD.DIO1 -| U1.5
-  - U1.1 -| AD.DIO2
+  - AD.V+ -| b4
+  - AD.GND -| e4
+  - AD.DIO2 -| b7i0
+  - b7i0 |- U1.1
+  - AD.DIO0 -| c6a0f0
+  - c6a0f0 |- U1.3
+  - AD.DIO1 -| c5d0
+  - c5d0 |- U1.5
+  - U1.4 -| d9
+  - U1.6 -| d9e0i0
+  - U1.7 -| d9e0i0
+  - U1.14 -| c11
+  - U1.11 -| e12
+  - U1.10 -| e12
+  - U1.9 -| e12
+  - U1.8 -| e12
+style:
+  grid: on
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/08-setup-hold.svg)
@@ -64,9 +78,9 @@ parts:
     type: device
     at: bottom
     label: Analog Discovery
-    pins: [V+, GND, DIO0, DIO1, DIO2]
+    pins: [DIO2, DIO0, DIO1, V+, GND]
 wires:
-  - AD.V+ -- +b15 red
+  - AD.V+ -- +b13 red
   - AD.GND -- -b16 black
   - AD.DIO0 -- j7 yellow
   - AD.DIO1 -- j9 white
@@ -92,7 +106,7 @@ wires:
 - 4=RESET1 (f8)・6=SET1 (f10)・7=VSS (f11) は下ブロックなので j 行から -b へ。
   8=SET2 (e11)・9=D2 (e10)・10=RESET2 (e9)・11=CLOCK2 (e8) は上ブロックなので
   a 行から -t へ逃がし、20・21 列で上下のレールを渡す
-- 14=VDD (e5) は a5 から +t5 へ。AD の V+ は下のレール (+b15) に直接入れてあるので、
+- 14=VDD (e5) は a5 から +t5 へ。AD の V+ は下のレール (+b13) に直接入れてあるので、
   上下のレールをつなぐ橋 (`+t20 -- +b20`) を忘れない
 
 ## 計器の設定

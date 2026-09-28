@@ -57,11 +57,11 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上のレールは +5V/GND。V− は赤レールに乗せず、BAT から直配線する
+# 上下のレールは +5V/GND (1 列目で渡す)。V− は赤レールに乗せず、BAT から直配線する
 board: half
 parts:
   U1: dip8 @ e10 LM358
-  Rin: resistor g5 g11 10k
+  Rin: resistor c5 c15 10k
   Rf: resistor h10 h11 100k
   GEN:
     type: device
@@ -75,19 +75,21 @@ parts:
     pins: [V+, GND, V-]
 wires:
   - GEN.OUT -- a5 yellow
-  - e5 -- f5 yellow
-  - GEN.GND -- -t5 black
-  - i12 -- -t12 black
+  - GEN.GND -- -t7 black
+  - d15 -- g15 -- g11 orange
+  - j12 -- -b12 black
   - +t10 -- a10 red
-  - BAT.V+ -- +t20 red
-  - BAT.GND -- -t20 black
+  - +t1 -- +b1 red
+  - -t1 -- -b1 black
+  - BAT.V+ -- +b8 red
+  - BAT.GND -- -b10 black
   - BAT.V- -- j13 orange
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/03-inverting-amp.svg)
 
-- **IN+ (3 番、12 列) は `i12--(-t12)` で GND に直結。** 分圧は要らない
-- **IN− (2 番、11 列) に Rin と Rf の両方が集まる。** Rin はここへ信号を入れ、
+- **IN+ (3 番、12 列) は `j12--(-b12)` で GND に直結。** 分圧は要らない
+- **IN− (2 番、11 列) に Rin と Rf の両方が集まる。** Rin (上ブロック) は 15 列から溝をまたぐ線でここへ信号を入れ、
   Rf はここから出力 (1 番、10 列) へ戻す
 - コンデンサ (直流カット) は無い。発振器は 0V を中心に振れるので直結でよい
 

@@ -102,8 +102,8 @@ board: full
 parts:
   U555: dip8 @ e5 NE555
   R1: resistor b6 b3 10k
-  R2: resistor c6 c10 47k
-  C1: capacitor/electrolytic d10 d12 10u
+  R2: resistor c6 c9 47k
+  C1: capacitor/electrolytic i9 i12 10u
   RRST: resistor c17 c14 10k
   SWRST: button @ e17
   U40: dip16 @ e22 CD4040
@@ -116,29 +116,29 @@ parts:
   RQ4: resistor a50 a52 330
   DQ4: led c52(A) c54(K) red
 wires:
-  - -t1 -- -b1
-  - +t2 -- +b2
-  - a5 -- +t5
-  - a3 -- +t3
-  - b7 -- b10
-  - d7 -- g6
-  - c12 -- -t12
-  - j5 -- -b5
-  - j8 -- +b8
-  - g7 -- c28
-  - b14 -- -t14
-  - d27 -- d17
-  - j17 -- +b17
-  - a22 -- +t22
-  - j29 -- -b29
-  - d29 -- d32
-  - j28 -- e38
-  - i27 -- e44
-  - h26 -- e50
-  - b36 -- -t36
-  - b42 -- -t42
-  - b48 -- -t48
-  - b54 -- -t54
+  - -t1 -- -b1 black
+  - +t2 -- +b2 red
+  - a5 -- +t5 red
+  - a3 -- +t3 red
+  - j5 -- -b5 black
+  - j8 -- +b8 red
+  - b7 -- b9 orange
+  - d9 -- g9 -- g6 orange
+  - j12 -- -b12 black
+  - h7 -- h21 -- d21 -- d28 blue
+  - c27 -- c19 green
+  - b14 -- -t14 black
+  - j17 -- +b17 red
+  - a22 -- +t22 red
+  - j29 -- -b29 black
+  - d29 -- d32 yellow
+  - g28 -- g38 -- e38 yellow
+  - h27 -- h44 -- e44 yellow
+  - i26 -- i50 -- e50 yellow
+  - b36 -- -t36 black
+  - b42 -- -t42 black
+  - b48 -- -t48 black
+  - b54 -- -t54 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/04-binary-counter.svg)
@@ -147,14 +147,16 @@ wires:
 - U555 (NE555) は 5〜8 列、U40 (CD4040) は 22〜29 列。どちらも切り欠きが左で、
   足1 が左下 (f 行)。U555 は足8 (5 列の上) が左上、U40 は足16 (22 列の上) が左上
 - U555: 足8 (5 列の上) と足4 (RESET、8 列の下) を Vcc へ、足1 (5 列の下) を GND へ。
-  R1 は足7 (6 列の上) から 3 列の Vcc へ、R2 は足7 から 10 列へ。10 列は b 行で
-  足6 (7 列の上) とつなぎ、C1 (+ が 10 列) を通して GND へ。足2 (6 列の下) は
-  足6 へ渡す (d7→g6)。足5 (CONT) は使わない
+  R1 は足7 (6 列の上) から 3 列の Vcc へ、R2 は足7 から 9 列へ。9 列は b 行で
+  足6 (7 列の上) とつなぎ、溝をまたぐオレンジの線で足2 (6 列の下) へも渡す。
+  C1 (+ が 9 列の下) を通して GND へ。足5 (CONT) は使わない
 - U40: 足16 (22 列の上) を Vcc、足8 (29 列の下) を GND へ。足10 (CLK、28 列の上)
-  に 555 の足3 (7 列の下)。足11 (RESET、27 列の上) は d 行で 17 列へ渡し、
-  RRST (10kΩ) で GND へ、SWRST (e17) を押すと Vcc へ
+  には 555 の足3 (7 列の下) から青の線 (h 行 → 21 列で溝をまたぐ → d 行)。
+  足11 (RESET、27 列の上) は c 行の緑の線で 19 列へ渡し、RRST (10kΩ) で GND へ、
+  SWRST (e17) を押すと Vcc へ
 - Q1 (足9、29 列の上)・Q2 (足7、28 列の下)・Q3 (足6、27 列の下)・Q4 (足5、
-  26 列の下) を 32・38・44・50 列へ渡し、330Ω と LED を通して GND へ
+  26 列の下) を黄の線で 32・38・44・50 列へ渡し (下の 3 本は g・h・i 行を通って
+  溝をまたぐ)、330Ω と LED を通して GND へ
 
 ## 見るべき値
 

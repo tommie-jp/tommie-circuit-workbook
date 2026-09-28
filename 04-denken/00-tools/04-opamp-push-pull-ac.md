@@ -128,7 +128,6 @@ wires:
   - d12 -- d17 white
 notes:
   - text small: Q1 = 2SC1815、Q2 = 2SA1015 (平らな面を向こうに挿す。左から B・C・E)
-  - text small: U1 の上の 10〜13 列 = 8 番 V+・7 番 OUT2・6 番 IN2−・5 番 IN2+
   - text small: 白い線 (d12–d17) が B の帰還。A は白い線を外して d11–d12 をつなぐ
 ```
 

@@ -123,46 +123,42 @@ style:
 title: 図2 ブレッドボードに組む
 board: full
 parts:
-  A: switch a3 a5
-  RpdA: resistor c5 c7 10k
-  B: switch a10 a12
-  RpdB: resistor c12 c14 10k
-  C: switch a17 a19
-  RpdC: resistor c19 c21 10k
+  A: switch b10 b12
+  B: switch b3 b5
+  C: switch b45 b47
+  RpdA: resistor i22 i30 10k
+  RpdB: resistor i21 i17 10k
+  RpdC: resistor i47 i51 10k
   U1: dip14 @ e24 CD4081
   U2: dip14 @ e38 CD4071
   U3: dip14 @ e52 CD4069
-  R1: resistor i32 i34 330
-  D1: led h34(A) h36(K) red
-  R2: resistor i46 i48 330
-  D2: led h48(A) h50(K) red
-  R3: resistor i59 i61 330
-  D3: led h61(A) h63(K) red
+  R1: resistor g26 g33 330
+  D1: led h33(A) h35(K) red
+  R2: resistor g40 g45 330
+  D2: led h45(A) h46(K) red
+  R3: resistor g53 g60 330
+  D3: led h60(A) h62(K) red
 wires:
-  - +t3 -- b3
-  - b7 -- -t7
-  - +t10 -- b10
-  - b14 -- -t14
-  - +t17 -- b17
-  - b21 -- -t21
-  - -t1 -- -b1
-  - b5 -- g24
-  - d5 -- g38
-  - b12 -- g25
-  - d12 -- g39
-  - b19 -- g52
-  - a24 -- +t24
-  - j30 -- -b30
-  - a38 -- +t38
-  - j44 -- -b44
-  - a52 -- +t52
-  - j58 -- -b58
-  - h26 -- h32
-  - h40 -- h46
-  - h53 -- h59
-  - j36 -- -b36
-  - j50 -- -b50
-  - j63 -- -b63
+  - -t1 -- -b1 black
+  - +t3 -- a3 red
+  - +t10 -- a10 red
+  - +t45 -- a45 red
+  - c12 -- c22 -- g22 -- g24 yellow
+  - c22 -- c37 -- g37 -- g38 yellow
+  - d5 -- d21 -- h21 -- h25 green
+  - d21 -- d36 -- h36 -- h39 green
+  - c47 -- g47 -- g52 blue
+  - j17 -- -b17 black
+  - j51 -- -b51 black
+  - a24 -- +t24 red
+  - j30 -- -b30 black
+  - a38 -- +t38 red
+  - j44 -- -b44 black
+  - a52 -- +t52 red
+  - j58 -- -b58 black
+  - j35 -- -b35 black
+  - j46 -- -b46 black
+  - j62 -- -b62 black
   # 使わない入力を GND へ (上は上の青レール、下は下の青レール)
   - a25 -- -t25 black
   - a26 -- -t26 black
@@ -191,10 +187,14 @@ wires:
   は 52〜58 列。どれも切り欠きが左で、足1 が左下 (f 行)、足14 が左上 (e 行)
 - 電源: 各 IC の足14 (24・38・52 列の上) を上の赤レールへ、足7 (VSS、30・44・58
   列の下) を下の青レールへ
-- A・B は 5・12 列のスイッチの出力を、それぞれ U1 と U2 の足 1・2 (24・25 列と
-  38・39 列の下) へ渡す。C は 19 列から U3 の足 1 (52 列の下) へ
-- 出力 (U1・U2 の足3 = 26・40 列、U3 の足2 = 53 列) は h 行で右隣の空き列へ渡し、
-  330Ω と LED を通して下の青レールへ
+- スイッチは上ブロック (B が 3〜5 列、A が 10〜12 列、C が 45〜47 列)。A は黄の線
+  (c 行)、B は緑の線 (d 行) で右へ運び、IC の手前で溝をまたいで下ろして足 1・2
+  (24・25 列と 38・39 列の下) へ渡す。黄と緑が交わるのは 22 列の 1 か所だけ。
+  C は青の線で U3 の足 1 (52 列の下) へ
+- プルダウン抵抗 (RpdA・RpdB・RpdC) は下ブロックの i 行。RpdA は 30 列 (U1 の VSS)、
+  RpdC は 51 列の線で GND へ落ちる
+- 出力 (U1・U2 の足3 = 26・40 列、U3 の足2 = 53 列) は g 行の 330Ω と h 行の LED を
+  通して下の青レールへ
 - 使わない入力は黒の短い線で GND へ。上側の足 (U1・U2 の足8・9・12・13、U3 の
   足9・11・13) は a 行から上の青レールへ、下側の足 (U1・U2 の足5・6、U3 の足3・5)
   は j 行から下の青レールへ

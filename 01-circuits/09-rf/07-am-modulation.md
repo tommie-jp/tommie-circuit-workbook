@@ -59,15 +59,6 @@ wires:
   - h6 -- h14
   - h14 -- c14
 notes:
-  # dip8 の記号は足番号しか刷らないので、足の名前を添える
-  - text d7d3 tiny right: GND
-  - text d7h3 tiny right: TRIG
-  - text e7b3 tiny right: OUT
-  - text e7f3 tiny right: RESET
-  - text d8d7 tiny left: VCC
-  - text d8h7 tiny left: DIS
-  - text e8b7 tiny left: THR
-  - text e8f7 tiny left: CV
   # 計測点。オシロは橙、スペアナは緑 (計器の設定の表と同じ名前)
   - arrow b1 c2 orange
   - text a1h0 small orange left: 音声

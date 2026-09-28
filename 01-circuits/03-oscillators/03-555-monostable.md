@@ -72,34 +72,34 @@ title: 図2 ブレッドボードに組む
 board: half
 parts:
   U1: dip8 @ e10 NE555
-  R1: resistor b7 c11 100k
-  C1: capacitor/electrolytic d11(+) d9(-) 10uF
-  R2: resistor g11 g16 10k
-  SW1: button @ f19
+  R1: resistor b7 b11 100k
+  C1: capacitor/electrolytic b12(+) b15(-) 10uF
   Cc: capacitor d13 d20 10n
-  R3: resistor g12 g23 330
-  D1: led h23(A) h26(K) red
+  SW1: button @ f4
+  R2: resistor g11 g7 10k
+  R3: resistor g12 g16 330
+  D1: led h16(A) h19(K) red
 wires:
   - +t1 -- +b1 red
   - -t1 -- -b1 black
   - +t7 -- a7 red
   - +t10 -- a10 red
-  - a11 -- a12
-  - c9 -- -t9 black
+  - a11 -- a12 orange
+  - a15 -- -t15 black
   - c20 -- -t20 black
-  - f16 -- +b16 red
-  - h19 -- h11 orange
-  - b19 -- -t19 black
+  - b4 -- -t4 black
+  - i4 -- i11 orange
+  - j7 -- +b7 red
   - j10 -- -b10 black
   - i13 -- +b13 red
-  - j26 -- -b26 black
+  - j19 -- -b19 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/breadboard/03-555-monostable.svg)
 
 - **R1 の右足 (11 列) が 7 番、6 番 (12 列) とは `a11--a12` の 1 本だけで結ぶ**
   (どちらも R1・C1 の同じ 1 点)
-- SW1 (タクトスイッチ) は溝をまたぐ 4 本足で、`e19` `f19` `e21` `f21` を占める。
+- SW1 (タクトスイッチ) は溝をまたぐ 4 本足で、`e4` `f4` `e6` `f6` を占める。
   **溝の手前 (f 行、下ブロック) を 2 番 (11 列) へ、溝の向こう (e 行、上ブロック) を
   GND へ**。同じ側 (同じブロック) の 2 本足は押していなくても中でつながっている
 - 4 番 (RESET) は使わないので +5V に固定 (`i13 -- +b13`)

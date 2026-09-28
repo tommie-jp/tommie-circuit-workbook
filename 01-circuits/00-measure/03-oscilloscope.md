@@ -43,16 +43,6 @@ wires:
   - a4 -- a11 -- f11i0 -- f9i0
   - U1.3 -| f4a5
   - U1.4 -| c3a5
-notes:
-  # dip8 の記号は足番号しか刷らないので、足の名前を添える
-  - text d5d3 tiny right: GND
-  - text d5h3 tiny right: TRIG
-  - text e5b3 tiny right: OUT
-  - text e5f3 tiny right: RESET
-  - text d6d7 tiny left: VCC
-  - text d6h7 tiny left: DIS
-  - text e6b7 tiny left: THR
-  - text e6f7 tiny left: CV
 style:
   grid: on
   pitch: 1.2

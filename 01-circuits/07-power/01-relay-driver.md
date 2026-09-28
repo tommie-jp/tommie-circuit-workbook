@@ -67,7 +67,7 @@ parts:
   K1: relay @ f10
   Q1: transistor h6(E) h7(C) h8(B) 2SC1815
   R1: resistor f2 f8 1k
-  D1: diode i10(A) i12(K) 1N4148
+  D1: diode h10(A) h12(K) 1N4148
   R2: resistor g17 g21 330
   L1: led h21(A) h22(K) red
 wires:
@@ -77,7 +77,7 @@ wires:
   - j12 -- +b12 red
   - j2 -- +b2 orange
   - g13 -- +b13 red
-  - i22 -- -b22 black
+  - j22 -- -b22 black
   - +t30 -- +b30 red
   - -t29 -- -b29 black
 notes:

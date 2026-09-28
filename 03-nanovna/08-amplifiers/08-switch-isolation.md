@@ -105,10 +105,12 @@ wires:
   - g1 -- a1 red
   - f2 -- g2 red
   - a3 -- a4 red
-  - d2 -- d4 black
-  - d4 -- b4 black
-  - b4 -- b7 black
-  - d7 -- b7 black
+  - d2 -- c2 black
+  - c2 -- c4 black
+  - d4 -- c4 black
+  - c4 -- c7 black
+  - d7 -- c7 black
+  - c7 -- b7 black
   - a7 -- b7 black
   - b7 -- b20 black
   - b20 -- g20 black

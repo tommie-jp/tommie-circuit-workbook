@@ -89,8 +89,7 @@ wires:
   - j14 -- -b14 black
   - g15 -- g16 green
 notes:
-  - text small: TL072 (1 回路目で非反転増幅)。1=OUT1 2=IN1- 3=IN1+ 4=V-
-  - text small: 5=IN2+ 6=IN2- 7=OUT2 8=V+。使わない 2 回路目は 5 番を GND、6・7 番をつなぐ
+  - text small: TL072 (1 回路目で非反転増幅)。使わない 2 回路目は 5 番を GND、6・7 番をつなぐ
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/breadboard/09-negative-feedback.svg)

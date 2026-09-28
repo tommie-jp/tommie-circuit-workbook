@@ -20,21 +20,33 @@ board: BB
 ```circuit
 title: 図1 Pattern でクロックを作り 4017 を動かす
 parts:
+  U2: dip16 d5 CD4017 r180
+  VCC: vcc c2
+  G4: ground d4b0c0 r90
+  G5: ground d4g0 r90
+  G6: ground c7b0g0 r270
   AD:
     type: device
-    at: a1
+    at: d11c0e0
     label: Analog Discovery
-    pins: [V+, GND, DIO0, DIO1, DIO2, DIO3]
-  U2: dip16 h3 CD4017
+    pins: [V+, DIO0, DIO3, DIO1, DIO2, GND]
+  VCC: vcc b10
+  G7: ground f10
 wires:
-  - AD.V+ -| U2.16
-  - AD.GND -| U2.8
-  - AD.GND -| U2.13
-  - AD.GND -| U2.15
-  - AD.DIO0 -| U2.14
-  - AD.DIO1 -| U2.3
-  - AD.DIO2 -| U2.2
-  - AD.DIO3 -| U2.4
+  - a3 |- U2.14
+  - a3 -- a9
+  - a9 |- AD.DIO0
+  - U2.13 -| d4b0c0
+  - U2.15 -| d4g0
+  - U2.16 -| c2
+  - U2.8 -| c7b0g0
+  - AD.V+ -| b10
+  - AD.GND -| f10
+  - U2.4 -| AD.DIO3
+  - U2.3 -| AD.DIO1
+  - U2.2 -| AD.DIO2
+style:
+  grid: on
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/02-pattern-counter.svg)
@@ -57,7 +69,7 @@ parts:
     type: device
     at: bottom
     label: Analog Discovery
-    pins: [V+, GND, DIO0, DIO1, DIO2, DIO3]
+    pins: [V+, GND, DIO0, DIO2, DIO1, DIO3]
 wires:
   - AD.V+ -- +b8 red
   - AD.GND -- -b9 black

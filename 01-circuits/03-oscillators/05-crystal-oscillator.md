@@ -63,46 +63,47 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 部品は下ブロック (f〜j 行) に組む。上の赤レール = +5V、青レール = GND (上下の青レールは 1 列でつなぐ)
+# 1A (1 番) を 6 列の線で上ブロックへ上げ、水晶と C1・C2 は上、Rf・Rd は下に組む。上の赤レール = +5V、青レール = GND (上下の青レールは 1 列でつなぐ)
 board: half
 parts:
-  U1: dip14 @ e5 74HC04
-  Rf: resistor g5 g6 1M
-  Rd: resistor h6 h15 330
-  X1: crystal/hc49 i5 i15
-  C1: capacitor j5 j3 22p
-  C2: capacitor j15 j17 22p
+  U1: dip14 @ e8 74HC04
+  Rf: resistor h8 h9 1M
+  Rd: resistor h10 h16 330
+  X1: crystal/hc49 b6 b16
+  C1: capacitor c6 c3 22p
+  C2: capacitor c16 c19 22p
   OUT:
     type: device
     at: bottom
     label: 周波数カウンタ / オシロ (Ch1)
     pins: [SIG, GND]
 wires:
-  - +t5 -- a5 red
-  - j11 -- -b11 black
-  - j6 -- j7 orange
-  - j3 -- -b3 black
-  - j17 -- -b17 black
-  - U1.4 -- j8 gray
-  - j8 -- OUT.SIG gray
-  - OUT.GND -- -b20 black
-  # 使わない 4 ゲートの入力 (足5・9・11・13) を GND へ
+  - +t8 -- a8 red
   - -t1 -- -b1 black
-  - j9 -- -b9 black
-  - a6 -- -t6 black
-  - a8 -- -t8 black
-  - a10 -- -t10 black
+  - g8 -- g6 -- d6 orange
+  - g9 -- g10 orange
+  - d16 -- g16 orange
+  - a3 -- -t3 black
+  - a19 -- -t19 black
+  - j14 -- -b14 black
+  - j11 -- OUT.SIG gray
+  - OUT.GND -- -b22 black
+  - j12 -- -b12 black
+  # 使わない 4 ゲートの入力 (足5・9・11・13) を GND へ
+  - a9 -- -t9 black
+  - a11 -- -t11 black
+  - a13 -- -t13 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/breadboard/05-crystal-oscillator.svg)
 
 - **U1 は 14 ピンの 74HC04。使うのは 1 番・2 番 (発振用) と 3 番・4 番 (緩衝用) の
   2 ゲートだけ。** 7 番が GND、14 番が VCC
-- 水晶 (HC-49/U) は極性が無いので向きは自由。**リード線は短く**、5 列・15 列の
-  すぐ上に立てる
+- 水晶 (HC-49/U) は極性が無いので向きは自由。**リード線は短く**、6 列 (1 番から
+  上げた線) と 16 列 (Rd・C2 の点。溝をまたぐ線で下の Rd へ) の間に置く
 - **使わない入力は GND へ。** 残り 4 ゲートの入力 (5・9・11・13 番) を GND に
   つなぐ。浮いた CMOS 入力は勝手に振れて消費電流が増え、発振の邪魔にもなる。
-  5 番 (9 列の下) は j 行から下の青レールへ、13・11・9 番 (6・8・10 列の上) は
+  5 番 (12 列の下) は j 行から下の青レールへ、13・11・9 番 (9・11・13 列の上) は
   a 行から上の青レールへ。上下の青レールは 1 列でつなぐ。出力 (6・8・10・12 番)
   は何もつながずに開けておく
 

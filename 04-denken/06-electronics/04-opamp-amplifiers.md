@@ -100,11 +100,12 @@ wires:
   - e10 -- f10 yellow
   - g10 -- g14 yellow
   - j11 -- -b11 black
-  - j17 -- +b17 red
+  - i17 -- i18 red
+  - j18 -- +b18 red
   - -t2 -- -b2 black
   - +t29 -- +b29 red
 notes:
-  - text small: TL072 (1 回路目が反転、2 回路目が非反転)。1=OUT1 2=IN1- 3=IN1+ 4=V- 5=IN2+ 6=IN2- 7=OUT2 8=V+
+  - text small: TL072 (1 回路目が反転、2 回路目が非反転)
   - text small: 2 回目の測定は AD.2+ を U1.7 (OUT2、非反転側) に挿し替える
 ```
 

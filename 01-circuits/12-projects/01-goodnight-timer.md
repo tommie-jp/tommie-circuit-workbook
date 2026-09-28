@@ -86,44 +86,47 @@ style:
 title: 図2 ブレッドボードに組む
 board: full
 parts:
-  U1: dip8 @ e5 TLC555
-  Rtrig: resistor a10 a12 100k
-  SWtrig: button @ e15
-  Rt: resistor a20 a22 4.7M
-  Ct: capacitor/electrolytic c22 c24 220u
-  Rg: resistor a32 a34 220
-  Q1: transistor i36(S) i37(G) i38(D) 2N7000
-  RLED: resistor a42 a44 470
-  DLED: led c44(A) c46(K) red
+  U1: dip8 @ e10 TLC555
+  Rtrig: resistor b2 b5 100k
+  SWtrig: button @ e3
+  Rt: resistor b15 b12 4.7M
+  Ct: capacitor/electrolytic c11 c8 220u
+  Rg: resistor g46 g41 220
+  Q1: transistor b40(S) b41(G) b42(D) 2N7000
+  RLED: resistor b52 b49 470
+  DLED: led c49(A) c46(K) red
 wires:
-  - a5 -- +t5
-  - g8 -- b5
-  - j5 -- -b5
-  - +t10 -- b10
-  - g6 -- b12
-  - c12 -- d15
-  - g15 -- -b15
-  - -t50 -- -b50
-  - +t20 -- b20
-  - a6 -- b22
-  - b7 -- d22
-  - b24 -- -t24
-  - g7 -- b32
-  - b34 -- g37
-  - g36 -- -t36
-  - +t42 -- b42
-  - b46 -- g38
+  - -t62 -- -b62 black
+  - +t63 -- +b63 red
+  - a10 -- +t10 red
+  - j10 -- -b10 black
+  - j13 -- +b13 red
+  - a11 -- a12 orange
+  - a15 -- +t15 red
+  - a8 -- -t8 black
+  - h11 -- h6 -- d6 -- d5 orange
+  - a2 -- +t2 red
+  - j3 -- -b3 black
+  - i12 -- i46 blue
+  - e41 -- f41 blue
+  - e40 -- f40 black
+  - j40 -- -b40 black
+  - e42 -- e46 green
+  - a52 -- +t52 red
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/breadboard/01-goodnight-timer.svg)
 
-- U1 (e5) の足8 (5 列の上) と足4 (8 列の下) を +t、足1 (5 列の下) を下の − レール
-  (GND)。足2 (TRIG、6 列の下) は 12 列へ渡して Rtrig で +t へプルアップし、15 列の
-  SWtrig を押すと下の − レールへ落ちる。下の − レールは 50 列の線で上の − レールと
-  つなぐ
-- 足6・7 (THR・DISCH、7 列・6 列の上) を 22 列へ渡した所が Rt・Ct の時定数ノード
-- 足3 (OUT、7 列の下) が Rg を通して Q1 のゲート (37 列)。+t → RLED → DLED (常夜灯) の
-  カソード (46 列) を Q1 のドレイン (38 列) へ、ソース (36 列) が GND。
+- 上下のレールは右端 (62・63 列) の線でつなぐ。U1 (e10) の足8 (10 列の上) と
+  足4 (13 列の下) を + レール、足1 (10 列の下) を下の − レール (GND) へ
+- 足2 (TRIG、11 列の下) はオレンジの線で 6 列を通って上ブロックの 5 列へ上げる。
+  そこで Rtrig が + レールへプルアップし、SWtrig (e3) を押すと下の − レールへ落ちる
+- 足6・7 (THR・DISCH、12 列・11 列の上) は a 行で結ぶ。Rt (4.7MΩ) は 12 列から
+  赤い + レールへ、Ct (220µF) は 11 列から 8 列の − レールへ。ここが時定数ノード
+- 足3 (OUT、12 列の下) は青の線 (i 行) で 46 列へ運び、Rg を通して Q1 のゲート
+  (41 列) へ。Q1 は上ブロック (40〜42 列の b 行) に挿し、足は e 行から溝をまたぐ
+  短い線で下へ (S は 40 列から GND、G は 41 列で Rg)。D (42 列) は緑の線で 46 列へ
+  渡し、DLED (常夜灯) のカソードへ (アノードは RLED を通して + レール)。
   2N7000 は**平らな面を見て左から S・G・D** (2-5 と同じ)
 - 1 つの穴には足か線を 1 本だけ挿す (部品の足のある列へは、同じ列の空いた穴から線を出す)
 

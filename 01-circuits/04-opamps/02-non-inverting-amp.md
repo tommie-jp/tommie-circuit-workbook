@@ -58,7 +58,7 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上のレールは +5V/GND。V− は赤レールに乗せず、BAT から直配線する
+# 上下のレールは +5V/GND (1 列目で渡す)。V− は赤レールに乗せず、BAT から直配線する
 board: half
 parts:
   U1: dip8 @ e10 LM358
@@ -67,10 +67,10 @@ parts:
     at: top
     label: 発振器 1kHz 0.1V
     pins: [OUT, GND]
-  C1: capacitor f5 f8 1uF
-  Rb: resistor h12 h7 100k
-  R2: resistor j11 j7 1k
-  R3: resistor i10 i11 10k
+  C1: capacitor c5 c15 1uF
+  Rb: resistor h15 h19 100k
+  R3: resistor g10 g11 10k
+  R2: resistor i11 i7 1k
   BAT:
     type: device
     at: bottom
@@ -78,20 +78,23 @@ parts:
     pins: [V+, GND, V-]
 wires:
   - GEN.OUT -- a5 yellow
-  - e5 -- g5 yellow
-  - GEN.GND -- -t5 black
-  - g8 -- g12 orange
-  - i7 -- -t7 black
+  - GEN.GND -- -t7 black
+  - d15 -- g15 -- g12 orange
+  - j19 -- -b19 black
+  - j7 -- -b7 black
   - +t10 -- a10 red
-  - BAT.V+ -- +t20 red
-  - BAT.GND -- -t20 black
+  - +t1 -- +b1 red
+  - -t1 -- -b1 black
+  - BAT.V+ -- +b9 red
+  - BAT.GND -- -b11 black
   - BAT.V- -- j13 orange
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/02-non-inverting-amp.svg)
 
-- **GEN (発振器) の出力を C1 で受け、12 列 (IN+、3 番) へ。** Rb はその 12 列を
-  GND へ持ち上げるバイアス抵抗 (直流だけを GND へ逃がす)
+- **GEN (発振器) の出力を C1 で受け、12 列 (IN+、3 番) へ。** C1 は上ブロックに
+  寝かせ、15 列から溝をまたぐ線で下の 15 列・12 列へ下ろす。Rb はその 15 列を
+  GND へ落とすバイアス抵抗 (直流だけを GND へ逃がす)
 - R2 (IN−、11 列) は 7 列で GND へ、R3 (帰還) は 11 列から 10 列 (OUT、1 番) へ
 - V− は赤レールに乗せず、`BAT.V- -- j13` で 4 番 (GND/V−) へ直配線する
 
