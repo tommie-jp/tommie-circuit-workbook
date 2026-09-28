@@ -51,6 +51,8 @@ wires:
   - X2.GND -| d12
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/03-noise-floor-attenuator-1.svg)
+
 ## 実体配線図
 
 1 MHz なら、パッドもブレッドボードの上で組んでよい。ブレッドボードの隣の列どうしの
@@ -82,6 +84,8 @@ wires:
   - SA.RF -- a18 orange
   - SA.GND -- -t22 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/breadboard/03-noise-floor-attenuator.svg)
 
 - R1・P1・P3 は、**同じ列の別の行に挿すとつながる**ことを使い、ジャンパを使わずに
   直列につなぐ (R1 の右足と P1 の左足が 10 列、P1 の右足・P3 の左足・P2 が 14 列)
@@ -159,6 +163,8 @@ wires:
 notes:
   - box a8 e12
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/03-noise-floor-attenuator-2.svg)
 
 破線の枠の中が、市販のアッテネータの筒の中にあたる。
 

@@ -33,6 +33,8 @@ wires:
   - J2.2 -- c8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/02-ceramic-capacitor.svg)
+
 ## 実体配線図
 
 ```perfboard
@@ -55,6 +57,8 @@ wires:
   - f15 -- h15 black
   - h15 -- GND black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/02-ceramic-capacitor.svg)
 
 積層セラミック (2012 サイズ相当) はリード線が無いぶん ESL が小さい。ここでは
 基板の穴までの配線を含めて ESL ≈ 2 nH、ESR ≈ 0.05 Ω と見積もる。
@@ -87,6 +91,8 @@ notes:
   - text 60M 0.2Ω: 谷の底 0.05 Ω (ESR) は枠の下端 0.1 Ω より下
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/02-ceramic-capacitor-1.svg)
+
 SRF の近く (5〜17.5 MHz) を広げ、|Z| に X を重ねて線形の目盛で見る。
 
 ```vna
@@ -104,6 +110,8 @@ markers:
 notes:
   - text 9M -0.15Ω: SRF で X = 0、|Z| = ESR (0.05 Ω)
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/02-ceramic-capacitor-2.svg)
 
 ## 見るべき値
 

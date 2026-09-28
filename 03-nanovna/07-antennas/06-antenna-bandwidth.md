@@ -41,6 +41,8 @@ wires:
   - J1.2 -- c2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/06-antenna-bandwidth.svg)
+
 ## 掃引の設定
 
 | 項目 | 値 |
@@ -68,6 +70,8 @@ markers:
 notes:
   - band 138.3M 150M: SWR 2 の幅
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/vna/06-antenna-bandwidth.svg)
 
 - SWR の最小は 144 MHz 付近で 1.40 (R = 70 Ω と 50 Ω の比)
 - SWR = 2 になる点はおよそ 138.3 MHz と 150.0 MHz。**帯域幅は約 11.7 MHz**

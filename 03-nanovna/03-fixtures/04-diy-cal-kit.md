@@ -39,6 +39,8 @@ notes:
   - text j2f0 blue center: Load
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/04-diy-cal-kit.svg)
+
 - **Open** は中心導体をどこにもつながず、外皮 (シェル) だけの部品。
   ほかに何もつながる先が無いのは意図どおりで、ERC のお知らせは無視してよい
 - **Short** は中心導体を最短距離で外皮 (GND) へ落とす
@@ -59,6 +61,8 @@ parts:
   J1: sma/female-edge e1 d0 f0
 ```
 
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/04-diy-cal-kit-1.svg)
+
 ```perfboard
 board:
   size: 8x8
@@ -72,6 +76,8 @@ wires:
   - e1 -- f1
   - f1 -- f0
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/04-diy-cal-kit-2.svg)
 
 ```perfboard
 board:
@@ -89,6 +95,8 @@ wires:
   - f2 -- g2 black
   - g2 -- g3 black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/04-diy-cal-kit-3.svg)
 
 - Short は**中心導体からシェルまでの線をできるだけ短く**する。長い線が
   誘導性のオフセットになり、高い周波数ほど Smith の左端から回っていく
@@ -115,6 +123,8 @@ markers:
   - 300M
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/vna/04-diy-cal-kit-1.svg)
+
 ```vna
 device: h4
 sweep: 1M-300M 101
@@ -125,6 +135,8 @@ traces:
 markers:
   - 300M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/vna/04-diy-cal-kit-2.svg)
 
 ```vna
 device: h4
@@ -138,6 +150,8 @@ traces:
 markers:
   - 300M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/vna/04-diy-cal-kit-3.svg)
 
 ## 見るべき値
 

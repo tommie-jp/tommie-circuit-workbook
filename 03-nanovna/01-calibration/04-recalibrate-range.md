@@ -41,6 +41,8 @@ notes:
   - text 340M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/04-recalibrate-range.svg)
+
 - 再校正すれば、範囲が変わっても S21 = 0 dB・S11 は検出限界以下のまま
 - **再校正しないまま範囲だけ広げると**、新しい点の一部 (特に元の範囲の外)
   には校正のときの補正係数が無い。NanoVNA は近い点から補って表示するので、

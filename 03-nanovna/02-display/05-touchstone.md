@@ -57,6 +57,8 @@ notes:
   - text 20M -20dB: S21 も S11 も −6.02 dB で重なる
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/vna/05-touchstone.svg)
+
 ## 見るべき値
 
 | ファイル | 中身 | この題で使うなら |

@@ -53,6 +53,8 @@ notes:
   - text 100M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/vna/01-device-range-1.svg)
+
 - 50 kHz でも 1.5 GHz でも S21 は 0 dB、S11 は検出限界以下 (実用上 0)。
   **範囲そのものは NanoVNA の中では特別扱いされていない** — H4 の限界は
   電気的な設計 (高調波の作り方) の限界であって、掃引欄に上限の表示は出ない
@@ -76,6 +78,8 @@ markers:
 notes:
   - band 1.5G 3G: H4 の範囲の外
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/vna/01-device-range-2.svg)
 
 - 図は出るが、**「NanoVNA-H4 は 1.5 GHz までです」**と言われる。実機でも
   1.5 GHz より上は測れない (どう見えるかは 9-1 で確かめる)

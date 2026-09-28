@@ -35,6 +35,8 @@ notes:
   - text b5h0 center: 1 m の同軸ケーブル
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/03-cable-loss.svg)
+
 ## 掃引の設定
 
 | 項目 | 値 |
@@ -62,6 +64,8 @@ markers:
 notes:
   - text 160M 0dB: 損失の計算 −0.12 / −0.27 / −0.48 dB
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/vna/03-cable-loss.svg)
 
 ## 見るべき値
 

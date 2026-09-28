@@ -32,6 +32,8 @@ notes:
   - text b8a2: 先端 (75 Ω または 50 Ω で終端)
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/06-fifty-vs-seventy-five.svg)
+
 ## 掃引の設定
 
 | 項目 | 値 |
@@ -59,6 +61,8 @@ markers:
   - 49.47M
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/vna/06-fifty-vs-seventy-five-1.svg)
+
 先を (75 Ω ではなく) **50 Ω で終端してしまった**場合 — 入口と先端の
 両方で反射が起き、線路の長さぶんだけ位相が回るので、SWR が周波数で揺れる。
 
@@ -76,6 +80,8 @@ markers:
   - 24.73M
   - 49.47M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/vna/06-fifty-vs-seventy-five-2.svg)
 
 ## 見るべき値
 

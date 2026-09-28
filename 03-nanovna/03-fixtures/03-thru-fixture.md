@@ -35,6 +35,8 @@ notes:
   - text a8 center: CH1
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/03-thru-fixture.svg)
+
 ## 実体配線図
 
 ```perfboard
@@ -55,6 +57,8 @@ wires:
   - f15 -- h15 black
   - h15 -- GND black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/03-thru-fixture.svg)
 
 - J1 の中心導体から J2 の中心導体まで、e 行を 1 本の線でつなぐだけ
 - この 1 本の長さが、そのまま**治具だけが持つ寄生インダクタンス**になる
@@ -85,6 +89,8 @@ markers:
 notes:
   - text 20M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/vna/03-thru-fixture.svg)
 
 ## 見るべき値
 

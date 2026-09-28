@@ -34,6 +34,8 @@ wires:
   - J1.2 -- g2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/circuit/02-sma-care.svg)
+
 - SMA は**ねじ込み式**。まずオスとメスを軽く合わせ、ガタが無いことを確かめて
   から**手でねじを回す** (工具は使わない)
 - 最後の締め込みだけトルクレンチを使う。**目安は 8 in-lb (約 0.9 N·m)**。
@@ -71,6 +73,8 @@ markers:
 notes:
   - text 20M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/vna/02-sma-care.svg)
 
 - 理想値は S21 = 0 dB、S11 は検出限界以下 (実用上 0)。**きちんと締めた
   実測はこの理想値にかなり近づく**

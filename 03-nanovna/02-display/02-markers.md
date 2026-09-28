@@ -49,6 +49,8 @@ notes:
   - text 72M -40dB: 印 2 (69 MHz) が −3 dB の遮断
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/vna/02-markers.svg)
+
 - **マーカー 1 (30 MHz)** — 通過域。S21 はほぼ 0 dB
 - **マーカー 2 (69 MHz)** — **遮断周波数**。S21 が −3 dB まで落ちる点
   (整合が取れているので S11 もほぼ同じ −3 dB になる)

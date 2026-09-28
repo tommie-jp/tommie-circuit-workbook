@@ -55,6 +55,8 @@ wires:
   - J1.2 -- c2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/05-loopstick-varicap.svg)
+
 - R1 = 20 Ω は**実在の抵抗ではなく**、タップで下がった見かけのインピーダンス
   (共振点での値)。実際に基板にはんだ付けするのは L1 (コイル) と C1 (バリコン) だけ
 - C1 のラベル VC1 が可変コンデンサ (バリコン)。極板を斜めの矢が貫く記号で、矢が「回して容量を変える」印。
@@ -78,6 +80,8 @@ wires:
   - h2 -- h11 black
   - h11 -- g11 black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/perfboard/05-loopstick-varicap.svg)
 
 - L1 がループスティックのコイル (330 µH)。実物はフェライト棒に巻いた線だが、
   ここでは軸物インダクタの記号で表す。記号は 2 端子なので、J1 からの線 (e3) は
@@ -114,6 +118,8 @@ markers:
   - 876k
   - 900k
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/vna/05-loopstick-varicap.svg)
 
 - 共振 (876 kHz) で SWR は最小 2.50 (タップの見かけ抵抗 20 Ω と 50 Ω の比)。
   完全な 1.00 にはならないが、共振点だけ大きく谷ができるのが分かる

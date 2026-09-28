@@ -36,6 +36,8 @@ notes:
   - text a8 center: CH1
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/02-shunt-fixture.svg)
+
 - CH0–CH1 は**直結**のまま。R1 (DUT) がその途中から GND へ枝分かれする
 - ここでは治具が正しく作れたかを確かめるため、100 Ω を仮に入れてある
 
@@ -62,6 +64,8 @@ wires:
   - f15 -- h15 black
   - h15 -- GND black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/02-shunt-fixture.svg)
 
 - e 行を CH0 から CH1 まで一直線に通す。R1 は e8 から下 (h8) へ枝分かれし、
   GND のまとめ (h2) へつながる
@@ -94,6 +98,8 @@ markers:
 notes:
   - text 20M -40dB: S21 は −1.94 dB、S11 は −13.98 dB (直列の 3-1 と逆の出方)
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/vna/02-shunt-fixture.svg)
 
 ## 見るべき値
 

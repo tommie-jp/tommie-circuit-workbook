@@ -56,6 +56,8 @@ wires:
   - J2.2 -- c18
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/04-insertion-return-loss.svg)
+
 ## 実体配線図
 
 6-1 と同じ治具 (端面 SMA 2 つの perfboard)。
@@ -98,6 +100,8 @@ wires:
   - f33 -- h33 black
 ```
 
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/04-insertion-return-loss.svg)
+
 ## 掃引の設定
 
 | 項目 | 値 |
@@ -130,6 +134,8 @@ markers:
   - 20M
   - 25M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/vna/04-insertion-return-loss.svg)
 
 - ESR は 10 MHz での値 (2π × 10 MHz × L / 60) を代表値として一定に置いた
   簡略化。実際は周波数に比例して増える (見るべき値の表は周波数ごとに計算し直した値)

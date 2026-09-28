@@ -52,6 +52,8 @@ notes:
   - text a10 center: CH1
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/05-attenuator.svg)
+
 ## 実体配線図
 
 ```perfboard
@@ -80,6 +82,8 @@ wires:
   - f15 -- h15 black
   - h15 -- h8 black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/05-attenuator.svg)
 
 - R1・R3 (27 Ω) は e 行を通る本線に、R2 (36 Ω) はそこから GND へ落ちる
   分岐に載る
@@ -114,6 +118,8 @@ markers:
 notes:
   - text 20M -55dB: S21 は −10.07 dB、S11 は E24 の丸めで −36.43 dB
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/vna/05-attenuator.svg)
 
 ## 見るべき値
 

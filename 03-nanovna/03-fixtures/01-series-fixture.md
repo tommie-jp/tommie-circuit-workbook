@@ -32,6 +32,8 @@ wires:
   - J2.2 -- c8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/01-series-fixture.svg)
+
 - R1 が測る部品 (DUT)。ここでは 100 Ω の抵抗を入れて、治具が正しく作れたかを確かめる
 - 2 つの SMA の外皮 (GND) は治具の上でつなぐ。つながないと、GND の戻り道が
   ケーブルの外側を回って値が狂う
@@ -58,6 +60,8 @@ wires:
   - f15 -- h15 black
   - h15 -- GND black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/01-series-fixture.svg)
 
 - 端面 SMA の凹の腕 (GND) を板の縁の銅箔に半田付けし、中心導体を板の穴に通す
 - **中心導体から部品までの線はできるだけ短く**。長い線はそのぶんインダクタンスに
@@ -90,6 +94,8 @@ markers:
 notes:
   - text 20M -20dB: S21 も S11 も −6.02 dB で重なる
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/vna/01-series-fixture.svg)
 
 - S21 と S11 はどちらも −6.02 dB で重なる。Smith では実軸の r = 3 (150 Ω) の 1 点
 - 測ったら NanoVNA-Saver で Touchstone (`.s2p`) に保存してこのファイルの隣に置き、

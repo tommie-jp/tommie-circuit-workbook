@@ -31,6 +31,8 @@ notes:
   - text b8a2: 開放
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/02-velocity-factor.svg)
+
 先端 (b8) は意図して開放のままにする。ノッチを作るには
 CH1 側へ信号を通す必要があるので、実機では CH0-CH1 間に長さ 1 m のスタブを
 分岐させて挿す (3-2 の並列治具と同じ考え方の板を使う)。
@@ -62,6 +64,8 @@ notes:
   - band 49.47M 148.40M
   - text 60M -60dB: 間隔 Δf = 98.93 MHz → vf 0.660
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/vna/02-velocity-factor.svg)
 
 ## 見るべき値
 

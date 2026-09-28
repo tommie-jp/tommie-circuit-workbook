@@ -36,6 +36,8 @@ notes:
   - text f8f0 blue center: Open (先端)
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/circuit/05-reference-plane.svg)
+
 ## 掃引の設定
 
 | 項目 | 値 |
@@ -61,6 +63,8 @@ notes:
   - text 99.1M 60deg: 基準面がコネクタなら 0° のまま
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/05-reference-plane-1.svg)
+
 **同じ Open を、30 cm のケーブルの先に置いた場合** (基準面を動かさずに測ると)。
 
 ```vna
@@ -78,6 +82,8 @@ markers:
 notes:
   - text 99.1M -45deg: ケーブルのぶん 0° から −109.17° に回る
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/05-reference-plane-2.svg)
 
 - 図2 は位相 0°、Smith の右端ちょうど
 - 図3 は 100 MHz で位相が **−109.17°** も回り、Smith 上では右端から

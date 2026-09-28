@@ -45,6 +45,8 @@ notes:
   - text 140M -30dB: 共振 136 MHz の谷 (−15.06 dB)
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/vna/01-trace-formats-1.svg)
+
 同じ DUT を、残りの 2 つの形式 (Smith・SWR) で見る。
 
 ```vna
@@ -64,6 +66,8 @@ markers:
 notes:
   - text 124M 6: 共振でも 1.43 (R が 35 Ω)
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/vna/01-trace-formats-2.svg)
 
 - **Log Mag** — 反射の大きさを dB で見る。共振点で谷になる (S11 が小さい
   ほど反射が少ない)

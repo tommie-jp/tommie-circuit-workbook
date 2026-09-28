@@ -57,6 +57,8 @@ notes:
   - text 135M -40dB: 印 2 が中心 144 MHz (スパン 20 MHz の真ん中)
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/vna/03-sweep-settings.svg)
+
 ## 見るべき値
 
 | 入れ方 | 開始 | 終了 | 中心のマーカーが指す周波数 |

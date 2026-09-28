@@ -58,6 +58,8 @@ wires:
   - X2.GND -| d11
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/05-square-wave-harmonics-1.svg)
+
 - 555 の出力は 0〜5 V を往復する方形波で、直接 tinySA (50 Ω) につなぐと
   基本波だけで +20 dBm 近くになる (見るべき値で計算)。**0-3 と同じ 20 dB
   T 型パッド (40.9 Ω・10.1 Ω・40.9 Ω) を必ず挟む** (図の P1〜P3)
@@ -93,6 +95,8 @@ wires:
   - c12 -| X2.RF
   - X2.GND -| e13
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/05-square-wave-harmonics-2.svg)
 
 ## 実体配線図
 
@@ -132,6 +136,8 @@ wires:
   - ATT.OUT -- SA.RF orange
   - SA.GND -- -b19 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/breadboard/05-square-wave-harmonics.svg)
 
 - DIP8・電源・RESET の配線は回路の教科書の 3-2 と同じ (溝をまたいで挿す、4 番は +5V に固定)
 - 3 番 OUT (下ブロック、列12) はそのまま `ATT.IN` へ。ATT (20 dB パッド) は

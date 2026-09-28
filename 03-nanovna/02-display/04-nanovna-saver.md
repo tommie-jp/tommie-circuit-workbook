@@ -57,6 +57,8 @@ notes:
   - text 20M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/vna/04-nanovna-saver.svg)
+
 ## 見るべき値
 
 | 点数 | 隣り合う点の間隔 (このスウィープ) | 分かること |

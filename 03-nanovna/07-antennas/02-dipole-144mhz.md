@@ -45,6 +45,8 @@ wires:
   - J1.2 -- c2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/02-dipole-144mhz.svg)
+
 - R1 = 70 Ω が放射抵抗、L1・C1 でエレメントの長さのずれ (自分の共振周波数) を表す
 - ここでは自分の共振が 140 MHz になるように L1・C1 を選んだ (**長すぎる状態**)
 
@@ -75,6 +77,8 @@ markers:
   - 140M
   - 144M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/vna/02-dipole-144mhz.svg)
 
 - 自分の共振 (140 MHz) では Smith が実軸上 (r = 1.4、純抵抗 70 Ω)。144 MHz では
   実軸から上 (+jX) にずれる — **誘導性は「長すぎる」の合図**

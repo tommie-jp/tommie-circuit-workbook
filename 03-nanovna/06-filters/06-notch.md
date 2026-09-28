@@ -43,6 +43,8 @@ wires:
   - J2.2 -- c6
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/06-notch.svg)
+
 - J1 と J2 の間は直結 (スルー)。L1・C1 の直列共振枝が b4 から地へ落ちているだけ
 
 ## 実体配線図
@@ -68,6 +70,8 @@ wires:
   - l2 -- l8 black
   - l8 -- l14 black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/06-notch.svg)
 
 - L1・C1 は e (信号) 行から下へ 2 段ずつ (g・h・j 行) 伸ばし、l 行の GND バスへ落とす
 
@@ -98,6 +102,8 @@ markers:
 notes:
   - band 88M 108M: FM 放送帯
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/vna/06-notch.svg)
 
 - ノッチの底は約 **−32.9 dB** (98.1 MHz)。FM 放送帯 (88〜108 MHz) の端でも
   −12〜−13 dB 落ちる — 1 段だけなので裾は広い

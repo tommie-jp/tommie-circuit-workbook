@@ -40,6 +40,8 @@ wires:
   - J1.2 -- c2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/01-swr-impedance-reading.svg)
+
 ## 掃引の設定
 
 | 項目 | 値 |
@@ -64,6 +66,8 @@ traces:
 markers:
   - 50M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/vna/01-swr-impedance-reading.svg)
 
 - Smith チャートでは実軸上、中心 (50 Ω) より右の r = 2 (100 Ω) の点で止まったまま
   動かない (純抵抗、周波数に依らない)

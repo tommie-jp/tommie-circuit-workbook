@@ -33,6 +33,8 @@ notes:
   - text b8a2: 開放
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/04-fault-location.svg)
+
 先 (b8) は断線した先という意味で、意図して開放のままにする。
 
 ## 掃引の設定
@@ -57,6 +59,8 @@ traces:
   - S11 tdr vf 0.66
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/vna/04-fault-location-1.svg)
+
 同じ距離で、断線ではなく**芯線とシールドが短絡**した場合。
 
 ```vna
@@ -69,6 +73,8 @@ dut:
 traces:
   - S11 tdr vf 0.66
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/vna/04-fault-location-2.svg)
 
 ## 見るべき値
 

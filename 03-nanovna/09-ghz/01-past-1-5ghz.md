@@ -57,6 +57,8 @@ notes:
   - text a6 center: バレルアダプタ (ここで 2 本のケーブルをつなぐ)
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/09-ghz/circuit/01-past-1-5ghz.svg)
+
 - 回路図としては 1 本の線と変わらない (同軸ケーブルは伝送線路なので、この本の
   circuit フェンスには専用の記号は無い。ただの導線として描き、注記で
   アダプタの位置だけ示す)
@@ -91,6 +93,8 @@ notes:
   - band 1.5G 3G: V2 でしか出ない
   - text 2.85G 0dB: 損失の計算 −0.92 / −1.30 dB
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/09-ghz/vna/01-past-1-5ghz.svg)
 
 - 理想の画面は損失が無いので S21 は 0 dB のまま平ら (フェンスの制約)。
   **実際に NanoVNA-V2 で測ると、上の表のとおり右肩下がりになるはず**

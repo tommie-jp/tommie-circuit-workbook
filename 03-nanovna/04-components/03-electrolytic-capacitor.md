@@ -32,6 +32,8 @@ wires:
   - J2.2 -- c8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/03-electrolytic-capacitor.svg)
+
 C1 は極性がある。先に書いた足 (J1 側) が +。
 
 ## 実体配線図
@@ -56,6 +58,8 @@ wires:
   - f15 -- h15 black
   - h15 -- GND black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/03-electrolytic-capacitor.svg)
 
 リード品の電解コンデンサは積層セラミックより ESL が大きい。ここでは
 ESR ≈ 0.8 Ω (汎用品の代表値)、ESL ≈ 8 nH と見積もる。
@@ -87,6 +91,8 @@ markers:
 notes:
   - text 1M 0.4Ω: 178 kHz (SRF)〜1 MHz は ESR の 0.8 Ω で平ら
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/03-electrolytic-capacitor.svg)
 
 ## 見るべき値
 

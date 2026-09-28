@@ -38,6 +38,8 @@ wires:
   - J1.2 -- c2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/03-whip-430mhz.svg)
+
 - R1 = 36 Ω が放射抵抗。L1・C1 は自分の共振が 425 MHz (**やや長すぎる状態**) に
   なるよう選んだ
 
@@ -66,6 +68,8 @@ markers:
   - 425M
   - 430M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/vna/03-whip-430mhz.svg)
 
 - 自分の共振 (425 MHz) は Smith の実軸上 (r = 0.72、36 Ω)。430 MHz では
   わずかに +jX 側 (誘導性) にずれる — まだ少し長い

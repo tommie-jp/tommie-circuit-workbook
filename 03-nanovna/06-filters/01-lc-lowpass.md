@@ -55,6 +55,8 @@ wires:
   - J2.2 -- c18
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/01-lc-lowpass.svg)
+
 - 両端が並列コンデンサ (shunt C) の π 型。直列側はコイル
 - C1 = C4 (図の 47 pF) が両端、C2 = C3 (200 pF) が内側。次数が奇数なので
   両端の素子は同じ種類 (コンデンサ) になる
@@ -99,6 +101,8 @@ wires:
   - f33 -- h33 black
 ```
 
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/01-lc-lowpass.svg)
+
 - e 行が信号の通り道。4 つのコンデンサの下側の足 (f 行) を h 行の GND バスへ落とす
 - コイルは軸物 (`inductor`)。330 nH と 560 nH は市販のカラーコード付きインダクタで買える
 
@@ -136,6 +140,8 @@ markers:
 notes:
   - band 1M 28.4M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/vna/01-lc-lowpass.svg)
 
 - 部品を E12/E24 系列に丸めたので、実際のカットオフ (−3 dB) は設計の 30 MHz より
   やや低い**約 28.4 MHz**になる (計算値)

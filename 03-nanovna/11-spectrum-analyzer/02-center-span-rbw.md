@@ -43,6 +43,8 @@ wires:
   - X2.GND -| d8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/02-center-span-rbw.svg)
+
 - W1 を 1 MHz・振幅 1 V (peak) の正弦波にする。R1 (1 kΩ) を直列に入れて
   50 Ω の tinySA 入力へ落とすと、Wavegen から見た負荷は 1 kΩ + 50 Ω ≈ 1.05 kΩ
   で、流れる電流は 1 V ÷ 1.05 kΩ ≈ 0.95 mA。**Wavegen の保証駆動電流 10 mA

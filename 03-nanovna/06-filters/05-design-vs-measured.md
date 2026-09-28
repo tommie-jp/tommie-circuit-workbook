@@ -57,6 +57,8 @@ wires:
   - J2.2 -- c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/05-design-vs-measured-1.svg)
+
 ```circuit
 title: 図2 5 次バターワース ローパス (計算だけの参考)
 parts:
@@ -79,6 +81,8 @@ wires:
   - J1.2 -- c2
   - J2.2 -- c14
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/05-design-vs-measured-2.svg)
 
 - 回路の形 (5 次 π 型) は同じ。**値の比だけが違う**。チェビシェフは両端の C が
   大きく真ん中の C との差が小さい (だから通過帯域で反射が波打つ)
@@ -117,6 +121,8 @@ wires:
   - f25 -- h25 black
 ```
 
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/05-design-vs-measured.svg)
+
 ## 掃引の設定
 
 | 項目 | 値 |
@@ -149,6 +155,8 @@ notes:
   - band 1M 30M
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/vna/05-design-vs-measured-1.svg)
+
 バターワース (参考) の**計算だけの画面**。
 
 ```vna
@@ -171,6 +179,8 @@ markers:
 notes:
   - band 1M 30M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/vna/05-design-vs-measured-2.svg)
 
 - チェビシェフは通過帯域 (1〜28 MHz あたり) に**0.5 dB 弱の波打ち**が見える
   (マーカー 1 と 2 で −0.47 dB と −0.01 dB。丸めのせいでリップルの谷が少しずれる)

@@ -33,6 +33,8 @@ wires:
   - J2.2 -- c8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/06-crystal.svg)
+
 ## 実体配線図
 
 ```perfboard
@@ -55,6 +57,8 @@ wires:
   - f15 -- h15 black
   - h15 -- GND black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/06-crystal.svg)
 
 10 MHz の HC-49 水晶の等価回路は代表的な値として、モーショナル容量
 Cm ≈ 12 fF、モーショナル抵抗 Rm ≈ 25 Ω、電極の容量 Co ≈ 4 pF、
@@ -89,6 +93,8 @@ markers:
 notes:
   - band 10.00203M 10.01702M: fs と fp の間 15 kHz
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/06-crystal.svg)
 
 ## 見るべき値
 

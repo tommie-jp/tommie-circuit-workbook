@@ -47,6 +47,8 @@ wires:
   - J2.2 -- c10
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/02-lc-highpass.svg)
+
 - shunt (地へ落とす) の 2 つがコイル、直列の 1 つがコンデンサ。ローパス (6-1) と
   ちょうど逆
 
@@ -78,6 +80,8 @@ wires:
   - f17 -- h17 black
 ```
 
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/02-lc-highpass.svg)
+
 ## 掃引の設定
 
 | 項目 | 値 |
@@ -105,6 +109,8 @@ markers:
 notes:
   - band 9.87M 100M: 通過帯域 (−3 dB から上)
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/vna/02-lc-highpass.svg)
 
 - 丸めた値での実際のカットオフ (−3 dB) は**約 9.87 MHz** (設計は 10 MHz)
 - 1 MHz では −59 dB とよく落ちる。中波帯や短波の低い方を切り、それより上を通す

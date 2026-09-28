@@ -29,6 +29,8 @@ wires:
   - J1.2 -- c2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/05-swr-termination.svg)
+
 RL の値を挿し替えて測る。短絡・開放は RL の代わりに直結・開放にする。
 
 ## 掃引の設定
@@ -56,6 +58,8 @@ markers:
   - 155M
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/vna/05-swr-termination-1.svg)
+
 終端 100 Ω — SWR = 2。
 
 ```vna
@@ -72,6 +76,8 @@ markers:
   - 155M
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/vna/05-swr-termination-2.svg)
+
 終端を短絡 (0 Ω) — SWR は測れる上限までずっと大きい。
 
 ```vna
@@ -86,6 +92,8 @@ traces:
 markers:
   - 155M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/vna/05-swr-termination-3.svg)
 
 ## 見るべき値
 

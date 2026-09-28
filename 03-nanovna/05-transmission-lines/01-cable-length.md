@@ -34,6 +34,8 @@ notes:
   - text b8a2: 開放
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/01-cable-length.svg)
+
 先端 (b8) は何にもつながず、意図して開放のままにする。
 
 ## 掃引の設定
@@ -60,6 +62,8 @@ traces:
 notes:
   - text 450M 0dB: 全反射で 0 dB (開放も短絡も同じ)
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/vna/01-cable-length.svg)
 
 ## 見るべき値
 

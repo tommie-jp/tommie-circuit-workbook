@@ -38,6 +38,8 @@ notes:
   - text a8 center: CH1
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/06-fixture-limit.svg)
+
 ## 実体配線図
 
 ```perfboard
@@ -58,6 +60,8 @@ wires:
   - f15 -- h15 black
   - h15 -- GND black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/06-fixture-limit.svg)
 
 - J1 から J2 までの e 行の線が長いほど、寄生インダクタンスが大きくなる。
   ここでは**線の長さぶんでおよそ 5 nH** と見積もる (4-7 の「リード線 1 cm
@@ -89,6 +93,8 @@ markers:
 notes:
   - text 100M -60dB: S11 が −20 dB を超える所が限界の目安
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/vna/06-fixture-limit.svg)
 
 ## 見るべき値
 

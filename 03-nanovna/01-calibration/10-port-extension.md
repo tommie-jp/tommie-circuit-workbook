@@ -80,6 +80,8 @@ notes:
   - text 530M -120deg: 印 3 (500 MHz) は短絡と同じ所
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/10-port-extension-1.svg)
+
 同じケーブルの群遅延 (図2) は周波数によらず一定になる。
 
 ```vna
@@ -99,6 +101,8 @@ markers:
 notes:
   - text 100M 1.4ns: 往復の遅延 2τ = 1.01 ns — ELECTRICAL DELAY に入れる値
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/10-port-extension-2.svg)
 
 - Smith の点は外周に張り付いたまま時計回りに回り、250 MHz で 1/4 周 (下の端の −j50 Ω)、
   500 MHz で半周 (左端。短絡と同じ所)、1 GHz でほぼ 1 周する。開放は右端の 1 点に

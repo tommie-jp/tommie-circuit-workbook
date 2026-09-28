@@ -67,6 +67,8 @@ wires:
   - J2.2 -- c12
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/circuit/02-input-output-return-loss.svg)
+
 - 8-1 との違いは出力にアッテネータを挟んでいないこと。ここでは電力を送り込む
   測定ではなく**反射だけ**を見るので、アンプの利得が悪さをしない
   (CH1 からの信号レベルは低く保ったまま、S11 だけを読む)
@@ -122,6 +124,8 @@ wires:
   - h19 -- h12 black
 ```
 
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/perfboard/02-input-output-return-loss.svg)
+
 - C2 (出力結合コンデンサ) は 8-1 と同じ所に残す。測る周波数では C2 の
   リアクタンスは小さく、J2 からはほぼコレクタ (Rc) がそのまま見える。
   C2 を外すとコレクタの約 8 V の直流が NanoVNA のポートにかかるので外さない
@@ -154,6 +158,8 @@ markers:
   - 300M
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/vna/02-input-output-return-loss-1.svg)
+
 **出力側** (基板を裏返して J2 を CH0 に挿す) の**見えるはずの画面**。
 
 ```vna
@@ -172,6 +178,8 @@ markers:
   - 100M
   - 300M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/vna/02-input-output-return-loss-2.svg)
 
 - 入力側は 1 MHz でほぼ 0 dB (ほぼ全反射)。2.2 kΩ が 50 Ω よりずっと大きいため
 - 出力側は 1 MHz で −3.25 dB とそこそこ反射する (270 Ω と 50 Ω の中間的な不整合)

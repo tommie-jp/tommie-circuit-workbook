@@ -49,6 +49,8 @@ wires:
   - X2.GND -| d10
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/04-nanovna-output.svg)
+
 ## 計器の設定
 
 | 一般の名前 | 値 | tinySA Ultra のメニュー |

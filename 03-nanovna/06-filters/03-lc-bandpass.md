@@ -57,6 +57,8 @@ wires:
   - J2.2 -- c21
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/03-lc-bandpass.svg)
+
 - L1・C1 が並列で入口のシャント共振器、L3・C3 が出口のシャント共振器 (どちらも
   21 MHz で並列共振し、そこだけ高いインピーダンスで地に落とさない)
 - L2・C2 は信号経路に直列に入る直列共振器 (21 MHz で直列共振し、そこだけ
@@ -100,6 +102,8 @@ wires:
   - f23 -- h23 black
 ```
 
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/03-lc-bandpass.svg)
+
 - L1/C1 と L3/C3 はそれぞれ g 行で 1 本にまとめてから GND バス (h 行) へ落とす
   (2 素子が同じ節点から並列に地へ落ちる)
 
@@ -131,6 +135,8 @@ markers:
   - 40M
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/vna/03-lc-bandpass-1.svg)
+
 通過帯域の中を見るには、掃引を 16〜26 MHz に狭める (帯域幅の約 5 倍)。
 
 ```vna
@@ -154,6 +160,8 @@ markers:
 notes:
   - band 20.06M 22.17M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/vna/03-lc-bandpass-2.svg)
 
 - 丸めた値でのピークは**約 21.75 MHz** (ほぼ 0 dB)。−3 dB の帯域は
   約 20.06 MHz〜22.17 MHz (帯域幅 約 2.12 MHz、比帯域 約 10%。計算値)

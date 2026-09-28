@@ -41,6 +41,8 @@ wires:
   - J2.2 -- c8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/01-resistor.svg)
+
 ## 実体配線図
 
 ```perfboard
@@ -63,6 +65,8 @@ wires:
   - f15 -- h15 black
   - h15 -- GND black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/01-resistor.svg)
 
 R1 を金属皮膜 100 Ω と炭素皮膜 100 Ω で挿し替えて、2 回測る。
 
@@ -99,6 +103,8 @@ notes:
   - text 50M 140Ω: 1 GHz で |Z| = 137.4 Ω (公称から +37%)
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/01-resistor-1.svg)
+
 炭素皮膜 (ESL 6 nH) — 見えるはずの画面。
 
 ```vna
@@ -118,6 +124,8 @@ markers:
 notes:
   - text 50M 140Ω: 1 GHz で |Z| = 106.9 Ω (公称から +7%)
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/01-resistor-2.svg)
 
 ## 見るべき値
 

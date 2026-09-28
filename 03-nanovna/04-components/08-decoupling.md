@@ -36,6 +36,8 @@ wires:
   - J2.2 -- c8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/08-decoupling.svg)
+
 CH0-CH1 の線は途切れず、C1 (10 µF) と C2 (0.1 µF) がそれぞれ GND へ落ちる。
 S21 (通り抜け) から、GND へ落ちている部品の合成インピーダンスが分かる
 (**シャントスルー法**。抵抗 1 個を直列に挿すより、こちらのほうがずっと
@@ -67,6 +69,8 @@ wires:
   - h15 -- f15 black
   - f15 -- f17 black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/08-decoupling.svg)
 
 e 行が CH0-CH1 の素通し線、h 行が GND のバス。C1・C2 とも e 行から h 行へ
 垂直に落とす。電解コンデンサ C1 は極性がある (e6 側が +)。
@@ -100,6 +104,8 @@ notes:
   - band 100k 20M: 図4 で広げる
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/08-decoupling-1.svg)
+
 2 つの SRF と反共振の山がある 100 kHz〜20 MHz を広げる。
 
 ```vna
@@ -118,6 +124,8 @@ markers:
 notes:
   - text 1M -15dB: 反共振 (8 MHz) の |Z| は 10 µF の SRF の 75 倍
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/08-decoupling-2.svg)
 
 ## 見るべき値
 

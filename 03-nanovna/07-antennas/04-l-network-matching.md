@@ -46,6 +46,8 @@ wires:
   - J1.2 -- c2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/04-l-network-matching.svg)
+
 - C1 (入口のシャント) と L1 (直列) が整合回路。R1・C2 がダミー負荷
   (25 − j15 Ω を模したもの)
 
@@ -73,6 +75,8 @@ wires:
   - f2 -- h2 black
   - h2 -- h3 black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/perfboard/04-l-network-matching.svg)
 
 - C1 の下側 (g3) と C2 の下側 (g15) を h 行の GND バスでつなぐ。J1 の外皮も
   同じバスへ
@@ -108,6 +112,8 @@ markers:
 notes:
   - text 50M 2.22: 整合なしなら 2.22 (負荷単体)
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/vna/04-l-network-matching.svg)
 
 - 丸めた値での最良点は設計の 50 MHz よりわずかに低い**約 49 MHz** (S11 約 −33 dB、
   SWR 約 1.05)。整合していない負荷単体 (25 − j15 Ω) の SWR は 2.22 なので、

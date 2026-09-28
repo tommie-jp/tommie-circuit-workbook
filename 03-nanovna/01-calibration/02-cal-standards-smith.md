@@ -37,6 +37,8 @@ markers:
   - 100M
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/02-cal-standards-smith-1.svg)
+
 **Short** — 中心導体を GND に直結。理想は Γ = 1∠180° で、Smith の**左端**。
 
 ```vna
@@ -49,6 +51,8 @@ traces:
 markers:
   - 100M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/02-cal-standards-smith-2.svg)
 
 **Load** — 50 Ω の抵抗で終端。理想は Γ = 0 で、Smith の**真ん中**。
 
@@ -64,6 +68,8 @@ traces:
 markers:
   - 100M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/02-cal-standards-smith-3.svg)
 
 - Open と Short は**周波数によらず同じ点**に留まるのが理想。実物の標準器には
   わずかな容量 (Open) やインダクタンス (Short) があり、周波数を上げると

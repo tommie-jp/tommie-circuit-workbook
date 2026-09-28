@@ -53,6 +53,8 @@ notes:
   - text f2f0 blue center: Short
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/circuit/01-solt.svg)
+
 ## 掃引の設定
 
 | 項目 | 値 |
@@ -79,6 +81,8 @@ markers:
 notes:
   - text 20M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/01-solt.svg)
 
 ## 見るべき値
 

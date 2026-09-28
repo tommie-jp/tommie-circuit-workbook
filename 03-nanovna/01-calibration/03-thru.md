@@ -41,6 +41,8 @@ notes:
   - text h4 blue: この 2 つを Thru アダプタで直結する
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/circuit/03-thru.svg)
+
 - 校正キットの Thru は多くの場合**メス–メスの短いアダプタ**。ケーブルの先
   どうしを直接ねじ込む
 - Thru を挟んだ瞬間、CH0 と CH1 は電気的に**同じ 1 点**になる (減衰も
@@ -71,6 +73,8 @@ markers:
 notes:
   - text 20M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/03-thru.svg)
 
 ## 見るべき値
 

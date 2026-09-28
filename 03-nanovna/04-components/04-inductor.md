@@ -33,6 +33,8 @@ wires:
   - J2.2 -- c8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/04-inductor.svg)
+
 ## 実体配線図
 
 ```perfboard
@@ -55,6 +57,8 @@ wires:
   - f15 -- h15 black
   - h15 -- GND black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/04-inductor.svg)
 
 小型の軸型コイル (10 µH) は巻線抵抗 (ESR) ≈ 1.2 Ω、巻線間の容量 (Cp) ≈ 2 pF と
 見積もる。
@@ -85,6 +89,8 @@ notes:
   - text 2M 20000Ω: SRF ≈ 35.6 MHz で X が + から − へ
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/04-inductor-1.svg)
+
 SRF より下 (100 kHz〜25 MHz) だけを掃引し直すと、表の 3 点が読める。
 
 ```vna
@@ -104,6 +110,8 @@ notes:
   - text 1M 3500Ω: R は印 1〜3 で 1.2 / 1.4 / 2.6 Ω (この目盛では 0 に重なる)
   - text 1M 3000Ω: Q = X / R は約 52 / 480 / 716
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/04-inductor-2.svg)
 
 ## 見るべき値
 

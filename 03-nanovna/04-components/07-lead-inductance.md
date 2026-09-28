@@ -35,6 +35,8 @@ notes:
   - text b5h0 center: "1 cm の裸銅線"
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/07-lead-inductance.svg)
+
 部品を置かず、ただの配線でつなぐ。
 
 ## 実体配線図
@@ -59,6 +61,8 @@ wires:
   - f15 -- h15 black
   - h15 -- GND black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/07-lead-inductance.svg)
 
 e6〜e11 (5 穴ぶん、2.54 mm 間隔で約 1.27 cm) を裸銅線でまたぐ。3-1 の R1 の
 足の長さとほぼ同じで、**「部品を挿すと本当は何が増えるか」**を、部品そのものを
@@ -96,6 +100,8 @@ markers:
 notes:
   - text 100M 60Ω: ただの導線でも 1 GHz で 44 Ω
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/07-lead-inductance.svg)
 
 ## 見るべき値
 

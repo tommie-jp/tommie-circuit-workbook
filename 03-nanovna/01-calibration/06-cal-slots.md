@@ -57,6 +57,8 @@ notes:
   - text 131M -40dB: 理想は平ら (S21 は 0 dB、S11 は −∞ で枠の下)
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/vna/06-cal-slots.svg)
+
 ## 見るべき値
 
 | 確かめること | 期待する値 | 分かること |

@@ -34,6 +34,8 @@ notes:
   - text b4h0 center: フェライトビーズ
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/05-ferrite-bead.svg)
+
 フェライトビーズはコイルの記号で描く (材質までは記号で描き分けられない)。
 
 ## 実体配線図
@@ -58,6 +60,8 @@ wires:
   - f15 -- h15 black
   - h15 -- GND black
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/05-ferrite-bead.svg)
 
 小型 SMD フェライトビーズの低周波でのインダクタンスは L ≈ 100 nH、
 直流抵抗 (R) ≈ 0.3 Ω が代表値。
@@ -90,6 +94,8 @@ notes:
   - text 5M 20Ω: 交差 (477 kHz) は左端に潰れる — 図4 で広げる
 ```
 
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/05-ferrite-bead-1.svg)
+
 交差のある低い側 (50 kHz〜1 MHz) だけを掃引し直すと、477 kHz の交差が真ん中に来る。
 
 ```vna
@@ -109,6 +115,8 @@ notes:
   - mark 477k 0.3Ω
   - text 560k 0.2Ω: ωL = R (0.3 Ω) の交差
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/05-ferrite-bead-2.svg)
 
 ## 見るべき値
 

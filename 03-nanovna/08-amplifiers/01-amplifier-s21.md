@@ -73,6 +73,8 @@ wires:
   - J2.2 -- c14
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/circuit/01-amplifier-s21.svg)
+
 - Q1 のコレクタ抵抗 Rc (270 Ω) が利得を決める。エミッタの Re (620 Ω) は
   Ce (10 µF) でバイパスして交流的には短絡し、直流の動作点だけを安定させる
 - 出力の PR1・PR2・PR3 が 10 dB (計算値 9.6 dB) の π 型アッテネータ
@@ -131,6 +133,8 @@ wires:
   - h25 -- h23 black
 ```
 
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/perfboard/01-amplifier-s21.svg)
+
 - Q1 は変換基板に載せた TO-92 (`transistor` は 3 本足)。足の並びは 2SC1815 の
   実物 (1 = E、2 = C、3 = B) に合わせて配線する
 - Vcc (電池) の配線は省略。R1 の上端と Rc の上端を電池の + へ、GND バスを − へ
@@ -164,6 +168,8 @@ markers:
 notes:
   - text 5M -9.63dB: 基準 −9.63 dB。アンプを挟むと +10.9 dB (計算)
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/vna/01-amplifier-s21.svg)
 
 - アッテネータだけなら周波数によらず一定 (−9.63 dB、計算値)。**この基準を
   確かめてから**アンプをアッテネータの前に足す

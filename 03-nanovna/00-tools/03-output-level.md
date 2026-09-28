@@ -67,6 +67,8 @@ notes:
   - text a2f0 blue center: 測るアンプ (DUT)
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/circuit/03-output-level.svg)
+
 - R1・R3 (40.9 Ω) と R2 (10.1 Ω) は 50 Ω 系の**20 dB T 型アッテネータ**。
   実際に作るときは E24 の値に丸める (10 dB 版の丸め方は 3-5)
 - CH0 はアンプの入力へ (今回の図には描いていない)。**CH1 の手前だけに
@@ -99,6 +101,8 @@ markers:
 notes:
   - text 100M -50dB: S21 は −20 dB で平ら、S11 は −80 dB (枠の下端)
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/vna/03-output-level.svg)
 
 ## 見るべき値
 

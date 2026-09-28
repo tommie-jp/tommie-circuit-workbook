@@ -45,6 +45,8 @@ wires:
   - J2.2 -- c8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/circuit/03-attenuator-s-parameters.svg)
+
 - R1・R3 (100 Ω) が両端のシャント、R2 (68 Ω) が真ん中の直列。左右対称なので
   向きを問わず同じ減衰量になる
 
@@ -76,6 +78,8 @@ wires:
   - f15 -- h15 black
 ```
 
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/perfboard/03-attenuator-s-parameters.svg)
+
 ## 掃引の設定
 
 | 項目 | 値 |
@@ -103,6 +107,8 @@ markers:
   - 500M
   - 1000M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/vna/03-attenuator-s-parameters.svg)
 
 - E24 丸め後の実際の減衰量は**9.63 dB** (設計 10 dB よりわずかに浅い)。
   S11 は −49.6 dB と非常によく整合している
