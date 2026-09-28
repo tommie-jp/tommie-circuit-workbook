@@ -1,0 +1,57 @@
+name: pages
+
+# 本文の画像の行 (npm run figures) が指す図を描いて GitHub Pages に載せる。
+# GitHub はフェンスを図にしないので、図はここから見せる。図はコミットしない (scripts/figures.mjs)。
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# 載せ替えの途中で次の push が来ても、今の載せ替えは最後まで終わらせる。
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # circuit はフォントを埋め込む。埋め込まないと GitHub で Ω や µ が化ける。
+      - run: npm run render -- --embed-fonts
+      - run: node scripts/figures.mjs --verify out
+      # 載せるのは SVG だけ (circuit の .tex は要らない)。
+      - run: |
+          find out -type f ! -name '*.svg' -delete
+          touch out/.nojekyll
+          cat > out/index.html <<'HTML'
+          <!doctype html>
+          <meta charset="utf-8">
+          <title>tommie-circuit-workbook の図</title>
+          <p>tommie-circuit-workbook の本文の図 (SVG) の置き場。本文は
+          <a href="https://github.com/tommie-jp/tommie-circuit-workbook">GitHub</a> で読む。</p>
+          HTML
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

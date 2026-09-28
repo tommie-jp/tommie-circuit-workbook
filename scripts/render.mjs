@@ -6,7 +6,10 @@
  * **フェンスごとに分ける。** 道具はどれも `<ファイル名>.svg` の名前で書くので、
  * 回路図と実体配線図を 1 つのディレクトリに書くと上書きし合う。
  *
- *   node scripts/render.mjs [冊のディレクトリ (01-circuits など) …]   省けば全部の冊
+ *   node scripts/render.mjs [冊のディレクトリ (01-circuits など) …] [--embed-fonts]   冊を省けば全部
+ *
+ * `--embed-fonts` は circuit の SVG に TeX のフォントを埋め込む (Pages に載せる図はこれで描く)。
+ * 埋め込まないと、ブラウザや GitHub で開いたとき Ω や µ が化ける。
  */
 
 import { spawnSync } from 'node:child_process';
@@ -15,7 +18,8 @@ import { ROOT, readEntries } from './collect.mjs';
 import { cliPath, fencesIn } from './fences.mjs';
 
 function main(args) {
-  const books = new Set(args);
+  const embedFonts = args.includes('--embed-fonts');
+  const books = new Set(args.filter((arg) => !arg.startsWith('--')));
   const reads = readEntries().filter((read) => books.size === 0 || books.has(read.path.split('/')[0]));
 
   /** 書き出し先ごとの題。`out/<冊>/<章>/<フェンス>` → パスの並び。 */
@@ -33,7 +37,10 @@ function main(args) {
     const { fence } = items[0];
     const run = spawnSync(
       process.execPath,
-      [cliPath(ROOT, fence), 'render', ...items.map((item) => item.path), '--out', out],
+      [
+        cliPath(ROOT, fence), 'render', ...items.map((item) => item.path), '--out', out,
+        ...(embedFonts && fence === 'circuit' ? ['--embed-fonts'] : []),
+      ],
       { cwd: ROOT, encoding: 'utf8' },
     );
     if (run.status !== 0) {

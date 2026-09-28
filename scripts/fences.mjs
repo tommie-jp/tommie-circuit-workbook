@@ -60,11 +60,19 @@ const looksLikeFence = (name) => {
 const FENCE_LINE = /^ {0,3}(`{3,}|~{3,})(.*)$/;
 
 /**
- * @returns {{ found: Set<string>, misspelled: { name: string, line: number }[] }}
+ * `blocks` は図になるフェンスを出てくる順に並べたもの。`open` と `close` は 0 始まりの行番号
+ * (閉じていないフェンスは `close` が null — CommonMark では文書の終わりまでがフェンス)。
+ *
+ * @returns {{
+ *   found: Set<string>,
+ *   misspelled: { name: string, line: number }[],
+ *   blocks: { fence: string, open: number, close: number | null }[],
+ * }}
  */
 export function fencesIn(text) {
   const found = new Set();
   const misspelled = [];
+  const blocks = [];
   /** 開いているフェンスの字と本数。閉じるのは同じ字で同じ本数以上、後ろに何も無い行。 */
   let open = null;
 
@@ -72,6 +80,7 @@ export function fencesIn(text) {
     const match = FENCE_LINE.exec(line);
     if (open !== null) {
       if (match !== null && match[1][0] === open.char && match[1].length >= open.length && match[2].trim() === '') {
+        if (open.block !== null) open.block.close = index;
         open = null;
       }
       return;
@@ -81,13 +90,19 @@ export function fencesIn(text) {
     const info = match[2].trim();
     // バッククォートのフェンスは、言語名の欄にバッククォートを含めない (CommonMark)。
     if (match[1][0] === '`' && info.includes('`')) return;
-    open = { char: match[1][0], length: match[1].length };
 
     const name = info.split(/\s+/)[0];
     const fence = Object.hasOwn(ALIASES, name) ? ALIASES[name] : name;
-    if (FENCES.includes(fence)) found.add(fence);
-    else if (name !== '' && looksLikeFence(name)) misspelled.push({ name, line: index + 1 });
+    let block = null;
+    if (FENCES.includes(fence)) {
+      found.add(fence);
+      block = { fence, open: index, close: null };
+      blocks.push(block);
+    } else if (name !== '' && looksLikeFence(name)) {
+      misspelled.push({ name, line: index + 1 });
+    }
+    open = { char: match[1][0], length: match[1].length, block };
   });
 
-  return { found, misspelled };
+  return { found, misspelled, blocks };
 }
