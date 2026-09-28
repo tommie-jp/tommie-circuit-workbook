@@ -78,7 +78,7 @@ wires:
 最大値と実効値は波形を丸ごと表示したまま Measure で読める。平均値は
 **半周期だけを画面に収める** (Time base を 50 µs/div にして、横 10 目盛り = 0.5 ms に正の 1 山
 だけがちょうど入るようにする) と、Measure の Average がそのまま
-半周期平均 = 2/π × V_m になる。1 周期まるごと表示すると Average は 0 に
+半周期平均 = 2/π × V_m になる (図4)。1 周期まるごと表示すると Average は 0 に
 近づいてしまうので、必ず半周期に絞る。
 
 波形を丸ごと表示した画面。正の半周期は X1 (0) から 0.5 ms まで、X2 はその真ん中の山に置いてある。
@@ -92,7 +92,21 @@ cursors: [0, 250us]
 measure: [vmax, rms, avg, freq]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/01-sine-wave-values.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/01-sine-wave-values-1.svg)
+
+半周期だけを映した画面。50 µs/div にし、トリガの位置を左端に寄せてある (t = 0 の立ち上がりが左端、
+右端が 0.5 ms)。X2 は山 (0.25 ms) に置いてある。
+
+```scope
+title: 図4 正の半周期だけを映すと、平均は 0.637 V
+time: 50us/div
+trigger: ch1 rising 0V at -5div
+ch1: {wave: sine 1kHz 1V, range: 200mV/div, position: -3div}
+cursors: [0, 250us]
+measure: [vmax, avg]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/01-sine-wave-values-2.svg)
 
 ### オシロスコープと発振器
 
