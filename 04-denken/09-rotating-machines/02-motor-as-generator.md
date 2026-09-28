@@ -32,14 +32,14 @@ title: 図1 モータを発電機にして開放電圧を見る
 style:
   standard: jis
 parts:
-  Mot1: motor c3 c7
-  M1: voltmeter a3 a7 l=$\mathrm{CH1}$
+  M1: motor c3 c7
+  M2: voltmeter a3 a7 l=$\mathrm{CH1}$
   G1: ground c7
 wires:
   - a3 |- c3
   - a7 -- c7
 notes:
-  - text e5: "指で軸を回す (発電機として使う)"
+  - text d5: "指で軸を回す (発電機として使う)"
 ```
 
 - 電源は無く、モータの軸を指で回すことで起電力が生じる

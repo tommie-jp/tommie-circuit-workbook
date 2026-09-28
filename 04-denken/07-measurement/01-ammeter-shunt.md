@@ -38,7 +38,6 @@ wires:
   - c1 -- c5 -- c8
 style:
   standard: jis
-  grid: on
 ```
 
 - Rg (100 Ω) が検流計の内部抵抗の模型。実物の検流計の記号 (G1) は電流の道筋を

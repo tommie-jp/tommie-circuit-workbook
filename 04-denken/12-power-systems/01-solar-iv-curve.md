@@ -29,24 +29,26 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  PV1: solar c1 g1 4.5
-  Rs: resistor c1 c3 10 i=I
-  M2: voltmeter a1 a3 l=$\mathrm{CH2}$
-  VR1: potentiometer c5 g5 1k
-  M1: voltmeter c8 g8 l=$\mathrm{CH1}$
+  PV1: solar c1 g1 4.5 l=$\mathrm{PV}_1$
+  M1: voltmeter c4 g4 l=$\mathrm{CH1}$
+  Rs: resistor c6 c8 10 i=I
+  M2: voltmeter a6 a8 l=$\mathrm{CH2}$
+  VR1: potentiometer c10 g10 1k l=$\mathrm{VR}_1$
   G1: ground g1
 wires:
-  - a1 -- c1
-  - a3 -- c3
-  - c3 -- c5 -- c8
-  - g1 -- g5 -- g8
-  - VR1.w |- g5
+  - c1 -- c4 -- c6
+  - a6 -- c6
+  - a8 -- c8
+  - c8 -- c10
+  - g1 -- g4 -- g10
+  - VR1.w |- g10
 ```
 
 - PV1 (太陽電池、屋内の照明かランプで照らす) の + から Rs (10 Ω、電流検出用の
   シャント) を通って VR1 (1 kΩ、可変抵抗) へ。VR1 は摺動子を GND 側の端と
   つないで可変抵抗 (レオスタット、0〜1 kΩ) として使い、摺動子を回して負荷を変える
-- CH1 (M1) が太陽電池の端子電圧 V、CH2 (M2) が Rs の両端 (I = 読み ÷ 10 Ω)
+- CH1 (M1) が太陽電池の端子電圧 V。**Rs の前** (太陽電池の + そのもの) で読む。Rs の後ろで読むと
+  I × Rs (最大 0.14 V) だけ低い負荷の電圧になる。CH2 (M2) が Rs の両端 (I = 読み ÷ 10 Ω)
 
 ## 実体配線図
 
@@ -69,7 +71,7 @@ parts:
 wires:
   - PV1.+ -- a3 red
   - PV1.- -- -t5 black
-  - AD.1+ -- a7 orange
+  - AD.1+ -- b3 orange [h10]
   - AD.1- -- -t9 black
   - AD.2+ -- a11 red
   - AD.2- -- a14 orange
@@ -84,14 +86,15 @@ wires:
   負荷にし、摺動子と 16 列 (端 3) をどちらも GND レールへつなぐ (0〜1 kΩ の
   可変抵抗になる。両端 14・16 列だけを使うと 1 kΩ 固定になって負荷が変わらない)
 - Rs は 3 列 (PV1 の +) と 7 列。3 列は赤の線で 11 列へ、7 列は橙の線で 14 列
-  (VR1 の端 1) へ延ばし、AD の足の並び (1+ 1− 2+ 2−) どおりに左から挿す
-- CH1 (1+/1−) が太陽電池の端子電圧、CH2 (2+/2−) が Rs の両端
+  (VR1 の端 1) へ延ばす。AD の 1+ は 3 列 (Rs の前)、1− は GND レール、2+ は 11 列、
+  2− は 14 列で、足の並び (1+ 1− 2+ 2−) どおりに左から挿す
+- CH1 (1+/1−) が太陽電池の端子電圧 (Rs の前で読む)、CH2 (2+/2−) が Rs の両端
 
 ## 計器の設定
 
 | 計器 | 設定 |
 | --- | --- |
-| Scope | CH1 = 太陽電池の端子電圧 V。CH2 = Rs の両端 (I = 読み ÷ 10 Ω) |
+| Scope | CH1 = 太陽電池の端子電圧 V (Rs の前、3 列)。CH2 = Rs の両端 (I = 読み ÷ 10 Ω) |
 | VR1 | 摺動子をゆっくり回し、短絡に近い所から開放に近い所まで数点測る |
 | 照明 | 室内の照明か卓上ランプ。日なたに比べると出力は小さくなる |
 
@@ -111,8 +114,8 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  PV1: solar c1 g1 4.5
-  VR1: potentiometer c4 e4 1k
+  PV1: solar c1 g1 4.5 l=$\mathrm{PV}_1$
+  VR1: potentiometer c4 e4 1k l=$\mathrm{VR}_1$
   Rs: resistor e4 g4 10 i=I
   M2: voltmeter e7 g7 l=$\mathrm{CH2}$
   M1: voltmeter c10 g10 l=$\mathrm{CH1}$
@@ -127,7 +130,7 @@ wires:
 - 板の変え方: Rs を 3〜7 列から抜き、3 列と 7 列を線でつなぐ (7 列 → 14 列の橙の線はそのまま)。
   15・16 列から青レールへの 2 本の黒い線を抜き、15 列と 16 列を短い線でつなぎ、
   Rs を 16 列と青レールの間に挿す
-- CH1 の先端は 3 列 (太陽電池の +)、CH2 の先端は 16 列 (Rs の上)。グランドクリップは 2 本とも青レール
+- CH1 の先端は 3 列 (太陽電池の +、AD の 1+ と同じ所)、CH2 の先端は 16 列 (Rs の上)。グランドクリップは 2 本とも青レール
 - I は CH2 ÷ 10 Ω (図1 と同じ)。CH1 は太陽電池の + を直に読むので、そのまま端子電圧 V になる。
   負荷の電圧が要るときは Math の CH1 − CH2
 - 直流なので Measure の Mean (平均) で読む。CH2 は 20 mV/div ほどに絞り、

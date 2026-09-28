@@ -87,17 +87,17 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, 1-, 2-, V-, W1, 1+, W2, 2+]
+    pins: [V+, GND, V-, W1, 2+, W2, 2-, 1+, 1-]
 wires:
-  - AD.V+ -- +t4 red
-  - AD.GND -- -t6 black
-  - AD.1- -- -t8 black
-  - AD.2- -- -t10 black
-  - AD.V- -- a13 purple
-  - AD.W1 -- c17 yellow [h-10]
-  - AD.1+ -- a17 yellow
-  - AD.W2 -- b25 orange [h-10]
-  - AD.2+ -- a25 orange
+  - AD.V+ -- +t4 red [v11, h-162]
+  - AD.GND -- -t6 black [v19, h-152]
+  - AD.V- -- a13 purple [v27, h-52, v79, h-10]
+  - AD.W1 -- c17 yellow [v11, h-32]
+  - AD.2+ -- a17 yellow
+  - AD.W2 -- b25 orange [v27, h48]
+  - AD.2- -- a25 orange
+  - AD.1+ -- a35 yellow
+  - AD.1- -- a39 green
   - a14 -- -t14 black
   - d15 -- d21 green
   - e21 -- f21 green
@@ -120,8 +120,11 @@ notes:
   取り出し、d 行の緑の線で 39・46・53 列を束ねて中性点 N (53 列) にする。
   3 つの相は下の段の g 行 (1 相目)・j 行 (2 相目)・h 行 (3 相目) で右へ運び、
   短い線で溝を渡って e35・e42・e49 から上の段へ戻す
-- N は GND のレールにはつながない。テスターや AD の 2 番目の入力の − 側を
-  N に挿すときは、GND とは別の場所だと確かめてから挿す
+- AD の 1+・1− は R3 の両端 (a35・a39) に挿し、相電圧 (1 相目 − N) を差動で測る。
+  2+・2− は 1 相目 (a17) と 2 相目 (a25) に挿し、線間電圧 (1 相目 − 2 相目) を
+  差動で測る。1− も 2− も GND のレールには挿さない
+- N は GND のレールにはつながない。1− を N (a39) に挿すときは、GND とは別の場所だと
+  確かめてから挿す
 
 ## 計器の設定
 
@@ -129,8 +132,8 @@ notes:
 | --- | --- |
 | Wavegen | W1: Sine、1 kHz、Amplitude 1 V、Phase 0°。W2: 同じく Phase −120° |
 | Supplies | V+ = 5 V、V− = −5 V |
-| Scope (1 回目) | CH1 = 1 相目 (AD.W1) − N (差動)、CH2 = 1 相目 − 2 相目 (差動) |
-| Scope (2 回目) | CH1 は同じ。CH2 の − 側だけ GND に挿し替え、N の電圧 (GND 基準) を読む |
+| Scope (1 回目) | CH1 = 1 相目 − N (差動。1+ を a35、1− を a39)、CH2 = 1 相目 − 2 相目 (差動。2+ を a17、2− を a25) |
+| Scope (2 回目) | CH1 は同じ。CH2 は 2+ を N (a53)、2− を GND のレールに挿し替え、N の電圧 (GND 基準) を読む |
 | Measure | CH1・CH2 の Amplitude と、CH1 に対する CH2 の Phase |
 
 1 回目の画面。CH1 が相電圧、CH2 が線間電圧で、2 つは同じ V/div にしてある。

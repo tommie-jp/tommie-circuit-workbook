@@ -33,14 +33,14 @@ title: 図1 磁石を回す駆動モータ
 style:
   standard: jis
 parts:
-  B1: battery c1 g1 3
+  B1: battery c1 e1 3
   S1: switch c1 c3
-  Mot1: motor c3 g3
-  G1: ground g1
+  M1: motor c3 e3
+  G1: ground e1
 wires:
-  - g1 -- g3
+  - e1 -- e3
 notes:
-  - text e5: "モータの軸に磁石を 2 個、極を向かい合わせて付ける"
+  - text f2: "モータの軸に磁石を 2 個、極を向かい合わせて付ける"
 ```
 
 - モータの軸の先に小さな磁石を 2 個 (N・S を向かい合わせて) 固定し、回転する

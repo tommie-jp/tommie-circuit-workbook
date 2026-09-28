@@ -21,7 +21,7 @@ board: BB
 | n = N1 / N2 | 巻数比。1 次巻線 (N1) と 2 次巻線 (N2) の巻数の比 |
 | n = √(Z1 / Z2) | 整合が取れた負荷のとき、インピーダンス比の平方根が巻数比に等しい |
 | V1 / V2 = n | 電圧比は巻数比に等しい |
-| I2 / I1 = n | 電流比は巻数比の逆数の逆 (電流は巻数に反比例) |
+| I2 / I1 = n | 電流は巻数に反比例する。2 次の電流は 1 次の n 倍 (電圧比の逆) |
 
 このトランスは 1 次 10 kΩ・2 次 8 Ω 用なので、n = √(10000 / 8) ≒ 35.4。
 
@@ -31,23 +31,25 @@ board: BB
 title: 図1 巻数比を測る回路
 style:
   standard: jis
+  pitch: 1.8
 parts:
-  W1: sine c1 g1 l=$\mathrm{W1}$
+  W1: sine c1 e1 l=$\mathrm{W1}$
   Rs1: resistor c1 c3 100 i=I1
-  M2: voltmeter a1 a3 l=$\mathrm{CH2}$
-  T1: transformer e5 10kto8
-  M1: voltmeter a5 a8 l=$\mathrm{CH1}$
-  RL: resistor c11 c13 8
-  G1: ground g1
+  M2: voltmeter b1 b3 l=$\mathrm{CH2}$
+  M1: voltmeter c4f0 d4f0 l=$\mathrm{CH1}$
+  T1: transformer d5 10kto8
+  RL: resistor c7f0 d7f0 8
+  G1: ground e1
 wires:
-  - a1 -- c1
-  - a3 -- c3
-  - c3 |- T1.A1
-  - a5 |- T1.A1
-  - a8 |- T1.A2
-  - T1.A2 -| g1
-  - T1.B1 -| c11
-  - T1.B2 -| c13
+  - b1 -- c1
+  - b3 -- c3
+  - c3 -- c4 -- c4f0
+  - c4f0 -| T1.A1
+  - T1.A2 -| d4f0
+  - d4f0 -- e4
+  - e1 -- e4
+  - T1.B1 -| c7f0
+  - T1.B2 -| d7f0
 ```
 
 - W1 は AD の波形発生器 (Wavegen)。1 kHz、振幅 2 V

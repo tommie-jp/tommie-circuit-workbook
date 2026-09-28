@@ -79,7 +79,7 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードと Analog Discovery
-# 上のブロック: TL071 の入力側と R1・R2、右に d 行の線電流シャントと a〜c 行の Δ の 3 辺。下のブロック: 出力側と Rf、g・h・j 行で 3 相を右へ運ぶ
+# 上のブロック: TL071 の入力側と R1・R2、右に d 行の線電流シャントと b・c 行の Δ の 2 辺。下のブロック: 出力側と Rf、g・h・j 行で 3 相を右へ運び、i 行に Δ の残り 1 辺 (RCA)
 board: full
 parts:
   R1: resistor b17 b21 10k
@@ -91,22 +91,22 @@ parts:
   RLC: resistor d53 d56 20
   RAB: resistor b38 b44 1k
   RBC: resistor c44 c56 1k
-  RCA: resistor a38 a56 1k
+  RCA: resistor i38 i56 1k
   AD:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, 1-, 2-, V-, W1, 1+, W2, 2+]
+    pins: [GND, V+, V-, W1, W2, 1+, 1-, 2+, 2-]
 wires:
-  - AD.V+ -- +t4 red
-  - AD.GND -- -t6 black
-  - AD.1- -- -t8 black
-  - AD.2- -- -t10 black
-  - AD.V- -- a13 purple
-  - AD.W1 -- c17 yellow [h-10]
-  - AD.1+ -- a17 yellow
-  - AD.W2 -- b25 orange [h-10]
-  - AD.2+ -- a25 orange
+  - AD.GND -- -t6 black [v11, h-208]
+  - AD.V+ -- +t8 red [v19, h-218]
+  - AD.V- -- a13 purple [v27, h-148, v79, h-10]
+  - AD.W1 -- c17 yellow [v35, h-128]
+  - AD.W2 -- b25 orange
+  - AD.1+ -- a35 yellow [v27, h172]
+  - AD.1- -- c38 green [v19, h172]
+  - AD.2+ -- a38 green [v11, h152]
+  - AD.2- -- a44 brown [v3, h232]
   - a14 -- -t14 black
   - d15 -- d21 green
   - e21 -- f21 green
@@ -120,6 +120,8 @@ wires:
   - f35 -- e35 yellow
   - f41 -- e41 orange
   - f53 -- e53 blue
+  - e38 -- f38 green
+  - e56 -- f56 pink
 notes:
   - text small: 列 38 が a 点、44 が b 点、56 が c 点 (どれも a〜e 行の同じ列は同じネット)
 ```
@@ -128,8 +130,15 @@ notes:
   溝を渡る短い線 (e35・e41・e53) で上の段へ戻したもの。
   d 行のシャント (RLA・RLB・RLC) を通って a・b・c の 3 点になる
 - **a〜e 行は同じ列なら同じネット**なので、a 点 (列 38) は RLA (d38)・RAB (b38)・
-  RCA (a38) の 3 つの穴に分かれて出る。別の行の穴を使うのは、実物のブレッドボードで
-  同じ穴に 2 本挿せないため。b 点は列 44、c 点は列 56 も同じ考え方
+  緑の線 (e38) に AD の 2+ (a38)・1− (c38) を加えた 5 つの穴に分かれて出る。
+  別の行の穴を使うのは、実物のブレッドボードで同じ穴に 2 本挿せないため。
+  b 点は列 44、c 点は列 56 も同じ考え方
+- RCA は a 点と c 点を結ぶ。上の段に置くと RAB・RBC の上をまたぎ、AD の線を挿す穴に
+  上から届かなくなるので、e38–f38・e56–f56 の短い線で溝を渡して下の段の i 行
+  (i38–i56) に置く
+- AD の 1+・1− は RLA の両端 (a35・c38) に挿し、線電流 a を差動で測る。
+  2+・2− は RAB の両端 (a38・a44) に挿し、相電流 ab を差動で測る。
+  1− も 2− も GND のレールには挿さない (挿すと a 点か b 点が GND に落ちる)
 
 ## 計器の設定
 
@@ -137,7 +146,7 @@ notes:
 | --- | --- |
 | Wavegen | W1: Sine、1 kHz、Amplitude 1 V、Phase 0°。W2: 同じく Phase −120° |
 | Supplies | V+ = 5 V、V− = −5 V |
-| Scope (1 回目) | CH1 = RLA の両端 (差動、線電流 a)、CH2 = RAB の両端 (差動、相電流 ab) |
+| Scope | CH1 = RLA の両端 (差動、線電流 a。1+ を a35、1− を c38)、CH2 = RAB の両端 (差動、相電流 ab。2+ を a38、2− を a44) |
 | Measure | CH1・CH2 の Amplitude と、CH1 に対する CH2 の Phase |
 
 RLA の両端は数十 mV しかないので、CH1 は 20 mV/div、CH2 は 500 mV/div と

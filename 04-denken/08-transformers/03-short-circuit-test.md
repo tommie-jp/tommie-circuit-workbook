@@ -32,24 +32,28 @@ board: BB
 title: 図1 短絡試験の回路 (2 次を短絡)
 style:
   standard: jis
+  pitch: 1.8
 parts:
-  W1: sine c1 g1 l=$\mathrm{W1}$
+  W1: sine c1 e1 l=$\mathrm{W1}$
   Rs1: resistor c1 c3 100 i=I1
-  M2: voltmeter a1 a3 l=$\mathrm{CH2}$
-  T1: transformer e5 10kto8
-  M1: voltmeter a5 a8 l=$\mathrm{CH1}$
-  G1: ground g1
+  M2: voltmeter b1 b3 l=$\mathrm{CH2}$
+  M1: voltmeter c4f0 d4f0 l=$\mathrm{CH1}$
+  T1: transformer d5 10kto8
+  G1: ground e1
 wires:
-  - a1 -- c1
-  - a3 -- c3
-  - c3 |- T1.A1
-  - a5 |- T1.A1
-  - a8 |- T1.A2
-  - T1.A2 -| g1
-  - T1.B1 -- T1.B2
+  - b1 -- c1
+  - b3 -- c3
+  - c3 -- c4 -- c4f0
+  - c4f0 -| T1.A1
+  - T1.A2 -| d4f0
+  - d4f0 -- e4
+  - e1 -- e4
+  - T1.B1 -| c6f5
+  - T1.B2 -| d6f5
+  - c6f5 -- d6f5
 ```
 
-- T1.B1 と T1.B2 を直接つないで 2 次を短絡する
+- T1.B1 と T1.B2 を線でつないで 2 次を短絡する
 - Rs1 (100 Ω) は 1 次電流 I1 を読むシャント。短絡時のインピーダンス (約 970 Ω) に
   対して 1 割ほどなので、V1 は Rs1 の分を引いて読む
 - M1 (CH1) は 1 次巻線の両端 (V1 = インピーダンス電圧)、M2 (CH2) は Rs1 の両端 (I1)
@@ -94,7 +98,7 @@ wires:
 
 **電流の目安**: この実験の Req ≒ 925 Ω、Xeq ≒ 300 Ω (漏れリアクタンス、実測して使う)
 なので、I1 を 3 mA (振幅) にすると Vsc は Wavegen 側で約 3.2 V になる。
-上げすぎない (AD の Wavegen は 10 mA まで)。
+上げすぎない (AD の Wavegen は 30 mA まで。AD3 の仕様で、AD2 はマニュアルに上限の記載が無い。この本の目安は 10 mA、0-1)。
 
 CH2 は CH1 の約 1/10 なので、CH2 だけ 100 mV/div に上げてある。Wavegen の 3.2 V のうち Rs1 に
 取られた残りが CH1 に出る。
@@ -144,7 +148,7 @@ wires:
 
 **FG の振幅。** 回路全体 (Rs1 + Zeq) は約 1.07 kΩ で、FG の 50 Ω が効き始める。FG は High-Z、Sine、1 kHz。
 表示が 3.2 V (Vpp の機種なら 6.4 Vpp) のままだと I1 は 2.87 mA (計算値) に下がる。I1 を 3.00 mA に
-するには表示で約 3.35 V (6.7 Vpp、計算値) まで上げる。AD の 10 mA の上限は無いが、CH2 を見ながら少しずつ上げるのは同じ。
+するには表示で約 3.35 V (6.7 Vpp、計算値) まで上げる。AD の 30 mA の上限は無いが、CH2 を見ながら少しずつ上げるのは同じ。
 
 **銅損。** CH1 − CH2 と CH2 の掛け算 (Math の入れ子) ができる機種は少ない。代わりに入力全体の
 電力から Rs1 の損失を引く。

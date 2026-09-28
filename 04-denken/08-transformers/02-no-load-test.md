@@ -30,20 +30,22 @@ board: BB
 title: 図1 無負荷試験の回路 (2 次は開放)
 style:
   standard: jis
+  pitch: 1.8
 parts:
-  W1: sine c1 g1 l=$\mathrm{W1}$
-  Rs1: resistor c1 c3 4k7 i=I0
-  M2: voltmeter a1 a3 l=$\mathrm{CH2}$
-  T1: transformer e5 10kto8
-  M1: voltmeter a5 a8 l=$\mathrm{CH1}$
-  G1: ground g1
+  W1: sine c1 e1 l=$\mathrm{W1}$
+  Rs1: resistor c1 c3 4.7k i=I0
+  M2: voltmeter b1 b3 l=$\mathrm{CH2}$
+  M1: voltmeter c4f0 d4f0 l=$\mathrm{CH1}$
+  T1: transformer d5 10kto8
+  G1: ground e1
 wires:
-  - a1 -- c1
-  - a3 -- c3
-  - c3 |- T1.A1
-  - a5 |- T1.A1
-  - a8 |- T1.A2
-  - T1.A2 -| g1
+  - b1 -- c1
+  - b3 -- c3
+  - c3 -- c4 -- c4f0
+  - c4f0 -| T1.A1
+  - T1.A2 -| d4f0
+  - d4f0 -- e4
+  - e1 -- e4
 ```
 
 - 2 次 (T1.B1 / T1.B2) は**わざと開放のまま**にする。8-1・8-3 と同じ 1 次側の

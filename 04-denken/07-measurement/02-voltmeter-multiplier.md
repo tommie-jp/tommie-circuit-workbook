@@ -35,7 +35,6 @@ wires:
   - c1 -- c5
 style:
   standard: jis
-  grid: on
 ```
 
 - Rg (1 kΩ、I_g = 1 mA でフルスケール) が電圧計の中身 (検流計) の模型。

@@ -28,7 +28,7 @@ board: BB
 ```circuit
 title: 図1 反転増幅と非反転増幅
 parts:
-  V1: sine a1 c1 0.3 l=$\mathrm{W1}$
+  V1: sine a1 c1 0.2 l=$\mathrm{W1}$
   G1: ground c1
   Rin: resistor a3 a5 10k
   Rf1: resistor a6 a9 100k
@@ -115,20 +115,22 @@ notes:
 | 計器 | 設定 |
 | --- | --- |
 | Supplies | V+ = 5 V、V− = −5 V |
-| Wavegen | W1: Sine、1 kHz、Amplitude 0.3 V、Offset 0 V |
+| Wavegen | W1: Sine、1 kHz、Amplitude 0.2 V、Offset 0 V |
 | Scope (1 回目) | CH1 = 入力、CH2 = OUT1 (反転) |
 | Scope (2 回目) | CH2 を OUT2 (非反転) に挿し替える |
 | Measure | CH1・CH2 の Amplitude と、CH1 に対する CH2 の Phase |
 
-図3 は CH1 を 100 mV/div、CH2 を 1 V/div と分け、上下が逆になるのを見やすくした
-(V/div が 10 倍違うので、2 本は同じ高さに見える)。図4 は 2 ch とも 1 V/div にそろえ、
+入力を 0.2 V にとどめるのは、TL072 が ±5 V の電源で振れる出力が約 ±3.5 V (typ) までで、
+0.3 V を入れると出力 3 V が振れの限界に近づき、山がつぶれることがあるため。0.2 V なら
+出力は 2 V で余裕がある。図3 は CH1 を 100 mV/div、CH2 を 1 V/div と分け、上下が逆になるのを
+見やすくした (V/div が 10 倍違うので、2 本は同じ高さに見える)。図4 は 2 ch とも 1 V/div にそろえ、
 10 倍の差を高さのまま見せる。2 回の画面で CH2 の高さは同じで、向きだけが逆になる。
 
 ```scope
 title: 図3 1 回目 — 反転増幅の OUT1 (CH2) は 10 倍で上下が逆 (V/div は別)
 time: 200us/div
 trigger: ch1 rising 0V
-ch1: {wave: sine 1kHz 300mV, range: 100mV/div}
+ch1: {wave: sine 1kHz 200mV, range: 100mV/div}
 ch2: {wave: ch1 | gain -10, range: 1V/div}
 measure: [vmax, phase]
 ```
@@ -137,7 +139,7 @@ measure: [vmax, phase]
 title: 図4 2 回目 — 非反転増幅の OUT2 (CH2) は 10 倍で同じ向き (2 ch とも 1 V/div)
 time: 200us/div
 trigger: ch1 rising 0V
-ch1: {wave: sine 1kHz 300mV, range: 1V/div}
+ch1: {wave: sine 1kHz 200mV, range: 1V/div}
 ch2: {wave: ch1 | gain 10, range: 1V/div}
 measure: [vmax, phase]
 ```
@@ -150,7 +152,7 @@ measure: [vmax, phase]
 
 | AD | 汎用の計器 |
 | --- | --- |
-| W1 | FG の OUT。Sine、1 kHz、**0.6 Vpp** (AD の Amplitude 0.3 V は山の高さ)、Offset 0 V、出力は High-Z |
+| W1 | FG の OUT。Sine、1 kHz、**0.4 Vpp** (AD の Amplitude 0.2 V は山の高さ)、Offset 0 V、出力は High-Z |
 | V+ / V− | 2 出力の安定化電源で ±5 V。電流制限は各 10 mA (TL072 の消費電流 数 mA と出力の電流に余裕を見た値) |
 | 1+ | CH1 の先端を 10 列 (入力)、グランドクリップを GND のレール |
 | 2+ | CH2 の先端を 17 列 (U1 の 1 番、OUT1)。2 回目は 16 列の下の段 (U1 の 7 番、OUT2)。グランドクリップは GND のレール |
@@ -164,9 +166,9 @@ FG が引く電流は R_in (10 kΩ、仮想接地へ) の分だけで、50 Ω �
 
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |
-| 入力の振幅 | 0.3 V | — |
-| OUT1 (反転) の振幅 | 3.0 V | ゲイン 10 倍。位相は入力と 180° ずれる |
-| OUT2 (非反転) の振幅 | 3.0 V | ゲイン 10 倍。位相は入力と同じ (0°) |
+| 入力の振幅 | 0.2 V | — |
+| OUT1 (反転) の振幅 | 2.0 V | ゲイン 10 倍。位相は入力と 180° ずれる |
+| OUT2 (非反転) の振幅 | 2.0 V | ゲイン 10 倍。位相は入力と同じ (0°) |
 | U1.− の電圧 (仮想接地) | ほぼ 0 V | 仮想短絡 (V_− = V_+ = GND) の直接の証拠 |
 
 分かること:
