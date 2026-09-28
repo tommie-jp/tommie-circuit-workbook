@@ -136,70 +136,84 @@ wires:
 
 ```perfboard
 board:
-  size: 35x12
+  size: 22x14
   slots: on
-title: 図3 perfboardに組む
+title: 図3 perfboardに組む (部品面から見た図)
 points:
   VCC: a1
-  GND: j1
+  GND: n1
 parts:
-  U1: dip8 c1 TLC555
-  Rtrig: resistor a10 c10 100k
-  SWtrig: button g10
-  Rt: resistor a15 c15 4.7M
-  Ct: capacitor/electrolytic g15 h15 220u
-  Rg: resistor g20 g22 220
-  Q1: transistor g24 g25 g26 2N7000
-  RLED: resistor a28 g28 470
-  DLED: led g30 g32 red
+  U1: dip8 e5 TLC555
+  Rtrig: resistor a2 d2 100k
+  SWtrig: button j2
+  Rt: resistor a7 d7 4.7M
+  Ct: capacitor/electrolytic d21 f21 220u
+  Rg: resistor i12 i16 220
+  Q1: transistor k15 k16 k17 2N7000
+  RLED: resistor e18 g18 470
+  DLED: led h18 j18 red
 wires:
-  - c1 -- a1
-  - a5 -- a28
-  - a1 -- a10
-  - a1 -- a15
-  - f1 -- g1
-  - g1 -- j1
-  - f4 -- f5
-  - f5 -- a5
-  - a5 -- a1
-  - c2 -- c3
-  - c3 -- b3
-  - b3 -- b15
-  - b15 -- c15
-  - g10 -- f2
-  - c10 -- g10
-  - i10 -- j10
-  - j10 -- j1
-  - g15 -- c15
-  - h15 -- h20
-  - h20 -- j20
-  - j20 -- j1
-  - g20 -- f3
-  - g22 -- f22
-  - f22 -- f25
-  - f25 -- g25
-  - g24 -- j24
-  - j24 -- j20
-  - g28 -- g30
-  - g32 -- i32
-  - i32 -- i26
-  - i26 -- g26
+  # 電源 (上の a 行) と GND (下の n 行) の筋
+  - VCC -- a2 red
+  - a2 -- a5 red
+  - a5 -- a7 red
+  - a7 -- a10 red
+  - GND -- n2 black
+  - n2 -- n5 black
+  - n5 -- n13 black
+  - n13 -- n21 black
+  # U1 の電源: 足8 (VDD) は上へ、足1 (GND) は下へ
+  - e5 -- a5 red
+  - h5 -- n5 black
+  # 足4 (RESET) は 10 列を上って VCC へ。途中の e10 から出力段へも配る
+  - h8 -- h10 red
+  - h10 -- e10 red
+  - e10 -- a10 red
+  - e10 -- e18 red
+  # TRIG (足2): Rtrig で VCC へ、SWtrig で GND へ
+  - d2 -- j2 yellow
+  - l2 -- n2 black
+  - h6 -- j6 yellow
+  - j6 -- j4 yellow
+  # THRES・DISCH (足6・7): Rt で VCC へ、Ct で GND へ
+  - e6 -- d6 orange
+  - d6 -- d7 orange
+  - e7 -- d7 orange
+  - d7 -- d21 orange
+  - f21 -- n21 black
+  # OUT (足3) → Rg → Q1 のゲート。Q1 のドレイン → DLED → RLED → VCC
+  - h7 -- i7
+  - i7 -- i12
+  - i16 -- k16
+  - g18 -- h18
+  - j18 -- k18
+  - k18 -- k17
+  - k15 -- k13 black
+  - k13 -- n13 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/perfboard/01-goodnight-timer.svg)
 
-- U1 (c1、DIP8) は 3 穴間隔で足8 (VCC) が c1、足7 (DISCH) が c2、足6 (THR) が
-  c3、足5 (CTRL) が c4、足1 (GND) が f1、足2 (TRIG) が f2、足3 (OUT) が f3、
-  足4 (RESET) が f4 に来る
-- 足4 (RESET) は 5 列へ迂回してから VCC の a 行へ、足1 (GND) は g・j 行を
-  通って GND の j 行へ。**足5 (CTRL) はどこにもつなげていない** — 単安定の
-  動作には必須ではなく、浮かせたままでも動く (つなぐならここに 0.01µF を
+- 部品面から見た図。電源は上の a 行 (赤)、GND は下の n 行 (黒) に 1 本ずつ筋を通し、
+  左端の a1・n1 に電源をつなぐ。部品はこの 2 本の筋から縦に配る
+- U1 (e5、DIP8) は切り欠きを左にして挿す。上の列が左から足8 (VDD)・7 (DISCH)・
+  6 (THRES)・5 (CONT) で e5〜e8、下の列が左から足1 (GND)・2 (TRIG)・3 (OUT)・
+  4 (RESET) で h5〜h8。足8 は 5 列を上って a 行へ、足1 は 5 列を下って n 行へ
+- 足4 (RESET) は h 行で 10 列へ出て、10 列を上って a 行 (VCC) へ。その途中の e10 から
+  e 行を右へ出して、出力段の RLED へ VCC を配る。**足5 (CONT) はどこにもつなげていない**
+  — 単安定の動作には必須ではなく、浮かせたままでも動く (つなぐならここに 0.01µF を
   GND へ)
-- Rtrig・SWtrig が足2 (TRIG) のプルアップと押しボタン (c10 行経由)、Rt・Ct が
-  足6・7 (THR・DISCH、b3 経由でひとつの節点) の時定数、Rg・Q1・RLED・DLED が
-  足3 (OUT) から先の出力段 (g 行を東西に使い、Q1 のゲートは f 行、ドレインは i 行で迂回)。
-  Q1 (2N7000) は平らな面を見て左から S・G・D なので、g24 がソース、g25 がゲート、
-  g26 がドレイン
+- 足2 (TRIG、黄) は h6 から j 行を左へ運んで SWtrig (j2) へ。SWtrig の下の足は l2 から
+  n 行の GND へ、上の足 j2 は 2 列を上って Rtrig (a2〜d2) で a 行の VCC へプルアップする
+- 足6・7 (THRES・DISCH、橙) はそれぞれ d 行へ上げて d6〜d7 で結び、Rt (a7〜d7) で VCC へ。
+  同じ d7 から d 行を右へ運んで Ct (d21、+ が上) へ、Ct の − は 21 列を下って GND へ
+- 足3 (OUT) は i 行で Rg (i12〜i16) へ、Rg から 16 列を下って Q1 のゲート (k16) へ。
+  Q1 (2N7000) は平らな面を見て左から S・G・D なので、k15 がソース、k16 がゲート、
+  k17 がドレイン。ソースは 13 列を下って GND へ、ドレインは k18 から 18 列を上って
+  DLED のカソード (j18) へ。DLED のアノード (h18) は RLED (e18〜g18) を通して e 行の VCC へ
+- **交差は 2 か所で、どちらも被覆線で跨ぐ**: 橙の d 行 (Ct へ) が 10 列の赤 (RESET) を、
+  黄の j 行 (TRIG) が 5 列の黒 (U1 の GND) を跨ぐ。この回路は足の並びから交差を
+  0 にはできない (足4 の VCC と、足6・7 から Ct への GND が U1 の右で必ず出会う)
 
 ## 見るべき値
 
