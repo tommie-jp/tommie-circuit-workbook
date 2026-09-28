@@ -57,6 +57,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/circuit/04-relaxation-oscillator-buzzer.svg)
+
 - R3・R4 を 100 kΩ→10 kΩ、C1・C2 を 10 µF→100 nF にしただけで、3-1 と
   **回路そのものは同じ**。周期が 1/1000 になり、耳に聞こえる周波数になる
 - **R5 (100 Ω) はブザーの保護。** 圧電ブザーはコンデンサに近い部品なので、
@@ -95,6 +97,8 @@ wires:
   - j15 -- j22 orange
   - j28 -- -b28 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/breadboard/04-relaxation-oscillator-buzzer.svg)
 
 - **R5・BZ1 は Q2 のコレクタ (15 列) から `j15--j22` で分けて GND へ落とす。**
   LED (D2) と並列に、音を出す枝が 1 本増えただけ

@@ -30,6 +30,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/circuit/03-adc-cds.svg)
+
 - CdS を **3V3 側** (Pico 自身が出す 3.3V 基準電源)、固定抵抗 R1 (10kΩ) を
   **GND 側**に置いた分圧。明るい (CdS の抵抗が下がる) ほど、ADC が読む
   電圧は 3.3V に近づく

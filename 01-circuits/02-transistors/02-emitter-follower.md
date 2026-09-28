@@ -43,6 +43,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/02-emitter-follower.svg)
+
 `R1` (22kΩ) と `R2` (10kΩ) でベースを分圧し、`RE` (1kΩ) がエミッタの電位を決める。
 `CIN` / `COUT` は直流を切って信号だけ通す結合コンデンサ。
 
@@ -78,6 +80,8 @@ wires:
   - d29 -- -t29 black
   - +t30 -- +b30 red
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/02-emitter-follower.svg)
 
 `R1`・`R2` の分圧点 (列 8) がベース、`RE` の上端 (列 20) がエミッタ。
 `Q1` のコレクタ (`f17`) は直接 +5V レールへ (下の + レール。30 列の赤線で上の

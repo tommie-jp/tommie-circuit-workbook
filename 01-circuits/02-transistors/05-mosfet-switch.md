@@ -40,6 +40,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/05-mosfet-switch.svg)
+
 `SW` を閉じるとゲートに 5V がかかり、MOSFET がオンになって LED が点く。
 `RPD` (100kΩ、プルダウン) が `SW` を開けたときにゲートを確実に 0V へ落とす。
 `RG` (220Ω) はゲートを充電する瞬間の電流を抑える保護抵抗。
@@ -75,6 +77,8 @@ wires:
   - g13 -- -b13 black
   - -t28 -- -b28 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/05-mosfet-switch.svg)
 
 2N7000 は**平らな面を見て左から S・G・D** (2SC1815 とは並びが違うので注意)。
 `RG` と `RPD` の分圧点 (列 21) がゲート。ソース (`f13`、下の − レール) と

@@ -45,6 +45,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/09-differentiator.svg)
+
 - V1 は 1 kHz・振幅 ±1 V の**三角波**。Cin (100 nF) が − 入力へ交流電流を送り、
   Rf (7.5 kΩ) の帰還で電圧に変える ── Vout = −Rf×Cin×(dVin/dt)。
   三角波は傾きが一定なので、微分すると**方形波**になる

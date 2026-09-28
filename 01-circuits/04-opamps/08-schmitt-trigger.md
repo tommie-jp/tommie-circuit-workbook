@@ -54,6 +54,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/08-schmitt-trigger.svg)
+
 - − 入力 (CdS・RFIX の分圧) は 4-4 と同じ。POT のワイパーはしきい値の基準電圧を
   作るが、**Rref (10 kΩ) を通してから + 入力へ**入れる (4-4 では直結だった)
 - **Rh (100 kΩ、出力から + 入力への正帰還) が新顔。** + 入力の電圧は

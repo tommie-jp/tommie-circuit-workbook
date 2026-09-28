@@ -45,6 +45,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/03-common-emitter.svg)
+
 `RE` (エミッタ抵抗) が動作点を安定させ、`CE` (バイパスコンデンサ) が交流だけ
 `RE` を迂回させて利得を最大にする。`R1`・`R2` の分圧が動作点を決める。
 
@@ -99,6 +101,8 @@ wires:
   - IN.SIG -- d6 gray
   - OUT.SIG -- d25 gray
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/03-common-emitter.svg)
 
 `R1`/`R2` の分圧点 (列 8) と `CIN` の出力 (列 9) をベースへ (同じ穴に 2 本は挿せないので g19 と h19 に分ける)。`CIN` の左側 (列 6) が入力の取り込み口。`RC` の下端
 (列 21) がコレクタ、`RE` の上端 (列 24) がエミッタ。`CE` は `RE` と並列

@@ -32,6 +32,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/02-series-parallel.svg)
+
 R2 と R3 (2 kΩ ずつ) は並列で 1 kΩ になり、R1 (1 kΩ) と直列で合計 2 kΩ。
 
 - 合成抵抗: R2∥R3 = (2k×2k)/(2k+2k) = **1 kΩ**、全体 = R1 + 1k = **2 kΩ**
@@ -54,6 +56,8 @@ wires:
   - +t5 -- c5 red
   - c15 -- -t15 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/02-series-parallel.svg)
 
 `R2` と `R3` の上端はどちらも列 10 (上ブロック) なので、ジャンパ線なしで
 `R1` の下端とつながる。下端も列 15 でつながっていて、そこから GND レールへ

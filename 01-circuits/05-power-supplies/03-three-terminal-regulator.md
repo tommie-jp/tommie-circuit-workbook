@@ -38,6 +38,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/circuit/03-three-terminal-regulator.svg)
+
 - **Cin (0.33 µF) は入力側、Cout (0.1 µF) は出力側**。どちらも発振防止と
   応答改善のためにデータシートが指定する定石の値
 - RL (100 Ω) が主負荷、Rled・Dled は電源が来ているかを示す表示 LED
@@ -72,6 +74,8 @@ wires:
   - i18 -- -b18 black
   - -t20 -- -b20 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/03-three-terminal-regulator.svg)
 
 - **7805 (TO-220) は端子側を上にすると左から IN・GND・OUT。** 放熱板を後ろに
   向けて挿す

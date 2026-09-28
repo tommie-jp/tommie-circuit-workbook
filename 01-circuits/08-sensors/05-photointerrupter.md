@@ -44,6 +44,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/circuit/05-photointerrupter.svg)
+
 - D1 (赤外線 LED) は R1 (220 Ω) で決まる電流で光りっぱなし。人の目には見えない
 - Q1 (フォトトランジスタ) は D1 の光を受けると電流を流し、R2 (プルアップ、10 kΩ)
   との分圧点 (N2) が下がる。**光が遮られると Q1 は電流を流せなくなり、N2 は
@@ -85,6 +87,8 @@ wires:
 notes:
   - text: D1 (赤外線 LED) と Q1 (フォトトランジスタ) を向かい合わせて置き、間に紙を通す
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/05-photointerrupter.svg)
 
 - D1 (赤外線 LED) と Q1 (フォトトランジスタ) は**離して向かい合わせに**挿し、
   リード線を伸ばして向き合わせる。**Q1 は胴が黒いので LED と見分けが付く**

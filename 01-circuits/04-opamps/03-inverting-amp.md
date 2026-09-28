@@ -44,6 +44,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/03-inverting-amp.svg)
+
 - **+ 入力を GND に直結**したのが反転増幅の印。OP アンプは − 入力も GND
   近くに保とうとする (仮想接地)
 - Rin (10 kΩ) が入力インピーダンス、Rf (100 kΩ) が帰還。
@@ -81,6 +83,8 @@ wires:
   - BAT.GND -- -t20 black
   - BAT.V- -- j13 orange
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/03-inverting-amp.svg)
 
 - **IN+ (3 番、12 列) は `i12--(-t12)` で GND に直結。** 分圧は要らない
 - **IN− (2 番、11 列) に Rin と Rf の両方が集まる。** Rin はここへ信号を入れ、

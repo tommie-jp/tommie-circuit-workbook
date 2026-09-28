@@ -26,6 +26,8 @@ wires:
   - c1 -- c3
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/01-led.svg)
+
 抵抗の値は **R = (V − V<sub>F</sub>) / I** で決める。電源 5 V、赤色 LED の
 順方向電圧 V<sub>F</sub> ≈ 2.0 V、流したい電流 10 mA なら 300 Ω。売っている
 値 (E12 系列) で近い 330 Ω にすると、電流は約 9 mA になる。
@@ -43,6 +45,8 @@ wires:
   - +t5 -- a5 red
   - a11 -- -t11 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/01-led.svg)
 
 - 同じ列の a〜e は中でつながっている。抵抗の右足 (10 列) と LED のアノードが
   10 列でつながる

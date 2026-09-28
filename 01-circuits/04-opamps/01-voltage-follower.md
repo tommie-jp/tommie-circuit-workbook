@@ -43,6 +43,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/01-voltage-follower.svg)
+
 - R1・R2 は ±5V を分圧して、高いインピーダンス (R1∥R2 ≈ 32 kΩ) の Vin を作る
   ためのわざと弱い分圧
 - **− 入力を出力に直結**したのがフォロアの印。OP アンプは +入力 = −入力に
@@ -75,6 +77,8 @@ wires:
   - i13 -- i16 orange
   - h10 -- h11 orange
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/01-voltage-follower.svg)
 
 - **V− (負電源) は赤レールに乗せない。** BAT.V− を 16 列へ直に配線し、そこから
   U1 の 4 番 (GND/V−、13 列) へ `i13--i16` で渡す

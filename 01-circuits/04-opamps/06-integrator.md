@@ -46,6 +46,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/06-integrator.svg)
+
 - V1 は 1 kHz **方形波**、振幅 ±1 V。**Cf (帰還のコンデンサ) が Rin と組んで
   積分**する ── Vout = −(1/RinCf) ∫Vin dt。方形波の積分は直線 (三角波) になる
 - **Rbleed (1 MΩ) は Cf と並列の漏れ抵抗。** 理想の積分器は直流成分まで

@@ -33,6 +33,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/06-potentiometer-divider-1.svg)
+
 `P1` (10kΩ) の上端が +5V、下端が GND。ワイパーを**下端 (GND 側) から**測って
 全体の **x** (0〜1) の位置にすると、無負荷の出力は単純な分圧と同じ式になる。
 
@@ -56,6 +58,8 @@ wires:
 style:
   grid: on
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/06-potentiometer-divider-2.svg)
 
 `RL` (10kΩ) は `P1` の下側の抵抗と並列になるので、ワイパーより下の抵抗が
 見かけ上小さくなり、出力が無負荷より**下がる**。x = 0.5 (ちょうど中点、

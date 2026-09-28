@@ -68,6 +68,8 @@ wires:
   - c8 -- e8
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/04-fm-transmitter.svg)
+
 - **タンク**: L1 (260nH、実測でずれる。手巻きコイル) と C1・C2 (コルピッツの
   分圧) で並列共振回路を作る。コレクタは L1 を介して Vcc につながるので、
   L1 は「タンクの一部」と「コレクタの負荷 (RFC 代わり)」を兼ねる
@@ -143,6 +145,8 @@ wires:
   - a28 -- -t28 black
   - -t30 -- -b30 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/04-fm-transmitter.svg)
 
 - 上の赤レール = +5V (USB や電池)、青レール = GND。30 列で上下の − レールを渡している
 - **アンテナ線は 20cm ほど**にとどめる (伸ばすと電波法の範囲を超えやすい)。

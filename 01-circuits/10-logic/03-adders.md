@@ -114,6 +114,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/03-adders.svg)
+
 - **半加算器**: U1 ゲート1 (XOR、足1・2→3) が S1 = A⊕B、U2 ゲート1 (AND、
   足1・2→3) が C1 = A·B
 - **全加算器への拡張**: U1 ゲート2 (足5・6→4) が S = S1⊕Cin、U2 ゲート2
@@ -212,6 +214,8 @@ wires:
   - j55 -- -b55 black
   - j56 -- -b56 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/03-adders.svg)
 
 - U1 (CD4070, XOR) は 14〜20 列、U2 (CD4081, AND) は 37〜43 列、U3 (CD4071, OR)
   は 51〜57 列。どれも切り欠きが左で、足1 が左下 (f 行)、足14 が左上 (e 行)。

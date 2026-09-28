@@ -39,6 +39,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/circuit/02-zener-series-regulator.svg)
+
 - **Rz がツェナーに電流を流す抵抗、DZ (5.1 V) が基準。** Q1 のベースは
   DZ の両端 (約 5.1 V) に固定される
 - **出力電圧 = ツェナー電圧 − Vbe ≈ 5.1 − 0.6 = 4.5 V。** Q1 はベース電流の
@@ -65,6 +67,8 @@ wires:
   - +t10 -- g10 red
   - j15 -- -b15 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/02-zener-series-regulator.svg)
 
 - **ツェナー (DZ) は帯のある側 (カソード) を上 (9 列)、GND 側 (アノード、11 列)
   を下に挿す。** アノードを GND レールへ、カソードを Rz とベースへ

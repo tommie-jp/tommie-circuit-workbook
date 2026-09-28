@@ -41,6 +41,8 @@ wires:
   - h1 -- h3 -- h7 -- h9 -- h12
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/01-lc-resonance.svg)
+
 L1・C1・R1 が直列の 1 つの輪になっている。LED はこの輪の外にあり、別の 5V から点ける。
 
 - 共振周波数 f<sub>0</sub> = 1 / (2π√(10mH × 10nF)) **≈ 15.9kHz**
@@ -119,6 +121,8 @@ wires:
   - V1.GND -- -b6 black
   - -t29 -- -b29 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/01-lc-resonance.svg)
 
 - 信号発生器 V1 は図1 の V1。正弦波を出し、周波数を 2kHz〜32kHz の間で動かす (中身は部品表)
 - 上の半分が共振の輪。列 3 に発生器の出力 (e3)・CH1 (a3)・L1 の左の足、
@@ -237,6 +241,8 @@ ch2: {wave: sine 15.9kHz 3.52Vpp, range: 1V/div}
 measure: [vpp, freq, phase]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/01-lc-resonance-1.svg)
+
 ```scope
 title: 図4 共振より下 (12kHz) — CH2 は 1.01Vpp に下がり、CH1 より進む
 time: 20us/div
@@ -245,6 +251,8 @@ ch1: {wave: sine 12kHz 5.88Vpp, range: 2V/div}
 ch2: {wave: sine 12kHz 1.01Vpp phase 78deg, range: 200mV/div}
 measure: [vpp, freq, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/01-lc-resonance-2.svg)
 
 - **CH2 は、どの周波数でもきれいな正弦波になる。** 輪の中には L1・C1・R1 しか無いので、
   電流の形は発生器の電圧の形のまま

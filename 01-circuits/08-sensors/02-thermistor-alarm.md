@@ -42,6 +42,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/circuit/02-thermistor-alarm.svg)
+
 - TH1 (NTC、上) と R1 (固定 2.2 kΩ、下) の分圧の中点 (c2) が Q1 のベース。
   **温度が上がると TH1 の抵抗が下がり、中点の電圧が上がる**
   (8-1 の CdS と上下が逆なだけで同じ考え方)
@@ -78,6 +80,8 @@ wires:
 notes:
   - text: TH1 を指でつまむと数秒でブザーが鳴りだす
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/02-thermistor-alarm.svg)
 
 - TH1 (NTC サーミスタ) は円板の部品。サーミスタどうしは形が同じなので、
   部品リストの種類名 (`thermistor-ntc`) と印字で見分ける

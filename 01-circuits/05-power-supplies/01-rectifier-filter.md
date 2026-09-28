@@ -41,6 +41,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/circuit/01-rectifier-filter.svg)
+
 - V1 は 12 V (実効値) の AC アダプタの出力。振幅 (ピーク) は 12 × √2 ≈ 17 V
 - **D1・D2 が上側 (+ へ)、D3・D4 が下側 (GND へ)** がブリッジ整流の形 (よく見る菱形の図と同じつながりを、ダイオードを縦に並べて描いている)。
   交流のどちらの半周期でも、C1 の + 側には必ず電流が流れ込む
@@ -74,6 +76,8 @@ wires:
   - i7 -- i14 red
   - g11 -- i18 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/01-rectifier-filter.svg)
 
 - **D1・D2 のカソード側 (7 列) が DC+、D3・D4 のアノード側 (11 列) が DC−。**
   7 列に C1 の + 側、11 列に − 側を挿す

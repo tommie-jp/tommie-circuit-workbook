@@ -55,6 +55,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/11-single-supply.svg)
+
 - **R1・R2 (各 10 kΩ) が Vcc/2 = 2.5 V を作る分圧、U1 はそれをバッファする
   ボルテージフォロア。** Cbyp (10 µF) は分圧点のノイズを抑える。
   これが**仮想 GND** ── 以後この 2.5 V を「0 V」のつもりで信号を扱う

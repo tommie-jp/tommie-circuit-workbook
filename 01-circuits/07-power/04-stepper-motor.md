@@ -54,6 +54,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/circuit/04-stepper-motor.svg)
+
 - ULN2003 は 7 回路入りの**ダーリントン配列**の IC で、そのうち 4 回路をこの
   モジュールが使う。**各入力には内蔵の直列抵抗 (約 2.7 kΩ) があるので、
   外付けの抵抗なしでロジックの GPIO (3.3 V でも 5 V でも) に直結できる**

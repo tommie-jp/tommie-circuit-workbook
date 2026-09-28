@@ -30,6 +30,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/circuit/05-listen-to-magnetic-field.svg)
+
 - L1 は太めのボビンや空のフィルムケースなどに**細いエナメル線を 1000 回ほど**
   巻いた自作コイル。部品としてはただのコイルだが、ここでは**周りの磁界を
   拾うアンテナ**として使う

@@ -32,6 +32,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/circuit/04-pwm-led-servo-1.svg)
+
 サーボは **5V (VBUS) で電源を取り、信号線だけ Pico の GPIO** につなぐ。
 
 ```circuit
@@ -50,6 +52,8 @@ wires:
 style:
   pitch: 1.2
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/circuit/04-pwm-led-servo-2.svg)
 
 - **LED**: 11-1 と同じ 330Ω + 赤色 LED。GP15 を単純な H/L ではなく、
   短い周期 (例えば 1kHz) で H の時間比 (デューティ比) を変えて出すと、

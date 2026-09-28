@@ -42,6 +42,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/circuit/02-motor-pwm.svg)
+
 - PWM は方形波電源 (0〜5 V、duty 可変) を表す。実際はファンクションジェネレータ
   (0-6 参照) か、マイコンの PWM 出力 (analogWrite など) を使う
 - R1 (100 Ω) は MOSFET のゲートに流れ込む充放電電流を抑える。R2 (10 kΩ) は
@@ -83,6 +85,8 @@ wires:
 notes:
   - text: R1 の上端 (15 列) が PWM 信号の入り口。ファンクションジェネレータか マイコンをつなぐ
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/breadboard/02-motor-pwm.svg)
 
 - モータは板に挿さず線でつなぐので `device` で書く。D1 の
   カソード (3 列) がモータの + 側、アノード (6 列) がモータの − 側 / Q1 のドレイン側

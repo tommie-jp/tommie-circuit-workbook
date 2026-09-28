@@ -38,6 +38,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/circuit/03-h-bridge.svg)
+
 - S1 が M1 の左端、S2 が M1 の右端を受け持つ (実体配線図では SW1・SW2)。
   それぞれ **1 側 (V+) か 2 側 (GND) か**を選べる
 - S1 = 1・S2 = 2 なら電流は左→右に流れて**正転**。S1 = 2・S2 = 1 なら
@@ -76,6 +78,8 @@ wires:
 notes:
   - text: SW1・SW2 とも上 (1 側) が +5V、下 (2 側) が GND
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/breadboard/03-h-bridge.svg)
 
 - SW1 (上ブロック) は上のレール、SW2 (下ブロック) は下のレールを使う。
   右端の 25 列で上下のレールをつないで、両方に同じ +5V・GND が来るようにする

@@ -42,6 +42,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/10-push-pull.svg)
+
 `V1`・`V2` で ±5V の 2 電源を作り (Analog Discovery の Supplies や、5V の
 USB 電源 2 個を直列にして真ん中を GND に落とす)、`Q1` のコレクタを +5V、
 `Q2` のコレクタを −5V につなぐ。

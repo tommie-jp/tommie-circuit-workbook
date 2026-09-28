@@ -47,6 +47,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/05-summing-amp.svg)
+
 - V1 (1 kHz、0.2 V) と V2 (3 kHz、0.1 V) が **同じ − 入力の 1 点 (仮想接地) に
   R1・R2 で合流**する。仮想接地なので互いの信号を押し返し合わない
 - **R1 = R2 = Rf = 10 kΩ なので、Vout = −(V1 + V2)。** 抵抗を変えれば
@@ -86,6 +88,8 @@ wires:
   - BAT.GND -- -t20 black
   - BAT.V- -- j13 orange
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/05-summing-amp.svg)
 
 - **R1 (5→11 列) と R2 (7→11 列) が IN− (11 列、2 番) の 1 点に合流**。
   Rf (11→10 列) が出力 (10 列、1 番) へ帰還する

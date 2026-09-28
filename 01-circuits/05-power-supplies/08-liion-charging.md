@@ -49,6 +49,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/circuit/08-liion-charging.svg)
+
 - **BAT は保護回路つき (protected) の 18650 セルを想定**。モジュール側の
   保護 (DW01A + FS8205A) と、電池自体の保護回路の**二重の安全**にする
 - B+/B- は電池、OUT+/OUT- は負荷 (今回は Rled・Dled で「充電中も動く機器」を

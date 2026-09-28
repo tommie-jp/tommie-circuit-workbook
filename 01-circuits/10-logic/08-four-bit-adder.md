@@ -116,6 +116,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/08-four-bit-adder.svg)
+
 - A1〜A4 (足5・3・14・12) と B1〜B4 (足6・2・15・11) がそれぞれ 4 bit の
   A・B。開けると 0、閉じると 1
 - **C0 (足7、繰り上がり入力) は GND (0) に固定**。スイッチに替えれば

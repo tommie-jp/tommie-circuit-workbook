@@ -37,6 +37,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/01-transistor-switch.svg)
+
 `IN` に 5V (スイッチや押しボタン) を入れるとベースに電流が流れ、
 トランジスタが**飽和**して LED が光る。0V (開放) にすると LED は消える。
 
@@ -63,6 +65,8 @@ wires:
   - g12 -- b20 yellow
   - g14 -- -b14 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/01-transistor-switch.svg)
 
 `Q1` は平らな面を見て左から E・C・B (2SC1815 の実物の並び)。図は B・C・E の
 順に挿すので、**平らな面を奥に向けて**挿す。`RB` の左端 (`a17`) が入力の端子。

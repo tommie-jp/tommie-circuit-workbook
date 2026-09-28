@@ -36,6 +36,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/09-jfet-current-source.svg)
+
 `J1` のゲートは `G1` で直接 GND に落としてある。ソースが `RS` を通して
 GND から浮くと、ゲート-ソース間には **V<sub>GS</sub> = −I<sub>D</sub> × RS** の
 逆バイアスがかかり、これが FET 自身の電流を絞る (セルフバイアス)。

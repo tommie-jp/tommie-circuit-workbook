@@ -46,6 +46,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/circuit/03-touch-switch.svg)
+
 - TPA (電源側の端子) と TPB (Q1 のベース側の端子) の間に指を置くと、肌の抵抗
   (数百 kΩ) を通してわずかな電流が R1 (1 MΩ、ベースを GND に軽く引く
   プルダウン) を上書きし、Q1 のベース電圧が上がる
@@ -87,6 +89,8 @@ wires:
 notes:
   - text: 触れる 2 点は j3 列 (R1・Q1 のベース側) と j10 列 (+5V 側)
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/03-touch-switch.svg)
 
 - j3 列と j10 列に**ワニ口クリップやむき出しの線を出しておき**、そこに指の腹を
   当てて 2 点をつなぐ。触れた瞬間に LED (e28-e30) が点く。LED のカソード側

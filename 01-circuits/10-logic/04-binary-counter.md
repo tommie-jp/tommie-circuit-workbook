@@ -81,6 +81,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/04-binary-counter.svg)
+
 - 555 は標準の非安定 (R1 10kΩ、R2 47kΩ、C1 10µF)。T ≈ 0.69×(10k+2×47k)×10µ
   **≈ 0.72秒**、f ≈ 1.4Hz
 - 555 の出力 (足3) が 4040 のクロック (足10)。**立ち下がりで 1 つ進む**
@@ -138,6 +140,8 @@ wires:
   - b48 -- -t48
   - b54 -- -t54
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/04-binary-counter.svg)
 
 - 上の赤レール = Vcc、青レール = GND。下のレールは 1・2 列で上のレールとつなぐ
 - U555 (NE555) は 5〜8 列、U40 (CD4040) は 22〜29 列。どちらも切り欠きが左で、

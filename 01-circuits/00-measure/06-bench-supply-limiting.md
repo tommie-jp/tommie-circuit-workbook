@@ -38,6 +38,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/circuit/06-bench-supply-limiting-1.svg)
+
 電源を **5V、電流制限 10mA** に設定し、負荷 `RL` の値を変えて出力を見る。
 
 - **RL = 1kΩ のとき**: 5V を出すのに必要な電流は 5V/1kΩ = 5mA。制限値 10mA
@@ -88,6 +90,8 @@ style:
   grid: on
   pitch: 1.2
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/circuit/06-bench-supply-limiting-2.svg)
 
 回路の中身は 2-1 と同じ (`R1` = 330Ω、`RB` = 10kΩ、Q1 = 2SC1815)。
 電源の + を電池の代わりに、ファンクションジェネレータの方形波を手動スイッチの

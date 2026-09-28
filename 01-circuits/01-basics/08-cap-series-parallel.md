@@ -37,6 +37,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/08-cap-series-parallel-1.svg)
+
 直列 (C1 = C2 = 100µF を直列にすると 50µF)。
 
 ```circuit
@@ -55,6 +57,8 @@ style:
   grid: on
   pitch: 1.2
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/08-cap-series-parallel-2.svg)
 
 `R1` = `R2` = 1kΩ (同じ抵抗を使う)。
 

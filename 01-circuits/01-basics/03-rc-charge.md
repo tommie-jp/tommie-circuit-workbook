@@ -39,6 +39,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/03-rc-charge-1.svg)
+
 スイッチを **1 (R1) 側**にすると、電池 → R1 → C1 の道だけがつながり、
 C1 は R1 を通して充電される。**2 (R2) 側**にすると電池から切り離され、
 C1 に貯まった電荷が R2 と LED を通して放電する。
@@ -72,6 +74,8 @@ wires:
   - c25 -- -t25 black
   - -t28 -- -b28 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/03-rc-charge-1.svg)
 
 `R1` の下端 (`a15`) とスイッチの `1` 番 (`e15`) は同じ列 15 でつながる。
 スイッチの `C` (共通) はコンデンサの + 側へ、`2` 番は放電側の `R2` へ配線した。
@@ -126,6 +130,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/03-rc-charge-2.svg)
+
 CH1 で入力 (方形波)、CH2 で C1 の両端の電圧を見る。2 本のプローブの GND は
 どちらも図の下の GND (発振器の GND と同じ点) に当てる。
 
@@ -154,6 +160,8 @@ wires:
   - SCOPE.GND -- -b20 black
   - -t28 -- -b28 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/03-rc-charge-2.svg)
 
 `R1` の右端 (`a15`) と `C1` の左端 (`b15`) は同じ列 15 でつながる。発振器の出力は
 `R1` の左端の列 10 へ、`C1` の右端の列 18 は上の − レール (GND) へ落とす。
@@ -187,6 +195,8 @@ cursors: [0, 1ms]
 measure: [vpp, vmax, rise]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/scope/03-rc-charge-1.svg)
+
 ### カーソルで τ を読む
 
 1. 縦のカーソル X1 を CH1 の立ち上がり (トリガの点、t = 0) に置く
@@ -213,6 +223,8 @@ cursors: [0, 1ms]
 measure: [vpp, vmin, period]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/scope/03-rc-charge-2.svg)
+
 発振器の周波数を **1 kHz** に上げると、半周期は 0.5 ms (0.5τ) しかない。C1 は満充電に
 届く前に放電に切り替わり、CH2 は 1.89 V と 3.11 V の間を行き来する、角の丸い三角波になる。
 平均はどちらも 2.50 V のまま。時間レンジは 200 µs/div にする。
@@ -225,6 +237,8 @@ ch1: {wave: square 1kHz 2.5V offset 2.5V, range: 1V/div, position: -3div}
 ch2: {wave: ch1 | rc 1ms, range: 1V/div, position: -3div}
 measure: [vpp, vmax, vmin, avg]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/scope/03-rc-charge-3.svg)
 
 ### 見るべき値
 
@@ -255,6 +269,8 @@ ch1: {wave: square 0.1Hz 2.5V offset 2.5V | rc 1s, range: 1V/div, position: -3di
 cursors: [0, 1s]
 measure: [vmax, vmin, rise]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/scope/03-rc-charge-4.svg)
 
 ## 出典
 

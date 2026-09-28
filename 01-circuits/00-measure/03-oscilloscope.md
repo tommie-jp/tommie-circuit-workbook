@@ -58,6 +58,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/circuit/03-oscilloscope.svg)
+
 555 の 2 番 (TRIG) と 6 番 (THR) をつなぐと**非安定**になる。8 番 (VCC) と
 4 番 (RESET) は電源に、1 番 (GND) はグラウンドに、5 番 (CV) は今回使わず
 浮かせたままにする (データシートどおり。気になるなら 0.01µF を GND へ)。
@@ -104,6 +106,8 @@ wires:
   - -t28 -- -b28 black
   - +t29 -- +b29 red
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/breadboard/03-oscilloscope.svg)
 
 555 の足は、それぞれが挿さった列の穴を使ってつなぐ。上の列 10〜13 が 8〜5 番、
 下の列 10〜13 が 1〜4 番 (1 番は左下)。

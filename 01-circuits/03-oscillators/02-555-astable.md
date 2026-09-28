@@ -53,6 +53,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/circuit/02-555-astable.svg)
+
 - **2 番 (TRIG) と 6 番 (THR) を直結**するのが非安定接続の印。この 1 点の電圧が
   1/3 Vcc〜2/3 Vcc の間を上下し続け、それに合わせて 3 番 (OUT) が反転する
 - **7 番 (DISCH) は Ra・Rb の中点**。C1 を充電するときは Ra + Rb を通り、
@@ -87,6 +89,8 @@ wires:
   - i13 -- +b13 red
   - j19 -- -b19 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/breadboard/02-555-astable.svg)
 
 - **DIP8 は溝をまたいで挿す** (e 行と f 行)。1 番 (GND) が左下の f10、8 番 (VCC) が
   左上の e10。切り欠きを左に向ける

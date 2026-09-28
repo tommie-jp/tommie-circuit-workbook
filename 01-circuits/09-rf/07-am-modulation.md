@@ -87,6 +87,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/07-am-modulation.svg)
+
 - **搬送波**: R1 (1kΩ)・R2 (10kΩ)・C1 (100pF) の 555 非安定。
   f = 1.44/((R1+2R2)C) = 1.44/((1k+20k)×100p) **≈ 686kHz** — 日本の
   AM 放送帯 (531kHz〜1602kHz) の中
@@ -164,6 +166,8 @@ wires:
   - ANT.1 -- j28 yellow
   - -t30 -- -b30 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/07-am-modulation-1.svg)
 
 - 上の赤レール = +5V (USB や電池)、青レール = GND。30 列で上下の − レールを渡している
 - U555 は 20〜23 列で溝をまたぐ (切り欠きを左、1 番は左下の f20)
@@ -268,6 +272,8 @@ notes:
   - box -b17 -b17 red solid
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/07-am-modulation-2.svg)
+
 - 赤い枠は図2 から足した所 (プローブの穴と GND)。図は足 3 (CH1) と ANT (CH2) を見るとき (図5)。GND のクリップは下の − レールへ
 - 音声と足 8 を見るとき (図6) は、CH1 を c10、CH2 を j16 に付け替える
 
@@ -326,6 +332,8 @@ notes:
   - box -b12 -b12 red solid
 ```
 
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/07-am-modulation-3.svg)
+
 - 赤い枠は図2 から足した所。Rsa (10 kΩ) と Csa (0.01 µF) で足 3 の方形波を小さくし、直流を切ってから入力へ渡す。
   **足 3 を直に入力へつながない**
 - オシロのプローブ (図3) を外してからつなぐ。どちらも足 3 の j22 を使う
@@ -359,6 +367,8 @@ ch2: {wave: ch1 | gain 0.87 | offset -1.99V, range: 1V/div, position: -2div}
 measure: [vpp, vmax, vmin, freq, duty]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/07-am-modulation-1.svg)
+
 - 足 3 (CH1) は 0〜4.4 V の方形波。H の高さは足 8 の電圧そのもの
 - ANT (CH2) は Cant で直流が切れ、**0 V を中心に振れる** (+1.84〜−1.99 V)。平均が 0 V に
   なるので、デューティ 52 % のぶん H のほうが低い。振幅は足 3 の 0.87 倍 (4.4 → 3.83 V<sub>pp</sub>)。
@@ -375,6 +385,8 @@ ch1: {wave: sine 1kHz 0.43V, range: 200mV/div}
 ch2: {wave: sine 1kHz 0.35V phase 36deg, range: 200mV/div}
 measure: [vpp, freq, phase]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/07-am-modulation-2.svg)
 
 - 発振器の端子 (CH1) は 0.5 V ではなく **約 0.43 V** (0.86 V<sub>pp</sub>)。負荷 (約 270 Ω) に
   電流を流すぶん、発振器の中の 50 Ω で落ちる
@@ -395,6 +407,8 @@ ch1: {wave: square 686kHz 2.375V offset 2.375V duty 52%, range: 1V/div, position
 ch2: {wave: square 686kHz 2.025V offset 2.025V duty 52%, range: 1V/div, position: -2.5div}
 measure: [vmax, freq, period]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/07-am-modulation-3.svg)
 
 - 実機では 1 本のプローブ (足 3) で、山で取り込んだ波を基準の波形 (Reference) に残し、
   谷の波と重ねる。図の CH2 はその 2 回目の取り込み

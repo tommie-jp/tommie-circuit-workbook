@@ -37,6 +37,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/circuit/08-hall-sensor.svg)
+
 - A3144 の OUT は**オープンコレクタ、負論理**。磁石の S 極を表の面に近づけると
   内部のトランジスタが ON になって OUT を GND に落とし、磁石が無いと
   OUT は浮いた (ハイインピーダンスの) ままになる

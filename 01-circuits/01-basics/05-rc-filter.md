@@ -32,6 +32,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/05-rc-filter-1.svg)
+
 出力を**コンデンサの両端**から取ると、高い周波数はコンデンサで短絡されて
 弱まり、低い周波数はそのまま出てくる (ローパス)。
 
@@ -48,6 +50,8 @@ wires:
 style:
   grid: on
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/05-rc-filter-2.svg)
 
 コンデンサと抵抗の**順番を入れ替え**、出力を**抵抗の両端**から取るとハイパスになる。
 低い周波数はコンデンサに阻まれて弱まり、高い周波数はそのまま出てくる。
@@ -83,6 +87,8 @@ wires:
   - SCOPE.GND -- -b15 black
   - -t25 -- -b25 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/05-rc-filter-1.svg)
 
 `R1` の右端 (`c10`) と `C1` の左端 (`d10`) は同じ列 10 でつながる。この列が出力。
 `C1` の右端の列 13 は、上の − レール (GND) へ黒線で落とす。
@@ -175,6 +181,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/05-rc-filter-3.svg)
+
 ```breadboard
 title: 図5 図3 の板に Analog Discovery をつなぐ
 board: half
@@ -195,6 +203,8 @@ wires:
   - AD.2+ -- a10 blue
   - AD.2- -- -t12 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/05-rc-filter-2.svg)
 
 部品の挿し方は図3 と同じ。W1 (黄) と CH1 の 1+ (橙) を入力の列 5 に、CH2 の 2+ (青) を
 出力の列 10 に挿す。AD の GND と、CH1・CH2 の − 側 (1−・2−) は上の − レールへ落とす。
@@ -343,6 +353,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/05-rc-filter-4.svg)
+
 C1 は 10 nF (103) のセラミックコンデンサ。板へは SMA とワニ口 (かピン) のケーブル 2 本で
 つなぎ、2 本の GND は C1 の GND 側の同じ列に集める。ハイパスは C1 を CH0 と CH1 の間に
 直列に入れ、GND は 2 本のケーブルの GND どうしをつなぐだけにする。
@@ -368,6 +380,8 @@ markers:
   - 637k
   - 6.37M
 ```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/vna/05-rc-filter.svg)
 
 | 周波数 | ローパス S21 (計算値) | ハイパス S21 (計算値) |
 | --- | --- | --- |

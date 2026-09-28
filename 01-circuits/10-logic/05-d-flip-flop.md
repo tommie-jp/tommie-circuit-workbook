@@ -69,6 +69,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/05-d-flip-flop.svg)
+
 - **FF1 (D-FF)**: SWD が D1 (足5)。SWC1 (CLK1、足3) を押すと GND から
   Vcc へ立ち上がり、その瞬間の D1 の状態を Q1 (足1) にコピーする。押している
   間や離したあとは D1 を変えても Q1 は動かない (次の立ち上がりまで保持)

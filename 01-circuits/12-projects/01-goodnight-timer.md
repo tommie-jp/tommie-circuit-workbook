@@ -56,6 +56,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/circuit/01-goodnight-timer.svg)
+
 - U1.2 (TRIG) は Rtrig (100kΩ) で常時 H。SWtrig を押した瞬間だけ L になり、
   単安定が始まる
 - U1.6・7 (THR・DISCH) と Rt (4.7MΩ)・Ct (220µF) が時定数を決める:
@@ -112,6 +114,8 @@ wires:
   - +t42 -- b42
   - b46 -- g38
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/breadboard/01-goodnight-timer.svg)
 
 - U1 (e5) の足8 (5 列の上) と足4 (8 列の下) を +t、足1 (5 列の下) を下の − レール
   (GND)。足2 (TRIG、6 列の下) は 12 列へ渡して Rtrig で +t へプルアップし、15 列の
@@ -178,6 +182,8 @@ wires:
   - i32 -- i26
   - i26 -- g26
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/perfboard/01-goodnight-timer.svg)
 
 - U1 (c1、DIP8) は 3 穴間隔で足8 (VCC) が c1、足7 (DISCH) が c2、足6 (THR) が
   c3、足5 (CTRL) が c4、足1 (GND) が f1、足2 (TRIG) が f2、足3 (OUT) が f3、

@@ -53,6 +53,8 @@ wires:
   - Q2.E -- j9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/circuit/03-water-alarm.svg)
+
 - **P1・P2 が電極** (むき出しの導線の先や、金属のねじ)。乾いている間は
   抵抗が無限大 (未接続) で、Q1 のベースは Rb (1MΩ) で GND に引かれて
   OFF。**水が P1・P2 を橋渡しすると**、水の抵抗 (図では Rwater と表す。
@@ -127,6 +129,8 @@ wires:
   - GND -- n2
   - n2 -- n9
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/perfboard/03-water-alarm.svg)
 
 - 2SC1815 は E-C-B の順 (東芝の実物の並び)。Q1 (i5=E, i4=C, i3=B)・
   Q2 (i9=E, i8=C, i7=B) と、どちらも左右を返して (左から B・C・E) i 行に揃えて置く。

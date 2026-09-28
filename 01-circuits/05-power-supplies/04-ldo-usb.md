@@ -40,6 +40,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/circuit/04-ldo-usb.svg)
+
 - J1 は USB Type-C。**使うのは VBUS・GND だけ**。CC1・CC2 (電源交渉用) は
   つながず、相手 (PC や充電器) の初期設定 5V/デフォルト電流に任せる
   (本格的に電流を引きたいなら CC に 5.1 kΩ でプルダウンする)
@@ -74,6 +76,8 @@ wires:
   - j14 -- -b14 black
   - -t16 -- -b16 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/04-ldo-usb.svg)
 
 - USB-C の VBUS・GND だけを引き出す (D+/D−/CC は使わない)。実物では
   USB コネクタのモジュール基板を使うとよい

@@ -52,6 +52,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/13-bench-supply/circuit/02-cc-mode.svg)
+
 - 電圧設定 5.0 V は LED の V<sub>F</sub> (約 2.0 V) より高いので、抵抗が
   無ければ CV のままでは電流が流れすぎる
 - 電流制限を 10 mA にすると、電源は**電圧を下げてでも電流を 10 mA に
@@ -82,6 +84,8 @@ wires:
   - a11 -- -t11 black
   - PSU.- -- -t9 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/13-bench-supply/breadboard/02-cc-mode.svg)
 
 - LED のアノードを赤いレールへ、カソードを青いレールへ。**抵抗を挟まない**
   のが 13-1 との違い

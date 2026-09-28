@@ -47,6 +47,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/circuit/05-i2c-temperature.svg)
+
 - **SDA (GP0) と SCL (GP1)** が I2C0。どちらも**プルアップ抵抗 (4.7kΩ)** で
   3.3V に持ち上げておく — I2C はオープンドレインの規格で、H は抵抗が
   作り、L はどちらかの機器が引き下げる (10-18 で詳しく扱う)

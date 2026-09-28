@@ -34,6 +34,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/circuit/03-diy-transformer.svg)
+
 - 1 次 (A1-A2) に **15 回**、2 次 (B1-B2) に **45 回** 巻く。フェライトコアは
   鉄心と違って高い周波数でよく働くので、商用電源ではなく**ファンクションジェネレータの
   5 kHz、振幅 2 V の正弦波**を 1 次に入れる (低圧 AC の範囲内で、コアを飽和させない

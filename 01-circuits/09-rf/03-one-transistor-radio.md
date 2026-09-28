@@ -50,6 +50,8 @@ wires:
   - c17 -- c19
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/03-one-transistor-radio.svg)
+
 - **タンク → C1 → ベース**: L1・VC1 の並列タンクで選んだ電波を、結合コンデンサ
   C1 で Q1 のベースへ渡す
 - **コレクタ帰還バイアス**: Rb (220kΩ) がコレクタからベースへ戻る。hFE が
@@ -118,6 +120,8 @@ wires:
   - a28 -- -t28 black
   - -t30 -- -b30 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/03-one-transistor-radio.svg)
 
 - 上の赤レール = +5V (USB や電池)、青レール = GND。30 列で上下の − レールを渡している
 - 前段は 8 列にアンテナ・VC1・L1・C1 をまとめる。L1 の右足 (12 列) は上の − レールへ

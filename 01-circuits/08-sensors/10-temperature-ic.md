@@ -37,6 +37,8 @@ wires:
   - U1.Vout -- e4 -- e7
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/circuit/10-temperature-ic.svg)
+
 - LM35 は **10 mV/°C、0°C で 0 V** というオフセット無しの特性。25°C の
   室温なら約 250 mV が出る。マイナスの温度を測るには負電源が要る
   (LM35DZ のような 0〜100°C 品なら単電源のままでよい)

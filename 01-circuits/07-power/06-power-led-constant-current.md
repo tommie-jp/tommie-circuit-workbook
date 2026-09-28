@@ -38,6 +38,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/circuit/06-power-led-constant-current.svg)
+
 - LM317 の OUT-ADJ 間には**常に 1.25 V** が保たれる (データシートの基準電圧)。
   R1 (3.6 Ω) に掛かるこの電圧で流れる電流が決まる — **I = 1.25 V / R1 ≈ 347 mA**。
   ADJ 自身が引くわずかな電流 (約 50 µA) は無視できる小ささ

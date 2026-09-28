@@ -37,6 +37,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/circuit/01-cds.svg)
+
 - R1 (固定 10 kΩ、上) と CDS1 (CdS、下) で分圧し、その中点 (g2) を Q1 の
   ベースに直結する。**CdS が暗くて抵抗が大きくなるほど、中点の電圧は VCC に
   近づく** — 上の R1 が固定なのに下の CDS1 の抵抗だけが上がるので、電圧の
@@ -71,6 +73,8 @@ wires:
 notes:
   - text: R1・CDS1 の間 (6・9 列) がベースへの分圧の中点。1 列で上下のレールをつないでいる
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/01-cds.svg)
 
 - CDS1 (CdS) は受光面の蛇行した抵抗体で見分けられる部品。向きは無い
 - Q1 のベース (15 列) へは、分圧の中点 (6 列) から配線する。R2・D1 は下ブロック

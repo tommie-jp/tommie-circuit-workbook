@@ -37,6 +37,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/circuit/08-schmitt-rc-oscillator.svg)
+
 - **U1 の入力 (b2) と出力 (b4) を Rf (100 kΩ) でつなぎ、入力に C1 (10 nF) を
   下げた**のがこの発振の全て。C1 の電圧が U1 の**上のしきい値 V<sub>T+</sub>**
   を超えると出力が反転して Low になり、Rf 経由で C1 を放電し始める。

@@ -55,6 +55,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/circuit/07-wien-bridge.svg)
+
 - **並列 RC (R2・C2、d6 のノードから GND へ)** と **直列 RC (R1・C1、出力から
   d6 へ)** が「ウィーンブリッジ」の周波数を決める部分。R1=R2=16 kΩ、
   C1=C2=10 nF が等しいとき、発振周波数は **f = 1 / (2πRC) ≈ 995 Hz**

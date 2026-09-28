@@ -47,6 +47,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/07-differential-amp.svg)
+
 - V1 (0.5 V) は R1 (10 kΩ) を通って − 入力へ、V2 (0.8 V) は R3 (10 kΩ) を通って + 入力へ入る。
   **R1=R3、Rf=R4 とペアの抵抗を揃える**のが差動増幅の条件
 - 非反転側 (+ 入力) は R3・R4 (100 kΩ) の分圧で V2 を弱めてから入れ、

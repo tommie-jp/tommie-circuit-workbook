@@ -46,6 +46,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/10-sallen-key-lowpass.svg)
+
 - **R1・R2 が直列 (c3→c5→c7)、C2 が後段の R2 の先で GND へ**、
   そして **C1 が前段の節点 (c5) から出力へ帰還**するのがサレンキーの骨格。
   出力 (交流的に低インピーダンス) から C1 を通して戻る正帰還が、

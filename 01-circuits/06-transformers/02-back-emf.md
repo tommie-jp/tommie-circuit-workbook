@@ -32,6 +32,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/circuit/02-back-emf.svg)
+
 - S1 を閉じると、電源 (5 V) → R1 (180 Ω、電流を決める) → L1 (100 mH) →
   GND の道で一定の電流が流れる。**LED (D1) はこの間、逆向きに電圧が掛かるだけで
   光らない** (先に書いた番地が + 側で、D1 はカソードが L1 の上の番地に来る向き)
@@ -60,6 +62,8 @@ wires:
 notes:
   - text: D1 は L1 と同じ 15・20 列 (別の行) に置き、コイルと並列にする
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/breadboard/02-back-emf.svg)
 
 - D1 (LED) は L1 と**同じ 15・20 列**の別の行 (d 行) に置くだけで、同じ列の
   導通でコイルと並列につながる

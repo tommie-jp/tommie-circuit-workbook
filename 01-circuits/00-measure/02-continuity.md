@@ -34,6 +34,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/circuit/02-continuity.svg)
+
 `R1` と `R2` は電源の同じ + 端子から出ている (回路図では線でつながっていれば
 同じネット)。`D1` と `D2` のカソードも同じ GND のネットに集まる。
 
@@ -53,6 +55,8 @@ wires:
   - b14 -- -t14 black
   - c3 -- -t3 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/breadboard/02-continuity.svg)
 
 - `R1` は列 8 の `a8`、`R2` も列 8 の `b8` に挿してある。**別の穴だが同じ列
   (上ブロック a〜e) なので、線を引かなくても中でつながっている**。電源は

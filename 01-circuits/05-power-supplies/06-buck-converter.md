@@ -47,6 +47,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/circuit/06-buck-converter.svg)
+
 - M1 は市販の降圧 DC-DC モジュール基板 (MC34063 と周辺のコイル・
   ダイオード・コンデンサを基板 1 枚にまとめたもの)。**外に出ている端子は
   IN+・IN-・OUT+・OUT- の 4 本だけ**で、出力電圧は基板上のトリマ抵抗で

@@ -38,6 +38,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/circuit/05-hfe-checker.svg)
+
 `RB` (1MΩ) がベース電流を、トランジスタの種類によらずほぼ一定に決める。
 
 - ベース電流: I<sub>B</sub> = (5 − 0.7) / 1MΩ ≈ **4.3 µA** (`A1` の読み。

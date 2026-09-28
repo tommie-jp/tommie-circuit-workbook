@@ -35,6 +35,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/09-diode-clipper-clamper-1.svg)
+
 クランパ (波形全体を上へずらす)。
 
 ```circuit
@@ -54,6 +56,8 @@ wires:
 style:
   grid: on
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/09-diode-clipper-clamper-2.svg)
 
 **クリッパ (図1)**: 入力に ±5V の方形波を想定する。`D1` は出力が +0.7V を
 超えると導通し、それ以上は流させない。`D2` は逆向きに入れてあるので、

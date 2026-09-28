@@ -47,6 +47,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/06-differential-amp.svg)
+
 `Q1` のベースは `R1`・`R2` (どちらも 10kΩ) の分圧で固定 (基準)。`Q2` のベースは
 `VR1` (ポテンショメータ) のつまみで 0〜5V に動かせる。`RE` (テール抵抗) が
 2 つのエミッタ電流の合計をほぼ一定に保つ。
@@ -94,6 +96,8 @@ wires:
   - g37 -- d31 green
   - d34 -- -t34 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/06-differential-amp.svg)
 
 `R1`・`R2` の分圧 (列 8) が `Q1` のベース (基準)。`VR1` のつまみ (列 18) が
 `Q2` のベース。`Q1`・`Q2` のエミッタはどちらも `RE` の上端 (列 31) に集まる。

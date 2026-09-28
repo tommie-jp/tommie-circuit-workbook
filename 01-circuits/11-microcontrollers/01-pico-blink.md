@@ -32,6 +32,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/circuit/01-pico-blink.svg)
+
 - GP15 (汎用入出力) を出力に設定し、program で H (3.3V) / L (0V) を切り替える
 - LED の戻り道として、Pico の GND (ここではピン 18) を GND につなぐ。
   これが無いと電流の帰り道が無く、LED は点かない
@@ -52,6 +54,8 @@ wires:
   - j22 -- -b22
   - -t50 -- -b50
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/breadboard/01-pico-blink.svg)
 
 - `pico @ h5` は基板の左端 (h 行、ピン 1 = GP0) を指す。USB を左に向けた
   ときの実物のピン配置のまま

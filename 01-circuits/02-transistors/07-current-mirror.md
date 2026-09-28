@@ -43,6 +43,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/07-current-mirror.svg)
+
 `Q1` はコレクタとベースを短絡した**ダイオード接続**で、`RREF` に流れる
 基準電流を決める。`Q2` は `Q1` とベース・エミッタを共通にしているので、
 `Q1` と同じコレクタ電流を**写し取る** (ミラーする)。

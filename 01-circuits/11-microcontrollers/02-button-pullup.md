@@ -31,6 +31,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/circuit/02-button-pullup.svg)
+
 - R1 (10kΩ) が GP16 を 3V3 (Pico が出す 3.3V) へ引き上げる。ボタンを離している間、
   GP16 は 3.3V (H)
 - SW1 を押すと GP16 が直接 GND につながり、0V (L) になる。R1 には
@@ -56,6 +58,8 @@ wires:
   - g37 -- -b37
   - -t40 -- -b40
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/breadboard/02-button-pullup.svg)
 
 - Pico の `3V3` (36番) を + レールへ、`GND` (3番) を − レールへ (USB を挿した
   だけではレールに出ないので、この 2 本は必ず配線する)

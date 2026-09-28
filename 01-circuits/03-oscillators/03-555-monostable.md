@@ -56,6 +56,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/circuit/03-555-monostable.svg)
+
 - **2 番 (TRIG) は常に R2 で Vcc に釣り上げてある。** SW1 を押した瞬間だけ GND に
   落ち、それが引き金になって 3 番 (OUT) が High になる
 - **7 番・6 番は R1・C1 の 1 点。** OUT が High の間だけ C1 を R1 で充電し、
@@ -92,6 +94,8 @@ wires:
   - i13 -- +b13 red
   - j26 -- -b26 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/breadboard/03-555-monostable.svg)
 
 - **R1 の右足 (11 列) が 7 番、6 番 (12 列) とは `a11--a12` の 1 本だけで結ぶ**
   (どちらも R1・C1 の同じ 1 点)

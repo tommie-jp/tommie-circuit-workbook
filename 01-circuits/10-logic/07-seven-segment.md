@@ -84,6 +84,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/07-seven-segment.svg)
+
 - SWA〜SWD が BCD の A(LSB)〜D(MSB)。開けると 0、閉じると 1 (プルダウンで
   開いた側を 0V に決める)
 - **LT̄ (足3) と BĪ (足4) は Vcc に固定** — どちらも負論理で、LT̄ を GND に

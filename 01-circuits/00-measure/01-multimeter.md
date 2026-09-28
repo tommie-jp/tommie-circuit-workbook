@@ -35,6 +35,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/circuit/01-multimeter.svg)
+
 電流計 (`A1`) は電池と `R1` の間に**割り込ませて**直列に、電圧計 (`V2`) は
 `R2` の両端に**並列に**当ててある。抵抗は R1 = R2 = 10 kΩ、電源は 5V。
 直列なので電流はどこでも同じ、電圧は 2 つの抵抗で半分ずつに分かれる。
@@ -62,6 +64,8 @@ wires:
   - MULT.+ -- c10 orange
   - MULT.COM -- c15 gray
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/breadboard/01-multimeter.svg)
 
 - `a10` と `b10` は**同じ列 10 (上ブロック)** なので、ジャンパ線を渡さなくても
   `R1` の下端と `R2` の上端はつながっている。同じ列の `c5` `c10` `c15` に

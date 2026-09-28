@@ -56,6 +56,8 @@ notes:
   - text d14 blue: "3番 出力+電源"
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/08-radio-ic.svg)
+
 - **タンク**: L1 (250µH) と VC1 (ポリバリコン、20〜260pF) は 9-2 と同じ
   中波帯の同調回路。タンクの上端 (足1側) を IC1 の**足2 (RF 入力)**へ
   直接つなぐ — IC の入力インピーダンスが高く、結合コンデンサを挟まなくても
@@ -126,6 +128,8 @@ wires:
   - EAR.B -- -b17 black
   - -t28 -- -b28 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/08-radio-ic.svg)
 
 - 上の赤レール = +5V (USB や電池)、青レール = GND。28 列で上下の − レールを渡している
 - IC1 は 10・11・12 列 (足 1 = GND、足 2 = RF 入力、足 3 = 出力+電源)。上の注意のとおり、

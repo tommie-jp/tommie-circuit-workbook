@@ -40,6 +40,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/circuit/04-mic.svg)
+
 - MK1 (マイク) は R1 (2.2 kΩ) で電源からバイアス電流をもらう、いちばん
   一般的な ECM の使い方。マイクの出力 (音の振動ぶんの小さな AC 電圧) は
   C1 (1 µF) を通してだけ次の段に伝わり、直流のバイアス電圧はここで止まる
@@ -76,6 +78,8 @@ wires:
 notes:
   - text: マイクに息を吹きかけたり手を叩いたりすると LED の明るさが揺れる
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/04-mic.svg)
 
 - マイク (ECM) は 2 本足の部品として置ける (向きは無い扱い)。実物には裏に
   端子の印字があるので、GND 側を確かめて挿す

@@ -38,6 +38,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/04-diode-direction.svg)
+
 D1 (赤) と D2 (青) は向きをそろえて挿し、D3 (赤) だけ**わざと逆向き**に
 挿してある。電源はどれも同じ 5V、抵抗もどれも 330Ω。
 
@@ -69,6 +71,8 @@ wires:
   - +t19 -- c19 red
   - c23 -- -t23 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/04-diode-direction.svg)
 
 D3 だけ **K (カソード) を抵抗の側 (22 列)、A (アノード) を GND の側 (23 列)** に挿してあるところに注目
 (D1・D2 は A が抵抗の側、K が GND の側)。

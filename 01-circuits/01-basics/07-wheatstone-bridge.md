@@ -36,6 +36,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/07-wheatstone-bridge.svg)
+
 `R1` = `R2` = 1kΩ (比を決める既知の 2 本)、`R3` は値の分かる可変抵抗、
 `RX` = 680Ω は測りたい未知の抵抗 (ここでは正解を 680Ω として計算する)。
 平衡条件は **R1/R3 = R2/RX**、R1 = R2 なので **R3 = RX のときに平衡**する。

@@ -42,6 +42,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/04-darlington-touch.svg)
+
 `TP1` と `TP2` が指で触れる 2 枚の金属板 (アルミ箔やねじの頭など)。
 触れていないときは `RB` (1MΩ) が Q1 のベースを GND 側に引いて OFF に保つ。
 
@@ -93,6 +95,8 @@ wires:
   - TP1.A -- +t3 red
   - TP2.B -- d20 gray
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/04-darlington-touch.svg)
 
 `Q1` のエミッタ (`f14`) は `Q2` のベース (`f17`) へ。`Q1`・`Q2` のコレクタは
 どちらも LED のカソード側 (`g13`) へまとめて配線する。`TP2` は `RB` の上端

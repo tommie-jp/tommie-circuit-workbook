@@ -49,6 +49,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/04-comparator-cds.svg)
+
 - **RCDS・RFIX の分圧点が − 入力。** 明るいと RCDS は低抵抗 (約 1 kΩ)、
   暗いと高抵抗 (約 200 kΩ) になり、分圧点の電圧が大きく動く
 - **POT (しきい値の調整) の中点 (ワイパ) が + 入力。** 帰還が無いので、
@@ -94,6 +96,8 @@ wires:
   - j3 -- j12 orange
   - j19 -- -t19 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/04-comparator-cds.svg)
 
 - **CdS (11 列) と RFIX (11 列) の分圧点が IN− (2 番)。** POT のワイパ (3 列) は
   `j3--j12` で IN+ (3 番、12 列) へ

@@ -44,6 +44,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/11-pnp-high-side.svg)
+
 `Q1` (PNP) のエミッタは +5V に直結。`RB1` (10kΩ) はベースをエミッタと
 同電位に保つ「切る」抵抗、`RB2` (4.7kΩ) は `Q2` (NPN) が導通したときに
 `Q1` のベースを引き下げる電流を決める。ロジック入力もこの回路の電源と

@@ -39,6 +39,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/circuit/04-shunt-multiplier-1.svg)
+
 10 mA レンジに必要な分流器の値は **R<sub>s</sub> = I<sub>g</sub>R<sub>g</sub> / (I<sub>max</sub> − I<sub>g</sub>)
 = (1mA × 100Ω) / 9mA ≈ 11.1 Ω**。E24 系列の 11Ω (1/4W で十分) にすると、
 実際のフルスケールは I<sub>g</sub> + I<sub>g</sub>R<sub>g</sub>/R<sub>s</sub> = 1mA + (1mA×100Ω)/11Ω
@@ -78,6 +80,8 @@ style:
   grid: on
   pitch: 1.2
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/circuit/04-shunt-multiplier-2.svg)
 
 5V レンジに必要な倍率器の値は **R<sub>v</sub> = V<sub>max</sub>/I<sub>g</sub> − R<sub>g</sub>
 = 5V/1mA − 100Ω = 4900 Ω**。手持ちの 4.7kΩ (E12 系列) にすると、実際の

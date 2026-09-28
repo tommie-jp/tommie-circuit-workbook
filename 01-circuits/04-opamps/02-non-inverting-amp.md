@@ -46,6 +46,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/02-non-inverting-amp.svg)
+
 - V1 は 1 kHz・振幅 0.1 V の発振器。C1 (1 µF) で直流を切り、Rb (100 kΩ) で
   非反転入力を GND (電池の中点) へ持ち上げる (交流だけを通す)
 - **利得 = 1 + R3/R2 = 1 + 10k/1k = 11 倍。** 出力振幅は 0.1 V × 11 = 1.1 V
@@ -85,6 +87,8 @@ wires:
   - BAT.GND -- -t20 black
   - BAT.V- -- j13 orange
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/02-non-inverting-amp.svg)
 
 - **GEN (発振器) の出力を C1 で受け、12 列 (IN+、3 番) へ。** Rb はその 12 列を
   GND へ持ち上げるバイアス抵抗 (直流だけを GND へ逃がす)

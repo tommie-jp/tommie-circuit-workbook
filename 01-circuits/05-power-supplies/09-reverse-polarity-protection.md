@@ -32,6 +32,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/circuit/09-reverse-polarity-protection-1.svg)
+
 ```circuit
 title: 図2 P-MOSFET 方式 (ゲート接地)
 parts:
@@ -51,6 +53,8 @@ wires:
 style:
   grid: on
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/circuit/09-reverse-polarity-protection-2.svg)
 
 - **図1**: D1 (ショットキー、1N5819) を電源の + 側に直列に入れるだけ。
   正しい向きなら D1 が導通して電流が流れ、逆向きなら D1 が阻止する。

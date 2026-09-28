@@ -103,6 +103,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/01-basic-gates.svg)
+
 - U1 (CD4081、AND) と U2 (CD4071、OR) は**同じ A・B** を入力にする。ゲート1
   (足1・2→3) だけを使う
 - U3 (CD4069、6 回路入りインバータ) はゲート1 (足1→2) を使う。C を NOT に入れる
@@ -180,6 +182,8 @@ wires:
   - j54 -- -b54 black
   - j56 -- -b56 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/01-basic-gates.svg)
 
 - 上の赤レール = +5V (単3 電池 3 本か USB の 5V)、青レール = GND。下の青レールは
   1 列で上の青レールとつなぐ

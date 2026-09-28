@@ -43,6 +43,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/circuit/07-ultrasonic.svg)
+
 - TRIG に**10 µs 以上の H パルス**を送ると、モジュールが自動で 40 kHz の
   超音波を 8 発出す
 - ECHO は VCC と同じ **5 V** で H になる。マイコンが 3.3 V 系 (Pico など) だと

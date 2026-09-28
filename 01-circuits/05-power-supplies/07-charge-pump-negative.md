@@ -61,6 +61,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/circuit/07-charge-pump-negative.svg)
+
 - 555 は 3-2 と同じ非安定接続。**3 番 (OUT) の方形波 (0〜9V) が
   Cp (1 µF、ポンプ用コンデンサ) を駆動する**
 - OUT が High から Low に落ちるたびに、Cp の右側 (D1・D2 の中点) が

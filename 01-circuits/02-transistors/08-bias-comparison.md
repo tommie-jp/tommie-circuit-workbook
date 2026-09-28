@@ -36,6 +36,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/08-bias-comparison-1.svg)
+
 分圧バイアス (2-3 と同じ形。抵抗 4 本要るが hFE に強い)。
 
 ```circuit
@@ -60,6 +62,8 @@ style:
   grid: on
   pitch: 1.2
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/08-bias-comparison-2.svg)
 
 どちらも `RC` = 4.7kΩ で揃え、2SC1815 の hFE の幅 (70〜700) を仮定して
 コレクタ電流 I<sub>C</sub> を計算する。

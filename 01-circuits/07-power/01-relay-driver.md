@@ -45,6 +45,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/circuit/01-relay-driver.svg)
+
 - IN (GPIO など) が H になると、R1 (1 kΩ) を通してベース電流が流れ、
   Q1 が飽和してコイル (K1.A1-A2) に電流が流れ、リレーが引く
 - D1 はコイルと**並列に、電源側がカソード**の向き。コイルに電流が流れている間は
@@ -81,6 +83,8 @@ wires:
 notes:
   - text: オレンジの線 (2 列) が IN。5V につなぐと Q1 が入り、リレーが引いて LED が点く
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/breadboard/01-relay-driver.svg)
 
 - リレーは胴の左端の列 (10 列) に置いた。足は切り欠きを左にした実物を上から見た
   並び (1 番の `A1` が左下の f10)

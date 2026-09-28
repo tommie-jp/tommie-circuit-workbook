@@ -34,6 +34,8 @@ style:
   pitch: 0.9
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/circuit/01-transformer-basics.svg)
+
 - V1 は AC アダプタの出力 (12 V、50/60 Hz)。T1 は 1 次 12 V・2 次 24 V の小さな
   トランス (豆電球やネオン管を光らせる用途で売っている昇圧トランスなど)
 - 1 次を 12 V で駆動すると、巻数比 1:2 から 2 次に **24 V** が出る
@@ -60,6 +62,8 @@ wires:
 notes:
   - text: 1 次 (5〜8 列) をアダプタへ、2 次 (13〜16 列) に負荷 R1
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/breadboard/01-transformer-basics.svg)
 
 - トランスの 4 本の足は実物の巻線の端そのものなので、挿した穴がそのまま足になる
   (`a5` が `A1`、`a8` が `A2`、というように穴に名前を添えて分かるようにした)。

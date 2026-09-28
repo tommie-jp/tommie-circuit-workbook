@@ -50,6 +50,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/circuit/04-center-tap-rectifier.svg)
+
 - T1・T2 は**同じ巻数比の 1 個のトランス**のつもりで描いている。この記法には
   センタータップ付きトランスの記号が無いので、**同じ仕様の 2 次巻線を 2 つ、
   直列につないだもの**として代用した (T1.B2 と T2.B1 をつないだ点が

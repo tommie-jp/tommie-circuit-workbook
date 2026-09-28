@@ -54,6 +54,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/circuit/01-astable-multivibrator.svg)
+
 - **R1・D1 が Q1 の負荷、R2・D2 が Q2 の負荷。** どちらもオンのときだけ点く
 - **C1 が Q1 のコレクタから Q2 のベースへ、C2 が Q2 のコレクタから Q1 のベースへ**
   斜めに交差する。これが「非安定」を作る帰還そのもの
@@ -87,6 +89,8 @@ wires:
   - j4 -- -b4 black
   - j14 -- -b14 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/breadboard/01-astable-multivibrator.svg)
 
 - **2SC1815 は平らな面を見て左から E・C・B。** 図のとおり左から E・C・B に
   挿すには、平らな面を奥 (f 行側) に向ける

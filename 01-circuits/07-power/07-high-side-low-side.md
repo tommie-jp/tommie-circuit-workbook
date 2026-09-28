@@ -53,6 +53,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/circuit/07-high-side-low-side.svg)
+
 - **ローサイド (左)**: 負荷 (R1・D1) を VCC 側に固定し、GND 側を Q1 (N チャネル
   MOSFET) で開閉する。2-1・7-2 と同じ形。ゲートは IN1 (GPIO) が **H で ON**
   という素直な向き。Rpd1 (10 kΩ) は GPIO が高インピーダンスのとき Q1 を

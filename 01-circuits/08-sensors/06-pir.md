@@ -39,6 +39,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/circuit/06-pir.svg)
+
 - PIR モジュールの OUT は、電源電圧によらず**3.3 V の TTL レベル**で出るのが
   代表的な仕様 (データシート値)。5 V で電源を取っても OUT は 3.3 V までしか
   上がらないので、そのまま LED を光らせられる

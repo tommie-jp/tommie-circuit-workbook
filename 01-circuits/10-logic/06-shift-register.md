@@ -81,6 +81,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/06-shift-register.svg)
+
 - **SER (足14)** がシリアル入力の 1 ビット。SW を閉じておくと 1、開けておくと
   (プルダウンで) 0 を送り込む
 - **SRCLK (足11)** の**立ち上がり**のたびに、そのときの SER の値が内部の

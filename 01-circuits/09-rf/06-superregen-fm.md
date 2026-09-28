@@ -78,6 +78,8 @@ wires:
   - b21 |- c23
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/06-superregen-fm.svg)
+
 - **タンクと発振回路は 9-4 とほぼ同じ**: L1 (今回は 100nH) と C1・C2 (今回は
   33pF・33pF) のコルピッツ。合成容量 C<sub>s</sub> = 33p×33p/(33p+33p) **= 16.5pF**
 - **同調は VC1 で合わせる**: 9-4 はコイルの巻きで周波数を合わせたが、ここでは
@@ -168,6 +170,8 @@ wires:
   - EAR.B -- -t29 black
   - -t1 -- -b1 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/06-superregen-fm.svg)
 
 - 上の赤レール = +5V (USB や電池)、青レール = GND。1 列で上下の − レールを渡している
 - Q1 は下のブロックの j 行 (14 列 B・18 列 C・22 列 E)。ベースとコレクタは e–f の短い線で

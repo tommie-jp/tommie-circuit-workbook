@@ -38,6 +38,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/circuit/05-servo-pulse-angle.svg)
+
 - SV1 (SG90 マイクロサーボ) は VCC・GND・SIG の 3 本足。VCC は 5 V (USB や
   電池)、SIG は 3.3 V/5 V ロジックのパルスでよい
 - PWM は周期 20 ms (50 Hz) の方形波を表す。**パルス幅が 1.0 ms で 0°、

@@ -38,6 +38,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/circuit/09-water-level-electrodes.svg)
+
 - RS が 2 本の電極間 (水や土) の抵抗。R1 (固定 10 kΩ) との分圧の中点が
   Q1 のベース。**電極間の抵抗が下がる (水分が増える) ほど、中点の電圧は
   VCC に近づき**、Q1 の V<sub>BE</sub> (約 0.7 V) を超えると ON になって

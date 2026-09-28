@@ -66,6 +66,8 @@ wires:
   - e22 -- e20
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/05-reflex-radio.svg)
+
 - **前段は 9-3 と同じ**: L1・VC1 のタンクで選局し、C1 で Q1 のベースへ結合。
   Rb (180kΩ、コレクタ帰還) と Rc (1.5kΩ) のバイアスも同じ (Ic ≈ 1.0mA、
   Vc ≈ 1.5V、9-3 と同じ計算値)
@@ -148,6 +150,8 @@ wires:
   - j28 -- -b28 black
   - -t30 -- -b30 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/05-reflex-radio.svg)
 
 - 上の赤レール = +5V (USB や電池)、青レール = GND。30 列で上下の − レールを渡している
 - 前段は 9-3 と同じく、8 列にアンテナ・VC1・L1・C1 をまとめる

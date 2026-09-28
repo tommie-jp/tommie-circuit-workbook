@@ -93,6 +93,8 @@ notes:
   - text j19 blue: "両方Hで点灯"
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/circuit/02-motion-light.svg)
+
 - **VL (3.3V) を作る**: Rz (330Ω) と Dz (3.3V ツェナー、1-13 と同じ考え方) の
   簡易シャント電源。ツェナー電流 = (5V−3.3V)/330Ω **≈ 5.2mA**。40106・4081
   は CMOS で消費電流が数µA と小さいので、この電流のほとんどはツェナーを
@@ -201,6 +203,8 @@ wires:
   - b31 -- f31
   - f31 -- f30
 ```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/perfboard/02-motion-light.svg)
 
 - Rz・Dz が VL (3.3V) を作り、b3 (Rz の下端) から U1・U2 の足14 (c12・c24) と
   CDS1・R1 の分圧へ配る

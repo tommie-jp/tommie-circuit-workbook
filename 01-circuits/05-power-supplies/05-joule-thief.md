@@ -43,6 +43,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/circuit/05-joule-thief.svg)
+
 - **T1 は同じ磁芯に 2 本の巻線を撚り合わせて巻いた (バイファイラ巻き) もの。**
   A 巻線は**巻き始め (A1)**、B 巻線は**巻き終わり (B2)** を電池の + に結ぶ。
   こうすると Q1 のコレクタ電流が増えるときに B 巻線のベース側 (B1) が持ち上がり、
@@ -82,6 +84,8 @@ wires:
   - i17 -- -t17 black
   - BAT.- -- -t3 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/05-joule-thief.svg)
 
 - **T1 は同じ磁芯にエナメル線 2 本を一緒に (バイファイラで) 10 回ずつ巻いた
   自作トランス。** FT37-43 のようなフェライトトロイダルコアが定番

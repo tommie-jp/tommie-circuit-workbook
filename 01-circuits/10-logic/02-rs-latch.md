@@ -64,6 +64,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/02-rs-latch.svg)
+
 - U1 の**ゲート1** (足1・2→3) が Q を出す NAND、**ゲート2** (足5・6→4) が Q̄ を
   出す NAND。互いの出力を相手の 2 番目の入力に戻す (足4→足2、足3→足6) のが
   ラッチの仕掛け
@@ -114,6 +116,8 @@ wires:
   - a25 -- -t25 black
   - a26 -- -t26 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/02-rs-latch.svg)
 
 - 上の赤レール = +5V、青レール = GND。下の青レールは 1 列で上の青レールとつなぐ
 - SWS (e5)・SWR (e12) はタクトスイッチ。溝をまたぐ 4 本足の**手前側**

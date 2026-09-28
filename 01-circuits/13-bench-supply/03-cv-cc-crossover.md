@@ -49,6 +49,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/13-bench-supply/circuit/03-cv-cc-crossover-1.svg)
+
 電圧設定 **6.0 V**、電流制限 **15 mA** とする。切り替わり点は
 
 R<sub>crossover</sub> = 6.0 V / 15 mA = **400 Ω** (計算値)
@@ -75,6 +77,8 @@ wires:
   - a12 -- -t12 black
   - PSU.- -- -t9 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/13-bench-supply/breadboard/03-cv-cc-crossover.svg)
 
 - `RV1` の 1 番 (c10) と W (c11) をジャンパで結ぶと、そこから 2 番 (c12) までの
   抵抗だけが効くレオスタットになる。つまみを回すと 0 Ω 〜 1 kΩ で変わる
@@ -157,6 +161,8 @@ style:
   grid: on
   pitch: 1.2
 ```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/13-bench-supply/circuit/03-cv-cc-crossover-2.svg)
 
 - CH1 (横軸 X) は RS の両端 = **電流**。CH2 (縦軸 Y) は電源の出力 = **電圧**
 - 2 本のプローブのグランド (ワニ口) は、どちらも電源の − (図の GND) に挟む。

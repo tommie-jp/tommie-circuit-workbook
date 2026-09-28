@@ -61,6 +61,8 @@ style:
   pitch: 1.2
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/13-bench-supply/circuit/01-cv-mode.svg)
+
 `GND` (シャーシ接地) の足はここでは使わない。回路の GND は電源の `-` 端子
 そのもの。
 
@@ -89,6 +91,8 @@ wires:
   - a11 -- -t11 black
   - PSU.- -- -t9 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/13-bench-supply/breadboard/01-cv-mode.svg)
 
 - 電源の `+` を上の赤いレールへ、`-` を上の青いレールへ。抵抗と LED は
   1-1 と同じ列 (10 列) でつながる

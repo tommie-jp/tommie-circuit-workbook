@@ -37,6 +37,8 @@ wires:
   - a10 -- a18
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/02-crystal-radio.svg)
+
 - L1 と VC1 (ポリバリコン) が並列の同調回路。アンテナ〜アースの間に浮かぶこの
   タンクだけが、受けた電波から 1 局分の周波数を選び出す
 - D1 (ゲルマニウムダイオード) が検波部。同調回路の高い側から音声成分だけを
@@ -101,6 +103,8 @@ wires:
   - a17 -- -t17 black
   - EAR.B -- -t20 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/02-crystal-radio.svg)
 
 - **アンテナ線は 5〜10m** の被覆線を屋外か窓際に張る。長いほど受かる局が増える
 - 上の -t レール (青) は**実物の大地アース**につなぐ。水道管やアース棒に線を

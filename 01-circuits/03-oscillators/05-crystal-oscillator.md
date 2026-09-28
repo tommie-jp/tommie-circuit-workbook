@@ -48,6 +48,8 @@ style:
   grid: on
 ```
 
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/circuit/05-crystal-oscillator.svg)
+
 - **Rf (1 MΩ) が U1 を直線領域でバイアス**する。CMOS インバータは本来
   0 か 1 のスイッチだが、出力を入力へ抵抗で戻すと**アンプ**として使える
 - **Rd (330 Ω) は水晶の駆動レベルを落とす damping 抵抗。** 無いと水晶に
@@ -91,6 +93,8 @@ wires:
   - a8 -- -t8 black
   - a10 -- -t10 black
 ```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/breadboard/05-crystal-oscillator.svg)
 
 - **U1 は 14 ピンの 74HC04。使うのは 1 番・2 番 (発振用) と 3 番・4 番 (緩衝用) の
   2 ゲートだけ。** 7 番が GND、14 番が VCC
