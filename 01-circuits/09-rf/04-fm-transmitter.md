@@ -34,7 +34,7 @@ parts:
   Cb: capacitor a4 c4 0.1u
   GCb: ground c4
   Cant: capacitor c13 c15 2p
-  ANT: port c16
+  ANT: antenna c16
   Q1: npn e10
   C1: capacitor d12 f12 22p
   C2: capacitor g12 i12 47p

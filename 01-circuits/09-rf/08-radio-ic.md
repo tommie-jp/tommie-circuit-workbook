@@ -26,7 +26,7 @@ LMF501T (三ツ美電機)。**どちらも今は製造が終わっているが�
 ```circuit
 title: 図1 TA7642系ラジオICの標準回路
 parts:
-  ANT: port d1
+  ANT: antenna d1
   L1: inductor d2 f2 250u
   GL: ground f2
   VC1: capacitor-var d4 f4 l=$\mathrm{VC}_1$
@@ -36,13 +36,10 @@ parts:
   Rload: resistor c12 a12 15k
   VCC: vcc a12
   Cout: capacitor e13 e15 0.1u
-  EAR:
-    type: device
-    at: f18
-    pins: [A, B]
+  EAR: earphone e18 g18 l=$\mathrm{EAR}$
   Csup: capacitor a15 c15 10u
   GCsup: ground c15
-  GEAR: ground g17
+  GEAR: ground g18
 wires:
   - d1 -- d8
   - d8 -| IC1.2
@@ -52,8 +49,7 @@ wires:
   - e12 -- e13
   - a12 -- a15
   - e15 -- e16
-  - e16 |- EAR.A
-  - EAR.B -| g17
+  - e16 -- e18
 notes:
   - text b7 blue: "1番 GND"
   - text d10 blue: "2番 RF入力"

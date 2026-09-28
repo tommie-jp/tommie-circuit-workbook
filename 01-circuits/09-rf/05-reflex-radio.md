@@ -21,7 +21,7 @@ era: 古
 ```circuit
 title: 図1 検波した音声をベースへ戻す1石レフレックス
 parts:
-  ANT: port g1
+  ANT: antenna g1
   L1: inductor g2 i2 250u
   GL: ground i2
   VC1: capacitor-var g4 i4 l=$\mathrm{VC}_1$
@@ -41,10 +41,7 @@ parts:
   Rf: resistor i15 i11 470k
   L2: inductor c11 c13 1m
   C5: capacitor c13 c15 0.1u
-  EAR:
-    type: device
-    at: d23
-    pins: [A, B]
+  EAR: earphone c23 e23 l=$\mathrm{EAR}$
   C6: capacitor c20 e20 0.001u
   GC6: ground e20
 wires:
@@ -64,8 +61,8 @@ wires:
   - i11 -- i8
   - i8 -- g8
   - c15 -- c21
-  - c21 |- EAR.A
-  - EAR.B -| e22
+  - c21 -- c23
+  - e23 -- e22
   - e22 -- e20
 ```
 

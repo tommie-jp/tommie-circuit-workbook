@@ -33,12 +33,9 @@ parts:
   Cb: capacitor a3 c3 0.1u
   GCb: ground c3
   Cant: capacitor d14 d15 2p
-  ANT: port d16
-  VC1:
-    type: device
-    at: f14
-    pins: [A, E]
-  GVC: ground h13
+  ANT: antenna d16
+  VC1: capacitor-var g13 i13 l=$\mathrm{VC}_1$
+  GVC: ground j13
   Q1: npn f10
   C1: capacitor e12 g12 33p
   C2: capacitor h12 j12 33p
@@ -55,11 +52,8 @@ parts:
   Caf: capacitor b17 e17 0.01u
   GCaf: ground e17
   Cout: capacitor b18 b20 1u
-  EAR:
-    type: device
-    at: d23
-    pins: [A, B]
-  GEAR: ground f22
+  EAR: earphone c23 e23 l=$\mathrm{EAR}$
+  GEAR: ground e23
 wires:
   - a2 -- a10
   - d10 -- Q1.C
@@ -69,8 +63,8 @@ wires:
   - d13 -- d14
   - d12 -- e12
   - d15 -- d16
-  - d13 |- VC1.A
-  - VC1.E -| h13
+  - d13 -- g13
+  - i13 -- j13
   - g12 -- h12
   - Q1.E -- h10
   - h10 -- h12
@@ -81,8 +75,7 @@ wires:
   - b11 -- b12
   - b15 -- b18
   - b20 -- b21
-  - b21 |- EAR.A
-  - EAR.B -| f22
+  - b21 |- c23
 ```
 
 - **タンクと発振回路は 9-4 とほぼ同じ**: L1 (今回は 100nH) と C1・C2 (今回は

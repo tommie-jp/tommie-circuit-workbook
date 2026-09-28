@@ -20,7 +20,7 @@ LC 同調で選び、ゲルマニウムダイオードで検波して、クリ�
 ```circuit
 title: 図1 ゲルマラジオ
 parts:
-  ANT: port a1
+  ANT: antenna a1
   L1: inductor a3 c3 250u
   GL: ground c3
   VC1: capacitor-var a5 c5 l=$\mathrm{VC}_1$
@@ -30,16 +30,11 @@ parts:
   GC2: ground c11
   R1: resistor a13 c13 100k
   GR1: ground c13
-  EAR:
-    type: device
-    at: b18
-    pins: [A, B]
-  GEAR: ground c16
+  EAR: earphone a18 c18 l=$\mathrm{EAR}$
+  GEAR: ground c18
 wires:
   - a1 -- a8
-  - a10 -- a15
-  - a15 |- EAR.A
-  - EAR.B -| c16
+  - a10 -- a18
 ```
 
 - L1 と VC1 (ポリバリコン) が並列の同調回路。アンテナ〜アースの間に浮かぶこの

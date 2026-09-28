@@ -20,7 +20,7 @@ era: 古
 ```circuit
 title: 図1 1石ラジオ
 parts:
-  ANT: port e1
+  ANT: antenna e1
   L1: inductor e2 g2 250u
   GL: ground g2
   VC1: capacitor-var e4 g4 l=$\mathrm{VC}_1$
@@ -36,11 +36,8 @@ parts:
   GC3: ground e14
   R3: resistor c16 e16 100k
   GR3: ground e16
-  EAR:
-    type: device
-    at: d19
-    pins: [A, B]
-  GEAR: ground f18
+  EAR: earphone c19 e19 l=$\mathrm{EAR}$
+  GEAR: ground e19
 wires:
   - e1 -- e6
   - e7 -- e8
@@ -50,8 +47,7 @@ wires:
   - Q1.E -- f10
   - c10 -- c11
   - c13 -- c17
-  - c17 |- EAR.A
-  - EAR.B -| f18
+  - c17 -- c19
 ```
 
 - **タンク → C1 → ベース**: L1・VC1 の並列タンクで選んだ電波を、結合コンデンサ
