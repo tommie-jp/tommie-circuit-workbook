@@ -19,43 +19,42 @@ IC (CD4013、2 回路入り) を使う。1 回路はそのまま **D-FF** (ク�
 ```circuit
 title: 図1 D-FFとQバー帰還のT-FF (CD4013)
 parts:
-  VCC: vcc e4e0
+  VCC: vcc e4e0 5V
   SWD: switch e4e0 g4e0
   RpdD: resistor g4e0 i4e0 10k
   GD: ground i4e0
-  VCC: vcc d7g5
+  VCC: vcc d7g5 5V
   SWC1: button d7g5 f7g5
   RpdC1: resistor f7g5 f5g5 10k
-  GC1: ground f5g5 r90
+  GC1: ground f5g5
   U1: dip14 g12 CD4013
-  VCC: vcc e13a5
+  VCC: vcc e13a5 5V
   GU1: ground i10a5
   RQ1: resistor c9 d9 330
   DQ1: led d9 e9 red
   GQ1: ground e9
-  VCC: vcc e15a5
+  VCC: vcc e15a5 5V
   SWC2: button e15a5 g15a5
   RpdC2: resistor g15a5 i15a5 10k
   GC2: ground i15a5
   RQ2: resistor c17a5 d17a5 330
   DQ2: led d17a5 e17a5 red
   GQ2: ground e17a5
-  GR1: ground g10a5 r90
-  GR2: ground g13e3 r270
   GS2: ground i13a5
 wires:
   - U1.14 -| e13a5
   - U1.5 -| g4e0
   - U1.3 -| f7g5
-  - U1.4 -| g10a5
+  - U1.4 -| h10a5
   - U1.6 -| h10a5
   - U1.7 -| h10a5
   - h10a5 -- i10a5
   - U1.1 -| c10a5
   - c10a5 -- c9
   - U1.11 -| g15a5
-  - U1.10 -| g13e3
-  - U1.8 -| i13a5
+  - U1.10 -| h13c5
+  - U1.8 -| h13c5
+  - h13c5 -- i13a5
   - U1.13 -| c14
   - c14 -- c17a5
   - U1.12 -| g14i2
@@ -64,6 +63,8 @@ notes:
   - text c2 blue: "D1 (PIN 5)"
   - text b5 blue: "CLK1 (PIN 3、立ち上がりでDをQへ)"
   - text b14 blue: "CLK2 (PIN 11、押すたびにQが反転)"
+  - text k1 small left: "VDD は PIN 14 (+5V)、VSS は PIN 7 (GND)"
+  - text l1 small left: "使わない RESET・SET (PIN 4・6・8・10) は GND へ"
 style:
   grid: on
   pitch: 1.2

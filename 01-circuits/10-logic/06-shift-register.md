@@ -21,23 +21,23 @@ LED をたくさん光らせたいときや 7 セグを並べたいときによ�
 ```circuit
 title: 図1 74HC595に手動でビットを送り込む
 parts:
-  VCC: vcc f15g0
+  VCC: vcc f15g0 5V
   GND: ground g15i3 r270
-  VCC: vcc e17e5
+  VCC: vcc e17e5 5V
   SER: switch e17e5 g17e5
   RpdS: resistor g17e5 g19e5 10k
-  GS: ground g19e5 r270
-  VCC: vcc h26
+  GS: ground g19e5
+  VCC: vcc h26 5V
   SRCLK: button h26 j26
   RpdCLK: resistor j26 j28 10k
-  GCLK: ground j28 r270
-  VCC: vcc f21c5
+  GCLK: ground j28
+  VCC: vcc f21c5 5V
   RCLK: button f21c5 h21c5
   RpdRCLK: resistor h21c5 h23c5 10k
-  GRCLK: ground h23c5 r270
+  GRCLK: ground h23c5
   U1: dip16 h14 74HC595
-  GU1: ground i13e0 r90
-  VCC: vcc k14
+  GU1: ground i13e0
+  VCC: vcc k14 5V
   RA: resistor c2 d2 330
   DA: led d2 e2 red
   GA: ground e2
@@ -76,6 +76,8 @@ notes:
   - text f3a8 blue: "QB (PIN 1)"
   - text f6a3 blue: "QC (PIN 2)"
   - text f8a8 blue: "QD (PIN 3)"
+  - text l1 small left: "U1 の VCC は PIN 16 (+5V)、GND は PIN 8"
+  - text m1 small left: "QE-QH (PIN 4-7) と QH (PIN 9) の出力は開けておく"
 style:
   grid: on
   pitch: 1.2

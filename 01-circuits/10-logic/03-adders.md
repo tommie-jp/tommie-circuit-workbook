@@ -19,111 +19,95 @@ board: BB
 ```circuit
 title: 図1 半加算器を全加算器に拡張する
 parts:
-  A: switch c3 e3
-  RpdA: resistor e3 e1 10k
-  GA: ground e1 r90
-  B: switch b6 d6
-  RpdB: resistor d6 d4 10k
-  GB: ground d4 r90
-  CIN: switch k16 m16
-  RpdC: resistor m16 m18 10k
-  GC: ground m18 r270
-  VCC: vcc c3
-  VCC: vcc b6
-  VCC: vcc k16
-  U1: dip14 j14 CD4070
-  U2: dip14 j31 CD4081
-  U3: dip14 j23 CD4071
-  VCC: vcc h15i0
-  VCC: vcc h32i0
-  VCC: vcc h24i0
-  RS1: resistor o17 p17 330
-  DS1: led p17 q17 red
-  GS1: ground q17
-  RC1: resistor g26 h26 330
-  DC1: led h26 i26 red
-  GC1: ground i26
-  RS: resistor k10 l10 330
-  DS: led l10 m10 red
-  GDS: ground m10
-  RCO: resistor k20 l20 330
-  DCO: led l20 m20 red
-  GCO: ground m20
-  GU1: ground l13
-  GU2: ground l30
-  GU3: ground l22
-  GU1b: ground k15c3
-  GU2b: ground k32c3
-  GU3b: ground k24c3
+  A: switch d3 f3
+  RpdA: resistor f3 f1 10k
+  GA: ground f1
+  B: switch c6 e6
+  RpdB: resistor e6 e4 10k
+  GB: ground e4
+  CIN: switch b9 d9
+  RpdC: resistor d9 d7 10k
+  GC: ground d7
+  VCC: vcc d3 5V
+  VCC: vcc c6 5V
+  VCC: vcc b9 5V
+  U1A: xor h14 CD4070
+  U2A: and n14 CD4081
+  U1B: xor h24 CD4070
+  U2B: and l24 CD4081
+  U3A: or m30 CD4071
+  RS1: resistor h17 j17 330
+  DS1: led j17 k17 red
+  GS1: ground k17
+  RC1: resistor n18 p18 330
+  DC1: led p18 q18 red
+  GC1: ground q18
+  RCO: resistor m34 o34 330
+  DCO: led o34 p34 red
+  GCO: ground p34
+  RS: resistor h37 j37 330
+  DS: led j37 k37 red
+  GDS: ground k37
 wires:
-  - e3 -- e12 -- e29
-  - e12 |- U1.1
-  - e29 |- U2.1
-  - d6 -- d11a6 -- d28a6
-  - d11a6 |- U1.2
-  - d28a6 |- U2.2
-  - U1.3 -| j11e2
-  - j11e2 |- U1.5
-  - j11e2 -- o11a2 -- o17 -- o28a6
-  - o28a6 |- U2.5
-  - U1.4 -| k10
-  - m16 -- n16
-  - n12 -- n16 -- n29
-  - n12 |- U1.6
-  - n29 |- U2.6
-  - U2.3 -| f28f2
-  - f28f2 -- f26f0 -- f21f0
-  - f26f0 -- g26
-  - f21f0 |- U3.1
-  - U2.4 -| f27a8
-  - f27a8 -- f20a6
-  - f20a6 |- U3.2
-  - U3.3 -| k20
-  - U1.14 -| h15i0
-  - U2.14 -| h32i0
-  - U3.14 -| h24i0
-  - U1.7 -| l13
-  - U2.7 -| l30
-  - U3.7 -| k22c0
-  # 使わない入力 (U1・U2 は PIN 8・9・12・13、U3 は PIN 5・6・8・9・12・13) を GND へ
-  - U1.13 -| i15c3
-  - U1.12 -| i15g3
-  - U1.9 -| j15i3
-  - U1.8 -| k15c3
-  - i15c3 -- i15g3 -- j15i3 -- k15c3
-  - U2.13 -| i32c3
-  - U2.12 -| i32g3
-  - U2.9 -| j32i3
-  - U2.8 -| k32c3
-  - i32c3 -- i32g3 -- j32i3 -- k32c3
-  - U3.13 -| i24c3
-  - U3.12 -| i24g3
-  - U3.9 -| j24i3
-  - U3.8 -| k24c3
-  - i24c3 -- i24g3 -- j24i3 -- k24c3
-  - U3.5 -| j22e0
-  - U3.6 -| j22i0
-  - j22e0 -- j22i0 -- k22c0 -- l22
+  - f3 -- f10 -- f12
+  - f12 |- U1A.a
+  - f10 |- U2A.a
+  - e6 -- e9 -- e11
+  - e11 |- U1A.b
+  - e9 |- U2A.b
+  - d9 -- d20 -- d21
+  - d21 |- U1B.a
+  - d20 |- U2B.a
+  - U1A.out -- h17 -- h19
+  - h19 |- U1B.b
+  - h19 |- U2B.b
+  - U2A.out -- n18 -- n28
+  - n28 |- U3A.b
+  - U2B.out -- l28
+  - l28 |- U3A.a
+  - U3A.out -- m34
+  - U1B.out -- h37
 notes:
-  - text n8a5 blue: S (合計)
-  - text q18 blue: S1 (半加算の和)
-  - text k25 blue: C1 (半加算の桁上げ)
-  - text m21 blue: Cout (全加算の桁上げ)
+  - text g12g8 small center: "1"
+  - text h12e8 small center: "2"
+  - text g14h2 small center: "3"
+  - text m12g8 small center: "1"
+  - text n12e8 small center: "2"
+  - text m14h2 small center: "3"
+  - text g22g8 small center: "5"
+  - text h22e8 small center: "6"
+  - text g24h2 small center: "4"
+  - text k22g8 small center: "5"
+  - text l22e8 small center: "6"
+  - text k24h2 small center: "4"
+  - text l28g8 small center: "1"
+  - text m28e8 small center: "2"
+  - text l30h2 small center: "3"
+  - text g16 blue: S1
+  - text m21 blue: C1
+  - text k26 blue: C2
+  - text l32 blue: Cout
+  - text g35 blue: S
+  - text r1 small left: "数字は IC の PIN 番号"
+  - text s1 small left: "VDD は 3 つとも PIN 14 (+5V)、VSS は PIN 7 (GND)"
+  - text t1 small left: "使わない入力は GND へ (U1・U2: PIN 8・9・12・13、U3: PIN 5・6・8・9・12・13)"
 style:
-  grid: on
+  grid: off
   pitch: 1.2
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/03-adders.svg)
 
-- **半加算器**: U1 ゲート1 (XOR、PIN 1・2→3) が S1 = A⊕B、U2 ゲート1 (AND、PIN 1・2→3) が C1 = A·B
-- **全加算器への拡張**: U1 ゲート2 (PIN 5・6→4) が S = S1⊕Cin、U2 ゲート2
-  (PIN 5・6→4) が C2 = S1·Cin、U3 ゲート1 (OR、PIN 1・2→3) が Cout = C1 + C2
-- 3 つの IC とも PIN 14 がVDD (VCC へ)、PIN 7 がVSS (GND へ)。どちらも図に描いてある。
-  つなぎ忘れると IC は動かない
+- **半加算器**: U1A (XOR、PIN 1・2→3) が S1 = A⊕B、U2A (AND、PIN 1・2→3) が C1 = A·B
+- **全加算器への拡張**: U1B (XOR、PIN 5・6→4) が S = Cin⊕S1、U2B (AND、PIN 5・6→4)
+  が C2 = Cin·S1、U3A (OR、PIN 1・2→3) が Cout = C2 + C1
+- 図1 はゲートを論理記号で描き、記号の入出力に IC の PIN 番号を添えた。U1A・U1B は同じ
+  CD4070 (U1) の 2 回路、U2A・U2B は同じ CD4081 (U2) の 2 回路
+- 電源の PIN は記号に出ないので図の下に書いた。3 つの IC とも PIN 14 が VDD (+5V)、
+  PIN 7 が VSS (GND)。つなぎ忘れると IC は動かない
 - **使わない入力は GND へ。** U1・U2 は残り 2 ゲートの入力 (PIN 8・9・12・13)、
   U3 は残り 3 ゲートの入力 (PIN 5・6・8・9・12・13) を GND につなぐ。CMOS の入力は
-  浮かせると勝手に振れて電流を食う。出力の足 (U1・U2 の PIN 10・11、U3 の PIN 4・10・11)
+  浮かせると勝手に振れて電流を食う。出力の PIN (U1・U2 の PIN 10・11、U3 の PIN 4・10・11)
   は何もつながずに開けておく
 
 ## 実体配線図
@@ -149,8 +133,15 @@ parts:
   U3: dip14 @ e51 CD4071
   RCO: resistor a58 a61 330
   DCO: led b61(A) b62(K) red
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
   # 電源: 上の + レール、下の - レール。- は 1 列で上下をつなぐ
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
   - -t1 -- -b1 black
   - +t2 -- a2 red
   - +t6 -- a6 red
@@ -194,7 +185,7 @@ wires:
   - g53 -- g58
   - f58 -- e58
   - a62 -- -t62 black
-  # 使わない入力を GND へ: 上側の足は a 行から上の − レール、下側は j 行から下の − レール
+  # 使わない入力を GND へ: 上側の PIN は a 行から上の − レール、下側は j 行から下の − レール
   - a15 -- -t15 black
   - a16 -- -t16 black
   - a19 -- -t19 black
@@ -216,6 +207,7 @@ wires:
 - U1 (CD4070, XOR) は 14〜20 列、U2 (CD4081, AND) は 37〜43 列、U3 (CD4071, OR)
   は 51〜57 列。どれも切り欠きが左で、PIN 1 が左下 (f 行)、PIN 14 が左上 (e 行)。
   左から入力 → U1・U2 → U3 → 出力 LED の順に並ぶ
+- 電源 (板の左上) の +5V (赤) は上の + レールの 1 列、GND (黒) は上の − レールの 2 列へ
 - 電源: 各 IC の PIN 14 (14・37・51 列) は a 行から上の + レールへ (赤)、PIN 7 (20・43・57
   列) は j 行から下の − レールへ (黒)。LED とプルダウン抵抗は上の − レールへ落とすので、1 列で
   上下の − レールをつなぐ

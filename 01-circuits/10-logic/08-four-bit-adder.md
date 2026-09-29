@@ -18,41 +18,41 @@ source: 自作
 ```circuit
 title: 図1 74HC283で4bit同士を足す
 parts:
-  VCC: vcc j7
+  VCC: vcc j7 5V
   SA1: switch j7 l7
   RA1: resistor l7 l5 10k
-  GA1: ground l5 r90
-  VCC: vcc d4
+  GA1: ground l5
+  VCC: vcc d4 5V
   SA2: switch d4 f4
   RA2: resistor f4 f2 10k
-  GA2: ground f2 r90
-  VCC: vcc d23
+  GA2: ground f2
+  VCC: vcc d23 5V
   SA3: switch d23 f23
   RA3: resistor f23 f25 10k
-  GA3: ground f25 r270
-  VCC: vcc j19
+  GA3: ground f25
+  VCC: vcc j19 5V
   SA4: switch j19 l19
   RA4: resistor l19 l21 10k
-  GA4: ground l21 r270
-  VCC: vcc k4
+  GA4: ground l21
+  VCC: vcc k4 5V
   SB1: switch k4 m4
   RB1: resistor m4 m2 10k
-  GB1: ground m2 r90
-  VCC: vcc c7
+  GB1: ground m2
+  VCC: vcc c7 5V
   SB2: switch c7 e7
   RB2: resistor e7 e5 10k
-  GB2: ground e5 r90
-  VCC: vcc c19
+  GB2: ground e5
+  VCC: vcc c19 5V
   SB3: switch c19 e19
   RB3: resistor e19 e21 10k
-  GB3: ground e21 r270
-  VCC: vcc k23
+  GB3: ground e21
+  VCC: vcc k23 5V
   SB4: switch k23 m23
   RB4: resistor m23 m25 10k
-  GB4: ground m25 r270
+  GB4: ground m25
   U1: dip16 h13 CD74HC283
-  VCC: vcc f14g0
-  GND: ground i12 r90
+  VCC: vcc f14g0 5V
+  GND: ground i12
   GU1: ground j11a6
   RS1: resistor g9i0 h9i0 330
   DS1: led h9i0 i9i0 red
@@ -111,6 +111,8 @@ notes:
   - text i17a6 blue: "和3"
   - text p17a6 blue: "和4"
   - text p9a5 blue: C4
+  - text q1 small left: "数字は CD74HC283 の PIN 番号。VCC は PIN 16、GND は PIN 8"
+  - text r1 small left: "C0 (PIN 7) は GND に固定。使わない入力は無い"
 style:
   grid: on
   pitch: 1.2

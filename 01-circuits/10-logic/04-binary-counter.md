@@ -23,7 +23,7 @@ board: BB
 ```circuit
 title: 図1 555クロック + 4040バイナリカウンタ
 parts:
-  VCC: vcc b12
+  VCC: vcc b12 5V
   U555: ic e20 NE555
   R1: resistor b17 d17f0 10k
   R2: resistor d17f0 f17 47k
@@ -32,11 +32,11 @@ parts:
   U40: dip16 i10 CD4040
   GU40: ground k9
   GU555: ground h20
-  GRRST: ground d14 r270
+  GRRST: ground d14
   RRST: resistor d12 d14 10k
   SWRST: button d12 b12
-  VCC: vcc f11
-  VCC: vcc b17
+  VCC: vcc f11 5V
+  VCC: vcc b17 5V
   RQ1: resistor l11a2 m11a2 330
   DQ1: led m11a2 n11a2 red
   GQ1: ground n11a2
@@ -93,6 +93,7 @@ style:
 - CD4040 の入力は CLK (PIN 10) と RESET (PIN 11) の 2 本だけで、どちらもつないで
   ある (RESET は RRST で GND へ)。CMOS の入力は浮かせてはいけないが、この IC に
   使わない入力は無い。使わない Q5〜Q12 は出力なので開けておく
+- 電源の PIN: 4040 は VDD が PIN 16・VSS が PIN 8、555 は VCC が PIN 8・GND が PIN 1
 
 ## 実体配線図
 
@@ -107,6 +108,11 @@ parts:
   RRST: resistor c17 c14 10k
   SWRST: button @ e17
   U40: dip16 @ e22 CD4040
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
   RQ1: resistor a32 a34 330
   DQ1: led c34(A) c36(K) red
   RQ2: resistor a38 a40 330
@@ -116,34 +122,43 @@ parts:
   RQ4: resistor a50 a52 330
   DQ4: led c52(A) c54(K) red
 wires:
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
   - -t1 -- -b1 black
-  - +t2 -- +b2 red
+  - +t62 -- +b62 red
   - a5 -- +t5 red
   - a3 -- +t3 red
   - j5 -- -b5 black
   - j8 -- +b8 red
   - b7 -- b9 orange
-  - d9 -- g9 -- g6 orange
+  - d9 -- f9 orange
+  - g9 -- g6 orange
   - j12 -- -b12 black
-  - h7 -- h21 -- d21 -- d28 blue
+  - h7 -- h21 blue
+  - g21 -- e21 blue
+  - d21 -- d28 blue
   - c27 -- c19 green
-  - b14 -- -t14 black
+  - a14 -- -t14 black
   - j17 -- +b17 red
   - a22 -- +t22 red
   - j29 -- -b29 black
   - d29 -- d32 yellow
-  - g28 -- g38 -- e38 yellow
-  - h27 -- h44 -- e44 yellow
-  - i26 -- i50 -- e50 yellow
-  - b36 -- -t36 black
-  - b42 -- -t42 black
-  - b48 -- -t48 black
-  - b54 -- -t54 black
+  - g28 -- g38 yellow
+  - f38 -- e38 yellow
+  - h27 -- h44 yellow
+  - f44 -- e44 yellow
+  - i26 -- i50 yellow
+  - f50 -- e50 yellow
+  - a36 -- -t36 black
+  - a42 -- -t42 black
+  - a48 -- -t48 black
+  - a54 -- -t54 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/04-binary-counter.svg)
 
-- 上の赤レール = Vcc、青レール = GND。下のレールは 1・2 列で上のレールとつなぐ
+- 左上の電源 5V の +5V を上の赤レール (1 列)、GND を上の青レール (2 列) へ。
+  下のレールは青を 1 列、赤を 62 列 (右端) で上のレールとつなぐ
 - U555 (NE555) は 5〜8 列、U40 (CD4040) は 22〜29 列。どちらも切り欠きが左で、PIN 1 が左下 (f 行)。U555 は PIN 8 (5 列の上) が左上、U40 は PIN 16 (22 列の上) が左上
 - U555: PIN 8 (5 列の上) と PIN 4 (RESET、8 列の下) を Vcc へ、PIN 1 (5 列の下) を GND へ。
   R1 は PIN 7 (6 列の上) から 3 列の Vcc へ、R2 は PIN 7 から 9 列へ。9 列は b 行で
