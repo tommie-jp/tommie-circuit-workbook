@@ -66,14 +66,14 @@ LED の 9 mA ほどなので V+ で足りる。CH2 はゲート、CH1 はドレ�
 
 ```breadboard
 title: 図2 2N7000 でスイッチする
-# 5V は AD の V+ から上の + レールへ。下の − レールは 28 列で上の − レールとつなぐ
+# 5V は AD の V+ から上の + レールへ、GND は上の − レール (下のレールは使わない)
 board: half
 parts:
   R1: resistor b5 b8 330
   D1: led c8(A) c9(K) red
-  Q1: transistor f13(S) f14(G) f15(D) 2N7000
-  RG: resistor a18 a21 220
-  RPD: resistor b21 b24 100k
+  Q1: transistor e13(D) e14(G) e15(S) 2N7000
+  RG: resistor b21 b14 220
+  RPD: resistor a14 -t14 100k
   SW: button @ e17
   AD:
     type: device
@@ -86,30 +86,28 @@ wires:
   - AD.1+ -- a9 orange
   - AD.1- -- -t10 black
   - AD.2- -- -t19 black
-  - AD.2+ -- a22 blue
-  - e22 -- e21 blue
+  - AD.2+ -- a16 blue
+  - d16 -- d14 blue
   - +t5 -- a5 red
-  - d9 -- g15 orange
+  - b9 -- b13 orange
   - +t17 -- a17 red
-  - g17 -- c18 orange
-  - c21 -- g14 yellow
-  - a24 -- -t24 black
-  - g13 -- -b13 black
-  - -t28 -- -b28 black
+  - g19 -- c21 orange
+  - a15 -- -t15 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/05-mosfet-switch.svg)
 
 5V は Analog Discovery の V+ (赤) から上の + レールの `+t1` へ、GND (黒) は `-t2` へ入れる。
 
-- **ドレイン (列 9)**: LED のカソードと同じ列。CH1 の 1+ (橙) を空いている `a9` に挿す
-- **ゲート (列 21)**: CH2 の 2+ (青) は `a22` に挿し、`e22`–`e21` の青線でゲートの列へ渡す
-- 1− と 2− (黒) は上の − レール (`-t10` `-t19`) へ
-
-2N7000 は**平らな面を見て左から S・G・D** (2SC1815 とは並びが違うので注意)。
-`RG` と `RPD` の分圧点 (列 21) がゲート。ソース (`f13`、下の − レール) と
-`RPD` の下端 (上の − レール) が同じ GND になるよう、28 列の黒線で上下の − レールを
-つなぐ。
+- **Q1 は上のブロックの e 行に、180 度回して挿す** (`e13` D・`e14` G・`e15` S)。
+  2N7000 は**平らな面を見て左から S・G・D** (2SC1815 とは並びが違うので注意) なので、
+  回すと左から D・G・S になり、線が重ならない
+- **ドレイン (列 13)**: LED のカソード (列 9) から橙の線 `b9`–`b13`。CH1 の 1+ (橙) は `a9` に挿す
+- **ゲート (列 14)**: `RG` の左端 (`b14`) と、− レールへ縦に挿した `RPD` (`a14`) が同じ列。
+  CH2 の 2+ (青) は `a16` に挿し、`d16`–`d14` の青線でゲートの列へ渡す
+- **ソース (列 15)**: `a15` から上の − レールへ (黒)
+- **スイッチ**: 上側の足 (列 17) は赤線で +5V、下側の足 (`g19`) から橙の線で `RG` の右端 (`c21`) へ
+- 1− と 2− (黒) は上の − レール (`-t10` `-t19`) へ。下のレールは使わない
 
 ## オシロで見る
 
