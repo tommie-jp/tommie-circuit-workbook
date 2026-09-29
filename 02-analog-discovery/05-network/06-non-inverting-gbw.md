@@ -31,8 +31,8 @@ parts:
   G4: ground d10
 wires:
   - a1 -- a3
-  - a3 |- U1.+
-  - c7 |- U1.-
+  - a3 -- a5 |- U1.+
+  - U1.- -| c5 -- c7
   - U1.out -- b9 -- b10
   - c9 -- b9
 ```
