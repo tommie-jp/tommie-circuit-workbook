@@ -189,6 +189,8 @@ cursors: [0, 200ms]
 measure: [vmax, rise]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/scope/08-cap-series-parallel-1.svg)
+
 ```scope
 title: 図7 直列 (50 µF、τ = 0.05 秒) — 同じ尺度で 4 倍速く立ち上がる
 time: 200ms/div
@@ -198,6 +200,8 @@ ch2: {wave: ch1 | rc 50ms, range: 1V/div, position: -3div}
 cursors: [0, 50ms]
 measure: [vmax, rise]
 ```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/scope/08-cap-series-parallel-2.svg)
 
 図6 と図7 は同じ 200 ms/div で並べてある。カーソル X2 の所で CH2 はどちらも約 3.16 V
 (5V × 0.63) — そこまでにかかる時間が 0.20 秒と 0.05 秒で、4 倍違う。
