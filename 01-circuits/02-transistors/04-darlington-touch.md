@@ -69,66 +69,61 @@ style:
 
 ```breadboard
 title: 図2 ダーリントンタッチスイッチ
-# 5V は AD の V+ から上の + レールへ。下の − レールは 28 列で上の − レールとつなぐ
+# 5V は AD の V+ から上の + レールへ、GND は上の − レール (下のレールは使わない)
 board: half
 parts:
-  RC: resistor b5 b8 470
-  D1: led c8(A) c9(K) red
-  Q1: transistor h12(B) h13(C) h14(E) 2SC1815
-  Q2: transistor h17(B) h18(C) h19(E) 2SC1815
-  RB: resistor b21 b24 1M
-  AD:
-    type: device
-    at: top
-    label: Analog Discovery
-    pins: [V+, GND, 1+, 1-, 2-, 2+]
-  TP1:
-    type: device
-    at: top
-    label: 触れる板 1 (+)
-    pins: [A]
+  RB: resistor b7 b12 1M
+  Q1: transistor e12(B) e13(C) e14(E) 2SC1815
+  Q2: transistor e17(B) e18(C) e19(E) 2SC1815
+  RC: resistor b25 b20 470
+  D1: led c20(A) c18(K) red
   TP2:
     type: device
     at: top
     label: 触れる板 2
     pins: [B]
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery
+    pins: [V+, GND, 2-, 2+, 1+, 1-]
+  TP1:
+    type: device
+    at: top
+    label: 触れる板 1 (+)
+    pins: [A]
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black
-  - AD.1+ -- a9 orange
-  - AD.1- -- -t10 black
-  - AD.2+ -- a20 blue
-  - AD.2- -- -t19 black
-  - +t5 -- a5 red
-  - d9 -- f13 orange
-  - a24 -- -t24 black
-  - e21 -- f12 yellow
-  - d20 -- d21 blue
-  - f14 -- f17 blue
-  - g18 -- g13 orange
-  - j19 -- -b19 black
-  - -t28 -- -b28 black
-  - TP1.A -- +t26 red
-  - TP2.B -- a21 gray
+  - a7 -- -t7 black
+  - AD.2- -- -t9 black
+  - AD.2+ -- a12 blue
+  - c11 -- c12 blue
+  - TP2.B -- a11 gray
+  - b13 -- b18 orange
+  - c14 -- c17 blue
+  - a19 -- -t19 black
+  - +t25 -- a25 red
+  - AD.1+ -- a18 orange
+  - AD.1- -- -t27 black
+  - TP1.A -- +t28 red
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/04-darlington-touch.svg)
 
-部品はすべて上のレール側から組む。5V は Analog Discovery の電源出力 V+ (赤) から
+部品はすべて上のブロックに挿す。5V は Analog Discovery の電源出力 V+ (赤) から
 上の + レールへ入れる (WaveForms の Supplies で V+ を 5 V にして入れる)。
-流れるのは LED の約 5.5 mA だけなので V+ で足りる。
+流れるのは LED の約 5.5 mA だけなので V+ で足りる。GND は上の − レールだけを使う。
 
-- `Q1`・`Q2` は下のブロックの h 行 (`h12`〜`h14`・`h17`〜`h19`)。上の f・g 行を線の通り道にする
-- `Q1` のエミッタ (`f14`) は `Q2` のベース (`f17`) へ青の線。LED のカソード (`d9`) は `Q1` の
-  コレクタの列 (`f13`) へ、`Q2` のコレクタ (`g18`) も同じ列の `g13` へ橙の線
-- `Q2` のエミッタは `j19` から下の − レールへ
-- `TP1` は上の + レール (`+t26`)、`TP2` は `RB` の上端 (列 21) へ。列 21 は
-  黄線で `Q1` のベースにもつながる
-- **CH1 (1+、橙)** は LED のカソードの列 9 (`a9`) — コレクタの電圧を見る
-- **CH2 (2+、青)** は列 20 (`a20`) に挿し、`d20`–`d21` で列 21 へ渡す — `Q1` のベース (触れる板 2) の電圧を見る
-- AD の GND・1−・2− (黒) は上の − レールへ。`Q2` のエミッタ (下の − レール) と
-  `RB` の下端 (上の − レール) が同じ GND になるよう、28 列の黒線で上下の − レールを
-  つなぐ
+- `Q1`・`Q2` は上のブロックの e 行 (`e12`〜`e14`・`e17`〜`e19`)。足の上の a〜d 行を線の通り道にする
+- **ベース (列 12)**: `RB` の右端 (`b12`) が `Q1` の B と同じ列。`RB` の左端は `a7` から − レールへ。
+  `TP2` (触れる板 2) は `a11` に挿し、`c11`–`c12` の青線で列 12 へ渡す
+- **Q1 の E → Q2 の B**: `c14`–`c17` の青線。**Q1 の C → Q2 の C**: `b13`–`b18` の橙線
+- **コレクタ (列 18)**: LED のカソード (`c18`) が `Q2` の C と同じ列。LED のアノード (`c20`) は
+  `RC` の左端 (`b20`) と同じ列、`RC` の右端は `a25` から + レールへ
+- `Q2` のエミッタは `a19` から − レールへ。`TP1` (触れる板 1) は + レール (`+t28`) へ
+- **CH1 (1+、橙)** はコレクタの列 18 (`a18`)、**CH2 (2+、青)** はベースの列 12 (`a12`)。
+  AD の GND・1−・2− (黒) は上の − レールへ
 
 ## オシロで見る
 
