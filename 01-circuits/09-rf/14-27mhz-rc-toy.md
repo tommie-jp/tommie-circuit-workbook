@@ -199,7 +199,8 @@ Manhattan 方式で組む。島は回路図の節点ごとに 1 つで、GND の
 同調が乱れる。そこで受信機を**図4 (高周波部、銅張り基板) と図5 (低周波部、perfboard) の
 2 枚に分ける**。板どうしのつなぎは 2 本 — 検波の出力 (DET) と GND。GND は図4 の裏の銅から
 短い線で図5 の GND の筋 (w 行) の 1 か所へ渡す。送信機 (図3) は発振だけの 1 枚なので分けない。
-どの板も AD の V+ と GND (Supplies の 5V) から給電し、受信機の高周波部 (図4) は電源が要らない。
+図3・図4・図5 のどれにも、板の外の機器 (AD やアンテナの線、板どうしのつなぎ) を箱で描き、足から島や穴へ線を引いてある。
+送信機と図5 は AD の V+ と GND (Supplies の 5V) から給電し、受信機の高周波部 (図4) は電源が要らない。
 図5 の入口に電源のデカップリング (0.1µF) は置かない。電流は LED の約 3mA だけで、信号は 50Hz の断続なので、電源の揺れが問題にならない (デカップリングは、電流が大きい・速い信号を扱う段で置く)。
 
 ### 送信機 (銅張り基板)
@@ -227,6 +228,8 @@ copper:
   VC2: via 42,40
   GRe: pad 50,40 4x4mm
   VRe: via 50,40
+  GAD: pad 60,10 4x4mm
+  VAD: via 60,10
 parts:
   Rb1: resistor 10,14 10,28 22k
   X1: crystal 12,28 12,40 27.145M
@@ -239,33 +242,49 @@ parts:
   C2: capacitor 42,30 42,40 100p
   Re: resistor 50,30 50,40 1k
   Cant: capacitor 45,20 56,20 2.2p
-notes:
-  - text 4,9: W1 (キー)
-  - text 20,9: 電源 + 5V
-  - text 50,15: アンテナ線 20cm
-  - text 4,46: 電源 − は裏の銅へ
+  AD:
+    type: device
+    at: 32,-14
+    label: Analog Discovery
+    pins: W1 2+ V+ 2- GND
+    face: bottom
+  WIRE:
+    type: device
+    at: 92,20
+    label: アンテナ線 20cm
+    pins: ANT
+    face: left
+wires:
+  - AD.W1 -- 9,13 blue
+  - AD.2+ -- 11,13 orange
+  - AD.V+ -- 30,14 red
+  - AD.2- -- 59,9 black
+  - AD.GND -- 61,9 black
+  - WIRE.ANT -- ANT green
 ```
 
 ![銅張り基板の寸法図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/copper/14-27mhz-rc-toy-1.svg)
 
-- 板は 5×7cm を横に置いた 70×50mm。**図の島と回路図 (図1) の節点の対応**
-  (`copper-fence check` のネットリストと図1 の接続は一致する)
+- 板は 5×7cm を横に置いた 70×50mm。板の外の箱は Analog Discovery (AD、上) とアンテナの線 (右)。
+  箱の足から島へ引いた線は、銅を作らない配線 (半田付けする線) で、線が指す島と足の対応が
+  **図の島と回路図 (図1) の節点の対応**の表 (`copper-fence check` のネットリストと図1 の接続は一致する)
 
   | 図の島 | 回路図の節点 (つながる足) |
   | --- | --- |
-  | KEY | Rb1 の上 (W1 の線と CH2 の 2+ をここへ)。左上 |
+  | KEY | Rb1 の上。**AD の W1 (青) と 2+ (橙、CH2) の線**をここへ。左上 |
   | BASE | Rb1 の下・X1 の上・Rb2 の上・Q1 のベース |
-  | VCC | +5V (Cb の上・L1 の上・C<sub>T</sub> の上)。上の帯 |
+  | VCC | +5V (Cb の上・L1 の上・C<sub>T</sub> の上)。上の帯。**AD の V+ (赤)** |
   | COL | Q1 のコレクタ・L1 の下・C<sub>T</sub> の下・C1 の上・Cant の左 |
   | EMI | Q1 のエミッタ・Re の上・C1 の下・C2 の上 |
-  | ANT | Cant の右。アンテナの線 (20cm) をここへ半田付けする |
+  | ANT | Cant の右。**アンテナの線 (20cm、緑)** をここへ半田付けする |
   | GND (via の島 5 つ) | X1・Rb2・Cb・C2・Re の下。**すべて via で裏の GND の面** |
+  | GAD (via の島、右上) | 裏の GND の面。**AD の GND と 2− (黒) の線**をここへ (板の上の空きの島で、回路の部品はつながない) |
 
 - Q1 (2SC1815) は 3 本の足を 3 つの島 (BASE・COL・EMI) へ広げて半田付けする。図の黒い丸は
   Q1 の胴の置き場で、足は B が左の BASE、C が上の COL、E が右下の EMI へ向かう。
   2SC1815 は平らな面を見て左から E・C・B なので、組む前に実物の足の並びを確かめてから折り曲げる
-- 電源 (5V) の + は上の VCC の帯へ、− は裏の GND の面 (via の島のどれか、または板の端で裏の銅) へ。
-  W1 の線は左の KEY の島へ (CH2 の 2+ もここへ、2− は裏の GND へ)。
+- 電源 (5V) の + は AD の V+ から上の VCC の帯へ、− は AD の GND から右上の GAD の島 (裏の GND の面) へ。
+  W1 の線は左の KEY の島へ、CH2 の 2+ も同じ島へ (2− は GND へ)。
   tinySA をつなぐときはアンテナの線を外し、ANT の島から短い同軸へ
 - 高周波の線 (L1・C<sub>T</sub>・C1・C2・Q1) はなるべく短く、特に C1・C2 の足は 5〜10mm にとどめる。
   C<sub>T</sub> は 30pF のセラミックトリマ (図の値は範囲の 5〜30pF)
@@ -292,6 +311,8 @@ copper:
   VCd: via 46,32
   GRd: pad 52,32 4x4mm
   VRd: via 52,32
+  GAD: pad 60,10 4x4mm
+  VAD: via 60,10
 parts:
   Cc: capacitor 8,20 17,20 10p
   L2: inductor 19,20 19,32 1u
@@ -300,28 +321,51 @@ parts:
   D1: schottky 37,20 45,20 1SS108
   Cd: capacitor 46,20 46,32 1n
   Rd: resistor 52,20 52,32 100k
-  NEXT: box 59,20 6x4mm 1 図5の板へ
-notes:
-  - text 4,15: アンテナ線 20cm
-  - text 40,40: 裏の GND を線で 図5 の GND へ
-  - text 40,44: 高周波部は電源が要らない
+  AD:
+    type: device
+    at: 52,-14
+    label: Analog Discovery
+    pins: 1+ 1- GND
+    face: bottom
+  WIRE:
+    type: device
+    at: -22,20
+    label: アンテナ線 20cm
+    pins: ANT
+    face: right
+  NEXT:
+    type: device
+    at: 92,26
+    label: 図5 の板へ
+    pins: DET GND
+    face: left
+wires:
+  - AD.1+ -- 50,18 green
+  - AD.1- -- 59,9 black
+  - AD.GND -- 61,9 black
+  - WIRE.ANT -- ANT green
+  - 55,20 -- NEXT.DET green
+  - NEXT.GND -- GRd black
 ```
 
 ![銅張り基板の寸法図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/copper/14-27mhz-rc-toy-2.svg)
 
-- 板は送信機と同じ 5×7cm の横置き (70×50mm)。**図の島と回路図 (図2) の節点の対応**
+- 板は送信機と同じ 5×7cm の横置き (70×50mm)。板の外の箱は AD (上)・アンテナの線 (左)・図5 の板 (右)。
+  **図の島と回路図 (図2) の節点の対応**
 
   | 図の島 | 回路図の節点 (つながる足) |
   | --- | --- |
-  | ANT | Cc の左。アンテナの線 (20cm) をここへ |
+  | ANT | Cc の左。**アンテナの線 (20cm、緑)** をここへ |
   | TANK | Cc の右・L2 の上・C<sub>T2</sub> の上・C3 の上・D1 の陽極 |
-  | DET | D1 の陰極・Cd の上・Rd の上。**検波の出力 (図5 の PIN 5 へ)** |
-  | GND (via の島 5 つ) | L2・C<sub>T2</sub>・C3・Cd・Rd の下。すべて via で裏の GND の面 |
+  | DET | D1 の陰極・Cd の上・Rd の上。**検波の出力**。AD の CH1 の 1+ (緑) と、図5 の板への線 (緑、図5 の PIN 5 へ) をここへ |
+  | GND (via の島 5 つ) | L2・C<sub>T2</sub>・C3・Cd・Rd の下。すべて via で裏の GND の面。図5 の板への GND の線 (黒) は右端の Rd の下の島から |
+  | GAD (via の島、右上) | 裏の GND の面。AD の CH1 の 1− と GND (黒) の線をここへ |
 
 - 同調の島 TANK に L2 (19mm)・C<sub>T2</sub> (27mm)・C3 (35mm) の上端を立て、下端は via の島へ落とす。
   D1 (1SS108) は TANK の右端から DET へ渡す。陰極は帯の側
-- 右端の箱「図5 の板へ」は DET の島の出口で、ここから図5 の**下の枠「図4 の板から」の DET の足**へ線を引く。
-  GND は図4 の裏の銅から線を 1 本、図5 の GND の足へ (箱に GND は描かない)
+- 右の箱「図5 の板へ」の DET と GND の足は、図5 の**下の枠「図4 の板から」の DET・GND の足**へ
+  そのままつなぐ 2 本の線 (DET は島 DET から、GND は裏の GND の面から)
+- 受信機の高周波部は電源が要らないので、AD の V+ はつながない。CH1 の 1+ を DET へ、1− を GND へ当てる
 - C<sub>T2</sub> は 30pF のセラミックトリマ (図の値は範囲の 5〜30pF)
 
 ### 受信機の低周波部 (perfboard)
@@ -350,6 +394,11 @@ parts:
     at: -c17
     label: Analog Discovery
     pins: V+ GND
+  SC:
+    type: device
+    at: -c4
+    label: AD CH1
+    pins: 1+ 1-
   U1: dip8 i9 r90 LM358
   Rt1: resistor e12 i12 100k
   Rt2: resistor k12 q12 1k
@@ -365,7 +414,8 @@ wires:
   - w18 -- w15 black
   - w15 -- w12 black
   - w12 -- w6 black
-  - w6 -- w3 black
+  - w6 -- w5 black
+  - w5 -- w3 black
   - PREV.GND -- w3 black
   - l6 -- w6 black
   - j6 -- k6 black
@@ -373,20 +423,21 @@ wires:
   - q12 -- w12 black
   - s15 -- w15 black
   - PREV.DET -- n2 green
-  - n2 -- n9 green
+  - n2 -- n4 green
+  - n4 -- n9 green
+  - SC.1+ -- n4 blue
+  - SC.1- -- w5 black
   - n9 -- l9 green
   - i12 -- k12 orange
   - k9 -- k12 orange
   - j9 -- j15 white
   - n15 -- o15 white
-notes:
-  - mark n9 blue
-  - text o10 white: CH1 1+
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/perfboard/14-27mhz-rc-toy.svg)
 
 - 上の c 行の赤い筋が +5V (AD の V+)、下の w 行の黒い筋が GND。AD の GND は 18 列を降ろして w18 へ。
+  計器の箱は 2 つで、右上が電源 (V+・GND)、左上が CH1 の 1+・1− (AD CH1)
   図4 の板からの GND は板の下から w3 へ (2 枚の板の GND を 1 か所でつなぐ)
 - U1 (LM358、DIP8) は 6 列と 9 列をまたいで立て、左の列が上から PIN 1・2・3・4、
   右の列が上から PIN 8・7・6・5 (足の名前は胴に刷ってある)。PIN 8 (i9) は c9 から降ろした +5V へ。
@@ -394,17 +445,18 @@ notes:
   PIN 4 と線で結んで GND へ。PIN 1 (OUT1) は何もつながない
 - **検波の出力 (緑)**: 図4 の板から来る DET を n2 に受け、n 行を右へ走らせて n9、そこから l9
   (LM358 の **PIN 5**) へ上げる。途中で 6 列の GND の線を跨ぐ (図の半円)。
-  CH1 の 1+ は青丸の n9 に当てる (図4 の DET の島と同じ電位)。1− は w 行の GND の筋の穴
+  CH1 の 1+ (青) は 4 列から降ろして n4 に当てる (図4 の DET の島と同じ電位)。1− (黒) は 5 列を降ろし、
+  n 行の緑の線を跨いで w5 の GND の筋へ
 - **PIN 6 (k9)** に Rt1 (12 列、上端は c12 から降ろした +5V) と Rt2 (12 列、下端は w12 の GND の筋へ)。
   PIN 6 から橙の線を k12 へ、Rt1 の下端 i12 からも橙の線を k12 へ (j12 で白い線を跨ぐ)。
   ここが 49.5mV のしきい値
 - PIN 7 (j9) から白の線を j15 へ、15 列を降ろして Rled → LED。LED の陰極 (s15) は w15 で GND の筋へ
 
 `copper-fence check` と `perfboard-fence check` のネットリストを合わせると、回路図 (図1・図2) と
-同じつながりになる。図3 は図1 のとおり (電圧計 CH2 は KEY の島と裏の GND)。受信機は図2 の
-D1・Cd・Rd の節点 (図4 の DET) と GND が、図4 の箱「図5 の板へ」・図5 の「図4 の板から」の
-DET と GND を通ってつながる。違いは電圧計だけで、図5 の CH1 は 1+・1− を描かずに
-(上のとおり n9 と GND の筋に) 当てる。
+同じつながりになる。図3 は図1 のとおり (AD の V+ は VCC、W1 と 2+ は KEY、2− と GND は GND、
+アンテナの線は ANT)。受信機は図2 の D1・Cd・Rd の節点 (図4 の DET) と GND が、図4 の箱
+「図5 の板へ」・図5 の「図4 の板から」の DET と GND を通ってつながる。図4 の AD は 1+ が DET、
+1− と GND が GND、図5 の AD は V+ が +5V、GND と CH1 の 1− が GND、1+ が DET (図2 の電圧計 CH1 の 1+・1− と同じ)。
 
 ## 計器の設定
 
