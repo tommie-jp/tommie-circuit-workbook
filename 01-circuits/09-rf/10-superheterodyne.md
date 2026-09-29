@@ -49,6 +49,7 @@ parts:
   VC1b: capacitor-var i17 k17 l=$\mathrm{VC}_{1b}$
   GVb: ground k17
   T3: transformer e20
+  Ci1: capacitor d18 g18 180p l=$\mathrm{C}$
   IF: port d22
   IFB: port g22
 wires:
@@ -69,17 +70,22 @@ wires:
   - c15 -- c16
   - T2.B1 -| c16
   - T2.B2 -| g17
-  - g17 -- g19
+  - g17 -- g18
+  - g18 -- g19
   - g19 -| T3.A2
   - Q1.C -- a11
   - a11 -- a19
-  - a19 |- T3.A1
+  - a19 -- d19
+  - d19 |- T3.A1
+  - d18 -- d19
   - T3.B1 -| d22
   - T3.B2 -| g22
 notes:
   - text b7 small center: バーアンテナ
-  - text g15a5 small center: 局発コイル (赤)
+  - text b15a5 small center: 局発コイル (赤)
   - text h20 small center: IFT1 (黄)
+  - box c17 g20 blue
+  - text b19a5 small blue left: IFT に内蔵 180pF
   - arrow b13f0 a13 green
   - text b13f0 small green right: スペアナ
 style:
@@ -103,7 +109,9 @@ style:
 - **W1 と Cw (10pF)**: 放送の代わりに、Analog Discovery の W1 で作った AM 信号を小さな容量でタンクへ入れる (計器の設定)。
   放送を聞くときは Cw ごと外す
 - **IFT の同調**: IFT は同調コンデンサ (180pF 前後) を内蔵する。
-  455kHz に合うコイルは L = 1/((2π × 455kHz)² × 180pF) ≈ 680µH。コアを回して 455kHz に合わせる
+  455kHz に合うコイルは L = 1/((2π × 455kHz)² × 180pF) ≈ 680µH。コアを回して 455kHz に合わせる。
+  図の破線の枠が IFT の缶の中で、内蔵の 180pF を 1 次巻線 (A1・A2) に並べて描いた。
+  2 次 (B1・B2) は同調させない前提で、コンデンサは描かない (7mm 角の 455kHz 用 IFT の多くは 1 次だけに内蔵)
 
 ### 2 連バリコンとトラッキング
 
@@ -156,6 +164,7 @@ parts:
   Ce2: capacitor f8 h8 0.01u
   GCe2: ground h8
   T4: transformer c10
+  Ci2: capacitor b8 d8 180p l=$\mathrm{C}$
   VCC: vcc a9 5V
   Cb3: capacitor g11 i11 0.01u
   GCb3: ground i11
@@ -169,6 +178,7 @@ parts:
   Ce3: capacitor f19 h19 0.01u
   GCe3: ground h19
   T5: transformer c21
+  Ci3: capacitor b19 d19 180p l=$\mathrm{C}$
   VCC: vcc a20 5V
   GT5: ground f22
   CH2: voltmeter d23 f23 l=$\mathrm{CH2}$
@@ -188,8 +198,10 @@ wires:
   - Q2.E -- f6
   - f6 -- f8
   - Q2.C -- b6
-  - b6 -- b8
-  - b8 |- T4.A2
+  - b6 -- b7
+  - b7 |- d8
+  - d8 |- T4.A2
+  - T4.A1 -| b8
   - T4.A1 -| a9
   - T4.B1 -| c16
   - c16 -- Q3.B
@@ -199,8 +211,10 @@ wires:
   - Q3.E -- f17
   - f17 -- f19
   - Q3.C -- b17
-  - b17 -- b19
-  - b19 |- T5.A2
+  - b17 -- b18
+  - b18 |- d19
+  - d19 |- T5.A2
+  - T5.A1 -| b19
   - T5.A1 -| a20
   - T5.B1 -| c23
   - c23 -- c24
@@ -213,7 +227,11 @@ wires:
 notes:
   - text f33 small center: 10kΩ (A)
   - text e9 small center: IFT2 (白)
+  - box b8 d10 blue
+  - text a10a5 small blue left: IFT に内蔵 180pF
   - text e20 small center: IFT3 (黒)
+  - box b19 d21 blue
+  - text a21a5 small blue left: IFT に内蔵 180pF
 style:
   pitch: 1.1
 ```
@@ -298,6 +316,9 @@ style:
 
 ## 実体配線図
 
+回路図の破線の枠の 180pF (IFT に内蔵) は IFT の缶の中にあり、外に足が出ない。
+実体配線図には描かず、IFT (T3・T4・T5) を 1 つの部品として挿す (足は 1 次の A1・A2 と 2 次の B1・B2 の 4 本だけ)。
+そのため、check で出るネットリストは、回路図のほうが 180pF の 3 個 (Ci1〜Ci3) だけ部品が多い。IFT の 1 次の 2 端子の間に並ぶだけなので、つながりは実体配線図と同じ。
 3 枚のブレッドボードに分けて組む。板どうしは IF・IFB・AF の 3 本と、+5V・GND を線でつなぐ
 (箱「図5 の板へ」などが相手の板)。電源は 3 枚とも同じ 5V (USB や電池) で、上下の − レールと + レールは右端 (29・30 列、図5 は 62・63 列) で渡す。
 1 つの穴には足か線を 1 本だけ挿す。赤は +5V、黒は GND、橙は板の中のつなぎ、緑は信号の出入り。
@@ -622,7 +643,7 @@ measure: [vmax, vmin, freq]
 | Q6 | PNP トランジスタ (出力) | 2SA950 |
 | T1 | バーアンテナ (1 次 約 330µH + 結合巻線) | 中波用 |
 | T2 | 局発コイル (赤) | 455kHz スーパー用 |
-| T3・T4・T5 | IFT (黄・白・黒) | 455kHz、同調コンデンサ内蔵 |
+| T3・T4・T5 | IFT (黄・白・黒) | 455kHz、コンデンサ内蔵 (1 次に 180pF 前後。買うのは IFT だけで、コンデンサは別に要らない) |
 | VC1a・VC1b | 2 連ポリバリコン (トリマ付き) | 同容量 約 260pF × 2 |
 | Cp | パディングコンデンサ | 270pF |
 | Cw | セラミックコンデンサ (W1 の注入) | 10pF |
