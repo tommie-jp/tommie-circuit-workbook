@@ -73,14 +73,14 @@ parts:
     pins: [VCC, SCLK, SDATA, FSYNC, DGND, AGND, OUT]
   G1: ground l8a5
   AT:
-    type: device
-    at: m13c0
+    type: ic3
+    at: m14
     label: SMA 40dB
-    pins: [IN, OUT, GND]
-  GAT: ground o15
+    pins: [IN, GND, OUT]
+  GAT: ground o14
   U3:
     type: device
-    at: m25c0
+    at: m24c0
     label: RTL-SDR
     pins: [RF, GND]
   GU3: ground o23
@@ -95,12 +95,12 @@ wires:
   - U2.DGND -| j8a5
   - U2.AGND -| j8a5
   - j8a5 -- l8a5
-  - U2.OUT -| AT.IN
-  - AT.OUT -| U3.RF
-  - AT.GND -| o15
+  - U2.OUT |- AT.IN
+  - AT.OUT -- U3.RF
+  - AT.GND -- o14
   - U3.GND -| o23
 notes:
-  - text k18f0 blue: 板の外 (SMAの減衰器 40dB)
+  - text k17f0 blue: 板の外 (SMAの減衰器 40dB)
   - text e4f0 blue: 3.3V (Picoの3V3 OUT)
 style:
   pitch: 1.2
@@ -133,54 +133,55 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-board: full
+board: half
 parts:
-  U1: pico @ h5
+  U1: pico @ h2
   U2:
     type: device
     at: bottom
     label: AD9833モジュール
-    pins: [SCLK, SDATA, FSYNC, VCC, DGND, AGND, OUT]
+    pins: [SCLK, SDATA, FSYNC, DGND, AGND, VCC, OUT]
   AT:
     type: device
     at: bottom
     label: SMA 40dB減衰器 (板の外)
-    pins: [IN, OUT, GND]
+    pins: [IN, GND, OUT]
   U3:
     type: device
     at: bottom
     label: RTL-SDR (SMA入力)
     pins: [RF, GND]
 wires:
-  - a9 -- +t9 red
-  - a7 -- -t7 black
-  - j12 -- -b12 black
-  - +t27 -- +b27 red
-  - -t50 -- -b50 black
-  - U2.VCC -- +b16 red
-  - U2.DGND -- -b19 black
-  - U2.AGND -- -b21 black
-  - U2.SDATA -- j9 green
-  - U2.SCLK -- j8 yellow
-  - U2.FSYNC -- j11 blue
+  - a6 -- +t6 red
+  - a4 -- -t4 black
+  - j9 -- -b9 black
+  - +t23 -- +b23 red
+  - -t27 -- -b27 black
+  - U2.SCLK -- j5 yellow
+  - U2.SDATA -- j6 green
+  - U2.FSYNC -- j8 blue
+  - U2.DGND -- -b10 black
+  - U2.AGND -- -b11 black
+  - U2.VCC -- +b12 red
   - U2.OUT -- AT.IN orange
   - AT.OUT -- U3.RF orange
-  - AT.GND -- -b43 black
-  - U3.GND -- -b45 black
+  - AT.GND -- -b20 black
+  - U3.GND -- -b28 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/16-dds-sdr-module.svg)
 
-- U1 (Pico) は h5 に挿す。上の列 (c 行) が PIN 40〜21、下の列 (h 行) が PIN 1〜20
-- **上の赤レール = 3.3V**。Pico の **3V3 (PIN 36、9 列)** から a9 → 上の + レールへ赤線を引き、
-  27 列で下の + レールへ渡す。**AD9833 モジュールはこの 3.3V で動く** (5V は使わない)
-- 青レール = GND。GND38 (7 列) を上の − レールへ、GND8 (12 列) を下の − レールへ。50 列で上下の − レールを渡している
-- U2 (AD9833 モジュール) は板の外に置き、ジャンパ線で SCLK → j8 (GP2)、SDATA → j9 (GP3)、
-  FSYNC → j11 (GP5)、VCC → 下の + レール、DGND・AGND → 下の − レール。
+- ブレッドボードは **half (30 列)**。Pico と数本の線だけなので、収まる最小の板にした
+- U1 (Pico) は h2 に挿す。上の列 (c 行) が PIN 40〜21、下の列 (h 行) が PIN 1〜20
+- **上の赤レール = 3.3V**。Pico の **3V3 (PIN 36、6 列)** から a6 → 上の + レールへ赤線を引き、
+  23 列で下の + レールへ渡す。**AD9833 モジュールはこの 3.3V で動く** (5V は使わない)
+- 青レール = GND。GND38 (4 列) を上の − レールへ、GND8 (9 列) を下の − レールへ。27 列で上下の − レールを渡している
+- U2 (AD9833 モジュール) は板の外に置き、ジャンパ線で SCLK → j5 (GP2)、SDATA → j6 (GP3)、
+  FSYNC → j8 (GP5)、VCC → 下の + レール (12 列)、DGND・AGND → 下の − レール (10・11 列)。
   図の足の並びは線が交わらない順にした。実物のピンヘッダの並びは基板の印字で確かめる
 - U2 の OUT は板に挿さず、**板の外で** SMA の 40dB 減衰器 (AT) の IN へ、AT の OUT は U3 (RTL-SDR) の
-  SMA へつなぐ。板の上には 7MHz の線も部品もない。AT と U3 の GND は同軸の外皮で、便宜上、
-  下の − レールにも寄せてある (回路図の GND と同じ節)
+  SMA へつなぐ (図では橙の線)。板の上には 7MHz の線も部品もない。AT と U3 の GND は同軸の外皮で、便宜上、
+  下の − レール (20・28 列) にも寄せてある (回路図の GND と同じ節)
 
 **ブレッドボードで組んでよい理由。** 7MHz は AD9833 モジュールの**中**で作られ、
 板の外の SMA 減衰器を通って SDR に入る。板を通るのは Pico とモジュールの間の
