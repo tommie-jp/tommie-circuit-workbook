@@ -72,12 +72,12 @@ parts:
     label: AD9833
     pins: [VCC, SCLK, SDATA, FSYNC, DGND, AGND, OUT]
   G1: ground l8a5
-  Cc: capacitor m12 m14 0.1u
-  Ra: resistor m16 o16 51
-  Rs: resistor m17 m20 2.4k
-  Rb: resistor m21 o21 51
-  GRa: ground o16
-  GRb: ground o21
+  AT:
+    type: device
+    at: m13c0
+    label: SMA 40dB
+    pins: [IN, OUT, GND]
+  GAT: ground o15
   U3:
     type: device
     at: m25c0
@@ -95,14 +95,12 @@ wires:
   - U2.DGND -| j8a5
   - U2.AGND -| j8a5
   - j8a5 -- l8a5
-  - U2.OUT -| m9a4
-  - m9a4 -- m12
-  - m14 -- m16 -- m17
-  - m20 -- m21 -- m23
-  - m23 -| U3.RF
+  - U2.OUT -| AT.IN
+  - AT.OUT -| U3.RF
+  - AT.GND -| o15
   - U3.GND -| o23
 notes:
-  - text k18f0 blue: 約40dBの減衰器 (Ra Rs Rb)
+  - text k18f0 blue: 板の外 (SMAの減衰器 40dB)
   - text e4f0 blue: 3.3V (Picoの3V3 OUT)
 style:
   pitch: 1.2
@@ -120,16 +118,16 @@ style:
   CPOL = 1・CPHA = 0)。MicroPython では `polarity=1, phase=0` と書く
 - **出力 OUT** は 0.038V〜0.65V を振れる正弦 (約 0.6Vpp、中心 約 0.34V。データシートの値)。
   チップの中の 200Ω を通して出てくるので、**開放 0.6Vpp・出力抵抗 200Ω の源**とみなす。
-  Cc (0.1µF) で直流を切る (7MHz で 0.23Ω、無視できる)
-- **Ra・Rs・Rb が 50Ω 系の π 型減衰器** (約 40dB)。40dB の理想値は並列 51.0Ω・直列 2.50kΩ で、
-  E24 の 51Ω と 2.4kΩ で 39.7dB (計算値)。RTL-SDR の入力は強い信号で飽和するので
-  (目安 −30dBm 以上)、DDS の出力をそのまま入れない。市販の SMA の 40dB 減衰器
-  (20dB を 2 個) でもよい
-- 減衰器の出口から RTL-SDR (U3) の SMA へは短い同軸ケーブルでつなぐ。
-  U3 の GND は同軸の外皮
-- **レベルの計算** (計算値): 減衰器の入力は約 50Ω なので、0.3V peak の源を 200Ω と 50Ω で分けて
+  直流分 (中心 約 0.34V) は、減衰器と SDR の入力を通しても支障がない
+- **AT は市販の SMA 型 40dB 減衰器** (板の外の部品。20dB のものを 2 個つないでもよい)。
+  RTL-SDR の入力は強い信号で飽和するので (目安 −30dBm 以上)、DDS の出力をそのまま入れない。
+  U2 の OUT から AT へは短い SMA 変換ケーブルで、AT の出口は U3 の SMA へ直接つなぐ。
+  GND は同軸の外皮
+- **レベルの計算** (計算値): 減衰器 (AT) の入力は約 50Ω なので、0.3V peak の源を 200Ω と 50Ω で分けて
   0.060V peak = **−14.4dBm**。7MHz は sinc で −1.2dB 下がって −15.6dBm。
   減衰器を通って U3 の入力で **−55.2dBm**
+  (公称 40dB ちょうどなら −55.6dBm。市販品の誤差は ±1dB ほどあるので、図と表は −55.2dBm のまま、
+  読みが 1dB ほどずれても像の比は変わらない)
 
 ## 実体配線図
 
@@ -143,15 +141,16 @@ parts:
     at: bottom
     label: AD9833モジュール
     pins: [SCLK, SDATA, FSYNC, VCC, DGND, AGND, OUT]
+  AT:
+    type: device
+    at: bottom
+    label: SMA 40dB減衰器 (板の外)
+    pins: [IN, OUT, GND]
   U3:
     type: device
     at: bottom
-    label: RTL-SDRへの同軸
-    pins: [芯線, 外皮]
-  Cc: capacitor/ceramic i30 i33 0.1u
-  Ra: resistor j33 -b33 51
-  Rs: resistor h33 h41 2.4k
-  Rb: resistor j41 -b41 51
+    label: RTL-SDR (SMA入力)
+    pins: [RF, GND]
 wires:
   - a9 -- +t9 red
   - a7 -- -t7 black
@@ -164,9 +163,10 @@ wires:
   - U2.SDATA -- j9 green
   - U2.SCLK -- j8 yellow
   - U2.FSYNC -- j11 blue
-  - U2.OUT -- j30 orange
-  - U3.芯線 -- g41 orange
-  - U3.外皮 -- -b43 black
+  - U2.OUT -- AT.IN orange
+  - AT.OUT -- U3.RF orange
+  - AT.GND -- -b43 black
+  - U3.GND -- -b45 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/16-dds-sdr-module.svg)
@@ -178,10 +178,14 @@ wires:
 - U2 (AD9833 モジュール) は板の外に置き、ジャンパ線で SCLK → j8 (GP2)、SDATA → j9 (GP3)、
   FSYNC → j11 (GP5)、VCC → 下の + レール、DGND・AGND → 下の − レール。
   図の足の並びは線が交わらない順にした。実物のピンヘッダの並びは基板の印字で確かめる
-- OUT → j30 (橙)。Cc は i30〜i33、33 列が減衰器の入口で、Ra (j33 → − レール) と Rs (h33〜h41) が並ぶ。
-  41 列が出口で、Rb (j41 → − レール) と、RTL-SDR へ行く同軸の芯線 (g41) が並ぶ。外皮は隣の − レール (43 列) へ
-- 高い周波数ではブレッドボードの線の長さが効くので、減衰器と同軸の間はできるだけ短くする。
-  減衰量が 40dB から数 dB ずれても、この題の見方 (線の並びと像の比) は変わらない
+- U2 の OUT は板に挿さず、**板の外で** SMA の 40dB 減衰器 (AT) の IN へ、AT の OUT は U3 (RTL-SDR) の
+  SMA へつなぐ。板の上には 7MHz の線も部品もない。AT と U3 の GND は同軸の外皮で、便宜上、
+  下の − レールにも寄せてある (回路図の GND と同じ節)
+
+**ブレッドボードで組んでよい理由。** 7MHz は AD9833 モジュールの**中**で作られ、
+板の外の SMA 減衰器を通って SDR に入る。板を通るのは Pico とモジュールの間の
+SPI (1MHz) と 3.3V の電源だけで、板の上の回路は 3MHz 以下に収まる。電流もモジュールと
+Pico を合わせて数十 mA で、板全体の 500mA にも遠く及ばない。
 
 ## 計器の設定
 
@@ -255,7 +259,7 @@ markers: [7M, 18M, 32M, 43M]
 
 ## 見るべき値
 
-計算値。MCLK = 25MHz、FREQREG = 75161928、減衰器 39.7dB。
+計算値。MCLK = 25MHz、FREQREG = 75161928、減衰器 (AT) 40dB。
 
 | 測る所 | 期待する値 |
 | --- | --- |
@@ -279,10 +283,8 @@ markers: [7M, 18M, 32M, 43M]
 | U1 | Raspberry Pi Pico | MicroPython を書き込む。USB から給電 |
 | U2 | AD9833 モジュール | 25MHz 水晶発振器つき。VCC・DGND・SDATA・SCLK・FSYNC・AGND・OUT のピンヘッダ |
 | U3 | RTL-SDR Blog V4 | SMA 入力。0.5MHz〜1.7GHz |
-| Cc | 0.1µF | セラミック |
-| Ra・Rb | 51Ω | 1/4W。π 型減衰器の並列 |
-| Rs | 2.4kΩ | 1/4W。π 型減衰器の直列 |
-| 同軸ケーブル・SMA コネクタ | 50Ω | 減衰器と U3 の間 |
+| AT | SMA 40dB 減衰器 (50Ω) | 市販品。板の外。20dB を 2 個でもよい |
+| SMA ケーブル | 50Ω | U2 の OUT から AT へ (SMA 変換ケーブル) |
 
 - 電源は既定の 5V ではなく 3.3V (Pico の 3V3 OUT)。Pico の GPIO と電圧を合わせるため
 - 同じ使い方で **Si5351 モジュール** (I2C、アドレス 0x60、8kHz〜160MHz 程度の方形波を 3 本) も

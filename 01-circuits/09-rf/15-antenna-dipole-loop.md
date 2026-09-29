@@ -6,7 +6,7 @@ title: アンテナ — ダイポールとループ、SWR
 tier: 200
 source: 自作
 tools: [VNA]
-board: BB
+board: PF
 ---
 
 # 9-15 アンテナ — ダイポールとループ、SWR
@@ -24,7 +24,7 @@ board: BB
   **50 Ω の同軸で給電すると SWR は 73 / 50 = 1.46** が最小値になる。
   共振から外れると、短い側は容量性 (X < 0)、長い側は誘導性 (X > 0) になる
 - 共振の近くは **直列 RLC** で置き換えられる。R = 73 Ω、Q を 10 と置くと
-  L = Q·R / (2πf<sub>0</sub>) = **801 nH**、C = 1 / ((2πf<sub>0</sub>)²L) = **1.504 pF** (図5 の模型)。
+  L = Q·R / (2πf<sub>0</sub>) = **801 nH**、C = 1 / ((2πf<sub>0</sub>)²L) = **1.504 pF** (図6 の模型)。
   Q は線が細いほど高い (Q = 10 は線径 1〜2 mm のおおよその目安)
 - **長さを切り詰める**: 共振周波数は長さにほぼ反比例する。f<sub>0</sub> が 142 MHz と低く出たら
   (2 % 長い)、両側を 1 cm ずつ (0.98 m の 2 %) 切ると 145 MHz に上がる。**切りすぎは戻せない**ので、
@@ -83,7 +83,7 @@ notes:
 - ANT1・ANT2 がダイポールの左右の素子 (線径 1〜2 mm の銅線かアルミ棒、片側 49 cm)。
   **一直線に張り**、金属や壁から 1 m ほど離す (近いと f<sub>0</sub> も R も変わる)
 
-共振の近くのダイポールの模型 (図5 の `dut:`)。給電点から見た 1 端子なので、最後を地へ落とす。
+共振の近くのダイポールの模型 (図6 の `dut:`)。給電点から見た 1 端子なので、最後を地へ落とす。
 
 ```circuit
 title: 図2 共振の近くのダイポールの模型 (直列RLC)
@@ -104,92 +104,136 @@ notes:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/15-antenna-dipole-loop-2.svg)
 
+小さなループの共振の模型。結合ループ (T1 の一次側) を通して、大ループ (T1 の二次側、
+L ≈ 0.25 µH) と同調コンデンサ CT が閉じた共振回路を作る。
+
+```circuit
+title: 図3 小さなループと同調コンデンサ
+parts:
+  J1: sma c2 mirror
+  G1: ground d2
+  T1: transformer c6
+  G2: ground d5
+  CT: capacitor c9 c11 4.7p
+wires:
+  - J1.1 -- c3
+  - J1.2 -- d2
+  - c3 -| T1.A1
+  - T1.A2 -| d5
+  - T1.B1 -| c9
+  - T1.B2 -| c11
+notes:
+  - text c1 right: CH0
+  - text d9 center small: 二次側が大ループ (0.25 µH)
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/15-antenna-dipole-loop-3.svg)
+
+- J1 は CH0。T1 は結合ループ (直径 2 cm) と大ループ (直径 10 cm) の**磁界の結合**を表す。
+  二次側の大ループのコイル (0.25 µH) と CT (4.7 pF) で 145 MHz 近くに共振する
+
 ## 実体配線図
 
-```breadboard
-title: 図3 ダイポールの給電点をブレッドボードに組む
-board: half
+**perfboard にした理由**: この題の回路は 145 MHz 帯で、ブレッドボードの上限 (板の上に組む回路で
+3 MHz) を大きく超える。ブレッドボードでは穴に挿した線 (1 cm でおよそ 10 nH、145 MHz で約 9 Ω)
+と接点の浮遊容量 (数 pF) が、そのままダイポールの素子やループの一部になり、組み直すたびに
+f<sub>0</sub> と SWR が変わる。**SMA コネクタを半田付けし、線を数 cm に抑えた給電点**なら、
+何度組んでも同じ値が測れる。板は 5×7 cm (18 列 × 24 行) で収まる。板の上にあるのは SMA と数 cm の
+配線と CT だけで、共振を決める素子 (ダイポールの線・ループ) は板の外に張る。
+周波数は 145 MHz で、perfboard の目安 (150 MHz、VHF まで) の内側だが上端に近いので、ここの値は**板の配線と半田の浮遊値を含む測定値**
+として読む (計算値との違いは、この浮遊値と素子の置き方による)。電圧は NanoVNA の −10 dBm 前後、
+電流はミリアンペア以下で、12 V・500 mA の範囲に十分収まる。
+
+```perfboard
+board: 5x7cm
+title: 図4 ダイポールの給電点 (部品面)
 parts:
-  CH0:
-    type: device
-    at: top
-    label: CH0 (同軸 1m)
-    pins: [外皮, 芯線]
-  BL:
-    type: device
-    at: top
-    label: 1:1電流バラン
-    pins: [A1, A2, B1, B2]
+  J1: sma/female e7 e10 CH0
   ANT1:
     type: device
-    at: bottom
+    at: -c4
     label: 左の素子 49cm
-    pins: ["1"]
+    pins: "1"
   ANT2:
     type: device
-    at: bottom
+    at: -c13
     label: 右の素子 49cm
-    pins: ["1"]
+    pins: "1"
 wires:
-  - CH0.芯線 -- a5 yellow
-  - CH0.外皮 -- -t4 black
-  - BL.A1 -- b5 yellow
-  - BL.A2 -- -t9 black
-  - BL.B1 -- a14 orange
-  - BL.B2 -- a20 blue
-  - ANT1.1 -- j14 orange
-  - ANT2.1 -- j20 blue
-  - e14 -- f14 orange
-  - e20 -- f20 blue
+  - e7 -- b7 yellow
+  - b7 -- b4 yellow
+  - ANT1.1 -- b4 yellow
+  - e10 -- b10 black
+  - b10 -- b13 black
+  - ANT2.1 -- b13 black
+notes:
+  - text e5e5: 芯線
+  - text e12e5: 外皮
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/15-antenna-dipole-loop-1.svg)
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/perfboard/15-antenna-dipole-loop-1.svg)
 
-- 5 列が同軸の芯線、上の − レールが外皮 (GND)。バランの入り口 (A1・A2) はここにつなぐ
-- バランの出口 B1 は 14 列 (橙)、B2 は 20 列 (青)。左右の素子は同じ列の下の段から出す。
-  中央の溝は e と f の短い線で渡る
-- 実際のバランは**同軸そのものにフェライトを通した物**で、給電点の直前に置く。
-  ブレッドボードは試しの給電点で、**ここの線 (数 cm) も素子の一部になる**。f<sub>0</sub> を
-  追い込むのは、素子を端子台や基板の切れ端に直にはんだ付けしてからにする
+- 部品面から見た図。J1 は同軸 (1 m) の先の SMA コネクタ。芯線 (e7) を黄の線で b7 へ、
+  外皮 (e10) を黒の線で b10 へ引き、b4 と b13 に左右の素子を半田付けする
+- 回路図 (図1) の T2 (1:1 電流バラン) は**同軸に通したフェライト**で、板の外、J1 の手前の同軸に付ける。
+  だから板の上は J1 の芯線 → 左の素子、J1 の外皮 → 右の素子の 2 本だけで、
+  つながりは回路図と同じ (J1 の芯線側 = ANT1、外皮側 = ANT2)
+- 左右の素子の半田付けの穴 (b4・b13) は J1 の足から 3〜4 穴 (10 mm 弱) の所にある。
+  **給電点の配線を短く保つ**のがこの図の狙い。f<sub>0</sub> を追い込むときは、素子を長めに付けて、
+  板はそのままで素子だけを切り詰める
 
-```breadboard
-title: 図4 小さなループと同調コンデンサ
-board: half
+```perfboard
+board: 5x7cm
+title: 図5 小さなループと同調コンデンサ (部品面)
 parts:
-  CT: capacitor/ceramic c10 c14 4.7p
-  LOOP:
+  J1: sma/female e7 e10 CH0
+  CT: capacitor/ceramic t9 t11 4.7p
+  CPL1:
     type: device
-    at: bottom
+    at: -c4
+    label: 結合ループ 2cm
+    pins: "1"
+  CPL2:
+    type: device
+    at: -c13
+    label: 結合ループ 2cm
+    pins: "2"
+  LOOP1:
+    type: device
+    at: y6
     label: ループ 直径10cm
-    pins: ["1", "2"]
-  CH0:
+    pins: "1"
+  LOOP2:
     type: device
-    at: top
-    label: CH0
-    pins: [外皮, 芯線]
-  CPL:
-    type: device
-    at: top
-    label: 結合ループ 直径2cm
-    pins: ["1", "2"]
+    at: y11
+    label: ループ 直径10cm
+    pins: "2"
 wires:
-  - LOOP.1 -- j10 green
-  - LOOP.2 -- j14 green
-  - e10 -- f10 green
-  - e14 -- f14 green
-  - CH0.外皮 -- -t17 black
-  - CH0.芯線 -- a18 yellow
-  - CPL.1 -- b18 yellow
-  - CPL.2 -- -t23 black
+  - e7 -- b7 yellow
+  - b7 -- b4 yellow
+  - CPL1.1 -- b4 yellow
+  - e10 -- b10 black
+  - b10 -- b13 black
+  - CPL2.2 -- b13 black
+  - LOOP1.1 -- w6 green
+  - w6 -- t6 green
+  - t6 -- t9 green
+  - LOOP2.2 -- w11 green
+  - w11 -- t11 green
+notes:
+  - text e5e5: 芯線
+  - text e12e5: 外皮
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/15-antenna-dipole-loop-2.svg)
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/perfboard/15-antenna-dipole-loop-2.svg)
 
-- ループの両端 (10 列と 14 列) の間に同調の CT (4.7 pF、計算の 4.8 pF に近い E12 の値) を挿す。
-  回して合わせるならトリマ (10 pF) に替える
-- 結合ループは同軸の芯線 (18 列) と外皮 (− レール) をつなぐ小さな輪で、大きなループの内側に
+- 部品面から見た図。ループの両端 (t6 と t11 の側) の間に CT (4.7 pF、計算の 4.8 pF に近い E12 の値) を
+  半田付けする。回して合わせるならトリマ (10 pF) に替える
+- 結合ループは同軸の芯線 (b4) と外皮 (b13) をつなぐ小さな輪で、大ループの内側に
   寄せて置く。**近づけると結合が強まり、離すと弱まる** — 50 Ω に合う位置を SWR を見ながら探す
-- ブレッドボードの浮遊容量 (数 pF) が CT に足されるので、f<sub>0</sub> は計算より低めに出る
+- 回路図 (図3) の T1 は、板の外の 2 つのループの磁界の結合。板の上では、結合ループが J1 の芯線と外皮に、
+  大ループが CT の両端につながる
+- 板の浮遊容量 (1 pF 前後) が CT に足されるので、f<sub>0</sub> は計算より少し低めに出る
 
 ## 計器の設定
 
@@ -206,7 +250,7 @@ wires:
 ```vna
 device: h4
 sweep: 120M-170M 101
-title: 図5 ダイポール (f0 = 145 MHz) の SWR と Smith
+title: 図6 ダイポール (f0 = 145 MHz) の SWR と Smith
 dut:
   - series R 73
   - series L 801n
@@ -252,8 +296,8 @@ notes:
 | ダイポールの素子 | 銅線 (線径 1〜2 mm) またはアルミ棒、片側 約 50 cm | 長めに切って詰める |
 | 同軸 | 50 Ω (RG-58 や 1.5D-2V)、約 1 m、SMA オス | NanoVNA の CH0 へ |
 | バラン | フェライトコア FT-37-43 やパッチン型を数個 | 給電点の近くの同軸に通す |
-| 給電点 | 小さな板 (ラグ板や基板の切れ端) | 左右の素子と同軸の中心・外皮をはんだ付け |
-| ループ | 銅線 2 mm、直径 10 cm、トリマ 10 pF | 小さな結合ループで 50 Ω へ |
+| 給電点 | ユニバーサル基板 5×7 cm (1.6 mm・FR-4)、基板用 SMA コネクタ (メス) | 左右の素子と SMA の芯線・外皮をはんだ付け |
+| ループ | 銅線 2 mm、直径 10 cm、セラミックコンデンサ 4.7 pF (CT)、トリマ 10 pF | 小さな結合ループ (直径 2 cm) で 50 Ω へ |
 | 計器 | NanoVNA-H4 | 50 kHz〜1.5 GHz |
 
 ## 出典

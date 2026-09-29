@@ -28,7 +28,7 @@
 | --- | --- | --- | --- |
 | 電圧 | 定常 12 V (DC / AC 実効値) 以下、ピーク 20 V 以下 | 同じ | 定常 12 V 以下 |
 | 電流 | 1 穴を通る線ごとに定常 200 mA・ピーク 300 mA 以下。**板全体で 500 mA 以下** | 1 本の線・ランドごとに定常 500 mA・ピーク 1 A 以下。板全体で 2 A 以下 | 電力 100 mW 以下 (送信は微弱無線局の範囲) |
-| 周波数 | 板の上に組む回路が **3 MHz 以下** | 30 MHz 以下 | 1 GHz 以下 |
+| 周波数 | 板の上に組む回路が **3 MHz 以下** | 150 MHz 以下 (VHF まで。線を短く、GND を近くに) | 1 GHz 以下 |
 | 標準の板 | `half` → `full` → full + half → full + full (`mini` は避ける) | 5×7 → 7×9 → 9×15 → 10×15 → 12×18 cm | FR-4・1.6 mm・両面 1 oz。5×7 → 7×10 → 10×15 → 10×20 → 12×18 → 15×20 → 20×30 cm |
 
 - 板の外のモジュールの中の高周波 (DDS の発振・2.4 GHz の無線) は数えない。板を通るのが SPI や電源だけならよい
@@ -253,9 +253,9 @@
 | 9-1 | [LC 同調 — 共振を LED で見る](09-rf/01-lc-resonance.md) | 必須 | | BB |
 | 9-2 | [ゲルマラジオ](09-rf/02-crystal-radio.md) | 必須 | 古 | BB |
 | 9-3 | [1 石ラジオ (トランジスタ検波)](09-rf/03-one-transistor-radio.md) | 必須 | 古 | BB |
-| 9-4 | [FM 送信機 (1 石)](09-rf/04-fm-transmitter.md) | 必須 | 古 | BB |
+| 9-4 | [FM 送信機 (1 石)](09-rf/04-fm-transmitter.md) | 必須 | 古 | PF |
 | 9-5 | [1 石レフレックスラジオ](09-rf/05-reflex-radio.md) | 入門 | 古 | BB |
-| 9-6 | [超再生 FM ラジオ](09-rf/06-superregen-fm.md) | 入門 | 古 | BB |
+| 9-6 | [超再生 FM ラジオ](09-rf/06-superregen-fm.md) | 入門 | 古 | PF |
 | 9-7 | [AM 変調 — 555 の搬送波を音声で振る](09-rf/07-am-modulation.md) | 入門 | | BB |
 | 9-8 | [ラジオ IC (LMF501T / TA7642)](09-rf/08-radio-ic.md) | 入門 | | BB |
 | 9-9 | [2 石ラジオ — 高周波増幅 + 低周波増幅](09-rf/09-two-transistor-radio.md) | 中級 | 古 | BB |
@@ -263,8 +263,8 @@
 | 9-11 | [ダイオード検波とトランジスタ検波の比較](09-rf/11-detector-comparison.md) | 中級 | | BB |
 | 9-12 | [バランスドミキサー](09-rf/12-balanced-mixer.md) | 中級 | | BB |
 | 9-13 | [FM 復調 — スロープ検波](09-rf/13-fm-slope-detector.md) | 中級 | 古 | BB |
-| 9-14 | [27MHz の送受信 (トイラジコン)](09-rf/14-27mhz-rc-toy.md) | 中級 | 古 | BB |
-| 9-15 | [アンテナ — ダイポールとループ、SWR](09-rf/15-antenna-dipole-loop.md) | 中級 | | BB |
+| 9-14 | [27MHz の送受信 (トイラジコン)](09-rf/14-27mhz-rc-toy.md) | 中級 | 古 | PF |
+| 9-15 | [アンテナ — ダイポールとループ、SWR](09-rf/15-antenna-dipole-loop.md) | 中級 | | PF |
 | 9-16 | [DDS / SDR モジュール](09-rf/16-dds-sdr-module.md) | 中級 | 今 | BB |
 | 9-17 | [2.4GHz モジュール (nRF24) と Pico](09-rf/17-nrf24-pico.md) | 中級 | 今 | BB |
 
