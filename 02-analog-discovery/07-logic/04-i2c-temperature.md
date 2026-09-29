@@ -92,7 +92,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/breadboard/04-i2c-temperature.svg)
 
 **LM75 の実物は SO-8 (または MSOP-8) しか売っていない**ので、ブレッドボードには
-SOP を DIP 化する変換基板 (`dip8/sop`) に載せて挿す (置き方・足番号は DIP と同じ)。
+SOP を DIP 化する変換基板 (`dip8/sop`) に載せて挿す (置き方・PIN 番号 は DIP と同じ)。
 LM75 (`U1`) は 8=VDD (e5) が左端。1=SDA (f5)・2=SCL (f6) は下ブロックの空いた
 行からプルアップと AD へ。プルアップは R1 (g 行、2〜5 列) と R2 (h 行、6〜9 列) を
 **行をずらして**重ならないように置き、VCC 側 (2・9 列) を j 行から +b へ、

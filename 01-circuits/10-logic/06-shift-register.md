@@ -69,13 +69,13 @@ wires:
   - c12a2 -- c9a5
   - U1.8 -| i13e0
 notes:
-  - text c16a5 blue: "SER (足14)"
-  - text d19a8 blue: "RCLK (足12、ラッチクロック)"
-  - text f24a3 blue: "SRCLK (足11、シフトクロック)"
-  - text f1a3 blue: "QA (足15)"
-  - text f3a8 blue: "QB (足1)"
-  - text f6a3 blue: "QC (足2)"
-  - text f8a8 blue: "QD (足3)"
+  - text c16a5 blue: "SER (PIN 14)"
+  - text d19a8 blue: "RCLK (PIN 12、ラッチクロック)"
+  - text f24a3 blue: "SRCLK (PIN 11、シフトクロック)"
+  - text f1a3 blue: "QA (PIN 15)"
+  - text f3a8 blue: "QB (PIN 1)"
+  - text f6a3 blue: "QC (PIN 2)"
+  - text f8a8 blue: "QD (PIN 3)"
 style:
   grid: on
   pitch: 1.2
@@ -83,16 +83,16 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/06-shift-register.svg)
 
-- **SER (足14)** がシリアル入力の 1 ビット。SW を閉じておくと 1、開けておくと
+- **SER (PIN 14)** がシリアル入力の 1 ビット。SW を閉じておくと 1、開けておくと
   (プルダウンで) 0 を送り込む
-- **SRCLK (足11)** の**立ち上がり**のたびに、そのときの SER の値が内部の
+- **SRCLK (PIN 11)** の**立ち上がり**のたびに、そのときの SER の値が内部の
   シフトレジスタに取り込まれ、既にあったビットは 1 つ後ろへずれる
-- **RCLK (足12)** の立ち上がりで、シフトレジスタの中身がまとめて出力ラッチへ
+- **RCLK (PIN 12)** の立ち上がりで、シフトレジスタの中身がまとめて出力ラッチへ
   コピーされる。**RCLK を押すまでは、何回 SRCLK を送っても QA〜QH は変わらない**
   — シフトと出力が分かれているのが 74HC595 の値打ち
-- **SRCLR̄ (足10)** は負論理のクリアなので Vcc に固定して無効化。**OĒ (足13)**
+- **SRCLR̄ (PIN 10)** は負論理のクリアなので Vcc に固定して無効化。**OĒ (PIN 13)**
   も負論理の出力イネーブルなので GND に固定して常時出力を有効にする
-- QA〜QD (足15・1・2・3) だけ LED を付けた。QE〜QH (足4〜7) も同じ考え方で
+- QA〜QD (PIN 15・1・2・3) だけ LED を付けた。QE〜QH (PIN 4〜7) も同じ考え方で
   続ければ 8 ビット全部を出せる (列が足りないのでここでは省略)
 
 ## 見るべき値
@@ -110,7 +110,7 @@ SER を 1 (スイッチを閉じる) にして SRCLK を 1 回押し、離して
 
 途中で SER を開けて (0) SRCLK を押すと、次にラッチしたときに先頭へ 0 が
 入り、古いビットが 1 つ後ろへ押し出される。8 回押し続けると、最初に入れた
-ビットは QH (足7) の先へ送り出され (足9、QH′ で次の 74HC595 へ渡せる)、
+ビットは QH (PIN 7) の先へ送り出され (PIN 9、QH′ で次の 74HC595 へ渡せる)、
 このレジスタからは消える。
 
 ## 出典

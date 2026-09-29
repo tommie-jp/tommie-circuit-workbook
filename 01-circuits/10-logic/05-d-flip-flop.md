@@ -61,9 +61,9 @@ wires:
   - U1.12 -| g14i2
   - g14i2 |- U1.9
 notes:
-  - text c2 blue: "D1 (足5)"
-  - text b5 blue: "CLK1 (足3、立ち上がりでDをQへ)"
-  - text b14 blue: "CLK2 (足11、押すたびにQが反転)"
+  - text c2 blue: "D1 (PIN 5)"
+  - text b5 blue: "CLK1 (PIN 3、立ち上がりでDをQへ)"
+  - text b14 blue: "CLK2 (PIN 11、押すたびにQが反転)"
 style:
   grid: on
   pitch: 1.2
@@ -71,14 +71,14 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/05-d-flip-flop.svg)
 
-- **FF1 (D-FF)**: SWD が D1 (足5)。SWC1 (CLK1、足3) を押すと GND から
-  Vcc へ立ち上がり、その瞬間の D1 の状態を Q1 (足1) にコピーする。押している
+- **FF1 (D-FF)**: SWD が D1 (PIN 5)。SWC1 (CLK1、PIN 3) を押すと GND から
+  Vcc へ立ち上がり、その瞬間の D1 の状態を Q1 (PIN 1) にコピーする。押している
   間や離したあとは D1 を変えても Q1 は動かない (次の立ち上がりまで保持)
-- **FF2 (T-FF)**: Q2̄ (足12) を D2 (足9) へ配線で戻してあるので、CLK2 (足11)
-  の**立ち上がりのたびに Q2 (足13) が反転**する。SWC2 を 1 回押すごとに
+- **FF2 (T-FF)**: Q2̄ (PIN 12) を D2 (PIN 9) へ配線で戻してあるので、CLK2 (PIN 11)
+  の**立ち上がりのたびに Q2 (PIN 13) が反転**する。SWC2 を 1 回押すごとに
   Q2 の LED が点滅を繰り返す — これは 10-4 の 4040 が内部でやっている
   「1 段で 1/2 分周する」仕組みそのもの
-- RESET (足4・10)・SET (足6・8) は CD4013 では**Hレベルで効く**ので、
+- RESET (PIN 4・10)・SET (PIN 6・8) は CD4013 では**Hレベルで効く**ので、
   使わないここでは両方 GND に落として無効化する
 - CLK 入力はボタンの手で押すチャタリングがそのまま Q に伝わることがある
   (Q が 1 回の押下で 2 回以上反転して見える)。きれいな 1 パルスにするには

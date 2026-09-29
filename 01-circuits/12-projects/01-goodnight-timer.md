@@ -115,13 +115,13 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/breadboard/01-goodnight-timer.svg)
 
-- 上下のレールは右端 (62・63 列) の線でつなぐ。U1 (e10) の足8 (10 列の上) と
-  足4 (13 列の下) を + レール、足1 (10 列の下) を下の − レール (GND) へ
-- 足2 (TRIG、11 列の下) はオレンジの線で 6 列を通って上ブロックの 5 列へ上げる。
+- 上下のレールは右端 (62・63 列) の線でつなぐ。U1 (e10) の PIN 8 (10 列の上) と
+  PIN 4 (13 列の下) を + レール、PIN 1 (10 列の下) を下の − レール (GND) へ
+- PIN 2 (TRIG、11 列の下) はオレンジの線で 6 列を通って上ブロックの 5 列へ上げる。
   そこで Rtrig が + レールへプルアップし、SWtrig (e3) を押すと下の − レールへ落ちる
-- 足6・7 (THR・DISCH、12 列・11 列の上) は a 行で結ぶ。Rt (4.7MΩ) は 12 列から
+- PIN 6・7 (THR・DISCH、12 列・11 列の上) は a 行で結ぶ。Rt (4.7MΩ) は 12 列から
   赤い + レールへ、Ct (220µF) は 11 列から 8 列の − レールへ。ここが時定数ノード
-- 足3 (OUT、12 列の下) は青の線 (i 行) で 46 列へ運び、Rg を通して Q1 のゲート
+- PIN 3 (OUT、12 列の下) は青の線 (i 行) で 46 列へ運び、Rg を通して Q1 のゲート
   (41 列) へ。Q1 は上ブロック (40〜42 列の b 行) に挿し、足は e 行から溝をまたぐ
   短い線で下へ (S は 40 列から GND、G は 41 列で Rg)。D (42 列) は緑の線で 46 列へ
   渡し、DLED (常夜灯) のカソードへ (アノードは RLED を通して + レール)。
@@ -160,26 +160,26 @@ wires:
   - n2 -- n5 black
   - n5 -- n13 black
   - n13 -- n21 black
-  # U1 の電源: 足8 (VDD) は上へ、足1 (GND) は下へ
+  # U1 の電源: PIN 8 (VDD) は上へ、PIN 1 (GND) は下へ
   - e5 -- a5 red
   - h5 -- n5 black
-  # 足4 (RESET) は 10 列を上って VCC へ。途中の e10 から出力段へも配る
+  # PIN 4 (RESET) は 10 列を上って VCC へ。途中の e10 から出力段へも配る
   - h8 -- h10 red
   - h10 -- e10 red
   - e10 -- a10 red
   - e10 -- e18 red
-  # TRIG (足2): Rtrig で VCC へ、SWtrig で GND へ
+  # TRIG (PIN 2): Rtrig で VCC へ、SWtrig で GND へ
   - d2 -- j2 yellow
   - l2 -- n2 black
   - h6 -- j6 yellow
   - j6 -- j4 yellow
-  # THRES・DISCH (足6・7): Rt で VCC へ、Ct で GND へ
+  # THRES・DISCH (PIN 6・7): Rt で VCC へ、Ct で GND へ
   - e6 -- d6 orange
   - d6 -- d7 orange
   - e7 -- d7 orange
   - d7 -- d21 orange
   - f21 -- n21 black
-  # OUT (足3) → Rg → Q1 のゲート。Q1 のドレイン → DLED → RLED → VCC
+  # OUT (PIN 3) → Rg → Q1 のゲート。Q1 のドレイン → DLED → RLED → VCC
   - h7 -- i7
   - i7 -- i12
   - i16 -- k16
@@ -194,24 +194,24 @@ wires:
 
 - 部品面から見た図。電源は上の a 行 (赤)、GND は下の n 行 (黒) に 1 本ずつ筋を通し、
   左端の a1・n1 に電源をつなぐ。部品はこの 2 本の筋から縦に配る
-- U1 (e5、DIP8) は切り欠きを左にして挿す。上の列が左から足8 (VDD)・7 (DISCH)・
-  6 (THRES)・5 (CONT) で e5〜e8、下の列が左から足1 (GND)・2 (TRIG)・3 (OUT)・
-  4 (RESET) で h5〜h8。足8 は 5 列を上って a 行へ、足1 は 5 列を下って n 行へ
-- 足4 (RESET) は h 行で 10 列へ出て、10 列を上って a 行 (VCC) へ。その途中の e10 から
-  e 行を右へ出して、出力段の RLED へ VCC を配る。**足5 (CONT) はどこにもつなげていない**
+- U1 (e5、DIP8) は切り欠きを左にして挿す。上の列が左から PIN 8 (VDD)・7 (DISCH)・
+  6 (THRES)・5 (CONT) で e5〜e8、下の列が左から PIN 1 (GND)・2 (TRIG)・3 (OUT)・
+  4 (RESET) で h5〜h8。PIN 8 は 5 列を上って a 行へ、PIN 1 は 5 列を下って n 行へ
+- PIN 4 (RESET) は h 行で 10 列へ出て、10 列を上って a 行 (VCC) へ。その途中の e10 から
+  e 行を右へ出して、出力段の RLED へ VCC を配る。**PIN 5 (CONT) はどこにもつなげていない**
   — 単安定の動作には必須ではなく、浮かせたままでも動く (つなぐならここに 0.01µF を
   GND へ)
-- 足2 (TRIG、黄) は h6 から j 行を左へ運んで SWtrig (j2) へ。SWtrig の下の足は l2 から
+- PIN 2 (TRIG、黄) は h6 から j 行を左へ運んで SWtrig (j2) へ。SWtrig の下の足は l2 から
   n 行の GND へ、上の足 j2 は 2 列を上って Rtrig (a2〜d2) で a 行の VCC へプルアップする
-- 足6・7 (THRES・DISCH、橙) はそれぞれ d 行へ上げて d6〜d7 で結び、Rt (a7〜d7) で VCC へ。
+- PIN 6・7 (THRES・DISCH、橙) はそれぞれ d 行へ上げて d6〜d7 で結び、Rt (a7〜d7) で VCC へ。
   同じ d7 から d 行を右へ運んで Ct (d21、+ が上) へ、Ct の − は 21 列を下って GND へ
-- 足3 (OUT) は i 行で Rg (i12〜i16) へ、Rg から 16 列を下って Q1 のゲート (k16) へ。
+- PIN 3 (OUT) は i 行で Rg (i12〜i16) へ、Rg から 16 列を下って Q1 のゲート (k16) へ。
   Q1 (2N7000) は平らな面を見て左から S・G・D なので、k15 がソース、k16 がゲート、
   k17 がドレイン。ソースは 13 列を下って GND へ、ドレインは k18 から 18 列を上って
   DLED のカソード (j18) へ。DLED のアノード (h18) は RLED (e18〜g18) を通して e 行の VCC へ
 - **交差は 2 か所で、どちらも被覆線で跨ぐ**: 橙の d 行 (Ct へ) が 10 列の赤 (RESET) を、
   黄の j 行 (TRIG) が 5 列の黒 (U1 の GND) を跨ぐ。この回路は足の並びから交差を
-  0 にはできない (足4 の VCC と、足6・7 から Ct への GND が U1 の右で必ず出会う)
+  0 にはできない (PIN 4 の VCC と、PIN 6・7 から Ct への GND が U1 の右で必ず出会う)
 
 ## 見るべき値
 

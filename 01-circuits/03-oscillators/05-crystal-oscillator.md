@@ -89,7 +89,7 @@ wires:
   - j11 -- OUT.SIG gray
   - OUT.GND -- -b22 black
   - j12 -- -b12 black
-  # 使わない 4 ゲートの入力 (足5・9・11・13) を GND へ
+  # 使わない 4 ゲートの入力 (PIN 5・9・11・13) を GND へ
   - a9 -- -t9 black
   - a11 -- -t11 black
   - a13 -- -t13 black
