@@ -28,9 +28,9 @@ parts:
   C: switch b9 d9
   RpdC: resistor d9 d7 10k
   GC: ground d7
-  VCC: vcc d3
-  VCC: vcc c6
-  VCC: vcc b9
+  VCC: vcc d3 5V
+  VCC: vcc c6 5V
+  VCC: vcc b9 5V
   U1: and h14 CD4081
   U2: or h20 CD4071
   U3: not h26 CD4069
@@ -66,7 +66,7 @@ notes:
   - text g25h4 small center: "1"
   - text g26h5 small center: "2"
   - text j1 small left: "数字は IC の PIN 番号 (1 回路目を使う)"
-  - text k1 small left: "VCC は 5 V。VDD は 3 つとも PIN 14、VSS は PIN 7 (GND)。使わない入力は GND へ"
+  - text k1 small left: "VDD は 3 つとも PIN 14 (+5V)、VSS は PIN 7 (GND)。使わない入力は GND へ"
 style:
   grid: on
   pitch: 1.2
