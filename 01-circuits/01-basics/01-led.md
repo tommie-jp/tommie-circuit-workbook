@@ -41,7 +41,14 @@ board: half
 parts:
   R1: resistor b5 b10 330
   D1: led c10(A) c11(K) red
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
   - +t5 -- a5 red
   - a11 -- -t11 black
 ```

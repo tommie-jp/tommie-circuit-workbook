@@ -61,23 +61,30 @@ title: 図2 スイッチで充電・放電を切り替える
 # 5V は上の +/− レールへ。下の − レールは 28 列で上の − レールとつなぐ
 board: half
 parts:
-  R1: resistor a10 a15 1k
+  R1: resistor b10 b15 1k
   S1: slide-switch e15(1) e16(C) e17(2)
   C1: capacitor/electrolytic f16(+) i19(-) 1000uF
   R2: resistor a19 a24 1k
   D1: led b24(A) b25(K) red
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
-  - +t10 -- b10 red
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - +t10 -- a10 red
   - d16 -- g16 orange
   - h19 -- -b19 black
   - c17 -- b19 orange
-  - c25 -- -t25 black
+  - a25 -- -t25 black
   - -t28 -- -b28 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/03-rc-charge-1.svg)
 
-`R1` の下端 (`a15`) とスイッチの `1` 番 (`e15`) は同じ列 15 でつながる。
+`R1` の下端 (`b15`) とスイッチの `1` 番 (`e15`) は同じ列 15 でつながる。
 スイッチの `C` (共通) はコンデンサの + 側へ、`2` 番は放電側の `R2` へ配線した。
 コンデンサは電解なので**帯のある側 (−) を GND 側**に挿す。C1 の − (下の − レール) と
 LED のカソード (上の − レール) が同じ GND になるよう、28 列の黒線で上下の − レールを

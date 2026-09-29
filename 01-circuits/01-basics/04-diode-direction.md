@@ -57,19 +57,26 @@ title: 図2 色の違う LED と逆向きの LED
 # 上の + レール = +5V、上の − レール = GND (下のレールは使わない)
 board: half
 parts:
-  R1: resistor a5 a8 330
-  D1: led b8(A) b9(K) red
-  R2: resistor a12 a15 330
-  D2: led b15(A) b16(K) blue
-  R3: resistor a19 a22 330
-  D3: led b23(A) b22(K) red
+  R1: resistor b5 b8 330
+  D1: led c8(A) c9(K) red
+  R2: resistor b12 b15 330
+  D2: led c15(A) c16(K) blue
+  R3: resistor b19 b22 330
+  D3: led c23(A) c22(K) red
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
-  - +t5 -- c5 red
-  - c9 -- -t9 black
-  - +t12 -- c12 red
-  - c16 -- -t16 black
-  - +t19 -- c19 red
-  - c23 -- -t23 black
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - +t5 -- a5 red
+  - a9 -- -t9 black
+  - +t12 -- a12 red
+  - a16 -- -t16 black
+  - +t19 -- a19 red
+  - a23 -- -t23 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/04-diode-direction.svg)

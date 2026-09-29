@@ -49,12 +49,19 @@ title: 図2 直列 1 本と並列 2 本
 # 上のレール = +5V、下のレール = GND
 board: half
 parts:
-  R1: resistor a5 a10 1k
-  R2: resistor b10 b15 2k
-  R3: resistor d10 d15 2k
+  R1: resistor b5 b10 1k
+  R2: resistor c10 c15 2k
+  R3: resistor e10 e15 2k
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
-  - +t5 -- c5 red
-  - c15 -- -t15 black
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - +t5 -- a5 red
+  - a15 -- -t15 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/02-series-parallel.svg)
