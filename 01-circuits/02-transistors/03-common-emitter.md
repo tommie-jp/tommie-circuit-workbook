@@ -17,24 +17,30 @@ board: BB
 ## 回路図
 
 ```circuit
-title: 図1 自己バイアスのエミッタ接地増幅
+title: 図1 自己バイアスのエミッタ接地増幅 (W1 で入れ、CH2 と CH1 で比べる)
 parts:
-  V1: vsource a1 h1 5
-  G1: ground h1
+  VCC: vcc a5 5V
   R1: resistor a5 d5 20k
   R2: resistor d5 f5 10k
   G2: ground f5
   RC: resistor a7 c7 2.2k
   Q1: npn d7
   CIN: capacitor d5 d3 1u
-  IN: port d3
+  W1: sine d1 f1 l=$\mathrm{W1}$
+  M2: voltmeter d3 f3 l=$\mathrm{CH2}$
+  G4: ground f3
   RE: resistor f7 h7 1k
   G3: ground h7
   CE: capacitor f9 h9 100u
   COUT: capacitor c8 c10 1u
   OUT: port c10
+  M1: voltmeter c11 e11 l=$\mathrm{CH1}$
+  G5: ground e11
 wires:
-  - a1 -- a5 -- a7
+  - a5 -- a7
+  - d1 -- d3
+  - f1 -- f3
+  - c10 -- c11
   - d5 -- Q1.B
   - c7 -- Q1.C
   - c7 -- c8
@@ -43,11 +49,13 @@ wires:
   - h7 -- h9
 style:
   grid: on
+  pitch: 1.2
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/03-common-emitter.svg)
 
-`RE` (エミッタ抵抗) が動作点を安定させ、`CE` (バイパスコンデンサ) が交流だけ
+`+5V` は Analog Discovery の電源出力 V+ (WaveForms の Supplies で 5 V にする)。入力は W1 から `CIN` へ入れ、
+CH2 で入力を、CH1 で出力を見る。`RE` (エミッタ抵抗) が動作点を安定させ、`CE` (バイパスコンデンサ) が交流だけ
 `RE` を迂回させて利得を最大にする。`R1`・`R2` の分圧が動作点を決める。
 
 元の 9V 設計 (R1 = 47kΩ) をそのまま 5V にすると、Vb が 0.9V 弱まで下がって
@@ -67,36 +75,32 @@ Ve が 0.2V 程度しか残らず、hFE のばらつきで動作点が大きく�
 ## 実体配線図
 
 ```breadboard
-title: 図2 自己バイアスのエミッタ接地増幅
-# 上の + レール = +5V、上の − レール = GND (下のレールは使わない)
+title: 図2 自己バイアスのエミッタ接地増幅 (W1 と CH2 を入力へ、CH1 を出力へ)
+# 5V は AD の V+ から上の + レールへ、上の − レール = GND (下のレールは使わない)
 board: half
 parts:
   R1: resistor b3 b8 20k
   R2: resistor c8 c13 10k
   RC: resistor b16 b21 2.2k
   Q1: transistor f19(B) f20(C) f21(E) 2SC1815
-  CIN: capacitor d6(-) d9(+) 1uF
+  CIN: capacitor d5(-) d9(+) 1uF
   RE: resistor a24 -t24 1k
   CE: capacitor/electrolytic b24(+) b27(-) 100uF
   COUT: capacitor d21(+) d25(-) 1uF
-  IN:
-    type: device
-    at: bottom
-    label: IN
-    pins: [SIG]
-  OUT:
-    type: device
-    at: bottom
-    label: OUT
-    pins: [SIG]
-  PS:
+  AD:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: Analog Discovery
+    pins: [V+, GND, 2+, W1, 2-, 1+, 1-]
 wires:
-  - PS.+5V -- +t1 red
-  - PS.GND -- -t2 black
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
+  - AD.2+ -- a4 blue
+  - e4 -- e5 blue
+  - AD.W1 -- a5 yellow
+  - AD.2- -- -t7 black
+  - AD.1+ -- a25 orange
+  - AD.1- -- -t26 black
   - +t3 -- a3 red
   - a13 -- -t13 black
   - d8 -- g19 orange
@@ -105,15 +109,40 @@ wires:
   - g20 -- e21 blue
   - g21 -- e24 green
   - a27 -- -t27 black
-  - IN.SIG -- e6 gray
-  - OUT.SIG -- e25 gray
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/03-common-emitter.svg)
 
-`R1`/`R2` の分圧点 (列 8) と `CIN` の出力 (列 9) をベースへ (同じ穴に 2 本は挿せないので g19 と h19 に分ける)。`CIN` の左側 (列 6) が入力の取り込み口。`RC` の下端
-(列 21) がコレクタ、`RE` の上端 (列 24) がエミッタ。`CE` は `RE` と並列
-(同じ列 24 と 27 のすぐ隣)。`COUT` の右側 (列 25) が出力の取り出し口。
+5V は Analog Discovery の電源出力 V+ (赤) から上の + レールへ入れる
+(WaveForms の Supplies で V+ を 5 V にする)。この回路が流すのは 1 mA ほどなので V+ で足りる。
+
+- **ベース**: `R1`/`R2` の分圧点 (列 8) と `CIN` の + 側 (列 9) をベースへ
+  (同じ穴に 2 本は挿せないので g19 と h19 に分ける)
+- **コレクタ (列 21)**: `RC` の下端。**エミッタ (列 24)**: `RE` の上端、`CE` は `RE` と並列
+- **入力 (列 5)**: `CIN` の − 側。W1 (黄) を `a5` に、CH2 の 2+ (青) は `a4` に挿して
+  `e4`–`e5` で渡す
+- **出力 (列 25)**: `COUT` の − 側。CH1 の 1+ (橙) を `a25` に挿す
+- AD の GND・2−・1− (黒) は上の − レールへ
+
+## オシロで見る
+
+W1 を 1 kHz・10 mVpp の正弦波にする。CH2 (入力) は 2 mV/div、CH1 (出力) は 200 mV/div
+で並べる (尺度が 100 倍違うので、画面の上では入力 5 目盛・出力 3.9 目盛とほぼ同じ高さに見える)。
+
+```scope
+title: 図3 入力 (CH2) と出力 (CH1) — 出力は約 78 倍で逆位相
+time: 200us/div
+trigger: ch2 rising 0V
+ch1: {wave: sine 1kHz 780mVpp phase -180deg, range: 200mV/div}
+ch2: {wave: sine 1kHz 10mVpp, range: 2mV/div}
+measure: [vpp, freq, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/scope/03-common-emitter.svg)
+
+CH1 は約 780 mVpp で、CH2 (10 mVpp) の約 78 倍。CH2 の山で CH1 が谷になる (位相 180°)
+— 反転増幅であることが一目で分かる。10 mVpp の入力は AD の W1 では小さな設定なので、
+波形が細かく乱れて見えるときは平均 (Average) を使う。
 
 ## 部品
 
@@ -126,7 +155,7 @@ wires:
 | CIN, COUT | フィルムコンデンサ | 1 µF |
 | CE | 電解コンデンサ | 100 µF |
 | Q1 | NPN トランジスタ | 2SC1815 |
-| — | 電源 | 5V (USB) |
+| — | 電源 | Analog Discovery の V+ (5 V) |
 
 ## 見るべき値
 
@@ -135,7 +164,7 @@ wires:
 | ベース電圧 | 約 1.6 〜 1.7 V | 分圧の計算どおり |
 | エミッタ電圧 | 約 0.93 V | ベースより 0.6〜0.7V 低い |
 | コレクタ電圧 | 約 3.0 V | 動作点が VCC と GND の間の適当な位置にある |
-| 入力 10mVpp (1kHz) のときの出力 | 約 780mVpp、入力と逆位相 | 反転増幅、利得 約 78 倍 (計算値) |
+| 入力 10mVpp (1kHz) のときの出力 (CH1) | 約 780mVpp、入力と逆位相 (位相 180°) | 反転増幅、利得 約 78 倍 (計算値) |
 | CE を外したときの出力 | 約 22mVpp まで低下 | 利得が −RC/RE ≈ 2.2 倍まで落ちる |
 
 ## 出典

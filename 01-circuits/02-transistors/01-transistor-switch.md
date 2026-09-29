@@ -17,21 +17,26 @@ board: BB
 ## 回路図
 
 ```circuit
-title: 図1 NPN トランジスタで LED をスイッチする
+title: 図1 NPN トランジスタで LED をスイッチする (W1 で入れ、CH2 と CH1 で比べる)
 parts:
-  V1: vsource b2 d2 5
-  G1: ground d2
-  R1: resistor b5 d5 330
-  D1: led d5 f5
-  Q1: npn g5
-  RB: resistor g2 g4 10k
-  IN: port g2
-  G2: ground h5
+  VCC: vcc b8 5V
+  R1: resistor b8 d8 330
+  D1: led d8 f8
+  Q1: npn g8
+  RB: resistor g5 g7 10k
+  W1: square g1 i1 l=$\mathrm{W1}$
+  G1: ground i1
+  M2: voltmeter g3 i3 l=$\mathrm{CH2}$
+  G3: ground i3
+  G2: ground h8
+  M1: voltmeter f10 h10 l=$\mathrm{CH1}$
+  G4: ground h10
 wires:
-  - b2 -- b5
-  - f5 -- Q1.C
-  - g4 -- Q1.B
-  - Q1.E -- h5
+  - g1 -- g3 -- g5
+  - g7 -- Q1.B
+  - f8 -- Q1.C
+  - Q1.E -- h8
+  - f8 -- f10
 style:
   grid: on
   pitch: 1.2
@@ -39,8 +44,10 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/01-transistor-switch.svg)
 
-`IN` に 5V (スイッチや押しボタン) を入れるとベースに電流が流れ、
-トランジスタが**飽和**して LED が光る。0V (開放) にすると LED は消える。
++5V は Analog Discovery の電源出力 V+ (WaveForms の Supplies で 5 V にして入れる)。
+入力はスイッチの代わりに W1 の 0 V / 5 V の方形波で入れる。W1 が 5V のときベースに電流が流れ、
+トランジスタが**飽和**して LED が光る。0V にすると LED は消える。
+CH2 は入力 (`RB` の左端)、CH1 はコレクタ (LED のカソード) の電圧を見る。
 
 - ベース電流: I<sub>B</sub> = (5 − 0.7) / 10kΩ ≈ **0.43 mA**
 - コレクタ電流 (LED): I<sub>C</sub> = (5 − 0.2 − 2.0) / 330Ω ≈ **8.5 mA**
@@ -51,33 +58,67 @@ style:
 ## 実体配線図
 
 ```breadboard
-title: 図2 トランジスタスイッチ
-# 上のレール = +5V、下のレール = GND (上下の − レールは 30 列でつなぐ)
+title: 図2 トランジスタスイッチ (W1 と CH2 を入力へ、CH1 をコレクタへ)
+# 上の + レール = +5V (AD の V+)、上の − レール = GND (下のレールは使わない)
 board: half
 parts:
-  R1: resistor b5 b8 330
-  D1: led c8(A) c9(K) red
-  Q1: transistor f12(B) f13(C) f14(E) 2SC1815
-  RB: resistor a17 a20 10k
-  PS:
+  R1: resistor b5 b11 330
+  D1: led c11(A) c13(K) red
+  Q1: transistor e12(B) e13(C) e14(E) 2SC1815
+  RB: resistor c17 c20 10k
+  AD:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: Analog Discovery
+    pins: [V+, GND, 1-, 1+, 2+, 2-, W1]
 wires:
-  - PS.+5V -- +t1 red
-  - PS.GND -- -t2 black
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
+  - AD.1- -- -t11 black
+  - AD.1+ -- a13 orange
+  - AD.2+ -- a15 blue
+  - e15 -- e17 blue
+  - AD.2- -- -t16 black
+  - AD.W1 -- a17 yellow
   - +t5 -- a5 red
-  - d9 -- g13 orange
-  - g12 -- b20 yellow
-  - g14 -- -b14 black
-  - -t30 -- -b30 black
+  - b12 -- b20 yellow
+  - a14 -- -t14 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/01-transistor-switch.svg)
 
+部品はすべて上半分に挿し、GND はすべて上の − レールに取る (下のレールは使わない)。
+5V は Analog Discovery の V+ (赤) から上の + レールへ。
+
+- **コレクタ (列 13)**: `D1` のカソードと `Q1` の C が同じ列。CH1 の 1+ (橙) を `a13` に挿す
+- **ベース (列 12)**: 黄線 `b12`–`b20` で `RB` の右端 (列 20) へ
+- **エミッタ (列 14)**: 黒線で `a14` から − レールへ直接
+- **入力 (列 17)**: `RB` の左端。W1 (黄) を `a17` に、CH2 の 2+ (青) は `a15` に挿して `e15`–`e17` で渡す
+- AD の GND・1−・2− (黒) は上の − レールへ
+
 `Q1` は平らな面を見て左から E・C・B (2SC1815 の実物の並び)。図は B・C・E の
-順に挿すので、**平らな面を奥に向けて**挿す。`RB` の左端 (`a17`) が入力の端子。
+順に挿すので、**平らな面を奥に向けて**挿す。
+
+## オシロで見る
+
+W1 を 100 Hz・0 V / 5 V の方形波にし (目には半分の明るさで点きっぱなしに見える。点滅を目で見たいときは 1 Hz に下げる)、CH2 (入力) と CH1 (コレクタ) を同じ 1 V/div で重ねる。
+
+```scope
+title: 図3 入力 (CH2) とコレクタ (CH1) — 入力が 5 V の間だけコレクタが 0.2 V に落ちる
+time: 2ms/div
+trigger: ch2 rising 2.5V
+ch1: {wave: square 100Hz 1.65V offset 1.85V phase 180deg, range: 1V/div, position: -3div}
+ch2: {wave: square 100Hz 2.5V offset 2.5V, range: 1V/div, position: -3div}
+measure: [vmax, vmin, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/scope/01-transistor-switch.svg)
+
+CH1 は CH2 を裏返した形になる (エミッタ接地のスイッチは反転する)。入力が 5 V の間、コレクタは
+V<sub>CE(sat)</sub> ≈ **0.2 V** まで落ち、LED には (5 − 0.2 − 2.0) / 330 Ω ≈ 8.5 mA が流れる。
+入力が 0 V の間は LED にほとんど電流が流れないので、コレクタは 5 V から LED の立ち上がり手前の
+約 1.5 V を引いた**約 3.5 V** に留まる (5 V までは上がらない)。
+両端の値は Measurements の Max・Min で読む。
 
 ## 部品
 
@@ -87,7 +128,7 @@ wires:
 | RB | 抵抗 (1/4 W) | 10 kΩ |
 | D1 | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
 | Q1 | NPN トランジスタ | 2SC1815 |
-| — | 電源 | 5 V |
+| — | 電源 | Analog Discovery の V+ (5 V) |
 
 ## 見るべき値
 
@@ -95,6 +136,7 @@ wires:
 | --- | --- | --- |
 | IN = 5V のときの LED の電流 (R1 の両端 ÷ 330Ω) | 約 8.5 mA | 計算値と一致すれば飽和で動いている証拠 |
 | IN = 5V のときの Q1 の C-E 間電圧 | 約 0.2 V (V<sub>CE(sat)</sub>) | 飽和領域では非常に小さい電圧しか残らない |
+| IN = 0V のときのコレクタ (CH1) | 約 3.5 V | LED にほぼ電流が流れず、V<sub>F</sub> の手前 (約 1.5 V) だけ下がる |
 | IN = 0V (開放) のときの LED | 消える | ベース電流が無いとコレクタ電流も流れない |
 | ベース抵抗を 100kΩ に替えたとき | LED はやや暗くなる程度で点いたまま | I<sub>B</sub> が減っても hFE に余裕があるので飽和が保たれる |
 
