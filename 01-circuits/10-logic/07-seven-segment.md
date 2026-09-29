@@ -19,69 +19,63 @@ IC が CD4511。10-4 のバイナリカウンタの出力をここへつなげ�
 ```circuit
 title: 図1 CD4511でBCDを7セグメントに変換する
 parts:
-  VCC: vcc j5
-  SWA: switch j5 l5
-  RpdA: resistor l5 l3 10k
-  GA: ground l3 r90
-  VCC: vcc b8
-  SWB: switch b8 d8
-  RpdB: resistor d8 d6 10k
-  GB: ground d6 r90
-  VCC: vcc c5
-  SWC: switch c5 e5
-  RpdC: resistor e5 e3 10k
-  GC: ground e3 r90
-  VCC: vcc i8
-  SWD: switch i8 k8
-  RpdD: resistor k8 k6 10k
-  GD: ground k6 r90
-  U1: dip16 h13 CD4511
-  VCC: vcc g10e6
-  VCC: vcc f14g0
-  GND: ground h11c7 r90
-  GU1: ground j12
-  DS1: seg7 k19
-  GCOM: ground m17a5
+  VCC: vcc b2
+  SWA: switch b5 c5
+  RpdA: resistor c5 d5 10k
+  GA: ground d5
+  SWB: switch e5 f5
+  RpdB: resistor f5 g5 10k
+  GB: ground g5
+  SWC: switch h5 i5
+  RpdC: resistor i5 j5 10k
+  GC: ground j5
+  SWD: switch k5 l5
+  RpdD: resistor l5 m5 10k
+  GD: ground m5
+  U1: ic g14 CD4511
+  VCC: vcc c13a5
+  GU1: ground j14
+  DS1: seg7 g20h0e5 5161AS
+  GCOM: ground j18a5
 wires:
-  - d8 -- d12
-  - d12 |- U1.1
-  - e5 -- e11a6
-  - e11a6 |- U1.2
-  - k8 -- k11
-  - k11 |- U1.6
-  - l5 -- l11a4
-  - l11a4 |- U1.7
-  - U1.3 -| g10e6
-  - U1.4 -| g10e6
-  - U1.5 -| h11c7
-  - U1.8 -| j12
-  - U1.16 -| f14g0
-  - U1.13 -| g15i8
-  - g15i8 |- DS1.a
-  - U1.12 -| h15c4
-  - h15c4 |- DS1.b
-  - U1.11 -| h15g0
-  - h15g0 |- DS1.c
-  - U1.10 -| i14a6
-  - i14a6 |- DS1.d
-  - U1.9 -| i14e2
-  - i14e2 |- DS1.e
-  - U1.14 -| n20a4
-  - n20a4 -- n17a1
-  - n17a1 |- DS1.g
-  - U1.15 -| o20a8
-  - o20a8 -- o16a7
-  - o16a7 |- DS1.f
-  - DS1.COM1 -| m17a5
-  - DS1.COM2 -| m17a5
+  - b2 -- k2
+  - b2 -- b5
+  - e2 -- e5
+  - h2 -- h5
+  - k2 -- k5
+  - c5 -- c11a5
+  - c11a5 |- U1.INA
+  - f5 -- f11
+  - f11 |- U1.INB
+  - i5 -- i11
+  - i11 |- U1.INC
+  - l5 -- l11a5
+  - l11a5 |- U1.IND
+  - U1.VDD |- c13a5
+  - U1.LT |- d14
+  - d14 -- d13a5
+  - U1.BL |- d14a5
+  - d14a5 -- d14
+  - U1.VSS |- j14
+  - U1.LE/STROBE |- j14a5
+  - j14a5 -- j14
+  - U1.Oa -- DS1.a
+  - U1.Ob -- DS1.b
+  - U1.Oc -- DS1.c
+  - U1.Od -- DS1.d
+  - U1.Oe -- DS1.e
+  - U1.Of -- DS1.f
+  - U1.Og -- DS1.g
+  - DS1.COM1 -| j18a5
+  - DS1.COM2 -| j18a5
 notes:
-  - text j1a5 blue: "A (足7、LSB)"
-  - text a9 blue: "B (足1)"
-  - text b2a5 blue: "C (足2)"
-  - text h4 blue: "D (足6、MSB)"
+  - text b7g0 blue: "A (足7、LSB)"
+  - text e7g0 blue: "B (足1)"
+  - text h7g0 blue: "C (足2)"
+  - text k7g0 blue: "D (足6、MSB)"
 style:
   grid: on
-  pitch: 1.2
+  pitch: 1.0
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/07-seven-segment.svg)
