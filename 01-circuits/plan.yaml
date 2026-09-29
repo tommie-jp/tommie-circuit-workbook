@@ -149,15 +149,15 @@
 - { id: 9-6, tier: 100, board: BB, era: 古, title: 超再生 FM ラジオ }
 - { id: 9-7, tier: 100, board: BB, title: AM 変調 — 555 の搬送波を音声で振る }
 - { id: 9-8, tier: 100, board: BB, title: ラジオ IC (LMF501T / TA7642) }
-- { id: 9-9, tier: 200, era: 古, title: 2 石ラジオ — 高周波増幅 + 低周波増幅 }
-- { id: 9-10, tier: 200, era: 古, title: スーパーヘテロダイン (6 石、IF 455kHz) }
-- { id: 9-11, tier: 200, title: ダイオード検波とトランジスタ検波の比較 }
-- { id: 9-12, tier: 200, title: バランスドミキサー }
-- { id: 9-13, tier: 200, era: 古, title: FM 復調 — スロープ検波 }
-- { id: 9-14, tier: 200, era: 古, title: 27MHz の送受信 (トイラジコン) }
-- { id: 9-15, tier: 200, title: アンテナ — ダイポールとループ、SWR }
-- { id: 9-16, tier: 200, era: 今, title: DDS / SDR モジュール }
-- { id: 9-17, tier: 200, era: 今, title: 2.4GHz モジュール (nRF24) と Pico }
+- { id: 9-9, tier: 200, board: BB, era: 古, title: 2 石ラジオ — 高周波増幅 + 低周波増幅 }
+- { id: 9-10, tier: 200, board: BB, era: 古, title: スーパーヘテロダイン (6 石、IF 455kHz) }
+- { id: 9-11, tier: 200, board: BB, title: ダイオード検波とトランジスタ検波の比較 }
+- { id: 9-12, tier: 200, board: BB, title: バランスドミキサー }
+- { id: 9-13, tier: 200, board: BB, era: 古, title: FM 復調 — スロープ検波 }
+- { id: 9-14, tier: 200, board: BB, era: 古, title: 27MHz の送受信 (トイラジコン) }
+- { id: 9-15, tier: 200, board: BB, title: アンテナ — ダイポールとループ、SWR }
+- { id: 9-16, tier: 200, board: BB, era: 今, title: DDS / SDR モジュール }
+- { id: 9-17, tier: 200, board: BB, era: 今, title: 2.4GHz モジュール (nRF24) と Pico }
 - { id: 10-1, tier: 50, board: BB, title: ゲートの基本 — スイッチと LED で AND / OR / NOT }
 - { id: 10-2, tier: 50, board: BB, title: RS ラッチ (NAND) }
 - { id: 10-3, tier: 50, board: BB, title: 半加算器と全加算器 (XOR + AND) }
