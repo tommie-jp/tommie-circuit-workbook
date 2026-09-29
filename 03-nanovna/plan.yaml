@@ -49,9 +49,9 @@
 - { id: 3-8, tier: 100, board: PF, device: H4, title: De-embedding — 治具の S2P を引く }
 - { id: 3-9, tier: 100, board: PF, device: H4, title: SMA オス / メスとケーブルの再現性 }
 - { id: 3-10, tier: 100, board: PF, device: H4, title: 市販のテストボードと自作の比較 }
-- { id: 3-11, tier: 200, board: 銅, device: H4, title: 銅張り基板に直付け (Manhattan 式) の治具 }
-- { id: 3-12, tier: 200, board: 銅, device: H4, title: マイクロストリップの治具 — FR4 で 50 Ω の幅を計算して作る }
-- { id: 3-13, tier: 200, board: 銅, device: V2, title: GHz の治具 — 端面 SMA + 短いマイクロストリップ }
+- { id: 3-11, tier: 200, board: CB, device: H4, title: 銅張り基板に直付け (Manhattan 式) の治具 }
+- { id: 3-12, tier: 200, board: CB, device: H4, title: マイクロストリップの治具 — FR4 で 50 Ω の幅を計算して作る }
+- { id: 3-13, tier: 200, board: CB, device: V2, title: GHz の治具 — 端面 SMA + 短いマイクロストリップ }
 - { id: 3-14, tier: 200, board: PF, device: H4, title: 治具の S パラを Touchstone で保存して使い回す }
 - { id: 3-15, tier: 200, board: PF, device: H4, title: 3 端子部品の治具 (トランジスタ・SAW) }
 - { id: 3-16, tier: 200, board: PF, device: H4, title: バイアス T — 能動部品に DC を与える }
@@ -73,10 +73,10 @@
 - { id: 4-14, tier: 100, board: PF, device: H4, title: トロイダルコアの材質比較 }
 - { id: 4-15, tier: 100, board: PF, device: H4, title: リレー・スイッチの S21 }
 - { id: 4-16, tier: 100, board: PF, device: H4, title: perfboard のパターンの容量 }
-- { id: 4-17, tier: 200, board: 銅, device: V2, title: チップ部品 (0603 / 0805) の SRF を GHz で }
-- { id: 4-18, tier: 200, board: 銅, device: V2, title: フェライトビーズの GHz 特性 }
-- { id: 4-19, tier: 200, board: 銅, device: H4, title: 空芯コイルの Q を 1 GHz 手前まで }
-- { id: 4-20, tier: 200, board: 銅, device: V2, title: 抵抗のリード品とチップ品 (GHz) }
+- { id: 4-17, tier: 200, board: CB, device: V2, title: チップ部品 (0603 / 0805) の SRF を GHz で }
+- { id: 4-18, tier: 200, board: CB, device: V2, title: フェライトビーズの GHz 特性 }
+- { id: 4-19, tier: 200, board: CB, device: H4, title: 空芯コイルの Q を 1 GHz 手前まで }
+- { id: 4-20, tier: 200, board: CB, device: V2, title: 抵抗のリード品とチップ品 (GHz) }
 - { id: 4-21, tier: 200, board: PF, device: H4, title: コンデンサの Q と誘電体 (C0G vs X7R) }
 - { id: 4-22, tier: 200, board: PF, device: H4, title: 電解 vs OS-CON vs セラミック }
 - { id: 4-23, tier: 200, board: PF, device: H4, title: 巻線抵抗のインダクタンス }
@@ -99,13 +99,13 @@
 - { id: 5-12, tier: 100, board: —, device: H4, title: 平行 2 線 (ラダーライン) }
 - { id: 5-13, tier: 200, board: —, device: V2, title: GHz でのケーブル損失 (2.4 GHz) }
 - { id: 5-14, tier: 200, board: —, device: V2, title: U.FL ピグテールの損失 }
-- { id: 5-15, tier: 200, board: 銅, device: V2, title: マイクロストリップの Zo と FR4 の誘電率 }
-- { id: 5-16, tier: 200, board: 銅, device: V2, title: コプレーナ線路 }
+- { id: 5-15, tier: 200, board: CB, device: V2, title: マイクロストリップの Zo と FR4 の誘電率 }
+- { id: 5-16, tier: 200, board: CB, device: V2, title: コプレーナ線路 }
 - { id: 5-17, tier: 200, board: —, device: V2, title: セミリジッドと柔らかいケーブルの位相安定性 }
 - { id: 5-18, tier: 200, board: —, device: H4, title: ケーブルを曲げると何が変わるか }
 - { id: 5-19, tier: 200, board: —, device: V2, title: コネクタの質 (真鍮 vs 金メッキ) を GHz で }
 - { id: 5-20, tier: 200, board: —, device: V2, title: TDR の分解能と帯域 (H4 vs V2) }
-- { id: 5-21, tier: 200, board: 銅, device: V2, title: スルーホール (via) の不連続 }
+- { id: 5-21, tier: 200, board: CB, device: V2, title: スルーホール (via) の不連続 }
 - { id: 5-22, tier: 200, board: —, device: H4, title: 遅延線を群遅延で }
 - { id: 6-1, tier: 50, board: PF, device: H4, title: LC ローパス (7 次) }
 - { id: 6-2, tier: 50, board: PF, device: H4, title: LC ハイパス }
@@ -119,18 +119,18 @@
 - { id: 6-10, tier: 100, board: PF, device: H4, title: π 型と T 型 }
 - { id: 6-11, tier: 100, board: PF, device: H4, title: 部品の許容差の影響 }
 - { id: 6-12, tier: 100, board: PF, device: H4, title: セラミックフィルタ 455 kHz / 10.7 MHz }
-- { id: 6-13, tier: 200, board: 銅, device: H4, title: SAW フィルタ 433 / 915 MHz }
-- { id: 6-14, tier: 200, board: 銅, device: H4, title: マイクロストリップ LPF (ステップインピーダンス、1 GHz) }
-- { id: 6-15, tier: 200, board: 銅, device: V2, title: 2.4 GHz バンドパス (インターディジタル / ヘアピン) }
-- { id: 6-16, tier: 200, board: 銅, device: V2, title: 2.4 GHz ノッチ (スタブ) }
+- { id: 6-13, tier: 200, board: CB, device: H4, title: SAW フィルタ 433 / 915 MHz }
+- { id: 6-14, tier: 200, board: CB, device: H4, title: マイクロストリップ LPF (ステップインピーダンス、1 GHz) }
+- { id: 6-15, tier: 200, board: CB, device: V2, title: 2.4 GHz バンドパス (インターディジタル / ヘアピン) }
+- { id: 6-16, tier: 200, board: CB, device: V2, title: 2.4 GHz ノッチ (スタブ) }
 - { id: 6-17, tier: 200, board: PF, device: H4, title: QRP 送信機の高調波フィルタ (7 MHz、2 倍・3 倍を見る) }
 - { id: 6-18, tier: 200, board: —, device: H4, title: 同軸スタブのノッチ (144 / 430 MHz) }
 - { id: 6-19, tier: 200, board: PF, device: H4, title: 温度による変化 }
-- { id: 6-20, tier: 200, board: 銅, device: H4, title: ヘリカルフィルタ }
+- { id: 6-20, tier: 200, board: CB, device: H4, title: ヘリカルフィルタ }
 - { id: 6-21, tier: 200, board: PF, device: H4, title: 入出力の整合 (50 Ω 以外) がフィルタをどう歪めるか }
-- { id: 6-22, tier: 200, board: 銅, device: V2, title: コムラインの模型 }
-- { id: 6-23, tier: 200, board: 銅, device: V2, title: GPS 1.575 GHz の SAW }
-- { id: 6-24, tier: 200, board: 銅, device: V2, title: Wi-Fi 2.4 GHz の帯域外減衰 }
+- { id: 6-22, tier: 200, board: CB, device: V2, title: コムラインの模型 }
+- { id: 6-23, tier: 200, board: CB, device: V2, title: GPS 1.575 GHz の SAW }
+- { id: 6-24, tier: 200, board: CB, device: V2, title: Wi-Fi 2.4 GHz の帯域外減衰 }
 - { id: 7-1, tier: 50, board: —, device: H4, title: SWR とインピーダンスの読み方 }
 - { id: 7-2, tier: 50, board: —, device: H4, title: ダイポール (144 MHz) の調整 }
 - { id: 7-3, tier: 50, board: —, device: H4, title: ホイップ (430 MHz) の共振 }
@@ -144,12 +144,12 @@
 - { id: 7-11, tier: 100, board: —, device: H4, title: 手・近くの物の影響 }
 - { id: 7-12, tier: 100, board: —, device: H4, title: 433 / 920 MHz のモジュール用アンテナ (LoRa) }
 - { id: 7-13, tier: 200, board: —, device: V2, title: 2.4 GHz Wi-Fi / BLE ホイップ }
-- { id: 7-14, tier: 200, board: 銅, device: V2, title: 基板の逆 F アンテナ (PIFA) }
-- { id: 7-15, tier: 200, board: 銅, device: V2, title: パッチアンテナ 2.4 GHz }
-- { id: 7-16, tier: 200, board: 銅, device: V2, title: GPS 1.575 GHz セラミックアンテナ }
+- { id: 7-14, tier: 200, board: CB, device: V2, title: 基板の逆 F アンテナ (PIFA) }
+- { id: 7-15, tier: 200, board: CB, device: V2, title: パッチアンテナ 2.4 GHz }
+- { id: 7-16, tier: 200, board: CB, device: V2, title: GPS 1.575 GHz セラミックアンテナ }
 - { id: 7-17, tier: 200, board: —, device: V2, title: Wi-Fi ルータの外部アンテナ (RP-SMA) }
-- { id: 7-18, tier: 200, board: 銅, device: V2, title: 2.4 GHz の整合 (π ネットワーク、チップ部品) }
-- { id: 7-19, tier: 200, board: 銅, device: V2, title: スロットアンテナ }
+- { id: 7-18, tier: 200, board: CB, device: V2, title: 2.4 GHz の整合 (π ネットワーク、チップ部品) }
+- { id: 7-19, tier: 200, board: CB, device: V2, title: スロットアンテナ }
 - { id: 7-20, tier: 200, board: —, device: H4, title: 八木の給電点 (430 MHz) }
 - { id: 7-21, tier: 200, board: —, device: H4, title: アンテナ間の結合 — S21 で距離と偏波 }
 - { id: 7-22, tier: 200, board: —, device: H4, title: 放射効率のまね (Wheeler cap) }
@@ -162,26 +162,26 @@
 - { id: 8-3, tier: 50, board: PF, device: H4, title: アッテネータの S パラメータ }
 - { id: 8-4, tier: 100, board: PF, device: H4, title: バイアス T でトランジスタの S パラメータ }
 - { id: 8-5, tier: 100, board: PF, device: H4, title: 安定性 (K 因子) }
-- { id: 8-6, tier: 100, board: 銅, device: H4, title: LNA (MMIC) の S21 / S11 }
+- { id: 8-6, tier: 100, board: CB, device: H4, title: LNA (MMIC) の S21 / S11 }
 - { id: 8-7, tier: 100, board: PF, device: H4, title: ミキサのポート間アイソレーション }
 - { id: 8-8, tier: 100, board: PF, device: H4, title: リレー / PIN スイッチのアイソレーション }
-- { id: 8-9, tier: 200, board: 銅, device: V2, title: GHz の LNA モジュール (SPF5189Z など) }
-- { id: 8-10, tier: 200, board: 銅, device: H4, title: 方向性結合器 }
-- { id: 8-11, tier: 200, board: 銅, device: V2, title: ウィルキンソン分配器 (マイクロストリップ、2.4 GHz) }
+- { id: 8-9, tier: 200, board: CB, device: V2, title: GHz の LNA モジュール (SPF5189Z など) }
+- { id: 8-10, tier: 200, board: CB, device: H4, title: 方向性結合器 }
+- { id: 8-11, tier: 200, board: CB, device: V2, title: ウィルキンソン分配器 (マイクロストリップ、2.4 GHz) }
 - { id: 8-12, tier: 200, board: —, device: V2, title: サーキュレータ / アイソレータ (借り物) }
 - { id: 8-13, tier: 200, board: PF, device: H4, title: ダイオード検波器の S11 }
-- { id: 8-14, tier: 200, board: 銅, device: H4, title: 小電力パワーアンプの出力整合 }
+- { id: 8-14, tier: 200, board: CB, device: H4, title: 小電力パワーアンプの出力整合 }
 - { id: 8-15, tier: 200, board: PF, device: H4, title: 整合回路の設計と実測 (Smith チャート上で) }
 - { id: 8-16, tier: 200, board: PF, device: H4, title: 入出力を同時に整合する }
 - { id: 8-17, tier: 200, board: —, device: H4, title: S パラメータを Touchstone で回路シミュレータへ }
 - { id: 8-18, tier: 200, board: PF, device: H4, title: エミッタフォロアの出力インピーダンス }
 - { id: 9-1, tier: 50, board: —, device: H4, title: 1.5 GHz より上へ — スルーで 3 GHz まで見る (ケーブルとコネクタで何 dB 落ちるか) }
 - { id: 9-2, tier: 100, board: —, device: V2, title: GHz の校正 — 付属キットの限界と基準面 }
-- { id: 9-3, tier: 100, board: 銅, device: V2, title: GND を面で取る — perfboard と銅張りの差を S21 で }
+- { id: 9-3, tier: 100, board: CB, device: V2, title: GND を面で取る — perfboard と銅張りの差を S21 で }
 - { id: 9-4, tier: 100, board: —, device: V2, title: ダイナミックレンジの帯域依存 — H4 (70 / 60 / 40 dB) と V2 を測る }
 - { id: 9-5, tier: 100, board: —, device: V2, title: 手・体・机の影響 — 放射する物を測るとき }
 - { id: 9-6, tier: 200, board: —, device: V2, title: コネクタの締め付け (トルク) と再現性 }
-- { id: 9-7, tier: 200, board: 銅, device: V2, title: FR4 の誘電率 — 長さの違う 2 本の線路で }
+- { id: 9-7, tier: 200, board: CB, device: V2, title: FR4 の誘電率 — 長さの違う 2 本の線路で }
 - { id: 9-8, tier: 200, board: —, device: V2, title: ケーブルの曲げ・温度で位相が動く }
 - { id: 9-9, tier: 200, board: —, device: V2, title: ノイズと平均化 — GHz で S21 −60 dB を読む }
 - { id: 9-10, tier: 200, board: —, device: H4, title: 高調波方式のスプリアス応答 — H4 の 300 / 900 MHz の段 }
@@ -189,7 +189,7 @@
 - { id: 9-12, tier: 200, board: —, device: V2, title: Wi-Fi の混入 — 2.4 GHz を測ると周りの電波が乗る }
 - { id: 9-13, tier: 200, board: —, device: V2, title: 4.4 GHz の壁 — 5 GHz Wi-Fi は測れないことを確かめる }
 - { id: 9-14, tier: 200, board: —, device: V2, title: GHz での TDR (分解能) }
-- { id: 9-15, tier: 200, board: 銅, device: V2, title: マイクロストリップの放射 (開放端) }
+- { id: 9-15, tier: 200, board: CB, device: V2, title: マイクロストリップの放射 (開放端) }
 - { id: 9-16, tier: 200, board: —, device: V2, title: 測った S パラを回路シミュレータ (QucsStudio) で使う — GHz LNA の整合 }
 - { id: 10-1, tier: 200, board: —, device: H4, title: NanoVNA-Saver で掃引と保存を繰り返す }
 - { id: 10-2, tier: 200, board: —, device: H4, title: Touchstone を scikit-rf で図にする }

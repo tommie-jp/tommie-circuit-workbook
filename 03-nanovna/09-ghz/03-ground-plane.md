@@ -5,7 +5,7 @@ id: 9-3
 title: GND を面で取る — perfboard と銅張りの差を S21 で
 tier: 100
 source: 自作
-board: 銅
+board: CB
 device: V2
 ---
 

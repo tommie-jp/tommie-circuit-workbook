@@ -69,3 +69,10 @@ test('reads the short names bread and perf as breadboard and perfboard', () => {
   assert.deepEqual([...found].sort(), ['breadboard', 'perfboard']);
   assert.deepEqual(misspelled, []);
 });
+
+test('reads the copper fence and flags a near miss', () => {
+  const { found, misspelled } = fencesIn('```copper\n```\n\n```coper\n```\n');
+
+  assert.deepEqual([...found], ['copper']);
+  assert.deepEqual(misspelled, [{ name: 'coper', line: 4 }]);
+});

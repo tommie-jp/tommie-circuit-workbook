@@ -5,7 +5,7 @@ id: 8-6
 title: LNA (MMIC) の S21 / S11
 tier: 100
 source: 自作。ERA-3SM+ の特性と推奨回路は Mini-Circuits のデータシート
-board: 銅
+board: CB
 device: H4
 ---
 

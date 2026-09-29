@@ -12,8 +12,8 @@ import { TIERS, findBook, findChapter } from './books.mjs';
 /** front matter に書ける鍵。ここに無い鍵は書き間違いとして断る。 */
 const KEYS = new Set(['book', 'chapter', 'id', 'title', 'tier', 'source', 'board', 'tools', 'device', 'era']);
 
-/** 板の印。BB = ブレッドボード、PF = perfboard、銅 = 銅張り基板、— = 板を使わない。 */
-const BOARDS = new Set(['BB', 'PF', '銅', '—']);
+/** 板の印。BB = ブレッドボード、PF = perfboard、CB = 銅張り基板、— = 板を使わない。 */
+const BOARDS = new Set(['BB', 'PF', 'CB', '—']);
 const TOOLS = new Set(['AD', 'VNA']);
 const ERAS = new Set(['古', '今', '古/今']);
 

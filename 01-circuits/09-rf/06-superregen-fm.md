@@ -5,7 +5,7 @@ id: 9-6
 title: 超再生 FM ラジオ
 tier: 100
 source: 自作
-board: PF
+board: CB
 era: 古
 ---
 
@@ -120,106 +120,121 @@ wires:
 
 ## 実体配線図
 
-**perfboard にした理由**: この回路は 75〜110MHz で発振する。ブレッドボードに
-組む回路の目安は 3MHz 以下で、それを大きく超える。タンクの容量は 21〜41pF しかなく、
-ブレッドボードの穴どうしの容量 (数 pF 規模) と、差し直すたびに変わる接触が、同調の位置を
-ずらしてしまう。そこで、部品の足を短く切って半田付けで固定できる perfboard に組む。
-perfboard の目安 (150MHz まで、VHF) の内側なので、この回路は 1 石の自励発振で部品を足で直に
-結ぶだけの構成に合う。配線の長さと板の浮遊容量は周波数に効くので、
-発振や同調範囲は実測して確かめる。電圧 (5V) と電流 (数 mA) は perfboard の範囲に十分収まる。
+**銅張り基板にした理由**: この回路は 75〜110MHz で発振する。ブレッドボードの目安 (3MHz 以下) も
+perfboard の目安 (10MHz 以下) も大きく超える。タンクの容量は 21〜41pF しかなく、
+穴どうしの容量や、差し直すたびに変わる接触、穴ピッチに合わせて長くなる足が、同調の位置と
+発振の条件をずらしてしまう。そこで、裏を切れ目の無い GND の面にした銅張り基板に、部品を
+短い足で島から島へ渡す Manhattan 方式で組む。島は回路図の節点ごとに 1 つで、GND の節点は島にせず、
+via で裏の GND の面へ直に落とす。見積もりは次のとおり (どちらも目安で、実測はしていない)。
 
-```perfboard
-board: 7x5cm
-title: 図2 perfboard に組む (部品面から見た図)
+- **島の浮遊容量**: 一番大きい島は、タンクの節点 COL (Q1 のコレクタ・L1・C1・Cant・VC1・Raf が
+  集まる島、5×13.5mm)。裏の GND の面との間の容量は、平行板の式 C = ε<sub>0</sub>ε<sub>r</sub>A/h
+  (ε<sub>r</sub> = 4.4、h = 1.6mm、A = 67.5mm²) で **約 1.6pF**。縁の広がりを含めても 2pF 前後で、
+  タンクの容量 21〜41pF の **5〜8% (低い側の端では 4%)**。同調範囲は 110MHz 側で約 4%、
+  79MHz 側で約 2% 下がるだけで、VC1 で追える。ほかの島 (4×4mm 1 つで約 0.4pF) は、容量の大きい
+  部品 (33pF・0.1µF) に並ぶか、高周波が通らない節点なので、同調にほとんど効かない
+- **足のインダクタンス**: 直径 0.5mm の足は、L ≈ 2l[ln(4l/d) − 0.75] nH (l は cm) で **1mm あたり 0.7nH 前後**。
+  タンクの輪に入る C1 (島の間 4mm) と C2 (6mm) の足を合わせて 10mm 分で **約 7nH**、L1 (100nH) の 7% に
+  あたる。ここに配線の分を足すと、同調範囲はさらに約 3% 下がり、およそ **74〜102MHz** になる。
+  日本の FM 放送帯 (76.1〜95.0MHz) は含まれる。足を長くするほど下がるので、切り詰めて島の間を
+  詰めるのがこの組み方の効きどころ
+- **なぜ perfboard でないか**: 穴ピッチ (2.54mm) に合わせて部品を渡すので、島から島へ渡す
+  今の図より足が長くなりやすく、裏の連続した GND の面も無い。10MHz 以下の回路には十分でも、
+  100MHz 前後で GND のインダクタンスが要る回路には向かない
+
+**範囲の確認**: 電圧 5V、電流は数 mA (電力は数十 mW、100mW 以下)、周波数 75〜110MHz は、
+銅張り基板の範囲 (10MHz 超〜1GHz) に収まる。島の幅は最小 4mm (3mm 以上)。島どうしの溝は
+最小 1.5mm (0.3mm 以上)。商用電源は使わない。
+
+```copper
+board:
+  size: 70x50mm
+  ground: back
+title: 図2 銅張り基板に組む (Manhattan)
+f: 90M
+copper:
+  VCC: pad 21,8 26x4mm
+  BIAS: pad 22,20 4x4mm
+  BASE: pad 32,20 4x6mm
+  COL: pad 40.5,12.75 5x13.5mm
+  EMI: pad 44,24 12x5mm
+  ANT: pad 55,7 4x4mm
+  AF: pad 57,18 14x4mm
+  OUT: pad 55,33 4x4mm
+  GCb: pad 10,18 4x4mm
+  VCb: via 10,18
+  GB2: pad 22,32 4x4mm
+  VB2: via 22,32
+  GCq: pad 32,32 4x4mm
+  VCq: via 32,32
+  GC2: pad 42,31 4x4mm
+  VC2: via 42,31
+  GRe: pad 47,35 4x4mm
+  VRe: via 47,35
+  GVC: pad 49,12.5 4x4mm
+  VVC: via 49,12.5
+  GCaf: pad 63,30 4x4mm
+  VCaf: via 63,30
+  GEAR: pad 55,43 4x4mm
+  VEAR: via 55,43
 parts:
-  PWR:
-    type: device
-    at: -e1
-    label: 電源 5V
-    pins: "- +"
-  ANT:
-    type: device
-    at: -e13
-    label: アンテナ 20cm
-    pins: "1"
-  VC1:
-    type: device
-    at: -e22
-    label: ポリバリコン FM側
-    pins: A E
-  EAR:
-    type: device
-    at: s17
-    label: クリスタルイヤホン
-    pins: A B
-  Rb1: resistor c4 g4 10k
-  Rb2: resistor l4 p4 4.7k
-  Cb: capacitor/ceramic e1 e3 0.1u
-  Rq: resistor l5 l9 330k
-  Cq: capacitor/ceramic m9 p9 100p
-  Q1: transistor/to92 j9 j11 j13 2SC1815
-  L1: inductor/axial c11 g11 100n
-  Re: resistor l13 p13 470
-  C2: capacitor/ceramic l15 p15 33p
-  C1: capacitor/ceramic g15 k15 33p
-  Cant: capacitor/ceramic d13 g13 2.2p
-  Raf: resistor g19 l19 4.7k
-  Caf: capacitor/ceramic l21 p21 0.01u
-  Cout: capacitor/ceramic l17 o17 1u
-wires:
-  - PWR.- -- e1 black
-  - e1 -- p1 black
-  - p1 -- p4 black
-  - p4 -- p9 black
-  - p9 -- p13 black
-  - p13 -- p15 black
-  - p15 -- p18 black
-  - p18 -- p21 black
-  - p21 -- p23 black
-  - PWR.+ -- c2 red
-  - c2 -- c3 red
-  - c3 -- c4 red
-  - c4 -- c11 red
-  - c3 -- e3 red
-  - g4 -- l4 purple
-  - l4 -- l5 purple
-  - j9 -- l9 green
-  - l9 -- m9 green
-  - g11 -- j11 orange
-  - g11 -- g13 orange
-  - g13 -- g15 orange
-  - g15 -- g19 orange
-  - g19 -- g22 orange
-  - j13 -- l13 blue
-  - l13 -- l15 blue
-  - k15 -- l15 blue
-  - l19 -- l21 yellow
-  - l19 -- l17 yellow
-  - ANT.1 -- d13 white
-  - VC1.A -- g22 orange
-  - VC1.E -- p23 black
-  - o17 -- EAR.A green
-  - EAR.B -- p18 black
+  Q1: box 36,20 4x6mm 3 r180 2SC1815
+  Cb: capacitor 10,8 10,18 0.1u
+  Rb1: resistor 22,8 22,19 10k
+  Rb2: resistor 22,21 22,32 4.7k
+  Rq: resistor 23,20 31,20 330k
+  Cq: capacitor 32,22 32,32 100p
+  L1: inductor 33,8 39,8 100n
+  C1: capacitor 40,19 40,23 33p
+  C2: capacitor 42,25 42,31 33p
+  Re: resistor 47,25 47,35 470
+  Cant: capacitor 42,7 54,7 2.2p
+  VC1: capacitor 42,12.5 48,12.5
+  Raf: resistor 42.5,18 51,18 4.7k
+  Caf: capacitor 63,19 63,30 0.01u
+  Cout: capacitor 55,19 55,33 1u
+notes:
+  - text 9,3.5: 電源 + 5V
+  - text 58,6: アンテナ線 20cm
+  - text 22,37: 電源 − は裏の銅へ
+  - text 58,33: イヤホン A
+  - text 58,43: イヤホン B
 ```
 
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/perfboard/06-superregen-fm.svg)
+![銅張り基板の寸法図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/copper/06-superregen-fm.svg)
 
-- 板は 5×7cm を横に置いた 24 列 × 18 行 (標準の板の先頭で、配置が収まる)。厚みと基材は
-  既定の 1.6mm・FR-4。図は部品面から見た図で、足や被覆線は図の線どおりに半田面で通す
-- 上の c 行が +5V の筋、下の p 行が GND の筋。左端の 1 列は電源の − から p 行へ下ろした GND
-- Q1 (2SC1815) は j9・j11・j13 に足を広げて挿す。2SC1815 は平らな面を見て左から E・C・B なので、
-  平らな面を板の上側に向けて挿すと左から B・C・E (ネットリストの 1・2・3 番)。組む前に実物の平らな面と足の並びを確かめる
-- 9 列 (j9–l9–m9) がベースで、Rq の右、Cq の上、Q1 の B が集まる。
-  4 列の縦線 (g4–l4) が Rb1・Rb2・Rq の中点
-- g 行の橙の線がコレクタの母線。L1 の下端 (g11)、Cant・C1 の上、Raf の上、VC1 の A (g22) が
-  ここにつながる。VC1 は板の外に置き、E (回転子) を GND の筋 (p23) へ
-- 13 列 (l13) がエミッタ。Re・C2・C1 の下が集まる。C1 はコレクタの母線 (g15) とエミッタ (k15–l15) の間
-- Raf の下端 (l19) が Caf と Cout に分かれる。Cout の下 (o17) からイヤホンの A へ、
-  B は GND の筋 (p18) へ。A の線は GND の筋の上を跨ぐ被覆線にする
+- 板は 5×7cm を横に置いた 70×50mm (標準の板の先頭で、配置が収まる)。FR-4・1.6mm・両面 1oz。
+  表の銅は図の島だけを残して剥がし (または別の銅板の小片を貼って島にする)、**裏の銅は全面を GND に**
+  する。図の下の段が裏から見た図。丸い印が via (裏の GND へ落とす穴と、その島)。島は板の端から
+  5mm 以上離してある。1cm の余白は取れなかった
+- **図の島と回路図の節点の対応** (`copper-fence check` のネットリストと回路図の接続は一致する)
+
+  | 図の島 | 回路図の節点 (つながる足) |
+  | --- | --- |
+  | VCC | +5V (Cb の上・Rb1 の上・L1 の上)。上の帯 |
+  | COL | Q1 のコレクタ・L1 の下・C1 の上・Cant の左・VC1 の A・Raf の上 |
+  | EMI | Q1 のエミッタ・Re の上・C1 の下・C2 の上 |
+  | BIAS | Rb1 の下・Rb2 の上・Rq の上 |
+  | BASE | Q1 のベース・Rq の下・Cq の上 |
+  | ANT | Cant の右。アンテナ線をここへ半田付けする |
+  | AF | Raf の下・Caf の上・Cout の左 |
+  | OUT | Cout の右。イヤホンの A をここへ |
+  | GND (via の島) | Cb・Rb2・Cq・C2・Re・Caf の下、VC1 の E、イヤホンの B。**すべて via で裏の GND の面** |
+
+- Q1 (2SC1815) は 3 本の足を 3 つの島 (BASE・COL・EMI) へ広げて半田付けする。図の黒い四角は
+  Q1 の置き場 (足は左に 1 本、右に 2 本)。2SC1815 は平らな面を見て左から E・C・B なので、
+  平らな面を見ながら、足を E は右下の島 (EMI)、C は右上の島 (COL)、B は左の島 (BASE) へ
+  折り曲げて渡す。組む前に実物の平らな面と足の並びを確かめる
+- VC1 (ポリバリコンの FM 側) は板の外に置き、A の線を COL の島へ、E (回転子) の線を右上の
+  GND の島 (図の VC1 の右端) へ渡す。線は短く。図の VC1 の記号は、その 2 本の線の置き場
+- 電源 (5V) の + は左上の VCC の帯へ、− は裏の GND の面 (via の島のどれか、または板の端で裏の銅) へ。
+  イヤホンは板の外に置き、A を OUT の島へ、B を下の GND の島へ渡す
+- 高周波の線 (L1・C1・C2・Q1・VC1) はなるべく短く。特に C1・C2 の足は 5mm 前後にとどめる。
+  アンテナ線は 20cm ほどにとどめる (上の警告のとおり)
 - L1 は市販の 100nH (0.1µH) のアキシャルのコイル。巻いて作る必要は無い。
   受信周波数は VC1 のつまみで合わせる
-- 高周波の線 (L1・C1・C2・Q1・VC1 へ行く線) はなるべく短く。アンテナ線は 20cm ほどに
-  とどめる (上の警告のとおり)
+- 島は組む前に紙で配置を決め、切り出したら島どうしと GND の面の導通をテスターで確かめる
+  (削り残しの銅で短絡していないか)
 
 ## 見るべき値
 

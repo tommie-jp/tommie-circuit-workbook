@@ -6,7 +6,7 @@
 
 回路・Analog Discovery・NanoVNA・電験三種の 4 冊の実験帳。回路図と実体配線図は
 [tommie-fence](https://github.com/tommie-jp/tommie-fence) の Markdown フェンス
-(` ```circuit ` / ` ```breadboard ` / ` ```perfboard `)、NanoVNA の画面は ` ```vna `、オシロスコープの画面は ` ```scope `、
+(` ```circuit ` / ` ```breadboard ` / ` ```perfboard `)、銅張り基板の寸法図は ` ```copper `、NanoVNA の画面は ` ```vna `、オシロスコープの画面は ` ```scope `、
 周波数特性や特性曲線のグラフは ` ```graph ` で書く。
 
 ## 4 冊
@@ -51,14 +51,14 @@ id: 1-1                 # 章-番号 (ファイル名の番号と同じ)
 title: LED を点ける — 抵抗で電流を決める
 tier: 50                # 50 = 必須 / 100 = 入門 / 200 = 中級
 source: 自作            # 出典。借りた回路なら出所 (例: Lessons in Electric Circuits Vol. VI ch.5)
-board: BB               # 任意。BB = ブレッドボード / PF = perfboard / 銅 = 銅張り基板 / — = 板なし
+board: BB               # 任意。BB = ブレッドボード / PF = perfboard / CB = 銅張り基板 (copper board) / — = 板なし
 device: H4              # nanovna は必須 (H4 / V2)。analog-discovery は AD3 でしかできない題だけ AD3
 era: 古                 # circuits だけ、任意。古 = 知っておきたい古典 / 今 = 今の定番 / 古/今
 tools: [AD, VNA]        # 任意。2 つの計器を両方使う題
 ---
 ```
 
-本文は **説明 → 回路図 (circuit) → 実体配線図 (breadboard / perfboard) →
+本文は **説明 → 回路図 (circuit) → 実体配線図 (breadboard / perfboard)・銅張り基板の寸法図 (copper) →
 計器の設定 (NanoVNA の本は画面の図 `vna`、オシロで波形を見る題は `scope` も) → 見るべき値
 (計算した特性は `graph` のグラフも) → 出典** の順。
 

@@ -51,3 +51,12 @@ test('gives every fence a label for its image line, so none reads "undefined"', 
     assert.doesNotMatch(line, /^!\[(undefined)?\]/, fence);
   }
 });
+
+test('labels the copper fence as a dimension drawing', () => {
+  const text = '```copper\n```\n';
+
+  assert.equal(withFigures(PATH, text), [
+    '```copper', '```', '',
+    `![銅張り基板の寸法図](${PAGES_URL}/01-circuits/01-basics/copper/03-rc-charge.svg)`, '',
+  ].join('\n'));
+});
