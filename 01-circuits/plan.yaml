@@ -144,9 +144,9 @@
 - { id: 9-1, tier: 50, board: BB, title: LC 同調 — 共振を LED で見る }
 - { id: 9-2, tier: 50, board: BB, era: 古, title: ゲルマラジオ }
 - { id: 9-3, tier: 50, board: BB, era: 古, title: 1 石ラジオ (トランジスタ検波) }
-- { id: 9-4, tier: 50, board: PF, era: 古, title: FM 送信機 (1 石) }
+- { id: 9-4, tier: 50, board: CB, era: 古, title: FM 送信機 (1 石) }
 - { id: 9-5, tier: 100, board: BB, era: 古, title: 1 石レフレックスラジオ }
-- { id: 9-6, tier: 100, board: PF, era: 古, title: 超再生 FM ラジオ }
+- { id: 9-6, tier: 100, board: CB, era: 古, title: 超再生 FM ラジオ }
 - { id: 9-7, tier: 100, board: BB, title: AM 変調 — 555 の搬送波を音声で振る }
 - { id: 9-8, tier: 100, board: BB, title: ラジオ IC (LMF501T / TA7642) }
 - { id: 9-9, tier: 200, board: BB, era: 古, title: 2 石ラジオ — 高周波増幅 + 低周波増幅 }
@@ -154,7 +154,7 @@
 - { id: 9-11, tier: 200, board: BB, title: ダイオード検波とトランジスタ検波の比較 }
 - { id: 9-12, tier: 200, board: BB, title: バランスドミキサー }
 - { id: 9-13, tier: 200, board: BB, era: 古, title: FM 復調 — スロープ検波 }
-- { id: 9-14, tier: 200, board: PF, era: 古, title: 27MHz の送受信 (トイラジコン) }
+- { id: 9-14, tier: 200, board: [ CB, PF ], era: 古, title: 27MHz の送受信 (トイラジコン) }
 - { id: 9-15, tier: 200, board: CB, title: アンテナ — ダイポールとループ、SWR }
 - { id: 9-16, tier: 200, board: BB, era: 今, title: DDS / SDR モジュール }
 - { id: 9-17, tier: 200, board: BB, era: 今, title: 2.4GHz モジュール (nRF24) と Pico }

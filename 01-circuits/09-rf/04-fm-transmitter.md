@@ -5,7 +5,7 @@ id: 9-4
 title: FM 送信機 (1 石)
 tier: 50
 source: 自作
-board: PF
+board: CB
 era: 古
 ---
 
@@ -104,102 +104,114 @@ Rb2 を 2.4kΩ に下げて I<sub>C</sub> を元とほぼ同じ (3V 時 ≈0.74m
 
 ## 実体配線図
 
-FM 放送帯 (80MHz 前後) の発振回路なので、ブレッドボードではなく **perfboard (ユニバーサル基板)** に半田付けする。
+**銅張り基板にした理由**: この回路は 80MHz 前後で発振する。ブレッドボードの目安 (3MHz 以下) も
+perfboard の目安 (10MHz 以下) も大きく超える。タンクは 15pF と 260nH しかなく、穴どうしの
+容量や、穴ピッチに合わせて長くなる足が、発振周波数と発振の条件をずらしてしまう。そこで、裏を
+切れ目の無い GND の面にした銅張り基板に、部品を短い足で島から島へ渡す Manhattan 方式で組む。
+島は回路図の節点ごとに 1 つで、GND の節点は島にせず、via で裏の GND の面へ直に落とす。
+見積もりは次のとおり (どちらも目安で、実測はしていない)。
 
-```perfboard
-title: 図2 perfboard に組む (部品面から見た図)
-board: 5x7cm
-style:
-  back: on
-points:
-  VCC: c17
-  GND: q17
-  ANT: g16
+- **島の浮遊容量**: 一番大きい島は、タンクの節点 COL (Q1 のコレクタ・L1・C1・Cant が集まる島、
+  14×4mm)。裏の GND の面との間の容量は、平行板の式 C = ε<sub>0</sub>ε<sub>r</sub>A/h
+  (ε<sub>r</sub> = 4.4、h = 1.6mm、A = 56mm²) で **約 1.4pF**。縁の広がりを含めて 2pF 前後で、
+  C<sub>s</sub> = 15pF の **1 割強**。これだけで発振周波数は 80.6MHz から数 MHz 下がる。EMI の島
+  (同じ大きさ) は C2 (47pF) に並ぶので 3% ほどで、ほかの島は高周波が通らない節点か容量の
+  大きい部品に並ぶので、ほとんど効かない
+- **足のインダクタンス**: 直径 0.5mm の足は、L ≈ 2l[ln(4l/d) − 0.75] nH (l は cm) で
+  **1mm あたり 0.7nH 前後**。タンクの輪に入る C1 と C2 の足を合わせて 20mm 分で **約 14nH**、
+  L1 (260nH) の 5% にあたる。両方を足すと周波数は 80.6MHz から 7% 前後下がり、**75MHz 台**に
+  なる見込み。日本の FM 放送帯 (76〜95MHz) の低い端にあたる。**コイルの巻きを少し広げて
+  (上の「コイルの巻きを少し広げる」のとおり) 80MHz 前後へ合わせる**。足を長くするほど下がるので、
+  切り詰めて島の間を詰めるのがこの組み方の効きどころ
+- **なぜ perfboard でないか**: 穴ピッチ (2.54mm) に合わせて部品を渡すので、島から島へ渡す
+  今の図より足が長くなりやすく、裏の連続した GND の面も無い。10MHz 以下の回路には十分でも、
+  80MHz で 15pF・260nH のタンクをそろえる回路には向かない
+
+**範囲の確認**: 電圧 5V、電流 I<sub>C</sub> ≈ 0.76mA (電力は 5mW 未満、100mW 以下)、周波数 80MHz 前後は、
+銅張り基板の範囲 (10MHz 超〜1GHz) に収まる。島の幅は最小 4mm (3mm 以上)。島どうしの溝は
+最小 1.5mm (0.3mm 以上)。商用電源は使わない。
+
+```copper
+board:
+  size: 70x50mm
+  ground: back
+title: 図2 銅張り基板に組む (Manhattan)
+f: 80M
+copper:
+  VCC: pad 31,7 46x4mm
+  VA: pad 10,11 4x6mm
+  VB: pad 25,11 4x6mm
+  MIC: pad 13,24 8x4mm
+  BASE: pad 29.5,24 15x4mm
+  COL: pad 48,18 14x4mm
+  EMI: pad 48,30 14x4mm
+  ANT: pad 61,18 4x4mm
+  GCb: pad 17,16 4x4mm
+  VCb: via 17,16
+  GMIC: pad 13,34 4x4mm
+  VMIC: via 13,34
+  GC3: pad 28,36 4x4mm
+  VC3: via 28,36
+  GB2: pad 33.5,36 4x4mm
+  VB2: via 33.5,36
+  GC2: pad 47,41 4x4mm
+  VC2: via 47,41
+  GRe: pad 53,41 4x4mm
+  VRe: via 53,41
 parts:
-  MIC:
-    type: device
-    at: -d4
-    label: マイク
-    pins: GND OUT
-  Rmic: resistor c6 g6 2.2k
-  Cmic: capacitor/ceramic i6 i8 0.1u
-  Rb1: resistor c10 g10 10k
-  Rb2: resistor m10 q10 2.4k
-  C3: capacitor/ceramic m8 q8 0.001u
-  Q1: transistor i10 i12 i14 2SC1815
-  L1: inductor/axial c12 g12 260n
-  Cant: capacitor/ceramic g14 g16 2.2p
-  C1: capacitor/ceramic k12 k14 22p
-  Re: resistor m14 q14 470
-  C2: capacitor/ceramic m12 q12 47p
-  Cb: capacitor/ceramic c17 e17 0.1u
-wires:
-  # 電源 (上の c 行、赤) と GND (下の q 行、黒) の筋
-  - c6 -- c10 red
-  - c10 -- c12 red
-  - c12 -- c17 red
-  - q4 -- q8 black
-  - q8 -- q10 black
-  - q10 -- q12 black
-  - q12 -- q14 black
-  - q14 -- q17 black
-  # Cb の GND 側は右端の縁を下りて GND の筋へ
-  - e17 -- q17 black
-  # マイク
-  - MIC.GND -- q4 black
-  - MIC.OUT -- i5 green
-  - i5 -- i6 green
-  - g6 -- i6 green
-  # ベース (Rb1 の下、Cmic の右、Rb2 と C3 の上)
-  - g10 -- i10 yellow
-  - i8 -- i10 yellow
-  - i10 -- m10 yellow
-  - m8 -- m10 yellow
-  # コレクタ (L1 の下、Cant、C1)
-  - g12 -- i12 blue
-  - g12 -- g14 blue
-  - i12 -- k12 blue
-  # エミッタ (C1、Re、C2)
-  - i14 -- k14 orange
-  - k14 -- m14 orange
-  - m14 -- m12 orange
+  Cb: capacitor 17,8 17,16 0.1u
+  Rmic: resistor 10,13 10,23 2.2k
+  Cmic: capacitor 16,24 23,24 0.1u
+  Rb1: resistor 25,13 25,23 10k
+  Rb2: resistor 33.5,25 33.5,36 2.4k
+  C3: capacitor 28,25 28,36 0.001u
+  Q1: transistor/to92 36,24 43,18 43,30 2SC1815
+  L1: inductor 46.5,8 46.5,17 260n
+  C1: capacitor 50,19 50,29 22p
+  C2: capacitor 47,31 47,41 47p
+  Re: resistor 53,31 53,41 470
+  Cant: capacitor 54,18 60,18 2.2p
 notes:
-  - text f16: ANT
+  - text 9,3.5: 電源 + 5V
+  - text 57,13: アンテナ線 20cm
+  - text 3,29: マイク +
+  - text 3,39: マイク −
+  - text 17,46: 電源 − は裏の銅へ
 ```
 
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/perfboard/04-fm-transmitter.svg)
+![銅張り基板の寸法図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/copper/04-fm-transmitter.svg)
 
-### perfboard にした理由
+- 板は 5×7cm (標準の板の先頭で、配置が収まる) を横に置いた 70×50mm。FR-4・1.6mm・両面 1oz。
+  表の銅は図の島だけを残して剥がし (または別の銅板の小片を貼って島にする)、**裏の銅は全面を GND に**
+  する。図の下の段が裏から見た図。丸い印が via (裏の GND へ落とす穴と、その島)。島は板の端から
+  5mm 以上離してある。1cm の余白は取れなかった
+- **図の島と回路図の節点の対応** (`copper-fence check` のネットリストと回路図の接続は一致する)
 
-- この回路は 80MHz 前後で発振する。この教科書はブレッドボードの上に組む回路を
-  3MHz 以下としている。VHF ではブレッドボードの浮遊容量 (数 pF) と足の長さによる
-  インダクタンスが、タンクの 15pF・260nH に対して無視できない。発振周波数が
-  ずれ、発振しなくなることもある。**ブレッドボードでは組まない**
-- perfboard は足を短く切って半田付けでき、GND の筋も近くに引ける。80MHz は perfboard の
-  目安 (150MHz、VHF まで) の内側。それでも**配線の長さと板の浮遊容量が周波数に効く**ので、
-  周波数は最後にコイルの巻きの広げ具合で合わせる。部品は 1 石だけで数が少なく、
-  この題では perfboard で足りる
-- 電圧は 5V、電流は I<sub>C</sub> ≈ 0.76mA と、perfboard の電圧・電流の範囲の
-  ずっと内側。板は 5×7cm の順位の先頭で収まる (18 列 × 24 行のうち、使うのは
-  C〜Q 行・4〜17 列)
+  | 図の島 | 回路図の節点 (つながる足) |
+  | --- | --- |
+  | VCC (VA・VB の張り出しを含む) | +5V (Cb の上・L1 の上・Rb1 の上・Rmic の上)。上の帯 |
+  | MIC | Rmic の下・Cmic の左。マイクの + (OUT) をここへ |
+  | BASE | Q1 のベース・Cmic の右・Rb1 の下・Rb2 の上・C3 の上 |
+  | COL | Q1 のコレクタ・L1 の下・C1 の上・Cant の左 |
+  | EMI | Q1 のエミッタ・C1 の下・C2 の上・Re の上 |
+  | ANT | Cant の右。アンテナ線をここへ半田付けする |
+  | GND (via の島) | Cb・Rb2・C3・C2・Re の下と、マイクの −。**すべて via で裏の GND の面** |
 
-### 図の読み方
-
-- 部品面から見た図で、下に半田面 (左右が逆) も出している。上の C 行の赤が +5V、
-  下の Q 行の黒が GND の筋。部品の足で筋につなぎ、届かないところだけ被覆線で足す
-- Cb (0.1µF) は +5V と GND の間なので、右端の 17 列に GND の線を通し、
-  Cb の下の足をそこから Q 行へ落とす。アンテナ線は G16 に半田付けする
-  (図の点 ANT。**アンテナ線は 20cm ほど**にとどめる。伸ばすと電波法の範囲を超えやすい。
+- Q1 (2SC1815) は 3 本の足を 3 つの島 (BASE・COL・EMI) へ広げて半田付けする。図の黒い半円は Q1 の胴で、
+  B は左の島 (BASE)、C は右上の島 (COL)、E は右下の島 (EMI) へ渡す。2SC1815 は平らな面を見て
+  左から E・C・B なので、平らな面を見ながら足を曲げて、この 3 つの島へ渡す。
+  組む前に実物の平らな面と足の並びを確かめる
+- マイク (エレクトレット) は板の外に置き、+ の線を MIC の島へ、− の線を左下の GND の島へ渡す。
+  電源 (5V) の + は上の VCC の帯へ、− は裏の GND の面 (via の島のどれか、または板の端で裏の銅) へ
+- **アンテナ線は 20cm ほど**にとどめる (図の点 ANT の島へ半田付け。伸ばすと電波法の範囲を超えやすい。
   結合コンデンサ Cant (2.2pF) も指定どおりの小さい値で)
-- 回路図とのつながりは、`perfboard-fence check` のネットリストが回路図と同じ。
-  Q1 は書いた順に B (i10)・C (i12)・E (i14)。2SC1815 は平らな面を見て左から E・C・B なので、
-  平らな面を板の上側 (L1 側) に向けて挿すと左から B・C・E になる
-- L1 は太さ 0.6mm のエナメル線を直径 8mm の丸棒に 8 回巻き、両端を穴に合わせて
-  曲げたもの (インダクタンスは目安。実測でずれる)
-- ベース (10 列) に Rb1 (上、+5V から)・Cmic (左)・Rb2 と C3 (下、GND へ) が集まる。
-  マイクの音声は 5 列のマイクの OUT から、Rmic の下の足 (6 列) と Cmic (i6〜i8) へ入る
-- コレクタ (12 列) に L1・Cant・C1、エミッタ (14 列) に C1・Re・C2 が集まる
-- 1 つの穴には部品の足を 1 本だけ挿す
+- 高周波の線 (L1・C1・C2・Q1) はなるべく短く。特に C1・C2 の足は 10mm 前後にとどめる
+- L1 は太さ 0.6mm のエナメル線を直径 8mm の丸棒に 8 回巻き、両端を島へ合わせて
+  曲げたもの (インダクタンスは目安。実測でずれる)。巻きの広げ具合が周波数の調整になる
+- ベース (BASE) に Rb1 (上、+5V から)・Cmic (左)・Rb2 と C3 (下、GND へ) が集まる。
+  マイクの音声は MIC の島から Cmic を通ってベースへ入る
+- 島は組む前に紙で配置を決め、切り出したら島どうしと GND の面の導通をテスターで確かめる
+  (削り残しの銅で短絡していないか)
 
 ## 見るべき値
 

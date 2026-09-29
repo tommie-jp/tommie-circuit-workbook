@@ -6,7 +6,7 @@ title: 27MHz の送受信 (トイラジコン)
 tier: 200
 source: 自作
 era: 古
-board: PF
+board: [CB, PF]
 ---
 
 # 9-14 27MHz の送受信 (トイラジコン)
@@ -157,29 +157,178 @@ notes:
   (3.5−2.0)/470 **≈ 3.2mA** (目安)
 - LM358 は入力の同相範囲が GND を含むので、数十 mV の比較ができる (単電源の OP アンプを選ぶ理由)
 - 図の `opamp` 記号は LM358 (DIP8) の 2 回路目 (PIN 5〜7)。電源は PIN 8 = +5V、PIN 4 = GND。
-  使わない 1 回路目は入力 PIN 2・PIN 3 を GND へつなぐ (図4)
+  使わない 1 回路目は入力 PIN 2・PIN 3 を GND へつなぐ (図5)
 
 ## 実体配線図
 
-**perfboard にした理由**: この題の回路は **27.145MHz** で、ブレッドボードの
-上限 (板の上に組む回路は 3MHz 以下) を超える。理由は 2 つ。
+**銅張り基板にした理由**: この題の回路は **27.145MHz** で、ブレッドボードの上限
+(板の上に組む回路は 3MHz 以下) も perfboard の目安 (10MHz 以下) も超える。
+送信機のタンクと受信機の同調回路は、容量が 5〜50pF ほどと小さく、穴どうしの容量、
+差し直すたびに変わる接触、穴ピッチに合わせて長くなる足が、同調の位置を動かしてしまう。
+そこで、裏を切れ目の無い GND の面にした銅張り基板に、部品を短い足で島から島へ渡す
+Manhattan 方式で組む。島は回路図の節点ごとに 1 つで、GND の節点は島にせず、via で裏の GND の面へ
+直に落とす。見積もりは次のとおり (どちらも目安で、実測はしていない)。
 
-- **浮遊容量**: ブレッドボードは隣り合う列の間に数 pF の容量がある。
-  CT・CT2 のトリマは 5〜30pF、Cant は 2.2pF、Cc は 10pF と、数 pF が
-  そのまま効く大きさなので、板の容量で同調が動く。たとえば送信機のタンクは
-  合計 34.3pF で 27.145MHz に合う (計算値)。ここへ 3pF が足されるだけで、
-  共振は約 **1.1MHz** (26.0MHz へ) 下がる
-- **足と配線のインダクタンス**: ブレッドボードの穴と長い足・引き回しは、
-  1 本で数十 nH になる (目安)。30nH のリアクタンスは 27MHz で
-  2π×27.145MHz×30nH **≈ 5.1Ω**。C2 (100pF) のリアクタンス **≈ 58.6Ω**
-  の約 1 割で、小さい容量と直列に入ると効きが変わる
+- **島の浮遊容量**: 送信機で一番大きい島はコレクタの節点 COL (14×4mm)。裏の GND の面との間の容量は、
+  平行板の式 C = ε<sub>0</sub>ε<sub>r</sub>A/h (ε<sub>r</sub> = 4.4、h = 1.6mm、A = 56mm²) で
+  **約 1.4pF**。タンクの合計 34.3pF (27.145MHz に合う値) の約 4%、共振は約 2% (0.5MHz) 下がる。
+  受信機で一番大きい同調の島 TANK (22×4mm、88mm²) は **約 2.1pF**。合計 34.4pF の約 6%、
+  共振は約 3% (0.8MHz) 下がる。どちらもトリマ (C<sub>T</sub>・C<sub>T2</sub>) の 5〜30pF の範囲で追える。
+  送信機は水晶が周波数を決めるので、C<sub>T</sub> で高さを合わせるだけでよい
+- **足のインダクタンス**: 直径 0.5mm の足は 1mm あたり **0.7nH 前後**。C1 と C2 の足を合わせて
+  10mm 分で約 7nH、27.145MHz では 2π×27.145MHz×7nH **≈ 1.2Ω**。C2 (100pF) の
+  リアクタンス **≈ 58.6Ω** の約 2% で、足を切り詰めれば効きは小さい。ブレッドボードの穴と
+  長い足・引き回し (1 本で数十 nH、30nH で約 5.1Ω) より一桁小さい
+- **なぜ perfboard でないか**: 穴ピッチ (2.54mm) に合わせて部品を渡すので、島から島へ渡す
+  今の図より足が長くなりやすく、裏の連続した GND の面も無い。10MHz 以下の回路には十分でも、
+  27MHz で同調の容量が 30〜50pF の回路には向かない
 
-ユニバーサル基板 (perfboard) なら、部品の足を短く切って穴に半田付けし、
-GND の筋を部品のすぐそばに通せるので、浮遊容量と足の長さを小さく抑えられる。
-使える範囲は 150MHz 以下・12V 以下・電流も 1 本の線あたり数 mA なので、範囲に収まる。
-板は 5×7cm (18×24 穴、1.6mm の FR-4・両面スルーホール) の 1 枚目で、
-送信機・受信機とも部品と線の外周に 1 穴の余白を残して収まる。
-送信機と受信機は別々の板に組み、どちらも AD の V+ と GND (Supplies の 5V) から給電する。
+**範囲の確認**: 電圧 5V、電流は送信機が 1mA 弱・受信機の高周波部は 0 (電源が要らない)、
+電力は数 mW (100mW 以下)、周波数 27.145MHz は、銅張り基板の範囲 (10MHz 超〜1GHz) に収まる。
+島の幅は最小 4mm (3mm 以上)。島どうしの溝は最小 2mm (0.3mm 以上)。商用電源は使わない。
+板は 5×7cm を横に置いた 70×50mm (標準の板の先頭で、配置が収まる)。FR-4・1.6mm・両面 1oz で、
+表の銅は図の島だけを残して剥がし (または別の銅板の小片を貼って島にする)、**裏の銅は全面を GND** にする。
+島は板の端から 8mm 以上離してある。各図の下の段が裏から見た図で、丸い印は via
+(裏の GND へ落とす穴と、その島)。図の値は設計値で、切り出したら島どうしと GND の面の導通を
+テスターで確かめる (削り残しの銅で短絡していないか)。
+
+**低周波の部分を perfboard に分けた理由**: 受信機のうち、LM358 のコンパレータと LED の部分
+(図5) は、増幅段 (LM358) と電源の電流の道を持つ低周波の回路で、扱う信号は検波後の 50Hz の
+断続と DC だけ。10MHz 以下の範囲なので perfboard で足りる。これを高周波の島と同じ銅張り基板に
+載せると、切り出しと面積が高くつくうえ、LM358 の電源と LED の電流の道が同調の島の近くを通り、
+同調が乱れる。そこで受信機を**図4 (高周波部、銅張り基板) と図5 (低周波部、perfboard) の
+2 枚に分ける**。板どうしのつなぎは 2 本 — 検波の出力 (DET) と GND。GND は図4 の裏の銅から
+短い線で図5 の GND の筋 (w 行) の 1 か所へ渡す。送信機 (図3) は発振だけの 1 枚なので分けない。
+どの板も AD の V+ と GND (Supplies の 5V) から給電し、受信機の高周波部 (図4) は電源が要らない。
+図5 の入口に電源のデカップリング (0.1µF) は置かない。電流は LED の約 3mA だけで、信号は 50Hz の断続なので、電源の揺れが問題にならない (デカップリングは、電流が大きい・速い信号を扱う段で置く)。
+
+### 送信機 (銅張り基板)
+
+```copper
+board:
+  size: 70x50mm
+  ground: back
+title: 図3 送信機 (銅張り基板、Manhattan)
+f: 27.145M
+copper:
+  KEY: pad 10,14 4x4mm
+  VCC: pad 30,14 28x4mm
+  BASE: pad 20,28 20x4mm
+  COL: pad 38,20 14x4mm
+  EMI: pad 45,30 14x4mm
+  ANT: pad 56,20 4x4mm
+  GCb: pad 19,22 4x4mm
+  VCb: via 19,22
+  GX: pad 12,40 4x4mm
+  VX: via 12,40
+  GB2: pad 27,40 4x4mm
+  VB2: via 27,40
+  GC2: pad 42,40 4x4mm
+  VC2: via 42,40
+  GRe: pad 50,40 4x4mm
+  VRe: via 50,40
+parts:
+  Rb1: resistor 10,14 10,28 22k
+  X1: crystal 12,28 12,40 27.145M
+  Rb2: resistor 27,28 27,40 10k
+  Cb: capacitor 19,14 19,22 0.1u
+  Q1: transistor/to92 29,28 36,20 41,30 2SC1815
+  L1: inductor 32,14 32,20 1u
+  CT: capacitor 38,14 38,20 5-30p
+  C1: capacitor 42,20 42,30 22p
+  C2: capacitor 42,30 42,40 100p
+  Re: resistor 50,30 50,40 1k
+  Cant: capacitor 45,20 56,20 2.2p
+notes:
+  - text 4,9: W1 (キー)
+  - text 20,9: 電源 + 5V
+  - text 50,15: アンテナ線 20cm
+  - text 4,46: 電源 − は裏の銅へ
+```
+
+![銅張り基板の寸法図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/copper/14-27mhz-rc-toy-1.svg)
+
+- 板は 5×7cm を横に置いた 70×50mm。**図の島と回路図 (図1) の節点の対応**
+  (`copper-fence check` のネットリストと図1 の接続は一致する)
+
+  | 図の島 | 回路図の節点 (つながる足) |
+  | --- | --- |
+  | KEY | Rb1 の上 (W1 の線と CH2 の 2+ をここへ)。左上 |
+  | BASE | Rb1 の下・X1 の上・Rb2 の上・Q1 のベース |
+  | VCC | +5V (Cb の上・L1 の上・C<sub>T</sub> の上)。上の帯 |
+  | COL | Q1 のコレクタ・L1 の下・C<sub>T</sub> の下・C1 の上・Cant の左 |
+  | EMI | Q1 のエミッタ・Re の上・C1 の下・C2 の上 |
+  | ANT | Cant の右。アンテナの線 (20cm) をここへ半田付けする |
+  | GND (via の島 5 つ) | X1・Rb2・Cb・C2・Re の下。**すべて via で裏の GND の面** |
+
+- Q1 (2SC1815) は 3 本の足を 3 つの島 (BASE・COL・EMI) へ広げて半田付けする。図の黒い丸は
+  Q1 の胴の置き場で、足は B が左の BASE、C が上の COL、E が右下の EMI へ向かう。
+  2SC1815 は平らな面を見て左から E・C・B なので、組む前に実物の足の並びを確かめてから折り曲げる
+- 電源 (5V) の + は上の VCC の帯へ、− は裏の GND の面 (via の島のどれか、または板の端で裏の銅) へ。
+  W1 の線は左の KEY の島へ (CH2 の 2+ もここへ、2− は裏の GND へ)。
+  tinySA をつなぐときはアンテナの線を外し、ANT の島から短い同軸へ
+- 高周波の線 (L1・C<sub>T</sub>・C1・C2・Q1) はなるべく短く、特に C1・C2 の足は 5〜10mm にとどめる。
+  C<sub>T</sub> は 30pF のセラミックトリマ (図の値は範囲の 5〜30pF)
+
+### 受信機の高周波部 (銅張り基板)
+
+```copper
+board:
+  size: 70x50mm
+  ground: back
+title: 図4 受信機の高周波部 (銅張り基板、Manhattan)
+f: 27.145M
+copper:
+  ANT: pad 8,20 4x4mm
+  TANK: pad 27,20 22x4mm
+  DET: pad 50,20 12x4mm
+  GL2: pad 19,32 4x4mm
+  VL2: via 19,32
+  GCT: pad 27,32 4x4mm
+  VCT: via 27,32
+  GC3: pad 35,32 4x4mm
+  VC3: via 35,32
+  GCd: pad 46,32 4x4mm
+  VCd: via 46,32
+  GRd: pad 52,32 4x4mm
+  VRd: via 52,32
+parts:
+  Cc: capacitor 8,20 17,20 10p
+  L2: inductor 19,20 19,32 1u
+  CT2: capacitor 27,20 27,32 5-30p
+  C3: capacitor 35,20 35,32 22p
+  D1: schottky 37,20 45,20 1SS108
+  Cd: capacitor 46,20 46,32 1n
+  Rd: resistor 52,20 52,32 100k
+  NEXT: box 59,20 6x4mm 1 図5の板へ
+notes:
+  - text 4,15: アンテナ線 20cm
+  - text 40,40: 裏の GND を線で 図5 の GND へ
+  - text 40,44: 高周波部は電源が要らない
+```
+
+![銅張り基板の寸法図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/copper/14-27mhz-rc-toy-2.svg)
+
+- 板は送信機と同じ 5×7cm の横置き (70×50mm)。**図の島と回路図 (図2) の節点の対応**
+
+  | 図の島 | 回路図の節点 (つながる足) |
+  | --- | --- |
+  | ANT | Cc の左。アンテナの線 (20cm) をここへ |
+  | TANK | Cc の右・L2 の上・C<sub>T2</sub> の上・C3 の上・D1 の陽極 |
+  | DET | D1 の陰極・Cd の上・Rd の上。**検波の出力 (図5 の PIN 5 へ)** |
+  | GND (via の島 5 つ) | L2・C<sub>T2</sub>・C3・Cd・Rd の下。すべて via で裏の GND の面 |
+
+- 同調の島 TANK に L2 (19mm)・C<sub>T2</sub> (27mm)・C3 (35mm) の上端を立て、下端は via の島へ落とす。
+  D1 (1SS108) は TANK の右端から DET へ渡す。陰極は帯の側
+- 右端の箱「図5 の板へ」は DET の島の出口で、ここから図5 の**下の枠「図4 の板から」の DET の足**へ線を引く。
+  GND は図4 の裏の銅から線を 1 本、図5 の GND の足へ (箱に GND は描かない)
+- C<sub>T2</sub> は 30pF のセラミックトリマ (図の値は範囲の 5〜30pF)
+
+### 受信機の低周波部 (perfboard)
+
+**perfboard に組む範囲**: 電圧 5V、電流は LED の約 3.2mA と数百 µA のしきい値の分圧だけ
+(1 本の線あたり 500mA 以下)、信号は 50Hz の断続と DC (10MHz 以下)。板は 5×7cm (18×24 穴、
+1.6mm の FR-4・両面スルーホール) の 1 枚目で、部品と線の外周に 1 穴の余白を残して収まる。
 図は部品面から見た図で、部品の足はその穴を通して裏の半田面で半田付けする。
 
 ```perfboard
@@ -187,168 +336,75 @@ board:
   size: 5x7cm
   h: 1.6mm
   material: FR-4
-title: 図3 送信機 (perfboard 5×7cm、部品面)
-parts:
-  AD:
-    type: device
-    at: -c2
-    label: Analog Discovery
-    pins: GND 2- W1 2+ V+
-  ANT:
-    type: device
-    at: -c17
-    label: アンテナ
-    pins: "1"
-  Rb1: resistor d4 i4 22k
-  X1: crystal/hc49 i5 o5 27.145M
-  Rb2: resistor i8 o8 10k
-  Q1: transistor i11 j11 k11 2SC1815
-  L1: inductor/axial b13 f13 1u
-  CT: capacitor/ceramic b15 f15 5-30p
-  C1: capacitor/ceramic f16 k16 22p
-  Cant: capacitor/ceramic b17 f17 2.2p
-  Re: resistor k13 o13 1k
-  C2: capacitor/ceramic k15 o15 100p
-  Cb: capacitor/ceramic b7 g7 0.1u
-wires:
-  - AD.V+ -- b6 red
-  - b6 -- b7 red
-  - b7 -- b13 red
-  - b13 -- b15 red
-  - AD.GND -- o2 black
-  - AD.2- -- o3 black
-  - o2 -- o3 black
-  - o3 -- o5 black
-  - o5 -- o7 black
-  - o7 -- o8 black
-  - o8 -- o13 black
-  - o13 -- o15 black
-  - AD.W1 -- d4 yellow
-  - AD.2+ -- d5 blue
-  - d4 -- d5 blue
-  - i4 -- i5 green
-  - i5 -- i8 green
-  - i8 -- i11 green
-  - f13 -- j13 orange
-  - j13 -- j11 orange
-  - f13 -- f15 orange
-  - f15 -- f16 orange
-  - f16 -- f17 orange
-  - k11 -- k13 white
-  - k13 -- k15 white
-  - k15 -- k16 white
-  - g7 -- o7 black
-  - b17 -- ANT.1 yellow
-```
-
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/perfboard/14-27mhz-rc-toy-1.svg)
-
-- 上の b 行の赤い筋が +5V (AD の V+)、下の o 行の黒い筋が GND。
-  AD の GND と CH2 の 2− は 2・3 列を縦に降りて、GND の筋の左端 (o2・o3) へ
-- **Q1 (2SC1815) は 11 列に縦**、平らな面を右にして上から B (i11)・C (j11)・E (k11)
-- **B の筋 (緑、i 行)**: Rb1 の下端 (i4)・X1 の上端 (i5)・Rb2 の上端 (i8)・Q1 の B。
-  X1 と Rb2 の下端は、足のまま o 行の GND の筋へ
-- **キー (W1)**: 黄の線を Rb1 の上端 d4 へ。CH2 の 2+ (青) は d5 に挿して d4 と短い線で結ぶ
-- **コレクタの筋 (橙、f 行)**: L1 (13 列)・CT (15 列) の下端と C1 (16 列)・Cant (17 列) の上端を集め、
-  13 列を j13 まで下ろして j11 (Q1 の C) へ。L1 と CT の上端は b 行の +5V の筋
-- **エミッタの筋 (白、k 行)**: Q1 の E (k11) から Re (13 列)・C2 (15 列) の上端と C1 の下端 (k16) へ。
-  Re と C2 の下端は o 行の GND の筋
-- Cb (0.1µF) は 7 列で b7 と g7 の間、g7 から o7 まで線で GND の筋へ (B の筋を跨ぐ)。CT は 30pF のセラミックトリマ (図の値は最大値)
-- アンテナの線 (20cm) は Cant の上端 b17 へ
-
-```perfboard
-board:
-  size: 5x7cm
-  h: 1.6mm
-  material: FR-4
-title: 図4 受信機 (perfboard 5×7cm、部品面)
+title: 図5 受信機の低周波部 (perfboard 5×7cm、部品面)
 points:
-  NC_PIN1: m10
+  NC_PIN1: i6
 parts:
+  PREV:
+    type: device
+    at: y2
+    label: 図4 の板から
+    pins: DET GND
   AD:
     type: device
     at: -c17
     label: Analog Discovery
     pins: V+ GND
-  ANT:
-    type: device
-    at: -c3
-    label: アンテナ
-    pins: "1"
-  Cc: capacitor/ceramic b3 f3 10p
-  L2: inductor/axial f5 k5 1u
-  CT2: capacitor/ceramic f7 k7 5-30p
-  C3: capacitor/ceramic f9 k9 22p
-  D1: schottky n4 r4 1SS108
-  Cd: capacitor/ceramic r6 w6 1n
-  Rd: resistor r8 w8 100k
-  U1: dip8 m13 r90 LM358
-  Rt1: resistor k16 o16 100k
-  Rt2: resistor q16 w16 1k
-  Rled: resistor p14 t14 470
-  LED: led u14 w14 red
+  U1: dip8 i9 r90 LM358
+  Rt1: resistor e12 i12 100k
+  Rt2: resistor k12 q12 1k
+  Rled: resistor j15 n15 470
+  LED: led o15 s15 red
 wires:
-  - AD.V+ -- k17 red
-  - k17 -- k16 red
-  - k16 -- k13 red
-  - k13 -- m13 red
+  - AD.V+ -- c17 red
+  - c17 -- c12 red
+  - c12 -- c9 red
+  - c12 -- e12 red
+  - c9 -- i9 red
   - AD.GND -- w18 black
-  - k5 -- k7 black
-  - k7 -- k9 black
-  - k5 -- k2 black
-  - k2 -- s2 black
-  - s2 -- w2 black
-  - w2 -- w6 black
-  - w6 -- w8 black
-  - w8 -- w10 black
-  - w10 -- w14 black
-  - w14 -- w16 black
-  - w16 -- w18 black
-  - n10 -- o10 black
-  - o10 -- p10 black
-  - p10 -- w10 black
-  - ANT.1 -- b3 yellow
-  - f3 -- f4 yellow
-  - f4 -- f5 yellow
-  - f5 -- f7 yellow
-  - f7 -- f9 yellow
-  - f4 -- n4 yellow
-  - r4 -- r6 green
-  - r6 -- r8 green
-  - r8 -- r13 green
-  - r13 -- p13 green
-  - o13 -- o16 orange
-  - o16 -- p16 orange
-  - p16 -- q16 orange
-  - n13 -- n14 white
-  - n14 -- p14 white
-  - t14 -- u14 white
+  - w18 -- w15 black
+  - w15 -- w12 black
+  - w12 -- w6 black
+  - w6 -- w3 black
+  - PREV.GND -- w3 black
+  - l6 -- w6 black
+  - j6 -- k6 black
+  - k6 -- l6 black
+  - q12 -- w12 black
+  - s15 -- w15 black
+  - PREV.DET -- n2 green
+  - n2 -- n9 green
+  - n9 -- l9 green
+  - i12 -- k12 orange
+  - k9 -- k12 orange
+  - j9 -- j15 white
+  - n15 -- o15 white
 notes:
-  - mark r7 blue
-  - text q7 white: CH1 1+
+  - mark n9 blue
+  - text o10 white: CH1 1+
 ```
 
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/perfboard/14-27mhz-rc-toy-2.svg)
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/perfboard/14-27mhz-rc-toy.svg)
 
-- b〜f 行は同調。アンテナ (b3) → Cc (3 列) → f 行の**同調の筋 (黄)** に L2 (5 列)・CT2 (7 列)・C3 (9 列) の上端。
-  3 つの下端は k 行の GND の筋へ (CT2 は 30pF のセラミックトリマ、図の値は最大値)
-- 同調の筋から D1 (1SS108) の陽極 (n4) へ 4 列を降ろす (k 行の GND の筋を跨ぐ)。
-  陰極は帯の側 (r4)
-- **r 行 (緑) が検波の出力**: D1 の陰極 (r4)・Cd (6 列)・Rd (8 列) の上端をつなぎ、
-  r13 から p13 (LM358 の **PIN 5**) へ上げる (10 列の GND の線を跨ぐ)。
-  CH1 の 1+ は青丸の r7 に当てる (D1 の陰極 r4 に近い穴でよい)。1− は w 行の GND の筋の穴
-- U1 (LM358、DIP8) は **90 度回して**立て、右の列が上から PIN 8・7・6・5、
-  左の列が上から PIN 1・2・3・4。右下の PIN 5 (IN2+) に検波の出力が入る。足の名前は胴に刷ってある
-- **PIN 6 (o13)** に Rt1 (16 列、+5V の筋 k 行から) と Rt2 (16 列、GND の筋へ)。
-  PIN 6 から橙の線を o16 へ (14 列の白い線を跨ぐ)。ここが 49.5mV のしきい値
-- PIN 7 (n13) から白の線を降ろして Rled (14 列) → LED (14 列)。LED の陰極 (w14) は GND の筋
-- PIN 8 (m13) は k13 の +5V の筋へ。PIN 4 (p10) は 10 列を降ろして GND の筋へ。
-  使わない 1 回路目の入力 PIN 2・PIN 3 (n10・o10) も PIN 4 と線で結んで GND へ。PIN 1 (OUT1) は何もつながない
-- AD の V+ は 17 列で k17 へ、GND は 18 列を降ろして w18 へ
+- 上の c 行の赤い筋が +5V (AD の V+)、下の w 行の黒い筋が GND。AD の GND は 18 列を降ろして w18 へ。
+  図4 の板からの GND は板の下から w3 へ (2 枚の板の GND を 1 か所でつなぐ)
+- U1 (LM358、DIP8) は 6 列と 9 列をまたいで立て、左の列が上から PIN 1・2・3・4、
+  右の列が上から PIN 8・7・6・5 (足の名前は胴に刷ってある)。PIN 8 (i9) は c9 から降ろした +5V へ。
+  PIN 4 (l6) は 6 列を w6 へ降ろして GND の筋へ。使わない 1 回路目の入力 PIN 2・PIN 3 (j6・k6) も
+  PIN 4 と線で結んで GND へ。PIN 1 (OUT1) は何もつながない
+- **検波の出力 (緑)**: 図4 の板から来る DET を n2 に受け、n 行を右へ走らせて n9、そこから l9
+  (LM358 の **PIN 5**) へ上げる。途中で 6 列の GND の線を跨ぐ (図の半円)。
+  CH1 の 1+ は青丸の n9 に当てる (図4 の DET の島と同じ電位)。1− は w 行の GND の筋の穴
+- **PIN 6 (k9)** に Rt1 (12 列、上端は c12 から降ろした +5V) と Rt2 (12 列、下端は w12 の GND の筋へ)。
+  PIN 6 から橙の線を k12 へ、Rt1 の下端 i12 からも橙の線を k12 へ (j12 で白い線を跨ぐ)。
+  ここが 49.5mV のしきい値
+- PIN 7 (j9) から白の線を j15 へ、15 列を降ろして Rled → LED。LED の陰極 (s15) は w15 で GND の筋へ
 
-`perfboard-fence check` のネットリストは、回路図 (図1・図2) と同じつながりになる。
-違いは電圧計だけで、図3 の CH2 は AD の 2+・2− の線で描き、図4 の CH1 は
-1+・1− を描かずに (上のとおり r7 と GND の筋に) 当てる。
+`copper-fence check` と `perfboard-fence check` のネットリストを合わせると、回路図 (図1・図2) と
+同じつながりになる。図3 は図1 のとおり (電圧計 CH2 は KEY の島と裏の GND)。受信機は図2 の
+D1・Cd・Rd の節点 (図4 の DET) と GND が、図4 の箱「図5 の板へ」・図5 の「図4 の板から」の
+DET と GND を通ってつながる。違いは電圧計だけで、図5 の CH1 は 1+・1− を描かずに
+(上のとおり n9 と GND の筋に) 当てる。
 
 ## 計器の設定
 
@@ -359,7 +415,7 @@ notes:
 | Supplies | V+ = 5V (送信機と受信機の両方の +5V) |
 | Wavegen W1 | Square・50Hz・Amplitude 2.5V・Offset 2.5V (0〜5V) |
 | Scope CH2 | W1 (送信機のキー)。2V/div |
-| Scope CH1 | 受信機の検波の出力 (Rd の上端)。100mV/div |
+| Scope CH1 | 受信機の検波の出力 (図5 の PIN 5、Rd の上端と同じ電位)。100mV/div |
 | Scope 時間軸 | 5ms/div、トリガ CH2 の立ち上がり 2.5V |
 
 送受信のアンテナ (どちらも 20cm の線) を平行に 10cm 離して置く。
@@ -379,7 +435,7 @@ W1 を DC 5V (Offset 5V・Amplitude 0V) にして送信機を発振させたま�
 ## 計器の画面
 
 ```spectrum
-title: 図5 送信機の搬送波 (Cant の出口を 50Ω で受ける)
+title: 図6 送信機の搬送波 (Cant の出口を 50Ω で受ける)
 device: tinysa-ultra
 center: 27.145MHz
 span: 1MHz
@@ -398,7 +454,7 @@ markers: [peak]
 (タンクが 27.145MHz に合った所で一番高い)。
 
 ```scope
-title: 図6 キー (CH2) と受信機の検波出力 (CH1)
+title: 図7 キー (CH2) と受信機の検波出力 (CH1)
 time: 5ms/div
 trigger: ch2 rising 2.5V
 ch1: {wave: square 50Hz 0.15V offset 0.15V | rc 0.1ms, range: 100mV/div, position: -3div}

@@ -254,7 +254,7 @@
 | 9-1 | [LC 同調 — 共振を LED で見る](09-rf/01-lc-resonance.md) | 必須 | | BB |
 | 9-2 | [ゲルマラジオ](09-rf/02-crystal-radio.md) | 必須 | 古 | BB |
 | 9-3 | [1 石ラジオ (トランジスタ検波)](09-rf/03-one-transistor-radio.md) | 必須 | 古 | BB |
-| 9-4 | [FM 送信機 (1 石)](09-rf/04-fm-transmitter.md) | 必須 | 古 | PF |
+| 9-4 | [FM 送信機 (1 石)](09-rf/04-fm-transmitter.md) | 必須 | 古 | CB |
 | 9-5 | [1 石レフレックスラジオ](09-rf/05-reflex-radio.md) | 入門 | 古 | BB |
 | 9-6 | [超再生 FM ラジオ](09-rf/06-superregen-fm.md) | 入門 | 古 | CB |
 | 9-7 | [AM 変調 — 555 の搬送波を音声で振る](09-rf/07-am-modulation.md) | 入門 | | BB |
@@ -264,7 +264,7 @@
 | 9-11 | [ダイオード検波とトランジスタ検波の比較](09-rf/11-detector-comparison.md) | 中級 | | BB |
 | 9-12 | [バランスドミキサー](09-rf/12-balanced-mixer.md) | 中級 | | BB |
 | 9-13 | [FM 復調 — スロープ検波](09-rf/13-fm-slope-detector.md) | 中級 | 古 | BB |
-| 9-14 | [27MHz の送受信 (トイラジコン)](09-rf/14-27mhz-rc-toy.md) | 中級 | 古 | PF |
+| 9-14 | [27MHz の送受信 (トイラジコン)](09-rf/14-27mhz-rc-toy.md) | 中級 | 古 | CB / PF |
 | 9-15 | [アンテナ — ダイポールとループ、SWR](09-rf/15-antenna-dipole-loop.md) | 中級 | | CB |
 | 9-16 | [DDS / SDR モジュール](09-rf/16-dds-sdr-module.md) | 中級 | 今 | BB |
 | 9-17 | [2.4GHz モジュール (nRF24) と Pico](09-rf/17-nrf24-pico.md) | 中級 | 今 | BB |
