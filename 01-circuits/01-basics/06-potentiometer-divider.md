@@ -72,6 +72,49 @@ style:
 実際の出力がずれる** — 0-4 で見た「自作テスターの内部抵抗による誤差」と
 同じ理屈。負荷が大きいほど (RL ≫ P1 の抵抗) ずれは小さくなる。
 
+## 実体配線図
+
+図1・図2 は同じ組み方で、`RL` を挿すか抜くかだけが違う。電圧はテスター (DCV) で
+当たるので、波形を見るオシロスコープは要らない。
+
+```breadboard
+title: 図3 ポテンショメータの分圧をテスターで当たる
+# 上の赤いレール = +5V、青いレール = GND
+board: half
+parts:
+  P1: potentiometer b5(1) b6(W) b7(3) 10k
+  RL: resistor e6 e11 10k
+  MULT:
+    type: device
+    at: bottom
+    label: テスター (DCV)
+    pins: ["+", COM]
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
+wires:
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - +t5 -- a5 red
+  - a7 -- -t7 black
+  - a11 -- -t11 black
+  - MULT.+ -- d6 orange
+  - MULT.COM -- d11 gray
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/06-potentiometer-divider.svg)
+
+- `P1` の 3 本足を `b5` `b6` `b7` に挿す。端の足 `b5` が +5V 側 (赤の線で
+  上の赤いレールから `a5` へ)、反対の端 `b7` が GND 側 (黒の線で `a7` から
+  青いレールへ)、真ん中の `b6` がワイパー。
+- `RL` (10kΩ) は `e6` と `e11` に挿す。`e6` はワイパーと同じ列 6 なので
+  ジャンパ線なしでつながる。右の足の列 11 は黒の線 (`a11` → 青いレール) で GND へ。
+  図1 の無負荷を測るときは `RL` を抜く。
+- テスターの赤の棒 (+) を `d6` (ワイパーの列)、黒の棒 (COM) を `d11`
+  (GND の列) に当てる。図ではそれぞれ橙・灰の線で描いた。
+
 ## 部品
 
 | 記号 | 部品 | 値 |

@@ -55,6 +55,55 @@ style:
 感度の良い検流計ほど、わずかな不平衡でも針が振れるので、より正確に
 `R3` を追い込める — 0-4 で見た検流計の性質がここでも生きる。
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードに組む
+# 上の赤いレール = +5 V、青いレール = GND
+board: half
+parts:
+  R1: resistor b5 b9 1k
+  R3: potentiometer/trimmer d9(1) d11(W) d13(2) 2k
+  R2: resistor b20 b24 1k
+  RX: resistor d24 d28 680
+  MULT:
+    type: device
+    at: top
+    label: テスター (DCV)
+    pins: ["+", COM]
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
+wires:
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - +t5 -- a5 red
+  - +t20 -- a20 red
+  - a11 -- -t11 black
+  - a28 -- -t28 black
+  - MULT.+ -- a9 orange
+  - MULT.COM -- a24 gray
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/07-wheatstone-bridge.svg)
+
+直流のブリッジなので、波形を見る必要はない。検流計の代わりに
+**テスター (DCV)** を 2 つの中点の間に当て、差の電圧が 0 V になるまで
+`R3` を回す。
+
+- 左の腕: `R1` (1 kΩ) を **b5〜b9**、`R3` (2 kΩ の半固定抵抗) を
+  **d9 (1)・d11 (W)・d13 (2)** に挿す。列 9 で `R1` と `R3` がつながり、
+  ここが中点 A になる。`R3` は 1 と W の間を可変抵抗として使い、
+  2 の足 (13 列) はどこにもつながない
+- 右の腕: `R2` (1 kΩ) を **b20〜b24**、`RX` (680 Ω) を **d24〜d28** に挿す。
+  列 24 が中点 B
+- 赤の線は + だけ: `+t5 → a5`、`+t20 → a20` で `R1` `R2` の上端に 5 V を配る
+- 黒の線は GND だけ: `a11 → -t11` (`R3` の W)、`a28 → -t28` (`RX` の下端)
+- テスターは + (橙) を **a9** (中点 A)、COM (灰) を **a24** (中点 B) に挿す。
+  読みが V<sub>A</sub> − V<sub>B</sub> で、0 V なら平衡
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -62,7 +111,7 @@ style:
 | R1, R2 | 抵抗 (1/4 W、精度の良いもの) | 1 kΩ |
 | R3 | 可変抵抗 (値の分かる箱、または多回転トリマ) | 0〜2 kΩ 程度 |
 | RX | 抵抗 (測りたい未知の抵抗、ここでは正解 680Ω) | 680 Ω |
-| GA | 検流計 | — |
+| GA | 検流計 (ブレッドボードではテスターの DCV で代用) | — |
 | — | 電源 | 5V (USB) |
 
 ## 見るべき値
