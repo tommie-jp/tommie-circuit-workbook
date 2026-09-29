@@ -177,6 +177,7 @@
 - { id: 10-17, tier: 200, era: 今, title: レベル変換 (3.3V ↔ 5V) }
 - { id: 10-18, tier: 200, era: 今, title: I2C バスの電気 — プルアップと容量 }
 - { id: 10-19, tier: 200, era: 古, title: 電子サイコロ (4017 + 555) }
+- { id: 10-20, tier: 200, board: BB, title: 4 ビット CPU のようなもの — カウンタとメモリと命令 }
 - { id: 11-1, tier: 50, board: BB, era: 今, title: Pico の L チカ }
 - { id: 11-2, tier: 50, board: BB, era: 今, title: ボタン入力とプルアップ }
 - { id: 11-3, tier: 100, era: 今, title: ADC で CdS を読む }
