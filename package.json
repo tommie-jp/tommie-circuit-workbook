@@ -18,7 +18,7 @@
     "all": "npm test && npm run lint && npm run check"
   },
   "devDependencies": {
-    "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.19.1/breadboard-fence-0.19.1.tgz",
+    "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.20.0/breadboard-fence-0.20.0.tgz",
     "circuit-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/circuit-fence-v0.21.0/circuit-fence-0.21.0.tgz",
     "graph-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/graph-fence-v0.2.0/graph-fence-0.2.0.tgz",
     "markdownlint-cli": "^0.49.1",
