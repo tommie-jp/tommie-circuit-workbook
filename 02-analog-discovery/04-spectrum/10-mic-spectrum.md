@@ -28,16 +28,16 @@ parts:
   VCC: vcc d1
   R2: resistor d1 d3 100k
   Q1: npn f5
-  VCC: vcc h1
-  RC: resistor h1 h3 470
-  G2: ground f8
-  C2: capacitor h3 j3 1u
-  M1: voltmeter j3 l3 l=$\mathrm{CH1}$
-  G3: ground l3
+  VCC: vcc c7
+  RC: resistor c7 e7 470
+  G2: ground h5
+  C2: capacitor e7 e9 1u
+  M1: voltmeter e9 h9 l=$\mathrm{CH1}$
+  G3: ground h9
 wires:
   - d3 |- Q1.B
-  - Q1.C -| h3
-  - Q1.E -| f8
+  - Q1.C |- e7
+  - Q1.E |- h5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/10-mic-spectrum.svg)
