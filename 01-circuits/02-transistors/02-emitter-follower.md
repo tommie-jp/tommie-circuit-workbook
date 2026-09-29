@@ -85,11 +85,9 @@ wires:
   - AD.V+ -- +t24 red
   - AD.GND -- -t1 black
   - AD.2- -- -t2 black
-  - AD.2+ -- a3 blue
-  - e3 -- e4 blue
+  - AD.2+ -- b4 blue
   - AD.W1 -- a4 yellow
-  - AD.1+ -- a20 orange
-  - e18 -- e20 orange
+  - AD.1+ -- c18 orange
   - AD.1- -- -t21 black
   - +t5 -- a5 red
   - +t12 -- a12 red
@@ -106,9 +104,9 @@ wires:
 - **エミッタ (列 14)**: `RE` と `COUT` の + 側が同じ列。`R2`・`RE`・`RL` は
   − レールへ縦に挿す
 - **入力 (列 4)**: `CIN` の − 側。Analog Discovery の W1 (黄) を `a4` に、
-  CH2 の 2+ (青) は `a3` に挿して `e3`–`e4` で渡す
-- **出力 (列 18)**: `COUT` の − 側と `RL`。CH1 の 1+ (橙) は `a20` に挿して
-  `e18`–`e20` で渡す
+  CH2 の 2+ (青) はそのすぐ下の `b4` に挿す
+- **出力 (列 18)**: `COUT` の − 側と `RL`。CH1 の 1+ (橙) は
+  空いている `c18` に挿す
 - AD の GND・2−・1− (黒) は上の − レールへ
 
 ## オシロで見る
