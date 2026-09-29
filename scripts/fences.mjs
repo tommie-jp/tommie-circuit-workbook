@@ -8,7 +8,7 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
-export const FENCES = ['circuit', 'breadboard', 'perfboard', 'vna', 'scope', 'graph'];
+export const FENCES = ['circuit', 'breadboard', 'perfboard', 'vna', 'scope', 'spectrum', 'graph'];
 
 /**
  * 短い綴り。breadboard-fence 0.13.0・perfboard-fence 0.11.0 からこちらが正で、長い綴りは

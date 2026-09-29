@@ -28,6 +28,7 @@ const LABELS = {
   perfboard: 'ユニバーサル基板の実体配線図',
   vna: 'NanoVNA の画面',
   scope: 'オシロスコープの画面',
+  spectrum: 'スペクトラムアナライザの画面',
   graph: 'グラフ',
 };
 
