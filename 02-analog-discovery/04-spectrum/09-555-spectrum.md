@@ -20,42 +20,39 @@ NE555 の標準的な非安定接続は**デューティ比が必ず 50% を超�
 ```circuit
 title: 図1 555 の非安定発振
 parts:
-  U1: dip8 f6 NE555
-  G1: ground c6
-  VCC: vcc d7
-  Ra: resistor d8 e8 1k
-  Rb: resistor e8 e10 10k
-  Ct: capacitor e12 h12 68n
-  G2: ground h12
-  VCC: vcc h6
-  Ccv: capacitor h7 j7 10n
-  G3: ground j7
+  U1: ic e6 NE555
+  VCC: vcc b2
+  Ra: resistor b2 c2 1k
+  Rb: resistor d2f0 f2f0 10k
+  Ct: capacitor f4f0 h4f0 68n
+  G2: ground h4f0
+  G1: ground h6f0
+  Ccv: capacitor g8 h8f0 10n
+  G3: ground h8f0
   AD:
     type: device
-    at: f16
+    at: d11
     label: Analog Discovery
     pins: [V+, 1+, 1-, GND]
-  VCC: vcc d15
-  G7: ground h15
+  VCC: vcc b10
+  G7: ground f10
 wires:
-  - U1.1 -| c5
-  - c5 -- c6
-  - U1.2 -| b4
-  - b4 -- b10 -- e10
-  - U1.8 -| d7
-  - d7 -- d8
-  - U1.7 -| e8
-  - U1.6 -| e10
-  - e10 -- e12
-  - U1.4 -| h5
-  - h5 -- h6
-  - U1.5 -| h7
-  - U1.3 -| a3
-  - a3 -- a14
-  - a14 |- AD.1+
-  - AD.V+ -| d15
-  - AD.1- -| h15
-  - AD.GND -| h15
+  - b2 -- b6a5
+  - U1.VCC |- b6
+  - U1.RESET |- b6a5
+  - c2 -- d2f0
+  - U1.DISCH -| d2f0
+  - U1.THRES -| e4
+  - U1.TRIG -| e4f0
+  - e4 -- f4f0
+  - f2f0 -- f4f0
+  - U1.GND |- h6f0
+  - U1.CONT |- g8
+  - U1.OUT -| e9
+  - e9 |- AD.1+
+  - AD.V+ -| b10
+  - AD.1- -| f10
+  - AD.GND -| f10
 style:
   grid: on
 ```
