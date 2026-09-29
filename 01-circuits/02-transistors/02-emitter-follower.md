@@ -135,15 +135,15 @@ CH1 は CH2 の約 0.97 倍 (0.97 Vpp) で、2 本の山と谷がほぼ重なる
 W1 と CH1・CH2 の代わりに NanoVNA をつなぎ (図4)、50 kHz〜100 MHz の通り方 (S21) を見る (図5)。
 
 - `CIN` の − 側 (入力の列 4) に CH0 (アッテネータを通す)、`COUT` の − 側 (出力の列 18) に
-  CH1 をつなぐ。**RL は外す** — CH1 の 50 Ω がそのまま負荷になる。NanoVNA の GND は − レールへ
-  (板につなぐ線は SMA の短いケーブルかクリップで、できるだけ短く)
+  CH1 をつなぐ (図4)。**RL は外す** — CH1 の 50 Ω がそのまま負荷になる。板へは SMA-クリップのケーブルで、**芯線と外皮を組で**挿す。外皮は信号の穴のすぐ隣の
+  − レールへ、線はできるだけ短く (GND の戻りが長いと 10 MHz あたりから特性が崩れる)
 - NanoVNA の出力はこの回路には大きすぎる (出力が 50 Ω を駆動するとエミッタの
   0.83 mA では下の半分が切れる)。**CH0 に 20 dB の SMA アッテネータを付け、
   付けたまま THRU で校正する** (アッテネータの分は校正で消える)
 - 電源は今までどおり AD の V+ (5 V)
 
 ```breadboard
-title: 図4 NanoVNA をつなぐ (CH0 は 20 dB のアッテネータを通す、RL は外す)
+title: 図4 NanoVNA をつなぐ (芯線と外皮を組で、RL は外す)
 board: half
 parts:
   R1: resistor b5 b10 22k
@@ -152,26 +152,26 @@ parts:
   Q1: transistor e10(B) e12(C) e14(E) 2SC1815
   RE: resistor a14 -t14 1k
   COUT: capacitor/electrolytic b14(+) b18(-) 10uF
-  VNA:
+  CH0:
     type: device
     at: top
-    label: NanoVNA
-    pins: [CH0, CH1, GND]
-  ATT:
+    label: CH0 (20 dB ATT 経由)
+    pins: [外皮, 芯線]
+  CH1:
     type: device
     at: top
-    label: 20 dB アッテネータ
-    pins: [OUT, IN]
+    label: CH1
+    pins: [芯線, 外皮]
   AD:
     type: device
     at: top
     label: AD (電源)
     pins: [GND, V+]
 wires:
-  - VNA.CH0 -- ATT.IN yellow
-  - ATT.OUT -- a4 yellow
-  - VNA.CH1 -- a18 orange
-  - VNA.GND -- -t19 black
+  - CH0.芯線 -- a4 yellow
+  - CH0.外皮 -- -t3 black
+  - CH1.芯線 -- a18 orange
+  - CH1.外皮 -- -t19 black
   - AD.GND -- -t24 black
   - AD.V+ -- +t25 red
   - +t5 -- a5 red
