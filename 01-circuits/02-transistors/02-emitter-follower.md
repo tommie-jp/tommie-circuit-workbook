@@ -17,27 +17,34 @@ board: BB
 ## 回路図
 
 ```circuit
-title: 図1 エミッタフォロア
+title: 図1 エミッタフォロア (W1 で入れ、CH2 と CH1 で比べる)
 parts:
-  V1: vsource b11 d11 5
-  G1: ground d11
-  R1: resistor b5 d5 22k
-  R2: resistor d5 f5 10k
-  G2: ground f5
-  Q1: npn d7
-  CIN: ecap d4 d2 10u
-  IN: port d2
-  RE: resistor f7 h7 1k
-  G3: ground h7
-  COUT: ecap f7 f10 10u
-  RL: resistor f10 h10 1k
-  G4: ground h10
-  OUT: port f10
+  V1: vsource b12 d12 5
+  G1: ground d12
+  R1: resistor b6 d6 22k
+  R2: resistor d6 f6 10k
+  G2: ground f6
+  Q1: npn d8
+  CIN: ecap d5 d4 10u
+  W1: sine d2 f2 l=$\mathrm{W1}$
+  M2: voltmeter d4 f4 l=$\mathrm{CH2}$
+  G5: ground f4
+  RE: resistor f8 h8 1k
+  G3: ground h8
+  COUT: ecap f8 f11 10u
+  RL: resistor f11 h11 1k
+  G4: ground h11
+  OUT: port f11
+  M1: voltmeter f13 h13 l=$\mathrm{CH1}$
 wires:
-  - b5 -- b7 -- b11
-  - b7 -- Q1.C
-  - d4 -- d5 -- Q1.B
-  - Q1.E -- f7
+  - b6 -- b8 -- b12
+  - b8 -- Q1.C
+  - d5 -- d6 -- Q1.B
+  - Q1.E -- f8
+  - d2 -- d4
+  - f2 -- f4
+  - f11 -- f13
+  - h11 -- h13
 style:
   grid: on
   pitch: 1.2
@@ -58,35 +65,75 @@ style:
 ## 実体配線図
 
 ```breadboard
-title: 図2 エミッタフォロア
-# 5V は上の +/− レールへ。下の + レールは 30 列で上の + レールとつなぐ
+title: 図2 エミッタフォロア (W1 と CH2 を入力へ、CH1 を出力へ)
+# 5V は上の +/− レールへ直接入れる (下のレールは使わない)
 board: half
 parts:
-  R1: resistor a3 a8 22k
-  R2: resistor b8 b13 10k
-  Q1: transistor f16(B) f17(C) f18(E) 2SC1815
-  CIN: capacitor/electrolytic c11(-) c14(+) 10uF
-  RE: resistor a20 a23 1k
-  COUT: capacitor/electrolytic b20(+) b26(-) 10uF
-  RL: resistor c26 c29 1k
+  R1: resistor b5 b10 22k
+  R2: resistor a10 -t10 10k
+  CIN: capacitor/electrolytic d4(-) d10(+) 10uF
+  Q1: transistor e10(B) e12(C) e14(E) 2SC1815
+  RE: resistor a14 -t14 1k
+  COUT: capacitor/electrolytic b14(+) b18(-) 10uF
+  RL: resistor a18 -t18 1k
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery
+    pins: [GND, 2-, 2+, W1, 1+, 1-]
+  PS:
+    type: device
+    at: top
+    label: 電源 5V (USB)
+    pins: [+5V, GND]
 wires:
-  - +t3 -- c3 red
-  - c8 -- g16 orange
-  - c13 -- -t13 black
-  - d14 -- g16 yellow
-  - g17 -- +b17 red
-  - g18 -- d20 blue
-  - d23 -- -t23 black
-  - d29 -- -t29 black
-  - +t30 -- +b30 red
+  - PS.+5V -- +t28 red
+  - PS.GND -- -t29 black
+  - AD.GND -- -t1 black
+  - AD.2- -- -t2 black
+  - AD.2+ -- a3 blue
+  - e3 -- e4 blue
+  - AD.W1 -- a4 yellow
+  - AD.1+ -- a20 orange
+  - e18 -- e20 orange
+  - AD.1- -- -t21 black
+  - +t5 -- a5 red
+  - +t12 -- a12 red
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/02-emitter-follower.svg)
 
-`R1`・`R2` の分圧点 (列 8) がベース、`RE` の上端 (列 20) がエミッタ。
-`Q1` のコレクタ (`f17`) は直接 +5V レールへ (下の + レール。30 列の赤線で上の
-+5V レールとつなぐ)。`CIN` の左端 (`c11`) が
-信号の入り口 (音声入力など)。
+部品はすべて上半分に挿し、電源 5V (USB) は上の + / − レールへ直接入れる。
+
+- **ベース (列 10)**: `R1` の右端・`R2` の上端・`CIN` の + 側・`Q1` の B が同じ列に
+  並ぶので、線は要らない。`R1` の左端 (列 5) は赤線で +5V へ
+- **コレクタ (列 12)**: 赤線で +5V レールへ直接
+- **エミッタ (列 14)**: `RE` と `COUT` の + 側が同じ列。`R2`・`RE`・`RL` は
+  − レールへ縦に挿す
+- **入力 (列 4)**: `CIN` の − 側。Analog Discovery の W1 (黄) を `a4` に、
+  CH2 の 2+ (青) は `a3` に挿して `e3`–`e4` で渡す
+- **出力 (列 18)**: `COUT` の − 側と `RL`。CH1 の 1+ (橙) は `a20` に挿して
+  `e18`–`e20` で渡す
+- AD の GND・2−・1− (黒) は上の − レールへ
+
+## オシロで見る
+
+W1 を 1 kHz・1 Vpp の正弦波にし、CH2 (入力) と CH1 (出力) を同じ 200 mV/div で重ねる。
+
+```scope
+title: 図3 入力 (CH2) と出力 (CH1) — 振幅はほぼ同じ、位相も揃う
+time: 200us/div
+trigger: ch2 rising 0V
+ch1: {wave: sine 1kHz 0.97Vpp, range: 200mV/div}
+ch2: {wave: sine 1kHz 1Vpp, range: 200mV/div}
+measure: [vpp, freq, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/scope/02-emitter-follower.svg)
+
+CH1 は CH2 の約 0.97 倍 (0.97 Vpp) で、2 本の山と谷がほぼ重なる。反転しないこと、
+電圧がほぼ 1 倍のまま出ることが一目で分かる。結合コンデンサ (10 µF) と 1 kΩ の
+遮断周波数は約 16 Hz なので、1 kHz では位相のずれは 1° ほどで画面では見えない。
 
 ## 部品
 
