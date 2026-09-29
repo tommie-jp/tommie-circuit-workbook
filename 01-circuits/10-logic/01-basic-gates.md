@@ -57,14 +57,14 @@ wires:
   - U3.out -- h28
 notes:
   # IC の足の番号 (ゲート 1 回路目)
-  - text g12h7 small center: "1"
-  - text h12c7 small center: "2"
-  - text g15h3 small center: "3"
-  - text g18h7 small center: "1"
-  - text h18c7 small center: "2"
-  - text g21h3 small center: "3"
-  - text g24h7 small center: "1"
-  - text g27h3 small center: "2"
+  - text g12g8 small center: "1"
+  - text h12e8 small center: "2"
+  - text g14h2 small center: "3"
+  - text g18g8 small center: "1"
+  - text h18e8 small center: "2"
+  - text g20h2 small center: "3"
+  - text g25h4 small center: "1"
+  - text g26h5 small center: "2"
   - text j1 small left: "数字は IC の足の番号 (1 回路目を使う)"
   - text k1 small left: "VDD は 3 つとも足 14 (VCC)、VSS は足 7 (GND)。使わない入力は GND へ"
 style:
