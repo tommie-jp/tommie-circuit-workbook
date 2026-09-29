@@ -74,8 +74,8 @@ board: half
 parts:
   RC: resistor b5 b8 470
   D1: led c8(A) c9(K) red
-  Q1: transistor f12(B) f13(C) f14(E) 2SC1815
-  Q2: transistor f17(B) f18(C) f19(E) 2SC1815
+  Q1: transistor h12(B) h13(C) h14(E) 2SC1815
+  Q2: transistor h17(B) h18(C) h19(E) 2SC1815
   RB: resistor b21 b24 1M
   AD:
     type: device
@@ -100,13 +100,13 @@ wires:
   - AD.2+ -- a20 blue
   - AD.2- -- -t19 black
   - +t5 -- a5 red
-  - d9 -- g13 orange
+  - d9 -- f13 orange
   - a24 -- -t24 black
-  - e21 -- g12 yellow
+  - e21 -- f12 yellow
   - d20 -- d21 blue
-  - g14 -- g17 blue
-  - g18 -- h13 orange
-  - g19 -- -b19 black
+  - f14 -- f17 blue
+  - g18 -- g13 orange
+  - j19 -- -b19 black
   - -t28 -- -b28 black
   - TP1.A -- +t26 red
   - TP2.B -- a21 gray
@@ -118,8 +118,10 @@ wires:
 上の + レールへ入れる (WaveForms の Supplies で V+ を 5 V にして入れる)。
 流れるのは LED の約 5.5 mA だけなので V+ で足りる。
 
-- `Q1` のエミッタ (`f14`) は `Q2` のベース (`f17`) へ。`Q1`・`Q2` のコレクタは
-  どちらも LED のカソード側 (`g13`) へまとめて配線する
+- `Q1`・`Q2` は下のブロックの h 行 (`h12`〜`h14`・`h17`〜`h19`)。上の f・g 行を線の通り道にする
+- `Q1` のエミッタ (`f14`) は `Q2` のベース (`f17`) へ青の線。LED のカソード (`d9`) は `Q1` の
+  コレクタの列 (`f13`) へ、`Q2` のコレクタ (`g18`) も同じ列の `g13` へ橙の線
+- `Q2` のエミッタは `j19` から下の − レールへ
 - `TP1` は上の + レール (`+t26`)、`TP2` は `RB` の上端 (列 21) へ。列 21 は
   黄線で `Q1` のベースにもつながる
 - **CH1 (1+、橙)** は LED のカソードの列 9 (`a9`) — コレクタの電圧を見る
