@@ -265,7 +265,7 @@
 | 9-12 | [バランスドミキサー](09-rf/12-balanced-mixer.md) | 中級 | | BB |
 | 9-13 | [FM 復調 — スロープ検波](09-rf/13-fm-slope-detector.md) | 中級 | 古 | BB |
 | 9-14 | [27MHz の送受信 (トイラジコン)](09-rf/14-27mhz-rc-toy.md) | 中級 | 古 | PF |
-| 9-15 | [アンテナ — ダイポールとループ、SWR](09-rf/15-antenna-dipole-loop.md) | 中級 | | PF |
+| 9-15 | [アンテナ — ダイポールとループ、SWR](09-rf/15-antenna-dipole-loop.md) | 中級 | | CB |
 | 9-16 | [DDS / SDR モジュール](09-rf/16-dds-sdr-module.md) | 中級 | 今 | BB |
 | 9-17 | [2.4GHz モジュール (nRF24) と Pico](09-rf/17-nrf24-pico.md) | 中級 | 今 | BB |
 

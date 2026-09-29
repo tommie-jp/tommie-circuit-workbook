@@ -155,7 +155,7 @@
 - { id: 9-12, tier: 200, board: BB, title: バランスドミキサー }
 - { id: 9-13, tier: 200, board: BB, era: 古, title: FM 復調 — スロープ検波 }
 - { id: 9-14, tier: 200, board: PF, era: 古, title: 27MHz の送受信 (トイラジコン) }
-- { id: 9-15, tier: 200, board: PF, title: アンテナ — ダイポールとループ、SWR }
+- { id: 9-15, tier: 200, board: CB, title: アンテナ — ダイポールとループ、SWR }
 - { id: 9-16, tier: 200, board: BB, era: 今, title: DDS / SDR モジュール }
 - { id: 9-17, tier: 200, board: BB, era: 今, title: 2.4GHz モジュール (nRF24) と Pico }
 - { id: 10-1, tier: 50, board: BB, title: ゲートの基本 — スイッチと LED で AND / OR / NOT }
