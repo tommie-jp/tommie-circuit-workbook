@@ -52,7 +52,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/02-emitter-follower.svg)
 
-`R1` (22kΩ) と `R2` (10kΩ) でベースを分圧し、`RE` (1kΩ) がエミッタの電位を決める。
+`V1` (5V) は Analog Discovery の電源出力 V+。`R1` (22kΩ) と `R2` (10kΩ) でベースを分圧し、`RE` (1kΩ) がエミッタの電位を決める。
 `CIN` / `COUT` は直流を切って信号だけ通す結合コンデンサ。
 
 - 分圧の開放電圧: 5V × 10k/(22k+10k) ≈ **1.56 V**、等価内部抵抗 ≈ 6.9kΩ
@@ -66,7 +66,7 @@ style:
 
 ```breadboard
 title: 図2 エミッタフォロア (W1 と CH2 を入力へ、CH1 を出力へ)
-# 5V は上の +/− レールへ直接入れる (下のレールは使わない)
+# 5V は AD の V+ から上の + レールへ (下のレールは使わない)
 board: half
 parts:
   R1: resistor b5 b10 22k
@@ -80,15 +80,9 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, 2-, 2+, W1, 1+, 1-]
-  PS:
-    type: device
-    at: top
-    label: 電源 5V (USB)
-    pins: [+5V, GND]
+    pins: [GND, 2-, 2+, W1, 1+, 1-, V+]
 wires:
-  - PS.+5V -- +t28 red
-  - PS.GND -- -t29 black
+  - AD.V+ -- +t24 red
   - AD.GND -- -t1 black
   - AD.2- -- -t2 black
   - AD.2+ -- a3 blue
@@ -101,9 +95,10 @@ wires:
   - +t12 -- a12 red
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/02-emitter-follower.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/02-emitter-follower-1.svg)
 
-部品はすべて上半分に挿し、電源 5V (USB) は上の + / − レールへ直接入れる。
+部品はすべて上半分に挿す。5V は Analog Discovery の電源出力 V+ (赤) から上の + レールへ入れる
+(WaveForms の Supplies で V+ を 5 V にして入れる)。この回路が流すのは 1 mA ほどなので V+ で足りる。
 
 - **ベース (列 10)**: `R1` の右端・`R2` の上端・`CIN` の + 側・`Q1` の B が同じ列に
   並ぶので、線は要らない。`R1` の左端 (列 5) は赤線で +5V へ
@@ -135,6 +130,87 @@ CH1 は CH2 の約 0.97 倍 (0.97 Vpp) で、2 本の山と谷がほぼ重なる
 電圧がほぼ 1 倍のまま出ることが一目で分かる。結合コンデンサ (10 µF) と 1 kΩ の
 遮断周波数は約 16 Hz なので、1 kHz では位相のずれは 1° ほどで画面では見えない。
 
+## NanoVNA で周波数特性を見る
+
+W1 と CH1・CH2 の代わりに NanoVNA をつなぎ (図4)、50 kHz〜100 MHz の通り方 (S21) を見る (図5)。
+
+- `CIN` の − 側 (入力の列 4) に CH0 (アッテネータを通す)、`COUT` の − 側 (出力の列 18) に
+  CH1 をつなぐ。**RL は外す** — CH1 の 50 Ω がそのまま負荷になる。NanoVNA の GND は − レールへ
+  (板につなぐ線は SMA の短いケーブルかクリップで、できるだけ短く)
+- NanoVNA の出力はこの回路には大きすぎる (出力が 50 Ω を駆動するとエミッタの
+  0.83 mA では下の半分が切れる)。**CH0 に 20 dB の SMA アッテネータを付け、
+  付けたまま THRU で校正する** (アッテネータの分は校正で消える)
+- 電源は今までどおり AD の V+ (5 V)
+
+```breadboard
+title: 図4 NanoVNA をつなぐ (CH0 は 20 dB のアッテネータを通す、RL は外す)
+board: half
+parts:
+  R1: resistor b5 b10 22k
+  R2: resistor a10 -t10 10k
+  CIN: capacitor/electrolytic d4(-) d10(+) 10uF
+  Q1: transistor e10(B) e12(C) e14(E) 2SC1815
+  RE: resistor a14 -t14 1k
+  COUT: capacitor/electrolytic b14(+) b18(-) 10uF
+  VNA:
+    type: device
+    at: top
+    label: NanoVNA
+    pins: [CH0, CH1, GND]
+  ATT:
+    type: device
+    at: top
+    label: 20 dB アッテネータ
+    pins: [OUT, IN]
+  AD:
+    type: device
+    at: top
+    label: AD (電源)
+    pins: [GND, V+]
+wires:
+  - VNA.CH0 -- ATT.IN yellow
+  - ATT.OUT -- a4 yellow
+  - VNA.CH1 -- a18 orange
+  - VNA.GND -- -t19 black
+  - AD.GND -- -t24 black
+  - AD.V+ -- +t25 red
+  - +t5 -- a5 red
+  - +t12 -- a12 red
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/02-emitter-follower-2.svg)
+
+```vna
+device: h4
+sweep: 50k-100M 201
+title: 図5 エミッタフォロアの S21 (計算) — 50 Ω 系では 1 倍より大きく +1.5 dB
+dut: series R 0
+data: 02-emitter-follower.s2p
+traces:
+  - S21 logmag
+  - S21 phase
+  - S11 smith
+markers:
+  - 1M
+  - 10M
+  - 100M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/vna/02-emitter-follower.svg)
+
+- 破線は CH0 と CH1 を直につないだスルー (0 dB・0°)。実線はそれより上にいて、
+  **S21 は約 +1.5 dB (|S21| ≈ 1.19)**。電圧利得は 1 倍未満なのに S21 が 1 を超えるのは、
+  入力が高インピーダンス (低い周波数で約 4.4 kΩ) で CH0 の 50 Ω をほとんど食わず、出力が低い
+  インピーダンス (約 32 Ω) で CH1 の 50 Ω を駆動できるから。50 Ω の線路に直につないだ
+  ときの 2 倍の電圧を受け、それを 0.6 倍にして 50 Ω へ渡している — これがインピーダンス変換
+- 10 MHz まではほぼ平らで、100 MHz では |S21| ≈ 1.03 (+0.3 dB)・位相 −8° まで下がる。2SC1815 の fT (約 80 MHz) で
+  β が下がり、出力のインピーダンスが上がるため
+- S11 は低い周波数で Smith の右端 (開放) の近く。周波数が上がるとトランジスタの容量で
+  下 (容量性) へ回り込む
+- `02-emitter-follower.s2p` は **ハイブリッド π の模型で計算した値** (実測ではない。
+  Ie 0.83 mA・hFE 150・fT 80 MHz・Cob 2 pF)。ブレッドボードでは 10 MHz あたりから
+  線と穴の容量・インダクタンスで計算から離れる
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -144,7 +220,7 @@ CH1 は CH2 の約 0.97 倍 (0.97 Vpp) で、2 本の山と谷がほぼ重なる
 | RE, RL | 抵抗 (1/4 W) | 1 kΩ |
 | CIN, COUT | 電解コンデンサ | 10 µF |
 | Q1 | NPN トランジスタ | 2SC1815 |
-| — | 電源 | 5V (USB) |
+| — | 電源 | Analog Discovery の V+ (5 V) |
 
 ## 見るべき値
 
