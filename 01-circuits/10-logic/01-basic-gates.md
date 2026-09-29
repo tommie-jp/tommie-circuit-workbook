@@ -56,7 +56,7 @@ wires:
   - U2.out -- h22
   - U3.out -- h28
 notes:
-  # IC の足の番号 (ゲート 1 回路目)
+  # IC の PIN 番号 (ゲート 1 回路目)
   - text g12g8 small center: "1"
   - text h12e8 small center: "2"
   - text g14h2 small center: "3"
@@ -65,8 +65,8 @@ notes:
   - text g20h2 small center: "3"
   - text g25h4 small center: "1"
   - text g26h5 small center: "2"
-  - text j1 small left: "数字は IC の足の番号 (1 回路目を使う)"
-  - text k1 small left: "VCC は 5 V。VDD は 3 つとも足 14、VSS は足 7 (GND)。使わない入力は GND へ"
+  - text j1 small left: "数字は IC の PIN 番号 (1 回路目を使う)"
+  - text k1 small left: "VCC は 5 V。VDD は 3 つとも PIN 14、VSS は PIN 7 (GND)。使わない入力は GND へ"
 style:
   grid: on
   pitch: 1.2
