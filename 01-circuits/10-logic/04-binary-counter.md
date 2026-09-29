@@ -24,20 +24,19 @@ board: BB
 title: 図1 555クロック + 4040バイナリカウンタ
 parts:
   VCC: vcc b12
-  U555: dip8 i16i0 NE555
-  R1: resistor h19 g19 10k
-  R2: resistor h19 h21 47k
-  C1: capacitor h23 j23 10u
-  GC1: ground j23
+  U555: ic e20 NE555
+  R1: resistor b17 d17f0 10k
+  R2: resistor d17f0 f17 47k
+  C1: capacitor f18 h18 10u
+  GC1: ground h18
   U40: dip16 i10 CD4040
   GU40: ground k9
-  GU555: ground i15c0 r90
+  GU555: ground h20
   GRRST: ground d14 r270
   RRST: resistor d12 d14 10k
   SWRST: button d12 b12
   VCC: vcc f11
-  VCC: vcc g17
-  VCC: vcc l16
+  VCC: vcc b17
   RQ1: resistor l11a2 m11a2 330
   DQ1: led m11a2 n11a2 red
   GQ1: ground n11a2
@@ -51,19 +50,20 @@ parts:
   DQ4: led m3 n3 red
   GQ4: ground n3
 wires:
-  - U555.3 -- U40.10
+  - U40.10 -| j23
+  - U555.OUT -| e23
+  - e23 -- j23
   - U40.16 -| f11
   - U40.11 -| d12
-  - U555.1 -| i15c0
-  - U555.2 -| e14a2
-  - e14a2 -- e21 -- h21
-  - U555.8 -| g17
-  - g17 -- g19
-  - U555.7 -| h19
-  - U555.6 -| h21
-  - h21 -- h23
-  - U555.4 -| l15
-  - l15 -- l16
+  - U555.VCC |- b20
+  - U555.RESET |- b20a5
+  - b17 -- b20 -- b20a5
+  - U555.DISCH -| d17f0
+  - U555.THRES -| e18
+  - U555.TRIG -| e18f0
+  - e18 -- f18
+  - f17 -- f18
+  - U555.GND |- h20
   - U40.8 -| k9
   - U40.9 -| l11a2
   - U40.7 -| l8

@@ -18,40 +18,37 @@ NE555 を単安定 (monostable) 接続にする。ボタンを 1 回押すと、
 ```circuit
 title: 図1 555 単安定
 parts:
-  V1: vsource b1 gnd 5
-  vcc: vcc b1
-  G1: ground gnd
-  U1: dip8 d6 NE555
-  G2: ground a6
-  vcc: vcc b4
-  R2: resistor b4 c4 10k
-  SW1: button c4 c2
-  G3: ground c2
-  vcc: vcc b7
-  R1: resistor b8 c8 100k
-  C1: ecap c10 f10 10u
-  G4: ground f10
-  Cc: capacitor f7 h7 10n
-  G5: ground h7
-  R3: resistor e3 f3 330
-  D1: led f3 h3 red
-  G6: ground h3
-  vcc: vcc f6
-points:
-  gnd: e1
+  V1: vsource c1 e1 5
+  vcc: vcc c1
+  G1: ground e1
+  U1: ic g10 NE555
+  vcc: vcc c3
+  R2: resistor c3 e3 10k
+  SW1: button j3 l3
+  G3: ground l3
+  R1: resistor c7 e7 100k
+  C1: ecap g7 i7 10u
+  G4: ground i7
+  G2: ground i10
+  Cc: capacitor i10a5 k10a5 10n
+  G5: ground k10a5
+  R3: resistor g12 g14 330
+  D1: led g14 i14 red
+  G6: ground i14
 wires:
-  - U1.1 -| a5
-  - a5 -- a6
-  - c4 |- U1.2
-  - U1.3 -| e3
-  - U1.4 -| f5
-  - f5 -- f6
-  - U1.8 -| b7
-  - b7 -- b8
-  - U1.7 -| c8
-  - c8 -- c9 -- c10
-  - U1.6 -| c9
-  - U1.5 -| f7
+  - c3 -- c10a5
+  - U1.VCC |- c10
+  - U1.RESET |- c10a5
+  - e7 -- f7f0
+  - U1.DISCH -| f7f0
+  - U1.THRES -| g7
+  - f7f0 -- g7
+  - U1.TRIG -| j8a5
+  - e3 -- j3
+  - j3 -- j8a5
+  - U1.GND |- i10
+  - U1.CONT |- i10a5
+  - U1.OUT -| g12
 style:
   grid: on
 ```

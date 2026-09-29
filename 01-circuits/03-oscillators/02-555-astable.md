@@ -19,36 +19,36 @@ board: BB
 ```circuit
 title: 図1 555 非安定
 parts:
-  V1: vsource c1 f1 5
-  VCC: vcc c1
-  G1: ground f1
-  U1: dip8 e6 NE555
-  G2: ground b6
-  VCC: vcc c7
-  Ra: resistor c8 d8 10k
-  Rb: resistor d8 d10 47k
-  C1: ecap d12 g12 10u
-  G3: ground g12
-  VCC: vcc g6
-  R1: resistor f3 g3 220
-  D1: led g3 i3 red
-  G4: ground i3
-  Cc: capacitor g7 i7 10n
-  G5: ground i7
+  V1: vsource c4 i4 5
+  VCC: vcc c4
+  G1: ground i4
+  U1: ic e10 NE555
+  VCC: vcc b7
+  Ra: resistor b7 d7f0 10k
+  Rb: resistor d7f0 f7f0 47k
+  C1: ecap f8f0 i8 10u
+  G3: ground i8
+  VCC: vcc b10
+  G2: ground i10
+  Cc: capacitor g12 i12 10n
+  G5: ground i12
+  R1: resistor e13 e15 220
+  D1: led e15 g15 red
+  G4: ground i15
 wires:
-  - U1.1 -| b5
-  - b5 -- b6
-  - U1.2 -| a4
-  - a4 -- a10 -- d10
-  - U1.8 -| c7
-  - c7 -- c8
-  - U1.7 -| d8
-  - U1.6 -| d10
-  - d10 -- d12
-  - U1.3 -| f3
-  - U1.4 -| g5
-  - g5 -- g6
-  - U1.5 -| g7
+  - U1.8 |- b10
+  - U1.4 |- b10a5
+  - b10 -- b10a5
+  - U1.7 -| d7f0
+  - U1.6 -| e8
+  - U1.2 -| e8f0
+  - e8 -- f8f0
+  - f7f0 -- f8f0
+  - U1.1 |- i10
+  - U1.5 |- g10a5
+  - g10a5 -- g12
+  - U1.3 -| e13
+  - g15 -- i15
 style:
   grid: on
 ```

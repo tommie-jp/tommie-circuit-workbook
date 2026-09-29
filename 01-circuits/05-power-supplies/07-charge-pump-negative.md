@@ -22,41 +22,41 @@ parts:
   V1: vsource b3 gnd 9
   vcc: vcc b3
   G1: ground gnd
-  U1: dip8 e8 NE555
-  G2: ground b8
-  vcc: vcc c9
-  Ra: resistor c10 d10 1k
-  Rb: resistor d10 d12 4k7
-  C1: capacitor d13 g13 10n
-  GC1: ground g13
-  Cc: capacitor g9 i9 10n
-  GCc: ground i9
-  vcc: vcc g8
-  Cp: capacitor f5 h5 1u
-  D1: diode h5 j5 1N4148
-  GD1: ground j5
-  D2: diode h3 h5 1N4148
-  Co: ecap j3 h3 10u
-  GCo: ground j3
-  RL: resistor h1 j1 1k
-  GRL: ground j1
+  U1: ic g10 NE555
+  vcc: vcc c6
+  Ra: resistor c6 e6 1k
+  Rb: resistor f6f0 h6f0 4k7
+  C1: capacitor h8f0 j8f0 10n
+  GC1: ground j8f0
+  vcc: vcc c10
+  GU1: ground j10f0
+  Cc: capacitor i11 j11f0 10n
+  GCc: ground j11f0
+  Cp: capacitor g12 g14 1u
+  D1: diode g14 j14f0 1N4148
+  GD1: ground j14f0
+  D2: diode g16 g14 1N4148
+  Co: ecap j16f0 g16 10u
+  GCo: ground j16f0
+  RL: resistor g18 j18f0 1k
+  GRL: ground j18f0
 points:
   gnd: e3
 wires:
-  - U1.1 -| b7
-  - b7 -- b8
-  - U1.2 -| a6
-  - a6 -- a12 -- d12
-  - U1.8 -| c9
-  - c9 -- c10
-  - U1.7 -| d10
-  - U1.6 -| d12
-  - d12 -- d13
-  - U1.5 -| g9
-  - U1.4 -| g7
-  - g7 -- g8
-  - U1.3 -| f5
-  - h1 -- h3
+  - U1.VCC |- c10
+  - c10 -- c10a5
+  - U1.RESET |- c10a5
+  - e6 -- f6f0
+  - U1.DISCH -| f6f0
+  - U1.THRES -| g8
+  - U1.TRIG -| g8f0
+  - g8 -- h8f0
+  - h6f0 -- h8f0
+  - U1.GND |- j10f0
+  - U1.CONT |- i10a5
+  - i10a5 -- i11
+  - U1.OUT -| g12
+  - g16 -- g18
 style:
   grid: on
 ```

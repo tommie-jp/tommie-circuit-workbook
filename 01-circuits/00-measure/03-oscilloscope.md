@@ -23,26 +23,27 @@ parts:
   V1: vsource c2 f2 5
   VCC: vcc c2
   G1: ground f2
-  U1: dip8 e6 NE555
-  VCC: vcc c7a3
-  R1: resistor c9 d9i0 10k
-  R2: resistor d9i0 f9i0 10k
-  C1: capacitor f9i0 h9i0 10n
-  G2: ground h9i0
-  G3: ground i3
-  VCC: vcc c3a5
-  OUT: port f4a5
+  U1: ic g10 NE555
+  VCC: vcc c10
+  R1: resistor c6 e6 10k
+  VCC: vcc c6
+  R2: resistor f6f0 h6f0 10k
+  C1: capacitor h8f0 j8f0 10n
+  G2: ground j8f0
+  G3: ground j10f0
+  OUT: port g13
 wires:
-  - U1.8 -| c7a3
-  - c7a3 -- c9
-  - U1.7 -| d9i0
-  - U1.6 -| f7i5
-  - f7i5 -- f9i0
-  - U1.1 -| i3
-  - U1.2 -| a4
-  - a4 -- a11 -- f11i0 -- f9i0
-  - U1.3 -| f4a5
-  - U1.4 -| c3a5
+  - U1.VCC |- c10
+  - U1.RESET |- c10a5
+  - c10 -- c10a5
+  - e6 -- f6f0
+  - U1.DISCH -| f6f0
+  - U1.THRES -| g8
+  - U1.TRIG -| g8f0
+  - g8 -- h8f0
+  - h6f0 -- h8f0
+  - U1.GND |- j10f0
+  - U1.OUT -| g13
 style:
   grid: on
   pitch: 1.2
