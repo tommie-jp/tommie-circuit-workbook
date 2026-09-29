@@ -29,51 +29,45 @@ parts:
   V1: sine c2 e2 0.5
   GV1: ground e2
   Cmod: capacitor c2 c4 1u
-  VCC: vcc a13
-  Rmod: resistor a13 c13 220
-  U555: dip8 e8 TLC555
-  GU555: ground h4a5
-  R1: resistor c12 d12i0 1k
-  R2: resistor d12i0 f12i0 10k
-  C1: capacitor k12 m12 100p
-  GC1: ground m12
-  Cant: capacitor i8 i10 100p
-  ANT: port i11
+  VCC: vcc a8
+  Rmod: resistor a8 c8 220
+  U555: ic g10 TLC555
+  GU555: ground j10f0
+  R1: resistor c6 e6 1k
+  R2: resistor f6f0 h6f0 10k
+  C1: capacitor h8f0 j8f0 100p
+  GC1: ground j8f0
+  Cant: capacitor g14 g16 100p
+  ANT: port g17
 wires:
-  - c4 -- c9a3
-  - c9a3 -- c12
-  - c12 -- c13
-  - c13 -- c14
-  - U555.8 -| c9a3
-  - U555.7 -| d12i0
-  - U555.6 -| f9i5
-  - f9i5 -- f12i0
-  - f12i0 -- k12
-  - U555.1 -| h4a5
-  - U555.2 -| k5
-  - k5 -- k12
-  - U555.3 -| i5a5
-  - i5a5 -- i8
-  - i10 -- i11
-  - U555.4 -| h6
-  - h6 -- h14
-  - h14 -- c14
+  - c4 -- c10a5
+  - U555.VDD |- c10
+  - U555.RESET |- c10a5
+  - e6 -- f6f0
+  - U555.DISCH -| f6f0
+  - U555.THRES -| g8
+  - U555.TRIG -| g8f0
+  - g8 -- h8f0
+  - h6f0 -- h8f0
+  - U555.GND |- j10f0
+  - U555.OUT -| g14
+  - g16 -- g17
 notes:
   # 計測点。オシロは橙、スペアナは緑 (計器の設定の表と同じ名前)
   - arrow b1 c2 orange
   - text a1h0 small orange left: 音声
-  - arrow b7f0 c7 orange
-  - text b7c0 small orange center: 足8
-  - arrow j6f0 i6 orange
-  - text j6h0 small orange right: 足3
-  - arrow j11f0 i11 orange
-  - text j11h0 small orange center: ANT
-  - arrow f2 f4a5 orange
-  - text f2 small orange right: オシロ GND
-  - arrow j7f0 i7 green
-  - text j6h8 small green left: スペアナ入力
-  - arrow g2 g4a5 green
-  - text g2 small green right: スペアナ GND
+  - arrow b9f5 c9a5 orange
+  - text b9c5 small orange center: 足8
+  - arrow e12f0 g12 orange
+  - text e12c0 small orange center: 足3
+  - arrow h17f0 g17 orange
+  - text h17h0 small orange right: ANT
+  - arrow i12 i10 orange
+  - text i12 small orange left: オシロ GND
+  - arrow e13f5 g13a5 green
+  - text e13c5 small green center: スペアナ入力
+  - arrow i12h0 i10h0 green
+  - text i12h0 small green left: スペアナ GND
 style:
   pitch: 1.2
 ```
