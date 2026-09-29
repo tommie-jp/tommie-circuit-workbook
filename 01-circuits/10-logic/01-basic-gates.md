@@ -21,83 +21,52 @@ title: 図1 AND・OR・NOTを並べて比べる
 parts:
   A: switch d3 f3
   RpdA: resistor f3 f1 10k
-  GA: ground f1 r90
+  GA: ground f1
   B: switch c6 e6
   RpdB: resistor e6 e4 10k
-  GB: ground e4 r90
+  GB: ground e4
   C: switch b9 d9
   RpdC: resistor d9 d7 10k
-  GC: ground d7 r90
+  GC: ground d7
   VCC: vcc d3
   VCC: vcc c6
   VCC: vcc b9
-  U1: dip14 i13 CD4081
-  U2: dip14 i18 CD4071
-  U3: dip14 i23 CD4069
-  VCC: vcc g14i0
-  VCC: vcc g19i0
-  VCC: vcc g24i0
-  R1: resistor l11 m11 330
-  D1: led m11 n11 red
-  GD1: ground n11
-  R2: resistor l16 m16 330
-  D2: led m16 n16 red
-  GD2: ground n16
-  R3: resistor l21 m21 330
-  D3: led m21 n21 red
-  GD3: ground n21
-  GU1: ground k12
-  GU2: ground k17
-  GU3: ground k21a6
-  GU1b: ground j14c3
-  GU2b: ground j19c3
-  GU3b: ground i24i3
+  U1: and h14 CD4081
+  U2: or h20 CD4071
+  U3: not h26 CD4069
+  R1: resistor h16 j16 330
+  D1: led j16 k16 red
+  GD1: ground k16
+  R2: resistor h22 j22 330
+  D2: led j22 k22 red
+  GD2: ground k22
+  R3: resistor h28 j28 330
+  D3: led j28 k28 red
+  GD3: ground k28
 wires:
-  - f3 -- f12 -- f17
-  - e6 -- e11a5 -- e16a5
-  - d9 -- d22
-  - f12 |- U1.1
-  - e11a5 |- U1.2
-  - f17 |- U2.1
-  - e16a5 |- U2.2
-  - d22 |- U3.1
-  - U1.3 -| l11
-  - U2.3 -| l16
-  - U3.2 -| l21
-  - U1.14 -| g14i0
-  - U2.14 -| g19i0
-  - U3.14 -| g24i0
-  - U1.7 -| i12e0
-  - U2.7 -| i17e0
-  - U3.7 -| i21e6
-  # 使わない入力 (U1・U2 は足5・6・8・9・12・13、U3 は足3・5・9・11・13) を GND へ
-  - U1.5 -| i12e0
-  - U1.6 -| i12e0
-  - i12e0 -- i12i0 -- j12c0 -- k12
-  - U1.13 -| h14g3
-  - U1.12 -| h14g3
-  - U1.9 -| i14i3
-  - U1.8 -| i14i3
-  - h14c3 -- h14g3 -- i14i3 -- j14c3
-  - U2.5 -| i17e0
-  - U2.6 -| i17e0
-  - i17e0 -- i17i0 -- j17c0 -- k17
-  - U2.13 -| h19g3
-  - U2.12 -| h19g3
-  - U2.9 -| i19i3
-  - U2.8 -| i19i3
-  - h19c3 -- h19g3 -- i19i3 -- j19c3
-  - U3.3 -| h21g6
-  - U3.5 -| i21e6
-  - h21g6 -- i21e6 -- j21c6 -- k21a6
-  - U3.13 -| h24c3
-  - U3.11 -| i24a3
-  - U3.9 -| i24i3
-  - h24c3 -- i24a3 -- i24i3
+  - f3 -- f12 -- f18
+  - e6 -- e11 -- e17
+  - d9 -- d24
+  - f12 |- U1.a
+  - e11 |- U1.b
+  - f18 |- U2.a
+  - e17 |- U2.b
+  - d24 |- U3.in
+  - U1.out -- h16
+  - U2.out -- h22
+  - U3.out -- h28
 notes:
-  - text k13a5 blue: AND
-  - text k18a5 blue: OR
-  - text k23a5 blue: NOT
+  # IC の足の番号 (ゲート 1 回路目)
+  - text g12h7 small center: "1"
+  - text h12c7 small center: "2"
+  - text g15h3 small center: "3"
+  - text g18h7 small center: "1"
+  - text h18c7 small center: "2"
+  - text g21h3 small center: "3"
+  - text g24h7 small center: "1"
+  - text g27h3 small center: "2"
+  - text j1 small left: "数字は IC の足の番号 (1 回路目を使う)"
+  - text k1 small left: "VDD は 3 つとも足 14 (VCC)、VSS は足 7 (GND)。使わない入力は GND へ"
 style:
   grid: on
   pitch: 1.2
@@ -111,7 +80,8 @@ style:
 - スイッチを開けると入力はプルダウン抵抗 (10kΩ) で 0V (0) に落ち、閉じると
   Vcc (1) になる。CMOS の入力は浮かせてはいけないので、開いている間もプル
   ダウンで電位を決めておく
-- U1.14・U2.14・U3.14 が VDD (5V)、U1.7・U2.7・U3.7 が VSS (GND)
+- 図1 はゲートを論理記号で描き、記号の足に IC の足の番号を添えた。電源の足は記号に
+  出ないので図の下に書いた — U1.14・U2.14・U3.14 が VDD (5V)、U1.7・U2.7・U3.7 が VSS (GND)
 - **使わない入力は GND へ。** U1・U2 は残り 3 ゲートの入力 (足5・6・8・9・12・13)、
   U3 は残り 5 回路の入力 (足3・5・9・11・13) を GND につなぐ。CMOS の入力は
   浮かせると勝手に振れて電流を食う。出力の足 (U1・U2 の足4・10・11、U3 の足4・6・
@@ -126,9 +96,9 @@ parts:
   A: switch b10 b12
   B: switch b3 b5
   C: switch b45 b47
-  RpdA: resistor i22 i30 10k
-  RpdB: resistor i21 i17 10k
-  RpdC: resistor i47 i51 10k
+  RpdA: resistor j24 -b24 10k
+  RpdB: resistor j39 -b39 10k
+  RpdC: resistor j52 -b52 10k
   U1: dip14 @ e24 CD4081
   U2: dip14 @ e38 CD4071
   U3: dip14 @ e52 CD4069
@@ -143,13 +113,19 @@ wires:
   - +t3 -- a3 red
   - +t10 -- a10 red
   - +t45 -- a45 red
-  - c12 -- c22 -- g22 -- g24 yellow
-  - c22 -- c37 -- g37 -- g38 yellow
-  - d5 -- d21 -- h21 -- h25 green
-  - d21 -- d36 -- h36 -- h39 green
-  - c47 -- g47 -- g52 blue
-  - j17 -- -b17 black
-  - j51 -- -b51 black
+  - a12 -- a22 yellow
+  - e22 -- f22 yellow
+  - g22 -- g24 yellow
+  - b22 -- b37 yellow
+  - e37 -- f37 yellow
+  - g37 -- g38 yellow
+  - d5 -- d20 green
+  - e20 -- f20 green
+  - h20 -- h25 green
+  - c20 -- c36 green
+  - e36 -- f36 green
+  - h36 -- h39 green
+  - c47 -- g52 blue
   - a24 -- +t24 red
   - j30 -- -b30 black
   - a38 -- +t38 red
@@ -187,12 +163,15 @@ wires:
   は 52〜58 列。どれも切り欠きが左で、足1 が左下 (f 行)、足14 が左上 (e 行)
 - 電源: 各 IC の足14 (24・38・52 列の上) を上の赤レールへ、足7 (VSS、30・44・58
   列の下) を下の青レールへ
-- スイッチは上ブロック (B が 3〜5 列、A が 10〜12 列、C が 45〜47 列)。A は黄の線
-  (c 行)、B は緑の線 (d 行) で右へ運び、IC の手前で溝をまたいで下ろして足 1・2
-  (24・25 列と 38・39 列の下) へ渡す。黄と緑が交わるのは 22 列の 1 か所だけ。
-  C は青の線で U3 の足 1 (52 列の下) へ
-- プルダウン抵抗 (RpdA・RpdB・RpdC) は下ブロックの i 行。RpdA は 30 列 (U1 の VSS)、
-  RpdC は 51 列の線で GND へ落ちる
+- スイッチは上ブロック (B が 3〜5 列、A が 10〜12 列、C が 45〜47 列)。**1 つの穴には
+  線を 1 本だけ挿す** — 分けるときは同じ列の別の穴から出す (縦の 5 穴は中でつながっている)
+  - A (黄): `a12` → `a22`。列 22 で溝をまたいで (`e22` → `f22`)、`g22` → U1 の足 1 (`g24`)。
+    U2 へは `b22` → `b37`、列 37 で溝をまたいで (`e37` → `f37`)、`g37` → U2 の足 1 (`g38`)
+  - B (緑): `d5` → `d20`。列 20 で溝をまたいで (`e20` → `f20`)、`h20` → U1 の足 2 (`h25`)。
+    U2 へは `c20` → `c36`、列 36 で溝をまたいで (`e36` → `f36`)、`h36` → U2 の足 2 (`h39`)
+  - C (青): `c47` → U3 の足 1 (`g52`)
+- プルダウン抵抗 (RpdA・RpdB・RpdC) は IC の入力の列の j 行から下の青レールへ縦に挿す
+  (RpdA は 24 列、RpdB は 39 列、RpdC は 52 列)
 - 出力 (U1・U2 の足3 = 26・40 列、U3 の足2 = 53 列) は g 行の 330Ω と h 行の LED を
   通して下の青レールへ
 - 使わない入力は黒の短い線で GND へ。上側の足 (U1・U2 の足8・9・12・13、U3 の
