@@ -46,6 +46,40 @@ W1・W2 を 1 kΩ ずつで足し合わせ、CH1 (1 MΩ、ほとんど電流を�
 | Spectrum (通常の FFT) | Source: Channel 1。Start 0 Hz、Stop 10 MHz。FFT 点数 32768。サンプル周波数 25 MHz (例。実機で選べる値は装置の丸めで多少ずれることがある) |
 | Spectrum (CZT) | 同じ取り込みから、表示帯域だけ **Start 4.99 MHz、Stop 5.01 MHz** に絞る (CZT モード) |
 
+通常の FFT で見ると次のようになる。図は Stop 10 MHz から決まるサンプル周波数
+(25.6 MHz) で描いたので RBW は 781 Hz だが、50 Hz 離れた 2 本が 1 本の山に
+融けることは変わらない。CZT で 2 本に分かれた画面は、この図の道具が CZT を
+持たないので描いていない。
+
+```spectrum
+title: 図2 通常の FFT では 50 Hz 離れた 2 本が 1 本の山になる
+device: ad3
+sweep: 0-10MHz
+samples: 32768
+window: flattop
+signal:
+  - sine 5MHz 0.5V
+  - sine 5.00005MHz 0.5V
+markers: [5MHz]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/06-czt-zoom-1.svg)
+
+```spectrum
+title: 図3 Start・Stop を 4.99〜5.01 MHz に絞っても RBW は同じで山は 1 本のまま
+device: ad3
+center: 5MHz
+span: 20kHz
+samples: 32768
+window: flattop
+signal:
+  - sine 5MHz 0.5V
+  - sine 5.00005MHz 0.5V
+markers: [5MHz]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/06-czt-zoom-2.svg)
+
 ## 見るべき値
 
 計算値。RBW = サンプル周波数 ÷ 点数 (通常の FFT)、RBW = 表示帯域幅 ÷ 点数 (CZT、

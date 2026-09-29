@@ -75,6 +75,17 @@ R1 (100 Ω) と LED を直列にして 5〜12 列に組む。CH1 (`1+`) は W1 �
 Offset 1.5 V ± Amplitude 1.5 V なので、Idle (Low) は **0 V**、山 (High) は
 **3.0 V**。2 kHz の半周期ぶんだけ High になる。
 
+```scope
+title: 図3 Run 1 回で 0 V から 3.0 V に 250 µs だけ上がる
+time: 100us/div
+trigger: ch1 rising 1.5V at -3div
+ch1: {wave: = 3V * step(t) * step(250us - t), range: 500mV/div, position: -3div}
+cursors: [0, 250us]
+measure: [vmax, vmin]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/06-burst-pulse.svg)
+
 ## 見るべき値
 
 計算値。

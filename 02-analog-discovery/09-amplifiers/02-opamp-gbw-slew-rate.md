@@ -129,6 +129,28 @@ wires:
 | Wavegen (スルーレート測定) | W1: Square、1 kHz、Amplitude 136 mV (出力 3 Vpp 相当)、Offset 0 V |
 | Scope (スルーレート測定) | CH2 の立ち上がり時間を Measurements で読む |
 
+方形波の立ち上がりの 1 つを 5 µs/div で拡大した。CH2 がスルーレート (0.3 V/µs) で
+傾く出力、CH3 は比べるための「帯域 90.9 kHz だけで決まる出力」(1 次の低域、
+τ = 1/(2π × 90.9 kHz) = 1.75 µs)。CH2 と CH3 は同じ 500 mV/div、入力 CH1 は
+振幅が 1/11 なので 50 mV/div にしてある。
+
+```scope
+title: 図3 出力は 3 V を 10 µs かけて直線で上る (CH2)。帯域だけなら 3.85 µs (CH3)
+time: 5us/div
+trigger: ch1 rising 0V at -3div
+ch1: {wave: square 1kHz 136mV, range: 50mV/div}
+ch2: {wave: "= clip(-1.5V + 0.3V / 1us * t, -1.5V, 1.5V)", range: 500mV/div}
+ch3: {wave: ch1 | gain 11 | rc 1.75us, range: 500mV/div}
+cursors: [0, 10us]
+measure: [vpp, rise]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/scope/02-opamp-gbw-slew-rate.svg)
+
+CH2 の Rise (10〜90 %) は 8 µs と出る。3 V 全部を振り切る時間 (カーソルの 0〜10 µs) は
+10 µs で、見るべき値の表の「実際の立ち上がり時間」はこちらを指す。CH3 の Rise は
+0.35/BW の 3.85 µs に当たる。
+
 ## 見るべき値
 
 計算値。LM358 の代表値: GBW ≈ 1 MHz、スルーレート SR ≈ 0.3 V/µs (データシート
@@ -145,6 +167,28 @@ wires:
 **利得 11 倍という中途半端な設定でも、出力振幅が数 V あればすぐスルー律速になる。**
 GBW から予想した帯域と実際の立ち上がりが合わないときは、振幅を絞ってスルーレートの
 影響を消してから帯域だけを測り直すとよい。
+
+Network で見える利得を計算で描く (GBW 1 MHz の 1 次の極、Cg と Rg の低域も入れた)。
+
+```graph
+title: 図4 利得 20.8 dB、−3 dB は 90.9 kHz (計算)
+x: 周波数 Hz log 100..1M
+y: 利得 dB 0..25
+lines:
+  計算 dB: 20*log10(sqrt((1+10k*1k/(1k^2+(1/(2*pi*x*10u))^2))^2+(10k*(1/(2*pi*x*10u))/(1k^2+(1/(2*pi*x*10u))^2))^2)) - 10*log10(1+(x/90.9k)^2)
+notes:
+  - level 17.8dB
+  - mark 1k
+  - mark 90.9k
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/graph/02-opamp-gbw-slew-rate.svg)
+
+分かること:
+
+- 1 kHz〜10 kHz の平らな所が 1 + Rf/Rg の 20.8 dB。100 Hz で 0.1 dB ほど低いのは
+  Cg (10 µF) の 1/(2πfC) が Rg に足されるため
+- 利得が 11 倍だと、GBW 1 MHz のうち帯域に使えるのは 90.9 kHz まで
 
 ## 出典
 

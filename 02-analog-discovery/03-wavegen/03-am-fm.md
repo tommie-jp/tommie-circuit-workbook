@@ -37,7 +37,34 @@ wires:
 | 計器 | 設定 (AM) | 設定 (FM) |
 | --- | --- | --- |
 | Wavegen | Carrier: Sine 100 kHz、Amplitude 1 V。AM: Modulation Sine 1 kHz、Depth 50% | Carrier: Sine 100 kHz、Amplitude 1 V。FM: Modulation Sine 1 kHz、Deviation 2 kHz |
-| Scope | CH1: 20 µs/div、Range 2 V/div (搬送波が 10 周期ほど見える) | CH1: 20 µs/div、Range 2 V/div (同じ設定でよい) |
+| Scope | CH1: 200 µs/div、Range 500 mV/div (変調 2 周期ぶんのエンベロープが見える) | CH1: 2 µs/div、Range 500 mV/div (搬送波の 1 周期をカーソルで読む) |
+
+AM は変調の 1 周期 (1 ms) が収まるよう 200 µs/div に広げる (図2)。
+FM の周期の違いは 2 % しかないので、2 µs/div に縮めて変調の山 (t = 0) の 1 周期をカーソルで読む (図3)。
+
+```scope
+title: 図2 AM のエンベロープは 1.5 V と 0.5 V の間を変調信号の形でなぞる
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: = 1V * (1 + 0.5 * sin(2 * pi * 1kHz * t)) * sin(2 * pi * 100kHz * t), range: 500mV/div}
+measure: [vmax]
+notes:
+  - text 250us 1.5V: 山 1.5 V
+  - text 750us -0.5V: 谷 0.5 V
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/03-am-fm-1.svg)
+
+```scope
+title: 図3 FM の変調の山では 1 周期が 9.804 µs (102 kHz)
+time: 2us/div
+trigger: ch1 rising 0V
+ch1: {wave: = 1V * sin(2 * pi * 100kHz * t + 2 * sin(2 * pi * 1kHz * t)), range: 500mV/div}
+cursors: [0, 9.804us]
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/03-am-fm-2.svg)
 
 ## 見るべき値
 

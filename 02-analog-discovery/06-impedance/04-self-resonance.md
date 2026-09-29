@@ -103,6 +103,32 @@ Rref よりずっと小さく、CH2 の読みが小さくなって誤差が増�
 の前後で符号が反転しているのが分かる。実際の巻線抵抗や測定のばらつきで、
 \|Z\| のピークの高さは計算値ほど鋭くは出ない。
 
+掃引で記録した \|Z\| と位相を周波数に対して並べると、次の形になる。
+
+```graph
+title: 図3 7.12 MHz (SRF) で |Z| が山になり、位相が +90° から −90° へ反転する
+x: 周波数 Hz log 100k..10M
+y:
+  - インピーダンス Ω log
+  - 位相 deg -100..100
+lines:
+  "|Z| Ω": sqrt(3^2+(2*pi*x*100u)^2)/sqrt((1-(2*pi*x)^2*100u*5p)^2+(2*pi*x*3*5p)^2)
+  位相 deg: deg(atan2(2*pi*x*100u, 3)) - deg(atan2(2*pi*x*3*5p, 1-(2*pi*x)^2*100u*5p))
+notes:
+  - mark 100k
+  - mark 3M
+  - mark 7.5M
+  - level 0deg
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/graph/04-self-resonance.svg)
+
+分かること:
+
+- 3 MHz までは \|Z\| が周波数に比例して増え、位相は +90° 近くで平ら (インダクタ)
+- 7.12 MHz を越えると位相が −90° に跳び、\|Z\| は下がり始める (コンデンサ)
+- 山の頂は Q が高く細いので、101 点程度の掃引では頂を踏まないことが多い
+
 ## 出典
 
 自作。計器の名前と操作は Digilent の

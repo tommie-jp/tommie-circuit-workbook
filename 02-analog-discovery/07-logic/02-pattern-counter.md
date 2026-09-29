@@ -107,6 +107,22 @@ Logic の DIO1〜DIO3 へ。14=CLK (上ブロック) へは Pattern の DIO0 を
 Pattern と Logic は同じ 16 本の DIO を共有する。**DIO0 は出力 (Pattern)、
 DIO1〜DIO3 は入力 (Logic)** に設定を分ける。
 
+AD の Scope にクロック (CH1) と Q0 (CH2) を入れると、Logic で見る波形を電圧で確かめられる。
+
+```scope
+title: 図3 Q0 (CH2) はクロック (CH1) 10 周期に 1 回、1 周期ぶんだけ H
+time: 20ms/div
+trigger: ch2 rising 1.65V at -4div
+ch1: {wave: square 100Hz 1.65V offset 1.65V, range: 1V/div, position: 0.5div}
+ch2: {wave: pulse 10Hz 1.65V offset 1.65V duty 10%, range: 1V/div, position: -3.5div}
+cursors: [0, 100ms]
+measure: [period, duty]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/scope/02-pattern-counter.svg)
+
+2 本を同じ 1 V/div で上下に分けて並べた (重ねると H と L が見分けにくいため)。
+
 ## 見るべき値
 
 計算値。Pattern のクロックは 100 Hz (周期 10 ms) に設定。

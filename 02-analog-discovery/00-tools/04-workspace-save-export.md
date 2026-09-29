@@ -42,6 +42,20 @@ wires:
 Sample Rate を固定 (Base Frequency ではなく数値を直接指定) しておくと、
 書き出した CSV の行数と時間刻みが計算どおりになる。
 
+記録の 1 ms は、100 μs/div の画面のちょうど横 10 目盛にあたる。t = 0 (トリガ) を
+左端に寄せると、CSV の 1 行目から最後の行までが画面の端から端に並ぶ。
+
+```scope
+title: 図2 記録の 1 ms (1000 点) が三角波のちょうど 1 周期
+time: 100us/div
+trigger: ch1 rising 0V at -5div
+ch1: {wave: triangle 1kHz 1V, range: 500mV/div}
+cursors: [0, 1ms]
+measure: [vpp, period]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/scope/04-workspace-save-export.svg)
+
 ## 手順
 
 1. **ワークスペースの保存**: `File > Save` (または `Save As`) で

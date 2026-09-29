@@ -102,6 +102,21 @@ wires:
 | Pattern | DIO0 = Clock、100 Hz、Duty 50% (7-2 と同じ) |
 | Logic | DIO1〜DIO3 を選んで Bus1 (3 bit) を作る。**DIO1 を最下位ビットにする (この本の決めごと。DIO1=Q0=bit0、DIO2=Q1=bit1、DIO3=Q2=bit2)**。Trigger モードを Protocol/Bus にして、条件を Bus1 = `2` (2 進で `010`、Q1 だけ H) にする |
 
+Bus1 = `2` でトリガした瞬間の Q0 (DIO1) と Q1 (DIO2) を電圧で描くと次のようになる。
+
+```scope
+title: 図3 t = 0 で Q0 (CH1) が下がり Q1 (CH2) が上がる。10 ms 後に Q1 が下がり Q2 へ
+time: 5ms/div
+trigger: ch2 rising 1.65V
+ch1: {wave: pulse 10Hz 1.65V offset 1.65V duty 10% phase 36deg, range: 1V/div, position: 0.3div}
+ch2: {wave: pulse 10Hz 1.65V offset 1.65V duty 10%, range: 1V/div, position: -3.5div}
+cursors: [0, 10ms]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/scope/07-bus-trigger.svg)
+
+2 本を同じ 1 V/div で上下に分けて並べた (重ねると H と L が見分けにくいため)。
+
 ## 見るべき値
 
 計算値。Pattern のクロックは 100 Hz (7-2 と同じ)。

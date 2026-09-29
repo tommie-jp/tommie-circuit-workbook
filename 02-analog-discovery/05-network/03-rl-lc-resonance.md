@@ -102,6 +102,49 @@ corner と同じ値になる — これは R/(2πL) が Q に依らず帯域幅�
 | 5.03 kHz (f₀、共振点) | 0.00 dB (最大、電流最大) | 0.0° |
 | 5.89 kHz (f₀ + BW/2、上側 −3 dB 点) | −3.01 dB | −45.0° |
 
+図3 は S1 を閉じた RL と開いた LC を同じ 100 Hz〜100 kHz に並べたもの、
+図4 は LC の山を計器の設定と同じ 1〜20 kHz で拡げたもの。
+
+```graph
+title: 図3 S1 を開くと 5.03 kHz に 0 dB の山が現れる — RL は 1.59 kHz から落ちるだけ
+x: 周波数 Hz log 100..100k
+y:
+  - 利得 dB
+  - 位相 deg
+lines:
+  RL (S1 閉) 利得 dB: -10*log10(1+(0.0628319*x/100)^2)
+  LC (S1 開) 利得 dB: -10*log10(1+((0.0628319*x-1/(6.28319e-7*x))/100)^2)
+  RL (S1 閉) 位相 deg: -deg(atan(0.0628319*x/100))
+  LC (S1 開) 位相 deg: -deg(atan((0.0628319*x-1/(6.28319e-7*x))/100))
+notes:
+  - level -3dB
+  - mark 100
+  - mark 1.59k
+  - mark 5.033k
+  - mark 10k
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/03-rl-lc-resonance-1.svg)
+
+```graph
+title: 図4 LC の山 — −3 dB の 2 点 (4.30 kHz・5.89 kHz) で位相は ±45°
+x: 周波数 Hz log 1k..20k
+y:
+  - 利得 dB
+  - 位相 deg
+lines:
+  利得 dB: -10*log10(1+((0.0628319*x-1/(6.28319e-7*x))/100)^2)
+  位相 deg: -deg(atan((0.0628319*x-1/(6.28319e-7*x))/100))
+notes:
+  - level -3dB
+  - band 4.30k 5.89k: 帯域幅 1.59 kHz
+  - mark 4.30k
+  - mark 5.033k
+  - mark 5.89k
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/03-rl-lc-resonance-2.svg)
+
 分かること:
 
 - **S1 を閉じると RL の corner (1.59 kHz) しか出ず、共振の山は見えない。**

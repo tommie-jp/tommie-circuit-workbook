@@ -86,6 +86,23 @@ wires:
 | フィルタ 2 の ENBW | **250 Hz** | |
 | CH2 の RMS の比 (フィルタ 1 出力 ÷ フィルタ 2 出力) | 約 **3.16 倍 (10.0 dB)** = √(2500/250) | ENBW の比の平方根。同じノイズ源を通した 2 つの RC の比較で使える |
 
+2 つのフィルタの利得を同じ図に描くと、f<sub>c</sub> が 10 倍違う分だけ、雑音を通す帯域が狭くなるのが分かる。
+
+```graph
+title: 図3 C1 を 1 µF にすると遮断周波数が 1/10 になり、雑音を通す帯域も 1/10
+x: 周波数 Hz log 10..100k
+y: 利得 dB -50..5
+lines:
+  フィルタ 1 (100 nF) dB: 20*log10(1/sqrt(1+(x/1592)^2))
+  フィルタ 2 (1 µF) dB: 20*log10(1/sqrt(1+(x/159.2)^2))
+notes:
+  - level -3dB
+  - mark 159
+  - mark 1.59k
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/graph/07-noise-rc-filter.svg)
+
 分かること:
 
 - **ENBW は RC だけで決まり、ノイズ源の中身 (絶対レベル) を知らなくても計算できる。**

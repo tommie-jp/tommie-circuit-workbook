@@ -96,6 +96,25 @@ wires:
 | 1 MHz | −1.44 dB、−32.1° | −2.09 dB、−38.1° | 約 0.65 dB、6° |
 | 10 MHz | −16.07 dB、−81.0° | −17.97 dB、−82.7° | 約 1.9 dB、2° |
 
+```graph
+title: 図3 寄生 2.5 pF で折れ点が 1.59 MHz から 1.27 MHz へ下がる
+x: 周波数 Hz log 100k..10M
+y:
+  - 利得 dB -20..0
+  - 位相 deg -90..0
+lines:
+  理論 10 pF 利得 dB: -10*log10(1+(2*pi*x*10k*10p)^2)
+  実測相当 12.5 pF 利得 dB: -10*log10(1+(2*pi*x*10k*12.5p)^2)
+  理論 10 pF 位相 deg: -deg(atan(2*pi*x*10k*10p))
+  実測相当 12.5 pF 位相 deg: -deg(atan(2*pi*x*10k*12.5p))
+notes:
+  - mark 1M
+  - mark 10M
+  - level -3dB
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/graph/04-rc-lowpass-deviation.svg)
+
 **ジャンパのインダクタンス (8-3) はここではほぼ効かない。** R = 10 kΩ という
 高いインピーダンスの前では、数十 nH の直列リアクタンス (10 MHz でも数 Ω) は
 無視できるほど小さい。**寄生が効くかどうかは、回路自身のインピーダンスとの

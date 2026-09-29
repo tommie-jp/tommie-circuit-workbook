@@ -120,6 +120,21 @@ wires:
 Pattern と Logic は同じマスタークロックを共有するので、Data の遷移を Clock の
 立ち上がりから何サンプルずらすかで、setup の時間を 10 ns 刻みで自由に作れる。
 
+Data を Clock の立ち上がりの 100 ns 前に切り替えた所を、理想の角で描くと次のようになる。
+
+```scope
+title: 図3 Data (CH2) が Clock (CH1) より 100 ns 先に変わる
+time: 50ns/div
+trigger: ch1 rising 1.65V
+ch1: {wave: = 3.3V * step(t), range: 1V/div, position: 0.5div}
+ch2: {wave: = 3.3V * step(t + 100ns), range: 1V/div, position: -3.5div}
+cursors: [-100ns, 0]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/scope/08-setup-hold.svg)
+
+2 本を同じ 1 V/div で上下に分けて並べた。
+
 ## 見るべき値
 
 CD4013B のデータシート (Recommended Operating Conditions) の最小セットアップ

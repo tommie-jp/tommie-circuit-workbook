@@ -283,6 +283,8 @@ signal: square 500Hz 1V
 markers: [500Hz, 1.5kHz, 4.5kHz, 9.5kHz]
 ```
 
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/spectrum/05-rc-filter-1.svg)
+
 ```spectrum
 title: 図8 出力 (CH2) — ローパスを通した後
 device: ad2
@@ -302,6 +304,8 @@ signal:
   - sine 9.5kHz 7.44mV
 markers: [500Hz, 1.5kHz, 4.5kHz, 9.5kHz]
 ```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/spectrum/05-rc-filter-2.svg)
 
 | 高調波 | 周波数 | CH1 (計算値) | CH2 (計算値) | 差 = フィルタの利得 |
 | --- | --- | --- | --- | --- |

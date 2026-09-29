@@ -71,6 +71,21 @@ wires:
 Pico 側 (MicroPython) も同じ 115200 bps で `uart.write(b'U')` のようなコードを
 1 秒ごとに実行させておく。
 
+`'U'` (0x55) の 1 フレームを DIO0 の電圧で描くと次のようになる。LSB から送るので、
+スタートビット (L) の後は 1・0・1・0… と交互に並び、ストップビット (H) で終わる。
+
+```scope
+title: 図3 'U' の 1 フレームは 86.8 µs、1 ビットは 8.68 µs
+time: 10us/div
+trigger: ch1 falling 1.65V at -4div
+ch1: {wave: = 3.3V * (1 - step(t) * step(78.125us - t) * step(sin(2 * pi * 57.6kHz * t))), range: 1V/div, position: -3div}
+cursors: [0, 8.68us]
+notes:
+  - band 0 86.8us: 1 フレーム (10 ビット)
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/scope/03-uart-pico.svg)
+
 ## 見るべき値
 
 計算値。115200 bps では 1 ビット = 1/115200 s。

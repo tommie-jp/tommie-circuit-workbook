@@ -72,6 +72,20 @@ sin x (1 周期ぶん) と sin 3x (3 周期ぶん) が同時に入っている�
 周波数成分は **1000 Hz (基本波、sin x の分) と 3000 Hz (3 次、sin 3x の分)**
 の 2 本になる。
 
+```spectrum
+title: 図2 1000 Hz と 3000 Hz に同じ高さ (−6.76 dBV) の 2 本が立つ
+device: ad2
+sweep: 0-5kHz
+samples: 8192
+window: flattop
+signal:
+  - sine 1kHz 0.6495V
+  - sine 3kHz 0.6495V
+markers: [1kHz, 3kHz]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/spectrum/10-formula-waveform.svg)
+
 ## 見るべき値
 
 計算値。正規化で両方の項を同じ係数 (1/1.5396) で割っているので、**2 つの

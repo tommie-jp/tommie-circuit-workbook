@@ -88,6 +88,7 @@ print("-- done --");
 | f [Hz] | 理論ゲイン [dB] |
 | --- | --- |
 | 100 | −0.02 |
+| 300 | −0.15 |
 | 1,000 | −1.45 |
 | 3,000 | −6.58 |
 | 10,000 | −16.07 |
@@ -98,6 +99,27 @@ print("-- done --");
 Script が出す表の `Gain[dB]` 列がこの理論値に近ければ、配線と Script の両方が
 合っている。**1-5 で 1 行だけ確かめた表が、ここでは 8 行に増えただけ** —
 やっていることの本質は同じで、繰り返しを Script に任せている。
+
+Script が出す 8 行を方眼に打つと、この線の上に乗るはずである。
+
+```graph
+title: 図2 Script の Gain[dB] が乗るはずの理論の線 (計算)
+x: 周波数 Hz log 100..300k
+y: 利得 dB -50..0
+lines:
+  理論 dB: -10*log10(1+(x/1.5915k)^2)
+notes:
+  - mark 1k
+  - mark 3k
+  - mark 10k
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/11-automation/graph/01-script-sweep.svg)
+
+分かること:
+
+- 10 kHz から上は 10 倍ごとに約 20 dB ずつ下がる (1 次のローパスの傾き)。表の
+  30 k → 300 kHz の 2 行も 20 dB 差になっている
 
 ## 出典
 

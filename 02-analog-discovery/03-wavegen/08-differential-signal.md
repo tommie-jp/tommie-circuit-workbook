@@ -68,7 +68,18 @@ W1 (7 列)・W2 (15 列) をそれぞれ引き出し、`1+`/`1-` をこの 2 本
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Sine、1 kHz、Amplitude 1 V、Offset 0 V、Phase 0°。W2: Sine、1 kHz、Amplitude 1 V、Offset 0 V、**W1 に同期させ Phase 180°** |
-| Scope | CH1 (差動): DC 結合、Range 1 V/div。CH2 (片側): DC 結合、Range 500 mV/div |
+| Scope | CH1 (差動): DC 結合、Range 1 V/div。CH2 (片側): DC 結合、Range 1 V/div (CH1 とそろえて 2 倍の差を見る) |
+
+```scope
+title: 図3 差動の CH1 は片側の CH2 の 2 倍 (同じ 1 V/div)
+time: 200us/div
+trigger: ch2 rising 0V
+ch1: {wave: sine 1kHz 2V, range: 1V/div}
+ch2: {wave: sine 1kHz 1V, range: 1V/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/08-differential-signal.svg)
 
 ## 見るべき値
 

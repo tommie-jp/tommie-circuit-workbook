@@ -96,6 +96,28 @@ wires:
 | 15.9 kHz (10×f<sub>c</sub>) | −40.10 dB | −168.0° |
 | 159 kHz (100×f<sub>c</sub>) | −80.00 dB | −178.8° |
 
+図3 は 2 段 (負荷込み) と、5-1 の 1 段を同じ枠に重ねたもの。
+
+```graph
+title: 図3 2 段は 1 桁で −40 dB 落ちる (1 段は −20 dB)、fc で −6.44 dB・−90°
+x: 周波数 Hz log 100..200k
+y:
+  - 利得 dB -100..0
+  - 位相 deg -180..0
+lines:
+  2 段 利得 dB: -10*log10((1-(x/1591.5)^2)^2+(2.1*x/1591.5)^2)
+  1 段 (5-1) 利得 dB: -10*log10(1+(x/1591.5)^2)
+  2 段 位相 deg: -deg(atan2(2.1*x/1591.5, 1-(x/1591.5)^2))
+  1 段 (5-1) 位相 deg: -deg(atan(x/1591.5))
+notes:
+  - mark 159
+  - mark 1.59k
+  - mark 15.9k
+  - mark 159k
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/09-two-stage-rc-40db.svg)
+
 分かること:
 
 - **f<sub>c</sub> から 10×f<sub>c</sub> の 1 桁で −40.1 dB → 10×f<sub>c</sub> から 100×f<sub>c</sub> の

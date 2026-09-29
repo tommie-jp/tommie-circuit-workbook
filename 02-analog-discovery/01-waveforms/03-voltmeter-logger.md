@@ -73,6 +73,21 @@ R1 と R2 は 10 列の穴 (c10 / d10) で中点を共有する。CH1 はその�
 | Data Logger の 60 点 | すべて 1.56 V 前後で横ばい | 固定の抵抗分圧は時間が経っても変わらない (温度センサーなどを使う 1-9 との違い) |
 | Data Logger のグラフの横軸 | 0〜60 s、60 点 | Scope の記録 (ms〜s のオーダー) より遥かに長い時間を扱える |
 
+Data Logger の画面は、横軸 0〜60 s に 1.56 V の水平な線が引かれるだけになる
+(計算値で描いた目安)。
+
+```graph
+title: 図3 分圧の 60 秒 — 1.56 V のまま動かない
+x: 時間 s 0..60
+y: CH1 の電圧 V 0..5
+lines:
+  分圧の中点 (計算) V: 5*1/(2.2+1)+0*x
+notes:
+  - mark 30
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/graph/03-voltmeter-logger.svg)
+
 ## 出典
 
 自作。

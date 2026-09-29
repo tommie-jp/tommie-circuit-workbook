@@ -71,6 +71,22 @@ wires:
 | Math 2 | `CH1 × CH2` (瞬時電力。CH2 は 1 Ω の両端なので、数値としては電流 [A] と同じ) |
 | Math 3 | `∫ CH2 dt` (電荷。積分区間はグラフの表示幅いっぱい) |
 
+CH2 は 9.9 mV しか振れないので 5 mV/div に絞る (CH1 とは別の尺度)。
+Math は瞬時電力 CH1 × CH2 (1 Ω なので V² の数がそのまま W)。
+CH1 と CH2 は尺度を変えたので、画面の上ではぴったり重なる (電流は電圧と同位相)。
+
+```scope
+title: 図3 瞬時電力 (Math) は 2 倍の周波数で振れ、平均は 4.95 mW で 0 にならない
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+ch2: {wave: ch1 | gain 0.0099, range: 5mV/div}
+math: {expr: ch1 * ch2, unit: W, range: 2mW/div, position: -3div}
+measure: [vmax, avg]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/06-math-channel.svg)
+
 ## 見るべき値
 
 | 項目 | 期待する値 (計算値) | 計算 |

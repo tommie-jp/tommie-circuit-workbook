@@ -58,6 +58,25 @@ wires:
 | **9 MHz (f<sub>BW</sub>)** | **−3.01 dB** | **−45.0°** |
 | 10 MHz | −3.49 dB | −48.0° |
 
+```graph
+title: 図2 DUT なしでも 9 MHz で −3 dB・−45° — AD 自身の帯域の壁
+x: 周波数 Hz log 100k..10M
+y:
+  - 利得 dB -4..0
+  - 位相 deg -60..0
+lines:
+  利得 dB: -10*log10(1+(x/9M)^2)
+  位相 deg: -deg(atan(x/9M))
+notes:
+  - level -3dB
+  - level -45deg
+  - mark 1M
+  - mark 5M
+  - mark 9M
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/08-9mhz-wall.svg)
+
 分かること:
 
 - **DUT が無いのに 9 MHz 付近から利得が落ちる。** これは測っている回路の問題では

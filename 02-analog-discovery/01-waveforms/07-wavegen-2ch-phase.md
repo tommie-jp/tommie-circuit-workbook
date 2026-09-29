@@ -45,6 +45,33 @@ wires:
 | Scope (CH1・CH2) | DC、Time/div 20 μs 程度 |
 | カーソル | 縦カーソル 2 本を X（時間）モードにする |
 
+次の 2 枚は Time/div と V/div を揃え、周波数だけを変えた。W2 の位相 90° は
+W1 より**進む**向きなので、CH2 は CH1 より左 (早い時刻) で 0 V を上に横切る。
+
+```scope
+title: 図2 10 kHz — CH2 は CH1 より 25.0 μs 早く 0 V を横切る (90°)
+time: 20us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 10kHz 1V, range: 500mV/div}
+ch2: {wave: sine 10kHz 1V phase 90deg, range: 500mV/div}
+cursors: [-25us, 0]
+measure: [freq, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/scope/07-wavegen-2ch-phase-1.svg)
+
+```scope
+title: 図3 20 kHz — 時間差は 12.5 μs に縮むが位相は 90° のまま
+time: 20us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 20kHz 1V, range: 500mV/div}
+ch2: {wave: sine 20kHz 1V phase 90deg, range: 500mV/div}
+cursors: [-12.5us, 0]
+measure: [freq, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/scope/07-wavegen-2ch-phase-2.svg)
+
 ## 見るべき値
 
 周期 T = 1 / 10 kHz = **100 μs**。位相差 90° は 1/4 周期にあたる。

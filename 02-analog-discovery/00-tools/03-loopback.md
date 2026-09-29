@@ -39,7 +39,18 @@ W1 (Wavegen の出力) と M1 (オシロの CH1) を直接つなぎ、GND も共
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen (W1) | 正弦波、1 kHz、振幅 1 V (2 Vpp)、オフセット 0 V |
-| Scope (CH1) | DC、Range ±5 V 程度、Auto トリガ |
+| Scope (CH1) | DC、Range 500 mV/div (±2 V)、Auto トリガ |
+
+```scope
+title: 図2 Vpp 2.00 V・1.000 kHz が設定どおり出る
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+cursors: [0, 1ms]
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/scope/03-loopback.svg)
 
 ## 見るべき値
 

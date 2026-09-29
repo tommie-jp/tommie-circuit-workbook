@@ -42,6 +42,36 @@ wires:
 | Wavegen (W2) | 正弦波、1 kHz、振幅 1 V、位相 90° |
 | Scope | 表示モードを **XY** に切り替え、X = CH1、Y = CH2 |
 
+```scope
+title: 図2 位相差 90°・同じ振幅は円になる
+view: xy
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+ch2: {wave: sine 1kHz 1V phase 90deg, range: 500mV/div}
+xy: ch1 ch2
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/05-xy-lissajous-1.svg)
+
+```scope
+title: 図3 同位相 (0°) は右肩上がりの直線
+view: xy
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+ch2: {wave: sine 1kHz 1V, range: 500mV/div}
+xy: ch1 ch2
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/05-xy-lissajous-2.svg)
+
+```scope
+title: 図4 W2 を 2 kHz (1:2) にすると 8 の字
+view: xy
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+ch2: {wave: sine 2kHz 1V, range: 500mV/div}
+xy: ch1 ch2
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/05-xy-lissajous-3.svg)
+
 ## 見るべき値
 
 | 設定 | 見え方 | 分かること |

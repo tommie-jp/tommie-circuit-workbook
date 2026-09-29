@@ -138,6 +138,22 @@ perfboard 側は**列間容量の代わりに隣接パッド間の容量**が乗
 | 1 MHz | −1.45 dB、−32.1° | −2.09 dB (差 0.64 dB) | −1.52 dB (差 0.07 dB) |
 | 10 MHz | −16.07 dB、−81.0° | −17.97 dB (差 1.90 dB) | −16.32 dB (差 0.25 dB) |
 
+```graph
+title: 図4 perfboard の線は理論にほぼ重なり、breadboard だけが低い周波数側へずれる
+x: 周波数 Hz log 100k..10M
+y: 利得 dB -20..0
+lines:
+  理論 10 pF dB: -10*log10(1+(2*pi*x*10k*10p)^2)
+  breadboard 12.5 pF dB: -10*log10(1+(2*pi*x*10k*12.5p)^2)
+  perfboard 10.3 pF dB: -10*log10(1+(2*pi*x*10k*10.3p)^2)
+notes:
+  - mark 1M
+  - mark 10M
+  - level -3dB
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/graph/07-perfboard-comparison.svg)
+
 **perfboard は breadboard よりも理論値に近い。** 8-4 で見た「板のせいで
 理論と実測がずれる」という問題は、板そのものの構造 (長い金属レールが並走
 するかどうか) に原因があり、**perfboard に組み替えるだけで寄生の影響が

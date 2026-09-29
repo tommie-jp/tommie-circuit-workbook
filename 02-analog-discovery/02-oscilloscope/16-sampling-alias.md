@@ -37,6 +37,29 @@ wires:
 | Wavegen (W1) | 正弦波、**1 MHz**、振幅 1 V |
 | Scope (CH1) | DC、Sample Rate を **1.2 MS/s** に指定する |
 
+```scope
+title: 図2 1.205 MS/s で取ると 1 MHz が 205 kHz に見える (エイリアス)
+time: 2us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 205kHz 1V, range: 500mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/16-sampling-alias-1.svg)
+
+```scope
+title: 図3 10 MS/s に戻すと正しく 1 MHz
+time: 200ns/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1MHz 1V, range: 500mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/16-sampling-alias-2.svg)
+
+図2 は WaveForms が点を結んで見せる形を描いたもの。1 周期あたりの点は
+1.205 MS/s ÷ 205 kHz ≈ 6 点しか無いので、実機では角ばった正弦波に見える。
+
 ## 見るべき値
 
 ナイキスト周波数 = サンプルレート ÷ 2 = 1.2 MHz ÷ 2 = **0.6 MHz**。信号

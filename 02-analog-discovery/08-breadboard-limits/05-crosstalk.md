@@ -101,6 +101,27 @@ wires:
 しない**というのが、ここでの実用上の教訓 (8-9 のデカップリングの置き場所にも
 通じる考え方)。
 
+```graph
+title: 図3 浮いた列の漏れは −20.5 dB で頭打ち、100 Ω の終端で 10 MHz でも −36 dB
+x: 周波数 Hz log 100..100M
+y: 漏れ dB -80..0
+lines:
+  浮いたまま dB: 20*log10(2*pi*x*2.5p*1M/sqrt(1+(2*pi*x*26.5p*1M)^2))
+  Rterm 100 Ω dB: 20*log10(2*pi*x*2.5p*99.99/sqrt(1+(2*pi*x*26.5p*99.99)^2))
+notes:
+  - mark 1k
+  - mark 10M
+  - level -20.5dB
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/graph/05-crosstalk.svg)
+
+分かること:
+
+- 浮いた被害側の漏れは 20 kHz あたりで −20.5 dB (容量の比) に達し、
+  それより上は周波数によらない
+- 100 Ω で終端すると、漏れは 1 MHz で −56 dB と小さく、周波数が 10 倍になるごとに 20 dB 増える
+
 ## 出典
 
 自作。計器の名前と操作は Digilent の

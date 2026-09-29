@@ -121,6 +121,22 @@ C = I / (2πf × V<sub>CH2</sub>) で求める (CH2 は CH1 より 90° 遅れ�
 - 1 MHz に落とすと、CH2 は抜いたとき 0.995 V・挿したとき 0.995 V とほぼ同じになり、
   差が読み取れない (X<sub>C</sub> が 10 倍になり、Rref との比が悪くなる)
 
+同じ計算を周波数に対して並べると、2 本が分かれるのは数 MHz より上だけだと分かる。
+
+```graph
+title: 図3 CH2 の振幅は 1 MHz では挿しても抜いても同じ、10 MHz で 18 mV 分かれる
+x: 周波数 Hz log 100k..30M
+y: CH2 の振幅 V 0..1.1
+lines:
+  抜く (48 pF) V: 1/sqrt(1+(2*pi*x*330*48p)^2)
+  挿す (50.5 pF) V: 1/sqrt(1+(2*pi*x*330*50.5p)^2)
+notes:
+  - mark 1M
+  - mark 10M
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/graph/02-row-capacitance.svg)
+
 ## 出典
 
 自作。計器の名前と操作は Digilent の

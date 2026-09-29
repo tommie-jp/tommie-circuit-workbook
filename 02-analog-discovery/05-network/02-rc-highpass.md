@@ -83,6 +83,29 @@ wires:
 | 10 kHz | −0.11 dB (ほぼ 0 dB) | +9.0° |
 | 100 kHz | −0.001 dB (ほぼ 0 dB) | +0.9° |
 
+図3 は 5-1 のローパスを同じ枠に重ねたもの。
+
+```graph
+title: 図3 ハイパスとローパスは 1.59 kHz で鏡写し — 利得は同じ −3 dB、位相は ±45°
+x: 周波数 Hz log 100..100k
+y:
+  - 利得 dB
+  - 位相 deg
+lines:
+  ハイパス 利得 dB: 20*log10((x/1.59k)/sqrt(1+(x/1.59k)^2))
+  ローパス (5-1) 利得 dB: 20*log10(1/sqrt(1+(x/1.59k)^2))
+  ハイパス 位相 deg: deg(atan(1.59k/x))
+  ローパス (5-1) 位相 deg: -deg(atan(x/1.59k))
+notes:
+  - level -3dB
+  - mark 100
+  - mark 1.59k
+  - mark 10k
+  - mark 100k
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/02-rc-highpass.svg)
+
 分かること:
 
 - **5-1 (ローパス) と 5-2 (ハイパス) は f<sub>c</sub> で鏡写しの形になる。**

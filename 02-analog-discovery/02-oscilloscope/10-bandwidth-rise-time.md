@@ -42,6 +42,20 @@ W1（100 kHz、0〜3.3 V の方形波）を CH1 に直結。周期 10 μs に対
 | Scope (CH1) | DC、Time/div 10〜20 ns（立ち上がり 1 つを画面いっぱいに拡大） |
 | カーソル | 縦カーソル 2 本を、10%（0.33 V）と 90%（2.97 V）の高さに合わせて X モード |
 
+付属ワイヤの経路を 1 次の低域 (t<sub>r</sub> = 2.2 τ = 55 ns、τ = 25 ns) とみなして描いた、
+見えるはずの立ち上がり。カーソルは 10 % (0.33 V) と 90 % (2.97 V) の所。
+
+```scope
+title: 図2 カーソルで 10 %→90 % を読むと約 55 ns
+time: 20ns/div
+trigger: ch1 rising 1.65V at -4div
+ch1: {wave: square 100kHz 1.65V offset 1.65V | rc 25ns, range: 500mV/div, position: -3div}
+cursors: [-14.7ns, 40.3ns]
+measure: [rise]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/10-bandwidth-rise-time.svg)
+
 ## 見るべき値
 
 ループバックでは発生器とオシロが直列に効くので、それぞれの立ち上がり時間を

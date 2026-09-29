@@ -81,8 +81,29 @@ Rs は 5〜10 列の中点が信号源 TP（10 列）。CH1（`1+`）は TP と�
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen (W1) | 方形波、1 kHz、振幅 1.65 V、オフセット 1.65 V（0〜3.3 V） |
-| Scope (CH1) | DC、Range 0〜3.3 V、Time/div を立ち上がりが見えるまで速く（1 μs 程度） |
-| Scope (CH2) | DC、Range 0〜0.4 V（1/10 に減衰されるため） |
+| Scope (CH1) | DC、Range 0〜3.3 V (1 V/div)、Time/div は角の形が見える 20 μs/div 程度 |
+| Scope (CH2) | DC、Range 0〜0.4 V (200 mV/div、1/10 に減衰されるため) |
+
+C<sub>trim</sub> の 3 つの設定で CH2 に出る立ち上がりを重ねる。角の形は
+プローブの時定数 (R<sub>p</sub> ∥ R<sub>in</sub>) × (C<sub>trim</sub> + C<sub>in</sub>) ≈ 23〜31 μs で決まる。
+Time/div を 20 μs/div 程度にするのはこのためで、1 μs/div では角の後の平らな所しか映らない。
+
+```scope
+title: 図3 合った 2.6 pF (CH2) は平ら、1 pF (CH3) は丸く、10 pF (CH4) は跳ねる
+time: 20us/div
+trigger: ch1 rising 1.65V at -4div
+ch1: {wave: square 1kHz 1.65V offset 1.65V, range: 1V/div, position: -3div}
+ch2: {wave: = 0.099 * ch1, range: 200mV/div, position: -3div}
+ch3: {wave: = 3.3V * step(t) * (0.099 - 0.059 * exp(-t / 22.5us)), range: 200mV/div, position: -3div}
+ch4: {wave: = 3.3V * step(t) * (0.099 + 0.195 * exp(-t / 30.6us)), range: 200mV/div, position: -3div}
+cursors: [1us, 100us]
+measure: [vmax]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/09-probe-compensation.svg)
+
+ここで 1 pF は立ち上がり直後が 3.3 V × 1/(1 + 24) ≈ 0.13 V、10 pF は
+3.3 V × 10/(10 + 24) ≈ 0.97 V で、どちらも数十 μs かけて 3.3 V ÷ 10.1 ≈ 0.33 V に落ち着く。
 
 ## 見るべき値
 

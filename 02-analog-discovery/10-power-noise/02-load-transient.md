@@ -134,6 +134,31 @@ wires:
 | Scope | CH1 = Rload の両端 (出力電圧)、CH2 = Q1 のゲート。トリガ = CH2 の立ち上がり、Single または Normal |
 | 時間軸 | 50 ms/div 程度 (2 Hz の 1 周期 500 ms の一部が見える範囲) |
 
+切り替わりの前 (CH1) と後 (CH3) で落ち着いた出力を、時間軸を 5 ms/div に縮めて並べた (模型が定常に
+落ち着くのに要る長さで、リップルは 6 周期入る)。
+Q1 off (τ = 1 kΩ × 470 µF) と Q1 on (τ = 320 Ω × 470 µF) の 2 つの状態を、
+9 V<sub>rms</sub>・60 Hz の全波整流とコンデンサ入力の模型で計算した (2 つの状態を
+同じ 100 mV/div で重ねたもので、切り替わりの瞬間そのものではない。CH3 は重ねるための
+仮の置き場で、ゲートを見る CH2 とは別)。
+縦は直流の 11 V を差し引いて (Scope の Offset を −11 V にして) 拡大してある。
+
+```scope
+title: 図3 Q1 on (CH3) ではリップルが約 3 倍になり、谷も下がる (模型)
+time: 5ms/div
+trigger: ch1 falling
+ch1: {wave: sine 60Hz 12.73V | abs | offset -1.4V | peak 470ms | offset -11V, range: 100mV/div, position: 0div}
+ch3: {wave: sine 60Hz 12.73V | abs | offset -1.4V | peak 150.4ms | offset -11V, range: 100mV/div, position: 0div}
+measure: [vpp, vmin]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/10-power-noise/scope/02-load-transient.svg)
+
+模型のリップルは Q1 off で 188 mV<sub>pp</sub>、on で 553 mV<sub>pp</sub> と、下の表の
+201・628 mV より 1 割ほど小さく、谷の差 (Vmin の差) も 365 mV と、下の ΔV の 427 mV より
+小さい。表の I/(f<sub>ripple</sub>・C) は放電が 1 周期
+まるごと続くと見る近似で、実際は山の手前で充電が始まるぶん放電の時間が短い。
+近似は上限側の見積もりと考えてよい。
+
 ## 見るべき値
 
 計算値。10-1 と同じ V<sub>DC</sub> ≒ 11.3 V (9 V<sub>rms</sub> のピークからダイオード

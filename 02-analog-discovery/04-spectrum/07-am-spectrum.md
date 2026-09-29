@@ -39,6 +39,23 @@ wires:
 | Wavegen | Carrier: Sine **100 kHz**、Amplitude 1 V。AM: Modulation Sine **1 kHz**、Depth **50%** (3-3 と同じ) |
 | Spectrum | Source: Channel 1。**Start 90 kHz、Stop 110 kHz**。サンプル周波数 250 kHz、FFT 点数 32768。Window: **Flat-top** (振幅を正しく読むため、4-1・4-3)。単位: dBV |
 
+画面は次のようになる。搬送波の両側 1 kHz に側波帯が 1 本ずつ立つ。
+
+```spectrum
+title: 図2 側波帯は搬送波の 12 dB 下に ±1 kHz で 1 本ずつ
+device: ad2
+sweep: 90kHz-110kHz
+samples: 32768
+window: flattop
+signal:
+  - sine 100kHz 1V
+  - sine 99kHz 0.25V
+  - sine 101kHz 0.25V
+markers: [100kHz, 99kHz, 101kHz]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/07-am-spectrum.svg)
+
 ## 見るべき値
 
 計算値。v(t) = A<sub>c</sub>[1 + m cos(2π f<sub>m</sub>t)] cos(2π f<sub>c</sub>t) を展開すると、

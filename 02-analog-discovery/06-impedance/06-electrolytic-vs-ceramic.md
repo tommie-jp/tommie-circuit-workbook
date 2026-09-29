@@ -99,6 +99,28 @@ Offset 0.5 V を足すと、コンデンサは 0.5 V に充電された上で ±
 | 電解 4.7 µF | 34.8 Ω | −76.7° | 8.0 Ω |
 | セラミック 4.7 µF | 33.9 Ω | **−89.97°** | 0.02 Ω |
 
+同じ模型 (C + ESR) で周波数を振ると、ESR の差は位相にだけはっきり出る。
+
+```graph
+title: 図3 |Z| はほぼ同じでも、電解の位相は 1 kHz で −76.7° まで浅い
+x: 周波数 Hz log 100..100k
+y:
+  - インピーダンス Ω log
+  - 位相 deg -90..0
+lines:
+  "電解 |Z| Ω": sqrt(8^2+(1/(2*pi*x*4.7u))^2)
+  "セラミック |Z| Ω": sqrt(0.02^2+(1/(2*pi*x*4.7u))^2)
+  電解 位相 deg: -deg(atan2(1/(2*pi*x*4.7u), 8))
+  セラミック 位相 deg: -deg(atan2(1/(2*pi*x*4.7u), 0.02))
+notes:
+  - mark 1k
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/graph/06-electrolytic-vs-ceramic.svg)
+
+周波数が上がって X<sub>C</sub> が ESR に近づくほど電解の位相は 0° へ戻り、\|Z\| は
+8 Ω で下げ止まる。セラミックは 100 kHz でも −89.4° のまま (ESL は模型に入れていない)。
+
 分かること:
 
 - **セラミックは位相がほぼ −90° ぴったり。** 6-2 の電解 (−76.7°) と比べて

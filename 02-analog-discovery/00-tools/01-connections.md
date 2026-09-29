@@ -81,6 +81,23 @@ wires:
 | CH2 | −5.00 V 前後 | 同じ 2 点でも `+` / `-` を入れ替えると符号が反転する |
 | CH1 と CH2 の絶対値 | 同じ (5.00 V) | 差動入力は「差」を読むので、大きさは変わらず符号だけ変わる |
 
+V+ の設定を 0〜5 V で動かしたときの 2 つの読みを並べると、2 本は 0 V を軸に
+鏡映しになる。
+
+```graph
+title: 図3 CH2 の読みはいつも CH1 の符号を反転した値 — 5 V で +5.00 V と −5.00 V
+x: V+ の設定 V 0..5
+y: 読み値 V -6..6
+lines:
+  CH1 (普通の向き) V: x
+  CH2 (逆向き) V: -x
+notes:
+  - mark 5
+  - level 0V
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/graph/01-connections.svg)
+
 ## 出典
 
 自作。計器の名前と操作は Digilent の

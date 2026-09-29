@@ -52,6 +52,21 @@ wires:
 | 64 | −18.06 dB | 64 倍 |
 | 256 | −24.08 dB | 256 倍 |
 
+```graph
+title: 図2 平均回数 N を 4 倍にするたびにノイズフロアが 6 dB 下がる
+x: 平均回数 回 log 1..1000
+y: ノイズフロアの下がり幅 dB -30..0
+lines:
+  下がり幅 dB: -10*log10(x)
+notes:
+  - mark 4
+  - mark 16
+  - mark 64
+  - mark 256
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/graph/05-noise-floor-averaging.svg)
+
 分かること:
 
 - **基本波の高さは平均しても変わらない。** 毎回同じ位相・同じ振幅で出ている

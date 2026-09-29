@@ -60,6 +60,30 @@ LED の V<sub>F</sub> ≈ 2.0 V と仮定。電流 = (V+ − V<sub>F</sub>) ÷ 3
 | V+ が使う電力 | 約 45.5 mW（= 5 V × 9.1 mA） | Supplies の上限 (USB 給電で 1 系統 250 mW) に対して十分小さい |
 | ±25 V の入力範囲との比較 | 今回の回路は最大 5 V | オシロの入力レンジ (±25 V) に対して十分小さく、壊れる心配は無い |
 
+直列抵抗を変えたときの電流と、V+ が使う電力を計算で描くと次のようになる
+(V+ = 5 V、V<sub>F</sub> = 2.0 V)。
+
+```graph
+title: 図2 330 Ω なら 9.1 mA・45.5 mW — 抵抗を小さくするほど電流が増える
+x: 直列抵抗 Ω log 100..10k
+y:
+  - 電流 mA 0..30
+  - 電力 mW 0..150
+lines:
+  LED の電流 mA: (5-2.0)/x*1000
+  V+ の電力 mW: 5*(5-2.0)/x*1000
+notes:
+  - mark 330
+  - level 20mA
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/graph/02-input-range-power-limits.svg)
+
+分かること:
+
+- 抵抗を 150 Ω まで小さくすると定格の 20 mA に届く。抵抗は電流を決める部品そのもの
+- 電力は 100 Ω でも 150 mW で、USB 給電の上限 (250 mW) より先に LED の定格を超える
+
 Supplies に Current Limit という設定が無い以上、**抵抗を省いてよい場面は
 無い**。同じ抵抗のまま V+ の電圧を変えると電流が変わることは 1-8 で
 確かめる。

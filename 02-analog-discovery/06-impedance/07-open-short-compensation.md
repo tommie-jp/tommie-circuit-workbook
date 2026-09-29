@@ -105,6 +105,25 @@ Open のとき、14 列 (2− 側) は浮くのではなく **6-2 と同様に�
 | 補償前 (生の測定値) | Z<sub>meas</sub> = Z<sub>short</sub> + (R<sub>DUT</sub> ∥ Z<sub>open</sub>) | \|Z<sub>meas</sub>\| ≈ 9.88 kΩ、位相 ≈ −8.9° |
 | **補償後** | Z<sub>DUT</sub> = (Z<sub>meas</sub> − Z<sub>short</sub>) × Z<sub>open</sub> / (Z<sub>open</sub> − (Z<sub>meas</sub> − Z<sub>short</sub>)) | **10.00 kΩ、位相 0.0°** (元の 10 kΩ に戻る) |
 
+同じ計算を周波数に対して並べると、補償の効きが周波数とともに大きくなるのが分かる。
+
+```graph
+title: 図3 補償前は 1 MHz で −8.9°・9.88 kΩ にずれ、補償後は 10 kΩ・0° に戻る
+x: 周波数 Hz log 10k..10M
+y:
+  - インピーダンス kΩ 0..11
+  - 位相 deg -90..10
+lines:
+  "補償前 |Z| kΩ": sqrt((10/(1+(2*pi*x*10k*2.5p)^2))^2 + (2*pi*x*43n/1k - 10*(2*pi*x*10k*2.5p)/(1+(2*pi*x*10k*2.5p)^2))^2)
+  "補償後 |Z| kΩ": 10 + 0*x
+  補償前 位相 deg: deg(atan2(2*pi*x*43n - 10k*(2*pi*x*10k*2.5p)/(1+(2*pi*x*10k*2.5p)^2), 10k/(1+(2*pi*x*10k*2.5p)^2)))
+  補償後 位相 deg: 0*x
+notes:
+  - mark 1M
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/graph/07-open-short-compensation.svg)
+
 分かること:
 
 - **補償しないと、ただの抵抗のはずが「約 8.9° の位相を持つ何か」に見えてしまう。**

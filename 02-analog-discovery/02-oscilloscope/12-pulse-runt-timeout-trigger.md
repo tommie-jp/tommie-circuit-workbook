@@ -80,6 +80,22 @@ SW1（`@ e15`、溝をまたぐタクトスイッチ）の上側（e15 の 15 �
 | Wavegen (W1) | 方形波、2 kHz、振幅 1.65 V、オフセット 1.65 V（周期 500 μs、High/Low 各 250 μs） |
 | Scope (CH1) | DC、Range 0〜3.3 V、トリガモード **Single** |
 
+Runt トリガで Single にし、High の途中でボタンを押したときに捕まる画面。
+押している半周期だけ山が 0.82 V で止まる。
+
+```scope
+title: 図3 Runt で捕まえた 1 回 — 山が 0.5 V を越え 3.0 V に届かず 0.82 V で戻る
+time: 200us/div
+trigger: ch1 rising 500mV
+ch1: {wave: "= clip(1kV * sin(2 * pi * 2kHz * t), 0V, 3.3V) * (1 - 0.752 * (step(t) - step(t - 250us)))", range: 500mV/div, position: -3div}
+measure: [vmax]
+notes:
+  - band 0 250us: ボタンを押した半周期
+  - text 125us 0.82V: 0.82 V
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/12-pulse-runt-timeout-trigger.svg)
+
 ## 見るべき値
 
 正常な波形は周期 500 μs、High 250 μs・Low 250 μs で変わらない。3 つのトリガは

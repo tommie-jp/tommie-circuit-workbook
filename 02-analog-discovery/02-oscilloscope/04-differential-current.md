@@ -70,6 +70,19 @@ Rs (1 Ω) は LED のカソード (14 列) の続きに置く。CH1 (`1+`) は 1
 | Supplies | V+ = 5 V、Master Enable |
 | Scope (CH1) | DC、Range を ±50 mV 程度まで絞る (1 Ω の電圧はとても小さい) |
 
+Range を 2 mV/div まで絞ると、9.1 mV の直流が画面の半分ほどの高さに出る。
+直流には縁が無いのでトリガは掛からない (トリガの Mode を Auto にしておけば流れ続ける)。
+
+```scope
+title: 図3 Range を 2 mV/div に絞ると Rs の 9.1 mV (= 9.1 mA) が読める
+time: 1ms/div
+trigger: ch1 rising
+ch1: {wave: dc 9.06mV, range: 2mV/div, position: -3div}
+measure: [avg]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/04-differential-current.svg)
+
 ## 見るべき値
 
 | 測る所 | 期待する値 (計算値) | 計算 |

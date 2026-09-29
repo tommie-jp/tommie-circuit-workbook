@@ -153,6 +153,27 @@ wires:
 急に育つのが 2 トーン IMD 測定の基本の見方。9-3 の 1 dB 圧縮点に近づくほど
 この傾きも崩れてくる (非線形性が強くなるため)。
 
+IM3 の高さそのものは実測でしか決まらないので、図には「入力を上げたときの増え方」
+だけを描く (どちらも今の入力を 0 dB とした増し分)。
+
+```graph
+title: 図3 入力を 6 dB 上げると、基本波は 6 dB、IM3 は 18 dB 上がる (弱い非線形の計算)
+x: 入力の増し分 dB 0..12
+y: 出力の増し分 dB 0..40
+lines:
+  基本波 (傾き 1) dB: x
+  IM3 (傾き 3) dB: 3*x
+notes:
+  - mark 6
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/graph/04-two-tone-imd.svg)
+
+分かること:
+
+- 2 本の差 (基本波と IM3 の開き) は入力 1 dB ごとに 2 dB ずつ縮む
+- 実測で IM3 がこの傾き 3 から外れ始めたら、9-3 の圧縮に近づいている
+
 ## 出典
 
 自作。計器の名前と操作は Digilent の

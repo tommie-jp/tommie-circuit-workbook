@@ -57,6 +57,19 @@ wires:
 Frequency 1 kHz なので 1 周期 = 1000 µs。8 点を均等に敷くので、
 **1 段の幅は 1000 µs ÷ 8 = 125 µs**。
 
+```scope
+title: 図2 Custom は 8 段の階段を 125 µs ずつくり返す
+time: 125us/div
+trigger: ch1 rising 0V at -5div
+ch1: {wave: = 0.143V - 0.286V*step(-t) + 0.2857V*(step(t-125us)+step(t-250us)+step(t-375us)+step(t-625us)+step(t-750us)+step(t-875us)+step(t-1ms)+step(t-1125us)) - 2V*step(t-500us), range: 500mV/div}
+cursors: [562.5us, 687.5us]
+measure: [vmax, vmin, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/04-custom-waveform.svg)
+
+X1 は段 0 (−1.000 V)、X2 は段 1 (−0.714 V) の中ほどで、ΔX が 1 段の幅 125 µs。
+
 ## 見るべき値
 
 計算値。CSV の値 v (−1〜1) に Amplitude 1 V を掛けた電圧がそのまま出る

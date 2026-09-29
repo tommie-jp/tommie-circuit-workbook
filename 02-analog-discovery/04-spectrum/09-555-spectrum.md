@@ -107,6 +107,22 @@ wires:
 | Supplies | V+ = 5 V、Master Enable |
 | Spectrum | Source: Channel 1。Start 0 Hz、Stop 9 kHz。サンプル周波数 20 kHz、FFT 点数 32768。Window: Flat-top。単位: dBV |
 
+出力を 0〜5 V・デューティ 52.4% の理想の方形波として描くと次のようになる。
+0 Hz の線は直流分 (平均 2.62 V) である。
+
+```spectrum
+title: 図3 デューティが 50% からずれているので偶数次が −15 dBV ほどで残る
+device: ad2
+sweep: 0-9kHz
+samples: 32768
+window: flattop
+ref: 20dBV
+signal: pulse 1008Hz 2.5V offset 2.5V duty 52.4%
+markers: [1008Hz, 2016Hz, 3024Hz, 4032Hz]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/09-555-spectrum.svg)
+
 ## 見るべき値
 
 計算値。2-8 と同じく f = 1.44 / ((Ra + 2Rb) × Ct) ≈ **1008 Hz**、

@@ -98,6 +98,39 @@ Nyquist・Nichols とも、掃引そのものは Bode と同じ (Start/Stop/Step
 | −84.3° | −20.04 dB |
 | −89.4° | −40.00 dB |
 
+図3 は複素平面 (Nyquist)、図4 は位相と利得 (Nichols)。どちらも同じ H(jω) を描いたもので、
+周波数の目盛りは無い (印の読み値で表の点と突き合わせる)。
+
+```graph
+title: 図3 Nyquist — 軌跡は中心 (0.5, 0)・半径 0.5 の下半円、fc で (0.5, −0.5)
+x: 実部 Re(H) 倍 0..1
+y: 虚部 Im(H) 倍 -0.6..0
+lines:
+  H(jω) 倍: -sqrt(x-x^2)
+notes:
+  - mark 0.2
+  - mark 0.5
+  - mark 0.8
+  - text 0.9 -0.05倍: 低い周波数
+  - text 0.1 -0.05倍: 高い周波数
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/07-nyquist-nichols-1.svg)
+
+```graph
+title: 図4 Nichols — fc は (−45°, −3.01 dB) の 1 点
+x: 位相 deg -90..0
+y: 利得 dB -40..0
+lines:
+  H(jω) dB: 20*log10(cos(rad(x)))
+notes:
+  - level -3dB
+  - mark -84.3
+  - mark -45
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/07-nyquist-nichols-2.svg)
+
 分かること:
 
 - **Nyquist の軌跡は 1 次ローパスでは半円になる。** Re と Im をプロットすると、

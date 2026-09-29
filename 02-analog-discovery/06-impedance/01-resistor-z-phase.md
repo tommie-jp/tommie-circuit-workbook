@@ -83,11 +83,26 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Sine、1 kHz、Amplitude 1 V |
-| Scope | CH1 = Rref の両端 (差動)、CH2 = DUT の両端 (差動)。Range は両方 1 V/div |
+| Scope | CH1 = Rref の両端 (差動)、CH2 = DUT の両端 (差動)。Range は両方 200 mV/div |
 | Measure | CH1・CH2 の Amplitude、CH2 の CH1 に対する Phase |
 
 Rref は **DUT と同じ桁の値**を選ぶ (ここは両方 1 kΩ)。桁が離れると、片方の読みが
 小さくなりすぎて誤差が増える。
+
+2 本は同じ振幅・同じ位相なので、ぴったり重なって 1 本に見える。
+
+```scope
+title: 図3 CH1 (Rref) と CH2 (DUT) が同じ振幅・同じ位相で重なる
+time: 500us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.5V, range: 200mV/div}
+ch2: {wave: sine 1kHz 0.5V, range: 200mV/div}
+measure: [vpp, freq, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/scope/01-resistor-z-phase.svg)
+
+Vpp の半分が表の振幅 (0.500 V)。Phase は 0° と読める。
 
 ## 見るべき値
 

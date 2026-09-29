@@ -67,6 +67,30 @@ wires:
 | Wavegen (W1) | 方形波、5 MHz、振幅 1 V、オフセット 0 V |
 | Scope (CH1) | DC、Range ±1.5 V 程度、Time/div 20〜50 ns、Auto トリガ |
 
+次の 2 枚は、経路全体を下の表の −3 dB 周波数を持つ 1 次のローパス
+(ワイヤ 9 MHz → τ = 17.7 ns、同軸 12 MHz → τ = 13.3 ns) とみなして描いた目安で、
+V/div と Time/div は同じにしてある。実機の角はこれより複雑に崩れる。
+
+```scope
+title: 図3 付属ワイヤ — 角が丸く、立ち上がり (10→90 %) が約 38 ns
+time: 50ns/div
+trigger: ch1 rising 0V
+ch1: {wave: square 5MHz 1V | rc 17.7ns, range: 500mV/div}
+measure: [vpp, rise]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/scope/06-wire-vs-coax-square-wave-1.svg)
+
+```scope
+title: 図4 BNC アダプタ + 同軸 — 立ち上がりが約 29 ns に縮み角が立つ
+time: 50ns/div
+trigger: ch1 rising 0V
+ch1: {wave: square 5MHz 1V | rc 13.3ns, range: 500mV/div}
+measure: [vpp, rise]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/scope/06-wire-vs-coax-square-wave-2.svg)
+
 ## 見るべき値
 
 5 MHz の方形波の高調波は 15 MHz（3 次）、25 MHz（5 次）…と続く。角が立つには

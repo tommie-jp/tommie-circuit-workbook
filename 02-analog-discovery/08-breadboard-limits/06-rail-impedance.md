@@ -106,6 +106,21 @@ Wavegen の電流上限 (保証 10 mA 以上) に対して、I ≈ 1 V / 150 Ω 
 | 1 MHz | 6.67 mA | 約 0.95 mV | 低い周波数ではほぼ無視できる |
 | 10 MHz | 6.67 mA | **約 9.5 mV** | 「同じ GND」の 2 点に 1 桁 mV の電位差 |
 
+10 MHz のときの画面。CH2 は CH1 の 1/100 しか振れないので、V/div を別にした。
+
+```scope
+title: 図3 10 MHz でレール区間 (CH2) に 19 mVpp が出て、電流 (CH1) より 90° 進む
+time: 50ns/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 10MHz 1V, range: 500mV/div}
+ch2: {wave: sine 10MHz 9.64mV phase 90deg, range: 5mV/div}
+measure: [vpp, freq, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/scope/06-rail-impedance.svg)
+
+CH1 の 1 V (peak) を 150 Ω で割ると電流 6.67 mA、CH2 の Vpp の半分 9.6 mV がレールの電位差。
+
 **GND レールは理想的な 0 Ω の導体ではない。** ここでは意図的に電流を流して
 確かめたが、実際の回路でも、電源のスイッチングノイズ (8-12) やデジタル回路の
 消費電流の変化がレールに流れ込むたびに、同じことが起きている —

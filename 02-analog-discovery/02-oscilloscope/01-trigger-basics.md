@@ -63,6 +63,29 @@ wires:
 | トリガ (Level) | Source CH1、Above/Below 1.65 V (エッジではなくレベルで止める) |
 | トリガ (Holdoff) | 0.3 ms 程度 (周期 0.5 ms の 6 割) |
 
+立ち上がり (Rising) で止めると t = 0 (画面の中央) で波が上がり、
+立ち下がり (Falling) にすると同じ波が半周期 (250 μs) ずれて中央で下がる。
+
+```scope
+title: 図3 Rising・1.65 V で止めると中央で立ち上がる
+time: 100us/div
+trigger: ch1 rising 1.65V
+ch1: {wave: square 2kHz 1.65V offset 1.65V, range: 500mV/div, position: -3div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/01-trigger-basics-1.svg)
+
+```scope
+title: 図4 Falling に変えると中央で立ち下がる
+time: 100us/div
+trigger: ch1 falling 1.65V
+ch1: {wave: square 2kHz 1.65V offset 1.65V, range: 500mV/div, position: -3div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/01-trigger-basics-2.svg)
+
 ## 見るべき値
 
 | 設定 | 見え方 | 分かること |

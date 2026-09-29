@@ -49,6 +49,28 @@ wires:
 | Linear | 一定間隔 Δf = (1 MHz − 100 Hz) / 200 ≈ **4999.5 Hz** ずつ |
 | Log | 一定比率 ×(1 MHz / 100 Hz)^(1/200) ≈ **×1.0471** (1 ステップで約 4.7% ずつ) |
 
+図2 は Steps 201 の各点の周波数を、ステップの番号に対して描いたもの。
+
+```graph
+title: 図2 Linear は 1 歩目で 5.1 kHz に飛び、Log は 50 歩で 1 桁ずつ進む
+x: ステップ番号 番 0..200
+y: 周波数 Hz log 100..1M
+lines:
+  Linear Hz: 100+4999.5*x
+  Log Hz: 100*pow(10,0.02*x)
+notes:
+  - mark 1
+  - mark 50
+  - mark 100
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/05-sweep-settings.svg)
+
+分かること (図2):
+
+- Linear の点は 1 歩目から 5.1 kHz にあり、100 Hz〜5 kHz の間に点が 1 つも無い
+- Log の点は縦の対数軸の上で等間隔に並ぶ。50 歩で 10 倍 (100 Hz → 1 kHz → 10 kHz …)
+
 分かること:
 
 - **Linear は低い周波数の刻みが粗すぎる。** 100 Hz 付近では次の点が 5 kHz 先

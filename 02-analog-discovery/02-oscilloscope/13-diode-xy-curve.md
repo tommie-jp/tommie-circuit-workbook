@@ -82,6 +82,19 @@ CH2（`2+` / `2-`）は Rs の両端（14 列と GND）だけで、電流を mV 
 | Scope (CH2) | DC、Range 0〜200 mV 程度 |
 | 表示 | XY モード。X = CH1（ダイオード電圧）、Y = CH2（電流 × 22 Ω） |
 
+```scope
+title: 図3 0.6 V あたりから立ち上がり、0.7 V で CH2 が約 143 mV (6.5 mA)
+view: xy
+ch1: {wave: triangle 10Hz 0.35V offset 0.35V, range: 100mV/div, position: -3.5div}
+ch2: {wave: = 0.204uV * (exp(ch1 / 52mV) - 1), range: 20mV/div, position: -3.5div}
+xy: ch1 ch2
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/13-diode-xy-curve.svg)
+
+図3 は、X (V<sub>D</sub>) が 0〜0.7 V を往復するとして、Y = 22 Ω × I<sub>S</sub>(e<sup>V<sub>D</sub>/nV<sub>T</sub></sup> − 1)
+(n V<sub>T</sub> = 52 mV、0.7 V で 6.5 mA になるよう I<sub>S</sub> を選んだ理想) を描いたもの。
+
 ## 見るべき値
 
 シリコンダイオードは V<sub>D</sub> ≈ 0.6〜0.7 V あたりから急に電流が増える

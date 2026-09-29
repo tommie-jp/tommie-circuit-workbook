@@ -89,6 +89,23 @@ wires:
 | CH2 | −5.00 V 前後 | V− は負の電圧。符号を確かめる |
 | 負荷 1 kΩ の電流 | 5 mA (1 系統 25 mW) | USB 給電のときの上限 (1 系統 250 mW) の 1/10 |
 
+負荷の抵抗を変えたときに 1 系統が出す電力 (5 V × 5 V ÷ R) を描くと、1 kΩ では
+上限の 1/10、100 Ω でちょうど上限に届く。
+
+```graph
+title: 図3 1 系統の電力 — 1 kΩ で 25 mW、100 Ω で上限の 250 mW
+x: 負荷の抵抗 Ω log 50..5k
+y: 電力 mW 0..500
+lines:
+  5 V を出す系統 mW: 5*5/x*1000
+notes:
+  - level 250mW
+  - mark 100
+  - mark 1k
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/graph/01-supplies.svg)
+
 負荷を 100 Ω にすると 1 系統 250 mW で上限に届く。上限の話は 0-2 で扱う。
 
 ## 出典

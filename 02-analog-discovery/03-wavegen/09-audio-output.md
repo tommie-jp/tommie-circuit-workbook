@@ -43,6 +43,17 @@ CH1 は W1 の出力 (R1 + スピーカーの両端) をそのまま読む。
 | Wavegen | W1: Sine、**440 Hz** (ラの音、A4)、Amplitude 1 V、Offset 0 V |
 | Scope | CH1: DC 結合、Range 500 mV/div、Time/div 500 µs/div (440 Hz の 1 周期が画面に入る) |
 
+```scope
+title: 図2 440 Hz の 1 周期は 2.273 ms
+time: 500us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 440Hz 1V, range: 500mV/div}
+cursors: [0, 2.273ms]
+measure: [vpp, freq, period]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/09-audio-output.svg)
+
 ## 見るべき値
 
 計算値。スピーカーは 8 Ω、R1 = 150 Ω (合計 158 Ω)。

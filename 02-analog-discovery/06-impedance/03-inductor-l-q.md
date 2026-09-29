@@ -76,11 +76,22 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Sine、**10 kHz**、Amplitude 2 V |
-| Scope | CH1 = Rref の両端、CH2 = L<sub>DUT</sub> の両端。Range は両方 1 V/div |
+| Scope | CH1 = Rref の両端、CH2 = L<sub>DUT</sub> の両端。Range は両方 500 mV/div |
 | Measure | CH1・CH2 の Amplitude、CH2 の CH1 に対する Phase |
 
 周波数を 1 kHz ではなく 10 kHz にするのは、XL = 2πfL をある程度大きくして
 Rref と桁を合わせるため (1 kHz だと XL は 63 Ω しかない)。
+
+```scope
+title: 図3 CH2 (L の電圧) が CH1 (電流) より 89.3° 進む — 90° に足りないぶんが巻線抵抗
+time: 50us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 10kHz 1.46V, range: 500mV/div}
+ch2: {wave: sine 10kHz 1.35V phase 89.3deg, range: 500mV/div}
+measure: [vpp, freq, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/scope/03-inductor-l-q.svg)
 
 ## 見るべき値
 

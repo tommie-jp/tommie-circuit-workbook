@@ -78,7 +78,7 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Sine、1 kHz、Amplitude 0.4 V、**Offset 0.5 V** (電解に逆電圧をかけないため) |
-| Scope | CH1 = Rref の両端、CH2 = C<sub>DUT</sub> の両端。Range は両方 200 mV/div |
+| Scope | CH1 = Rref の両端、CH2 = C<sub>DUT</sub> の両端。Range は両方 100 mV/div (CH2 は Offset 0.5 V を 5 目盛下げて中央に) |
 | Measure | CH1・CH2 の Amplitude、CH2 の CH1 に対する Phase |
 
 **W1 にオフセットを足す理由。** オフセット無しの正弦波だと、C<sub>DUT</sub> の両端は
@@ -89,6 +89,19 @@ Offset 0.5 V を足すと、コンデンサは 0.5 V に充電された上で ±
 0.5 V 持ち上がる。Amplitude と Phase は交流分だけを見るので、下の値は変わらない。
 
 Xc がまだ ESR より大きいので、位相は −90° に近いがぴったりではない。
+
+```scope
+title: 図3 CH2 (C の電圧) が CH1 (電流) より 76.7° 遅れる — 90° に足りないぶんが ESR
+time: 500us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.248V, range: 100mV/div}
+ch2: {wave: sine 1kHz 0.262V offset 0.5V phase -76.7deg, range: 100mV/div, position: -5div}
+measure: [vpp, avg, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/scope/02-capacitor-c-esr.svg)
+
+Vpp の半分が表の振幅 (CH1 0.248 V・CH2 0.262 V)。CH2 の Avg 0.5 V がオフセットの分。
 
 ## 見るべき値
 

@@ -110,6 +110,26 @@ wires:
 | 25 MHz | 0.00 dB (同上、AD の上限) | −0.0101 dB |
 | 100 MHz | 測れない (AD の範囲外) | **−0.16 dB** |
 
+```graph
+title: 図3 AD は 25 MHz まで 0 dB、NanoVNA は 100 MHz で −0.16 dB
+x: 周波数 Hz log 100k..100M
+y: S21 dB -0.2..0.02
+lines:
+  AD 1 MΩ dB:
+    - 100k 0
+    - 1M 0
+    - 10M 0
+    - 25M 0
+  NanoVNA 50 Ω dB: -10*log10(1+(2*pi*x*30.7n/100)^2)
+notes:
+  - mark 10M
+  - mark 25M
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/graph/08-bnc-vs-nanovna.svg)
+
+AD の線は 25 MHz (上限) で止まる。1 MHz〜25 MHz の重なりでは 2 本の差は 0.01 dB に収まる。
+
 **AD の読みは 25 MHz まで数字の上ではほぼ完璧に 0 dB のまま動かない。** これは
 治具が優秀だからというより、**AD の入力が 1 MΩ と高いせいで、治具のわずかな
 インダクタンス (数十 nH) の影響がほとんど埋もれてしまう**ため — AD の

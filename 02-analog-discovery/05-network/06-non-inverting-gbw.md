@@ -106,6 +106,27 @@ wires:
 | 10 kΩ | 11 | 20.8 dB | 90.9 kHz |
 | 100 kΩ | 101 | 40.1 dB | 9.90 kHz |
 
+```graph
+title: 図3 利得を 11 倍 → 101 倍にすると、−3 dB 点は 90.9 kHz → 9.90 kHz に下がる
+x: 周波数 Hz log 1k..1M
+y: 利得 dB 0..60
+lines:
+  Av = 11 dB: 20*log10(11/sqrt(1+(x*11/1M)^2))
+  Av = 101 dB: 20*log10(101/sqrt(1+(x*101/1M)^2))
+  開ループ (GBW 1 MHz) dB: 20*log10(1M/x)
+notes:
+  - mark 9.90k
+  - mark 90.9k
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/06-non-inverting-gbw.svg)
+
+分かること (図3):
+
+- 2 本とも、平らな所から落ち始めると開ループの線 (GBW ÷ f) に沿って下がる。
+  帯域の端は「平らな利得の線」と「GBW の線」が交わる所
+- mark の読み値は 9.90 kHz で Av = 101 の線が 37.1 dB (40.1 − 3)、90.9 kHz で Av = 11 の線が 17.8 dB (20.8 − 3)
+
 分かること:
 
 - **利得を 10 倍にすると帯域はほぼ 1/10 になる。** 90.9 kHz → 9.90 kHz と、

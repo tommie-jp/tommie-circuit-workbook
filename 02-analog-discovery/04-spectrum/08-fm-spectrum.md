@@ -38,6 +38,29 @@ wires:
 | Wavegen | Carrier: Sine **100 kHz**、Amplitude 1 V。FM: Modulation Sine **1 kHz**、Deviation **2 kHz** (3-3 と同じ、β = Δf/f<sub>m</sub> = 2) |
 | Spectrum | Source: Channel 1。**Start 90 kHz、Stop 110 kHz**。サンプル周波数 250 kHz、FFT 点数 32768。Window: **Flat-top**。単位: dBV |
 
+画面は次のようになる (±4 次までを描いた)。搬送波より ±1 次・±2 次の側波帯のほうが高い。
+
+```spectrum
+title: 図2 β = 2 では搬送波より ±1 次・±2 次の側波帯が高い
+device: ad2
+sweep: 90kHz-110kHz
+samples: 32768
+window: flattop
+signal:
+  - sine 100kHz 0.2239V
+  - sine 99kHz 0.5767V
+  - sine 101kHz 0.5767V
+  - sine 98kHz 0.3528V
+  - sine 102kHz 0.3528V
+  - sine 97kHz 0.1289V
+  - sine 103kHz 0.1289V
+  - sine 96kHz 0.034V
+  - sine 104kHz 0.034V
+markers: [100kHz, 101kHz, 102kHz, 103kHz]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/08-fm-spectrum.svg)
+
 ## 見るべき値
 
 計算値。v(t) = A<sub>c</sub> cos(2π f<sub>c</sub>t + β sin(2π f<sub>m</sub>t)) を展開すると、

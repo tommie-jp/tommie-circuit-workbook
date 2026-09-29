@@ -113,6 +113,20 @@ wires:
 | Wavegen | W1: Sine、**1 kHz**、振幅を 10・50・80・95 mV と段階的に上げる |
 | Spectrum | Range 0〜10 kHz、窓 Flat-top、CH2 (出力) の THD を測定 (Measurements の THD 表示、4-4 と同じ) |
 
+Spectrum の画面の前に、Scope で出力の形を見ておくとよい。入力 50 mV と 95 mV の
+ときの出力を、上側だけ 3.5 V で硬く切る模型で重ねた (同じ 500 mV/div)。
+
+```scope
+title: 図3 入力 95 mV (CH2) では上の頭が 3.5 V で切れ、50 mV (CH1) は切れない (模型)
+time: 200us/div
+trigger: ch1 rising 2.5V
+ch1: {wave: sine 1kHz 550mV offset 2.5V, range: 500mV/div, position: -5div}
+ch2: {wave: sine 1kHz 1.045V offset 2.5V | clip 0V 3.5V, range: 500mV/div, position: -5div}
+measure: [vmax, vmin]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/scope/05-thd-vs-output.svg)
+
 ## 見るべき値
 
 小信号領域と、完全にクリップした極限の 2 つは計算で押さえられる。真ん中は
@@ -141,6 +155,47 @@ wires:
 9-3 で振幅を上げながら利得の下がり方を見たのと、9-5 で THD の増え方を見るのは
 **同じ現象 (出力段の非線形化) を 2 つの指標 (利得の圧縮と歪みの増加) で
 見ている**という関係にある。
+
+同じ模型 (上側を 3.5 V で硬く切る。切れない所は仮定の 0.1 %) で THD を計算すると
+次の形になる。実際の出力段は切れ目が丸いので、立ち上がりはこれより手前から
+なだらかに始まる。
+
+```graph
+title: 図4 THD は 90.9 mV までほぼ平らで、そこから急に立ち上がる (模型の計算)
+x: 入力振幅 mV 0..200
+y: THD % log 0.01..100
+lines:
+  上側を硬く切る模型 %:
+    - 10 0.1
+    - 30 0.1
+    - 50 0.1
+    - 70 0.1
+    - 80 0.1
+    - 90 0.1
+    - 91 0.101
+    - 92 0.273
+    - 93 0.56
+    - 95 1.2
+    - 97 1.87
+    - 100 2.88
+    - 105 4.5
+    - 110 6.02
+    - 120 8.75
+    - 140 13.2
+    - 160 16.6
+    - 180 19.2
+    - 200 21.4
+notes:
+  - mark 50
+  - mark 95
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/graph/05-thd-vs-output.svg)
+
+分かること:
+
+- 90.9 mV を越えたとたん THD が急に増える (95 mV で約 1.2 %、110 mV で約 6 %)
+- 片側だけ切れる形なので、200 mV でも 48.3 % (両側を切った方形波の上限) には届かない
 
 ## 出典
 

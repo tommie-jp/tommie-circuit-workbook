@@ -102,6 +102,22 @@ wires:
 | --- | --- |
 | Spectrum | Range 0〜1 kHz、窓 Hann、平均 8 回、CH1 = Rload の両端 (直結でよい。FFT は交流成分だけを示す) |
 
+リップルを「200 mV<sub>pp</sub>・120 Hz の鋸歯状波」と見なして描いた画面 (直流の 11 V は
+0 Hz の線になるので省いた。平均の回数は描けない)。鋸歯状波の n 次は基本波の 1/n。
+
+```spectrum
+title: 図3 リップルの線が 120 Hz とその整数倍に並ぶ (鋸歯状波の模型)
+device: ad2
+sweep: 0-1kHz
+window: hann
+samples: 8192
+ref: -20dBV
+signal: sawtooth 120Hz 200mVpp
+markers: [120Hz, 240Hz, 360Hz]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/10-power-noise/spectrum/01-ripple-fft.svg)
+
 ## 見るべき値
 
 計算値。二次側 9 V<sub>rms</sub>、ブリッジの順方向電圧を 2 段ぶん (1.4 V) と仮定、

@@ -108,6 +108,24 @@ R<sub>o</sub> = 50 × (0.500 / 0.485 − 1) ≈ **1.5 Ω**。ここで測る R<s
 | 1.0 V | 20.0 mA (保証値の 2 倍。代表値の範囲内) | 個体によっては頭がわずかに丸まり始める |
 | 2.0 V | 40.0 mA (代表的な最大値 (約 50 mA) に接近) | 多くの個体で頭が潰れて見える (電流制限) |
 
+```graph
+title: 図3 負荷電流は Amplitude に比例し、1 V で保証の 10 mA の 2 倍になる
+x: Amplitude V 0..2.5
+y: 負荷電流 mA 0..60
+lines:
+  50 Ω 負荷 mA: x/50*1000
+notes:
+  - level 10mA
+  - level 50mA
+  - text 1.4 12mA: 保証 (最小) 10 mA
+  - text 0.3 52mA: 代表的な最大 約 50 mA
+  - mark 0.5
+  - mark 1
+  - mark 2
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/graph/05-output-impedance.svg)
+
 分かること:
 
 - **落ち込みの正体は R<sub>o</sub> ではなく電流。** W1 は「50 Ω 負荷に耐える

@@ -74,6 +74,30 @@ DIO0 は R1 のもう一方の端 (f5 と同じ列の j5) から、GND は D1 �
 | Pattern | DIO0 = Clock、1 kHz、**Duty = 25%** |
 | Logic | DIO0 を Enable。Rate は 1 kHz より十分速く (1 MS/s 程度)。カーソルで H の時間と 1 周期の時間を読む |
 
+```scope
+title: 図3 Duty 25% — H 250 µs・周期 1000 µs
+time: 500us/div
+trigger: ch1 rising 1.65V at -4div
+ch1: {wave: square 1kHz 1.65V offset 1.65V duty 25%, range: 500mV/div, position: -3div}
+cursors: [0, 250us]
+measure: [period, duty]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/scope/10-pwm-duty-1.svg)
+
+Duty を 75% にすると、周期はそのままで H だけが 3 倍に延びる。
+
+```scope
+title: 図4 Duty 75% — H 750 µs・周期は同じ 1000 µs
+time: 500us/div
+trigger: ch1 rising 1.65V at -4div
+ch1: {wave: square 1kHz 1.65V offset 1.65V duty 75%, range: 500mV/div, position: -3div}
+cursors: [0, 750us]
+measure: [period, duty]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/scope/10-pwm-duty-2.svg)
+
 ## 見るべき値
 
 計算値。Pattern の周期は 1 kHz → 1000 µs、Duty 25% として設定。

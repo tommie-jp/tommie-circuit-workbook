@@ -41,6 +41,20 @@ Stop を 9000 Hz よりだいぶ高い 20 kHz にしておくのは、ナイキ�
 Stop ぎりぎりに設定すると、9 次が折り返って (エイリアス) 別の周波数に
 化けて見えることがある。
 
+画面は次のようになる。奇数次の山が 1/n で下がりながら並び、偶数次には何も出ない (理想)。
+
+```spectrum
+title: 図2 奇数次の山だけが 1/n で下がって並ぶ
+device: ad2
+sweep: 0-20kHz
+samples: 32768
+window: flattop
+signal: square 1kHz 1V
+markers: [1kHz, 3kHz, 5kHz, 9kHz]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/02-square-harmonics.svg)
+
 ## 見るべき値
 
 計算値。振幅 A = 1 V の理想方形波 (デューティ 50%) の n 次高調波 (n は奇数) の

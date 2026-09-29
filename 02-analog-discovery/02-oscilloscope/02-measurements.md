@@ -59,6 +59,16 @@ wires:
 | Wavegen (W1) | 方形波、1 kHz、振幅 1.65 V、オフセット 1.65 V、デューティ 30% |
 | Scope (CH1) | DC、Measurements に Vpp・Vmax・Vmin・Average・RMS・Frequency・Duty Cycle を追加 |
 
+```scope
+title: 図3 デューティ 30 % の方形波は Average 0.99 V・RMS 1.81 V
+time: 200us/div
+trigger: ch1 rising 1.65V
+ch1: {wave: square 1kHz 1.65V offset 1.65V duty 30%, range: 500mV/div, position: -3div}
+measure: [vmax, avg, rms, duty]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/02-measurements.svg)
+
 ## 見るべき値
 
 | 測定項目 | 期待する値 (計算値) | 計算 |

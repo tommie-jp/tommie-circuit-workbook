@@ -54,6 +54,28 @@ wires:
 | 2.9 MHz | −0.5 dB | 約 1.89 V | 約 94.4% |
 | 9 MHz | −3 dB（≈ 1/√2） | 約 1.41 V | 約 70.7% |
 
+仕様の 3 点と 100 kHz の基準を並べると、Vpp は 1 MHz を越えたあたりから目に見えて
+落ち始める。
+
+```graph
+title: 図2 付属ワイヤの Vpp — 9 MHz で 1.41 V (−3 dB) まで落ちる
+x: 周波数 Hz log 100k..20M
+y: 振幅 Vpp V 0..2.2
+lines:
+  仕様から計算 V:
+    - 100k 2.00
+    - 800k 1.977
+    - 2.9M 1.888
+    - 9M 1.414
+notes:
+  - mark 800k
+  - mark 2.9M
+  - mark 9M
+  - level 1.414V
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/graph/05-bnc-probe-bandwidth.svg)
+
 9 MHz でおよそ 3 割落ちるのが「帯域 9 MHz」の中身。これは付属ワイヤの寄生インダクタンス・
 容量による自然なローパスで、Analog Discovery 自体の故障ではない。
 

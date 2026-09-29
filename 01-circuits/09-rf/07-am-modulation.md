@@ -427,6 +427,8 @@ signal: square 686kHz 10.9mV duty 52%
 markers: [686k, 1372k, 2058k, 3430k]
 ```
 
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/spectrum/07-am-modulation-1.svg)
+
 - 方形波なので奇数次 (3 次・5 次) が大きく、1/n で並ぶ。デューティが 50 % から少し
   ずれているぶん、偶数次 (2 次 1372 kHz、4 次 2744 kHz) も小さく出る
 - 2 次 (1372 kHz) は AM 放送帯の中。ラジオでも弱く受かる
@@ -445,6 +447,8 @@ signal:
   - sine 687kHz -55.1dBm
 markers: [peak, 685k, 687k]
 ```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/spectrum/07-am-modulation-2.svg)
 
 - 搬送波の両側 ±1 kHz (音声の周波数) に側波が立つ。側波の大きさは搬送波の m/2 = 0.04 倍 (−28 dB)
 - 図6 で見た音声が、周波数の軸ではこの 2 本の側波になる。音声の周波数を変えると側波の間隔が、

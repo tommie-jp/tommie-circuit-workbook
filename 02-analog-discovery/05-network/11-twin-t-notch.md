@@ -123,6 +123,24 @@ H(jω) = (1 − (ωRC)²) / (1 − (ωRC)² + 4jωRC)。
 | 1.75 kHz (1.1×f₀) | −26.4 dB | +87.3° |
 | 15.9 kHz (10×f₀) | −0.66 dB | +22.0° |
 
+```graph
+title: 図3 1.59 kHz だけに深い谷 — 谷の前後で位相が −90° 付近から +90° 付近へ跳ぶ
+x: 周波数 Hz log 150..15k
+y:
+  - 利得 dB -50..0
+  - 位相 deg -90..90
+lines:
+  利得 dB: -10*log10(1+16*(x/1591.5)^2/(1-(x/1591.5)^2)^2)
+  位相 deg: -deg(atan(4*(x/1591.5)/(1-(x/1591.5)^2)))
+notes:
+  - mark 159
+  - mark 1.432k
+  - mark 1.751k
+  - mark 15.9k
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/11-twin-t-notch.svg)
+
 分かること:
 
 - **f₀ をまたいで利得が急に深く落ち、また戻る。** ローパス・ハイパスのような

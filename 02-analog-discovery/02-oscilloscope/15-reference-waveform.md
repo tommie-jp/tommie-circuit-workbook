@@ -37,6 +37,31 @@ wires:
 | Wavegen (W1) | 正弦波、1 kHz、振幅 1 V（基準を保存する時点の設定） |
 | Scope (CH1) | DC。トレースを右クリック（または該当ボタン）で **Reference として保存**（破線で表示され続ける） |
 
+次の 2 枚は、保存した参照 (1 kHz・1 V) を CH1、生きた波形を CH2 として同じ尺度で重ねたもの。
+
+```scope
+title: 図2 振幅を 1.5 V にすると参照 (CH1) より 1.5 倍高い
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+ch2: {wave: sine 1kHz 1.5V, range: 500mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/15-reference-waveform-1.svg)
+
+```scope
+title: 図3 1.2 kHz にすると山がずれていき、5 ms で 1 周期ぶん追い付く
+time: 500us/div
+trigger: ch1 rising 0V at -5div
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+ch2: {wave: sine 1.2kHz 1V, range: 500mV/div}
+cursors: [0, 5ms]
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/15-reference-waveform-2.svg)
+
 ## 見るべき値
 
 保存した参照波形は 1 kHz・振幅 1 V（Vpp 2 V）の正弦波。これを基準に、生きた

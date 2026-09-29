@@ -67,7 +67,7 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Amplitude 1 V |
-| Network | Start 150 Hz、Stop 15 kHz、Log、Steps 101、表示: 利得 (dB) と位相 (deg) を重ねる。カーソルを 3 本 (0.1×f<sub>c</sub>、f<sub>c</sub>、10×f<sub>c</sub>) 立てる |
+| Network | Start 100 Hz、Stop 20 kHz、Log、Steps 101、表示: 利得 (dB) と位相 (deg) を重ねる。カーソルを 3 本 (0.1×f<sub>c</sub>、f<sub>c</sub>、10×f<sub>c</sub>) 立てる |
 
 ## 見るべき値
 
@@ -78,6 +78,25 @@ wires:
 | 0.1 × f<sub>c</sub> | 153.9 Hz | −0.04 dB (ほぼ 0) | −5.7° |
 | **1 × f<sub>c</sub> (−3 dB 点)** | **1539.2 Hz** | **−3.01 dB** | **−45.0°** |
 | 10 × f<sub>c</sub> | 15.39 kHz | −20.04 dB | −84.3° |
+
+```graph
+title: 図3 −3 dB の線と −45° の線は同じ 1539 Hz で曲線を横切る
+x: 周波数 Hz log 100..20k
+y:
+  - 利得 dB
+  - 位相 deg
+lines:
+  利得 dB: 20*log10(1/sqrt(1+(x/1539.2)^2))
+  位相 deg: -deg(atan(x/1539.2))
+notes:
+  - level -3dB
+  - level -45deg
+  - mark 153.9
+  - mark 1539.2
+  - mark 15.39k
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/04-phase-and-3db.svg)
 
 分かること:
 

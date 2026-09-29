@@ -71,6 +71,22 @@ R1 と C1 は 10 列の穴で中点 (RC の接続点) を共有する。CH2 は�
 | Scope (CH1・CH2) | DC、Time/div 1 ms 程度 |
 | カーソル | 縦カーソル 2 本を X (時間) モードにする |
 
+```scope
+title: 図3 C の電圧 (CH2) が 2.08 V に届くまでをカーソルで読むと 1 τ = 1 ms
+time: 1ms/div
+trigger: ch1 rising 1.65V
+ch1: {wave: square 100Hz 1.65V offset 1.65V, range: 500mV/div, position: -3div}
+ch2: {wave: ch1 | rc 1ms, range: 500mV/div, position: -3div}
+cursors: [0, 1ms]
+measure: [vpp, vmax]
+notes:
+  - text ch2 1ms 2.08V: 1 τ で 63.2 %
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/03-cursors-rc.svg)
+
+CH1 と CH2 は同じ 500 mV/div・同じ基準で重ねてある。画面の左半分は前の半周期の放電。
+
 ## 見るべき値
 
 τ = R × C = 10 kΩ × 100 nF = **1.00 ms (計算値)**。

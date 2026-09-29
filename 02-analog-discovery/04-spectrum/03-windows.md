@@ -47,6 +47,46 @@ wires:
 **最悪ケースの理論値**でどれだけ振幅が下にずれるか (スキャロッピング損失) を
 比べる。
 
+図 2〜4 は最悪ケースを作って描いた画面である。FFT 点数を 8192 にすると
+分解能は 6.25 Hz (1000 Hz はちょうど 160 番目のビン) になるので、信号を
+半ビンずらした 1003.125 Hz にして、窓だけを替えて同じ尺度で並べた。
+
+```spectrum
+title: 図2 Rectangular — 半ビンずれで山が −6.92 dBV まで下がる
+device: ad2
+sweep: 0-20kHz
+samples: 8192
+window: rect
+signal: sine 1003.125Hz 1V
+markers: [peak]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/03-windows-1.svg)
+
+```spectrum
+title: 図3 Hann — 同じずれで −4.43 dBV
+device: ad2
+sweep: 0-20kHz
+samples: 8192
+window: hann
+signal: sine 1003.125Hz 1V
+markers: [peak]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/03-windows-2.svg)
+
+```spectrum
+title: 図4 Flat-top — 同じずれでも −3.02 dBV とほぼ正しい
+device: ad2
+sweep: 0-20kHz
+samples: 8192
+window: flattop
+signal: sine 1003.125Hz 1V
+markers: [peak]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/03-windows-3.svg)
+
 ## 見るべき値
 
 計算値。半ビンずれ (最悪のケース) でのスキャロッピング損失は窓ごとに決まった

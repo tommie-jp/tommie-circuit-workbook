@@ -99,6 +99,20 @@ Wavegen1.stop();
 | 1.0 V | 2.00 V |
 | 1.5 V | 3.00 V |
 
+```graph
+title: 図3 Vpp は振幅の設定のちょうど 2 倍 (1.00 / 2.00 / 3.00 V)
+x: 振幅の設定 V 0..2
+y: Vpp V 0..4
+lines:
+  計算 (Vpp = 2 × 振幅) V: 2*x
+notes:
+  - mark 0.5
+  - mark 1
+  - mark 1.5
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/graph/05-script-basics.svg)
+
 Log ウィンドウに 3 行の表が出て、振幅を 2 倍にすると Vpp も 2 倍になる
 (負荷 1 kΩ が Wavegen の出力インピーダンスに対して十分大きいため)
 ことを確かめる。11-1 でこのスクリプトを掃引・自動判定に広げる。

@@ -63,7 +63,18 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen (W1) | 正弦波、1 kHz、振幅 1 V (2 Vpp)、オフセット 0 V |
-| Scope (CH1) | DC、Range ±2 V 程度、Auto トリガ、Time/div 0.2 ms 程度 (1 周期が画面に 5 つ) |
+| Scope (CH1) | DC、Range ±2 V 程度、Auto トリガ、Time/div 0.2 ms 程度 (画面に 2 周期) |
+
+```scope
+title: 図3 R1 の両端 — Vpp 2.00 V、カーソルの間が 1 周期 1.00 ms
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+cursors: [0, 1ms]
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/scope/02-first-sine.svg)
 
 ## 見るべき値
 

@@ -86,6 +86,22 @@ wires:
 | 0.52 s (掃引の中ほど) | 1.59 kHz (f<sub>c</sub>) | −3.01 dB | 1.41 V (√2 分の 1、折れ点) |
 | 1 s (掃引の末尾) | 20 kHz | −22.0 dB | 0.16 V (ほとんど見えない) |
 
+横軸を掃引の時刻にして CH2 の Vpp を描くと、Scope の画面で見える包絡線 (外形) になる。
+
+```graph
+title: 図3 CH2 の Vpp は掃引の中ほど (0.52 s) で 1.41 V に下がる
+x: 時刻 s 0..1
+y: 振幅 V 0..2.2
+lines:
+  CH1 Vpp V: 2
+  CH2 Vpp V: 2/sqrt(1+(100*exp(5.2983*x)/1592)^2)
+notes:
+  - mark 0.522
+  - mark 1
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/graph/02-sweep.svg)
+
 分かること:
 
 - **掃引の前半 (低い周波数) は CH2 がほぼ CH1 と重なる**。f<sub>c</sub> の少し手前から

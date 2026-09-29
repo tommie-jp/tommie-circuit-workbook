@@ -48,6 +48,28 @@ wires:
 波形はどれも **+2.5 V から −1.5 V の間**を振れる (Vpp = 2 × Amplitude = 4 V)。
 DC だけは Amplitude が効かず、Offset の値がそのまま出力になる。
 
+Sine と Ramp Up を同じ設定で読むと、形は違っても最大・最小・平均は同じ所に出る。
+
+```scope
+title: 図2 Sine は +2.5 V と −1.5 V の間を振れ、平均は Offset の 0.5 V
+time: 200us/div
+trigger: ch1 rising 0.5V
+ch1: {wave: sine 1kHz 2V offset 0.5V, range: 1V/div}
+measure: [vmax, vmin, vpp, avg]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/01-basic-waveforms-1.svg)
+
+```scope
+title: 図3 Ramp Up でも最大・最小・平均は Sine と同じ
+time: 200us/div
+trigger: ch1 rising 0.5V
+ch1: {wave: sawtooth 1kHz 2V offset 0.5V, range: 1V/div}
+measure: [vmax, vmin, vpp, avg]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/01-basic-waveforms-2.svg)
+
 ## 見るべき値
 
 計算値。RMS の列は交流成分だけ (Average を引いた分) の実効値。

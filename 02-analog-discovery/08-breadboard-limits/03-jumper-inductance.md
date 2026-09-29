@@ -80,11 +80,22 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Sine、**10 MHz**、**Amplitude 30 mV** (振幅を絞らないと電流が過大になる) |
-| Scope | CH1 = Rref の両端、CH2 = ジャンパの両端。Range は両方 20 mV/div |
+| Scope | CH1 = Rref の両端、CH2 = ジャンパの両端。Range は両方 10 mV/div |
 | Measure | CH1・CH2 の Amplitude、CH2 の CH1 に対する Phase |
 
 **電流の確認**: I = 30 mV / \|Rref + jXL\| ≈ 30 mV / 3.8 Ω ≈ 7.9 mA。
 Wavegen の上限 (約 10 mA) の範囲内。
+
+```scope
+title: 図3 ジャンパの電圧 (CH2) が電流 (CH1) より 90° 進み、振幅は Rref と同じ
+time: 50ns/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 10MHz 21.2mV, range: 10mV/div}
+ch2: {wave: sine 10MHz 21.2mV phase 90deg, range: 10mV/div}
+measure: [vpp, freq, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/scope/03-jumper-inductance.svg)
 
 ## 見るべき値
 

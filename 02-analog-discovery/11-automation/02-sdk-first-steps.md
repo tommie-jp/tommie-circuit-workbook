@@ -57,7 +57,7 @@ Python スクリプトの中で全部設定するので、WaveForms 本体は起
 | 項目 | 値 |
 | --- | --- |
 | Wavegen (W1) | Sine、1 kHz、振幅 1 V |
-| Scope | サンプリング 20 MHz、バッファ 8192 点、レンジ ±5 V、CH1・CH2 とも有効 |
+| Scope | サンプリング 1 MHz、バッファ 8192 点 (8.19 ms = 1 kHz の約 8 周期)、レンジ ±5 V、CH1・CH2 とも有効 |
 | 待ち時間 | 設定後 0.5 秒待ってから記録 (波形が落ち着くまで) |
 
 ```python
@@ -87,11 +87,11 @@ dwf.FDwfAnalogOutNodeFrequencySet(hdwf, channel, constants.AnalogOutNodeCarrier,
 dwf.FDwfAnalogOutNodeAmplitudeSet(hdwf, channel, constants.AnalogOutNodeCarrier, ctypes.c_double(1.0))
 dwf.FDwfAnalogOutConfigure(hdwf, channel, ctypes.c_bool(True))
 
-# --- Scope: CH1・CH2 を ±5 V、20 MHz、8192 点で ---
+# --- Scope: CH1・CH2 を ±5 V、1 MHz、8192 点で (8.19 ms で約 8 周期) ---
 dwf.FDwfAnalogInChannelEnableSet(hdwf, ctypes.c_int(-1), ctypes.c_bool(True))
 dwf.FDwfAnalogInChannelRangeSet(hdwf, ctypes.c_int(-1), ctypes.c_double(5.0))
 dwf.FDwfAnalogInBufferSizeSet(hdwf, ctypes.c_int(8192))
-dwf.FDwfAnalogInFrequencySet(hdwf, ctypes.c_double(20e6))
+dwf.FDwfAnalogInFrequencySet(hdwf, ctypes.c_double(1e6))
 
 time.sleep(0.5)  # 波形が落ち着くまで待つ
 
@@ -109,7 +109,7 @@ dwf.FDwfAnalogInStatusData(hdwf, ctypes.c_int(0), buf1, ctypes.c_int(8192))  # C
 dwf.FDwfAnalogInStatusData(hdwf, ctypes.c_int(1), buf2, ctypes.c_int(8192))  # CH2 = 出力
 
 vin = (max(buf1) - min(buf1)) / 2   # 振幅は自分で計算する (measure() は無い)
-vout = (max(buf2) - min(buf2)) / 2
+vout = (max(buf2) - min(buf2)) / 2  # 何周期か入っているので山と谷を拾える
 gain_db = 20 * math.log10(vout / vin)
 print("Vin =", round(vin, 4), "V   Vout =", round(vout, 4), "V   Gain =", round(gain_db, 2), "dB")
 
@@ -129,6 +129,19 @@ dwf.FDwfDeviceClose(hdwf)
   `20 * Math.log(vout / vin) / Math.LN10` と書いたのと同じ式を、Python では
   `math.log10` でそのまま書ける
 
+同じ 2 本を WaveForms の Scope の画面で 2 周期見るとこうなる。振幅は (最大値 − 最小値) / 2 なので、Vmax と Vmin を読む。
+
+```scope
+title: 図2 1 kHz で Vout (CH2) の山は約 0.85 V で、入力 (CH1) の 1 V より低い
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+ch2: {wave: ch1 | rc 100us, range: 500mV/div}
+measure: [vmax, vmin]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/11-automation/scope/02-sdk-first-steps.svg)
+
 ## 見るべき値
 
 計算値。11-1 と同じ f<sub>c</sub> = 1.5915 kHz、f = 1 kHz での理論ゲインは
@@ -137,7 +150,7 @@ dwf.FDwfDeviceClose(hdwf)
 | 項目 | 期待する値 | 分かること |
 | --- | --- | --- |
 | Vin (CH1 の振幅) | 1.000 V 前後 | Wavegen の設定どおり |
-| Vout (CH2 の振幅) | 0.845 V 前後 (= 10<sup>−1.45/20</sup>) | 1 kHz での理論ゲイン −1.45 dB に相当 |
+| Vout (CH2 の振幅) | 0.847 V 前後 (= 10<sup>−1.45/20</sup>) | 1 kHz での理論ゲイン −1.45 dB に相当 |
 | Vout/Vin をデシベルに直した値 | 約 −1.45 dB | 11-1 で Script Editor が出した値と同じであるはず |
 
 **WaveForms の Script Editor で測った値と、外部 Python (SDK) で測った値は
