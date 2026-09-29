@@ -68,11 +68,11 @@ title: 図2 ダーリントンタッチスイッチ
 # 5V は上の +/− レールへ。下の − レールは 28 列で上の − レールとつなぐ
 board: half
 parts:
-  RC: resistor a5 a8 470
-  D1: led b8(A) b9(K) red
+  RC: resistor b5 b8 470
+  D1: led c8(A) c9(K) red
   Q1: transistor f12(B) f13(C) f14(E) 2SC1815
   Q2: transistor f17(B) f18(C) f19(E) 2SC1815
-  RB: resistor a20 a23 1M
+  RB: resistor b20 b23 1M
   TP1:
     type: device
     at: top
@@ -83,17 +83,24 @@ parts:
     at: top
     label: 触れる板 2
     pins: [B]
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
-  - +t5 -- c5 red
-  - c9 -- g13 orange
-  - b23 -- -t23 black
-  - d20 -- g12 yellow
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - +t5 -- a5 red
+  - d9 -- g13 orange
+  - a23 -- -t23 black
+  - e20 -- g12 yellow
   - g14 -- g17 blue
-  - g18 -- g13 orange
+  - g18 -- h13 orange
   - g19 -- -b19 black
   - -t28 -- -b28 black
   - TP1.A -- +t3 red
-  - TP2.B -- d20 gray
+  - TP2.B -- c20 gray
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/04-darlington-touch.svg)

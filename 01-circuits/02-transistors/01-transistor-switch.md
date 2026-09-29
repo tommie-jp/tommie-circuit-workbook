@@ -52,18 +52,26 @@ style:
 
 ```breadboard
 title: 図2 トランジスタスイッチ
-# 上のレール = +5V、下のレール = GND
+# 上のレール = +5V、下のレール = GND (上下の − レールは 30 列でつなぐ)
 board: half
 parts:
-  R1: resistor a5 a8 330
-  D1: led b8(A) b9(K) red
+  R1: resistor b5 b8 330
+  D1: led c8(A) c9(K) red
   Q1: transistor f12(B) f13(C) f14(E) 2SC1815
   RB: resistor a17 a20 10k
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
-  - +t5 -- b5 red
-  - c9 -- g13 orange
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - +t5 -- a5 red
+  - d9 -- g13 orange
   - g12 -- b20 yellow
   - g14 -- -b14 black
+  - -t30 -- -b30 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/01-transistor-switch.svg)

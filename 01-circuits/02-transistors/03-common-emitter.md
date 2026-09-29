@@ -71,14 +71,14 @@ title: 図2 自己バイアスのエミッタ接地増幅
 # 上の + レール = +5V、上の − レール = GND (下のレールは使わない)
 board: half
 parts:
-  R1: resistor a3 a8 20k
-  R2: resistor b8 b13 10k
-  RC: resistor a16 a21 2.2k
+  R1: resistor b3 b8 20k
+  R2: resistor c8 c13 10k
+  RC: resistor b16 b21 2.2k
   Q1: transistor f19(B) f20(C) f21(E) 2SC1815
-  CIN: capacitor c6(-) c9(+) 1uF
-  RE: resistor a24 a27 1k
+  CIN: capacitor d6(-) d9(+) 1uF
+  RE: resistor a24 -t24 1k
   CE: capacitor/electrolytic b24(+) b27(-) 100uF
-  COUT: capacitor c21(+) c25(-) 1uF
+  COUT: capacitor d21(+) d25(-) 1uF
   IN:
     type: device
     at: bottom
@@ -89,17 +89,24 @@ parts:
     at: bottom
     label: OUT
     pins: [SIG]
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
-  - +t3 -- d3 red
-  - d13 -- -t13 black
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - +t3 -- a3 red
+  - a13 -- -t13 black
   - d8 -- g19 orange
-  - d9 -- h19 yellow
-  - +t16 -- b16 red
-  - g20 -- b21 blue
-  - g21 -- d24 green
-  - d27 -- -t27 black
-  - IN.SIG -- d6 gray
-  - OUT.SIG -- d25 gray
+  - e9 -- h19 yellow
+  - +t16 -- a16 red
+  - g20 -- e21 blue
+  - g21 -- e24 green
+  - a27 -- -t27 black
+  - IN.SIG -- e6 gray
+  - OUT.SIG -- e25 gray
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/03-common-emitter.svg)

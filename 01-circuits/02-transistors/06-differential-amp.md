@@ -71,30 +71,37 @@ title: 図2 差動対で電流を振り分ける
 # 上のレール = +5V、下のレール = GND
 board: full
 parts:
-  R1: resistor a3 a8 10k
-  R2: resistor b8 b13 10k
-  VR1: potentiometer a17(1) a18(w) a19(3) 10k
-  RC1: resistor a25 a28 220
-  D1: led b28(A) b29(K) red
+  R1: resistor b3 b8 10k
+  R2: resistor c8 c13 10k
+  VR1: potentiometer b17(1) b18(w) b19(3) 10k
+  RC1: resistor b25 b28 220
+  D1: led c28(A) c29(K) red
   Q1: transistor f25(B) f26(C) f27(E) 2SC1815
-  RC2: resistor a35 a38 220
-  D2: led b38(A) b39(K) red
+  RC2: resistor b35 b38 220
+  D2: led c38(A) c39(K) red
   Q2: transistor f35(B) f36(C) f37(E) 2SC1815
-  RE: resistor a31 a34 220
+  RE: resistor b31 b34 220
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
-  - +t3 -- c3 red
-  - +t17 -- b17 red
-  - +t25 -- c25 red
-  - +t35 -- c35 red
-  - c13 -- -t13 black
-  - c19 -- -t19 black
-  - c8 -- g25 orange
-  - b18 -- g35 blue
-  - c29 -- g26 yellow
-  - c39 -- g36 yellow
-  - g27 -- d31 green
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - +t3 -- a3 red
+  - +t17 -- a17 red
+  - +t25 -- a25 red
+  - +t35 -- a35 red
+  - a13 -- -t13 black
+  - a19 -- -t19 black
+  - d8 -- g25 orange
+  - c18 -- g35 blue
+  - d29 -- g26 yellow
+  - d39 -- g36 yellow
+  - g27 -- c31 green
   - g37 -- d31 green
-  - d34 -- -t34 black
+  - a34 -- -t34 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/06-differential-amp.svg)

@@ -61,19 +61,26 @@ title: 図2 2N7000 でスイッチする
 # 5V は上の +/− レールへ。下の − レールは 28 列で上の − レールとつなぐ
 board: half
 parts:
-  R1: resistor a5 a8 330
-  D1: led b8(A) b9(K) red
+  R1: resistor b5 b8 330
+  D1: led c8(A) c9(K) red
   Q1: transistor f13(S) f14(G) f15(D) 2N7000
   RG: resistor a18 a21 220
   RPD: resistor b21 b24 100k
   SW: button @ e17
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
-  - +t5 -- c5 red
-  - c9 -- g15 orange
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - +t5 -- a5 red
+  - d9 -- g15 orange
   - +t17 -- a17 red
   - g17 -- c18 orange
   - c21 -- g14 yellow
-  - c24 -- -t24 black
+  - a24 -- -t24 black
   - g13 -- -b13 black
   - -t28 -- -b28 black
 ```
