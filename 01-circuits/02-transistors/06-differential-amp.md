@@ -84,10 +84,10 @@ parts:
   VR1: potentiometer b17(1) b18(w) b19(3) 10k
   RC1: resistor b25 b28 220
   D1: led c28(A) c29(K) red
-  Q1: transistor f25(B) f26(C) f27(E) 2SC1815
+  Q1: transistor h25(B) h26(C) h27(E) 2SC1815
   RC2: resistor b35 b38 220
   D2: led c38(A) c39(K) red
-  Q2: transistor f35(B) f36(C) f37(E) 2SC1815
+  Q2: transistor h35(B) h36(C) h37(E) 2SC1815
   RE: resistor b31 b34 220
   AD:
     type: device
@@ -128,37 +128,28 @@ wires:
 
 ## オシロで見る
 
-WaveForms の Scope で CH1・CH2 を 1 V/div・DC 結合にし、`VR1` を回しながら 2 本の直流の高さを見る
-(電圧は時間で動かないので、水平の 2 本の線の上下で読む)。
+WaveForms の Scope で CH1・CH2 を 500 mV/div・DC 結合 (中央を 2.5 V) にし、`VR1` を基準 (2.5 V) に合わせてから
+0.1 V ほど上げる。CH1 の立ち上がりでトリガを掛けると、上げた瞬間の前後が 1 画面に入る
+(直流は時間で動かないので、動かした瞬間を捉えて前後の高さを比べる)。
 
 ```scope
-title: 図3 VR1 を基準 (2.5 V) に合わせたとき — 2 つのコレクタは同じ高さ
+title: 図3 VR1 を 0.1 V 上げた瞬間 — CH1 は上がり、CH2 は下がる
 time: 1ms/div
-trigger: ch1 rising 0V
-ch1: {wave: dc 2.1V, range: 1V/div, position: -3div}
-ch2: {wave: dc 2.1V, range: 1V/div, position: -3div}
-measure: [avg]
+trigger: ch1 rising 2.7V
+ch1: {wave: = 2.1V + 1.2V * step(t), range: 500mV/div, position: -5div}
+ch2: {wave: = 2.1V - 0.1V * step(t), range: 500mV/div, position: -5div}
+cursors: [-2ms, 2ms]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/scope/06-differential-amp-1.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/scope/06-differential-amp.svg)
 
-```scope
-title: 図4 VR1 を 0.1 V 上げたとき — CH1 は上がり、CH2 は下がる
-time: 1ms/div
-trigger: ch1 rising 0V
-ch1: {wave: dc 3.3V, range: 1V/div, position: -3div}
-ch2: {wave: dc 2.0V, range: 1V/div, position: -3div}
-measure: [avg]
-```
-
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/scope/06-differential-amp-2.svg)
-
-- 釣り合い (図3): コレクタ電圧 = 5 − 220Ω × 4.1mA − 2.0 (LED) ≈ **2.1 V** で、2 本が重なる
-- VR1 を上げる (図4): 電流を失った `Q1` 側は `RC1` と D1 の降下が消えて **約 3.3 V** へ上がり、
+- 釣り合い (カーソル X1、上げる前): コレクタ電圧 = 5 − 220Ω × 4.1mA − 2.0 (LED) ≈ **2.1 V** で、2 本が重なる
+- VR1 を上げた後 (カーソル X2): 電流を失った `Q1` 側は `RC1` と D1 の降下が消えて **約 3.3 V** へ上がり、
   電流を集めた `Q2` 側は **約 2.0 V** へ下がる。2 本は**逆向き**に動く。
   `Q2` のコレクタはエミッタ (約 1.9 V) より下へは行けない (飽和) ので、ここで止まる —
   このため D2 の電流は計算の 8.2 mA までは増えず、4〜5 mA ほどで頭打ちになる
-- `VR1` を逆に下げると、CH1 と CH2 の役が入れ替わる
+- 実際は手でつまみを回すので段はなだらかになり、指の震えで少し揺れる。`VR1` を逆に下げると、
+  CH1 と CH2 の役が入れ替わる
 
 ## 部品
 
