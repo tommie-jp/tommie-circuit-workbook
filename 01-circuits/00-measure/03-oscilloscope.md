@@ -83,11 +83,18 @@ parts:
     at: bottom
     label: PC オシロ / AD2 (Ch1)
     pins: [SIG, GND]
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
   - +t6 -- a6 red
   - +t10 -- a10 red
   - a12 -- a15 green
-  - d15 -- g15 green
+  - d15 -- f15 green
   - g11 -- g15 green
   - j10 -- -b10 black
   - j13 -- +b13 red

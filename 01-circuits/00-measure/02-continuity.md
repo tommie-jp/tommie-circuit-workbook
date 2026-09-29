@@ -46,24 +46,31 @@ title: 図2 同じ列は 1 つのネット
 # 上の赤いレール = +5V、青いレール = GND
 board: half
 parts:
-  R1: resistor a8 a13 330
-  D1: led b13(A) b14(K) red
-  R2: resistor b8 b4 330
-  D2: led c4(A) c3(K) green
+  R1: resistor b8 b13 330
+  D1: led d13(A) d14(K) red
+  R2: resistor c8 c4 330
+  D2: led e4(A) e3(K) green
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
-  - +t8 -- c8 red
-  - b14 -- -t14 black
-  - c3 -- -t3 black
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - +t8 -- a8 red
+  - a14 -- -t14 black
+  - b3 -- -t3 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/breadboard/02-continuity.svg)
 
-- `R1` は列 8 の `a8`、`R2` も列 8 の `b8` に挿してある。**別の穴だが同じ列
+- `R1` は列 8 の `b8`、`R2` も列 8 の `c8` に挿してある。**別の穴だが同じ列
   (上ブロック a〜e) なので、線を引かなくても中でつながっている**。電源は
-  どちらか片方 (図では空いている `c8`) に 1 本挿すだけでよい。`R1` は右へ、
+  どちらか片方 (図では空いている `a8`) に 1 本挿すだけでよい。`R1` は右へ、
   `R2` は左へ伸ばして、2 つの枝の足が同じ穴の並びに重ならないようにした。
-- 同じ理屈で、`R1` の他端 (`a13`) と `D1` のアノード (`b13`) も列 13 で
-  つながっている。`R2` の他端 (`b4`) と `D2` のアノード (`c4`) も列 4 で
+- 同じ理屈で、`R1` の他端 (`b13`) と `D1` のアノード (`d13`) も列 13 で
+  つながっている。`R2` の他端 (`c4`) と `D2` のアノード (`e4`) も列 4 で
   つながっている。**部品の足どうしをジャンパ線でつながなくてよいのは、
   同じ列に挿したときだけ**。
 - 上の赤レールと下の赤レールは記号こそ離れているが、**板の端から端まで

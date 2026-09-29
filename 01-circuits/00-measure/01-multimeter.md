@@ -51,29 +51,36 @@ title: 図2 分圧回路をテスターで当たる
 # 上の赤いレール = +5V、青いレール = GND
 board: half
 parts:
-  R1: resistor a5 a10 10k
-  R2: resistor b10 b15 10k
+  R1: resistor b5 b10 10k
+  R2: resistor c10 c15 10k
   MULT:
     type: device
     at: bottom
     label: テスター (DCV)
     pins: ["+", COM]
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
-  - +t5 -- b5 red
-  - c15 -- -t15 black
-  - MULT.+ -- c10 orange
-  - MULT.COM -- c15 gray
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - +t5 -- a5 red
+  - a15 -- -t15 black
+  - MULT.+ -- d10 orange
+  - MULT.COM -- d15 gray
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/breadboard/01-multimeter.svg)
 
-- `a10` と `b10` は**同じ列 10 (上ブロック)** なので、ジャンパ線を渡さなくても
-  `R1` の下端と `R2` の上端はつながっている。同じ列の `c5` `c10` `c15` に
+- `b10` と `c10` は**同じ列 10 (上ブロック)** なので、ジャンパ線を渡さなくても
+  `R1` の下端と `R2` の上端はつながっている。同じ列の `d10` `d15` に
   テスターの線を挿せば、`R1` `R2` の足と同じ穴を取り合わずに当てられる。
-- テスターの赤 (+) を `R2` の上端と同じネット (`c10`)、黒 (COM) を下端の GND
-  (`c15`) に当てて、`R2` の両端の電圧を読む。
+- テスターの赤 (+) を `R2` の上端と同じネット (`d10`)、黒 (COM) を下端の GND
+  (`d15`) に当てて、`R2` の両端の電圧を読む。
 
-**電流を測るとき**は、`R1` の上端 (`a5`) につながる赤レールの線を一度抜き、
+**電流を測るとき**は、`R1` の上端 (`b5`) につながる赤レールの線 (`a5`)を一度抜き、
 そこにテスターを COM → 電流端子で割り込ませる (テスターを回路の一部にする)。
 **抵抗を測るとき**は電池を外し、`R1` と `R2` を板から抜いてから 1 本ずつ
 テスターの Ω レンジで当てる。
