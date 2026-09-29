@@ -108,7 +108,14 @@ parts:
   D2: led h45(A) h46(K) red
   R3: resistor g53 g60 330
   D3: led h60(A) h62(K) red
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
 wires:
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
   - -t1 -- -b1 black
   - +t3 -- a3 red
   - +t10 -- a10 red
@@ -157,7 +164,8 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/01-basic-gates.svg)
 
-- 上の赤レール = +5V (単3 電池 3 本か USB の 5V)、青レール = GND。下の青レールは
+- 上の赤レール = +5V (単3 電池 3 本か USB の 5V)、青レール = GND。電源の +5V (赤) は
+  上の赤レールの 1 列、GND (黒) は上の青レールの 2 列へ (電源は板の左上に置く)。下の青レールは
   1 列で上の青レールとつなぐ
 - U1 (CD4081, AND) は 24〜30 列、U2 (CD4071, OR) は 38〜44 列、U3 (CD4069, NOT)
   は 52〜58 列。どれも切り欠きが左で、足1 が左下 (f 行)、足14 が左上 (e 行)
