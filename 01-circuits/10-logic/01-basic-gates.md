@@ -19,13 +19,13 @@ LED が点いていれば出力は 1 (Hレベル)、消えていれば 0。
 ```circuit
 title: 図1 AND・OR・NOTを並べて比べる
 parts:
-  A: switch d3 f3
+  A: button d3 f3
   RpdA: resistor f3 f1 10k
   GA: ground f1
-  B: switch c6 e6
+  B: button c6 e6
   RpdB: resistor e6 e4 10k
   GB: ground e4
-  C: switch b9 d9
+  C: button b9 d9
   RpdC: resistor d9 d7 10k
   GC: ground d7
   VCC: vcc d3
