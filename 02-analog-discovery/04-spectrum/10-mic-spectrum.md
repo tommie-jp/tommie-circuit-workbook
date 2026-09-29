@@ -133,6 +133,8 @@ signal:
 markers: [150Hz, 300Hz, 450Hz, 600Hz]
 ```
 
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/10-mic-spectrum.svg)
+
 - 基本周波数 150 Hz (男性の声のおおよその高さ) の声を、倍音の高さを
   適当に決めて足し合わせた**理想の例**。実際の声では山の高さの並びが人と
   母音ごとに変わり、山の裾も少し広がる
