@@ -79,14 +79,14 @@ title: 図2 自己バイアスのエミッタ接地増幅 (W1 と CH2 を入力�
 # 5V は AD の V+ から上の + レールへ、上の − レール = GND (下のレールは使わない)
 board: half
 parts:
-  R1: resistor b3 b8 20k
-  R2: resistor c8 c13 10k
-  RC: resistor b16 b21 2.2k
-  Q1: transistor f19(B) f20(C) f21(E) 2SC1815
+  R1: resistor b3 b9 20k
+  R2: resistor c9 c13 10k
+  RC: resistor b15 b20 2.2k
+  Q1: transistor e19(B) e20(C) e21(E) 2SC1815
   CIN: capacitor d5(-) d9(+) 1uF
-  RE: resistor a24 -t24 1k
-  CE: capacitor/electrolytic b24(+) b27(-) 100uF
-  COUT: capacitor d21(+) d25(-) 1uF
+  RE: resistor a21 -t21 1k
+  CE: capacitor/electrolytic b21(+) b26(-) 100uF
+  COUT: capacitor d20(+) d27(-) 1uF
   AD:
     type: device
     at: top
@@ -99,16 +99,13 @@ wires:
   - e4 -- e5 blue
   - AD.W1 -- a5 yellow
   - AD.2- -- -t7 black
-  - AD.1+ -- a25 orange
-  - AD.1- -- -t26 black
+  - AD.1+ -- a27 orange
+  - AD.1- -- -t28 black
   - +t3 -- a3 red
   - a13 -- -t13 black
-  - d8 -- g19 orange
-  - e9 -- h19 yellow
-  - +t16 -- a16 red
-  - g20 -- e21 blue
-  - g21 -- e24 green
-  - a27 -- -t27 black
+  - e9 -- d19 orange [v10]
+  - +t15 -- a15 red
+  - a26 -- -t26 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/03-common-emitter.svg)
@@ -116,12 +113,13 @@ wires:
 5V は Analog Discovery の電源出力 V+ (赤) から上の + レールへ入れる
 (WaveForms の Supplies で V+ を 5 V にする)。この回路が流すのは 1 mA ほどなので V+ で足りる。
 
-- **ベース**: `R1`/`R2` の分圧点 (列 8) と `CIN` の + 側 (列 9) をベースへ
-  (同じ穴に 2 本は挿せないので g19 と h19 に分ける)
-- **コレクタ (列 21)**: `RC` の下端。**エミッタ (列 24)**: `RE` の上端、`CE` は `RE` と並列
+- **Q1 は上のブロック** (`e19` B・`e20` C・`e21` E)。溝をまたぐ線が要らない
+- **ベース (列 9)**: `R1` の下端・`R2` の上端・`CIN` の + 側が同じ列。橙の線 1 本 (`e9`–`d19`) で Q1 の B へ
+- **コレクタ (列 20)**: `RC` の下端と `COUT` の + 側が、Q1 の C と同じ列
+- **エミッタ (列 21)**: `RE` を − レールへ縦に挿し、`CE` の + 側も同じ列
 - **入力 (列 5)**: `CIN` の − 側。W1 (黄) を `a5` に、CH2 の 2+ (青) は `a4` に挿して
   `e4`–`e5` で渡す
-- **出力 (列 25)**: `COUT` の − 側。CH1 の 1+ (橙) を `a25` に挿す
+- **出力 (列 27)**: `COUT` の − 側。CH1 の 1+ (橙) を `a27` に挿す
 - AD の GND・2−・1− (黒) は上の − レールへ
 
 ## オシロで見る
