@@ -148,9 +148,79 @@ GND 基準の題で、測る所は図1 のまま ([回路の本の 0-3](../../01
 [0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md))。CH1 の先端を i10、CH2 の先端を i12、グランドクリップは青レール。
 
 - 要るのは **90° ずつずれた 4 本の方形波** と、決まった数だけ出して止める働き。2 ch の発振器では作れない。
-  マイコン (回路の本の 7-4・11 章の Raspberry Pi Pico) で 4 本を出すのが簡単。発振器の Burst (N サイクル) の機能で
+  マイコン (回路の本の 11 章の Raspberry Pi Pico 2) で 4 本を出すのが簡単 (下の「Pico 2 で 4 相を出す」)。発振器の Burst (N サイクル) の機能で
   fs のパルスを数だけ出し、74HC194 などで 4 相に分ける方法もある
 - 電源は安定化電源の 5 V、電流制限 0.3 A
+
+## Pico 2 で 4 相を出す
+
+AD の Patterns の代わりに、Raspberry Pi Pico 2 (RP2350) の GP2〜GP5 (ピン 4・5・6・7) をドライバの 4 つの入力
+(A・B・C・D) へつなぎ、Pico 2 の GND (ピン 3 など) を GND のレールへつなぐ。出力は 3.3 V で、AD の DIO と同じ。
+2 相励磁で、2 つずつ同時に H にする (0011 → 0110 → 1100 → 1001)。fs = 200 Hz のパルスを 2048 個出して止める。
+プログラムは **C/C++ (Pico SDK) を第 1、MicroPython を第 2** とする (書き込み方は回路の本の 11-1)。
+
+`main.c`
+
+```c
+#include "pico/stdlib.h"
+
+#define PIN_BASE 2                    // GP2〜GP5 -> 4 相 A B C D (ドライバの入力)
+#define STEP_HZ 200                   // fs
+#define STEPS 2048                    // 出すステップの数 (360° 分)
+
+// 2 相励磁: 2 つずつ同時に H。4 つ出すごとに 1 周期
+static const uint8_t PATTERN[4] = {0x3, 0x6, 0xC, 0x9};
+
+int main(void) {
+    for (int i = 0; i < 4; i++) {
+        gpio_init(PIN_BASE + i);
+        gpio_set_dir(PIN_BASE + i, GPIO_OUT);
+    }
+
+    absolute_time_t next = get_absolute_time();
+    for (int n = 0; n < STEPS; n++) {
+        gpio_put_masked(0xFu << PIN_BASE, (uint32_t)PATTERN[n % 4] << PIN_BASE);
+        next = delayed_by_us(next, 1000000 / STEP_HZ);
+        sleep_until(next);
+    }
+    gpio_put_masked(0xFu << PIN_BASE, 0);   // 止めるときは全相を L に戻す
+    while (true) {
+        tight_loop_contents();
+    }
+}
+```
+
+`CMakeLists.txt` は回路の本の 11-1 と同じ形で、名前だけ `step` に替える。
+`cmake -B build -DPICO_BOARD=pico2` のあと `cmake --build build` で `build/step.uf2` ができる。
+
+MicroPython (Pico 2 用の `RPI_PICO2`) では、次のように書く。
+
+```python
+from machine import Pin
+from time import ticks_us, ticks_add, ticks_diff, sleep_us
+
+STEP_HZ = 200
+STEPS = 2048
+PATTERN = (0b0011, 0b0110, 0b1100, 0b1001)
+pins = [Pin(n, Pin.OUT) for n in (2, 3, 4, 5)]   # A, B, C, D
+
+period = 1000000 // STEP_HZ
+next_t = ticks_us()
+for n in range(STEPS):
+    bits = PATTERN[n % 4]
+    for i in range(4):
+        pins[i].value((bits >> i) & 1)
+    next_t = ticks_add(next_t, period)
+    wait = ticks_diff(next_t, ticks_us())
+    if wait > 0:
+        sleep_us(wait)
+for p in pins:
+    p.value(0)   # 止めるときは全相を L に戻す
+```
+
+C/C++ のプログラムは、この環境で `PICO_BOARD=pico2` の `.uf2` までビルドが通ることを確かめた。
+**実機では動かしていない。** MicroPython は実行していない (未確認)。
+2048 個で 360° になるのは、ここで仮定したギア 1/64 の 28BYJ-48 型のときで、モータ本体で数を確かめること。
 
 ## 見るべき値
 

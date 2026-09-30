@@ -187,7 +187,7 @@
 - { id: 11-7, tier: 200, era: 今, title: UART — Pico 2 台で通信 }
 - { id: 11-8, tier: 200, era: 今, title: 割り込みとロータリーエンコーダ }
 - { id: 11-9, tier: 200, era: 今, title: モータドライバ (DRV8833) }
-- { id: 11-10, tier: 200, era: 今, title: Pico W で しきい値を通知 }
+- { id: 11-10, tier: 200, era: 今, title: Pico 2 W で しきい値を通知 }
 - { id: 11-11, tier: 200, era: 今, title: USB 給電と電源設計 (VSYS / VBUS) }
 - { id: 11-12, tier: 200, era: 今, title: デカップリングとグラウンド }
 - { id: 12-1, tier: 50, board: [ BB, PF ], title: おやすみタイマー — 555 単安定 + MOSFET }

@@ -18,8 +18,9 @@ board: —
   この本には出てこない
 - 交流が要る実験は、**Analog Discovery (AD) の波形発生器**か、**二次側 12 V 以下の
   AC 出力アダプタ**から取る。AD の波形発生器は**出せる電流に上限がある**
-  (Analog Discovery 3 の仕様で 1 ch あたり 30 mA。40 mA を超えると保護が働いて出力が
-  止まる。Analog Discovery 2 はマニュアルに上限の記載が無い)。これを超える負荷
+  (Analog Discovery 3 の仕様で 1 ch あたり 30 mA。これは「ひずみなく出せる最大値」で、
+  40 mA までは出せるが、それを超えるとハードウェアの保護が働く。出力インピーダンスは 0 Ω、
+  振幅は ±5 V まで)。これを超える負荷
   (低い抵抗) をつなぐと、波形がひずんだり、電圧が下がったりする
 - 直流は 5 V が既定 (USB の 5 V、AD の Supplies、単 3 電池 3 本の 4.5 V のどれでもよい)。
   この本の直流の実験はどれもこれらと乾電池で組める
@@ -81,16 +82,37 @@ wires:
   どれも組む前に R_min を計算してから抵抗を選ぶ
 - 100 Ω ちょうどは上限ぎりぎりなので、実際には **150 Ω 以上**にして 3 割ほど
   余裕を持たせる
-- 30 mA は AD3 の仕様で、AD2 はマニュアルに上限の記載が無い。以後の題は機種によらず
-  組めるよう、**10 mA 以内** (AD3 の仕様の 1/3) に収まる値で決めている
+- 30 mA は AD3 の仕様。以後の題は余裕を見て、**10 mA 以内** (AD3 の仕様の 1/3) に
+  収まる値で決めている
 - AC アダプタ (二次側 12 V 以下) は波形発生器より大きな電流を出せるが、
   その分**ヒューズや電流制限抵抗**で上限を決めておく (0-6 で扱う)。二次側でも
   12 V を超えないこと、濡れた手で触らないことは変わらない
+
+## この本の標準の計器 Analog Discovery 3 の数字
+
+この本の計器は Analog Discovery 3 (AD3) にそろえる。使う数字を並べる
+(出典はこの節の下)。
+
+| 項目 | AD3 の値 |
+| --- | --- |
+| Wavegen (W1・W2) | 振幅 ±5 V、出力インピーダンス 0 Ω、電流は 30 mA まで (ひずみなし)・40 mA で保護 |
+| Supplies (V+・V−) | +0.5〜+5 V、−0.5〜−5 V。USB からだけで使うと、装置全体で約 5.5 W が目安。5 V の補助電源 (3.1 A 以上) を付けると 1 ch あたり 800 mA・2.4 W まで |
+| Scope の入力 | ±25 V (±2.5 V のレンジもある)、入力抵抗と容量は 1 MΩ‖24 pF、14 bit、125 MS/s |
+| Scope の帯域 | BNC アダプタ付き 30 MHz 以上 (−3 dB)、2×15 のヘッダのままでは 9 MHz (−3 dB) |
+
+- この本の実験は 1 kHz 前後の低い周波数なので、帯域の差は結果に響かない
+- 補助電源なしの USB 給電では、Supplies の電流を欲張ると Wavegen や Scope の分が
+  足りなくなる。TL071 1 個 (約 1.4 mA) のような小さい負荷なら問題ない
+- Wavegen の出力インピーダンス 0 Ω は、ヘッダから出すときの値。BNC アダプタを付けた
+  ときは、ジャンパで 0 Ω と 50 Ω を選べる
 
 ## 出典
 
 自作。AD の波形発生器の電流の上限 (30 mA、保護は 40 mA) と出力インピーダンス (0 Ω) は
 Digilent の [Analog Discovery 3 リファレンスマニュアル](https://digilent.com/reference/test-and-measurement/analog-discovery-3/reference-manual)
 の仕様 (Arbitrary Waveform Generator の節)。
-[Analog Discovery 2 のリファレンスマニュアル](https://digilent.com/reference/test-and-measurement/analog-discovery-2/reference-manual)
-には電流の上限の記載が無い。
+電流の値の注記 (30 mA は「ひずみなく出せる最大値」、40 mA まででハードウェアの保護) は
+Digilent の Analog Discovery 3 Specifications の Arbitrary Waveform Generator の表の注。
+
+上の表の Scope の入力・帯域、Supplies、USB の電力の目安は、Digilent の
+Analog Discovery 3 Specifications と Reference Manual (Programmable Power Supply の節)。

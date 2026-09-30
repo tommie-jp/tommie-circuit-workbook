@@ -180,10 +180,76 @@ GND 基準の題で、測る所は図1 のまま ([回路の本の 0-3](../../01
 クリップを当てない。
 
 - AD の Patterns の代わりに要るのは、**120° ずつずれた 3 本の方形波**。2 ch の発振器では 3 本目が作れない。
-  マイコン (回路の本の 11 章の Raspberry Pi Pico など) で 3 本を出すか、3 ch 以上のパターン発生器を使う。
+  マイコン (回路の本の 11 章の Raspberry Pi Pico 2) で 3 本を出すか、3 ch 以上のパターン発生器を使う。
+  Pico 2 のプログラムは下の「Pico 2 で 3 本の方形波を出す」に置いた
   発振器 1 台なら、7 Hz × 6 = 42 Hz の方形波を 4017 のような 10 進カウンタで分けて 6 ステップを作る方法もある (配線は増える)
 - 電源は安定化電源の 5 V、電流制限 0.8 A (6 ステップのどの状態でも 0.4 A ほど、計算値)
 - 周波数は Measure の Frequency、相の遅れは 2 ch の Phase で読む
+
+## Pico 2 で 3 本の方形波を出す
+
+AD の Patterns が無いときは、Raspberry Pi Pico 2 (RP2350) の GPIO 3 本を図 1 の DIO0〜DIO2 の代わりにする。
+GP2 (ピン 4)・GP3 (ピン 5)・GP4 (ピン 6) を L293D の 2・7・10 番へ、Pico 2 の GND (ピン 3 など) を GND のレールへつなぐ。
+出力は 3.3 V の方形波で、AD の DIO と同じ (L293D の入力の H に足りる)。
+1 周期を 6 ステップに分け、V は U より 2 ステップ (120°)、W は 4 ステップ遅らせる。f = 7 Hz なら 1 ステップは 1 / (7 × 6) ≒ 23.8 ms。
+プログラムは **C/C++ (Pico SDK) を第 1、MicroPython を第 2** とする (書き込み方は回路の本の 11-1)。
+
+`main.c`
+
+```c
+#include "pico/stdlib.h"
+
+#define PIN_U 2                       // GP2 -> L293D の 2 番
+#define PIN_V 3                       // GP3 -> L293D の 7 番
+#define PIN_W 4                       // GP4 -> L293D の 10 番
+#define FREQ_HZ 7                     // 電源の周波数 f
+#define STEP_US (1000000 / (FREQ_HZ * 6))   // 1 周期を 6 ステップに分ける
+
+int main(void) {
+    const uint pins[3] = {PIN_U, PIN_V, PIN_W};
+    for (int i = 0; i < 3; i++) {
+        gpio_init(pins[i]);
+        gpio_set_dir(pins[i], GPIO_OUT);
+    }
+
+    absolute_time_t next = get_absolute_time();
+    for (int step = 0; ; step = (step + 1) % 6) {
+        // 相 k は 3 ステップ H、3 ステップ L。V は U より 2 ステップ (120°) 遅れる
+        for (int k = 0; k < 3; k++) {
+            gpio_put(pins[k], ((step + 6 - 2 * k) % 6) < 3);
+        }
+        next = delayed_by_us(next, STEP_US);
+        sleep_until(next);
+    }
+}
+```
+
+`CMakeLists.txt` は回路の本の 11-1 と同じ形で、名前だけ `sync` に替える
+(`pico_sdk_import.cmake` も同じようにコピーする)。`cmake -B build -DPICO_BOARD=pico2` のあと
+`cmake --build build` で `build/sync.uf2` ができる。
+
+MicroPython (Pico 2 用の `RPI_PICO2`) では、同じ動きを次のように書く。
+
+```python
+from machine import Pin
+from time import sleep_us
+
+FREQ_HZ = 7
+STEP_US = 1000000 // (FREQ_HZ * 6)   # 1 周期を 6 ステップに分ける
+pins = [Pin(n, Pin.OUT) for n in (2, 3, 4)]   # U, V, W
+
+step = 0
+while True:
+    for k in range(3):
+        pins[k].value(1 if (step + 6 - 2 * k) % 6 < 3 else 0)
+    step = (step + 1) % 6
+    sleep_us(STEP_US)
+```
+
+C/C++ のプログラムは、この環境で `PICO_BOARD=pico2` の `.uf2` までビルドが通ることを確かめた。
+**実機では動かしていない。** MicroPython は実行していない (未確認)。
+MicroPython の `sleep_us` は待つたびに処理の時間が足されるので、周期が C/C++ よりわずかに長くなる。
+本文の見るべき値 (7 Hz で 60 rpm) は周波数を Measure で読んで合わせる。
 
 ## 見るべき値
 
