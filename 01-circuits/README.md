@@ -134,7 +134,7 @@
 | --- | --- | --- | --- | --- |
 | 0-1 | [テスターで電圧・電流・抵抗を測る — 分圧回路を相手に](00-measure/01-multimeter.md) | 必須 | | BB |
 | 0-2 | [ブレッドボードの導通と回路図の読み方 — 同じ列、レール、ネット](00-measure/02-continuity.md) | 必須 | | BB |
-| 0-3 | [オシロスコープで波形を見る — 555 の出力を PC オシロ / AD2 で](00-measure/03-oscilloscope.md) | 必須 | 今 | BB |
+| 0-3 | [オシロスコープで波形を見る — 555 の出力を PC オシロ / AD3 で](00-measure/03-oscilloscope.md) | 必須 | 今 | BB |
 | 0-4 | [自作テスター — 分流器と倍率器](00-measure/04-shunt-multiplier.md) | 入門 | 古 | |
 | 0-5 | [hFE チェッカー](00-measure/05-hfe-checker.md) | 入門 | 古 | |
 | 0-6 | [安定化電源とファンクションジェネレータ — 電流制限を掛けて実験する](00-measure/06-bench-supply-limiting.md) | 入門 | 今 | |
@@ -334,8 +334,8 @@
 | 9-13 | [FM 復調 — スロープ検波](09-rf/13-fm-slope-detector.md) | 中級 | 古 | BB |
 | 9-14 | [27MHz の送受信 (トイラジコン)](09-rf/14-27mhz-rc-toy.md) | 中級 | 古 | CB / PF |
 | 9-15 | [アンテナ — ダイポールとループ、SWR](09-rf/15-antenna-dipole-loop.md) | 中級 | | CB |
-| 9-16 | [DDS モジュール — Pico で 7MHz を出して tinySA で見る](09-rf/16-dds-sdr-module.md) | 中級 | 今 | BB |
-| 9-17 | [2.4GHz モジュール (nRF24) と Pico](09-rf/17-nrf24-pico.md) | 中級 | 今 | BB |
+| 9-16 | [DDS モジュール — Pico 2 で 7MHz を出して tinySA で見る](09-rf/16-dds-sdr-module.md) | 中級 | 今 | BB |
+| 9-17 | [2.4GHz モジュール (nRF24) と Pico 2](09-rf/17-nrf24-pico.md) | 中級 | 今 | BB |
 
 ## 第 10 章 ロジック
 
@@ -366,7 +366,7 @@
 
 | # | 題 | 段 | 印 | 板 |
 | --- | --- | --- | --- | --- |
-| 11-1 | [Pico の L チカ](11-microcontrollers/01-pico-blink.md) | 必須 | 今 | BB |
+| 11-1 | [Pico 2 の L チカ](11-microcontrollers/01-pico-blink.md) | 必須 | 今 | BB |
 | 11-2 | [ボタン入力とプルアップ](11-microcontrollers/02-button-pullup.md) | 必須 | 今 | BB |
 | 11-3 | [ADC で CdS を読む](11-microcontrollers/03-adc-cds.md) | 入門 | 今 | |
 | 11-4 | [PWM で LED 調光とサーボ](11-microcontrollers/04-pwm-led-servo.md) | 入門 | 今 | |

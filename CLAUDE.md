@@ -4,6 +4,12 @@
 CC BY 4.0。回路図と実体配線図は tommie-fence のフェンス
 (` ```circuit ` / ` ```breadboard ` / ` ```perfboard `)、銅張り基板の寸法図は ` ```copper `、NanoVNA の画面は ` ```vna `、オシロスコープの画面は ` ```scope `、ロジックアナライザの画面は ` ```logic ` で書く。
 
+## 標準の計器・部品・言語
+
+計器は Analog Discovery 3 (AD3)、LiteVNA64 (`device: LV64`)、tinySA Ultra ZS405。
+マイコンは Raspberry Pi Pico 2。プログラムは C / C++ (Pico SDK) が第 1、MicroPython が第 2 で、両方を併記する。
+AD2 と NanoVNA-H4 / V2 は歴史的な機種 (比較のために残す)。一覧と使える範囲は 01-circuits/README.md。
+
 ## 置き場と書き方
 
 - 1 題 1 ファイル: `<NN-冊>/<NN-章>/<NN-題>.md` (冊は 01-circuits / 02-analog-discovery /

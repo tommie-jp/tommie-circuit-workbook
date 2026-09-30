@@ -18,14 +18,15 @@ const TOOLS = new Set(['AD', 'VNA']);
 const ERAS = new Set(['古', '今', '古/今']);
 
 /**
- * 冊ごとの機種 (`device`)。鍵は冊の slug。NanoVNA は必ず書く (1.5 GHz より上は V2 が要る)。
+ * 冊ごとの機種 (`device`)。鍵は冊の slug。NanoVNA は必ず書く。標準は LV64 (LiteVNA64)。
+ * H4 / V2 は歴史的で、第 3 冊の書き直しが済むまで残す。
  * NanoVNA の冊の第 11 章 (スペクトラムアナライザ) は `SA` (例の機種は tinySA Ultra)。
  * Analog Discovery は AD3 でしかできない題にだけ書く。回路と電験の冊には無い。
  */
 const DEVICES = {
   circuits: { required: false, values: new Set() },
   'analog-discovery': { required: false, values: new Set(['AD2', 'AD3']) },
-  nanovna: { required: true, values: new Set(['H4', 'V2', 'SA']) },
+  nanovna: { required: true, values: new Set(['LV64', 'H4', 'V2', 'SA']) },
   denken: { required: false, values: new Set() },
 };
 

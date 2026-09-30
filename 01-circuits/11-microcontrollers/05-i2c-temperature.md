@@ -23,7 +23,7 @@ SDA・SCL の 2 本だけで、複数のセンサを同じ 2 本にぶら下げ�
 ```circuit
 title: 図1 MCP9808をI2C0(GP0/GP1)で読む
 parts:
-  U1: pico k3 mirror
+  U1: pico2 k3 mirror
   SENS:
     type: device
     at: g12
@@ -59,7 +59,67 @@ style:
 - MCP9808 は I2C アドレス **0x18** (デフォルト、A0〜A2 未接続時)。
   分解能 0.0625℃、精度は目安 ±0.25℃ (typ)、±0.5℃ (max、−40〜+125℃)
 
-## 見るべき値
+## プログラム
+
+C/C++ を第 1、MicroPython を第 2 に並べる。この教科書の標準で、実行時間が読みやすい
+C/C++ を先にし、手軽に試せる MicroPython を添える。
+
+### C/C++ (Pico SDK)
+
+`main.c` (I2C0 を 100kHz で使い、Ambient Temperature レジスタ 0x05 を 1 秒ごとに読む)。
+
+```c
+#include <stdio.h>
+#include "pico/stdlib.h"
+#include "hardware/i2c.h"
+
+#define I2C_PORT i2c0
+#define SDA_PIN 0
+#define SCL_PIN 1
+#define MCP9808_ADDR 0x18
+#define REG_AMBIENT_TEMP 0x05
+
+static bool read_temperature(float *celsius) {
+    uint8_t reg = REG_AMBIENT_TEMP;
+    uint8_t data[2];
+    if (i2c_write_blocking(I2C_PORT, MCP9808_ADDR, &reg, 1, true) != 1) return false;
+    if (i2c_read_blocking(I2C_PORT, MCP9808_ADDR, data, 2, false) != 2) return false;
+
+    uint8_t upper = data[0] & 0x1F;       // 上位バイトからフラグを除く
+    uint8_t lower = data[1];
+    if (upper & 0x10) {                   // 符号ビット (負)
+        upper &= 0x0F;
+        *celsius = (upper * 16 + lower / 16.0f) - 256;
+    } else {
+        *celsius = upper * 16 + lower / 16.0f;
+    }
+    return true;
+}
+
+int main(void) {
+    stdio_init_all();
+    i2c_init(I2C_PORT, 100 * 1000);
+    gpio_set_function(SDA_PIN, GPIO_FUNC_I2C);
+    gpio_set_function(SCL_PIN, GPIO_FUNC_I2C);
+    // プルアップは外付けの 4.7kΩ (図 1) が受け持つので、内蔵は使わない
+
+    while (true) {
+        float temp;
+        if (read_temperature(&temp)) printf("%.4f C\n", temp);
+        else printf("read failed\n");
+        sleep_ms(1000);
+    }
+}
+```
+
+`CMakeLists.txt` は 11-2 と同じ形で、名前を `i2ctemp` にし、`target_link_libraries` を
+`pico_stdlib hardware_i2c` にする。ビルドと書き込みは 11-1 と同じ
+(`cmake -B build -DPICO_BOARD=pico2 && cmake --build build`、`.uf2` を BOOTSEL のドライブへ)。
+`printf` の出力は USB シリアルのターミナルで見る。センサが応答しないと
+`read failed` が出る (下の `i2c.scan()` に当たる確認は、C/C++ では
+アドレス 0x18 への読み出しが成功するかで代える)。
+
+### MicroPython
 
 ```python
 from machine import I2C, Pin
@@ -86,16 +146,22 @@ while True:
 | 25.0℃ | 0x01 | 0x90 | 1×16 + 0x90/16 = **25.0℃** |
 | negative の例 (−10.0℃) | 0x1F | 0x60 | 符号あり: (15×16 + 0x60/16) − 256 = **−10.0℃** |
 
+C/C++ は `PICO_BOARD=pico2` の `.uf2` までビルドが通ることを確かめた。
+**実機では動かしていない。** MicroPython は実行していない (未確認)。
+
+## 見るべき値
+
 | 測る所 | 期待する値 |
 | --- | --- |
-| `i2c.scan()` の結果 | `[24]` (0x18 の 10進、計算値) |
+| MicroPython の `i2c.scan()` の結果 | `[24]` (0x18 の 10進、計算値) |
 | 室温での `temp` | だいたい 20〜28℃ (季節・部屋による) |
 | センサを指で温める | 数℃上がる (分解能 0.0625℃ なのですぐ反応する) |
 
-`i2c.scan()` は接続を確かめる第一歩。何も出なければ、SDA/SCL の
+`i2c.scan()` (C/C++ では `read failed` の有無) は接続を確かめる第一歩。何も出なければ、SDA/SCL の
 プルアップ忘れか、配線の左右 (SDA と SCL) の取り違えを疑う。
 
 ## 出典
 
 自作。MCP9808 のレジスタ読み出しは Microchip のデータシート
-(Ambient Temperature Register, 05h) の手順による。
+(Ambient Temperature Register, 05h) の手順による。I2C0 の GP0/GP1 と
+`i2c_write_blocking` / `i2c_read_blocking` は Pico SDK (`hardware_i2c`) による。

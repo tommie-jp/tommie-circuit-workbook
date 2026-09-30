@@ -2,26 +2,27 @@
 book: circuits
 chapter: 9
 id: 9-16
-title: DDS モジュール — Pico で 7MHz を出して tinySA で見る
+title: DDS モジュール — Pico 2 で 7MHz を出して tinySA で見る
 tier: 200
 source: 自作
 board: BB
 era: 今
 ---
 
-# 9-16 DDS モジュール — Pico で 7MHz を出して tinySA で見る
+# 9-16 DDS モジュール — Pico 2 で 7MHz を出して tinySA で見る
 
 **DDS (Direct Digital Synthesis、直接デジタル合成)** は、クロックごとに位相を足し込み、
 その位相で正弦の表を引いて DAC から出す発振器だ。9-4 や 9-6 の LC 発振器は
 コイルとコンデンサで周波数が決まり、温度や手の近さでずれたが、DDS は
 **マイコンから数値を書くだけで周波数が決まり、水晶の精度で止まる**。
 ここでは定番の **AD9833 モジュール** (25MHz の水晶発振器と AD9833 を載せた小基板) を
-Raspberry Pi Pico から SPI で 7.000MHz に設定し、その出力を
+Raspberry Pi Pico 2 (RP2350) から SPI で 7.000MHz に設定し、その出力を
 **tinySA Ultra** (手のひらのスペクトラムアナライザ、通常モードで 100kHz〜800MHz、入力は SMA) で見る。
 送る側は「モジュール + マイコン」、見る側は市販の計器、という今のラジオ工作の形だ。
 
 **なぜ tinySA か。** 見たいのは 7MHz の線だけでなく、その上に出る像 (18・32・43MHz、下の節)。
-Analog Discovery 2 のスペクトラム表示は帯域が 30MHz までなので 32MHz と 43MHz の像が見えない
+Analog Discovery 3 (AD3) の入力は BNC アダプタ付きで帯域が 30MHz 以上 (−3dB)、2×15 ピンのヘッダだけだと 9MHz (−3dB) なので、
+32MHz と 43MHz の像は帯域の縁か外で、大きさを信用できない
 (7MHz の線だけを見るなら使える)。RTL-SDR は 1 画面が 2.4MS/s で ±1.2MHz 幅しかなく、
 7MHz は V4 でなければダイレクトサンプリングの設定も要る。tinySA Ultra なら 0〜50MHz を
 1 画面で掃引でき、4 本の線が同じ画面に並ぶ。
@@ -69,9 +70,9 @@ f<sub>out</sub> が MCLK の半分 (12.5MHz) に近づくほど、像が目的�
 ## 回路図
 
 ```circuit
-title: 図1 PicoでAD9833を7MHzに設定しtinySAで見る
+title: 図1 Pico 2でAD9833を7MHzに設定しtinySAで見る
 parts:
-  U1: pico k3 mirror
+  U1: pico2 k3 mirror
   U2:
     type: device
     at: i11
@@ -99,28 +100,28 @@ wires:
   - U3.GND -| o17
 notes:
   - text k17f0 blue: 板の外 (SMAケーブルでtinySAへ)
-  - text e4f0 blue: 3.3V (Picoの3V3 OUT)
+  - text e4f0 blue: 3.3V (Pico 2の3V3 OUT)
 style:
   pitch: 1.2
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/16-dds-sdr-module.svg)
 
-- **U2 (AD9833 モジュール)** は 2.3〜5.5V で動く。ここでは Pico の **3V3 OUT (PIN 36)** から
-  3.3V を取る。Pico の GPIO も 3.3V なので、信号の電圧がそのまま合う。
-  Pico 本体は PC の USB から給電する (5V を使わない理由はこれ)
+- **U2 (AD9833 モジュール)** は 2.3〜5.5V で動く。ここでは Pico 2 の **3V3 OUT (PIN 36)** から
+  3.3V を取る。Pico 2 の GPIO も 3.3V (固定) なので、信号の電圧がそのまま合う。
+  Pico 2 本体は PC の USB から給電する (5V を使わない理由はこれ)
 - **SPI0** を使う: **SCLK = GP2 (PIN 4)**、**SDATA = GP3 (PIN 5、SPI0 TX)**、
   **FSYNC = GP5 (PIN 7)**。FSYNC は AD9833 のチップセレクトにあたり、L の間だけ 16 bit の語を受け取る。
-  GND は Pico の **GND (PIN 8)** からモジュールの DGND・AGND へ
+  GND は Pico 2 の **GND (PIN 8)** からモジュールの DGND・AGND へ
 - AD9833 は SCLK の**立ち下がり**でデータを読み、SCLK は H で待つ (SPI のモード 2、
-  CPOL = 1・CPHA = 0)。MicroPython では `polarity=1, phase=0` と書く
+  CPOL = 1・CPHA = 0)。Pico SDK では `spi_set_format()` に `SPI_CPOL_1, SPI_CPHA_0`、MicroPython では `polarity=1, phase=0` と書く
 - **出力 OUT** は 0.038V〜0.65V を振れる正弦 (約 0.6Vpp、中心 約 0.34V。データシートの値)。
   チップの中の 200Ω を通して出てくるので、**開放 0.6Vpp・出力抵抗 200Ω の源**とみなす。
   直流分 (中心 約 0.34V) は、tinySA Ultra の入力の許す直流 (±5V まで) に収まる
 - **減衰器は入れない。** 源は 200Ω の出力抵抗を持つが、tinySA の入力は 50Ω なので、
   0.3V peak の源を 200Ω と 50Ω で分けて 0.060V peak = **−14.4dBm** (計算値。
   P = 0.060² ÷ (2 × 50Ω) = 36µW)。7MHz は sinc で −1.2dB 下がって **−15.6dBm**。
-  tinySA Ultra の入力の上限の目安は +0dBm 程度 (絶対最大 +20dBm) なので、この値は
+  tinySA Ultra の入力の上限の目安は +0dBm 程度 (絶対最大 +6dBm) なので、この値は
   **上限より 15dB 以上低く、フロア (RBW 100kHz で約 −97dBm) より 80dB 以上高い**。
   読みやすいレベルなので、40dB の減衰器は要らない。U2 の OUT から U3 の SMA へは
   短い SMA 変換ケーブルで直接つなぐ。GND は同軸の外皮
@@ -134,7 +135,7 @@ style:
 title: 図2 ブレッドボードに組む
 board: half
 parts:
-  U1: pico @ h2
+  U1: pico2 @ h2
   U2:
     type: device
     at: bottom
@@ -163,9 +164,9 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/16-dds-sdr-module.svg)
 
-- ブレッドボードは **half (30 列)**。Pico と数本の線だけなので、収まる最小の板にした
-- U1 (Pico) は h2 に挿す。上の列 (c 行) が PIN 40〜21、下の列 (h 行) が PIN 1〜20
-- **上の赤レール = 3.3V**。Pico の **3V3 (PIN 36、6 列)** から a6 → 上の + レールへ赤線を引き、
+- ブレッドボードは **half (30 列)**。Pico 2 と数本の線だけなので、収まる最小の板にした
+- U1 (Pico 2) は h2 に挿す。上の列 (c 行) が PIN 40〜21、下の列 (h 行) が PIN 1〜20
+- **上の赤レール = 3.3V**。Pico 2 の **3V3 (PIN 36、6 列)** から a6 → 上の + レールへ赤線を引き、
   23 列で下の + レールへ渡す。**AD9833 モジュールはこの 3.3V で動く** (5V は使わない)
 - 青レール = GND。GND38 (4 列) を上の − レールへ、GND8 (9 列) を下の − レールへ。27 列で上下の − レールを渡している
 - U2 (AD9833 モジュール) は板の外に置き、ジャンパ線で SCLK → j5 (GP2)、SDATA → j6 (GP3)、
@@ -176,13 +177,95 @@ wires:
   下の − レール (20 列) にも寄せてある (回路図の GND と同じ節)
 
 **ブレッドボードで組んでよい理由。** 7MHz は AD9833 モジュールの**中**で作られ、
-板の外の SMA ケーブルを通って tinySA に入る。板を通るのは Pico とモジュールの間の
+板の外の SMA ケーブルを通って tinySA に入る。板を通るのは Pico 2 とモジュールの間の
 SPI (1MHz) と 3.3V の電源だけで、板の上の回路は 3MHz 以下に収まる。電流もモジュールと
-Pico を合わせて数十 mA で、板全体の 500mA にも遠く及ばない。
+Pico 2 を合わせて数十 mA で、板全体の 500mA にも遠く及ばない。
 
 ## 計器の設定
 
-**プログラム (MicroPython)**。Pico に書き、実行すると 7.000MHz を出し続ける。
+### プログラム
+
+プログラムは **C/C++ (Pico SDK) を第 1、MicroPython を第 2** として並べる。
+C/C++ を先にするのは、この教科書の標準がそうだからで、SPI の形式 (モード・ビット数) や
+FSYNC を上げ下げする順が、コードにそのまま出るため。どちらも同じ動きで、Pico 2 に書くと
+7.000MHz を出し続ける。
+
+**C/C++ (Pico SDK)**。`dds7mhz.c` (SPI0 を 16 ビット・モード 2 で使い、FSYNC は GPIO で上げ下げする)。
+
+```c
+#include <stdio.h>
+#include <stdint.h>
+#include "pico/stdlib.h"
+#include "hardware/spi.h"
+
+#define MCLK      25000000u   // モジュールの水晶発振器
+#define PIN_SCK   2
+#define PIN_MOSI  3
+#define PIN_FSYNC 5
+
+static void write16(uint16_t word) {
+    gpio_put(PIN_FSYNC, 0);
+    spi_write16_blocking(spi0, &word, 1);   // 16 bit を出し終えてから戻る
+    gpio_put(PIN_FSYNC, 1);
+}
+
+static double set_freq(double f) {
+    uint32_t freqreg = (uint32_t)(f * (1u << 28) / MCLK + 0.5);  // 7MHz なら 75161928
+    write16(0x2100);                                  // B28 = 1 (28 bit を 2 語で書く)、RESET = 1
+    write16(0x4000 | (freqreg & 0x3FFF));             // FREQ0 下位 14 bit
+    write16(0x4000 | ((freqreg >> 14) & 0x3FFF));     // FREQ0 上位 14 bit
+    write16(0xC000);                                  // PHASE0 = 0
+    write16(0x2000);                                  // RESET を解いて正弦を出す
+    return (double)freqreg * MCLK / (1u << 28);
+}
+
+int main(void) {
+    stdio_init_all();
+    spi_init(spi0, 1000 * 1000);
+    spi_set_format(spi0, 16, SPI_CPOL_1, SPI_CPHA_0, SPI_MSB_FIRST);  // SCLK は H で待つ、立ち下がりで読む
+    gpio_set_function(PIN_SCK, GPIO_FUNC_SPI);
+    gpio_set_function(PIN_MOSI, GPIO_FUNC_SPI);
+    gpio_init(PIN_FSYNC);
+    gpio_set_dir(PIN_FSYNC, GPIO_OUT);
+    gpio_put(PIN_FSYNC, 1);
+
+    double actual = set_freq(7000000.0);
+    while (true) {
+        printf("%.2f\n", actual);                     // 7000000.03 と出る
+        sleep_ms(1000);
+    }
+}
+```
+
+同じフォルダに `pico_sdk_import.cmake` (SDK の `external/` にあるものをコピーする) と
+`CMakeLists.txt` を置く。
+
+```cmake
+cmake_minimum_required(VERSION 3.13)
+set(PICO_BOARD pico2 CACHE STRING "Board type")
+include(pico_sdk_import.cmake)
+project(dds7mhz C CXX ASM)
+pico_sdk_init()
+add_executable(dds7mhz dds7mhz.c)
+target_link_libraries(dds7mhz pico_stdlib hardware_spi)
+pico_enable_stdio_usb(dds7mhz 1)
+pico_add_extra_outputs(dds7mhz)
+```
+
+環境変数 `PICO_SDK_PATH` に SDK のフォルダを指しておき、次でビルドする。
+
+```sh
+cmake -B build -DPICO_BOARD=pico2
+cmake --build build
+```
+
+`build/dds7mhz.uf2` ができる。**BOOTSEL ボタンを押しながら USB をつなぐ**と Pico 2 が
+USB ドライブ (ボリューム名は既定で `RP2350`) として見えるので、`.uf2` をそこへコピーする。
+`PICO_BOARD=pico2` を付け忘れると Pico (RP2040) 用になり、Pico 2 では動かない。
+表示 (`7000000.03`) は USB のシリアルに出るので、ターミナルソフトで見る。
+
+**MicroPython**。Pico 2 用の MicroPython (ダウンロードページ `RPI_PICO2`、Pico 用とは別のファイル) の
+`.uf2` を BOOTSEL でつないだドライブへコピーし、Thonny で「MicroPython (Raspberry Pi Pico)」を選んで実行する。
 
 ```python
 from machine import Pin, SPI
@@ -209,7 +292,14 @@ def set_freq(f):
 print(set_freq(7_000_000))             # 7000000.03 と出る
 ```
 
-**tinySA Ultra の設定**。通常モード (100kHz〜800MHz) の入力 (LOW) に SMA ケーブルでつなぐ。
+C/C++ のプログラムは、この環境で `PICO_BOARD=pico2` の `.uf2` までビルドが
+通ることを確かめた。**実機では動かしていない。** MicroPython は実行していない (未確認)。
+制御語 (0x2100・0x4000・0xC000・0x2000) と SPI のモードは AD9833 データシートの
+制御レジスタ・周波数レジスタ・68HC11 との接続例 (SCLK は H で待ち、立ち下がりで読む) と突き合わせた。
+
+### tinySA Ultra の設定
+
+通常モード (100kHz〜800MHz) の入力 (LOW) に SMA ケーブルでつなぐ。
 
 | 項目 | 設定 | 理由 |
 | --- | --- | --- |
@@ -221,8 +311,8 @@ print(set_freq(7_000_000))             # 7000000.03 と出る
 | 減衰 (ATT) | 自動 | 入力は −15.6dBm と上限より小さい |
 | マーカー | 1 = 7MHz、2 = 18MHz、3 = 32MHz、4 = 43MHz | 本文の順。peak で 1 を取り、周波数で 2〜4 を置く |
 
-7MHz の線だけを **Analog Discovery 2 のスペクトラム表示** (帯域 30MHz まで) で見ることもできる
-(32・43MHz の像は帯域の外)。
+7MHz の線だけを **Analog Discovery 3 のスペクトラム表示** (BNC アダプタ付きで帯域 30MHz 以上) で見ることもできる
+(43MHz の像は帯域の外、32MHz は縁)。
 
 **周波数のずれを読むとき。** 50MHz の掃引では 1 点が約 111kHz なので、7.000MHz の
 ±350Hz は読めない。中心を 7MHz、幅を 20kHz 程度に狭め RBW を 300Hz くらいにして読む。
@@ -256,7 +346,7 @@ markers: [7M, 18M, 32M, 43M]
 
 | 測る所 | 期待する値 |
 | --- | --- |
-| `set_freq(7_000_000)` の表示 | 7000000.03 (Hz) |
+| `set_freq()` の表示 (7MHz を指定) | 7000000.03 (Hz) |
 | 周波数の分解能 | 0.093Hz (25MHz ÷ 2<sup>28</sup>) |
 | tinySA のマーカー 1 (7MHz) | −15.6dBm |
 | マーカー 2 (18MHz、1 つ目の像) | −23.8dBm (7MHz の 8.2dB 下) |
@@ -273,9 +363,9 @@ markers: [7M, 18M, 32M, 43M]
 
 | 部品 | 値・型番 | 備考 |
 | --- | --- | --- |
-| U1 | Raspberry Pi Pico | MicroPython を書き込む。USB から給電 |
+| U1 | Raspberry Pi Pico 2 | C/C++ の `.uf2` か MicroPython を書き込む。USB から給電 |
 | U2 | AD9833 モジュール | 25MHz 水晶発振器つき。VCC・DGND・SDATA・SCLK・FSYNC・AGND・OUT のピンヘッダ |
-| U3 | tinySA Ultra | SMA 入力。通常モード 100kHz〜800MHz。板の外 |
+| U3 | tinySA Ultra ZS405 | SMA 入力。通常モード 100kHz〜800MHz。板の外 |
 | SMA ケーブル | 50Ω | U2 の OUT から U3 へ (SMA 変換ケーブル)。減衰器は入れない |
 
 - 電源は既定の 5V ではなく 3.3V (Pico の 3V3 OUT)。Pico の GPIO と電圧を合わせるため
@@ -287,6 +377,7 @@ markers: [7M, 18M, 32M, 43M]
 自作。AD9833 の周波数レジスタ・制御語・SPI の読み取りの向き・出力電圧は
 [Analog Devices AD9833 データシート](https://www.analog.com/media/en/technical-documentation/data-sheets/ad9833.pdf)、
 DDS の像と sinc の減衰は [Analog Devices の DDS 解説 (MT-085)](https://www.analog.com/media/en/training-seminars/tutorials/MT-085.pdf)、
-Pico の SPI0 のピンは [Raspberry Pi Pico のピン配置 (データシート)](https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf)、
+Pico 2 の SPI0 のピンは [Raspberry Pi Pico 2 のピン配置 (データシート)](https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf)、
+Pico SDK の SPI 関数は [Raspberry Pi Pico SDK のドキュメント (hardware_spi)](https://www.raspberrypi.com/documentation/pico-sdk/hardware.html)、
 tinySA Ultra の範囲・入力の上限・フロアは [tinySA wiki の仕様](https://tinysa.org/wiki/pmwiki.php?n=TinySA4.Specification) による。
 微弱無線局の範囲は電波法施行規則第 6 条。

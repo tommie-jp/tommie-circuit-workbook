@@ -68,7 +68,7 @@ export const BOOKS = [
     number: 3,
     slug: 'nanovna',
     title: 'NanoVNA の教科書',
-    summary: 'NanoVNA-H4 / V2 で 10 kHz〜4.4 GHz を測る。治具・部品・フィルタ・アンテナ・GHz 帯。第 11 章でスペクトラムアナライザ (tinySA など)',
+    summary: 'LiteVNA64 で 50 kHz〜6.3 GHz を測る (NanoVNA-H4 / V2 は比較用)。治具・部品・フィルタ・アンテナ・GHz 帯。第 11 章でスペクトラムアナライザ (tinySA など)',
     columns: ['device', 'board'],
     chapters: [
       [0, 'tools', '道具と安全'],

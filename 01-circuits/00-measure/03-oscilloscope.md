@@ -2,18 +2,18 @@
 book: circuits
 chapter: 0
 id: 0-3
-title: オシロスコープで波形を見る — 555 の出力を PC オシロ / AD2 で
+title: オシロスコープで波形を見る — 555 の出力を PC オシロ / AD3 で
 tier: 50
 source: 自作
 board: BB
 era: 今
 ---
 
-# 0-3 オシロスコープで波形を見る — 555 の出力を PC オシロ / AD2 で
+# 0-3 オシロスコープで波形を見る — 555 の出力を PC オシロ / AD3 で
 
 テスターは電圧の**大きさ**しか見せないが、オシロスコープは電圧が**時間とともに
 どう変わるか**を見せる。555 タイマーの非安定 (無安定) 回路で方形波を作り、
-USB 接続の PC オシロか Analog Discovery (AD2) の Scope 機能で波形を見る。
+USB 接続の PC オシロか Analog Discovery 3 (AD3) の Scope 機能で波形を見る。
 
 ## 回路図
 
@@ -81,7 +81,7 @@ parts:
   SCOPE:
     type: device
     at: bottom
-    label: PC オシロ / AD2 (Ch1)
+    label: PC オシロ / AD3 (Ch1)
     pins: [SIG, GND]
   PS:
     type: device
@@ -130,7 +130,7 @@ wires:
 | 時間レンジ | 50 µs/div (周期 208µs が 4 目盛り分) |
 | トリガ | 立ち上がり、レベル 1.5V くらい |
 
-PC オシロは付属ソフトの Scope 画面、AD2 は WaveForms の Scope で同じように設定する。
+PC オシロは付属ソフトの Scope 画面、AD3 は WaveForms の Scope で同じように設定する。
 
 ### Analog Discovery と汎用オシロの読み替え
 

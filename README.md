@@ -9,6 +9,9 @@
 (` ```circuit ` / ` ```breadboard ` / ` ```perfboard `)、銅張り基板の寸法図は ` ```copper `、NanoVNA の画面は ` ```vna `、オシロスコープの画面は ` ```scope `、ロジックアナライザの画面は ` ```logic `、
 周波数特性や特性曲線のグラフは ` ```graph ` で書く。
 
+標準の計器は Analog Discovery 3・LiteVNA64・tinySA Ultra ZS405、マイコンは Raspberry Pi Pico 2
+(プログラムは C / C++ が第 1、MicroPython が第 2 で併記)。一覧は [回路の教科書](01-circuits/README.md) にある。
+
 ## 4 冊
 
 <!-- toc:start -->
@@ -17,7 +20,7 @@
 | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 直流の基本から実用回路まで。回路図と実体配線図を並べて組む | 50 | 103 | 209 | 113 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | Analog Discovery 2 / 3 と WaveForms で DC〜10 MHz を測る | 50 | 100 | 200 | 100 |
-| [NanoVNA の教科書](03-nanovna/README.md) | NanoVNA-H4 / V2 で 10 kHz〜4.4 GHz を測る。治具・部品・フィルタ・アンテナ・GHz 帯。第 11 章でスペクトラムアナライザ (tinySA など) | 50 | 105 | 213 | 105 |
+| [NanoVNA の教科書](03-nanovna/README.md) | LiteVNA64 で 50 kHz〜6.3 GHz を測る (NanoVNA-H4 / V2 は比較用)。治具・部品・フィルタ・アンテナ・GHz 帯。第 11 章でスペクトラムアナライザ (tinySA など) | 50 | 105 | 213 | 105 |
 | [電験三種の教科書](04-denken/README.md) | 理論・機械・電力・法規の範囲を、低い電圧の実験で測って式を確かめる | 50 | 100 | 200 | 100 |
 
 <!-- toc:end -->
@@ -52,7 +55,7 @@ title: LED を点ける — 抵抗で電流を決める
 tier: 50                # 50 = 必須 / 100 = 入門 / 200 = 中級
 source: 自作            # 出典。借りた回路なら出所 (例: Lessons in Electric Circuits Vol. VI ch.5)
 board: BB               # 任意。BB = ブレッドボード / PF = perfboard / CB = 銅張り基板 (copper board) / — = 板なし
-device: H4              # nanovna は必須 (H4 / V2)。analog-discovery は AD3 でしかできない題だけ AD3
+device: LV64            # nanovna は必須 (LV64 標準 / H4・V2 は歴史的)。analog-discovery は AD3 でしかできない題だけ AD3
 era: 古                 # circuits だけ、任意。古 = 知っておきたい古典 / 今 = 今の定番 / 古/今
 tools: [AD, VNA]        # 任意。2 つの計器を両方使う題
 ---

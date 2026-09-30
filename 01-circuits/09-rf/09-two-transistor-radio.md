@@ -250,7 +250,7 @@ measure: [vpp, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/09-two-transistor-radio-2.svg)
 
 W1 の変調を切って (無変調の搬送波) 横軸を 0.5µs/div にすると、帯の中身が 1MHz の正弦波だと分かる。
-AD2 のアナログ入力は 30MHz 級の帯域があるので、1MHz は形のまま見える。
+AD3 のアナログ入力は、BNC アダプタ付きで帯域 30MHz 以上 (−3dB)、6MHz まで −0.1dB に収まるので、1MHz は形のまま見える。2×15 ピンのヘッダに直接つないでも 9MHz (−3dB)、2.9MHz (−0.5dB) あり、1MHz は読める。
 
 ## 見るべき値
 
