@@ -76,3 +76,10 @@ test('reads the copper fence and flags a near miss', () => {
   assert.deepEqual([...found], ['copper']);
   assert.deepEqual(misspelled, [{ name: 'coper', line: 4 }]);
 });
+
+test('reads the logic fence and flags a near miss', () => {
+  const { found, misspelled } = fencesIn('```logic\n```\n\n```logik\n```\n');
+
+  assert.deepEqual([...found], ['logic']);
+  assert.deepEqual(misspelled, [{ name: 'logik', line: 4 }]);
+});

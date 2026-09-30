@@ -2,7 +2,7 @@
 
 回路・Analog Discovery・NanoVNA・電験三種の 4 冊の実験帳。本文は日本語、ライセンスは
 CC BY 4.0。回路図と実体配線図は tommie-fence のフェンス
-(` ```circuit ` / ` ```breadboard ` / ` ```perfboard `)、銅張り基板の寸法図は ` ```copper `、NanoVNA の画面は ` ```vna `、オシロスコープの画面は ` ```scope ` で書く。
+(` ```circuit ` / ` ```breadboard ` / ` ```perfboard `)、銅張り基板の寸法図は ` ```copper `、NanoVNA の画面は ` ```vna `、オシロスコープの画面は ` ```scope `、ロジックアナライザの画面は ` ```logic ` で書く。
 
 ## 置き場と書き方
 
@@ -30,7 +30,7 @@ CC BY 4.0。回路図と実体配線図は tommie-fence のフェンス
   フェンスは似ているが同じではない (番地、`board:`、注釈の種類、DIP の書き方)
 - 書いたら `npm run check -- --verbose` でネットリストを出し、意図した回路と突き合わせる
 - **図の配置は [electronics-drawing-skills](https://github.com/tommie-jp/electronics-drawing-skills) の流儀と点検表に従う**
-  (回路図は readable-schematic、ブレッドボードは breadboard-wiring、ユニバーサル基板は perfboard-wiring、銅張り基板は copper-board)。
+  (回路図は readable-schematic、ブレッドボードは breadboard-wiring、ユニバーサル基板は perfboard-wiring、銅張り基板は copper-board、計器の画面 (scope / vna / spectrum / logic) は instrument-screen)。
   信号は左から右、電源は上・GND は下、線は箱や記号を横切らない、など。check はつながりしか見ないので、
   PNG にして点検表を 1 項目ずつ通す。既存の図を手本にするときも、先に点検表に通す
   (図のフェンスを書き込むと、`.claude/hooks/drawing-skill-reminder.sh` が Claude にこれを思い出させる)

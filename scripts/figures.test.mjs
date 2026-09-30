@@ -60,3 +60,12 @@ test('labels the copper fence as a dimension drawing', () => {
     `![銅張り基板の寸法図](${PAGES_URL}/01-circuits/01-basics/copper/03-rc-charge.svg)`, '',
   ].join('\n'));
 });
+
+test('labels the logic fence as a logic analyser screen', () => {
+  const text = '```logic\n```\n';
+
+  assert.equal(withFigures(PATH, text), [
+    '```logic', '```', '',
+    `![ロジックアナライザの画面](${PAGES_URL}/01-circuits/01-basics/logic/03-rc-charge.svg)`, '',
+  ].join('\n'));
+});
