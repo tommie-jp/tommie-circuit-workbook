@@ -18,7 +18,7 @@
     "all": "npm test && npm run lint && npm run check"
   },
   "devDependencies": {
-    "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.23.1/breadboard-fence-0.23.1.tgz",
+    "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.24.0/breadboard-fence-0.24.0.tgz",
     "circuit-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/circuit-fence-v0.23.1/circuit-fence-0.23.1.tgz",
     "copper-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/copper-fence-v0.6.1/copper-fence-0.6.1.tgz",
     "graph-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/graph-fence-v0.2.1/graph-fence-0.2.1.tgz",
