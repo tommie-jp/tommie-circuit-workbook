@@ -45,7 +45,7 @@ Stop ぎりぎりに設定すると、9 次が折り返って (エイリアス) 
 
 ```spectrum
 title: 図2 奇数次の山だけが 1/n で下がって並ぶ
-device: ad2
+device: ad3
 sweep: 0-20kHz
 samples: 32768
 window: flattop

@@ -36,7 +36,14 @@ wires:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/06-czt-zoom.svg)
 
 W1・W2 を 1 kΩ ずつで足し合わせ、CH1 (1 MΩ、ほとんど電流を取らない) で
-読む。合成した電圧はほぼ (W1 + W2) ÷ 2 になる。
+読む。合成した電圧はほぼ (W1 + W2) ÷ 2 になるので、CH1 に現れる 2 本は
+Wavegen の半分の **0.25 V** ずつ (図 2・3 はこの値で描いた)。
+
+5 MHz は AD3 の入力帯域の内側だが、BNC アダプタ無し (2×15 ヘッダ) の帯域は
+9 MHz (−3 dB)・2.9 MHz (−0.5 dB) なので、ワイヤでつなぐと読みが 0.5〜3 dB の
+あいだで下がる (5 MHz での値は仕様書に無く、**未確認**)。BNC アダプタ有りなら
+−0.5 dB が 15 MHz なので 5 MHz はほぼ平らである。どちらも 2 本を分けて見る
+話には影響しない。
 
 ## 計器の設定
 
@@ -58,8 +65,8 @@ sweep: 0-10MHz
 samples: 32768
 window: flattop
 signal:
-  - sine 5MHz 0.5V
-  - sine 5.00005MHz 0.5V
+  - sine 5MHz 0.25V
+  - sine 5.00005MHz 0.25V
 markers: [5MHz]
 ```
 
@@ -73,8 +80,8 @@ span: 20kHz
 samples: 32768
 window: flattop
 signal:
-  - sine 5MHz 0.5V
-  - sine 5.00005MHz 0.5V
+  - sine 5MHz 0.25V
+  - sine 5.00005MHz 0.25V
 markers: [5MHz]
 ```
 
@@ -102,16 +109,17 @@ markers: [5MHz]
   ズームする。** 通常の FFT で Start・Stop を狭めても (4-1)、それは表示を
   切り取るだけで RBW 自体は変わらない — CZT は RBW そのものを狭い帯域に
   集中させる点が違う
-- **AD2 には CZT が無い。** 同じ効果を得るには、見たい帯域に Nyquist が合うまで
+- **CZT が無い計器では、** 同じ効果を得るには、見たい帯域に Nyquist が合うまで
   サンプル周波数そのものを下げてから (取り込み直して) 通常の FFT を掛ける
-  しかなく、そのたびに再取り込みが要る。分解能の上限も AD2 のバッファ長
-  (16k、AD3 は 32k) で頭打ちになる
+  しかなく、そのたびに再取り込みが要る。分解能の上限もバッファ長
+  (AD3 は 1 チャンネルあたり最大 32768 点、Scope を 1 チャンネルだけ使うと
+  65536 点) で頭打ちになる
 - 2 本の周波数差 50 Hz は Wavegen の周波数分解能 (1 Hz よりずっと細かい) の
-  範囲内なので、この設定はどちらの機種でも作れる — 違うのは**見る側** (CZT の
-  有無) だけ
+  範囲内なので、この設定は作れる。50 Hz の差が見えるかどうかを決めるのは
+  **見る側** (FFT か CZT か、RBW) である
 
 ## 出典
 
 自作。計器の名前と操作は Digilent の
 [WaveForms リファレンスマニュアル](https://digilent.com/reference/software/waveforms/waveforms-3/reference-manual)
-(Spectrum の節)。CZT は AD3 だけの機能。
+(Spectrum の節)。AD3 の仕様書 (Specifications) の Spectrum Analyzer の項に、電力スペクトルの算法として FFT と CZT が載っている。

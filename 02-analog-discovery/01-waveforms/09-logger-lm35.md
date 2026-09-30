@@ -51,7 +51,7 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [V+, 1+, 1-, GND]
 wires:
   - AD.V+ -- a5 red
@@ -65,7 +65,7 @@ wires:
 LM35 は TO-92（`ic3` の既定の姿）で、5〜7 列の `e` 行（上半分のブロック）に足を
 置く。`+Vs`（5 列）を V+ へ、`GND`（7 列）を GND へ、`Vout`（6 列）を CH1 の
 `1+` へつなぐ。**5〜7 列は上半分（`a`〜`e` 行）と下半分（`f`〜`j` 行）が別の
-ノードなので**、Analog Discovery からの配線も `a`〜`e` 側の穴（`a5` `a6` `a7`）
+ノードなので**、AD3 からの配線も `a`〜`e` 側の穴（`a5` `a6` `a7`）
 へ挿す。`1-` は GND と同じ 7 列の別の穴（`b7`）から取る。
 
 ## 計器の設定

@@ -73,13 +73,25 @@ measure: [vpp, freq]
 | Scope に映る波形の周波数 | 約 200 kHz の正弦波（1 MHz には見えない） | 1 MHz の信号が、サンプルレートに対して折り返され、別の周波数として現れる |
 | Wavegen を 1 MHz のまま、Sample Rate だけ 10 MS/s（ナイキスト 5 MHz）に戻す | 正しく 1.000 MHz の正弦波に見える | ナイキスト周波数を上回ってさえいなければエイリアスは起きない |
 
-**注**: サンプルレートは「100 MHz を整数で割った値」しか選べない
-（1-10 のバッファの話と同じ、AD のクロックの仕組み）。1.2 MS/s ちょうどには
-できず、実際には 100 MHz ÷ 83 ≈ **1.205 MS/s** に丸められる。この場合の
+**注**: AD3 のサンプルレートは、システムクロック（既定 100 MHz、Device Options で
+50〜125 MHz）を整数で割った値になる（整数で割る仕組みは、AD3 の資料では**未確認**。
+WaveForms の一般的な動作としての説明）。1.2 MS/s ちょうどにはできず、100 MHz ÷ 83 ≈
+**1.205 MS/s** に丸められる。この場合の
 エイリアス周波数は |1 MHz − 1.205 MHz| ≈ **205 kHz** となり、上の計算値
 （200 kHz）とわずかにずれる。この丸めのずれ自体も、サンプルレートが
 「連続量ではなく飛び飛びの値」であることを示す一例になっている。
 
+**最大の 125 MS/s ではどうか。** システムクロックを 125 MHz にすると、ナイキスト周波数は
+125 ÷ 2 = **62.5 MHz**。AD3 のアナログ入力の帯域は BNC アダプタ有りで 30+ MHz（−3 dB）、
+ヘッダ直結で 9 MHz（−3 dB）とどちらもこれより低いので、最大のサンプルレートでは
+**アナログ帯域が先に信号を減らす**ので、エイリアスは起きにくい（帯域の外の
+信号が完全に消えるわけではない）。この題のエイリアスは、
+サンプルレートを信号に対して低く選んだときの話。
+
 ## 出典
 
-自作。
+自作。システムクロック（50〜125 MHz、既定 100 MHz）・最大 125 MS/s・アナログ帯域は Digilent の
+[Analog Discovery 3 Specifications](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Specifications_1123.pdf)
+と
+[Reference Manual](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Reference-Manual_1123.pdf)
+（Adjustable System Clock Frequency の節）による。

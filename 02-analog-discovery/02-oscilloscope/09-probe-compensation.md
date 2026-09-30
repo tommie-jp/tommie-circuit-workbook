@@ -59,7 +59,7 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [W1, 1+, 2+, 1-, GND, 2-]
 wires:
   - AD.W1 -- b5 yellow
@@ -133,5 +133,6 @@ C<sub>trim</sub> と C<sub>in</sub> の直列 ≈ (2.6 pF × 24 pF) / (2.6 pF + 
 
 ## 出典
 
-自作。入力インピーダンスの値（1 MΩ ∥ 24 pF）は Digilent の Analog Discovery 2 / 3
-の公式仕様による。
+自作。入力インピーダンスの値（1 MΩ ∥ 24 pF）は Digilent の
+[Analog Discovery 3 Specifications](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Specifications_1123.pdf)
+（Analog Input の Input Impedance の項）による。

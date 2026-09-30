@@ -74,7 +74,7 @@ sin x (1 周期ぶん) と sin 3x (3 周期ぶん) が同時に入っている�
 
 ```spectrum
 title: 図2 1000 Hz と 3000 Hz に同じ高さ (−6.76 dBV) の 2 本が立つ
-device: ad2
+device: ad3
 sweep: 0-5kHz
 samples: 8192
 window: flattop

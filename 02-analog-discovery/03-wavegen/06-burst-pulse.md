@@ -42,7 +42,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードと Analog Discovery
+title: 図2 ブレッドボードと Analog Discovery 3
 board: half
 parts:
   R1: resistor c5 c10 100
@@ -50,7 +50,7 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [GND, 1+, W1, 1-]
 wires:
   - AD.GND -- -t2 black
@@ -95,7 +95,7 @@ measure: [vmax, vmin]
 | CH1 の High レベル | 3.00 V (= Offset + Amplitude) | 3-1 と同じ Offset・Amplitude の読み方 |
 | CH1 の Idle (Low) レベル | 0.00 V (= Offset − Amplitude) | Repeat 1 のときの待機電圧 |
 | パルス幅 (High の継続時間) | 250 µs (= 1 / (2 × 2 kHz)、1 周期の前半) | Repeat 1 が「1 周期だけ」を作る仕組み |
-| LED (D1) のピーク電流 | 10.0 mA (= (3.0 V − V<sub>F</sub> 2.0 V) ÷ 100 Ω) | ちょうど Wavegen の保証駆動電流 (3-5) と同じ値 |
+| LED (D1) のピーク電流 | 10.0 mA (= (3.0 V − V<sub>F</sub> 2.0 V) ÷ 100 Ω) | AD3 の歪みなく出せる上限 30 mA (3-5) の 1/3。Wavegen の負荷として問題ない |
 
 分かること:
 

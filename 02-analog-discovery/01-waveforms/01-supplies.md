@@ -11,7 +11,7 @@ board: BB
 # 1-1 Supplies — +5 V と −5 V を出して電圧計で読む
 
 WaveForms の最初の 2 つの計器、**Supplies** (電源) と **Voltmeter** (電圧計) を使う。
-Analog Discovery の電源から +5 V と −5 V を出し、それぞれに 1 kΩ の負荷を
+Analog Discovery 3 (AD3) の電源から +5 V と −5 V を出し、それぞれに 1 kΩ の負荷を
 つないで、オシロスコープの 2 つの入力で電圧を読む。
 
 ## 回路図
@@ -40,7 +40,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードと Analog Discovery
+title: 図2 ブレッドボードと Analog Discovery 3
 # 上の赤いレール = +5 V (V+)、上の青いレール = GND。−5 V (V−) はレールに出さず 15 列へ直に
 board: half
 parts:
@@ -49,7 +49,7 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [GND, V+, 1+, 1-, 2+, V-, 2-]
 wires:
   - AD.V+ -- +t6 red
@@ -87,29 +87,34 @@ wires:
 | --- | --- | --- |
 | CH1 | +5.00 V 前後 | V+ の出力。負荷をつないでも下がらない |
 | CH2 | −5.00 V 前後 | V− は負の電圧。符号を確かめる |
-| 負荷 1 kΩ の電流 | 5 mA (1 系統 25 mW) | USB 給電のときの上限 (1 系統 250 mW) の 1/10 |
+| 負荷 1 kΩ の電流 | 5 mA (1 系統 25 mW) | USB だけで給電するときの Supplies に回せる電力 (2 系統あわせて約 2 W の目安、0-2) のごく一部。外部の 5 V 電源を付ければ 1 系統 800 mA・2.4 W まで |
 
 負荷の抵抗を変えたときに 1 系統が出す電力 (5 V × 5 V ÷ R) を描くと、1 kΩ では
-上限の 1/10、100 Ω でちょうど上限に届く。
+25 mW、100 Ω でも 250 mW (電流 50 mA)。2 系統とも 100 Ω にして 500 mW で、
+USB 給電の目安の約 2 W の 1/4。上限に届くのは、USB 給電で 2 系統に 1 W ずつ回すとして 25 Ω (= 5 V × 5 V ÷ 1 W) より
+重い負荷のときで、この題の範囲では上限を気にしなくてよい。
 
 ```graph
-title: 図3 1 系統の電力 — 1 kΩ で 25 mW、100 Ω で上限の 250 mW
+title: 図3 1 系統の電力 — 1 kΩ で 25 mW、100 Ω で 250 mW
 x: 負荷の抵抗 Ω log 50..5k
 y: 電力 mW 0..500
 lines:
   5 V を出す系統 mW: 5*5/x*1000
 notes:
-  - level 250mW
   - mark 100
   - mark 1k
 ```
 
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/graph/01-supplies.svg)
 
-負荷を 100 Ω にすると 1 系統 250 mW で上限に届く。上限の話は 0-2 で扱う。
+電力の上限の話は 0-2 で扱う。
 
 ## 出典
 
 自作。計器の名前と操作は Digilent の
 [WaveForms リファレンスマニュアル](https://digilent.com/reference/software/waveforms/waveforms-3/reference-manual)
-(Supplies・Voltmeter の節)。
+(Supplies・Voltmeter の節)。Supplies の電圧範囲 (0.5〜5 V と −0.5〜−5 V)・電力の数字は
+[Analog Discovery 3 Specifications](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Specifications_1123.pdf)
+と
+[Reference Manual](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Reference-Manual_1123.pdf)
+(Power Supplies の節)。

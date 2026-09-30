@@ -10,7 +10,7 @@ board: BB
 
 # 1-4 Static I/O — LED とボタンを DIO で
 
-Static I/O は、Analog Discovery のデジタル入出力ピン (`DIO0`〜) を
+Static I/O は、AD3 のデジタル入出力ピン (`DIO0`〜) を
 1 本ずつ**手で** High / Low に切り替えたり読んだりできる計器。
 ここでは `DIO0` を出力にして LED を点け、`DIO1` を入力にしてボタンを読む。
 
@@ -22,7 +22,7 @@ parts:
   AD:
     type: device
     at: e20
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [DIO0, V+, DIO1, GND]
   R1: resistor a1 a3 470
   D1: led a5 a7
@@ -64,7 +64,7 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [DIO0, GND, DIO1, V+]
 wires:
   - AD.DIO0 -- a3 yellow

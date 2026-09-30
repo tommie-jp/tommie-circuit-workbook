@@ -115,36 +115,36 @@ wires:
 | コレクタ電圧 Vc | 2.83 V | Vcc − Ie × Rc (中間電位で振幅を確保) |
 | 中域利得 Av = Rc / (Re + re′) | 4.32 倍 (12.7 dB) | re′ = 25 mV / Ie ≈ 11.5 Ω |
 | 低域 −3 dB (Cin と入力インピーダンスで決まる) | 約 21 Hz | 音声帯域より十分低い |
-| 高域 −3 dB (Rc とオシロ入力容量 20 pF で決まる) | 約 7.96 MHz | **ブレッドボードとプローブの負荷容量が上限を決めている** (8 章の続き) |
+| 高域 −3 dB (Rc とAD3 の入力容量 24 pF で決まる) | 約 6.63 MHz (= 1 / (2π × 1 kΩ × 24 pF)、Rc ∥ トランジスタの出力側は無視) | **ブレッドボードとプローブの負荷容量が上限を決めている** (8 章の続き) |
 
 **利得はほぼ Rc / Re で決まり、hFE の個体差にあまり影響されない。** 高域の
 上限がトランジスタ自身の f<sub>T</sub> (2SC1815 で 80 MHz 級) よりずっと低いのは、
 コレクタの 1 kΩ に対してオシロやブレッドボードの数十 pF が効くため。
 
 入力インピーダンスは R1 ∥ R2 ∥ hFE (Re + re′) ≒ 7.66 kΩ で、Cin (1 µF) と組んで
-低域の −3 dB が 20.8 Hz になる。高域は Rc と 20 pF の 7.96 MHz。この 2 つの
+低域の −3 dB が 20.8 Hz になる。高域は Rc と 24 pF の 6.63 MHz。この 2 つの
 折れ点を入れた計算の利得を図にする。
 
 ```graph
-title: 図3 中域 12.7 dB、−3 dB は 20.8 Hz と 7.96 MHz (計算)
+title: 図3 中域 12.7 dB、−3 dB は 20.8 Hz と 6.63 MHz (計算)
 x: 周波数 Hz log 1..100M
 y: 利得 dB -20..20
 lines:
-  計算 dB: 12.71 + 20*log10((x/20.8)/sqrt(1+(x/20.8)^2)) - 10*log10(1+(x/7.96M)^2)
+  計算 dB: 12.71 + 20*log10((x/20.8)/sqrt(1+(x/20.8)^2)) - 10*log10(1+(x/6.63M)^2)
 notes:
   - band 10 1M: Network の掃引 (10 Hz〜1 MHz)
   - level 9.7dB
   - mark 20.8
   - mark 1k
-  - mark 7.96M
+  - mark 6.63M
 ```
 
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/graph/01-common-emitter-bandwidth.svg)
 
 分かること:
 
-- Network の掃引 (10 Hz〜1 MHz) には低域の折れ点しか入らない。高域の 7.96 MHz は
-  掃引の外で、1 MHz ではまだ 0.07 dB しか下がらない
+- Network の掃引 (10 Hz〜1 MHz) には低域の折れ点しか入らない。高域の 6.63 MHz は
+  掃引の外で、1 MHz ではまだ 0.10 dB しか下がらない
 - 中域の平らな所 (100 Hz〜1 MHz) が Rc / (Re + re′) の 12.7 dB
 
 ## 出典

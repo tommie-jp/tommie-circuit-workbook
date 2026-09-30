@@ -7,7 +7,7 @@
 - { id: 0-6, tier: 100, board: BB, title: 付属ワイヤと同軸で同じ 5 MHz の方形波を見比べる }
 - { id: 0-7, tier: 200, board: BB, title: 外部電源で電源ツールを 700 mA まで使う }
 - { id: 0-8, tier: 200, board: —, title: トリガ入出力 (T1 / T2) で 2 台を同期する }
-- { id: 0-9, tier: 200, board: BB, title: AD2 と AD3 を同じ実験で比べる (帯域・バッファ長) }
+- { id: 0-9, tier: 200, board: BB, title: AD3 の BNC アダプタ有りと無し (ヘッダ直結) を比べる (帯域・バッファ長) }
 - { id: 0-10, tier: 200, board: —, title: デバイスの校正 (WaveForms の Calibration) }
 - { id: 1-1, tier: 50, board: BB, title: Supplies — +5 V と −5 V を出して電圧計で読む }
 - { id: 1-2, tier: 50, board: BB, title: 1 kHz の正弦波を出してオシロで見る (最初の 1 本) }
@@ -18,7 +18,7 @@
 - { id: 1-7, tier: 100, board: —, title: 波形発生器 2 ch の同期と位相差 }
 - { id: 1-8, tier: 100, board: BB, title: 電源の電圧と直列抵抗で LED の電流を決める }
 - { id: 1-9, tier: 100, board: BB, title: データロガーで温度 (LM35) を 10 分 }
-- { id: 1-10, tier: 100, board: —, device: AD3, title: デバイスマネージャ — バッファ長と ch 数の構成を切り替える }
+- { id: 1-10, tier: 100, board: —, device: AD3, title: デバイスマネージャ — 計器ごとのバッファ長の配分を切り替える }
 - { id: 1-11, tier: 200, board: BB, device: AD3, title: Supplies のトラッキング (± 対称) }
 - { id: 1-12, tier: 200, board: BB, title: 電圧計の AC / DC / True RMS }
 - { id: 1-13, tier: 200, board: BB, title: ロガーを Script から回して CSV に追記する }
@@ -131,7 +131,7 @@
 - { id: 6-16, tier: 200, board: BB, title: サーミスタ・CdS のインピーダンス vs 温度・光 }
 - { id: 7-1, tier: 50, board: BB, title: ロジックアナライザで 555 と 4017 を見る }
 - { id: 7-2, tier: 50, board: BB, title: パターンジェネレータでカウンタを叩く }
-- { id: 7-3, tier: 50, board: BB, title: UART を見る (Pico) }
+- { id: 7-3, tier: 50, board: BB, title: UART を見る (Pico 2) }
 - { id: 7-4, tier: 50, board: BB, title: I2C を見る・叩く (温度センサ) }
 - { id: 7-5, tier: 100, board: BB, title: SPI }
 - { id: 7-6, tier: 100, board: BB, title: プロトコルアナライザから送信する }
@@ -154,7 +154,7 @@
 - { id: 8-5, tier: 100, board: BB, title: クロストーク — 隣の列に何が漏れるか }
 - { id: 8-6, tier: 100, board: BB, title: レールの GND インピーダンス }
 - { id: 8-7, tier: 100, board: [ BB, PF ], title: 同じ回路を perfboard で作って比べる }
-- { id: 8-8, tier: 100, board: PF, title: 同じスルーを BNC で 25 MHz まで、NanoVNA で 1〜100 MHz }
+- { id: 8-8, tier: 100, board: PF, title: 同じスルーを BNC で 25 MHz まで、LiteVNA64 で 1〜100 MHz }
 - { id: 8-9, tier: 200, board: BB, title: デカップリングの置き場所 (近い / 遠い) }
 - { id: 8-10, tier: 200, board: BB, title: GND の取り回し — 1 点接地とループ }
 - { id: 8-11, tier: 200, board: BB, title: 長いワイヤのアンテナ効果 (放送波の混入) }

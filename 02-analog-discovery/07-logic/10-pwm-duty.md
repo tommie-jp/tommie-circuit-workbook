@@ -37,7 +37,8 @@ wires:
 
 - R1 (1 kΩ) は LED の電流制限。DIO0 が H (3.3 V) のとき、赤 LED の順方向電圧を
   2.0 V とすると電流は (3.3 − 2.0) / 1 kΩ = **1.3 mA** — LED の上限 (20 mA) にも
-  DIO の駆動能力 (AD2 の DIO は 4 mA 駆動) にも十分収まる
+  DIO の駆動能力 (AD3 の DIO の既定は 4 mA 駆動。4・8・12・16 mA から選べる) にも十分収まる。
+  H の電圧は仕様で 2.4〜3.3 V なので、最悪の 2.4 V でも (2.4 − 2.0) / 1 kΩ = 0.4 mA は流れて点く
 - DIO0 が L (0 V) の間、LED は消える。**デューティ比が高いほど点いている時間が
   長く、目には明るく見える** (人の目は数十 Hz 以上の点滅を積分して見る)
 
@@ -117,5 +118,7 @@ measure: [period, duty]
 
 自作。計器の名前と操作は Digilent の
 [Using the Logic Analyzer](https://digilent.com/reference/test-and-measurement/guides/waveforms-logic-analyzer)
-(Pattern Generator の節)。AD2 の DIO 駆動能力 (4 mA) は Analog Discovery 2
-リファレンスマニュアルによる。
+(Pattern Generator の節)。AD3 の DIO の駆動能力 (既定 4 mA、4・8・12・16 mA)・
+出力 H の電圧 (2.4〜3.3 V) は
+[Analog Discovery 3 Specifications](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Specifications_1123.pdf)
+の Digital Channels の項による。

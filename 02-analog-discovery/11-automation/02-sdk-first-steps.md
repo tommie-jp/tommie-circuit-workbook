@@ -13,7 +13,7 @@ board: —
 11-1 までの Script は**WaveForms 本体の中の Script Editor** (JavaScript 風)
 から計器を動かした。ここでは一歩外に出て、**WaveForms を起動していない
 外部の Python プロセス**から、SDK (`dwf` ライブラリ、`ctypes` 経由の C 関数)
-で AD を直接動かす。1-5・11-1 と同じ RC ローパス (R = 1 kΩ、C = 100 nF、
+で AD3 を直接動かす。1-5・11-1 と同じ RC ローパス (R = 1 kΩ、C = 100 nF、
 f<sub>c</sub> ≒ 1.59 kHz) を、Python だけで駆動・測定する。
 
 Script Editor の `Scope1.channel[0].measure("Amplitude")` のような**便利な
@@ -57,7 +57,7 @@ Python スクリプトの中で全部設定するので、WaveForms 本体は起
 | 項目 | 値 |
 | --- | --- |
 | Wavegen (W1) | Sine、1 kHz、振幅 1 V |
-| Scope | サンプリング 1 MHz、バッファ 8192 点 (8.19 ms = 1 kHz の約 8 周期)、レンジ ±5 V、CH1・CH2 とも有効 |
+| Scope | サンプリング 1 MHz、バッファ 8192 点 (8.19 ms = 1 kHz の約 8 周期)、レンジ 5 V (AD3 の名目レンジは 5 V と 50 V の 2 段で、5 V は ±2.5 V の側。1 V の正弦波は ±1 V なので収まる)、CH1・CH2 とも有効 |
 | 待ち時間 | 設定後 0.5 秒待ってから記録 (波形が落ち着くまで) |
 
 ```python
@@ -87,7 +87,7 @@ dwf.FDwfAnalogOutNodeFrequencySet(hdwf, channel, constants.AnalogOutNodeCarrier,
 dwf.FDwfAnalogOutNodeAmplitudeSet(hdwf, channel, constants.AnalogOutNodeCarrier, ctypes.c_double(1.0))
 dwf.FDwfAnalogOutConfigure(hdwf, channel, ctypes.c_bool(True))
 
-# --- Scope: CH1・CH2 を ±5 V、1 MHz、8192 点で (8.19 ms で約 8 周期) ---
+# --- Scope: CH1・CH2 をレンジ 5 V (±2.5 V 側)、1 MHz、8192 点で (8.19 ms で約 8 周期) ---
 dwf.FDwfAnalogInChannelEnableSet(hdwf, ctypes.c_int(-1), ctypes.c_bool(True))
 dwf.FDwfAnalogInChannelRangeSet(hdwf, ctypes.c_int(-1), ctypes.c_double(5.0))
 dwf.FDwfAnalogInBufferSizeSet(hdwf, ctypes.c_int(8192))
@@ -142,6 +142,11 @@ measure: [vmax, vmin]
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/11-automation/scope/02-sdk-first-steps.svg)
 
+AD3 の 1 チャンネルあたりのバッファは最大 32768 点 (Scope を 1 チャンネルだけ使うと 65536 点)
+なので、8192 点は収まる。この節のコードは AD3 で**実行して確かめていない** (実機は未確認)。
+`FDwfAnalogInChannelRangeSet` の値が p-p の幅を指すことも、公式サンプルの書き方に
+沿っただけで、AD3 では確かめていない。
+
 ## 見るべき値
 
 計算値。11-1 と同じ f<sub>c</sub> = 1.5915 kHz、f = 1 kHz での理論ゲインは
@@ -163,4 +168,5 @@ measure: [vmax, vmin]
 公式: [Getting Started with WaveForms SDK](https://digilent.com/reference/test-and-measurement/guides/waveforms-sdk-getting-started)
 (Digilent)。関数名・呼び出し順は同社公開の Python サンプル
 ([Digilent/WaveForms-SDK-Getting-Started-PY](https://github.com/Digilent/WaveForms-SDK-Getting-Started-PY))
-の `device.py` / `wavegen.py` / `scope.py` に沿って確認した。
+の `device.py` / `wavegen.py` / `scope.py` に沿って確認した。AD3 の名目レンジ (5 V と 50 V)・
+バッファ (最大 32768 点) は Digilent の AD3 Specifications による。

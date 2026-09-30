@@ -51,7 +51,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 0-6 | [付属ワイヤと同軸で同じ 5 MHz の方形波を見比べる](00-tools/06-wire-vs-coax-square-wave.md) | 入門 | BB | |
 | 0-7 | 外部電源で電源ツールを 700 mA まで使う | 中級 | BB | |
 | 0-8 | トリガ入出力 (T1 / T2) で 2 台を同期する | 中級 | — | |
-| 0-9 | AD2 と AD3 を同じ実験で比べる (帯域・バッファ長) | 中級 | BB | |
+| 0-9 | AD3 の BNC アダプタ有りと無し (ヘッダ直結) を比べる (帯域・バッファ長) | 中級 | BB | |
 | 0-10 | デバイスの校正 (WaveForms の Calibration) | 中級 | — | |
 
 ## 第 1 章 WaveForms の基本
@@ -67,7 +67,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 1-7 | [波形発生器 2 ch の同期と位相差](01-waveforms/07-wavegen-2ch-phase.md) | 入門 | — | |
 | 1-8 | [電源の電圧と直列抵抗で LED の電流を決める](01-waveforms/08-current-limit-led.md) | 入門 | BB | |
 | 1-9 | [データロガーで温度 (LM35) を 10 分](01-waveforms/09-logger-lm35.md) | 入門 | BB | |
-| 1-10 | [デバイスマネージャ — バッファ長と ch 数の構成を切り替える](01-waveforms/10-device-manager-buffer.md) | 入門 | — | AD3 |
+| 1-10 | [デバイスマネージャ — 計器ごとのバッファ長の配分を切り替える](01-waveforms/10-device-manager-buffer.md) | 入門 | — | AD3 |
 | 1-11 | Supplies のトラッキング (± 対称) | 中級 | BB | AD3 |
 | 1-12 | 電圧計の AC / DC / True RMS | 中級 | BB | |
 | 1-13 | ロガーを Script から回して CSV に追記する | 中級 | BB | |
@@ -210,7 +210,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | --- | --- | --- | --- | --- |
 | 7-1 | [ロジックアナライザで 555 と 4017 を見る](07-logic/01-logic-555-4017.md) | 必須 | BB | |
 | 7-2 | [パターンジェネレータでカウンタを叩く](07-logic/02-pattern-counter.md) | 必須 | BB | |
-| 7-3 | [UART を見る (Pico)](07-logic/03-uart-pico.md) | 必須 | BB | |
+| 7-3 | [UART を見る (Pico 2)](07-logic/03-uart-pico.md) | 必須 | BB | |
 | 7-4 | [I2C を見る・叩く (温度センサ)](07-logic/04-i2c-temperature.md) | 必須 | BB | |
 | 7-5 | [SPI](07-logic/05-spi.md) | 入門 | BB | |
 | 7-6 | [プロトコルアナライザから送信する](07-logic/06-uart-echo.md) | 入門 | BB | |
@@ -238,7 +238,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 8-5 | [クロストーク — 隣の列に何が漏れるか](08-breadboard-limits/05-crosstalk.md) | 入門 | BB | |
 | 8-6 | [レールの GND インピーダンス](08-breadboard-limits/06-rail-impedance.md) | 入門 | BB | |
 | 8-7 | [同じ回路を perfboard で作って比べる](08-breadboard-limits/07-perfboard-comparison.md) | 入門 | BB / PF | |
-| 8-8 | [同じスルーを BNC で 25 MHz まで、NanoVNA で 1〜100 MHz](08-breadboard-limits/08-bnc-vs-nanovna.md) | 入門 | PF | |
+| 8-8 | [同じスルーを BNC で 25 MHz まで、LiteVNA64 で 1〜100 MHz](08-breadboard-limits/08-bnc-vs-nanovna.md) | 入門 | PF | |
 | 8-9 | デカップリングの置き場所 (近い / 遠い) | 中級 | BB | |
 | 8-10 | GND の取り回し — 1 点接地とループ | 中級 | BB | |
 | 8-11 | 長いワイヤのアンテナ効果 (放送波の混入) | 中級 | BB | |

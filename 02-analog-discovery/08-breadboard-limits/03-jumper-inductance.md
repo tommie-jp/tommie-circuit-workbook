@@ -84,7 +84,8 @@ wires:
 | Measure | CH1・CH2 の Amplitude、CH2 の CH1 に対する Phase |
 
 **電流の確認**: I = 30 mV / \|Rref + jXL\| ≈ 30 mV / 3.8 Ω ≈ 7.9 mA。
-Wavegen の上限 (約 10 mA) の範囲内。
+Wavegen の DC 電流の上限 (AD3 は 30 mA) の範囲内。10 MHz は AD3 の 2×15 ヘッダ直の帯域
+(9 MHz @ −3 dB) を超えるので、BNC アダプタ (Scope 30+ MHz、Wavegen 12 MHz @ −3 dB) を付ける。
 
 ```scope
 title: 図3 ジャンパの電圧 (CH2) が電流 (CH1) より 90° 進み、振幅は Rref と同じ

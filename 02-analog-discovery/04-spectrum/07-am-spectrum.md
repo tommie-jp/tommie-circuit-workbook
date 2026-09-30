@@ -43,7 +43,7 @@ wires:
 
 ```spectrum
 title: 図2 側波帯は搬送波の 12 dB 下に ±1 kHz で 1 本ずつ
-device: ad2
+device: ad3
 sweep: 90kHz-110kHz
 samples: 32768
 window: flattop

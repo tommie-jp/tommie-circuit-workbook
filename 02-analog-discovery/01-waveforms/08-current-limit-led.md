@@ -10,15 +10,15 @@ board: BB
 
 # 1-8 電源の電圧と直列抵抗で LED の電流を決める
 
-0-2 で確かめたとおり、**Supplies の画面には Current Limit（電流制限）という
-設定項目そのものが無い**。AD2・AD3 とも Supplies (Positive Supply / Negative
-Supply) にあるのは **Master Enable・個別の Enable・出力電圧（0 〜 ±5 V、AD3 は
-機種により +9 V まで）・Tracking** だけで、LED を守れるような mA 単位の電流制限は
-どちらの機種にも実装されていない（AD3 は公式フォーラムで「power supplies は
-current limiting できない」と明言されている）。内部には USB 給電を守るための
-ハードウェアの過電流しきい値があるが、これは合計で 300 mA 前後（AD2、USB 給電時。
-外部給電なら 1.4 A 超）と LED の定格 (20 mA) よりずっと高く、**AD 自体を守る
-ものであって LED を守るものではない**——切れる前に LED のほうが先に壊れる。
+0-2 で確かめたとおり、**Supplies の画面には mA 単位の Current Limit（電流制限）が
+見当たらない**（AD3 のリファレンスマニュアルの Supplies の説明にあるのは、AD3 全体の
+電力の上限 Max Power と温度の上限だけ。実機の画面での確認は未確認）。
+Supplies (Positive Supply / Negative Supply) で決められるのは
+**Master Enable・個別の Enable・出力電圧（+0.5〜+5 V と −0.5〜−5 V）・Tracking** で、
+LED を守れるような mA 単位の電流制限は無い。AD3 が守っているのは自分の内部部品
+（外部の 5 V 電源を付けたとき 1 系統 800 mA・2.4 W、USB だけなら全体で 5.5 W が推奨）で、
+LED の定格 (20 mA) よりずっと高く、**AD3 自体を守るものであって LED を守るものではない**
+——切れる前に LED のほうが先に壊れる。
 
 **したがって、抵抗なしで LED を守る方法は無い。** この題では、0-2 と同じく
 回路の教科書 1-1 と同じ**直列抵抗**で LED の
@@ -43,7 +43,7 @@ wires:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/circuit/08-current-limit-led.svg)
 
 V+（Supplies）→ R1（330 Ω）→ LED → GND。R1 が無いと LED の順方向抵抗はごく
-小さいので大電流が流れ、LED か AD 自体を壊す恐れがある——**これは実機では
+小さいので大電流が流れ、LED か AD3 自体を壊す恐れがある——**これは実機では
 試さない**。
 
 ## 実体配線図
@@ -57,7 +57,7 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [V+, 1+, 1-, GND]
 wires:
   - AD.V+ -- a5 red
@@ -106,7 +106,7 @@ notes:
 
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/graph/08-current-limit-led.svg)
 
-Current Limit という設定が無い以上、**抵抗を省いてよい場面は無い**。LED の
+mA の Current Limit が無い以上、**抵抗を省いてよい場面は無い**。LED の
 電流は、ここで確かめたとおり電圧と直列抵抗の組み合わせで決める。
 
 ## 出典
@@ -114,8 +114,9 @@ Current Limit という設定が無い以上、**抵抗を省いてよい場面�
 自作。Supplies の操作 (Master Enable・Positive Supply・Negative Supply・
 Voltage・Tracking) は Digilent の
 [Using the Power Supplies](https://digilent.com/reference/test-and-measurement/guides/waveforms-supplies)。
-Current Limit という設定項目が無いことと AD2 のハードウェア過電流しきい値
-(USB 給電で合算約 290 mA、外部給電で約 1.45 A) は
-[Analog Discovery 2 リファレンスマニュアル](https://digilent.com/reference/test-and-measurement/analog-discovery-2/reference-manual)
-§6.3 (User Supply Control)・§6.4 (User Voltage Supplies) による。AD3 に
-current limiting が無いことは Digilent フォーラムでの記載による。
+Supplies の電圧範囲・1 系統 800 mA・2.4 W・USB 給電の 5.5 W は
+[Analog Discovery 3 Specifications](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Specifications_1123.pdf)
+と
+[Reference Manual](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Reference-Manual_1123.pdf)
+(Power Supplies の節) による。mA の Current Limit が無いことは、この 2 つの資料に
+電力と温度の上限しか載っていないことからの判断で、**設定項目の有無は実機では未確認**。

@@ -38,7 +38,7 @@ W1（2 kHz、0〜3.3 V の方形波）→ R1（1 kΩ、直列）→ CH1 の節�
 R2（330 Ω）は CH1 の節点から GND への「わざと作る短絡経路」——普段は開いていて
 波形に影響しない (CH1 の入力は 1 MΩ なので R1 の電圧降下はほぼ 0) が、押すと
 R1 と R2 の分圧で節点が 3.3 V × 330 / (1 k + 330) ≈ 0.82 V まで下がる。
-R1 は Wavegen の出力電流を保証値（10 mA）より十分小さく抑える制限抵抗も兼ねる
+R1 は Wavegen の出力電流を AD3 の歪みなく出せる上限（30 mA）より十分小さく抑える制限抵抗も兼ねる
 （押している間 3.3 V ÷ 1.33 kΩ ≈ 2.5 mA）。
 
 ## 実体配線図
@@ -53,7 +53,7 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [W1, 1+, 1-, GND]
 wires:
   - AD.W1 -- a5 yellow

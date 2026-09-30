@@ -10,10 +10,11 @@ board: BB
 
 # 0-1 接続と極性 — ワイヤの色、1+ / 1- の差動入力、GND を共通に
 
-Analog Discovery のオシロスコープ入力 (1+ / 1- など) は**差動入力**で、
+Analog Discovery 3 (AD3) のオシロスコープ入力 (2×15 ヘッダの 1+ / 1- など) は**差動入力**で、
 2 本の間の電圧差を読む。GND を基準にしたいときは、片方 (多くは `-` 側) を
 GND につなぐ。ここでは同じ 2 点を、リード線の順を変えて読み、符号が
-入れ替わることを確かめる。
+入れ替わることを確かめる。BNC アダプタを付けたときの入力は差動ではなく
+シングルエンド (BNC の外側が GND) になる (Digilent の AD3 Specifications、Input Type の項)。
 
 ## 回路図
 
@@ -46,7 +47,7 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [V+, GND, 1+, 1-, 2+, 2-]
 wires:
   - AD.V+ -- +t5 red

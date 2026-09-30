@@ -107,7 +107,7 @@ wires:
 
 ```spectrum
 title: 図3 リップルの線が 120 Hz とその整数倍に並ぶ (鋸歯状波の模型)
-device: ad2
+device: ad3
 sweep: 0-1kHz
 window: hann
 samples: 8192

@@ -112,7 +112,7 @@ wires:
 
 ```spectrum
 title: 図3 デューティが 50% からずれているので偶数次が −15 dBV ほどで残る
-device: ad2
+device: ad3
 sweep: 0-9kHz
 samples: 32768
 window: flattop

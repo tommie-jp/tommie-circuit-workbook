@@ -12,8 +12,8 @@ board: BB
 
 WaveForms の **Tracer** (Curve Tracer) は、ベース電流 Ib を数段階に自動で振り
 ながら Vce を掃引し、Ic–Vce の特性曲線を家族 (ファミリー) で描いてくれる計器。
-**AD2 でも AD3 でも使える** (Digilent の Transistor Tester Adapter は AD の旧機種・
-AD2・AD3 のいずれにも対応する)。ここでは専用アダプタを使わず、Rb・Rs だけの
+AD3 の仕様書 (Specifications) の対応する計器の一覧に Tracer が載っている。ここでは
+専用アダプタ (Digilent の Transistor Tester Adapter) を使わず、Rb・Rs だけの
 自作の基準回路で Tracer 相当のことを**手動で**確かめる — Ib を固定した状態で
 Vce だけを掃引する「手動の 1 本」を、Ib を替えて何度か繰り返す方法を説明する —
 2-13 でダイオードの順方向特性を XY 表示で描いたのと同じ考え方を、3 端子に
@@ -22,7 +22,7 @@ Vce だけを掃引する「手動の 1 本」を、Ib を替えて何度か繰�
 ## 回路図
 
 ```circuit
-title: 図1 Vce を掃引し、Ib を数段階に固定して測る (AD2 でもできるやり方)
+title: 図1 Vce を掃引し、Ib を数段階に固定して測る (アダプタ無しのやり方)
 parts:
   AD:
     type: device
@@ -53,7 +53,8 @@ wires:
   (下の表)
 - W1 は 0〜5 V の三角波 (Offset 2.5 V、振幅 2.5 V) にして、コレクタ側を
   Rs (100 Ω、電流検出用) 経由で掃引する。1+ が Vce 側、2+ が Rs の両端 (Ic に比例)
-- Rs は 6-1 などと同じ「基準抵抗」の考え方 — Ic = (2+ の読み) / Rs
+- Rs は 6-1 などと同じ「基準抵抗」の考え方 — Ic = (2+ の読み) / Rs。Ic は最大 8.6 mA なので、
+  Wavegen の DC 電流の上限 (AD3 は 30 mA) に収まる。W1 の 0〜5 V は AD3 の出力範囲 ±5 V の内側
 
 ## 実体配線図
 
@@ -99,7 +100,7 @@ wires:
 
 | 計器 | 設定 |
 | --- | --- |
-| Tracer (自動、AD2・AD3 共通) | DUT 種別 = NPN トランジスタ、Ib を 3 段階 (自動)、Vce 掃引 0〜5 V |
+| Tracer (自動、AD3) | DUT 種別 = NPN トランジスタ、Ib を 3 段階 (自動)、Vce 掃引 0〜5 V |
 | 専用アダプタ無しの手動法 (この題の回路) | Wavegen: W1 Triangle、Offset 2.5 V、振幅 2.5 V、10 Hz (ゆっくり)。Scope: XY モード (CH1 = Vce、CH2 = Rs の両端)。Rb を差し替えて 3 回繰り返す |
 
 ## 見るべき値
@@ -117,7 +118,7 @@ Vce が十分大きい領域では Ic ≒ hFE × Ib で頭打ちになるとみ�
 立ち上がり、Vce ≒ 0.2 V (2SC1815 の代表的な Vce(sat)) を超えたところから
 上の表の値でほぼ平らになる — これが Ic–Vce 曲線の「膝」。**Ib を変えるたびに
 この平らな部分の高さが変わり、間隔がほぼ等しければ hFE がほぼ一定**だと
-確かめられる。Tracer 計器 (アダプタ付きの AD2・AD3) ならこの 3 本
+確かめられる。Tracer 計器 (AD3) ならこの 3 本
 (またはもっと細かい段階) を自動で重ねて 1 枚の図にしてくれる。
 
 3 本を 1 枚に重ねた形を計算で描く。膝の丸みは Vce が 0.2 V で平らな値の 95 % に
@@ -148,6 +149,8 @@ notes:
 
 自作。計器の名前と操作は Digilent の
 [WaveForms リファレンスマニュアル](https://digilent.com/reference/software/waveforms/waveforms-3/reference-manual)
-(Tracer の節)。Tracer が AD2 でも使えることは Digilent の
-Transistor Tester Adapter の資料による。専用アダプタ無しの手動法は 2-13
+(Tracer の節)。AD3 が Tracer を持つことは
+[Analog Discovery 3 Specifications](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Specifications_1123.pdf)
+による (Tracer の設定や、専用アダプタが必要かどうかは、この題では確かめていない: **未確認**)。
+専用アダプタ無しの手動法は 2-13
 (ダイオードの順方向特性を XY で描く) と同じ考え方の応用。

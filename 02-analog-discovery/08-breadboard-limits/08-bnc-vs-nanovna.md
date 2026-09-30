@@ -2,25 +2,25 @@
 book: analog-discovery
 chapter: 8
 id: 8-8
-title: 同じスルーを BNC で 25 MHz まで、NanoVNA で 1〜100 MHz
+title: 同じスルーを BNC で 25 MHz まで、LiteVNA64 で 1〜100 MHz
 tier: 100
 source: 自作 (計器の操作は Digilent の Using the Network Analyzer)
 board: PF
 ---
 
-# 8-8 同じスルーを BNC で 25 MHz まで、NanoVNA で 1〜100 MHz
+# 8-8 同じスルーを BNC で 25 MHz まで、LiteVNA64 で 1〜100 MHz
 
-perfboard に端面 SMA を 2 つ載せただけの「スルー治具」——**NanoVNA の教科書の
+perfboard に端面 SMA を 2 つ載せただけの「スルー治具」——**VNA の教科書 (LiteVNA64) の
 3-3 と同じ物**——を、まず AD3 に BNC アダプタ経由でつないで 25 MHz まで測り、
-続けて同じ治具を NanoVNA につなぎ替えて 1〜100 MHz まで測る。2 つの計器が
+続けて同じ治具を LiteVNA64 につなぎ替えて 1〜100 MHz まで測る。2 つの計器が
 重なる範囲 (1〜25 MHz) で値が揃うかどうかが、この治具を橋渡しに使ってよい
-かどうかの確認になる。**10 MHz より上を測るときの本命は NanoVNA** — ここから先は
-NanoVNA の教科書で続ける。
+かどうかの確認になる。**10 MHz より上を測るときの本命は LiteVNA64** — ここから先は
+VNA の教科書 (LiteVNA64) で続ける。
 
 ## 回路図
 
 ```circuit
-title: 図1 SMA スルー治具を AD の BNC 入力へ
+title: 図1 SMA スルー治具を AD3 の BNC 入力へ
 parts:
   AD:
     type: device
@@ -58,12 +58,12 @@ style:
   1+・2+ の名前は BNC を挟んでも変わらない (0-5 で確かめたとおり)
 - 中身は単なる導通 (スルー)。J1 と J2 の中心導体を結ぶ横線が治具の線 (実体配線図の
   e 行)。理想値は S21 = 0 dB
-- NanoVNA へつなぎ替えるときは、この図の AD を外して NanoVNA の CH0 を P1、
+- LiteVNA64 へつなぎ替えるときは、この図の AD を外して LiteVNA64 の CH0 を P1、
   CH1 を P2 に直結する (SMA なのでアダプタ不要)
 
 ## 実体配線図
 
-治具そのものは NanoVNA の教科書の 3-3 と同じ perfboard (端面 SMA 2 つ、
+治具そのものは VNA の教科書 (LiteVNA64) の 3-3 と同じ perfboard (端面 SMA 2 つ、
 中心導体どうしを 1 本の線でつなぐだけ)。**1 度作れば両方の計器で使い回す。**
 
 ```perfboard
@@ -89,21 +89,21 @@ wires:
 
 - J1 (P1) が e1、J2 (P2) が e16。中心導体どうしを e 行 1 本でつなぐだけの、
   部品を挟まない「素通し」の治具
-- AD へは BNC-SMA 変換アダプタ経由、NanoVNA へは SMA ケーブルで直結する
+- AD へは BNC-SMA 変換アダプタ経由、LiteVNA64 へは SMA ケーブルで直結する
 
 ## 計器の設定
 
 | 計器 | 設定 |
 | --- | --- |
-| AD Network | BNC アダプタ (W1 側ジャンパは 50 Ω 側にして NanoVNA と条件を揃える)。掃引 100 kHz〜25 MHz、点数 101、振幅 1 V、Reference = CH1、DUT = CH2 |
-| NanoVNA | 掃引 1 MHz〜100 MHz、点数 101。校正は SOLT (Open / Short / Load / Thru を P1・P2 の SMA 面で)。表示 S21 の Log Mag |
+| AD Network | BNC アダプタ (W1 側ジャンパは 50 Ω 側にして LiteVNA64 と条件を揃える)。掃引 100 kHz〜25 MHz、点数 101、振幅 1 V、Reference = CH1、DUT = CH2 |
+| LiteVNA64 | 掃引 1 MHz〜100 MHz (LiteVNA64 の範囲は 50 kHz〜6.3 GHz)、点数 101 (本体で 10〜1001 点)。使うのは S21 (S11・S21 だけを測る機種で足りる)。校正は SOLT (Open / Short / Load / Thru を P1・P2 の SMA 面で)。表示 S21 の Log Mag |
 
 ## 見るべき値
 
 計算値。治具の中心導体 (e1〜e16、15 穴 ≒ 38.1 mm) を経験式 (8-3 と同じ) で
 見積もったインダクタンスは約 30.7 nH。
 
-| 周波数 | AD (1 MΩ 入力、電圧比) | NanoVNA (50 Ω 系、真の S21) |
+| 周波数 | AD (1 MΩ 入力、電圧比) | LiteVNA64 (50 Ω 系、真の S21) |
 | --- | --- | --- |
 | 1 MHz | 0.00 dB (差は測定限界以下) | −0.00 dB |
 | 10 MHz | 0.00 dB (同上) | −0.0016 dB |
@@ -111,7 +111,7 @@ wires:
 | 100 MHz | 測れない (AD の範囲外) | **−0.16 dB** |
 
 ```graph
-title: 図3 AD は 25 MHz まで 0 dB、NanoVNA は 100 MHz で −0.16 dB
+title: 図3 AD は 25 MHz まで 0 dB、LiteVNA64 は 100 MHz で −0.16 dB
 x: 周波数 Hz log 100k..100M
 y: S21 dB -0.2..0.02
 lines:
@@ -120,7 +120,7 @@ lines:
     - 1M 0
     - 10M 0
     - 25M 0
-  NanoVNA 50 Ω dB: -10*log10(1+(2*pi*x*30.7n/100)^2)
+  LiteVNA64 50 Ω dB: -10*log10(1+(2*pi*x*30.7n/100)^2)
 notes:
   - mark 10M
   - mark 25M
@@ -134,14 +134,17 @@ AD の線は 25 MHz (上限) で止まる。1 MHz〜25 MHz の重なりでは 2 
 治具が優秀だからというより、**AD の入力が 1 MΩ と高いせいで、治具のわずかな
 インダクタンス (数十 nH) の影響がほとんど埋もれてしまう**ため — AD の
 Network アナライザは 50 Ω の系ではなく、高い入力インピーダンスでの電圧比を
-測っている。NanoVNA は本物の 50 Ω の系で測るので、同じインダクタンスが
+測っている。LiteVNA64 は本物の 50 Ω の系で測るので、同じインダクタンスが
 S21 の低下としてそのまま見える。**1〜25 MHz の重なる範囲では、AD の
-「ほぼ 0 dB」と NanoVNA の「ほぼ 0 dB」が矛盾なく一致する**ので橋渡しとして
-使えるが、**治具の限界そのものを追い詰めるには NanoVNA が要る** —
-これがそのまま NanoVNA の教科書の 3-6 (治具の限界周波数) につながる。
+「ほぼ 0 dB」と LiteVNA64 の「ほぼ 0 dB」が矛盾なく一致する**ので橋渡しとして
+使えるが、**治具の限界そのものを追い詰めるには LiteVNA64 が要る** —
+これがそのまま VNA の教科書 (LiteVNA64) の 3-6 (治具の限界周波数) につながる。
 
 ## 出典
 
 自作。計器の名前と操作は Digilent の
 [Using the Network Analyzer](https://digilent.com/reference/test-and-measurement/guides/waveforms-network-analyzer)。
-治具は NanoVNA の教科書の 3-3 (スルー治具) と同じもの。
+治具は VNA の教科書 (LiteVNA64) の 3-3 (スルー治具) と同じもの。
+
+LiteVNA64 の周波数範囲・点数の数字は、本の標準の計器の決め (作者が持っている機種) による。
+この題の LiteVNA64 の読みは計算値で、**実機は未確認**。

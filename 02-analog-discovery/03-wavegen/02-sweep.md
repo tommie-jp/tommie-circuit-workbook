@@ -41,7 +41,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードと Analog Discovery
+title: 図2 ブレッドボードと Analog Discovery 3
 board: half
 parts:
   R1: resistor c6 c10 1k
@@ -49,7 +49,7 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [GND, 1+, W1, 1-, 2+, 2-]
 wires:
   - AD.GND -- -t2 black

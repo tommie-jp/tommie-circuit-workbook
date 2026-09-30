@@ -12,8 +12,8 @@ board: —
 
 FFT は「取り込んだ長さがちょうど 1 周期の整数倍」でないと、周波数がビンの
 真ん中からずれて**漏れ (leakage)** が起き、読んだ振幅が小さく出る。窓関数は
-この漏れの出方を変える。AD の内部サンプル周波数は 100 MHz を整数で割った値
-からしか選べないので、**信号の周波数がビンのどこに乗るかはこちらで正確には
+この漏れの出方を変える。AD3 のサンプル周波数は、システムクロック (既定 100 MHz、50〜125 MHz で調整できる)
+を整数で割った値からしか選べないので、**信号の周波数がビンのどこに乗るかはこちらで正確には
 決められない**。4-1 では Flat-top を使ってこの問題を避けたが、ここでは
 **乗る場所が一番悪いとき (半ビンぶんずれた最悪ケース) の理論値**で、
 Rectangular・Hann・Flat-top の 3 つが振幅の読み値をどれだけ悪化させるかを
@@ -53,7 +53,7 @@ wires:
 
 ```spectrum
 title: 図2 Rectangular — 半ビンずれで山が −6.92 dBV まで下がる
-device: ad2
+device: ad3
 sweep: 0-20kHz
 samples: 8192
 window: rect
@@ -65,7 +65,7 @@ markers: [peak]
 
 ```spectrum
 title: 図3 Hann — 同じずれで −4.43 dBV
-device: ad2
+device: ad3
 sweep: 0-20kHz
 samples: 8192
 window: hann
@@ -77,7 +77,7 @@ markers: [peak]
 
 ```spectrum
 title: 図4 Flat-top — 同じずれでも −3.02 dBV とほぼ正しい
-device: ad2
+device: ad3
 sweep: 0-20kHz
 samples: 8192
 window: flattop

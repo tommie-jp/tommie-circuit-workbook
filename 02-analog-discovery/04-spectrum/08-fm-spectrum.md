@@ -42,7 +42,7 @@ wires:
 
 ```spectrum
 title: 図2 β = 2 では搬送波より ±1 次・±2 次の側波帯が高い
-device: ad2
+device: ad3
 sweep: 90kHz-110kHz
 samples: 32768
 window: flattop

@@ -14,11 +14,11 @@ board: BB
 50 Ω の負荷をつなぐと分圧で電圧がちょうど半分 (−6.02 dB) になるのは、
 その手の発生器の常識になっている。
 
-Wavegen の W1 (付属のワイヤで使う場合) はこれと**違う**。出力段はレール to
-レールのオペアンプ (AD8067) で、直列に入っているのは短絡保護用の PTC
-(自己復帰型ヒューズ、R145) だけ。**出力インピーダンスはほぼ 0 Ω** のまま。
-50 Ω をつないでも電圧はほとんど落ちない — その代わり、**電流**に無理をさせると
-波形の頭が潰れる。この実験では両方を実際に測る。
+Analog Discovery 3 (AD3) の Wavegen の W1 はこれと**違う**。仕様の出力インピーダンスは
+**0 Ω**（ヘッダ直結。「精密には制御されていない」と注記されている）で、ほぼ
+理想の電圧源として振る舞う。50 Ω をつないでも電圧はほとんど落ちない — その代わり、
+**電流**に無理をさせると波形の頭が潰れる。AD3 が歪みなく出せる電流は最大
+**30 mA**（40 mA まではハードウェアの遮断の手前）。この実験では両方を実際に測る。
 
 ## 回路図
 
@@ -47,7 +47,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードと Analog Discovery
+title: 図2 ブレッドボードと Analog Discovery 3
 board: half
 parts:
   S1: switch c5 c8
@@ -56,7 +56,7 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [GND, 1+, W1, 1-]
 wires:
   - AD.GND -- -t2 black
@@ -76,7 +76,7 @@ S1 を抜いたまま (開放) 測ってから、挿して (短絡) もう一度
 
 | 計器 | 設定 |
 | --- | --- |
-| Wavegen | W1: Sine、1 kHz、Offset 0 V。**Amplitude を 0.5 V → 1 V → 2 V の順に上げる** |
+| Wavegen | W1: Sine、1 kHz、Offset 0 V。**Amplitude を 0.5 V → 1 V → 1.5 V → 2 V の順に上げる** |
 | Scope | CH1: DC 結合、Range は振幅に合わせて調整 (0.5 V/div など)。Measure の Amplitude (0-peak) だけでなく、**波形の頭の形も目で見る** |
 
 ## 見るべき値
@@ -100,27 +100,30 @@ R<sub>o</sub> = 50 × (0.500 / 0.485 − 1) ≈ **1.5 Ω**。ここで測る R<s
 ### 2. 電流のほうが本当の制約 (R<sub>L</sub> = 50 Ω 固定、振幅を上げる)
 
 計算値。負荷電流 (0-peak) ≈ Amplitude ÷ 50 Ω (R<sub>o</sub> が小さいので分母は
-ほぼ R<sub>L</sub> のまま)。
+ほぼ R<sub>L</sub> のまま)。AD3 の仕様は、歪みなく出せる DC 電流を最大 30 mA、
+ハードウェアの遮断までを 40 mA としている。
 
 | Amplitude | 負荷電流 (0-peak) の計算値 | 見えるはずの波形 |
 | --- | --- | --- |
-| 0.5 V | 10.0 mA (Digilent が保証する最小駆動電流ちょうど) | ほとんどの個体できれいな正弦波 |
-| 1.0 V | 20.0 mA (保証値の 2 倍。代表値の範囲内) | 個体によっては頭がわずかに丸まり始める |
-| 2.0 V | 40.0 mA (代表的な最大値 (約 50 mA) に接近) | 多くの個体で頭が潰れて見える (電流制限) |
+| 0.5 V | 10.0 mA (30 mA の 1/3) | きれいな正弦波 |
+| 1.0 V | 20.0 mA (30 mA の 2/3) | きれいな正弦波 |
+| 1.5 V | 30.0 mA (歪みなく出せる上限ちょうど) | ここまでは仕様の範囲。頭が丸まり始めるかは個体次第 (**未確認**) |
+| 2.0 V | 40.0 mA (ハードウェアの遮断の値ちょうど) | 30 mA を超えるので仕様の範囲外。頭が潰れて見えるはず (遮断されたときの見え方は**未確認**) |
 
 ```graph
-title: 図3 負荷電流は Amplitude に比例し、1 V で保証の 10 mA の 2 倍になる
+title: 図3 負荷電流は Amplitude に比例し、1.5 V で歪みなしの上限 30 mA に届く
 x: Amplitude V 0..2.5
 y: 負荷電流 mA 0..60
 lines:
   50 Ω 負荷 mA: x/50*1000
 notes:
-  - level 10mA
-  - level 50mA
-  - text 1.4 12mA: 保証 (最小) 10 mA
-  - text 0.3 52mA: 代表的な最大 約 50 mA
+  - level 30mA
+  - level 40mA
+  - text 0.55 32mA: 歪みなしの上限 30 mA
+  - text 0.55 42mA: ハードウェアの遮断 40 mA
   - mark 0.5
   - mark 1
+  - mark 1.5
   - mark 2
 ```
 
@@ -129,25 +132,24 @@ notes:
 分かること:
 
 - **落ち込みの正体は R<sub>o</sub> ではなく電流。** W1 は「50 Ω 負荷に耐える
-  電圧源」ではなく、「保証は少なくとも 10 mA、代表的な個体では 50 mA 程度まで
-  出せる電流源としての限界を持つ、ほぼ理想の電圧源」というのが実像
-- **頭が潰れ始めたら、それは分圧ではなく電流制限。** オペアンプの出力段が
-  必要な電流を出しきれなくなり、ピークだけ平らになる (クリップ)
-- 直列の PTC (R145) は短絡保護用。電流を絞り込むと自分の抵抗が増えて熱で
-  守る仕組みなので、**頭が潰れたまま長時間動かし続けない** (PTC が温まると
-  R<sub>o</sub> の値そのものも動く)
+  電圧源」ではなく、「30 mA までは歪みなく出せる、ほぼ理想の電圧源」というのが実像
+- **頭が潰れ始めたら、それは分圧ではなく電流の限界。** 出力段が必要な電流を
+  出しきれなくなり、ピークだけ平らになる (クリップ)。**頭が潰れたまま長時間
+  動かし続けない**
 - **Discovery BNC アダプタ**を使うと、AWG 出力に **50 Ω / 0 Ω を選べる
-  ジャンパ**がある。ここで 50 Ω 側を選べば、今度は本物の 50 Ω 抵抗が直列に
+  ジャンパ**がある（既定は 0 Ω）。ここで 50 Ω 側を選べば、今度は本物の 50 Ω が直列に
   入るので、ベンチの発生器と同じ「50 Ω 負荷で電圧が半分」という挙動になる
-  (この実験は付属のワイヤ・0 Ω 側の話)
+  (この実験は 0 Ω 側の話)。AD3 のマニュアルは、容量の大きい負荷でエッジが
+  リンギングするときにも 50 Ω 側にするとよいとしている
 
 ## 出典
 
 自作。計器の名前と操作は Digilent の
 [WaveForms リファレンスマニュアル](https://digilent.com/reference/software/waveforms/waveforms-3/reference-manual)
-(Wavegen の節)。W1 の出力段 (AD8067、短絡保護用 PTC R145) と駆動電流
-(保証値・代表値) は Digilent の
-[Analog Discovery 2 リファレンスマニュアル](https://digilent.com/reference/test-and-measurement/analog-discovery-2/reference-manual)
-§3.4 (AWG Out)。50 Ω / 0 Ω の出力ジャンパは
-[Discovery BNC Adapter リファレンスマニュアル](https://digilent.com/reference/add-ons/discovery-bnc-adapter/reference-manual)
-による。
+(Wavegen の節)。W1 の出力インピーダンス (0 Ω・精密には制御されていない)、
+DC 電流 30 mA (歪みなく出せる最大値)・40 mA (ハードウェアの遮断まで)、BNC アダプタ
+有りの 0 Ω / 50 Ω の選択は Digilent の
+[Analog Discovery 3 Specifications](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Specifications_1123.pdf)
+(Wavegen の節) と
+[Reference Manual](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Reference-Manual_1123.pdf)
+(Analog Output の節) による。出力段の部品の型番は AD3 の資料に無く、書いていない。

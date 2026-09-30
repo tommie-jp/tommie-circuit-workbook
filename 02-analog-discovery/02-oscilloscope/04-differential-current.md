@@ -48,7 +48,7 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [V+, 1+, 1-, GND]
 wires:
   - AD.V+ -- a8 red

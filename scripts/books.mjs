@@ -46,7 +46,7 @@ export const BOOKS = [
     number: 2,
     slug: 'analog-discovery',
     title: 'Analog Discovery の教科書',
-    summary: 'Analog Discovery 2 / 3 と WaveForms で DC〜10 MHz を測る',
+    summary: 'Analog Discovery 3 と WaveForms で DC〜10 MHz を測る',
     columns: ['board', 'device'],
     chapters: [
       [0, 'tools', '道具と安全'],

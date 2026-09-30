@@ -106,7 +106,7 @@ j5・j6 へ、V+・GND を下のレールへ入れる。
 | 計器 | 設定 |
 | --- | --- |
 | Supplies | V+ = 5 V、Master Enable を入れる |
-| Protocol | I2C、SDA = DIO0、SCL = DIO1、Rate = 100 kHz。Read、Address = 0x48、レジスタ 0 を 2 バイト |
+| Protocol | I2C、SDA = DIO0、SCL = DIO1、Rate = 100 kHz。Read、Address = 0x48、レジスタ 0 を 2 バイト。プルアップは 5 V だが、AD3 の DIO 入力は 5 V まで耐える (5 V tolerant) |
 
 ## 見るべき値
 

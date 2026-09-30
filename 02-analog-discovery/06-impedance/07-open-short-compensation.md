@@ -133,7 +133,7 @@ notes:
   (この題の 10 kΩ) では Open の寄生が支配的で、Short の寄生 (0.27 Ω) は
   ほぼ無視できる。小さい R<sub>DUT</sub> (6-3 のような数十〜数百 Ω) では逆に
   Short の寄生のほうが効いてくる
-- **この Open/Short の考え方は、NanoVNA の校正 (Open・Short・Load) と同じ
+- **この Open/Short の考え方は、VNA (NanoVNA・LiteVNA64 など) の校正 (Open・Short・Load) と同じ
   発想**。測定治具そのものの寄生を先に測って引き算する、という基本は
   計測全般で共通する
 

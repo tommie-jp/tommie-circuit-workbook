@@ -2,20 +2,20 @@
 book: analog-discovery
 chapter: 1
 id: 1-10
-title: デバイスマネージャ — バッファ長と ch 数の構成を切り替える
+title: デバイスマネージャ — 計器ごとのバッファ長の配分を切り替える
 tier: 100
-source: 自作 (数値は Digilent の Analog Discovery 2 / 3 の公式仕様)
+source: 自作 (数値は Digilent の Analog Discovery 3 の公式資料)
 board: —
 device: AD3
 ---
 
-# 1-10 デバイスマネージャ — バッファ長と ch 数の構成を切り替える
+# 1-10 デバイスマネージャ — 計器ごとのバッファ長の配分を切り替える
 
-Analog Discovery の中の FPGA には、Scope・Wavegen・Logic Analyzer・Pattern
-Generator が使う記録メモリが 1 つのプールとして載っている。**Device Manager**
-（`Settings > Device Manager`）は、このメモリをどの計器にどれだけ割り振るかを
-選ぶ画面。ここでは AD3 でチャネル数とバッファ長（1 チャネルあたりの記録点数）
-がどう入れ替わるかを確かめる。
+Analog Discovery 3 (AD3) は、Scope・Wavegen・Logic Analyzer・Pattern
+Generator が使う記録メモリの配分を、あらかじめ決められた**6 通りの構成**から
+選ぶ。**Device Manager**（`Settings > Device Manager`）は、その構成を選ぶ画面。
+ここでは Scope と Wavegen のバッファ長（1 チャネルあたりの記録点数）が構成ごとに
+どう入れ替わるかを確かめる。
 
 ## 回路図
 
@@ -40,43 +40,56 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen (W1) | 正弦波、1 kHz、振幅 1 V |
-| Scope (CH1・CH2) | 既定の構成（2 ch）でまず Record Length（Scope の記録点数の設定欄）を確認する |
-| Device Manager | 既定の構成 → 「Scope を 1 ch にしてバッファを増やす」構成に切り替える |
+| Scope (CH1・CH2) | 今の構成でまず Buffer（Scope の記録点数の設定欄）の上限を確認する |
+| Device Manager | 今の構成 → Scope が最大の構成 2 → Scope が最小の構成 5 と切り替え、そのつど Scope の Buffer の上限を見る |
 
 ## 見るべき値（AD3）
 
-AD3 の仕様では、Scope のバッファは**既定で 2 ch とも 32,768 点/ch**。
-**片方の ch だけを使う設定にすると、1 ch の記録が 65,536 点まで増える**
-（2 ch 分のメモリを 1 ch に集める）。
+AD3 のリファレンスマニュアル（Device Configuration の節、Table 1）に、構成 1〜6 の
+バッファ長が載っている。単位の KiS は 1024 サンプル（1 KiS = 1,024 点）。
+
+| 構成 | Scope | Wavegen（搬送波） | Logic Analyzer | Pattern Generator |
+| --- | --- | --- | --- | --- |
+| 1 | 16 KiS（16,384 点） | 16 KiS | 16 KiS | 2 KiS |
+| 2 | **32 KiS（32,768 点）** | 4 KiS | 4 KiS | 2 KiS |
+| 3 | 8 KiS（8,192 点） | **32 KiS** | 2 KiS | 2 KiS |
+| 4 | 16 KiS | 4 KiS | **32 KiS** | 2 KiS |
+| 5 | 4 KiS（4,096 点） | 4 KiS | **32 KiS** | **32 KiS** |
+| 6 | 8 KiS | 16 KiS | 2 KiS | 2 KiS |
+
+読み方:
+
+- 仕様の「Scope のバッファは最大 32,768 点/ch」は、構成 2 の 32 KiS に当たる。
+  表の値は 1 チャネルあたりと読む（マニュアルの表には 1 チャネルあたりか合計かの
+  明記が無く、仕様の「per channel」との一致からの判断。**未確認**）
+- 仕様の脚注に、**Scope を 1 チャネルだけ使うと 65,536 点まで増える**とある
+  （2 チャネルぶんのメモリを 1 チャネルに集める。構成 2 なら 32,768 × 2 = 65,536）
+- **どの構成が既定かは、手元の資料に書かれていない（未確認）**。実機の Device Manager で
+  選択中の構成と、Scope の Buffer の上限を見て確かめる
 
 | 構成 | CH1 のバッファ長 | CH2 は使えるか |
 | --- | --- | --- |
-| 既定（2 ch） | 32,768 点 | 使える |
-| CH1 のみ（Device Manager で切り替え） | 65,536 点（2 倍） | 使えない |
+| 構成 2（Scope 最大） | 32,768 点 | 使える |
+| 構成 2 で CH1 のみ | 65,536 点（2 倍） | 使えない |
+| 構成 5（Scope 最小） | 4,096 点 | 使える |
 
-Device Manager にはこのほかにも、Scope・Wavegen・Logic Analyzer・Pattern
-Generator の間でメモリの配分を変えるプリセットがあるが、正確な組み合わせは
-バージョンによって増えることがあるので、実際の画面で確かめる。設定を切り替えると
-デバイスの再構成（FPGA の書き直し）が入り、一瞬デバイスが切断されたように
-見えることがある——実験中の波形は失われるので、切り替えは測定の合間に行う。
+構成 2 と 5 で Scope が 8 倍（32,768 ÷ 4,096）違う代わりに、構成 5 は Logic Analyzer と
+Pattern Generator が 32 KiS に増える。**今の実験に要らない計器のメモリを削って、
+使う計器に長い記録を回す**、というのがこの画面の考え方。
 
-## AD2 ではどうするか
+Wavegen は、Custom（3-4・3-10）で作れる波形の点数が構成で変わる（構成 3 で最大の
+32,768 点）。Scope の記録点数がこの範囲を超えるときは、2-11 の Record モード
+（パソコン側へ流し込む）を使う。
 
-AD2 にも同じ Device Manager があるが、初期値と上限が違う。仕様
-（Analog Discovery 2 リファレンスマニュアル 9.1〜9.4 節）によれば：
-
-| 計器 | 既定のバッファ | 切り替え後の上限 | 引き換えに失うもの |
-| --- | --- | --- | --- |
-| Scope | 8k 点/ch | 16k 点/ch | Digital I/O のメモリを 0 にし、Wavegen のバッファも減らす |
-| Wavegen | 4k 点/ch | 16k 点/ch | Digital I/O のメモリを 0 にし、Scope のバッファも減らす |
-| Logic Analyzer | 4k 点/ch | 16k 点/ch | Scope・Wavegen のメモリを 0 にする |
-
-AD2 は「ch 数を減らして 2 倍」という AD3 のような軽い切り替えではなく、**別の
-計器（主に Digital I/O）を丸ごと諦める**ことでバッファを伸ばす。上限も
-16k 点/ch と AD3（65,536 点）の 1/4。それでも「今の実験に要らない計器を削って、
-使う計器に長い記録を回す」という考え方自体は AD2 でも AD3 でも同じ。
+設定を切り替えるとデバイスの再構成（FPGA の書き直し）が入り、一瞬デバイスが
+切断されたように見えることがある——実験中の波形は失われるので、切り替えは測定の
+合間に行う（この再構成の挙動は WaveForms の一般的な動作で、AD3 のマニュアルの
+その節には書かれていない。**未確認**）。
 
 ## 出典
 
-自作。バッファ長の数値は Digilent の Analog Discovery 2 / 3 の公式仕様
+自作。バッファ長は Digilent の
+[Analog Discovery 3 Reference Manual](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Reference-Manual_1123.pdf)
+（Device Configuration の Table 1）と
+[Analog Discovery 3 Specifications](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Specifications_1123.pdf)
 （Horizontal System の節）による。

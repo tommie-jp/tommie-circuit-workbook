@@ -40,7 +40,7 @@ V1 の記号は正弦だが、実際は Wavegen の Function を **Noise** に�
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードと Analog Discovery
+title: 図2 ブレッドボードと Analog Discovery 3
 board: half
 parts:
   R1: resistor c6 c10 1k
@@ -48,7 +48,7 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [GND, 1+, W1, 1-, 2+, 2-]
 wires:
   - AD.GND -- -t2 black
@@ -108,7 +108,7 @@ notes:
 - **ENBW は RC だけで決まり、ノイズ源の中身 (絶対レベル) を知らなくても計算できる。**
   だから「フィルタ 1 出力 と フィルタ 2 出力 の比」という**相対値**なら、
   Wavegen の Noise が実際どんな分布・帯域を持つか (非公開) を仮定しなくても
-  確かめられる — Wavegen の出力帯域 (付属ワイヤで 9 MHz、3-5) は両方の f<sub>c</sub>
+  確かめられる — Wavegen の出力帯域 (BNC アダプタ有りで 12 MHz、付属ワイヤ (ヘッダ) で 9 MHz。0-5) は両方の f<sub>c</sub>
   よりずっと広いので、「広い帯域に平らに広がった雑音」という前提は妥当
 - CH1 (フィルタ前) の RMS は、C1 をどちらに替えても変わらないはず。**変わって
   しまったら、ノイズ源ではなく配線や負荷を疑う**

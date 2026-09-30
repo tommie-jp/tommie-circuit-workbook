@@ -42,7 +42,7 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [1+, W1, 1-, GND]
 wires:
   - AD.W1 -- b5 yellow
@@ -71,7 +71,7 @@ wires:
 | Persistence をクリア (Reset) | また 1 本の細い線に戻る | 残光は積算表示であることの確認 |
 
 にじみの幅が気になるほど大きいときは、まず 0-3 のループバックに戻って
-Analog Discovery 自体のジッタなのか、外の回路 (この題では方形波と
+AD3 自体のジッタなのか、外の回路 (この題では方形波と
 抵抗だけなので考えにくい) のせいかを切り分けるとよい。
 
 ## 出典

@@ -49,11 +49,11 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/circuit/05-impedance-adapter-autorange.svg)
 
-- アダプタは AD の 2×15 コネクタにそのまま挿す (W1・GND・1±・2± の 6 本は
+- アダプタは AD3 の 2×15 コネクタにそのまま挿す (W1・GND・1±・2± の 6 本は
   基板内部で結線済み)。**DUT はアダプタの端子台 (J2) に挟むだけ**で、
   ブレッドボードは要らない
 - アダプタの中では、内蔵の**複数の基準抵抗 (0.1% 精度) をリレーで切り替えて**
-  DUT と直列にし、1+/1− (基準抵抗の両端) と 2+/2− (DUT の両端) を AD の
+  DUT と直列にし、1+/1− (基準抵抗の両端) と 2+/2− (DUT の両端) を AD3 の
   オシロへ渡す — 6-1〜6-4 で自分の手でやっていたことを基板がやる
 
 ## 計器の設定
@@ -98,13 +98,19 @@ C ≈ 1 µF の行は公式の表のまま 1 kΩ と写した。C が 10 倍に�
 - **6 段階しかないので、DUT の値が境目付近だと桁の変わり目で誤差が増える。**
   自分で Rref を選ぶ方式なら、境目を避けてぴったりの値を選べる場面もある —
   自動レンジは速いが、際どい値では手動のほうが追い込める
-- USB 給電の 5 V から動作し、消費電流は約 25 mA (AD の 250 mW/系統の
-  上限に対して十分小さい)
+- AD3 の資料 (Reference Manual) によれば、アダプタを使うときは、デジタル入出力と
+  Supplies の電源がアダプタのリレーの制御に使われる。アダプタの消費電流は
+  アダプタの資料に約 25 mA とあるが、これは AD3 で測った値ではなく、**AD3 での値は未確認**
+  (AD3 の Supplies に回せる電力は USB 給電で約 2 W の目安、0-2 に比べれば十分小さい)
 
 ## 出典
 
 自作。アダプタの機能・自動レンジ表・消費電流は Digilent の
 [Analog Discovery Impedance Analyzer Reference Manual](https://digilent.com/reference/add-ons/impedance-analyzer/reference-manual)
+による (アダプタの資料そのものは旧機種の時代のもので、AD3 で表・消費電流が同じかは未確認)。
+アダプタが Supplies と DIO を使うことと、Impedance の周波数範囲 (20 µHz 〜 システムクロックの 1/4、
+既定 25 MHz) は
+[Analog Discovery 3 Reference Manual](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Reference-Manual_1123.pdf)
 による。計器の操作は Digilent の
 [WaveForms リファレンスマニュアル](https://digilent.com/reference/software/waveforms/waveforms-3/reference-manual)
 (Impedance の節)。

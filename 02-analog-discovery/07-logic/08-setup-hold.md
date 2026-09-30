@@ -115,7 +115,7 @@ wires:
 | --- | --- |
 | Supplies | V+ = 3.3 V、Master Enable を入れる |
 | Pattern | DIO0 = Clock (CLOCK1 用、1 kHz)。DIO1 = Custom (D1 用。Clock の立ち上がりの前後で 1 回だけ H⇄L を切り替える波形を、サンプルレート 100 MHz (10 ns 刻み) で描く) |
-| Logic | DIO0〜DIO2 を Enable。Rate は Pattern と同じ 100 MHz (10 ns 刻み) にしてカーソルで時間差を読む |
+| Logic | DIO0〜DIO2 を Enable。Rate は Pattern と同じ 100 MHz (10 ns 刻み) にしてカーソルで時間差を読む。100 MHz は AD3 のシステムクロックの既定値で、DIO の最大は 125 MS/s (50〜125 MHz で調整可) |
 
 Pattern と Logic は同じマスタークロックを共有するので、Data の遷移を Clock の
 立ち上がりから何サンプルずらすかで、setup の時間を 10 ns 刻みで自由に作れる。

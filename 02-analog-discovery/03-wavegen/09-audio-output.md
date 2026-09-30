@@ -11,8 +11,8 @@ board: —
 # 3-9 音を出す (オーディオ出力)
 
 W1 は可聴域 (20 Hz〜20 kHz) の波形をそのまま出せるので、小さいスピーカーを
-つなげば音になる。W1 はほぼ理想電圧源 (3-5) で、8 Ω のスピーカーに直結すると
-保証電流 (10 mA) を超えてしまうので、**電流を制限する抵抗**を直列に入れる。
+つなげば音になる。AD3 の W1 はほぼ理想電圧源 (3-5) で、8 Ω のスピーカーに直結すると
+歪みなく出せる電流 (30 mA) を超えてしまうので、**電流を制限する抵抗**を直列に入れる。
 アンプ (第 9 章の LM386 など) を使わない、いちばん簡素な「音を出す」実験。
 
 ## 回路図
@@ -60,7 +60,7 @@ measure: [vpp, freq, period]
 
 | 測る所 | 期待する値 (計算値) | 分かること |
 | --- | --- | --- |
-| ピーク電流 | 6.33 mA (= 1 V ÷ 158 Ω) | Wavegen の保証駆動電流 10 mA より小さく、安全 |
+| ピーク電流 | 6.33 mA (= 1 V ÷ 158 Ω) | AD3 の歪みなく出せる電流 30 mA より小さく、安全 (約 1/5) |
 | 実効電流 | 4.48 mA (= 6.33 mA ÷ √2) | RMS の電流 |
 | スピーカーで消費する電力 | 約 160 µW (= 実効電流² × 8 Ω) | R1 でほとんどの電圧が落ちるので、音はごく小さい (アンプではない) |
 
@@ -75,8 +75,8 @@ measure: [vpp, freq, period]
 分かること:
 
 - **R1 が無いと壊れはしないが規格外になる。** 8 Ω に直結すると Amplitude 1 V で
-  125 mA を要求してしまい、保証電流の 10 倍を超える (実際は電流制限がかかって
-  波形が潰れる、3-5 と同じ現象)
+  125 mA を要求してしまい、歪みなく出せる 30 mA の約 4 倍、ハードウェアの遮断の 40 mA の
+  3 倍を超える (波形が潰れる・遮断されるなど、3-5 と同じ現象)
 - 160 µW は静かな部屋でようやく聞こえる程度で、大きな音にはならない。
   **もっと大きく鳴らしたいなら R1 を外すのではなく、第 9 章 (9-14) の LM386 の
   ようなアンプを間に挟む** — 電流を制限したまま音量を上げる本来のやり方
@@ -88,6 +88,6 @@ measure: [vpp, freq, period]
 
 自作。計器の名前と操作は Digilent の
 [WaveForms リファレンスマニュアル](https://digilent.com/reference/software/waveforms/waveforms-3/reference-manual)
-(Wavegen の節)。W1 の出力インピーダンスと保証駆動電流は
-[Analog Discovery 2 リファレンスマニュアル](https://digilent.com/reference/test-and-measurement/analog-discovery-2/reference-manual)
-§3.4 (AWG Out)、3-5 で確かめた値。
+(Wavegen の節)。W1 の出力インピーダンス (0 Ω) と歪みなく出せる電流 (30 mA) は
+[Analog Discovery 3 Specifications](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Specifications_1123.pdf)
+(Wavegen の節)、3-5 で確かめた値。
