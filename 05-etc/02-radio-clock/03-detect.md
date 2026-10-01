@@ -124,8 +124,7 @@ parts:
   R1: resistor d3 d6 75k
   C1: capacitor d8 d11 22n
   C2: capacitor a8 a13 22n
-  R2a: resistor e7 g7 470
-  R2b: resistor-var g7 i7 1k
+  R2: resistor-var e7 i7 2k
   R3: resistor b12 b17 300k
   U3A: opamp d14 +down
   VBI: port j3
@@ -190,8 +189,7 @@ parts:
   R1: resistor d3 d6 91k
   C1: capacitor d8 d11 10n
   C2: capacitor a8 a13 10n
-  R2a: resistor e7 g7 470
-  R2b: resistor-var g7 i7 1k
+  R2: resistor-var e7 i7 2k
   R3: resistor b12 b17 330k
   U3B: opamp d14 +down
   VBI: port j3
@@ -245,6 +243,213 @@ style:
 
 図 2 と同じ形で、フィルタの値だけが違う。中心は 880 Hz、Q は約 9、利得は約 1.8 倍。TH と VB は図 2 と共通にする。
 
+## 実体配線図
+
+ブレッドボード (半分の大きさ) 3 枚に分ける。板の間は、同じ名前の端子どうしを線でつなぐ。端子は AF、VB、TH、P440、P880、T440、T880 の 7 つ。**5 V と GND は 3 枚で共通**にする。ほかの板への線は、図に機器の箱を置いて示した。
+
+### 図 4: 入力増幅、基準電圧、しきい値の板
+
+```bread
+title: 図4 入力増幅・基準電圧・しきい値の板 (LM358 1 個)
+board: half
+parts:
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
+  IN:
+    type: device
+    at: bottom
+    label: 02 の検波出力 OUT
+    pins: [GND, IN]
+  LINK:
+    type: device
+    at: bottom
+    label: 図5 の板へ
+    pins: [AF, VB, TH, GND]
+  U1: dip8 @ e12 LM358
+  Cin: capacitor/ceramic i2 i4 1u
+  Rin: resistor j4 j8 10k
+  Rf: resistor i8 i12 100k
+  Ra: resistor a15 +t15 10k
+  Rb: resistor b15 b18 10k
+  Cb: capacitor/electrolytic d15 d20 10u
+  R6: resistor j20 +b20 6.2k
+  VR1: potentiometer g20(A) g22(W) g24(B) 2k
+  R7: resistor j24 -b24 5.6k
+wires:
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t1 black
+  - a12 -- +t12 red
+  - j15 -- -b15 black
+  - a18 -- -t18 black
+  - a20 -- -t20 black
+  - d13 -- d14 green
+  - c13 -- c11 green
+  - d11 -- f11 green
+  - g11 -- g14 green
+  - h8 -- h13 orange
+  - IN.IN -- i2 white
+  - IN.GND -- -b1 black
+  - LINK.AF -- j12 white
+  - LINK.VB -- i14 green
+  - LINK.TH -- i22 purple
+  - LINK.GND -- -b27 black
+  - +t30 -- +b30 red
+  - -t30 -- -b30 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/03-detect-1.svg)
+
+- LM358 (U1) を溝をまたいで `e12` に挿す。PIN 8 は `a12` から + レール (赤) へ、PIN 4 は `j15` から下の − レール (黒) へ。上下のレールは、右端の線 (赤と黒) でつなぐ
+- 入力: 02 の検波出力 (OUT) を、C<sub>in</sub> (`i2`) → R<sub>in</sub> (`j4`〜`j8`) の順に入れる。R<sub>f</sub> は `i8` から PIN 1 の列 (`i12`) へ。PIN 2 の列へは、`h8` から `h13` へ橙の線
+- 基準電圧: R<sub>a</sub> (`a15` から + レール)、R<sub>b</sub> (`b15`〜`b18`)、C<sub>b</sub> (`d15`〜`d20`、+ は `d15` 側) が PIN 5 の列に集まる。PIN 6 と PIN 7 は緑の短い線 (`d13`〜`d14`) でつなぎ、VB の列は `c13` から左 (`c11`) へ、溝を渡して (`d11`〜`f11`)、`g11` から PIN 3 の列 (`g14`) へ引く
+- しきい値: R6 (`j20` から下の + レール)、半固定抵抗 VR1 (`g20`〜`g24`)、R7 (`j24` から − レール)。VR1 の中央の足 (`i22`) が TH
+- 図 5 の板へ: AF (`j12`)、VB (`i14`)、TH (`i22`) と GND
+
+### 図 5: 帯域通過フィルタの板
+
+```bread
+title: 図5 帯域通過フィルタの板 (LM358 1 個、上が 880 Hz・下が 440 Hz)
+board: half
+parts:
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
+  FROM:
+    type: device
+    at: top
+    label: 図4 の板から (AF は 2 本に分ける)
+    pins: [AF880, AF440, VB, GND]
+  TO8:
+    type: device
+    at: top
+    label: 880 Hz の P (図6 の板へ)
+    pins: [P880, GND]
+  TO4:
+    type: device
+    at: bottom
+    label: 440 Hz の P (図6 の板へ)
+    pins: [P440, GND]
+  U2: dip8 @ e16 LM358
+  R1H: resistor a3 a7 91k
+  C2H: capacitor/ceramic b7 b17 10n
+  C1H: capacitor/ceramic d7 d18 10n
+  R2H: resistor c7 c10 2k
+  R3H: resistor c17 c22 330k
+  R1L: resistor j2 j6 75k
+  C2L: capacitor/ceramic i6 i16 22n
+  C1L: capacitor/ceramic g6 g17 22n
+  R2L: resistor h6 h9 2k
+  R3L: resistor h16 h21 300k
+wires:
+  - PS.+5V -- a16 red
+  - PS.GND -- -t1 black
+  - FROM.AF880 -- c3 white
+  - FROM.VB -- +t2 green
+  - FROM.GND -- -t3 black
+  - b18 -- b22 green
+  - a10 -- +t10 green
+  - a19 -- +t19 green
+  - TO8.P880 -- a17 orange
+  - TO8.GND -- -t25 black
+  - i17 -- i21 green
+  - j9 -- +b9 green
+  - j18 -- +b18 green
+  - j19 -- -b19 black
+  - TO4.P440 -- j16 orange
+  - TO4.GND -- -b25 black
+  - FROM.AF440 -- h2 white
+  - +t30 -- +b30 green
+  - -t30 -- -b30 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/03-detect-2.svg)
+
+- LM358 (U2) を `e16` に挿す。**溝の上側の PIN 5〜7 が 880 Hz、下側の PIN 1〜3 が 440 Hz** のフィルタになる。同じ形の配線を、上下で左右が 1 列ずれた位置に組む
+- **この板の上下の + レールは、5 V ではなく VB (約 2.5 V) につなぐ。** R2 の電源側と PIN 3・PIN 5 (+ 入力) が VB で、図 4 の板の VB を `+t2` に入れて、上下のレールを右端の線でつなぐ。5 V は PIN 8 だけに、1 本の線 (`a16`) で直接入れる
+- 図 4 の板の AF は、**2 本の線に分けて**入れる。880 Hz 側は `c3` (R1H の入口)、440 Hz 側は `h2` (R1L の入口) で、2 本の線は板の上で重ならない
+- R2 は 2 kΩ の半固定抵抗。図では抵抗の絵で描いたが、実物は半固定抵抗の中央の足と片方の足を使う
+- 440 Hz 側の P は `j16`、880 Hz 側の P は `a17` から図 6 の板へ
+
+### 図 6: 整流と平滑、比較器の板
+
+```bread
+title: 図6 整流と平滑、比較器の板 (LM393 1 個、上が 880 Hz・下が 440 Hz)
+board: half
+parts:
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
+  FROM8:
+    type: device
+    at: top
+    label: 図5 の板から (880 Hz の P と TH)
+    pins: [P880, TH, GND]
+  FROM4:
+    type: device
+    at: bottom
+    label: 図5 と 図4 の板から (440 Hz の P と TH)
+    pins: [P440, TH, GND]
+  T8:
+    type: device
+    at: top
+    label: T880 (04 の状態遷移へ)
+    pins: [T880]
+  T4:
+    type: device
+    at: bottom
+    label: T440 (04 の状態遷移へ)
+    pins: [T440]
+  U4: dip8 @ e16 LM393
+  D1H: diode d13(A) d19(K) 1N4148
+  CpH: capacitor/ceramic a19 -t19 1u
+  RpH: resistor a21 -t21 100k
+  RpuH: resistor a15 +t15 10k
+  D1L: diode g12(A) g18(K) 1N4148
+  CpL: capacitor/ceramic j18 -b18 1u
+  RpL: resistor j20 -b20 100k
+  RpuL: resistor j14 +b14 10k
+wires:
+  - PS.+5V -- +t1 red
+  - a16 -- +t16 red
+  - PS.GND -- -t1 black
+  - FROM8.P880 -- c13 orange
+  - FROM8.TH -- b18 purple
+  - FROM8.GND -- -t3 black
+  - FROM4.P440 -- h12 orange
+  - FROM4.TH -- i17 purple
+  - FROM4.GND -- -b3 black
+  - T8.T880 -- b17 white
+  - T4.T440 -- i16 white
+  - b19 -- b21 green
+  - c17 -- c15 white
+  - h16 -- h14 white
+  - i18 -- i20 green
+  - j19 -- -b19 black
+  - -t30 -- -b30 black
+  - +t30 -- +b30 red
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/03-detect-3.svg)
+
+- LM393 (U4) を `e16` に挿す。**上の PIN 5〜7 が 880 Hz、下の PIN 1〜3 が 440 Hz** の比較器になる。LM393 の足の名前は、図では番号で出る (図の道具が型番の足の名前の表に持たないため)
+- 440 Hz 側: P を D1 (`g12` のアノードから `g18` のカソード) へ入れる。C<sub>p</sub> (`j18` から − レール)、R<sub>p</sub> (`j20` から − レール。PIN 3 の列から `i18`〜`i20` の緑の線で渡す) が PIN 3 (+ 入力) の列にぶら下がる。TH は PIN 2 (`i17`)。T440 は PIN 1 の列の `i16` から出す。引き上げの 10 kΩ は、別の列に置く (`h16` から `h14` へ白い線で渡し、`j14` から + レールへ)。T440 の線と 10 kΩ が、穴も経路も重ならない
+- 880 Hz 側は上下を逆にして組む。P は `d13` のアノードから `d19` へ、TH は PIN 6 (`b18`)、T880 は PIN 7 の列の `b17`。引き上げの 10 kΩ は、`c17` から `c15` へ白い線で渡した 15 列 (`a15`) に置く。PIN 8 は `a16` から + レールへ
+- 板の電源は、上下の + レールが 5 V、− レールが GND (図 5 の板とは違う)
+
+### 実体配線図のまとめ
+
+- 3 枚で LM358 2 個 (U1 と U2、U3)、LM393 1 個を使う。**図 4 は LM358 の 1 個目 (U1・U2)、図 5 は LM358 の 2 個目 (U3A・U3B)**
+- 5 V と GND は 3 枚で共通にする。電源から出る電流は、LM358 2 個、LM393 1 個、分圧の抵抗の分で、合計 約 3 mA (見積り)
+- 板に載せる回路の周波数は、最も高い 880 Hz のフィルタでも板の目安 (3 MHz 以下) の範囲に収まる
+- 分割レールの板を使うときは、図の右端の線のほかに、中央をジャンパでまたぐ (この図ではレールを 1 本の通しとして描いている)
+
 ## 帯域通過フィルタの値 (計算値)
 
 MFB 帯域通過フィルタの式 (C1 = C2 = C) で決めて、抵抗を E24 に丸めた。LM358 の利得帯域幅 (約 1 MHz) を入れて計算し直しても、中心周波数のずれは 1 % 未満だった。実機では測っていない。
@@ -253,7 +458,7 @@ MFB 帯域通過フィルタの式 (C1 = C2 = C) で決めて、抵抗を E24 �
 | --- | --- | --- |
 | C (C1、C2) | 22 nF | 10 nF |
 | R1 | 75 kΩ | 91 kΩ |
-| R2 (R2a + R2b) | 470 Ω + 1 kΩ のトリマ (約 910 Ω に合わせる) | 同じ (約 1 kΩ に合わせる) |
+| R2 | 2 kΩ の半固定抵抗 (約 910 Ω に合わせる) | 2 kΩ の半固定抵抗 (約 1 kΩ に合わせる) |
 | R3 | 300 kΩ | 330 kΩ |
 | 中心周波数 | 約 440 Hz | 約 880 Hz |
 | Q (帯域は約 f<sub>0</sub> ÷ Q) | 約 9.1 (約 48 Hz) | 約 9.1 (約 97 Hz) |
@@ -262,7 +467,7 @@ MFB 帯域通過フィルタの式 (C1 = C2 = C) で決めて、抵抗を E24 �
 | 立ち上がりの時定数 | 約 7 ms | 約 3 ms |
 
 - 時報の 440 Hz と 880 Hz は 1 オクターブ離れているので、Q 約 9 で、反対の音は約 7 分の 1 に落ちる。しきい値は、この漏れ (0.13〜0.15 倍) より上に置く
-- **R2 は固定抵抗とトリマの直列にした。** 抵抗の誤差 (5 %) とコンデンサの誤差 (10 %) だけで、中心周波数が 390〜510 Hz (440 Hz 側) ほど動く計算になる。帯域は ±24 Hz ほどなので、そのままでは外れる。R2 を回して中心を合わせる
+- **R2 は半固定抵抗にした。** 抵抗の誤差 (5 %) とコンデンサの誤差 (10 %) だけで、中心周波数が 390〜510 Hz (440 Hz 側) ほど動く計算になる。帯域は ±24 Hz ほどなので、そのままでは外れる。R2 を回して中心を合わせる。計算では、R2 を 500 Ω〜2 kΩ に回すと、440 Hz 側の中心は約 593 Hz〜299 Hz、880 Hz 側は約 1242 Hz〜626 Hz と動き、目的の中心は半固定抵抗の真ん中あたりにくる
 
 ## 部品表
 
@@ -275,7 +480,7 @@ MFB 帯域通過フィルタの式 (C1 = C2 = C) で決めて、抵抗を E24 �
 | R<sub>f</sub>、R<sub>p</sub> (2 つ) | 100 kΩ | 帰還、平滑の放電 |
 | R6、R7 | 6.2 kΩ、5.6 kΩ | しきい値の分圧 |
 | VR1 | 2 kΩ の半固定抵抗 | しきい値 |
-| R2a (2 つ)、R2b (2 つ) | 470 Ω、1 kΩ の半固定抵抗 | 中心周波数の調整 |
+| R2 (2 つ) | 2 kΩ の半固定抵抗 | 中心周波数の調整 |
 | R1、R3 | 図 2、図 3 の値 | 1 % の金属皮膜が望ましい |
 | C<sub>in</sub>、C<sub>p</sub> (2 つ) | 1 µF | セラミックかフィルム |
 | C<sub>b</sub> | 10 µF 16 V | 電解。+ を VB 側に |
@@ -284,9 +489,7 @@ MFB 帯域通過フィルタの式 (C1 = C2 = C) で決めて、抵抗を E24 �
 ## 調整と注意
 
 1. **電源を入れて、VB が 2.5 V 前後か** (U2 の出力、PIN 7) をテスターで見る
-2. **中心周波数を合わせる**: AD3 の波形発生器から、440 Hz の正弦波 (50 mV 程度) を AFI に入れ、BPF の出力 (U3A の PIN 1) をオシロスコープで見て、R2b を回して振幅が最大になる点に合わせる。880 Hz 側も同じ
+2. **中心周波数を合わせる**: AD3 の波形発生器から、440 Hz の正弦波 (50 mV 程度) を AFI に入れ、BPF の出力 (U3A の PIN 1) をオシロスコープで見て、R2 を回して振幅が最大になる点に合わせる。880 Hz 側も同じ
 3. **しきい値を合わせる**: ラジオを NHK 第 1 に合わせ、時報の音がしないときに T440 と T880 が L のままで、時報の音のときに H になるよう、VR1 を回す。しきい値は、平滑した電圧の「音がないときの値」の少し上に置く
 4. 平滑した電圧の「音がないときの値」は、ダイオードの電圧降下のぶん、VB (2.5 V) より約 0.4〜0.5 V 低い (見積り)。しきい値の可変範囲 (約 2.0〜2.8 V) は、この値より上に収まるように決めた
 5. T440 が H になる長さは、約 0.1 秒の音で約 0.2 秒、T880 は音の長さ (約 1 秒) より長くなる (見積り)。次の [04-state-machine.md](04-state-machine.md) は、この 2 本の H / L を入力にする
-
-(実体配線図はこれから書く)
