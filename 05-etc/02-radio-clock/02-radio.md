@@ -190,6 +190,28 @@ wires:
   - d28 -- d29 white
   - OUT.OUT -- b28 white
   - OUT.GND -- -t30 black
+notes:
+  - arrow f7 e7 blue
+  - text f7 tiny blue bold right: 約 1.0 V
+  - arrow f10 e10 blue
+  - text f10 tiny blue bold right: 約 3.4 V
+  - arrow f13 e13 blue
+  - text f13 tiny blue bold right: 約 0.34 V
+  - arrow f19 e19 blue
+  - text f19 tiny blue bold right: 約 1.0 V
+  - arrow f21 e21 blue
+  - text f21 tiny blue bold right: 約 3.4 V
+  - arrow f23 e23 blue
+  - text f23 tiny blue bold right: 約 0.34 V
+  - arrow f27 e27 blue
+  - text f27 tiny blue bold right: 約 3 V
+  - circle c10 green
+  - text c11 small green left: CH2
+  - circle e27 orange
+  - text e28 small orange left: CH1
+  - circle -t15 ink
+  - text tiny blue: "青い数字は計算値 (hFE 200、無信号のとき)。電圧は GND から"
+  - text tiny ink: "オシロ (AD3): 橙の丸は CH1 (検波出力)、緑の丸は CH2 (Q1 のコレクタ)、黒い丸は GND"
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/02-radio.svg)
@@ -212,11 +234,105 @@ wires:
 | 27〜30 列 | D1 のカソード (`d27`)、C4 (`a27` から − レール)。27 列から 28 列へ白い線 (`c27`〜`c28`)、28 列から 29 列へ白い線 (`d28`〜`d29`) で渡し、R5 (`a29` から − レール) をつなぐ。**検波出力は 28 列の `b28` から、板の外の OUT へ白い線で出す。OUT の GND は黒い線で `-t30` へ** |
 
 - 線の色は、赤が + の電源、黒が GND だけ。黄は同調回路の上端 (バリコンの A とフェライトバーの TOP)、紫はフェライトバーのタップ、青はベース、緑はエミッタ、白は検波出力
+- 青い矢印と数字は、各節点の電圧の計算値 (回路図の値と同じ)。トランジスタの足 (B・C・E) と、検波の出力 (27 列) を指す。組んだら、テスターで GND との間を測って見比べる
 - 電解コンデンサ (CE1、CE2) は + をエミッタ側 (`a` 行側) に、− をレール側にする
 - 2SC1815 の足は、平らな面を手前にして左から E・C・B。図の B・C・E の並びは、平らな面を向こう側にしたときの順
 - フェライトバーのタップは、接地側から巻数の 6 分の 1 ほどの所から出す。コイルの両端 (TOP と GND) は、バリコンの A と B に並べてつなぐ。バリコンの A とフェライトバーの TOP は、同じ列の別の穴に挿して線を重ねない
 - 板に載せる回路の周波数は 540 kHz〜1.6 MHz で、板の目安の 3 MHz 以下に収まる。電源から出る電流は、計算で 2 つの Q の電流とバイアスの電流を合わせて約 1.6 mA (見積り)
 - 高周波の部分 (4〜29 列) の線は、できるだけ短く。長いと出力が入力へ回り込んで発振しやすい
+
+### オシロスコープで調べる場所
+
+**計器は Analog Discovery 3 (AD3) に決める。** 見たいのは 440 Hz の音声と 594 kHz の搬送波で、どちらも AD3 の範囲 (30 MHz まで) に入る。入力は 1 MΩ で、Q1 のコレクタ (2.2 kΩ) に当てても負荷がほとんど増えず、FFT の分解能 (最小 23 Hz) で 440 Hz 離れた側波も分けられる。tinySA Ultra は使わない。入力が 50 Ω で、高インピーダンスの節点に直接つなげない。通常モードが 100 kHz からなので、440 Hz の音声が見えない。分解能 (RBW) の最小も 200 Hz で、側波を分けにくい。
+
+Analog Discovery 3 のオシロスコープを使う。プローブの先を次の場所に当て、GND のクリップを黒い丸の − レール (15 列) につなぐ。
+
+| チャンネル | 場所 (図の丸) | 見えるもの |
+| --- | --- | --- |
+| CH1 (橙) | 27 列の `e27` (検波出力) | 約 3 V の直流に、放送の音声 (包絡線) が乗る |
+| CH2 (緑) | 10 列の `c10` (Q1 のコレクタ) | 約 3.4 V の直流に、594 kHz の AM 波が乗る。同調を合わせると振幅が大きくなる |
+| GND クリップ | 15 列の − レール | 基準 (0 V) |
+
+- 値は計算値の動作点 (図の青い数字) で、**波の大きさは受信した電波の強さで変わる** (測っていない)
+- CH2 のプローブは、高周波の部分に容量 (数 pF〜十数 pF) を足すので、同調が少しずれる。測るときだけ当て、離したら合わせ直す
+- 音声の周波数 (数 100 Hz〜数 kHz) と搬送波 (594 kHz) は大きく違うので、時間軸を変えて見る。CH1 は 1 ms/div、CH2 は 2 µs/div
+
+見えるはずの画面 (推測) を、scope フェンスで描いた。**波の大きさは仮の値で、実測ではない**。直流分 (CH1 は約 3 V、CH2 は約 3.4 V) は、画面の中央を波の中心にして描き、図の下の読み値 (Avg) に出る。AD3 では、波を見やすくするため、CH を AC 結合にするか、オフセットを合わせる。
+
+```scope
+title: 図3 CH1 検波出力 (時報の 440 Hz が出ているとき、推測)
+time: 1ms/div
+trigger: ch1 rising 3V
+ch1: sine 440Hz 50mV offset 3V
+measure: [vpp, freq, avg]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/02-radio-1.svg)
+
+- 時報の 440 Hz が出ているあいだ、検波出力に 440 Hz の正弦波 (周期 約 2.3 ms) が乗る。振幅は仮に 50 mV (100 mVpp)
+- 放送の音声は一定の高さではないので、普段の番組では、この形にはならない
+
+```scope
+title: 図4 CH2 Q1 のコレクタ (594 kHz の搬送波、推測)
+time: 2us/div
+trigger: ch2 rising 3.4V
+ch2: sine 594kHz 100mV offset 3.4V
+measure: [vpp, freq, avg]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/02-radio-2.svg)
+
+- 搬送波の周期は 約 1.68 µs なので、画面 (20 µs) に約 12 周期が入る。振幅は仮に 100 mV (200 mVpp)
+- 振幅は、音声の強さに合わせて、ゆっくり (数 ms の周期で) 大きくなったり小さくなったりする (AM 変調)。2 µs/div の画面では、この変化は見えない。時間軸を 1 ms/div にすると、搬送波が密に並んだ帯になり、帯の太さが音声に合わせて変わる
+
+### Analog Discovery 3 の FFT (スペクトル) で見る
+
+同じ 2 つの場所を、WaveForms の Spectrum (FFT) でも見られる。波形では見えない**搬送波と側波の高さ**が分かる。見えるはずの画面 (推測) を、spectrum フェンスで描いた。**振幅は仮の値 (CH1 は 50 mV、CH2 は 100 mV、変調度は 0.3) で、実測ではない。** 実測したら WaveForms の CSV を題のファイルの隣に置き、`data:` で重ねる。
+
+```spectrum
+title: 図5 CH1 検波出力のスペクトル (440 Hz の音声、推測)
+device: ad3
+sweep: 0-1kHz
+samples: 8192
+window: hann
+unit: dBV
+ref: -10dBV
+signal: sine 440Hz 50mV
+markers: [440Hz]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/spectrum/02-radio-1.svg)
+
+- 440 Hz に山が 1 本立つ。50 mV (peak) の正弦波は −29.03 dBV (読み値)。1 V (peak) の正弦波が −3.01 dBV にあたる
+- 検波出力の直流分 (約 3 V) は 0 Hz に大きな線として出る。見やすくするため、CH1 を AC 結合にして測る
+
+```spectrum
+title: 図6 CH2 Q1 のコレクタのスペクトル (搬送波と AM の側波、推測)
+device: ad3
+center: 594kHz
+span: 4kHz
+samples: 65536
+window: hann
+unit: dBV
+ref: -10dBV
+signal:
+  - sine 594kHz 100mV
+  - sine 593.56kHz 15mV
+  - sine 594.44kHz 15mV
+markers: [594kHz, 593.56kHz, 594.44kHz]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/spectrum/02-radio-2.svg)
+
+| マーカー | 周波数 | レベル (読み値) | 意味 |
+| --- | --- | --- | --- |
+| 1 | 約 594 kHz | −23.06 dBV | 搬送波 (100 mV) |
+| 2 | 約 593.56 kHz | −39.70 dBV | 下側の側波 (594 kHz − 440 Hz) |
+| 3 | 約 594.44 kHz | −39.49 dBV | 上側の側波 (594 kHz + 440 Hz) |
+
+- 側波は、搬送波から**音声の周波数 (440 Hz) だけ離れて**両側に出る。高さは、変調度 m = 0.3 のとき搬送波の m ÷ 2 = 0.15 倍で、**搬送波より約 16.5 dB 低い**
+- 音声が強いほど (変調度が大きいほど) 側波が高くなる。同調が合っていると、側波も同じように増幅される
+- FFT の分解能は、掃引の幅と標本数で決まる (図 5 は 0.3125 Hz、図 6 は 23.28 Hz)。440 Hz 離れた側波を分けるには、分解能が側波の間隔より十分細かいことが要る
 
 ## 動作
 
