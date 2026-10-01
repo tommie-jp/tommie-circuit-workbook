@@ -20,6 +20,8 @@ jobs:
           cache: npm
       # フェンスの道具は tommie-fence の Release の tgz (package.json の URL)。
       - run: npm ci
+      # ```plantuml のブロック図が描けるかを check が確かめる (pages.yml と同じ入れ方)。
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends plantuml graphviz fonts-noto-cjk
       - run: npm test
       - run: npm run lint
       # 置き場・front matter・フェンス名・フェンスの読めない行・目次の古さ。
