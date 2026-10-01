@@ -16,6 +16,7 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { ROOT, readEntries } from './collect.mjs';
 import { cliPath, fencesIn } from './fences.mjs';
+import { renderPlantuml } from './plantuml.mjs';
 
 function main(args) {
   const embedFonts = args.includes('--embed-fonts');
@@ -35,6 +36,16 @@ function main(args) {
   let failed = 0;
   for (const [out, items] of groups) {
     const { fence } = items[0];
+    if (fence === 'plantuml') {
+      for (const item of items) {
+        const error = renderPlantuml(item.path, out);
+        if (error !== null) {
+          failed += 1;
+          console.error(`--- ${out}\n${error}`);
+        }
+      }
+      continue;
+    }
     const run = spawnSync(
       process.execPath,
       [

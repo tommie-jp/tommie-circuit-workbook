@@ -32,6 +32,7 @@ const LABELS = {
   spectrum: 'スペクトラムアナライザの画面',
   graph: 'グラフ',
   logic: 'ロジックアナライザの画面',
+  plantuml: 'ブロック図',
 };
 
 /** このスクリプトが書いた画像の行。Pages の URL を指す画像だけの行。 */

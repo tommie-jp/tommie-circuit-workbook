@@ -1,14 +1,14 @@
 ---
-book: circuits
-chapter: 10
-id: 10-20
+book: etc
+chapter: 1
+id: 1-1
 title: 4 ビット CPU のようなもの — カウンタとメモリと命令
 tier: 200
 source: 自作
 board: BB
 ---
 
-# 10-20 4 ビット CPU のようなもの — カウンタとメモリと命令
+# 1-1 4 ビット CPU のようなもの — カウンタとメモリと命令
 
 4 ビットのカウンタ (74HC163) を**プログラムカウンタ (PC)** にして、その番地を
 ダイオードで作った小さな ROM (74HC154 + 1N4148) に送る。ROM が返す 8 ビットの語の
@@ -162,7 +162,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/20-cpu-like-1.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/01-cpu-like-1.svg)
 
 - U1 (74HC163) は**働きで足を並べた記号**で描いた。足の番号は名前の隣に添えてある
   (`03 A` は PIN 3 が A)。実物の DIP-16 の足の順とは違うので、組むときは PIN の番号で探す。
@@ -245,7 +245,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/20-cpu-like-2.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/01-cpu-like-2.svg)
 
 - U2 (74HC154) も働きで足を並べた記号で描いた。左が入力の A0〜A3 (PIN 23〜20)、
   右が出力の Y0〜Y15 (PIN 1〜11 が Y0〜Y10、PIN 13〜17 が Y11〜Y15)、下が GND (PIN 12) と
@@ -290,7 +290,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/20-cpu-like-3.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/01-cpu-like-3.svg)
 
 - A0〜A3 (U1 の PIN 14〜11) に、820 Ω と赤の LED を 1 つずつつなぐ。**74HC の出力の保証は 4 mA まで**
   (データシートの ±4 mA)。(5 − 1.9 V) ÷ 820 Ω ≒ **3.8 mA** で、この範囲に収まる
@@ -373,7 +373,7 @@ wires:
   - DN.P2 -- i14 white
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/20-cpu-like-1.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/01-cpu-like-1.svg)
 
 ```breadboard
 title: 図5 板 2 — メモリ (74HC154 とダイオード) と命令の線
@@ -425,7 +425,7 @@ wires:
   - c31 -- c33 gray
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/20-cpu-like-2.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/01-cpu-like-2.svg)
 
 - 電源 (AD3 の V+ 5V) は左上の AD3 から板 1 の上の + レール (1 列) へ、GND は上の − レール (2 列) へ入れる。
   板 1 の + レールと − レールを右の端 (28〜29 列) から板 2 へ渡す。**赤は +5V の線だけ、黒は GND の線だけ**に使った。
@@ -519,7 +519,7 @@ cursors: [5.25s, 6.25s]
 trigger: CLK rising at 0s
 ```
 
-![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/logic/20-cpu-like.svg)
+![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/logic/01-cpu-like.svg)
 
 ## 見るべき値
 
@@ -681,7 +681,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/20-cpu-like-4.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/01-cpu-like-4.svg)
 
 - 74HC154 の Y5 (PIN 6、アドレス 5 のとき L になる行) から、6 つのスイッチを通して 6 本の列につなぐ。
   列は図2 と同じ 10 kΩ のプルアップで H に引いてある。**スイッチを ON (閉) にした列だけが、アドレス 5 のとき L (0)** になる。
@@ -764,7 +764,7 @@ wires:
   - j31 -- -b31 black
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/20-cpu-like-3.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/01-cpu-like-3.svg)
 
 - U2 (74HC154) は図5 と同じ 3〜14 列 (幅 0.3 インチの品)。Y5 は PIN 6 (8 列の下) で、橙の線 (`i8` → `i21`) でスイッチの下の組へ渡す
 - SW1 は 21〜24 列、SW2 は 25〜28 列 (切り欠きが左)。n 番のスイッチが n 番目の列の上下をつなぐ。
@@ -895,7 +895,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/20-cpu-like-5.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/01-cpu-like-5.svg)
 
 - **図9 は SRAM 本体**。U3 (AS6C62256) は 28 ピン。左が番地 (PIN 10〜7 が A0〜A3)、右がデータ (DQ0〜DQ7)、
   下が VSS (PIN 14)・CE (PIN 20)・OE (PIN 22)・WE (PIN 27)、上が VCC (PIN 28)。番地の A4〜A14 は GND に、CE も GND に固定した
@@ -955,7 +955,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/20-cpu-like-6.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/01-cpu-like-6.svg)
 
 - **図10 は書き込みのバス**。U4 (74HC245、8 ビットのバストランシーバ) の A1〜A8 (PIN 2〜9) が、スイッチの SD0〜SD7 (図11)、
   B1〜B8 (PIN 18〜11) が DQ0〜DQ7 につながる。DIR (PIN 1) は +5V で、A から B へ向かう向きに固定した。
@@ -1040,7 +1040,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/20-cpu-like-7.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/01-cpu-like-7.svg)
 
 - **図11 は語を作るスイッチ**。SW1 (4 連) の 1〜4 番が SD0〜SD3、SW2 (4 連) の 1〜4 番が SD4〜SD7。
   SD0 = ENT、SD1 = CLR、SD2 = LDn、SD3 = P0、SD4 = P1、SD5 = P2 で、SD6・SD7 は使わない (DQ6・DQ7、書いても読んでも何も起きない)。
@@ -1094,7 +1094,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/20-cpu-like-8.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/01-cpu-like-8.svg)
 
 - **図12 は動作の切り替えと CLR**。S3 は SPDT のスライドスイッチで、共通の足が GND。RUN の側は OEn (SRAM の OE) を L にし、
   PROG の側は Yn (U4 の OE) を L にする。**どちらの側にも倒していない間 (切り替えの途中) は、OEn も Yn も R27・R28 で H になり、
@@ -1224,7 +1224,7 @@ wires:
   - j41 -- -b41 black
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/20-cpu-like-4.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/01-cpu-like-4.svg)
 
 - **U3 (AS6C62256) は 15〜28 列** (`@ d15`)、切り欠きが左。上の行 (d 行) に 28 番 (VCC、15 列) から 15 番 (DQ3、28 列) まで、
   下の行 (h 行) に 1 番 (A14、15 列) から 14 番 (VSS、28 列) まで並ぶ。足の番号は胴の縁、名前はそのすぐ内側に出る
@@ -1308,7 +1308,7 @@ wires:
   - BB.SD7 -- j16 yellow
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/20-cpu-like-5.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/01-cpu-like-5.svg)
 
 - **U4 (74HC245) は 8〜17 列** (`@ e8`)、切り欠きが左。上の行に 20 番 (VCC、8 列)、19 番 (OE = Yn、9 列)、18〜11 番 (B1〜B8、10〜17 列)、
   下の行に 1 番 (DIR、8 列)、2〜9 番 (A1〜A8、9〜16 列)、10 番 (GND、17 列) が並ぶ。VCC は `a8` から + レールへ、

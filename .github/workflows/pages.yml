@@ -25,6 +25,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # ```plantuml のブロック図を描く (日本語のフォントは図の寸法に要る)。
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends plantuml graphviz fonts-noto-cjk
       # circuit はフォントを埋め込む。埋め込まないと GitHub で Ω や µ が化ける。
       - run: npm run render -- --embed-fonts
       - run: node scripts/figures.mjs --verify out

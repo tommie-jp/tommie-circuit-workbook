@@ -21,6 +21,7 @@ import { duplicateIds } from './entry.mjs';
 import { FENCES, cliPath, fencesIn } from './fences.mjs';
 import { withFigures } from './figures.mjs';
 import { PLAN_FILE } from './plan.mjs';
+import { checkPlantuml } from './plantuml.mjs';
 import { mergedRows, plannedReadmes } from './toc.mjs';
 
 /** 古い題を言うときに名前まで出す数。全部の題が古いと 300 行を超える。 */
@@ -51,8 +52,13 @@ function main(args) {
     }
   }
 
+  for (const { path, message } of checkPlantuml(byFence.get('plantuml'))) {
+    console.error(`--- plantuml: ${path}\n${message}`);
+    problems.push(`${path}: plantuml フェンスが描けません (上の出力)`);
+  }
+
   for (const [fence, paths] of byFence) {
-    if (paths.length === 0) continue;
+    if (paths.length === 0 || fence === 'plantuml') continue;
     const run = runCheck(fence, paths);
     if (verbose && run.stdout.trim() !== '') console.log(`--- ${fence} (${paths.length})\n${run.stdout.trimEnd()}`);
     if (run.status === 0) {

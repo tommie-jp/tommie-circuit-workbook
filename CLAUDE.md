@@ -1,8 +1,8 @@
 # tommie-circuit-workbook
 
-回路・Analog Discovery・NanoVNA・電験三種の 4 冊の実験帳。本文は日本語、ライセンスは
+回路・Analog Discovery・NanoVNA・電験三種の 4 冊と番外の工作 (05-etc) の実験帳。本文は日本語、ライセンスは
 CC BY 4.0。回路図と実体配線図は tommie-fence のフェンス
-(` ```circuit ` / ` ```breadboard ` / ` ```perfboard `)、銅張り基板の寸法図は ` ```copper `、NanoVNA の画面は ` ```vna `、オシロスコープの画面は ` ```scope `、ロジックアナライザの画面は ` ```logic ` で書く。
+(` ```circuit ` / ` ```breadboard ` / ` ```perfboard `)、銅張り基板の寸法図は ` ```copper `、NanoVNA の画面は ` ```vna `、オシロスコープの画面は ` ```scope `、ロジックアナライザの画面は ` ```logic `、ブロック図は ` ```plantuml ` (PlantUML、`apt install plantuml graphviz`) で書く。
 
 ## 標準の計器・部品・言語
 

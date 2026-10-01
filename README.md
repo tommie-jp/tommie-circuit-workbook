@@ -1,10 +1,10 @@
 # tommie-circuit-workbook
 
 > [!WARNING]
-> この 4 冊は AI (Claude) が書いたもので、人間の専門家の校正を受けていない。
+> この本は AI (Claude) が書いたもので、人間の専門家の校正を受けていない。
 > 回路・数値・手順が間違っている可能性がある。組む前に自分で確かめてほしい。
 
-回路・Analog Discovery・NanoVNA・電験三種の 4 冊の実験帳。回路図と実体配線図は
+回路・Analog Discovery・NanoVNA・電験三種の 4 冊と番外の工作の実験帳。回路図と実体配線図は
 [tommie-fence](https://github.com/tommie-jp/tommie-fence) の Markdown フェンス
 (` ```circuit ` / ` ```breadboard ` / ` ```perfboard `)、銅張り基板の寸法図は ` ```copper `、NanoVNA の画面は ` ```vna `、オシロスコープの画面は ` ```scope `、ロジックアナライザの画面は ` ```logic `、
 周波数特性や特性曲線のグラフは ` ```graph ` で書く。
@@ -12,16 +12,17 @@
 標準の計器は Analog Discovery 3・LiteVNA64・tinySA Ultra ZS405、マイコンは Raspberry Pi Pico 2
 (プログラムは C / C++ が第 1、MicroPython が第 2 で併記)。一覧は [回路の教科書](01-circuits/README.md) にある。
 
-## 4 冊
+## 冊
 
 <!-- toc:start -->
 
 | 冊 | 内容 | 必須 | 入門 | 中級 | 済 |
 | --- | --- | --- | --- | --- | --- |
-| [回路の教科書](01-circuits/README.md) | 直流の基本から実用回路まで。回路図と実体配線図を並べて組む | 50 | 103 | 209 | 113 |
+| [回路の教科書](01-circuits/README.md) | 直流の基本から実用回路まで。回路図と実体配線図を並べて組む | 50 | 103 | 209 | 112 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | Analog Discovery 3 と WaveForms で DC〜10 MHz を測る | 50 | 100 | 200 | 100 |
 | [NanoVNA の教科書](03-nanovna/README.md) | LiteVNA64 で 50 kHz〜6.3 GHz を測る (NanoVNA-H4 / V2 は比較用)。治具・部品・フィルタ・アンテナ・GHz 帯。第 11 章でスペクトラムアナライザ (tinySA など) | 50 | 105 | 213 | 105 |
 | [電験三種の教科書](04-denken/README.md) | 理論・機械・電力・法規の範囲を、低い電圧の実験で測って式を確かめる | 50 | 100 | 200 | 100 |
+| [番外の工作](05-etc/README.md) | 4 冊の部品を組み合わせて作る工作。CPU もどき、中波ラジオの時報で動く時計 | 0 | 0 | 7 | 7 |
 
 <!-- toc:end -->
 

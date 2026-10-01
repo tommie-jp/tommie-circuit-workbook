@@ -1,5 +1,5 @@
 /**
- * 4 冊の冊と章の表。**ディレクトリ名・目次・front matter の検査がここを見る。**
+ * 冊と章の表。**ディレクトリ名・目次・front matter の検査がここを見る。**
  *
  * 冊のディレクトリも章のディレクトリも `NN-slug` (2 桁の番号 + 英語の短い名前)。
  * front matter には番号を書かず、冊は `book: <slug>`、章は `chapter: <番号>` で書く。
@@ -107,6 +107,17 @@ export const BOOKS = [
       [11, 'applications', '機械 — 照明・電熱・電気化学・制御・情報'],
       [12, 'power-systems', '電力 — 発電・送配電・蓄電'],
       [13, 'regulations', '法規 — 保安と施設管理'],
+    ],
+  },
+  {
+    number: 5,
+    slug: 'etc',
+    title: '番外の工作',
+    summary: '4 冊の部品を組み合わせて作る工作。CPU もどき、中波ラジオの時報で動く時計',
+    columns: ['board'],
+    chapters: [
+      [1, 'cpu', 'CPU もどき'],
+      [2, 'radio-clock', '中波ラジオの時報で動く時計'],
     ],
   },
 ].map((book) => ({

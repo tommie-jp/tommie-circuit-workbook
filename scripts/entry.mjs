@@ -28,6 +28,7 @@ const DEVICES = {
   'analog-discovery': { required: false, values: new Set(['AD2', 'AD3']) },
   nanovna: { required: true, values: new Set(['LV64', 'H4', 'V2', 'SA']) },
   denken: { required: false, values: new Set() },
+  etc: { required: false, values: new Set() },
 };
 
 const FILE_NAME = /^(\d{2})-[a-z0-9]+(?:-[a-z0-9]+)*\.md$/;
