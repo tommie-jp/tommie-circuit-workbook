@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, readEntries } from './collect.mjs';
@@ -31,6 +31,11 @@ function loadManifest() {
   } catch {
     return {};
   }
+}
+
+function saveManifest(manifest) {
+  mkdirSync(CACHE_DIR, { recursive: true });
+  writeFileSync(CACHE_FILE, JSON.stringify(manifest, null, 2));
 }
 
 export function figurePaths(path, blocks) {
@@ -104,7 +109,7 @@ function main(args) {
     writeFileSync(join(ROOT, read.path), nextText);
   }
 
-  writeFileSync(CACHE_FILE, JSON.stringify(manifest, null, 2));
+  saveManifest(manifest);
   console.log(`${reads.length} 題のうち ${stale.length} 題の画像の行を書き直した`);
 }
 
