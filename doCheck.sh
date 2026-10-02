@@ -23,6 +23,7 @@ Examples:
 Output:
   ログファイルは ./log/npm-run-check-YYYY-MM-DD-HHMM.log に保存されます。
   例: ./log/npm-run-check-2026-10-02-2325.log
+  24 時間以上古いログは自動削除されます。
 EOF
 }
 
@@ -51,6 +52,8 @@ while [[ $# -gt 0 ]]; do
 done
 
 mkdir -p ./log
+find ./log -type f -name 'npm-run-check-*.log' -mmin +1440 -delete
+
 TIMESTAMP=$(date "+%Y-%m-%d-%H%M")
 LOGFILE="./log/npm-run-check-${TIMESTAMP}.log"
 
