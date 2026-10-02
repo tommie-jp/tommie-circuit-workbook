@@ -1,20 +1,3 @@
-/**
- * 全部の題を検査する。CI と手元で同じものを回す。
- *
- *   1. 置き場と front matter と最初の見出し (`entry.mjs`)
- *   2. フェンス名の書き間違い (`fences.mjs`)
- *   3. フェンスを道具の `check` に掛ける (読めない行があれば落ちる)
- *   4. 計画 (`plan.yaml`) が読め、書いた題が計画と合っている (`plan.mjs`)
- *   5. 目次が計画と front matter と合っている (`toc.mjs --check` と同じ)
- *   6. GitHub で図を見せる画像の行が、フェンスの並びと合っている (`figures.mjs`)
- *
- *   node scripts/check.mjs            落ちた所だけ出す
- *   node scripts/check.mjs --verbose  ネットリストも出す (意図した回路と突き合わせる)
- *
- * **ERC (つながっていない足など) は落とさない。** 道具が終了コードを変えない
- * ものなので、ここでも出すだけにする。承知で残す未接続は本文に理由を書く。
- */
-
 import { spawnSync } from 'node:child_process';
 import { ROOT, readEntries } from './collect.mjs';
 import { duplicateIds } from './entry.mjs';
@@ -23,8 +6,8 @@ import { withFigures } from './figures.mjs';
 import { PLAN_FILE } from './plan.mjs';
 import { checkPlantuml } from './plantuml.mjs';
 import { mergedRows, plannedReadmes } from './toc.mjs';
+import { readFrontMatter, validateFrontMatter } from './validate-entry.mjs';
 
-/** 古い題を言うときに名前まで出す数。全部の題が古いと 300 行を超える。 */
 const SHOWN_PATHS = 5;
 
 const runCheck = (fence, paths) =>
@@ -36,8 +19,17 @@ function main(args) {
   const reads = readEntries();
 
   for (const read of reads) {
+    const { data, errors } = readFrontMatter(read.text);
+    if (data !== null) {
+      const frontMatterErrors = validateFrontMatter(data);
+      for (const error of frontMatterErrors) problems.push(`${read.path}: ${error}`);
+    } else {
+      for (const error of errors) problems.push(`${read.path}: ${error}`);
+    }
+
     for (const error of read.errors) problems.push(`${read.path}: ${error}`);
   }
+
   const validEntries = reads.filter((read) => read.entry !== null).map((read) => read.entry);
   for (const { book, id, paths } of duplicateIds(validEntries)) {
     problems.push(`${book} の id ${id} を ${paths.length} つのファイルが使っています: ${paths.join(', ')}`);
@@ -65,8 +57,6 @@ function main(args) {
       if (run.stderr.trim() !== '') console.error(`--- ${fence} の言うこと\n${run.stderr.trimEnd()}`);
       continue;
     }
-    // 道具はファイル名の末尾 (`01-led`) しか出さず、章をまたぐと見分けられない。
-    // 落ちたときだけ 1 つずつ回し直して、どのファイルかを置き場ごと言う。
     for (const path of paths) {
       const one = runCheck(fence, [path]);
       if (one.status === 0) continue;
