@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tommie-circuit-workbook topic front matter",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["book", "chapter", "id", "title", "tier", "source"],
+  "properties": {
+    "book": {
+      "type": "string",
+      "enum": ["circuits", "analog-discovery", "nanovna", "denken", "etc"]
+    },
+    "chapter": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 99
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9]+-[0-9]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tier": {
+      "type": "integer",
+      "enum": [50, 100, 200]
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "board": {
+      "oneOf": [
+        { "type": "string", "enum": ["BB", "PF", "CB", "—"] },
+        { "type": "array", "items": { "type": "string", "enum": ["BB", "PF", "CB", "—"] } }
+      ]
+    },
+    "device": {
+      "type": "string",
+      "enum": ["AD2", "AD3", "LV64", "H4", "V2", "SA"]
+    },
+    "tools": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["AD", "VNA", "SA", "scope", "logic"] }
+    },
+    "era": {
+      "type": "string",
+      "enum": ["古", "今", "古/今"]
+    }
+  }
+}
