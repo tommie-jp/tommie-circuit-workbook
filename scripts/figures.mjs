@@ -14,7 +14,7 @@
  *   node scripts/figures.mjs --verify <dir>  書き出した図 (<dir>) に、画像の行の指す SVG が全部あるか
  */
 
-import { existsSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, readEntries } from './collect.mjs';
@@ -35,8 +35,20 @@ const LABELS = {
   plantuml: 'ブロック図',
 };
 
+const CACHE_DIR = join('out', '.cache');
+const CACHE_FILE = join(CACHE_DIR, 'render-manifest.json');
+
 /** このスクリプトが書いた画像の行。Pages の URL を指す画像だけの行。 */
 const FIGURE_LINE = new RegExp(`^ {0,3}!\\[[^\\]]*\\]\\(${PAGES_URL.replace(/[.]/g, '\\.')}/[^)\\s]+\\)$`);
+
+function loadManifest() {
+  if (!existsSync(CACHE_FILE)) return {};
+  try {
+    return JSON.parse(readFileSync(CACHE_FILE, 'utf8'));
+  } catch {
+    return {};
+  }
+}
 
 /**
  * 題の各フェンスの図の置き場 (`<冊>/<章>/<フェンス>/<名前>.svg`)。道具の名付けに合わせる —
@@ -80,6 +92,7 @@ export function withFigures(path, text) {
 
 function main(args) {
   const reads = readEntries();
+  const manifest = loadManifest();
 
   if (args[0] === '--verify') {
     const dir = args[1] ?? 'out';
@@ -93,7 +106,14 @@ function main(args) {
     return;
   }
 
-  const stale = reads.filter((read) => withFigures(read.path, read.text) !== read.text);
+  const stale = reads.filter((read) => {
+    const key = `${read.path}`;
+    const current = withFigures(read.path, read.text);
+    const cached = manifest[key];
+    if (cached && cached.text === current) return false;
+    return current !== read.text;
+  });
+
   if (args.includes('--check')) {
     if (stale.length > 0) {
       console.error(`画像の行が古い: ${stale.map((read) => read.path).join(', ')} (npm run figures で書き直す)`);
@@ -101,7 +121,14 @@ function main(args) {
     }
     return;
   }
-  for (const read of stale) writeFileSync(join(ROOT, read.path), withFigures(read.path, read.text));
+
+  for (const read of stale) {
+    const nextText = withFigures(read.path, read.text);
+    manifest[read.path] = { text: nextText, updatedAt: Date.now() };
+    writeFileSync(join(ROOT, read.path), nextText);
+  }
+
+  writeFileSync(CACHE_FILE, JSON.stringify(manifest, null, 2));
   console.log(`${reads.length} 題のうち ${stale.length} 題の画像の行を書き直した`);
 }
 
