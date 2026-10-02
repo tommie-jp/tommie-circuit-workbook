@@ -3,7 +3,6 @@
 
 set -e
 
-# ヘルプ表示
 show_help() {
   cat << 'EOF'
 Usage: ./doCheck.sh [OPTIONS]
@@ -27,10 +26,8 @@ Output:
 EOF
 }
 
-# オプション解析
 LOG_FILE=true
 CONSOLE_OUTPUT=true
-
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -h|--help)
@@ -53,28 +50,46 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# ログディレクトリ作成
 mkdir -p ./log
-
-# ログファイル名（年-月-日-時分形式）
 TIMESTAMP=$(date "+%Y-%m-%d-%H%M")
 LOGFILE="./log/npm-run-check-${TIMESTAMP}.log"
 
-# npm run check を実行
+START_TIME=$(date "+%Y-%m-%d %H:%M:%S")
+COMMAND_NAME="npm run check"
+WORKDIR=$(pwd)
+
 if [ "$LOG_FILE" = true ] && [ "$CONSOLE_OUTPUT" = true ]; then
-  # ログと端末の両方に出力
-  npm run check 2>&1 | tee "$LOGFILE"
+  {
+    echo "=== start ==="
+    echo "started_at: $START_TIME"
+    echo "command: $COMMAND_NAME"
+    echo "workdir: $WORKDIR"
+    echo "=== command output ==="
+    npm run check
+  } 2>&1 | tee "$LOGFILE"
   EXIT_CODE=${PIPESTATUS[0]}
   echo ""
   echo "✓ ログファイルに保存されました: $LOGFILE"
 elif [ "$LOG_FILE" = true ]; then
-  # ログのみに出力
-  npm run check > "$LOGFILE" 2>&1
+  {
+    echo "=== start ==="
+    echo "started_at: $START_TIME"
+    echo "command: $COMMAND_NAME"
+    echo "workdir: $WORKDIR"
+    echo "=== command output ==="
+    npm run check
+  } > "$LOGFILE" 2>&1
   EXIT_CODE=$?
   echo "✓ ログファイルに保存されました: $LOGFILE"
 else
-  # 端末のみに出力
-  npm run check 2>&1
+  {
+    echo "=== start ==="
+    echo "started_at: $START_TIME"
+    echo "command: $COMMAND_NAME"
+    echo "workdir: $WORKDIR"
+    echo "=== command output ==="
+    npm run check
+  } 2>&1
   EXIT_CODE=$?
 fi
 
