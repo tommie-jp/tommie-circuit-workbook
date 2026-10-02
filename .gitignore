@@ -1,6 +1,111 @@
-node_modules/
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { ROOT, readEntries } from './collect.mjs';
+import { fencesIn } from './fences.mjs';
 
-# npm run render の書き出し先。図はフェンスの版で変わる生成物なのでコミットしない
-out/
+export const PAGES_URL = 'https://tommie-jp.github.io/tommie-circuit-workbook';
 
-.DS_Store
+const LABELS = {
+  circuit: '回路図',
+  breadboard: 'ブレッドボードの実体配線図',
+  perfboard: 'ユニバーサル基板の実体配線図',
+  copper: '銅張り基板の寸法図',
+  vna: 'NanoVNA の画面',
+  scope: 'オシロスコープの画面',
+  spectrum: 'スペクトラムアナライザの画面',
+  graph: 'グラフ',
+  logic: 'ロジックアナライザの画面',
+  plantuml: 'ブロック図',
+};
+
+const CACHE_DIR = join('out', '.cache');
+const CACHE_FILE = join(CACHE_DIR, 'render-manifest.json');
+
+const FIGURE_LINE = new RegExp(`^ {0,3}!\\[[^\\]]*\\]\\(${PAGES_URL.replace(/[.]/g, '\\.')}/[^)\\s]+\\)$`);
+
+function loadManifest() {
+  if (!existsSync(CACHE_FILE)) return {};
+  try {
+    return JSON.parse(readFileSync(CACHE_FILE, 'utf8'));
+  } catch {
+    return {};
+  }
+}
+
+export function figurePaths(path, blocks) {
+  const [book, chapter, file] = path.split('/');
+  const base = file.replace(/\.md$/, '');
+  const totals = new Map();
+  for (const { fence } of blocks) totals.set(fence, (totals.get(fence) ?? 0) + 1);
+  const seen = new Map();
+  return blocks.map(({ fence }) => {
+    const nth = (seen.get(fence) ?? 0) + 1;
+    seen.set(fence, nth);
+    const name = totals.get(fence) === 1 ? base : `${base}-${nth}`;
+    return `${book}/${chapter}/${fence}/${name}.svg`;
+  });
+}
+
+function withoutFigures(lines) {
+  return lines.filter((line, index) => {
+    if (FIGURE_LINE.test(line)) return false;
+    return !(line === '' && FIGURE_LINE.test(lines[index + 1] ?? ''));
+  });
+}
+
+export function withFigures(path, text) {
+  const lines = withoutFigures(text.split('\n'));
+  const { blocks } = fencesIn(lines.join('\n'));
+  const figures = figurePaths(path, blocks);
+  const after = new Map();
+  blocks.forEach((block, index) => {
+    if (block.close === null) return;
+    const indent = /^ */.exec(lines[block.open])[0];
+    after.set(block.close, `${indent}![${LABELS[block.fence]}](${PAGES_URL}/${figures[index]})`);
+  });
+  return lines.flatMap((line, index) => (after.has(index) ? [line, '', after.get(index)] : [line])).join('\n');
+}
+
+function main(args) {
+  const reads = readEntries();
+  const manifest = loadManifest();
+
+  if (args[0] === '--verify') {
+    const dir = args[1] ?? 'out';
+    const missing = reads.flatMap((read) => figurePaths(read.path, fencesIn(read.text).blocks))
+      .filter((figure) => !existsSync(join(ROOT, dir, figure)));
+    if (missing.length > 0) {
+      console.error(`${dir}/ に無い図が ${missing.length} 枚:\n${missing.map((figure) => `  ${figure}`).join('\n')}`);
+      process.exit(1);
+    }
+    console.log(`${dir}/ に画像の行の指す図が全部ある`);
+    return;
+  }
+
+  const stale = reads.filter((read) => {
+    const current = withFigures(read.path, read.text);
+    const cached = manifest[read.path];
+    if (cached && cached.text === current) return false;
+    return current !== read.text;
+  });
+
+  if (args.includes('--check')) {
+    if (stale.length > 0) {
+      console.error(`画像の行が古い: ${stale.map((read) => read.path).join(', ')} (npm run figures で書き直す)`);
+      process.exit(1);
+    }
+    return;
+  }
+
+  for (const read of stale) {
+    const nextText = withFigures(read.path, read.text);
+    manifest[read.path] = { text: nextText, updatedAt: Date.now() };
+    writeFileSync(join(ROOT, read.path), nextText);
+  }
+
+  writeFileSync(CACHE_FILE, JSON.stringify(manifest, null, 2));
+  console.log(`${reads.length} 題のうち ${stale.length} 題の画像の行を書き直した`);
+}
+
+if (import.meta.url === pathToFileURL(process.argv[1]).href) main(process.argv.slice(2));

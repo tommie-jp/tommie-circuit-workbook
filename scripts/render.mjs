@@ -1,60 +1,14 @@
-/**
- * 全部の題の図を SVG に書き出す。書き出し先は `out/` (コミットしない)。
- *
- *   out/<NN-冊>/<NN-章>/<フェンス>/<NN-題>.svg   (1 つのファイルに同じフェンスが 2 枚以上なら -2, -3 …)
- *
- * **フェンスごとに分ける。** 道具はどれも `<ファイル名>.svg` の名前で書くので、
- * 回路図と実体配線図を 1 つのディレクトリに書くと上書きし合う。
- *
- *   node scripts/render.mjs [冊のディレクトリ (01-circuits など) …] [--embed-fonts]   冊を省けば全部
- *
- * `--embed-fonts` は circuit の SVG に TeX のフォントを埋め込む (Pages に載せる図はこれで描く)。
- * 埋め込まないと、ブラウザや GitHub で開いたとき Ω や µ が化ける。
- */
-
-import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { join } from 'node:path';
 import { ROOT, readEntries } from './collect.mjs';
 import { cliPath, fencesIn } from './fences.mjs';
 import { renderPlantuml } from './plantuml.mjs';
-
-const CACHE_DIR = join('out', '.cache');
-const CACHE_FILE = join(CACHE_DIR, 'render-manifest.json');
-
-function hashText(text) {
-  return createHash('sha256').update(text).digest('hex');
-}
-
-function loadManifest() {
-  if (!existsSync(CACHE_FILE)) return {};
-  try {
-    return JSON.parse(readFileSync(CACHE_FILE, 'utf8'));
-  } catch {
-    return {};
-  }
-}
-
-function saveManifest(manifest) {
-  mkdirSync(CACHE_DIR, { recursive: true });
-  writeFileSync(CACHE_FILE, JSON.stringify(manifest, null, 2));
-}
-
-function groupHash(items) {
-  return items.map(({ path }) => {
-    const text = readFileSync(join(ROOT, path), 'utf8');
-    return `${path}:${hashText(text)}`;
-  }).join('\n');
-}
 
 function main(args) {
   const embedFonts = args.includes('--embed-fonts');
   const books = new Set(args.filter((arg) => !arg.startsWith('--')));
   const reads = readEntries().filter((read) => books.size === 0 || books.has(read.path.split('/')[0]));
-  const manifest = loadManifest();
 
-  /** 書き出し先ごとの題。`out/<冊>/<章>/<フェンス>` → パスの並び。 */
   const groups = new Map();
   for (const read of reads) {
     const [book, chapter] = read.path.split('/');
@@ -66,13 +20,6 @@ function main(args) {
 
   let failed = 0;
   for (const [out, items] of groups) {
-    const key = out;
-    const nextHash = hashText(groupHash(items));
-    const cached = manifest[key];
-    if (cached && cached.hash === nextHash) {
-      continue;
-    }
-
     const { fence } = items[0];
     if (fence === 'plantuml') {
       for (const item of items) {
@@ -82,7 +29,6 @@ function main(args) {
           console.error(`--- ${out}\n${error}`);
         }
       }
-      manifest[key] = { hash: nextHash, updatedAt: Date.now() };
       continue;
     }
     const run = spawnSync(
@@ -96,12 +42,8 @@ function main(args) {
     if (run.status !== 0) {
       failed += 1;
       console.error(`--- ${out}\n${run.stderr.trimEnd()}`);
-      continue;
     }
-    manifest[key] = { hash: nextHash, updatedAt: Date.now() };
   }
-
-  saveManifest(manifest);
 
   const pairs = [...groups.values()].reduce((sum, items) => sum + items.length, 0);
   console.log(`${reads.length} 題 (題 × フェンスで ${pairs} 組) の図を ${groups.size} か所に書き出した (out/)`);
