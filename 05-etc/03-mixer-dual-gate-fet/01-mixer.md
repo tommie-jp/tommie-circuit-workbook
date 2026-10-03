@@ -82,11 +82,7 @@ parts:
   C3:   capacitor b15 d15 560p
   C4:   capacitor d16 d18 10n
   R7:   resistor d19 f19 2k
-  FL1:
-    type: ic3
-    at: d21
-    label: 455kHz
-    pins: [IN, GND, OUT]
+  FL1: ceramic-filter d21 455kHz
   C5:   capacitor d23 f23 1.2n
   L2:   inductor d23 d25 100u
   IF:   port d27
@@ -212,7 +208,7 @@ parts:
   L1: inductor b36 b40 220u
   C4: capacitor/ceramic e36 e46 10n
   R7: resistor b46 b43 2k
-  FL1: ic3 d46(IN) d48(GND) d50(OUT)
+  FL1: sip3 @ d46 SFU455B
   C5: capacitor/ceramic e50 e54 1.2n
   L2: inductor b50 b56 100u
   R8: resistor d56 d60 51
@@ -324,7 +320,7 @@ parts:
   C7: capacitor/electrolytic k4 m4 10u
   L1: inductor b13 e13 220u
   L2: inductor l22 o22 100u
-  FL1: ic3 j20 j21 j22 455kHz
+  FL1: sip3 j20 SFU455B
   J1: sma/female-edge c1 b0 d0
   J2: sma/female-edge j1 i0 k0
   J3: sma/female-edge j24 i25 k25
