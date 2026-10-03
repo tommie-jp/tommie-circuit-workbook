@@ -105,14 +105,14 @@ wires:
   - j8 -- k8
   - m8 -- n8
   - n8 -- n10 |- U1.G1
-  - U1.D -- d11
+  - U1.D |- d11
   - d11 -- d13
   - d13 -- d15 -- d16
   - d18 -- d19 -- FL1.IN
   - FL1.OUT -- d23
   - d25 -- d27
   - FL1.GND -- e21
-  - U1.S -- h11
+  - U1.S |- h11
 notes:
   - text i1 small left: "LO IN 50Ω (0.985-2.055 MHz)"
   - text j1 small blue left: "+7 dBm (0.71 Vp / 1.4 Vpp)"
