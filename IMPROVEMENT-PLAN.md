@@ -3,6 +3,7 @@
 ## 概要
 
 tommie-circuit-workbook の保守性と開発速度向上のための 2 つの改善：
+
 1. **スキーマ定義と front matter 検証** — 新題の品質保証
 2. **rendering のキャッシュ化** — 開発速度向上（300+ 題の差分 render）
 
@@ -11,6 +12,7 @@ tommie-circuit-workbook の保守性と開発速度向上のための 2 つの�
 ## 1. スキーマ定義と front matter 検証
 
 ### 目標
+
 - front matter の構造を明確に定義
 - 新題・修正題で必須フィールドの落とし忘れを防止
 - `check.mjs` で型チェック、許可値チェックを実施
@@ -335,7 +337,7 @@ main(process.argv[2], process.argv[3], process.argv[4], process.argv[5]);
 ### 実装手順
 
 | Step | 作業 | 見積 | 依存 |
-|------|------|------|------|
+| ------ | ------ | ------ | ------ |
 | 1-A | `schemas/entry.schema.json` を作成 | 2h | なし |
 | 1-B | `ajv` を package.json に追加、`npm install` | 0.5h | 1-A |
 | 1-C | `scripts/validate-entry.mjs` を実装 | 1.5h | 1-B |
@@ -368,11 +370,13 @@ node scripts/validate-entry.mjs 01-circuits/01-basics/01-led.md
 ## 2. rendering のキャッシュ化
 
 ### 目標
+
 - フェンスの内容が変わらなければ SVG を再生成しない
 - 300+ 題のうち差分のみを render して時間短縮
 - GitHub Actions での Pages 生成時間を 5 分以内に抑える（現状で数分だが、フェンス増加時に悪化を防ぐ）
 
 ### 背景
+
 - `npm run render` は全フェンスを subprocess で処理（各フェンス道具を CLI で実行）
 - 現在、push 時に毎回全題を再計算
 - 新題追加が増えると処理時間が線形増加
@@ -381,7 +385,7 @@ node scripts/validate-entry.mjs 01-circuits/01-basics/01-led.md
 
 #### 2-1. `out/.cache/` — キャッシュディレクトリ構造
 
-```
+```text
 out/.cache/
   manifest.json          全題と hash のマニフェスト
   circuits/
@@ -624,7 +628,7 @@ function insertFigureLines(text, outFiles) {
 
 #### 2-5. `.gitignore` への追加
 
-```
+```text
 # キャッシュ（git に含めない）
 out/.cache/
 out/**/*.svg
@@ -635,7 +639,7 @@ out/**/*.png
 ### 実装手順
 
 | Step | 作業 | 見積 | 依存 |
-|------|------|------|------|
+| ------ | ------ | ------ | ------ |
 | 2-A | `scripts/fence-render.mjs` を実装（単一フェンス render） | 1.5h | なし |
 | 2-B | `scripts/render.mjs` を改造、キャッシュ logic を追加 | 2.5h | 2-A |
 | 2-C | マニフェスト format と load/save を実装 | 1h | 2-B |
@@ -678,7 +682,7 @@ git checkout 01-circuits/01-basics/01-led.md
 ## 統合スケジュール
 
 | Phase | 内容 | Duration | Start | End |
-|-------|------|----------|-------|-----|
+| ------- | ------ | ---------- | ------- | ----- |
 | **Phase 1** | スキーマ検証（1-A 〜 1-G） | 10h | Week 1 Mon | Week 1 Fri |
 | **Phase 2** | キャッシュ化（2-A 〜 2-I） | 12h | Week 2 Mon | Week 2 Fri |
 | **Phase 3** | 統合テスト・CI 更新 | 3h | Week 3 Mon | Week 3 Tue |
@@ -695,7 +699,7 @@ git checkout 01-circuits/01-basics/01-led.md
 ## リスク・mitigations
 
 | Risk | Impact | Mitigation |
-|------|--------|-----------|
+| ------ | -------- | ----------- |
 | スキーマが冊のニーズに合わない | 新題で検証エラーが多発 | schema の `allOf` で冊別条件を先に検証。trial run で 5 題ずつ確認 |
 | キャッシュの hash ズレ（内容が変わったのに見落とし） | SVG が古いまま Pages に載る | manifest に mtime も記録。スクリプト修正時は `--clear-cache` フラグで強制更新 |
 | 既存題の front matter が多数不正 | Phase 1 で大量の修正作業 | 最初に全題を scan、问题数を把握。多ければ自動修正 script を用意 |
@@ -715,7 +719,7 @@ git checkout 01-circuits/01-basics/01-led.md
 
 ## 参考：既存スクリプトの依存関係
 
-```
+```text
 check.mjs
   ├→ entry.mjs (front matter 解析)
   ├→ fences.mjs (フェンス名検証)
@@ -733,7 +737,7 @@ figures.mjs
 
 **新スクリプト追加後の依存：**
 
-```
+```text
 check.mjs
   ├→ entry.mjs
   ├→ fences.mjs
