@@ -38,7 +38,7 @@ GitHub では他の図と同じく画像の行 (Pages の SVG) で見せる。
 | 2-1 | [中波ラジオの時報を検出するブロック図](02-radio-clock/01-block.md) | 中級 | — |
 | 2-2 | [中波ラジオの受信と AM 検波 — 2SC1815 の高周波増幅 2 段](02-radio-clock/02-radio.md) | 中級 | BB / PF |
 | 2-3 | [時報音の検出 — 440 Hz と 880 Hz の帯域通過フィルタとしきい値比較](02-radio-clock/03-detect.md) | 中級 | BB / PF |
-| 2-4 | [時報の状態遷移 — 440 Hz を 3 回数えて 880 Hz で正時パルス](02-radio-clock/04-state-machine.md) | 中級 | BB |
+| 2-4 | [時報の状態遷移 — 440 Hz を 3 回数えて 880 Hz で正時パルス](02-radio-clock/04-state-machine.md) | 中級 | BB / PF |
 | 2-5 | [時計 — 32.768 kHz を数えて時分秒を出し、正時パルスで合わせる](02-radio-clock/05-clock.md) | 中級 | BB |
 | 2-6 | [マイコン版 — ① 受信のあとを Raspberry Pi Pico 2 の FFT とプログラムで作る](02-radio-clock/06-mcu.md) | 中級 | BB / PF |
 
