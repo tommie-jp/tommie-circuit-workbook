@@ -143,11 +143,75 @@ buses:
 cursors: [1.09375s, 3.21875s]
 ```
 
-![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/logic/04-state-machine.svg)
+![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/logic/04-state-machine-1.svg)
 
 - 1 回目の E440 (0.125〜0.25 秒) で ST が 1 になり、タイマが 0 から数え始める。2 回目、3 回目も同じ間隔 (タイマは 9 まで数えて次の E440) で進み、**ST が 3 になる (2.25 秒)**
 - カーソル X1 (1.094 秒) は、1 回目と 2 回目の E440 のあいだ (Timer 8、State 1)。X2 (3.219 秒) は、E880 のあいだ (Timer 9、State 3、OUT が H)
 - 880 Hz の E880 (3.125〜3.25 秒) が、ST = 3 のあいだ、窓の中 (タイマ 9) で来るので、**OUT に 1 クロック (0.125 秒) のパルスが出て、ST が 0 に戻る (3.25 秒)**
+
+### 順番が崩れたときの動き
+
+正しい時報のほかに、**パルスを出してはいけない場合**の動きも見る。いずれも計算で、実機の波形ではない。
+
+```logic
+title: 図2 440 Hz が 4 回続くと、4 回目で待機に戻り、正時パルスは出ない (計算)
+device: ad3
+window: 5s
+sample: 1kHz
+signals:
+  CLK: dio0 clock 8Hz
+  T440: dio1 edges 0s=0 40ms=1 240ms=0 1.04s=1 1.24s=0 2.04s=1 2.24s=0 3.04s=1 3.24s=0
+  T880: dio2 edges 0s=0 4.04s=1
+  TM: dio3..dio6 counter on CLK rising sequence 1 2 2 3 4 5 6 7 8 9 2 3 4 5 6 7 8 9 2 3 4 5 6 7 8 9 2 3 4 5 6 7 8 9 10 11 12 13 14 15 0
+  ST: dio7..dio8 counter on CLK rising sequence 0 0 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+  OUT: dio9 low
+buses:
+  Timer: TM3..TM0 dec
+  State: ST1..ST0 dec
+cursors: [3.1875s, 4.1875s]
+```
+
+![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/logic/04-state-machine-2.svg)
+
+| 見る所 | 読み値 | 意味 |
+| --- | --- | --- |
+| カーソル X1 (3.1875 秒) | Timer 9、State 3、T440 が H | 4 回目の 440 Hz が来ている。まだ S3 のまま |
+| State の変わり目 | 0 → 1 (0.25 秒)、2 (1.25 秒)、3 (2.25 秒)、0 (3.25 秒) | 4 回目の E440 の次のクロックで S0 に戻る |
+| カーソル X2 (4.1875 秒) | Timer 9、State 0、T880 が H、OUT 0 | 880 Hz が来たときは S0 なので、パルスは出ない |
+| OUT の変わり目 | 0 | 正時パルスは出ない |
+
+```logic
+title: 図3 2 回目の音が 1.5 秒後に遅れると、時間切れで戻り、数え直しになる (計算)
+device: ad3
+window: 4.5s
+sample: 1kHz
+signals:
+  CLK: dio0 clock 8Hz
+  T440: dio1 edges 0s=0 40ms=1 240ms=0 1.54s=1 1.74s=0 2.54s=1 2.74s=0
+  T880: dio2 edges 0s=0 3.54s=1 3.74s=0
+  TM: dio3..dio6 counter on CLK rising sequence 1 2 2 3 4 5 6 7 8 9 10 11 12 13 2 3 4 5 6 7 8 9 2 3 4 5 6 7 8 9 10 11 12 13 14 15 0
+  ST: dio7..dio8 counter on CLK rising sequence 0 0 1 1 1 1 1 1 1 1 1 1 0 0 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 0 0 0 0 0 0 0
+  OUT: dio9 low
+buses:
+  Timer: TM3..TM0 dec
+  State: ST1..ST0 dec
+cursors: [1.4375s, 3.6875s]
+```
+
+![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/logic/04-state-machine-3.svg)
+
+| 見る所 | 読み値 | 意味 |
+| --- | --- | --- |
+| カーソル X1 (1.4375 秒) | Timer 11、State 1 | 1 回目の音から 11 クロック待った。時間切れ (TO) の瞬間 |
+| State の変わり目 | 1 (0.25 秒)、0 (1.5 秒)、1 (1.75 秒)、2 (2.75 秒)、0 (3.75 秒) | 時間切れで S0 に戻り、遅れた音から S1 で数え直す |
+| カーソル X2 (3.6875 秒) | Timer 9、State 2、T880 が H、OUT 0 | 数え直しの途中 (S2) で 880 Hz が来たので、パルスは出ない |
+| OUT の変わり目 | 0 | 正時パルスは出ない |
+
+この 2 つの動きは、次の「数値シミュレーション」の 4 回の 440 Hz と間隔の長い音の行に対応する。
+
+**注意:** この計算は、T440 が約 0.2 秒 H になると置いている。[03-detect.md](03-detect.md) の計算では、
+約 0.1 秒の音で T440 が H になるのは約 0.11 秒で、8 Hz の標本化の周期 (0.125 秒) より短い。
+標本化の瞬間が H の外に当たると、音を取りこぼす。03 の R<sub>p</sub> や TH を見直して、H を 0.125 秒より十分長くしてから使う。
 
 ## 数値シミュレーション
 
@@ -183,7 +247,7 @@ cursors: [1.09375s, 3.21875s]
 ### ユニット 1: 同期とエッジ検出
 
 ```circuit
-title: 図2 同期とエッジ検出 (ユニット 1)
+title: 図4 同期とエッジ検出 (ユニット 1)
 parts:
   T440: port d2
   T880: port j2
@@ -277,7 +341,7 @@ style:
 ### ユニット 2: 間隔タイマと窓
 
 ```circuit
-title: 図3 間隔タイマと窓 (ユニット 2)
+title: 図5 間隔タイマと窓 (ユニット 2)
 parts:
   NE440: port a3
   CLK: port f3f0
@@ -342,14 +406,14 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/04-state-machine-2.svg)
 
-- 74HC163 (U9) は 4 ビットのカウンタ。LOAD は L のとき働く (NE440 を入れる)。**E440 のクロックの立ち上がりで、データ入力 (A = 1、B〜D = 0、つまり値 2) を読み込む**。ほかのときは 8 Hz を数える
+- 74HC163 (U9) は 4 ビットのカウンタ。LOAD は L のとき働く (NE440 を入れる)。**E440 のクロックの立ち上がりで、データ入力 (B = 1、A・C・D = 0、つまり値 2) を読み込む**。ほかのときは 8 Hz を数える
 - m = QA かつ QB (U10A)。k = QC も m も 0 (U11A)。**W = QD かつ k** (U10B)。数が 8、9、10 のとき W が H になる
 - **TO = m かつ QD** (U10C)。数が 11 になると H になる
 
 ### ユニット 3: 状態を動かす条件
 
 ```circuit
-title: 図4 状態を動かす条件 (ユニット 3)
+title: 図6 状態を動かす条件 (ユニット 3)
 parts:
   W: port a2
   QA: port b2
@@ -433,7 +497,7 @@ style:
 ### ユニット 4: 状態レジスタと出力
 
 ```circuit
-title: 図5 状態レジスタと出力 (ユニット 4)
+title: 図7 状態レジスタと出力 (ユニット 4)
 parts:
   LOADN: port a3
   CLRN: port b3
@@ -519,4 +583,395 @@ style:
 
 IC は全部で 13 個。ユニットごとに 4 個以内なので、フルサイズのブレッドボードか 5 × 7 cm のユニバーサル基板 1 枚に 1 ユニットを載せる。
 
-(実体配線図はこれから書く)
+## 実体配線図
+
+4 つのユニットを、フルサイズ (63 列) のブレッドボード 4 枚に 1 つずつ組む。**配線は、回路図 (図 4〜7) の足のつながりをそのまま板に写したもの**で、check のネットリストを回路図と突き合わせて確かめた。
+板の間は、同じ名前の端子どうしを線でつなぐ。電源 (5 V) と GND は 4 枚で共通にする。
+
+- 線の色は、赤が + だけ、黒が GND だけ、黄が CLK、橙が板の外とやりとりする信号、緑が板の中の信号。
+- 各 IC のそばに 0.1 µF を 1 個ずつ、上の + レールと − レールのあいだに入れる。
+- 使わないゲートの入力は、GND に落とす。74HC74 の使わない PRE と CLR (PIN 1、4、10、13) は +5V に上げる。どちらも、レールからの線で描いてある。
+- フルサイズの板は、レールが中央で切れていることがある。図の中央にあるレールの渡しの線 (赤と黒) は、そのためだ。
+- 74HC74、74HC86、74HC02 は、図の道具が足の名前の表を持たないので、足は番号だけで出る。足の名前は、各ユニットの回路図の PIN の番号と合わせて読む。
+- 配線は多い。読めない所は、check のネットリスト (`breadboard-fence check`) で、足ごとのつながりを確かめる。
+
+板の外とやりとりする端子は、次のとおり。上下の箱は、線の出る側を表す。
+
+| ユニット | 板 | 入力 | 出力 |
+| --- | --- | --- | --- |
+| 1 | 図 8 | T440、T880、CLK | E440、NE440、E880 |
+| 2 | 図 9 | NE440、CLK | W、TO |
+| 3 | 図 10 | W、QA、QB、NE440、E440、E880、TO、S3、PON | LOADN、EN、CLRN |
+| 4 | 図 11 | LOADN、CLRN、EN、CLK、E880、W | QA、QB、S3、OUT |
+
+### 図 8: ユニット 1 (同期とエッジ検出)
+
+```bread
+title: 図8 同期とエッジ検出の板 (ユニット 1)
+board: full
+parts:
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
+  LINKT:
+    type: device
+    at: top
+    label: 他のユニットへ (上)
+    pins: [CLK, T440, E440, NE440, E880]
+  LINKB:
+    type: device
+    at: bottom
+    label: 他のユニットへ (下)
+    pins: [CLK, T880]
+  U6: dip14 @ e3 l=74HC74
+  U7: dip14 @ e13 r180 74HC04
+  U8: dip14 @ e23 r180 74HC08
+  U5: dip14 @ e33 r180 l=74HC74
+  C1: capacitor/ceramic +t10 -t10 100n
+  C2: capacitor/ceramic +t20 -t20 100n
+  C3: capacitor/ceramic +t30 -t30 100n
+  C4: capacitor/ceramic +t40 -t40 100n
+wires:
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t1 black
+  - +t44 -- +b44 red
+  - -t44 -- -b44 black
+  - +t31 -- +t33 red
+  - -t31 -- -t33 black
+  - +b31 -- +b33 red
+  - -b31 -- -b33 black
+  - d32 -- g32 green
+  - d22 -- g22 green
+  - d12 -- g12 orange
+  - d30 -- g30 orange
+  - d11 -- g11 green
+  - d10 -- g10 green
+  - d31 -- g31 green
+  - a29 -- a32 green
+  - c32 -- c35 green
+  - i32 -- i37 green
+  - b19 -- b22 green
+  - h22 -- h34 green
+  - a18 -- a28 green
+  - a12 -- a15 orange
+  - j12 -- j30 orange
+  - b27 -- b30 orange
+  - c5 -- c11 green
+  - a10 -- a11 green
+  - i10 -- i31 green
+  - c26 -- c31 green
+  - j7 -- j11 green
+  - b8 -- b17 green
+  - c16 -- c25 green
+  - +t3 -- a3 red
+  - -b9 -- i9 black
+  - +b3 -- j3 red
+  - +b6 -- j6 red
+  - +t7 -- a7 red
+  - +t4 -- a4 red
+  - +b19 -- h19 red
+  - -t13 -- c13 black
+  - -b14 -- h14 black
+  - -b16 -- h16 black
+  - -b18 -- h18 black
+  - +b29 -- g29 red
+  - -t23 -- b23 black
+  - -b24 -- g24 black
+  - -b25 -- g25 black
+  - -b27 -- g27 black
+  - -b28 -- g28 black
+  - +b39 -- j39 red
+  - -t33 -- a33 black
+  - +t39 -- a39 red
+  - +t36 -- a36 red
+  - +b35 -- j35 red
+  - +b38 -- j38 red
+  - d41 -- g41 green
+  - d21 -- g21 green
+  - d20 -- g20 green
+  - d40 -- g40 green
+  - LINKT.CLK -- a37 yellow
+  - LINKB.CLK -- j36 yellow
+  - LINKB.CLK -- j5 yellow
+  - LINKT.CLK -- a6 yellow
+  - LINKT.T440 -- a38 orange
+  - LINKB.T880 -- j4 orange
+  - LINKT.E440 -- c15 orange
+  - LINKT.NE440 -- c14 orange
+  - LINKT.E880 -- b24 orange
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/04-state-machine-1.svg)
+
+- IC は 74HC74 が 2 個 (U5、U6)、74HC04 (U7)、74HC08 (U8)。CLK は 4 つのフリップフロップの CLK 足 (PIN 3、11) へ、箱の CLK から 1 本ずつ引く。
+
+### 図 9: ユニット 2 (間隔タイマと窓)
+
+```bread
+title: 図9 間隔タイマと窓の板 (ユニット 2)
+board: full
+parts:
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
+  LINKT:
+    type: device
+    at: top
+    label: 他のユニットへ (上)
+    pins: [NE440, W]
+  LINKB:
+    type: device
+    at: bottom
+    label: 他のユニットへ (下)
+    pins: [CLK, TO]
+  U11: dip14 @ e3 l=74HC02
+  U10: dip14 @ e16 r180 74HC08
+  U9: dip16 @ e29 74HC163
+  C1: capacitor/ceramic +t10 -t10 100n
+  C2: capacitor/ceramic +t23 -t23 100n
+  C3: capacitor/ceramic +t37 -t37 100n
+wires:
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t1 black
+  - +t44 -- +b44 red
+  - -t44 -- -b44 black
+  - +t31 -- +t33 red
+  - -t31 -- -t33 black
+  - +b31 -- +b33 red
+  - -b31 -- -b33 black
+  - d23 -- g23 green
+  - d28 -- g28 green
+  - d15 -- g15 green
+  - d14 -- g14 green
+  - d13 -- g13 green
+  - d37 -- g37 green
+  - d25 -- g25 green
+  - d12 -- g12 green
+  - c22 -- c31 green
+  - a21 -- a23 green
+  - i23 -- i28 green
+  - b28 -- b32 green
+  - a15 -- a20 green
+  - j4 -- j15 green
+  - i15 -- i17 green
+  - b13 -- b14 green
+  - h13 -- h37 green
+  - c33 -- c37 green
+  - i5 -- i14 green
+  - b19 -- b25 green
+  - a25 -- a34 green
+  - j18 -- j25 green
+  - c12 -- c18 green
+  - h3 -- h12 green
+  - +t3 -- a3 red
+  - -b9 -- g9 black
+  - -b7 -- g7 black
+  - -b8 -- g8 black
+  - -t9 -- a9 black
+  - -t8 -- a8 black
+  - -t6 -- a6 black
+  - -t5 -- a5 black
+  - +b22 -- i22 red
+  - -t16 -- b16 black
+  - -b20 -- i20 black
+  - -b21 -- i21 black
+  - +t29 -- d29 red
+  - -b36 -- j36 black
+  - +b29 -- j29 red
+  - -b31 -- j31 black
+  - +b32 -- j32 red
+  - -b33 -- j33 black
+  - -b34 -- j34 black
+  - +b35 -- j35 red
+  - +t35 -- a35 red
+  - d11 -- g11 green
+  - d24 -- g24 green
+  - d10 -- g10 green
+  - d27 -- g27 green
+  - d26 -- g26 green
+  - d39 -- g39 green
+  - d38 -- g38 green
+  - d40 -- g40 green
+  - LINKB.CLK -- j30 yellow
+  - LINKT.NE440 -- a36 orange
+  - LINKB.TO -- j16 orange
+  - LINKT.W -- b17 orange
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/04-state-machine-2.svg)
+
+- 74HC163 (U9) のデータ入力は、B (PIN 4) だけ +5V、A・C・D (PIN 3、5、6) は GND で、値 2 を読み込む。CLR (PIN 1)、ENP (PIN 7)、ENT (PIN 10) は +5V。
+
+### 図 10: ユニット 3 (状態を動かす条件)
+
+```bread
+title: 図10 状態を動かす条件の板 (ユニット 3)
+board: full
+parts:
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
+  LINKT:
+    type: device
+    at: top
+    label: 他のユニットへ (上)
+    pins: [W, QA, QB, NE440, E440, E880, TO, PON, LOADN, EN, CLRN]
+  LINKB:
+    type: device
+    at: bottom
+    label: 他のユニットへ (下)
+    pins: [S3]
+  U15: dip14 @ e3 r180 l=74HC02
+  U14: dip14 @ e13 r180 74HC32
+  U12: dip14 @ e23 r180 l=74HC86
+  U13: dip14 @ e33 r180 74HC08
+  C1: capacitor/ceramic +t10 -t10 100n
+  C2: capacitor/ceramic +t20 -t20 100n
+  C3: capacitor/ceramic +t30 -t30 100n
+  C4: capacitor/ceramic +t40 -t40 100n
+wires:
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t1 black
+  - +t44 -- +b44 red
+  - -t44 -- -b44 black
+  - +t31 -- +t33 red
+  - -t31 -- -t33 black
+  - +b31 -- +b33 red
+  - -b31 -- -b33 black
+  - d40 -- g40 orange
+  - d12 -- g12 green
+  - d10 -- g10 green
+  - b36 -- b40 orange
+  - j35 -- j40 orange
+  - a27 -- a38 green
+  - c18 -- c35 green
+  - d35 -- d37 green
+  - b12 -- b14 green
+  - h12 -- h14 green
+  - j15 -- j33 green
+  - a8 -- a10 green
+  - i10 -- i13 green
+  - +b9 -- j9 red
+  - -t3 -- a3 black
+  - -t5 -- a5 black
+  - -t4 -- a4 black
+  - -b3 -- j3 black
+  - -b4 -- j4 black
+  - -b6 -- j6 black
+  - -b7 -- j7 black
+  - +b19 -- i19 red
+  - -t13 -- a13 black
+  - -b17 -- i17 black
+  - -b18 -- i18 black
+  - +b29 -- i29 red
+  - -t23 -- a23 black
+  - -t26 -- a26 black
+  - -t25 -- a25 black
+  - -b24 -- i24 black
+  - -b25 -- i25 black
+  - -b27 -- i27 black
+  - -b28 -- i28 black
+  - +b39 -- i39 red
+  - -t33 -- b33 black
+  - -b37 -- i37 black
+  - -b38 -- i38 black
+  - d30 -- g30 orange
+  - d11 -- g11 green
+  - d20 -- g20 green
+  - LINKT.W -- a39 orange
+  - LINKT.QA -- b29 orange
+  - LINKT.QB -- b28 orange
+  - LINKT.NE440 -- a19 orange
+  - LINKT.E440 -- c36 orange
+  - LINKT.E880 -- a16 orange
+  - LINKT.TO -- a15 orange
+  - LINKB.S3 -- j34 orange
+  - LINKT.PON -- a7 orange
+  - LINKT.LOADN -- a17 orange
+  - LINKT.EN -- b34 orange
+  - LINKT.CLRN -- b9 orange
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/04-state-machine-3.svg)
+
+- IC は 74HC86 (U12)、74HC08 (U13)、74HC32 (U14)、74HC02 (U15)。入力が 9 本と出力が 3 本ある。入力は上の箱、S3 だけ下の箱から入れる。
+
+### 図 11: ユニット 4 (状態レジスタと出力)
+
+```bread
+title: 図11 状態レジスタと出力の板 (ユニット 4)
+board: full
+parts:
+  PS:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
+  LINKT:
+    type: device
+    at: top
+    label: 他のユニットへ (上)
+    pins: [CLK, CLRN, EN, S3, OUT]
+  LINKB:
+    type: device
+    at: bottom
+    label: 他のユニットへ (下)
+    pins: [LOADN, E880, W, QA, QB]
+  U16: dip16 @ e3 r180 74HC163
+  U17: dip14 @ e15 74HC08
+  C1: capacitor/ceramic +t11 -t11 100n
+  C2: capacitor/ceramic +t22 -t22 100n
+wires:
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t1 black
+  - +t27 -- +b27 red
+  - -t27 -- -b27 black
+  - +t30 -- +t32 red
+  - -t30 -- -t32 black
+  - +b30 -- +b32 red
+  - -b30 -- -b32 black
+  - d11 -- g11 orange
+  - d14 -- g14 orange
+  - d22 -- g22 green
+  - a4 -- a11 orange
+  - i4 -- i11 orange
+  - j8 -- j15 orange
+  - h7 -- h16 orange
+  - a14 -- a20 orange
+  - i14 -- i17 orange
+  - c19 -- c22 green
+  - i20 -- i22 green
+  - +b10 -- g10 red
+  - -t3 -- a3 black
+  - +t8 -- b8 red
+  - -t7 -- b7 black
+  - -t6 -- b6 black
+  - -t5 -- b5 black
+  - +t15 -- b15 red
+  - -b21 -- j21 black
+  - -t17 -- b17 black
+  - -t16 -- b16 black
+  - d12 -- g12 orange
+  - d23 -- g23 orange
+  - d13 -- g13 green
+  - LINKT.CLK -- b9 yellow
+  - LINKB.LOADN -- j3 orange
+  - LINKT.CLRN -- b10 orange
+  - LINKT.EN -- b4 orange
+  - LINKB.E880 -- j18 orange
+  - LINKB.W -- j19 orange
+  - LINKB.QA -- g8 orange
+  - LINKB.QB -- j16 orange
+  - LINKT.S3 -- b20 orange
+  - LINKT.OUT -- a21 orange
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/04-state-machine-4.svg)
+
+- 74HC163 (U16) のデータ入力は、A (PIN 3) だけ +5V、B〜D は GND で、値 1 を読み込む。ENP (PIN 7) と ENT (PIN 10) は、EN を 1 本の線で受ける。

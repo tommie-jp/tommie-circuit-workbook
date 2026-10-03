@@ -5,7 +5,7 @@ id: 2-2
 title: 中波ラジオの受信と AM 検波 — 2SC1815 の高周波増幅 2 段
 tier: 200
 source: 自作
-board: BB
+board: [BB, PF]
 ---
 
 # 2-2 中波ラジオの受信と AM 検波 — 2SC1815 の高周波増幅 2 段
@@ -216,6 +216,99 @@ notes:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/02-radio.svg)
 
+```perf
+title: 図2b 中波 AM 受信機のユニバーサル基板
+board: 7x5cm
+parts:
+  BAR:
+    type: device
+    at: s1
+    label: フェライトバー
+    pins: TAP GND TOP
+  VC1:
+    type: device
+    at: s6
+    label: バリコン 365pF
+    pins: A B
+  PS:
+    type: device
+    at: s23
+    label: 電源 5V
+    pins: GND +5V
+  OUT:
+    type: device
+    at: s19
+    label: 検波出力 OUT
+    pins: GND OUT
+  C1: capacitor/ceramic h1 h4 0.01u
+  R1: resistor b5 g5 82k
+  R2: resistor h5 q5 22k
+  Q1: transistor i7 h7 g7 2SC1815
+  Rc1: resistor b7 f7 2.2k
+  RE1: resistor j7 q7 470
+  CE1: capacitor/electrolytic j9 q9 100u
+  C2: capacitor/ceramic g9 g12 0.01u
+  R3: resistor b13 f13 82k
+  R4: resistor g13 q13 22k
+  Q2: transistor h15 g15 f15 2SC1815
+  Rc2: resistor b15 e15 2.2k
+  RE2: resistor i15 q15 470
+  CE2: capacitor/electrolytic i17 q17 100u
+  D1: diode f19 j19 1N60
+  C4: capacitor/ceramic j21 q21 0.01u
+  R5: resistor j23 q23 100k
+wires:
+  - BAR.TAP -- h1
+  - BAR.GND -- q2
+  - VC1.B -- q7
+  - PS.+5V -- b24 red
+  - b24 -- b15 red
+  - PS.GND -- q23 black
+  - OUT.GND -- q19 black
+  - OUT.OUT -- j20
+  - BAR.TOP -- VC1.A
+  - h4 -- h5
+  - g5 -- h5
+  - h5 -- h7
+  - f7 -- g7
+  - i7 -- j7
+  - j7 -- j9
+  - g7 -- g9
+  - b5 -- b7 red
+  - b7 -- b13 red
+  - b13 -- b15 red
+  - q2 -- q5 black
+  - q5 -- q7 black
+  - q7 -- q9 black
+  - q9 -- q11 black
+  - q11 -- q13 black
+  - q13 -- q15 black
+  - q15 -- q17 black
+  - q17 -- q19 black
+  - q19 -- q21 black
+  - q21 -- q23 black
+  - g12 -- g13
+  - f13 -- g13
+  - g13 -- g15
+  - e15 -- f15
+  - h15 -- i15
+  - i15 -- i17
+  - f15 -- f19
+  - j19 -- j20
+  - j20 -- j21
+  - j21 -- j23
+notes:
+  - mark j20 orange
+  - text k22 orange: CH1
+  - mark g7 green
+  - text f9 green: CH2
+  - mark q11 black
+```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/02-radio.svg)
+
+図2 はブレッドボード、図2b は同じ回路をユニバーサル基板に組む図。次の説明は図2 のもので、図2b は「ユニバーサル基板に組むとき」に書く。
+
 半分の大きさ (30 列) のブレッドボード 1 枚に収まる。電源の 5 V は左上から、上の赤いレール (+) と青いレール (−) の
 左端へ入れる。部品の電源側と GND 側の足は、それぞれのレールまで縦に 1 本で届く。
 
@@ -240,6 +333,38 @@ notes:
 - フェライトバーのタップは、接地側から巻数の 6 分の 1 ほどの所から出す。コイルの両端 (TOP と GND) は、バリコンの A と B に並べてつなぐ。バリコンの A とフェライトバーの TOP は、同じ列の別の穴に挿して線を重ねない
 - 板に載せる回路の周波数は 540 kHz〜1.6 MHz で、板の目安の 3 MHz 以下に収まる。電源から出る電流は、計算で 2 つの Q の電流とバイアスの電流を合わせて約 1.6 mA (見積り)
 - 高周波の部分 (4〜29 列) の線は、できるだけ短く。長いと出力が入力へ回り込んで発振しやすい
+
+### ユニバーサル基板に組むとき
+
+図2b は図2 と同じ回路で、ネットリストも同じ (check で突き合わせて、全部の節点が一致した)。ブレッドボードは接触が揺れやすく、
+高周波の 2 段は回り込みで発振しやすいので、組み上げて残したいときは半田付けで固定する。
+
+- 板は 5×7 cm (24 列 × 18 行を横に置く)。部品と線が収まる一番小さい在庫の板で、外周の 1 穴と電源の筋の行が残る。
+  厚みと基材は書いていないので 1.6 mm の FR-4 (両面スルーホール)
+- 図は部品面から見たもの。部品は表に挿し、線は裏で半田付けする。部品の足を線のつもりで曲げて届かせ、足で届かない所は被覆線で渡す
+- 電源の + は上の行 (`b`、赤) に 5 列から 24 列まで 1 本の筋で通し、GND は下の行 (`q`、黒) に 2 列から 23 列まで通す。各部品は、電源側の足を上、GND 側の足を下にして縦に立てる
+- 板の外の電源は右下。+5 V は右端の 24 列を真上へ上げて筋につなぎ、GND は 23 列で下の筋につなぐ
+- フェライトバーの TAP は 1 列を上へ上げて C1 の左足 (`h1`) に、GND は下の筋の左端 (`q2`) につなぐ。バリコンの B は `q7`。バリコンの A とフェライトバーの TOP は板に載せず、板の外で直接つなぐ (図2 と同じ)
+- 検波出力は 20 列を上へ上げて `j20` につなぐ。この線は下の GND の筋 (`q` 行) を渡るので、被覆線にする。OUT の GND は `q19` につなぐ
+- 線の交差は、このほかに無い。ベースの 4 つの足 (C1・R1・R2・Q) は `h5` に集め、短い線で隣の穴へつなぐ
+- 2SC1815 は足を曲げて、上から C・B・E の順に 3 つの穴 (`g`・`h`・`i` 行) へ挿す。向きは図2 の 2SC1815 と同じ (平らな面を手前にして左から E・C・B)
+- 電解コンデンサ (CE1、CE2) の + は上側 (エミッタ側)、− は下の GND の筋の側
+- 橙の丸 (`j20`) はオシロの CH1、緑の丸 (`g7`) は CH2、黒い丸 (`q11`) は GND のクリップ
+
+| 場所 | 挿すもの |
+| --- | --- |
+| `b` 行 | + の筋。R1 (`b5`)、Rc1 (`b7`)、R3 (`b13`)、Rc2 (`b15`) の上の足。電源は `b24` |
+| `q` 行 | GND の筋。R2 (`q5`)、RE1 (`q7`)、CE1 (`q9`)、R4 (`q13`)、RE2 (`q15`)、CE2 (`q17`)、C4 (`q21`)、R5 (`q23`) の下の足 |
+| 1〜4 列 | C1 (`h1`〜`h4`)。左の `h1` に TAP の線が来る |
+| 5 列 | R1 (`b5`〜`g5`)、R2 (`h5`〜`q5`)。`g5` と `h5` を短い線でつなぐ |
+| 7 列 | Rc1 (`b7`〜`f7`)、Q1 (`g7` が C、`h7` が B、`i7` が E)、RE1 (`j7`〜`q7`) |
+| 9〜12 列 | CE1 (`j9`〜`q9`)、C2 (`g9`〜`g12`) |
+| 13 列 | R3 (`b13`〜`f13`)、R4 (`g13`〜`q13`) |
+| 15 列 | Rc2 (`b15`〜`e15`)、Q2 (`f15` が C、`g15` が B、`h15` が E)、RE2 (`i15`〜`q15`) |
+| 17 列 | CE2 (`i17`〜`q17`) |
+| 19〜23 列 | D1 (`f19` が A、`j19` が K)、C4 (`j21`〜`q21`)、R5 (`j23`〜`q23`)。`j19`〜`j23` を線でつなぎ、検波出力を `j20` から出す |
+
+この図は、組んで確かめていない。電圧 5 V、電流は約 1.6 mA、周波数は 540 kHz〜1.6 MHz なので、ユニバーサル基板の範囲 (12 V 以下、500 mA 以下、10 MHz 以下) に収まる。
 
 ### オシロスコープで調べる場所
 
