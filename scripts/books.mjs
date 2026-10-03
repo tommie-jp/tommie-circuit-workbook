@@ -113,11 +113,12 @@ export const BOOKS = [
     number: 5,
     slug: 'etc',
     title: '番外の工作',
-    summary: '4 冊の部品を組み合わせて作る工作。CPU もどき、中波ラジオの時報で動く時計',
+    summary: '4 冊の部品を組み合わせて作る工作。CPU もどき、中波ラジオの時報で動く時計、デュアルゲート FET ミキサー',
     columns: ['board'],
     chapters: [
       [1, 'cpu', 'CPU もどき'],
       [2, 'radio-clock', '中波ラジオの時報で動く時計'],
+      [3, 'mixer-dual-gate-fet', 'デュアルゲート FET ミキサー'],
     ],
   },
 ].map((book) => ({

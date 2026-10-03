@@ -1,0 +1,46 @@
+* 3SK291 dual-gate mixer (stand-in model)
+.options reltol=1e-4 abstol=1e-10 vntol=1e-7 gmin=1e-12
+VDD vdd 0 5
+C6 vdd 0 100n
+C7 vdd 0 10u
+L1 vdd d1 220u
+RL1 d1 d 5
+C3 vdd d 560p
+R4 vdd g2 33000.0
+R5 g2 0 13000.0
+R2 vdd g1 1000000.0
+R6 g1 0 330000.0
+R3 lo 0 51
+C2 lo g2 10n
+R1 rf 0 51
+C1 rf g1 10n
+.model NE NMOS (LEVEL=1 VTO=0.4 KP=0.0337 LAMBDA=0.03 CGSO=1.9p CGDO=0.016p)
+.model NE2 NMOS (LEVEL=1 VTO=0.4 KP=0.06 LAMBDA=0.03 CGSO=1.5p CGDO=0.3p)
+M1 mid g1 0 0 NE
+M2 d g2 mid 0 NE2
+C4 d fin 10n
+Rleak fin 0 1G
+R7 fin 0 2k
+* 455k ceramic filter equivalent (3rd-order BPF, 1.5k, BW~12k, finite Q)
+Ls1 fin a 19.9m
+Cs1 a b1 6.15p
+Rs1 b1 n1 38
+Cp1 n1 0 17.7n
+Lp1 n1 0 6.9u
+Ls2 n1 c 19.9m
+Cs2 c e1 6.15p
+Rs2 e1 fout 38
+C5 fout 0 1.2n
+L2 fout o2 100u
+RL2 o2 out 2
+Rload out 0 50
+Vlo los 0 SIN(0 1.4166 1.455e6)
+Rlo los lo 50
+Vrf rfs 0 SIN(0 0.02 1e6)
+Rrf rfs rf 50
+
+
+* --- LTspice 用 (この 2 行を有効にして .tran を走らせる。ngspice では main2.py が制御する) ---
+*.tran 0 1.4m 0 25n
+*.ac dec 100 10k 10Meg   ; AC は Vrf を AC 1 にして別に走らせる
+.end
