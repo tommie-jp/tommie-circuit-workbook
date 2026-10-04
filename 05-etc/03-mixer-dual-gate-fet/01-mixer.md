@@ -301,7 +301,7 @@ parts:
   U1: dip4 f12 3SK291
   R1: resistor e7 e10 51
   R2: resistor e6 b6 1M
-  R3: resistor h3 h6 51
+  R3: resistor g3 g6 51
   R4: resistor i16 f16 33k
   R5: resistor n14 q14 13k
   R6: resistor i8 l8 150k
@@ -334,8 +334,8 @@ wires:
   - k3 -- k4 red
   - k2 -- k3 red
   - d0 -- d1 black
-  - d1 -- h1 black
-  - h1 -- i1 black
+  - d1 -- g1 black
+  - g1 -- i1 black
   - i0 -- i1 black
   - k0 -- k1 black
   - k1 -- m1 black
@@ -344,7 +344,7 @@ wires:
   - m2 -- m4 black
   - m4 -- m6 black
   - m6 -- q6 black
-  - h1 -- h3 black
+  - g1 -- g3 black
   - q6 -- q11 black
   - q11 -- q14 black
   - q14 -- q21 black
@@ -361,9 +361,8 @@ wires:
   - h21 -- j21 black
   - j21 -- q21 black
   - j23 -- q23 black
-  - c1 -- c4 white
-  - c4 -- g4 white
-  - g4 -- g7 white
+  - c1 -- c7 white
+  - c7 -- e7 white
   - g7 -- e7 white
   - g10 -- i10 white
   - i10 -- i8 white
@@ -382,7 +381,7 @@ wires:
   - i16 -- m16 white
   - b16 -- f16 yellow
   - j1 -- j6 white
-  - j6 -- h6 white
+  - j6 -- g6 white
   - j6 -- k6 white
   - k6 -- k7 white
   - k7 -- m7 white
@@ -407,15 +406,15 @@ style:
 5×7 cm に収めるために、次のようにした。
 
 - 端面実装の SMA は胴が板の外へ出るので、板の中の穴は中心導体の 1 穴 (J1 は c1、J2 は j1、J3 は j24) だけ。先端は縁の銅箔 (0 列と 25 列) に半田付けする
-- 抵抗・コンデンサ・インダクタは足を 3 穴間隔 (差が 3) にした (L2 は縦。R3 は h 行に横に置く。C6・C7 は USB-C の基板のすぐ上に縦に置き、2 穴間隔で k 行 (VDD) と m 行 (GND) にまたがる)
+- 抵抗・コンデンサ・インダクタは足を 3 穴間隔 (差が 3) にした (L2 は縦。R3 は g 行に横に置く。C6・C7 は USB-C の基板のすぐ上に縦に置き、2 穴間隔で k 行 (VDD) と m 行 (GND) にまたがる)
 - USB-C (J4) の変換基板は 14.5 x 9.2 x 3.2 mm の品を想定する。図の胴は幅 9.2 mm (約 3.6 穴) で 2〜5 列に、長さは 5 穴に詰めて n 行から下に描かれる。**足は基板の後ろの縁の四角いパッド 4 つ (n2〜n5) で、線はパッドへつなぐ。図ではパッドの真ん中から線が出るのが部品面からも見える。胴の上には部品も線も置かない** (m 行の GND の筋は胴のすぐ上を通る)。足の書き順は変換基板のパッドの並び GND D+ D- VBUS で、4 本とも書くので `J4: usb-c/female n2 n3 n4 n5` と書く。左端が GND (n2)、右端が VBUS (n5)、間の D+ (n3)・D- (n4) は使わない。基板の刷り字は VBUS を `V` と縮めてあり、パッドの下に出る
 - GND の筋は Q 行の q6〜q24。左の GND は m 行 (m1〜m6) から 6 列を下って q6 へ、右は 25 列を下って q25 → q24
-- 跨ぎは数えていない。VBUS の線 (2 列と 5 列) を RF・LO の線と h 行・m 行の GND の線が渡る
+- 跨ぎは数えていない。VBUS の線 (2 列と 5 列) を RF・LO の線と g 行・m 行の GND の線が渡る
 - U1 は dip4 のまま (向きを変えていない)。前の版は perf_5x7_edge_v5.md に残した
 
 - USB-C (J4) は左下の隅。VBUS のパッド (n5) から 5 列を k 行まで上って C7 の + (k4)・C6 (k2) へ渡り、2 列を b 行の電源 + の筋へ。GND のパッド (n2) から m2 へ上がって m 行の GND の筋へ。D+ (n3)・D- (n4) はどこにもつながない。CC1・CC2 の 5.1 kΩ は、変換基板に内蔵のもの (電源取り出し用の基板) を使う前提で、図には描かない。変換基板は 14.5 x 9.2 x 3.2 mm の品を想定 (図は縦 5 穴に詰める)
 - J1 (RF 入力) は左上の b〜d 行 (先端 b0・d0、中心 c1)。J2 (LO 入力) は左の中央。J3 (IF 出力) は右の中央。入口の 51 Ω (R1・R3) は SMA の中心から。IF は L2 から J3 の中心 (j24) へ。計器側が 50 Ω の負荷
-- 左端の縁の銅箔の GND は 1 列に出し (d1〜i1、k1〜m1)、m 行へ通した。R3 の GND の足 (h3) は h1 から
+- 左端の縁の銅箔の GND は 1 列に出し (d1〜i1、k1〜m1)、m 行へ通した。R3 の GND の足 (g3) は g1 から
 - C5 の GND の足 (j23) は 23 列を真下に通って q23 へ (IF の線が被覆線で渡る)
 - 半田付けの順は、電源と GND の筋 → 抵抗・インダクタ・コンデンサ → VR1 → FL1 → C6・C7 → U1 の変換基板 → J1〜J4
 - FL1 の足: 1 = IN (j20)、2 = GND (j21)、3 = OUT (j22)。VR1: 1 = A (k10、中点)、2 = W (k11)、3 = B (k12)。W は GND (11 列の線)、B は W と線でつなぐ
@@ -426,7 +425,7 @@ style:
 | U1 | 3SK291 (dip4) | アンカー f12: S f12、D f13、G1 i12、G2 i13 |
 | R1 | 51 | e7 (RF) / e10 (GND) |
 | R2 | 1M | e6 (G1) / b6 (VDD) |
-| R3 | 51 | h6 (LO) / h3 (GND) |
+| R3 | 51 | g6 (LO) / g3 (GND) |
 | R4 | 33k | i16 (G2) / f16 (VDD) |
 | R5 | 13k | n14 (G2) / q14 (GND) |
 | R6 | 150k | i8 (G1) / l8 (中点) |
