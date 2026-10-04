@@ -33,7 +33,7 @@ parts:
   C1: capacitor c5 e5 l=$C_x$
   DMM:
     type: device
-    at: g9
+    at: c7
     label: "DMM (C)"
     pins: ["+", "-"]
 wires:

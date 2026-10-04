@@ -107,7 +107,7 @@ wires:
 共振の画面は 1 kHz の画面より CH2 を 2.5 倍に拡げてある。高さではなく位相と Measure の数を見る。
 
 ```scope
-title: 図3 理想のコイルの共振 (1.59 kHz) — 電流 (CH2、20 mV/div) は 0.21 mA で電圧と同相
+title: 図3 理想のコイルの共振 (1.59 kHz) — 電流 (CH2) は 0.21 mA で電圧と同相
 time: 200us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1.59kHz 1V, range: 500mV/div}

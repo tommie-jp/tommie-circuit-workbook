@@ -39,7 +39,7 @@ parts:
     at: e5
     label: A1324
     pins: [VCC, GND, VOUT]
-  VCC: vcc b3
+  VCC: vcc b3 5V
   C1: capacitor c1 g1 100n
   M1: voltmeter e7 h7 l=$\mathrm{CH1}$
   G1: ground h3
