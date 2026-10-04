@@ -124,7 +124,7 @@ parts:
     pins: [A, B]
   L1: inductor/axial b8 b12 250u
   C1: capacitor/ceramic d8 d14 0.01u
-  Q1: transistor j14(B) j18(C) j22(E) 2SC1815
+  Q1: transistor j14(B) j15(C) j16(E) 2SC1815
   Rf: resistor b14 b19 470k
   Rc: resistor d18 d15 1.5k
   D1: diode a18(A) a24(K) 1N60
@@ -132,7 +132,7 @@ parts:
   C3: capacitor/ceramic b24 b28 0.001u
   R3: resistor d24 d28 100k
   Rb: resistor h14 h18 180k
-  L2: inductor/axial g18 g21 1m
+  L2: inductor/axial i18 i21 1m
   C5: capacitor/ceramic f21 f24 0.1u
   C6: capacitor/ceramic h24 h28 0.001u
 wires:
@@ -144,8 +144,9 @@ wires:
   - e18 -- f18 blue
   - +t15 -- a15 red
   - a28 -- -t28 black
-  - i22 -- i23 black
-  - j23 -- -b23 black
+  - g15 -- g18 blue
+  - f16 -- f17 black
+  - j17 -- -b17 black
   - EAR.A -- j24 green
   - EAR.B -- -b29 black
   - j28 -- -b28 black
@@ -156,10 +157,13 @@ wires:
 
 - 上の赤レール = +5V (USB や電池)、青レール = GND。30 列で上下の − レールを渡している
 - 前段は 9-3 と同じく、8 列にアンテナ・VC1・L1・C1 をまとめる
-- Q1 は下のブロックの j 行 (14 列 B・18 列 C・22 列 E)。ベース (14 列) とコレクタ (18 列) は
-  e–f の短い線で上のブロックへも出し、足の多いネットを上下に分ける
+- Q1 は下のブロックの j 行に、隣り合う 3 列 (14 列 B・15 列 C・16 列 E) へ挿す。足を大きく曲げずに挿せる間隔。
+  2SC1815 は平らな面を手前にすると左から E・C・B なので、平らな面を上のブロック側へ向けて挿すと左から B・C・E になる
+- ベース (14 列) は e–f の短い線で上のブロックへも出す。コレクタ (15 列) は g 行の青い線で 18 列へ渡し、
+  18 列から e–f の線で上のブロックへ出す。足の多いネットを上下に分けるため
+- エミッタ (16 列) は f 行の短い線で 17 列へ渡し、17 列から下の − レールへ
 - レフレックスの帰還は D1 のカソード (24 列) → Cf → 19 列 → Rf → ベース (14 列)。
-  コレクタ (g18) から L2 で 21 列へ、C5 で EAR の A 端子 (24 列、下) へ。C6 が残った高周波を GND へ逃がす
+  コレクタ (i18) から L2 で 21 列へ、C5 で EAR の A 端子 (24 列、下) へ。C6 が残った高周波を GND へ逃がす
 - 1 つの穴には足か線を 1 本だけ挿す
 
 ## 見るべき値

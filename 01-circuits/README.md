@@ -333,7 +333,7 @@
 | --- | --- | --- | --- | --- |
 | 9-1 | [LC 同調 — 共振を LED で見る](09-rf/01-lc-resonance.md) | 必須 | | BB |
 | 9-2 | [ゲルマラジオ](09-rf/02-crystal-radio.md) | 必須 | 古 | BB |
-| 9-3 | [1 石ラジオ (トランジスタ検波)](09-rf/03-one-transistor-radio.md) | 必須 | 古 | BB |
+| 9-3 | [1 石ラジオ — トランジスタの高周波増幅とダイオード検波](09-rf/03-one-transistor-radio.md) | 必須 | 古 | BB |
 | 9-4 | [FM 送信機 (1 石)](09-rf/04-fm-transmitter.md) | 必須 | 古 | CB |
 | 9-5 | [1 石レフレックスラジオ](09-rf/05-reflex-radio.md) | 入門 | 古 | BB |
 | 9-6 | [超再生 FM ラジオ](09-rf/06-superregen-fm.md) | 入門 | 古 | CB |

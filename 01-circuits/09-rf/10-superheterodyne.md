@@ -25,7 +25,7 @@ IF は局によらず同じなので、455kHz に固定した同調 (IFT、中�
 - 回路図は信号の順に 3 枚 (図1 周波数変換、図2 中間周波増幅と検波、図3 低周波増幅)
 - 図1 のあとに、2 連バリコンで局発を追従させる「トラッキング」と、スーパー特有の混信「イメージ周波数」を説明する
 - 実体配線図も同じ 3 枚の板に分ける (図4〜図6)
-- Analog Discovery の W1 で作った AM 信号を入れ、tinySA で Q1 のコレクタのスペクトル (図7)、オシロで検波の前後 (図8) を見る
+- Analog Discovery の W1 で作った AM 信号を入れ、同じ Analog Discovery の Spectrum で Q1 のコレクタのスペクトル (図7)、オシロで検波の前後 (図8) を見る
 
 ## 回路図
 
@@ -530,7 +530,7 @@ parts:
   Rb2: resistor b4 b2 22k
   D3: diode a9(A) a5(K) 1N4148
   D2: diode c13(A) c9(K) 1N4148
-  R7: resistor j13 +b13 680
+  R7: resistor b13 b17 680
   Q4: transistor g4(B) g5(C) g6(E) 2SC1815
   Re4: resistor j6 j9 100
   Q5: transistor g13(B) g14(C) g15(E) 2SC2120
@@ -547,6 +547,7 @@ wires:
   - -b9 -- i9 black
   - e13 -- f13 orange
   - +b14 -- j14 red
+  - +t17 -- a17 red
   - d5 -- d21 orange [v10]
   - e21 -- f21 orange
   - -b22 -- j22 black
@@ -564,13 +565,14 @@ wires:
 - Q4 (g4〜g6)・Q5 (g13〜g15)・Q6 (g21〜g23) は下のブロック、バイアスとダイオードは上のブロック
 - 4 列がベース (C1 の +・Rb2・e4–f4)。Rf (a19〜a23) は c19–a4 の線でベースへ戻る
 - Q4 のコレクタ (5 列) は e5–f5 で上へ渡して D3 のカソード (a5) へ、d5–d21 で Q6 のベース (21 列) へ
-- D3 のアノードと D2 のカソードが 9 列、D2 のアノードが 13 列で、e13–f13 で Q5 のベースへ。R7 (j13 から + レール) がここへ電流を流す
+- D3 のアノードと D2 のカソードが 9 列、D2 のアノードが 13 列で、e13–f13 で Q5 のベースへ。R7 (b13〜b17。17 列は a17 から上の + レールへ) がここへ電流を流す
 - Q5 のエミッタ (15 列) と Q6 のエミッタ (23 列) を j15–j23 でつなぎ、e23–f23 で上の 23 列 (中点) へ。C2 (b23〜b27) からスピーカーへ
 
 ## 計器の設定
 
-Analog Discovery (W1・CH1・CH2) と、スペクトラムアナライザ (tinySA Ultra) を使う。
-W1 は放送の代わりの AM 信号、オシロは検波の前後の波形 (図8)、tinySA は Q1 のコレクタに並ぶ RF・LO・IF・和のスペクトル (図7) に使う。
+Analog Discovery (W1・CH1・CH2) だけを使う。
+W1 は放送の代わりの AM 信号、オシロは検波の前後の波形 (図8)、Spectrum (WaveForms のスペクトル表示) は Q1 のコレクタに並ぶ RF・LO・IF・和のスペクトル (図7) に使う。
+見る周波数は 3MHz までなので、この本の決め (10MHz 以下は Analog Discovery、それより上は tinySA) どおり Analog Discovery で足りる。
 
 | 項目 | 設定 |
 | --- | --- |
@@ -580,30 +582,33 @@ W1 は放送の代わりの AM 信号、オシロは検波の前後の波形 (�
 | CH2 (Scope) | IFT3 の 2 次 (D1 の手前)。500mV/div、DC 結合 |
 | CH1 (Scope) | 検波出力 (VR の上)。100mV/div、DC 結合 |
 | 時間軸・トリガ | 200µs/div、CH1 の立ち上がり 0.4V |
-| tinySA のつなぎ方 | Q1 のコレクタから 10kΩ と 0.01µF を直列に通して入力 (50Ω) へ (9-7 と同じ)。入力に届くのはコレクタの約 1/200 |
-| tinySA の掃引 | 開始 100kHz・終了 3MHz、450 点、RBW 3kHz、REF −30dBm |
+| Spectrum のつなぎ方 | CH2 を Q1 のコレクタへ移す。10kΩ と 0.01µF を直列に通し、CH2 の入力 (2+ と 2−) の間に 51Ω を入れる。入力に届くのはコレクタの約 1/200 |
+| Spectrum の設定 | 0〜3MHz、8192 標本 (分解能 約 0.9kHz)、窓 Flat Top、縦軸 dBm (50Ω)、Top −30dBm |
 
-- 9-7 と同じく、tinySA の入力へ直につながない。プローブや tinySA を局発のタンク (T2・VC1b) に当てると、
-  その容量で局発の周波数がずれる
+- CH2 をコレクタへ直につながない。入力 (1MΩ) と線の容量 (数十 pF) が IFT1 の同調容量に足され、同調がずれる。
+  10kΩ で切り離し、51Ω で入力の容量を効かなくする (tinySA なら入力の 50Ω が同じ役をする)。
+  プローブを局発のタンク (T2・VC1b) に当てると、その容量で局発の周波数がずれる
 
 ## 計器の画面
 
-### スペクトラムアナライザで見る
+### Analog Discovery の Spectrum で見る
 
 レベルは目安。Q1 のコレクタで IF 50mV、LO 300mV、RF 2.3mV、和 2mV (いずれも peak) と置き、
-10kΩ + 50Ω の分圧 (1/201) をかけた値。IF と LO の周波数は計算で決まる。
+10kΩ + 51Ω の分圧 (約 1/197) をかけた値。IF と LO の周波数は計算で決まる。
 
 ```spectrum
 title: 図7 Q1 のコレクタ 受信 1000kHz のとき
-device: tinysa-ultra
-sweep: 100k-3M 450
-rbw: 3kHz
+device: ad3
+sweep: 0-3MHz
+samples: 8192
+window: flattop
+unit: dBm
 ref: -30dBm
 signal:
-  - sine 455kHz -62.1dBm
-  - sine 1000kHz -88.9dBm
-  - sine 1455kHz -46.5dBm
-  - sine 2455kHz -90.0dBm
+  - sine 455kHz -61.9dBm
+  - sine 1000kHz -88.7dBm
+  - sine 1455kHz -46.4dBm
+  - sine 2455kHz -89.9dBm
 markers: [455k, 1000k, 1455k, 2455k]
 ```
 

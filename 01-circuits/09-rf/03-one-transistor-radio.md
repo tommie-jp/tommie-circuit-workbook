@@ -2,14 +2,14 @@
 book: circuits
 chapter: 9
 id: 9-3
-title: 1 石ラジオ (トランジスタ検波)
+title: 1 石ラジオ — トランジスタの高周波増幅とダイオード検波
 tier: 50
 source: 自作
 board: BB
 era: 古
 ---
 
-# 9-3 1 石ラジオ (トランジスタ検波)
+# 9-3 1 石ラジオ — トランジスタの高周波増幅とダイオード検波
 
 ゲルマラジオ (9-2) の同調タンクはそのままに、**検波の前にトランジスタ 1 石で高周波を
 増幅**する。検波はダイオード D1 が受け持ち、D1 には直流のバイアス電流をあらかじめ流しておく。
@@ -85,55 +85,66 @@ wires:
 title: 図2 ブレッドボードに組む
 board: half
 parts:
-  VC1:
+  PWR:
     type: device
     at: top
-    label: ポリバリコン 260pF
-    pins: [E, A]
+    label: 電源 5V
+    pins: [+5V, GND]
   ANT:
     type: device
     at: top
     label: アンテナ
     pins: ["1"]
+  VC1:
+    type: device
+    at: top
+    label: ポリバリコン 260pF
+    pins: [A, E]
   EAR:
     type: device
     at: bottom
     label: クリスタルイヤホン
     pins: [A, B]
-  L1: inductor/axial b8 b12 250u
-  C1: capacitor/ceramic d8 d14 0.01u
-  Q1: transistor j14(B) j18(C) j22(E) 2SC1815
-  Rb: resistor h14 h18 220k
-  Rc: resistor d18 d15 1.5k
-  D1: diode a18(A) a24(K) 1N60
-  C3: capacitor/ceramic b24 b28 0.001u
-  R3: resistor d24 d28 100k
+  L1: inductor/axial b12 b16 250u
+  C1: capacitor/ceramic d12 d18 0.01u
+  Rb: resistor b18 b22 220k
+  Rc: resistor c22 c26 1.5k
+  Q1: transistor h18(B) h19(C) h20(E) 2SC1815
+  D1: diode e22(A) f22(K) 1N60
+  C3: capacitor/ceramic g22 g26 0.001u
+  R3: resistor i22 i26 100k
 wires:
-  - ANT.1 -- c8 yellow
-  - VC1.A -- a8 yellow
-  - VC1.E -- -t6 black
-  - a12 -- -t12 black
-  - e14 -- f14 orange
-  - e18 -- f18 blue
-  - +t15 -- a15 red
-  - i22 -- i23 black
-  - j23 -- -b23 black
-  - e24 -- f24 green
-  - EAR.A -- j24 green
-  - EAR.B -- -b29 black
-  - a28 -- -t28 black
+  - PWR.+5V -- +t1 red
+  - PWR.GND -- -t2 black
+  - VC1.E -- -t14 black
+  - VC1.A -- a12 yellow
+  - ANT.1 -- c12 yellow
+  - a16 -- -t16 black
+  - e18 -- f18 orange
+  - f19 -- e19 blue
+  - a19 -- a22 blue
+  - +t26 -- a26 red
+  - j20 -- -b20 black
+  - j26 -- -b26 black
+  - EAR.A -- j22 green
+  - EAR.B -- -b28 black
   - -t30 -- -b30 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/03-one-transistor-radio.svg)
 
-- 上の赤レール = +5V (USB や電池)、青レール = GND。30 列で上下の − レールを渡している
-- 前段は 8 列にアンテナ・VC1・L1・C1 をまとめる。L1 の右足 (12 列) は上の − レールへ
-- Q1 は下のブロックの j 行 (14 列 B・18 列 C・22 列 E)。ベース (14 列) とコレクタ (18 列) は
-  e–f の短い線で上のブロックへも出し、足の多いネットを上下に分ける。
-  Rb はベースとコレクタの間 (h 行)、Rc はコレクタと 15 列 (+5V) の間
-- D1 のアノードはコレクタ (a18)、カソード (a24) が検波出力。24 列に C3・R3 の左足が並び、
-  e–f の線で下へ出して EAR の A 端子 (j24) へ。C3・R3 の右足 (28 列) と EAR の B 端子は GND へ
+- 電源 (5V。USB の 5V や電池) は左上から上のレールへ入れる。上の赤レール = +5V、青レール = GND。
+  30 列で上下の − レールを渡している
+- 前段は 12 列にアンテナ・VC1・L1・C1 をまとめる。L1 の右足 (16 列) は上の − レールへ
+- Q1 は下のブロックの h 行に、隣り合う 3 列 (18 列 B・19 列 C・20 列 E) へ挿す。足を大きく
+  曲げずに挿せる間隔。2SC1815 は平らな面を手前にすると左から E・C・B なので、
+  平らな面を上のブロック側へ向けて挿すと左から B・C・E になる。エミッタ (20 列) は下の − レールへ
+- ベース (18 列) は e–f の短い線で上のブロックの 18 列へ出し、C1 と Rb の左足をそこに挿す。
+  コレクタ (19 列) も e–f の線で上の 19 列へ出し、a 行の青い線で 22 列へ渡す。
+  22 列に Rb の右足・Rc・D1 が集まる。B と C が隣り合うので、Rb をじかに渡さずに 22 列を使う
+- Rc の右足 (26 列) は上の + レールへ。D1 は 22 列で溝をまたぎ、アノードが上 (コレクタ)、
+  カソードが下 (検波出力)。下の 22 列に C3・R3 の左足と EAR の A 端子が並ぶ。
+  C3・R3 の右足 (26 列) と EAR の B 端子は下の − レールへ
 - 1 つの穴には足か線を 1 本だけ挿す
 
 ## 見るべき値

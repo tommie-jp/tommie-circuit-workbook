@@ -136,8 +136,8 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
-    pins: [V+, GND, W1, 2+, 2-, 1-, 1+]
+    label: Analog Discovery (電源・W1)
+    pins: [GND, V+, W1]
   VC1:
     type: device
     at: top
@@ -147,68 +147,81 @@ parts:
     type: device
     at: top
     label: バーアンテナ (1 次 P・2 次 S)
-    pins: [P1, P2, S1, S2]
+    pins: [P1, S1, P2, S2]
+  ADM:
+    type: device
+    at: bottom
+    label: Analog Discovery (CH2・CH1)
+    pins: [2+, 2-, 1-, 1+]
   EAR:
     type: device
     at: bottom
     label: クリスタルイヤホン
     pins: [A, B]
-  CT: capacitor/ceramic b4 b7 10p
-  C1: capacitor/ceramic d10 d13 0.01u
-  Rb1: resistor b13 b17 220k
-  Q1: transistor e13(B) e17(C) e21(E) 2SC1815
-  Rc1: resistor a17 +t17 1.5k
-  D1: diode c17(A) c24(K) 1N60
-  R3: resistor a24 -t24 4.7k
-  C3: capacitor/ceramic b24 b28 2200p
-  C4: capacitor/film d24 d30 1u
-  Q2: transistor e30(B) e31(C) e32(E) 2SC1815
-  Rb2: resistor c30 c36 470k
-  Rc2: resistor a31 +t31 4.7k
+  CT: capacitor/ceramic b16 b19 10p
+  C1: capacitor/ceramic d22 d25 0.01u
+  Rb1: resistor b25 b29 220k
+  Q1: transistor e25(B) e29(C) e33(E) 2SC1815
+  Rc1: resistor a29 +t29 1.5k
+  D1: diode c29(A) c41(K) 1N60
+  R3: resistor a41 -t41 4.7k
+  C3: capacitor/ceramic b41 b45 2200p
+  C4: capacitor/film d41 d47 1u
+  Q2: transistor e47(B) e48(C) e49(E) 2SC1815
+  Rb2: resistor c47 c53 470k
+  Rc2: resistor a48 +t48 4.7k
 wires:
-  - AD.V+ -- +t25 red
-  - AD.GND -- -t27 black
-  - AD.W1 -- a4 yellow
-  - VC1.E -- -t6 black
-  - VC1.A -- a7 yellow
-  - BAR.P1 -- c7 yellow
-  - BAR.P2 -- -t8 black
-  - BAR.S1 -- a10 yellow
-  - BAR.S2 -- -t11 black
-  - AD.2+ -- a13 blue
-  - AD.2- -- -t14 black
-  - a21 -- -t21 black
-  - a28 -- -t28 black
-  - a32 -- -t32 black
-  - b31 -- b36 orange
-  - AD.1+ -- a36 orange
-  - AD.1- -- -t38 black
-  - e36 -- f36 green
-  - EAR.A -- j36 green
-  - EAR.B -- -b38 black
+  - AD.V+ -- +t3 red
+  - AD.GND -- -t1 black
+  - AD.W1 -- a16 yellow
+  - VC1.E -- -t17 black
+  - VC1.A -- a19 yellow
+  - BAR.P1 -- c19 yellow
+  - BAR.P2 -- -t37 black
+  - BAR.S1 -- a22 yellow
+  - BAR.S2 -- -t39 black
+  - e22 -- f22 blue
+  - ADM.2+ -- j22 blue
+  - ADM.2- -- -b24 black
+  - a33 -- -t33 black
+  - a45 -- -t45 black
+  - a49 -- -t49 black
+  - b48 -- b53 orange
+  - e53 -- f53 green
+  - ADM.1+ -- i53 orange
+  - ADM.1- -- -b40 black
+  - EAR.A -- j53 green
+  - EAR.B -- -b55 black
+  - +t30 -- +t32 red
+  - -t30 -- -t32 black
+  - -b30 -- -b32 black
   - -t61 -- -b61 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/09-two-transistor-radio.svg)
 
 フルサイズ (63 列) のブレッドボードに、左から同調 → 高周波増幅 → 検波 → 低周波増幅の順に並べる。
+Analog Discovery は 1 台だが、線が交わらないよう図では箱を 2 つに分けた。上の箱が電源と W1、下の箱がオシロの CH2・CH1。
 上の赤レール = +5V (AD の V+、赤)、上の青レール = GND (AD の GND、黒)。61 列の黒い線で下の − レールへ渡す。
+フルサイズの板には、電源レールが中央 (31 列と 32 列の間) で左右に切れている品がある。
+30〜32 列の短い線 (+ は赤、− は黒) で、上の + と −、下の − の切れ目を渡しておく (切れていない板でも害は無い)。
 
-- **同調 (4〜10 列)**: W1 (黄) を `a4` に挿し、C<sub>T</sub> (b4–b7) を通して 7 列へ。
-  7 列にポリバリコンの A 端子 (`a7`) とバーアンテナの 1 次 P1 (`c7`) が並ぶ。
-  E 端子と P2 は上の − レールへ。2 次の S1 は `a10`、S2 は − レールへ。黄はアンテナ側の高周波の線
-- **Q1 (上のブロックの e 行)**: 13 列 B・17 列 C・21 列 E。
-  - ベース (13 列): C1 (d10–d13) の右足と Rb1 (b13–b17) の左足。CH2 の 2+ (青) を `a13` にまっすぐ挿す
-  - コレクタ (17 列): Rc1 を `a17` から上の + レールへ縦に、Rb1 の右足、D1 のアノード (`c17`)
-  - エミッタ (21 列): `a21` から − レールへ黒の線
-- **検波 (24 列)**: D1 のカソード (`c24`)、R3 (`a24` から − レールへ縦に)、C3 (b24–b28、28 列を − レールへ)、C4 の左足 (`d24`)
-- **Q2 (e 行、30 列 B・31 列 C・32 列 E)**: 足を詰めて挿すので、コレクタは橙の線 (b31–b36) で 36 列へ引き出す。
-  - ベース (30 列): C4 の右足 (`d30`) と Rb2 (c30–c36) の左足
-  - コレクタ (31 列): Rc2 を `a31` から + レールへ。36 列に Rb2 の右足、CH1 の 1+ (橙、`a36`)
-  - エミッタ (32 列): `a32` から − レールへ
-  - 36 列の e–f を緑の線で下のブロックへ渡し、クリスタルイヤホンの A を `j36`、B を下の − レールへ
-- AD の 2−・1− (黒) は上の − レールへ。放送を聞くときは W1・CH1・CH2 の線と C<sub>T</sub> を抜く
-- 高周波の部分 (4〜24 列) の線はできるだけ短く。長いと Q1 の出力が入力側へ回り込んで発振しやすい
+- **同調 (16〜22 列)**: W1 (黄) を `a16` に挿し、C<sub>T</sub> (b16–b19) を通して 19 列へ。
+  19 列にポリバリコンの A 端子 (`a19`) とバーアンテナの 1 次 P1 (`c19`) が並ぶ。
+  E 端子と P2・S2 は上の − レールへ。2 次の S1 は `a22`。黄はアンテナ側の高周波の線
+- **CH2**: 22 列 (2 次巻線の出力、C1 の手前) を e–f の青い線で下のブロックへ渡し、`j22` に 2+ を挿す。回路図の CH2 と同じ所
+- **Q1 (上のブロックの e 行)**: 25 列 B・29 列 C・33 列 E。
+  - ベース (25 列): C1 (d22–d25) の右足と Rb1 (b25–b29) の左足
+  - コレクタ (29 列): Rc1 を `a29` から上の + レールへ縦に、Rb1 の右足、D1 のアノード (`c29`)
+  - エミッタ (33 列): `a33` から − レールへ黒の線
+- **検波 (41 列)**: D1 のカソード (`c41`)、R3 (`a41` から − レールへ縦に)、C3 (b41–b45、45 列を − レールへ)、C4 の左足 (`d41`)
+- **Q2 (e 行、47 列 B・48 列 C・49 列 E)**: 足を詰めて挿すので、コレクタは橙の線 (b48–b53) で 53 列へ引き出す。
+  - ベース (47 列): C4 の右足 (`d47`) と Rb2 (c47–c53) の左足
+  - コレクタ (48 列): Rc2 を `a48` から + レールへ。53 列に Rb2 の右足
+  - エミッタ (49 列): `a49` から − レールへ
+  - 53 列の e–f を緑の線で下のブロックへ渡し、クリスタルイヤホンの A を `j53`、CH1 の 1+ (橙) を `i53`、イヤホンの B を下の − レールへ
+- AD の 2−・1− (黒) は下の − レールへ。放送を聞くときは W1・CH1・CH2 の線と C<sub>T</sub> を抜く
+- 高周波の部分 (16〜41 列) の線はできるだけ短く。長いと Q1 の出力が入力側へ回り込んで発振しやすい
 
 ## 計器の設定
 
@@ -220,7 +233,7 @@ wires:
 | --- | --- |
 | Supplies | V+ = 5V (オン) |
 | Wavegen W1 | Sine 1MHz、Modulation: AM、1kHz の Sine、変調度 30%。振幅は CH2 の搬送波が 3mVpp になるよう絞る (目安 30mVpp — 2 次巻線で 1/10 になる) |
-| Scope | CH2 = Q1 のベース (RF 入力)、CH1 = Q2 のコレクタ (音声出力)。トリガは CH1 の立ち上がり 0V、AC 結合 |
+| Scope | CH2 = 2 次巻線の出力 (C1 の手前、RF 入力)、CH1 = Q2 のコレクタ (音声出力)。トリガは CH1 の立ち上がり 0V、AC 結合 |
 
 VC1 を回して CH1 の振幅が最大になる所が 1MHz の同調点。外れると CH2 も CH1 も小さくなる
 (タンクの Q が選択度そのもの)。
@@ -264,7 +277,7 @@ AD3 のアナログ入力は、BNC アダプタ付きで帯域 30MHz 以上 (−
 | --- | --- | --- |
 | Q1 のコレクタ電圧 | 約 2.2V | D1 のバイアス電流 (約 0.42mA) も R<sub>c1</sub> を流れる |
 | Q2 のコレクタ電圧 | 約 2.1V | 動作点が電源のほぼ半分 |
-| CH2 (Q1 のベース、無変調) | 3.00mVpp、1.000MHz | 2 次巻線で 1 次の 1/10 |
+| CH2 (2 次巻線の出力、無変調) | 3.00mVpp、1.000MHz | 2 次巻線で 1 次の 1/10 |
 | CH2 (30% の AM) | 包絡線の山で 3.90mVpp | 変調度 = (3.9 − 2.1)/(3.9 + 2.1) = 0.3 |
 | Q1 のコレクタの搬送波 | 約 150mVpp | 高周波の利得 約 51 倍 (34dB) |
 | 検波の出力 (R3) | 約 23mVpp、1kHz | η 0.5 × 0.3 × 76mV (仮定) |

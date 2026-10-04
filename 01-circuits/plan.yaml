@@ -143,7 +143,7 @@
 - { id: 8-20, tier: 200, era: 古, title: LED を受光素子に }
 - { id: 9-1, tier: 50, board: BB, title: LC 同調 — 共振を LED で見る }
 - { id: 9-2, tier: 50, board: BB, era: 古, title: ゲルマラジオ }
-- { id: 9-3, tier: 50, board: BB, era: 古, title: 1 石ラジオ (トランジスタ検波) }
+- { id: 9-3, tier: 50, board: BB, era: 古, title: 1 石ラジオ — トランジスタの高周波増幅とダイオード検波 }
 - { id: 9-4, tier: 50, board: CB, era: 古, title: FM 送信機 (1 石) }
 - { id: 9-5, tier: 100, board: BB, era: 古, title: 1 石レフレックスラジオ }
 - { id: 9-6, tier: 100, board: CB, era: 古, title: 超再生 FM ラジオ }

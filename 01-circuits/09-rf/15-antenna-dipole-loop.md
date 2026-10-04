@@ -12,12 +12,13 @@ board: CB
 # 9-15 アンテナ — ダイポールとループ、SWR
 
 9-2・9-3 のラジオはアンテナに長い線を張るだけだった。中波の波長 (1 MHz で 300 m) に比べて
-線がずっと短く、アンテナとしての働きは弱い。ここでは NanoVNA-H4 が得意な **144 MHz 帯
+線がずっと短く、アンテナとしての働きは弱い。ここでは VNA (この本の標準は LiteVNA64) で測りやすい **144 MHz 帯
 (波長 約 2.07 m)** で、**半波長ダイポール**と**小さなループ**を作り、S11 と SWR で
 「アンテナが給電線とどれだけ整合しているか」を測る。S11 は、VNA が送った信号のうち
 アンテナで跳ね返って戻ってくる割合 (反射係数)。SWR (定在波比) はその反射を 1 以上の数で表したもので、
 1 なら反射が無く (完全に整合)、大きいほど反射が多い。この題は**受信と測定だけ**で、
-送信はしない (NanoVNA の出力は −10 dBm 前後で、電波法の免許の要らない微弱な測定信号)。
+送信はしない (VNA の出力は −10 dBm 前後 (目安) で、電波法の免許の要らない微弱な測定信号)。
+歴史的な機種の NanoVNA-H4 も、同じ手順で測れる。
 
 - **半波長ダイポール**: 長さ λ/2 (λ は波長) の線を中央で 2 つに切り、切れ目に給電する。
   145 MHz の λ/2 は 299.8 / 145 / 2 = **1.034 m**。線の太さと端の効果で電気的には少し長く見えるので、
@@ -47,12 +48,12 @@ board: CB
 > [!NOTE]
 > 送信機をつなぐときは、アマチュア無線の免許と 144〜146 MHz の割り当てが要る。
 > 免許の要らない**微弱無線局**は「3 m の距離で電界強度 500 µV/m 以下」(322 MHz 以下) で、
-> アンテナを整合させるとこの範囲を超えやすい。この題は NanoVNA の測定信号だけを使う。
+> アンテナを整合させるとこの範囲を超えやすい。この題は VNA の測定信号だけを使う。
 
 ## 回路図
 
 ```circuit
-title: 図1 NanoVNA からバラン経由でダイポールへ
+title: 図1 VNA からバラン経由でダイポールへ
 parts:
   J1: sma c2 mirror
   G1: ground d2
@@ -69,7 +70,7 @@ wires:
   - T2.B1 -| a11
   - T2.B2 -| a13
 notes:
-  - text c1 right: CH0
+  - text c1 right: PORT1
   - text b10a7 right small: 片側49cm
   - text b13a3 left small: 片側49cm
   - text d9 left small: 1:1電流バラン
@@ -77,7 +78,7 @@ notes:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/15-antenna-dipole-loop-1.svg)
 
-- J1 は NanoVNA-H4 の CH0 (S11 を測る口)。T1 は給電線の同軸 (50 Ω、1 m)。
+- J1 は LiteVNA64 の PORT1 (S11 を測る口。NanoVNA-H4 なら CH0)。T1 は給電線の同軸 (50 Ω、1 m)。
   **測る前に、同軸の先 (バランの手前) で OPEN・SHORT・LOAD の校正をする**と、同軸の長さが
   画面から消え、給電点のインピーダンスがそのまま見える
 - T2 はバラン。電流バランは実物では「同軸にフェライトを通したもの」で、変圧器の記号は
@@ -101,7 +102,7 @@ wires:
   - J1.2 -- d2
   - c10 -- c11 -- d11
 notes:
-  - text b2 center: CH0
+  - text b2 center: PORT1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/15-antenna-dipole-loop-2.svg)
@@ -125,13 +126,13 @@ wires:
   - T1.B1 -| c9
   - T1.B2 -| c11
 notes:
-  - text c1 right: CH0
+  - text c1 right: PORT1
   - text d9 center small: 二次側が大ループ (0.25 µH)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/15-antenna-dipole-loop-3.svg)
 
-- J1 は CH0。T1 は結合ループ (直径 2 cm) と大ループ (直径 10 cm) の**磁界の結合**を表す。
+- J1 は VNA の PORT1。T1 は結合ループ (直径 2 cm) と大ループ (直径 10 cm) の**磁界の結合**を表す。
   二次側の大ループのコイル (0.25 µH) と CT (4.7 pF) で 145 MHz 近くに共振する
 
 ## 実体配線図
@@ -146,7 +147,7 @@ notes:
 70×50 mm で収まる。FR-4・1.6 mm・両面 1 oz。板の上にあるのは SMA と数 cm の線路・島 (と CT) だけで、
 共振を決める素子 (ダイポールの線・ループ) は板の外に張る。
 
-**範囲の確認**: 周波数 145 MHz は銅張り基板の範囲 (10 MHz 超〜1 GHz) の内側。電圧は NanoVNA の
+**範囲の確認**: 周波数 145 MHz は銅張り基板の範囲 (10 MHz 超〜1 GHz) の内側。電圧は VNA の
 −10 dBm 前後 (0.1 mW 程度) で、100 mW 以下・電流はミリアンペア以下。島と線の幅は最小 3.06 mm
 (3 mm 以上)、島どうしの溝は最小 1 mm (0.3 mm 以上)。商用電源は使わない。
 
@@ -162,7 +163,7 @@ copper:
   ANT2: pad 26,39 6x6mm
   VA2: via 26,39
 parts:
-  J1: sma/female-edge left 25 CH0
+  J1: sma/female-edge left 25 PORT1
 notes:
   - text 31,25: ANT1 左の素子 49cm (芯線側)
   - text 31,39: ANT2 右の素子 49cm (外皮側)
@@ -204,7 +205,7 @@ copper:
   LP1: pad 52,17 6x7mm
   LP2: pad 52,24.5 6x6mm
 parts:
-  J1: sma/female-edge left 15 CH0
+  J1: sma/female-edge left 15 PORT1
   CT: capacitor/2012 52,21 r90 4.7p
 notes:
   - text 31,15: CPL1 結合ループ 2cm (芯線側)
@@ -235,16 +236,16 @@ S11 と SWR を周波数ごとに測るので VNA を使う。
 
 | 項目 | 設定 |
 | --- | --- |
-| 計器 | NanoVNA-H4 (CH0 だけ使う) |
+| 計器 | LiteVNA64 (PORT1 だけ使う) |
 | 掃引 | 135〜155 MHz、101 点 (谷が見つからないときは 100〜200 MHz に広げて探してから狭める) |
-| 校正 | 同軸の先で OPEN / SHORT / LOAD (CH1 は使わないので THRU は省ける) |
+| 校正 | 同軸の先で OPEN / SHORT / LOAD (PORT2 は使わないので THRU は省ける) |
 | トレース | S11 SWR、S11 Smith |
 | マーカー | 140 MHz、145 MHz、150 MHz |
 
 ## 計器の画面
 
 ```vna
-device: h4
+device: litevna64
 sweep: 135M-155M 101
 title: 図6 ダイポール (f0 = 145 MHz) の SWR と Smith
 dut:
@@ -290,11 +291,11 @@ notes:
 | 部品 | 値・型番 | 備考 |
 | --- | --- | --- |
 | ダイポールの素子 | 銅線 (線径 1〜2 mm) またはアルミ棒、片側 約 50 cm | 長めに切って詰める |
-| 同軸 | 50 Ω (RG-58 や 1.5D-2V)、約 1 m、SMA オス | NanoVNA の CH0 へ |
+| 同軸 | 50 Ω (RG-58 や 1.5D-2V)、約 1 m、SMA オス | VNA の PORT1 へ |
 | バラン | フェライトコア FT-37-43 やパッチン型を数個 | 給電点の近くの同軸に通す |
 | 給電点 | 銅張り基板 5×7 cm (FR-4・1.6 mm・両面 1 oz)、端面 SMA コネクタ (メス) | 表は島と 50 Ω の線路 (3.06 mm)、裏は全面 GND。左右の素子を島にはんだ付け |
 | ループ | 銅線 2 mm、直径 10 cm、チップコンデンサ 2012 4.7 pF NP0 (CT)、トリマ 10 pF | 小さな結合ループ (直径 2 cm) で 50 Ω へ |
-| 計器 | NanoVNA-H4 | 50 kHz〜1.5 GHz |
+| 計器 | LiteVNA64 | 50 kHz〜6.3 GHz。NanoVNA-H4 (〜1.5 GHz) でも同じ手順で測れる |
 
 ## 出典
 

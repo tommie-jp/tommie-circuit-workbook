@@ -63,11 +63,13 @@ parts:
   G2: ground c16
   G3: ground g10
   G4: ground j1
+  V3V3: vcc c1 3.3V
+  V3V3: vcc a10 3.3V
   SW1: button k6 m6 l=$\mathrm{SW1}$
   G5: ground m6
 wires:
-  - U1.3V3 -| a1
-  - a1 -- a10 -- a14 -- a16
+  - U1.3V3 -| c1
+  - a10 -- a14 -- a16
   - a10 |- U2.VCC
   - U1.GP2 -| c8g0 |- U2.SCK
   - U1.GP3 -| d7a5 |- U2.MOSI
@@ -77,8 +79,6 @@ wires:
   - U2.GND -| g10
   - U1.GND23 -| j1
   - U1.GP15 -| k6
-notes:
-  - text b6 blue: "3.3V"
 style:
   pitch: 1.2
 ```
@@ -100,12 +100,14 @@ parts:
   G2: ground c16
   G3: ground g10
   G4: ground j1
+  V3V3: vcc c1 3.3V
+  V3V3: vcc a10 3.3V
   R1: resistor k6 m6 330
   D1: led m6 o6 red
   G5: ground o6
 wires:
-  - U1.3V3 -| a1
-  - a1 -- a10 -- a14 -- a16
+  - U1.3V3 -| c1
+  - a10 -- a14 -- a16
   - a10 |- U2.VCC
   - U1.GP2 -| c8g0 |- U2.SCK
   - U1.GP3 -| d7a5 |- U2.MOSI
@@ -115,8 +117,6 @@ wires:
   - U2.GND -| g10
   - U1.GND23 -| j1
   - U1.GP15 -| k6
-notes:
-  - text b6 blue: "3.3V"
 style:
   pitch: 1.2
 ```

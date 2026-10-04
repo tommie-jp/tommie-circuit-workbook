@@ -92,10 +92,11 @@ parts:
     label: tinySA Ultra
     pins: [RF, GND]
   GU3: ground o17
+  V3V3: vcc h1 3.3V
+  V3V3: vcc h7 3.3V
 wires:
-  - U1.3V3 -| f1
-  - f1 -- f7
-  - f7 |- U2.VCC
+  - U1.3V3 -| h1
+  - h7 |- U2.VCC
   - U1.GP2 -| h7d5 |- U2.SCLK
   - U1.GP3 -| h6h5 |- U2.SDATA
   - U1.GP5 -| i5d5 |- U2.FSYNC
@@ -107,7 +108,6 @@ wires:
   - U3.GND -| o17
 notes:
   - text k17f0 blue: 板の外 (SMAケーブルでtinySAへ)
-  - text e4f0 blue: 3.3V (Pico 2の3V3 OUT)
 style:
   pitch: 1.2
 ```
