@@ -24,19 +24,19 @@ CD4511 は、2 進数 4 桁で表した 0〜9 (BCD: 10 進の 1 桁を 2 進数 
 title: 図1 CD4511でBCDを7セグメントに変換する
 parts:
   VCC: vcc a11 5V
-  SWB: switch a11 c11
+  SWB: switch a11 c11 l=$\mathrm{SW}_\mathrm{B}$
   RpdB: resistor c11 e11 10k
   GB: ground e11
   VCC: vcc d8 5V
-  SWC: switch d8 f8
+  SWC: switch d8 f8 l=$\mathrm{SW}_\mathrm{C}$
   RpdC: resistor f8 h8 10k
   GC: ground h8
   VCC: vcc h11 5V
-  SWD: switch h11 j11
+  SWD: switch h11 j11 l=$\mathrm{SW}_\mathrm{D}$
   RpdD: resistor j11 l11 10k
   GD: ground l11
   VCC: vcc k8 5V
-  SWA: switch k8 m8
+  SWA: switch k8 m8 l=$\mathrm{SW}_\mathrm{A}$
   RpdA: resistor m8 o8 10k
   GA: ground o8
   U1: dip16 h16 CD4511
@@ -88,10 +88,10 @@ wires:
   - DS1.COM1 -| s29a5
   - DS1.COM2 -| s29a5
 notes:
-  - text b12a5h5 small blue: "B (PIN 1)"
-  - text f10d5 small blue: "C (PIN 2)"
-  - text j11d8 small blue: "D (PIN 6)"
-  - text l12h5 small blue: "A (PIN 7)"
+  - text b12a5h5 small blue: "B"
+  - text f10d5 small blue: "C"
+  - text j11d8 small blue: "D"
+  - text l12h5 small blue: "A"
   - text w1 small left: "VDD は PIN 16 (+5V)、VSS は PIN 8 (GND)"
   - text x1 small left: "LT (PIN 3)・BI (PIN 4) は +5V、LE (PIN 5) は GND に固定"
 style:

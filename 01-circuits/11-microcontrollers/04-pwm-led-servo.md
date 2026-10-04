@@ -42,18 +42,25 @@ style:
 ```circuit
 title: 図2 GP14でサーボを回す
 parts:
-  U1: pico2 g4
-  SV1:
+  U1: pico2 g8 mirror
+  VBUS: vcc b6 5V
+  GP: ground e6
+  M1:
     type: device
-    at: d10
+    at: j12e0
     label: Servo
-    pins: [VCC, GND, SIG]
+    pins: [VCC, SIG, GND]
+  VBUS: vcc i11 5V
+  GM: ground l11
 wires:
-  - U1.VBUS -| c6e0 |- SV1.VCC
-  - U1.GND38 -- SV1.GND
-  - U1.GP14 -| l2 -- l7 |- SV1.SIG
+  - U1.VBUS -| b6
+  - U1.GND38 -| e6
+  - U1.GP14 -| M1.SIG
+  - M1.VCC -| i11
+  - M1.GND -| l11
 style:
   pitch: 1.2
+  grid: on
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/circuit/04-pwm-led-servo-2.svg)

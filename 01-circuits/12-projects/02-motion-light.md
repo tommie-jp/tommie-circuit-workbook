@@ -22,80 +22,64 @@ PIR モジュールの出力は 3.3V なので、ロジック IC 側もツェナ
 ```circuit
 title: 図1 PIR+CdS(暗さ)をANDでMOSFETへ
 parts:
-  VCC5: vcc a1 5V
-  Rz: resistor a1 a3 330
-  Dz: zener c3 a3 3V3
-  GDz: ground c3
-  CDS1: photoresistor a5 c5 l=$\mathrm{CdS}$
-  R1: resistor c5 e5 10k
-  GR1: ground e5
-  U1: dip14 f9 CD40106
-  GU1: ground g8
+  VCC5: vcc b2 5V
+  Rz: resistor b2 d2 330
+  Dz: zener f2 d2 3V3
+  GDz: ground f2
+  VL: vcc c5 3.3V
+  VL: vcc d3a5 3.3V
+  CDS1: photoresistor c5 e5 l=$\mathrm{CdS}$
+  R1: resistor e5 g5 10k
+  GR1: ground g5
+  U1A: not e9 CD40106
   U3:
     type: device
-    at: d15
+    at: j8
     label: PIR module
     pins: [VCC, OUT, GND]
-  VCC5: vcc c14 5V
-  U2: dip14 f18 CD4081
-  GU2: ground g17
-  Rg: resistor i19 i21 220
-  Rgpd: resistor i22 k22 100k
-  GRgpd: ground k22
-  Q1: nmos-e h24j0
-  GQ1: ground j24
-  VCC5: vcc c24 5V
-  RLED: resistor c24 e24 330 l=$R_\mathrm{LED}$
-  DLED: led e24 g24 red l=$D_\mathrm{LED}$
-  GPIR: ground d14c0f0 r90
-  GU1b: ground f9e8i0
-  GU2b: ground f18h8c0
+    turn: mirror
+  VCC5: vcc i11 5V
+  GPIR: ground k11
+  U2A: and g14 CD4081
+  Rg: resistor g16 g18 220
+  Rgpd: resistor g18 i18 100k
+  GRgpd: ground i18
+  Q1: nmos-e f20j0
+  GQ1: ground h20
+  VCC5: vcc b20 5V
+  RLED: resistor b20 d20 330 l=$R_\mathrm{LED}$
+  DLED: led d20 e20 red l=$D_\mathrm{LED}$
 wires:
-  - a3 -- a19
-  - c5 -- c6
-  - c6 |- U1.1
-  - U1.14 -| a10
-  - U1.7 -| f8c0e0
-  - U1.2 -| h7
-  - h7 -- h15
-  - h15 |- U2.2
-  - U3.OUT -| e13
-  - e13 |- U2.1
-  - U3.VCC -| c14
-  - U3.GND -| d14c0f0
-  - U2.14 -| a19
-  - U2.7 -| f17c0e0
-  - U2.3 -| i16
-  - i16 -- i19
-  - i21 -- i22
-  - Q1.G -| i22
-  - Q1.S -- j24
-  - g24 -- Q1.D
-  # 使わない入力を GND へ (U1 は PIN 3・5・9・11・13、U2 は PIN 5・6・8・9・12・13)
-  - U1.3 -| e8h0g0
-  - U1.5 -| f8c0e0
-  - e8h0g0 -- f8c0e0 -- f8h0c0 -- g8
-  - U1.13 -| e9f8c0
-  - U1.11 -| f9a8
-  - U1.9 -| f9e8i0
-  - e9f8c0 -- f9a8 -- f9e8i0
-  - U2.5 -| f17c0e0
-  - U2.6 -| f17c0e0
-  - f17c0e0 -- f17e0i0 -- f17h0c0 -- g17
-  - U2.13 -| e18h8g0
-  - U2.12 -| e18h8g0
-  - U2.9 -| f18e8i0
-  - U2.8 -| f18e8i0
-  - e18f8c0 -- e18h8g0 -- f18e8i0 -- f18h8c0
+  - d2 -- d3a5
+  - e5 -- e7
+  - e7 |- U1A.in
+  - U1A.out -- e12
+  - e12 |- U2A.a
+  - U3.OUT -| j12
+  - j12 |- U2A.b
+  - U3.VCC -| i11
+  - U3.GND -| k11
+  - U2A.out -- g16
+  - g18 -| Q1.G
+  - Q1.S -- h20
+  - e20 -- Q1.D
 notes:
-  - text b7 blue: "VL 3.3V (ツェナー基準)"
+  - text c4 blue: "VL"
   - text d7 blue: "暗いとH"
-  - text d11a5 blue: "動いたらH"
-  - text j19 blue: "両方Hで点灯"
+  - text i12a5 blue: "動いたらH"
+  - text f15 blue: "両方Hで点灯"
+  - text m1 small left: "U1A・U2A の VDD (PIN 14) は VL (+3.3V)、VSS (PIN 7) は GND"
+  - text n1 small left: "使わない入力は GND へ (U1: PIN 3・5・9・11・13、U2: PIN 5・6・8・9・12・13)"
+style:
+  grid: on
+  pitch: 1.2
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/circuit/02-motion-light.svg)
 
+- 図1 はゲートを論理記号で描いた。U1A は CD40106 の 1 回路目 (PIN 1→2)、U2A は CD4081 の
+  1 回路目 (PIN 1・2→3) で、記号の足の数字が PIN 番号。VL は電源の記号 (+3.3V) で表し、
+  同じ記号どうしがつながっている
 - VL (3.3V) を作る: Rz (330Ω) と Dz (3.3V のツェナー) の簡易シャント電源
   (ツェナーを負荷と並列に置いて電圧を保つ方式)。ツェナー電流 = (5V − 3.3V) / 330Ω
   ≈ 5.2mA。40106・4081 は CMOS で消費電流が数µA と小さいので、この電流のほとんどは
@@ -121,7 +105,7 @@ notes:
 - 使わない入力は GND へつなぐ。40106 は 6 つのうち 1 つ、4081 は 4 つのうち 1 つ
   しか使わない。CMOS の入力は浮かせると勝手に振れて電流を食い、発振することも
   ある (10-1)。使わないゲートの入力 (40106 は PIN 3・5・9・11・13、4081 は PIN 5・6・8・
-  9・12・13) はすべて GND へつなぐ (図1・図2 とも描いてある)。出力の足は開けたまま
+  9・12・13) はすべて GND へつなぐ (図1 は図の下に書き、図2 は線で描いてある)。出力の足は開けたまま
   でよい
 - PIR モジュール自体は、基板上のポテンショメータで感度と保持時間 (動きを検知してから
   出力を H に保つ時間) を、ジャンパで再トリガ (H の間にまた動いたら時間を延ばすか) を
@@ -133,12 +117,12 @@ notes:
 
 ```perfboard
 board:
-  size: 37x16
+  size: 9x7cm
   slots: on
 title: 図2 perfboardに組む (部品面から見た図)
 points:
   PWR: a1
-  GND: p1
+  GND: y1
 parts:
   PIR:
     type: device
@@ -151,28 +135,29 @@ parts:
   R1: resistor i5 l5 10k
   U1: dip14 f8 CD40106
   U2: dip14 f20 CD4081
-  Rg: resistor e34 h34 220
-  Rgpd: resistor h33 h29 100k
-  Q1: transistor j33 j34 j35 2N7000
-  RLED: resistor a36 d36 330
-  DLED: led e36 g36 red
+  Rg: resistor n22 q22 220
+  Rgpd: resistor q20 u20 100k
+  Q1: transistor s21 s22 s23 2N7000
+  RLED: resistor a29 d29 330
+  DLED: led e29 g29 red
 wires:
-  # 5V (a 行・赤)、VL 3.3V (c 行・橙)、GND (p 行・黒) の筋
+  # 5V (a 行・赤)、VL 3.3V (d 行・橙)、GND (y 行・黒) の筋
   - PWR -- a2 red
   - a2 -- a17 red
-  - a17 -- a36 red
+  - a17 -- a29 red
   - d2 -- d3 orange
   - d3 -- d5 orange
   - d5 -- d8 orange
   - d8 -- d20 orange
-  - GND -- p3 black
-  - p3 -- p5 black
-  - p5 -- p15 black
-  - p15 -- p27 black
-  - p27 -- p29 black
+  - GND -- y3 black
+  - y3 -- y5 black
+  - y5 -- y15 black
+  - y15 -- y20 black
+  - y20 -- y21 black
+  - y21 -- y27 black
   # Dz のアノードと R1 の下端を GND へ
-  - f3 -- p3 black
-  - l5 -- p5 black
+  - f3 -- y3 black
+  - l5 -- y5 black
   # 暗さの分圧 (CDS1・R1) を U1 の PIN 1 へ
   - f5 -- i5
   - i5 -- i8
@@ -193,7 +178,7 @@ wires:
   - j12 -- j14 black
   - i14 -- j14 black
   - j14 -- j15 black
-  - j15 -- p15 black
+  - j15 -- y15 black
   # U2 (4081) の使わない入力: PIN 13・12・9・8 は e 行、PIN 5・6 は j 行でまとめ、27 列で PIN 7 と結んで GND へ
   - f21 -- e21 black
   - e21 -- e22 black
@@ -210,7 +195,7 @@ wires:
   - j25 -- j26 black
   - i26 -- j26 black
   - j26 -- j27 black
-  - j27 -- p27 black
+  - j27 -- y27 black
   # PIR: VCC は 5V の筋へ、GND は U1 の GND の角 (e15) へ、OUT は U2 の PIN 1 へ
   - PIR.VCC -- a17 red
   - PIR.GND -- e16 black
@@ -222,26 +207,25 @@ wires:
   - i9 -- l9 blue
   - l9 -- l21 blue
   - l21 -- i21 blue
-  # U2 の PIN 3 (AND の出力) → Rg → Q1 のゲート
-  - i22 -- k22 yellow
-  - k22 -- k28 yellow
-  - k28 -- e28 yellow
-  - e28 -- e34 yellow
-  - h33 -- h34
-  - h34 -- j34
-  - h29 -- j29 black
+  # U2 の PIN 3 (AND の出力) → Rg → Q1 のゲート。Rgpd でゲートを GND へ
+  - i22 -- n22 yellow
+  - q22 -- s22
+  - q22 -- q20
+  - u20 -- y20 black
   # Q1: ソースは GND へ、ドレインは DLED のカソードへ
-  - j33 -- j29 black
-  - j29 -- p29 black
-  - j35 -- j36
-  - j36 -- g36
-  - d36 -- e36
+  - s21 -- y21 black
+  - s23 -- s29
+  - s29 -- g29
+  - d29 -- e29
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/perfboard/02-motion-light.svg)
 
+- 板は 7×9cm の板を横に置いた 31 列 × 26 行 (厚み 1.6mm の FR-4)。5×7cm の板 (24 列 × 18 行) には
+  DIP14 2 個と出力の段が横に並びきらないので、次の順位の 7×9cm にした。出力の段 (Rg・Rgpd・Q1) は
+  U2 の下に置いて、板の幅に収めた
 - 部品面から見た図。5V (PWR) は上の a 行 (赤)、VL (3.3V) は d 行 (橙)、GND は下の
-  p 行 (黒) に 1 本ずつ筋を通し、部品はそこから縦に配る。電源は左端の a1・p1 に入れる
+  y 行 (黒) に 1 本ずつ筋を通し、部品はそこから縦に配る。電源は左端の a1・y1 に入れる
 - Rz (a2〜d2) が 5V の筋から VL の筋へ、Dz (d3〜f3、カソードが上) が VL から 3 列を
   下って GND へ。これで VL (3.3V) ができ、d 行で U1・U2 の PIN 14 (f8・f20) と
   CDS1 (d5〜f5) へ配る。CDS1 の下端から 5 列を下り、i5 で R1 (i5〜l5、下は GND) と
@@ -254,18 +238,18 @@ wires:
 - PIR は板の外 (上、`-d16`) に置き、ケーブルの 3 本を真下の穴へ下ろす:
   GND は e16 (U1 の GND をまとめた角 e15 の隣)、VCC は a17 (5V の筋)、OUT は k18
 - 使わない入力は黒の線で GND へ。U1 の PIN 13・11・9 (f9・f11・f13) は e 行、PIN 3・5
-  (i10・i12) は j 行でまとめ、15 列で PIN 7 (i14) と結んで p 行へ下ろす。U2 の PIN 13・12・9・8
+  (i10・i12) は j 行でまとめ、15 列で PIN 7 (i14) と結んで y 行へ下ろす。U2 の PIN 13・12・9・8
   (f21・f22・f25・f26) は e 行、PIN 5・6 (i24・i25) は j 行でまとめ、27 列で PIN 7 (i26) と
-  結んで p 行へ下ろす。出力の足 (U1 の PIN 4・6・8・10・12、U2 の PIN 4・10・11) には
+  結んで y 行へ下ろす。出力の足 (U1 の PIN 4・6・8・10・12、U2 の PIN 4・10・11) には
   何もつながない
-- U2 の PIN 3 (AND の出力、i22) は黄の線で k 行を右へ運び、28 列を上って e 行から
-  Rg (e34〜h34) の上端へ。Rg の下端 (h34) から Q1 のゲート (j34) へ下ろし、隣の h33 から
-  Rgpd (h33〜h29) を通して 29 列の GND へ
-- Q1 (2N7000) は j 行に S・G・D の順 (平らな面を見て左から、実物の足の並び) で
-  横並びに置く (j33・j34・j35)。ソースは j 行を左へ出して 29 列で GND へ、ドレインは
-  j36 から 36 列を上って DLED のカソード (g36) へ。DLED のアノード (e36) は RLED
-  (a36〜d36) を通して 5V の筋へ
-- 交差は被覆線で跨ぐ。青 (U1 の PIN 2) が 15 列の GND を、黄 (U2 の PIN 3) が 27 列の
+- U2 の PIN 3 (AND の出力、i22) は黄の線で 22 列をまっすぐ下り、Rg (n22〜q22) の上端へ。
+  Rg の下端 (q22) から Q1 のゲート (s22) へ下ろし、同じ q22 から q 行を左へ出して
+  Rgpd (q20〜u20) を通して y 行の GND へ
+- Q1 (2N7000) は s 行に S・G・D の順 (平らな面を見て左から、実物の足の並び) で
+  横並びに置く (s21・s22・s23)。ソースは 21 列を下って GND へ、ドレインは s 行を右へ運び、
+  29 列を上って DLED のカソード (g29) へ。DLED のアノード (e29) は RLED (a29〜d29) を
+  通して 5V の筋へ
+- 交差は被覆線で跨ぐ。青 (U1 の PIN 2) が 15 列の GND を、Q1 のドレインの線が 27 列の
   GND を跨ぐ。どちらも U1・U2 の出力の足が GND にまとめた足の向こうにあるためで、
   足の並びからは避けられない。PIR のケーブルの GND と OUT は、板の上を 5V と VL の
   筋を越えて渡る

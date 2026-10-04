@@ -22,63 +22,57 @@ LED をたくさん光らせたいときや 7 セグメント表示器 (10-7) �
 ```circuit
 title: 図1 74HC595に手動でビットを送り込む
 parts:
-  VCC: vcc f15g0 5V
-  GND: ground g15i3 r270
-  VCC: vcc e17e5 5V
-  SER: switch e17e5 g17e5
-  RpdS: resistor g17e5 g19e5 10k
-  GS: ground g19e5
-  VCC: vcc h26 5V
-  SRCLK: button h26 j26
-  RpdCLK: resistor j26 j28 10k
-  GCLK: ground j28
-  VCC: vcc f21c5 5V
-  RCLK: button f21c5 h21c5
-  RpdRCLK: resistor h21c5 h23c5 10k
-  GRCLK: ground h23c5
-  U1: dip16 h14 74HC595
-  GU1: ground i13e0
-  VCC: vcc k14 5V
-  RA: resistor c2 d2 330
-  DA: led d2 e2 red
-  GA: ground e2
-  RB: resistor c4a5 d4a5 330
-  DB: led d4a5 e4a5 red
-  GB: ground e4a5
-  RC: resistor c7 d7 330
-  DC: led d7 e7 red
-  GC: ground e7
-  RD: resistor c9a5 d9a5 330
-  DD: led d9a5 e9a5 red
-  GD: ground e9a5
+  U1: ic h14 74HC595
+  VCC: vcc d14 5V
+  GND: ground l14
+  VCC: vcc c10 5V
+  SER: switch c10 e10 l=$\mathrm{SER}$
+  RpdS: resistor e10 e8 10k l=$R_\mathrm{pdS}$
+  GS: ground e8
+  VCC: vcc f4 5V
+  SRCLK: button f4 h4 l=$\mathrm{SRCLK}$
+  RpdCLK: resistor h4 j4 10k l=$R_\mathrm{pdCLK}$
+  GCLK: ground j4
+  VCC: vcc k6 5V
+  RCLK: button k8 k6 l=$\mathrm{RCLK}$
+  RpdRCLK: resistor k8 m8 10k l=$R_\mathrm{pdRCLK}$
+  GRCLK: ground m8
+  RD: resistor k17 l17 330
+  DD: led l17 m17 red
+  GD: ground m17
+  RC: resistor k19a5 l19a5 330
+  DC: led l19a5 m19a5 red
+  GC: ground m19a5
+  RB: resistor k22 l22 330
+  DB: led l22 m22 red
+  GB: ground m22
+  RA: resistor k24a5 l24a5 330
+  DA: led l24a5 m24a5 red
+  GA: ground m24a5
 wires:
-  - U1.16 -| f15g0
-  - U1.13 -| g15i3
-  - U1.10 -| k15a5
-  - k15a5 -- k14
-  - U1.14 -| g17e5
-  - U1.12 -| h21c5
-  - U1.11 -| j16a5
-  - j16a5 -- j26
-  - U1.15 -| a15f8
-  - a15f8 -- a2f0 -- c2
-  - U1.1 -| b13
-  - b13 -- b4a5 -- c4a5
-  - U1.2 -| b12f6
-  - b12f6 -- b7f0 -- c7
-  - U1.3 -| c12a2
-  - c12a2 -- c9a5
-  - U1.8 -| i13e0
+  # 電源: VCC と SRCLR (クリアしない) を +5V、GND と OE (出力を常に出す) を GND へ
+  - U1.VCC |- d14
+  - U1.SRCLR |- d14a5
+  - d14 -- d14a5
+  - U1.GND |- k14
+  - U1.OE |- k14a5
+  - k14a5 -- k14 -- l14
+  # 入力: SER は上、SRCLK は左、RCLK は下のスイッチから
+  - U1.SER -| e10
+  - U1.SRCLK -| h4
+  - U1.RCLK -| k8
+  # 出力: QA〜QD を LED へ (QA がいちばん右)
+  - U1.QA -| k24a5
+  - U1.QB -| k22
+  - U1.QC -| k19a5
+  - U1.QD -| k17
 notes:
-  - text c16a5 blue: "SER (PIN 14)"
-  - text d19a8 blue: "RCLK (PIN 12、ラッチクロック)"
-  - text f24a3 blue: "SRCLK (PIN 11、シフトクロック)"
-  - text f1a3 blue: "QA (PIN 15)"
-  - text f3a8 blue: "QB (PIN 1)"
-  - text f6a3 blue: "QC (PIN 2)"
-  - text f8a8 blue: "QD (PIN 3)"
-  - text l1 small left: "U1 の VCC は PIN 16 (+5V)、GND は PIN 8"
-  - text m1 small left: "QE-QH (PIN 4-7) と直列出力 (PIN 9) は開けておく"
+  - text n17 blue center: QD
+  - text n19a5 blue center: QC
+  - text n22 blue center: QB
+  - text n24a5 blue center: QA
+  - text p1 small left: "SRCLK はシフトクロック、RCLK はラッチクロック"
+  - text q1 small left: "QE-QH と直列出力 (PIN 9) は開けておく"
 style:
   grid: on
   pitch: 1.2
@@ -98,6 +92,8 @@ style:
   負論理なので GND に固定して出力を常に有効にする
 - QA〜QD (PIN 15・1・2・3) だけ LED を付けた。QE〜QH (PIN 4〜7) も同じ考え方で
   続ければ 8 ビット全部を出せる (図1 の場所が足りないので省略)
+- 図1 の 74HC595 は足を働きで並べた箱で描いた (左が入力、右が出力、上が電源、下が GND)。
+  箱の中に PIN の番号を添えてある。出力の線が交わらないよう、LED は右から QA・QB・QC・QD の順に並ぶ
 - 74HC595 は速い IC なので、ボタンのチャタリング (10-5) も 1 回のクロックとして数える。
   1 回押しただけで 2 ビット以上進むことがある。表どおりにならないときはこれを疑う。
   確実にするには 10-9 のチャタリング除去を SRCLK と RCLK に足す

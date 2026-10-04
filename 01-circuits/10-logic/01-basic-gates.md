@@ -44,13 +44,13 @@ parts:
   U1: and h14 CD4081
   U2: or h20 CD4071
   U3: not h26 CD4069
-  R1: resistor h16 j16 330
+  R1: resistor h16 j16 1k
   D1: led j16 k16 red
   GD1: ground k16
-  R2: resistor h22 j22 330
+  R2: resistor h22 j22 1k
   D2: led j22 k22 red
   GD2: ground k22
-  R3: resistor h28 j28 330
+  R3: resistor h28 j28 1k
   D3: led j28 k28 red
   GD3: ground k28
 wires:
@@ -97,6 +97,29 @@ style:
   振れて電流を食う。出力の足 (U1・U2 の PIN 4・10・11、U3 の PIN 4・6・8・10・12) は
   何もつながずに開けておく
 
+### LED の抵抗を 1kΩ にする理由
+
+CD4000 系の出力は、電流を取り出すほど電圧が下がる。H を出している出力から流し出せる電流を
+I<sub>OH</sub> と呼ぶ。TI のデータシート (CD4081B、V<sub>DD</sub> = 5V、25℃) では、
+出力が 4.6V のとき最小 0.51mA (標準 1mA)、2.5V まで下がったときでも最小 1.6mA
+(標準 3.2mA) しかない。CD4071B と CD4069UB のデータシートも同じ値。
+5V で動かす CD4000 系の出力は数 mA が限度なので、330Ω で
+(5V − 2.0V) / 330Ω ≈ 9.1mA を流す設計にすると、出力の電圧が落ちて計算と合わない。
+
+そこで LED の直列抵抗 R1〜R3 を 1kΩ にして、電流を 2mA 前後に抑える。出力の電圧を
+V<sub>OH</sub>、LED の順方向電圧を V<sub>F</sub> (赤の LED を 2mA で使うとき約 1.8V、目安) とすると、
+
+I = (V<sub>OH</sub> − V<sub>F</sub>) / R
+
+V<sub>OH</sub> は流す電流で決まる。出力の電圧の落ちと電流の関係を上の 2 点を通る曲線で表し、
+この式と両方を満たす点を python で解くと次のようになる (目安)。
+
+- 標準の品: V<sub>OH</sub> ≈ 4.0V、I = (4.0V − 1.8V) / 1kΩ ≈ 2.2mA
+- 最小の品: V<sub>OH</sub> ≈ 3.3V、I = (3.3V − 1.8V) / 1kΩ ≈ 1.5mA
+
+2mA 前後でも LED の点灯は見て分かる。暗いときは高輝度 LED にするか、出力の強い
+74HC 系 (AND は 74HC08、OR は 74HC32、NOT は 74HC04) に替える。
+
 ## 実体配線図
 
 ```breadboard
@@ -112,11 +135,11 @@ parts:
   U1: dip14 @ e24 CD4081
   U2: dip14 @ e38 CD4071
   U3: dip14 @ e52 CD4069
-  R1: resistor g26 g33 330
+  R1: resistor g26 g33 1k
   D1: led h33(A) h35(K) red
-  R2: resistor g40 g45 330
+  R2: resistor g40 g45 1k
   D2: led h45(A) h46(K) red
-  R3: resistor g53 g60 330
+  R3: resistor g53 g60 1k
   D3: led h60(A) h62(K) red
   PS:
     type: device
@@ -190,7 +213,7 @@ wires:
   - C (青): `c47` → U3 の PIN 1 (`g52`)
 - プルダウン抵抗 (RpdA・RpdB・RpdC) は IC の入力の列の j 行から下の青レールへ縦に挿す
   (RpdA は 24 列、RpdB は 39 列、RpdC は 52 列)
-- 出力 (U1・U2 の PIN 3 = 26・40 列、U3 の PIN 2 = 53 列) は g 行の 330Ω と h 行の LED を
+- 出力 (U1・U2 の PIN 3 = 26・40 列、U3 の PIN 2 = 53 列) は g 行の 1kΩ と h 行の LED を
   通して下の青レールへ
 - 使わない入力は黒の短い線で GND へ。上側の足 (U1・U2 の PIN 8・9・12・13、U3 の
   PIN 9・11・13) は a 行から上の青レールへ、下側の足 (U1・U2 の PIN 5・6、U3 の PIN 3・5)
@@ -214,7 +237,7 @@ wires:
 片方でも点く。NOT は C を開けている間だけ点く (入力 0 → 出力 1)。
 
 テスターで確かめるなら、直流電圧レンジで各 IC の出力の PIN (U1・U2 は PIN 3、U3 は PIN 2) と
-GND の間を測る。LED が点いているときは数 V (1)、消えているときはほぼ 0V (0) になる。
+GND の間を測る。LED が点いているときは約 3.3〜4V (1)、消えているときはほぼ 0V (0) になる。
 
 ## 出典
 

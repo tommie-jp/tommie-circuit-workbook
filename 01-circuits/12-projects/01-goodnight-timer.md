@@ -28,8 +28,8 @@ parts:
   Ct: capacitor g5 h5 220u
   Get: ground h5
   VCC: vcc g3 5V
-  Rtrig: resistor g3 i3 100k
-  SWtrig: button i3 k3 l=$SW_\mathrm{trig}$
+  Rtrig: resistor g3 i3 100k l=$R_\mathrm{trig}$
+  SWtrig: button i3 k3 l=$\mathrm{SW_{trig}}$
   Gtrig: ground k3
   Rg: resistor g10 g12 220
   Q1: nmos-e f13i0i0

@@ -30,59 +30,65 @@ Q4 がいちばん上の桁 (MSB)。
 ```circuit
 title: 図1 555クロック + 4040バイナリカウンタ
 parts:
-  VCC: vcc b12 5V
-  U555: ic e20 NE555
-  R1: resistor b17 d17f0 10k
-  R2: resistor d17f0 f17 47k
-  C1: capacitor f18 h18 10u
-  GC1: ground h18
-  U40: dip16 i10 CD4040
-  GU40: ground k9
-  GU555: ground h20
-  GRRST: ground d14
-  RRST: resistor d12 d14 10k
-  SWRST: button d12 b12
-  VCC: vcc f11 5V
-  VCC: vcc b17 5V
-  RQ1: resistor l11a2 m11a2 330
-  DQ1: led m11a2 n11a2 red
-  GQ1: ground n11a2
-  RQ2: resistor l8 m8 330
-  DQ2: led m8 n8 red
-  GQ2: ground n8
-  RQ3: resistor l5a5 m5a5 330
-  DQ3: led m5a5 n5a5 red
-  GQ3: ground n5a5
-  RQ4: resistor l3 m3 330
-  DQ4: led m3 n3 red
-  GQ4: ground n3
+  U555: ic e6 NE555
+  VCC: vcc b3 5V
+  R1: resistor b3 d3f0 10k
+  R2: resistor d3f0 f3 47k
+  C1: capacitor f4 h4 10u
+  GC1: ground h4
+  GU555: ground h6
+  U40: dip16 f13 r180 CD4040
+  VCC: vcc g11f5 5V
+  GU40: ground c15a5
+  VCC: vcc g8 5V
+  SWRST: button g8 i8 l=$\mathrm{SW_{RST}}$
+  RRST: resistor i10a5 k10a5 10k l=$R_\mathrm{RST}$
+  GRRST: ground k10a5
+  RQ4: resistor h15 i15 1k l=$R_\mathrm{Q4}$
+  DQ4: led i15 j15 red l=$D_\mathrm{Q4}$
+  GQ4: ground j15
+  RQ3: resistor h17a5 i17a5 1k l=$R_\mathrm{Q3}$
+  DQ3: led i17a5 j17a5 red l=$D_\mathrm{Q3}$
+  GQ3: ground j17a5
+  RQ2: resistor h20 i20 1k l=$R_\mathrm{Q2}$
+  DQ2: led i20 j20 red l=$D_\mathrm{Q2}$
+  GQ2: ground j20
+  RQ1: resistor h22a5 i22a5 1k l=$R_\mathrm{Q1}$
+  DQ1: led i22a5 j22a5 red l=$D_\mathrm{Q1}$
+  GQ1: ground j22a5
 wires:
-  - U40.10 -| j23
-  - U555.OUT -| e23
-  - e23 -- j23
-  - U40.16 -| f11
-  - U40.11 -| d12
-  - U555.VCC |- b20
-  - U555.RESET |- b20a5
-  - b17 -- b20 -- b20a5
-  - U555.DISCH -| d17f0
-  - U555.THRES -| e18
-  - U555.TRIG -| e18f0
-  - e18 -- f18
-  - f17 -- f18
-  - U555.GND |- h20
-  - U40.8 -| k9
-  - U40.9 -| l11a2
-  - U40.7 -| l8
-  - U40.6 -| k7a4
-  - k7a4 -- k5a5 -- l5a5
-  - U40.5 -| j6f8
-  - j6f8 -- j3f0 -- l3
+  # 555 非安定
+  - U555.VCC |- b6
+  - U555.RESET |- b6a5
+  - b3 -- b6 -- b6a5
+  - U555.DISCH -| d3f0
+  - U555.THRES -| e4
+  - U555.TRIG -| e4f0
+  - e4 -- f4
+  - f3 -- f4
+  - U555.GND |- h6
+  # クロック: 555 の OUT → 4040 の CLOCK (PIN 10)
+  - U555.OUT -| e10
+  - U40.10 -| e10
+  # リセット: SWRST で +5V、離すと RRST で GND
+  - U40.11 -| i10a5
+  - i8 -- i10a5
+  # 4040 の電源 (箱を逆さに描いたので VDD が左下、VSS が右上)
+  - U40.16 -| g11f5
+  - U40.8 -| c14a5
+  - c14a5 -- c15a5
+  # 出力: Q4〜Q2 は右へ、Q1 は箱の上を越えて右へ
+  - U40.5 -| h15
+  - U40.6 -| h17a5
+  - U40.7 -| h20
+  - U40.9 -| b11a5
+  - b11a5 -- b22a5 -- h22a5
 notes:
-  - text o10a6 blue: Q1 (LSB)
-  - text o7a6 blue: Q2
-  - text o5a1 blue: Q3
-  - text o2a6 blue: Q4 (MSB)
+  - text k15 blue center: Q4 (MSB)
+  - text k17a5 blue center: Q3
+  - text k20 blue center: Q2
+  - text k22a5 blue center: Q1 (LSB)
+  - text m1 small left: "U40 は逆さに置いた (PIN 9-16 が左、PIN 1-8 が右。入力が左、出力が右になる)"
 style:
   grid: on
   pitch: 1.2
@@ -101,6 +107,15 @@ style:
   ある (RESET は RRST で GND へ)。CMOS の入力は浮かせてはいけないが、この IC に
   使わない入力は無い。使わない Q5〜Q12 は出力なので開けておく
 - 電源の PIN: 4040 は VDD が PIN 16・VSS が PIN 8、555 は VCC が PIN 8・GND が PIN 1
+- 図1 の 4040 (U40) は、箱を逆さ (切り欠きが下) に描いた。実物の並びのままだと入力の
+  CLOCK・R が右、出力の Q2〜Q4 が左に来て、信号が右から左へ流れる。逆さにすると
+  入力が左、出力が右に並ぶ。その代わり VDD (PIN 16) が左下、VSS (PIN 8) が右上に来る。
+  555 (U555) は足を働きで並べた箱 (上が電源、左が入力、右が出力) で描いた。
+  PIN の番号は箱の中に添えてある
+- LED の直列抵抗 RQ1〜RQ4 は 1kΩ。10-1 と同じく、5V の CD4000 系の出力は数 mA しか
+  流し出せないので (CD4040B も CD4000B 系の標準の出力で、I<sub>OH</sub> は出力 2.5V のとき
+  最小 1.6mA)、LED の電流を 1.5〜2.2mA (10-1 で求めた目安) に抑える。
+  暗いときは高輝度 LED にするか、足の並びが同じ 74HC4040 に替える
 
 ## 実体配線図
 
@@ -120,13 +135,13 @@ parts:
     at: top
     label: 電源 5V
     pins: [+5V, GND]
-  RQ1: resistor a32 a34 330
+  RQ1: resistor a32 a34 1k
   DQ1: led c34(A) c36(K) red
-  RQ2: resistor a38 a40 330
+  RQ2: resistor a38 a40 1k
   DQ2: led c40(A) c42(K) red
-  RQ3: resistor a44 a46 330
+  RQ3: resistor a44 a46 1k
   DQ3: led c46(A) c48(K) red
-  RQ4: resistor a50 a52 330
+  RQ4: resistor a50 a52 1k
   DQ4: led c52(A) c54(K) red
 wires:
   - PS.+5V -- +t1 red
@@ -177,7 +192,7 @@ wires:
   SWRST (e17) を押すと +5V へ
 - Q1 (PIN 9、29 列の上)・Q2 (PIN 7、28 列の下)・Q3 (PIN 6、27 列の下)・Q4 (PIN 5、
   26 列の下) を黄の線で 32・38・44・50 列へ渡し (下の 3 本は g・h・i 行を通って
-  溝をまたぐ)、330Ω と LED を通して GND へ
+  溝をまたぐ)、1kΩ と LED を通して GND へ
 
 ## 見るべき値
 

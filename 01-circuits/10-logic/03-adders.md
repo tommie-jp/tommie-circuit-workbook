@@ -31,7 +31,7 @@ parts:
   B: switch c6 e6
   RpdB: resistor e6 e4 10k
   GB: ground e4
-  CIN: switch b9 d9
+  CIN: switch b9 d9 l=$C_\mathrm{in}$
   RpdC: resistor d9 d7 10k
   GC: ground d7
   VCC: vcc d3 5V
@@ -42,16 +42,16 @@ parts:
   U1B: xor h24 CD4070
   U2B: and l24 CD4081
   U3A: or m30 CD4071
-  RS1: resistor h17 j17 330
-  DS1: led j17 k17 red
+  RS1: resistor h17 j17 1k l=$R_\mathrm{S1}$
+  DS1: led j17 k17 red l=$D_\mathrm{S1}$
   GS1: ground k17
-  RC1: resistor n18 p18 330
-  DC1: led p18 q18 red
+  RC1: resistor n18 p18 1k l=$R_\mathrm{C1}$
+  DC1: led p18 q18 red l=$D_\mathrm{C1}$
   GC1: ground q18
-  RCO: resistor m34 o34 330
-  DCO: led o34 p34 red
+  RCO: resistor m34 o34 1k l=$R_\mathrm{Cout}$
+  DCO: led o34 p34 red l=$D_\mathrm{Cout}$
   GCO: ground p34
-  RS: resistor h37 j37 330
+  RS: resistor h37 j37 1k
   DS: led j37 k37 red
   GDS: ground k37
 wires:
@@ -100,6 +100,14 @@ style:
 - 使わない入力は GND へつなぐ (10-1)。U1・U2 は残り 2 ゲートの入力 (PIN 8・9・12・13)、
   U3 は残り 3 ゲートの入力 (PIN 5・6・8・9・12・13) が対象。出力の PIN (U1・U2 の
   PIN 10・11、U3 の PIN 4・10・11) は何もつながずに開けておく
+- LED の直列抵抗 (RS1・RC1・RS・RCO) は 1kΩ。10-1 と同じく、5V の CD4000 系の出力は
+  数 mA しか流し出せないので、LED の電流を 1.5〜2.2mA (10-1 で求めた目安) に抑える。
+  暗いときは高輝度 LED にするか、74HC 系 (74HC86・74HC08・74HC32) に替える
+- S1 と C1 は LED を点けながら次のゲートの入力にもなる。LED に電流を取られた分だけ
+  H の電圧は下がり、10-1 の目安では標準の品で約 4.0V、最小の品で約 3.3V。データシートが
+  H と読むことを保証する入力の電圧 (V<sub>IH</sub>、5V のとき 3.5V 以上) を最小の品はわずかに
+  下回るが、CMOS の入力は実際には電源の半分 (約 2.5V) の前後で 0 と 1 が切り替わる
+  ので、表どおりに動く (目安)。330Ω のままだと H が 3V を切るおそれがある
 
 ## 実体配線図
 
@@ -114,15 +122,15 @@ parts:
   CIN: switch d10 d12
   RpdC: resistor a12 -t12 10k
   U1: dip14 @ e14 CD4070
-  RS1: resistor d21 d25 330
+  RS1: resistor d21 d25 1k
   DS1: led e25(A) e26(K) red
-  RS: resistor d28 d32 330
+  RS: resistor d28 d32 1k
   DS: led e32(A) e33(K) red
   U2: dip14 @ e37 CD4081
-  RC1: resistor a45 a48 330
+  RC1: resistor a45 a48 1k
   DC1: led b48(A) b49(K) red
   U3: dip14 @ e51 CD4071
-  RCO: resistor a58 a61 330
+  RCO: resistor a58 a61 1k
   DCO: led b61(A) b62(K) red
   PS:
     type: device

@@ -18,101 +18,89 @@ source: 自作
 ```circuit
 title: 図1 74HC283で4bit同士を足す
 parts:
-  VCC: vcc j7 5V
-  SA1: switch j7 l7
-  RA1: resistor l7 l5 10k
-  GA1: ground l5
-  VCC: vcc d4 5V
-  SA2: switch d4 f4
-  RA2: resistor f4 f2 10k
-  GA2: ground f2
-  VCC: vcc d23 5V
-  SA3: switch d23 f23
-  RA3: resistor f23 f25 10k
-  GA3: ground f25
-  VCC: vcc j19 5V
-  SA4: switch j19 l19
-  RA4: resistor l19 l21 10k
-  GA4: ground l21
-  VCC: vcc k4 5V
-  SB1: switch k4 m4
-  RB1: resistor m4 m2 10k
-  GB1: ground m2
-  VCC: vcc c7 5V
-  SB2: switch c7 e7
-  RB2: resistor e7 e5 10k
-  GB2: ground e5
-  VCC: vcc c19 5V
-  SB3: switch c19 e19
-  RB3: resistor e19 e21 10k
-  GB3: ground e21
-  VCC: vcc k23 5V
-  SB4: switch k23 m23
-  RB4: resistor m23 m25 10k
-  GB4: ground m25
-  U1: dip16 h13 CD74HC283
-  VCC: vcc f14g0 5V
-  GU1: ground j11a6
-  RS1: resistor g9i0 h9i0 330
-  DS1: led h9i0 i9i0 red
-  GS1: ground i9i0
-  RS2: resistor b13a5 c13a5 330
-  DS2: led c13a5 d13a5 red
-  GS2: ground d13a5
-  RS3: resistor g17i0 h17i0 330
-  DS3: led h17i0 i17i0 red
-  GS3: ground i17i0
-  RS4: resistor n17 o17 330
-  DS4: led o17 p17 red
-  GS4: ground p17
-  RC4: resistor n11 o11 330
-  DC4: led o11 p11 red
-  GC4: ground p11
+  U1: ic j14 CD74HC283
+  VCC: vcc f14 5V
+  GU1: ground m14
+  GC0: ground l11a5
+  VCC: vcc b3 5V
+  SA1: switch b3 b6 l=$\mathrm{A1}$
+  RA1: resistor b6 c6 10k l=$R_\mathrm{A1}$
+  GA1: ground c6
+  VCC: vcc d3 5V
+  SB1: switch d3 d6 l=$\mathrm{B1}$
+  RB1: resistor d6 e6 10k l=$R_\mathrm{B1}$
+  GB1: ground e6
+  VCC: vcc f3 5V
+  SA2: switch f3 f6 l=$\mathrm{A2}$
+  RA2: resistor f6 g6 10k l=$R_\mathrm{A2}$
+  GA2: ground g6
+  VCC: vcc h3 5V
+  SB2: switch h3 h6 l=$\mathrm{B2}$
+  RB2: resistor h6 i6 10k l=$R_\mathrm{B2}$
+  GB2: ground i6
+  VCC: vcc j3 5V
+  SA3: switch j3 j6 l=$\mathrm{A3}$
+  RA3: resistor j6 k6 10k l=$R_\mathrm{A3}$
+  GA3: ground k6
+  VCC: vcc l3 5V
+  SB3: switch l3 l6 l=$\mathrm{B3}$
+  RB3: resistor l6 m6 10k l=$R_\mathrm{B3}$
+  GB3: ground m6
+  VCC: vcc n3 5V
+  SA4: switch n3 n6 l=$\mathrm{A4}$
+  RA4: resistor n6 o6 10k l=$R_\mathrm{A4}$
+  GA4: ground o6
+  VCC: vcc p3 5V
+  SB4: switch p3 p6 l=$\mathrm{B4}$
+  RB4: resistor p6 q6 10k l=$R_\mathrm{B4}$
+  GB4: ground q6
+  RS1: resistor m26 n26 330 l=$R_\mathrm{S1}$
+  DS1: led n26 o26 red l=$D_\mathrm{S1}$
+  GS1: ground o26
+  RS2: resistor m23a5 n23a5 330 l=$R_\mathrm{S2}$
+  DS2: led n23a5 o23a5 red l=$D_\mathrm{S2}$
+  GS2: ground o23a5
+  RS3: resistor m21 n21 330 l=$R_\mathrm{S3}$
+  DS3: led n21 o21 red l=$D_\mathrm{S3}$
+  GS3: ground o21
+  RS4: resistor m18a5 n18a5 330 l=$R_\mathrm{S4}$
+  DS4: led n18a5 o18a5 red l=$D_\mathrm{S4}$
+  GS4: ground o18a5
+  RC4: resistor m16 n16 330 l=$R_\mathrm{C4}$
+  DC4: led n16 o16 red l=$D_\mathrm{C4}$
+  GC4: ground o16
 wires:
-  - U1.16 -| f14g0
-  - U1.7 -| i11a6
-  - U1.8 -| i11e6
-  - i11a6 -- i11e6 -- j11a6
-  - f4 -- f11a2
-  - f11a2 |- U1.3
-  - e7 -- e11a6
-  - e11a6 |- U1.2
-  - e19 -- e14a8
-  - e14a8 |- U1.15
-  - f23 -- f15a2
-  - f15a2 |- U1.14
-  - l7 -- l10a8
-  - l10a8 |- U1.5
-  - m4 -- m11a2
-  - m11a2 |- U1.6
-  - l19 -- l15a2
-  - l15a2 |- U1.12
-  - m23 -- m14a8
-  - m14a8 |- U1.11
-  - U1.4 -| g9i0
-  - U1.13 -| g17i0
-  - U1.1 -| b12
-  - b12 -- b13a5
-  - U1.9 -| n14
-  - n14 -- n11
-  - U1.10 -| n14a4
-  - n14a4 -- n17
+  - U1.VCC |- f14
+  - U1.GND |- m14
+  # C0 (CIN) は GND に固定
+  - U1.CIN -| l11a5
+  - U1.A0 -| b11
+  - b11 -- b6
+  - U1.B0 -| d10a5
+  - d10a5 -- d6
+  - U1.A1 -| f10
+  - f10 -- f6
+  - U1.B1 -| h9a5
+  - h9a5 -- h6
+  - U1.A2 -| j6
+  - U1.B2 -| l10
+  - l10 -- l6
+  - U1.A3 -| n10a5
+  - n10a5 -- n6
+  - U1.B3 -| p11
+  - p11 -- p6
+  - U1.S0 -| m26
+  - U1.S1 -| m23a5
+  - U1.S2 -| m21
+  - U1.S3 -| m18a5
+  - U1.COUT -| m16
 notes:
-  - text j4a5 blue: A1
-  - text d1a5 blue: A2
-  - text d23a6 blue: A3
-  - text j19a6 blue: A4
-  - text k1a5 blue: B1
-  - text c4a5 blue: B2
-  - text c19a6 blue: B3
-  - text k23a6 blue: B4
-  - text i7a5 blue: "和1"
-  - text b14a6 blue: "和2"
-  - text i17a6 blue: "和3"
-  - text p17a6 blue: "和4"
-  - text p9a5 blue: C4
-  - text q1 small left: "数字は CD74HC283 の PIN 番号。VCC は PIN 16、GND は PIN 8"
-  - text r1 small left: "C0 (PIN 7) は GND に固定。使わない入力は無い"
+  - text p16 blue center: C4
+  - text p18a5 blue center: 和4
+  - text p21 blue center: 和3
+  - text p23a5 blue center: 和2
+  - text p26 blue center: 和1
+  - text r1 small left: "箱の足の名前は 0 から数える (A0 は本文の A1、S0 は本文の和1)"
 style:
   grid: on
   pitch: 1.2

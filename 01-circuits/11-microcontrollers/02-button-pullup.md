@@ -26,7 +26,7 @@ title: 図1 プルアップ抵抗とボタン
 parts:
   U1: pico2 e3c0
   R1: resistor f6 i6 10k
-  SW1: button i6 k6
+  SW1: button i6 k6 l=$\mathrm{SW1}$
   G1: ground k6
 wires:
   - U1.3V3 -| f6

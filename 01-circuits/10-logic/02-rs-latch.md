@@ -26,18 +26,18 @@ title: 図1 NANDたすき掛けのRSラッチ
 parts:
   VCC: vcc b5 5V
   RS: resistor b5 e5 10k
-  SWS: button e5 g5
+  SWS: button e5 g5 l=$\mathrm{SW}_\mathrm{S}$
   GSWS: ground g5
   VCC: vcc j3 5V
   RR: resistor j3 n3 10k
-  SWR: button n3 p3
+  SWR: button n3 p3 l=$\mathrm{SW}_\mathrm{R}$
   GSWR: ground p3
   U1A: nand h14 CD4011
   U1B: nand m14 CD4011
-  RQ: resistor h20 h23 330
+  RQ: resistor h20 h23 1k
   DQ: led h23 j23 red
   GDQ: ground j23
-  RQb: resistor m20 m23 330
+  RQb: resistor m20 m23 1k
   DQb: led m23 o23 red
   GDQb: ground o23
 wires:
@@ -78,6 +78,10 @@ style:
 - 使わないゲート3・4 の入力 (PIN 8・9・12・13) は GND につなぐ (図1 には描かず、
   図の下に書いた)。CMOS の入力は浮かせると勝手に振れて電流を食う (10-1)。
   出力の PIN 10・11 は何もつながずに開けておく
+- LED の直列抵抗 RQ・RQb は 1kΩ。10-1 と同じく、5V の CD4000 系の出力は数 mA しか
+  流し出せない (TI の CD4011B のデータシートで I<sub>OH</sub> は出力 2.5V のとき最小 1.6mA)。
+  1kΩ なら LED の電流は 1.5〜2.2mA (10-1 で求めた目安)。暗いときは高輝度 LED にするか、
+  74HC00 (74HC 系の NAND) に替える
 
 ## 実体配線図
 
@@ -90,9 +94,9 @@ parts:
   SWR: button @ e32
   RR: resistor b36 b34 10k
   U1: dip14 @ e20 CD4011
-  RQ: resistor h16 h11 330
+  RQ: resistor h16 h11 1k
   DQ: led g11(A) g8(K) red
-  RQb: resistor h30 h35 330
+  RQb: resistor h30 h35 1k
   DQb: led i35(A) i39(K) red
   PS:
     type: device
