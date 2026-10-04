@@ -301,13 +301,13 @@ parts:
   U1: dip4 f12 3SK291
   R1: resistor e7 e10 51
   R2: resistor e6 b6 1M
-  R3: resistor i3 i6 51
+  R3: resistor h3 h6 51
   R4: resistor i16 f16 33k
   R5: resistor n14 q14 13k
   R6: resistor i8 l8 150k
   R7: resistor e21 h21 2k
   VR1: potentiometer/trimmer k10 k11 k12 200k
-  C1: capacitor/ceramic h7 h10 10n
+  C1: capacitor/ceramic g7 g10 10n
   C2: capacitor/ceramic m7 m10 10n
   C3: capacitor/ceramic b15 e15 560p
   C4: capacitor/ceramic e17 e20 10n
@@ -334,7 +334,8 @@ wires:
   - k3 -- k4 red
   - k2 -- k3 red
   - d0 -- d1 black
-  - d1 -- i1 black
+  - d1 -- h1 black
+  - h1 -- i1 black
   - i0 -- i1 black
   - k0 -- k1 black
   - k1 -- m1 black
@@ -342,11 +343,9 @@ wires:
   - n2 -- m2 black
   - m2 -- m4 black
   - m4 -- m6 black
-  - m6 -- n6 black
-  - i1 -- i3 black
-  - n6 -- n7 black
-  - n7 -- q7 black
-  - q7 -- q11 black
+  - m6 -- q6 black
+  - h1 -- h3 black
+  - q6 -- q11 black
   - q11 -- q14 black
   - q14 -- q21 black
   - q21 -- q23 black
@@ -363,14 +362,14 @@ wires:
   - j21 -- q21 black
   - j23 -- q23 black
   - c1 -- c4 white
-  - c4 -- h4 white
-  - h4 -- h7 white
-  - h7 -- e7 white
-  - h10 -- i10 white
+  - c4 -- g4 white
+  - g4 -- g7 white
+  - g7 -- e7 white
+  - g10 -- i10 white
   - i10 -- i8 white
-  - e6 -- g6 blue
-  - g6 -- g10 blue
-  - g10 -- h10 blue
+  - e6 -- f6 blue
+  - f6 -- f10 blue
+  - f10 -- g10 blue
   - l8 -- l9 white
   - l9 -- k9 white
   - k9 -- k10 white
@@ -383,7 +382,7 @@ wires:
   - i16 -- m16 white
   - b16 -- f16 yellow
   - j1 -- j6 white
-  - j6 -- i6 white
+  - j6 -- h6 white
   - j6 -- k6 white
   - k6 -- k7 white
   - k7 -- m7 white
@@ -408,15 +407,15 @@ style:
 5×7 cm に収めるために、次のようにした。
 
 - 端面実装の SMA は胴が板の外へ出るので、板の中の穴は中心導体の 1 穴 (J1 は c1、J2 は j1、J3 は j24) だけ。先端は縁の銅箔 (0 列と 25 列) に半田付けする
-- 抵抗・コンデンサ・インダクタは足を 3 穴間隔 (差が 3) にした (L2 は縦。R3 は i 行に横に置く。C6・C7 は USB-C の基板のすぐ上に縦に置き、2 穴間隔で k 行 (VDD) と m 行 (GND) にまたがる)
+- 抵抗・コンデンサ・インダクタは足を 3 穴間隔 (差が 3) にした (L2 は縦。R3 は h 行に横に置く。C6・C7 は USB-C の基板のすぐ上に縦に置き、2 穴間隔で k 行 (VDD) と m 行 (GND) にまたがる)
 - USB-C (J4) の変換基板は 14.5 x 9.2 x 3.2 mm の品を想定する。図の胴は幅 9.2 mm (約 3.6 穴) で 2〜5 列に、長さは 5 穴に詰めて n 行から下に描かれる。**足は基板の後ろの縁の四角いパッド 4 つ (n2〜n5) で、線はパッドへつなぐ。図ではパッドの真ん中から線が出るのが部品面からも見える。胴の上には部品も線も置かない** (m 行の GND の筋は胴のすぐ上を通る)。足の書き順は変換基板のパッドの並び GND D+ D- VBUS で、4 本とも書くので `J4: usb-c/female n2 n3 n4 n5` と書く。左端が GND (n2)、右端が VBUS (n5)、間の D+ (n3)・D- (n4) は使わない。基板の刷り字は VBUS を `V` と縮めてあり、パッドの下に出る
-- GND の筋は Q 行の q7〜q24。左の GND は m 行 (m1〜m6) から n6 へ下り、n7 → 7 列を下って q7 へ、右は 25 列を下って q25 → q24
-- 跨ぎは数えていない。VBUS の線 (2 列と 5 列) を RF・LO の線と i 行・m 行の GND の線が渡る
+- GND の筋は Q 行の q6〜q24。左の GND は m 行 (m1〜m6) から 6 列を下って q6 へ、右は 25 列を下って q25 → q24
+- 跨ぎは数えていない。VBUS の線 (2 列と 5 列) を RF・LO の線と h 行・m 行の GND の線が渡る
 - U1 は dip4 のまま (向きを変えていない)。前の版は perf_5x7_edge_v5.md に残した
 
 - USB-C (J4) は左下の隅。VBUS のパッド (n5) から 5 列を k 行まで上って C7 の + (k4)・C6 (k2) へ渡り、2 列を b 行の電源 + の筋へ。GND のパッド (n2) から m2 へ上がって m 行の GND の筋へ。D+ (n3)・D- (n4) はどこにもつながない。CC1・CC2 の 5.1 kΩ は、変換基板に内蔵のもの (電源取り出し用の基板) を使う前提で、図には描かない。変換基板は 14.5 x 9.2 x 3.2 mm の品を想定 (図は縦 5 穴に詰める)
 - J1 (RF 入力) は左上の b〜d 行 (先端 b0・d0、中心 c1)。J2 (LO 入力) は左の中央。J3 (IF 出力) は右の中央。入口の 51 Ω (R1・R3) は SMA の中心から。IF は L2 から J3 の中心 (j24) へ。計器側が 50 Ω の負荷
-- 左端の縁の銅箔の GND は 1 列に出し (d1〜i1、k1〜m1)、m 行へ通した。R3 の GND の足 (i3) は i1 から
+- 左端の縁の銅箔の GND は 1 列に出し (d1〜i1、k1〜m1)、m 行へ通した。R3 の GND の足 (h3) は h1 から
 - C5 の GND の足 (j23) は 23 列を真下に通って q23 へ (IF の線が被覆線で渡る)
 - 半田付けの順は、電源と GND の筋 → 抵抗・インダクタ・コンデンサ → VR1 → FL1 → C6・C7 → U1 の変換基板 → J1〜J4
 - FL1 の足: 1 = IN (j20)、2 = GND (j21)、3 = OUT (j22)。VR1: 1 = A (k10、中点)、2 = W (k11)、3 = B (k12)。W は GND (11 列の線)、B は W と線でつなぐ
@@ -427,13 +426,13 @@ style:
 | U1 | 3SK291 (dip4) | アンカー f12: S f12、D f13、G1 i12、G2 i13 |
 | R1 | 51 | e7 (RF) / e10 (GND) |
 | R2 | 1M | e6 (G1) / b6 (VDD) |
-| R3 | 51 | i6 (LO) / i3 (GND) |
+| R3 | 51 | h6 (LO) / h3 (GND) |
 | R4 | 33k | i16 (G2) / f16 (VDD) |
 | R5 | 13k | n14 (G2) / q14 (GND) |
 | R6 | 150k | i8 (G1) / l8 (中点) |
 | R7 | 2k | e21 (FIN) / h21 (GND) |
 | VR1 | 200k 半固定 | k10 (A) k11 (W) k12 (B) |
-| C1 | 10n | h7 (RF) / h10 (G1) |
+| C1 | 10n | g7 (RF) / g10 (G1) |
 | C2 | 10n | m7 (LO) / m10 (G2) |
 | C3 | 560p | b15 (VDD) / e15 (D) |
 | C4 | 10n | e17 (D) / e20 (FIN) |
