@@ -119,88 +119,146 @@ style:
   (5V − 2.0V) / 330Ω ≈ 9.1mA で、10mA を超えない。330Ω は E24 の値
 - 電流がいちばん多いのは「8」を出して 7 セグメントが全部点くときで、
   7 × 6.7mA ≈ 47mA (5V で見積もっても 7 × 9.1mA ≈ 64mA)。プルダウン抵抗の 4 本
-  (閉じたとき 1 本 0.5mA) を足しても 70mA に届かない。ブレッドボードに組んでも、
-  1 穴 200mA・板全体 500mA (README の板の範囲) に収まる。4511 の 1 出力あたりの
-  上限 25mA にも十分余裕がある
+  (閉じたとき 1 本 0.5mA) を足しても 70mA に届かない。4511 の 1 出力あたりの
+  上限 25mA にも十分余裕がある。板に組んだときの電流の扱いは、図2 の説明に書く
 
 ## 実体配線図
 
-```breadboard
-title: 図2 ブレッドボードに組む (U1 は CD4511B、DS1 は 7 セグメント LED。電源は AD3 の Supplies)
-board: full
+出力が 7 本 (a〜g) あり、ブレッドボードでは線が重なって追えない。配線が多いので perfboard に組む。
+7 セグメントの 7 本の線は、足の並びの向きが U1 と逆なので、そのままでは交差が避けられない。
+電流は約 50mA と、AD3 の Supplies の各レール 50mA (USB 給電で 250mW) の限度に近い。
+そこで電源は別の 5V (USB アダプタ) にする。AD3 は電源に使わないので、この題の図には入れない。
+
+```perfboard
+title: 図2 perfboard に組む (部品面と半田面。電源は USB アダプタ)
+board:
+  size: 9x7cm
+  h: 1.6mm
+  material: FR-4
+style:
+  back: on
 parts:
-  AD:
+  PSU:
     type: device
-    at: top
-    label: Analog Discovery 3 (Supplies)
-    pins: [V+, GND]
-  U1: dip16 @ e30 CD4511B
-  DS1: seg7 @ h50
-  Rg: resistor a47 a50 330
-  Rf: resistor b48 b51 330
-  Ra: resistor c49 c53 330
-  Rb: resistor b54 b57 330
-  Re: resistor i47 i50 330
-  Rd: resistor j48 j51 330
-  Rc: resistor i53 i56 330
-  SWA: switch c22 c25
-  RpdA: resistor d22 d20 10k
-  SWB: switch c16 c19
-  RpdB: resistor d16 d14 10k
-  SWC: switch c10 c13
-  RpdC: resistor d10 d8 10k
-  SWD: switch c4 c7
-  RpdD: resistor d4 d2 10k
+    at: -c3
+    label: 5V USB アダプタ
+    pins: [GND, +5V]
+  U1: dip16 j19 r90 CD4511B
+  DS1: seg7 l26
+  Rf: resistor k20 k22 330
+  Rg: resistor l23 l25 330
+  Ra: resistor m20 m22 330
+  Rb: resistor n23 n25 330
+  Rc: resistor o20 o22 330
+  Rd: resistor p23 p25 330
+  Re: resistor q20 q22 330
+  SWB: switch d6 g6
+  RpdB: resistor h6 j6 10k
+  SWC: switch h9 k9
+  RpdC: resistor l9 n9 10k
+  SWD: switch l11 o11
+  RpdD: resistor p11 r11 10k
+  SWA: switch p13 s13
+  RpdA: resistor t13 v13 10k
+notes:
+  - text j27: DS1 5161AS
 wires:
-  - AD.V+ -- +t1 red
-  - AD.GND -- -t2 black
-  - -t1 -- -b1 black
-  - +t3 -- +b3 red
-  - a30 -- +t30 red
-  - h32 -- +b32 red
-  - h33 -- +b33 red
-  - h34 -- -b34 black
-  - h37 -- -b37 black
-  - a7 -- +t7 red
-  - a13 -- +t13 red
-  - a19 -- +t19 red
-  - a25 -- +t25 red
-  - a2 -- -t2 black
-  - a8 -- -t8 black
-  - a14 -- -t14 black
-  - a20 -- -t20 black
-  - a52 -- -t52 black
-  - j52 -- -b52 black
-  - e22 -- g22 yellow
-  - g22 -- g36 yellow
-  - e16 -- h16 yellow
-  - h16 -- h30 yellow
-  - e10 -- i10 yellow
-  - i10 -- i31 yellow
-  - e4 -- j4 yellow
-  - j4 -- j35 yellow
-  - b32 -- b47 orange
-  - c31 -- c48 orange
-  - d33 -- d49 orange
-  - a34 -- b57 orange
-  - c35 -- h56 orange
-  - d36 -- h48 orange
-  - d37 -- h47 orange
+  # 電源
+  - PSU.+5V -- b4 red
+  - b4 -- b6 red
+  - b6 -- b19 red
+  - b19 -- j19 red
+  - PSU.GND -- b3 black
+  - b3 -- y3 black
+  - y3 -- y11 black
+  - y11 -- y28 black
+  - y28 -- y31 black
+  - k31 -- y31 black
+  - k28 -- k31 black
+  - l28 -- k28 black
+  - r28 -- y28 black
+  # + の階段
+  - b6 -- d6 red
+  - d6 -- d9 red
+  - d9 -- h9 red
+  - h9 -- h11 red
+  - h11 -- l11 red
+  - l11 -- l13 red
+  - l13 -- l16 red
+  - l13 -- p13 red
+  - l16 -- m16 red
+  # GND の階段
+  - v11 -- y11 black
+  - v13 -- v11 black
+  - v11 -- r11 black
+  - r11 -- r9 black
+  - r9 -- n9 black
+  - n9 -- n6 black
+  - n6 -- j6 black
+  - n16 -- n15 black
+  - n15 -- q15 black
+  - q15 -- q16 black
+  - q15 -- v15 black
+  - v15 -- v13 black
+  # 入力
+  - g6 -- h6 gray
+  - j16 -- j15 gray
+  - j15 -- g15 gray
+  - g15 -- g6 gray
+  - k9 -- l9 pink
+  - k16 -- k9 pink
+  - "o11 -- p11 #00aaaa"
+  - "o16 -- o11 #00aaaa"
+  - "s13 -- t13 #c8a000"
+  - "s14 -- s13 #c8a000"
+  - "p14 -- s14 #c8a000"
+  - "p16 -- p14 #c8a000"
+  # 出力
+  - k19 -- k20 yellow
+  - l19 -- l23 orange
+  - m19 -- m20 green
+  - n19 -- n23 blue
+  - o19 -- o20 purple
+  - p19 -- p23 brown
+  - q19 -- q20 white
+  - k22 -- k27 yellow
+  - k27 -- l27 yellow
+  - l25 -- l26 orange
+  - m22 -- m29 green
+  - m29 -- l29 green
+  - n25 -- n30 blue
+  - n30 -- l30 blue
+  - o22 -- o29 purple
+  - o29 -- r29 purple
+  - p25 -- p27 brown
+  - p27 -- r27 brown
+  - q22 -- q25 white
+  - q25 -- r25 white
+  - r25 -- r26 white
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/07-seven-segment.svg)
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/perfboard/07-seven-segment.svg)
 
-- 板は full (60 列)。U1 (CD4511B) は 30〜37 列で、切り欠きが左、PIN 1 (INB) が下の左端 (f 行の 30 列)、PIN 16 (VDD) が上の左端
-- 電源は AD3 の Supplies。V+ (赤) を +5V、GND (黒) を GND へ。VDD (PIN 16) と LT・BL (PIN 3・4) は +5V、VSS (PIN 8) と LE (PIN 5) は GND へ
-- 入力は左の 4 組。上のブロックの SWD・SWC・SWB・SWA (左から 4・10・16・22 列) が +5V から、10kΩ のプルダウンが GND へ。
-  各スイッチの出力の列から黄の線で、下のブロックの U1 の足 (IND・INC・INB・INA) へ
-- 出力はオレンジの線。U1 の上の足 (Oa〜Og) から、右の抵抗 Ra〜Rg (330Ω) の左端へ渡す。
-  抵抗の右端は DS1 の足の列で、a・b・f・g は上のブロック、c・d・e は下のブロック。
-  7 本の線が交わらないように置けないので、図の色は同じで、線の端 (列の番号) で追う
-- DS1 は 5161AS (コモンカソード)。50〜54 列に挿し、COM1・COM2 (52 列) を GND へ。dp は使わない
+- 板は 7×9 cm (1.6mm の FR-4) を横に置く。5×7 cm は、外周の 1 穴と電源の筋を残すと、入力の 4 組と出力の 7 本を線が重ならない間隔で置けない。
+  左から入力 (スイッチと 10kΩ)・U1・Ra〜Rg・DS1 の順に並べ、信号が左から右へ流れる
+- U1 (CD4511B) は縦に立てて切り欠きを上にする。左の列が上から PIN 1 (INB)〜PIN 8 (VSS)、右の列が上から PIN 16 (VDD)〜PIN 9 (Oe)。
+  電源は左上の 5V USB アダプタ。+5V (赤) は B 行を右へ運んで VDD (J19) へ。
+  左の「+ の階段」は、B 行から SWB・SWC・SWD・SWA の上の足 (D6・H9・L11・P13) と、LT・BL (L16・M16) へ配る
+- GND (黒) は 3 列を下って Y 行へ。左の「GND の階段」は、RpdB・RpdC・RpdD・RpdA の下の足 (J6・N9・R11・V13) と、
+  LE・VSS (N16・Q16) を結んで Y 行へ落とす。DS1 の COM2 (L28) は K 行を右へ出て 31 列を下り、COM1 (R28) は 28 列を下って、どちらも Y 行へ
+- 入力は階段状の 4 組。上の足を + の階段へ、下の足を GND の階段へつなぎ、スイッチと 10kΩ の間 (G6/H6・K9/L9・O11/P11・S13/T13) から、
+  色の付いた線で U1 の入力 (灰 INB・桃 INC・水色 IND・金 INA) へ運ぶ
+- 出力 Ra〜Rg は、U1 の右の列から 1 行ずつ右へ出る。隣の行の字が重ならないよう、Rf・Ra・Rc・Re と Rg・Rb・Rd を 2 列にずらして置いた。
+  線は実物の被覆の色で描き分ける (f 黄・g 橙・a 緑・b 青・c 紫・d 茶・e 白)
+- DS1 は 5161AS (コモンカソード)。上の列が左から g・f・COM2・a・b、下の列が左から e・d・COM1・c・dp。dp は使わない
+- DS1 の足は上と下の 2 列だけで、間の穴は空いている。a・b・c・d の 4 本は半田面で DS1 の下を通し、
+  上の列の a・b と下の列の c・d の足へ運ぶ。f・g・e は DS1 の外を通る
+- 交差は 5 か所で、どれも被覆線で跨ぐ。灰 (INB) が + の階段 (SWC へ) を、桃 (INC) が + の階段 (SWD へ) を、
+  水色 (IND) が + の階段 (SWA へ) と GND の線 (LE・VSS を結ぶ線) を、金 (INA) が GND の線を跨ぐ。
+  この足の並びで、交差を 0 にする配置は見つけられなかった
 - 板を流れる電流は、セグメント 7 本で最大約 47mA (回路図の見積もり)、プルダウンで約 2mA で、合計は 50mA 前後
-  (5V で見積もっても 7 × 9.1mA ≈ 64mA)。AD3 の Supplies の各レール 50mA (USB 給電で 250mW) の目安をわずかに超え得るので、
-  Supplies だけで足りないときは 5V の USB アダプタを使い、その GND を AD3 の GND につなぐ。板の範囲 (1 穴 200mA・板全体 500mA) には収まる
+  (5V で見積もっても 7 × 9.1mA ≈ 64mA)。perfboard の範囲 (1 本の線・ランドごとに 500mA、板全体で 2A) には余裕で収まる。
+  USB アダプタは 500mA 以上のものを使う
 
 ## 部品
 
@@ -211,11 +269,12 @@ wires:
 | Ra〜Rg | 抵抗 (1/4 W)、セグメントの電流制限 | 330Ω × 7 本 |
 | RpdA〜RpdD | 抵抗 (1/4 W)、プルダウン | 10kΩ × 4 本 |
 | SWA〜SWD | スライドスイッチかトグルスイッチ | 4 個 |
-| — | 電源・計器 | AD3 の Supplies (V+ = 5V、GND。Master Enable を入れる)。電流が足りないときは 5V の USB アダプタ |
+| — | 電源 | 5V の USB アダプタ (500mA 以上)。AD3 の Supplies は各レール 50mA の限度に近いので使わない |
 
 ## 計器の設定
 
-計器は AD3 の Supplies (5V) だけ。スイッチで決めた BCD を 7 セグメントの形に直す回路は、時間で動かず、
+計器はテスターだけ。電源は 5V の USB アダプタで、AD3 は使わない (電流が Supplies の限度に近いため)。
+スイッチで決めた BCD を 7 セグメントの形に直す回路は、時間で動かず、
 入力の組で表示が決まるので、オシロやロジックの画面は付けない (見るのは表示器の形と、テスターで測る電圧)。
 テスターの直流電圧レンジで、Ra など抵抗の両端を測る。
 
