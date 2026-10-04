@@ -326,14 +326,11 @@ wires:
   - n5 -- j5 red
   - j5 -- j4 red
   - j2 -- b2 red
-  - b2 -- b3 red
-  - b3 -- b10 red
-  - b10 -- b11 red
+  - b2 -- b11 red
   - b11 -- b13 red
   - b13 -- b15 red
   - b15 -- b16 red
-  - j3 -- j4 red
-  - j2 -- j3 red
+  - j2 -- j4 red
   - d0 -- d1 black
   - d1 -- f1 black
   - f1 -- h1 black
@@ -348,14 +345,12 @@ wires:
   - f1 -- f4 black
   - q6 -- q12 black
   - q12 -- q16 black
-  - q16 -- q21 black
-  - q21 -- q24 black
+  - q16 -- q24 black
   - j25 -- j24 black
   - j24 -- q24 black
   - c6 -- c12 black
-  - c12 -- e12 black
+  - c12 -- f12 black
   - f14 -- f12 black
-  - e12 -- f12 black
   - f12 -- k12 black
   - k12 -- q12 black
   - k12 -- k11 black
@@ -381,8 +376,7 @@ wires:
   - b16 -- f16 yellow
   - i1 -- i4 white
   - i4 -- i7 white
-  - i7 -- k7 white
-  - k7 -- n7 white
+  - i7 -- n7 white
   - f15 -- e15 white
   - e13 -- e15 white
   - e15 -- e17 white
