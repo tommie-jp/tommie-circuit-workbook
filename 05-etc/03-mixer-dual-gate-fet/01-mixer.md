@@ -300,7 +300,7 @@ board:
 parts:
   U1: dip4 f14 3SK291
   R1: resistor c7 c10 51
-  R2: resistor e6 b6 1M
+  R2: resistor e11 b11 1M
   R3: resistor g3 g6 51
   R4: resistor i16 f16 33k
   R5: resistor n16 q16 13k
@@ -326,9 +326,9 @@ wires:
   - j5 -- j4 red
   - j2 -- b2 red
   - b2 -- b3 red
-  - b3 -- b6 red
-  - b6 -- b10 red
-  - b10 -- b13 red
+  - b3 -- b10 red
+  - b10 -- b11 red
+  - b11 -- b13 red
   - b13 -- b15 red
   - b15 -- b16 red
   - j3 -- j4 red
@@ -369,9 +369,8 @@ wires:
   - f10 -- g10 white
   - g10 -- i10 white
   - g10 -- g8 white
-  - e6 -- f6 blue
-  - f6 -- f10 blue
   - f10 -- e10 blue
+  - e10 -- e11 blue
   - j8 -- k8 white
   - k8 -- k9 white
   - i14 -- i10 yellow
@@ -423,7 +422,7 @@ style:
 | --- | --- | --- |
 | U1 | 3SK291 (dip4) | アンカー f14: S f14、D f15、G1 i14、G2 i15 |
 | R1 | 51 | c7 (RF) / c10 (GND) |
-| R2 | 1M | e6 (G1) / b6 (VDD) |
+| R2 | 1M | e11 (G1) / b11 (VDD) |
 | R3 | 51 | g6 (LO) / g3 (GND) |
 | R4 | 33k | i16 (G2) / f16 (VDD) |
 | R5 | 13k | n16 (G2) / q16 (GND) |
