@@ -57,6 +57,8 @@ npm run toc   # 題を足した・動かしたら
 npm run all   # 試験・lint・全題の検査 (CI と同じ)
 ```
 
+- `npm run all` の最後の `parity` は、同じ題の回路図と実体配線図のネットリストを部品の組で比べる。
+  等価回路・電流計の隙間などの見かけの違いは `scripts/netlist-parity-allow.json` に図の題と理由を書いて許す
 - `out/` (図) はコミットしない。測った値 (Touchstone・CSV) はコミットする
 - コミットは conventional commits (`docs:` が中心、スクリプトは `feat:` / `fix:`)。
   マージは fast-forward のみ

@@ -14,9 +14,10 @@
     "toc": "node scripts/toc.mjs",
     "render": "node scripts/render.mjs",
     "figures": "node scripts/figures.mjs",
+    "parity": "node scripts/netlist-parity.mjs",
     "lint": "markdownlint '**/*.md' --ignore node_modules --ignore out",
     "test": "node --test scripts/*.test.mjs",
-    "all": "npm test && npm run lint && npm run check"
+    "all": "npm test && npm run lint && npm run check && npm run parity"
   },
   "devDependencies": {
     "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.30.0/breadboard-fence-0.30.0.tgz",
