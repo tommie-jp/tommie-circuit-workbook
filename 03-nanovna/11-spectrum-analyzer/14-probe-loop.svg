@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600" font-family="'Noto Sans CJK JP','Noto Sans JP',sans-serif" font-size="15">
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="20" y="32" font-size="20" font-weight="bold" fill="#000">図7 L1・L3 (プローブ) の作り方と置き方</text>
+
+  <!-- (a) 素の 1 回巻き -->
+  <text x="20" y="72" font-weight="bold">(a) 1 回巻きのプローブ</text>
+  <circle cx="120" cy="170" r="60" fill="none" stroke="#c0392b" stroke-width="3"/>
+  <!-- 端の引き出し: 下で開いて SMA へ -->
+  <rect x="100" y="228" width="40" height="34" fill="#f4f4f4" stroke="#000"/>
+  <rect x="108" y="262" width="24" height="40" fill="#ddd" stroke="#000"/>
+  <text x="146" y="250" font-size="13">SMA (パネル取り付け型)</text>
+  <text x="146" y="268" font-size="13">芯に一端、胴に他端</text>
+  <line x1="120" y1="302" x2="120" y2="340" stroke="#000" stroke-width="5"/>
+  <text x="128" y="336" font-size="13">同軸で CH0 (または CH1) へ</text>
+  <!-- 直径の寸法 -->
+  <g stroke="#000" stroke-width="1">
+    <line x1="60" y1="96" x2="180" y2="96"/>
+    <line x1="60" y1="90" x2="60" y2="170"/>
+    <line x1="180" y1="90" x2="180" y2="170"/>
+  </g>
+  <polygon points="60,96 70,92 70,100" fill="#000"/>
+  <polygon points="180,96 170,92 170,100" fill="#000"/>
+  <text x="80" y="88" font-size="14">直径 3〜4 cm</text>
+  <text x="20" y="372" font-size="13">φ1 mm のすずめっき線</text>
+  <text x="20" y="390" font-size="13">直径 4 cm で約 0.1 µH (計算値)</text>
+
+  <!-- (b) シールドループ -->
+  <text x="300" y="72" font-weight="bold">(b) シールドループ (よりよい)</text>
+  <circle cx="400" cy="170" r="60" fill="none" stroke="#555" stroke-width="7"/>
+  <circle cx="400" cy="170" r="60" fill="none" stroke="#c0392b" stroke-width="2"/>
+  <!-- 頂上の切れ目 (網線だけ切る) -->
+  <rect x="393" y="100" width="14" height="20" fill="#ffffff"/>
+  <path d="M393 110 A60 60 0 0 1 407 110" fill="none" stroke="#c0392b" stroke-width="2"/>
+  <line x1="400" y1="108" x2="470" y2="90" stroke="#000"/>
+  <text x="474" y="88" font-size="13">網線だけを数 mm 切る</text>
+  <text x="474" y="106" font-size="13">(芯線は切らない)</text>
+  <rect x="380" y="228" width="40" height="34" fill="#f4f4f4" stroke="#000"/>
+  <rect x="388" y="262" width="24" height="40" fill="#ddd" stroke="#000"/>
+  <text x="426" y="250" font-size="13">SMA</text>
+  <line x1="400" y1="302" x2="400" y2="340" stroke="#000" stroke-width="5"/>
+  <text x="300" y="372" font-size="13">細い同軸 (RG-174 など) で円を作る。</text>
+  <text x="300" y="390" font-size="13">網線が電界をさえぎり、磁界だけを受ける</text>
+  <g font-size="12">
+    <rect x="610" y="60" width="16" height="6" fill="#555"/><text x="632" y="67">網線 (外側)</text>
+    <rect x="610" y="78" width="16" height="2" fill="#c0392b"/><text x="632" y="83">芯線</text>
+  </g>
+
+  <!-- (c) 置き方 -->
+  <text x="20" y="430" font-weight="bold">(c) 置き方 (上から見た図)</text>
+  <rect x="330" y="420" width="240" height="120" fill="none" stroke="#c0392b" stroke-width="3"/>
+  <text x="390" y="485">測るループ L2</text>
+  <!-- プローブ 2 つを反対側の辺の外に -->
+  <circle cx="300" cy="480" r="16" fill="none" stroke="#2471a3" stroke-width="3"/>
+  <circle cx="600" cy="480" r="16" fill="none" stroke="#2471a3" stroke-width="3"/>
+  <line x1="284" y1="480" x2="240" y2="480" stroke="#000" stroke-width="4"/>
+  <line x1="616" y1="480" x2="660" y2="480" stroke="#000" stroke-width="4"/>
+  <text x="150" y="476" font-size="13">L1 → CH0</text>
+  <text x="668" y="476" font-size="13">L3 → CH1</text>
+  <text x="640" y="520" font-size="13">・2 つは反対側の辺に置く</text>
+  <text x="640" y="538" font-size="13">・辺から 1〜3 cm 離す</text>
+  <text x="640" y="556" font-size="13">・山が見える範囲で遠ざける</text>
+  <text x="20" y="510" font-size="13">先に L2 を外して S21 を見て、</text>
+  <text x="20" y="528" font-size="13">L1→L3 の直接の漏れが低いことを確かめる</text>
+</svg>
