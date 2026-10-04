@@ -76,29 +76,32 @@ wires:
 ## 実体配線図
 
 ```breadboard
-title: 図3 直列のブレッドボード
+title: 図3 直列のブレッドボードと Analog Discovery
 board: half
 parts:
   R1: resistor c3 c8 10k
   S1: switch d8 d10
   C1: capacitor/film c10 c15 2.2u
   C2: capacitor/film d15 d20 4.7u
-  BAT:
+  AD:
     type: device
     at: top
-    label: "電源 5V"
-    pins: ["+", "-"]
+    label: Analog Discovery
+    pins: [V+, GND, "1+", "1-", "2+", "2-"]
 wires:
-  - BAT.+ -- a3 red
-  - BAT.- -- -t6 black
+  - AD.V+ -- a3 red
+  - AD.GND -- -t6 black
+  - AD.1+ -- a10 blue
+  - AD.1- -- b15 orange
+  - AD.2+ -- a15 white
+  - AD.2- -- b20 green
   - a20 -- -t20 black
-notes:
-  - text: "V1 (電圧レンジ) を C1 の両端 (10・15 列) に当てる"
-  - text: "V2 (電圧レンジ) を C2 の両端 (15・20 列) に当てる"
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/breadboard/01-capacitors-series-parallel.svg)
 
+- AD の V+ が 3 列 (R1 の左端)、GND が青レール。CH1 (1+・1−) は C1 の両端 (10 列と 15 列)、
+  CH2 (2+・2−) は C2 の両端 (15 列と 20 列)。C2 の右足 (20 列) も青レールにつなぐ
 - S1 (スイッチ) を実際に挿す。閉じてから数秒待てば十分充電される
   (時定数は R1 × 合成容量で 15 ms ほど。過渡現象は 5 章で扱う)
 - 並列にするには、C2 の左足を C1 の左足と同じ列 (10 列) に挿し替え、C1 の右足の
@@ -107,9 +110,34 @@ notes:
 
 ## 計器の設定
 
+AD の Supplies で 5 V を出し、Scope で C1 と C2 の電圧を同時に見る (テスターでも各コンデンサの電圧は読める)。
+
 | 計器 | 設定 |
 | --- | --- |
+| Supplies | V+ = 5 V (電源を入れてから S1 を閉じる) |
+| Scope | CH1 = C1 の両端、CH2 = C2 の両端 (どちらも差動)。DC 結合、1 V/div、Time base 20 ms/div。Trigger は CH1 の立ち上がり 0.1 V、Single |
 | テスター | 直流電圧レンジ。S1 を閉じて 1 秒ほど待ってから、各コンデンサの両端に当てる |
+
+```scope
+title: 図4 S1 を閉じると C1 (CH1) は 3.41 V、C2 (CH2) は 1.59 V まで充電される
+time: 20ms/div
+trigger: ch1 rising 0.1V at -1div
+ch1: {wave: "= 3.41V * step(t) * (1 - exp(-t/15ms))", range: 1V/div, position: -3div}
+ch2: {wave: "= 1.59V * step(t) * (1 - exp(-t/15ms))", range: 1V/div, position: -3div}
+cursors: [0, 15ms]
+measure: [vmax]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/scope/01-capacitors-series-parallel.svg)
+
+2 つの電圧は同じ時定数 15 ms (= R1 × 直列の合成容量 10 kΩ × 1.5 µF) で立ち上がり、
+最後に 3.41 V : 1.59 V (= C2 : C1 = 4.7 : 2.2) に落ち着く。
+
+### オシロスコープと発振器
+
+発振器は使わない (電源は直流の 5 V)。汎用オシロでは、CH2 の先端を 15 列、CH1 の先端を 10 列に当て、
+グランドクリップは 2 本とも青レール。CH2 がそのまま C2 の電圧 (15 列は C2 の + 側で、20 列が GND)、
+C1 の電圧は Math の CH1 − CH2 で読む。
 
 ## 見るべき値
 

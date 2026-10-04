@@ -59,15 +59,23 @@ parts:
     at: bottom
     label: DCモータ
     pins: ["+", "-"]
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery
+    pins: ["1+", "1-"]
 wires:
   - MOT.+ -- j5 orange
   - MOT.- -- j8 black
+  - AD.1+ -- f5 blue
+  - AD.1- -- f8 white
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/breadboard/02-motor-as-generator.svg)
 
 - MOT (モータ) だけを板の外の機器として描く。電源も他の部品も無い
-- CH1 (1+/1−) を下のブロックの 5 列・8 列にあて、モータの両端をそのまま読む
+- AD の CH1 (1+・1−) を下のブロックの 5 列・8 列 (f 行) につなぎ、モータの両端をそのまま読む。
+  Wavegen も Supplies も使わない (電源は無く、指で回す)
 
 ## 計器の設定
 
@@ -75,6 +83,19 @@ wires:
 | --- | --- |
 | Scope | CH1 = モータの両端 (V)。Time/div は 5〜20 ms 程度 (リップルの山が見える範囲) |
 | Measure | CH1 の Frequency (リップルの周波数 f_ripple)、Average や Peak-Peak (振幅の目安) |
+
+```scope
+title: 図3 AC 結合で見ると、300 rpm のリップルは 30 Hz (振幅は目安)
+time: 10ms/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 30Hz 0.02V, range: 10mV/div}
+measure: [freq, vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/scope/02-motor-as-generator.svg)
+
+図は遅く回した場合 (表の 300 rpm) のリップルだけを AC 結合で拡大したもの。E の平均 0.20 V は DC 結合に戻して Mean で読む。
+速く回した場合 (1200 rpm) は周波数が 120 Hz、E が 0.80 V に変わる。リップルの振幅 (図では 0.04 Vpp) は仮の値で、モータの作りで違う。
 
 指で軸を回すのは難しいので、遅く回す・速く回すの 2 段階で十分。**同じ向きに
 回し続ける** (向きを変えると極性が反転する)。

@@ -40,6 +40,35 @@ wires:
 - L1 が実験用のコイル (巻線)。M1 は AD の Scope の CH1 (電圧を読むだけで、
   電流はほとんど流さない。コイルには抵抗負荷を追加しなくてよい)
 
+## 実体配線図
+
+```breadboard
+title: 図2 コイルを Analog Discovery の Scope につなぐ
+board: half
+parts:
+  COIL:
+    type: device
+    at: bottom
+    label: コイル
+    pins: ["+", "-"]
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery
+    pins: ["1+", "1-"]
+wires:
+  - COIL.+ -- j5 orange
+  - COIL.- -- j8 black
+  - AD.1+ -- f5 blue
+  - AD.1- -- f8 white
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/breadboard/03-electromagnetic-induction.svg)
+
+- 板に挿す部品は無い。コイルの 2 本の端を 5 列と 8 列にそれぞれつなぎ、AD の 1+ と 1− も同じ列 (f 行) に挿す
+  (コイルの端を AD の 1+ と 1− に直接つないでもよい)
+- 電源も発振器も使わない。コイルが磁束の変化を受けて作る電圧を、Scope の CH1 が読むだけ
+
 ## 手順
 
 1. エナメル線を紙筒 (直径 2 cm ほど) に 300 回ほど巻き、両端の被膜を剥がして
@@ -53,7 +82,24 @@ wires:
 
 | 計器 | 設定 |
 | --- | --- |
-| Scope | CH1、DC 結合、Range は 1 V/div 程度、Time base は 100 ms/div、Trigger は Single |
+| Scope | CH1 (1+・1−)、DC 結合、Range は 1 V/div 程度、Time base は 100 ms/div、Trigger は Single |
+
+AD の Scope の CH1 (1+・1−) でコイルの両端の電圧を読む。
+
+```scope
+title: 図3 磁石を近づけると正の山、遠ざけると逆符号の山 (波形は目安)
+time: 100ms/div
+trigger: ch1 rising 50mV at -2div
+ch1: {wave: "= 0.3V * exp(-((t - 80ms) / 60ms)^2) - 0.3V * exp(-((t - 380ms) / 60ms)^2)", range: 200mV/div}
+measure: [vmax, vmin]
+notes:
+  - text 80ms 0.3V: 近づける
+  - text 380ms -0.3V: 遠ざける
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/scope/03-electromagnetic-induction.svg)
+
+図の山の高さ 0.3 V は「見るべき値」の見当 (300 回巻き・0.1 秒ほど) による。実際の波形は磁石の動かし方で変わる。
 
 ### オシロスコープと発振器
 

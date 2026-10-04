@@ -69,12 +69,21 @@ parts:
     at: top
     label: DCモータ
     pins: ["+", "-"]
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery
+    pins: ["2+", "1+", "2-", "1-"]
 wires:
   - BAT.+ -- +t2 red
   - BAT.- -- -t3 black
   - +t4 -- a4 red
   - MOT.+ -- a11 orange
   - MOT.- -- -t13 black
+  - AD.1+ -- d11 blue
+  - AD.1- -- -t16 black
+  - AD.2+ -- a7 white
+  - AD.2- -- e11 green
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/breadboard/01-back-emf.svg)
@@ -82,8 +91,10 @@ wires:
 - S1 で電池を入り切りする。Rs1 (10 Ω) はモータの電流を電圧に変えるシャント
 - 電池 (BAT) とモータ (MOT) は板の外の機器として描く。電池は上の赤・青レールへ、
   モータの + 側は 11 列 (Rs1 の右)、− 側は青レールにつながる
-- CH1 は 11 列 (モータの+) と GND (青レール) の間、CH2 は Rs1 の両端
-  (7 列と 11 列) にあてる (計器は図に描かず、AD のプローブを直接挿す)
+- AD の CH1 (1+・1−) は 11 列 (モータの +) と GND (青レール) の間、CH2 (2+・2−) は Rs1 の両端
+  (7 列と 11 列) につなぐ
+- 電源は AD の Supplies ではなく電池にする。回転を指で止めたとき (Ra の測定) に 0.5 A 流れ、
+  Supplies の 1 レール (50 mA まで) では足りない。AD は Scope だけを使う
 
 ## 計器の設定
 
@@ -129,6 +140,8 @@ wires:
   CH1 をそのまま V とすると、Rs1 の 0.15 V の分だけ E が大きく出る
 - 直流なので Measure の Mean (平均) で読む。Math に Measure を当てられない機種は、
   CH1 と CH2 の Mean の差でよい (平均は引き算と順序を入れ替えられる)
+
+この題はオシロの図を付けない — 見るのは直流の電圧と電流だけで (Scope の Mean か、テスターの読みで足りる)、時間で変わる波形が出ないため。
 
 ## 見るべき値
 
