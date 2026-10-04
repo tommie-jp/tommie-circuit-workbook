@@ -100,6 +100,11 @@ notes:
 title: 図2 ブレッドボードに組む
 board: half
 parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [V+, GND, W1, 2+, 1+, 1-, 2-]
   VC1:
     type: device
     at: top
@@ -120,6 +125,7 @@ parts:
   Cout: capacitor/ceramic a12 a15 0.1u
   Rload: resistor c12 c16 15k
   Csup: capacitor/electrolytic b16 b20 10u
+  RS: resistor e11 e9 1k
 wires:
   - VC1.E -- -t5 black
   - VC1.A -- a11 yellow
@@ -132,16 +138,74 @@ wires:
   - EAR.A -- j18 green
   - EAR.B -- -b20 black
   - -t28 -- -b28 black
+  - AD.V+ -- +t2 red
+  - AD.GND -- -t2 black
+  - AD.W1 -- a9 orange
+  - AD.2+ -- b9 blue
+  - AD.1+ -- b15 blue
+  - AD.1- -- -t24 black
+  - AD.2- -- -t26 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/08-radio-ic.svg)
 
-- 上の赤レール = +5V (USB や電池)、青レール = GND。28 列で上下の − レールを渡している
+- 上の赤レール = +5V (AD の V+)、青レール = GND (AD の GND)。28 列で上下の − レールを渡している
 - IC1 は 10・11・12 列 (PIN 1 = GND、PIN 2 = RF 入力、PIN 3 = 出力+電源)。上の注意のとおり、
   挿す前に入手した個体のデータシートで足の並びを確かめる
 - 11 列がタンクの上端 (VC1・アンテナ・L1) で、そのまま PIN 2 へ入る
 - PIN 3 (12 列) から Rload で +5V (16 列) へ、Cout で 15 列へ。15 列から緑の線で 18 列へ回って溝を越え
   (溝に刷った IC の字をよけるため)、j18 から EAR の A 端子へ。Csup は + の足を 16 列に挿す
+
+- AD3 を足した。V+ (Supplies、5 V) が上の赤レール、GND が青レールにつながる。この回路の電流は 0.25 mA ほどで、
+  AD3 の V+ の上限 (約 50 mA) に十分収まる。放送の電波が弱くて確かめにくいときは、W1 (Wavegen) の AM 信号を
+  RS (1 kΩ) を通して同調回路 (11 列) へ入れる試験ができる (そのときは ANT の線を外す)。
+  W1 の線は 9 列 (RS の左端) へ、2+ も同じ 9 列へ当てて、入れた信号を見る。1+ は Cout の出口の列 (15 列。直流を切ったあとの音声を見る)、1−・2− は上の青レールへ
+- 板の電流は 0.25 mA で、ブレッドボードの範囲 (1 穴 200 mA・板全体 500 mA) に十分収まる。周波数は 1 MHz 前後で 3 MHz 以下
+
+## 部品
+
+| 記号 | 部品 | 値 |
+| --- | --- | --- |
+| IC1 | ラジオ IC | TA7642 |
+| L1 | インダクタ (アキシャル) | 250 µH |
+| VC1 | ポリバリコン | 20〜260 pF |
+| Rload | 抵抗 | 15 kΩ |
+| Cout | セラミックコンデンサ | 0.1 µF |
+| Csup | 電解コンデンサ | 10 µF (16 V 以上) |
+| EAR | クリスタルイヤホン | 容量 約 15 nF |
+| RS | 抵抗 (試験用。W1 から同調回路へ入れる) | 1 kΩ |
+| — | 電源・試験用の信号源・オシロ | Analog Discovery 3 (V+ と GND、W1、Scope の 1・2) |
+
+## 計器の設定
+
+計器は Analog Discovery 3 (AD3)。電源 (Supplies) と試験の信号 (W1) とオシロ (Scope) を 1 台でまかなう。
+搬送波 1 MHz は Scope の範囲 (10 MHz 以下) に入る。波形で見たいのは PIN 3 に出る検波後の音声なので、オシロを選ぶ。
+VC1 は約 100 pF に回しておく (f<sub>0</sub> = 1 / (2π√(250 µH × 100 pF)) ≈ 1.007 MHz)。
+
+| 項目 | 値 |
+| --- | --- |
+| Supplies V+ | +5 V (Rload を通して PIN 3 へ) |
+| Wavegen W1 | 搬送波 Sine 1 MHz、振幅 10 mV (peak)、Modulation: AM、変調波 Sine 1 kHz、変調度 50 % |
+| Scope CH1 (1+ = Cout の出口) | Coupling DC (Cout が直流を切っている)、5 mV/div |
+| Scope CH2 (2+ = W1 の出力側) | Coupling DC、10 mV/div |
+| Scope 時間軸・トリガ | 200 µs/div、CH1 の立ち上がり |
+
+```scope
+title: 図3 AM 試験信号 (CH2) と Cout の出口の検波出力 (CH1) — 出力の大きさは仮定
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: = 0.01V * sin(2 * pi * 1kHz * t), range: 5mV/div, position: 2div}
+ch2: {wave: = 0.01V * (1 + 0.5 * sin(2 * pi * 1kHz * t)) * sin(2 * pi * 1MHz * t), range: 10mV/div, position: -1.5div}
+measure: [vpp, freq]
+cursors: [250us, 750us]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/08-radio-ic.svg)
+
+- 図3 は目安の画面で、実測ではない。CH2 は W1 に設定した AM 信号 (1 MHz は 200 µs/div では塗りつぶされた帯に見え、
+  帯の太さが 1 kHz で太り細りする)。CH1 は PIN 3 から Cout を通った検波後の 1 kHz で、振幅 10 mV (20 mV<sub>pp</sub>) は**仮定した値**。
+  TA7642 の出力の大きさは入力の強さと個体で変わるので、実物の値で読み替える
+- 見る点は、CH2 の帯が太い所で CH1 が上がる (同じ 1 kHz で動く) ことと、W1 を止める (振幅 0) と CH1 の 1 kHz が消えること
 
 ## 見るべき値
 

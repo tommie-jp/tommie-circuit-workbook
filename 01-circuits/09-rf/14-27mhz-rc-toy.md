@@ -16,6 +16,8 @@ board: [CB, PF]
 水晶で周波数を決めた 1 石の発振器、受信機は同じ周波数に合わせた同調回路と
 検波だけ。ここでは 27.145MHz (トイラジコンでよく使われたチャンネル) で両方を組み、
 W1 の方形波で送信機を断続させて、受信機の LED が同じ調子で点滅するのを見る。
+W1 を 50 Hz にすると LED は 1 秒に 50 回点滅するが、目には連続した光 (やや暗め) に見え、ちらつきはほぼ分からない。
+点滅を目で見るときは W1 を 2 Hz に下げる。50 Hz のままの断続は、オシロの波形 (図7) で確かめる。
 
 この題の流れは次のとおり。
 
@@ -397,12 +399,12 @@ parts:
     pins: DET GND
   AD:
     type: device
-    at: -c17
+    at: -c4
     label: Analog Discovery
     pins: V+ GND
   SC:
     type: device
-    at: -c4
+    at: y9
     label: AD CH1
     pins: 1+ 1-
   U1: dip8 i9 r90 LM358
@@ -411,12 +413,14 @@ parts:
   Rled: resistor j15 n15 470
   LED: led o15 s15 red
 wires:
-  - AD.V+ -- c17 red
-  - c17 -- c12 red
-  - c12 -- c9 red
+  - AD.V+ -- c4 red
+  - c4 -- c9 red
+  - c9 -- c12 red
   - c12 -- e12 red
   - c9 -- i9 red
-  - AD.GND -- w18 black
+  - AD.GND -- a5 black
+  - a5 -- a18 black
+  - a18 -- w18 black
   - w18 -- w15 black
   - w15 -- w12 black
   - w12 -- w6 black
@@ -431,8 +435,9 @@ wires:
   - PREV.DET -- n2 green
   - n2 -- n4 green
   - n4 -- n9 green
-  - SC.1+ -- n4 blue
-  - SC.1- -- w5 black
+  - SC.1+ -- n9 blue
+  - SC.1- -- w10 black
+  - w10 -- w12 black
   - n9 -- l9 green
   - i12 -- k12 orange
   - k9 -- k12 orange
@@ -442,8 +447,9 @@ wires:
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/perfboard/14-27mhz-rc-toy.svg)
 
-- 上の c 行の赤い筋が +5V (AD の V+)、下の w 行の黒い筋が GND。AD の GND は 18 列を降ろして w18 へ。
-  計器の箱は 2 つで、右上が電源 (V+・GND)、左上が CH1 の 1+・1− (AD CH1)。
+- 上の c 行の赤い筋が +5V (AD の V+)、下の w 行の黒い筋が GND。AD の GND は上の a 行を右へ回して 18 列を降ろし、w18 へ。
+  計器の箱は 2 つで、左上が電源 (V+・GND)、下の中ほどが CH1 の 1+・1− (AD CH1。1+ は 9 列で n9、1− は w10 へ。
+  1+ の線は w 行の GND の筋を 1 か所だけ渡る)。
   図4 の板からの GND は板の下から w3 へ (2 枚の板の GND を 1 か所でつなぐ)
 - U1 (LM358、DIP8) は 6 列と 9 列をまたいで立て、左の列が上から PIN 1・2・3・4、
   右の列が上から PIN 8・7・6・5 (足の名前は胴に刷ってある)。PIN 8 (i9) は c9 から降ろした +5V へ。
@@ -527,7 +533,7 @@ measure: [vmax, vmin, freq, duty]
 
 CH1 は CH2 と同じ 50Hz・デューティ 50% で上がり下がりする。高さの 0.3V は
 アンテナの間 10cm での目安で、**距離を離すとすぐ小さくなる** (近くの電界は距離の
-2〜3 乗で弱まる)。0.3V は判定の 49.5mV の約 6 倍あるので LED は確実に点滅する。
+2〜3 乗で弱まる)。0.3V は判定の 49.5mV の約 6 倍あるので LED は確実に点く (W1 が 50 Hz のときは明るさで確かめ、点滅は W1 を 2 Hz にして見る)。
 
 ## 見るべき値
 
@@ -540,7 +546,7 @@ CH1 は CH2 と同じ 50Hz・デューティ 50% で上がり下がりする。�
 | C<sub>T</sub> を回す | 周波数は動かず、約 16.3pF で高さが最大 |
 | 検波の出力 CH1 | 50Hz・デューティ 50%、最大 約0.3V (目安、10cm)・最小 0V |
 | LM358 PIN 6 の電圧 | 49.5mV |
-| LED | W1 の 50Hz で点滅 (目では速いので W1 を 2Hz にすると分かる) |
+| LED | W1 が 50Hz のとき、点きっぱなしの光に見える (平均の明るさは W1 が DC 5V のときより暗い)。W1 を 2Hz に下げると 1 秒に 2 回の点滅が目で分かり、W1 を止めて 0V にすると消える |
 | 受信機の CT2 を回す | 約 12.4pF で CH1 が最大 |
 | アンテナの間を 1m にする | CH1 がほぼ 0 になり LED が点かない (微弱の範囲の目安) |
 
