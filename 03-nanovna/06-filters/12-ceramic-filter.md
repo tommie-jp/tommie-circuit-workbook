@@ -52,11 +52,7 @@ title: 図1 10.7 MHz のセラミックフィルタ (前後に 270 Ω)
 parts:
   J1: sma b2 mirror CH0
   R1: resistor b3 b5 270
-  U1:
-    type: ic3
-    at: b7
-    label: SFELF10M7
-    pins: [IN, GND, OUT]
+  U1: ceramic-filter b7 SFELF10M7
   R2: resistor b9 b11 270
   J2: sma b13 CH1
   G1: ground c2
@@ -79,11 +75,7 @@ title: 図2 455 kHz のセラミックフィルタ (前後に 1.5 kΩ)
 parts:
   J1: sma b2 mirror CH0
   R1: resistor b3 b5 1.5k
-  U1:
-    type: ic3
-    at: b7
-    label: CFULA455KE4A
-    pins: [IN, GND, OUT]
+  U1: ceramic-filter b7 CFULA455KE4A
   R2: resistor b9 b11 1.5k
   J2: sma b13 CH1
   G1: ground c2

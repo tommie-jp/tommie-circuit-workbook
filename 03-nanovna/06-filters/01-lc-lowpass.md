@@ -59,8 +59,9 @@ wires:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/01-lc-lowpass.svg)
 
 - 両端が並列コンデンサ (shunt C) の π 型。直列側はコイル
-- C1 = C4 (図の 47 pF) が両端、C2 = C3 (200 pF。100 pF を 2 個並列) が内側。次数が奇数なので
-  両端の素子は同じ種類 (コンデンサ) になる
+- 式の添字は g の番号 (C1・L2・…・C7) で、図の部品番号とは違う。図では 47 pF の
+  C1・C4 が両端、200 pF (100 pF を 2 個並列) の C2・C3 が内側、330 nH の L1・L3 と
+  560 nH の L2 が直列側。次数が奇数なので両端の素子は同じ種類 (コンデンサ) になる
 
 ## 実体配線図
 
