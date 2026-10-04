@@ -304,9 +304,9 @@ parts:
   R3: resistor g3 g6 51
   R4: resistor i16 f16 33k
   R5: resistor n14 q14 13k
-  R6: resistor i8 l8 150k
+  R6: resistor g8 j8 150k
   R7: resistor e21 h21 2k
-  VR1: potentiometer/trimmer k10 k11 k12 200k
+  VR1: potentiometer/trimmer k9 k10 k11 200k
   C1: capacitor/ceramic e7 e10 10n
   C2: capacitor/ceramic m7 m10 10n
   C3: capacitor/ceramic b15 e15 560p
@@ -358,20 +358,20 @@ wires:
   - e11 -- f11 black
   - f11 -- k11 black
   - k11 -- q11 black
-  - k12 -- k11 black
+  - k11 -- k10 black
   - h21 -- j21 black
   - j21 -- q21 black
   - j23 -- q23 black
   - c1 -- c7 white
   - c7 -- e7 white
-  - f10 -- i10 white
-  - i10 -- i8 white
+  - f10 -- g10 white
+  - g10 -- i10 white
+  - g10 -- g8 white
   - e6 -- f6 blue
   - f6 -- f10 blue
   - f10 -- e10 blue
-  - l8 -- l9 white
-  - l9 -- k9 white
-  - k9 -- k10 white
+  - j8 -- j9 white
+  - j9 -- k9 white
   - i12 -- i10 yellow
   - i13 -- m13 white
   - m13 -- m14 white
@@ -417,7 +417,7 @@ style:
 - 左端の縁の銅箔の GND は 1 列に出し (d1〜h1、j1〜m1)、m 行へ通した。上下は縁の銅箔でつながる。R3 の GND の足 (g3) は g1 から
 - C5 の GND の足 (j23) は 23 列を真下に通って q23 へ (IF の線が被覆線で渡る)
 - 半田付けの順は、電源と GND の筋 → 抵抗・インダクタ・コンデンサ → VR1 → FL1 → C6・C7 → U1 の変換基板 → J1〜J4
-- FL1 の足: 1 = IN (j20)、2 = GND (j21)、3 = OUT (j22)。VR1: 1 = A (k10、中点)、2 = W (k11)、3 = B (k12)。W は GND (11 列の線)、B は W と線でつなぐ
+- FL1 の足: 1 = IN (j20)、2 = GND (j21)、3 = OUT (j22)。VR1: 1 = A (k9、中点)、2 = W (k10)、3 = B (k11)。W は GND (11 列の線)、B は W と線でつなぐ
 - 周波数は最大 2.055 MHz、電流は 10 mA ほどで perfboard の範囲に収まる
 
 | 部品 | 値 | 穴 |
@@ -428,9 +428,9 @@ style:
 | R3 | 51 | g6 (LO) / g3 (GND) |
 | R4 | 33k | i16 (G2) / f16 (VDD) |
 | R5 | 13k | n14 (G2) / q14 (GND) |
-| R6 | 150k | i8 (G1) / l8 (中点) |
+| R6 | 150k | g8 (G1) / j8 (中点) |
 | R7 | 2k | e21 (FIN) / h21 (GND) |
-| VR1 | 200k 半固定 | k10 (A) k11 (W) k12 (B) |
+| VR1 | 200k 半固定 | k9 (A) k10 (W) k11 (B) |
 | C1 | 10n | e7 (RF) / e10 (G1) |
 | C2 | 10n | m7 (LO) / m10 (G2) |
 | C3 | 560p | b15 (VDD) / e15 (D) |
