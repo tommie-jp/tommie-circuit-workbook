@@ -79,6 +79,11 @@ parts:
     at: top
     label: AD3 Supplies ±5V
     pins: [V+, GND, V-]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: [1+, 2+, 1-, 2-]
   U1: dip8 @ e12 LM358
   CDS1: photoresistor i16 i13
   RFIX: resistor h13 h9 10k
@@ -103,6 +108,10 @@ wires:
   - g12 -- g11 orange
   - f11 -- e11 orange
   - a6 -- -t6 black
+  - SC.1+ -- j13 orange
+  - SC.2+ -- j12 green
+  - SC.1- -- -t19 black
+  - SC.2- -- -t20 black
 notes:
   - text below: 上は 赤 +5V・青 GND、下は 赤 +5V・青 −5V (V−)
 ```
@@ -120,8 +129,40 @@ notes:
   D1 と同じ列を使うだけで配線が要らない (9 列で D1 のアノード側、6 列でカソード側と
   自動的に同じネットになる)。出力が −V に張り付いたときの逆電圧を DP の順方向降下
   (約 0.7 V) までクランプする。VR1 を回してしきい値の明るさを変える
+- Scope は板の下に別の箱 (AD3 Scope) で描いた。1+ (橙) は − 入力の 13 列 (`j13`)、2+ (緑) は出力の 12 列 (`j12`) に挿し、
+  1− と 2− (黒) は板の右の空いた所から上の青レール (GND) へ戻す
 - AD3 の Supplies の電流は、+5V 側が LED の約 7 mA と CdS・VR1・OP アンプの数 mA、−5V 側が
   明所で R1・DP を通って吸い込む約 17 mA が最大。どちらも USB 給電の目安 50 mA (250 mW) に収まる
+
+## 計器の設定
+
+テスターの代わりに AD3 の Scope で、CdS を手で覆った瞬間の − 入力 (CH1) と出力 (CH2) の変わり方を見る。
+電圧が 1 回だけ大きく変わる題で、10 MHz よりずっと遅いから (見る時間は数秒)。VR1 は中点 (しきい値 0 V) に合わせておく。
+
+| 設定 | 値 |
+| --- | --- |
+| Scope CH1 (− 入力、13 列) | DC、2 V/div |
+| Scope CH2 (出力、12 列) | DC、2 V/div |
+| Time | 100 ms/div。Mode は Repeated でなく Single か Screen にして、手で CdS を覆う |
+| Trigger | CH1、立ち下がり、0 V (− 入力が + 入力の 0 V を下回った瞬間) |
+
+```scope
+title: 図3 CdS を覆った瞬間 — − 入力 (CH1) が 0 V を切ると出力 (CH2) が High に
+time: 100ms/div
+trigger: ch1 falling 0V
+ch1: {wave: = 4.1V - 8.6V * step(t), range: 2V/div}
+ch2: {wave: = -4.5V + 8V * step(t), range: 2V/div}
+cursors: [-300ms, 300ms]
+measure: [vmax, vmin]
+notes:
+  - text ch2 0 3.5V: 出力が +3.5 V へ (LED 点灯)
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/scope/04-comparator-cds.svg)
+
+図3 の波形は表の計算値を階段で描いた想定図で、実際の CdS は変わり方が数十 ms ほどなだらかになる。CH1 が +4.1 V (明るい) から
+−4.5 V (暗い) に動き、0 V を横切った所で CH2 が −4.5 V から +3.5 V に跳ぶ。CH1 が 0 V を越えるたびに CH2 が反転するので、
+しきい値ぴったりでちらつく様子 (ヒステリシスが無いこと) もこの画面で見える。
 
 ## 部品
 
@@ -135,10 +176,11 @@ notes:
 | D1 | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
 | DP | 保護ダイオード (D1 と逆並列) | 1N4148 |
 | — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
+| — | 計器 | AD3 の Scope 1+/2+ (− 入力と出力)、テスター |
 
 ## 見るべき値
 
-CdS を手で覆ったり明かりを当てたりしながら、テスターの直流電圧レンジで GND を基準に − 入力 (13 列) と
+CdS を手で覆ったり明かりを当てたりしながら、テスターの直流電圧レンジか AD3 の Scope (図3) で GND を基準に − 入力 (13 列) と
 出力 (12 列) を測り、LED を見る。表の値は計算値。分圧点の電圧 = V− + (V+ − V−) × RFIX / (CDS1 + RFIX)。VR1 を中点
 (しきい値 0 V) にしたとき。LM358 の出力は無負荷に近い状態で **+V 側は約
 1.5 V 落ち (≈ +3.5 V)、−V 側はほぼ V− まで (≈ −4.5 V)** 振れる (代表値)。

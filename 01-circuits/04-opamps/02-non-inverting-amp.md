@@ -71,6 +71,11 @@ parts:
     at: top
     label: AD3 (Supplies ±5V・W1)
     pins: [V+, GND, V-, W1]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: [1-, 2-, 2+, 1+]
   U1: dip8 @ e10 LM358
   C1: capacitor c15 c19 1uF
   Rb: resistor a15 -t15 100k
@@ -81,6 +86,10 @@ wires:
   - AD3.GND -- -t2 black
   - AD3.V- -- -b3 blue
   - AD3.W1 -- a19 yellow
+  - SC.1+ -- j12 orange
+  - SC.2+ -- j10 green
+  - SC.1- -- h7 black
+  - SC.2- -- j7 black
   - +t10 -- a10 red
   - j13 -- -b13 blue
   - e15 -- f15 orange
@@ -94,12 +103,40 @@ notes:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/02-non-inverting-amp.svg)
 
 - 図2 の AD3 は、Supplies (V+・V−) が図1 の VP・VN、W1 が V1 (発振器) に当たる。
-  電源のレールの分け方は 4-1 と同じ (下の青レールは −5V で、GND ではない)
+  電源のレールの分け方は 4-1 と同じ (下の青レールは −5V で、GND ではない)。
+  Scope は板の下に別の箱 (AD3 Scope) で描いた。1+ (橙) は IN+ の 12 列 (`j12`)、2+ (緑) は出力の 10 列 (`j10`) に挿し、1− と 2− (黒) は R2 の GND 側の 7 列 (`h7`・`j7`。上の青レールにつながっている) へ挿す
 - **W1 (19 列) の信号を C1 で受け、15 列から溝をまたぐ線と `g15--g12` で IN+ (PIN 3、12 列) へ。**
   Rb は 15 列の a の穴から上の青レール (GND) へ立てて挿すバイアス抵抗 (直流だけを GND へ逃がす)
 - R3 (帰還) は出力 (PIN 1、10 列) と IN− (PIN 2、11 列) をつなぐ。R2 は 11 列から 7 列へ渡し、
   7 列から溝をまたぐ黒い線と `a7--(-t7)` で GND へ落とす
 - PIN 8 (10 列) は `+t10--a10` で +5V へ、PIN 4 (13 列) は `j13--(-b13)` で −5V へ
+
+## 計器の設定
+
+オシロには Analog Discovery 3 (AD3) の Scope を使う。1 kHz の正弦波の形・振幅・向きを見る題で、10 MHz よりずっと低いから。
+W1 は 1 kHz・振幅 0.1 V の正弦波 (オフセット 0 V) に、Scope は CH1 を入力、CH2 を出力にして、トリガは CH1 の立ち上がり 0 V にする。
+
+| 設定 | 値 |
+| --- | --- |
+| Wavegen W1 | Sine、1 kHz、振幅 0.1 V、オフセット 0 V |
+| Scope CH1 (入力、12 列) | DC、500 mV/div |
+| Scope CH2 (出力、10 列) | DC、500 mV/div |
+| Time | 200 µs/div (1 kHz が 2 周期) |
+| Trigger | CH1、立ち上がり、0 V |
+
+```scope
+title: 図3 入力 (CH1) と出力 (CH2) — 出力は 11 倍で同じ向き
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.1V, range: 500mV/div}
+ch2: {wave: sine 1kHz 1.1V, range: 500mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/scope/02-non-inverting-amp.svg)
+
+図3 は 2 本とも 500 mV/div。CH1 (入力) は 0.2 Vpp (0.4 目盛) の小さな波、CH2 (出力) は 2.2 Vpp (4.4 目盛) で、高さは 11 倍。
+山と谷は同じ時刻に来るので、向きは反転しない。入力が小さくて読みにくいときは、CH1 だけ 50 mV/div に切り替えて形を見る。
 
 ## 部品
 
@@ -112,11 +149,12 @@ notes:
 | R3 | 抵抗 (帰還) | 10 kΩ |
 | — | 信号源 | 1 kHz、振幅 0.1 V |
 | — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
+| — | 計器 | AD3 の W1 (信号源)・Scope 1+/2+ (入力と出力) |
 
 ## 見るべき値
 
 発振器は AD3 の W1 (1 kHz・振幅 0.1 V の正弦波)。オシロの CH1 を入力 (12 列)、
-CH2 を出力 (10 列) に当て、2 本を重ねて振幅と向きを比べる。表の値は計算値。利得 A = 1 + R3/R2。
+CH2 を出力 (10 列) に当て、2 本を重ねて振幅と向きを比べる (図3)。表の値は計算値。利得 A = 1 + R3/R2。
 
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |

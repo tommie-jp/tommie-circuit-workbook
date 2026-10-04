@@ -74,11 +74,16 @@ style:
 title: 図2 ブレッドボードに組む (回路図と同じく Q1 を左、Q2 を右に)
 board: half
 parts:
-  PS:
+  AD3:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: AD3 Supplies 5V
+    pins: [V+, GND]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: [1+, 2+, 1-, 2-]
   R1: resistor b2 b5 330
   D1: led c5(A) c7(K) red
   R4: resistor b8 b12 100k
@@ -90,8 +95,8 @@ parts:
   Q1: transistor h6(E) h7(C) h8(B) 2SC1815
   Q2: transistor h22(B) h23(C) h24(E) 2SC1815
 wires:
-  - PS.+5V -- +t1 red
-  - PS.GND -- -t3 black
+  - AD3.V+ -- +t1 red
+  - AD3.GND -- -t3 black
   - +t2 -- a2 red
   - +t12 -- a12 red
   - +t18 -- a18 red
@@ -105,6 +110,10 @@ wires:
   - e23 -- f23 orange
   - d19 -- d8 green
   - e11 -- d22 yellow [v-10, h220, v-10]
+  - SC.1+ -- j7 orange
+  - SC.2+ -- j23 green
+  - SC.1- -- -b10 black
+  - SC.2- -- -b11 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/breadboard/01-astable-multivibrator.svg)
@@ -113,7 +122,8 @@ wires:
 を鏡に映した形で置く。板の上半分 (a〜e 行) が回路図の上半分 (抵抗・LED・コンデンサ)、下半分 (f〜j 行) が
 トランジスタに当たる。
 
-- 電源の +5V は上の + レール、GND は上の − レールへ。抵抗の電源側の足へは、+ レールから
+- 電源は AD3 の Supplies (V+ を 5 V にする)。V+ は上の + レール、GND は上の − レールへ。回路が流す電流は
+  LED 1 個ぶんの約 8.5 mA と少しなので、V+ の 50 mA (USB 給電で 250 mW) に収まる。抵抗の電源側の足へは、+ レールから
   赤い線を縦に 1 本ずつ下ろす (2・12・18・28 列)。エミッタは下の − レールへ黒い線で落とし (6・24 列)、
   上と下の − レールは右端の 29 列の黒い線でつなぐ
 - **2SC1815 は平らな面を見て左から E・C・B。** Q1 は平らな面を手前 (j 行側) に向けて、
@@ -130,6 +140,37 @@ wires:
 - 電解コンデンサの `+` はコレクタ側 (C1 は 7 列、C2 は 23 列) に向ける (逆にすると壊れる)。
   足は 4 穴離れているので、10 mm ほどに広げて a 行に挿す
 
+- Scope は板の下に別の箱 (AD3 Scope) で描いた。1+ (橙) は Q1 のコレクタの 7 列 (`j7`)、2+ (緑) は Q2 のコレクタの 23 列 (`j23`) に挿し、
+  1− と 2− (黒) は下の − レール (GND) へ挿す
+
+## 計器の設定
+
+オシロには AD3 の Scope を使う。周期 1 秒ほどの遅い方形波の形を見る題で、10 MHz よりずっと遅いから。
+CH1 に Q1 のコレクタ、CH2 に Q2 のコレクタをつなぎ、2 つのコレクタが交互に上下するのを重ねて見る。
+
+| 設定 | 値 |
+| --- | --- |
+| Scope CH1 (Q1 のコレクタ、7 列) | DC、1 V/div |
+| Scope CH2 (Q2 のコレクタ、23 列) | DC、1 V/div |
+| Time | 250 ms/div (2.5 秒で周期が約 2 つ見える) |
+| Trigger | CH1、立ち上がり、1.8 V |
+
+```scope
+title: 図3 Q1 のコレクタ (CH1) と Q2 のコレクタ (CH2) — 逆の位相で交互に上下する
+time: 250ms/div
+trigger: ch1 rising 1.8V
+ch1: {wave: square 0.952Hz 1.65V offset 1.85V, range: 1V/div}
+ch2: {wave: square 0.952Hz 1.65V offset 1.85V phase 180deg, range: 1V/div}
+cursors: [-250ms, 800ms]
+measure: [vmax, vmin, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/scope/01-astable-multivibrator.svg)
+
+図3 は SPICE の値 (周期 約 1.05 秒、オフの側のコレクタ 約 3.5 V、オンの側 約 0.2 V) で描いた想定の波形で、実測ではない。
+CH1 が高い間 (Q1 がオフ) は CH2 が低く (Q2 がオン)、半周期 (約 0.5 秒) ごとに入れ替わる。カーソルの間隔 1.05 秒が 1 周期 (2 本とも低い側に置いた)。
+CH2 が低い側の LED が点くので、CH1 が高いとき D2 が点く。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -139,7 +180,8 @@ wires:
 | R3, R4 | 抵抗 (ベース) | 100 kΩ |
 | C1, C2 | 電解コンデンサ | 10 µF |
 | D1, D2 | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
-| — | 電源 | 5 V |
+| — | 電源 | 5 V (AD3 の Supplies の V+) |
+| — | 計器 | AD3 の Scope 1+/2+ (Q1 と Q2 のコレクタ) |
 
 ## 見るべき値
 
@@ -160,7 +202,7 @@ LED の 8.5 mA を流しきって飽和するには hFE が 200 ほど要る (2-
 **GR ランク (hFE 200〜400)** を使う。SPICE では hFE 250 以上で上の値、hFE 200 で片側 0.46 秒、
 hFE 120 (O・Y ランクの個体) では片側 0.32 秒まで縮んだ。
 
-LED の点灯時間と周期はストップウォッチで 10 回分を測って 10 で割る。電圧はテスターの
+LED の点灯時間と周期はストップウォッチで 10 回分を測って 10 で割る (オシロで測るなら図3 のカーソル)。電圧はテスターの
 直流電圧レンジで測るが、0.5 秒ごとに切り替わるので表示が追いつく範囲の目安になる。
 
 | 測る所 | 期待する値 | 分かること |

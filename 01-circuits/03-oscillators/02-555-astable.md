@@ -73,25 +73,31 @@ title: 図2 ブレッドボードに組む
 # 上のレールは +5V/GND、下のレールも +5V/GND (1 列目で上下を渡している)
 board: half
 parts:
-  PS:
+  AD3:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: AD3 Supplies 5V
+    pins: [V+, GND]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: [1+, 1-]
   U1: dip8 @ e10 NE555
   Ra: resistor b7 b11 10k
-  Rb: resistor a11 a12 47k
+  Rb: resistor a11 a15 47k
   C1: capacitor/electrolytic i9(+) i5(-) 10uF
   Cc: capacitor d13 d20 10n
   R1: resistor g12 g16 220
   D1: led h16(A) h19(K) red
 wires:
-  - PS.+5V -- +t2 red
-  - PS.GND -- -t3 black
+  - AD3.V+ -- +t2 red
+  - AD3.GND -- -t3 black
   - +t1 -- +b1 red
   - -t1 -- -b1 black
   - +t7 -- a7 red
   - +t10 -- a10 red
+  - c15 -- c12 orange
   - d12 -- d9 orange
   - e9 -- f9 orange
   - g9 -- g11 orange
@@ -100,6 +106,8 @@ wires:
   - j10 -- -b10 black
   - i13 -- +b13 red
   - j19 -- -b19 black
+  - SC.1+ -- j12 yellow
+  - SC.1- -- -b14 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/breadboard/02-555-astable.svg)
@@ -108,8 +116,38 @@ wires:
   左上の e10。切り欠きを左に向ける
 - 2 番 (TRIG、f11) は下ブロックにあるので、板の上の 6 番 (THRES、e12) へは
   IC の左を回るオレンジの線 (`d12 -- d9`、`e9 -- f9`、`g9 -- g11`) で渡す。C1 の + はこの 9 列に挿す
+- Rb (47 kΩ) は Ra の右端 (11 列、7 番) から右へ 4 穴渡して 15 列に挿し、15 列から 12 列 (6 番) へ短い橙の線で戻す
 - 4 番 (RESET) は使わないので +5V に固定 (`i13 -- +b13`)。浮かせておくと
   誤動作することがある
+
+- 電源は AD3 の Supplies (V+ を 5 V にする)。回路が流すのは LED の約 6.8 mA と 555 の数 mA で、V+ の 50 mA (USB 給電で 250 mW) に収まる。
+  V+ は上の + レール、GND は上の − レールへ入れ、1 列目の線で下のレールへ渡す
+- Scope は板の下に別の箱 (AD3 Scope) で描いた。1+ (黄) は 3 番 (OUT、12 列) の `j12` に挿し、1− (黒) は下の − レール (GND) へ挿す
+
+## 計器の設定
+
+オシロには AD3 の Scope を使う。1 Hz ほどの遅い方形波の形と時間を見る題で、10 MHz よりずっと遅いから。
+3 番 (OUT) を CH1 に当て、High の時間と周期を読む。
+
+| 設定 | 値 |
+| --- | --- |
+| Scope CH1 (3 番 OUT、12 列) | DC、1 V/div |
+| Time | 200 ms/div (2 秒で周期が約 2.8 個見える) |
+| Trigger | CH1、立ち上がり、1.8 V |
+
+```scope
+title: 図3 555 の出力 (3 番) — High が約 0.40 秒、周期が約 0.72 秒
+time: 200ms/div
+trigger: ch1 rising 1.8V
+ch1: {wave: pulse 1.386Hz 1.75V offset 1.75V duty 55%, range: 1V/div}
+cursors: [1ms, 396ms]
+measure: [vmax, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/scope/02-555-astable.svg)
+
+図3 は計算値 (High 約 3.5 V、Low は 0 V と置いた) の想定の波形で、実測ではない。カーソルの間隔 395 ms が High の時間 (LED が点いている間)。
+1 周期 (約 0.72 秒) から引いた残りが Low の約 0.33 秒。High がわずかに長いので、デューティ比は 55 % ほどになる。
 
 ## 部品
 
@@ -122,11 +160,12 @@ wires:
 | Cc | セラミックコンデンサ (CONT のノイズ対策) | 0.01 µF |
 | R1 | 抵抗 (LED 電流制限) | 220 Ω |
 | D1 | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
-| — | 電源 | 5 V |
+| — | 電源 | 5 V (AD3 の Supplies の V+) |
+| — | 計器 | AD3 の Scope 1+ (3 番 OUT) |
 
 ## 見るべき値
 
-点灯・消灯の時間はストップウォッチで 10 回分を測って 10 で割るか、オシロ (0-3) で 3 番の波形を見る。
+点灯・消灯の時間はストップウォッチで 10 回分を測って 10 で割るか、オシロ (0-3) で 3 番の波形を見る (図3)。
 
 計算値。f = 1.44 / {(Ra + 2Rb) × C}、High の時間は (Ra + Rb) × C × 0.693、
 Low の時間は Rb × C × 0.693。

@@ -67,6 +67,11 @@ parts:
     at: top
     label: AD3 (Supplies ±5V・W1)
     pins: [V+, GND, V-, W1]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: [1+, 2+, 1-, 2-]
   U1: dip8 @ e10 LM358
   Rin: resistor g6 g11 10k
   Rf: resistor i10 i11 100k
@@ -75,6 +80,10 @@ wires:
   - AD3.GND -- -t2 black
   - AD3.V- -- -b3 blue
   - AD3.W1 -- a6 yellow
+  - SC.1+ -- j6 orange
+  - SC.2+ -- j10 green
+  - SC.1- -- j15 black
+  - SC.2- -- i15 black
   - e6 -- f6 yellow
   - +t10 -- a10 red
   - j13 -- -b13 blue
@@ -93,7 +102,36 @@ notes:
   3 本の黒い線で上の青レールへつなぐ。分圧は要らない
 - **IN− (PIN 2、11 列) に Rin と Rf の両方が集まる。** W1 の信号は 6 列で溝をまたいで下ブロックへ下り、
   Rin (6→11 列) を通ってここへ入る。Rf はここから出力 (PIN 1、10 列) へ戻す
+- Scope は板の下に別の箱 (AD3 Scope) で描いた。1+ (橙) は入力の 6 列 (`j6`)、2+ (緑) は出力の 10 列 (`j10`) に挿し、
+  1− と 2− (黒) は GND につながる 15 列 (`j15`・`i15`) へ挿す
 - コンデンサ (直流カット) は無い。発振器は 0V を中心に振れるので直結でよい
+
+## 計器の設定
+
+オシロには AD3 の Scope を使う。1 kHz の正弦波の振幅と向き (反転) を見る題で、10 MHz よりずっと低いから。
+W1 は 4-2 と同じ 1 kHz・振幅 0.1 V・オフセット 0 V。Scope は CH1 を入力 (6 列)、CH2 を出力 (10 列) にする。
+
+| 設定 | 値 |
+| --- | --- |
+| Wavegen W1 | Sine、1 kHz、振幅 0.1 V、オフセット 0 V |
+| Scope CH1 (入力、6 列) | DC、500 mV/div |
+| Scope CH2 (出力、10 列) | DC、500 mV/div |
+| Time | 200 µs/div |
+| Trigger | CH1、立ち上がり、0 V |
+
+```scope
+title: 図3 入力 (CH1) と出力 (CH2) — 出力は 10 倍で逆向き
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.1V, range: 500mV/div}
+ch2: {wave: sine 1kHz 1V phase 180deg, range: 500mV/div}
+measure: [vpp, freq, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/scope/03-inverting-amp.svg)
+
+図3 は 2 本とも 500 mV/div。CH1 (入力) は 0.2 Vpp、CH2 (出力) は 2.0 Vpp で、高さは 10 倍。
+入力が上がるとき出力は下がり、山と谷が入れ替わる (位相 180°)。
 
 ## 部品
 
@@ -104,10 +142,11 @@ notes:
 | Rf | 抵抗 (帰還) | 100 kΩ |
 | — | 信号源 | 1 kHz、振幅 0.1 V |
 | — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
+| — | 計器 | AD3 の W1 (信号源)・Scope 1+/2+ (入力と出力) |
 
 ## 見るべき値
 
-測り方は 4-2 と同じ (発振器は AD の W1、CH1 を入力、CH2 を出力の 10 列)。表の値は計算値。利得 A = −Rf/Rin。
+測り方は 4-2 と同じ (発振器は AD3 の W1、Scope の CH1 を入力の 6 列、CH2 を出力の 10 列。図3)。表の値は計算値。利得 A = −Rf/Rin。
 
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |
