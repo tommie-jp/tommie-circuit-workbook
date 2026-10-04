@@ -98,24 +98,24 @@ parts:
     at: top
     label: AD3 Scope (DC 電圧計)
     pins: [1+, 1-]
-  D1: led b7(A) b10(K) red
-  J1: transistor e10(D) e11(S) e12(G) 2SK30A
-  RS: resistor a11 -t11 470
+  D1: led b7(A) b12(K) red
+  J1: transistor e10(S) e11(G) e12(D) 2SK30A
+  RS: resistor a10 -t10 470
 wires:
   - PS.V+ -- +t1 red
   - PS.GND -- -t2 black
   - +t7 -- a7 red
-  - a12 -- -t12 black
-  - SC.1+ -- c11 orange
+  - a11 -- -t11 black
+  - SC.1+ -- c10 orange
   - SC.1- -- -t14 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/09-jfet-current-source.svg)
 
-- J1 を e10 (D)・e11 (S)・e12 (G) に挿す。2SK30A の足の並びはデータシートで確かめ、図の D・S・G の順に合わせる
-- D1 (LED) のアノードを b7、カソードを b10 (ドレインの列) に挿す。+5 V は赤の線 `+t7 → a7`
-- RS (470 Ω) はソースの列 11 の `a11` から GND のレールへ立てて挿す。ゲート (列 12) は黒の線 `a12 → -t12` で直接 GND へ
-- Scope の 1+ (橙) をソースの列 11 (`c11`)、1− (黒) を GND のレールへ。読みが RS の電圧 (約 0.4 V)
+- J1 を e10 (S)・e11 (G)・e12 (D) に挿す。2SK30A (TO-92) は、平らな面を手前に、足を下に向けて、左から S (ソース)・G (ゲート)・D (ドレイン) の順。出典は東芝の 2SK30ATM のデータシート (1997-04-10 版) の足の図で、1 番 SOURCE、2 番 GATE、3 番 DRAIN。同じ並びで別のメーカーの品が出ることもあるので、買った品のデータシートも見る
+- D1 (LED) のアノードを b7、カソードを b12 (ドレインの列) に挿す。+5 V は赤の線 `+t7 → a7`
+- RS (470 Ω) はソースの列 10 の `a10` から GND のレールへ立てて挿す。ゲート (列 11) は黒の線 `a11 → -t11` で直接 GND へ
+- Scope の 1+ (橙) をソースの列 10 (`c10`)、1− (黒) を GND のレールへ。読みが RS の電圧 (約 0.4 V)
 
 ## 部品
 
