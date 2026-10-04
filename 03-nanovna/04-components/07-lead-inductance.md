@@ -43,28 +43,22 @@ notes:
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図2 perfboard の直列治具を裸銅線でつなぐ
-points:
-  GND: h2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
 wires:
-  - e1 -- e6
-  - e6 -- e11 yellow
-  - e11 -- e16
-  - f0 -- f2 black
-  - f2 -- GND black
-  - f17 -- f15 black
-  - f15 -- h15 black
-  - h15 -- GND black
+  - i1 -- i6
+  - i6 -- i11 yellow
+  - i11 -- i24
+  - j0 -- j25 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/07-lead-inductance.svg)
 
-e6〜e11 (5 穴ぶん、2.54 mm 間隔で約 1.27 cm) を裸銅線でまたぐ。3-1 の R1 の
+i6〜i11 (5 穴ぶん、2.54 mm 間隔で約 1.27 cm) を裸銅線でまたぐ。3-1 の R1 の
 足の長さとほぼ同じで、**「部品を挿すと本当は何が増えるか」**を、部品そのものを
 外して確かめる形。
 

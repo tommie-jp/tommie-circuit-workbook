@@ -82,52 +82,51 @@ notes:
 
 ```perfboard
 board:
-  size: 23x9
+  size: 7x5cm
 title: 図2 SBL-1+ と端面 SMA 3 つ (部品面。足は 2 穴おき)
 points:
-  P8LO: f9
-  P6G: f11
-  P4IF: f13
-  P2G: f15
-  P7G: d9
-  P5G: d11
-  P3IF: d13
-  P1RF: d15
+  P8LO: i9
+  P6G: i11
+  P4IF: i13
+  P2G: i15
+  P7G: g9
+  P5G: g11
+  P3IF: g13
+  P1RF: g15
 parts:
-  J1: sma/female-edge f1 g0
-  J2: sma/female-edge d22 e23
-  J3: sma/female-edge h13 i12
+  J1: sma/female-edge i1 j0
+  J2: sma/female-edge g24 h25
+  J3: sma/female-edge k24 l25
 wires:
-  - f1 -- P8LO
-  - P1RF -- d22
+  - i1 -- P8LO
+  - P1RF -- g24
   - P3IF -- P4IF
-  - P4IF -- h13
-  - a11 -- a9 black
-  - a9 -- a1 black
-  - a1 -- e1 black
-  - e1 -- e0 black
-  - P7G -- a9 black
-  - P5G -- a11 black
-  - g0 -- g2 black
-  - g2 -- i2 black
-  - i2 -- i10 black
-  - i10 -- i12 black
-  - i14 -- i15 black
-  - i15 -- i21 black
-  - P6G -- f10 black
-  - f10 -- i10 black
-  - P2G -- i15 black
-  - e23 -- e21 black
-  - e21 -- i21 black
+  - P4IF -- k13
+  - k13 -- k24
+  - d11 -- d9 black
+  - d9 -- d1 black
+  - d1 -- h1 black
+  - h1 -- h0 black
+  - P7G -- d9 black
+  - P5G -- d11 black
+  - j0 -- j2 black
+  - j2 -- l2 black
+  - l2 -- l10 black
+  - l10 -- l25 black
+  - P6G -- i10 black
+  - i10 -- l10 black
+  - P2G -- i17 black
+  - i17 -- h17 black
+  - h17 -- h25 black
 notes:
-  - box c8 g16 blue
-  - text d9 mirror: 7
-  - text d11 mirror: 5
+  - box f8 j16 blue
+  - text g9 mirror: 7
+  - text g11 mirror: 5
   - text d13: 3
   - text d15: 1
-  - text f9 mirror: 8
-  - text f11 mirror: 6
-  - text f14 mirror: 4
+  - text i9 mirror: 8
+  - text i11 mirror: 6
+  - text i14 mirror: 4
   - text f15: 2
 ```
 
@@ -136,9 +135,11 @@ notes:
 - 青い枠が SBL-1+ の缶、枠の中の数字が PIN 番号。**足は 5.08 mm (2 穴) おきの 2 列 × 4 本**なので、穴を 1 つずつ
   飛ばして挿す。部品面 (上) から見て、上の列が左から 7・5・3・1、下の列が 8・6・4・2
   (データシートの外形図は裏から見た図で、左右が逆)
-- 3・4 番 (IF) は板の上でつなぎ、下の縁の J3 へ。GND の 7・5 番は上の線 (a 行)、
-  6・2 番は下の線 (i 行) へ。下の線は J3 の外皮の腕 (i12・i14) を通って左右がつながり、
-  上と下の GND は J1 の外皮 (e0 と g0 は同じ金物) でつながる
+- 入力の J1 (LO) は左の縁、出力の J2 (RF) と J3 (IF) は右の縁に上下に並べた。
+  2 つの真ん中が板の高さの中ほど (i 行) に来る
+- 3・4 番 (IF) は板の上でつなぎ、k 行を通って右下の J3 へ。GND の 7・5 番は上の線 (d 行)、
+  6 番は下の線 (l 行) で J3 の外皮 (l25) へ、2 番は h 行で J2 の外皮 (h25) へ。
+  上と下の GND は J1 の外皮 (h0 と j0 は同じ金物) でつながる
 - 缶の裏の金属と足の間を短く。缶をじかに板に付けて半田付けする
 
 ## 掃引の設定

@@ -82,59 +82,59 @@ wires:
 
 ```perfboard
 board:
-  size: 14x8
+  size: 7x5cm
 title: 図3 π 型を perfboard に組む
 parts:
-  J1: sma/female-edge e1 f0
-  C1: capacitor e3 f3 100p
-  L1: inductor e5 e9 560n
-  C2: capacitor e11 f11 100p
-  J2: sma/female-edge e14 f15
+  J1: sma/female-edge i1 j0
+  C1: capacitor i3 j3 100p
+  L1: inductor i5 i9 560n
+  C2: capacitor i11 j11 100p
+  J2: sma/female-edge i24 j25
 wires:
-  - e1 -- e3
-  - e3 -- e5
-  - e9 -- e11
-  - e11 -- e14
-  - f0 -- f2 black
-  - f2 -- h2 black
-  - h2 -- h3 black
-  - h3 -- f3 black
-  - h3 -- h11 black
-  - h11 -- f11 black
-  - h11 -- h13 black
-  - f15 -- f13 black
-  - f13 -- h13 black
+  - i1 -- i3
+  - i3 -- i5
+  - i9 -- i11
+  - i11 -- i24
+  - j0 -- j2 black
+  - j2 -- l2 black
+  - l2 -- l3 black
+  - l3 -- j3 black
+  - l3 -- l11 black
+  - l11 -- j11 black
+  - l11 -- l13 black
+  - j25 -- j13 black
+  - j13 -- l13 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/10-pi-and-t-1.svg)
 
 ```perfboard
 board:
-  size: 14x8
+  size: 7x5cm
 title: 図4 T 型を perfboard に組む
 parts:
-  J1: sma/female-edge e1 f0
-  L1: inductor e2 e6 270n
-  C1: capacitor e7 g7 220p
-  L2: inductor e8 e12 270n
-  J2: sma/female-edge e14 f15
+  J1: sma/female-edge i1 j0
+  L1: inductor i2 i6 270n
+  C1: capacitor i7 k7 220p
+  L2: inductor i8 i12 270n
+  J2: sma/female-edge i24 j25
 wires:
-  - e1 -- e2
-  - e6 -- e7
-  - e7 -- e8
-  - e12 -- e14
-  - f0 -- f2 black
-  - f2 -- h2 black
-  - h2 -- h7 black
-  - h7 -- g7 black
-  - h7 -- h13 black
-  - f15 -- f13 black
-  - f13 -- h13 black
+  - i1 -- i2
+  - i6 -- i7
+  - i7 -- i8
+  - i12 -- i24
+  - j0 -- j2 black
+  - j2 -- l2 black
+  - l2 -- l7 black
+  - l7 -- k7 black
+  - l7 -- l13 black
+  - j25 -- j13 black
+  - j13 -- l13 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/10-pi-and-t-2.svg)
 
-- e 行が信号の通り道、h 行が GND の筋。どちらもコンデンサの下の足を h 行へ落とす
+- i 行が信号の通り道、l 行が GND の筋。どちらもコンデンサの下の足を l 行へ落とす
 - コイルは軸物 (カラーコード付き)。560 nH・270 nH とも E12 の値で買える
 
 ## 掃引の設定

@@ -105,57 +105,57 @@ wires:
 
 ```perfboard
 board:
-  size: 16x10
+  size: 7x5cm
 title: 図3 10.7 MHz 用を perfboard に組む
 parts:
-  J1: sma/female-edge e1 f0
-  R1: resistor e3 e6 270
-  U1: ic3 e8 e9 e10 SFELF10M7
-  R2: resistor e12 e15 270
-  J2: sma/female-edge e16 f17
+  J1: sma/female-edge i1 j0
+  R1: resistor i3 i6 270
+  U1: ic3 i8 i9 i10 SFELF10M7
+  R2: resistor i12 i15 270
+  J2: sma/female-edge i24 j25
 wires:
-  - e1 -- e3
-  - e6 -- e8
-  - e10 -- e12
-  - e15 -- e16
-  - e9 -- h9 black
-  - f0 -- f2 black
-  - f2 -- h2 black
-  - h2 -- h9 black
-  - h9 -- h15 black
-  - f17 -- f15 black
-  - f15 -- h15 black
+  - i1 -- i3
+  - i6 -- i8
+  - i10 -- i12
+  - i15 -- i24
+  - i9 -- l9 black
+  - j0 -- j2 black
+  - j2 -- l2 black
+  - l2 -- l9 black
+  - l9 -- l15 black
+  - j25 -- j15 black
+  - j15 -- l15 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/12-ceramic-filter-1.svg)
 
 ```perfboard
 board:
-  size: 16x10
+  size: 7x5cm
 title: 図4 455 kHz 用を perfboard に組む
 parts:
-  J1: sma/female-edge e1 f0
-  R1: resistor e3 e6 1k5
-  U1: ic3 e8 e9 e10 CFULA455
-  R2: resistor e12 e15 1k5
-  J2: sma/female-edge e16 f17
+  J1: sma/female-edge i1 j0
+  R1: resistor i3 i6 1k5
+  U1: ic3 i8 i9 i10 CFULA455
+  R2: resistor i12 i15 1k5
+  J2: sma/female-edge i24 j25
 wires:
-  - e1 -- e3
-  - e6 -- e8
-  - e10 -- e12
-  - e15 -- e16
-  - e9 -- h9 black
-  - f0 -- f2 black
-  - f2 -- h2 black
-  - h2 -- h9 black
-  - h9 -- h15 black
-  - f17 -- f15 black
-  - f15 -- h15 black
+  - i1 -- i3
+  - i6 -- i8
+  - i10 -- i12
+  - i15 -- i24
+  - i9 -- l9 black
+  - j0 -- j2 black
+  - j2 -- l2 black
+  - l2 -- l9 black
+  - l9 -- l15 black
+  - j25 -- j15 black
+  - j15 -- l15 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/12-ceramic-filter-2.svg)
 
-- U1 の真ん中の足 (GND) は、真下 (h 行) の GND の筋へ最短で落とす
+- U1 の真ん中の足 (GND) は、真下 (l 行) の GND の筋へ最短で落とす
 
 ## 掃引の設定
 

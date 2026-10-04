@@ -51,29 +51,29 @@ wires:
 
 ```perfboard
 board:
-  size: 16x12
+  size: 7x5cm
 title: 図2 perfboard に組む (端面 SMA 2 つ)
 parts:
-  J1: sma/female-edge e1 f0
-  L1: inductor e8 g8 47n
-  C1: capacitor h8 j8 56p
-  J2: sma/female-edge e16 f17
+  J1: sma/female-edge i1 j0
+  L1: inductor i8 k8 47n
+  C1: capacitor l8 n8 56p
+  J2: sma/female-edge i24 j25
 wires:
-  - e1 -- e8
-  - e8 -- e16
-  - g8 -- h8
-  - j8 -- l8
-  - f0 -- f2 black
-  - f2 -- l2 black
-  - f17 -- f14 black
-  - f14 -- l14 black
-  - l2 -- l8 black
-  - l8 -- l14 black
+  - i1 -- i8
+  - i8 -- i24
+  - k8 -- l8
+  - n8 -- p8
+  - j0 -- j2 black
+  - j2 -- p2 black
+  - j25 -- j14 black
+  - j14 -- p14 black
+  - p2 -- p8 black
+  - p8 -- p14 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/06-notch.svg)
 
-- L1・C1 は e (信号) 行から下へ 2 段ずつ (g・h・j 行) 伸ばし、l 行の GND バスへ落とす
+- L1・C1 は i (信号) 行から下へ 2 段ずつ (k・l・n 行) 伸ばし、p 行の GND バスへ落とす
 
 ## 掃引の設定
 

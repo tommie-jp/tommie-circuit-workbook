@@ -44,31 +44,31 @@ notes:
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図2 perfboard の並列治具
 points:
-  GND: h2
+  GND: l2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
-  R1: resistor e8 h8 100
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
+  R1: resistor i8 l8 100
 wires:
-  - e1 -- e8
-  - e8 -- e16
-  - h8 -- GND black
-  - f0 -- f2 black
-  - f2 -- GND black
-  - f17 -- f15 black
-  - f15 -- h15 black
-  - h15 -- GND black
+  - i1 -- i8
+  - i8 -- i24
+  - l8 -- GND black
+  - j0 -- j2 black
+  - j2 -- GND black
+  - j25 -- j15 black
+  - j15 -- l15 black
+  - l15 -- GND black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/02-shunt-fixture.svg)
 
-- e 行を CH0 から CH1 まで一直線に通す。R1 は e8 から下 (h8) へ枝分かれし、
-  GND のまとめ (h2) へつながる
-- **中心導体の枝分かれの根元 (e8) から部品までを短く**する。3-1 と同じ理由で、
+- i 行を CH0 から CH1 まで一直線に通す。R1 は i8 から下 (l8) へ枝分かれし、
+  GND のまとめ (l2) へつながる
+- **中心導体の枝分かれの根元 (i8) から部品までを短く**する。3-1 と同じ理由で、
   長い枝はインダクタンスになり高い周波数でずれる (3-6)
 
 ## 掃引の設定

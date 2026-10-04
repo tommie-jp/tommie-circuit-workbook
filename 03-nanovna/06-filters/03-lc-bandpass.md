@@ -69,43 +69,43 @@ wires:
 
 ```perfboard
 board:
-  size: 24x10
+  size: 7x5cm
 title: 図2 perfboard に組む (端面 SMA 2 つ)
 parts:
-  J1: sma/female-edge e1 f0
-  L1: inductor e3 g3 39n
-  C1: capacitor e5 g5 1500p
-  L2: inductor e8 e12 6.8u
-  C2: capacitor e14 e16 8.2p
-  L3: inductor e18 g18 39n
-  C3: capacitor e20 g20 1500p
-  J2: sma/female-edge e24 f25
+  J1: sma/female-edge i1 j0
+  L1: inductor i3 k3 39n
+  C1: capacitor i5 k5 1500p
+  L2: inductor i8 i12 6.8u
+  C2: capacitor i14 i16 8.2p
+  L3: inductor i18 k18 39n
+  C3: capacitor i20 k20 1500p
+  J2: sma/female-edge i24 j25
 wires:
-  - e1 -- e3
-  - e3 -- e5
-  - e5 -- e8
-  - e12 -- e14
-  - e16 -- e18
-  - e18 -- e20
-  - e20 -- e24
-  - f0 -- f2 black
-  - f2 -- h2 black
-  - h2 -- h3 black
-  - h3 -- g3 black
-  - h3 -- h5 black
-  - h5 -- g5 black
-  - h5 -- h18 black
-  - h18 -- g18 black
-  - h18 -- h20 black
-  - h20 -- g20 black
-  - h20 -- h23 black
-  - f25 -- f23 black
-  - f23 -- h23 black
+  - i1 -- i3
+  - i3 -- i5
+  - i5 -- i8
+  - i12 -- i14
+  - i16 -- i18
+  - i18 -- i20
+  - i20 -- i24
+  - j0 -- j2 black
+  - j2 -- l2 black
+  - l2 -- l3 black
+  - l3 -- k3 black
+  - l3 -- l5 black
+  - l5 -- k5 black
+  - l5 -- l18 black
+  - l18 -- k18 black
+  - l18 -- l20 black
+  - l20 -- k20 black
+  - l20 -- l23 black
+  - j25 -- j23 black
+  - j23 -- l23 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/03-lc-bandpass.svg)
 
-- L1/C1 と L3/C3 はそれぞれ g 行で 1 本にまとめてから GND バス (h 行) へ落とす
+- L1/C1 と L3/C3 はそれぞれ k 行で 1 本にまとめてから GND バス (l 行) へ落とす
   (2 素子が同じ節点から並列に地へ落ちる)
 
 ## 掃引の設定

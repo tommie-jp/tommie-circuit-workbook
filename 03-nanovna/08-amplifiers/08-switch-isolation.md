@@ -82,53 +82,53 @@ wires:
 
 ```perfboard
 board:
-  size: 20x10
+  size: 7x5cm
 title: 図2 perfboard に組む (G5V-2、端面 SMA 2 つ)
 parts:
-  J1: sma/female-edge h1 i0
-  K1: relay d4
-  D1: diode d2 f2 1N4148
-  SW1: switch a1 a3
-  BAT: battery a4 a7 5
-  J2: sma/female-edge h19 i20
+  J1: sma/female-edge i1 j0
+  K1: relay e4
+  D1: diode e2 g2 1N4148
+  SW1: switch b1 b3
+  BAT: battery b4 b7 5
+  J2: sma/female-edge i24 j25
 wires:
-  - h1 -- h7
-  - h7 -- g7
-  - g11 -- h11
-  - h11 -- h13
-  - h13 -- h19
-  - d9 -- c9
-  - c9 -- c13
-  - c13 -- h13
-  - g4 -- g2 red
-  - g2 -- g1 red
-  - g1 -- a1 red
-  - f2 -- g2 red
-  - a3 -- a4 red
-  - d2 -- c2 black
-  - c2 -- c4 black
-  - d4 -- c4 black
-  - c4 -- c7 black
+  - i1 -- i7
+  - i7 -- h7
+  - h11 -- i11
+  - i11 -- i13
+  - i13 -- i24
+  - e9 -- d9
+  - d9 -- d13
+  - d13 -- i13
+  - h4 -- h2 red
+  - h2 -- h1 red
+  - h1 -- b1 red
+  - g2 -- h2 red
+  - b3 -- b4 red
+  - e2 -- d2 black
+  - d2 -- d4 black
+  - e4 -- d4 black
+  - d4 -- d7 black
+  - e7 -- d7 black
   - d7 -- c7 black
-  - c7 -- b7 black
-  - a7 -- b7 black
-  - b7 -- b20 black
-  - b20 -- g20 black
-  - i0 -- i2 black
-  - i2 -- j2 black
-  - j2 -- j18 black
-  - j18 -- i18 black
-  - i18 -- i20 black
+  - b7 -- c7 black
+  - c7 -- c25 black
+  - c25 -- h25 black
+  - j0 -- j2 black
+  - j2 -- k2 black
+  - k2 -- k18 black
+  - k18 -- j18 black
+  - j18 -- j25 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/perfboard/08-switch-isolation.svg)
 
 - K1 の足は実物の G5V-2 (DIP16 の位置のうち 8 本)。1 番 (A1) が左下
-- 信号の線 (h 行) は短く。J1 → COM1、NO1 → J2 の間は、ほかの線と並べて走らせない
+- 信号の線 (i 行) は短く。J1 → COM1、NO1 → J2 の間は、ほかの線と並べて走らせない
   (並んだ線どうしの容量も漏れになる)
-- **2 回路目を使わないとき**は、NC2 から出口への線 (c 行から h13 へ下りる線) を外す。
+- **2 回路目を使わないとき**は、NC2 から出口への線 (d 行から i13 へ下りる線) を外す。
   図3 と図4 はこの線の有り無しの比較
-- 5 V (赤) は SW1 から K1 の 1 番 (A1) へ。GND (黒) は上の b 行と下の j 行で、
+- 5 V (赤) は SW1 から K1 の 1 番 (A1) へ。GND (黒) は上の c 行と下の k 行で、
   J1・J2 の外皮でつながる
 
 ## 掃引の設定

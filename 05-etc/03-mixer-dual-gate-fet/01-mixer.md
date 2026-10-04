@@ -238,7 +238,7 @@ wires:
   - -t30 -- a30 black
   - -t15 -- a15 black
   - -t43 -- a43 black
-  - -t48 -- a48 black
+  - -t47 -- a47 black
   - -t54 -- a54 black
   - -t60 -- a60 black
   - AD.W1 -- e19 yellow
@@ -252,6 +252,7 @@ wires:
   - f29 -- e29 purple
   - j31 -- j33 purple
   - c31 -- c36 brown
+  - c48 -- c50 blue
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/breadboard/01-mixer.svg)
@@ -278,7 +279,7 @@ wires:
 | C3 560p | d32 / d36 | R3 51 | i47 / i51 |
 | L1 220u | b36 / b40 | C6 100n | f6 / f10 |
 | C4 10n | e36 / e46 | C7 10u | h10 (+) / h6 (−) |
-| R7 2k | b43 / b46 | FL1 | d46 (IN) d48 (GND) d50 (OUT) |
+| R7 2k | b43 / b46 | FL1 | d46 (IN) d47 (GND) d48 (OUT) |
 
 ### ユニバーサル基板
 

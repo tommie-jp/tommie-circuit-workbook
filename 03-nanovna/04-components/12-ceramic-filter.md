@@ -58,34 +58,34 @@ wires:
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図2 セラミックフィルタと 270 Ω 2 本
 points:
-  GND: h2
+  GND: l2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
-  R1: resistor e2 e6 270
-  FL1: ic3 e7 e8 e9 SFELF10M7
-  R2: resistor e10 e14 270
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
+  R1: resistor i2 i6 270
+  FL1: ic3 i7 i8 i9 SFELF10M7
+  R2: resistor i10 i14 270
 wires:
-  - e1 -- e2
-  - e6 -- e7
-  - e9 -- e10
-  - e14 -- e16
-  - e8 -- h8 black
-  - f0 -- f2 black
-  - f2 -- GND black
-  - GND -- h8 black
-  - h8 -- h15 black
-  - f17 -- f15 black
-  - f15 -- h15 black
+  - i1 -- i2
+  - i6 -- i7
+  - i9 -- i10
+  - i14 -- i24
+  - i8 -- l8 black
+  - j0 -- j2 black
+  - j2 -- GND black
+  - GND -- l8 black
+  - l8 -- l15 black
+  - j25 -- j15 black
+  - j15 -- l15 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/12-ceramic-filter.svg)
 
-- FL1 の真ん中の足 (e8) を h 行の GND へ最短で落とす。GND の足が長いと、帯域の外の
+- FL1 の真ん中の足 (i8) を l 行の GND へ最短で落とす。GND の足が長いと、帯域の外の
   減衰が浅くなる (入力と出力が GND の線を通して結合する)
 - R1・R2 はフィルタの足のすぐ隣に。フィルタから見た 330 Ω の相手はこの抵抗の位置で決まる
 

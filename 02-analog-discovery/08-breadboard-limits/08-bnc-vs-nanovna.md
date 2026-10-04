@@ -57,7 +57,7 @@ style:
 - J1 (P1) が入力側、J2 (P2) が出力側。AD の BNC アダプタ経由の配線なので、
   1+・2+ の名前は BNC を挟んでも変わらない (0-5 で確かめたとおり)
 - 中身は単なる導通 (スルー)。J1 と J2 の中心導体を結ぶ横線が治具の線 (実体配線図の
-  e 行)。理想値は S21 = 0 dB
+  i 行)。理想値は S21 = 0 dB
 - LiteVNA64 へつなぎ替えるときは、この図の AD を外して LiteVNA64 の CH0 を P1、
   CH1 を P2 に直結する (SMA なのでアダプタ不要)
 
@@ -68,26 +68,20 @@ style:
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図2 perfboard の SMA スルー治具
-points:
-  GND: h2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 d17 f17
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 h25 j25
 wires:
-  - e1 -- e16
-  - f0 -- f2 black
-  - f2 -- GND black
-  - f17 -- f15 black
-  - f15 -- h15 black
-  - h15 -- GND black
+  - i1 -- i24
+  - j0 -- j25 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/perfboard/08-bnc-vs-nanovna.svg)
 
-- J1 (P1) が e1、J2 (P2) が e16。中心導体どうしを e 行 1 本でつなぐだけの、
+- J1 (P1) が i1、J2 (P2) が i24。中心導体どうしを i 行 1 本でつなぐだけの、
   部品を挟まない「素通し」の治具
 - AD へは BNC-SMA 変換アダプタ経由、LiteVNA64 へは SMA ケーブルで直結する
 
@@ -100,27 +94,27 @@ wires:
 
 ## 見るべき値
 
-計算値。治具の中心導体 (e1〜e16、15 穴 ≒ 38.1 mm) を経験式 (8-3 と同じ) で
-見積もったインダクタンスは約 30.7 nH。
+計算値。治具の中心導体 (i1〜i24、23 穴 ≒ 58.4 mm) を経験式 (8-3 と同じ) で
+見積もったインダクタンスは約 52.1 nH。
 
 | 周波数 | AD (1 MΩ 入力、電圧比) | LiteVNA64 (50 Ω 系、真の S21) |
 | --- | --- | --- |
 | 1 MHz | 0.00 dB (差は測定限界以下) | −0.00 dB |
-| 10 MHz | 0.00 dB (同上) | −0.0016 dB |
-| 25 MHz | 0.00 dB (同上、AD の上限) | −0.0101 dB |
-| 100 MHz | 測れない (AD の範囲外) | **−0.16 dB** |
+| 10 MHz | 0.00 dB (同上) | −0.0046 dB |
+| 25 MHz | 0.00 dB (同上、AD の上限) | −0.0290 dB |
+| 100 MHz | 測れない (AD の範囲外) | **−0.44 dB** |
 
 ```graph
-title: 図3 AD は 25 MHz まで 0 dB、LiteVNA64 は 100 MHz で −0.16 dB
+title: 図3 AD は 25 MHz まで 0 dB、LiteVNA64 は 100 MHz で −0.44 dB
 x: 周波数 Hz log 100k..100M
-y: S21 dB -0.2..0.02
+y: S21 dB -0.5..0.02
 lines:
   AD 1 MΩ dB:
     - 100k 0
     - 1M 0
     - 10M 0
     - 25M 0
-  LiteVNA64 50 Ω dB: -10*log10(1+(2*pi*x*30.7n/100)^2)
+  LiteVNA64 50 Ω dB: -10*log10(1+(2*pi*x*52.1n/100)^2)
 notes:
   - mark 10M
   - mark 25M
@@ -128,7 +122,7 @@ notes:
 
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/graph/08-bnc-vs-nanovna.svg)
 
-AD の線は 25 MHz (上限) で止まる。1 MHz〜25 MHz の重なりでは 2 本の差は 0.01 dB に収まる。
+AD の線は 25 MHz (上限) で止まる。1 MHz〜25 MHz の重なりでは 2 本の差は 0.03 dB に収まる。
 
 **AD の読みは 25 MHz まで数字の上ではほぼ完璧に 0 dB のまま動かない。** これは
 治具が優秀だからというより、**AD の入力が 1 MΩ と高いせいで、治具のわずかな

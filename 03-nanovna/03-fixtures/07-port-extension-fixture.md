@@ -49,26 +49,26 @@ notes:
 
 ```perfboard
 board:
-  size: 12x8
+  size: 7x5cm
   slots: on
 title: 図2 1 端子の治具
 points:
-  GND: h2
+  GND: l2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  R1: resistor e9 h9 100
+  J1: sma/female-edge i1 h0 j0
+  R1: resistor i9 l9 100
 wires:
-  - e1 -- e9
-  - f0 -- f2 black
-  - f2 -- GND black
-  - GND -- h9 black
+  - i1 -- i9
+  - j0 -- j2 black
+  - j2 -- GND black
+  - GND -- l9 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/07-port-extension-fixture.svg)
 
-- e1〜e9 の線 (8 穴ぶん、約 2 cm) が板の上の電気長。R1 の足を抜いた状態が
-  「治具の開放」、R1 の代わりに太い線で e9 と h9 を結んだ状態が「治具の短絡」になる
-- GND は h 行にまとめ、SMA の凹の腕 (f0) からつなぐ (3-1 と同じ)
+- i1〜i9 の線 (8 穴ぶん、約 2 cm) が板の上の電気長。R1 の足を抜いた状態が
+  「治具の開放」、R1 の代わりに太い線で i9 と l9 を結んだ状態が「治具の短絡」になる
+- GND は l 行にまとめ、SMA の凹の腕 (j0) からつなぐ (3-1 と同じ)
 
 ## 掃引の設定
 
@@ -153,11 +153,11 @@ notes:
 2. E-DELAY に往復の遅延を入れる。この模型なら **0.286 ns**。実物では S11 の
    群遅延を読んでその値から始める
 3. Smith の点が**右端の 1 点に縮む**まで値を少しずつ変える。回りが速くなったら符号が逆
-4. e9 と h9 を太い線で短絡し、左端の 1 点に縮むことを確かめる。短絡の線を外して R1 を挿す
+4. i9 と l9 を太い線で短絡し、左端の 1 点に縮むことを確かめる。短絡の線を外して R1 を挿す
 5. 図5 のように 100 Ω の 1 点に戻れば、治具の電気長が除けている
 
 ポート延長が消すのは**線の遅延 (位相の回り) だけ**。板の上の線は 50 Ω の線路では
-ないので (GND の h 行から離れた 1 本の線)、そのずれと、線のインダクタンスが残す分は
+ないので (GND の l 行から離れた 1 本の線)、そのずれと、線のインダクタンスが残す分は
 消えない。これも除くなら、治具の S パラメータを測って引く De-embedding (3-8) を使う。
 
 ## 見るべき値

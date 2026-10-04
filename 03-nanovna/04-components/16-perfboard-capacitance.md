@@ -43,35 +43,29 @@ notes:
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図2 2 穴離して並べた 2 本の線 (つなげない)
-points:
-  GND: h2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
 wires:
-  - e1 -- e13
-  - e16 -- c16
-  - c16 -- c4
-  - f0 -- f2 black
-  - f2 -- GND black
-  - GND -- h15 black
-  - f17 -- f15 black
-  - f15 -- h15 black
+  - i1 -- i13
+  - i24 -- g24
+  - g24 -- g4
+  - j0 -- j25 black
 notes:
-  - box c4 e13 blue
+  - box g4 i13 blue
   - text -a8: 並んだ 10 穴 (約 2.3 cm)
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/16-perfboard-capacitance.svg)
 
-- e 行 (CH0 側) と c 行 (CH1 側) の線が、4〜13 列の 10 穴ぶん 2 穴 (5.08 mm) 離れて並ぶ。
+- i 行 (CH0 側) と g 行 (CH1 側) の線が、4〜13 列の 10 穴ぶん 2 穴 (5.08 mm) 離れて並ぶ。
   **2 本はどこでもつながっていない**。線はどちらも 0.5 mm のスズめっき線を板に沿わせる
 - 先に**線を張らない治具 (SMA だけ)** を測っておく。SMA どうしの漏れ (3-1 の「何も入れない」)
   が基準で、線を張って増えたぶんが線どうしの容量
-- 間隔を 1 穴 (2.54 mm、c 行の代わりに d 行) にしたときも測って比べる
+- 間隔を 1 穴 (2.54 mm、g 行の代わりに h 行) にしたときも測って比べる
 - 2 本の線は片方の端が浮いているので、検査 (ERC) が J1・J2 の中心導体を「つながっていない」
   と言う。部品をつながないのがこの題の中身なので、意図どおり
 

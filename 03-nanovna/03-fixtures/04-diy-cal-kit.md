@@ -54,51 +54,51 @@ notes:
 
 ```perfboard
 board:
-  size: 8x8
+  size: 7x5cm
   slots: on
 title: 図2 Open
 points:
-  GND: g2
+  GND: k2
 parts:
-  J1: sma/female-edge e1 d0 f0
+  J1: sma/female-edge i1 h0 j0
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/04-diy-cal-kit-1.svg)
 
 ```perfboard
 board:
-  size: 8x8
+  size: 7x5cm
   slots: on
 title: 図3 Short
 points:
-  GND: g2
+  GND: k2
 parts:
-  J2: sma/female-edge e1 d0 f0
+  J2: sma/female-edge i1 h0 j0
 wires:
-  - e1 -- f1
-  - f1 -- f0
+  - i1 -- j1
+  - j1 -- j0
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/04-diy-cal-kit-2.svg)
 
 ```perfboard
 board:
-  size: 8x8
+  size: 7x5cm
   slots: on
 title: 図4 Load (50 Ω)
 points:
-  GND: g3
+  GND: k3
 parts:
-  J3: sma/female-edge e1 d0 f0
-  R1: resistor e3 g3 100
-  R2: resistor e5 g5 100
+  J3: sma/female-edge i1 h0 j0
+  R1: resistor i3 l3 100
+  R2: resistor i5 l5 100
 wires:
-  - e1 -- e3
-  - e3 -- e5
-  - f0 -- f2 black
-  - f2 -- g2 black
-  - g2 -- g3 black
-  - g3 -- g5 black
+  - i1 -- i3
+  - i3 -- i5
+  - j0 -- j2 black
+  - j2 -- l2 black
+  - l2 -- l3 black
+  - l3 -- l5 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/04-diy-cal-kit-3.svg)

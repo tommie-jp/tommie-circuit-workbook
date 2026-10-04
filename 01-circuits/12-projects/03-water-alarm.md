@@ -86,7 +86,7 @@ wires:
 
 ```perfboard
 board:
-  size: 24x14
+  size: 7x5cm
   slots: on
 title: 図2 perfboardに組む
 points:

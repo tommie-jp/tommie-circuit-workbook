@@ -59,34 +59,34 @@ wires:
 
 ```perfboard
 board:
-  size: 18x10
+  size: 7x5cm
 title: 図2 perfboard に組む (整合回路 + ダミー負荷)
 parts:
-  J1: sma/female-edge e1 f0
-  C1: capacitor e3 g3 68p
-  L1: inductor e5 e9 120n
-  R1: resistor e11 e13 51
-  R2: resistor g11 g13 51
-  C2: capacitor e15 g15 220p
+  J1: sma/female-edge i1 j0
+  C1: capacitor i3 k3 68p
+  L1: inductor i5 i9 120n
+  R1: resistor i11 i13 51
+  R2: resistor k11 k13 51
+  C2: capacitor i15 k15 220p
 wires:
-  - e1 -- e3
-  - e3 -- e5
-  - e9 -- e11
-  - e11 -- g11
-  - e13 -- e15
-  - e13 -- g13
-  - g3 -- h3 black
-  - h3 -- h15 black
-  - h15 -- g15 black
-  - f0 -- f2 black
-  - f2 -- h2 black
-  - h2 -- h3 black
+  - i1 -- i3
+  - i3 -- i5
+  - i9 -- i11
+  - i11 -- k11
+  - i13 -- i15
+  - i13 -- k13
+  - k3 -- l3 black
+  - l3 -- l15 black
+  - l15 -- k15 black
+  - j0 -- j2 black
+  - j2 -- l2 black
+  - l2 -- l3 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/perfboard/04-l-network-matching.svg)
 
-- R1 (e 行) と R2 (g 行) を 11 列と 13 列の線で並列にする
-- C1 の下側 (g3) と C2 の下側 (g15) を h 行の GND バスでつなぐ。J1 の外皮も
+- R1 (i 行) と R2 (k 行) を 11 列と 13 列の線で並列にする
+- C1 の下側 (k3) と C2 の下側 (k15) を l 行の GND バスでつなぐ。J1 の外皮も
   同じバスへ
 
 ## 掃引の設定

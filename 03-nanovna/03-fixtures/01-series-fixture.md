@@ -42,23 +42,17 @@ wires:
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図2 perfboard に端面 SMA を 2 つ
-points:
-  GND: h2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
-  R1: resistor e6 e11 100
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
+  R1: resistor i6 i11 100
 wires:
-  - e1 -- e6
-  - e11 -- e16
-  - f0 -- f2 black
-  - f2 -- GND black
-  - f17 -- f15 black
-  - f15 -- h15 black
-  - h15 -- GND black
+  - i1 -- i6
+  - i11 -- i24
+  - j0 -- j25 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/01-series-fixture.svg)
@@ -66,7 +60,13 @@ wires:
 - 端面 SMA の凹の腕 (GND) を板の縁の銅箔に半田付けし、中心導体を板の穴に通す
 - **中心導体から部品までの線はできるだけ短く**。長い線はそのぶんインダクタンスに
   なり、高い周波数で値がずれる (どこまで信じられるかは 3-6 で測る)
-- GND は下の行 (h 行) を太めの線でまとめ、両方の SMA をつなぐ
+- GND は信号の線のすぐ隣の j 行を 1 本の線で通し、両方の SMA の凹の腕 (j0〜j25) をつなぐ。
+  帰り道を信号の線と同じ長さに抑えるため
+- 5×7 cm の板の両端に SMA を置くので、線は左が i1〜i6 の 5 穴 (1.27 cm)、右が
+  i11〜i24 の 13 穴 (3.30 cm) で、左右が対称でない。8-3 の経験式で見積もると、
+  足を含めて一直線に並んだ 23 穴の線全体で約 52 nH。長さで割り振ると左が約 11 nH、
+  右が約 29 nH で、300 MHz で合わせて約 +j77 Ω になる。値の引き方と、
+  対称でないことの扱いは 3-8 で計算する
 
 ## 掃引の設定
 

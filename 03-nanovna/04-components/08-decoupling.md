@@ -47,33 +47,33 @@ S21 (通り抜け) から、GND へ落ちている部品の合成インピーダ
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図2 perfboard の並列治具に電解 + セラミック
 points:
-  GND: h2
+  GND: l2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
-  C1: capacitor/electrolytic e6 h6 10u
-  C2: capacitor/ceramic e11 h11 100n
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
+  C1: capacitor/electrolytic i6 l6 10u
+  C2: capacitor/ceramic i11 l11 100n
 wires:
-  - e1 -- e6
-  - e6 -- e11
-  - e11 -- e16
-  - f0 -- f2 black
-  - f2 -- GND black
-  - GND -- h6 black
-  - h6 -- h11 black
-  - h11 -- h15 black
-  - h15 -- f15 black
-  - f15 -- f17 black
+  - i1 -- i6
+  - i6 -- i11
+  - i11 -- i24
+  - j0 -- j2 black
+  - j2 -- GND black
+  - GND -- l6 black
+  - l6 -- l11 black
+  - l11 -- l15 black
+  - l15 -- j15 black
+  - j15 -- j25 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/08-decoupling.svg)
 
-e 行が CH0-CH1 の素通し線、h 行が GND のバス。C1・C2 とも e 行から h 行へ
-垂直に落とす。電解コンデンサ C1 は極性がある (e6 側が +)。
+i 行が CH0-CH1 の素通し線、l 行が GND のバス。C1・C2 とも i 行から l 行へ
+垂直に落とす。電解コンデンサ C1 は極性がある (i6 側が +)。
 
 ## 掃引の設定
 

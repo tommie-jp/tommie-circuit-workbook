@@ -66,25 +66,25 @@ wires:
 
 ```perfboard
 board:
-  size: 18x8
+  size: 7x5cm
 title: 図2 perfboard に組む (コイルとバリコン)
 parts:
-  J1: sma/female-edge e1 f0
-  L1: inductor e3 e10 330u
-  C1: capacitor e11 g11 100p
+  J1: sma/female-edge i1 j0
+  L1: inductor i3 i10 330u
+  C1: capacitor i11 k11 100p
 wires:
-  - e1 -- e3
-  - e10 -- e11
-  - f0 -- f2 black
-  - f2 -- h2 black
-  - h2 -- h11 black
-  - h11 -- g11 black
+  - i1 -- i3
+  - i10 -- i11
+  - j0 -- j2 black
+  - j2 -- l2 black
+  - l2 -- l11 black
+  - l11 -- k11 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/perfboard/05-loopstick-varicap.svg)
 
 - L1 がループスティックのコイル (330 µH)。実物はフェライト棒に巻いた線だが、
-  ここでは軸物インダクタの記号で表す。記号は 2 端子なので、J1 からの線 (e3) は
+  ここでは軸物インダクタの記号で表す。記号は 2 端子なので、J1 からの線 (i3) は
   実物では**タップ**へつなぐ (上の「給電の作り方」)。図1 の R1 (20 Ω) は
   このタップで下がった見かけの抵抗なので、基板には現れない
 - C1 がバリコン。実物は 2 本の端子を持つ可変コンデンサで、つまみを回して

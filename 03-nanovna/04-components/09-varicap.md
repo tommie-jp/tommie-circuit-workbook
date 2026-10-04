@@ -64,50 +64,44 @@ notes:
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図2 直列治具にバリキャップとバイアス
-points:
-  GND: h2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
-  C1: capacitor/ceramic e2 e4 100n
-  D1: varicap e9 e6 1SV149
-  C2: capacitor/ceramic e11 e13 100n
-  R1: resistor b6 d6 100k
-  R2: resistor b9 d9 100k
-  VR1: potentiometer/trimmer a2 b3 a4 10k
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
+  C1: capacitor/ceramic i2 i4 100n
+  D1: varicap i9 i6 1SV149
+  C2: capacitor/ceramic i11 i13 100n
+  R1: resistor f6 h6 100k
+  R2: resistor f9 h9 100k
+  VR1: potentiometer/trimmer e2 f3 e4 10k
   BT1:
     type: device
     at: top
     label: 電池 9V
     pins: + -
 wires:
-  - e1 -- e2
-  - e4 -- e6
-  - e9 -- e11
-  - e13 -- e16
-  - e6 -- d6
-  - e9 -- d9
-  - b3 -- b6
-  - a4 -- a9
-  - a9 -- b9
-  - BT1.+ -- a2 red
-  - BT1.- -- a9 blue
-  - f0 -- f2 black
-  - f2 -- GND black
-  - f17 -- f15 black
-  - f15 -- h15 black
-  - h15 -- GND black
+  - i1 -- i2
+  - i4 -- i6
+  - i9 -- i11
+  - i13 -- i24
+  - i6 -- h6
+  - i9 -- h9
+  - f3 -- f6
+  - e4 -- e9
+  - e9 -- f9
+  - BT1.+ -- e2 red
+  - BT1.- -- e9 blue
+  - j0 -- j25 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/09-varicap.svg)
 
-- 信号は e 行をまっすぐ通る。バイアスは上 (a〜d 行) から R1・R2 で D1 の両足へ降りる
-- 電池の − (青) は GND ではない。h 行の GND とつながないまま、VR1 と R2 へ行く
+- 信号は i 行をまっすぐ通る。バイアスは上 (e〜h 行) から R1・R2 で D1 の両足へ降りる
+- 電池の − (青) は GND ではない。j 行の GND とつながないまま、VR1 と R2 へ行く
 - 1SV149 の足のどちらがカソードかは、データシートの外形図で確かめてから挿す
-- 電圧はテスターで D1 の両足 (e6 と e9) の間を測って合わせる。VR1 の目盛は当てにしない
+- 電圧はテスターで D1 の両足 (i6 と i9) の間を測って合わせる。VR1 の目盛は当てにしない
 - VR1 を回し切ると 9 V になる。1SV149 の最大逆電圧は 15 V (データシート) なので 9 V は
   範囲の中。表はデータシートの容量比の点 (1 V と 8 V) に合わせて 8 V までにする
 

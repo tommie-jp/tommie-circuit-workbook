@@ -12,7 +12,7 @@ device: H4
 # 3-9 SMA オス / メスとケーブルの再現性
 
 同じ物を測り直しても、読み値は少しずつ違う。違いの多くは**SMA の付け外し**と
-**ケーブルの曲げ**から来る。この題では 3-4 の自作 Load と 3-6 の短いスルー治具 (図 2) を
+**ケーブルの曲げ**から来る。この題では 3-4 の自作 Load と 3-6 のスルー治具 (図 2) を
 10 回ずつ付け外しし、読み値がどれだけ揺れるかを自分の道具で測る。その揺れより
 小さい差は、測っても意味が無い。
 
@@ -53,7 +53,7 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/09-sma-repeatability.svg)
 
-2 つ目の測る物は 3-6 の短いスルー治具 (図は 3-6 の図 2)。
+2 つ目の測る物は 3-6 のスルー治具 (図は 3-6 の図 2。5×7 cm の板の幅いっぱい)。
 
 ## 実体配線図
 
@@ -61,22 +61,22 @@ wires:
 
 ```perfboard
 board:
-  size: 8x8
+  size: 7x5cm
   slots: on
 title: 図2 自作 Load (3-4 と同じ)
 points:
-  GND: g3
+  GND: k3
 parts:
-  J1: sma/female-edge e1 d0 f0
-  R1: resistor e3 g3 100
-  R2: resistor e5 g5 100
+  J1: sma/female-edge i1 h0 j0
+  R1: resistor i3 k3 100
+  R2: resistor i5 k5 100
 wires:
-  - e1 -- e3
-  - e3 -- e5
-  - f0 -- f2 black
-  - f2 -- g2 black
-  - g2 -- g3 black
-  - g3 -- g5 black
+  - i1 -- i3
+  - i3 -- i5
+  - j0 -- j2 black
+  - j2 -- k2 black
+  - k2 -- k3 black
+  - k3 -- k5 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/09-sma-repeatability.svg)
@@ -112,14 +112,14 @@ notes:
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/vna/09-sma-repeatability-1.svg)
 
-**2. スルー治具** — 3-6 の短いスルーと同じ 5 nH の模型。曲げの揺れは S21 の位相に出る。
+**2. スルー治具** — 3-6 のスルーと同じ 52 nH の模型 (23 穴の線を 8-3 の経験式で見積もった値)。曲げの揺れは S21 の位相に出る。
 
 ```vna
 device: h4
 sweep: 1M-300M 101
-title: 図4 スルー治具 — 300 MHz で S21 の位相は −5.4°
+title: 図4 スルー治具 — 300 MHz で S21 の位相は −44.5°
 dut:
-  - series R 0 esl 5n
+  - series R 0 esl 52.1n
 traces:
   - S21 phase
   - S11 logmag
@@ -150,16 +150,19 @@ notes:
 | --- | --- | --- | --- |
 | Load | 100 MHz の S11 | −38.0 dB | |
 | Load | 300 MHz の S11 | −28.5 dB | |
-| スルー | 300 MHz の S21 の位相 | −5.4° | |
-| スルー | 300 MHz の S11 | −20.6 dB | |
+| スルー | 300 MHz の S21 の位相 | −44.5° | |
+| スルー | 300 MHz の S11 | −3.1 dB | |
 | スルー (曲げ) | 300 MHz の S21 の位相の変化 | 0° | |
 
 - **S11 の幅は、低い値ほど大きく見える。** −38 dB の反射は 0.013 (1.3 %) しかなく、
   付け外しで乗る小さな反射と同じくらいの大きさ。−38 dB と −42 dB の差は
   付け外しの揺れに埋もれることが多い
-- 図4 の S21 の位相は 300 MHz でも −5.4° で、45°/目盛の枠では 0° の線からほとんど
-  離れない (見えるはずの画面としては意図どおり)。**揺れは線の形ではなく、マーカーの
+- 図4 の S21 の位相は 300 MHz で −44.5° で、45°/目盛の枠ではほぼ 1 目盛。
+  付け外しの揺れは 1° 前後なので線の形では見えない。**揺れは線の形ではなく、マーカーの
   読み値 (小数 2 桁) で比べる**
+- 300 MHz のスルーの S11 (−3.1 dB) は、3-6 の限界 (約 31 MHz) をはるかに超えた所の値。
+  治具としては信じられない周波数だが、付け外しの揺れを見るには、読み値が大きく
+  動きやすいこの所が向く
 - **位相の揺れは周波数に比例して増える。** 300 MHz で 1° 揺れるなら、900 MHz では
   およそ 3°。GHz で位相を読む題 (第 9 章) ほど、ケーブルを固定する意味が大きい
 - 出した幅が、**この道具で見分けられる差の下限**になる。3-7・3-8 で治具を引いた後に

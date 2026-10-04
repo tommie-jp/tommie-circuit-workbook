@@ -76,49 +76,49 @@ wires:
 
 ```perfboard
 board:
-  size: 20x14
-title: 図2 perfboard に組む (e 行 LPF・k 行 HPF)
+  size: 7x5cm
+title: 図2 perfboard に組む (g 行 LPF・m 行 HPF)
 parts:
-  J1: sma/female-edge e1 f0
-  L1: inductor e4 e8 220n
-  C2: capacitor e9 c9 82p
-  L3: inductor e10 e14 82n
-  J2: sma/female-edge e20 f21
-  C1: capacitor k4 k6 43p
-  L2: inductor k7 m7 120n
-  C3: capacitor k8 k10 130p
-  J3: sma/female-edge k20 l21
+  J1: sma/female-edge g1 h0
+  L1: inductor g4 g8 220n
+  C2: capacitor g9 e9 82p
+  L3: inductor g10 g14 82n
+  J2: sma/female-edge g24 h25
+  C1: capacitor m4 m6 43p
+  L2: inductor m7 o7 120n
+  C3: capacitor m8 m10 130p
+  J3: sma/female-edge m24 n25
 wires:
-  - e1 -- e3
-  - e3 -- e4
-  - e8 -- e9
-  - e9 -- e10
-  - e14 -- e20
-  - e3 -- k3
-  - k3 -- k4
-  - k6 -- k7
-  - k7 -- k8
-  - k10 -- k20
-  - d0 -- d2 black
-  - d2 -- c2 black
-  - c2 -- c9 black
-  - c9 -- c19 black
-  - d21 -- d19 black
-  - d19 -- c19 black
+  - g1 -- g3
+  - g3 -- g4
+  - g8 -- g9
+  - g9 -- g10
+  - g14 -- g24
+  - g3 -- m3
+  - m3 -- m4
+  - m6 -- m7
+  - m7 -- m8
+  - m10 -- m24
   - f0 -- f2 black
-  - f2 -- m2 black
-  - m2 -- m7 black
-  - m7 -- m19 black
-  - l21 -- l19 black
-  - l19 -- m19 black
+  - f2 -- e2 black
+  - e2 -- e9 black
+  - e9 -- e19 black
+  - f25 -- f19 black
+  - f19 -- e19 black
+  - h0 -- h2 black
+  - h2 -- o2 black
+  - o2 -- o7 black
+  - o7 -- o19 black
+  - n25 -- n19 black
+  - n19 -- o19 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/09-diplexer.svg)
 
-- GND は c 行 (LPF の上) と m 行 (HPF の下) の 2 本の筋。2 本は左の J1 の凹の
-  上下の先端でつながり、右では c 行が J2 の凹に、m 行が J3 の凹に落ちる。信号の線と交差しないように、
+- GND は e 行 (LPF の上) と o 行 (HPF の下) の 2 本の筋。2 本は左の J1 の凹の
+  上下の先端でつながり、右では e 行が J2 の凹に、o 行が J3 の凹に落ちる。信号の線と交差しないように、
   LPF の並列の C2 は上へ、HPF の並列の L2 は下へ落とした
-- 分かれ目 (e3) から LPF と HPF の入口の素子までは短く。ここが長いと、
+- 分かれ目 (g3) から LPF と HPF の入口の素子までは短く。ここが長いと、
   2 つの枝の足し合わせがずれる
 
 ## 掃引の設定

@@ -67,32 +67,32 @@ wires:
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
 title: 図2 perfboard に組む (部品面)
 parts:
-  J1: sma/female-edge c1 d0
-  J2: sma/female-edge c16 d17
-  L1: inductor c5 c11 10u
-  C1: capacitor e5 e11 47p
-  C2: capacitor g5 g11 3.3p
+  J1: sma/female-edge i1 j0
+  J2: sma/female-edge i24 j25
+  L1: inductor i5 i11 10u
+  C1: capacitor k5 k11 47p
+  C2: capacitor m5 m11 3.3p
 wires:
-  - c1 -- c5
-  - c11 -- c16
-  - c5 -- e5
-  - e5 -- g5
-  - c11 -- e11
-  - e11 -- g11
-  - d0 -- d2 black
-  - d2 -- h2 black
-  - h2 -- h15 black
-  - h15 -- d15 black
-  - d15 -- d17 black
+  - i1 -- i5
+  - i11 -- i24
+  - i5 -- k5
+  - k5 -- m5
+  - i11 -- k11
+  - k11 -- m11
+  - j0 -- j2 black
+  - j2 -- n2 black
+  - n2 -- n15 black
+  - n15 -- j15 black
+  - j15 -- j25 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/perfboard/09-trap.svg)
 
 - L1・C1・C2 の 3 つを 5 列と 11 列の縦の線で並列にする
-- J1 と J2 の外皮は h 行の GND の線でつなぐ (トラップの外側を回す)
+- J1 と J2 の外皮は n 行の GND の線でつなぐ (トラップの外側を回す)
 
 ## 掃引の設定
 

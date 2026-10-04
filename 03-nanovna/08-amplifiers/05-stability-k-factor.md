@@ -82,55 +82,55 @@ wires:
 
 ```perfboard
 board:
-  size: 23x11
-title: 図2 8-4 の板に RST を足す (g19 から k 行へ)
+  size: 7x5cm
+title: 図2 8-4 の板に RST を足す (i19 から m 行へ)
 parts:
-  J1: sma/female-edge g1 h0
-  BAT: battery a4 a1 5
-  Cd: capacitor b5 c5 10u
-  C1: capacitor g3 g5 100n
-  RB: resistor a7 d7 200k
-  L1: inductor d8 g8 100u
-  Q1: transistor h12 h11 h10
-  Rs: resistor a14 d14 100
-  L2: inductor d13 g13 100u
-  C2: capacitor g15 g17 100n
-  RST: resistor g19 j19 270
-  J2: sma/female-edge g22 h23
+  J1: sma/female-edge i1 j0
+  BAT: battery c4 c1 5
+  Cd: capacitor d5 e5 10u
+  C1: capacitor i3 i5 100n
+  RB: resistor c7 f7 200k
+  L1: inductor f8 i8 100u
+  Q1: transistor j12 j11 j10
+  Rs: resistor c14 f14 100
+  L2: inductor f13 i13 100u
+  C2: capacitor i15 i17 100n
+  RST: resistor i19 l19 270
+  J2: sma/female-edge i24 j25
 wires:
-  - a4 -- a5 red
-  - a5 -- a7 red
-  - a7 -- a14 red
-  - b5 -- a5 red
-  - a1 -- c1 black
-  - c1 -- f1 black
-  - f1 -- f0 black
-  - c5 -- c1 black
-  - g1 -- g3
-  - g5 -- g8
-  - g8 -- g10
-  - g10 -- h10
-  - d7 -- d8
-  - g11 -- h11
-  - g11 -- g13
-  - d13 -- d14
-  - g13 -- g15
-  - g17 -- g19
-  - g19 -- g22
-  - j19 -- k19 black
-  - h0 -- h2 black
-  - h2 -- k2 black
-  - k2 -- k12 black
-  - k12 -- k19 black
-  - k19 -- k21 black
-  - h12 -- k12 black
-  - h23 -- h21 black
-  - h21 -- k21 black
+  - c4 -- c5 red
+  - c5 -- c7 red
+  - c7 -- c14 red
+  - d5 -- c5 red
+  - c1 -- e1 black
+  - e1 -- h1 black
+  - h1 -- h0 black
+  - e5 -- e1 black
+  - i1 -- i3
+  - i5 -- i8
+  - i8 -- i10
+  - i10 -- j10
+  - f7 -- f8
+  - i11 -- j11
+  - i11 -- i13
+  - f13 -- f14
+  - i13 -- i15
+  - i17 -- i19
+  - i19 -- i24
+  - l19 -- m19 black
+  - j0 -- j2 black
+  - j2 -- m2 black
+  - m2 -- m12 black
+  - m12 -- m19 black
+  - m19 -- m21 black
+  - j12 -- m12 black
+  - j25 -- j21 black
+  - j21 -- m21 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/perfboard/05-stability-k-factor.svg)
 
-- RST は C2 の出口 (g19) から GND の線 (k 行) へ最短で。長いと高い周波数で
+- RST は C2 の出口 (i19) から GND の線 (m 行) へ最短で。長いと高い周波数で
   RST にインダクタンスが直列に付き、効きが落ちる
 
 ## 掃引の設定

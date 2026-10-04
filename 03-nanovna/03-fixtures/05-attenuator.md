@@ -56,34 +56,34 @@ notes:
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図2 perfboard の 10 dB アッテネータ
 points:
-  GND: h2
+  GND: l2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  R1: resistor e3 e6 27
-  R2: resistor e8 g8 36
-  R3: resistor e10 e13 27
-  J2: sma/female-edge e16 f17
+  J1: sma/female-edge i1 h0 j0
+  R1: resistor i3 i6 27
+  R2: resistor i8 k8 36
+  R3: resistor i10 i13 27
+  J2: sma/female-edge i24 j25
 wires:
-  - e1 -- e3
-  - e6 -- e8
-  - e8 -- e10
-  - e13 -- e16
-  - g8 -- h8 black
-  - h8 -- GND black
-  - f0 -- f2 black
-  - f2 -- GND black
-  - f17 -- f15 black
-  - f15 -- h15 black
-  - h15 -- h8 black
+  - i1 -- i3
+  - i6 -- i8
+  - i8 -- i10
+  - i13 -- i24
+  - k8 -- l8 black
+  - l8 -- GND black
+  - j0 -- j2 black
+  - j2 -- GND black
+  - j25 -- j15 black
+  - j15 -- l15 black
+  - l15 -- l8 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/05-attenuator.svg)
 
-- R1・R3 (27 Ω) は e 行を通る本線に、R2 (36 Ω) はそこから GND へ落ちる
+- R1・R3 (27 Ω) は i 行を通る本線に、R2 (36 Ω) はそこから GND へ落ちる
   分岐に載る
 - **分岐 (R2) のリード線もできるだけ短く。** 長いとインダクタンスが乗り、
   高い周波数で減衰量がずれる (3-6)

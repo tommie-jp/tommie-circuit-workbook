@@ -63,48 +63,42 @@ notes:
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図2 直列治具にダイオードとバイアス
-points:
-  GND: h2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
-  C1: capacitor/ceramic e2 e4 100n
-  D1: diode/do41 e9 e6 1N4007
-  C2: capacitor/ceramic e11 e13 100n
-  R1: resistor b6 d6 100k
-  R2: resistor b9 d9 100k
-  VR1: potentiometer/trimmer a2 b3 a4 10k
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
+  C1: capacitor/ceramic i2 i4 100n
+  D1: diode/do41 i9 i6 1N4007
+  C2: capacitor/ceramic i11 i13 100n
+  R1: resistor f6 h6 100k
+  R2: resistor f9 h9 100k
+  VR1: potentiometer/trimmer e2 f3 e4 10k
   V1:
     type: device
     at: top
     label: USB 5V
     pins: + -
 wires:
-  - e1 -- e2
-  - e4 -- e6
-  - e9 -- e11
-  - e13 -- e16
-  - e6 -- d6
-  - e9 -- d9
-  - b3 -- b6
-  - a4 -- a9
-  - a9 -- b9
-  - V1.+ -- a2 red
-  - V1.- -- a9 blue
-  - f0 -- f2 black
-  - f2 -- GND black
-  - f17 -- f15 black
-  - f15 -- h15 black
-  - h15 -- GND black
+  - i1 -- i2
+  - i4 -- i6
+  - i9 -- i11
+  - i13 -- i24
+  - i6 -- h6
+  - i9 -- h9
+  - f3 -- f6
+  - e4 -- e9
+  - e9 -- f9
+  - V1.+ -- e2 red
+  - V1.- -- e9 blue
+  - j0 -- j25 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/13-junction-capacitance.svg)
 
-- D1 は帯 (カソード) を e6 (左) に向ける。1N5819 に替えるときも帯を左に
-- **D1 の足は e6〜e9 の幅に曲げて、短く**。足の長さがインダクタンスになり、
+- D1 は帯 (カソード) を i6 (左) に向ける。1N5819 に替えるときも帯を左に
+- **D1 の足は i6〜i9 の幅に曲げて、短く**。足の長さがインダクタンスになり、
   1N5819 のように容量の大きい物では 300 MHz より下に直列共振が出る (図5)
 
 | 部品 | 値 | 理由・注意 |

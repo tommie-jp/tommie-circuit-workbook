@@ -94,21 +94,21 @@ wires:
 
 ```perfboard
 board:
-  size: 15x5
+  size: 7x5cm
 title: 図3 perfboard に組む (部品面)
 points:
-  ANT_A: b12
-  ANT_B: d12
+  ANT_A: i12
+  ANT_B: k12
 parts:
-  J1: sma/female-edge b1 c0
-  T1: transformer b4 b8 d4 d8 FT37-61
+  J1: sma/female-edge i1 j0
+  T1: transformer i4 i8 k4 k8 FT37-61
 wires:
-  - b1 -- b4
-  - c0 -- c2 black
-  - c2 -- d2 black
-  - d2 -- d4 black
-  - b8 -- ANT_A
-  - d8 -- ANT_B
+  - i1 -- i4
+  - j0 -- j2 black
+  - j2 -- k2 black
+  - k2 -- k4 black
+  - i8 -- ANT_A
+  - k8 -- ANT_B
 notes:
   - text b13: A
   - text d13: B
@@ -116,11 +116,11 @@ notes:
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/perfboard/08-balun.svg)
 
-- T1 がトロイダルコア (FT-37-61) に 2 本巻いたバラン。**b4→b8 が 1 本目 (L1)、
-  d4→d8 が 2 本目 (L2)**。2 本の巻き始めを同じ側 (4 列) にそろえる。逆にすると
+- T1 がトロイダルコア (FT-37-61) に 2 本巻いたバラン。**i4→i8 が 1 本目 (L1)、
+  k4→k8 が 2 本目 (L2)**。2 本の巻き始めを同じ側 (4 列) にそろえる。逆にすると
   差動の信号を止めてしまう
-- b12 (A) と d12 (B) にダイポールの左右のエレメントを直に半田付けする
-- 同相の Z を測るときは、b4 と d4、b8 と d8 をそれぞれ短い線で束ね、
+- i12 (A) と k12 (B) にダイポールの左右のエレメントを直に半田付けする
+- 同相の Z を測るときは、i4 と k4、i8 と k8 をそれぞれ短い線で束ね、
   8 列側を CH1 へつなぐ (J1 から CH1 へ 2 つ目の SMA を足してもよい)
 
 ## 掃引の設定
@@ -182,7 +182,7 @@ notes:
   同軸の長さで変わるので、**自分の組み合わせで測って表に書き込む**
 - バランを入れても、SWR の最小 (144 MHz で 1.40) は変わらない — **バランは整合ではない**
   (1:1 なので 70 Ω は 70 Ω のまま)。整合は 7-4 の L 型整合でする
-- 差動の信号が素通りするかは、出口の b12・d12 に 51 Ω をつないで S11 を見れば分かる。
+- 差動の信号が素通りするかは、出口の i12・k12 に 51 Ω をつないで S11 を見れば分かる。
   144 MHz で SWR がほぼ 1 なら素通り (巻線が長すぎると線路としてずれが出る)
 
 ## 出典

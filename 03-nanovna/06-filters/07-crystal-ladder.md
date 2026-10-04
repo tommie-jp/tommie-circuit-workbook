@@ -77,36 +77,36 @@ wires:
 
 ## 実体配線図
 
-部品面から見た図。水晶は e 行に直列に並べ、C1・C2 は下の h 行 (GND) へ落とす。
+部品面から見た図。水晶は i 行に直列に並べ、C1・C2 は下の l 行 (GND) へ落とす。
 
 ```perfboard
 board:
-  size: 21x10
+  size: 7x5cm
 title: 図2 perfboard に組む (端面 SMA 2 つ)
 parts:
-  J1: sma/female-edge e1 f0
-  X1: crystal/hc49 e3 e5 10M
-  C1: capacitor e7 g7 220p
-  X2: crystal/hc49 e9 e11 10M
-  C2: capacitor e13 g13 220p
-  X3: crystal/hc49 e15 e17 10M
-  J2: sma/female-edge e21 f22
+  J1: sma/female-edge i1 j0
+  X1: crystal/hc49 i3 i5 10M
+  C1: capacitor i7 k7 220p
+  X2: crystal/hc49 i9 i11 10M
+  C2: capacitor i13 k13 220p
+  X3: crystal/hc49 i15 i17 10M
+  J2: sma/female-edge i24 j25
 wires:
-  - e1 -- e3
-  - e5 -- e7
-  - e7 -- e9
-  - e11 -- e13
-  - e13 -- e15
-  - e17 -- e21
-  - f0 -- f2 black
-  - f2 -- h2 black
-  - h2 -- h7 black
-  - h7 -- g7 black
-  - h7 -- h13 black
-  - h13 -- g13 black
-  - h13 -- h20 black
-  - f22 -- f20 black
-  - f20 -- h20 black
+  - i1 -- i3
+  - i5 -- i7
+  - i7 -- i9
+  - i11 -- i13
+  - i13 -- i15
+  - i17 -- i24
+  - j0 -- j2 black
+  - j2 -- l2 black
+  - l2 -- l7 black
+  - l7 -- k7 black
+  - l7 -- l13 black
+  - l13 -- k13 black
+  - l13 -- l20 black
+  - j25 -- j20 black
+  - j20 -- l20 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/07-crystal-ladder.svg)

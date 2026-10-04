@@ -51,62 +51,62 @@ G5V-2 は実物を上から見て、切り欠きを左に置いた並びで描�
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図2 閉じた接点 (COM1–NC1)
 points:
-  GND: h2
+  GND: l2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
-  K1: relay b5
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
+  K1: relay f5
 wires:
-  - e1 -- e3
-  - e3 -- f3
-  - f3 -- f8
-  - f8 -- e8
-  - e10 -- f10
-  - f10 -- f14
-  - f14 -- e14
-  - e14 -- e16
-  - f0 -- f2 black
-  - f2 -- GND black
-  - GND -- h15 black
-  - f17 -- f15 black
-  - f15 -- h15 black
+  - i1 -- i3
+  - i3 -- j3
+  - j3 -- j8
+  - j8 -- i8
+  - i10 -- j10
+  - j10 -- j14
+  - j14 -- i14
+  - i14 -- i24
+  - j0 -- j2 black
+  - j2 -- GND black
+  - j25 -- j15 black
+  - j15 -- l15 black
+  - l15 -- GND black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/15-relay-switch-1.svg)
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図3 開いた接点 (COM1–NO1)
 points:
-  GND: h2
+  GND: l2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
-  K1: relay b5
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
+  K1: relay f5
 wires:
-  - e1 -- e3
-  - e3 -- f3
-  - f3 -- f8
-  - f8 -- e8
-  - e12 -- e16
-  - f0 -- f2 black
-  - f2 -- GND black
-  - GND -- h15 black
-  - f17 -- f15 black
-  - f15 -- h15 black
+  - i1 -- i3
+  - i3 -- j3
+  - j3 -- j8
+  - j8 -- i8
+  - i12 -- i24
+  - j0 -- j2 black
+  - j2 -- GND black
+  - j25 -- j15 black
+  - j15 -- l15 black
+  - l15 -- GND black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/15-relay-switch-2.svg)
 
-- 入る線は A1 (e5) の足を避けて f 行を回り、下から COM1 (e8) に入る
-- 図2 は NC1 (e10) から、NO1 (e12) の足を避けて f 行を回って J2 へ。図3 は NO1 (e12) から
-  e 行をまっすぐ J2 へ
+- 入る線は A1 (i5) の足を避けて j 行を回り、下から COM1 (i8) に入る
+- 図2 は NC1 (i10) から、NO1 (i12) の足を避けて j 行を回って J2 へ。図3 は NO1 (i12) から
+  i 行をまっすぐ J2 へ
 - 使わない足 (コイルと 2 つ目の接点) は穴に挿すだけ。検査 (ERC) が「つながっていない足」と
   言うが、意図どおり
 - 線を回したぶん、治具の線は 3-1 より長い。この長さも閉じた接点のインダクタンスに入って見える

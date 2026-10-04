@@ -41,28 +41,24 @@ notes:
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図2 perfboard のスルー治具
-points:
-  GND: h2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
 wires:
-  - e1 -- e16
-  - f0 -- f2 black
-  - f2 -- GND black
-  - f17 -- f15 black
-  - f15 -- h15 black
-  - h15 -- GND black
+  - i1 -- i24
+  - j0 -- j25 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/03-thru-fixture.svg)
 
-- J1 の中心導体から J2 の中心導体まで、e 行を 1 本の線でつなぐだけ
+- J1 の中心導体から J2 の中心導体まで、i 行を 1 本の線でつなぐだけ
 - この 1 本の長さが、そのまま**治具だけが持つ寄生インダクタンス**になる
   (3-6 で測る)
+- GND は J1 と J2 の凹の腕どうし (j0〜j25) を、信号の線のすぐ隣の j 行で 1 本につなぐ。
+  帰り道を信号の線と同じ長さに抑えるため
 
 ## 掃引の設定
 

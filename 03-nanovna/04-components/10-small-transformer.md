@@ -52,33 +52,33 @@ wires:
 
 ```perfboard
 board:
-  size: 16x8
+  size: 7x5cm
   slots: on
 title: 図2 トロイダルの 1:1 トランスを直列の位置に
 points:
-  GND: h2
+  GND: l2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
-  T1: transformer e6 g6 e11 g11 FT37-43
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
+  T1: transformer i6 k6 i11 k11 FT37-43
 wires:
-  - e1 -- e6
-  - e11 -- e16
-  - g6 -- h6 black
-  - g11 -- h11 black
-  - h6 -- GND black
-  - h6 -- h11 black
-  - h11 -- h15 black
-  - f0 -- f2 black
-  - f2 -- GND black
-  - f17 -- f15 black
-  - f15 -- h15 black
+  - i1 -- i6
+  - i11 -- i24
+  - k6 -- l6 black
+  - k11 -- l11 black
+  - l6 -- GND black
+  - l6 -- l11 black
+  - l11 -- l15 black
+  - j0 -- j2 black
+  - j2 -- GND black
+  - j25 -- j15 black
+  - j15 -- l15 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/10-small-transformer.svg)
 
-- e6・g6 が 1 次 (A1・A2)、e11・g11 が 2 次 (B1・B2)。巻き始め (A1・B1) を上の e 行に、
-  巻き終わり (A2・B2) を h 行の GND に
+- i6・k6 が 1 次 (A1・A2)、i11・k11 が 2 次 (B1・B2)。巻き始め (A1・B1) を上の i 行に、
+  巻き終わり (A2・B2) を l 行の GND に
 - コアは板に寝かせ、4 本の線をそれぞれの穴まで短く引き出す。図のトランスは角形の
   形で描かれる (フェンスにトロイダルの形が無い) が、足の位置の意味は同じ
 

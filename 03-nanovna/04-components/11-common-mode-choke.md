@@ -76,64 +76,64 @@ wires:
 
 ```perfboard
 board:
-  size: 16x9
+  size: 7x5cm
   slots: on
 title: 図3 コモンモードのつなぎ方
 points:
-  GND: i2
+  GND: m2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
-  L1: transformer e6 g6 e9 g9 CMC
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
+  L1: transformer i6 k6 i9 k9 CMC
 wires:
-  - e1 -- e6
-  - e6 -- d6
-  - d6 -- d9
-  - d9 -- e9
-  - g6 -- h6
+  - i1 -- i6
+  - i6 -- h6
   - h6 -- h9
-  - h9 -- g9
-  - h9 -- h13
-  - h13 -- e13
-  - e13 -- e16
-  - f0 -- f2 black
-  - f2 -- GND black
-  - GND -- i15 black
-  - f17 -- f15 black
-  - f15 -- i15 black
+  - h9 -- i9
+  - k6 -- l6
+  - l6 -- l9
+  - l9 -- k9
+  - l9 -- l13
+  - l13 -- i13
+  - i13 -- i24
+  - j0 -- j2 black
+  - j2 -- GND black
+  - GND -- m15 black
+  - j25 -- j15 black
+  - j15 -- m15 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/11-common-mode-choke-1.svg)
 
 ```perfboard
 board:
-  size: 16x9
+  size: 7x5cm
   slots: on
 title: 図4 ディファレンシャルモードのつなぎ方
 points:
-  GND: i2
+  GND: m2
 parts:
-  J1: sma/female-edge e1 d0 f0
-  J2: sma/female-edge e16 f17
-  L1: transformer e6 g6 e9 g9 CMC
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
+  L1: transformer i6 k6 i9 k9 CMC
 wires:
-  - e1 -- e6
-  - g6 -- h6
-  - h6 -- h9
-  - h9 -- g9
-  - e9 -- e16
-  - f0 -- f2 black
-  - f2 -- GND black
-  - GND -- i15 black
-  - f17 -- f15 black
-  - f15 -- i15 black
+  - i1 -- i6
+  - k6 -- l6
+  - l6 -- l9
+  - l9 -- k9
+  - i9 -- i24
+  - j0 -- j2 black
+  - j2 -- GND black
+  - GND -- m15 black
+  - j25 -- j15 black
+  - j15 -- m15 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/11-common-mode-choke-2.svg)
 
-- 違いは**上の 2 本の足 (e6・e9) を d 行で結ぶか**と、**CH1 へ出す足**だけ。コモンモードは
-  下の結び (h 行) から、ディファレンシャルモードは B1 (e9) から出す。GND は i 行
-- 図4 の h 行の線は A2 と B2 を結ぶだけで、ほかへはつながない。検査 (ERC) が
+- 違いは**上の 2 本の足 (i6・i9) を h 行で結ぶか**と、**CH1 へ出す足**だけ。コモンモードは
+  下の結び (l 行) から、ディファレンシャルモードは B1 (i9) から出す。GND は m 行
+- 図4 の l 行の線は A2 と B2 を結ぶだけで、ほかへはつながない。検査 (ERC) が
   「L1 の 2 本の足がどこにもつながっていない」と言うが、これは意図どおり
 
 ## 掃引の設定
