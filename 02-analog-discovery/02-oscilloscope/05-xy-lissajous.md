@@ -5,7 +5,7 @@ id: 2-5
 title: XY 表示 — リサージュ図形
 tier: 50
 source: 自作
-board: —
+board: BB
 ---
 
 # 2-5 XY 表示 — リサージュ図形

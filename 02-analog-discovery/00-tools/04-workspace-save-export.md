@@ -5,7 +5,7 @@ id: 0-4
 title: ワークスペースの保存、CSV と画像の書き出し
 tier: 50
 source: 自作
-board: —
+board: BB
 ---
 
 # 0-4 ワークスペースの保存、CSV と画像の書き出し

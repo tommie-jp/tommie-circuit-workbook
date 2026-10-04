@@ -4,6 +4,7 @@ chapter: 2
 id: 2-11
 title: PNP のハイサイドスイッチ
 tier: 100
+board: BB
 source: 自作
 ---
 

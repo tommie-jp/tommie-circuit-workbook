@@ -4,6 +4,7 @@ chapter: 1
 id: 1-7
 title: ホイートストンブリッジ
 tier: 100
+board: BB
 source: 自作
 era: 古
 ---

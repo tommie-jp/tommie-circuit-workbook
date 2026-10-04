@@ -5,7 +5,7 @@ id: 2-15
 title: 参照波形と重ねて比べる
 tier: 100
 source: 自作
-board: —
+board: BB
 ---
 
 # 2-15 参照波形と重ねて比べる

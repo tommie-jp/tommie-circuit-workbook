@@ -44,9 +44,9 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | # | 題 | 段 | 板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 0-1 | [接続と極性 — ワイヤの色、1+ / 1- の差動入力、GND を共通に](00-tools/01-connections.md) | 必須 | BB | |
-| 0-2 | [入力範囲 ±25 V と電源の限界 — 電流は直列抵抗で決める](00-tools/02-input-range-power-limits.md) | 必須 | — | |
-| 0-3 | [ループバック — W1 を 1+ に直結して発生器とオシロを確かめる](00-tools/03-loopback.md) | 必須 | — | |
-| 0-4 | [ワークスペースの保存、CSV と画像の書き出し](00-tools/04-workspace-save-export.md) | 必須 | — | |
+| 0-2 | [入力範囲 ±25 V と電源の限界 — 電流は直列抵抗で決める](00-tools/02-input-range-power-limits.md) | 必須 | BB | |
+| 0-3 | [ループバック — W1 を 1+ に直結して発生器とオシロを確かめる](00-tools/03-loopback.md) | 必須 | BB | |
+| 0-4 | [ワークスペースの保存、CSV と画像の書き出し](00-tools/04-workspace-save-export.md) | 必須 | BB | |
 | 0-5 | [BNC アダプタと 10:1 プローブ — 帯域 9 MHz と 30 MHz の違い](00-tools/05-bnc-probe-bandwidth.md) | 入門 | — | |
 | 0-6 | [付属ワイヤと同軸で同じ 5 MHz の方形波を見比べる](00-tools/06-wire-vs-coax-square-wave.md) | 入門 | BB | |
 | 0-7 | 外部電源で電源ツールを 700 mA まで使う | 中級 | BB | |
@@ -63,11 +63,11 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 1-3 | [電圧計とデータロガー — 分圧回路を 1 分記録する](01-waveforms/03-voltmeter-logger.md) | 必須 | BB | |
 | 1-4 | [Static I/O — LED とボタンを DIO で](01-waveforms/04-static-io.md) | 必須 | BB | |
 | 1-5 | [Script の最初の 1 行 — 波形を出し、測り、表にする](01-waveforms/05-script-basics.md) | 必須 | BB | |
-| 1-6 | [画面の構成 — 計器の窓、Run / Stop / Single、Help](01-waveforms/06-ui-layout.md) | 必須 | — | |
-| 1-7 | [波形発生器 2 ch の同期と位相差](01-waveforms/07-wavegen-2ch-phase.md) | 入門 | — | |
+| 1-6 | [画面の構成 — 計器の窓、Run / Stop / Single、Help](01-waveforms/06-ui-layout.md) | 必須 | BB | |
+| 1-7 | [波形発生器 2 ch の同期と位相差](01-waveforms/07-wavegen-2ch-phase.md) | 入門 | BB | |
 | 1-8 | [電源の電圧と直列抵抗で LED の電流を決める](01-waveforms/08-current-limit-led.md) | 入門 | BB | |
 | 1-9 | [データロガーで温度 (LM35) を 10 分](01-waveforms/09-logger-lm35.md) | 入門 | BB | |
-| 1-10 | [デバイスマネージャ — 計器ごとのバッファ長の配分を切り替える](01-waveforms/10-device-manager-buffer.md) | 入門 | — | AD3 |
+| 1-10 | [デバイスマネージャ — 計器ごとのバッファ長の配分を切り替える](01-waveforms/10-device-manager-buffer.md) | 入門 | BB | AD3 |
 | 1-11 | Supplies のトラッキング (± 対称) | 中級 | BB | AD3 |
 | 1-12 | 電圧計の AC / DC / True RMS | 中級 | BB | |
 | 1-13 | ロガーを Script から回して CSV に追記する | 中級 | BB | |
@@ -83,18 +83,18 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 2-2 | [測定 (Measurements) — Vpp・RMS・周波数・デューティ](02-oscilloscope/02-measurements.md) | 必須 | BB | |
 | 2-3 | [カーソルで RC の時定数を読む](02-oscilloscope/03-cursors-rc.md) | 必須 | BB | |
 | 2-4 | [差動入力で電流を測る — 1 Ω の両端](02-oscilloscope/04-differential-current.md) | 必須 | BB | |
-| 2-5 | [XY 表示 — リサージュ図形](02-oscilloscope/05-xy-lissajous.md) | 必須 | — | |
+| 2-5 | [XY 表示 — リサージュ図形](02-oscilloscope/05-xy-lissajous.md) | 必須 | BB | |
 | 2-6 | [Math チャネル — 差・積 (瞬時電力)・積分](02-oscilloscope/06-math-channel.md) | 必須 | BB | |
 | 2-7 | [Persistence でノイズとジッタを見る](02-oscilloscope/07-persistence.md) | 必須 | BB | |
 | 2-8 | [デジタル ch を並べる (MSO) — 555 の出力と 4017 の分周](02-oscilloscope/08-mso-555-4017.md) | 必須 | BB | |
 | 2-9 | [10:1 プローブの補正と入力容量の影響](02-oscilloscope/09-probe-compensation.md) | 入門 | BB | |
-| 2-10 | [帯域の違いを方形波の立ち上がりで見る (9 / 30 MHz)](02-oscilloscope/10-bandwidth-rise-time.md) | 入門 | — | |
+| 2-10 | [帯域の違いを方形波の立ち上がりで見る (9 / 30 MHz)](02-oscilloscope/10-bandwidth-rise-time.md) | 入門 | BB | |
 | 2-11 | [Record モードで長時間 (ディスクへ)](02-oscilloscope/11-record-mode.md) | 入門 | BB | |
 | 2-12 | [トリガ: パルス幅・ラント・タイムアウト](02-oscilloscope/12-pulse-runt-timeout-trigger.md) | 入門 | BB | |
 | 2-13 | [ダイオードの順方向特性を XY で描く (Tracer の前段)](02-oscilloscope/13-diode-xy-curve.md) | 入門 | BB | |
 | 2-14 | [平均化と 14 bit の分解能](02-oscilloscope/14-averaging-resolution.md) | 入門 | BB | |
-| 2-15 | [参照波形と重ねて比べる](02-oscilloscope/15-reference-waveform.md) | 入門 | — | |
-| 2-16 | [サンプリングとエイリアス — 1 MHz を 1.2 MS/s で見る](02-oscilloscope/16-sampling-alias.md) | 入門 | — | |
+| 2-15 | [参照波形と重ねて比べる](02-oscilloscope/15-reference-waveform.md) | 入門 | BB | |
+| 2-16 | [サンプリングとエイリアス — 1 MHz を 1.2 MS/s で見る](02-oscilloscope/16-sampling-alias.md) | 入門 | BB | |
 | 2-17 | シュミットトリガのヒステリシスを XY で | 中級 | BB | |
 | 2-18 | 電源投入の突入電流 (Single トリガ) | 中級 | BB | |
 | 2-19 | リレーの接点バウンス | 中級 | BB | |
@@ -112,16 +112,16 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 | # | 題 | 段 | 板 | 機種 |
 | --- | --- | --- | --- | --- |
-| 3-1 | [正弦・方形・三角・ノコギリ・DC と振幅・オフセット](03-wavegen/01-basic-waveforms.md) | 必須 | — | |
+| 3-1 | [正弦・方形・三角・ノコギリ・DC と振幅・オフセット](03-wavegen/01-basic-waveforms.md) | 必須 | BB | |
 | 3-2 | [周波数掃引 (Sweep) をオシロで追う](03-wavegen/02-sweep.md) | 必須 | BB | |
-| 3-3 | [AM / FM 変調](03-wavegen/03-am-fm.md) | 必須 | — | |
-| 3-4 | [カスタム波形 (CSV) と Play](03-wavegen/04-custom-waveform.md) | 必須 | — | |
+| 3-3 | [AM / FM 変調](03-wavegen/03-am-fm.md) | 必須 | BB | |
+| 3-4 | [カスタム波形 (CSV) と Play](03-wavegen/04-custom-waveform.md) | 必須 | BB | |
 | 3-5 | [出力に 50 Ω を付けたときの落ち込み — 出力インピーダンス](03-wavegen/05-output-impedance.md) | 必須 | BB | |
 | 3-6 | [バースト・トリガで単発パルス](03-wavegen/06-burst-pulse.md) | 入門 | BB | |
 | 3-7 | [ノイズ波形と RC フィルタ](03-wavegen/07-noise-rc-filter.md) | 入門 | BB | |
 | 3-8 | [2 ch で差動信号](03-wavegen/08-differential-signal.md) | 入門 | BB | |
-| 3-9 | [音を出す (オーディオ出力)](03-wavegen/09-audio-output.md) | 入門 | — | |
-| 3-10 | [数式で波形 (sin x + sin 3x) を作って FFT へ](03-wavegen/10-formula-waveform.md) | 入門 | — | |
+| 3-9 | [音を出す (オーディオ出力)](03-wavegen/09-audio-output.md) | 入門 | BB | |
+| 3-10 | [数式で波形 (sin x + sin 3x) を作って FFT へ](03-wavegen/10-formula-waveform.md) | 入門 | BB | |
 | 3-11 | PWM 波形で MOSFET 経由のモータ | 中級 | BB | |
 | 3-12 | 任意波形でステップ応答 (RC・RLC) | 中級 | BB | |
 | 3-13 | 変調度と側波帯 (FFT と対) | 中級 | — | |
@@ -135,14 +135,14 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 | # | 題 | 段 | 板 | 機種 |
 | --- | --- | --- | --- | --- |
-| 4-1 | [正弦波の FFT — 基本波と高調波](04-spectrum/01-sine-fft.md) | 必須 | — | |
-| 4-2 | [方形波の高調波 (奇数次)](04-spectrum/02-square-harmonics.md) | 必須 | — | |
-| 4-3 | [窓関数 (矩形・Hann・Flat-top) の違い](04-spectrum/03-windows.md) | 必須 | — | |
-| 4-4 | [THD と SNR — 波形発生器自身の歪](04-spectrum/04-thd-snr.md) | 必須 | — | |
-| 4-5 | [ノイズフロアと平均化](04-spectrum/05-noise-floor-averaging.md) | 必須 | — | |
-| 4-6 | [CZT (ズーム) で狭帯域を見る](04-spectrum/06-czt-zoom.md) | 入門 | — | AD3 |
-| 4-7 | [AM 波のスペクトル — 搬送波と側波帯](04-spectrum/07-am-spectrum.md) | 入門 | — | |
-| 4-8 | [FM 波のスペクトル](04-spectrum/08-fm-spectrum.md) | 入門 | — | |
+| 4-1 | [正弦波の FFT — 基本波と高調波](04-spectrum/01-sine-fft.md) | 必須 | BB | |
+| 4-2 | [方形波の高調波 (奇数次)](04-spectrum/02-square-harmonics.md) | 必須 | BB | |
+| 4-3 | [窓関数 (矩形・Hann・Flat-top) の違い](04-spectrum/03-windows.md) | 必須 | BB | |
+| 4-4 | [THD と SNR — 波形発生器自身の歪](04-spectrum/04-thd-snr.md) | 必須 | BB | |
+| 4-5 | [ノイズフロアと平均化](04-spectrum/05-noise-floor-averaging.md) | 必須 | BB | |
+| 4-6 | [CZT (ズーム) で狭帯域を見る](04-spectrum/06-czt-zoom.md) | 入門 | BB | AD3 |
+| 4-7 | [AM 波のスペクトル — 搬送波と側波帯](04-spectrum/07-am-spectrum.md) | 入門 | BB | |
+| 4-8 | [FM 波のスペクトル](04-spectrum/08-fm-spectrum.md) | 入門 | BB | |
 | 4-9 | [555 の出力スペクトル](04-spectrum/09-555-spectrum.md) | 入門 | BB | |
 | 4-10 | [マイクの音のスペクトル](04-spectrum/10-mic-spectrum.md) | 入門 | BB | |
 | 4-11 | 分解能帯域幅とサンプル数 | 中級 | — | |
@@ -164,14 +164,14 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 5-2 | [RC ハイパス](05-network/02-rc-highpass.md) | 必須 | BB | |
 | 5-3 | [RL と LC の共振](05-network/03-rl-lc-resonance.md) | 必須 | BB | |
 | 5-4 | [位相の読み方と −3 dB 点](05-network/04-phase-and-3db.md) | 必須 | BB | |
-| 5-5 | [掃引の設定 — 開始・終了・ステップ・振幅・平均](05-network/05-sweep-settings.md) | 必須 | — | |
+| 5-5 | [掃引の設定 — 開始・終了・ステップ・振幅・平均](05-network/05-sweep-settings.md) | 必須 | BB | |
 | 5-6 | [オペアンプ非反転増幅の利得と帯域 (GBW)](05-network/06-non-inverting-gbw.md) | 必須 | BB | |
 | 5-7 | [Nyquist / Nichols 表示](05-network/07-nyquist-nichols.md) | 入門 | BB | |
-| 5-8 | [9 MHz の壁 — スルーで NA 自身の特性を取る](05-network/08-9mhz-wall.md) | 入門 | — | |
+| 5-8 | [9 MHz の壁 — スルーで NA 自身の特性を取る](05-network/08-9mhz-wall.md) | 入門 | BB | |
 | 5-9 | [2 段 RC と −40 dB/dec](05-network/09-two-stage-rc-40db.md) | 入門 | BB | |
 | 5-10 | [CR 発振器の帰還路をループを切って測る](05-network/10-cr-oscillator-loop.md) | 入門 | BB | |
 | 5-11 | [ツイン T ノッチ](05-network/11-twin-t-notch.md) | 入門 | BB | |
-| 5-12 | [外部発振器モード (Wavegen を使わない)](05-network/12-external-oscillator-mode.md) | 入門 | — | |
+| 5-12 | [外部発振器モード (Wavegen を使わない)](05-network/12-external-oscillator-mode.md) | 入門 | BB | |
 | 5-13 | 反転増幅の入力インピーダンスと周波数 | 中級 | BB | |
 | 5-14 | ボルテージフォロアの容量負荷とピーキング | 中級 | BB | |
 | 5-15 | サレンキー LPF の Q | 中級 | BB | |
@@ -284,8 +284,8 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 | # | 題 | 段 | 板 | 機種 |
 | --- | --- | --- | --- | --- |
-| 11-1 | [Script で掃引と測定を自動化 (1-5 の続き)](11-automation/01-script-sweep.md) | 必須 | — | |
-| 11-2 | [WaveForms SDK (Python) の最初](11-automation/02-sdk-first-steps.md) | 入門 | — | |
+| 11-1 | [Script で掃引と測定を自動化 (1-5 の続き)](11-automation/01-script-sweep.md) | 必須 | BB | |
+| 11-2 | [WaveForms SDK (Python) の最初](11-automation/02-sdk-first-steps.md) | 入門 | BB | |
 | 11-3 | 部品 10 個のバッチ測定 | 中級 | BB | |
 | 11-4 | CSV をグラフにする (matplotlib) | 中級 | — | |
 | 11-5 | SDK でオシロを取り込み、FFT を自分で書く | 中級 | — | |

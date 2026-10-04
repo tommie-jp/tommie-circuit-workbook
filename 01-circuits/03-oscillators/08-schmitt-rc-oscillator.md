@@ -4,6 +4,7 @@ chapter: 3
 id: 3-8
 title: シュミット CMOS (40106) の RC 発振
 tier: 100
+board: BB
 source: 自作
 ---
 

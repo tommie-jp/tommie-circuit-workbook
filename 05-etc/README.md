@@ -46,7 +46,7 @@ GitHub では他の図と同じく画像の行 (Pages の SVG) で見せる。
 
 | # | 題 | 段 | 板 |
 | --- | --- | --- | --- |
-| 3-1 | [デュアルゲート FET ミキサー — 3SK291 で中波を 455 kHz の IF に変える](03-mixer-dual-gate-fet/01-mixer.md) | 中級 | — |
+| 3-1 | [デュアルゲート FET ミキサー — 3SK291 で中波を 455 kHz の IF に変える](03-mixer-dual-gate-fet/01-mixer.md) | 中級 | BB / PF |
 | 3-2 | [ミキサーの特性をシミュレーションで見る — 変換利得・インピーダンス・FFT](03-mixer-dual-gate-fet/02-simulation.md) | 中級 | — |
 
 <!-- toc:end -->

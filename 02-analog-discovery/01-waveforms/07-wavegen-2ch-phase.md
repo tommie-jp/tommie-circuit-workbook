@@ -5,7 +5,7 @@ id: 1-7
 title: 波形発生器 2 ch の同期と位相差
 tier: 100
 source: 自作
-board: —
+board: BB
 ---
 
 # 1-7 波形発生器 2 ch の同期と位相差

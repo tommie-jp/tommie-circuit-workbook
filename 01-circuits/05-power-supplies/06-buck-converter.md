@@ -4,6 +4,7 @@ chapter: 5
 id: 5-6
 title: 降圧スイッチング (MC34063 かモジュール)
 tier: 100
+board: BB
 source: 自作
 era: 今
 ---

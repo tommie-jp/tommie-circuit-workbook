@@ -5,7 +5,7 @@ id: 5-5
 title: 掃引の設定 — 開始・終了・ステップ・振幅・平均
 tier: 50
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 5-5 掃引の設定 — 開始・終了・ステップ・振幅・平均

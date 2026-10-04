@@ -5,7 +5,7 @@ id: 7-7
 title: 計器用変流器 (CT) — 二次を開放しない理由
 tier: 100
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 7-7 計器用変流器 (CT) — 二次を開放しない理由

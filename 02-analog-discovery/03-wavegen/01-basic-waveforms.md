@@ -5,7 +5,7 @@ id: 3-1
 title: 正弦・方形・三角・ノコギリ・DC と振幅・オフセット
 tier: 50
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 3-1 正弦・方形・三角・ノコギリ・DC と振幅・オフセット

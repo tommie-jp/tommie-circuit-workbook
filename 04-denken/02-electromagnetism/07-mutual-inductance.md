@@ -5,7 +5,7 @@ id: 2-7
 title: 相互インダクタンスと結合係数 — 2 つのコイルの距離
 tier: 100
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 2-7 相互インダクタンスと結合係数 — 2 つのコイルの距離

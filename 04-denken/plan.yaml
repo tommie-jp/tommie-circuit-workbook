@@ -1,5 +1,5 @@
 # 04-denken の計画 — 必須 50 ⊂ 入門 100 ⊂ 中級 200 の 200 題。目次 (README) はここと題のファイルから npm run toc が組む。
-- { id: 0-1, tier: 50, board: —, title: 安全の約束 — 商用電源に触れない。低圧の交流の作り方と電流の上限 }
+- { id: 0-1, tier: 50, board: BB, title: 安全の約束 — 商用電源に触れない。低圧の交流の作り方と電流の上限 }
 - { id: 0-2, tier: 50, board: BB, title: テスターの直流と交流 — 平均値形と真の実効値形で方形波の読みが違う }
 - { id: 0-3, tier: 50, board: BB, title: 電圧と電流を同時に見る — シャント抵抗で電流を電圧に、AD の 2 ch }
 - { id: 0-4, tier: 100, board: BB, title: 低圧の交流電源を作る — AD の波形発生器を OP アンプとプッシュプルで受ける }
@@ -29,11 +29,11 @@
 - { id: 1-18, tier: 200, board: BB, title: 非線形抵抗の動作点 — 電球と抵抗の直列を負荷線で }
 - { id: 2-1, tier: 50, board: BB, title: コンデンサの直列・並列 — 合成容量と分担電圧 }
 - { id: 2-2, tier: 50, board: —, title: 平行平板コンデンサ — アルミ箔の面積・間隔・誘電体で容量が変わる }
-- { id: 2-3, tier: 50, board: —, title: 電磁誘導 — 磁石をコイルに出し入れして起電力 (レンツの法則) }
+- { id: 2-3, tier: 50, board: BB, title: 電磁誘導 — 磁石をコイルに出し入れして起電力 (レンツの法則) }
 - { id: 2-4, tier: 50, board: —, title: 電流が作る磁界 — 電線の周りの方位磁針 (右ねじの法則) }
 - { id: 2-5, tier: 50, board: —, title: 電磁力 — 磁石の間の電線が動く (フレミングの左手) }
-- { id: 2-6, tier: 100, board: —, title: 自己インダクタンス — 巻数と鉄心でコイルの L が変わる }
-- { id: 2-7, tier: 100, board: —, title: 相互インダクタンスと結合係数 — 2 つのコイルの距離 }
+- { id: 2-6, tier: 100, board: BB, title: 自己インダクタンス — 巻数と鉄心でコイルの L が変わる }
+- { id: 2-7, tier: 100, board: BB, title: 相互インダクタンスと結合係数 — 2 つのコイルの距離 }
 - { id: 2-8, tier: 100, board: BB, title: 和動接続と差動接続 — コイルの直列で極性を変える }
 - { id: 2-9, tier: 100, board: —, title: 電磁石の吸引力 — 電流と巻数で変わる }
 - { id: 2-10, tier: 100, board: BB, title: ホール効果 — ホール素子で磁束密度を測る }
@@ -115,7 +115,7 @@
 - { id: 7-4, tier: 50, board: BB, title: 誤差率と補正率 — 1 % の抵抗を測って計算する }
 - { id: 7-5, tier: 100, board: BB, title: 電力計の結線 — 単相の電力を測る }
 - { id: 7-6, tier: 100, board: BB, title: 整流形の計器 — 平均値を測って実効値を表示する (波形率 1.11) }
-- { id: 7-7, tier: 100, board: —, title: 計器用変流器 (CT) — 二次を開放しない理由 }
+- { id: 7-7, tier: 100, board: BB, title: 計器用変流器 (CT) — 二次を開放しない理由 }
 - { id: 7-8, tier: 100, board: BB, title: 交流ブリッジで C と L を測る }
 - { id: 7-9, tier: 200, board: BB, title: 電位差計法 — 電流を流さずに電圧を測る }
 - { id: 7-10, tier: 200, board: BB, title: 低い抵抗の測定 — 4 端子法 }
@@ -194,7 +194,7 @@
 - { id: 12-11, tier: 200, board: BB, title: 蓄電池の充放電と効率 — 蓄電所の小さな模型 }
 - { id: 12-12, tier: 200, board: BB, title: 電源の並列運転と負荷の分担 — 内部抵抗の違い }
 - { id: 13-1, tier: 50, board: BB, title: 接地の効果 — 漏電した機器に触れたときの電圧 (抵抗の模型、5 V) }
-- { id: 13-2, tier: 100, board: —, title: 漏電遮断器の原理 — 往きと帰りの電流の差 }
+- { id: 13-2, tier: 100, board: BB, title: 漏電遮断器の原理 — 往きと帰りの電流の差 }
 - { id: 13-3, tier: 200, board: BB, title: 絶縁抵抗の測定の原理 — 高い抵抗を µA で }
 - { id: 13-4, tier: 200, board: —, title: 接地抵抗の測定の原理 — 電位降下法 (水槽の模型、AD の低い交流) }
 - { id: 13-5, tier: 200, board: BB, title: 電線の太さ — 電圧降下と発熱 (許容電流の考え方) }

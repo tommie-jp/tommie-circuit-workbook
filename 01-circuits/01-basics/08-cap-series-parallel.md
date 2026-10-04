@@ -4,6 +4,7 @@ chapter: 1
 id: 1-8
 title: コンデンサの直列・並列と時定数の比較
 tier: 100
+board: BB
 source: 自作
 ---
 

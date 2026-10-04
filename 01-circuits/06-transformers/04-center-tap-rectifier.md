@@ -4,6 +4,7 @@ chapter: 6
 id: 6-4
 title: センタータップと全波整流
 tier: 100
+board: BB
 source: 自作
 ---
 

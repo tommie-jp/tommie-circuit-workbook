@@ -4,6 +4,7 @@ chapter: 5
 id: 5-7
 title: チャージポンプ — 555 で負電圧
 tier: 100
+board: BB
 source: 自作
 ---
 

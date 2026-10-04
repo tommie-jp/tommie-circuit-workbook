@@ -5,7 +5,7 @@ id: 1-6
 title: 画面の構成 — 計器の窓、Run / Stop / Single、Help
 tier: 50
 source: 自作
-board: —
+board: BB
 ---
 
 # 1-6 画面の構成 — 計器の窓、Run / Stop / Single、Help

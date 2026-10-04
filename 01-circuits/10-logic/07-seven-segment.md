@@ -23,77 +23,68 @@ CD4511 は、2 進数 4 桁で表した 0〜9 (BCD: 10 進の 1 桁を 2 進数 
 ```circuit
 title: 図1 CD4511でBCDを7セグメントに変換する
 parts:
-  VCC: vcc a11 5V
-  SWB: switch a11 c11 l=$\mathrm{SW}_\mathrm{B}$
-  RpdB: resistor c11 e11 10k
-  GB: ground e11
-  VCC: vcc d8 5V
-  SWC: switch d8 f8 l=$\mathrm{SW}_\mathrm{C}$
-  RpdC: resistor f8 h8 10k
-  GC: ground h8
-  VCC: vcc h11 5V
-  SWD: switch h11 j11 l=$\mathrm{SW}_\mathrm{D}$
-  RpdD: resistor j11 l11 10k
-  GD: ground l11
-  VCC: vcc k8 5V
-  SWA: switch k8 m8 l=$\mathrm{SW}_\mathrm{A}$
-  RpdA: resistor m8 o8 10k
-  GA: ground o8
-  U1: dip16 h16 CD4511
-  VCC: vcc e12a5 5V
-  VCC: vcc e18a5 5V
-  GND: ground h13f0
-  GU1: ground j14a5
-  DS1: seg7 p31
-  GCOM: ground s29a5
-  Ra: resistor k26a5 m26a5 330
-  Rb: resistor k24a5 m24a5 330
-  Rc: resistor k22a5 m22a5 330
-  Rd: resistor k20a5 m20a5 330
-  Re: resistor k18a5 m18a5 330
-  Rg: resistor k33a5 m33a5 330
-  Rf: resistor k35a5 m35a5 330
+  VCC: vcc a17 5V
+  SWA: switch a17 c17 l=$\mathrm{SW}_\mathrm{A}$
+  RpdA: resistor c17 c15 10k
+  GA: ground c15
+  VCC: vcc a13 5V
+  SWB: switch a13 c13 l=$\mathrm{SW}_\mathrm{B}$
+  RpdB: resistor c13 c11 10k
+  GB: ground c11
+  VCC: vcc a9 5V
+  SWC: switch a9 c9 l=$\mathrm{SW}_\mathrm{C}$
+  RpdC: resistor c9 c7 10k
+  GC: ground c7
+  VCC: vcc a5 5V
+  SWD: switch a5 c5 l=$\mathrm{SW}_\mathrm{D}$
+  RpdD: resistor c5 c3 10k
+  GD: ground c3
+  U1: ic h20 CD4511B
+  VCC: vcc d20 5V
+  GU1: ground k20
+  Ra: resistor k36 m36 330
+  Rb: resistor k34 m34 330
+  Rc: resistor k32 m32 330
+  Rd: resistor k30 m30 330
+  Re: resistor k28 m28 330
+  Rf: resistor k26 m26 330
+  Rg: resistor k24 m24 330
+  DS1: seg7 q41
+  GCOM: ground t38
 wires:
-  - c11 -- c14
-  - c14 |- U1.1
-  - f8 -- f13a5
-  - f13a5 |- U1.2
-  - j11 -- j13a5
-  - j13a5 |- U1.6
-  - m8 -- m14
-  - m14 |- U1.7
-  - U1.3 -| e12a5
-  - U1.4 -| e12a5
-  - U1.5 -| h13f0
-  - U1.8 -| j14a5
-  - U1.16 -| e18a5
-  # 出力 a〜e: 縦に下りて電流制限の抵抗 (Ra〜Re) を通り、DS1 へ
-  - U1.13 -| k26a5
-  - m26a5 |- DS1.a
-  - U1.12 -| k24a5
-  - m24a5 |- DS1.b
-  - U1.11 -| k22a5
-  - m22a5 |- DS1.c
-  - U1.10 -| k20a5
-  - m20a5 |- DS1.d
-  - U1.9 -| k18a5
-  - m18a5 |- DS1.e
-  # 出力 f・g: 右を回って Rf・Rg を通り、DS1 の下から入る
-  - U1.14 -| k33a5
-  - m33a5 -- t33f5 -- t28f5
-  - t28f5 |- DS1.g
-  - U1.15 -| k35a5
-  - m35a5 -- u35f5 -- u27f5
-  - u27f5 |- DS1.f
-  - DS1.COM1 -| s29a5
-  - DS1.COM2 -| s29a5
+  # 電源: VDD (PIN 16)・LT (PIN 3)・BL (PIN 4) を +5V、VSS (PIN 8)・LE (PIN 5) を GND へ
+  - U1.VDD |- d19a5
+  - U1.LT |- d20
+  - U1.BL |- d20a5
+  - d19a5 -- d20 -- d20a5
+  - U1.VSS |- k20
+  - U1.5 |- k20a5
+  - k20 -- k20a5
+  # 入力: SWA〜SWD から BCD の A〜D へ (D が最も左)
+  - U1.INA -| c17
+  - U1.INB -| c13
+  - U1.INC -| c9
+  - U1.IND -| c5
+  # 出力 a〜g: 下りて電流制限の抵抗 (Ra〜Rg) を通り、DS1 へ
+  - U1.Oa -| k36
+  - m36 |- DS1.a
+  - U1.Ob -| k34
+  - m34 |- DS1.b
+  - U1.Oc -| k32
+  - m32 |- DS1.c
+  - U1.Od -| k30
+  - m30 |- DS1.d
+  - U1.Oe -| k28
+  - m28 |- DS1.e
+  - U1.Of -| k26
+  - m26 |- DS1.f
+  - U1.Og -| k24
+  - m24 |- DS1.g
+  - DS1.COM1 -| t38
+  - DS1.COM2 -| t38
 notes:
-  - text b12a5h5 small blue: "B"
-  - text f10d5 small blue: "C"
-  - text j11d8 small blue: "D"
-  - text l12h5 small blue: "A"
-  - text w1 small left: "VDD は PIN 16 (+5V)、VSS は PIN 8 (GND)"
-  - text x1 small left: "LT (PIN 3)・BI (PIN 4) は +5V、LE (PIN 5) は GND に固定"
+  - text u1 small left: "VDD は PIN 16 (+5V)、VSS は PIN 8 (GND)"
+  - text v1 small left: "LT (PIN 3)・BL (PIN 4) は +5V、LE (PIN 5) は GND に固定"
 style:
   grid: off
   pitch: 1.2
@@ -132,6 +123,85 @@ style:
   1 穴 200mA・板全体 500mA (README の板の範囲) に収まる。4511 の 1 出力あたりの
   上限 25mA にも十分余裕がある
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードに組む (U1 は CD4511B、DS1 は 7 セグメント LED。電源は AD3 の Supplies)
+board: full
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3 (Supplies)
+    pins: [V+, GND]
+  U1: dip16 @ e30 CD4511B
+  DS1: seg7 @ h50
+  Rg: resistor a47 a50 330
+  Rf: resistor b48 b51 330
+  Ra: resistor c49 c53 330
+  Rb: resistor b54 b57 330
+  Re: resistor i47 i50 330
+  Rd: resistor j48 j51 330
+  Rc: resistor i53 i56 330
+  SWA: switch c22 c25
+  RpdA: resistor d22 d20 10k
+  SWB: switch c16 c19
+  RpdB: resistor d16 d14 10k
+  SWC: switch c10 c13
+  RpdC: resistor d10 d8 10k
+  SWD: switch c4 c7
+  RpdD: resistor d4 d2 10k
+wires:
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
+  - -t1 -- -b1 black
+  - +t3 -- +b3 red
+  - a30 -- +t30 red
+  - h32 -- +b32 red
+  - h33 -- +b33 red
+  - h34 -- -b34 black
+  - h37 -- -b37 black
+  - a7 -- +t7 red
+  - a13 -- +t13 red
+  - a19 -- +t19 red
+  - a25 -- +t25 red
+  - a2 -- -t2 black
+  - a8 -- -t8 black
+  - a14 -- -t14 black
+  - a20 -- -t20 black
+  - a52 -- -t52 black
+  - j52 -- -b52 black
+  - e22 -- g22 yellow
+  - g22 -- g36 yellow
+  - e16 -- h16 yellow
+  - h16 -- h30 yellow
+  - e10 -- i10 yellow
+  - i10 -- i31 yellow
+  - e4 -- j4 yellow
+  - j4 -- j35 yellow
+  - b32 -- b47 orange
+  - c31 -- c48 orange
+  - d33 -- d49 orange
+  - a34 -- b57 orange
+  - c35 -- h56 orange
+  - d36 -- h48 orange
+  - d37 -- h47 orange
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/07-seven-segment.svg)
+
+- 板は full (60 列)。U1 (CD4511B) は 30〜37 列で、切り欠きが左、PIN 1 (INB) が下の左端 (f 行の 30 列)、PIN 16 (VDD) が上の左端
+- 電源は AD3 の Supplies。V+ (赤) を +5V、GND (黒) を GND へ。VDD (PIN 16) と LT・BL (PIN 3・4) は +5V、VSS (PIN 8) と LE (PIN 5) は GND へ
+- 入力は左の 4 組。上のブロックの SWD・SWC・SWB・SWA (左から 4・10・16・22 列) が +5V から、10kΩ のプルダウンが GND へ。
+  各スイッチの出力の列から黄の線で、下のブロックの U1 の足 (IND・INC・INB・INA) へ
+- 出力はオレンジの線。U1 の上の足 (Oa〜Og) から、右の抵抗 Ra〜Rg (330Ω) の左端へ渡す。
+  抵抗の右端は DS1 の足の列で、a・b・f・g は上のブロック、c・d・e は下のブロック。
+  7 本の線が交わらないように置けないので、図の色は同じで、線の端 (列の番号) で追う
+- DS1 は 5161AS (コモンカソード)。50〜54 列に挿し、COM1・COM2 (52 列) を GND へ。dp は使わない
+- 板を流れる電流は、セグメント 7 本で最大約 47mA (回路図の見積もり)、プルダウンで約 2mA で、合計は 50mA 前後
+  (5V で見積もっても 7 × 9.1mA ≈ 64mA)。AD3 の Supplies の各レール 50mA (USB 給電で 250mW) の目安をわずかに超え得るので、
+  Supplies だけで足りないときは 5V の USB アダプタを使い、その GND を AD3 の GND につなぐ。板の範囲 (1 穴 200mA・板全体 500mA) には収まる
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -141,7 +211,13 @@ style:
 | Ra〜Rg | 抵抗 (1/4 W)、セグメントの電流制限 | 330Ω × 7 本 |
 | RpdA〜RpdD | 抵抗 (1/4 W)、プルダウン | 10kΩ × 4 本 |
 | SWA〜SWD | スライドスイッチかトグルスイッチ | 4 個 |
-| — | 電源 | 5V |
+| — | 電源・計器 | AD3 の Supplies (V+ = 5V、GND。Master Enable を入れる)。電流が足りないときは 5V の USB アダプタ |
+
+## 計器の設定
+
+計器は AD3 の Supplies (5V) だけ。スイッチで決めた BCD を 7 セグメントの形に直す回路は、時間で動かず、
+入力の組で表示が決まるので、オシロやロジックの画面は付けない (見るのは表示器の形と、テスターで測る電圧)。
+テスターの直流電圧レンジで、Ra など抵抗の両端を測る。
 
 ## 見るべき値
 

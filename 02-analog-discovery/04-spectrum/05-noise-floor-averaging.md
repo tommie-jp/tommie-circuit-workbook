@@ -5,7 +5,7 @@ id: 4-5
 title: ノイズフロアと平均化
 tier: 50
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 4-5 ノイズフロアと平均化

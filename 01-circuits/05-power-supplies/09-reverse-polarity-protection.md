@@ -4,6 +4,7 @@ chapter: 5
 id: 5-9
 title: 逆接続保護 — ダイオード / P-MOSFET
 tier: 100
+board: BB
 source: 自作
 era: 今
 ---

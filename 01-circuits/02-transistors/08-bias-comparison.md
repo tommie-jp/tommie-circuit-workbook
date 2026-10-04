@@ -4,6 +4,7 @@ chapter: 2
 id: 2-8
 title: コレクタ帰還バイアスと分圧バイアスの比較
 tier: 100
+board: BB
 source: 自作
 ---
 

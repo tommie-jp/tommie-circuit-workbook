@@ -5,7 +5,7 @@ id: 4-2
 title: 方形波の高調波 (奇数次)
 tier: 50
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 4-2 方形波の高調波 (奇数次)

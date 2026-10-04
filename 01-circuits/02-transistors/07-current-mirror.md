@@ -4,6 +4,7 @@ chapter: 2
 id: 2-7
 title: カレントミラー
 tier: 100
+board: BB
 source: 自作
 ---
 

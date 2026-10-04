@@ -4,6 +4,7 @@ chapter: 6
 id: 6-3
 title: 自作トランス — 巻数比を測る
 tier: 100
+board: BB
 source: 自作
 era: 古
 ---

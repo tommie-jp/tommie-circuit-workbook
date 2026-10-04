@@ -5,7 +5,7 @@ id: 5-8
 title: 9 MHz の壁 — スルーで NA 自身の特性を取る
 tier: 100
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 5-8 9 MHz の壁 — スルーで NA 自身の特性を取る

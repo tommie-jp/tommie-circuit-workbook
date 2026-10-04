@@ -4,6 +4,7 @@ chapter: 4
 id: 4-8
 title: シュミットトリガ (ヒステリシス)
 tier: 100
+board: BB
 source: 自作
 ---
 

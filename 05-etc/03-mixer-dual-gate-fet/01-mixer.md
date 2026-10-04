@@ -5,7 +5,7 @@ id: 3-1
 title: デュアルゲート FET ミキサー — 3SK291 で中波を 455 kHz の IF に変える
 tier: 200
 source: 自作
-board: —
+board: [BB, PF]
 ---
 
 # 3-1 デュアルゲート FET ミキサー — 3SK291 で中波を 455 kHz の IF に変える

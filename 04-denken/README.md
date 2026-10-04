@@ -69,7 +69,7 @@
 
 | # | 題 | 段 | 板 |
 | --- | --- | --- | --- |
-| 0-1 | [安全の約束 — 商用電源に触れない。低圧の交流の作り方と電流の上限](00-tools/01-safety-promise.md) | 必須 | — |
+| 0-1 | [安全の約束 — 商用電源に触れない。低圧の交流の作り方と電流の上限](00-tools/01-safety-promise.md) | 必須 | BB |
 | 0-2 | [テスターの直流と交流 — 平均値形と真の実効値形で方形波の読みが違う](00-tools/02-tester-ac-dc.md) | 必須 | BB |
 | 0-3 | [電圧と電流を同時に見る — シャント抵抗で電流を電圧に、AD の 2 ch](00-tools/03-shunt-2ch.md) | 必須 | BB |
 | 0-4 | [低圧の交流電源を作る — AD の波形発生器を OP アンプとプッシュプルで受ける](00-tools/04-opamp-push-pull-ac.md) | 入門 | BB |
@@ -109,11 +109,11 @@
 | --- | --- | --- | --- |
 | 2-1 | [コンデンサの直列・並列 — 合成容量と分担電圧](02-electromagnetism/01-capacitors-series-parallel.md) | 必須 | BB |
 | 2-2 | [平行平板コンデンサ — アルミ箔の面積・間隔・誘電体で容量が変わる](02-electromagnetism/02-parallel-plate-capacitor.md) | 必須 | — |
-| 2-3 | [電磁誘導 — 磁石をコイルに出し入れして起電力 (レンツの法則)](02-electromagnetism/03-electromagnetic-induction.md) | 必須 | — |
+| 2-3 | [電磁誘導 — 磁石をコイルに出し入れして起電力 (レンツの法則)](02-electromagnetism/03-electromagnetic-induction.md) | 必須 | BB |
 | 2-4 | [電流が作る磁界 — 電線の周りの方位磁針 (右ねじの法則)](02-electromagnetism/04-magnetic-field-of-current.md) | 必須 | — |
 | 2-5 | [電磁力 — 磁石の間の電線が動く (フレミングの左手)](02-electromagnetism/05-electromagnetic-force.md) | 必須 | — |
-| 2-6 | [自己インダクタンス — 巻数と鉄心でコイルの L が変わる](02-electromagnetism/06-self-inductance.md) | 入門 | — |
-| 2-7 | [相互インダクタンスと結合係数 — 2 つのコイルの距離](02-electromagnetism/07-mutual-inductance.md) | 入門 | — |
+| 2-6 | [自己インダクタンス — 巻数と鉄心でコイルの L が変わる](02-electromagnetism/06-self-inductance.md) | 入門 | BB |
+| 2-7 | [相互インダクタンスと結合係数 — 2 つのコイルの距離](02-electromagnetism/07-mutual-inductance.md) | 入門 | BB |
 | 2-8 | [和動接続と差動接続 — コイルの直列で極性を変える](02-electromagnetism/08-series-aiding-opposing.md) | 入門 | BB |
 | 2-9 | [電磁石の吸引力 — 電流と巻数で変わる](02-electromagnetism/09-electromagnet-force.md) | 入門 | — |
 | 2-10 | [ホール効果 — ホール素子で磁束密度を測る](02-electromagnetism/10-hall-effect.md) | 入門 | BB |
@@ -220,7 +220,7 @@
 | 7-4 | [誤差率と補正率 — 1 % の抵抗を測って計算する](07-measurement/04-error-correction-rate.md) | 必須 | BB |
 | 7-5 | [電力計の結線 — 単相の電力を測る](07-measurement/05-wattmeter-connection.md) | 入門 | BB |
 | 7-6 | [整流形の計器 — 平均値を測って実効値を表示する (波形率 1.11)](07-measurement/06-rectifier-meter.md) | 入門 | BB |
-| 7-7 | [計器用変流器 (CT) — 二次を開放しない理由](07-measurement/07-current-transformer.md) | 入門 | — |
+| 7-7 | [計器用変流器 (CT) — 二次を開放しない理由](07-measurement/07-current-transformer.md) | 入門 | BB |
 | 7-8 | [交流ブリッジで C と L を測る](07-measurement/08-ac-bridge.md) | 入門 | BB |
 | 7-9 | 電位差計法 — 電流を流さずに電圧を測る | 中級 | BB |
 | 7-10 | 低い抵抗の測定 — 4 端子法 | 中級 | BB |
@@ -329,7 +329,7 @@
 | # | 題 | 段 | 板 |
 | --- | --- | --- | --- |
 | 13-1 | [接地の効果 — 漏電した機器に触れたときの電圧 (抵抗の模型、5 V)](13-regulations/01-grounding-effect.md) | 必須 | BB |
-| 13-2 | [漏電遮断器の原理 — 往きと帰りの電流の差](13-regulations/02-earth-leakage-breaker.md) | 入門 | — |
+| 13-2 | [漏電遮断器の原理 — 往きと帰りの電流の差](13-regulations/02-earth-leakage-breaker.md) | 入門 | BB |
 | 13-3 | 絶縁抵抗の測定の原理 — 高い抵抗を µA で | 中級 | BB |
 | 13-4 | 接地抵抗の測定の原理 — 電位降下法 (水槽の模型、AD の低い交流) | 中級 | — |
 | 13-5 | 電線の太さ — 電圧降下と発熱 (許容電流の考え方) | 中級 | BB |

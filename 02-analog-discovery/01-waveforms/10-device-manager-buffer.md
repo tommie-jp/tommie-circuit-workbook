@@ -5,7 +5,7 @@ id: 1-10
 title: デバイスマネージャ — 計器ごとのバッファ長の配分を切り替える
 tier: 100
 source: 自作 (数値は Digilent の Analog Discovery 3 の公式資料)
-board: —
+board: BB
 device: AD3
 ---
 

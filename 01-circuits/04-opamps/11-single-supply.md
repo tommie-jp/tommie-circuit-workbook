@@ -4,6 +4,7 @@ chapter: 4
 id: 4-11
 title: 単電源での使い方 — 仮想 GND、レール to レール
 tier: 100
+board: BB
 source: 自作
 era: 今
 ---

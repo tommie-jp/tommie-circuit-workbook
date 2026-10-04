@@ -4,6 +4,7 @@ chapter: 1
 id: 1-9
 title: ダイオードのクリッパとクランパ
 tier: 100
+board: BB
 source: 自作
 ---
 

@@ -4,6 +4,7 @@ chapter: 5
 id: 5-8
 title: Li-ion 充電 (TP4056 モジュール) と保護
 tier: 100
+board: BB
 source: 自作
 era: 今
 ---

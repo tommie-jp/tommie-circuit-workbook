@@ -4,6 +4,7 @@ chapter: 4
 id: 4-9
 title: 微分器
 tier: 100
+board: BB
 source: 自作
 ---
 

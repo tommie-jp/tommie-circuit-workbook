@@ -5,7 +5,7 @@ id: 13-2
 title: 漏電遮断器の原理 — 往きと帰りの電流の差
 tier: 100
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 13-2 漏電遮断器の原理 — 往きと帰りの電流の差

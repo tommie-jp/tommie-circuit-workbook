@@ -5,7 +5,7 @@ id: 4-4
 title: THD と SNR — 波形発生器自身の歪
 tier: 50
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 4-4 THD と SNR — 波形発生器自身の歪

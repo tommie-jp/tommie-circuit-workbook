@@ -4,6 +4,7 @@ chapter: 0
 id: 0-5
 title: hFE チェッカー
 tier: 100
+board: BB
 source: 自作
 era: 古
 ---

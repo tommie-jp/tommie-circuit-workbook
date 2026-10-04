@@ -4,6 +4,7 @@ chapter: 6
 id: 6-5
 title: 磁界を聞く — コイル + 音
 tier: 100
+board: BB
 source: 自作
 era: 古
 ---

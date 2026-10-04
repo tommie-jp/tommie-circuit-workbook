@@ -4,6 +4,7 @@ chapter: 4
 id: 4-10
 title: アクティブ ローパス (サレンキー)
 tier: 100
+board: BB
 source: 自作
 ---
 

@@ -5,7 +5,7 @@ id: 3-10
 title: 数式で波形 (sin x + sin 3x) を作って FFT へ
 tier: 100
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 3-10 数式で波形 (sin x + sin 3x) を作って FFT へ

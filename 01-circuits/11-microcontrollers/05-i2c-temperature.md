@@ -4,6 +4,7 @@ chapter: 11
 id: 11-5
 title: I2C センサー (温度)
 tier: 100
+board: BB
 source: 自作
 era: 今
 ---

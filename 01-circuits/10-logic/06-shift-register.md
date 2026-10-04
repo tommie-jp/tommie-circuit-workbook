@@ -4,6 +4,7 @@ chapter: 10
 id: 10-6
 title: シフトレジスタ (74HC595)
 tier: 100
+board: BB
 source: 自作
 era: 今
 ---

@@ -5,7 +5,7 @@ id: 11-2
 title: WaveForms SDK (Python) の最初
 tier: 100
 source: 公式 (Digilent Getting Started with WaveForms SDK) + 自作
-board: —
+board: BB
 ---
 
 # 11-2 WaveForms SDK (Python) の最初

@@ -4,6 +4,7 @@ chapter: 2
 id: 2-10
 title: プッシュプル (B 級) とクロスオーバー歪
 tier: 100
+board: BB
 source: 自作
 ---
 

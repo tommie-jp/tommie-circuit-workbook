@@ -5,7 +5,7 @@ id: 5-12
 title: 外部発振器モード (Wavegen を使わない)
 tier: 100
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 5-12 外部発振器モード (Wavegen を使わない)

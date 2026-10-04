@@ -4,6 +4,7 @@ chapter: 2
 id: 2-9
 title: JFET の定電流
 tier: 100
+board: BB
 source: 自作
 ---
 

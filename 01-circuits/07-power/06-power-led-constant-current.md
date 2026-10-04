@@ -4,6 +4,7 @@ chapter: 7
 id: 7-6
 title: パワー LED の定電流
 tier: 100
+board: PF
 source: 自作
 era: 今
 ---

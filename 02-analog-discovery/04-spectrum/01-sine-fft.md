@@ -5,7 +5,7 @@ id: 4-1
 title: 正弦波の FFT — 基本波と高調波
 tier: 50
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 4-1 正弦波の FFT — 基本波と高調波

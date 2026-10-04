@@ -4,6 +4,7 @@ chapter: 10
 id: 10-5
 title: D フリップフロップ (4013) と T フリップフロップ
 tier: 100
+board: BB
 source: 自作
 ---
 

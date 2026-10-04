@@ -5,7 +5,7 @@ id: 3-3
 title: AM / FM 変調
 tier: 50
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 3-3 AM / FM 変調

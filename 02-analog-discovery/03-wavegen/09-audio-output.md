@@ -5,7 +5,7 @@ id: 3-9
 title: 音を出す (オーディオ出力)
 tier: 100
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 3-9 音を出す (オーディオ出力)

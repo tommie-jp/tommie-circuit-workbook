@@ -4,6 +4,7 @@ chapter: 11
 id: 11-4
 title: PWM で LED 調光とサーボ
 tier: 100
+board: BB
 source: 自作
 era: 今
 ---

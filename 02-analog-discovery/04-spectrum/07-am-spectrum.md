@@ -5,7 +5,7 @@ id: 4-7
 title: AM 波のスペクトル — 搬送波と側波帯
 tier: 100
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 4-7 AM 波のスペクトル — 搬送波と側波帯

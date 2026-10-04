@@ -5,7 +5,7 @@ id: 4-8
 title: FM 波のスペクトル
 tier: 100
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 4-8 FM 波のスペクトル

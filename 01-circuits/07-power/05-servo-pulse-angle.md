@@ -4,6 +4,7 @@ chapter: 7
 id: 7-5
 title: サーボ — パルス幅で角度
 tier: 100
+board: BB
 source: 自作
 era: 今
 ---

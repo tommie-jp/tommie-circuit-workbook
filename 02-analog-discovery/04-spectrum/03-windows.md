@@ -5,7 +5,7 @@ id: 4-3
 title: 窓関数 (矩形・Hann・Flat-top) の違い
 tier: 50
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 4-3 窓関数 (矩形・Hann・Flat-top) の違い

@@ -4,6 +4,7 @@ chapter: 0
 id: 0-6
 title: 安定化電源とファンクションジェネレータ — 電流制限を掛けて実験する
 tier: 100
+board: BB
 source: 自作
 era: 今
 ---

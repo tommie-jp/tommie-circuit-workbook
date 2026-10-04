@@ -4,6 +4,7 @@ chapter: 3
 id: 3-7
 title: ウィーンブリッジ — OP アンプで正弦波
 tier: 100
+board: BB
 source: 自作
 era: 古
 ---

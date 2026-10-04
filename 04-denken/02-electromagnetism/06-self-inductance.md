@@ -5,7 +5,7 @@ id: 2-6
 title: 自己インダクタンス — 巻数と鉄心でコイルの L が変わる
 tier: 100
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 2-6 自己インダクタンス — 巻数と鉄心でコイルの L が変わる

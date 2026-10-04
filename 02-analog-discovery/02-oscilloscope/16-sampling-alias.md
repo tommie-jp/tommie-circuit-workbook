@@ -5,7 +5,7 @@ id: 2-16
 title: サンプリングとエイリアス — 1 MHz を 1.2 MS/s で見る
 tier: 100
 source: 自作
-board: —
+board: BB
 ---
 
 # 2-16 サンプリングとエイリアス — 1 MHz を 1.2 MS/s で見る

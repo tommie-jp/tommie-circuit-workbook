@@ -4,6 +4,7 @@ chapter: 11
 id: 11-3
 title: ADC で CdS を読む
 tier: 100
+board: BB
 source: 自作
 era: 今
 ---

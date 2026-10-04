@@ -4,6 +4,7 @@ chapter: 7
 id: 7-4
 title: ステッピングモータ (ULN2003)
 tier: 100
+board: BB
 source: 自作
 ---
 

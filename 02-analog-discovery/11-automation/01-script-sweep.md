@@ -5,7 +5,7 @@ id: 11-1
 title: Script で掃引と測定を自動化 (1-5 の続き)
 tier: 50
 source: 自作 (計器の操作は Digilent の Using the Script Editor)
-board: —
+board: BB
 ---
 
 # 11-1 Script で掃引と測定を自動化 (1-5 の続き)

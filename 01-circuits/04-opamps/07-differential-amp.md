@@ -4,6 +4,7 @@ chapter: 4
 id: 4-7
 title: 差動増幅
 tier: 100
+board: BB
 source: 自作
 ---
 

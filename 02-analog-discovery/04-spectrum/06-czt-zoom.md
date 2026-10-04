@@ -5,7 +5,7 @@ id: 4-6
 title: CZT (ズーム) で狭帯域を見る
 tier: 100
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 device: AD3
 ---
 

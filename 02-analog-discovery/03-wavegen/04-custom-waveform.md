@@ -5,7 +5,7 @@ id: 3-4
 title: カスタム波形 (CSV) と Play
 tier: 50
 source: 自作 (計器の操作は Digilent の WaveForms リファレンスマニュアル)
-board: —
+board: BB
 ---
 
 # 3-4 カスタム波形 (CSV) と Play

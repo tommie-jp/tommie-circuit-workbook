@@ -4,6 +4,7 @@ chapter: 0
 id: 0-4
 title: 自作テスター — 分流器と倍率器
 tier: 100
+board: BB
 source: 自作
 era: 古
 ---

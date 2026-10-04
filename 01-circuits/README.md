@@ -147,9 +147,9 @@
 | 0-1 | [テスターで電圧・電流・抵抗を測る — 分圧回路を相手に](00-measure/01-multimeter.md) | 必須 | | BB |
 | 0-2 | [ブレッドボードの導通と回路図の読み方 — 同じ列、レール、ネット](00-measure/02-continuity.md) | 必須 | | BB |
 | 0-3 | [オシロスコープで波形を見る — 555 の出力を PC オシロ / AD3 で](00-measure/03-oscilloscope.md) | 必須 | 今 | BB |
-| 0-4 | [自作テスター — 分流器と倍率器](00-measure/04-shunt-multiplier.md) | 入門 | 古 | |
-| 0-5 | [hFE チェッカー](00-measure/05-hfe-checker.md) | 入門 | 古 | |
-| 0-6 | [安定化電源とファンクションジェネレータ — 電流制限を掛けて実験する](00-measure/06-bench-supply-limiting.md) | 入門 | 今 | |
+| 0-4 | [自作テスター — 分流器と倍率器](00-measure/04-shunt-multiplier.md) | 入門 | 古 | BB |
+| 0-5 | [hFE チェッカー](00-measure/05-hfe-checker.md) | 入門 | 古 | BB |
+| 0-6 | [安定化電源とファンクションジェネレータ — 電流制限を掛けて実験する](00-measure/06-bench-supply-limiting.md) | 入門 | 今 | BB |
 | 0-7 | テブナン等価を測って確かめる | 中級 | | |
 | 0-8 | コンデンサ容量計 — ブリッジで測る | 中級 | 古 | |
 | 0-9 | 周波数カウンタ (CMOS) | 中級 | | |
@@ -164,10 +164,10 @@
 | 1-3 | [コンデンサの充放電 — RC 時定数を LED で見る](01-basics/03-rc-charge.md) | 必須 | | BB |
 | 1-4 | [ダイオードの向きと順方向電圧 — LED の色で比べる](01-basics/04-diode-direction.md) | 必須 | | BB |
 | 1-5 | [RC ローパス・ハイパス](01-basics/05-rc-filter.md) | 必須 | | BB |
-| 1-6 | [ポテンショメータで分圧 (電位差計)](01-basics/06-potentiometer-divider.md) | 入門 | | |
-| 1-7 | [ホイートストンブリッジ](01-basics/07-wheatstone-bridge.md) | 入門 | 古 | |
-| 1-8 | [コンデンサの直列・並列と時定数の比較](01-basics/08-cap-series-parallel.md) | 入門 | | |
-| 1-9 | [ダイオードのクリッパとクランパ](01-basics/09-diode-clipper-clamper.md) | 入門 | | |
+| 1-6 | [ポテンショメータで分圧 (電位差計)](01-basics/06-potentiometer-divider.md) | 入門 | | BB |
+| 1-7 | [ホイートストンブリッジ](01-basics/07-wheatstone-bridge.md) | 入門 | 古 | BB |
+| 1-8 | [コンデンサの直列・並列と時定数の比較](01-basics/08-cap-series-parallel.md) | 入門 | | BB |
+| 1-9 | [ダイオードのクリッパとクランパ](01-basics/09-diode-clipper-clamper.md) | 入門 | | BB |
 | 1-10 | 倍電圧 — ダイオードとコンデンサで (コッククロフト) | 中級 | 古 | |
 | 1-11 | LC 共振 — 直列と並列 | 中級 | | |
 | 1-12 | 保護素子 — ヒューズ・PTC・バリスタ | 中級 | | |
@@ -186,11 +186,11 @@
 | 2-4 | [ダーリントン — 指で触れて点く](02-transistors/04-darlington-touch.md) | 必須 | | BB |
 | 2-5 | [MOSFET スイッチ (2N7000、ロジックレベル)](02-transistors/05-mosfet-switch.md) | 必須 | 今 | BB |
 | 2-6 | [差動増幅](02-transistors/06-differential-amp.md) | 必須 | | BB |
-| 2-7 | [カレントミラー](02-transistors/07-current-mirror.md) | 入門 | | |
-| 2-8 | [コレクタ帰還バイアスと分圧バイアスの比較](02-transistors/08-bias-comparison.md) | 入門 | | |
-| 2-9 | [JFET の定電流](02-transistors/09-jfet-current-source.md) | 入門 | | |
-| 2-10 | [プッシュプル (B 級) とクロスオーバー歪](02-transistors/10-push-pull.md) | 入門 | | |
-| 2-11 | [PNP のハイサイドスイッチ](02-transistors/11-pnp-high-side.md) | 入門 | | |
+| 2-7 | [カレントミラー](02-transistors/07-current-mirror.md) | 入門 | | BB |
+| 2-8 | [コレクタ帰還バイアスと分圧バイアスの比較](02-transistors/08-bias-comparison.md) | 入門 | | BB |
+| 2-9 | [JFET の定電流](02-transistors/09-jfet-current-source.md) | 入門 | | BB |
+| 2-10 | [プッシュプル (B 級) とクロスオーバー歪](02-transistors/10-push-pull.md) | 入門 | | BB |
+| 2-11 | [PNP のハイサイドスイッチ](02-transistors/11-pnp-high-side.md) | 入門 | | BB |
 | 2-12 | カスコード | 中級 | | |
 | 2-13 | シュミットトリガ (Tr 2 石) | 中級 | 古 | |
 | 2-14 | 定電流源 — Tr + ツェナー / 2 石 | 中級 | | |
@@ -210,9 +210,9 @@
 | 3-3 | [555 単安定 — タイマー](03-oscillators/03-555-monostable.md) | 必須 | | BB |
 | 3-4 | [弛張発振 — Tr 2 石でブザー](03-oscillators/04-relaxation-oscillator-buzzer.md) | 必須 | 古 | BB |
 | 3-5 | [水晶発振 — CMOS インバータ + 水晶](03-oscillators/05-crystal-oscillator.md) | 必須 | | BB |
-| 3-6 | [555 の PWM — ボリュームで LED 調光](03-oscillators/06-555-pwm.md) | 入門 | | |
-| 3-7 | [ウィーンブリッジ — OP アンプで正弦波](03-oscillators/07-wien-bridge.md) | 入門 | 古 | |
-| 3-8 | [シュミット CMOS (40106) の RC 発振](03-oscillators/08-schmitt-rc-oscillator.md) | 入門 | | |
+| 3-6 | [555 の PWM — ボリュームで LED 調光](03-oscillators/06-555-pwm.md) | 入門 | | BB |
+| 3-7 | [ウィーンブリッジ — OP アンプで正弦波](03-oscillators/07-wien-bridge.md) | 入門 | 古 | BB |
+| 3-8 | [シュミット CMOS (40106) の RC 発振](03-oscillators/08-schmitt-rc-oscillator.md) | 入門 | | BB |
 | 3-9 | 単安定 (Tr 2 石) | 中級 | 古 | |
 | 3-10 | コルピッツ | 中級 | 古 | |
 | 3-11 | 移相発振 (RC 3 段) | 中級 | 古 | |
@@ -230,12 +230,12 @@
 | 4-3 | [反転増幅](04-opamps/03-inverting-amp.md) | 必須 | | BB |
 | 4-4 | [比較器 — CdS でしきい値](04-opamps/04-comparator-cds.md) | 必須 | | BB |
 | 4-5 | [加算 (ミキサー)](04-opamps/05-summing-amp.md) | 必須 | | BB |
-| 4-6 | [積分器](04-opamps/06-integrator.md) | 入門 | | |
-| 4-7 | [差動増幅](04-opamps/07-differential-amp.md) | 入門 | | |
-| 4-8 | [シュミットトリガ (ヒステリシス)](04-opamps/08-schmitt-trigger.md) | 入門 | | |
-| 4-9 | [微分器](04-opamps/09-differentiator.md) | 入門 | | |
-| 4-10 | [アクティブ ローパス (サレンキー)](04-opamps/10-sallen-key-lowpass.md) | 入門 | | |
-| 4-11 | [単電源での使い方 — 仮想 GND、レール to レール](04-opamps/11-single-supply.md) | 入門 | 今 | |
+| 4-6 | [積分器](04-opamps/06-integrator.md) | 入門 | | BB |
+| 4-7 | [差動増幅](04-opamps/07-differential-amp.md) | 入門 | | BB |
+| 4-8 | [シュミットトリガ (ヒステリシス)](04-opamps/08-schmitt-trigger.md) | 入門 | | BB |
+| 4-9 | [微分器](04-opamps/09-differentiator.md) | 入門 | | BB |
+| 4-10 | [アクティブ ローパス (サレンキー)](04-opamps/10-sallen-key-lowpass.md) | 入門 | | BB |
+| 4-11 | [単電源での使い方 — 仮想 GND、レール to レール](04-opamps/11-single-supply.md) | 入門 | 今 | BB |
 | 4-12 | 精密整流とピークホールド | 中級 | | |
 | 4-13 | 計装アンプ (OP アンプ 3 つ) | 中級 | | |
 | 4-14 | 電流→電圧 (トランスインピーダンス、フォトダイオード) | 中級 | | |
@@ -255,10 +255,10 @@
 | 5-3 | [3 端子レギュレータ (7805)](05-power-supplies/03-three-terminal-regulator.md) | 必須 | | BB |
 | 5-4 | [LDO — USB 5V → 3.3V](05-power-supplies/04-ldo-usb.md) | 必須 | 今 | BB |
 | 5-5 | [昇圧 — Joule thief](05-power-supplies/05-joule-thief.md) | 必須 | 古 | BB |
-| 5-6 | [降圧スイッチング (MC34063 かモジュール)](05-power-supplies/06-buck-converter.md) | 入門 | 今 | |
-| 5-7 | [チャージポンプ — 555 で負電圧](05-power-supplies/07-charge-pump-negative.md) | 入門 | | |
-| 5-8 | [Li-ion 充電 (TP4056 モジュール) と保護](05-power-supplies/08-liion-charging.md) | 入門 | 今 | |
-| 5-9 | [逆接続保護 — ダイオード / P-MOSFET](05-power-supplies/09-reverse-polarity-protection.md) | 入門 | 今 | |
+| 5-6 | [降圧スイッチング (MC34063 かモジュール)](05-power-supplies/06-buck-converter.md) | 入門 | 今 | BB |
+| 5-7 | [チャージポンプ — 555 で負電圧](05-power-supplies/07-charge-pump-negative.md) | 入門 | | BB |
+| 5-8 | [Li-ion 充電 (TP4056 モジュール) と保護](05-power-supplies/08-liion-charging.md) | 入門 | 今 | BB |
+| 5-9 | [逆接続保護 — ダイオード / P-MOSFET](05-power-supplies/09-reverse-polarity-protection.md) | 入門 | 今 | BB |
 | 5-10 | 定電流 (LM317) | 中級 | | |
 | 5-11 | 昇圧スイッチング (MT3608) | 中級 | 今 | |
 | 5-12 | 電池残量チェッカー | 中級 | | |
@@ -274,9 +274,9 @@
 | --- | --- | --- | --- | --- |
 | 6-1 | [トランスの基本 — 低圧 AC で昇圧・降圧・絶縁](06-transformers/01-transformer-basics.md) | 必須 | | BB |
 | 6-2 | [コイルの逆起電力 — 切った瞬間に LED が光る、フライバックダイオード](06-transformers/02-back-emf.md) | 必須 | | BB |
-| 6-3 | [自作トランス — 巻数比を測る](06-transformers/03-diy-transformer.md) | 入門 | 古 | |
-| 6-4 | [センタータップと全波整流](06-transformers/04-center-tap-rectifier.md) | 入門 | | |
-| 6-5 | [磁界を聞く — コイル + 音](06-transformers/05-listen-to-magnetic-field.md) | 入門 | 古 | |
+| 6-3 | [自作トランス — 巻数比を測る](06-transformers/03-diy-transformer.md) | 入門 | 古 | BB |
+| 6-4 | [センタータップと全波整流](06-transformers/04-center-tap-rectifier.md) | 入門 | | BB |
+| 6-5 | [磁界を聞く — コイル + 音](06-transformers/05-listen-to-magnetic-field.md) | 入門 | 古 | BB |
 | 6-6 | フライバックコンバータ (小型) | 中級 | 今 | |
 | 6-7 | インダクタの飽和 | 中級 | | |
 | 6-8 | 相互誘導と極性 (ドット) | 中級 | | |
@@ -290,10 +290,10 @@
 | 7-1 | [リレー駆動 — Tr + フライバックダイオード](07-power/01-relay-driver.md) | 必須 | | BB |
 | 7-2 | [DC モータの PWM (MOSFET)](07-power/02-motor-pwm.md) | 必須 | 今 | BB |
 | 7-3 | [H ブリッジ — 正転・逆転](07-power/03-h-bridge.md) | 必須 | | BB |
-| 7-4 | [ステッピングモータ (ULN2003)](07-power/04-stepper-motor.md) | 入門 | | |
-| 7-5 | [サーボ — パルス幅で角度](07-power/05-servo-pulse-angle.md) | 入門 | 今 | |
-| 7-6 | [パワー LED の定電流](07-power/06-power-led-constant-current.md) | 入門 | 今 | |
-| 7-7 | [ハイサイドとローサイド](07-power/07-high-side-low-side.md) | 入門 | | |
+| 7-4 | [ステッピングモータ (ULN2003)](07-power/04-stepper-motor.md) | 入門 | | BB |
+| 7-5 | [サーボ — パルス幅で角度](07-power/05-servo-pulse-angle.md) | 入門 | 今 | BB |
+| 7-6 | [パワー LED の定電流](07-power/06-power-led-constant-current.md) | 入門 | 今 | PF |
+| 7-7 | [ハイサイドとローサイド](07-power/07-high-side-low-side.md) | 入門 | | BB |
 | 7-8 | ゲートドライバ IC | 中級 | 今 | |
 | 7-9 | ブラシレスの原理 (3 相、簡略) | 中級 | 今 | |
 | 7-10 | ソレノイド | 中級 | | |
@@ -311,10 +311,10 @@
 | 8-3 | [タッチスイッチ (人体)](08-sensors/03-touch-switch.md) | 必須 | 古 | BB |
 | 8-4 | [マイクで音に反応](08-sensors/04-mic.md) | 必須 | | BB |
 | 8-5 | [赤外線 LED とフォトトランジスタ — 遮光検出](08-sensors/05-photointerrupter.md) | 必須 | | BB |
-| 8-6 | [人感 (PIR モジュール)](08-sensors/06-pir.md) | 入門 | 今 | |
-| 8-7 | [超音波 (HC-SR04)](08-sensors/07-ultrasonic.md) | 入門 | 今 | |
-| 8-8 | [ホール素子 (磁石)](08-sensors/08-hall-sensor.md) | 入門 | | |
-| 8-9 | [水位・土壌湿度 (電極)](08-sensors/09-water-level-electrodes.md) | 入門 | 古 | |
+| 8-6 | [人感 (PIR モジュール)](08-sensors/06-pir.md) | 入門 | 今 | BB |
+| 8-7 | [超音波 (HC-SR04)](08-sensors/07-ultrasonic.md) | 入門 | 今 | BB |
+| 8-8 | [ホール素子 (磁石)](08-sensors/08-hall-sensor.md) | 入門 | | BB |
+| 8-9 | [水位・土壌湿度 (電極)](08-sensors/09-water-level-electrodes.md) | 入門 | 古 | BB |
 | 8-10 | [温度センサ IC (LM35 / TMP36)](08-sensors/10-temperature-ic.md) | 入門 | 今 | |
 | 8-11 | リードスイッチ | 中級 | | |
 | 8-12 | 圧電 (ノック) | 中級 | | |
@@ -357,8 +357,8 @@
 | 10-2 | [RS ラッチ (NAND)](10-logic/02-rs-latch.md) | 必須 | | BB |
 | 10-3 | [半加算器と全加算器 (XOR + AND)](10-logic/03-adders.md) | 必須 | | BB |
 | 10-4 | [バイナリカウンタ (4 bit、4040)](10-logic/04-binary-counter.md) | 必須 | | BB |
-| 10-5 | [D フリップフロップ (4013) と T フリップフロップ](10-logic/05-d-flip-flop.md) | 入門 | | |
-| 10-6 | [シフトレジスタ (74HC595)](10-logic/06-shift-register.md) | 入門 | 今 | |
+| 10-5 | [D フリップフロップ (4013) と T フリップフロップ](10-logic/05-d-flip-flop.md) | 入門 | | BB |
+| 10-6 | [シフトレジスタ (74HC595)](10-logic/06-shift-register.md) | 入門 | 今 | BB |
 | 10-7 | [7 セグメントとデコーダ (4511)](10-logic/07-seven-segment.md) | 入門 | | |
 | 10-8 | [4 bit 加算器 (74HC283)](10-logic/08-four-bit-adder.md) | 入門 | | |
 | 10-9 | チャタリング除去 — RC + シュミット | 中級 | | |
@@ -380,9 +380,9 @@
 | --- | --- | --- | --- | --- |
 | 11-1 | [Pico 2 の L チカ](11-microcontrollers/01-pico-blink.md) | 必須 | 今 | BB |
 | 11-2 | [ボタン入力とプルアップ](11-microcontrollers/02-button-pullup.md) | 必須 | 今 | BB |
-| 11-3 | [ADC で CdS を読む](11-microcontrollers/03-adc-cds.md) | 入門 | 今 | |
-| 11-4 | [PWM で LED 調光とサーボ](11-microcontrollers/04-pwm-led-servo.md) | 入門 | 今 | |
-| 11-5 | [I2C センサー (温度)](11-microcontrollers/05-i2c-temperature.md) | 入門 | 今 | |
+| 11-3 | [ADC で CdS を読む](11-microcontrollers/03-adc-cds.md) | 入門 | 今 | BB |
+| 11-4 | [PWM で LED 調光とサーボ](11-microcontrollers/04-pwm-led-servo.md) | 入門 | 今 | BB |
+| 11-5 | [I2C センサー (温度)](11-microcontrollers/05-i2c-temperature.md) | 入門 | 今 | BB |
 | 11-6 | SPI (シフトレジスタ / 表示) | 中級 | 今 | |
 | 11-7 | UART — Pico 2 台で通信 | 中級 | 今 | |
 | 11-8 | 割り込みとロータリーエンコーダ | 中級 | 今 | |

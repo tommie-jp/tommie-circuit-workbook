@@ -4,6 +4,7 @@ chapter: 1
 id: 1-6
 title: ポテンショメータで分圧 (電位差計)
 tier: 100
+board: BB
 source: 自作
 ---
 

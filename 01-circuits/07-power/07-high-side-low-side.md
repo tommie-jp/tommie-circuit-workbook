@@ -4,6 +4,7 @@ chapter: 7
 id: 7-7
 title: ハイサイドとローサイド
 tier: 100
+board: BB
 source: 自作
 ---
 
