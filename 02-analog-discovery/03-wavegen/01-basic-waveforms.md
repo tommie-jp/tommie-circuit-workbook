@@ -86,10 +86,10 @@ measure: [vmax, vmin, vpp, avg]
 
 - **最大値・最小値・Vpp はどの波形でも同じ** (Amplitude と Offset だけで決まる)。
   違うのは波形の**形**で、RMS (実効値、電力に効く量) が変わる
-- Square が RMS 最大 (常に振れ切っているため)、Sine が最小に近い。
-  Triangle と Ramp Up は同じ RMS (三角波の特別な形がノコギリなので当然)
-- Average は**どの波形でも Offset に一致する**。波形の対称性 (Sine・Triangle・
-  Square は上下対称、Ramp Up も平均では対称) から、直流成分は Offset だけで決まる
+- RMS は Square が最大 (いつも振れ切っているため)、Sine が次で、Triangle と Ramp Up が最小。
+  Triangle と Ramp Up は同じ RMS になる (どちらも直線で振れ、各電圧に居る時間の割合が同じため)
+- Average は**どの波形でも Offset に一致する**。どの波形も Offset の上と下で面積が等しいので、
+  直流成分は Offset だけで決まる
 
 ## 出典
 

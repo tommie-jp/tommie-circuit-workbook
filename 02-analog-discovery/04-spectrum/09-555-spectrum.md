@@ -84,7 +84,9 @@ wires:
   - +t1 -- +b1 red
   - -t2 -- -b2 black
   - a10 -- +t10 red
-  - d12 -- d9 -- h9 -- h11 purple
+  - d12 -- d9 purple
+  - c9 -- g9 purple
+  - h9 -- h11 purple
   - j6 -- -b6 black
   - +t7 -- a7 red
   - c17 -- -t17 black
