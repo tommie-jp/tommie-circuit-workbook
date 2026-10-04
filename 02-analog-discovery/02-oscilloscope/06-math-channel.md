@@ -19,17 +19,16 @@ Scope の **Math チャネル**は、2 つの入力を演算した波形を新�
 ```circuit
 title: 図1 電圧と電流をそれぞれ測る
 parts:
-  W1: sine a1 c1 1
-  R1: resistor a1 a3 100
-  Rs: resistor a3 a5 1R
-  G1: ground a5
-  M1: voltmeter b7 d7 l=$\mathrm{CH1}$
-  M2: voltmeter e3 e5 l=$\mathrm{CH2}$
+  M1: voltmeter a1 c1 l=$\mathrm{CH1}$
+  W1: sine a3 c3 1
+  R1: resistor a3 a6 100
+  Rs: resistor a6 c6 1
+  M2: voltmeter a8 c8 l=$\mathrm{CH2}$
+  G1: ground c3
 wires:
-  - a1 |- b7
-  - c1 |- d7
-  - a3 -- e3
-  - a5 -- e5
+  - a1 -- a3
+  - a6 -- a8
+  - c1 -- c3 -- c6 -- c8
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/06-math-channel.svg)

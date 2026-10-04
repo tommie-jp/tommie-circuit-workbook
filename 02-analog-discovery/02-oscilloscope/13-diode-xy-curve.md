@@ -20,27 +20,25 @@ AD3 の Tracer（9-6）はこれを自動でやってくれる専用の計器だ
 ```circuit
 title: 図1 ダイオードの順方向特性を掃引する
 parts:
-  W1: triangle a1 c1 1.5
-  R1: resistor a1 a3 330
-  D1: diode a3 a5
-  Rs: resistor a5 a7 22
-  G1: ground a7
-  M1: voltmeter e3 e7 l=$\mathrm{CH1}$
-  M2: voltmeter g5 g7 l=$\mathrm{CH2}$
+  W1: triangle a1 e1 1.5
+  R1: resistor a1 a4 330
+  D1: diode a4 c4
+  Rs: resistor c4 e4 22
+  M2: voltmeter c6 e6 l=$\mathrm{CH2}$
+  M1: voltmeter a9 e9 l=$\mathrm{CH1}$
+  G1: ground e1
 wires:
-  - a3 -- e3
-  - a5 -- g5
-  - a7 -- e7
-  - a7 -- g7
-  - c1 -- a7
+  - a4 -- a9
+  - c4 -- c6
+  - e1 -- e4 -- e6 -- e9
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/13-diode-xy-curve.svg)
 
 W1（三角波、1.5 V の振幅・1.5 V のオフセットで 0〜3 V を往復）→ R1（330 Ω、電流
 制限）→ D1（1N4148）→ Rs（22 Ω、電流検出）→ GND。CH1 は R1 の**先**（D1 と Rs を
-合わせた両端＝ほぼダイオードの順電圧 V<sub>D</sub>）、CH2 は Rs の両端だけ
-（電流を電圧で表したもの）。
+合わせた両端）、CH2 は Rs の両端だけ（電流を電圧で表したもの）。ダイオードの順電圧
+V<sub>D</sub> は Math で CH1 − CH2 として取り出す。
 
 ## 実体配線図
 
@@ -68,8 +66,9 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/13-diode-xy-curve.svg)
 
-CH1（`1+` / `1-`）は R1 の**先**（12 列＝D1 のアノード側）と GND の間——D1 と
-Rs を合わせた電圧、すなわちダイオードの順電圧にほぼ等しい（Rs は小さいため）。
+CH1（`1+` / `1-`）は R1 の**先**（12 列＝D1 のアノード側）と GND の間で、D1 と
+Rs を合わせた電圧を読む。ピークでは Rs に約 0.14 V かかるので、CH1 のままでは
+順電圧より 2 割ほど大きく出る。
 CH2（`2+` / `2-`）は Rs の両端（14 列と GND）だけで、電流を mV の値として読む
 （2-4 と同じ考え方）。
 
@@ -80,7 +79,8 @@ CH2（`2+` / `2-`）は Rs の両端（14 列と GND）だけで、電流を mV 
 | Wavegen (W1) | 三角波、10 Hz（ゆっくり）、振幅 1.5 V、オフセット 1.5 V（0〜3 V） |
 | Scope (CH1) | DC、Range 0〜1 V 程度 |
 | Scope (CH2) | DC、Range 0〜200 mV 程度 |
-| 表示 | XY モード。X = CH1（ダイオード電圧）、Y = CH2（電流 × 22 Ω） |
+| Math | `CH1 − CH2`（ダイオードの両端の電圧 V<sub>D</sub>） |
+| 表示 | XY モード。X = Math（V<sub>D</sub>）、Y = CH2（電流 × 22 Ω） |
 
 ```scope
 title: 図3 0.6 V あたりから立ち上がり、0.7 V で CH2 が約 143 mV (6.5 mA)
@@ -104,7 +104,7 @@ I<sub>peak</sub> ≈ (3 V − 0.7 V) / (330 Ω + 22 Ω) ≈ **6.5 mA（計算値
 
 | V<sub>D</sub>（X 軸） | 見え方 | 分かること |
 | --- | --- | --- |
-| 0〜0.4 V | ほぼ 0（Y 軸に張り付いた横線） | この範囲ではダイオードはほとんど電流を流さない |
+| 0〜0.4 V | ほぼ 0（X 軸に張り付いた横線） | この範囲ではダイオードはほとんど電流を流さない |
 | 0.5〜0.6 V | わずかに立ち上がり始める | 電流が指数関数的に増え始める領域 |
 | 0.65〜0.7 V | 急に立ち上がる「ひざ」 | シリコンダイオードの順方向特性の目印 |
 | ピーク（V<sub>D</sub> ≈ 0.7 V 付近） | Y 軸（CH2）が 22 Ω × 6.5 mA ≈ 143 mV 付近まで達する（計算値） | 22 Ω は 330 Ω に対して小さいので、掃引そのものをほとんど乱さない |

@@ -21,16 +21,15 @@ AD3 の Scope の ADC は 14 bit。公式仕様では「平均化を使うと 16
 ```circuit
 title: 図1 LED の電流を 1 Ω で測る (2-4 と同じ)
 parts:
-  V1: vsource a1 c1 5
+  V1: vsource a1 d1 5
   R1: resistor a1 a3 330
   D1: led a3 a5
-  Rs: resistor a5 a7 1R
-  G1: ground a7
-  M1: voltmeter e5 e7 l=$\mathrm{CH1}$
+  Rs: resistor a5 d5 1
+  M1: voltmeter a7 d7 l=$\mathrm{CH1}$
+  G1: ground d1
 wires:
-  - c1 -| a7
-  - a5 -- e5
-  - a7 -- e7
+  - a5 -- a7
+  - d1 -- d5 -- d7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/14-averaging-resolution.svg)
