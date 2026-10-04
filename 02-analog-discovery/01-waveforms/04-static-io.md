@@ -88,6 +88,8 @@ wires:
 | Supplies | V+ = 5 V、Master Enable |
 | Static I/O | `DIO0` = Output、`DIO1` = Input |
 
+この題はオシロの図を付けない — 時間で変わらない直流の電圧だけを見る題で、電圧計の読み値で足りる。
+
 ## 見るべき値
 
 | 測る所 | 期待する値 | 分かること |

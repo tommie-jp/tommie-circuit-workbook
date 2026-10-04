@@ -81,6 +81,21 @@ S1 は C1 (10〜15 列) と**同じ 2 列**の別の行 (b 行) に挿すだけ�
 | Wavegen | W1: Amplitude 0.5 V |
 | Network | S1 を閉じて (RL): Start 100 Hz、Stop 100 kHz、Log、Steps 101。S1 を開いて (LC): Start 1 kHz、Stop 20 kHz、Log、Steps 101 |
 
+```scope
+title: 図3 共振点 5.03 kHz では CH2 (R の両端) が CH1 と同じ振幅・同じ位相になる
+time: 50us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 5.03kHz 0.5V, range: 200mV/div}
+ch2: {wave: sine 5.03kHz 0.5V, range: 200mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/scope/03-rl-lc-resonance.svg)
+
+図3 は S1 を開いて W1 を 5.03 kHz にしたときの画面 (計算値)。L と C のリアクタンスが打ち消し合って
+回路のインピーダンスが R<sub>1</sub> だけになり、CH2 は CH1 に重なる (利得 0 dB・位相 0°)。
+周波数をずらすと CH2 は小さくなり、f₀ の下では進み、上では遅れる (下の −3 dB 点で ±45°)。
+
 ## 見るべき値
 
 計算値。**RL** (S1 閉、C1 短絡): 利得 (CH2/CH1) = R / √(R² + (2πfL)²)。
@@ -102,11 +117,11 @@ S1 は C1 (10〜15 列) と**同じ 2 列**の別の行 (b 行) に挿すだけ�
 | 5.03 kHz (f₀、共振点) | 0.00 dB (最大、電流最大) | 0.0° |
 | 5.89 kHz (f₀ + BW/2、上側 −3 dB 点) | −3.01 dB | −45.0° |
 
-図3 は S1 を閉じた RL と開いた LC を同じ 100 Hz〜100 kHz に並べたもの、
-図4 は LC の山を計器の設定と同じ 1〜20 kHz で拡げたもの。
+図4 は S1 を閉じた RL と開いた LC を同じ 100 Hz〜100 kHz に並べたもの、
+図5 は LC の山を計器の設定と同じ 1〜20 kHz で拡げたもの。
 
 ```graph
-title: 図3 S1 を開くと 5.03 kHz に 0 dB の山が現れる — RL は 1.59 kHz から落ちるだけ
+title: 図4 S1 を開くと 5.03 kHz に 0 dB の山が現れる — RL は 1.59 kHz から落ちるだけ
 x: 周波数 Hz log 100..100k
 y:
   - 利得 dB
@@ -127,7 +142,7 @@ notes:
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/03-rl-lc-resonance-1.svg)
 
 ```graph
-title: 図4 LC の山 — −3 dB の 2 点 (4.30 kHz・5.89 kHz) で位相は ±45°
+title: 図5 LC の山 — −3 dB の 2 点 (4.30 kHz・5.89 kHz) で位相は ±45°
 x: 周波数 Hz log 1k..20k
 y:
   - 利得 dB

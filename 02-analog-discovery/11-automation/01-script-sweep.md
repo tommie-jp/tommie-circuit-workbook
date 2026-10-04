@@ -14,7 +14,7 @@ board: —
 **周波数を変えながら繰り返す**ところまで自動化する。**Script** から
 Wavegen の周波数を書き換え、Scope の振幅を読み、表にして出す —
 自分で作る簡易ネットワークアナライザ。配線は RC ローパス 1 つだけで、
-板の絵は省く。
+5-1 と同じ。
 
 ## 回路図
 
@@ -44,6 +44,33 @@ wires:
 
 R = 1 kΩ、C = 100 nF で、理論の折れ点 f<sub>c</sub> = 1/(2πRC) ≒ 1.59 kHz。
 1+ が入力 (W1)、2+ が出力 (R と C の中点)。
+
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (5-1 と同じ配線)
+board: half
+parts:
+  R1: resistor c5 c10 1k
+  C1: capacitor d10 d14 100n
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [GND, W1, 1+, 1-, 2+, 2-]
+wires:
+  - AD.GND -- -t3 black
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange [h10]
+  - AD.1- -- -t8 black
+  - AD.2+ -- a10 blue
+  - AD.2- -- -t12 black
+  - a14 -- -t14 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/11-automation/breadboard/01-script-sweep.svg)
+
+R1 と C1 は 10 列で中点を共有する。1+ は入力 (5 列)、2+ は R1 と C1 の中点 (10 列)、1−・2− と C1 の下端は GND のレールへ。
 
 ## 計器の設定
 
@@ -82,6 +109,20 @@ print("-- done --");
   もう少し長くしないと測定中に波形が安定しない
 - `Scope1.channel[0]` が CH1、`[1]` が CH2 (0 始まり)
 
+```scope
+title: 図3 Script が 3 kHz を出しているときの画面 — CH2 は CH1 の 0.47 倍で約 62° 遅れる
+time: 100us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 3kHz 1V, range: 500mV/div}
+ch2: {wave: ch1 | rc 100us, range: 500mV/div}
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/11-automation/scope/01-script-sweep.svg)
+
+図3 は表の 3,000 Hz の行 (理論ゲイン −6.58 dB) をオシロで見た画面 (計算値)。
+Script の `measure("Amplitude")` は CH1 を 1.000 V、CH2 を 0.469 V と読み、`Gain[dB]` は 20 log₁₀(0.469 / 1.000) ≈ −6.58 になる。
+
 ## 見るべき値
 
 計算値。理論値 = 1/√(1+(f/f<sub>c</sub>)²)、f<sub>c</sub> = 1.5915 kHz。
@@ -104,7 +145,7 @@ Script が出す表の `Gain[dB]` 列がこの理論値に近ければ、配線�
 Script が出す 8 行を方眼に打つと、この線の上に乗るはずである。
 
 ```graph
-title: 図2 Script の Gain[dB] が乗るはずの理論の線 (計算)
+title: 図4 Script の Gain[dB] が乗るはずの理論の線 (計算)
 x: 周波数 Hz log 100..300k
 y: 利得 dB -50..0
 lines:

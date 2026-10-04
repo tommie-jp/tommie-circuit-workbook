@@ -104,6 +104,23 @@ wires:
 
 **振幅を小さく** (50 mV) するのは、ベースへの入力振幅を線形領域に収めるため。
 
+Network の代わりにオシロで中域の波形を見るときは、Wavegen の W1 を 10 kHz・振幅 50 mV の正弦波にし、
+Scope の CH2 を AC 結合にする (コレクタに 2.83 V の直流があるため)。
+
+```scope
+title: 図3 中域 (10 kHz) で CH2 (コレクタ) は CH1 (入力 50 mV) を約 4.3 倍にして逆向きにする
+time: 20us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 10kHz 50mV, range: 20mV/div}
+ch2: {wave: sine 10kHz 0.216V phase 180deg, range: 100mV/div}
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/scope/01-common-emitter-bandwidth.svg)
+
+図3 は計算値 (中域利得 4.32 倍、出力は入力と逆相)。CH1 は 20 mV/div、CH2 は 100 mV/div と尺度を変えてあるので、
+波の高さは CH1 のほうが高く見えるが、Vpp は CH1 0.10 V、CH2 0.43 V で 4.3 倍。
+
 ## 見るべき値
 
 計算値。Vcc = 5 V、hFE = 200 と仮定。
@@ -126,7 +143,7 @@ wires:
 折れ点を入れた計算の利得を図にする。
 
 ```graph
-title: 図3 中域 12.7 dB、−3 dB は 20.8 Hz と 6.63 MHz (計算)
+title: 図4 中域 12.7 dB、−3 dB は 20.8 Hz と 6.63 MHz (計算)
 x: 周波数 Hz log 1..100M
 y: 利得 dB -20..20
 lines:

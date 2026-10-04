@@ -96,6 +96,20 @@ wires:
 | Wavegen | W1: Amplitude 20 mV |
 | Network | Start 1 kHz、Stop 1 MHz、Log、Steps 101、Reference: Channel 1 |
 
+```scope
+title: 図3 利得 11 倍 — 1 kHz で CH2 は CH1 の 11 倍 (20 mV → 220 mV)
+time: 500us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 20mV, range: 10mV/div}
+ch2: {wave: sine 1kHz 220mV, range: 100mV/div}
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/scope/06-non-inverting-gbw.svg)
+
+図3 は帯域より十分低い 1 kHz の画面 (計算値)。CH1 は 10 mV/div、CH2 は 100 mV/div と尺度を 10 倍変えてあるので、
+波の高さが同じに見えても CH2 は 11 倍。Vpp は CH1 0.04 V、CH2 0.44 V。R<sub>f</sub> を 100 kΩ にすると CH2 は 2.02 V (0-peak) に増える。
+
 ## 見るべき値
 
 計算値。GBW ≈ 1 MHz (LM358 のデータシート代表値) として、
@@ -107,7 +121,7 @@ wires:
 | 100 kΩ | 101 | 40.1 dB | 9.90 kHz |
 
 ```graph
-title: 図3 利得を 11 倍 → 101 倍にすると、−3 dB 点は 90.9 kHz → 9.90 kHz に下がる
+title: 図4 利得を 11 倍 → 101 倍にすると、−3 dB 点は 90.9 kHz → 9.90 kHz に下がる
 x: 周波数 Hz log 1k..1M
 y: 利得 dB 0..60
 lines:
@@ -121,7 +135,7 @@ notes:
 
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/06-non-inverting-gbw.svg)
 
-分かること (図3):
+分かること (図4):
 
 - 2 本とも、平らな所から落ち始めると開ループの線 (GBW ÷ f) に沿って下がる。
   帯域の端は「平らな利得の線」と「GBW の線」が交わる所

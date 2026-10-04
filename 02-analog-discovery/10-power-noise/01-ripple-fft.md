@@ -118,6 +118,21 @@ markers: [120Hz, 240Hz, 360Hz]
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/10-power-noise/spectrum/01-ripple-fft.svg)
 
+Scope の CH1 を AC 結合にして時間波形でも見ると、リップルの形が分かる。
+
+```scope
+title: 図4 Rload の電圧の交流分 — 120 Hz で約 0.2 V の鋸歯状のリップル (AC 結合、計算)
+time: 5ms/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 60Hz 12.7V | abs | offset -1.4V | clip 0V | peak 470ms | offset -11.2V, range: 50mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/10-power-noise/scope/01-ripple-fft.svg)
+
+図4 は整流後の電圧の 11 V ほどの直流を AC 結合で除いた画面。山ごとにコンデンサが充電され、次の山までの間に負荷へ放電して
+電圧が下がる。この下がり幅がリップルで、FFT の 120 Hz の線と同じ現象を時間で見たもの。
+
 ## 見るべき値
 
 計算値。二次側 9 V<sub>rms</sub>、ブリッジの順方向電圧を 2 段ぶん (1.4 V) と仮定、

@@ -75,6 +75,23 @@ wires:
 | Wavegen | W1: Sine、Amplitude 1 V、Offset 0 V。Sweep: Start 100 Hz、Stop 20 kHz、Time 1 s、Type **Log**、Repeat: Run を 1 回 |
 | Scope | Time/div 100 ms/div (10 div で 1 s、掃引 1 回ぶんが画面に収まる)。CH1・CH2 とも Range 500 mV/div。Trigger: Wavegen の Sync 出力 (掃引の開始に同期) |
 
+```scope
+title: 図3 掃引の中ほど (1.59 kHz) を切り出すと CH2 は CH1 の 0.71 倍で 45° 遅れる
+time: 100us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1.59kHz 1V, range: 500mV/div}
+ch2: {wave: ch1 | rc 100us, range: 500mV/div}
+cursors: [157us, 236us]
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/02-sweep.svg)
+
+図3 は掃引の途中の 1 点 (f<sub>c</sub> = 1.59 kHz、掃引の約 0.52 s) を、
+RC の定常応答として切り出した画面。掃引中の画面は周波数が毎周期変わる 1 s ぶんの帯になるので、
+1 周期ごとの波形はこのように 1 つの周波数で止めて読む。CH2 は CH1 の
+1/√2 ≈ 0.71 倍 (Vpp 1.41 V)、カーソルの間の 79 µs が 1 周期 629 µs の 1/8 = 45° の遅れ。
+
 ## 見るべき値
 
 計算値。ゲイン (dB) = 20 log₁₀ (CH2 の振幅 ÷ CH1 の振幅)。Log 掃引なので、
@@ -89,7 +106,7 @@ wires:
 横軸を掃引の時刻にして CH2 の Vpp を描くと、Scope の画面で見える包絡線 (外形) になる。
 
 ```graph
-title: 図3 CH2 の Vpp は掃引の中ほど (0.52 s) で 1.41 V に下がる
+title: 図4 CH2 の Vpp は掃引の中ほど (0.52 s) で 1.41 V に下がる
 x: 時刻 s 0..1
 y: 振幅 V 0..2.2
 lines:

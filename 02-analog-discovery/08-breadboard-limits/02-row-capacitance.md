@@ -104,6 +104,23 @@ CH2 に現れない (ノイズに埋もれる)。
 **BNC アダプタを付けて**測る (Scope 30+ MHz、Wavegen 12 MHz @ −3 dB)。CH1 を基準にした比を
 読むので、2 つのチャンネルが同じ帯域を持つ限り、帯域の影響は小さい (目安)。
 
+```scope
+title: 図3 11 列の線を挿した 10 MHz — CH2 (10 列) が CH1 (Rref の両端) より 90° 遅れる
+time: 20ns/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 10MHz 0.723V, range: 200mV/div}
+ch2: {wave: sine 10MHz 0.691V phase -90deg, range: 200mV/div}
+cursors: [25ns, 50ns]
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/scope/02-row-capacitance.svg)
+
+図3 は 11 列の線を挿したときの 10 MHz の画面 (計算値。BNC アダプタを付けて測る)。
+CH1 は電流に比例し、容量にかかる CH2 の電圧は電流より 1/4 周期 (25 ns) 遅れる。
+Vpp は CH1 1.45 V、CH2 1.38 V。11 列の線を抜くと CH2 の振幅は 0.709 V (Vpp 1.42 V) に増え、
+その差 18 mV (0.036 V<sub>pp</sub>) が列間容量 2.5 pF の分。差は小さいので Average を増やして読む。
+
 ## 見るべき値
 
 計算値。列間容量は 2.5 pF、AD の入力容量は 1 入力 24 pF × 2 = 48 pF と仮定
@@ -128,7 +145,7 @@ C = I / (2πf × V<sub>CH2</sub>) で求める (CH2 は CH1 より 90° 遅れ�
 同じ計算を周波数に対して並べると、2 本が分かれるのは数 MHz より上だけだと分かる。
 
 ```graph
-title: 図3 CH2 の振幅は 1 MHz では挿しても抜いても同じ、10 MHz で 18 mV 分かれる
+title: 図4 CH2 の振幅は 1 MHz では挿しても抜いても同じ、10 MHz で 18 mV 分かれる
 x: 周波数 Hz log 100k..30M
 y: CH2 の振幅 V 0..1.1
 lines:

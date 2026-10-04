@@ -79,6 +79,21 @@ S1 を抜いたまま (開放) 測ってから、挿して (短絡) もう一度
 | Wavegen | W1: Sine、1 kHz、Offset 0 V。**Amplitude を 0.5 V → 1 V → 1.5 V → 2 V の順に上げる** |
 | Scope | CH1: DC 結合、Range は振幅に合わせて調整 (0.5 V/div など)。Measure の Amplitude (0-peak) だけでなく、**波形の頭の形も目で見る** |
 
+```scope
+title: 図3 50 Ω をつなぐ前 (CH1) とつないだ後 (CH2) の 1 kHz の正弦波 — 振幅の差は約 3 %
+time: 500us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.5V, range: 200mV/div}
+ch2: {wave: sine 1kHz 0.485V, range: 200mV/div}
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/05-output-impedance.svg)
+
+図3 は読み方の例の値 (V<sub>open</sub> = 0.500 V、V<sub>L</sub> = 0.485 V) を、同じ尺度で重ねた画面。
+ベンチの発生器なら 50 Ω でちょうど半分 (0.25 V) になるところが、W1 では 3 % ほどしか下がらない。
+実際の値は個体と配線で変わるので、手元の読み値で R<sub>o</sub> を計算し直す。
+
 ## 見るべき値
 
 ### 1. 出力インピーダンス R<sub>o</sub> を測る (Amplitude 0.5 V)
@@ -111,7 +126,7 @@ R<sub>o</sub> = 50 × (0.500 / 0.485 − 1) ≈ **1.5 Ω**。ここで測る R<s
 | 2.0 V | 40.0 mA (ハードウェアの遮断の値ちょうど) | 30 mA を超えるので仕様の範囲外。頭が潰れて見えるはず (遮断されたときの見え方は**未確認**) |
 
 ```graph
-title: 図3 負荷電流は Amplitude に比例し、1.5 V で歪みなしの上限 30 mA に届く
+title: 図4 負荷電流は Amplitude に比例し、1.5 V で歪みなしの上限 30 mA に届く
 x: Amplitude V 0..2.5
 y: 負荷電流 mA 0..60
 lines:

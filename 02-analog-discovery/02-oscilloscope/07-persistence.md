@@ -61,6 +61,20 @@ wires:
 | Scope (CH1) | DC、Edge トリガ、Rising、Level 1.65 V |
 | 表示 | **Persistence を On**、時間を「無限 (Infinite)」か数秒に設定 |
 
+```scope
+title: 図3 Persistence を切った 1 本の方形波 (2 kHz、0〜3.3 V)
+time: 100us/div
+trigger: ch1 rising 1.65V
+ch1: {wave: square 2kHz 1.65V offset 1.65V, range: 1V/div, position: -2div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/07-persistence.svg)
+
+図3 は Persistence を切った通常表示で、1 周期 500 µs の方形波が 1 本できれいに見える。
+Persistence を入れると、縁のジッタとノイズが帯のにじみとして重なる。にじみは
+理想の波形では描けないので、この図は「にじむ前」の基準になる。
+
 ## 見るべき値
 
 | 見る所 | 期待する見え方 | 分かること |

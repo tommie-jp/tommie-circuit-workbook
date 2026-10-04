@@ -71,6 +71,22 @@ wires:
 | Wavegen | W1: Amplitude 1 V |
 | Network | Start 100 Hz、Stop 100 kHz、Log、Steps 101、Reference: Channel 1 |
 
+```scope
+title: 図3 遮断周波数 (1.59 kHz) では CH2 (R の両端) が CH1 の 0.71 倍で 45° 進む
+time: 100us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1.59kHz 1V, range: 500mV/div}
+ch2: {wave: ch1 | hp 100us, range: 500mV/div}
+cursors: [79us, 157us]
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/scope/02-rc-highpass.svg)
+
+図3 は f<sub>c</sub> の 1 点をオシロの時間波形で見た画面。CH2 の Vpp は 1.41 V (入力 2.00 V の 1/√2 倍 = −3.01 dB)。
+CH2 の山 (79 µs) が CH1 の山 (157 µs) より 79 µs 早く、1 周期 629 µs の 1/8 = 45° の進み。
+5-1 のローパスは同じ 1 点で遅れる。
+
 ## 見るべき値
 
 計算値。利得 (dB) = 20 log₁₀ ((f/f<sub>c</sub>) / √(1 + (f/f<sub>c</sub>)²))、
@@ -83,10 +99,10 @@ wires:
 | 10 kHz | −0.11 dB (ほぼ 0 dB) | +9.0° |
 | 100 kHz | −0.001 dB (ほぼ 0 dB) | +0.9° |
 
-図3 は 5-1 のローパスを同じ枠に重ねたもの。
+図4 は 5-1 のローパスを同じ枠に重ねたもの。
 
 ```graph
-title: 図3 ハイパスとローパスは 1.59 kHz で鏡写し — 利得は同じ −3 dB、位相は ±45°
+title: 図4 ハイパスとローパスは 1.59 kHz で鏡写し — 利得は同じ −3 dB、位相は ±45°
 x: 周波数 Hz log 100..100k
 y:
   - 利得 dB

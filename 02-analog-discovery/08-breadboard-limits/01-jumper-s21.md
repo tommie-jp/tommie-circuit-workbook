@@ -86,6 +86,21 @@ wires:
 **BNC アダプタを付けて**測る (Scope 30+ MHz、Wavegen 12 MHz @ −3 dB)。CH1 を基準にした比を
 読むので、2 つのチャンネルが同じ帯域を持つ限り、帯域の影響は小さい (目安)。
 
+```scope
+title: 図3 ジャンパを通した 10 MHz — CH2 は CH1 に重なり、遅れは 0.15° (0.4 ns) しかない
+time: 20ns/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 10MHz 1V, range: 500mV/div}
+ch2: {wave: sine 10MHz 1V phase -0.15deg, range: 500mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/scope/01-jumper-s21.svg)
+
+図3 は 10 MHz の 1 点をオシロの時間波形で見た画面 (計算値。BNC アダプタを付けて測る)。
+CH1 (ジャンパの手前) と CH2 (向こう側) は、100 ns の周期の中で 0.4 ns しかずれず、振幅も同じ 2.00 V なので、
+画面では 1 本に見える。Network の S21 が 0 dB・0° に張り付くのは、時間波形ではこの重なりのこと。
+
 ## 見るべき値
 
 計算値。ジャンパ (約 5 cm) の直列インピーダンスは、抵抗分が数十 mΩ、
@@ -103,7 +118,7 @@ wires:
 (単体では小さくても、低いインピーダンスの回路に入ると効いてくる。8-3・8-4)。
 
 ```graph
-title: 図3 ジャンパ 1 本のスルーは 10 MHz でも −0.0005 dB・−0.15° しか動かない
+title: 図4 ジャンパ 1 本のスルーは 10 MHz でも −0.0005 dB・−0.15° しか動かない
 x: 周波数 Hz log 100k..10M
 y:
   - S21 dB -0.001..0

@@ -69,6 +69,21 @@ wires:
 | Wavegen | W1: Amplitude 1 V |
 | Network | Start 100 Hz、Stop 20 kHz、Log、Steps 101、表示: 利得 (dB) と位相 (deg) を重ねる。カーソルを 3 本 (0.1×f<sub>c</sub>、f<sub>c</sub>、10×f<sub>c</sub>) 立てる |
 
+```scope
+title: 図3 遮断周波数 (1539 Hz) で CH2 は CH1 の 0.71 倍、約 81 µs (45°) 遅れる
+time: 100us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1.5392kHz 1V, range: 500mV/div}
+ch2: {wave: ch1 | rc 103.4us, range: 500mV/div}
+cursors: [162us, 243us]
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/scope/04-phase-and-3db.svg)
+
+図3 は −3 dB 点の 1 点をオシロの時間波形で見た画面 (計算値)。CH2 の Vpp は 1.41 V (入力 2.00 V の 0.71 倍 = −3.01 dB)。
+カーソルの間 81 µs は 1 周期 650 µs の 1/8 = 45° の遅れで、利得の −3 dB と位相の −45° が同じ周波数で起きている。
+
 ## 見るべき値
 
 計算値。位相 = −arctan(f / f<sub>c</sub>)。
@@ -80,7 +95,7 @@ wires:
 | 10 × f<sub>c</sub> | 15.39 kHz | −20.04 dB | −84.3° |
 
 ```graph
-title: 図3 −3 dB の線と −45° の線は同じ 1539 Hz で曲線を横切る
+title: 図4 −3 dB の線と −45° の線は同じ 1539 Hz で曲線を横切る
 x: 周波数 Hz log 100..20k
 y:
   - 利得 dB

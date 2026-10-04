@@ -88,6 +88,22 @@ Rref (10 kΩ) は**共振点付近に合わせてある**。低い周波数で�
 Rref よりずっと小さく、CH2 の読みが小さくなって誤差が増えるが、この題の目的は
 正確な \|Z\| そのものより**位相が反転する周波数を見つけること**なので実害は小さい。
 
+```scope
+title: 図3 SRF の上 (7.5 MHz) では CH2 (コイルの両端) が CH1 (電流) より約 90° 遅れる
+time: 20ns/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 7.5MHz 0.228V, range: 100mV/div}
+ch2: {wave: sine 7.5MHz 0.972V phase -89.7deg, range: 500mV/div}
+cursors: [33.3ns, 66.5ns]
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/scope/04-self-resonance.svg)
+
+図3 は 7.5 MHz の 1 点を、オシロの時間波形で見た画面 (計算値)。CH1 (Rref の両端) は電流に比例し、CH2 は L<sub>DUT</sub> の電圧。
+コンデンサは電圧が電流より 90° 遅れるので、CH2 が CH1 より 1/4 周期 (33 ns) 遅れる。SRF の下の 7.0 MHz では CH2 が約 89° 進む。
+CH1 は 100 mV/div、CH2 は 500 mV/div と尺度を変えてあり、CH2 の Vpp は 1.94 V、CH1 は 0.46 V。
+
 ## 見るべき値
 
 計算値 (L = 100 µH、Cp = 5 pF、巻線抵抗 Rs = 3 Ω と仮定)。
@@ -108,7 +124,7 @@ Rref よりずっと小さく、CH2 の読みが小さくなって誤差が増�
 掃引で記録した \|Z\| と位相を周波数に対して並べると、次の形になる。
 
 ```graph
-title: 図3 7.12 MHz (SRF) で |Z| が山になり、位相が +90° から −90° へ反転する
+title: 図4 7.12 MHz (SRF) で |Z| が山になり、位相が +90° から −90° へ反転する
 x: 周波数 Hz log 100k..10M
 y:
   - インピーダンス Ω log

@@ -108,6 +108,25 @@ j5・j6 へ、V+・GND を下のレールへ入れる。
 | Supplies | V+ = 5 V、Master Enable を入れる |
 | Protocol | I2C、SDA = DIO0、SCL = DIO1、Rate = 100 kHz。Read、Address = 0x48、レジスタ 0 を 2 バイト。プルアップは 5 V だが、AD3 の DIO 入力は 5 V まで耐える (5 V tolerant) |
 
+```scope
+title: 図3 アドレス 0x91 を送ると、9 クロック目で LM75 が ACK (SDA = L) を返す
+time: 20us/div
+trigger: ch2 falling 2.5V at -1div
+ch1: {wave: = 5V*(step(2.5us-t)+step(t-5us)*step(95us-t)*step(sin(2*pi*100kHz*(t-5us)))+step(t-95us)), range: 2V/div, position: 1div}
+ch2: {wave: = 5V*(step(-t)+step(t-2.5us)*step(12.5us-t)+step(t-32.5us)*step(42.5us-t)+step(t-72.5us)*step(82.5us-t)+step(t-100us)), range: 2V/div, position: -2div}
+measure: [vmax, vmin]
+notes:
+  - band 0 10us: スタート
+  - band 85us 95us: ACK
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/scope/04-i2c-temperature.svg)
+
+図3 は SCL (CH1、DIO1) と SDA (CH2、DIO0) の計算値の波形で、Rate = 100 kHz (1 クロック 10 µs)。
+SCL が L の間に SDA が変わり、SCL が H の間は動かない。SDA が SCL の H のうちに H→L になる最初の変化がスタート条件。
+8 ビット 1001 0001 (0x91) を送り、9 クロック目 (85〜95 µs) は LM75 が SDA を L に引いて ACK、
+SCL が H のうちに SDA が L→H になる最後の変化がストップ条件。読み出しの 2 バイトはこの後に続く。
+
 ## 見るべき値
 
 LM75 のレジスタ 0 は 9 ビット (0.5°C 単位) を上位 9 ビットに詰めた 2 バイト。

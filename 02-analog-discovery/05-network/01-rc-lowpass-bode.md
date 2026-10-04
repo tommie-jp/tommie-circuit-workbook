@@ -67,6 +67,22 @@ wires:
 | Wavegen | W1: Amplitude 1 V (Network が自動で掃引する) |
 | Network | Start 100 Hz、Stop 100 kHz、**Log**、Steps 101、Reference: Channel 1、表示: Bode (利得 dB・位相 deg) |
 
+```scope
+title: 図3 10 kHz では CH2 (出力) が CH1 の 0.16 倍に減り、約 81° 遅れる
+time: 20us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 10kHz 1V, range: 500mV/div}
+ch2: {wave: ch1 | rc 100us, range: 500mV/div}
+cursors: [25us, 47.5us]
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/scope/01-rc-lowpass-bode.svg)
+
+図3 は Network が掃引の途中で測っている 10 kHz の 1 点を、オシロの時間波形で見た画面。
+CH2 の Vpp は 0.31 V (入力 2.00 V の 0.157 倍 = −16.07 dB)、カーソルの間 22.5 µs は
+1 周期 100 µs の 81°ぶんの遅れ (−81.0°)。Network の表はこの比と遅れを周波数ごとに自動で出している。
+
 ## 見るべき値
 
 計算値。利得 (dB) = 20 log₁₀ (1 / √(1 + (f/f<sub>c</sub>)²))、
@@ -80,7 +96,7 @@ wires:
 | 100 kHz | −35.96 dB | −89.1° |
 
 ```graph
-title: 図3 RC ローパスのボード線図 — −3 dB と −45° が同じ 1.59 kHz に来る
+title: 図4 RC ローパスのボード線図 — −3 dB と −45° が同じ 1.59 kHz に来る
 x: 周波数 Hz log 100..100k
 y:
   - 利得 dB

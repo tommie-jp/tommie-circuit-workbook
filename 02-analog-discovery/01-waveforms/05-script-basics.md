@@ -92,6 +92,19 @@ Wavegen1.stop();
 | Wavegen (W1) | 正弦波、1 kHz、振幅はスクリプトが 0.5 / 1.0 / 1.5 V の順に変える |
 | Scope (CH1) | DC、Range 5 V、Auto トリガ (Script から `measure("Amplitude")` で読む) |
 
+```scope
+title: 図3 振幅 1.0 V の設定なら Scope は Vpp 2.00 V を読む (1 kHz の正弦波)
+time: 500us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+cursors: [250us, 750us]
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/scope/05-script-basics.svg)
+
+図3 は振幅 1.0 V の回のオシロの画面。1 kHz なので 1 周期が 1 ms で、`measure("Amplitude")` が返す値の 2 倍の Vpp を画面の表にも出す。
+
 ## 見るべき値
 
 | 振幅の設定 | 期待する Vpp (計算値) |
@@ -101,7 +114,7 @@ Wavegen1.stop();
 | 1.5 V | 3.00 V |
 
 ```graph
-title: 図3 Vpp は振幅の設定のちょうど 2 倍 (1.00 / 2.00 / 3.00 V)
+title: 図4 Vpp は振幅の設定のちょうど 2 倍 (1.00 / 2.00 / 3.00 V)
 x: 振幅の設定 V 0..2
 y: Vpp V 0..4
 lines:

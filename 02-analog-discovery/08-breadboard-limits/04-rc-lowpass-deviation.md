@@ -94,6 +94,22 @@ wires:
 **BNC アダプタを付けて**測る (Scope 30+ MHz、Wavegen 12 MHz @ −3 dB)。CH1 を基準にした比を
 読むので、2 つのチャンネルが同じ帯域を持つ限り、帯域の影響は小さい (目安)。
 
+```scope
+title: 図3 1 MHz で CH2 (出力) は 0.40 倍・約 66° 遅れ (理論は 0.85 倍・32°)
+time: 200ns/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1MHz 1V, range: 500mV/div}
+ch2: {wave: sine 1MHz 0.4V phase -66.4deg, range: 500mV/div}
+cursors: [250ns, 434ns]
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/scope/04-rc-lowpass-deviation.svg)
+
+図3 は 1 MHz の 1 点を、実測相当 (36.5 pF) の計算値でオシロの時間波形にした画面 (BNC アダプタを付けて測る)。
+CH2 の Vpp は 0.80 V (入力 2.00 V の 0.40 倍 = −7.97 dB)、カーソルの間 184 ns は 1 周期 1 µs の 66.4° ぶんの遅れ。
+10 pF だけの理論なら CH2 は 0.85 倍 (Vpp 1.69 V)・32.1° 遅れで、入力容量と列間容量が乗ると CH2 が目に見えて小さく遅れる。
+
 ## 見るべき値
 
 計算値。理想 (C = 10 pF のみ) の折れ点 f<sub>c</sub> = 1/(2πRC) = **1.59 MHz**。
@@ -108,7 +124,7 @@ AD3 の入力容量 24 pF を足す (34 pF) と **468 kHz**、さらに C<sub>st
 C<sub>stray</sub> だけの効き (34 pF と 36.5 pF の差) は 1 MHz で約 0.5 dB、10 MHz で約 0.6 dB。
 
 ```graph
-title: 図3 折れ点は 1.59 MHz から 436 kHz へ (入力 24 pF が主因)
+title: 図4 折れ点は 1.59 MHz から 436 kHz へ (入力 24 pF が主因)
 x: 周波数 Hz log 100k..10M
 y:
   - 利得 dB -30..0
