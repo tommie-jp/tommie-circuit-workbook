@@ -373,8 +373,8 @@ wires:
   - e6 -- f6 blue
   - f6 -- f10 blue
   - f10 -- e10 blue
-  - j8 -- j9 white
-  - j9 -- k9 white
+  - j8 -- k8 white
+  - k8 -- k9 white
   - i14 -- i10 yellow
   - i15 -- n15 white
   - n15 -- n16 white
