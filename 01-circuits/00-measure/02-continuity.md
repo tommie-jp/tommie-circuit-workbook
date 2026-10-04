@@ -56,10 +56,10 @@ parts:
   PS:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: Analog Discovery (Supplies)
+    pins: [V+, GND]
 wires:
-  - PS.+5V -- +t1 red
+  - PS.V+ -- +t1 red
   - PS.GND -- -t2 black
   - +t8 -- a8 red
   - a14 -- -t14 black
@@ -68,6 +68,8 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/breadboard/02-continuity.svg)
 
+- 電源は Analog Discovery 3 (AD) の Supplies の V+ (WaveForms で 5 V にする)。V+ を上の + レール、
+  GND を上の − レールへつなぐ。LED 2 個で約 18 mA 流れ、AD の電源 (各レール約 50 mA まで) に収まる。
 - 図2 の `R1` は列 8 の `b8`、`R2` も列 8 の `c8` に挿してある。別の穴だが同じ列
   (上ブロック a〜e) なので、線を引かなくても中でつながっている。電源は
   どちらか片方 (図では空いている `a8`) に 1 本挿すだけでよい。`R1` は右へ、
@@ -88,7 +90,10 @@ wires:
 | R1, R2 | 抵抗 (1/4 W) | 330 Ω |
 | D1 | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V (光っているときの両端の電圧。1-1) |
 | D2 | LED (緑、5 mm) | V<sub>F</sub> ≈ 2.1 V |
-| — | 電源 | 5 V |
+| — | 電源 | Analog Discovery 3 の V+ (5 V) |
+| — | テスター | 導通チェック (ブザー) つき |
+
+オシロスコープの図は付けない。この題は導通と、LED を点ける直流の電流だけを見るので、テスターで足りる (オシロは 0-3)。
 
 ## 見るべき値
 

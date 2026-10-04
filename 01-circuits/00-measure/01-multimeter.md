@@ -63,10 +63,10 @@ parts:
   PS:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: Analog Discovery (Supplies)
+    pins: [V+, GND]
 wires:
-  - PS.+5V -- +t1 red
+  - PS.V+ -- +t1 red
   - PS.GND -- -t2 black
   - +t5 -- a5 red
   - a15 -- -t15 black
@@ -75,6 +75,10 @@ wires:
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/breadboard/01-multimeter.svg)
+
+5 V の電源は Analog Discovery 3 (以下 AD) の Supplies の V+ を使う (WaveForms で V+ を 5 V にして出力を入れる)。
+図2 の「電源」の箱がそれで、V+ を上の + レール、GND を上の − レールにつなぐ。
+この題の電流は 0.25 mA で、AD の電源 (各レール約 50 mA まで) に十分収まる。
 
 ブレッドボードは、縦に並んだ 5 つの穴 (同じ列の a〜e) が板の中でつながっている
 (しくみは次の 0-2 で詳しく見る)。図2 の穴の番地は「行の英字 + 列の数字」で書いてある。
@@ -97,7 +101,8 @@ wires:
 | --- | --- | --- |
 | R1 | 抵抗 (1/4 W) | 10 kΩ |
 | R2 | 抵抗 (1/4 W) | 10 kΩ |
-| — | 電源 | 5V (USB) |
+| — | 電源 | Analog Discovery 3 の V+ (5 V) |
+| — | テスター | デジタルマルチメータ (DC 電圧・DC mA・Ω) |
 
 ## 計器の設定
 
@@ -106,6 +111,8 @@ wires:
 | 電圧 (R2 の両端) | DC 20V (オートレンジなら自動) | R2 に並列 |
 | 電流 (回路の電流) | DC mA | 回路を切って直列 |
 | 抵抗 (R1 単体、電源を外して) | 20 kΩ | 部品の両端 |
+
+オシロスコープの図は付けない。この題は直流の電圧・電流・抵抗だけを見るので、テスターの読み値で足りる (オシロは 0-3)。
 
 ## 見るべき値
 

@@ -153,22 +153,23 @@ measure: [vpp, freq, phase]
 — 反転増幅であることが一目で分かる。10 mVpp の入力は AD の W1 では小さな設定なので、
 波形が細かく乱れて見えるときは平均 (Average) を使う。
 
-## NanoVNA で周波数特性を見る
+## VNA で周波数特性を見る
 
-AD の W1・CH1・CH2 の代わりに NanoVNA をつなぎ (図4)、50 kHz〜100 MHz の通り方 (S21) を見る (図5)。
+AD の W1・CH1・CH2 の代わりに VNA (この本の標準は LiteVNA64) をつなぎ (図4)、50 kHz〜100 MHz の通り方 (S21) を見る (図5)。
 S21・S11・Smith チャートの読み方と THRU の校正は 2-2 と同じ。
 
 - `CIN` の − 側 (入力の列 5) に CH0 (アッテネータを通す)、`COUT` の − 側 (出力の列 27) に
   CH1 をつなぐ (図4)。板へは SMA-クリップのケーブルで、**芯線と外皮を組で**挿す。外皮は信号の穴のすぐ隣の
   − レールへ、線はできるだけ短く (GND の戻りが長いと 10 MHz あたりから特性が崩れる)
-- NanoVNA の出力 (約 −7 dBm、50 Ω に 0.28 Vpp) はこの回路には大きすぎる。利得が 79 倍ある
+- VNA の出力は 0 dBm (1 mW) より小さいが、機種と周波数で変わる (NanoVNA の教科書の 0-3)。
+  目安に −7 dBm とすると、50 Ω に 0.28 Vpp で、この回路には大きすぎる。利得が 79 倍ある
   アンプの入力は数 mV までに抑えたい。**CH0 に 20 dB の SMA アッテネータを 2 個 (計 40 dB) 重ね、
   付けたまま THRU で校正する** (アッテネータの分は校正で消える)。40 dB でベースの振幅は約 6 mVpp
   (20 dB 1 個だと約 55 mVpp で、コレクタ電流が振り切れて波形がつぶれる)
 - 電源は今までどおり AD の V+ (5 V)
 
 ```breadboard
-title: 図4 NanoVNA をつなぐ (芯線と外皮を組で)
+title: 図4 VNA をつなぐ (芯線と外皮を組で)
 board: half
 parts:
   R1: resistor b3 b9 20k
@@ -210,41 +211,73 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/03-common-emitter-2.svg)
 
-```vna
-device: h4
-sweep: 50k-100M 201
+図5 は、トランジスタを小信号の模型 (ハイブリッド π) に置き換えて**計算した** S21 のグラフ
+(VNA の画面ではない)。測ると、VNA の画面にこれと同じ形の線が出るはず。
+
+```graph
 title: 図5 エミッタ接地増幅の S21 (計算) — 低い所で +10.6 dB・位相 180°、13 MHz で −3 dB
-dut: series R 0
-data: 03-common-emitter.s2p
-traces:
-  - S21 logmag
-  - S21 phase
-markers:
-  - 1M
-  - 13M
-  - 50M
+x: 周波数 Hz log 50k..100M
+y:
+  - 大きさ dB
+  - 位相 deg
+lines:
+  S21 (計算) dB:
+    - 50k 10.60
+    - 549.8k 10.60
+    - 1.05M 10.58
+    - 2.049M 10.50
+    - 3.049M 10.37
+    - 4.048M 10.20
+    - 5.048M 9.99
+    - 7.046M 9.48
+    - 9.046M 8.89
+    - 11.04M 8.24
+    - 13.04M 7.58
+    - 15.04M 6.92
+    - 20.04M 5.35
+    - 25.04M 3.94
+    - 30.04M 2.69
+    - 40.03M 0.63
+    - 50.02M -1.01
+    - 60.02M -2.32
+    - 70.02M -3.39
+    - 80.01M -4.28
+    - 90M -5.04
+    - 100M -5.71
+  S21 の位相 (計算) deg:
+    - 50k 180.0
+    - 549.8k 177.2
+    - 1.05M 174.6
+    - 2.049M 169.5
+    - 3.049M 164.5
+    - 4.048M 159.7
+    - 5.048M 155.0
+    - 7.046M 146.3
+    - 9.046M 138.4
+    - 11.04M 131.4
+    - 13.04M 125.2
+    - 15.04M 119.7
+    - 20.04M 108.2
+    - 25.04M 99.0
+    - 30.04M 91.2
+    - 40.03M 78.2
+    - 50.02M 67.0
+    - 60.02M 56.5
+    - 70.02M 46.2
+    - 80.01M 35.9
+    - 90M 25.1
+    - 100M 13.8
+notes:
+  - level 0dB
+  - level 7.6dB
+  - mark 1M
+  - mark 13M
+  - mark 50M
 ```
 
-![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/vna/03-common-emitter-1.svg)
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/graph/03-common-emitter.svg)
 
-```vna
-device: h4
-sweep: 50k-100M 201
-title: 図6 エミッタ接地増幅の入力側の S11 (計算) — 低い所で Smith の右端 (高インピーダンス) の近く
-dut: series R 0
-data: 03-common-emitter.s2p
-traces:
-  - S11 logmag
-  - S11 smith
-markers:
-  - 1M
-  - 13M
-  - 50M
-```
-
-![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/vna/03-common-emitter-2.svg)
-
-- 破線は CH0 と CH1 を直につないだスルー (0 dB・0°)。実線は低い周波数で **約 +10.6 dB
+- 0 dB の破線は CH0 と CH1 を直につないだスルー。S21 は低い周波数で **約 +10.6 dB
   (|S21| ≈ 3.4)、位相 180°** (反転)。オシロで見た 79 倍 (+38 dB) よりずっと小さいのは、
   **CH1 の 50 Ω が `COUT` を通してコレクタの負荷になる**から。利得は gm × (RC ‖ 50 Ω)
   = 35.8 mA/V × 48.9 Ω ≈ **1.75 倍**まで下がる (RC 2.2 kΩ より 50 Ω のほうがずっと小さい)
@@ -253,7 +286,7 @@ markers:
   直につないだときの約 2 倍の電圧がかかる。S21 ≈ 2 × 1.75 ≈ 3.4 (+10.6 dB) はこの 2 つの積。
   S11 (図6) が Smith の右端 (開放) の近くにいるのも、入力が高インピーダンスだから
 - **低い側に角はない**。`CIN` は 50 Ω + 2.6 kΩ と組んで約 60 Hz、`COUT` は 2.2 kΩ + 50 Ω と組んで
-  約 70 Hz、`CE` はエミッタから見た約 29 Ω (re と信号源の分) と組んで約 56 Hz。どれも NanoVNA の
+  約 70 Hz、`CE` はエミッタから見た約 29 Ω (re と信号源の分) と組んで約 56 Hz。どれも VNA の
   下限 50 kHz よりずっと下なので、50 kHz から平ら。低い角を見たいときは AD のネットワーク
   アナライザ (1 Hz〜) を使う
 - **高い側は 13 MHz で −3 dB** (+7.6 dB)、50 MHz で約 −1.0 dB (スルーより下)。位相も 180° から
@@ -266,9 +299,39 @@ markers:
   - その合計をベースの広がり抵抗 (rbb′ 約 50 Ω) と信号源の 50 Ω で充電するので、
     1 / (2π × 約 100 Ω × 約 138 pF) ≈ 12 MHz あたりに極 (利得が落ち始める周波数) ができる
   - SMA-クリップのリード線 (10 cm で約 80 nH) とブレッドボードの穴の浮遊容量 (1 か所 数 pF)
-- `03-common-emitter.s2p` は **ハイブリッド π の模型で計算した値** (実測ではない)。
-  Ic 0.93 mA・hFE 150・fT 45 MHz・Cob 4 pF・rbb′ 50 Ω に、クリップのリード 80 nH (入力・出力)
+- 図5 の計算に使った値: Ic 0.93 mA・hFE 150・fT 45 MHz・Cob 4 pF・rbb′ 50 Ω に、クリップのリード 80 nH (入力・出力)
   と各節点の浮遊容量 5 pF を足した。実際の落ち始めはリード線の長さと組み方で変わる
+
+入力側 (S11) は、ベースから見た回路を抵抗・コンデンサ・コイルだけの等価回路に置き換えると、
+VNA の画面 (図6) にそのまま描ける。CH0 から順に、クリップのリード (80 nH)、ベースの節点の浮遊容量 (5 pF)、
+バイアスの R1 ∥ R2 (6.7 kΩ)、rbb′ (50 Ω)、最後にトランジスタの入力 rπ (= β / gm ≈ 4.2 kΩ) と、
+Cπ にミラー効果の分を足した容量 (127 pF + 11 pF ≈ 138 pF) を並列に置く。エミッタは `CE` で交流の GND に落ちている。
+
+```vna
+device: litevna64
+sweep: 50k-100M 201
+title: 図6 エミッタ接地増幅の入力の S11 (等価回路で計算) — 低い所は Smith の右端
+dut:
+  - series L 80n
+  - shunt C 5p
+  - shunt R 6k7
+  - series R 50
+  - shunt R 4k2
+  - shunt C 138p
+  - open
+traces:
+  - S11 logmag
+  - S11 smith
+markers:
+  - 1M
+  - 13M
+  - 50M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/vna/03-common-emitter.svg)
+
+- 図5 と図6 は計算で、実測ではない。測ったら、VNA の Touchstone (`.s2p`) を題のファイルの隣に置き、
+  図6 のフェンスに `data: <ファイル名>.s2p` と書くと、測った線が実線で重なる (理想は破線に変わる)
 
 ## 部品
 
