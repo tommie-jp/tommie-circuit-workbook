@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 600" width="760" height="600" font-family="'Noto Sans CJK JP','Noto Sans JP',sans-serif" font-size="15">
   <rect width="760" height="600" fill="#ffffff"/>
-  <text x="20" y="32" font-size="20" font-weight="bold" fill="#000">図5 中波帯の同調ループの作り方 (図 4 を組んだ姿)</text>
+  <text x="20" y="32" font-size="20" font-weight="bold" fill="#000">図6 中波帯の同調ループの作り方 (図 5 を組んだ姿)</text>
 
   <!-- 枠 (木や塩ビの十字枠) -->
   <line x1="260" y1="80" x2="260" y2="420" stroke="#b08850" stroke-width="10"/>
