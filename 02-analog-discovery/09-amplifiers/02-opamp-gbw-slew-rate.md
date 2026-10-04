@@ -126,7 +126,7 @@ wires:
 | --- | --- |
 | Supplies | V+ = 5 V、Master Enable を入れる |
 | Network (GBW 測定) | 掃引 100 Hz〜1 MHz、点数 101、振幅 20 mV、Reference = CH1、DUT = CH2 |
-| Wavegen (スルーレート測定) | W1: Square、1 kHz、Amplitude 136 mV (出力 3 Vpp 相当)、Offset 0 V |
+| Wavegen (スルーレート測定) | W1: Square、1 kHz、Amplitude 82 mV (出力 1.8 Vpp 相当)、Offset 0 V。出力の上側は Vcc − 1.5 V = 3.5 V ほどまでしか振れないので (9-3)、バイアス 2.5 V から ±0.9 V に収める |
 | Scope (スルーレート測定) | CH2 の立ち上がり時間を Measurements で読む |
 
 方形波の立ち上がりの 1 つを 5 µs/div で拡大した。CH2 がスルーレート (0.3 V/µs) で
@@ -135,20 +135,20 @@ wires:
 振幅が 1/11 なので 50 mV/div にしてある。
 
 ```scope
-title: 図3 出力は 3 V を 10 µs かけて直線で上る (CH2)。帯域だけなら 3.85 µs (CH3)
+title: 図3 出力は 1.8 V を 6 µs かけて直線で上る (CH2)。帯域だけなら 3.85 µs (CH3)
 time: 5us/div
 trigger: ch1 rising 0V at -3div
-ch1: {wave: square 1kHz 136mV, range: 50mV/div}
-ch2: {wave: "= clip(-1.5V + 0.3V / 1us * t, -1.5V, 1.5V)", range: 500mV/div}
+ch1: {wave: square 1kHz 82mV, range: 50mV/div}
+ch2: {wave: "= clip(-0.9V + 0.3V / 1us * t, -0.9V, 0.9V)", range: 500mV/div}
 ch3: {wave: ch1 | gain 11 | rc 1.75us, range: 500mV/div}
-cursors: [0, 10us]
+cursors: [0, 6us]
 measure: [vpp, rise]
 ```
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/scope/02-opamp-gbw-slew-rate.svg)
 
-CH2 の Rise (10〜90 %) は 8 µs と出る。3 V 全部を振り切る時間 (カーソルの 0〜10 µs) は
-10 µs で、見るべき値の表の「実際の立ち上がり時間」はこちらを指す。CH3 の Rise は
+CH2 の Rise (10〜90 %) は 4.8 µs と出る。1.8 V 全部を振り切る時間 (カーソルの 0〜6 µs) は
+6 µs で、見るべき値の表の「実際の立ち上がり時間」はこちらを指す。CH3 の Rise は
 0.35/BW の 3.85 µs に当たる。
 
 ## 見るべき値
@@ -160,11 +160,11 @@ CH2 の Rise (10〜90 %) は 8 µs と出る。3 V 全部を振り切る時間 (
 | --- | --- | --- |
 | 交流利得 Av = 1 + Rf/Rg | 11 倍 (20.8 dB) | 帰還抵抗の比だけで決まる |
 | 予想 −3 dB 帯域 = GBW / Av | 90.9 kHz | GBW が一定なら利得を上げるほど帯域が狭くなる |
-| 帯域だけで決まる立ち上がり時間 (0.35/BW) | 3.85 µs | もしスルーレートが無限なら、これだけの時間で 3 V 変化するはず |
-| 必要な傾き (3 V / 3.85 µs) | 0.78 V/µs | **LM358 の SR (0.3 V/µs) を超えている** |
-| 実際の立ち上がり時間 (ΔV / SR = 3 V / 0.3 V/µs) | **10 µs** | 帯域予想の 2.6 倍も遅い — **スルーレートが効いている** |
+| 帯域だけで決まる立ち上がり時間 (0.35/BW) | 3.85 µs | スルーレートが無限なら、この時間で 1.8 V 変化するはず |
+| 必要な傾き (1.8 V / 3.85 µs) | 0.47 V/µs | **LM358 の SR (0.3 V/µs) を超えている** |
+| 実際の立ち上がり時間 (ΔV / SR = 1.8 V / 0.3 V/µs) | **6 µs** | 帯域予想の 1.6 倍遅い — **スルーレートが効いている** |
 
-**利得 11 倍という中途半端な設定でも、出力振幅が数 V あればすぐスルー律速になる。**
+**利得 11 倍でも、出力の段差が 1.2 V (= 0.3 V/µs × 3.85 µs) を超えるとスルー律速になる。**
 GBW から予想した帯域と実際の立ち上がりが合わないときは、振幅を絞ってスルーレートの
 影響を消してから帯域だけを測り直すとよい。
 

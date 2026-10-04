@@ -137,5 +137,5 @@ cursors: [0, 10ms]
 
 自作。計器の名前と操作は Digilent の
 [Using the Logic Analyzer](https://digilent.com/reference/test-and-measurement/guides/waveforms-logic-analyzer)。
-Bus によるトリガは WaveForms のリファレンスマニュア (Logic Analyzer の章)
+Bus によるトリガは WaveForms のリファレンスマニュアル (Logic Analyzer の章)
 に基づく。
