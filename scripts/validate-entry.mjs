@@ -16,7 +16,7 @@ export function validateFrontMatter(data) {
     }
   }
 
-  if (!['circuits', 'analog-discovery', 'nanovna', 'denken', 'etc'].includes(data.book)) {
+  if (!['circuits', 'analog-discovery', 'nanovna', 'denken', 'etc', 'fpga'].includes(data.book)) {
     errors.push(`book は未定義の値です: ${data.book}`);
   }
 

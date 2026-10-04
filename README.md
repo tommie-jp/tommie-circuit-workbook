@@ -4,7 +4,7 @@
 > この本は AI (Claude) が書いたもので、人間の専門家の校正を受けていない。
 > 回路・数値・手順が間違っている可能性がある。組む前に自分で確かめてほしい。
 
-回路・Analog Discovery・NanoVNA・電験三種の 4 冊と番外の工作の実験帳。回路図と実体配線図は
+回路・Analog Discovery・NanoVNA・電験三種・FPGA の 5 冊と番外の工作の実験帳。回路図と実体配線図は
 [tommie-fence](https://github.com/tommie-jp/tommie-fence) の Markdown フェンス
 (` ```circuit ` / ` ```breadboard ` / ` ```perfboard `)、銅張り基板の寸法図は ` ```copper `、NanoVNA の画面は ` ```vna `、オシロスコープの画面は ` ```scope `、ロジックアナライザの画面は ` ```logic `、
 周波数特性や特性曲線のグラフは ` ```graph ` で書く。
@@ -23,6 +23,7 @@
 | [NanoVNA の教科書](03-nanovna/README.md) | LiteVNA64 で 50 kHz〜6.3 GHz を測る (NanoVNA-H4 / V2 は比較用)。治具・部品・フィルタ・アンテナ・GHz 帯。第 11 章でスペクトラムアナライザ (tinySA など) | 50 | 105 | 214 | 106 |
 | [電験三種の教科書](04-denken/README.md) | 理論・機械・電力・法規の範囲を、低い電圧の実験で測って式を確かめる | 50 | 100 | 200 | 100 |
 | [番外の工作](05-etc/README.md) | 4 冊の部品を組み合わせて作る工作。CPU もどき、中波ラジオの時報で動く時計、デュアルゲート FET ミキサー | 0 | 0 | 9 | 9 |
+| [FPGA の教科書](06-fpga/README.md) | 1 本の Verilog をブラウザ・Raspberry Pi Pico 2 (Soft-FPGA)・実物の FPGA で動かし、Analog Discovery 3 の Logic で測って比べる | 50 | 100 | 200 | 0 |
 
 <!-- toc:end -->
 
@@ -49,13 +50,13 @@
 
 ```yaml
 ---
-book: circuits          # circuits / analog-discovery / nanovna / denken (置き場の冊から番号を除いた名前)
+book: circuits          # circuits / analog-discovery / nanovna / denken / fpga (置き場の冊から番号を除いた名前)
 chapter: 1              # 置き場の章の番号
 id: 1-1                 # 章-番号 (ファイル名の番号と同じ)
 title: LED を点ける — 抵抗で電流を決める
 tier: 50                # 50 = 必須 / 100 = 入門 / 200 = 中級
 source: 自作            # 出典。借りた回路なら出所 (例: Lessons in Electric Circuits Vol. VI ch.5)
-board: BB               # 任意。BB = ブレッドボード / PF = perfboard / CB = 銅張り基板 (copper board) / — = 板なし
+board: BB               # 任意。BB = ブレッドボード / PF = perfboard / CB = 銅張り基板 (copper board) / — = 基板なし
 device: LV64            # nanovna は必須 (LV64 標準 / H4・V2 は歴史的)。analog-discovery は AD3 でしかできない題だけ AD3
 era: 古                 # circuits だけ、任意。古 = 知っておきたい古典 / 今 = 今の定番 / 古/今
 tools: [AD, VNA]        # 任意。2 つの計器を両方使う題
@@ -68,15 +69,15 @@ tools: [AD, VNA]        # 任意。2 つの計器を両方使う題
 
 **どの題にも、特に理由がなければ次の 3 つを入れる** (読んだ回路をそのまま組んで、計器で確かめられるように):
 
-- **実体配線図** — 板の範囲 (各冊の README) に収まればブレッドボード、超えれば perfboard か copper
-- **Analog Discovery 3** — 板の外の機器 (`type: device`) で描き、電源 (Supplies) と信号 (Wavegen) とオシロ (Scope) の線を足の名前で配線する
+- **実体配線図** — 基板の範囲 (各冊の README) に収まればブレッドボード、超えれば perfboard か copper
+- **Analog Discovery 3** — 基板の外の機器 (`type: device`) で描き、電源 (Supplies) と信号 (Wavegen) とオシロ (Scope) の線をピンの名前で配線する
 - **オシロスコープの図** (`scope`) — 計器の設定の下に、見えるはずの波形。「見るべき値」は `cursors:` と `measure:` で図にも出す
 
 入れないときは、その理由を題に 1 行書く。理由になるのは次のときだけ:
 
 | 入れないもの | 理由になること |
 | --- | --- |
-| 実体配線図 | 組まない題 (計算・理論だけ)。商用電源に繋ぐ回路。どの板の範囲にも収まらない回路 |
+| 実体配線図 | 組まない題 (計算・理論だけ)。商用電源に繋ぐ回路。どの基板の範囲にも収まらない回路 |
 | Analog Discovery 3 | 計器の範囲の外 (10 MHz を超える信号、S パラメータは VNA、スペクトルは tinySA)。組まない題。電源装置そのものが題材の題 (01-circuits の第 13 章。AD3 の Supplies は 250 mW までなので、定電圧・定電流の実験は電源装置で行い、出力は AD3 の Scope で見る) |
 | オシロの図 | 時間で変わらない量 (直流の電圧・電流・抵抗) だけを見る題。10 MHz を超えてオシロで見えない題 (spectrum か vna の図にする)。S パラメータを見る題 (vna の図)。組まない題 |
 
@@ -115,7 +116,7 @@ npm run check -- --verbose   # ネットリストも出す。意図した回路�
 `check` は置き場と front matter の食い違い、フェンス名の書き間違い、フェンスの
 読めない行、`plan.yaml` とのずれ (計画に無い題、違う title や tier)、古い目次、
 フェンスの並びと合わない画像の行で落ちる。画像の行 (Pages の図を指す `![…](https://tommie-jp.github.io/…)`) は
-`npm run figures` が書くので手で直さない。ERC (つながっていない足など) は出すだけで落とさない。
+`npm run figures` が書くので手で直さない。ERC (つながっていないピンなど) は出すだけで落とさない。
 
 ## ライセンス
 

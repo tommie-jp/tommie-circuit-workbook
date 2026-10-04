@@ -1,0 +1,202 @@
+# 06-fpga の計画 — 必須 50 ⊂ 入門 100 ⊂ 中級 200 の 200 題。目次 (README) はここと題のファイルから npm run toc が組む。
+# device は動かす所: SIM = PC の Verilator だけ / WEB = ブラウザの soft-fpga / PICO = Pico 2 の Soft-FPGA / FPGA = 実物の FPGA。
+- { id: 0-1, tier: 50, board: —, title: FPGA と Soft-FPGA の違い — 回路を並べる物と、回路を計算で真似る物 }
+- { id: 0-2, tier: 50, board: —, device: SIM, title: 道具を入れる — Verilator と Pico SDK を Docker で }
+- { id: 0-3, tier: 50, board: BB, device: PICO, title: 3.3 V の決まり — Pico 2 と FPGA のピンに 5 V を入れない }
+- { id: 0-4, tier: 50, board: BB, device: PICO, title: AD3 の Logic をつなぐ — DIO を 3.3 V にして GND を共通に }
+- { id: 0-5, tier: 50, board: —, device: WEB, title: 最初の 1 本 — ブラウザの soft-fpga でカウンタの波形を見る }
+- { id: 0-6, tier: 100, board: —, device: SIM, title: 波形を見る道具 — VCD と波形ビューア }
+- { id: 0-7, tier: 100, board: —, device: SIM, title: Verilator の lint で書き間違いを見つける }
+- { id: 0-8, tier: 200, board: —, device: SIM, title: Windows (MSYS2) で道具を入れる }
+- { id: 0-9, tier: 200, board: BB, device: PICO, title: Debug Probe で Pico 2 に書き込み、UART のログを見る }
+- { id: 0-10, tier: 200, board: —, device: FPGA, title: 開いた道具で FPGA を合成する — Yosys と nextpnr }
+- { id: 0-11, tier: 200, board: —, device: SIM, title: CI で回帰を回す — GitHub Actions で Verilator の試験 }
+- { id: 1-1, tier: 50, board: —, device: SIM, title: assign で AND・OR・NOT — 論理図と Verilog を並べる }
+- { id: 1-2, tier: 50, board: —, device: SIM, title: module と port — 回路を箱にして呼ぶ }
+- { id: 1-3, tier: 50, board: —, device: SIM, title: ビットの束 — 幅のある信号と連結・切り出し }
+- { id: 1-4, tier: 50, board: —, device: SIM, title: マルチプレクサ — 条件演算子で 2 つから 1 つを選ぶ }
+- { id: 1-5, tier: 50, board: —, device: SIM, title: always @(*) と case — デコーダ }
+- { id: 1-6, tier: 50, board: —, device: SIM, title: 半加算器と全加算器 }
+- { id: 1-7, tier: 50, board: —, device: SIM, title: 4 ビットの加算器 — 全加算器を 4 つ並べるのと + 演算子を比べる }
+- { id: 1-8, tier: 100, board: —, device: SIM, title: 7 セグメントのデコーダ }
+- { id: 1-9, tier: 100, board: —, device: SIM, title: 比較器 — 一致と大小 }
+- { id: 1-10, tier: 100, board: —, device: SIM, title: プライオリティエンコーダ }
+- { id: 1-11, tier: 100, board: —, device: SIM, title: 符号付きの数 — 2 の補数と signed }
+- { id: 1-12, tier: 100, board: —, device: SIM, title: parameter と generate — 幅を変えられる部品 }
+- { id: 1-13, tier: 200, board: —, device: SIM, title: ラッチを作ってしまう書き方 — else の無い if }
+- { id: 1-14, tier: 200, board: —, device: SIM, title: バレルシフタ }
+- { id: 1-15, tier: 200, board: —, device: SIM, title: 桁上げ先見の加算器 — リップルと段数を比べる }
+- { id: 1-16, tier: 200, board: —, device: SIM, title: ALU — 加減算・論理・フラグ }
+- { id: 1-17, tier: 200, board: —, device: SIM, title: 3 ステートと双方向のピン (inout) }
+- { id: 1-18, tier: 200, board: —, device: SIM, title: function と localparam で書き直す }
+- { id: 2-1, tier: 50, board: —, device: SIM, title: D フリップフロップ — always @(posedge clk) }
+- { id: 2-2, tier: 50, board: —, device: SIM, title: ノンブロッキング代入 — ブロッキング代入との違いを波形で見る }
+- { id: 2-3, tier: 50, board: —, device: SIM, title: リセット — 同期と非同期 }
+- { id: 2-4, tier: 50, board: —, device: WEB, title: 2 進カウンタ }
+- { id: 2-5, tier: 50, board: —, device: SIM, title: クロックイネーブル — クロックを分けずに遅く動かす }
+- { id: 2-6, tier: 50, board: —, device: SIM, title: シフトレジスタ }
+- { id: 2-7, tier: 50, board: —, device: WEB, title: 分周して LED を 1 Hz で点滅させる }
+- { id: 2-8, tier: 100, board: —, device: SIM, title: アップダウンカウンタとロード }
+- { id: 2-9, tier: 100, board: —, device: WEB, title: 10 進カウンタと桁上げ — 2 桁の 7 セグ }
+- { id: 2-10, tier: 100, board: —, device: SIM, title: 立ち上がりの検出 — 1 クロックのパルスを作る }
+- { id: 2-11, tier: 100, board: —, device: SIM, title: PWM — カウンタと比較器 }
+- { id: 2-12, tier: 200, board: —, device: SIM, title: リングカウンタとジョンソンカウンタ }
+- { id: 2-13, tier: 200, board: —, device: WEB, title: LFSR — 擬似乱数 }
+- { id: 2-14, tier: 200, board: —, device: SIM, title: グレイコードのカウンタ }
+- { id: 2-15, tier: 200, board: BB, device: PICO, title: 7 セグのダイナミック点灯 }
+- { id: 2-16, tier: 200, board: BB, device: PICO, title: ロータリーエンコーダを読む }
+- { id: 2-17, tier: 200, board: —, device: SIM, title: 分周した信号をクロックに使わない理由 }
+- { id: 2-18, tier: 200, board: —, device: SIM, title: 初期値 — initial とリセットの違い }
+- { id: 2-19, tier: 200, board: —, device: SIM, title: パイプライン — 長い組み合わせをレジスタで切る }
+- { id: 3-1, tier: 50, board: —, device: SIM, title: テストベンチ — クロックとリセットを C++ から与える }
+- { id: 3-2, tier: 50, board: —, device: SIM, title: 波形を書き出して読む }
+- { id: 3-3, tier: 50, board: —, device: SIM, title: 期待値と比べる — 自分で合否を言うテストベンチ }
+- { id: 3-4, tier: 50, board: —, device: SIM, title: 全部の入力を試す — 加算器の全数検査 }
+- { id: 3-5, tier: 100, board: —, device: SIM, title: $display でログを出す }
+- { id: 3-6, tier: 100, board: —, device: SIM, title: Verilog で書くテストベンチと Icarus Verilog }
+- { id: 3-7, tier: 100, board: —, device: SIM, title: cocotb — Python で試験を書く }
+- { id: 3-8, tier: 100, board: —, device: SIM, title: assert — 起きてはいけないことを書く }
+- { id: 3-9, tier: 200, board: —, device: SIM, title: 乱数で試す }
+- { id: 3-10, tier: 200, board: —, device: SIM, title: カバレッジ — 試していない行を見つける }
+- { id: 3-11, tier: 200, board: —, device: SIM, title: X と Z — 2 値のシミュレータと 4 値のシミュレータ }
+- { id: 3-12, tier: 200, board: —, device: SIM, title: 同じ時刻の中の順番とレース }
+- { id: 3-13, tier: 200, board: —, device: SIM, title: 参照モデルと突き合わせる — C++ のモデルと RTL }
+- { id: 3-14, tier: 200, board: —, device: SIM, title: プロトコルの E2E 回帰 — UART の字を流して確かめる }
+- { id: 3-15, tier: 200, board: —, device: SIM, title: 形式検証の入口 — カウンタの性質を証明する }
+- { id: 3-16, tier: 200, board: —, device: SIM, title: シミュレーションの速さを測る — 1 秒に何クロックか }
+- { id: 4-1, tier: 50, board: —, device: WEB, title: soft-fpga の仕組み — Verilog → Verilator → Emscripten → ブラウザ }
+- { id: 4-2, tier: 50, board: —, device: WEB, title: カウンタの 8 ビットをロジックアナライザの画面で見る }
+- { id: 4-3, tier: 50, board: —, device: WEB, title: 自分の Verilog に差し替えてビルドする }
+- { id: 4-4, tier: 50, board: —, device: WEB, title: 信号機の状態機械 — 今の状態が図で光る }
+- { id: 4-5, tier: 100, board: —, device: WEB, title: 見たい信号を外へ引き出す — 最上位の薄いラッパ }
+- { id: 4-6, tier: 100, board: —, device: WEB, title: UART のループバックを波形で見る }
+- { id: 4-7, tier: 100, board: —, device: WEB, title: ボタンとスイッチを画面に付ける — JS から入力を与える }
+- { id: 4-8, tier: 200, board: —, device: WEB, title: リングバッファと TypedArray — 毎クロック JS を呼ばない }
+- { id: 4-9, tier: 200, board: —, device: WEB, title: Web Worker で回す — 画面を止めない }
+- { id: 4-10, tier: 200, board: —, device: WEB, title: メモリが伸びるとビューが切れる }
+- { id: 4-11, tier: 200, board: —, device: WEB, title: 6502 の内部を見る — マイクロシーケンサとバス }
+- { id: 4-12, tier: 200, board: —, device: WEB, title: 8080 と CP/M — I/O のバスを見る }
+- { id: 4-13, tier: 200, board: —, device: WEB, title: GitHub Pages に載せる }
+- { id: 4-14, tier: 200, board: —, device: WEB, title: 命令エミュレータに無い信号 — T ステートを数える }
+- { id: 5-1, tier: 50, board: —, device: PICO, title: Pico 2 で Verilog を動かす仕組み — Verilator の C++ を Pico SDK でビルドする }
+- { id: 5-2, tier: 50, board: BB, device: PICO, title: カウンタを Pico 2 で回して LED を点ける }
+- { id: 5-3, tier: 50, board: BB, device: PICO, title: Verilog の入出力を GPIO につなぐ — 入力を読み、eval し、出力を書く }
+- { id: 5-4, tier: 50, board: BB, device: PICO, title: DIP スイッチと LED で AND・OR を確かめる }
+- { id: 5-5, tier: 50, board: BB, device: PICO, title: Soft-FPGA のクロックを測る — 1 クロックに何 µs かかるか }
+- { id: 5-6, tier: 50, board: BB, device: PICO, title: 回路の規模でクロックは変わる — カウンタと TD4 で比べる }
+- { id: 5-7, tier: 50, board: BB, device: PICO, title: クロックを固定する — タイマ割り込みで一定の間隔で回す }
+- { id: 5-8, tier: 50, board: BB, device: PICO, title: 4 ビット CPU の TD4 を動かす — DIP スイッチで入力、LED で出力 }
+- { id: 5-9, tier: 100, board: BB, device: PICO, title: 固定できるクロックの上限 — いちばん重い 1 クロックより長い周期を選ぶ }
+- { id: 5-10, tier: 100, board: BB, device: PICO, title: クロックの周期のばらつき (ジッタ) を測る }
+- { id: 5-11, tier: 100, board: BB, device: PICO, title: 精密なクロック — PWM のハードウェアで刻み、その割り込みで回す }
+- { id: 5-12, tier: 100, board: BB, device: PICO, title: 水晶の精度を測る — 1 Hz を出して AD3 で ppm を見る }
+- { id: 5-13, tier: 100, board: —, device: PICO, title: Verilator のランタイムを Pico で通す — 削る所と差し替える所 }
+- { id: 5-14, tier: 100, board: BB, device: PICO, title: USB シリアルで内部の信号を出す }
+- { id: 5-15, tier: 100, board: BB, device: PICO, title: 7 セグと押しボタンを付ける }
+- { id: 5-16, tier: 100, board: BB, device: PICO, title: ブラウザと Pico 2 で同じ Verilog を動かして波形を比べる }
+- { id: 5-17, tier: 200, board: BB, device: PICO, title: 外の基準にクロックを合わせる — 32.768 kHz の発振器と GPS の 1PPS }
+- { id: 5-18, tier: 200, board: BB, device: PICO, title: 外から来るクロックで 1 歩ずつ動かす }
+- { id: 5-19, tier: 200, board: BB, device: PICO, title: 2 つのコアで回す — コア 1 を eval 専用にする }
+- { id: 5-20, tier: 200, board: BB, device: PICO, title: 速い所を PIO に任せる — UART の送信 }
+- { id: 5-21, tier: 200, board: BB, device: PICO, title: 最適化で何倍速くなるか }
+- { id: 5-22, tier: 200, board: —, device: PICO, title: 結線の表でゲートを真似る — Verilog を使わない方式 }
+- { id: 6-1, tier: 50, board: —, device: SIM, title: 状態機械の書き方 — 状態のレジスタと、次の状態の case }
+- { id: 6-2, tier: 50, board: BB, device: PICO, title: 信号機 — 青・黄・赤と歩行者ボタン }
+- { id: 6-3, tier: 50, board: BB, device: PICO, title: 押しボタンのチャタリングを取る }
+- { id: 6-4, tier: 100, board: —, device: WEB, title: 系列検出 — 1011 を見つける (ムーアとミーリー) }
+- { id: 6-5, tier: 100, board: —, device: SIM, title: 状態の符号 — 2 進・ワンホット・グレイ }
+- { id: 6-6, tier: 100, board: BB, device: PICO, title: 時間を持つ状態機械 — 長押しと短押し }
+- { id: 6-7, tier: 100, board: BB, device: PICO, title: 電子サイコロ }
+- { id: 6-8, tier: 100, board: —, device: SIM, title: 状態機械とデータパスを分ける — 掛け算を足し算の繰り返しで }
+- { id: 6-9, tier: 200, board: —, device: WEB, title: 自動販売機 }
+- { id: 6-10, tier: 200, board: —, device: SIM, title: valid と ready の受け渡し }
+- { id: 6-11, tier: 200, board: —, device: SIM, title: 定義していない状態から戻る }
+- { id: 6-12, tier: 200, board: —, device: SIM, title: ROM で状態機械を作る — マイクロプログラム }
+- { id: 6-13, tier: 200, board: BB, device: PICO, title: 時報の状態遷移を Verilog に移す — 440 Hz を 3 回数えて 880 Hz }
+- { id: 6-14, tier: 200, board: BB, device: PICO, title: キーパッドの走査 }
+- { id: 6-15, tier: 200, board: BB, device: PICO, title: 文字の LCD を初期化する手順 }
+- { id: 6-16, tier: 200, board: —, device: SIM, title: 状態遷移図と Verilog を突き合わせる }
+- { id: 7-1, tier: 50, board: BB, device: PICO, title: UART の送信 — ボーレートの分周とシフトレジスタ }
+- { id: 7-2, tier: 50, board: BB, device: PICO, title: UART の受信 — 16 倍で刻んでビットの真ん中を読む }
+- { id: 7-3, tier: 50, board: BB, device: PICO, title: AD3 の Protocol で UART の字を読む }
+- { id: 7-4, tier: 100, board: BB, device: PICO, title: SPI のマスタ }
+- { id: 7-5, tier: 100, board: BB, device: PICO, title: I2C のマスタ — 温度センサーを読む }
+- { id: 7-6, tier: 100, board: BB, device: PICO, title: ボーレートのずれは何 % まで許されるか }
+- { id: 7-7, tier: 100, board: BB, device: PICO, title: エコーバック — 受けた字を返す }
+- { id: 7-8, tier: 200, board: BB, device: PICO, title: SPI のスレーブ — 74HC595 を真似る }
+- { id: 7-9, tier: 200, board: BB, device: PICO, title: I2C のスレーブ }
+- { id: 7-10, tier: 200, board: BB, device: PICO, title: FIFO を挟む — 受信の取りこぼしを防ぐ }
+- { id: 7-11, tier: 200, board: BB, device: PICO, title: テキストのプロトコルを解く — RUP }
+- { id: 7-12, tier: 200, board: BB, device: FPGA, title: WS2812 — 800 kHz のタイミングを作る }
+- { id: 7-13, tier: 200, board: BB, device: PICO, title: 赤外線リモコンの受信 }
+- { id: 7-14, tier: 200, board: BB, device: FPGA, title: PS/2 キーボード }
+- { id: 7-15, tier: 200, board: BB, device: PICO, title: マンチェスタ符号 }
+- { id: 7-16, tier: 200, board: —, device: SIM, title: CRC を回路で計算する }
+- { id: 7-17, tier: 200, board: BB, device: PICO, title: Soft-FPGA の UART は何 bps まで出るか }
+- { id: 8-1, tier: 50, board: —, title: FPGA の中身 — LUT とフリップフロップと配線 }
+- { id: 8-2, tier: 50, board: —, device: FPGA, title: おすすめの FPGA ボード — 規模・出来ること・価格・情報の多さで比べる }
+- { id: 8-3, tier: 50, board: BB, device: FPGA, title: ボードと書き込みの道具をつなぐ }
+- { id: 8-4, tier: 50, board: BB, device: FPGA, title: LED の点滅 — 合成・配置配線・書き込みの一巡り }
+- { id: 8-5, tier: 50, board: BB, device: FPGA, title: ピンの割り当て — 制約ファイル }
+- { id: 8-6, tier: 50, board: BB, device: FPGA, title: Pico 2 で動かした同じ Verilog を FPGA で動かす }
+- { id: 8-7, tier: 50, board: BB, device: FPGA, title: Soft-FPGA と FPGA の速さを AD3 で比べる }
+- { id: 8-8, tier: 100, board: —, device: FPGA, title: 合成の報告を読む — LUT とフリップフロップの数 }
+- { id: 8-9, tier: 100, board: BB, device: FPGA, title: 押しボタンと 7 セグをつなぐ }
+- { id: 8-10, tier: 100, board: BB, device: FPGA, title: PLL でクロックを作る }
+- { id: 8-11, tier: 100, board: —, device: FPGA, title: ブロック RAM }
+- { id: 8-12, tier: 100, board: —, device: FPGA, title: 電源を切ると消える書き込みと、残る書き込み }
+- { id: 8-13, tier: 100, board: BB, device: FPGA, title: ブレッドボードに出す信号は 3 MHz まで — 速いクロックは分周して出す }
+- { id: 8-14, tier: 200, board: —, device: FPGA, title: LUT 1 個に何が入るか — 4 入力の関数 }
+- { id: 8-15, tier: 200, board: —, device: FPGA, title: 桁上げの専用の回路 }
+- { id: 8-16, tier: 200, board: —, device: FPGA, title: FPGA の中にロジックアナライザを入れる }
+- { id: 8-17, tier: 200, board: BB, device: FPGA, title: ピンの駆動の強さと立ち上がりを波形で見る }
+- { id: 8-18, tier: 200, board: —, device: FPGA, title: 開いた道具とメーカーの道具で結果を比べる }
+- { id: 8-19, tier: 200, board: —, device: FPGA, title: HDMI に絵を出す }
+- { id: 8-20, tier: 200, board: BB, device: FPGA, title: 5 V の回路とつなぐ — レベル変換 }
+- { id: 8-21, tier: 200, board: —, device: FPGA, title: 配置を図で見る }
+- { id: 9-1, tier: 50, board: —, device: SIM, title: セットアップとホールド — クロックの前後で動かしてはいけない時間 }
+- { id: 9-2, tier: 100, board: BB, device: FPGA, title: 外から来る信号はフリップフロップ 2 段で受ける }
+- { id: 9-3, tier: 100, board: —, device: FPGA, title: 最高の動作周波数 — タイミングの報告を読む }
+- { id: 9-4, tier: 100, board: BB, device: FPGA, title: 伝搬の遅れを測る — インバータを並べたリングオシレータ }
+- { id: 9-5, tier: 100, board: BB, device: FPGA, title: グリッチ — 組み合わせの出力に出る細いパルス }
+- { id: 9-6, tier: 200, board: BB, device: FPGA, title: メタステーブルを見る }
+- { id: 9-7, tier: 200, board: —, device: FPGA, title: クロックをまたぐ 1 ビット }
+- { id: 9-8, tier: 200, board: —, device: FPGA, title: クロックをまたぐバス — グレイコードと非同期 FIFO }
+- { id: 9-9, tier: 200, board: —, device: FPGA, title: タイミングの制約を書く }
+- { id: 9-10, tier: 200, board: —, device: FPGA, title: パイプラインで最高の周波数を上げる }
+- { id: 9-11, tier: 200, board: —, device: FPGA, title: リセットの解除をクロックに合わせる }
+- { id: 9-12, tier: 200, board: BB, device: FPGA, title: クロックのスキューとジッタ }
+- { id: 9-13, tier: 200, board: BB, device: FPGA, title: 外の IC とのセットアップ — 入出力の遅れ }
+- { id: 9-14, tier: 200, board: BB, device: PICO, title: Soft-FPGA にタイミングはあるか — 計算の順と遅れ }
+- { id: 10-1, tier: 50, board: —, device: SIM, title: ROM — 配列と $readmemh }
+- { id: 10-2, tier: 100, board: —, device: SIM, title: RAM — クロックに合わせて読み書きする }
+- { id: 10-3, tier: 100, board: —, device: SIM, title: FIFO }
+- { id: 10-4, tier: 100, board: —, device: SIM, title: 掛け算 — 演算子と、シフトと加算の繰り返し }
+- { id: 10-5, tier: 200, board: —, device: SIM, title: 固定小数点 }
+- { id: 10-6, tier: 200, board: —, device: SIM, title: 割り算 }
+- { id: 10-7, tier: 200, board: —, device: SIM, title: FIR フィルタ }
+- { id: 10-8, tier: 200, board: BB, device: FPGA, title: DDS — 位相を足し続けて正弦波を作る }
+- { id: 10-9, tier: 200, board: BB, device: FPGA, title: 1 ビットの ΔΣ DAC — RC で均して AD3 のスペクトルで見る }
+- { id: 10-10, tier: 200, board: BB, device: FPGA, title: PWM の DAC とひずみ }
+- { id: 10-11, tier: 200, board: —, device: SIM, title: CORDIC }
+- { id: 10-12, tier: 200, board: BB, device: FPGA, title: 周波数カウンタ }
+- { id: 10-13, tier: 200, board: —, device: FPGA, title: 読み口と書き口が別の RAM }
+- { id: 10-14, tier: 200, board: —, device: SIM, title: 64 ビットで盤面を持つ — ビットボードの演算 }
+- { id: 11-1, tier: 100, board: —, device: WEB, title: TD4 の構成 — 4 ビットのレジスタ・加算器・ROM }
+- { id: 11-2, tier: 100, board: —, device: WEB, title: TD4 の命令を 1 つずつ波形で追う }
+- { id: 11-3, tier: 200, board: BB, device: PICO, title: TD4 のプログラムを書く — タイマー }
+- { id: 11-4, tier: 200, board: —, title: TD4 を 74 シリーズの IC で組んだ物と比べる }
+- { id: 11-5, tier: 200, board: —, device: SIM, title: TD4 に命令を足す }
+- { id: 11-6, tier: 200, board: —, device: SIM, title: アセンブラを作る }
+- { id: 11-7, tier: 200, board: —, device: WEB, title: 6502 を読む — Apple-I の wozmon を動かす }
+- { id: 11-8, tier: 200, board: —, device: WEB, title: 6502 で Integer BASIC を動かす }
+- { id: 11-9, tier: 200, board: —, device: WEB, title: 8080 で CP/M 2.2 を動かす }
+- { id: 11-10, tier: 200, board: —, device: SIM, title: 割り込み }
+- { id: 11-11, tier: 200, board: —, device: SIM, title: 自分の 8 ビット CPU を設計する }
+- { id: 11-12, tier: 200, board: BB, device: FPGA, title: 6502 を実物の FPGA に載せる }
+- { id: 12-1, tier: 200, board: —, device: SIM, title: リバーシのアクセラレータ — 合法手と裏返しを回路で }
+- { id: 12-2, tier: 200, board: BB, device: PICO, title: リバーシを UART で PC と対戦させる }
+- { id: 12-3, tier: 200, board: —, device: WEB, title: Pong — ゲートだけで動くゲーム }
+- { id: 12-4, tier: 200, board: BB, device: FPGA, title: 時計 — 32.768 kHz を数えて時分秒を出す }
+- { id: 12-5, tier: 200, board: BB, device: FPGA, title: DDS の信号発生器 }
+- { id: 12-6, tier: 200, board: BB, device: FPGA, title: 小さいロジックアナライザを作る }

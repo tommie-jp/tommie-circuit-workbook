@@ -29,6 +29,8 @@ const DEVICES = {
   nanovna: { required: true, values: new Set(['LV64', 'H4', 'V2', 'SA']) },
   denken: { required: false, values: new Set() },
   etc: { required: false, values: new Set() },
+  // FPGA の冊は動かす所。SIM = PC の Verilator だけ / WEB = ブラウザの soft-fpga / PICO = Pico 2 の Soft-FPGA / FPGA = 実物。組まない題には書かない。
+  fpga: { required: false, values: new Set(['SIM', 'WEB', 'PICO', 'FPGA']) },
 };
 
 const FILE_NAME = /^(\d{2})-[a-z0-9]+(?:-[a-z0-9]+)*\.md$/;
