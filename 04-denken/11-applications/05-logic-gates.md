@@ -32,17 +32,17 @@ style:
   standard: jis
   pitch: 1.4
 parts:
-  VCC: vcc a1
+  VCC: vcc a1 5V
   SA: switch a1 c1
   RA: resistor c1 e1 10k
   GA: ground e1
-  VCC: vcc g1
+  VCC: vcc g1 5V
   SB: switch g1 j1
   RB: resistor j1 l1 10k
   GB: ground l1
-  U3: not c7 74HC04
-  U1: and f7 74HC08
-  U2: or i7 74HC32
+  U3A: not c7 74HC04
+  U1A: and f7 74HC08
+  U2A: or i7 74HC32
   R3: resistor c9 c11 1k
   D3: led c11 c13
   G3: ground c13
@@ -53,15 +53,15 @@ parts:
   D2: led i11 i13
   G2: ground i13
 wires:
-  - c1 -- c3 -- U3.in
-  - U1.a -| c3
-  - U2.a -| c3
+  - c1 -- c3 -- U3A.in
+  - U1A.a -| c3
+  - U2A.a -| c3
   - j1 -- j5
-  - U2.b -| j5
-  - U1.b -| j5
-  - U3.out -- c9
-  - U1.out -- f9
-  - U2.out -- i9
+  - U2A.b -| j5
+  - U1A.b -| j5
+  - U3A.out -- c9
+  - U1A.out -- f9
+  - U2A.out -- i9
 notes:
   - text b2 blue: A
   - text i2 blue: B

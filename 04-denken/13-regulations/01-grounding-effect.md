@@ -37,7 +37,7 @@ parts:
   Rbody: resistor c3 g3 1k
   S1: switch c5 e5
   Rground: resistor e5 g5 100
-  M1: voltmeter a7 a9 l=$\mathrm{CH1}$
+  M1: voltmeter c7 g7 l=$\mathrm{CH1}$
   G1: ground g1
 wires:
   - a1 -- c1
@@ -45,8 +45,8 @@ wires:
   - c3 -- c5
   - g3 -- g5
   - g1 -- g3
-  - a7 |- c3
-  - a9 |- g3
+  - c5 -- c7
+  - g5 -- g7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/13-regulations/circuit/01-grounding-effect-1.svg)

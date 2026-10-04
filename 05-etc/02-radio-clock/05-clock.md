@@ -1392,7 +1392,7 @@ parts:
   U18: dip14 @ e28 CD4069UB
   U19: dip16 @ e37 CD4040B
   U20: dip16 @ e47 74HC163
-  U46: dip14 @ e56
+  U46: dip14 @ e56 74HC02
   X1: crystal/cylinder c6 c10 32.768k
   Rf: resistor b10 b13 10M
   Rd: resistor e6 e13 270k
@@ -1453,8 +1453,6 @@ wires:
   - d5 -- d6 blue
   - g5 -- g6 blue
   - g29 -- g30 white
-notes:
-  - text: U46 は 74HC02 (足の名前の表に無いので番号だけ)
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/05-clock-1.svg)
@@ -1842,7 +1840,7 @@ parts:
     pins: [MT2, MT1, MT0, MU3, MU0, LDHU, SET, O8, LDHT, WH]
   U38: dip14 @ e3 74HC32
   U39: dip14 @ e11 74HC32
-  U43: dip14 @ e19
+  U43: dip14 @ e19 74HC02
 wires:
   - PS.+5V -- +t1 red
   - PS.GND -- -t1 black
@@ -1892,8 +1890,6 @@ wires:
   - h20 -- h23 brown
   - h8 -- h10 yellow
   - i13 -- i15 gray
-notes:
-  - text: U43 は 74HC02 (足の名前の表に無いので番号だけ)
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/05-clock-3.svg)
@@ -2060,7 +2056,7 @@ parts:
   C15: capacitor/electrolytic d15 d18 10u
   U45: dip14 @ e24 CD40106B
   U41: dip14 @ e34 74HC32
-  U44: dip14 @ e44
+  U44: dip14 @ e44 74HC74
 wires:
   - PS.+5V -- +t1 red
   - PS.GND -- -t1 black
@@ -2115,8 +2111,6 @@ wires:
   - i35 -- i37 pink
   - d40 -- d41 purple
   - i33 -- i34 white
-notes:
-  - text: U44 は 74HC74 (足の名前の表に無いので番号だけ)
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/05-clock-4.svg)

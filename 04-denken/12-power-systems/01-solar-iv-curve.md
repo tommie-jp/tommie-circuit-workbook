@@ -73,7 +73,7 @@ parts:
 wires:
   - PV1.+ -- a3 red
   - PV1.- -- -t5 black
-  - AD.1+ -- b3 orange [h10]
+  - AD.1+ -- b3 yellow [h10]
   - AD.1- -- -t9 black
   - AD.2+ -- a11 red
   - AD.2- -- a14 orange

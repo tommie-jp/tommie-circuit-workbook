@@ -37,17 +37,19 @@ parts:
   D3: diode e16 c13 1N4148
   D4: diode g13 e10 1N4148
   D5: diode g13 e16 1N4148
-  RL2: resistor c13 g13 1.5k
-  M2: voltmeter c15 g15 l=$\mathrm{CH2}$
+  RL2: resistor c18 g18 1.5k
+  M2: voltmeter c20 g20 l=$\mathrm{CH2}$
   G1: ground g1
+  G2: ground g16
 wires:
   - c1 -- a1 -- a10 -- e10
-  - g1 -- i1 -- i16 -- e16
+  - e16 -- g16
   - g1 -- g3
   - c3 -- c5
   - g3 -- g5
-  - c13 -- c15
-  - g13 -- g15
+  - c13 -- c18 -- c20
+  - g13 -- i13 -- i18 -- g18
+  - g18 -- g20
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/01-rectifiers-1.svg)

@@ -202,7 +202,7 @@ notes:
   - arrow f21 e21 blue
   - text f21 tiny blue bold right: 約 3.4 V
   - arrow f23 e23 blue
-  - text f23 tiny blue bold right: 約 0.34 V
+  - text f23 tiny blue bold left: 約 0.34 V
   - arrow f27 e27 blue
   - text f27 tiny blue bold right: 約 3 V
   - circle c10 green

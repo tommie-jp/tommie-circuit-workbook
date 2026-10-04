@@ -111,7 +111,7 @@ W1 の差は 0.4 % しかない。線路の電圧降下 (I r) は受電端の電
 title: 図3 S1 を開く (力率 1) — 線電流 (CH2) 5.0 mA、P は Math の Avg で 1.25 mW
 time: 200us/div
 trigger: ch1 rising 0V
-ch1: {wave: sine 1kHz 0.5V, range: 200mV/div}
+ch1: {wave: sine 1kHz 0.5V, range: 200mV/div, position: 1div}
 ch2: {wave: sine 1kHz 50mV, range: 20mV/div}
 math: {expr: ch1 * ch2 / 10, unit: W, range: 1mW/div, position: -2div}
 measure: [vmax, rms, avg, phase]
@@ -123,7 +123,7 @@ measure: [vmax, rms, avg, phase]
 title: 図4 S1 を閉じる (力率 0.73) — 線電流 (CH2) は 6.9 mA に増え、P は同じ
 time: 200us/div
 trigger: ch1 rising 0V
-ch1: {wave: sine 1kHz 0.5V, range: 200mV/div}
+ch1: {wave: sine 1kHz 0.5V, range: 200mV/div, position: 1div}
 ch2: {wave: sine 1kHz 68.7mV phase 43.3deg, range: 20mV/div}
 math: {expr: ch1 * ch2 / 10, unit: W, range: 1mW/div, position: -2div}
 measure: [vmax, rms, avg, phase]

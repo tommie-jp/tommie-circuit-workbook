@@ -44,7 +44,7 @@ parts:
   G1: ground j1
 wires:
   - e3 |- U1.+
-  - VR1.w -| U1.-
+  - VR1.w |- U1.-
   - U1.out -| e9
   - g9 |- Q1.B
   - e13 |- Q1.C

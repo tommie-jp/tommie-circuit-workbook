@@ -389,7 +389,7 @@ notes:
   - text e4 tiny right: GND
   - text e4f0 tiny right: +5V
   - text f4 tiny right: +5V
-  - text b3 small left: B だけ +5V で、E440 のたびに値 2 を読み込む
+  - text i3 small left: B だけ +5V で、E440 のたびに値 2 を読み込む
   - text c18f9 tiny center: "1"
   - text d18g9 tiny center: "2"
   - text c20g7 tiny center: "3"
@@ -656,7 +656,7 @@ wires:
   - +t44 -- +b44 red
   - -t44 -- -b44 black
   - +t31 -- +t33 red
-  - -t31 -- -t33 black
+  - -t31 -- -t34 black
   - +b31 -- +b33 red
   - -b31 -- -b33 black
   - d32 -- g32 green
@@ -952,7 +952,7 @@ wires:
   - +t31 -- +t33 red
   - -t31 -- -t33 black
   - +b31 -- +b33 red
-  - -b31 -- -b33 black
+  - -b30 -- -b35 black
   - d23 -- g23 green
   - d28 -- g28 green
   - d15 -- g15 green
@@ -1181,7 +1181,7 @@ wires:
   - +t44 -- +b44 red
   - -t44 -- -b44 black
   - +t31 -- +t33 red
-  - -t31 -- -t33 black
+  - -t31 -- -t34 black
   - +b31 -- +b33 red
   - -b31 -- -b33 black
   - d40 -- g40 orange

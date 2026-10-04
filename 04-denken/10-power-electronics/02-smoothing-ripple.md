@@ -30,19 +30,21 @@ style:
   standard: jis
 parts:
   W1: sine c1 g1 l=$\mathrm{W1}$
-  D2: diode e10 c13 1N4148
-  D3: diode e16 c13 1N4148
-  D4: diode g13 e10 1N4148
-  D5: diode g13 e16 1N4148
-  C1: ecap c15 g15 100u
-  M1: voltmeter c17 g17 l=$\mathrm{CH1}$
-  RL: resistor c19 g19 1.5k
+  D2: diode e4 c7 1N4148
+  D3: diode e10 c7 1N4148
+  D4: diode g7 e4 1N4148
+  D5: diode g7 e10 1N4148
+  C1: ecap c12 g12 100u
+  M1: voltmeter c14 g14 l=$\mathrm{CH1}$
+  RL: resistor c16 g16 1.5k
   G1: ground g1
+  G2: ground g10
 wires:
-  - c1 -- a1 -- a10 -- e10
-  - g1 -- i1 -- i16 -- e16
-  - c13 -- c15 -- c17 -- c19
-  - g13 -- g15 -- g17 -- g19
+  - c1 -- a1 -- a4 -- e4
+  - e10 -- g10
+  - c7 -- c12 -- c14 -- c16
+  - g7 -- i7 -- i12 -- g12
+  - g12 -- g14 -- g16
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/02-smoothing-ripple-1.svg)

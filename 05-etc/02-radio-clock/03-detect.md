@@ -315,7 +315,7 @@ wires:
   - d11 -- f11 green
   - g11 -- g14 green
   - h8 -- h13 orange
-  - IN.IN -- i2 white
+  - IN.IN -- j2 white
   - IN.GND -- -b1 black
   - LINK.AF -- j12 white
   - LINK.VB -- i14 green
@@ -629,10 +629,10 @@ wires:
   - PS.+5V -- +t1 red
   - a16 -- +t16 red
   - PS.GND -- -t1 black
-  - FROM8.P880 -- d27 orange
+  - FROM8.P880 -- e27 orange
   - FROM8.TH -- b18 purple
   - FROM8.GND -- -t21 black
-  - FROM4.P440 -- g26 orange
+  - FROM4.P440 -- h26 orange
   - FROM4.TH -- i17 purple
   - FROM4.GND -- -b21 black
   - T8.T880 -- b17 white
@@ -697,7 +697,8 @@ wires:
   - e4 -- f4 orange
   - P_440 -- g2 white
   - g10 -- g9 white
-  - g9 -- f7 white
+  - g9 -- f9 white
+  - f9 -- f7 white
   - g5 -- g6 white
   - g5 -- h5 white
   - h5 -- h7 white
@@ -711,7 +712,8 @@ wires:
   - f15 -- f19 orange
   - f19 -- g19 orange
   - h13 -- h14 white
-  - h14 -- g16 white
+  - h14 -- g14 white
+  - g14 -- g16 white
   - h18 -- h17 white
   - h18 -- i18 white
   - i18 -- i16 white

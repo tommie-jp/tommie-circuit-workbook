@@ -156,7 +156,7 @@ wires:
   - U1.GND |- k14
 notes:
   - text i18 small: "RCO (PIN 15) は開放"
-  - text j4 small: "W1: AD3 の波形発生器"
+  - text j5 small: "W1: AD3 の波形発生器"
 style:
   grid: on
   pitch: 1.2
@@ -1064,9 +1064,9 @@ parts:
   GS: ground q19
   VCC: vcc d22 5V
   R30: resistor e22 g22 10k
-  CLR: port g24
-  S1: button h22 j22
-  GC: ground k22
+  CLR: port h24
+  S1: button i22 k22
+  GC: ground l22
   D7: diode g22 g20
   DQ1: port g18
 wires:
@@ -1084,8 +1084,9 @@ wires:
   - S3.in -| q19
   - d22 -- e22
   - g22 -- h22
-  - j22 -- k22
-  - g22 -- g24
+  - h22 -- i22
+  - k22 -- l22
+  - h22 -- h24
   - g20 -- g18
 notes:
   - text a4 small: "S3 は RUN の位置で描いた (OEn が L、Yn は R28 で H)"

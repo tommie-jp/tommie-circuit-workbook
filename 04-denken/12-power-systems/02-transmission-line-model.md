@@ -35,15 +35,15 @@ parts:
   Lline: inductor c3 e3 10m
   S1: switch c5 e5
   Rload: resistor e3 g3 100
-  M1: voltmeter a7 a9 l=$\mathrm{CH1}$
+  M1: voltmeter e7 g7 l=$\mathrm{CH1}$
   G1: ground g1
 wires:
   - a1 -- c1
   - a3 -- c3
   - c3 -- c5
   - e3 -- e5
-  - a7 |- e3
-  - a9 |- g3
+  - e5 -- e7
+  - g3 -- g7
   - g1 -- g3
 ```
 
