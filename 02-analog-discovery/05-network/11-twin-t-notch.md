@@ -110,6 +110,22 @@ wires:
 | Wavegen | W1: Amplitude 1 V |
 | Network | Start 150 Hz、Stop 15 kHz、Log、Steps 201 (谷が細いので点数を増やす)、Reference: Channel 1 |
 
+谷のすぐ手前、0.9 × f₀ = 1.432 kHz の 1 点を、オシロの時間波形で見たのが図3。
+H(0.9 f₀) の大きさは 0.0527 (−25.6 dB)、位相は −87.0° なので、CH2 は CH1 (振幅 1 V) の
+約 1/19 の 0.0527 V まで減り、山がほぼ 1/4 周期遅れる。f₀ ちょうどでは CH2 は理想の上では 0 V の
+一直線になる (実機は部品の誤差で数十 mV ほど残る)。
+
+```scope
+title: 図3 谷の手前 (1.432 kHz) — CH2 は CH1 の 1/19 まで減る
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1.432kHz 1V, range: 500mV/div}
+ch2: {wave: = 0.0527V * sin(2 * pi * 1.432kHz * t - 1.5184), range: 500mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/scope/11-twin-t-notch.svg)
+
 ## 見るべき値
 
 計算値。回路方程式から求めた伝達関数
@@ -124,7 +140,7 @@ H(jω) = (1 − (ωRC)²) / (1 − (ωRC)² + 4jωRC)。
 | 15.9 kHz (10×f₀) | −0.66 dB | +22.0° |
 
 ```graph
-title: 図3 1.59 kHz だけに深い谷 — 谷の前後で位相が −90° 付近から +90° 付近へ跳ぶ
+title: 図4 1.59 kHz だけに深い谷 — 谷の前後で位相が −90° 付近から +90° 付近へ跳ぶ
 x: 周波数 Hz log 150..15k
 y:
   - 利得 dB -50..0

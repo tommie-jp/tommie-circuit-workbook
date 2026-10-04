@@ -85,6 +85,23 @@ wires:
 | Wavegen | W1: Amplitude 1 V |
 | Network | Start 100 Hz、Stop 200 kHz、Log、Steps 101、Reference: Channel 1 |
 
+掃引の途中の f<sub>c</sub> (1.59 kHz) の 1 点を、オシロの時間波形で見たのが図3。2 段の伝達関数
+H = 1 / ((1 − x²) + j2.1x) (x = f / f<sub>c</sub>、負荷込み。図4 の式と同じ) を f<sub>c</sub> (x = 1) で計算すると、
+大きさ 1/2.1 = 0.476 (−6.44 dB)、位相 −90° になる。CH2 (C2 の電圧) は CH1 の 0.476 倍で、
+山が 1/4 周期 (629 µs ÷ 4 ≈ 157 µs) 遅れる。
+
+```scope
+title: 図3 1.59 kHz の 1 点 — CH2 は 0.476 倍で 157 µs (90°) 遅れる
+time: 100us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1.59kHz 1V, range: 500mV/div}
+ch2: {wave: ch1 | lc 1.59kHz 0.476, range: 500mV/div}
+cursors: [157us, 314us]
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/scope/09-two-stage-rc-40db.svg)
+
 ## 見るべき値
 
 計算値。負荷 (2 段目が 1 段目を引く効果) を含めて回路方程式から計算した値。
@@ -96,10 +113,10 @@ wires:
 | 15.9 kHz (10×f<sub>c</sub>) | −40.10 dB | −168.0° |
 | 159 kHz (100×f<sub>c</sub>) | −80.00 dB | −178.8° |
 
-図3 は 2 段 (負荷込み) と、5-1 の 1 段を同じ枠に重ねたもの。
+図4 は 2 段 (負荷込み) と、5-1 の 1 段を同じ枠に重ねたもの。
 
 ```graph
-title: 図3 2 段は 1 桁で −40 dB 落ちる (1 段は −20 dB)、fc で −6.44 dB・−90°
+title: 図4 2 段は 1 桁で −40 dB 落ちる (1 段は −20 dB)、fc で −6.44 dB・−90°
 x: 周波数 Hz log 100..200k
 y:
   - 利得 dB -100..0

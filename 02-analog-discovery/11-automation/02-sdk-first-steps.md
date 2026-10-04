@@ -49,6 +49,34 @@ wires:
 
 11-1 と全く同じ RC ローパス。1+ が入力 (W1)、2+ が出力 (R と C の中点)。
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (11-1 と同じ配線)
+board: half
+parts:
+  R1: resistor c5 c10 1k
+  C1: capacitor d10 d14 100n
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [GND, W1, 1+, 1-, 2+, 2-]
+wires:
+  - AD.GND -- -t3 black
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange [h10]
+  - AD.1- -- -t8 black
+  - AD.2+ -- a10 blue
+  - AD.2- -- -t12 black
+  - a14 -- -t14 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/11-automation/breadboard/02-sdk-first-steps.svg)
+
+R1 と C1 は 10 列で中点を共有する。1+ は入力 (5 列)、2+ は R1 と C1 の中点 (10 列)、1−・2− と C1 の下端は GND のレールへ。
+電源は使わず、W1 と Scope の信号だけを板に渡す (電流は 1 V / 1 kΩ = 1 mA 以下で、板の範囲に収まる)。
+
 ## 計器の設定
 
 Python スクリプトの中で全部設定するので、WaveForms 本体は起動しなくてよい
@@ -132,7 +160,7 @@ dwf.FDwfDeviceClose(hdwf)
 同じ 2 本を WaveForms の Scope の画面で 2 周期見るとこうなる。振幅は (最大値 − 最小値) / 2 なので、Vmax と Vmin を読む。
 
 ```scope
-title: 図2 1 kHz で Vout (CH2) の山は約 0.85 V で、入力 (CH1) の 1 V より低い
+title: 図3 1 kHz で Vout (CH2) の山は約 0.85 V で、入力 (CH1) の 1 V より低い
 time: 200us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1kHz 1V, range: 500mV/div}

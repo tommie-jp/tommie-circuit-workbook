@@ -38,13 +38,38 @@ wires:
 
 W1・W2 を 1 kΩ ずつで足し合わせ、CH1 (1 MΩ、ほとんど電流を取らない) で
 読む。合成した電圧はほぼ (W1 + W2) ÷ 2 になるので、CH1 に現れる 2 本は
-Wavegen の半分の **0.25 V** ずつ (図 2・3 はこの値で描いた)。
+Wavegen の半分の **0.25 V** ずつ (図 3・4 はこの値で描いた)。
 
 5 MHz は AD3 の入力帯域の内側だが、BNC アダプタ無し (2×15 ヘッダ) の帯域は
 9 MHz (−3 dB)・2.9 MHz (−0.5 dB) なので、ワイヤでつなぐと読みが 0.5〜3 dB の
 あいだで下がる (5 MHz での値は仕様書に無く、**未確認**)。BNC アダプタ有りなら
 −0.5 dB が 15 MHz なので 5 MHz はほぼ平らである。どちらも 2 本を分けて見る
 話には影響しない。
+
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1・W2 を 1 kΩ ずつで足す)
+board: half
+parts:
+  R1: resistor c6 c10 1k
+  R2: resistor d10 d14 1k
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, W2, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a6 yellow
+  - AD.W2 -- a14 green
+  - AD.1+ -- a10 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/breadboard/06-czt-zoom.svg)
+
+R1 と R2 の片方の端を 10 列に挿して足し合わせ、その列から CH1 (1+) を取る。W1 は 6 列、W2 は 14 列の R の端へつなぐ。電源 (Supplies) は使わず、W1・W2 の出力だけを使う。
 
 ## 計器の設定
 
@@ -57,10 +82,10 @@ Wavegen の半分の **0.25 V** ずつ (図 2・3 はこの値で描いた)。
 通常の FFT で見ると次のようになる。図は Stop 10 MHz から決まるサンプル周波数
 (25.6 MHz) で描いたので RBW は 781 Hz だが、50 Hz 離れた 2 本が 1 本の山に
 融けることは変わらない。CZT の画面は、この図の道具が CZT を持たないので
-描いていない。CZT でもビンが細かくなるだけで、山は図3 と同じ 1 本のままになる。
+描いていない。CZT でもビンが細かくなるだけで、山は図4 と同じ 1 本のままになる。
 
 ```spectrum
-title: 図2 通常の FFT では 50 Hz 離れた 2 本が 1 本の山になる
+title: 図3 通常の FFT では 50 Hz 離れた 2 本が 1 本の山になる
 device: ad3
 sweep: 0-10MHz
 samples: 32768
@@ -74,7 +99,7 @@ markers: [5MHz]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/06-czt-zoom-1.svg)
 
 ```spectrum
-title: 図3 Start・Stop を 4.99〜5.01 MHz に絞っても RBW は同じで山は 1 本のまま
+title: 図4 Start・Stop を 4.99〜5.01 MHz に絞っても RBW は同じで山は 1 本のまま
 device: ad3
 center: 5MHz
 span: 20kHz
@@ -87,6 +112,21 @@ markers: [5MHz]
 ```
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/06-czt-zoom-2.svg)
+
+時間波形では、5 MHz と 5.00005 MHz の差 50 Hz は見えない。うなりの周期は 1 / 50 Hz = 20 ms で、
+図5 の 2 µs の窓の 1 万倍ある。窓の中では 2 本が同位相で重なり、振幅 0.25 V の 2 本の和 0.5 V (Vpp 1.00 V) の
+5 MHz 正弦波 1 本に見える (図は CH1 に映る和そのものを描いた)。
+
+```scope
+title: 図5 CH1 は Vpp 1.00 V の 5 MHz — 50 Hz のうなりは窓に出ない
+time: 200ns/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 5MHz 0.5V, range: 200mV/div}
+cursors: [0, 200ns]
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/scope/06-czt-zoom.svg)
 
 ## 見るべき値
 
@@ -107,7 +147,7 @@ markers: [5MHz]
 分かること:
 
 - **CZT は取り込みをやり直さず、すでに取り込んだデータを計算だけでズームする。**
-  通常の FFT で Start・Stop を狭めても (図3) 表示を切り取るだけでビンは粗いままだが、
+  通常の FFT で Start・Stop を狭めても (図4) 表示を切り取るだけでビンは粗いままだが、
   CZT は狭い帯域に点を密に並べる。山の頂点の周波数と高さを細かく読むのに効く
 - **2 本を分けるには、取り込み時間を延ばすしかない。** 50 Hz を Flat-top で分けるには
   T ≥ 3.8 ÷ 50 Hz ≈ 76 ms が要る。バッファが 32768 点 (Scope を 1 チャンネルだけ

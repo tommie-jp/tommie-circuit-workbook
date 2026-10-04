@@ -33,8 +33,33 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/08-9mhz-wall.svg)
 
-板は使わない。5-5 と同じ結線 (W1 を CH1・CH2 の両方に直結) だが、掃引を
+5-5 と同じ結線 (W1 を CH1・CH2 の両方に直結) だが、掃引を
 10 MHz まで伸ばす。
+
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ と 2+ に直結)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-, 2+, 2-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.2+ -- c5 blue
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+  - AD.2- -- -t10 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/breadboard/08-9mhz-wall.svg)
+
+W1・1+・2+ を同じ 5 列に挿し、GND・1−・2− は上の − レールにまとめる。部品は無く、電源も使わない。
+10 MHz までの信号なのでブレッドボードの範囲 (10 MHz まで) に収まる。
 
 ## 計器の設定
 
@@ -45,6 +70,23 @@ wires:
 
 付属のワイヤ (MTE ワイヤ) を使う。BNC アダプタに替えると壁の位置がもっと高くなる
 (0-5 参照)。
+
+壁の効きを時間波形で見たのが図3。掃引の途中の 1 点、f<sub>BW</sub> = 9 MHz の正弦波を、入力帯域を
+1 次ローパス (τ = 1/(2π × 9 MHz) = 17.7 ns) と見立てて描いた。CH1 は基準で 2.00 Vpp、
+壁を通った側は 1/√2 倍の 1.41 Vpp になり、山が 1/8 周期 (111 ns ÷ 8 ≈ 13.9 ns) 遅れる。
+これが「−3 dB・−45°」の時間波形での姿である。図は 1 次ローパスと仮定した計算の画面で、実機の帯域の形とは少し違う。
+
+```scope
+title: 図3 9 MHz の 1 点 — 壁を通った線は 0.71 倍で 13.9 ns (45°) 遅れる
+time: 20ns/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 9MHz 1V, range: 500mV/div}
+ch2: {wave: ch1 | rc 17.68ns, range: 500mV/div}
+cursors: [27.8ns, 41.7ns]
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/scope/08-9mhz-wall.svg)
 
 ## 見るべき値
 
@@ -61,7 +103,7 @@ wires:
 | 10 MHz | −3.49 dB | −48.0° |
 
 ```graph
-title: 図2 DUT なしでも 9 MHz で −3 dB・−45° — AD3 自身の帯域の壁
+title: 図4 DUT なしでも 9 MHz で −3 dB・−45° — AD3 自身の帯域の壁
 x: 周波数 Hz log 100k..10M
 y:
   - 利得 dB -4..0
@@ -99,5 +141,5 @@ notes:
 (Network の節)。AD3 のオシロ入力帯域 (ヘッダで 9 MHz @ −3 dB、BNC アダプタで 30+ MHz)
 と Network の周波数範囲は Digilent の
 [AD3 Specifications](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Specifications_1123.pdf)
-の値。表と図 2 は 1 次ローパスと仮定した計算で、実際の帯域の形とは少し違う
+の値。表と図 3・4 は 1 次ローパスと仮定した計算で、実際の帯域の形とは少し違う
 (仕様は 2.9 MHz で −0.5 dB、1 次モデルでは約 −0.43 dB)。

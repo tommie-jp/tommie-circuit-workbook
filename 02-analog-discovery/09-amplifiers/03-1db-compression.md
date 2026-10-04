@@ -114,6 +114,25 @@ wires:
 | Wavegen | W1: Sine、**1 kHz** (スルーレートの影響を避けるため低め)、振幅を 10・20・40・60・80・90・100 mV と段階的に上げる |
 | Scope | CH1 = 入力 (バイアス点)、CH2 = 出力。それぞれ Amplitude を測定し、その都度利得 (dB) を計算する |
 
+計器は Analog Discovery 3 の Supplies (+5 V、LM358 の消費電流は数 mA で各レール 50 mA に収まる)、Wavegen、Scope。
+
+振幅を上限の 90.9 mV より大きい 100 mV にしたときの画面を図3 に示す。
+CH1 (入力) は 2.5 V のバイアスに 100 mV が乗る。出力の交流分は 100 mV × 11 = 1.1 V だが、上側は 3.5 V (2.5 V + 1.0 V) で頭打ちになる。
+図は頭打ちを理想の直線で切って描いたもので、**実機は丸まりながら頭打ちになる** (3.5 V は代表値)。下側は 2.5 − 1.1 = 1.4 V まで振れて切れない。
+
+```scope
+title: 図3 入力 100 mV は出力の上側が 3.5 V で頭打ち
+time: 500us/div
+trigger: ch1 rising 2.5V
+ch1: {wave: sine 1kHz 0.1V offset 2.5V, range: 50mV/div, position: -50div}
+ch2: {wave: ch1 | offset -2.5V | gain 11 | offset 2.5V | clip 0V 3.5V, range: 1V/div, position: -2.5div}
+measure: [vmax, vmin]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/scope/03-1db-compression.svg)
+
+図3 の CH2 は Vmax 3.50 V、Vmin 1.40 V。CH1 と CH2 は縦の尺度が違う (50 mV/div と 1 V/div) ので、高さを直接比べない。
+
 ## 見るべき値
 
 小信号利得は 9-2 で確かめた 11 倍 (20.83 dB)。1 dB 下がった利得は
@@ -137,11 +156,11 @@ LM358 は単電源 (Vcc = 5 V、バイアス 2.5 V) で、データシートの�
 振幅を上げながら利得を計算し、19.8 dB を最初に下回った振幅が測定による
 1 dB 圧縮点になる。
 
-先に計算できる 2 本 (小信号利得のまま伸ばした出力と、上側の限界 1.0 V) を描く。
+先に計算できる 2 本 (図4) (小信号利得のまま伸ばした出力と、上側の限界 1.0 V) を描く。
 実測の点はこの 2 本の交点より手前で、上の線から丸まって離れていく。
 
 ```graph
-title: 図3 小信号の直線が上限 1.0 V に当たるのが入力 90.9 mV (計算)
+title: 図4 小信号の直線が上限 1.0 V に当たるのが入力 90.9 mV (計算)
 x: 入力振幅 mV 0..120
 y: 出力の上側の振れ V 0..1.4
 lines:

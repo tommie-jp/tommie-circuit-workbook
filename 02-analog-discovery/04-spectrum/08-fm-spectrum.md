@@ -29,7 +29,29 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/08-fm-spectrum.svg)
 
-板は使わない。3-3 と同じ FM 波を W1 から出し、CH1 で読む。
+3-3 と同じ FM 波を W1 から出し、CH1 で読む。
+
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/breadboard/08-fm-spectrum.svg)
+
+W1 と 1+ は同じ 5 列に挿し、GND と 1− は上の − レールにまとめる。部品は無く、電源も使わない。
 
 ## 計器の設定
 
@@ -41,7 +63,7 @@ wires:
 画面は次のようになる (±4 次までを描いた)。搬送波より ±1 次・±2 次の側波帯のほうが高い。
 
 ```spectrum
-title: 図2 β = 2 では搬送波より ±1 次・±2 次の側波帯が高い
+title: 図3 β = 2 では搬送波より ±1 次・±2 次の側波帯が高い
 device: ad3
 sweep: 90kHz-110kHz
 samples: 32768
@@ -60,6 +82,21 @@ markers: [100kHz, 101kHz, 102kHz, 103kHz]
 ```
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/08-fm-spectrum.svg)
+
+同じ FM 波を時間軸で見ると図4 になる。変調の山 (f<sub>c</sub> + Δf = 102 kHz) では 1 周期が
+1 / 102 kHz = 9.804 µs に縮む (3-3 で見た瞬時周波数の変化)。振幅は 1 V のまま変わらず、
+変わるのは周期だけ。この周波数の揺れが、図3 の何本もの側波帯になっている。
+
+```scope
+title: 図4 FM 波は振幅が一定のまま、変調の山で 1 周期が 9.804 µs (102 kHz) に縮む
+time: 2us/div
+trigger: ch1 rising 0V
+ch1: {wave: = 1V * sin(2 * pi * 100kHz * t + 2 * sin(2 * pi * 1kHz * t)), range: 500mV/div}
+cursors: [0, 9.804us]
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/scope/08-fm-spectrum.svg)
 
 ## 見るべき値
 

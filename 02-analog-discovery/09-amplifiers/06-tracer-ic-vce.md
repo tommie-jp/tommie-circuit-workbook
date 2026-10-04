@@ -37,12 +37,12 @@ wires:
   - AD.V+ -| a5
   - c5 |- Q1.B
   - AD.W1 -| c15
-  - AD.1+ -| c15
+  - AD.2+ -| c15
   - c18 |- Q1.C
-  - AD.1- -| c18
-  - AD.2+ -| c18
+  - AD.2- -| c18
+  - AD.1+ -| c18
   - Q1.E -| f21
-  - AD.2- -| f21
+  - AD.1- -| f21
   - AD.GND -| f21
 ```
 
@@ -52,8 +52,8 @@ wires:
   Ib = (5 − 0.7) / 220 k ≒ 19.5 µA。**別の値に差し替えて Ib を数段階に振る**
   (下の表)
 - W1 は 0〜5 V の三角波 (Offset 2.5 V、振幅 2.5 V) にして、コレクタ側を
-  Rs (100 Ω、電流検出用) 経由で掃引する。CH1 (1+/1−) が Rs の両端 (Ic に比例)、CH2 (2+/2−) がコレクタの対 GND 電圧 (Vce)
-- Rs は 6-1 などと同じ「基準抵抗」の考え方 — Ic = (CH1 の読み) / Rs。Ic は最大 8.6 mA なので、
+  Rs (100 Ω、電流検出用) 経由で掃引する。CH2 (2+/2−) が Rs の両端 (Ic に比例)、CH1 (1+/1−) がコレクタの対 GND 電圧 (Vce)。CH1 を X に取れるように 2-13 と同じ割り当てにした
+- Rs は 6-1 などと同じ「基準抵抗」の考え方 — Ic = (CH2 の読み) / Rs。Ic は最大 8.6 mA なので、
   Wavegen の DC 電流の上限 (AD3 は 30 mA) に収まる。W1 の 0〜5 V は AD3 の出力範囲 ±5 V の内側
 
 ## 実体配線図
@@ -69,15 +69,15 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
+    pins: [V+, GND, W1, 2+, 2-, 1+, 1-]
 wires:
   - AD.V+ -- +t2 red
   - AD.GND -- -t3 black
   - AD.W1 -- a5 yellow [h-10]
-  - AD.1+ -- b5 orange [h10]
-  - AD.1- -- a11 white
-  - AD.2+ -- b11 purple [h10]
-  - AD.2- -- -t13 black
+  - AD.2+ -- b5 orange [h10]
+  - AD.2- -- a11 white
+  - AD.1+ -- b11 purple [h10]
+  - AD.1- -- -t13 black
   - e11 -- f11 gray
   - j6 -- +b6 red
   - g12 -- g14 black
@@ -101,7 +101,25 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Tracer (自動、AD3) | DUT 種別 = NPN トランジスタ、Ib を 3 段階 (自動)、Vce 掃引 0〜5 V |
-| 専用アダプタ無しの手動法 (この題の回路) | Wavegen: W1 Triangle、Offset 2.5 V、振幅 2.5 V、10 Hz (ゆっくり)。Scope: XY モード (X = CH2 = Vce、Y = CH1 = Rs の両端)。Rb を差し替えて 3 回繰り返す |
+| 専用アダプタ無しの手動法 (この題の回路) | Wavegen: W1 Triangle、Offset 2.5 V、振幅 2.5 V、10 Hz (ゆっくり)。Scope: XY モード (X = CH1 = Vce、Y = CH2 = Rs の両端)。Rb を差し替えて 3 回繰り返す |
+
+計器は Analog Discovery 3 の Supplies (V+ = 5 V。Ib の電流は数十 µA、Ic は最大 8.6 mA で各レール 50 mA に収まる)、Wavegen、Scope。
+
+手動法の XY 画面 (Rb = 220 kΩ の 1 本) を図3 に示す。W1 の 0〜5 V の三角波から Rs の電圧降下 (3.91 mA × 100 Ω = 0.39 V) を引いた Vce は 0〜約 4.6 V の範囲を往復するので、X は 0〜4.6 V。
+Y は Rs の両端で、Ic × 100 Ω = 3.91 mA × 100 Ω = 0.391 V の高さで頭打ち。立ち上がりは 0.2 V 付近 (飽和領域) で膝になる。
+図の曲線は、図4 と同じ膝の丸みの模型 (Ic = 3.91 mA × (1 − e<sup>−Vce/0.0667 V</sup>)) を Y = 100 Ω × Ic にして描いた計算値。
+
+```scope
+title: 図3 Rb = 220 kΩ の Ic–Vce 曲線 (X = Vce、Y = Rs の電圧)
+view: xy
+ch1: {wave: triangle 10Hz 2.3V offset 2.3V, range: 1V/div, position: -2.5div}
+ch2: {wave: = 0.391V * (1 - exp(-ch1 / 66.7mV)), range: 100mV/div, position: -2div}
+xy: ch1 ch2
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/scope/06-tracer-ic-vce.svg)
+
+Rb を 470 kΩ・100 kΩ に差し替えると、頭打ちの高さが Y = 0.183 V・0.860 V になる (上の Ic × 100 Ω)。
 
 ## 見るべき値
 
@@ -125,7 +143,7 @@ Vce が十分大きい領域では Ic ≒ hFE × Ib で頭打ちになるとみ�
 届くように置いた模型で、平らな所の高さが上の表の hFE × Ib。
 
 ```graph
-title: 図3 平らな所が 1.83・3.91・8.60 mA に並ぶ (hFE 200 の模型)
+title: 図4 平らな所が 1.83・3.91・8.60 mA に並ぶ (hFE 200 の模型)
 x: 電圧 Vce V 0..5
 y: コレクタ電流 Ic mA 0..10
 lines:

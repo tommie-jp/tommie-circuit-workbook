@@ -34,7 +34,7 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/14-averaging-resolution.svg)
 
-2-4 とまったく同じ回路。V+（5 V）→ R1（330 Ω）→ LED → Rs（1 Ω）→ GND。CH1 は
+2-4 とまったく同じ回路。V+（5 V）→ R1（330 Ω）→ LED → Rs（1 Ω）→ GND。V+ は AD3 の Supplies で、流れる電流は約 9 mA と各レールの上限 (約 50 mA) に収まる。CH1 は
 Rs の両端（≈ 9.1 mV、mV の値がそのまま mA の値）。
 
 ## 実体配線図
@@ -67,6 +67,8 @@ wires:
 | --- | --- |
 | Supplies | V+ = 5 V、Master Enable |
 | Scope (CH1) | DC、**Range を最も細かい帯（≤ 0.5 V/div）まで絞る**、Sampling Mode は Average。Sample Rate を 100 MS/s（既定のシステムクロックのまま）→ 50 MS/s → 25 MS/s 以下と下げて比べる。Normal との比較もする |
+
+この題はオシロの波形の図を付けない — 見るのは約 9.1 mV の直流で、時間とともに変わらない。違いは量子化の刻み (0.336 mV → 約 0.084 mV) の細かさで、理想の計算では描き分けられないため、上の表の数で示す。
 
 ## 見るべき値
 

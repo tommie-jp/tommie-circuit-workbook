@@ -30,7 +30,29 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/07-am-spectrum.svg)
 
-板は使わない。3-3 と同じ AM 波を W1 から出し、CH1 で読む。
+3-3 と同じ AM 波を W1 から出し、CH1 で読む。
+
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/breadboard/07-am-spectrum.svg)
+
+W1 と 1+ は同じ 5 列に挿し、GND と 1− は上の − レールにまとめる。部品は無く、電源も使わない。
 
 ## 計器の設定
 
@@ -42,7 +64,7 @@ wires:
 画面は次のようになる。搬送波の両側 1 kHz に側波帯が 1 本ずつ立つ。
 
 ```spectrum
-title: 図2 側波帯は搬送波の 12 dB 下に ±1 kHz で 1 本ずつ
+title: 図3 側波帯は搬送波の 12 dB 下に ±1 kHz で 1 本ずつ
 device: ad3
 sweep: 90kHz-110kHz
 samples: 32768
@@ -55,6 +77,19 @@ markers: [100kHz, 99kHz, 101kHz]
 ```
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/07-am-spectrum.svg)
+
+同じ AM 波を時間軸で見ると図4 になる。山は A<sub>c</sub>(1 + m) = 1.5 V、谷は A<sub>c</sub>(1 − m) = 0.5 V
+(3-3 で見たエンベロープ)。図3 の側波帯の高さ −12.04 dB は、この山と谷の振れ幅 (m = 0.5) から決まっている。
+
+```scope
+title: 図4 AM 波 (深さ 50 %) のエンベロープは 1.5 V と 0.5 V の間
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: = 1V * (1 + 0.5 * sin(2 * pi * 1kHz * t)) * sin(2 * pi * 100kHz * t), range: 500mV/div}
+measure: [vmax]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/scope/07-am-spectrum.svg)
 
 ## 見るべき値
 

@@ -33,8 +33,34 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/09-audio-output.svg)
 
-板は使わない。ワニ口クリップで R1 とスピーカーを直列にし、W1・GND につなぐ。
+R1 とスピーカーを直列にし、W1・GND につなぐ。
 CH1 は W1 の出力 (R1 + スピーカーの両端) をそのまま読む。
+
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (R1 とスピーカーを W1 に直列)
+board: half
+parts:
+  R1: resistor c6 c10 150
+  SPK: speaker d10 d14
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a6 yellow
+  - AD.1+ -- b6 orange
+  - a14 -- -t14 black
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/breadboard/09-audio-output.svg)
+
+W1 → R1 (150 Ω) → スピーカー → GND の順に直列。CH1 (1+・1−) は W1 の出力と GND の間を読む。
+スピーカーはリード線の付いた小型のものを挿す。リードが太くて挿せないときは、ワニ口クリップで R1 の端と GND につなぐ。電源 (Supplies) は使わず、W1 の出力だけで鳴らす。
 
 ## 計器の設定
 
@@ -44,7 +70,7 @@ CH1 は W1 の出力 (R1 + スピーカーの両端) をそのまま読む。
 | Scope | CH1: DC 結合、Range 500 mV/div、Time/div 500 µs/div (440 Hz の 1 周期が画面に入る) |
 
 ```scope
-title: 図2 440 Hz の 1 周期は 2.273 ms
+title: 図3 440 Hz の 1 周期は 2.273 ms
 time: 500us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 440Hz 1V, range: 500mV/div}

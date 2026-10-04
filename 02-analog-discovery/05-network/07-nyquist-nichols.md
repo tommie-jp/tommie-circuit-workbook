@@ -75,6 +75,22 @@ wires:
 Nyquist・Nichols とも、掃引そのものは Bode と同じ (Start/Stop/Steps の設定は共通)。
 **表示形式を選ぶだけ**で、同じ測定結果を 3 通りに見られる。
 
+掃引の途中の 1 点、f<sub>c</sub> (1.59 kHz) をオシロの時間波形で見たのが図3。Nyquist では (0.5, −0.5)、
+Nichols では (−45°, −3.01 dB) の点にあたる。CH2 (C1 の電圧) は CH1 の 1/√2 倍 (Vpp 1.41 V、入力は 2.00 V) で、
+山が 1/8 周期 (629 µs ÷ 8 ≈ 79 µs) 遅れる。
+
+```scope
+title: 図3 1.59 kHz の 1 点 — CH2 は 0.71 倍で 79 µs (45°) 遅れる
+time: 100us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1.59kHz 1V, range: 500mV/div}
+ch2: {wave: ch1 | rc 100us, range: 500mV/div}
+cursors: [157us, 236us]
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/scope/07-nyquist-nichols.svg)
+
 ## 見るべき値
 
 計算値。H(jω) = 1 / (1 + jωRC)。
@@ -98,11 +114,11 @@ Nyquist・Nichols とも、掃引そのものは Bode と同じ (Start/Stop/Step
 | −84.3° | −20.04 dB |
 | −89.4° | −40.00 dB |
 
-図3 は複素平面 (Nyquist)、図4 は位相と利得 (Nichols)。どちらも同じ H(jω) を描いたもので、
+図4 は複素平面 (Nyquist)、図5 は位相と利得 (Nichols)。どちらも同じ H(jω) を描いたもので、
 周波数の目盛りは無い (印の読み値で表の点と突き合わせる)。
 
 ```graph
-title: 図3 Nyquist — 軌跡は中心 (0.5, 0)・半径 0.5 の下半円、fc で (0.5, −0.5)
+title: 図4 Nyquist — 軌跡は中心 (0.5, 0)・半径 0.5 の下半円、fc で (0.5, −0.5)
 x: 実部 Re(H) 倍 0..1
 y: 虚部 Im(H) 倍 -0.6..0
 lines:
@@ -118,7 +134,7 @@ notes:
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/07-nyquist-nichols-1.svg)
 
 ```graph
-title: 図4 Nichols — fc は (−45°, −3.01 dB) の 1 点
+title: 図5 Nichols — fc は (−45°, −3.01 dB) の 1 点
 x: 位相 deg -90..0
 y: 利得 dB -40..0
 lines:

@@ -72,6 +72,23 @@ wires:
 | Wavegen | W1: Function **Noise**、Amplitude 2 V、Frequency 1 MHz (Noise では Frequency が DAC の更新の速さになる (出典の手引き)。雑音はこの速さで出し直されるので、f<sub>c</sub> より十分高くしておく) |
 | Scope | CH1・CH2 とも DC 結合、Range ±2 V 程度。**Persistence** (2-7) を on にすると、帯の太さで振幅のばらつきが見える。Measure に **RMS** (AC) を出す |
 
+雑音は乱数の波形で、1 画面ごとに形が変わるので、理想の波として描けない。そこで図3 は、
+**1.59 kHz の正弦波 1 つ**を 2 つのフィルタに通した画面にした。雑音のうち 1.59 kHz の成分が、
+フィルタ 1 (C1 = 100 nF) では 1/√2 倍、フィルタ 2 (C1 = 1 µF) では約 1/10 倍になることを、時間波形で見せる。
+CH1 は入力、CH2 はフィルタ 1 の出力、CH3 はフィルタ 2 の出力で、3 本とも 500 mV/div にそろえた。Vpp は CH1 が 2.00 V、CH2 が 1.41 V (2.00 × 0.707)、CH3 が 199 mV (2.00 × 0.0996) で、計算値と一致する。
+
+```scope
+title: 図3 1.59 kHz の成分は 0.71 倍 (100 nF)、約 0.1 倍 (1 µF) に減る
+time: 100us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1.59kHz 1V, range: 500mV/div}
+ch2: {wave: ch1 | rc 100us, range: 500mV/div}
+ch3: {wave: ch1 | rc 1ms, range: 500mV/div}
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/07-noise-rc-filter.svg)
+
 ## 見るべき値
 
 計算値。1 次 RC ローパスの**等価雑音帯域幅 (ENBW)** は ENBW = (π/2) f<sub>c</sub> =
@@ -86,10 +103,10 @@ wires:
 | フィルタ 2 の ENBW | **250 Hz** | |
 | CH2 の RMS の比 (フィルタ 1 出力 ÷ フィルタ 2 出力) | 約 **3.16 倍 (10.0 dB)** = √(2500/250) | ENBW の比の平方根。同じノイズ源を通した 2 つの RC の比較で使える |
 
-2 つのフィルタの利得を同じ図に描くと、f<sub>c</sub> が 10 倍違う分だけ、雑音を通す帯域が狭くなるのが分かる。
+2 つのフィルタの利得を同じ図 (図4) に描くと、f<sub>c</sub> が 10 倍違う分だけ、雑音を通す帯域が狭くなるのが分かる。
 
 ```graph
-title: 図3 C1 を 1 µF にすると遮断周波数が 1/10 になり、雑音を通す帯域も 1/10
+title: 図4 C1 を 1 µF にすると遮断周波数が 1/10 になり、雑音を通す帯域も 1/10
 x: 周波数 Hz log 10..100k
 y: 利得 dB -50..5
 lines:

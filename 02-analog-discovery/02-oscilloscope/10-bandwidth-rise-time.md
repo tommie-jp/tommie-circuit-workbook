@@ -35,6 +35,29 @@ wires:
 W1（100 kHz、0〜3.3 V の方形波）を CH1 に直結。周期 10 μs に対して立ち上がりは
 ずっと短いので、他のエッジと混ざらずに 1 つの立ち上がりだけを拡大して見られる。
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/10-bandwidth-rise-time.svg)
+
+W1 と 1+ は同じ 5 列に挿す。GND と 1− は上の − レールにまとめる。部品は無く、電源も使わない。
+付属ワイヤ (ヘッダ直結) でつなぐので、測るのは 9 MHz の側 (「見るべき値」の表の付属ワイヤの行)。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -44,10 +67,10 @@ W1（100 kHz、0〜3.3 V の方形波）を CH1 に直結。周期 10 μs に対
 | カーソル | 縦カーソル 2 本を、10%（0.33 V）と 90%（2.97 V）の高さに合わせて X モード |
 
 付属ワイヤの経路を 1 次の低域 (t<sub>r</sub> = 2.2 τ = 55 ns、τ = 25 ns) とみなして描いた、
-見えるはずの立ち上がり。カーソルは 10 % (0.33 V) と 90 % (2.97 V) の所。
+見えるはずの立ち上がりが図3。カーソルは 10 % (0.33 V) と 90 % (2.97 V) の所。
 
 ```scope
-title: 図2 カーソルで 10 %→90 % を読むと約 55 ns
+title: 図3 カーソルで 10 %→90 % を読むと約 55 ns
 time: 20ns/div
 trigger: ch1 rising 1.65V at -4div
 ch1: {wave: square 100kHz 1.65V offset 1.65V | rc 25ns, range: 500mV/div, position: -3div}

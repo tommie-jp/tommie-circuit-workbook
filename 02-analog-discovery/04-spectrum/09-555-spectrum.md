@@ -106,7 +106,7 @@ wires:
 
 | 計器 | 設定 |
 | --- | --- |
-| Supplies | V+ = 5 V、Master Enable |
+| Supplies | V+ = 5 V、Master Enable (555 は数 mA で、各レール約 50 mA に収まる) |
 | Spectrum | Source: Channel 1。Start 0 Hz、Stop 9 kHz。サンプル周波数 20 kHz、FFT 点数 32768。Window: Flat-top。単位: dBV |
 
 出力を 0〜5 V・デューティ 52.4% の理想の方形波として描くと次のようになる。
@@ -124,6 +124,20 @@ markers: [1008Hz, 2016Hz, 3024Hz, 4032Hz]
 ```
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/09-555-spectrum.svg)
+
+同じ出力を時間軸で見ると図4 になる。周期は 1 / 1008 Hz ≈ 992 µs、High の時間は 992 µs × 0.524 ≈ 520 µs、
+Low は 472 µs。High のほうがわずかに長く、これが偶数次の源になる。
+
+```scope
+title: 図4 555 の出力 — 周期 992 µs、デューティ 52.4 % (High が 520 µs)
+time: 200us/div
+trigger: ch1 rising 2.5V
+ch1: {wave: pulse 1008Hz 2.5V offset 2.5V duty 52.4%, range: 1V/div}
+cursors: [10us, 530us]
+measure: [freq, avg, vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/scope/09-555-spectrum.svg)
 
 ## 見るべき値
 

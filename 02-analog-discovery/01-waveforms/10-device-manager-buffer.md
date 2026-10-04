@@ -35,6 +35,28 @@ wires:
 配線は 0-3 のループバックのまま。ここで変えるのは配線ではなく、Device Manager
 の設定。
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/breadboard/10-device-manager-buffer.svg)
+
+W1 と 1+ を同じ 5 列に挿し、GND と 1− は上の − レールにまとめる。部品は無く、電源も使わない。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -42,6 +64,20 @@ wires:
 | Wavegen (W1) | 正弦波、1 kHz、振幅 1 V |
 | Scope (CH1・CH2) | 今の構成でまず Buffer（Scope の記録点数の設定欄）の上限を確認する |
 | Device Manager | 今の構成 → Scope が最大の構成 2 → Scope が最小の構成 5 と切り替え、そのつど Scope の Buffer の上限を見る |
+
+どの構成でも、波形そのものは同じに見える。構成が変えるのは記録点数 (Buffer の上限) だけで、図3 は
+どの構成でも読める 1 kHz・振幅 1 V の正弦波である。
+
+```scope
+title: 図3 構成を切り替えても CH1 の波形は同じ — Vpp 2.00 V・1.000 kHz
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+cursors: [0, 1ms]
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/scope/10-device-manager-buffer.svg)
 
 ## 見るべき値（AD3）
 

@@ -30,6 +30,28 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/15-reference-waveform.svg)
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/15-reference-waveform.svg)
+
+W1 と 1+ は同じ 5 列に挿し、GND と 1− は上の − レールにまとめる。部品は無く、電源も使わない。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -37,10 +59,10 @@ wires:
 | Wavegen (W1) | 正弦波、1 kHz、振幅 1 V（基準を保存する時点の設定） |
 | Scope (CH1) | DC。トレースを右クリック（または該当ボタン）で **Reference として保存**（破線で表示され続ける） |
 
-次の 2 枚は、保存した参照 (1 kHz・1 V) を CH1、生きた波形を CH2 として同じ尺度で重ねたもの。
+次の図3・図4は、保存した参照 (1 kHz・1 V) を CH1、生きた波形を CH2 として同じ尺度で重ねたもの。
 
 ```scope
-title: 図2 振幅を 1.5 V にすると参照 (CH1) より 1.5 倍高い
+title: 図3 振幅を 1.5 V にすると参照 (CH1) より 1.5 倍高い
 time: 200us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1kHz 1V, range: 500mV/div}
@@ -51,7 +73,7 @@ measure: [vpp, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/15-reference-waveform-1.svg)
 
 ```scope
-title: 図3 1.2 kHz にすると山がずれていき、5 ms で 1 周期ぶん追い付く
+title: 図4 1.2 kHz にすると山がずれていき、5 ms で 1 周期ぶん追い付く
 time: 500us/div
 trigger: ch1 rising 0V at -5div
 ch1: {wave: sine 1kHz 1V, range: 500mV/div}

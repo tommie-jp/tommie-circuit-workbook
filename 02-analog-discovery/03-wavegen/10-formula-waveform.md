@@ -58,7 +58,29 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/10-formula-waveform.svg)
 
-板は使わない。V1 の記号は正弦だが、実際は上の CSV を Custom で出す。
+V1 の記号は正弦だが、実際は上の CSV を Custom で出す。
+
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/breadboard/10-formula-waveform.svg)
+
+W1 と 1+ は同じ 5 列に挿し、GND と 1− は上の − レールにまとめる。部品は無く、電源も使わない。
 
 ## 計器の設定
 
@@ -73,7 +95,7 @@ sin x (1 周期ぶん) と sin 3x (3 周期ぶん) が同時に入っている�
 の 2 本になる。
 
 ```spectrum
-title: 図2 1000 Hz と 3000 Hz に同じ高さ (−6.76 dBV) の 2 本が立つ
+title: 図3 1000 Hz と 3000 Hz に同じ高さ (−6.76 dBV) の 2 本が立つ
 device: ad3
 sweep: 0-5kHz
 samples: 8192
@@ -85,6 +107,21 @@ markers: [1kHz, 3kHz]
 ```
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/spectrum/10-formula-waveform.svg)
+
+実機の CH1 に映るのは、この 2 つの和の波形 (図4 の中央の線、MATH)。
+和の中身が見えるように、図4 では成分の 1 kHz (上) と 3 kHz (下) も別に並べた。
+
+```scope
+title: 図4 1 kHz と 3 kHz の和 — 実機の CH1 はこの中央の線 (Vpp 約 2 V)
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.6495V, range: 500mV/div, position: 2.7div}
+ch2: {wave: sine 3kHz 0.6495V, range: 500mV/div, position: -2.7div}
+math: {expr: ch1 + ch2, unit: V, range: 500mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/10-formula-waveform.svg)
 
 ## 見るべき値
 

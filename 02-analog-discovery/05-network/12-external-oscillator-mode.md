@@ -32,9 +32,34 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/12-external-oscillator-mode.svg)
 
-板は使わない。5-5・5-8 と同じスルー (W1 を CH1・CH2 の両方に直結)。ここでは
+5-5・5-8 と同じスルー (W1 を CH1・CH2 の両方に直結)。ここでは
 W1 を**「外部の信号源」に見立て**、Network からは操作しない (周波数を Network
 の掃引ではなく Wavegen 側で直接決める)。
+
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ と 2+ に直結)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-, 2+, 2-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.2+ -- c5 blue
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+  - AD.2- -- -t10 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/breadboard/12-external-oscillator-mode.svg)
+
+W1・1+・2+ を同じ 5 列に挿し、GND・1−・2− は上の − レールにまとめる。部品は無く、電源も使わない。
+Source: External のときも、W1 は Network ではなく Wavegen の画面で 2.5 kHz に決める。
 
 ## 計器の設定
 
@@ -42,6 +67,21 @@ W1 を**「外部の信号源」に見立て**、Network からは操作しな�
 | --- | --- |
 | Wavegen | W1: Sine、**2.5 kHz 固定**、Amplitude 1 V (Network からは触らない) |
 | Network | **Source: External**。Start・Stop を下表のとおり変える |
+
+スルーなので、Network が見つける 2.5 kHz の成分は CH1 と CH2 で同じ波形になる (図3)。
+周期は 1 / 2.5 kHz = 400 µs、Vpp は両方 2.00 V で、位相差は 0° になる。
+
+```scope
+title: 図3 2.5 kHz のスルー — CH1 と CH2 は同じ波形 (利得 0 dB・位相 0°)
+time: 100us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 2.5kHz 1V, range: 500mV/div}
+ch2: {wave: ch1, range: 500mV/div}
+cursors: [0, 400us]
+measure: [vpp, freq, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/scope/12-external-oscillator-mode.svg)
 
 ## 見るべき値
 

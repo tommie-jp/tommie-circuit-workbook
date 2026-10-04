@@ -36,6 +36,31 @@ wires:
 
 外部の部品は無く、`W1`→`1+`、`W2`→`2+`、GND 共通のループバック（2-5 と同じ配線）。
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+、W2 を 2+ に直結)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, W2, GND, 1+, 1-, 2+, 2-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.W2 -- a8 green
+  - AD.2+ -- b8 blue
+  - AD.GND -- -t3 black
+  - AD.1- -- -t10 black
+  - AD.2- -- -t12 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/breadboard/07-wavegen-2ch-phase.svg)
+
+W1 と 1+ は 5 列、W2 と 2+ は 8 列に挿し、列の内側でつなぐ。GND・1−・2− は上の − レールにまとめる。部品は無く、電源も使わない。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -45,11 +70,11 @@ wires:
 | Scope (CH1・CH2) | DC、Time/div 20 μs 程度 |
 | カーソル | 縦カーソル 2 本を X（時間）モードにする |
 
-次の 2 枚は Time/div と V/div を揃え、周波数だけを変えた。W2 の位相 90° は
+次の図3・図4は Time/div と V/div を揃え、周波数だけを変えた。W2 の位相 90° は
 W1 より**進む**向きなので、CH2 は CH1 より左 (早い時刻) で 0 V を上に横切る。
 
 ```scope
-title: 図2 10 kHz — CH2 は CH1 より 25.0 μs 早く 0 V を横切る (90°)
+title: 図3 10 kHz — CH2 は CH1 より 25.0 μs 早く 0 V を横切る (90°)
 time: 20us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 10kHz 1V, range: 500mV/div}
@@ -61,7 +86,7 @@ measure: [freq, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/scope/07-wavegen-2ch-phase-1.svg)
 
 ```scope
-title: 図3 20 kHz — 時間差は 12.5 μs に縮むが位相は 90° のまま
+title: 図4 20 kHz — 時間差は 12.5 μs に縮むが位相は 90° のまま
 time: 20us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 20kHz 1V, range: 500mV/div}

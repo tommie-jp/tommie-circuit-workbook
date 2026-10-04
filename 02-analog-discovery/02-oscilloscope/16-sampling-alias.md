@@ -30,6 +30,28 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/16-sampling-alias.svg)
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/16-sampling-alias.svg)
+
+W1 と 1+ は同じ 5 列に挿し、GND と 1− は上の − レールにまとめる。部品は無く、電源も使わない。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -38,7 +60,7 @@ wires:
 | Scope (CH1) | DC、Sample Rate を **1.2 MS/s** に指定する |
 
 ```scope
-title: 図2 1.205 MS/s で取ると 1 MHz が 205 kHz に見える (エイリアス)
+title: 図3 1.205 MS/s で取ると 1 MHz が 205 kHz に見える (エイリアス)
 time: 2us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 205kHz 1V, range: 500mV/div}
@@ -48,7 +70,7 @@ measure: [vpp, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/16-sampling-alias-1.svg)
 
 ```scope
-title: 図3 10 MS/s に戻すと正しく 1 MHz
+title: 図4 10 MS/s に戻すと正しく 1 MHz
 time: 200ns/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1MHz 1V, range: 500mV/div}
@@ -57,7 +79,7 @@ measure: [vpp, freq]
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/16-sampling-alias-2.svg)
 
-図2 は WaveForms が点を結んで見せる形を描いたもの。1 周期あたりの点は
+図3 は WaveForms が点を結んで見せる形を描いたもの。1 周期あたりの点は
 1.205 MS/s ÷ 205 kHz ≈ 6 点しか無いので、実機では角ばった正弦波に見える。
 
 ## 見るべき値
