@@ -86,11 +86,11 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Sine、**100 kHz**、Amplitude 1 V |
-| Scope | CH1 = Rref の両端、CH2 = L<sub>ANT</sub> の両端。Range は両方 1 V/div |
+| Scope | CH1 = Rref の両端、CH2 = L<sub>ANT</sub> の両端。Range は両方 200 mV/div |
 | Measure | CH1・CH2 の Amplitude、CH2 の CH1 に対する Phase |
 
-AM 放送帯 (526.5 kHz〜1606.5 kHz、日本) の下のほうで測ると同調前のコイル
-単体の様子が見やすいので、あえて 100 kHz を選んだ。
+AM 放送帯 (526.5 kHz〜1606.5 kHz、日本) より下の 100 kHz で測る。同調前の
+コイル単体の様子が見やすい。
 
 ## 見るべき値
 

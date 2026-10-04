@@ -119,7 +119,7 @@ notes:
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/graph/06-electrolytic-vs-ceramic.svg)
 
 周波数が上がって X<sub>C</sub> が ESR に近づくほど電解の位相は 0° へ戻り、\|Z\| は
-8 Ω で下げ止まる。セラミックは 100 kHz でも −89.4° のまま (ESL は模型に入れていない)。
+8 Ω で下げ止まる。セラミックは 100 kHz でも −86.6° にとどまる (ESL は模型に入れていない)。
 
 分かること:
 

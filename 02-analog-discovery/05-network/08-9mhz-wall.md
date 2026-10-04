@@ -100,4 +100,4 @@ notes:
 と Network の周波数範囲は Digilent の
 [AD3 Specifications](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Specifications_1123.pdf)
 の値。表と図 2 は 1 次ローパスと仮定した計算で、実際の帯域の形とは少し違う
-(仕様は 2.9 MHz で −0.5 dB、1 次モデルでは約 −0.36 dB)。
+(仕様は 2.9 MHz で −0.5 dB、1 次モデルでは約 −0.43 dB)。

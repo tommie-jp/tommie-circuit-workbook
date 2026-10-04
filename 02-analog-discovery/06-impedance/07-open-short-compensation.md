@@ -77,8 +77,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/breadboard/07-open-short-compensation.svg)
 
 R<sub>DUT</sub> (10〜14 列) を空ける・ジャンパにする・10 kΩ にする、の 3 通り。
-Open のとき、14 列 (2− 側) は浮くのではなく **6-2 と同様に基準側の配線には
-そのままつながっている** ので、Open は「R<sub>DUT</sub> の 2 端子間だけが開いている」
+Open のとき、14 列 (2− 側) は浮かず、**GND と 2− にはそのままつながっている** ので、Open は「R<sub>DUT</sub> の 2 端子間だけが開いている」
 状態になる。
 
 ## 計器の設定
