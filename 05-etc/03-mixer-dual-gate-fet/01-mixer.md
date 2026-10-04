@@ -367,7 +367,7 @@ wires:
   - c1 -- c3 white
   - c3 -- e3 white
   - f10 -- g10 white
-  - g10 -- i10 white
+  - g11 -- i11 white
   - g10 -- g8 white
   - e6 -- e10 blue
   - f10 -- e10 blue
@@ -375,7 +375,7 @@ wires:
   - b11 -- d11 red
   - j8 -- k8 white
   - k8 -- k9 white
-  - i14 -- i10 yellow
+  - i14 -- i11 yellow
   - i15 -- n15 white
   - n15 -- n16 white
   - n15 -- n10 yellow
