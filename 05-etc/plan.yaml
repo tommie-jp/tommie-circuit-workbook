@@ -8,5 +8,3 @@
 - { id: 2-6, tier: 200, board: BB, title: マイコン版 — ① 受信のあとを Raspberry Pi Pico 2 の FFT とプログラムで作る }
 - { id: 3-1, tier: 200, board: —, title: デュアルゲート FET ミキサー — 3SK291 で中波を 455 kHz の IF に変える }
 - { id: 3-2, tier: 200, board: —, title: ミキサーの特性をシミュレーションで見る — 変換利得・インピーダンス・FFT }
-- { id: 4-1, tier: 200, board: —, title: SONY TR-55 の回路を読む — 日本初のトランジスタラジオの 5 石スーパー }
-- { id: 4-2, tier: 200, board: —, title: 2SC1815 で組む 5 石スーパー — TR-55 の構成を今の部品で、SPICE で確かめる }
