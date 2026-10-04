@@ -101,10 +101,10 @@ parts:
   PS:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: AD3 Supplies 5V
+    pins: [V+, GND]
 wires:
-  - PS.+5V -- +t1 red
+  - PS.V+ -- +t1 red
   - PS.GND -- -t2 black
   - -t1 -- -b1 black
   - +t3 -- a3 red
@@ -138,8 +138,9 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/02-rs-latch.svg)
 
-- 左上の電源 5V から +5V を上の赤レール (+t1) へ赤、GND を上の青レール (-t2) へ
-  黒で入れる。下の青レールは 1 列で上の青レールとつなぐ
+- 電源は Analog Discovery 3 (AD3、0-3 で使った USB 計測器) の Supplies で、V+ を 5V にする。
+  左上の AD3 の V+ を上の赤レール (+t1) へ赤、GND を上の青レール (-t2) へ黒で入れる。
+  下の青レールは 1 列で上の青レールとつなぐ
 - SWS (e5)・SWR (e32) はタクトスイッチ。溝をまたぐ 4 本足の手前側
   (1a・1b、e5/e7 か e32/e34) にプルアップの節点、奥側 (2a・2b、f5/f7 か
   f32/f34) に GND をつなぐ。押すと手前と奥がつながり、押している間だけ入力の PIN が 0 になる
@@ -154,6 +155,15 @@ wires:
   23 列) は i 行のオレンジの線 (i23→i30) で RQb・DQb へ
 - 使わないゲート3・4 の入力 (PIN 13・12・9・8 = 21・22・25・26 列の上) は、a 行から
   黒の短い線で上の青レール (GND) へ。PIN 11・10 (23・24 列の上) は出力なので開けておく
+
+## 計器の設定
+
+計器は AD3 の Supplies (電源) だけを使い、Q・Q̄ は LED で読む。
+この題はオシロの図を付けない — ボタンを押す・離すたびに変わる直流の 0 と 1 (保持された状態) を見る題で、
+画面に残す時間の波形が無いため。
+
+板を流れる電流は、LED 1 個 (1kΩ で約 2mA) と押したボタンのプルアップ (5V / 10kΩ = 0.5mA) を合わせて
+数 mA。板の範囲 (1 穴 200mA・板全体 500mA) にも、AD3 の V+ を USB 給電で使うときの目安 (5V で 50mA) にも収まる。
 
 ## 見るべき値
 

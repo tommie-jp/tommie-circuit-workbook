@@ -133,8 +133,13 @@ parts:
   PS:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: AD3 Supplies 5V
+    pins: [V+, GND]
+  SC:
+    type: device
+    at: top
+    label: AD3 Scope
+    pins: [1+, 1-, 2+, 2-]
   RQ1: resistor a32 a34 1k
   DQ1: led c34(A) c36(K) red
   RQ2: resistor a38 a40 1k
@@ -144,7 +149,7 @@ parts:
   RQ4: resistor a50 a52 1k
   DQ4: led c52(A) c54(K) red
 wires:
-  - PS.+5V -- +t1 red
+  - PS.V+ -- +t1 red
   - PS.GND -- -t2 black
   - -t1 -- -b1 black
   - +t62 -- +b62 red
@@ -175,11 +180,16 @@ wires:
   - a42 -- -t42 black
   - a48 -- -t48 black
   - a54 -- -t54 black
+  - SC.1+ -- a21 yellow
+  - SC.1- -- -t19 black
+  - SC.2+ -- b29 blue
+  - SC.2- -- -t31 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/04-binary-counter.svg)
 
-- 左上の電源 5V の +5V を上の赤レール (1 列)、GND を上の青レール (2 列) へ。
+- 電源は Analog Discovery 3 (AD3、0-3 で使った USB 計測器) の Supplies で、V+ を 5V にする。
+  左上の AD3 の V+ を上の赤レール (1 列)、GND を上の青レール (2 列) へ。
   下のレールは青を 1 列、赤を 62 列 (右端) で上のレールとつなぐ
 - U555 (NE555) は 5〜8 列、U40 (CD4040) は 22〜29 列。どちらも切り欠きが左で、PIN 1 が左下 (f 行)。U555 は PIN 8 (5 列の上) が左上、U40 は PIN 16 (22 列の上) が左上
 - U555: PIN 8 (5 列の上) と PIN 4 (RESET、8 列の下) を +5V へ、PIN 1 (5 列の下) を GND へ。
@@ -193,6 +203,46 @@ wires:
 - Q1 (PIN 9、29 列の上)・Q2 (PIN 7、28 列の下)・Q3 (PIN 6、27 列の下)・Q4 (PIN 5、
   26 列の下) を黄の線で 32・38・44・50 列へ渡し (下の 3 本は g・h・i 行を通って
   溝をまたぐ)、1kΩ と LED を通して GND へ
+- AD3 のオシロは、1+ (黄) をクロックの列 21 (`a21`、555 の PIN 3 から U40 の PIN 10 へ渡る青の線の途中) に、
+  2+ (青) を Q1 の列 29 (`b29`) に挿す。1− と 2− (黒) は上の青レール (GND) へ
+- 板を流れる電流は、LED 4 個が全部点いても約 2.2mA × 4 ≈ 9mA に、NE555 自身の約 3mA (データシートの典型値) と
+  R1 の数百 µA を足して 13mA ほど。板の範囲 (1 穴 200mA・板全体 500mA) にも、AD3 の V+ を USB 給電で使うときの
+  目安 (5V で 50mA) にも収まる
+
+## 計器の設定
+
+計器は AD3 の Supplies (電源) とオシロ (Scope)。クロックと Q1 を同じ時間軸で並べ、
+**Q1 がクロックの立ち下がりで切り替わり、周期がクロックの 2 倍になる** (2 分周) ことを見る。
+クロックは約 1.4Hz とゆっくりなので、WaveForms の Scope を Scan (流し表示) にするか、
+時間レンジを 500ms/div にして 1 画面に 7 周期ほどを入れる。
+
+| 項目 | 値 |
+| --- | --- |
+| 電源 | Supplies の V+ を 5V、V− は使わない |
+| CH1 (1+) | クロック (555 の PIN 3 = 4040 の PIN 10)。1V/div、0V を下から 1 目盛 |
+| CH2 (2+) | Q1 (4040 の PIN 9)。CH1 と同じ 1V/div・同じ 0V の位置 |
+| 1−・2− | GND |
+| 時間レンジ | 500ms/div |
+| トリガ | CH1 の立ち上がり、1.8V。トリガの点を左から 1 目盛に置く |
+| Measurements | Frequency・Duty |
+| カーソル | X1・X2 をクロックの続く 2 つの立ち下がりの直後に置く。ΔX がクロックの 1 周期 = Q1 の半周期 |
+
+```scope
+title: 図3 クロック (CH1) と Q1 (CH2) — Q1 は立ち下がりで切り替わり、周波数は半分
+time: 500ms/div
+trigger: ch1 rising 1.8V at -4div
+ch1: {wave: square 1.394Hz 1.7V offset 1.8V duty 54.8%, range: 1V/div, position: -3div}
+ch2: {wave: square 0.697Hz 2V offset 2V | delay 393ms, range: 1V/div, position: -3div}
+cursors: [400ms, 1.117s]
+measure: [freq, duty, vmax, vmin]
+```
+
+- 図3 の CH1 (クロック) は約 0.1V と約 3.5V を行き来する。High が約 0.39 秒、Low が約 0.32 秒
+  (3-2 の式で tH = 0.69 × (R1 + R2) × C1、tL = 0.69 × R2 × C1。計算値)
+- CH2 (Q1) はクロックが立ち下がるたびに (カーソル X1・X2 の位置) 0 と 1 が入れ替わる。
+  Q1 の周波数はクロックの半分の約 0.70Hz で、デューティ比は 50%。Q1 の High は LED に 2mA ほど流しながら約 4V
+  (10-1 の目安。標準の品)
+- 2+ を Q2・Q3・Q4 に挿し替えると、周波数はさらに半分ずつ (約 0.35Hz・0.17Hz・0.087Hz) になる
 
 ## 見るべき値
 

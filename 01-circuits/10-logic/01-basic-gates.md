@@ -144,10 +144,10 @@ parts:
   PS:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: AD3 Supplies 5V
+    pins: [V+, GND]
 wires:
-  - PS.+5V -- +t1 red
+  - PS.V+ -- +t1 red
   - PS.GND -- -t2 black
   - -t1 -- -b1 black
   - +t3 -- a3 red
@@ -197,8 +197,9 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/01-basic-gates.svg)
 
-- 上の赤レール = +5V (単3 電池 3 本か USB の 5V)、青レール = GND。電源の +5V (赤) は
-  上の赤レールの 1 列、GND (黒) は上の青レールの 2 列へ (電源は板の左上に置く)。下の青レールは
+- 電源は Analog Discovery 3 (AD3、0-3 で使った USB 計測器) の Supplies。WaveForms の Supplies で
+  V+ を 5V にする (単3 電池 3 本や USB の 5V でもよい)。上の赤レール = +5V、青レール = GND。
+  AD3 の V+ (赤) は上の赤レールの 1 列、GND (黒) は上の青レールの 2 列へ (AD3 は板の左上に置く)。下の青レールは
   1 列で上の青レールとつなぐ
 - U1 (CD4081, AND) は 24〜30 列、U2 (CD4071, OR) は 38〜44 列、U3 (CD4069, NOT)
   は 52〜58 列。どれも切り欠きが左で、PIN 1 が左下 (f 行)、PIN 14 が左上 (e 行)
@@ -218,6 +219,15 @@ wires:
 - 使わない入力は黒の短い線で GND へ。上側の足 (U1・U2 の PIN 8・9・12・13、U3 の
   PIN 9・11・13) は a 行から上の青レールへ、下側の足 (U1・U2 の PIN 5・6、U3 の PIN 3・5)
   は j 行から下の青レールへ
+
+## 計器の設定
+
+計器は AD3 の Supplies (電源) だけを使い、出力の 0・1 は LED とテスターで読む。
+この題はオシロの図を付けない — スイッチを止めている間の直流の電圧 (0 か 1) だけを見る題で、時間で変わる量が無いため。
+
+板を流れる電流は、LED 3 個が全部点いても約 2.2mA × 3 ≈ 7mA と、閉じたスイッチのプルダウンに流れる
+5V / 10kΩ = 0.5mA × 3 で、合わせて 10mA に満たない。板の範囲 (1 穴 200mA・板全体 500mA) にも、
+AD3 の V+ を USB 給電で使うときの目安 (5V で 50mA) にも収まる。
 
 ## 見るべき値
 
