@@ -44,8 +44,15 @@ parts:
   VCC: vcc e18a5 5V
   GND: ground h13f0
   GU1: ground j14a5
-  DS1: seg7 k22
-  GCOM: ground m20a5
+  DS1: seg7 p31
+  GCOM: ground s29a5
+  Ra: resistor k26a5 m26a5 330
+  Rb: resistor k24a5 m24a5 330
+  Rc: resistor k22a5 m22a5 330
+  Rd: resistor k20a5 m20a5 330
+  Re: resistor k18a5 m18a5 330
+  Rg: resistor k33a5 m33a5 330
+  Rf: resistor k35a5 m35a5 330
 wires:
   - c11 -- c14
   - c14 |- U1.1
@@ -60,31 +67,33 @@ wires:
   - U1.5 -| h13f0
   - U1.8 -| j14a5
   - U1.16 -| e18a5
-  - U1.13 -| g19i2
-  - g19i2 |- DS1.a
-  - U1.12 -| h18c8
-  - h18c8 |- DS1.b
-  - U1.11 -| h18g4
-  - h18g4 |- DS1.c
-  - U1.10 -| i18
-  - i18 |- DS1.d
-  - U1.9 -| i17e6
-  - i17e6 |- DS1.e
-  - U1.14 -| n23a4
-  - n23a4 -- n20a1
-  - n20a1 |- DS1.g
-  - U1.15 -| o23a8
-  - o23a8 -- o19a7
-  - o19a7 |- DS1.f
-  - DS1.COM1 -| m20a5
-  - DS1.COM2 -| m20a5
+  # 出力 a〜e: 縦に下りて電流制限の抵抗 (Ra〜Re) を通り、DS1 へ
+  - U1.13 -| k26a5
+  - m26a5 |- DS1.a
+  - U1.12 -| k24a5
+  - m24a5 |- DS1.b
+  - U1.11 -| k22a5
+  - m22a5 |- DS1.c
+  - U1.10 -| k20a5
+  - m20a5 |- DS1.d
+  - U1.9 -| k18a5
+  - m18a5 |- DS1.e
+  # 出力 f・g: 右を回って Rf・Rg を通り、DS1 の下から入る
+  - U1.14 -| k33a5
+  - m33a5 -- t33f5 -- t28f5
+  - t28f5 |- DS1.g
+  - U1.15 -| k35a5
+  - m35a5 -- u35f5 -- u27f5
+  - u27f5 |- DS1.f
+  - DS1.COM1 -| s29a5
+  - DS1.COM2 -| s29a5
 notes:
   - text b12a5h5 small blue: "B (PIN 1)"
   - text f10d5 small blue: "C (PIN 2)"
   - text j11d8 small blue: "D (PIN 6)"
   - text l12h5 small blue: "A (PIN 7)"
-  - text p1 small left: "VDD は PIN 16 (+5V)、VSS は PIN 8 (GND)"
-  - text q1 small left: "LT (PIN 3)・BI (PIN 4) は +5V、LE (PIN 5) は GND に固定"
+  - text w1 small left: "VDD は PIN 16 (+5V)、VSS は PIN 8 (GND)"
+  - text x1 small left: "LT (PIN 3)・BI (PIN 4) は +5V、LE (PIN 5) は GND に固定"
 style:
   grid: off
   pitch: 1.2
@@ -106,6 +115,33 @@ style:
 - 出力 (PIN 9〜15、セグメント a〜g) は H で点灯させる向きに電流を出す。そのため DS1 は
   コモンカソード (全セグメントの LED のカソードを共通の足 COM1・COM2 にまとめた品) を使い、
   COM を GND へつなぐ。コモンアノード品 (アノードが共通) では向きが逆で点かない
+- セグメントは 1 本ずつが LED なので、1-1 の LED と同じく電流を決める抵抗が要る。
+  出力ごとに Ra〜Rg (330Ω) を 1 本ずつ直列に入れる (図1 の中ほどの 7 本)。抵抗を
+  省いて直結すると、電流を決めるものが 4511 の出力の内部だけになり、セグメントと
+  4511 の両方に無理な電流が流れる
+- 4511 の出力は、H のとき電源の 5V より 1V 弱低い。データシートの典型値は、
+  5V 電源で 5mA を流したとき 4.25V、10mA で 4.10V なので、ここでは V<sub>OH</sub> ≈ 4.2V とする。
+  セグメントの順方向電圧 V<sub>F</sub> は、赤の 7 セグメントで約 2.0V (使う品のデータシートで
+  確かめる)。1 セグメントの電流は
+  I = (V<sub>OH</sub> − V<sub>F</sub>) / R = (4.2V − 2.0V) / 330Ω ≈ 6.7mA (計算値)。
+  5〜10mA の範囲に入る。出力が落ちないと仮定して 5V で見積もっても
+  (5V − 2.0V) / 330Ω ≈ 9.1mA で、10mA を超えない。330Ω は E24 の値
+- 電流がいちばん多いのは「8」を出して 7 セグメントが全部点くときで、
+  7 × 6.7mA ≈ 47mA (5V で見積もっても 7 × 9.1mA ≈ 64mA)。プルダウン抵抗の 4 本
+  (閉じたとき 1 本 0.5mA) を足しても 70mA に届かない。ブレッドボードに組んでも、
+  1 穴 200mA・板全体 500mA (README の板の範囲) に収まる。4511 の 1 出力あたりの
+  上限 25mA にも十分余裕がある
+
+## 部品
+
+| 記号 | 部品 | 値 |
+| --- | --- | --- |
+| U1 | BCD → 7 セグメント デコーダ | CD4511 (DIP-16) |
+| DS1 | 7 セグメント LED (赤、コモンカソード) | 5161AS など。V<sub>F</sub> 約 2.0V |
+| Ra〜Rg | 抵抗 (1/4 W)、セグメントの電流制限 | 330Ω × 7 本 |
+| RpdA〜RpdD | 抵抗 (1/4 W)、プルダウン | 10kΩ × 4 本 |
+| SWA〜SWD | スライドスイッチかトグルスイッチ | 4 個 |
+| — | 電源 | 5V |
 
 ## 見るべき値
 
@@ -119,6 +155,8 @@ style:
 | 1 1 1 1 | 15 | **空白** (無効なコード) |
 
 スイッチは閉じると 1。10 進で 9 まではふつうの数字の形、10 以上はセグメントが全部消える。
+点いているセグメントの抵抗 (Ra など) の両端をテスターの直流電圧レンジで測ると約 2.2V で、
+330Ω で割ると約 6.7mA (計算値) になる。
 LE を GND から外して +5V につなぎ替えてから BCD を変えると、表示は変わらないままになる
 (直前の値を保持している)。
 
