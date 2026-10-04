@@ -305,18 +305,18 @@ parts:
   R4: resistor i16 f16 33k
   R5: resistor n14 q14 13k
   R6: resistor g8 j8 150k
-  R7: resistor e21 h21 2k
+  R7: resistor e21 b21 2k
   VR1: potentiometer/trimmer k9 k10 k11 200k
   C1: capacitor/ceramic e7 e10 10n
   C2: capacitor/ceramic m7 m10 10n
   C3: capacitor/ceramic b15 e15 560p
   C4: capacitor/ceramic e17 e20 10n
-  C5: capacitor/ceramic e23 h23 1.2n
+  C5: capacitor/ceramic h20 h23 1.2n
   C6: capacitor/ceramic j2 m2 100n
   C7: capacitor/electrolytic j4 m4 10u
   L1: inductor b13 e13 220u
-  L2: inductor e22 b22 100u
-  FL1: sip3 j20 SFU455B
+  L2: inductor i20 i23 100u
+  FL1: sip3 g17 r90 SFU455B
   J1: sma/female-edge c1 b0 d0
   J2: sma/female-edge i1 h0 j0
   J3: sma/female-edge i24 h25 j25
@@ -347,7 +347,8 @@ wires:
   - g1 -- g3 black
   - q6 -- q11 black
   - q11 -- q14 black
-  - q14 -- q21 black
+  - q14 -- q15 black
+  - q15 -- q21 black
   - q21 -- q24 black
   - q24 -- q25 black
   - j25 -- q25 black
@@ -358,9 +359,12 @@ wires:
   - f11 -- k11 black
   - k11 -- q11 black
   - k11 -- k10 black
-  - h21 -- j21 black
-  - j21 -- q21 black
-  - h23 -- h25 black
+  - h17 -- h15 black
+  - h15 -- q15 black
+  - b21 -- b24 black
+  - b24 -- h24 black
+  - h23 -- h24 black
+  - h24 -- h25 black
   - c1 -- c7 white
   - c7 -- e7 white
   - f10 -- g10 white
@@ -388,11 +392,14 @@ wires:
   - e13 -- e15 white
   - e15 -- e17 white
   - e20 -- e21 white
-  - e20 -- j20 white
-  - j22 -- e22 white
-  - e22 -- e23 white
-  - b22 -- b24 white
-  - b24 -- i24 white
+  - e20 -- f20 white
+  - f20 -- f17 white
+  - f17 -- g17 white
+  - i17 -- j17 white
+  - j17 -- j20 white
+  - j20 -- i20 white
+  - i20 -- h20 white
+  - i23 -- i24 white
 notes:
   - parts
 style:
@@ -404,18 +411,18 @@ style:
 5×7 cm に収めるために、次のようにした。
 
 - 端面実装の SMA は胴が板の外へ出るので、板の中の穴は中心導体の 1 穴 (J1 は c1、J2 は i1、J3 は i24) だけ。先端は縁の銅箔 (0 列と 25 列) に半田付けする
-- 抵抗・コンデンサ・インダクタは足を 3 穴間隔 (差が 3) にした (L2 は右上に縦。R3 は g 行に横に置く。C6・C7 は USB-C の基板のすぐ上に縦に置き、3 穴間隔で j 行 (VDD) と m 行 (GND) にまたがる)
+- 抵抗・コンデンサ・インダクタは足を 3 穴間隔 (差が 3) にした (L2・C5 は J3 の手前に横。R7 は右上に縦。FL1 は 17 列に縦 (`sip3 g17 r90`)。R3 は g 行に横に置く。C6・C7 は USB-C の基板のすぐ上に縦に置き、3 穴間隔で j 行 (VDD) と m 行 (GND) にまたがる)
 - USB-C (J4) の変換基板は 14.5 x 9.2 x 3.2 mm の品を想定する。図の胴は幅 9.2 mm (約 3.6 穴) で 2〜5 列に、長さは 5 穴に詰めて n 行から下に描かれる。**足は基板の後ろの縁の四角いパッド 4 つ (n2〜n5) で、線はパッドへつなぐ。図ではパッドの真ん中から線が出るのが部品面からも見える。胴の上には部品も線も置かない** (m 行の GND の筋は胴のすぐ上を通る)。足の書き順は変換基板のパッドの並び GND D+ D- VBUS で、4 本とも書くので `J4: usb-c/female n2 n3 n4 n5` と書く。左端が GND (n2)、右端が VBUS (n5)、間の D+ (n3)・D- (n4) は使わない。基板の刷り字は VBUS を `V` と縮めてあり、パッドの下に出る
-- GND の筋は Q 行の q6〜q24。左の GND は m 行 (m1〜m6) から 6 列を下って q6 へ、右は 25 列を下って q25 → q24
+- GND の筋は Q 行の q6〜q24。左の GND は m 行 (m1〜m6) から 6 列を下って q6 へ、右は 25 列を下って q25 → q24。FL1 の GND (h17) は h15 から 15 列を下って q15 へ
 - 跨ぎは数えていない。VBUS の線 (2 列と 5 列) を RF・LO の線と g 行・m 行の GND の線が渡る
 - U1 は dip4 のまま (向きを変えていない)。前の版は perf_5x7_edge_v5.md に残した
 
 - USB-C (J4) は左下の隅。VBUS のパッド (n5) から 5 列を j 行まで上って C7 の + (j4)・C6 (j2) へ渡り、2 列を b 行の電源 + の筋へ。GND のパッド (n2) から m2 へ上がって m 行の GND の筋へ。D+ (n3)・D- (n4) はどこにもつながない。CC1・CC2 の 5.1 kΩ は、変換基板に内蔵のもの (電源取り出し用の基板) を使う前提で、図には描かない。変換基板は 14.5 x 9.2 x 3.2 mm の品を想定 (図は縦 5 穴に詰める)
-- J1 (RF 入力) は左上の b〜d 行 (先端 b0・d0、中心 c1)。J2 (LO 入力) は左の中央 (先端 h0・j0、中心 i1)。LO は i 行を右へ通る。J3 (IF 出力) は右の中央 (先端 h25・j25、中心 i24)。入口の 51 Ω (R1・R3) は SMA の中心から。IF は L2 (b22) から b24 へ出て、24 列を下って J3 の中心 (i24) へ。計器側が 50 Ω の負荷
+- J1 (RF 入力) は左上の b〜d 行 (先端 b0・d0、中心 c1)。J2 (LO 入力) は左の中央 (先端 h0・j0、中心 i1)。LO は i 行を右へ通る。J3 (IF 出力) は右の中央 (先端 h25・j25、中心 i24)。入口の 51 Ω (R1・R3) は SMA の中心から。IF は L2 の IF 側 (i23) から隣の J3 の中心 (i24) へ。計器側が 50 Ω の負荷
 - 左端の縁の銅箔の GND は 1 列に出し (d1〜h1、j1〜m1)、m 行へ通した。上下は縁の銅箔でつながる。R3 の GND の足 (g3) は g1 から
-- C5 の GND の足 (h23) は h 行を右へ通って J3 の上の先端 (h25) へ (IF の線を跨ぐ)
+- C5 の GND の足 (h23) は h 行を右へ通って J3 の上の先端 (h25) へ。R7 の GND の足 (b21) は b24 から 24 列を下って h24 で合流する
 - 半田付けの順は、電源と GND の筋 → 抵抗・インダクタ・コンデンサ → VR1 → FL1 → C6・C7 → U1 の変換基板 → J1〜J4
-- FL1 の足: 1 = IN (j20)、2 = GND (j21)、3 = OUT (j22)。VR1: 1 = A (k9、中点)、2 = W (k10)、3 = B (k11)。B は GND (11 列の線)、W は B と線でつなぐ (k10〜k11)
+- FL1 の足: 1 = IN (g17)、2 = GND (h17)、3 = OUT (i17)。IN は C4 の FIN (e20) から f 行を回って、OUT は j 行を回って L2 (i20) へ。VR1: 1 = A (k9、中点)、2 = W (k10)、3 = B (k11)。B は GND (11 列の線)、W は B と線でつなぐ (k10〜k11)
 - 周波数は最大 2.055 MHz、電流は 10 mA ほどで perfboard の範囲に収まる
 
 | 部品 | 値 | 穴 |
@@ -427,18 +434,18 @@ style:
 | R4 | 33k | i16 (G2) / f16 (VDD) |
 | R5 | 13k | n14 (G2) / q14 (GND) |
 | R6 | 150k | g8 (G1) / j8 (中点) |
-| R7 | 2k | e21 (FIN) / h21 (GND) |
+| R7 | 2k | e21 (FIN) / b21 (GND) |
 | VR1 | 200k 半固定 | k9 (A) k10 (W) k11 (B) |
 | C1 | 10n | e7 (RF) / e10 (G1) |
 | C2 | 10n | m7 (LO) / m10 (G2) |
 | C3 | 560p | b15 (VDD) / e15 (D) |
 | C4 | 10n | e17 (D) / e20 (FIN) |
-| C5 | 1.2n | e23 (FO) / h23 (GND) |
+| C5 | 1.2n | h20 (FO) / h23 (GND) |
 | C6 | 100n | j2 (VDD) / m2 (GND) |
 | C7 | 10u 16 V | j4 (+、VDD) / m4 (-、GND) |
 | L1 | 220u | b13 (VDD) / e13 (D) |
-| L2 | 100u | e22 (FO) / b22 (IF) |
-| FL1 | 455 kHz | j20 (IN) j21 (GND) j22 (OUT) |
+| L2 | 100u | i20 (FO) / i23 (IF) |
+| FL1 | 455 kHz | g17 (IN) h17 (GND) i17 (OUT)。縦置き |
 | J1 | SMA 端面 (RF 入力) | 中心 c1 / 先端 b0・d0 (縁の銅箔) |
 | J2 | SMA 端面 (LO 入力) | 中心 i1 / 先端 h0・j0 (縁の銅箔) |
 | J3 | SMA 端面 (IF 出力) | 中心 i24 / 先端 h25・j25 (縁の銅箔) |
