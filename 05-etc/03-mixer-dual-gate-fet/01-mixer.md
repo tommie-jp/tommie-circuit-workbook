@@ -298,7 +298,7 @@ board:
   material: FR-4
   slots: on
 parts:
-  U1: dip4 f12 3SK291
+  U1: dip4 f14 3SK291
   R1: resistor c7 c10 51
   R2: resistor e6 b6 1M
   R3: resistor g3 g6 51
@@ -354,7 +354,7 @@ wires:
   - j25 -- q25 black
   - c10 -- c11 black
   - c11 -- e11 black
-  - f12 -- f11 black
+  - f14 -- f11 black
   - e11 -- f11 black
   - f11 -- k11 black
   - k11 -- q11 black
@@ -374,10 +374,10 @@ wires:
   - f10 -- e10 blue
   - j8 -- j9 white
   - j9 -- k9 white
-  - i12 -- i10 yellow
-  - i13 -- n13 white
-  - n13 -- n16 white
-  - n13 -- n10 yellow
+  - i14 -- i10 yellow
+  - i15 -- n15 white
+  - n15 -- n16 white
+  - n15 -- n10 yellow
   - i16 -- n16 white
   - b16 -- f16 yellow
   - i1 -- i6 white
@@ -385,7 +385,7 @@ wires:
   - i6 -- k6 white
   - k6 -- k7 white
   - k7 -- n7 white
-  - f13 -- e13 white
+  - f15 -- e15 white
   - e13 -- e15 white
   - e15 -- e17 white
   - e20 -- e21 white
@@ -424,7 +424,7 @@ style:
 
 | 部品 | 値 | 穴 |
 | --- | --- | --- |
-| U1 | 3SK291 (dip4) | アンカー f12: S f12、D f13、G1 i12、G2 i13 |
+| U1 | 3SK291 (dip4) | アンカー f14: S f14、D f15、G1 i14、G2 i15 |
 | R1 | 51 | c7 (RF) / c10 (GND) |
 | R2 | 1M | e6 (G1) / b6 (VDD) |
 | R3 | 51 | g6 (LO) / g3 (GND) |
