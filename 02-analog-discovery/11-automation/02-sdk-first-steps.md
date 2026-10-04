@@ -13,7 +13,7 @@ board: —
 11-1 までの Script は**WaveForms 本体の中の Script Editor** (JavaScript 風)
 から計器を動かした。ここでは一歩外に出て、**WaveForms を起動していない
 外部の Python プロセス**から、SDK (`dwf` ライブラリ、`ctypes` 経由の C 関数)
-で AD3 を直接動かす。1-5・11-1 と同じ RC ローパス (R = 1 kΩ、C = 100 nF、
+で AD3 を直接動かす。11-1 と同じ RC ローパス (R = 1 kΩ、C = 100 nF、
 f<sub>c</sub> ≒ 1.59 kHz) を、Python だけで駆動・測定する。
 
 Script Editor の `Scope1.channel[0].measure("Amplitude")` のような**便利な

@@ -58,9 +58,9 @@ wires:
   - a10 -- -t10 black
   - AD.1+ -- +t7 yellow
   - AD.1- -- -t8 black
-  - AD.V- -- b15 orange
+  - AD.V- -- b15 blue
   - a20 -- -t20 black
-  - AD.2+ -- a15 blue
+  - AD.2+ -- a15 white
   - AD.2- -- -t17 black
 ```
 

@@ -54,7 +54,7 @@ wires:
 
 ## Script
 
-Scope の **Script** ウィンドウ (計器メニューの `Script`) に書く。
+**Script** の窓 (計器メニューの `Script`) に書く。
 `Run` を押すと、振幅を変えながら Vpp を測って `Log` ウィンドウに表を出す。
 
 ```javascript
@@ -69,6 +69,7 @@ Wavegen1.Channel1.Simple.Frequency.value = 1000; // 1 kHz
 Scope1.Channel1.Range.value = 5;
 
 Wavegen1.run();
+Scope1.run();
 wait(0.2);
 
 for (var i = 0; i < amps.length; i++) {
