@@ -311,7 +311,7 @@ parts:
   C2: capacitor/ceramic m7 m10 10n
   C3: capacitor/ceramic b15 e15 560p
   C4: capacitor/ceramic e17 e20 10n
-  C5: capacitor/ceramic g23 j23 1.2n
+  C5: capacitor/ceramic e23 h23 1.2n
   C6: capacitor/ceramic j2 m2 100n
   C7: capacitor/electrolytic j4 m4 10u
   L1: inductor b13 e13 220u
@@ -348,8 +348,7 @@ wires:
   - q6 -- q11 black
   - q11 -- q14 black
   - q14 -- q21 black
-  - q21 -- q23 black
-  - q23 -- q24 black
+  - q21 -- q24 black
   - q24 -- q25 black
   - j25 -- q25 black
   - c10 -- c11 black
@@ -361,7 +360,7 @@ wires:
   - k11 -- k10 black
   - h21 -- j21 black
   - j21 -- q21 black
-  - j23 -- q23 black
+  - h23 -- h25 black
   - c1 -- c7 white
   - c7 -- e7 white
   - f10 -- g10 white
@@ -390,9 +389,8 @@ wires:
   - e15 -- e17 white
   - e20 -- e21 white
   - e20 -- j20 white
-  - j22 -- g22 white
-  - g22 -- g23 white
-  - e22 -- g22 white
+  - j22 -- e22 white
+  - e22 -- e23 white
   - b22 -- b24 white
   - b24 -- i24 white
 notes:
@@ -415,7 +413,7 @@ style:
 - USB-C (J4) は左下の隅。VBUS のパッド (n5) から 5 列を j 行まで上って C7 の + (j4)・C6 (j2) へ渡り、2 列を b 行の電源 + の筋へ。GND のパッド (n2) から m2 へ上がって m 行の GND の筋へ。D+ (n3)・D- (n4) はどこにもつながない。CC1・CC2 の 5.1 kΩ は、変換基板に内蔵のもの (電源取り出し用の基板) を使う前提で、図には描かない。変換基板は 14.5 x 9.2 x 3.2 mm の品を想定 (図は縦 5 穴に詰める)
 - J1 (RF 入力) は左上の b〜d 行 (先端 b0・d0、中心 c1)。J2 (LO 入力) は左の中央 (先端 h0・j0、中心 i1)。LO は i 行を右へ通る。J3 (IF 出力) は右の中央 (先端 h25・j25、中心 i24)。入口の 51 Ω (R1・R3) は SMA の中心から。IF は L2 (b22) から b24 へ出て、24 列を下って J3 の中心 (i24) へ。計器側が 50 Ω の負荷
 - 左端の縁の銅箔の GND は 1 列に出し (d1〜h1、j1〜m1)、m 行へ通した。上下は縁の銅箔でつながる。R3 の GND の足 (g3) は g1 から
-- C5 の GND の足 (j23) は 23 列を真下に通って q23 へ
+- C5 の GND の足 (h23) は h 行を右へ通って J3 の上の先端 (h25) へ (IF の線を跨ぐ)
 - 半田付けの順は、電源と GND の筋 → 抵抗・インダクタ・コンデンサ → VR1 → FL1 → C6・C7 → U1 の変換基板 → J1〜J4
 - FL1 の足: 1 = IN (j20)、2 = GND (j21)、3 = OUT (j22)。VR1: 1 = A (k9、中点)、2 = W (k10)、3 = B (k11)。B は GND (11 列の線)、W は B と線でつなぐ (k10〜k11)
 - 周波数は最大 2.055 MHz、電流は 10 mA ほどで perfboard の範囲に収まる
@@ -435,7 +433,7 @@ style:
 | C2 | 10n | m7 (LO) / m10 (G2) |
 | C3 | 560p | b15 (VDD) / e15 (D) |
 | C4 | 10n | e17 (D) / e20 (FIN) |
-| C5 | 1.2n | g23 (FO) / j23 (GND) |
+| C5 | 1.2n | e23 (FO) / h23 (GND) |
 | C6 | 100n | j2 (VDD) / m2 (GND) |
 | C7 | 10u 16 V | j4 (+、VDD) / m4 (-、GND) |
 | L1 | 220u | b13 (VDD) / e13 (D) |
