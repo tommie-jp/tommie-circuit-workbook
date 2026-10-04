@@ -38,7 +38,7 @@
     },
     "device": {
       "type": "string",
-      "enum": ["AD2", "AD3", "LV64", "H4", "V2", "SA"]
+      "enum": ["AD2", "AD3", "LV64", "H4", "V2", "SA", "SIM", "WEB", "PICO", "FPGA"]
     },
     "tools": {
       "type": "array",

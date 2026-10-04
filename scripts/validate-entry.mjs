@@ -51,7 +51,7 @@ export function validateFrontMatter(data) {
   }
 
   if (data.device !== undefined) {
-    const allowed = ['AD2', 'AD3', 'LV64', 'H4', 'V2', 'SA'];
+    const allowed = ['AD2', 'AD3', 'LV64', 'H4', 'V2', 'SA', 'SIM', 'WEB', 'PICO', 'FPGA'];
     if (!allowed.includes(data.device)) {
       errors.push(`device は ${allowed.join(' / ')} のどれかにしてください`);
     }
