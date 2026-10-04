@@ -80,7 +80,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/06-wheatstone-bridge.svg)
 
-- R1・R2 が上段〜中段で節点 B (10 列) を作る。R3 (半固定抵抗器) が節点 A
+- R1 (c 行) と R2 (d 行) が 10 列でつながり、節点 B を作る。R3 (半固定抵抗器) が節点 A
   (30 列、電源の + 側から b 行の赤い線で渡る) から分かれて節点 D (R3 のワイパー) を
   作り、Rx が節点 D から GND (38 列) へつながる
 - GA (検流計) は板の外の機器として描き、節点 B (10 列) と節点 D (R3 のワイパー、

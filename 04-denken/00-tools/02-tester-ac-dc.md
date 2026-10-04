@@ -30,16 +30,16 @@ title: 図1 方形波を 2 種類のテスターで読む
 style:
   standard: jis
 parts:
-  V1: square a1 c1 l=$\mathrm{W1}$
+  V1: square a1 i1 l=$\mathrm{W1}$
   R1: resistor a3 a5 1k
   M1: voltmeter e3 e5 l=$\mathrm{RMS}$
   M2: voltmeter g3 g5 l=$\mathrm{AVG}$
-  G1: ground c1
+  G1: ground i1
 wires:
   - a1 -- a3
   - a5 -- a9
-  - a9 -- c9
-  - c9 -- c1
+  - a9 -- i9
+  - i9 -- i1
   - a3 -- e3
   - a5 -- e5
   - e3 -- g3
@@ -82,7 +82,7 @@ notes:
 
 | 計器 | 設定 |
 | --- | --- |
-| Wavegen | W1: Square、1 kHz、Amplitude 1 V、Offset 0 V、Symmetry 50 %(デューティ比 50 %) |
+| Wavegen | W1: Square、1 kHz、Amplitude 1 V、Offset 0 V、Symmetry 50 % (デューティ比 50 %) |
 | テスター 1 | 交流電圧レンジ、真の実効値形 (カタログに "True RMS" と書いてある機種) |
 | テスター 2 | 交流電圧レンジ、平均値形 (無印の安価な機種。多くのアナログテスターもこちら) |
 

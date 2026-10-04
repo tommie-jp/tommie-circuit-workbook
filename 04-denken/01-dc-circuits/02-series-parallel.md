@@ -35,12 +35,12 @@ parts:
   R2: resistor a5 a7 2k
   V1: voltmeter e3 e5
   V2: voltmeter g5 g7
-  G1: ground c1
+  G1: ground i1
 wires:
-  - a1 -- c1
+  - a1 -- i1
   - a7 -- a11
-  - a11 -- c11
-  - c11 -- c1
+  - a11 -- i11
+  - i11 -- i1
   - a3 -- e3
   - a5 -- e5
   - a5 -- g5
