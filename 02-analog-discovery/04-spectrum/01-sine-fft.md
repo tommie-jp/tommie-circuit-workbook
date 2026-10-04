@@ -29,6 +29,28 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/01-sine-fft.svg)
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/breadboard/01-sine-fft.svg)
+
+W1 と 1+ は 5 列に挿すだけで、列の内側でつながる。GND と 1− は上の − レールにまとめる。部品は無い。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -46,7 +68,7 @@ AD3 のサンプル周波数は、システムクロック (既定 100 MHz、50�
 画面は次のようになる。基本波 1 本だけが立ち、ほかの周波数には何も出ない (理想)。
 
 ```spectrum
-title: 図2 1 kHz の基本波が −3.01 dBV に 1 本だけ立つ
+title: 図3 1 kHz の基本波が −3.01 dBV に 1 本だけ立つ
 device: ad3
 sweep: 0-20kHz
 samples: 32768
@@ -56,6 +78,18 @@ markers: [1kHz]
 ```
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/01-sine-fft.svg)
+
+```scope
+title: 図4 同じ信号を時間で見ると 1 kHz・Vpp 2.00 V の正弦波
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/scope/01-sine-fft.svg)
+
+図4 は同じ信号を Scope の時間波形で見た画面。Spectrum はこの波形を FFT にかけて、1 kHz の 1 本の線として見せる。
 
 ## 見るべき値
 

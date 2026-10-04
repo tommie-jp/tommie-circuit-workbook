@@ -47,11 +47,36 @@ V+ (Supplies、5 V) → R1 (330 Ω) → LED → GND。抵抗を入れずに LED 
 直結すると、LED の順方向抵抗はごく小さいので大電流が流れ、LED か AD3 自体を
 壊す恐れがある。**これは実機では試さない**。
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードで V+ から 330 Ω と LED を GND へ
+board: half
+parts:
+  R1: resistor c5 c10 330
+  D1: led d10(A) d14(K) red
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [V+, GND]
+wires:
+  - AD.V+ -- a5 red
+  - AD.GND -- -t3 black
+  - a14 -- -t14 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/breadboard/02-input-range-power-limits.svg)
+
+V+ は 5 列に入れ、R1 (330 Ω)・LED の順に 10 列でつなぐ。LED は足の長い方 (アノード) を 10 列に、短い方 (カソード) を 14 列に挿し、14 列から GND のレールへ戻す。
+
 ## 計器の設定
 
 | 計器 | 設定 |
 | --- | --- |
 | Supplies | V+ = 5 V、Master Enable |
+
+この題はオシロの図を付けない — 時間で変わらない直流の電圧・電流だけを見る題で、電圧計の読み値で足りる。
 
 ## 見るべき値
 
@@ -68,7 +93,7 @@ LED の V<sub>F</sub> ≈ 2.0 V と仮定。電流 = (V+ − V<sub>F</sub>) ÷ 3
 (V+ = 5 V、V<sub>F</sub> = 2.0 V)。
 
 ```graph
-title: 図2 330 Ω なら 9.1 mA・45.5 mW — 抵抗を小さくするほど電流が増える
+title: 図3 330 Ω なら 9.1 mA・45.5 mW — 抵抗を小さくするほど電流が増える
 x: 直列抵抗 Ω log 100..10k
 y:
   - 電流 mA 0..30

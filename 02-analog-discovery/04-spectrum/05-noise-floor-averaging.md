@@ -30,6 +30,28 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/05-noise-floor-averaging.svg)
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/breadboard/05-noise-floor-averaging.svg)
+
+W1 と 1+ は 5 列に挿すだけで、列の内側でつながる。GND と 1− は上の − レールにまとめる。部品は無い。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -37,6 +59,18 @@ wires:
 | Wavegen | W1: Sine、1000 Hz、Amplitude 1 V |
 | Scope | **Average: N 回** (下の表で N を変える)。Trigger を Wavegen に同期させ、毎回同じ位相で取り込む |
 | Spectrum | Source: Channel 1。**Start 0 Hz、Stop 20 kHz**。Window: Rectangular (ノイズフロアの比較は ENBW が一番狭い窓が見やすい、4-3)。単位: dBV |
+
+```scope
+title: 図3 同じ信号を時間で見ると 1 kHz の正弦波 (雑音は平均で減るので画面には描かない)
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/scope/05-noise-floor-averaging.svg)
+
+図3 は同じ信号を Scope の時間波形で見た画面。ランダムな雑音は理想の波形では描けないので省いてある。Average を増やすと、この波形に重なる雑音が減る。
 
 ## 見るべき値
 
@@ -53,7 +87,7 @@ wires:
 | 256 | −24.08 dB | 256 倍 |
 
 ```graph
-title: 図2 平均回数 N を 4 倍にするたびにノイズフロアが 6 dB 下がる
+title: 図4 平均回数 N を 4 倍にするたびにノイズフロアが 6 dB 下がる
 x: 平均回数 回 log 1..1000
 y: ノイズフロアの下がり幅 dB -30..0
 lines:

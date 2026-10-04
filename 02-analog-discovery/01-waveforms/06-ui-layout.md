@@ -28,12 +28,46 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/circuit/06-ui-layout.svg)
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/breadboard/06-ui-layout.svg)
+
+配線は 0-3 と同じ。W1 と 1+ を 5 列に挿し、GND と 1− を上の − レールにまとめる。
+
 ## 計器の設定
 
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen (W1) | 正弦波、1 kHz、振幅 1 V |
 | Scope (CH1) | DC、Auto トリガ |
+
+```scope
+title: 図3 Run 中の画面 — 1 kHz・Vpp 2.00 V の正弦波 (Stop を押すとこの波形で止まる)
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/scope/06-ui-layout.svg)
+
+図3 は 0-3 と同じ波形を、Run 中に Stop で止めたところ。止めた画面の波形は残り、値はそのまま読める。
 
 ## 画面の読み方
 

@@ -32,6 +32,28 @@ wires:
 0-3 と同じ配線。ここでは正弦波の代わりに**三角波**にして、CSV に
 書き出したときに値の変化が読み取りやすくしてある。
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/breadboard/04-workspace-save-export.svg)
+
+配線は 0-3 と同じ。W1 と 1+ を 5 列に挿し、GND と 1− を上の − レールにまとめる。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -46,7 +68,7 @@ Sample Rate を固定 (Base Frequency ではなく数値を直接指定) して�
 左端に寄せると、CSV の 1 行目から最後の行までが画面の端から端に並ぶ。
 
 ```scope
-title: 図2 記録の 1 ms (1000 点) が三角波のちょうど 1 周期
+title: 図3 記録の 1 ms (1000 点) が三角波のちょうど 1 周期
 time: 100us/div
 trigger: ch1 rising 0V at -5div
 ch1: {wave: triangle 1kHz 1V, range: 500mV/div}

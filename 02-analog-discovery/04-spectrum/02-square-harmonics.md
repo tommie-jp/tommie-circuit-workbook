@@ -29,6 +29,28 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/02-square-harmonics.svg)
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/breadboard/02-square-harmonics.svg)
+
+W1 と 1+ は 5 列に挿すだけで、列の内側でつながる。GND と 1− は上の − レールにまとめる。部品は無い。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -43,7 +65,7 @@ Stop を 9000 Hz よりだいぶ高い 20 kHz にしておくのは、9 次の�
 画面は次のようになる。奇数次の山が 1/n で下がりながら並び、偶数次には何も出ない (理想)。
 
 ```spectrum
-title: 図2 奇数次の山だけが 1/n で下がって並ぶ
+title: 図3 奇数次の山だけが 1/n で下がって並ぶ
 device: ad3
 sweep: 0-20kHz
 samples: 32768
@@ -53,6 +75,18 @@ markers: [1kHz, 3kHz, 5kHz, 9kHz]
 ```
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/02-square-harmonics.svg)
+
+```scope
+title: 図4 同じ信号を時間で見ると 0〜2 V ではなく ±1 V の方形波 (Vpp 2.00 V)
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: square 1kHz 1V, range: 500mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/scope/02-square-harmonics.svg)
+
+図4 は同じ信号を Scope の時間波形で見た画面。角ばった波形が奇数次の高調波の重なりでできている。
 
 ## 見るべき値
 

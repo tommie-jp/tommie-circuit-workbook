@@ -30,6 +30,28 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/04-thd-snr.svg)
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/breadboard/04-thd-snr.svg)
+
+W1 と 1+ は 5 列に挿すだけで、列の内側でつながる。GND と 1− は上の − レールにまとめる。部品は無い。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -39,6 +61,18 @@ wires:
 
 **定義**: THD = √(Σ 2 次以上の高調波の実効値²) ÷ 基本波の実効値。
 SNR = 基本波の実効値 ÷ (高調波を除いた雑音の実効値)、どちらも dB で表す。
+
+```scope
+title: 図3 時間で見ると歪みは見えない (1 kHz、Vpp 2.00 V の正弦波)
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/scope/04-thd-snr.svg)
+
+図3 は同じ信号を Scope の時間波形で見た画面。THD が 0.1〜1% 程度の歪みは、時間波形では目で分からない。Spectrum の高調波の線で測る理由になる。
 
 ## 見るべき値
 

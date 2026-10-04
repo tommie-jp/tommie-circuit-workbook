@@ -34,6 +34,28 @@ wires:
 W1 (Wavegen の出力) と M1 (オシロの CH1) を直接つなぎ、GND も共通に
 する。他には何もつながない。
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/breadboard/03-loopback.svg)
+
+W1 と 1+ は同じ 5 列に挿すだけで、列の内側でつながる。GND と 1− は上の − レールにまとめる。部品は無い。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -42,7 +64,7 @@ W1 (Wavegen の出力) と M1 (オシロの CH1) を直接つなぎ、GND も共
 | Scope (CH1) | DC、Range 500 mV/div (±2 V)、Auto トリガ |
 
 ```scope
-title: 図2 Vpp 2.00 V・1.000 kHz が設定どおり出る
+title: 図3 Vpp 2.00 V・1.000 kHz が設定どおり出る
 time: 200us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1kHz 1V, range: 500mV/div}

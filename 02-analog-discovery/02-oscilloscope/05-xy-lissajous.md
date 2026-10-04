@@ -34,6 +34,31 @@ wires:
 
 外部の部品は無く、`W1`→`1+`、`W2`→`2+`、GND 共通のループバック。
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 → 1+、W2 → 2+)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, W2, GND, 1+, 1-, 2+, 2-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.W2 -- a9 green
+  - AD.2+ -- b9 blue
+  - AD.GND -- -t3 black
+  - AD.1- -- -t7 black
+  - AD.2- -- -t11 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/breadboard/05-xy-lissajous.svg)
+
+W1 と 1+ を 5 列、W2 と 2+ を 9 列に挿す。GND・1−・2− は上の − レールにまとめる。部品は無い。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -43,7 +68,7 @@ wires:
 | Scope | 表示モードを **XY** に切り替え、X = CH1、Y = CH2 |
 
 ```scope
-title: 図2 位相差 90°・同じ振幅は円になる
+title: 図3 位相差 90°・同じ振幅は円になる
 view: xy
 ch1: {wave: sine 1kHz 1V, range: 500mV/div}
 ch2: {wave: sine 1kHz 1V phase 90deg, range: 500mV/div}
@@ -53,7 +78,7 @@ xy: ch1 ch2
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/05-xy-lissajous-1.svg)
 
 ```scope
-title: 図3 同位相 (0°) は右肩上がりの直線
+title: 図4 同位相 (0°) は右肩上がりの直線
 view: xy
 ch1: {wave: sine 1kHz 1V, range: 500mV/div}
 ch2: {wave: sine 1kHz 1V, range: 500mV/div}
@@ -63,7 +88,7 @@ xy: ch1 ch2
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/05-xy-lissajous-2.svg)
 
 ```scope
-title: 図4 W2 を 2 kHz (1:2) にすると 8 の字
+title: 図5 W2 を 2 kHz (1:2) にすると 8 の字
 view: xy
 ch1: {wave: sine 1kHz 1V, range: 500mV/div}
 ch2: {wave: sine 2kHz 1V, range: 500mV/div}

@@ -29,7 +29,7 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/04-custom-waveform.svg)
 
-板は使わない。V1 の記号は正弦だが、実際は下の CSV の波形が出る。
+V1 の記号は正弦だが、実際は下の CSV の波形が出る。
 
 ## 作る CSV
 
@@ -46,6 +46,28 @@ wires:
 1.000
 ```
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/breadboard/04-custom-waveform.svg)
+
+W1 と 1+ は 5 列に挿すだけで、列の内側でつながる。GND と 1− は上の − レールにまとめる。部品は無い。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -58,7 +80,7 @@ Frequency 1 kHz なので 1 周期 = 1000 µs。8 点を均等に敷くので、
 **1 段の幅は 1000 µs ÷ 8 = 125 µs**。
 
 ```scope
-title: 図2 Custom は 8 段の階段を 125 µs ずつくり返す
+title: 図3 Custom は 8 段の階段を 125 µs ずつくり返す
 time: 125us/div
 trigger: ch1 rising 0V at -5div
 ch1: {wave: = 0.143V - 0.286V*step(-t) + 0.2857V*(step(t-125us)+step(t-250us)+step(t-375us)+step(t-625us)+step(t-750us)+step(t-875us)+step(t-1ms)+step(t-1125us)) - 2V*step(t-500us), range: 500mV/div}

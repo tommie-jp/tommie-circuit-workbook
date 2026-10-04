@@ -17,7 +17,7 @@ FFT やネットワークアナライザで振幅が計算と合わなくなる�
 
 ## 回路図
 
-W1 を 1+ に直結するだけの**ループバック**。板は使わない。
+W1 を 1+ に直結するだけの**ループバック**。板に部品は載せない (配線は図2)。
 
 ```circuit
 title: 図1 ループバック (W1 を 1+ に直結)
@@ -37,6 +37,28 @@ wires:
 - 1− は GND に、W1 の GND (黒) も同じ GND に落とす。**GND を共通にしないと
   読みが浮く** (0-1 の話)
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/breadboard/01-basic-waveforms.svg)
+
+W1 と 1+ は 5 列に挿すだけで、列の内側でつながる。GND と 1− は上の − レールにまとめる。部品は無い。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -51,7 +73,7 @@ DC だけは Amplitude が効かず、Offset の値がそのまま出力にな�
 Sine と Ramp Up を同じ設定で読むと、形は違っても最大・最小・平均は同じ所に出る。
 
 ```scope
-title: 図2 Sine は +2.5 V と −1.5 V の間を振れ、平均は Offset の 0.5 V
+title: 図3 Sine は +2.5 V と −1.5 V の間を振れ、平均は Offset の 0.5 V
 time: 200us/div
 trigger: ch1 rising 0.5V
 ch1: {wave: sine 1kHz 2V offset 0.5V, range: 1V/div}
@@ -61,7 +83,7 @@ measure: [vmax, vmin, vpp, avg]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/01-basic-waveforms-1.svg)
 
 ```scope
-title: 図3 Ramp Up でも最大・最小・平均は Sine と同じ
+title: 図4 Ramp Up でも最大・最小・平均は Sine と同じ
 time: 200us/div
 trigger: ch1 rising 0.5V
 ch1: {wave: sawtooth 1kHz 2V offset 0.5V, range: 1V/div}

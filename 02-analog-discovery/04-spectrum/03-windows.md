@@ -34,6 +34,28 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/03-windows.svg)
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [W1, GND, 1+, 1-]
+wires:
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
+  - AD.GND -- -t3 black
+  - AD.1- -- -t8 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/breadboard/03-windows.svg)
+
+W1 と 1+ は 5 列に挿すだけで、列の内側でつながる。GND と 1− は上の − レールにまとめる。部品は無い。
+
 ## 計器の設定
 
 | 計器 | 設定 |
@@ -47,12 +69,12 @@ wires:
 **最悪ケースの理論値**でどれだけ振幅が下にずれるか (スキャロッピング損失) を
 比べる。
 
-図 2〜4 は最悪ケースを作って描いた画面である。FFT 点数を 8192 にすると
+図 3〜5 は最悪ケースを作って描いた画面である。FFT 点数を 8192 にすると
 分解能は 6.25 Hz (1000 Hz はちょうど 160 番目のビン) になるので、信号を
 半ビンずらした 1003.125 Hz にして、窓だけを替えて同じ尺度で並べた。
 
 ```spectrum
-title: 図2 Rectangular — 半ビンずれで山が −6.92 dBV まで下がる
+title: 図3 Rectangular — 半ビンずれで山が −6.92 dBV まで下がる
 device: ad3
 sweep: 0-20kHz
 samples: 8192
@@ -64,7 +86,7 @@ markers: [peak]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/03-windows-1.svg)
 
 ```spectrum
-title: 図3 Hann — 同じずれで −4.43 dBV
+title: 図4 Hann — 同じずれで −4.43 dBV
 device: ad3
 sweep: 0-20kHz
 samples: 8192
@@ -76,7 +98,7 @@ markers: [peak]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/03-windows-2.svg)
 
 ```spectrum
-title: 図4 Flat-top — 同じずれでも −3.02 dBV とほぼ正しい
+title: 図5 Flat-top — 同じずれでも −3.02 dBV とほぼ正しい
 device: ad3
 sweep: 0-20kHz
 samples: 8192
@@ -86,6 +108,18 @@ markers: [peak]
 ```
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/03-windows-3.svg)
+
+```scope
+title: 図6 最悪ケースの 1003.125 Hz を時間で見ても、見かけは普通の正弦波
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1003.125Hz 1V, range: 500mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/scope/03-windows.svg)
+
+図6 は図3〜5 と同じ信号を時間波形で見た画面。半ビンずれは時間波形には現れず、FFT にかけたときだけ窓ごとの読み値の差になる。
 
 ## 見るべき値
 
