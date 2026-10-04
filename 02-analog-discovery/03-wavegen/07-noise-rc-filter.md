@@ -69,7 +69,7 @@ wires:
 
 | 計器 | 設定 |
 | --- | --- |
-| Wavegen | W1: Function **Noise**、Amplitude 2 V、Frequency 1 MHz (Noise では乱数を出し直す速さとして働き、雑音の広がる帯域を決める。f<sub>c</sub> より十分高くしておく) |
+| Wavegen | W1: Function **Noise**、Amplitude 2 V、Frequency 1 MHz (Noise では Frequency が DAC の更新の速さになる (出典の手引き)。雑音はこの速さで出し直されるので、f<sub>c</sub> より十分高くしておく) |
 | Scope | CH1・CH2 とも DC 結合、Range ±2 V 程度。**Persistence** (2-7) を on にすると、帯の太さで振幅のばらつきが見える。Measure に **RMS** (AC) を出す |
 
 ## 見るべき値
