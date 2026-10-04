@@ -83,6 +83,7 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  slots: on
 title: 図2 8-4 の板に RST を足す (i19 から m 行へ)
 parts:
   J1: sma/female-edge i1 j0

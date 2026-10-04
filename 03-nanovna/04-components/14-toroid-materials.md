@@ -60,17 +60,17 @@ points:
 parts:
   J1: sma/female-edge i1 h0 j0
   J2: sma/female-edge i24 j25
-  L1: inductor i6 i11 巻線10回
+  L1: inductor i6 i9 巻線10回
 wires:
   - i1 -- i6
-  - i11 -- i24
+  - i9 -- i24
   - j0 -- j25 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/14-toroid-materials.svg)
 
 - 図の L1 は軸物のコイルの形で描かれる (フェンスにトロイダルの形が無い)。実物はコアを
-  板に寝かせ、巻線の両端を i6 と i11 に挿す
+  板に寝かせ、巻線の両端を i6 と i9 に挿す
 - 3 つのコアで巻線の引き出しの長さをそろえる。引き出しの長さの違いは、そのまま
   インダクタンスの違いになる (4-7)
 

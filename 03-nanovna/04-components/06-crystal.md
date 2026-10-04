@@ -47,10 +47,10 @@ points:
 parts:
   J1: sma/female-edge i1 h0 j0
   J2: sma/female-edge i24 j25
-  X1: crystal/hc49 i6 i11 10M
+  X1: crystal/hc49 i6 i9 10M
 wires:
   - i1 -- i6
-  - i11 -- i24
+  - i9 -- i24
   - j0 -- j25 black
 ```
 

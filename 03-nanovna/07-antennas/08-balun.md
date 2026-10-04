@@ -95,6 +95,7 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  slots: on
 title: 図3 perfboard に組む (部品面)
 points:
   ANT_A: i12

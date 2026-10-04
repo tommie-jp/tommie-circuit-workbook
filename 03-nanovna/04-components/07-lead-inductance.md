@@ -53,20 +53,20 @@ parts:
   J2: sma/female-edge i24 j25
 wires:
   - i1 -- i6
-  - i6 -- i11 yellow
-  - i11 -- i24
+  - i6 -- i9 yellow
+  - i9 -- i24
   - j0 -- j25 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/07-lead-inductance.svg)
 
-i6〜i11 (5 穴ぶん、2.54 mm 間隔で約 1.27 cm) を裸銅線でまたぐ。3-1 の R1 の
+i6〜i9 (3 穴ぶん、2.54 mm 間隔で約 0.76 cm) を裸銅線でまたぐ。3-1 の R1 の
 足の長さとほぼ同じで、**「部品を挿すと本当は何が増えるか」**を、部品そのものを
 外して確かめる形。
 
 直線の導線のインダクタンスは近似式 L ≈ (µ₀l / 2π)(ln(2l/r) − 0.75) で見積もれる。
 直径 0.5 mm (半径 0.25 mm)・長さ 1 cm の銅線では L ≈ 7 nH (ここでは切りのよい 1 cm で見積もる。
-実際の 1.27 cm なら約 10 nH)。
+実際の 0.76 cm なら約 5 nH)。
 
 ## 掃引の設定
 

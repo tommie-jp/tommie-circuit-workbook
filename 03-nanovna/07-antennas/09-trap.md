@@ -68,6 +68,7 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  slots: on
 title: 図2 perfboard に組む (部品面)
 parts:
   J1: sma/female-edge i1 j0

@@ -95,6 +95,7 @@ wires:
 ```perfboard
 board:
   size: 26x10
+  slots: on
 title: 図3 perfboard に組む (チェビシェフ)
 parts:
   J1: sma/female-edge e1 f0

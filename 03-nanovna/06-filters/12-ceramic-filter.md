@@ -106,6 +106,7 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  slots: on
 title: 図3 10.7 MHz 用を perfboard に組む
 parts:
   J1: sma/female-edge i1 j0
@@ -132,6 +133,7 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  slots: on
 title: 図4 455 kHz 用を perfboard に組む
 parts:
   J1: sma/female-edge i1 j0

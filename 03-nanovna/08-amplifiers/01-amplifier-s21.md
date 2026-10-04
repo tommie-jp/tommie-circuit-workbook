@@ -112,6 +112,7 @@ wires:
 ```perfboard
 board:
   size: 27x9
+  slots: on
 title: 図2 perfboard に組む (アンプ + アッテネータ)
 parts:
   J1: sma/female-edge e1 f0

@@ -83,6 +83,7 @@ notes:
 ```perfboard
 board:
   size: 7x5cm
+  slots: on
 title: 図2 SBL-1+ と端面 SMA 3 つ (部品面。足は 2 穴おき)
 points:
   P8LO: i9
