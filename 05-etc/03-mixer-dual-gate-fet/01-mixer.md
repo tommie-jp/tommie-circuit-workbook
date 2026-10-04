@@ -303,12 +303,12 @@ parts:
   R2: resistor e6 b6 1M
   R3: resistor g3 g6 51
   R4: resistor i16 f16 33k
-  R5: resistor n14 q14 13k
+  R5: resistor n16 q16 13k
   R6: resistor g8 j8 150k
   R7: resistor e21 e24 2k
   VR1: potentiometer/trimmer k9 k10 k11 200k
   C1: capacitor/ceramic e7 e10 10n
-  C2: capacitor/ceramic m7 m10 10n
+  C2: capacitor/ceramic n7 n10 10n
   C3: capacitor/ceramic b15 e15 560p
   C4: capacitor/ceramic e17 e20 10n
   C5: capacitor/ceramic h20 h23 1.2n
@@ -346,8 +346,8 @@ wires:
   - m6 -- q6 black
   - g1 -- g3 black
   - q6 -- q11 black
-  - q11 -- q14 black
-  - q14 -- q17 black
+  - q11 -- q16 black
+  - q16 -- q17 black
   - q17 -- q21 black
   - q21 -- q24 black
   - q24 -- q25 black
@@ -375,18 +375,16 @@ wires:
   - j8 -- j9 white
   - j9 -- k9 white
   - i12 -- i10 yellow
-  - i13 -- m13 white
-  - m13 -- m14 white
-  - m14 -- n14 white
-  - m14 -- m16 white
-  - m13 -- m10 yellow
-  - i16 -- m16 white
+  - i13 -- n13 white
+  - n13 -- n16 white
+  - n13 -- n10 yellow
+  - i16 -- n16 white
   - b16 -- f16 yellow
   - i1 -- i6 white
   - i6 -- g6 white
   - i6 -- k6 white
   - k6 -- k7 white
-  - k7 -- m7 white
+  - k7 -- n7 white
   - f13 -- e13 white
   - e13 -- e15 white
   - e15 -- e17 white
@@ -431,12 +429,12 @@ style:
 | R2 | 1M | e6 (G1) / b6 (VDD) |
 | R3 | 51 | g6 (LO) / g3 (GND) |
 | R4 | 33k | i16 (G2) / f16 (VDD) |
-| R5 | 13k | n14 (G2) / q14 (GND) |
+| R5 | 13k | n16 (G2) / q16 (GND) |
 | R6 | 150k | g8 (G1) / j8 (中点) |
 | R7 | 2k | e21 (FIN) / e24 (GND) |
 | VR1 | 200k 半固定 | k9 (A) k10 (W) k11 (B) |
 | C1 | 10n | e7 (RF) / e10 (G1) |
-| C2 | 10n | m7 (LO) / m10 (G2) |
+| C2 | 10n | n7 (LO) / n10 (G2) |
 | C3 | 560p | b15 (VDD) / e15 (D) |
 | C4 | 10n | e17 (D) / e20 (FIN) |
 | C5 | 1.2n | h20 (FO) / h23 (GND) |
