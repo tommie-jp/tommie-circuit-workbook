@@ -40,17 +40,17 @@ title: 図1 CH0 に Short をつなぐ (手順 3)
 parts:
   M1:
     type: device
-    at: b2
+    at: c2b0c0
     label: NanoVNA
     pins: [CH0, CH1]
     turn: mirror
-  J1: sma f2 mirror
-  G1: ground g2
+  J1: sma c8
+  G1: ground d8
 wires:
-  - M1.CH0 -| J1.1
-  - J1.2 -- g2
+  - M1.CH0 -- J1.1
+  - J1.2 -- d8
 notes:
-  - text f2f0 blue center: Short
+  - text b8 blue center: Short
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/circuit/01-solt.svg)

@@ -47,24 +47,21 @@ parts:
     label: DUT
     pins: [IN, OUT]
     turn: mirror
-  R1: resistor f4 f6 43
-  R2: resistor h6 h8 11
-  R3: resistor f6 f8 43
-  G1: ground h9
+  R1: resistor c5 c7 43
+  R2: resistor c7 e7 11
+  R3: resistor c7 c9 43
+  G1: ground e7
   M1:
     type: device
-    at: b10
+    at: b11
     label: NanoVNA
     pins: [CH0, CH1]
-    turn: mirror
 wires:
-  - A1.OUT -| f4
-  - f6 -- h6
-  - f8 -| M1.CH1
-  - h8 -- h9
+  - A1.OUT -| c5
+  - c9 |- M1.CH1
 notes:
-  - text f4f0 blue center: 20 dB パッド
-  - text a2f0 blue center: 測るアンプ (DUT)
+  - text d5 blue center: 20 dB パッド
+  - text c2 blue center: 測るアンプ (DUT)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/circuit/03-output-level.svg)
