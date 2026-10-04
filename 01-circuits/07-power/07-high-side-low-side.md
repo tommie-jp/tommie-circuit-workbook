@@ -10,8 +10,8 @@ source: 自作
 # 7-7 ハイサイドとローサイド
 
 負荷を ON/OFF するスイッチは、**負荷より GND 側 (ローサイド)** に置くか
-**負荷より電源側 (ハイサイド)** に置くかの 2 通りがある。2-1・7-2 は
-どちらもローサイド (N チャネル) だった。同じ負荷を今度はハイサイド
+**負荷より電源側 (ハイサイド)** に置くかの 2 通りがある。2-1 (NPN) と 7-2 (N チャネル
+MOSFET) はどちらもローサイドだった。同じ負荷を今度はハイサイド
 (P チャネル) で切ってみて、駆動のしかたの違いを比べる。
 
 ## 回路図
@@ -19,7 +19,7 @@ source: 自作
 ```circuit
 title: 図1 ローサイド (左) とハイサイド (右) の比較
 parts:
-  VCC: vcc b6
+  VCC: vcc b6 5V
   R1: resistor b6 d6 330
   D1: led d6 e6
   Q1: nmos-e f6 2N7000
@@ -28,14 +28,14 @@ parts:
   Rpd1: resistor f4 h4 10k
   G1: ground g6
   G2: ground h4
-  VCC: vcc b13
+  VCC: vcc b13 5V
   Q2: pmos-e d13 BSS84
   R2: resistor e13 g13 330
   D2: led g13 h13
   IN2: port d10
   Rg2: resistor d10 d12 100
   Rpu2: resistor d12 b12 10k
-  VCC: vcc b12
+  VCC: vcc b12 5V
   G3: ground h13
 wires:
   - e6 -- Q1.D
@@ -69,7 +69,7 @@ style:
 - この回路は VCC = 5 V (GPIO と同じ電源) を前提にしている。**VCC が GPIO より
   高い電源 (例えば 12 V のモータ電源) だと、GPIO の H (5 V や 3.3 V) では
   ゲートを VCC まで持ち上げきれず、Q2 を確実に OFF にできない**。その場合は
-  NPN 1 石でゲートを VCC まで引っ張る回路が要る (2-11 の PNP ハイサイドスイッチ、
+  ゲートを VCC へプルアップし、NPN 1 石で GND へ引き下げる回路が要る (2-11 の PNP ハイサイドスイッチ、
   7-8 のゲートドライバ IC 参照)
 
 ## 部品

@@ -20,15 +20,15 @@ source: 自作
 title: 図1 555 チャージポンプ (負電圧)
 parts:
   V1: vsource b3 gnd 9
-  vcc: vcc b3
+  vcc: vcc b3 9V
   G1: ground gnd
   U1: ic g10 NE555
-  vcc: vcc c6
+  vcc: vcc c6 9V
   Ra: resistor c6 e6 1k
   Rb: resistor f6f0 h6f0 4k7
   C1: capacitor h8f0 j8f0 10n
   GC1: ground j8f0
-  vcc: vcc c10
+  vcc: vcc c10 9V
   GU1: ground j10f0
   Cc: capacitor i11 j11f0 10n
   GCc: ground j11f0
@@ -63,11 +63,11 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/circuit/07-charge-pump-negative.svg)
 
-- 555 は 3-2 と同じ非安定接続。**3 番 (OUT) の方形波 (0〜9V) が
+- 555 は 3-2 と同じ非安定接続。**PIN 3 (OUT) の方形波 (0〜9V) が
   Cp (1 µF、ポンプ用コンデンサ) を駆動する**
-- OUT が High から Low に落ちるたびに、Cp の右側 (D1・D2 の中点) が
-  電源電圧ぶん引きずり下ろされる。**D1 が中点を −0.6V あたりで留め、
-  そのたびに D2 が Co (出力の蓄電コンデンサ) から電荷を吸い出す** ──
+- OUT が High の間は、D1 が Cp の右側 (D1・D2 の中点) を +0.6V あたりで留め、
+  Cp を約 (9 − 0.6) V に充電する。**OUT が Low に落ちると中点は約 −8.4V まで
+  引き下げられ、D2 が Co (出力の蓄電コンデンサ) から電荷を吸い出す。**
   これを繰り返すたびに Co の電圧がだんだん負に育っていく
 - 無負荷の出力電圧は理論上 **−(Vcc − 2×ダイオードの順方向降下) ≈ −7.8V**。
   ダイオード 2 個ぶん (約 1.2V) だけ Vcc より浅くなるのがこの方式の宿命
@@ -95,7 +95,7 @@ style:
 
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |
-| 3 番 (OUT) の周波数 | 約 13.8 kHz | 1.44 / ((1k+9.4k) × 10nF) |
+| PIN 3 (OUT) の周波数 | 約 13.8 kHz | 1.44 / ((1k+9.4k) × 10nF) |
 | 出力電圧 (無負荷) | 約 −7.8 V (計算値) | −(9V − 2×0.6V)。実測はダイオードの特性でもう少し浅くなることがある |
 | 出力電圧 (RL=1kΩ) | 約 −7.3 V (計算値) | 出力インピーダンス (約 72 Ω) と RL の分圧ぶん浅くなる |
 | RL を流れる電流 | 約 7.3 mA | 7.3V ÷ 1kΩ |

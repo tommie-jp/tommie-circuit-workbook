@@ -25,7 +25,7 @@ parts:
     at: c5
     label: SG90
     pins: [VCC, GND, SIG]
-  VCC: vcc b4
+  VCC: vcc b4 5V
   G1: ground c3 r90
   PWM: square d2 f2 5 l=$\mathrm{PWM}$
   G2: ground f2

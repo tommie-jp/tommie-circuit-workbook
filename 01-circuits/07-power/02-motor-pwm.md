@@ -59,38 +59,45 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードにモータと MOSFET を組む
-# 上の赤いレール = +5V、青いレール = GND (27・28 列で上下のレールをつないでいる)
 board: half
 parts:
   D1: diode b3(K) b6(A) 1N4001
   Q1: transistor h10(S) h11(G) h12(D) 2N7000
   R1: resistor d15 d18 100
   R2: resistor f18 f21 10k
+  PSU:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: ["+", "-"]
   MTR:
     type: device
     at: top
     label: DC モータ
     pins: [M+, M-]
 wires:
-  - MTR.M+ -- a3 red
-  - a3 -- +t3 red
+  - PSU.+ -- +t1 red
+  - PSU.- -- -t2 black
+  - MTR.M+ -- +t4 red
+  - +t3 -- a3 red
   - MTR.M- -- a6 orange
-  - a6 -- g12
+  - d6 -- d12 orange
+  - e12 -- g12 orange
   - e18 -- g18
-  - g18 -- i11
+  - i18 -- i11
   - g21 -- -b21 black
   - i10 -- -b10 black
   - +t28 -- +b28 red
   - -t27 -- -b27 black
 notes:
-  - text: R1 の上端 (15 列) が PWM 信号の入り口。ファンクションジェネレータか マイコンをつなぐ
+  - text: R1 の左端 (15 列) が PWM 信号の入り口。ファンクションジェネレータかマイコンをつなぐ
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/breadboard/02-motor-pwm.svg)
 
 - モータは板に挿さず線でつなぐので `device` で書く。D1 の
   カソード (3 列) がモータの + 側、アノード (6 列) がモータの − 側 / Q1 のドレイン側
-- R1 の下端 (18 列) が R1・R2・Q1 のゲートをつなぐ節点。列をまたぐので、
+- R1 の右端 (18 列) が R1・R2・Q1 のゲートをつなぐ節点。列をまたぐので、
   部品の足そのものではなく同じ列の空いた行 (e・g・i 行) を経由させてある
 - Q1 (2N7000) は TO-92。**平らな面を見て左から S・G・D** (2SC1815 とは並びが違う)。
   平らな面を手前 (j 行側) に向けて 10・11・12 列に挿す。ゲート (G、11 列) に

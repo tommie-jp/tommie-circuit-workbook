@@ -22,14 +22,14 @@ title: 図1 Joule thief
 parts:
   B1: battery b2c0f0 d2 1.5
   G1: ground d2
-  VBAT: vcc b2c0f0
+  VBAT: vcc b2c0f0 1.5V
   T1: transformer c5
   D1: led e5 g5 white
   G3: ground g5
   Q1: npn g7 mirror 2N3904
   G2: ground h7
   Rb: resistor c8 e8 1k
-  VBAT: vcc d6
+  VBAT: vcc d6 1.5V
 wires:
   - b2c0f0 |- T1.A1
   - T1.A2 |- e5

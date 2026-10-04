@@ -52,39 +52,43 @@ style:
 title: 図2 ブレッドボードに組む
 board: half
 parts:
-  U1: regulator/to220 g5(in) g6(gnd) g7(out)
-  Cin: capacitor f5 f3 0.33uF
-  Cout: capacitor f7 f9 0.1uF
-  RL: resistor h7 h12 100
-  Rled: resistor i7 i16 330
-  Dled: led j16(A) j18(K) red
+  U1: regulator/to220 c8(in) c9(gnd) c10(out)
+  Cin: capacitor g5 g8 0.33uF
+  Cout: capacitor g10 g13 0.1uF
+  RL: resistor b14 b18 100
+  Rled: resistor d14 d20 330
+  Dled: led b20(A) b23(K) red
   BAT:
     type: device
     at: top
     label: 電池 9V
     pins: ["+", "-"]
 wires:
-  - BAT.+ -- a5 red
-  - e5 -- h5 red
-  - BAT.- -- -t2 black
-  - j3 -- -b3 black
-  - j6 -- -b6 black
-  - g9 -- -t9 black
-  - i12 -- -t12 black
-  - i18 -- -b18 black
-  - -t20 -- -b20 black
+  - BAT.+ -- +t2 red
+  - BAT.- -- -t3 black
+  - +t8 -- a8 red
+  - e8 -- f8 red
+  - e9 -- f9 black
+  - j9 -- -b9 black
+  - j5 -- -b5 black
+  - j13 -- -b13 black
+  - e10 -- f10 orange
+  - a10 -- a14 orange
+  - a18 -- -t18 black
+  - a23 -- -t23 black
+  - -t29 -- -b29 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/03-three-terminal-regulator.svg)
 
 - **7805 (TO-220) は端子側を上にすると左から IN・GND・OUT。** 放熱板を後ろに
   向けて挿す
-- **GND の足 (6 列) は必ず − レールへ** (j6 から黒線)。ここが浮くと出力は 5 V に
+- U1 の足 (IN・GND・OUT = 8・9・10 列) は、上のブロックの e 行から線で下のブロックへ渡す
+- **GND の足 (9 列) は必ず − レールへ** (j9 から黒線)。ここが浮くと出力は 5 V に
   ならない
-- Cin (5 列) は IN・GND の間、Cout (7 列) は OUT・GND の間。**リード線は
+- Cin (5・8 列) は IN・GND の間、Cout (10・13 列) は OUT・GND の間。**リード線は
   短く、レギュレータのすぐ近くに**
-- 1 つの穴には足か線を 1 本だけ挿す。Cin の足のある 3・5 列へは、同じ列の空いた穴
-  (j3・h5) から線を出す。上下の − レールは 20 列でつなぐ
+- 出力は a10 から 14 列へ渡し、RL と Rled に配る。上下の − レールは 29 列でつなぐ
 
 ## 部品
 
@@ -93,9 +97,9 @@ wires:
 | U1 | 三端子レギュレータ (TO-220) | 7805 |
 | Cin | セラミックコンデンサ (入力側) | 0.33 µF |
 | Cout | セラミックコンデンサ (出力側) | 0.1 µF |
-| RL | 抵抗 (主負荷) | 100 Ω |
+| RL | 抵抗 (主負荷、1/2 W。消費は 0.25 W) | 100 Ω |
 | Rled | 抵抗 (表示 LED 電流制限) | 330 Ω |
-| Dled | LED (緑、5 mm) | V<sub>F</sub> ≈ 2.0 V |
+| Dled | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
 | — | 電源 | 9 V — 7805 は入出力差 (ドロップアウト) が約 2V 要るので、出力 5V に対して入力は 7V 以上が要る |
 
 ## 見るべき値

@@ -59,6 +59,11 @@ title: 図2 ブレッドボードに 2 つのスイッチとモータを組む
 # 上下の赤いレール = +5V、青いレール = GND (右端で上下を渡している)
 board: half
 parts:
+  PSU:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: ["+", "-"]
   SW1: slide-switch b5(1) b6(c) b7(2)
   SW2: slide-switch h12(1) h13(c) h14(2)
   MTR:
@@ -67,6 +72,8 @@ parts:
     label: DC モータ
     pins: [M+, M-]
 wires:
+  - PSU.+ -- +t1 red
+  - PSU.- -- -t2 black
   - +t5 -- a5 red
   - -t7 -- a7 black
   - MTR.M+ -- a6 orange

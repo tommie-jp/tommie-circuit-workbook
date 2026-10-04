@@ -58,12 +58,12 @@ style:
 title: 図2 ブレッドボードに組む
 board: half
 parts:
-  D1: diode f5(A) f7(K) 1N4001
-  D2: diode g9(A) g7(K) 1N4001
-  D3: diode j11(A) j5(K) 1N4001
-  D4: diode i11(A) i9(K) 1N4001
-  C1: capacitor/electrolytic g14(+) g18(-) 1000uF
-  RL: resistor j14 j18 220
+  D3: diode b8(A) b5(K) 1N4001
+  D4: diode d8(A) d11(K) 1N4001
+  D1: diode g5(A) g8(K) 1N4001
+  D2: diode i11(A) i8(K) 1N4001
+  C1: capacitor/electrolytic g16(+) g20(-) 1000uF
+  RL: resistor i16 i20 220
   GEN:
     type: device
     at: top
@@ -71,17 +71,22 @@ parts:
     pins: [AC1, AC2]
 wires:
   - GEN.AC1 -- a5 yellow
-  - e5 -- g5 yellow
-  - GEN.AC2 -- a9 yellow
-  - e9 -- g9 yellow
-  - i7 -- i14 red
-  - g11 -- i18 black
+  - e5 -- f5 yellow
+  - GEN.AC2 -- a11 yellow
+  - e11 -- f11 yellow
+  - a8 -- -t8 black
+  - j8 -- +b8 red
+  - +b16 -- j16 red
+  - -b20 -- j20 black
+  - -t29 -- -b29 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/01-rectifier-filter.svg)
 
-- **D1・D2 のカソード側 (7 列) が DC+、D3・D4 のアノード側 (11 列) が DC−。**
-  7 列に C1 の + 側、11 列に − 側を挿す
+- **D1・D2 のカソード (8 列の下のブロック) が DC+、D3・D4 のアノード (8 列の上のブロック) が DC−。**
+  DC+ は下の + レールへ、DC− は上の − レールへ出し、C1 と RL はレールから 16・20 列に取る。
+  上下の − レールは 29 列でつなぐ
+- 交流は 5 列と 11 列に入れ、上のブロックから下のブロックへ黄色の線で渡す
 - 整流ダイオードは向き (帯のある側がカソード) を必ず確認する。逆にすると
   電流が流れず、AC アダプタと C1 に負担がかかる
 

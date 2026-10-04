@@ -56,33 +56,38 @@ style:
 title: 図2 ブレッドボードに組む
 board: half
 parts:
-  U1: regulator/to220 g5(in) g6(gnd) g7(out)
-  Cin: capacitor f5 f3 10uF
-  Cout: capacitor f7 f9 22uF
-  Rled: resistor h7 h12 150
-  Dled: led i12(A) i14(K) red
+  U1: regulator/to220 c8(in) c9(gnd) c10(out)
+  Cin: capacitor g5 g8 10uF
+  Cout: capacitor g10 g13 22uF
+  Rled: resistor b14 b20 150
+  Dled: led d20(A) d23(K) red
   USB:
     type: device
     at: top
     label: USB-C (電源のみ)
     pins: [VBUS, GND]
 wires:
-  - USB.VBUS -- a5 red
-  - e5 -- h5 red
-  - USB.GND -- -t2 black
-  - j3 -- -b3 black
-  - -t6 -- h6 black
-  - g9 -- -t9 black
-  - j14 -- -b14 black
-  - -t16 -- -b16 black
+  - USB.VBUS -- +t2 red
+  - USB.GND -- -t3 black
+  - +t8 -- a8 red
+  - e8 -- f8 red
+  - e9 -- f9 black
+  - j9 -- -b9 black
+  - j5 -- -b5 black
+  - j13 -- -b13 black
+  - e10 -- f10 orange
+  - a10 -- a14 orange
+  - a23 -- -t23 black
+  - -t29 -- -b29 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/04-ldo-usb.svg)
 
 - USB-C の VBUS・GND だけを引き出す (D+/D−/CC は使わない)。実物では
   USB コネクタのモジュール基板を使うとよい
-- 1 つの穴には足か線を 1 本だけ挿す。Cin の足のある 3・5 列へは、同じ列の空いた穴
-  (j3・h5) から線を出す。上下の − レールは 16 列でつなぐ
+- U1 の足 (IN・GND・OUT = 8・9・10 列) は、上のブロックの e 行から線で下のブロックへ渡す。
+  Cin (5・8 列) と Cout (10・13 列) は下のブロックに挿し、出力は a10 から 14 列の Rled へ渡す。
+  上下の − レールは 29 列でつなぐ
 - **AMS1117 は実物では SOT-223 (面実装) のみで、DIP のように直接
   ブレッドボードへは挿せない。** 3 本足の THT 部品として描いているのは、
   ピン間隔を持たせて市販の「AMS1117 3.3V 固定出力モジュール」基板

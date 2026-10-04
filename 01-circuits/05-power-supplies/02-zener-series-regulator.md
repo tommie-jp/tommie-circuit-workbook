@@ -52,29 +52,37 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上のレールは Vin (12V) / GND
 board: half
 parts:
-  Rz: resistor a5 a9 1.2k
-  DZ: zener/do41 b11(A) b9(K)
-  Q1: transistor f9(E) f10(C) f11(B)
-  RL: resistor i9 i15 220
+  Rz: resistor b5 b9 1.2k
+  DZ: zener/do41 d13(A) d9(K)
+  Q1: transistor f7(E) f8(C) f9(B) 2SC1815
+  RL: resistor h7 h13 220
+  PSU:
+    type: device
+    at: top
+    label: 電源 12V
+    pins: ["+", "-"]
 wires:
-  - +t5 -- b5 red
-  - -t9 -- c11 black
-  - -t9 -- -b9 black
-  - c9 -- g11 orange
-  - +t10 -- g10 red
-  - j15 -- -b15 black
+  - PSU.+ -- +t2 red
+  - PSU.- -- -t3 black
+  - +t5 -- a5 red
+  - a13 -- -t13 black
+  - e9 -- g9 orange
+  - j8 -- +b8 red
+  - j13 -- -b13 black
+  - +t29 -- +b29 red
+  - -t30 -- -b30 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/02-zener-series-regulator.svg)
 
-- **ツェナー (DZ) は帯のある側 (カソード) を上 (9 列)、GND 側 (アノード、11 列)
-  を下に挿す。** アノードを GND レールへ、カソードを Rz とベースへ
-- **Q1 のコレクタ (10 列) を Vin (+12 V) に直結**、ベース (11 列) を DZ・Rz の
-  接続点へ、エミッタ (9 列) が出力。RL (220 Ω、9→15 列) が負荷で、
-  15 列を GND (青レール) へ落とす
+- **ツェナー (DZ) は帯のある側 (カソード) を 9 列、アノードを 13 列に挿す。**
+  アノードは a13 から − レールへ、カソードは Rz とベースへつなぐ
+- **Q1 は E・C・B を 7・8・9 列に挿す。** コレクタ (8 列) は j8 から下の + レール (+12 V) へ直結し、
+  ベース (9 列) は e9 から g9 への線で DZ・Rz の接続点へつなぐ。エミッタ (7 列) が出力で、
+  RL (220 Ω、7→13 列) が負荷。13 列は j13 から − レールへ落とす
+- 上下のレールは右端 (+ は 29 列、− は 30 列) でつなぐ
 
 ## 部品
 

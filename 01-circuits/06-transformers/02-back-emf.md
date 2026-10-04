@@ -50,15 +50,22 @@ title: 図2 ブレッドボードに組む
 # 上の赤いレール = +5V、青いレール = GND
 board: half
 parts:
+  BAT:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: ["+", "-"]
   S1: switch b3 b5
   R1: resistor b8 b12 180
   L1: inductor/axial b15 b20 100m
   D1: led d20(A) d15(K)
 wires:
+  - BAT.+ -- +t1 red
+  - BAT.- -- -t2 black
   - +t3 -- a3 red
   - a5 -- a8
   - a12 -- a15
-  - c20 -- -t20 black
+  - a20 -- -t20 black
 notes:
   - text: D1 は L1 と同じ 15・20 列 (別の行) に置き、コイルと並列にする
 ```
