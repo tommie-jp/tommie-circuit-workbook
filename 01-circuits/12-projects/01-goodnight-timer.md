@@ -96,7 +96,23 @@ parts:
   Q1: transistor b40(S) b41(G) b42(D) 2N7000
   RLED: resistor b52 b49 470
   DLED: led c49(A) c46(K) red
+  PS:
+    type: device
+    at: top
+    label: AD3 Supplies 5V / Scope 1
+    pins: [V+, GND, 1+, 1-]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope 2
+    pins: [2+, 2-]
 wires:
+  - PS.V+ -- +t1 red
+  - PS.GND -- -t1 black
+  - PS.1+ -- d11 yellow
+  - SC.2+ -- j12 blue
+  - PS.1- -- -t3 black
+  - SC.2- -- -b21 black
   - -t62 -- -b62 black
   - +t63 -- +b63 red
   - a10 -- +t10 red
@@ -132,6 +148,11 @@ wires:
   渡し、DLED (常夜灯) のカソードへ (アノードは RLED を通して + レール)。
   2N7000 は平らな面を見て左から S・G・D (2-5 と同じ)
 - 1 つの穴には足か線を 1 本だけ挿す (部品の足のある列へは、同じ列の空いた穴から線を出す)
+- 電源は Analog Discovery 3 (AD3、0-3 で使った USB 計測器) の Supplies で、V+ を 5V にして上の赤レール (1 列)、
+  GND を上の青レール (1 列の下) へ。AD3 のオシロ (Scope) は 2 つの点を見る。1+ を Ct と THRES・DISCH の列 (11 列、`d11`) に、
+  2+ を OUT の列 (12 列の下、`j12`) に挿し、1− と 2− (黒) は − レール (GND) へ。図2 では同じ AD3 を 2 つの箱 (上と下) に描いた。
+  板を流れる電流は DLED の約 6.4mA に TLC555 の数百 µA を足した 7mA ほどで、板の範囲 (1 穴 200mA・板全体 500mA) にも、
+  AD3 の V+ を USB 給電で使うときの目安 (5V で 50mA) にも収まる
 
 ## ユニバーサル基板に組む
 
@@ -217,6 +238,41 @@ wires:
 - 交差は 2 か所で、どちらも被覆線で跨ぐ。橙の d 行 (Ct へ) が 10 列の赤 (RESET) を、
   黄の j 行 (TRIG) が 5 列の黒 (U1 の GND) を跨ぐ。この回路は足の並びから交差を
   0 にはできない (PIN 4 の VCC と、PIN 6・7 から Ct への GND が U1 の右で必ず出会う)
+
+## 計器の設定
+
+計器は AD3 の Supplies (電源) とオシロ (Scope)。**SWtrig を押した瞬間から OUT が H になり、Ct の電圧が 5V に向かってゆっくり上がる**のを、
+1 回の押下で見る。約 19 分の現象なので、Scope を Record モード (Analog Discovery の本の 2-11) にする。
+図3 は押してから最初の 9 分 (時間レンジ 60s/div、図に描ける最長のレンジ) で、OUT が H のまま Ct が上がっていく様子。
+Ct が電源電圧の 2/3 (約 3.33V) に届いて OUT が L に戻るのは約 1137 秒 (約 19 分) で図の外になる。実機では記録を 20 分以上に延ばして確かめる。
+
+| 項目 | 値 |
+| --- | --- |
+| 電源 | Supplies の V+ を 5V、V− は使わない |
+| CH1 (1+) | Ct の電圧 (U1 の PIN 6・7)。1V/div、0V を下から 1 目盛 |
+| CH2 (2+) | OUT (U1 の PIN 3)。CH1 と同じ 1V/div・同じ 0V の位置 |
+| 1−・2− | GND |
+| 時間レンジ | 60s/div (Record モード、図3 の最初の 9 分)。T まで見るなら記録を 20 分以上に延ばす |
+| トリガ | CH2 の立ち上がり、2.5V。トリガの点を左から 1 目盛に置く (SWtrig を押した時刻が t = 0) |
+| Measurements | Maximum |
+| カーソル | X1 を 60 秒、X2 を 480 秒に置き、そのときの Ct を読む |
+
+```scope
+title: 図3 押してから最初の 9 分 — OUT は H のまま、Ct の電圧が上がっていく
+time: 60s/div
+trigger: ch2 rising 2.5V at -4div
+ch1: {wave: = 5V * step(t) * (1 - exp(-t / 1034s)), range: 1V/div, position: -3div}
+ch2: {wave: = 5V * step(t), range: 1V/div, position: -3div}
+cursors: [60s, 480s]
+measure: [vmax]
+```
+
+- 図3 の CH2 (OUT) は押した瞬間 (t = 0) に 0V から約 5V へ上がり、図の間ずっと H のまま。
+  CH1 (Ct) は 0V から 5V に向かって曲線を描いて上がる。時定数 τ = Rt × Ct = 4.7MΩ × 220µF = 1034 秒 (計算値)
+- カーソルの読みは、X1 (60 秒) で 5V × (1 − e<sup>−60/1034</sup>) ≈ 0.28V、X2 (480 秒) で 5V × (1 − e<sup>−480/1034</sup>) ≈ 1.86V (計算値)
+- T = 1.1 × τ ≈ 1137 秒のとき Ct は 5V × (1 − e<sup>−1.1</sup>) ≈ 3.33V (電源の 2/3) になり、555 が止まって OUT が L に戻る。
+  DISCH が Ct を放電して 0V に戻す。この変化は図3 の外 (原点から約 19 目盛) で、実機の記録で確かめる
+- 実物の T は、電解コンデンサの容量誤差 (±20% ほど) と漏れで変わる (下の「見るべき値」の注)。図は計算値
 
 ## 見るべき値
 

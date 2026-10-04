@@ -58,7 +58,16 @@ parts:
   MCU: pico2 @ h5
   R1: resistor j24 j28 330
   D1: led i28(A) i30(K) red
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: [1+, 1-, 2+, 2-]
 wires:
+  - SC.1+ -- g24 yellow
+  - SC.2+ -- g28 blue
+  - SC.1- -- -b26 black
+  - SC.2- -- -b27 black
   - j30 -- -b30 black
   - j22 -- -b22 black
   - -t50 -- -b50 black
@@ -76,6 +85,44 @@ wires:
   LED の電流が Pico 2 へ戻れず、点かない (Pico 2 の GND はどのピンも中でつながって
   いるので、どれか 1 本をレールへ出せばよい)。上下の − レールは 50 列で渡して
   おく
+- 電源は Pico 2 の USB (VBUS ピン 40 に来る 5V を、基板上のレギュレータが 3.3V にして使う)。
+  Analog Discovery 3 (AD3、0-3 で使った USB 計測器) は電源に使わず、**オシロ (Scope) だけ**を
+  つなぐ。1+ (黄) を GP15 の列 (24 列、`g24`) に、2+ (青) を LED のアノードの列 (28 列、`g28`) に挿し、
+  1− と 2− (黒) は下の − レール (GND) へ。板を流れる電流は LED の約 3.9mA だけで、
+  板の範囲 (1 穴 200mA・板全体 500mA) に収まる
+
+## 計器の設定
+
+計器は AD3 のオシロ (Scope)。**GP15 が 0.5 秒ごとに H・L を切り替え、LED のアノードが
+H のときだけ約 2.0V (LED の順方向電圧) に上がる**のを見る。1 周期 1 秒のゆっくりした波なので、
+時間レンジは 200ms/div (1 画面 2 秒、2 周期)。
+
+| 項目 | 値 |
+| --- | --- |
+| 電源 | Pico 2 の USB (AD3 の Supplies は使わない) |
+| CH1 (1+) | GP15 (ピン 20)。1V/div、0V を下から 1 目盛 |
+| CH2 (2+) | LED のアノード (R1 と LED のあいだ)。CH1 と同じ 1V/div・同じ 0V の位置 |
+| 1−・2− | GND |
+| 時間レンジ | 200ms/div |
+| トリガ | CH1 の立ち上がり、1.5V。トリガの点を左から 1 目盛に置く |
+| Measurements | Frequency・Vmax |
+| カーソル | X1 を点灯の中 (250ms)、X2 を消灯の中 (750ms) に置く。ΔX が半周期 500ms |
+
+```scope
+title: 図3 GP15 (CH1) と LED のアノード (CH2) — 0.5 秒ごとに切り替わる
+time: 200ms/div
+trigger: ch1 rising 1.5V at -4div
+ch1: {wave: square 1Hz 1.65V offset 1.65V duty 50%, range: 1V/div, position: -3div}
+ch2: {wave: square 1Hz 1V offset 1V duty 50%, range: 1V/div, position: -3div}
+cursors: [250ms, 750ms]
+measure: [freq, vmax]
+```
+
+- 図3 の CH1 (GP15) は 0V と 3.3V を行き来する。High が 0.5 秒、Low が 0.5 秒で、周波数は 1Hz
+  (プログラムの `sleep_ms(500)` の 2 回分が 1 周期)
+- CH2 (LED のアノード) は GP15 が High のとき約 2.0V。残りの約 1.3V は R1 の両端にかかる
+  (3.3V − 2.0V、下の「見るべき値」と同じ計算値)。Low のときは 0V で LED は消える
+- 0.5 秒の点滅はテスターでは追えないが、オシロなら 1 画面で High・Low の両方が見える
 
 ## 見るべき値
 

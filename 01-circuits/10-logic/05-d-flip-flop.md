@@ -104,6 +104,114 @@ style:
   (チャタリング)。CLK にボタンをそのままつなぐと、1 回の押下で Q が 2 回以上
   反転して見えることがある。きれいな 1 パルスにするには 10-9 のチャタリング除去を足す
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードに組む (CD4013 の D-FF と T-FF)
+board: half
+parts:
+  PS:
+    type: device
+    at: top
+    label: AD3
+    pins: [V+, GND, 2+, W1, 1+, 1-, 2-]
+  U1: dip14 @ e8 CD4013B
+  RQ2: resistor b9 b6 1k
+  DQ2: led d6(A) d3(K) red
+  RQ1: resistor i8 i5 1k
+  DQ1: led g5(A) g2(K) red
+  SWC1: button @ e17
+  RpdC1: resistor i17 i20 10k
+  SWC2: button @ e21
+  RpdC2: resistor b21 b25 10k
+  SWD: switch g25 g29
+  RpdD: resistor i25 i28 10k
+wires:
+  - PS.V+ -- +t1 red
+  - PS.GND -- -t2 black
+  - -t1 -- -b1 black
+  - +t30 -- +b30 red
+  - a8 -- +t8 red
+  - a12 -- -t12 black
+  - a14 -- -t14 black
+  - a3 -- -t3 black
+  - d10 -- d13 orange
+  - c11 -- c21 yellow
+  - a17 -- +t17 red
+  - j23 -- +b23 red
+  - a25 -- -t25 black
+  - j11 -- -b11 black
+  - j13 -- -b13 black
+  - j14 -- -b14 black
+  - j2 -- -b2 black
+  - g17 -- g10 yellow
+  - j20 -- -b20 black
+  - h12 -- h25 blue
+  - j29 -- +b29 red
+  - j28 -- -b28 black
+  - PS.2+ -- a9 blue
+  - PS.W1 -- a11 yellow
+  - PS.1+ -- a21 yellow
+  - PS.1- -- -t28 black
+  - PS.2- -- -t29 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/05-d-flip-flop.svg)
+
+- 電源は Analog Discovery 3 (AD3、0-3 で使った USB 計測器) の Supplies で、V+ を 5V にする。
+  AD3 の V+ を上の赤レール (1 列)、GND を上の青レール (2 列) へ。
+  下のレールは青を 1 列、赤を 30 列 (右端) で上のレールとつなぐ
+- U1 (CD4013) は 8〜14 列。切り欠きが左で、PIN 1 が左下 (f 行の 8 列)、PIN 14 (VDD) が左上 (e 行の 8 列)。
+  下の列が PIN 1〜7 (FF1 の足と VSS)、上の列が PIN 14〜8 (VDD と FF2 の足)
+- 電源: PIN 14 (8 列の上) を +5V へ、PIN 7 (14 列の下) を GND へ。使わない RESET・SET の
+  PIN 4 (11 列の下)・PIN 6 (13 列の下)・PIN 10 (12 列の上)・PIN 8 (14 列の上) は GND へ
+- FF1 (D-FF): SWD (g23 〜 g26) の 26 列を +5V に、23 列を青の線で PIN 5 (D1、12 列の下) へ。
+  RpdD (10kΩ) が 23 列を GND に落とす。SWC1 (ボタン、17 列) は上の列を +5V に、
+  下の列を黄の線で PIN 3 (CLK1、10 列の下) へ。RpdC1 (10kΩ) が下の列を GND に落とす。
+  Q1 (PIN 1、8 列の下) は RQ1 (1kΩ) と DQ1 を通して GND へ
+- FF2 (T-FF): オレンジの線で PIN 12 (Q̄2、10 列の上) を PIN 9 (D2、13 列の上) へ戻す。
+  CLK2 (PIN 11、11 列の上) は黄の線で SWC2 (ボタン、22 列) の上の列へ渡す。SWC2 の下の列は +5V、
+  RpdC2 (10kΩ) が上の列を GND に落とす。Q2 (PIN 13、9 列の上) は RQ2 (1kΩ) と DQ2 を通して GND へ
+- 図2 では、CLK2 の列 (11 列と、黄の線でつながった 22 列) に AD3 の W1 と 1+ を、Q2 の列 (9 列) に 2+ を挿す。
+  1− と 2− (黒) は上の青レール (GND) へ。W1 を挿すときは SWC2 を押さない (押すと W1 の出力が +5V につながる)
+- 板を流れる電流は、LED 2 個で約 2mA × 2、プルダウン抵抗 3 本で 5V ÷ 10kΩ = 0.5mA × 3 (ボタンやスイッチが閉じたとき)、
+  CD4013 自身は数 µA で、全部で 6mA ほど。板の範囲 (1 穴 200mA・板全体 500mA) にも、AD3 の V+ を USB 給電で使うときの
+  目安 (5V で 50mA) にも収まる
+
+## 計器の設定
+
+計器は AD3 の Supplies (電源)・Wavegen (クロックの信号源)・Scope (オシロ)。ボタンを押す間隔は人の手で決まり、
+オシロで止めて見られないので、波形を見るときは SWC2 の代わりに W1 のクロックを CLK2 に入れる。
+**Q2 がクロックの立ち上がりごとに反転し、周期がクロックの 2 倍になる** (2 分周) ことを見る。
+
+| 項目 | 値 |
+| --- | --- |
+| 電源 | Supplies の V+ を 5V、V− は使わない |
+| W1 | Square、100Hz、Amplitude 2.5V、Offset 2.5V (0〜5V)。SWC2 は押さない |
+| CH1 (1+) | CLK2 (W1 と同じ点、PIN 11)。1V/div、0V を下から 1 目盛 |
+| CH2 (2+) | Q2 (PIN 13)。CH1 と同じ 1V/div・同じ 0V の位置 |
+| 1−・2− | GND |
+| 時間レンジ | 5ms/div |
+| トリガ | CH1 の立ち上がり、1.8V。トリガの点を左から 1 目盛に置く |
+| Measurements | Frequency・Vmax・Vmin |
+| カーソル | X1 をクロックの High の中 (2.5ms)、X2 をその 2 周期あと (22.5ms) に置く。ΔX = 20ms の逆数が Q2 の周波数 |
+
+```scope
+title: 図3 クロック (CH1) と Q2 (CH2) — Q2 はクロックの立ち上がりで反転し、周波数は半分
+time: 5ms/div
+trigger: ch1 rising 1.8V at -4div
+ch1: {wave: square 100Hz 2.5V offset 2.5V duty 50%, range: 1V/div, position: -3div}
+ch2: {wave: square 50Hz 2V offset 2V, range: 1V/div, position: -3div}
+cursors: [2.5ms, 22.5ms]
+measure: [freq, vmax, vmin]
+```
+
+- 図3 の CH1 (クロック) は 0V と 5V を行き来し、周波数は 100Hz (周期 10ms)。
+  CH2 (Q2) はクロックの立ち上がりのたびに (0・10ms・20ms…) 0V と約 4V が入れ替わる。立ち下がりでは動かない
+- カーソルの ΔX = 20ms から、1/ΔX = 50Hz。クロックの半分で、Q2 の周期はクロックの 2 周期
+- Q2 の High は LED に 2mA ほど流しながら約 4V (10-1 の目安。標準の品)。D-FF の側 (Q1) は、
+  W1 を CLK1 に挿し替え、D1 を SWD で切り替えれば同じ形で見られる
+
 ## 見るべき値
 
 | 操作 | Q1 (DQ1) | Q2 (DQ2) |
