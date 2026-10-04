@@ -67,32 +67,33 @@ parts:
   R3: potentiometer/trimmer d9(1) d11(W) d13(2) 2k
   R2: resistor b20 b24 1k
   RX: resistor d24 d28 680
-  MULT:
+  SC:
     type: device
-    at: top
-    label: テスター (DCV)
-    pins: ["+", COM]
+    at: bottom
+    label: AD3 Scope (DC 電圧計)
+    pins: [1-, 1+]
   PS:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: AD3 Supplies 5V
+    pins: [V+, GND]
 wires:
-  - PS.+5V -- +t1 red
+  - PS.V+ -- +t1 red
   - PS.GND -- -t2 black
   - +t5 -- a5 red
   - +t20 -- a20 red
   - a11 -- -t11 black
   - a28 -- -t28 black
-  - MULT.+ -- a9 orange
-  - MULT.COM -- a24 gray
+  - SC.1+ -- a9 orange
+  - SC.1- -- a24 gray
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/07-wheatstone-bridge.svg)
 
-直流のブリッジなので、波形を見る必要はない。図2 では検流計の代わりに
-**テスター (DCV)** を 2 つの中点の間に当て、差の電圧が 0 V になるまで
-`R3` を回す。平衡したら電源を外し、`R3` を板から抜いて、1 と W の間の抵抗を
+直流のブリッジなので、オシロの波形の図は付けない。電源は Analog Discovery 3 (AD3) の
+Supplies の +5 V (電流は約 5 mA で、各レール約 50 mA の範囲に収まる)。図2 では検流計の代わりに
+**AD3 の Scope (1+ / 1−) を DC の電圧計として**2 つの中点の間に当て (テスターの DCV でもよい)、
+差の電圧が 0 V になるまで `R3` を回す。Scope は 1 V/div から始め、0 V に近づいたら 10 mV/div まで上げる。平衡したら電源を外し、`R3` を板から抜いて、1 と W の間の抵抗を
 テスターの Ω レンジで測る。その値が `RX` の値になる (多回転トリマには目盛りが無いため)。
 
 - 左の腕: `R1` (1 kΩ) を **b5〜b9**、`R3` (2 kΩ の半固定抵抗) を
@@ -103,7 +104,7 @@ wires:
   列 24 が中点 B
 - 赤の線は + だけ: `+t5 → a5`、`+t20 → a20` で `R1` `R2` の上端に 5 V を配る
 - 黒の線は GND だけ: `a11 → -t11` (`R3` の W)、`a28 → -t28` (`RX` の下端)
-- テスターは + (橙) を **a9** (中点 A)、COM (灰) を **a24** (中点 B) に挿す。
+- Scope の 1+ (橙) を **a9** (中点 A)、1− (灰) を **a24** (中点 B) に挿す。
   読みが V<sub>A</sub> − V<sub>B</sub> で、0 V なら平衡
 
 ## 部品
@@ -113,8 +114,8 @@ wires:
 | R1, R2 | 抵抗 (1/4 W、精度の良いもの) | 1 kΩ |
 | R3 | 可変抵抗 (値の分かる箱、または多回転トリマ) | 0〜2 kΩ 程度 |
 | RX | 抵抗 (測りたい未知の抵抗、ここでは正解 680Ω) | 680 Ω |
-| GA | 検流計 (ブレッドボードではテスターの DCV で代用) | — |
-| — | 電源 | 5V (USB) |
+| GA | 検流計 (ブレッドボードでは AD3 の Scope を電圧計にして代用) | — |
+| — | 電源 | 5 V (AD3 の Supplies の V+) |
 
 ## 見るべき値
 

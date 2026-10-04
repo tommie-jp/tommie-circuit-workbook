@@ -69,6 +69,99 @@ style:
   超えるまで戻らない**というのがヒステリシスの効果で、CdS の抵抗が
   しきい値ぴったりで揺れてもちらつかなくなる
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードに組む
+# 上のレールは +5V (赤) と GND (青)。下の赤レールは +5V (1 列目で渡す)、下の青レールは −5V (V−)
+board: half
+parts:
+  AD3:
+    type: device
+    at: top
+    label: AD3 Supplies ±5V
+    pins: [V+, GND, V-]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: [1+, 2+, 1-, 2-]
+  U1: dip8 @ e12 LM358
+  CDS1: photoresistor i16 i13
+  RFIX: resistor h13 h9 10k
+  VR1: potentiometer b26(1) b27(W) b28(3) 10k
+  Rref: resistor c27 c23 10k
+  Rh: resistor d11 d23 100k
+  R1: resistor c11 c9 220
+  D1: led b9(A) b6(K) red
+  DP: diode d6(A) d9(K) 1N4148
+wires:
+  - AD3.V+ -- +t2 red
+  - AD3.GND -- -t3 black
+  - AD3.V- -- -b4 blue
+  - +t1 -- +b1 red
+  - +t12 -- a12 red
+  - +t26 -- a26 red
+  - e28 -- g28 blue
+  - j28 -- -b28 blue
+  - e23 -- g14 orange
+  - j15 -- -b15 blue
+  - j9 -- -b9 blue
+  - j16 -- +b16 red
+  - g12 -- g11 orange
+  - f11 -- e11 orange
+  - a6 -- -t6 black
+  - SC.1+ -- j13 orange
+  - SC.2+ -- j12 green
+  - SC.1- -- -t19 black
+  - SC.2- -- -t20 black
+notes:
+  - text below: 上は 赤 +5V・青 GND、下は 赤 +5V・青 −5V (V−)
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/08-schmitt-trigger.svg)
+
+- 図2 は 4-4 の板に Rref と Rh を足した形。左上の AD3 Supplies は図1 の VP・VN (±5 V 電源) に当たる。V+ は上の赤レール、
+  GND は上の青レール、V− は板の左端を下ろして下の青レールへ入れる (下の赤レールは 1 列目の赤い線で +5V をもらう)。
+  PIN 8 (12 列) は `+t12 → a12` で +5V、PIN 4 (15 列) は `j15 → -b15` で −5V へ
+- **CdS (13 列) と RFIX (13 列) の分圧点が IN− (PIN 2)。** CdS の他端 (16 列) は下の赤レール (+5V) へ
+- VR1 のワイパー (27 列) から Rref (10 kΩ、27 列〜23 列) を通り、橙の線 `e23 → g14` で IN+ (PIN 3、14 列) へ入る
+- **Rh (100 kΩ) は出力の 11 列 (上ブロック) から IN+ の 23 列へ渡す。** これで出力の一部が + 入力へ戻る (正帰還)。
+  出力 (PIN 1、12 列) は `g12 → g11` と溝をまたぐ線で上ブロックの 11 列へ上げ、R1 (220 Ω)、D1 (LED) を通って GND (6 列) へ。
+  DP (1N4148) は D1 と逆並列 (4-4 と同じ。6 列・9 列を D1 と共有)
+- Scope は板の下に別の箱 (AD3 Scope) で描いた。1+ (橙) は − 入力の 13 列 (`j13`)、2+ (緑) は出力の 12 列 (`j12`)。
+  1− と 2− (黒) は上の青レール (GND) へ戻す
+- AD3 の電流は 4-4 と同じ。+5V 側は LED の約 7 mA と数 mA、−5V 側は最大約 17 mA で、各レール約 50 mA (USB 給電の目安 250 mW) に収まる
+
+## 計器の設定
+
+オシロには Analog Discovery 3 (AD3) の Scope を使う。CdS を手でゆっくり覆って開く間の − 入力 (CH1) と出力 (CH2) を見る。
+電圧がゆっくり動く題で、10 MHz よりずっと遅いから (見る時間は 1 秒)。VR1 は中点 (基準電圧 0 V) に合わせておく。
+
+| 設定 | 値 |
+| --- | --- |
+| Scope CH1 (− 入力、13 列) | DC、1 V/div |
+| Scope CH2 (出力、12 列) | DC、2 V/div |
+| Time | 100 ms/div。Mode は Single か Screen にして、手で CdS を覆い、1 秒かけて開く |
+| Trigger | CH1、立ち下がり、+1 V (覆い始めた直後) |
+
+```scope
+title: 図3 − 入力 (CH1) を下げて上げる — 出力 (CH2) はしきい値が 2 つ
+time: 100ms/div
+trigger: ch1 falling 1V at -5div
+ch1: {wave: "= 1V - 10V * (t / 1s) + 20V * ((t - 0.3s) / 1s) * step(t - 0.3s) | clip -2V 1V", range: 1V/div}
+ch2: {wave: = -4.5V + 8V * (step(t - 0.141s) - step(t - 0.532s)), range: 2V/div}
+cursors: [141ms, 532ms]
+measure: [vmax, vmin]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/scope/08-schmitt-trigger.svg)
+
+図3 は − 入力が直線で下がって上がると仮定した想定図で、実際の CdS はなだらかに変わる。CH1 は +1 V (左端のトリガ点) から 0.3 秒で −2 V へ下がり、同じ傾きで戻る。
+下がるとき、CH1 が −0.41 V (カーソル X1、0.141 秒) を切った所で CH2 が −4.5 V から +3.5 V に跳ぶ。上がるとき、CH2 が戻るのは +0.32 V (X2、0.532 秒) を越えた所。
+カーソルは CH2 が跳ぶ瞬間に置いたので、CH2 の読みは跳びの途中の値になる。CH1 の読み (−0.41 V と +0.32 V) を見る。
+切り替わる電圧が 0.73 V ずれることが、この画面でヒステリシスとして見える。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -83,6 +176,7 @@ style:
 | D1 | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
 | DP | 保護ダイオード (D1 と逆並列、4-4 と同じ理由) | 1N4148 |
 | — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
+| — | 計器 | AD3 の Scope 1+/2+ (− 入力と出力)、テスター |
 
 ## 見るべき値
 

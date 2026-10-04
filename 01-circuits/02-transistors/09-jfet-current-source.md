@@ -76,6 +76,46 @@ V<sub>GS(off)</sub> を測り、絶対値がおよそ 1.5V 以下の個体を選
 方法は電源電圧で電流が変わったが、JFET のセルフバイアスは電源電圧に
 ほぼ無関係な電流源になる**。
 
+## 実体配線図
+
+電源は Analog Discovery 3 (AD3) の Supplies の +5 V。電流は約 0.8 mA で、各レール約 50 mA・ブレッドボードの 1 穴 200 mA の範囲に収まる。
+RS の両端の電圧は AD3 の Scope の 1+ / 1− を電圧計として当てて読む (÷470 Ω で I<sub>D</sub>。テスターの DCV でもよい)。
+この題は直流の電流・電圧だけを見るので、オシロの波形の図は付けない。
+
+```breadboard
+title: 図2 JFET の定電流を組む (Scope 1+ / 1− を RS の両端へ)
+# 上の赤いレール = +5V、青いレール = GND
+board: half
+parts:
+  PS:
+    type: device
+    at: top
+    label: AD3 Supplies 5V
+    pins: [V+, GND]
+  SC:
+    type: device
+    at: top
+    label: AD3 Scope (DC 電圧計)
+    pins: [1+, 1-]
+  D1: led b7(A) b10(K) red
+  J1: transistor e10(D) e11(S) e12(G) 2SK30A
+  RS: resistor a11 -t11 470
+wires:
+  - PS.V+ -- +t1 red
+  - PS.GND -- -t2 black
+  - +t7 -- a7 red
+  - a12 -- -t12 black
+  - SC.1+ -- c11 orange
+  - SC.1- -- -t14 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/09-jfet-current-source.svg)
+
+- J1 を e10 (D)・e11 (S)・e12 (G) に挿す。2SK30A の足の並びはデータシートで確かめ、図の D・S・G の順に合わせる
+- D1 (LED) のアノードを b7、カソードを b10 (ドレインの列) に挿す。+5 V は赤の線 `+t7 → a7`
+- RS (470 Ω) はソースの列 11 の `a11` から GND のレールへ立てて挿す。ゲート (列 12) は黒の線 `a12 → -t12` で直接 GND へ
+- Scope の 1+ (橙) をソースの列 11 (`c11`)、1− (黒) を GND のレールへ。読みが RS の電圧 (約 0.4 V)
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -83,7 +123,8 @@ V<sub>GS(off)</sub> を測り、絶対値がおよそ 1.5V 以下の個体を選
 | J1 | N チャネル JFET | 2SK30A (Y ランク、V<sub>GS(off)</sub> の絶対値 1.5V 以下を選別)、代表値 I<sub>DSS</sub> = 1.5mA、V<sub>GS(off)</sub> = −1.5V |
 | RS | 抵抗 (1/4 W) | 470 Ω |
 | D1 | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
-| — | 電源 | 5V (USB) |
+| — | 電源 | 5 V (AD3 の Supplies の V+) |
+| — | 計器 | AD3 の Scope 1+ / 1− (RS の電圧を読む) |
 | — | 可変の定電圧電源 (あれば) | 0〜12 V、電流制限 20 mA ほど。次の節で電源の電圧を振るときだけ使う |
 
 ## 可変の定電圧電源で電源の電圧を振る

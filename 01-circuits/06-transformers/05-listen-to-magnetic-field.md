@@ -53,12 +53,72 @@ style:
 - セラミックイヤホンの周波数範囲は 200〜8000 Hz ほどで、50 Hz・60 Hz そのものは
   よく鳴らない。聞こえるブーンには、100 Hz・150 Hz などの倍音 (元の周波数の整数倍の成分) が多く混じる
 
+## 実体配線図
+
+```breadboard
+title: 図2 自作コイルの両端にイヤホンと Scope をつなぐ
+board: half
+parts:
+  EAR:
+    type: device
+    at: top
+    label: クリスタルイヤホン
+    pins: [A, B]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: [1+, 1-]
+  L1: inductor c5 c9 1H
+wires:
+  - EAR.A -- a5 yellow
+  - EAR.B -- a9 yellow
+  - SC.1+ -- d5 blue
+  - SC.1- -- d9 black
+notes:
+  - text below: コイル L1 は自作 (約 1000 回巻き)。電源はつながない
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/breadboard/05-listen-to-magnetic-field.svg)
+
+- L1 (自作コイル) の 2 本の足を 5 列と 9 列に挿す。コイルは太めのボビンに巻いた物で、ブレッドボードの上には**置かず**、リード線を伸ばして板から離して持つ。板に挿すのは足だけ
+  (板の上に置くと、板の金属の帯が磁界を乱す)
+- クリスタルイヤホン (EAR) の 2 本の線を 5 列 (`a5`、黄) と 9 列 (`a9`、黄) につなぐ。コイルの両端に並列になる
+- Scope の 1+ (青) は 5 列 (`d5`)、1− (黒) は 9 列 (`d9`)。コイルが生む電圧 (数 mV) を直接見る。**1+ と 1− の線は 2 本を撚って**、線が拾う電源のノイズを減らす。
+  電源 (Supplies) と信号源 (Wavegen) は使わない。この題の信号は磁界から来るコイルの電圧だけで、板を通る電流は無いに等しい
+
+## 計器の設定
+
+オシロには Analog Discovery 3 (AD3) の Scope を使う。50/60 Hz の mV 級の波形を見る題で、10 MHz よりずっと低いから。
+入力は数 mV と小さいので、Scope は最も細かい V/div の側に合わせる。
+
+| 設定 | 値 |
+| --- | --- |
+| Scope CH1 (コイルの両端、5 列と 9 列) | AC 結合 (または DC)、2 mV/div |
+| Time | 5 ms/div (50 Hz が 2.5 周期) |
+| Trigger | CH1、立ち上がり、0 V (トリガが掛からないときは Auto にする) |
+
+```scope
+title: 図3 コイルの起電力 — 50 Hz 地域で約 4.9 mV (目安の想定図)
+time: 5ms/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 50Hz 4.9mV, range: 2mV/div}
+cursors: [5ms, 15ms]
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/scope/05-listen-to-magnetic-field.svg)
+
+図3 は、下の表の 50 Hz 地域の計算値 (約 4.9 mV の振幅) を描いた**目安の図**。磁界の強さは AC アダプタとの距離と向きで大きく変わるので、実機の振幅は数倍違う。
+カーソルを山 (X1、5 ms) と谷 (X2、15 ms) に置くと ±4.9 mV と読める。コイルを磁界と直角にすると、この波形はほぼ消える。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
 | --- | --- | --- |
 | L1 | 自作コイル (エナメル線を約 1000 回巻き) | インダクタンスは目安で 1 H 程度 (巻き方次第でばらつく) |
 | EAR | クリスタルイヤホン (セラミック型、9-2 と同じ) | 容量 約 15 nF (50 Hz で約 210 kΩ、1 kHz で約 10 kΩ)。mV 級の電圧でも聞こえる |
+| — | 計器 | AD3 の Scope 1+ / 1− (コイルの両端の電圧)。電源は使わない |
 
 ## 見るべき値
 

@@ -75,34 +75,36 @@ style:
 
 ## 実体配線図
 
-図1・図2 は同じ組み方で、`RL` を挿すか抜くかだけが違う。電圧はテスター (DCV) で
-当たるので、波形を見るオシロスコープは要らない。
+図1・図2 は同じ組み方で、`RL` を挿すか抜くかだけが違う。電源は Analog Discovery 3 (AD3) の
+Supplies の +5 V (電流は数 mA で、各レール約 50 mA の範囲に収まる)。出力の電圧は AD3 の Scope の
+1+ / 1− を電圧計として当てて読む (テスターの DCV でも同じ値が読める)。
+この題は直流の電圧だけを見るので、オシロの波形の図は付けない。
 
 ```breadboard
-title: 図3 ポテンショメータの分圧をテスターで当たる
+title: 図3 ポテンショメータの分圧を AD3 の電圧計で当たる
 # 上の赤いレール = +5V、青いレール = GND
 board: half
 parts:
   P1: potentiometer b5(1) b6(W) b7(3) 10k
   RL: resistor e6 e11 10k
-  MULT:
+  SC:
     type: device
     at: bottom
-    label: テスター (DCV)
-    pins: ["+", COM]
+    label: AD3 Scope (DC 電圧計)
+    pins: [1-, 1+]
   PS:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: AD3 Supplies 5V
+    pins: [V+, GND]
 wires:
-  - PS.+5V -- +t1 red
+  - PS.V+ -- +t1 red
   - PS.GND -- -t2 black
   - +t5 -- a5 red
   - a7 -- -t7 black
   - a11 -- -t11 black
-  - MULT.+ -- d6 orange
-  - MULT.COM -- d11 gray
+  - SC.1+ -- d6 orange
+  - SC.1- -- d11 gray
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/06-potentiometer-divider.svg)
@@ -113,8 +115,8 @@ wires:
 - `RL` (10kΩ) は `e6` と `e11` に挿す。`e6` はワイパーと同じ列 6 なので
   ジャンパ線なしでつながる。右の足の列 11 は黒の線 (`a11` → 青いレール) で GND へ。
   図1 の無負荷を測るときは `RL` を抜く。
-- テスターの赤の棒 (+) を `d6` (ワイパーの列)、黒の棒 (COM) を `d11`
-  (GND の列) に当てる。図ではそれぞれ橙・灰の線で描いた。
+- AD3 Scope の 1+ を `d6` (ワイパーの列)、1− を `d11` (GND の列) につなぐ。
+  図ではそれぞれ橙・灰の線で描いた。Scope は DC カップリング、1 V/div 程度で、画面の Measurements の平均値 (DC) を読む。
 
 ## 部品
 
@@ -122,7 +124,8 @@ wires:
 | --- | --- | --- |
 | P1 | ポテンショメータ | 10 kΩ |
 | RL | 抵抗 (1/4 W) | 10 kΩ |
-| — | 電源 | 5V (USB) |
+| — | 電源 | 5 V (AD3 の Supplies の V+) |
+| — | 計器 | AD3 の Scope 1+ / 1− (直流の電圧を読む)。抵抗はテスターで測る |
 
 ## 見るべき値
 

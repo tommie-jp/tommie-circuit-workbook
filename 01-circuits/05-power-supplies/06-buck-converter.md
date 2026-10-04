@@ -63,6 +63,81 @@ style:
   になる。12 V → 5 V のように差が大きい変換で、効率の差がはっきり出る
 - 図1 では、モジュールの足がすべて箱の左に並ぶ描き方のため、出力 (OUT+) も左から出て右の負荷へ回っている
 
+## 実体配線図
+
+```breadboard
+title: 図2 モジュールの出力 5 V にブレッドボードの負荷をつなぐ
+# 上の赤レール = +5V (モジュールの出力)、青レール = GND。12 V はレールに入れず、アダプタからモジュールへ直接つなぐ
+board: half
+parts:
+  ADP:
+    type: device
+    at: top
+    label: 12 V AC アダプタ (DC 出力)
+    pins: [GND, 12V]
+  M1:
+    type: device
+    at: top
+    label: Buck DC-DC モジュール (5 V に調整済み)
+    pins: [IN+, IN-, OUT+, OUT-]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope (AC 結合)
+    pins: [1+, 1-]
+  Rload: resistor/half c10 c14 100
+  Rled: resistor c18 c21 330
+  Dled: led b21(A) b24(K) red
+wires:
+  - ADP.12V -- M1.IN+ red
+  - ADP.GND -- -t1 black
+  - M1.IN- -- -t2 black
+  - M1.OUT+ -- +t3 red
+  - M1.OUT- -- -t4 black
+  - +t10 -- a10 red
+  - a14 -- -t14 black
+  - +t18 -- a18 red
+  - a24 -- -t24 black
+  - SC.1+ -- +t12 orange
+  - SC.1- -- -t13 black
+notes:
+  - text below: 上の赤レール = +5V (OUT+)、青レール = GND。12 V は赤レールに入れない
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/06-buck-converter.svg)
+
+- 図2 の M1 は市販のモジュール (板の外)。12 V の AC アダプタ (ADP) の 12V を M1 の IN+ へ直接つなぎ、アダプタの GND と M1 の IN- は青レール (GND) へ入れる。**12 V は板のレールに入れず、赤レールは出力の 5 V だけにする** (取り違えると 5 V の回路に 12 V がかかる)。IN- は GND の青レールへもつなぐ
+- AD3 の Supplies は 12 V を出せない (約 5 V まで、各レール約 50 mA)。**12 V のこの題は AC アダプタを電源にし、AD3 は出力のリップルを見る Scope だけに使う。** 12 V は板の範囲 (定常 12 V 以下) の上限
+- モジュールの OUT+ (5 V) は上の赤レールへ、OUT- は上の青レールへ。板を通る電流は出力側が約 59 mA (Rload 50 mA + LED 約 9 mA)、入力側が約 33 mA で、1 穴 200 mA・板全体 500 mA の範囲に収まる
+- Rload (100 Ω) は 10 列〜14 列、Rled (330 Ω) は 18 列〜21 列。Rload の消費電力は 0.25 W なので、板の図でも 1/2 W 以上の抵抗を使う。LED (Dled) はアノードを 21 列、カソードを 24 列に挿す
+- Scope の 1+ (橙) を上の赤レール (出力の 5 V)、1− (黒) を上の青レール (GND) へつなぐ
+
+## 計器の設定
+
+オシロには Analog Discovery 3 (AD3) の Scope を使う。出力のリップルの形と大きさを見る題で、数十 kHz のスイッチング周波数は 10 MHz よりずっと低いから。
+直流の 5 V は乗せずに、リップルだけを大きく見るので、Scope は AC 結合にする。
+
+| 設定 | 値 |
+| --- | --- |
+| Scope CH1 (出力の 5 V、上の赤レール) | AC 結合、20 mV/div |
+| Time | 10 µs/div (数周期が見える) |
+| Trigger | CH1、立ち上がり、0 V |
+
+```scope
+title: 図3 出力のリップル (AC 結合) — 50 kHz・約 50 mVpp と仮定した目安
+time: 10us/div
+trigger: ch1 rising 0V
+ch1: {wave: triangle 50kHz 0.05Vpp, range: 20mV/div}
+cursors: [-5us, 5us]
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/scope/06-buck-converter.svg)
+
+図3 は MC34063 系のモジュールを想定した**目安の図**で、リップルの大きさと周波数はモジュールの種類と負荷で変わる (この図は 50 kHz・50 mVpp と仮定した)。
+カーソルは谷 (X1、−5 µs で −25 mV) と山 (X2、+5 µs で +25 mV) に置いてあり、差の 50 mV がリップルの大きさ (Pk-Pk)、X1 と X2 の間の 10 µs が半周期 (50 kHz の周期 20 µs の半分) に当たる。
+実機の読みは、図の Measurements の Pk-Pk と Frequency に出る。リニア方式 (5-3 の 7805) の出力にはこの周期的な揺れがほとんど無く、スイッチング方式の特徴が見える。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -71,6 +146,7 @@ style:
 | Rload | 抵抗 (負荷、1/2W 品を使う) | 100 Ω |
 | Rled | 抵抗 (LED 電流制限) | 330 Ω |
 | Dled | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
+| — | 計器 | AD3 の Scope 1+ / 1− (出力のリップルを AC 結合で見る)。テスター (電圧・電流) |
 | — | 電源 | 12 V (AC アダプタ) — 降圧 (buck) は出力より高い入力が要る。出力 5V との差が大きいほど、リニア方式との効率差もはっきり出る |
 
 ## 見るべき値

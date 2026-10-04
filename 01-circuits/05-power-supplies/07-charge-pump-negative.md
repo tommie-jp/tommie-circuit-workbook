@@ -74,6 +74,90 @@ style:
 - RL (負荷) をつなぐと、Cp が 1 周期に運べる電荷には限りがあるので、出力はさらに浅くなる。
   大きな電流は取り出せない、軽い負荷向けの方式だ
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードに組む
+# 上の赤レール = +9V、青レール = GND。下の青レール = GND (左端の線で渡す)、下の赤レール = +9V (RESET 用)
+board: half
+parts:
+  BAT:
+    type: device
+    at: top
+    label: 9 V 電源 (006P 電池かアダプタ)
+    pins: [+9V, GND]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope (CH2 は AC 結合)
+    pins: [1+, 2+, 1-, 2-]
+  U1: dip8 @ e10 NE555
+  Ra: resistor a11 +t11 1k
+  Rb: resistor b11 b17 4.7k
+  C1: capacitor d17 d20 10n
+  Cc: capacitor a13 -t13 10n
+  Cp: capacitor h18 h22 1u
+  D1: diode i22(A) -b22(K) 1N4148
+  D2: diode g26(A) g22(K) 1N4148
+  Co: capacitor/electrolytic -b26(+) i26(-) 10u
+  RL: resistor i30 -b30 1k
+wires:
+  - BAT.+9V -- +t1 red
+  - BAT.GND -- -t2 black
+  - +t1 -- +b1 red
+  - -t2 -- -b2 black
+  - +t10 -- a10 red
+  - j10 -- -b10 black
+  - j13 -- +b13 red
+  - c12 -- c17 orange
+  - g11 -- d12 orange
+  - g12 -- g18 yellow
+  - h26 -- h30 blue
+  - a20 -- -t20 black
+  - SC.1+ -- h12 orange
+  - SC.2+ -- j26 green
+  - SC.1- -- -b15 black
+  - SC.2- -- -b16 black
+notes:
+  - text below: 上の赤レール = +9V、青レール = GND。下の赤レール = +9V (PIN 4 用)、青レール = GND
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/07-charge-pump-negative.svg)
+
+- 電源は 9 V の電池 (006P) かアダプタ。**AD3 の Supplies は ±5 V までで 9 V は出せない**ので、9 V は別の電源にし、AD3 は Scope だけに使う。9 V は板の範囲 (定常 12 V 以下) に収まる。板を通る電流は 555 の約 10 mA と負荷の約 7 mA で、200 mA の範囲に収まる
+- 555 (U1) の PIN 8 (10 列) は `+t10 → a10` で +9V へ、PIN 1 (10 列) は `j10 → -b10` で GND へ、PIN 4 (RESET、13 列) は `j13 → +b13` で下の赤レール (+9V、左端の線で上の赤レールから渡す) へ
+- 非安定の接続: Ra (1 kΩ) は +9V から PIN 7 (11 列) へ立てて挿す。Rb (4.7 kΩ) は PIN 7 の 11 列から 17 列へ渡し、橙の線 `c12 → c17` で PIN 6 (12 列) とつなぐ。PIN 2 (11 列) と PIN 6 (12 列) は橙の線 `g11 → d12` でつなぐ。C1 (10 nF) は 17 列〜20 列で、黒の線 `a20 → -t20` で GND へ。Cc (10 nF) は PIN 5 (13 列) から GND へ立てて挿す
+- ポンプ部: PIN 3 (OUT、12 列) を黄の線 `g12 → g18` で 18 列へ広げ、Cp (1 µF、18 列〜22 列) を挿す。22 列が図1 の D1・D2 の中点。D1 は 22 列 (アノード) から下の青レール (GND、カソード)、D2 は出力の 26 列 (アノード) から 22 列 (カソード) へ。**D1・D2 は帯 (カソード) の向きに注意**
+- Co (10 µF) は + を GND (下の青レール) に、− を出力の 26 列 (`i26`) に挿す (電解コンデンサの向き)。RL (1 kΩ) は 30 列から GND へ立てて挿し、青の線 `h26 → h30` で出力につなぐ
+- Scope の 1+ (橙) は PIN 3 (`h12`)、2+ (緑) は出力 (`j26`)、1− と 2− (黒) は下の青レール (GND) へ
+
+## 計器の設定
+
+オシロには Analog Discovery 3 (AD3) の Scope を使う。13.8 kHz の方形波とリップルを見る題で、10 MHz よりずっと低いから。
+CH1 は 555 の出力 (0〜9 V)、CH2 は出力の −7.3 V に乗った小さなリップルを見るので **AC 結合** にする。
+
+| 設定 | 値 |
+| --- | --- |
+| Scope CH1 (PIN 3、12 列) | DC、2 V/div |
+| Scope CH2 (出力、26 列) | AC 結合、20 mV/div |
+| Time | 20 µs/div (13.8 kHz が約 3 周期) |
+| Trigger | CH1、立ち上がり、4.5 V |
+
+```scope
+title: 図3 PIN 3 の方形波 (CH1) と出力のリップル (CH2、AC 結合) — 目安
+time: 20us/div
+trigger: ch1 rising 4.5V
+ch1: {wave: square 13.8kHz 4.5V offset 4.5V, range: 2V/div}
+ch2: {wave: triangle 13.8kHz 53mVpp, range: 20mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/scope/07-charge-pump-negative.svg)
+
+図3 の CH1 は 0〜9 V (9 Vpp、2 V/div で 4.5 目盛)、周波数は約 13.8 kHz。画面下の Measurements も Vpp 9.00 V・13.80 kHz (CH1)、53.0 mV (CH2) と表の値に合う。CH2 は 53 mVpp の揺れで、「見るべき値」の表の計算値 (約 53 mV) を三角波で**目安として**描いた
+(実際の形は Cp が電荷を運ぶ瞬間の跳びを含むのこぎり状になり、大きさは使うダイオードと 555 の出力の High の電圧で変わる)。
+DC 結合のままだと CH2 は約 −7.3 V の直線に見えて揺れは読めないので、AC 結合にする。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -87,7 +171,8 @@ style:
 | D1, D2 | ダイオード | 1N4148 |
 | Co | 電解コンデンサ (出力の平滑) | 10 µF |
 | RL | 抵抗 (負荷) | 1 kΩ |
-| — | 電源 | 9 V。チャージポンプは出力がダイオード 2 個ぶん (約 1.2 V) 浅くなる。既定の 5 V では負電圧が浅すぎて OP アンプの負電源に使いにくいので、9 V にして実用的な深さの負電圧を取り出す |
+| — | 計器 | AD3 の Scope 1+ / 2+ (PIN 3 と出力)。直流の電圧はテスター |
+| — | 電源 | 9 V (006P 電池かアダプタ)。チャージポンプは出力がダイオード 2 個ぶん (約 1.2 V) 浅くなる。既定の 5 V では負電圧が浅すぎて OP アンプの負電源に使いにくいので、9 V にして実用的な深さの負電圧を取り出す |
 
 ## 見るべき値
 

@@ -52,12 +52,77 @@ style:
   数 Ω〜数十 Ω にしかならないことがある (コアによる目安)。信号源が電流を出し切れずに振幅が下がるので、
   1 次の電圧も信号源の設定値ではなく A1-A2 で測り、比は測った 2 つの値で出す。下がりすぎるなら周波数を上げる
 
+## 実体配線図
+
+```breadboard
+title: 図2 自作トランスの 1 次を W1 で駆動し、1 次と 2 次を Scope で見る
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: AD3 (Wavegen W1 と GND)
+    pins: [W1, GND]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: [1+, 1-, 2+, 2-]
+  T1: transformer a5(A1) a8(A2) a13(B1) a16(B2)
+wires:
+  - AD.W1 -- b5 yellow
+  - AD.GND -- b8 black
+  - SC.1+ -- d5 blue
+  - SC.1- -- d8 black
+  - SC.2+ -- d13 green
+  - SC.2- -- d16 black
+notes:
+  - text below: 1 次は 5・8 列、2 次は 13・16 列。間に配線は無い
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/breadboard/03-diy-transformer.svg)
+
+- T1 の 4 本の足は、手巻きの線の端 (エナメルの被覆を削って、ブレッドボードに挿せる線にした端) そのもの。1 次の A1・A2 を 5・8 列、2 次の B1・B2 を 13・16 列に挿す (6-1 と同じ)
+- 駆動は AD3 の Wavegen W1 (5 kHz・振幅 2 V の正弦波)。W1 (黄) は 1 次の A1 の列 (5 列)、AD3 の GND (黒) は 1 次の A2 の列 (8 列) につなぐ。AD3 の Wavegen は 30 mA まで出せ、出力は約 0 Ω。
+  15 回巻きは 5 kHz でリアクタンスが小さいので、1 次の電流が W1 の 30 mA を超えるときは、周波数を上げるか振幅を下げる (本文の注意のとおり)。板を通る電流は 30 mA 以下で、200 mA の範囲に収まる
+- Scope の 1+ (青) と 1− (黒) は 1 次の A1・A2 の列 (`d5`・`d8`)、2+ (緑) と 2− (黒) は 2 次の B1・B2 の列 (`d13`・`d16`)。
+  GND は 1 次側の 1 か所だけにして、2 次側はつながない (6-1 と同じ)。電源の Supplies は使わない
+
+## 計器の設定
+
+オシロには Analog Discovery 3 (AD3) の Scope を使う。5 kHz の正弦波の振幅を 1 次と 2 次で比べる題で、10 MHz よりずっと低いから。
+W1 は 5 kHz・振幅 2 V の正弦波 (オフセット 0 V)。Scope は CH1 を 1 次、CH2 を 2 次にして、トリガは CH1 の立ち上がり 0 V にする。
+
+| 設定 | 値 |
+| --- | --- |
+| Wavegen W1 | Sine、5 kHz、振幅 2 V、オフセット 0 V |
+| Scope CH1 (1 次、5・8 列) | DC (または AC)、1 V/div |
+| Scope CH2 (2 次、13・16 列) | DC (または AC)、2 V/div |
+| Time | 50 µs/div (5 kHz が 2.5 周期) |
+| Trigger | CH1、立ち上がり、0 V |
+
+```scope
+title: 図3 1 次 (CH1) 2 V と 2 次 (CH2) 6 V — 理想の巻数比 3 倍
+time: 50us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 5kHz 2V, range: 1V/div}
+ch2: {wave: sine 5kHz 6V, range: 2V/div}
+cursors: [50us, 150us]
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/scope/03-diy-transformer.svg)
+
+図3 は結合係数 k = 1 の**理想**の波形で、CH1 が 4 Vpp (4 目盛)、CH2 が 12 Vpp (6 目盛)。同じ向きに動き、2 次の高さが 1 次の 3 倍になる。
+カーソルを山 (X1、50 µs) と谷 (X2、150 µs) に置くと、1 次が ±2 V、2 次が ±6 V と読める。自作では 2 次が 5.0〜5.8 V ほどに小さく出る (下の「見るべき値」の目安)。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
 | --- | --- | --- |
 | T1 | 自作トランス (フェライトトロイダルコアに手巻き) | 1 次 15 回・2 次 45 回 (巻数比 1:3) |
-| — | 信号源 | ファンクションジェネレータ (5 kHz、振幅 2 V の正弦波) |
+| — | 信号源 | AD3 の Wavegen W1 (5 kHz、振幅 2 V の正弦波) |
+| — | 計器 | AD3 の Scope 1+/1− (1 次)・2+/2− (2 次) |
 | VM1 | 交流電圧計 (Analog Discovery のオシロ。5 kHz を正しく測れるテスターなら AC レンジでも可) | — |
 
 ## 見るべき値

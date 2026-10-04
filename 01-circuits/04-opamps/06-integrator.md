@@ -63,6 +63,85 @@ style:
   すると、LM358 の入力バイアス電流が + と − の両方の入力で同じだけ電圧降下を
   作り、オフセット誤差が打ち消し合う
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードに組む
+# 上のレールは +5V (赤) と GND (青)。下の青レールは −5V (V−)。下の赤レールは使わない
+board: half
+parts:
+  AD3:
+    type: device
+    at: top
+    label: AD3 (Supplies ±5V・W1)
+    pins: [V+, GND, V-, W1]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: [1-, 2-, 2+, 1+]
+  U1: dip8 @ e10 LM358
+  Cf: capacitor j19 j22 100n
+  Rbleed: resistor g19 g22 1M
+  Rin: resistor j11 j7 10k
+  Rbias: resistor g12 g15 10k
+wires:
+  - AD3.V+ -- +t1 red
+  - AD3.GND -- -t2 black
+  - AD3.V- -- -b3 blue
+  - AD3.W1 -- g7 yellow
+  - SC.1+ -- h7 orange
+  - SC.2+ -- j10 green
+  - SC.1- -- j15 black
+  - SC.2- -- h15 black
+  - i10 -- i22 green
+  - h11 -- h19 yellow
+  - +t10 -- a10 red
+  - j13 -- -b13 blue
+  - f15 -- -t15 black
+notes:
+  - text below: 上の赤レール = +5V、上の青レール = GND、下の青レール = −5V (V−)
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/06-integrator.svg)
+
+- 図2 の AD3 は、Supplies (V+・V−) が図1 の VP・VN、W1 が V1 (方形波) に当たる。電源のレールの分け方は 4-2 と同じ
+  (下の青レールは −5V で、GND ではない)。OP アンプ 1 個と抵抗の電流は数 mA で、各レール約 50 mA の範囲に収まる
+- W1 (黄) は 7 列へ。Rin (10 kΩ) が 7 列から IN− (PIN 2、11 列) へ渡す
+- 帰還の 2 本は IC の足の隣では部品を挿せないので、線で右へ広げる。IN− (11 列) は `h11 → h19`、出力 (PIN 1、10 列) は `i10 → i22`。
+  Cf (100 nF) は 19 列と 22 列の間 (`j19`・`j22`)、Rbleed (1 MΩ) も 19 列と 22 列の間 (`g19`・`g22`) に挿す (並列)
+- Rbias (10 kΩ) は IN+ (PIN 3、12 列) から 15 列へ。15 列は黒の線 `f15 → -t15` で GND へ落とす
+- Scope は板の下に別の箱で描いた。1+ (橙) は入力の 7 列 (`h7`)、2+ (緑) は出力の 10 列 (`j10`)。1− と 2− (黒) は GND の 15 列 (`j15`・`h15`) へ
+- PIN 8 (10 列) は `+t10 → a10` で +5V へ、PIN 4 (13 列) は `j13 → -b13` で −5V へ
+
+## 計器の設定
+
+オシロには Analog Discovery 3 (AD3) の Scope を使う。1 kHz の方形波と三角波の形・傾きを見る題で、10 MHz よりずっと低いから。
+W1 は 1 kHz・振幅 1 V の方形波 (オフセット 0 V)、Scope は CH1 を入力、CH2 を出力にして、トリガは CH1 の立ち上がり 0 V にする。
+
+| 設定 | 値 |
+| --- | --- |
+| Wavegen W1 | Square、1 kHz、振幅 1 V、オフセット 0 V、デューティ 50 % |
+| Scope CH1 (入力、7 列) | DC、500 mV/div |
+| Scope CH2 (出力、10 列) | DC、200 mV/div |
+| Time | 200 µs/div (1 kHz が 2 周期) |
+| Trigger | CH1、立ち上がり、0 V |
+
+```scope
+title: 図3 入力の方形波 (CH1) と出力の三角波 (CH2)
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: square 1kHz 1V, range: 500mV/div}
+ch2: {wave: "ch1 | integrate 1ms | invert", range: 200mV/div}
+cursors: [50us, 450us]
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/scope/06-integrator.svg)
+
+図3 は CH1 が 500 mV/div、CH2 が 200 mV/div。CH1 は 2 Vpp (4 目盛) の方形波、CH2 は 0.5 Vpp (2.5 目盛) の三角波。
+方形波が High の半周期 (0〜500 µs) の間、出力は直線で下がり、Low の間は上がる。カーソルを 50 µs と 450 µs に置くと、CH1 は 1 V のまま、CH2 は +0.2 V から −0.2 V へ変わる。ΔV = −0.4 V を 400 µs で割ると傾き −1 V/ms で、下の表の値と合う。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -74,11 +153,12 @@ style:
 | Rbias | 抵抗 (+入力のバイアス電流補償) | 10 kΩ |
 | — | 信号源 | 1 kHz、方形波、振幅 ±1 V |
 | — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
+| — | 計器 | AD3 の W1 (信号源)・Scope 1+/2+ (入力と出力) |
 
 ## 見るべき値
 
-発振器には Analog Discovery の W1 (1 kHz・±1 V の方形波) を使える。オシロの CH1 を入力、CH2 を出力 (OUT) に当て、
-同じ時間軸で重ねる。表の値は計算値。傾き = Vin / (Rin×Cf)。RinCf = 10 kΩ × 100 nF = 1 ms。
+発振器は AD3 の W1 (1 kHz・±1 V の方形波)。オシロの CH1 を入力 (7 列)、CH2 を出力 (10 列) に当て、
+同じ時間軸で重ねる (図3)。表の値は計算値。傾き = Vin / (Rin×Cf)。RinCf = 10 kΩ × 100 nF = 1 ms。
 
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |

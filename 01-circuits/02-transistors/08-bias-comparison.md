@@ -94,6 +94,88 @@ Vbe の近似誤差に埋もれてしまうので、47kΩ にして Vth を確�
 固定する分圧のおかげで、hFE のばらつきに強い** — 部品を 2 本余分に使う
 だけの価値がある。
 
+## 実体配線図
+
+2 つの回路を別々の板に組む (同じ板で差し替えてもよい)。電源は Analog Discovery 3 (AD3) の
+Supplies の +5 V で、どちらも電流は 1 mA 未満なので各レール約 50 mA の範囲に収まり、
+ブレッドボードの 1 穴 200 mA の範囲にも収まる。電圧は AD3 の Scope の 1+ / 2+ を電圧計として当てて読む
+(テスターの DCV でもよい)。この題は直流の動作点だけを見るので、オシロの波形の図は付けない。
+
+```breadboard
+title: 図3 コレクタ帰還バイアスを組む (図1。Scope 1+ をコレクタへ)
+# 上の赤いレール = +5V、青いレール = GND
+board: half
+parts:
+  PS:
+    type: device
+    at: top
+    label: AD3 Supplies 5V
+    pins: [V+, GND]
+  SC:
+    type: device
+    at: top
+    label: AD3 Scope (DC 電圧計)
+    pins: [1+, 1-]
+  RB: resistor a2 a6 680k
+  RC: resistor b9 b6 4.7k
+  Q1: transistor e5(B) e6(C) e7(E) 2SC1815
+wires:
+  - PS.V+ -- +t1 red
+  - PS.GND -- -t2 black
+  - +t9 -- a9 red
+  - d5 -- d2 yellow
+  - a7 -- -t7 black
+  - SC.1+ -- c6 orange
+  - SC.1- -- -t12 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/08-bias-comparison-1.svg)
+
+- Q1 を e5 (B)・e6 (C)・e7 (E) に挿す。2SC1815 は平らな面を見て左から E・C・B (2-1 で見た)。図は B・C・E の順に挿すので、平らな面を奥に向けて挿す
+- RC (4.7 kΩ) は b9 と b6 (コレクタの列) の間。+5 V は赤の線 `+t9 → a9` で RC の上端へ
+- RB (680 kΩ) はコレクタの列 6 (`a6`) から列 2 (`a2`) へ。列 2 から黄の線 `d2 → d5` でベースの列 5 へ戻す。これで RB がコレクタとベースをつなぐ
+- エミッタ (列 7) は黒の線 `a7 → -t7` で GND へ
+- Scope の 1+ (橙) をコレクタの列 6 (`c6`)、1− (黒) を GND のレールへ
+
+```breadboard
+title: 図4 分圧バイアスを組む (図2。Scope 1+ をコレクタ、2+ をベースへ)
+# 上の赤いレール = +5V、青いレール = GND
+board: half
+parts:
+  PS:
+    type: device
+    at: top
+    label: AD3 Supplies 5V
+    pins: [V+, GND]
+  SC:
+    type: device
+    at: top
+    label: AD3 Scope (DC 電圧計)
+    pins: [1+, 2+, 1-, 2-]
+  R1: resistor a19 +t19 47k
+  R2: resistor c20 c16 15k
+  RC: resistor b21 b24 4.7k
+  Q1: transistor e20(B) e21(C) e22(E) 2SC1815
+  RE: resistor a22 -t22 1k
+wires:
+  - PS.V+ -- +t1 red
+  - PS.GND -- -t2 black
+  - b19 -- b20 yellow
+  - +t24 -- a24 red
+  - a16 -- -t16 black
+  - SC.1+ -- a21 orange
+  - SC.2+ -- a20 green
+  - SC.1- -- -t27 black
+  - SC.2- -- -t28 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/08-bias-comparison-2.svg)
+
+- Q1 を e20 (B)・e21 (C)・e22 (E) に挿す。R1 (47 kΩ) は +5 V のレールから列 19 (`a19`) へ立てて挿し、黄の線 `b19 → b20` でベースの列 20 へつなぐ。R2 (15 kΩ) はベースの列 20 から列 16 へ渡し、黒の線 `a16 → -t16` で GND へ落とす
+- RC (4.7 kΩ) はコレクタの列 21 (b21) と列 24 (b24) の間。+5 V は赤の線 `+t24 → a24`
+- RE (1 kΩ) はエミッタの列 22 の `a22` から GND のレールへ立てて挿す
+- Scope の 1+ (橙) をコレクタ (`a21`)、2+ (緑) をベース (`a20`) へ。1−・2− (黒) は GND のレールへ
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -104,7 +186,8 @@ Vbe の近似誤差に埋もれてしまうので、47kΩ にして Vth を確�
 | R2 (図2) | 抵抗 (1/4 W) | 15 kΩ |
 | RE (図2) | 抵抗 (1/4 W) | 1 kΩ |
 | Q1 | NPN トランジスタ | 2SC1815 |
-| — | 電源 | 5V (USB) |
+| — | 電源 | 5 V (AD3 の Supplies の V+) |
+| — | 計器 | AD3 の Scope 1+ / 2+ (直流の電圧を読む)。hFE はテスターか 0-5 の hFE チェッカー |
 
 ## 見るべき値
 

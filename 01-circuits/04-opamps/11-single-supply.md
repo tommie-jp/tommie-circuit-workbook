@@ -77,6 +77,94 @@ style:
   振りたいなら **MCP6002 のようなレール to レール入出力の CMOS OP アンプ**に
   替える (今どきの低電圧回路の定番)
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードに組む
+# 上のレールは +5V (赤) と GND (青)。下のレールも赤 +5V・青 GND (左の 1 列と 4 列の線で渡す)
+board: half
+parts:
+  AD3:
+    type: device
+    at: top
+    label: AD3 (Supplies 5V・W1)
+    pins: [V+, GND, W1]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: [1+, 2+, 1-, 2-]
+  U1: dip8 @ e10 LM358
+  R1: resistor j12 +b12 10k
+  R2: resistor j14 -b14 10k
+  Cbyp: capacitor/electrolytic h14(+) h17(-) 10u
+  Rbias: resistor b13 b8 100k
+  Rg: resistor d12 d8 10k
+  Cin: capacitor d13 d16 1u
+  Rf: resistor b17 b20 10k
+wires:
+  - AD3.V+ -- +t2 red
+  - AD3.GND -- -t3 black
+  - +t1 -- +b1 red
+  - -t4 -- -b4 black
+  - AD3.W1 -- b16 yellow
+  - SC.1+ -- e16 orange
+  - SC.2+ -- e20 green
+  - SC.1- -- -t26 black
+  - SC.2- -- -t27 black
+  - g10 -- g11 green
+  - h10 -- c8 green
+  - g12 -- g14 orange
+  - a11 -- a20 green
+  - c12 -- c17 orange
+  - +t10 -- a10 red
+  - j13 -- -b13 black
+  - j17 -- -b17 black
+notes:
+  - text below: 上下とも 赤レール = +5V、青レール = GND (単電源なので −5V は無い)
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/11-single-supply.svg)
+
+- 図2 の AD3 は、Supplies の V+ (+5 V) が図1 の V1 (単電源)、W1 が V2 (信号源) に当たる。V− は使わない。
+  V+ は上の赤レール、GND は上の青レールへ入れ、下のレールには 1 列の赤い線と 4 列の黒い線で渡す。電流は LED なしで 5 mA 前後、AD3 の 5 V の約 50 mA の範囲に収まる
+- 1 個の LM358 の 2 回路を両方使う。**下ブロック側の回路 (PIN 1〜3) が U1 (仮想 GND)、上ブロック側 (PIN 5〜7) が U2 (増幅)。** 図1 の U1・U2 は板では 1 つの IC
+- **仮想 GND**: R1 (10 kΩ、12 列から下の赤レール +5V) と R2 (10 kΩ、14 列から下の青レール GND) の中点を `g12 → g14` でつなぎ、
+  U1 の + 入力 (PIN 3、12 列) へ。Cbyp (10 µF) は 14 列 (+) と 17 列 (−、`j17 → -b17` で GND) の間。出力 (PIN 1、10 列) は `g10 → g11` で − 入力に戻す (フォロア)。
+  PIN 4 (13 列) は `j13 → -b13` で GND、PIN 8 (10 列) は `+t10 → a10` で +5V
+- 仮想 GND の出力 (10 列) は緑の線 `h10 → c8` で上ブロックの 8 列へ上げる。Rbias (100 kΩ、b 段) は 8 列と U2 の + 入力 (PIN 5、13 列)、Rg (10 kΩ、d 段) は 8 列と U2 の − 入力 (PIN 6、12 列) の間
+- Cin (1 µF) は + 入力の 13 列から 16 列へ。W1 (黄) は 16 列 (`b16`) へ入れる。Rf (10 kΩ) は − 入力 (橙の線 `c12 → c17` で 17 列へ) と出力 (緑の線 `a11 → a20` で 20 列へ) の間
+- Scope の 1+ (橙) は入力の 16 列 (`e16`)、2+ (緑) は出力の 20 列 (`e20`)。1− と 2− (黒) は上の青レール (GND) へ
+
+## 計器の設定
+
+オシロには Analog Discovery 3 (AD3) の Scope を使う。1 kHz の正弦波の振幅と中心の電圧を見る題で、10 MHz よりずっと低いから。
+W1 は 1 kHz・振幅 0.3 V の正弦波 (オフセット 0 V。GND 基準)、Scope は CH1 を入力 (Cin の入力側)、CH2 を出力にして、**どちらも DC 結合**にする。
+トリガは CH2 の立ち上がり 2.5 V にする。
+
+| 設定 | 値 |
+| --- | --- |
+| Wavegen W1 | Sine、1 kHz、振幅 0.3 V、オフセット 0 V |
+| Scope CH1 (入力、16 列) | DC、100 mV/div。0 V を中心の線に置く |
+| Scope CH2 (出力、20 列) | DC、500 mV/div。オフセットを −2.5 V にして 2.5 V を中心の線に置く |
+| Time | 200 µs/div (1 kHz が 2 周期) |
+| Trigger | CH2、立ち上がり、2.5 V |
+
+```scope
+title: 図3 入力 (CH1) は 0 V が中心、出力 (CH2) は 2.5 V が中心で ±0.6 V
+time: 200us/div
+trigger: ch2 rising 2.5V
+ch1: {wave: sine 1kHz 0.3V, range: 100mV/div}
+ch2: {wave: sine 1kHz 0.6V offset 2.5V, range: 500mV/div, position: -5div}
+cursors: [250us, 750us]
+measure: [vmax, vmin]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/scope/11-single-supply.svg)
+
+図3 は CH1 が 100 mV/div で 0.6 Vpp (6 目盛、入力、0 V 中心)、CH2 が 500 mV/div で 1.2 Vpp (約 2.4 目盛、出力、2.5 V 中心)。CH2 は Scope のオフセットを −2.5 V にして、2.5 V の線を画面の中心に置く。
+カーソルを山 (X1、250 µs) と谷 (X2、750 µs) に置くと、CH2 の読みが 3.1 V と 1.9 V (表の「1.9〜3.1 V」) になる。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -89,7 +177,8 @@ style:
 | Rg | 抵抗 (利得設定、仮想GND側) | 10 kΩ |
 | Rf | 抵抗 (帰還) | 10 kΩ |
 | — | 信号源 | 0.3 V、交流 (GND 基準) |
-| — | 電源 | 単電源 5 V |
+| — | 電源 | 単電源 5 V (AD3 の Supplies の V+) |
+| — | 計器 | AD3 の W1 (信号源)・Scope 1+/2+ (入力と出力) |
 
 ## 見るべき値
 

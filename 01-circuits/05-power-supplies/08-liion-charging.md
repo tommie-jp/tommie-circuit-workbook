@@ -73,6 +73,61 @@ style:
   定格は C という単位で書かれ、1 C は電池の容量 (mAh) の数字をそのまま mA にした電流をいう。
   多くの 18650 は 0.5 C〜1 C までで、2000 mAh なら 1〜2 A まで
 
+## 実体配線図
+
+```breadboard
+title: 図2 充電の大電流は板を通さず、負荷の LED だけを板に組む
+# 上の赤レール = OUT+ (電池の電圧)、青レール = OUT− (負荷の GND)。USB の 5 V は M1 の USB ソケットへ、電池は B+ / B− へ (板に入れない)
+board: half
+parts:
+  M1:
+    type: device
+    at: top
+    label: TP4056 + 保護 (USB 入力は基板の USB ソケットへ)
+    pins: [B+, B-, OUT+, OUT-]
+  PK:
+    type: device
+    at: top
+    label: Li-ion 電池 (18650・保護つき)
+    pins: ["+", "-"]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope (OUT の電圧を見る)
+    pins: [1+, 1-]
+  Rled: resistor c10 c14 390
+  Dled: led b14(A) b18(K) red
+wires:
+  - M1.B+ -- PK.+ red
+  - M1.B- -- PK.- black
+  - M1.OUT+ -- +t1 red
+  - M1.OUT- -- -t2 black
+  - +t10 -- a10 red
+  - a18 -- -t18 black
+  - SC.1+ -- +t12 orange
+  - SC.1- -- -t13 black
+notes:
+  - text below: 上の赤レール = OUT+ (電池の電圧、約 3.0〜4.2 V)。USB の 5 V と電池は板に入れない
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/08-liion-charging.svg)
+
+- **充電電流 (約 1 A) は板の 1 穴 200 mA・板全体 500 mA の範囲を超える。そこで USB・モジュール・電池を板の外でつなぎ、板には OUT 側の負荷だけを載せる。** 板を通る電流は Dled の約 5 mA だけ
+- 図2 で USB の 5 V は、M1 の基板に付いている USB ソケット (図1 の J1 に当たる。IN+/IN− がここにつながる) へ USB ケーブルで入れる。電池 (PK) は B+/B- に太めの線で直接つなぐ。B+/B- と OUT+/OUT- を板の上で近づけない
+  (短絡すると数十 A が流れる。本文冒頭の注意を読み返す)
+- OUT+ は上の赤レール、OUT- は上の青レールへ。Rled (390 Ω、10 列〜14 列) は `+t10 → a10` で OUT+ から、Dled (LED) はアノードを 14 列、カソードを 18 列に挿し、`a18 → -t18` で OUT- へ
+- AD3 の Supplies は使わない (5 V は USB 充電器が出し、電池が負荷を動かす)。Scope の 1+ (橙) を上の赤レール (OUT+)、1− (黒) を上の青レール (OUT−) につなぐ。AD3 の入力は ±25 V まで (電池の 4.2 V は余裕で入る)
+
+## 計器の設定
+
+オシロには Analog Discovery 3 (AD3) の Scope を電圧計として使う。電池の電圧はゆっくり変わる直流 (満充電の 4.2 V まで数時間) なので、
+**オシロの波形の図は付けない** (時間で変わらない量だけを見る題)。
+
+| 設定 | 値 |
+| --- | --- |
+| Scope CH1 (OUT+、上の赤レール) | DC、1 V/div。Measurements の平均値 (DC) を読む |
+| 見る値 | 電池の電圧 (3.0〜4.2 V)。1 A を超える電流は AD3 では測らない |
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -82,7 +137,8 @@ style:
 | B1 | Li-ion 電池 (18650、保護回路つき) | 公称 3.7 V |
 | Rled | 抵抗 (負荷 LED の電流制限) | 390 Ω |
 | Dled | LED (赤、5 mm、負荷の代わり) | V<sub>F</sub> ≈ 2.0 V |
-| — | 電源 | USB 5 V |
+| — | 電源 | USB 5 V (充電器かモバイルバッテリー) |
+| — | 計器 | AD3 の Scope 1+ / 1− (電圧計)。電流はテスターの電流レンジ |
 
 ## 見るべき値
 

@@ -79,6 +79,83 @@ AC アダプタの中身は 1 次 100 V の小形トランスで、コンセン�
 - 6 V の AC アダプタが手に入らないときは、9 V や 12 V の AC アダプタ 2 台でも同じ形に組める。
   その場合は、下の表の値を、振幅 = 実効値 × √2 から計算し直す。C1 の耐圧も、ピーク電圧の 2 倍以上にする
 
+## 実体配線図
+
+```breadboard
+title: 図2 AC アダプタ 2 台でセンタータップを作り、全波整流を組む
+# 上の青レール = センタータップ (出力の − 側)。赤レールは使わない
+board: half
+parts:
+  V1:
+    type: device
+    at: top
+    label: AC アダプタ 1 (AC 6V)
+    pins: [OUT1, OUT2]
+  V2:
+    type: device
+    at: top
+    label: AC アダプタ 2 (AC 6V)
+    pins: [OUT1, OUT2]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: [1+, 2+, 1-, 2-]
+  D1: diode b8(A) b12(K) 1N4001
+  D2: diode d14(A) d12(K) 1N4001
+  C1: capacitor/electrolytic a20(+) -t20(-) 1000u
+  RL: resistor/half d20 d24 220
+wires:
+  - V1.OUT1 -- a8 yellow
+  - V2.OUT2 -- a14 yellow
+  - V1.OUT2 -- -t1 black
+  - V2.OUT1 -- -t2 black
+  - c12 -- c20 orange
+  - a24 -- -t24 black
+  - SC.1+ -- c8 blue
+  - SC.2+ -- e20 green
+  - SC.1- -- -t26 black
+  - SC.2- -- -t27 black
+notes:
+  - text below: 青レール = センタータップ。帯 (カソード) は 12 列側
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/breadboard/04-center-tap-rectifier.svg)
+
+- この題は商用電源 (AC 100 V) につなぐ AC アダプタを使うが、板に入るのは**アダプタの 6 V の出力側だけ**で、板の電圧の範囲 (実効値 12 V 以下、ピーク 20 V 以下) に収まる。
+  AD3 の Wavegen は振幅 5 V までで、ピーク 8.5 V の交流は出せないので、**電源は AC アダプタ、AD3 は Scope だけ**に使う
+- V1 (アダプタ 1) の OUT2 と V2 (アダプタ 2) の OUT1 を、どちらも上の青レールへ (黒い線 2 本)。これがセンタータップで、出力の − 側になる
+- V1 の OUT1 (黄) は 8 列の D1 のアノードへ、V2 の OUT2 (黄) は 14 列の D2 のアノードへ。D1 は 8 列〜12 列、D2 は 14 列〜12 列で、**どちらもカソード (帯) を 12 列** に向ける。12 列が出力の + 側
+- 橙の線 `c12 → c20` で出力を 20 列へ広げ、C1 (1000 µF) は + を 20 列、− を青レール (センタータップ) に立てて挿す (電解コンデンサの向き)。RL (220 Ω、1 W 級) は 20 列〜24 列、黒の線 `a24 → -t24` でセンタータップへ
+- 板を通る直流は約 35 mA で、とがった形の電流を含めても 1 穴 200 mA の範囲に収まる
+- Scope の 1+ (青) は V1 の OUT1 の 8 列 (`c8`)、2+ (緑) は出力の 20 列 (`e20`)。1− と 2− (黒) は上の青レール (センタータップ) へ
+
+## 計器の設定
+
+オシロには Analog Discovery 3 (AD3) の Scope を使う。50/60 Hz の波形とリップルを見る題で、10 MHz よりずっと低いから。
+CH1 を V1 の端 (センタータップ基準の交流)、CH2 を整流後の出力 (リップルだけを見る) にして、トリガは CH1 の立ち上がり 0 V にする (50 Hz 地域の値で描いた)。
+
+| 設定 | 値 |
+| --- | --- |
+| Scope CH1 (V1 の端、8 列) | DC、5 V/div |
+| Scope CH2 (出力、20 列) | **AC 結合**、100 mV/div (直流の約 7.5 V は乗らず、リップルだけが 0 V の線のまわりに見える) |
+| Time | 5 ms/div (50 Hz が 2.5 周期) |
+| Trigger | CH1、立ち上がり、0 V |
+
+```scope
+title: 図3 V1 の端 (CH1) と出力のリップル (CH2、AC 結合) — 50 Hz 地域
+time: 5ms/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 50Hz 8.5V, range: 5V/div}
+ch2: {wave: "ch1 | abs | offset -0.8V | clip 0V | peak 220ms | offset -7.55V", range: 100mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/scope/04-center-tap-rectifier.svg)
+
+図3 の CH1 は ±8.5 V (17 Vpp、3.4 目盛)、CH2 は直流の約 7.5 V を AC 結合で除いた、100 Hz のリップル。CH2 の Vpp がリップルの大きさで、図の読みは約 0.31 V。
+下の「見るべき値」の概算 0.35 V<sub>pp</sub> (I<sub>dc</sub> / (f × C)) より少し小さいのは、図が放電の時間を半周期より短く見ているため。直流の約 7.5 V はテスターか、Scope を DC 結合にして読む。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -87,6 +164,7 @@ AC アダプタの中身は 1 次 100 V の小形トランスで、コンセン�
 | D1・D2 | 整流ダイオード | 1N4001 |
 | C1 | 電解コンデンサ (平滑) | 1000 µF (耐圧 25 V 以上) |
 | RL | 抵抗 (負荷、1 W 級) | 220 Ω |
+| — | 計器 | AD3 の Scope 1+/2+ (V1 の端と出力) |
 
 ## 見るべき値
 

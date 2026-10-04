@@ -75,6 +75,84 @@ style:
 - MOSFET 方式の電圧降下は電流に比例する (I × R<sub>DS(on)</sub>)。ダイオード方式の降下はほぼ一定なので、
   電流が小さいほど MOSFET が有利になり、電流が大きいとオン抵抗の発熱が効いてくる
 
+## 実体配線図
+
+負荷電流は約 50 mA で、AD3 の Supplies の 1 レールの目安 (約 50 mA) の上限になる。**ここは USB アダプタ (5 V) を電源にし、AD3 は電圧を読む Scope だけに使う。**
+板を通る電流は 50 mA で、1 穴 200 mA の範囲に収まる。逆接続の実験は、電源の線を入れ替える (+5V を GND の穴へ、GND を +5V の穴へ) ことで行う。
+この題は直流の電圧だけを見るので、オシロの波形の図は付けない。
+
+```breadboard
+title: 図3 ダイオード方式 (図1) を組む。Scope 1+ を負荷、2+ を電源へ
+# 上の赤レール = +5V、青レール = GND
+board: half
+parts:
+  PS:
+    type: device
+    at: top
+    label: 5 V 電源 (USB アダプタ)
+    pins: [+5V, GND]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope (DC 電圧計)
+    pins: [1+, 2+, 1-, 2-]
+  D1: diode b10(A) b14(K) 1N5819
+  RL1: resistor/half c14 c18 100
+wires:
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - +t10 -- a10 red
+  - a18 -- -t18 black
+  - SC.1+ -- d14 orange
+  - SC.2+ -- +t20 green
+  - SC.1- -- -t22 black
+  - SC.2- -- -t23 black
+notes:
+  - text below: 上の赤レール = +5V、青レール = GND。逆接続の実験は PS の線を入れ替える
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/09-reverse-polarity-protection-1.svg)
+
+- D1 (1N5819) はアノードを 10 列、カソード (帯のある側) を 14 列に挿す。+5V は赤の線 `+t10 → a10` で D1 のアノードの列へ。RL1 (100 Ω、1/2 W 以上) は D1 のカソードの列 14 から 18 列へ渡し、黒の線 `a18 → -t18` で GND へ
+- Scope の 1+ (橙) は D1 のカソードの 14 列 (`d14`、負荷に届く電圧)、2+ (緑) は上の赤レール (電源の電圧)。1− と 2− (黒) は上の青レールへ。2 つの差が D1 の電圧降下 (約 0.4 V)
+
+```breadboard
+title: 図4 P-MOSFET 方式 (図2) を組む。Scope 1+ を負荷、2+ を電源へ
+# 上の赤レール = +5V、青レール = GND。IRF9540 は G・D・S の順 (図2 と同じく D を電源側、S を負荷側に)
+board: half
+parts:
+  PS:
+    type: device
+    at: top
+    label: 5 V 電源 (USB アダプタ)
+    pins: [+5V, GND]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope (DC 電圧計)
+    pins: [1+, 2+, 1-, 2-]
+  Q1: transistor/to220 e10(G) e11(D) e12(S) IRF9540
+  RL2: resistor/half b12 b16 100
+wires:
+  - PS.+5V -- +t1 red
+  - PS.GND -- -t2 black
+  - a10 -- -t10 black
+  - +t11 -- a11 red
+  - a16 -- -t16 black
+  - SC.1+ -- d12 orange
+  - SC.2+ -- +t20 green
+  - SC.1- -- -t22 black
+  - SC.2- -- -t23 black
+notes:
+  - text below: 上の赤レール = +5V、青レール = GND。ゲート (10 列) は GND、ドレイン (11 列) は電源側
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/09-reverse-polarity-protection-2.svg)
+
+- Q1 (IRF9540、TO-220) は、印字のある面を手前に、足を下に向けて、左から G (ゲート)・D (ドレイン)・S (ソース) の順。図は G を 10 列、D を 11 列、S を 12 列に挿す。足の並びは使う品のデータシートで確かめる
+- **ゲート (10 列) は黒の線 `a10 → -t10` で GND へ、ドレイン (11 列) は赤の線 `+t11 → a11` で電源の + 側へ、ソース (12 列) は負荷へ**。2-5 の MOSFET スイッチと D・S の向きが逆。RL2 (100 Ω、1/2 W 以上) は 12 列から 16 列へ渡し、黒の線 `a16 → -t16` で GND へ
+- Scope の 1+ (橙) はソースの 12 列 (`d12`、負荷に届く電圧)、2+ (緑) は上の赤レール (電源の電圧)。差が MOSFET の電圧降下 (約 0.01 V)
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -82,7 +160,8 @@ style:
 | D1 | ショットキーバリアダイオード | 1N5819 (V<sub>F</sub> ≈ 0.45V @0.1A 前後) |
 | Q1 | P チャネル MOSFET | IRF9540 (R<sub>DS(on)</sub> ≈ 0.2Ω、TO-220。0.2Ω は V<sub>GS</sub> = −10V での値で、−5V ではこれより大きくなる。表の計算は 0.2Ω と仮定) |
 | RL1, RL2 | 抵抗 (負荷、2 W 級を使う。0.2〜0.25 W ほど消費するため) | 各 100 Ω |
-| — | 電源 | 5 V |
+| — | 電源 | 5 V (USB アダプタ。負荷電流が約 50 mA で AD3 の Supplies の 1 レールの目安に当たるため) |
+| — | 計器 | AD3 の Scope 1+ / 2+ (負荷と電源の直流の電圧)、テスター |
 
 ## 見るべき値
 

@@ -59,6 +59,68 @@ style:
 - 抵抗が 1 組でもずれると、V1・V2 に共通の成分 (同相成分。2 つの入力が同じだけ動く分) が漏れて出力に残る。
   同相成分をどれだけ消せるかの比を**同相除去比**と呼び、実測では抵抗の誤差 (E24 系列の 1% 品でも) がその限界になる
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードに組む
+# 上のレールは +5V (赤) と GND (青)。下の青レールは −5V (V−)。下の赤レールは使わない
+board: half
+parts:
+  AD3:
+    type: device
+    at: top
+    label: AD3 (Supplies ±5V・W1・W2)
+    pins: [V+, GND, V-, W1, W2]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope (DC 電圧計)
+    pins: [1-, 1+]
+  U1: dip8 @ e10 LM358
+  R1: resistor j11 j7 10k
+  Rf: resistor j15 j18 100k
+  R3: resistor j22 j26 10k
+  R4: resistor h22 h25 100k
+wires:
+  - AD3.V+ -- +t1 red
+  - AD3.GND -- -t2 black
+  - AD3.V- -- -b3 blue
+  - AD3.W1 -- g7 yellow
+  - AD3.W2 -- g26 yellow
+  - SC.1+ -- j10 green
+  - SC.1- -- j25 black
+  - h11 -- h15 orange
+  - i10 -- i18 green
+  - g12 -- g22 orange
+  - +t10 -- a10 red
+  - j13 -- -b13 blue
+  - f25 -- -t25 black
+notes:
+  - text below: 上の赤レール = +5V、上の青レール = GND、下の青レール = −5V (V−)
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/07-differential-amp.svg)
+
+- 図2 の AD3 は、Supplies (V+・V−) が図1 の VP・VN、Wavegen の W1・W2 が V1・V2 に当たる。
+  W1 と W2 は振幅 0 V のまま直流のオフセットだけを出す (W1 = 0.5 V、W2 = 0.8 V)。電源のレールの分け方は 4-2 と同じ
+  (下の青レールは −5V で、GND ではない)。電流は OP アンプと抵抗で数 mA、各レール約 50 mA の範囲に収まる
+- IC の足の隣には部品を挿せないので、3 つの足を線で右へ広げる。IN− (PIN 2、11 列) は `h11 → h15`、
+  出力 (PIN 1、10 列) は `i10 → i18`、IN+ (PIN 3、12 列) は `g12 → g22`
+- R1 (10 kΩ) は W1 の 7 列 (`g7`) から IN− の 11 列へ。Rf (100 kΩ) は 15 列 (IN−) と 18 列 (出力) の間
+- R3 (10 kΩ) は W2 の 26 列 (`g26`) から IN+ の 22 列へ。R4 (100 kΩ) は 22 列から 25 列へ渡し、黒の線 `f25 → -t25` で GND へ落とす
+- Scope の 1+ (緑) は出力の 10 列 (`j10`)、1− (黒) は GND の 25 列 (`j25`)。PIN 8 (10 列) は `+t10 → a10` で +5V へ、PIN 4 (13 列) は `j13 → -b13` で −5V へ
+
+## 計器の設定
+
+オシロには Analog Discovery 3 (AD3) の Scope を使い、1+ / 1− を直流の電圧計として出力に当てる (テスターの DCV でもよい)。
+この題は時間で変わらない直流の電圧だけを見るので、オシロの波形の図は付けない。
+
+| 設定 | 値 |
+| --- | --- |
+| Wavegen W1 | DC (Offset)、0.5 V |
+| Wavegen W2 | DC (Offset)、0.8 V |
+| Scope CH1 (出力、10 列) | DC、1 V/div。Measurements の平均値 (DC) を読む |
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -66,12 +128,13 @@ style:
 | U1 | オペアンプ (2 回路入りの片方) | LM358 |
 | R1, R3 | 抵抗 (入力、2 本を揃える) | 各 10 kΩ |
 | Rf, R4 | 抵抗 (帰還・+入力の分圧、2 本を揃える) | 各 100 kΩ |
-| — | 信号源 | V1 = 0.5 V (直流)、V2 = 0.8 V (直流)、いずれも電池や可変電源 |
+| — | 信号源 | V1 = 0.5 V (直流)、V2 = 0.8 V (直流)。AD3 の W1・W2 の DC オフセット |
 | — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
+| — | 計器 | AD3 の Scope 1+ / 1− (出力の直流電圧を読む) |
 
 ## 見るべき値
 
-テスターの直流電圧レンジで、GND を基準に V1・V2・出力 (OUT) を測る。表の値は計算値。Vout = (Rf/R1) × (V2 − V1) (R1=R3、Rf=R4 のとき)。
+AD3 の Scope (または テスターの直流電圧レンジ) で、GND を基準に V1・V2・出力 (OUT) を測る。V1・V2 は W1・W2 の設定値そのもの。表の値は計算値。Vout = (Rf/R1) × (V2 − V1) (R1=R3、Rf=R4 のとき)。
 
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |
