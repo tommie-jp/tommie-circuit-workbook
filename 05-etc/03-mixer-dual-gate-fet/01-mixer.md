@@ -380,9 +380,8 @@ wires:
   - i16 -- n16 white
   - b16 -- f16 yellow
   - i1 -- i4 white
-  - i4 -- i6 white
-  - i6 -- k6 white
-  - k6 -- k7 white
+  - i4 -- i7 white
+  - i7 -- k7 white
   - k7 -- n7 white
   - f15 -- e15 white
   - e13 -- e15 white
