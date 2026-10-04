@@ -14,6 +14,7 @@ board: BB
 「1 チップ AM ラジオ」の定番が TA7642 (東芝、ZN414/MK484 と同じ系列) と
 LMF501T (三ツ美電機)。**どちらも今は製造が終わっているが、ラジオ工作
 キット向けに今でも通販や部品店 (秋月・マルツ・aitendo など) で手に入る**。
+9-3 で石と部品で組んだ増幅と検波を、IC 1 個に置き換える。
 
 > [!NOTE]
 > 2 つは足の並びが同じとは限らない。ここでは TA7642 のデータシートで確かめた
@@ -31,10 +32,14 @@ parts:
   GL: ground f2
   VC1: capacitor-var d4 f4 l=$\mathrm{VC}_1$
   GVC: ground f4
-  IC1: ic3 c9 TA7642
-  GIC1: ground c7 r90
+  IC1:
+    type: ic3
+    at: c9
+    label: TA7642
+    pins: [GND, IN, OUT]
+  GIC1: ground c7
   Rload: resistor c12 a12 15k
-  VCC: vcc a12
+  VCC: vcc a12 5V
   Cout: capacitor e13 e15 0.1u
   EAR: earphone e18 g18 l=$\mathrm{EAR}$
   Csup: capacitor a15 c15 10u
@@ -51,9 +56,10 @@ wires:
   - e15 -- e16
   - e16 -- e18
 notes:
-  - text b7 blue: "1番 GND"
-  - text d10 blue: "2番 RF入力"
-  - text d14 blue: "3番 出力+電源"
+  - text b8h0 small blue center: "PIN 1"
+  - text c8h8 small blue right: "PIN 2"
+  - text b10h0 small blue center: "PIN 3"
+  - text d13 small blue left: "PIN 3 (OUT) は出力と電源の入口"
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/08-radio-ic.svg)
@@ -62,9 +68,8 @@ notes:
   中波帯の同調回路。タンクの上端 (アンテナ側) を IC1 の**PIN 2 (RF 入力)**へ
   直接つなぐ — IC の入力インピーダンスが高く、結合コンデンサを挟まなくても
   タンクを大きく乱さない
-- **PIN 1 = GND**、**PIN 3 = 出力であり電源の入り口でもある** — チップ内部の
-  電圧リミッタが自分の動作点を VCC = 1.2〜1.6V (typ 1.3V) に自分で
-  制限する。データシートの静止電流は 0.14〜0.30mA (typ 0.20mA) しかなく、
+- **PIN 1 = GND**、**PIN 3 = 出力であり電源の入り口でもある**。チップ内部の
+  電圧リミッタが、PIN 3 の電圧 (VCC) を 1.2〜1.6V (typ 1.3V) に抑える。データシートの静止電流は 0.14〜0.30mA (typ 0.20mA) しかなく、
   絶対最大定格も VCC = 6V までなので、5V をそのまま PIN 3 に入れると
   チップの内部リミッタに定格を超えた電流が流れてしまう。そこで **Rload
   を直列の降圧抵抗として** VCC と PIN 3 の間に入れ、データシートの静止電流
@@ -123,9 +128,9 @@ wires:
   - a10 -- -t10 black
   - +t16 -- a16 red
   - a20 -- -t20 black
-  - e15 -- f15 green
-  - EAR.A -- j15 green
-  - EAR.B -- -b17 black
+  - e15 -- f18 green [h60]
+  - EAR.A -- j18 green
+  - EAR.B -- -b20 black
   - -t28 -- -b28 black
 ```
 
@@ -135,7 +140,8 @@ wires:
 - IC1 は 10・11・12 列 (PIN 1 = GND、PIN 2 = RF 入力、PIN 3 = 出力+電源)。上の注意のとおり、
   挿す前に入手した個体のデータシートで足の並びを確かめる
 - 11 列がタンクの上端 (VC1・アンテナ・L1) で、そのまま PIN 2 へ入る
-- PIN 3 (12 列) から Rload で +5V (16 列) へ、Cout で EAR の A 端子へ。Csup は + の足を 16 列に挿す
+- PIN 3 (12 列) から Rload で +5V (16 列) へ、Cout で 15 列へ。15 列から緑の線で 18 列へ回って溝を越え
+  (溝に刷った IC の字をよけるため)、j18 から EAR の A 端子へ。Csup は + の足を 16 列に挿す
 
 ## 見るべき値
 
@@ -143,8 +149,8 @@ wires:
 
 | 測る所 | 期待する値 |
 | --- | --- |
-| PIN 3 (出力+電源) の直流電圧 | 約1.3V (データシートの VCC typ、チップ内部のリミッタで自己調整) |
-| Rload に流れる電流 | 約0.25mA (データシートの静止電流 0.14〜0.30mA の範囲内) |
+| PIN 3 (出力+電源) の直流電圧 (テスターで GND 基準) | 約1.3V (データシートの VCC typ、チップ内部のリミッタで自己調整) |
+| Rload に流れる電流 (Rload の両端の電圧をテスターで測り ÷ 15kΩ) | 約0.25mA (両端で約 3.7V。データシートの静止電流 0.14〜0.30mA の範囲内) |
 | VC1 を回す | 受かる局が変わる (9-2・9-3 と同じ同調の効き方) |
 | 弱い局と強い局を切り替える | 音量差が 9-3 (AGC 無し) より小さい (AGC の効果) |
 
