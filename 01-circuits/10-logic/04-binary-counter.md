@@ -37,25 +37,25 @@ parts:
   C1: capacitor f4 h4 10u
   GC1: ground h4
   GU555: ground h6
-  U40: dip16 f13 r180 CD4040
-  VCC: vcc g11f5 5V
-  GU40: ground c15a5
-  VCC: vcc g8 5V
-  SWRST: button g8 i8 l=$\mathrm{SW_{RST}}$
-  RRST: resistor i10a5 k10a5 10k l=$R_\mathrm{RST}$
-  GRRST: ground k10a5
-  RQ4: resistor h15 i15 1k l=$R_\mathrm{Q4}$
-  DQ4: led i15 j15 red l=$D_\mathrm{Q4}$
-  GQ4: ground j15
-  RQ3: resistor h17a5 i17a5 1k l=$R_\mathrm{Q3}$
-  DQ3: led i17a5 j17a5 red l=$D_\mathrm{Q3}$
-  GQ3: ground j17a5
-  RQ2: resistor h20 i20 1k l=$R_\mathrm{Q2}$
-  DQ2: led i20 j20 red l=$D_\mathrm{Q2}$
-  GQ2: ground j20
-  RQ1: resistor h22a5 i22a5 1k l=$R_\mathrm{Q1}$
-  DQ1: led i22a5 j22a5 red l=$D_\mathrm{Q1}$
-  GQ1: ground j22a5
+  U40: ic e15 CD4040B
+  VCC: vcc a15 5V
+  GU40: ground j15
+  VCC: vcc g10 5V
+  SWRST: button g10 g12 l=$\mathrm{SW_{RST}}$
+  RRST: resistor g12 i12 10k l=$R_\mathrm{RST}$
+  GRRST: ground i12
+  RQ1: resistor e27 f27 1k l=$R_\mathrm{Q1}$
+  DQ1: led f27 g27 red l=$D_\mathrm{Q1}$
+  GQ1: ground g27
+  RQ2: resistor e24 f24 1k l=$R_\mathrm{Q2}$
+  DQ2: led f24 g24 red l=$D_\mathrm{Q2}$
+  GQ2: ground g24
+  RQ3: resistor e21 f21 1k l=$R_\mathrm{Q3}$
+  DQ3: led f21 g21 red l=$D_\mathrm{Q3}$
+  GQ3: ground g21
+  RQ4: resistor e18 f18 1k l=$R_\mathrm{Q4}$
+  DQ4: led f18 g18 red l=$D_\mathrm{Q4}$
+  GQ4: ground g18
 wires:
   # 555 非安定
   - U555.VCC |- b6
@@ -67,28 +67,24 @@ wires:
   - e4 -- f4
   - f3 -- f4
   - U555.GND |- h6
-  # クロック: 555 の OUT → 4040 の CLOCK (PIN 10)
+  # クロック: 555 の OUT を 4040 の CLOCK へ
   - U555.OUT -| e10
-  - U40.10 -| e10
+  - U40.CLOCK -| e10
   # リセット: SWRST で +5V、離すと RRST で GND
-  - U40.11 -| i10a5
-  - i8 -- i10a5
-  # 4040 の電源 (箱を逆さに描いたので VDD が左下、VSS が右上)
-  - U40.16 -| g11f5
-  - U40.8 -| c14a5
-  - c14a5 -- c15a5
-  # 出力: Q4〜Q2 は右へ、Q1 は箱の上を越えて右へ
-  - U40.5 -| h15
-  - U40.6 -| h17a5
-  - U40.7 -| h20
-  - U40.9 -| b11a5
-  - b11a5 -- b22a5 -- h22a5
+  - U40.R -| g12
+  # 4040 の電源
+  - a15 |- U40.VDD
+  - U40.VSS |- j15
+  # 出力: Q1 を一番外側にして、線が交わらないように右へ
+  - U40.Q1 -| e27
+  - U40.Q2 -| e24
+  - U40.Q3 -| e21
+  - U40.Q4 -| e18
 notes:
-  - text k15 blue center: Q4 (MSB)
-  - text k17a5 blue center: Q3
-  - text k20 blue center: Q2
-  - text k22a5 blue center: Q1 (LSB)
-  - text m1 small left: "U40 は逆さに置いた (PIN 9-16 が左、PIN 1-8 が右。入力が左、出力が右になる)"
+  - text i27 blue center: Q1 (LSB)
+  - text i24 blue center: Q2
+  - text i21 blue center: Q3
+  - text i18 blue center: Q4 (MSB)
 style:
   grid: on
   pitch: 1.2
@@ -107,11 +103,10 @@ style:
   ある (RESET は RRST で GND へ)。CMOS の入力は浮かせてはいけないが、この IC に
   使わない入力は無い。使わない Q5〜Q12 は出力なので開けておく
 - 電源の PIN: 4040 は VDD が PIN 16・VSS が PIN 8、555 は VCC が PIN 8・GND が PIN 1
-- 図1 の 4040 (U40) は、箱を逆さ (切り欠きが下) に描いた。実物の並びのままだと入力の
-  CLOCK・R が右、出力の Q2〜Q4 が左に来て、信号が右から左へ流れる。逆さにすると
-  入力が左、出力が右に並ぶ。その代わり VDD (PIN 16) が左下、VSS (PIN 8) が右上に来る。
-  555 (U555) は足を働きで並べた箱 (上が電源、左が入力、右が出力) で描いた。
-  PIN の番号は箱の中に添えてある
+- 図1 の 4040 (U40) と 555 (U555) は、足を働きで並べた箱で描いた。
+  上が電源 (VDD・VCC)、左が入力 (CLOCK・R)、右が出力 (Q1〜Q4)、下が GND (VSS・GND)。
+  PIN の番号は箱の中に添えてある。使わない Q5〜Q12 は線を引かず開けておく。
+  LED は Q1 を一番右、Q4 を一番左に並べ、出力の線が交わらないようにした
 - LED の直列抵抗 RQ1〜RQ4 は 1kΩ。10-1 と同じく、5V の CD4000 系の出力は数 mA しか
   流し出せないので (CD4040B も CD4000B 系の標準の出力で、I<sub>OH</sub> は出力 2.5V のとき
   最小 1.6mA)、LED の電流を 1.5〜2.2mA (10-1 で求めた目安) に抑える。

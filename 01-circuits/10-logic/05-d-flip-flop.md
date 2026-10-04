@@ -24,61 +24,56 @@ D-FF (クロックの立ち上がりで D の値を Q に写す) として、も
 ```circuit
 title: 図1 D-FFとQバー帰還のT-FF (CD4013)
 parts:
-  VCC: vcc e4e0 5V
-  SWD: switch e4e0 g4e0 l=$\mathrm{SW}_\mathrm{D}$
-  RpdD: resistor g4e0 i4e0 10k l=$R_\mathrm{pdD}$
-  GD: ground i4e0
-  VCC: vcc d7g5 5V
-  SWC1: button d7g5 f7g5 l=$\mathrm{SW_{C1}}$
-  RpdC1: resistor f7g5 f5g5 10k l=$R_\mathrm{pdC1}$
-  GC1: ground f5g5
-  U1: dip14 g12 CD4013
-  VCC: vcc d13h5 5V
-  GS1: ground i10a5
-  GS2: ground i13a5
-  VCC: vcc g18a5 5V
-  SWC2: button g16a5 g18a5 l=$\mathrm{SW_{C2}}$
-  RpdC2: resistor g16a5 i16a5 10k l=$R_\mathrm{pdC2}$
-  GC2: ground i16a5
-  RQ2: resistor c17 d17 1k l=$R_\mathrm{Q2}$
-  DQ2: led d17 e17 red l=$D_\mathrm{Q2}$
-  GQ2: ground e17
-  RQ1: resistor c20 d20 1k l=$R_\mathrm{Q1}$
-  DQ1: led d20 e20 red l=$D_\mathrm{Q1}$
-  GQ1: ground e20
+  U1: ic h15 CD4013B
+  VCC: vcc a6 5V
+  SWD: switch a6 c6 l=$\mathrm{SW}_\mathrm{D}$
+  RpdD: resistor c6 e6 10k l=$R_\mathrm{pdD}$
+  GD: ground e6
+  VCC: vcc a3 5V
+  SWC1: button a3 c3 l=$\mathrm{SW_{C1}}$
+  RpdC1: resistor c3 e3 10k l=$R_\mathrm{pdC1}$
+  GC1: ground e3
+  VCC: vcc k3 5V
+  SWC2: button k3 m3 l=$\mathrm{SW_{C2}}$
+  RpdC2: resistor m3 o3 10k l=$R_\mathrm{pdC2}$
+  GC2: ground o3
+  VCC: vcc c15 5V
+  GU1: ground l15
+  GS1: ground h10
+  GS2: ground j12a5
+  RQ1: resistor j25 k25 1k l=$R_\mathrm{Q1}$
+  DQ1: led k25 l25 red l=$D_\mathrm{Q1}$
+  GQ1: ground l25
+  RQ2: resistor j22 k22 1k l=$R_\mathrm{Q2}$
+  DQ2: led k22 l22 red l=$D_\mathrm{Q2}$
+  GQ2: ground l22
 wires:
-  # FF1 (D-FF): D1 と CLOCK1 を左から入れ、Q1 は箱の上を越えて右の LED へ
-  - U1.5 -| g4e0
-  - U1.3 -| f7g5
-  - U1.1 -| a10
-  - a10 -- a20 -- c20
-  # FF1 の RESET1 は GND、SET1・VSS は下の GND へ
-  - U1.4 -| g10a5
-  - g10i5 -| U1.6
-  - h10c5 -| U1.7
-  - g10a5 -- g10i5 -- h10c5 -- i10a5
+  # FF1 (D-FF): D1 と CLOCK1 を左から入れる
+  - U1.D1 -| c8
+  - c8 -- c6
+  - U1.CLOCK1 -| c4
+  - c4 -- c3
+  # FF2 (T-FF): Qバー2 を D2 へ戻し、CLOCK2 は左のボタンから
+  - U1./Q2 -| n17
+  - n17 -- n11 -- h11f0
+  - U1.D2 -| h11f0
+  - U1.CLOCK2 -| m4
+  - m4 -- m3
+  # 使わない SET・RESET は GND
+  - U1.SET1 -| g10f0
+  - U1.RESET1 -| h10
+  - h10 -- g10f0
+  - U1.SET2 -| j12a5
+  - U1.RESET2 -| j12a5
   # 電源
-  - U1.14 -| d13h5
-  # FF2 (T-FF): Qバー2 を D2 へ戻し、CLOCK2 は右のボタンから
-  - U1.12 -| g15i0
-  - g15i0 |- U1.9
-  - U1.11 -| g16a5
-  - U1.13 -| b15a5
-  - b15a5 -- b17 -- c17
-  # FF2 の RESET2・SET2 は GND
-  - g13e5 -| U1.10
-  - h13c5 -| U1.8
-  - g13e5 -- h13c5 -- i13a5
+  - c15 |- U1.VDD
+  - U1.VSS |- l15
+  # 出力
+  - U1.Q1 -| j25
+  - U1.Q2 -| j22
 notes:
-  - text g8a5 blue center: "D1"
-  - text f9 blue center: "CLK1"
-  - text g19a5 blue: "CLK2"
-  - text f17 blue center: "Q2"
-  - text f20 blue center: "Q1"
-  - text k1 small left: "左半分が D-FF (CLK1 の立ち上がりで D1 を Q1 へ写す)"
-  - text l1 small left: "右半分が T-FF (CLK2 を押すたびに Q2 が反転する)"
-  - text m1 small left: "VDD は PIN 14 (+5V)、VSS は PIN 7 (GND)"
-  - text n1 small left: "使わない RESET・SET (PIN 4・6・8・10) は GND へ"
+  - text m25 blue center: Q1
+  - text m22 blue center: Q2
 style:
   grid: on
   pitch: 1.2
@@ -93,9 +88,10 @@ style:
   立ち上がるたびに、Q2 (PIN 13) は今と反対の値を取り込むので反転する。SWC2 を
   1 回押すごとに DQ2 が点く・消えるを繰り返す。クロック 2 回で Q2 が 1 往復するので、
   周波数が半分になる (1/2 分周)。10-4 の 4040 の中では、この T-FF が 12 段つながっている
-- 図1 は IC を実物の足の並びで描いた。CD4013 は FF1 の足が左の列、FF2 の足が右の列に
-  まとまっているので、FF1 は左から入れ、FF2 のクロック (SWC2) は右から入れる。
-  Q1 (PIN 1) は左の列にあるが、箱の上を越えて右の LED へ運んだ
+- 図1 の CD4013 (U1) は、足を働きで並べた箱で描いた。左に入力 (D・CLOCK・SET・RESET)、
+  右に出力 (Q・Q̄)、上が VDD (PIN 14)、下が VSS (PIN 7)。PIN の番号は箱の中に添えてある。
+  FF1 の入力 (D1・CLOCK1) と FF2 の入力 (D2・CLOCK2) は、ともに左から入る。
+  Q̄2 から D2 への帰還の線だけが、箱の下を回って CLOCK2 の線と 1 か所で交わる
 - LED の直列抵抗 RQ1・RQ2 は 1kΩ。10-1 と同じく、5V の CD4000 系の出力は数 mA しか
   流し出せない (TI の CD4013B のデータシートで I<sub>OH</sub> は出力 2.5V のとき最小 1.6mA)。
   1kΩ なら LED の電流は 1.5〜2.2mA (10-1 で求めた目安)。暗いときは高輝度 LED にする
