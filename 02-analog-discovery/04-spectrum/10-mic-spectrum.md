@@ -112,7 +112,7 @@ RC (16 列) は緑のジャンパでつなぐ。
 | 計器 | 設定 |
 | --- | --- |
 | Supplies | V+ = 5 V、Master Enable |
-| Scope | CH1: **AC 結合**、Range 5 mV/div 程度 (音は数 mV と小さいので絞る、2-4 と同じ考え方) |
+| Scope | CH1: DC 結合のまま (C2 が直流を切るので、CH1 に直流は乗らない)、Range 5 mV/div 程度 (音は数 mV と小さいので絞る、2-4 と同じ考え方) |
 | Spectrum | Source: Channel 1。Start 0 Hz、Stop 5 kHz (声の基本周波数と主な倍音が入る範囲)。Window: Hann (声のような変化する信号には Flat-top より Hann、4-3) |
 
 ## スペクトルの例

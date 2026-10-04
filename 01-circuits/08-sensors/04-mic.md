@@ -155,11 +155,12 @@ style:
 - 節点の直流は R1 と R<sub>D</sub> の分圧で約 0.2 V。C1 が止めるので Q1 のバイアスには響かない。
   R<sub>D</sub> に電源から約 2 mA 流れるが、V+ には十分な余裕がある
 - 節点に CH2 (2+) を、Q1 のコレクタ (LED のカソード側) に CH1 (1+) を当てる (2− と 1− は GND)。
-  CH1 は直流 2.1 V に振れが乗る。AD3 の Scope には入力の結合 (カップリング) の切り替えがあり、
-  **AC にすると直流分が除かれ、振れだけが見える**。AC のカットオフ (高域通過の −3 dB の周波数) は約 1.6 Hz なので、
-  1 kHz の信号はほとんど減らない (1 Hz 以下のゆっくりした変化は見えなくなる)。
-  手順: Scope の CH1 の設定で Coupling を AC にし、Range を 200 mV/div にする。
-  DC のまま見るなら、Offset で 2.1 V 分を打ち消す。CH2 の節点は約 0.2 V の直流に 16.5 mVpp が乗るので、同じく AC にする
+  CH1 は直流 2.1 V に振れが乗る。AD3 本体のピンの入力は DC 結合だけなので、直流は WaveForms の CH の **Offset** で打ち消す。
+  Offset を −2.1 V にすると 2.1 V が画面の中央に来て、振れだけを細かい目盛で拡大して見られる。
+  手順: Scope の CH1 の設定で Range を 200 mV/div、Offset を −2.1 V にする。
+  CH2 の節点は約 0.2 V の直流に 16.5 mVpp が乗るので、Range を 5 mV/div、Offset を −0.2 V にする。
+  直流の値は個体で少し違うので、波が中央からずれたら、テスターで読んだ直流の値に Offset を合わせ直す
+  (0.5 V/div 以下の細かい目盛で Offset が動かせるのは ±2.5 V まで。この題の直流はその中に入る)
 
 ```breadboard
 title: 図4 マイクを外し、W1 を 10kΩ と 100Ω の分圧で入れる
@@ -214,10 +215,10 @@ WaveForms の Supplies で V+ を 5 V にしてから W1 を出す。
 ```scope
 title: 図5 入力 (CH2) と出力 (CH1) — 1 kHz、入力は数 mV、出力は約 38 倍で反転
 time: 200us/div
-trigger: ch2 rising 0V
-ch1: {wave: sine 1kHz 0.62Vpp phase 193deg, range: 200mV/div}
-ch2: {wave: sine 1kHz 16.5mVpp, range: 5mV/div}
-measure: [vpp, freq]
+trigger: ch2 rising 0.2V
+ch1: {wave: sine 1kHz 0.62Vpp phase 193deg offset 2.1V, range: 200mV/div, position: -10.5div}
+ch2: {wave: sine 1kHz 16.5mVpp offset 0.2V, range: 5mV/div, position: -40div}
+measure: [vpp, freq, avg]
 ```
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/scope/04-mic.svg)
@@ -228,6 +229,7 @@ CH1 が谷のとき CH2 は山になる (C1 と入力抵抗のせいで 13° ほ
 LED は 1 kHz では揺れが速すぎて、ほぼ点きっぱなしに見える。
 コレクタの振れは約 0.31 V (振幅) で、下の表の手拍子の見積もり (約 0.2 V) と同じ桁になる。
 W1 の振幅を下げると、出力もそれに比例して小さくなる。
+画面の中央は Offset で打ち消した直流の高さで、Measurements の Avg に直流の 2.10 V (CH1)・200 mV (CH2) が出る。
 
 ## 計器の設定
 
@@ -239,8 +241,8 @@ W1 の振幅を下げると、出力もそれに比例して小さくなる。
 | --- | --- |
 | Supplies | V+ = 5 V、出力 ON |
 | Wavegen W1 | Sine、1 kHz、振幅 1 V (2 Vpp)、オフセット 0 V |
-| Scope CH1 (1+ をコレクタ、1− を GND) | Coupling AC、200 mV/div、時間軸 200 µs/div |
-| Scope CH2 (2+ を節点、2− を GND) | Coupling AC、5 mV/div。トリガは CH2 の立ち上がり 0 V |
+| Scope CH1 (1+ をコレクタ、1− を GND) | 200 mV/div、Offset −2.1 V (直流を打ち消す)、時間軸 200 µs/div |
+| Scope CH2 (2+ を節点、2− を GND) | 5 mV/div、Offset −0.2 V。トリガは CH2 の立ち上がり 0.2 V (波の中央) |
 
 図5 が、この設定で見える波形。
 
@@ -263,7 +265,7 @@ W1 の振幅を下げると、出力もそれに比例して小さくなる。
 
 表の値は計算値。hFE = 100 と仮定した (2SC1815 は実物の hFE のばらつきが
 大きいので、LED がずっと明るく点きっぱなしなら R2 を大きく、暗すぎるなら小さくする)。
-直流の電圧はテスターの DC 電圧レンジで測り、交流は図5 のようにオシロ (AC カップリング) で見る。
+直流の電圧はテスターの DC 電圧レンジで測り、交流は図5 のようにオシロ (Offset で直流を打ち消す) で見る。
 
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |

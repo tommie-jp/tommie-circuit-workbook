@@ -370,7 +370,7 @@ notes:
 
 **計器は Analog Discovery 3 (AD3) に決める。** 見たいのは 440 Hz の音声と 594 kHz の搬送波で、どちらも AD3 の範囲 (30 MHz まで) に入る。入力は 1 MΩ で、Q1 のコレクタ (2.2 kΩ) に当てても負荷がほとんど増えず、FFT の分解能 (最小 23 Hz) で 440 Hz 離れた側波も分けられる。tinySA Ultra は使わない。入力が 50 Ω で、高インピーダンスの節点に直接つなげない。通常モードが 100 kHz からなので、440 Hz の音声が見えない。分解能 (RBW) の最小も 200 Hz で、側波を分けにくい。
 
-Analog Discovery 3 のオシロスコープを使う。プローブの先を次の場所に当て、GND のクリップを黒い丸の − レール (15 列) につなぐ。
+Analog Discovery 3 のオシロスコープを、BNC アダプタを付けて使う。プローブの先を次の場所に当て、GND のクリップを黒い丸の − レール (15 列) につなぐ。
 
 | チャンネル | 場所 (図の丸) | 見えるもの |
 | --- | --- | --- |
@@ -382,14 +382,14 @@ Analog Discovery 3 のオシロスコープを使う。プローブの先を次�
 - CH2 のプローブは、高周波の部分に容量 (数 pF〜十数 pF) を足すので、同調が少しずれる。測るときだけ当て、離したら合わせ直す
 - 音声の周波数 (数 100 Hz〜数 kHz) と搬送波 (594 kHz) は大きく違うので、時間軸を変えて見る。CH1 は 1 ms/div、CH2 は 2 µs/div
 
-見えるはずの画面 (推測) を、scope フェンスで描いた。**波の大きさは仮の値で、実測ではない**。直流分 (CH1 は約 3 V、CH2 は約 3.4 V) は、画面の中央を波の中心にして描き、図の下の読み値 (Avg) に出る。AD3 では、波を見やすくするため、CH を AC 結合にするか、オフセットを合わせる。
+見えるはずの画面 (推測) を、scope フェンスで描いた。**波の大きさは仮の値で、実測ではない**。波を見やすくするため、BNC アダプタのジャンパで CH1・CH2 を AC 結合にする (約 1.6 Hz より低い成分を切る)。図もその画面で、直流分は除いてある。AD3 本体のピンの入力は DC 結合だけで、直流を打ち消す Offset も 0.5 V/div 以下の細かい目盛では ±2.5 V までしか動かせないので、約 3 V の直流は打ち消せない。直流分 (CH1 は約 3 V、CH2 は約 3.4 V) は、テスターか、ジャンパを DC に戻して Avg で読む。
 
 ```scope
-title: 図3 CH1 検波出力 (時報の 440 Hz が出ているとき、推測)
+title: 図3 CH1 検波出力 (AC 結合。時報の 440 Hz が出ているとき、推測)
 time: 1ms/div
-trigger: ch1 rising 3V
-ch1: sine 440Hz 50mV offset 3V
-measure: [vpp, freq, avg]
+trigger: ch1 rising 0V
+ch1: sine 440Hz 50mV
+measure: [vpp, freq]
 ```
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/02-radio-1.svg)
@@ -398,11 +398,11 @@ measure: [vpp, freq, avg]
 - 放送の音声は一定の高さではないので、普段の番組では、この形にはならない
 
 ```scope
-title: 図4 CH2 Q1 のコレクタ (594 kHz の搬送波、推測)
+title: 図4 CH2 Q1 のコレクタ (AC 結合。594 kHz の搬送波、推測)
 time: 2us/div
-trigger: ch2 rising 3.4V
-ch2: sine 594kHz 100mV offset 3.4V
-measure: [vpp, freq, avg]
+trigger: ch2 rising 0V
+ch2: sine 594kHz 100mV
+measure: [vpp, freq]
 ```
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/02-radio-2.svg)
@@ -429,7 +429,7 @@ markers: [440Hz]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/spectrum/02-radio-1.svg)
 
 - 440 Hz に山が 1 本立つ。50 mV (peak) の正弦波は −29.03 dBV (読み値)。1 V (peak) の正弦波が −3.01 dBV にあたる
-- 検波出力の直流分 (約 3 V) は 0 Hz に大きな線として出る。見やすくするため、CH1 を AC 結合にして測る
+- 検波出力の直流分 (約 3 V) は 0 Hz に大きな線として出る。見やすくするため、CH1 を AC 結合 (BNC アダプタのジャンパ) にして測る
 
 ```spectrum
 title: 図6 CH2 Q1 のコレクタのスペクトル (搬送波と AM の側波、推測)

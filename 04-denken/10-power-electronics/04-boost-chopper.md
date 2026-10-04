@@ -135,7 +135,9 @@ measure: [avg, freq]
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/scope/04-boost-chopper.svg)
 
-出力のリップル (1.1 mV) は 2 V/div では見えない。見たいときは CH1 を AC 結合にして 1 mV/div まで上げる。
+出力のリップル (1.1 mV) は 2 V/div では見えない。AD3 本体のピンの入力は DC 結合だけで、直流を打ち消す Offset も
+0.5 V/div 以下の細かい目盛では ±2.5 V までしか動かせないので、9.70 V の直流は打ち消せない。見たいときは AD3 に BNC アダプタを付け、
+CH1 のジャンパを AC にして (AC 結合。約 1.6 Hz より低い成分を切る) 1 mV/div まで上げる。
 
 ### オシロスコープと発振器
 

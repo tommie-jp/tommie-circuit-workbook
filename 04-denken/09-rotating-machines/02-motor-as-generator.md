@@ -85,16 +85,18 @@ wires:
 | Measure | CH1 の Frequency (リップルの周波数 f_ripple)、Average や Peak-Peak (振幅の目安) |
 
 ```scope
-title: 図3 AC 結合で見ると、300 rpm のリップルは 30 Hz (振幅は目安)
+title: 図3 Offset で直流を打ち消すと、300 rpm のリップルは 30 Hz (振幅は目安)
 time: 10ms/div
-trigger: ch1 rising 0V
-ch1: {wave: sine 30Hz 0.02V, range: 10mV/div}
-measure: [freq, vpp]
+trigger: ch1 rising 0.2V
+ch1: {wave: sine 30Hz 0.02V offset 0.2V, range: 10mV/div, position: -20div}
+measure: [freq, vpp, avg]
 ```
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/scope/02-motor-as-generator.svg)
 
-図は遅く回した場合 (表の 300 rpm) のリップルだけを AC 結合で拡大したもの。E の平均 0.20 V は DC 結合に戻して Mean で読む。
+図は遅く回した場合 (表の 300 rpm) のリップルを拡大したもの。AD3 本体のピンの入力は DC 結合だけなので、CH1 の Offset を −0.2 V にして
+E の平均 0.20 V を画面の中央に寄せ、10 mV/div に上げた。E の平均は Measurements の Avg (0.20 V) で読める。
+速く回したときは E に合わせて Offset を −0.8 V に変える (0.5 V/div 以下の目盛で Offset が動かせるのは ±2.5 V まで)。
 速く回した場合 (1200 rpm) は周波数が 120 Hz、E が 0.80 V に変わる。リップルの振幅 (図では 0.04 Vpp) は仮の値で、モータの作りで違う。
 
 指で軸を回すのは難しいので、遅く回す・速く回すの 2 段階で十分。**同じ向きに

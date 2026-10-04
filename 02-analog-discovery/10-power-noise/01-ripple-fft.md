@@ -118,7 +118,11 @@ markers: [120Hz, 240Hz, 360Hz]
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/10-power-noise/spectrum/01-ripple-fft.svg)
 
-Scope の CH1 を AC 結合にして時間波形でも見ると、リップルの形が分かる。
+Scope の時間波形でも見ると、リップルの形が分かる。ただし約 11 V の直流に乗った 0.2 V の揺れなので、
+AD3 本体のピン (2×15 のヘッダー) では拡大できない。本体の入力は DC 結合だけで、直流を打ち消す Offset も
+0.5 V/div 以下の細かい目盛では ±2.5 V までしか動かせないからだ。時間波形を見るときは AD3 に **BNC アダプタ** を付け、
+CH1 のジャンパを AC にする (AC 結合。約 1.6 Hz より低い成分を切る)。BNC ケーブル (先がクリップのもの) の芯を
+上の + レール、外皮を上の − レールに当てる。FFT は直流を 0 Hz の線に分けるので、Spectrum はヘッダーのまま (DC 結合) でよい。
 
 ```scope
 title: 図4 Rload の電圧の交流分 — 120 Hz で約 0.2 V の鋸歯状のリップル (AC 結合、計算)
@@ -130,7 +134,7 @@ measure: [vpp, freq]
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/10-power-noise/scope/01-ripple-fft.svg)
 
-図4 は整流後の電圧の 11 V ほどの直流を AC 結合で除いた画面。山ごとにコンデンサが充電され、次の山までの間に負荷へ放電して
+図4 は整流後の電圧の 11 V ほどの直流を、BNC アダプタの AC 結合で除いた画面。山ごとにコンデンサが充電され、次の山までの間に負荷へ放電して
 電圧が下がる。この下がり幅がリップルで、FFT の 120 Hz の線と同じ現象を時間で見たもの。
 
 ## 見るべき値
