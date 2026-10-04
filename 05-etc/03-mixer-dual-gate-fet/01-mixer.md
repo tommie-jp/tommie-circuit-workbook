@@ -345,19 +345,20 @@ wires:
   - m4 -- m6 black
   - m6 -- q6 black
   - g1 -- g3 black
-  - q6 -- q11 black
-  - q11 -- q16 black
+  - q6 -- q12 black
+  - q12 -- q16 black
   - q16 -- q17 black
   - q17 -- q21 black
   - q21 -- q24 black
   - q24 -- q25 black
   - j25 -- q25 black
-  - c10 -- c11 black
-  - c11 -- e11 black
-  - f14 -- f11 black
-  - e11 -- f11 black
-  - f11 -- k11 black
-  - k11 -- q11 black
+  - c10 -- c12 black
+  - c12 -- e12 black
+  - f14 -- f12 black
+  - e12 -- f12 black
+  - f12 -- k12 black
+  - k12 -- q12 black
+  - k12 -- k11 black
   - k11 -- k10 black
   - h18 -- h17 black
   - h17 -- q17 black
@@ -419,7 +420,7 @@ style:
 - 左端の縁の銅箔の GND は 1 列に出し (d1〜h1、j1〜m1)、m 行へ通した。上下は縁の銅箔でつながる。R3 の GND の足 (g3) は g1 から
 - C5 の GND の足 (h23) は h 行を右へ通って J3 の上の先端 (h25) へ。R7 の GND の足 (e24) は 24 列を下って h24 で合流する
 - 半田付けの順は、電源と GND の筋 → 抵抗・インダクタ・コンデンサ → VR1 → FL1 → C6・C7 → U1 の変換基板 → J1〜J4
-- FL1 の足: 1 = IN (g18)、2 = GND (h18)、3 = OUT (i18)。IN は C4 の FIN (e20) から f 行を回って、OUT は j 行を回って L2 (i20) へ。VR1: 1 = A (k9、中点)、2 = W (k10)、3 = B (k11)。B は GND (11 列の線)、W は B と線でつなぐ (k10〜k11)
+- FL1 の足: 1 = IN (g18)、2 = GND (h18)、3 = OUT (i18)。IN は C4 の FIN (e20) から f 行を回って、OUT は j 行を回って L2 (i20) へ。VR1: 1 = A (k9、中点)、2 = W (k10)、3 = B (k11)。B は 12 列の GND の線へ (k11〜k12)、W は B と線でつなぐ (k10〜k11)
 - 周波数は最大 2.055 MHz、電流は 10 mA ほどで perfboard の範囲に収まる
 
 | 部品 | 値 | 穴 |
