@@ -91,7 +91,7 @@ wires:
 board:
   size: 7x5cm
   slots: on
-title: 図2 perfboardに組む (部品面から見た図)
+title: 図2 perfboardに組む (部品面から見た図。AD3 は 5V と Scope)
 points:
   PWR: b21
   GND: n1
@@ -113,6 +113,11 @@ parts:
   Buzzer: buzzer d14 g14
   RLED: resistor b18 d18 330
   DLED: led e18 g18 red
+  AD:
+    type: device
+    at: s16
+    label: Analog Discovery 3
+    pins: GND 1- 2- 1+ 2+ V+
 wires:
   - P1.W -- b6
   - b10 -- b14 red
@@ -131,6 +136,12 @@ wires:
   - i9 -- n9 black
   - GND -- n2 black
   - n2 -- n9 black
+  - AD.V+ -- PWR red
+  - AD.GND -- GND black
+  - AD.1+ -- i3 blue
+  - AD.2+ -- g14 green
+  - AD.1- -- n9 black
+  - AD.2- -- n9 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/perfboard/03-water-alarm.svg)
@@ -140,6 +151,13 @@ wires:
   こうするとベースが左 (電極の側)、エミッタが右 (次の段の側) に来る
 - 配線は縦と横だけで、交差は無い。上の b 行が PWR、下の n 行が GND、
   その間の g 行が Q1・Q2 のコレクタをまとめた線
+- 5V と計器は Analog Discovery 3 (AD3) から取る。V+ (Supplies の +5V、赤) を PWR の b21 へ、GND (黒) を GND の n1 へ。
+  電流は、Buzzer (自励式のアクティブブザー。目安 30mA 前後) と DLED の約 6.7mA を合わせて約 37mA で、AD3 の各レール約 50mA
+  (USB 給電で 250mW) の内側に収まる。使うブザーの電流がもっと大きいときは、別の 5V 電源 (USB アダプタ) に替える。
+  Scope は 1+ (青) を Q1 のベース (i3)、2+ (緑) を Q1・Q2 のコレクタをまとめた g 行 (g14、Buzzer の下の足と同じ穴)、1−・2− (黒) を GND の n9 へつなぐ
+- 板を流れる電流は約 37mA で、perfboard の範囲 (1 本の線・ランドごとに定常 500mA、板全体 2A) に収まる
+- 水に触れる電極 (P1・P2) に Scope をつながない。Scope の入力は GND とつながっているので、つなぐ先は電極の先ではなく、
+  基板上のベース (i3) とコレクタ (g8) にする。電極に GND を引き込むと、水を通した直流の電流が増え、腐食が早まる
 - 板の外の電極 P1 (`-c6`) は Rprobe の左端 (b6) へ下ろし、Rprobe の右端 (b10) から
   b 行を PWR へ。もう一方の電極 P2 (`-c2`) は 2 列をまっすぐ下りて Rb の上端 (i2) へ、
   そこから隣の Q1 のベース (i3) へ。Rb の下端 (n2) は GND (図1 と同じプルダウン)。
@@ -149,9 +167,56 @@ wires:
   つなぐ。Buzzer の上の足 (d14) と RLED の上端 (b18) は PWR の b 行へ
   (ダーリントンは GND 側のスイッチとして働く)。Q2 のエミッタ (i9) は 9 列を下りて GND の n 行へ
 
+## 部品
+
+| 記号 | 部品 | 値 |
+| --- | --- | --- |
+| Q1・Q2 | NPN トランジスタ | 2SC1815 |
+| Rprobe | 抵抗 (電極の電流制限) | 10kΩ |
+| Rb | 抵抗 (ベースのプルダウン) | 1MΩ |
+| RLED | 抵抗 (LED の電流制限) | 330Ω |
+| DLED | LED | 赤色 5mm |
+| Buzzer | アクティブブザー | 5V (目安 30mA 前後) |
+| P1・P2 | 電極 | むき出しの導線の先か金属のねじ |
+| — | 電源・計器 | Analog Discovery 3 の Supplies の V+ (5V) と Scope (1+ = Q1 のベース、2+ = コレクタ、1−・2− = GND) |
+
+## 計器の設定
+
+計器は AD3 の Scope。**電極が水につかった瞬間に、Q1 のベースが 0V から約 1.2V に上がり、Q2 のコレクタが 5V から約 0.8V に落ちる**
+(ブザーが鳴り始める) のを、1 回きりの変化として捕まえる。水につける・拭くは 1 回きりなので、トリガを Single にする。
+
+| 項目 | 値 |
+| --- | --- |
+| 電源 | AD3 の Supplies の V+ (5V) |
+| CH1 (1+) | Q1 のベース (i3)。1V/div、0V を下から 3 目盛 |
+| CH2 (2+) | コレクタの g 行 (g14)。CH1 と同じ 1V/div・同じ 0V の位置 |
+| 1−・2− | GND |
+| 時間レンジ | 100ms/div (1 画面 1 秒) |
+| トリガ | CH2 の立ち下がり、2.5V (5V の中央)、Single。トリガの点を左から 2 目盛に置く |
+| Measurements | Maximum・Minimum |
+| カーソル | X1 を水につかる前 (−200ms)、X2 をつかったあと (500ms) に置く |
+
+```scope
+title: 図3 電極が水につかると、ベース (CH1) が上がりコレクタ (CH2) が落ちる
+time: 100ms/div
+trigger: ch2 falling 2.5V at -3div
+ch1: {wave: = 1.2V * step(t) | rc 20ms, range: 1V/div, position: -3div}
+ch2: {wave: = 5V - 4.2V * step(t) | rc 20ms, range: 1V/div, position: -3div}
+cursors: [-200ms, 500ms]
+measure: [vmax, vmin]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/scope/03-water-alarm.svg)
+
+- 図3 の X1 (水につかる前) は CH1 が 0V、CH2 が 5V。X2 (つかったあと) は CH1 が約 1.2V (V<sub>BE</sub> 2 段分)、CH2 が約 0.8V (ダーリントンの V<sub>CE</sub>)。
+  上の表 (ベース電圧・V<sub>CE</sub>) の計算値と同じ値で、実測ではない
+- 図は理想の形。水がつかる速さは実際にはまちまちで、立ち上がりは図より遅いことが多い (時定数 20ms でなめらかにした)。
+  水の抵抗が大きい (蒸留水など) と、ベースは 1.2V まで上がらず、コレクタも落ちきらない
+- AD3 の Scope の入力は 1MΩ。ベースの Rb (1MΩ) と並列になるが、水を通す電流 (約 0.13mA) の経路にはほとんど影響しない
+
 ## 見るべき値
 
-計算値。VCC = 5V (USB や電池)。電圧はテスターの直流電圧レンジで GND との間を測る。
+計算値。VCC = 5V (AD3 の V+)。電圧はテスターの直流電圧レンジで GND との間を測る。
 
 | 確かめること | 期待する値 |
 | --- | --- |

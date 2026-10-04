@@ -21,11 +21,13 @@ ADC (アナログ→デジタル変換。電圧を数値に変える回路) を�
 title: 図1 CdS分圧をADC0(GP26)で読む
 parts:
   U1: pico2 d3
+  P1: vcc a6i0 3.3V
+  P2: vcc a5i0 3.3V
   CDS1: photoresistor a6i0 c6i0 GL5528 l=$\mathrm{CDS1}$
   R1: resistor c6i0 e6i0 10k
   G1: ground e6i0
 wires:
-  - U1.3V3 -| a5i0 -- a6i0
+  - U1.3V3 -| a5i0
   - U1.GP26 -| c6i0
 style:
   pitch: 1.2
@@ -56,6 +58,83 @@ C/C++ の `adc_read()` はその値をそのまま返す。MicroPython の `read
 作っている (データシートによる)。ADC は「基準電圧を 4096 等分した何段目か」を返すので、
 電圧に戻す式は V = 値 × 3.3V / 4096 (`read_u16()` なら 65535 で割る)。基準を精密に
 したいときは `ADC_VREF` に外付けの基準電圧をつなげる。
+
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードに組む (Pico 2 は USB から給電、AD3 は Scope だけ)
+board: full
+parts:
+  MCU: pico2 @ h5
+  CDS1: photoresistor a30 a33 GL5528
+  R1: resistor c33 c37 10k
+  SC:
+    type: device
+    at: top
+    label: AD3 Scope
+    pins: [1+, 1-]
+wires:
+  - MCU.3V3 -- +t9 red
+  - MCU.GND38 -- -t7 black
+  - +t30 -- b30 red
+  - MCU.GP26 -- d33 yellow
+  - d37 -- -t37 black
+  - SC.1+ -- e33 yellow
+  - SC.1- -- -t42 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/breadboard/03-adc-cds.svg)
+
+- 電源は Pico 2 の USB。`3V3` (ピン 36、9 列の上) を上の + レールへ、`GND` (ピン 38、7 列の上) を上の − レールへ出す
+  (11-2 と同じ。USB を挿しただけではレールに出ない)
+- CdS (CDS1) は 30〜33 列、R1 は 33〜37 列。33 列が分圧の点 (V<sub>node</sub>) で、GP26 (ピン 31) からの黄の線、
+  AD3 の 1+ (黄) も同じ 33 列に挿す。CDS1 の左端 (30 列) は + レール、R1 の右端 (37 列) は − レールへ
+- AD3 は電源に使わず、**オシロ (Scope) だけ**をつなぐ。1+ は V<sub>node</sub> (33 列) に、1− (黒) は − レール (GND) へ。
+  Scope の入力は 1MΩ なので、10kΩ の分圧にほとんど負荷をかけない (ずれは 1% ほど)
+- 板を流れる電流は、CdS が 1kΩ (明るい) のとき最大でも 3.3V ÷ (1kΩ + 10kΩ) = 0.3mA。
+  板の範囲 (1 穴 200mA・板全体 500mA) に収まる
+
+## 部品
+
+| 記号 | 部品 | 値 |
+| --- | --- | --- |
+| U1 | マイコン | Raspberry Pi Pico 2 (USB で給電) |
+| CDS1 | CdS セル | GL5528 |
+| R1 | 抵抗 (分圧) | 10kΩ |
+| — | 計器 | Analog Discovery 3 の Scope (1+ = V<sub>node</sub>、1− = GND) |
+
+## 計器の設定
+
+計器は AD3 のオシロ (Scope)。**CdS を手で覆った瞬間に V<sub>node</sub> が約 1.65V から約 0.16V へ落ち、手を離すと戻る**のを、
+時間の形で見る。覆うのも離すのも 1 回きりの変化なので、トリガを Single (1 回だけ捕まえる) にし、
+覆ってから離すまで (約 1.2 秒) を 1 画面に入れる。ここでは室内の明るさ (CdS = 10kΩ) と真っ暗 (200kΩ) を例にした
+(上の計算値。CdS の抵抗は個体差が大きい目安)。
+
+| 項目 | 値 |
+| --- | --- |
+| 電源 | Pico 2 の USB (AD3 の Supplies は使わない) |
+| CH1 (1+) | V<sub>node</sub> (33 列)。500mV/div、0V を下から 1 目盛 |
+| 1− | GND |
+| 時間レンジ | 200ms/div (1 画面 2 秒) |
+| トリガ | CH1 の立ち下がり、0.9V (1.65V と 0.16V の中ほど)、Single。トリガの点を左から 2 目盛に置く |
+| Measurements | Maximum・Minimum |
+| カーソル | X1 を覆う前 (−200ms)、X2 を覆っている間 (600ms) に置く |
+
+```scope
+title: 図3 CdS を覆うと分圧の点が約 1.65V から約 0.16V へ落ち、離すと戻る
+time: 200ms/div
+trigger: ch1 falling 0.9V at -3div
+ch1: {wave: = 1.65V - 1.493V * step(t) + 1.493V * step(t - 1.2s) | rc 50ms, range: 500mV/div, position: -3div}
+cursors: [-200ms, 600ms]
+measure: [vmax, vmin]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/scope/03-adc-cds.svg)
+
+- 図3 の X1 (覆う前) は約 1.65V、X2 (覆っている間) は約 0.16V。上の計算値の表の「室内」と「真っ暗」の行と同じ値で、
+  プログラムが出す電圧 (V = 値 × 3.3V / 4096) とも一致する
+- 図は理想の形。覆う動きと CdS の応答は実際には時間がかかる (CdS は光が変わってから数十 ms〜数百 ms かけて変わる。目安)。
+  図では手の動きを時定数 50ms のなめらかな変化で表した
 
 ## プログラム
 

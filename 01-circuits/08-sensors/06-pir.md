@@ -5,6 +5,7 @@ id: 8-6
 title: 人感 (PIR モジュール)
 tier: 100
 source: 自作
+board: BB
 era: 今
 ---
 
@@ -53,6 +54,43 @@ style:
 - OUT はマイコンの GPIO にもそのままつなげる (11 章)。この図では LED の
   インジケータで代用する
 
+## 実体配線図
+
+```breadboard
+title: 図2 PIR モジュールと LED を組む (1+ が OUT を見る)
+board: half
+parts:
+  M1:
+    type: device
+    at: top
+    label: HC-SR501 (PIR モジュール)
+    pins: [VCC, OUT, GND]
+  R1: resistor c10 c14 150
+  D1: led e14(A) e18(K) red
+  AD:
+    type: device
+    at: bottom
+    label: Analog Discovery 3 (Supplies と Scope)
+    pins: [V+, GND, 1+, 1-]
+wires:
+  - AD.V+ -- +b1 red
+  - AD.GND -- -b2 black
+  - +b30 -- +t30 red
+  - -b29 -- -t29 black
+  - M1.VCC -- +t5 red
+  - M1.GND -- -t13 black
+  - M1.OUT -- a10 yellow
+  - AD.1+ -- d10 blue
+  - AD.1- -- -b12 black
+  - b18 -- -t18 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/06-pir.svg)
+
+- 5 V の電源は Analog Discovery 3 (AD3) の Supplies の V+ (WaveForms で 5 V にして出力を入れる)。V+ を下の + レール、GND を下の − レールへつなぎ、右端の 2 本で上のレールへ渡す。HC-SR501 は板に挿さず、VCC を上の + レール、GND を上の − レールへ線でつなぐ
+- OUT (黄) は 10 列へ。10 列の R1 (10→14 列) が D1 のアノード (14 列) に続き、D1 のカソード (18 列) を黒の線で − レールへ落とす。1+ (青) も同じ 10 列に挿して OUT を見る。1− は − レールへ
+- 電流は、LED が点いているとき約 8.7 mA、モジュール自身は数十 µA (データシートの目安) で、合計しても AD3 の Supplies の 50 mA (USB 給電で 250 mW) と、板の 500 mA の内側に収まる
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -60,12 +98,33 @@ style:
 | M1 | 人感センサーモジュール (HC-SR501) | 検知距離 約 7 m、検知角 約 120°、OUT の H は 3.3 V |
 | R1 | 抵抗 | 150 Ω |
 | D1 | LED (赤) | V<sub>F</sub> ≈ 2.0 V |
-| — | 電源 | 5 V (USB や電池) |
+| — | 電源 | 5 V (AD3 の Supplies の V+。モジュールと LED で約 9 mA) |
+| — | 計器 | Analog Discovery 3 の Supplies (V+ = 5 V) と Scope (1+ = OUT、1− = GND) |
+
+## 計器の設定
+
+計器は Analog Discovery 3 の Supplies (V+ = 5 V) と Scope。OUT が H を保つ時間は秒単位の変化なので、テスターの読みだけでは測れず、時間軸のあるオシロで見る。
+Scope は 1+ を OUT (10 列)、1− を GND に当て、Time base を 1 s/div、Range を 1 V/div、トリガは 1+ の立ち上がり 1.65 V (Single) にして、センサーの前で手を振る。基板の保持時間のトリマは、最短 (約 5 s) に回しておく。
+
+```scope
+title: 図3 検知してから OUT が H を保つ時間 (保持時間を最短にしたとき)
+time: 1s/div
+trigger: ch1 rising 1.65V at -2div
+ch1: {wave: "= 3.3V * step(t) * step(5s - t)", range: 1V/div, position: -3div}
+measure: [vmax, vmin]
+notes:
+  - band 0 5s: 保持時間 約 5 s
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/scope/06-pir.svg)
+
+図3 は理想の形で、保持時間を最短 (約 5 s、基板の調整範囲の下端。データシートの目安) にして 1 回だけ検知した場合を描いた。検知の瞬間 (t = 0) に 0 V から 3.3 V へ立ち上がり、5 s 後に 0 V へ戻る。
+実機では、保持時間のトリマの位置と再トリガの設定で H の幅が変わり、立ち上がりの時刻も手を振った瞬間になる。塗った帯の幅 (0 から 5 s) が保持時間である。
 
 ## 見るべき値
 
 表の値は計算値。OUT の電圧は、テスターの DC 電圧レンジで OUT と GND の間を測る。
-センサーの前で手を振ると検知し、離れて動かずにいると、保持時間のあとで L に戻る。
+センサーの前で手を振ると検知し、離れて動かずにいると、保持時間のあとで L に戻る。保持時間は Scope で読む (図3)。
 
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |

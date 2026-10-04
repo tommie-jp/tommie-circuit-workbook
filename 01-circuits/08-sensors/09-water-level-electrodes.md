@@ -5,6 +5,7 @@ id: 8-9
 title: 水位・土壌湿度 (電極)
 tier: 100
 source: 自作
+board: BB
 era: 古
 ---
 
@@ -55,6 +56,47 @@ style:
 - 電極の間隔と水質 (含まれるイオンの量) で抵抗の絶対値は大きく変わるので、
   R1 の値は実測して電極に合わせて選び直すとよい
 
+## 実体配線図
+
+```breadboard
+title: 図2 電極と分圧、トランジスタ、LED を組む
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3 (Supplies)
+    pins: [V+, GND]
+  ELEC:
+    type: device
+    at: top
+    label: 電極 (水・土に挿す 2 本)
+    pins: [E1, E2]
+  R1: resistor b6 b10 10k
+  Q1: transistor h6(B) h7(C) h8(E) 2SC1815
+  R2: resistor i12 i16 330
+  D1: led g16(A) g7(K) red
+wires:
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
+  - +t30 -- +b30 red
+  - -t29 -- -b29 black
+  - ELEC.E2 -- +t20 red
+  - ELEC.E1 -- a6 yellow
+  - a10 -- -t10 black
+  - e6 -- f6 green
+  - j8 -- -b8 black
+  - j12 -- +b12 red
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/09-water-level-electrodes.svg)
+
+- 5 V の電源は Analog Discovery 3 (AD3) の Supplies の V+ (WaveForms で 5 V にして出力を入れる)。V+ を上の + レール、GND を上の − レールへつなぎ、右端の 2 本で下のレールへ渡す
+- 電極は板に挿さず、片方 (E2、赤の線) を + レールへ、もう片方 (E1、黄の線) を 6 列へつなぐ。6 列が RS と R1 の分圧の中点で、R1 (6→10 列) の右端 (10 列) は黒の線で − レールへ落とす。緑の線で 6 列を下のブロックの Q1 のベース (6 列) へ渡す
+- Q1 (2SC1815) は、平らな面を手前にして見ると左から E・C・B と並ぶ。図2 では丸い面を奥に向けて挿し、左から B (6 列)・C (7 列)・E (8 列) になるので、図の足の名前と実物の足を突き合わせる。エミッタ (8 列) は黒の線で − レールへ
+- R2 (12→16 列) の左端 (12 列) は赤の線で + レールへ。右端 (16 列) が D1 のアノード、D1 のカソード (7 列) が Q1 のコレクタ。LED は長い足がアノード (16 列側)
+- 電流は、D1 が点いているとき約 9 mA、分圧に流れるのは水道水のとき 5 V ÷ 12 kΩ ≈ 0.4 mA。合計しても AD3 の Supplies の 50 mA (USB 給電で 250 mW) と、板の 500 mA の内側に収まる。5 V の直流で、電極にも触れる水にも危険な電圧は掛からない (電食を避けるため通電は実験の間だけにする)
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -64,7 +106,12 @@ style:
 | Q1 | NPN トランジスタ | 2SC1815 |
 | R2 | 抵抗 | 330 Ω |
 | D1 | LED (赤) | V<sub>F</sub> ≈ 2.0 V |
-| — | 電源 | 5 V (USB や電池) |
+| — | 電源 | 5 V (AD3 の Supplies の V+。約 9 mA) |
+| — | 計器 | Analog Discovery 3 の Supplies (V+ = 5 V)。中点の電圧はテスター |
+
+## 計器の設定
+
+計器は Analog Discovery 3 の Supplies (V+ = 5 V) だけを使い、分圧の中点の電圧はテスターで読む。この題はオシロの図を付けない — 見るのは電極間の抵抗で決まる直流の電圧で、時間で変わらない量だけなので、テスターの読み値で足りるため。
 
 ## 見るべき値
 

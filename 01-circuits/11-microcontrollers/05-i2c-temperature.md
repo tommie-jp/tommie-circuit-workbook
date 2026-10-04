@@ -68,6 +68,96 @@ style:
 - MCP9808 の I2C アドレスは 0x18 (16 進数。10 進で 24。既定値で、アドレスの足 A0〜A2 が L のとき)。
   分解能 0.0625℃、精度は目安 ±0.25℃ (typ)、±0.5℃ (max、−20〜+100℃)
 
+## 実体配線図
+
+```breadboard
+title: 図2 MCP9808 モジュールを I2C0 (GP0/GP1) につなぐ (Pico 2 は USB から給電、AD3 は Scope だけ)
+board: full
+parts:
+  MCU: pico2 @ h5
+  M1:
+    type: sip4
+    holes: [a34]
+    pins: [VDD, SDA, SCL, GND]
+    label: MCP9808
+  Rsda: resistor c35 c39 4.7k
+  Rscl: resistor e36 e41 4.7k
+  SC:
+    type: device
+    at: top
+    label: AD3 Scope
+    pins: [1+, 1-, 2+, 2-]
+wires:
+  - MCU.3V3 -- +t9 red
+  - MCU.GND38 -- -t7 black
+  - c34 -- +t34 red
+  - d37 -- -t37 black
+  - d39 -- +t39 red
+  - d41 -- +t41 red
+  - MCU.GP0 -- d35 yellow
+  - MCU.GP1 -- d36 green
+  - SC.1+ -- b36 green
+  - SC.2+ -- e35 yellow
+  - SC.1- -- -t46 black
+  - SC.2- -- -t47 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/breadboard/05-i2c-temperature.svg)
+
+- 電源は Pico 2 の USB。`3V3` (ピン 36、9 列の上) を上の + レールへ、`GND` (ピン 38、7 列の上) を上の − レールへ出す (11-2 と同じ)
+- モジュール (M1) は 34〜37 列の a 行に挿す。足の並びは図の `VDD` `SDA` `SCL` `GND` の順にしたが、**モジュールによって並びが違う**ので、
+  手元の基板の印字を見て配線する。VDD (34 列) は + レールへ、GND (37 列) は − レールへ
+- SDA (35 列) は GP0 (ピン 1) へ黄の線、SCL (36 列) は GP1 (ピン 2) へ緑の線。プルアップ Rsda (35〜39 列) と Rscl (36〜41 列) は、
+  もう一方の端 (39 列・41 列) を + レールへ上げる。モジュールが内蔵のプルアップを持つなら、外付けは省いてよい
+- AD3 は電源に使わず、**オシロ (Scope) だけ**をつなぐ。1+ (緑) を SCL の 36 列 (`b36`)、2+ (黄) を SDA の 35 列 (`e35`) に挿し、
+  1− と 2− (黒) は − レールへ
+- 板を流れる電流は、モジュール (動作時 数百 µA、目安) と、プルアップが SDA・SCL を L に引かれたときの 3.3V ÷ 4.7kΩ ≈ 0.7mA が 2 本分だけで、
+  板の範囲 (1 穴 200mA・板全体 500mA) に収まる
+
+## 部品
+
+| 記号 | 部品 | 値 |
+| --- | --- | --- |
+| U1 | マイコン | Raspberry Pi Pico 2 (USB で給電) |
+| M1 | 温度センサーのモジュール | MCP9808 ブレイクアウト (I2C アドレス 0x18) |
+| Rsda・Rscl | プルアップ抵抗 | 4.7kΩ |
+| — | 計器 | Analog Discovery 3 の Scope (1+ = SCL、2+ = SDA、1−・2− = GND) |
+
+## 計器の設定
+
+計器は AD3 のオシロ (Scope)。I2C のクロックは 100kHz で、1 ビットが 10µs。電圧の上下は 2 本の線を重ねて、
+**クロック (SCL) が H の間、データ (SDA) が動かない**のを見る。ロジックアナライザ (Logic) でも見られるが、I2C の読み下しは付いていないので、ここは Scope にした。
+ここで見るのは、Pico 2 が最初に送る「アドレス 0x18 に書く」の 1 バイト (0x30 = 0011 0000、下の説明) と、センサーの応答 (ACK)。
+
+| 項目 | 値 |
+| --- | --- |
+| 電源 | Pico 2 の USB (AD3 の Supplies は使わない) |
+| CH1 (1+) | SCL (GP1)。1V/div、0V を下から 3 目盛 |
+| CH2 (2+) | SDA (GP0)。同じ 1V/div |
+| 1−・2− | GND |
+| 時間レンジ | 10µs/div (1 画面 100µs。1 バイトと ACK の 9 クロックが入る) |
+| トリガ | CH2 (SDA) の立ち下がり、1.65V。START (SCL が H のまま SDA が H から L へ落ちる) を捕まえる。トリガの点を左端に置く |
+| カーソル | X1 を 30µs (3 ビット目のクロックの H の間)、X2 を 80µs (8 ビット目のクロックの H の間) に置く |
+
+```scope
+title: 図3 アドレス 0x18 に書く 1 バイト (0x30) と ACK — SCL (CH1) と SDA (CH2)
+time: 10us/div
+trigger: ch2 falling 1.65V at -5div
+ch1: {wave: square 100kHz 1.65V offset 1.65V phase 90deg, range: 1V/div, position: -3div}
+ch2: {wave: = 3.3V - 3.3V * step(t) + 3.3V * (step(t - 25us) - step(t - 45us)), range: 1V/div, position: -3div}
+cursors: [30us, 80us]
+measure: [vmax, vmin]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/scope/05-i2c-temperature.svg)
+
+- 図3 の左端 (0µs) で SDA が H から L に落ちる (START)。そのあと SCL が 7.5µs・17.5µs… と立ち上がるたびに、SDA の値が 1 ビットずつ読まれる。
+  読まれる値は上位ビットから 0・0・1・1・0・0・0・0。7 ビットのアドレス 0x18 (001 1000) と、書き込みを表す 0 の 8 ビットで、16 進で 0x30
+- 9 つ目のクロック (87.5µs) で、センサーが SDA を L に引く (ACK。受け取った印)。ここが L なら、配線とアドレスが合っている。
+  H のままなら応答が無く、プログラムは `read failed` や `OSError` になる
+- X1 (30µs、SCL が H) の SDA は 3.3V (3 ビット目 = 1)、X2 (80µs) の SDA は 0V (8 ビット目 = 0)
+- 図は理想の形。実機の SDA・SCL の立ち上がりは、プルアップの 4.7kΩ と配線の容量で数百 ns〜1µs ほどなまる (目安)
+
 ## プログラム
 
 11-1 と同じく、C/C++ を第 1、MicroPython を第 2 に並べる。MCP9808 は温度を

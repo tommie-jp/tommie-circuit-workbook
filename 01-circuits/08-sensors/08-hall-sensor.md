@@ -5,6 +5,7 @@ id: 8-8
 title: ホール素子 (磁石)
 tier: 100
 source: 自作
+board: BB
 ---
 
 # 8-8 ホール素子 (磁石)
@@ -52,6 +53,35 @@ style:
 - 磁石の向きが大事。A3144 は S 極が表の面に向いたときだけ反応し、
   N 極や、面と平行な向きでは反応しない品が多い
 
+## 実体配線図
+
+```breadboard
+title: 図2 A3144 と LED を組む
+board: half
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3 (Supplies)
+    pins: [V+, GND]
+  U1: ic3 b8(VCC) b9(GND) b10(OUT) A3144
+  R1: resistor b13 b17 330
+  D1: led e17(A) e10(K) red
+wires:
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
+  - +t8 -- a8 red
+  - -t9 -- a9 black
+  - +t13 -- a13 red
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/08-hall-sensor.svg)
+
+- 5 V の電源は Analog Discovery 3 (AD3) の Supplies の V+ (WaveForms で 5 V にして出力を入れる)。V+ を上の + レール、GND を上の − レールへつなぎ、下のレールは使わない
+- U1 (A3144、TO-92) は、型番の印字のある面 (表) を手前にして左から VCC・GND・OUT。8・9・10 列に挿し、VCC (8 列) は赤の線で + レール、GND (9 列) は黒の線で − レールへ短く引く
+- R1 (13→17 列) の左端 (13 列) は赤の線で + レールへ。右端 (17 列) が D1 のアノード、D1 のカソード (10 列) が U1 の OUT と同じ列なので、図1 の OUT につながる。磁石は板の外にあるので描かない
+- 電流は、D1 が点いているとき約 8.5 mA、A3144 自身の電源電流は数 mA (データシートの目安)。合計しても AD3 の Supplies の 50 mA (USB 給電で 250 mW) と、板の 500 mA の内側に収まる
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -59,7 +89,12 @@ style:
 | U1 | ホールスイッチ IC (A3144、TO-92) | 動作点 (B<sub>op</sub>) 目安 90〜175 G、復帰点 (B<sub>rp</sub>) 目安 −25〜+25 G |
 | R1 | 抵抗 | 330 Ω |
 | D1 | LED (赤) | V<sub>F</sub> ≈ 2.0 V |
-| — | 電源 | 5 V |
+| — | 電源 | 5 V (AD3 の Supplies の V+。約 8.5 mA と A3144 の電源電流) |
+| — | 計器 | Analog Discovery 3 の Supplies (V+ = 5 V)。OUT の読みはテスター |
+
+## 計器の設定
+
+計器は Analog Discovery 3 の Supplies (V+ = 5 V) だけを使い、OUT の電圧はテスターで読む。この題はオシロの図を付けない — 見るのは磁石を近づけたときの OUT の 2 つの電圧 (磁石が無いときと ON のとき) という、時間で変わらない量だけで、テスターの読み値で足りるため。
 
 ## 見るべき値
 

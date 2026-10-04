@@ -37,23 +37,21 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/circuit/04-pwm-led-servo-1.svg)
 
-サーボ (図2) は 5V (VBUS) で電源を取り、信号線だけを Pico 2 の GPIO (GP14) につなぐ。
+サーボ (図2) は別の 5V 電源で動かし、信号線だけを Pico 2 の GPIO (GP14) につなぐ。GND は Pico 2 と共通にする。
 
 ```circuit
 title: 図2 GP14でサーボを回す
 parts:
   U1: pico2 g8 mirror
-  VBUS: vcc b6 5V
   GP: ground e6
   M1:
     type: device
     at: j12e0
     label: Servo
     pins: [VCC, SIG, GND]
-  VBUS: vcc i11 5V
+  V5: vcc i11 5V
   GM: ground l11
 wires:
-  - U1.VBUS -| b6
   - U1.GND38 -| e6
   - U1.GP14 -| M1.SIG
   - M1.VCC -| i11
@@ -72,13 +70,117 @@ style:
   信号は 20ms 周期のパルスで、パルス幅 1.5ms が中央 (0°)、1.0ms が
   −90°、2.0ms が +90° という約束
   (目安。品によっては 1.0〜2.0ms で ±45° ほどしか回らず、0.5〜2.4ms で ±90° のものもある)
-- サーボの電源は VBUS (ピン 40、USB の 5V) から取る。Pico 2 自身の 3V3
+- サーボの電源は、Pico 2 とは別の 5V 電源 (電池 4 本や 5V の AC アダプタ) にする。Pico 2 自身の 3V3
   は、データシートが外部への負荷を 300mA 未満にとどめるよう勧めている。
-  サーボの起動時の突入電流 (SG90 で瞬間 500mA 程度) はこれを超えうる。GND は Pico 2 と必ず共通にする
+  サーボの起動時の突入電流 (SG90 で瞬間 500mA 程度、目安) はこれを超えうるし、USB の 5V (VBUS) から
+  ブレッドボードを通して取ると 1 穴 200mA (README の板の表) も超える。だから電流が板を通らないよう、
+  サーボの電源線は板の外で電源へ直接つなぐ。GND は Pico 2 と必ず共通にする (板の − レールへは信号の基準として 1 本だけ渡す)
 - 信号は 3.3V のロジックのままでも、SG90 クラスは多くの場合動く。ただし 5V で動く回路の
   V<sub>IH</sub> (H と認める最低の入力電圧) を 3.3V が満たすとは限らない。確実にするなら
   レベル変換 (10-17) を挟むか、入力のしきい値が低い 74HCT 系 (5V で動き、V<sub>IH</sub> は
   2.0V) を 1 段はさむ
+
+## 実体配線図
+
+```breadboard
+title: 図3 LED (GP15) とサーボ (GP14) を組む (AD3 は Scope だけ、サーボは別電源)
+board: full
+parts:
+  MCU: pico2 @ h5
+  R1: resistor j24 j28 330
+  D1: led i28(A) i30(K) red
+  PS:
+    type: device
+    at: bottom
+    label: 電源 5V (別電源)
+    pins: ["+", "-"]
+  SV:
+    type: device
+    at: bottom
+    label: サーボ SG90
+    pins: [VCC, SIG, GND]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: [1+, 1-, 2+, 2-]
+wires:
+  - SC.1+ -- g24 yellow
+  - SC.2+ -- g23 blue
+  - SC.1- -- -b26 black
+  - SC.2- -- -b27 black
+  - j30 -- -b30 black
+  - j22 -- -b22 black
+  - j23 -- SV.SIG yellow
+  - PS.+ -- SV.VCC red
+  - PS.- -- SV.GND black
+  - PS.- -- -b40 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/breadboard/04-pwm-led-servo.svg)
+
+- LED の部分は 11-1 と同じ。R1 は GP15 (ピン 20、24 列) から 28 列へ、LED のアノードが 28 列 (i28)、カソードが 30 列で、j30 から − レールへ。
+  Pico 2 の GND (ピン 18、22 列) も j22 から − レールへ渡す
+- サーボの信号線 (SIG) は GP14 (ピン 19、23 列) の j23 から出す。電源線 (VCC) は別の 5V 電源の + へ、GND は電源の − へ直接つなぎ、
+  その電源の − を板の − レール (b40) にも 1 本つないで Pico 2 の GND と共通にする。
+  サーボの電流 (SG90 の目安: 動作中 100〜250mA、起動や停止で 500mA 超) は板を通らない。板を流れるのは LED の約 3.9mA と信号の電流だけで、
+  板の範囲 (1 穴 200mA・板全体 500mA) に収まる
+- 電源は Pico 2 の USB (VBUS ピン 40 の 5V を基板上のレギュレータが 3.3V にして使う)。AD3 は電源に使わず、**オシロ (Scope) だけ**をつなぐ。
+  1+ (黄) を GP15 の列 (`g24`) に、2+ (青) を GP14 の列 (`g23`) に、1− と 2− (黒) を − レール (GND) へ挿す。
+  GP14 と GP15 は同じスライスで周期が共通なので、LED とサーボは別々に動かす (プログラムの節)。測るのも 1 回に 1 つ
+
+## 部品
+
+| 記号 | 部品 | 値 |
+| --- | --- | --- |
+| U1 | マイコン | Raspberry Pi Pico 2 (USB で給電) |
+| R1 | 抵抗 (LED の電流制限) | 330Ω |
+| D1 | LED | 赤色 5mm |
+| M1 | サーボモータ | SG90 (3 本線) |
+| — | サーボの電源 | 5V (4.8〜6V の電池 4 本か AC アダプタ。起動時 500mA 超に耐えるもの) |
+| — | 計器 | Analog Discovery 3 の Scope (1+ = GP15、2+ = GP14、1−・2− = GND) |
+
+## 計器の設定
+
+計器は AD3 のオシロ (Scope)。LED の PWM は 1kHz の方形波で、デューティ比が変わるのは時間の波形でしか見えない。
+サーボの信号は周期 20ms のうち 1〜2ms しか H にならない細いパルスなので、同じくオシロで幅を測る。
+
+| 項目 | 値 |
+| --- | --- |
+| 電源 | Pico 2 の USB (AD3 の Supplies は使わない) |
+| CH1 (1+) | GP15 (LED)。1V/div、0V を下から 3 目盛 |
+| CH2 (2+) | GP14 (サーボ)。同じ 1V/div |
+| 1−・2− | GND |
+| LED のとき (図4) | 時間レンジ 500µs/div (1 画面 5ms、5 周期)、トリガ CH1 の立ち上がり 1.65V。カーソル X1 を H の中 (100µs)、X2 を L の中 (600µs) に置く。Duty の読みが 25% |
+| サーボのとき (図5) | 時間レンジ 500µs/div、トリガ CH2 の立ち上がり 1.65V。パルスの幅 (1.5ms = 3 目盛) を目盛で読む。カーソル X1 を H の中 (750µs)、X2 を L の中 (3ms) に置く。周期 20ms は 5ms/div に替えると 2 周期見える |
+| Measurements | 図4: Frequency・Duty・Maximum。図5: Maximum・Minimum |
+
+```scope
+title: 図4 GP15 の LED 用 PWM — 1kHz、デューティ比 25%
+time: 500us/div
+trigger: ch1 rising 1.65V at -4div
+ch1: {wave: pulse 1kHz 1.65V offset 1.65V duty 25%, range: 1V/div, position: -3div}
+cursors: [100us, 600us]
+measure: [freq, duty, vmax]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/scope/04-pwm-led-servo-1.svg)
+
+```scope
+title: 図5 GP14 のサーボ信号 — 周期 20ms、パルス幅 1.5ms (中央)
+time: 500us/div
+trigger: ch1 rising 1.65V at -4div
+ch1: {wave: pulse 50Hz 1.65V offset 1.65V duty 7.5%, range: 1V/div, position: -3div}
+cursors: [750us, 3ms]
+measure: [vmax, vmin]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/scope/04-pwm-led-servo-2.svg)
+
+- 図4 の読み値は Frequency 1kHz、Duty 25.0% (H の幅 250µs ÷ 周期 1ms)、Maximum 3.30V。X1 は H の中で 3.3V、X2 は L の中で 0V。「見るべき値」の表で 25% のとき LED の平均電流は約 1.0mA。
+  H の高さは 3.3V (GP15 の出力)。デューティ比を 50% にすると H の幅は 500µs になる
+- 図5 の H の幅は 1.5ms (500µs/div で 3 目盛) で、周期 20ms の 7.5%。X1 は H の中で 3.30V、X2 は L の中で 0V。1.0ms なら 5%、2.0ms なら 10%。トリガを立ち上がりにするとパルスの始まりが左端に固定される
+- 2 つの図は理想の形。実機のエッジはなまり、H は 3.3V に少し足りないことがある
 
 ## プログラム
 
