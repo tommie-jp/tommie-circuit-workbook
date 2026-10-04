@@ -10,37 +10,40 @@ board: BB
 
 # 2-4 ダーリントン — 指で触れて点く
 
-トランジスタ 2 つを**エミッタ→ベースで縦につなぐ**と、電流増幅率が
-掛け算になる (ダーリントン接続)。指の皮膚の抵抗 (数百 kΩ) ほどの
-わずかな電流でも、LED を光らせるだけの電流に増幅できる。
+トランジスタ 2 つを、**Q1 のエミッタから Q2 のベースへ**つなぎ、2 つのコレクタどうしもつなぐと、
+全体の電流増幅率が 2 つの hFE の掛け算になる (ダーリントン接続)。指の皮膚 (数百 kΩ) を通る
+ほどのわずかな電流でも、LED を光らせるだけの電流に増幅できる。
+
+この題では、2 枚の金属板に指で触れると LED が点くスイッチを作り、オシロで触れた瞬間の
+ベースとコレクタの電圧を見る。
 
 ## 回路図
 
 ```circuit
 title: 図1 ダーリントンで作る指タッチスイッチ (CH2 でベース、CH1 でコレクタを見る)
 parts:
-  VCC: vcc a2 5V
-  TP1: port a4
-  TP2: port f3
-  RB: resistor f4 h4 1M
-  G2: ground h4
-  Q1: npn f7
-  Q2: npn g9
-  RC: resistor a9 c9 470
-  D1: led c9 e9
-  G3: ground h9
-  M2: voltmeter f3 h3 l=$\mathrm{CH2}$
-  G5: ground h3
-  M1: voltmeter e11 h11 l=$\mathrm{CH1}$
-  G4: ground h11
+  VCC: vcc b2 5V
+  TP1: port b4
+  TP2: port g3
+  RB: resistor g4 i4 1M
+  G2: ground i4
+  Q1: npn g7
+  Q2: npn h9
+  RC: resistor b9 d9 470
+  D1: led d9 f9
+  G3: ground i9
+  M2: voltmeter g3 i3 l=$\mathrm{CH2}$
+  G5: ground i3
+  M1: voltmeter f11 i11 l=$\mathrm{CH1}$
+  G4: ground i11
 wires:
-  - a2 -- a4 -- a9
-  - f3 -- f4 -- Q1.B
+  - b2 -- b4 -- b9
+  - g3 -- g4 -- Q1.B
   - Q1.E |- Q2.B
-  - e9 -| Q1.C
-  - e9 -- Q2.C
-  - Q2.E -- h9
-  - e9 -- e11
+  - f9 -| Q1.C
+  - f9 -- Q2.C
+  - Q2.E -- i9
+  - f9 -- f11
 style:
   grid: on
   pitch: 1.2
@@ -48,7 +51,8 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/04-darlington-touch.svg)
 
-`TP1` と `TP2` が指で触れる 2 枚の金属板 (アルミ箔やねじの頭など)。
+図1 の `TP1` と `TP2` が指で触れる 2 枚の金属板 (アルミ箔やねじの頭など)。指で 2 枚にまたがって
+触れると、+5V から指を通ってベースへ電流が流れる。
 触れていないときは `RB` (1MΩ) が Q1 のベースを GND 側に引いて OFF に保つ。
 
 - 指の抵抗 (仮に 500kΩ とする、実際は 100kΩ〜1MΩ 程度と幅がある) を通って
@@ -111,7 +115,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/04-darlington-touch.svg)
 
-部品はすべて上のブロックに挿す。5V は Analog Discovery の電源出力 V+ (赤) から
+図2 のとおり、部品はすべて上のブロックに挿す。5V は Analog Discovery の電源出力 V+ (赤) から
 上の + レールへ入れる (WaveForms の Supplies で V+ を 5 V にして入れる)。
 流れるのは LED の約 4.7 mA だけなので V+ で足りる。GND は上の − レールだけを使う。
 
@@ -127,8 +131,8 @@ wires:
 
 ## オシロで見る
 
-CH1 を 1 V/div、CH2 を 500 mV/div、時間軸を 20 ms/div にし、CH2 の立ち上がり
-(0.7 V) でシングル トリガを掛けてから両方の板に指で触れる。
+CH1 を 1 V/div、CH2 を 500 mV/div、時間軸を 20 ms/div にする。トリガは CH2 の立ち上がり
+(0.7 V) で、1 回だけ画面を止める Single にしてから両方の板に指で触れる (図3)。
 
 ```scope
 title: 図3 指で触れた瞬間 — ベース (CH2) が上がり、コレクタ (CH1) が落ちる
@@ -166,9 +170,9 @@ measure: [vmax, vmin]
 | --- | --- | --- |
 | 触れていないときの LED | 消灯 | RB が Q1 のベースを GND に落としている |
 | 両方の板に指で触れたときの LED | 点灯 (約 4.7mA、計算値) | わずかな指の電流でも十分に飽和する |
-| 触れる前の CH1 (コレクタ) / CH2 (ベース) | 約 3.5 V (目安) / 0 V | Tr は OFF、ベースは RB で GND |
+| 触れる前の CH1 (コレクタ) / CH2 (ベース) | 約 3.5 V (目安) / 0 V | トランジスタは OFF、ベースは RB で GND |
 | 触れたときの CH2 (Q1 のベース) | 約 1.4 V | V<sub>BE</sub> 2 段ぶんで頭打ち |
-| 触れたときの CH1 (Q2 の C-E 間電圧) | 約 0.8 V | ダーリントンは 1 段の Tr (約 0.1〜0.2 V) より大きい飽和電圧が残る |
+| 触れたときの CH1 (Q2 の C-E 間電圧) | 約 0.8 V | ダーリントンは 1 段のトランジスタ (約 0.1〜0.2 V) より大きい飽和電圧が残る |
 | RB を 100kΩ に替えたとき | 指の乾き具合によっては点かないことがある | RB が小さすぎると指の電流の大半が RB に逃げてしまう |
 
 ## 出典

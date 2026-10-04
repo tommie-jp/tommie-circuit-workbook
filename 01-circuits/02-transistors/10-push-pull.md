@@ -9,37 +9,42 @@ source: 自作
 
 # 2-10 プッシュプル (B 級) とクロスオーバー歪
 
-NPN と PNP を上下に積み、ベースを共通の入力に、エミッタを共通の出力に
-つなぐと、**入力が + のときは NPN が、− のときは PNP が**交代で電流を
-流す (B 級プッシュプル)。ダイオードでバイアスを足さない素の B 級では、
-±0.7V 付近でどちらのトランジスタも導通しない**すき間**ができる —
-これが**クロスオーバー歪**。
+PNP 形のトランジスタは、NPN 形 (2-1) と電圧・電流の向きが逆のもので、ベースをエミッタより
+約 0.7V **低く**すると導通する。NPN と PNP を上下に積み、ベースを共通の入力に、エミッタを
+共通の出力につなぐと、**入力が + のときは NPN が、− のときは PNP が**交代で電流を流す。
+2 つが押したり (push) 引いたり (pull) するのでプッシュプルと呼び、それぞれが半周期だけ働く
+使い方を B 級と呼ぶ。スピーカーなどの重い負荷を、両方向に電流を流して動かす出力段の基本形。
+
+ベースに直流の電圧 (バイアス) を足さない素の B 級では、入力が 0V を横切る (ゼロクロスの)
+付近の ±0.7V で、どちらのトランジスタも導通しない**すき間**ができる。そこで出力の波が
+平らに欠ける。これが**クロスオーバー歪** (歪は、出力の波の形が入力と変わること)。
+この題では正弦波を入れて、オシロで欠けを見る。
 
 ## 回路図
 
 ```circuit
 title: 図1 B 級プッシュプル (W1 で入れ、CH2 で入力・CH1 で出力を見る)
 parts:
-  VCC: vcc a5 5V
-  VEE: vee g5 5V
-  W1: sine d1 f1 l=$\mathrm{W1}$
-  G0: ground f1
-  M2: voltmeter d3 f3 l=$\mathrm{CH2}$
-  G2: ground f3
-  Q1: npn c5
-  Q2: pnp e5
-  RL: resistor d7 f7 100
-  G1: ground f7
-  M1: voltmeter d9 f9 l=$\mathrm{CH1}$
-  G3: ground f9
+  VCC: vcc b6 5V
+  VEE: vee h6 5V
+  W1: sine e2 g2 l=$\mathrm{W1}$
+  G0: ground g2
+  M2: voltmeter e4 g4 l=$\mathrm{CH2}$
+  G2: ground g4
+  Q1: npn d6
+  Q2: pnp f6
+  RL: resistor e8 g8 100
+  G1: ground g8
+  M1: voltmeter e10 g10 l=$\mathrm{CH1}$
+  G3: ground g10
 wires:
-  - a5 -- Q1.C
-  - g5 -- Q2.C
-  - d1 -- d3 -- d4
-  - d4 |- Q1.B
-  - d4 |- Q2.B
-  - Q1.E -- d5 -- Q2.E
-  - d5 -- d7 -- d9
+  - b6 -- Q1.C
+  - h6 -- Q2.C
+  - e2 -- e4 -- e5
+  - e5 |- Q1.B
+  - e5 |- Q2.B
+  - Q1.E -- e6 -- Q2.E
+  - e6 -- e8 -- e10
 style:
   grid: on
   pitch: 1.2
@@ -47,7 +52,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/10-push-pull.svg)
 
-+5V と −5V は Analog Discovery の V+ と V− (WaveForms の Supplies で ±5 V にする)。
+図1 の +5V と −5V は Analog Discovery の V+ と V− (WaveForms の Supplies で ±5 V にする)。
 `Q1` のコレクタを +5V、`Q2` のコレクタを −5V につなぐ。
 `Q1`・`Q2` のベースは共通の入力 (W1 と CH2)、エミッタは共通の出力 (`RL` の上端、CH1)。
 
@@ -98,7 +103,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/10-push-pull.svg)
 
-`Q1` (NPN) は上半分、`Q2` (PNP) は下半分に挿し、ベースどうし (列 10) と
+図2 では、`Q1` (NPN) は上半分、`Q2` (PNP) は下半分に挿し、ベースどうし (列 10) と
 エミッタどうし (列 12) を溝をまたぐ短い線でつなぐ。2SC1815 も 2SA1015 も平らな面を見て
 左から E・C・B なので、2 本とも平らな面を奥に向けて (180 度回して) 挿し、左から B・C・E にする。
 
@@ -127,10 +132,10 @@ measure: [vpp, vmax, vmin]
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/scope/10-push-pull-1.svg)
 
-CH1 の山は +2.3 V、谷は −2.3 V (4.6 Vpp) で、入力 (6 Vpp) より上下とも 0.7 V ずつ低い。
+図3 の CH1 の山は +2.3 V、谷は −2.3 V (4.6 Vpp) で、入力 (6 Vpp) より上下とも 0.7 V ずつ低い。
 入力が ±0.7V の間にいる間は CH1 が 0V で平らになる — これがクロスオーバー歪。
 
-W1 を 2 Vpp (±1V) に下げると、すき間の幅は変わらないので歪の割合が大きくなる。
+W1 を 2 Vpp (±1V) に下げると、すき間の幅は変わらないので歪の割合が大きくなる (図4)。
 
 ```scope
 title: 図4 振幅を 2 Vpp に下げる — 出力は ±0.3 V の山だけが残る

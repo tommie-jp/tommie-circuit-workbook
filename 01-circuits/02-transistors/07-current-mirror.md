@@ -12,35 +12,37 @@ source: 自作
 2 つのトランジスタの**ベースとエミッタを共通**にし、片方のコレクタと
 ベースを短絡 (ダイオード接続) すると、もう片方のコレクタには
 **ほぼ同じ電流が「写し取られる」**。基準側の電流を 1 本の抵抗で決めるだけで、
-出力側は電源電圧や負荷の変化にほとんど左右されない定電流源になる。
+出力側は負荷の変化にほとんど左右されない定電流源 (いつも同じ電流を流す回路) になる。
+この題では、出力側に LED をつないで流れる電流を測り、LED を 2 個に増やしても電流が
+変わらないことを確かめる。
 
 ## 回路図
 
 ```circuit
 title: 図1 カレントミラーで LED を定電流点灯する (CH2 で RREF、CH1 で RS の電圧を見る)
 parts:
-  VCC: vcc a1 5V
-  M2: voltmeter a2 c2 l=$\mathrm{CH2}$
-  RREF: resistor a4 c4 560
-  Q1: npn e4 mirror
-  RS: resistor a7 b7 47
-  D1: led b7 c7
-  Q2: npn e7
-  M1: voltmeter a9 b9 l=$\mathrm{CH1}$
-  G0: ground f5
+  VCC: vcc b1 5V
+  M2: voltmeter b2 d2 l=$\mathrm{CH2}$
+  RREF: resistor b4 d4 560
+  Q1: npn f4 mirror
+  RS: resistor b7 c7 47
+  D1: led c7 d7
+  Q2: npn f7
+  M1: voltmeter b9 c9 l=$\mathrm{CH1}$
+  G0: ground g5
 wires:
-  - a1 -- a2 -- a4 -- a7 -- a9
-  - c2 -- c4
-  - b7 -- b9
-  - c4 -- Q1.C
-  - c4 -- c5
-  - c5 -- e5
-  - Q1.B -- e5
-  - e5 -- Q2.B
-  - c7 -- Q2.C
-  - Q1.E -- f4
-  - Q2.E -- f7
-  - f4 -- f5 -- f7
+  - b1 -- b2 -- b4 -- b7 -- b9
+  - d2 -- d4
+  - c7 -- c9
+  - d4 -- Q1.C
+  - d4 -- d5
+  - d5 -- f5
+  - Q1.B -- f5
+  - f5 -- Q2.B
+  - d7 -- Q2.C
+  - Q1.E -- g4
+  - Q2.E -- g7
+  - g4 -- g5 -- g7
 style:
   grid: on
   pitch: 1.2
@@ -48,14 +50,15 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/07-current-mirror.svg)
 
-+5V は Analog Discovery の V+ (WaveForms の Supplies で 5 V にして入れる)。
+図1 の +5V は Analog Discovery の V+ (WaveForms の Supplies で 5 V にして入れる)。
 流れるのは基準側と出力側を合わせて 15 mA ほどなので V+ で足りる。
-AD の入力は差動なので、CH2 は `RREF` の両端、CH1 は `RS` の両端の電圧をそのまま測る。
+AD の入力は差動 (1+ と 1− の間の電圧を測り、1− を GND につながなくてよい) なので、
+CH2 は `RREF` の両端、CH1 は `RS` の両端の電圧をそのまま測る。
 `RS` (47Ω) は出力側の電流を電圧に変えて読むための抵抗 (電流を見る抵抗) で、
 ミラーの働きには関わらない。
 
-`Q1` はコレクタとベースを短絡した**ダイオード接続**で、`RREF` に流れる
-基準電流を決める。`Q2` は `Q1` とベース・エミッタを共通にしているので、
+`Q1` はコレクタとベースを短絡した**ダイオード接続** (ベース-エミッタ間がダイオード 1 個と同じに働く) で、
+`RREF` に流れる基準電流を受けて、それに見合う V<sub>BE</sub> を作る。`Q2` は `Q1` とベース・エミッタを共通にしているので、
 `Q1` と同じコレクタ電流を**写し取る** (ミラーする)。
 
 - 基準電流: I<sub>ref</sub> = (5 − 0.7) / 560Ω ≈ **7.68 mA** (8.2kΩ では
@@ -110,7 +113,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/07-current-mirror.svg)
 
-5V は Analog Discovery の V+ (赤) から上の + レールの `+t1` へ、GND (黒) は `-t2` へ入れる。
+図2 のとおり、5V は Analog Discovery の V+ (赤) から上の + レールの `+t1` へ、GND (黒) は `-t2` へ入れる。
 
 - **Q1・Q2 は上のブロックの e 行に、ベースどうしが隣り合うように挿す**
   (Q1 は `e10` E・`e11` C・`e12` B、Q2 は `e13` B・`e14` C・`e15` E。Q2 は 180 度回す)。

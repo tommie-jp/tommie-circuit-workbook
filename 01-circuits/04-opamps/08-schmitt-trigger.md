@@ -10,9 +10,10 @@ source: 自作
 # 4-8 シュミットトリガ (ヒステリシス)
 
 4-4 の比較器は帰還が無いので、しきい値ぴったりで LED がちらつくことがあると
-書いた。**出力の一部を + 入力へ正帰還で戻す**と、しきい値が 2 つに分かれて
-(ヒステリシス)、ちらつきが止まる。4-4 の CdS 回路に 2 本の抵抗を足すだけで
-直せる。
+書いた。**出力の一部を + 入力へ戻す**と、しきい値が 2 つに分かれて
+(ヒステリシス)、ちらつきが止まる。+ 入力へ戻すと、出力の変化をさらに同じ向きに押す
+(正帰還。4-1 の負帰還の逆)。4-4 の CdS 回路に 2 本の抵抗を足すだけで直せる。
+この題では、点くときと消えるときで、CdS の抵抗のしきい値が違うことを確かめる。
 
 ## 回路図
 
@@ -21,34 +22,35 @@ title: 図1 シュミットトリガ (CdS + ヒステリシス)
 parts:
   B1: battery vp mid 5
   B2: battery mid vm 5
-  G1: ground c2f0
-  RCDS: photoresistor a3 c3
-  RFIX: resistor d3 f3 10k
-  POT: potentiometer a5 c5 10k
-  Rref: resistor b6 b8 10k
-  Rh: resistor b11 b8 100k
-  U1: opamp d10 +up
-  R1: resistor d12 d14 220
-  D1: led d14 f14 red
-  DP: diode f17 d17 1N4148
-  GD1: ground f14
+  G1: ground c3f0
+  CDS1: photoresistor a4 c4 l=$\mathrm{CDS1}$
+  RFIX: resistor d4 f4 10k
+  VR1: potentiometer a6 c6 10k l=$\mathrm{VR1}$
+  Rref: resistor c7 c9 10k
+  Rh: resistor b12 b9 100k
+  U1: opamp d11 +up
+  R1: resistor d13 d15 220
+  D1: led d15 f15 red
+  DP: diode f18 d18 1N4148
+  GD1: ground f15
 points:
-  vp: a1
-  vm: f1
-  mid: c1f0
+  vp: a2
+  vm: f2
+  mid: c2f0
 wires:
-  - mid -- c2f0
-  - a1 -- a3 -- a5
-  - f1 -- f3
-  - f3 -- f5 -- c5
-  - c3 -- d3
-  - d3 -- d9 |- U1.-
-  - POT.w -- b6
-  - b8 |- U1.+
-  - U1.out -- d11 -- d12
-  - b11 -- d11
-  - d14 -- d17
-  - f14 -- f17
+  - mid -- c3f0
+  - a2 -- a4 -- a6
+  - f2 -- f4
+  - f4 -- f6 -- c6
+  - c4 -- d4
+  - d4 -- d10 |- U1.-
+  - VR1.w |- c7
+  - b9 -- c9
+  - c9 |- U1.+
+  - U1.out -- d12 -- d13
+  - b12 -- d12
+  - d15 -- d18
+  - f15 -- f18
 style:
   grid: on
   pitch: 1.2
@@ -56,10 +58,11 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/08-schmitt-trigger.svg)
 
-- − 入力 (CdS・RFIX の分圧) は 4-4 と同じ。POT のワイパーはしきい値の基準電圧を
+- 左の B1・B2 は ±5 V 電源 (4-1・4-4 と同じ)
+- − 入力 (CdS・RFIX の分圧) は 4-4 と同じ。VR1 のワイパーはしきい値の基準電圧を
   作るが、**Rref (10 kΩ) を通してから + 入力へ**入れる (4-4 では直結だった)
 - **Rh (100 kΩ、出力から + 入力への正帰還) が新顔。** + 入力の電圧は
-  「POT の基準電圧」と「出力の電圧」を Rref と Rh で分圧した値になり、
+  「VR1 の基準電圧」と「出力の電圧」を Rref と Rh で分圧した値になり、
   **出力が High か Low かで + 入力のしきい値そのものが動く**
 - 出力が High (+3.5V) のときのしきい値は基準電圧より高め、Low (−4.5V) の
   ときは低めにずれる。**一度暗いと判定したら、明るさがしきい値を大きく
@@ -71,9 +74,9 @@ style:
 | 記号 | 部品 | 値 |
 | --- | --- | --- |
 | U1 | オペアンプ (2 回路入りの片方、比較器として使用) | LM358 |
-| CDS | 硫化カドミウムセル (CdS) | 明所 約 1 kΩ / 暗所 約 200 kΩ (代表値) |
+| CDS1 | 硫化カドミウムセル (CdS) | 明所 約 1 kΩ / 暗所 約 200 kΩ (代表値) |
 | RFIX | 抵抗 | 10 kΩ |
-| POT | 半固定抵抗 (しきい値調整) | 10 kΩ |
+| VR1 | 半固定抵抗 (しきい値調整) | 10 kΩ |
 | Rref | 抵抗 (基準電圧側) | 10 kΩ |
 | Rh | 抵抗 (正帰還、ヒステリシス幅を決める) | 100 kΩ |
 | R1 | 抵抗 (LED 電流制限) | 220 Ω |
@@ -83,7 +86,8 @@ style:
 
 ## 見るべき値
 
-計算値。POT を中点 (基準電圧 0 V) にしたときの値。4-4 と同じく
+4-4 と同じく、CdS を手で覆う量を少しずつ変えながら、テスターで + 入力と − 入力の電圧を測り、
+LED が点く所と消える所を探す。表の値は計算値。VR1 を中点 (基準電圧 0 V) にしたときの値。4-4 と同じく
 出力は **+3.5 V (High) / −4.5 V (Low)** と仮定する。
 
 | 測る所 | 期待する値 | 分かること |

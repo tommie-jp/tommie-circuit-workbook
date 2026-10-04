@@ -10,55 +10,56 @@ board: BB
 
 # 2-6 差動増幅
 
-トランジスタ 2 つのエミッタを 1 本の抵抗 (テール抵抗) でまとめると、
-**2 つの入力の差**に反応する回路になる。片方を基準電圧、もう片方を
-可変にして、電流がどちらのコレクタに流れるかを LED で見る。
+トランジスタ 2 つのエミッタをつないで 1 本の抵抗 (テール抵抗。尾のように下へ伸びるのでこう呼ぶ)
+で GND へ落とすと、**2 つのベースの電圧の差**に反応する回路になる。この 2 つ組を差動対と呼ぶ。
+片方のベースを基準電圧、もう片方を可変にして、電流がどちらのコレクタに流れるかを LED と
+オシロで見る。OP アンプ (第 4 章) の入り口は、この差動対でできている。
 
 ## 回路図
 
 ```circuit
 title: 図1 差動対で電流を振り分ける (2 つのコレクタを CH1・CH2 で見る)
 parts:
-  VCC: vcc a4 5V
-  R1: resistor a4 d4 10k
-  R2: resistor f4 h4 10k
-  G2: ground h4
-  VR1: potentiometer a14 e14 10k
-  G3: ground e14
-  RC1: resistor a7 c7 220
-  D1: led c7 e7
-  Q1: npn f7
-  RC2: resistor a11 c11 220
-  D2: led c11 e11
-  Q2: npn f11 mirror
-  RE: resistor h9 j9 220
-  G4: ground j9
-  M1: voltmeter e8 g8 l=$\mathrm{CH1}$
-  G5: ground g8
-  M2: voltmeter e10 g10 l=$\mathrm{CH2}$
-  G6: ground g10
+  VCC: vcc b4 5V
+  R1: resistor b4 e4 10k
+  R2: resistor g4 i4 10k
+  G2: ground i4
+  VR1: potentiometer b14 f14 10k
+  G3: ground f14
+  RC1: resistor b7 d7 220
+  D1: led d7 f7
+  Q1: npn g7
+  RC2: resistor b11 d11 220
+  D2: led d11 f11
+  Q2: npn g11 mirror
+  RE: resistor i9 k9 220
+  G4: ground k9
+  M1: voltmeter f8 h8 l=$\mathrm{CH1}$
+  G5: ground h8
+  M2: voltmeter f10 h10 l=$\mathrm{CH2}$
+  G6: ground h10
 wires:
-  - e7 -- e8
-  - e11 -- e10
-  - a4 -- a7 -- a11 -- a14
-  - d4 -- f4 -- Q1.B
+  - f7 -- f8
+  - f11 -- f10
+  - b4 -- b7 -- b11 -- b14
+  - e4 -- g4 -- Q1.B
   - VR1.w |- Q2.B
-  - e7 -- Q1.C
-  - e11 -- Q2.C
-  - Q1.E -- h7
-  - Q2.E -- h11
-  - h7 -- h9 -- h11
+  - f7 -- Q1.C
+  - f11 -- Q2.C
+  - Q1.E -- i7
+  - Q2.E -- i11
+  - i7 -- i9 -- i11
 style:
   grid: on
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/06-differential-amp.svg)
 
-`VCC` (+5V) は Analog Discovery (AD) の電源出力 V+ (WaveForms の Supplies で 5 V にして入れる)。
+図1 の `VCC` (+5V) は Analog Discovery (AD) の電源出力 V+ (WaveForms の Supplies で 5 V にして入れる)。
 CH1 は `Q1` のコレクタ、CH2 は `Q2` のコレクタの電圧を GND 基準で見る。
 
 `Q1` のベースは `R1`・`R2` (どちらも 10kΩ) の分圧で固定 (基準)。`Q2` のベースは
-`VR1` (ポテンショメータ) のつまみで 0〜5V に動かせる。`RE` (テール抵抗) が
+`VR1` (1-6 で使ったポテンショメータ) のつまみで 0〜5V に動かせる。`RE` (テール抵抗) が
 2 つのエミッタ電流の合計をほぼ一定に保つ。
 
 - 基準電圧: 5V × 10k/20k = **2.5 V**
@@ -68,7 +69,7 @@ CH1 は `Q1` のコレクタ、CH2 は `Q2` のコレクタの電圧を GND 基�
   1kΩ にすると 5 V では Itail が 1.8mA しか流れず LED が暗すぎるので、
   220Ω にしてある)
 - **VR1 を基準よりわずかに (0.1V ほど) 高くする**: バイポーラの差動対は
-  入力差が ±4V<sub>T</sub> (常温で約 ±100mV) を超えると、電流はほぼ片側に
+  入力差が ±4V<sub>T</sub> (V<sub>T</sub> は 2-2 で見た熱電圧 26 mV。常温で約 ±100mV) を超えると、電流はほぼ片側に
   寄ってしまう。Q2 側の LED が明るくなり (Q2 が飽和して約 4.5mA で頭打ち)、
   Q1 側はほぼ消える — **わずかな電位差を大きく増幅する**のがこの回路の仕事
 
@@ -118,7 +119,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/06-differential-amp.svg)
 
-`R1`・`R2` の分圧 (列 8) が `Q1` のベース (基準)。`VR1` のつまみ (列 18) が
+図2 では、`R1`・`R2` の分圧 (列 8) が `Q1` のベース (基準)。`VR1` のつまみ (列 18) が
 `Q2` のベース。`Q1`・`Q2` のエミッタはどちらも `RE` の上端 (列 31) に集まる。
 
 - 電源: AD の V+ (赤) を `+t1`、GND (黒) を `-t2` へ。上の + レールが +5V、− レールが GND
@@ -130,7 +131,7 @@ wires:
 
 WaveForms の Scope で CH1・CH2 を 500 mV/div・DC 結合 (中央を 2.5 V) にし、`VR1` を基準 (2.5 V) に合わせてから
 0.1 V ほど上げる。CH1 の立ち上がりでトリガを掛けると、上げた瞬間の前後が 1 画面に入る
-(直流は時間で動かないので、動かした瞬間を捉えて前後の高さを比べる)。
+(直流は時間で動かないので、動かした瞬間を捉えて前後の高さを比べる。図3)。
 
 ```scope
 title: 図3 VR1 を 0.1 V 上げた瞬間 — CH1 は上がり、CH2 は下がる
@@ -144,7 +145,8 @@ cursors: [-2ms, 2ms]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/scope/06-differential-amp.svg)
 
 - 釣り合い (カーソル X1、上げる前): コレクタ電圧 = 5 − 220Ω × 4.1mA − 2.0 (LED) ≈ **2.1 V** で、2 本が重なる
-- VR1 を上げた後 (カーソル X2): 電流を失った `Q1` 側は `RC1` と D1 の降下が消えて **約 3.3 V** へ上がり、
+- VR1 を上げた後 (カーソル X2): 電流を失った `Q1` 側は `RC1` の電圧降下が消えて **約 3.3 V** へ上がり
+  (D1 にはオシロの入力へ流れるわずかな電流しか流れず、2-1 と同じ理由で 5 V までは上がらない)、
   電流を集めた `Q2` 側は **約 2.0 V** へ下がる。2 本は**逆向き**に動く。
   `Q2` のコレクタはエミッタ (約 1.9 V) より下へは行けない (飽和) ので、ここで止まる —
   このため D2 の電流は計算の 8.2 mA までは増えず、4〜5 mA ほどで頭打ちになる

@@ -11,35 +11,41 @@ board: BB
 
 # 2-5 MOSFET スイッチ (2N7000、ロジックレベル)
 
-MOSFET はゲートに電圧をかけるだけでオン・オフするスイッチ (ベース電流が
-要らない)。2N7000 は**ロジックレベル**の MOSFET で、5V (3.3V でも) の
-デジタル信号で十分にオンにできる。マイコンの GPIO で直接駆動できるのが利点。
+MOSFET はゲートに電圧をかけるだけでオン・オフするスイッチ。足は 3 本で、ゲート (G)・
+ドレイン (D)・ソース (S) と呼ぶ。BJT (2-1〜2-4 で使ったバイポーラトランジスタ) のベース・コレクタ・エミッタに当たる。
+ゲートとソースの間に電圧をかけるとドレインからソースへ電流が流れ、ゲートには電流がほとんど
+流れない (BJT のようなベース電流が要らない)。
+
+2N7000 は**ロジックレベル**の MOSFET、つまりロジック回路の電圧 (5V) をゲートにかけるだけで
+十分にオンにできる MOSFET である。マイコンの出力で直接駆動できるのが利点。ただし 3.3V の
+マイコンでは、個体によってオンが浅くなる (しきい値が最大 3V のため。下の計算)。
+この題では、スイッチでゲートを 0V と 5V に切り替えて LED を点け、2-1 の BJT のスイッチと比べる。
 
 ## 回路図
 
 ```circuit
 title: 図1 2N7000 でスイッチする (CH2 でゲート、CH1 でドレインを見る)
 parts:
-  VCC: vcc a4 5V
-  R1: resistor a7 c7 330
-  D1: led c7 d7
-  Q1: nmos-e d7i0
-  SW: switch a4 c4
-  RG: resistor c4 e4 220
-  RPD: resistor e4 g4 100k
-  G2: ground g4
-  G3: ground f7
-  M2: voltmeter e2 g2 l=$\mathrm{CH2}$
-  G4: ground g2
-  M1: voltmeter d10 f10 l=$\mathrm{CH1}$
-  G5: ground f10
+  VCC: vcc b4 5V
+  R1: resistor b7 d7 330
+  D1: led d7 e7
+  Q1: nmos-e e7i0
+  SW: switch b4 d4
+  RG: resistor d4 f4 220
+  RPD: resistor f4 h4 100k
+  G2: ground h4
+  G3: ground g7
+  M2: voltmeter f2 h2 l=$\mathrm{CH2}$
+  G4: ground h2
+  M1: voltmeter e10 g10 l=$\mathrm{CH1}$
+  G5: ground g10
 wires:
-  - a4 -- a7
-  - e2 -- e4
-  - d7 -- d10
-  - d7 -- Q1.D
-  - e4 |- Q1.G
-  - Q1.S -- f7
+  - b4 -- b7
+  - f2 -- f4
+  - e7 -- e10
+  - e7 -- Q1.D
+  - f4 |- Q1.G
+  - Q1.S -- g7
 style:
   grid: on
   pitch: 1.2
@@ -47,15 +53,15 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/05-mosfet-switch.svg)
 
-+5V は Analog Discovery の電源出力 V+ (WaveForms の Supplies で 5 V にして入れる)。
+図1 の +5V は Analog Discovery の電源出力 V+ (WaveForms の Supplies で 5 V にして入れる)。
 流れるのは LED の 9 mA ほどなので V+ で足りる。CH2 はゲート、CH1 はドレインの電圧を GND から測る。
 
 `SW` を閉じるとゲートに 5V がかかり、MOSFET がオンになって LED が点く。
 `RPD` (100kΩ、プルダウン) が `SW` を開けたときにゲートを確実に 0V へ落とす。
 `RG` (220Ω) はゲートを充電する瞬間の電流を抑える保護抵抗。
 
-- 2N7000 のしきい値電圧 V<sub>GS(th)</sub> は 1〜3V (データシートの規格) で、
-  5V を掛ければ確実にオン (オーバードライブが取れている)
+- 2N7000 のしきい値電圧 V<sub>GS(th)</sub> (ドレイン電流が流れ始めるゲート-ソース間の電圧) は
+  0.8〜3V (onsemi のデータシートの規格)。5V を掛ければ、最大の 3V より 2V 以上高いので確実にオンになる
 - オン抵抗 R<sub>DS(on)</sub> は V<sub>GS</sub>=5V で数Ω程度 (十分小さい)
 - LED の電流: I = (5 − V<sub>F</sub>) / R1 ≈ (5 − 2.0) / 330 ≈ **9.1 mA**
   (R<sub>DS(on)</sub> による電圧降下 数十mV は無視できるほど小さい)
@@ -79,7 +85,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, 1+, 1-, 2-, 2+]
+    pins: [V+, GND, 1+, 1-, 2+, 2-]
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black
@@ -97,7 +103,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/05-mosfet-switch.svg)
 
-5V は Analog Discovery の V+ (赤) から上の + レールの `+t1` へ、GND (黒) は `-t2` へ入れる。
+図2 のとおり、5V は Analog Discovery の V+ (赤) から上の + レールの `+t1` へ、GND (黒) は `-t2` へ入れる。
 
 - **Q1 は上のブロックの e 行に、180 度回して挿す** (`e13` D・`e14` G・`e15` S)。
   2N7000 は**平らな面を見て左から S・G・D** (2SC1815 とは並びが違うので注意) なので、
@@ -113,7 +119,7 @@ wires:
 
 CH2 (ゲート) の立ち上がり 2.5 V でトリガを掛け (Normal)、SW を押す。押した瞬間の 1 回を
 画面に止める。ゲートは RG (220Ω) と 2N7000 の入力容量 (数十 pF) で 10 ns ほどで上がり、
-V<sub>GS</sub> がしきい値を越えたところでドレインが落ちる。
+V<sub>GS</sub> がしきい値を越えたところでドレインが落ちる (図3)。
 
 ```scope
 title: 図3 SW を押した瞬間 — ゲート (CH2) が上がるとドレイン (CH1) が落ちる

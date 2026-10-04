@@ -10,42 +10,45 @@ source: 自作
 # 2-11 PNP のハイサイドスイッチ
 
 2-1 の NPN スイッチは負荷の**GND 側**に割り込む「ローサイド」だった。
-PNP は逆に、負荷の**電源側**に割り込む「ハイサイド」スイッチに向く。
-PNP は「エミッタよりベースを下げる」と導通するので、ロジック信号
-(0V/5V) をそのままベースに繋げない — 間に NPN を 1 石はさんで、
-ベースを浅く引き下げる。
+PNP (2-10 で見た、NPN と向きが逆のトランジスタ) は逆に、負荷の**電源側**に割り込む
+「ハイサイド」スイッチに向く。負荷の片方を GND につないだまま、電源側で入り切りできる。
+
+PNP は「エミッタよりベースを下げる」と導通する。ロジック信号 (0V/5V) でベースを直接動かすと、
+0V で点いて 5V で消える逆の動きになり、負荷の電源がロジックより高い (12V など) ときは 5V でも
+切れない。そこで間に NPN (`Q2`) を 1 石はさみ、NPN が導通したときだけ PNP のベースを引き下げる。
+この題では W1 の方形波で入り切りし、入力とコレクタの電圧が同じ向きに動くことをオシロで確かめる。
 
 ## 回路図
 
 ```circuit
 title: 図1 PNP ハイサイドスイッチ (W1 で入れ、CH2 で入力、CH1 でコレクタを見る)
 parts:
-  VCC: vcc a3 5V
-  RB1: resistor a6 c6 10k
-  RB2: resistor c6 e6 4.7k
-  Q1: pnp c8
-  Q2: npn f7
-  RB3: resistor f4 f6 10k
-  W1: square f1 h1 l=$\mathrm{W1}$
-  G0: ground h1
-  M2: voltmeter f3 h3 l=$\mathrm{CH2}$
-  G3: ground h3
-  RL: resistor d10 d12 470
-  D1: led d12 f12
-  G1: ground f12
-  G2: ground g7
-  M1: voltmeter e9 g9 l=$\mathrm{CH1}$
-  G4: ground g9
+  VCC: vcc b4 5V
+  RB1: resistor b7 d7 10k
+  RB2: resistor d7 f7 4.7k
+  Q1: pnp d9
+  Q2: npn g8
+  RB3: resistor g5 g7 10k
+  W1: square g2 i2 l=$\mathrm{W1}$
+  G0: ground i2
+  M2: voltmeter g4 i4 l=$\mathrm{CH2}$
+  G3: ground i4
+  RL: resistor e11 e13 470
+  D1: led e13 g13
+  G1: ground g13
+  G2: ground h8
+  M1: voltmeter f10 h10 l=$\mathrm{CH1}$
+  G4: ground h10
 wires:
-  - a3 -- a6 -- a8
-  - a8 -- Q1.E
-  - c6 -- Q1.B
-  - e6 -| Q2.C
-  - f1 -- f3 -- f4
-  - f6 -- Q2.B
-  - Q1.C -- d8 -- d9 -- d10
-  - d9 -- e9
-  - Q2.E -- g7
+  - b4 -- b7 -- b9
+  - b9 -- Q1.E
+  - d7 -- Q1.B
+  - f7 -| Q2.C
+  - g2 -- g4 -- g5
+  - g7 -- Q2.B
+  - Q1.C -- e9 -- e10 -- e11
+  - e10 -- f10
+  - Q2.E -- h8
 style:
   grid: on
   pitch: 1.2
@@ -53,8 +56,8 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/11-pnp-high-side.svg)
 
-+5V は Analog Discovery の電源出力 V+ (WaveForms の Supplies で 5 V にして入れる)。
-流れるのは LED の 6 mA ほどなので V+ で足りる。ロジック入力 `IN` の代わりに W1 の 0 V / 5 V の方形波を
+図1 の +5V は Analog Discovery の電源出力 V+ (WaveForms の Supplies で 5 V にして入れる)。
+流れるのは LED の 6 mA ほどなので V+ で足りる。ロジック入力の代わりに W1 の 0 V / 5 V の方形波を
 `RB3` に入れる。CH2 は入力 (`RB3` の左端)、CH1 は `Q1` のコレクタ (負荷の上端) の電圧を GND から測る。
 
 `Q1` (PNP) のエミッタは +5V に直結。`RB1` (10kΩ) はベースをエミッタと
@@ -75,8 +78,8 @@ style:
     (V<sub>EC(sat)</sub> ≈ 0.2V) すると、コレクタ電圧 = 5 − 0.2 = 4.8V、
     I<sub>C1</sub> = (4.8 − 2.0) / 470Ω ≈ **6.0 mA**
   - 飽和に要る最小ベース電流 (hFE = 70 の最悪値でも): 6.0mA/70 ≈
-    0.085mA。実際のベース電流 0.80mA は約 **9 倍のオーバードライブ**が
-    あるので、確実に飽和する
+    0.085mA。実際のベース電流 0.80mA はその約 **9 倍**ある。この余裕を
+    オーバードライブと呼び、これだけあれば確実に飽和する
 
 `RB2` を小さくしすぎると `Q1` のベース電流が過大になって無駄が大きく、
 大きくしすぎると飽和しない — 4.7kΩ はこの回路の負荷電流 (約 6.0mA) に対して
@@ -118,7 +121,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/11-pnp-high-side.svg)
 
-5V は Analog Discovery の V+ (赤) から上の + レールの `+t1` へ、GND (黒) は `-t2` へ入れる。
+図2 のとおり、5V は Analog Discovery の V+ (赤) から上の + レールの `+t1` へ、GND (黒) は `-t2` へ入れる。
 
 - **Q2 (2SC1815) と Q1 (2SA1015) は上のブロックの e 行に、180 度回して挿す**。どちらも平らな面を
   見て左から E・C・B なので、回すと左から B・C・E になる (Q2 は `e8`–`e10`、Q1 は `e14`–`e16`)
@@ -135,7 +138,7 @@ wires:
 ## オシロで見る
 
 W1 を 100 Hz・0 V / 5 V の方形波にし (目には半分の明るさで点きっぱなしに見える。点滅を目で見たいときは 1 Hz に下げる)、
-CH2 (入力) と CH1 (Q1 のコレクタ) を同じ 1 V/div で重ねる。トリガは CH2 の立ち上がり 2.5 V (Normal)。
+CH2 (入力) と CH1 (Q1 のコレクタ) を同じ 1 V/div で重ねる (図3)。トリガは CH2 の立ち上がり 2.5 V (Normal)。
 
 ```scope
 title: 図3 入力 (CH2) とコレクタ (CH1) — 入力が 5 V の間だけコレクタが 4.8 V に上がる

@@ -9,9 +9,10 @@ source: 自作
 
 # 2-8 コレクタ帰還バイアスと分圧バイアスの比較
 
-2-3 は `R1`・`R2` の分圧でベースを固定する**分圧バイアス**だった。ここでは
-もう 1 つの定番、**コレクタ帰還バイアス** (ベース抵抗をコレクタから引く)
+2-3 は `R1`・`R2` の分圧でベースを固定する**分圧バイアス**だった (2-3 の題名では自己バイアスと呼んだ形)。
+ここではもう 1 つの定番、**コレクタ帰還バイアス** (ベース抵抗をコレクタから引く)
 と並べて、hFE が個体ごとに違ってもコレクタ電流がどれだけブレるかを比べる。
+手持ちのトランジスタを何本か差し替え、コレクタの電圧がどれだけ動くかをテスターで確かめる。
 
 ## 回路図
 
@@ -20,17 +21,15 @@ source: 自作
 ```circuit
 title: 図1 コレクタ帰還バイアス
 parts:
-  V1: vsource a1 f1 5
-  G0: ground f1
-  RC: resistor a5 c5 4.7k
-  RB: resistor c3 e3 680k
-  Q1: npn e5
-  G1: ground f5
+  VCC: vcc b5 5V
+  RC: resistor b5 d5 4.7k
+  RB: resistor d3 f3 680k
+  Q1: npn f5
+  G1: ground g5
 wires:
-  - a1 -- a5
-  - c3 -- c5 -- Q1.C
-  - e3 -| Q1.B
-  - Q1.E -- f5
+  - d3 -- d5 -- Q1.C
+  - f3 -| Q1.B
+  - Q1.E -- g5
 style:
   grid: on
   pitch: 1.2
@@ -43,21 +42,19 @@ style:
 ```circuit
 title: 図2 分圧バイアス (2-3 と同じ形)
 parts:
-  V1: vsource a1 e1 5
-  G0: ground e1
-  R1: resistor a3 c3 47k
-  R2: resistor c3 e3 15k
-  G1: ground e3
-  RC: resistor a6 c6 4.7k
-  Q1: npn d6
-  RE: resistor e6 g6 1k
-  G2: ground g6
+  VCC: vcc b3 5V
+  R1: resistor b3 d3 47k
+  R2: resistor d3 f3 15k
+  G1: ground f3
+  RC: resistor b6 d6 4.7k
+  Q1: npn e6
+  RE: resistor f6 h6 1k
+  G2: ground h6
 wires:
-  - a1 -- a3
-  - a3 -- a6
-  - c3 -| Q1.B
-  - c6 -- Q1.C
-  - Q1.E -- e6
+  - b3 -- b6
+  - d3 -| Q1.B
+  - d6 -- Q1.C
+  - Q1.E -- f6
 style:
   grid: on
   pitch: 1.2
@@ -68,8 +65,10 @@ style:
 どちらも `RC` = 4.7kΩ で揃え、2SC1815 の hFE の幅 (70〜700) を仮定して
 コレクタ電流 I<sub>C</sub> を計算する。
 
-**図1 (コレクタ帰還)**: `RB` (680kΩ) がコレクタ (電圧が下がるほどベース電流も
-減る、負帰還) からベースへ流れる。I<sub>C</sub> = hFE(5−0.7) / (RB + hFE×RC)。
+**図1 (コレクタ帰還)**: ベース電流は `RB` (680kΩ) を通ってコレクタからベースへ流れる。
+コレクタ電流が増えるとコレクタの電圧が下がり、ベース電流が減って増えすぎを抑える。
+出力の変化を打ち消す向きに入力へ戻すことを**負帰還**と呼ぶ。
+I<sub>C</sub> = hFE(5−0.7) / (RB + hFE×RC)。
 
 | hFE | I<sub>C</sub> (計算値) | V<sub>C</sub> |
 | --- | --- | --- |
@@ -108,6 +107,9 @@ Vbe の近似誤差に埋もれてしまうので、47kΩ にして Vth を確�
 | — | 電源 | 5V (USB) |
 
 ## 見るべき値
+
+図1 と図2 を別々に組み、テスターの直流電圧レンジで Q1 のコレクタ (と図2 のベース) を GND から測る。
+自分の Q1 の hFE は、0-5 の hFE チェッカーで先に測っておくと、下の表の計算値と比べられる。
 
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |
