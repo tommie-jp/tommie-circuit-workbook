@@ -65,18 +65,18 @@ board:
   slots: on
 title: 図2 自作 Load (3-4 と同じ)
 points:
-  GND: k3
+  GND: l3
 parts:
   J1: sma/female-edge i1 h0 j0
-  R1: resistor i3 k3 100
-  R2: resistor i5 k5 100
+  R1: resistor i3 l3 100
+  R2: resistor i5 l5 100
 wires:
   - i1 -- i3
   - i3 -- i5
   - j0 -- j2 black
-  - j2 -- k2 black
-  - k2 -- k3 black
-  - k3 -- k5 black
+  - j2 -- l2 black
+  - l2 -- l3 black
+  - l3 -- l5 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/09-sma-repeatability.svg)

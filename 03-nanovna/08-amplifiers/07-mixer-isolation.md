@@ -122,12 +122,12 @@ notes:
   - box f8 j16 blue
   - text g9 mirror: 7
   - text g11 mirror: 5
-  - text d13: 3
-  - text d15: 1
+  - text g13: 3
+  - text g15: 1
   - text i9 mirror: 8
   - text i11 mirror: 6
   - text i14 mirror: 4
-  - text f15: 2
+  - text i15: 2
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/perfboard/07-mixer-isolation.svg)

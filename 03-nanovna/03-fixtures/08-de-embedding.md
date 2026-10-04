@@ -89,6 +89,8 @@ board:
   size: 7x5cm
   slots: on
 title: 図2 2x-Thru の板
+points:
+  GND: j0
 parts:
   J1: sma/female-edge i1 h0 j0
   J2: sma/female-edge i24 j25

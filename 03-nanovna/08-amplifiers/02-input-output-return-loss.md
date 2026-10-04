@@ -108,8 +108,8 @@ parts:
   BAT: battery g4 g1 5
   Q1: transistor j12 j11 j10
   Rc: resistor g11 i11 270
-  Re: resistor k12 m12 200
-  Ce: capacitor k13 l13 10u
+  Re: resistor k12 n12 200
+  Ce: capacitor k14 n14 10u
   C2: capacitor i15 i17 100n
   J2: sma/female-edge i24 j25
 wires:
@@ -124,18 +124,18 @@ wires:
   - i11 -- i15
   - i17 -- i24
   - j12 -- k12
-  - k12 -- k13
-  - m12 -- l12
-  - l13 -- l12
+  - k12 -- k14
+  - n12 -- n14 black
   - g1 -- h1 black
   - h1 -- h0 black
   - j0 -- j2 black
-  - j2 -- l2 black
-  - l2 -- l8 black
-  - l8 -- l12 black
+  - j2 -- n2 black
+  - n2 -- n8 black
+  - l8 -- n8 black
+  - n8 -- n12 black
   - j25 -- j19 black
-  - j19 -- l19 black
-  - l19 -- l12 black
+  - j19 -- n19 black
+  - n19 -- n14 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/perfboard/02-input-output-return-loss.svg)

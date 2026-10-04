@@ -66,6 +66,8 @@ board:
   size: 7x5cm
   slots: on
 title: 図2 直列治具にダイオードとバイアス
+points:
+  GND: j0
 parts:
   J1: sma/female-edge i1 h0 j0
   J2: sma/female-edge i24 j25
@@ -77,7 +79,7 @@ parts:
   VR1: potentiometer/trimmer e2 f3 e4 10k
   V1:
     type: device
-    at: top
+    at: -c8
     label: USB 5V
     pins: + -
 wires:
@@ -90,8 +92,11 @@ wires:
   - f3 -- f6
   - e4 -- e9
   - e9 -- f9
-  - V1.+ -- e2 red
-  - V1.- -- e9 blue
+  - V1.+ -- a8 red
+  - a8 -- a2 red
+  - a2 -- e2 red
+  - V1.- -- a9 blue
+  - a9 -- e9 blue
   - j0 -- j25 black
 ```
 

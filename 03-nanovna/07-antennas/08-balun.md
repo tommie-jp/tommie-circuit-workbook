@@ -110,8 +110,8 @@ wires:
   - i8 -- ANT_A
   - k8 -- ANT_B
 notes:
-  - text b13: A
-  - text d13: B
+  - text i13: A
+  - text k13: B
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/perfboard/08-balun.svg)

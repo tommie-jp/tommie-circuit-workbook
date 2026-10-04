@@ -87,7 +87,7 @@ board:
   slots: on
 title: 図4 Load (50 Ω)
 points:
-  GND: k3
+  GND: l3
 parts:
   J3: sma/female-edge i1 h0 j0
   R1: resistor i3 l3 100
