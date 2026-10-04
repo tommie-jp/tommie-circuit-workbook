@@ -14,11 +14,18 @@ era: 古
 9-3 や 9-9 のラジオは、受けたい局の周波数のまま増幅して検波する (ストレート方式)。
 同調を鋭くしようとタンクを増やすと、全部を同時に動かすのが難しい。
 **スーパーヘテロダイン**は、受けた電波をいったん**決まった周波数 (中間周波、IF = 455kHz) に変換**してから増幅する。
-IF は局によらず同じなので、固定の同調 (IFT) を何段も重ねて、利得と選択度を稼げる。
-昭和のトランジスタラジオの定番、6 石スーパーを 5 V で組む。
+IF は局によらず同じなので、455kHz に固定した同調 (IFT、中間周波トランス) を何段も重ねて、利得と選択度を稼げる。
+昭和のトランジスタラジオの定番、6 石スーパーを 5 V で組む (「石」はトランジスタの数)。
 
 6 石の内訳は、周波数変換 (Q1)・中間周波増幅 2 段 (Q2・Q3)・低周波のドライブ (Q4)・
 プッシュプル出力 (Q5・Q6)。検波はダイオード (D1) で、石には数えない。
+
+この題の流れは次のとおり。
+
+- 回路図は信号の順に 3 枚 (図1 周波数変換、図2 中間周波増幅と検波、図3 低周波増幅)
+- 図1 のあとに、2 連バリコンで局発を追従させる「トラッキング」と、スーパー特有の混信「イメージ周波数」を説明する
+- 実体配線図も同じ 3 枚の板に分ける (図4〜図6)
+- Analog Discovery の W1 で作った AM 信号を入れ、tinySA で Q1 のコレクタのスペクトル (図7)、オシロで検波の前後 (図8) を見る
 
 ## 回路図
 
@@ -94,9 +101,9 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/10-superheterodyne-1.svg)
 
-- **局発の周波数は受信周波数 + 455kHz**: f<sub>LO</sub> = f<sub>RF</sub> + f<sub>IF</sub>。
+- **局発の周波数は受信周波数 + 455kHz**: 局発は局部発振器 (LO) の略で、ラジオの中で作る発振。f<sub>LO</sub> = f<sub>RF</sub> + f<sub>IF</sub>。
   1000kHz の局なら f<sub>LO</sub> = 1455kHz。Q1 は局発 (発振) とミキサーを 1 石で兼ねる (自励式コンバータ)
-- **発振**: T2 (局発コイル、赤) の 1 次は Q1 のエミッタへ Cc2 で帰還し、2 次は Cp と VC1b とでタンクを作る。
+- **発振**: T2 (局発コイル、赤) の 1 次 (図の左の巻線) は Q1 のエミッタへ Cc2 で帰還し、2 次 (右の巻線) は Cp と VC1b とでタンクを作る。
   コレクタ電流が T2 の 2 次を通るので、コレクタとエミッタが巻線でつながり、発振が続く。
   発振しないときは T2 の片方の巻線の向きを入れ替える (帰還の向きが逆)。
   実物の局発コイルはタップ付きの 3 端子 + 2 端子で、図は巻線 2 つに略した
@@ -104,9 +111,10 @@ style:
   トランジスタの V<sub>BE</sub>–I<sub>C</sub> は曲がっている (指数) ので、コレクタ電流には
   f<sub>RF</sub>・f<sub>LO</sub> のほか、**差 f<sub>LO</sub> − f<sub>RF</sub> = 455kHz** と和 (2455kHz) が出る。
   T3 (IFT1、黄) が 455kHz にだけ同調しているので、差だけが次の段へ渡る
-- **バイアス**: R1 (33kΩ)・R2 (10kΩ) でベースは 5 × 10/43 ≈ 1.16V、Re (1kΩ) で I<sub>E</sub> ≈ 0.56mA (V<sub>BE</sub> = 0.6V の計算値)。
+- **バイアス**: R1 (33kΩ)・R2 (10kΩ) でベースは 5 × 10/43 ≈ 1.16V。
+  I<sub>E</sub> = (1.16 − 0.6)/1kΩ ≈ 0.56mA (V<sub>BE</sub> = 0.6V と置いた計算値)。
   コンバータは電流を絞るほうが雑音が少なく、発振も穏やか
-- **W1 と Cw (10pF)**: 放送の代わりに、Analog Discovery の W1 で作った AM 信号を小さな容量でタンクへ入れる (計器の設定)。
+- **W1 と Cw (10pF)**: 放送の代わりに、Analog Discovery の W1 で作った AM 信号を小さな容量でタンクへ入れる (設定は「計器の設定」の表)。
   放送を聞くときは Cw ごと外す
 - **IFT の同調**: IFT は同調コンデンサ (180pF 前後) を内蔵する。
   455kHz に合うコイルは L = 1/((2π × 455kHz)² × 180pF) ≈ 680µH。コアを回して 455kHz に合わせる。
@@ -122,8 +130,10 @@ VC1a (アンテナ) と VC1b (局発) は 1 本の軸で一緒に回る 2 連バ
   同じ容量の 2 連をそのまま使うと、局発が回りすぎて差が 455kHz に保てない
 - **パディングで縮める**: 局発側に Cp (パディングコンデンサ、270pF) を直列に入れると、容量の変わり方が縮む。
   トリマ (VC1b に並列) で上の端を、コイルのコアで下の端を合わせる。これを**トラッキング**という
-- 計算値 (T1 の 1 次 330µH、VC1a 側は浮遊とトリマで 20pF、同容量 2 連。600・1000・1400kHz の 3 点で合わせた。
-  局発コイル 187µH・VC1b のトリマ 27pF・Cp 270pF):
+- 次の表は計算値。条件は、T1 の 1 次 330µH、VC1a 側は浮遊容量とトリマで 20pF、同容量の 2 連、
+  局発コイル 187µH・VC1b のトリマ 27pF・Cp 270pF。600・1000・1400kHz の 3 点で差がちょうど 0 になる Cp は 271.5pF で、
+  表はこの値で計算した (270pF でも各行の差は 0.5kHz 以内しか変わらない)。
+  VC1 の容量は 1/((2πf<sub>RF</sub>)² × 330µH) − 20pF、f<sub>LO</sub> は 187µH と「(VC1 + 27pF) と Cp の直列」の共振周波数:
 
 | 受信 f<sub>RF</sub> | VC1 の容量 | 局発 f<sub>LO</sub> | 差 − 455kHz |
 | --- | --- | --- | --- |
@@ -136,7 +146,7 @@ VC1a (アンテナ) と VC1b (局発) は 1 本の軸で一緒に回る 2 連バ
 | 1602kHz | 10pF | 2045.2kHz | −11.8kHz |
 
 - 帯の中ほどのずれは ±4kHz ほどで、IF の通過帯域 (IFT 3 段で ±4〜5kHz、目安) に収まる。
-  帯の端はずれが大きく、そこでは感度が落ちる。ずれた分は局発が決めるので、
+  帯の端はずれが大きく、そこでは感度が落ちる。ずれても IFT を通るのは f<sub>LO</sub> − 455kHz の局なので、
   **選局 (聞こえる周波数) は局発で決まり、アンテナのタンクは感度だけを決める**
 
 ### イメージ周波数
@@ -166,10 +176,10 @@ parts:
   T4: transformer c10
   Ci2: capacitor b8 d8 180p l=$\mathrm{C}$
   VCC: vcc a9 5V
-  Cb3: capacitor g11 i11 0.01u
-  GCb3: ground i11
-  R6: resistor g13 i13 10k
-  GR6: ground i13
+  R6: resistor g11 i11 10k
+  GR6: ground i11
+  Cb3: capacitor g13 i13 0.01u
+  GCb3: ground i13
   VCC: vcc e15 5V
   R5: resistor e15 g15 22k
   Q3: npn c17
@@ -181,16 +191,16 @@ parts:
   Ci3: capacitor b19 d19 180p l=$\mathrm{C}$
   VCC: vcc a20 5V
   GT5: ground f22
-  CH2: voltmeter d23 f23 l=$\mathrm{CH2}$
-  GCH2: ground f23
-  D1: diode c24 c26 1N60
-  Cd: capacitor c27 e27 0.01u
-  GCd: ground e27
-  CH1: voltmeter c30 e30 l=$\mathrm{CH1}$
-  GCH1: ground e30
-  VR: potentiometer c33 e33 l=$\mathrm{VR}$
-  GVR: ground e33
-  AF: port d35
+  CH2: voltmeter d24 f24 l=$\mathrm{CH2}$
+  GCH2: ground f24
+  D1: diode c25 c27 1N60
+  Cd: capacitor c28 e28 0.01u
+  GCd: ground e28
+  CH1: voltmeter c31 e31 l=$\mathrm{CH1}$
+  GCH1: ground e31
+  VR: potentiometer c34 e34 l=$\mathrm{VR}$
+  GVR: ground e34
+  AF: port d36
 wires:
   - c1 -- Q2.B
   - g1 -- g2
@@ -218,14 +228,15 @@ wires:
   - T5.A1 -| a20
   - T5.B1 -| c23
   - c23 -- c24
-  - c23 -- d23
+  - c24 -- c25
+  - c24 -- d24
   - T5.B2 -| f22
-  - c26 -- c27
-  - c27 -- c30
-  - c30 -- c33
-  - VR.w -| d35
+  - c27 -- c28
+  - c28 -- c31
+  - c31 -- c34
+  - VR.w -| d36
 notes:
-  - text f33 small center: 10kΩ (A)
+  - text f34 small center: 10kΩ (A)
   - text e9 small center: IFT2 (白)
   - box b8 d10 blue
   - text a10a5 small blue left: IFT に内蔵 180pF
@@ -239,7 +250,8 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/10-superheterodyne-2.svg)
 
 - **中間周波増幅**: Q2・Q3 は 455kHz だけを増幅するエミッタ接地。
-  バイアスは Q2 が 33kΩ/10kΩ・1kΩ で I<sub>E</sub> ≈ 0.56mA、Q3 が 22kΩ/10kΩ・1kΩ で 5 × 10/32 = 1.56V、I<sub>E</sub> ≈ 0.96mA (計算値)。
+  バイアスは Q2 が R3 (33kΩ)・R4 (10kΩ)・Re2 (1kΩ) で Q1 と同じ I<sub>E</sub> ≈ 0.56mA。
+  Q3 は R5 (22kΩ)・R6 (10kΩ) でベースが 5 × 10/32 ≈ 1.56V、I<sub>E</sub> = (1.56 − 0.6)/1kΩ ≈ 0.96mA (計算値)。
   Ce2・Ce3 (0.01µF) は 455kHz で 35Ω で、エミッタを交流で GND にする
 - ベースの直流は IFT の 2 次を通って入る。2 次の下の端 (IFB) は Cb2・Cb3 で交流の GND に落とす
 - **IFT の色**: 局発コイル 赤、IFT1 黄、IFT2 白、IFT3 黒。
@@ -264,9 +276,9 @@ parts:
   R7: resistor a9 c9 680
   D2: diode c9 e9 1N4148
   D3: diode e9 g9 1N4148
-  Q5: npn c11 2SC2120
+  Q5: npn c11
   VCC: vcc a11 5V
-  Q6: pnp g11 2SA950
+  Q6: pnp g11
   GQ6: ground j11
   Rf: resistor m8 m10 30k
   C2: ecap e13 e15 220u
@@ -295,6 +307,8 @@ wires:
   - e15 -- e17
 notes:
   - text f18 small left: 8Ω
+  - text c11h5 small left: 2SC2120
+  - text g10h9 small right: 2SA950
 style:
   pitch: 1.2
 ```
@@ -307,7 +321,7 @@ style:
 - **中点の帰還**: Rf (30kΩ) が中点からベースへ直流を戻す。中点が上がると Q4 の電流が増えて中点を引き下げ、2.5V 前後に落ち着く
   (Rb2 の 40µA とベース電流 14µA の和 54µA を Rf が流す。(2.5 − 0.87)/54µA ≈ 30kΩ、hFE = 200 の計算値)
 - **プッシュプル (Q5・Q6)**: 上半分を NPN の Q5、下半分を PNP の Q6 が受け持つ。D2・D3 の 1.3V が 2 つの V<sub>BE</sub> を
-  あらかじめ持ち上げ、0 付近のすき間 (クロスオーバーひずみ) を減らす
+  あらかじめ持ち上げ、0 付近のすき間 (クロスオーバー歪、2-10 で見た) を減らす
 - **出力**: 中点が ±1.5V 振れると、8Ω に最大 1.5/8 ≈ 190mA が流れ、出力は約 1.5²/(2 × 8) ≈ 0.14W (計算値)。
   2SC1815 (150mA) では足りないので、Q5・Q6 は 2SC2120・2SA950 (800mA) にする。
   C2 (220µF) と 8Ω の低域のカットオフは 1/(2π × 8Ω × 220µF) ≈ 90Hz
@@ -538,7 +552,7 @@ wires:
   - -b22 -- j22 black
   - j15 -- j23 orange
   - e23 -- f23 orange
-  - c19 -- c4 orange
+  - c19 -- a4 orange
   - SP.1 -- a27 green
   - SP.2 -- -t28 black
   - +t29 -- +b29 red
@@ -548,7 +562,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/10-superheterodyne-3.svg)
 
 - Q4 (g4〜g6)・Q5 (g13〜g15)・Q6 (g21〜g23) は下のブロック、バイアスとダイオードは上のブロック
-- 4 列がベース (C1 の +・Rb2・e4–f4)。Rf (a19〜a23) は c19–c4 の線でベースへ戻る
+- 4 列がベース (C1 の +・Rb2・e4–f4)。Rf (a19〜a23) は c19–a4 の線でベースへ戻る
 - Q4 のコレクタ (5 列) は e5–f5 で上へ渡して D3 のカソード (a5) へ、d5–d21 で Q6 のベース (21 列) へ
 - D3 のアノードと D2 のカソードが 9 列、D2 のアノードが 13 列で、e13–f13 で Q5 のベースへ。R7 (j13 から + レール) がここへ電流を流す
 - Q5 のエミッタ (15 列) と Q6 のエミッタ (23 列) を j15–j23 でつなぎ、e23–f23 で上の 23 列 (中点) へ。C2 (b23〜b27) からスピーカーへ
@@ -556,6 +570,7 @@ wires:
 ## 計器の設定
 
 Analog Discovery (W1・CH1・CH2) と、スペクトラムアナライザ (tinySA Ultra) を使う。
+W1 は放送の代わりの AM 信号、オシロは検波の前後の波形 (図8)、tinySA は Q1 のコレクタに並ぶ RF・LO・IF・和のスペクトル (図7) に使う。
 
 | 項目 | 設定 |
 | --- | --- |
@@ -601,7 +616,7 @@ markers: [455k, 1000k, 1455k, 2455k]
 
 ### オシロスコープで見る
 
-レベルは目安 (IFT3 の 2 次で peak 0.5V、D1 の順方向の落ちを 0.1V と置いた)。
+レベルは目安 (IFT3 の 2 次で peak 0.5V、D1 の順方向電圧を 0.1V と置いた)。
 
 ```scope
 title: 図8 検波の前後 CH2 は IFT3 の2次 CH1 は検波出力
@@ -620,6 +635,8 @@ measure: [vmax, vmin, freq]
 - 変調を 30% のまま、周波数を変えても、CH2 の包絡線の周期が変わるだけで、IF の 455kHz は変わらない
 
 ## 見るべき値
+
+直流の電圧は、テスターの直流電圧レンジで GND との間を測る。
 
 | 確かめること | 期待する値 |
 | --- | --- |

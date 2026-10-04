@@ -10,10 +10,11 @@ source: 自作
 
 # 9-12 バランスドミキサー
 
-**ミキサー**は 2 つの周波数を掛け合わせて、**和と差の周波数**を作る部品だ。
+**ミキサー**は 2 つの信号を掛け合わせて、**和と差の周波数**を作る部品だ。
 スーパーヘテロダイン (9-10) は、受けたい電波 (RF) と局部発振 (LO) を混ぜて、
 差の中間周波数 (IF) を取り出す。掛け算は sin a × sin b = ½{cos(a−b) − cos(a+b)} なので、
 理想の掛け算器の出力には **f<sub>RF</sub> − f<sub>LO</sub> と f<sub>RF</sub> + f<sub>LO</sub> だけ**が出て、元の LO と RF は出ない。
+この題では、その理想に近い「バランスドミキサー」を IC 1 個で組み、Analog Discovery のスペクトルで和と差だけが立つことを確かめる。
 
 ダイオード 1 本で混ぜる**単一ダイオードのミキサー**は、LO で開け閉めするスイッチと見なせる。
 開いている間だけ (LO + RF) を通すので、スイッチの関数 s(t) = ½ + (2/π)cos ω<sub>LO</sub>t − … の ½ の項が
@@ -86,7 +87,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/12-balanced-mixer.svg)
 
-`+5V` は AD の電源出力 V+ (Supplies で 5 V)。SA612 は 4.5〜8 V で動き、流す電流は 2.4 mA ほど (データシートの代表値)。
+図1 の `+5V` は AD の電源出力 V+ (Supplies で 5 V)。SA612 は 4.5〜8 V で動き、流す電流は 2.4 mA ほど (データシートの代表値)。
 
 - **RF (W2)** は C1 を通して PIN 1 (IN_A) へ。PIN 2 (IN_B) は C2 で交流だけ GND に落とす (片側から入れる使い方)。
   入力の抵抗は約 1.5 kΩ。1.1 MHz での C1 (10 nF) は 14 Ω なので、W2 の電圧がほぼそのまま入る
@@ -116,7 +117,7 @@ parts:
   C3: capacitor/ceramic a17 a21 10n
   C5: capacitor/ceramic d18 d24 100n
   C1: capacitor/ceramic i9 i15 10n
-  C2: capacitor/ceramic j16 -b16 10n
+  C2: capacitor/ceramic g16 g14 10n
   C4: capacitor/ceramic h18 h25 100n
 wires:
   - AD.V+ -- +t1 red
@@ -127,6 +128,7 @@ wires:
   - e9 -- f9 yellow
   - AD.W1 -- b21 green
   - j17 -- -b17 black
+  - j14 -- -b14 black
   - f25 -- e25 orange
   - d25 -- d27 orange
   - AD.1- -- a24 blue
@@ -142,7 +144,7 @@ wires:
 - **電源**: AD の V+ (赤) を上の + レールへ、GND (黒) を上の − レールへ。+ レールから a15 (PIN 8) へ赤い線。
   C6 は PIN 8 の列 (c15) と 12 列 (c12) の間に置き、12 列を黒い線で − レールへ落とす。上下の − レールは 30 列で渡す
 - **RF (W2、黄)**: a9 に挿し、e9〜f9 の黄の線で下の段の 9 列へ。C1 (i9〜i15) で PIN 1 へ
-- **PIN 2** は C2 で下の − レールへ (j16)、**PIN 3** (GND) は j17 から黒い線で下の − レールへ
+- **PIN 2** は C2 (g16〜g14) で 14 列へ渡し、j14 の黒い線で下の − レールへ。**PIN 3** (GND) は j17 から黒い線で下の − レールへ
 - **LO (W1、緑)**: b21 に挿す。C3 (a17〜a21) で PIN 6 (17 列の上) へ
 - **OUT_B (PIN 5)**: C5 (d18〜d24) を通して 24 列へ。CH1 の 1− (青) を a24 に挿す
 - **OUT_A (PIN 4)**: C4 (h18〜h25) を通して下の 25 列へ、f25〜e25 の橙の線で上の 25 列へ上げる。
@@ -150,6 +152,8 @@ wires:
 - CH1 (1+ と 1−) で差動の出力、CH2 (2+ と GND) で片側の出力を見る
 
 ## 計器の設定
+
+Analog Discovery だけを使う。周波数が 2.5 MHz 以下なので、W1・W2 で LO と RF を作り、Spectrum (FFT) で和と差を見られる。
 
 | 項目 | 設定 |
 | --- | --- |
@@ -187,10 +191,10 @@ markers: [100k, 1M, 1.1M, 2.1M]
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/spectrum/12-balanced-mixer.svg)
 
-- 100 kHz (差) と 2.1 MHz (和) が同じ高さで立つ。これが掛け算の証拠
+- 図3 では、100 kHz (差、マーカー 1) と 2.1 MHz (和、マーカー 4) が同じ高さで立つ。これが掛け算の証拠
 - 1.9 MHz は 3 × LO − RF (3 − 1.1 = 1.9 MHz)。LO で切り替えるスイッチは方形波に近く、
   その 3 次 (1/3) とも掛かる。約 −29.5 dBV (IF より 9.5 dB 下、目安)
-- 1 MHz (LO) と 1.1 MHz (RF) は IF より **37〜43 dB 下** (目安)。平衡が取れているほど低い
+- 1 MHz (LO、マーカー 2) と 1.1 MHz (RF、マーカー 3) は IF より **37〜43 dB 下** (目安)。平衡が取れているほど低い
 - スーパーヘテロダインでは、この後ろに IF のフィルタ (セラミックフィルタや LC) を置き、100 kHz だけを通す
 
 ## 見るべき値
