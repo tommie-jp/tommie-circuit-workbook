@@ -366,12 +366,10 @@ wires:
   - h24 -- h25 black
   - c1 -- c3 white
   - c3 -- e3 white
-  - f10 -- g10 white
   - g11 -- i11 white
-  - g10 -- g8 white
-  - e6 -- e10 blue
-  - f10 -- e10 blue
-  - g10 -- g11 blue
+  - g8 -- g11 white
+  - e6 -- e8 blue
+  - e8 -- g8 blue
   - b11 -- d11 red
   - j8 -- k8 white
   - k8 -- k9 white
