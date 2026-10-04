@@ -21,22 +21,22 @@ board: BB
 ```circuit
 title: 図1 マイクの音で LED が揺れる
 parts:
-  VCC: vcc a2 5V
-  R1: resistor a2 c2 2.2k
-  MK1: mic c2 e2 l=$\mathrm{MK1}$
-  G1: ground e2
-  C1: capacitor c2 c4 1u
-  VCC: vcc a4 5V
-  R2: resistor a4 c4 100k
-  Q1: npn e6 2SC1815
-  VCC: vcc a6 5V
-  R3: resistor a6 c6 220
-  D1: led c6 d6
-  G2: ground f6
+  VCC: vcc b2 5V
+  R1: resistor b2 d2 2.2k
+  MK1: mic d2 f2 l=$\mathrm{MK1}$
+  G1: ground f2
+  C1: capacitor d2 d4 1u
+  VCC: vcc b4 5V
+  R2: resistor b4 d4 100k
+  Q1: npn f6 2SC1815
+  VCC: vcc b6 5V
+  R3: resistor b6 d6 220
+  D1: led d6 e6
+  G2: ground g6
 wires:
-  - c4 |- Q1.B
-  - d6 -- Q1.C
-  - Q1.E -- f6
+  - d4 |- Q1.B
+  - e6 -- Q1.C
+  - Q1.E -- g6
 style:
   grid: on
   pitch: 1.2
@@ -60,11 +60,11 @@ title: 図2 ブレッドボードに組む
 # 上の赤いレール = +5V、青いレール = GND (29・30 列で下のレールへ渡す)
 board: half
 parts:
-  PSU:
+  AD:
     type: device
     at: top
-    label: 電源 5V
-    pins: ["+", "-"]
+    label: Analog Discovery 3 (Supplies)
+    pins: [V+, GND]
   R1: resistor b3 b7 2.2k
   C1: capacitor c7 c12 1u
   R2: resistor b12 b16 100k
@@ -73,8 +73,8 @@ parts:
   D1: led f18(A) f13(K) red
   R3: resistor h18 h22 220
 wires:
-  - PSU.+ -- +t1 red
-  - PSU.- -- -t2 black
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
   - +t3 -- a3 red
   - +t16 -- a16 red
   - e7 -- f7 yellow
@@ -90,7 +90,7 @@ notes:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/04-mic-1.svg)
 
-- 電源の + と GND は上のレールに入れ、右端 (29・30 列) で下のレールへ渡す
+- AD3 の V+ (+5 V) と GND は上のレールに入れ、右端 (29・30 列) で下のレールへ渡す
 - 上のブロックに R1 (3→7 列)・C1 (7→12 列)・R2 (12→16 列) を置く。7 列がマイクの節点、12 列が Q1 のベースの節点
 - マイク (ECM) は下のブロックの 7・10 列に挿し、7 列を黄色の線で上の 7 列へ、10 列を下の − レールへつなぐ。
   図2 では向きの無い 2 本足の部品として描いたが、実物の ECM には極性がある。
@@ -114,32 +114,32 @@ W1 の出力は大きすぎる (最小でも数十 mV、ふつう 1 V 前後) �
 ```circuit
 title: 図3 マイクの代わりに W1 を分圧して入れる (CH2 は入力、CH1 は出力)
 parts:
-  W1: sine c2 e2 l=$\mathrm{W1}$
-  G0: ground e2
-  RS: resistor c2 c5 10k
-  VCC: vcc a5 5V
-  R1: resistor a5 c5 2.2k
-  RD: resistor c5 e5 100
-  G1: ground e5
-  M2: voltmeter d6 f6 l=$\mathrm{CH2}$
-  G2: ground f6
-  C1: capacitor c6 c8 1u
-  VCC: vcc a8 5V
-  R2: resistor a8 c8 100k
-  Q1: npn e10 2SC1815
-  VCC: vcc a10 5V
-  R3: resistor a10 c10 220
-  D1: led c10 d10
-  G3: ground f10
-  M1: voltmeter d12 f12 l=$\mathrm{CH1}$
-  G4: ground f12
+  W1: sine d2 f2 l=$\mathrm{W1}$
+  G0: ground f2
+  RS: resistor d2 d5 10k
+  VCC: vcc b5 5V
+  R1: resistor b5 d5 2.2k
+  RD: resistor d5 f5 100
+  G1: ground f5
+  M2: voltmeter e6 g6 l=$\mathrm{CH2}$
+  G2: ground g6
+  C1: capacitor d6 d8 1u
+  VCC: vcc b8 5V
+  R2: resistor b8 d8 100k
+  Q1: npn f10 2SC1815
+  VCC: vcc b10 5V
+  R3: resistor b10 d10 220
+  D1: led d10 e10
+  G3: ground g10
+  M1: voltmeter e12 g12 l=$\mathrm{CH1}$
+  G4: ground g12
 wires:
-  - c5 -- c6
-  - c6 -- d6
-  - c8 |- Q1.B
-  - d10 -- Q1.C
-  - Q1.E -- f10
-  - d10 -- d12
+  - d5 -- d6
+  - d6 -- e6
+  - d8 |- Q1.B
+  - e10 -- Q1.C
+  - Q1.E -- g10
+  - e10 -- e12
 style:
   grid: on
   pitch: 1.2
@@ -155,8 +155,11 @@ style:
 - 節点の直流は R1 と R<sub>D</sub> の分圧で約 0.2 V。C1 が止めるので Q1 のバイアスには響かない。
   R<sub>D</sub> に電源から約 2 mA 流れるが、V+ には十分な余裕がある
 - 節点に CH2 (2+) を、Q1 のコレクタ (LED のカソード側) に CH1 (1+) を当てる (2− と 1− は GND)。
-  CH1 は直流 2.1 V に振れが乗るので、Scope の入力を AC カップリングにするか、
-  オフセットで 2.1 V 分を打ち消す
+  CH1 は直流 2.1 V に振れが乗る。AD3 の Scope には入力の結合 (カップリング) の切り替えがあり、
+  **AC にすると直流分が除かれ、振れだけが見える**。AC のカットオフ (高域通過の −3 dB の周波数) は約 1.6 Hz なので、
+  1 kHz の信号はほとんど減らない (1 Hz 以下のゆっくりした変化は見えなくなる)。
+  手順: Scope の CH1 の設定で Coupling を AC にし、Range を 200 mV/div にする。
+  DC のまま見るなら、Offset で 2.1 V 分を打ち消す。CH2 の節点は約 0.2 V の直流に 16.5 mVpp が乗るので、同じく AC にする
 
 ```breadboard
 title: 図4 マイクを外し、W1 を 10kΩ と 100Ω の分圧で入れる
@@ -166,7 +169,7 @@ parts:
   AD:
     type: device
     at: bottom
-    label: Analog Discovery
+    label: Analog Discovery 3
     pins: [V+, GND, W1, 2+, 2-, 1+, 1-]
   R1: resistor b3 b7 2.2k
   C1: capacitor c7 c12 1u
@@ -226,6 +229,21 @@ LED は 1 kHz では揺れが速すぎて、ほぼ点きっぱなしに見える
 コレクタの振れは約 0.31 V (振幅) で、下の表の手拍子の見積もり (約 0.2 V) と同じ桁になる。
 W1 の振幅を下げると、出力もそれに比例して小さくなる。
 
+## 計器の設定
+
+計器は Analog Discovery 3 (AD3) を使う。電源 (Supplies の V+ = 5 V)、信号源 (Wavegen の W1)、オシロ (Scope の 1・2)
+を 1 台で賄え、波形は 10 MHz 以下の音声帯域なので Scope で見える。消費電流は LED の約 4.3 mA、
+分圧の約 2 mA、マイクのバイアス約 0.3 mA の計 7 mA 前後で、電源 1 系統の約 50 mA に収まり、ブレッドボードの 1 穴 200 mA の範囲にも入る。
+
+| 計器 | 設定 |
+| --- | --- |
+| Supplies | V+ = 5 V、出力 ON |
+| Wavegen W1 | Sine、1 kHz、振幅 1 V (2 Vpp)、オフセット 0 V |
+| Scope CH1 (1+ をコレクタ、1− を GND) | Coupling AC、200 mV/div、時間軸 200 µs/div |
+| Scope CH2 (2+ を節点、2− を GND) | Coupling AC、5 mV/div。トリガは CH2 の立ち上がり 0 V |
+
+図5 が、この設定で見える波形。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -239,13 +257,13 @@ W1 の振幅を下げると、出力もそれに比例して小さくなる。
 | RS | 抵抗 (W1 の分圧、マイクの代わりの試験用) | 10 kΩ |
 | RD | 抵抗 (W1 の分圧、マイクの代わりの試験用) | 100 Ω |
 | D1 | LED (赤) | V<sub>F</sub> ≈ 2.0 V |
-| — | 信号発生器・電源 (試験用) | Analog Discovery (W1、V+ = 5 V) |
+| — | 信号発生器・電源・オシロ | Analog Discovery 3 (W1、V+ = 5 V、Scope の 1・2)。図2 の電源も V+ |
 
 ## 見るべき値
 
 表の値は計算値。hFE = 100 と仮定した (2SC1815 は実物の hFE のばらつきが
 大きいので、LED がずっと明るく点きっぱなしなら R2 を大きく、暗すぎるなら小さくする)。
-直流の電圧はテスターの DC 電圧レンジで測り、交流は図5 のようにオシロで見る。
+直流の電圧はテスターの DC 電圧レンジで測り、交流は図5 のようにオシロ (AC カップリング) で見る。
 
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |

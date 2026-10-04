@@ -21,26 +21,26 @@ era: 古
 ```circuit
 title: 図1 指で触れると LED が点く
 parts:
-  VCC: vcc a2 5V
-  TPA: port c2
-  TPB: port c3
-  R1: resistor c4 e4 1M
-  G1: ground e4
-  Q1: npn c6 2SC1815
-  R3: resistor f6 h6 100k
-  G2: ground h6
-  R4: resistor a8 c8 330
-  D1: led c8 e8
-  Q2: npn f8 2SC1815
-  G4: ground g8
+  VCC: vcc b2 5V
+  TPA: port d2
+  TPB: port d3
+  R1: resistor d4 f4 1M
+  G1: ground f4
+  Q1: npn d6 2SC1815
+  R3: resistor g6 i6 100k
+  G2: ground i6
+  R4: resistor b8 d8 330
+  D1: led d8 f8
+  Q2: npn g8 2SC1815
+  G4: ground h8
 wires:
-  - a2 -- c2
-  - a2 -- a6 -- a8
-  - c3 -- c4 -- Q1.B
-  - a6 -- Q1.C
-  - Q1.E -- f6 -- Q2.B
-  - e8 -- Q2.C
-  - Q2.E -- g8
+  - b2 -- d2
+  - b2 -- b6 -- b8
+  - d3 -- d4 -- Q1.B
+  - b6 -- Q1.C
+  - Q1.E -- g6 -- Q2.B
+  - f8 -- Q2.C
+  - Q2.E -- h8
 style:
   grid: on
   pitch: 1.2
@@ -68,11 +68,11 @@ title: 図2 ブレッドボードに組む
 # 上の赤いレール = +5V、青いレール = GND (29・30 列で下のレールへ渡す)
 board: half
 parts:
-  PSU:
+  AD:
     type: device
     at: top
-    label: 電源 5V
-    pins: ["+", "-"]
+    label: Analog Discovery 3 (Supplies)
+    pins: [V+, GND]
   Q1: transistor c8(B) c9(C) c10(E) 2SC1815
   R3: resistor b15 b18 100k
   Q2: transistor c20(B) c21(C) c22(E) 2SC1815
@@ -80,8 +80,8 @@ parts:
   D1: led h25(A) h21(K) red
   R4: resistor f25 f28 330
 wires:
-  - PSU.+ -- +t1 red
-  - PSU.- -- -t2 black
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
   - +t9 -- a9 red
   - a10 -- a15 yellow
   - -t18 -- a18 black
@@ -101,7 +101,7 @@ notes:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/03-touch-switch.svg)
 
-- 電源の + と GND は上のレールに入れ、右端 (29・30 列) で下のレールへ渡す
+- AD3 の V+ (+5 V) と GND は上のレールに入れ、右端 (29・30 列) で下のレールへ渡す
 - 触れる 2 点は、下のブロックの 11 列 (緑の線で Q1 のベースの 8 列とつながる) と 13 列 (下の + レールへつながる)。
   i11 と i13 にむき出しの線かワニ口クリップを挿して出しておき、2 本に指の腹を同時に当てる。触れた瞬間に LED が点く
 - Q1・Q2 (2SC1815) は、平らな面を手前にして見ると左から E・C・B。ここでは平らな面を奥 (a 行側) に向けて挿し、
@@ -109,6 +109,15 @@ notes:
 - Q1 のエミッタ (10 列) から黄色の線で R3 (15→18 列) と Q2 のベース (20 列) へつなぐ
 - Q2 のコレクタ (21 列) はオレンジの線で下のブロックへ渡し、LED のカソード (21 列) につなぐ。
   LED のアノード (25 列) から R4 (25→28 列) を通して下の + レールへ。LED のカソードは GND ではなく、Q2 のコレクタにつながる
+
+## 計器の設定
+
+計器は Analog Discovery 3 の Supplies (電源) とテスターを使う。AD3 の V+ を 5 V にして出力を ON にする。
+消費電流は LED の約 8.5 mA と、指と R1 を通る数 µA で、AD3 の電源 1 系統の約 50 mA に収まる。
+ブレッドボードの 1 穴を通る電流も 200 mA 以下で、板の範囲に入る。
+
+この題はオシロの図を付けない。見るのは指で触れたときの直流の電圧と LED の点灯で、時間で変わる波形ではない。
+テスターの読み値で足りる。
 
 ## 部品
 
@@ -119,6 +128,7 @@ notes:
 | R3 | 抵抗 (ブリーダー) | 100 kΩ |
 | R4 | 抵抗 | 330 Ω |
 | D1 | LED (赤) | V<sub>F</sub> ≈ 2.0 V |
+| — | 電源 | 5 V (AD3 の Supplies の V+) |
 
 ## 見るべき値
 

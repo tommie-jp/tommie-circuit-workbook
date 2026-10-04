@@ -21,23 +21,23 @@ NTC サーミスタは、温度が上がるほど抵抗が下がる素子。CdS 
 ```circuit
 title: 図1 サーミスタが温まるとブザーが鳴る
 parts:
-  VCC: vcc a2 5V
-  TH1: thermistor-ntc a2 c2 10k l=$\mathrm{TH1}$
-  R1: resistor c2 e2 2.2k
-  G1: ground e2
-  Q1: npn c4 2SC1815
-  R2: resistor e4 g4 100k
-  G2: ground g4
-  Q2: npn e6 2SC1815
-  BZ1: buzzer a6 c6 l=$\mathrm{BZ1}$
-  G3: ground g6
+  VCC: vcc b2 5V
+  TH1: thermistor-ntc b2 d2 10k l=$\mathrm{TH1}$
+  R1: resistor d2 f2 2.2k
+  G1: ground f2
+  Q1: npn d4 2SC1815
+  R2: resistor f4 h4 100k
+  G2: ground h4
+  Q2: npn f6 2SC1815
+  BZ1: buzzer b6 d6 l=$\mathrm{BZ1}$
+  G3: ground h6
 wires:
-  - a2 -- a4 -- a6
-  - a4 -- Q1.C
-  - c2 -- Q1.B
-  - Q1.E -- e4 -- Q2.B
-  - c6 -- Q2.C
-  - Q2.E -- g6
+  - b2 -- b4 -- b6
+  - b4 -- Q1.C
+  - d2 -- Q1.B
+  - Q1.E -- f4 -- Q2.B
+  - d6 -- Q2.C
+  - Q2.E -- h6
 style:
   grid: on
   pitch: 1.2
@@ -62,11 +62,11 @@ title: 図2 ブレッドボードに組む
 # 上の赤いレール = +5V、青いレール = GND (40・41 列で下のレールへ渡す)
 board: full
 parts:
-  PSU:
+  AD:
     type: device
     at: top
-    label: 電源 5V
-    pins: ["+", "-"]
+    label: Analog Discovery 3 (Supplies)
+    pins: [V+, GND]
   TH1: thermistor-ntc b3 b6 10k
   R1: resistor b10 b13 2.2k
   Q1: transistor c17(B) c18(C) c19(E) 2SC1815
@@ -74,8 +74,8 @@ parts:
   Q2: transistor c30(B) c31(C) c32(E) 2SC1815
   BZ1: buzzer h34(+) h31
 wires:
-  - PSU.+ -- +t1 red
-  - PSU.- -- -t2 black
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
   - +t3 -- a3 red
   - +t18 -- a18 red
   - -t13 -- a13 black
@@ -95,7 +95,7 @@ notes:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/02-thermistor-alarm.svg)
 
-- 電源の + と GND は上のレールに入れる。ブザーだけは下のブロックに置くので、40・41 列で下のレールへ渡す
+- AD3 の V+ (+5 V) と GND は上のレールに入れる。ブザーだけは下のブロックに置くので、40・41 列で下のレールへ渡す
 - TH1 (NTC サーミスタ、3→6 列) と R1 (10→13 列) の分圧は、緑の線 (a6→a10) でつなぐ。
   中点 (10 列) から緑の線 (d10→d17) で Q1 のベースへ。
   TH1 は円板の部品で、PTC サーミスタと形が同じなので、印字と部品の袋の表示で見分ける
@@ -106,6 +106,15 @@ notes:
 - Q2 のコレクタ (31 列) は、オレンジの線で下のブロックへ渡してブザーの − の足へ。
   ブザー (アクティブ型) には極性があり、+ の足 (34 列、足の長いほう) を下の + レールへつなぐ
 
+## 計器の設定
+
+計器は Analog Discovery 3 の Supplies (電源) とテスターを使う。AD3 の V+ を 5 V にして出力を ON にする。
+消費電流は、ブザーが数 mA から 30 mA 前後 (部品による。実物の定格で確かめる)、分圧と Q1 のベースが 1 mA 未満で、
+AD3 の電源 1 系統の約 50 mA に収まる。ブレッドボードの 1 穴を通る電流も 200 mA 以下で、板の範囲に入る。
+
+この題はオシロの図を付けない。見るのは温度でゆっくり変わる直流の電圧で、時間で変わる波形ではない。
+テスターの読み値で足りる。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -115,6 +124,7 @@ notes:
 | Q1・Q2 | NPN トランジスタ | 2SC1815 |
 | R2 | 抵抗 (ブリーダー) | 100 kΩ |
 | BZ1 | ブザー (アクティブ型 = 電圧を掛けるだけで鳴る発振回路入り、5 V) | — |
+| — | 電源 | 5 V (AD3 の Supplies の V+) |
 
 ## 見るべき値
 

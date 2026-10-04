@@ -55,19 +55,19 @@ title: 図2 ブレッドボードに組む
 # 上の赤いレール = +5V、青いレール = GND (右端で上下を渡している)
 board: half
 parts:
-  PSU:
+  AD:
     type: device
     at: top
-    label: 電源 5V
-    pins: ["+", "-"]
+    label: Analog Discovery 3 (Supplies)
+    pins: [V+, GND]
   R1: resistor b3 b7 10k
   CDS1: photoresistor d7 d12 GL5528
   Q1: transistor h7(B) h8(C) h9(E) 2SC1815
   D1: led f13(A) f8(K) red
   R2: resistor h13 h17 330
 wires:
-  - PSU.+ -- +t1 red
-  - PSU.- -- -t2 black
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
   - +t3 -- a3 red
   - a12 -- -t12 black
   - e7 -- f7 green
@@ -81,13 +81,22 @@ notes:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/01-cds.svg)
 
-- 電源の + と GND は上のレールに入れ、右端 (29・30 列) で下のレールへ渡す
+- AD3 の V+ (+5 V) と GND を上のレールに入れ、右端 (29・30 列) で下のレールへ渡す
 - 分圧 (R1・CDS1) は上のブロックに置く。R1 (3→7 列) の 3 列を + レールへ、CDS1 (7→12 列) の 12 列を − レールへつなぐ。
   CDS1 は、受光面の蛇行した線で見分けられる部品。向きは無い
 - 7 列が分圧の中点で、緑の線で下のブロックの 7 列 (Q1 のベース) へ渡す
 - Q1 (2SC1815) は、平らな面を手前にして見ると左から E・C・B。ここでは平らな面を奥 (f 行側) に向けて挿し、
   B・C・E を h 行の 7・8・9 列に入れる。
   エミッタ (9 列) は下の − レールへ。コレクタ (8 列) に D1 のカソード、D1 のアノード (13 列) から R2 (13→17 列) を通して下の + レールへつなぐ
+
+## 計器の設定
+
+計器は Analog Discovery 3 の Supplies (電源) とテスターを使う。AD3 の V+ を 5 V にして出力を ON にする。
+この回路の消費は LED の約 9 mA と分圧の数百 µA で、AD3 の電源 1 系統の約 50 mA に収まる。
+ブレッドボードの 1 穴を通る電流も 200 mA 以下で、板の範囲に入る。
+
+この題はオシロの図を付けない。見るのは明るさでゆっくり変わる直流の電圧で、時間で変わる波形ではない。
+テスターの読み値で足りる。
 
 ## 部品
 
@@ -98,6 +107,7 @@ notes:
 | Q1 | NPN トランジスタ | 2SC1815 |
 | R2 | 抵抗 | 330 Ω |
 | D1 | LED (赤) | V<sub>F</sub> ≈ 2.0 V |
+| — | 電源 | 5 V (AD3 の Supplies の V+) |
 
 ## 見るべき値
 

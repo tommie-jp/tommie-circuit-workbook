@@ -84,6 +84,11 @@ wires:
 title: 図2 ブレッドボードに組む
 board: half
 parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3 (試験)
+    pins: [GND, W1, 1+, 1-, 2+, 2-]
   VC1:
     type: device
     at: top
@@ -103,10 +108,18 @@ parts:
   D1: diode e5(A) e12(K) 1N60
   C2: capacitor/ceramic b12 b14 1n
   R1: resistor d12 d17 100k
+  RS: resistor d1 d5 1k
 wires:
   - VC1.E -- -t3 black
   - VC1.A -- a5 yellow
-  - ANT.1 -- c5 yellow
+  - c5 -- c3 yellow
+  - ANT.1 -- a3 yellow
+  - AD.W1 -- a1 orange
+  - AD.2+ -- b3 blue
+  - AD.1+ -- c12 blue
+  - AD.1- -- -t22 black
+  - AD.2- -- -t24 black
+  - AD.GND -- -t26 black
   - a9 -- -t9 black
   - EAR.A -- a12 green
   - a14 -- -t14 black
@@ -122,7 +135,55 @@ wires:
 - 5 列がアンテナのネット (VC1 の A・アンテナ・L1 の左足・D1 のアノード)。L1 の右足 (9 列) は − レールへ
 - 12 列が検波出力のネット (D1 のカソード・C2 と R1 の左足・EAR の A)。C2 の右足 (14 列)・
   R1 の右足 (17 列)・EAR の B は − レールへ
+- AD3 は、放送の電波が弱くて波形が見えにくいときの**試験用**に足した。W1 (Wavegen) の AM 信号を、
+  RS (1 kΩ) を通して同調回路 (5 列) へ入れる。アンテナの代わりに W1 を使うので、試験のときは ANT の線を外してよい。
+  AD3 の 1+ (Scope CH1) を検波出力 (12 列)、2+ (CH2) を同調回路 (3 列。5 列と黄色の短い線でつないである) に当て、
+  1−・2−・GND は − レールへ入れる。電池は無いので Supplies は使わない
 - 1 つの穴には足か線を 1 本だけ挿す
+
+## 計器の設定
+
+計器は Analog Discovery 3 (AD3)。放送の電波の代わりに W1 で AM 信号を出し、Scope で同調回路と検波出力を見る。
+信号は搬送波 1 MHz で、Scope の範囲 (10 MHz 以下) に入る。VC1 は約 100 pF に回しておく
+(f<sub>0</sub> = 1 / (2π√(250 µH × 100 pF)) ≈ 1.007 MHz)。
+
+| 項目 | 値 |
+| --- | --- |
+| Wavegen W1 | 搬送波 Sine 1 MHz、振幅 1 V (peak)、Modulation: AM、変調波 Sine 1 kHz、変調度 50 % |
+| Scope CH1 (1+ = 検波出力) | Coupling DC、200 mV/div、Offset 1 V 前後 |
+| Scope CH2 (2+ = 同調回路) | Coupling DC、1 V/div |
+| Scope 時間軸・トリガ | 200 µs/div、CH1 の立ち上がり |
+
+```scope
+title: 図3 AM 信号の試験 — 同調回路 (CH2) は太り細り、検波出力 (CH1) は 1 kHz
+time: 200us/div
+trigger: ch1 rising 0.99V
+ch1: {wave: = 0.99V + 0.197V * sin(2 * pi * 1kHz * t), range: 200mV/div, position: -4.95div}
+ch2: {wave: = 0.93V * (1 + 0.5 * sin(2 * pi * 1kHz * t)) * sin(2 * pi * 1MHz * t), range: 1V/div, position: 2.5div}
+measure: [vpp, avg, freq]
+cursors: [250us, 750us]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/02-crystal-radio.svg)
+
+- 図3 は LTspice の計算 (1N60 は IS = 0.2 µA・RS = 25 Ω と仮定した目安) をもとにした画面。実測ではない
+- CH1 は平均 約 1.0 V、1 kHz の振れは約 0.39 Vpp (0.80〜1.19 V)。包絡線 (CH2) の振れ幅 (約 1.4 Vpp) よりかなり小さい。
+  R1 (100 kΩ) と C2・EAR (計 16 nF) の時定数が約 1.6 ms で、1 kHz の周期 (1 ms) より長く、検波出力がならされるため
+- CH2 の搬送波 (1 MHz) は 200 µs/div では塗りつぶされた帯に見える。帯の外形が 1 kHz で太り細りするのが AM。
+  帯の最大の振幅は約 1.4 V (peak)
+
+## 部品
+
+| 記号 | 部品 | 値 |
+| --- | --- | --- |
+| L1 | インダクタ (アキシャル) | 250 µH |
+| VC1 | ポリバリコン | 20〜260 pF |
+| D1 | ゲルマニウムダイオード | 1N60 |
+| C2 | セラミックコンデンサ | 1 nF |
+| R1 | 抵抗 | 100 kΩ |
+| EAR | クリスタルイヤホン | 容量 約 15 nF |
+| RS | 抵抗 (試験用。W1 から同調回路へ入れる) | 1 kΩ |
+| — | 試験用の信号源・オシロ | Analog Discovery 3 (W1、Scope の 1・2)。電池・Supplies は使わない |
 
 ## 見るべき値
 
@@ -135,6 +196,7 @@ wires:
 | D1 を 1N4148 (シリコン) に差し替え | ほとんど聞こえなくなる (立ち上がり電圧が高すぎる) |
 | アース線を外す | 音が小さくなるか消える (電流の戻り道が細る) |
 | R1 を外す | 音が小さくなり、ひずむ (検波した電荷が抜けない。上の R1 の項目) |
+| W1 の AM 信号 (1 MHz・1 V peak・1 kHz・50 %) を入れ、VC1 を約 100 pF に回す (試験用) | 図3 のとおり、CH1 は平均 約 1.0 V・1 kHz の振れ 約 0.39 Vpp (LTspice の計算値の目安) |
 
 ## 出典
 

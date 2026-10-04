@@ -202,8 +202,8 @@ parts:
   PWR:
     type: device
     at: -14,8
-    label: 電源 5V
-    pins: + -
+    label: AD3 Supplies 5V
+    pins: V+ GND
     face: right
   MK:
     type: device
@@ -218,8 +218,8 @@ parts:
     pins: A
     face: left
 wires:
-  - PWR.+ -- 8.5,6 red
-  - PWR.- -- 11,34 black
+  - PWR.V+ -- 8.5,6 red
+  - PWR.GND -- 11,34 black
   - MK.+ -- 16,25.5
   - MK.- -- 13,36 black
   - WIRE.A -- ANT
@@ -235,13 +235,13 @@ wires:
 
   | 図の島 | 回路図の節点 (つながる足) |
   | --- | --- |
-  | VCC (VA・VB の張り出しを含む) | +5V (Cb の上・L1 の上・Rb1 の上・Rmic の上)・電源の + (PWR.+)。上の帯 |
+  | VCC (VA・VB の張り出しを含む) | +5V (Cb の上・L1 の上・Rb1 の上・Rmic の上)・電源の + (PWR.V+)。上の帯 |
   | MIC | Rmic の下・Cmic の左・マイクの + (MK.+) |
   | BASE | Q1 のベース・Cmic の右・Rb1 の下・Rb2 の上・C3 の上 |
   | COL | Q1 のコレクタ・L1 の下・C1 の上・Cant の左 |
   | EMI | Q1 のエミッタ・C1 の下・C2 の上・Re の上 |
   | ANT | Cant の右・アンテナ線 (WIRE.A)。アンテナ線をここへ半田付けする |
-  | GND (via の島) | Cb・Rb2・C3・C2・Re の下と、電源の − (PWR.-)・マイクの − (MK.-)。**すべて via で裏の GND の面** |
+  | GND (via の島) | Cb・Rb2・C3・C2・Re の下と、電源の − (PWR.GND)・マイクの − (MK.-)。**すべて via で裏の GND の面** |
 
 - Q1 (2SC3355L-T92) は 3 本の足を 3 つの島 (BASE・COL・EMI) へ広げて半田付けする。図の黒い半円は Q1 の胴で、
   B は左の島 (BASE)、C は右上の島 (COL)、E は右下の島 (EMI) へ渡す。2SC3355L-T92 は平らな面を見て
@@ -251,7 +251,7 @@ wires:
   メーカーによって並びが違うことがあるので、組む前にテスターの hFE 端子
   (トランジスタの足の並びを確かめる端子) に挿して、B・E・C の向きを実物で確かめる
 - 板の外の機器 (図の黒い箱) は 3 つ。線は銅を作らず、島の上に半田付けする。
-  **電源 5V** は + (赤) を上の VCC の帯の左端へ、− (黒) を左下の GND の島 (GMIC の via) へ渡す。
+  **AD3 の Supplies (V+ = 5V)** は + (赤) を上の VCC の帯の左端へ、− (黒) を左下の GND の島 (GMIC の via) へ渡す。
   **マイク** (エレクトレット) は板の下に置き、+ を MIC の島へ、− を GND の島 (GMIC) へ渡す。
   **アンテナ線**は板の右に置き、ANT の島へ半田付けする。線はどれも部品と字の上を通らないように引いてある
 - **アンテナ線は 20cm ほど**にとどめる (図の ANT の島へ半田付け。伸ばすと電波法の範囲を超えやすい。
@@ -282,7 +282,7 @@ wires:
 | MIC | エレクトレットマイク | 声で試すとき |
 | Rin・Rd | 10kΩ・100Ω | マイクの代わりに AD の W1 で試すとき (Rmic は外す) |
 | 信号源 | Analog Discovery 3 の W1 | 1kHz、1Vpp の正弦波 |
-| 電源 | 5V | |
+| 電源 | 5V (AD3 の Supplies の V+) | 消費は 1mA ほどで、AD3 の電源 1 系統の約 50mA に収まる。板の電流も銅張り基板の範囲 (500mA) 内 |
 | 計器 | tinySA Ultra | 図3 の確かめに。付属のアンテナで拾う (板には直接つながない) |
 
 **Q1 に 2SC3355 を選んだ理由**: この回路は 80MHz 前後で発振する。発振には、その周波数で
@@ -298,6 +298,9 @@ P<sub>C</sub> 600mW (TO-92)、hFE 50〜300。この回路の V<sub>CE</sub> ≈ 
 どれにも十分収まる。データシートの雑音指数 1.1dB (typ、1GHz) は、この回路では使わない。
 
 ## 計器の設定
+
+この題はオシロの図を付けない。搬送波は 80MHz で、AD3 の Scope の範囲 (10MHz 以下) の外にあり、波形では見えない。
+図3 の tinySA のスペクトルで確かめる。電源と変調用の信号は AD3 (Supplies・W1) から入れる。
 
 **なぜ tinySA か。** 搬送波は 80MHz 前後で、Analog Discovery の入力の範囲 (10MHz 以下) の外にある。
 この題で見たいのは波形の形ではなく、**搬送波の周波数と、2 倍・3 倍の高調波の高さ**、つまりスペクトルなので、
@@ -419,8 +422,8 @@ wires:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/04-fm-transmitter-2.svg)
 
 **銅張り基板の組み方は図 2 のまま、マイクの箱と Rmic をやめて次のように変える**。
-板の外の機器は電源 5V と AD (W1・GND) とアンテナ線の 3 つ。AD の W1 は Rin の下の島 (VIN) へ、
-GND は電源の − と同じ GND (裏の面) の島へ渡す。Rin (10kΩ) は VIN から MIC の島へ、Rd (100Ω) は
+板の外の機器は AD3 (Supplies の V+、W1、GND) とアンテナ線の 2 つ。AD3 の W1 は Rin の下の島 (VIN) へ、
+GND は電源の − と同じ GND (裏の面) の島へ渡す。V+ は図2 と同じく VCC の帯へ。Rin (10kΩ) は VIN から MIC の島へ、Rd (100Ω) は
 MIC の島から GND の島 (via) へ渡す。図 2 にあった上の VA の島は使わないので切り出さない。
 `copper-fence check` のネットリストは、図 4 の回路図 (VIN = W1 と Rin の節点、MIC = Rin・Rd・Cmic の節点)
 と一致する。
@@ -466,17 +469,11 @@ parts:
   C2: capacitor 47,31 47,41 47p
   Re: resistor 53,31 53,41 470
   Cant: capacitor 54,18 60,18 2.2p
-  PWR:
-    type: device
-    at: -14,8
-    label: 電源 5V
-    pins: + -
-    face: right
   AD:
     type: device
-    at: -14,40
-    label: AD W1・GND
-    pins: W1 GND
+    at: -26,16
+    label: Analog Discovery 3 (Supplies・W1)
+    pins: V+ GND W1
     face: right
   WIRE:
     type: device
@@ -485,8 +482,8 @@ parts:
     pins: A
     face: left
 wires:
-  - PWR.+ -- 8.5,6 red
-  - PWR.- -- 15.5,16 black
+  - AD.V+ -- 8.5,6 red
+  - AD.GND -- 15.5,16 black
   - AD.W1 -- VIN
   - AD.GND -- 15,35.5 black
   - WIRE.A -- ANT

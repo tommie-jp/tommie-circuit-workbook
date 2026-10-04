@@ -1,5 +1,4 @@
 [
-  { "file": "01-circuits/07-power/01-relay-driver.md", "board": "図2 トランジスタでリレーを動かす", "reason": "回路図の入力 IN を、板では R1 を + レールにつないで常に ON にしている" },
   { "file": "01-circuits/09-rf/09-two-transistor-radio.md", "board": "図2 ブレッドボードに組む — 左が同調と高周波増幅、右が検波と低周波増幅", "reason": "回路図は電源を VCC1・VCC2 の別の名前で描き、板は 1 本の + レール" },
   { "file": "05-etc/02-radio-clock/02-radio.md", "board": "図2 中波 AM 受信機のブレッドボード", "reason": "回路図は電源を VCC1〜VCC4 の別の名前で描き、板は 1 本の + レール" },
   { "file": "05-etc/02-radio-clock/02-radio.md", "board": "図2b 中波 AM 受信機のユニバーサル基板", "reason": "回路図は電源を VCC1〜VCC4 の別の名前で描き、板は 1 本の + 線" },

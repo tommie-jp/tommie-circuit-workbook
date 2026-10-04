@@ -97,55 +97,45 @@ parts:
   Q1: transistor g15(B) g16(C) g17(E) 2SC1815
   D1: led c17(A) c16(K) red
   R3: resistor b17 b21 330
-  SCOPE:
+  AD:
     type: device
     at: top
-    label: オシロスコープ
-    pins: [CH1, CH2, GND]
-  PSU:
-    type: device
-    at: top
-    label: 電源 5V
-    pins: [V+, GND]
-  V1:
-    type: device
-    at: bottom
-    label: 信号発生器 V1
-    pins: [OUT, GND]
+    label: Analog Discovery 3
+    pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
 wires:
-  - SCOPE.CH1 -- a3 orange
-  - SCOPE.CH2 -- a10 blue
-  - SCOPE.GND -- -t12 black
+  - AD.W1 -- b3 yellow
+  - AD.1+ -- a3 orange
+  - AD.2+ -- a10 blue
+  - AD.1- -- -t12 black
+  - AD.2- -- -t13 black
+  - AD.GND -- -t11 black
   - a14 -- -t14 black
   - e10 -- f10 blue
   - f16 -- e16 green
   - a21 -- +t21 red
   - i17 -- -b19 black [h40]
-  - PSU.V+ -- +t25 red
-  - PSU.GND -- -t27 black
-  - V1.OUT -- e3 yellow
-  - V1.GND -- -b6 black
+  - AD.V+ -- +t25 red
   - -t29 -- -b29 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/01-lc-resonance.svg)
 
-- 信号発生器 V1 は図1 の V1。正弦波を出し、周波数を 2kHz〜32kHz の間で動かす (中身は部品表)
-- 上の半分が共振の輪。列 3 に発生器の出力 (e3)・CH1 (a3)・L1 の左の足、
+- AD3 の W1 (Wavegen) が図1 の V1。正弦波を出し、周波数を 2kHz〜32kHz の間で動かす (中身は部品表)。オシロは Scope の 1 (CH1) と 2 (CH2)
+- 上の半分が共振の輪。列 3 に W1 (b3)・CH1 の 1+ (a3)・L1 の左の足、
   列 10 に C1・R1・CH2 (a10) が集まる。R1 の右の端 (列 14) は上の − レールへ
 - 列 10 の輪の電圧を青の線で下の半分へ渡し、R2 で Q1 のベース (列 15) に入れる。
   2SC1815 は平らな面を見て左から E・C・B。図のとおり左から B・C・E に挿すには、
   平らな面を奥 (f 行側) に向ける
 - コレクタ (列 16) は緑の線で上の半分へ戻り、D1 のカソードにつながる。
   D1 のアノード (列 17) から R3 を通って上の + レール (5V) へ
-- エミッタ (列 17 の下の半分) は下の − レールへ。上の − レール (オシロと電源の GND) と
-  下の − レール (発生器の GND) は 29 列の黒線でつなぐ。上の + レールには電源の 5V だけを入れる
+- エミッタ (列 17 の下の半分) は下の − レールへ。上の − レール (AD3 の GND・1−・2−) と
+  下の − レールは 29 列の黒線でつなぐ。上の + レールには AD3 の V+ (5V) だけを入れる
 
 ## 部品
 
 | 記号 | 部品 | 値 |
 | --- | --- | --- |
-| V1 | 信号発生器 (ファンクションジェネレータ) | 正弦波、6 V<sub>pp</sub> (図1 の 3 V は peak)、2 kHz〜32 kHz、出力抵抗 50 Ω (≈ 0 Ω の発生器でもよい。値は「見るべき値」の表の 2 列) |
+| V1 | 信号発生器 (AD3 の Wavegen W1。出力は約 0 Ω) | 正弦波、6 V<sub>pp</sub> (図1 の 3 V は peak)、2 kHz〜32 kHz、AD3 の W1 は出力抵抗 ≈ 0 Ω (出力 50 Ω の発生器でもよい。値は「見るべき値」の表の 2 列) |
 | L1 | インダクタ (アキシャル) | 10 mH |
 | C1 | セラミックコンデンサ | 10 nF (103)、耐圧 50 V |
 | R1 | 抵抗 (1/4 W) | 100 Ω |
@@ -153,9 +143,11 @@ wires:
 | R3 | 抵抗 (1/4 W) | 330 Ω |
 | D1 | 赤色 LED | 1 本 |
 | Q1 | NPN トランジスタ | 2SC1815 |
-| VCC | 電源 | 5 V。GND は発生器・オシロの GND とつなぐ |
+| VCC | 電源 | 5 V (AD3 の Supplies の V+)。GND は W1・Scope の GND と共通 |
 
 ## 計器の設定
+
+計器は Analog Discovery 3 (AD3)。信号源 (Wavegen)・オシロ (Scope)・5 V (Supplies) が 1 台で足り、波形は 2〜32 kHz で Scope の範囲に入る。
 
 発生器:
 
@@ -175,7 +167,7 @@ wires:
 | トリガ | CH1、立ち上がり、レベル 0V |
 | 測定 | CH2 の Vpp (自動測定があれば使う) |
 
-PC オシロは付属ソフトの Scope 画面、AD3 は WaveForms の Scope で同じように設定する。
+AD3 では WaveForms の Wavegen (W1)・Scope・Supplies (V+ = 5 V) で設定する。PC オシロでも同じ設定でよい。LED を光らせる 5 V の電流 (約 3〜9 mA) は AD3 の電源 1 系統の約 50 mA に収まる。
 共振から離れると CH2 は 0.1V<sub>pp</sub> ほどまで小さくなるので、読みにくければ CH2 のレンジを下げる。
 
 ## 見るべき値

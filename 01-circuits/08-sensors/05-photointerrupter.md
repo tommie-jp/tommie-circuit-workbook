@@ -19,26 +19,26 @@ board: BB
 ```circuit
 title: 図1 光を遮るとインジケータが点く
 parts:
-  VCC: vcc a2 5V
-  R1: resistor a2 c2 220
-  D1: led c2 e2
-  G1: ground e2
-  VCC: vcc a4 5V
-  R2: resistor a4 c4 10k
-  Q1: phototransistor d4 NJL7502L
-  G2: ground e4
-  R3: resistor c4 c6 10k
-  VCC: vcc a7 5V
-  R4: resistor a7 c7 330
-  D2: led c7 e7
-  Q2: npn f7 2SC1815
-  G3: ground g7
+  VCC: vcc b2 5V
+  R1: resistor b2 d2 220
+  D1: led d2 f2
+  G1: ground f2
+  VCC: vcc b4 5V
+  R2: resistor b4 d4 10k
+  Q1: phototransistor e4 PT204-6C
+  G2: ground f4
+  R3: resistor d4 d6 10k
+  VCC: vcc b7 5V
+  R4: resistor b7 d7 330
+  D2: led d7 f7
+  Q2: npn g7 2SC1815
+  G3: ground h7
 wires:
-  - c4 -- Q1.C
-  - Q1.E -- e4
-  - c6 |- Q2.B
-  - e7 -- Q2.C
-  - Q2.E -- g7
+  - d4 -- Q1.C
+  - Q1.E -- f4
+  - d6 |- Q2.B
+  - f7 -- Q2.C
+  - Q2.E -- h7
 style:
   grid: on
   pitch: 1.2
@@ -65,11 +65,11 @@ title: 図2 ブレッドボードに組む
 # 上の赤いレール = +5V、青いレール = GND (29 列で下の − レールへ渡す)
 board: half
 parts:
-  PSU:
+  AD:
     type: device
     at: top
-    label: 電源 5V
-    pins: ["+", "-"]
+    label: Analog Discovery 3 (Supplies)
+    pins: [V+, GND]
   R1: resistor b3 b6 220
   D1: led d6(A) d9(K)
   R2: resistor b12 b16 10k
@@ -79,8 +79,8 @@ parts:
   R3: resistor g16 g20 10k
   Q2: transistor h21(B) h22(C) h23(E) 2SC1815
 wires:
-  - PSU.+ -- +t1 red
-  - PSU.- -- -t2 black
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
   - +t3 -- a3 red
   - a9 -- -t9 black
   - +t12 -- a12 red
@@ -97,7 +97,7 @@ notes:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/05-photointerrupter.svg)
 
-- 電源の + と GND は上のレールに入れ、右端 (30 列) で下の − レールへ渡す
+- AD3 の V+ (+5 V) と GND は上のレールに入れ、右端 (30 列) で下の − レールへ渡す
 - D1 (赤外線 LED、6→9 列) と Q1 (フォトトランジスタ、16→19 列) は上のブロックに挿し、
   リード線を曲げて、光る面と受ける面を向かい合わせる。図2 では D1 を赤い LED の形で描いているが、実物は無色透明か薄い青の胴が多い。
   Q1 の C・E の見分け方 (足の長さ・平らな面) は品ごとに違うので、データシートで確かめる
@@ -107,17 +107,27 @@ notes:
 - コレクタ (22 列) はオレンジの線で上のブロックへ渡し、D2 のカソード (22 列) につなぐ。
   D2 のアノード (26 列) から R4 (26→29 列) を通して + レールへ
 
+## 計器の設定
+
+計器は Analog Discovery 3 の Supplies (電源) とテスターを使う。AD3 の V+ を 5 V にして出力を ON にする。
+消費電流は D1 が約 17.3 mA、遮ったときの D2 が約 8.5 mA、そのほか 1 mA 未満で、計 26 mA 前後。
+AD3 の電源 1 系統の約 50 mA に収まり、ブレッドボードの 1 穴 200 mA の範囲にも入る。
+
+この題はオシロの図を付けない。見るのは遮ったかどうかで決まる直流の電圧で、時間で変わる波形ではない。
+テスターの読み値で足りる。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
 | --- | --- | --- |
-| D1 | 赤外線 LED | V<sub>F</sub> ≈ 1.2 V |
+| D1 | 赤外線 LED (発光ピーク 940 nm 前後の品) | V<sub>F</sub> ≈ 1.2 V |
 | R1 | 抵抗 | 220 Ω |
-| Q1 | フォトトランジスタ | NJL7502L など (赤外線に感度のある品を選ぶ) |
+| Q1 | フォトトランジスタ | PT204-6C (Everlight、3 mm、透明樹脂。分光感度は 400〜1100 nm で、ピークは 940 nm の赤外。データシートで確認。NJL7502L は可視光用なので使わない) |
 | R2・R3 | 抵抗 | 10 kΩ |
 | Q2 | NPN トランジスタ | 2SC1815 |
 | R4 | 抵抗 | 330 Ω |
 | D2 | LED (赤、インジケータ) | V<sub>F</sub> ≈ 2.0 V |
+| — | 電源 | 5 V (AD3 の Supplies の V+) |
 
 ## 見るべき値
 
@@ -126,7 +136,7 @@ notes:
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |
 | D1 (赤外線 LED) の電流 | 約 17.3 mA (= (5 − 1.2) / 220 Ω) | R1 で決まる |
-| 分圧点の電圧 (光が通っているとき) | 約 0.2〜0.4 V (Q1 が飽和) | Q1 が光を受けて電流を流している |
+| 分圧点の電圧 (光が通っているとき) | 約 0.2〜0.4 V (Q1 が飽和) | Q1 が光を受けて電流を流している。飽和には R2 に約 0.5 mA (= 4.8 V / 10 kΩ) 以上が要る。PT204-6C は 1 mW/cm² の光で 0.7〜2.0 mA (V<sub>CE</sub> = 5 V、データシート) なので、D1 を数 mm 先に向かい合わせれば足りる |
 | 分圧点の電圧 (光を遮ったとき) | 約 2.9 V (= 0.7 + 4.3 V × 10 kΩ / 20 kΩ) | Q1 に電流が流れなくなり、R2 → R3 → Q2 のベースへ電流が流れる。Q2 のベースが 0.7 V に抑えるので 5 V までは上がらない |
 | Q2 のベース電流 (遮ったとき) | 約 215 µA (= (5 − 0.7) / (R2 + R3) = 4.3 V / 20 kΩ) | hFE が 70 でも 15 mA まで流せ、D2 の電流 (約 8.5 mA) に対して Q2 を飽和させるのに十分 |
 | D2 の電流 (遮ったとき) | 約 8.5 mA (= (5 − 2.0 − 0.2) / 330 Ω、0.2 V は Q2 の V<sub>CE(sat)</sub>) | R4 で決まる |

@@ -85,11 +85,11 @@ wires:
 title: 図2 ブレッドボードに組む
 board: half
 parts:
-  PWR:
+  AD:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: Analog Discovery 3
+    pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
   ANT:
     type: device
     at: top
@@ -107,6 +107,7 @@ parts:
     pins: [A, B]
   L1: inductor/axial b12 b16 250u
   C1: capacitor/ceramic d12 d18 0.01u
+  RS: resistor e8 e12 1k
   Rb: resistor b18 b22 220k
   Rc: resistor c22 c26 1.5k
   Q1: transistor h18(B) h19(C) h20(E) 2SC1815
@@ -114,8 +115,13 @@ parts:
   C3: capacitor/ceramic g22 g26 0.001u
   R3: resistor i22 i26 100k
 wires:
-  - PWR.+5V -- +t1 red
-  - PWR.GND -- -t2 black
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
+  - AD.W1 -- a8 orange
+  - AD.2+ -- c19 blue
+  - AD.1+ -- h22 blue [h420]
+  - AD.1- -- -t3 black
+  - AD.2- -- -t4 black
   - VC1.E -- -t14 black
   - VC1.A -- a12 yellow
   - ANT.1 -- c12 yellow
@@ -133,7 +139,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/03-one-transistor-radio.svg)
 
-- 電源 (5V。USB の 5V や電池) は左上から上のレールへ入れる。上の赤レール = +5V、青レール = GND。
+- AD3 の V+ (Supplies の 5V) を上の赤レール、GND を青レールへ入れる。上の赤レール = +5V、青レール = GND。
   30 列で上下の − レールを渡している
 - 前段は 12 列にアンテナ・VC1・L1・C1 をまとめる。L1 の右足 (16 列) は上の − レールへ
 - Q1 は下のブロックの h 行に、隣り合う 3 列 (18 列 B・19 列 C・20 列 E) へ挿す。足を大きく
@@ -145,7 +151,58 @@ wires:
 - Rc の右足 (26 列) は上の + レールへ。D1 は 22 列で溝をまたぎ、アノードが上 (コレクタ)、
   カソードが下 (検波出力)。下の 22 列に C3・R3 の左足と EAR の A 端子が並ぶ。
   C3・R3 の右足 (26 列) と EAR の B 端子は下の − レールへ
+- AD3 (Analog Discovery 3) の W1 を RS (1 kΩ) 経由で同調回路の 12 列へ入れる。放送の電波の代わりの試験用で、
+  使うときは ANT の線を外してよい。1+ は検波出力 (下の 22 列)、2+ は Q1 のコレクタ (19 列)、1−・2−・GND は − レールへ入れる
 - 1 つの穴には足か線を 1 本だけ挿す
+
+## 計器の設定
+
+計器は Analog Discovery 3。電源 (Supplies の V+ = 5 V)、信号源 (Wavegen の W1)、オシロ (Scope) が 1 台で足り、
+搬送波 1 MHz は Scope の範囲 (10 MHz 以下) に入る。消費電流は I<sub>C</sub> ≈ 1.7 mA ほどで、電源 1 系統の約 50 mA に収まり、
+ブレッドボードの 1 穴 200 mA の範囲にも入る。VC1 は約 100 pF に回しておく (f<sub>0</sub> ≈ 1.007 MHz)。
+
+| 項目 | 値 |
+| --- | --- |
+| Supplies | V+ = 5 V、出力 ON |
+| Wavegen W1 | 搬送波 Sine 1 MHz、振幅 20 mV (peak)、Modulation: AM、変調波 Sine 1 kHz、変調度 50 % |
+| Scope CH1 (1+ = 検波出力) | Coupling DC、200 mV/div |
+| Scope CH2 (2+ = コレクタ) | Coupling DC、1 V/div |
+| Scope 時間軸・トリガ | 200 µs/div、CH1 の立ち上がり |
+
+```scope
+title: 図3 AM 信号の試験 — コレクタ (CH2) は増幅され、検波出力 (CH1) は 1 kHz
+time: 200us/div
+trigger: ch1 rising 2.98V
+ch1: {wave: = 2.98V + 0.31V * sin(2 * pi * 1kHz * t), range: 200mV/div, position: -14.9div}
+ch2: {wave: = 2.45V + 0.78V * (1 + 0.5 * sin(2 * pi * 1kHz * t)) * sin(2 * pi * 1MHz * t), range: 1V/div, position: -2.45div}
+measure: [vpp, avg, freq]
+cursors: [250us, 750us]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/03-one-transistor-radio.svg)
+
+- 図3 は LTspice の計算 (2SC1815 は BF = 200 の汎用モデル、1N60 は IS = 0.2 µA・RS = 25 Ω と仮定) をもとにした画面。実測ではない
+- CH2 (コレクタ) は直流 約 2.45 V (上の動作点の 2.5 V とほぼ一致) に、1 MHz の搬送波が乗る。振幅は 1 kHz で太り細りして、
+  最大 約 1.2 V (peak)。入力の同調回路の振幅は最大でも約 19 mV (peak) なので、実効の利得は約 60 倍。
+  上の 98 倍より小さいのは、タンクと Rc に D1・R3・イヤホンの負荷が付くため
+- CH1 は平均 約 3.0 V、1 kHz の振れ 約 0.6 Vpp (2.66〜3.28 V)。D1 がコレクタの山を拾い、C3・R3・イヤホンでならした出力
+
+## 部品
+
+| 記号 | 部品 | 値 |
+| --- | --- | --- |
+| L1 | インダクタ (アキシャル) | 250 µH |
+| VC1 | ポリバリコン | 20〜260 pF |
+| C1 | セラミックコンデンサ | 0.01 µF |
+| Rb | 抵抗 | 220 kΩ |
+| Rc | 抵抗 | 1.5 kΩ |
+| Q1 | NPN トランジスタ | 2SC1815 |
+| D1 | ゲルマニウムダイオード | 1N60 |
+| C3 | セラミックコンデンサ | 1 nF |
+| R3 | 抵抗 | 100 kΩ |
+| EAR | クリスタルイヤホン | 容量 約 15 nF |
+| RS | 抵抗 (試験用。W1 から同調回路へ入れる) | 1 kΩ |
+| — | 電源・試験用の信号源・オシロ | Analog Discovery 3 (V+ = 5 V、W1、Scope の 1・2) |
 
 ## 見るべき値
 
