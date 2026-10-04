@@ -30,29 +30,35 @@ board: BB
 ```circuit
 title: 図1 三相の信号を作る
 parts:
-  V1: sine a1 c1 1 l=$\mathrm{W1}$
-  G1: ground c1
-  R1: resistor a1 a4 10k
-  V2: sine e1 g1 1 l=$\mathrm{W2}$
-  G2: ground g1
-  R2: resistor e1 e5 10k
-  U1: opamp c9 +up TL071
-  G3: ground c6
-  Rf: resistor d11 d14 10k
-  OUT: port c16
+  V1: sine c1 e1 1 l=$\mathrm{W1}$
+  G1: ground e1
+  V2: sine i1 k1 1 l=$\mathrm{W2}$
+  G2: ground k1
+  R1: resistor c3 e3 10k
+  R2: resistor i4 g4 10k
+  U1: opamp f8 +down TL071
+  G3: ground g6
+  Rf: resistor d7 d10 10k
+  P1: port c14
+  P3: port f14
+  P2: port i14
 wires:
-  - a4 |- U1.-
-  - e5 |- U1.-
-  - c6 |- U1.+
-  - d11 |- U1.-
-  - U1.out -- c14 -- c16
-  - d14 -- c14
+  - e3 -- e4 -- e7
+  - e4 -- g4
+  - d7 -- e7
+  - e7 |- U1.-
+  - g6 |- U1.+
+  - d10 -- f10
+  - c1 -- c3 -- c14
+  - i1 -- i4 -- i14
+  - U1.out -- f10 -- f14
 notes:
-  - text c16 blue: 3 相目
+  - text b12: 1 相目
+  - text g12: 3 相目
+  - text h12: 2 相目
 style:
   standard: jis
-  grid: on
-  pitch: 1.4
+  pitch: 1.2
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/01-three-phase-source.svg)
@@ -103,9 +109,9 @@ notes:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/breadboard/01-three-phase-source-1.svg)
 
 - TL071 (dip8) は `r180` で置き、1 番が e16 に来る。上の段 (e13〜e16) が 4・3・2・1 番、
-  下の段 (f13〜f16) が 5・6・7・8 番。ピン: 1 = NC、2 = IN−、3 = IN+、4 = V−、
-  5 = NC、6 = OUT、7 = V+、8 = NC。**1・5・8 番はオフセット調整用**
-  (データシートどおり未使用。空けたままでよい)
+  下の段 (f13〜f16) が 5・6・7・8 番。ピン: 1 = OFFSET N1、2 = IN−、3 = IN+、4 = V−、
+  5 = OFFSET N2、6 = OUT、7 = V+、8 = NC。1・5 番はオフセット調整用、8 番は
+  どこにもつながっていない。3 本とも空けたままでよい
 - IN− (15 列) は d 行の緑の線で 21 列へ延ばし、R1・R2 と、溝を渡って下の段の Rf が集まる。
   IN+ (14 列) は GND レール (−t)、V+ (7 番、下の段 15 列) は下の + レールから取る
   (左端の赤い線で上の + レールとつなぐ)

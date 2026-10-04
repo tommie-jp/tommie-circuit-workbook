@@ -28,38 +28,40 @@ board: BB
 ```circuit
 title: 図1 三相電源に Y 結線の負荷
 parts:
-  V1: sine a1 c1 1 l=$\mathrm{W1}$
-  G1: ground c1
-  R1: resistor a1 a4 10k
-  V2: sine e1 g1 1 l=$\mathrm{W2}$
-  G2: ground g1
-  R2: resistor e1 e5 10k
-  U1: opamp c9 +up TL071
-  G3: ground c6
-  Rf: resistor d11 d14 10k
-  OUT: port c16
-  R3: resistor b20 b23 1k
-  R4: resistor f20 f23 1k
-  R5: resistor c20 c23 1k
+  V1: sine c1 e1 1 l=$\mathrm{W1}$
+  G1: ground e1
+  V2: sine i1 k1 1 l=$\mathrm{W2}$
+  G2: ground k1
+  R1: resistor c3 e3 10k
+  R2: resistor i4 g4 10k
+  U1: opamp f8 +down TL071
+  G3: ground g6
+  Rf: resistor d7 d10 10k
+  R3: resistor c16 c18 1k
+  R5: resistor f16 f18 1k
+  R4: resistor i16 i18 1k
 wires:
-  - a4 |- U1.-
-  - e5 |- U1.-
-  - c6 |- U1.+
-  - d11 |- U1.-
-  - U1.out -- c14 -- c16
-  - d14 -- c14
-  - a1 -- b20
-  - e1 -- f20
-  - c16 -- c20
-  - b23 -- c23
-  - f23 -- c23
+  - e3 -- e4 -- e7
+  - e4 -- g4
+  - d7 -- e7
+  - e7 |- U1.-
+  - g6 |- U1.+
+  - d10 -- f10
+  - c1 -- c3 -- c16
+  - i1 -- i4 -- i16
+  - U1.out -- f10 -- f16
+  - c18 -- c20 -- f20
+  - f18 -- f20
+  - i18 -- i20
+  - f20 -- i20
 notes:
-  - text c16 blue: 3 相目
-  - text d23 blue: N
+  - text b12: 1 相目
+  - text g12: 3 相目
+  - text h12: 2 相目
+  - text d20a3: N
 style:
   standard: jis
-  grid: on
-  pitch: 1.4
+  pitch: 1.2
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/02-star-connection-1.svg)
@@ -113,7 +115,8 @@ wires:
   - f42 -- e42 orange
   - h14 -- h49 blue
   - f49 -- e49 blue
-  - d39 -- d46 -- d53 green
+  - d39 -- d46 green
+  - a46 -- a53 green
 notes:
   - text small: R3・R4・R5 (各 1k) が Y 結線。b53 (R5 の右) が中性点 N (浮かせたまま)
 ```
@@ -121,7 +124,7 @@ notes:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/breadboard/02-star-connection.svg)
 
 - 1 相目 (R3) を b35 の列、2 相目 (R4) を b42 の列、3 相目 (R5) を b49 の列から
-  取り出し、d 行の緑の線で 39・46・53 列を束ねて中性点 N (53 列) にする。
+  取り出し、d 行と a 行の緑の線で 39・46・53 列を束ねて中性点 N (53 列) にする。
   3 つの相は下の段の g 行 (1 相目)・j 行 (2 相目)・h 行 (3 相目) で右へ運び、
   短い線で溝を渡って e35・e42・e49 から上の段へ戻す
 - AD の 1+・1− は R3 の両端 (a35・a39) に挿し、相電圧 (1 相目 − N) を差動で測る。
@@ -137,7 +140,7 @@ notes:
 | Wavegen | W1: Sine、1 kHz、Amplitude 1 V、Phase 0°。W2: 同じく Phase −120° |
 | Supplies | V+ = 5 V、V− = −5 V |
 | Scope (1 回目) | CH1 = 1 相目 − N (差動。1+ を a35、1− を a39)、CH2 = 1 相目 − 2 相目 (差動。2+ を a17、2− を a25) |
-| Scope (2 回目) | CH1 は同じ。CH2 は 2+ を N (a53)、2− を GND のレールに挿し替え、N の電圧 (GND 基準) を読む |
+| Scope (2 回目) | CH1 は同じ。CH2 は 2+ を N (c53)、2− を GND のレールに挿し替え、N の電圧 (GND 基準) を読む |
 | Measure | CH1・CH2 の Amplitude と、CH1 に対する CH2 の Phase |
 
 1 回目の画面。CH1 が相電圧、CH2 が線間電圧で、2 つは同じ V/div にしてある。
@@ -163,7 +166,7 @@ N が GND に落ちて中性線ありの 4-4 に変わり、2 相目に当てれ
 GND と短絡する。
 
 **回路はそのまま、先端を当てる点を GND 基準で測り、Math の CH1 − CH2 で引く** (図4)。
-引いて得る相電圧と線間電圧は振れと同じくらい大きいので、8 bit のオシロでも埋もれない。
+引いた結果 (相電圧・線間電圧) は元の 2 つの波と同じくらいの大きさなので、8 bit のオシロでも埋もれない。
 測る点は 1 相目・2 相目・N の 3 つで、2 ch では 2 回に分ける。
 
 ```circuit
@@ -220,7 +223,7 @@ style:
   ch どうしの利得の差が、そのまま差の誤差になる
 
 **FG の 50 Ω で値が変わる** (計算値)。1 相あたりの負荷は 1 kΩ で、FG の 50 Ω が
-直列に入る。相電圧の振幅は 0.95 V、線間電圧は 1.64 V になる。√3 倍と 30° は
+直列に入る。相電圧の振幅は 0.95 V、線間電圧は 1.65 V になる。√3 倍と 30° は
 変わらない。3 相目の OP アンプは 1・2 相目の端子の電圧 (50 Ω で下がったあと) を
 足すので、3 相目も同じだけ下がり、負荷は平衡のままで N は 0 V のまま。
 

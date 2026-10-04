@@ -27,45 +27,43 @@ board: BB
 ```circuit
 title: 図1 三相電源にデルタ結線の負荷
 parts:
-  V1: sine a1 c1 1 l=$\mathrm{W1}$
-  G1: ground c1
-  R1: resistor a1 a4 10k
-  V2: sine e1 g1 1 l=$\mathrm{W2}$
-  G2: ground g1
-  R2: resistor e1 e5 10k
-  U1: opamp c9 +up TL071
-  G3: ground c6
-  Rf: resistor d11 d14 10k
-  OUT: port c16
-  RLA: resistor b30 b33 20
-  RLB: resistor f35 f38 20
-  RLC: resistor c40 c43 20
-  RAB: resistor k33 k38 1k
-  RBC: resistor k38 k43 1k
-  RCA: resistor m33 m43 1k
+  V1: sine c1 e1 1 l=$\mathrm{W1}$
+  G1: ground e1
+  V2: sine i1 k1 1 l=$\mathrm{W2}$
+  G2: ground k1
+  R1: resistor c3 e3 10k
+  R2: resistor i4 g4 10k
+  U1: opamp f8 +down TL071
+  G3: ground g6
+  Rf: resistor d7 d10 10k
+  RLA: resistor c13 c15 20 l=$\mathrm{R_{LA}}$
+  RLC: resistor f13 f15 20 l=$\mathrm{R_{LC}}$
+  RLB: resistor i13 i15 20 l=$\mathrm{R_{LB}}$
+  RCA: resistor c17 f17 1k l=$\mathrm{R_{CA}}$
+  RBC: resistor f17 i17 1k l=$\mathrm{R_{BC}}$
+  RAB: resistor c20 i20 1k l=$\mathrm{R_{AB}}$
 wires:
-  - a4 |- U1.-
-  - e5 |- U1.-
-  - c6 |- U1.+
-  - d11 |- U1.-
-  - U1.out -- c14 -- c16
-  - d14 -- c14
-  - a1 -- b30
-  - e1 -- f35
-  - c16 -- c40
-  - b33 -- k33
-  - f38 -- k38
-  - c43 -- k43
-  - k43 -- m43
-  - m33 -- k33
+  - e3 -- e4 -- e7
+  - e4 -- g4
+  - d7 -- e7
+  - e7 |- U1.-
+  - g6 |- U1.+
+  - d10 -- f10
+  - c1 -- c3 -- c13
+  - i1 -- i4 -- i13
+  - U1.out -- f10 -- f13
+  - c15 -- c17 -- c20
+  - f15 -- f17
+  - i15 -- i17 -- i20
 notes:
-  - text c16 blue: 3 相目
-  - text k33 blue: a
-  - text k38 blue: b
-  - text k43 blue: c
+  - text b12: 1 相目
+  - text g12: 3 相目
+  - text h12: 2 相目
+  - text b17: a
+  - text f17a3: c
+  - text j17: b
 style:
   standard: jis
-  grid: on
   pitch: 1.2
 ```
 
@@ -244,9 +242,9 @@ style:
 
 | 測る所 | 200 Ω のシャントでの値 |
 | --- | --- |
-| FG の CH1 の端子 (RLA の電源側) の振幅 | 0.910 V |
-| RLA の両端 (1 回目の Math) | 341 mV → 線電流 1.71 mA |
-| RAB の両端 (2 回目の Math) | 0.985 V → 相電流 0.985 mA |
+| FG の CH1 の端子 (RLA の電源側) の振幅 | 0.914 V |
+| RLA の両端 (1 回目の Math) | 343 mV → 線電流 1.71 mA |
+| RAB の両端 (2 回目の Math) | 0.990 V → 相電流 0.990 mA |
 | 線電流 ÷ 相電流、位相 | 1.73 (= √3)、−30° (見るべき値と同じ) |
 
 ## 見るべき値

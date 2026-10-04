@@ -83,11 +83,11 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Square、Amplitude 1 V、Offset 1 V (0 V〜2 V)。周波数を 100 Hz → 500 Hz → 5 kHz と変える |
-| Scope | CH1 = 入力、CH2 = 出力。2 ch とも 500 mV/div、0 V を下から 1 目盛。Time base は 2 周期ぶん (2 ms/div・500 µs/div・50 µs/div)。Trigger は CH1 の立ち上がり |
+| Scope | CH1 = 入力、CH2 = 出力。2 ch とも 500 mV/div、0 V を下から 1 目盛。Time base は 2〜2.5 周期ぶん (2 ms/div・500 µs/div・50 µs/div)。Trigger は CH1 の立ち上がり |
 | Measure | CH2 の Maximum・Minimum・Peak2Peak |
 
 3 枚とも CH1 と CH2 を同じ尺度で描き、周期に合わせて Time base だけを変えた。
-横軸の長さはどれも 2 周期なので、形の違いは半周期と τ の比だけから来る。
+横軸はどれも 2〜2.5 周期ぶんなので、形の違いは半周期と τ の比だけから来る。
 
 ```scope
 title: 図3 100 Hz (半周期 5τ) — 出力 (CH2) は毎回ほぼ 0 V と 2 V に届く

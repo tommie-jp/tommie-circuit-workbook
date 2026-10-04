@@ -161,7 +161,8 @@ wires:
   - f35 -- e35 yellow
   - f42 -- e42 orange
   - f49 -- e49 blue
-  - a41 -- a48 -- a55 green
+  - a41 -- a48 green
+  - c48 -- c55 green [v-15, h140]
   - AD.2+ -- a38 pink
   - AD.1- -- a49 blue
   - AD.2- -- c41 green
@@ -171,7 +172,7 @@ notes:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/breadboard/08-two-wattmeter.svg)
 
-- 三相電源と C + R は 4-5 と同じ。R の右の端 (41・48・55 列) は a 行の緑の線で束ねて N にし、GND にはつながない。
+- 三相電源と C + R は 4-5 と同じ。R の右の端 (41・48・55 列) は a 行と c 行の緑の線で束ねて N にし、GND にはつながない。
 - 1 つ目: 1+ を 35 列 (a 線)、1− を 49 列 (c 線)、2+ を 38 列 (Ca と Ra のつなぎ目)、2− を 41 列 (c41、N)
 - 2 つ目: 1+ を 42 列 (a42、b 線)、2+ を 45 列 (a45、Cb と Rb のつなぎ目) に挿し替える。1− と 2− はそのまま
 - **1− と 2− を GND のレールにつながない** (つなぐと c 線か N が GND に落ちる)

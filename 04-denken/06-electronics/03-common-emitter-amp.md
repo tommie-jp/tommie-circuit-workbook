@@ -29,25 +29,28 @@ board: BB
 ```circuit
 title: 図1 エミッタ接地増幅 (分圧バイアス)
 parts:
-  VCC: vcc a3
-  R1: resistor a3 a9 39k
-  RC: resistor c3 c13 2.2k
-  R2: resistor a9 e9 10k
-  Cin: capacitor a9 a15 10u
-  IN: port a18
-  Cout: capacitor c13 c19 10u
-  OUT: port c22
-  Q1: npn e11 2SC1815
-  RE: resistor g11 g15 470
-  G1: ground e9
-  G2: ground g15
+  VCC: vcc a6 5V
+  R1: resistor a6 d6 39k
+  R2: resistor f7 i7 10k
+  G1: ground i7
+  IN: port e1
+  Cin: capacitor e2 e5 10u
+  Q1: npn e9 2SC1815
+  RC: resistor a9 c9 2.2k
+  Cout: capacitor c10 c13 10u
+  OUT: port c15
+  RE: resistor g9 i9 470
+  G2: ground i9
 wires:
-  - a3 -- c3
-  - a9 |- Q1.B
-  - c13 |- Q1.C
-  - a15 -- a18
-  - c19 -- c22
-  - Q1.E -| g11
+  - a6 -- a9
+  - d6 -- e6 -- e7 -- f7
+  - e1 -- e2
+  - e5 -- e6
+  - e7 -- Q1.B
+  - c9 -- Q1.C
+  - c9 -- c10
+  - c13 -- c15
+  - Q1.E -- g9
 style:
   standard: jis
   grid: on

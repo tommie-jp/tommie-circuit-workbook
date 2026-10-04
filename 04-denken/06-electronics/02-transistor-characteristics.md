@@ -27,16 +27,18 @@ board: BB
 ```circuit
 title: 図1 固定バイアスで hFE を測る
 parts:
-  VCC: vcc a3
-  RB: resistor a3 a7 470k i=IB
-  RC: resistor c3 c7 1k i=IC
-  Q1: npn e5 2SC1815
-  G1: ground e9
+  VCC: vcc a3 5V
+  RB: resistor b3 d3 470k i=IB
+  RC: resistor b7 d7 1k i=IC
+  Q1: npn f7 2SC1815
+  G1: ground h7
 wires:
-  - a3 -- c3
-  - a7 |- Q1.B
-  - c7 |- Q1.C
-  - Q1.E -| e9
+  - a3 -- a7 -- b7
+  - a3 -- b3
+  - d3 -- f3
+  - f3 -- Q1.B
+  - d7 -- Q1.C
+  - Q1.E -- h7
 style:
   standard: jis
   grid: on
@@ -102,7 +104,7 @@ R_C に 5 V がそのまま掛かる ([回路の本の 0-3](../../01-circuits/00
 ```circuit
 title: 図3 汎用オシロでの測り方
 parts:
-  VCC: vcc b3
+  VCC: vcc b3 5V
   RB: resistor b3 e3 470k i=IB
   RC: resistor b8 e8 1k i=IC
   Q1: npn g8 2SC1815
@@ -157,9 +159,9 @@ style:
 
 - **CH1 は h_FE によらずほぼ一定** (V_CC − V_BE を R_B で割るだけ)。CH2 だけが
   トランジスタの個体差で変わるので、h_FE の違いは CH2 の値にそのまま出る
-- R_B を 2 倍 (940 kΩ) にすると I_B が半分になり、I_C・CH2 も半分になる —
+- R_B を 2 倍 (470 kΩ を 2 本直列で 940 kΩ) にすると I_B が半分になり、I_C・CH2 も半分になる —
   比例関係を変えて確かめられる
-- V_CE が V_CE(sat) (約 0.2 V) より小さくなると I_C は h_FE × I_B より頭打ちになる
+- I_B を増やして V_CE が V_CE(sat) (約 0.2 V) まで下がると、I_C は h_FE × I_B に届かず頭打ちになる
   (飽和。6-7 のスイッチ動作で使う領域)
 
 ## 出典

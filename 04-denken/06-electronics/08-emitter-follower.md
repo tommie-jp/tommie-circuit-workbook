@@ -34,7 +34,7 @@ parts:
   RS: resistor d1 d3 22k
   S2: switch b1 b3
   Cin: capacitor d4 d5 10u
-  VCC: vcc a6
+  VCC: vcc a6 5V
   R1: resistor a6 d6 47k
   R2: resistor d7 g7 47k
   Q1: npn d9 2SC1815
@@ -128,7 +128,7 @@ wires:
 | Measure | CH1・CH2 の Amplitude。Average を 16 回掛けると 1 mV まで読める |
 
 入力を 0.1 V に抑えるのは、2 回目に R_L = 100 Ω をつないだとき、負の半周期でエミッタの電流
-(直流 1.69 mA) が 0 まで減って波形が欠けないようにするため (R_E ∥ R_L = 91 Ω に 1.1 mA 要る)。
+(直流 1.69 mA) が 0 まで減って波形が欠けないようにするため (R_E ∥ R_L = 91 Ω に山で 0.94 mA 流す)。
 
 ```scope
 title: 図3 1 回目 — R_S (22 kΩ) の後ろ (CH2) は W1 (CH1) の 0.494 倍

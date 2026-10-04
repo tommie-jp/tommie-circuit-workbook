@@ -27,40 +27,42 @@ board: BB
 ```circuit
 title: 図1 Y 結線に中性線を足す
 parts:
-  V1: sine a1 c1 1 l=$\mathrm{W1}$
-  G1: ground c1
-  R1: resistor a1 a4 10k
-  V2: sine e1 g1 1 l=$\mathrm{W2}$
-  G2: ground g1
-  R2: resistor e1 e5 10k
-  U1: opamp c9 +up TL071
-  G3: ground c6
-  Rf: resistor d11 d14 10k
-  OUT: port c16
-  R3: resistor b20 b23 1k
-  R4: resistor f20 f23 1k
-  R5: resistor c20 c23 1k
-  RN: resistor c23 c27 10
-  G4: ground c27
+  V1: sine c1 e1 1 l=$\mathrm{W1}$
+  G1: ground e1
+  V2: sine i1 k1 1 l=$\mathrm{W2}$
+  G2: ground k1
+  R1: resistor c3 e3 10k
+  R2: resistor i4 g4 10k
+  U1: opamp f8 +down TL071
+  G3: ground g6
+  Rf: resistor d7 d10 10k
+  R3: resistor c16 c18 1k
+  R5: resistor f16 f18 1k
+  R4: resistor i16 i18 1k
+  RN: resistor i20 k20 10 i=IN
+  G4: ground k20
 wires:
-  - a4 |- U1.-
-  - e5 |- U1.-
-  - c6 |- U1.+
-  - d11 |- U1.-
-  - U1.out -- c14 -- c16
-  - d14 -- c14
-  - a1 -- b20
-  - e1 -- f20
-  - c16 -- c20
-  - b23 -- c23
-  - f23 -- c23
+  - e3 -- e4 -- e7
+  - e4 -- g4
+  - d7 -- e7
+  - e7 |- U1.-
+  - g6 |- U1.+
+  - d10 -- f10
+  - c1 -- c3 -- c16
+  - i1 -- i4 -- i16
+  - U1.out -- f10 -- f16
+  - c18 -- c20 -- f20
+  - f18 -- f20
+  - i18 -- i20
+  - f20 -- i20
 notes:
-  - text c16 blue: 3 相目
-  - text d24 blue: N
+  - text b12: 1 相目
+  - text g12: 3 相目
+  - text h12: 2 相目
+  - text d20a3: N
 style:
   standard: jis
-  grid: on
-  pitch: 1.4
+  pitch: 1.2
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/04-neutral-wire.svg)
@@ -113,7 +115,9 @@ wires:
   - f35 -- e35 yellow
   - f42 -- e42 orange
   - f49 -- e49 blue
-  - a28 -- a39 -- a46 -- a53 green
+  - a28 -- a39 green
+  - d39 -- d46 green
+  - a46 -- a53 green
   - AD.1+ -- b28 pink
   - c57 -- -t57 black
 notes:
@@ -169,7 +173,7 @@ RN の下の端は GND のレールなので、AD の 1− は GND で、測り�
   して Average を掛けると、1 kHz に同期しないノイズは平均で減る
 - FG の 50 Ω が 1・2 相目に入っても、3 相目の OP アンプが同じだけ下がった電圧を作る
   (4-2 の「オシロスコープと発振器」)。負荷は平衡のままで、RN の両端は 0 V のまま (計算値)。
-  残るのは FG の 2 つの ch の振幅の差 (機種の確度で 1 % 前後) と TL071 のオフセットの分
+  残るのは FG の 2 つの ch の振幅の差 (機種の確度で 1 % 前後) と抵抗の誤差の分
 
 ## 見るべき値
 
@@ -184,9 +188,9 @@ RN の下の端は GND のレールなので、AD の 1− は GND で、測り�
 
 - **平衡なら中性線は無くても Y 結線の動きは変わらない。** 4-2 (中性線なし) と
   4-4 (中性線あり、電流 0) の結果が同じになることがその証拠
-- 実際には TL071 のオフセット電圧 (データシートで数 mV) が乗るので、RN の両端は
-  ぴったり 0 ではなく数 mV 前後になる。これは負荷の不平衡ではなく計器・部品の
-  誤差
+- 実際には RN の両端はぴったり 0 にならない。抵抗の誤差 (±5 %) と 3 つの相の振幅の差で、
+  0.5 mV 前後 (目安) の交流が残る。TL071 のオフセット電圧 (データシートで数 mV) は、
+  RN の両端では 0.1 mV 以下の直流になる (計算値)。どれも負荷の不平衡ではなく計器・部品の誤差
 
 ## AD3 を 2 台使う — 3 つの相電流と中性線の電流を同時に
 
@@ -205,7 +209,7 @@ AD-B は測るだけ (Wavegen も Supplies も使わない)。
 
 | 台 | 測る所 | 期待する値 |
 | --- | --- | --- |
-| AD-A | RN の両端 | 0 V (TL071 のオフセットで数 mV 出ることがある) |
+| AD-A | RN の両端 | 0 V (部品の誤差で 0.5 mV 前後残ることがある) |
 | AD-A・AD-B | R3・R4・R5 の両端の振幅 | どれも 1.00 V (相電流 1.00 mA) |
 | AD-B | CH1 (2 相目) に対する CH2 (3 相目) の位相 | −120° (= +240°) |
 

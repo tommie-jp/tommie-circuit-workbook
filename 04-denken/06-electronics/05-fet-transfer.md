@@ -34,7 +34,7 @@ parts:
   RG: resistor d1 d3 1k
   Q1: nmos-e d5 2N7000
   RD: resistor a5 c5 1k i=ID
-  VCC: vcc a5
+  VCC: vcc a5 5V
   G1: ground f1
 wires:
   - d3 -| Q1.G

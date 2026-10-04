@@ -157,7 +157,8 @@ wires:
   - f35 -- e35 yellow
   - f42 -- e42 orange
   - f49 -- e49 blue
-  - a41 -- a48 -- a55 green
+  - a41 -- a48 green
+  - c48 -- c55 green [v-15, h140]
   - c37 -- c38 green
   - AD.2+ -- a37 pink
   - AD.1- -- a38 green
@@ -168,7 +169,7 @@ notes:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/breadboard/07-y-delta-conversion.svg)
 
 - 三相電源の部分は 4-5 と同じ。35・42・49 列から d 行のシャント (330 Ω) を通って、38・45・52 列が負荷の端子 a・b・c
-- Y: b 行の 1 kΩ の右の端 (41・48・55 列) を a 行の緑の線で束ねて N にする。N は GND につながない
+- Y: b 行の 1 kΩ の右の端 (41・48・55 列) を a 行と c 行の緑の線で束ねて N にする。N は GND につながない
 - **Δ に替える**: 1 kΩ の 3 本と N の緑の線を外し、3.0 kΩ を b38–b45 (R_ab) と c45–c52 (R_bc) に挿す。
   R_ca (a と c の間) は e38–f38・e52–f52 の短い線で溝を渡して、下の段の i38–i52 に挿す
 - CH1 は 1+ を 35 列、1− を 38 列 (R_La の両端)。**1− を GND につながない**。CH2 は 2+ を 37 列 (c37–c38 の線で 38 列とつながる)、

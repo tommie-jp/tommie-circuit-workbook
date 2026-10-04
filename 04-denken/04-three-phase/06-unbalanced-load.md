@@ -120,7 +120,8 @@ wires:
   - f35 -- e35 yellow
   - f42 -- e42 orange
   - f49 -- e49 blue
-  - d39 -- d46 -- d53 green
+  - d39 -- d46 green
+  - a46 -- a53 green
   - a57 -- -t57 black
   - AD.2+ -- a39 pink
 notes:
@@ -129,7 +130,7 @@ notes:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/breadboard/06-unbalanced-load.svg)
 
-- 三相電源の部分は 4-5 と同じ。R3・R4・R5 の右の端 (39・46・53 列) を d 行の緑の線で束ねて N (53 列) にし、
+- 三相電源の部分は 4-5 と同じ。R3・R4・R5 の右の端 (39・46・53 列) を d 行と a 行の緑の線で束ねて N (53 列) にし、
   RN (c53–c57) と 57 列の黒い線で GND のレールへ
 - 1+ は 35 列 (1 相目)、2+ は 39 列 (N。緑の線で 53 列とつながる)。1− と 2− は GND のレール
 - 相電流も見るときは、1+ を相の列 (35・42・49)、1− を N (39 列の空いた穴) に挿し替え、
