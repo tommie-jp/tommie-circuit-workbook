@@ -104,7 +104,7 @@ wires:
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/perfboard/08-four-traces.svg)
 
 J1 に CH0、J2 に CH1 のケーブルをつなぐ。C1・C2 (68 pF) は中心導体から GND へ立てる。L1 (180 nH) は C1 と C2 の間に横にはさむ。
-板に流れる電流は、NanoVNA の出力が 0 dBm 以下なので数 mA 以下で、板の範囲 (1 穴 200 mA) に収まる。
+ユニバーサル基板に流れる電流は、NanoVNA の出力が 0 dBm 以下なので数 mA 以下で、ユニバーサル基板の範囲 (1 穴 200 mA) に収まる。
 
 ## 掃引の設定
 

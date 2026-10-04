@@ -73,7 +73,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/breadboard/04-self-resonance.svg)
 
-配線の考え方は 6-1〜6-3 と同じ。寄生容量は板の上には現れない (コイルの中の話)
+配線の考え方は 6-1〜6-3 と同じ。寄生容量はブレッドボードの上には現れない (コイルの中の話)
 ので、実体配線図には出てこない。
 
 ## 計器の設定

@@ -78,7 +78,7 @@ tommie-circuit-workbook の保守性と開発速度向上のための 2 つの�
           "minItems": 1
         }
       ],
-      "description": "BB=ブレッドボード, PF=perfboard, CB=銅張り基板, —=板なし"
+      "description": "BB=ブレッドボード, PF=perfboard, CB=銅張り基板, —=基板なし"
     },
     "device": {
       "type": "string",

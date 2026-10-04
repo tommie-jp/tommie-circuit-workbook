@@ -17,7 +17,7 @@ AD2 と NanoVNA-H4 / V2 は歴史的な機種 (比較のために残す)。一�
 - 頭に front matter (鍵と値の決まりは README の「書き方」と `scripts/entry.mjs`)。
   本文の最初の見出しは `# <id> <title>`
 - 本文の順: 説明 → 回路図 → 実体配線図 → 計器の設定 → 見るべき値 → 出典
-- **特に理由がなければ、どの題にも実体配線図・Analog Discovery 3 (板の外の機器)・オシロの図 (`scope`) を入れる**。入れないときは理由を題に 1 行。理由になることは README の「書き方」の表
+- **特に理由がなければ、どの題にも実体配線図・Analog Discovery 3 (基板の外の機器)・オシロの図 (`scope`) を入れる**。入れないときは理由を題に 1 行。理由になることは README の「書き方」の表
 - 各冊の 200 題の計画は `<NN-冊>/plan.yaml` (1 行 1 題)。題を書くときは計画の `id` `title`
   `tier` を front matter に写し、題を書き換えたら計画も直す (ずれは `check` が言う)
 - 各冊の `README.md` の `<!-- toc:start -->` 〜 `<!-- toc:end -->` の間は
@@ -43,7 +43,7 @@ AD2 と NanoVNA-H4 / V2 は歴史的な機種 (比較のために残す)。一�
   (図のフェンスを書き込むと、`.claude/hooks/drawing-skill-reminder.sh` が Claude にこれを思い出させる)
 - 字の重なりや配線の見え方は check では分からない。`npm run render` の SVG か、
   VS Code 拡張のプレビューで見る
-- Analog Discovery と NanoVNA は板の外の機器 (`type: device`) で描き、足の名前で配線する
+- Analog Discovery と NanoVNA は基板の外の機器 (`type: device`) で描き、ピンの名前で配線する
 - NanoVNA の本の題は、計器の設定の下に ` ```vna ` で**見えるはずの画面** (`dut:` の理想の模型) を
   描く。測ったら Touchstone を題のファイルの隣に置いて `data:` で重ねる (`.s2p` はコミットする)
 - オシロで時間波形を見る題は、計器の設定の下に ` ```scope ` で**見えるはずの画面** (発生器の波と

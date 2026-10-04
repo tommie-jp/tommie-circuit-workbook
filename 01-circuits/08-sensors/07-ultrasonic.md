@@ -91,10 +91,10 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/07-ultrasonic.svg)
 
-- 5 V の電源は Analog Discovery 3 (AD3) の Supplies の V+ (WaveForms で 5 V にして出力を入れる)。V+ を下の + レール、GND を下の − レールへつなぎ、右端の 2 本で上のレールへ渡す。HC-SR04 は板に挿さず、VCC を上の + レール、GND を上の − レールへ線でつなぐ
+- 5 V の電源は Analog Discovery 3 (AD3) の Supplies の V+ (WaveForms で 5 V にして出力を入れる)。V+ を下の + レール、GND を下の − レールへつなぎ、右端の 2 本で上のレールへ渡す。HC-SR04 はブレッドボードに挿さず、VCC を上の + レール、GND を上の − レールへ線でつなぐ
 - TRIG (緑) は 6 列へ。AD3 の W1 (緑) も同じ 6 列に入れ、TRIG へパルスを送る。W1 は 30 mA まで出せ、TRIG の入力に要る電流はごく小さい
 - ECHO (黄) は 10 列へ。R1 (10→14 列) と R2 (14→18 列) が分圧で、14 列が図1 の右の ECHO の端子に当たる。R2 の右端 (18 列) は黒の線で − レールへ。1+ (青) は 14 列に挿して、分圧後の ECHO を見る。1− は − レールへ
-- 電流は、HC-SR04 が動作時に約 15 mA (データシートの目安) で、分圧に流れるのは 5 V ÷ 2.5 kΩ = 2 mA。合計しても AD3 の Supplies の 50 mA (USB 給電で 250 mW) と、板の 500 mA の内側に収まる
+- 電流は、HC-SR04 が動作時に約 15 mA (データシートの目安) で、分圧に流れるのは 5 V ÷ 2.5 kΩ = 2 mA。合計しても AD3 の Supplies の 50 mA (USB 給電で 250 mW) と、ブレッドボードの 500 mA の内側に収まる
 
 ## 部品
 

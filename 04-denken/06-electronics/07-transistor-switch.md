@@ -84,7 +84,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/breadboard/07-transistor-switch.svg)
 
 - Q1 (2SC1815) は**平らな面を奥に向けて**挿すと、左から B (15 列)・C (16 列)・E (17 列)。
-  足の並びをデータシートで確かめてから挿す
+  ピンの並びをデータシートで確かめてから挿す
 - R_B は 10〜15 列で、W1 と CH1 (1+) を 10 列に挿す。R_C は 16〜24 列、24 列を赤い線で
   上の + のレール (V+ = 5 V) へ。エミッタ (17 列) は黒い線で GND のレールへ
 - CH2 (2+) はコレクタ (16 列)。1− と 2− は GND のレール
@@ -176,4 +176,4 @@ notes:
 
 自作。計器の名前と操作は Digilent の
 [WaveForms リファレンスマニュアル](https://digilent.com/reference/software/waveforms/waveforms-3/reference-manual)
-(Wavegen・Supplies・Scope の節)。2SC1815 の足の並びと V_CE(sat) はメーカーのデータシート。
+(Wavegen・Supplies・Scope の節)。2SC1815 のピンの並びと V_CE(sat) はメーカーのデータシート。

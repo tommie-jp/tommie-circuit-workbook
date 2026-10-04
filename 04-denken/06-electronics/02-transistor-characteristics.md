@@ -80,7 +80,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/breadboard/02-transistor-characteristics.svg)
 
 - +t (赤レール) が +5 V。R_B・R_C ともここから取る (R_B は 10 列、R_C は 24 列から)。
-  もう片方の足はベース (15 列)・コレクタ (16 列) に直に挿す
+  もう片方のピンはベース (15 列)・コレクタ (16 列) に直に挿す
 - CH1 (1+/1−) は R_B の両端の差動 (1+ は +t レール、1− は 15 列)。CH2 は R_C の両端の差動
   (2+ は +t レール、2− は 16 列)。Q1.E (17 列) は -t のレールへ
 

@@ -76,7 +76,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/breadboard/08-bar-antenna-l-q.svg)
 
-- バーアンテナは基板に載る 2 本足の部品ではないので、AD と同じ**板の外の
+- バーアンテナは基板に載る 2 ピンの部品ではないので、AD と同じ**ブレッドボードの外の
   機器**として下辺 (`at: bottom`) に描いた。2 本の巻線の端 (A・B) をワイヤで
   10・14 列に渡す
 - 配線の考え方は 6-3 と同じ。10 列がコイルと Rref の中点

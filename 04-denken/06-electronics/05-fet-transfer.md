@@ -244,5 +244,5 @@ notes:
 
 自作。計器の名前と操作は Digilent の
 [WaveForms リファレンスマニュアル](https://digilent.com/reference/software/waveforms/waveforms-3/reference-manual)
-(Wavegen・Supplies・Scope の節)。2N7000 の足の並びとしきい値電圧の範囲はメーカーのデータシート
+(Wavegen・Supplies・Scope の節)。2N7000 のピンの並びとしきい値電圧の範囲はメーカーのデータシート
 (onsemi 2N7000)。

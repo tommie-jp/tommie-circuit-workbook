@@ -100,7 +100,7 @@ wires:
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/perfboard/10-screenshot-records.svg)
 
-2-6 の基板をそのまま使う。J1 に NanoVNA の CH0 のケーブルをつなぐ。板に流れる電流は、NanoVNA の出力が 0 dBm 以下なので数 mA 以下で、板の範囲 (1 穴 200 mA) に収まる。
+2-6 の基板をそのまま使う。J1 に NanoVNA の CH0 のケーブルをつなぐ。ユニバーサル基板に流れる電流は、NanoVNA の出力が 0 dBm 以下なので数 mA 以下で、ユニバーサル基板の範囲 (1 穴 200 mA) に収まる。
 
 ## 掃引の設定
 

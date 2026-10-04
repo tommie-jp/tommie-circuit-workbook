@@ -84,7 +84,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/04-diode-direction.svg)
 
-5 V の電源は Analog Discovery 3 (AD3) の Supplies の V+ を使う (WaveForms で V+ を 5 V にして出力を入れる)。図2 の「電源」の箱がそれで、V+ を上の + レール、GND を上の − レールへつなぐ。電流は全部で約 15 mA で、板の範囲と AD3 の電源 (各レール約 50 mA まで) に収まる。
+5 V の電源は Analog Discovery 3 (AD3) の Supplies の V+ を使う (WaveForms で V+ を 5 V にして出力を入れる)。図2 の「電源」の箱がそれで、V+ を上の + レール、GND を上の − レールへつなぐ。電流は全部で約 15 mA で、ブレッドボードの範囲と AD3 の電源 (各レール約 50 mA まで) に収まる。
 
 図2 では、D3 だけ **K (カソード) を抵抗の側 (22 列)、A (アノード) を GND の側 (23 列)** に挿してあるところに注目
 (D1・D2 は A が抵抗の側、K が GND の側)。

@@ -89,7 +89,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/breadboard/01-back-emf.svg)
 
 - S1 で電池を入り切りする。Rs1 (10 Ω) はモータの電流を電圧に変えるシャント
-- 電池 (BAT) とモータ (MOT) は板の外の機器として描く。電池は上の赤・青レールへ、
+- 電池 (BAT) とモータ (MOT) はブレッドボードの外の機器として描く。電池は上の赤・青レールへ、
   モータの + 側は 11 列 (Rs1 の右)、− 側は青レールにつながる
 - AD の CH1 (1+・1−) は 11 列 (モータの +) と GND (青レール) の間、CH2 (2+・2−) は Rs1 の両端
   (7 列と 11 列) につなぐ
@@ -133,7 +133,7 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/01-back-emf-2.svg)
 
-- 板の変え方: Rs1 を 7〜11 列から抜き、7 列と 11 列を線でつなぐ。MOT の − を青レールから
+- ブレッドボードの変え方: Rs1 を 7〜11 列から抜き、7 列と 11 列を線でつなぐ。MOT の − を青レールから
   空いた 15 列へ挿し替え、Rs1 を 15 列と青レールの間に挿す
 - CH1 の先端は 11 列 (モータの +)、CH2 の先端は 15 列 (Rs1 の上)。グランドクリップは 2 本とも青レール
 - I は CH2 ÷ 10 Ω (図1 と同じ)。モータの端子電圧 V は Math の CH1 − CH2 で読む。

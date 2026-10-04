@@ -90,7 +90,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/breadboard/02-pattern-counter.svg)
 
 16=VDD (e12) の列を +t で電源へ。13=CE・15=MR (上ブロック) を -t で GND に固定、
-8=GND (下ブロック) は -b へ。AD は板の下に置き、V+・GND を下のレールへ入れて、
+8=GND (下ブロック) は -b へ。AD はブレッドボードの下に置き、V+・GND を下のレールへ入れて、
 上のレールとは 22・23 列で渡す。3=Q0・2=Q1・4=Q2 は下ブロックの空いた行 (j) から
 Logic の DIO1〜DIO3 へ。14=CLK (上ブロック) へは Pattern の DIO0 を空いた 10 列
 (j10) に入れ、溝を跨いで (`g10 -- d10`) `b10 -- b14` で渡す (DIP の胴を

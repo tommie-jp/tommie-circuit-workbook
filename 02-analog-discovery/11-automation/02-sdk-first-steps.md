@@ -75,7 +75,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/11-automation/breadboard/02-sdk-first-steps.svg)
 
 R1 と C1 は 10 列で中点を共有する。1+ は入力 (5 列)、2+ は R1 と C1 の中点 (10 列)、1−・2− と C1 の下端は GND のレールへ。
-電源は使わず、W1 と Scope の信号だけを板に渡す (電流は 1 V / 1 kΩ = 1 mA 以下で、板の範囲に収まる)。
+電源は使わず、W1 と Scope の信号だけをブレッドボードに渡す (電流は 1 V / 1 kΩ = 1 mA 以下で、ブレッドボードの範囲に収まる)。
 
 ## 計器の設定
 

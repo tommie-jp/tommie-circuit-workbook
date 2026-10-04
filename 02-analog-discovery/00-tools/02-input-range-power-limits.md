@@ -68,7 +68,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/breadboard/02-input-range-power-limits.svg)
 
-V+ は 5 列に入れ、R1 (330 Ω)・LED の順に 10 列でつなぐ。LED は足の長い方 (アノード) を 10 列に、短い方 (カソード) を 14 列に挿し、14 列から GND のレールへ戻す。
+V+ は 5 列に入れ、R1 (330 Ω)・LED の順に 10 列でつなぐ。LED はピンの長い方 (アノード) を 10 列に、短い方 (カソード) を 14 列に挿し、14 列から GND のレールへ戻す。
 
 ## 計器の設定
 

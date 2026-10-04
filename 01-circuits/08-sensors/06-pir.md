@@ -87,9 +87,9 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/06-pir.svg)
 
-- 5 V の電源は Analog Discovery 3 (AD3) の Supplies の V+ (WaveForms で 5 V にして出力を入れる)。V+ を下の + レール、GND を下の − レールへつなぎ、右端の 2 本で上のレールへ渡す。HC-SR501 は板に挿さず、VCC を上の + レール、GND を上の − レールへ線でつなぐ
+- 5 V の電源は Analog Discovery 3 (AD3) の Supplies の V+ (WaveForms で 5 V にして出力を入れる)。V+ を下の + レール、GND を下の − レールへつなぎ、右端の 2 本で上のレールへ渡す。HC-SR501 はブレッドボードに挿さず、VCC を上の + レール、GND を上の − レールへ線でつなぐ
 - OUT (黄) は 10 列へ。10 列の R1 (10→14 列) が D1 のアノード (14 列) に続き、D1 のカソード (18 列) を黒の線で − レールへ落とす。1+ (青) も同じ 10 列に挿して OUT を見る。1− は − レールへ
-- 電流は、LED が点いているとき約 8.7 mA、モジュール自身は数十 µA (データシートの目安) で、合計しても AD3 の Supplies の 50 mA (USB 給電で 250 mW) と、板の 500 mA の内側に収まる
+- 電流は、LED が点いているとき約 8.7 mA、モジュール自身は数十 µA (データシートの目安) で、合計しても AD3 の Supplies の 50 mA (USB 給電で 250 mW) と、ブレッドボードの 500 mA の内側に収まる
 
 ## 部品
 

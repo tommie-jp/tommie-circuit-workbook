@@ -102,7 +102,7 @@ wires:
 この題の計器は Analog Discovery 3 (AD3)。波形発生器 W1 の出力を `R1` の左端の列 5 へ、
 AD3 の GND を上の − レールへ入れる。Scope は 1+ を入力の列 5、2+ を出力の列 10 に当て、
 1−・2− は上の − レールへ落とす。発振器とオシロの GND は同じ − レールで 1 つになる。
-W1 の出力は 100 µA 以下で、板の範囲に十分収まる。
+W1 の出力は 100 µA 以下で、ブレッドボードの範囲に十分収まる。
 テスターで読むときは、黒の棒を − レールに、赤の棒を列 5 (入力) と列 10 (出力) に
 順に当てる。
 
@@ -180,7 +180,7 @@ f<sub>c</sub> が 1 kHz 前後のフィルタなら、おすすめの順は次�
 | --- | --- | --- | --- |
 | 〜100 kHz (音の帯) | AD の Network | 発振器 + 2 ch のオシロ。数百 Hz までならテスター | VNA・tinySA (下限の外) |
 | 100 kHz〜数 MHz | AD の Network (上は 9 MHz ほどで AD 自身の帯域が効く。AD の教科書の 5-8) | VNA。回路を 50 Ω の入出力で組み直す (下の「VNA で見る」) | テスター |
-| 数 MHz〜6.3 GHz | VNA (LiteVNA64) | tinySA と信号源 (VNA の CH0 など。NanoVNA の教科書の第 11 章)。800 MHz より上は tinySA Ultra の Ultra モード | AD (帯域の外)、ブレッドボード (数十 MHz から板の寄生が効く) |
+| 数 MHz〜6.3 GHz | VNA (LiteVNA64) | tinySA と信号源 (VNA の CH0 など。NanoVNA の教科書の第 11 章)。800 MHz より上は tinySA Ultra の Ultra モード | AD (帯域の外)、ブレッドボード (数十 MHz からブレッドボードの寄生が効く) |
 
 以下では、上の 3 つの計器 (Network・Spectrum・VNA) で実際に見る。
 
@@ -213,7 +213,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/05-rc-filter-3.svg)
 
 ```breadboard
-title: 図6 図3 の板に Analog Discovery をつなぐ
+title: 図6 図3 の基板に Analog Discovery をつなぐ
 board: half
 parts:
   R1: resistor c5 c10 1.5k
@@ -394,7 +394,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/05-rc-filter-4.svg)
 
-C1 は 10 nF (103) のセラミックコンデンサ。板へは SMA とワニ口 (かピン) のケーブル 2 本で
+C1 は 10 nF (103) のセラミックコンデンサ。ブレッドボードへは SMA とワニ口 (かピン) のケーブル 2 本で
 つなぎ、2 本の GND は C1 の GND 側の同じ列に集める。ハイパスは C1 を CH0 と CH1 の間に
 直列に入れ、GND は 2 本のケーブルの GND どうしをつなぐだけにする。
 
@@ -430,8 +430,8 @@ markers:
 | 637 kHz (ローパスの f<sub>c</sub>) | −3.01 dB | −0.26 dB |
 | 6.37 MHz | −20.05 dB | 0.00 dB |
 
-ブレッドボードの目安 (板の上の回路は 3 MHz 以下) を超える **3 MHz より上の値は、
-板の浮遊インダクタンス・浮遊容量を含み、上の計算値はおおよその目安** として読む
+ブレッドボードの目安 (ブレッドボードの上の回路は 3 MHz 以下) を超える **3 MHz より上の値は、
+ブレッドボードの浮遊インダクタンス・浮遊容量を含み、上の計算値はおおよその目安** として読む
 (6.37 MHz の行が該当する。浮遊の影響は数十 MHz でいっそう大きくなる)。
 
 分かること:
@@ -441,7 +441,7 @@ markers:
 - **計器をつなぐと、計器の抵抗も回路の一部になる**。1.5 kΩ のフィルタを 50 Ω の
   計器で測れないのはこのため。AD の CH1・CH2 の入力は 1 MΩ なので、図5 では無視できた
 - Stop を 30 MHz まで広げると、ローパスの S21 が十数 MHz あたりで底を打って戻り始める。
-  C1 の足とブレッドボードのインダクタンス (10 nH ほど) と C1 の直列共振で、
+  C1 のピンとブレッドボードのインダクタンス (10 nH ほど) と C1 の直列共振で、
   その先はコンデンサとして働かない (NanoVNA の教科書の 4-2)
 
 ## 出典

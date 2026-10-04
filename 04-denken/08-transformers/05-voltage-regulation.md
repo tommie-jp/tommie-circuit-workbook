@@ -58,14 +58,14 @@ notes:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/05-voltage-regulation.svg)
 
 - W1 は AD の波形発生器 (Wavegen)。1 kHz、振幅 2 V。1 次にシャントは入れない (W1 の出力抵抗はほぼ 0 Ω なので、V1 は負荷によらず 2 V)
-- S1 は RL をつなぐか外すか。実物ではスイッチを使わず、RL の片足を抜き挿しする
+- S1 は RL をつなぐか外すか。実物ではスイッチを使わず、RL の片ピンを抜き挿しする
 - M1 (CH1) は 2 次の端子の電圧 (V2)。S1 を開けば V20、閉じれば V2n を読む。M2 (CH2) は 1 次 (V1) で、2 V のままかを見る
 - RL は 8 Ω (16 Ω を 2 本並列、このトランスの定格の負荷)。軽い負荷として 33 Ω・16 Ω でも測る
 
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードと Analog Discovery (RL の片足を抜き挿しする)
+title: 図2 ブレッドボードと Analog Discovery (RL の片ピンを抜き挿しする)
 # 上のブロックの 15・18 列が 1 次、下のブロックの 15・18 列が 2 次
 board: half
 parts:
@@ -94,7 +94,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/breadboard/05-voltage-regulation.svg)
 
 - 配線は 8-4 と同じ。RL は 16 Ω の 2 本 (RL1 を h 行、RL2 を j 行) で、15・18 列の下ブロックに挿すと並列の 8 Ω になる
-- 無負荷を測るときは RL1・RL2 の 18 列側の足を抜く (図1 の S1 を開くのに当たる)。
+- 無負荷を測るときは RL1・RL2 の 18 列側のピンを抜く (図1 の S1 を開くのに当たる)。
   33 Ω・16 Ω のときは RL1 の所に 1 本だけ挿す
 - CH1 (1+/1−) は 2 次の両端 (18 列と 15 列、i 行)、CH2 (2+) は 1 次の上 (15 列)、2− は青レール
 

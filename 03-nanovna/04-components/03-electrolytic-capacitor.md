@@ -34,7 +34,7 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/03-electrolytic-capacitor.svg)
 
-C1 は極性がある。先に書いた足 (J1 側) が +。
+C1 は極性がある。先に書いたピン (J1 側) が +。
 
 ## 実体配線図
 

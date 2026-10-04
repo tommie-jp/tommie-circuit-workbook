@@ -104,7 +104,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/breadboard/03-1db-compression.svg)
 
-9-2 と同じ配置。9-2 の板をそのまま使い、振幅だけを Wavegen 側で変えていく。
+9-2 と同じ配置。9-2 のブレッドボードをそのまま使い、振幅だけを Wavegen 側で変えていく。
 
 ## 計器の設定
 

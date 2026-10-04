@@ -61,7 +61,7 @@ wires:
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/07-lead-inductance.svg)
 
 i6〜i9 (3 穴ぶん、2.54 mm 間隔で約 0.76 cm) を裸銅線でまたぐ。3-1 の R1 の
-足の長さとほぼ同じで、**「部品を挿すと本当は何が増えるか」**を、部品そのものを
+ピンの長さとほぼ同じで、**「部品を挿すと本当は何が増えるか」**を、部品そのものを
 外して確かめる形。
 
 直線の導線のインダクタンスは近似式 L ≈ (µ₀l / 2π)(ln(2l/r) − 0.75) で見積もれる。

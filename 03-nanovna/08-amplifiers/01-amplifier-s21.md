@@ -163,7 +163,7 @@ wires:
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/perfboard/01-amplifier-s21.svg)
 
-- Q1 は変換基板に載せた TO-92 (`transistor` は 3 本足)。足の並びは 2SC1815 の
+- Q1 は変換基板に載せた TO-92 (`transistor` は 3 ピン)。ピンの並びは 2SC1815 の
   実物 (1 = E、2 = C、3 = B) に合わせて配線する
 - Vcc は 5 V (USB の 5 V か、単 3 電池 3 本の 4.5 V)。4.5 V なら Ic ≈ 3.5 mA で、
   S21 は 1 MHz で 1.6 dB ほど小さくなる (計算値。30 MHz ではほとんど変わらない)

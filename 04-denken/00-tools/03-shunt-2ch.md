@@ -74,7 +74,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/breadboard/03-shunt-2ch.svg)
 
-- Rs と R1 は 10 列でつながる直列 (Rs の右足と R1 の左足が同じ列)
+- Rs と R1 は 10 列でつながる直列 (Rs の右リードと R1 の左リードが同じ列)
 - CH2 (2+/2-) は Rs の両端 (5 列と 10 列) の差動入力。**GND にはつながない**
   (つなぐと負荷側の電圧が GND に落ちる)
 - CH1 (1+) は R1 の左端 (10 列)。1− は GND レールへ

@@ -146,7 +146,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/02-series-parallel-2.svg)
 
-- AD の Supplies V+ = 5 V を電源に使う。電流は直列で 1.67 mA、並列で 7.5 mA で、各レール約 50 mA (USB 給電で 250 mW) に収まる。板の電流もブレッドボードの範囲 (1 穴 200 mA) に収まる
+- AD の Supplies V+ = 5 V を電源に使う。電流は直列で 1.67 mA、並列で 7.5 mA で、各レール約 50 mA (USB 給電で 250 mW) に収まる。ブレッドボードの電流もブレッドボードの範囲 (1 穴 200 mA) に収まる
 - 図4 は 12 列が節点 (電源と AM0 の先。d 行の橙の線で 21 列へ延ばす)。
   AM1 を介して R1 が、AM2 を介して R2 がそれぞれ GND に落ちる。AM0 が全電流、AM1・AM2 が枝の電流をそのまま示す
 

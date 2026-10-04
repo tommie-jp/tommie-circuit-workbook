@@ -88,7 +88,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/breadboard/06-tracer-ic-vce.svg)
 
-- Q1 の実際の足の並びは平らな面を見て E・C・B。図のとおり左から B・C・E
+- Q1 の実際のピンの並びは平らな面を見て E・C・B。図のとおり左から B・C・E
   (h10〜h12) に挿すには平らな面を奥 (a〜e 側) に向ける (9-1 と同じ 2SC1815)。
   Q1 と Rb (g6〜g10、電源側を +b へ) は下ブロックに置き、コレクタ (11 列) だけを
   溝越しの灰の線 (`e11 -- f11`) で上ブロックの Rs へ渡す。エミッタ (12 列) は

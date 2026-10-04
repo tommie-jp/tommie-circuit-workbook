@@ -53,7 +53,7 @@ wires:
 
 ## 実体配線図
 
-パッドは 10 MHz 以上を測るので、ブレッドボードではなく perfboard に端面 SMA で組む (0-3 の図2 と同じ板、3-5)。
+パッドは 10 MHz 以上を測るので、ブレッドボードではなく perfboard に端面 SMA で組む (0-3 の図2 と同じ基板、3-5)。
 J1 に NanoVNA の CH0 のケーブルを、J2 に tinySA の RF のケーブルを付ける。
 
 ```perfboard
@@ -85,7 +85,7 @@ wires:
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/perfboard/04-nanovna-output.svg)
 
-CH0 の出力は 0 dBm 以下 (1 mW、約 6.3 mA 相当) なので、板に流れる電流は数 mA 以下で、1 穴 200 mA の範囲に収まる。
+CH0 の出力は 0 dBm 以下 (1 mW、約 6.3 mA 相当) なので、ユニバーサル基板に流れる電流は数 mA 以下で、1 穴 200 mA の範囲に収まる。
 抵抗は 0.25 W 品でよい。
 
 ## 計器の設定

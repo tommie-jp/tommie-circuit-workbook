@@ -53,11 +53,11 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/09-sma-repeatability.svg)
 
-2 つ目の測る物は 3-6 のスルー治具 (図は 3-6 の図 2。5×7 cm の板の幅いっぱい)。
+2 つ目の測る物は 3-6 のスルー治具 (図は 3-6 の図 2。5×7 cm のユニバーサル基板の幅いっぱい)。
 
 ## 実体配線図
 
-3-4 の Load の板をそのまま使う。
+3-4 の Load のユニバーサル基板をそのまま使う。
 
 ```perfboard
 board:
@@ -90,7 +90,7 @@ wires:
 | 校正 | SOLT。ケーブルの先で。**校正の後はケーブルを動かさない** (手順 3 だけわざと曲げる) |
 | 表示 | Load は S11 の Log Mag と Smith、スルーは S21 の位相と S11 の Log Mag |
 
-**1. 自作 Load** — 見えるはずの画面。R1・R2 の足とパターンで 2 nH が残る模型
+**1. 自作 Load** — 見えるはずの画面。R1・R2 のピンとパターンで 2 nH が残る模型
 (1-7 の自作の Load の例と同じ値)。
 
 ```vna

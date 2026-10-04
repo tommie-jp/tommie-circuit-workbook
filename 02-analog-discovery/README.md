@@ -9,8 +9,8 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 ガイドを隣に開いて進められる。第 8 章でブレッドボードの限界を測り、第 9 章から
 応用 (アンプ・電源・自動化・混合信号)。
 
-- **板の印**: BB = ブレッドボード (10 MHz まで)、PF = perfboard (それより上)、
-  — = 板を使わない
+- **基板の印**: BB = ブレッドボード (10 MHz まで)、PF = perfboard (それより上)、
+  — = 基板を使わない
 - **機種の印**: AD3 = Analog Discovery 3 でしかできない題 (CZT・25 MHz の
   インピーダンスなど)。本文に AD2 での代わりのやり方を書く。印の無い題は AD2 でも AD3 でも同じ
 - **安全**: 入力は ±25 V まで。電源は USB 給電で 1 系統 250 mW まで。
@@ -41,7 +41,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 ## 第 0 章 道具と安全
 
-| # | 題 | 段 | 板 | 機種 |
+| # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 0-1 | [接続と極性 — ワイヤの色、1+ / 1- の差動入力、GND を共通に](00-tools/01-connections.md) | 必須 | BB | |
 | 0-2 | [入力範囲 ±25 V と電源の限界 — 電流は直列抵抗で決める](00-tools/02-input-range-power-limits.md) | 必須 | BB | |
@@ -56,7 +56,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 ## 第 1 章 WaveForms の基本
 
-| # | 題 | 段 | 板 | 機種 |
+| # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 1-1 | [Supplies — +5 V と −5 V を出して電圧計で読む](01-waveforms/01-supplies.md) | 必須 | BB | |
 | 1-2 | [1 kHz の正弦波を出してオシロで見る (最初の 1 本)](01-waveforms/02-first-sine.md) | 必須 | BB | |
@@ -77,7 +77,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 ## 第 2 章 オシロスコープ
 
-| # | 題 | 段 | 板 | 機種 |
+| # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 2-1 | [トリガの基本 — エッジ・レベル・ホールドオフ](02-oscilloscope/01-trigger-basics.md) | 必須 | BB | |
 | 2-2 | [測定 (Measurements) — Vpp・RMS・周波数・デューティ](02-oscilloscope/02-measurements.md) | 必須 | BB | |
@@ -110,7 +110,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 ## 第 3 章 波形発生器
 
-| # | 題 | 段 | 板 | 機種 |
+| # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 3-1 | [正弦・方形・三角・ノコギリ・DC と振幅・オフセット](03-wavegen/01-basic-waveforms.md) | 必須 | BB | |
 | 3-2 | [周波数掃引 (Sweep) をオシロで追う](03-wavegen/02-sweep.md) | 必須 | BB | |
@@ -133,7 +133,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 ## 第 4 章 FFT とスペクトラム
 
-| # | 題 | 段 | 板 | 機種 |
+| # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 4-1 | [正弦波の FFT — 基本波と高調波](04-spectrum/01-sine-fft.md) | 必須 | BB | |
 | 4-2 | [方形波の高調波 (奇数次)](04-spectrum/02-square-harmonics.md) | 必須 | BB | |
@@ -158,7 +158,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 ## 第 5 章 ネットワークアナライザ
 
-| # | 題 | 段 | 板 | 機種 |
+| # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 5-1 | [RC ローパスのボード線図](05-network/01-rc-lowpass-bode.md) | 必須 | BB | |
 | 5-2 | [RC ハイパス](05-network/02-rc-highpass.md) | 必須 | BB | |
@@ -185,7 +185,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 ## 第 6 章 インピーダンス測定
 
-| # | 題 | 段 | 板 | 機種 |
+| # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 6-1 | [抵抗の \|Z\| と位相 — 基準抵抗で測る仕組み](06-impedance/01-resistor-z-phase.md) | 必須 | BB | |
 | 6-2 | [コンデンサの C と ESR](06-impedance/02-capacitor-c-esr.md) | 必須 | BB | |
@@ -206,7 +206,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 ## 第 7 章 ロジックとプロトコル
 
-| # | 題 | 段 | 板 | 機種 |
+| # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 7-1 | [ロジックアナライザで 555 と 4017 を見る](07-logic/01-logic-555-4017.md) | 必須 | BB | |
 | 7-2 | [パターンジェネレータでカウンタを叩く](07-logic/02-pattern-counter.md) | 必須 | BB | |
@@ -229,7 +229,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 ## 第 8 章 ブレッドボードの限界と perfboard
 
-| # | 題 | 段 | 板 | 機種 |
+| # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 8-1 | [ジャンパ 1 本のスルーの S21 を 100 kHz〜10 MHz](08-breadboard-limits/01-jumper-s21.md) | 必須 | BB | |
 | 8-2 | [隣の列との容量 (数 pF) を測る](08-breadboard-limits/02-row-capacitance.md) | 必須 | BB | |
@@ -248,7 +248,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 ## 第 9 章 アンプの特性
 
-| # | 題 | 段 | 板 | 機種 |
+| # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 9-1 | [エミッタ接地の利得と帯域 (NA)](09-amplifiers/01-common-emitter-bandwidth.md) | 必須 | BB | |
 | 9-2 | [オペアンプの GBW とスルーレート](09-amplifiers/02-opamp-gbw-slew-rate.md) | 必須 | BB | |
@@ -269,7 +269,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 ## 第 10 章 電源と雑音
 
-| # | 題 | 段 | 板 | 機種 |
+| # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 10-1 | [リップルを FFT で](10-power-noise/01-ripple-fft.md) | 必須 | BB | |
 | 10-2 | [負荷過渡応答](10-power-noise/02-load-transient.md) | 入門 | BB | |
@@ -282,7 +282,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 ## 第 11 章 自動化
 
-| # | 題 | 段 | 板 | 機種 |
+| # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 11-1 | [Script で掃引と測定を自動化 (1-5 の続き)](11-automation/01-script-sweep.md) | 必須 | BB | |
 | 11-2 | [WaveForms SDK (Python) の最初](11-automation/02-sdk-first-steps.md) | 入門 | BB | |
@@ -295,7 +295,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 ## 第 12 章 デジタルと混合信号
 
-| # | 題 | 段 | 板 | 機種 |
+| # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 12-1 | Pico の ADC の特性 (直線性・雑音) | 中級 | BB | |
 | 12-2 | PWM + RC で DAC | 中級 | BB | |

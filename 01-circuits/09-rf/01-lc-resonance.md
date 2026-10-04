@@ -121,7 +121,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/01-lc-resonance.svg)
 
 - AD3 の W1 (Wavegen) が図1 の V1。正弦波を出し、周波数を 2kHz〜32kHz の間で動かす (中身は部品表)。オシロは Scope の 1 (CH1) と 2 (CH2)
-- 上の半分が共振の輪。列 3 に W1 (b3)・CH1 の 1+ (a3)・L1 の左の足、
+- 上の半分が共振の輪。列 3 に W1 (b3)・CH1 の 1+ (a3)・L1 の左のピン、
   列 10 に C1・R1・CH2 (a10) が集まる。R1 の右の端 (列 14) は上の − レールへ
 - 列 10 の輪の電圧を青の線で下の半分へ渡し、R2 で Q1 のベース (列 15) に入れる。
   2SC1815 は平らな面を見て左から E・C・B。図のとおり左から B・C・E に挿すには、

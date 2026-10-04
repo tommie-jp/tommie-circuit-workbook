@@ -137,7 +137,7 @@ wires:
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/perfboard/09-saver-calibration-averaging.svg)
 
 J1 に CH0、J2 に CH1 のケーブルをつなぐ。43・11・43 Ω の T 型パッドを 2 段つなぎ、2 本の 11 Ω の下を GND の線でつなぐ。
-抵抗は 0.25 W 品。NanoVNA の出力は 0 dBm 以下 (1 mW 以下) で、板に流れる電流は数 mA 以下に収まる。
+抵抗は 0.25 W 品。NanoVNA の出力は 0 dBm 以下 (1 mW 以下) で、ユニバーサル基板に流れる電流は数 mA 以下に収まる。
 
 ## 掃引の設定
 

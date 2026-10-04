@@ -88,7 +88,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/13-regulations/breadboard/01-grounding-effect.svg)
 
 - Rleak (3〜7 列)、Rbody (15〜19 列) が直列。7 列 (人体側の節点) は橙の線で
-  15 列へ、3 列 (V+) は赤の線で 11 列へ延ばし、AD の足の並びどおりに左から挿す
+  15 列へ、3 列 (V+) は赤の線で 11 列へ延ばし、AD のピンの並びどおりに左から挿す
 - S1 + Rground (15〜24 列) は 15 列 (人体側の節点) から分かれて 24 列から
   GND (青レール) へ戻る、Rbody と並列の枝。S1 を挿すと接地ありになる
 - CH1 (1+/1−) が Rbody の両端 (人体電圧)、CH2 (2+/2−) が Rleak の両端

@@ -70,7 +70,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードと Analog Discovery (板は配線の中継)
+title: 図2 ブレッドボードと Analog Discovery (ブレッドボードは配線の中継)
 # 上の赤レール = 5 V (USB)、青レール = GND
 board: half
 parts:
@@ -116,7 +116,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/breadboard/07-stepper-motor.svg)
 
-- 板には部品を挿さず、線の中継と電源の分配に使う。10・12・14・16 列が IN1〜IN4 (上のブロックで基板へ、溝を渡って下のブロックで AD へ)
+- ブレッドボードには部品を挿さず、線の中継と電源の分配に使う。10・12・14・16 列が IN1〜IN4 (上のブロックで基板へ、溝を渡って下のブロックで AD へ)
 - 基板の + を赤レール (5 V)、− を青レール。上下の青レールは 29 列でつなぎ、AD の GND も同じ GND にする
 - CH1 (1+) は i10 (IN1)、CH2 (2+) は i12 (IN2)
 

@@ -21,7 +21,7 @@ const START = '<!-- toc:start -->';
 const END = '<!-- toc:end -->';
 
 /** front matter の欄 → 目次の表の見出し。 */
-const COLUMN_NAMES = { era: '印', board: '板', device: '機種' };
+const COLUMN_NAMES = { era: '印', board: '基板', device: '機種' };
 
 const WRITTEN = '済';
 

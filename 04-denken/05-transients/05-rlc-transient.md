@@ -87,7 +87,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/breadboard/05-rlc-transient.svg)
 
 - 5〜10 列が R1、13〜18 列が L1 (軸物のインダクタ)、21〜24 列が C1 (フィルム)。
-  緑の線で順につなぎ、C1 の右の足 (24 列) を GND のレールへ
+  緑の線で順につなぎ、C1 の右のピン (24 列) を GND のレールへ
 - CH1 (1+) は入力 (5 列)、CH2 (2+) は C1 の上の端 (21 列)。1− と 2− は GND のレール
 - R1 を 100 Ω → 620 Ω → 2.2 kΩ と差し替えて 3 回測る。ほかは動かさない
 

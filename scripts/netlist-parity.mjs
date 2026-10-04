@@ -3,7 +3,7 @@
  * ネットリストが一致するかを確かめる。
  *
  * **図ごとの check は「読めた・つながった」しか見ない。** ブレッドボードで SIP3 の足を
- * 取り違えても (GND が浮き、出力が GND)、板の図だけなら筋の通った回路として通る。
+ * 取り違えても (GND が浮き、出力が GND)、実体配線図だけなら筋の通った回路として通る。
  * そこで両方の図にある部品だけを残し、ネットごとの「乗っている部品の組」を比べる。
  * 足の名前は図ごとに違う (`U1.source` と `U1.S`) ので、部品の単位で比べる。
  *
@@ -106,7 +106,7 @@ function excuseExtraPins(mine, theirs, theirAll, extra) {
   return { mine: kept, theirs: rest };
 }
 
-/** 回路図と板の図の違い。`onlyCircuit` `onlyBoard` は部品の組 (`C5,FL1,L2`)。 */
+/** 回路図と実体配線図の違い。`onlyCircuit` `onlyBoard` は部品の組 (`C5,FL1,L2`)。 */
 export function compareDiagrams(circuit, board) {
   const onlyIn = (a, b) => [...partsOf(a)].filter((part) => WIRE_LIKE.test(part) && !partsOf(b).has(part));
   const drawn = compareAsDrawn(circuit, board);
@@ -135,7 +135,7 @@ function compareAsDrawn(circuit, board) {
 const differences = (result) => result.onlyCircuit.length + result.onlyBoard.length;
 
 /**
- * 板の図ごとに組む回路図を選んで比べる。共通の部品が多い回路図、同数なら違いの少ない回路図
+ * 実体配線図ごとに組む回路図を選んで比べる。共通の部品が多い回路図、同数なら違いの少ない回路図
  * (それでも同じなら前にある方)。共通の部品が 2 つ未満なら比べない (計器だけの図など)。
  */
 export function pairBoards(diagrams) {
@@ -169,7 +169,7 @@ export function judge(results, allow) {
 
 const titleOf = (lines) => (lines.map((line) => /^\s*title:\s*(.*)$/.exec(line)).find(Boolean) ?? [, '(題なし)'])[1].trim();
 
-/** 回路図と板の図のある題について、図を出てくる順に集め、道具ごとに 1 度だけ check を回して読む。 */
+/** 回路図と実体配線図のある題について、図を出てくる順に集め、道具ごとに 1 度だけ check を回して読む。 */
 function readDiagrams(reads) {
   const figures = [];
   for (const read of reads) {
@@ -209,9 +209,9 @@ function compareAll(reads) {
 }
 
 const describe = (result) => [
-  `${result.file}\n    板の図: ${result.board}\n    回路図: ${result.circuit}`,
+  `${result.file}\n    実体配線図: ${result.board}\n    回路図: ${result.circuit}`,
   ...result.onlyCircuit.map((net) => `    回路図だけ: ${net}`),
-  ...result.onlyBoard.map((net) => `    板だけ    : ${net}`),
+  ...result.onlyBoard.map((net) => `    実体配線図だけ: ${net}`),
 ].join('\n');
 
 function main(args) {
@@ -221,7 +221,7 @@ function main(args) {
   const { failures, allowed, stale } = judge(results, allow);
 
   if (verbose) for (const result of allowed) console.log(`(許可済み) ${describe(result)}`);
-  for (const result of failures) console.error(`--- 回路図と板の図のネットが合わない\n${describe(result)}`);
+  for (const result of failures) console.error(`--- 回路図と実体配線図のネットが合わない\n${describe(result)}`);
   for (const permit of stale) {
     console.error(`--- 許可が古い (もう違いが無いか、題・図が無い): ${permit.file} / ${permit.board} — ${ALLOW_FILE} から消す`);
   }
@@ -229,7 +229,7 @@ function main(args) {
     console.error(`\n合わない組 ${failures.length}、古い許可 ${stale.length}。図を直すか、見かけの違いなら理由を書いて ${ALLOW_FILE} に足す`);
     process.exit(1);
   }
-  console.log(`回路図と板の図を ${results.length} 組比べた。許可済みの違い ${allowed.length} 組のほかは一致`);
+  console.log(`回路図と実体配線図を ${results.length} 組比べた。許可済みの違い ${allowed.length} 組のほかは一致`);
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) main(process.argv.slice(2));

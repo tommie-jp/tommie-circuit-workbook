@@ -88,7 +88,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/breadboard/01-common-emitter-bandwidth.svg)
 
-- `Q1` の実際の足の並びは平らな面を見て E・C・B。図のとおり左から B・C・E
+- `Q1` の実際のピンの並びは平らな面を見て E・C・B。図のとおり左から B・C・E
   (g20・g21・g22) に挿すには**平らな面を奥 (a〜e 側) に向ける**
 - **トランジスタの胴は下ブロックの数列ぶんを占める**ので、結合・分圧・負荷 (Cin・R1・Rc)
   は上ブロックに置き、ベース (20 列)・コレクタ (21 列) を溝を跨ぐ短い線

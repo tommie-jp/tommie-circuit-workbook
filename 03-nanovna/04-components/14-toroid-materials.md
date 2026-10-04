@@ -54,7 +54,7 @@ L = A<sub>L</sub> × 巻き数²。巻線はポリウレタン線 0.4 mm を 10 
 board:
   size: 7x5cm
   slots: on
-title: 図2 直列治具にトロイダルコイル (3-1 と同じ板)
+title: 図2 直列治具にトロイダルコイル (3-1 と同じユニバーサル基板)
 points:
   GND: j0
 parts:
@@ -70,7 +70,7 @@ wires:
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/14-toroid-materials.svg)
 
 - 図の L1 は軸物のコイルの形で描かれる (フェンスにトロイダルの形が無い)。実物はコアを
-  板に寝かせ、巻線の両端を i6 と i9 に挿す
+  ユニバーサル基板に寝かせ、巻線の両端を i6 と i9 に挿す
 - 3 つのコアで巻線の引き出しの長さをそろえる。引き出しの長さの違いは、そのまま
   インダクタンスの違いになる (4-7)
 

@@ -73,7 +73,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/breadboard/02-motor-as-generator.svg)
 
-- MOT (モータ) だけを板の外の機器として描く。電源も他の部品も無い
+- MOT (モータ) だけをブレッドボードの外の機器として描く。電源も他の部品も無い
 - AD の CH1 (1+・1−) を下のブロックの 5 列・8 列 (f 行) につなぎ、モータの両端をそのまま読む。
   Wavegen も Supplies も使わない (電源は無く、指で回す)
 

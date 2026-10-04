@@ -114,7 +114,7 @@ wires:
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/01-lc-lowpass.svg)
 
-- e 行が信号の通り道。6 つのコンデンサの下側の足 (f 行) を h 行の GND バスへ落とす
+- e 行が信号の通り道。6 つのコンデンサの下側のピン (f 行) を h 行の GND バスへ落とす
 - 回路図の C2・C3 (200 pF) は、それぞれ 100 pF 2 個 (C2a・C2b、C3a・C3b) の並列
 - コイルは軸物 (`inductor`)。330 nH と 560 nH は市販のカラーコード付きインダクタで買える
 

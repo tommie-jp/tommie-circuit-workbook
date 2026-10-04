@@ -160,7 +160,7 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/circuit/02-transmission-line-model-2.svg)
 
-- 板の変え方: Rline を 12〜16 列から抜き、3 列からの黄の線を 12 列でなく 16 列へ挿す。
+- ブレッドボードの変え方: Rline を 12〜16 列から抜き、3 列からの黄の線を 12 列でなく 16 列へ挿す。
   4 列から青レールへの黒い線を抜き、代わりに Rline を 4 列と青レールの間に挿す
 - CH1 の先端は 8 列 (Rload の上)、CH2 の先端は 4 列 (Rline の上)。グランドクリップは 2 本とも青レール
 - I は CH2 ÷ 10 Ω (図1 と同じ)。受電端電圧 Vr は Math の CH1 − CH2。Rload も Rline も抵抗なので、

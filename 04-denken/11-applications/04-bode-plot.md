@@ -85,7 +85,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/11-applications/breadboard/04-bode-plot.svg)
 
-- 11-3 の板のまま。5 列が入力 (W1 と CH1)、14 列が出力 (CH2)
+- 11-3 のブレッドボードのまま。5 列が入力 (W1 と CH1)、14 列が出力 (CH2)
 - R2 を抜くと K = 1・T = 2.0 ms (f_c = 79.6 Hz) の回路になる。平らな所が 0 dB に上がり、
   折れ点が左へ半分ずれる
 

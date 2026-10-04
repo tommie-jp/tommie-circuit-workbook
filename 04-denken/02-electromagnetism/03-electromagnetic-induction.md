@@ -65,7 +65,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/breadboard/03-electromagnetic-induction.svg)
 
-- 板に挿す部品は無い。コイルの 2 本の端を 5 列と 8 列にそれぞれつなぎ、AD の 1+ と 1− も同じ列 (f 行) に挿す
+- ブレッドボードに挿す部品は無い。コイルの 2 本の端を 5 列と 8 列にそれぞれつなぎ、AD の 1+ と 1− も同じ列 (f 行) に挿す
   (コイルの端を AD の 1+ と 1− に直接つないでもよい)
 - 電源も発振器も使わない。コイルが磁束の変化を受けて作る電圧を、Scope の CH1 が読むだけ
 

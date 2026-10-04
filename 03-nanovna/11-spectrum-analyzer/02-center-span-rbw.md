@@ -84,7 +84,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/breadboard/02-center-span-rbw.svg)
 
-- 板を流れる電流は約 0.95 mA で、ブレッドボードの範囲 (1 穴 200 mA) に収まる
+- ブレッドボードを流れる電流は約 0.95 mA で、ブレッドボードの範囲 (1 穴 200 mA) に収まる
 - **グランドを先に**つなぎ、外すときは最後に外す
 
 ## 計器の設定

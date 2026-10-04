@@ -56,7 +56,7 @@ test('counts the plan cumulatively, counts the written ones, and lists only chap
 test('shows the columns each book asks for', () => {
   const toc = bookToc(nanovna, [written(nanovna, 3, 1, { device: 'V2', board: 'PF' })]);
 
-  assert.match(toc, /\| # \| 題 \| 段 \| 機種 \| 板 \|/);
+  assert.match(toc, /\| # \| 題 \| 段 \| 機種 \| 基板 \|/);
   assert.match(toc, /\| 3-1 \| .* \| 必須 \| V2 \| PF \|/);
 });
 
@@ -90,8 +90,8 @@ test('names each chapter of the fourth book after its exam subject', () => {
   assert.equal(denken.chapters.length, 14);
   assert.ok(denken.chapters.slice(1, 8).every((chapter) => chapter.title.startsWith('理論 — ')));
   assert.equal(denken.chapters.at(-1).title.split(' — ')[0], '法規');
-  // 目次の欄は板だけ (科目は章の名前で分かる)。
-  assert.match(toc, /\| # \| 題 \| 段 \| 板 \|/);
+  // 目次の欄は基板だけ (科目は章の名前で分かる)。
+  assert.match(toc, /\| # \| 題 \| 段 \| 基板 \|/);
   assert.ok(toc.includes('## 第 3 章 理論 — 交流回路'));
 });
 

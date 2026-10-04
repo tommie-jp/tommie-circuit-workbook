@@ -62,7 +62,7 @@ notes:
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/05-ferrite-bead.svg)
 
 - ビーズは**リード付き (アキシャル) のフェライトビーズ**を使う。面実装 (SMD) の
-  ビーズはユニバーサル基板の穴に挿せない。足は 4 穴分 (i6〜i9) に曲げて挿す
+  ビーズはユニバーサル基板の穴に挿せない。ピンは 4 穴分 (i6〜i9) に曲げて挿す
 - J2 には **SMA の短絡プラグ**を付ける。ビーズの先を GND へ落とし、CH0 から見た
   1 端子 (S11) で部品の Z を読むため。CH1 へはつながない
 

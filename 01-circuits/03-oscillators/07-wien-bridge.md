@@ -69,7 +69,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/circuit/07-wien-bridge.svg)
 
 - 図1 左上の **+5V と −5V は、AD3 の Supplies の V+ と V−**。U1 の PIN 8 が +5V、PIN 4 が −5V
-  (回路図の OP アンプには電源の足を描かないので、記号に注記を添えた)。
+  (回路図の OP アンプには電源のピンを描かないので、記号に注記を添えた)。
   ほかの GND の記号は AD3 の GND。各レールの電流は、LM358 が 1 回路あたり最大 0.6 mA (5 V、
   データシートの値) で、2 回路入りでも数 mA に収まる。AD3 の Supplies の限度 (各レール 50 mA、
   USB 給電で 250 mW) に十分収まる。電池で作るなら 006P (9 V) を 2 本と 7805・7905 でもよい

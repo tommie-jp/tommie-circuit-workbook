@@ -86,7 +86,7 @@ wires:
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/perfboard/06-rx-polar.svg)
 
 J1 に NanoVNA の CH0 のケーブルをつなぐ。R1 (22 Ω)・L1 (100 nH)・C1 (100 pF) を中心導体から GND へ直列に並べる。
-L1 は 100 nH のチップかリード付きの小型品 (リードを短く切る)。板に流れる電流は、NanoVNA の出力が 0 dBm 以下なので数 mA 以下で、板の範囲 (1 穴 200 mA) に収まる。
+L1 は 100 nH のチップかリード付きの小型品 (リードを短く切る)。ユニバーサル基板に流れる電流は、NanoVNA の出力が 0 dBm 以下なので数 mA 以下で、ユニバーサル基板の範囲 (1 穴 200 mA) に収まる。
 
 ## 掃引の設定
 

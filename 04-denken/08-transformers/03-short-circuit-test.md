@@ -89,7 +89,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/breadboard/03-short-circuit-test.svg)
 
 - T1 の 2 次リード (下ブロックの 15 列・18 列) と同じ列の空いた穴 (i15・i18) を
-  緑の線 1 本でつなぎ、2 次を短絡する (足の穴そのものには線を挿せないため)
+  緑の線 1 本でつなぎ、2 次を短絡する (ピンの穴そのものには線を挿せないため)
 - それ以外の配線は 8-1・8-2 と同じ。Rs1 は 8-3 用に 100 Ω に戻す
 
 ## 計器の設定
