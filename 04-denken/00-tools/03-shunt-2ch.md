@@ -81,10 +81,27 @@ wires:
 
 ## 計器の設定
 
+この題の計器は Analog Discovery 3 (AD3) の Supplies と Scope。V+ が電源、Scope の CH1 と CH2 が電圧を読む。
+電流は 10 mA 余りで、Supplies の各レール約 50 mA の範囲に収まる。
+
 | 計器 | 設定 |
 | --- | --- |
 | Supplies | V+ = 5 V。Enable してから Master Enable を入れる |
 | Scope | CH1・CH2 とも DC。CH2 の Range は小さめ (200 mV/div 程度) にして分解能を上げる |
+
+```scope
+title: 図3 直流を見る — CH1 (R1) 4.90 V、CH2 (Rs) 104 mV
+time: 1ms/div
+trigger: ch1 rising
+ch1: {wave: dc 4.9V, range: 1V/div, position: -3div}
+ch2: {wave: dc 104mV, range: 20mV/div, position: -2div}
+measure: [avg]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/scope/03-shunt-2ch.svg)
+
+- 直流なので画面は水平線 2 本になり、トリガは掛からない (Mode を Auto にしておく)。CH1 は 4.90 V、CH2 は 104 mV (Measure の Average で読む)。
+  0 V の位置を下げて (CH1 は 3 目盛り、CH2 は 2 目盛り)、2 本の線を画面に入れる。CH2 は 20 mV/div で 104 mV が約 5 目盛り
 
 ### オシロスコープと発振器
 
@@ -102,12 +119,12 @@ AD の CH2 は差動入力なので、Rs の両端 (5 列と 10 列) を 2+ と 
 2 本の先端を 5 列と 10 列に当てて CH1 − CH2 で引く手もここでは使えない。差の 104 mV は 5 V の 2 % で、
 8 bit のオシロ (1 V/div・8 目盛りなら 1 段が約 30 mV) では差が分解能に埋もれる。
 
-そこで **Rs を GND 側へ移す** (図3)。直列の回路では電流はどこでも同じなので、Rs を負荷の下に入れても
+そこで **Rs を GND 側へ移す** (図4)。直列の回路では電流はどこでも同じなので、Rs を負荷の下に入れても
 流れる電流は変わらない。Rs の上の端は GND から 104 mV しか上がらないので、1 本の先端で直に読める。
 試験の図は電流計を電源の + 側に描くことが多いが、直列なら電流計の位置で読みは変わらない。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図4 汎用オシロでの測り方
 style:
   standard: jis
   pitch: 1.2
@@ -126,7 +143,7 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/circuit/03-shunt-2ch-2.svg)
 
-| 図1 (AD) | 図3 (汎用) |
+| 図1 (AD) | 図4 (汎用) |
 | --- | --- |
 | V1 = Supplies の V+ | 安定化電源の + (5 V)。電流制限は 20 mA (流れるのは 10.4 mA) |
 | CH1 (1+ / 1−) = R1 の電圧 | CH1 の先端を R1 の上 (電源の +)。R1 の電圧は Math の CH1 − CH2 |

@@ -59,12 +59,54 @@ wires:
 - R1 = 100 Ω は**振幅 3 V のときの下限ぴったり**の値 (見るべき値で計算する)。
   実際に使うときはもっと大きい値にして余裕を持たせる
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery
+board: half
+parts:
+  R1: resistor c10 c15 100
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery
+    pins: [GND, W1, "1+", "1-"]
+wires:
+  - AD.GND -- -t2 black
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 blue
+  - AD.1- -- -t3 black [h-10]
+  - c15 -- -t15 black
+notes:
+  - text: "テスターの電流レンジ (A1) を 5 列と 10 列の間に挿す。R1 と直列になる"
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/breadboard/01-safety-promise.svg)
+
+- W1 の出力は 5 列へ。テスターのリードを 5 列と 10 列に当てると、電流は W1 → テスター → R1 → GND の順に流れる
+- Scope の 1+ は 5 列 (W1 の出力)、1− は GND のレール。波形の振幅が設定どおりか見る
+- 図の R1 = 100 Ω は下限ぴったりの値。最初は Amplitude 1 V (電流 10 mA) で試し、振幅は 1 V ずつ上げて電流を読む
+- 板を流れる電流は最大 30 mA で、ブレッドボードの 1 穴 200 mA の範囲に収まる
+
 ## 計器の設定
+
+この題の計器は Analog Discovery 3 (AD3) の Wavegen と Scope、それにテスター。Wavegen が試す電源で、Scope が電源の電圧、テスターが電流を読む。
 
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Sine。周波数はどれでもよい (例 1 kHz)。Amplitude は表の値に合わせる |
 | テスター | 交流電流レンジ (mA)。R1 と直列に入れる |
+| Scope | CH1 (1+ / 1−) = W1 の電圧。DC 結合、500 mV/div、200 µs/div。Measure で Amplitude を読む |
+
+```scope
+title: 図3 W1 の波形 (CH1) — 振幅 1 V のとき R1 = 100 Ω に 10 mA
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 1V, range: 500mV/div}
+measure: [vmax, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/scope/01-safety-promise.svg)
 
 ## 見るべき値
 

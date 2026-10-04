@@ -60,19 +60,19 @@ parts:
   R1b: resistor e8 e11 200
   R2: resistor c13 c18 200
   R3: resistor f15 f20 100
-  E1:
+  AD:
     type: device
     at: top
-    label: "電源 5V (E1)"
-    pins: ["+", "-"]
+    label: "Analog Discovery (E1)"
+    pins: [GND, V+]
   E2:
     type: device
     at: top
     label: "電池 3V (E2)"
     pins: ["+", "-"]
 wires:
-  - E1.+ -- c3 red
-  - E1.- -- -t6 black
+  - AD.V+ -- c3 red
+  - AD.GND -- -t6 black
   - b11 -- b13 orange
   - d13 -- f13 green
   - g20 -- -b20 black
@@ -96,7 +96,7 @@ notes:
 
 | 記号 | 部品 | 値 |
 | --- | --- | --- |
-| E1 | 電源 | 5 V (USB の 5 V か AD の Supplies の V+) |
+| E1 | 電源 | 5 V (AD の Supplies の V+。USB の 5 V でも可) |
 | E2 | 電池 | 3 V (単 3 電池 2 本)。2 つの電源を見分けるため、E1 と電圧を変える |
 | R1 | 抵抗 (1/4 W) | 400 Ω — 200 Ω を 2 本直列 (R1a・R1b) |
 | R2 | 抵抗 (1/4 W) | 200 Ω |
@@ -104,9 +104,14 @@ notes:
 
 ## 計器の設定
 
+この題の計器は Analog Discovery 3 (AD3) の Supplies (電源) とテスター。E1 が Supplies の V+、E2 は単 3 電池 2 本。電流は E1 の枝で 8.57 mA で、各レール約 50 mA (USB 給電で 250 mW) に収まる。板を流れる電流も最大 15.7 mA で、ブレッドボードの 1 穴 200 mA に収まる。
+
 | 計器 | 設定 |
 | --- | --- |
+| Supplies | V+ = 5 V (E1)。Enable してから Master Enable を入れる |
 | テスター | 直流電流レンジ (mA)。3 か所の隙間 (A1・A2・A3) に順に直列で入れる |
+
+この題はオシロの図を付けない — 直流の量だけを見る (テスターの読みで足りる)。
 
 ## 見るべき値
 

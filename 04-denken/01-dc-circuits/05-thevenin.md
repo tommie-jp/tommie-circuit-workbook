@@ -89,14 +89,16 @@ parts:
     at: bottom
     label: "テスター (mA)"
     pins: ["+", "-"]
-  E1:
+  AD:
     type: device
     at: top
-    label: "電源 5V"
-    pins: ["+", "-"]
+    label: Analog Discovery
+    pins: [GND, V+, "1+", "1-"]
 wires:
-  - E1.+ -- a5 red
-  - E1.- -- -t7 black
+  - AD.V+ -- a5 red
+  - AD.GND -- -t7 black
+  - AD.1+ -- b10 blue
+  - AD.1- -- -t11 white
   - a10 -- g10 green
   - g15 -- -b15 black
   - -b27 -- -t27 black
@@ -110,6 +112,7 @@ notes:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/05-thevenin.svg)
 
+- AD の Scope の 1+ / 1− を端子 X (10 列) と GND レールに挿してある。テスターの電圧レンジの代わりに V_th・V_load を読める。
 - R1 の右足 (10 列) が端子 X。R2 は緑の線で下段へ渡す
 - S1 (スイッチ) は 10 列と 12 列の間に実物のスイッチとして挿す。開けば V_th
   (端子を開放した状態)、閉じれば R_L がつながった状態になる
@@ -120,11 +123,17 @@ notes:
 
 ## 計器の設定
 
+この題の計器は Analog Discovery 3 (AD3) の Supplies (電源) とテスター。Scope は電圧の読みの代わりに使える。電流は最大 2.2 mA で、各レール約 50 mA (USB 給電で 250 mW) と板の 1 穴 200 mA に収まる。
+
 | 計器 | 設定 |
 | --- | --- |
+| Supplies | V+ = 5 V。Enable してから Master Enable を入れる |
+| Scope | CH1 (1+ / 1−) を端子 X と GND レールの間に。DC 結合で Average が V_th (S1 開) 3.33 V、V_load (S1 閉) 1.67 V |
 | テスター 1 | 直流電圧レンジ。V_th (S1 開放) と V_load (S1 閉) を端子 X-GND で測る |
 | テスター 2 | 抵抗レンジ。電源を外して R_th を測る |
 | テスター 3 | 直流電流レンジ (mA)。図の AM の位置に直列に入れて I_load を測る |
+
+この題はオシロの図を付けない — 直流の量だけを見る (テスターの読みで足りる)。
 
 ## 見るべき値
 

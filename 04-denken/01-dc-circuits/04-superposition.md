@@ -82,14 +82,14 @@ parts:
   R1b: resistor e8 e11 200
   R2: resistor c13 c18 200
   R3: resistor f15 f20 100
-  E1:
+  AD:
     type: device
     at: top
-    label: "電源 5V (E1)"
-    pins: ["+", "-"]
+    label: "Analog Discovery (E1)"
+    pins: [GND, V+]
 wires:
-  - E1.+ -- c3 red
-  - E1.- -- -t6 black
+  - AD.V+ -- c3 red
+  - AD.GND -- -t6 black
   - b11 -- b13 orange
   - d13 -- f13 green
   - g20 -- -b20 black
@@ -113,9 +113,14 @@ notes:
 
 ## 計器の設定
 
+この題の計器は Analog Discovery 3 (AD3) の Supplies (電源) とテスター。E1 が Supplies の V+ (5 V)。E2 を残す測り方では E2 は単 3 電池 2 本 (3 V) で、E1 側 (3 列) を GND レールへ直結する。電流は最大でも 10.7 mA で、各レール約 50 mA (USB 給電で 250 mW) と板の 1 穴 200 mA に収まる。
+
 | 計器 | 設定 |
 | --- | --- |
+| Supplies | V+ = 5 V (E1)。Enable してから Master Enable を入れる |
 | テスター | 直流電流レンジ (mA)。1-3 と同じ隙間で、E1 のみ・E2 のみをそれぞれ測る |
+
+この題はオシロの図を付けない — 直流の量だけを見る (テスターの読みで足りる)。
 
 ## 見るべき値
 

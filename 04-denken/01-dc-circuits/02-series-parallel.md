@@ -83,22 +83,26 @@ board: half
 parts:
   R1: resistor a5 a10 1k
   R2: resistor a12 a17 2k
-  BAT:
+  AD:
     type: device
     at: top
-    label: 電源 5V
-    pins: ["+", "-"]
+    label: Analog Discovery
+    pins: [GND, V+, "1+", "1-"]
 wires:
-  - BAT.+ -- b5 red
+  - AD.V+ -- b5 red
   - b10 -- b12 orange
   - b17 -- -t17 black
-  - BAT.- -- -t7 black
+  - AD.GND -- -t7 black
+  - AD.1+ -- d5 blue
+  - AD.1- -- d10 white
 notes:
   - text: "R1 の両端 (5・10 列) と R2 の両端 (12・17 列) にテスターの電圧レンジを当てる"
   - text: "共通の電流を読むにはここ (10-12 列の橙の線) を外してテスターの電流レンジを挟む"
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/02-series-parallel-1.svg)
+
+- AD の Scope の 1+ / 1− を R1 の両端 (5 列・10 列) に挿してある。テスターの電圧レンジの代わりに R1 の電圧を読める
 
 ```breadboard
 title: 図4 並列のブレッドボード
@@ -121,14 +125,14 @@ parts:
     at: bottom
     label: "テスター (mA、R2)"
     pins: ["+", "-"]
-  BAT:
+  AD:
     type: device
     at: top
-    label: 電源 5V
-    pins: ["-", "+"]
+    label: Analog Discovery
+    pins: [GND, V+]
 wires:
-  - BAT.- -- -t2 black
-  - BAT.+ -- b6 red [h-10]
+  - AD.GND -- -t2 black
+  - AD.V+ -- b6 red [h-10]
   - AM0.+ -- a6 orange
   - AM0.- -- b12 orange
   - d12 -- d21 orange
@@ -142,14 +146,21 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/breadboard/02-series-parallel-2.svg)
 
+- AD の Supplies V+ = 5 V を電源に使う。電流は直列で 1.67 mA、並列で 7.5 mA で、各レール約 50 mA (USB 給電で 250 mW) に収まる。板の電流もブレッドボードの範囲 (1 穴 200 mA) に収まる
 - 図4 は 12 列が節点 (電源と AM0 の先。d 行の橙の線で 21 列へ延ばす)。
   AM1 を介して R1 が、AM2 を介して R2 がそれぞれ GND に落ちる。AM0 が全電流、AM1・AM2 が枝の電流をそのまま示す
 
 ## 計器の設定
 
+この題の計器は Analog Discovery 3 (AD3) の Supplies (電源) とテスター。
+
 | 計器 | 設定 |
 | --- | --- |
+| Supplies | V+ = 5 V。Enable してから Master Enable を入れる |
+| Scope | 図3 の直列で、CH1 (1+ / 1−) を R1 の両端に。DC 結合で Measure の Average が 1.67 V |
 | テスター | 直流電圧レンジ (分圧) と直流電流レンジ (分流) を、図に合わせて当て替える |
+
+この題はオシロの図を付けない — 直流の量だけを見る (テスターの読みで足りる)。
 
 ## 見るべき値
 

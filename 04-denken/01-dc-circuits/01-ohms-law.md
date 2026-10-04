@@ -60,17 +60,19 @@ parts:
     at: bottom
     label: "テスター (mA)"
     pins: ["+", "-"]
-  BAT:
+  AD:
     type: device
     at: top
-    label: 電源 5V
-    pins: ["+", "-"]
+    label: Analog Discovery
+    pins: [GND, V+, "1+", "1-"]
 wires:
-  - BAT.+ -- b3 red
+  - AD.V+ -- b3 red
   - AM.+ -- c3 orange
   - AM.- -- b5 orange
   - b10 -- -t10 black
-  - BAT.- -- -t5 black
+  - AD.GND -- -t5 black
+  - AD.1+ -- d5 blue
+  - AD.1- -- d10 white
 notes:
   - text: "R1 の両端 (5 列・10 列) にテスター (電圧レンジ) を当てる"
 ```
@@ -79,15 +81,22 @@ notes:
 
 - AM (テスターの電流レンジ) を電源と R1 の間に直列に入れる。3 列 (電源側) と
   5 列 (R1 側) が離れているのは、テスターを挟むため
-- 電圧計は R1 の両端 (5 列・10 列) に当てるだけでよい (回路を切らない)
+- 電圧計は R1 の両端 (5 列・10 列) に当てるだけでよい (回路を切らない)。AD の Scope の 1+ / 1− も同じ 5 列・10 列に挿してあり、テスターの代わりに電圧を読める
+- AD の Supplies V+ を 5 V にして電源に使う。流れる電流は 5 mA で、各レール約 50 mA (USB 給電で 250 mW) に収まる。板の電流もブレッドボードの範囲 (1 穴 200 mA) に収まる
 
 ## 計器の設定
 
+この題の計器は Analog Discovery 3 (AD3) の Supplies (電源) とテスター。Scope は電圧の読みの代わりに使える。
+
 | 計器 | 設定 |
 | --- | --- |
+| Supplies | V+ = 5 V。Enable してから Master Enable を入れる |
+| Scope | CH1 (1+ / 1−) を R1 の両端に。DC 結合で、Measure の Average が 5 V になる |
 | テスター 1 | 直流電流レンジ (mA)。3〜5 列の間に直列に入れる |
 | テスター 2 | 直流電圧レンジ (V)。R1 の両端に当てる |
 | テスター 3 (別に) | 抵抗レンジ。回路から外した R1 単体を測って比べる |
+
+この題はオシロの図を付けない — 直流の量だけを見る (テスターの読みで足りる)。
 
 ## 見るべき値
 

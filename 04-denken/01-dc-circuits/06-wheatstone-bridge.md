@@ -63,14 +63,14 @@ parts:
     at: bottom
     label: "検流計"
     pins: ["+", "-"]
-  BAT:
+  AD:
     type: device
     at: top
-    label: "電源 5V"
-    pins: ["+", "-"]
+    label: Analog Discovery
+    pins: [GND, V+]
 wires:
-  - BAT.+ -- a5 red
-  - BAT.- -- -t8 black
+  - AD.V+ -- a5 red
+  - AD.GND -- -t8 black
   - b5 -- b30 red
   - a15 -- -t15 black
   - a38 -- -t38 black
@@ -91,10 +91,15 @@ wires:
 
 ## 計器の設定
 
+この題の計器は Analog Discovery 3 (AD3) の Supplies (電源) とテスター。電流は 1 辺あたり 1.5 mA 前後で、各レール約 50 mA (USB 給電で 250 mW) と板の 1 穴 200 mA に収まる。
+
 | 計器 | 設定 |
 | --- | --- |
+| Supplies | V+ = 5 V。Enable してから Master Enable を入れる |
 | テスター | 直流電流レンジ (最小レンジ、µA まで読めるとよい)。GA の位置で読む |
 | R3 | 0〜5 kΩ の半固定抵抗器。目盛りかテスターの抵抗レンジで読む |
+
+この題はオシロの図を付けない — 直流の量だけを見る (テスターの読みで足りる)。
 
 ## 見るべき値
 
