@@ -138,7 +138,7 @@ L は線の太さ 1 mm で見積もった**目安**で、L ≈ 1.4 µH × N² �
 周波数を読むだけなら十分である。ループはアンテナでもあるので、測るあいだに近くの放送局を
 拾って線が揺れることがある。平均を増やすか、揺れの少ない時間に測る。
 
-6 回巻きのループ (図 4) を、浮遊容量 20 pF (仮定)・巻き線の抵抗 2 Ω (目安) の模型で計算すると、
+6 回巻きのループ (図 9) を、浮遊容量 20 pF (仮定)・巻き線の抵抗 2 Ω (目安) の模型で計算すると、
 NanoVNA の画面は図 2 のようになる (計算値)。
 
 ```vna
@@ -156,7 +156,7 @@ markers:
   - 5.03M
 ```
 
-![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/vna/14-field-strength.svg)
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/vna/14-field-strength-1.svg)
 
 | 読み (図 2、計算値) | 値 | 求まるもの |
 | --- | --- | --- |
@@ -188,12 +188,214 @@ L は f<sub>SRF</sub> より十分低い所で読む。1 MHz で読むと X は 
 - 中波帯 (0.53〜1.6 MHz) では、線は上半分の外周の近く (531 kHz で j3.4、1 MHz で j6.5、1.6 MHz で j11。計算値) にいる。
   ここが右端に近いほど、自己共振が帯域に近く、読みが持ち上がっている
 
+#### S11 の位相で読む
+
+スミスチャートや X が表示しにくいときは、S11 の位相 (PHASE) で読む。表示を `S11` の `PHASE` にすると、
+自己共振の周波数で位相が 0° を横切る (図 3、計算値)。
+
+```vna
+device: h4
+sweep: 300k-10M 401
+title: 図3 S11 の位相 — 5.03 MHz で 0° を横切る (開放の点)
+dut:
+  - series L 50u esr 2 cp 20p
+  - short
+traces:
+  - S11 phase
+markers:
+  - 1M
+  - 5.03M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/vna/14-field-strength-2.svg)
+
+| 読み (図 3、計算値) | 値 | 意味 |
+| --- | --- | --- |
+| 印 1: 1 MHz の位相 | 17.38° | 正。コイルとして働いている (上半分) |
+| 印 2: 位相が 0° を横切る所 | 5.030 MHz | f<sub>SRF</sub>。スミスチャートの右端 (開放の点) と同じ |
+
+- **位相 0° は開放の点である。** 反射係数の位相は、短絡で ±180°、開放で 0° になる。
+  コイルは周波数とともに短絡の側 (+180° の近く) から上半分を回って開放 (0°) に近づき、
+  自己共振を越えると下半分 (負の位相) へ回る。0° を横切る周波数が f<sub>SRF</sub> である
+- **LOGMAG (|S11| の dB) はこの用途に向かない。** 損失の小さいループは、短絡に近い低い周波数でも、
+  開放に近い自己共振でも、ほとんど全部を反射する。|S11| は 1 MHz で −0.017 dB、5.03 MHz で −0.0007 dB (計算値) で、
+  10 dB/目盛の枠ではどちらも上端の 0 dB に張り付き、自己共振の印が見えない。見るのは大きさではなく位相である
+- **0° の近くの傾きはゆるい** (3〜7 MHz で約 6° しか動かない、計算値)。位相が 0.1° ぶれるだけで、
+  読む周波数は約 70 kHz ずれる。Z がとても大きくなる並列共振では、位相は共振の手前からほぼ 0° に張り付くためである。
+  **位相は「どのあたりで共振するか」をつかむのに使い、周波数を詰めるのは X の符号の変わり目か、
+  次の S21 で行う**。印を 0° の所へ動かして周波数を読む。
+  掃引を 300 kHz から始めたのは、それより低いと位相が左端で急に立ち上がり、0° の付近が平らに潰れるからである
+
+#### S21 で直列に挟む
+
+2 ポートで測るなら、ループを CH0 と CH1 の間に直列に入れる (図 4)。3-1 の直列治具と同じつなぎ方である。
+
+```circuit
+title: 図4 ループを CH0 と CH1 の間に直列に挟む
+parts:
+  X1:
+    type: device
+    at: b1
+    label: NanoVNA
+    pins: [CH0, GND]
+    turn: mirror
+  L1: inductor b5 b8 50u
+  C1: capacitor d5 d8 20p
+  X2:
+    type: device
+    at: b12
+    label: NanoVNA
+    pins: [CH1, GND]
+  G1: ground e4
+  G2: ground e11
+wires:
+  - X1.CH0 -| b5
+  - b5 -- d5
+  - b8 -- d8
+  - b8 -| X2.CH1
+  - X1.GND -| e4
+  - X2.GND -| e11
+notes:
+  - text a6f5: ループ (6 回巻き)
+  - text e6f5: C1 は浮遊容量 (仮定)
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-1.svg)
+
+- L1 と C1 はループそのもの (C1 は巻き線の浮遊容量で、部品として付けるわけではない。20 pF は仮定)
+- 校正は、CH0 と CH1 のケーブルの先で SOLT (Open・Short・Load と Through) を行う。
+  ループはケーブルの先に、できるだけ短い線でつなぐ
+
+自己共振では L と浮遊容量の並列共振で Z がとても大きくなり、CH0 から CH1 へほとんど通らない。
+50 Ω の 2 ポートに直列の Z を入れた通過は |S21| = 2 · 50 / |100 + Z| で、図 5 のように深い谷になる (計算値)。
+
+```vna
+device: h4
+sweep: 100k-10M 401
+title: 図5 ループを直列に挟んだ S21 — 5.03 MHz で深い谷
+dut:
+  - series L 50u esr 2 cp 20p
+traces:
+  - S21 logmag
+markers:
+  - 1M
+  - 5.03M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/vna/14-field-strength-3.svg)
+
+| 読み (図 5、計算値) | 値 | 式で確かめる |
+| --- | --- | --- |
+| 印 1: 1 MHz | −10.70 dB | Z ≈ 327 Ω (ほぼ +jX) で 2 · 50 / \|100 + Z\| |
+| 印 2: 5.03 MHz | −79.28 dB | Z ≈ 0.92 MΩ で 100 / 0.92 MΩ ≈ 1.1 × 10⁻⁴ |
+
+- **谷の底が f<sub>SRF</sub> である。** 底の周波数を印で読む。谷の深さは巻き線の損失で決まり、
+  実物では NanoVNA の雑音 (−80 dB 前後、目安) に埋もれて底が平らに見えることがある。周波数は谷の両側の形の真ん中で読む
+- S11 より谷がはっきり見えるので、読み違えにくい
+- **つなぐ線の容量の分だけ低く出る。** 線と治具の容量はループの浮遊容量に並列に足される。
+  2 pF 足されると 22 pF になり、f<sub>SRF</sub> は約 4.80 MHz (計算値) まで下がる。線は短くし、
+  tinySA につなぐときと同じ取り回しで測る
+
+#### S21 でゆるく結合する (ディップメーターと同じ考え)
+
+ループに線をつながずに測ることもできる。CH0 と CH1 の先に 1 回巻きの小さなループ
+(直径 3 cm ほど) を 1 つずつ付け、測るループの近くに置く (図 6)。ディップメーターがコイルを
+近づけて共振を探すのと同じ考えである。
+
+```circuit
+title: 図6 小さなループ 2 つで、ゆるく結合する
+parts:
+  X1:
+    type: device
+    at: b1
+    label: NanoVNA
+    pins: [CH0, GND]
+    turn: mirror
+  L1: inductor b5 d5 0.1u
+  L2: inductor b8 d8 50u
+  C1: capacitor b10 d10 20p
+  L3: inductor b13 d13 0.1u
+  X2:
+    type: device
+    at: b16
+    label: NanoVNA
+    pins: [CH1, GND]
+  G1: ground e4
+  G2: ground e5
+  G3: ground e13
+  G4: ground e15
+wires:
+  - X1.CH0 -| b5
+  - X1.GND -| e4
+  - d5 -- e5
+  - b8 -- b10
+  - d8 -- d10
+  - b13 -| X2.CH1
+  - d13 -- e13
+  - X2.GND -| e15
+notes:
+  - text a9: 測るループ (線でつながない)
+  - text e6f5: 磁気結合
+  - text e11f5: 磁気結合
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-2.svg)
+
+- L1 と L3 が小さなループ、L2 と C1 が測るループ (C1 は浮遊容量、仮定)。L1 と L2、L2 と L3 は
+  磁界で結合する。回路図には相互インダクタンスを描けないので、注記で示した
+- L1 と L3 を直接近づけると、ループを通らずに CH0 から CH1 へ漏れる。2 つは測るループの向かい側に離して置く
+
+測るループが共振する周波数でだけ、CH0 → L2 → CH1 と通るので、S21 は山になる (図 7)。
+vna フェンスの模型は結合したコイルを書けないので、図 7 は 0.1 pF の小さな結合で置き換えた**目安の模型**である。
+山の高さは結合の強さで決まり、実物では置き方で数十 dB 変わる。
+
+```vna
+device: h4
+sweep: 4.9M-5.15M 401
+title: 図7 ゆるく結合した S21 — 5.01 MHz で山 (目安の模型)
+dut:
+  - series C 0.1p
+  - shunt L 50u esr 2 cp 20p
+  - series C 0.1p
+traces:
+  - S21 logmag
+markers:
+  - 5.008M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/vna/14-field-strength-4.svg)
+
+| 読み (図 7、目安の模型の計算値) | 値 | 意味 |
+| --- | --- | --- |
+| 印 1: 山の頂 | 5.008 MHz、−58.25 dB | f<sub>SRF</sub> (結合で 5.03 MHz から 0.4 % 引き込まれた) |
+
+- **結合を弱くするほど、引き込みが小さい。** 同じ模型で結合を 0.5 pF に強めると、山は −31 dB と高くなるが、
+  周波数は 4.91 MHz (計算値) まで下がる。小さなループを離していき、**山が雑音からはっきり見える範囲で
+  いちばん遠い所**で読む
+- 山の外の線は −80 dB の下端に張り付いている。実機では、ここが NanoVNA の雑音の高さになる
+- 線をつながないので、つなぐ線の容量が足されない。**使うときのループ (アンテナ) そのものの f<sub>SRF</sub> に
+  いちばん近い値**が読める
+
+#### どの表示・つなぎ方で読むか
+
+| 表示 / 方法 | 見え方 | 向き不向き |
+| --- | --- | --- |
+| S11 の LOGMAG | 低い周波数でも自己共振でも 0 dB 近くで平ら | 向かない。印が見えない |
+| S11 の X・スミスチャート (図 2) | X の符号が変わる、右端を通る | 向く。1 ポートで手軽 |
+| S11 の位相 (図 3) | 位相が 0° を横切る | おおよその位置をつかむのに向く。0° の近くの傾きがゆるく、周波数を詰めるには粗い |
+| S21 で直列に挟む (図 4・図 5) | 深い谷 | 谷がはっきりして正確。線の容量の分だけ低く出る |
+| S21 でゆるく結合する (図 6・図 7) | 小さな山 | 線をつながないので、使うときに最も近い。結合は弱く保つ |
+
+まず S11 の位相かスミスチャートで当たりを付け、アンテナとして使う値は、ゆるく結合した S21 で確かめる。
+
+#### 巻数ごとの自己共振の目安
+
 計算値 (浮遊容量は仮定) で、自己共振がどこに来るかの目安を示す。
 
 | ループ | L | 浮遊容量 (仮定) | f<sub>SRF</sub> (計算値) | 中波帯の上端 1.6 MHz での読みの持ち上がり |
 | --- | --- | --- | --- | --- |
 | 1 回巻き | 1.4 µH | 10 pF | 約 43 MHz | ほぼ 0 dB |
-| 6 回巻き (図 4) | 50 µH | 20 pF | 約 5.0 MHz | 約 +0.9 dB |
+| 6 回巻き (図 9) | 50 µH | 20 pF | 約 5.0 MHz | 約 +0.9 dB |
 | 10 回巻き | 140 µH | 20 pF | 約 3.0 MHz | 約 +3 dB (1 / (1 − (f/f<sub>SRF</sub>)²)) |
 | 15 回巻き | 324 µH | 20 pF | 約 2.0 MHz | 帯域の中で効きすぎて、非同調では使えない |
 
@@ -204,7 +406,7 @@ L は f<sub>SRF</sub> より十分低い所で読む。1 MHz で読むと X は 
 - **同調ループ ((c))** では、浮遊容量はポリバリコンに並列に足される。15 回巻きで浮遊容量が 20 pF あると、
   バリコンを最小の 30 pF にしても合計 50 pF で、上端は約 1.25 MHz (計算値) までしか届かない。
   測った C<sub>s</sub> を足して、帯域の両端に届くかを先に計算する。届かなければ、巻数を減らして
-  固定のコンデンサを切り替え、帯域を 2 つに分けて合わせる (図 5 の 11 回巻き + 220 pF)
+  固定のコンデンサを切り替え、帯域を 2 つに分けて合わせる (図 10 の 11 回巻き + 220 pF)
 - コイルの自己共振の測り方そのものは 4-4 と同じである
 
 ### ループに同調回路は要るか — 3 つの受け方
@@ -217,9 +419,9 @@ L は f<sub>SRF</sub> より十分低い所で読む。1 MHz で読むと X は 
 
 | つなぎ方 | おすすめの巻数 | 理由 |
 | --- | --- | --- |
-| (a) tinySA に直結 | 2〜3 回 (図 3 は 2 回) | 読みは ωL ≈ 50 Ω で最大になる。巻きすぎると分圧で失う |
-| (b) JFET バッファ | 5〜8 回 (図 4 は 6 回) | 開放電圧は N に比例するが、自己共振を帯域の上端の 3 倍 (約 5 MHz) 以上に置く必要がある |
-| (c) 同調ループ | 11 回 (図 5) | 単連のポリバリコンと 220 pF の切り替えで中波帯の両端に届く |
+| (a) tinySA に直結 | 2〜3 回 (図 8 は 2 回) | 読みは ωL ≈ 50 Ω で最大になる。巻きすぎると分圧で失う |
+| (b) JFET バッファ | 5〜8 回 (図 9 は 6 回) | 開放電圧は N に比例するが、自己共振を帯域の上端の 3 倍 (約 5 MHz) 以上に置く必要がある |
+| (c) 同調ループ | 11 回 (図 10) | 単連のポリバリコンと 220 pF の切り替えで中波帯の両端に届く |
 
 L ∝ N² は目安なので、実際の最適は ±1 回ほどずれることがある。作ったら L と f<sub>SRF</sub> を NanoVNA で測る
 (上の「ループの自己共振を NanoVNA で確かめる」)。
@@ -234,7 +436,7 @@ L ∝ N² は目安なので、実際の最適は ±1 回ほどずれること�
 #### (a) 非同調の 2 回巻きを直結
 
 ```circuit
-title: 図3 (a) 非同調の 2 回巻きを tinySA に直結
+title: 図8 (a) 非同調の 2 回巻きを tinySA に直結
 parts:
   L1: inductor b3 d3 5.6u
   X1:
@@ -252,7 +454,7 @@ notes:
   - text c1: 2 回巻きのループ
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-1.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-3.svg)
 
 - L1 はループそのもの (1 辺 32 cm の正方形 2 回巻き、約 5.6 µH、目安)。部品として買う物ではない
 - 上の表の N = 2 の行がそのまま使える。1 MHz で上限の読みは −102.3 dBm。
@@ -269,7 +471,7 @@ notes:
 #### (b) 非同調の 6 回巻きを JFET のソースフォロワで受ける
 
 ```circuit
-title: 図4 (b) 非同調の 6 回巻きを JFET のソースフォロワで受ける
+title: 図9 (b) 非同調の 6 回巻きを JFET のソースフォロワで受ける
 parts:
   VCC: vcc a7 5V
   L1: inductor c2 e2 50u
@@ -303,7 +505,7 @@ notes:
   - text b1: 6 回巻きのループ (非同調)
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-2.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-4.svg)
 
 | 部品 | 値 | 役目 |
 | --- | --- | --- |
@@ -326,7 +528,7 @@ notes:
 #### (c) 同調ループをポリバリコンで合わせ、リンクで取り出す
 
 ```circuit
-title: 図5 (c) 同調ループをポリバリコンで合わせ、リンクで取り出す
+title: 図10 (c) 同調ループをポリバリコンで合わせ、リンクで取り出す
 parts:
   L1: inductor b3 d3 175u
   C2: capacitor-var b5 d5 30p-280p
@@ -355,24 +557,24 @@ notes:
   - text f9: 1 回巻きのリンク (L1 に重ねて巻く)
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-3.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-5.svg)
 
-図 5 を組んだ姿を図 6 に示す。L1 は 32 cm 角の十字の枠に 11 回巻き、リンク L2 はその内側に 1 回巻く。
+図 10 を組んだ姿を図 11 に示す。L1 は 32 cm 角の十字の枠に 11 回巻き、リンク L2 はその内側に 1 回巻く。
 同調の箱 (C2・S1・C3) は L1 の両端に、SMA と同軸は L2 の両端につなぐ。
 
-![図6 中波帯の同調ループの作り方](14-loop-antenna.svg)
+![図11 中波帯の同調ループの作り方](14-loop-antenna.svg)
 
 同調に要る容量は C = 1 / (ω² L)。L を上の目安で置いた計算値:
 
 | ループ | L (目安) | 531 kHz | 1602 kHz |
 | --- | --- | --- | --- |
 | 10 回巻き | 140 µH | 642 pF | 70.5 pF |
-| 11 回巻き (図 5) | 175 µH | 513 pF | 56.4 pF |
+| 11 回巻き (図 10) | 175 µH | 513 pF | 56.4 pF |
 | 15 回巻き | 324 µH | 277 pF | 30.5 pF |
 
 - AM ラジオ用の単連のポリバリコン (最大 約 260〜280 pF、目安) では、10 回巻きは約 800 kHz より下に届かない。
   15 回巻きなら低い側には届くが、浮遊容量 (20 pF なら) が足されて上端が約 1.25 MHz までになる
-  (上の「ループの自己共振を NanoVNA で確かめる」)。**図 5 は 11 回巻き (約 175 µH、目安) にし、220 pF (E12) を S1 で
+  (上の「ループの自己共振を NanoVNA で確かめる」)。**図 10 は 11 回巻き (約 175 µH、目安) にし、220 pF (E12) を S1 で
   切り替えて帯域を 2 つに分ける。** 浮遊容量 20 pF を足した計算値で、S1 を切ると約 0.70〜1.70 MHz、
   入れると約 0.53〜0.73 MHz に合い、2 つの範囲が重なる。10 回巻きに 330 pF だと 0.68〜0.77 MHz に
   合わせられない隙間が残る
@@ -404,7 +606,7 @@ notes:
 送信機とアンテナを 3 m 離して置き、受けのダイポールから同軸で tinySA へつなぐ。
 
 ```circuit
-title: 図7 3 m 離して受け、同軸で tinySA へ
+title: 図12 3 m 離して受け、同軸で tinySA へ
 parts:
   X1:
     type: device
@@ -432,7 +634,7 @@ notes:
   - text b10 small: 同軸 (損失 L)
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-4.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-6.svg)
 
 - X1 (TX) は測られる送信機。7 章の NanoVNA + アンテナでも、回路の冊の FM 送信機でもよい
 - ANT2 は受けの半波長ダイポール。7-2 と同じ作り方で、測る周波数に合わせて長さを決める
@@ -481,7 +683,7 @@ AF は「この実験で使う式」のダイポールの式による**計算値
 上限に近い読みの例 (100 MHz で −65.0 dBm) の、**見えるはずの画面**。
 
 ```spectrum
-title: 図8 100 MHz で −65.0 dBm — 上限の読み −62.1 dBm まで 2.9 dB
+title: 図13 100 MHz で −65.0 dBm — 上限の読み −62.1 dBm まで 2.9 dB
 device: tinysa-ultra
 center: 100MHz
 span: 2MHz
@@ -496,7 +698,7 @@ markers: [100M]
 
 ### 見るべき値
 
-図 8 の読みを電界強度に直す。
+図 13 の読みを電界強度に直す。
 
 | 項目 | 値 |
 | --- | --- |
@@ -532,7 +734,7 @@ NanoVNA の出力より大きい 1 mW (0 dBm) を、半波長ダイポール (G 
 | 余裕 (上限 − E) | 読み方 |
 | --- | --- |
 | 10 dB 以上 | まず収まる。下の不確かさを全部悪い向きに足しても上限を超えにくい |
-| 0〜10 dB | 不確か。第 2 部の図 8 の例 (2.9 dB) はここに入る。収まるとは言えない |
+| 0〜10 dB | 不確か。第 2 部の図 13 の例 (2.9 dB) はここに入る。収まるとは言えない |
 | 0 dB 未満 (上限を超える) | 超えている。出力を下げる (アッテネータを入れる) か、アンテナを短く・効率の悪いものにする |
 
 ## 見積りの不確かさ
