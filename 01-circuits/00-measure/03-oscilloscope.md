@@ -82,19 +82,14 @@ parts:
   R1: resistor b6 b11 10k
   R2: resistor c11 c15 10k
   C1: capacitor/ceramic h15 h18 10n
-  SCOPE:
+  AD:
     type: device
     at: bottom
-    label: PC オシロ / AD3 (Ch1)
-    pins: [SIG, GND]
-  PS:
-    type: device
-    at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: Analog Discovery 3
+    pins: [V+, GND, 1+, 1-]
 wires:
-  - PS.+5V -- +t1 red
-  - PS.GND -- -t2 black
+  - AD.V+ -- +b3 red
+  - AD.GND -- -b4 black
   - +t6 -- a6 red
   - +t10 -- a10 red
   - a12 -- a15 green
@@ -103,8 +98,8 @@ wires:
   - j10 -- -b10 black
   - j13 -- +b13 red
   - j18 -- -b18 black
-  - j12 -- SCOPE.SIG gray
-  - SCOPE.GND -- -b22 black
+  - j12 -- AD.1+ gray
+  - AD.1- -- -b22 black
   - -t28 -- -b28 black
   - +t29 -- +b29 red
 ```
@@ -121,7 +116,9 @@ wires:
   R2・C1 の間が 1 つのネット)
 - C1 は下の列 15 から列 18 へ。列 18 は黒線で下の青レール (GND)
 - 1 番 (列 10) は黒線で下の青レール、4 番 (列 13) は赤線で下の赤レール
-- プローブ (`SCOPE`) は 3 番 (列 12) と下の青レールに当てる
+- 電源は Analog Discovery 3 (AD3) の Supplies。V+ (赤) を下の + レール、GND (黒) を下の − レールへ。
+  WaveForms の Supplies で V+ を 5 V にして出力を入れる。555 の電流は数 mA で、AD3 の電源 (各レール約 50 mA まで) に収まる
+- Scope の 1+ (灰) を 3 番 (列 12) へ、1− (黒) を下の青レール (GND) へ
 - 上下のレールは右端の 28 列 (黒)・29 列 (赤) でつなぎ、どちらのレールに
   電源を入れても同じにする
 
@@ -137,7 +134,17 @@ wires:
 | 時間レンジ | 50 µs/div (周期 208µs が約 4 目盛り分) |
 | トリガ | 立ち上がり、レベル 1.5V くらい。トリガは、波形がこの電圧を下から上へ横切った所を画面の基準にして、波形を止めて見せる仕掛け |
 
-PC オシロは付属ソフトの Scope 画面、AD3 は WaveForms の Scope で同じように設定する。
+この題の計器は AD3 の Scope (10 MHz 以下の時間波形を見る標準の計器)。4.8 kHz の波形なので範囲に収まる。
+PC オシロなら付属ソフトの Scope 画面で同じように設定する。
+
+```scope
+title: 図3 555 の出力 (3 番)。High 139 µs と周期 208 µs をカーソルで読む
+time: 50us/div
+trigger: ch1 rising 1.5V
+ch1: {wave: pulse 4.8kHz 1.65V offset 1.85V duty 67%, range: 1V/div, position: -3div}
+cursors: [0, 139us]
+measure: [vpp, vmax, vmin, freq]
+```
 
 ### Analog Discovery と汎用オシロの読み替え
 
@@ -173,6 +180,8 @@ PC オシロは付属ソフトの Scope 画面、AD3 は WaveForms の Scope で
 | 波形の周期 | 約 208 µs (≈ 4.8 kHz) | 計算値と一致すれば R・C の値が合っている証拠 |
 | High の時間 / Low の時間 | 約 139 µs / 約 69 µs | Duty 比 約 67 % (テスターでは見えない情報) |
 | 振幅 (High − Low) | 約 3.3 V (0.2V 〜 3.5V) | テスターの直流レンジで測る平均値 (約 2.4 V) とは違う値になる |
+
+図3 は計算で描いた画面で、カーソル X1・X2 の間隔が High の時間 139 µs、Measurements が Vpp 3.30 V・Freq 4.800 kHz。実機の画面もこれに近くなる。
 
 周期と時間は、画面で何目盛り分あるかを数えて時間レンジを掛けて読む (Measure や
 カーソルの機能があれば数字で出る)。テスターで同じ点を測ると、方形波の平均値に近い

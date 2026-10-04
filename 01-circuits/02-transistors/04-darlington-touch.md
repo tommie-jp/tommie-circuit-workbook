@@ -81,6 +81,11 @@ parts:
   Q2: transistor e17(B) e18(C) e19(E) 2SC1815
   RC: resistor b25 b20 470
   D1: led c20(A) c18(K) red
+  TP1:
+    type: device
+    at: top
+    label: 触れる板 1 (+)
+    pins: [A]
   TP2:
     type: device
     at: top
@@ -89,43 +94,38 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery
-    pins: [V+, GND, 2-, 2+, 1+, 1-]
-  TP1:
-    type: device
-    at: top
-    label: 触れる板 1 (+)
-    pins: [A]
+    label: Analog Discovery 3
+    pins: [2-, 2+, 1+, 1-, V+, GND]
 wires:
-  - AD.V+ -- +t1 red
-  - AD.GND -- -t2 black
+  - AD.V+ -- +t29 red
+  - AD.GND -- -t30 black
   - a7 -- -t7 black
   - AD.2- -- -t9 black
   - AD.2+ -- a12 blue
-  - c11 -- c12 blue
-  - TP2.B -- a11 gray
+  - d4 -- d12 blue
+  - TP2.B -- a4 gray
   - b13 -- b18 orange
   - c14 -- c17 blue
   - a19 -- -t19 black
   - +t25 -- a25 red
   - AD.1+ -- a18 orange
   - AD.1- -- -t27 black
-  - TP1.A -- +t28 red
+  - TP1.A -- +t3 red
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/04-darlington-touch.svg)
 
-図2 のとおり、部品はすべて上のブロックに挿す。5V は Analog Discovery の電源出力 V+ (赤) から
+図2 のとおり、部品はすべて上のブロックに挿す。5V は Analog Discovery 3 の電源出力 V+ (赤、右端の `+t29`) から
 上の + レールへ入れる (WaveForms の Supplies で V+ を 5 V にして入れる)。
 流れるのは LED の約 4.7 mA だけなので V+ で足りる。GND は上の − レールだけを使う。
 
 - `Q1`・`Q2` は上のブロックの e 行 (`e12`〜`e14`・`e17`〜`e19`)。足の上の a〜d 行を線の通り道にする
 - **ベース (列 12)**: `RB` の右端 (`b12`) が `Q1` の B と同じ列。`RB` の左端は `a7` から − レールへ。
-  `TP2` (触れる板 2) は `a11` に挿し、`c11`–`c12` の青線で列 12 へ渡す
+  `TP2` (触れる板 2) は `a4` に挿し、`d4`–`d12` の青線で列 12 へ渡す
 - **Q1 の E → Q2 の B**: `c14`–`c17` の青線。**Q1 の C → Q2 の C**: `b13`–`b18` の橙線
 - **コレクタ (列 18)**: LED のカソード (`c18`) が `Q2` の C と同じ列。LED のアノード (`c20`) は
   `RC` の左端 (`b20`) と同じ列、`RC` の右端は `a25` から + レールへ
-- `Q2` のエミッタは `a19` から − レールへ。`TP1` (触れる板 1) は + レール (`+t28`) へ
+- `Q2` のエミッタは `a19` から − レールへ。`TP1` (触れる板 1) は + レール (`+t3`) へ
 - **CH1 (1+、橙)** はコレクタの列 18 (`a18`)、**CH2 (2+、青)** はベースの列 12 (`a12`)。
   AD の GND・1−・2− (黒) は上の − レールへ
 

@@ -73,10 +73,10 @@ parts:
   PS:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: Analog Discovery 3 (Supplies)
+    pins: [V+, GND]
 wires:
-  - PS.+5V -- +t1 red
+  - PS.V+ -- +t1 red
   - PS.GND -- -t2 black
   - +t10 -- a10 red
   - d16 -- g16 orange
@@ -87,6 +87,9 @@ wires:
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/03-rc-charge-1.svg)
+
+5 V の電源は Analog Discovery 3 (AD3) の Supplies の V+ (WaveForms で 5 V にして出力を入れる)。図2 の「電源」の箱がそれで、
+電流は充電の最初で最大 5 mA、LED の点灯で 3 mA ほど、AD3 の電源 (各レール約 50 mA まで) に収まる。
 
 図2 の `R1` の下端 (`b15`) とスイッチの `1` 番 (`e15`) は同じ列 15 でつながる。
 スイッチの `C` (共通) はコンデンサの + 側へ、`2` 番は放電側の `R2` へ配線した。
@@ -102,7 +105,7 @@ LED のカソード (上の − レール) が同じ GND になるよう、28 �
 | C1 | 電解コンデンサ | 1000 µF (16V 以上) |
 | D1 | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
 | S1 | スライドスイッチ | 1 回路 2 接点 |
-| — | 電源 | 5V (USB) |
+| — | 電源 | Analog Discovery 3 の V+ (5 V) |
 
 ## 見るべき値
 
@@ -155,31 +158,26 @@ board: half
 parts:
   R1: resistor a10 a15 1k
   C1: capacitor/film b15 b18 1u
-  FG:
+  AD:
     type: device
     at: top
-    label: 発振器 / AD (W1)
-    pins: [GND, OUT]
-  SCOPE:
-    type: device
-    at: bottom
-    label: オシロ / AD (CH1・CH2)
-    pins: [CH1, CH2, GND]
+    label: Analog Discovery 3
+    pins: [GND, W1, 1+, 1-, 2+, 2-]
 wires:
-  - FG.OUT -- c10 yellow
-  - FG.GND -- -t8 black
+  - AD.W1 -- c10 yellow
+  - AD.GND -- -t8 black
   - a18 -- -t18 black
-  - SCOPE.CH1 -- e10 yellow
-  - SCOPE.CH2 -- e15 green
-  - SCOPE.GND -- -b20 black
-  - -t28 -- -b28 black
+  - AD.1+ -- e10 orange
+  - AD.1- -- -t11 black
+  - AD.2+ -- e15 green
+  - AD.2- -- -t16 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/03-rc-charge-2.svg)
 
 図4 の `R1` の右端 (`a15`) と `C1` の左端 (`b15`) は同じ列 15 でつながる。発振器の出力は
 `R1` の左端の列 10 へ、`C1` の右端の列 18 は上の − レール (GND) へ落とす。
-CH1 は列 10、CH2 は列 15 に当てる。上下の − レールは 28 列の黒線でつなぎ、
+AD3 の W1 は列 10、Scope の 1+ も列 10、2+ は列 15 に当てる。GND と 1−・2− は上の − レールへ落とし、
 発振器とオシロの GND を同じにする。
 
 - C1 は**フィルムコンデンサ** (向きなし) を使う。積層セラミックの 1 µF は、

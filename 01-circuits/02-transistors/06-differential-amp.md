@@ -77,19 +77,19 @@ CH1 は `Q1` のコレクタ、CH2 は `Q2` のコレクタの電圧を GND 基�
 
 ```breadboard
 title: 図2 差動対で電流を振り分ける (電源は AD の V+、CH1・CH2 を 2 つのコレクタへ)
-# 上の + レール = +5V (AD の V+)、上の − レール = GND
+# 上の + レール = +5V (AD の V+)、上の − レール = GND。Q2 は左右を逆にして挿し、線が交差しないようにした
 board: full
 parts:
-  R1: resistor b3 b8 10k
-  R2: resistor c8 c13 10k
-  VR1: potentiometer b17(1) b18(w) b19(3) 10k
-  RC1: resistor b25 b28 220
-  D1: led c28(A) c29(K) red
-  Q1: transistor h25(B) h26(C) h27(E) 2SC1815
-  RC2: resistor b35 b38 220
-  D2: led c38(A) c39(K) red
-  Q2: transistor h35(B) h36(C) h37(E) 2SC1815
-  RE: resistor b31 b34 220
+  R1: resistor b2 b6 10k
+  R2: resistor c6 c10 10k
+  RC1: resistor b13 b16 220
+  D1: led c16(A) c17(K) red
+  RE: resistor b20 b23 220
+  RC2: resistor b25 b28 220
+  D2: led c28(A) c29(K) red
+  VR1: potentiometer b32(1) b33(w) b34(3) 10k
+  Q1: transistor g25(B) g26(C) g27(E) 2SC1815
+  Q2: transistor g31(B) g30(C) g29(E) 2SC1815
   AD:
     type: device
     at: top
@@ -98,34 +98,38 @@ parts:
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black
-  - AD.1- -- -t28 black
-  - AD.1+ -- a29 orange
-  - AD.2- -- -t38 black
-  - AD.2+ -- a39 blue
-  - +t3 -- a3 red
-  - +t17 -- a17 red
+  - AD.1- -- -t15 black
+  - AD.1+ -- a17 orange
+  - AD.2- -- -t27 black
+  - AD.2+ -- a29 blue
+  - +t2 -- a2 red
+  - +t13 -- a13 red
   - +t25 -- a25 red
-  - +t35 -- a35 red
-  - a13 -- -t13 black
-  - a19 -- -t19 black
-  - d8 -- g25 orange
-  - c18 -- g35 blue
-  - d29 -- g26 yellow
-  - d39 -- g36 yellow
-  - g27 -- c31 green
-  - g37 -- d31 green
+  - +t32 -- a32 red
+  - a10 -- -t10 black
+  - a23 -- -t23 black
   - a34 -- -t34 black
+  - d6 -- g25 orange
+  - d17 -- g26 yellow
+  - d20 -- g27 green
+  - c20 -- g29 green
+  - d29 -- g30 yellow
+  - c33 -- g31 blue
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/06-differential-amp.svg)
 
-図2 では、`R1`・`R2` の分圧 (列 8) が `Q1` のベース (基準)。`VR1` のつまみ (列 18) が
-`Q2` のベース。`Q1`・`Q2` のエミッタはどちらも `RE` の上端 (列 31) に集まる。
+図2 では、`R1`・`R2` の分圧 (列 6) が `Q1` のベース (基準)、`VR1` のつまみ (列 33) が `Q2` のベース。
+`Q1`・`Q2` は溝の下のブロックに挿し、上のブロックの部品と 6 本の線 (橙・黄・緑・緑・黄・青) でつなぐ。
+**`Q2` は左右を逆にして (左から E・C・B の順に) 挿す**。上の部品の並びと、下の足の並びが同じ順になり、6 本が交差しない。
 
 - 電源: AD の V+ (赤) を `+t1`、GND (黒) を `-t2` へ。上の + レールが +5V、− レールが GND
   (下のレールは使わない)。LED 2 つで 10 mA 弱なので V+ で足りる
-- CH1: 1+ (橙) を `a29` (D1 のカソード = `Q1` のコレクタの列)、1− (黒) を `-t28` へ
-- CH2: 2+ (青) を `a39` (D2 のカソード = `Q2` のコレクタの列)、2− (黒) を `-t38` へ
+- 基準: `d6` (R1・R2 の中点) → `g25` (`Q1` のベース、橙)。つまみ: `c33` → `g31` (`Q2` のベース、青)
+- コレクタ: `d17` (D1 のカソード) → `g26` (`Q1` の C)、`d29` (D2 のカソード) → `g30` (`Q2` の C) (黄)
+- エミッタ: `RE` の上端 (列 20) から `g27` (`Q1` の E) と `g29` (`Q2` の E) へ (緑 2 本)。`RE` の下端は `a23` から − レールへ
+- CH1: 1+ (橙) を `a17` (D1 のカソード = `Q1` のコレクタの列)、1− (黒) を `-t15` へ
+- CH2: 2+ (青) を `a29` (D2 のカソード = `Q2` のコレクタの列)、2− (黒) を `-t27` へ
 
 ## オシロで見る
 

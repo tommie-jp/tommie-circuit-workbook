@@ -18,12 +18,12 @@ board: BB
 
 この題の流れ:
 
-- 前半 (回路図〜見るべき値): ローパスとハイパスを組み、発振器とテスター (かオシロ) で
+- 前半 (回路図〜見るべき値): ローパスとハイパスを組み、AD3 の発振器・オシロとテスター (図3・図4) で
   3 つの周波数の出力を読む。ここまでで題のねらいは押さえられる
 - 後半「周波数特性を計器で見る」: 周波数特性 (周波数ごとの利得) をまとめて見る測り方。
-  計器の選び方の結論のあと、Analog Discovery の Network でボード線図 (図4〜図6)、
-  スペクトラムアナライザで方形波の高調波の減り方 (図7・図8)、VNA (LiteVNA64) で値を替えて
-  MHz 帯 (図9・図10) を見る
+  計器の選び方の結論のあと、Analog Discovery の Network でボード線図 (図5〜図7)、
+  スペクトラムアナライザで方形波の高調波の減り方 (図8・図9)、VNA (LiteVNA64) で値を替えて
+  MHz 帯 (図10・図11) を見る
 
 ## 回路図
 
@@ -75,38 +75,34 @@ style:
 ## 実体配線図
 
 ```breadboard
-title: 図3 RC ローパスを組み、発振器とオシロ (かテスター) をつなぐ
+title: 図3 RC ローパスを組み、AD3 の W1 と Scope をつなぐ
 board: half
 parts:
   R1: resistor c5 c10 1.5k
   C1: capacitor/ceramic d10 d13 100n
-  FG:
+  AD:
     type: device
     at: top
-    label: 発振器
-    pins: [GND, OUT]
-  SCOPE:
-    type: device
-    at: bottom
-    label: オシロ (CH1・CH2) / テスター
-    pins: [CH1, CH2, GND]
+    label: Analog Discovery 3 (W1・Scope)
+    pins: [GND, W1, 1+, 1-, 2+, 2-]
 wires:
   - a13 -- -t13 black
-  - FG.OUT -- a5 yellow
-  - FG.GND -- -t3 black
-  - SCOPE.CH1 -- e5 yellow
-  - SCOPE.CH2 -- e10 green
-  - SCOPE.GND -- -b15 black
-  - -t25 -- -b25 black
+  - AD.W1 -- a5 yellow
+  - AD.GND -- -t3 black
+  - AD.1+ -- e5 orange
+  - AD.1- -- -t7 black
+  - AD.2+ -- e10 green
+  - AD.2- -- -t12 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/05-rc-filter-1.svg)
 
 図3 の `R1` の右端 (`c10`) と `C1` の左端 (`d10`) は同じ列 10 でつながる。この列が出力。
 `C1` の右端の列 13 は、上の − レール (GND) へ黒線で落とす。
-発振器の出力は `R1` の左端の列 5 へ、発振器の GND は上の − レールへ入れる。
-オシロは CH1 を入力の列 5、CH2 を出力の列 10 に当て、GND は下の − レールへ。
-上下の − レールは 25 列の黒線でつなぎ、発振器とオシロの GND を同じにする。
+この題の計器は Analog Discovery 3 (AD3)。波形発生器 W1 の出力を `R1` の左端の列 5 へ、
+AD3 の GND を上の − レールへ入れる。Scope は 1+ を入力の列 5、2+ を出力の列 10 に当て、
+1−・2− は上の − レールへ落とす。発振器とオシロの GND は同じ − レールで 1 つになる。
+W1 の出力は 100 µA 以下で、板の範囲に十分収まる。
 テスターで読むときは、黒の棒を − レールに、赤の棒を列 5 (入力) と列 10 (出力) に
 順に当てる。
 
@@ -119,6 +115,7 @@ wires:
 | --- | --- | --- |
 | R1 (R2) | 抵抗 (1/4 W) | 1.5 kΩ |
 | C1 (C2) | セラミックコンデンサ | 100 nF (0.1µF) |
+| — | 発振器・オシロ | Analog Discovery 3 (W1 と Scope) |
 
 ## 見るべき値
 
@@ -133,6 +130,22 @@ wires:
 | 11 kHz (f<sub>c</sub> の 10 倍) | 約 0.10 倍 (−20dB、計算値) | 高くなるほどよく弱まる |
 
 **ハイパス**はこの逆 (100Hz で弱く、11kHz でよく通る) になる。
+
+### オシロで f<sub>c</sub> の波形を見る
+
+W1 を **1.06 kHz** (f<sub>c</sub> の計算値 1/(2π×1.5kΩ×100nF) = 1061 Hz)、振幅 1 V の正弦波にし、Scope の 1+ (入力) と 2+ (出力) を同じ 500 mV/div、
+時間 200 µs/div で重ねる。ローパスの出力 (図の CH2) は、入力 (CH1) に対して振幅が 1/√2 = **0.707 倍**になり、位相が **45 度遅れる** (1 周期 943 µs の 1/8 = 118 µs)。
+
+```scope
+title: 図4 ローパスの遮断周波数 (1.06 kHz) — 出力 (CH2) は入力 (CH1) の 0.707 倍
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1.06kHz 1V, range: 500mV/div, position: 0div}
+ch2: {wave: ch1 | rc 150us, range: 500mV/div, position: 0div}
+measure: [vpp, freq]
+```
+
+読み値は CH1 が Vpp 2.00 V、CH2 が Vpp 1.41 V (どちらも 1.06 kHz)。比は 0.707 で、見るべき値の表の f<sub>c</sub> の行と合う。
 
 ## 周波数特性を計器で見る
 
@@ -179,7 +192,7 @@ CH1 (入力) に対する CH2 (出力) の利得と位相を測ってグラフ�
 操作の詳しい説明は Analog Discovery の教科書の 5-1 (ローパス)・5-2 (ハイパス)。
 
 ```circuit
-title: 図4 AD の W1 で掃引し、CH1 (入力) と CH2 (出力) を比べる
+title: 図5 AD の W1 で掃引し、CH1 (入力) と CH2 (出力) を比べる
 parts:
   V1: sine a1 c1 l=$\mathrm{W1}$
   M1: voltmeter a3 c3 l=$\mathrm{CH1}$
@@ -198,7 +211,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/05-rc-filter-3.svg)
 
 ```breadboard
-title: 図5 図3 の板に Analog Discovery をつなぐ
+title: 図6 図3 の板に Analog Discovery をつなぐ
 board: half
 parts:
   R1: resistor c5 c10 1.5k
@@ -247,7 +260,7 @@ wires:
 Network に見えるはずのボード線図 (計算値)。上が利得、下が位相で、横軸は同じ周波数 (対数)。
 
 ```graph
-title: 図6 Network のボード線図 — −3 dB の所が −45°
+title: 図7 Network のボード線図 — −3 dB の所が −45°
 x: 周波数 Hz log 10..100k
 y:
   - 利得 dB
@@ -265,7 +278,7 @@ notes:
 
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/graph/05-rc-filter.svg)
 
-図6 はグラフのフェンス (graph) で書いた。印 (mark) の 4 つの周波数は上の表の 4 行と同じで、
+図7 はグラフのフェンス (graph) で書いた。印 (mark) の 4 つの周波数は上の表の 4 行と同じで、
 図の下の読み値も表と同じ数になる。
 
 汎用のオシロスコープにも、発振器と組み合わせてボード線図を描く機能
@@ -280,7 +293,7 @@ notes:
 これをローパスに通すと、f<sub>c</sub> より上の高調波ほど強く削られる。
 入力 (CH1) と出力 (CH2) のスペクトルを並べると、**高調波ごとの差がそのままフィルタの利得**になる。
 
-つなぎ方は図4・図5 と同じ。W1 を方形波にして、AD の **Spectrum** で CH1 と CH2 を見る。
+つなぎ方は図5・図6 と同じ。W1 を方形波にして、AD の **Spectrum** で CH1 と CH2 を見る。
 
 | 計器 | 設定 |
 | --- | --- |
@@ -288,7 +301,7 @@ notes:
 | Spectrum | Channel 1 と Channel 2 を表示、**Start 0 Hz、Stop 10 kHz**、Window: Flat-top、単位: dBV |
 
 ```spectrum
-title: 図7 入力 (CH1) — 方形波 500 Hz の高調波
+title: 図8 入力 (CH1) — 方形波 500 Hz の高調波
 device: ad2
 sweep: 0-10kHz
 samples: 8192
@@ -300,7 +313,7 @@ markers: [500Hz, 1.5kHz, 4.5kHz, 9.5kHz]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/spectrum/05-rc-filter-1.svg)
 
 ```spectrum
-title: 図8 出力 (CH2) — ローパスを通した後
+title: 図9 出力 (CH2) — ローパスを通した後
 device: ad2
 sweep: 0-10kHz
 samples: 8192
@@ -361,7 +374,7 @@ VNA (ベクトルネットワークアナライザ) は CH0 から信号を出�
   f<sub>c</sub> = 1 / (2π × 100Ω × 10nF) = **159 kHz**
 
 ```circuit
-title: 図9 VNA の入出力の抵抗を R にしたローパス (C1 は 10 nF)
+title: 図10 VNA の入出力の抵抗を R にしたローパス (C1 は 10 nF)
 parts:
   J1: sma a2 mirror CH0
   C1: capacitor a4 b4 10n
@@ -394,7 +407,7 @@ C1 は 10 nF (103) のセラミックコンデンサ。板へは SMA とワニ�
 ```vna
 device: litevna64
 sweep: 50k-10M 201
-title: 図10 C 1 つのローパスの S21 (fc = 637 kHz)
+title: 図11 C 1 つのローパスの S21 (fc = 637 kHz)
 dut:
   - shunt C 10n
 traces:
@@ -422,9 +435,9 @@ markers:
 分かること:
 
 - f<sub>c</sub> と −20 dB/decade の下がり方は、R が計器の 50 Ω に替わっただけで
-  図4 の回路と同じ
+  図5 の回路と同じ
 - **計器をつなぐと、計器の抵抗も回路の一部になる**。1.5 kΩ のフィルタを 50 Ω の
-  計器で測れないのはこのため。AD の CH1・CH2 の入力は 1 MΩ なので、図4 では無視できた
+  計器で測れないのはこのため。AD の CH1・CH2 の入力は 1 MΩ なので、図5 では無視できた
 - Stop を 30 MHz まで広げると、ローパスの S21 が十数 MHz あたりで底を打って戻り始める。
   C1 の足とブレッドボードのインダクタンス (10 nH ほど) と C1 の直列共振で、
   その先はコンデンサとして働かない (NanoVNA の教科書の 4-2)

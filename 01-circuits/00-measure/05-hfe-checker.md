@@ -56,6 +56,38 @@ style:
 - hFE は測ったあとで **hFE = I<sub>C</sub>(A2 の読み) / I<sub>B</sub>(A1 の読み)** を
   手計算で求める
 
+## 実体配線図
+
+```breadboard
+title: 図2 RB と RC を 5V につなぎ、Q1 のベースとコレクタへ入れる
+board: half
+parts:
+  RB: resistor b12 b17 1M
+  RC: resistor c8 c13 1k
+  Q1: transistor e12(B) e13(C) e14(E) 2SC1815
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [V+, GND]
+wires:
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
+  - +t8 -- a8 red
+  - +t17 -- a17 red
+  - a14 -- -t14 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/breadboard/05-hfe-checker.svg)
+
+5V は Analog Discovery 3 (AD3) の Supplies の V+ から上の + レールへ、GND は上の − レールへ。
+電流は 3 mA ほどで、板の範囲と AD3 の電源 (各レール約 50 mA まで) に収まる。
+`RB` の下端 (列 12) はベース、`RC` の下端 (列 13) はコレクタと同じ列で、エミッタ (列 14) は黒線で − レールへ落とす。
+`Q1` は平らな面を奥に向けて挿す (2-1 と同じ)。
+
+回路図の電流計 `A1`・`A2` は、板では線で埋めた形に描いてある。電流を読むときは、`RB` か `RC` の下端の足を 1 本抜き、
+その穴と抵抗の足の間にテスターの電流端子を挟む。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -63,7 +95,12 @@ style:
 | RB | 抵抗 (1/4 W) | 1 MΩ |
 | RC | 抵抗 (1/4 W) | 1 kΩ |
 | Q1 | NPN トランジスタ (測るもの) | 2SC1815 など |
-| — | 電源 | 5V (USB) |
+| — | 電源 | Analog Discovery 3 の V+ (5 V) |
+
+## 計器の設定
+
+計器は、直流の電流を読むテスターと、電源の AD3 (Supplies の V+ を 5 V にする)。
+オシロの図は付けない。見るのは時間で変わらない直流の電流 (I<sub>B</sub>・I<sub>C</sub>) と電圧 (V<sub>C</sub>) だけで、テスターの読みで足りるため。
 
 ## 見るべき値
 

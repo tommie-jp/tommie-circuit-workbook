@@ -108,6 +108,72 @@ style:
 今どきのデジタルテスター (入力抵抗が数MΩ〜) は分圧回路をほとんど乱さないので、
 この自作テスターのような大きな誤差は出ない。
 
+## 実体配線図
+
+検流計 `GA` は板に挿せる部品ではないので、板の外の箱で描き、2 本の線で板につなぐ。
+5V の電源は Analog Discovery 3 (AD3) の Supplies の V+ (WaveForms で 5 V にして出力を入れる)。
+図3・図4 とも電流は 10 mA 以下で、板の範囲 (1 穴 200 mA、板全体 500 mA) と AD3 の電源 (各レール約 50 mA まで) に収まる。
+
+図3 は図1 の電流計。`R1` の下端 (列 10) に `RS` の上端と `GA` の + を、`RS` の下端 (列 14) に `GA` の − を同じ列で集めて、並列にする。
+
+```breadboard
+title: 図3 分流器 RS と検流計 GA を並列にして、R1 に直列に入れる
+board: half
+parts:
+  R1: resistor b5 b10 510
+  RS: resistor c10 c14 11
+  GA:
+    type: device
+    at: bottom
+    label: 検流計 GA (1 mA・100 Ω)
+    pins: ["+", "-"]
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [V+, GND]
+wires:
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
+  - +t5 -- a5 red
+  - a14 -- -t14 black
+  - GA.+ -- d10 orange
+  - GA.- -- d14 gray
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/breadboard/04-shunt-multiplier-1.svg)
+
+図4 は図2 の電圧計。0-1 と同じ分圧回路 (`R1`・`R2`) の `R2` の両端 (列 10 と列 15) に、
+`GA` と倍率器 `RV` の直列を渡す。`GA` の + を列 10、`GA` の − を列 12 に当て、`RV` を列 12 から列 15 へ挿す。
+
+```breadboard
+title: 図4 R2 の両端に、検流計 GA と倍率器 RV の直列を当てる
+board: half
+parts:
+  R1: resistor b5 b10 10k
+  R2: resistor c10 c15 10k
+  RV: resistor e12 e15 4.7k
+  GA:
+    type: device
+    at: bottom
+    label: 検流計 GA (1 mA・100 Ω)
+    pins: ["+", "-"]
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [V+, GND]
+wires:
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
+  - +t5 -- a5 red
+  - a15 -- -t15 black
+  - GA.+ -- d10 orange
+  - GA.- -- d12 gray
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/breadboard/04-shunt-multiplier-2.svg)
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -117,7 +183,13 @@ style:
 | RV | 倍率器 (電圧計用) | 4.7 kΩ |
 | R1 (図1) | 抵抗 (1/4 W) | 510 Ω |
 | R1, R2 (図2) | 抵抗 (1/4 W) | 10 kΩ |
-| — | 電源 | 5V (USB) |
+| — | 電源 | Analog Discovery 3 の V+ (5 V) |
+
+## 計器の設定
+
+この題の計器は、自作の検流計テスターと、電源の AD3 (Supplies) だけ。
+オシロの図は付けない。電流も電圧も時間で変わらない直流の値で、検流計の針の振れ (または手持ちのテスターの読み) で足りるため。
+手持ちのテスターは、図3 では `GA` の代わりに mA レンジで、図4 では `GA` と `RV` の直列の代わりに DC V レンジで当てて、読みを比べる。
 
 ## 見るべき値
 

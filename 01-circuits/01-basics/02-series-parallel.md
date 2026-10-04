@@ -58,16 +58,18 @@ parts:
   PS:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: Analog Discovery 3 (Supplies)
+    pins: [V+, GND]
 wires:
-  - PS.+5V -- +t1 red
+  - PS.V+ -- +t1 red
   - PS.GND -- -t2 black
   - +t5 -- a5 red
   - a15 -- -t15 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/02-series-parallel.svg)
+
+5 V の電源は Analog Discovery 3 (AD3) の Supplies の V+ を使う (WaveForms で V+ を 5 V にして出力を入れる)。図2 の「電源」の箱がそれで、V+ を上の + レール、GND を上の − レールへつなぐ。電流は全部で約 2.5 mA で、板の範囲と AD3 の電源 (各レール約 50 mA まで) に収まる。
 
 図2 の `R2` と `R3` の上端はどちらも列 10 (上ブロック) なので、ジャンパ線なしで
 `R1` の下端とつながる。下端も列 15 でつながっていて、そこから GND レールへ
@@ -79,7 +81,9 @@ wires:
 | --- | --- | --- |
 | R1 | 抵抗 (1/4 W) | 1 kΩ |
 | R2, R3 | 抵抗 (1/4 W) | 2 kΩ |
-| — | 電源 | 5V (USB) |
+| — | 電源 | Analog Discovery 3 の V+ (5 V) |
+
+オシロスコープの図は付けない。この題は直流の電圧と電流だけを見るので、テスターの読み値で足りる (オシロは 0-3)。
 
 ## 見るべき値
 

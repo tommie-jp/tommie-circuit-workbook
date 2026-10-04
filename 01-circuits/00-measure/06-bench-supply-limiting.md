@@ -108,6 +108,56 @@ FG は **0V/5V の方形波、1Hz** に設定する (人の目で点滅が分か
 - もし `R1` を短絡するなど配線を間違えても、電流は 20mA までしか流れない
   ので、電源やブレッドボードの配線が高温になる前に守られる
 
+## 実体配線図
+
+図2 を板に組むと図3 になる (図1 は抵抗を 1 本つなぐだけなので板の図は付けない)。配置と配線は 2-1 の図2 と同じで、
+2-1 で Analog Discovery の V+ と W1 から取っていた 5V と入力を、ここでは安定化電源 (PSU) と FG から取る。
+Analog Discovery 3 (AD3) は電源にも発振器にも使わず、Scope だけで波形を見る。この題は安定化電源そのものが題材で、
+AD3 の Supplies には電流制限を決める設定が無いため、電源は PSU を使う。
+
+```breadboard
+title: 図3 PSU と FG で LED を点滅させ、AD3 の Scope で入力とコレクタを見る
+# 上の + レール = +5V (PSU)、上の − レール = GND。PSU・FG・AD3 の GND は同じ − レールへ
+board: half
+parts:
+  R1: resistor b5 b11 330
+  D1: led c11(A) c13(K) red
+  Q1: transistor e12(B) e13(C) e14(E) 2SC1815
+  RB: resistor b12 b17 10k
+  V1:
+    type: device
+    at: top
+    label: 安定化電源 (5 V、制限 20 mA)
+    pins: ["+", "-"]
+  V2:
+    type: device
+    at: top
+    label: FG (0〜5 V、1 Hz)
+    pins: [OUT, GND]
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3 (Scope)
+    pins: [1+, 1-, 2+, 2-]
+wires:
+  - V1.+ -- +t1 red
+  - V1.- -- -t2 black
+  - V2.GND -- -t3 black
+  - V2.OUT -- a17 yellow
+  - +t5 -- a5 red
+  - a14 -- -t14 black
+  - AD.1+ -- a13 orange
+  - AD.1- -- -t11 black
+  - AD.2+ -- a15 blue
+  - e15 -- e17 blue
+  - AD.2- -- -t16 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/breadboard/06-bench-supply-limiting.svg)
+
+LED の電流は 8.5 mA で、板の範囲 (1 穴 200 mA、板全体 500 mA) と PSU の電流制限 20 mA に収まる。
+`Q1` は平らな面を奥に向けて挿す (2-1 と同じ)。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -150,6 +200,23 @@ AD で Amplitude 1 V の題は、FG では 2 Vpp にする。
 | W1 / W2 (波形発生器) | ファンクションジェネレータの OUT (2 ch の機種なら CH1 / CH2) | AD の出力抵抗はほぼ 0 Ω で、AD3 は 30 mA まで歪みなく出せる。汎用の FG は 50 Ω なので、小さな負荷では振幅が下がる |
 | V+ / V− (±5 V の電源) | 安定化電源 (± が要る題は 2 出力の機種か 2 台) | 汎用の電源は電流制限を掛けられる (この題)。AD の Supplies には利用者が決める電流制限が無い |
 | GND | 電源の −、FG の出力の外側 | FG の GND はオシロの GND と同じく大地につながっている (0-3 の落とし穴) |
+
+### オシロで見る
+
+計器は、図3 の入力 (CH2) とコレクタ (CH1) を見る AD3 の Scope。FG の 1 Hz は 10 MHz よりずっと遅く、Scope の範囲に収まる。
+時間は 200 ms/div (2 周期が画面に入る)、電圧は両方 1 V/div、トリガは CH2 の立ち上がり 2.5 V。
+
+```scope
+title: 図4 FG の 1 Hz 方形波 (CH2) と、点滅するコレクタ (CH1)
+time: 200ms/div
+trigger: ch2 rising 2.5V
+ch1: {wave: square 1Hz 1.65V offset 1.85V phase 180deg, range: 1V/div, position: -3div}
+ch2: {wave: square 1Hz 2.5V offset 2.5V, range: 1V/div, position: -3div}
+cursors: [0, 500ms]
+measure: [vmax, vmin, freq]
+```
+
+CH2 が 5 V の 0.5 秒だけ LED が点き、その間コレクタは約 0.2 V に落ちる。CH2 が 0 V の間は LED が消え、コレクタは約 3.5 V (2-1 と同じ値)。
 
 ## 見るべき値
 
