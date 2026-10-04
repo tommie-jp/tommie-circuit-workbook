@@ -118,6 +118,8 @@ cursors: [250ms, 750ms]
 measure: [freq, vmax]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/scope/01-pico-blink.svg)
+
 - 図3 の CH1 (GP15) は 0V と 3.3V を行き来する。High が 0.5 秒、Low が 0.5 秒で、周波数は 1Hz
   (プログラムの `sleep_ms(500)` の 2 回分が 1 周期)
 - CH2 (LED のアノード) は GP15 が High のとき約 2.0V。残りの約 1.3V は R1 の両端にかかる

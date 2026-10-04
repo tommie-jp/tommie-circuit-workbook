@@ -206,6 +206,8 @@ cursors: [2.5ms, 22.5ms]
 measure: [freq, vmax, vmin]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/scope/05-d-flip-flop.svg)
+
 - 図3 の CH1 (クロック) は 0V と 5V を行き来し、周波数は 100Hz (周期 10ms)。
   CH2 (Q2) はクロックの立ち上がりのたびに (0・10ms・20ms…) 0V と約 4V が入れ替わる。立ち下がりでは動かない
 - カーソルの ΔX = 20ms から、1/ΔX = 50Hz。クロックの半分で、Q2 の周期はクロックの 2 周期

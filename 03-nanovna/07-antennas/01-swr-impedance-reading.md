@@ -60,6 +60,8 @@ wires:
   - j7 -- j0 black
 ```
 
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/perfboard/01-swr-impedance-reading.svg)
+
 R1 を 25 Ω・50 Ω・100 Ω・200 Ω と挿し替えて、SWR と Smith チャートの動きを見る
 (E24 に無い値は 5-5 の表の作り方で作る)。板に流れる電流は数 mA 以下で、板の範囲に収まる。
 

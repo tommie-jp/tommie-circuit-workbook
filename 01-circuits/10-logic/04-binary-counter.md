@@ -237,6 +237,8 @@ cursors: [400ms, 1.117s]
 measure: [freq, duty, vmax, vmin]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/scope/04-binary-counter.svg)
+
 - 図3 の CH1 (クロック) は約 0.1V と約 3.5V を行き来する。High が約 0.39 秒、Low が約 0.32 秒
   (3-2 の式で tH = 0.69 × (R1 + R2) × C1、tL = 0.69 × R2 × C1。計算値)
 - CH2 (Q1) はクロックが立ち下がるたびに (カーソル X1・X2 の位置) 0 と 1 が入れ替わる。

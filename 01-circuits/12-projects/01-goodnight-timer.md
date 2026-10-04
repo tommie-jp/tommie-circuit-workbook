@@ -267,6 +267,8 @@ cursors: [60s, 480s]
 measure: [vmax]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/scope/01-goodnight-timer.svg)
+
 - 図3 の CH2 (OUT) は押した瞬間 (t = 0) に 0V から約 5V へ上がり、図の間ずっと H のまま。
   CH1 (Ct) は 0V から 5V に向かって曲線を描いて上がる。時定数 τ = Rt × Ct = 4.7MΩ × 220µF = 1034 秒 (計算値)
 - カーソルの読みは、X1 (60 秒) で 5V × (1 − e<sup>−60/1034</sup>) ≈ 0.28V、X2 (480 秒) で 5V × (1 − e<sup>−480/1034</sup>) ≈ 1.86V (計算値)

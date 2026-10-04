@@ -183,7 +183,7 @@ cursors: [0, 1.0136ms]
 measure: [vpp, freq, phase]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/scope/07-wien-bridge-1.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/scope/07-wien-bridge.svg)
 
 図3 は、下の SPICE の波形 (基本波と 3 次の高調波) から作った画面。カーソルの 1 周期の間隔 (ΔX) は約 1.01 ms で、1/ΔX が約 987 Hz。
 CH2 (+ 入力) は CH1 (出力) の 1/3 の高さで、山と谷の時刻がほぼ同じ (同相)。頭がわずかに平らに見えるのが、ダイオードによるひずみ。

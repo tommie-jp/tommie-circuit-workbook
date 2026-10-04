@@ -146,6 +146,8 @@ cursors: [0, 139us]
 measure: [vpp, vmax, vmin, freq]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/scope/03-oscilloscope.svg)
+
 ### Analog Discovery と汎用オシロの読み替え
 
 この節は、AD 以外のオシロを使う人が後の章で読み返すための対応表で、この題の実験には要らない。

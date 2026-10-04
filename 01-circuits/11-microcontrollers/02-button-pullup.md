@@ -108,6 +108,8 @@ cursors: [-100ms, 300ms]
 measure: [vmax, vmin]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/scope/02-button-pullup.svg)
+
 - 図3 の GP16 は、押す前は 3.3V (R1 が引き上げている)。押した瞬間 (t = 0) に 0V へ落ち、
   離した瞬間 (約 500ms) に 3.3V へ戻る
 - カーソルの読みは X1 (押す前) が 3.3V、X2 (押している間) が 0V で、下の「見るべき値」の表と同じ。

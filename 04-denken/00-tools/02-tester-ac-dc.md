@@ -64,11 +64,13 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, W1]
+    pins: [GND, W1, 1+, 1-]
 wires:
   - AD.GND -- -t3 black
   - AD.W1 -- a5 yellow
   - c10 -- -t10 black
+  - AD.1+ -- b5 blue
+  - AD.1- -- -t12 black
 notes:
   - text: "R1 の両端 (5・10 列) にテスターを当てる。実効値形と平均値形を順に 2 回読む"
 ```
@@ -76,6 +78,7 @@ notes:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/breadboard/02-tester-ac-dc.svg)
 
 - R1 の両端 (5 列と 10 列) が測定点。テスターのリードをここに当てる
+- AD3 の Scope は 1+ (青) を 5 列に、1− (黒) を GND のレールへ挿す (図3)。
 - AD の GND とテスターの GND 側 (COM) は共通にする。別々の電源で浮かせない
 
 ## 計器の設定
@@ -99,6 +102,37 @@ W1 はファンクションジェネレータ (FG) の OUT に替え、出力を
   M1 は 0.95 V、M2 は 1.06 V になる (計算値)。M2 ÷ M1 = 1.11 は変わらない。
   表の値にそろえるなら、M1 が 1.00 V を示すまで振幅を上げる (約 2.1 Vpp)
 - テスターは電池で動き、大地から浮いている。COM を GND のレールに当ててよい
+
+### オシロスコープで波形を見る
+
+テスターの読みの違いは、波形そのものは同じでも「何を計算するか」が違うことから生まれる。
+AD3 の Scope で、R1 の両端の波形 (CH1) と、それを全波整流した形 (Scope の Math で |CH1| を作る) を並べて見る。
+
+| 項目 | 値 |
+| --- | --- |
+| CH1 (1+) | R1 の左端 (5 列)。500mV/div、0V を画面の中央に置く (双極の波) |
+| 1− | GND |
+| Math | abs(CH1)。CH1 と同じ 500mV/div |
+| 時間レンジ | 500µs/div (1 kHz が 2 周期) |
+| トリガ | CH1 の立ち上がり、0V |
+| Measurements | CH1: RMS・DC (平均)。Math: DC (平均) |
+
+```scope
+title: 図3 方形波 (CH1) とその整流 (M) — 整流平均は 1 V、実効値も 1 V
+time: 500us/div
+ch1: {wave: square 1kHz 1V duty 50% offset 0V, range: 500mV/div, position: 0div}
+math: {expr: abs(ch1), unit: V, range: 500mV/div, position: 0div}
+trigger: ch1 rising 0V
+cursors: [250us, 750us]
+measure: [rms, avg]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/scope/02-tester-ac-dc.svg)
+
+- CH1 は ±1 V を行き来する方形波で、実効値 (RMS) は 1.00 V、平均 (DC) は 0 V。M1 (真の実効値形) の読みと同じ
+- Math (|CH1|) は常に 1 V の一定値で、整流平均は約 1.00 V (check の読みは 999 mV、標本化の端数)。M2 (平均値形) はこの 1.00 V に 1.11 を掛けて 1.11 V と表示する
+- カーソルは 250µs (CH1 が +1 V の間) と 750µs (−1 V の間)。CH1 は +1 V と −1 V、Math は両方とも 1 V と読める
+- 図の振幅は表の値 (1 V) にそろえた。実際に FG の 50 Ω で 0.95 V に下がる分は、上の注のとおり振幅を上げて補う
 
 ## 見るべき値
 

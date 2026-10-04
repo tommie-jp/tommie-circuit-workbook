@@ -102,6 +102,8 @@ wires:
   - l15 -- l8 black
 ```
 
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/perfboard/03-output-level.svg)
+
 J1 にアンプの出力のケーブルを、J2 に NanoVNA の CH1 のケーブルを付ける。
 抵抗は 0.25 W 品を使う。+20 dBm (100 mW) を入れたときの電流は I = √(0.1 W ÷ 50 Ω) ≈ 45 mA で、
 R1 の発熱は 45 mA の 2 乗 × 43 Ω ≈ 0.09 W (R2 は約 0.01 W) と、0.25 W 品に収まる。

@@ -216,6 +216,8 @@ cursors: [0, 500ms]
 measure: [vmax, vmin, freq]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/00-measure/scope/06-bench-supply-limiting.svg)
+
 CH2 が 5 V の 0.5 秒だけ LED が点き、その間コレクタは約 0.2 V に落ちる。CH2 が 0 V の間は LED が消え、コレクタは約 3.5 V (2-1 と同じ値)。
 
 ## 見るべき値

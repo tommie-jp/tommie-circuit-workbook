@@ -145,6 +145,8 @@ ch2: {wave: ch1 | rc 150us, range: 500mV/div, position: 0div}
 measure: [vpp, freq]
 ```
 
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/scope/05-rc-filter.svg)
+
 読み値は CH1 が Vpp 2.00 V、CH2 が Vpp 1.41 V (どちらも 1.06 kHz)。比は 0.707 で、見るべき値の表の f<sub>c</sub> の行と合う。
 
 ## 周波数特性を計器で見る

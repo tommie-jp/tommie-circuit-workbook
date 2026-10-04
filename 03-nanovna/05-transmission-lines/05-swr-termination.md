@@ -66,6 +66,8 @@ wires:
   - j2 -- GND black
 ```
 
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/perfboard/05-swr-termination.svg)
+
 R1 と R2 の所を挿し替えて、表のほかの終端を測る。板に流れる電流は、NanoVNA の出力が 0 dBm 以下なので
 数 mA 以下で、板の範囲に収まる。
 
