@@ -51,7 +51,46 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/04-nanovna-output.svg)
 
+## 実体配線図
+
+パッドは 10 MHz 以上を測るので、ブレッドボードではなく perfboard に端面 SMA で組む (0-3 の図2 と同じ板、3-5)。
+J1 に NanoVNA の CH0 のケーブルを、J2 に tinySA の RF のケーブルを付ける。
+
+```perfboard
+board:
+  size: 7x5cm
+  slots: on
+title: 図2 perfboard の 20 dB パッド (CH0 から tinySA へ)
+points:
+  GND: l2
+parts:
+  J1: sma/female-edge i1 h0 j0
+  P1: resistor i3 i6 43
+  P2: resistor i8 k8 11
+  P3: resistor i10 i13 43
+  J2: sma/female-edge i24 j25
+wires:
+  - i1 -- i3
+  - i6 -- i8
+  - i8 -- i10
+  - i13 -- i24
+  - k8 -- l8 black
+  - l8 -- GND black
+  - j0 -- j2 black
+  - j2 -- GND black
+  - j25 -- j15 black
+  - j15 -- l15 black
+  - l15 -- l8 black
+```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/perfboard/04-nanovna-output.svg)
+
+CH0 の出力は 0 dBm 以下 (1 mW、約 6.3 mA 相当) なので、板に流れる電流は数 mA 以下で、1 穴 200 mA の範囲に収まる。
+抵抗は 0.25 W 品でよい。
+
 ## 計器の設定
+
+計器は tinySA Ultra。信号源は NanoVNA の CH0 で、AD3 とオシロは使わない (10 MHz 以上を見る題)。
 
 | 一般の名前 | 値 | tinySA Ultra のメニュー |
 | --- | --- | --- |

@@ -77,7 +77,7 @@ style:
 title: 図2 ULN2003A とステッピングモータを組む
 board: half
 parts:
-  U1: dip16 @ e5
+  U1: dip16 @ e5 ULN2003A
   PSU:
     type: device
     at: top

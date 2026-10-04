@@ -55,7 +55,41 @@ wires:
   直すと **約 −16.4 dBm** (計算値)。tinySA Ultra の入力上限 (11-1、自動減衰で
   +0 dBm 程度) より 16 dB 以上低いので安全
 
+## 実体配線図
+
+1 MHz で 1 kΩ の抵抗が 1 本だけなので、ブレッドボードに組んでよい (3 MHz 以下)。
+AD3 の Wavegen W1 と GND、tinySA の RF と GND に、それぞれケーブルをつなぐ。
+
+```breadboard
+title: 図2 ブレッドボードに R1 を挿す (W1 から tinySA へ)
+board: half
+parts:
+  R1: resistor b5 b10 1k
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery
+    pins: [GND, W1]
+  SA:
+    type: device
+    at: top
+    label: tinySA
+    pins: [RF, GND]
+wires:
+  - AD.GND -- -t3 black
+  - AD.W1 -- a5 yellow
+  - SA.RF -- a10 orange
+  - SA.GND -- -t12 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/breadboard/02-center-span-rbw.svg)
+
+- 板を流れる電流は約 0.95 mA で、ブレッドボードの範囲 (1 穴 200 mA) に収まる
+- **グランドを先に**つなぎ、外すときは最後に外す
+
 ## 計器の設定
+
+計器は tinySA Ultra。信号源は Analog Discovery 3 (AD3) の Wavegen W1 (1 MHz・振幅 1 V の正弦波) で、オシロは使わない (周波数を見る題)。
 
 一般の名前と tinySA Ultra のメニューの対応 (ファームウェアは TinySA4 系を仮定)。
 

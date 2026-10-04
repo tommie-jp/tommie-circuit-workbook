@@ -92,33 +92,77 @@ wires:
 
 ## 実体配線図
 
-この本のフェンスの版には銅張り基板の図が無いので、**寸法を表で**示す。
-基板は FR4 (厚さ 1.6 mm、比誘電率 4.4 と仮定) の両面銅張り、裏は全面 GND。
+基板は FR4 (厚さ 1.6 mm、比誘電率 4.4 と仮定) の両面銅張りで、5×7 cm の板に収まる。裏は全面 GND。
+J1 に CH0 のケーブルを、J2 に 20 dB アッテネータ経由で CH1 のケーブルをつなぐ。電源の 5 V は USB アダプタなどから取る。
+
+```copper
+board:
+  size: 70x50mm
+  ground: back
+title: 図2 ERA-3SM+ の 1 段を銅張り基板に組む
+f: 1G
+copper:
+  Lin: line 0,36 27,36 3.06mm
+  Lout: line 41,36 70,36 3.06mm
+  G1: pad 34,28 4x4mm
+  VG1a: via 33,28
+  VG1b: via 35,28
+  G2: pad 34,44 4x4mm
+  VG2a: via 33,44
+  VG2b: via 35,44
+  N1: pad 46,26 4x4mm
+  N2: pad 56,26 4x4mm
+  VCC: pad 66,26 4x4mm
+  GCb: pad 56,14 4x4mm
+  VCb: via 56,14
+parts:
+  J1: sma left 36 CH0
+  J2: sma right 36 CH1
+  C1: capacitor/1608 12,36 1n
+  C2: capacitor/1608 60,36 1n
+  U1: mmic 27,36 G1 41,36 G2 ERA-3SM+
+  L1: inductor 46,36 N1 100n
+  L2: inductor N1 N2 1u
+  Cbp: capacitor N2 GCb 10n
+  Rb: resistor N2 VCC 51
+  BAT:
+    type: device
+    at: 62,-9
+    label: 5 V
+    pins: ["-", "+"]
+wires:
+  - BAT.+ -- VCC red
+  - BAT.- -- GCb black
+```
+
+![銅張り基板の寸法図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/copper/06-mmic-lna.svg)
 
 | 何 | 寸法・置き方 |
 | --- | --- |
-| 基板 | 30 mm × 20 mm。裏は全面の銅 (GND) |
-| 50 Ω の線 | **幅 3.0 mm** (計算値 50.8 Ω、実効比誘電率 3.3)。基板の中央を左右に通す |
-| 端面 SMA (J1・J2) | 左右の縁に 1 つずつ。中心ピンを線の端に、外皮の脚を表の GND の島と裏のベタへ半田付け |
-| U1 (ERA-3SM+) | 線の中央に置く。線を 1 番 (IN) と 3 番 (OUT) の足の間で切る |
-| U1 の GND (2・4 番) | 線の両脇に GND の島 (3 mm × 3 mm)。**島ごとに 2 か所、0.8 mm の穴に線を通して裏のベタへ** (ビアの代わり) |
-| C1・C2 (1 nF、1608) | U1 の左右で線を 1 mm 切り、その隙間を跨いで載せる |
-| RFC (100 nH・1 µH、1608) | OUT 側の線の、C2 より U1 寄りから直角に上へ。100 nH を線に近い側に |
-| Cbp・Rbias | RFC の上の端の島に。Cbp は GND の島へ、Rbias (1/4 W の軸物でよい) は 5 V の線へ |
+| 50 Ω の線 | **幅 3.06 mm** (計算値 50.0 Ω、実効比誘電率 3.3。図の線路のラベルの値)。板の中央を左右に通す |
+| 端面 SMA (J1・J2) | 左右の縁に 1 つずつ。中心ピンを線の端に、外皮の脚を表の GND の縁と裏のベタへ半田付け |
+| U1 (ERA-3SM+) | 線の中央。線を 1 番 (IN) と 3 番 (OUT) の足の間で切る |
+| U1 の GND (2・4 番) | 線の上下に GND の島 (4 mm × 4 mm)。**島ごとに 2 か所、0.8 mm の穴に線を通して裏のベタへ** (ビアの代わり) |
+| C1・C2 (1 nF、1608) | 線を 1 mm 切り、その隙間を跨いで載せる |
+| L1 (100 nH)・L2 (1 µH) | OUT 側の線から直角に上へ。100 nH を線に近い側に |
+| Cbp・Rbias | L2 の先の島 (N2) に。Cbp は GND の島 (穴で裏のベタへ)、Rbias (1/4 W の軸物) は 5 V の島へ |
 
-- 50 Ω の幅は Hammerstad の式で計算した値。基板の厚さや比誘電率が違えば幅も変わる
+- 板を流れる電流は Id = 35 mA で、幅 3 mm の線に対して十分小さい (C 値の目安 500 mA 以下)
+- 50 Ω の幅は Hammerstad の近似式で計算した値。基板の厚さや比誘電率が違えば幅も変わる
   (測って確かめるのは 3-13・9-7)
 - **治具だけで先に確かめる**: U1 と C1・C2 を載せる前に、切る前の線 (スルー) の S21 と
   S11 を測っておく。1.5 GHz で S11 が −20 dB 以下なら治具は使える (3-6 と同じ考え方)
 
 ## 掃引の設定
 
+計器は VNA。この本の図は NanoVNA-H4 で書いてあり、標準の LiteVNA64 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題。電源の 5 V は USB アダプタ)。
+
 | 項目 | 値 |
 | --- | --- |
 | 範囲 | 100 MHz〜1.5 GHz |
 | 点数 | 141 |
 | 校正 | SOLT。CH0 のケーブルの先と、**20 dB アッテネータを付けた CH1 側の先**で (アッテネータを校正に含める) |
-| 表示 | 図2 は S21 の Log Mag、図3 は S11 の Log Mag と Smith |
+| 表示 | 図3 は S21 の Log Mag、図4 は S11 の Log Mag と Smith |
 
 アッテネータを校正に**含める**と、画面の S21 は MMIC の利得そのもの (+21 dB など) になる。
 **含めない** (ケーブルの先で校正してから付ける) と、画面は利得 − 20 dB。
@@ -130,7 +174,7 @@ wires:
 ```vna
 device: h4
 sweep: 100M-1.5G 141
-title: 図2 20 dB アッテネータ単体の S21 (MMIC を挟む前の基準)
+title: 図3 20 dB アッテネータ単体の S21 (MMIC を挟む前の基準)
 dut:
   - series R 40.9
   - shunt R 10.1
@@ -154,7 +198,7 @@ notes:
 ```vna
 device: h4
 sweep: 100M-1.5G 141
-title: 図3 MMIC の入力の S11 — 周波数とともに −30 dB から −16 dB へ (等価回路)
+title: 図4 MMIC の入力の S11 — 周波数とともに −30 dB から −16 dB へ (等価回路)
 dut:
   - series R 3 esl 1.8n
   - shunt R 50
