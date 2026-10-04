@@ -60,8 +60,9 @@ wires:
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/02-ceramic-capacitor.svg)
 
-積層セラミック (2012 サイズ相当) はリード線が無いぶん ESL が小さい。ここでは
-基板の穴までの配線を含めて ESL ≈ 2 nH、ESR ≈ 0.05 Ω と見積もる。
+部品はリード付きの積層セラミック (ラジアル形) を使い、リードを数 mm に切りつめて
+挿す。リードが短いほど ESL は小さい。ここでは短いリードと基板の穴までの配線を
+含めて ESL ≈ 2 nH、ESR ≈ 0.05 Ω と見積もる (目安)。
 
 ## 掃引の設定
 

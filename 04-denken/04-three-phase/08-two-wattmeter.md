@@ -101,10 +101,10 @@ wires:
   - f12 -- f14
   - i12 -- i14
 notes:
-  - line c4 i4 blue
-  - line f7 i7 blue
-  - text d4a3: 電圧コイル (a-c)
-  - text g7a3: 電圧コイル (b-c)
+  - line c5 i5 blue
+  - line f8 i8 blue
+  - text d5a3: 電圧コイル (a-c)
+  - text g8a3: 電圧コイル (b-c)
   - text b14: N
   - text b1: a 線
   - text e1: b 線

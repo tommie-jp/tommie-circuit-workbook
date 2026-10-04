@@ -31,14 +31,14 @@ style:
   standard: jis
 parts:
   C1: capacitor c5 e5 l=$C_x$
-  DMM:
+  M1:
     type: device
     at: c7
     label: "DMM (C)"
     pins: ["+", "-"]
 wires:
-  - c5 -| DMM.+
-  - e5 -| DMM.-
+  - c5 -| M1.+
+  - e5 -| M1.-
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/02-parallel-plate-capacitor.svg)

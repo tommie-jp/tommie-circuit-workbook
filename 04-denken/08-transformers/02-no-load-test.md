@@ -103,7 +103,7 @@ title: 図3 励磁電流の分 (CH2、20 mV/div) は V1 (CH1、1 V/div) より 8
 time: 200us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1kHz 2V, range: 1V/div}
-ch2: {wave: sine 1kHz 47.2mV phase -84deg, range: 20mV/div}
+ch2: {wave: sine 1kHz 46.9mV phase -84deg, range: 20mV/div}
 measure: [vmax, freq, phase]
 ```
 
@@ -157,7 +157,7 @@ CH1 − CH2 で作り、それに対する位相を読む (Math の位相を測�
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |
 | CH1 (V1、振幅) | 2.00 V | Wavegen の設定どおり |
-| CH2 (Rs1 の両端、振幅) | 47.2 mV | I0 = 47.2 mV ÷ 4.7 kΩ ≒ 10.0 µA |
+| CH2 (Rs1 の両端、振幅) | 46.9 mV | I0 = 46.9 mV ÷ 4.7 kΩ ≒ 10.0 µA |
 | φ0 (CH1 に対する CH2 の遅れ) | 約 84° | ほぼ 90° 遅れ = ほとんど無効電流 (磁化分) |
 | P0 (計算値、V1×I0×cos φ0) | 約 1.0 µW | 鉄損に当たる有効分。桁がとても小さい |
 | 8-1 の負荷時 1 次電流との比 (I0 / I1) | 約 0.05 | 励磁電流は負荷時電流の 5 % ほど。良いトランスほど小さい |
