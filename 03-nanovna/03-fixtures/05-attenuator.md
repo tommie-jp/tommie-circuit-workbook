@@ -34,17 +34,15 @@ title: 図1 10 dB T 型アッテネータ
 parts:
   J1: sma b2 mirror
   R1: resistor b4 b6 27
-  R2: resistor d6 d8 36
+  R2: resistor b6 d6 36
   R3: resistor b6 b8 27
   J2: sma b10
   G1: ground c2
-  G2: ground d9
+  G2: ground d6
   G3: ground c10
 wires:
   - J1.1 -- b4
-  - b6 -- d6
   - b8 -- J2.1
-  - d8 -- d9
   - J1.2 -- c2
   - J2.2 -- c10
 notes:

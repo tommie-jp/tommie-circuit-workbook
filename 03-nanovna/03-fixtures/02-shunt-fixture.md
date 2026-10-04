@@ -25,10 +25,9 @@ parts:
   R1: resistor b4 d4 100
   G1: ground c2
   G2: ground c8
-  G3: ground d6
+  G3: ground d4
 wires:
   - J1.1 -- b4 -- b6 -- J2.1
-  - d4 -- d6
   - J1.2 -- c2
   - J2.2 -- c8
 notes:

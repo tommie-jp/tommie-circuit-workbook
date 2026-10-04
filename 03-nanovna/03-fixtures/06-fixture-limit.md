@@ -47,7 +47,7 @@ notes:
 board:
   size: 4x8
   slots: on
-title: 図2
+title: 図2 中心導体の間を 3 穴に詰めたスルー
 parts:
   J1: sma/female-edge e1 d0 f0
   J2: sma/female-edge e4 f5

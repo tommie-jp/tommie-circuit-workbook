@@ -75,7 +75,7 @@ perfboard ではないので描かない (基板の印刷でスルーの区画�
 board:
   size: 4x8
   slots: on
-title: 図2
+title: 図2 自作のスルー治具 (3-6 の図 2 と同じ)
 parts:
   J1: sma/female-edge e1 d0 f0
   J2: sma/female-edge e4 f5
