@@ -57,6 +57,39 @@ notes:
   CH2 の入力 (1 MΩ) には電流がほとんど流れないので、V2 = ω M I1 がそのまま出る
 - L1 と L2 の筒は、軸を一直線にそろえて机に置き、巻線の端どうしの距離 d を変える
 
+## 実体配線図
+
+L<sub>1</sub>・L<sub>2</sub> は筒を板の外の机に置き、両端のリードを板の穴に挿す (リードが届かなければ、つなぎ線で延ばす)。
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery
+board: half
+parts:
+  L1: inductor/axial c5 c10
+  Rr: resistor d10 d15 150
+  L2: inductor/axial c20 c25
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery
+    pins: [GND, W1, "1+", "1-", "2+", "2-"]
+wires:
+  - AD.GND -- -t2 black
+  - AD.W1 -- b5 yellow [h-10]
+  - AD.1+ -- a10 blue
+  - AD.1- -- -t12 black
+  - AD.2+ -- b25 white [h-10]
+  - AD.2- -- -t27 black
+  - a15 -- -t15 black
+  - a20 -- -t20 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/breadboard/07-mutual-inductance.svg)
+
+- W1 → L<sub>1</sub> (5〜10 列) → R<sub>ref</sub> (10〜15 列) → GND レール (15 列)。1+ は R<sub>ref</sub> の上 (10 列)、1− は GND
+- L<sub>2</sub> (20〜25 列) は L<sub>1</sub> とつながない。20 列を GND レールへ、25 列に 2+ を当てる
+- 板に流れる電流は 6.13 mA (計算値) で、ブレッドボードの 1 穴 200 mA に十分収まる
+
 ## 部品
 
 | 記号 | 部品 | 値 |
@@ -74,6 +107,8 @@ notes:
 
 ## 計器の設定
 
+計器は Analog Discovery 3 (AD3)。Wavegen W1 が 100 kHz の正弦波を出し、Scope の 1 ch で I1、2 ch で V2 を同時に読めるため。
+
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Sine、100 kHz、Amplitude 1 V |
@@ -83,7 +118,7 @@ notes:
 d = 0 の画面。V2 は I1 より 90° 進む (L2 の向きを逆にすると 90° 遅れる)。
 
 ```scope
-title: 図2 d = 0 — V2 (CH2) は I1 の分 (CH1) より 90° 進む
+title: 図3 d = 0 — V2 (CH2) は I1 の分 (CH1) より 90° 進む
 time: 2us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 100kHz 920mV, range: 500mV/div}

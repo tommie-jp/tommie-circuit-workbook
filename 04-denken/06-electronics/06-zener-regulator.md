@@ -95,6 +95,8 @@ wires:
 
 ## 計器の設定
 
+計器は Analog Discovery 3 (AD3)。入力の三角波は Wavegen W1、入力と出力の波形は Scope の 2 ch で読む。回路の電流は最大 7.6 mA で、W1 の 30 mA 以内に収まる。
+
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Triangle、10 Hz、Amplitude 3 V、Offset 2 V (−1 V〜5 V) |
@@ -104,6 +106,21 @@ wires:
 
 表の値は、XY の画面にカーソルを当てるか、時間軸の画面で CH1 が 4 V・5 V を通る瞬間の CH2 を
 読む。三角波の上りと下りで同じ線をなぞるかも見る。
+
+時間軸の画面 (S1 を開けた無負荷) は図3 になる。入力 (CH1) の三角波が 4 V・5 V を通る所にカーソルを当てると、
+出力 (CH2) は 3.21 V・3.33 V と読める (表の値。V_Z0 = 3.1 V、r_Z = 30 Ω の仮定)。
+
+```scope
+title: 図3 入力 (CH1) が 4 → 5 V のとき、出力 (CH2) は 3.21 → 3.33 V
+time: 10ms/div
+trigger: ch1 rising 2V
+ch1: {wave: triangle 10Hz 3V offset 2V phase 90deg, range: 1V/div, position: -2div}
+ch2: {wave: "= max(min(ch1, 3.1V + (ch1 - 3.1V) * 30 / 250), -0.65V + (ch1 + 0.65V) * 10 / 230)", range: 1V/div, position: -2div}
+cursors: [16.667ms, 25ms]
+measure: [vmax, vmin]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/scope/06-zener-regulator.svg)
 
 ### オシロスコープと発振器
 
@@ -142,7 +159,7 @@ wires:
   3.1 V × 1220 ÷ 1000 = 3.78 V を越えてから (それより下では R1 と R_L の分圧)
 
 ```graph
-title: 図3 入出力の関係 (計算) — 3.1 V を越えると出力が頭打ちになる
+title: 図4 入出力の関係 (計算) — 3.1 V を越えると出力が頭打ちになる
 x: 入力 V -1..5
 y: 出力 V -1..4
 lines:

@@ -583,6 +583,7 @@ style:
 | 74HC86 | 1 | U12 (2 入力 XOR) |
 | 74HC32 | 1 | U14 (2 入力 OR) |
 | 0.1 µF のセラミックコンデンサ | 13 | IC ごとの電源のそば |
+| 10 kΩ の抵抗 (1/4 W)・押しボタン (a 接点) | 各 1 | 試験用 (図12)。T880 のプルダウンと、T880 を H にするボタン |
 
 IC は全部で 13 個。ユニットごとに 4 個以内なので、フルサイズのブレッドボード 1 枚に 1 ユニットを載せる。ユニバーサル基板には、ユニットごとに板の大きさを変えて載せる (「実体配線図」)。
 
@@ -1617,3 +1618,71 @@ wires:
 - 図 11b: 5×7 cm の板を横に置く (24 列 × 18 行)。IC は U16 が `i12`、U17 が `i11` (U17 は 180 度回した)。交差は 21 か所。check のネットリストは図 11 と同じ
 
 - 74HC163 (U16) のデータ入力は、A (PIN 3) だけ +5V、B〜D は GND で、値 1 を読み込む。ENP (PIN 7) と ENT (PIN 10) は、EN を 1 本の線で受ける。
+
+## Analog Discovery 3 で試験する
+
+**計器は Analog Discovery 3 (AD3) 1 台。** 電源は Supplies の V+ (5 V)、クロックは Wavegen W1、T440 は Wavegen W2、見るのは Scope の 2 ch (T440 と OUT)。
+ブロック全体の 74HC は 13 個で、8 Hz の遅い動作なので、電流は目安で 1 mA に満たず、V+ の 50 mA (USB 給電で 250 mW) に収まる。
+T880 は 3 回目の T440 のあと、+5 V の線を押しボタンで触れて H にする。AD3 の DIO は 3.3 V の出力で、74HC (5 V) の H の下限 3.5 V に届かないので使わない。
+本物の T440・T880 は検出の回路 ([03-detect.md](03-detect.md)) が作る。ここでは、それが無くても状態遷移だけを試験できるようにする。
+
+```breadboard
+title: 図12 AD3 と板 1〜4 の端子 (試験用のつなぎ)
+board: half
+parts:
+  S1: switch d8 d12
+  R1: resistor b8 b10 10k
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [V+, GND, W1, W2, "1+", "1-", "2+", "2-"]
+  LINK:
+    type: device
+    at: bottom
+    label: 板 1〜4 の端子
+    pins: [CLK, T440, T880, OUT, +5V, GND]
+wires:
+  - AD.V+ -- +t2 red
+  - AD.GND -- -t2 black
+  - LINK.+5V -- +t25 red
+  - LINK.GND -- -t25 black
+  - AD.W1 -- a4 yellow
+  - LINK.CLK -- e4 yellow
+  - AD.W2 -- a6 orange
+  - AD.1+ -- b6 orange
+  - LINK.T440 -- e6 orange
+  - LINK.T880 -- e8 green
+  - a10 -- -t10 black
+  - a12 -- +t12 red
+  - AD.2+ -- a14 blue
+  - LINK.OUT -- e14 blue
+  - AD.1- -- -t16 black
+  - AD.2- -- -t18 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/04-state-machine-5.svg)
+
+- 板 1〜4 の電源 (5 V と GND) と、4 枚の板の間の信号は、これまでの図のとおり。AD3 とつなぐのは、板 1 の CLK・T440・T880 の入力と、板 4 の OUT の出力
+- 押しボタン S1 (12 列) は +5 V につなぎ、T880 (8 列) へ渡す。R1 (10 kΩ) は、押さないとき T880 を L に保つプルダウン
+
+| 計器 | 設定 |
+| --- | --- |
+| Supplies | V+ = 5 V、Master Enable を入れる |
+| Wavegen | W1: Square、8 Hz、Amplitude 2.5 V、Offset 2.5 V (0〜5 V)。W2: Pulse、1 Hz、Amplitude 2.5 V、Offset 2.5 V、Duty 20 % (幅 0.2 s)、Burst の回数 3 (1 秒おきに 3 回だけ出る) |
+| Scope | CH1 = T440、CH2 = OUT。500 ms/div、Trigger は CH1 の立ち上がり、Mode は Normal (単発で測る)。1 回目の T440 が t = 0 |
+
+図13 は、T440 の 3 回のあと T880 を触れたときの見えるはずの画面で、図1 (計算) と同じ時刻を CH1・CH2 で見たもの。
+**OUT は T880 のあとの 3.125〜3.25 秒に 1 クロック (0.125 秒) だけ H になる。** 4 回目の T440 を出したり、間隔を 1.5 秒にしたりすると、OUT は出ない (図2・図3)。
+
+```scope
+title: 図13 T440 (CH1) が 3 回来たあと、OUT (CH2) に 0.125 s のパルスが 1 つ
+time: 500ms/div
+trigger: ch1 rising 2.5V at -5div
+ch1: {wave: "= 5V * (step(t - 40ms) - step(t - 240ms) + step(t - 1.04s) - step(t - 1.24s) + step(t - 2.04s) - step(t - 2.24s))", range: 2V/div, position: 1div}
+ch2: {wave: "= 5V * (step(t - 3.125s) - step(t - 3.25s))", range: 2V/div, position: -3div}
+cursors: [1.5s, 3.2s]
+measure: [vmax, vmin]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/04-state-machine.svg)

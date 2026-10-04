@@ -68,10 +68,47 @@ notes:
   電流が戻る。これが漏電
 - G1 と G2 は同じ GND (AD の GND) だが、Rret を通らない道であることが分かるように分けて描いた
 
+## 実体配線図
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery
+board: half
+parts:
+  Rgo: resistor e3 e8 10
+  Rload: resistor d8 d13 220
+  Rret: resistor c13 c18 10
+  S1: switch g8 g12
+  Rleak: resistor h12 h17 1k
+  Rg: resistor i17 i22 100
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery
+    pins: [GND, W1, "1+", "1-", "2+", "2-"]
+wires:
+  - AD.GND -- -t2 black
+  - AD.W1 -- a3 yellow
+  - AD.1+ -- b3 orange
+  - AD.1- -- a8 white
+  - AD.2+ -- a13 blue
+  - AD.2- -- -t20 black
+  - a18 -- -t18 black
+  - b8 -- h8 green
+  - j22 -- -b22 black
+  - -t29 -- -b29 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/13-regulations/breadboard/02-earth-leakage-breaker.svg)
+
+- 往きは W1 → Rgo (3〜8 列) → Rload (8〜13 列) → Rret (13〜18 列) → GND レール。1+ は 3 列、1− は 8 列 (Rgo の両端)。
+  2+ は 13 列 (Rret の上の端)、2− は GND。**1− を GND につながない**
+- 漏電の道は 8 列から緑の線で下の半分へ渡り、S1 (8〜12 列) → Rleak (12〜17 列) → Rg (17〜22 列) → 下の GND レール。
+  S1 を閉じると漏電になる。上と下の GND レールは 29 列の黒い線でつなぐ
+- 板に流れる電流は最大 5.0 mA (計算値) で、ブレッドボードの 1 穴 200 mA に十分収まる
+
 ## 計器の設定
 
-板は無い。部品はワニ口のケーブルか小さなブレッドボードで図1 のとおりにつなぐ。AD の 1+ と 1− は Rgo の
-両端、2+ は Rret の上の端、2− は GND。**1− を GND につながない** (Rgo の下の端が GND に落ちる)。
+計器は Analog Discovery 3 (AD3)。W1 が 1 kHz の正弦波 (振幅 1 V、5 mA 以下) を出し、Scope の 2 ch で往きと帰りの電流を読む。商用電源には繋がない。
 
 | 計器 | 設定 |
 | --- | --- |
@@ -81,7 +118,7 @@ notes:
 | Measure | CH1・CH2・M1 の Maximum (振幅) |
 
 ```scope
-title: 図2 S1 を開く (漏電なし) — CH1 と CH2 が重なり、差 (Math) は 0
+title: 図3 S1 を開く (漏電なし) — CH1 と CH2 が重なり、差 (Math) は 0
 time: 200us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1kHz 41.67mV, range: 20mV/div}
@@ -93,7 +130,7 @@ measure: [vmax]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/13-regulations/scope/02-earth-leakage-breaker-1.svg)
 
 ```scope
-title: 図3 S1 を閉じる (漏電あり) — CH1 が CH2 より高く、差は 8.64 mV (0.864 mA)
+title: 図4 S1 を閉じる (漏電あり) — CH1 が CH2 より高く、差は 8.64 mV (0.864 mA)
 time: 200us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1kHz 49.944mV, range: 20mV/div}
@@ -112,11 +149,11 @@ measure: [vmax]
 往きの電流の大部分が大地へ流れる。この題が測りたいものを、計器が作ってしまう。
 
 Rgo の両端を 2 本の先端で挟んで CH1 − CH2 を取る手もあるが、差は 50 mV で、振れ (1 V) の 5 % しかなく
-8 bit の分解能に埋もれる。そこで**往きの電流は測らず、大地へ漏れた電流を Rg で直に測る** (図4)。
+8 bit の分解能に埋もれる。そこで**往きの電流は測らず、大地へ漏れた電流を Rg で直に測る** (図5)。
 Rg の下の端は GND なので、先端 1 本で GND 基準に読める。往きの電流は KCL (I_go = I_ret + I_leak) で出す。
 
 ```circuit
-title: 図4 汎用オシロでの測り方
+title: 図5 汎用オシロでの測り方
 style:
   standard: jis
   pitch: 1.2
@@ -145,7 +182,7 @@ wires:
 - W1 は FG の OUT (Sine、1 kHz、High-Z)。CH2 の先端は Rret の上の端、CH1 の先端は Rg の上の端
   (Rleak と Rg の間)。グランドクリップは 2 本とも GND (電源の接地の側) に当てる。回路の部品は図1 のまま
 - I_leak = CH1 ÷ 100 Ω、I_ret = CH2 ÷ 10 Ω、I_go = I_ret + I_leak。Rg の電圧は 86.4 mV (計算値) で、
-  図3 の差 (8.64 mV) の 10 倍あり、読みやすい
+  図4 の差 (8.64 mV) の 10 倍あり、読みやすい
 - 実物の漏電遮断器は大地を通る電流ではなく、ZCT で往きと帰りの差を取る。ここは計器の都合で測る所を
   変えたと心得る
 - FG の 50 Ω で FG の出力の電圧が下がる。**FG の出力端 (Rgo の左) の振幅が 1.00 V になるよう FG の振幅を

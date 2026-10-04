@@ -48,7 +48,38 @@ wires:
 - W1 は AD の波形発生器。100 kHz、振幅 1 V。流れる電流は 7 mA 以下 (0-1 の 10 mA に収まる)
 - L<sub>x</sub> が測るコイル。R<sub>ref</sub> = 150 Ω が電流を読む基準抵抗 (I = CH2 / 150 Ω)
 - CH1 は差動でコイルの両端 (1+ を上、1− をコイルと R<sub>ref</sub> の間)。CH2 は R<sub>ref</sub> の両端 (GND 基準)
-- 板は使わない。コイルのリードと R<sub>ref</sub> を AD のワイヤキットに直に (ワニ口で) つなぐ
+
+## 実体配線図
+
+コイルは両端の被覆をはがし、リードをブレッドボードの穴に直に挿す。R<sub>ref</sub> も同じ板に載せる。
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery
+board: half
+parts:
+  L1: inductor/axial c5 c10
+  Rr: resistor d10 d15 150
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery
+    pins: [GND, W1, "1+", "1-", "2+", "2-"]
+wires:
+  - AD.GND -- -t2 black
+  - AD.W1 -- b5 yellow [h-10]
+  - AD.1+ -- a5 blue
+  - AD.1- -- b10 orange [h-10]
+  - AD.2+ -- a10 white
+  - AD.2- -- -t12 black
+  - a15 -- -t15 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/breadboard/06-self-inductance.svg)
+
+- W1 は L<sub>x</sub> の左端 (5 列)。1+ も同じ 5 列に当て、コイルの両端を差動で見る
+- 10 列がコイルと R<sub>ref</sub> の間。1− と 2+ をここに当てる。2− は GND レール
+- R<sub>ref</sub> の右端 (15 列) を GND レールへ。3 個のコイルは 5 列と 10 列のリードを挿し替える
+- 板に流れる電流は 7 mA 以下で、ブレッドボードの 1 穴 200 mA に十分収まる (計算値)
 
 ## 部品
 
@@ -69,6 +100,8 @@ wires:
 
 ## 計器の設定
 
+計器は Analog Discovery 3 (AD3)。Wavegen W1 が 100 kHz の正弦波を出し、Scope の 2 ch で電圧と電流を同時に読めるため。
+
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Sine、100 kHz、Amplitude 1 V |
@@ -77,7 +110,7 @@ wires:
 100 回のコイルの画面。コイルの電圧は電流 (CH2) より 88.5° 進む (CH2 が 88.5° 遅れる)。
 
 ```scope
-title: 図2 100 回のコイル — 電流 (CH2) はコイルの電圧 (CH1) より 88.5° 遅れる
+title: 図3 100 回のコイル — 電流 (CH2) はコイルの電圧 (CH1) より 88.5° 遅れる
 time: 2us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 100kHz 370mV, range: 200mV/div}
@@ -93,12 +126,12 @@ measure: [vmax, freq, phase]
 [0-6](../../01-circuits/00-measure/06-bench-supply-limiting.md)。AD の CH1 はコイルの両端を差動で挟み、
 1− がコイルと R<sub>ref</sub> の間 (GND ではない) に当たる。汎用オシロのグランドクリップはそこに当てられない。
 
-**回路はそのままで、2 本の先端をコイルの上と下に当て、コイルの電圧は CH1 − CH2 で引く** (図3)。
+**回路はそのままで、2 本の先端をコイルの上と下に当て、コイルの電圧は CH1 − CH2 で引く** (図4)。
 差 (コイルの電圧、振幅 0.37 V) は CH1 の振れ (約 1 V) の 4 割あり、8 bit でも埋もれない。電流は
 CH2 (R<sub>ref</sub>、GND 基準) で、AD と同じに読める。
 
 ```circuit
-title: 図3 汎用オシロでの測り方
+title: 図4 汎用オシロでの測り方
 style:
   standard: jis
   pitch: 1.2
@@ -133,10 +166,10 @@ wires:
 | 200 回 (2 層) | 389 µH | 244 Ω | 3.47 mA | 0.847 V | 89.3° |
 | 100 回 + フェライト棒 | 数倍 (目安 5 倍前後) | — | — | — | — |
 
-巻数と L をグラフにすると、ほぼ L ∝ N² の放物線に乗る (図4。線は 100 回の 95.9 µH を N² 倍したもの。表の 200 回の 389 µH は、2 層目の分だけ線の 384 µH より上)。
+巻数と L をグラフにすると、ほぼ L ∝ N² の放物線に乗る (図5。線は 100 回の 95.9 µH を N² 倍したもの。表の 200 回の 389 µH は、2 層目の分だけ線の 384 µH より上)。
 
 ```graph
-title: 図4 L は巻数の 2 乗に比例する
+title: 図5 L は巻数の 2 乗に比例する
 x: 巻数 回 0..220
 y: インダクタンス µH 0..450
 lines:

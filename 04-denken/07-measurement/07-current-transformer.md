@@ -62,9 +62,52 @@ style:
   (**電流源**。実際の CT が線路に入っているのと同じ)
 - R_S (10 Ω) で一次電流を測る (CH1)。二次は R_B (10 Ω、電流計の模型) を S1 で入れたり外したりし、
   二次の電圧を CH2 で測る。二次の片側は GND につなぐ (実物の CT も二次の片側を接地する)
-- 板は使わない。リングと線は宙に浮かせ、抵抗の足をワニ口で AD の線につなぐ
+
+## 実体配線図
+
+CT の模型 (リング) は板の外に置き、一次の 2 本の端 (5 回通した線の両端) と二次の 2 本の端 (100 回巻いた線の両端) を板の穴に挿す。
+一次は上の半分 (a〜e 行)、二次は下の半分 (f〜j 行) を使う。
+
+```breadboard
+title: 図2 ブレッドボードと Analog Discovery
+board: half
+parts:
+  RLN: resistor e3 e7 510
+  T1: transformer c10 c13 f10 f13 5to100
+  RS: resistor d13 d18 10
+  S1: switch h10 h14
+  RB: resistor i14 i19 10
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery
+    pins: [GND, W1, "1+", "1-", "2+", "2-"]
+wires:
+  - AD.GND -- -t2 black
+  - AD.W1 -- a3 yellow
+  - b7 -- b10 yellow
+  - AD.1+ -- a13 orange
+  - AD.1- -- -t14 black
+  - a18 -- -t18 black
+  - AD.2+ -- j10 blue
+  - AD.2- -- -b22 black
+  - j13 -- -b13 black
+  - j19 -- -b19 black
+  - -t29 -- -b29 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/breadboard/07-current-transformer.svg)
+
+- 一次: W1 → R<sub>line</sub> (3〜7 列) → CT の一次 (10 列と 13 列) → R<sub>S</sub> (13〜18 列) → GND レール。
+  CH1 (1+) は 13 列 (R<sub>S</sub> の上の端)
+- 二次: CT の二次 (下の半分の 10 列と 13 列)。13 列を GND レール、10 列を S1 (10〜14 列) → R<sub>B</sub> (14〜19 列) → GND レール。
+  CH2 (2+) は 10 列 (S1 の手前)。S1 を開けると二次は開放になる
+- 上と下の GND レールは 29 列の黒い線でつなぐ
+- 板に流れる電流は一次の 9.6 mA だけ (計算値)。ブレッドボードの 1 穴 200 mA に十分収まる
 
 ## 計器の設定
+
+計器は Analog Discovery 3 (AD3)。W1 が 10 kHz の正弦波を出し、Scope の 2 ch で一次電流 (R_S の電圧) と二次の電圧を同時に読める。W1 の電流 9.6 mA は 30 mA 以内に収まる。
 
 | 計器 | 設定 |
 | --- | --- |
@@ -77,7 +120,7 @@ style:
 CH2 は 2 mV/div にし、Average で雑音を落とす。二次を開いたら CH2 を 50 mV/div に上げる。
 
 ```scope
-title: 図2 二次を閉じた (R_B = 10 Ω) — 二次の電圧 (CH2、2 mV/div) は 4.8 mV
+title: 図3 二次を閉じた (R_B = 10 Ω) — 二次の電圧 (CH2、2 mV/div) は 4.8 mV
 time: 50us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 10kHz 96.2mV, range: 25mV/div}
@@ -88,7 +131,7 @@ measure: [vmax, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/scope/07-current-transformer-1.svg)
 
 ```scope
-title: 図3 二次を開いた — 二次の電圧 (CH2、50 mV/div) は 127 mV に跳ね、位相は 90° 進む
+title: 図4 二次を開いた — 二次の電圧 (CH2、50 mV/div) は 127 mV に跳ね、位相は 90° 進む
 time: 50us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 10kHz 96.2mV, range: 25mV/div}

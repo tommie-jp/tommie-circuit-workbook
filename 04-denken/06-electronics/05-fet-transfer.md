@@ -93,6 +93,8 @@ wires:
 
 ## 計器の設定
 
+計器は Analog Discovery 3 (AD3)。電源は Supplies の V+ (5 V、約 5 mA)、ゲートの三角波は Wavegen W1、ゲートとドレインの波形は Scope の 2 ch で読む。
+
 | 計器 | 設定 |
 | --- | --- |
 | Supplies | V+ = 5 V |
@@ -100,6 +102,21 @@ wires:
 | Scope | CH1 = ゲート (V_GS)、CH2 = ドレイン (V_D)。Time base 20 ms/div |
 | Math | M1 = 5 − C2 (R_D の電圧。1 kΩ なので V の読みがそのまま I_D の mA) |
 | XY | X = C1、Y = M1。伝達特性の曲線が出る |
+
+時間軸の画面は図3 のようになる (上りの 1 本を 5 ms/div で拡大)。ゲート (CH1) の三角波が 2.2 V・2.4 V を通る瞬間にカーソルを当てると、
+ドレイン (CH2) は 4.50 V・0.50 V と読める (表の値。V_th = 2.1 V、K = 50 mA/V² の仮定)。
+
+```scope
+title: 図3 ゲート 2.2 → 2.4 V でドレインは 4.50 → 0.50 V
+time: 5ms/div
+trigger: ch1 rising 2V
+ch1: {wave: triangle 10Hz 2V offset 2V phase 90deg, range: 1V/div, position: -3div}
+ch2: {wave: "= max(5V - 50 * max(ch1 - 2.1V, 0V) ^ 2 / 1V, 60mV)", range: 1V/div, position: -3div}
+cursors: [2.5ms, 5ms]
+measure: [freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/scope/05-fet-transfer.svg)
 
 表の 3 点は、XY の画面でカーソルを当てて読むか、時間軸の画面で CH1 が 2.2 V・2.3 V・2.4 V を
 通る瞬間の Math を読む。三角波の上りと下りで同じ曲線をなぞれば、発熱などの影響は無い。
@@ -137,7 +154,7 @@ wires:
 | 3.0 V | 0.06 V | 4.94 mA (R_D で頭打ち) | — |
 
 ```graph
-title: 図3 2N7000 の伝達特性 (計算) — V_th を越えると 2 乗で増え、5 mA で頭打ち
+title: 図4 2N7000 の伝達特性 (計算) — V_th を越えると 2 乗で増え、5 mA で頭打ち
 x: ゲート電圧 V 1.8..3.0
 y: ドレイン電流 mA 0..5.5
 lines:
