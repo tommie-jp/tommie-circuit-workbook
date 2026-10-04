@@ -21,7 +21,7 @@ board: BB
 ## 回路図
 
 ```circuit
-title: 図1 ブリッジ整流と平滑
+title: 図1 ブリッジ整流と平滑 (CH1 は Analog Discovery のオシロで C1 の両端を見る)
 parts:
   D1: diode acL b3 1N4001
   D2: diode acR dcP 1N4001
@@ -30,6 +30,7 @@ parts:
   V1: sine d4 d7 12.7
   C1: ecap b10 f10 1000u
   RL: resistor b13 f13 220
+  M1: voltmeter b16 f16 l=$\mathrm{CH1}$
 points:
   acL: d3
   acR: d8
@@ -38,8 +39,8 @@ points:
 wires:
   - acL -- d4
   - d7 -- acR
-  - b3 -- dcP -- b10 -- b13
-  - f3 -- dcN -- f10 -- f13
+  - b3 -- dcP -- b10 -- b13 -- b16
+  - f3 -- dcN -- f10 -- f13 -- f16
 style:
   grid: on
   pitch: 1.2
@@ -59,7 +60,7 @@ style:
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードに組む
+title: 図2 ブレッドボードに組む (1+ を C1 の + へ、1− を GND へ)
 board: half
 parts:
   D3: diode b8(A) b5(K) 1N4001
@@ -73,6 +74,11 @@ parts:
     at: top
     label: 9V AC アダプタ
     pins: [AC1, AC2]
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery (Scope)
+    pins: [1+, 1-]
 wires:
   - GEN.AC1 -- a5 yellow
   - e5 -- f5 yellow
@@ -83,6 +89,8 @@ wires:
   - +b16 -- j16 red
   - -b20 -- j20 black
   - -t29 -- -b29 black
+  - AD.1+ -- h16 orange
+  - AD.1- -- -b22 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/01-rectifier-filter.svg)
@@ -91,8 +99,25 @@ wires:
   DC+ は下の + レールへ、DC− は上の − レールへ出し、C1 と RL はレールから 16・20 列に取る。
   上下の − レールは 29 列でつなぐ
 - 交流は 5 列と 11 列に入れ、上のブロックから下のブロックへ黄色の線で渡す
+- Analog Discovery の 1+ (橙) は C1 の + 側の列 (`h16`) へ、1− (黒) は下の − レール (`-b22`) へ。
+  交流源は AC アダプタで、AD3 の Wavegen は使わない (AD3 の出力は最大 ±5 V、30 mA で、9 V の交流源にならない)
 - 整流ダイオードは向き (帯のある側がカソード) を必ず確認する。逆にすると
   電流が流れず、AC アダプタと C1 に負担がかかる
+
+## オシロで見る
+
+C1 を付けた状態と外した状態で、整流の波形がどう変わるかを図4 に示す (計算で描いた形。実測ではない)。
+
+```scope
+title: 図4 整流直後 (CH1、C1 を外す) と平滑後 (CH2、C1 を付ける)
+time: 5ms/div
+trigger: ch1 rising 5V
+ch1: {wave: "sine 60Hz 12.7V | abs | offset -1.6V | clip 0V", range: 2V/div, position: -2div}
+ch2: {wave: "ch1 | peak 220ms", range: 2V/div, position: -2div}
+measure: [vmax, vmin, vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/scope/01-rectifier-filter.svg)
 
 ## 部品
 
@@ -101,6 +126,7 @@ wires:
 | D1〜D4 | 整流ダイオード | 1N4001 |
 | C1 | 電解コンデンサ (平滑) | 1000 µF (耐圧 25 V 以上。整流後は約 11 V) |
 | RL | 抵抗 (負荷、**1W**、約 0.54 W を消費するため) | 220 Ω |
+| — | 計器 | Analog Discovery 3 の Scope (1+ = C1 の +、1− = GND) |
 | — | 交流源 | 9 V AC アダプタ (または発振器、実効値 9 V) — トランスの実験 (6 章) と同じく低圧の AC 入力 |
 
 ## 見るべき値
@@ -111,14 +137,21 @@ wires:
 - V<sub>ripple(pp)</sub> ≈ I<sub>dc</sub> / (f<sub>ripple</sub> × C)
 - f<sub>ripple</sub> = 2 × 電源周波数 (60 Hz なら 120 Hz)。表は 60 Hz で計算した。50 Hz の地域では 100 Hz で、リップルは約 0.50 V になる
 
-測り方: 直流の電圧はテスターの DC 電圧レンジで C1 の両端に当てる。リップルは Analog Discovery のオシロ
-(1+ を C1 の +、1− を GND) で波形の山と谷の差を読む。整流直後のピークは、C1 を外して RL の両端の波形の山を読む。
+計器は Analog Discovery 3 のオシロ (Scope)。時間の波形で山と谷の差を読むので、テスターより向く
+(直流の平均はテスターの DC 電圧レンジでも測れる)。1+ を C1 の +、1− を GND (図2) につなぎ、
+リップルは波形の山と谷の差を読む。整流直後のピークは、C1 を外して RL の両端の波形の山を読む。
+
+C1 を外した波形 (CH1) と付けた波形 (CH2) を重ねた形を図4 に示す。CH1 は交流が 0 V を横切る前後でダイオード 2 本ぶんの
+電圧 (約 1.6 V) に届かない間、電流が止まって 0 V に張り付く。CH2 は山の頂上で C1 が充電され、谷では RL に放電して下がる。
+図4 の読み値はピーク 11.1 V・谷 10.7 V・リップル 0.38 V で、周波数は 120 Hz。
+式の 0.41 V は放電の時間を谷まで丸ごと使った見積もりで、図は充電している時間 (山の前後) を除いて計算した値のため少し小さい
+(どちらも計算値で、実測ではない)。
 
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |
 | 整流直後のピーク電圧 | 約 11.1 V (12.7 V − 2 × 0.8 V) | ダイオード 2 本ぶんの電圧降下 |
 | C1・RL 後の直流電圧 (平均) | 約 10.9 V | ピークからリップルの半分ぶん下がる |
-| リップル電圧 (peak-to-peak) | 約 0.41 V | I<sub>dc</sub> (≈ 50 mA) / (120 Hz × 1000 µF) |
+| リップル電圧 (peak-to-peak) | 約 0.41 V (図4 の計算は 0.38 V) | I<sub>dc</sub> (≈ 50 mA) / (120 Hz × 1000 µF) |
 | **計算 (半波整流だったら)**: 同じ C・RL でのリップル | 約 0.83 V (倍) | f<sub>ripple</sub> が 60 Hz になり、リップルが約 2 倍。全波の利点 |
 
 半波整流は、交流源の一方の端子からダイオード 1 本を通して C1 と RL の + 側へつなぎ、

@@ -22,7 +22,7 @@ era: 古
 ## 回路図
 
 ```circuit
-title: 図1 ツェナー + Tr のシリーズレギュレータ
+title: 図1 ツェナー + Tr のシリーズレギュレータ (CH1 は出力の電圧)
 parts:
   V1: vsource a1 f1 12
   G1: ground f1
@@ -30,12 +30,14 @@ parts:
   DZ: zener f3 c3 5V1
   Q1: npn c6 2SC1815
   RL: resistor d8 f8 220
+  M1: voltmeter d10 f10 l=$\mathrm{CH1}$
 wires:
   - vin -- a3 -- a6
   - a6 |- Q1.C
   - c3 -| Q1.B
   - Q1.E |- d8
-  - gnd -- f3 -- f8
+  - gnd -- f3 -- f8 -- f10
+  - d8 -- d10
 points:
   vin: a1
   gnd: f1
@@ -58,7 +60,7 @@ style:
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードに組む
+title: 図2 ブレッドボードに組む (1+ を出力の 7 列へ、1− を GND へ)
 board: half
 parts:
   Rz: resistor b5 b9 1.2k
@@ -68,8 +70,13 @@ parts:
   PSU:
     type: device
     at: top
-    label: 電源 12V
+    label: 電源 12V (AC アダプタ)
     pins: ["+", "-"]
+  AD:
+    type: device
+    at: bottom
+    label: Analog Discovery (Scope)
+    pins: [1+, 1-]
 wires:
   - PSU.+ -- +t2 red
   - PSU.- -- -t3 black
@@ -80,6 +87,8 @@ wires:
   - j13 -- -b13 black
   - +t29 -- +b29 red
   - -t30 -- -b30 black
+  - AD.1+ -- i7 orange
+  - AD.1- -- -b20 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/02-zener-series-regulator.svg)
@@ -89,6 +98,8 @@ wires:
 - Q1 は E・C・B を 7・8・9 列に挿す。コレクタ (8 列) は j8 から下の + レール (+12 V) へ直結し、
   ベース (9 列) は e9 から g9 への線で DZ・Rz の接続点へつなぐ。エミッタ (7 列) が出力で、
   RL (220 Ω、7→13 列) が負荷。13 列は j13 から − レールへ落とす
+- 12 V は AC アダプタ (または電源装置) から入れる。Analog Discovery の Supplies は +5 V・各レール 50 mA (USB 給電で 250 mW) までで、
+  12 V は出せない。AD3 は出力を見る計器だけに使う (1+ を出力の 7 列 `i7`、1− を GND の − レール `-b20` へ)
 - 上下のレールは右端 (+ は 29 列、− は 30 列) でつなぐ
 
 ## 部品
@@ -99,7 +110,13 @@ wires:
 | DZ | ツェナーダイオード (0.5 W) | 5.1 V (1N5231B など。20 mA で 5.1 V の品) |
 | Q1 | NPN トランジスタ | 2SC1815 |
 | RL | 抵抗 (負荷、出力電流 19.5 mA 相当) | 220 Ω |
-| — | 入力電源 | 12 V — レギュレータは入力と出力の差を Q1 の発熱で捨てる方式なので、出力 (約 4.3 V) より高い入力が要る |
+| — | 計器 | Analog Discovery 3 の Scope (1+ = 出力、1− = GND)。直流の電圧を読む電圧計として使う |
+| — | 入力電源 | 12 V (AC アダプタ。AD3 の Supplies は 5 V までなので使わない) — レギュレータは入力と出力の差を Q1 の発熱で捨てる方式なので、出力 (約 4.3 V) より高い入力が要る |
+
+## 計器の設定
+
+計器は Analog Discovery 3 の Scope (1+ = 出力、1− = GND) か、テスター。この題は直流の電圧と電流だけを見るので、
+オシロの波形の図は付けない (時間で変わる量が無く、読み値の数字で足りる)。Scope は DC カップリング・1 V/div で出力の電圧を読む。
 
 ## 見るべき値
 

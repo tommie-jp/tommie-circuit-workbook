@@ -20,7 +20,7 @@ board: BB
 ## 回路図
 
 ```circuit
-title: 図1 トランジスタでリレーを駆動する
+title: 図1 トランジスタでリレーを駆動する (IN は AD の W1、CH1 は IN、CH2 はコレクタ)
 parts:
   VCC: vcc b5 5V
   D1:  diode f3 c3 1N4148
@@ -32,6 +32,10 @@ parts:
   R2:  resistor g7 g9 330
   D2:  led g9 g11
   G2:  ground h11
+  M1:  voltmeter i2 k2 l=$\mathrm{CH1}$
+  G3:  ground k2
+  M2:  voltmeter f1 i1 l=$\mathrm{CH2}$
+  G4:  ground i1
 wires:
   - b5 -- c5 -- c3
   - K1.A2 |- c5
@@ -42,6 +46,8 @@ wires:
   - K1.COM1 |- c5
   - K1.NO1 |- g7
   - g11 -- h11
+  - h2 -- i2
+  - f3 -- f1
 style:
   grid: on
   pitch: 1.2
@@ -63,14 +69,19 @@ style:
 ## 実体配線図
 
 ```breadboard
-title: 図2 トランジスタでリレーを動かす
+title: 図2 トランジスタでリレーを動かす (W1 が IN、1+ が IN、2+ がコレクタ)
 board: half
 parts:
   PSU:
     type: device
     at: top
-    label: 電源 5V
+    label: 電源 5V (AC アダプタ等)
     pins: ["+", "-"]
+  AD:
+    type: device
+    at: bottom
+    label: Analog Discovery (W1 と Scope)
+    pins: [W1, 1+, 1-, 2+, 2-, GND]
   K1: relay @ f10
   Q1: transistor i4(E) i5(C) i6(B) 2SC1815
   R1: resistor f1 f6 1k
@@ -83,13 +94,18 @@ wires:
   - +t10 -- a10 red
   - g5 -- g10 yellow
   - j4 -- -b4 black
-  - j1 -- +b1 orange
+  - AD.W1 -- j1 orange
+  - AD.1+ -- i1 blue
+  - AD.2+ -- j5 green
+  - AD.1- -- -b7 black
+  - AD.2- -- -b9 black
+  - AD.GND -- -b11 black
   - g13 -- +b13 red
   - j22 -- -b22 black
   - +t30 -- +b30 red
   - -t29 -- -b29 black
 notes:
-  - text: オレンジの線 (1 列) が IN。5V につなぐと Q1 が入り、リレーが引いて LED が点く
+  - text: オレンジの線 (1 列) が IN。W1 が 5V のとき Q1 が入り、リレーが引いて LED が点く
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/breadboard/01-relay-driver.svg)
@@ -101,6 +117,10 @@ notes:
 - D1 (フライバックダイオード) は、アノードをコイルの `A1` と同じ 10 列 (Q1 のコレクタ側)、
   カソードを 13 列 (`COM1` と同じ列で、g13 から + レールへつながる) に挿す。
   これでコイルと並列・逆向きに入る (コイルの `A2` は 10 列の上のブロックから + レールへ)
+- 5 V の電源は別の電源 (5 V の AC アダプタや電源装置) を使う。コイルが約 100 mA、LED が約 9 mA で、
+  Analog Discovery の Supplies の各レール 50 mA (USB 給電で 250 mW) を超えるため、AD3 は信号 (W1) とオシロ (Scope) だけに使う
+- IN (1 列) には AD の W1 (オレンジ) を入れる。1+ (青) は同じ 1 列 (`i1`) で IN を、2+ (緑) は Q1 のコレクタの 5 列 (`j5`) を見る。
+  1−・2−・GND (黒) は下の − レールへ。W1 の出力は約 0 Ω・30 mA までで、ベース電流 約 4.3 mA は余裕で出せる
 - 使わない 2 回路目 (`COM2` `NC2` `NO2`) は空けたまま
 
 ## 部品
@@ -113,6 +133,29 @@ notes:
 | D1 | 小信号ダイオード (フライバック用) | 1N4148 |
 | R2 | 抵抗 | 330 Ω |
 | D2 | LED (赤) | V<sub>F</sub> ≈ 2.0 V |
+| — | 電源 | 5 V の AC アダプタか電源装置 (負荷が 約 110 mA で AD3 の Supplies の 50 mA を超えるため) |
+| — | 計器・入力 | Analog Discovery 3 の W1 (IN。0 V / 5 V の方形波) と Scope (1+ = IN、2+ = コレクタ、1−・2− = GND) |
+
+## 計器の設定
+
+計器は Analog Discovery 3 の W1 (IN に入れる 0 V / 5 V の方形波) と Scope。リレーの入り切りは波形の変わり目で見るので、W1 を 10 Hz にして、
+CH1 (IN) と CH2 (コレクタ) を同じ 1 V/div で重ねる。WaveForms の W1 は Simple の Square、Amplitude 2.5 V、Offset 2.5 V。
+
+```scope
+title: 図3 IN (CH1) とコレクタ (CH2) — 逆向きに動く
+time: 20ms/div
+trigger: ch1 rising 2.5V
+ch1: {wave: square 10Hz 2.5V offset 2.5V, range: 1V/div, position: -3div}
+ch2: {wave: square 10Hz 2.4V offset 2.6V phase 180deg, range: 1V/div, position: -3div}
+measure: [vmax, vmin, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/scope/01-relay-driver.svg)
+
+図3 は理想の形で、CH2 は 5 V (Q1 が切れてコイルの先が 5 V) と 0.2 V (飽和) の間を、CH1 と逆向きに動く。
+実物は Q1 が切れる瞬間、コイルの逆起電力で D1 が導通し、コレクタが一瞬だけ約 5.7 V (= 5 V + D1 の順方向電圧 0.7 V) になる。
+D1 が無いとこの山が数十 V に達しうる (この教科書では外して試さない)。山の幅はコイルのインダクタンスで決まり、
+このリレーの値を確かめていないので図3 には描かない。LED とリレーの「カチッ」は、CH1 が 5 V の間だけ続く。
 
 ## 見るべき値
 

@@ -21,7 +21,7 @@ Joule thief (ジュールシーフ) はトランジスタ 1 石と手巻きの�
 ## 回路図
 
 ```circuit
-title: 図1 Joule thief
+title: 図1 Joule thief (CH1 は Q1 のコレクタの電圧)
 parts:
   B1: battery b2c0f0 d2 1.5
   G1: ground d2
@@ -33,10 +33,13 @@ parts:
   G2: ground h7
   Rb: resistor c8 e8 2.2k
   VBAT: vcc d6 1.5V
+  M1: voltmeter e3 g3 l=$\mathrm{CH1}$
+  G4: ground g3
 wires:
   - b2c0f0 |- T1.A1
   - T1.A2 |- e5
   - e5 -- e7 -- Q1.C
+  - e5 -- e3
   - T1.B2 -| d6
   - T1.B1 -| c8
   - e8 |- Q1.B
@@ -68,7 +71,7 @@ style:
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードに組む
+title: 図2 ブレッドボードに組む (1+ を Q1 のコレクタ 17 列へ、1− を GND へ)
 board: half
 parts:
   T1: transformer c5(A1) c7(A2) c9(B1) c11(B2)
@@ -80,6 +83,11 @@ parts:
     at: top
     label: 電池 1.5V (単 3)
     pins: ["+", "-"]
+  AD:
+    type: device
+    at: bottom
+    label: Analog Discovery (Scope)
+    pins: [1+, 1-]
 wires:
   - BAT.+ -- +t2 red
   - BAT.- -- -t3 black
@@ -91,6 +99,8 @@ wires:
   - j3 -- -b3 black
   - j16 -- -b16 black
   - -t29 -- -b29 black
+  - AD.1+ -- h17 orange
+  - AD.1- -- -b20 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/05-joule-thief.svg)
@@ -101,6 +111,8 @@ wires:
 - A1 (5 列) と B2 (11 列) は、上の + レールから赤の線で電池の + へつなぐ
 - A2 (7 列) はオレンジの線で下のブロックの 7 列へ渡し、i7 からの線で Q1 のコレクタ (17 列) へつなぐ
 - B1 (9 列) は Rb (9→18 列) を通り、緑の線で下のブロックのベース (18 列) へつなぐ。エミッタ (16 列) は下の − レールへ
+- Analog Discovery の 1+ (橙) は Q1 のコレクタの 17 列 (`h17`)、1− (黒) は下の − レール (`-b20`) へ。
+  電源は電池 1 本で、電池の電流が約 60 mA と Supplies の各レール 50 mA (USB 給電で 250 mW) を超えるため、AD3 の Supplies は使わず Scope だけにする
 - Q1 (2SC1815) は、平らな面を手前 (j 行側) にして見ると左から E・C・B。そのまま g 行の 16・17・18 列に挿す
 - LED はアノードを 7 列 (コレクタと同じつながり)、カソードを 3 列に挿し、3 列を下の − レールへつなぐ。
   これで LED が C-E 間 (エミッタも GND) に並列に入る。上下の − レールは 29 列でつなぐ
@@ -113,6 +125,7 @@ wires:
 | Q1 | NPN トランジスタ | 2SC1815 |
 | Rb | 抵抗 (ベース電流の制限) | 2.2 kΩ |
 | D1 | 白色 LED (5 mm) | V<sub>F</sub> ≈ 3.0〜3.2 V |
+| — | 計器 | Analog Discovery 3 の Scope (1+ = Q1 のコレクタ、1− = GND) |
 | — | 電源 | 単 3 電池 1 本、1.5 V。使いかけの電池でもよい。「乾電池 1 本からでも LED を光らせる」のが主題なので、既定の 5 V は使わない |
 
 ## 見るべき値
@@ -120,8 +133,24 @@ wires:
 Joule thief の発振は磁芯の性質 (どこまで磁気をためられるか) に左右されるので、周波数や電流は計算だけでは決まらず、
 測って確かめるのが基本になる。表は代表的な値の目安。
 
-測り方: 波形は Analog Discovery のオシロで、1+ を Q1 のコレクタ (7 列か 16 列)、1− を GND に当てて見る。
+測り方: 波形は Analog Discovery のオシロで、1+ を Q1 のコレクタ (図2 の 17 列。LED のアノードの 7 列でも同じ)、1− を GND に当てて見る。
+周波数が約 180 kHz で、AD3 のオシロの範囲 (10 MHz 以下) に入る。
 電池からの電流は、テスターの電流 (mA) レンジを、電池の + と + レールの間に直列に入れて測る。
+
+コレクタの波形を図3 に示す。Q1 が ON の間は 0 V 近くに落ち、OFF の瞬間に LED を光らせるフライバックの電圧まで跳ね上がる。
+図3 は SPICE (上の条件と同じ、Rb = 2.2 kΩ) の読み値 (周期約 5.45 µs = 約 183 kHz、0.5 V 未満の時間が約 57 %、山 約 3.6 V) に合わせて、
+方形波で近似した形である。実物の山は丸く、LED の電圧に向けて下がるので、平均 (SPICE で約 1.49 V) は方形波の 1.55 V より少し低い。
+実物の周波数はコアと巻数で変わるので、時間軸 (5 µs/div) は測った周期に合わせて直す。
+
+```scope
+title: 図3 Q1 のコレクタ (SPICE をもとにした近似の形)
+time: 5us/div
+trigger: ch1 rising 1.8V
+ch1: {wave: pulse 183kHz 1.8V offset 1.8V duty 43%, range: 1V/div, position: -2div}
+measure: [vmax, vmin, freq, duty]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/scope/05-joule-thief.svg)
 
 表の「目安の値」の数は、LTspice で確かめた値。巻線は FT37-43 (A<sub>L</sub> = 350 nH/回²) に 10 回で
 L = 350 nH × 10² = 35 µH、結合係数 0.98 とし、2SC1815 は電流増幅率 250 (小電流)・約 90 (200 mA 前後) の近似のモデル、

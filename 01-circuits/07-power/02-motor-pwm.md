@@ -19,7 +19,7 @@ era: 今
 ## 回路図
 
 ```circuit
-title: 図1 モータを MOSFET で PWM 駆動する
+title: 図1 モータを MOSFET で PWM 駆動する (CH2 は Q1 のドレインの電圧)
 parts:
   R3: resistor a11 c11 15
   B1: battery c11 e11 5
@@ -33,9 +33,11 @@ parts:
   G2: ground f3
   G3: ground f1
   G4: ground e11
+  M2: voltmeter c9 e9 l=$\mathrm{CH2}$
+  G5: ground e9
 wires:
   - a5 -- a7 -- a11
-  - c5 -- c7
+  - c5 -- c7 -- c9
   - c5 -- Q1.D
   - Q1.S -- f5
   - d3 -| Q1.G
@@ -46,7 +48,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/circuit/02-motor-pwm.svg)
 
-- PWM は方形波の電源 (0〜5 V、デューティ比を変えられる) を表す。実際はファンクションジェネレータ
+- PWM (AD の W1 が出す信号。CH1 で見る) は方形波の電源 (0〜5 V、デューティ比を変えられる) を表す。実際はファンクションジェネレータ
   (0-6 参照) か、マイコン (Pico 2 など。11-4 で扱う) の PWM 出力を使う
 - R1 (100 Ω) は、MOSFET のゲートに流れ込む充放電の電流を抑える。R2 (10 kΩ) は
   ゲートを GND に軽く引く (プルダウン)。PWM 側が外れたり、何もつながっていないのと同じ状態 (高インピーダンス) になったりしても、
@@ -73,7 +75,7 @@ style:
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードにモータと MOSFET を組む
+title: 図2 モータと MOSFET を組む (W1 が PWM、1+ が PWM、2+ がドレイン)
 board: half
 parts:
   R3: resistor/half d2 d5 15
@@ -84,13 +86,18 @@ parts:
   PSU:
     type: device
     at: top
-    label: 電源 5V
+    label: 電源 5V (AC アダプタ等)
     pins: ["+", "-"]
   MTR:
     type: device
     at: top
     label: DC モータ RF-300CA
     pins: [M+, M-]
+  AD:
+    type: device
+    at: bottom
+    label: Analog Discovery (W1 と Scope)
+    pins: [W1, 1+, 1-, 2+, 2-, GND]
 wires:
   - PSU.+ -- +t1 red
   - PSU.- -- -t3 black
@@ -102,8 +109,14 @@ wires:
   - e9 -- f9 green
   - j10 -- -b10 black
   - -t27 -- -b27 black
+  - AD.W1 -- c14 yellow
+  - AD.1+ -- e14 blue
+  - AD.2+ -- j8 green
+  - AD.1- -- -b14 black
+  - AD.2- -- -b16 black
+  - AD.GND -- -b18 black
 notes:
-  - text: R1 の右端 (14 列) が PWM 信号の入り口。ファンクションジェネレータかマイコンをつなぐ
+  - text: R1 の右端 (14 列) が PWM 信号の入り口。AD の W1 かマイコンをつなぐ
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/breadboard/02-motor-pwm.svg)
@@ -119,6 +132,10 @@ notes:
   ここでは平らな面を奥 (a 行側) に向けて挿すので、左から D・G・S になり、h 行の 8・9・10 列に入る。
   ソース (S、10 列) は下の − レールへつなぐ
 - PWM 信号の GND は − レールにつなぐ
+- 5 V の電源は別の電源 (5 V の AC アダプタや電源装置) を使う。回っているときの電流は数十 mA、軸を止めると約 0.16 A (上の計算) で、
+  Analog Discovery の Supplies の各レール 50 mA (USB 給電で 250 mW) を超えるので、AD3 は PWM の信号 (W1) とオシロ (Scope) だけに使う
+- PWM は AD の W1 (黄) を R1 の右端の 14 列 (`c14`) に入れる。1+ (青) は同じ 14 列 (`e14`) で PWM を、2+ (緑) は Q1 のドレインの 8 列 (`j8`) を見る。
+  1−・2−・GND (黒) は下の − レールへ。W1 は 30 mA まで出せ、ゲートに要る電流 (R2 の 0.5 mA ほど) は十分に小さい
 
 ## 部品
 
@@ -130,13 +147,37 @@ notes:
 | D1 | 整流ダイオード (フライバック用) | 1N4001 |
 | R1 | 抵抗 (ゲート直列) | 100 Ω |
 | R2 | 抵抗 (ゲートプルダウン) | 10 kΩ |
+| — | 電源 | 5 V の AC アダプタか電源装置 (停動で約 0.16 A となり AD3 の Supplies の 50 mA を超えるため) |
+| — | 計器・PWM の信号源 | Analog Discovery 3 の W1 (PWM。0 V / 5 V の方形波、1 kHz) と Scope (1+ = PWM、2+ = Q1 のドレイン、1−・2− = GND) |
+
+## 計器の設定
+
+計器は Analog Discovery 3 の W1 (PWM の信号源) と Scope。PWM のパルスの幅と形は時間の波形で見るので、テスターでは足りない。
+W1 は Simple の Square、Frequency 1 kHz、Amplitude 2.5 V、Offset 2.5 V、Symmetry (デューティ比) 50 %。
+CH1 (PWM) と CH2 (Q1 のドレイン) を同じ 1 V/div で重ねる。
+
+```scope
+title: 図3 PWM (CH1) とドレイン (CH2) — デューティ比 50 %
+time: 500us/div
+trigger: ch1 rising 2.5V
+ch1: {wave: pulse 1kHz 2.5V offset 2.5V duty 50%, range: 1V/div, position: -3div}
+ch2: {wave: "ch1 | invert | offset 5V | gain 0.96 | offset 200mV", range: 1V/div, position: -3div}
+measure: [vmax, vmin, freq, duty]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/scope/02-motor-pwm.svg)
+
+図3 は理想の形。CH2 は PWM と逆向きに動く。Q1 が ON の間はドレインが 0 V 近くに落ち、OFF の間は 5 V に戻る。
+ON の間の値 0.2 V は、回っているときのモータの電流を数十 mA (目安) として、2N7000 の ON 抵抗 4.5 Ω との積から見積もった値で、実測ではない
+(停動の 0.16 A では約 0.7 V になる)。OFF になる瞬間は D1 がモータの逆起電力を逃がすので、ドレインは一瞬だけ 5 V より約 0.7 V 高くなる。
+デューティ比を 25 %・75 % に変えると、CH1 の ON の幅と、下の表の平均電圧 (5 V × デューティ比) が比例して変わる。
 
 ## 見るべき値
 
 表の値は計算値。PWM の平均の電圧は 5 V × デューティ比で、これがモータと R3 の組に掛かる。
 モータの回転数はおおよそこの平均の電圧で決まる。
 モータと R3 の組の両端の平均電圧は、テスターの DC 電圧レンジで測れる (テスターは速い変化をならして平均を出す)。
-PWM の波形は Analog Discovery のオシロ (1+ を Q1 のドレイン、1− を GND) で見る。
+PWM の波形は Analog Discovery のオシロ (1+ を PWM、2+ を Q1 のドレイン、1−・2− を GND) で見る (図3)。
 
 | デューティ比 | モータと R3 に掛かる平均電圧 | 回転の様子 |
 | --- | --- | --- |

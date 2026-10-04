@@ -17,7 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
-title: 図1 7805 で 5V を作る
+title: 図1 7805 で 5V を作る (CH1 は出力の電圧)
 parts:
   V1: vsource vin gnd 9
   G1: ground gnd
@@ -27,14 +27,15 @@ parts:
   RL: resistor b9 d9 100
   Rled: resistor b11 c11 330
   Dled: led c11 d11 red
+  M1: voltmeter b13 d13 l=$\mathrm{CH1}$
 points:
   vin: b1
   gnd: d1
 wires:
   - vin -- b3 -- U1.in
-  - U1.out -- b7 -- b9 -- b11
+  - U1.out -- b7 -- b9 -- b11 -- b13
   - U1.gnd -- d5
-  - gnd -- d3 -- d5 -- d7 -- d9 -- d11
+  - gnd -- d3 -- d5 -- d7 -- d9 -- d11 -- d13
 style:
   grid: on
 ```
@@ -50,7 +51,7 @@ style:
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードに組む
+title: 図2 ブレッドボードに組む (1+ を OUT の 10 列へ、1− を GND へ)
 board: half
 parts:
   U1: regulator/to220 c8(in) c9(gnd) c10(out) 7805
@@ -64,6 +65,11 @@ parts:
     at: top
     label: 電池 9V
     pins: ["+", "-"]
+  AD:
+    type: device
+    at: bottom
+    label: Analog Discovery (Scope)
+    pins: [1+, 1-]
 wires:
   - BAT.+ -- +t2 red
   - BAT.- -- -t3 black
@@ -78,6 +84,8 @@ wires:
   - a18 -- -t18 black
   - a23 -- -t23 black
   - -t29 -- -b29 black
+  - AD.1+ -- i10 orange
+  - AD.1- -- -b20 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/03-three-terminal-regulator.svg)
@@ -89,6 +97,8 @@ wires:
   ならない
 - Cin (5・8 列) は IN・GND の間、Cout (10・13 列) は OUT・GND の間に入れる。リード線は
   短くし、レギュレータのすぐ近くに挿す
+- Analog Discovery の 1+ (橙) は OUT の 10 列 (`i10`)、1− (黒) は下の − レール (`-b20`) へ。
+  9 V は電池から入れる。AD3 の Supplies は最大 ±5 V・各レール 50 mA (USB 給電で 250 mW) なので、7805 の入力 (7 V 以上) には使えない
 - 出力は a10 から 14 列へ渡し、RL と Rled に配る。上下の − レールは 29 列でつなぐ
 
 ## 部品
@@ -101,7 +111,13 @@ wires:
 | RL | 抵抗 (主負荷、1/2 W。消費は 0.25 W) | 100 Ω |
 | Rled | 抵抗 (表示 LED 電流制限) | 330 Ω |
 | Dled | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
-| — | 電源 | 9 V — 7805 は入出力差 (ドロップアウト) が約 2V 要るので、出力 5V に対して入力は 7V 以上が要る |
+| — | 計器 | Analog Discovery 3 の Scope (1+ = OUT、1− = GND)。直流の電圧を読む電圧計として使う |
+| — | 電源 | 9 V (電池。AD3 の Supplies は 5 V までなので使わない) — 7805 は入出力差 (ドロップアウト) が約 2V 要るので、出力 5V に対して入力は 7V 以上が要る |
+
+## 計器の設定
+
+計器は Analog Discovery 3 の Scope (1+ = OUT、1− = GND) か、テスター。この題は直流の電圧と電流だけを見るので、
+オシロの波形の図は付けない (時間で変わる量が無く、読み値の数字で足りる)。Scope は DC カップリング・1 V/div で OUT の電圧を読む。
 
 ## 見るべき値
 

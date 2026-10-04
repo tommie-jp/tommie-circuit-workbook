@@ -19,7 +19,7 @@ USB 給電の基板でいちばんよく見る電源回路だ。
 ## 回路図
 
 ```circuit
-title: 図1 USB 5V から 3.3V の LDO
+title: 図1 USB 5V から 3.3V の LDO (CH1 は出力の電圧)
 parts:
   J1: usb-c b2g0d0
   U1: regulator b6 AMS1117-3.3
@@ -27,6 +27,7 @@ parts:
   Cout: ecap b8 d8 22u
   Rled: resistor b10 c10 150
   Dled: led c10 d10 red
+  M1: voltmeter b12 d12 l=$\mathrm{CH1}$
   G1: ground gnd
 points:
   gnd: d3
@@ -34,9 +35,9 @@ wires:
   - J1.VBUS -| b4
   - J1.GND -| gnd
   - b4 -- U1.in
-  - U1.out -- b8 -- b10
+  - U1.out -- b8 -- b10 -- b12
   - U1.gnd -- d6
-  - gnd -- d4 -- d6 -- d8 -- d10
+  - gnd -- d4 -- d6 -- d8 -- d10 -- d12
 style:
   grid: on
 ```
@@ -66,7 +67,7 @@ style:
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードに組む
+title: 図2 ブレッドボードに組む (5 V は AD の V+、1+ を OUT へ)
 board: half
 parts:
   U1: regulator/to220 c8(in) c9(gnd) c10(out) AMS1117-3.3
@@ -74,15 +75,13 @@ parts:
   Cout: capacitor/electrolytic g10 g13 22uF
   Rled: resistor b14 b20 150
   Dled: led d20(A) d23(K) red
-  USB:
+  AD:
     type: device
-    at: top
-    label: USB-C (電源のみ)
-    pins: [VBUS, GND]
+    at: bottom
+    label: Analog Discovery (Supplies V+ と Scope)
+    pins: [V+, GND, 1+, 1-]
 wires:
-  - USB.VBUS -- +t2 red
-  - USB.GND -- -t3 black
-  - +t8 -- a8 red
+  - AD.V+ -- i8 red
   - e8 -- f8 red
   - e9 -- f9 black
   - j9 -- -b9 black
@@ -92,13 +91,18 @@ wires:
   - a10 -- a14 orange
   - a23 -- -t23 black
   - -t29 -- -b29 black
+  - AD.GND -- -b4 black
+  - AD.1+ -- i10 orange
+  - AD.1- -- -b11 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/breadboard/04-ldo-usb.svg)
 
-- USB-C の VBUS・GND だけを引き出す (D+・D− は使わない)。実物では
-  USB-C の電源取り出しモジュール基板を使う。CC に 5.1 kΩ のプルダウンが載ったものを選ぶ
-  (載っているかは商品の説明で確かめる)
+- 入力の 5 V は Analog Discovery の Supplies の V+ (WaveForms で 5 V にする) から、IN の 8 列 (`i8`) へ入れる。
+  負荷は約 9 mA で、Supplies の各レール 50 mA (USB 給電で 250 mW) に収まる。GND は下の − レール (`-b4`) へ。
+  実機の USB 給電にするなら、USB-C の電源取り出しモジュール基板の VBUS を V+ の代わりに、GND を GND の代わりに挿す。
+  CC に 5.1 kΩ のプルダウンが載ったものを選ぶ (載っているかは商品の説明で確かめる)。USB の D+・D− は使わない
+- Analog Discovery の 1+ (橙) は OUT の 10 列 (`i10`)、1− (黒) は下の − レール (`-b11`) へ
 - U1 の足 (IN・GND・OUT = 8・9・10 列) は、上のブロックの e 行から線で下のブロックへ渡す。
   Cin (5・8 列) と Cout (10・13 列) は下のブロックに挿し、出力は a10 から 14 列の Rled へ渡す。
   上下の − レールは 29 列でつなぐ
@@ -116,7 +120,12 @@ wires:
 | Cout | アルミ電解コンデンサ (出力側、極性あり) | 22 µF・16 V |
 | Rled | 抵抗 (表示 LED 電流制限) | 150 Ω |
 | Dled | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
-| — | 電源 | USB 5V |
+| — | 電源・計器 | Analog Discovery 3 の Supplies V+ = 5 V (USB 5 V の代わり。電流 約 9 mA) と Scope (1+ = OUT、1− = GND)。USB-C 給電でも同じ |
+
+## 計器の設定
+
+計器は Analog Discovery 3 の Scope (1+ = OUT、1− = GND) か、テスター。この題は直流の電圧と電流だけを見るので、
+オシロの波形の図は付けない (時間で変わる量が無く、読み値の数字で足りる)。Scope は DC カップリング・1 V/div で OUT の電圧を読む。
 
 ## 見るべき値
 
