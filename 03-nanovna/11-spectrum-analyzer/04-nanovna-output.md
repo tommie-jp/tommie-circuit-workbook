@@ -55,8 +55,7 @@ wires:
 
 | 一般の名前 | 値 | tinySA Ultra のメニュー |
 | --- | --- | --- |
-| 中心周波数 | 10 MHz (まず低い、素直な周波数で試す) | `FREQUENCY` → `CENTER` |
-| スパン | 100 MHz (5 次高調波の 50 MHz まで余裕を見る) | `FREQUENCY` → `SPAN` |
+| 開始・終了 | 1 MHz〜60 MHz (基本波 10 MHz から 5 次高調波の 50 MHz まで入る) | `FREQUENCY` → `START` / `STOP` |
 | RBW | 100 kHz | `FREQUENCY` → `RBW` |
 | 基準レベル | −20 dBm (パッド込みで信号が −20 dBm 前後に収まる想定) | `LEVEL` → `REF LEVEL` |
 
