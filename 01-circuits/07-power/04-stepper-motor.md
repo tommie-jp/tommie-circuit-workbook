@@ -18,38 +18,38 @@ source: 自作
 
 ```circuit
 title: 図1 ULN2003 ボードでステッピングモータを駆動する
+points:
+  in1x: c2b0g0
+  in2x: c2e0
+  in3x: c2g0e0
+  in4x: c2i0i0
+  com9: d7i0e0
 parts:
-  U1:
-    type: device
-    at: d2
-    label: ULN2003
-    pins: [IN1, IN2, IN3, IN4, V+, OUT1, OUT2, OUT3, OUT4, GND]
-    turn: mirror
+  U1: dip16 d5 ULN2003A
+  IN1: port in1x
+  IN2: port in2x
+  IN3: port in3x
+  IN4: port in4x
   M1:
     type: device
-    at: g10
+    at: c9e0
     label: 28BYJ-48
     pins: [COM, A, B, C, D]
-    turn: r90
-  IN1: port a4
-  IN2: port a5
-  IN3: port a6
-  IN4: port a7
   G1: ground f4
+  VCC: vcc com9 5V
   VCC: vcc b8 5V
-  VCC: vcc e11 5V
 wires:
-  - a4 |- U1.IN1
-  - a5 |- U1.IN2
-  - a6 |- U1.IN3
-  - a7 |- U1.IN4
-  - U1.GND -| f4
-  - b8 |- U1.V+
-  - e11 |- M1.COM
-  - U1.OUT1 -| M1.A
-  - U1.OUT2 -| M1.B
-  - U1.OUT3 -| M1.C
-  - U1.OUT4 -| M1.D
+  - in1x -- U1.1
+  - in2x -- U1.2
+  - in3x -- U1.3
+  - in4x -- U1.4
+  - U1.16 -- M1.A
+  - U1.15 -- M1.B
+  - U1.14 -- M1.C
+  - U1.13 -- M1.D
+  - U1.8 -| f4
+  - U1.9 -- com9
+  - b8 |- M1.COM
 style:
   grid: on
 ```
@@ -59,8 +59,10 @@ style:
 - ULN2003 は、ダーリントン接続 (2-4 で見た、トランジスタ 2 個の組) のスイッチを 7 回路入れた IC で、
   そのうち 4 回路をこのモジュールが使う。各入力には直列抵抗 (約 2.7 kΩ) が内蔵されているので、
   外付けの抵抗なしで、マイコンの GPIO (3.3 V でも 5 V でも) に直結できる
-- 各コイルは、一端を V+ (ここでは 5 V) に、もう一端を OUT1〜OUT4 につなぐ。M1 の COM がコイルの共通の端だ。
-  ULN2003 の COM ピン (図1 では省略) は内蔵のフライバックダイオードの共通端子で、モジュールの中で V+ に配線済み。
+- 図1 はボードの中身を、ULN2003A の足の番号で描いた。左の 1〜4 番が入力 IN1〜IN4、右の 16〜13 番が出力
+  OUT1〜OUT4 (16 番が OUT1)、8 番が GND、9 番が COM。5〜7 番と 10〜12 番は、このボードでは使わない 3 回路
+- 各コイルは、一端を +5 V に、もう一端を OUT1〜OUT4 につなぐ。M1 の COM がコイルの共通の端だ。
+  ULN2003 の COM (9 番) は内蔵のフライバックダイオードの共通端子で、ボードの中で +5 V (V+) に配線済み。
   コイルを OFF にした瞬間の逆起電力 (6-2・7-1 と同じ理屈) を、外付けの部品なしで吸収してくれる
 - IN1〜IN4 を 1 回に 1 本だけ H にして、A→B→C→D→A… の順で送ると、
   モータは一定の角度ずつ回る (下の表)。逆順に送れば逆回転する

@@ -19,8 +19,8 @@ source: 自作
 ```circuit
 title: 図1 差動増幅
 parts:
-  B1: battery vp mid 5
-  B2: battery mid vm 5
+  VP: vsource vp mid 5
+  VN: vsource mid vm 5
   G1: ground c2
   V1: vsource b3 d3 0.5
   G2: ground d3
@@ -50,7 +50,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/07-differential-amp.svg)
 
-- 左の B1・B2 は OP アンプの ±5 V 電源 (4-1 と同じ)
+- 左の VP・VN は OP アンプの ±5 V 電源。AD3 の Supplies の V+・V− で作る (4-1 と同じ)
 - V1 (0.5 V) は R1 (10 kΩ) を通って − 入力へ、V2 (0.8 V) は R3 (10 kΩ) を通って + 入力へ入る。
   **R1=R3、Rf=R4 とペアの抵抗を揃える**のが差動増幅の条件
 - 非反転側 (+ 入力) は R3・R4 (100 kΩ) の分圧で V2 を弱めてから入れ、
@@ -67,7 +67,7 @@ style:
 | R1, R3 | 抵抗 (入力、2 本を揃える) | 各 10 kΩ |
 | Rf, R4 | 抵抗 (帰還・+入力の分圧、2 本を揃える) | 各 100 kΩ |
 | — | 信号源 | V1 = 0.5 V (直流)、V2 = 0.8 V (直流)、いずれも電池や可変電源 |
-| — | 電源 | ±5 V (電池 2 個) |
+| — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
 
 ## 見るべき値
 

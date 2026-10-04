@@ -19,8 +19,8 @@ board: BB
 ```circuit
 title: 図1 反転増幅
 parts:
-  B1: battery vp mid 5
-  B2: battery mid vm 5
+  VP: vsource vp mid 5
+  VN: vsource mid vm 5
   G1: ground c2
   V1: sine b3 d3 0.1
   G2: ground d3
@@ -46,7 +46,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/03-inverting-amp.svg)
 
-- 左の B1・B2 は OP アンプの ±5 V 電源 (4-1 と同じ)
+- 左の VP・VN は OP アンプの ±5 V 電源。AD3 の Supplies の V+・V− で作る (4-1 と同じ)
 - **+ 入力を GND に直結**したのが反転増幅の印。OP アンプは + 入力 = − 入力になるように出力を
   動かすので、− 入力は GND につながっていないのに 0 V に保たれる。これを**仮想接地**と呼ぶ
 - Rin (10 kΩ) が入力インピーダンス、Rf (100 kΩ) が帰還。
@@ -59,42 +59,40 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上下のレールは +5V/GND (1 列目で渡す)。V− は赤レールに乗せず、BAT から直配線する
+# 上のレールは +5V (赤) と GND (青)。下の青レールは −5V (V−)。下の赤レールは使わない
 board: half
 parts:
-  U1: dip8 @ e10 LM358
-  Rin: resistor c5 c15 10k
-  Rf: resistor h10 h11 100k
-  GEN:
+  AD3:
     type: device
     at: top
-    label: 発振器 1kHz 0.1V
-    pins: [OUT, GND]
-  BAT:
-    type: device
-    at: bottom
-    label: 電源 ±5V
-    pins: [V+, GND, V-]
+    label: AD3 (Supplies ±5V・W1)
+    pins: [V+, GND, V-, W1]
+  U1: dip8 @ e10 LM358
+  Rin: resistor g6 g11 10k
+  Rf: resistor i10 i11 100k
 wires:
-  - GEN.OUT -- a5 yellow
-  - GEN.GND -- -t7 black
-  - d15 -- f15 orange
-  - g15 -- g11 orange
-  - j12 -- -b12 black
+  - AD3.V+ -- +t1 red
+  - AD3.GND -- -t2 black
+  - AD3.V- -- -b3 blue
+  - AD3.W1 -- a6 yellow
+  - e6 -- f6 yellow
   - +t10 -- a10 red
-  - +t1 -- +b1 red
-  - -t1 -- -b1 black
-  - BAT.V+ -- +b8 red
-  - BAT.GND -- -b10 black
-  - BAT.V- -- j13 blue
+  - j13 -- -b13 blue
+  - h12 -- h15 black
+  - f15 -- e15 black
+  - a15 -- -t15 black
+notes:
+  - text below: 上の赤レール = +5V、上の青レール = GND、下の青レール = −5V (V−)
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/03-inverting-amp.svg)
 
-- 図2 の GEN は図1 の V1 (発振器)、BAT は B1・B2 (±5 V 電源) に当たる
-- **IN+ (PIN 3、12 列) は `j12--(-b12)` で GND に直結。** 分圧は要らない
-- **IN− (PIN 2、11 列) に Rin と Rf の両方が集まる。** Rin (上ブロック) は 15 列から溝をまたぐ線でここへ信号を入れ、
-  Rf はここから出力 (PIN 1、10 列) へ戻す
+- 図2 の AD3 は、Supplies (V+・V−) が図1 の VP・VN、W1 が V1 (発振器) に当たる。
+  電源のレールの分け方は 4-1 と同じ (下の青レールは −5V で、GND ではない)
+- **IN+ (PIN 3、12 列) は GND に直結。** `h12--h15`、溝をまたぐ線、`a15--(-t15)` の
+  3 本の黒い線で上の青レールへつなぐ。分圧は要らない
+- **IN− (PIN 2、11 列) に Rin と Rf の両方が集まる。** W1 の信号は 6 列で溝をまたいで下ブロックへ下り、
+  Rin (6→11 列) を通ってここへ入る。Rf はここから出力 (PIN 1、10 列) へ戻す
 - コンデンサ (直流カット) は無い。発振器は 0V を中心に振れるので直結でよい
 
 ## 部品
@@ -105,7 +103,7 @@ wires:
 | Rin | 抵抗 (入力) | 10 kΩ |
 | Rf | 抵抗 (帰還) | 100 kΩ |
 | — | 信号源 | 1 kHz、振幅 0.1 V |
-| — | 電源 | ±5 V (電池 2 個) |
+| — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
 
 ## 見るべき値
 

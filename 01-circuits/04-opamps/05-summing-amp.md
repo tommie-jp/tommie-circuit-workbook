@@ -19,8 +19,8 @@ board: BB
 ```circuit
 title: 図1 加算アンプ
 parts:
-  B1: battery vp mid 5
-  B2: battery mid vm 5
+  VP: vsource vp mid 5
+  VN: vsource mid vm 5
   G1: ground c2
   V1: sine b3 d3 0.2
   G2: ground d3
@@ -49,7 +49,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/05-summing-amp.svg)
 
-- 左の B1・B2 は OP アンプの ±5 V 電源 (4-1 と同じ)
+- 左の VP・VN は OP アンプの ±5 V 電源。AD3 の Supplies の V+・V− で作る (4-1 と同じ)
 - V1 (1 kHz、振幅 0.2 V) と V2 (3 kHz、振幅 0.1 V) が **同じ − 入力の 1 点 (仮想接地) に
   R1・R2 で合流**する。− 入力は仮想接地 (4-3 で見た) で 0 V に保たれるので、
   V1 と V2 は互いの信号を押し返し合わず、それぞれの電流が Rf で足し合わされる
@@ -61,46 +61,43 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上下のレールは +5V/GND (1 列目で渡す)。V− は赤レールに乗せず、BAT から直配線する
+# 上のレールは +5V (赤) と GND (青)。下の青レールは −5V (V−)。下の赤レールは使わない
 board: half
 parts:
-  U1: dip8 @ e10 LM358
-  R1: resistor c4 c15 10k
-  R2: resistor h6 h11 10k
-  Rf: resistor i11 i10 10k
-  GEN:
+  AD3:
     type: device
     at: top
-    label: 発振器 2ch (1kHz 0.2V / 3kHz 0.1V)
-    pins: [OUT1, OUT2, GND]
-  BAT:
-    type: device
-    at: bottom
-    label: 電源 ±5V
-    pins: [V+, GND, V-]
+    label: AD3 (Supplies ±5V・W1・W2)
+    pins: [V+, GND, V-, W1, W2]
+  U1: dip8 @ e10 LM358
+  R1: resistor b4 b9 10k
+  R2: resistor d6 d9 10k
+  Rf: resistor g10 g11 10k
 wires:
-  - GEN.OUT1 -- a4 yellow
-  - GEN.OUT2 -- a6 green
-  - e6 -- g6 green
-  - GEN.GND -- -t9 black
-  - d15 -- f15 orange
-  - g15 -- g11 orange
-  - j12 -- -b12 black
+  - AD3.V+ -- +t1 red
+  - AD3.GND -- -t2 black
+  - AD3.V- -- -b3 blue
+  - AD3.W1 -- a4 yellow
+  - AD3.W2 -- a6 green
   - +t10 -- a10 red
-  - +t1 -- +b1 red
-  - -t1 -- -b1 black
-  - BAT.V+ -- +b8 red
-  - BAT.GND -- -b10 black
-  - BAT.V- -- j13 blue
+  - e9 -- f9 orange
+  - i9 -- i11 orange
+  - j13 -- -b13 blue
+  - h12 -- h15 black
+  - f15 -- e15 black
+  - a15 -- -t15 black
+notes:
+  - text below: 上の赤レール = +5V、上の青レール = GND、下の青レール = −5V (V−)
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/05-summing-amp.svg)
 
-- 図2 の GEN は図1 の V1・V2 (2 出力の発振器。OUT1 が V1、OUT2 が V2)、BAT は B1・B2 に当たる
-- **R1 (上ブロック 4→15 列、溝をまたいで 11 列へ) と R2 (6→11 列) が IN− (11 列、PIN 2) の
-  1 点に合流**。
-  Rf (11→10 列) が出力 (10 列、PIN 1) へ帰還する
-- IN+ (12 列、PIN 3) は `j12--(-b12)` で GND に直結
+- 図2 の AD3 は、Supplies (V+・V−) が図1 の VP・VN、W1 が V1、W2 が V2 に当たる。
+  電源のレールの分け方は 4-1 と同じ (下の青レールは −5V で、GND ではない)
+- **R1 (W1 から、上ブロック 4→9 列) と R2 (W2 から、6→9 列) が 9 列の 1 点で合流**し、
+  溝をまたぐ線と `i9--i11` で IN− (PIN 2、11 列) へ入る。
+  Rf (11→10 列) が出力 (PIN 1、10 列) へ帰還する
+- IN+ (PIN 3、12 列) は `h12--h15`、溝をまたぐ線、`a15--(-t15)` の 3 本の黒い線で GND に直結
 
 ## 部品
 
@@ -110,11 +107,11 @@ wires:
 | R1, R2 | 抵抗 (入力) | 10 kΩ |
 | Rf | 抵抗 (帰還) | 10 kΩ |
 | — | 信号源 | 1 kHz 0.2V (出力 1)、3 kHz 0.1V (出力 2) |
-| — | 電源 | ±5 V (電池 2 個) |
+| — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
 
 ## 見るべき値
 
-発振器には Analog Discovery の W1 (1 kHz・振幅 0.2 V) と W2 (3 kHz・振幅 0.1 V) を使える。オシロの CH1 を
+発振器は AD3 の W1 (1 kHz・振幅 0.2 V) と W2 (3 kHz・振幅 0.1 V)。オシロの CH1 を
 出力 (10 列) に当て、片方ずつ止めたときと両方入れたときの波を比べる。表の値は計算値。Vout = −(Rf/R1 × V1 + Rf/R2 × V2)。
 
 | 測る所 | 期待する値 | 分かること |

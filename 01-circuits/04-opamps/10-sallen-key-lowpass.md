@@ -20,8 +20,8 @@ source: 自作
 ```circuit
 title: 図1 サレンキー ローパス (利得 1 倍)
 parts:
-  B1: battery vp mid 5
-  B2: battery mid vm 5
+  VP: vsource vp mid 5
+  VN: vsource mid vm 5
   G1: ground c2
   V1: sine c3 e3 0.1
   G2: ground e3
@@ -49,7 +49,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/10-sallen-key-lowpass.svg)
 
-- 左の B1・B2 は OP アンプの ±5 V 電源 (4-1 と同じ)
+- 左の VP・VN は OP アンプの ±5 V 電源。AD3 の Supplies の V+・V− で作る (4-1 と同じ)
 - 図1 で、**R1・R2 が直列 (c3→c5→c7)、C2 が後段の R2 の先で GND へ**、
   そして **C1 が前段の節点 (c5) から出力へ帰還**するのがサレンキーの骨格。
   出力 (交流的に低インピーダンス) から C1 を通して戻る正帰還が、
@@ -71,7 +71,7 @@ style:
 | C1 | セラミックコンデンサ (正帰還、C2 の 2 倍) | 20 nF (10 nF を 2 本並列。20 nF は店に並ばないことが多い) |
 | C2 | セラミックコンデンサ (2 次ローパス) | 10 nF |
 | — | 信号源 | 振幅 0.1 V、周波数を掃引 |
-| — | 電源 | ±5 V (電池 2 個) |
+| — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
 
 ## 見るべき値
 

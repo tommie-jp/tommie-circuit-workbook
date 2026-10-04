@@ -30,8 +30,8 @@ OP アンプが 2 回路入った LM358 を使う。
 ```circuit
 title: 図1 ボルテージフォロア
 parts:
-  B1: battery a1 c1 5
-  B2: battery c1 e1 5
+  VP: vsource a1 c1 5
+  VN: vsource c1 e1 5
   G1: ground c2
   R1: resistor a3 c3 100k
   R2: resistor c3 e3 47k
@@ -56,8 +56,12 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/01-voltage-follower.svg)
 
-- 図1 の B1・B2 は 5 V の電源 2 つを直列にしたもの。中点を GND にすると、上が +5V・下が −5V の
-  両電源になる (2-10 と同じく Analog Discovery の V+・V− で作ってもよい)。OP アンプの電源の足は図では省いた
+- 図1 の VP・VN は 5 V の電源 2 つを直列にしたもの。中点を GND にすると、上が +5V・下が −5V の
+  両電源になる。この章では Analog Discovery 3 (AD3) の Supplies で作る。V+ を +5 V、V− を −5 V に
+  設定すると、VP が V+、VN が V−、中点が AD3 の GND に当たる (2-10 と同じ)。OP アンプの電源の足は図では省いた
+- AD3 の Supplies は、USB 給電だけのとき 1 系統 250 mW (5 V で 50 mA) が目安の上限。
+  この題で流れるのは、OP アンプの消費電流 (1 mA 前後) と RL の 1.8 mA、R1・R2 の 0.07 mA で、
+  各レール数 mA に収まる。電池で作るなら、006P (9 V) 2 本と 7805・7905 で ±5 V にしてもよい
 - R1・R2 は ±5V を分圧して、高いインピーダンス (R1∥R2 ≈ 32 kΩ) の Vin を作る
   ためのわざと弱い分圧
 - **− 入力を出力に直結**したのがフォロアの印。OP アンプは + 入力 = − 入力に
@@ -68,38 +72,48 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上下のレールは +5V/GND (1 列目で渡す)。V− は赤レールに乗せず、BAT から直配線する
+# 上のレールは +5V (赤) と GND (青)。下の青レールは −5V (V−)。下の赤レールは使わない
 board: half
 parts:
-  U1: dip8 @ e10 LM358
-  R1: resistor g18 g12 100k
-  R2: resistor h12 h13 47k
-  RL: resistor i10 i6 1k
-  BAT:
+  AD3:
     type: device
-    at: bottom
-    label: 電源 ±5V
+    at: top
+    label: AD3 Supplies ±5V
     pins: [V+, GND, V-]
+  U1: dip8 @ e10 LM358
+  R1: resistor c15 c19 100k
+  R2: resistor i15 i19 47k
+  RL: resistor c4 c8 1k
 wires:
+  - AD3.V+ -- +t1 red
+  - AD3.GND -- -t2 black
+  - AD3.V- -- -b3 blue
   - +t10 -- a10 red
-  - +t1 -- +b1 red
-  - -t1 -- -b1 black
+  - +t19 -- a19 red
+  - a4 -- -t4 black
+  - j13 -- -b13 blue
+  - j19 -- -b19 blue
   - g10 -- g11 orange
-  - j18 -- +b18 red
-  - j6 -- -b6 black
-  - BAT.V+ -- +b8 red
-  - BAT.GND -- -b11 black
-  - BAT.V- -- j13 blue
+  - e15 -- f15 orange
+  - h15 -- h12 orange
+  - e8 -- f8 orange
+  - h8 -- h10 orange
+notes:
+  - text below: 上の赤レール = +5V、上の青レール = GND、下の青レール = −5V (V−)
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/01-voltage-follower.svg)
 
-- 図2 で、**V− (負電源) は赤レールに乗せない。** BAT.V− を U1 の PIN 4 (V−、13 列) へ
-  直に配線する。R2 (47 kΩ) は 12 列 (IN+) と 13 列に立てて挿す
-- U1 は LM358 の片方だけ使う (PIN 1 OUT・PIN 2 IN−・PIN 3 IN+・PIN 4 GND(V−)・
-  PIN 8 VCC(V+))。もう片方 (PIN 5〜7) は浮かせたまま
-- **フォロアは出力 (PIN 1、10 列) を IN− (PIN 2、11 列) へそのまま返す**だけ
-  (`g10--g11`)。12 列が Vin (R1・R2 の分圧点、IN+ の PIN 3)
+- 図2 の左上の箱が AD3 の Supplies。**V+ (+5 V) は上の赤レール、GND は上の青レール、
+  V− (−5 V) は下の青レール**へ入れる。下の青レールは GND ではないので取り違えない
+- U1 は LM358 の片方だけ使う (PIN 1 OUT・PIN 2 IN−・PIN 3 IN+・PIN 4 V−・
+  PIN 8 V+)。もう片方 (PIN 5〜7) は浮かせたまま。PIN 8 (10 列) は `+t10--a10` で +5V へ、
+  PIN 4 (13 列) は `j13--(-b13)` で −5V へつなぐ
+- R1 (100 kΩ) は上ブロックの 15〜19 列で +5V から下ろし、R2 (47 kΩ) は下ブロックの 15〜19 列で
+  −5V へ落とす。2 つの分圧点 (15 列) を溝をまたぐ線で上下つなぎ、`h15--h12` で IN+ (PIN 3、12 列) へ入れる
+- **フォロアは出力 (PIN 1、10 列) を IN− (PIN 2、11 列) へそのまま返す**だけ (`g10--g11`)
+- RL (1 kΩ) は上ブロックの 4〜8 列。出力 (10 列) を `h8--h10` と溝をまたぐ線で 8 列へ上げ、
+  4 列から GND (上の青レール) へ落とす
 
 ## 部品
 
@@ -109,11 +123,11 @@ wires:
 | R1 | 抵抗 | 100 kΩ |
 | R2 | 抵抗 | 47 kΩ |
 | RL | 抵抗 (負荷) | 1 kΩ |
-| — | 電源 | ±5 V (電池 2 個) |
+| — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
 
 ## 見るべき値
 
-テスターの直流電圧レンジで、GND (電池の中点) を基準に Vin (12 列) と出力 (10 列) を測る。
+テスターの直流電圧レンジで、GND (上の青レール) を基準に Vin (12 列) と出力 (10 列) を測る。
 表の値は計算値。分圧点 Vin = V− + (V+ − V−) × R2/(R1+R2) = −5 + 10 × 47/147。
 
 | 測る所 | 期待する値 | 分かること |
@@ -124,8 +138,17 @@ wires:
 | OP アンプの出力電流 (RL に流れる分) | 約 1.80 mA | フォロアはこの電流を OP アンプの出力段が供給し、分圧側には流れない |
 
 **フォロアの効能はここ**: 分圧点だけなら 32 kΩ という高い出力インピーダンスだが、
-フォロアを通すと出力インピーダンスは OP アンプの出力段の低い値 (LM358 で
-数十 Ω) まで下がる。だから RL をつないでも電圧が沈まない。
+フォロアを通すと出力インピーダンスはずっと低くなる。だから RL をつないでも電圧が沈まない。
+
+低くなる理由は負帰還にある。OP アンプ単体 (帰還なし) の出力抵抗 R<sub>O</sub> は、TI の LM358 系の
+データシート (SLOS068) で LM358B が典型 300 Ω (1 MHz で測った値) と書かれている。
+負帰還をかけると、出力が下がった分を OP アンプが開ループ利得 A 倍で打ち消すので、
+出力インピーダンスは R<sub>O</sub> ÷ (1 + A) に縮む (フォロアは出力を全部戻すので、帰還の割合は 1)。
+
+- 直流: A ≈ 100 000 (データシートの典型 100 V/mV) → 300 Ω ÷ 100 001 ≈ 3 mΩ
+- 1 kHz: A ≈ GBW ÷ f ≈ 1 MHz ÷ 1 kHz = 1000 → 300 Ω ÷ 1001 ≈ 0.3 Ω
+
+どちらも典型値からの目安。周波数が上がって A が下がるほど、出力インピーダンスは上がる。
 
 ## 出典
 

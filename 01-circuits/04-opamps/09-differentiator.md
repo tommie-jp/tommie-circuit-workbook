@@ -19,8 +19,8 @@ source: 自作
 ```circuit
 title: 図1 微分器
 parts:
-  B1: battery vp mid 5
-  B2: battery mid vm 5
+  VP: vsource vp mid 5
+  VN: vsource mid vm 5
   G1: ground c2
   V1: triangle b3 d3 1
   G2: ground d3
@@ -47,7 +47,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/09-differentiator.svg)
 
-- 左の B1・B2 は OP アンプの ±5 V 電源 (4-1 と同じ)
+- 左の VP・VN は OP アンプの ±5 V 電源。AD3 の Supplies の V+・V− で作る (4-1 と同じ)
 - V1 は 1 kHz・振幅 ±1 V の**三角波**。Cin (100 nF) が − 入力へ交流電流を送り、
   Rf (7.5 kΩ) の帰還で電圧に変える ── Vout = −Rf×Cin×(dVin/dt)。
   三角波は傾きが一定なので、微分すると**方形波**になる
@@ -71,7 +71,7 @@ style:
 | Cin | セラミックコンデンサ (微分・入力) | 100 nF |
 | Rf | 抵抗 (帰還) | 7.5 kΩ |
 | — | 信号源 | 1 kHz、三角波、振幅 ±1 V |
-| — | 電源 | ±5 V (電池 2 個) |
+| — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
 
 ## 見るべき値
 

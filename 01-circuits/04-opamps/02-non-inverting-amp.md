@@ -22,8 +22,8 @@ OP アンプは + 入力 = − 入力になるように出力を動かす。− 
 ```circuit
 title: 図1 非反転増幅
 parts:
-  B1: battery a1 c1 5
-  B2: battery c1 e1 5
+  VP: vsource a1 c1 5
+  VN: vsource c1 e1 5
   G1: ground c2
   V1: sine b4 d4 0.1
   G2: ground d4
@@ -52,9 +52,9 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/02-non-inverting-amp.svg)
 
-- 左の B1・B2 は OP アンプの ±5 V 電源 (4-1 と同じ)
+- 左の VP・VN は OP アンプの ±5 V 電源。AD3 の Supplies の V+・V− で作る (4-1 と同じ)
 - V1 は 1 kHz・振幅 0.1 V (0 V から山までの高さ。山から谷までは 0.2 Vpp) の発振器。C1 (1 µF) で直流を切り (交流だけを通す)、Rb (100 kΩ) で
-  非反転入力の直流の電位を GND (電池の中点) に決める
+  非反転入力の直流の電位を GND (VP と VN の中点) に決める
 - **利得 = 1 + R3/R2 = 1 + 10k/1k = 11 倍。** 出力振幅は 0.1 V × 11 = 1.1 V
 - Rb が大きいほど入力インピーダンスは高いが、大きすぎると OP アンプの
   入力バイアス電流 (入力にわずかに流れ込む直流) で誤差が出る (LM358 は数十 nA なので 100 kΩ でも問題ない)
@@ -63,47 +63,43 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上下のレールは +5V/GND (1 列目で渡す)。V− は赤レールに乗せず、BAT から直配線する
+# 上のレールは +5V (赤) と GND (青)。下の青レールは −5V (V−)。下の赤レールは使わない
 board: half
 parts:
-  U1: dip8 @ e10 LM358
-  GEN:
+  AD3:
     type: device
     at: top
-    label: 発振器 1kHz 0.1V
-    pins: [OUT, GND]
-  C1: capacitor c5 c15 1uF
-  Rb: resistor h15 h19 100k
+    label: AD3 (Supplies ±5V・W1)
+    pins: [V+, GND, V-, W1]
+  U1: dip8 @ e10 LM358
+  C1: capacitor c15 c19 1uF
+  Rb: resistor a15 -t15 100k
   R3: resistor g10 g11 10k
   R2: resistor i11 i7 1k
-  BAT:
-    type: device
-    at: bottom
-    label: 電源 ±5V
-    pins: [V+, GND, V-]
 wires:
-  - GEN.OUT -- a5 yellow
-  - GEN.GND -- -t7 black
-  - d15 -- f15 orange
-  - g15 -- g12 orange
-  - j19 -- -b19 black
-  - j7 -- -b7 black
+  - AD3.V+ -- +t1 red
+  - AD3.GND -- -t2 black
+  - AD3.V- -- -b3 blue
+  - AD3.W1 -- a19 yellow
   - +t10 -- a10 red
-  - +t1 -- +b1 red
-  - -t1 -- -b1 black
-  - BAT.V+ -- +b9 red
-  - BAT.GND -- -b11 black
-  - BAT.V- -- j13 blue
+  - j13 -- -b13 blue
+  - e15 -- f15 orange
+  - g15 -- g12 orange
+  - f7 -- e7 black
+  - a7 -- -t7 black
+notes:
+  - text below: 上の赤レール = +5V、上の青レール = GND、下の青レール = −5V (V−)
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/02-non-inverting-amp.svg)
 
-- 図2 の GEN は図1 の V1 (発振器)、BAT は B1・B2 (±5 V 電源) に当たる
-- **GEN (発振器) の出力を C1 で受け、12 列 (IN+、PIN 3) へ。** C1 は上ブロックに
-  寝かせ、15 列から溝をまたぐ線で下の 15 列・12 列へ下ろす。Rb はその 15 列を
-  GND へ落とすバイアス抵抗 (直流だけを GND へ逃がす)
-- R2 (IN−、11 列) は 7 列で GND へ、R3 (帰還) は 11 列から 10 列 (OUT、PIN 1) へ
-- V− は赤レールに乗せず、`BAT.V- -- j13` で PIN 4 (GND/V−) へ直配線する
+- 図2 の AD3 は、Supplies (V+・V−) が図1 の VP・VN、W1 が V1 (発振器) に当たる。
+  電源のレールの分け方は 4-1 と同じ (下の青レールは −5V で、GND ではない)
+- **W1 (19 列) の信号を C1 で受け、15 列から溝をまたぐ線と `g15--g12` で IN+ (PIN 3、12 列) へ。**
+  Rb は 15 列の a の穴から上の青レール (GND) へ立てて挿すバイアス抵抗 (直流だけを GND へ逃がす)
+- R3 (帰還) は出力 (PIN 1、10 列) と IN− (PIN 2、11 列) をつなぐ。R2 は 11 列から 7 列へ渡し、
+  7 列から溝をまたぐ黒い線と `a7--(-t7)` で GND へ落とす
+- PIN 8 (10 列) は `+t10--a10` で +5V へ、PIN 4 (13 列) は `j13--(-b13)` で −5V へ
 
 ## 部品
 
@@ -115,11 +111,11 @@ wires:
 | R2 | 抵抗 | 1 kΩ |
 | R3 | 抵抗 (帰還) | 10 kΩ |
 | — | 信号源 | 1 kHz、振幅 0.1 V |
-| — | 電源 | ±5 V (電池 2 個) |
+| — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
 
 ## 見るべき値
 
-発振器には Analog Discovery の W1 (1 kHz・振幅 0.1 V の正弦波) を使える。オシロの CH1 を入力 (12 列)、
+発振器は AD3 の W1 (1 kHz・振幅 0.1 V の正弦波)。オシロの CH1 を入力 (12 列)、
 CH2 を出力 (10 列) に当て、2 本を重ねて振幅と向きを比べる。表の値は計算値。利得 A = 1 + R3/R2。
 
 | 測る所 | 期待する値 | 分かること |

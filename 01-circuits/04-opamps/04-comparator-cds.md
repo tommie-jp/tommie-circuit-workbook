@@ -20,8 +20,8 @@ OP アンプの基本形の 4 つ目。この題では CdS (硫化カドミウ�
 ```circuit
 title: 図1 比較器 (CdS)
 parts:
-  B1: battery vp mid 5
-  B2: battery mid vm 5
+  VP: vsource vp mid 5
+  VN: vsource mid vm 5
   G1: ground mid
   CDS1: photoresistor a4 c4 l=$\mathrm{CDS1}$
   RFIX: resistor d4 f4 10k
@@ -52,7 +52,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/04-comparator-cds.svg)
 
-- 左の B1・B2 は ±5 V 電源 (4-1 と同じ)。図1 では CDS1・RFIX と VR1 の電源も兼ねる
+- 左の VP・VN は ±5 V 電源。AD3 の Supplies の V+・V− で作る (4-1 と同じ)。図1 では CDS1・RFIX と VR1 の電源も兼ねる
 - **CDS1・RFIX の分圧点が − 入力。** 明るいと CDS1 は低抵抗 (約 1 kΩ)、
   暗いと高抵抗 (約 200 kΩ) になり、分圧点の電圧が大きく動く
 - **VR1 (しきい値の調整) の中点 (ワイパー) が + 入力。** 帰還が無いので、
@@ -71,52 +71,57 @@ style:
 
 ```breadboard
 title: 図2 ブレッドボードに組む
-# 上のレールは +5V/GND。下の赤レールは +5V (1 列目で渡す)、下の青レールは V− (BAT.V− を 28 列の青い線で下ろす)
+# 上のレールは +5V (赤) と GND (青)。下の赤レールは +5V (1 列目で渡す)、下の青レールは −5V (V−)
 board: half
 parts:
-  U1: dip8 @ e10 LM358
-  CDS1: photoresistor i14 i11
-  RFIX: resistor h11 h7 10k
-  VR1: potentiometer b26(1) b27(W) b28(3) 10k
-  R1: resistor c9 c6 220
-  D1: led b6(A) b3(K) red
-  DP: diode d3(A) d6(K) 1N4148
-  BAT:
+  AD3:
     type: device
     at: top
-    label: 電源 ±5V
+    label: AD3 Supplies ±5V
     pins: [V+, GND, V-]
+  U1: dip8 @ e12 LM358
+  CDS1: photoresistor i16 i13
+  RFIX: resistor h13 h9 10k
+  VR1: potentiometer b26(1) b27(W) b28(3) 10k
+  R1: resistor c11 c9 220
+  D1: led b9(A) b6(K) red
+  DP: diode d6(A) d9(K) 1N4148
 wires:
-  - +t10 -- a10 red
+  - AD3.V+ -- +t2 red
+  - AD3.GND -- -t3 black
+  - AD3.V- -- -b4 blue
   - +t1 -- +b1 red
-  - BAT.V+ -- +t20 red
-  - BAT.GND -- -t22 black
-  - BAT.V- -- a28 blue
+  - +t12 -- a12 red
+  - +t26 -- a26 red
   - e28 -- g28 blue
   - j28 -- -b28 blue
-  - +t26 -- a26 red
   - e27 -- f27 orange
-  - g27 -- g12 orange
-  - j13 -- -b13 blue
-  - j7 -- -b7 blue
-  - j14 -- +b14 red
-  - g10 -- g9 orange
-  - f9 -- d9 orange
-  - a3 -- -t3 black
+  - g27 -- g14 orange
+  - j15 -- -b15 blue
+  - j9 -- -b9 blue
+  - j16 -- +b16 red
+  - g12 -- g11 orange
+  - f11 -- e11 orange
+  - a6 -- -t6 black
+notes:
+  - text below: 上は 赤 +5V・青 GND、下は 赤 +5V・青 −5V (V−)
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/breadboard/04-comparator-cds.svg)
 
-- 図2 の BAT は図1 の B1・B2 (±5 V 電源) に当たる
-- **CdS (11 列) と RFIX (11 列) の分圧点が IN− (PIN 2)。** VR1 (上ブロックの右端) の
-  ワイパー (27 列) は溝をまたぐオレンジの線で IN+ (PIN 3、12 列) へ
-- **V− は下の青レール。** GND (上の青レール) と取り違えない。PIN 4 (13 列)・RFIX・
-  VR1 の端子 3 がここへつながる
-- 出力 (PIN 1、10 列) は 9 列の線で上ブロックへ上げ、R1 (220 Ω)、D1 (LED) を通って
-  GND (3 列、上の青レール) へ。**D1 と逆並列に DP (1N4148)。** DP は 3 列・6 列という
-  D1 と同じ列を使うだけで配線が要らない (6 列で D1 のアノード側、3 列でカソード側と
+- 図2 の左上の AD3 Supplies は図1 の VP・VN (±5 V 電源) に当たる。V+ は上の赤レール、GND は上の青レール、
+  V− は板の左端を下ろして下の青レールへ入れる。下の赤レールは 1 列目の赤い線で上の赤レールから +5V をもらう
+- **V− は下の青レール。** GND (上の青レール) と取り違えない。PIN 4 (15 列)・RFIX・
+  VR1 の端子 3 がここへつながる。PIN 8 (12 列) は `+t12--a12` で +5V へ
+- **CdS (13 列) と RFIX (13 列) の分圧点が IN− (PIN 2)。** CdS の他端 (16 列) は下の赤レール (+5V) へ。
+  VR1 (上ブロックの右端) のワイパー (27 列) は溝をまたぐオレンジの線と `g27--g14` で IN+ (PIN 3、14 列) へ
+- 出力 (PIN 1、12 列) は `g12--g11` と溝をまたぐ線で上ブロックの 11 列へ上げ、R1 (220 Ω)、D1 (LED) を通って
+  GND (6 列、上の青レール) へ。**D1 と逆並列に DP (1N4148)。** DP は 6 列・9 列という
+  D1 と同じ列を使うだけで配線が要らない (9 列で D1 のアノード側、6 列でカソード側と
   自動的に同じネットになる)。出力が −V に張り付いたときの逆電圧を DP の順方向降下
   (約 0.7 V) までクランプする。VR1 を回してしきい値の明るさを変える
+- AD3 の Supplies の電流は、+5V 側が LED の約 7 mA と CdS・VR1・OP アンプの数 mA、−5V 側が
+  明所で R1・DP を通って吸い込む約 17 mA が最大。どちらも USB 給電の目安 50 mA (250 mW) に収まる
 
 ## 部品
 
@@ -129,12 +134,12 @@ wires:
 | R1 | 抵抗 (LED 電流制限) | 220 Ω |
 | D1 | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
 | DP | 保護ダイオード (D1 と逆並列) | 1N4148 |
-| — | 電源 | ±5 V (電池 2 個) |
+| — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
 
 ## 見るべき値
 
-CdS を手で覆ったり明かりを当てたりしながら、テスターの直流電圧レンジで GND を基準に − 入力 (11 列) と
-出力 (10 列) を測り、LED を見る。表の値は計算値。分圧点の電圧 = V− + (V+ − V−) × RFIX / (CDS1 + RFIX)。VR1 を中点
+CdS を手で覆ったり明かりを当てたりしながら、テスターの直流電圧レンジで GND を基準に − 入力 (13 列) と
+出力 (12 列) を測り、LED を見る。表の値は計算値。分圧点の電圧 = V− + (V+ − V−) × RFIX / (CDS1 + RFIX)。VR1 を中点
 (しきい値 0 V) にしたとき。LM358 の出力は無負荷に近い状態で **+V 側は約
 1.5 V 落ち (≈ +3.5 V)、−V 側はほぼ V− まで (≈ −4.5 V)** 振れる (代表値)。
 

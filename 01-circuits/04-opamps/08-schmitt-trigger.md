@@ -20,8 +20,8 @@ source: 自作
 ```circuit
 title: 図1 シュミットトリガ (CdS + ヒステリシス)
 parts:
-  B1: battery vp mid 5
-  B2: battery mid vm 5
+  VP: vsource vp mid 5
+  VN: vsource mid vm 5
   G1: ground c3f0
   CDS1: photoresistor a4 c4 l=$\mathrm{CDS1}$
   RFIX: resistor d4 f4 10k
@@ -58,7 +58,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/08-schmitt-trigger.svg)
 
-- 左の B1・B2 は ±5 V 電源 (4-1・4-4 と同じ)
+- 左の VP・VN は ±5 V 電源。AD3 の Supplies の V+・V− で作る (4-1・4-4 と同じ)
 - − 入力 (CdS・RFIX の分圧) は 4-4 と同じ。VR1 のワイパーはしきい値の基準電圧を
   作るが、**Rref (10 kΩ) を通してから + 入力へ**入れる (4-4 では直結だった)
 - **Rh (100 kΩ、出力から + 入力への正帰還) が新顔。** + 入力の電圧は
@@ -82,7 +82,7 @@ style:
 | R1 | 抵抗 (LED 電流制限) | 220 Ω |
 | D1 | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
 | DP | 保護ダイオード (D1 と逆並列、4-4 と同じ理由) | 1N4148 |
-| — | 電源 | ±5 V (電池 2 個) |
+| — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
 
 ## 見るべき値
 

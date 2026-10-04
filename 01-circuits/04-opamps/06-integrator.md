@@ -20,8 +20,8 @@ source: 自作
 ```circuit
 title: 図1 積分器
 parts:
-  B1: battery vp mid 5
-  B2: battery mid vm 5
+  VP: vsource vp mid 5
+  VN: vsource mid vm 5
   G1: ground c2
   V1: square c3 e3 1
   G2: ground e3
@@ -49,7 +49,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/04-opamps/circuit/06-integrator.svg)
 
-- 左の B1・B2 は OP アンプの ±5 V 電源 (4-1 と同じ)
+- 左の VP・VN は OP アンプの ±5 V 電源。AD3 の Supplies の V+・V− で作る (4-1 と同じ)
 - V1 は 1 kHz **方形波**、振幅 ±1 V。**Cf (帰還のコンデンサ) が Rin と組んで
   積分**する。− 入力は仮想接地 (4-3) なので、Rin を流れる電流 Vin/Rin がそのまま Cf を充電し、
   Vout = −(1/RinCf) ∫Vin dt になる。方形波の積分は直線 (三角波) になる
@@ -73,7 +73,7 @@ style:
 | Rbleed | 抵抗 (直流の漏れ、暴走防止) | 1 MΩ |
 | Rbias | 抵抗 (+入力のバイアス電流補償) | 10 kΩ |
 | — | 信号源 | 1 kHz、方形波、振幅 ±1 V |
-| — | 電源 | ±5 V (電池 2 個) |
+| — | 電源 | ±5 V (AD3 の Supplies。V+ = +5 V、V− = −5 V) |
 
 ## 見るべき値
 
