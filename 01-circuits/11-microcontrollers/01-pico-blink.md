@@ -52,9 +52,9 @@ parts:
   R1: resistor j24 j28 330
   D1: led i28(A) i30(K) red
 wires:
-  - j30 -- -b30
-  - j22 -- -b22
-  - -t50 -- -b50
+  - j30 -- -b30 black
+  - j22 -- -b22 black
+  - -t50 -- -b50 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/breadboard/01-pico-blink.svg)

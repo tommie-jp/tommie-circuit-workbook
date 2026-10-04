@@ -71,20 +71,20 @@ board: half
 parts:
   Q1: transistor h4(E) h5(C) h6(B) 2SC1815
   R1: resistor f5 f8 330
-  D1: led g9(A) g8(K) red
+  D1: led i9(A) i8(K) red
   R4: resistor g6 g11 100k
   Q2: transistor h14(E) h15(C) h16(B) 2SC1815
   R2: resistor f15 f18 330
-  D2: led g19(A) g18(K) red
+  D2: led i19(A) i18(K) red
   R3: resistor g16 g21 100k
   C1: capacitor/electrolytic i5(+) i7(-) 10uF
   C2: capacitor/electrolytic i15(+) i17(-) 10uF
 wires:
   - j7 -- j16 orange
   - j17 -- j6 orange
-  - i9 -- +b9 red
+  - j9 -- +b9 red
   - i11 -- +b11 red
-  - i19 -- +b19 red
+  - j19 -- +b19 red
   - i21 -- +b21 red
   - j4 -- -b4 black
   - j14 -- -b14 black
@@ -125,8 +125,8 @@ wires:
 | 点灯中の LED の電流 (抵抗の両端 ÷ 330 Ω) | 約 8.5 mA | (5 V − 0.2 V(飽和) − 2.0 V) ÷ 330 Ω |
 | 消えている側のコレクタ電圧 | 約 5 V | 反対側のトランジスタがオフでプルアップされている |
 
-`R3` `R4` を大きく (小さく) すると点滅がゆっくりに (速く) なる。`C1` `C2` を
-1000 pF ぐらいまで小さくすると音になる (3-4 で使う)。
+`R3` `R4` を大きく (小さく) すると点滅がゆっくりに (速く) なる。`R3` `R4` を 10 kΩ、
+`C1` `C2` を 100 nF まで小さくすると周期が 1/1000 になり、音になる (3-4 で使う)。
 
 ## 出典
 

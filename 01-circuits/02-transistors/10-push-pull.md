@@ -70,8 +70,8 @@ title: 図2 B 級プッシュプル (W1 と CH2 を入力へ、CH1 を出力へ)
 # +5V は上の + レール、GND は上の − レール、−5V は下の − レール
 board: half
 parts:
-  Q1: transistor c10(C) c11(B) c12(E) 2SC1815
-  Q2: transistor h11(B) h12(E) h13(C) 2SA1015
+  Q1: transistor c10(B) c11(C) c12(E) 2SC1815
+  Q2: transistor h10(B) h11(C) h12(E) 2SA1015
   RL: resistor a12 -t12 100
   AD:
     type: device
@@ -88,24 +88,25 @@ wires:
   - AD.1+ -- a15 orange
   - AD.1- -- -t16 black
   - e7 -- e8 blue
-  - b8 -- b11 yellow
-  - +t10 -- a10 red
-  - e11 -- f11 yellow
+  - b8 -- b10 yellow
+  - +t11 -- a11 red
+  - e10 -- f10 yellow
   - e12 -- f12 orange
   - b12 -- b15 orange
-  - j13 -- -b13 purple
+  - j11 -- -b11 purple
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/breadboard/10-push-pull.svg)
 
-`Q1` (NPN) は上半分、`Q2` (PNP) は下半分に挿し、ベースどうし (列 11) と
-エミッタどうし (列 12) を溝をまたぐ短い線でつなぐ。
+`Q1` (NPN) は上半分、`Q2` (PNP) は下半分に挿し、ベースどうし (列 10) と
+エミッタどうし (列 12) を溝をまたぐ短い線でつなぐ。2SC1815 も 2SA1015 も平らな面を見て
+左から E・C・B なので、2 本とも平らな面を奥に向けて (180 度回して) 挿し、左から B・C・E にする。
 
 - **電源**: AD の V+ (赤) を上の + レール (+5V)、GND (黒) を上の − レール、
   V− (紫) を下の − レール (−5V) へ。下のレールは −5V 専用で GND ではない
-- **Q1 のコレクタ (列 10)**: 赤線で +5V レールへ
-- **Q2 のコレクタ (列 13)**: 紫線で下の −5V レールへ
-- **入力 (列 11)**: W1 (黄) を `a8` に挿し `b8`–`b11` でベースへ。CH2 の 2+ (青) は
+- **Q1 のコレクタ (上の列 11)**: 赤線で +5V レールへ
+- **Q2 のコレクタ (下の列 11)**: 紫線で下の −5V レールへ
+- **入力 (列 10)**: W1 (黄) を `a8` に挿し `b8`–`b10` でベースへ。CH2 の 2+ (青) は
   `a7` に挿して `e7`–`e8` で渡す
 - **出力 (列 12)**: `RL` は上の − レール (GND) へ縦に挿す。CH1 の 1+ (橙) は
   `a15` に挿して `b12`–`b15` で渡す

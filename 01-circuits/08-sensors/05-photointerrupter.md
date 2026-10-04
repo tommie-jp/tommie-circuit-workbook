@@ -79,7 +79,7 @@ wires:
   - +t16 -- b16 red
   - b19 -- b22
   - -t24 -- b24 black
-  - b22 -- b27
+  - d22 -- d27
   - b30 -- d33
   - -t35 -- d35 black
   - +t38 -- b38 red

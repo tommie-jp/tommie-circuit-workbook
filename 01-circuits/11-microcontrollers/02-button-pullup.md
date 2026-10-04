@@ -50,13 +50,13 @@ parts:
   R1: resistor a30 a33 10k
   SW1: button @ e35
 wires:
-  - MCU.3V3 -- +t9
-  - MCU.GND3 -- -t7
-  - +t9 -- b30
-  - MCU.GP16 -- b33
-  - b33 -- b35
-  - g37 -- -b37
-  - -t40 -- -b40
+  - MCU.3V3 -- +t9 red
+  - MCU.GND3 -- -t7 black
+  - +t30 -- b30 red
+  - MCU.GP16 -- b33 yellow
+  - c33 -- c35 yellow
+  - g37 -- -b37 black
+  - -t40 -- -b40 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/breadboard/02-button-pullup.svg)

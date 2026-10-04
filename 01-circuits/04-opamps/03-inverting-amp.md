@@ -76,7 +76,8 @@ parts:
 wires:
   - GEN.OUT -- a5 yellow
   - GEN.GND -- -t7 black
-  - d15 -- g15 -- g11 orange
+  - d15 -- f15 orange
+  - g15 -- g11 orange
   - j12 -- -b12 black
   - +t10 -- a10 red
   - +t1 -- +b1 red

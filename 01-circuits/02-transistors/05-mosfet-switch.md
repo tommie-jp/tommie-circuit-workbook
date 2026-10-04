@@ -48,7 +48,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/circuit/05-mosfet-switch.svg)
 
 +5V は Analog Discovery の電源出力 V+ (WaveForms の Supplies で 5 V にして入れる)。
-LED の 9 mA ほどなので V+ で足りる。CH2 はゲート、CH1 はドレインの電圧を GND から測る。
+流れるのは LED の 9 mA ほどなので V+ で足りる。CH2 はゲート、CH1 はドレインの電圧を GND から測る。
 
 `SW` を閉じるとゲートに 5V がかかり、MOSFET がオンになって LED が点く。
 `RPD` (100kΩ、プルダウン) が `SW` を開けたときにゲートを確実に 0V へ落とす。

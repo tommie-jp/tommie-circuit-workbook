@@ -63,8 +63,8 @@ style:
   **回路そのものは同じ**。周期が 1/1000 になり、耳に聞こえる周波数になる
 - **R5 (100 Ω) はブザーの保護。** 圧電ブザーはコンデンサに近い部品なので、
   スイッチの切り替わり (Q2 が急に ON/OFF) で流れ込む突入電流を抑える
-- LED も 3-1 と同じ速さでは点滅が見えず、うっすら点いたままに見える
-  (残像。目に見える上限は 30〜60 Hz 程度)
+- LED は 720 Hz で点滅するので目では点滅が見えず、うっすら点いたままに見える
+  (残像。目で追える点滅は 30〜60 Hz 程度まで)
 
 ## 実体配線図
 
@@ -75,11 +75,11 @@ board: half
 parts:
   Q1: transistor h4(E) h5(C) h6(B) 2SC1815
   R1: resistor f5 f8 330
-  D1: led g9(A) g8(K) red
+  D1: led i9(A) i8(K) red
   R4: resistor g6 g11 10k
   Q2: transistor h14(E) h15(C) h16(B) 2SC1815
   R2: resistor f15 f18 330
-  D2: led g19(A) g18(K) red
+  D2: led i19(A) i18(K) red
   R3: resistor g16 g21 10k
   R5: resistor g22 g25 100
   BZ1: buzzer i25 i28
@@ -88,13 +88,13 @@ parts:
 wires:
   - j7 -- j16 orange
   - j17 -- j6 orange
-  - i9 -- +b9 red
+  - j9 -- +b9 red
   - i11 -- +b11 red
-  - i19 -- +b19 red
+  - j19 -- +b19 red
   - i21 -- +b21 red
   - j4 -- -b4 black
   - j14 -- -b14 black
-  - j15 -- j22 orange
+  - j15 -- j22 yellow
   - j28 -- -b28 black
 ```
 

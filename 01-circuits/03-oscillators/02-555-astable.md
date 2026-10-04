@@ -20,15 +20,15 @@ board: BB
 title: 図1 555 非安定
 parts:
   V1: vsource c4 i4 5
-  VCC: vcc c4
+  VCC: vcc c4 5V
   G1: ground i4
   U1: ic e10 NE555
-  VCC: vcc b7
+  VCC: vcc b7 5V
   Ra: resistor b7 d7f0 10k
   Rb: resistor d7f0 f7f0 47k
   C1: ecap f8f0 i8 10u
   G3: ground i8
-  VCC: vcc b10
+  VCC: vcc b10 5V
   G2: ground i10
   Cc: capacitor g12 i12 10n
   G5: ground i12
@@ -82,7 +82,9 @@ wires:
   - -t1 -- -b1 black
   - +t7 -- a7 red
   - +t10 -- a10 red
-  - d12 -- d9 -- h9 -- h11 orange
+  - d12 -- d9 orange
+  - e9 -- f9 orange
+  - g9 -- g11 orange
   - c20 -- -t20 black
   - j5 -- -b5 black
   - j10 -- -b10 black
@@ -95,7 +97,7 @@ wires:
 - **DIP8 は溝をまたいで挿す** (e 行と f 行)。1 番 (GND) が左下の f10、8 番 (VCC) が
   左上の e10。切り欠きを左に向ける
 - 2 番 (TRIG、f11) は下ブロックにあるので、板の上の 6 番 (THR、e12) へは
-  IC の左を回るオレンジの線 (`d12 -- d9 -- h9 -- h11`) で渡す。C1 の + はこの線の 9 列に挿す
+  IC の左を回るオレンジの線 (`d12 -- d9`、`e9 -- f9`、`g9 -- g11`) で渡す。C1 の + はこの 9 列に挿す
 - 4 番 (RESET) は使わないので +5V に固定 (`i13 -- +b13`)。浮かせておくと
   誤動作することがある
 
@@ -125,7 +127,7 @@ Low の時間は Rb × C × 0.693。
 | デューティ比 (High の割合) | 約 55% | (Ra+Rb) / (Ra+2Rb)。**555 の非安定はきっちり 50% にならない** |
 | LED の電流 (点灯中) | 約 6.8 mA | (5 V − 出力 High の飽和 (バイポーラ 555 は Vcc−1.5 V 程度) − 2.0 V) ÷ 220 Ω |
 
-Ra を 0 に近づけると デューティ比は 50% に近づくが、Ra が小さすぎると
+Ra を 0 に近づけるとデューティ比は 50% に近づくが、Ra が小さすぎると
 放電時に 7 番から Vcc へ大電流が流れて IC を痛める (下限は 1 kΩ 程度)。
 デューティ比をきっちり変えたいなら 3-6 のダイオード付き PWM を見る。
 
