@@ -86,7 +86,33 @@ notes:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/circuit/05-battery-firmware.svg)
 
+## 実体配線図
+
+```perfboard
+board:
+  size: 7x5cm
+  slots: on
+title: 図2 perfboard の検査片 (100 Ω を端面 SMA の先に付ける)
+points:
+  GND: l2
+parts:
+  J1: sma/female-edge i1 h0 j0
+  R1: resistor i5 l5 100
+wires:
+  - i1 -- i5
+  - l5 -- GND black
+  - j0 -- j2 black
+  - j2 -- GND black
+```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/perfboard/05-battery-firmware.svg)
+
+J1 のねじ (SMA) に NanoVNA の CH0 のケーブルをつなぐ。R1 (100 Ω、E24 にある 1 本) は中心導体から GND へ立てて付ける。
+板に流れる電流は、NanoVNA の出力が 0 dBm 以下なので数 mA 以下で、板の範囲 (1 穴 200 mA) に収まる。
+
 ## 掃引の設定
+
+計器は VNA。この本の図は NanoVNA-H4 で書いてあり、標準の LiteVNA64 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
 | 項目 | 値 |
 | --- | --- |
@@ -98,7 +124,7 @@ notes:
 ```vna
 device: h4
 sweep: 1M-30M 101
-title: 図2 更新の後の検査片 100 Ω は −9.54 dB (SWR 2.00)
+title: 図3 更新の後の検査片 100 Ω は −9.54 dB (SWR 2.00)
 dut:
   - series R 100
   - short

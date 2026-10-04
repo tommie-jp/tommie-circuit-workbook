@@ -71,11 +71,43 @@ notes:
 
 - R1 (1 MΩ) は給電点の中心導体と外皮 (GND) の間に付ける。1/4 W の炭素皮膜でよい
 - R1 は DC では電荷の逃げ道、高周波では 50 Ω に比べてずっと大きいので
-  **ほとんど見えない** (下の図 2)
+  **ほとんど見えない** (下の図 3)
 - 給電点が DC で GND につながったアンテナ (折り返しダイポール、ガンマ整合など)
   は、それ自体が逃げ道になっている。それでも同軸の手元の短絡 (手順 3) はしておく
 
+## 実体配線図
+
+```perfboard
+board:
+  size: 7x5cm
+  slots: on
+title: 図2 perfboard の放電抵抗 (1 MΩ を T の分岐に付ける)
+points:
+  GND: l2
+parts:
+  J1: sma/female-edge i1 h0 j0
+  J2: sma/female-edge i24 j25
+  R1: resistor i8 l8 1M
+wires:
+  - i1 -- i8
+  - i8 -- i24
+  - l8 -- GND black
+  - j0 -- j2 black
+  - j2 -- GND black
+  - j25 -- j15 black
+  - j15 -- l15 black
+  - l15 -- GND black
+```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/perfboard/04-esd-antenna-discharge.svg)
+
+J1 に NanoVNA 側の同軸ケーブル、J2 にアンテナの同軸ケーブルをつなぐ。R1 (1 MΩ、1/4 W) は中心導体から GND へ立てて付ける。
+アンテナを繋ぎっぱなしにする測定ではこの基板を挟む。T 型の BNC・SMA アダプタの先に抵抗をねじ込んでもよい。
+1 MΩ に流れる電流は NanoVNA の出力 (0 dBm 以下) で 1 µA 以下、静電気の放電でも数 µA なので、板の範囲に収まる。
+
 ## 掃引の設定
+
+計器は VNA。この本の図は NanoVNA-H4 で書いてあり、標準の LiteVNA64 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
 | 項目 | 値 |
 | --- | --- |
@@ -90,7 +122,7 @@ notes:
 ```vna
 device: h4
 sweep: 120M-170M 101
-title: 図2 1 MΩ の放電抵抗を付けたままでも SWR は 1.11
+title: 図3 1 MΩ の放電抵抗を付けたままでも SWR は 1.11
 dut:
   - shunt R 1M
   - series R 45

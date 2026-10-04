@@ -72,9 +72,45 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/circuit/08-four-traces.svg)
 
+## 実体配線図
+
+```perfboard
+board:
+  size: 7x5cm
+  slots: on
+title: 図2 perfboard の 3 次 LC ローパス (端面 SMA 2 つ)
+points:
+  GND: l2
+parts:
+  J1: sma/female-edge i1 h0 j0
+  C1: capacitor i3 l3 68p
+  L1: inductor i5 i9 180n
+  C2: capacitor i13 l13 68p
+  J2: sma/female-edge i24 j25
+wires:
+  - i1 -- i3
+  - i3 -- i5
+  - i9 -- i13
+  - i13 -- i24
+  - l3 -- GND black
+  - l3 -- l13 black
+  - l13 -- l15 black
+  - l15 -- j15 black
+  - j15 -- j25 black
+  - j0 -- j2 black
+  - j2 -- GND black
+```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/perfboard/08-four-traces.svg)
+
+J1 に CH0、J2 に CH1 のケーブルをつなぐ。C1・C2 (68 pF) は中心導体から GND へ立てる。L1 (180 nH) は C1 と C2 の間に横にはさむ。
+板に流れる電流は、NanoVNA の出力が 0 dBm 以下なので数 mA 以下で、板の範囲 (1 穴 200 mA) に収まる。
+
 ## 掃引の設定
 
-| 項目 | 図 2 (フィルタ) | 図 3 (アンテナ) |
+計器は VNA。この本の図は NanoVNA-H4 で書いてあり、標準の LiteVNA64 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
+
+| 項目 | 図 3 (フィルタ) | 図 4 (アンテナ) |
 | --- | --- | --- |
 | 範囲 | 1 MHz〜200 MHz | 100 MHz〜180 MHz |
 | 点数 | 201 | 161 |
@@ -88,7 +124,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-200M 201
-title: 図2 既定の 4 トレースで LC ローパスを見る
+title: 図3 既定の 4 トレースで LC ローパスを見る
 dut:
   - shunt C 68p
   - series L 180n
@@ -119,7 +155,7 @@ notes:
 ```vna
 device: h4
 sweep: 100M-180M 161
-title: 図3 アンテナは S11 の SWR と X の 2 本に絞る
+title: 図4 アンテナは S11 の SWR と X の 2 本に絞る
 dut:
   - series R 35
   - series L 220n
@@ -151,7 +187,7 @@ notes:
 
 ## 見るべき値
 
-図 2 (LC ローパス、計算値)。S21 と S11 の LOGMAG は 2-2 の表と同じ値になる。
+図 3 (LC ローパス、計算値)。S21 と S11 の LOGMAG は 2-2 の表と同じ値になる。
 
 | 印 | 周波数 | S11 LOGMAG | S21 LOGMAG | S11 (Smith) | S21 PHASE |
 | --- | --- | --- | --- | --- | --- |
@@ -159,7 +195,7 @@ notes:
 | 2 | 69 MHz | −3.00 dB | −3.02 dB | 26.5 Ω − j69.0 Ω | −156.75° |
 | 3 | 150 MHz | −0.02 dB | −24.05 dB | 0.1 Ω − j17.3 Ω | 128.26° |
 
-図 3 (アンテナの等価回路、計算値)。
+図 4 (アンテナの等価回路、計算値)。
 
 | 印 | 周波数 | SWR | X |
 | --- | --- | --- | --- |

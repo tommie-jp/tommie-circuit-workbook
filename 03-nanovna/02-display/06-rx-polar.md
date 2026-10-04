@@ -60,19 +60,49 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/circuit/06-rx-polar.svg)
 
+## 実体配線図
+
+```perfboard
+board:
+  size: 7x5cm
+  slots: on
+title: 図2 perfboard の直列 RLC (端面 SMA の先に R・L・C を直列に立てる)
+points:
+  GND: l2
+parts:
+  J1: sma/female-edge i1 h0 j0
+  R1: resistor i3 i6 22
+  L1: inductor i8 i12 100n
+  C1: capacitor i14 l14 100p
+wires:
+  - i1 -- i3
+  - i6 -- i8
+  - i12 -- i14
+  - l14 -- GND black
+  - j0 -- j2 black
+  - j2 -- GND black
+```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/perfboard/06-rx-polar.svg)
+
+J1 に NanoVNA の CH0 のケーブルをつなぐ。R1 (22 Ω)・L1 (100 nH)・C1 (100 pF) を中心導体から GND へ直列に並べる。
+L1 は 100 nH のチップかリード付きの小型品 (リードを短く切る)。板に流れる電流は、NanoVNA の出力が 0 dBm 以下なので数 mA 以下で、板の範囲 (1 穴 200 mA) に収まる。
+
 ## 掃引の設定
+
+計器は VNA。この本の図は NanoVNA-H4 で書いてあり、標準の LiteVNA64 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
 | 項目 | 値 |
 | --- | --- |
 | 範囲 | 25 MHz〜125 MHz |
 | 点数 | 101 (1 MHz おき) |
 | 校正 | CH0 のケーブルの先で Open / Short / Load (1-1) |
-| 表示 | 図 2 は S11 の R と X、図 3 は S11 の極表示と Smith |
+| 表示 | 図 3 は S11 の R と X、図 4 は S11 の極表示と Smith |
 
 ```vna
 device: h4
 sweep: 25M-125M 101
-title: 図2 R は 22 Ω のまま、X は負から正へ (50.33 MHz で 0)
+title: 図3 R は 22 Ω のまま、X は負から正へ (50.33 MHz で 0)
 dut:
   - series R 22
   - series L 100n
@@ -94,7 +124,7 @@ markers:
 ```vna
 device: h4
 sweep: 25M-125M 101
-title: 図3 同じ点を極表示と Smith で — 共振で 0.389∠180°
+title: 図4 同じ点を極表示と Smith で — 共振で 0.389∠180°
 dut:
   - series R 22
   - series L 100n
@@ -111,7 +141,7 @@ markers:
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/vna/06-rx-polar-2.svg)
 
-- **R はどの周波数でも 22 Ω** (図 2 の R は平ら)。直列の L と C は R を変えない
+- **R はどの周波数でも 22 Ω** (図 3 の R は平ら)。直列の L と C は R を変えない
 - **X は 30 MHz で −34.2 Ω (容量性)、50.33 MHz で 0、100 MHz で +46.9 Ω (誘導性)**。
   X = 2πfL − 1 / (2πfC) の形そのまま
 - 極表示では点が円の中を時計回りに回る。共振の点は大きさ 0.389、角度 180°

@@ -97,7 +97,51 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/circuit/09-saver-calibration-averaging.svg)
 
+## 実体配線図
+
+```perfboard
+board:
+  size: 9x7cm
+  slots: on
+title: 図2 perfboard の 40 dB パッド (20 dB を 2 段、端面 SMA 2 つ)
+points:
+  GND: l2
+parts:
+  J1: sma/female-edge i1 h0 j0
+  R1: resistor i3 i6 43
+  R2: resistor i8 k8 11
+  R3: resistor i10 i13 43
+  R4: resistor i15 i18 43
+  R5: resistor i20 k20 11
+  R6: resistor i22 i25 43
+  J2: sma/female-edge i34 j35
+wires:
+  - i1 -- i3
+  - i6 -- i8
+  - i8 -- i10
+  - i13 -- i15
+  - i18 -- i20
+  - i20 -- i22
+  - i25 -- i34
+  - k8 -- l8 black
+  - l8 -- GND black
+  - k20 -- l20 black
+  - l20 -- l8 black
+  - j0 -- j2 black
+  - j2 -- GND black
+  - j35 -- j30 black
+  - j30 -- l30 black
+  - l30 -- l20 black
+```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/perfboard/09-saver-calibration-averaging.svg)
+
+J1 に CH0、J2 に CH1 のケーブルをつなぐ。43・11・43 Ω の T 型パッドを 2 段つなぎ、2 本の 11 Ω の下を GND の線でつなぐ。
+抵抗は 0.25 W 品。NanoVNA の出力は 0 dBm 以下 (1 mW 以下) で、板に流れる電流は数 mA 以下に収まる。
+
 ## 掃引の設定
+
+計器は VNA。この本の図は NanoVNA-H4 で書いてあり、標準の LiteVNA64 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
 | 項目 | 値 |
 | --- | --- |
@@ -110,7 +154,7 @@ wires:
 ```vna
 device: h4
 sweep: 1M-300M 404
-title: 図2 40 dB のパッドは S21 が −39.50 dB で平ら
+title: 図3 40 dB のパッドは S21 が −39.50 dB で平ら
 dut:
   - series R 43
   - shunt R 11

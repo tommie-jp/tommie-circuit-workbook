@@ -55,7 +55,33 @@ notes:
 - F-SMA 変換の数 cm も線路の一部になり、λ/4 の周波数を少し下げる
   (見るべき値の表より数 MHz 低く出る目安)
 
+## 実体配線図
+
+```perfboard
+board:
+  size: 7x5cm
+  slots: on
+title: 図2 perfboard の 100 Ω の負荷 (端面 SMA の先に付ける)
+points:
+  GND: l2
+parts:
+  J2: sma/female-edge i1 h0 j0
+  R1: resistor i5 l5 100
+wires:
+  - i1 -- i5
+  - l5 -- GND black
+  - j0 -- j2 black
+  - j2 -- GND black
+```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/perfboard/08-quarter-wave-transformer.svg)
+
+J2 に 75 Ω・50 cm の同軸 (TL1) をつなぎ、TL1 の反対側を NanoVNA の CH0 につなぐ。TL1 は図の部品ではなくケーブルで、基板に付けるのは R1 (100 Ω) の負荷だけ。
+板に流れる電流は、NanoVNA の出力が 0 dBm 以下なので数 mA 以下で、板の範囲 (1 穴 200 mA) に収まる。
+
 ## 掃引の設定
+
+計器は VNA。この本の図は NanoVNA-H4 で書いてあり、標準の LiteVNA64 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
 | 項目 | 値 |
 | --- | --- |
@@ -69,7 +95,7 @@ notes:
 ```vna
 device: h4
 sweep: 10M-250M 241
-title: 図2 λ/4 (100.4 MHz) で SWR 1.125 まで下がる。2 倍では 2 に戻る
+title: 図3 λ/4 (100.4 MHz) で SWR 1.125 まで下がる。2 倍では 2 に戻る
 dut:
   - line 75 50cm vf 0.67
   - series R 100
