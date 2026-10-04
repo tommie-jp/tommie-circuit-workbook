@@ -21,17 +21,23 @@ board: BB
 ## 回路図
 
 ```circuit
-title: 図1 トランスで昇圧する
+title: 図1 トランスで昇圧する (CH1 は 1 次、CH2 は 2 次の電圧)
 parts:
   V1: sine b2 d2 8.5
-  T1: transformer c5 6V/12V
-  R1: resistor b8 d8 1k
+  M1: voltmeter b5 d5 l=$\mathrm{CH1}$
+  T1: transformer c8 6V/12V
+  R1: resistor b12 d12 1k
+  M2: voltmeter b15 d15 l=$\mathrm{CH2}$
   G1: ground d2
 wires:
-  - b2 -| T1.A1
-  - d2 -| T1.A2
-  - b8 |- T1.B1
-  - d8 |- T1.B2
+  - b2 -- b5
+  - b5 -| T1.A1
+  - d2 -- d5
+  - d5 -| T1.A2
+  - b12 |- T1.B1
+  - d12 |- T1.B2
+  - b12 -- b15
+  - d12 -- d15
 style:
   grid: on
   pitch: 0.9
@@ -48,7 +54,7 @@ style:
 ## 実体配線図
 
 ```breadboard
-title: 図2 トランスとアダプタをブレッドボードにつなぐ
+title: 図2 トランスとアダプタをつなぐ (1 次を CH1、2 次を CH2 で見る)
 # トランスの 4 本の足は板の穴に直に挿す。レールは使わない
 board: half
 parts:
@@ -57,11 +63,21 @@ parts:
     at: top
     label: AC アダプタ 6V
     pins: [OUT1, OUT2]
+  AD:
+    type: device
+    at: bottom
+    label: Analog Discovery (Scope)
+    pins: [1+, 1-, 2+, 2-, GND]
   T1: transformer a5(A1) a8(A2) a13(B1) a16(B2)
   R1: resistor c13 c16 1k
 wires:
   - ADP.OUT1 -- b5 yellow
   - ADP.OUT2 -- b8 orange
+  - AD.1+ -- d5 blue
+  - AD.1- -- d8 black
+  - AD.2+ -- d13 green
+  - AD.2- -- d16 black
+  - AD.GND -- e8 black
 notes:
   - text: 1 次 (5〜8 列) をアダプタへ、2 次 (13〜16 列) に負荷 R1
 ```
@@ -71,7 +87,44 @@ notes:
 - トランスの 4 本の足は実物の巻線の端そのものなので、挿した穴がそのまま足になる
   (`a5` が `A1`、`a8` が `A2`、というように穴に名前を添えて分かるようにした)。
   R1 は 13・16 列に置いて、同じ列の導通で 2 次巻線とつながる
+- 駆動はアダプタ (6 V の AC アダプタ) にする。AD3 の Wavegen は最大 ±5 V (実効値 3.5 V)・30 mA で、6 V (ピーク 8.5 V) の交流は出せない
+  (Wavegen で駆動するなら 1 次を 3.5 V 以下にし、2 次も比例して 7 V 以下になる)
+- Analog Discovery の 1+ (青) は 1 次の A1 の列 (`d5`)、1− (黒) は A2 の列 (`d8`)。2+ (緑) は 2 次の B1 の列 (`d13`)、2− (黒) は B2 の列 (`d16`)。
+  1 次と 2 次の間に配線が無いまま、2 つのチャネルでそれぞれの電圧を見る
+- AD の GND (黒) は 1 次の A2 の列 (`e8`) につなぐ。図1 の接地の記号 G1 と同じ点で、
+  Scope の基準 (共通のグラウンド) を 1 次側に 1 か所だけ置く
+- AD3 の Scope 入力は差動で、1− と 2− は内部でつながっていない (出典は下の「計器の設定」)。
+  そのため 1 次と 2 次を別々の点で測っても、トランスの絶縁は AD3 の中で短絡されない。
+  GND を 2 次側にもつなぐと、AD の GND が両方の巻線に付いて絶縁が崩れるので、1 次側の 1 か所だけにする
 - 1 次 (5・8 列) と 2 次 (13・16 列) の間は、どこにも配線が無い。これが絶縁の姿だ
+
+## 計器の設定
+
+計器は Analog Discovery 3 の Scope (1+/1− = 1 次、2+/2− = 2 次)。交流の波形の大きさと形を 1 次と 2 次で並べて比べるので、
+テスターより向く。1 次・2 次とも 5 V/div・5 ms/div で、AC カップリングにすると 0 V を中心に見える。
+
+1 次と 2 次を別々の点で測ってよい理由は、AD の仕様にある。Digilent の仕様書 (Analog Discovery 3 Specifications) は
+Scope の入力形式を差動 (Without BNC Adapter) と書き、入力範囲を GND に対して ±25 V としている。
+AD2 のリファレンスマニュアルは「入力は完全な差動」と書き、そのうえで、安定した同相電圧を得るために
+被測定回路の GND と AD の GND をつなぐ必要があると書く (AD の GND は USB の GND につながる)。
+つまり 1− と 2− は互いにつながらず、それぞれが 1+ と 2+ の相手として働く。
+GND を 1 か所つなげば基準が決まり、各チャネルは自分の 2 点の電位差だけを読む。
+AD3 のマニュアルの本文は確かめられなかった (digilent.com は読めない)。差動の入力は AD2 と共通の作りだが、
+AD3 の 1− と 2− の内部の接続は、仕様書と AD2 のマニュアルからの推定になる。
+
+```scope
+title: 図3 1 次 (CH1) と 2 次 (CH2) の電圧 — 2 次は 1 次の 2 倍で、同じ向きに動く
+time: 5ms/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 60Hz 8.49V, range: 5V/div}
+ch2: {wave: sine 60Hz 17V, range: 5V/div}
+measure: [vpp, rms, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/06-transformers/scope/01-transformer-basics.svg)
+
+図3 は理想の巻数比 1:2 で、電源は 60 Hz (50 Hz の地域では 50 Hz。時間軸を 5 ms/div のままなら 2.5 周期)。
+CH1 の読み値は 17.0 Vpp・6.00 V、CH2 は 34.0 Vpp・12.0 V で、下の表の 6 V・12 V と一致する。
 
 ## 見るべき値
 
@@ -81,8 +134,8 @@ notes:
 
 | 測る所 | 期待する値 | 分かること |
 | --- | --- | --- |
-| 1 次 (A1-A2) の電圧 | 6 V (アダプタの出力そのまま) | 1 次はアダプタと同じ |
-| 2 次 (B1-B2) の電圧 | 12 V | 巻数比どおり 2 倍に昇圧する |
+| 1 次 (A1-A2) の電圧 | 6 V (アダプタの出力そのまま。Scope で約 17 Vpp) | 1 次はアダプタと同じ |
+| 2 次 (B1-B2) の電圧 | 12 V (Scope で約 34 Vpp) | 巻数比どおり 2 倍に昇圧する |
 | 2 次の電流 (R1 = 1 kΩ) | 12 mA (= 12 V / 1 kΩ) | 負荷を掛けても電圧はほぼ保たれる (小さな鉄心でも軽い負荷なら) |
 | 1 次の電流 (計算値) | 約 24 mA | 損失の無い理想のトランスでは 1 次と 2 次の電力が等しいので、電流は巻数比の逆になる (巻数が 1/2 なら電流は 2 倍)。実物は鉄心を磁化する電流が加わり、これより多いことがある |
 | 1 次と 2 次の間の抵抗 (テスターの導通レンジ) | ∞ (導通しない) | 巻線どうしは鉄心で磁気的に結ばれるだけで、電気的にはつながっていない (絶縁) |
