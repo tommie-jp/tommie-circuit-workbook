@@ -10,9 +10,15 @@ board: BB
 
 # 10-3 半加算器と全加算器 (XOR + AND)
 
-半加算器 (XOR + AND) を作ってから、もう 1 組の XOR・AND と OR を足して
-**下の桁からの繰り上がり (Cin) も足せる全加算器**に拡張する。3 つの CMOS IC
-(XOR・AND・OR) だけで組める。
+2 進数の足し算をゲートで組む。コンピュータの計算の中身は、この回路の積み重ねになっている。
+
+まず 1 桁どうしの A + B を計算する半加算器を作る。1 + 1 = 10 (2 進数) のように、
+1 桁の足し算は「その桁の和」と「上の桁への繰り上がり」の 2 つの出力を持つ。
+和は XOR (排他的論理和: 2 つの入力が違うときだけ 1)、繰り上がりは AND (10-1) で作れる。
+次に、もう 1 組の XOR・AND と OR を足して、下の桁からの繰り上がり (Cin) も足せる
+全加算器に拡張する。3 つの CMOS IC (XOR・AND・OR) だけで組める。
+
+式の記号は、⊕ が XOR、· が AND、+ が OR を表す。
 
 ## 回路図
 
@@ -68,21 +74,6 @@ wires:
   - U3A.out -- m34
   - U1B.out -- h37
 notes:
-  - text g12g8 small center: "1"
-  - text h12e8 small center: "2"
-  - text g14h2 small center: "3"
-  - text m12g8 small center: "1"
-  - text n12e8 small center: "2"
-  - text m14h2 small center: "3"
-  - text g22g8 small center: "5"
-  - text h22e8 small center: "6"
-  - text g24h2 small center: "4"
-  - text k22g8 small center: "5"
-  - text l22e8 small center: "6"
-  - text k24h2 small center: "4"
-  - text l28g8 small center: "1"
-  - text m28e8 small center: "2"
-  - text l30h2 small center: "3"
   - text g16 blue: S1
   - text m21 blue: C1
   - text k26 blue: C2
@@ -98,17 +89,17 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/circuit/03-adders.svg)
 
-- **半加算器**: U1A (XOR、PIN 1・2→3) が S1 = A⊕B、U2A (AND、PIN 1・2→3) が C1 = A·B
-- **全加算器への拡張**: U1B (XOR、PIN 5・6→4) が S = Cin⊕S1、U2B (AND、PIN 5・6→4)
-  が C2 = Cin·S1、U3A (OR、PIN 1・2→3) が Cout = C2 + C1
+- 半加算器: U1A (XOR、PIN 1・2→3) が和 S1 = A⊕B、U2A (AND、PIN 1・2→3) が繰り上がり C1 = A·B
+- 全加算器への拡張: U1B (XOR、PIN 5・6→4) が和 S = Cin⊕S1、U2B (AND、PIN 5・6→4)
+  が C2 = Cin·S1、U3A (OR、PIN 1・2→3) が繰り上がり Cout = C2 + C1。
+  C1 と C2 が同時に 1 になることは無いので、OR でまとめてよい
 - 図1 はゲートを論理記号で描き、記号の入出力に IC の PIN 番号を添えた。U1A・U1B は同じ
   CD4070 (U1) の 2 回路、U2A・U2B は同じ CD4081 (U2) の 2 回路
 - 電源の PIN は記号に出ないので図の下に書いた。3 つの IC とも PIN 14 が VDD (+5V)、
   PIN 7 が VSS (GND)。つなぎ忘れると IC は動かない
-- **使わない入力は GND へ。** U1・U2 は残り 2 ゲートの入力 (PIN 8・9・12・13)、
-  U3 は残り 3 ゲートの入力 (PIN 5・6・8・9・12・13) を GND につなぐ。CMOS の入力は
-  浮かせると勝手に振れて電流を食う。出力の PIN (U1・U2 の PIN 10・11、U3 の PIN 4・10・11)
-  は何もつながずに開けておく
+- 使わない入力は GND へつなぐ (10-1)。U1・U2 は残り 2 ゲートの入力 (PIN 8・9・12・13)、
+  U3 は残り 3 ゲートの入力 (PIN 5・6・8・9・12・13) が対象。出力の PIN (U1・U2 の
+  PIN 10・11、U3 の PIN 4・10・11) は何もつながずに開けておく
 
 ## 実体配線図
 
@@ -232,14 +223,21 @@ wires:
 
 ## 見るべき値
 
-| A | B | Cin | S1 | C1 | S (全体の和) | Cout |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 1 | 0 | 0 | 1 | 0 | 1 | 0 |
-| 1 | 1 | 0 | 0 | 1 | 0 | 1 |
-| 1 | 1 | 1 | 0 | 1 | 1 | **1** |
+スイッチは閉じると 1。表の 1 は LED の点灯 (S1 は DS1、C1 は DC1、S は DS、Cout は DCO)。
 
-最後の行 (A=B=Cin=1) だけ S と Cout が両方光る。1+1+1 = 3 (2進数で 11) になる
+| A | B | Cin | S1 | C1 | S (全体の和) | Cout | 10 進で |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 1 | 0 | 0 | 1 | 0 | 1 |
+| 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 |
+| 0 | 1 | 1 | 1 | 0 | 0 | 1 | 2 |
+| 1 | 0 | 0 | 1 | 0 | 1 | 0 | 1 |
+| 1 | 0 | 1 | 1 | 0 | 0 | 1 | 2 |
+| 1 | 1 | 0 | 0 | 1 | 0 | 1 | 2 |
+| 1 | 1 | 1 | 0 | 1 | 1 | 1 | 3 |
+
+Cout を 2 の位、S を 1 の位として読むと、A + B + Cin の答えになる (最後の列)。
+最後の行 (A=B=Cin=1) だけ S と Cout が両方光る。1+1+1 = 3 (2 進数で 11) になる
 唯一の組み合わせで、Cin を足せる全加算器でないと表せない。
 
 ## 出典

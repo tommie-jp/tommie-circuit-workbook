@@ -11,10 +11,15 @@ era: 今
 
 # 11-1 Pico 2 の L チカ
 
-Raspberry Pi Pico 2 (RP2350) の GPIO ピン 1 本に LED をつなぎ、C/C++ (Pico SDK) と
-MicroPython の両方で点滅させる。
-マイコンで最初に書くプログラムの定番「L チカ」を、外付けの LED で行う
-(基板上の LED は GP25 に固定されていて配線の練習にならない)。
+マイコンは、プログラムで決めたとおりにピンの電圧を H・L に切り替えたり、ピンの
+電圧を読んだりする IC。第 10 章ではスイッチと配線で決めていた 0・1 を、プログラムで
+決められるようになる。
+
+この題では、Raspberry Pi Pico 2 (マイコン RP2350 を載せた小さな基板。以下 Pico 2) の
+GPIO (汎用入出力ピン。入力にも出力にも使える) 1 本に LED をつなぎ、C/C++ (Pico SDK) と
+MicroPython の両方で点滅させる。LED を点滅させる (L チカ) のは、マイコンで最初に
+書くプログラムの定番。基板上の LED は使わず、外付けの LED で行う
+(基板上の LED は中で GP25 に固定されていて、配線の練習にならない)。
 
 ## 回路図
 
@@ -25,7 +30,7 @@ parts:
   R1: resistor i6 i8 330
   D1: led i8 k8 red
   G1: ground k8
-  G2: ground h5c0 r270
+  G2: ground h5c0
 wires:
   - U1.GP15 -| i6
   - U1.GND18 -| h5c0
@@ -35,12 +40,14 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/circuit/01-pico-blink.svg)
 
-- GP15 (汎用入出力) を出力に設定し、program で H (3.3V) / L (0V) を切り替える
+- GP15 (図1 の右下、ピン 20) を出力に設定し、プログラムで H (3.3V) / L (0V) を切り替える。
+  Pico 2 の GPIO の H は 5V ではなく 3.3V
 - LED の戻り道として、Pico 2 の GND (ここではピン 18) を GND につなぐ。
   これが無いと電流の帰り道が無く、LED は点かない
-- R1 (330Ω) が電流を決める。3.3V − V<sub>F</sub> (赤色 LED 約2.0V) を 330Ω で割ると
-  約 3.9mA。Pico 2 (RP2350) の GPIO は 1 本あたり最大 12mA (既定は 4mA の設定)、
-  全ピンの合計 100mA までなので余裕がある。3.9mA は既定の 4mA に収まる
+- R1 (330Ω) が電流を決める。I = (3.3V − V<sub>F</sub>) / R1 = (3.3V − 2.0V) / 330Ω ≈ 3.9mA
+  (V<sub>F</sub> は LED の順方向電圧。赤色 LED で約 2.0V、計算値)。Pico 2 (RP2350) の
+  GPIO は 1 本あたり最大 12mA (既定の設定は 4mA)、全ピンの合計 100mA までなので余裕がある。
+  3.9mA は既定の 4mA にも収まる
 
 ## 実体配線図
 
@@ -65,27 +72,30 @@ wires:
   配線する。`h5` に置いたとき `j24` が GP15 の列 (`j23` は隣の GP14)
 - LED のアノードは R1 の右足と同じ 28 列 (i28)、カソード (30 列) は j30 から下の
   − レール (GND) へ
-- **Pico 2 の GND (ピン 18、22 列) を j22 から下の − レールへ渡す。** これが無いと
+- Pico 2 の GND (ピン 18、22 列) を j22 から下の − レールへ渡す。これが無いと
   LED の電流が Pico 2 へ戻れず、点かない (Pico 2 の GND はどのピンも中でつながって
   いるので、どれか 1 本をレールへ出せばよい)。上下の − レールは 50 列で渡して
   おく
 
 ## 見るべき値
 
-計算値。
+計算値。テスターの直流電圧レンジで、LED が点いている間に測る。0.5 秒の点滅では
+読みにくいので、プログラムの `sleep_ms(500)` (MicroPython は `sleep(0.5)`) を 5 秒ほどに
+延ばしてから測るとよい。
 
 | 測る所 | 期待する値 |
 | --- | --- |
+| GP15 (ピン 20) と GND の間 (H のとき) | 約3.3V |
 | GP15 が H のときの R1 の両端 | 約1.3V (3.3 − 2.0) |
-| R1 に流れる電流 | 約3.9mA |
+| R1 に流れる電流 | 約3.9mA (R1 の両端の電圧 ÷ 330Ω) |
 | LED の両端 | 約2.0V (順方向電圧、赤色) |
 
 ## プログラム
 
-プログラムは **C/C++ (Pico SDK) を第 1、MicroPython を第 2** として並べる。
-C/C++ を先にするのは、この教科書の標準がそうだからで、実行時間が読みやすく
-(後の章の PWM や I2C のタイミングに効く)、RAM も食わないため。
-どちらも同じ動きをする。
+プログラムは C/C++ (Pico SDK) を第 1、MicroPython を第 2 として並べる。どちらも同じ動きをする。
+C/C++ を先にするのはこの教科書の標準で、1 行の実行にかかる時間が読みやすく
+(この章の PWM や I2C のタイミングにかかわる)、RAM も少なくて済むため。
+MicroPython は書いてすぐ試せるのが利点。
 
 ### C/C++ (Pico SDK)
 
@@ -109,8 +119,12 @@ int main(void) {
 }
 ```
 
+- `gpio_init(LED_PIN)` で GP15 を GPIO として使えるようにし、`gpio_set_dir(..., GPIO_OUT)` で出力にする
+- `gpio_put(LED_PIN, 1)` で H、`gpio_put(LED_PIN, 0)` で L を出す
+- `sleep_ms(500)` は 500ms (0.5 秒) 待つ。`while (true)` で点灯と消灯をいつまでも繰り返す
+
 同じフォルダに `pico_sdk_import.cmake` (SDK の `external/` にあるものをコピーする) と
-`CMakeLists.txt` を置く。
+`CMakeLists.txt` (ビルドの設定) を置く。
 
 ```cmake
 cmake_minimum_required(VERSION 3.13)
@@ -123,14 +137,15 @@ target_link_libraries(blink pico_stdlib)
 pico_add_extra_outputs(blink)
 ```
 
-環境変数 `PICO_SDK_PATH` に SDK のフォルダを指しておき、次でビルドする。
+環境変数 `PICO_SDK_PATH` に SDK のフォルダを指しておき、次でビルド (プログラムを
+Pico 2 で動く形に変換) する。
 
 ```sh
 cmake -B build -DPICO_BOARD=pico2
 cmake --build build
 ```
 
-`build/blink.uf2` ができる。**BOOTSEL ボタンを押しながら USB をつなぐ**と Pico 2 が
+`build/blink.uf2` ができる。基板上の BOOTSEL ボタンを押しながら USB をつなぐと Pico 2 が
 USB ドライブ (ボリューム名は既定で `RP2350`) として見えるので、`.uf2` をそこへ
 コピーすれば書き込まれて動く。`PICO_BOARD=pico2` を付け忘れると Pico (RP2040) 用に
 ビルドされ、Pico 2 では動かない。
@@ -139,7 +154,8 @@ USB ドライブ (ボリューム名は既定で `RP2350`) として見えるの
 
 Pico 2 用の MicroPython (ダウンロードページ `RPI_PICO2`、Pico 用とは別のファイル) の
 `.uf2` を、同じく BOOTSEL でつないで出てきたドライブへコピーする。あとは
-Thonny で「MicroPython (Raspberry Pi Pico)」を選び、次を実行する。
+Thonny (Python の開発環境) で「MicroPython (Raspberry Pi Pico)」を選び、次を実行する。
+`Pin(15, Pin.OUT)` が GP15 を出力にし、`led.value(1)` / `led.value(0)` で H / L を出す。
 
 ```python
 from machine import Pin
@@ -155,7 +171,7 @@ while True:
 ```
 
 C/C++ のプログラムは、この環境で `PICO_BOARD=pico2` の `.uf2` までビルドが
-通ることを確かめた。**実機では動かしていない。** MicroPython は実行していない
+通ることを確かめた。実機では動かしていない。MicroPython は実行していない
 (未確認)。
 
 ## 出典
