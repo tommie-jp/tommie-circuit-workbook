@@ -299,15 +299,15 @@ board:
   slots: on
 parts:
   U1: dip4 f14 3SK291
-  R1: resistor c7 c10 51
-  R2: resistor e11 b11 1M
+  R1: resistor c3 c6 51
+  R2: resistor g11 d11 1M
   R3: resistor g3 g6 51
   R4: resistor i16 f16 33k
   R5: resistor n16 q16 13k
   R6: resistor g8 j8 150k
   R7: resistor b21 b24 2k
   VR1: potentiometer/trimmer k9 k10 k11 200k
-  C1: capacitor/ceramic e7 e10 10n
+  C1: capacitor/ceramic e3 e6 10n
   C2: capacitor/ceramic n7 n10 10n
   C3: capacitor/ceramic b15 e15 560p
   C4: capacitor/ceramic b17 b20 10n
@@ -351,7 +351,7 @@ wires:
   - q21 -- q24 black
   - j25 -- j24 black
   - j24 -- q24 black
-  - c10 -- c12 black
+  - c6 -- c12 black
   - c12 -- e12 black
   - f14 -- f12 black
   - e12 -- f12 black
@@ -364,13 +364,15 @@ wires:
   - e24 -- h24 black
   - h23 -- h24 black
   - h24 -- h25 black
-  - c1 -- c7 white
-  - c7 -- e7 white
+  - c1 -- c3 white
+  - c3 -- e3 white
   - f10 -- g10 white
   - g10 -- i10 white
   - g10 -- g8 white
+  - e6 -- e10 blue
   - f10 -- e10 blue
-  - e10 -- e11 blue
+  - g10 -- g11 blue
+  - b11 -- d11 red
   - j8 -- k8 white
   - k8 -- k9 white
   - i14 -- i10 yellow
@@ -421,15 +423,15 @@ style:
 | 部品 | 値 | 穴 |
 | --- | --- | --- |
 | U1 | 3SK291 (dip4) | アンカー f14: S f14、D f15、G1 i14、G2 i15 |
-| R1 | 51 | c7 (RF) / c10 (GND) |
-| R2 | 1M | e11 (G1) / b11 (VDD) |
+| R1 | 51 | c3 (RF) / c6 (GND) |
+| R2 | 1M | g11 (G1) / d11 (VDD) |
 | R3 | 51 | g6 (LO) / g3 (GND) |
 | R4 | 33k | i16 (G2) / f16 (VDD) |
 | R5 | 13k | n16 (G2) / q16 (GND) |
 | R6 | 150k | g8 (G1) / j8 (中点) |
 | R7 | 2k | b21 (FIN) / b24 (GND) |
 | VR1 | 200k 半固定 | k9 (A) k10 (W) k11 (B) |
-| C1 | 10n | e7 (RF) / e10 (G1) |
+| C1 | 10n | e3 (RF) / e6 (G1) |
 | C2 | 10n | n7 (LO) / n10 (G2) |
 | C3 | 560p | b15 (VDD) / e15 (D) |
 | C4 | 10n | b17 (D) / b20 (FIN) |
