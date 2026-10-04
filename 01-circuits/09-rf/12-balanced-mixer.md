@@ -75,13 +75,11 @@ wires:
   - m11 -- m15
   - m17 -- m21
 notes:
-  - text g12 small center: SA612
+  - text g12h5 small right: SA612
   - text e10 small center: PIN 1 IN_A
-  - text g9h5 small right: PIN 2
-  - text h10h5 small right: PIN 3
   - text l11h5 small left: PIN 4 OUT_A
   - text j13h5 small left: PIN 5 OUT_B
-  - text f15h5 small center: PIN 6 LO
+  - text f14h5 small center: PIN 6 LO
 style:
   pitch: 1
 ```
@@ -192,7 +190,7 @@ markers: [100k, 1M, 1.1M, 2.1M]
 - 100 kHz (差) と 2.1 MHz (和) が同じ高さで立つ。これが掛け算の証拠
 - 1.9 MHz は 3 × LO − RF (3 − 1.1 = 1.9 MHz)。LO で切り替えるスイッチは方形波に近く、
   その 3 次 (1/3) とも掛かる。約 −29.5 dBV (IF より 9.5 dB 下、目安)
-- 1 MHz (LO) と 1.1 MHz (RF) は IF より **35〜40 dB 下**。平衡が取れているほど低い
+- 1 MHz (LO) と 1.1 MHz (RF) は IF より **37〜43 dB 下** (目安)。平衡が取れているほど低い
 - スーパーヘテロダインでは、この後ろに IF のフィルタ (セラミックフィルタや LC) を置き、100 kHz だけを通す
 
 ## 見るべき値

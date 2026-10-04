@@ -102,7 +102,9 @@ wires:
   - a11 -- a12 orange
   - a15 -- +t15 red
   - a8 -- -t8 black
-  - h11 -- h6 -- d6 -- d5 orange
+  - h11 -- h6 orange
+  - g6 -- d6 orange
+  - c6 -- c5 orange
   - a2 -- +t2 red
   - j3 -- -b3 black
   - i12 -- i46 blue

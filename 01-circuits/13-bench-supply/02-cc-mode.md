@@ -35,18 +35,18 @@ LED を抵抗なしで定電圧の電源に直につなぐと、LED の V<sub>F<
 ```circuit
 title: 図1 CC で LED を光らせる (抵抗なし)
 parts:
-  PSU:
+  U1:
     type: device
     at: b2
     label: PSU
-    pins: ["+", "-", "GND"]
+    pins: ["+", "GND", "-"]
     turn: mirror
   D1: led b6 d6
   G1: ground d6
   G2: ground c3
 wires:
-  - PSU.+ -| b6
-  - PSU.- -| c3
+  - U1.+ -| b6
+  - U1.- -| c3
 style:
   grid: on
   pitch: 1.2
@@ -79,7 +79,7 @@ parts:
     pins: ["+", "-", "GND"]
   D1: led c10(A) c11(K) red
 wires:
-  - PSU.+ -- +t5 red
+  - PSU.+ -- +t3 red
   - +t5 -- a10 red
   - a11 -- -t11 black
   - PSU.- -- -t9 black
@@ -92,6 +92,8 @@ wires:
 - 抵抗が無い分、電流を決めているのが電源の電流制限だけになる。**電流制限を
   誤って大きい値 (LED の定格を超える値) にしたまま出力を入れると LED が
   壊れる** — 手順どおり、電流制限は出力を入れる前に決める
+- 電源によっては、出力を入れた瞬間や CV から CC へ切り替わる瞬間に、出力のコンデンサの電荷で
+  電流制限を超える電流が一瞬流れる。気になるなら電圧つまみを 3 V ほどまで下げておく (目安)
 
 ## 部品
 

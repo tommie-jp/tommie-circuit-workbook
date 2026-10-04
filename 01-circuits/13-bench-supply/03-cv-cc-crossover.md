@@ -32,7 +32,7 @@ board: BB
 ```circuit
 title: 図1 電源 + 可変抵抗の負荷
 parts:
-  PSU:
+  U1:
     type: device
     at: b2
     label: PSU
@@ -42,8 +42,8 @@ parts:
   G1: ground d6
   G2: ground c3
 wires:
-  - PSU.+ -| b6
-  - PSU.- -| c3
+  - U1.+ -| b6
+  - U1.- -| c3
 style:
   grid: on
   pitch: 1.2
@@ -71,18 +71,18 @@ parts:
     pins: ["+", "-", "GND"]
   RV1: potentiometer c10(1) c11(W) c12(2) 1k
 wires:
-  - PSU.+ -- +t5 red
+  - PSU.+ -- +t3 red
   - +t5 -- a10 red
-  - c10 -- c11
+  - e10 -- e11
   - a12 -- -t12 black
   - PSU.- -- -t9 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/13-bench-supply/breadboard/03-cv-cc-crossover.svg)
 
-- `RV1` の 1 番 (c10) と W (c11) をジャンパで結ぶと、そこから 2 番 (c12) までの
+- `RV1` の 1 番 (10 列) と W (11 列) をジャンパ (e10〜e11) で結ぶと、そこから 2 番 (c12) までの
   抵抗だけが効くレオスタットになる。つまみを回すと 0 Ω 〜 1 kΩ で変わる
-- 1 番と 2 番を入れ替えても向きは変わらない (無極性の抵抗なので極性は無い)
+- 1 番と 2 番を入れ替えてもよい (抵抗に極性は無い)
 
 ## 部品
 
@@ -139,7 +139,7 @@ wires:
 ```circuit
 title: 図3 シャント抵抗で電流を電圧にして XY 表示
 parts:
-  PSU:
+  U1:
     type: device
     at: b2
     label: PSU
@@ -152,8 +152,8 @@ parts:
   G1: ground f6
   G2: ground c3
 wires:
-  - PSU.+ -| b6
-  - PSU.- -| c3
+  - U1.+ -| b6
+  - U1.- -| c3
   - d6 -- d9
   - f6 -- f9 -- f12
   - b6 -- b12

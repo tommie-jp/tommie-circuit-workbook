@@ -76,7 +76,7 @@ wires:
 | 状態 | ベース電圧 (目安) | ダーリントン |
 | --- | --- | --- |
 | 乾いている (Rwater = ∞) | 0V (Rb で GND) | OFF |
-| 水道水で橋渡し (Rwater ≈ 20kΩ と仮定) | 約 **1.2V** (VBE 2 段分で頭打ち)。ベース電流 ≈ (5V−1.2V)/(10kΩ+20kΩ) ≈ **0.13mA** (Rb へ逃げるのは 1.2µA ほど) | ON (飽和) |
+| 水道水で橋渡し (Rwater ≈ 20kΩ と仮定) | 約 **1.2V** (VBE 2 段分で頭打ち)。ベース電流 ≈ (5V−1.2V)/(10kΩ+20kΩ) ≈ **0.13mA** (Rb へ逃げるのは 1.2µA ほど) | ON (ダーリントンは飽和しきらず、V<sub>CE</sub> は 0.8V 前後で止まる) |
 
 - Q1.C = Q2.C (共通コレクタ) に Buzzer (自励式、電圧をかけるだけで鳴る
   アクティブブザー) と、RLED・DLED (目印の LED) を並列にぶら下げる。
@@ -112,9 +112,9 @@ parts:
   DLED: led e18 g18 red
 wires:
   - P1.W -- b6
-  - b10 -- b14
-  - b14 -- b18
-  - b18 -- PWR
+  - b10 -- b14 red
+  - b14 -- b18 red
+  - b18 -- PWR red
   - P2.W -- i2
   - i2 -- i3
   - i5 -- i7
@@ -123,11 +123,11 @@ wires:
   - g4 -- g8
   - g8 -- g14
   - g14 -- g18
-  - b14 -- d14
+  - b14 -- d14 red
   - d18 -- e18
-  - i9 -- n9
-  - GND -- n2
-  - n2 -- n9
+  - i9 -- n9 black
+  - GND -- n2 black
+  - n2 -- n9 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/perfboard/03-water-alarm.svg)
@@ -144,7 +144,7 @@ wires:
 - Q1 のエミッタ (i5) を Q2 のベース (i7) へ。Q1・Q2 のコレクタ (i4・i8) は
   g 行へ上げて共通ネットにし、その先に Buzzer の下の足 (g14) と DLED の K (g18) を
   つなぐ。Buzzer の上の足 (d14) と RLED の上端 (b18) は PWR の b 行へ
-  (電源側のスイッチとして働く)。Q2 のエミッタ (i9) は 9 列を下りて GND の n 行へ
+  (ダーリントンは GND 側のスイッチとして働く)。Q2 のエミッタ (i9) は 9 列を下りて GND の n 行へ
 
 ## 見るべき値
 

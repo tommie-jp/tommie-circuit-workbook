@@ -395,7 +395,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/10-superheterodyne-1.svg)
 
 - 上のブロックが Q1 のベース側、下のブロックがエミッタと局発。Q1 は c 行 (11 列 B・12 列 C・13 列 E)
-- 1 列にアンテナの同調 (Cw の右端 d4・VC1 の A・バーアンテナの A1)。W1 は 1 列 (a1) から Cw (10pF) を通して入る
+- 4 列にアンテナの同調 (Cw の右端 d4・VC1 の A・バーアンテナの A1)。W1 は 1 列 (a1) から Cw (10pF) を通して入る
 - 7 列がベースのバイアス (R1 は 9 列の +5V へ、R2・Cb は e7–f7 の線で下の 7 列へ渡して 5 列の GND へ)
 - エミッタ (13 列) は e13–f13 で下へ。Re は 15 列の GND へ、Cc2 は 17 列の T2 の A2 (局発コイルの帰還の巻線) へ
 - T2 は h17〜h20 (A2・A1・B1・B2)。A1・B1 (18・19 列) を +5V へ。B2 (20 列) は e20–f20 で上へ渡して Cp (b20〜b22) から VC1 の B へ、
@@ -525,7 +525,7 @@ parts:
   C2: capacitor/electrolytic b23 b27 220u
 wires:
   - PWR.+5V -- +t1 red
-  - PWR.GND -- -t2 black
+  - PWR.GND -- -t4 black
   - PREV.AF -- a1 green
   - -t2 -- a2 black
   - e4 -- f4 orange
@@ -596,7 +596,7 @@ markers: [455k, 1000k, 1455k, 2455k]
 
 - 1 本目 (455kHz) が IF、2 本目 (1000kHz) が受けている RF、3 本目 (1455kHz) が LO、4 本目 (2455kHz) が和
 - **LO が一番大きい**。局発はコレクタにも巻線で強く乗る。RF と和は IFT1 の同調から外れて、コレクタでは小さい
-- VC1 を回すと、LO (3 本目) と IF 以外の 2 本が一緒に動き、455kHz の IF は動かない。これが「どの局も IF に揃える」ということ
+- W1 の周波数を変えて VC1 で合わせ直すと、RF (2 本目)・LO (3 本目)・和 (4 本目) は一緒に動くが、455kHz の IF は動かない。これが「どの局も IF に揃える」ということ
 - W1 を 1910kHz (イメージ) に変えても、VC1 を触らなければ 455kHz に IF が出る。大きさは 1000kHz のときより 37dB ほど下 (計算値)
 
 ### オシロスコープで見る

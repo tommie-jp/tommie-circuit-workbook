@@ -59,7 +59,7 @@ notes:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/08-radio-ic.svg)
 
 - **タンク**: L1 (250µH) と VC1 (ポリバリコン、20〜260pF) は 9-2 と同じ
-  中波帯の同調回路。タンクの上端 (PIN 1 側) を IC1 の**PIN 2 (RF 入力)**へ
+  中波帯の同調回路。タンクの上端 (アンテナ側) を IC1 の**PIN 2 (RF 入力)**へ
   直接つなぐ — IC の入力インピーダンスが高く、結合コンデンサを挟まなくても
   タンクを大きく乱さない
 - **PIN 1 = GND**、**PIN 3 = 出力であり電源の入り口でもある** — チップ内部の

@@ -10,7 +10,7 @@ board: BB
 
 # 13-1 定電圧 (CV) で使う — 電圧を決めて電流制限を掛ける
 
-実験用の安定化電源 (バイポーラ電源、ラボ電源) を使うときの基本の手順を、
+実験用の安定化電源 (ベンチ電源、ラボ電源) を使うときの基本の手順を、
 1-1 と同じ LED 回路で確かめる。0-6 で触れた **CV (Constant Voltage) と
 CC (Constant Current)** のうち、この題では CV での正しい使い方を追う。
 
@@ -43,19 +43,19 @@ CC (Constant Current)** のうち、この題では CV での正しい使い方�
 ```circuit
 title: 図1 CV で LED を点ける
 parts:
-  PSU:
+  U1:
     type: device
     at: b2
     label: PSU
-    pins: ["+", "-", "GND"]
+    pins: ["+", "GND", "-"]
     turn: mirror
   R1: resistor b6 d6 330
   D1: led d6 f6
   G1: ground f6
   G2: ground c3
 wires:
-  - PSU.+ -| b6
-  - PSU.- -| c3
+  - U1.+ -| b6
+  - U1.- -| c3
 style:
   grid: on
   pitch: 1.2
@@ -86,7 +86,7 @@ parts:
   R1: resistor b5 b10 330
   D1: led c10(A) c11(K) red
 wires:
-  - PSU.+ -- +t5 red
+  - PSU.+ -- +t3 red
   - +t5 -- a5 red
   - a11 -- -t11 black
   - PSU.- -- -t9 black

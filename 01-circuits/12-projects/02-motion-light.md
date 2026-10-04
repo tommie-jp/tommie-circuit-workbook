@@ -25,12 +25,12 @@ parts:
   Rz: resistor a1 a3 330
   Dz: zener c3 a3 3V3
   GDz: ground c3
-  CDS1: photoresistor a5 c5
+  CDS1: photoresistor a5 c5 l=$\mathrm{CdS}$
   R1: resistor c5 e5 10k
   GR1: ground e5
   U1: dip14 f9 CD40106
   GU1: ground g8
-  PIR:
+  U3:
     type: device
     at: d15
     label: PIR module
@@ -44,8 +44,8 @@ parts:
   Q1: nmos-e h24j0
   GQ1: ground j24
   VCC5: vcc c24
-  RLED: resistor c24 e24 330
-  DLED: led e24 g24 red
+  RLED: resistor c24 e24 330 l=$R_\mathrm{LED}$
+  DLED: led e24 g24 red l=$D_\mathrm{LED}$
   GPIR: ground d14c0f0 r90
   GU1b: ground f9e8i0
   GU2b: ground f18h8c0
@@ -58,10 +58,10 @@ wires:
   - U1.2 -| h7
   - h7 -- h15
   - h15 |- U2.2
-  - PIR.OUT -| e13
+  - U3.OUT -| e13
   - e13 |- U2.1
-  - PIR.VCC -| c14
-  - PIR.GND -| d14c0f0
+  - U3.VCC -| c14
+  - U3.GND -| d14c0f0
   - U2.14 -| a19
   - U2.7 -| f17h0c0
   - U2.3 -| i16
@@ -114,7 +114,8 @@ notes:
 - AND の出力 (H、電圧は VL = 3.3V) を Rg (220Ω) 経由で Q1 (2N7000) の
   ゲートへ。Rgpd (100kΩ) はゲートを浮かせないためのプルダウン。
   3.3V のゲート駆動では 2N7000 は完全飽和まで届かないが、常夜灯 LED
-  程度の電流 (計算値 約9.1mA) なら Rds(on) が多少高くても実害はない
+  程度の電流 (計算値 約9.1mA) なら Rds(on) が多少高くても実害はない。
+  ただし 2N7000 のしきい値は 0.8〜3V とばらつくので、上限に近い個体では LED が暗い (目安)
 - **使わない入力は GND へ。** 40106 は 6 つのうち 1 つ、4081 は 4 つのうち 1 つ
   しか使わない。CMOS の入力は浮かせると勝手に振れて電流を食い、発振することも
   ある (10-1)。使わないゲートの入力 (40106 は PIN 3・5・9・11・13、4081 は PIN 5・6・8・
