@@ -74,6 +74,9 @@ wires:
 | --- | --- |
 | Protocol | UART、**TX = DIO1**、**RX = DIO0**、Baud = 115200、8N1。送信欄に `0x41` (`'A'`) を 1 バイト入力して Write |
 
+計器は Analog Discovery 3 の Protocol と Logic。Pico 2 は USB から給電するので Supplies は使わない。
+AD3 の DIO は 3.3 V の信号で、Pico 2 の GPIO (3.3 V) とそのままつなげる。
+
 Pico 2 側は GP1 (UART0 RX) で受けた 1 バイトに 1 を足し、GP0 (UART0 TX) から送り返すだけの
 簡単なプログラムを常駐させておく (下の「Pico 2 のプログラム」)。
 
@@ -145,6 +148,30 @@ while True:
 
 C/C++ のプログラムは、この環境で `PICO_BOARD=pico2` の `.uf2` までビルドが通ることを確かめた。
 **実機では動かしていない。** MicroPython は実行していない (未確認)。
+
+Protocol の送信と返信を、Logic で線の高低として見ると図3 のとおり。
+送信側 TX (DIO1) は t = 0 のスタートビット (L) から 86.8 µs で 1 フレーム、データは下位ビットから 1 0 0 0 0 0 1 0 (0x41)。
+受信側 RX (DIO0) は少し遅れて 0x42 のフレームが出る。
+
+```logic
+title: 図3 TX が 0x41 ('A') を送り、RX に 0x42 ('B') が返る
+device: ad3
+time: 25us/div
+start: -20us
+sample: 1MHz
+signals:
+  TX: dio1 pattern 101000001011 bit 8.68us from -8.68us
+  RX: dio0 pattern 100100001011 bit 8.68us from 91.32us
+decode:
+  TXdata: uart TX baud 115200 8N1 ascii
+  RXdata: uart RX baud 115200 8N1 ascii
+trigger: TX falling at 0s
+```
+
+![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/logic/06-uart-echo.svg)
+
+図3 の箱は 115200 baud・8N1・ASCII の読み下しで、それぞれ 'A' (0x41) と 'B' (0x42)。
+RX が始まるまでの 13.2 µs は**図のための仮の値**で、実際の遅れは Pico 2 のプログラムで決まる (下の表の 4 行目)。
 
 ## 見るべき値
 

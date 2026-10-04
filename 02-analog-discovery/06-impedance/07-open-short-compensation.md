@@ -90,6 +90,23 @@ Open のとき、14 列 (2− 側) は浮かず、**GND と 2− にはそのま
 
 低い周波数では寄生が小さすぎて見えないので、**あえて 1 MHz**で測る
 (6-1〜6-6 の 1 kHz よりずっと高い)。
+計器は Analog Discovery 3 の Wavegen と Scope (6-1 と同じ。1 MHz は 2×15 ヘッダ直の帯域 9 MHz に収まる)。
+
+実測 (補償前) のオシロの画面。R<sub>DUT</sub> = 10 kΩ を挿し、寄生 (C<sub>stray</sub> = 2.5 pF、L<sub>stray</sub> = 43 nH) が乗った生の読み。
+Z<sub>meas</sub> = 9.88 kΩ ∠−8.9° を使うと、電流は 1 V / \|10 kΩ + Z<sub>meas</sub>\| = 50.5 µA、
+CH1 は 50.5 µA × 10 kΩ = 0.505 V、CH2 は 50.5 µA × 9.88 kΩ = 0.498 V。
+CH2 が CH1 より約 9° 遅れるぶんが、Open で測った寄生容量の効き。
+
+```scope
+title: 図3 補償前は CH2 が CH1 より 8.9° 遅れる
+time: 500ns/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1MHz 0.505V, range: 200mV/div}
+ch2: {wave: sine 1MHz 0.498V phase -8.9deg, range: 200mV/div}
+measure: [vpp, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/scope/07-open-short-compensation.svg)
 
 ## 見るべき値
 
@@ -104,10 +121,10 @@ Open のとき、14 列 (2− 側) は浮かず、**GND と 2− にはそのま
 | 補償前 (生の測定値) | Z<sub>meas</sub> = Z<sub>short</sub> + (R<sub>DUT</sub> ∥ Z<sub>open</sub>) | \|Z<sub>meas</sub>\| ≈ 9.88 kΩ、位相 ≈ −8.9° |
 | **補償後** | Z<sub>DUT</sub> = (Z<sub>meas</sub> − Z<sub>short</sub>) × Z<sub>open</sub> / (Z<sub>open</sub> − (Z<sub>meas</sub> − Z<sub>short</sub>)) | **10.00 kΩ、位相 0.0°** (元の 10 kΩ に戻る) |
 
-同じ計算を周波数に対して並べると、補償の効きが周波数とともに大きくなるのが分かる。
+同じ計算を周波数に対して並べると、補償の効きが周波数とともに大きくなるのが分かる (図4)。
 
 ```graph
-title: 図3 補償前は 1 MHz で −8.9°・9.88 kΩ にずれ、補償後は 10 kΩ・0° に戻る
+title: 図4 補償前は 1 MHz で −8.9°・9.88 kΩ にずれ、補償後は 10 kΩ・0° に戻る
 x: 周波数 Hz log 10k..10M
 y:
   - インピーダンス kΩ 0..11

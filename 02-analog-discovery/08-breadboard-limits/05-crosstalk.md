@@ -85,6 +85,36 @@ wires:
 10 MHz は AD3 の 2×15 ヘッダ直の帯域 (9 MHz @ −3 dB、5-8) を超えるので、この題は
 **BNC アダプタを付けて**測る (Scope 30+ MHz、Wavegen 12 MHz @ −3 dB)。CH1 を基準にした比を
 読むので、2 つのチャンネルが同じ帯域を持つ限り、帯域の影響は小さい (目安)。
+計器は Analog Discovery 3 の Wavegen (W1) と Scope (BNC アダプタ付き)。
+
+10 MHz のオシロの画面は図3 (被害側が浮いたまま) と図4 (Rterm 100 Ω を追加)。
+どちらも CH1 は 500 mV/div だが、**CH2 の尺度は違う** (漏れが小さすぎて同じ尺度では読めない)。
+図3 の CH2 は振幅 1 V × 9.43 % = 94.3 mV (ほぼ CH1 と同位相)、
+図4 の CH2 は 1 V × 1.55 % = 15.5 mV で、被害側の抵抗 100 Ω のぶん CH1 より 80.5° 進む。
+
+```scope
+title: 図3 被害側が浮いたままの 10 MHz (CH2 は 50 mV/div)
+time: 50ns/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 10MHz 1V, range: 500mV/div}
+ch2: {wave: sine 10MHz 94.3mV, range: 50mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/scope/05-crosstalk-1.svg)
+
+```scope
+title: 図4 Rterm 100 Ω を足すと CH2 は 15.5 mV (CH2 は 10 mV/div)
+time: 50ns/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 10MHz 1V, range: 500mV/div}
+ch2: {wave: sine 10MHz 15.5mV phase 80.5deg, range: 10mV/div}
+measure: [vpp, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/scope/05-crosstalk-2.svg)
+
+読み値は図3 が CH1 2.00 V・CH2 189 mV (振幅の 2 倍)、図4 が CH2 31 mV・位相 80.5°。
 
 ## 見るべき値
 
@@ -106,7 +136,7 @@ wires:
 通じる考え方)。
 
 ```graph
-title: 図3 浮いた列の漏れは −20.5 dB で頭打ち、100 Ω の終端で 10 MHz でも −36 dB
+title: 図5 浮いた列の漏れは −20.5 dB で頭打ち、100 Ω の終端で 10 MHz でも −36 dB
 x: 周波数 Hz log 100..100M
 y: 漏れ dB -80..0
 lines:

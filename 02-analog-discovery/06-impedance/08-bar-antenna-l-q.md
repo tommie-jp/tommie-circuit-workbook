@@ -91,6 +91,22 @@ wires:
 
 AM 放送帯 (526.5 kHz〜1606.5 kHz、日本) より下の 100 kHz で測る。同調前の
 コイル単体の様子が見やすい。
+計器は Analog Discovery 3 の Wavegen と Scope (6-3 と同じ。100 kHz は 2×15 ヘッダ直の帯域 9 MHz に収まる)。
+
+計算値 (下の表) どおりのオシロの画面。CH2 は CH1 より約 90° **進む** (コイルの電圧は電流より進むため。コンデンサの 6-2 とは逆)。
+
+```scope
+title: 図3 CH2 (コイルの電圧) は CH1 (電流) より 89.4° 進む
+time: 5us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 100kHz 0.724V, range: 200mV/div}
+ch2: {wave: sine 100kHz 0.683V phase 89.4deg, range: 200mV/div}
+measure: [vpp, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/scope/08-bar-antenna-l-q.svg)
+
+図3 の Vpp は CH1 1.45 V・CH2 1.37 V (振幅の 2 倍)。
 
 ## 見るべき値
 

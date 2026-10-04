@@ -109,6 +109,35 @@ wires:
 | Supplies | V+ = 3.3 V、Master Enable を入れる |
 | Protocol | SPI、CS = DIO0、MOSI (DIN) = DIO1、MISO (DOUT) = DIO2、CLK = DIO3。Mode 0 (CPOL=0, CPHA=0)、Rate = **100 kHz** (MCP3008 の上限より十分低い)。送信バイト列 `0x01 0x80 0x00` を CS を下げた状態で送る |
 
+計器は Analog Discovery 3 の Supplies (3.3 V) と Logic・Protocol (MCP3008 が 3.3 V 駆動で、DIO の H レベルと合うため)。
+AD3 の DIO は 3.3 V の信号で、5 V 耐性がある。
+
+Protocol が出す 4 本の線を Logic で見ると図3 のとおり。バイト列は 0x01 0x80 0x00 の 24 クロック (100 kHz で 240 µs)。
+CLK は CS が L の間だけ動き、Mode 0 なので待機中は L、立ち上がりで受け側が読む。
+MOSI の 8 クロック目の 1 がスタートビット、9 クロック目の 1 が SGL/DIFF=1 で、続く 3 ビット (10〜12 クロック目) の 000 がチャネル 0。
+MISO は 14 クロック目の null ビット (0) の次、15 クロック目に B9 = 1、16 クロック目に B8 = 0、残りの B7〜B0 は 17〜24 クロック目の 0。
+つまり結果は 0b10_0000_0000 = 512 (下の表の 0b10 と 0x00)。
+
+```logic
+title: 図3 SPI Mode 0 で 3 バイトを送る間の 4 本の線
+device: ad3
+time: 30us/div
+start: -30us
+sample: 1MHz
+signals:
+  CLK:  dio3 pattern 01010101010101010101010101010101010101010101010100 bit 5us from -5us
+  CS:   dio0 edges -30us=1 -15us=0 250us=1
+  MOSI: dio1 pattern 000000011000000000000000 bit 10us from -5us
+  MISO: dio2 pattern 000000000000001000000000 bit 10us from -5us
+cursors: [142.5us, 152.5us]
+trigger: CS falling at -15us
+```
+
+![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/logic/05-spi.svg)
+
+カーソルは 15 クロック目 (142.5 µs) と 16 クロック目 (152.5 µs) の CLK が H の真ん中に置いた。X1 で MISO が 1 (B9)、X2 で 0 (B8)。
+ΔX = 10 µs (1/ΔX = 100 kHz) は Rate と同じ。図の波形は計算で置いたもので、バス (SPI) の読み下しはこの図では出していない。
+
 ## 見るべき値
 
 計算値。CH0 = 1.65 V (3.3 V の半分)、VREF = 3.3 V、10 bit (0〜1023) として

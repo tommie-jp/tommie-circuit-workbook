@@ -87,6 +87,25 @@ Offset 0.5 V を足すと、コンデンサは 0.5 V に充電された上で ±
 (充電は 33 Ω × 4.7 µF ≈ 0.16 ms で終わる) CH1 は 0 V 中心のまま、CH2 だけ
 0.5 V 持ち上がる。Amplitude と Phase は交流分だけを見るので、下の値は変わらない。
 セラミックに差し替えたときも同じ設定のまま測る (比べる条件を揃える)。
+計器は Analog Discovery 3 の Wavegen と Scope (6-2 と同じ。Impedance 計器を使わずに値を自分で読むため)。
+
+セラミックに差し替えたときのオシロの画面。電流は 6-2 の電解のときより大きい。
+ESR が 8 Ω から 0.02 Ω に減り、回路全体の \|Z\| が 53.2 Ω から 47.3 Ω に下がるため、
+I = 0.4 V / 47.3 Ω = 8.46 mA、CH1 は 8.46 mA × 33 Ω = 0.279 V (電解は 0.248 V)、
+CH2 は 8.46 mA × 33.86 Ω = 0.286 V (電解は 0.262 V)。
+
+```scope
+title: 図3 セラミックの CH2 は CH1 より 90° 近く遅れる
+time: 500us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.279V, range: 100mV/div}
+ch2: {wave: sine 1kHz 0.286V offset 0.5V phase -89.97deg, range: 100mV/div, position: -5div}
+measure: [vpp, avg, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/scope/06-electrolytic-vs-ceramic.svg)
+
+図3 の位相は CH1 に対して −90.0°。6-2 の図3 (電解) の −76.7° より 13° 深い。
 
 ## 見るべき値
 
@@ -99,10 +118,10 @@ Offset 0.5 V を足すと、コンデンサは 0.5 V に充電された上で ±
 | 電解 4.7 µF | 34.8 Ω | −76.7° | 8.0 Ω |
 | セラミック 4.7 µF | 33.9 Ω | **−89.97°** | 0.02 Ω |
 
-同じ模型 (C + ESR) で周波数を振ると、ESR の差は位相にだけはっきり出る。
+同じ模型 (C + ESR) で周波数を振ると、ESR の差は位相にだけはっきり出る (図4)。
 
 ```graph
-title: 図3 |Z| はほぼ同じでも、電解の位相は 1 kHz で −76.7° まで浅い
+title: 図4 |Z| はほぼ同じでも、電解の位相は 1 kHz で −76.7° まで浅い
 x: 周波数 Hz log 100..100k
 y:
   - インピーダンス Ω log

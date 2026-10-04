@@ -56,12 +56,35 @@ wires:
   DUT と直列にし、1+/1− (基準抵抗の両端) と 2+/2− (DUT の両端) を AD3 の
   オシロへ渡す — 6-1〜6-4 で自分の手でやっていたことを基板がやる
 
+この題は実体配線図を付けない — DUT はアダプタの端子台に挟むだけで、板に挿す部品も配線も無い。
+
 ## 計器の設定
+
+計器は Analog Discovery 3 とそのアダプタ (Rref を自動で選ぶため)。
 
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | Impedance 計器が自動で設定 (手で触らない) |
 | Impedance | Reference: **Adapter** (自動レンジ)。Start・Stop を測りたい範囲に設定 |
+
+アダプタの中の 1+/1− と 2+/2− は、6-1〜6-4 と同じく Scope で見える。
+DUT を 100 nF のコンデンサ、W1 の振幅を 1 V、周波数を 1 kHz とすると、表のとおりアダプタは Rref = 1 kΩ を選ぶ。
+このとき X<sub>C</sub> = 1/(2π × 1 kHz × 100 nF) = 1591.5 Ω、回路全体の \|Z\| = √(1000² + 1591.5²) = 1879.6 Ω なので、
+電流は 1 V / 1879.6 Ω = 0.532 mA。CH1 (Rref の両端) は 0.532 mA × 1 kΩ = 0.532 V、
+CH2 (DUT の両端) は 0.532 mA × 1591.5 Ω = 0.847 V、CH2 は CH1 より 90° 遅れる。
+
+```scope
+title: 図2 CH2 (100 nF の電圧) は CH1 (電流) より 90° 遅れる
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1kHz 0.532V, range: 500mV/div}
+ch2: {wave: sine 1kHz 0.847V phase -90deg, range: 500mV/div}
+measure: [vpp, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/scope/05-impedance-adapter-autorange.svg)
+
+図2 の Vpp は CH1 1.06 V・CH2 1.69 V (振幅の 2 倍)。
 
 ## 見るべき値
 

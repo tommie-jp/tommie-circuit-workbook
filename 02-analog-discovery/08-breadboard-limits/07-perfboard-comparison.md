@@ -130,6 +130,25 @@ wires:
 10 MHz は AD3 の 2×15 ヘッダ直の帯域 (9 MHz @ −3 dB、5-8) を超えるので、この題は
 **BNC アダプタを付けて**測る (Scope 30+ MHz、Wavegen 12 MHz @ −3 dB)。CH1 を基準にした比を
 読むので、2 つのチャンネルが同じ帯域を持つ限り、帯域の影響は小さい (目安)。
+計器は Analog Discovery 3 の Network (Wavegen と Scope の組。BNC アダプタ付き)。
+1 MHz の 1 点を Scope で見るとこうなる。
+
+perfboard 相当 (34.3 pF) の 1 MHz の画面を図4 に示す。
+ωRC = 2π × 1 MHz × 10 kΩ × 34.3 pF = 2.155、利得は 1/√(1 + 2.155²) = 0.421 (−7.52 dB)、位相は −atan(2.155) = −65.1°。
+CH1 (W1 の入力) の振幅を 1 V とすると CH2 の振幅は 0.421 V。
+breadboard 相当 (36.5 pF) では 0.40 V・−66.4° で、波形は図4 とほとんど見分けがつかない
+(0.45 dB の差は表のとおり)。
+
+```scope
+title: 図4 perfboard の 1 MHz は CH2 が 0.42 V で CH1 より 65.1° 遅れる
+time: 500ns/div
+trigger: ch1 rising 0V
+ch1: {wave: sine 1MHz 1V, range: 500mV/div}
+ch2: {wave: sine 1MHz 0.421V phase -65.1deg, range: 500mV/div}
+measure: [vpp, phase]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/scope/07-perfboard-comparison.svg)
 
 ## 見るべき値
 
@@ -149,7 +168,7 @@ perfboard 側は**列間容量の代わりに隣接パッド間の容量**が乗
 差 (6〜11 dB) に比べるとずっと小さい。
 
 ```graph
-title: 図4 入力容量 24 pF が共通の土台で、板の差 (36.5 pF と 34.3 pF) はその上の小さい差
+title: 図5 入力容量 24 pF が共通の土台で、板の差 (36.5 pF と 34.3 pF) はその上の小さい差
 x: 周波数 Hz log 100k..10M
 y: 利得 dB -30..0
 lines:

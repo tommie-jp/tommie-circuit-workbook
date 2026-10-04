@@ -94,6 +94,29 @@ wires:
 | AD Network | BNC アダプタ (W1 側ジャンパは 50 Ω 側にして LiteVNA64 と条件を揃える)。掃引 100 kHz〜25 MHz、点数 101、振幅 1 V、Reference = CH1、DUT = CH2 |
 | LiteVNA64 | 掃引 1 MHz〜100 MHz (LiteVNA64 の範囲は 50 kHz〜6.3 GHz)、点数 101 (本体で 10〜1001 点)。使うのは S21 (S11・S21 だけを測る機種で足りる)。校正は SOLT (Open / Short / Load / Thru を P1・P2 の SMA 面で)。表示 S21 の Log Mag |
 
+計器は 1〜25 MHz を Analog Discovery 3 の Network (BNC アダプタ付き)、それより上を LiteVNA64 (S21 は 50 Ω の系で測る)。
+この題はオシロの図を付けない — 25 MHz・100 MHz は 10 MHz を超えて AD3 の Scope では見えないので、VNA の画面 (図3) にする。
+
+LiteVNA64 の画面は図3 のとおり。L<sub>stray</sub> = 52.1 nH の直列インダクタとして描いた。
+100 MHz の X = 2π × 100 MHz × 52.1 nH = 32.7 Ω、S21 = 100 Ω / \|100 Ω + j32.7 Ω\| = 0.9505 (−0.44 dB)、
+S11 の大きさ \|Γ\| = 32.7 Ω / \|100 Ω + j32.7 Ω\| = 0.311 で、SWR = (1 + 0.311)/(1 − 0.311) = 1.90。
+S21 の変化は 0.44 dB と小さく、LOGMAG の枠 (0〜−80 dB) では上端に張り付くので、図3 は反射の SWR とリアクタンス X で見せる
+(S21 の dB の値は図4 のグラフ)。X は 25 MHz で 8.2 Ω、100 MHz で 32.7 Ω と周波数に比例して増え、治具が小さなインダクタンスに見えることを示す。
+
+```vna
+sweep: 1M-100M 101
+title: 図3 100 MHz で SWR 1.90、X = 32.7 Ω
+dut: series L 52.1n
+traces:
+  - S11 swr
+  - S11 x
+markers:
+  - 25M
+  - 100M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/vna/08-bnc-vs-nanovna.svg)
+
 ## 見るべき値
 
 計算値。治具の中心導体 (i1〜i24、23 穴 ≒ 58.4 mm) を経験式 (8-3 と同じ) で
@@ -107,7 +130,7 @@ wires:
 | 100 MHz | 測れない (AD の範囲外) | **−0.44 dB** |
 
 ```graph
-title: 図3 AD は 25 MHz まで 0 dB、LiteVNA64 は 100 MHz で −0.44 dB
+title: 図4 AD は 25 MHz まで 0 dB、LiteVNA64 は 100 MHz で −0.44 dB
 x: 周波数 Hz log 100k..100M
 y: S21 dB -0.5..0.02
 lines:

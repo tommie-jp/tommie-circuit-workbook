@@ -83,7 +83,30 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Supplies | V+ = 3.3 V、Master Enable を入れる |
-| Logic | DIO0 を Enable。Rate は 10 MS/s 程度 (チャタリングの 1 回 1 回を波形として見られるくらい十分速く)。Trigger は DIO0 の立ち下がりで、押した瞬間の前後が入る位置にする |
+| Logic | DIO0 を Enable。Rate は **1 MS/s** (1 µs の分解能でチャタリングの 1 回 1 回が見え、AD3 の 1 本 32,768 標本のバッファで 32 ms を撮れる)。Trigger は DIO0 の立ち下がりで、押した瞬間の前後が入る位置にする |
+
+計器は Analog Discovery 3 の Supplies (3.3 V) と Logic。AD3 の DIO は 3.3 V の信号で、5 V 耐性がある。
+10 MS/s にすると 32,768 標本で 3.3 ms しか撮れず、5〜10 ms 続くチャタリングの全体が入らないので、1 MS/s にした。
+
+Logic で押した瞬間を撮ると、図3 のような形になる。t = 0 の立ち下がりが最初の接触、そのあと H・L を 3 回行き来して 2.4 ms で L に落ち着く。
+この時刻は典型的な形を見せるための**仮の値**で、押し方・個体で変わる。
+
+```logic
+title: 図3 押した瞬間、DIO0 が H と L を行き来する
+device: ad3
+time: 500us/div
+start: -500us
+sample: 1MHz
+signals:
+  DIO0: dio0 edges -500us=1 0s=0 150us=1 300us=0 900us=1 1ms=0 2.3ms=1 2.4ms=0
+cursors: [225us, 2.35ms]
+trigger: DIO0 falling at 0s
+```
+
+![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/logic/09-switch-bounce.svg)
+
+カーソルは最初に跳ね上がった H の真ん中 (225 µs) と、最後に跳ね上がった H の真ん中 (2.35 ms)。どちらも DIO0 = 1。
+ΔX = 2.125 ms は、この図の例で跳ね返りが続いた時間の目安 (最初の H から最後の H まで)。
 
 ## 見るべき値
 
