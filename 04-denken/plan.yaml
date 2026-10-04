@@ -57,8 +57,8 @@
 - { id: 3-10, tier: 100, board: BB, title: 記号法を測って確かめる — RL と C の並列の合成インピーダンス }
 - { id: 3-11, tier: 100, board: BB, title: Q と帯域幅 — 共振の鋭さを R で変える }
 - { id: 3-12, tier: 100, board: BB, title: 瞬時電力 — v × i の波形は 2 倍の周波数で脈打つ }
-- { id: 3-13, tier: 100, board: BB, title: ひずみ波 — 方形波を FFT で基本波と高調波に分ける }
-- { id: 3-14, tier: 200, board: BB, title: ひずみ波の実効値 — 各調波の実効値の二乗和の平方根 }
+- { id: 3-13, tier: 100, board: BB, title: 歪み波 — 方形波を FFT で基本波と高調波に分ける }
+- { id: 3-14, tier: 200, board: BB, title: 歪み波の実効値 — 各調波の実効値の二乗和の平方根 }
 - { id: 3-15, tier: 200, board: BB, title: 高調波電流 — コンデンサ入力の整流の電流はひずむ }
 - { id: 3-16, tier: 200, board: BB, title: 直列共振の電圧拡大 — L と C の電圧が電源より大きい }
 - { id: 3-17, tier: 200, board: BB, title: 直流と交流の重ね合わせ — 実効値の合成 }
@@ -166,7 +166,7 @@
 - { id: 10-11, tier: 200, board: BB, title: 昇降圧チョッパ — 出力の極性が反転する }
 - { id: 10-12, tier: 200, board: BB, title: スイッチング損失 — MOSFET の発熱と周波数 }
 - { id: 10-13, tier: 200, board: BB, title: VVVF — 周波数と電圧を一緒に変えて BLDC を回す }
-- { id: 10-14, tier: 200, board: BB, title: 整流回路の力率 — 電流のひずみで力率が下がる }
+- { id: 10-14, tier: 200, board: BB, title: 整流回路の力率 — 電流の歪みで力率が下がる }
 - { id: 11-1, tier: 50, board: BB, title: 照度の逆二乗則 — LED からの距離とフォトダイオードの電流 }
 - { id: 11-2, tier: 50, board: BB, title: オン・オフ制御 — 温度を一定に保つ (サーミスタ + 比較器 + ヒータ) }
 - { id: 11-3, tier: 100, board: BB, title: 一次遅れ系のステップ応答 — RC で模す }

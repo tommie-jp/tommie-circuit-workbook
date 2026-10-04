@@ -130,7 +130,7 @@
 - { id: 8-7, tier: 100, era: 今, title: 超音波 (HC-SR04) }
 - { id: 8-8, tier: 100, title: ホール素子 (磁石) }
 - { id: 8-9, tier: 100, era: 古, title: 水位・土壌湿度 (電極) }
-- { id: 8-10, tier: 100, era: 今, title: 温度センサ IC (LM35 / TMP36) }
+- { id: 8-10, tier: 100, era: 今, title: 温度センサー IC (LM35 / TMP36) }
 - { id: 8-11, tier: 200, title: リードスイッチ }
 - { id: 8-12, tier: 200, title: 圧電 (ノック) }
 - { id: 8-13, tier: 200, era: 今, title: 加速度 (モジュール) }
@@ -138,7 +138,7 @@
 - { id: 8-15, tier: 200, title: ロータリーエンコーダ }
 - { id: 8-16, tier: 200, era: 今, title: 湿度 (DHT) }
 - { id: 8-17, tier: 200, era: 今, title: 気圧 (I2C) }
-- { id: 8-18, tier: 200, title: 太陽電池を光センサに }
+- { id: 8-18, tier: 200, title: 太陽電池を光センサーに }
 - { id: 8-19, tier: 200, title: フォトダイオードの短絡電流 }
 - { id: 8-20, tier: 200, era: 古, title: LED を受光素子に }
 - { id: 9-1, tier: 50, board: BB, title: LC 同調 — 共振を LED で見る }

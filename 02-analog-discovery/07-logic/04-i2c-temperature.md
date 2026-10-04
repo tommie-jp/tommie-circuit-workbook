@@ -2,16 +2,16 @@
 book: analog-discovery
 chapter: 7
 id: 7-4
-title: I2C を見る・叩く (温度センサ)
+title: I2C を見る・叩く (温度センサー)
 tier: 50
 source: 自作 (計器の操作は Digilent の Using the Protocol Analyzer)
 board: BB
 ---
 
-# 7-4 I2C を見る・叩く (温度センサ)
+# 7-4 I2C を見る・叩く (温度センサー)
 
 **Protocol** の I2C モードは、AD 自身がマスタになって読み書きもできる。
-温度センサ LM75 (アドレス 0x48) のレジスタ 0 (温度) を読み、Protocol の
+温度センサー LM75 (アドレス 0x48) のレジスタ 0 (温度) を読み、Protocol の
 解読結果と自分で計算した温度を突き合わせる。
 
 ## 回路図

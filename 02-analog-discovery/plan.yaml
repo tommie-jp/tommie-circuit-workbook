@@ -132,7 +132,7 @@
 - { id: 7-1, tier: 50, board: BB, title: ロジックアナライザで 555 と 4017 を見る }
 - { id: 7-2, tier: 50, board: BB, title: パターンジェネレータでカウンタを叩く }
 - { id: 7-3, tier: 50, board: BB, title: UART を見る (Pico 2) }
-- { id: 7-4, tier: 50, board: BB, title: I2C を見る・叩く (温度センサ) }
+- { id: 7-4, tier: 50, board: BB, title: I2C を見る・叩く (温度センサー) }
 - { id: 7-5, tier: 100, board: BB, title: SPI }
 - { id: 7-6, tier: 100, board: BB, title: プロトコルアナライザから送信する }
 - { id: 7-7, tier: 100, board: BB, title: バスの値でトリガする }

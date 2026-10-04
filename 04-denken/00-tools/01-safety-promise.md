@@ -18,7 +18,7 @@ board: BB
   この本には出てこない
 - 交流が要る実験は、**Analog Discovery (AD) の波形発生器**か、**二次側 12 V 以下の
   AC 出力アダプタ**から取る。AD の波形発生器は**出せる電流に上限がある**
-  (Analog Discovery 3 の仕様で 1 ch あたり 30 mA。これは「ひずみなく出せる最大値」で、
+  (Analog Discovery 3 の仕様で 1 ch あたり 30 mA。これは「歪みなく出せる最大値」で、
   40 mA までは出せるが、それを超えるとハードウェアの保護が働く。出力インピーダンスは 0 Ω、
   振幅は ±5 V まで)。これを超える負荷
   (低い抵抗) をつなぐと、波形がひずんだり、電圧が下がったりする
@@ -137,7 +137,7 @@ measure: [vmax, freq]
 
 | 項目 | AD3 の値 |
 | --- | --- |
-| Wavegen (W1・W2) | 振幅 ±5 V、出力インピーダンス 0 Ω、電流は 30 mA まで (ひずみなし)・40 mA で保護 |
+| Wavegen (W1・W2) | 振幅 ±5 V、出力インピーダンス 0 Ω、電流は 30 mA まで (歪みなし)・40 mA で保護 |
 | Supplies (V+・V−) | +0.5〜+5 V、−0.5〜−5 V。USB からだけで使うと、装置全体で約 5.5 W が目安。5 V の補助電源 (3.1 A 以上) を付けると 1 ch あたり 800 mA・2.4 W まで |
 | Scope の入力 | ±25 V (±2.5 V のレンジもある)、入力抵抗と容量は 1 MΩ‖24 pF、14 bit、125 MS/s |
 | Scope の帯域 | BNC アダプタ付き 30 MHz 以上 (−3 dB)、2×15 のヘッダのままでは 9 MHz (−3 dB) |
@@ -153,7 +153,7 @@ measure: [vmax, freq]
 自作。AD の波形発生器の電流の上限 (30 mA、保護は 40 mA) と出力インピーダンス (0 Ω) は
 Digilent の [Analog Discovery 3 リファレンスマニュアル](https://digilent.com/reference/test-and-measurement/analog-discovery-3/reference-manual)
 の仕様 (Arbitrary Waveform Generator の節)。
-電流の値の注記 (30 mA は「ひずみなく出せる最大値」、40 mA まででハードウェアの保護) は
+電流の値の注記 (30 mA は「歪みなく出せる最大値」、40 mA まででハードウェアの保護) は
 Digilent の Analog Discovery 3 Specifications の Arbitrary Waveform Generator の表の注。
 
 上の表の Scope の入力・帯域、Supplies、USB の電力の目安は、Digilent の

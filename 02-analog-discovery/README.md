@@ -211,7 +211,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 7-1 | [ロジックアナライザで 555 と 4017 を見る](07-logic/01-logic-555-4017.md) | 必須 | BB | |
 | 7-2 | [パターンジェネレータでカウンタを叩く](07-logic/02-pattern-counter.md) | 必須 | BB | |
 | 7-3 | [UART を見る (Pico 2)](07-logic/03-uart-pico.md) | 必須 | BB | |
-| 7-4 | [I2C を見る・叩く (温度センサ)](07-logic/04-i2c-temperature.md) | 必須 | BB | |
+| 7-4 | [I2C を見る・叩く (温度センサー)](07-logic/04-i2c-temperature.md) | 必須 | BB | |
 | 7-5 | [SPI](07-logic/05-spi.md) | 入門 | BB | |
 | 7-6 | [プロトコルアナライザから送信する](07-logic/06-uart-echo.md) | 入門 | BB | |
 | 7-7 | [バスの値でトリガする](07-logic/07-bus-trigger.md) | 入門 | BB | |
