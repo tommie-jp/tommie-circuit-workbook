@@ -44,7 +44,7 @@ parts:
     at: b8
     label: ULN2003 + 28BYJ-48
     pins: [V+, IN1, IN2, IN3, IN4, GND]
-  P1: vcc a6
+  P1: vcc a6 5V
   G1: ground d3
 wires:
   - A1.DIO0 -- U1.IN1
@@ -55,7 +55,7 @@ wires:
   - A1.GND -| d3
   - U1.V+ -| a6
 notes:
-  - text a4 small: 5 V (USB)
+  - text a5 small: (USB)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/07-stepper-motor.svg)
