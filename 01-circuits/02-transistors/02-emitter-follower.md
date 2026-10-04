@@ -187,6 +187,22 @@ data: 02-emitter-follower.s2p
 traces:
   - S21 logmag
   - S21 phase
+markers:
+  - 1M
+  - 20M
+  - 50M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/vna/02-emitter-follower-1.svg)
+
+```vna
+device: h4
+sweep: 50k-100M 201
+title: 図6 エミッタフォロアの入力側の S11 (計算) — 低い所で Smith の右端 (高インピーダンス) の近く
+dut: series R 0
+data: 02-emitter-follower.s2p
+traces:
+  - S11 logmag
   - S11 smith
 markers:
   - 1M
@@ -194,7 +210,7 @@ markers:
   - 50M
 ```
 
-![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/vna/02-emitter-follower.svg)
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/vna/02-emitter-follower-2.svg)
 
 - 破線は CH0 と CH1 を直につないだスルー (0 dB・0°)。実線はそれより上にいて、
   **S21 は約 +1.5 dB (|S21| ≈ 1.19)**。電圧利得は 1 倍未満なのに S21 が 1 を超えるのは、
@@ -208,7 +224,7 @@ markers:
     周波数が上がると β が下がり、出力のインピーダンスが上がる
   - ベースの広がり抵抗 (rbb′ 約 50 Ω) と C<sub>ob</sub> (VCB 約 4 V で 3 pF) で、入力側にも極ができる
   - SMA-クリップのリード線 (10 cm で約 80 nH) とブレッドボードの穴の浮遊容量 (1 か所 数 pF)
-- S11 は低い周波数で Smith の右端 (開放) の近く。周波数が上がるとトランジスタの容量で
+- S11 (図6) は低い周波数で Smith の右端 (開放) の近く。周波数が上がるとトランジスタの容量で
   下 (容量性) へ回り込む
 - `02-emitter-follower.s2p` は **ハイブリッド π の模型で計算した値** (実測ではない)。
   Ie 0.83 mA・hFE 150・fT 40 MHz・Cob 3 pF・rbb′ 50 Ω に、クリップのリード 80 nH (入力・出力)

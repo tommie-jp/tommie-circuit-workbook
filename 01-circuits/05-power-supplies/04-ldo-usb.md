@@ -23,7 +23,7 @@ parts:
   J1: usb-c b2g0d0
   U1: regulator b6 AMS1117-3.3
   Cin: capacitor b4 d4 10u
-  Cout: capacitor b8 d8 22u
+  Cout: ecap b8 d8 22u
   Rled: resistor b10 c10 150
   Dled: led c10 d10 red
   G1: ground gnd
@@ -45,9 +45,12 @@ style:
 - J1 は USB Type-C。**使うのは VBUS・GND だけ**。CC1・CC2 (電源交渉用) は
   つながず、相手 (PC や充電器) の初期設定 5V/デフォルト電流に任せる
   (本格的に電流を引きたいなら CC に 5.1 kΩ でプルダウンする)
-- Cin (10 µF)・Cout (22 µF) は AMS1117 のデータシートが指定する定石の値。
-  LDO は Cout の ESR (等価直列抵抗) が低すぎても発振することがあるので、
-  データシートの指定値を守る
+- Cin (10 µF) と Cout (22 µF タンタル) は AMS1117 のデータシートの
+  標準的な使い方の値。AMS1117 は出力コンデンサにある程度の ESR
+  (等価直列抵抗、目安 0.3〜22 Ω) を求め、ESR がほぼ 0 の積層セラミックだけを
+  出力に付けると発振することがある。そのため Cout はタンタルにする。
+  Cin は ESR を問わないので積層セラミックでよい。タンタルには極性があり、
+  プラス側を OUT につなぐ
 - Rled・Dled は 3.3V が出ているかを示す表示 LED
 
 ## 実体配線図
@@ -58,7 +61,7 @@ board: half
 parts:
   U1: regulator/to220 c8(in) c9(gnd) c10(out)
   Cin: capacitor g5 g8 10uF
-  Cout: capacitor g10 g13 22uF
+  Cout: capacitor/tantalum g10 g13 22uF
   Rled: resistor b14 b20 150
   Dled: led d20(A) d23(K) red
   USB:
@@ -101,7 +104,7 @@ wires:
 | --- | --- | --- |
 | U1 | LDO レギュレータ (SOT-223 → ピンヘッダ変換モジュール) | AMS1117-3.3 |
 | Cin | セラミックコンデンサ (入力側) | 10 µF |
-| Cout | セラミックコンデンサ (出力側) | 22 µF |
+| Cout | タンタルコンデンサ (出力側、極性あり) | 22 µF・10 V 以上 |
 | Rled | 抵抗 (表示 LED 電流制限) | 150 Ω |
 | Dled | LED (赤、5 mm) | V<sub>F</sub> ≈ 2.0 V |
 | — | 電源 | USB 5V |

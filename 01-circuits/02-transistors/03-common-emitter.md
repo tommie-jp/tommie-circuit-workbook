@@ -207,6 +207,22 @@ data: 03-common-emitter.s2p
 traces:
   - S21 logmag
   - S21 phase
+markers:
+  - 1M
+  - 13M
+  - 50M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/vna/03-common-emitter-1.svg)
+
+```vna
+device: h4
+sweep: 50k-100M 201
+title: 図6 エミッタ接地増幅の入力側の S11 (計算) — 低い所で Smith の右端 (高インピーダンス) の近く
+dut: series R 0
+data: 03-common-emitter.s2p
+traces:
+  - S11 logmag
   - S11 smith
 markers:
   - 1M
@@ -214,7 +230,7 @@ markers:
   - 50M
 ```
 
-![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/vna/03-common-emitter.svg)
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/02-transistors/vna/03-common-emitter-2.svg)
 
 - 破線は CH0 と CH1 を直につないだスルー (0 dB・0°)。実線は低い周波数で **約 +10.6 dB
   (|S21| ≈ 3.4)、位相 180°** (反転)。オシロで見た 78 倍 (+38 dB) よりずっと小さいのは、
@@ -223,7 +239,7 @@ markers:
 - 入力側は、CH0 の 50 Ω から見たアンプの入力インピーダンスが R1 ‖ R2 ‖ β·re
   = 6.7 kΩ ‖ 4.2 kΩ ≈ **2.6 kΩ** と高い。50 Ω をほとんど食わないので、ベースには 50 Ω の線路に
   直につないだときの約 2 倍の電圧がかかる。S21 ≈ 2 × 1.75 ≈ 3.4 (+10.6 dB) はこの 2 つの積。
-  S11 が Smith の右端 (開放) の近くにいるのも、入力が高インピーダンスだから
+  S11 (図6) が Smith の右端 (開放) の近くにいるのも、入力が高インピーダンスだから
 - **低い側に角はない**。`CIN` は 50 Ω + 2.6 kΩ と組んで約 60 Hz、`COUT` は 2.2 kΩ + 50 Ω と組んで
   約 70 Hz、`CE` はエミッタから見た約 29 Ω (re と信号源の分) と組んで約 56 Hz。どれも NanoVNA の
   下限 50 kHz よりずっと下なので、50 kHz から平ら。低い角を見たいときは AD のネットワーク
