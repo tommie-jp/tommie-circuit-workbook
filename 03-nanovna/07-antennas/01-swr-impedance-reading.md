@@ -42,7 +42,30 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/01-swr-impedance-reading.svg)
 
+## 実体配線図
+
+```perfboard
+board:
+  size: 7x5cm
+  slots: on
+title: 図2 perfboard の抵抗 1 個の負荷 (CH0 の先に付ける)
+points:
+  GND: j0
+parts:
+  J1: sma/female-edge i1 h0 j0
+  R1: resistor i4 i7 100
+wires:
+  - i1 -- i4
+  - i7 -- j7 black
+  - j7 -- j0 black
+```
+
+R1 を 25 Ω・50 Ω・100 Ω・200 Ω と挿し替えて、SWR と Smith チャートの動きを見る
+(E24 に無い値は 5-5 の表の作り方で作る)。板に流れる電流は数 mA 以下で、板の範囲に収まる。
+
 ## 掃引の設定
+
+計器は VNA。この本の図は NanoVNA-H4 で書いてあり、標準の LiteVNA64 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
 | 項目 | 値 |
 | --- | --- |
@@ -56,7 +79,7 @@ wires:
 ```vna
 device: h4
 sweep: 10M-100M 101
-title: 図2 100 Ω 負荷 — Smith は r = 2 の 1 点、SWR は 2.00 で平ら (枠の上端)
+title: 図3 100 Ω 負荷 — Smith は r = 2 の 1 点、SWR は 2.00 で平ら (枠の上端)
 dut:
   - series R 100
   - short

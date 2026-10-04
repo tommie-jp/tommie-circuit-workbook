@@ -71,7 +71,45 @@ notes:
 - CH0 はアンプの入力へ (今回の図には描いていない)。**CH1 の手前だけに
   パッドを入れれば足りる** — 反射で戻る分もこのパッドで一緒に減衰する
 
+## 実体配線図
+
+3-5 の perfboard のアッテネータを、20 dB の値 (43・11・43 Ω) に替えた。
+
+```perfboard
+board:
+  size: 7x5cm
+  slots: on
+title: 図2 perfboard の 20 dB アッテネータ (CH1 の手前に挟む)
+points:
+  GND: l2
+parts:
+  J1: sma/female-edge i1 h0 j0
+  R1: resistor i3 i6 43
+  R2: resistor i8 k8 11
+  R3: resistor i10 i13 43
+  J2: sma/female-edge i24 j25
+wires:
+  - i1 -- i3
+  - i6 -- i8
+  - i8 -- i10
+  - i13 -- i24
+  - k8 -- l8 black
+  - l8 -- GND black
+  - j0 -- j2 black
+  - j2 -- GND black
+  - j25 -- j15 black
+  - j15 -- l15 black
+  - l15 -- l8 black
+```
+
+J1 にアンプの出力のケーブルを、J2 に NanoVNA の CH1 のケーブルを付ける。
+抵抗は 0.25 W 品を使う。+20 dBm (100 mW) を入れたときの電流は I = √(0.1 W ÷ 50 Ω) ≈ 45 mA で、
+R1 の発熱は 45 mA の 2 乗 × 43 Ω ≈ 0.09 W (R2 は約 0.01 W) と、0.25 W 品に収まる。
+板を通る電流は約 45 mA で、1 穴 200 mA の範囲に収まる。
+
 ## 掃引の設定
+
+計器は VNA。この本の図は NanoVNA-H4 で書いてあり、標準の LiteVNA64 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
 | 項目 | 値 |
 | --- | --- |
@@ -85,7 +123,7 @@ notes:
 ```vna
 device: h4
 sweep: 1M-1.5G 101
-title: 図2 E24 (43・11・43 Ω) の 20 dB パッドは全域で平ら
+title: 図3 E24 (43・11・43 Ω) の 20 dB パッドは全域で平ら
 dut:
   - series R 43
   - shunt R 11

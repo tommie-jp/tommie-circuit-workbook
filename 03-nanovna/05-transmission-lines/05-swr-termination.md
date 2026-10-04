@@ -43,7 +43,35 @@ wires:
 | 75 Ω・100 Ω・150 Ω | 1 本 (E24 にある) |
 | 短絡・開放 | R1・R2 の代わりに直結・開放 |
 
+## 実体配線図
+
+```perfboard
+board:
+  size: 7x5cm
+  slots: on
+title: 図2 perfboard の終端 (100 Ω 2 本並列で 50 Ω)
+points:
+  GND: m2
+parts:
+  J1: sma/female-edge i1 h0 j0
+  R1: resistor i4 i7 100
+  R2: resistor l4 l7 100
+wires:
+  - i1 -- i4
+  - i4 -- l4
+  - i7 -- l7 black
+  - l7 -- m7 black
+  - m7 -- GND black
+  - j0 -- j2 black
+  - j2 -- GND black
+```
+
+R1 と R2 の所を挿し替えて、表のほかの終端を測る。板に流れる電流は、NanoVNA の出力が 0 dBm 以下なので
+数 mA 以下で、板の範囲に収まる。
+
 ## 掃引の設定
+
+計器は VNA。この本の図は NanoVNA-H4 で書いてあり、標準の LiteVNA64 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
 | 項目 | 値 |
 | --- | --- |
@@ -57,7 +85,7 @@ wires:
 ```vna
 device: h4
 sweep: 10M-300M 101
-title: 図2 終端 50 Ω (整合) — SWR = 1 で下端に乗る。Smith は中心
+title: 図3 終端 50 Ω (整合) — SWR = 1 で下端に乗る。Smith は中心
 dut:
   - series R 50
   - short
@@ -75,7 +103,7 @@ markers:
 ```vna
 device: h4
 sweep: 10M-300M 101
-title: 図3 終端 100 Ω — SWR = 2 で平ら (枠の上端)。Smith は 2 の点
+title: 図4 終端 100 Ω — SWR = 2 で平ら (枠の上端)。Smith は 2 の点
 dut:
   - series R 100
   - short
@@ -93,7 +121,7 @@ markers:
 ```vna
 device: h4
 sweep: 10M-300M 101
-title: 図4 終端を短絡 — SWR は上限に張り付く。Smith は左端の 1 点
+title: 図5 終端を短絡 — SWR は上限に張り付く。Smith は左端の 1 点
 dut:
   - short
 traces:
