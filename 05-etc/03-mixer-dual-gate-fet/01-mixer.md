@@ -374,9 +374,8 @@ wires:
   - j8 -- k8 white
   - k8 -- k9 white
   - i14 -- i11 yellow
-  - i15 -- n15 white
-  - n15 -- n16 white
-  - n15 -- n10 yellow
+  - i15 -- i16 white
+  - n16 -- n10 yellow
   - i16 -- n16 white
   - b16 -- f16 yellow
   - i1 -- i4 white
