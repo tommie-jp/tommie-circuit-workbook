@@ -20,8 +20,8 @@
     "all": "npm test && npm run lint && npm run check && npm run parity"
   },
   "devDependencies": {
-    "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.31.0/breadboard-fence-0.31.0.tgz",
-    "circuit-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/circuit-fence-v0.28.0/circuit-fence-0.28.0.tgz",
+    "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.31.1/breadboard-fence-0.31.1.tgz",
+    "circuit-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/circuit-fence-v0.29.0/circuit-fence-0.29.0.tgz",
     "copper-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/copper-fence-v0.7.0/copper-fence-0.7.0.tgz",
     "graph-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/graph-fence-v0.2.1/graph-fence-0.2.1.tgz",
     "logic-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/logic-fence-v0.2.0/logic-fence-0.2.0.tgz",
@@ -30,7 +30,7 @@
     "scope-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/scope-fence-v0.5.1/scope-fence-0.5.1.tgz",
     "spectrum-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/spectrum-fence-v0.3.1/spectrum-fence-0.3.1.tgz",
     "subset-font": "^2.9.0",
-    "vna-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/vna-fence-v0.5.0/vna-fence-0.5.0.tgz",
+    "vna-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/vna-fence-v0.6.0/vna-fence-0.6.0.tgz",
     "yaml": "^2.9.0"
   }
 }
