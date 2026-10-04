@@ -1,0 +1,106 @@
+* 2SC1815 5-transistor superhet (TR-55 style), Vcc=6V
+.param Lfb=6u Rx=1m R1v=22k Cc=10n Rd=1G k3=0.95 k4=0.95 kosc=0.6 Ru=100 Ca=76.8p Cb=119.6p hfe=250 Am=10m
+.model 2SC1815 NPN(IS=1e-14 BF={hfe} VAF=100 IKF=0.2 BR=5 RB=50 RC=1 RE=0.2 CJE=8p CJC=3.5p MJC=0.33 TF=1.8n)
+.model D1N60 D(IS=1u N=1.3 RS=10 CJO=1p BV=40)
+
+V1 VCC 0 6
+C13 VCC 0 220u
+R18 VCC VB 100
+C14 VB 0 100u
+
+* signal: 1 MHz carrier, 30 % AM at 1 kHz, loosely coupled to the bar-antenna tank
+Bsig src 0 V={Am}*(1+0.3*sin(2*pi*1k*time))*sin(2*pi*1Meg*time)
+Rant src ant 100k
+L1a ant 0 330u
+CVa ant 0 {Ca}
+Rp1 ant 0 200k
+L1b b1 nb1 3.3u
+K1 L1a L1b 0.9
+
+* Q1 converter
+R1 VB nb1 {R1v}
+R2 nb1 0 4.7k
+C1 nb1 0 22n
+Q1 c1 b1 e1 2SC1815
+R3 e1 0 1k
+C2 e1 xo {Cc}
+Rx xo 0 1G
+* OSC coil: tuned winding L2a, emitter tap winding L2e (1/5 turns), collector feedback L2b
+L2a osc 0 100u
+CVb osc 0 {Cb}
+Rp2 osc 0 60k
+L2e xo 0 4u
+L2b c1 m1 {Lfb}
+K2 L2a L2b L2e {kosc}
+* IFT1
+* IFT seen from the collector tap (1/3 of the winding): L/9, C*9, Rp/9
+L3a m1 VB 75.6u
+C3t m1 VB 1620p
+Rp3 m1 VB 16.7k
+Rd3 m1 VB {Rd}
+L3b b2 agc 6.8u
+K3 L3a L3b {k3}
+
+* Q2 IF1 (AGC)
+R4 VB agc 27k
+R5 agc 0 6.8k
+C3 agc 0 22n
+Q2 c2 b2 e2 2SC1815
+R6a e2 x2 {Ru}
+R6 x2 0 560
+C4 x2 0 22n
+* IFT seen from the collector tap (1/3 of the winding): L/9, C*9, Rp/9
+L4a c2 VB 75.6u
+C4t c2 VB 1620p
+Rp4 c2 VB 16.7k
+Rd4 c2 VB {Rd}
+L4b b3 n3 6.8u
+K4 L4a L4b {k4}
+
+* Q3 IF2
+R7 VB n3 27k
+R8 n3 0 6.8k
+C5 n3 0 22n
+Q3 c3 b3 e3 2SC1815
+R9a e3 x3 {Ru}
+R9 x3 0 560
+C6 x3 0 22n
+* IFT seen from the collector tap (1/3 of the winding): L/9, C*9, Rp/9
+L5a c3 VB 75.6u
+C5t c3 VB 1620p
+Rp5 c3 VB 16.7k
+L5b dk 0 27u
+K5 L5a L5b 0.95
+
+* detector, AGC, volume (wiper at mid)
+D1 det dk D1N60
+C7 det 0 10n
+Rva det w 5k
+Rvb w 0 5k
+R10 det agc 22k
+C8 agc 0 10u
+
+* Q4 AF
+C9 b4 w 4.7u
+R11 VB b4 56k
+R12 b4 0 10k
+Q4 c4 b4 e4 2SC1815
+R13 e4 0 470
+C10 e4 0 47u
+R14 VB c4 4.7k
+C11 c4 b5 10u
+
+* Q5 output, class A
+R15 VCC b5 10k
+R16 b5 0 2.2k
+Q5 c5 b5 e5 2SC1815
+R17 e5 0 47
+C12 e5 0 100u
+Rdcr VCC p6 50
+L6a p6 c5 1
+L6b spk 0 8m
+K6 L6a L6b 0.99
+Rsp spk 0 8
+
+.op
+.end
