@@ -92,7 +92,7 @@ board:
   size: 7x5cm
   silk: board
   slots: on
-title: 図2 perfboardに組む (部品面から見た図。AD3 は 5V と Scope)
+title: 図2 perfboardに組む (部品面から見た図。黄色の丸は AD3 を挟む所)
 points:
   PWR: u17
   GND: a5
@@ -114,11 +114,6 @@ parts:
   Buzzer: buzzer n15 n12
   RLED: resistor r17 r15 330
   DLED: led r14 r12 red
-  AD:
-    type: device
-    at: p0
-    label: Analog Discovery 3
-    pins: GND 1- 2- 1+ 2+ V+
 wires:
   - P1.W -- f17
   - j17 -- n17 red
@@ -137,12 +132,17 @@ wires:
   - i10 -- i5 black
   - GND -- b5 black
   - b5 -- i5 black
-  - AD.V+ -- PWR red
-  - AD.GND -- GND black
-  - AD.1+ -- c10 blue
-  - AD.2+ -- n12 green
-  - AD.1- -- i5 black
-  - AD.2- -- i5 black
+notes:
+  - mark u17 yellow
+  - mark a5 yellow
+  - mark c10 yellow
+  - mark n12 yellow
+  - mark i5 yellow
+  - text u17 red large bold right: V+
+  - text b4 red large bold center: GND
+  - text c11 red large bold center: 1+
+  - text n11 red large bold center: 2+
+  - text i4 red large bold center: 1-/2-
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/perfboard/03-water-alarm.svg)
@@ -152,10 +152,12 @@ wires:
   こうするとベースが左 (電極の側)、エミッタが右 (次の段の側) に来る
 - 配線は縦と横だけで、交差は無い。上の 17 行が PWR、下の 5 行が GND、
   その間の 12 行が Q1・Q2 のコレクタをまとめた線
-- 5V と計器は Analog Discovery 3 (AD3) から取る。V+ (Supplies の +5V、赤) を PWR の u17 へ、GND (黒) を GND の a5 へ。
+- 5V と計器は Analog Discovery 3 (AD3) から取る。**AD3 は測るときだけ挟む一時的な接続で、基板には配線しない**。
+  図では AD3 の箱と線を描かず、AD3 を挟む穴を黄色の丸で囲み、赤の大きな太字で名前を書いた。
+  V+ (Supplies の +5V) は PWR の u17、GND は GND の a5、Scope の 1+ は Q1 のベース (c10)、2+ は Q1・Q2 のコレクタをまとめた
+  12 行 (n12、Buzzer の下のピンと同じ穴)、1−・2− は GND の i5 を挟む。
   電流は、Buzzer (自励式のアクティブブザー。目安 30mA 前後) と DLED の約 6.7mA を合わせて約 37mA で、AD3 の各レール約 50mA
-  (USB 給電で 250mW) の内側に収まる。使うブザーの電流がもっと大きいときは、別の 5V 電源 (USB アダプタ) に替える。
-  Scope は 1+ (青) を Q1 のベース (c10)、2+ (緑) を Q1・Q2 のコレクタをまとめた 12 行 (n12、Buzzer の下のピンと同じ穴)、1−・2− (黒) を GND の i5 へつなぐ
+  (USB 給電で 250mW) の内側に収まる。使うブザーの電流がもっと大きいときは、別の 5V 電源 (USB アダプタ) に替える
 - ユニバーサル基板を流れる電流は約 37mA で、perfboard の範囲 (1 本の線・ランドごとに定常 500mA、ユニバーサル基板全体 2A) に収まる
 - 水に触れる電極 (P1・P2) に Scope をつながない。Scope の入力は GND とつながっているので、つなぐ先は電極の先ではなく、
   基板上のベース (c10) とコレクタ (h12) にする。電極に GND を引き込むと、水を通した直流の電流が増え、腐食が早まる

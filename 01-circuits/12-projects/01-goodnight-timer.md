@@ -164,6 +164,7 @@ board:
   silk: board
   slots: on
 title: 図3 perfboardに組む (部品面から見た図)
+unused: [U1.CONT]
 points:
   VCC: a18
   GND: a5
@@ -225,7 +226,7 @@ wires:
   6 (THRES)・5 (CONT) で e14〜h14、下の列が左から PIN 1 (GND)・2 (TRIG)・3 (OUT)・
   4 (RESET) で e11〜h11。PIN 8 は E 列を上って 18 行へ、PIN 1 は E 列を下って 5 行へ
 - PIN 4 (RESET) は 11 行で J 列へ出て、J 列を上って 18 行 (VCC) へ。その途中の j14 から
-  14 行を右へ出して、出力段の RLED へ VCC を配る。PIN 5 (CONT) はどこにもつないでいない。
+  14 行を右へ出して、出力段の RLED へ VCC を配る。PIN 5 (CONT) はどこにもつないでいない (`unused:` に並べて、ERC の「つながっていない」から外した)。
   単安定の動作には必須ではなく、浮かせたままでも動く (つなぐならここから 0.01µF を
   GND へ)
 - PIN 2 (TRIG、黄) は f11 から 9 行を左へ運んで SWtrig (b9) へ。SWtrig の下のピンは b7 から
