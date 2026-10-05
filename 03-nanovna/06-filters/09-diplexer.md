@@ -77,42 +77,43 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard に組む (g 行 LPF・k 行 HPF)
 parts:
-  J1: sma/female-edge i1 h0 j0
-  L1: inductor g4 g7 220n
-  C2: capacitor g8 d8 82p
-  L3: inductor g9 g12 82n
-  J2: sma/female-edge g24 h25
-  C1: capacitor k4 k7 43p
-  L2: inductor k8 n8 120n
-  C3: capacitor k9 k12 130p
-  J3: sma/female-edge k24 l25
+  J1: sma/female-edge a10 011 09
+  L1: inductor d12 g12 220n
+  C2: capacitor h12 h15 82p
+  L3: inductor i12 l12 82n
+  J2: sma/female-edge x12 y11
+  C1: capacitor d8 g8 43p
+  L2: inductor h8 h5 120n
+  C3: capacitor i8 l8 130p
+  J3: sma/female-edge x8 y7
 wires:
-  - i1 -- i3
-  - i3 -- g3
-  - g3 -- g4
-  - g7 -- g8
-  - g8 -- g9
-  - g12 -- g24
-  - i3 -- k3
-  - k3 -- k4
-  - k7 -- k8
-  - k8 -- k9
-  - k12 -- k24
-  - h0 -- h2 black
-  - h2 -- d2 black
-  - d2 -- d8 black
-  - d8 -- d19 black
-  - d19 -- f19 black
-  - f19 -- f25 black
-  - j0 -- j2 black
-  - j2 -- n2 black
-  - n2 -- n8 black
-  - n8 -- n19 black
-  - n19 -- l19 black
-  - l19 -- l25 black
+  - a10 -- c10
+  - c10 -- c12
+  - c12 -- d12
+  - g12 -- h12
+  - h12 -- i12
+  - l12 -- x12
+  - c10 -- c8
+  - c8 -- d8
+  - g8 -- h8
+  - h8 -- i8
+  - l8 -- x8
+  - 011 -- b11 black
+  - b11 -- b15 black
+  - b15 -- h15 black
+  - h15 -- s15 black
+  - s15 -- s13 black
+  - s13 -- y13 black
+  - 09 -- b9 black
+  - b9 -- b5 black
+  - b5 -- h5 black
+  - h5 -- s5 black
+  - s5 -- s7 black
+  - s7 -- y7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/09-diplexer.svg)

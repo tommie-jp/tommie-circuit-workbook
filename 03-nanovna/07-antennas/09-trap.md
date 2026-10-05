@@ -68,26 +68,27 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard に組む (部品面)
 parts:
-  J1: sma/female-edge i1 j0
-  J2: sma/female-edge i24 j25
-  L1: inductor i5 i11 10u
-  C1: capacitor k5 k11 47p
-  C2: capacitor m5 m11 3.3p
+  J1: sma/female-edge a10 09
+  J2: sma/female-edge x10 y9
+  L1: inductor e10 k10 10u
+  C1: capacitor e8 k8 47p
+  C2: capacitor e6 k6 3.3p
 wires:
-  - i1 -- i5
-  - i11 -- i24
-  - i5 -- k5
-  - k5 -- m5
-  - i11 -- k11
-  - k11 -- m11
-  - j0 -- j2 black
-  - j2 -- n2 black
-  - n2 -- n15 black
-  - n15 -- j15 black
-  - j15 -- j25 black
+  - a10 -- e10
+  - k10 -- x10
+  - e10 -- e8
+  - e8 -- e6
+  - k10 -- k8
+  - k8 -- k6
+  - 09 -- b9 black
+  - b9 -- b5 black
+  - b5 -- o5 black
+  - o5 -- o9 black
+  - o9 -- y9 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/perfboard/09-trap.svg)

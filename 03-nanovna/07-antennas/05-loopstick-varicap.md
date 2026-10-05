@@ -67,19 +67,20 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard に組む (コイルとバリコン)
 parts:
-  J1: sma/female-edge i1 j0
-  L1: inductor i3 i10 330u
-  C1: capacitor i11 k11 100p
+  J1: sma/female-edge a10 09
+  L1: inductor c10 j10 330u
+  C1: capacitor k10 k8 100p
 wires:
-  - i1 -- i3
-  - i10 -- i11
-  - j0 -- j2 black
-  - j2 -- l2 black
-  - l2 -- l11 black
-  - l11 -- k11 black
+  - a10 -- c10
+  - j10 -- k10
+  - 09 -- b9 black
+  - b9 -- b7 black
+  - b7 -- k7 black
+  - k7 -- k8 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/perfboard/05-loopstick-varicap.svg)

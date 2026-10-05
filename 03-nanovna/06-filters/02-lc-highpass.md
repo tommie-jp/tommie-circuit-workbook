@@ -57,28 +57,29 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard に組む (端面 SMA 2 つ)
 parts:
-  J1: sma/female-edge i1 j0
-  L1: inductor i3 k3 820n
-  C1: capacitor i5 i8 150p
-  L2: inductor i10 k10 820n
-  J2: sma/female-edge i24 j25
+  J1: sma/female-edge a10 09
+  L1: inductor c10 c8 820n
+  C1: capacitor e10 h10 150p
+  L2: inductor j10 j8 820n
+  J2: sma/female-edge x10 y9
 wires:
-  - i1 -- i3
-  - i3 -- i5
-  - i8 -- i10
-  - i10 -- i24
-  - j0 -- j2 black
-  - j2 -- l2 black
-  - l2 -- l3 black
-  - l3 -- k3 black
-  - l3 -- l10 black
-  - l10 -- k10 black
-  - l10 -- l17 black
-  - j25 -- j17 black
-  - j17 -- l17 black
+  - a10 -- c10
+  - c10 -- e10
+  - h10 -- j10
+  - j10 -- x10
+  - 09 -- b9 black
+  - b9 -- b7 black
+  - b7 -- c7 black
+  - c7 -- c8 black
+  - c7 -- j7 black
+  - j7 -- j8 black
+  - j7 -- q7 black
+  - y9 -- q9 black
+  - q9 -- q7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/02-lc-highpass.svg)

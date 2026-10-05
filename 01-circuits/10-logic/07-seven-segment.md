@@ -133,6 +133,7 @@ style:
 title: 図2 perfboard に組む (部品面と半田面。電源は USB アダプタ)
 board:
   size: 9x7cm
+  silk: board
   h: 1.6mm
   material: FR-4
 style:
@@ -140,101 +141,101 @@ style:
 parts:
   PSU:
     type: device
-    at: -c3
+    at: c30
     label: 5V USB アダプタ
     pins: [GND, +5V]
-  U1: dip16 j19 r90 CD4511B
-  DS1: seg7 l26
-  Rf: resistor k20 k22 330
-  Rg: resistor l23 l25 330
-  Ra: resistor m20 m22 330
-  Rb: resistor n23 n25 330
-  Rc: resistor o20 o22 330
-  Rd: resistor p23 p25 330
-  Re: resistor q20 q22 330
-  SWB: switch d6 g6
-  RpdB: resistor h6 j6 10k
-  SWC: switch h9 k9
-  RpdC: resistor l9 n9 10k
-  SWD: switch l11 o11
-  RpdD: resistor p11 r11 10k
-  SWA: switch p13 s13
-  RpdA: resistor t13 v13 10k
+  U1: dip16 s17 r90 CD4511B
+  DS1: seg7 z15
+  Rf: resistor t16 v16 330
+  Rg: resistor w15 y15 330
+  Ra: resistor t14 v14 330
+  Rb: resistor w13 y13 330
+  Rc: resistor t12 v12 330
+  Rd: resistor w11 y11 330
+  Re: resistor t10 v10 330
+  SWB: switch f23 f20
+  RpdB: resistor f19 f17 10k
+  SWC: switch i19 i16
+  RpdC: resistor i15 i13 10k
+  SWD: switch k15 k12
+  RpdD: resistor k11 k9 10k
+  SWA: switch m11 m8
+  RpdA: resistor m7 m5 10k
 notes:
-  - text j27: DS1 5161AS
+  - text aa17: DS1 5161AS
 wires:
   # 電源
-  - PSU.+5V -- b4 red
-  - b4 -- b6 red
-  - b6 -- b19 red
-  - b19 -- j19 red
-  - PSU.GND -- b3 black
-  - b3 -- y3 black
-  - y3 -- y11 black
-  - y11 -- y28 black
-  - y28 -- y31 black
-  - k31 -- y31 black
-  - k28 -- k31 black
-  - l28 -- k28 black
-  - r28 -- y28 black
+  - PSU.+5V -- d25 red
+  - d25 -- f25 red
+  - f25 -- s25 red
+  - s25 -- s17 red
+  - PSU.GND -- c25 black
+  - c25 -- c2 black
+  - c2 -- k2 black
+  - k2 -- ab2 black
+  - ab2 -- ae2 black
+  - ae16 -- ae2 black
+  - ab16 -- ae16 black
+  - ab15 -- ab16 black
+  - ab9 -- ab2 black
   # + の階段
-  - b6 -- d6 red
-  - d6 -- d9 red
-  - d9 -- h9 red
-  - h9 -- h11 red
-  - h11 -- l11 red
-  - l11 -- l13 red
-  - l13 -- l16 red
-  - l13 -- p13 red
-  - l16 -- m16 red
+  - f25 -- f23 red
+  - f23 -- i23 red
+  - i23 -- i19 red
+  - i19 -- k19 red
+  - k19 -- k15 red
+  - k15 -- m15 red
+  - m15 -- p15 red
+  - m15 -- m11 red
+  - p15 -- p14 red
   # GND の階段
-  - v11 -- y11 black
-  - v13 -- v11 black
-  - v11 -- r11 black
-  - r11 -- r9 black
-  - r9 -- n9 black
-  - n9 -- n6 black
-  - n6 -- j6 black
-  - n16 -- n15 black
-  - n15 -- q15 black
-  - q15 -- q16 black
-  - q15 -- v15 black
-  - v15 -- v13 black
+  - k5 -- k2 black
+  - m5 -- k5 black
+  - k5 -- k9 black
+  - k9 -- i9 black
+  - i9 -- i13 black
+  - i13 -- f13 black
+  - f13 -- f17 black
+  - p13 -- o13 black
+  - o13 -- o10 black
+  - o10 -- p10 black
+  - o10 -- o5 black
+  - o5 -- m5 black
   # 入力
-  - g6 -- h6 gray
-  - j16 -- j15 gray
-  - j15 -- g15 gray
-  - g15 -- g6 gray
-  - k9 -- l9 pink
-  - k16 -- k9 pink
-  - "o11 -- p11 #00aaaa"
-  - "o16 -- o11 #00aaaa"
-  - "s13 -- t13 #c8a000"
-  - "s14 -- s13 #c8a000"
-  - "p14 -- s14 #c8a000"
-  - "p16 -- p14 #c8a000"
+  - f20 -- f19 gray
+  - p17 -- o17 gray
+  - o17 -- o20 gray
+  - o20 -- f20 gray
+  - i16 -- i15 pink
+  - p16 -- i16 pink
+  - "k12 -- k11 #00aaaa"
+  - "p12 -- k12 #00aaaa"
+  - "m8 -- m7 #c8a000"
+  - "n8 -- m8 #c8a000"
+  - "n11 -- n8 #c8a000"
+  - "p11 -- n11 #c8a000"
   # 出力
-  - k19 -- k20 yellow
-  - l19 -- l23 orange
-  - m19 -- m20 green
-  - n19 -- n23 blue
-  - o19 -- o20 purple
-  - p19 -- p23 brown
-  - q19 -- q20 white
-  - k22 -- k27 yellow
-  - k27 -- l27 yellow
-  - l25 -- l26 orange
-  - m22 -- m29 green
-  - m29 -- l29 green
-  - n25 -- n30 blue
-  - n30 -- l30 blue
-  - o22 -- o29 purple
-  - o29 -- r29 purple
-  - p25 -- p27 brown
-  - p27 -- r27 brown
-  - q22 -- q25 white
-  - q25 -- r25 white
-  - r25 -- r26 white
+  - s16 -- t16 yellow
+  - s15 -- w15 orange
+  - s14 -- t14 green
+  - s13 -- w13 blue
+  - s12 -- t12 purple
+  - s11 -- w11 brown
+  - s10 -- t10 white
+  - v16 -- aa16 yellow
+  - aa16 -- aa15 yellow
+  - y15 -- z15 orange
+  - v14 -- ac14 green
+  - ac14 -- ac15 green
+  - y13 -- ad13 blue
+  - ad13 -- ad15 blue
+  - v12 -- ac12 purple
+  - ac12 -- ac9 purple
+  - y11 -- aa11 brown
+  - aa11 -- aa9 brown
+  - v10 -- y10 white
+  - y10 -- y9 white
+  - y9 -- z9 white
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/perfboard/07-seven-segment.svg)

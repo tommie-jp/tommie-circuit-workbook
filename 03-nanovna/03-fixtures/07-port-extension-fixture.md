@@ -50,18 +50,19 @@ notes:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 1 端子の治具
 points:
-  GND: l2
+  GND: b7
 parts:
-  J1: sma/female-edge i1 h0 j0
-  R1: resistor i9 l9 100
+  J1: sma/female-edge a10 011 09
+  R1: resistor i10 i7 100
 wires:
-  - i1 -- i9
-  - j0 -- j2 black
-  - j2 -- GND black
-  - GND -- l9 black
+  - a10 -- i10
+  - 09 -- b9 black
+  - b9 -- GND black
+  - GND -- i7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/07-port-extension-fixture.svg)

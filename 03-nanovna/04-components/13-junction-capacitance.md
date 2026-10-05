@@ -64,40 +64,41 @@ notes:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 直列治具にダイオードとバイアス
 points:
-  GND: j0
+  GND: 09
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 j25
-  C1: capacitor/ceramic i2 i4 100n
-  D1: diode/do41 i9 i6 1N4007
-  C2: capacitor/ceramic i11 i13 100n
-  R1: resistor f6 h6 100k
-  R2: resistor f9 h9 100k
-  VR1: potentiometer/trimmer e2 f3 e4 10k
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y9
+  C1: capacitor/ceramic b10 d10 100n
+  D1: diode/do41 i10 f10 1N4007
+  C2: capacitor/ceramic k10 m10 100n
+  R1: resistor f13 f11 100k
+  R2: resistor i13 i11 100k
+  VR1: potentiometer/trimmer b14 c13 d14 10k
   V1:
     type: device
-    at: -c8
+    at: h22
     label: USB 5V
     pins: + -
 wires:
-  - i1 -- i2
-  - i4 -- i6
-  - i9 -- i11
-  - i13 -- i24
-  - i6 -- h6
-  - i9 -- h9
-  - f3 -- f6
-  - e4 -- e9
-  - e9 -- f9
-  - V1.+ -- a8 red
-  - a8 -- a2 red
-  - a2 -- e2 red
-  - V1.- -- a9 blue
-  - a9 -- e9 blue
-  - j0 -- j25 black
+  - a10 -- b10
+  - d10 -- f10
+  - i10 -- k10
+  - m10 -- x10
+  - f10 -- f11
+  - i10 -- i11
+  - c13 -- f13
+  - d14 -- i14
+  - i14 -- i13
+  - V1.+ -- h18 red
+  - h18 -- b18 red
+  - b18 -- b14 red
+  - V1.- -- i18 blue
+  - i18 -- i14 blue
+  - 09 -- y9 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/13-junction-capacitance.svg)

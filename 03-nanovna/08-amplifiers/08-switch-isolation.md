@@ -83,43 +83,44 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard に組む (G5V-2、端面 SMA 2 つ)
 parts:
-  J1: sma/female-edge i1 j0
-  K1: relay e4
-  D1: diode e2 g2 1N4148
-  SW1: switch b1 b3
-  BAT: battery b4 b7 5
-  J2: sma/female-edge i24 j25
+  J1: sma/female-edge a10 09
+  K1: relay d14
+  D1: diode b14 b12 1N4148
+  SW1: switch a17 c17
+  BAT: battery d17 g17 5
+  J2: sma/female-edge x10 y9
 wires:
-  - i1 -- i7
-  - i7 -- h7
-  - h11 -- i11
-  - i11 -- i13
-  - i13 -- i24
-  - e9 -- d9
-  - d9 -- d13
-  - d13 -- i13
-  - h4 -- h2 red
-  - h2 -- h1 red
-  - h1 -- b1 red
-  - g2 -- h2 red
-  - b3 -- b4 red
-  - e2 -- d2 black
-  - d2 -- d4 black
-  - e4 -- d4 black
-  - d4 -- d7 black
-  - e7 -- d7 black
-  - d7 -- c7 black
-  - b7 -- c7 black
-  - c7 -- c25 black
-  - c25 -- h25 black
-  - j0 -- j2 black
-  - j2 -- k2 black
-  - k2 -- k18 black
-  - k18 -- j18 black
-  - j18 -- j25 black
+  - a10 -- g10
+  - g10 -- g11
+  - k11 -- k10
+  - k10 -- m10
+  - m10 -- x10
+  - i14 -- i15
+  - i15 -- m15
+  - m15 -- m10
+  - d11 -- b11 red
+  - b11 -- a11 red
+  - a11 -- a17 red
+  - b12 -- b11 red
+  - c17 -- d17 red
+  - b14 -- b15 black
+  - b15 -- d15 black
+  - d14 -- d15 black
+  - d15 -- g15 black
+  - g14 -- g15 black
+  - g15 -- g16 black
+  - g17 -- g16 black
+  - g16 -- y16 black
+  - y16 -- y11 black
+  - 09 -- b9 black
+  - b9 -- b8 black
+  - b8 -- r8 black
+  - r8 -- r9 black
+  - r9 -- y9 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/perfboard/08-switch-isolation.svg)

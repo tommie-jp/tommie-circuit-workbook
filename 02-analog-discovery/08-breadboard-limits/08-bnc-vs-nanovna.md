@@ -69,16 +69,17 @@ style:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard の SMA スルー治具
 points:
-  GND: j0
+  GND: 09
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 h25 j25
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y11 j25
 wires:
-  - i1 -- i24
-  - j0 -- j25 black
+  - a10 -- x10
+  - 09 -- y9 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/perfboard/08-bnc-vs-nanovna.svg)

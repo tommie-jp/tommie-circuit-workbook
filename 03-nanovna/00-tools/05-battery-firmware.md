@@ -91,18 +91,19 @@ notes:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard の検査片 (100 Ω を端面 SMA の先に付ける)
 points:
-  GND: l2
+  GND: b7
 parts:
-  J1: sma/female-edge i1 h0 j0
-  R1: resistor i5 l5 100
+  J1: sma/female-edge a10 011 09
+  R1: resistor e10 e7 100
 wires:
-  - i1 -- i5
-  - l5 -- GND black
-  - j0 -- j2 black
-  - j2 -- GND black
+  - a10 -- e10
+  - e7 -- GND black
+  - 09 -- b9 black
+  - b9 -- GND black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/perfboard/05-battery-firmware.svg)

@@ -90,58 +90,59 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboardに組む (部品面から見た図。AD3 は 5V と Scope)
 points:
-  PWR: b21
-  GND: n1
+  PWR: u17
+  GND: a5
 parts:
   P2:
     type: device
-    at: -c2
+    at: b22
     label: Probe2
     pins: [W]
   P1:
     type: device
-    at: -c6
+    at: f22
     label: Probe1
     pins: [W]
-  Rprobe: resistor b10 b6 10k
-  Rb: resistor i2 n2 1M
-  Q1: transistor i5 i4 i3 2SC1815
-  Q2: transistor i9 i8 i7 2SC1815
-  Buzzer: buzzer d14 g14
-  RLED: resistor b18 d18 330
-  DLED: led e18 g18 red
+  Rprobe: resistor j17 f17 10k
+  Rb: resistor b10 b5 1M
+  Q1: transistor e10 d10 c10 2SC1815
+  Q2: transistor i10 h10 g10 2SC1815
+  Buzzer: buzzer n15 n12
+  RLED: resistor r17 r15 330
+  DLED: led r14 r12 red
   AD:
     type: device
-    at: s16
+    at: p0
     label: Analog Discovery 3
     pins: GND 1- 2- 1+ 2+ V+
 wires:
-  - P1.W -- b6
-  - b10 -- b14 red
-  - b14 -- b18 red
-  - b18 -- PWR red
-  - P2.W -- i2
-  - i2 -- i3
-  - i5 -- i7
-  - i4 -- g4
-  - i8 -- g8
-  - g4 -- g8
-  - g8 -- g14
-  - g14 -- g18
-  - b14 -- d14 red
-  - d18 -- e18
-  - i9 -- n9 black
-  - GND -- n2 black
-  - n2 -- n9 black
+  - P1.W -- f17
+  - j17 -- n17 red
+  - n17 -- r17 red
+  - r17 -- PWR red
+  - P2.W -- b10
+  - b10 -- c10
+  - e10 -- g10
+  - d10 -- d12
+  - h10 -- h12
+  - d12 -- h12
+  - h12 -- n12
+  - n12 -- r12
+  - n17 -- n15 red
+  - r15 -- r14
+  - i10 -- i5 black
+  - GND -- b5 black
+  - b5 -- i5 black
   - AD.V+ -- PWR red
   - AD.GND -- GND black
-  - AD.1+ -- i3 blue
-  - AD.2+ -- g14 green
-  - AD.1- -- n9 black
-  - AD.2- -- n9 black
+  - AD.1+ -- c10 blue
+  - AD.2+ -- n12 green
+  - AD.1- -- i5 black
+  - AD.2- -- i5 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/perfboard/03-water-alarm.svg)

@@ -1459,121 +1459,123 @@ wires:
 
 ```perfboard
 title: 図9b 発振と分周のユニバーサル基板 (ユニット 1)
-board: 15x9cm
+board:
+  size: 15x9cm
+  silk: board
 points:
-  VCC: k1
-  GND: j2
-  TICK: m36
-  CLK: p25
-  RS: p47
+  VCC: a23
+  GND: b24
+  TICK: aj21
+  CLK: y18
+  RS: au18
 parts:
-  U18: dip14 m16 CD4069UB
-  U19: dip16 m25 CD4040B
-  U20: dip16 m35 74HC163
-  U46: dip14 m45 74HC02
-  X1: crystal/cylinder m4 m7
-  C1: capacitor/ceramic o4 o7 18p
-  C2: capacitor/ceramic q4 q7 18p
-  Rf: resistor n9 n13 10M
-  Rd: resistor p9 p13 270k
+  U18: dip14 p21 CD4069UB
+  U19: dip16 y21 CD4040B
+  U20: dip16 ai21 74HC163
+  U46: dip14 as21 74HC02
+  X1: crystal/cylinder d21 g21
+  C1: capacitor/ceramic d19 g19 18p
+  C2: capacitor/ceramic d17 g17 18p
+  Rf: resistor i20 m20 10M
+  Rd: resistor i18 m18 270k
 wires:
-  - k52 -- k45 red
-  - k45 -- k41 red
-  - k45 -- m45 red
-  - k41 -- m41 red
-  - k41 -- k35 red
-  - k35 -- k34 red
-  - k35 -- m35 red
-  - k34 -- k25 red
-  - k34 -- p34 red
-  - k25 -- m25 red
-  - k25 -- k16 red
-  - k16 -- m16 red
-  - k16 -- VCC red
-  - VCC -- s1 red
-  - s1 -- s40 red
-  - s40 -- p40 red
-  - s40 -- s51 red
-  - p34 -- p35 red
-  - p40 -- p41 red
-  - GND -- j53 black
-  - j53 -- l53 black
-  - l53 -- m53 black
-  - l53 -- l48 black
-  - m53 -- m51 black
-  - m53 -- r53 black
-  - r53 -- r49 black
-  - r49 -- p49 black
-  - r49 -- r42 black
-  - r42 -- p42 black
-  - r42 -- r37 black
-  - r37 -- p37 black
-  - r37 -- r32 black
-  - r32 -- p32 black
-  - r32 -- r23 black
-  - r23 -- l23 black
-  - r23 -- r22 black
-  - r22 -- p22 black
-  - r22 -- r20 black
-  - r20 -- p20 black
-  - r20 -- r7 black
-  - r7 -- r2 black
-  - r7 -- q7 black
-  - q7 -- o7 black
-  - p37 -- p38 black
-  - p38 -- p39 black
-  - p49 -- p50 black
-  - p50 -- p51 black
-  - m51 -- m50 black
-  - l48 -- m48 black
-  - m48 -- m47 black
-  - l23 -- l30 black
-  - l23 -- l21 black
-  - l21 -- l19 black
-  - l21 -- m21 black
-  - l19 -- m19 black
-  - l19 -- l17 black
-  - l17 -- m17 black
-  - l30 -- m30 black
-  - m36 -- l36 orange
-  - l36 -- l44 orange
-  - l44 -- o44 orange
-  - o44 -- o46 orange
-  - o46 -- p46 orange
-  - p25 -- q25 yellow
-  - q25 -- q36 yellow
-  - q36 -- p36 yellow
-  - p16 -- p15 blue
-  - p15 -- m15 blue
-  - m15 -- m9 blue
-  - m9 -- n9 blue
-  - m9 -- m7 blue
-  - n9 -- n4 blue
-  - n4 -- o4 blue
-  - p17 -- p18 purple
-  - p17 -- q17 purple
-  - q17 -- q13 purple
-  - q13 -- p13 purple
-  - p13 -- n13 purple
-  - p19 -- o19 white
-  - o19 -- o24 white
-  - o24 -- n24 white
-  - n24 -- n31 white
-  - n31 -- m31 white
-  - m42 -- m43 pink
-  - m43 -- p43 pink
-  - p43 -- p45 pink
-  - m4 -- m3 brown
-  - m3 -- p3 brown
-  - p3 -- q3 brown
-  - p3 -- p9 brown
-  - q3 -- q4 brown
+  - az23 -- as23 red
+  - as23 -- ao23 red
+  - as23 -- as21 red
+  - ao23 -- ao21 red
+  - ao23 -- ai23 red
+  - ai23 -- ah23 red
+  - ai23 -- ai21 red
+  - ah23 -- y23 red
+  - ah23 -- ah18 red
+  - y23 -- y21 red
+  - y23 -- p23 red
+  - p23 -- p21 red
+  - p23 -- VCC red
+  - VCC -- a15 red
+  - a15 -- an15 red
+  - an15 -- an18 red
+  - an15 -- ay15 red
+  - ah18 -- ai18 red
+  - an18 -- ao18 red
+  - GND -- ba24 black
+  - ba24 -- ba22 black
+  - ba22 -- ba21 black
+  - ba22 -- av22 black
+  - ba21 -- ay21 black
+  - ba21 -- ba16 black
+  - ba16 -- aw16 black
+  - aw16 -- aw18 black
+  - aw16 -- ap16 black
+  - ap16 -- ap18 black
+  - ap16 -- ak16 black
+  - ak16 -- ak18 black
+  - ak16 -- af16 black
+  - af16 -- af18 black
+  - af16 -- w16 black
+  - w16 -- w22 black
+  - w16 -- v16 black
+  - v16 -- v18 black
+  - v16 -- t16 black
+  - t16 -- t18 black
+  - t16 -- g16 black
+  - g16 -- b16 black
+  - g16 -- g17 black
+  - g17 -- g19 black
+  - ak18 -- al18 black
+  - al18 -- am18 black
+  - aw18 -- ax18 black
+  - ax18 -- ay18 black
+  - ay21 -- ax21 black
+  - av22 -- av21 black
+  - av21 -- au21 black
+  - w22 -- ad22 black
+  - w22 -- u22 black
+  - u22 -- s22 black
+  - u22 -- u21 black
+  - s22 -- s21 black
+  - s22 -- q22 black
+  - q22 -- q21 black
+  - ad22 -- ad21 black
+  - aj21 -- aj22 orange
+  - aj22 -- ar22 orange
+  - ar22 -- ar19 orange
+  - ar19 -- at19 orange
+  - at19 -- at18 orange
+  - y18 -- y17 yellow
+  - y17 -- aj17 yellow
+  - aj17 -- aj18 yellow
+  - p18 -- o18 blue
+  - o18 -- o21 blue
+  - o21 -- i21 blue
+  - i21 -- i20 blue
+  - i21 -- g21 blue
+  - i20 -- d20 blue
+  - d20 -- d19 blue
+  - q18 -- r18 purple
+  - q18 -- q17 purple
+  - q17 -- m17 purple
+  - m17 -- m18 purple
+  - m18 -- m20 purple
+  - s18 -- s19 white
+  - s19 -- x19 white
+  - x19 -- x20 white
+  - x20 -- ae20 white
+  - ae20 -- ae21 white
+  - ap21 -- aq21 pink
+  - aq21 -- aq18 pink
+  - aq18 -- as18 pink
+  - d21 -- c21 brown
+  - c21 -- c18 brown
+  - c18 -- c17 brown
+  - c18 -- i18 brown
+  - c17 -- d17 brown
 style:
   check: off
 notes:
-  - mark m36 yellow
-  - mark p25 yellow
-  - mark p47 yellow
+  - mark aj21 yellow
+  - mark y18 yellow
+  - mark au18 yellow
   - parts
 ```
 
@@ -1676,112 +1678,114 @@ wires:
 
 ```perfboard
 title: 図10b 窓判定のユニバーサル基板 1/2 (ユニット 6)
-board: 9x7cm
+board:
+  size: 9x7cm
+  silk: board
 points:
-  VCC: h1
-  GND: g2
-  MT_0: j4
-  MT_1: j5
-  ST_0: j7
-  ST_1: j8
-  XA: j9
-  ENHT: j15
-  O_8: j16
-  CM: j18
-  SETN: j24
-  SYD_1: j25
-  SYD: j26
-  H_23: m3
-  ENH: m4
-  WH: m5
-  MT_5: m6
-  MU_9: m7
-  NSY: m13
-  O_2: m14
-  MT_2: m16
-  X: m24
-  W_59: m25
-  ACC: m28
+  VCC: a19
+  GND: b20
+  MT_0: d17
+  MT_1: e17
+  ST_0: g17
+  ST_1: h17
+  XA: i17
+  ENHT: o17
+  O_8: p17
+  CM: r17
+  SETN: x17
+  SYD_1: y17
+  SYD: z17
+  H_23: c14
+  ENH: d14
+  WH: e14
+  MT_5: f14
+  MU_9: g14
+  NSY: m14
+  O_2: n14
+  MT_2: p14
+  X: x14
+  W_59: y14
+  ACC: ab14
 parts:
-  U36: dip14 j3 74HC08
-  U40: dip14 j13 74HC32
-  U37: dip14 j23 74HC08
+  U36: dip14 c17 74HC08
+  U40: dip14 m17 74HC32
+  U37: dip14 w17 74HC08
 wires:
-  - h29 -- h23 red
-  - h23 -- h13 red
-  - h23 -- j23 red
-  - h13 -- h3 red
-  - h13 -- j13 red
-  - h3 -- j3 red
-  - h3 -- VCC red
-  - VCC -- p1 red
-  - p1 -- p28 red
-  - GND -- g30 black
-  - g30 -- m30 black
-  - m30 -- m29 black
-  - m30 -- o30 black
-  - o30 -- o19 black
-  - o19 -- m19 black
-  - o19 -- o9 black
-  - o9 -- m9 black
-  - o9 -- o2 black
-  - m4 -- q4 blue
-  - q4 -- q31 blue
-  - q31 -- l31 blue
-  - l31 -- l22 blue
-  - l22 -- j22 blue
-  - j22 -- j19 blue
-  - m5 -- n5 purple
-  - n5 -- n11 purple
-  - n11 -- i11 purple
-  - i11 -- i14 purple
-  - i14 -- j14 purple
-  - m28 -- j28 blue
-  - m8 -- k8 purple
-  - k8 -- k20 purple
-  - k20 -- m20 purple
-  - m20 -- m23 purple
-  - j6 -- i6 white
-  - i6 -- i10 white
-  - i10 -- l10 white
-  - l10 -- l17 white
-  - l17 -- m17 white
-  - m15 -- n15 pink
-  - n15 -- n27 pink
-  - n27 -- m27 pink
-  - m18 -- l18 brown
-  - l18 -- l21 brown
-  - l21 -- k21 brown
-  - k21 -- k27 brown
-  - k27 -- j27 brown
-  - j17 -- i17 gray
-  - i17 -- i29 gray
-  - i29 -- j29 gray
+  - ac19 -- w19 red
+  - w19 -- m19 red
+  - w19 -- w17 red
+  - m19 -- c19 red
+  - m19 -- m17 red
+  - c19 -- c17 red
+  - c19 -- VCC red
+  - VCC -- a11 red
+  - a11 -- ab11 red
+  - GND -- ad20 black
+  - ad20 -- ad14 black
+  - ad14 -- ac14 black
+  - ad14 -- ad12 black
+  - ad12 -- s12 black
+  - s12 -- s14 black
+  - s12 -- i12 black
+  - i12 -- i14 black
+  - i12 -- b12 black
+  - d14 -- d10 blue
+  - d10 -- ae10 blue
+  - ae10 -- ae15 blue
+  - ae15 -- v15 blue
+  - v15 -- v17 blue
+  - v17 -- s17 blue
+  - e14 -- e13 purple
+  - e13 -- k13 purple
+  - k13 -- k18 purple
+  - k18 -- n18 purple
+  - n18 -- n17 purple
+  - ab14 -- ab17 blue
+  - h14 -- h16 purple
+  - h16 -- t16 purple
+  - t16 -- t14 purple
+  - t14 -- w14 purple
+  - f17 -- f18 white
+  - f18 -- j18 white
+  - j18 -- j15 white
+  - j15 -- q15 white
+  - q15 -- q14 white
+  - o14 -- o13 pink
+  - o13 -- aa13 pink
+  - aa13 -- aa14 pink
+  - r14 -- r15 brown
+  - r15 -- u15 brown
+  - u15 -- u16 brown
+  - u16 -- aa16 brown
+  - aa16 -- aa17 brown
+  - q17 -- q18 gray
+  - q18 -- ac18 gray
+  - ac18 -- ac17 gray
 style:
   check: off
 notes:
-  - mark j4 yellow
-  - mark j5 yellow
-  - mark j7 yellow
-  - mark j8 yellow
-  - mark j9 yellow
-  - mark j15 yellow
-  - mark j16 yellow
-  - mark j18 yellow
-  - mark j24 yellow
-  - mark j25 yellow
-  - mark j26 yellow
-  - mark m3 yellow
-  - mark m4 yellow
-  - mark m5 yellow
-  - mark m6 yellow
-  - mark m7 yellow
-  - mark m13 yellow
+  - mark d17 yellow
+  - mark e17 yellow
+  - mark g17 yellow
+  - mark h17 yellow
+  - mark i17 yellow
+  - mark o17 yellow
+  - mark p17 yellow
+  - mark r17 yellow
+  - mark x17 yellow
+  - mark y17 yellow
+  - mark z17 yellow
+  - mark c14 yellow
+  - mark d14 yellow
+  - mark e14 yellow
+  - mark f14 yellow
+  - mark g14 yellow
   - mark m14 yellow
-  - mark m16 yellow
-  - mark m24 yellow
-  - mark m25 yellow
-  - mark m28 yellow
+  - mark n14 yellow
+  - mark p14 yellow
+  - mark x14 yellow
+  - mark y14 yellow
+  - mark ab14 yellow
   - parts
 ```
 
@@ -1896,103 +1900,105 @@ wires:
 
 ```perfboard
 title: 図11b 窓判定のユニバーサル基板 2/2 (ユニット 6)
-board: 9x7cm
+board:
+  size: 9x7cm
+  silk: board
 points:
-  VCC: h1
-  GND: g2
-  MU_1: j7
-  MU_2: j8
-  W_59: j15
-  O_2: j16
-  XA: j17
-  ST_2: j18
-  X: j19
-  MT_2: m3
-  MT_1: m4
-  MT_0: m6
-  MU_3: m7
-  MU_0: m14
-  LDHU: m23
-  SET: m24
-  O_8: m25
-  LDHT: m26
-  WH: m28
+  VCC: a19
+  GND: b20
+  MU_1: g17
+  MU_2: h17
+  W_59: o17
+  O_2: p17
+  XA: q17
+  ST_2: r17
+  X: s17
+  MT_2: c14
+  MT_1: d14
+  MT_0: f14
+  MU_3: g14
+  MU_0: n14
+  LDHU: w14
+  SET: x14
+  O_8: y14
+  LDHT: z14
+  WH: ab14
 parts:
-  U38: dip14 j3 74HC32
-  U39: dip14 j13 74HC32
-  U43: dip14 j23 74HC02
+  U38: dip14 c17 74HC32
+  U39: dip14 m17 74HC32
+  U43: dip14 w17 74HC02
 wires:
-  - h29 -- h23 red
-  - h23 -- h13 red
-  - h23 -- j23 red
-  - h13 -- h3 red
-  - h13 -- j13 red
-  - h3 -- j3 red
-  - h3 -- VCC red
-  - VCC -- p1 red
-  - p1 -- p28 red
-  - GND -- g30 black
-  - g30 -- j30 black
-  - j30 -- j29 black
-  - j30 -- m30 black
-  - m30 -- m29 black
-  - m30 -- o30 black
-  - o30 -- o19 black
-  - o19 -- m19 black
-  - o19 -- o9 black
-  - o9 -- m9 black
-  - o9 -- o2 black
-  - j29 -- j28 black
-  - j19 -- j20 pink
-  - j20 -- k20 pink
-  - k20 -- k25 pink
-  - k25 -- j25 pink
-  - m24 -- n24 purple
-  - n24 -- n27 purple
-  - n27 -- m27 purple
-  - m5 -- j5 gray
-  - m8 -- n8 orange
-  - n8 -- n2 orange
-  - n2 -- k2 orange
-  - k2 -- k4 orange
-  - k4 -- j4 orange
-  - j9 -- j10 yellow
-  - j10 -- m10 yellow
-  - m10 -- m13 yellow
-  - j6 -- i6 green
-  - i6 -- i11 green
-  - i11 -- l11 green
-  - l11 -- l16 green
-  - l16 -- m16 green
-  - m15 -- n15 blue
-  - n15 -- n17 blue
-  - n17 -- m17 blue
-  - m18 -- l18 purple
-  - l18 -- l26 purple
-  - l26 -- j26 purple
-  - j14 -- i14 white
-  - i14 -- i24 white
-  - i24 -- j24 white
+  - ac19 -- w19 red
+  - w19 -- m19 red
+  - w19 -- w17 red
+  - m19 -- c19 red
+  - m19 -- m17 red
+  - c19 -- c17 red
+  - c19 -- VCC red
+  - VCC -- a11 red
+  - a11 -- ab11 red
+  - GND -- ad20 black
+  - ad20 -- ad17 black
+  - ad17 -- ac17 black
+  - ad17 -- ad14 black
+  - ad14 -- ac14 black
+  - ad14 -- ad12 black
+  - ad12 -- s12 black
+  - s12 -- s14 black
+  - s12 -- i12 black
+  - i12 -- i14 black
+  - i12 -- b12 black
+  - ac17 -- ab17 black
+  - s17 -- t17 pink
+  - t17 -- t16 pink
+  - t16 -- y16 pink
+  - y16 -- y17 pink
+  - x14 -- x13 purple
+  - x13 -- aa13 purple
+  - aa13 -- aa14 purple
+  - e14 -- e17 gray
+  - h14 -- h13 orange
+  - h13 -- b13 orange
+  - b13 -- b16 orange
+  - b16 -- d16 orange
+  - d16 -- d17 orange
+  - i17 -- j17 yellow
+  - j17 -- j14 yellow
+  - j14 -- m14 yellow
+  - f17 -- f18 green
+  - f18 -- k18 green
+  - k18 -- k15 green
+  - k15 -- p15 green
+  - p15 -- p14 green
+  - o14 -- o13 blue
+  - o13 -- q13 blue
+  - q13 -- q14 blue
+  - r14 -- r15 purple
+  - r15 -- z15 purple
+  - z15 -- z17 purple
+  - n17 -- n18 white
+  - n18 -- x18 white
+  - x18 -- x17 white
 style:
   check: off
 notes:
-  - mark j7 yellow
-  - mark j8 yellow
-  - mark j15 yellow
-  - mark j16 yellow
-  - mark j17 yellow
-  - mark j18 yellow
-  - mark j19 yellow
-  - mark m3 yellow
-  - mark m4 yellow
-  - mark m6 yellow
-  - mark m7 yellow
-  - mark m14 yellow
-  - mark m23 yellow
-  - mark m24 yellow
-  - mark m25 yellow
-  - mark m26 yellow
-  - mark m28 yellow
+  - mark g17 yellow
+  - mark h17 yellow
+  - mark o17 yellow
+  - mark p17 yellow
+  - mark q17 yellow
+  - mark r17 yellow
+  - mark s17 yellow
+  - mark c14 yellow
+  - mark d14 yellow
+  - mark f14 yellow
+  - mark g14 yellow
+  - mark n14 yellow
+  - mark w14 yellow
+  - mark x14 yellow
+  - mark y14 yellow
+  - mark z14 yellow
+  - mark ab14 yellow
   - parts
 ```
 
@@ -2117,127 +2123,129 @@ wires:
 
 ```perfboard
 title: 図12b 同期済みと設定のユニバーサル基板 (ユニット 7)
-board: 15x9cm
+board:
+  size: 15x9cm
+  silk: board
 points:
-  VCC: k1
-  GND: j2
-  NSY: m24
-  SET: p22
-  SETN: p23
-  ACC: p32
-  SYD_1: p33
-  RS: p36
-  SYD: p44
-  CLK: p45
+  VCC: a23
+  GND: b24
+  NSY: x21
+  SET: v18
+  SETN: w18
+  ACC: af18
+  SYD_1: ag18
+  RS: aj18
+  SYD: ar18
+  CLK: as18
 parts:
-  U45: dip14 m18 CD40106B
-  U41: dip14 m31 74HC32
-  U44: dip14 m43 74HC74
-  R14: resistor m4 m8 10k
-  S14: switch o4 o7
-  C14: capacitor/ceramic q4 q7 1u
-  R15: resistor m10 m14 100k
-  C15: capacitor/electrolytic o10 o13 10u
+  U45: dip14 r21 CD40106B
+  U41: dip14 ae21 74HC32
+  U44: dip14 aq21 74HC74
+  R14: resistor d21 h21 10k
+  S14: switch d19 g19
+  C14: capacitor/ceramic d17 g17 1u
+  R15: resistor j21 n21 100k
+  C15: capacitor/electrolytic j19 m19 10u
 wires:
-  - k52 -- k47 red
-  - k47 -- m47 red
-  - k47 -- k44 red
-  - k44 -- m44 red
-  - k44 -- k42 red
-  - k42 -- p42 red
-  - k42 -- k31 red
-  - k31 -- m31 red
-  - k31 -- k18 red
-  - k18 -- k14 red
-  - k18 -- m18 red
-  - k14 -- m14 red
-  - k14 -- k8 red
-  - k8 -- m8 red
-  - k8 -- VCC red
-  - VCC -- s1 red
-  - s1 -- s51 red
-  - m44 -- m43 red
-  - p42 -- p43 red
-  - p43 -- q43 red
-  - q43 -- q46 red
-  - q46 -- p46 red
-  - GND -- j46 black
-  - j46 -- m46 black
-  - j46 -- j53 black
-  - j53 -- r53 black
-  - r53 -- r49 black
-  - r49 -- p49 black
-  - r49 -- r38 black
-  - r38 -- l38 black
-  - r38 -- r37 black
-  - r37 -- p37 black
-  - r37 -- r25 black
-  - r25 -- l25 black
-  - r25 -- r24 black
-  - r24 -- r13 black
-  - r24 -- p24 black
-  - r13 -- r7 black
-  - r13 -- o13 black
-  - r7 -- r2 black
-  - r7 -- q7 black
-  - q7 -- o7 black
-  - l25 -- l21 black
-  - l21 -- l19 black
-  - l21 -- m21 black
-  - l19 -- m19 black
-  - l38 -- l33 black
-  - l33 -- m33 black
-  - m33 -- m32 black
-  - m46 -- m45 black
-  - p22 -- q22 yellow
-  - q22 -- q35 yellow
-  - q35 -- p35 yellow
-  - p35 -- o35 yellow
-  - o35 -- o37 yellow
-  - o37 -- m37 yellow
-  - p32 -- o32 blue
-  - o32 -- o34 blue
-  - o34 -- p34 blue
-  - m4 -- n4 gray
-  - n4 -- n14 gray
-  - n4 -- o4 gray
-  - o4 -- q4 gray
-  - n14 -- p14 gray
-  - p14 -- p18 gray
-  - m10 -- o10 orange
-  - o10 -- q10 orange
-  - q10 -- q20 orange
-  - q20 -- p20 orange
-  - p19 -- o19 yellow
-  - o19 -- o17 yellow
-  - o17 -- i17 yellow
-  - i17 -- i39 yellow
-  - i39 -- n39 yellow
-  - n39 -- n36 yellow
-  - n36 -- m36 yellow
-  - p21 -- o21 green
-  - o21 -- o27 green
-  - o27 -- n27 green
-  - n27 -- n35 green
-  - n35 -- m35 green
-  - m23 -- n23 blue
-  - n23 -- n26 blue
-  - n26 -- p26 blue
-  - p26 -- p31 blue
-  - p31 -- t31 blue
-  - t31 -- t47 blue
-  - t47 -- p47 blue
+  - az23 -- au23 red
+  - au23 -- au21 red
+  - au23 -- ar23 red
+  - ar23 -- ar21 red
+  - ar23 -- ap23 red
+  - ap23 -- ap18 red
+  - ap23 -- ae23 red
+  - ae23 -- ae21 red
+  - ae23 -- r23 red
+  - r23 -- n23 red
+  - r23 -- r21 red
+  - n23 -- n21 red
+  - n23 -- h23 red
+  - h23 -- h21 red
+  - h23 -- VCC red
+  - VCC -- a15 red
+  - a15 -- ay15 red
+  - ar21 -- aq21 red
+  - ap18 -- aq18 red
+  - aq18 -- aq17 red
+  - aq17 -- at17 red
+  - at17 -- at18 red
+  - GND -- at24 black
+  - at24 -- at21 black
+  - at24 -- ba24 black
+  - ba24 -- ba16 black
+  - ba16 -- aw16 black
+  - aw16 -- aw18 black
+  - aw16 -- al16 black
+  - al16 -- al22 black
+  - al16 -- ak16 black
+  - ak16 -- ak18 black
+  - ak16 -- y16 black
+  - y16 -- y22 black
+  - y16 -- x16 black
+  - x16 -- m16 black
+  - x16 -- x18 black
+  - m16 -- g16 black
+  - m16 -- m19 black
+  - g16 -- b16 black
+  - g16 -- g17 black
+  - g17 -- g19 black
+  - y22 -- u22 black
+  - u22 -- s22 black
+  - u22 -- u21 black
+  - s22 -- s21 black
+  - al22 -- ag22 black
+  - ag22 -- ag21 black
+  - ag21 -- af21 black
+  - at21 -- as21 black
+  - v18 -- v17 yellow
+  - v17 -- ai17 yellow
+  - ai17 -- ai18 yellow
+  - ai18 -- ai19 yellow
+  - ai19 -- ak19 yellow
+  - ak19 -- ak21 yellow
+  - af18 -- af19 blue
+  - af19 -- ah19 blue
+  - ah19 -- ah18 blue
+  - d21 -- d20 gray
+  - d20 -- n20 gray
+  - d20 -- d19 gray
+  - d19 -- d17 gray
+  - n20 -- n18 gray
+  - n18 -- r18 gray
+  - j21 -- j19 orange
+  - j19 -- j17 orange
+  - j17 -- t17 orange
+  - t17 -- t18 orange
+  - s18 -- s19 yellow
+  - s19 -- q19 yellow
+  - q19 -- q25 yellow
+  - q25 -- am25 yellow
+  - am25 -- am20 yellow
+  - am20 -- aj20 yellow
+  - aj20 -- aj21 yellow
+  - u18 -- u19 green
+  - u19 -- aa19 green
+  - aa19 -- aa20 green
+  - aa20 -- ai20 green
+  - ai20 -- ai21 green
+  - w21 -- w20 blue
+  - w20 -- z20 blue
+  - z20 -- z18 blue
+  - z18 -- ae18 blue
+  - ae18 -- ae14 blue
+  - ae14 -- au14 blue
+  - au14 -- au18 blue
 style:
   check: off
 notes:
-  - mark m24 yellow
-  - mark p22 yellow
-  - mark p23 yellow
-  - mark p32 yellow
-  - mark p33 yellow
-  - mark p36 yellow
-  - mark p44 yellow
-  - mark p45 yellow
+  - mark x21 yellow
+  - mark v18 yellow
+  - mark w18 yellow
+  - mark af18 yellow
+  - mark ag18 yellow
+  - mark aj18 yellow
+  - mark ar18 yellow
+  - mark as18 yellow
   - parts
 ```
 

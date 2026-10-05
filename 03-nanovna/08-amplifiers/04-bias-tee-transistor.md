@@ -98,46 +98,47 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard に組む (バイアス T 2 つ + 2SC1815)
 parts:
-  J1: sma/female-edge i1 j0
-  BAT: battery c4 c1 5
-  Cd: capacitor d5 e5 10u
-  C1: capacitor i3 i5 100n
-  RB: resistor c7 f7 200k
-  L1: inductor f8 i8 100u
-  Q1: transistor j12 j11 j10
-  Rs: resistor c14 f14 100
-  L2: inductor f13 i13 100u
-  C2: capacitor i15 i17 100n
-  J2: sma/female-edge i24 j25
+  J1: sma/female-edge a10 09
+  BAT: battery d16 a16 5
+  Cd: capacitor e15 e14 10u
+  C1: capacitor c10 e10 100n
+  RB: resistor g16 g13 200k
+  L1: inductor h13 h10 100u
+  Q1: transistor l9 k9 j9
+  Rs: resistor n16 n13 100
+  L2: inductor m13 m10 100u
+  C2: capacitor o10 q10 100n
+  J2: sma/female-edge x10 y9
 wires:
-  - c4 -- c5 red
-  - c5 -- c7 red
-  - c7 -- c14 red
-  - d5 -- c5 red
-  - c1 -- e1 black
-  - e1 -- h1 black
-  - h1 -- h0 black
-  - e5 -- e1 black
-  - i1 -- i3
-  - i5 -- i8
-  - i8 -- i10
-  - i10 -- j10
-  - f7 -- f8
-  - i11 -- j11
-  - i11 -- i13
-  - f13 -- f14
-  - i13 -- i15
-  - i17 -- i24
-  - j0 -- j2 black
-  - j2 -- m2 black
-  - m2 -- m12 black
-  - m12 -- m21 black
-  - j12 -- m12 black
-  - j25 -- j21 black
-  - j21 -- m21 black
+  - d16 -- e16 red
+  - e16 -- g16 red
+  - g16 -- n16 red
+  - e15 -- e16 red
+  - a16 -- a14 black
+  - a14 -- a11 black
+  - a11 -- 011 black
+  - e14 -- a14 black
+  - a10 -- c10
+  - e10 -- h10
+  - h10 -- j10
+  - j10 -- j9
+  - g13 -- h13
+  - k10 -- k9
+  - k10 -- m10
+  - m13 -- n13
+  - m10 -- o10
+  - q10 -- x10
+  - 09 -- b9 black
+  - b9 -- b6 black
+  - b6 -- l6 black
+  - l6 -- u6 black
+  - l9 -- l6 black
+  - y9 -- u9 black
+  - u9 -- u6 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/perfboard/04-bias-tee-transistor.svg)

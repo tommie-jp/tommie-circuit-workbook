@@ -48,26 +48,27 @@ S21 (通り抜け) から、GND へ落ちている部品の合成インピーダ
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard の並列治具に電解 + セラミック
 points:
-  GND: l2
+  GND: b7
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 j25
-  C1: capacitor/electrolytic i6 l6 10u
-  C2: capacitor/ceramic i11 l11 100n
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y9
+  C1: capacitor/electrolytic f10 f7 10u
+  C2: capacitor/ceramic k10 k7 100n
 wires:
-  - i1 -- i6
-  - i6 -- i11
-  - i11 -- i24
-  - j0 -- j2 black
-  - j2 -- GND black
-  - GND -- l6 black
-  - l6 -- l11 black
-  - l11 -- l15 black
-  - l15 -- j15 black
-  - j15 -- j25 black
+  - a10 -- f10
+  - f10 -- k10
+  - k10 -- x10
+  - 09 -- b9 black
+  - b9 -- GND black
+  - GND -- f7 black
+  - f7 -- k7 black
+  - k7 -- o7 black
+  - o7 -- o9 black
+  - o9 -- y9 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/08-decoupling.svg)

@@ -218,91 +218,93 @@ notes:
 
 ```perf
 title: 図2b 中波 AM 受信機のユニバーサル基板
-board: 7x5cm
+board:
+  size: 7x5cm
+  silk: board
 parts:
   BAR:
     type: device
-    at: s1
+    at: a0
     label: フェライトバー
     pins: TAP GND TOP
   VC1:
     type: device
-    at: s6
+    at: f0
     label: バリコン 365pF
     pins: A B
   PS:
     type: device
-    at: s23
+    at: w0
     label: 電源 5V
     pins: GND +5V
   OUT:
     type: device
-    at: s19
+    at: s0
     label: 検波出力 OUT
     pins: GND OUT
-  C1: capacitor/ceramic h1 h4 0.01u
-  R1: resistor b5 g5 82k
-  R2: resistor h5 q5 22k
-  Q1: transistor i7 h7 g7 2SC1815
-  Rc1: resistor b7 f7 2.2k
-  RE1: resistor j7 q7 470
-  CE1: capacitor/electrolytic j9 q9 100u
-  C2: capacitor/ceramic g9 g12 0.01u
-  R3: resistor b13 f13 82k
-  R4: resistor g13 q13 22k
-  Q2: transistor h15 g15 f15 2SC1815
-  Rc2: resistor b15 e15 2.2k
-  RE2: resistor i15 q15 470
-  CE2: capacitor/electrolytic i17 q17 100u
-  D1: diode f19 j19 1N60
-  C4: capacitor/ceramic j21 q21 0.01u
-  R5: resistor j23 q23 100k
+  C1: capacitor/ceramic a11 d11 0.01u
+  R1: resistor e17 e12 82k
+  R2: resistor e11 e2 22k
+  Q1: transistor g10 g11 g12 2SC1815
+  Rc1: resistor g17 g13 2.2k
+  RE1: resistor g9 g2 470
+  CE1: capacitor/electrolytic i9 i2 100u
+  C2: capacitor/ceramic i12 l12 0.01u
+  R3: resistor m17 m13 82k
+  R4: resistor m12 m2 22k
+  Q2: transistor o11 o12 o13 2SC1815
+  Rc2: resistor o17 o14 2.2k
+  RE2: resistor o10 o2 470
+  CE2: capacitor/electrolytic q10 q2 100u
+  D1: diode s13 s9 1N60
+  C4: capacitor/ceramic u9 u2 0.01u
+  R5: resistor w9 w2 100k
 wires:
-  - BAR.TAP -- h1
-  - BAR.GND -- q2
-  - VC1.B -- q7
-  - PS.+5V -- b24 red
-  - b24 -- b15 red
-  - PS.GND -- q23 black
-  - OUT.GND -- q19 black
-  - OUT.OUT -- j20
+  - BAR.TAP -- a11
+  - BAR.GND -- b2
+  - VC1.B -- g2
+  - PS.+5V -- x17 red
+  - x17 -- o17 red
+  - PS.GND -- w2 black
+  - OUT.GND -- s2 black
+  - OUT.OUT -- t9
   - BAR.TOP -- VC1.A
-  - h4 -- h5
-  - g5 -- h5
-  - h5 -- h7
-  - f7 -- g7
-  - i7 -- j7
-  - j7 -- j9
-  - g7 -- g9
-  - b5 -- b7 red
-  - b7 -- b13 red
-  - b13 -- b15 red
-  - q2 -- q5 black
-  - q5 -- q7 black
-  - q7 -- q9 black
-  - q9 -- q11 black
-  - q11 -- q13 black
-  - q13 -- q15 black
-  - q15 -- q17 black
-  - q17 -- q19 black
-  - q19 -- q21 black
-  - q21 -- q23 black
-  - g12 -- g13
-  - f13 -- g13
-  - g13 -- g15
-  - e15 -- f15
-  - h15 -- i15
-  - i15 -- i17
-  - f15 -- f19
-  - j19 -- j20
-  - j20 -- j21
-  - j21 -- j23
+  - d11 -- e11
+  - e12 -- e11
+  - e11 -- g11
+  - g13 -- g12
+  - g10 -- g9
+  - g9 -- i9
+  - g12 -- i12
+  - e17 -- g17 red
+  - g17 -- m17 red
+  - m17 -- o17 red
+  - b2 -- e2 black
+  - e2 -- g2 black
+  - g2 -- i2 black
+  - i2 -- k2 black
+  - k2 -- m2 black
+  - m2 -- o2 black
+  - o2 -- q2 black
+  - q2 -- s2 black
+  - s2 -- u2 black
+  - u2 -- w2 black
+  - l12 -- m12
+  - m13 -- m12
+  - m12 -- o12
+  - o14 -- o13
+  - o11 -- o10
+  - o10 -- q10
+  - o13 -- s13
+  - s9 -- t9
+  - t9 -- u9
+  - u9 -- w9
 notes:
-  - mark j20 orange
-  - text k22 orange: CH1
-  - mark g7 green
-  - text f9 green: CH2
-  - mark q11 black
+  - mark t9 orange
+  - text v8 orange: CH1
+  - mark g12 green
+  - text i13 green: CH2
+  - mark k2 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/02-radio.svg)

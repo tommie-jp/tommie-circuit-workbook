@@ -99,44 +99,45 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard に組む (アンプ、アッテネータなし)
 parts:
-  J1: sma/female-edge i1 j0
-  C1: capacitor i3 i5 100n
-  R1: resistor g6 i6 8k2
-  R2: resistor i8 l8 3k9
-  BAT: battery g4 g1 5
-  Q1: transistor j12 j11 j10
-  Rc: resistor g11 i11 270
-  Re: resistor k12 n12 200
-  Ce: capacitor k14 n14 10u
-  C2: capacitor i15 i17 100n
-  J2: sma/female-edge i24 j25
+  J1: sma/female-edge a10 09
+  C1: capacitor c10 e10 100n
+  R1: resistor f12 f10 8k2
+  R2: resistor h10 h7 3k9
+  BAT: battery d12 a12 5
+  Q1: transistor l9 k9 j9
+  Rc: resistor k12 k10 270
+  Re: resistor l8 l5 200
+  Ce: capacitor n8 n5 10u
+  C2: capacitor o10 q10 100n
+  J2: sma/female-edge x10 y9
 wires:
-  - i1 -- i3
-  - i5 -- i6
-  - i6 -- i8
-  - i8 -- i10
-  - i10 -- j10
-  - g4 -- g6 red
-  - g6 -- g11 red
-  - i11 -- j11
-  - i11 -- i15
-  - i17 -- i24
-  - j12 -- k12
-  - k12 -- k14
-  - n12 -- n14 black
-  - g1 -- h1 black
-  - h1 -- h0 black
-  - j0 -- j2 black
-  - j2 -- n2 black
-  - n2 -- n8 black
-  - l8 -- n8 black
-  - n8 -- n12 black
-  - j25 -- j19 black
-  - j19 -- n19 black
-  - n19 -- n14 black
+  - a10 -- c10
+  - e10 -- f10
+  - f10 -- h10
+  - h10 -- j10
+  - j10 -- j9
+  - d12 -- f12 red
+  - f12 -- k12 red
+  - k10 -- k9
+  - k10 -- o10
+  - q10 -- x10
+  - l9 -- l8
+  - l8 -- n8
+  - l5 -- n5 black
+  - a12 -- a11 black
+  - a11 -- 011 black
+  - 09 -- b9 black
+  - b9 -- b5 black
+  - b5 -- h5 black
+  - h7 -- h5 black
+  - h5 -- l5 black
+  - y9 -- s9 black
+  - s9 -- s5 black
+  - s5 -- n5 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/perfboard/02-input-output-return-loss.svg)

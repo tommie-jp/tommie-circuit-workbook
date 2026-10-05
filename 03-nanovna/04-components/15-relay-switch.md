@@ -52,28 +52,29 @@ G5V-2 は実物を上から見て、切り欠きを左に置いた並びで描�
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 閉じた接点 (COM1–NC1)
 points:
-  GND: l2
+  GND: b7
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 j25
-  K1: relay f5
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y9
+  K1: relay e13
 wires:
-  - i1 -- i3
-  - i3 -- j3
-  - j3 -- j8
-  - j8 -- i8
-  - i10 -- j10
-  - j10 -- j14
-  - j14 -- i14
-  - i14 -- i24
-  - j0 -- j2 black
-  - j2 -- GND black
-  - j25 -- j15 black
-  - j15 -- l15 black
-  - l15 -- GND black
+  - a10 -- c10
+  - c10 -- c9
+  - c9 -- h9
+  - h9 -- h10
+  - j10 -- j9
+  - j9 -- n9
+  - n9 -- n10
+  - n10 -- x10
+  - 09 -- b9 black
+  - b9 -- GND black
+  - y9 -- o9 black
+  - o9 -- o7 black
+  - o7 -- GND black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/15-relay-switch-1.svg)
@@ -81,25 +82,26 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図3 開いた接点 (COM1–NO1)
 points:
-  GND: l2
+  GND: b7
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 j25
-  K1: relay f5
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y9
+  K1: relay e13
 wires:
-  - i1 -- i3
-  - i3 -- j3
-  - j3 -- j8
-  - j8 -- i8
-  - i12 -- i24
-  - j0 -- j2 black
-  - j2 -- GND black
-  - j25 -- j15 black
-  - j15 -- l15 black
-  - l15 -- GND black
+  - a10 -- c10
+  - c10 -- c9
+  - c9 -- h9
+  - h9 -- h10
+  - l10 -- x10
+  - 09 -- b9 black
+  - b9 -- GND black
+  - y9 -- o9 black
+  - o9 -- o7 black
+  - o7 -- GND black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/15-relay-switch-2.svg)

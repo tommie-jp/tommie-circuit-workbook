@@ -47,17 +47,18 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard の抵抗 1 個の負荷 (CH0 の先に付ける)
 points:
-  GND: j0
+  GND: 09
 parts:
-  J1: sma/female-edge i1 h0 j0
-  R1: resistor i4 i7 100
+  J1: sma/female-edge a10 011 09
+  R1: resistor d10 g10 100
 wires:
-  - i1 -- i4
-  - i7 -- j7 black
-  - j7 -- j0 black
+  - a10 -- d10
+  - g10 -- g9 black
+  - g9 -- 09 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/perfboard/01-swr-impedance-reading.svg)

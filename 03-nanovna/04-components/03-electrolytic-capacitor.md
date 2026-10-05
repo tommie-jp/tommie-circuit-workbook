@@ -41,18 +41,19 @@ C1 は極性がある。先に書いたピン (J1 側) が +。
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard の直列治具にアルミ電解コンデンサ
 points:
-  GND: j0
+  GND: 09
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 j25
-  C1: capacitor/electrolytic i6 i9 100u
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y9
+  C1: capacitor/electrolytic f10 i10 100u
 wires:
-  - i1 -- i6
-  - i9 -- i24
-  - j0 -- j25 black
+  - a10 -- f10
+  - i10 -- x10
+  - 09 -- y9 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/03-electrolytic-capacitor.svg)

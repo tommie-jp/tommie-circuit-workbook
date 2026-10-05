@@ -59,28 +59,29 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 セラミックフィルタと 270 Ω 2 本
 points:
-  GND: l2
+  GND: b7
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 j25
-  R1: resistor i2 i6 270
-  FL1: ic3 i7 i8 i9 SFELF10M7
-  R2: resistor i10 i14 270
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y9
+  R1: resistor b10 f10 270
+  FL1: ic3 g10 h10 i10 SFELF10M7
+  R2: resistor j10 n10 270
 wires:
-  - i1 -- i2
-  - i6 -- i7
-  - i9 -- i10
-  - i14 -- i24
-  - i8 -- l8 black
-  - j0 -- j2 black
-  - j2 -- GND black
-  - GND -- l8 black
-  - l8 -- l15 black
-  - j25 -- j15 black
-  - j15 -- l15 black
+  - a10 -- b10
+  - f10 -- g10
+  - i10 -- j10
+  - n10 -- x10
+  - h10 -- h7 black
+  - 09 -- b9 black
+  - b9 -- GND black
+  - GND -- h7 black
+  - h7 -- o7 black
+  - y9 -- o9 black
+  - o9 -- o7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/12-ceramic-filter.svg)

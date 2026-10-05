@@ -53,26 +53,27 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 トロイダルの 1:1 トランスを直列の位置に
 points:
-  GND: l2
+  GND: b7
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 j25
-  T1: transformer i6 k6 i11 k11 FT37-43
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y9
+  T1: transformer f10 f8 k10 k8 FT37-43
 wires:
-  - i1 -- i6
-  - i11 -- i24
-  - k6 -- l6 black
-  - k11 -- l11 black
-  - l6 -- GND black
-  - l6 -- l11 black
-  - l11 -- l15 black
-  - j0 -- j2 black
-  - j2 -- GND black
-  - j25 -- j15 black
-  - j15 -- l15 black
+  - a10 -- f10
+  - k10 -- x10
+  - f8 -- f7 black
+  - k8 -- k7 black
+  - f7 -- GND black
+  - f7 -- k7 black
+  - k7 -- o7 black
+  - 09 -- b9 black
+  - b9 -- GND black
+  - y9 -- o9 black
+  - o9 -- o7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/10-small-transformer.svg)

@@ -43,20 +43,21 @@ notes:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard の直列治具にフェライトビーズ
 points:
-  GND: j0
+  GND: 09
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 j25
-  FB1: ferrite-bead i6 i9 200R@164M
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y9
+  FB1: ferrite-bead f10 i10 200R@164M
 wires:
-  - i1 -- i6
-  - i9 -- i24
-  - j0 -- j25 black
+  - a10 -- f10
+  - i10 -- x10
+  - 09 -- y9 black
 notes:
-  - text i22: J2 に SMA の短絡プラグ
+  - text v10: J2 に SMA の短絡プラグ
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/05-ferrite-bead.svg)

@@ -83,28 +83,29 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図3 π 型を perfboard に組む
 parts:
-  J1: sma/female-edge i1 j0
-  C1: capacitor i3 j3 100p
-  L1: inductor i5 i9 560n
-  C2: capacitor i11 j11 100p
-  J2: sma/female-edge i24 j25
+  J1: sma/female-edge a10 09
+  C1: capacitor c10 c9 100p
+  L1: inductor e10 i10 560n
+  C2: capacitor k10 k9 100p
+  J2: sma/female-edge x10 y9
 wires:
-  - i1 -- i3
-  - i3 -- i5
-  - i9 -- i11
-  - i11 -- i24
-  - j0 -- j2 black
-  - j2 -- l2 black
-  - l2 -- l3 black
-  - l3 -- j3 black
-  - l3 -- l11 black
-  - l11 -- j11 black
-  - l11 -- l13 black
-  - j25 -- j13 black
-  - j13 -- l13 black
+  - a10 -- c10
+  - c10 -- e10
+  - i10 -- k10
+  - k10 -- x10
+  - 09 -- b9 black
+  - b9 -- b7 black
+  - b7 -- c7 black
+  - c7 -- c9 black
+  - c7 -- k7 black
+  - k7 -- k9 black
+  - k7 -- m7 black
+  - y9 -- m9 black
+  - m9 -- m7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/10-pi-and-t-1.svg)
@@ -112,26 +113,27 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図4 T 型を perfboard に組む
 parts:
-  J1: sma/female-edge i1 j0
-  L1: inductor i2 i6 270n
-  C1: capacitor i7 k7 220p
-  L2: inductor i8 i12 270n
-  J2: sma/female-edge i24 j25
+  J1: sma/female-edge a10 09
+  L1: inductor b10 f10 270n
+  C1: capacitor g10 g8 220p
+  L2: inductor h10 l10 270n
+  J2: sma/female-edge x10 y9
 wires:
-  - i1 -- i2
-  - i6 -- i7
-  - i7 -- i8
-  - i12 -- i24
-  - j0 -- j2 black
-  - j2 -- l2 black
-  - l2 -- l7 black
-  - l7 -- k7 black
-  - l7 -- l13 black
-  - j25 -- j13 black
-  - j13 -- l13 black
+  - a10 -- b10
+  - f10 -- g10
+  - g10 -- h10
+  - l10 -- x10
+  - 09 -- b9 black
+  - b9 -- b7 black
+  - b7 -- g7 black
+  - g7 -- g8 black
+  - g7 -- m7 black
+  - y9 -- m9 black
+  - m9 -- m7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/10-pi-and-t-2.svg)

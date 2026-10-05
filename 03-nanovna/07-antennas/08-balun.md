@@ -95,24 +95,25 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図3 perfboard に組む (部品面)
 points:
-  ANT_A: i12
-  ANT_B: k12
+  ANT_A: l10
+  ANT_B: l8
 parts:
-  J1: sma/female-edge i1 j0
-  T1: transformer i4 i8 k4 k8 FT37-61
+  J1: sma/female-edge a10 09
+  T1: transformer d10 h10 d8 h8 FT37-61
 wires:
-  - i1 -- i4
-  - j0 -- j2 black
-  - j2 -- k2 black
-  - k2 -- k4 black
-  - i8 -- ANT_A
-  - k8 -- ANT_B
+  - a10 -- d10
+  - 09 -- b9 black
+  - b9 -- b8 black
+  - b8 -- d8 black
+  - h10 -- ANT_A
+  - h8 -- ANT_B
 notes:
-  - text i13: A
-  - text k13: B
+  - text m10: A
+  - text m8: B
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/perfboard/08-balun.svg)

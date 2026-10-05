@@ -118,105 +118,106 @@ style:
 ```perfboard
 board:
   size: 9x7cm
+  silk: board
   slots: on
 title: 図2 perfboardに組む (部品面から見た図)
 points:
-  PWR: a1
-  GND: y1
+  PWR: a26
+  GND: a2
 parts:
   PIR:
     type: device
-    at: -d16
+    at: p31
     label: PIR
     pins: GND VCC OUT
-  Rz: resistor a2 d2 330
-  Dz: zener f3 d3 3V3
-  CDS1: photoresistor d5 f5
-  R1: resistor i5 l5 10k
-  U1: dip14 f8 CD40106
-  U2: dip14 f20 CD4081
-  Rg: resistor n22 q22 220
-  Rgpd: resistor q20 u20 100k
-  Q1: transistor s21 s22 s23 2N7000
-  RLED: resistor a29 d29 330
-  DLED: led e29 g29 red
+  Rz: resistor b26 b23 330
+  Dz: zener c21 c23 3V3
+  CDS1: photoresistor e23 e21
+  R1: resistor e18 e15 10k
+  U1: dip14 h21 CD40106
+  U2: dip14 t21 CD4081
+  Rg: resistor v13 v10 220
+  Rgpd: resistor t10 t6 100k
+  Q1: transistor u8 v8 w8 2N7000
+  RLED: resistor ac26 ac23 330
+  DLED: led ac22 ac20 red
 wires:
   # 5V (a 行・赤)、VL 3.3V (d 行・橙)、GND (y 行・黒) の筋
-  - PWR -- a2 red
-  - a2 -- a17 red
-  - a17 -- a29 red
-  - d2 -- d3 orange
-  - d3 -- d5 orange
-  - d5 -- d8 orange
-  - d8 -- d20 orange
-  - GND -- y3 black
-  - y3 -- y5 black
-  - y5 -- y15 black
-  - y15 -- y20 black
-  - y20 -- y21 black
-  - y21 -- y27 black
+  - PWR -- b26 red
+  - b26 -- q26 red
+  - q26 -- ac26 red
+  - b23 -- c23 orange
+  - c23 -- e23 orange
+  - e23 -- h23 orange
+  - h23 -- t23 orange
+  - GND -- c2 black
+  - c2 -- e2 black
+  - e2 -- o2 black
+  - o2 -- t2 black
+  - t2 -- u2 black
+  - u2 -- aa2 black
   # Dz のアノードと R1 の下端を GND へ
-  - f3 -- y3 black
-  - l5 -- y5 black
+  - c21 -- c2 black
+  - e15 -- e2 black
   # 暗さの分圧 (CDS1・R1) を U1 の PIN 1 へ
-  - f5 -- i5
-  - i5 -- i8
+  - e21 -- e18
+  - e18 -- h18
   # U1・U2 の PIN 14 (VDD) を VL へ
-  - f8 -- d8 orange
-  - f20 -- d20 orange
+  - h21 -- h23 orange
+  - t21 -- t23 orange
   # U1 (40106) の使わない入力: PIN 13・11・9 は e 行、PIN 3・5 は j 行でまとめ、15 列で PIN 7 と結んで GND へ
-  - f9 -- e9 black
-  - e9 -- e11 black
-  - f11 -- e11 black
-  - e11 -- e13 black
-  - f13 -- e13 black
-  - e13 -- e15 black
-  - e15 -- j15 black
-  - i10 -- j10 black
-  - j10 -- j12 black
-  - i12 -- j12 black
-  - j12 -- j14 black
-  - i14 -- j14 black
-  - j14 -- j15 black
-  - j15 -- y15 black
+  - i21 -- i22 black
+  - i22 -- k22 black
+  - k21 -- k22 black
+  - k22 -- m22 black
+  - m21 -- m22 black
+  - m22 -- o22 black
+  - o22 -- o17 black
+  - j18 -- j17 black
+  - j17 -- l17 black
+  - l18 -- l17 black
+  - l17 -- n17 black
+  - n18 -- n17 black
+  - n17 -- o17 black
+  - o17 -- o2 black
   # U2 (4081) の使わない入力: PIN 13・12・9・8 は e 行、PIN 5・6 は j 行でまとめ、27 列で PIN 7 と結んで GND へ
-  - f21 -- e21 black
-  - e21 -- e22 black
-  - f22 -- e22 black
-  - e22 -- e25 black
-  - f25 -- e25 black
-  - e25 -- e26 black
-  - f26 -- e26 black
-  - e26 -- e27 black
-  - e27 -- j27 black
-  - i24 -- j24 black
-  - j24 -- j25 black
-  - i25 -- j25 black
-  - j25 -- j26 black
-  - i26 -- j26 black
-  - j26 -- j27 black
-  - j27 -- y27 black
+  - u21 -- u22 black
+  - u22 -- v22 black
+  - v21 -- v22 black
+  - v22 -- y22 black
+  - y21 -- y22 black
+  - y22 -- z22 black
+  - z21 -- z22 black
+  - z22 -- aa22 black
+  - aa22 -- aa17 black
+  - x18 -- x17 black
+  - x17 -- y17 black
+  - y18 -- y17 black
+  - y17 -- z17 black
+  - z18 -- z17 black
+  - z17 -- aa17 black
+  - aa17 -- aa2 black
   # PIR: VCC は 5V の筋へ、GND は U1 の GND の角 (e15) へ、OUT は U2 の PIN 1 へ
-  - PIR.VCC -- a17 red
-  - PIR.GND -- e16 black
-  - e16 -- e15 black
-  - PIR.OUT -- k18 green
-  - k18 -- k20 green
-  - k20 -- i20 green
+  - PIR.VCC -- q26 red
+  - PIR.GND -- p22 black
+  - p22 -- o22 black
+  - PIR.OUT -- r16 green
+  - r16 -- t16 green
+  - t16 -- t18 green
   # U1 の PIN 2 (暗いと H) → U2 の PIN 2
-  - i9 -- l9 blue
-  - l9 -- l21 blue
-  - l21 -- i21 blue
+  - i18 -- i15 blue
+  - i15 -- u15 blue
+  - u15 -- u18 blue
   # U2 の PIN 3 (AND の出力) → Rg → Q1 のゲート。Rgpd でゲートを GND へ
-  - i22 -- n22 yellow
-  - q22 -- s22
-  - q22 -- q20
-  - u20 -- y20 black
+  - v18 -- v13 yellow
+  - v10 -- v8
+  - v10 -- t10
+  - t6 -- t2 black
   # Q1: ソースは GND へ、ドレインは DLED のカソードへ
-  - s21 -- y21 black
-  - s23 -- s29
-  - s29 -- g29
-  - d29 -- e29
+  - u8 -- u2 black
+  - w8 -- ac8
+  - ac8 -- ac20
+  - ac23 -- ac22
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/perfboard/02-motion-light.svg)

@@ -60,28 +60,29 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard に組む (整合回路 + ダミー負荷)
 parts:
-  J1: sma/female-edge i1 j0
-  C1: capacitor i3 k3 68p
-  L1: inductor i5 i9 120n
-  R1: resistor i11 i13 51
-  R2: resistor k11 k13 51
-  C2: capacitor i15 k15 220p
+  J1: sma/female-edge a10 09
+  C1: capacitor c10 c8 68p
+  L1: inductor e10 i10 120n
+  R1: resistor k10 m10 51
+  R2: resistor k8 m8 51
+  C2: capacitor o10 o8 220p
 wires:
-  - i1 -- i3
-  - i3 -- i5
-  - i9 -- i11
-  - i11 -- k11
-  - i13 -- i15
-  - i13 -- k13
-  - k3 -- l3 black
-  - l3 -- l15 black
-  - l15 -- k15 black
-  - j0 -- j2 black
-  - j2 -- l2 black
-  - l2 -- l3 black
+  - a10 -- c10
+  - c10 -- e10
+  - i10 -- k10
+  - k10 -- k8
+  - m10 -- o10
+  - m10 -- m8
+  - c8 -- c7 black
+  - c7 -- o7 black
+  - o7 -- o8 black
+  - 09 -- b9 black
+  - b9 -- b7 black
+  - b7 -- c7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/perfboard/04-l-network-matching.svg)

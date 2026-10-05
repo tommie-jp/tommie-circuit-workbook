@@ -44,21 +44,22 @@ notes:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 2 穴離して並べた 2 本の線 (つなげない)
 points:
-  GND: j0
+  GND: 09
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 j25
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y9
 wires:
-  - i1 -- i13
-  - i24 -- g24
-  - g24 -- g4
-  - j0 -- j25 black
+  - a10 -- m10
+  - x10 -- x12
+  - x12 -- d12
+  - 09 -- y9 black
 notes:
-  - box g4 i13 blue
-  - text -a8: 並んだ 10 穴 (約 2.3 cm)
+  - box d12 m10 blue
+  - text h20: 並んだ 10 穴 (約 2.3 cm)
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/16-perfboard-capacitance.svg)

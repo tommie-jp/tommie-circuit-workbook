@@ -331,78 +331,79 @@ wires:
 title: 図4b 入力増幅・基準電圧・しきい値の基板 (ユニバーサル基板)
 board:
   size: 7x5cm
+  silk: board
   h: 1.6mm
   material: FR-4
 parts:
   PS:
     type: device
-    at: -c22
+    at: v22
     label: 電源 5V
     pins: +5V GND
   IN:
     type: device
-    at: -c3
+    at: c22
     label: 検波出力
     pins: IN GND
   LINK:
     type: device
-    at: -c7
+    at: g22
     label: 図5 の基板へ
     pins: GND AF VB TH
-  U1: dip8 e11 LM358
-  Cin: capacitor/ceramic m10 m13 1u
-  Rin: resistor j14 m14 10k
-  Rf: resistor k8 k12 100k
-  Ra: resistor b16 d16 10k
-  Rb: resistor f16 o16 10k
-  Cb: capacitor/electrolytic f18 o18 10u
-  R6: resistor b19 e19 6.2k
-  VR1: potentiometer/trimmer g19 g20 g21 2k
-  R7: resistor i21 o21 5.6k
+  U1: dip8 k14 LM358
+  Cin: capacitor/ceramic j6 m6 1u
+  Rin: resistor n9 n6 10k
+  Rf: resistor h8 l8 100k
+  Ra: resistor p17 p15 10k
+  Rb: resistor p13 p4 10k
+  Cb: capacitor/electrolytic r13 r4 10u
+  R6: resistor s17 s14 6.2k
+  VR1: potentiometer/trimmer s12 t12 u12 2k
+  R7: resistor u10 u4 5.6k
 wires:
-  - PS.+5V -- b22 red
-  - b22 -- b19 red
-  - b19 -- b16 red
-  - b16 -- b11 red
-  - e11 -- b11 red
-  - PS.GND -- o23 black
-  - o23 -- o21 black
-  - o21 -- o18 black
-  - o18 -- o16 black
-  - o16 -- o15 black
-  - o15 -- o4 black
-  - IN.GND -- a4 black
-  - a4 -- o4 black
-  - LINK.GND -- a7 black
-  - a7 -- a4 black
-  - LINK.VB -- a9 green
-  - a9 -- d9 green
-  - d9 -- d12 green
-  - d12 -- e12 green
-  - e12 -- e13 green
-  - e13 -- h13 green
-  - LINK.AF -- a8 white
-  - a8 -- i8 white
-  - i8 -- i11 white
-  - i11 -- h11 white
-  - i8 -- k8 white
-  - h12 -- j12 orange
-  - j12 -- k12 orange
-  - j12 -- j14 orange
-  - h14 -- h15 black
-  - h15 -- o15 black
-  - IN.IN -- m3 yellow
-  - m3 -- m10 yellow
-  - m13 -- m14 orange
-  - e14 -- e16 orange
-  - d16 -- e16 orange
-  - e16 -- f16 orange
-  - f16 -- f18 orange
-  - e19 -- g19 orange
-  - g21 -- i21 orange
-  - LINK.TH -- a10 purple
-  - a10 -- a20 purple
-  - a20 -- g20 purple
+  - PS.+5V -- v17 red
+  - v17 -- s17 red
+  - s17 -- p17 red
+  - p17 -- k17 red
+  - k14 -- k17 red
+  - PS.GND -- w4 black
+  - w4 -- u4 black
+  - u4 -- r4 black
+  - r4 -- p4 black
+  - p4 -- o4 black
+  - o4 -- d4 black
+  - IN.GND -- d18 black
+  - d18 -- d4 black
+  - LINK.GND -- g18 black
+  - g18 -- d18 black
+  - LINK.VB -- i18 green
+  - i18 -- i15 green
+  - i15 -- l15 green
+  - l15 -- l14 green
+  - l14 -- m14 green
+  - m14 -- m11 green
+  - LINK.AF -- h18 white
+  - h18 -- h10 white
+  - h10 -- k10 white
+  - k10 -- k11 white
+  - h10 -- h8 white
+  - l11 -- l9 orange
+  - l9 -- l8 orange
+  - l9 -- n9 orange
+  - n11 -- o11 black
+  - o11 -- o4 black
+  - IN.IN -- c6 yellow
+  - c6 -- j6 yellow
+  - m6 -- n6 orange
+  - n14 -- p14 orange
+  - p15 -- p14 orange
+  - p14 -- p13 orange
+  - p13 -- r13 orange
+  - s14 -- s12 orange
+  - u12 -- u10 orange
+  - LINK.TH -- j18 purple
+  - j18 -- t18 purple
+  - t18 -- t12 purple
 style:
   back: on
 ```
@@ -493,71 +494,72 @@ wires:
 title: 図5b 帯域通過フィルタの基板 (ユニバーサル基板)
 board:
   size: 7x5cm
+  silk: board
   h: 1.6mm
   material: FR-4
 points:
-  P_440: a9
-  V_5V: a13
-  P_880: a16
-  AF_440: r3
-  VB: r8
-  GND: r10
-  AF_880: r20
+  P_440: i18
+  V_5V: m18
+  P_880: p18
+  AF_440: c1
+  VB: h1
+  GND: j1
+  AF_880: t1
 parts:
-  U3: dip8 e13 r90 LM358
-  R1L: resistor j3 m3 75k
-  C2L: capacitor/ceramic c6 c3 22n
-  C1L: capacitor/ceramic f6 f3 22n
-  R2L: resistor i8 i3 2k
-  R3L: resistor c7 f7 300k
-  R1H: resistor j20 m20 91k
-  C2H: capacitor/ceramic c17 c20 10n
-  C1H: capacitor/ceramic g17 g20 10n
-  R2H: resistor i17 i20 2k
-  R3H: resistor c16 g16 330k
+  U3: dip8 m14 r90 LM358
+  R1L: resistor c9 c6 75k
+  C2L: capacitor/ceramic f16 c16 22n
+  C1L: capacitor/ceramic f13 c13 22n
+  R2L: resistor h10 c10 2k
+  R3L: resistor g16 g13 300k
+  R1H: resistor t9 t6 91k
+  C2H: capacitor/ceramic q16 t16 10n
+  C1H: capacitor/ceramic q12 t12 10n
+  R2H: resistor q10 t10 2k
+  R3H: resistor p16 p12 330k
 wires:
-  - V_5V -- e13 red
-  - GND -- h10 black
-  - VB -- i8 green
-  - i9 -- i8 green
-  - g9 -- i9 green
-  - g10 -- g9 green
-  - g10 -- g12 green
-  - g12 -- h12 green
-  - h12 -- h13 green
-  - h13 -- h14 green
-  - h14 -- i14 green
-  - i14 -- i17 green
-  - e10 -- e9 orange
-  - e9 -- c9 orange
-  - c9 -- c7 orange
-  - c7 -- c6 orange
-  - P_440 -- c9 orange
-  - f10 -- f7 orange
-  - f7 -- f6 orange
-  - c3 -- f3 white
-  - f3 -- i3 white
-  - i3 -- j3 white
-  - AF_440 -- m3 white
-  - f13 -- f14 orange
-  - f14 -- c14 orange
-  - c14 -- c16 orange
-  - c16 -- c17 orange
-  - P_880 -- c16 orange
-  - g13 -- g16 orange
-  - g16 -- g17 orange
-  - c20 -- g20 white
-  - g20 -- i20 white
-  - i20 -- j20 white
-  - AF_880 -- m20 white
+  - V_5V -- m14 red
+  - GND -- j11 black
+  - VB -- h10 green
+  - i10 -- h10 green
+  - i12 -- i10 green
+  - j12 -- i12 green
+  - j12 -- l12 green
+  - l12 -- l11 green
+  - l11 -- m11 green
+  - m11 -- n11 green
+  - n11 -- n10 green
+  - n10 -- q10 green
+  - j14 -- i14 orange
+  - i14 -- i16 orange
+  - i16 -- g16 orange
+  - g16 -- f16 orange
+  - P_440 -- i16 orange
+  - j13 -- g13 orange
+  - g13 -- f13 orange
+  - c16 -- c13 white
+  - c13 -- c10 white
+  - c10 -- c9 white
+  - AF_440 -- c6 white
+  - m13 -- n13 orange
+  - n13 -- n16 orange
+  - n16 -- p16 orange
+  - p16 -- q16 orange
+  - P_880 -- p16 orange
+  - m12 -- p12 orange
+  - p12 -- q12 orange
+  - t16 -- t12 white
+  - t12 -- t10 white
+  - t10 -- t9 white
+  - AF_880 -- t6 white
 notes:
-  - text b10: P440
-  - text b14: 5V
-  - text b17: P880
-  - text s4: AF440
-  - text s9: VB
-  - text s11: GND
-  - text s21: AF880
+  - text j17: P440
+  - text n17: 5V
+  - text q17: P880
+  - text d0: AF440
+  - text i0: VB
+  - text k0: GND
+  - text u0: AF880
 style:
   back: on
 ```
@@ -652,80 +654,81 @@ wires:
 title: 図6b 整流と平滑、比較器の基板 (ユニバーサル基板)
 board:
   size: 7x5cm
+  silk: board
   h: 1.6mm
   material: FR-4
 points:
-  P_440: a2
-  T_440: a8
-  V_5V: a10
-  TH: a12
-  T_880: a15
-  P_880: a22
-  GND: r11
+  P_440: b18
+  T_440: h18
+  V_5V: j18
+  TH: l18
+  T_880: o18
+  P_880: v18
+  GND: k1
 parts:
-  U4: dip8 e13 r90 LM393
-  D1L: diode g2 g5
-  RsL: resistor g6 g9 47k
-  RhL: resistor f4 f7 2.2M
-  CpL: capacitor/ceramic h5 l5 1u
-  RpL: resistor h7 l7 100k
-  RpuL: resistor b9 e9 10k
-  D1H: diode h22 h18
-  RsH: resistor h14 h17 47k
-  RhH: resistor g19 g16 2.2M
-  CpH: capacitor/ceramic i18 m18 1u
-  RpH: resistor i16 m16 100k
-  RpuH: resistor b14 f14 10k
+  U4: dip8 m14 r90 LM393
+  D1L: diode b12 e12
+  RsL: resistor f12 i12 47k
+  RhL: resistor d13 g13 2.2M
+  CpL: capacitor/ceramic e11 e7 1u
+  RpL: resistor g11 g7 100k
+  RpuL: resistor i17 i14 10k
+  D1H: diode v11 r11
+  RsH: resistor n11 q11 47k
+  RhH: resistor s12 p12 2.2M
+  CpH: capacitor/ceramic r10 r6 1u
+  RpH: resistor p10 p6 100k
+  RpuH: resistor n17 n13 10k
 wires:
-  - V_5V -- b10 red
-  - b9 -- b10 red
-  - b10 -- b13 red
-  - b13 -- b14 red
-  - e13 -- b13 red
-  - GND -- l11 black
-  - l5 -- l7 black
-  - l7 -- l11 black
-  - l11 -- m11 black
-  - m11 -- m16 black
-  - m16 -- m18 black
-  - h10 -- h11 black
-  - h11 -- l11 black
-  - e10 -- e9 orange
-  - e9 -- e8 orange
-  - T_440 -- e8 orange
-  - e8 -- e4 orange
-  - e4 -- f4 orange
-  - P_440 -- g2 white
-  - g10 -- g9 white
-  - g9 -- f9 white
-  - f9 -- f7 white
-  - g5 -- g6 white
-  - g5 -- h5 white
-  - h5 -- h7 white
-  - f10 -- f12 purple
-  - f12 -- g12 purple
-  - g12 -- g13 purple
-  - TH -- f12 purple
-  - f13 -- f14 orange
-  - f14 -- f15 orange
-  - T_880 -- f15 orange
-  - f15 -- f19 orange
-  - f19 -- g19 orange
-  - h13 -- h14 white
-  - h14 -- g14 white
-  - g14 -- g16 white
-  - h18 -- h17 white
-  - h18 -- i18 white
-  - i18 -- i16 white
-  - P_880 -- h22 white
+  - V_5V -- j17 red
+  - i17 -- j17 red
+  - j17 -- m17 red
+  - m17 -- n17 red
+  - m14 -- m17 red
+  - GND -- k7 black
+  - e7 -- g7 black
+  - g7 -- k7 black
+  - k7 -- k6 black
+  - k6 -- p6 black
+  - p6 -- r6 black
+  - j11 -- k11 black
+  - k11 -- k7 black
+  - j14 -- i14 orange
+  - i14 -- h14 orange
+  - T_440 -- h14 orange
+  - h14 -- d14 orange
+  - d14 -- d13 orange
+  - P_440 -- b12 white
+  - j12 -- i12 white
+  - i12 -- i13 white
+  - i13 -- g13 white
+  - e12 -- f12 white
+  - e12 -- e11 white
+  - e11 -- g11 white
+  - j13 -- l13 purple
+  - l13 -- l12 purple
+  - l12 -- m12 purple
+  - TH -- l13 purple
+  - m13 -- n13 orange
+  - n13 -- o13 orange
+  - T_880 -- o13 orange
+  - o13 -- s13 orange
+  - s13 -- s12 orange
+  - m11 -- n11 white
+  - n11 -- n12 white
+  - n12 -- p12 white
+  - r11 -- q11 white
+  - r11 -- r10 white
+  - r10 -- p10 white
+  - P_880 -- v11 white
 notes:
-  - text b3: P440
-  - text b9: T440
-  - text b11: 5V
-  - text b13: TH
-  - text b16: T880
-  - text b23: P880
-  - text s12: GND
+  - text c17: P440
+  - text i17: T440
+  - text k17: 5V
+  - text m17: TH
+  - text p17: T880
+  - text w17: P880
+  - text l0: GND
 style:
   back: on
 ```

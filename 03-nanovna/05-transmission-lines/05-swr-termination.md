@@ -48,22 +48,23 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard の終端 (100 Ω 2 本並列で 50 Ω)
 points:
-  GND: m2
+  GND: b6
 parts:
-  J1: sma/female-edge i1 h0 j0
-  R1: resistor i4 i7 100
-  R2: resistor l4 l7 100
+  J1: sma/female-edge a10 011 09
+  R1: resistor d10 g10 100
+  R2: resistor d7 g7 100
 wires:
-  - i1 -- i4
-  - i4 -- l4
-  - i7 -- l7 black
-  - l7 -- m7 black
-  - m7 -- GND black
-  - j0 -- j2 black
-  - j2 -- GND black
+  - a10 -- d10
+  - d10 -- d7
+  - g10 -- g7 black
+  - g7 -- g6 black
+  - g6 -- GND black
+  - 09 -- b9 black
+  - b9 -- GND black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/perfboard/05-swr-termination.svg)

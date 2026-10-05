@@ -55,28 +55,29 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard に組む (端面 SMA 2 つ)
 parts:
-  J1: sma/female-edge i1 j0
-  R1: resistor i3 k3 100
-  R2: resistor i5 i7 68
-  R3: resistor i9 k9 100
-  J2: sma/female-edge i24 j25
+  J1: sma/female-edge a10 09
+  R1: resistor c10 c8 100
+  R2: resistor e10 g10 68
+  R3: resistor i10 i8 100
+  J2: sma/female-edge x10 y9
 wires:
-  - i1 -- i3
-  - i3 -- i5
-  - i7 -- i9
-  - i9 -- i24
-  - j0 -- j2 black
-  - j2 -- l2 black
-  - l2 -- l3 black
-  - l3 -- k3 black
-  - l3 -- l9 black
-  - l9 -- k9 black
-  - l9 -- l15 black
-  - j25 -- j15 black
-  - j15 -- l15 black
+  - a10 -- c10
+  - c10 -- e10
+  - g10 -- i10
+  - i10 -- x10
+  - 09 -- b9 black
+  - b9 -- b7 black
+  - b7 -- c7 black
+  - c7 -- c8 black
+  - c7 -- i7 black
+  - i7 -- i8 black
+  - i7 -- o7 black
+  - y9 -- o9 black
+  - o9 -- o7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/perfboard/03-attenuator-s-parameters.svg)

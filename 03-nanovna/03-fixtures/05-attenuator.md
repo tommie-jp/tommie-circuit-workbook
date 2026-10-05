@@ -57,28 +57,29 @@ notes:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard の 10 dB アッテネータ
 points:
-  GND: l2
+  GND: b7
 parts:
-  J1: sma/female-edge i1 h0 j0
-  R1: resistor i3 i6 27
-  R2: resistor i8 k8 36
-  R3: resistor i10 i13 27
-  J2: sma/female-edge i24 j25
+  J1: sma/female-edge a10 011 09
+  R1: resistor c10 f10 27
+  R2: resistor h10 h8 36
+  R3: resistor j10 m10 27
+  J2: sma/female-edge x10 y9
 wires:
-  - i1 -- i3
-  - i6 -- i8
-  - i8 -- i10
-  - i13 -- i24
-  - k8 -- l8 black
-  - l8 -- GND black
-  - j0 -- j2 black
-  - j2 -- GND black
-  - j25 -- j15 black
-  - j15 -- l15 black
-  - l15 -- l8 black
+  - a10 -- c10
+  - f10 -- h10
+  - h10 -- j10
+  - m10 -- x10
+  - h8 -- h7 black
+  - h7 -- GND black
+  - 09 -- b9 black
+  - b9 -- GND black
+  - y9 -- o9 black
+  - o9 -- o7 black
+  - o7 -- h7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/05-attenuator.svg)

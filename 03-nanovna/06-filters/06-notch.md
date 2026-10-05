@@ -52,24 +52,25 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard に組む (端面 SMA 2 つ)
 parts:
-  J1: sma/female-edge i1 j0
-  L1: inductor i8 k8 47n
-  C1: capacitor l8 n8 56p
-  J2: sma/female-edge i24 j25
+  J1: sma/female-edge a10 09
+  L1: inductor h10 h8 47n
+  C1: capacitor h7 h5 56p
+  J2: sma/female-edge x10 y9
 wires:
-  - i1 -- i8
-  - i8 -- i24
-  - k8 -- l8
-  - n8 -- p8
-  - j0 -- j2 black
-  - j2 -- p2 black
-  - j25 -- j14 black
-  - j14 -- p14 black
-  - p2 -- p8 black
-  - p8 -- p14 black
+  - a10 -- h10
+  - h10 -- x10
+  - h8 -- h7
+  - h5 -- h3
+  - 09 -- b9 black
+  - b9 -- b3 black
+  - y9 -- n9 black
+  - n9 -- n3 black
+  - b3 -- h3 black
+  - h3 -- n3 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/06-notch.svg)

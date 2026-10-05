@@ -83,52 +83,53 @@ notes:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 SBL-1+ と端面 SMA 3 つ (部品面。ピンは 2 穴おき)
 points:
-  P8LO: i9
-  P6G: i11
-  P4IF: i13
-  P2G: i15
-  P7G: g9
-  P5G: g11
-  P3IF: g13
-  P1RF: g15
+  P8LO: i10
+  P6G: k10
+  P4IF: m10
+  P2G: o10
+  P7G: i12
+  P5G: k12
+  P3IF: m12
+  P1RF: o12
 parts:
-  J1: sma/female-edge i1 j0
-  J2: sma/female-edge g24 h25
-  J3: sma/female-edge k24 l25
+  J1: sma/female-edge a10 09
+  J2: sma/female-edge x12 y11
+  J3: sma/female-edge x8 y7
 wires:
-  - i1 -- P8LO
-  - P1RF -- g24
+  - a10 -- P8LO
+  - P1RF -- x12
   - P3IF -- P4IF
-  - P4IF -- k13
-  - k13 -- k24
-  - d11 -- d9 black
-  - d9 -- d1 black
-  - d1 -- h1 black
-  - h1 -- h0 black
-  - P7G -- d9 black
-  - P5G -- d11 black
-  - j0 -- j2 black
-  - j2 -- l2 black
-  - l2 -- l10 black
-  - l10 -- l25 black
-  - P6G -- i10 black
-  - i10 -- l10 black
-  - P2G -- i17 black
-  - i17 -- h17 black
-  - h17 -- h25 black
+  - P4IF -- m8
+  - m8 -- x8
+  - k15 -- i15 black
+  - i15 -- a15 black
+  - a15 -- a11 black
+  - a11 -- 011 black
+  - P7G -- i15 black
+  - P5G -- k15 black
+  - 09 -- b9 black
+  - b9 -- b7 black
+  - b7 -- j7 black
+  - j7 -- y7 black
+  - P6G -- j10 black
+  - j10 -- j7 black
+  - P2G -- q10 black
+  - q10 -- q11 black
+  - q11 -- y11 black
 notes:
-  - box f8 j16 blue
-  - text g9 mirror: 7
-  - text g11 mirror: 5
-  - text g13: 3
-  - text g15: 1
-  - text i9 mirror: 8
-  - text i11 mirror: 6
-  - text i14 mirror: 4
-  - text i15: 2
+  - box h13 p9 blue
+  - text i12 mirror: 7
+  - text k12 mirror: 5
+  - text m12: 3
+  - text o12: 1
+  - text i10 mirror: 8
+  - text k10 mirror: 6
+  - text n10 mirror: 4
+  - text o10: 2
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/perfboard/07-mixer-isolation.svg)

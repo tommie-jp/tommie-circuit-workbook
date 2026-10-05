@@ -180,38 +180,40 @@ notes:
 
 ```perf
 title: 図2b Pico 2 と ADC の前処理のユニバーサル基板
-board: 7x5cm
+board:
+  size: 7x5cm
+  silk: board
 style:
   check: off
 parts:
   DET:
     type: device
-    at: -c1
+    at: a22
     label: 検波出力
     pins: GND OUT
-  MCU: pico2 j5
-  C1: capacitor/ceramic b2 b6 0.1u
-  Ra: resistor b8 f8 220k
-  Rb: resistor b10 h10 220k
-  Cf: capacitor/ceramic b12 h12 1n
+  MCU: pico2 e9
+  C1: capacitor/ceramic b17 f17 0.1u
+  Ra: resistor h17 h13 220k
+  Rb: resistor j17 j11 220k
+  Cf: capacitor/ceramic l17 l11 1n
 wires:
-  - DET.GND -- h1 black
-  - DET.OUT -- b2
-  - h1 -- h6 black
-  - h6 -- h10 black
-  - h10 -- h12 black
-  - j12 -- h12 black
-  - b6 -- b8 white
-  - b8 -- b10 white
-  - b10 -- b12 white
-  - b12 -- b14 white
-  - j14 -- b14 white
-  - f8 -- f9 red
-  - j9 -- f9 red
+  - DET.GND -- a11 black
+  - DET.OUT -- b17
+  - a11 -- f11 black
+  - f11 -- j11 black
+  - j11 -- l11 black
+  - l9 -- l11 black
+  - f17 -- h17 white
+  - h17 -- j17 white
+  - j17 -- l17 white
+  - l17 -- n17 white
+  - n9 -- n17 white
+  - h13 -- i13 red
+  - i9 -- i13 red
 notes:
-  - mark b14 orange
-  - text d16 orange: ADC0 (CH1)
-  - mark h6 black
+  - mark n17 orange
+  - text p15 orange: ADC0 (CH1)
+  - mark f11 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/06-mcu.svg)

@@ -62,21 +62,22 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 自作 Load (3-4 と同じ)
 points:
-  GND: l3
+  GND: c7
 parts:
-  J1: sma/female-edge i1 h0 j0
-  R1: resistor i3 l3 100
-  R2: resistor i5 l5 100
+  J1: sma/female-edge a10 011 09
+  R1: resistor c10 c7 100
+  R2: resistor e10 e7 100
 wires:
-  - i1 -- i3
-  - i3 -- i5
-  - j0 -- j2 black
-  - j2 -- l2 black
-  - l2 -- l3 black
-  - l3 -- l5 black
+  - a10 -- c10
+  - c10 -- e10
+  - 09 -- b9 black
+  - b9 -- b7 black
+  - b7 -- c7 black
+  - c7 -- e7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/09-sma-repeatability.svg)

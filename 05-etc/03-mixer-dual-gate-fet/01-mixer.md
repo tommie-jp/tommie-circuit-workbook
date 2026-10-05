@@ -295,97 +295,98 @@ wires:
 title: 図03 ユニバーサル基板に組む (部品面から見た図。下は半田面)
 board:
   size: 7x5cm
+  silk: board
   h: 1.6mm
   material: FR-4
   slots: on
 parts:
-  U1: dip4 f14 3SK291
-  R1: resistor c3 c6 51
-  R2: resistor g11 d11 1M
-  R3: resistor f4 i4 51
-  R4: resistor i16 f16 33k
-  R5: resistor n16 q16 13k
-  R6: resistor g8 j8 150k
-  R7: resistor b21 b24 2k
-  VR1: potentiometer/trimmer k9 k10 k11 200k
-  C1: capacitor/ceramic e3 e6 10n
-  C2: capacitor/ceramic n7 n10 10n
-  C3: capacitor/ceramic b15 e15 560p
-  C4: capacitor/ceramic b17 b20 10n
-  C5: capacitor/ceramic h20 h23 1.2n
-  C6: capacitor/ceramic j2 m2 100n
-  C7: capacitor/electrolytic j4 m4 10u
-  L1: inductor b13 e13 220u
-  L2: inductor i20 i23 100u
-  FL1: sip3 d20 r90 SFU455B
-  J1: sma/female-edge c1 b0 d0
-  J2: sma/female-edge i1 h0 j0
-  J3: sma/female-edge i24 h25 j25
-  J4: usb-c/female n2 n3 n4 n5
+  U1: dip4 n13 3SK291
+  R1: resistor c16 f16 51
+  R2: resistor k12 k15 1M
+  R3: resistor d13 d10 51
+  R4: resistor p10 p13 33k
+  R5: resistor p5 p2 13k
+  R6: resistor h12 h9 150k
+  R7: resistor u17 x17 2k
+  VR1: potentiometer/trimmer i8 j8 k8 200k
+  C1: capacitor/ceramic c14 f14 10n
+  C2: capacitor/ceramic g5 j5 10n
+  C3: capacitor/ceramic o17 o14 560p
+  C4: capacitor/ceramic q17 t17 10n
+  C5: capacitor/ceramic t11 w11 1.2n
+  C6: capacitor/ceramic b9 b6 100n
+  C7: capacitor/electrolytic d9 d6 10u
+  L1: inductor m17 m14 220u
+  L2: inductor t10 w10 100u
+  FL1: sip3 t15 r90 SFU455B
+  J1: sma/female-edge a16 017 015
+  J2: sma/female-edge a10 011 09
+  J3: sma/female-edge x10 y11 j25
+  J4: usb-c/female b5 c5 d5 e5
 wires:
-  - n5 -- j5 red
-  - j5 -- j4 red
-  - j2 -- b2 red
-  - b2 -- b11 red
-  - b11 -- b13 red
-  - b13 -- b15 red
-  - b15 -- b16 red
-  - j2 -- j4 red
-  - d0 -- d1 black
-  - d1 -- f1 black
-  - f1 -- h1 black
-  - h0 -- h1 black
-  - j0 -- j1 black
-  - j1 -- m1 black
-  - m1 -- m2 black
-  - n2 -- m2 black
-  - m2 -- m4 black
-  - m4 -- m6 black
-  - m6 -- q6 black
-  - f1 -- f4 black
-  - q6 -- q12 black
-  - q12 -- q16 black
-  - q16 -- q24 black
-  - j25 -- j24 black
-  - j24 -- q24 black
-  - c6 -- c12 black
-  - c12 -- f12 black
-  - f14 -- f12 black
-  - f12 -- k12 black
-  - k12 -- q12 black
-  - k12 -- k11 black
-  - k11 -- k10 black
-  - e20 -- e24 black
-  - b24 -- e24 black
-  - e24 -- h24 black
-  - h23 -- h24 black
-  - h24 -- h25 black
-  - c1 -- c3 white
-  - c3 -- e3 white
-  - g11 -- i11 white
-  - g8 -- g11 white
-  - e6 -- e8 blue
-  - e8 -- g8 blue
-  - b11 -- d11 red
-  - j8 -- k8 white
-  - k8 -- k9 white
-  - i14 -- i11 yellow
-  - i15 -- i16 white
-  - n16 -- n10 yellow
-  - i16 -- n16 white
-  - b16 -- f16 yellow
-  - i1 -- i4 white
-  - i4 -- i7 white
-  - i7 -- n7 white
-  - f15 -- e15 white
-  - e13 -- e15 white
-  - e15 -- e17 white
-  - e17 -- b17 white
-  - b20 -- b21 white
-  - b20 -- d20 white
-  - f20 -- h20 white
-  - i20 -- h20 white
-  - i23 -- i24 white
+  - e5 -- e9 red
+  - e9 -- d9 red
+  - b9 -- b17 red
+  - b17 -- k17 red
+  - k17 -- m17 red
+  - m17 -- o17 red
+  - o17 -- p17 red
+  - b9 -- d9 red
+  - 015 -- a15 black
+  - a15 -- a13 black
+  - a13 -- a11 black
+  - 011 -- a11 black
+  - 09 -- a9 black
+  - a9 -- a6 black
+  - a6 -- b6 black
+  - b5 -- b6 black
+  - b6 -- d6 black
+  - d6 -- f6 black
+  - f6 -- f2 black
+  - a13 -- d13 black
+  - f2 -- l2 black
+  - l2 -- p2 black
+  - p2 -- x2 black
+  - y9 -- x9 black
+  - x9 -- x2 black
+  - f16 -- l16 black
+  - l16 -- l13 black
+  - n13 -- l13 black
+  - l13 -- l8 black
+  - l8 -- l2 black
+  - l8 -- k8 black
+  - k8 -- j8 black
+  - t14 -- x14 black
+  - x17 -- x14 black
+  - x14 -- x11 black
+  - w11 -- x11 black
+  - x11 -- y11 black
+  - a16 -- c16 white
+  - c16 -- c14 white
+  - k12 -- k10 white
+  - h12 -- k12 white
+  - f14 -- h14 blue
+  - h14 -- h12 blue
+  - k17 -- k15 red
+  - h9 -- h8 white
+  - h8 -- i8 white
+  - n10 -- k10 yellow
+  - o10 -- p10 white
+  - p5 -- j5 yellow
+  - p10 -- p5 white
+  - p17 -- p13 yellow
+  - a10 -- d10 white
+  - d10 -- g10 white
+  - g10 -- g5 white
+  - o13 -- o14 white
+  - m14 -- o14 white
+  - o14 -- q14 white
+  - q14 -- q17 white
+  - t17 -- u17 white
+  - t17 -- t15 white
+  - t13 -- t11 white
+  - t10 -- t11 white
+  - w10 -- x10 white
 notes:
   - parts
 style:

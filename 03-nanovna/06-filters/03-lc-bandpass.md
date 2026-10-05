@@ -70,38 +70,39 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard に組む (端面 SMA 2 つ)
 parts:
-  J1: sma/female-edge i1 j0
-  L1: inductor i3 k3 39n
-  C1: capacitor i5 k5 1500p
-  L2: inductor i8 i12 6.8u
-  C2: capacitor i14 i16 8.2p
-  L3: inductor i18 k18 39n
-  C3: capacitor i20 k20 1500p
-  J2: sma/female-edge i24 j25
+  J1: sma/female-edge a10 09
+  L1: inductor c10 c8 39n
+  C1: capacitor e10 e8 1500p
+  L2: inductor h10 l10 6.8u
+  C2: capacitor n10 p10 8.2p
+  L3: inductor r10 r8 39n
+  C3: capacitor t10 t8 1500p
+  J2: sma/female-edge x10 y9
 wires:
-  - i1 -- i3
-  - i3 -- i5
-  - i5 -- i8
-  - i12 -- i14
-  - i16 -- i18
-  - i18 -- i20
-  - i20 -- i24
-  - j0 -- j2 black
-  - j2 -- l2 black
-  - l2 -- l3 black
-  - l3 -- k3 black
-  - l3 -- l5 black
-  - l5 -- k5 black
-  - l5 -- l18 black
-  - l18 -- k18 black
-  - l18 -- l20 black
-  - l20 -- k20 black
-  - l20 -- l23 black
-  - j25 -- j23 black
-  - j23 -- l23 black
+  - a10 -- c10
+  - c10 -- e10
+  - e10 -- h10
+  - l10 -- n10
+  - p10 -- r10
+  - r10 -- t10
+  - t10 -- x10
+  - 09 -- b9 black
+  - b9 -- b7 black
+  - b7 -- c7 black
+  - c7 -- c8 black
+  - c7 -- e7 black
+  - e7 -- e8 black
+  - e7 -- r7 black
+  - r7 -- r8 black
+  - r7 -- t7 black
+  - t7 -- t8 black
+  - t7 -- w7 black
+  - y9 -- w9 black
+  - w9 -- w7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/03-lc-bandpass.svg)

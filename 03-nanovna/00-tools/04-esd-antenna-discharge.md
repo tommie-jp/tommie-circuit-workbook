@@ -80,23 +80,24 @@ notes:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard の放電抵抗 (1 MΩ を T の分岐に付ける)
 points:
-  GND: l2
+  GND: b7
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 j25
-  R1: resistor i8 l8 1M
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y9
+  R1: resistor h10 h7 1M
 wires:
-  - i1 -- i8
-  - i8 -- i24
-  - l8 -- GND black
-  - j0 -- j2 black
-  - j2 -- GND black
-  - j25 -- j15 black
-  - j15 -- l15 black
-  - l15 -- GND black
+  - a10 -- h10
+  - h10 -- x10
+  - h7 -- GND black
+  - 09 -- b9 black
+  - b9 -- GND black
+  - y9 -- o9 black
+  - o9 -- o7 black
+  - o7 -- GND black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/perfboard/04-esd-antenna-discharge.svg)

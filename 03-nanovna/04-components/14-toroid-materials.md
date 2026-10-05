@@ -53,18 +53,19 @@ L = A<sub>L</sub> × 巻き数²。巻線はポリウレタン線 0.4 mm を 10 
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 直列治具にトロイダルコイル (3-1 と同じユニバーサル基板)
 points:
-  GND: j0
+  GND: 09
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 j25
-  L1: inductor i6 i9 巻線10回
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y9
+  L1: inductor f10 i10 巻線10回
 wires:
-  - i1 -- i6
-  - i9 -- i24
-  - j0 -- j25 black
+  - a10 -- f10
+  - i10 -- x10
+  - 09 -- y9 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/14-toroid-materials.svg)

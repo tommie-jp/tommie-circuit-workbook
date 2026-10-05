@@ -82,32 +82,33 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard に組む (端面 SMA 2 つ)
 parts:
-  J1: sma/female-edge i1 j0
-  X1: crystal/hc49 i3 i5 10M
-  C1: capacitor i7 k7 220p
-  X2: crystal/hc49 i9 i11 10M
-  C2: capacitor i13 k13 220p
-  X3: crystal/hc49 i15 i17 10M
-  J2: sma/female-edge i24 j25
+  J1: sma/female-edge a10 09
+  X1: crystal/hc49 c10 e10 10M
+  C1: capacitor g10 g8 220p
+  X2: crystal/hc49 i10 k10 10M
+  C2: capacitor m10 m8 220p
+  X3: crystal/hc49 o10 q10 10M
+  J2: sma/female-edge x10 y9
 wires:
-  - i1 -- i3
-  - i5 -- i7
-  - i7 -- i9
-  - i11 -- i13
-  - i13 -- i15
-  - i17 -- i24
-  - j0 -- j2 black
-  - j2 -- l2 black
-  - l2 -- l7 black
-  - l7 -- k7 black
-  - l7 -- l13 black
-  - l13 -- k13 black
-  - l13 -- l20 black
-  - j25 -- j20 black
-  - j20 -- l20 black
+  - a10 -- c10
+  - e10 -- g10
+  - g10 -- i10
+  - k10 -- m10
+  - m10 -- o10
+  - q10 -- x10
+  - 09 -- b9 black
+  - b9 -- b7 black
+  - b7 -- g7 black
+  - g7 -- g8 black
+  - g7 -- m7 black
+  - m7 -- m8 black
+  - m7 -- t7 black
+  - y9 -- t9 black
+  - t9 -- t7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/07-crystal-ladder.svg)

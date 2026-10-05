@@ -77,30 +77,31 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図3 コモンモードのつなぎ方
 points:
-  GND: m2
+  GND: b6
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 j25
-  L1: transformer i6 k6 i9 k9 CMC
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y9
+  L1: transformer f10 f8 i10 i8 CMC
 wires:
-  - i1 -- i6
-  - i6 -- h6
-  - h6 -- h9
-  - h9 -- i9
-  - k6 -- l6
-  - l6 -- l9
-  - l9 -- k9
-  - l9 -- l13
-  - l13 -- i13
-  - i13 -- i24
-  - j0 -- j2 black
-  - j2 -- GND black
-  - GND -- m15 black
-  - j25 -- j15 black
-  - j15 -- m15 black
+  - a10 -- f10
+  - f10 -- f11
+  - f11 -- i11
+  - i11 -- i10
+  - f8 -- f7
+  - f7 -- i7
+  - i7 -- i8
+  - i7 -- m7
+  - m7 -- m10
+  - m10 -- x10
+  - 09 -- b9 black
+  - b9 -- GND black
+  - GND -- o6 black
+  - y9 -- o9 black
+  - o9 -- o6 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/11-common-mode-choke-1.svg)
@@ -108,25 +109,26 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図4 ディファレンシャルモードのつなぎ方
 points:
-  GND: m2
+  GND: b6
 parts:
-  J1: sma/female-edge i1 h0 j0
-  J2: sma/female-edge i24 j25
-  L1: transformer i6 k6 i9 k9 CMC
+  J1: sma/female-edge a10 011 09
+  J2: sma/female-edge x10 y9
+  L1: transformer f10 f8 i10 i8 CMC
 wires:
-  - i1 -- i6
-  - k6 -- l6
-  - l6 -- l9
-  - l9 -- k9
-  - i9 -- i24
-  - j0 -- j2 black
-  - j2 -- GND black
-  - GND -- m15 black
-  - j25 -- j15 black
-  - j15 -- m15 black
+  - a10 -- f10
+  - f8 -- f7
+  - f7 -- i7
+  - i7 -- i8
+  - i10 -- x10
+  - 09 -- b9 black
+  - b9 -- GND black
+  - GND -- o6 black
+  - y9 -- o9 black
+  - o9 -- o6 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/11-common-mode-choke-2.svg)

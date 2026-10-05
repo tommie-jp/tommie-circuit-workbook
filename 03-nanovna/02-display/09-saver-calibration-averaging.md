@@ -102,36 +102,37 @@ wires:
 ```perfboard
 board:
   size: 9x7cm
+  silk: board
   slots: on
 title: 図2 perfboard の 40 dB パッド (20 dB を 2 段、端面 SMA 2 つ)
 points:
-  GND: l2
+  GND: b15
 parts:
-  J1: sma/female-edge i1 h0 j0
-  R1: resistor i3 i6 43
-  R2: resistor i8 k8 11
-  R3: resistor i10 i13 43
-  R4: resistor i15 i18 43
-  R5: resistor i20 k20 11
-  R6: resistor i22 i25 43
-  J2: sma/female-edge i34 j35
+  J1: sma/female-edge a18 019 017
+  R1: resistor c18 f18 43
+  R2: resistor h18 h16 11
+  R3: resistor j18 m18 43
+  R4: resistor o18 r18 43
+  R5: resistor t18 t16 11
+  R6: resistor v18 y18 43
+  J2: sma/female-edge ah18 ai17
 wires:
-  - i1 -- i3
-  - i6 -- i8
-  - i8 -- i10
-  - i13 -- i15
-  - i18 -- i20
-  - i20 -- i22
-  - i25 -- i34
-  - k8 -- l8 black
-  - l8 -- GND black
-  - k20 -- l20 black
-  - l20 -- l8 black
-  - j0 -- j2 black
-  - j2 -- GND black
-  - j35 -- j30 black
-  - j30 -- l30 black
-  - l30 -- l20 black
+  - a18 -- c18
+  - f18 -- h18
+  - h18 -- j18
+  - m18 -- o18
+  - r18 -- t18
+  - t18 -- v18
+  - y18 -- ah18
+  - h16 -- h15 black
+  - h15 -- GND black
+  - t16 -- t15 black
+  - t15 -- h15 black
+  - 017 -- b17 black
+  - b17 -- GND black
+  - ai17 -- ad17 black
+  - ad17 -- ad15 black
+  - ad15 -- t15 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/perfboard/09-saver-calibration-averaging.svg)

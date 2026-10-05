@@ -77,28 +77,29 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図2 perfboard の 3 次 LC ローパス (端面 SMA 2 つ)
 points:
-  GND: l2
+  GND: b7
 parts:
-  J1: sma/female-edge i1 h0 j0
-  C1: capacitor i3 l3 68p
-  L1: inductor i5 i9 180n
-  C2: capacitor i13 l13 68p
-  J2: sma/female-edge i24 j25
+  J1: sma/female-edge a10 011 09
+  C1: capacitor c10 c7 68p
+  L1: inductor e10 i10 180n
+  C2: capacitor m10 m7 68p
+  J2: sma/female-edge x10 y9
 wires:
-  - i1 -- i3
-  - i3 -- i5
-  - i9 -- i13
-  - i13 -- i24
-  - l3 -- GND black
-  - l3 -- l13 black
-  - l13 -- l15 black
-  - l15 -- j15 black
-  - j15 -- j25 black
-  - j0 -- j2 black
-  - j2 -- GND black
+  - a10 -- c10
+  - c10 -- e10
+  - i10 -- m10
+  - m10 -- x10
+  - c7 -- GND black
+  - c7 -- m7 black
+  - m7 -- o7 black
+  - o7 -- o9 black
+  - o9 -- y9 black
+  - 09 -- b9 black
+  - b9 -- GND black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/perfboard/08-four-traces.svg)

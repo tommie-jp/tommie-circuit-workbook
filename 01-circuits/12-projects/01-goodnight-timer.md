@@ -161,59 +161,60 @@ wires:
 ```perfboard
 board:
   size: 7x5cm
+  silk: board
   slots: on
 title: 図3 perfboardに組む (部品面から見た図)
 points:
-  VCC: a1
-  GND: n1
+  VCC: a18
+  GND: a5
 parts:
-  U1: dip8 e5 TLC555
-  Rtrig: resistor a2 d2 100k
-  SWtrig: button j2
-  Rt: resistor a7 d7 4.7M
-  Ct: capacitor/electrolytic d21 f21 220u
-  Rg: resistor i12 i16 220
-  Q1: transistor k15 k16 k17 2N7000
-  RLED: resistor e18 g18 470
-  DLED: led h18 j18 red
+  U1: dip8 e14 TLC555
+  Rtrig: resistor b18 b15 100k
+  SWtrig: button b9
+  Rt: resistor g18 g15 4.7M
+  Ct: capacitor/electrolytic u15 u13 220u
+  Rg: resistor l10 p10 220
+  Q1: transistor o8 p8 q8 2N7000
+  RLED: resistor r14 r12 470
+  DLED: led r11 r9 red
 wires:
   # 電源 (上の a 行) と GND (下の n 行) の筋
-  - VCC -- a2 red
-  - a2 -- a5 red
-  - a5 -- a7 red
-  - a7 -- a10 red
-  - GND -- n2 black
-  - n2 -- n5 black
-  - n5 -- n13 black
-  - n13 -- n21 black
+  - VCC -- b18 red
+  - b18 -- e18 red
+  - e18 -- g18 red
+  - g18 -- j18 red
+  - GND -- b5 black
+  - b5 -- e5 black
+  - e5 -- m5 black
+  - m5 -- u5 black
   # U1 の電源: PIN 8 (VDD) は上へ、PIN 1 (GND) は下へ
-  - e5 -- a5 red
-  - h5 -- n5 black
+  - e14 -- e18 red
+  - e11 -- e5 black
   # PIN 4 (RESET) は 10 列を上って VCC へ。途中の e10 から出力段へも配る
-  - h8 -- h10 red
-  - h10 -- e10 red
-  - e10 -- a10 red
-  - e10 -- e18 red
+  - h11 -- j11 red
+  - j11 -- j14 red
+  - j14 -- j18 red
+  - j14 -- r14 red
   # TRIG (PIN 2): Rtrig で VCC へ、SWtrig で GND へ
-  - d2 -- j2 yellow
-  - l2 -- n2 black
-  - h6 -- j6 yellow
-  - j6 -- j4 yellow
+  - b15 -- b9 yellow
+  - b7 -- b5 black
+  - f11 -- f9 yellow
+  - f9 -- d9 yellow
   # THRES・DISCH (PIN 6・7): Rt で VCC へ、Ct で GND へ
-  - e6 -- d6 orange
-  - d6 -- d7 orange
-  - e7 -- d7 orange
-  - d7 -- d21 orange
-  - f21 -- n21 black
+  - f14 -- f15 orange
+  - f15 -- g15 orange
+  - g14 -- g15 orange
+  - g15 -- u15 orange
+  - u13 -- u5 black
   # OUT (PIN 3) → Rg → Q1 のゲート。Q1 のドレイン → DLED → RLED → VCC
-  - h7 -- i7
-  - i7 -- i12
-  - i16 -- k16
-  - g18 -- h18
-  - j18 -- k18
-  - k18 -- k17
-  - k15 -- k13 black
-  - k13 -- n13 black
+  - g11 -- g10
+  - g10 -- l10
+  - p10 -- p8
+  - r12 -- r11
+  - r9 -- r8
+  - r8 -- q8
+  - o8 -- m8 black
+  - m8 -- m5 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/perfboard/01-goodnight-timer.svg)
