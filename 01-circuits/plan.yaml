@@ -82,7 +82,7 @@
 - { id: 4-20, tier: 200, title: 帰還の安定性 — 容量負荷と位相補償 }
 - { id: 5-1, tier: 50, board: BB, title: 半波・全波・ブリッジ整流と平滑 (低圧 AC) }
 - { id: 5-2, tier: 50, board: BB, era: 古, title: ツェナー + Tr のシリーズレギュレータ }
-- { id: 5-3, tier: 50, board: BB, title: 3 端子レギュレータ (7805) }
+- { id: 5-3, tier: 50, board: [ BB, PF ], title: 3 端子レギュレータ (7805) }
 - { id: 5-4, tier: 50, board: [ BB, PF ], era: 今, title: LDO — USB 5V → 3.3V }
 - { id: 5-5, tier: 50, board: BB, era: 古, title: 昇圧 — Joule thief }
 - { id: 5-6, tier: 100, board: BB, era: 今, title: 降圧スイッチング (MC34063 かモジュール) }
