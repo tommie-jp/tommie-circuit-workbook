@@ -58,6 +58,7 @@ board:
   silk: board
   slots: on
 title: 図2 Open
+unused: [J1.1, J1.2, J1.3]
 points:
   GND: b8
 parts:
@@ -73,7 +74,7 @@ board:
   slots: on
 title: 図3 Short
 points:
-  GND: b8
+  GND: 09
 parts:
   J2: sma/female-edge a10 011 09
 wires:

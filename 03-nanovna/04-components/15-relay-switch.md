@@ -55,6 +55,7 @@ board:
   silk: board
   slots: on
 title: 図2 閉じた接点 (COM1–NC1)
+unused: [K1.A1, K1.A2, K1.NO1, K1.COM2, K1.NC2, K1.NO2]
 points:
   GND: b7
 parts:
@@ -85,6 +86,7 @@ board:
   silk: board
   slots: on
 title: 図3 開いた接点 (COM1–NO1)
+unused: [K1.A1, K1.A2, K1.NC1, K1.COM2, K1.NC2, K1.NO2]
 points:
   GND: b7
 parts:
@@ -109,8 +111,8 @@ wires:
 - 入る線は A1 (i5) のピンを避けて j 行を回り、下から COM1 (i8) に入る
 - 図2 は NC1 (i10) から、NO1 (i12) のピンを避けて j 行を回って J2 へ。図3 は NO1 (i12) から
   i 行をまっすぐ J2 へ
-- 使わないピン (コイルと 2 つ目の接点) は穴に挿すだけ。検査 (ERC) が「つながっていないピン」と
-  言うが、意図どおり
+- 使わないピン (コイルと 2 つ目の接点、図ごとに使わない側の接点) は穴に挿すだけ。
+  `unused:` に並べて ERC の「つながっていない」から外した
 - 線を回したぶん、治具の線は 3-1 より長い。この長さも閉じた接点のインダクタンスに入って見える
 
 ## 掃引の設定

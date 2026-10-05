@@ -76,7 +76,7 @@ wires:
 - 1 回路目: COM1 から a 接点 (NO1) を通って J2 へ。コイルに電流を流すと閉じる
 - 2 回路目: b 接点 (NC2) を出口 (J2 の側) に、COM2 を GND に。コイルに電流が無い
   (1 回路目が開いている) ときだけ、出口を GND へ落とす
-- 使わないピン NC1・NO2 はどこにもつなげない (ERC がそう言うのは意図どおり)
+- 使わないピン NC1・NO2 はどこにもつなげない。実体配線図では `unused:` に並べて ERC の「つながっていない」から外した
 
 ## 実体配線図
 
@@ -86,6 +86,7 @@ board:
   silk: board
   slots: on
 title: 図2 perfboard に組む (G5V-2、端面 SMA 2 つ)
+unused: [K1.NC1, K1.NO2]
 parts:
   J1: sma/female-edge a10 09
   K1: relay d14
