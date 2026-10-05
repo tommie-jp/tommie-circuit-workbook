@@ -117,143 +117,147 @@ style:
 
 ```perfboard
 board:
-  size: 9x7cm
-  silk: board
+  size: 7x5cm
+  h: 1.6mm
+  material: FR-4
   slots: on
 title: 図2 perfboardに組む (部品面から見た図)
+unused: [U1.H, U1.I, U1.J, U1.K, U1.L, U2.K, U2.L, U2.M]
 points:
-  PWR: a26
-  GND: a2
+  PWR: a18
+  GND: a1
 parts:
   PIR:
     type: device
-    at: p31
+    at: l23
     label: PIR
     pins: GND VCC OUT
-  Rz: resistor b26 b23 330
-  Dz: zener c21 c23 3V3
-  CDS1: photoresistor e23 e21
-  R1: resistor e18 e15 10k
-  U1: dip14 h21 CD40106
-  U2: dip14 t21 CD4081
-  Rg: resistor v13 v10 220
-  Rgpd: resistor t10 t6 100k
-  Q1: transistor u8 v8 w8 2N7000
-  RLED: resistor ac26 ac23 330
-  DLED: led ac22 ac20 red
+  Rz: resistor a18 a15 330
+  Dz: zener b13 b15 3V3
+  CDS1: photoresistor d15 d13
+  R1: resistor d10 d7 10k
+  U1: dip14 f13 CD40106
+  U2: dip14 o13 CD4081
+  Rg: resistor q9 q6 220
+  Rgpd: resistor o6 o3 100k
+  Q1: transistor s4 s5 s6 2N7000
+  RLED: resistor w18 w15 330
+  DLED: led w14 w12 red
 wires:
-  # 5V (26 行・赤)、VL 3.3V (23 行・橙)、GND (2 行・黒) の筋
-  - PWR -- b26 red
-  - b26 -- q26 red
-  - q26 -- ac26 red
-  - b23 -- c23 orange
-  - c23 -- e23 orange
-  - e23 -- h23 orange
-  - h23 -- t23 orange
-  - GND -- c2 black
-  - c2 -- e2 black
-  - e2 -- o2 black
-  - o2 -- t2 black
-  - t2 -- u2 black
-  - u2 -- aa2 black
+  # 5V (18 行・赤)、VL 3.3V (15 行・橙)、GND (1 行・黒) の筋
+  - PWR -- m18 red
+  - m18 -- w18 red
+  - a15 -- b15 orange
+  - b15 -- d15 orange
+  - d15 -- f15 orange
+  - f15 -- o15 orange
+  - GND -- b1 black
+  - b1 -- d1 black
+  - d1 -- m1 black
+  - m1 -- o1 black
+  - o1 -- u1 black
+  - u1 -- v1 black
   # Dz のアノードと R1 の下端を GND へ
-  - c21 -- c2 black
-  - e15 -- e2 black
+  - b13 -- b1 black
+  - d7 -- d1 black
   # 暗さの分圧 (CDS1・R1) を U1 の PIN 1 へ
-  - e21 -- e18
-  - e18 -- h18
+  - d13 -- d10
+  - d10 -- f10
   # U1・U2 の PIN 14 (VDD) を VL へ
-  - h21 -- h23 orange
-  - t21 -- t23 orange
-  # U1 (40106) の使わない入力: PIN 13・11・9 は 22 行、PIN 3・5 は 17 行でまとめ、O 列で PIN 7 と結んで GND へ
-  - i21 -- i22 black
-  - i22 -- k22 black
-  - k21 -- k22 black
-  - k22 -- m22 black
-  - m21 -- m22 black
-  - m22 -- o22 black
-  - o22 -- o17 black
-  - j18 -- j17 black
-  - j17 -- l17 black
-  - l18 -- l17 black
-  - l17 -- n17 black
-  - n18 -- n17 black
-  - n17 -- o17 black
-  - o17 -- o2 black
-  # U2 (4081) の使わない入力: PIN 13・12・9・8 は 22 行、PIN 5・6 は 17 行でまとめ、AA 列で PIN 7 と結んで GND へ
-  - u21 -- u22 black
-  - u22 -- v22 black
-  - v21 -- v22 black
-  - v22 -- y22 black
-  - y21 -- y22 black
-  - y22 -- z22 black
-  - z21 -- z22 black
-  - z22 -- aa22 black
-  - aa22 -- aa17 black
-  - x18 -- x17 black
-  - x17 -- y17 black
-  - y18 -- y17 black
-  - y17 -- z17 black
-  - z18 -- z17 black
-  - z17 -- aa17 black
-  - aa17 -- aa2 black
-  # PIR: VCC は 5V の筋へ、GND は U1 の GND の角 (e15) へ、OUT は U2 の PIN 1 へ
-  - PIR.VCC -- q26 red
-  - PIR.GND -- p22 black
-  - p22 -- o22 black
-  - PIR.OUT -- r16 green
-  - r16 -- t16 green
-  - t16 -- t18 green
+  - f15 -- f13 orange
+  - o15 -- o13 orange
+  # U1 (40106) の使わない入力: 上の列の PIN 13・11・9 は 14 行、下の列の PIN 3・5 は 9 行でまとめ、PIN 7 と結んで m 列から GND へ
+  - g13 -- g14 black
+  - i13 -- i14 black
+  - k13 -- k14 black
+  - g14 -- i14 black
+  - i14 -- k14 black
+  - k14 -- l14 black
+  - l14 -- m14 black
+  - m14 -- m9 black
+  - h10 -- h9 black
+  - j10 -- j9 black
+  - l10 -- l9 black
+  - h9 -- j9 black
+  - j9 -- l9 black
+  - l9 -- m9 black
+  - m9 -- m1 black
+  # U2 (4081) の使わない入力: 上の列の PIN 13・12・9・8 は 14 行、下の列の PIN 5・6 は 9 行でまとめ、PIN 7 と結んで v 列から GND へ
+  - p13 -- p14 black
+  - q13 -- q14 black
+  - t13 -- t14 black
+  - u13 -- u14 black
+  - p14 -- q14 black
+  - q14 -- t14 black
+  - t14 -- u14 black
+  - u14 -- v14 black
+  - v14 -- v9 black
+  - s10 -- s9 black
+  - t10 -- t9 black
+  - u10 -- u9 black
+  - s9 -- t9 black
+  - t9 -- u9 black
+  - u9 -- v9 black
+  - v9 -- v1 black
+  # PIR: VCC は 5V の筋へ、GND は U1 の GND の筋 (l14) へ、OUT は U2 の PIN 1 へ
+  - PIR.VCC -- m18 red
+  - PIR.GND -- l14 black
+  - PIR.OUT -- n10 green
+  - n10 -- o10 green
   # U1 の PIN 2 (暗いと H) → U2 の PIN 2
-  - i18 -- i15 blue
-  - i15 -- u15 blue
-  - u15 -- u18 blue
+  - g10 -- g8 blue
+  - g8 -- p8 blue
+  - p8 -- p10 blue
   # U2 の PIN 3 (AND の出力) → Rg → Q1 のゲート。Rgpd でゲートを GND へ
-  - v18 -- v13 yellow
-  - v10 -- v8
-  - v10 -- t10
-  - t6 -- t2 black
+  - q10 -- q9 yellow
+  - q6 -- q5
+  - q5 -- s5
+  - q6 -- o6
+  - o3 -- o1 black
   # Q1: ソースは GND へ、ドレインは DLED のカソードへ
-  - u8 -- u2 black
-  - w8 -- ac8
-  - ac8 -- ac20
-  - ac23 -- ac22
+  - s4 -- u4 black
+  - u4 -- u1 black
+  - s6 -- w6
+  - w6 -- w12
+  - w15 -- w14
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/perfboard/02-motion-light.svg)
 
-- ユニバーサル基板は 7×9cm のユニバーサル基板を横に置いた 31 列 × 26 行 (厚み 1.6mm の FR-4)。5×7cm のユニバーサル基板 (24 列 × 18 行) には
-  DIP14 2 個と出力の段が横に並びきらないので、次の順位の 7×9cm にした。出力の段 (Rg・Rgpd・Q1) は
-  U2 の下に置いて、ユニバーサル基板の幅に収めた
-- 部品面から見た図。5V (PWR) は上の 26 行 (赤)、VL (3.3V) は 23 行 (橙)、GND は下の
-  2 行 (黒) に 1 本ずつ筋を通し、部品はそこから縦に配る。電源は左端の a26・a2 に入れる
-- Rz (b26〜b23) が 5V の筋から VL の筋へ、Dz (c23〜c21、カソードが上) が VL から C 列を
-  下って GND へ。これで VL (3.3V) ができ、23 行で U1・U2 の PIN 14 (h21・t21) と
-  CDS1 (e23〜e21) へ配る。CDS1 の下端から E 列を下り、e18 で R1 (e18〜e15、下は GND) と
-  U1 の PIN 1 (h18) へ分ける
+- ユニバーサル基板は 5×7cm のユニバーサル基板を横に置いた 24 列 × 18 行 (縁のパッド付き、厚み 1.6mm の
+  FR-4)。番地は基板の刷りどおりで、英字が列 (左から A〜X)、数字が行 (下から 1〜18)。DIP14 を縦に
+  並べずに 2 個とも横のまま並べ、使わない入力をまとめる線を DIP の上 (14 行) と下 (9 行) に置いて、
+  GND へ下りる線を U1 と U2 の右隣の 1 列ずつ (M 列・V 列) に絞ったので、5×7cm に収まった。
+  出力の段 (Rg・Rgpd・Q1) は U2 の下に置いた
+- 部品面から見た図。5V (PWR) は上の 18 行 (赤)、VL (3.3V) は 15 行 (橙)、GND は下の
+  1 行 (黒) に 1 本ずつ筋を通し、部品はそこから縦に配る。電源は左端の a18・a1 に入れる
+- Rz (a18〜a15) が 5V の筋から VL の筋へ、Dz (b13〜b15、カソードが上) が VL から B 列を
+  下って GND へ。これで VL (3.3V) ができ、15 行で U1・U2 の PIN 14 (f13・o13) と
+  CDS1 (d15〜d13) へ配る。CDS1 の下端 d13 から D 列を下り、d10 で R1 (d10〜d7、下は GND) と
+  U1 の PIN 1 (f10) へ分ける
 - DIP14 は「アンカーの行に PIN 14〜8、その 3 行下に PIN 1〜7」の並び (perfboard の
-  DIP の決め方)。U1 (h21 アンカー) は PIN 14=h21、PIN 8=n21、PIN 1=h18、PIN 7=n18。
-  U2 (t21 アンカー) は PIN 14=t21、PIN 8=z21、PIN 1=t18、PIN 7=z18
-- U1 の PIN 2 (暗いと H、i18) は青の線で 15 行を右へ運び、U 列を上って U2 の PIN 2 (u18) へ。
-  PIR の OUT (緑) は r16 に下ろし、16 行と T 列で U2 の PIN 1 (t18) へ
-- PIR はユニバーサル基板の外 (上、`-p23`) に置き、ケーブルの 3 本を真下の穴へ下ろす:
-  GND は p22 (U1 の GND をまとめた角 o22 の隣)、VCC は q26 (5V の筋)、OUT は r16
-- 使わない入力は黒の線で GND へ。U1 の PIN 13・11・9 (i21・k21・m21) は 22 行、PIN 3・5
-  (j18・l18) は 17 行でまとめ、O 列で PIN 7 (n18) と結んで 2 行へ下ろす。U2 の PIN 13・12・9・8
-  (u21・v21・y21・z21) は 22 行、PIN 5・6 (x18・y18) は 17 行でまとめ、AA 列で PIN 7 (z18) と
-  結んで 2 行へ下ろす。出力のピン (U1 の PIN 4・6・8・10・12、U2 の PIN 4・10・11) には
-  何もつながない
-- U2 の PIN 3 (AND の出力、v18) は黄の線で V 列をまっすぐ下り、Rg (v13〜v10) の上端へ。
-  Rg の下端 (v10) から Q1 のゲート (v8) へ下ろし、同じ v10 から 10 行を左へ出して
-  Rgpd (t10〜t6) を通して 2 行の GND へ
-- Q1 (2N7000) は 8 行に S・G・D の順 (平らな面を見て左から、実物のピンの並び) で
-  横並びに置く (u8・v8・w8)。ソースは U 列を下って GND へ、ドレインは 8 行を右へ運び、
-  AC 列を上って DLED のカソード (ac20) へ。DLED のアノード (ac22) は RLED (ac26〜ac23) を
-  通して 5V の筋へ
-- 交差は被覆線で跨ぐ。青 (U1 の PIN 2) が O 列の GND を、Q1 のドレインの線が AA 列の
-  GND を跨ぐ。どちらも U1・U2 の出力のピンが GND にまとめたピンの向こうにあるためで、
-  ピンの並びからは避けられない。PIR のケーブルの GND と OUT は、ユニバーサル基板の上を 5V と VL の
-  筋を越えて渡る
+  DIP の決め方)。U1 (f13 アンカー) は PIN 14=f13、PIN 8=l13、PIN 1=f10、PIN 7=l10。
+  U2 (o13 アンカー) は PIN 14=o13、PIN 8=u13、PIN 1=o10、PIN 7=u10
+- U1 の PIN 2 (暗いと H、g10) は青の線で 8 行を右へ運び、P 列を上って U2 の PIN 2 (p10) へ。
+  PIR の OUT (緑) は n10 に下ろし、隣の o10 で U2 の PIN 1 へ
+- PIR はユニバーサル基板の外 (上、`l23`) に置き、ケーブルの 3 本を真下の穴へ下ろす:
+  GND は l14 (U1 の使わない入力をまとめた 14 行の筋)、VCC は m18 (5V の筋)、OUT は n10
+- 使わない入力は黒の線で GND へ。U1 の PIN 13・11・9 (g13・i13・k13) は 14 行、PIN 3・5
+  (h10・j10) と PIN 7 (l10) は 9 行でまとめ、14 行の右端 (m14) と 9 行の右端 (m9) を M 列で
+  つないで 1 行へ下ろす。U2 の PIN 13・12・9・8 (p13・q13・t13・u13) は 14 行、PIN 5・6
+  (s10・t10) と PIN 7 (u10) は 9 行でまとめ、V 列で 1 行へ下ろす。出力のピン (U1 の PIN 4・6・8・
+  10・12、U2 の PIN 4・10・11) には何もつながない (意図して使わないピンなので `unused:` に並べた)
+- U2 の PIN 3 (AND の出力、q10) は黄の線で Rg (q9〜q6) の上端へ。Rg の下端 (q6) から
+  Q1 のゲート (s5) へ 5 行を右へ運び、同じ q6 から 6 行を左へ出して Rgpd (o6〜o3) を通して
+  1 行の GND へ
+- Q1 (2N7000) は S・G・D を縦に並べて置く (s4・s5・s6、下から S・G・D)。ソースは 4 行を右へ出し、
+  U 列を下って GND へ、ドレインは 6 行を右へ運び、W 列を上って DLED のカソード (w12) へ。DLED の
+  アノード (w14) は RLED (w18〜w15) を通して 5V の筋へ
+- 交差は被覆線で跨ぐ。6 か所。(1) 青 (U1 の PIN 2) が M 列の GND を跨ぐ。(2) Q1 のドレインの線が
+  V 列の GND を跨ぐ。(3) (4) PIR の GND (黒) が 18 行の 5V と 15 行の VL の筋を跨ぐ。(5) (6) PIR の
+  OUT (緑) も同じ 2 本の筋を跨ぐ。(1)(2) は U1・U2 の使わない入力を GND へ集める線が出力の
+  ピンの向こう側にあるため、(3)〜(6) は PIR のケーブルが上から基板の中ほどへ下りるため
+  で、ピンの並びと PIR の置き場からは避けられない
 
 ## 見るべき値
 
