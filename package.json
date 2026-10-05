@@ -30,7 +30,7 @@
     "scope-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/scope-fence-v0.7.0/scope-fence-0.7.0.tgz",
     "spectrum-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/spectrum-fence-v0.4.0/spectrum-fence-0.4.0.tgz",
     "subset-font": "^2.9.0",
-    "vna-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/vna-fence-v0.7.0/vna-fence-0.7.0.tgz",
+    "vna-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/vna-fence-v0.8.0/vna-fence-0.8.0.tgz",
     "yaml": "^2.9.0"
   }
 }
