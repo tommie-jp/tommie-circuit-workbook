@@ -916,7 +916,7 @@ wires:
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/04-state-machine-1.svg)
 
-- 図 8b: 9×15 cm のユニバーサル基板を横に置く (54 列 × 33 行)。IC は U8 が `g20`、U5 が `j37`、U7 が `x24`、U6 が `x35` (U5・U7・U6 は 180 度回した)。交差は 42 か所と多い。check のネットリストは図 8 と同じ
+- 図 8b: 9×15 cm のユニバーサル基板を横に置く (54 列 × 33 行)。IC は U8 が `t27`、U5 が `ak24`、U7 が `x10`、U6 が `ai10` (U5・U7・U6 は 180 度回した)。交差は 42 か所と多い。check のネットリストは図 8 と同じ
 
 - IC は 74HC74 が 2 個 (U5、U6)、74HC04 (U7)、74HC08 (U8)。CLK は 4 つのフリップフロップの CLK ピン (PIN 3、11) へ、箱の CLK から 1 本ずつ引く。
 
@@ -1432,7 +1432,7 @@ wires:
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/04-state-machine-3.svg)
 
-- 図 10b: 9×15 cm のユニバーサル基板を横に置く (54 列 × 33 行)。IC は U15 が `n9`、U14 が `n18`、U12 が `n27`、U13 が `n36` で、横一列に並べた。交差は 43 か所と多い。check のネットリストは図 10 と同じ
+- 図 10b: 9×15 cm のユニバーサル基板を横に置く (54 列 × 33 行)。IC は U15 が `i20`、U14 が `r20`、U12 が `aa20`、U13 が `aj20` で、横一列に並べた。交差は 43 か所と多い。check のネットリストは図 10 と同じ
 
 - IC は 74HC86 (U12)、74HC08 (U13)、74HC32 (U14)、74HC02 (U15)。入力が 9 本と出力が 3 本ある。入力は上の箱、S3 だけ下の箱から入れる。
 
@@ -1621,7 +1621,7 @@ wires:
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/04-state-machine-4.svg)
 
-- 図 11b: 5×7 cm のユニバーサル基板を横に置く (24 列 × 18 行)。IC は U16 が `i12`、U17 が `i11` (U17 は 180 度回した)。交差は 21 か所。check のネットリストは図 11 と同じ
+- 図 11b: 5×7 cm のユニバーサル基板を横に置く (24 列 × 18 行)。IC は U16 が `l10`、U17 が `k10` (U17 は 180 度回した)。交差は 21 か所。check のネットリストは図 11 と同じ
 
 - 74HC163 (U16) のデータ入力は、A (PIN 3) だけ +5V、B〜D は GND で、値 1 を読み込む。ENP (PIN 7) と ENT (PIN 10) は、EN を 1 本の線で受ける。
 

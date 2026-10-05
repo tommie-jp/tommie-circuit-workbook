@@ -178,7 +178,7 @@ parts:
   RLED: resistor r14 r12 470
   DLED: led r11 r9 red
 wires:
-  # 電源 (上の a 行) と GND (下の n 行) の筋
+  # 電源 (上の 18 行) と GND (下の 5 行) の筋
   - VCC -- b18 red
   - b18 -- e18 red
   - e18 -- g18 red
@@ -190,7 +190,7 @@ wires:
   # U1 の電源: PIN 8 (VDD) は上へ、PIN 1 (GND) は下へ
   - e14 -- e18 red
   - e11 -- e5 black
-  # PIN 4 (RESET) は 10 列を上って VCC へ。途中の e10 から出力段へも配る
+  # PIN 4 (RESET) は J 列を上って VCC へ。途中の j14 から出力段へも配る
   - h11 -- j11 red
   - j11 -- j14 red
   - j14 -- j18 red
@@ -219,25 +219,25 @@ wires:
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/perfboard/01-goodnight-timer.svg)
 
-- 部品面から見た図。電源は上の a 行 (赤)、GND は下の n 行 (黒) に 1 本ずつ筋を通し、
-  左端の a1・n1 に電源をつなぐ。部品はこの 2 本の筋から縦に配る
-- U1 (e5、DIP8) は切り欠きを左にして挿す。上の列が左から PIN 8 (VDD)・7 (DISCH)・
-  6 (THRES)・5 (CONT) で e5〜e8、下の列が左から PIN 1 (GND)・2 (TRIG)・3 (OUT)・
-  4 (RESET) で h5〜h8。PIN 8 は 5 列を上って a 行へ、PIN 1 は 5 列を下って n 行へ
-- PIN 4 (RESET) は h 行で 10 列へ出て、10 列を上って a 行 (VCC) へ。その途中の e10 から
-  e 行を右へ出して、出力段の RLED へ VCC を配る。PIN 5 (CONT) はどこにもつないでいない。
+- 部品面から見た図。電源は上の 18 行 (赤)、GND は下の 5 行 (黒) に 1 本ずつ筋を通し、
+  左端の a18・a5 に電源をつなぐ。部品はこの 2 本の筋から縦に配る
+- U1 (e14、DIP8) は切り欠きを左にして挿す。上の列が左から PIN 8 (VDD)・7 (DISCH)・
+  6 (THRES)・5 (CONT) で e14〜h14、下の列が左から PIN 1 (GND)・2 (TRIG)・3 (OUT)・
+  4 (RESET) で e11〜h11。PIN 8 は E 列を上って 18 行へ、PIN 1 は E 列を下って 5 行へ
+- PIN 4 (RESET) は 11 行で J 列へ出て、J 列を上って 18 行 (VCC) へ。その途中の j14 から
+  14 行を右へ出して、出力段の RLED へ VCC を配る。PIN 5 (CONT) はどこにもつないでいない。
   単安定の動作には必須ではなく、浮かせたままでも動く (つなぐならここから 0.01µF を
   GND へ)
-- PIN 2 (TRIG、黄) は h6 から j 行を左へ運んで SWtrig (j2) へ。SWtrig の下のピンは l2 から
-  n 行の GND へ、上のピン j2 は 2 列を上って Rtrig (a2〜d2) で a 行の VCC へプルアップする
-- PIN 6・7 (THRES・DISCH、橙) はそれぞれ d 行へ上げて d6〜d7 で結び、Rt (a7〜d7) で VCC へ。
-  同じ d7 から d 行を右へ運んで Ct (d21、+ が上) へ、Ct の − は 21 列を下って GND へ
-- PIN 3 (OUT) は i 行で Rg (i12〜i16) へ、Rg から 16 列を下って Q1 のゲート (k16) へ。
-  Q1 (2N7000) は平らな面を見て左から S・G・D なので、k15 がソース、k16 がゲート、
-  k17 がドレイン。ソースは 13 列を下って GND へ、ドレインは k18 から 18 列を上って
-  DLED のカソード (j18) へ。DLED のアノード (h18) は RLED (e18〜g18) を通して e 行の VCC へ
-- 交差は 2 か所で、どちらも被覆線で跨ぐ。橙の d 行 (Ct へ) が 10 列の赤 (RESET) を、
-  黄の j 行 (TRIG) が 5 列の黒 (U1 の GND) を跨ぐ。この回路はピンの並びから交差を
+- PIN 2 (TRIG、黄) は f11 から 9 行を左へ運んで SWtrig (b9) へ。SWtrig の下のピンは b7 から
+  5 行の GND へ、上のピン b9 は B 列を上って Rtrig (b18〜b15) で 18 行の VCC へプルアップする
+- PIN 6・7 (THRES・DISCH、橙) はそれぞれ 15 行へ上げて f15〜g15 で結び、Rt (g18〜g15) で VCC へ。
+  同じ g15 から 15 行を右へ運んで Ct (u15、+ が上) へ、Ct の − は U 列を下って GND へ
+- PIN 3 (OUT) は 10 行で Rg (l10〜p10) へ、Rg から P 列を下って Q1 のゲート (p8) へ。
+  Q1 (2N7000) は平らな面を見て左から S・G・D なので、o8 がソース、p8 がゲート、
+  q8 がドレイン。ソースは M 列を下って GND へ、ドレインは r8 から R 列を上って
+  DLED のカソード (r9) へ。DLED のアノード (r11) は RLED (r14〜r12) を通して 14 行の VCC へ
+- 交差は 2 か所で、どちらも被覆線で跨ぐ。橙の 15 行 (Ct へ) が J 列の赤 (RESET) を、
+  黄の 9 行 (TRIG) が E 列の黒 (U1 の GND) を跨ぐ。この回路はピンの並びから交差を
   0 にはできない (PIN 4 の VCC と、PIN 6・7 から Ct への GND が U1 の右で必ず出会う)
 
 ## 計器の設定
