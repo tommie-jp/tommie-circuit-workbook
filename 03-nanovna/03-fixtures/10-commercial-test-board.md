@@ -108,7 +108,7 @@ dut:
   - series R 0 esl 52.1n
 traces:
   - S11 logmag
-  - S21 phase
+  - S21 phase 20deg
 markers:
   - 100M
   - 300M
@@ -128,7 +128,7 @@ dut:
   - series L 0.5n
 traces:
   - S11 logmag
-  - S21 phase
+  - S21 phase 10deg
 markers:
   - 100M
   - 300M

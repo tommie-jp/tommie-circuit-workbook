@@ -112,7 +112,7 @@ title: 図3 perfboard のスルー — 3 GHz で S21 −2.8 dB・S11 −3.3 dB (
 dut:
   - series R 0 esl 5n
 traces:
-  - S21 logmag
+  - S21 logmag 10dB
   - S11 logmag
 markers:
   - 500M

@@ -104,7 +104,7 @@ title: 図3 52 nH が残るスルー — S11 は 31 MHz で −20 dB
 dut:
   - series R 0 esl 52.1n
 traces:
-  - S21 logmag
+  - S21 logmag 10dB
   - S11 logmag
 markers:
   - 10M

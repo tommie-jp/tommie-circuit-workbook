@@ -179,7 +179,7 @@ dut:
   - shunt L 100u cp 3p
   - series C 100n
 traces:
-  - S21 logmag
+  - S21 logmag 10dB
   - S11 logmag
 markers:
   - 1M

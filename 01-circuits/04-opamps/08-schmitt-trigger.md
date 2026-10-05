@@ -149,7 +149,7 @@ notes:
 ```scope
 title: 図3 − 入力 (CH1) を下げて上げる — 出力 (CH2) はしきい値が 2 つ
 time: 100ms/div
-trigger: ch1 falling 1V at -5div
+trigger: ch1 falling 0.999V at -5div
 ch1: {wave: "= 1V - 10V * (t / 1s) + 20V * ((t - 0.3s) / 1s) * step(t - 0.3s) | clip -2V 1V", range: 1V/div}
 ch2: {wave: = -4.5V + 8V * (step(t - 0.141s) - step(t - 0.532s)), range: 2V/div}
 cursors: [141ms, 532ms]

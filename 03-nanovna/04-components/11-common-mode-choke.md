@@ -177,7 +177,7 @@ title: 図6 ディファレンシャルモード — 1 MHz で −0.15 dB
 dut:
   - series L 2u esr 1 cp 5p
 traces:
-  - S21 logmag
+  - S21 logmag 1dB
   - S21 phase
 markers:
   - 100k

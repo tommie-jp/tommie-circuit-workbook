@@ -42,8 +42,8 @@ notes:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/04-diy-cal-kit.svg)
 
 - **Open** は中心導体をどこにもつながず、外皮 (シェル) だけの部品。
-  ほかに何もつながる先が無いのは意図どおりで、ERC のお知らせは無視してよい
-- **Short** は中心導体を最短距離で外皮 (GND) へ落とす
+  ほかに何もつながる先が無いのは意図どおりで、3 本のピンを `unused:` に並べて、ERC の「つながっていない」から外した
+- **Short** は中心導体を最短距離で外皮 (GND) へ落とす。ピンが全部同じネットになるのは意図どおりなので、`shorted: [J2]` に並べて、ERC の短絡のお知らせから外した
 - **Load** は中心導体と外皮の間に 50 Ω を入れる。50 Ω は E24 に無いので、
   **100 Ω を 2 本並列**にする (R1 ∥ R2 = 50 Ω)。2 本を並べると、リード線の
   インダクタンスも 2 本の並列で半分になり、1 本より高い周波数まで 50 Ω に近い
@@ -72,6 +72,7 @@ board:
   size: 7x5cm
   silk: board
   slots: on
+shorted: [J2]
 title: 図3 Short
 points:
   GND: 09

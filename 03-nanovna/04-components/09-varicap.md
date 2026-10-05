@@ -159,7 +159,7 @@ dut:
   - series C 100n
 traces:
   - S21 logmag
-  - S21 phase
+  - S21 phase 50deg
 markers:
   - 1M
 ```

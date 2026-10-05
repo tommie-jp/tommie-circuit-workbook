@@ -150,7 +150,7 @@ wires:
 | 項目 | 値 |
 | --- | --- |
 | Wavegen W1 | 搬送波 Sine 1 MHz、振幅 1 V (peak)、Modulation: AM、変調波 Sine 1 kHz、変調度 50 % |
-| Scope CH1 (1+ = 検波出力) | Coupling DC、200 mV/div、Offset 1 V 前後 |
+| Scope CH1 (1+ = 検波出力) | Coupling DC、100 mV/div、Offset 1 V 前後 |
 | Scope CH2 (2+ = 同調回路) | Coupling DC、1 V/div |
 | Scope 時間軸・トリガ | 200 µs/div、CH1 の立ち上がり |
 
@@ -158,7 +158,7 @@ wires:
 title: 図3 AM 信号の試験 — 同調回路 (CH2) は太り細り、検波出力 (CH1) は 1 kHz
 time: 200us/div
 trigger: ch1 rising 0.99V
-ch1: {wave: = 0.99V + 0.197V * sin(2 * pi * 1kHz * t), range: 200mV/div, position: -4.95div}
+ch1: {wave: = 0.99V + 0.197V * sin(2 * pi * 1kHz * t), range: 100mV/div, position: -10div}
 ch2: {wave: = 0.93V * (1 + 0.5 * sin(2 * pi * 1kHz * t)) * sin(2 * pi * 1MHz * t), range: 1V/div, position: 2.5div}
 measure: [vpp, avg, freq]
 cursors: [250us, 750us]

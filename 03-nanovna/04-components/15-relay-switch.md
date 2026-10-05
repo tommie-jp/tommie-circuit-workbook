@@ -134,7 +134,7 @@ title: 図4 閉じた接点 (15 nH) — 300 MHz で S11 が −11.3 dB まで上
 dut:
   - series R 0 esl 15n
 traces:
-  - S21 logmag
+  - S21 logmag 10dB
   - S11 logmag
 markers:
   - 10M

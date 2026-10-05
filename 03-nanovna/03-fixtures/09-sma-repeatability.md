@@ -122,7 +122,7 @@ title: 図4 スルー治具 — 300 MHz で S21 の位相は −44.5°
 dut:
   - series R 0 esl 52.1n
 traces:
-  - S21 phase
+  - S21 phase 20deg
   - S11 logmag
 markers:
   - 100M

@@ -104,7 +104,7 @@ dut:
   - series C 0.5p
 traces:
   - S21 logmag
-  - S21 phase
+  - S21 phase 50deg
 markers:
   - 10M
   - 100M
