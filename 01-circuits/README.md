@@ -253,7 +253,7 @@
 | 5-1 | [半波・全波・ブリッジ整流と平滑 (低圧 AC)](05-power-supplies/01-rectifier-filter.md) | 必須 | | BB |
 | 5-2 | [ツェナー + Tr のシリーズレギュレータ](05-power-supplies/02-zener-series-regulator.md) | 必須 | 古 | BB |
 | 5-3 | [3 端子レギュレータ (7805)](05-power-supplies/03-three-terminal-regulator.md) | 必須 | | BB |
-| 5-4 | [LDO — USB 5V → 3.3V](05-power-supplies/04-ldo-usb.md) | 必須 | 今 | BB |
+| 5-4 | [LDO — USB 5V → 3.3V](05-power-supplies/04-ldo-usb.md) | 必須 | 今 | BB / PF |
 | 5-5 | [昇圧 — Joule thief](05-power-supplies/05-joule-thief.md) | 必須 | 古 | BB |
 | 5-6 | [降圧スイッチング (MC34063 かモジュール)](05-power-supplies/06-buck-converter.md) | 入門 | 今 | BB |
 | 5-7 | [チャージポンプ — 555 で負電圧](05-power-supplies/07-charge-pump-negative.md) | 入門 | | BB |
