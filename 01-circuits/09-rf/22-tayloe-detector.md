@@ -289,7 +289,7 @@ I と Q は 1 kHz の音なので Scope でそのまま見える。4 相の順�
 
 ## 計器の画面
 
-計算値 (振幅は LTspice の 0.434 V peak)。I と Q の線には 498 kHz の切り替えの段が数 mV 乗るが、この尺度では見えない (LTspice で約 5 mV<sub>pp</sub>)。
+計算値 (振幅は LTspice の 0.434 V peak)。I と Q の線には 498 kHz の切り替えの段が数 mV 乗るが、この尺度では見えない (計算値で約 5 mV<sub>pp</sub>)。
 
 ```scope
 title: 図3 W2 = 499 kHz (LO より 1 kHz 上) — Q が I より 250 µs 進む
