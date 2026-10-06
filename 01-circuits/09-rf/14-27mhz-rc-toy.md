@@ -388,6 +388,7 @@ board:
   size: 5x7cm
   h: 1.6mm
   material: FR-4
+  slots: on
 title: 図5 受信機の低周波部 (perfboard 5×7cm、部品面)
 points:
   NC_PIN1: i6

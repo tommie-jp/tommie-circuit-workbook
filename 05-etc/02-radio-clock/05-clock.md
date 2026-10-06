@@ -1462,6 +1462,9 @@ title: 図9b 発振と分周のユニバーサル基板 (ユニット 1)
 board:
   size: 15x9cm
   silk: board
+  h: 1.6mm
+  material: FR-4
+  slots: on
 points:
   VCC: a23
   GND: b24
@@ -1681,6 +1684,9 @@ title: 図10b 窓判定のユニバーサル基板 1/2 (ユニット 6)
 board:
   size: 9x7cm
   silk: board
+  h: 1.6mm
+  material: FR-4
+  slots: on
 points:
   VCC: a19
   GND: b20
@@ -1903,6 +1909,9 @@ title: 図11b 窓判定のユニバーサル基板 2/2 (ユニット 6)
 board:
   size: 9x7cm
   silk: board
+  h: 1.6mm
+  material: FR-4
+  slots: on
 points:
   VCC: a19
   GND: b20
@@ -2126,6 +2135,9 @@ title: 図12b 同期済みと設定のユニバーサル基板 (ユニット 7)
 board:
   size: 15x9cm
   silk: board
+  h: 1.6mm
+  material: FR-4
+  slots: on
 points:
   VCC: a23
   GND: b24

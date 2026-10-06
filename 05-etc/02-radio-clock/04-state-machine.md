@@ -728,6 +728,9 @@ title: 図8b 同期とエッジ検出のユニバーサル基板 (ユニット 1
 board:
   size: 15x9cm
   silk: board
+  h: 1.6mm
+  material: FR-4
+  slots: on
 points:
   NC_U6_6: ad13
   NC_U6_8: ac10
@@ -1019,7 +1022,11 @@ wires:
 
 ```perf
 title: 図9b 間隔タイマと窓のユニバーサル基板 (ユニット 2)
-board: 7x9cm
+board:
+  size: 7x9cm
+  h: 1.6mm
+  material: FR-4
+  slots: on
 points:
   NC_U11_4: i9
   NC_U11_10: f10
@@ -1248,6 +1255,9 @@ title: 図10b 状態を動かす条件のユニバーサル基板 (ユニット 
 board:
   size: 15x9cm
   silk: board
+  h: 1.6mm
+  material: FR-4
+  slots: on
 points:
   NC_U15_10: m20
   NC_U15_13: j20
@@ -1513,6 +1523,9 @@ title: 図11b 状態レジスタと出力のユニバーサル基板 (ユニッ�
 board:
   size: 7x5cm
   silk: board
+  h: 1.6mm
+  material: FR-4
+  slots: on
 points:
   NC_U16_11: q10
   NC_U16_12: p10

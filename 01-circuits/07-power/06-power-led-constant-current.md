@@ -62,7 +62,11 @@ LED に約 350 mA が流れるので、ブレッドボードの 1 穴 200 mA の
 ユニバーサル基板 (perfboard、5×7 cm) に半田付けする。電源の 9 V は 12 V 以下、周波数は直流なので、perfboard の範囲に収まる。
 
 ```perf
-board: 5x7cm
+board:
+  size: 5x7cm
+  h: 1.6mm
+  material: FR-4
+  slots: on
 title: 図2 perfboard に組む (部品面から見た図)
 parts:
   U1: ic3/to220 e4 e5 e6 LM317

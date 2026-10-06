@@ -137,6 +137,7 @@ board:
   silk: board
   h: 1.6mm
   material: FR-4
+  slots: on
 style:
   back: on
 parts:

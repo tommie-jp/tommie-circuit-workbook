@@ -183,6 +183,9 @@ title: 図2b Pico 2 と ADC の前処理のユニバーサル基板
 board:
   size: 7x5cm
   silk: board
+  h: 1.6mm
+  material: FR-4
+  slots: on
 style:
   check: off
 parts:

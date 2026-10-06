@@ -221,6 +221,9 @@ title: 図2b 中波 AM 受信機のユニバーサル基板
 board:
   size: 7x5cm
   silk: board
+  h: 1.6mm
+  material: FR-4
+  slots: on
 parts:
   BAR:
     type: device

@@ -334,6 +334,7 @@ board:
   silk: board
   h: 1.6mm
   material: FR-4
+  slots: on
 parts:
   PS:
     type: device
@@ -497,6 +498,7 @@ board:
   silk: board
   h: 1.6mm
   material: FR-4
+  slots: on
 points:
   P_440: i18
   V_5V: m18
@@ -657,6 +659,7 @@ board:
   silk: board
   h: 1.6mm
   material: FR-4
+  slots: on
 points:
   P_440: b18
   T_440: h18
