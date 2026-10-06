@@ -1,0 +1,40 @@
+* mixer single
+.options reltol=1e-4 abstol=1e-10 vntol=1e-7 gmin=1e-12
+VDD vdd 0 5
+C6 vdd 0 100n
+C7 vdd 0 10u
+R1 rf 0 51
+R3 lo 0 51
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+RB1 vdd b 82k
+RB2 b 0 22k
+RE e 0 470
+C1 rf b 10n
+C2 lo e 10n
+Q1 d b e Q1815
+L1 vdd d1 220u
+RLt d1 d 5
+C3 vdd d 560p
+C4 d fin 10n
+Rleak fin 0 1G
+
+R7 fin 0 2000.0
+Ls1 fin a 19.9m
+Cs1 a fb1 6.15p
+Rs1 fb1 n1 38
+Cp1 n1 0 17.7n
+Lp1 n1 0 6.9u
+Ls2 n1 c 19.9m
+Cs2 c e1 6.15p
+Rs2 e1 fout 38
+C5 fout 0 1.2n
+L2 fout o2 100u
+RLf2 o2 out 2
+Rload out 0 50
+Vlo los 0 SIN(0 0.7079457843841378 1455000.0)
+Rlo los lo 0.001
+Vrf rfs 0 SIN(0 0.01 1000000.0)
+Rrf rfs rf 0.001
+.options plotwinsize=0 numdgt=15
+.tran 0 1.4m 0 25n
+.end

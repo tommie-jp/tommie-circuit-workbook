@@ -1,4 +1,4 @@
-* 2SC1815 differential-pair mixer (4-2): PNP current mirror (2SA1015) collects the difference, tuned 455 kHz, ceramic filter, 50 ohm out
+* diff new
 .options reltol=1e-4 abstol=1e-10 vntol=1e-7 gmin=1e-12
 .model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
 .model Q1015 PNP (IS=2e-14 BF=200 NF=1 VAF=50 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=4p TF=2n TR=50n)
@@ -33,7 +33,6 @@ Ct d t1 100n
 Lt t1 0 220u
 RLt t1 0 1G
 Ctk t1 0 560p
-R7 fin 0 2k
 Ls1 fin a 19.9m
 Cs1 a fb1 6.15p
 Rs1 fb1 n1 38
@@ -47,10 +46,10 @@ L2 fout o2 100u
 RLf2 o2 out 2
 Rload out 0 50
 Rleak fin 0 1G
-Vlo los 0 SIN(0 0.31622776601683794 1455000.0)
+Vlo los 0 SIN(0 0.31622776601683794 1.455e6)
 Rlo los lo 1m
-Vrf rfs 0 SIN(0 0.01 1000000.0)
+Vrf rfs 0 SIN(0 0.01 1e6)
 Rrf rfs rf 1m
-
-* 過渡解析: .tran 25n 1.4m 0 25n (最後の 1 ms を FFT)。IF OUT は v(out)、ミラーの出力は v(d) (diff_output.py)
+.options plotwinsize=0 numdgt=15
+.tran 0 1.4m 0 25n
 .end

@@ -1,4 +1,4 @@
-"""4-3 の表とグラフに使う数を出す。結果は results.json に残す。"""
+"""4-3 の表とグラフに使う数を出す (1 石と、抵抗負荷の差動対 = 元の 4-2。今の 4-2 (カレントミラー) は diff_output.py)。結果は results.json に残す。"""
 from lib import *
 import json
 R = {}
