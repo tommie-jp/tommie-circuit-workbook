@@ -62,175 +62,225 @@ CPU は 4 ms ごとに届く 2000 個の値を計算するだけにする。
 ## 回路図
 
 ```circuit
-title: 図1 Tayloe 検波器 (3.3 V) と差動増幅 2 つから Pico 2 の ADC へ
+title: 図1 Tayloe 検波器 (3.3 V。A0・A1・A2・A3 は図2 の差動増幅へ)
 parts:
-  W2: sine c11 e11 l=$\mathrm{W2}$
-  G1: ground e11
-  R1: resistor c16 e16 1k
-  U2: dip16 l16a2a4 r270 74HC4052
-  P1: vcc j14a5 3.3V
-  G2: ground n15a5
-  G3: ground n18
-  C2: capacitor f12a5 g12a5 10n
-  G4: ground g12a5
-  C3: capacitor h13a5 i13a5 10n
-  G5: ground i13a5
-  R6: resistor f11 f9 100k
-  R8: resistor h11 h9 100k
-  R7: resistor d9 f9 200k
-  VREF: vcc d9 1.65V
-  U4A: opamp g7 mirror +up MCP6002
-  R9: resistor i9 i6 200k
-  C1: capacitor f19 g19 10n
-  G6: ground g19
-  C4: capacitor h20 i20 10n
-  G7: ground i20
-  R2: resistor f21 f23 100k
-  R4: resistor h21 h23 100k
-  R3: resistor d23 f23 200k
-  VREF: vcc d23 1.65V
-  U3A: opamp g25 +up MCP6002
-  R5: resistor i23 i26 200k
-  M1: voltmeter g28 i28 l=$\mathrm{CH1}$
-  G8: ground i28
-  M2: voltmeter a27 c27 l=$\mathrm{CH2}$
-  G9: ground c27
-  U5:
+  P1: vcc e6 3.3V
+  U1: ic h8 74HC74
+  G2: ground j8
+  W1: square j3a5 l3a5 l=$\mathrm{W1}$
+  G1: ground l3a5
+  U2: ic h35 74HC4052
+  P1: vcc d35 3.3V
+  G3: ground l34
+  G4: ground j38a5
+  C1: capacitor l19a5 n19a5 10n
+  G5: ground n19a5
+  C2: capacitor l23a5 n23a5 10n
+  G6: ground n23a5
+  C3: capacitor l27a5 n27a5 10n
+  G7: ground n27a5
+  C4: capacitor l31a5 n31a5 10n
+  G8: ground n31a5
+  X1:
     type: device
-    at: d33
-    label: Pico 2
-    pins: [3V3, GP27, GP26, GND]
-  P1: vcc b31 3.3V
-  G10: ground e31
-  W1: square o20 q20 l=$\mathrm{W1}$
-  G11: ground q20
-  U1: ic q26 74HC74
-  P1: vcc n24 3.3V
-  G12: ground t26
-  P1: vcc q3 3.3V
-  R10: resistor q3 s3 10k
-  R11: resistor s3 u3 10k
-  G13: ground u3
-  U4B: opamp s7 +down MCP6002
-  VREF: vcc q9 1.65V
-  U3B: opamp s13 +down MCP6002
-  G15: ground t11
-  P1: vcc k2 3.3V
-  C5: capacitor k3 m3 100n
-  C6: capacitor k6 m6 100n
-  C7: capacitor k9 m9 100n
-  C8: capacitor k12 m12 100n
-  G14: ground m7a5
+    at: q15
+    pins: [A0, A1, A2, A3]
+    turn: mirror
+  R1: resistor h39 h41 1k
+  W2: sine h42 j42 l=$\mathrm{W2}$
+  G9: ground j42
+  P1: vcc r3 3.3V
+  C5: capacitor r3 t3 100n
+  G10: ground t3
+  P1: vcc r7 3.3V
+  C6: capacitor r7 t7 100n
+  G11: ground t7
 wires:
-  - c11 -- c16
-  - U2.AN |- e16
-  - U2.VCC |- j14a5
-  - U2.BN |- n15a5
-  - U2.E |- n18
-  - U2.VEE |- n18
-  - U2.GND |- n18
-  - U2.A1 |- f15a5
-  - f15a5 -- f12a5
-  - f12a5 -- f11
-  - U2.A2 |- h15
-  - h15 -- h13a5
-  - h13a5 -- h11
-  - U4A.+ -| f9
-  - U4A.- -| h9
-  - h9 -- i9
-  - i6 -- g6
-  - U4A.out -- g6
-  - g6 -- g3 -- a3 -- a27
-  - a27 -- a30
-  - U5.GP27 -| a30
-  - U2.A0 |- f16a5
-  - f16a5 -- f19
-  - f19 -- f21
-  - U2.A3 |- h17
-  - h17 -- h20
-  - h20 -- h21
-  - U3A.+ -| f23
-  - U3A.- -| h23
-  - h23 -- i23
-  - i26 -- g26
-  - U3A.out -- g26
-  - g26 -- g28
-  - g28 -- g29
-  - U5.GP26 -| g29
-  - U5.3V3 -| b31
-  - U5.GND -| e31
-  - U2.S0 |- j31
-  - U2.S1 |- j30f0
-  - j31 -- p31f0
-  - p31f0 -- u31
-  - j30f0 -- q30f0
-  - U1.1Q -| p31f0
-  - U1.2Q -| q30f0
-  - u31 -- u22
-  - U1.2D -| u22
-  - U1./2Q -| v29a5
-  - v29a5 -- v21
-  - U1.1D -| v21
-  - U1.1CLK -| q22a5
-  - U1.2CLK -| r22a5
-  - r22a5 -- q22a5
-  - q22a5 -- o22a5
-  - o20 -- o22a5
-  - U1.GND |- t26
-  - n25 |- U1.VCC
-  - n25a5 |- U1.1PRE
-  - n26 |- U1.1CLR
-  - n26a5 |- U1.2PRE
-  - n27 |- U1.2CLR
-  - n24 -- n25
-  - n25 -- n25a5
-  - n25a5 -- n26
-  - n26 -- n26a5
-  - n26a5 -- n27
-  - s3 -- s5
-  - U4B.+ -| s5
-  - U4B.- -| q6
-  - q6 -- q9
-  - q9 -- s9
-  - U4B.out -- s9
-  - U3B.+ -| t11
-  - U3B.- -| q12
-  - q12 -- q15
-  - q15 -- s15
-  - U3B.out -- s15
-  - k2 -- k3 -- k6 -- k9 -- k12
-  - m3 -- m6 -- m7a5 -- m9 -- m12
+  - e6 -- e9
+  - e7 |- U1.VCC
+  - e7a5 |- U1.1PRE
+  - e8 |- U1.1CLR
+  - e8a5 |- U1.2PRE
+  - e9 |- U1.2CLR
+  - U1.GND |- j8
+  - U1.1CLK -| h3a5
+  - h3a5 -- i3a5
+  - U1.2CLK -| i3a5
+  - i3a5 -- j3a5
+  - U1./2Q -| i11
+  - i11 -- n11 -- n1 -- g1f0
+  - g1f0 -| U1.1D
+  - U1.1Q -| g11f5
+  - g11f5 -- g13f0
+  - g13f0 -- t13
+  - g11f5 -- b11a5 -- b2 -- h2f0
+  - h2f0 -| U1.2D
+  - U1.2Q -| h12f0
+  - h12f0 -- u12
+  - t13 -| U2.S0
+  - u12 -| U2.S1
+  - U2.VCC |- d35
+  - l34 |- U2.GND
+  - U2.VEE |- l34a5
+  - U2.E |- l35
+  - l34 -- l35
+  - U2.BN -| j38a5
+  - U2.A0 -| f18f0
+  - f18f0 -- l18
+  - U2.A1 -| g22
+  - g22 -- l22
+  - U2.A2 -| g26f0
+  - g26f0 -- l26
+  - U2.A3 -| h30
+  - h30 -- l30
+  - l18 -- l19a5
+  - l22 -- l23a5
+  - l26 -- l27a5
+  - l30 -- l31a5
+  - X1.A0 -| l18
+  - X1.A1 -| l22
+  - X1.A2 -| l26
+  - X1.A3 -| l30
+  - U2.AN -| h39
+  - h41 -- h42
 notes:
-  - text n2 small left: C5・C6・C7・C8 は各 IC の電源ピンのそばに 1 個ずつ
-  - text w2 small left: U3・U4 (MCP6002) の電源は PIN 8 が +3.3V、PIN 4 が GND
-  - text x2 small left: U3B は使わない (+ を GND、- を出力へつなぐ)
+  - text k4 small left: 1.992 MHz (0 - 3.3 V)
+  - text i43 small left: 499 kHz
+  - text j43 small left: 直流 1.65 V
+  - text s15 small center: 図2 の差動増幅へ
+  - text u5 small center: パスコン (C5 は U1、C6 は U2)
+  - text s25f0 small center: LO 0° (S0)
+  - text v25 small center: LO 90° (S1)
 style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/23-iq-pico2-adc.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/23-iq-pico2-adc-1.svg)
 
-- **左上**: W2 (RF) を R1 (1 kΩ) を通して 74HC4052 の AN (PIN 13) へ。W2 は 0.5 V<sub>pp</sub>・直流 1.65 V にして、
+回路図は 2 枚に分けた。図1 が Tayloe 検波器、図2 が I と Q の差動増幅と Pico 2 だ。
+図1 の左下の箱 X1 と図2 の左の箱 X2 は部品ではなく、A0〜A3 の 4 本の線が図をまたいで続くことを示す。
+
+- **右**: W2 (RF) を R1 (1 kΩ) を通して U2 (74HC4052) の AN (PIN 13) へ。W2 は 0.5 V<sub>pp</sub>・直流 1.65 V にして、
   部品を足さずに 3.3 V の電源の真ん中に偏らせる。A0〜A3 は C1〜C4 (10 nF) で GND へ (9-22 と同じ)
-- **下**: W1 (1.992 MHz、0〜3.3 V の方形波) で 74HC74 の 2 つのフリップフロップを同時に叩く。
+- U2 はピンを働きで並べた箱で描いた (左にチャネル、右に共通の AN、下に GND・VEE・E・S0・S1)。
+  この箱は左右を裏返せず、共通の AN が右にあるので、**RF は右から入り、左の C1〜C4 へ流れる**
+- **左**: W1 (1.992 MHz、0〜3.3 V の方形波) で 74HC74 の 2 つのフリップフロップを同時に叩く。
   1D ← /2Q、2D ← 1Q のジョンソンカウンタで、(Q1, Q2) が 00 → 10 → 11 → 01 と回る。
   **S0 ← 1Q、S1 ← 2Q** なので (S1, S0) は 00 → 01 → 11 → 10 で、選ばれる出口は **A0 → A1 → A3 → A2** (0°・90°・180°・270°)。
-  番号の順ではない。だから **I = A0 − A3、Q = A1 − A2** (9-22 と同じ)
-- **右**: U3A が I の差動増幅。R2 (100 kΩ)・R3 (200 kΩ) で + 入力を (2·A0 + VREF)/3 にし、
+  番号の順ではない。だから **I = A0 − A3、Q = A1 − A2** (9-22 と同じ)。帰還の 2 本は箱の上と下を回り、
+  線の交差が 2 か所ある (黒丸の無い交差はつながっていない)
+- C5・C6 (100 nF) は U1・U2 の電源のパスコン
+
+```circuit
+title: 図2 I と Q の差動増幅から Pico 2 の ADC へ
+parts:
+  X2:
+    type: device
+    at: f4h0f0
+    pins: [A0, A3, A1, A2]
+    turn: mirror
+  R2: resistor f9 f11 100k
+  R4: resistor h9 h11 100k
+  R3: resistor d11 f11 200k
+  VREF: vcc d11 1.65V
+  U3A: opamp g13 +up MCP6002
+  R5: resistor i11 i14 200k
+  R6: resistor o9 o11 100k
+  R8: resistor q9 q11 100k
+  R7: resistor m11 o11 200k
+  VREF: vcc m11 1.65V
+  U4A: opamp p13 +up MCP6002
+  R9: resistor r11 r14 200k
+  M1: voltmeter g18 i18 l=$\mathrm{CH1}$
+  G1: ground i18
+  M2: voltmeter p18 r18 l=$\mathrm{CH2}$
+  G2: ground r18
+  U5:
+    type: device
+    at: k25
+    label: Pico 2
+    pins: [3V3, GP26, GP27, GND]
+  P1: vcc h23a5 3.3V
+  G3: ground m23a5
+  P1: vcc u3 3.3V
+  R10: resistor u3 w3 10k
+  R11: resistor w3 y3 10k
+  G4: ground y3
+  U4B: opamp w7 +down MCP6002
+  VREF: vcc u9 1.65V
+  U3B: opamp w13 +down MCP6002
+  G5: ground x11
+  P1: vcc u19 3.3V
+  C7: capacitor u19 w19 100n
+  G6: ground w19
+  P1: vcc u22 3.3V
+  C8: capacitor u22 w22 100n
+  G7: ground w22
+wires:
+  - X2.A0 -| f9
+  - X2.A3 -| h8
+  - h8 -- h9
+  - X2.A1 -| o7
+  - o7 -- o9
+  - X2.A2 -| q6
+  - q6 -- q9
+  - U3A.+ -| f11
+  - U3A.- -| h11
+  - h11 -- i11
+  - i14 -- g14
+  - U3A.out -- g14
+  - U4A.+ -| o11
+  - U4A.- -| q11
+  - q11 -- r11
+  - r14 -- p14
+  - U4A.out -- p14
+  - g14 -- g18
+  - g18 -- g22
+  - U5.GP26 -| g22
+  - p14 -- p18
+  - p18 -- p22a5
+  - U5.GP27 -| p22a5
+  - U5.3V3 -| h23a5
+  - U5.GND -| m23a5
+  - w3 -- w5
+  - U4B.+ -| w5
+  - U4B.- -| u6
+  - u6 -- u9
+  - u9 -- w9
+  - U4B.out -- w9
+  - U3B.+ -| x11
+  - U3B.- -| u12
+  - u12 -- u15
+  - u15 -- w15
+  - U3B.out -- w15
+notes:
+  - text d4 small center: 図1 の C1 - C4 から
+  - text f20f0 small center: I (ADC0)
+  - text o20f0 small center: Q (ADC1)
+  - text y7 small center: U4B で VREF (+1.65 V) を作る
+  - text x20a5 small center: パスコン (C7 は U3、C8 は U4)
+  - text y17 small left: U3・U4 (MCP6002) の電源は PIN 8 が +3.3V、PIN 4 が GND
+  - text z17 small left: U3B は使わない (+ を GND、- を出力へつなぐ)
+style:
+  pitch: 1
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/23-iq-pico2-adc-2.svg)
+
+- **上**: U3A が I の差動増幅。R2 (100 kΩ)・R3 (200 kΩ) で + 入力を (2·A0 + VREF)/3 にし、
   R4 (100 kΩ)・R5 (200 kΩ) で出力 = **VREF + 2 × (A0 − A3)**。出力は Pico 2 の **GP26 (ADC0)** へ
-- **左**: U4A が Q の差動増幅 (同じ形を左右に裏返して描いた)。出力 = VREF + 2 × (A1 − A2) を **GP27 (ADC1)** へ
+- **下**: U4A が Q の差動増幅。I と同じ形で、出力 = VREF + 2 × (A1 − A2) を **GP27 (ADC1)** へ。
+  I も Q も左から右へ流れ、右端の Pico 2 に入る
 - **左下**: VREF (+1.65 V) は 3.3 V を R10・R11 (10 kΩ ずつ) で半分にし、U4B のボルテージフォロワで低い出力抵抗にしたもの。
   R3 と R7 (200 kΩ) へ配る。U3B は使わないので、+ を GND、− を出力につないで遊ばせる
 - **電源**: すべて Pico 2 の **3V3 (PIN 36)** から。MCP6002 は 1.8〜6 V、74HC は 2〜6 V で動く。
-  C5〜C8 (100 nF) は各 IC の電源のパスコン
-- 図1 はつながりを読むための図で、74HC4052 は実物のピンの並び (DIP-16 を寝かせた形) で描いた。
-  そのため A1・A2 は左へ、A0・A3 は右へ出し、74HC74 の帰還の線は箱の下を回した (交差は黒丸の無い所)
+  C7・C8 (100 nF) は U3・U4 の電源のパスコン
 - CH1・CH2 は AD3 の Scope。ADC の入口 (GP26・GP27) を GND に対して見る
 
 ## 実体配線図
 
 ```breadboard
-title: 図2 ブレッドボードに組む (Pico 2 は図3 の別のブレッドボード)
+title: 図3 ブレッドボードに組む (Pico 2 は図4 の別のブレッドボード)
 board: full
 parts:
   AD:
@@ -241,17 +291,17 @@ parts:
   PI:
     type: device
     at: bottom
-    label: 図3 の GP26 へ
+    label: 図4 の GP26 へ
     pins: [I]
   PQ:
     type: device
     at: bottom
-    label: 図3 の GP27 へ
+    label: 図4 の GP27 へ
     pins: [Q]
   PP:
     type: device
     at: bottom
-    label: 図3 の 3V3・GND へ
+    label: 図4 の 3V3・GND へ
     pins: [3V3, GND]
   U1: dip14 @ e2 74HC74
   U2: dip16 @ e12 r180 74HC4052
@@ -322,17 +372,15 @@ wires:
   - PP.3V3 -- +b61 red
   - PP.GND -- -b60 black
 notes:
-  - text: レールは上下とも 赤 = +3.3V (図3 の Pico 2 の 3V3)、青 = GND
-  - text: MCP6002 のピン — 1 OUTA、2 INA−、3 INA+、4 VSS
-  - text: MCP6002 のピン — 5 INB+、6 INB−、7 OUTB、8 VDD (LM358 と同じ並び)
+  - text: レールは上下とも 赤 = +3.3V (図4 の Pico 2 の 3V3)、青 = GND
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/23-iq-pico2-adc-1.svg)
 
-- ブレッドボードは **full (63 列)**。部品が多いので、Pico 2 は図3 の別のハーフのブレッドボードに挿し、
-  I・Q・3V3・GND の 4 本のジャンパ線でつなぐ (図2 の下の 3 つの箱)
-- **電源**: 図3 の Pico 2 の 3V3 を図2 の下の + レールへ (赤)、GND を − レールへ (黒)。
-  上下のレールは 1 列 (+、赤) と 62 列 (−、黒) で渡す。**図2 の + レールはどれも +3.3 V** (5 V ではない)
+- ブレッドボードは **full (63 列)**。部品が多いので、Pico 2 は図4 の別のハーフのブレッドボードに挿し、
+  I・Q・3V3・GND の 4 本のジャンパ線でつなぐ (図3 の下の 3 つの箱)
+- **電源**: 図4 の Pico 2 の 3V3 を図3 の下の + レールへ (赤)、GND を − レールへ (黒)。
+  上下のレールは 1 列 (+、赤) と 62 列 (−、黒) で渡す。**図3 の + レールはどれも +3.3 V** (5 V ではない)
 - **U1 (74HC74)** は 2〜8 列。VCC・2CLR・2PRE (上の列) と 1CLR・1PRE (下の列) は + レールへ、GND (8 列の下) は − レールへ。
   W1 (緑) は 2CLK (5 列の上) に挿し、緑の線で 1CLK (4 列の下) へも渡す。
   1Q (6 列の下) は青で S0 と 2D へ、2Q (7 列の上) は紫で S1 へ、/2Q (8 列の上) は白で 1D へ
@@ -340,27 +388,26 @@ notes:
   GND・VEE・E・BN が上の列に並び、上の − レールへ短く落とせるため。VCC (19 列の下) は下の + レールへ。
   B0〜B3 は使わない (開けておく。スイッチの B 側は BN = GND とつながるだけ)
 - **RF**: W2 (黄) を 10 列へ。R1 (1 kΩ、i10〜i16) で AN (16 列) へ。C1〜C4 (103) は A0・A3・A1・A2 の列の j 行から − レールへ
-- **I の差動増幅 (U3 の下の半分、30〜33 列)**: A3 (14 列) を橙で 23 列へ運び R4 (g23〜g31) で IN− へ。
-  A0 (15 列) を橙で 22 列へ運び R2 (i22〜i32) で IN+ へ。R5 (j30〜j31) は OUTA と INA− の間に**立てて**挿す。
-  R3 (h32〜h38) は IN+ から VREF (38 列) へ
+- **I の差動増幅 (U3 の下の半分、30〜33 列)**: A3 (14 列) を橙で 23 列へ運び R4 (g23〜g31) で VINA− へ。
+  A0 (15 列) を橙で 22 列へ運び R2 (i22〜i32) で VINA+ へ。R5 (j30〜j31) は VOUTA と VINA− の間に**立てて**挿す。
+  R3 (h32〜h38) は VINA+ から VREF (38 列) へ
 - **Q の差動増幅 (U4 の下の半分、50〜53 列)**: A1 (17 列、茶) と A2 (18 列、桃) は、I の部品をよけて上の段の b・c 行を通し、
-  42・43 列で下の段へ下ろす。R6 (i42〜i52) で IN+、R8 (g43〜g51) で IN−。R9 は j50〜j51 に立てる。R7 (h52〜h58) は VREF (58 列) へ
-- **VREF**: R10 (d55〜d60、60 列は + レール)・R11 (a55 から − レール) の中点を U4 の INB+ へ。
-  U4 の OUTB (51 列の上) と INB− をつないでフォロワにし、灰色の線で 38 列と 58 列の VREF へ配る。
-  U3 の上の半分 (INB+ を − レール、OUTB と INB− をつなぐ) は使わない
-- **出力**: U3 の OUTA (30 列) を橙で Pico 2 の GP26 へ、U4 の OUTA (50 列) を茶で GP27 へ
-- 図2 の MCP6002 はピンの名前の表に無いので、ピンは番号だけで出る。並びは LM358 と同じ (1 OUTA、2 INA−、3 INA+、4 VSS、5 INB+、6 INB−、7 OUTB、8 VDD)
+  42・43 列で下の段へ下ろす。R6 (i42〜i52) で VINA+、R8 (g43〜g51) で VINA−。R9 は j50〜j51 に立てる。R7 (h52〜h58) は VREF (58 列) へ
+- **VREF**: R10 (d55〜d60、60 列は + レール)・R11 (a55 から − レール) の中点を U4 の VINB+ へ。
+  U4 の VOUTB (51 列の上) と VINB− をつないでフォロワにし、灰色の線で 38 列と 58 列の VREF へ配る。
+  U3 の上の半分 (VINB+ を − レール、VOUTB と VINB− をつなぐ) は使わない
+- **出力**: U3 の VOUTA (30 列) を橙で Pico 2 の GP26 へ、U4 の VOUTA (50 列) を茶で GP27 へ
 - **ブレッドボードで組んでよい理由**: いちばん高い周波数は W1 の 1.992 MHz で、ブレッドボードの 3 MHz 以下に収まる。
   電流は IC 4 個で数 mA で、Pico 2 の 3V3 (最大 300 mA) にも、ブレッドボードの 500 mA にも遠い
 
 ```breadboard
-title: 図3 Pico 2 は別のブレッドボードに (USB で PC から給電)
+title: 図4 Pico 2 は別のブレッドボードに (USB で PC から給電)
 board: half
 parts:
   BB:
     type: device
     at: top
-    label: 図2 のブレッドボードから
+    label: 図3 のブレッドボードから
     pins: [GND, 3V3, Q, I]
   AD:
     type: device
@@ -386,7 +433,7 @@ notes:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/23-iq-pico2-adc-2.svg)
 
 - Pico 2 は PC の USB から給電し、プログラムの表示もこの USB のシリアルで受ける。GND38 (PIN 38) を − レールへ、3V3 (PIN 36) を + レールへ
-- GP26 (PIN 31) と GP27 (PIN 32) の a 行に図2 からの I・Q を挿し、b 行に AD3 の 1+・2+ を挿す。1−・2− は GND
+- GP26 (PIN 31) と GP27 (PIN 32) の a 行に図3 からの I・Q を挿し、b 行に AD3 の 1+・2+ を挿す。1−・2− は GND
 - **電源を入れる順**: 先に Pico 2 の USB をつなぎ (3.3 V が立ってから)、そのあと AD3 の W1・W2 を出す。
   電源の無い 74HC74・74HC4052 に W1・W2 を入れると、入力の保護ダイオードを通して電源の側へ電流が流れ込む
 
@@ -397,7 +444,7 @@ notes:
 | U1 | D フリップフロップ ×2 | 74HC74 | ジョンソンカウンタで 1/4 と 90° の 2 本 |
 | U2 | アナログマルチプレクサ (4 チャネル ×2) | 74HC4052 | A 側だけ使う。B0〜B3 は開け、BN・E・VEE は GND |
 | U3・U4 | オペアンプ (2 回路、レールツーレール) | MCP6002 (DIP-8) | U3A = I、U4A = Q、U4B = VREF、U3B は使わない |
-| U5 | マイコンボード | Raspberry Pi Pico 2 | 3V3 で全体に給電。別のハーフのブレッドボード (図3) |
+| U5 | マイコンボード | Raspberry Pi Pico 2 | 3V3 で全体に給電。別のハーフのブレッドボード (図4) |
 | R1 | 抵抗 | 1 kΩ | 9-22 と同じ |
 | R2・R4・R6・R8 | 抵抗 | 100 kΩ | 金属皮膜 ±1 % をすすめる (下の注) |
 | R3・R5・R7・R9 | 抵抗 | 200 kΩ (E24) | 同上 |
@@ -418,7 +465,7 @@ Analog Discovery 3 (AD3) で W1 (クロック) と W2 (RF) を作り、Scope で
 
 | 項目 | 設定 |
 | --- | --- |
-| Supplies | 使わない (電源は Pico 2 の 3V3)。AD3 の GND は図2 の − レールへ |
+| Supplies | 使わない (電源は Pico 2 の 3V3)。AD3 の GND は図3 の − レールへ |
 | Wavegen W1 (クロック) | Square、**1.992 MHz**、振幅 1.65 V、オフセット 1.65 V (0〜3.3 V)、Symmetry 50 % |
 | Wavegen W2 (RF) | Sine、**499 kHz** (次に 497 kHz)、振幅 0.25 V (0.5 V<sub>pp</sub>)、オフセット 1.65 V |
 | Scope (時間) | CH1 = GP26 (I)、CH2 = GP27 (Q)、どちらも GND 基準。250 mV/div、オフセットで 1.65 V を中央に。200 µs/div、トリガは CH1 の立ち上がり 1.65 V |
@@ -659,7 +706,7 @@ MicroPython のプログラムは実行していない (未確認)。
 Tayloe の出口の I・Q は 0.417 V peak (1 kHz)、差動増幅で 2 倍して ADC の入口では **1.65 V ± 0.834 V (1.67 V<sub>pp</sub>)**。
 
 ```scope
-title: 図4 ADC の入口 (W2 499 kHz) — Q (CH2) が I より 250 µs 進む
+title: 図5 ADC の入口 (W2 499 kHz) — Q (CH2) が I より 250 µs 進む
 time: 200us/div
 trigger: ch1 rising 1.65V
 ch1: {wave: sine 1kHz 0.834V offset 1.65V, range: 250mV/div, position: -6.6div}
@@ -675,7 +722,7 @@ measure: [vpp, avg, freq, phase]
   W2 を 497 kHz にすると、CH2 は 250 µs **遅れ**、−1.000 kHz と出る
 
 ```scope
-title: 図5 XY (X = I、Y = Q) — 半径 0.834 V の円。1 秒に 1000 回まわる
+title: 図6 XY (X = I、Y = Q) — 半径 0.834 V の円。1 秒に 1000 回まわる
 view: xy
 ch1: {wave: sine 1kHz 0.834V offset 1.65V, range: 250mV/div, position: -6.6div}
 ch2: {wave: sine 1kHz 0.834V offset 1.65V phase 90deg, range: 250mV/div, position: -6.6div}
@@ -685,7 +732,7 @@ xy: ch1 ch2
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/23-iq-pico2-adc-2.svg)
 
 - 中心が (1.65 V, 1.65 V) の円。プログラムはこの中心 (VREF) を引いて、点の向き φ と半径 A を計算している
-- 回る向きは止まった画面では分からない (時間の図4 で先後を見る)。円がつぶれていれば I と Q の利得か位相がずれている
+- 回る向きは止まった画面では分からない (時間の図5 で先後を見る)。円がつぶれていれば I と Q の利得か位相がずれている
 
 ## 見るべき値
 
@@ -694,7 +741,7 @@ xy: ch1 ch2
 
 | 確かめること | 期待する値 |
 | --- | --- |
-| ADC の入口 (CH1・CH2、W2 499 kHz) | 1 kHz、1.67 V<sub>pp</sub> (0.82〜2.48 V)、平均 1.65 V (図4) |
+| ADC の入口 (CH1・CH2、W2 499 kHz) | 1 kHz、1.67 V<sub>pp</sub> (0.82〜2.48 V)、平均 1.65 V (図5) |
 | CH2 と CH1 の先後 (W2 499 kHz) | CH2 (Q) が 250 µs (+90°) 進む。497 kHz では 250 µs 遅れる |
 | 表示 (W2 499 kHz) | `+1.000 kHz  0.83 Vpp` |
 | 表示 (W2 497 kHz) | `-1.000 kHz  0.83 Vpp` (符号だけ変わる) |
