@@ -117,16 +117,16 @@ parts:
   CIN: capacitor/ceramic d5 d9 100n
   R2: resistor c9 c13 15k
   RC: resistor b15 b20 2.2k
-  Q1: transistor e19(B) e20(C) e21(E) 2SC1815
+  Q1: transistor d19(B) d20(C) d21(E) 2SC1815
   RE1: resistor b21 b25 100
   RE2: resistor a25 -t25 390
   CE: capacitor/electrolytic c25(+) c28(-) 10uF
-  D2: diode h13(A) h17(K) 1N4148
-  CC: capacitor/ceramic i17 i20 10n
-  D1: diode j17(A) j14(K) 1N4148
+  D2: diode g13(A) g17(K) 1N4148
+  CC: capacitor/ceramic h17 h20 10n
+  D1: diode i17(A) i14(K) 1N4148
   COUT: capacitor/ceramic g20 g24 100n
-  RB: resistor i9 i13 4.7k
-  CG: capacitor/electrolytic g13(+) g8(-) 10uF
+  RB: resistor a13 -t13 4.7k
+  CG: capacitor/electrolytic h13(+) h9(-) 10uF
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black
@@ -139,25 +139,24 @@ wires:
   - AD.1- -- -t18 black
   - +t3 -- a3 red
   - +t15 -- a15 red
-  - e9 -- d19 orange [v10]
+  - e9 -- e19 orange [v10]
   - e13 -- f13 green
-  - d20 -- f20 green
+  - e20 -- f20 green
   - a28 -- -t28 black
-  - j8 -- -b8 black
   - j9 -- -b9 black
-  - i14 -- -b14 black
+  - j14 -- -b14 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/25-agc.svg)
 
-- **増幅段 (上のブロック)**: 9-11 の図 4 と同じ並び。5V は AD の V+ (赤) から上の + レールへ。**Q1 は `e19` (B)・`e20` (C)・`e21` (E)**
+- **増幅段 (上のブロック)**: 9-11 の図 4 と同じ並び。5V は AD の V+ (赤) から上の + レールへ。**Q1 は `d19` (B)・`d20` (C)・`d21` (E)**
   (2SC1815 は平らな面を手前に、左から E・C・B。穴に挿す向きに注意)
-- **ベース (9 列)**: R1 の下端・R2 の左・C<sub>IN</sub> の右が同じ列。橙の線 1 本で Q1 の B (19 列) へ。**R2 の右 (13 列) が G** で、
-  緑の線で下のブロックの 13 列へ渡す
-- **AGC (下のブロック)**: 13 列が G (D2 のアノード・R<sub>B</sub>・C<sub>G</sub> の + 側)、17 列が A (D2 のカソード・C<sub>C</sub>・D1 のアノード)。
-  コレクタは緑の線で 20 列へ渡し、C<sub>OUT</sub> (20 列 → 24 列) と C<sub>C</sub> (17 列 → 20 列) をつなぐ。C<sub>G</sub> と D1 のカソード・R<sub>B</sub> は、
-  下のレール (−) へ黒い線で落とす。**D1 と D2 は向き (帯がカソード) を合わせる**
-- **CH1 は 29 列** (緑の線で 24 列から渡す)。出力を見るときはここ。**G を見るときは、橙の線を `a13` へ移す** (図 5)
+- **ベース (9 列)**: R1 の下端・R2 の左・C<sub>IN</sub> の右が同じ列。橙の線 1 本で Q1 の B の列 (`e19`) へ。**R2 の右 (13 列) が G** で、
+  R<sub>B</sub> を `a13` から上の − レールへ立てて挿し、緑の線で下のブロックの 13 列へ渡す
+- **AGC (下のブロック)**: 13 列が G (D2 のアノード `g13`・C<sub>G</sub> の + 側 `h13`)、17 列が A (D2 のカソード `g17`・C<sub>C</sub> `h17`・D1 のアノード `i17`)。
+  コレクタは緑の線で 20 列へ渡し、C<sub>OUT</sub> (20 列 → 24 列) と C<sub>C</sub> (17 列 → 20 列) をつなぐ。C<sub>G</sub> の − 側 (`h9`) と D1 のカソード (`i14`) は、
+  同じ列の `j9`・`j14` から下のレール (−) へ黒い線で落とす。**D1 と D2 は向き (帯がカソード) を合わせる**
+- **CH1 は 29 列** (緑の線で 24 列から渡す)。出力を見るときはここ。**G を見るときは、橙の線を `b13` へ移す** (図 5)
 - 上下のレールの − は、30 列の黒い線でつなぐ。AD の GND・2−・1− も −
 - 周波数が 100 kHz なので、線は短くなくてもよい。9-11 と同じく、**10 µF の電解コンデンサは + の向き**に気を付ける
 
