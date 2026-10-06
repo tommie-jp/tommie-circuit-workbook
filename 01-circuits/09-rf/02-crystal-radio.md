@@ -172,6 +172,34 @@ cursors: [250us, 750us]
 - CH2 の搬送波 (1 MHz) は 200 µs/div では塗りつぶされた帯に見える。帯の外形が 1 kHz で太り細りするのが AM。
   帯の最大の振幅は約 1.4 V (peak)
 
+### 同調回路だけを VNA で見る (補足)
+
+W1 と Scope の代わりに LiteVNA64 を使うと、同調回路 (L1 と VC1 の並列) の共振周波数と鋭さを、放送の電波なしで測れる
+(中波は 50 kHz〜の範囲に入る)。L1 と VC1 の並列を回路から外し、03-nanovna/03-fixtures/01-series-fixture.md (3-1) の直列治具のように
+CH0 と CH1 の間に**直列**に挿して、S21 の Log Mag を 0.8〜1.3 MHz で掃引する。
+並列共振では L1 と VC1 の並列のインピーダンスが非常に大きくなって信号が通らないので、S21 は f<sub>0</sub> だけ深い谷になる。
+谷の位置が同調周波数で、VC1 を回すと動く。
+
+見えるはずの画面 (理想の模型。VC1 = 100 pF、L1 の損失を並列の 158 kΩ (Q = 100) とした目安で、実測ではない)。
+
+```vna
+device: litevna64
+sweep: 0.8M-1.3M 401
+title: 図4 同調回路 (L1 250 µH ∥ VC1 100 pF) の S21 — f0 で深い谷
+dut:
+  - series L 250u cp 100p rp 158k
+traces:
+  - S21 logmag
+markers:
+  - 1.007M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/vna/02-crystal-radio.svg)
+
+- 谷の位置は f<sub>0</sub> = 1 / (2π√(250 µH × 100 pF)) ≈ 1.007 MHz。図の読み値は 1.007 MHz で約 −64 dB
+- 谷の幅が狭いほど L1 の損失が小さい (Q が高い)。実物は −64 dB まで深くならず、コイルの Q と治具の漏れで浅くなる
+- VC1 を 20〜260 pF に回すと、谷は約 2.2 MHz から 0.62 MHz まで動く (計算値。配線の浮遊容量の分だけ低くなる)
+
 ## 部品
 
 | 記号 | 部品 | 値 |
