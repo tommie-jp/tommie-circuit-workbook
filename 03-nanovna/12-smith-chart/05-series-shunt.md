@@ -37,7 +37,7 @@ device: LV64
 
 計器は VNA。この本の図は LiteVNA64 の画面に合わせて書いてあり、NanoVNA-H4 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
-この題は実体配線図を付けない — 動き方の読み方の題で、組む回路が無い (12-4 のデモボードに部品を足して試せる)。
+この題は回路図 (図1〜図4 の各 vna の図の前) を付け、実体配線図は付けない — 動き方の読み方の題で、組む回路が無い (12-4 のデモボードに部品を足して試せる)。回路図の負荷 24 Ω は 12-6 と同じ値。
 
 | 項目 | 値 |
 | --- | --- |
@@ -49,6 +49,26 @@ device: LV64
 ## 直列の部品
 
 24 Ω (z = 0.48) の負荷に、**直列**のコイルとコンデンサを足す。
+
+```circuit
+title: 図1 の回路 (24 Ω に直列のコイル L1 390 nH)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  L1: inductor c5 c9 390n
+  R1: resistor c9 e9 24
+  G2: ground e9
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+notes:
+  - text b7 small center: 入口
+  - text g9 small center: 負荷
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/05-series-shunt-1.svg)
 
 ```vna
 sweep: 1M-30M 101
@@ -67,6 +87,26 @@ markers:
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/05-series-shunt-1.svg)
+
+```circuit
+title: 図2 の回路 (24 Ω に直列のコンデンサ C1 1 nF)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  C1: capacitor c5 c9 1n
+  R1: resistor c9 e9 24
+  G2: ground e9
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+notes:
+  - text b7 small center: 入口
+  - text g9 small center: 負荷
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/05-series-shunt-2.svg)
 
 ```vna
 sweep: 1M-30M 101
@@ -90,6 +130,28 @@ markers:
 
 同じ 24 Ω の負荷の**入口に並列**にコンデンサとコイルを足す (ケーブルの側から見て、負荷と並列)。
 
+```circuit
+title: 図3 の回路 (24 Ω に並列のコンデンサ C1 330 pF)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  C1: capacitor c5 e5 330p
+  G1: ground e5
+  R1: resistor c9 e9 24
+  G2: ground e9
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+  - c5 -- c9
+notes:
+  - text b7 small center: 入口
+  - text g9 small center: 負荷
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/05-series-shunt-3.svg)
+
 ```vna
 sweep: 1M-30M 101
 title: 図3 24 Ω に並列のコンデンサ 330 pF — g = 2.08 の円の上を下へ
@@ -107,6 +169,28 @@ markers:
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/05-series-shunt-3.svg)
+
+```circuit
+title: 図4 の回路 (24 Ω に並列のコイル L1 390 nH)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  L1: inductor c5 e5 390n
+  G1: ground e5
+  R1: resistor c9 e9 24
+  G2: ground e9
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+  - c5 -- c9
+notes:
+  - text b7 small center: 入口
+  - text g9 small center: 負荷
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/05-series-shunt-4.svg)
 
 ```vna
 sweep: 1M-30M 101
