@@ -41,46 +41,41 @@ LO が作る電流も 2 本の出力に同じだけ流す (差を取れば消え
 ```circuit
 title: 図1 SA612 のバランスドミキサー (W2 が RF、W1 が LO)
 parts:
-  W2: sine e4 g4 l=$\mathrm{W2}$
-  G1: ground g4
-  C1: capacitor e5 e7 10n
-  U1: dip8 f12
-  C2: capacitor h9 j9 10n
-  G2: ground j9
-  G3: ground h10
-  VCC: vcc c13 5V
-  C6: capacitor c15 e15 100n
-  G6: ground e15
-  C3: capacitor g16 g18 10n
-  W1: sine g19 i19 l=$\mathrm{W1}$
-  G4: ground i19
-  C5: capacitor k15 k17 100n
-  C4: capacitor m15 m17 100n
-  M1: voltmeter m19 k19 l=$\mathrm{CH1}$
-  M2: voltmeter m21 o21 l=$\mathrm{CH2}$
-  G5: ground o21
+  W2: sine e3 g3 l=$\mathrm{W2}$
+  G1: ground g3
+  C1: capacitor e5 e6 10n
+  U1: ic g10f0 SA612
+  C2: capacitor i5 j5 10n
+  G2: ground j5
+  C3: capacitor l5 l4 10n
+  W1: sine l3 n3 l=$\mathrm{W1}$
+  G4: ground n3
+  G3: ground j10
+  VCC: vcc c10 5V
+  C6: capacitor c8 d8 100n
+  G6: ground d8
+  C4: capacitor e14 e15 100n
+  C5: capacitor j14 j15 100n
+  M1: voltmeter e17 j17 l=$\mathrm{CH1}$
+  M2: voltmeter e20 j20 l=$\mathrm{CH2}$
+  G5: ground j20
 wires:
-  - e4 -- e5
-  - e7 -- e8
-  - U1.1 -| e8
-  - U1.2 -| h9
-  - U1.3 -| h10
-  - U1.8 -| c13
-  - c13 -- c15
-  - U1.6 -| g16
-  - g18 -- g19
-  - U1.5 -| k13
-  - k13 -- k15
-  - k17 -- k19
-  - U1.4 -| m11
-  - m11 -- m15
-  - m17 -- m21
-notes:
-  - text g12h5 small right: SA612
-  - text e10 small center: PIN 1 IN_A
-  - text l11h5 small left: PIN 4 OUT_A
-  - text j13h5 small left: PIN 5 OUT_B
-  - text f14h5 small center: PIN 6 LO
+  - e3 -- e5
+  - e6 -- e7
+  - U1.IN_A -| e7
+  - U1.IN_B -| i5
+  - U1.OSC_B -| l7
+  - l7 -- l5
+  - l3 -- l4
+  - U1.GND |- j10
+  - U1.VCC |- c10
+  - c10 -- c8
+  - U1.OUT_A -| e13
+  - e13 -- e14
+  - U1.OUT_B -| j14
+  - e15 -- e17
+  - j15 -- j17
+  - e17 -- e20
 style:
   pitch: 1
 ```
@@ -119,12 +114,12 @@ parts:
     at: top
     label: Analog Discovery
     pins: [V+, GND, W2, W1, 1-, 1+, 2+, 2-]
-  U1: dip8 @ e15
+  U1: dip8 @ e15 SA612
   C6: capacitor/ceramic c12 c15 100n
   C3: capacitor/ceramic a17 a21 10n
   C5: capacitor/ceramic d18 d24 100n
   C1: capacitor/ceramic i9 i15 10n
-  C2: capacitor/ceramic g16 g14 10n
+  C2: capacitor/ceramic j16 -b16 10n
   C4: capacitor/ceramic h18 h25 100n
 wires:
   - AD.V+ -- +t1 red
@@ -135,7 +130,6 @@ wires:
   - e9 -- f9 yellow
   - AD.W1 -- b21 green
   - j17 -- -b17 black
-  - j14 -- -b14 black
   - f25 -- e25 orange
   - d25 -- d27 orange
   - AD.1- -- a24 blue
@@ -151,7 +145,7 @@ wires:
 - **電源**: AD の V+ (赤) を上の + レールへ、GND (黒) を上の − レールへ。+ レールから a15 (PIN 8) へ赤い線。
   C6 は PIN 8 の列 (c15) と 12 列 (c12) の間に置き、12 列を黒い線で − レールへ落とす。上下の − レールは 30 列で渡す
 - **RF (W2、黄)**: a9 に挿し、e9〜f9 の黄の線で下の段の 9 列へ。C1 (i9〜i15) で PIN 1 へ
-- **PIN 2** は C2 (g16〜g14) で 14 列へ渡し、j14 の黒い線で下の − レールへ。**PIN 3** (GND) は j17 から黒い線で下の − レールへ
+- **PIN 2** は C2 を j16 と下の − レールの間に直に挿して、交流だけ GND へ落とす。**PIN 3** (GND) は j17 から黒い線で下の − レールへ
 - **LO (W1、緑)**: b21 に挿す。C3 (a17〜a21) で PIN 6 (17 列の上) へ
 - **OUT_B (PIN 5)**: C5 (d18〜d24) を通して 24 列へ。CH1 の 1− (青) を a24 に挿す
 - **OUT_A (PIN 4)**: C4 (h18〜h25) を通して下の 25 列へ、f25〜e25 の橙の線で上の 25 列へ上げる。
@@ -225,7 +219,7 @@ markers: [100k, 1M, 1.1M, 2.1M]
 
 | 記号 | 部品 | 値 |
 | --- | --- | --- |
-| U1 | ダブルバランスドミキサー IC | SA612A (NE612A)、DIP8 (図2 では型番の無い dip8 で描いた) |
+| U1 | ダブルバランスドミキサー IC | SA612A (NE612A)、DIP8 |
 | C1・C2・C3 | セラミックコンデンサ (結合・パスコン) | 10 nF |
 | C4・C5 | セラミックコンデンサ (出力の直流を切る) | 100 nF |
 | C6 | セラミックコンデンサ (電源のパスコン) | 100 nF |
