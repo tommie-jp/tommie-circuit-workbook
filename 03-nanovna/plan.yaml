@@ -213,3 +213,9 @@
 - { id: 11-12, tier: 200, board: —, device: SA, title: アンテナで受ける — FM 放送帯と 430 MHz }
 - { id: 11-13, tier: 200, board: —, device: SA, title: PC から操作して記録する }
 - { id: 11-14, tier: 200, board: —, device: SA, title: 微弱電波の電界強度を見積もる — アンテナ係数とケーブルの損失 }
+- { id: 12-1, tier: 100, board: —, device: LV64, title: Smith チャートの地図 — 外周・実軸・R の円・X の円 }
+- { id: 12-2, tier: 100, board: —, device: LV64, title: 周波数を掃くと点が回る — 直列の L は上半分、C は下半分を時計回りに }
+- { id: 12-3, tier: 100, board: —, device: LV64, title: Γ の円と SWR — 負荷の SWR は中心からの距離、ケーブルを足すと円を回る }
+- { id: 12-4, tier: 100, board: PF, device: LV64, title: Smith チャートデモボード — 8 つの負荷を差し替えて 1 点ずつ測る }
+- { id: 12-5, tier: 200, board: —, device: LV64, title: 直列と並列 — 直列は R の円の上を、並列は G の円の上を動く }
+- { id: 12-6, tier: 200, board: PF, device: LV64, title: L 形の整合を Smith チャート上で作る — 24 Ω を 50 Ω にする }

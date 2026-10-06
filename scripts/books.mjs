@@ -83,6 +83,7 @@ export const BOOKS = [
       [9, 'ghz', 'GHz 帯の作法'],
       [10, 'automation', '自動化'],
       [11, 'spectrum-analyzer', 'スペクトラムアナライザ — tinySA と同じ種類の計器'],
+      [12, 'smith-chart', 'Smith チャート — 読み方から整合まで'],
     ],
   },
   {

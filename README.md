@@ -20,7 +20,7 @@
 | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 直流の基本から実用回路まで。回路図と実体配線図を並べて組む | 50 | 104 | 217 | 120 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | Analog Discovery 3 と WaveForms で DC〜10 MHz を測る | 50 | 100 | 200 | 100 |
-| [NanoVNA の教科書](03-nanovna/README.md) | LiteVNA64 で 50 kHz〜6.3 GHz を測る (NanoVNA-H4 / V2 は比較用)。治具・部品・フィルタ・アンテナ・GHz 帯。第 11 章でスペクトラムアナライザ (tinySA など) | 50 | 105 | 214 | 106 |
+| [NanoVNA の教科書](03-nanovna/README.md) | LiteVNA64 で 50 kHz〜6.3 GHz を測る (NanoVNA-H4 / V2 は比較用)。治具・部品・フィルタ・アンテナ・GHz 帯。第 11 章でスペクトラムアナライザ (tinySA など) | 50 | 109 | 220 | 112 |
 | [電験三種の教科書](04-denken/README.md) | 理論・機械・電力・法規の範囲を、低い電圧の実験で測って式を確かめる | 50 | 100 | 200 | 100 |
 | [番外の工作](05-etc/README.md) | 4 冊の部品を組み合わせて作る工作。CPU もどき、中波ラジオの時報で動く時計、デュアルゲート FET ミキサー、2SC1815 のミキサー | 0 | 0 | 12 | 12 |
 | [FPGA の教科書](06-fpga/README.md) | 1 本の Verilog をブラウザ・Raspberry Pi Pico 2 (Soft-FPGA)・実物の FPGA で動かし、Analog Discovery 3 の Logic で測って比べる | 50 | 100 | 200 | 28 |
