@@ -245,7 +245,7 @@ wires:
   - j45 -- -b45 black
   - -t62 -- -b62 black
 notes:
-  - text: U1・U2 は SA612 (PIN 1 IN_A、2 IN_B、3 GND、5 OUT_B、6 LO、8 VCC。4・7 は使わない)
+  - text: U1・U2 は SA612 (PIN 1 音声、6 LO、5 出力、8 電源。4・7 は空き)
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/21-ssb-phasing.svg)
@@ -296,7 +296,7 @@ Analog Discovery 3 だけを使う。LO と音声を W1・W2 で作り、498 kHz
 | Wavegen W1 (LO) | Sine、498 kHz、振幅 0.25 V (0.5 V<sub>pp</sub>)、オフセット 0 V |
 | Wavegen W2 (音声) | Sine、995 Hz、振幅 20 mV (40 mV<sub>pp</sub>)、オフセット 0 V |
 | Scope | CH1 = 1+ を C13 の先、1− を GND。50 mV/div、200 µs/div、トリガは CH1 の立ち上がり 0 V。標本化は 5 MS/s 以上 (499 kHz を折り返さない) |
-| Spectrum | 開始 490 kHz・終了 506 kHz、FFT 32768 点、窓は Flat Top、縦軸 dBV、REF −20 dBV。チャンネルは CH1 |
+| Spectrum | 開始 490 kHz・終了 506 kHz、FFT 32768 点、窓は Flat Top、縦軸 dBV、REF −10 dBV。チャンネルは CH1 |
 
 - 標本化は 506 kHz × 2.56 ≈ 1.30 MHz、分解能は 1.30 MHz ÷ 32768 ≈ **39.5 Hz**。1 kHz 離れた 497・498・499 kHz の線がはっきり分かれる。
   9-12 の設定 (0〜2.5 MHz、8192 点、分解能 0.78 kHz) では、1 kHz 隣の線が Flat Top の幅に埋もれて分かれない
@@ -315,7 +315,7 @@ sweep: 490k-506k
 samples: 32768
 window: flattop
 unit: dBV
-ref: -20dBV
+ref: -10dBV
 signal:
   - sine 498.995kHz 60.3mV
   - sine 497.005kHz 1.35mV
@@ -332,7 +332,7 @@ sweep: 490k-506k
 samples: 32768
 window: flattop
 unit: dBV
-ref: -20dBV
+ref: -10dBV
 signal:
   - sine 498.995kHz 60.3mV
   - sine 497.005kHz 60.3mV
