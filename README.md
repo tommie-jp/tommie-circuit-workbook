@@ -34,6 +34,8 @@
 
 ## 読み方
 
+- 部品の型番のデータシートは [部品のデータシート (リンク集)](datasheets.md)
+
 - GitHub では、各フェンス (YAML の字) の直後に、その図が画像で出る。図は main に push するたびに
   [GitHub Pages](https://tommie-jp.github.io/tommie-circuit-workbook/) へ描き直して載せる
   (`.github/workflows/pages.yml`)。push の直後の数分は前の図が出る
