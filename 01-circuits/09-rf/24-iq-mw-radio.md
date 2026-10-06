@@ -146,31 +146,32 @@ parts:
   C1: capacitor l15 n15 1u
   GC1: ground n15
   VREF: port l17
-  U1: dip16 k21 74HC4052
-  VCC: vcc h23 3.3V
-  GU1: ground n19
-  A2: port i24i0
-  A1: port j24c0i0
-  AN: port j24h0g0
-  A0: port k24c0e0
-  A3: port k24h0c0
-  S0: port l24c0
-  S1: port l24g0i0
-  A0: port p21
-  CA0: capacitor p21 r21 22n
-  GA0: ground r21
-  A1: port p24
-  CA1: capacitor p24 r24 22n
-  GA1: ground r24
-  A2: port p27
-  CA2: capacitor p27 r27 22n
-  GA2: ground r27
-  A3: port p30
-  CA3: capacitor p30 r30 22n
-  GA3: ground r30
-  VCC: vcc p33 3.3V
-  C3: capacitor p33 r33 100n
-  GC3: ground r33
+  U1: ic j26 74HC4052
+  VCC: vcc f26 3.3V
+  GU1: ground m25
+  GBN: ground l29a5
+  A0: port h22f0
+  A1: port i22
+  A2: port i22f0
+  A3: port j22
+  AN: port j30
+  S1: port n30
+  S0: port o30
+  A0: port q21
+  CA0: capacitor q21 s21 22n
+  GA0: ground s21
+  A1: port q24
+  CA1: capacitor q24 s24 22n
+  GA1: ground s24
+  A2: port q27
+  CA2: capacitor q27 s27 22n
+  GA2: ground s27
+  A3: port q30
+  CA3: capacitor q30 s30 22n
+  GA3: ground s30
+  VCC: vcc q33 3.3V
+  C3: capacitor q33 s33 100n
+  GC3: ground s33
 wires:
   - c3 -- g3b0
   - i3 -- g3b0
@@ -182,26 +183,23 @@ wires:
   - l10 -- l12
   - l12 -- l15
   - l15 -- l17
-  - U1.VCC -| h23
-  - U1.A2 |- i24i0
-  - U1.A1 |- j24c0i0
-  - U1.AN |- j24h0g0
-  - U1.A0 |- k24c0e0
-  - U1.A3 |- k24h0c0
-  - U1.S0 |- l24c0
-  - U1.S1 |- l24g0i0
-  - U1.BN |- j19c0i0
-  - U1.E |- k19h0c0
-  - U1.VEE |- l19c0
-  - j19c0i0 -- k19h0c0
-  - k19h0c0 -- l19c0
-  - l19c0 -- l19g0i0
-  - U1.GND |- l19g0i0
-  - l19g0i0 -- n19
+  - U1.VCC |- f26
+  - h22f0 -| U1.A0
+  - i22 -| U1.A1
+  - i22f0 -| U1.A2
+  - j22 -| U1.A3
+  - U1.AN -| j30
+  - U1.BN -| l29a5
+  - m25 |- U1.GND
+  - U1.VEE |- m25a5
+  - U1.E |- m26
+  - m25 -- m26
+  - U1.S1 |- n30
+  - U1.S0 |- o30
 notes:
   - text f8 small center: バーアンテナ
-  - text s25h5 small center: A0 から A3 の 22nF (図5 の基板の入口に挿す)
-  - text s33 small center: U1 のそば
+  - text t25h5 small center: A0 から A3 の 22nF (図5 の基板の入口に挿す)
+  - text t33 small center: U1 のそば
 style:
   pitch: 1
 ```
@@ -217,6 +215,8 @@ style:
 - **U1 (74HC4052)** は 3.3 V で動かす。5 V で動かすと H のしきい値が 3.5 V になり、Pico 2 の 3.3 V では切り替わらない。
   E (PIN 6、L で働く)・VEE (PIN 7)・GND (PIN 8) は GND。**B の側は使わない**: 共通端 BN (PIN 3) を GND に落とし、
   B0〜B3 (PIN 1・2・4・5) は開けておく (選ばれた 1 本が GND につながり、残りは浮くだけ)
+- U1 はピンを働きで並べた箱で描いた (左にチャネル A0〜A3・B0〜B3、右に共通の AN・BN、下に GND・VEE・E・S0・S1)。
+  共通の AN が右にあるので、R1 からの RF は端子 AN を通って箱の右から入り、左のチャネルへ流れる
 - **CA0〜CA3 (22 nF)** は A0〜A3 のホールドのコンデンサ。LO の 1/4 周期ずつ、R1 と 74HC4052 のスイッチ (オン抵抗 約 100 Ω) を通して充電される。
   低域通過の角は 1/(2π · 4(R1 + R<sub>on</sub>) · C) = 1/(2π × 800 Ω × 22 nF) ≈ **9.0 kHz** (計算値)。
   AM の片側の帯域 4.5 kHz と、残りのずれ Δf (最大 2.9 kHz) の和 7.4 kHz を通す
@@ -356,17 +356,18 @@ parts:
   C31: capacitor o26f0g0 q26 2.2n
   GC31: ground q26
   C32: capacitor o27f0g0 o29f0g0 1u
-  VR1: potentiometer o30f0g0 q30 10k l=$\mathrm{VR}_1$
+  VR1: potentiometer o30f0g0 q30 l=$\mathrm{VR}_1$
   GVR: ground q30
-  U4: dip8 p35 LM386
-  GU4: ground r33
-  V5: vcc m37 5V
-  C33: ecap p41h0c0 p43h0c0 220u
-  SP1: speaker p45h0c0 r45 l=$\mathrm{SP}$
+  U4: ic p37 LM386
+  GU4: ground s37
+  GIN: ground q32a5
+  V5: vcc m36a5 5V
+  C33: ecap p41 p43 220u
+  SP1: speaker p45 r45 l=$\mathrm{SP}$
   GSP: ground r45
-  R32: resistor p39h0c0 r39 10
-  C34: capacitor r39 t39 47n
-  GC34: ground t39
+  R32: resistor p40 r40 10
+  C34: capacitor r40 t40 47n
+  GC34: ground t40
   V5: vcc j46 5V
   C35: ecap j46 l46 100u
   GC35: ground l46
@@ -390,18 +391,17 @@ wires:
   - o19f0g0 -- o22f0g0
   - o24f0g0 -- o27f0g0
   - o29f0g0 -- o30f0g0
-  - VR1.w -| o32h0g0
-  - U4.2 |- o32h0g0
-  - U4.3 |- p33c0e0
-  - U4.4 |- p33h0c0
-  - p33c0e0 -- p33h0c0
-  - p33h0c0 -- r33
-  - U4.6 -| m37
-  - U4.5 |- p39h0c0
-  - p39h0c0 -- p41h0c0
-  - p43h0c0 -- p45h0c0
+  - VR1.w -| r31a5
+  - r31a5 -- r33a5
+  - r33a5 |- U4.-INPUT
+  - q32a5 |- U4.+INPUT
+  - s37 |- U4.GND
+  - m36a5 |- U4.VS
+  - U4.VOUT -| p40
+  - p40 -- p41
+  - p43 -- p45
 notes:
-  - text l32 small center: "U4 (LM386) PIN 2 -IN、3 +IN、4 GND、5 OUT、6 VS"
+  - text q29a5 small right: 10 kΩ
   - text m46 small center: U4 のそば
 style:
   pitch: 1
@@ -414,8 +414,8 @@ style:
 - **GP26 (PIN 31) = ADC0 = I、GP27 (PIN 32) = ADC1 = Q**。ADC は 0〜3.3 V を 12 bit で読む (1 LSB = 0.8 mV)
 - **GP15 (PIN 20) = PWM**。100 kHz の PWM で音声を出し、R30・C30・R31・C31 (10 kΩ・2.2 nF の 2 段、各段の角 7.2 kHz) で搬送波を落とす。
   100 kHz では 1 段で約 1/14、2 段で約 1/190 になる (計算値)
-- C32 (1 µF) で直流を切り、VR1 (10 kΩ、音量) を通して **U4 (LM386)** の −IN (PIN 2) へ。+IN (PIN 3) は GND。
-  LM386 はどちらの入力から入れてもよく、−IN から入れると出力の極性が逆になるだけ (音は同じ)。図の線が交わらないほうを選んだ。
+- C32 (1 µF) で直流を切り、VR1 (10 kΩ、音量) を通して **U4 (LM386)** の -INPUT (PIN 2) へ。+INPUT (PIN 3) は GND。
+  LM386 はどちらの入力から入れてもよく、-INPUT から入れると出力の極性が逆になるだけ (音は同じ)。
   LM386 は PIN 1・8 を開けた 20 倍で使う。出力 (PIN 5) は C33 (220 µF) を通してスピーカー (8 Ω) へ。
   R32 (10 Ω) と C34 (47 nF) は発振止め (データシートの標準回路)。C35 (100 µF) は PIN 6 (+5 V) のそばのパスコン
 - **X1 (ロータリーエンコーダ EC11)** は A を GP10、B を GP11、C を GND へ。Pico 2 の内蔵のプルアップを使う。1 クリックで 9 kHz 動く (11-8 と同じ読み方)
@@ -687,10 +687,9 @@ wires:
 - **S0 と S1**: GP2 (6 列)・GP3 (7 列) の i 行から図4 の基板へ (紫・茶)。AD3 の Logic の DIO0・DIO1 を j6・j7 に挿す
 - **エンコーダ**: A を i16 (GP10)、B を i17 (GP11)、C を下の − レールへ
 - **音声**: GP15 (22 列) から R30 (i22〜i26)・C30 (26 列から − レール)・R31 (g26〜g30)・C31 (30 列から − レール)・C32 (h30〜h33)。
-  VR1 は f33〜f35 (33 列が上、35 列が GND、34 列がワイパー)。ワイパーから i34〜i39 の橙の線で LM386 の −IN (PIN 2、39 列の下) へ
-- U4 (LM386) は 38〜41 列。+IN (PIN 3、40 列)・GND (PIN 4、41 列) を下の − レールへ、VS (PIN 6、40 列の上) を上の + レール (5 V) へ。
+  VR1 は f33〜f35 (33 列が上、35 列が GND、34 列がワイパー)。ワイパーから i34〜i39 の橙の線で LM386 の -INPUT (PIN 2、39 列の下) へ
+- U4 (LM386) は 38〜41 列。+INPUT (PIN 3、40 列)・GND (PIN 4、41 列) を下の − レールへ、VS (PIN 6、40 列の上) を上の + レール (5 V) へ。
   出力 (PIN 5、41 列の上) から C33 (d41〜d46、+ が左) を通してスピーカーへ。R32 (b41〜b44) と C34 (44 列から上の − レール) が発振止め
-- 図6 の LM386 と図5 の MCP6002 は型番のピンの名前が道具の表に無いので、胴に番号だけが出る (お知らせ)。ピンの働きは回路図 (図2・図3) の番号で読む
 
 ## 部品
 
