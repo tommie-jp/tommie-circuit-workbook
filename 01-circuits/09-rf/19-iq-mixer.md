@@ -52,81 +52,83 @@ RF が上でも下でも 49.8 kHz に同じ高さの線が 1 本立つだけだ�
 ```circuit
 title: 図1 SA612 を 2 個並べた I/Q ミキサー (W2 が RF、W1 が LO)
 parts:
-  W2: sine l1 n1 l=$\mathrm{W2}$
-  G1: ground n1
-  C5: capacitor f3 f5 10n
-  C6: capacitor r3 r5 10n
-  U1: dip8 f12h0c0
-  U2: dip8 r12h0c0
-  C7: capacitor i8 j8 10n
-  G2: ground j8
-  G3: ground h10
-  C8: capacitor u8 v8 10n
-  G4: ground v8
-  G5: ground t10
-  VCC: vcc c13 5V
-  C9: capacitor c15 e15 100n
-  G6: ground e15
-  VCC: vcc o13 5V
-  C10: capacitor o15 q15 100n
-  G7: ground q15
-  C11: capacitor k11 k13 470p
-  M1: voltmeter m11 m13 l=$\mathrm{CH1}$
-  C12: capacitor w11 w13 470p
-  M2: voltmeter y11 y13 l=$\mathrm{CH2}$
-  C3: capacitor f16j0g0 f18j0g0 10n
-  C4: capacitor r16j0g0 r18j0g0 10n
-  C1: capacitor f21j0g0 f23j0g0 470p
-  R2: resistor f20j0g0 i20 680
-  G8: ground i20
-  R1: resistor r21j0g0 r23j0g0 680
-  C2: capacitor r20j0g0 u20 470p
-  G9: ground u20
-  W1: sine l26 n26 l=$\mathrm{W1}$
-  G10: ground n26
+  W2: sine e1 g1 l=$\mathrm{W2}$
+  G1: ground g1
+  C5: capacitor e5 e6 10n
+  C6: capacitor q5 q6 10n
+  U1: ic g16f0 SA612
+  U2: ic s16f0 SA612
+  C7: capacitor i11 j11 10n
+  G2: ground j11
+  G3: ground j16
+  C8: capacitor u11 v11 10n
+  G4: ground v11
+  G5: ground v16
+  VCC: vcc c16 5V
+  C9: capacitor c14 d14 100n
+  G6: ground d14
+  VCC: vcc o16 5V
+  C10: capacitor o14 p14 100n
+  G7: ground p14
+  C11: capacitor f22 j22 470p
+  M1: voltmeter f25 j25 l=$\mathrm{CH1}$
+  C12: capacitor r22 v22 470p
+  M2: voltmeter r25 v25 l=$\mathrm{CH2}$
+  C3: capacitor l13 l12 10n
+  C1: capacitor l9 l8 470p
+  R2: resistor l10 m10 680
+  G8: ground m10
+  R1: resistor o7 n7 680
+  C2: capacitor o7 p7 470p
+  G9: ground p7
+  C4: capacitor s9 r9 10n
+  W1: sine l5 n5 l=$\mathrm{W1}$
+  G10: ground n5
 wires:
-  - l1 -- l3
-  - f3 -- r3
-  - f5 -| U1.1
-  - r5 -| U2.1
-  - U1.2 -| i8
-  - U1.3 -| h10
-  - U2.2 -| u8
-  - U2.3 -| t10
-  - U1.8 -| c13
-  - c13 -- c15
-  - U2.8 -| o13
-  - o13 -- o15
-  - U1.4 -| k11
-  - k11 -- m11
-  - U1.5 -| k13
-  - k13 -- m13
-  - U2.4 -| w11
-  - w11 -- y11
-  - U2.5 -| w13
-  - w13 -- y13
-  - U1.6 -| f16j0g0
-  - f18j0g0 -- f21j0g0
-  - f23j0g0 -- f24j0g0 -- r24j0g0
-  - U2.6 -| r16j0g0
-  - r18j0g0 -- r21j0g0
-  - r23j0g0 -- r24j0g0
-  - l24 -- l26
+  - e1 -- e3
+  - e3 -- e5
+  - e3 -- q3
+  - q3 -- q5
+  - e6 -- e13
+  - U1.IN_A -| e13
+  - q6 -- q13
+  - U2.IN_A -| q13
+  - U1.IN_B -| i11
+  - U2.IN_B -| u11
+  - U1.GND |- j16
+  - U2.GND |- v16
+  - U1.VCC |- c16
+  - c16 -- c14
+  - U2.VCC |- o16
+  - o16 -- o14
+  - U1.OUT_A -| f19
+  - f19 -- f22
+  - f22 -- f25
+  - U1.OUT_B -| j20
+  - j20 -- j22
+  - j22 -- j25
+  - U2.OUT_A -| r19
+  - r19 -- r22
+  - r22 -- r25
+  - U2.OUT_B -| v20
+  - v20 -- v22
+  - v22 -- v25
+  - U1.OSC_B -| l13
+  - l12 -- l10
+  - l10 -- l9
+  - l7 -- l8
+  - l5 -- l7
+  - l7 -- n7
+  - o7 -- o9
+  - o9 -- r9
+  - s9 -- w9
+  - w9 -- w13
+  - U2.OSC_B -| w13
 notes:
-  - text e8h0 small center: PIN 1 IN_A
-  - text q8h0 small center: PIN 1 IN_A
-  - text f13f4 small left: PIN 6 LO
-  - text r13f4 small left: PIN 6 LO
-  - text h12 small center: SA612
-  - text t12 small center: SA612
-  - text k10a8 small right: OUT_A
-  - text k13a2 small left: OUT_B
-  - text w10a8 small right: OUT_A
-  - text w13a2 small left: OUT_B
-  - text f20f0 small center: LO_I +45°
-  - text r20f0 small center: LO_Q -45°
-  - text m13a3 small left: I
-  - text y13a3 small left: Q
+  - text k10 small center: LO_I +45°
+  - text n9f5 small center: LO_Q -45°
+  - text h26 small center: I
+  - text t26 small center: Q
 style:
   pitch: 1
 ```
@@ -136,14 +138,15 @@ style:
 図1 の `+5V` は AD3 の電源出力 V+ (Supplies で 5 V)。SA612 は 4.5〜8 V で動き、1 個 2.4 mA ほど (データシートの代表値)。
 2 個で 5 mA ほどなので、AD3 の Supplies で足りる。
 
-- **RF (W2、左)** は 1 本の線を 2 つに分け、C5 と C6 (10 nF) を通して U1 と U2 の PIN 1 (IN_A) へ入れる。
+- **RF (W2、左上)** は 1 本の線を 2 つに分け、C5 と C6 (10 nF) を通して U1 と U2 の PIN 1 (IN_A) へ入れる。
   PIN 2 (IN_B) は C7・C8 で交流だけ GND に落とす。ここまでは 9-12 と同じ使い方を 2 組並べただけだ。
   PIN 1 を 1 本の C でまとめないのは、2 個の IC の入力の直流の偏りどうしをつながないため
-- **LO (W1、右)** は 9-18 の RC-CR 網で 2 本に分ける。高域側は C1 (470 pF) が直列で R2 (680 Ω) が GND へ — ここが **LO<sub>I</sub> (+45°)**。
+- **LO (W1、左)** は 9-18 の RC-CR 網で 2 本に分ける。高域側は C1 (470 pF) が直列で R2 (680 Ω) が GND へ — ここが **LO<sub>I</sub> (+45°)**。
   低域側は R1 (680 Ω) が直列で C2 (470 pF) が GND へ — ここが **LO<sub>Q</sub> (−45°)**。
   それぞれ C3・C4 (10 nF) を通して U1・U2 の PIN 6 へ入れる。498 kHz での 10 nF は 32 Ω で、網にはほとんど効かない
-- 図は RF が左から、LO が右から入り、出力は各 IC の下に出る。PIN 1 と PIN 6 が IC の左右に分かれているので、
-  入力を両側から入れる形にした (信号は左から右、の例外)
+- 図は RF と LO が左から入り、出力は各 IC の右に出る。SA612 は IN_A・IN_B・OSC_B が左の辺に上から並ぶので、
+  RF は IC の上から、LO は IC の下から回して入れた。U2 へ行く LO<sub>Q</sub> の線は、U2 へ行く RF の線と 1 か所で交わる
+  (黒丸の無い交差で、つながっていない)
 - W1 は振幅 0.25 V (0.5 V<sub>pp</sub>)。網の出口は 0.707 倍の **0.354 V<sub>pp</sub>** で、データシートが外部 LO に求める
   **200 mV<sub>pp</sub> 以上**を満たす。網の出口に PIN 6 がつながると振幅は少し下がるが、2 本は同じだけ下がる
   (10 kΩ で受けたときの計算で、どちらも 0.707 → 0.683)。位相差は 90° のまま
@@ -169,8 +172,8 @@ parts:
     at: top
     label: Analog Discovery 3
     pins: [W2, V+, GND, 1-, 1+, W1, 2-, 2+]
-  U1: dip8 @ e4 l=SA612
-  U2: dip8 @ e22 l=SA612
+  U1: dip8 @ e4 SA612
+  U2: dip8 @ e22 SA612
   C9: capacitor/ceramic +t3 -t3 100n
   C10: capacitor/ceramic +t28 -t28 100n
   C3: capacitor/ceramic c9 c12 10n
@@ -211,7 +214,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/19-iq-mixer.svg)
 
 - U1 は 4〜7 列、U2 は 22〜25 列で溝をまたぐ (切り欠きを左、PIN 1 は左下)。どちらも下の列が PIN 1〜4、上の列が PIN 8〜5。
-  胴には型番の SA612 だけを刷った (ピンの名前の表に SA612 が無いので、ピンの名前は図1 の注記で読む)
+  胴にはピンの番号と名前が出る
 - **電源**: AD3 の V+ (赤) を上の + レールの 2 列、GND (黒) を上の − レールの 2 列へ。
   PIN 8 (VCC) は 4 列・22 列から赤い線で + レールへ。パスコン C9・C10 (100 nF) は IC のすぐ脇で、上の + と − のレールに直に挿す。
   PIN 3 (GND) は 6 列・24 列から黒い線で下の − レールへ。上下の − レールは 30 列の黒い線で渡す
