@@ -62,128 +62,132 @@ I の LO を高域側 (+45°)、Q の LO を低域側 (−45°) にしたので�
 ```circuit
 title: 図1 位相法のイメージ除去 (W1 が LO、W2 が RF)
 parts:
-  W1: sine b2 d2 l=$\mathrm{W1}$
-  G1: ground d2
-  C2: capacitor b4 b6 470p
-  R2: resistor b6 d6 680
-  G2: ground d6
-  R1: resistor f4 f6 680
-  C1: capacitor f6 h6 470p
-  G3: ground h6
-  C3: capacitor b9 b11 10n
-  C4: capacitor n8 n10 10n
-  W2: sine l2 n2 l=$\mathrm{W2}$
-  G4: ground n2
-  C5: capacitor i8 i10 10n
-  C6: capacitor s8 s10 10n
-  U1: dip8 g14 r270
-  VCC: vcc e13a2a6 5V
-  C7: capacitor j12 l12 10n
-  G5: ground l12
-  G6: ground i14a2a1
-  C11: capacitor j16 l16 470p
-  G7: ground l16
-  U2: dip8 q14 r270
-  VCC: vcc o13a2a6 5V
-  C8: capacitor t12 v12 10n
-  G8: ground v12
-  G9: ground s14a2a1
-  C12: capacitor t16 v16 470p
-  G10: ground v16
-  U3A: opamp j21d0 +up
-  U3B: opamp t21d0 +up
-  C13: capacitor j24d0 j26d0 1u
-  R3: resistor j27d0 j30d0 6.8k
-  C14: capacitor j31d0 l31d0 470p
-  G17: ground l31d0
-  M1: voltmeter k27d0 m27d0 l=$\mathrm{CH1}$
-  VREF: port m27d0
-  C15: capacitor t24d0 t26d0 1u
-  C16: capacitor t27d0 t30d0 470p
-  R4: resistor t31d0 v31d0 6.8k
-  VREF: port v31d0
-  R7: resistor j32d0 j35d0 100k
-  R8: resistor t32d0 t34d0 91k
-  VR1: resistor-var t34d0 t36d0 20k l=$\mathrm{VR1}$
-  R9: resistor j38d0 j41d0 100k
-  U4B: opamp o40d0 +down
-  VREF: port s39
-  M2: voltmeter p45d0 r45d0 l=$\mathrm{CH2}$
-  VREF: port r45d0
-  VCC: vcc w28 5V
-  R5: resistor w28 y28 10k
-  R6: resistor y28 aa28 10k
-  G11: ground aa28
-  U4A: opamp y35d0 +up
-  VREF: port y39d0
-  VCC: vcc x4 5V
-  C9: capacitor x4 z4 100n
-  C10: capacitor x7 z7 100n
-  C18: capacitor x10 z10 100n
-  C19: capacitor x13 z13 100n
-  G13: ground z4
-  G14: ground z7
-  G15: ground z10
-  G16: ground z13
+  U3A: opamp j25e0 +up
+  U3B: opamp t25e0 +up
+  C13: capacitor j28e0 j30e0 1u
+  R3: resistor j31e0 j34e0 6.8k
+  C14: capacitor j35e0 l35d0 470p
+  G17: ground l35d0
+  M1: voltmeter k31d0 m31d0 l=$\mathrm{CH1}$
+  VREF: port m31d0
+  C15: capacitor t28e0 t30e0 1u
+  C16: capacitor t31e0 t34e0 470p
+  R4: resistor t35e0 v35d0 6.8k
+  VREF: port v35d0
+  R7: resistor j36e0 j39e0 100k
+  R8: resistor t36e0 t38e0 91k
+  VR1: resistor-var t38e0 t40e0 20k l=$\mathrm{VR1}$
+  R9: resistor j42e0 j45e0 100k
+  U4B: opamp o44d0 +down
+  VREF: port s43
+  M2: voltmeter p49d0 r49d0 l=$\mathrm{CH2}$
+  VREF: port r49d0
+  VCC: vcc w32 5V
+  R5: resistor w32 y32 10k
+  R6: resistor y32 aa32 10k
+  G11: ground aa32
+  U4A: opamp y39d0 +up
+  VREF: port y43d0
+  VCC: vcc ab4 5V
+  C9: capacitor ab4 ad4 100n
+  C10: capacitor ab7 ad7 100n
+  C18: capacitor ab10 ad10 100n
+  C19: capacitor ab13 ad13 100n
+  G13: ground ad4
+  G14: ground ad7
+  G15: ground ad10
+  G16: ground ad13
+  W2: sine h1 j1 l=$\mathrm{W2}$
+  G4: ground j1
+  C5: capacitor h5 h6 10n
+  C6: capacitor r5 r6 10n
+  U1: ic j16 SA612
+  VCC: vcc g16 5V
+  G6: ground m16
+  C7: capacitor k11 l11 10n
+  G5: ground l11
+  C11: capacitor j19 l19 470p
+  G7: ground l19
+  U2: ic t16 SA612
+  VCC: vcc q16 5V
+  G9: ground w16
+  C8: capacitor u11 v11 10n
+  G8: ground v11
+  C12: capacitor t19 v19 470p
+  G10: ground v19
+  W1: sine n5 p5 l=$\mathrm{W1}$
+  G1: ground p5
+  C2: capacitor n8 n9 470p
+  R2: resistor n10 o10 680
+  G2: ground o10
+  C3: capacitor n12 n13 10n
+  R1: resistor n7 p7 680
+  C1: capacitor p7 q7 470p
+  G3: ground q7
+  C4: capacitor s9 t9 10n
 wires:
-  - b2 -- b4
-  - b4 -- f4
-  - b6 -- b9
-  - b11 -| U1.6
-  - f6 -- f7 -- n7 -- n8
-  - n10 -| U2.6
-  - l2 -- l4
-  - i4 -- s4
-  - i4 -- i8
-  - s4 -- s8
-  - U1.1 |- i10
-  - U2.1 |- s10
-  - U1.2 |- j12
-  - U2.2 |- t12
-  - U1.3 |- i14a2a1
-  - U2.3 |- s14a2a1
-  - U1.8 |- e13a2a6
-  - U2.8 |- o13a2a6
-  - U1.4 |- j16
-  - U2.4 |- t16
-  - j16 -| U3A.+
-  - t16 -| U3B.+
-  - U3A.out -- j23d0 -- j24d0
-  - j23d0 -- l23 -- l20
-  - l20 |- U3A.-
-  - U3B.out -- t23d0 -- t24d0
-  - t23d0 -- v23 -- v20
-  - v20 |- U3B.-
-  - j26d0 -- j27d0
-  - j27d0 -- k27d0
-  - j30d0 -- j31d0 -- j32d0
-  - t26d0 -- t27d0
-  - t30d0 -- t31d0 -- t32d0
-  - j35d0 -- j36d0 -- j38d0
-  - j36d0 -- o36 -- t36d0
-  - o36 -| U4B.-
-  - U4B.+ -| s39
-  - j41d0 -- j43d0 -- o43d0
-  - U4B.out -- o43d0 -- o45d0 -- p45d0
-  - y28 -- y31
-  - y31 -| U4A.+
-  - U4A.out -- y37d0 -- y39d0
-  - y37d0 -- aa37 -- aa34
-  - aa34 |- U4A.-
-  - x4 -- x13
+  - U3A.out -- j27e0 -- j28e0
+  - j27e0 -- l27 -- l24
+  - l24 |- U3A.-
+  - U3B.out -- t27e0 -- t28e0
+  - t27e0 -- v27 -- v24
+  - v24 |- U3B.-
+  - j30e0 -- j31e0
+  - j31e0 -- k31d0
+  - j34e0 -- j35e0 -- j36e0
+  - t30e0 -- t31e0
+  - t34e0 -- t35e0 -- t36e0
+  - j39e0 -- j40e0 -- j42e0
+  - j40e0 -- o40 -- t40e0
+  - o40 -| U4B.-
+  - U4B.+ -| s43
+  - j45e0 -- j47e0 -- o47d0
+  - U4B.out -- o47d0 -- o49d0 -- p49d0
+  - y32 -- y35
+  - y35 -| U4A.+
+  - U4A.out -- y41d0 -- y43d0
+  - y41d0 -- aa41 -- aa38
+  - aa38 |- U4A.-
+  - ab4 -- ab13
+  - h1 -- h3
+  - h3 -- h5
+  - h3 -- r3
+  - r3 -- r5
+  - h6 -- h13
+  - U1.IN_A -| h13
+  - r6 -- r13
+  - U2.IN_A -| r13
+  - U1.IN_B -| k11
+  - U2.IN_B -| u11
+  - U1.GND |- m16
+  - U2.GND |- w16
+  - U1.VCC |- g16
+  - U2.VCC |- q16
+  - n5 -- n7
+  - n7 -- n8
+  - n9 -- n10
+  - n10 -- n12
+  - U1.OSC_B -| n13
+  - p7 -- p9
+  - p9 -- s9
+  - t9 -- x9
+  - x9 -- x13
+  - U2.OSC_B -| x13
+  - U1.OUT_A -| j19
+  - j19 -| U3A.+
+  - U2.OUT_A -| t19
+  - t19 -| U3B.+
 notes:
-  - text a7f5 small center: LO_I (+45°)
-  - text f7f5 small left: LO_Q (-45°)
-  - text g15f5 small left: SA612
-  - text q15f5 small left: SA612
-  - text j23 small center: I
-  - text t23 small center: Q
-  - text h28f5 small center: I は低域側 (-45°)
-  - text r28f5 small center: Q は高域側 (+45°)
-  - text m41 small left: 反転加算
-  - text w37 small center: VREF 2.5 V
-  - text w8f5 small center: パスコン (U1 から U4 の電源ピン)
-  - text ab20 small center: U3、U4 は MCP6002 (PIN 8 は +5V、PIN 4 は GND)
+  - text j27 small center: I
+  - text t27 small center: Q
+  - text h32f5 small center: I は低域側 (-45°)
+  - text r32f5 small center: Q は高域側 (+45°)
+  - text m45 small left: 反転加算
+  - text w41 small center: VREF 2.5 V
+  - text aa8f5 small center: パスコン (U1 から U4 の電源ピン)
+  - text ab24 small center: U3、U4 は MCP6002 (PIN 8 は +5V、PIN 4 は GND)
+  - text m10 small center: LO_I (+45°)
+  - text o8f5 small center: LO_Q (-45°)
 style:
   pitch: 1
 ```
@@ -192,10 +196,12 @@ style:
 
 図1 の `+5V` は AD3 の Supplies の V+ (5 V)。W1 と W2 も AD3 の Wavegen。
 
-- **左上が LO の 90° 網** (9-18 と同じ)。W1 から C2 (470 pF) → R2 (680 Ω) が高域側で LO_I (+45°)、R1 (680 Ω) → C1 (470 pF) が低域側で LO_Q (−45°)。
+- **左の中ほどが LO の 90° 網** (9-18 と同じ)。W1 から C2 (470 pF) → R2 (680 Ω) が高域側で LO_I (+45°)、R1 (680 Ω) → C1 (470 pF) が低域側で LO_Q (−45°)。
   それぞれ C3・C4 (10 nF) を通して U1・U2 の PIN 6 (発振のトランジスタのベース) へ。W1 は 0.5 V<sub>pp</sub> (振幅 0.25 V) で、
   網の出口は 0.354 V<sub>pp</sub>。SA612 が外からの LO に求める 200 mV<sub>pp</sub> 以上に足りる
 - **RF (W2)** は C5・C6 (10 nF) を通して U1・U2 の PIN 1 へ。PIN 2 は C7・C8 (10 nF) で交流だけ GND に落とす (9-12 と同じ片側入力)
+- 9-19 と同じく、RF は各 IC の上から、LO は IC の下から回して入れる。U2 へ行く LO_Q の線は、U2 へ行く RF の線と 1 か所で交わる
+  (黒丸の無い交差で、つながっていない)
 - **出力は PIN 4 だけ**。PIN 5 は使わない (開けておく)。PIN 7 も開けておく。PIN 4 の直流は 4 V ほどで、MCP6002 はレール to レールの入力なのでそのまま受けられる
 - U3A・U3B (MCP6002 の 2 回路) はフォロア。C13・C15 (1 µF) で直流を切り、IF の網へ
 - **I 側の網**: R3 (6.8 kΩ) が直列、C14 (470 pF) が GND へ。**Q 側の網**: C16 (470 pF) が直列、R4 (6.8 kΩ) が VREF へ。
@@ -223,10 +229,10 @@ parts:
     at: bottom
     label: AD3 Scope
     pins: [1+, 1-, 2+, 2-]
-  U1: dip8 @ e13
-  U2: dip8 @ e27
-  U3: dip8 @ e38
-  U4: dip8 @ e52
+  U1: dip8 @ e13 SA612
+  U2: dip8 @ e27 SA612
+  U3: dip8 @ e38 MCP6002
+  U4: dip8 @ e52 MCP6002
   C9: capacitor/ceramic +t12 -t12 100n
   C10: capacitor/ceramic +t31 -t31 100n
   C18: capacitor/ceramic +t37 -t37 100n
@@ -298,12 +304,7 @@ wires:
 - ブレッドボードは full (63 列)。IC が 4 個あるので half には収まらない。上の 2 本のレールが +5 V (外側の赤) と GND (内側の青)。
   下の青い GND レールは 63 列の黒い線で上の GND とつなぐ。下の赤いレールは使わない。full のレールが途中で切れている製品なら、切れ目を線で渡す
 - **IC の向き**: 4 個とも切り欠きを左に、PIN 1 は左下 (f 行)。下の列が PIN 1〜4、上の列が PIN 8〜5。
-  SA612 と MCP6002 はフェンスのピンの名前の表に無いので、図の IC には番号だけが出る。ピンの働きは次のとおり
-
-| IC | PIN 1 | PIN 2 | PIN 3 | PIN 4 | PIN 5 | PIN 6 | PIN 7 | PIN 8 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| U1・U2 (SA612) | IN_A (RF) | IN_B | GND | OUT_A | OUT_B | OSC_B (LO) | OSC_E | VCC |
-| U3・U4 (MCP6002) | OUTA | VINA− | VINA+ | VSS | VINB+ | VINB− | OUTB | VDD |
+  胴にはピンの番号と名前が出る
 
 - **電源**: 各 IC の PIN 8 を赤い線で + レールへ、SA612 の PIN 3 と MCP6002 の PIN 4 を黒い線で下の GND レールへ。
   パスコン C9・C10・C18・C19 (100 nF) は + レールと GND レールの間に直に挿す
