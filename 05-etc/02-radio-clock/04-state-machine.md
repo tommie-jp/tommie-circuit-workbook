@@ -637,12 +637,17 @@ parts:
     type: device
     at: top
     label: 他のユニットへ (上)
-    pins: [CLK, T440, E440, NE440, E880]
+    pins: [CLK, NE440, E440, E880]
+  LINKR:
+    type: device
+    at: top
+    label: 他のユニットへ (上・右)
+    pins: [CLK, T440]
   LINKB:
     type: device
     at: bottom
     label: 他のユニットへ (下)
-    pins: [CLK, T880]
+    pins: [T880, CLK]
   U6: dip14 @ e3 l=74HC74
   U7: dip14 @ e13 r180 74HC04
   U8: dip14 @ e23 r180 74HC08
@@ -710,11 +715,11 @@ wires:
   - d21 -- g21 green
   - d20 -- g20 green
   - d40 -- g40 green
-  - LINKT.CLK -- a37 yellow
+  - LINKR.CLK -- a37 yellow
   - LINKB.CLK -- j36 yellow
   - LINKB.CLK -- j5 yellow
   - LINKT.CLK -- a6 yellow
-  - LINKT.T440 -- a38 orange
+  - LINKR.T440 -- a38 orange
   - LINKB.T880 -- j4 orange
   - LINKT.E440 -- c15 orange
   - LINKT.NE440 -- c14 orange
@@ -938,12 +943,12 @@ parts:
     type: device
     at: top
     label: 他のユニットへ (上)
-    pins: [NE440, W]
+    pins: [W, NE440]
   LINKB:
     type: device
     at: bottom
     label: 他のユニットへ (下)
-    pins: [CLK, TO]
+    pins: [TO, CLK]
   U11: dip14 @ e3 l=74HC02
   U10: dip14 @ e16 r180 74HC08
   U9: dip16 @ e29 74HC163
@@ -1171,7 +1176,7 @@ parts:
     type: device
     at: top
     label: 他のユニットへ (上)
-    pins: [W, QA, QB, NE440, E440, E880, TO, PON, LOADN, EN, CLRN]
+    pins: [PON, CLRN, TO, E880, LOADN, NE440, QB, QA, EN, E440, W]
   LINKB:
     type: device
     at: bottom
@@ -1461,12 +1466,12 @@ parts:
     type: device
     at: top
     label: 他のユニットへ (上)
-    pins: [CLK, CLRN, EN, S3, OUT]
+    pins: [EN, CLK, CLRN, S3, OUT]
   LINKB:
     type: device
     at: bottom
     label: 他のユニットへ (下)
-    pins: [LOADN, E880, W, QA, QB]
+    pins: [LOADN, QA, QB, E880, W]
   U16: dip16 @ e3 r180 74HC163
   U17: dip14 @ e15 74HC08
   C1: capacitor/ceramic +t11 -t11 100n
@@ -1655,21 +1660,22 @@ parts:
     type: device
     at: top
     label: Analog Discovery 3
-    pins: [V+, GND, W1, W2, "1+", "1-", "2+", "2-"]
+    pins: [V+, GND, W1, W2, "1+", "2+", "1-", "2-"]
   LINK:
     type: device
     at: bottom
     label: 基板 1〜4 の端子
-    pins: [CLK, T440, T880, OUT, +5V, GND]
+    pins: [CLK, T440, T880, OUT, GND, +5V]
 wires:
   - AD.V+ -- +t2 red
-  - AD.GND -- -t2 black
-  - LINK.+5V -- +t25 red
+  - AD.GND -- -t3 black
+  - LINK.+5V -- +t26 red
   - LINK.GND -- -t25 black
   - AD.W1 -- a4 yellow
   - LINK.CLK -- e4 yellow
   - AD.W2 -- a6 orange
-  - AD.1+ -- b6 orange
+  - AD.1+ -- a7 orange
+  - c6 -- c7 orange
   - LINK.T440 -- e6 orange
   - LINK.T880 -- e8 green
   - a10 -- -t10 black

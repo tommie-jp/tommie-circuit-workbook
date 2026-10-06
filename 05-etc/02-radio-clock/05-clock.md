@@ -1621,60 +1621,60 @@ parts:
     at: bottom
     label: 他の基板へ (下)
     pins: [H23, ENH, WH, MT5, MU9, NSY, O2, MT2, X, W59, ACC]
-  U36: dip14 @ e3 74HC08
-  U40: dip14 @ e11 74HC32
-  U37: dip14 @ e19 74HC08
+  U36: dip14 @ e6 74HC08
+  U40: dip14 @ e14 74HC32
+  U37: dip14 @ e22 74HC08
 wires:
   - PS.+5V -- +t1 red
   - PS.GND -- -t1 black
   - +t2 -- +b2 red
   - -t2 -- -b2 black
-  - XT.MT0 -- a4 gray
-  - XT.MT1 -- a5 orange
-  - XT.ST0 -- a7 yellow
-  - XT.ST1 -- a8 green
-  - XT.XA -- a9 blue
-  - XT.ENHT -- a13 purple
-  - XT.O8 -- a14 white
-  - XT.CM -- a16 pink
-  - XT.SETN -- a20 brown
-  - XT.SYD1 -- a21 gray
-  - XT.SYD -- a22 orange
-  - XB.H23 -- j3 yellow
-  - XB.ENH -- j4 yellow
-  - XB.WH -- j5 purple
-  - XB.MT5 -- j6 green
-  - XB.MU9 -- j7 blue
-  - XB.NSY -- j11 purple
-  - XB.O2 -- j12 white
-  - XB.MT2 -- j14 pink
-  - XB.X -- j20 brown
-  - XB.W59 -- j21 gray
-  - XB.ACC -- j24 orange
-  - a3 -- +t3 red
-  - a11 -- +t11 red
-  - a19 -- +t19 red
-  - j9 -- -b9 black
-  - j17 -- -b17 black
-  - j25 -- -b25 black
-  - e26 -- f26 orange
-  - e10 -- f10 yellow
-  - e18 -- f18 green
-  - e2 -- f2 blue
-  - e1 -- f1 purple
-  - g2 -- g15 blue
-  - h8 -- h19 white
-  - d1 -- d12 purple
-  - d15 -- d25 pink
-  - i13 -- i23 brown
-  - c10 -- c17 yellow
-  - i4 -- i10 yellow
-  - c18 -- c23 green
-  - c2 -- c6 blue
-  - h1 -- h5 purple
-  - c24 -- c26 orange
-  - g24 -- g26 orange
-  - g16 -- g18 green
+  - XT.MT0 -- a7 gray
+  - XT.MT1 -- a8 orange
+  - XT.ST0 -- a10 yellow
+  - XT.ST1 -- a11 green
+  - XT.XA -- a12 blue
+  - XT.ENHT -- a16 purple
+  - XT.O8 -- a17 white
+  - XT.CM -- a19 pink
+  - XT.SETN -- a23 brown
+  - XT.SYD1 -- a24 gray
+  - XT.SYD -- a25 orange
+  - XB.H23 -- j6 yellow
+  - XB.ENH -- j7 yellow
+  - XB.WH -- j8 purple
+  - XB.MT5 -- j9 green
+  - XB.MU9 -- j10 blue
+  - XB.NSY -- j14 purple
+  - XB.O2 -- j15 white
+  - XB.MT2 -- j17 pink
+  - XB.X -- j23 brown
+  - XB.W59 -- j24 gray
+  - XB.ACC -- j27 orange
+  - a6 -- +t6 red
+  - a14 -- +t14 red
+  - a22 -- +t22 red
+  - j12 -- -b12 black
+  - j20 -- -b20 black
+  - j28 -- -b28 black
+  - e29 -- f29 orange
+  - e13 -- f13 yellow
+  - e21 -- f21 green
+  - e5 -- f5 blue
+  - e4 -- f4 purple
+  - g5 -- g18 blue
+  - h11 -- h22 white
+  - d4 -- d15 purple
+  - d18 -- d28 pink
+  - i16 -- i26 brown
+  - c13 -- c20 yellow
+  - i7 -- i13 yellow
+  - c21 -- c26 green
+  - c5 -- c9 blue
+  - h4 -- h8 purple
+  - c27 -- c29 orange
+  - g27 -- g29 orange
+  - g19 -- g21 green
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/05-clock-2.svg)
@@ -1848,58 +1848,58 @@ parts:
     at: bottom
     label: 他の基板へ (下)
     pins: [MT2, MT1, MT0, MU3, MU0, LDHU, SET, O8, LDHT, WH]
-  U38: dip14 @ e3 74HC32
-  U39: dip14 @ e11 74HC32
-  U43: dip14 @ e19 74HC02
+  U38: dip14 @ e6 74HC32
+  U39: dip14 @ e14 74HC32
+  U43: dip14 @ e22 74HC02
 wires:
   - PS.+5V -- +t1 red
   - PS.GND -- -t1 black
   - +t2 -- +b2 red
   - -t2 -- -b2 black
-  - XT.MU1 -- a7 orange
-  - XT.MU2 -- a8 yellow
-  - XT.W59 -- a13 green
-  - XT.O2 -- a14 blue
-  - XT.XA -- a15 purple
-  - XT.ST2 -- a16 white
-  - XT.X -- a17 pink
-  - XB.MT2 -- j3 pink
-  - XB.MT1 -- j4 brown
-  - XB.MT0 -- j6 gray
-  - XB.MU3 -- j7 orange
-  - XB.MU0 -- j12 yellow
-  - XB.LDHU -- j19 green
-  - XB.SET -- j20 brown
-  - XB.O8 -- j21 blue
-  - XB.LDHT -- j22 purple
-  - XB.WH -- j24 white
-  - a3 -- +t3 red
-  - a11 -- +t11 red
-  - a19 -- +t19 red
-  - j9 -- -b9 black
-  - j17 -- -b17 black
-  - j25 -- -b25 black
-  - a24 -- -t24 black
-  - a25 -- -t25 black
-  - e2 -- f2 orange
-  - e10 -- f10 yellow
-  - e18 -- f18 green
-  - e1 -- f1 blue
-  - e26 -- f26 purple
-  - g1 -- g14 blue
-  - g16 -- g26 purple
-  - d9 -- d18 green
-  - c12 -- c20 white
-  - h11 -- h18 green
-  - c4 -- c10 yellow
-  - d1 -- d6 blue
-  - d22 -- d26 purple
-  - b17 -- b21 pink
-  - b2 -- b5 orange
-  - h2 -- h5 orange
-  - h20 -- h23 brown
-  - h8 -- h10 yellow
-  - i13 -- i15 gray
+  - XT.MU1 -- a10 orange
+  - XT.MU2 -- a11 yellow
+  - XT.W59 -- a16 green
+  - XT.O2 -- a17 blue
+  - XT.XA -- a18 purple
+  - XT.ST2 -- a19 white
+  - XT.X -- a20 pink
+  - XB.MT2 -- j6 pink
+  - XB.MT1 -- j7 brown
+  - XB.MT0 -- j9 gray
+  - XB.MU3 -- j10 orange
+  - XB.MU0 -- j15 yellow
+  - XB.LDHU -- j22 green
+  - XB.SET -- j23 brown
+  - XB.O8 -- j24 blue
+  - XB.LDHT -- j25 purple
+  - XB.WH -- j27 white
+  - a6 -- +t6 red
+  - a14 -- +t14 red
+  - a22 -- +t22 red
+  - j12 -- -b12 black
+  - j20 -- -b20 black
+  - j28 -- -b28 black
+  - a27 -- -t27 black
+  - a28 -- -t28 black
+  - e5 -- f5 orange
+  - e13 -- f13 yellow
+  - e21 -- f21 green
+  - e4 -- f4 blue
+  - e29 -- f29 purple
+  - g4 -- g17 blue
+  - g19 -- g29 purple
+  - d12 -- d21 green
+  - c15 -- c23 white
+  - h14 -- h21 green
+  - c7 -- c13 yellow
+  - d4 -- d9 blue
+  - d25 -- d29 purple
+  - b20 -- b24 pink
+  - b5 -- b8 orange
+  - h5 -- h8 orange
+  - h23 -- h26 brown
+  - h11 -- h13 yellow
+  - i16 -- i18 gray
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/05-clock-3.svg)

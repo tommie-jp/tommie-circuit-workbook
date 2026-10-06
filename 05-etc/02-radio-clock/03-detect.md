@@ -445,7 +445,7 @@ parts:
     type: device
     at: top
     label: 図4 の基板から (AF は 2 本に分ける)
-    pins: [AF880, AF440, VB, GND]
+    pins: [AF440, VB, AF880, GND]
   TO8:
     type: device
     at: top
@@ -462,17 +462,17 @@ parts:
   C1H: capacitor/ceramic d7 d18 10n
   R2H: resistor c7 c10 2k
   R3H: resistor c17 c22 330k
-  R1L: resistor j2 j6 75k
+  R1L: resistor j1 j6 75k
   C2L: capacitor/ceramic i6 i16 22n
   C1L: capacitor/ceramic g6 g17 22n
   R2L: resistor h6 h9 2k
   R3L: resistor h16 h21 300k
 wires:
   - PS.+5V -- a16 red
-  - PS.GND -- -t1 black
+  - PS.GND -- -t17 black
   - FROM.AF880 -- c3 white
   - FROM.VB -- +t2 green
-  - FROM.GND -- -t3 black
+  - FROM.GND -- -t4 black
   - b18 -- b22 green
   - a10 -- +t10 green
   - a19 -- +t19 green
@@ -484,7 +484,7 @@ wires:
   - j19 -- -b19 black
   - TO4.P440 -- j16 orange
   - TO4.GND -- -b25 black
-  - FROM.AF440 -- h2 white
+  - FROM.AF440 -- h1 white
   - +t30 -- +b30 green
   - -t30 -- -b30 black
 ```
@@ -571,8 +571,8 @@ style:
 ブレッドボードで組む手順は次のとおり。
 
 - LM358 (U3) を `e16` に挿す。**溝の上側の PIN 5〜7 が 880 Hz、下側の PIN 1〜3 が 440 Hz** のフィルタになる。同じ形の配線を、上下で左右が 1 列ずれた位置に組む
-- **このユニバーサル基板の上下の + レールは、5 V ではなく VB (約 2.5 V) につなぐ。** R2 の電源側と PIN 3・PIN 5 (+ 入力) が VB で、図 4 の基板の VB を `+t2` に入れて、上下のレールを右端の線でつなぐ。5 V は PIN 8 だけに、1 本の線 (`a16`) で直接入れる
-- 図 4 の基板の AF は、**2 本の線に分けて**入れる。880 Hz 側は `c3` (R1H の入口)、440 Hz 側は `h2` (R1L の入口) で、2 本の線はユニバーサル基板の上で重ならない
+- **このブレッドボードの上下の + レールは、5 V ではなく VB (約 2.5 V) につなぐ。** R2 の電源側と PIN 3・PIN 5 (+ 入力) が VB で、図 4 の基板の VB を `+t2` に入れて、上下のレールを右端の線でつなぐ。5 V は PIN 8 だけに、1 本の線 (`a16`) で直接入れる
+- 図 4 の基板の AF は、**2 本の線に分けて**入れる。880 Hz 側は `c3` (R1H の入口)、440 Hz 側は `h1` (R1L の入口) で、2 本の線はブレッドボードの上で重ならない。図 4 の基板の GND は `-t4`、電源の GND は電源の真下の `-t17` へ
 - R2 は 2 kΩ の半固定抵抗。図では抵抗の絵で描いたが、実物は半固定抵抗の中央のピンと片方のピンを使う
 - 440 Hz 側の P は `j16`、880 Hz 側の P は `a17` から図 6 の基板へ
 
