@@ -8,6 +8,9 @@
  * 1. 部品の値が買える値か: 抵抗は E24、コンデンサ・インダクタは E12 を優先 (電解 `ecap` は E6)。
  * 2. 電源の記号 (`vcc` / `vee`) に符号付きの電圧が書いてあるか。
  * 3. 本文・図の字で IC のピンを「足 14」と書いていないか (`PIN 14` と書く)。
+ * 4. 実体配線図の線の色: 赤は + だけ・黒は − (GND) だけ (breadboard-wiring)。極性の逆挿しを見せる題は除く。
+ * 5. 計器の画面 (instrument-screen): vna / spectrum は本文の数字の所にマーカー、scope はカーソルか Measure。
+ *    TDR (`tdr`)・`mark` 注釈・XY 表示 (`view: xy`) は別の手段があるので除く。
  */
 import { readEntries } from './collect.mjs';
 import { fencesIn } from './fences.mjs';
@@ -55,6 +58,38 @@ export function auditCircuitText(block, fileText = '') {
   return findings;
 }
 
+const isMinus = (e) => /^-[a-z]/i.test(e) || /\.(GND|V-|1-|2-)$/.test(e);
+const isPlus = (e) => /^\+[a-z]/i.test(e) || /\.(V\+|1\+|2\+)$/.test(e);
+
+/** 実体配線図 (breadboard / perfboard) の `wires:` で、赤が − 側・黒が + 側につながっている行。 */
+export function auditWireColors(block, fileText = '') {
+  if (/逆向き|逆に挿/.test(fileText)) return [];
+  const start = block.findIndex((l) => /^wires:/.test(l));
+  if (start < 0) return [];
+  const findings = [];
+  for (let i = start + 1; i < block.length; i += 1) {
+    const m = /^\s+-\s+(.+?)\s+(?:--|\|-|-\|)\s+(.+?)\s+(red|black)\s*$/.exec(block[i]);
+    if (!m) continue;
+    const [, a, c, color] = m;
+    if (color === 'red' && (isMinus(a) || isMinus(c))) findings.push({ offset: i, kind: '線の色', message: `赤が − 側につながっている: ${block[i].trim()}` });
+    if (color === 'black' && (isPlus(a) || isPlus(c))) findings.push({ offset: i, kind: '線の色', message: `黒が + 側につながっている: ${block[i].trim()}` });
+  }
+  return findings;
+}
+
+/** 計器の画面にマーカーかカーソルがあるか。 */
+export function auditInstrument(fence, block) {
+  const text = block.join('\n');
+  const has = (re) => re.test(text);
+  if ((fence === 'vna' || fence === 'spectrum') && !has(/^markers:/m) && !has(/^\s+-\s+mark\s/m) && !has(/\btdr\b/)) {
+    return [{ offset: 0, kind: '計器のマーカー', message: `${fence}: markers: が無い` }];
+  }
+  if (fence === 'scope' && !has(/^(cursors|measure):/m) && !has(/^view:\s*xy/m)) {
+    return [{ offset: 0, kind: '計器のカーソル', message: 'scope: cursors: も measure: も無い' }];
+  }
+  return [];
+}
+
 function main(args) {
   const verbose = args.includes('--verbose');
   const tally = new Map();
@@ -62,8 +97,14 @@ function main(args) {
     const lines = read.text.split('\n');
     const { blocks } = fencesIn(read.text);
     for (const block of blocks) {
-      if (block.fence !== 'circuit' || block.close === null) continue;
-      for (const f of auditCircuitText(lines.slice(block.open + 1, block.close), read.text)) {
+      if (block.close === null) continue;
+      const body = lines.slice(block.open + 1, block.close);
+      const found = [
+        ...(block.fence === 'circuit' ? auditCircuitText(body, read.text) : []),
+        ...(block.fence === 'breadboard' || block.fence === 'perfboard' ? auditWireColors(body, read.text) : []),
+        ...auditInstrument(block.fence, body),
+      ];
+      for (const f of found) {
         tally.set(f.kind, (tally.get(f.kind) ?? 0) + 1);
         if (verbose) console.log(`${read.path}:${block.open + 2 + f.offset}: [${f.kind}] ${f.message}`);
       }
