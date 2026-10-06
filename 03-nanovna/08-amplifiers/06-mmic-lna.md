@@ -96,43 +96,54 @@ wires:
 J1 に CH0 のケーブルを、J2 に 20 dB アッテネータ経由で CH1 のケーブルをつなぐ。電源の 5 V は USB アダプタなどから取る。
 
 ```copper
-board:
-  size: 70x50mm
-  ground: back
-title: 図2 ERA-3SM+ の 1 段を銅張り基板に組む
+title: 図2 ERA-3SM+ を銅張り基板に組む
 f: 1G
-copper:
-  Lin: line 0,36 27,36 3.06mm
-  Lout: line 41,36 70,36 3.06mm
-  G1: pad 34,28 4x4mm
-  VG1a: via 33,28
-  VG1b: via 35,28
-  G2: pad 34,44 4x4mm
-  VG2a: via 33,44
-  VG2b: via 35,44
-  N1: pad 46,26 4x4mm
-  N2: pad 56,26 4x4mm
-  VCC: pad 66,26 4x4mm
-  GCb: pad 56,14 4x4mm
-  VCb: via 56,14
-parts:
-  J1: sma left 36 CH0
-  J2: sma right 36 CH1
-  C1: capacitor/1608 12,36 1n
-  C2: capacitor/1608 60,36 1n
-  U1: mmic 27,36 G1 41,36 G2 ERA-3SM+
-  L1: inductor 46,36 N1 100n
-  L2: inductor N1 N2 1u
-  Cbp: capacitor N2 GCb 10n
-  Rb: resistor N2 VCC 51
-  BAT:
-    type: device
-    at: 62,-9
-    label: 5 V
-    pins: ["-", "+"]
-wires:
-  - BAT.+ -- VCC red
-  - BAT.- -- GCb black
+sheets:
+  - name: 治具
+    board:
+      size: 70x50mm
+      ground: back
+    copper:
+      Lin: line 0,36 27,36 3.06mm
+      Lout: line 41,36 70,36 3.06mm
+      G1: pad 34,28 4x4mm
+      VG1a: via 33,28
+      VG1b: via 35,28
+      G2: pad 34,44 4x4mm
+      VG2a: via 33,44
+      VG2b: via 35,44
+      N1: pad 46,26 4x4mm
+      N2: pad 56,26 4x4mm
+      VCC: pad 66,26 4x4mm
+      GCb: pad 56,14 4x4mm
+      VCb: via 56,14
+    parts:
+      J1: sma left 36 CH0
+      J2: sma right 36 CH1
+      C1: capacitor/1608 12,36 1n
+      C2: capacitor/1608 60,36 1n
+      U1: mmic 27,36 G1 41,36 G2 ERA-3SM+
+      L1: inductor 46,36 N1 100n
+      L2: inductor N1 N2 1u
+      Cbp: capacitor N2 GCb 10n
+      Rb: resistor N2 VCC 51
+      BAT:
+        type: device
+        at: 62,-9
+        label: 5 V
+        pins: ["-", "+"]
+    wires:
+      - BAT.+ -- VCC red
+      - BAT.- -- GCb black
+  - name: スルー
+    board:
+      size: 56x20mm
+      ground: back
+    copper:
+      L3: line 0,10 56,10 3.06mm
+    parts:
+      J3: sma left 10 CH0
+      J4: sma right 10 CH1
 ```
 
 ![銅張り基板の寸法図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/copper/06-mmic-lna.svg)
@@ -146,12 +157,16 @@ wires:
 | C1・C2 (1 nF、1608) | 線を 1 mm 切り、その隙間を跨いで載せる |
 | L1 (100 nH)・L2 (1 µH) | OUT 側の線から直角に上へ。100 nH を線に近い側に |
 | Cbp・Rbias | L2 の先の島 (N2) に。Cbp は GND の島 (穴で裏のベタへ)、Rbias (1/4 W の軸物) は 5 V の島へ |
+| スルー (図2 (2枚め)) | 治具と同じ両面の FR4 から **56 mm × 20 mm** を切り出し、幅 3.06 mm の線を 1 本通す。長さ 56 mm は治具の Lin (27 mm) と Lout (29 mm) の和。端面 SMA (J3・J4) の付け方は J1・J2 と同じ |
 
 - 銅張り基板を流れる電流は Id = 35 mA で、幅 3 mm の線に対して十分小さい (C 値の目安 500 mA 以下)
 - 50 Ω の幅は Hammerstad の近似式で計算した値。基板の厚さや比誘電率が違えば幅も変わる
   (測って確かめるのは 3-13・9-7)
 - **治具だけで先に確かめる**: U1 と C1・C2 を載せる前に、切る前の線 (スルー) の S21 と
   S11 を測っておく。1.5 GHz で S11 が −20 dB 以下なら治具は使える (3-6 と同じ考え方)
+- **治具とスルーを 1 つの図に並べたのは、同じ基材・同じ線路幅で切り出すため**。U1 の両側の
+  線を足すとスルーの線と同じ長さになるので、スルーの S21 を基準にすれば、治具の線の損失と遅延を
+  差し引いて U1 だけの S21 が読める。U1 を載せた後も、スルーは治具の確かめに使い続けられる
 
 ## 掃引の設定
 
