@@ -83,81 +83,87 @@ I と Q は差を取るので 2.5 V は消える。
 ```circuit
 title: 図1 Tayloe 検波器 (74HC74 で 4 相を作り、74HC4052 で 4 つの C に振り分ける)
 parts:
-  VCC: vcc c6 5V
-  U1: ic f8 74HC74
-  G2: ground h8
-  W1: square h4 j4 l=$\mathrm{W1}$
-  G1: ground j4
-  U2: dip16 e20a7a6 r90 74HC4052
-  G3: ground c17
-  VCC: vcc g25 5V
-  C1: capacitor i15 k15 10n
-  G4: ground k15
-  M1: voltmeter k17 i17 l=$\mathrm{CH1}$
-  C2: capacitor k19 m19 10n
-  G5: ground m19
-  C3: capacitor k24 m24 10n
-  G6: ground m24
-  M2: voltmeter k26 i26 l=$\mathrm{CH2}$
-  C4: capacitor i29 k29 10n
-  G7: ground k29
-  W2: sine n14 p14 l=$\mathrm{W2}$
-  G8: ground p14
-  R1: resistor n16 n18 1k
-  VCC: vcc n4 5V
-  C5: capacitor n4 p4 100n
-  G9: ground p4
-  VCC: vcc n8 5V
-  C6: capacitor n8 p8 100n
-  G10: ground p8
+  VCC: vcc e6 5V
+  U1: ic h8 74HC74
+  G2: ground j8
+  W1: square j3a5 l3a5 l=$\mathrm{W1}$
+  G1: ground l3a5
+  U2: ic h32 74HC4052
+  VCC: vcc d32 5V
+  G3: ground l31
+  G11: ground j35a5
+  C2: capacitor l17 n17 10n
+  G4: ground n17
+  C3: capacitor l20 n20 10n
+  G5: ground n20
+  C4: capacitor l23 n23 10n
+  G6: ground n23
+  C1: capacitor l26 n26 10n
+  G7: ground n26
+  M2: voltmeter j20 j23 l=$\mathrm{CH2}$
+  M1: voltmeter p20 p23 l=$\mathrm{CH1}$
+  R1: resistor h36 h38 1k
+  W2: sine h39 j39 l=$\mathrm{W2}$
+  G8: ground j39
+  VCC: vcc r3 5V
+  C5: capacitor r3 t3 100n
+  G9: ground t3
+  VCC: vcc r7 5V
+  C6: capacitor r7 t7 100n
+  G10: ground t7
 wires:
-  - c6 -- c9
-  - c7 |- U1.VCC
-  - c7a5 |- U1.1PRE
-  - c8 |- U1.1CLR
-  - c8a5 |- U1.2PRE
-  - c9 |- U1.2CLR
-  - U1.GND |- h8
-  - U1.1CLK -| f4
-  - f4 -- g4 -- h4
-  - U1.2CLK -| g4
-  - U1.1Q -| e11f5
-  - e11f5 -- e13f0 -- h13
-  - h13 -| U2.S0
-  - e11f5 -- a11a5 -- a2a5 -- f2f5
-  - f2f5 -| U1.2D
-  - U1.2Q -| f12f0
-  - f12f0 -- g12
-  - g12 -| U2.S1
-  - U1./2Q -| g11
-  - g11 -- l11 -- l1 -- e1f0
-  - e1f0 -| U1.1D
-  - b17 -- b21a4a8
-  - b19a0a8 |- U2.GND
-  - b19a5a6 |- U2.VEE
-  - b20a0a4 |- U2.E
-  - b21a4a8 |- U2.BN
-  - b17 -- c17
-  - U2.VCC |- g25
-  - U2.A3 |- i17
-  - i17 -- i15
-  - U2.A0 |- k19
-  - k19 -- k17
-  - U2.A2 |- i26
-  - i26 -- i29
-  - U2.A1 |- k24
-  - k24 -- k26
-  - n14 -- n16
-  - n18 -- n21
-  - n21 |- U2.AN
+  - e6 -- e9
+  - e7 |- U1.VCC
+  - e7a5 |- U1.1PRE
+  - e8 |- U1.1CLR
+  - e8a5 |- U1.2PRE
+  - e9 |- U1.2CLR
+  - U1.GND |- j8
+  - U1.1CLK -| h3a5
+  - h3a5 -- i3a5
+  - U1.2CLK -| i3a5
+  - i3a5 -- j3a5
+  - U1./2Q -| i11
+  - i11 -- n11 -- n1 -- g1f0
+  - g1f0 -| U1.1D
+  - U1.1Q -| g11f5
+  - g11f5 -- g13f0
+  - g13f0 -- t13
+  - g11f5 -- b11a5 -- b2 -- h2f0
+  - h2f0 -| U1.2D
+  - U1.2Q -| h12f0
+  - h12f0 -- u12
+  - t13 -| U2.S0
+  - u12 -| U2.S1
+  - U2.VCC |- d32
+  - l31 |- U2.GND
+  - U2.VEE |- l31a5
+  - U2.E |- l32
+  - l31 -- l32
+  - U2.BN -| j35a5
+  - U2.A0 -| f17f0
+  - f17f0 -- k17
+  - k17 -- l17
+  - U2.A1 -| g20
+  - g20 -- j20
+  - j20 -- l20
+  - U2.A2 -| g23f0
+  - g23f0 -- j23
+  - j23 -- l23
+  - U2.A3 -| h26
+  - h26 -- k26
+  - k26 -- l26
+  - k17 -- k15a5 -- p15a5 -- p20
+  - p23 -- p28 -- k28 -- k26
+  - U2.AN -| h36
+  - h38 -- h39
 notes:
-  - text h3a5 small right: 1.992 MHz
-  - text q6 small center: パスコン (C5 は U1、C6 は U2)
-  - text o12a8 small right: 499 kHz
-  - text l16 small center: CH1 は I (A0 - A3)
-  - text l27a5 small center: CH2 は Q (A1 - A2)
-  - text g16h0 small center: LO 0° (S0)
-  - text f16h0 small center: LO 90° (S1)
+  - text k4 small left: 1.992 MHz
+  - text i40 small left: 499 kHz
+  - text u5 small center: パスコン (C5 は U1、C6 は U2)
+  - text s22f0 small center: LO 0° (S0)
+  - text v22 small center: LO 90° (S1)
+  - text r21a5 small center: CH1 は I (A0 - A3)、CH2 は Q (A1 - A2)
 style:
   pitch: 1
 ```
@@ -168,10 +174,13 @@ style:
 
 - **左が LO の 4 相**。W1 (1.992 MHz) を U1 (74HC74) の 1CLK と 2CLK へ。1Q (PIN 5) が S0 と 2D へ、
   2Q (PIN 9) が S1 へ、/2Q (PIN 8) が 1D へ戻る。2 本の帰還は箱の上と下を回るので、
-  線の交差が 3 か所ある (黒丸の無い交差はつながっていない)
-- **右が Tayloe 検波器**。W2 (499 kHz) が R1 (1 kΩ) を通って U2 (74HC4052) の AN (PIN 13) へ。
-  A3 (PIN 11)・A0 (PIN 12)・A1 (PIN 14)・A2 (PIN 15) に C1〜C4 (10 nF) を GND へ。
-  U2 は寝かせて描き、ピンの名前を胴に刷った。上の列 (GND・VEE・E・BN) は GND へ
+  線の交差が 2 か所ある (黒丸の無い交差はつながっていない)
+- **右が Tayloe 検波器**。U2 (74HC4052) はピンを働きで並べた箱で描いた (左にチャネル A0〜A3・B0〜B3、
+  右に共通の AN・BN、下に GND・VEE・E・S0・S1)。この箱は左右を裏返せず、共通の AN が右にあるので、
+  **RF は右から入り、左のコンデンサへ流れる**。W2 (499 kHz) が R1 (1 kΩ) を通って AN (PIN 13) へ。
+  A0 (PIN 12)・A1 (PIN 14)・A2 (PIN 15)・A3 (PIN 11) に C2・C3・C4・C1 (10 nF) を GND へ。
+  GND・VEE・E・BN は GND へ
+- LO の 2 本は下から S0・S1 へ入る
 - **CH1 は差動**で 1+ を A0、1− を A3 (I)。**CH2 も差動**で 2+ を A1、2− を A2 (Q)。
   AD3 の Scope の入力はもともと差動なので (9-12 と同じ)、差を取る回路が要らない
 - C5・C6 は U1・U2 の電源のパスコン。それぞれの IC の VCC と GND のそばに挿す
