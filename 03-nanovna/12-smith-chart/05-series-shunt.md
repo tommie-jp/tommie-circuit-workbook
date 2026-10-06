@@ -5,7 +5,7 @@ id: 12-5
 title: 直列と並列 — 直列は R の円の上を、並列は G の円の上を動く
 tier: 200
 source: 自作
-board: —
+board: BB
 device: LV64
 ---
 
@@ -37,25 +37,25 @@ device: LV64
 
 計器は VNA。この本の図は LiteVNA64 の画面に合わせて書いてあり、NanoVNA-H4 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
-この題は回路図 (図1〜図4 の各 vna の図の前) を付け、実体配線図は付けない — 動き方の読み方の題で、組む回路が無い (12-4 のデモボードに部品を足して試せる)。回路図の負荷 24 Ω は 12-6 と同じ値。
+4 つの回路は 1 枚のブレッドボードに並べて挿しておき、VNA の RF の線を測る回路の列へ挿し替えて 1 つずつ測る (実体配線図は図 5)。各 vna の図の前には、その回路だけの回路図を付ける。負荷 24 Ω は [03-nanovna/12-smith-chart/06-l-match.md](06-l-match.md) と同じ値。周波数は 3 MHz までにした (ブレッドボードの寄生が見えない範囲。理由は [03-nanovna/12-smith-chart/01-map.md](01-map.md) の掃引の設定)。
 
 | 項目 | 値 |
 | --- | --- |
-| 範囲 | 1 MHz〜30 MHz |
+| 範囲 | 100 kHz〜3 MHz |
 | 点数 | 101 |
 | 校正 | SOLT (1-1)。ケーブルの先で Open / Short / Load |
-| 表示 | S11 の Smith チャート。マーカー 5・10・20・30 MHz |
+| 表示 | S11 の Smith チャート。マーカー 500 kHz・1・2・3 MHz |
 
 ## 直列の部品
 
-24 Ω (z = 0.48) の負荷に、**直列**のコイルとコンデンサを足す。
+24 Ω (z = 0.48) の負荷に、**直列**のコイル (3.9 µH (マイクロヘンリー)) とコンデンサ (10 nF) を足す。
 
 ```circuit
-title: 図1 の回路 (24 Ω に直列のコイル L1 390 nH)
+title: 図1 の回路 (24 Ω に直列のコイル L1 3.9 µH)
 parts:
   J1: sma c2 mirror
   G0: ground d2
-  L1: inductor c5 c9 390n
+  L1: inductor c5 c9 3.9u
   R1: resistor c9 e9 24
   G2: ground e9
 wires:
@@ -71,29 +71,29 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/05-series-shunt-1.svg)
 
 ```vna
-sweep: 1M-30M 101
-title: 図1 24 Ω に直列のコイル 390 nH — r = 0.48 の円の上を上へ
+sweep: 100k-3M 101
+title: 図1 24 Ω に直列のコイル 3.9 µH — r = 0.48 の円の上を上へ
 dut:
-  - series L 390n
+  - series L 3.9u
   - series R 24
   - short
 traces:
   - S11 smith
 markers:
-  - 5M
-  - 10M
-  - 20M
-  - 30M
+  - 500k
+  - 1M
+  - 2M
+  - 3M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/05-series-shunt-1.svg)
 
 ```circuit
-title: 図2 の回路 (24 Ω に直列のコンデンサ C1 1 nF)
+title: 図2 の回路 (24 Ω に直列のコンデンサ C1 10 nF)
 parts:
   J1: sma c2 mirror
   G0: ground d2
-  C1: capacitor c5 c9 1n
+  C1: capacitor c5 c9 10n
   R1: resistor c9 e9 24
   G2: ground e9
 wires:
@@ -109,19 +109,19 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/05-series-shunt-2.svg)
 
 ```vna
-sweep: 1M-30M 101
-title: 図2 24 Ω に直列のコンデンサ 1 nF — r = 0.48 の円の上を下へ
+sweep: 100k-3M 101
+title: 図2 24 Ω に直列のコンデンサ 10 nF — r = 0.48 の円の上を下へ
 dut:
-  - series C 1n
+  - series C 10n
   - series R 24
   - short
 traces:
   - S11 smith
 markers:
-  - 5M
-  - 10M
-  - 20M
-  - 30M
+  - 500k
+  - 1M
+  - 2M
+  - 3M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/05-series-shunt-2.svg)
@@ -131,11 +131,11 @@ markers:
 同じ 24 Ω の負荷の**入口に並列**にコンデンサとコイルを足す (ケーブルの側から見て、負荷と並列)。
 
 ```circuit
-title: 図3 の回路 (24 Ω に並列のコンデンサ C1 330 pF)
+title: 図3 の回路 (24 Ω に並列のコンデンサ C1 3.3 nF)
 parts:
   J1: sma c2 mirror
   G0: ground d2
-  C1: capacitor c5 e5 330p
+  C1: capacitor c5 e5 3.3n
   G1: ground e5
   R1: resistor c9 e9 24
   G2: ground e9
@@ -153,29 +153,29 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/05-series-shunt-3.svg)
 
 ```vna
-sweep: 1M-30M 101
-title: 図3 24 Ω に並列のコンデンサ 330 pF — g = 2.08 の円の上を下へ
+sweep: 100k-3M 101
+title: 図3 24 Ω に並列のコンデンサ 3.3 nF — g = 2.08 の円の上を下へ
 dut:
-  - shunt C 330p
+  - shunt C 3.3n
   - series R 24
   - short
 traces:
   - S11 smith
 markers:
-  - 5M
-  - 10M
-  - 20M
-  - 30M
+  - 500k
+  - 1M
+  - 2M
+  - 3M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/05-series-shunt-3.svg)
 
 ```circuit
-title: 図4 の回路 (24 Ω に並列のコイル L1 390 nH)
+title: 図4 の回路 (24 Ω に並列のコイル L1 3.9 µH)
 parts:
   J1: sma c2 mirror
   G0: ground d2
-  L1: inductor c5 e5 390n
+  L1: inductor c5 e5 3.9u
   G1: ground e5
   R1: resistor c9 e9 24
   G2: ground e9
@@ -193,25 +193,59 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/05-series-shunt-4.svg)
 
 ```vna
-sweep: 1M-30M 101
-title: 図4 24 Ω に並列のコイル 390 nH — g = 2.08 の円の上を上へ
+sweep: 100k-3M 101
+title: 図4 24 Ω に並列のコイル 3.9 µH — g = 2.08 の円の上を上へ
 dut:
-  - shunt L 390n
+  - shunt L 3.9u
   - series R 24
   - short
 traces:
   - S11 smith
 markers:
-  - 5M
-  - 10M
-  - 20M
-  - 30M
+  - 500k
+  - 1M
+  - 2M
+  - 3M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/05-series-shunt-4.svg)
 
-- 図 3 の 10 MHz の点 (19.2 − j9.6 Ω) は、中心の左下に来る。**並列の C で、Z の実部は 24 Ω から下がり、虚部は容量性になる** (Z = 1 / (1/24 + jωC))
+- 図 3 の 1 MHz の点 (19.2 − j9.6 Ω) は、中心の左下に来る。**並列の C で、Z の実部は 24 Ω から下がり、虚部は容量性になる** (Z = 1 / (1/24 + jωC))
 - 並列のコイルは逆に、上に動き、実部が下がる。**どちらも g = 2.08 の円**の上。直列の動き (図 1・図 2) は r = 0.48 の円
+
+## 実体配線図
+
+```breadboard
+title: 図5 4 つの回路をブレッドボードに並べる (図1 を選んだ状態)
+board: half
+parts:
+  VNA:
+    type: device
+    at: top
+    label: VNA (SMA ケーブルの先)
+    pins: [GND, RF]
+  L1: inductor c3 c7 3.9u
+  R1: resistor a7 -t7 24
+  C1: capacitor/film c9 c13 10n
+  R2: resistor a13 -t13 24
+  C2: capacitor/ceramic a17 -t17 3.3n
+  R3: resistor a21 -t21 24
+  L2: inductor a24 -t24 3.9u
+  R4: resistor a28 -t28 24
+wires:
+  - VNA.GND -- -t1 black
+  - VNA.RF -- e3 orange
+  - d17 -- d21 yellow
+  - d24 -- d28 yellow
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/breadboard/05-series-shunt.svg)
+
+- 列ごとに回路が 1 つ: **図 1 (直列の 3.9 µH) は 3 列目、図 2 (直列の 10 nF) は 9 列目、図 3 (並列の 3.3 nF) は 17 列目、図 4 (並列の 3.9 µH) は 24 列目**が入口。選ぶのはオレンジの線 1 本で、測る回路の入口の列の e の行へ挿し替える
+- **直列** (図 1・図 2) は、入口の列からコイルかコンデンサが横に渡り、渡った先の列の 24 Ω が上の − レール (GND) へ下りる
+- **並列** (図 3・図 4) は、入口の列のコンデンサかコイルがそのまま GND へ下り、黄色の短い線で隣の列の 24 Ω へつなぐ。入口から見て、部品と 24 Ω が並ぶ
+- 上の − レールが GND で、黒い線で VNA の GND へ。ケーブルの先から挿し先の列までの線は 5 cm 以下にする (測る物に含まれる)
+- 部品は E12・E24: コイル 3.9 µH (軸付き)、コンデンサ 10 nF (フィルム) と 3.3 nF (セラミック、C0G がよい)、抵抗 24 Ω
 
 ## 見るべき値
 
@@ -219,12 +253,12 @@ markers:
 
 | 図 | 周波数 | Z | z |
 | --- | --- | --- | --- |
-| 図1 (24 Ω + 390 nH) | 10 MHz | 24 + j24.5 Ω | 0.48 + j0.49 |
-| 図2 (24 Ω + 1 nF) | 10 MHz | 24 − j15.9 Ω | 0.48 − j0.32 |
-| 図3 (24 Ω ∥ 330 pF) | 10 MHz | 19.2 − j9.6 Ω | 0.38 − j0.19 |
-| 図4 (24 Ω ∥ 390 nH) | 10 MHz | 12.2 + j12.0 Ω | 0.24 + j0.24 |
+| 図1 (24 Ω + 3.9 µH) | 1 MHz | 24 + j24.5 Ω | 0.48 + j0.49 |
+| 図2 (24 Ω + 10 nF) | 1 MHz | 24 − j15.9 Ω | 0.48 − j0.32 |
+| 図3 (24 Ω ∥ 3.3 nF) | 1 MHz | 19.2 − j9.6 Ω | 0.38 − j0.19 |
+| 図4 (24 Ω ∥ 3.9 µH) | 1 MHz | 12.2 + j12.0 Ω | 0.24 + j0.24 |
 
-- **直列の動き (図 1・図 2) では実部が 24 Ω のまま**、並列の動き (図 3・図 4) では**実部が 24 Ω から下がっていく** (図 3 は 5 MHz の 22.6 Ω から 30 MHz の 7.4 Ω へ)。並列の部品は、Y に足すので、Z の実部も虚部も一緒に動く
+- **直列の動き (図 1・図 2) では実部が 24 Ω のまま**、並列の動き (図 3・図 4) では**実部が 24 Ω から下がっていく** (図 3 は 500 kHz の 22.6 Ω から 3 MHz の 7.4 Ω へ)。並列の部品は、Y に足すので、Z の実部も虚部も一緒に動く
 - 並列でも直列でも、**上へ動くのはコイル、下へ動くのはコンデンサ**。次の題では、この 2 つの動きを組み合わせて、24 Ω を中心へ運ぶ
 
 ## 出典

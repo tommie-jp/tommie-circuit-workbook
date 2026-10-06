@@ -324,11 +324,11 @@ GHz 帯の作法をまとめる。
 
 | # | 題 | 段 | 機種 | 基板 |
 | --- | --- | --- | --- | --- |
-| 12-1 | [Smith チャートの地図 — 外周・実軸・R の円・X の円](12-smith-chart/01-map.md) | 入門 | LV64 | — |
-| 12-2 | [周波数を掃くと点が回る — 直列の L は上半分、C は下半分を時計回りに](12-smith-chart/02-sweep-rotation.md) | 入門 | LV64 | — |
-| 12-3 | [Γ の円と SWR — 負荷の SWR は中心からの距離、ケーブルを足すと円を回る](12-smith-chart/03-swr-circle.md) | 入門 | LV64 | — |
+| 12-1 | [Smith チャートの地図 — 外周・実軸・R の円・X の円](12-smith-chart/01-map.md) | 入門 | LV64 | BB |
+| 12-2 | [周波数を掃くと点が回る — 直列の L は上半分、C は下半分を時計回りに](12-smith-chart/02-sweep-rotation.md) | 入門 | LV64 | BB |
+| 12-3 | [Γ の円と SWR — 負荷の SWR は中心からの距離、線路を足すと円を回る](12-smith-chart/03-swr-circle.md) | 入門 | LV64 | BB |
 | 12-4 | [Smith チャートデモボード — 8 つの負荷を差し替えて 1 点ずつ測る](12-smith-chart/04-demo-board.md) | 入門 | LV64 | PF / BB |
-| 12-5 | [直列と並列 — 直列は R の円の上を、並列は G の円の上を動く](12-smith-chart/05-series-shunt.md) | 中級 | LV64 | — |
-| 12-6 | [L 形の整合を Smith チャート上で作る — 24 Ω を 50 Ω にする](12-smith-chart/06-l-match.md) | 中級 | LV64 | PF |
+| 12-5 | [直列と並列 — 直列は R の円の上を、並列は G の円の上を動く](12-smith-chart/05-series-shunt.md) | 中級 | LV64 | BB |
+| 12-6 | [L 形の整合を Smith チャート上で作る — 24 Ω を 50 Ω にする](12-smith-chart/06-l-match.md) | 中級 | LV64 | PF / BB |
 
 <!-- toc:end -->

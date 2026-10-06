@@ -16,7 +16,7 @@ device: LV64
 ジャンパを差し替えるたびに点がチャートの別の場所へ跳ぶのを見て、位置と値の関係を体で覚える。
 
 > **この章の図の画面は理想の模型から計算したもので、実機では測っていない。** 治具で測った Touchstone は、フェンスの `data:` に書けば同じ画面に重なる。
-> perfboard と端面 SMA の治具は、**周波数が 30 MHz までなら、図の理想と同じ位置に来る**ように設計した (自分で作って確かめる前の見積り)。
+> 測る周波数は **3 MHz まで** (マーカーは 1 MHz)。perfboard の治具でもブレッドボードでも、この範囲なら**図の理想と同じ位置に来る**見込み (自分で作って確かめる前の見積り。寄生の大きさは下の「なぜ 3 MHz までにするか」)。
 
 ## 回路図
 
@@ -38,14 +38,14 @@ parts:
   R3: resistor e17 h17 100
   G5: ground h17
   JP6: switch c20 e20
-  L1: inductor e20 h20 820n
+  L1: inductor e20 h20 8.2u
   G6: ground h20
   JP7: switch c23 e23
-  C1: capacitor e23 h23 330p
+  C1: capacitor e23 h23 3.3n
   G7: ground h23
   JP8: switch c26 e26
   R4: resistor e26 g26 51
-  L2: inductor g26 j26 820n
+  L2: inductor g26 j26 8.2u
   G8: ground j26
 wires:
   - J1.1 -- c5
@@ -74,7 +74,7 @@ style:
 
 - J1 の中心導体が**共通の線 (バス)**。JP1〜JP8 は 2 ピンのジャンパで、**同時に閉じるのは 1 つだけ** (2 つ閉じると、負荷が並列になる)
 - JP1 は Open (閉じても何も付かない)。JP2 は Short (閉じると地へ直結)。それ以外は、JP を閉じると**その負荷が J1 の先に付く**
-- 閉じていない JP の先の負荷は**切り離され**、バスには JP のピン 1 本 (数 pF 未満) だけが付く。30 MHz までなら見えないほど小さい
+- 閉じていない JP の先の負荷は**切り離され**、バスには JP のピン 1 本 (数 pF 未満) だけが付く。3 MHz では見えないほど小さい
 
 ## 実体配線図
 
@@ -100,10 +100,10 @@ parts:
   R1: resistor m12 m17 51
   R2: resistor r12 r17 24
   R3: resistor e8 e3 100
-  L1: inductor j8 j3 820n
-  C1: capacitor/ceramic o8 o3 330p
+  L1: inductor j8 j3 8.2u
+  C1: capacitor/ceramic o8 o3 3.3n
   R4: resistor t8 t5 51
-  L2: inductor u5 u2 820n
+  L2: inductor u5 u2 8.2u
 wires:
   - a10 -- c10
   - c10 -- e10
@@ -143,18 +143,17 @@ wires:
 - **バス**は 10 行の白い線で、**JP のピン 1 本ずつを通る** (JP1〜JP4 は C・H・M・R 列、JP5〜JP8 は E・J・O・T 列)。上の 4 組 (JP1〜JP4) は 11 行から上、下の 4 組 (JP5〜JP8) は 9 行から下
 - **負荷は縦に半田付け**: 上の 4 組は 12 行〜17 行、下の 4 組は 8 行〜3 行。GND の線は 18 行 (上) と 2 行 (下)。リード線を短く切って、部品を基板に寝かせる
 - **JP2 は GND への線 1 本** (H11 → H18): Short。**JP1 は何も付けない** (C11 のピンだけ): Open
-- **JP8 の負荷は 51 Ω と 820 nH の直列**: T8 → T5 の抵抗と U5 → U2 のコイルを、T5 と U5 の間の線でつなぐ
+- **JP8 の負荷は 51 Ω と 8.2 µH の直列**: T8 → T5 の抵抗と U5 → U2 のコイルを、T5 と U5 の間の線でつなぐ
 - ジャンパは **JP に挿すショートピン** (2.54 mm ピッチ) を 1 つだけ用意して、差し替えて使う。**図には描かない**
 - 抵抗は 1/4 W の金属皮膜 (誤差 1 %)。**51 Ω と 24 Ω は E24**、100 Ω も E24。51 Ω は 50 Ω に 2 % 高いが、SWR は 1.02 で十分 Load の代わりになる
-- **820 nH** (E12) は 10 MHz で +j51.5 Ω、**330 pF** (E12) は −j48.2 Ω。どちらも「ほぼ ±j50 Ω」の部品になる。コイルは軸付きの小さなインダクタ (リードの短いもの)、コンデンサはセラミック (C0G 推奨)
+- **8.2 µH (マイクロヘンリー)** (E12) は 1 MHz で +j51.5 Ω、**3.3 nF** (E12) は −j48.2 Ω。どちらも「ほぼ ±j50 Ω」の部品になる。コイルは軸付きの小さなインダクタ (リードの短いもの)、コンデンサはセラミック (C0G 推奨)
 
-## ブレッドボードで組む (3 MHz 以下向け)
+## ブレッドボードで組む
 
 perfboard の治具を作る前に、**ブレッドボードで同じ 8 つの負荷を試す**こともできる。ジャンパ (JP) の代わりに、**1 本の線 (オレンジ) を、選んだ負荷の列へ挿し替える**。
 
-> **周波数の範囲の注意。** ブレッドボードは、列どうしの浮遊容量 (約 2.5 pF、8-2) と線のインダクタンス (5 cm のジャンパで約 43 nH、8-3) が
-> 付くので、**3 MHz を超える部分は、ブレッドボードの寄生を含んだ値の目安**になる。**図の理想 (perfboard の値) と合わせて読むのは 3 MHz まで**。
-> 10 MHz や 30 MHz の位置は、Open が右端から、Short が左端から**回り込んで**見える (下の図11〜図13)。
+> **周波数の範囲。** ブレッドボードは、列どうしの浮遊容量 (約 2.5 pF、[02-analog-discovery/08-breadboard-limits/02-row-capacitance.md](../../02-analog-discovery/08-breadboard-limits/02-row-capacitance.md)) と線のインダクタンス (5 cm のジャンパで約 43 nH、[02-analog-discovery/08-breadboard-limits/03-jumper-inductance.md](../../02-analog-discovery/08-breadboard-limits/03-jumper-inductance.md)) が付く。
+> この題の掃引は 3 MHz までなので、どちらも負荷に比べて見えないほど小さく、**perfboard と同じ図の理想の位置に来る** (下の「なぜ 3 MHz までにするか」)。
 > 校正の基準面は SMA のケーブルの先なので、**ケーブルの先から挿し先の列までの線も測る物に含まれる**。短い線 (5 cm 以下) で挿す。
 
 ```breadboard
@@ -165,26 +164,26 @@ parts:
     type: device
     at: top
     label: VNA (SMA ケーブルの先)
-    pins: [RF, GND]
+    pins: [GND, RF]
   R1: resistor a8 -t8 51
   R2: resistor a11 -t11 24
   R3: resistor a14 -t14 100
-  L1: inductor a17 -t17 820n
-  C1: capacitor a20 -t20 330p
+  L1: inductor a17 -t17 8.2u
+  C1: capacitor/ceramic a20 -t20 3.3n
   R4: resistor b23 b26 51
-  L2: inductor a26 -t26 820n
+  L2: inductor a26 -t26 8.2u
 wires:
   - VNA.GND -- -t1 black
   - VNA.RF -- e8 orange
-  - e5 -- -t5 black
+  - -t5 -- a5 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/breadboard/04-demo-board.svg)
 
-- 列ごとに負荷が 1 つ: **JP1 Open は 2 列目 (何も付けない)、JP2 Short は 5 列目 (黒い線で GND へ)、JP3 51 Ω は 8 列目、JP4 24 Ω は 11 列目、JP5 100 Ω は 14 列目、JP6 820 nH は 17 列目、JP7 330 pF は 20 列目、JP8 51 Ω + 820 nH は 23 列目から 26 列目**
+- 列ごとに負荷が 1 つ: **JP1 Open は 2 列目 (何も付けない)、JP2 Short は 5 列目 (黒い線で GND へ)、JP3 51 Ω は 8 列目、JP4 24 Ω は 11 列目、JP5 100 Ω は 14 列目、JP6 8.2 µH は 17 列目、JP7 3.3 nF は 20 列目、JP8 51 Ω + 8.2 µH は 23 列目から 26 列目**
 - **選ぶのはオレンジの線 1 本だけ**。VNA の RF からの線を、測りたい列 (e の行) へ挿し替える。図は JP3 (8 列目) を選んだ状態で、上の青い線のレールが GND (黒の線で VNA の GND へ)。同時に 2 つの列へ挿さない (負荷が並列になる)
-- JP8 は **23 列目の 51 Ω が 26 列目へ横に渡り、26 列目の 820 nH が GND へ**つながる。選ぶときは 23 列目 (b の行) へ
-- 部品は perfboard の図 2 と同じ値。**perfboard の治具は 30 MHz まで**、ブレッドボードは **3 MHz まで** が使える範囲 (上の注意)
+- JP8 は **23 列目の 51 Ω が 26 列目へ横に渡り、26 列目の 8.2 µH が GND へ**つながる。選ぶときは 23 列目 (b の行) へ
+- 部品は perfboard の図 2 と同じ値。この題の範囲 (3 MHz まで) なら、**perfboard の治具とブレッドボードのどちらで測っても同じ点**に来る
 - 計器は VNA だけ (AD3 とオシロは使わない)。SMA ケーブルの先は、ピンヘッダに変換する SMA の基板か、ケーブルの先の線を剥いて、2 本の線 (RF と GND) に分けて使う
 
 ## 掃引の設定
@@ -193,46 +192,46 @@ wires:
 
 | 項目 | 値 |
 | --- | --- |
-| 範囲 | 1 MHz〜30 MHz |
+| 範囲 | 100 kHz〜3 MHz |
 | 点数 | 101 |
 | 校正 | SOLT (1-1)。**ケーブルの先 (デモボードの SMA に挿す手前)** で Open / Short / Load / Thru |
-| 表示 | S11 の Smith チャート。マーカー 1 を 10 MHz に置く |
+| 表示 | S11 の Smith チャート。マーカー 1 を 1 MHz に置く |
 
 手順:
 
 1. 校正したケーブルの先を、デモボードの SMA にしっかり (締めすぎずに、0-2) つなぐ
 2. **JP を 1 つだけ閉じる** (ほかは全部開けておく)
-3. マーカー 1 を 10 MHz に置いて、Smith の位置と Z の読み値を、下の表に書き込む
+3. マーカー 1 を 1 MHz に置いて、Smith の位置と Z の読み値を、下の表に書き込む
 4. JP を替えて繰り返す。**8 つ全部測ると、チャートの上に 8 点がそろう**
 
 以下は、**理想の模型から計算した画面**。
 
 ```vna
-sweep: 1M-30M 101
+sweep: 100k-3M 101
 title: 図3 JP1 Open — 右端
 dut: open
 traces:
   - S11 smith
 markers:
-  - 10M
+  - 1M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-1.svg)
 
 ```vna
-sweep: 1M-30M 101
+sweep: 100k-3M 101
 title: 図4 JP2 Short — 左端
 dut: short
 traces:
   - S11 smith
 markers:
-  - 10M
+  - 1M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-2.svg)
 
 ```vna
-sweep: 1M-30M 101
+sweep: 100k-3M 101
 title: 図5 JP3 51 Ω — 中心 (SWR 1.02)
 dut:
   - series R 51
@@ -240,13 +239,13 @@ dut:
 traces:
   - S11 smith
 markers:
-  - 10M
+  - 1M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-3.svg)
 
 ```vna
-sweep: 1M-30M 101
+sweep: 100k-3M 101
 title: 図6 JP4 24 Ω — 実軸の左 (SWR 2.08)
 dut:
   - series R 24
@@ -254,13 +253,13 @@ dut:
 traces:
   - S11 smith
 markers:
-  - 10M
+  - 1M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-4.svg)
 
 ```vna
-sweep: 1M-30M 101
+sweep: 100k-3M 101
 title: 図7 JP5 100 Ω — 実軸の右 (SWR 2.0)
 dut:
   - series R 100
@@ -268,59 +267,59 @@ dut:
 traces:
   - S11 smith
 markers:
-  - 10M
+  - 1M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-5.svg)
 
 ```vna
-sweep: 1M-30M 101
-title: 図8 JP6 820 nH — 上の外周 (+j51.5 Ω)
+sweep: 100k-3M 101
+title: 図8 JP6 8.2 µH — 上の外周 (+j51.5 Ω)
 dut:
-  - series L 820n
+  - series L 8.2u
   - short
 traces:
   - S11 smith
 markers:
-  - 10M
+  - 1M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-6.svg)
 
 ```vna
-sweep: 1M-30M 101
-title: 図9 JP7 330 pF — 下の外周 (−j48.2 Ω)
+sweep: 100k-3M 101
+title: 図9 JP7 3.3 nF — 下の外周 (−j48.2 Ω)
 dut:
-  - series C 330p
+  - series C 3.3n
   - short
 traces:
   - S11 smith
 markers:
-  - 10M
+  - 1M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-7.svg)
 
 ```vna
-sweep: 1M-30M 101
-title: 図10 JP8 51 Ω + 820 nH — r = 1 の円の上 (51 + j51.5 Ω)
+sweep: 100k-3M 101
+title: 図10 JP8 51 Ω + 8.2 µH — r = 1 の円の上 (51 + j51.5 Ω)
 dut:
   - series R 51
-  - series L 820n
+  - series L 8.2u
   - short
 traces:
   - S11 smith
 markers:
-  - 10M
+  - 1M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-8.svg)
 
-## ブレッドボードの寄生を含む Smith チャート
+## なぜ 3 MHz までにするか
 
-ブレッドボードで同じ負荷を測ると、**浮遊容量 2.5 pF (8-2) と 5 cm の線のインダクタンス 43 nH (8-3) が付いて、点が少し回る**。
-下は、この 2 つを**負荷に足した模型**で計算した Smith チャート (perfboard の図 3〜図10 と同じ 1〜30 MHz。マーカーは 3 MHz と 30 MHz)。
-**3 MHz では図の理想の位置に近く、30 MHz では回り込みが見える**。
+ブレッドボードで負荷を測ると、**浮遊容量 2.5 pF と 5 cm の線のインダクタンス 43 nH が付いて、点が少し回る**。
+下は、この 2 つを**負荷に足した模型**で計算した Smith チャート。**3 MHz を超えるとどうなるか**を見るため、この 3 枚だけ掃引を 30 MHz まで広げた (マーカーは 3 MHz と 30 MHz)。
+**3 MHz では図の理想の位置に近く、30 MHz では回り込みが見える**。この題の掃引を 3 MHz までにしたのはこのため。
 
 ```vna
 sweep: 1M-30M 101
@@ -369,13 +368,14 @@ markers:
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-11.svg)
 
-- **模型は仮定**: 2.5 pF と 43 nH は、8-2・8-3 の測った値を負荷の両側に足しただけ。実際の寄生は、挿す列・線の長さ・部品のリード線で変わる。**値の目安を見る図で、測った値ではない**
+- **模型は仮定**: 2.5 pF と 43 nH は、[02-analog-discovery/08-breadboard-limits/02-row-capacitance.md](../../02-analog-discovery/08-breadboard-limits/02-row-capacitance.md)・[02-analog-discovery/08-breadboard-limits/03-jumper-inductance.md](../../02-analog-discovery/08-breadboard-limits/03-jumper-inductance.md) の値を負荷の両側に足しただけ。実際の寄生は、挿す列・線の長さ・部品のリード線で変わる。**値の目安を見る図で、測った値ではない**
 - Open は右端の少し下 (容量性の側)、Short は左端の少し上 (誘導性の側) へ回る。**30 MHz で回りが大きい** (Open の 2.5 pF は −j2.1 kΩ、Short の 43 nH は +j8.1 Ω)
-- 回り込みが大きいときは、**校正 (Open / Short / Load) を同じ列・同じ線の長さで取り直す**と、基準面が負荷の根元へ移って、寄生が消える
+- 3 MHz では、Open の 2.5 pF は −j21 kΩ、Short の 43 nH は +j0.8 Ω で、どちらも図では見分けられない
+- 3 MHz より上で測りたいときは、**校正 (Open / Short / Load) を同じ列・同じ線の長さで取り直す**と、基準面が負荷の根元へ移って、寄生が消える
 
 ## 見るべき値
 
-計算値 (10 MHz、基準 50 Ω)。測った値と見比べる。
+計算値 (1 MHz、基準 50 Ω)。測った値と見比べる。
 
 | JP | 負荷 | 理想の Z | z | \|Γ\| | SWR | チャート上の場所 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -384,14 +384,14 @@ markers:
 | JP3 | 51 Ω | 51 Ω | 1.02 | 0.010 | 1.02 | 中心 |
 | JP4 | 24 Ω | 24 Ω | 0.48 | 0.351 | 2.08 | 実軸の左 |
 | JP5 | 100 Ω | 100 Ω | 2 | 0.333 | 2.00 | 実軸の右 |
-| JP6 | 820 nH | +j51.5 Ω | +j1.03 | 1 | ∞ | 上の外周 |
-| JP7 | 330 pF | −j48.2 Ω | −j0.96 | 1 | ∞ | 下の外周 |
-| JP8 | 51 Ω + 820 nH | 51 + j51.5 Ω | 1.02 + j1.03 | 0.455 | 2.67 | r = 1 の円の上 |
+| JP6 | 8.2 µH | +j51.5 Ω | +j1.03 | 1 | ∞ | 上の外周 |
+| JP7 | 3.3 nF | −j48.2 Ω | −j0.96 | 1 | ∞ | 下の外周 |
+| JP8 | 51 Ω + 8.2 µH | 51 + j51.5 Ω | 1.02 + j1.03 | 0.455 | 2.67 | r = 1 の円の上 |
 
 - **24 Ω と 100 Ω は、中心から同じ距離 (SWR 2) で左右の対称**の位置に来る。ここがずれていたら、抵抗の値か基準面を疑う
-- 実物では、**Open と Short が右端・左端から少し回る** (パッドの容量・配線のインダクタンス)。10 MHz なら数度以内に収まる見込み。周波数を 30 MHz に上げると回り方が増える
-- JP6 (820 nH) と JP7 (330 pF) は**外周の近く** (実物のコイルは抵抗が少しあるので、外周から少し内側)。**この 2 点が外周の上と下に来れば、上はコイル・下はコンデンサの向きが確かめられる**
-- 掃引を 1〜30 MHz にして、JP6 と JP7 の線が**上へ・下へ外周を時計回りに**動くことも確かめる (12-2)
+- 実物では、**Open と Short が右端・左端から少し回る** (パッドの容量・配線のインダクタンス)。3 MHz までならほとんど見えない見込み (上の「なぜ 3 MHz までにするか」)
+- JP6 (8.2 µH) と JP7 (3.3 nF) は**外周の近く** (実物のコイルは抵抗が少しあるので、外周から少し内側)。**この 2 点が外周の上と下に来れば、上はコイル・下はコンデンサの向きが確かめられる**
+- 掃引の 100 kHz〜3 MHz で、JP6 と JP7 の線が**上へ・下へ外周を時計回りに**動くことも確かめる (12-2)
 
 ## 出典
 

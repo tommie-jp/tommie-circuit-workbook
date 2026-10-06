@@ -5,7 +5,7 @@ id: 12-1
 title: Smith チャートの地図 — 外周・実軸・R の円・X の円
 tier: 100
 source: 自作
-board: —
+board: BB
 device: LV64
 ---
 
@@ -37,26 +37,32 @@ Smith はそれを「何 Ω (オーム) の抵抗と、何 Ω のコイルかコ
 
 計器は VNA。この本の図は LiteVNA64 の画面に合わせて書いてあり、NanoVNA-H4 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
-この題は各 vna の図の前に回路図を付け、実体配線図は付けない — 格子の読み方の題で、組む回路が無い (同じ負荷を実物で測るのは 12-4 のデモボード)。
+4 つの負荷は 1 枚のブレッドボードに並べて挿しておき、VNA の RF の線を測る負荷の列へ挿し替えて 1 つずつ測る (実体配線図は図 5)。
+各 vna の図の前には、その負荷だけの回路図を付ける。
 
 | 項目 | 値 |
 | --- | --- |
-| 範囲 | 1 MHz〜30 MHz |
+| 範囲 | 100 kHz〜3 MHz |
 | 点数 | 101 |
 | 校正 | SOLT (1-1)。ケーブルの先 (負荷を付ける所) で Open / Short / Load |
-| 表示 | S11 の Smith チャート。マーカーは 10 MHz |
+| 表示 | S11 の Smith チャート。マーカーは 1 MHz |
+
+周波数は 3 MHz までにした。ブレッドボードの列どうしの浮遊容量 (約 2.5 pF、[02-analog-discovery/08-breadboard-limits/02-row-capacitance.md](../../02-analog-discovery/08-breadboard-limits/02-row-capacitance.md)) は 3 MHz で −j21 kΩ、
+5 cm の線のインダクタンス (約 43 nH、[02-analog-discovery/08-breadboard-limits/03-jumper-inductance.md](../../02-analog-discovery/08-breadboard-limits/03-jumper-inductance.md)) は +j0.8 Ω で、どちらも負荷 (数十 Ω) に比べて見えないほど小さい。
+**ブレッドボードで組んでも、図の理想の位置に来る**範囲。
 
 ## 4 つの点
 
 **25 Ω** (Γ = −1/3、z = 0.5)。実軸の左半分、中心と左端の間の 1/3 あたり。周波数を変えても動かない (純抵抗)。
 
 ```circuit
-title: 図1 の回路 (25 Ω)
+title: 図1 の回路 (25 Ω、12 Ω と 13 Ω の直列)
 parts:
   J1: sma c2 mirror
   G0: ground d2
-  R1: resistor c5 e5 25
-  G1: ground e5
+  R1: resistor c5 c9 12
+  R2: resistor c9 e9 13
+  G1: ground e9
 wires:
   - J1.1 -- c5
   - J1.2 -- d2
@@ -67,7 +73,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/01-map-1.svg)
 
 ```vna
-sweep: 1M-30M 101
+sweep: 100k-3M 101
 title: 図1 25 Ω — 実軸の中心より左
 dut:
   - series R 25
@@ -75,7 +81,7 @@ dut:
 traces:
   - S11 smith
 markers:
-  - 10M
+  - 1M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/01-map-1.svg)
@@ -99,7 +105,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/01-map-2.svg)
 
 ```vna
-sweep: 1M-30M 101
+sweep: 100k-3M 101
 title: 図2 100 Ω — 実軸の中心より右
 dut:
   - series R 100
@@ -107,19 +113,19 @@ dut:
 traces:
   - S11 smith
 markers:
-  - 10M
+  - 1M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/01-map-2.svg)
 
-**820 nH のコイル** (10 MHz で Z = +j51.5 Ω、z = +j1.03)。上半分の外周の近く。**周波数を上げると外周を時計回りに右へ**回る。
+**8.2 µH (マイクロヘンリー) のコイル** (1 MHz で Z = +j51.5 Ω、z = +j1.03)。上半分の外周の近く。**周波数を上げると外周を時計回りに右へ**回る。
 
 ```circuit
-title: 図3 の回路 (コイル 820 nH)
+title: 図3 の回路 (コイル 8.2 µH)
 parts:
   J1: sma c2 mirror
   G0: ground d2
-  L1: inductor c5 e5 820n
+  L1: inductor c5 e5 8.2u
   G1: ground e5
 wires:
   - J1.1 -- c5
@@ -131,27 +137,27 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/01-map-3.svg)
 
 ```vna
-sweep: 1M-30M 101
-title: 図3 コイル 820 nH — 上半分の外周
+sweep: 100k-3M 101
+title: 図3 コイル 8.2 µH — 上半分の外周
 dut:
-  - series L 820n
+  - series L 8.2u
   - short
 traces:
   - S11 smith
 markers:
-  - 10M
+  - 1M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/01-map-3.svg)
 
-**330 pF のコンデンサ** (10 MHz で Z = −j48.2 Ω、z = −j0.96)。下半分の外周の近く。**周波数を上げると外周を時計回りに左へ**回る。
+**3.3 nF のコンデンサ** (1 MHz で Z = −j48.2 Ω、z = −j0.96)。下半分の外周の近く。**周波数を上げると外周を時計回りに左へ**回る。
 
 ```circuit
-title: 図4 の回路 (コンデンサ 330 pF)
+title: 図4 の回路 (コンデンサ 3.3 nF)
 parts:
   J1: sma c2 mirror
   G0: ground d2
-  C1: capacitor c5 e5 330p
+  C1: capacitor c5 e5 3.3n
   G1: ground e5
 wires:
   - J1.1 -- c5
@@ -163,33 +169,63 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/01-map-4.svg)
 
 ```vna
-sweep: 1M-30M 101
-title: 図4 コンデンサ 330 pF — 下半分の外周
+sweep: 100k-3M 101
+title: 図4 コンデンサ 3.3 nF — 下半分の外周
 dut:
-  - series C 330p
+  - series C 3.3n
   - short
 traces:
   - S11 smith
 markers:
-  - 10M
+  - 1M
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/01-map-4.svg)
 
-- 820 nH と 330 pF は、どちらも 10 MHz でリアクタンスの大きさがほぼ 50 Ω (z がほぼ ±j1)。**z = ±j1 の弧は、外周の上と下、実軸から約 90° の所**を通る。
-  この 2 つは 12-4 のデモボードの負荷になる。E12 の値で 50 Ω ちょうどにはならない (820 nH は +j51.5 Ω、330 pF は −j48.2 Ω)
+- 8.2 µH と 3.3 nF は、どちらも 1 MHz でリアクタンスの大きさがほぼ 50 Ω (z がほぼ ±j1)。**z = ±j1 の弧は、外周の上と下、実軸から約 90° の所**を通る。
+  この 2 つは 12-4 のデモボードの負荷になる。E12 の値で 50 Ω ちょうどにはならない (8.2 µH は +j51.5 Ω、3.3 nF は −j48.2 Ω)
 - 4 つの点を並べると、実軸の右が抵抗の大きいほう、上がコイル、下がコンデンサの 3 つの向きが 1 枚で覚えられる
+
+## 実体配線図
+
+```breadboard
+title: 図5 4 つの負荷をブレッドボードに並べる (図1 の 25 Ω を選んだ状態)
+board: half
+parts:
+  VNA:
+    type: device
+    at: top
+    label: VNA (SMA ケーブルの先)
+    pins: [GND, RF]
+  R1: resistor c3 c7 12
+  R2: resistor a7 -t7 13
+  R3: resistor a12 -t12 100
+  L1: inductor a17 -t17 8.2u
+  C1: capacitor/ceramic a22 -t22 3.3n
+wires:
+  - VNA.GND -- -t1 black
+  - VNA.RF -- e3 orange
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/breadboard/01-map.svg)
+
+- 列ごとに負荷が 1 つ: **25 Ω (図 1) は 3 列目** (R1 12 Ω で 7 列目へ渡り、R2 13 Ω で上の − レールへ)、**100 Ω (図 2) は 12 列目、8.2 µH (図 3) は 17 列目、3.3 nF (図 4) は 22 列目**
+- **選ぶのはオレンジの線 1 本だけ**。VNA の RF からの線を、測る負荷の列の e の行へ挿し替える。上の − レール (青の線) が GND で、黒い線で VNA の GND へつなぐ。同時に 2 つの列へ挿さない (負荷が並列になる)
+- 25 Ω は E24 に無いので、**12 Ω と 13 Ω (どちらも E24) の直列**で作る
+- 校正の基準面はケーブルの先なので、**ケーブルの先から挿し先の列までの線も測る物に含まれる**。線は 5 cm 以下にする。
+  SMA ケーブルの先は、ピンヘッダに変換する SMA の基板を使うか、線を剥いて RF と GND の 2 本に分ける
+- コイルは軸付きの小さなインダクタ (8.2 µH、E12)、コンデンサはセラミック (3.3 nF、E12。C0G がよい)
 
 ## 見るべき値
 
-計算値 (10 MHz、基準 50 Ω)。
+計算値 (1 MHz、基準 50 Ω)。
 
 | 負荷 | Z | z = Z / 50 | \|Γ\| | Γ の角 | SWR | 場所 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 25 Ω | 25 Ω | 0.5 | 0.333 | 180° | 2.0 | 実軸、中心の左 |
 | 100 Ω | 100 Ω | 2 | 0.333 | 0° | 2.0 | 実軸、中心の右 |
-| 820 nH | +j51.5 Ω | +j1.03 | 1.000 | +88° | ∞ | 外周の上 |
-| 330 pF | −j48.2 Ω | −j0.96 | 1.000 | −92° | ∞ | 外周の下 |
+| 8.2 µH | +j51.5 Ω | +j1.03 | 1.000 | +88° | ∞ | 外周の上 |
+| 3.3 nF | −j48.2 Ω | −j0.96 | 1.000 | −92° | ∞ | 外周の下 |
 
 - 25 Ω と 100 Ω は、**中心からの距離がどちらも 1/3** (SWR がどちらも 2)。**中心を挟んで同じ距離**にあるが、抵抗の値が「25 Ω は 50 Ω の半分、100 Ω は 2 倍」と比で対称になるため。
   SWR は比 (50 Ω の何倍か、または何分の 1 か) だけで決まる
