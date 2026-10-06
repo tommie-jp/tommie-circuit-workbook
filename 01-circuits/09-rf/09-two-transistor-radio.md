@@ -269,6 +269,32 @@ measure: [vpp, freq]
 W1 の変調を切って (無変調の搬送波) 横軸を 0.5µs/div にすると、帯の中身が 1MHz の正弦波だと分かる。
 AD3 のアナログ入力は、BNC アダプタ付きで帯域 30MHz 以上 (−3dB)、6MHz まで −0.1dB に収まるので、1MHz は形のまま見える。2×15 ピンのヘッダに直接つないでも 9MHz (−3dB)、2.9MHz (−0.5dB) あり、1MHz は読める。
 
+### 同調回路だけを VNA で見る (補足)
+
+W1 の代わりに LiteVNA64 を使うと、バーアンテナの 1 次 (約 530 µH) と同調の容量 (VC1 と C<sub>T</sub> を合わせた約 48 pF) の
+並列だけを、放送の電波なしで測れる。この並列を回路から外し、CH0 と CH1 の間に**直列**に挿して、S21 の Log Mag を 0.8〜1.2 MHz で掃引する。
+並列共振ではインピーダンスが非常に大きくなって信号が通らないので、f<sub>0</sub> だけ深い谷になる。
+03-nanovna/03-fixtures/01-series-fixture.md (3-1) の直列治具が使える。
+
+見えるはずの画面 (理想の模型。コイルの損失を並列の 333 kΩ (Q = 100) とした目安で、実測ではない)。
+
+```vna
+device: litevna64
+sweep: 0.8M-1.2M 401
+title: 図5 同調回路 (T1 の 1 次 530 µH ∥ 48 pF) の S21 — f0 で深い谷
+dut:
+  - series L 530u cp 48p rp 333k
+traces:
+  - S21 logmag
+markers:
+  - 0.998M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/vna/09-two-transistor-radio.svg)
+
+- 谷の位置は f<sub>0</sub> = 1 / (2π√(530 µH × 48 pF)) ≈ 0.998 MHz で、図の読み値は 0.998 MHz で約 −70 dB。VC1 を回すと動く
+- 実物は図ほど深くならない。コイルの Q、バーアンテナの置き方、治具の漏れで浅くなり、手や金属を近づけても動く
+
 ## 見るべき値
 
 計算値。
