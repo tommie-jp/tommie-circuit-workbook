@@ -113,7 +113,7 @@ parts:
     at: top
     label: Analog Discovery 3
     pins: [V+, GND, W1, 2+, 2-, 1+, 1-]
-  R1: resistor b3 b9 68k
+  R1: resistor b3 b9 68k shift=down
   CIN: capacitor/ceramic d5 d9 100n
   R2: resistor c9 c13 15k
   RC: resistor b15 b20 2.2k
@@ -122,8 +122,8 @@ parts:
   RE2: resistor a25 -t25 390
   CE: capacitor/electrolytic c25(+) c28(-) 10uF
   D2: diode g13(A) g17(K) 1N4148
-  CC: capacitor/ceramic h17 h20 10n
-  D1: diode i17(A) i14(K) 1N4148
+  CC: capacitor/ceramic h17 h20 10n cap=below:0.5,0
+  D1: diode i17(A) i14(K) 1N4148 cap=below:1,0
   COUT: capacitor/ceramic g20 g24 100n
   RB: resistor a13 -t13 4.7k
   CG: capacitor/electrolytic h13(+) h9(-) 10uF
