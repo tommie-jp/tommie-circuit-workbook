@@ -14,7 +14,7 @@
 
 | 型番 | 内容 | データシート |
 | --- | --- | --- |
-| 2N7000 / BS170 | N ch MOSFET (TO-92) | [PDF](https://www.vishay.com/docs/70226/70226.pdf) |
+| 2N7000 / BS170 | N ch MOSFET (TO-92) | [PDF](https://www.vishay.com/docs/70226/70226.pdf)。2N7000 のピンの並びは実物で確かめる: onsemi の 2007 年版の図は S G D、2022 年版の表は D G S で食い違い、表は 2007 年版 (S G D) に従う。実物はテスタで確かめる |
 | 2SC3355 / 2SC3355L | 高周波 NPN (fT 7 GHz) | [PDF](https://static.chipdip.ru/lib/225/DOC000225164.pdf) |
 | IRF9540 | P ch パワー MOSFET | [PDF](https://www.vishay.com/docs/91078/91078.pdf) |
 
