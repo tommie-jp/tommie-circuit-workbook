@@ -18,6 +18,7 @@ AD2 と NanoVNA-H4 / V2 は歴史的な機種 (比較のために残す)。一�
   本文の最初の見出しは `# <id> <title>`
 - 本文の順: 説明 → 回路図 → 実体配線図 → 計器の設定 → 見るべき値 → 出典
 - **特に理由がなければ、どの題にも実体配線図・Analog Discovery 3 (基板の外の機器)・オシロの図 (`scope`) を入れる**。入れないときは理由を題に 1 行。理由になることは README の「書き方」の表
+- 題を足す手順と、段ごとの周波数の絞り (必須・入門は 3 MHz 以下) は `.claude/skills/workbook-writing/SKILL.md`
 - 各冊の 200 題の計画は `<NN-冊>/plan.yaml` (1 行 1 題)。題を書くときは計画の `id` `title`
   `tier` を front matter に写し、題を書き換えたら計画も直す (ずれは `check` が言う)
 - 各冊の `README.md` の `<!-- toc:start -->` 〜 `<!-- toc:end -->` の間は
