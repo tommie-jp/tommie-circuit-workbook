@@ -338,7 +338,7 @@ measure: [vpp, freq, phase]
 - この符号の違いで、RF が LO の上 (499 kHz) か下 (497 kHz) かが分かる。I だけを見ていたら分からない
 
 ```logic
-title: 図6 74HC74 の 4 相 — S1 S0 が 0 1 3 2 と回る
+title: 図6 74HC74 の 4 相 — CH (S1 S0) が 1 3 2 0 と回る
 device: ad3
 time: 400ns/div
 sample: 100MHz
