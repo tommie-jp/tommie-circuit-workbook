@@ -132,14 +132,14 @@ wires:
   - AD.GND -- -t2 black
   - -t30 -- -b30 black
   - AD.W1 -- a5 yellow
-  - AD.2+ -- b5 blue
-  - AD.2- -- -t7 black
+  - AD.2+ -- b5 blue [v40, h-73]
+  - AD.2- -- -t11 black
   - AD.1+ -- g29 orange
   - f24 -- f29 green
   - AD.1- -- -t18 black
   - +t3 -- a3 red
   - +t15 -- a15 red
-  - e9 -- e19 orange [v10]
+  - e9 -- e19 orange [v-10]
   - e13 -- f13 green
   - e20 -- f20 green
   - a28 -- -t28 black
