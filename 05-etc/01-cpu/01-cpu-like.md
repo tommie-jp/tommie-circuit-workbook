@@ -28,13 +28,28 @@ LED に出る番地が、プログラム `F F F F F B3` の
 
 ## 全体の構成
 
-```text
- W1 (1 Hz) --CLK--> [ U1  74HC163: PC ] --A0..A3--> [ U2  74HC154 + ダイオード: ROM ] --> 語
-                      |    ^                    |                                        |
-                      |    |                    +--> LED 4 つ (図3)                       |
-                      |    +-- ENT・/CLR・/LD・P0〜P2 <--------------------------------+
-                      +--> 番地 (A0〜A3)         (語の上位 = 命令、下位 = operand)
+```plantuml
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName "Noto Sans CJK JP"
+skinparam rectangle {
+  RoundCorner 6
+}
+
+rectangle "クロック\nAD3 の W1 (1 Hz)" as CLK #FFF8E1
+rectangle "U1 74HC163\nプログラムカウンタ (PC)\n番地 A0〜A3" as PC #E8F0FE
+rectangle "U2 74HC154 + ダイオード\nメモリ (ROM)\n語 = 命令 4 ビット + operand" as ROM #FDECEA
+rectangle "LED 4 つ (図3)\n番地の表示" as LED #E6F4EA
+
+CLK --> PC : CLK
+PC --> ROM : A0〜A3
+PC --> LED : A0〜A3
+ROM --> PC : ENT・CLR・LDn・P0〜P2\n(語の上位 = 命令、下位 = operand)
+@enduml
 ```
+
+![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/plantuml/01-cpu-like.svg)
 
 1. クロックの立ち上がりで U1 が番地 (A0..A3) を進める
 2. U2 が番地に対応する行を L にする (アドレス 5 なら Y5)
@@ -125,7 +140,7 @@ parts:
   P0: port e6f0
   P1: port f7
   P2: port f8f0
-  GD: ground g10 r270
+  GD: ground g12 r90
   VE: vcc g3f0 5V
   ENT: port h6
   W1: square h4f0 i4f0 l=W1
@@ -142,7 +157,7 @@ wires:
   - U1.A -| e6f0
   - U1.B -| f7
   - U1.C -| f8f0
-  - U1.D -| g10
+  - U1.D -| g12
   - U1.ENP -| g3f0
   - U1.ENT -| h6
   - U1.CLK -| h4f0
@@ -306,127 +321,125 @@ style:
 full 1 枚の穴の数には入るが、A0〜A3 の 4 本、LED への 4 本、AD3 の探り 4 本、命令の 6 本が
 同じブレッドボードの上で重なり、線が追えなくなる。ブレッドボードの順位は half → full → full + half だが、half には収まらず、full 1 枚では図が読めないので、
 次の順位 (full を足す) に進めて **half + full** にした。
+図4 は、この 2 枚を 1 つの図に縦に並べて見せる (上が基板 1、下が基板 2)。
 
 ```breadboard
-title: 図4 基板 1 — カウンタ (74HC163)・クロック・アドレスの LED
-board: half
-parts:
-  AD:
-    type: device
-    at: top
-    label: Analog Discovery 3
-    pins: [V+, GND, W1, DIO0, DIO1, DIO2, DIO3, DIO4]
-  UP:
-    type: device
-    at: top
-    label: 基板 2 へ (上)
-    pins: [A0, A1, ENT, LDn, A2, A3, +5V, GND]
-  DN:
-    type: device
-    at: bottom
-    label: 基板 2 へ (下)
-    pins: [CLR, P0, P1, P2]
-  U1: dip16 @ e10 74HC163
-  R1: resistor e2 g2 820
-  D1: led h2(A) h3(K) red
-  R2: resistor e6 g6 820
-  D2: led h6(A) h7(K) red
-  R3: resistor e21 g21 820
-  D3: led h21(A) h22(K) red
-  R4: resistor e25 g25 820
-  D4: led h25(A) h26(K) red
-wires:
-  - AD.V+ -- +t1 red
-  - AD.GND -- -t2 black
-  - -t1 -- -b1 black
-  - +t30 -- +b30 red
-  - UP.+5V -- +t29 red
-  - UP.GND -- -t28 black
-  - a10 -- +t10 red
-  - j15 -- -b15 black
-  - j16 -- +b16 red
-  - j17 -- -b17 black
-  - j3 -- -b3 black
-  - j7 -- -b7 black
-  - j22 -- -b22 black
-  - j26 -- -b26 black
-  - AD.W1 -- a9 yellow
-  - b9 -- g9 yellow
-  - h9 -- h11 yellow
-  - c12 -- c2 green
-  - d13 -- d6 green
-  - a14 -- a21 green
-  - b15 -- b25 green
-  - AD.DIO0 -- b12 orange
-  - AD.DIO1 -- b13 orange
-  - AD.DIO2 -- b14 orange
-  - AD.DIO3 -- c15 orange
-  - AD.DIO4 -- i11 orange
-  - UP.A0 -- a2 blue
-  - UP.A1 -- a6 blue
-  - UP.A2 -- b21 blue
-  - UP.A3 -- c25 blue
-  - UP.ENT -- c16 purple
-  - UP.LDn -- c17 purple
-  - DN.CLR -- i10 white
-  - DN.P0 -- i12 white
-  - DN.P1 -- i13 white
-  - DN.P2 -- i14 white
+title: 図4 ブレッドボード 2 枚
+sheets:
+  - name: 基板1
+    board: half
+    parts:
+      AD:
+        type: device
+        at: top
+        label: Analog Discovery 3
+        pins: [V+, GND, W1, DIO0, DIO1, DIO2, DIO3, DIO4]
+      UP:
+        type: device
+        at: top
+        label: 基板 2 へ (上)
+        pins: [A0, A1, ENT, LDn, A2, A3, +5V, GND]
+      DN:
+        type: device
+        at: bottom
+        label: 基板 2 へ (下)
+        pins: [CLR, P0, P1, P2]
+      U1: dip16 @ e10 74HC163
+      R1: resistor e2 g2 820
+      D1: led h2(A) h3(K) red
+      R2: resistor e6 g6 820
+      D2: led h6(A) h7(K) red
+      R3: resistor e21 g21 820
+      D3: led h21(A) h22(K) red
+      R4: resistor e25 g25 820
+      D4: led h25(A) h26(K) red
+    wires:
+      - AD.V+ -- +t1 red
+      - AD.GND -- -t2 black
+      - -t1 -- -b1 black
+      - +t30 -- +b30 red
+      - UP.+5V -- +t29 red
+      - UP.GND -- -t28 black
+      - a10 -- +t10 red
+      - j15 -- -b15 black
+      - j16 -- +b16 red
+      - j17 -- -b17 black
+      - j3 -- -b3 black
+      - j7 -- -b7 black
+      - j22 -- -b22 black
+      - j26 -- -b26 black
+      - AD.W1 -- a9 yellow
+      - b9 -- g9 yellow
+      - h9 -- h11 yellow
+      - c12 -- c2 green
+      - d13 -- d6 green
+      - a14 -- a21 green
+      - b15 -- b25 green
+      - AD.DIO0 -- b12 orange
+      - AD.DIO1 -- b13 orange
+      - AD.DIO2 -- b14 orange
+      - AD.DIO3 -- c15 orange
+      - AD.DIO4 -- i11 orange
+      - UP.A0 -- a2 blue
+      - UP.A1 -- a6 blue
+      - UP.A2 -- b21 blue
+      - UP.A3 -- c25 blue
+      - UP.ENT -- c16 purple
+      - UP.LDn -- c17 purple
+      - DN.CLR -- i10 white
+      - DN.P0 -- i12 white
+      - DN.P1 -- i13 white
+      - DN.P2 -- i14 white
+  - name: 基板2
+    board: full
+    parts:
+      UQ:
+        type: device
+        at: top
+        label: 基板 1 から
+        pins: [A0, A1, A2, A3, P2, LDn, ENT, CLR, P1, P0, +5V, GND]
+      U2: dip24 @ e3 74HC154
+      D6: diode b19(A) b25(K)
+      D5: diode d22(A) d25(K)
+      R10: resistor e19 g19 10k
+      R7: resistor e22 g22 10k
+      R5: resistor e28 g28 10k
+      R6: resistor e31 g31 10k
+      S1: button @ e33
+      R9: resistor e37 g37 10k
+      R8: resistor e41 g41 10k
+    wires:
+      - UQ.+5V -- +t61 red
+      - UQ.GND -- -t60 black
+      - +t62 -- +b62 red
+      - -t1 -- -b1 black
+      - a3 -- +t3 red
+      - a8 -- -t8 black
+      - a9 -- -t9 black
+      - j14 -- -b14 black
+      - UQ.A0 -- a4 blue
+      - UQ.A1 -- a5 blue
+      - UQ.A2 -- a6 blue
+      - UQ.A3 -- a7 blue
+      - UQ.P2 -- a19 white
+      - UQ.LDn -- a22 purple
+      - UQ.ENT -- a28 purple
+      - UQ.CLR -- a31 white
+      - UQ.P1 -- a37 white
+      - UQ.P0 -- a41 white
+      - i8 -- i25 orange
+      - e25 -- g25 orange
+      - j19 -- +b19 red
+      - j22 -- +b22 red
+      - j28 -- +b28 red
+      - j31 -- +b31 red
+      - j37 -- +b37 red
+      - j41 -- +b41 red
+      - j33 -- -b33 black
+      - c31 -- c33 gray
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/01-cpu-like-1.svg)
-
-```breadboard
-title: 図5 基板 2 — メモリ (74HC154 とダイオード) と命令の線
-board: full
-parts:
-  UP:
-    type: device
-    at: top
-    label: 基板 1 から
-    pins: [A0, A1, A2, A3, P2, LDn, ENT, CLR, P1, P0, +5V, GND]
-  U2: dip24 @ e3 74HC154
-  D6: diode b19(A) b25(K)
-  D5: diode d22(A) d25(K)
-  R10: resistor e19 g19 10k
-  R7: resistor e22 g22 10k
-  R5: resistor e28 g28 10k
-  R6: resistor e31 g31 10k
-  S1: button @ e33
-  R9: resistor e37 g37 10k
-  R8: resistor e41 g41 10k
-wires:
-  - UP.+5V -- +t61 red
-  - UP.GND -- -t60 black
-  - +t62 -- +b62 red
-  - -t1 -- -b1 black
-  - a3 -- +t3 red
-  - a8 -- -t8 black
-  - a9 -- -t9 black
-  - j14 -- -b14 black
-  - UP.A0 -- a4 blue
-  - UP.A1 -- a5 blue
-  - UP.A2 -- a6 blue
-  - UP.A3 -- a7 blue
-  - UP.P2 -- a19 white
-  - UP.LDn -- a22 purple
-  - UP.ENT -- a28 purple
-  - UP.CLR -- a31 white
-  - UP.P1 -- a37 white
-  - UP.P0 -- a41 white
-  - i8 -- i25 orange
-  - e25 -- g25 orange
-  - j19 -- +b19 red
-  - j22 -- +b22 red
-  - j28 -- +b28 red
-  - j31 -- +b31 red
-  - j37 -- +b37 red
-  - j41 -- +b41 red
-  - j33 -- -b33 black
-  - c31 -- c33 gray
-```
-
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/01-cpu-like-2.svg)
 
 - 電源 (AD3 の V+ 5V) は左上の AD3 から基板 1 の上の + レール (1 列) へ、GND は上の − レール (2 列) へ入れる。
   基板 1 の + レールと − レールを右の端 (28〜29 列) から基板 2 へ渡す。**赤は +5V の線だけ、黒は GND の線だけ**に使った。
@@ -497,17 +510,17 @@ AD3 の探り・基板 2 への線」の複数の穴になり、同じ列 (5 穴
 
 始め方: Supplies を入れる → S1 を押す → **W1 のクロックの立ち上がりを 1 回待つ**と LED が全部消える (番地 0)
 → S1 を離す。次の立ち上がりから LED が 0001 → 0010 → 0011 … と進む。
-図6 の t = 0 は、S1 を押したまま番地が 0 になる立ち上がりに合わせてある。
+図5 の t = 0 は、S1 を押したまま番地が 0 になる立ち上がりに合わせてある。
 
 ## 計器の画面
 
-Logic の画面は、DIO の 0 / 1 を横の線で並べる。図6 は**クロック (CLK) と番地の 4 本 (A0〜A3)、それを束ねたバス Address (16 進)**
+Logic の画面は、DIO の 0 / 1 を横の線で並べる。図5 は**クロック (CLK) と番地の 4 本 (A0〜A3)、それを束ねたバス Address (16 進)**
 の見えるはずの画面だ。t = 0 は S1 を押したまま番地が 0 になる立ち上がりで、CLK の立ち上がりごと (1 s ごと) に
 番地が変わる。カーソルは変わり目を避けて **X1 = 5.25 s、X2 = 6.25 s** に置いた (どちらも CLK は H で、番地は変わり目の途中でない)。
 A3 は 0 のままだ。
 
 ```logic
-title: 図6 アドレスは 1 s ごとに 0 1 2 3 4 5 3 4 5 3 と進む
+title: 図5 アドレスは 1 s ごとに 0 1 2 3 4 5 3 4 5 3 と進む
 device: ad3
 time: 1s/div
 sample: 1kHz
@@ -524,11 +537,11 @@ trigger: CLK rising at 0s
 
 アナログの電圧として見たいときは、AD3 の Scope を使う。1+ を CLK の線 (W1 と同じ列)、2+ を U1 の 9 番ピン (/LD) に当て、
 1− と 2− は基板 1 の − レール (GND) に挿す。DIO4・DIO5 の線を挿し替えればよい。Logic と同時には使えない。
-図7 は t = 0 を左端 (CLK の立ち上がり) に置いた 10 s の画面で、**番地 5 の 1 秒間 (5〜6 s、2 周目は 8〜9 s) だけ /LD が L (0 V) に落ちる**。
+図6 は t = 0 を左端 (CLK の立ち上がり) に置いた 10 s の画面で、**番地 5 の 1 秒間 (5〜6 s、2 周目は 8〜9 s) だけ /LD が L (0 V) に落ちる**。
 そのとき次の立ち上がりで PC が 3 を読み込む。
 
 ```scope
-title: 図7 /LD (CH2) は番地 5 の間だけ L — CLK (CH1) は 1 Hz
+title: 図6 /LD (CH2) は番地 5 の間だけ L — CLK (CH1) は 1 Hz
 time: 1s/div
 trigger: ch1 rising 2.5V at -5div
 ch1: {wave: square 1Hz 2.5V offset 2.5V, range: 2V/div, position: 1div}
@@ -543,7 +556,7 @@ measure: [vmax, vmin]
 
 **クロック 1 Hz** で、番地は 1 秒ごとに次の順に動く。t = 0 は番地が 0 になる立ち上がり。LED は A3 A2 A1 A0 の順に並べた 2 進数だ。
 
-| クロックの数 | 図6 の時刻 | 番地 | A2 A1 A0 (LED) | 読んだ語 | 次のクロックで |
+| クロックの数 | 図5 の時刻 | 番地 | A2 A1 A0 (LED) | 読んだ語 | 次のクロックで |
 | --- | --- | --- | --- | --- | --- |
 | 0 | 0〜1 s | 0 | 0 0 0 | `FF` | +1 |
 | 1 | 1〜2 s | 1 | 0 0 1 | `FF` | +1 |
@@ -557,10 +570,10 @@ measure: [vmax, vmin]
 | 9 | 9〜10 s | 3 | 0 1 1 | `FF` | +1 |
 
 - 番地は **0 1 2 3 4 5 3 4 5 3 …**。ループ (3 → 4 → 5 → 3) は **3 クロック = 3 秒**で 1 周する
-- 図6 の**カーソル**: X1 = 5.25 秒は Address = `0x5` (A2 = 1、A1 = 0、A0 = 1 の 101)、
+- 図5 の**カーソル**: X1 = 5.25 秒は Address = `0x5` (A2 = 1、A1 = 0、A0 = 1 の 101)、
   X2 = 6.25 秒は Address = `0x3` (A2 = 0、A1 = 1、A0 = 1 の 011)。ΔX = 1.000 秒 (1/ΔX = 1 Hz = クロックの周波数)。
   **JUMP で 5 の次が 6 でなく 3 になる**。どちらのカーソルも CLK は H (1) で、変わり目にかからない
-- 図6 の Address の並びは `0x0@0 s 0x1@1 s 0x2@2 s 0x3@3 s 0x4@4 s 0x5@5 s 0x3@6 s 0x4@7 s 0x5@8 s 0x3@9 s`。
+- 図5 の Address の並びは `0x0@0 s 0x1@1 s 0x2@2 s 0x3@3 s 0x4@4 s 0x5@5 s 0x3@6 s 0x4@7 s 0x5@8 s 0x3@9 s`。
   A0・A1・A2 の変わり目は 7・5・4 回、A3 は 0 回 (`logic-fence check` の読み値)。実機では 74HC の H は約 4.9V、L は約 0V だが、
   Logic は 0 / 1 で読む
 - 番地 5 (`B3`) の間は、/LD (U1 の PIN 9) が L になる。Logic の DIO をもう 1 本 (DIO5) U1 の PIN 9 に当てると、
@@ -600,7 +613,7 @@ measure: [vmax, vmin]
 どちらも図のままでよく、メモリから基板 1 へ戻る線 (ENT・CLR・LDn・P0〜P2) と、基板 1 から来る番地 (A0〜A3) の
 名前も変わらない。
 
-| | ダイオードの ROM (図2・図5) | DIP スイッチ (図8・図9) | SRAM (図10〜12) |
+| | ダイオードの ROM (図2・図4) | DIP スイッチ (図7・図8) | SRAM (図9〜11) |
 | --- | --- | --- | --- |
 | 語の書き換え | ダイオードのピンを差し替える | スイッチを倒す | スイッチで語を作り、ボタンで書き込む |
 | 書き換えられる番地 | ダイオードを足せば全部 | **番地 5 だけ** (行を足せば増える) | 16 番地すべて |
@@ -619,7 +632,7 @@ measure: [vmax, vmin]
 別の飛び先に書き換えられる。ハンダ付けもピンの抜き差しも要らない。
 
 ```circuit
-title: 図8 DIP スイッチのメモリ (アドレス 5 の語だけを書き換えられる)
+title: 図7 DIP スイッチのメモリ (アドレス 5 の語だけを書き換えられる)
 parts:
   U2: ic l14 74HC154
   A0: port k6f0
@@ -734,67 +747,133 @@ style:
   SW2 の 3・4 番は空きだ
 - 番地 5 以外の語は `FF` (NEXT) のままだ。ほかの番地の語も書き換えたいときは、上の「行を増やす」の作りにする
 
-**実体配線図 (図9)**: 基板 1 は図4 のまま、基板 2 の 74HC154・DIP スイッチ 2 個・集合抵抗を組む。ブレッドボードは half + full で、
+**実体配線図 (図8)**: 基板 1 は図4 のまま、基板 2 の 74HC154・DIP スイッチ 2 個・集合抵抗を組む。ブレッドボードは half + full で、
 ダイオード版と同じだ。4 連 DIP スイッチ (DIP-8) は、n 番のスイッチが PIN n と PIN 9−n をつなぐ。
 この 2 本のピンは溝をはさんで**同じ列**に来るので、スイッチ 1 個が「溝の上の 5 穴の組」と「溝の下の 5 穴の組」を
 つなぐ。上の組を**列の線** (プルアップと UP からの線)、下の組を **Y5** にした。
 
 ```breadboard
-title: 図9 基板 2 — DIP スイッチのメモリ (74HC154 と 4 連 DIP スイッチ 2 個)
-board: full
-parts:
-  UP:
-    type: device
-    at: top
-    label: 基板 1 から
-    pins: [A0, A1, A2, A3, ENT, CLR, LDn, P0, P1, P2, +5V, GND]
-  U2: dip24 @ e3 74HC154
-  SW1: dip8 @ e21 l=DIP1
-  SW2: dip8 @ e25 l=DIP2
-  RN1: sip9 @ b20 l=10k-8
-  S1: button @ e31
-wires:
-  - UP.+5V -- +t61 red
-  - UP.GND -- -t60 black
-  - -t1 -- -b1 black
-  - a3 -- +t3 red
-  - a8 -- -t8 black
-  - a9 -- -t9 black
-  - j14 -- -b14 black
-  - UP.A0 -- a4 blue
-  - UP.A1 -- a5 blue
-  - UP.A2 -- a6 blue
-  - UP.A3 -- a7 blue
-  - UP.ENT -- a21 purple
-  - UP.CLR -- a22 white
-  - UP.LDn -- a23 purple
-  - UP.P0 -- a24 white
-  - UP.P1 -- a25 white
-  - UP.P2 -- a26 white
-  - a20 -- +t20 red
-  - i8 -- i21 orange
-  - g21 -- g22 orange
-  - h22 -- h23 orange
-  - g23 -- g24 orange
-  - h24 -- h25 orange
-  - g25 -- g26 orange
-  - d22 -- d31 gray
-  - j31 -- -b31 black
+title: 図8 ブレッドボード 2 枚 (DIP スイッチのメモリ)
+sheets:
+  - name: 基板1
+    board: half
+    parts:
+      AD:
+        type: device
+        at: top
+        label: Analog Discovery 3
+        pins: [V+, GND, W1, DIO0, DIO1, DIO2, DIO3, DIO4]
+      UP:
+        type: device
+        at: top
+        label: 基板 2 へ (上)
+        pins: [A0, A1, ENT, LDn, A2, A3, +5V, GND]
+      DN:
+        type: device
+        at: bottom
+        label: 基板 2 へ (下)
+        pins: [CLR, P0, P1, P2]
+      U1: dip16 @ e10 74HC163
+      R1: resistor e2 g2 820
+      D1: led h2(A) h3(K) red
+      R2: resistor e6 g6 820
+      D2: led h6(A) h7(K) red
+      R3: resistor e21 g21 820
+      D3: led h21(A) h22(K) red
+      R4: resistor e25 g25 820
+      D4: led h25(A) h26(K) red
+    wires:
+      - AD.V+ -- +t1 red
+      - AD.GND -- -t2 black
+      - -t1 -- -b1 black
+      - +t30 -- +b30 red
+      - UP.+5V -- +t29 red
+      - UP.GND -- -t28 black
+      - a10 -- +t10 red
+      - j15 -- -b15 black
+      - j16 -- +b16 red
+      - j17 -- -b17 black
+      - j3 -- -b3 black
+      - j7 -- -b7 black
+      - j22 -- -b22 black
+      - j26 -- -b26 black
+      - AD.W1 -- a9 yellow
+      - b9 -- g9 yellow
+      - h9 -- h11 yellow
+      - c12 -- c2 green
+      - d13 -- d6 green
+      - a14 -- a21 green
+      - b15 -- b25 green
+      - AD.DIO0 -- b12 orange
+      - AD.DIO1 -- b13 orange
+      - AD.DIO2 -- b14 orange
+      - AD.DIO3 -- c15 orange
+      - AD.DIO4 -- i11 orange
+      - UP.A0 -- a2 blue
+      - UP.A1 -- a6 blue
+      - UP.A2 -- b21 blue
+      - UP.A3 -- c25 blue
+      - UP.ENT -- c16 purple
+      - UP.LDn -- c17 purple
+      - DN.CLR -- i10 white
+      - DN.P0 -- i12 white
+      - DN.P1 -- i13 white
+      - DN.P2 -- i14 white
+  - name: 基板2
+    board: full
+    parts:
+      UQ:
+        type: device
+        at: top
+        label: 基板 1 から
+        pins: [A0, A1, A2, A3, ENT, CLR, LDn, P0, P1, P2, +5V, GND]
+      U2: dip24 @ e3 74HC154
+      SW1: dip8 @ e21 l=DIP1
+      SW2: dip8 @ e25 l=DIP2
+      RN1: sip9 @ b20 l=10k-8
+      S1: button @ e31
+    wires:
+      - UQ.+5V -- +t61 red
+      - UQ.GND -- -t60 black
+      - -t1 -- -b1 black
+      - a3 -- +t3 red
+      - a8 -- -t8 black
+      - a9 -- -t9 black
+      - j14 -- -b14 black
+      - UQ.A0 -- a4 blue
+      - UQ.A1 -- a5 blue
+      - UQ.A2 -- a6 blue
+      - UQ.A3 -- a7 blue
+      - UQ.ENT -- a21 purple
+      - UQ.CLR -- a22 white
+      - UQ.LDn -- a23 purple
+      - UQ.P0 -- a24 white
+      - UQ.P1 -- a25 white
+      - UQ.P2 -- a26 white
+      - a20 -- +t20 red
+      - i8 -- i21 orange
+      - g21 -- g22 orange
+      - h22 -- h23 orange
+      - g23 -- g24 orange
+      - h24 -- h25 orange
+      - g25 -- g26 orange
+      - d22 -- d31 gray
+      - j31 -- -b31 black
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/01-cpu-like-3.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/01-cpu-like-2.svg)
 
-- U2 (74HC154) は図5 と同じ 3〜14 列 (幅 0.3 インチの品)。Y5 は PIN 6 (8 列の下) で、橙の線 (`i8` → `i21`) でスイッチの下の組へ渡す
+- U2 (74HC154) は図4 の基板 2 と同じ 3〜14 列 (幅 0.3 インチの品)。Y5 は PIN 6 (8 列の下) で、橙の線 (`i8` → `i21`) でスイッチの下の組へ渡す
 - SW1 は 21〜24 列、SW2 は 25〜28 列 (切り欠きが左)。n 番のスイッチが n 番目の列の上下をつなぐ。
   下の組は、橙の短い線 5 本 (`g21`〜`g26` と `h22`〜`h25` の間) でつないで、6 列 (SW1 の 4 列と SW2 の 2 列) すべてに Y5 を届ける
 - 10 kΩ は **集合抵抗 (SIL、9 ピン、共通のピンが +5V)** を 1 個使う。共通のピン (1 番) を 20 列に、残りの 8 本を 21〜28 列の上の組 (b 行) に挿し、
   共通のピンの列から赤線で + レールへ (`a20` → `+t20`)。1 つの穴に 1 本ずつ入る。個別の抵抗 6 本でも同じだが、
   スイッチと同じ列に抵抗を挿す穴が無く、集合抵抗のほうが配線が短い
-- UP からの線は、ENT・CLR・LDn・P0・P1・P2 を 21〜26 列の上の穴 (`a21`〜`a26`) へ。S1 は図5 と同じ働きで、
+- UP からの線は、ENT・CLR・LDn・P0・P1・P2 を 21〜26 列の上の穴 (`a21`〜`a26`) へ。S1 は図4 の基板 2 と同じ働きで、
   CLR の列 (22 列) の穴 `d22` から灰色の線で 31 列の S1 の上のピンへ、下のピンは − レールへ
 
 `breadboard-fence check` が出したネットリストは、Y5 が `U2.Y5, SW1.1, SW1.2, SW1.3, SW1.4, SW2.1, SW2.2`、
-CLR の列が `UP.CLR, SW1.7, RN1.3, S1.1a, S1.1b` などで、回路図の図8 と一致した。スイッチの 1〜4 番のピンが Y5 の側 (下の組)、
+CLR の列が `UP.CLR, SW1.7, RN1.3, S1.1a, S1.1b` などで、回路図の図7 と一致した。スイッチの 1〜4 番のピンが Y5 の側 (下の組)、
 5〜8 番のピンが列の側 (上の組) になる。
 
 **ブレッドボードの限度の確認 (DIP スイッチ版)**: 電圧は 5V。電流は LED 4 つが全部点いて 3.8 mA × 4 ≒ 15 mA、列 6 本が全部 L で 0.5 mA × 6 = 3 mA、
@@ -819,7 +898,7 @@ DIP スイッチの接点の抵抗と定格は品による。この回路は 0.5
 回路図は 4 枚に分ける。同じ名前の端子 (A0〜A3・ENT・LDn・P0〜P2・DQ1・DQ6・DQ7・SD0〜SD7・OEn・WEn・Yn・CLR) は、図をまたいで同じ線だ。
 
 ```circuit
-title: 図10 SRAM (AS6C62256) とデータ線
+title: 図9 SRAM (AS6C62256) とデータ線
 parts:
   U3: ic j14 62256
   A0: port f6f0
@@ -915,16 +994,16 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/01-cpu-like-5.svg)
 
-- **図10 は SRAM 本体**。U3 (AS6C62256) は 28 ピン。左が番地 (PIN 10〜7 が A0〜A3)、右がデータ (DQ0〜DQ7)、
+- **図9 は SRAM 本体**。U3 (AS6C62256) は 28 ピン。左が番地 (PIN 10〜7 が A0〜A3)、右がデータ (DQ0〜DQ7)、
   下が VSS (PIN 14)・CE (PIN 20)・OE (PIN 22)・WE (PIN 27)、上が VCC (PIN 28)。番地の A4〜A14 は GND に、CE も GND に固定した
   (常に選ばれた状態)。入力のピンは開けない
 - DQ の 8 本は、それぞれ 10 kΩ で H に引いた。SRAM の出力の H は 1 mA を流して 2.4 V 以上までしか保証されず、74HC163 の入力の H の
   しきい値 (3.15V 以上) に届かないことがある。プルアップが出力を 5V まで持ち上げる。SRAM の出力の L は 2 mA で 0.4 V 以下で、
   プルアップの 0.5 mA には十分だ
-- OEn は SRAM の OE (PIN 22)、WEn は WE (PIN 27) につなぐ端子。動作で決まる (図13)
+- OEn は SRAM の OE (PIN 22)、WEn は WE (PIN 27) につなぐ端子。動作で決まる (図12)
 
 ```circuit
-title: 図11 データの書き込み側 (74HC245)
+title: 図10 データの書き込み側 (74HC245)
 parts:
   U4: dip20 j16 74HC245
   SD0: port h7g0
@@ -975,13 +1054,13 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/01-cpu-like-6.svg)
 
-- **図11 は書き込みのバス**。U4 (74HC245、8 ビットのバストランシーバ) の A1〜A8 (PIN 2〜9) が、スイッチの SD0〜SD7 (図12)、
+- **図10 は書き込みのバス**。U4 (74HC245、8 ビットのバストランシーバ) の A1〜A8 (PIN 2〜9) が、スイッチの SD0〜SD7 (図11)、
   B1〜B8 (PIN 18〜11) が DQ0〜DQ7 につながる。DIR (PIN 1) は +5V で、A から B へ向かう向きに固定した。
   OE (PIN 19) は Yn。**Yn が L のときだけ**、スイッチの値が DQ に出る。H のときは出力が浮き (ハイインピーダンス)、SRAM の出力と
   ぶつからない
 
 ```circuit
-title: 図12 データのスイッチ (DIP スイッチ 2 個)
+title: 図11 データのスイッチ (DIP スイッチ 2 個)
 parts:
   VCC: vcc d4 5V
   R19: resistor e4 g4 10k
@@ -1060,13 +1139,13 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/01-cpu-like-7.svg)
 
-- **図12 は語を作るスイッチ**。SW1 (4 連) の 1〜4 番が SD0〜SD3、SW2 (4 連) の 1〜4 番が SD4〜SD7。
+- **図11 は語を作るスイッチ**。SW1 (4 連) の 1〜4 番が SD0〜SD3、SW2 (4 連) の 1〜4 番が SD4〜SD7。
   SD0 = ENT、SD1 = CLR、SD2 = LDn、SD3 = P0、SD4 = P1、SD5 = P2 で、SD6・SD7 は使わない (DQ6・DQ7、書いても読んでも何も起きない)。
   **ON (閉) が 0、OFF (開) が 1**。全部 OFF が `FF` で、DIP スイッチのメモリと同じ並びだ (SW1 の 3 番と SW2 の 2 番を ON にすると `B3`)。
   SD0〜SD7 は 10 kΩ で H に引いてあり、U4 の入力を浮かせない
 
 ```circuit
-title: 図13 動作の切り替え (RUN / PROG)・書き込みボタン・CLR
+title: 図12 動作の切り替え (RUN / PROG)・書き込みボタン・CLR
 parts:
   VCC: vcc d6 5V
   R29: resistor e6 g6 10k
@@ -1115,7 +1194,7 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/01-cpu-like-8.svg)
 
-- **図13 は動作の切り替えと CLR**。S3 は SPDT のスライドスイッチで、共通のピンが GND。RUN の側は OEn (SRAM の OE) を L にし、
+- **図12 は動作の切り替えと CLR**。S3 は SPDT のスライドスイッチで、共通のピンが GND。RUN の側は OEn (SRAM の OE) を L にし、
   PROG の側は Yn (U4 の OE) を L にする。**どちらの側にも倒していない間 (切り替えの途中) は、OEn も Yn も R27・R28 で H になり、
   SRAM も U4 も出力が止まる**。図は RUN の位置で描いた
 - **WRITE (S2)** は、WEn と Yn の間のボタン。Yn が L の PROG のときだけ、押すと WEn が L になる。RUN のときは Yn が H なので、
@@ -1130,210 +1209,207 @@ style:
 基板 2 に SRAM (U3)・データのスイッチ (SW1・SW2 と集合抵抗 RN1)・動作の切り替え (S3)・WRITE (S2)・CLR (S1) を、
 基板 3 に 74HC245 (U4)・DQ のプルアップ (RN2)・D7 を組む。基板 1 と基板 2 は 12 本、基板 2 と基板 3 は 20 本のジャンパ線でつなぐ (下の表)。
 
-AS6C62256-55PCN は **600 mil (幅 0.6 インチ) の DIP** で、図14 はフェンスの幅広 DIP の置き方 (`dip28/wide`、ピンの行は d 行と h 行) で描いた。
+AS6C62256-55PCN は **600 mil (幅 0.6 インチ) の DIP** で、図13 はフェンスの幅広 DIP の置き方 (`dip28/wide`、ピンの行は d 行と h 行) で描いた。
 ピンの行が溝をはさんで 6 穴離れ、胴の下の e・f・g 行には何も挿せない。配線に使えるのは、上の a〜c 行と下の i・j 行の 5 行だけだ。
 この 5 行に、U3 の DQ 8 本を U4 へ、スイッチの SD 8 本を U4 へつなぐ線 16 本を並べると、線が重なって追えない。
 そこで、ブレッドボードの順位 (half → full → full + half) の次の **full + half** に進め、基板 1 と合わせて **half 2 枚と full 1 枚**にした。
 
 基板 2 は、基板 1 から A0〜A3 (下の箱)・ENT・LDn (下の箱)・P0〜P2 (上の箱)・CLR と電源 (右上の箱) を受ける。
-基板 3 へは、DQ0〜DQ7・SD0〜SD7・Yn・CLR・電源を渡す。箱のピンの名前が同じもの (図14 の「基板 3 へ」と図15 の「基板 2 から」) を 1 本ずつつなぐ。
+基板 3 へは、DQ0〜DQ7・SD0〜SD7・Yn・CLR・電源を渡す。箱のピンの名前が同じもの (基板 2 の「基板 3 へ」の箱と、基板 3 の「基板 2 から」の箱) を 1 本ずつつなぐ。図13 は、この 2 枚を 1 つの図に縦に並べた。
 
 ```breadboard
-title: 図14 基板 2 — SRAM (AS6C62256-55PCN、幅広 DIP)・データのスイッチ・切り替え
-board: full
-parts:
-  P1:
-    type: device
-    at: top
-    label: 基板 1 から (CLR・電源)
-    pins: [CLR, GND, +5V]
-  P3:
-    type: device
-    at: top
-    label: 基板 3 へ (電源・CLR)
-    pins: [+5V, GND, CLR]
-  T13:
-    type: device
-    at: top
-    label: 基板 1 から・基板 3 へ (上)
-    pins: [DQ7, DQ6, DQ5, P2, DQ4, P1, DQ3, P0]
-  TSD:
-    type: device
-    at: top
-    label: 基板 3 へ (SD)
-    pins: [SD0, SD1, SD2, SD3, SD4, SD5, SD6, SD7]
-  B13:
-    type: device
-    at: bottom
-    label: 基板 1 から・基板 3 へ (下)
-    pins: [Yn, A3, A2, A1, A0, ENT, DQ0, DQ1, LDn, DQ2]
-  U3: dip28/wide @ d15 AS6C62256-55PCN
-  S3: slide-switch h6 h7 h8
-  R27: resistor j6 +b6 10k
-  S2: button @ e8
-  R29: resistor a8 +t8 10k
-  R28: resistor j10 +b10 10k
-  SW1: dip8 @ e34 l=DIP1
-  SW2: dip8 @ e38 l=DIP2
-  RN1: sip9 @ b33 l=10k-8
-  S1: button @ e54
-  R30: resistor a56 +t56 10k
-wires:
-  - P1.+5V -- +t61 red
-  - P1.GND -- -t60 black
-  - P1.CLR -- c54 white
-  - P3.CLR -- b54 white
-  - P3.+5V -- +t49 red
-  - P3.GND -- -t50 black
-  - +t62 -- +b62 red
-  - -t59 -- -b59 black
-  - j54 -- -b54 black
-  - j7 -- -b7 black
-  - a15 -- +t15 red
-  - a17 -- -t17 black
-  - a18 -- -t18 black
-  - a19 -- -t19 black
-  - a20 -- -t20 black
-  - a22 -- -t22 black
-  - a23 -- -t23 black
-  - b21 -- b6 green
-  - c6 -- g6 green
-  - c16 -- c10 green
-  - T13.DQ7 -- c24 orange
-  - T13.DQ6 -- c25 orange
-  - T13.DQ5 -- c26 orange
-  - T13.P2 -- a26 white
-  - T13.DQ4 -- c27 orange
-  - T13.P1 -- a27 white
-  - T13.DQ3 -- c28 orange
-  - T13.P0 -- a28 white
-  - j15 -- -b15 black
-  - j16 -- -b16 black
-  - j17 -- -b17 black
-  - j18 -- -b18 black
-  - j19 -- -b19 black
-  - j20 -- -b20 black
-  - j28 -- -b28 black
-  - B13.Yn -- i8 blue
-  - B13.A3 -- j21 purple
-  - B13.A2 -- j22 purple
-  - B13.A1 -- j23 purple
-  - B13.A0 -- j24 purple
-  - B13.ENT -- j25 purple
-  - B13.DQ0 -- i25 orange
-  - B13.DQ1 -- j26 orange
-  - B13.LDn -- j27 purple
-  - B13.DQ2 -- i27 orange
-  - a33 -- +t33 red
-  - TSD.SD0 -- a34 yellow
-  - TSD.SD1 -- a35 yellow
-  - TSD.SD2 -- a36 yellow
-  - TSD.SD3 -- a37 yellow
-  - TSD.SD4 -- a38 yellow
-  - TSD.SD5 -- a39 yellow
-  - TSD.SD6 -- a40 yellow
-  - TSD.SD7 -- a41 yellow
-  - j34 -- -b34 black
-  - j35 -- -b35 black
-  - j36 -- -b36 black
-  - j37 -- -b37 black
-  - j38 -- -b38 black
-  - j39 -- -b39 black
-  - j40 -- -b40 black
-  - j41 -- -b41 black
+title: 図13 ブレッドボード 2 枚 (SRAM のメモリ)
+sheets:
+  - name: 基板2
+    board: full
+    parts:
+      P1:
+        type: device
+        at: top
+        label: 基板 1 から (CLR・電源)
+        pins: [CLR, GND, +5V]
+      P3:
+        type: device
+        at: top
+        label: 基板 3 へ (電源・CLR)
+        pins: [+5V, GND, CLR]
+      T13:
+        type: device
+        at: top
+        label: 基板 1 から・基板 3 へ (上)
+        pins: [DQ7, DQ6, DQ5, P2, DQ4, P1, DQ3, P0]
+      TSD:
+        type: device
+        at: top
+        label: 基板 3 へ (SD)
+        pins: [SD0, SD1, SD2, SD3, SD4, SD5, SD6, SD7]
+      B13:
+        type: device
+        at: bottom
+        label: 基板 1 から・基板 3 へ (下)
+        pins: [Yn, A3, A2, A1, A0, ENT, DQ0, DQ1, LDn, DQ2]
+      U3: dip28/wide @ d15 AS6C62256-55PCN
+      S3: slide-switch h6 h7 h8
+      R27: resistor j6 +b6 10k
+      S2: button @ e8
+      R29: resistor a8 +t8 10k
+      R28: resistor j10 +b10 10k
+      SW1: dip8 @ e34 l=DIP1
+      SW2: dip8 @ e38 l=DIP2
+      RN1: sip9 @ b33 l=10k-8
+      S1: button @ e54
+      R30: resistor a56 +t56 10k
+    wires:
+      - P1.+5V -- +t61 red
+      - P1.GND -- -t60 black
+      - P1.CLR -- c54 white
+      - P3.CLR -- b54 white
+      - P3.+5V -- +t49 red
+      - P3.GND -- -t50 black
+      - +t62 -- +b62 red
+      - -t59 -- -b59 black
+      - j54 -- -b54 black
+      - j7 -- -b7 black
+      - a15 -- +t15 red
+      - a17 -- -t17 black
+      - a18 -- -t18 black
+      - a19 -- -t19 black
+      - a20 -- -t20 black
+      - a22 -- -t22 black
+      - a23 -- -t23 black
+      - b21 -- b6 green
+      - c6 -- g6 green
+      - c16 -- c10 green
+      - T13.DQ7 -- c24 orange
+      - T13.DQ6 -- c25 orange
+      - T13.DQ5 -- c26 orange
+      - T13.P2 -- a26 white
+      - T13.DQ4 -- c27 orange
+      - T13.P1 -- a27 white
+      - T13.DQ3 -- c28 orange
+      - T13.P0 -- a28 white
+      - j15 -- -b15 black
+      - j16 -- -b16 black
+      - j17 -- -b17 black
+      - j18 -- -b18 black
+      - j19 -- -b19 black
+      - j20 -- -b20 black
+      - j28 -- -b28 black
+      - B13.Yn -- i8 blue
+      - B13.A3 -- j21 purple
+      - B13.A2 -- j22 purple
+      - B13.A1 -- j23 purple
+      - B13.A0 -- j24 purple
+      - B13.ENT -- j25 purple
+      - B13.DQ0 -- i25 orange
+      - B13.DQ1 -- j26 orange
+      - B13.LDn -- j27 purple
+      - B13.DQ2 -- i27 orange
+      - a33 -- +t33 red
+      - TSD.SD0 -- a34 yellow
+      - TSD.SD1 -- a35 yellow
+      - TSD.SD2 -- a36 yellow
+      - TSD.SD3 -- a37 yellow
+      - TSD.SD4 -- a38 yellow
+      - TSD.SD5 -- a39 yellow
+      - TSD.SD6 -- a40 yellow
+      - TSD.SD7 -- a41 yellow
+      - j34 -- -b34 black
+      - j35 -- -b35 black
+      - j36 -- -b36 black
+      - j37 -- -b37 black
+      - j38 -- -b38 black
+      - j39 -- -b39 black
+      - j40 -- -b40 black
+      - j41 -- -b41 black
+  - name: 基板3
+    board: half
+    parts:
+      PW:
+        type: device
+        at: top
+        label: 基板 2 から (電源・CLR)
+        pins: [+5V, GND, CLR]
+      TA:
+        type: device
+        at: top
+        label: 基板 2 から (Yn・DQ0〜DQ3)
+        pins: [Yn, DQ0, DQ1, DQ2, DQ3]
+      TB:
+        type: device
+        at: top
+        label: 基板 2 から (DQ4〜DQ7)
+        pins: [DQ4, DQ5, DQ6, DQ7]
+      BB:
+        type: device
+        at: bottom
+        label: 基板 2 から (SD)
+        pins: [SD0, SD1, SD2, SD3, SD4, SD5, SD6, SD7]
+      U4: dip20 @ e8 74HC245
+      RN2: sip9 @ b10 r180 l=10k-8
+      D7: diode a3(K) a7(A)
+    wires:
+      - PW.+5V -- +t1 red
+      - PW.GND -- -t2 black
+      - PW.CLR -- b7 white
+      - +t30 -- +b30 red
+      - -t30 -- -b30 black
+      - a8 -- +t8 red
+      - j8 -- +b8 red
+      - j17 -- -b17 black
+      - TA.Yn -- a9 blue
+      - TA.DQ0 -- a10 orange
+      - TA.DQ1 -- a11 orange
+      - TA.DQ2 -- a12 orange
+      - TA.DQ3 -- a13 orange
+      - TB.DQ4 -- a14 orange
+      - TB.DQ5 -- a15 orange
+      - TB.DQ6 -- a16 orange
+      - TB.DQ7 -- a17 orange
+      - a18 -- +t18 red
+      - d11 -- d3 orange
+      - BB.SD0 -- j9 yellow
+      - BB.SD1 -- j10 yellow
+      - BB.SD2 -- j11 yellow
+      - BB.SD3 -- j12 yellow
+      - BB.SD4 -- j13 yellow
+      - BB.SD5 -- j14 yellow
+      - BB.SD6 -- j15 yellow
+      - BB.SD7 -- j16 yellow
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/01-cpu-like-4.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/01-cpu-like-3.svg)
 
 - **U3 (AS6C62256) は 15〜28 列** (`@ d15`)、切り欠きが左。上の行 (d 行) に 28 番 (VCC、15 列) から 15 番 (DQ3、28 列) まで、
   下の行 (h 行) に 1 番 (A14、15 列) から 14 番 (VSS、28 列) まで並ぶ。ピンの番号は胴の縁、名前はそのすぐ内側に出る
 - **電源と GND は縦 1 本**: VCC は `a15` から + レールへ (赤)。GND は、上の行の A13・A8・A9・A11・A10・CE (`a17`〜`a20`・`a22`・`a23`) を上の − レールへ、
-  下の行の A14〜A4 (`j15`〜`j20`) と VSS (`j28`) を下の − レールへ落とす (黒)。A4〜A14 と CE を GND に固定した回路図 (図10) のとおりだ
+  下の行の A14〜A4 (`j15`〜`j20`) と VSS (`j28`) を下の − レールへ落とす (黒)。A4〜A14 と CE を GND に固定した回路図 (図9) のとおりだ
 - **番地**: 基板 1 の A0〜A3 を、下の箱から下の行の 24〜21 列 (`j24`〜`j21`、PIN 10〜7) へ入れる (紫)
 - **DQ**: 下の行の DQ0〜DQ2 (25〜27 列) と、上の行の DQ3〜DQ7 (28〜24 列) を、基板 3 の U4 の B 側へ渡す (橙)。
   下の行の穴は各列に `i` と `j` の 2 つだけなので、基板 1 の線 (ENT は 25 列、LDn は 27 列、紫) と DQ の線 (橙) を 1 つずつ入れる。
   上の行の DQ3〜DQ5 (28・27・26 列) には、基板 1 の P0・P1・P2 (白) を `a` 行に、DQ の線 (橙) を `c` 行に入れる。
-  10 kΩ のプルアップ (図10 の R11〜R18) は、基板 3 の U4 の B 側に付けた
+  10 kΩ のプルアップ (図9 の R11〜R18) は、基板 3 の U4 の B 側に付けた
 - **OE と WE**: OE (PIN 22、21 列) の `b21` から緑の線を 6 列へ引き (`b6`)、`c6` から溝をまたぐ縦の線で 6 列の下 (`g6`) へ渡す。
   WE (PIN 27、16 列) の `c16` から緑の線を S2 の上のピンの列 (10 列) へ引く
 - **S3 (スライドスイッチ)** は 6〜8 列 (`h6`〜`h8`) で、1 番が RUN 側 (OEn)、2 番が共通 (GND、`j7` から下の − レールへ)、3 番が PROG 側 (Yn)。
   R27 (OEn を H に引く) は `j6` と + レールの間、R28 (Yn を H に引く) は `j10` と + レールの間に立てる
 - **S2 (WRITE)** は 8〜10 列 (`e8`)。上のピンの列 (8・10 列の上) が WEn で、R29 は `a8` と上の + レールの間。
   下のピンの列 (8・10 列の下) が Yn で、S3 の 3 番 (8 列) と同じ組だ。基板 3 へ渡す Yn の線は `i8`。
-  Yn が L の PROG のときだけ、押すと WEn が L になる (回路図の図13 のとおり)
+  Yn が L の PROG のときだけ、押すと WEn が L になる (回路図の図12 のとおり)
 - **S1 (CLR)** は 54〜56 列 (`e54`)。上のピンの列が CLR、下のピンの列が GND (`j54` から下の − レールへ)。
   R30 は `a56` と上の + レールの間。CLR の線は、基板 1 から `c54`、基板 3 へ `b54` の 2 本を、同じ列の別の穴に入れる
 - **データのスイッチ**: SW1 は 34〜37 列、SW2 は 38〜41 列 (切り欠きが左)。n 番のスイッチが n 番目の列の上の組と下の組をつなぐ。
   上の組を SD0〜SD7、下の組を GND にした (下の組は `j34`〜`j41` から − レールへ、黒の 8 本)。
-  集合抵抗 RN1 (10 kΩ × 8、図12 の R19〜R26) は `b33` から 9 本のピンを挿し、共通のピン (1 番、33 列) を `a33` から + レールへ、
+  集合抵抗 RN1 (10 kΩ × 8、図11 の R19〜R26) は `b33` から 9 本のピンを挿し、共通のピン (1 番、33 列) を `a33` から + レールへ、
   残りの 8 本を SD の列 (34〜41 列の上) に入れる。SD の線は `a34`〜`a41` から基板 3 へ渡す
 - **電源**: 基板 1 の +5V と GND は、右上の箱から `+t61` と `-t60` へ入れる。基板 3 への電源は `+t49` と `-t50` から出す。
   上下のレールは、+ が `+t62` と `+b62`、− が `-t59` と `-b59` の線でつなぐ。**赤は +5V の線だけ、黒は GND の線だけ**に使った
-
-```breadboard
-title: 図15 基板 3 — 74HC245 (DQ のバス)・DQ のプルアップ・D7
-board: half
-parts:
-  PW:
-    type: device
-    at: top
-    label: 基板 2 から (電源・CLR)
-    pins: [+5V, GND, CLR]
-  TA:
-    type: device
-    at: top
-    label: 基板 2 から (Yn・DQ0〜DQ3)
-    pins: [Yn, DQ0, DQ1, DQ2, DQ3]
-  TB:
-    type: device
-    at: top
-    label: 基板 2 から (DQ4〜DQ7)
-    pins: [DQ4, DQ5, DQ6, DQ7]
-  BB:
-    type: device
-    at: bottom
-    label: 基板 2 から (SD)
-    pins: [SD0, SD1, SD2, SD3, SD4, SD5, SD6, SD7]
-  U4: dip20 @ e8 74HC245
-  RN2: sip9 @ b10 r180 l=10k-8
-  D7: diode a3(K) a7(A)
-wires:
-  - PW.+5V -- +t1 red
-  - PW.GND -- -t2 black
-  - PW.CLR -- b7 white
-  - +t30 -- +b30 red
-  - -t30 -- -b30 black
-  - a8 -- +t8 red
-  - j8 -- +b8 red
-  - j17 -- -b17 black
-  - TA.Yn -- a9 blue
-  - TA.DQ0 -- a10 orange
-  - TA.DQ1 -- a11 orange
-  - TA.DQ2 -- a12 orange
-  - TA.DQ3 -- a13 orange
-  - TB.DQ4 -- a14 orange
-  - TB.DQ5 -- a15 orange
-  - TB.DQ6 -- a16 orange
-  - TB.DQ7 -- a17 orange
-  - a18 -- +t18 red
-  - d11 -- d3 orange
-  - BB.SD0 -- j9 yellow
-  - BB.SD1 -- j10 yellow
-  - BB.SD2 -- j11 yellow
-  - BB.SD3 -- j12 yellow
-  - BB.SD4 -- j13 yellow
-  - BB.SD5 -- j14 yellow
-  - BB.SD6 -- j15 yellow
-  - BB.SD7 -- j16 yellow
-```
-
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/01-cpu-like-5.svg)
 
 - **U4 (74HC245) は 8〜17 列** (`@ e8`)、切り欠きが左。上の行に 20 番 (VCC、8 列)、19 番 (OE = Yn、9 列)、18〜11 番 (B1〜B8、10〜17 列)、
   下の行に 1 番 (DIR、8 列)、2〜9 番 (A1〜A8、9〜16 列)、10 番 (GND、17 列) が並ぶ。VCC は `a8` から + レールへ、
   DIR は `j8` から下の + レールへ (A から B の向きに固定)、GND は `j17` から下の − レールへ、縦 1 本ずつ落とす
 - **基板 2 から入る線**: 上の 2 つの箱の Yn を `a9` (OE の列) へ、DQ0〜DQ7 を `a10`〜`a17` (B1〜B8 の列) へ、下の箱の SD0〜SD7 を `j9`〜`j16` (A1〜A8 の列) へ入れる
-- **DQ のプルアップ RN2** (10 kΩ × 8、図10 の R11〜R18) は、B の列の上 (`b10`、向きを反転) に挿す。共通のピン (1 番) が右端の 18 列で、
+- **DQ のプルアップ RN2** (10 kΩ × 8、図9 の R11〜R18) は、B の列の上 (`b10`、向きを反転) に挿す。共通のピン (1 番) が右端の 18 列で、
   `a18` から + レールへ (赤)。残りの 8 本のピンが 17〜10 列 (B8〜B1) に入る
 - **D7 (1N4148)** は、カソード (線の入った側) を 3 列 (`a3`)、アノードを 7 列 (`a7`) に挿す。
   カソードの列 (3 列) を、橙の線 (`d3` と `d11`) で B2 = DQ1 の列 (11 列) につなぐ。アノードの列 (7 列) に、基板 2 の CLR の線 (白) を `b7` へ入れる
@@ -1365,19 +1441,19 @@ wires:
 
 | 線の名前 | 回路図 | 基板 2 | 基板 3 |
 | --- | --- | --- | --- |
-| A0〜A3 | 図10 U3 PIN 10〜7 | 24〜21 列の下 (PIN 10〜7) | — |
-| DQ0 (ENT) | 図10 U3 PIN 11、R11、図11 U4 B1 | 25 列の下 (PIN 11) | 10 列の上 (B1、RN2) |
-| DQ1 | 図10 U3 PIN 12、R12、図11 U4 B2、図13 D7 | 26 列の下 (PIN 12) | 11 列の上 (B2、RN2、D7 のカソードへ) |
-| DQ2 (LDn) | 図10 U3 PIN 13、R13、図11 U4 B3 | 27 列の下 (PIN 13) | 12 列の上 (B3、RN2) |
-| DQ3〜DQ5 (P0〜P2) | 図10 U3 PIN 15〜17、R14〜R16、図11 U4 B4〜B6 | 28〜26 列の上 (PIN 15〜17) | 13〜15 列の上 (B4〜B6、RN2) |
-| DQ6・DQ7 | 図10 U3 PIN 18・19、R17・R18、図11 U4 B7・B8 | 25・24 列の上 (PIN 18・19) | 16・17 列の上 (B7・B8、RN2) |
-| OEn | 図10 U3 PIN 22、図13 R27・S3 | 21 列の上 (PIN 22)、6 列 (S3 の 1 番、R27) | — |
-| WEn | 図10 U3 PIN 27、図13 R29・S2 | 16 列の上 (PIN 27)、8・10 列の上 (S2、R29) | — |
-| Yn | 図11 U4 OE、図13 R28・S2・S3 | 8・10 列の下 (S2、R28)、8 列 (S3 の 3 番) | 9 列の上 (U4 の OE) |
-| SD0〜SD7 | 図11 U4 A1〜A8、図12 R19〜R26・スイッチ | 34〜41 列の上 (RN1、スイッチ) | 9〜16 列の下 (A1〜A8) |
-| CLR | 図13 R30・S1・D7 のアノード、U1 の CLR | 54・56 列の上 (S1、R30) | 7 列の上 (D7 のアノード) |
+| A0〜A3 | 図9 U3 PIN 10〜7 | 24〜21 列の下 (PIN 10〜7) | — |
+| DQ0 (ENT) | 図9 U3 PIN 11、R11、図10 U4 B1 | 25 列の下 (PIN 11) | 10 列の上 (B1、RN2) |
+| DQ1 | 図9 U3 PIN 12、R12、図10 U4 B2、図12 D7 | 26 列の下 (PIN 12) | 11 列の上 (B2、RN2、D7 のカソードへ) |
+| DQ2 (LDn) | 図9 U3 PIN 13、R13、図10 U4 B3 | 27 列の下 (PIN 13) | 12 列の上 (B3、RN2) |
+| DQ3〜DQ5 (P0〜P2) | 図9 U3 PIN 15〜17、R14〜R16、図10 U4 B4〜B6 | 28〜26 列の上 (PIN 15〜17) | 13〜15 列の上 (B4〜B6、RN2) |
+| DQ6・DQ7 | 図9 U3 PIN 18・19、R17・R18、図10 U4 B7・B8 | 25・24 列の上 (PIN 18・19) | 16・17 列の上 (B7・B8、RN2) |
+| OEn | 図9 U3 PIN 22、図12 R27・S3 | 21 列の上 (PIN 22)、6 列 (S3 の 1 番、R27) | — |
+| WEn | 図9 U3 PIN 27、図12 R29・S2 | 16 列の上 (PIN 27)、8・10 列の上 (S2、R29) | — |
+| Yn | 図10 U4 OE、図12 R28・S2・S3 | 8・10 列の下 (S2、R28)、8 列 (S3 の 3 番) | 9 列の上 (U4 の OE) |
+| SD0〜SD7 | 図10 U4 A1〜A8、図11 R19〜R26・スイッチ | 34〜41 列の上 (RN1、スイッチ) | 9〜16 列の下 (A1〜A8) |
+| CLR | 図12 R30・S1・D7 のアノード、U1 の CLR | 54・56 列の上 (S1、R30) | 7 列の上 (D7 のアノード) |
 
-`breadboard-fence check` が出したネットリストは、この表のとおりだった。2 枚の図を合わせて (同じ名前の箱のピンを 1 本の線として) 回路図の図10〜12 と一致した。
+`breadboard-fence check` が出したネットリストは、この表のとおりだった。2 枚の図を合わせて (同じ名前の箱のピンを 1 本の線として) 回路図の図9〜11 と一致した。
 たとえば、基板 2 の DQ0 の線は `B13.ENT, B13.DQ0, U3.DQ0`、OEn は `U3.OE, S3.1, R27.1`、Yn は `B13.Yn, S3.3, S2.2a, S2.2b, R28.1`、
 基板 3 の DQ1 の線は `TA.DQ1, U4.B2, RN2.8, D7.K` だった。ブレッドボードでは、回路図の 1 つの線が「U3 のピン・基板 1 への線・基板 3 への線」の複数の穴になり、
 同じ列の別の穴にまとめてある。S3 は、回路図の 1 番 (RUN) と共通 (GND) を、ブレッドボードでは 1 番・2 番に、PROG 側を 3 番に割り当てた。
@@ -1395,7 +1471,7 @@ wires:
 5. S1 を押しながら W1 を 1 回出して番地を 0 に戻し、W1 を 5 回出して番地 5 (LED が 0101) にする
 6. **SW1 の 3 番 (LDn) と SW2 の 2 番 (P2) を ON にする** (= `B3`)。WRITE を押して離す。番地 5 に `B3` が書かれた
 7. 走らせる: **S3 を RUN に倒す**。S1 を押しながら W1 を 1 回出して番地を 0 に戻す。W1 を **1 Hz の連続** (図4 の設定) に戻して S1 を離す。
-   LED が 0 1 2 3 4 5 3 4 5 3 … と進む (図6 と同じ)
+   LED が 0 1 2 3 4 5 3 4 5 3 … と進む (図5 と同じ)
 
 書き込みのときに守ること:
 
@@ -1465,24 +1541,24 @@ R30 を 4.7 kΩ にすれば上限は上がるが、この題は 1 Hz で使う�
   74HC154 は 24 ピンで、TI の CD74HC154 は `E` が幅 0.6 インチ、`EN` が幅 0.3 インチ
 - クロックを AD3 の代わりに 555 で作るときは [回路の本の 10-4](../../01-circuits/10-logic/04-binary-counter.md) の 555 (10 kΩ・47 kΩ・10 µF) を足す
 
-**DIP スイッチのメモリ (図8・図9) にするとき** (D5・D6 の 2 個は要らない。基板 1 の部品は上の表のまま)
+**DIP スイッチのメモリ (図7・図8) にするとき** (D5・D6 の 2 個は要らない。基板 1 の部品は上の表のまま)
 
 | 記号 | 部品 | 値・型番 | 数 |
 | --- | --- | --- | --- |
 | U2 | 4 → 16 デコーダ (DIP-24、幅 0.3 インチ) | 74HC154 (上と同じ) | 1 |
 | SW1、SW2 | 4 連 DIP スイッチ (DIP-8、幅 0.3 インチ) | ピッチ 2.54 mm。n 番が PIN n と PIN 9−n をつなぐ品 | 2 |
-| RN1 | 集合抵抗 (SIL 9 ピン、共通付き) | 10 kΩ × 8 (図8 の R5〜R10 の 6 本ぶんを兼ねる。残りの 2 本は空き) | 1 |
+| RN1 | 集合抵抗 (SIL 9 ピン、共通付き) | 10 kΩ × 8 (図7 の R5〜R10 の 6 本ぶんを兼ねる。残りの 2 本は空き) | 1 |
 | S1 | タクトスイッチ | 6 mm | 1 |
 | — | ブレッドボード | half 1 枚 (基板 1)、full 1 枚 (基板 2) | 2 |
 
-**SRAM のメモリ (図10〜12) にするとき** (U2・D5・D6・R5〜R10 は要らない。基板 1 の部品は上の表のまま)
+**SRAM のメモリ (図9〜11) にするとき** (U2・D5・D6・R5〜R10 は要らない。基板 1 の部品は上の表のまま)
 
 | 記号 | 部品 | 値・型番 | 数 |
 | --- | --- | --- | --- |
 | U3 | SRAM 32K × 8 (DIP-28、**幅 0.6 インチ**) | AS6C62256-55PCN (Alliance Memory) | 1 |
 | U4 | 8 ビット バス トランシーバ (DIP-20) | 74HC245 (SN74HC245N など) | 1 |
 | SW1、SW2 | 4 連 DIP スイッチ (DIP-8、幅 0.3 インチ) | 上と同じ | 2 |
-| RN1、RN2 | 集合抵抗 (SIL 9 ピン、共通付き) | 10 kΩ × 8 (RN1 = 図12 の R19〜R26、RN2 = 図10 の R11〜R18) | 2 |
+| RN1、RN2 | 集合抵抗 (SIL 9 ピン、共通付き) | 10 kΩ × 8 (RN1 = 図11 の R19〜R26、RN2 = 図9 の R11〜R18) | 2 |
 | R27〜R30 | 抵抗 (1/4 W) | 10 kΩ | 4 |
 | D7 | 小信号ダイオード | 1N4148 | 1 |
 | S1 | タクトスイッチ (CLR) | 6 mm | 1 |
@@ -1490,7 +1566,7 @@ R30 を 4.7 kΩ にすれば上限は上がるが、この題は 1 Hz で使う�
 | S3 | スライドスイッチ (SPDT) | 切り替えの途中で両側が触れない型 (ブレーク・ビフォア・メイク) | 1 |
 | — | ブレッドボード | half 2 枚 (基板 1・基板 3)、full 1 枚 (基板 2) | 3 |
 
-- AS6C62256-55PCN は 28 ピンの 600 mil PDIP で、図14 はフェンスの幅広 DIP の置き方で描いた。電源は 2.7〜5.5V。SOP (330 mil) 品はブレッドボードに載らない。入手性は確認していない
+- AS6C62256-55PCN は 28 ピンの 600 mil PDIP で、図13 はフェンスの幅広 DIP の置き方で描いた。電源は 2.7〜5.5V。SOP (330 mil) 品はブレッドボードに載らない。入手性は確認していない
 
 ## 出典
 
