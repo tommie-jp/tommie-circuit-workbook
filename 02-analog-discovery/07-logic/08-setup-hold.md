@@ -27,12 +27,12 @@ parts:
     label: Analog Discovery
     pins: [V+, DIO2, DIO0, DIO1, GND]
     turn: mirror
-  VCC: vcc b4
+  VCC: vcc b4 3.3V
   G1: ground e4
   U1: dip14 d10 CD4013B
   G2: ground d9 r90
   G3: ground d9e0i0 r90
-  VCC: vcc c11
+  VCC: vcc c11 3.3V
   G5: ground e12
 wires:
   - AD.V+ -| b4

@@ -42,8 +42,8 @@ parts:
   U1: opamp e6 +up
   Q1: npn c10
   Q2: pnp g10
-  VCC: vcc a10
-  VEE: vee i10
+  VCC: vcc a10 5V
+  VEE: vee i10 5V
   RL: resistor e13 h13 47
   M2: voltmeter e15 h15 l=$\mathrm{CH2}$
   G1: ground h1

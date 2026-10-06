@@ -20,15 +20,15 @@ FFT の読み方そのものは同じでも、平均化 (4-5) が使えないな
 ```circuit
 title: 図1 マイクアンプの出力を交流結合で CH1 へ
 parts:
-  VCC: vcc a1
+  VCC: vcc a1 5V
   R1: resistor a1 a3 2.2k
   MK1: mic a3 a5
   G1: ground a5
   C1: capacitor a3 d3 1u
-  VCC: vcc d1
+  VCC: vcc d1 5V
   R2: resistor d1 d3 100k
   Q1: npn f5
-  VCC: vcc c7
+  VCC: vcc c7 5V
   RC: resistor c7 e7 470
   G2: ground h5
   C2: capacitor e7 e9 1u

@@ -21,7 +21,7 @@ NE555 の標準的な非安定接続は**デューティ比が必ず 50% を超�
 title: 図1 555 の非安定発振
 parts:
   U1: ic e6 NE555
-  VCC: vcc b2
+  VCC: vcc b2 5V
   Ra: resistor b2 c2 1k
   Rb: resistor d2f0 f2f0 10k
   Ct: capacitor f4f0 h4f0 68n
@@ -34,7 +34,7 @@ parts:
     at: d11
     label: Analog Discovery
     pins: [V+, 1+, 1-, GND]
-  VCC: vcc b10
+  VCC: vcc b10 5V
   G7: ground f10
 wires:
   - b2 -- b6a5

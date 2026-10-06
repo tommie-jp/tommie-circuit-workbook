@@ -15,6 +15,7 @@
     "render": "node scripts/render.mjs",
     "figures": "node scripts/figures.mjs",
     "parity": "node scripts/netlist-parity.mjs",
+    "audit": "node scripts/audit-figures.mjs",
     "lint": "markdownlint '**/*.md' --ignore node_modules --ignore out",
     "test": "node --test scripts/*.test.mjs",
     "all": "npm test && npm run lint && npm run check && npm run parity"
