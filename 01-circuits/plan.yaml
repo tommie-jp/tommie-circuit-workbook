@@ -176,10 +176,10 @@
 - { id: 10-8, tier: 100, title: 4 bit 加算器 (74HC283) }
 - { id: 10-9, tier: 200, title: チャタリング除去 — RC + シュミット }
 - { id: 10-10, tier: 200, title: ジョンソンカウンタ (4017) — LED 順送り }
-- { id: 10-11, tier: 200, title: 4 bit ALU もどき — 加算と減算 (2 の補数) }
-- { id: 10-12, tier: 200, title: CPU もどき — レジスタ + 加算器 + クロック }
-- { id: 10-13, tier: 200, title: メモリ — フリップフロップ 4 bit }
-- { id: 10-14, tier: 200, title: プログラムカウンタ }
+- { id: 10-11, tier: 200, title: 4 bit ALU もどき — 加算と減算 (2 の補数) (05-etc の 1-2 へ移した) }
+- { id: 10-12, tier: 200, title: CPU もどき — レジスタ + 加算器 + クロック (05-etc の 1-4 へ移した) }
+- { id: 10-13, tier: 200, title: メモリ — フリップフロップ 4 bit (05-etc の 1-3 へ移した) }
+- { id: 10-14, tier: 200, title: プログラムカウンタ (05-etc の 1-1 が担う) }
 - { id: 10-15, tier: 200, era: 古, title: トランジスタで作るゲート (RTL / DTL) }
 - { id: 10-16, tier: 200, title: オープンドレインと配線 AND、プルアップ }
 - { id: 10-17, tier: 200, era: 今, title: レベル変換 (3.3V ↔ 5V) }
