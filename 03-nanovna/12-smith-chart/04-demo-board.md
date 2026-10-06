@@ -5,7 +5,7 @@ id: 12-4
 title: Smith チャートデモボード — 8 つの負荷を差し替えて 1 点ずつ測る
 tier: 100
 source: 自作
-board: PF
+board: [PF, BB]
 device: LV64
 ---
 
@@ -148,6 +148,45 @@ wires:
 - 抵抗は 1/4 W の金属皮膜 (誤差 1 %)。**51 Ω と 24 Ω は E24**、100 Ω も E24。51 Ω は 50 Ω に 2 % 高いが、SWR は 1.02 で十分 Load の代わりになる
 - **820 nH** (E12) は 10 MHz で +j51.5 Ω、**330 pF** (E12) は −j48.2 Ω。どちらも「ほぼ ±j50 Ω」の部品になる。コイルは軸付きの小さなインダクタ (リードの短いもの)、コンデンサはセラミック (C0G 推奨)
 
+## ブレッドボードで組む (3 MHz 以下向け)
+
+perfboard の治具を作る前に、**ブレッドボードで同じ 8 つの負荷を試す**こともできる。ジャンパ (JP) の代わりに、**1 本の線 (オレンジ) を、選んだ負荷の列へ挿し替える**。
+
+> **周波数の範囲の注意。** ブレッドボードは、列どうしの浮遊容量 (約 2.5 pF、8-2) と線のインダクタンス (5 cm のジャンパで約 43 nH、8-3) が
+> 付くので、**3 MHz を超える部分は、ブレッドボードの寄生を含んだ値の目安**になる。**図の理想 (perfboard の値) と合わせて読むのは 3 MHz まで**。
+> 10 MHz や 30 MHz の位置は、Open が右端から、Short が左端から**回り込んで**見える (下の図11〜図13)。
+> 校正の基準面は SMA のケーブルの先なので、**ケーブルの先から挿し先の列までの線も測る物に含まれる**。短い線 (5 cm 以下) で挿す。
+
+```breadboard
+title: 図2b デモボードをブレッドボードで組む (JP3 の 51 Ω を選んだ状態)
+board: half
+parts:
+  VNA:
+    type: device
+    at: top
+    label: VNA (SMA ケーブルの先)
+    pins: [RF, GND]
+  R1: resistor a8 -t8 51
+  R2: resistor a11 -t11 24
+  R3: resistor a14 -t14 100
+  L1: inductor a17 -t17 820n
+  C1: capacitor a20 -t20 330p
+  R4: resistor b23 b26 51
+  L2: inductor a26 -t26 820n
+wires:
+  - VNA.GND -- -t1 black
+  - VNA.RF -- e8 orange
+  - e5 -- -t5 black
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/breadboard/04-demo-board.svg)
+
+- 列ごとに負荷が 1 つ: **JP1 Open は 2 列目 (何も付けない)、JP2 Short は 5 列目 (黒い線で GND へ)、JP3 51 Ω は 8 列目、JP4 24 Ω は 11 列目、JP5 100 Ω は 14 列目、JP6 820 nH は 17 列目、JP7 330 pF は 20 列目、JP8 51 Ω + 820 nH は 23 列目から 26 列目**
+- **選ぶのはオレンジの線 1 本だけ**。VNA の RF からの線を、測りたい列 (e の行) へ挿し替える。図は JP3 (8 列目) を選んだ状態で、上の青い線のレールが GND (黒の線で VNA の GND へ)。同時に 2 つの列へ挿さない (負荷が並列になる)
+- JP8 は **23 列目の 51 Ω が 26 列目へ横に渡り、26 列目の 820 nH が GND へ**つながる。選ぶときは 23 列目 (b の行) へ
+- 部品は perfboard の図 2 と同じ値。**perfboard の治具は 30 MHz まで**、ブレッドボードは **3 MHz まで** が使える範囲 (上の注意)
+- 計器は VNA だけ (AD3 とオシロは使わない)。SMA ケーブルの先は、ピンヘッダに変換する SMA の基板か、ケーブルの先の線を剥いて、2 本の線 (RF と GND) に分けて使う
+
 ## 掃引の設定
 
 計器は VNA。この本の図は LiteVNA64 の画面に合わせて書いてあり、NanoVNA-H4 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
@@ -276,6 +315,63 @@ markers:
 ```
 
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-8.svg)
+
+## ブレッドボードの寄生を含む Smith チャート
+
+ブレッドボードで同じ負荷を測ると、**浮遊容量 2.5 pF (8-2) と 5 cm の線のインダクタンス 43 nH (8-3) が付いて、点が少し回る**。
+下は、この 2 つを**負荷に足した模型**で計算した Smith チャート (perfboard の図 3〜図10 と同じ 1〜30 MHz。マーカーは 3 MHz と 30 MHz)。
+**3 MHz では図の理想の位置に近く、30 MHz では回り込みが見える**。
+
+```vna
+sweep: 1M-30M 101
+title: 図11 ブレッドボードの Open — 右端から下へ (2.5 pF 付き)
+dut:
+  - shunt C 2.5p
+  - open
+traces:
+  - S11 smith
+markers:
+  - 3M
+  - 30M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-9.svg)
+
+```vna
+sweep: 1M-30M 101
+title: 図12 ブレッドボードの Short — 左端から上へ (43 nH 付き)
+dut:
+  - series L 43n
+  - short
+traces:
+  - S11 smith
+markers:
+  - 3M
+  - 30M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-10.svg)
+
+```vna
+sweep: 1M-30M 101
+title: 図13 ブレッドボードの 51 Ω — 中心の近く (2.5 pF と 43 nH 付き)
+dut:
+  - series L 43n
+  - shunt C 2.5p
+  - series R 51
+  - short
+traces:
+  - S11 smith
+markers:
+  - 3M
+  - 30M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-11.svg)
+
+- **模型は仮定**: 2.5 pF と 43 nH は、8-2・8-3 の測った値を負荷の両側に足しただけ。実際の寄生は、挿す列・線の長さ・部品のリード線で変わる。**値の目安を見る図で、測った値ではない**
+- Open は右端の少し下 (容量性の側)、Short は左端の少し上 (誘導性の側) へ回る。**30 MHz で回りが大きい** (Open の 2.5 pF は −j2.1 kΩ、Short の 43 nH は +j8.1 Ω)
+- 回り込みが大きいときは、**校正 (Open / Short / Load) を同じ列・同じ線の長さで取り直す**と、基準面が負荷の根元へ移って、寄生が消える
 
 ## 見るべき値
 
