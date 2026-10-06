@@ -8,3 +8,6 @@
 - { id: 2-6, tier: 200, board: BB, title: マイコン版 — ① 受信のあとを Raspberry Pi Pico 2 の FFT とプログラムで作る }
 - { id: 3-1, tier: 200, board: [BB, PF], title: デュアルゲート FET ミキサー — 3SK291 で中波を 455 kHz の IF に変える }
 - { id: 3-2, tier: 200, board: —, title: ミキサーの特性をシミュレーションで見る — 変換利得・インピーダンス・FFT }
+- { id: 4-1, tier: 200, board: BB, title: 1 石ミキサー — 2SC1815 で中波を 455 kHz の IF に変える }
+- { id: 4-2, tier: 200, board: BB, title: 差動対のミキサー — 2SC1815 を 3 本でシングルバランスに組む }
+- { id: 4-3, tier: 200, board: —, title: 3 つのミキサーをシミュレーションで比べる — 変換利得・漏れ・P1dB }
