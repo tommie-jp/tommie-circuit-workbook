@@ -1,5 +1,6 @@
 # 05-etc の計画 — 番外の工作。目次 (README) はここと題のファイルから npm run toc が組む。
 - { id: 1-1, tier: 200, board: BB, title: 4 ビット CPU のようなもの — カウンタとメモリと命令 }
+- { id: 1-2, tier: 200, board: BB, title: 4 ビット ALU もどき — 加算と減算 (2 の補数) }
 - { id: 2-1, tier: 200, board: —, title: 中波ラジオの時報を検出するブロック図 }
 - { id: 2-2, tier: 200, board: BB, title: 中波ラジオの受信と AM 検波 — 2SC1815 の高周波増幅 2 段 }
 - { id: 2-3, tier: 200, board: BB, title: 時報音の検出 — 440 Hz と 880 Hz の帯域通過フィルタとしきい値比較 }
