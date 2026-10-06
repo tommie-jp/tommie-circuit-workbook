@@ -1,0 +1,26 @@
+* 9-25 AGC (2SC1815 1 段、搬送波 100 kHz)。代用モデルは 05-etc/04-mixer-2sc1815/sim と同じ (目安から作った仮定。実測の値ではない)
+* 入力の波高値は 250 ms (tup) で 10 mV → 100 mV、さらに 250 ms 後に 100 mV → 10 mV (AD3 の AM 矩形波 2 Hz に合わせる)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model D4148 D (IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+.param vin=0.02 r1=68k cg=10u cc=10n tstop=0.75 tup=0.25
+VCC vcc 0 5
+R1 vcc b {r1}
+R2 b g 15k
+Rb g 0 4.7k
+RE1 e e2 100
+RE2 e2 0 390
+CE e2 0 10u
+RC vcc c 2.2k
+Q1 c b e Q1815
+Cin in b 100n
+Bw w 0 V={(0.01+0.09*(time>tup)*(time<tup+0.25))*sin(2*pi*100k*time)}
+Rw w in 50
+Cout c out 100n
+Rl out 0 100k
+* AGC: 倍電圧の検波 (D1 が山を 0.6 V にそろえ、D2 が谷を G に溜める)
+Cc c a {cc}
+D1 a 0 D4148
+D2 g a D4148
+Cg g 0 {cg}
+.tran 0 {tstop} 0 250n
+.end

@@ -165,6 +165,7 @@
 - { id: 9-22, tier: 200, board: BB, era: 今, title: Tayloe 検波器 — 74HC4052 で I/Q を音にする (直接変換) }
 - { id: 9-23, tier: 200, board: BB, era: 今, title: I/Q をマイコンで読む — Pico 2 の ADC で位相と大きさを計算する }
 - { id: 9-24, tier: 200, board: BB, era: 今, title: IQ 中波ラジオ — バーアンテナと 74HC4052 と Pico 2 で NHK を聞く }
+- { id: 9-25, tier: 200, board: BB, title: AGC — 強い局で音量が跳ねないように利得を自動で下げる }
 - { id: 10-1, tier: 50, board: BB, title: ゲートの基本 — スイッチと LED で AND / OR / NOT }
 - { id: 10-2, tier: 50, board: BB, title: RS ラッチ (NAND) }
 - { id: 10-3, tier: 50, board: BB, title: 半加算器と全加算器 (XOR + AND) }
