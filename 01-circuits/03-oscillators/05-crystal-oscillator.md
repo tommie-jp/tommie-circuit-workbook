@@ -165,6 +165,37 @@ measure: [vpp, freq]
 図3 は計算の想定図で、実測ではない。5 V の方形波に、AD3 の 9 MHz の帯域を 1 次遅れ (時定数 17.7 ns = 1 ÷ (2π × 9 MHz)) で重ねた。
 カーソルの間隔 250 ns が 1 周期で、周波数に直すと 4 MHz。立ち上がりの丸みは、74HC04 自身の遅れではなく、ほぼ計器の帯域によるもの。
 
+### 水晶単体を VNA で見る (補足)
+
+発振回路に組む前に、水晶そのものの共振を LiteVNA64 の S21 で確かめられる (下限 50 kHz なので 4 MHz は範囲に入る)。
+3-1 の直列治具のように水晶を CH0 と CH1 の間に直列に挿し、校正のあと S21 の Log Mag を 3.99〜4.02 MHz で掃引する。
+直列共振 f<sub>s</sub> では信号がよく通り、そのすぐ上の並列共振 f<sub>p</sub> では通らない。
+発振回路の周波数は、この 2 つの間 (22 pF の負荷容量で決まる所) に来る。測り方と読み方の詳細は
+03-nanovna/04-components/06-crystal.md (4-6)。
+
+見えるはずの画面 (理想の模型。HC-49/U の 4 MHz の典型値として C<sub>m</sub> = 31.66 fF、L<sub>m</sub> = 50 mH、R<sub>m</sub> = 50 Ω、C<sub>0</sub> = 5 pF を仮定した目安で、実測ではない)。
+
+```vna
+device: litevna64
+sweep: 3.99M-4.02M 401
+title: 図4 4 MHz 水晶の S21 — fs (通る) と fp (通らない)
+dut:
+  - series C 31.66f esl 50m esr 50 cp 5p
+traces:
+  - S21 logmag
+markers:
+  - 4.0001M
+  - 4.0127M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/vna/05-crystal-oscillator.svg)
+
+f<sub>p</sub> = f<sub>s</sub>·√(1 + C<sub>m</sub>/C<sub>0</sub>) ≈ 4.0127 MHz で、f<sub>s</sub> との差は約 13 kHz。
+図の読み値は、f<sub>s</sub> (4.000 MHz) で −4.0 dB (R<sub>m</sub> = 50 Ω が 50 Ω の 2 つの間に直列に入るため 0 dB にはならない)、
+f<sub>p</sub> (4.013 MHz) で −76 dB。
+水晶の刻印 (4.000 MHz) は、負荷容量 (ここでは C1・C2 の直列 約 11 pF) を付けた状態の周波数なので、
+単体で測る f<sub>s</sub> と f<sub>p</sub> の間に収まるのが正しい。
+
 ## 部品
 
 | 記号 | 部品 | 値 |
