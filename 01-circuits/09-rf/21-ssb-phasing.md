@@ -80,97 +80,88 @@ f<sub>c</sub> = 1/(2πRC) のときだけ。LO の網は f<sub>c</sub> = 1/(2π 
 ```circuit
 title: 図1 位相法の SSB 変調器 (W1 が LO、W2 が音声)
 parts:
-  W1: sine b2 d2 l=$\mathrm{W1}$
-  G1: ground d2
-  R1: resistor b4 b6 680
-  C1: capacitor b8 d8 470p
-  G2: ground d8
-  C4: capacitor b10 b12 10n
-  C2: capacitor e4 e6 470p
-  R2: resistor e7 g7 680
-  G3: ground g7
-  C3: capacitor e10 e12 10n
-  W2: sine l2 n2 l=$\mathrm{W2}$
-  G4: ground n2
-  R3: resistor i3 i5 1.6k
-  C5: capacitor i7 k7 100n
-  G5: ground k7
-  C7: capacitor i8 i10 1u
-  C6: capacitor q4 q6 100n
-  R4: resistor q7 s7 1.6k
-  G6: ground s7
-  C8: capacitor q8 q10 1u
-  U1: dip8 i15h0c0
-  U2: dip8 q15h0c0
+  W2: sine h1 j1 l=$\mathrm{W2}$
+  G4: ground j1
+  R3: resistor h3 h4 1.6k
+  C5: capacitor h5 i5 100n
+  G5: ground i5
+  C7: capacitor h7 h8 1u
+  C6: capacitor s3 s4 100n
+  R4: resistor s5 t5 1.6k
+  G6: ground t5
+  C8: capacitor s7 s8 1u
+  U1: ic j16 SA612
   VCC: vcc g16 5V
-  VCC: vcc o16 5V
-  C9: capacitor k11 m11 1u
-  G7: ground m11
-  G8: ground l13
-  C10: capacitor s11 u11 1u
-  G9: ground u11
-  G10: ground t13
-  R5: resistor j22e0e0 m22 4.7k
-  R6: resistor o22 r22e0e0 4.7k
-  C13: capacitor n24 n26 100n
-  M1: voltmeter n28 p28 l=$\mathrm{CH1}$
-  G11: ground p28
-  VCC: vcc c25 5V
-  C11: capacitor c25 e25 100n
-  G12: ground e25
-  C12: capacitor c28 e28 100n
-  G13: ground e28
+  G8: ground m16
+  C9: capacitor k11 l11 1u
+  G7: ground l11
+  U2: ic u16 SA612
+  VCC: vcc r16 5V
+  G10: ground x16
+  C10: capacitor v11 w11 1u
+  G9: ground w11
+  W1: sine n5 p5 l=$\mathrm{W1}$
+  G1: ground p5
+  C2: capacitor n8 n9 470p
+  R2: resistor n10 o10 680
+  G3: ground o10
+  C3: capacitor n12 n13 10n
+  R1: resistor n7 p7 680
+  C1: capacitor p7 q7 470p
+  G2: ground q7
+  C4: capacitor t9 u9 10n
+  R5: resistor m20 o20 4.7k
+  R6: resistor q20 s20 4.7k
+  C13: capacitor p22 p23 100n
+  M1: voltmeter p25 r25 l=$\mathrm{CH1}$
+  G11: ground r25
+  VCC: vcc u23 5V
+  C11: capacitor u23 w23 100n
+  G12: ground w23
+  C12: capacitor u26 w26 100n
+  G13: ground w26
 wires:
-  - b2 -- b3
-  - b3 -- b4
-  - b3 -- e3
-  - e3 -- e4
-  - b6 -- b8
-  - b8 -- b10
-  - b12 -- b20
-  - e6 -- e7
-  - e7 -- e10
-  - e12 -- e17
-  - l2 -- i2
-  - i2 -- i3
-  - l2 -- l3
-  - l3 -- q3
-  - q3 -- q4
-  - i5 -- i7
-  - i7 -- i8
-  - q6 -- q7
-  - q7 -- q8
-  - U1.1 -| i10
-  - U1.2 -| k11
-  - U1.3 -| l13
-  - U1.8 -| g16
-  - U1.6 -| e17
-  - U1.5 -| j22e0e0
-  - U2.1 -| q10
-  - U2.2 -| s11
-  - U2.3 -| t13
-  - U2.8 -| o16
-  - U2.6 -| b20
-  - U2.5 -| r22e0e0
-  - m22 -- n22
-  - n22 -- o22
-  - n22 -- n24
-  - n26 -- n28
-  - c25 -- c28
+  - h1 -- h2
+  - h2 -- h3
+  - h2 -- s2
+  - h4 -- h5
+  - h5 -- h7
+  - h8 -- h13
+  - U1.IN_A -| h13
+  - s2 -- s3
+  - s4 -- s5
+  - s5 -- s7
+  - s8 -- s13
+  - U2.IN_A -| s13
+  - U1.IN_B -| k11
+  - U2.IN_B -| v11
+  - U1.GND |- m16
+  - U2.GND |- x16
+  - U1.VCC |- g16
+  - U2.VCC |- r16
+  - n5 -- n7
+  - n7 -- n8
+  - n9 -- n10
+  - n10 -- n12
+  - U1.OSC_B -| n13
+  - p7 -- p9
+  - p9 -- t9
+  - u9 -- y9
+  - y9 -- y13
+  - U2.OSC_B -| y13
+  - U1.OUT_B -| m20
+  - o20 -- p20
+  - p20 -- q20
+  - U2.OUT_B -| s20
+  - p20 -- p22
+  - p23 -- p25
+  - u23 -- u26
 notes:
-  - text k15 small center: SA612
-  - text s15 small center: SA612
-  - text h12f5 small center: PIN 1
-  - text p12f5 small center: PIN 1
-  - text h18 small center: PIN 6
-  - text q18f0 small center: PIN 6
-  - text k19 small center: PIN 5
-  - text s19 small center: PIN 5
-  - text a8 small center: LO -45°
-  - text f9 small center: LO +45°
-  - text h7 small center: 音声 -45°
-  - text p7 small center: 音声 +45°
-  - text m24 small center: 和の点
+  - text m10 small center: LO +45°
+  - text o8f5 small center: LO -45°
+  - text g5 small center: 音声 -45°
+  - text r5 small center: 音声 +45°
+  - text p19 small center: 和の点
 style:
   pitch: 1
 ```
@@ -183,13 +174,13 @@ style:
   C7・C8 (1 µF) で直流を切って PIN 1 へ入れる。PIN 2 は C9・C10 (1 µF) で交流だけ GND に落とす。
   9-12 の 10 nF では 995 Hz に対して 16 kΩ もあり、交流の GND にならないので、音声を入れるこの題では 1 µF にした
 - **出力は PIN 5 (OUT_B)** を使う。9-12 と 9-20 は PIN 4 (OUT_A) を使ったが、PIN 4 と PIN 5 は同じ信号の逆相なので、
-  2 つとも PIN 5 にそろえれば和は変わらない (2 つの側波がそろって反転するだけ)。PIN 6 と同じ側にあるので、
-  図の信号が左から右へ流れる。PIN 4 と PIN 7 はつながない
+  2 つとも PIN 5 にそろえれば和は変わらない (2 つの側波がそろって反転するだけ)。PIN 4 と PIN 7 はつながない
 - **和は受け身の抵抗で取る**。R5・R6 (4.7 kΩ) で 2 つの PIN 5 を 1 点に集める。各出力は内部の 1.5 kΩ を通して出るので、
   和の点は 2 つの出力の**平均** (½ の和) になる。MCP6002 などの OP アンプの加算器は GBW が約 1 MHz で、500 kHz を足せない
 - C13 (100 nF) で直流 (約 4 V) を切って CH1 へ。AD3 のスコープの入力は約 1 MΩ なので、和の点をほとんど引っ張らない
 - C11・C12 は U1・U2 の電源のパスコン。+5V は AD3 の V+ (Supplies で 5 V)
-- 図1 で交差は 1 か所 (U2 の LO の線と U1 の出力の線)。黒丸は無く、つながっていない
+- 図1 は 9-19 と同じく、音声を各 IC の上から、LO を IC の下から左に入れ、和を右に取る。
+  交差は 1 か所 (U2 へ行く LO の線と U2 へ行く音声の線)。黒丸は無く、つながっていない
 
 ## 実体配線図
 
@@ -207,11 +198,11 @@ parts:
   C2: capacitor/ceramic d6 d10 470p
   R2: resistor a10 -t10 680
   C3: capacitor/ceramic b19 b24 10n
-  U1: dip8 @ e22
+  U1: dip8 @ e22 SA612
   C11: capacitor/ceramic +t20 -t20 100n
   R5: resistor a25 a30 4k7
   C4: capacitor/ceramic c34 c42 10n
-  U2: dip8 @ e40
+  U2: dip8 @ e40 SA612
   C12: capacitor/ceramic +t38 -t38 100n
   R6: resistor c43 c48 4k7
   C13: capacitor/ceramic d48 d53 100n
@@ -244,8 +235,6 @@ wires:
   - j42 -- -b42 black
   - j45 -- -b45 black
   - -t62 -- -b62 black
-notes:
-  - text: U1・U2 は SA612 (PIN 1 音声、6 LO、5 出力、8 電源。4・7 は空き)
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/21-ssb-phasing.svg)
@@ -270,7 +259,7 @@ notes:
 
 | 記号 | 部品 | 値 |
 | --- | --- | --- |
-| U1・U2 | ダブルバランスドミキサー IC | SA612A (NE612A)、DIP8 (図2 では型番の無い dip8 で描いた) |
+| U1・U2 | ダブルバランスドミキサー IC | SA612A (NE612A)、DIP8 |
 | R1・R2 | 抵抗 (LO の網) | 680 Ω (±1 % の金属皮膜にすると抑圧が深くなる) |
 | C1・C2 | セラミックコンデンサ (LO の網、NP0/C0G) | 470 pF (471) |
 | R3・R4 | 抵抗 (音声の網) | 1.6 kΩ (E24) |
