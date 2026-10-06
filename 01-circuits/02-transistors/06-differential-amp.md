@@ -134,7 +134,7 @@ wires:
 
 ## オシロで見る
 
-WaveForms の Scope で CH1・CH2 を 500 mV/div・DC 結合 (中央を 2.5 V) にし、`VR1` を基準 (2.5 V) に合わせてから
+WaveForms の Scope で CH1・CH2 を 100 mV/div・DC 結合 (中央を 2.1 V。Offset で合わせる) にし、`VR1` を基準 (2.5 V) に合わせてから
 0.1 V ほど上げる。CH1 の立ち上がりでトリガを掛けると、上げた瞬間の前後が 1 画面に入る
 (直流は時間で動かないので、動かした瞬間を捉えて前後の高さを比べる。図3)。
 
@@ -142,8 +142,8 @@ WaveForms の Scope で CH1・CH2 を 500 mV/div・DC 結合 (中央を 2.5 V) �
 title: 図3 VR1 を 0.1 V 上げた瞬間 — CH1 は少し上がり、CH2 は少し下がる
 time: 1ms/div
 trigger: ch1 rising 2.25V
-ch1: {wave: = 2.1V + 0.3V * step(t), range: 500mV/div, position: -5div}
-ch2: {wave: = 2.1V - 0.3V * step(t), range: 500mV/div, position: -5div}
+ch1: {wave: = 2.1V + 0.3V * step(t), range: 100mV/div, position: -21div}
+ch2: {wave: = 2.1V - 0.3V * step(t), range: 100mV/div, position: -21div}
 cursors: [-2ms, 2ms]
 ```
 
