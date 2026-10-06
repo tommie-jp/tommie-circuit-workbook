@@ -44,7 +44,7 @@ Smith はそれを「何 Ω (オーム) の抵抗と、何 Ω のコイルかコ
 | --- | --- |
 | 範囲 | 100 kHz〜3 MHz |
 | 点数 | 101 |
-| 校正 | SOLT (1-1)。ケーブルの先 (負荷を付ける所) で Open / Short / Load |
+| 校正 | SOLT (1-1) の Open / Short / Load を、**ブレッドボードの上で**取る (下の「測る前に」の図 6) |
 | 表示 | S11 の Smith チャート。マーカーは 1 MHz |
 
 周波数は 3 MHz までにした。ブレッドボードの列どうしの浮遊容量 (約 2.5 pF、[02-analog-discovery/08-breadboard-limits/02-row-capacitance.md](../../02-analog-discovery/08-breadboard-limits/02-row-capacitance.md)) は 3 MHz で −j21 kΩ、
@@ -207,14 +207,69 @@ wires:
   - VNA.RF -- e3 orange
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/breadboard/01-map.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/breadboard/01-map-1.svg)
 
 - 列ごとに負荷が 1 つ: **25 Ω (図 1) は 3 列目** (R1 12 Ω で 7 列目へ渡り、R2 13 Ω で上の − レールへ)、**100 Ω (図 2) は 12 列目、8.2 µH (図 3) は 17 列目、3.3 nF (図 4) は 22 列目**
 - **選ぶのはオレンジの線 1 本だけ**。VNA の RF からの線を、測る負荷の列の e の行へ挿し替える。上の − レール (青の線) が GND で、黒い線で VNA の GND へつなぐ。同時に 2 つの列へ挿さない (負荷が並列になる)
 - 25 Ω は E24 に無いので、**12 Ω と 13 Ω (どちらも E24) の直列**で作る
-- 校正の基準面はケーブルの先なので、**ケーブルの先から挿し先の列までの線も測る物に含まれる**。線は 5 cm 以下にする。
-  SMA ケーブルの先は、ピンヘッダに変換する SMA の基板を使うか、線を剥いて RF と GND の 2 本に分ける
+- SMA ケーブルの先は、ピンヘッダに変換する SMA の基板を使うか、線を剥いて RF と GND の 2 本に分ける。線は 5 cm 以下にする
 - コイルは軸付きの小さなインダクタ (8.2 µH、E12)、コンデンサはセラミック (3.3 nF、E12。C0G がよい)
+
+## 測る前に — ブレッドボードの上で校正し、部品を測る
+
+### ブレッドボードの上で校正する
+
+ケーブルの先で校正すると、ケーブルの先からブレッドボードの列までの線も測る物に入る。
+**校正の Open / Short / Load をブレッドボードの列で取る**と、校正の基準面
+([03-nanovna/01-calibration/05-reference-plane.md](../01-calibration/05-reference-plane.md)) がオレンジの線の先へ移り、
+線とブレッドボードの寄生は校正で差し引かれる。**測る物は、列に挿した負荷だけ**になる。
+
+```breadboard
+title: 図6 校正の 3 つの標準をブレッドボードで作る (Open を取る状態)
+board: half
+parts:
+  VNA:
+    type: device
+    at: top
+    label: VNA (SMA ケーブルの先)
+    pins: [GND, RF]
+  R1: resistor b11 b14 100
+  R2: resistor d11 d14 100
+wires:
+  - VNA.GND -- -t1 black
+  - VNA.RF -- e3 orange
+  - -t7 -- a7 black
+  - -t14 -- a14 black
+notes:
+  - text f3 large bold center: Open
+  - text f7 large bold center: Short
+  - text f12 large bold center: Load
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/breadboard/01-map-2.svg)
+
+1. VNA の範囲を、測るときと同じ 100 kHz〜3 MHz に合わせてから校正 (1-1) を始める
+2. **Open**: オレンジの線を 3 列目 (何も挿していない列) の e の行に挿して取る
+3. **Short**: 7 列目 (黒い線で上の − レールへ) に挿し替えて取る
+4. **Load**: 11 列目 (100 Ω の 2 本並列 = 50 Ω を通って 14 列目から GND へ) に挿し替えて取る
+5. 校正を保存する。**このあと、オレンジの線は替えない**。線の先が基準面なので、線を替えたり取り回しを大きく変えたりすると基準面がずれる
+
+- 3 MHz 以下では、ブレッドボードで作った標準でもほぼ理想どおりに働く。Open の列の浮遊容量 (約 2.5 pF) は 3 MHz で −j21 kΩ、
+  Short の黒い線 (約 20 nH、見積り) は +j0.4 Ω、Load の 100 Ω (誤差 1 %) の 2 本並列は 50 Ω から ±1 % 以内
+- Load は 51 Ω 1 本でもよい (2 % 高く、SWR 1.02)。そのときは、測った 51 Ω の負荷 ([03-nanovna/12-smith-chart/04-demo-board.md](04-demo-board.md) の JP3) が 50 Ω に見える
+- 標準は、測る負荷と同じブレッドボードの空いた列に作っておくと、校正をすぐ取り直せる
+
+### 組む前にコイルとコンデンサを測る
+
+図と実測が食い違う原因で一番大きいのは、ブレッドボードの寄生ではなく**部品の誤差**。軸付きのコイルは ±10 % の物が多く、
+8.2 µH の +j51.5 Ω (1 MHz) は +j46〜57 Ω のどこかに来る。コンデンサは C0G でも ±5 %。
+
+校正のあと、**コイルとコンデンサを 1 本ずつ列に挿して (列から上の − レールへ)、1 MHz のマーカーの読み値**から値を出す。
+図 3・図 4 の測り方そのもの。
+
+- コイル: L = X / (2π (パイ) f)。例: +j51.5 Ω なら 51.5 / (2π × 1 MHz) = 8.2 µH
+- コンデンサ: C = 1 / (2π f |X|)。例: −j48.2 Ω なら 1 / (2π × 1 MHz × 48.2) = 3.3 nF
+- 出た値を、部品表の値の横に書いておく。**図と点がずれたら、まずこの値で計算し直す**。12-2 以降の題で使うコイルとコンデンサも、組む前に同じように測っておく
 
 ## 見るべき値
 

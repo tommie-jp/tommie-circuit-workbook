@@ -154,7 +154,7 @@ perfboard の治具を作る前に、**ブレッドボードで同じ 8 つの�
 
 > **周波数の範囲。** ブレッドボードは、列どうしの浮遊容量 (約 2.5 pF、[02-analog-discovery/08-breadboard-limits/02-row-capacitance.md](../../02-analog-discovery/08-breadboard-limits/02-row-capacitance.md)) と線のインダクタンス (5 cm のジャンパで約 43 nH、[02-analog-discovery/08-breadboard-limits/03-jumper-inductance.md](../../02-analog-discovery/08-breadboard-limits/03-jumper-inductance.md)) が付く。
 > この題の掃引は 3 MHz までなので、どちらも負荷に比べて見えないほど小さく、**perfboard と同じ図の理想の位置に来る** (下の「なぜ 3 MHz までにするか」)。
-> 校正の基準面は SMA のケーブルの先なので、**ケーブルの先から挿し先の列までの線も測る物に含まれる**。短い線 (5 cm 以下) で挿す。
+> 校正はブレッドボードの上で取る ([03-nanovna/12-smith-chart/01-map.md](01-map.md) の「測る前に」)。基準面がオレンジの線の先へ移り、線の長さは測る物に入らない。
 
 ```breadboard
 title: 図2b デモボードをブレッドボードで組む (JP3 の 51 Ω を選んだ状態)
@@ -194,12 +194,13 @@ wires:
 | --- | --- |
 | 範囲 | 100 kHz〜3 MHz |
 | 点数 | 101 |
-| 校正 | SOLT (1-1)。**ケーブルの先 (デモボードの SMA に挿す手前)** で Open / Short / Load / Thru |
+| 校正 | SOLT (1-1)。perfboard の治具は**ケーブルの先 (デモボードの SMA に挿す手前)** で Open / Short / Load。ブレッドボードは**ブレッドボードの上で**取る ([03-nanovna/12-smith-chart/01-map.md](01-map.md) の「測る前に」) |
 | 表示 | S11 の Smith チャート。マーカー 1 を 1 MHz に置く |
 
 手順:
 
-1. 校正したケーブルの先を、デモボードの SMA にしっかり (締めすぎずに、0-2) つなぐ
+1. 校正したケーブルの先を、デモボードの SMA にしっかり (締めすぎずに、0-2) つなぐ。ブレッドボードなら、校正したオレンジの線のまま選んだ列へ挿す。
+   コイルとコンデンサは、半田付けする (挿す) 前に 1 本ずつ測って値を書いておく
 2. **JP を 1 つだけ閉じる** (ほかは全部開けておく)
 3. マーカー 1 を 1 MHz に置いて、Smith の位置と Z の読み値を、下の表に書き込む
 4. JP を替えて繰り返す。**8 つ全部測ると、チャートの上に 8 点がそろう**
