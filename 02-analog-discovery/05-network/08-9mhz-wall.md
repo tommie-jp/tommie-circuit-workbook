@@ -134,6 +134,40 @@ notes:
   5-22 のように DUT 自身が 25 MHz まで伸びる測定では、この壁を差し引いて
   考える必要がある
 
+### 壁の外は VNA で測る (補足)
+
+AD の Network で 9 MHz より上のフィルタを測ると、DUT の特性に AD 自身の壁が重なって、本当の遮断周波数が分からない。
+遮断周波数が 10 MHz を超えるフィルタは、LiteVNA64 (50 kHz〜6.3 GHz) の S21 で測る。AD の 2×15 ヘッダに頼らず、
+SMA の治具で DUT を CH0 と CH1 の間に挿し、校正してから掃引する。校正でケーブルと治具の分が消えるので、壁は現れない。
+
+例として、遮断周波数 28.4 MHz の 7 次ローパス (03-nanovna/06-filters/01-lc-lowpass.md の 6-1) を見る。
+AD では 9 MHz の壁が先に効いて、この −3 dB 点 (28.4 MHz) は読めない。VNA なら −3 dB 点と阻止域まで見える。
+見えるはずの画面 (理想の模型で、実測ではない)。
+
+```vna
+device: litevna64
+sweep: 1M-100M 201
+title: 図4 28.4 MHz の 7 次ローパス — AD の壁 (9 MHz) の先の −3 dB 点と阻止域
+dut:
+  - shunt C 47p
+  - series L 330n
+  - shunt C 200p
+  - series L 560n
+  - shunt C 200p
+  - series L 330n
+  - shunt C 47p
+traces:
+  - S21 logmag
+markers:
+  - 9M
+  - 28.4M
+  - 100M
+```
+
+![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/vna/08-9mhz-wall.svg)
+
+図の読み値は、9 MHz で 0.00 dB (壁のない値)、28.4 MHz で −3.0 dB、100 MHz で −74 dB。
+
 ## 出典
 
 自作。計器の名前と操作は Digilent の
