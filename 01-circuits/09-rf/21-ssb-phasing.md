@@ -1,0 +1,403 @@
+---
+book: circuits
+chapter: 9
+id: 9-21
+title: SSB を作る — 位相法の送信側
+tier: 200
+board: BB
+source: 自作
+era: 古
+---
+
+# 9-21 SSB を作る — 位相法の送信側
+
+9-7 の **AM** は、搬送波 f<sub>c</sub> の両脇に、音声 f<sub>a</sub> の分だけ離れた**上側波 (f<sub>c</sub> + f<sub>a</sub>) と下側波 (f<sub>c</sub> − f<sub>a</sub>)** が立つ。
+音声の中身は 2 つの側波のどちらにも同じだけ入っていて、搬送波には何も入っていない。
+**SSB (単側波帯)** は、片方の側波だけを送る変調だ。占める幅は AM の半分で、送信の電力を中身の無い搬送波に使わない。
+
+片方の側波を消す方法は 2 つある。急な傾きのフィルタで切る**フィルタ法**と、90° ずらした 2 組の掛け算を足して打ち消す**位相法**だ。
+位相法は 1920 年代に R. V. L. Hartley が特許にした古典で、9-20 (受信のイメージ除去) と同じ考えを送信に使う。
+この題では 9-19 の SA612 ×2 と RC-CR の網で位相法の SSB 変調器を組み、Analog Discovery 3 (AD3) のスペクトルで**片側だけが立つ**ことを確かめる。
+
+**なぜ消えるか (三角関数で確かめる)。** LO の網 (9-18 の 680 Ω・470 pF) は W1 を **+45° (高域側)** と **−45° (低域側)** に分け、
+音声の網 (1.6 kΩ・100 nF) は W2 を同じく +45° と −45° に分ける。U1 と U2 は次の組で掛ける (振幅は省く)。
+
+| ミキサー | LO | 音声 | 積 = ½{和 + 差} |
+| --- | --- | --- | --- |
+| U1 | 高域側 cos(ω<sub>0</sub>t + 45°) | 低域側 cos(ω<sub>a</sub>t − 45°) | ½{cos(ω<sub>0</sub> + ω<sub>a</sub>)t + cos((ω<sub>0</sub> − ω<sub>a</sub>)t + 90°)} |
+| U2 | 低域側 cos(ω<sub>0</sub>t − 45°) | 高域側 cos(ω<sub>a</sub>t + 45°) | ½{cos(ω<sub>0</sub> + ω<sub>a</sub>)t + cos((ω<sub>0</sub> − ω<sub>a</sub>)t − 90°)} |
+
+- 和の周波数 (上側波) は 2 つとも位相 0° なので、**足すとそのまま残る**
+- 差の周波数 (下側波) は +90° と −90° で向きが逆なので、**足すと消える**
+- LO 498 kHz・音声 995 Hz なら、**499 kHz (上側波) だけが立ち、497 kHz (下側波) は消える**
+- 組を入れ替える (U1 を LO の高域側 × 音声の高域側、U2 を低域側 × 低域側) と、今度は**下側波 497 kHz が残る**。
+  実物では、音声の網の 2 本の出口 (C7 と C8 の入口) を入れ替えればよい
+
+**網の働きを決める数。** RC-CR の網の 2 本の出口は、**どの周波数でも位相差が 90°** だ (9-18)。振幅がそろうのは
+f<sub>c</sub> = 1/(2πRC) のときだけ。LO の網は f<sub>c</sub> = 1/(2π · 680 Ω · 470 pF) = 497.9 kHz で、LO の 498 kHz は動かさないのでこれでよい。
+音声の網は f<sub>c</sub> = 1/(2π · 1.6 kΩ · 100 nF) = 994.7 Hz なので、**W2 を 995 Hz の 1 音に決める**。
+
+- 音声の網の出口には SA612 の入力 (約 1.5 kΩ、データシートの代表値) が 1 µF を通してつながる。
+  負荷が 2 本とも同じなので、**位相差は 90° のまま、振幅もそろったまま**で、大きさだけが 0.707 から **0.428** に下がる (計算値)
+- W2 を振幅 20 mV (40 mV<sub>pp</sub>) にすると、各 SA612 の PIN 1 は 20 mV × 0.428 × 0.994 (1 µF と 1.5 kΩ の分圧) = **8.5 mV (17 mV<sub>pp</sub>)**。
+  9-12・9-19 の RF (10 mV、20 mV<sub>pp</sub>) と同じくらいで、SA612 が飽和しない範囲に収まる
+- 音の高さを変えると、位相差は 90° のままだが振幅の比がずれ、下側波が消え残る (下の表、計算値)。
+  実用の位相法の送信機は、300〜3000 Hz の全体で 90° を保つ**オールパスの網** (振幅は平らで位相だけを回す網) を使う。
+  この題の網は 1 音でしか働かない、教えるための形だ
+
+| W2 の周波数 | 低域側 : 高域側 (網の出口、負荷込み) | 下側波の抑圧 (網だけの計算値) |
+| --- | --- | --- |
+| 500 Hz | 0.466 : 0.234 | 9.6 dB |
+| 900 Hz | 0.436 : 0.394 | 26.0 dB |
+| 995 Hz | 0.428 : 0.428 | 理想の部品で 70 dB 以上 |
+| 1100 Hz | 0.419 : 0.464 | 26.0 dB |
+| 2000 Hz | 0.342 : 0.688 | 9.5 dB |
+
+**実物でどこまで消えるか。** 理想の部品なら下側波はほぼ 0 になる。実物は網の R と C のずれ、2 つの SA612 の利得の差で消え残る。
+網の R・C を一様にずらした 2 万回の計算 (LO の網と音声の網の両方) では、次のようになった。
+
+| 部品の許容差 | 抑圧の中央値 | 悪いほうから 1 割の値 |
+| --- | --- | --- |
+| ±1 % | 47 dB | 42 dB |
+| ±5 % | 33 dB | 28 dB |
+| ±10 % | 27 dB | 22 dB |
+
+- 2 つの SA612 の利得が 5 % 違うだけでも、抑圧は 32 dB で頭打ちになる (位相が 3° ずれても同じく 32 dB)。
+  9-20 の受信側と同じ話で、**±5 % の部品なら 25〜35 dB を見込む**
+- もっと深く消したいときは、R6 を 3.9 kΩ + 半固定抵抗 2 kΩ に替えて、2 つの出力の大きさを合わせる (9-20 の半固定と同じ役目)
+- **搬送波 (498 kHz)** は、理想の掛け算なら出ない。実物は SA612 の平衡のずれで LO が漏れ、その大きさは個体と配線で決まる。
+  この題の図は、各 SA612 の PIN 5 に 4 mV (peak) 漏れるとして描いた (目安)
+
+**受信と送信は同じ箱。** 9-20 は「I と Q を 90° ずらして足すと、片側のイメージが消える」受信機だった。
+この題は信号の向きを逆にして、「音声と LO をそれぞれ 90° ずらして掛けて足すと、片側の側波が消える」送信機にした。
+どちらも、90° ずれた 2 組の掛け算を足すと片側が打ち消し合う、という同じ式でできている。
+
+> **アンテナはつながない。** 499 kHz は中波の放送の帯のすぐ下で、アンテナから出すと近くの受信を妨げうる。
+> 9-16 と同じく、出力は AD3 のスコープにケーブルで直につなぐだけにする。
+
+## 回路図
+
+```circuit
+title: 図1 位相法の SSB 変調器 (W1 が LO、W2 が音声)
+parts:
+  W1: sine b2 d2 l=$\mathrm{W1}$
+  G1: ground d2
+  R1: resistor b4 b6 680
+  C1: capacitor b8 d8 470p
+  G2: ground d8
+  C4: capacitor b10 b12 10n
+  C2: capacitor e4 e6 470p
+  R2: resistor e7 g7 680
+  G3: ground g7
+  C3: capacitor e10 e12 10n
+  W2: sine l2 n2 l=$\mathrm{W2}$
+  G4: ground n2
+  R3: resistor i3 i5 1.6k
+  C5: capacitor i7 k7 100n
+  G5: ground k7
+  C7: capacitor i8 i10 1u
+  C6: capacitor q4 q6 100n
+  R4: resistor q7 s7 1.6k
+  G6: ground s7
+  C8: capacitor q8 q10 1u
+  U1: dip8 i15h0c0
+  U2: dip8 q15h0c0
+  VCC: vcc g16 5V
+  VCC: vcc o16 5V
+  C9: capacitor k11 m11 1u
+  G7: ground m11
+  G8: ground l13
+  C10: capacitor s11 u11 1u
+  G9: ground u11
+  G10: ground t13
+  R5: resistor j22e0e0 m22 4.7k
+  R6: resistor o22 r22e0e0 4.7k
+  C13: capacitor n24 n26 100n
+  M1: voltmeter n28 p28 l=$\mathrm{CH1}$
+  G11: ground p28
+  VCC: vcc c25 5V
+  C11: capacitor c25 e25 100n
+  G12: ground e25
+  C12: capacitor c28 e28 100n
+  G13: ground e28
+wires:
+  - b2 -- b3
+  - b3 -- b4
+  - b3 -- e3
+  - e3 -- e4
+  - b6 -- b8
+  - b8 -- b10
+  - b12 -- b20
+  - e6 -- e7
+  - e7 -- e10
+  - e12 -- e17
+  - l2 -- i2
+  - i2 -- i3
+  - l2 -- l3
+  - l3 -- q3
+  - q3 -- q4
+  - i5 -- i7
+  - i7 -- i8
+  - q6 -- q7
+  - q7 -- q8
+  - U1.1 -| i10
+  - U1.2 -| k11
+  - U1.3 -| l13
+  - U1.8 -| g16
+  - U1.6 -| e17
+  - U1.5 -| j22e0e0
+  - U2.1 -| q10
+  - U2.2 -| s11
+  - U2.3 -| t13
+  - U2.8 -| o16
+  - U2.6 -| b20
+  - U2.5 -| r22e0e0
+  - m22 -- n22
+  - n22 -- o22
+  - n22 -- n24
+  - n26 -- n28
+  - c25 -- c28
+notes:
+  - text k15 small center: SA612
+  - text s15 small center: SA612
+  - text h12f5 small center: PIN 1
+  - text p12f5 small center: PIN 1
+  - text h18 small center: PIN 6
+  - text q18f0 small center: PIN 6
+  - text k19 small center: PIN 5
+  - text s19 small center: PIN 5
+  - text a8 small center: LO -45°
+  - text f9 small center: LO +45°
+  - text h7 small center: 音声 -45°
+  - text p7 small center: 音声 +45°
+  - text m24 small center: 和の点
+style:
+  pitch: 1
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/21-ssb-phasing.svg)
+
+- **LO (W1)** は振幅 0.25 V (0.5 V<sub>pp</sub>)。LO の網の 2 本の出口は約 0.35 V<sub>pp</sub> ずつで、
+  SA612 の外部 LO の要求 (200 mV<sub>pp</sub> 以上) を満たす (9-19 と同じ)。C3・C4 (10 nF) で直流を切って PIN 6 へ入れる
+- **音声 (W2)** は振幅 20 mV (40 mV<sub>pp</sub>)。音声の網の低域側 (R3 → C5) が −45°、高域側 (C6 → R4) が +45°。
+  C7・C8 (1 µF) で直流を切って PIN 1 へ入れる。PIN 2 は C9・C10 (1 µF) で交流だけ GND に落とす。
+  9-12 の 10 nF では 995 Hz に対して 16 kΩ もあり、交流の GND にならないので、音声を入れるこの題では 1 µF にした
+- **出力は PIN 5 (OUT_B)** を使う。9-12 と 9-20 は PIN 4 (OUT_A) を使ったが、PIN 4 と PIN 5 は同じ信号の逆相なので、
+  2 つとも PIN 5 にそろえれば和は変わらない (2 つの側波がそろって反転するだけ)。PIN 6 と同じ側にあるので、
+  図の信号が左から右へ流れる。PIN 4 と PIN 7 はつながない
+- **和は受け身の抵抗で取る**。R5・R6 (4.7 kΩ) で 2 つの PIN 5 を 1 点に集める。各出力は内部の 1.5 kΩ を通して出るので、
+  和の点は 2 つの出力の**平均** (½ の和) になる。MCP6002 などの OP アンプの加算器は GBW が約 1 MHz で、500 kHz を足せない
+- C13 (100 nF) で直流 (約 4 V) を切って CH1 へ。AD3 のスコープの入力は約 1 MΩ なので、和の点をほとんど引っ張らない
+- C11・C12 は U1・U2 の電源のパスコン。+5V は AD3 の V+ (Supplies で 5 V)
+- 図1 で交差は 1 か所 (U2 の LO の線と U1 の出力の線)。黒丸は無く、つながっていない
+
+## 実体配線図
+
+```bread
+title: 図2 ブレッドボードに組む (LO の網は左上、音声の網は左下、和は右)
+board: full
+parts:
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [V+, GND, W2, W1, 1+, 1-]
+  R1: resistor b6 b13 680
+  C1: capacitor/ceramic a13 -t13 470p
+  C2: capacitor/ceramic d6 d10 470p
+  R2: resistor a10 -t10 680
+  C3: capacitor/ceramic b19 b24 10n
+  U1: dip8 @ e22
+  C11: capacitor/ceramic +t20 -t20 100n
+  R5: resistor a25 a30 4k7
+  C4: capacitor/ceramic c34 c42 10n
+  U2: dip8 @ e40
+  C12: capacitor/ceramic +t38 -t38 100n
+  R6: resistor c43 c48 4k7
+  C13: capacitor/ceramic d48 d53 100n
+  R3: resistor g3 g13 1k6
+  C6: capacitor/film i3 i8 100n
+  R4: resistor j8 -b8 1k6
+  C5: capacitor/film j13 -b13 100n
+  C7: capacitor/film h18 h22 1u
+  C9: capacitor/film h23 h27 1u
+  C8: capacitor/film i37 i40 1u
+  C10: capacitor/film h41 h45 1u
+wires:
+  - AD.V+ -- +t1 red
+  - AD.GND -- -t2 black
+  - AD.W2 -- a3 yellow
+  - e3 -- f3 yellow
+  - AD.W1 -- a6 green
+  - e10 -- e19 green
+  - d13 -- d34 white
+  - a22 -- +t22 red
+  - a40 -- +t40 red
+  - b30 -- b48 orange
+  - AD.1+ -- a53 orange
+  - AD.1- -- -t55 black
+  - f8 -- f19 purple
+  - g19 -- g37 purple
+  - i13 -- i18 blue
+  - j24 -- -b24 black
+  - j27 -- -b27 black
+  - j42 -- -b42 black
+  - j45 -- -b45 black
+  - -t62 -- -b62 black
+notes:
+  - text: U1・U2 は SA612 (PIN 1 IN_A、2 IN_B、3 GND、5 OUT_B、6 LO、8 VCC。4・7 は使わない)
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/21-ssb-phasing.svg)
+
+- 回路は 498 kHz までなので、ブレッドボードの 3 MHz 以下に収まる。LO の網の 470 pF は小さいので、リードを短く切って挿す
+- **電源**: AD3 の V+ (赤) を上の + レールへ、GND (黒) を上の − レールへ。上下の − レールは 62 列で渡す。
+  U1 の PIN 8 (22 列) と U2 の PIN 8 (40 列) から + レールへ赤い線。C11 (20 列) と C12 (38 列) は + と − のレールの間に直に挿す
+- **LO の網 (左上)**: W1 (緑) を a6 へ。R1 (b6〜b13) と C1 (a13 から − レール) が低域側で、13 列が LO の −45°。
+  C2 (d6〜d10) と R2 (a10 から − レール) が高域側で、10 列が LO の +45°
+  - +45° は e10〜e19 の緑の線から C3 (b19〜b24) を通して U1 の PIN 6 (24 列) へ
+  - −45° は d13〜d34 の白い線から C4 (c34〜c42) を通して U2 の PIN 6 (42 列) へ
+- **音声の網 (左下)**: W2 (黄) を a3 へ挿し、e3〜f3 の黄の線で下の段の 3 列へ。R3 (g3〜g13) と C5 (j13 から − レール) が低域側で、
+  13 列が音声の −45°。C6 (i3〜i8) と R4 (j8 から − レール) が高域側で、8 列が音声の +45°
+  - −45° は i13〜i18 の青い線から C7 (h18〜h22) を通して U1 の PIN 1 (22 列) へ
+  - +45° は f8〜f19 と g19〜g37 の紫の線から C8 (i37〜i40) を通して U2 の PIN 1 (40 列) へ
+- **SA612**: U1 は 22〜25 列、U2 は 40〜43 列で溝をまたぐ (切り欠きを左、PIN 1 は左下)。PIN 2 は C9・C10 (h 行) から 27 列・45 列の黒い線で − レールへ、
+  PIN 3 は 24 列・42 列の黒い線で − レールへ
+- **和**: U1 の PIN 5 (25 列) から R5 (a25〜a30) と b30〜b48 の橙の線で 48 列へ。U2 の PIN 5 (43 列) から R6 (c43〜c48) で 48 列へ。
+  48 列が和の点。C13 (d48〜d53) を通して CH1 の 1+ (橙) を a53 に挿し、1− (黒) は − レールへ
+
+## 部品
+
+| 記号 | 部品 | 値 |
+| --- | --- | --- |
+| U1・U2 | ダブルバランスドミキサー IC | SA612A (NE612A)、DIP8 (図2 では型番の無い dip8 で描いた) |
+| R1・R2 | 抵抗 (LO の網) | 680 Ω (±1 % の金属皮膜にすると抑圧が深くなる) |
+| C1・C2 | セラミックコンデンサ (LO の網、NP0/C0G) | 470 pF (471) |
+| R3・R4 | 抵抗 (音声の網) | 1.6 kΩ (E24) |
+| C5・C6 | フィルムコンデンサ (音声の網) | 100 nF (104) |
+| C3・C4 | セラミックコンデンサ (LO の結合) | 10 nF (103) |
+| C7・C8 | フィルムコンデンサ (音声の結合) | 1 µF (105) |
+| C9・C10 | フィルムコンデンサ (PIN 2 を交流で GND へ) | 1 µF (105) |
+| C11・C12 | セラミックコンデンサ (電源のパスコン) | 100 nF (104) |
+| R5・R6 | 抵抗 (和を取る) | 4.7 kΩ |
+| C13 | セラミックコンデンサ (直流を切る) | 100 nF (104) |
+| — | 信号源・計器・電源 | Analog Discovery 3 (W1・W2、Scope、Spectrum、V+ 5 V) |
+
+- 網の 2 本の枝は、同じ袋の部品から選ぶと値がそろいやすい。テスターで R を測って近い 2 本を組にするだけでも抑圧が深くなる
+
+## 計器の設定
+
+Analog Discovery 3 だけを使う。LO と音声を W1・W2 で作り、498 kHz の両脇 1 kHz の線を Spectrum (FFT) で分けて見る。
+同じ和の点を Scope でも見て、側波が 1 本 (SSB) か 2 本 (両側波帯) かを包絡線の形で比べる。
+
+| 項目 | 設定 |
+| --- | --- |
+| Supplies | V+ = 5 V (V− は使わない) |
+| Wavegen W1 (LO) | Sine、498 kHz、振幅 0.25 V (0.5 V<sub>pp</sub>)、オフセット 0 V |
+| Wavegen W2 (音声) | Sine、995 Hz、振幅 20 mV (40 mV<sub>pp</sub>)、オフセット 0 V |
+| Scope | CH1 = 1+ を C13 の先、1− を GND。50 mV/div、200 µs/div、トリガは CH1 の立ち上がり 0 V。標本化は 5 MS/s 以上 (499 kHz を折り返さない) |
+| Spectrum | 開始 490 kHz・終了 506 kHz、FFT 32768 点、窓は Flat Top、縦軸 dBV、REF −20 dBV。チャンネルは CH1 |
+
+- 標本化は 506 kHz × 2.56 ≈ 1.30 MHz、分解能は 1.30 MHz ÷ 32768 ≈ **39.5 Hz**。1 kHz 離れた 497・498・499 kHz の線がはっきり分かれる。
+  9-12 の設定 (0〜2.5 MHz、8192 点、分解能 0.78 kHz) では、1 kHz 隣の線が Flat Top の幅に埋もれて分かれない
+- 比べるために、**R6 を抜いて U1 だけ**にした画面も撮る (図4・図6)。U1 だけなら両側波帯 (搬送波を抑えた AM) になる
+
+## 計器の画面
+
+目安。各 SA612 の変換利得を 9-12 と同じ 17 dB (7.08 倍、片側の出力・1 側波あたり) と見ると、PIN 5 の各側波は
+8.5 mV × 7.08 = 60.3 mV (peak)。和の点は 2 つの平均なので、上側波は **60.3 mV (peak) = −27.4 dBV** のまま残る (rms で表す)。
+大きさは実物で変わるが、**上側波と下側波の比 (抑圧) は網と利得のそろい方で決まる** (上の表)。図3 は ±5 % の部品の中央値 33 dB で描いた。
+
+```spectrum
+title: 図3 SSB (U1 + U2) — 上側波 498.995 kHz だけが立ち、下側波は 33 dB 下
+device: ad3
+sweep: 490k-506k
+samples: 32768
+window: flattop
+unit: dBV
+ref: -20dBV
+signal:
+  - sine 498.995kHz 60.3mV
+  - sine 497.005kHz 1.35mV
+  - sine 498kHz 2.83mV
+markers: [498.995k, 497.005k, 498k]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/spectrum/21-ssb-phasing-1.svg)
+
+```spectrum
+title: 図4 R6 を抜いて U1 だけ — 両側波帯 (搬送波を抑えた AM)、図3 と同じ尺度
+device: ad3
+sweep: 490k-506k
+samples: 32768
+window: flattop
+unit: dBV
+ref: -20dBV
+signal:
+  - sine 498.995kHz 60.3mV
+  - sine 497.005kHz 60.3mV
+  - sine 498kHz 4mV
+markers: [498.995k, 497.005k, 498k]
+```
+
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/spectrum/21-ssb-phasing-2.svg)
+
+- マーカーは FFT の分解能 39.5 Hz の刻みに吸い付くので、読み値の周波数は 499.003 kHz のように少しずれる
+- 図3 のマーカー 1 が上側波 (498 kHz + 995 Hz = 498.995 kHz)、2 が下側波 (497.005 kHz)、3 が搬送波の漏れ (498 kHz)
+- 図4 は U1 だけなので、上側波と下側波が同じ高さで立つ。9-7 の AM から搬送波を抜いた形で、**両側波帯 (DSB)** と呼ぶ。
+  図3 と比べると、**U2 を足しただけで下側波が 33 dB 下がり、上側波は同じ高さのまま**なのが分かる
+- 搬送波 (マーカー 3) は、U1 だけで 4 mV (目安)。2 つを足すと、2 つの漏れは LO の網で 90° ずれているので 0.707 倍の 2.83 mV になる
+- 音声の網の 2 本の出口を入れ替えると、図3 の 1 と 2 の高さが入れ替わる (下側波だけが残る)
+
+```scope
+title: 図5 SSB (U1 + U2) — 包絡線は平ら (1 本の正弦)
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: = 60.3mV * sin(2 * pi * 498.995kHz * t) + 1.35mV * sin(2 * pi * 497.005kHz * t) + 2.83mV * sin(2 * pi * 498kHz * t), range: 50mV/div}
+measure: [vpp, freq]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/21-ssb-phasing-1.svg)
+
+```scope
+title: 図6 R6 を抜いて U1 だけ — 包絡線が 995 Hz の 2 倍で膨らんでは 0 になる (図5 と同じ尺度)
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: = 120.6mV * cos(2 * pi * 995Hz * t) * sin(2 * pi * 498kHz * t) + 4mV * sin(2 * pi * 498kHz * t), range: 50mV/div}
+cursors: [-251.3us, 251.3us]
+measure: [vpp]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/21-ssb-phasing-2.svg)
+
+- 図5 は 498.995 kHz の 1 本の正弦なので、2 ms の画面では一様な帯に見える。幅は約 2 × 60 mV。
+  下側波と搬送波の残り (−33 dB・−27 dB) が、帯の縁をわずかに揺らす
+- 図6 は 2 つの側波の和 = 120.6 mV × cos(2π · 995 Hz · t) × sin(2π · 498 kHz · t)。包絡線は |cos| の形で、
+  **502.5 µs (1/(2 × 995 Hz)) ごとに 0 に近づく**。カーソルはその 2 つの谷 (−251.3 µs と +251.3 µs)
+- 2 つの画面を並べると、SSB は「音の大きさに比例した大きさの正弦が 1 本出る」変調だと分かる。
+  1 音の SSB は、LO から 995 Hz ずれた周波数の正弦そのものだ
+
+## 見るべき値
+
+計算値。大きさは 9-12 の変換利得 (17 dB) からの目安、抑圧の dB は網の計算 (上の表) による。
+
+| 確かめること | 期待する値 |
+| --- | --- |
+| 各 SA612 の PIN 1 の音声 | 8.5 mV (17 mV<sub>pp</sub>)。網の出口は負荷込みで 0.428 倍 |
+| 各 SA612 の PIN 6 の LO | 約 0.35 V<sub>pp</sub> (200 mV<sub>pp</sub> 以上) |
+| 図3 の上側波 (マーカー 1) | 499.003 kHz で −27.40 dBV (目安。60.3 mV peak) |
+| 図3 の下側波 (マーカー 2) | 496.987 kHz で −60.41 dBV。上側波より 33 dB 下 (±5 % の部品の中央値。25〜35 dB を見込む) |
+| 図3 の搬送波 (マーカー 3) | 498.015 kHz で −53.97 dBV (目安。SA612 の平衡で決まる) |
+| 図4 (U1 だけ) の上側波・下側波 | −27.40 dBV と −27.41 dBV。同じ高さ (両側波帯)。搬送波は −50.97 dBV (目安) |
+| 図5 の CH1 | 129 mV<sub>pp</sub>・499.0 kHz。包絡線は平ら |
+| 図6 の包絡線の谷の間隔 | ΔX = 502.6 µs (1/ΔX = 1.990 kHz = 音の 2 倍) |
+| 音声の網の出口を入れ替える | 497.005 kHz が残り、498.995 kHz が 33 dB ほど下がる |
+| W2 を 2 kHz にする | 下側波の抑圧が 9.5 dB に落ちる (網の振幅がそろわない)。位相差は 90° のまま |
+| W1 を止める | 側波が消える (掛ける相手が無い) |
+
+## 出典
+
+自作。SA612A のピンの並び (PIN 1・2 = RF 入力、3 = GND、4・5 = 出力、6・7 = 発振、8 = VCC)、入力と出力の抵抗 1.5 kΩ、
+変換利得 (代表 17 dB)、外部 LO の 200 mV<sub>pp</sub> 以上は NXP の SA612A データシートと応用ノート AN1983 による。
+位相法 (phasing method) の SSB は R. V. L. Hartley の特許 (1920 年代) による古典の方式。
+抑圧の dB は、網の伝達関数 (SA612 の入力 1.5 kΩ を負荷に含む) と、R・C を一様にずらした 2 万回の計算 (Python) による計算値。
