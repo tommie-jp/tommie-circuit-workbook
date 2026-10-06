@@ -29,7 +29,7 @@ device: LV64
 
 計器は VNA。この本の図は LiteVNA64 の画面に合わせて書いてあり、NanoVNA-H4 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
-この題は実体配線図を付けない — 掃き方の読み方の題で、組む回路が無い (組んで測るのは 12-4 のデモボード)。
+この題は各 vna の図の前に回路図を付け、実体配線図は付けない — 掃き方の読み方の題で、組む回路が無い (組んで測るのは 12-4 のデモボード)。
 
 | 項目 | 値 |
 | --- | --- |
@@ -41,6 +41,23 @@ device: LV64
 ## 50 Ω に直列のコイル
 
 50 Ω に 820 nH のコイルを直列に付けた負荷 (Z = 50 + jωL)。**R = 50 Ω の円** (中心を通る円) の上半分を、中心から右へ回る。
+
+```circuit
+title: 図1 の回路 (50 Ω と 820 nH の直列)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  R1: resistor c5 c9 50
+  L1: inductor c9 e9 820n
+  G1: ground e9
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/02-sweep-rotation-1.svg)
 
 ```vna
 sweep: 1M-100M 101
@@ -64,6 +81,23 @@ markers:
 
 50 Ω に 330 pF のコンデンサを直列に付けた負荷 (Z = 50 − j / (ωC))。**同じ r = 1 の円の下半分**で、低い周波数では右端の近く (x が大きな負) から始まり、周波数を上げると中心へ近づく。
 
+```circuit
+title: 図2 の回路 (50 Ω と 330 pF の直列)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  R1: resistor c5 c9 50
+  C1: capacitor c9 e9 330p
+  G1: ground e9
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/02-sweep-rotation-2.svg)
+
 ```vna
 sweep: 1M-100M 101
 title: 図2 50 Ω + 330 pF — r = 1 の円の下半分を右から中心へ
@@ -86,6 +120,24 @@ markers:
 
 25 Ω に 820 nH と 330 pF を直列に付けた負荷。**共振周波数 f0 = 1 / (2π√(LC)) ≈ 9.68 MHz** で、コイルとコンデンサのリアクタンスが打ち消し合って、純粋な抵抗 25 Ω (z = 0.5) になる。
 f0 より下は容量性 (下半分)、上は誘導性 (上半分) で、**実軸をちょうど f0 で横切る**。r = 0.5 の円の上を、下から上へ時計回りに動く。
+
+```circuit
+title: 図3 の回路 (25 Ω と 820 nH と 330 pF の直列共振)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  R1: resistor c5 c9 25
+  L1: inductor c9 c13 820n
+  C1: capacitor c13 e13 330p
+  G1: ground e13
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/02-sweep-rotation-3.svg)
 
 ```vna
 sweep: 3M-30M 101

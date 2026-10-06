@@ -37,7 +37,7 @@ Smith はそれを「何 Ω (オーム) の抵抗と、何 Ω のコイルかコ
 
 計器は VNA。この本の図は LiteVNA64 の画面に合わせて書いてあり、NanoVNA-H4 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
-この題は実体配線図を付けない — 格子の読み方の題で、組む回路が無い (同じ負荷を実物で測るのは 12-4 のデモボード)。
+この題は各 vna の図の前に回路図を付け、実体配線図は付けない — 格子の読み方の題で、組む回路が無い (同じ負荷を実物で測るのは 12-4 のデモボード)。
 
 | 項目 | 値 |
 | --- | --- |
@@ -49,6 +49,22 @@ Smith はそれを「何 Ω (オーム) の抵抗と、何 Ω のコイルかコ
 ## 4 つの点
 
 **25 Ω** (Γ = −1/3、z = 0.5)。実軸の左半分、中心と左端の間の 1/3 あたり。周波数を変えても動かない (純抵抗)。
+
+```circuit
+title: 図1 の回路 (25 Ω)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  R1: resistor c5 e5 25
+  G1: ground e5
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/01-map-1.svg)
 
 ```vna
 sweep: 1M-30M 101
@@ -66,6 +82,22 @@ markers:
 
 **100 Ω** (Γ = +1/3、z = 2)。実軸の右半分。25 Ω と対称に、中心から同じ距離。
 
+```circuit
+title: 図2 の回路 (100 Ω)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  R1: resistor c5 e5 100
+  G1: ground e5
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/01-map-2.svg)
+
 ```vna
 sweep: 1M-30M 101
 title: 図2 100 Ω — 実軸の中心より右
@@ -82,6 +114,22 @@ markers:
 
 **820 nH のコイル** (10 MHz で Z = +j51.5 Ω、z = +j1.03)。上半分の外周の近く。**周波数を上げると外周を時計回りに右へ**回る。
 
+```circuit
+title: 図3 の回路 (コイル 820 nH)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  L1: inductor c5 e5 820n
+  G1: ground e5
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/01-map-3.svg)
+
 ```vna
 sweep: 1M-30M 101
 title: 図3 コイル 820 nH — 上半分の外周
@@ -97,6 +145,22 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/01-map-3.svg)
 
 **330 pF のコンデンサ** (10 MHz で Z = −j48.2 Ω、z = −j0.96)。下半分の外周の近く。**周波数を上げると外周を時計回りに左へ**回る。
+
+```circuit
+title: 図4 の回路 (コンデンサ 330 pF)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  C1: capacitor c5 e5 330p
+  G1: ground e5
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/01-map-4.svg)
 
 ```vna
 sweep: 1M-30M 101

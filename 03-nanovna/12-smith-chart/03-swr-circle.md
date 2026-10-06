@@ -36,7 +36,7 @@ Smith チャートの**中心からの距離は |Γ|** で、SWR = (1 + |Γ|) / 
 
 計器は VNA。この本の図は LiteVNA64 の画面に合わせて書いてあり、NanoVNA-H4 でも同じ手順で測れる。AD3 とオシロは使わない (S パラメータを見る題)。
 
-この題は実体配線図を付けない — 読み方の題で、組む回路が無い (同軸ケーブルと負荷は、12-4 のデモボードの負荷とケーブルで試せる)。
+この題は各 vna の図の前に回路図を付け、実体配線図は付けない — 読み方の題で、組む回路が無い (同軸ケーブルと負荷は、12-4 のデモボードの負荷とケーブルで試せる)。
 
 | 項目 | 値 |
 | --- | --- |
@@ -48,6 +48,23 @@ Smith チャートの**中心からの距離は |Γ|** で、SWR = (1 + |Γ|) / 
 ## 100 Ω の先のケーブルを回す
 
 50 Ω の同軸 (短縮率 0.66) を 1 m と、その先に 100 Ω を付けた負荷。**半波長 (約 99 MHz) ごとに 1 周**する。SWR の線は、全周波数で 2.0 のまま水平になる。
+
+```circuit
+title: 図1 の回路 (1 m のケーブルと 100 Ω)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  TL1: tline c5 c9 50
+  R1: resistor c9 e9 100
+  G1: ground e9
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/03-swr-circle-1.svg)
 
 ```vna
 sweep: 1M-100M 201
@@ -75,6 +92,23 @@ markers:
 
 同じ負荷で 2 m のケーブルにすると、**同じ円を 2 周**する (半波長が 49.5 MHz に縮むため)。
 
+```circuit
+title: 図2 の回路 (2 m のケーブルと 100 Ω)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  TL1: tline c5 c9 50
+  R1: resistor c9 e9 100
+  G1: ground e9
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/03-swr-circle-2.svg)
+
 ```vna
 sweep: 1M-100M 201
 title: 図2 2 m のケーブルと 100 Ω — 同じ円を 2 周
@@ -96,6 +130,21 @@ markers:
 ## 先が開放のケーブル
 
 先を開放した 1 m のケーブル。|Γ| = 1 なので、**外周そのものを回る** (SWR ∞)。λ/4 (49.5 MHz) で左端 (短絡と同じ) になる。
+
+```circuit
+title: 図3 の回路 (1 m のケーブルの先を開放)
+parts:
+  J1: sma c2 mirror
+  G0: ground d2
+  TL1: tline c5 c9 50
+wires:
+  - J1.1 -- c5
+  - J1.2 -- d2
+style:
+  pitch: 1.0
+```
+
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/03-swr-circle-3.svg)
 
 ```vna
 sweep: 1M-100M 201
