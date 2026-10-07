@@ -307,7 +307,7 @@ parts:
   U2: dip16 @ e12 r180 74HC4052
   U3: dip8 @ e30 MCP6002
   U4: dip8 @ e50 MCP6002
-  R1: resistor i10 i16 1k
+  R1: resistor i9 i16 1k
   C1: capacitor/ceramic j15 -b15 10n
   C2: capacitor/ceramic j17 -b17 10n
   C3: capacitor/ceramic j18 -b18 10n
@@ -322,7 +322,7 @@ parts:
   R7: resistor h52 h58 200k
   R10: resistor d55 d60 10k
   R11: resistor a55 -t55 10k
-  C5: capacitor/ceramic +t9 -t9 100n
+  C5: capacitor/ceramic +t11 -t11 100n
   C6: capacitor/ceramic +b21 -b21 100n
   C7: capacitor/ceramic +t29 -t29 100n
   C8: capacitor/ceramic +t49 -t49 100n
@@ -341,7 +341,8 @@ wires:
   - h6 -- d4 blue
   - d7 -- h12 purple
   - c8 -- h3 white
-  - AD.W2 -- j10 yellow
+  - AD.W2 -- a9 yellow
+  - e9 -- f9 yellow
   - AD.GND -- -t26 black
   - a12 -- -t12 black
   - a13 -- -t13 black
@@ -387,7 +388,7 @@ notes:
 - **U2 (74HC4052)** は 12〜19 列に**逆向き (切り欠きが右)** に挿す。信号のピン (S1・S0・A3・A0・AN・A1・A2) が下の列に、
   GND・VEE・E・BN が上の列に並び、上の − レールへ短く落とせるため。VCC (19 列の下) は下の + レールへ。
   B0〜B3 は使わない (開けておく。スイッチの B 側は BN = GND とつながるだけ)
-- **RF**: W2 (黄) を 10 列へ。R1 (1 kΩ、i10〜i16) で AN (16 列) へ。C1〜C4 (103) は A0・A3・A1・A2 の列の j 行から − レールへ
+- **RF**: W2 (黄) を上の 9 列 (`a9`) へ入れ、e9–f9 の黄色の線で下の 9 列へ渡す。R1 (1 kΩ、i9〜i16) で AN (16 列) へ。C1〜C4 (103) は A0・A3・A1・A2 の列の j 行から − レールへ
 - **I の差動増幅 (U3 の下の半分、30〜33 列)**: A3 (14 列) を橙で 23 列へ運び R4 (g23〜g31) で VINA− へ。
   A0 (15 列) を橙で 22 列へ運び R2 (i22〜i32) で VINA+ へ。R5 (j30〜j31) は VOUTA と VINA− の間に**立てて**挿す。
   R3 (h32〜h38) は VINA+ から VREF (38 列) へ

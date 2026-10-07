@@ -112,7 +112,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery 3
-    pins: [V+, GND, W1, 2+, 2-, 1+, 1-]
+    pins: [V+, GND, W1, 2+, 2-, 1-, 1+]
   R1: resistor b3 b9 68k shift=down
   CIN: capacitor/ceramic d5 d9 100n
   R2: resistor c9 c13 15k
@@ -136,7 +136,7 @@ wires:
   - AD.2- -- -t11 black
   - AD.1+ -- g29 orange
   - f24 -- f29 green
-  - AD.1- -- -t18 black
+  - AD.1- -- -t16 black
   - +t3 -- a3 red
   - +t15 -- a15 red
   - e9 -- e19 orange [v-10]
