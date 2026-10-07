@@ -99,7 +99,7 @@ parts:
     type: device
     at: bottom
     label: Analog Discovery 3
-    pins: [W1, 2+, 1+, V+, GND, 1-, 2-]
+    pins: [W1, V+, GND, 2+, 1+, 1-, 2-]
   EAR:
     type: device
     at: bottom
@@ -107,7 +107,7 @@ parts:
     pins: [A, B]
   L1: inductor/axial b12 b16 250u
   C1: capacitor/ceramic d12 d18 0.01u
-  RS: resistor e8 e12 1k
+  RS: resistor e12 i12 1k
   Rb: resistor b18 b22 220k
   Rc: resistor c22 c26 1.5k
   Q1: transistor h18(B) h19(C) h20(E) 2SC1815
@@ -118,8 +118,7 @@ wires:
   - ANT.1 -- c12 yellow
   - VC1.A -- a12 yellow
   - VC1.E -- -t14 black
-  - AD.W1 -- f8 orange
-  - d8 -- f8 orange
+  - AD.W1 -- j12 orange
   - AD.2+ -- j19 blue
   - AD.1+ -- h22 blue
   - AD.V+ -- +b17 red
@@ -134,7 +133,8 @@ wires:
   - +t26 -- a26 red
   - j20 -- -b21 black
   - j26 -- -b25 black
-  - EAR.A -- j22 green
+  - EAR.A -- j24 green
+  - j24 -- j22 green
   - EAR.B -- -b28 black
   - -t30 -- -b30 black
 ```
@@ -152,10 +152,10 @@ wires:
   コレクタ (19 列) も e–f の線で上の 19 列へ出し、a 行の青い線で 22 列へ渡す。
   22 列に Rb の右リード・Rc・D1 が集まる。B と C が隣り合うので、Rb をじかに渡さずに 22 列を使う
 - Rc の右リード (26 列) は上の + レールへ。D1 は 22 列で溝をまたぎ、アノードが上 (コレクタ)、
-  カソードが下 (検波出力)。下の 22 列に C3・R3 の左リードと EAR の A 端子が並ぶ。
+  カソードが下 (検波出力)。下の 22 列に C3・R3 の左リードが並び、EAR の A 端子は 24 列 (`j24`) を通って 22 列 (`j22`) へつなぐ (AD3 の 1−・2− の線との交差を減らすため)。
   C3・R3 の右リード (26 列) と EAR の B 端子は下の − レールへ
 - AD3 (Analog Discovery 3) の W1 を RS (1 kΩ) 経由で同調回路の 12 列へ入れる。放送の電波の代わりの試験用で、
-  使うときは ANT の線を外してよい。W1 は下の 8 列 (`f8`) に入れ、溝をまたぐ短い橙の線 (`d8`) で RS の左リードへ渡す。1+ は検波出力 (下の 22 列、`h22`)、2+ は Q1 のコレクタ (下の 19 列、`j19`)、1−・2−・GND は下の − レール (22・23・19 列) へ入れる
+  使うときは ANT の線を外してよい。RS は溝をまたいで縦に挿し (`e12` と `i12`)、W1 は下の 12 列 (`j12`) へ入れる。1+ は検波出力 (下の 22 列、`h22`)、2+ は Q1 のコレクタ (下の 19 列、`j19`)、1−・2−・GND は下の − レール (22・23・19 列) へ入れる
 - 1 つの穴にはピンか線を 1 本だけ挿す
 
 ## 計器の設定
