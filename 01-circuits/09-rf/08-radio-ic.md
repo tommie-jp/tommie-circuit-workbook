@@ -100,11 +100,6 @@ notes:
 title: 図2 ブレッドボードに組む
 board: half
 parts:
-  AD:
-    type: device
-    at: top
-    label: Analog Discovery 3
-    pins: [V+, GND, W1, 2+, 1+, 1-, 2-]
   VC1:
     type: device
     at: top
@@ -115,51 +110,66 @@ parts:
     at: top
     label: アンテナ
     pins: ["1"]
+  AD:
+    type: device
+    at: bottom
+    label: Analog Discovery 3
+    pins: [2+, W1, V+, GND, 1-, 2-, 1+]
   EAR:
     type: device
     at: bottom
     label: クリスタルイヤホン
     pins: [A, B]
-  L1: inductor/axial b11 b7 250u
-  IC1: ic3 d10 d11 d12 TA7642
+  L1: inductor/axial c5 c9 250u
+  IC1: ic3 h10 h11 h12 TA7642 cap=right:0,-1
+  RS: resistor e9 g9 1k cap=left
   Cout: capacitor/ceramic a12 a15 0.1u
   Rload: resistor c12 c16 15k
   Csup: capacitor/electrolytic b16 b20 10u
-  RS: resistor e11 e9 1k
 wires:
-  - VC1.E -- -t5 black
-  - VC1.A -- a11 yellow
-  - ANT.1 -- c11 yellow
-  - a7 -- -t7 black
-  - a10 -- -t10 black
+  - VC1.E -- -t7 black
+  - VC1.A -- a9 yellow
+  - ANT.1 -- a11 yellow
+  - b9 -- b11 yellow
+  - a5 -- -t5 black
+  - e11 -- f11 yellow
+  - j10 -- -b10 black
+  - e12 -- f12 purple
   - +t16 -- a16 red
   - a20 -- -t20 black
-  - e15 -- f18 green [h60]
-  - EAR.A -- j18 green
-  - EAR.B -- -b20 black
-  - -t28 -- -b28 black
-  - AD.V+ -- +t2 red
-  - AD.GND -- -t2 black
-  - AD.W1 -- a9 orange
-  - AD.2+ -- b9 blue
-  - AD.1+ -- b15 blue
-  - AD.1- -- -t24 black
-  - AD.2- -- -t26 black
+  - e15 -- f15 green
+  - i15 -- i16 green
+  - AD.1+ -- j15 blue
+  - EAR.A -- j16 green
+  - EAR.B -- -b18 black
+  - i9 -- i8 orange
+  - AD.W1 -- j9 orange
+  - AD.2+ -- j8 blue
+  - AD.V+ -- +b11 red
+  - AD.GND -- -b12 black
+  - AD.1- -- -b13 black
+  - AD.2- -- -b14 black
+  - -t29 -- -b29 black
+  - +t30 -- +b30 red
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/08-radio-ic.svg)
 
-- 上の赤レール = +5V (AD の V+)、青レール = GND (AD の GND)。28 列で上下の − レールを渡している
-- IC1 は 10・11・12 列 (PIN 1 = GND、PIN 2 = RF 入力、PIN 3 = 出力+電源)。上の注意のとおり、
-  挿す前に入手した個体のデータシートでピンの並びを確かめる
-- 11 列がタンクの上端 (VC1・アンテナ・L1) で、そのまま PIN 2 へ入る
-- PIN 3 (12 列) から Rload で +5V (16 列) へ、Cout で 15 列へ。15 列から緑の線で 18 列へ回って溝を越え
-  (溝に刷った IC の字をよけるため)、j18 から EAR の A 端子へ。Csup は + のピンを 16 列に挿す
+- 上の赤レール = +5V、青レール = GND。AD3 は下に置き、V+ と GND は下のレールへ入れる。
+  上下の + レールは 30 列の赤い線、− レールは 29 列の黒い線でつなぐ
+- IC1 は下のブロックの h 行の 10・11・12 列 (PIN 1 = GND、PIN 2 = RF 入力、PIN 3 = 出力+電源)。上の注意のとおり、
+  挿す前に入手した個体のデータシートでピンの並びを確かめる。PIN 1 (10 列) は j10 から下の − レールへ
+- 9 列と 11 列が同調回路の上端。VC1 の A を 9 列 (`a9`)、アンテナを 11 列 (`a11`) に入れ、b 行の黄色の短い線で 9 列と 11 列をつなぐ。
+  L1 は 5〜9 列 (5 列は上の − レールへ)。11 列は溝をまたぐ黄色の短い線で PIN 2 (下の 11 列) へ入る
+- PIN 3 (12 列) は溝をまたぐ紫の短い線で上の 12 列へ出す。上の 12 列から Rload で +5V (16 列) へ、Cout で 15 列へ。
+  Csup は + のピンを 16 列に挿し、− のピン (20 列) は上の − レールへ。15 列は溝をまたぐ緑の線で下の 15 列へ渡し、
+  i 行の短い線で 16 列にも分け、j16 から EAR の A 端子へ
 
-- AD3 を足した。V+ (Supplies、5 V) が上の赤レール、GND が青レールにつながる。この回路の電流は 0.25 mA ほどで、
+- AD3 を足した。V+ (Supplies、5 V) が + レール、GND が − レールにつながる。この回路の電流は 0.25 mA ほどで、
   AD3 の V+ の上限 (約 50 mA) に十分収まる。放送の電波が弱くて確かめにくいときは、W1 (Wavegen) の AM 信号を
-  RS (1 kΩ) を通して同調回路 (11 列) へ入れる試験ができる (そのときは ANT の線を外す)。
-  W1 の線は 9 列 (RS の左端) へ、2+ も同じ 9 列へ当てて、入れた信号を見る。1+ は Cout の出口の列 (15 列。直流を切ったあとの音声を見る)、1−・2− は上の青レールへ
+  RS (1 kΩ) を通して同調回路 (9 列) へ入れる試験ができる (そのときは ANT の線を外す)。
+  RS は 9 列で溝をまたいで縦に挿し (`e9` と `g9`)、W1 の線は下の 9 列 (`j9`) へ入れる。2+ は i 行の短い線で 8 列へ分けた `j8` に当てて、入れた信号を見る。
+  1+ は Cout の出口の列 (下の 15 列、`j15`。直流を切ったあとの音声を見る)、1−・2− は下の − レールへ
 - ブレッドボードの電流は 0.25 mA で、ブレッドボードの範囲 (1 穴 200 mA・ブレッドボード全体 500 mA) に十分収まる。周波数は 1 MHz 前後で 3 MHz 以下
 
 ## 部品
