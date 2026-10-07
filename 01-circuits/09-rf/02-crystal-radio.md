@@ -84,47 +84,50 @@ wires:
 title: 図2 ブレッドボードに組む
 board: half
 parts:
-  AD:
-    type: device
-    at: top
-    label: Analog Discovery 3 (試験)
-    pins: [GND, W1, 1+, 1-, 2+, 2-]
-  VC1:
-    type: device
-    at: top
-    label: ポリバリコン 260pF
-    pins: [E, A]
   ANT:
     type: device
     at: top
     label: アンテナ
     pins: ["1"]
+  VC1:
+    type: device
+    at: top
+    label: ポリバリコン 260pF
+    pins: [A, E]
   EAR:
     type: device
     at: top
     label: クリスタルイヤホン
     pins: [A, B]
+  AD:
+    type: device
+    at: bottom
+    label: Analog Discovery 3 (試験)
+    pins: [W1, 2+, 1+, 1-, 2-, GND]
   L1: inductor/axial b5 b9 250u
-  D1: diode e5(A) e12(K) 1N60
+  D1: diode d5(A) d12(K) 1N60
   C2: capacitor/ceramic b12 b14 1n
-  R1: resistor d12 d17 100k
-  RS: resistor d1 d5 1k
+  R1: resistor h12 h17 100k
+  RS: resistor e3 i3 1k
 wires:
-  - VC1.E -- -t3 black
-  - VC1.A -- a5 yellow
-  - c5 -- c3 yellow
   - ANT.1 -- a3 yellow
-  - AD.W1 -- a1 orange
-  - AD.2+ -- b3 blue
-  - AD.1+ -- c12 blue
-  - AD.1- -- -t22 black
-  - AD.2- -- -t24 black
-  - AD.GND -- -t26 black
+  - c3 -- c5 yellow
+  - VC1.A -- a5 yellow
+  - VC1.E -- -t7 black
   - a9 -- -t9 black
   - EAR.A -- a12 green
+  - EAR.B -- -t16 black
   - a14 -- -t14 black
-  - a17 -- -t17 black
-  - EAR.B -- -t20 black
+  - e5 -- f5 yellow
+  - e12 -- f12 green
+  - AD.W1 -- j3 orange
+  - AD.2+ -- j5 blue
+  - AD.1+ -- j12 blue
+  - AD.1- -- -b14 black
+  - AD.2- -- -b15 black
+  - AD.GND -- -b16 black
+  - j17 -- -b17 black
+  - -t30 -- -b30 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/02-crystal-radio.svg)
@@ -132,13 +135,16 @@ wires:
 - **アンテナ線は 5〜10m** の被覆線を屋外か窓際に張る。長いほど受かる局が増える
 - 上の -t レール (青) は**実物の大地アース**につなぐ。水道管やアース棒に線を
   這わせる (回路の共通線というだけでなく、本当に大地へ電流を逃がす経路)
-- 5 列がアンテナのネット (VC1 の A・アンテナ・L1 の左リード・D1 のアノード)。L1 の右リード (9 列) は − レールへ
-- 12 列が検波出力のネット (D1 のカソード・C2 と R1 の左リード・EAR の A)。C2 の右リード (14 列)・
-  R1 の右リード (17 列)・EAR の B は − レールへ
+- 3 列と 5 列がアンテナのネット (ANT・VC1 の A・L1 の左リード・D1 のアノード・RS の上のリード)。
+  3 列と 5 列は c 行の黄色の短い線でつなぐ。L1 の右リード (9 列) は − レールへ
+- 12 列が検波出力のネット (D1 のカソード・C2 の左リード・EAR の A)。C2 の右リード (14 列) と EAR の B は上の − レールへ。
+  12 列は溝をまたぐ緑の短い線で下の 12 列へ渡し、R1 (100 kΩ) は下の h 行に置く。R1 の右リード (17 列) は下の − レールへ
+- 上と下の − レールは 30 列の黒い線でつなぐ
 - AD3 は、放送の電波が弱くて波形が見えにくいときの**試験用**に足した。W1 (Wavegen) の AM 信号を、
-  RS (1 kΩ) を通して同調回路 (5 列) へ入れる。アンテナの代わりに W1 を使うので、試験のときは ANT の線を外してよい。
-  AD3 の 1+ (Scope CH1) を検波出力 (12 列)、2+ (CH2) を同調回路 (3 列。5 列と黄色の短い線でつないである) に当て、
-  1−・2−・GND は − レールへ入れる。電池は無いので Supplies は使わない
+  RS (1 kΩ) を通して同調回路へ入れる。RS は 3 列で溝をまたいで縦に挿し (`e3` と `i3`)、W1 は下の 3 列 (`j3`) へ入れる。
+  アンテナの代わりに W1 を使うので、試験のときは ANT の線を外してよい。
+  5 列は溝をまたぐ黄色の短い線で下の 5 列へ渡し、AD3 の 2+ (CH2) を同調回路 (`j5`) に当てる。
+  1+ (CH1) は検波出力 (下の 12 列、`j12`) に当てる。1−・2−・GND は下の − レールへ入れる。電池は無いので Supplies は使わない
 - 1 つの穴にはピンか線を 1 本だけ挿す
 
 ## 計器の設定
