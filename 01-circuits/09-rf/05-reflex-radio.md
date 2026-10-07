@@ -107,16 +107,16 @@ wires:
 title: 図2 ブレッドボードに組む
 board: half
 parts:
-  VC1:
-    type: device
-    at: top
-    label: ポリバリコン 260pF
-    pins: [E, A]
   ANT:
     type: device
     at: top
     label: アンテナ
     pins: ["1"]
+  VC1:
+    type: device
+    at: top
+    label: ポリバリコン 260pF
+    pins: [A, E]
   EAR:
     type: device
     at: bottom
@@ -124,21 +124,22 @@ parts:
     pins: [A, B]
   L1: inductor/axial b8 b12 250u
   C1: capacitor/ceramic d8 d14 0.01u
-  Q1: transistor j14(B) j15(C) j16(E) 2SC1815
+  Q1: transistor j14(B) j15(C) j16(E) 2SC1815 cap=left
   Rf: resistor b14 b19 470k
   Rc: resistor d18 d15 1.5k
   D1: diode a18(A) a24(K) 1N60
   Cf: capacitor/ceramic c19 c24 0.1u
   C3: capacitor/ceramic b24 b28 0.001u
   R3: resistor d24 d28 100k
-  Rb: resistor h14 h18 180k
+  Rb: resistor h14 h18 180k cap=left
   L2: inductor/axial i18 i21 1m
   C5: capacitor/ceramic f21 f24 0.1u
   C6: capacitor/ceramic h24 h28 0.001u
 wires:
-  - ANT.1 -- c8 yellow
+  - ANT.1 -- a6 yellow
+  - c6 -- c8 yellow
   - VC1.A -- a8 yellow
-  - VC1.E -- -t6 black
+  - VC1.E -- -t10 black
   - a12 -- -t12 black
   - e14 -- f14 orange
   - e18 -- f18 blue
@@ -156,7 +157,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/05-reflex-radio.svg)
 
 - 上の赤レール = +5V (USB や電池)、青レール = GND。30 列で上下の − レールを渡している
-- 前段は 9-3 と同じく、8 列にアンテナ・VC1・L1・C1 をまとめる
+- 前段は 9-3 と同じく、8 列に VC1・L1・C1 をまとめる。アンテナは 6 列 (`a6`) に入れ、c 行の黄色の短い線で 8 列へつなぐ
 - Q1 は下のブロックの j 行に、隣り合う 3 列 (14 列 B・15 列 C・16 列 E) へ挿す。ピンを大きく曲げずに挿せる間隔。
   2SC1815 は平らな面を手前にすると左から E・C・B なので、平らな面を上のブロック側へ向けて挿すと左から B・C・E になる
 - ベース (14 列) は e–f の短い線で上のブロックへも出す。コレクタ (15 列) は g 行の青い線で 18 列へ渡し、
