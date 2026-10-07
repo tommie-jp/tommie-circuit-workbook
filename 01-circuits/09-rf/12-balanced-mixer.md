@@ -113,7 +113,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [V+, GND, W2, W1, 1-, 1+, 2+, 2-]
+    pins: [W2, V+, GND, W1, 1-, 1+, 2+, 2-]
   U1: dip8 @ e15 SA612
   C6: capacitor/ceramic c12 c15 100n
   C3: capacitor/ceramic a17 a21 10n
@@ -122,8 +122,8 @@ parts:
   C2: capacitor/ceramic j16 -b16 10n
   C4: capacitor/ceramic h18 h25 100n
 wires:
-  - AD.V+ -- +t1 red
-  - AD.GND -- -t2 black
+  - AD.V+ -- +t11 red
+  - AD.GND -- -t13 black
   - +t15 -- a15 red
   - a12 -- -t12 black
   - AD.W2 -- a9 yellow
