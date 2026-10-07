@@ -179,14 +179,14 @@ parts:
     at: top
     label: Analog Discovery
     pins: [V+, GND, 2+, W1, 2-, 1-, 1+]
-  R1: resistor b3 b9 68k
+  R1: resistor b3 b9 68k shift=down
   R2: resistor c9 c13 18k
   RC: resistor b15 b20 22k
-  Q1: transistor e19(B) e20(C) e21(E) 2SC1815
+  Q1: transistor e19(B) e20(C) e21(E) 2SC1815 cap=below
   CIN: capacitor/ceramic d5 d9 0.1u
-  RE: resistor a21 -t21 4.7k
+  RE: resistor a21 -t21 4.7k cap=right
   CE: capacitor/electrolytic b21(+) b29(-) 100uF
-  CC: capacitor/ceramic c20 c23 2.2n
+  CC: capacitor/ceramic c20 c23 2.2n cap=right
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black
@@ -194,7 +194,7 @@ wires:
   - AD.2+ -- b5 blue
   - AD.2- -- -t7 black
   - AD.1+ -- a20 orange
-  - AD.1- -- -t18 black
+  - AD.1- -- -t12 black
   - +t3 -- a3 red
   - a13 -- -t13 black
   - e9 -- d19 orange [v10]
