@@ -158,25 +158,26 @@ parts:
     at: bottom
     label: クリスタルイヤホン
     pins: [A, B]
-  CT: capacitor/ceramic b16 b19 10p
+  CT: capacitor/ceramic c15 c19 10p
   C1: capacitor/ceramic d22 d25 0.01u
   Rb1: resistor b25 b29 220k
-  Q1: transistor e25(B) e29(C) e33(E) 2SC1815
+  Q1: transistor e25(B) e29(C) e33(E) 2SC1815 cap=below
   Rc1: resistor a29 +t29 1.5k
   D1: diode c29(A) c41(K) 1N60
   R3: resistor a41 -t41 4.7k
   C3: capacitor/ceramic b41 b45 2200p
   C4: capacitor/film d41 d47 1u
-  Q2: transistor e47(B) e48(C) e49(E) 2SC1815
-  Rb2: resistor c47 c53 470k
-  Rc2: resistor a48 +t48 4.7k
+  Q2: transistor e47(B) e48(C) e49(E) 2SC1815 cap=below
+  Rb2: resistor c47 c53 470k cap=below:1.5,0
+  Rc2: resistor a48 +t48 4.7k cap=left
 wires:
   - AD.V+ -- +t3 red
   - AD.GND -- -t1 black
-  - AD.W1 -- a16 yellow
+  - AD.W1 -- a15 yellow
   - VC1.E -- -t17 black
   - VC1.A -- a19 yellow
-  - BAR.P1 -- c19 yellow
+  - BAR.P1 -- a20 yellow
+  - b19 -- b20 yellow
   - BAR.P2 -- -t37 black
   - BAR.S1 -- a22 yellow
   - BAR.S2 -- -t39 black
@@ -188,7 +189,8 @@ wires:
   - a49 -- -t49 black
   - b48 -- b53 orange
   - e53 -- f53 green
-  - ADM.1+ -- i53 orange
+  - h53 -- h52 green
+  - ADM.1+ -- j52 orange
   - ADM.1- -- -b40 black
   - EAR.A -- j53 green
   - EAR.B -- -b55 black
@@ -206,8 +208,9 @@ Analog Discovery は 1 台だが、線が交わらないよう図では箱を 2 
 フルサイズのブレッドボードには、電源レールが中央 (31 列と 32 列の間) で左右に切れている品がある。
 30〜32 列の短い線 (+ は赤、− は黒) で、上の + と −、下の − の切れ目を渡しておく (切れていないブレッドボードでも害は無い)。
 
-- **同調 (16〜22 列)**: W1 (黄) を `a16` に挿し、C<sub>T</sub> (b16–b19) を通して 19 列へ。
-  19 列にポリバリコンの A 端子 (`a19`) とバーアンテナの 1 次 P1 (`c19`) が並ぶ。
+- **同調 (15〜22 列)**: W1 (黄) を `a15` に挿し、C<sub>T</sub> (c15–c19) を通して 19 列へ。
+  19 列にポリバリコンの A 端子 (`a19`) が入る。バーアンテナの 1 次 P1 は `a20` に挿し、b 行の黄色の短い線 (b19–b20) で 19 列へつなぐ
+  (2 本の線が同じ列の穴の上を通らないようにするため)。
   E 端子と P2・S2 は上の − レールへ。2 次の S1 は `a22`。黄はアンテナ側の高周波の線
 - **CH2**: 22 列 (2 次巻線の出力、C1 の手前) を e–f の青い線で下のブロックへ渡し、`j22` に 2+ を挿す。回路図の CH2 と同じ所
 - **Q1 (上のブロックの e 行)**: 25 列 B・29 列 C・33 列 E。
@@ -219,7 +222,8 @@ Analog Discovery は 1 台だが、線が交わらないよう図では箱を 2 
   - ベース (47 列): C4 の右リード (`d47`) と Rb2 (c47–c53) の左リード
   - コレクタ (48 列): Rc2 を `a48` から + レールへ。53 列に Rb2 の右リード
   - エミッタ (49 列): `a49` から − レールへ
-  - 53 列の e–f を緑の線で下のブロックへ渡し、クリスタルイヤホンの A を `j53`、CH1 の 1+ (橙) を `i53`、イヤホンの B を下の − レールへ
+  - 53 列の e–f を緑の線で下のブロックへ渡し、クリスタルイヤホンの A を `j53`、イヤホンの B を下の − レールへ。
+    CH1 の 1+ (橙) は、h 行の緑の短い線 (h53–h52) で 52 列へ分けた `j52` に挿す (イヤホンの線と交わらないようにするため)
 - AD の 2−・1− (黒) は下の − レールへ。放送を聞くときは W1・CH1・CH2 の線と C<sub>T</sub> を抜く
 - 高周波の部分 (16〜41 列) の線はできるだけ短く。長いと Q1 の出力が入力側へ回り込んで発振しやすい
 
