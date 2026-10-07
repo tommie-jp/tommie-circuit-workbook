@@ -228,7 +228,7 @@ parts:
     type: device
     at: bottom
     label: AD3 Scope
-    pins: [1+, 1-, 2+, 2-]
+    pins: [1+, 1-, 2-, 2+]
   U1: dip8 @ e13 SA612
   U2: dip8 @ e27 SA612
   U3: dip8 @ e38 MCP6002
