@@ -53,18 +53,18 @@ title: 図1 アンテナの給電点に 1 MΩ の放電抵抗
 parts:
   M1:
     type: device
-    at: b2
+    at: 2,2
     label: NanoVNA
     pins: [CH0, CH1]
     turn: mirror
-  R1: resistor a6i0i0 c6i0i0 1M
-  G1: ground c6i0i0
-  A1: antenna a8i0i0
+  R1: resistor 6,1.88 6,3.88 1M
+  G1: ground 6,3.88
+  A1: antenna 8,1.88
 wires:
-  - M1.CH0 -| a6i0i0
-  - a6i0i0 -- a8i0i0
+  - M1.CH0 -| 6,1.88
+  - 6,1.88 -- 8,1.88
 notes:
-  - text a4a5 blue center: 同軸ケーブル
+  - text 4.5,1 blue center: 同軸ケーブル
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/circuit/04-esd-antenna-discharge.svg)

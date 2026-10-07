@@ -33,14 +33,14 @@ title: 図1 磁石を回す駆動モータ
 style:
   standard: jis
 parts:
-  B1: battery c1 e1 4.5
-  S1: switch c1 c3
-  M1: motor c3 e3
-  G1: ground e1
+  B1: battery 1,3 1,5 4.5
+  S1: switch 1,3 3,3
+  M1: motor 3,3 3,5
+  G1: ground 1,5
 wires:
-  - e1 -- e3
+  - 1,5 -- 3,5
 notes:
-  - text f2: "モータの軸に磁石を 2 個、極を向かい合わせて付ける"
+  - text 2,6: "モータの軸に磁石を 2 個、極を向かい合わせて付ける"
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/03-arago-disk.svg)

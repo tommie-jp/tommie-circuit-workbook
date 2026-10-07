@@ -19,15 +19,15 @@ board: BB
 ```circuit
 title: 図1 LED の電流を 1 Ω で測る
 parts:
-  V1: vsource a1 d1 5
-  R1: resistor a1 a3 330
-  D1: led a3 a5
-  Rs: resistor a5 d5 1
-  M1: voltmeter a7 d7 l=$\mathrm{CH1}$
-  G1: ground d1
+  V1: vsource 1,1 1,4 5
+  R1: resistor 1,1 3,1 330
+  D1: led 3,1 5,1
+  Rs: resistor 5,1 5,4 1
+  M1: voltmeter 7,1 7,4 l=$\mathrm{CH1}$
+  G1: ground 1,4
 wires:
-  - a5 -- a7
-  - d1 -- d5 -- d7
+  - 5,1 -- 7,1
+  - 1,4 -- 5,4 -- 7,4
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/04-differential-current.svg)

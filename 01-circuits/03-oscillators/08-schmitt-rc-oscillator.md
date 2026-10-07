@@ -24,24 +24,24 @@ IC のほかは部品 2 個 (Rf と C1) で組める、いちばん手軽な CMO
 ```circuit
 title: 図1 40106 の RC 発振
 parts:
-  U1: not d3 40106
-  U2: not d6 40106
-  Rf: resistor b2 b4 100k
-  C1: capacitor d2 f2 10n
-  GC1: ground f2
-  R2: resistor d7 d9 1k
-  D1: led d9 f9 red
-  GD1: ground f9
-  VDD: vcc f5 5V
-  C2: capacitor f5 h5 100n
-  GC2: ground h5
+  U1: not 3,4 40106
+  U2: not 6,4 40106
+  Rf: resistor 2,2 4,2 100k
+  C1: capacitor 2,4 2,6 10n
+  GC1: ground 2,6
+  R2: resistor 7,4 9,4 1k
+  D1: led 9,4 9,6 red
+  GD1: ground 9,6
+  VDD: vcc 5,6 5V
+  C2: capacitor 5,6 5,8 100n
+  GC2: ground 5,8
 wires:
-  - b2 -- d2 -- U1.in
-  - b4 -- d4
-  - U1.out -- d4 -- U2.in
-  - U2.out -- d7
+  - 2,2 -- 2,4 -- U1.in
+  - 4,2 -- 4,4
+  - U1.out -- 4,4 -- U2.in
+  - U2.out -- 7,4
 notes:
-  - text g7 blue left: "U1 の 14 番 (VDD) と 7 番 (VSS) の間"
+  - text 7,7 blue left: "U1 の 14 番 (VDD) と 7 番 (VSS) の間"
 style:
   grid: on
   pitch: 1.2

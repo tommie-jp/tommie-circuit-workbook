@@ -43,48 +43,48 @@ board: BB
 ```circuit
 title: 図1 AGC 付きの 1 段増幅 (出力の大きさで G を引き下げる)
 parts:
-  VCC: vcc a5 5V
-  R1: resistor a5 d5 68k
-  R2: resistor d5 g5 15k
-  RC: resistor a7 c7 2.2k
-  Q1: npn d7
-  CIN: capacitor d3 d5 100n
-  W1: sine d1 f1 l=$\mathrm{W1}$
-  M2: voltmeter d3 f3 l=$\mathrm{CH2}$
-  G1: ground f3
-  RE1: resistor f7 h7 100
-  RE2: resistor h7 k7 390
-  CE: ecap h10 k10 10u
-  G2: ground k7
-  G3: ground k10
-  COUT: capacitor c13 c16 100n
-  M1: voltmeter c18 e18 l=$\mathrm{CH1}$
-  G4: ground e18
-  CC: capacitor f13 j13 10n
-  D1: diode j13 j16 1N4148
-  G5: ground j16
-  D2: diode n13 j13 1N4148
-  RB: resistor n5 q5 4.7k
-  G6: ground q5
-  CG: ecap n8 q8 10u
-  G7: ground q8
+  VCC: vcc 5,1 5V
+  R1: resistor 5,1 5,4 68k
+  R2: resistor 5,4 5,7 15k
+  RC: resistor 7,1 7,3 2.2k
+  Q1: npn 7,4
+  CIN: capacitor 3,4 5,4 100n
+  W1: sine 1,4 1,6 l=$\mathrm{W1}$
+  M2: voltmeter 3,4 3,6 l=$\mathrm{CH2}$
+  G1: ground 3,6
+  RE1: resistor 7,6 7,8 100
+  RE2: resistor 7,8 7,11 390
+  CE: ecap 10,8 10,11 10u
+  G2: ground 7,11
+  G3: ground 10,11
+  COUT: capacitor 13,3 16,3 100n
+  M1: voltmeter 18,3 18,5 l=$\mathrm{CH1}$
+  G4: ground 18,5
+  CC: capacitor 13,6 13,10 10n
+  D1: diode 13,10 16,10 1N4148
+  G5: ground 16,10
+  D2: diode 13,14 13,10 1N4148
+  RB: resistor 5,14 5,17 4.7k
+  G6: ground 5,17
+  CG: ecap 8,14 8,17 10u
+  G7: ground 8,17
 wires:
-  - a5 -- a7
-  - d1 -- d3
-  - f1 -- f3
-  - d5 -- Q1.B
-  - c7 -- Q1.C
-  - c7 -- c13
-  - Q1.E -- f7
-  - h7 -- h10
-  - c13 -- f13
-  - c16 -- c18
-  - g5 -- n5
-  - n5 -- n8
-  - n8 -- n13
+  - 5,1 -- 7,1
+  - 1,4 -- 3,4
+  - 1,6 -- 3,6
+  - 5,4 -- Q1.B
+  - 7,3 -- Q1.C
+  - 7,3 -- 13,3
+  - Q1.E -- 7,6
+  - 7,8 -- 10,8
+  - 13,3 -- 13,6
+  - 16,3 -- 18,3
+  - 5,7 -- 5,14
+  - 5,14 -- 8,14
+  - 8,14 -- 13,14
 notes:
-  - text d7h5 small left: 2SC1815
-  - text m4a5 small left: G
+  - text 7.5,4.7 small left: 2SC1815
+  - text 4.5,13 small left: G
 style:
   pitch: 1.0
 ```

@@ -20,15 +20,15 @@ CH0 の先につなぐ終端 (負荷) を変えて、SWR (定在波比) がど�
 ```circuit
 title: 図1 CH0 の先に 50 Ω の終端 (100 Ω 2 本並列)
 parts:
-  J1: sma b2 mirror
-  R1: resistor b4 d4 100
-  R2: resistor b6 d6 100
-  G1: ground c2
-  G2: ground d6
+  J1: sma 2,2 mirror
+  R1: resistor 4,2 4,4 100
+  R2: resistor 6,2 6,4 100
+  G1: ground 2,3
+  G2: ground 6,4
 wires:
-  - J1.1 -- b4 -- b6
-  - J1.2 -- c2
-  - d4 -- d6
+  - J1.1 -- 4,2 -- 6,2
+  - J1.2 -- 2,3
+  - 4,4 -- 6,4
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/05-swr-termination.svg)

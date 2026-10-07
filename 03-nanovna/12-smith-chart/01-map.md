@@ -58,14 +58,14 @@ Smith はそれを「何 Ω (オーム) の抵抗と、何 Ω のコイルかコ
 ```circuit
 title: 図1 の回路 (25 Ω、12 Ω と 13 Ω の直列)
 parts:
-  J1: sma c2 mirror
-  G0: ground d2
-  R1: resistor c5 c9 12
-  R2: resistor c9 e9 13
-  G1: ground e9
+  J1: sma 2,3 mirror
+  G0: ground 2,4
+  R1: resistor 5,3 9,3 12
+  R2: resistor 9,3 9,5 13
+  G1: ground 9,5
 wires:
-  - J1.1 -- c5
-  - J1.2 -- d2
+  - J1.1 -- 5,3
+  - J1.2 -- 2,4
 style:
   pitch: 1.0
 ```
@@ -91,13 +91,13 @@ markers:
 ```circuit
 title: 図2 の回路 (100 Ω)
 parts:
-  J1: sma c2 mirror
-  G0: ground d2
-  R1: resistor c5 e5 100
-  G1: ground e5
+  J1: sma 2,3 mirror
+  G0: ground 2,4
+  R1: resistor 5,3 5,5 100
+  G1: ground 5,5
 wires:
-  - J1.1 -- c5
-  - J1.2 -- d2
+  - J1.1 -- 5,3
+  - J1.2 -- 2,4
 style:
   pitch: 1.0
 ```
@@ -123,13 +123,13 @@ markers:
 ```circuit
 title: 図3 の回路 (コイル 8.2 µH)
 parts:
-  J1: sma c2 mirror
-  G0: ground d2
-  L1: inductor c5 e5 8.2u
-  G1: ground e5
+  J1: sma 2,3 mirror
+  G0: ground 2,4
+  L1: inductor 5,3 5,5 8.2u
+  G1: ground 5,5
 wires:
-  - J1.1 -- c5
-  - J1.2 -- d2
+  - J1.1 -- 5,3
+  - J1.2 -- 2,4
 style:
   pitch: 1.0
 ```
@@ -155,13 +155,13 @@ markers:
 ```circuit
 title: 図4 の回路 (コンデンサ 3.3 nF)
 parts:
-  J1: sma c2 mirror
-  G0: ground d2
-  C1: capacitor c5 e5 3.3n
-  G1: ground e5
+  J1: sma 2,3 mirror
+  G0: ground 2,4
+  C1: capacitor 5,3 5,5 3.3n
+  G1: ground 5,5
 wires:
-  - J1.1 -- c5
-  - J1.2 -- d2
+  - J1.1 -- 5,3
+  - J1.2 -- 2,4
 style:
   pitch: 1.0
 ```

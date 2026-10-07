@@ -21,26 +21,26 @@ era: 今
 ```circuit
 title: 図1 モータを MOSFET で PWM 駆動する (CH2 は Q1 のドレインの電圧)
 parts:
-  R3: resistor a11 c11 15
-  B1: battery c11 e11 5
-  M1: motor a5 c5
-  D1: diode c7 a7 1N4001
-  Q1: nmos-e c5i0b0 2N7000
-  R1: resistor d1 d3 100
-  R2: resistor d3 f3 10k
-  PWM: square d1 f1 5 l=$\mathrm{PWM}$
-  G1: ground f5
-  G2: ground f3
-  G3: ground f1
-  G4: ground e11
-  M2: voltmeter c9 e9 l=$\mathrm{CH2}$
-  G5: ground e9
+  R3: resistor 11,1 11,3 15
+  B1: battery 11,3 11,5 5
+  M1: motor 5,1 5,3
+  D1: diode 7,3 7,1 1N4001
+  Q1: nmos-e 5,3.81 2N7000
+  R1: resistor 1,4 3,4 100
+  R2: resistor 3,4 3,6 10k
+  PWM: square 1,4 1,6 5 l=$\mathrm{PWM}$
+  G1: ground 5,6
+  G2: ground 3,6
+  G3: ground 1,6
+  G4: ground 11,5
+  M2: voltmeter 9,3 9,5 l=$\mathrm{CH2}$
+  G5: ground 9,5
 wires:
-  - a5 -- a7 -- a11
-  - c5 -- c7 -- c9
-  - c5 -- Q1.D
-  - Q1.S -- f5
-  - d3 -| Q1.G
+  - 5,1 -- 7,1 -- 11,1
+  - 5,3 -- 7,3 -- 9,3
+  - 5,3 -- Q1.D
+  - Q1.S -- 5,6
+  - 3,4 -| Q1.G
 style:
   grid: on
   pitch: 1.2

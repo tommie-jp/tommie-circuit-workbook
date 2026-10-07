@@ -48,16 +48,16 @@ title: 図1 校正に使った Load を測り直す
 parts:
   M1:
     type: device
-    at: b2
+    at: 2,2
     label: NanoVNA
     pins: [CH0, CH1]
     turn: mirror
-  R1: resistor a5i0i0 c5i0i0 50
-  G1: ground c5i0i0
+  R1: resistor 5,1.88 5,3.88 50
+  G1: ground 5,3.88
 wires:
-  - M1.CH0 -| a5i0i0
+  - M1.CH0 -| 5,1.88
 notes:
-  - text c5f5 blue: Load
+  - text 5.5,3.5 blue: Load
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/circuit/09-cal-lifetime.svg)

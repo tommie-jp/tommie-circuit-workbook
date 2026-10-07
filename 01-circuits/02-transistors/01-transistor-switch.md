@@ -28,24 +28,24 @@ hFE が 100 なら、ベースに 1 mA 流すとコレクタに最大 100 mA 流
 ```circuit
 title: 図1 NPN トランジスタで LED をスイッチする (W1 で入れ、CH2 と CH1 で比べる)
 parts:
-  VCC: vcc b9 5V
-  R1: resistor b9 d9 330
-  D1: led d9 f9
-  Q1: npn g9
-  RB: resistor g6 g8 10k
-  W1: square g2 i2 l=$\mathrm{W1}$
-  G1: ground i2
-  M2: voltmeter g4 i4 l=$\mathrm{CH2}$
-  G3: ground i4
-  G2: ground h9
-  M1: voltmeter f11 h11 l=$\mathrm{CH1}$
-  G4: ground h11
+  VCC: vcc 9,2 5V
+  R1: resistor 9,2 9,4 330
+  D1: led 9,4 9,6
+  Q1: npn 9,7
+  RB: resistor 6,7 8,7 10k
+  W1: square 2,7 2,9 l=$\mathrm{W1}$
+  G1: ground 2,9
+  M2: voltmeter 4,7 4,9 l=$\mathrm{CH2}$
+  G3: ground 4,9
+  G2: ground 9,8
+  M1: voltmeter 11,6 11,8 l=$\mathrm{CH1}$
+  G4: ground 11,8
 wires:
-  - g2 -- g4 -- g6
-  - g8 -- Q1.B
-  - f9 -- Q1.C
-  - Q1.E -- h9
-  - f9 -- f11
+  - 2,7 -- 4,7 -- 6,7
+  - 8,7 -- Q1.B
+  - 9,6 -- Q1.C
+  - Q1.E -- 9,8
+  - 9,6 -- 11,6
 style:
   grid: on
   pitch: 1.2

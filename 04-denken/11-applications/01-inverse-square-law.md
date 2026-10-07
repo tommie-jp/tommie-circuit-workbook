@@ -28,18 +28,18 @@ title: 図1 LED とフォトダイオード
 style:
   standard: jis
 parts:
-  B1: battery a1 e1 4.5
-  R1: resistor a1 a3 240
-  D1: led a3 e3
-  G1: ground e1
-  V2: vsource a7 e7 5
-  D2: photodiode a9 a7
-  R2: resistor a9 e9 100k
-  M1: voltmeter a11 e11 l=$\mathrm{CH1}$
+  B1: battery 1,1 1,5 4.5
+  R1: resistor 1,1 3,1 240
+  D1: led 3,1 3,5
+  G1: ground 1,5
+  V2: vsource 7,1 7,5 5
+  D2: photodiode 9,1 7,1
+  R2: resistor 9,1 9,5 100k
+  M1: voltmeter 11,1 11,5 l=$\mathrm{CH1}$
 wires:
-  - e1 -- e3
-  - e7 -- e9 -- e11
-  - a9 -- a11
+  - 1,5 -- 3,5
+  - 7,5 -- 9,5 -- 11,5
+  - 9,1 -- 11,1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/11-applications/circuit/01-inverse-square-law.svg)

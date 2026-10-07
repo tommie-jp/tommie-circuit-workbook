@@ -23,20 +23,20 @@ title: 図1 ジャンパ 1 本のスルーと負荷抵抗
 parts:
   AD:
     type: device
-    at: a1
+    at: 1,1
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
-  J1: short c3 c6
-  Rload: resistor c6 c9 1k
-  G1: ground c11
+  J1: short 3,3 6,3
+  Rload: resistor 6,3 9,3 1k
+  G1: ground 11,3
 wires:
-  - AD.W1 -| c3
-  - AD.1+ -| c3
-  - AD.1- -| c11
-  - AD.2+ -| c6
-  - AD.2- -| c11
-  - c9 -- c11
-  - AD.GND -| c11
+  - AD.W1 -| 3,3
+  - AD.1+ -| 3,3
+  - AD.1- -| 11,3
+  - AD.2+ -| 6,3
+  - AD.2- -| 11,3
+  - 9,3 -- 11,3
+  - AD.GND -| 11,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/01-jumper-s21.svg)

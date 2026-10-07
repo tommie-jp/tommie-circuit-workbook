@@ -48,37 +48,37 @@ device: H4
 ```circuit
 title: 図1 ERA-3SM+ の 1 段 (5 V、Rbias 51 Ω + RFC)
 parts:
-  BAT: battery a1 g1 5 l=$\mathrm{BAT}$
-  J1: sma e3 mirror CH0
-  C1: capacitor e4 e5 1n
+  BAT: battery 1,1 1,7 5 l=$\mathrm{BAT}$
+  J1: sma 3,5 mirror CH0
+  C1: capacitor 4,5 5,5 1n
   U1:
     type: ic3
-    at: e7
+    at: 7,5
     label: ERA-3SM+
     pins: [IN, GND, OUT]
-  Rb: resistor a10 b10 51
-  L2: inductor b10 c10 1u
-  L1: inductor c10 d10 100n
-  Cbp: capacitor b12 c12 10n
-  C2: capacitor e11 e12 1n
-  J2: sma e14 CH1
-  GBAT: ground g1
-  GJ1: ground f3
-  GU1: ground f7
-  GCbp: ground c12
-  GJ2: ground f14
+  Rb: resistor 10,1 10,2 51
+  L2: inductor 10,2 10,3 1u
+  L1: inductor 10,3 10,4 100n
+  Cbp: capacitor 12,2 12,3 10n
+  C2: capacitor 11,5 12,5 1n
+  J2: sma 14,5 CH1
+  GBAT: ground 1,7
+  GJ1: ground 3,6
+  GU1: ground 7,6
+  GCbp: ground 12,3
+  GJ2: ground 14,6
 wires:
-  - a1 -- a10
-  - J1.1 -- e4
-  - J1.2 -- f3
-  - e5 |- U1.IN
-  - U1.GND |- f7
-  - U1.OUT -| e10
-  - e10 -- d10
-  - e10 -- e11
-  - b10 -- b12
-  - e12 -- e14 -- J2.1
-  - J2.2 -- f14
+  - 1,1 -- 10,1
+  - J1.1 -- 4,5
+  - J1.2 -- 3,6
+  - 5,5 |- U1.IN
+  - U1.GND |- 7,6
+  - U1.OUT -| 10,5
+  - 10,5 -- 10,4
+  - 10,5 -- 11,5
+  - 10,2 -- 12,2
+  - 12,5 -- 14,5 -- J2.1
+  - J2.2 -- 14,6
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/circuit/06-mmic-lna.svg)

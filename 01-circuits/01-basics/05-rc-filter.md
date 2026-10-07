@@ -30,13 +30,13 @@ board: BB
 ```circuit
 title: 図1 RC ローパス
 parts:
-  IN: port a1
-  R1: resistor a1 a2 1.5k
-  C1: capacitor a2 b2 100n
-  OUT: port a3
-  G1: ground b2
+  IN: port 1,1
+  R1: resistor 1,1 2,1 1.5k
+  C1: capacitor 2,1 2,2 100n
+  OUT: port 3,1
+  G1: ground 2,2
 wires:
-  - a2 -- a3
+  - 2,1 -- 3,1
 style:
   grid: on
 ```
@@ -50,13 +50,13 @@ style:
 ```circuit
 title: 図2 RC ハイパス
 parts:
-  IN: port a1
-  C2: capacitor a1 a2 100n
-  R2: resistor a2 b2 1.5k
-  OUT: port a3
-  G2: ground b2
+  IN: port 1,1
+  C2: capacitor 1,1 2,1 100n
+  R2: resistor 2,1 2,2 1.5k
+  OUT: port 3,1
+  G2: ground 2,2
 wires:
-  - a2 -- a3
+  - 2,1 -- 3,1
 style:
   grid: on
 ```
@@ -196,16 +196,16 @@ CH1 (入力) に対する CH2 (出力) の利得と位相を測ってグラフ�
 ```circuit
 title: 図5 AD の W1 で掃引し、CH1 (入力) と CH2 (出力) を比べる
 parts:
-  V1: sine a1 c1 l=$\mathrm{W1}$
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  R1: resistor a4 a6 1.5k
-  C1: capacitor a6 c6 100n
-  M2: voltmeter a8 c8 l=$\mathrm{CH2}$
-  G1: ground c1
+  V1: sine 1,1 1,3 l=$\mathrm{W1}$
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  R1: resistor 4,1 6,1 1.5k
+  C1: capacitor 6,1 6,3 100n
+  M2: voltmeter 8,1 8,3 l=$\mathrm{CH2}$
+  G1: ground 1,3
 wires:
-  - a1 -- a3 -- a4
-  - c1 -- c3 -- c6 -- c8
-  - a6 -- a8
+  - 1,1 -- 3,1 -- 4,1
+  - 1,3 -- 3,3 -- 6,3 -- 8,3
+  - 6,1 -- 8,1
 style:
   grid: on
 ```
@@ -378,16 +378,16 @@ VNA (ベクトルネットワークアナライザ) は CH0 から信号を出�
 ```circuit
 title: 図10 VNA の入出力の抵抗を R にしたローパス (C1 は 10 nF)
 parts:
-  J1: sma a2 mirror CH0
-  C1: capacitor a4 b4 10n
-  J2: sma a6 CH1
-  G1: ground b2
-  G2: ground b4
-  G3: ground b6
+  J1: sma 2,1 mirror CH0
+  C1: capacitor 4,1 4,2 10n
+  J2: sma 6,1 CH1
+  G1: ground 2,2
+  G2: ground 4,2
+  G3: ground 6,2
 wires:
-  - J1.1 -- a4 -- J2.1
-  - J1.2 -- b2
-  - J2.2 -- b6
+  - J1.1 -- 4,1 -- J2.1
+  - J1.2 -- 2,2
+  - J2.2 -- 6,2
 style:
   grid: on
 ```

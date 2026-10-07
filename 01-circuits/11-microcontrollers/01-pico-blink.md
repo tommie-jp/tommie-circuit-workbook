@@ -26,14 +26,14 @@ MicroPython の両方で点滅させる。LED を点滅させる (L チカ) の�
 ```circuit
 title: 図1 Pico2でLEDを点滅させる
 parts:
-  U1: pico2 e3c0 mirror
-  R1: resistor i6 i8 330
-  D1: led i8 k8 red
-  G1: ground k8
-  G2: ground h5c0
+  U1: pico2 3,5.2 mirror
+  R1: resistor 6,9 8,9 330
+  D1: led 8,9 8,11 red
+  G1: ground 8,11
+  G2: ground 5,8.2
 wires:
-  - U1.GP15 -| i6
-  - U1.GND18 -| h5c0
+  - U1.GP15 -| 6,9
+  - U1.GND18 -| 5,8.2
 style:
   pitch: 1.2
 ```

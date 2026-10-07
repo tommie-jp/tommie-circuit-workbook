@@ -28,14 +28,14 @@ era: 古
 ```circuit
 title: 図1 分流器で作った電流計
 parts:
-  V1: vsource b2 d2 5
-  R1: resistor b2 b4 510
-  GA: galvanometer b4 d4
-  RS: resistor b6 d6 11
-  G1: ground d4
+  V1: vsource 2,2 2,4 5
+  R1: resistor 2,2 4,2 510
+  GA: galvanometer 4,2 4,4
+  RS: resistor 6,2 6,4 11
+  G1: ground 4,4
 wires:
-  - b4 -- b6
-  - d2 -- d4 -- d6
+  - 4,2 -- 6,2
+  - 2,4 -- 4,4 -- 6,4
 style:
   grid: on
   pitch: 1.2
@@ -69,17 +69,17 @@ R2 の両端を測る (図2)。
 ```circuit
 title: 図2 倍率器で作った電圧計 (0-1 と同じ分圧回路に当てる)
 parts:
-  V1: vsource b2 e2 5
-  G1: ground e2
-  R1: resistor b4 b6 10k
-  R2: resistor b6 b9 10k
-  GA: galvanometer d6 d7a5
-  RV: resistor d7a5 d9 4.7k
+  V1: vsource 2,2 2,5 5
+  G1: ground 2,5
+  R1: resistor 4,2 6,2 10k
+  R2: resistor 6,2 9,2 10k
+  GA: galvanometer 6,4 7.5,4
+  RV: resistor 7.5,4 9,4 4.7k
 wires:
-  - b2 -- b4
-  - b6 -- d6
-  - b9 -- d9 -- e9
-  - e2 -- e9
+  - 2,2 -- 4,2
+  - 6,2 -- 6,4
+  - 9,2 -- 9,4 -- 9,5
+  - 2,5 -- 9,5
 style:
   grid: on
   pitch: 1.2

@@ -27,31 +27,31 @@ SDA・SCL・VDD・GND をピンヘッダに出したブレイクアウトモジ�
 ```circuit
 title: 図1 MCP9808をI2C0(GP0/GP1)で読む
 parts:
-  U1: pico2 k5 mirror
-  P3V3: vcc h2 3.3V
-  G1: ground i7a5
+  U1: pico2 5,11 mirror
+  P3V3: vcc 2,8 3.3V
+  G1: ground 7.5,9
   U2:
     type: device
-    at: g14e0
+    at: 14,7.4
     label: MCP9808
     pins: [VDD, SDA, SCL, GND]
-  P3V3: vcc e7 3.3V
-  P3V3: vcc e9 3.3V
-  Rsda: resistor e7 f7 4.7k l=$R_\mathrm{SDA}$
-  Rscl: resistor e9 f9 4.7k l=$R_\mathrm{SCL}$
-  P3V3: vcc e12 3.3V
-  G2: ground i12
+  P3V3: vcc 7,5 3.3V
+  P3V3: vcc 9,5 3.3V
+  Rsda: resistor 7,5 7,6 4.7k l=$R_\mathrm{SDA}$
+  Rscl: resistor 9,5 9,6 4.7k l=$R_\mathrm{SCL}$
+  P3V3: vcc 12,5 3.3V
+  G2: ground 12,9
 wires:
-  - U1.3V3 -| h2
-  - U1.GND3 -| i7a5
-  - U1.GP0 -| g7c0
-  - U2.SDA -| g7c0
-  - f7 -- g7c0
-  - U1.GP1 -| g9g0
-  - U2.SCL -| g9g0
-  - f9 -- g9g0
-  - U2.VDD -| e12
-  - U2.GND -| i12
+  - U1.3V3 -| 2,8
+  - U1.GND3 -| 7.5,9
+  - U1.GP0 -| 7,7.2
+  - U2.SDA -| 7,7.2
+  - 7,6 -- 7,7.2
+  - U1.GP1 -| 9,7.6
+  - U2.SCL -| 9,7.6
+  - 9,6 -- 9,7.6
+  - U2.VDD -| 12,5
+  - U2.GND -| 12,9
 style:
   grid: on
   pitch: 1.2

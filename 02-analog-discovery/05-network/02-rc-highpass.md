@@ -19,16 +19,16 @@ board: BB
 ```circuit
 title: 図1 RC ハイパス
 parts:
-  V1: sine a1 c1 l=$\mathrm{W1}$
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  C1: capacitor a5 a7 100n
-  R1: resistor a7 c7 1k
-  M2: voltmeter a9 c9 l=$\mathrm{CH2}$
-  G1: ground c1
+  V1: sine 1,1 1,3 l=$\mathrm{W1}$
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  C1: capacitor 5,1 7,1 100n
+  R1: resistor 7,1 7,3 1k
+  M2: voltmeter 9,1 9,3 l=$\mathrm{CH2}$
+  G1: ground 1,3
 wires:
-  - a1 -- a3 -- a5
-  - c1 -- c3 -- c7 -- c9
-  - a7 -- a9
+  - 1,1 -- 3,1 -- 5,1
+  - 1,3 -- 3,3 -- 7,3 -- 9,3
+  - 7,1 -- 9,1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/02-rc-highpass.svg)

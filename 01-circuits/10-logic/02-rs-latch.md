@@ -24,40 +24,40 @@ CD4011 (2 入力 NAND が 4 回路入り) の 2 つのゲートだけを使う�
 ```circuit
 title: 図1 NANDたすき掛けのRSラッチ
 parts:
-  VCC: vcc b5 5V
-  RS: resistor b5 e5 10k
-  SWS: button e5 g5 l=$\mathrm{SW}_\mathrm{S}$
-  GSWS: ground g5
-  VCC: vcc j3 5V
-  RR: resistor j3 n3 10k
-  SWR: button n3 p3 l=$\mathrm{SW}_\mathrm{R}$
-  GSWR: ground p3
-  U1A: nand h14 CD4011
-  U1B: nand m14 CD4011
-  RQ: resistor h20 h23 1k
-  DQ: led h23 j23 red
-  GDQ: ground j23
-  RQb: resistor m20 m23 1k
-  DQb: led m23 o23 red
-  GDQb: ground o23
+  VCC: vcc 5,2 5V
+  RS: resistor 5,2 5,5 10k
+  SWS: button 5,5 5,7 l=$\mathrm{SW}_\mathrm{S}$
+  GSWS: ground 5,7
+  VCC: vcc 3,10 5V
+  RR: resistor 3,10 3,14 10k
+  SWR: button 3,14 3,16 l=$\mathrm{SW}_\mathrm{R}$
+  GSWR: ground 3,16
+  U1A: nand 14,8 CD4011
+  U1B: nand 14,13 CD4011
+  RQ: resistor 20,8 23,8 1k
+  DQ: led 23,8 23,10 red
+  GDQ: ground 23,10
+  RQb: resistor 20,13 23,13 1k
+  DQb: led 23,13 23,15 red
+  GDQb: ground 23,15
 wires:
-  - e5 -- e11
-  - e11 |- U1A.a
-  - U1A.out -- h17 -- h20
-  - h17 -- j17 -- j11
-  - j11 |- U1B.a
-  - n3 -- n11
-  - n11 |- U1B.b
-  - U1B.out -- m18 -- m20
-  - m18 -- k18 -- k9
-  - k9 |- U1A.b
+  - 5,5 -- 11,5
+  - 11,5 |- U1A.a
+  - U1A.out -- 17,8 -- 20,8
+  - 17,8 -- 17,10 -- 11,10
+  - 11,10 |- U1B.a
+  - 3,14 -- 11,14
+  - 11,14 |- U1B.b
+  - U1B.out -- 18,13 -- 20,13
+  - 18,13 -- 18,11 -- 9,11
+  - 9,11 |- U1A.b
 notes:
-  - text d8 blue: "S (Low で有効)"
-  - text m7 blue: "R (Low で有効)"
-  - text g18 blue: "Q"
-  - text l20 blue: "Qバー"
-  - text r1 small left: "数字は IC の PIN 番号 (U1A・U1B は同じ CD4011)"
-  - text s1 small left: "VDD は PIN 14 (+5V)、VSS は PIN 7 (GND)。使わない入力は GND へ"
+  - text 8,4 blue: "S (Low で有効)"
+  - text 7,13 blue: "R (Low で有効)"
+  - text 18,7 blue: "Q"
+  - text 20,12 blue: "Qバー"
+  - text 1,18 small left: "数字は IC の PIN 番号 (U1A・U1B は同じ CD4011)"
+  - text 1,19 small left: "VDD は PIN 14 (+5V)、VSS は PIN 7 (GND)。使わない入力は GND へ"
 style:
   grid: on
   pitch: 1.2

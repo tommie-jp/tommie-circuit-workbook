@@ -23,35 +23,35 @@ title: 図1 シュミットトリガ (CdS + ヒステリシス)
 parts:
   VP: vsource vp mid 5
   VN: vsource mid vm 5
-  G1: ground c3f0
-  CDS1: photoresistor a4 c4 l=$\mathrm{CDS1}$
-  RFIX: resistor d4 f4 10k
-  VR1: potentiometer a6 c6 10k l=$\mathrm{VR1}$
-  Rref: resistor c7 c9 10k
-  Rh: resistor b12 b9 100k
-  U1: opamp d11 +up
-  R1: resistor d13 d15 220
-  D1: led d15 f15 red
-  DP: diode f18 d18 1N4148
-  GD1: ground f15
+  G1: ground 3,3.5
+  CDS1: photoresistor 4,1 4,3 l=$\mathrm{CDS1}$
+  RFIX: resistor 4,4 4,6 10k
+  VR1: potentiometer 6,1 6,3 10k l=$\mathrm{VR1}$
+  Rref: resistor 7,3 9,3 10k
+  Rh: resistor 12,2 9,2 100k
+  U1: opamp 11,4 +up
+  R1: resistor 13,4 15,4 220
+  D1: led 15,4 15,6 red
+  DP: diode 18,6 18,4 1N4148
+  GD1: ground 15,6
 points:
-  vp: a2
-  vm: f2
-  mid: c2f0
+  vp: 2,1
+  vm: 2,6
+  mid: 2,3.5
 wires:
-  - mid -- c3f0
-  - a2 -- a4 -- a6
-  - f2 -- f4
-  - f4 -- f6 -- c6
-  - c4 -- d4
-  - d4 -- d10 |- U1.-
-  - VR1.w |- c7
-  - b9 -- c9
-  - c9 |- U1.+
-  - U1.out -- d12 -- d13
-  - b12 -- d12
-  - d15 -- d18
-  - f15 -- f18
+  - mid -- 3,3.5
+  - 2,1 -- 4,1 -- 6,1
+  - 2,6 -- 4,6
+  - 4,6 -- 6,6 -- 6,3
+  - 4,3 -- 4,4
+  - 4,4 -- 10,4 |- U1.-
+  - VR1.w |- 7,3
+  - 9,2 -- 9,3
+  - 9,3 |- U1.+
+  - U1.out -- 12,4 -- 13,4
+  - 12,2 -- 12,4
+  - 15,4 -- 18,4
+  - 15,6 -- 18,6
 style:
   grid: on
   pitch: 1.2

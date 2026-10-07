@@ -21,25 +21,25 @@ title: 図1 反転増幅
 parts:
   VP: vsource vp mid 5
   VN: vsource mid vm 5
-  G1: ground c2
-  V1: sine b3 d3 0.1
-  G2: ground d3
-  Rin: resistor b3 b6 10k
-  Rf: resistor a6 a9 100k
-  U1: opamp c8 +down
-  G3: ground d7
-  OUT: port c10
+  G1: ground 2,3
+  V1: sine 3,2 3,4 0.1
+  G2: ground 3,4
+  Rin: resistor 3,2 6,2 10k
+  Rf: resistor 6,1 9,1 100k
+  U1: opamp 8,3 +down
+  G3: ground 7,4
+  OUT: port 10,3
 points:
-  vp: a1
-  vm: e1
-  mid: c1
+  vp: 1,1
+  vm: 1,5
+  mid: 1,3
 wires:
-  - mid -- c2
-  - b6 |- U1.-
-  - d7 |- U1.+
-  - b6 -- a6
-  - a9 -- c9
-  - U1.out -- c9 -- c10
+  - mid -- 2,3
+  - 6,2 |- U1.-
+  - 7,4 |- U1.+
+  - 6,2 -- 6,1
+  - 9,1 -- 9,3
+  - U1.out -- 9,3 -- 10,3
 style:
   grid: on
 ```

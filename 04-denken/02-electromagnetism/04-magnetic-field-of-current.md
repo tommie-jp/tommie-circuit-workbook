@@ -28,14 +28,14 @@ title: 図1 導線に流す電流を作る回路
 style:
   standard: jis
 parts:
-  B1: battery a3 a1 3
-  S1: button a3 a5
-  R1: resistor a5 a7 10
-  G1: ground c1
+  B1: battery 3,1 1,1 3
+  S1: button 3,1 5,1
+  R1: resistor 5,1 7,1 10
+  G1: ground 1,3
 wires:
-  - a7 -- c7
-  - c1 -- c7
-  - a1 -- c1
+  - 7,1 -- 7,3
+  - 1,3 -- 7,3
+  - 1,1 -- 1,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/04-magnetic-field-of-current.svg)

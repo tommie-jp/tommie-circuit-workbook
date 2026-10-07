@@ -23,49 +23,49 @@ device: LV64
 ```circuit
 title: 図1 デモボードの回路 (JP をどれか 1 つだけ閉じる)
 parts:
-  J1: sma c2 mirror
-  G0: ground d2
-  JP1: switch c5 e5
-  JP2: switch c8 e8
-  G2: ground e8
-  JP3: switch c11 e11
-  R1: resistor e11 h11 51
-  G3: ground h11
-  JP4: switch c14 e14
-  R2: resistor e14 h14 24
-  G4: ground h14
-  JP5: switch c17 e17
-  R3: resistor e17 h17 100
-  G5: ground h17
-  JP6: switch c20 e20
-  L1: inductor e20 h20 8.2u
-  G6: ground h20
-  JP7: switch c23 e23
-  C1: capacitor e23 h23 3.3n
-  G7: ground h23
-  JP8: switch c26 e26
-  R4: resistor e26 g26 51
-  L2: inductor g26 j26 8.2u
-  G8: ground j26
+  J1: sma 2,3 mirror
+  G0: ground 2,4
+  JP1: switch 5,3 5,5
+  JP2: switch 8,3 8,5
+  G2: ground 8,5
+  JP3: switch 11,3 11,5
+  R1: resistor 11,5 11,8 51
+  G3: ground 11,8
+  JP4: switch 14,3 14,5
+  R2: resistor 14,5 14,8 24
+  G4: ground 14,8
+  JP5: switch 17,3 17,5
+  R3: resistor 17,5 17,8 100
+  G5: ground 17,8
+  JP6: switch 20,3 20,5
+  L1: inductor 20,5 20,8 8.2u
+  G6: ground 20,8
+  JP7: switch 23,3 23,5
+  C1: capacitor 23,5 23,8 3.3n
+  G7: ground 23,8
+  JP8: switch 26,3 26,5
+  R4: resistor 26,5 26,7 51
+  L2: inductor 26,7 26,10 8.2u
+  G8: ground 26,10
 wires:
-  - J1.1 -- c5
-  - c5 -- c8
-  - c8 -- c11
-  - c11 -- c14
-  - c14 -- c17
-  - c17 -- c20
-  - c20 -- c23
-  - c23 -- c26
-  - J1.2 -- d2
+  - J1.1 -- 5,3
+  - 5,3 -- 8,3
+  - 8,3 -- 11,3
+  - 11,3 -- 14,3
+  - 14,3 -- 17,3
+  - 17,3 -- 20,3
+  - 20,3 -- 23,3
+  - 23,3 -- 26,3
+  - J1.2 -- 2,4
 notes:
-  - text f5 small center: Open
-  - text f8 small center: Short
-  - text i11 small center: 51 Ω
-  - text i14 small center: 24 Ω
-  - text i17 small center: 100 Ω
-  - text i20 small center: L
-  - text i23 small center: C
-  - text k26 small center: R + L
+  - text 5,6 small center: Open
+  - text 8,6 small center: Short
+  - text 11,9 small center: 51 Ω
+  - text 14,9 small center: 24 Ω
+  - text 17,9 small center: 100 Ω
+  - text 20,9 small center: L
+  - text 23,9 small center: C
+  - text 26,11 small center: R + L
 style:
   pitch: 1.0
 ```

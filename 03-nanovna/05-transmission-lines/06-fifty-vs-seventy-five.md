@@ -21,15 +21,15 @@ device: H4
 ```circuit
 title: 図1 75 Ω のケーブルを 50 Ω 系につなぐ
 parts:
-  J1: sma b2 mirror
-  G1: ground c2
+  J1: sma 2,2 mirror
+  G1: ground 2,3
 wires:
-  - J1.1 -- b8
-  - J1.2 -- c2
+  - J1.1 -- 8,2
+  - J1.2 -- 2,3
 notes:
-  - text a2 center: CH0 (50 Ω)
-  - text e5 center: 75 Ω のケーブル
-  - text b8a2: 先端 (75 Ω または 50 Ω で終端)
+  - text 2,1 center: CH0 (50 Ω)
+  - text 5,5 center: 75 Ω のケーブル
+  - text 8.2,2: 先端 (75 Ω または 50 Ω で終端)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/06-fifty-vs-seventy-five.svg)

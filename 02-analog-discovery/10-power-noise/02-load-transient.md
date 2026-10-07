@@ -20,36 +20,36 @@ board: BB
 ```circuit
 title: 図1 ブリッジ整流・平滑と、切り替えできる追加負荷
 parts:
-  V1: sine a5 e5 12.7
-  D1: diode a5 a9 1N4007
-  D2: diode e5 a9 1N4007
-  D3: diode e12 a5 1N4007
-  D4: diode e12 e5 1N4007
-  Csmooth: capacitor a9 e12 470u
-  Rload: resistor h9 h12 1k
-  Radd: resistor k25 k28 470
-  Q1: nmos-e n28 2N7000
-  Rg: resistor n3 n9 1k
-  Rgpd: resistor n9 q9 100k
+  V1: sine 5,1 5,5 12.7
+  D1: diode 5,1 9,1 1N4007
+  D2: diode 5,5 9,1 1N4007
+  D3: diode 12,5 5,1 1N4007
+  D4: diode 12,5 5,5 1N4007
+  Csmooth: capacitor 9,1 12,5 470u
+  Rload: resistor 9,8 12,8 1k
+  Radd: resistor 25,11 28,11 470
+  Q1: nmos-e 28,14 2N7000
+  Rg: resistor 3,14 9,14 1k
+  Rgpd: resistor 9,14 9,17 100k
   AD:
     type: device
-    at: q1
+    at: 1,17
     label: Analog Discovery
     pins: [GND, W2, 1+, 1-, 2+, 2-]
 wires:
-  - a9 -- h9
-  - h9 -- k25
-  - e12 -- h12
-  - h12 -- q9
-  - AD.1+ |- h9
-  - AD.1- -| h12
-  - AD.W2 -| n3
-  - n9 |- Q1.G
-  - k28 |- Q1.D
-  - Q1.S -| q9
-  - AD.2+ -| n9
-  - AD.2- -| q9
-  - AD.GND -| q9
+  - 9,1 -- 9,8
+  - 9,8 -- 25,11
+  - 12,5 -- 12,8
+  - 12,8 -- 9,17
+  - AD.1+ |- 9,8
+  - AD.1- -| 12,8
+  - AD.W2 -| 3,14
+  - 9,14 |- Q1.G
+  - 28,11 |- Q1.D
+  - Q1.S -| 9,17
+  - AD.2+ -| 9,14
+  - AD.2- -| 9,17
+  - AD.GND -| 9,17
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/10-power-noise/circuit/02-load-transient.svg)

@@ -20,28 +20,28 @@ board: BB
 ```circuit
 title: 図1 Pattern でクロックを作り 4017 を動かす
 parts:
-  U2: dip16 d5 CD4017 r180
-  VCC: vcc c2 3.3V
-  G4: ground d4b0c0 r90
-  G5: ground d4g0 r90
-  G6: ground c7b0g0 r270
+  U2: dip16 5,4 CD4017 r180
+  VCC: vcc 2,3 3.3V
+  G4: ground 4,4.12 r90
+  G5: ground 4,4.6 r90
+  G6: ground 7,3.16 r270
   AD:
     type: device
-    at: d11c0e0
+    at: 11,4.24
     label: Analog Discovery
     pins: [V+, DIO0, DIO3, DIO1, DIO2, GND]
-  VCC: vcc b10 3.3V
-  G7: ground f10
+  VCC: vcc 10,2 3.3V
+  G7: ground 10,6
 wires:
-  - a3 |- U2.14
-  - a3 -- a9
-  - a9 |- AD.DIO0
-  - U2.13 -| d4b0c0
-  - U2.15 -| d4g0
-  - U2.16 -| c2
-  - U2.8 -| c7b0g0
-  - AD.V+ -| b10
-  - AD.GND -| f10
+  - 3,1 |- U2.14
+  - 3,1 -- 9,1
+  - 9,1 |- AD.DIO0
+  - U2.13 -| 4,4.12
+  - U2.15 -| 4,4.6
+  - U2.16 -| 2,3
+  - U2.8 -| 7,3.16
+  - AD.V+ -| 10,2
+  - AD.GND -| 10,6
   - U2.4 -| AD.DIO3
   - U2.3 -| AD.DIO1
   - U2.2 -| AD.DIO2

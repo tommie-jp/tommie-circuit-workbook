@@ -40,20 +40,20 @@ device: H4
 ```circuit
 title: 図1 トラップ (L と C の並列) を直列治具で測る
 parts:
-  J1: sma b2 mirror CH0
-  L1: inductor b4 b8 10u
-  C1: capacitor c4 c8 47p
-  C2: capacitor d4 d8 3.3p
-  J2: sma b10 CH1
-  G1: ground c2
-  G2: ground c10
+  J1: sma 2,2 mirror CH0
+  L1: inductor 4,2 8,2 10u
+  C1: capacitor 4,3 8,3 47p
+  C2: capacitor 4,4 8,4 3.3p
+  J2: sma 10,2 CH1
+  G1: ground 2,3
+  G2: ground 10,3
 wires:
-  - J1.1 -- b4
-  - b4 -- c4 -- d4
-  - b8 -- c8 -- d8
-  - b8 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c10
+  - J1.1 -- 4,2
+  - 4,2 -- 4,3 -- 4,4
+  - 8,2 -- 8,3 -- 8,4
+  - 8,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 10,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/09-trap.svg)

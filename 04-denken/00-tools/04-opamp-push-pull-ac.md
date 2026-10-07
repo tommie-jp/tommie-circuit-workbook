@@ -37,35 +37,35 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  W1: sine d1 h1 l=$\mathrm{W1}$
-  M1: voltmeter d3 h3 l=$\mathrm{CH1}$
-  U1: opamp e6 +up
-  Q1: npn c10
-  Q2: pnp g10
-  VCC: vcc a10 5V
-  VEE: vee i10 5V
-  RL: resistor e13 h13 47
-  M2: voltmeter e15 h15 l=$\mathrm{CH2}$
-  G1: ground h1
-  G2: ground h13
+  W1: sine 1,4 1,8 l=$\mathrm{W1}$
+  M1: voltmeter 3,4 3,8 l=$\mathrm{CH1}$
+  U1: opamp 6,5 +up
+  Q1: npn 10,3
+  Q2: pnp 10,7
+  VCC: vcc 10,1 5V
+  VEE: vee 10,9 5V
+  RL: resistor 13,5 13,8 47
+  M2: voltmeter 15,5 15,8 l=$\mathrm{CH2}$
+  G1: ground 1,8
+  G2: ground 13,8
 wires:
-  - d1 -- d3 -- d4
-  - d4 |- U1.+
-  - U1.out -- e8
-  - c8 -- g8
-  - c8 -- Q1.B
-  - g8 -- Q2.B
-  - a10 -- Q1.C
-  - i10 -- Q2.C
-  - Q1.E -- e10 -- Q2.E
-  - e10 -- e12 -- e13 -- e15
-  - e12 -- k12 -- k4
-  - k4 |- U1.-
-  - h1 -- h3
-  - h13 -- h15
+  - 1,4 -- 3,4 -- 4,4
+  - 4,4 |- U1.+
+  - U1.out -- 8,5
+  - 8,3 -- 8,7
+  - 8,3 -- Q1.B
+  - 8,7 -- Q2.B
+  - 10,1 -- Q1.C
+  - 10,9 -- Q2.C
+  - Q1.E -- 10,5 -- Q2.E
+  - 10,5 -- 12,5 -- 13,5 -- 15,5
+  - 12,5 -- 12,11 -- 4,11
+  - 4,11 |- U1.-
+  - 1,8 -- 3,8
+  - 13,8 -- 15,8
 notes:
-  - text a10a3 left: +5 V
-  - text i10a3 left: -5 V
+  - text 10.3,1 left: +5 V
+  - text 10.3,9 left: -5 V
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/circuit/04-opamp-push-pull-ac.svg)

@@ -36,28 +36,28 @@ style:
 parts:
   U1:
     type: ic3
-    at: e5
+    at: 5,5
     label: A1324
     pins: [VCC, GND, VOUT]
-  VCC: vcc b3 5V
-  C1: capacitor c1 g1 100n
-  M1: voltmeter e7 h7 l=$\mathrm{CH1}$
-  G1: ground h3
-  B1: battery e11 i11 3
-  S1: switch e11 e13
-  R1: resistor e13 e15 10
-  A1: ammeter e15 e17
-  L1: inductor e19 i19 l=$\mathrm{L_1}$
+  VCC: vcc 3,2 5V
+  C1: capacitor 1,3 1,7 100n
+  M1: voltmeter 7,5 7,8 l=$\mathrm{CH1}$
+  G1: ground 3,8
+  B1: battery 11,5 11,9 3
+  S1: switch 11,5 13,5
+  R1: resistor 13,5 15,5 10
+  A1: ammeter 15,5 17,5
+  L1: inductor 19,5 19,9 l=$\mathrm{L_1}$
 wires:
-  - b3 -- c3 -- c1
-  - c3 |- U1.VCC
-  - U1.GND -| h3
-  - g1 -- h1 -- h3 -- h7
-  - U1.VOUT -| e7
-  - e17 -- e19
-  - i11 -- i19
+  - 3,2 -- 3,3 -- 1,3
+  - 3,3 |- U1.VCC
+  - U1.GND -| 3,8
+  - 1,7 -- 1,8 -- 3,8 -- 7,8
+  - U1.VOUT -| 7,5
+  - 17,5 -- 19,5
+  - 11,9 -- 19,9
 notes:
-  - text e19f5 left small: 200 回 (U1 は筒の中)
+  - text 19.5,5.5 left small: 200 回 (U1 は筒の中)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/10-hall-effect.svg)

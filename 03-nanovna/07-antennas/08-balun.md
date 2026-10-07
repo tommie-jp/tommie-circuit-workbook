@@ -38,21 +38,21 @@ device: H4
 ```circuit
 title: 図1 1:1 のチョーク型バランでダイポールへ
 parts:
-  J1: sma b2 mirror CH0
-  L1: inductor b4 b6 2u
-  L2: inductor c4 c6 2u
+  J1: sma 2,2 mirror CH0
+  L1: inductor 4,2 6,2 2u
+  L2: inductor 4,3 6,3 2u
   X1:
     type: device
-    at: b8
+    at: 8,2
     label: DIPOLE
     pins: [A, B]
-  G1: ground d2
+  G1: ground 2,4
 wires:
-  - J1.1 -- b4
-  - b6 -| X1.A
-  - c6 -| X1.B
-  - J1.2 -- c2 -- c4
-  - c2 -- d2
+  - J1.1 -- 4,2
+  - 6,2 -| X1.A
+  - 6,3 -| X1.B
+  - J1.2 -- 2,3 -- 4,3
+  - 2,3 -- 2,4
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/08-balun-1.svg)
@@ -68,20 +68,20 @@ CH0 と CH1 の間に入れる (3-1 の直列治具と同じ形)。2 本の巻�
 ```circuit
 title: 図2 同相の Z を S21 で測る (等価回路)
 parts:
-  J1: sma b2 mirror CH0
-  R1: resistor b4 b6 180
-  L1: inductor b6 b8 2u
-  C1: capacitor d4 d8 1p
-  J2: sma b10 CH1
-  G1: ground c2
-  G2: ground c10
+  J1: sma 2,2 mirror CH0
+  R1: resistor 4,2 6,2 180
+  L1: inductor 6,2 8,2 2u
+  C1: capacitor 4,4 8,4 1p
+  J2: sma 10,2 CH1
+  G1: ground 2,3
+  G2: ground 10,3
 wires:
-  - J1.1 -- b4
-  - b4 -- d4
-  - b8 -- d8
-  - b8 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c10
+  - J1.1 -- 4,2
+  - 4,2 -- 4,4
+  - 8,2 -- 8,4
+  - 8,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 10,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/08-balun-2.svg)

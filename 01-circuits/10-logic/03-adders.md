@@ -25,63 +25,63 @@ board: BB
 ```circuit
 title: 図1 半加算器を全加算器に拡張する
 parts:
-  A: switch d3 f3
-  RpdA: resistor f3 f1 10k
-  GA: ground f1
-  B: switch c6 e6
-  RpdB: resistor e6 e4 10k
-  GB: ground e4
-  CIN: switch b9 d9 l=$C_\mathrm{in}$
-  RpdC: resistor d9 d7 10k
-  GC: ground d7
-  VCC: vcc d3 5V
-  VCC: vcc c6 5V
-  VCC: vcc b9 5V
-  U1A: xor h14 CD4070
-  U2A: and n14 CD4081
-  U1B: xor h24 CD4070
-  U2B: and l24 CD4081
-  U3A: or m30 CD4071
-  RS1: resistor h17 j17 1k l=$R_\mathrm{S1}$
-  DS1: led j17 k17 red l=$D_\mathrm{S1}$
-  GS1: ground k17
-  RC1: resistor n18 p18 1k l=$R_\mathrm{C1}$
-  DC1: led p18 q18 red l=$D_\mathrm{C1}$
-  GC1: ground q18
-  RCO: resistor m34 o34 1k l=$R_\mathrm{Cout}$
-  DCO: led o34 p34 red l=$D_\mathrm{Cout}$
-  GCO: ground p34
-  RS: resistor h37 j37 1k
-  DS: led j37 k37 red
-  GDS: ground k37
+  A: switch 3,4 3,6
+  RpdA: resistor 3,6 1,6 10k
+  GA: ground 1,6
+  B: switch 6,3 6,5
+  RpdB: resistor 6,5 4,5 10k
+  GB: ground 4,5
+  CIN: switch 9,2 9,4 l=$C_\mathrm{in}$
+  RpdC: resistor 9,4 7,4 10k
+  GC: ground 7,4
+  VCC: vcc 3,4 5V
+  VCC: vcc 6,3 5V
+  VCC: vcc 9,2 5V
+  U1A: xor 14,8 CD4070
+  U2A: and 14,14 CD4081
+  U1B: xor 24,8 CD4070
+  U2B: and 24,12 CD4081
+  U3A: or 30,13 CD4071
+  RS1: resistor 17,8 17,10 1k l=$R_\mathrm{S1}$
+  DS1: led 17,10 17,11 red l=$D_\mathrm{S1}$
+  GS1: ground 17,11
+  RC1: resistor 18,14 18,16 1k l=$R_\mathrm{C1}$
+  DC1: led 18,16 18,17 red l=$D_\mathrm{C1}$
+  GC1: ground 18,17
+  RCO: resistor 34,13 34,15 1k l=$R_\mathrm{Cout}$
+  DCO: led 34,15 34,16 red l=$D_\mathrm{Cout}$
+  GCO: ground 34,16
+  RS: resistor 37,8 37,10 1k
+  DS: led 37,10 37,11 red
+  GDS: ground 37,11
 wires:
-  - f3 -- f10 -- f12
-  - f12 |- U1A.a
-  - f10 |- U2A.a
-  - e6 -- e9 -- e11
-  - e11 |- U1A.b
-  - e9 |- U2A.b
-  - d9 -- d20 -- d21
-  - d21 |- U1B.a
-  - d20 |- U2B.a
-  - U1A.out -- h17 -- h19
-  - h19 |- U1B.b
-  - h19 |- U2B.b
-  - U2A.out -- n18 -- n28
-  - n28 |- U3A.b
-  - U2B.out -- l28
-  - l28 |- U3A.a
-  - U3A.out -- m34
-  - U1B.out -- h37
+  - 3,6 -- 10,6 -- 12,6
+  - 12,6 |- U1A.a
+  - 10,6 |- U2A.a
+  - 6,5 -- 9,5 -- 11,5
+  - 11,5 |- U1A.b
+  - 9,5 |- U2A.b
+  - 9,4 -- 20,4 -- 21,4
+  - 21,4 |- U1B.a
+  - 20,4 |- U2B.a
+  - U1A.out -- 17,8 -- 19,8
+  - 19,8 |- U1B.b
+  - 19,8 |- U2B.b
+  - U2A.out -- 18,14 -- 28,14
+  - 28,14 |- U3A.b
+  - U2B.out -- 28,12
+  - 28,12 |- U3A.a
+  - U3A.out -- 34,13
+  - U1B.out -- 37,8
 notes:
-  - text g16 blue: S1
-  - text m21 blue: C1
-  - text k26 blue: C2
-  - text l32 blue: Cout
-  - text g35 blue: S
-  - text r1 small left: "数字は IC の PIN 番号"
-  - text s1 small left: "VDD は 3 つとも PIN 14 (+5V)、VSS は PIN 7 (GND)"
-  - text t1 small left: "使わない入力は GND へ (U1・U2: PIN 8・9・12・13、U3: PIN 5・6・8・9・12・13)"
+  - text 16,7 blue: S1
+  - text 21,13 blue: C1
+  - text 26,11 blue: C2
+  - text 32,12 blue: Cout
+  - text 35,7 blue: S
+  - text 1,18 small left: "数字は IC の PIN 番号"
+  - text 1,19 small left: "VDD は 3 つとも PIN 14 (+5V)、VSS は PIN 7 (GND)"
+  - text 1,20 small left: "使わない入力は GND へ (U1・U2: PIN 8・9・12・13、U3: PIN 5・6・8・9・12・13)"
 style:
   grid: off
   pitch: 1.2

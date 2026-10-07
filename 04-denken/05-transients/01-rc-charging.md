@@ -27,15 +27,15 @@ AD の波形発生器 (Wavegen) で方形波を作り、抵抗とコンデンサ
 ```circuit
 title: 図1 RC 直列の充電回路
 parts:
-  V1: square a1 c1 1 l=$\mathrm{W1}$
-  R1: resistor a1 a5 10k
-  C1: capacitor a5 c5 100n
-  G1: ground c1
+  V1: square 1,1 1,3 1 l=$\mathrm{W1}$
+  R1: resistor 1,1 5,1 10k
+  C1: capacitor 5,1 5,3 100n
+  G1: ground 1,3
 wires:
-  - c1 -- c5
+  - 1,3 -- 5,3
 notes:
-  - text a1 blue: 入力
-  - text a5 blue: 出力 (Vc)
+  - text 1,1 blue: 入力
+  - text 5,1 blue: 出力 (Vc)
 style:
   standard: jis
   grid: on

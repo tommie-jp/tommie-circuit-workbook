@@ -21,22 +21,22 @@ board: BB
 ```circuit
 title: 図1 マイクの音で LED が揺れる
 parts:
-  VCC: vcc b2 5V
-  R1: resistor b2 d2 2.2k
-  MK1: mic d2 f2 l=$\mathrm{MK1}$
-  G1: ground f2
-  C1: capacitor d2 d4 1u
-  VCC: vcc b4 5V
-  R2: resistor b4 d4 100k
-  Q1: npn f6 2SC1815
-  VCC: vcc b6 5V
-  R3: resistor b6 d6 220
-  D1: led d6 e6
-  G2: ground g6
+  VCC: vcc 2,2 5V
+  R1: resistor 2,2 2,4 2.2k
+  MK1: mic 2,4 2,6 l=$\mathrm{MK1}$
+  G1: ground 2,6
+  C1: capacitor 2,4 4,4 1u
+  VCC: vcc 4,2 5V
+  R2: resistor 4,2 4,4 100k
+  Q1: npn 6,6 2SC1815
+  VCC: vcc 6,2 5V
+  R3: resistor 6,2 6,4 220
+  D1: led 6,4 6,5
+  G2: ground 6,7
 wires:
-  - d4 |- Q1.B
-  - e6 -- Q1.C
-  - Q1.E -- g6
+  - 4,4 |- Q1.B
+  - 6,5 -- Q1.C
+  - Q1.E -- 6,7
 style:
   grid: on
   pitch: 1.2
@@ -114,32 +114,32 @@ W1 の出力は大きすぎる (最小でも数十 mV、ふつう 1 V 前後) �
 ```circuit
 title: 図3 マイクの代わりに W1 を分圧して入れる (CH2 は入力、CH1 は出力)
 parts:
-  W1: sine d2 f2 l=$\mathrm{W1}$
-  G0: ground f2
-  RS: resistor d2 d5 10k
-  VCC: vcc b5 5V
-  R1: resistor b5 d5 2.2k
-  RD: resistor d5 f5 100
-  G1: ground f5
-  M2: voltmeter e6 g6 l=$\mathrm{CH2}$
-  G2: ground g6
-  C1: capacitor d6 d8 1u
-  VCC: vcc b8 5V
-  R2: resistor b8 d8 100k
-  Q1: npn f10 2SC1815
-  VCC: vcc b10 5V
-  R3: resistor b10 d10 220
-  D1: led d10 e10
-  G3: ground g10
-  M1: voltmeter e12 g12 l=$\mathrm{CH1}$
-  G4: ground g12
+  W1: sine 2,4 2,6 l=$\mathrm{W1}$
+  G0: ground 2,6
+  RS: resistor 2,4 5,4 10k
+  VCC: vcc 5,2 5V
+  R1: resistor 5,2 5,4 2.2k
+  RD: resistor 5,4 5,6 100
+  G1: ground 5,6
+  M2: voltmeter 6,5 6,7 l=$\mathrm{CH2}$
+  G2: ground 6,7
+  C1: capacitor 6,4 8,4 1u
+  VCC: vcc 8,2 5V
+  R2: resistor 8,2 8,4 100k
+  Q1: npn 10,6 2SC1815
+  VCC: vcc 10,2 5V
+  R3: resistor 10,2 10,4 220
+  D1: led 10,4 10,5
+  G3: ground 10,7
+  M1: voltmeter 12,5 12,7 l=$\mathrm{CH1}$
+  G4: ground 12,7
 wires:
-  - d5 -- d6
-  - d6 -- e6
-  - d8 |- Q1.B
-  - e10 -- Q1.C
-  - Q1.E -- g10
-  - e10 -- e12
+  - 5,4 -- 6,4
+  - 6,4 -- 6,5
+  - 8,4 |- Q1.B
+  - 10,5 -- Q1.C
+  - Q1.E -- 10,7
+  - 10,5 -- 12,5
 style:
   grid: on
   pitch: 1.2

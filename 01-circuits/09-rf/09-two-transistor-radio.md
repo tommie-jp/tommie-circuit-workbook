@@ -27,55 +27,55 @@ era: 古
 ```circuit
 title: 図1 2 石ラジオ (W1 で AM を入れ、CH2 で RF 入力・CH1 で音声出力を見る)
 parts:
-  W1: sine d2 f2 l=$\mathrm{W1}$
-  GW: ground f2
-  CT: capacitor d2 d3 10p
-  VC1: capacitor-var d4 f4 l=$\mathrm{VC}_1$
-  GVC: ground f4
-  T1: transformer e7
-  GT2: ground f9
-  C1: capacitor e9 e10 0.01u
-  M2: voltmeter e10 g10 l=$\mathrm{CH2}$
-  GM2: ground g10
-  Q1: npn e13
-  GE1: ground f13
-  Rb1: resistor c11 c13 220k
-  Rc1: resistor c14 a14 1.5k
-  VCC1: vcc a14 5V
-  D1: diode c14 c16 1N60
-  C3: capacitor c17 e17 2200p
-  GC3: ground e17
-  R3: resistor c19 e19 4.7k
-  GR3: ground e19
-  C4: capacitor c19 c21 1u
-  Q2: npn e23
-  GE2: ground f23
-  Rb2: resistor c21 c23 470k
-  Rc2: resistor c24 a24 4.7k
-  VCC2: vcc a24 5V
-  EAR: earphone c26 e26 l=$\mathrm{EAR}$
-  GEAR: ground e26
-  M1: voltmeter c28 e28 l=$\mathrm{CH1}$
-  GM1: ground e28
+  W1: sine 2,4 2,6 l=$\mathrm{W1}$
+  GW: ground 2,6
+  CT: capacitor 2,4 3,4 10p
+  VC1: capacitor-var 4,4 4,6 l=$\mathrm{VC}_1$
+  GVC: ground 4,6
+  T1: transformer 7,5
+  GT2: ground 9,6
+  C1: capacitor 9,5 10,5 0.01u
+  M2: voltmeter 10,5 10,7 l=$\mathrm{CH2}$
+  GM2: ground 10,7
+  Q1: npn 13,5
+  GE1: ground 13,6
+  Rb1: resistor 11,3 13,3 220k
+  Rc1: resistor 14,3 14,1 1.5k
+  VCC1: vcc 14,1 5V
+  D1: diode 14,3 16,3 1N60
+  C3: capacitor 17,3 17,5 2200p
+  GC3: ground 17,5
+  R3: resistor 19,3 19,5 4.7k
+  GR3: ground 19,5
+  C4: capacitor 19,3 21,3 1u
+  Q2: npn 23,5
+  GE2: ground 23,6
+  Rb2: resistor 21,3 23,3 470k
+  Rc2: resistor 24,3 24,1 4.7k
+  VCC2: vcc 24,1 5V
+  EAR: earphone 26,3 26,5 l=$\mathrm{EAR}$
+  GEAR: ground 26,5
+  M1: voltmeter 28,3 28,5 l=$\mathrm{CH1}$
+  GM1: ground 28,5
 wires:
-  - d3 -- d4
-  - T1.A1 -| d4
-  - T1.A2 -| f4
-  - T1.B1 -| e9
-  - T1.B2 -| f9
-  - e10 -- e11
-  - c11 -- e11
-  - e11 -- Q1.B
-  - c13 -- Q1.C
-  - c13 -- c14
-  - Q1.E -- f13
-  - c16 -- c17 -- c19
-  - c21 -- e21
-  - e21 -- Q2.B
-  - c23 -- Q2.C
-  - c23 -- c24
-  - Q2.E -- f23
-  - c24 -- c26 -- c28
+  - 3,4 -- 4,4
+  - T1.A1 -| 4,4
+  - T1.A2 -| 4,6
+  - T1.B1 -| 9,5
+  - T1.B2 -| 9,6
+  - 10,5 -- 11,5
+  - 11,3 -- 11,5
+  - 11,5 -- Q1.B
+  - 13,3 -- Q1.C
+  - 13,3 -- 14,3
+  - Q1.E -- 13,6
+  - 16,3 -- 17,3 -- 19,3
+  - 21,3 -- 21,5
+  - 21,5 -- Q2.B
+  - 23,3 -- Q2.C
+  - 23,3 -- 24,3
+  - Q2.E -- 23,6
+  - 24,3 -- 26,3 -- 28,3
 style:
   grid: on
   pitch: 1.2

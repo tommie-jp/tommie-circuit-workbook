@@ -29,22 +29,22 @@ title: 図1 全波整流にコンデンサを足す
 style:
   standard: jis
 parts:
-  W1: sine c1 g1 l=$\mathrm{W1}$
-  D2: diode e4 c7 1N4148
-  D3: diode e10 c7 1N4148
-  D4: diode g7 e4 1N4148
-  D5: diode g7 e10 1N4148
-  C1: ecap c12 g12 100u
-  M1: voltmeter c14 g14 l=$\mathrm{CH1}$
-  RL: resistor c16 g16 1.5k
-  G1: ground g1
-  G2: ground g10
+  W1: sine 1,3 1,7 l=$\mathrm{W1}$
+  D2: diode 4,5 7,3 1N4148
+  D3: diode 10,5 7,3 1N4148
+  D4: diode 7,7 4,5 1N4148
+  D5: diode 7,7 10,5 1N4148
+  C1: ecap 12,3 12,7 100u
+  M1: voltmeter 14,3 14,7 l=$\mathrm{CH1}$
+  RL: resistor 16,3 16,7 1.5k
+  G1: ground 1,7
+  G2: ground 10,7
 wires:
-  - c1 -- a1 -- a4 -- e4
-  - e10 -- g10
-  - c7 -- c12 -- c14 -- c16
-  - g7 -- i7 -- i12 -- g12
-  - g12 -- g14 -- g16
+  - 1,3 -- 1,1 -- 4,1 -- 4,5
+  - 10,5 -- 10,7
+  - 7,3 -- 12,3 -- 14,3 -- 16,3
+  - 7,7 -- 7,9 -- 12,9 -- 12,7
+  - 12,7 -- 14,7 -- 16,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/02-smoothing-ripple-1.svg)
@@ -137,24 +137,24 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{FG}$
-  D2: diode e4 c7 1N4148
-  D3: diode e10 c7 1N4148
-  D4: diode g7 e4 1N4148
-  D5: diode g7 e10 1N4148
-  C1: ecap c13 i13 100u
-  RL: resistor c16 i16 1.5k
-  M2: voltmeter i11 k11 l=$\mathrm{CH2}$
-  M1: voltmeter c19 k19 l=$\mathrm{CH1}$
-  G1: ground g1
-  G2: ground g10
-  G3: ground k15
+  V1: sine 1,3 1,7 l=$\mathrm{FG}$
+  D2: diode 4,5 7,3 1N4148
+  D3: diode 10,5 7,3 1N4148
+  D4: diode 7,7 4,5 1N4148
+  D5: diode 7,7 10,5 1N4148
+  C1: ecap 13,3 13,9 100u
+  RL: resistor 16,3 16,9 1.5k
+  M2: voltmeter 11,9 11,11 l=$\mathrm{CH2}$
+  M1: voltmeter 19,3 19,11 l=$\mathrm{CH1}$
+  G1: ground 1,7
+  G2: ground 10,7
+  G3: ground 15,11
 wires:
-  - c1 -- a1 -- a4 -- e4
-  - e10 -- g10
-  - c7 -- c13 -- c16 -- c19
-  - g7 -- i7 -- i11 -- i13 -- i16
-  - k11 -- k15 -- k19
+  - 1,3 -- 1,1 -- 4,1 -- 4,5
+  - 10,5 -- 10,7
+  - 7,3 -- 13,3 -- 16,3 -- 19,3
+  - 7,7 -- 7,9 -- 11,9 -- 13,9 -- 16,9
+  - 11,11 -- 15,11 -- 19,11
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/02-smoothing-ripple-2.svg)

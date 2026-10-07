@@ -48,15 +48,15 @@ title: 図1 V2 の CH0 に 2.4 GHz のアンテナを直に付ける
 parts:
   M1:
     type: device
-    at: d2b0c0
+    at: 2,4.12
     label: NanoVNA V2
     pins: [CH0, CH1]
     turn: mirror
-  E1: antenna d7
+  E1: antenna 7,4
 wires:
-  - M1.CH0 -| d7
+  - M1.CH0 -| 7,4
 notes:
-  - text c8 blue left: 手・体・机が近づく
+  - text 8,3 blue left: 手・体・机が近づく
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/09-ghz/circuit/05-hand-body-desk.svg)

@@ -36,20 +36,20 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{W1}$
-  M1: voltmeter c3 g3 l=$\mathrm{CH1}$
-  R1: resistor c5 c7 20k
-  C1: capacitor c9 g9 100n
-  R2: resistor c11 g11 20k
-  M2: voltmeter c14 g14 l=$\mathrm{CH2}$
-  G1: ground g1
+  V1: sine 1,3 1,7 l=$\mathrm{W1}$
+  M1: voltmeter 3,3 3,7 l=$\mathrm{CH1}$
+  R1: resistor 5,3 7,3 20k
+  C1: capacitor 9,3 9,7 100n
+  R2: resistor 11,3 11,7 20k
+  M2: voltmeter 14,3 14,7 l=$\mathrm{CH2}$
+  G1: ground 1,7
 wires:
-  - c1 -- c3 -- c5
-  - c7 -- c9 -- c11 -- c14
-  - g1 -- g3 -- g9 -- g11 -- g14
+  - 1,3 -- 3,3 -- 5,3
+  - 7,3 -- 9,3 -- 11,3 -- 14,3
+  - 1,7 -- 3,7 -- 9,7 -- 11,7 -- 14,7
 notes:
-  - text a1 blue: 入力
-  - text a13 blue: 出力
+  - text 1,1 blue: 入力
+  - text 13,1 blue: 出力
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/11-applications/circuit/04-bode-plot.svg)

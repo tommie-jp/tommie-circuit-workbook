@@ -47,63 +47,63 @@ LO を大きくすると、トランジスタが LO に合わせて流れたり�
 ```circuit
 title: 図01 2SC1815 の 1 石ミキサー (+5 V・50 Ω 入出力・IF 455 kHz)
 parts:
-  VDD:  vcc b10 5V
-  C6:   capacitor c6 e6 100n
-  C7:   ecap c8 e8 10u
-  RB1:  resistor c10 e10 82k
-  L1:   inductor c12 e12 220u
-  C3:   capacitor c14 e14 560p
-  RF:   port h2
-  R1:   resistor h4 j4 51
-  C1:   capacitor h5 h7 10n
-  RB2:  resistor h10 j10 22k
-  Q1:   npn h12
-  LO:   port l2
-  R3:   resistor l4 n4 51
-  C2:   capacitor l5 l7 10n
-  RE:   resistor l12 n12 470
-  C4:   capacitor e16 e18 10n
-  R7:   resistor e20 g20 2k
-  FL1:  ceramic-filter e23 455kHz
-  C5:   capacitor e27 g27 1.2n
-  L2:   inductor e27 e30 100u
-  IF:   port e32
-  G1:   ground e6
-  G2:   ground e8
-  G3:   ground j4
-  G4:   ground j10
-  G5:   ground n4
-  G6:   ground n12
-  G7:   ground g20
-  G8:   ground g23
-  G9:   ground g27
+  VDD:  vcc 10,2 5V
+  C6:   capacitor 6,3 6,5 100n
+  C7:   ecap 8,3 8,5 10u
+  RB1:  resistor 10,3 10,5 82k
+  L1:   inductor 12,3 12,5 220u
+  C3:   capacitor 14,3 14,5 560p
+  RF:   port 2,8
+  R1:   resistor 4,8 4,10 51
+  C1:   capacitor 5,8 7,8 10n
+  RB2:  resistor 10,8 10,10 22k
+  Q1:   npn 12,8
+  LO:   port 2,12
+  R3:   resistor 4,12 4,14 51
+  C2:   capacitor 5,12 7,12 10n
+  RE:   resistor 12,12 12,14 470
+  C4:   capacitor 16,5 18,5 10n
+  R7:   resistor 20,5 20,7 2k
+  FL1:  ceramic-filter 23,5 455kHz
+  C5:   capacitor 27,5 27,7 1.2n
+  L2:   inductor 27,5 30,5 100u
+  IF:   port 32,5
+  G1:   ground 6,5
+  G2:   ground 8,5
+  G3:   ground 4,10
+  G4:   ground 10,10
+  G5:   ground 4,14
+  G6:   ground 12,14
+  G7:   ground 20,7
+  G8:   ground 23,7
+  G9:   ground 27,7
 wires:
-  - b10 -- c10
-  - c6 -- c8 -- c10 -- c12 -- c14
-  - e10 -- h10
-  - h2 -- h5
-  - h4 -- h5
-  - h7 -- h10
-  - h10 -- Q1.B
-  - l2 -- l5
-  - l4 -- l5
-  - l7 -- l12
-  - Q1.E -- l12
-  - Q1.C -- e12
-  - e12 -- e14 -- e16
-  - e18 -- e20 -- FL1.IN
-  - FL1.GND -- g23
-  - FL1.OUT -- e27
-  - e30 -- e32
+  - 10,2 -- 10,3
+  - 6,3 -- 8,3 -- 10,3 -- 12,3 -- 14,3
+  - 10,5 -- 10,8
+  - 2,8 -- 5,8
+  - 4,8 -- 5,8
+  - 7,8 -- 10,8
+  - 10,8 -- Q1.B
+  - 2,12 -- 5,12
+  - 4,12 -- 5,12
+  - 7,12 -- 12,12
+  - Q1.E -- 12,12
+  - Q1.C -- 12,5
+  - 12,5 -- 14,5 -- 16,5
+  - 18,5 -- 20,5 -- FL1.IN
+  - FL1.GND -- 23,7
+  - FL1.OUT -- 27,5
+  - 30,5 -- 32,5
 notes:
-  - text f2 small left: "RF IN 50Ω"
-  - text j2 small left: "LO IN 50Ω"
-  - text f32 small left: "IF OUT 50Ω"
-  - text g2 small blue left: "-30 dBm (10 mVp)"
-  - text k2 small blue left: "0 dBm (0.32 Vp)"
-  - text g32 small blue left: "RF -30 dBm で -20.7 dBm (29 mVp)"
-  - text b14a5 small left: "L1・C3 は約 454 kHz に同調"
-  - text j13 small blue left: "B 1.00 V・E 0.37 V・IC 0.79 mA"
+  - text 2,6 small left: "RF IN 50Ω"
+  - text 2,10 small left: "LO IN 50Ω"
+  - text 32,6 small left: "IF OUT 50Ω"
+  - text 2,7 small blue left: "-30 dBm (10 mVp)"
+  - text 2,11 small blue left: "0 dBm (0.32 Vp)"
+  - text 32,7 small blue left: "RF -30 dBm で -20.7 dBm (29 mVp)"
+  - text 14.5,2 small left: "L1・C3 は約 454 kHz に同調"
+  - text 13,10 small blue left: "B 1.00 V・E 0.37 V・IC 0.79 mA"
 style:
   pitch: 1.2
 ```

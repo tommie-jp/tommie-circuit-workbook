@@ -33,16 +33,16 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  E1: vsource d2 h2 5 l=$E$
-  Ri: resistor d2 d4 220 l=$r$
-  RL: resistor d7 h7 l=$\mathrm{R_L}$
-  V1: voltmeter d9 h9
+  E1: vsource 2,4 2,8 5 l=$E$
+  Ri: resistor 2,4 4,4 220 l=$r$
+  RL: resistor 7,4 7,8 l=$\mathrm{R_L}$
+  V1: voltmeter 9,4 9,8
 wires:
-  - d4 -- d7 -- d9
-  - h2 -- h7 -- h9
+  - 4,4 -- 7,4 -- 9,4
+  - 2,8 -- 7,8 -- 9,8
 notes:
-  - box c1f5 h5 blue
-  - text i3 blue: 電源 (テブナンの等価回路)
+  - box 1.5,3.5 5,8 blue
+  - text 3,9 blue: 電源 (テブナンの等価回路)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/08-maximum-power-transfer.svg)

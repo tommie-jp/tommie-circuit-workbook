@@ -43,24 +43,24 @@ I を cos、Q を sin と見るのと同じ向きだ。9-19 からも同じ名�
 ```circuit
 title: 図1 RC-CR で W1 から I (高域側 +45°) と Q (低域側 -45°) を作る
 parts:
-  W1: sine d1 f1 l=$\mathrm{W1}$
-  G1: ground f1
-  R1: resistor d2 d4 680
-  C2: capacitor d6 f6 470p
-  M2: voltmeter d9 f9 l=$\mathrm{CH2}$
-  C1: capacitor b2 b4 470p
-  R2: resistor b11 f11 680
-  M1: voltmeter b13 f13 l=$\mathrm{CH1}$
+  W1: sine 1,4 1,6 l=$\mathrm{W1}$
+  G1: ground 1,6
+  R1: resistor 2,4 4,4 680
+  C2: capacitor 6,4 6,6 470p
+  M2: voltmeter 9,4 9,6 l=$\mathrm{CH2}$
+  C1: capacitor 2,2 4,2 470p
+  R2: resistor 11,2 11,6 680
+  M1: voltmeter 13,2 13,6 l=$\mathrm{CH1}$
 wires:
-  - b1 -- d1
-  - b1 -- b2
-  - d1 -- d2
-  - d4 -- d6 -- d9
-  - b4 -- b11 -- b13
-  - f1 -- f6 -- f9 -- f11 -- f13
+  - 1,2 -- 1,4
+  - 1,2 -- 2,2
+  - 1,4 -- 2,4
+  - 4,4 -- 6,4 -- 9,4
+  - 4,2 -- 11,2 -- 13,2
+  - 1,6 -- 6,6 -- 9,6 -- 11,6 -- 13,6
 notes:
-  - text a12f0 small center: I (+45°)
-  - text c7f5 small center: Q (-45°)
+  - text 12,1.5 small center: I (+45°)
+  - text 7.5,3.5 small center: Q (-45°)
 style:
   pitch: 1.2
 ```

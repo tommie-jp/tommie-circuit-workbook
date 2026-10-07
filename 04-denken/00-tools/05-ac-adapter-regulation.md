@@ -36,18 +36,18 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  E0: sine d2 h2 l=$\mathrm{E_0}$
-  Ri: resistor d2 d4 4.8 l=$r$
-  A1: ammeter d6 d8
-  RL: resistor d10 h10 l=$\mathrm{R_L}$
-  V1: voltmeter d12 h12
+  E0: sine 2,4 2,8 l=$\mathrm{E_0}$
+  Ri: resistor 2,4 4,4 4.8 l=$r$
+  A1: ammeter 6,4 8,4
+  RL: resistor 10,4 10,8 l=$\mathrm{R_L}$
+  V1: voltmeter 12,4 12,8
 wires:
-  - d4 -- d6
-  - d8 -- d10 -- d12
-  - h2 -- h10 -- h12
+  - 4,4 -- 6,4
+  - 8,4 -- 10,4 -- 12,4
+  - 2,8 -- 10,8 -- 12,8
 notes:
-  - box c1f5 h5 blue
-  - text i3 blue: AC アダプタ (等価回路)
+  - box 1.5,3.5 5,8 blue
+  - text 3,9 blue: AC アダプタ (等価回路)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/circuit/05-ac-adapter-regulation.svg)

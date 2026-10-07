@@ -21,23 +21,23 @@ USB 給電の基板でいちばんよく見る電源回路だ。
 ```circuit
 title: 図1 USB 5V から 3.3V の LDO (CH1 は出力の電圧)
 parts:
-  J1: usb-c b2g0d0
-  U1: regulator b6 AMS1117-3.3
-  Cin: capacitor b4 d4 10u
-  Cout: ecap b8 d8 22u
-  Rled: resistor b10 c10 150
-  Dled: led c10 d10 red
-  M1: voltmeter b12 d12 l=$\mathrm{CH1}$
+  J1: usb-c 2,2.63
+  U1: regulator 6,2 AMS1117-3.3
+  Cin: capacitor 4,2 4,4 10u
+  Cout: ecap 8,2 8,4 22u
+  Rled: resistor 10,2 10,3 150
+  Dled: led 10,3 10,4 red
+  M1: voltmeter 12,2 12,4 l=$\mathrm{CH1}$
   G1: ground gnd
 points:
-  gnd: d3
+  gnd: 3,4
 wires:
-  - J1.VBUS -| b4
+  - J1.VBUS -| 4,2
   - J1.GND -| gnd
-  - b4 -- U1.in
-  - U1.out -- b8 -- b10 -- b12
-  - U1.gnd -- d6
-  - gnd -- d4 -- d6 -- d8 -- d10 -- d12
+  - 4,2 -- U1.in
+  - U1.out -- 8,2 -- 10,2 -- 12,2
+  - U1.gnd -- 6,4
+  - gnd -- 4,4 -- 6,4 -- 8,4 -- 10,4 -- 12,4
 style:
   grid: on
 ```

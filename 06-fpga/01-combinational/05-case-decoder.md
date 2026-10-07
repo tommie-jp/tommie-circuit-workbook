@@ -36,41 +36,41 @@ device: SIM
 ```circuit
 title: 図1 2 ビットから 4 本へのデコーダ
 parts:
-  a1: port b1
-  a0: port d1
-  N1: not b6
-  N2: not d13
-  Y0: and h21
-  Y1: and l21
-  Y2: and p21
-  Y3: and t21
-  y0: port h26
-  y1: port l26
-  y2: port p26
-  y3: port t26
+  a1: port 1,2
+  a0: port 1,4
+  N1: not 6,2
+  N2: not 13,4
+  Y0: and 21,8
+  Y1: and 21,12
+  Y2: and 21,16
+  Y3: and 21,20
+  y0: port 26,8
+  y1: port 26,12
+  y2: port 26,16
+  y3: port 26,20
 wires:
-  - b1 -- b4
-  - b4 -- t4
-  - b4 -- N1.in
-  - N1.out -- b9
-  - b9 -- l9
-  - d1 -- d12
-  - d12 -- t12
-  - d12 -- N2.in
-  - N2.out -- d16
-  - d16 -- p16
-  - h9 |- Y0.a
-  - l9 |- Y1.a
-  - p4 |- Y2.a
-  - t4 |- Y3.a
-  - h16 |- Y0.b
-  - l12 |- Y1.b
-  - p16 |- Y2.b
-  - t12 |- Y3.b
-  - Y0.out -- h26
-  - Y1.out -- l26
-  - Y2.out -- p26
-  - Y3.out -- t26
+  - 1,2 -- 4,2
+  - 4,2 -- 4,20
+  - 4,2 -- N1.in
+  - N1.out -- 9,2
+  - 9,2 -- 9,12
+  - 1,4 -- 12,4
+  - 12,4 -- 12,20
+  - 12,4 -- N2.in
+  - N2.out -- 16,4
+  - 16,4 -- 16,16
+  - 9,8 |- Y0.a
+  - 9,12 |- Y1.a
+  - 4,16 |- Y2.a
+  - 4,20 |- Y3.a
+  - 16,8 |- Y0.b
+  - 12,12 |- Y1.b
+  - 16,16 |- Y2.b
+  - 12,20 |- Y3.b
+  - Y0.out -- 26,8
+  - Y1.out -- 26,12
+  - Y2.out -- 26,16
+  - Y3.out -- 26,20
 style:
   grid: off
   pitch: 1.2

@@ -33,23 +33,23 @@ Li-ion 電池はスマートフォンや携帯機器の電池で、ほかの電�
 ```circuit
 title: 図1 TP4056 (保護回路つき) での Li-ion 充電
 parts:
-  J1: usb-c c2
+  J1: usb-c 2,3
   M1:
     type: device
-    at: c11
+    at: 11,3
     label: TP4056 + Protect
     pins: [IN+, IN-, B+, B-, OUT+, OUT-]
-  B1: battery e4 e6 3.7
-  Rled: resistor d7 f7 390
-  Dled: led f7 h7 red
+  B1: battery 4,5 6,5 3.7
+  Rled: resistor 7,4 7,6 390
+  Dled: led 7,6 7,8 red
 wires:
   - J1.VBUS -- M1.IN+
   - J1.GND -- M1.IN-
-  - M1.B+ -| e4
-  - M1.B- -| e6
-  - M1.OUT+ -| d7
-  - M1.OUT- -| h9
-  - h9 -- h7
+  - M1.B+ -| 4,5
+  - M1.B- -| 6,5
+  - M1.OUT+ -| 7,4
+  - M1.OUT- -| 9,8
+  - 9,8 -- 7,8
 style:
   grid: on
   pitch: 1.2

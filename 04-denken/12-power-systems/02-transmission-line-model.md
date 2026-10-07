@@ -29,22 +29,22 @@ title: 図1 送電線の模型 (R + L、S1 で L を短絡)
 style:
   standard: jis
 parts:
-  W1: sine c1 g1 l=$\mathrm{W1}$
-  Rline: resistor c1 c3 10 i=I
-  M2: voltmeter a1 a3 l=$\mathrm{CH2}$
-  Lline: inductor c3 e3 10m
-  S1: switch c5 e5
-  Rload: resistor e3 g3 100
-  M1: voltmeter e7 g7 l=$\mathrm{CH1}$
-  G1: ground g1
+  W1: sine 1,3 1,7 l=$\mathrm{W1}$
+  Rline: resistor 1,3 3,3 10 i=I
+  M2: voltmeter 1,1 3,1 l=$\mathrm{CH2}$
+  Lline: inductor 3,3 3,5 10m
+  S1: switch 5,3 5,5
+  Rload: resistor 3,5 3,7 100
+  M1: voltmeter 7,5 7,7 l=$\mathrm{CH1}$
+  G1: ground 1,7
 wires:
-  - a1 -- c1
-  - a3 -- c3
-  - c3 -- c5
-  - e3 -- e5
-  - e5 -- e7
-  - g3 -- g7
-  - g1 -- g3
+  - 1,1 -- 1,3
+  - 3,1 -- 3,3
+  - 3,3 -- 5,3
+  - 3,5 -- 5,5
+  - 5,5 -- 7,5
+  - 3,7 -- 7,7
+  - 1,7 -- 3,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/circuit/02-transmission-line-model-1.svg)
@@ -141,21 +141,21 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{FG}$
-  S1: switch a3 a6
-  Lline: inductor c3 c6 10m
-  Rload: resistor c8 e8 100
-  Rline: resistor e8 g8 10 i=I
-  M2: voltmeter e11 g11 l=$\mathrm{CH2}$
-  M1: voltmeter c14 g14 l=$\mathrm{CH1}$
-  G1: ground g1
+  V1: sine 1,3 1,7 l=$\mathrm{FG}$
+  S1: switch 3,1 6,1
+  Lline: inductor 3,3 6,3 10m
+  Rload: resistor 8,3 8,5 100
+  Rline: resistor 8,5 8,7 10 i=I
+  M2: voltmeter 11,5 11,7 l=$\mathrm{CH2}$
+  M1: voltmeter 14,3 14,7 l=$\mathrm{CH1}$
+  G1: ground 1,7
 wires:
-  - c1 -- c3
-  - a3 -- c3
-  - a6 -- c6
-  - c6 -- c8 -- c14
-  - e8 -- e11
-  - g1 -- g8 -- g11 -- g14
+  - 1,3 -- 3,3
+  - 3,1 -- 3,3
+  - 6,1 -- 6,3
+  - 6,3 -- 8,3 -- 14,3
+  - 8,5 -- 11,5
+  - 1,7 -- 8,7 -- 11,7 -- 14,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/circuit/02-transmission-line-model-2.svg)

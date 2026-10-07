@@ -21,12 +21,12 @@ Analog Discovery 3 自体・付属ワイヤ・両方の計器が正しく動く�
 ```circuit
 title: 図1 ループバック配線
 parts:
-  W1: sine a1 c1 1
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  G1: ground c1
+  W1: sine 1,1 1,3 1
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  G1: ground 1,3
 wires:
-  - a1 -- a3
-  - c1 -- c3
+  - 1,1 -- 3,1
+  - 1,3 -- 3,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/circuit/03-loopback.svg)

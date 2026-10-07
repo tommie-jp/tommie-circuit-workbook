@@ -32,29 +32,29 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  Rab: resistor c2 h2 1.1k
-  Rca: resistor c8 h8 4.7k
-  Rbc: resistor h4 h6 4.3k
-  Ra: resistor c15 f15 510
-  Rb: resistor f15 f12 470
-  Rc: resistor f15 f18 2k
+  Rab: resistor 2,3 2,8 1.1k
+  Rca: resistor 8,3 8,8 4.7k
+  Rbc: resistor 4,8 6,8 4.3k
+  Ra: resistor 15,3 15,6 510
+  Rb: resistor 15,6 12,6 470
+  Rc: resistor 15,6 18,6 2k
 wires:
-  - c2 -- c5 -- c8
-  - b5 -- c5
-  - h2 -- h4
-  - h6 -- h8
-  - h2 -- i2
-  - h8 -- i8
-  - b15 -- c15
-  - f12 -- i12
-  - f18 -- i18
+  - 2,3 -- 5,3 -- 8,3
+  - 5,2 -- 5,3
+  - 2,8 -- 4,8
+  - 6,8 -- 8,8
+  - 2,8 -- 2,9
+  - 8,8 -- 8,9
+  - 15,2 -- 15,3
+  - 12,6 -- 12,9
+  - 18,6 -- 18,9
 notes:
-  - text b5 left: A
-  - text i2 left: B
-  - text i8 left: C
-  - text b15 left: A
-  - text i12 left: B
-  - text i18 left: C
+  - text 5,2 left: A
+  - text 2,9 left: B
+  - text 8,9 left: C
+  - text 15,2 left: A
+  - text 12,9 left: B
+  - text 18,9 left: C
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/10-delta-y-conversion.svg)

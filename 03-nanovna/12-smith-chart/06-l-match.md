@@ -25,19 +25,19 @@ device: LV64
 ```circuit
 title: 図1 L 形整合回路 (24 Ω を 50 Ω に見せる)
 parts:
-  J1: sma c2 mirror
-  G0: ground d2
-  C1: capacitor c5 e5 3.3n
-  G1: ground e5
-  L1: inductor c5 c9 3.9u
-  R1: resistor c9 e9 24
-  G2: ground e9
+  J1: sma 2,3 mirror
+  G0: ground 2,4
+  C1: capacitor 5,3 5,5 3.3n
+  G1: ground 5,5
+  L1: inductor 5,3 9,3 3.9u
+  R1: resistor 9,3 9,5 24
+  G2: ground 9,5
 wires:
-  - J1.1 -- c5
-  - J1.2 -- d2
+  - J1.1 -- 5,3
+  - J1.2 -- 2,4
 notes:
-  - text b7 small center: 入口
-  - text g9 small center: 負荷
+  - text 7,2 small center: 入口
+  - text 9,7 small center: 負荷
 style:
   pitch: 1.0
 ```

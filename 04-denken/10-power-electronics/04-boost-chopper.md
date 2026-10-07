@@ -34,27 +34,27 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  Vin: vsource b1 i1 5
-  L1: inductor b2 b5 1m
-  D1: schottky b6 b9 1N5819
-  Q1: nmos-e g6
-  Vg: square i3 h3 l=$\mathrm{PWM}$
-  M2: voltmeter f8 i8 l=$\mathrm{CH2}$
-  Cout: ecap b11 i11 10u
-  RL: resistor b13 i13 2.2k
-  M1: voltmeter b16 i16 l=$\mathrm{CH1}$
-  G1: ground i1
+  Vin: vsource 1,2 1,9 5
+  L1: inductor 2,2 5,2 1m
+  D1: schottky 6,2 9,2 1N5819
+  Q1: nmos-e 6,7
+  Vg: square 3,9 3,8 l=$\mathrm{PWM}$
+  M2: voltmeter 8,6 8,9 l=$\mathrm{CH2}$
+  Cout: ecap 11,2 11,9 10u
+  RL: resistor 13,2 13,9 2.2k
+  M1: voltmeter 16,2 16,9 l=$\mathrm{CH1}$
+  G1: ground 1,9
 wires:
-  - b1 -- b2
-  - b5 -- b6 -- f6
-  - f6 -- Q1.D
-  - f6 -- f8
-  - b9 -- b11 -- b13 -- b16
-  - Q1.G -| h3
-  - Q1.S |- i6
-  - i1 -- i3 -- i6 -- i8 -- i11 -- i13 -- i16
+  - 1,2 -- 2,2
+  - 5,2 -- 6,2 -- 6,6
+  - 6,6 -- Q1.D
+  - 6,6 -- 8,6
+  - 9,2 -- 11,2 -- 13,2 -- 16,2
+  - Q1.G -| 3,8
+  - Q1.S |- 6,9
+  - 1,9 -- 3,9 -- 6,9 -- 8,9 -- 11,9 -- 13,9 -- 16,9
 notes:
-  - text a6f5 blue: X
+  - text 6.5,1.5 blue: X
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/04-boost-chopper.svg)

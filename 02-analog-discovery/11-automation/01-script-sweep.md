@@ -23,21 +23,21 @@ title: 図1 RC ローパスを Script で掃引する
 parts:
   AD:
     type: device
-    at: a1
+    at: 1,1
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
-  R1: resistor c3 c6 1k
-  C1: capacitor c9 c12 100n
-  G1: ground c14
+  R1: resistor 3,3 6,3 1k
+  C1: capacitor 9,3 12,3 100n
+  G1: ground 14,3
 wires:
-  - AD.W1 -| c3
-  - AD.1+ -| c3
-  - AD.1- -| c14
-  - c6 -- c9
-  - AD.2+ -| c6
-  - AD.2- -| c14
-  - c12 -- c14
-  - AD.GND -| c14
+  - AD.W1 -| 3,3
+  - AD.1+ -| 3,3
+  - AD.1- -| 14,3
+  - 6,3 -- 9,3
+  - AD.2+ -| 6,3
+  - AD.2- -| 14,3
+  - 12,3 -- 14,3
+  - AD.GND -| 14,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/11-automation/circuit/01-script-sweep.svg)

@@ -27,26 +27,26 @@ title: 図1 CH0 の出力を 20 dB パッドで tinySA へ
 parts:
   X1:
     type: device
-    at: b1
+    at: 1,2
     label: NanoVNA
     pins: [CH0, GND]
     turn: mirror
-  P1: resistor b5 b7 43
-  P2: resistor b7 d7 11
-  P3: resistor b7 b9 43
+  P1: resistor 5,2 7,2 43
+  P2: resistor 7,2 7,4 11
+  P3: resistor 7,2 9,2 43
   X2:
     type: device
-    at: b11
+    at: 11,2
     label: tinySA
     pins: [RF, GND]
-  GV: ground d4
-  GP: ground d7
-  GM: ground d10
+  GV: ground 4,4
+  GP: ground 7,4
+  GM: ground 10,4
 wires:
-  - X1.CH0 -| b5
-  - b9 -| X2.RF
-  - X1.GND -| d4
-  - X2.GND -| d10
+  - X1.CH0 -| 5,2
+  - 9,2 -| X2.RF
+  - X1.GND -| 4,4
+  - X2.GND -| 10,4
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/04-nanovna-output.svg)

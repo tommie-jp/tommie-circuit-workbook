@@ -31,13 +31,13 @@ R = 50 Ω なら Γ = 0 (SWR = 1、反射なし)。R が大きくても小さく
 ```circuit
 title: 図1 抵抗 1 個の負荷
 parts:
-  J1: sma b2 mirror CH0
-  R1: resistor b4 d4 100
-  G1: ground c2
-  G2: ground d4
+  J1: sma 2,2 mirror CH0
+  R1: resistor 4,2 4,4 100
+  G1: ground 2,3
+  G2: ground 4,4
 wires:
-  - J1.1 -- b4
-  - J1.2 -- c2
+  - J1.1 -- 4,2
+  - J1.2 -- 2,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/01-swr-impedance-reading.svg)

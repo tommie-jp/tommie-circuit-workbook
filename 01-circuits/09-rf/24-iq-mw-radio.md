@@ -128,78 +128,78 @@ AD3 の W1・W2 で試験の電波を作るときも、10 pF を通してタン�
 ```circuit
 title: 図1 バーアンテナと Tayloe 検波器 (74HC4052、3.3V)
 parts:
-  W1: sine c1 e1 l=$\mathrm{W1}$
-  GW1: ground e1
-  Cw1: capacitor c1 c3 10p
-  W2: sine i1 k1 l=$\mathrm{W2}$
-  GW2: ground k1
-  Cw2: capacitor i1 i3 10p
-  VC1: capacitor-var g5b0 i5 260p l=$\mathrm{VC}_1$
-  GVC: ground i5
-  T1: transformer h8
-  R1: resistor g10b0 g13b0 100
-  AN: port g13b0
-  VCC: vcc j12 3.3V
-  R2: resistor j12 l12 10k
-  R3: resistor l12 n12 10k
-  GR3: ground n12
-  C1: capacitor l15 n15 1u
-  GC1: ground n15
-  VREF: port l17
-  U1: ic j26 74HC4052
-  VCC: vcc f26 3.3V
-  GU1: ground m25
-  GBN: ground l29a5
-  A0: port h22f0
-  A1: port i22
-  A2: port i22f0
-  A3: port j22
-  AN: port j30
-  S1: port n30
-  S0: port o30
-  A0: port q21
-  CA0: capacitor q21 s21 22n
-  GA0: ground s21
-  A1: port q24
-  CA1: capacitor q24 s24 22n
-  GA1: ground s24
-  A2: port q27
-  CA2: capacitor q27 s27 22n
-  GA2: ground s27
-  A3: port q30
-  CA3: capacitor q30 s30 22n
-  GA3: ground s30
-  VCC: vcc q33 3.3V
-  C3: capacitor q33 s33 100n
-  GC3: ground s33
+  W1: sine 1,3 1,5 l=$\mathrm{W1}$
+  GW1: ground 1,5
+  Cw1: capacitor 1,3 3,3 10p
+  W2: sine 1,9 1,11 l=$\mathrm{W2}$
+  GW2: ground 1,11
+  Cw2: capacitor 1,9 3,9 10p
+  VC1: capacitor-var 5,7.1 5,9 260p l=$\mathrm{VC}_1$
+  GVC: ground 5,9
+  T1: transformer 8,8
+  R1: resistor 10,7.1 13,7.1 100
+  AN: port 13,7.1
+  VCC: vcc 12,10 3.3V
+  R2: resistor 12,10 12,12 10k
+  R3: resistor 12,12 12,14 10k
+  GR3: ground 12,14
+  C1: capacitor 15,12 15,14 1u
+  GC1: ground 15,14
+  VREF: port 17,12
+  U1: ic 26,10 74HC4052
+  VCC: vcc 26,6 3.3V
+  GU1: ground 25,13
+  GBN: ground 29.5,12
+  A0: port 22,8.5
+  A1: port 22,9
+  A2: port 22,9.5
+  A3: port 22,10
+  AN: port 30,10
+  S1: port 30,14
+  S0: port 30,15
+  A0: port 21,17
+  CA0: capacitor 21,17 21,19 22n
+  GA0: ground 21,19
+  A1: port 24,17
+  CA1: capacitor 24,17 24,19 22n
+  GA1: ground 24,19
+  A2: port 27,17
+  CA2: capacitor 27,17 27,19 22n
+  GA2: ground 27,19
+  A3: port 30,17
+  CA3: capacitor 30,17 30,19 22n
+  GA3: ground 30,19
+  VCC: vcc 33,17 3.3V
+  C3: capacitor 33,17 33,19 100n
+  GC3: ground 33,19
 wires:
-  - c3 -- g3b0
-  - i3 -- g3b0
-  - g3b0 -- g5b0
-  - T1.A1 -| g5b0
-  - T1.A2 -| i5
-  - T1.B1 -| g10b0
-  - T1.B2 -| l10
-  - l10 -- l12
-  - l12 -- l15
-  - l15 -- l17
-  - U1.VCC |- f26
-  - h22f0 -| U1.A0
-  - i22 -| U1.A1
-  - i22f0 -| U1.A2
-  - j22 -| U1.A3
-  - U1.AN -| j30
-  - U1.BN -| l29a5
-  - m25 |- U1.GND
-  - U1.VEE |- m25a5
-  - U1.E |- m26
-  - m25 -- m26
-  - U1.S1 |- n30
-  - U1.S0 |- o30
+  - 3,3 -- 3,7.1
+  - 3,9 -- 3,7.1
+  - 3,7.1 -- 5,7.1
+  - T1.A1 -| 5,7.1
+  - T1.A2 -| 5,9
+  - T1.B1 -| 10,7.1
+  - T1.B2 -| 10,12
+  - 10,12 -- 12,12
+  - 12,12 -- 15,12
+  - 15,12 -- 17,12
+  - U1.VCC |- 26,6
+  - 22,8.5 -| U1.A0
+  - 22,9 -| U1.A1
+  - 22,9.5 -| U1.A2
+  - 22,10 -| U1.A3
+  - U1.AN -| 30,10
+  - U1.BN -| 29.5,12
+  - 25,13 |- U1.GND
+  - U1.VEE |- 25.5,13
+  - U1.E |- 26,13
+  - 25,13 -- 26,13
+  - U1.S1 |- 30,14
+  - U1.S0 |- 30,15
 notes:
-  - text f8 small center: バーアンテナ
-  - text t25h5 small center: A0 から A3 の 22nF (図5 の基板の入口に挿す)
-  - text t33 small center: U1 のそば
+  - text 8,6 small center: バーアンテナ
+  - text 25.5,20.7 small center: A0 から A3 の 22nF (図5 の基板の入口に挿す)
+  - text 33,20 small center: U1 のそば
 style:
   pitch: 1
 ```
@@ -228,91 +228,91 @@ style:
 ```circuit
 title: 図2 I と Q の増幅 (MCP6002、差動で 10 倍と反転で 10 倍)
 parts:
-  A3: port d1
-  R10: resistor d2 d5 100k
-  A0: port f1e0c0
-  R11: resistor f2e0c0 f5e0c0 100k
-  R12: resistor f8e0c0 h8 1M
-  R13: resistor b9 b14 1M
-  U2B: opamp f12 +down MCP6002
-  C10: capacitor f15 f17 1u
-  R14: resistor f17 f19 10k
-  R15: resistor c19 c24 100k
-  U2A: opamp f22e0c0 +down MCP6002
-  VREF: port h6
-  I: port f27e0c0
-  A2: port m1
-  R20: resistor m2 m5 100k
-  A1: port o1e0c0
-  R21: resistor o2e0c0 o5e0c0 100k
-  R22: resistor o8e0c0 q8 1M
-  R23: resistor k9 k14 1M
-  U3B: opamp o12 +down MCP6002
-  C20: capacitor o15 o17 1u
-  R24: resistor o17 o19 10k
-  R25: resistor l19 l24 100k
-  U3A: opamp o22e0c0 +down MCP6002
-  VREF: port q6
-  Q: port o27e0c0
-  VCC: vcc c30 3.3V
-  C4: capacitor c30 e30 100n
-  GC4: ground e30
-  VCC: vcc c33 3.3V
-  C5: capacitor c33 e33 100n
-  GC5: ground e33
+  A3: port 1,4
+  R10: resistor 2,4 5,4 100k
+  A0: port 1,6.42
+  R11: resistor 2,6.42 5,6.42 100k
+  R12: resistor 8,6.42 8,8 1M
+  R13: resistor 9,2 14,2 1M
+  U2B: opamp 12,6 +down MCP6002
+  C10: capacitor 15,6 17,6 1u
+  R14: resistor 17,6 19,6 10k
+  R15: resistor 19,3 24,3 100k
+  U2A: opamp 22,6.42 +down MCP6002
+  VREF: port 6,8
+  I: port 27,6.42
+  A2: port 1,13
+  R20: resistor 2,13 5,13 100k
+  A1: port 1,15.42
+  R21: resistor 2,15.42 5,15.42 100k
+  R22: resistor 8,15.42 8,17 1M
+  R23: resistor 9,11 14,11 1M
+  U3B: opamp 12,15 +down MCP6002
+  C20: capacitor 15,15 17,15 1u
+  R24: resistor 17,15 19,15 10k
+  R25: resistor 19,12 24,12 100k
+  U3A: opamp 22,15.42 +down MCP6002
+  VREF: port 6,17
+  Q: port 27,15.42
+  VCC: vcc 30,3 3.3V
+  C4: capacitor 30,3 30,5 100n
+  GC4: ground 30,5
+  VCC: vcc 33,3 3.3V
+  C5: capacitor 33,3 33,5 100n
+  GC5: ground 33,5
 wires:
-  - d1 -- d2
-  - f1e0c0 -- f2e0c0
-  - m1 -- m2
-  - o1e0c0 -- o2e0c0
-  - d5 -- d9
-  - d9 -- e9f0i0
-  - U2B.- |- e9f0i0
-  - d9 -- b9
-  - b14 -- f14
-  - U2B.out -| f14
-  - f14 -- f15
-  - f5e0c0 -- f8e0c0
-  - U2B.+ |- f8e0c0
-  - h6 -- h8
-  - h8 -- h20
-  - U2A.+ -| h20
-  - U2A.- |- f19
-  - f19 -- c19
-  - c24 -- f24e0c0
-  - U2A.out -| f24e0c0
-  - f24e0c0 -- f27e0c0
-  - m5 -- m9
-  - m9 -- n9f0i0
-  - U3B.- |- n9f0i0
-  - m9 -- k9
-  - k14 -- o14
-  - U3B.out -| o14
-  - o14 -- o15
-  - o5e0c0 -- o8e0c0
-  - U3B.+ |- o8e0c0
-  - q6 -- q8
-  - q8 -- q20
-  - U3A.+ -| q20
-  - U3A.- |- o19
-  - o19 -- l19
-  - l24 -- o24e0c0
-  - U3A.out -| o24e0c0
-  - o24e0c0 -- o27e0c0
+  - 1,4 -- 2,4
+  - 1,6.42 -- 2,6.42
+  - 1,13 -- 2,13
+  - 1,15.42 -- 2,15.42
+  - 5,4 -- 9,4
+  - 9,4 -- 9,5.58
+  - U2B.- |- 9,5.58
+  - 9,4 -- 9,2
+  - 14,2 -- 14,6
+  - U2B.out -| 14,6
+  - 14,6 -- 15,6
+  - 5,6.42 -- 8,6.42
+  - U2B.+ |- 8,6.42
+  - 6,8 -- 8,8
+  - 8,8 -- 20,8
+  - U2A.+ -| 20,8
+  - U2A.- |- 19,6
+  - 19,6 -- 19,3
+  - 24,3 -- 24,6.42
+  - U2A.out -| 24,6.42
+  - 24,6.42 -- 27,6.42
+  - 5,13 -- 9,13
+  - 9,13 -- 9,14.58
+  - U3B.- |- 9,14.58
+  - 9,13 -- 9,11
+  - 14,11 -- 14,15
+  - U3B.out -| 14,15
+  - 14,15 -- 15,15
+  - 5,15.42 -- 8,15.42
+  - U3B.+ |- 8,15.42
+  - 6,17 -- 8,17
+  - 8,17 -- 20,17
+  - U3A.+ -| 20,17
+  - U3A.- |- 19,15
+  - 19,15 -- 19,12
+  - 24,12 -- 24,15.42
+  - U3A.out -| 24,15.42
+  - 24,15.42 -- 27,15.42
 notes:
-  - text e10d5 small center: "6"
-  - text f10h5 small center: "5"
-  - text e13h5 small center: "7"
-  - text e20h5 small center: "2"
-  - text g20b5 small center: "3"
-  - text f23b6 small center: "1"
-  - text n10d5 small center: "6"
-  - text o10h5 small center: "5"
-  - text n13h5 small center: "7"
-  - text n20h5 small center: "2"
-  - text p20b5 small center: "3"
-  - text o23b6 small center: "1"
-  - text g31h5 small center: U2・U3 の PIN 8 と PIN 4 のそば
+  - text 10.5,5.3 small center: "6"
+  - text 10.5,6.7 small center: "5"
+  - text 13.5,5.7 small center: "7"
+  - text 20.5,5.7 small center: "2"
+  - text 20.5,7.1 small center: "3"
+  - text 23.6,6.1 small center: "1"
+  - text 10.5,14.3 small center: "6"
+  - text 10.5,15.7 small center: "5"
+  - text 13.5,14.7 small center: "7"
+  - text 20.5,14.7 small center: "2"
+  - text 20.5,16.1 small center: "3"
+  - text 23.6,15.1 small center: "1"
+  - text 31.5,7.7 small center: U2・U3 の PIN 8 と PIN 4 のそば
 style:
   pitch: 1
 ```
@@ -335,74 +335,74 @@ style:
 ```circuit
 title: 図3 Pico 2 (LO の出力・ADC・PWM) と LM386 の音声
 parts:
-  U1: pico2 k14 mirror
-  Q: port j9c0i0
-  I: port j9h0g0
-  VCC: vcc d9 3.3V
-  V5: vcc d11 5V
-  GU1: ground p11
-  S0: port g18i0i0
-  S1: port h18d0g0
+  U1: pico2 14,11 mirror
+  Q: port 9,10.28
+  I: port 9,10.76
+  VCC: vcc 9,4 3.3V
+  V5: vcc 11,4 5V
+  GU1: ground 11,16
+  S0: port 18,7.88
+  S1: port 18,8.36
   X1:
     type: device
-    at: m22b0i0
+    at: 22,13.18
     label: EC11
     pins: [A, B, C]
-  GX1: ground n20a5
-  R30: resistor o17f0g0 o19f0g0 10k
-  C30: capacitor o20f0g0 q20 2.2n
-  GC30: ground q20
-  R31: resistor o22f0g0 o24f0g0 10k
-  C31: capacitor o26f0g0 q26 2.2n
-  GC31: ground q26
-  C32: capacitor o27f0g0 o29f0g0 1u
-  VR1: potentiometer o30f0g0 q30 l=$\mathrm{VR}_1$
-  GVR: ground q30
-  U4: ic p37 LM386
-  GU4: ground s37
-  GIN: ground q32a5
-  V5: vcc m36a5 5V
-  C33: ecap p41 p43 220u
-  SP1: speaker p45 r45 l=$\mathrm{SP}$
-  GSP: ground r45
-  R32: resistor p40 r40 10
-  C34: capacitor r40 t40 47n
-  GC34: ground t40
-  V5: vcc j46 5V
-  C35: ecap j46 l46 100u
-  GC35: ground l46
+  GX1: ground 20.5,14
+  R30: resistor 17,15.56 19,15.56 10k
+  C30: capacitor 20,15.56 20,17 2.2n
+  GC30: ground 20,17
+  R31: resistor 22,15.56 24,15.56 10k
+  C31: capacitor 26,15.56 26,17 2.2n
+  GC31: ground 26,17
+  C32: capacitor 27,15.56 29,15.56 1u
+  VR1: potentiometer 30,15.56 30,17 l=$\mathrm{VR}_1$
+  GVR: ground 30,17
+  U4: ic 37,16 LM386
+  GU4: ground 37,19
+  GIN: ground 32.5,17
+  V5: vcc 36.5,13 5V
+  C33: ecap 41,16 43,16 220u
+  SP1: speaker 45,16 45,18 l=$\mathrm{SP}$
+  GSP: ground 45,18
+  R32: resistor 40,16 40,18 10
+  C34: capacitor 40,18 40,20 47n
+  GC34: ground 40,20
+  V5: vcc 46,10 5V
+  C35: ecap 46,10 46,12 100u
+  GC35: ground 46,12
 wires:
-  - U1.GP27 |- j9c0i0
-  - U1.GP26 |- j9h0g0
-  - U1.3V3 |- h9d0g0
-  - h9d0g0 -- d9
-  - U1.VBUS |- f11e0e0
-  - f11e0e0 -- d11
-  - U1.GND23 |- n11g0
-  - n11g0 -- p11
-  - U1.GP2 |- g18i0i0
-  - U1.GP3 |- h18d0g0
-  - U1.GP10 |- l20g0i0
-  - X1.A |- l20g0i0
-  - U1.GP11 |- m20b0g0
-  - X1.B |- m20b0g0
-  - X1.C -| n20a5
-  - U1.GP15 |- o17f0g0
-  - o19f0g0 -- o22f0g0
-  - o24f0g0 -- o27f0g0
-  - o29f0g0 -- o30f0g0
-  - VR1.w -| r31a5
-  - r31a5 -- r33a5
-  - r33a5 |- U4.-INPUT
-  - q32a5 |- U4.+INPUT
-  - s37 |- U4.GND
-  - m36a5 |- U4.VS
-  - U4.VOUT -| p40
-  - p40 -- p41
-  - p43 -- p45
+  - U1.GP27 |- 9,10.28
+  - U1.GP26 |- 9,10.76
+  - U1.3V3 |- 9,8.36
+  - 9,8.36 -- 9,4
+  - U1.VBUS |- 11,6.44
+  - 11,6.44 -- 11,4
+  - U1.GND23 |- 11,14.6
+  - 11,14.6 -- 11,16
+  - U1.GP2 |- 18,7.88
+  - U1.GP3 |- 18,8.36
+  - U1.GP10 |- 20,12.68
+  - X1.A |- 20,12.68
+  - U1.GP11 |- 20,13.16
+  - X1.B |- 20,13.16
+  - X1.C -| 20.5,14
+  - U1.GP15 |- 17,15.56
+  - 19,15.56 -- 22,15.56
+  - 24,15.56 -- 27,15.56
+  - 29,15.56 -- 30,15.56
+  - VR1.w -| 31.5,18
+  - 31.5,18 -- 33.5,18
+  - 33.5,18 |- U4.-INPUT
+  - 32.5,17 |- U4.+INPUT
+  - 37,19 |- U4.GND
+  - 36.5,13 |- U4.VS
+  - U4.VOUT -| 40,16
+  - 40,16 -- 41,16
+  - 43,16 -- 45,16
 notes:
-  - text q29a5 small right: 10 kΩ
-  - text m46 small center: U4 のそば
+  - text 29.5,17 small right: 10 kΩ
+  - text 46,13 small center: U4 のそば
 style:
   pitch: 1
 ```

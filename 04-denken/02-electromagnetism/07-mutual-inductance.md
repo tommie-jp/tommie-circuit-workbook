@@ -31,22 +31,22 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  W1: sine c1 h1 l=$\mathrm{W1}$
-  L1: inductor c4 e4 l=$\mathrm{L_1}$
-  Rr: resistor e4 h4 150 l=$\mathrm{R_{ref}}$
-  M2: voltmeter e7 h7 l=$\mathrm{CH1}$
-  L2: inductor c9 e9 l=$\mathrm{L_2}$
-  M1: voltmeter c11 e11 l=$\mathrm{CH2}$
-  G1: ground h1
-  G2: ground e11
+  W1: sine 1,3 1,8 l=$\mathrm{W1}$
+  L1: inductor 4,3 4,5 l=$\mathrm{L_1}$
+  Rr: resistor 4,5 4,8 150 l=$\mathrm{R_{ref}}$
+  M2: voltmeter 7,5 7,8 l=$\mathrm{CH1}$
+  L2: inductor 9,3 9,5 l=$\mathrm{L_2}$
+  M1: voltmeter 11,3 11,5 l=$\mathrm{CH2}$
+  G1: ground 1,8
+  G2: ground 11,5
 wires:
-  - c1 -- c4
-  - e4 -- e7
-  - h1 -- h4 -- h7
-  - c9 -- c11
-  - e9 -- e11
+  - 1,3 -- 4,3
+  - 4,5 -- 7,5
+  - 1,8 -- 4,8 -- 7,8
+  - 9,3 -- 11,3
+  - 9,5 -- 11,5
 notes:
-  - text d5 left blue: L1 と L2 の距離 d
+  - text 5,4 left blue: L1 と L2 の距離 d
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/07-mutual-inductance.svg)

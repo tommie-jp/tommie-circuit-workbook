@@ -32,19 +32,19 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{W1}$
-  Rs: resistor c1 c4 10 i=I
-  M2: voltmeter a1 a4 l=$\mathrm{CH2}$
-  M1: voltmeter c6 g6 l=$\mathrm{CH1}$
-  RL: resistor c8 g8 100
-  S1: switch c10 e10
-  C1: capacitor e10 g10 1.5u i=IC
-  G1: ground g6
+  V1: sine 1,3 1,7 l=$\mathrm{W1}$
+  Rs: resistor 1,3 4,3 10 i=I
+  M2: voltmeter 1,1 4,1 l=$\mathrm{CH2}$
+  M1: voltmeter 6,3 6,7 l=$\mathrm{CH1}$
+  RL: resistor 8,3 8,7 100
+  S1: switch 10,3 10,5
+  C1: capacitor 10,5 10,7 1.5u i=IC
+  G1: ground 6,7
 wires:
-  - a1 -- c1
-  - a4 -- c4
-  - c4 -- c6 -- c8 -- c10
-  - g1 -- g6 -- g8 -- g10
+  - 1,1 -- 1,3
+  - 4,1 -- 4,3
+  - 4,3 -- 6,3 -- 8,3 -- 10,3
+  - 1,7 -- 6,7 -- 8,7 -- 10,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/circuit/03-power-factor-line-loss-1.svg)
@@ -146,18 +146,18 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 i1 l=$\mathrm{FG}$
-  M1: voltmeter c3 i3 l=$\mathrm{CH1}$
-  RL: resistor c5 g5 100
-  S1: switch c8 e8
-  C1: capacitor e8 g8 1.5u i=IC
-  Rs: resistor g10 i10 10 i=I
-  M2: voltmeter g12 i12 l=$\mathrm{CH2}$
-  G1: ground i1
+  V1: sine 1,3 1,9 l=$\mathrm{FG}$
+  M1: voltmeter 3,3 3,9 l=$\mathrm{CH1}$
+  RL: resistor 5,3 5,7 100
+  S1: switch 8,3 8,5
+  C1: capacitor 8,5 8,7 1.5u i=IC
+  Rs: resistor 10,7 10,9 10 i=I
+  M2: voltmeter 12,7 12,9 l=$\mathrm{CH2}$
+  G1: ground 1,9
 wires:
-  - c1 -- c3 -- c5 -- c8
-  - g5 -- g8 -- g10 -- g12
-  - i1 -- i3 -- i10 -- i12
+  - 1,3 -- 3,3 -- 5,3 -- 8,3
+  - 5,7 -- 8,7 -- 10,7 -- 12,7
+  - 1,9 -- 3,9 -- 10,9 -- 12,9
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/circuit/03-power-factor-line-loss-2.svg)

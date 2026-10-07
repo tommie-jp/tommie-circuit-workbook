@@ -32,47 +32,47 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 e1 l=$\mathrm{W1}$
-  G1: ground e1
-  V2: sine i1 k1 l=$\mathrm{W2}$
-  G2: ground k1
-  R1: resistor c3 e3 10k
-  R2: resistor i4 g4 10k
-  U1: opamp f8 +down TL071
-  G3: ground g6
-  Rf: resistor d7 d10 10k
-  RLa: resistor c13 c15 330 l=$\mathrm{R_{La}}$
-  M1: voltmeter a13 a15 l=$\mathrm{CH1}$
-  M2: voltmeter c17 e17 l=$\mathrm{CH2}$
-  G4: ground e17
-  YA: resistor c19 c21 1k l=$\mathrm{R_{Ya}}$
-  RLc: resistor f13 f15 330 l=$\mathrm{R_{Lc}}$
-  YC: resistor f19 f21 1k l=$\mathrm{R_{Yc}}$
-  RLb: resistor i13 i15 330 l=$\mathrm{R_{Lb}}$
-  YB: resistor i19 i21 1k l=$\mathrm{R_{Yb}}$
+  V1: sine 1,3 1,5 l=$\mathrm{W1}$
+  G1: ground 1,5
+  V2: sine 1,9 1,11 l=$\mathrm{W2}$
+  G2: ground 1,11
+  R1: resistor 3,3 3,5 10k
+  R2: resistor 4,9 4,7 10k
+  U1: opamp 8,6 +down TL071
+  G3: ground 6,7
+  Rf: resistor 7,4 10,4 10k
+  RLa: resistor 13,3 15,3 330 l=$\mathrm{R_{La}}$
+  M1: voltmeter 13,1 15,1 l=$\mathrm{CH1}$
+  M2: voltmeter 17,3 17,5 l=$\mathrm{CH2}$
+  G4: ground 17,5
+  YA: resistor 19,3 21,3 1k l=$\mathrm{R_{Ya}}$
+  RLc: resistor 13,6 15,6 330 l=$\mathrm{R_{Lc}}$
+  YC: resistor 19,6 21,6 1k l=$\mathrm{R_{Yc}}$
+  RLb: resistor 13,9 15,9 330 l=$\mathrm{R_{Lb}}$
+  YB: resistor 19,9 21,9 1k l=$\mathrm{R_{Yb}}$
 wires:
-  - c1 -- c3 -- c13
-  - i1 -- i4 -- i13
-  - e3 -- e4 -- e7
-  - e4 -- g4
-  - d7 -- e7
-  - e7 |- U1.-
-  - g6 |- U1.+
-  - d10 -- f10
-  - U1.out -- f10 -- f13
-  - a13 -- c13
-  - a15 -- c15
-  - c15 -- c17 -- c19
-  - f15 -- f19
-  - i15 -- i19
-  - c21 -- c23 -- f23 -- i23
-  - f21 -- f23
-  - i21 -- i23
+  - 1,3 -- 3,3 -- 13,3
+  - 1,9 -- 4,9 -- 13,9
+  - 3,5 -- 4,5 -- 7,5
+  - 4,5 -- 4,7
+  - 7,4 -- 7,5
+  - 7,5 |- U1.-
+  - 6,7 |- U1.+
+  - 10,4 -- 10,6
+  - U1.out -- 10,6 -- 13,6
+  - 13,1 -- 13,3
+  - 15,1 -- 15,3
+  - 15,3 -- 17,3 -- 19,3
+  - 15,6 -- 19,6
+  - 15,9 -- 19,9
+  - 21,3 -- 23,3 -- 23,6 -- 23,9
+  - 21,6 -- 23,6
+  - 21,9 -- 23,9
 notes:
-  - text b9: 1 相目
-  - text g11: 3 相目
-  - text h9: 2 相目
-  - text d23a3: N
+  - text 9,2: 1 相目
+  - text 11,7: 3 相目
+  - text 9,8: 2 相目
+  - text 23.3,4: N
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/07-y-delta-conversion-1.svg)
@@ -83,29 +83,29 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  PA: port c1
-  PC: port f1
-  PB: port i1
-  RLa: resistor c3 c5 330 l=$\mathrm{R_{La}}$
-  RLc: resistor f3 f5 330 l=$\mathrm{R_{Lc}}$
-  RLb: resistor i3 i5 330 l=$\mathrm{R_{Lb}}$
-  DCA: resistor c9 f9 3k l=$\mathrm{R_{ca}}$
-  DBC: resistor f9 i9 3k l=$\mathrm{R_{bc}}$
-  DAB: resistor c12 i12 3k l=$\mathrm{R_{ab}}$
+  PA: port 1,3
+  PC: port 1,6
+  PB: port 1,9
+  RLa: resistor 3,3 5,3 330 l=$\mathrm{R_{La}}$
+  RLc: resistor 3,6 5,6 330 l=$\mathrm{R_{Lc}}$
+  RLb: resistor 3,9 5,9 330 l=$\mathrm{R_{Lb}}$
+  DCA: resistor 9,3 9,6 3k l=$\mathrm{R_{ca}}$
+  DBC: resistor 9,6 9,9 3k l=$\mathrm{R_{bc}}$
+  DAB: resistor 12,3 12,9 3k l=$\mathrm{R_{ab}}$
 wires:
-  - c1 -- c3
-  - f1 -- f3
-  - i1 -- i3
-  - c5 -- c9 -- c12
-  - f5 -- f9
-  - i5 -- i9 -- i12
+  - 1,3 -- 3,3
+  - 1,6 -- 3,6
+  - 1,9 -- 3,9
+  - 5,3 -- 9,3 -- 12,3
+  - 5,6 -- 9,6
+  - 5,9 -- 9,9 -- 12,9
 notes:
-  - text b1: 1 相目
-  - text e1: 3 相目
-  - text h1: 2 相目
-  - text b9: a
-  - text f9a3: c
-  - text j9: b
+  - text 1,2: 1 相目
+  - text 1,5: 3 相目
+  - text 1,8: 2 相目
+  - text 9,2: a
+  - text 9.3,6: c
+  - text 9,10: b
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/07-y-delta-conversion-2.svg)

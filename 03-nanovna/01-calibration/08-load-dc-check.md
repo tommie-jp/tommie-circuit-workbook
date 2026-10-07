@@ -21,16 +21,16 @@ device: H4
 ```circuit
 title: 図1 Load の中心導体と外皮の間をテスターで測る
 parts:
-  J1: sma b2 mirror
-  R1: resistor b4 d4 50
-  M1: ohmmeter b6 d6
+  J1: sma 2,2 mirror
+  R1: resistor 4,2 4,4 50
+  M1: ohmmeter 6,2 6,4
 wires:
-  - J1.1 -| b4
-  - b4 -- b6
-  - J1.2 |- d4
-  - d4 -- d6
+  - J1.1 -| 4,2
+  - 4,2 -- 6,2
+  - J1.2 |- 4,4
+  - 4,4 -- 6,4
 notes:
-  - text a3 blue center: Load の中 (J1 と R1)
+  - text 3,1 blue center: Load の中 (J1 と R1)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/circuit/08-load-dc-check.svg)

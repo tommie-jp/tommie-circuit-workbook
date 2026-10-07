@@ -43,16 +43,16 @@ L = 330 µH (実効値)、バリコン C = 20〜260 pF (2 連バリコンの片�
 ```circuit
 title: 図1 タップ付きループスティックの給電点 (等価回路)
 parts:
-  J1: sma b2 mirror CH0
-  R1: resistor b4 b6 20
-  L1: inductor b6 b8 330u
-  C1: capacitor-var b8 b10 l=$\mathrm{VC}_1$
-  G1: ground c2
-  G2: ground c10
+  J1: sma 2,2 mirror CH0
+  R1: resistor 4,2 6,2 20
+  L1: inductor 6,2 8,2 330u
+  C1: capacitor-var 8,2 10,2 l=$\mathrm{VC}_1$
+  G1: ground 2,3
+  G2: ground 10,3
 wires:
-  - J1.1 -- b4
-  - b10 -- c10
-  - J1.2 -- c2
+  - J1.1 -- 4,2
+  - 10,2 -- 10,3
+  - J1.2 -- 2,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/05-loopstick-varicap.svg)

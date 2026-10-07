@@ -31,17 +31,17 @@ Zoc = −jZ₀、Zsc = +jZ₀ と、**リアクタンスの大きさがそのま
 ```circuit
 title: 図1 中身の分からない 1 m のケーブルの先を開放・短絡
 parts:
-  J1: sma b2 mirror CH0
-  TL1: tline b3 b6 75 l=$\mathrm{TL}_1$
-  S1: switch b7 d7
-  G1: ground c2
-  G2: ground d7
+  J1: sma 2,2 mirror CH0
+  TL1: tline 3,2 6,2 75 l=$\mathrm{TL}_1$
+  S1: switch 7,2 7,4
+  G1: ground 2,3
+  G2: ground 7,4
 wires:
-  - J1.1 -- b3
-  - b6 -- b7
-  - J1.2 -- c2
+  - J1.1 -- 3,2
+  - 6,2 -- 7,2
+  - J1.2 -- 2,3
 notes:
-  - text b4h5 center: 1 m・Z0 は未知
+  - text 4.5,2.7 center: 1 m・Z0 は未知
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/10-z0-from-zoc-zsc.svg)

@@ -37,31 +37,31 @@ g3 = 0.5 を使う。LPF と HPF の入口の素子が**どちらも直列**に�
 ```circuit
 title: 図1 ダイプレクサ (上が LPF の枝、下が HPF の枝)
 parts:
-  J1: sma d2 mirror CH0
-  L1: inductor b4 b6 220n
-  C2: capacitor b7 d7 82p
-  L3: inductor b8 b10 82n
-  J2: sma b12 CH1
-  C1: capacitor f4 f6 43p
-  L2: inductor f7 h7 120n
-  C3: capacitor f8 f10 130p
-  J3: sma f12 Load
-  G1: ground e2
-  G2: ground d7
-  G3: ground c12
-  G4: ground h7
-  G5: ground g12
+  J1: sma 2,4 mirror CH0
+  L1: inductor 4,2 6,2 220n
+  C2: capacitor 7,2 7,4 82p
+  L3: inductor 8,2 10,2 82n
+  J2: sma 12,2 CH1
+  C1: capacitor 4,6 6,6 43p
+  L2: inductor 7,6 7,8 120n
+  C3: capacitor 8,6 10,6 130p
+  J3: sma 12,6 Load
+  G1: ground 2,5
+  G2: ground 7,4
+  G3: ground 12,3
+  G4: ground 7,8
+  G5: ground 12,7
 wires:
-  - J1.1 -- d3
-  - d3 -- b3 -- b4
-  - d3 -- f3 -- f4
-  - b6 -- b7 -- b8
-  - b10 -- J2.1
-  - f6 -- f7 -- f8
-  - f10 -- J3.1
-  - J1.2 -- e2
-  - J2.2 -- c12
-  - J3.2 -- g12
+  - J1.1 -- 3,4
+  - 3,4 -- 3,2 -- 4,2
+  - 3,4 -- 3,6 -- 4,6
+  - 6,2 -- 7,2 -- 8,2
+  - 10,2 -- J2.1
+  - 6,6 -- 7,6 -- 8,6
+  - 10,6 -- J3.1
+  - J1.2 -- 2,5
+  - J2.2 -- 12,3
+  - J3.2 -- 12,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/09-diplexer.svg)

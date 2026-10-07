@@ -29,17 +29,17 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  E1: battery a1 e1 5
-  R1: resistor a1 a3 400
-  R3: resistor a5 e5 100
-  R2: resistor a7 a9 200
-  SH1: short a9 e9
-  G1: ground e5
+  E1: battery 1,1 1,5 5
+  R1: resistor 1,1 3,1 400
+  R3: resistor 5,1 5,5 100
+  R2: resistor 7,1 9,1 200
+  SH1: short 9,1 9,5
+  G1: ground 5,5
 wires:
-  - a3 -- a5
-  - a5 -- a7
-  - e1 -- e5
-  - e5 -- e9
+  - 3,1 -- 5,1
+  - 5,1 -- 7,1
+  - 1,5 -- 5,5
+  - 5,5 -- 9,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/04-superposition-1.svg)
@@ -50,17 +50,17 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  SH1: short a1 e1
-  R1: resistor a1 a3 400
-  R3: resistor a5 e5 100
-  R2: resistor a7 a9 200
-  E2: battery a9 e9 3
-  G1: ground e5
+  SH1: short 1,1 1,5
+  R1: resistor 1,1 3,1 400
+  R3: resistor 5,1 5,5 100
+  R2: resistor 7,1 9,1 200
+  E2: battery 9,1 9,5 3
+  G1: ground 5,5
 wires:
-  - a3 -- a5
-  - a5 -- a7
-  - e1 -- e5
-  - e5 -- e9
+  - 3,1 -- 5,1
+  - 5,1 -- 7,1
+  - 1,5 -- 5,5
+  - 5,5 -- 9,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/04-superposition-2.svg)

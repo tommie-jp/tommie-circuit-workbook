@@ -79,35 +79,35 @@ f<sub>out</sub> が MCLK の半分 (12.5MHz) に近づくほど、像が目的�
 ```circuit
 title: 図1 Pico 2でAD9833を7MHzに設定しtinySAで見る
 parts:
-  U1: pico2 k3 mirror
+  U1: pico2 3,11 mirror
   U2:
     type: device
-    at: i11
+    at: 11,9
     label: AD9833
     pins: [VCC, SCLK, SDATA, FSYNC, DGND, AGND, OUT]
-  G1: ground l8a5
+  G1: ground 8.5,12
   U3:
     type: device
-    at: m19c0
+    at: 19,13.2
     label: tinySA Ultra
     pins: [RF, GND]
-  GU3: ground o17
-  V3V3: vcc h1 3.3V
-  V3V3: vcc h7 3.3V
+  GU3: ground 17,15
+  V3V3: vcc 1,8 3.3V
+  V3V3: vcc 7,8 3.3V
 wires:
-  - U1.3V3 -| h1
-  - h7 |- U2.VCC
-  - U1.GP2 -| h7d5 |- U2.SCLK
-  - U1.GP3 -| h6h5 |- U2.SDATA
-  - U1.GP5 -| i5d5 |- U2.FSYNC
-  - U1.GND8 -| j8a5
-  - U2.DGND -| j8a5
-  - U2.AGND -| j8a5
-  - j8a5 -- l8a5
+  - U1.3V3 -| 1,8
+  - 7,8 |- U2.VCC
+  - U1.GP2 -| 7.5,8.3 |- U2.SCLK
+  - U1.GP3 -| 6.5,8.7 |- U2.SDATA
+  - U1.GP5 -| 5.5,9.3 |- U2.FSYNC
+  - U1.GND8 -| 8.5,10
+  - U2.DGND -| 8.5,10
+  - U2.AGND -| 8.5,10
+  - 8.5,10 -- 8.5,12
   - U2.OUT |- U3.RF
-  - U3.GND -| o17
+  - U3.GND -| 17,15
 notes:
-  - text k17f0 blue: ブレッドボードの外 (SMAケーブルでtinySAへ)
+  - text 17,11.5 blue: ブレッドボードの外 (SMAケーブルでtinySAへ)
 style:
   pitch: 1.2
 ```

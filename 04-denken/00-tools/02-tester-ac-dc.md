@@ -30,20 +30,20 @@ title: 図1 方形波を 2 種類のテスターで読む
 style:
   standard: jis
 parts:
-  V1: square a1 i1 l=$\mathrm{W1}$
-  R1: resistor a3 a5 1k
-  M1: voltmeter e3 e5 l=$\mathrm{RMS}$
-  M2: voltmeter g3 g5 l=$\mathrm{AVG}$
-  G1: ground i1
+  V1: square 1,1 1,9 l=$\mathrm{W1}$
+  R1: resistor 3,1 5,1 1k
+  M1: voltmeter 3,5 5,5 l=$\mathrm{RMS}$
+  M2: voltmeter 3,7 5,7 l=$\mathrm{AVG}$
+  G1: ground 1,9
 wires:
-  - a1 -- a3
-  - a5 -- a9
-  - a9 -- i9
-  - i9 -- i1
-  - a3 -- e3
-  - a5 -- e5
-  - e3 -- g3
-  - e5 -- g5
+  - 1,1 -- 3,1
+  - 5,1 -- 9,1
+  - 9,1 -- 9,9
+  - 9,9 -- 1,9
+  - 3,1 -- 3,5
+  - 5,1 -- 5,5
+  - 3,5 -- 3,7
+  - 5,5 -- 5,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/circuit/02-tester-ac-dc.svg)

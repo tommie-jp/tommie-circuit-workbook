@@ -27,34 +27,34 @@ board: BB
 ```circuit
 title: 図1 自己バイアスのエミッタ接地増幅 (W1 で入れ、CH2 と CH1 で比べる)
 parts:
-  VCC: vcc b6 5V
-  R1: resistor b6 e6 20k
-  R2: resistor e6 g6 10k
-  G2: ground g6
-  RC: resistor b8 d8 2.2k
-  Q1: npn e8
-  CIN: capacitor e6 e4 1u
-  W1: sine e2 g2 l=$\mathrm{W1}$
-  M2: voltmeter e4 g4 l=$\mathrm{CH2}$
-  G4: ground g4
-  RE: resistor g8 i8 1k
-  G3: ground i8
-  CE: capacitor g10 i10 100u
-  COUT: capacitor d9 d11 1u
-  OUT: port d11
-  M1: voltmeter d12 f12 l=$\mathrm{CH1}$
-  G5: ground f12
+  VCC: vcc 6,2 5V
+  R1: resistor 6,2 6,5 20k
+  R2: resistor 6,5 6,7 10k
+  G2: ground 6,7
+  RC: resistor 8,2 8,4 2.2k
+  Q1: npn 8,5
+  CIN: capacitor 6,5 4,5 1u
+  W1: sine 2,5 2,7 l=$\mathrm{W1}$
+  M2: voltmeter 4,5 4,7 l=$\mathrm{CH2}$
+  G4: ground 4,7
+  RE: resistor 8,7 8,9 1k
+  G3: ground 8,9
+  CE: capacitor 10,7 10,9 100u
+  COUT: capacitor 9,4 11,4 1u
+  OUT: port 11,4
+  M1: voltmeter 12,4 12,6 l=$\mathrm{CH1}$
+  G5: ground 12,6
 wires:
-  - b6 -- b8
-  - e2 -- e4
-  - g2 -- g4
-  - d11 -- d12
-  - e6 -- Q1.B
-  - d8 -- Q1.C
-  - d8 -- d9
-  - Q1.E -- g8
-  - g8 -- g10
-  - i8 -- i10
+  - 6,2 -- 8,2
+  - 2,5 -- 4,5
+  - 2,7 -- 4,7
+  - 11,4 -- 12,4
+  - 6,5 -- Q1.B
+  - 8,4 -- Q1.C
+  - 8,4 -- 9,4
+  - Q1.E -- 8,7
+  - 8,7 -- 10,7
+  - 8,9 -- 10,9
 style:
   grid: on
   pitch: 1.2

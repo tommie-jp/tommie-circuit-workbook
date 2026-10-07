@@ -23,27 +23,27 @@ title: 図1 サレンキー ローパス (利得 1 倍)
 parts:
   VP: vsource vp mid 5
   VN: vsource mid vm 5
-  G1: ground c2
-  V1: sine c3 e3 0.1
-  G2: ground e3
-  R1: resistor c3 c5 10k
-  R2: resistor c5 c7 10k
-  C1: capacitor c5 a5 20n
-  C2: capacitor c7 e7 10n
-  G3: ground e7
-  U1: opamp c9c0b0 +up
-  OUT: port c12c0b0
+  G1: ground 2,3
+  V1: sine 3,3 3,5 0.1
+  G2: ground 3,5
+  R1: resistor 3,3 5,3 10k
+  R2: resistor 5,3 7,3 10k
+  C1: capacitor 5,3 5,1 20n
+  C2: capacitor 7,3 7,5 10n
+  G3: ground 7,5
+  U1: opamp 9,3.21 +up
+  OUT: port 12,3.21
 points:
-  vp: a1
-  vm: e1
-  mid: c1
+  vp: 1,1
+  vm: 1,5
+  mid: 1,3
 wires:
-  - mid -- c2
-  - c7 -| U1.+
-  - d8 |- U1.-
-  - d8 -- d10 -- c10c0b0
-  - a5 -- a11 -- c11c0b0
-  - U1.out -- c10c0b0 -- c11c0b0 -- c12c0b0
+  - mid -- 2,3
+  - 7,3 -| U1.+
+  - 8,4 |- U1.-
+  - 8,4 -- 10,4 -- 10,3.21
+  - 5,1 -- 11,1 -- 11,3.21
+  - U1.out -- 10,3.21 -- 11,3.21 -- 12,3.21
 style:
   grid: on
 ```

@@ -31,22 +31,22 @@ title: 図1 漏電の模型 (S1 で接地の有無を切り替える)
 style:
   standard: jis
 parts:
-  V1: vsource c1 g1 5
-  Rleak: resistor c1 c3 1k i=Ileak
-  M2: voltmeter a1 a3 l=$\mathrm{CH2}$
-  Rbody: resistor c3 g3 1k
-  S1: switch c5 e5
-  Rground: resistor e5 g5 100
-  M1: voltmeter c7 g7 l=$\mathrm{CH1}$
-  G1: ground g1
+  V1: vsource 1,3 1,7 5
+  Rleak: resistor 1,3 3,3 1k i=Ileak
+  M2: voltmeter 1,1 3,1 l=$\mathrm{CH2}$
+  Rbody: resistor 3,3 3,7 1k
+  S1: switch 5,3 5,5
+  Rground: resistor 5,5 5,7 100
+  M1: voltmeter 7,3 7,7 l=$\mathrm{CH1}$
+  G1: ground 1,7
 wires:
-  - a1 -- c1
-  - a3 -- c3
-  - c3 -- c5
-  - g3 -- g5
-  - g1 -- g3
-  - c5 -- c7
-  - g5 -- g7
+  - 1,1 -- 1,3
+  - 3,1 -- 3,3
+  - 3,3 -- 5,3
+  - 3,7 -- 5,7
+  - 1,7 -- 3,7
+  - 5,3 -- 7,3
+  - 5,7 -- 7,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/13-regulations/circuit/01-grounding-effect-1.svg)
@@ -129,18 +129,18 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: vsource c1 g1 5
-  M2: voltmeter c4 g4 l=$\mathrm{CH2}$
-  Rleak: resistor c4 c7 1k i=Ileak
-  Rbody: resistor c7 g7 1k
-  M1: voltmeter c9 g9 l=$\mathrm{CH1}$
-  S1: switch c11 e11
-  Rground: resistor e11 g11 100
-  G1: ground g1
+  V1: vsource 1,3 1,7 5
+  M2: voltmeter 4,3 4,7 l=$\mathrm{CH2}$
+  Rleak: resistor 4,3 7,3 1k i=Ileak
+  Rbody: resistor 7,3 7,7 1k
+  M1: voltmeter 9,3 9,7 l=$\mathrm{CH1}$
+  S1: switch 11,3 11,5
+  Rground: resistor 11,5 11,7 100
+  G1: ground 1,7
 wires:
-  - c1 -- c4
-  - c7 -- c9 -- c11
-  - g1 -- g4 -- g7 -- g9 -- g11
+  - 1,3 -- 4,3
+  - 7,3 -- 9,3 -- 11,3
+  - 1,7 -- 4,7 -- 7,7 -- 9,7 -- 11,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/13-regulations/circuit/01-grounding-effect-2.svg)

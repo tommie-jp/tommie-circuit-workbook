@@ -41,41 +41,41 @@ LO が作る電流も 2 本の出力に同じだけ流す (差を取れば消え
 ```circuit
 title: 図1 SA612 のバランスドミキサー (W2 が RF、W1 が LO)
 parts:
-  W2: sine e3 g3 l=$\mathrm{W2}$
-  G1: ground g3
-  C1: capacitor e5 e6 10n
-  U1: ic g10f0 SA612
-  C2: capacitor i5 j5 10n
-  G2: ground j5
-  C3: capacitor l5 l4 10n
-  W1: sine l3 n3 l=$\mathrm{W1}$
-  G4: ground n3
-  G3: ground j10
-  VCC: vcc c10 5V
-  C6: capacitor c8 d8 100n
-  G6: ground d8
-  C4: capacitor e14 e15 100n
-  C5: capacitor j14 j15 100n
-  M1: voltmeter e17 j17 l=$\mathrm{CH1}$
-  M2: voltmeter e20 j20 l=$\mathrm{CH2}$
-  G5: ground j20
+  W2: sine 3,5 3,7 l=$\mathrm{W2}$
+  G1: ground 3,7
+  C1: capacitor 5,5 6,5 10n
+  U1: ic 10,7.5 SA612
+  C2: capacitor 5,9 5,10 10n
+  G2: ground 5,10
+  C3: capacitor 5,12 4,12 10n
+  W1: sine 3,12 3,14 l=$\mathrm{W1}$
+  G4: ground 3,14
+  G3: ground 10,10
+  VCC: vcc 10,3 5V
+  C6: capacitor 8,3 8,4 100n
+  G6: ground 8,4
+  C4: capacitor 14,5 15,5 100n
+  C5: capacitor 14,10 15,10 100n
+  M1: voltmeter 17,5 17,10 l=$\mathrm{CH1}$
+  M2: voltmeter 20,5 20,10 l=$\mathrm{CH2}$
+  G5: ground 20,10
 wires:
-  - e3 -- e5
-  - e6 -- e7
-  - U1.IN_A -| e7
-  - U1.IN_B -| i5
-  - U1.OSC_B -| l7
-  - l7 -- l5
-  - l3 -- l4
-  - U1.GND |- j10
-  - U1.VCC |- c10
-  - c10 -- c8
-  - U1.OUT_A -| e13
-  - e13 -- e14
-  - U1.OUT_B -| j14
-  - e15 -- e17
-  - j15 -- j17
-  - e17 -- e20
+  - 3,5 -- 5,5
+  - 6,5 -- 7,5
+  - U1.IN_A -| 7,5
+  - U1.IN_B -| 5,9
+  - U1.OSC_B -| 7,12
+  - 7,12 -- 5,12
+  - 3,12 -- 4,12
+  - U1.GND |- 10,10
+  - U1.VCC |- 10,3
+  - 10,3 -- 8,3
+  - U1.OUT_A -| 13,5
+  - 13,5 -- 14,5
+  - U1.OUT_B -| 14,10
+  - 15,5 -- 17,5
+  - 15,10 -- 17,10
+  - 17,5 -- 20,5
 style:
   pitch: 1
 ```

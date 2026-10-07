@@ -73,26 +73,26 @@ DUT は 0-3 の 20 dB パッド (43 Ω・11 Ω・43 Ω、E24) を 2 段つない
 ```circuit
 title: 図1 20 dB パッドを 2 段 (約 40 dB)
 parts:
-  J1: sma b2 mirror CH0
-  R1: resistor b3 b4 43
-  R2: resistor b5 d5 11
-  R3: resistor b6 b7 43
-  R4: resistor b8 b9 43
-  R5: resistor b10 d10 11
-  R6: resistor b11 b12 43
-  J2: sma b13 CH1
-  G1: ground c2
-  G2: ground d5
-  G3: ground d10
-  G4: ground c13
+  J1: sma 2,2 mirror CH0
+  R1: resistor 3,2 4,2 43
+  R2: resistor 5,2 5,4 11
+  R3: resistor 6,2 7,2 43
+  R4: resistor 8,2 9,2 43
+  R5: resistor 10,2 10,4 11
+  R6: resistor 11,2 12,2 43
+  J2: sma 13,2 CH1
+  G1: ground 2,3
+  G2: ground 5,4
+  G3: ground 10,4
+  G4: ground 13,3
 wires:
-  - J1.1 -- b3
-  - b4 -- b5 -- b6
-  - b7 -- b8
-  - b9 -- b10 -- b11
-  - b12 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c13
+  - J1.1 -- 3,2
+  - 4,2 -- 5,2 -- 6,2
+  - 7,2 -- 8,2
+  - 9,2 -- 10,2 -- 11,2
+  - 12,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 13,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/circuit/09-saver-calibration-averaging.svg)

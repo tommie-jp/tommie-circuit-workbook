@@ -18,13 +18,13 @@ Scope の **Measurements** (自動計測) を使う。デューティ比 30% の
 ```circuit
 title: 図1 デューティ 30% の方形波
 parts:
-  W1: square a1 c1 1.65
-  R1: resistor a3 c3 1k
-  M1: voltmeter a5 c5 l=$\mathrm{CH1}$
-  G1: ground c1
+  W1: square 1,1 1,3 1.65
+  R1: resistor 3,1 3,3 1k
+  M1: voltmeter 5,1 5,3 l=$\mathrm{CH1}$
+  G1: ground 1,3
 wires:
-  - a1 -- a3 -- a5
-  - c1 -- c3 -- c5
+  - 1,1 -- 3,1 -- 5,1
+  - 1,3 -- 3,3 -- 5,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/02-measurements.svg)

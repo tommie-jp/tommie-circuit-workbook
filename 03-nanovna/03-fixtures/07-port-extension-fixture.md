@@ -25,17 +25,17 @@ device: H4
 ```circuit
 title: 図1 1 端子の治具 (SMA から部品までの線が電気長)
 parts:
-  J1: sma b2 mirror CH0
-  T1: tline b3 b5 50
-  R1: resistor b6 d6 100
-  G1: ground c2
-  G2: ground d6
+  J1: sma 2,2 mirror CH0
+  T1: tline 3,2 5,2 50
+  R1: resistor 6,2 6,4 100
+  G1: ground 2,3
+  G2: ground 6,4
 wires:
-  - J1.1 -- b3
-  - b5 -- b6
-  - J1.2 -- c2
+  - J1.1 -- 3,2
+  - 5,2 -- 6,2
+  - J1.2 -- 2,3
 notes:
-  - text a4 center: "治具の線 3 cm"
+  - text 4,1 center: "治具の線 3 cm"
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/07-port-extension-fixture.svg)

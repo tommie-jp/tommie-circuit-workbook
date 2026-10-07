@@ -21,23 +21,23 @@ title: 図1 DIO0 で LED を光らせ、DIO1 でボタンを読む
 parts:
   AD:
     type: device
-    at: e20
+    at: 20,5
     label: Analog Discovery 3
     pins: [DIO0, V+, DIO1, GND]
-  R1: resistor a1 a3 470
-  D1: led a5 a7
-  SW1: button c11 c13
-  R2: resistor c15 c17 10k
-  G1: ground a9
+  R1: resistor 1,1 3,1 470
+  D1: led 5,1 7,1
+  SW1: button 11,3 13,3
+  R2: resistor 15,3 17,3 10k
+  G1: ground 9,1
 wires:
-  - a3 -- a5
-  - a7 -- a9
-  - c13 -- c15
-  - c17 |- a9
-  - AD.DIO0 -| a1
-  - AD.V+ -| c11
-  - AD.DIO1 -| c15
-  - AD.GND -| a9
+  - 3,1 -- 5,1
+  - 7,1 -- 9,1
+  - 13,3 -- 15,3
+  - 17,3 |- 9,1
+  - AD.DIO0 -| 1,1
+  - AD.V+ -| 11,3
+  - AD.DIO1 -| 15,3
+  - AD.GND -| 9,1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/circuit/04-static-io.svg)

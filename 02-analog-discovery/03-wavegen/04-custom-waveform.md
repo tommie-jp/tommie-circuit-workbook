@@ -19,12 +19,12 @@ Wavegen の Function には **Custom** (くり返す) と **Play** (1 回だけ�
 ```circuit
 title: 図1 ループバック (W1 を 1+ に直結)
 parts:
-  V1: sine a1 c1 l=$\mathrm{W1}$
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  G1: ground c1
+  V1: sine 1,1 1,3 l=$\mathrm{W1}$
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  G1: ground 1,3
 wires:
-  - a1 -- a3
-  - c1 -- c3
+  - 1,1 -- 3,1
+  - 1,3 -- 3,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/04-custom-waveform.svg)

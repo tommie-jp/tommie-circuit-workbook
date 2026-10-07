@@ -21,37 +21,37 @@ MOSFET スイッチ (2-5) を組み合わせた実用回路。ボタンを押す
 ```circuit
 title: 図1 555単安定(CMOS版)でMOSFETを約19分だけON
 parts:
-  VCC: vcc b5 5V
-  U1: ic g8 TLC555
-  Gu1: ground i8
-  Rt: resistor b5 d5 4.7M
-  Ct: capacitor g5 h5 220u
-  Get: ground h5
-  VCC: vcc g3 5V
-  Rtrig: resistor g3 i3 100k l=$R_\mathrm{trig}$
-  SWtrig: button i3 k3 l=$\mathrm{SW_{trig}}$
-  Gtrig: ground k3
-  Rg: resistor g10 g12 220
-  Q1: nmos-e f13i0i0
-  Gq1: ground h13
-  VCC: vcc b13 5V
-  RLED: resistor b13 d13 470 l=$R_\mathrm{LED}$
-  DLED: led d13 e13 red l=$D_\mathrm{LED}$
+  VCC: vcc 5,2 5V
+  U1: ic 8,7 TLC555
+  Gu1: ground 8,9
+  Rt: resistor 5,2 5,4 4.7M
+  Ct: capacitor 5,7 5,8 220u
+  Get: ground 5,8
+  VCC: vcc 3,7 5V
+  Rtrig: resistor 3,7 3,9 100k l=$R_\mathrm{trig}$
+  SWtrig: button 3,9 3,11 l=$\mathrm{SW_{trig}}$
+  Gtrig: ground 3,11
+  Rg: resistor 10,7 12,7 220
+  Q1: nmos-e 13,6.88
+  Gq1: ground 13,8
+  VCC: vcc 13,2 5V
+  RLED: resistor 13,2 13,4 470 l=$R_\mathrm{LED}$
+  DLED: led 13,4 13,5 red l=$D_\mathrm{LED}$
 wires:
-  - b5 -- b8 -- b8a5
-  - U1.VDD |- b8
-  - U1.RESET |- b8a5
-  - d5 -- f5f0
-  - U1.DISCH -| f5f0
-  - U1.THRES -| g5
-  - f5f0 -- g5
-  - U1.TRIG -| g6f0
-  - g6f0 -- i6 -- i3
-  - U1.GND |- i8
-  - U1.OUT -| g10
-  - g12 |- Q1.G
-  - e13 -- Q1.D
-  - Q1.S -- h13
+  - 5,2 -- 8,2 -- 8.5,2
+  - U1.VDD |- 8,2
+  - U1.RESET |- 8.5,2
+  - 5,4 -- 5,6.5
+  - U1.DISCH -| 5,6.5
+  - U1.THRES -| 5,7
+  - 5,6.5 -- 5,7
+  - U1.TRIG -| 6,7.5
+  - 6,7.5 -- 6,9 -- 3,9
+  - U1.GND |- 8,9
+  - U1.OUT -| 10,7
+  - 12,7 |- Q1.G
+  - 13,5 -- Q1.D
+  - Q1.S -- 13,8
 style:
   grid: on
 ```

@@ -26,12 +26,12 @@ PWM に変わるだけ。
 ```circuit
 title: 図1 GP15でLEDをPWM調光
 parts:
-  U1: pico2 e3c0 mirror
-  R1: resistor i6 i8 330
-  D1: led i8 k8 red
-  G1: ground k8
+  U1: pico2 3,5.2 mirror
+  R1: resistor 6,9 8,9 330
+  D1: led 8,9 8,11 red
+  G1: ground 8,11
 wires:
-  - U1.GP15 -| i6
+  - U1.GP15 -| 6,9
 style:
   pitch: 1.2
 ```
@@ -43,20 +43,20 @@ style:
 ```circuit
 title: 図2 GP14でサーボを回す
 parts:
-  U1: pico2 g8 mirror
-  GP: ground e6
+  U1: pico2 8,7 mirror
+  GP: ground 6,5
   M1:
     type: device
-    at: j12e0
+    at: 12,10.4
     label: Servo
     pins: [VCC, SIG, GND]
-  V5: vcc i11 5V
-  GM: ground l11
+  V5: vcc 11,9 5V
+  GM: ground 11,12
 wires:
-  - U1.GND38 -| e6
+  - U1.GND38 -| 6,5
   - U1.GP14 -| M1.SIG
-  - M1.VCC -| i11
-  - M1.GND -| l11
+  - M1.VCC -| 11,9
+  - M1.GND -| 11,12
 style:
   pitch: 1.2
   grid: on

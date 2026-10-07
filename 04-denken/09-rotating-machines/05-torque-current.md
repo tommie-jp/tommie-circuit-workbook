@@ -36,25 +36,25 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  B1: battery c1 g1 4.5
-  M1: motor c5 e5
-  Rs: resistor e5 g5 1 i=I1
-  M3: voltmeter e7 g7 l=$\mathrm{CH1}$
-  M2: motor c11 g11
-  RL: resistor c14 g14 47 i=I2
-  M4: voltmeter c16 g16 l=$\mathrm{CH2}$
-  G1: ground g1
-  G2: ground g16
+  B1: battery 1,3 1,7 4.5
+  M1: motor 5,3 5,5
+  Rs: resistor 5,5 5,7 1 i=I1
+  M3: voltmeter 7,5 7,7 l=$\mathrm{CH1}$
+  M2: motor 11,3 11,7
+  RL: resistor 14,3 14,7 47 i=I2
+  M4: voltmeter 16,3 16,7 l=$\mathrm{CH2}$
+  G1: ground 1,7
+  G2: ground 16,7
 wires:
-  - c1 -- c5
-  - e5 -- e7
-  - g1 -- g5 -- g7
-  - c11 -- c14 -- c16
-  - g11 -- g14 -- g16
+  - 1,3 -- 5,3
+  - 5,5 -- 7,5
+  - 1,7 -- 5,7 -- 7,7
+  - 11,3 -- 14,3 -- 16,3
+  - 11,7 -- 14,7 -- 16,7
 notes:
-  - line d5f5 d10f5 blue
-  - text c8 small blue: 軸を継手でつなぐ
-  - text h14 small: (1 W。100・47・22 Ω に替える)
+  - line 5.5,4.5 10.5,4.5 blue
+  - text 8,3 small blue: 軸を継手でつなぐ
+  - text 14,8 small: (1 W。100・47・22 Ω に替える)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/05-torque-current.svg)

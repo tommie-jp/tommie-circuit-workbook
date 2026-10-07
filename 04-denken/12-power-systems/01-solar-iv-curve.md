@@ -29,19 +29,19 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  PV1: solar c1 g1 4.5 l=$\mathrm{PV}_1$
-  M1: voltmeter c4 g4 l=$\mathrm{CH1}$
-  Rs: resistor c6 c8 10 i=I
-  M2: voltmeter a6 a8 l=$\mathrm{CH2}$
-  VR1: potentiometer c10 g10 1k l=$\mathrm{VR}_1$
-  G1: ground g1
+  PV1: solar 1,3 1,7 4.5 l=$\mathrm{PV}_1$
+  M1: voltmeter 4,3 4,7 l=$\mathrm{CH1}$
+  Rs: resistor 6,3 8,3 10 i=I
+  M2: voltmeter 6,1 8,1 l=$\mathrm{CH2}$
+  VR1: potentiometer 10,3 10,7 1k l=$\mathrm{VR}_1$
+  G1: ground 1,7
 wires:
-  - c1 -- c4 -- c6
-  - a6 -- c6
-  - a8 -- c8
-  - c8 -- c10
-  - g1 -- g4 -- g10
-  - VR1.w |- g10
+  - 1,3 -- 4,3 -- 6,3
+  - 6,1 -- 6,3
+  - 8,1 -- 8,3
+  - 8,3 -- 10,3
+  - 1,7 -- 4,7 -- 10,7
+  - VR1.w |- 10,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/circuit/01-solar-iv-curve-1.svg)
@@ -120,17 +120,17 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  PV1: solar c1 g1 4.5 l=$\mathrm{PV}_1$
-  VR1: potentiometer c4 e4 1k l=$\mathrm{VR}_1$
-  Rs: resistor e4 g4 10 i=I
-  M2: voltmeter e7 g7 l=$\mathrm{CH2}$
-  M1: voltmeter c10 g10 l=$\mathrm{CH1}$
-  G1: ground g1
+  PV1: solar 1,3 1,7 4.5 l=$\mathrm{PV}_1$
+  VR1: potentiometer 4,3 4,5 1k l=$\mathrm{VR}_1$
+  Rs: resistor 4,5 4,7 10 i=I
+  M2: voltmeter 7,5 7,7 l=$\mathrm{CH2}$
+  M1: voltmeter 10,3 10,7 l=$\mathrm{CH1}$
+  G1: ground 1,7
 wires:
-  - c1 -- c4 -- c10
-  - VR1.w |- e4
-  - e4 -- e7
-  - g1 -- g4 -- g7 -- g10
+  - 1,3 -- 4,3 -- 10,3
+  - VR1.w |- 4,5
+  - 4,5 -- 7,5
+  - 1,7 -- 4,7 -- 7,7 -- 10,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/circuit/01-solar-iv-curve-2.svg)

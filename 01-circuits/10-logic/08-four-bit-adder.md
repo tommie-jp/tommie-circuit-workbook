@@ -18,89 +18,89 @@ source: 自作
 ```circuit
 title: 図1 74HC283で4bit同士を足す
 parts:
-  U1: ic j14 CD74HC283
-  VCC: vcc f14 5V
-  GU1: ground m14
-  GC0: ground l11a5
-  VCC: vcc b3 5V
-  SA1: switch b3 b6 l=$\mathrm{A1}$
-  RA1: resistor b6 c6 10k l=$R_\mathrm{A1}$
-  GA1: ground c6
-  VCC: vcc d3 5V
-  SB1: switch d3 d6 l=$\mathrm{B1}$
-  RB1: resistor d6 e6 10k l=$R_\mathrm{B1}$
-  GB1: ground e6
-  VCC: vcc f3 5V
-  SA2: switch f3 f6 l=$\mathrm{A2}$
-  RA2: resistor f6 g6 10k l=$R_\mathrm{A2}$
-  GA2: ground g6
-  VCC: vcc h3 5V
-  SB2: switch h3 h6 l=$\mathrm{B2}$
-  RB2: resistor h6 i6 10k l=$R_\mathrm{B2}$
-  GB2: ground i6
-  VCC: vcc j3 5V
-  SA3: switch j3 j6 l=$\mathrm{A3}$
-  RA3: resistor j6 k6 10k l=$R_\mathrm{A3}$
-  GA3: ground k6
-  VCC: vcc l3 5V
-  SB3: switch l3 l6 l=$\mathrm{B3}$
-  RB3: resistor l6 m6 10k l=$R_\mathrm{B3}$
-  GB3: ground m6
-  VCC: vcc n3 5V
-  SA4: switch n3 n6 l=$\mathrm{A4}$
-  RA4: resistor n6 o6 10k l=$R_\mathrm{A4}$
-  GA4: ground o6
-  VCC: vcc p3 5V
-  SB4: switch p3 p6 l=$\mathrm{B4}$
-  RB4: resistor p6 q6 10k l=$R_\mathrm{B4}$
-  GB4: ground q6
-  RS1: resistor m26 n26 330 l=$R_\mathrm{S1}$
-  DS1: led n26 o26 red l=$D_\mathrm{S1}$
-  GS1: ground o26
-  RS2: resistor m23a5 n23a5 330 l=$R_\mathrm{S2}$
-  DS2: led n23a5 o23a5 red l=$D_\mathrm{S2}$
-  GS2: ground o23a5
-  RS3: resistor m21 n21 330 l=$R_\mathrm{S3}$
-  DS3: led n21 o21 red l=$D_\mathrm{S3}$
-  GS3: ground o21
-  RS4: resistor m18a5 n18a5 330 l=$R_\mathrm{S4}$
-  DS4: led n18a5 o18a5 red l=$D_\mathrm{S4}$
-  GS4: ground o18a5
-  RC4: resistor m16 n16 330 l=$R_\mathrm{C4}$
-  DC4: led n16 o16 red l=$D_\mathrm{C4}$
-  GC4: ground o16
+  U1: ic 14,10 CD74HC283
+  VCC: vcc 14,6 5V
+  GU1: ground 14,13
+  GC0: ground 11.5,12
+  VCC: vcc 3,2 5V
+  SA1: switch 3,2 6,2 l=$\mathrm{A1}$
+  RA1: resistor 6,2 6,3 10k l=$R_\mathrm{A1}$
+  GA1: ground 6,3
+  VCC: vcc 3,4 5V
+  SB1: switch 3,4 6,4 l=$\mathrm{B1}$
+  RB1: resistor 6,4 6,5 10k l=$R_\mathrm{B1}$
+  GB1: ground 6,5
+  VCC: vcc 3,6 5V
+  SA2: switch 3,6 6,6 l=$\mathrm{A2}$
+  RA2: resistor 6,6 6,7 10k l=$R_\mathrm{A2}$
+  GA2: ground 6,7
+  VCC: vcc 3,8 5V
+  SB2: switch 3,8 6,8 l=$\mathrm{B2}$
+  RB2: resistor 6,8 6,9 10k l=$R_\mathrm{B2}$
+  GB2: ground 6,9
+  VCC: vcc 3,10 5V
+  SA3: switch 3,10 6,10 l=$\mathrm{A3}$
+  RA3: resistor 6,10 6,11 10k l=$R_\mathrm{A3}$
+  GA3: ground 6,11
+  VCC: vcc 3,12 5V
+  SB3: switch 3,12 6,12 l=$\mathrm{B3}$
+  RB3: resistor 6,12 6,13 10k l=$R_\mathrm{B3}$
+  GB3: ground 6,13
+  VCC: vcc 3,14 5V
+  SA4: switch 3,14 6,14 l=$\mathrm{A4}$
+  RA4: resistor 6,14 6,15 10k l=$R_\mathrm{A4}$
+  GA4: ground 6,15
+  VCC: vcc 3,16 5V
+  SB4: switch 3,16 6,16 l=$\mathrm{B4}$
+  RB4: resistor 6,16 6,17 10k l=$R_\mathrm{B4}$
+  GB4: ground 6,17
+  RS1: resistor 26,13 26,14 330 l=$R_\mathrm{S1}$
+  DS1: led 26,14 26,15 red l=$D_\mathrm{S1}$
+  GS1: ground 26,15
+  RS2: resistor 23.5,13 23.5,14 330 l=$R_\mathrm{S2}$
+  DS2: led 23.5,14 23.5,15 red l=$D_\mathrm{S2}$
+  GS2: ground 23.5,15
+  RS3: resistor 21,13 21,14 330 l=$R_\mathrm{S3}$
+  DS3: led 21,14 21,15 red l=$D_\mathrm{S3}$
+  GS3: ground 21,15
+  RS4: resistor 18.5,13 18.5,14 330 l=$R_\mathrm{S4}$
+  DS4: led 18.5,14 18.5,15 red l=$D_\mathrm{S4}$
+  GS4: ground 18.5,15
+  RC4: resistor 16,13 16,14 330 l=$R_\mathrm{C4}$
+  DC4: led 16,14 16,15 red l=$D_\mathrm{C4}$
+  GC4: ground 16,15
 wires:
-  - U1.VCC |- f14
-  - U1.GND |- m14
+  - U1.VCC |- 14,6
+  - U1.GND |- 14,13
   # C0 (CIN) は GND に固定
-  - U1.CIN -| l11a5
-  - U1.A0 -| b11
-  - b11 -- b6
-  - U1.B0 -| d10a5
-  - d10a5 -- d6
-  - U1.A1 -| f10
-  - f10 -- f6
-  - U1.B1 -| h9a5
-  - h9a5 -- h6
-  - U1.A2 -| j6
-  - U1.B2 -| l10
-  - l10 -- l6
-  - U1.A3 -| n10a5
-  - n10a5 -- n6
-  - U1.B3 -| p11
-  - p11 -- p6
-  - U1.S0 -| m26
-  - U1.S1 -| m23a5
-  - U1.S2 -| m21
-  - U1.S3 -| m18a5
-  - U1.COUT -| m16
+  - U1.CIN -| 11.5,12
+  - U1.A0 -| 11,2
+  - 11,2 -- 6,2
+  - U1.B0 -| 10.5,4
+  - 10.5,4 -- 6,4
+  - U1.A1 -| 10,6
+  - 10,6 -- 6,6
+  - U1.B1 -| 9.5,8
+  - 9.5,8 -- 6,8
+  - U1.A2 -| 6,10
+  - U1.B2 -| 10,12
+  - 10,12 -- 6,12
+  - U1.A3 -| 10.5,14
+  - 10.5,14 -- 6,14
+  - U1.B3 -| 11,16
+  - 11,16 -- 6,16
+  - U1.S0 -| 26,13
+  - U1.S1 -| 23.5,13
+  - U1.S2 -| 21,13
+  - U1.S3 -| 18.5,13
+  - U1.COUT -| 16,13
 notes:
-  - text p16 blue center: C4
-  - text p18a5 blue center: 和4
-  - text p21 blue center: 和3
-  - text p23a5 blue center: 和2
-  - text p26 blue center: 和1
-  - text r1 small left: "箱のピンの名前は 0 から数える (A0 は本文の A1、S0 は本文の和1)"
+  - text 16,16 blue center: C4
+  - text 18.5,16 blue center: 和4
+  - text 21,16 blue center: 和3
+  - text 23.5,16 blue center: 和2
+  - text 26,16 blue center: 和1
+  - text 1,18 small left: "箱のピンの名前は 0 から数える (A0 は本文の A1、S0 は本文の和1)"
 style:
   grid: on
   pitch: 1.2

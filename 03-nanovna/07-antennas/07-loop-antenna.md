@@ -41,18 +41,18 @@ device: H4
 ```circuit
 title: 図1 1 波長ループの給電点 (等価回路) と 75 Ω の同軸
 parts:
-  J1: sma b2 mirror CH0
-  T1: tline b4 b6 75
-  R1: resistor b7 b9 120
-  L1: inductor b9 b11 360n
-  C1: capacitor b11 b13 0.381p
-  G1: ground c2
-  G2: ground c13
+  J1: sma 2,2 mirror CH0
+  T1: tline 4,2 6,2 75
+  R1: resistor 7,2 9,2 120
+  L1: inductor 9,2 11,2 360n
+  C1: capacitor 11,2 13,2 0.381p
+  G1: ground 2,3
+  G2: ground 13,3
 wires:
-  - J1.1 -- b4
-  - b6 -- b7
-  - b13 -- c13
-  - J1.2 -- c2
+  - J1.1 -- 4,2
+  - 6,2 -- 7,2
+  - 13,2 -- 13,3
+  - J1.2 -- 2,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/07-loop-antenna.svg)

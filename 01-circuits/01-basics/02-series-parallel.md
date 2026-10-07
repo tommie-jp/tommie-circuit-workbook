@@ -21,15 +21,15 @@ board: BB
 ```circuit
 title: 図1 直列 1 本と並列 2 本
 parts:
-  V1: vsource a1 c1 5
-  R1: resistor a1 a3 1k
-  R2: resistor a3 c3 2k
-  R3: resistor a5 c5 2k
-  G1: ground c1
+  V1: vsource 1,1 1,3 5
+  R1: resistor 1,1 3,1 1k
+  R2: resistor 3,1 3,3 2k
+  R3: resistor 5,1 5,3 2k
+  G1: ground 1,3
 wires:
-  - a3 -- a5
-  - c1 -- c3
-  - c3 -- c5
+  - 3,1 -- 5,1
+  - 1,3 -- 3,3
+  - 3,3 -- 5,3
 style:
   grid: on
 ```

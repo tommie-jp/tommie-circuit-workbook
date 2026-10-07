@@ -20,18 +20,18 @@ source: 自作
 ```circuit
 title: 図1 センタータップ 2 本ダイオードの全波整流
 parts:
-  V1: sine a2c0f0 d2 8.5
-  V2: sine d2 g2h0f0 8.5
-  D1: diode a3c0f0 a5c0f0 1N4001
-  D2: diode g3h0f0 g5h0f0 1N4001
-  C1: ecap c7 c4 1000u
-  RL: resistor e4 e7 220
+  V1: sine 2,1.25 2,4 8.5
+  V2: sine 2,4 2,7.75 8.5
+  D1: diode 3,1.25 5,1.25 1N4001
+  D2: diode 3,7.75 5,7.75 1N4001
+  C1: ecap 7,3 4,3 1000u
+  RL: resistor 4,5 7,5 220
 wires:
-  - a2c0f0 -- a3c0f0
-  - g2h0f0 -- g3h0f0
-  - d2 -- d4
-  - c4 -- d4 -- e4
-  - a5c0f0 -- a7c0f0 -- c7 -- e7 -- g7h0f0 -- g5h0f0
+  - 2,1.25 -- 3,1.25
+  - 2,7.75 -- 3,7.75
+  - 2,4 -- 4,4
+  - 4,3 -- 4,4 -- 4,5
+  - 5,1.25 -- 7,1.25 -- 7,3 -- 7,5 -- 7,7.75 -- 5,7.75
 style:
   grid: on
   pitch: 1.2

@@ -30,15 +30,15 @@ title: 図1 アルミ箔のコンデンサをテスターで測る
 style:
   standard: jis
 parts:
-  C1: capacitor c5 e5 l=$C_x$
+  C1: capacitor 5,3 5,5 l=$C_x$
   M1:
     type: device
-    at: c7
+    at: 7,3
     label: "DMM (C)"
     pins: ["+", "-"]
 wires:
-  - c5 -| M1.+
-  - e5 -| M1.-
+  - 5,3 -| M1.+
+  - 5,5 -| M1.-
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/02-parallel-plate-capacitor.svg)

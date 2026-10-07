@@ -19,17 +19,17 @@ Analog Discovery 3 (AD3) の電源から +5 V と −5 V を出し、それぞ�
 ```circuit
 title: 図1 2 つの電源に負荷と電圧計
 parts:
-  V1: vsource a1 c1 5
-  R1: resistor a3 c3 1k
-  M1: voltmeter a5 c5 l=$\mathrm{CH1}$
-  V2: vsource c7 a7 5
-  R2: resistor a9 c9 1k
-  M2: voltmeter a11 c11 l=$\mathrm{CH2}$
-  G1: ground c6
+  V1: vsource 1,1 1,3 5
+  R1: resistor 3,1 3,3 1k
+  M1: voltmeter 5,1 5,3 l=$\mathrm{CH1}$
+  V2: vsource 7,3 7,1 5
+  R2: resistor 9,1 9,3 1k
+  M2: voltmeter 11,1 11,3 l=$\mathrm{CH2}$
+  G1: ground 6,3
 wires:
-  - a1 -- a3 -- a5
-  - a7 -- a9 -- a11
-  - c1 -- c3 -- c5 -- c6 -- c7 -- c9 -- c11
+  - 1,1 -- 3,1 -- 5,1
+  - 7,1 -- 9,1 -- 11,1
+  - 1,3 -- 3,3 -- 5,3 -- 6,3 -- 7,3 -- 9,3 -- 11,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/circuit/01-supplies.svg)

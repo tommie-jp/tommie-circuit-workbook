@@ -22,36 +22,36 @@ title: 図1 LM358 非反転増幅 (9-2・9-3 と同じ、利得 11 倍)
 parts:
   AD:
     type: device
-    at: f2
+    at: 2,6
     label: Analog Discovery
     pins: [2+, V+, W1, 1+, 1-, 2-, GND]
     turn: mirror
-  R1: resistor c11 e11 100k
-  R2: resistor e11 g11 100k
-  Cin: capacitor e6 e8 1u
-  U1: opamp e14d0f0 +up LM358
-  Rf: resistor g17 g13 10k
-  Rg: resistor g13 i13 1k
-  Cg: capacitor i13 k13 10u
-  G1: ground k13
-  G2: ground g11
-  G3: ground h5
+  R1: resistor 11,3 11,5 100k
+  R2: resistor 11,5 11,7 100k
+  Cin: capacitor 6,5 8,5 1u
+  U1: opamp 14,5.35 +up LM358
+  Rf: resistor 17,7 13,7 10k
+  Rg: resistor 13,7 13,9 1k
+  Cg: capacitor 13,9 13,11 10u
+  G1: ground 13,11
+  G2: ground 11,7
+  G3: ground 5,8
 wires:
-  - AD.V+ -| c5
-  - c5 -- c11
-  - AD.W1 -| e6
-  - e8 -- e9 -- e11
-  - AD.1+ -| e9
-  - e11 -| U1.+
-  - U1.- -| g13
-  - U1.out -| g17
-  - AD.2+ -| b4
-  - b4 -- b18 -- g18
-  - g17 -- g18
-  - AD.GND -| h4
-  - AD.2- -| h5
-  - AD.1- -| h6
-  - h4 -- h5 -- h6
+  - AD.V+ -| 5,3
+  - 5,3 -- 11,3
+  - AD.W1 -| 6,5
+  - 8,5 -- 9,5 -- 11,5
+  - AD.1+ -| 9,5
+  - 11,5 -| U1.+
+  - U1.- -| 13,7
+  - U1.out -| 17,7
+  - AD.2+ -| 4,2
+  - 4,2 -- 18,2 -- 18,7
+  - 17,7 -- 18,7
+  - AD.GND -| 4,8
+  - AD.2- -| 5,8
+  - AD.1- -| 6,8
+  - 4,8 -- 5,8 -- 6,8
 style:
   pitch: 1.2
 ```

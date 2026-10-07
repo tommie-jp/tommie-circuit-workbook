@@ -24,32 +24,32 @@ PNP は「エミッタよりベースを下げる」と導通する。ロジッ�
 ```circuit
 title: 図1 PNP ハイサイドスイッチ (W1 で入れ、CH2 で入力、CH1 でコレクタを見る)
 parts:
-  VCC: vcc b4 5V
-  RB1: resistor b7 d7 10k
-  RB2: resistor d7 f7 4.7k
-  Q1: pnp d9
-  Q2: npn g8
-  RB3: resistor g5 g7 10k
-  W1: square g2 i2 l=$\mathrm{W1}$
-  G0: ground i2
-  M2: voltmeter g4 i4 l=$\mathrm{CH2}$
-  G3: ground i4
-  RL: resistor e11 e13 470
-  D1: led e13 g13
-  G1: ground g13
-  G2: ground h8
-  M1: voltmeter f10 h10 l=$\mathrm{CH1}$
-  G4: ground h10
+  VCC: vcc 4,2 5V
+  RB1: resistor 7,2 7,4 10k
+  RB2: resistor 7,4 7,6 4.7k
+  Q1: pnp 9,4
+  Q2: npn 8,7
+  RB3: resistor 5,7 7,7 10k
+  W1: square 2,7 2,9 l=$\mathrm{W1}$
+  G0: ground 2,9
+  M2: voltmeter 4,7 4,9 l=$\mathrm{CH2}$
+  G3: ground 4,9
+  RL: resistor 11,5 13,5 470
+  D1: led 13,5 13,7
+  G1: ground 13,7
+  G2: ground 8,8
+  M1: voltmeter 10,6 10,8 l=$\mathrm{CH1}$
+  G4: ground 10,8
 wires:
-  - b4 -- b7 -- b9
-  - b9 -- Q1.E
-  - d7 -- Q1.B
-  - f7 -| Q2.C
-  - g2 -- g4 -- g5
-  - g7 -- Q2.B
-  - Q1.C -- e9 -- e10 -- e11
-  - e10 -- f10
-  - Q2.E -- h8
+  - 4,2 -- 7,2 -- 9,2
+  - 9,2 -- Q1.E
+  - 7,4 -- Q1.B
+  - 7,6 -| Q2.C
+  - 2,7 -- 4,7 -- 5,7
+  - 7,7 -- Q2.B
+  - Q1.C -- 9,5 -- 10,5 -- 11,5
+  - 10,5 -- 10,6
+  - Q2.E -- 8,8
 style:
   grid: on
   pitch: 1.2

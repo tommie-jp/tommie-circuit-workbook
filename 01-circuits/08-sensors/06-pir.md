@@ -24,19 +24,19 @@ title: 図1 PIR モジュールでインジケータを点ける
 parts:
   M1:
     type: device
-    at: c3
+    at: 3,3
     label: HC-SR501
     pins: [VCC, OUT, GND]
     turn: mirror
-  VCC: vcc b5 5V
-  G1: ground e5
-  R1: resistor d7 f7 150
-  D1: led f7 h7 red
-  G2: ground h7
+  VCC: vcc 5,2 5V
+  G1: ground 5,5
+  R1: resistor 7,4 7,6 150
+  D1: led 7,6 7,8 red
+  G2: ground 7,8
 wires:
-  - b5 |- M1.VCC
-  - M1.GND -| e5
-  - M1.OUT -| d7
+  - 5,2 |- M1.VCC
+  - M1.GND -| 5,5
+  - M1.OUT -| 7,4
 style:
   grid: on
   pitch: 1.2

@@ -30,20 +30,20 @@ board: BB
 ```circuit
 title: 図1 トランジスタのスイッチ
 parts:
-  V1: square d1 f1 2.5 l=$\mathrm{W1}$
-  RB: resistor d1 d3 47k i=IB
-  Q1: npn d5 2SC1815
-  RC: resistor a5 c5 1k i=IC
-  VCC: vcc a5 5V
-  G1: ground f1
+  V1: square 1,4 1,6 2.5 l=$\mathrm{W1}$
+  RB: resistor 1,4 3,4 47k i=IB
+  Q1: npn 5,4 2SC1815
+  RC: resistor 5,1 5,3 1k i=IC
+  VCC: vcc 5,1 5V
+  G1: ground 1,6
 wires:
-  - d3 -| Q1.B
-  - c5 -| Q1.C
-  - Q1.E -| f5
-  - f1 -- f5
+  - 3,4 -| Q1.B
+  - 5,3 -| Q1.C
+  - Q1.E -| 5,6
+  - 1,6 -- 5,6
 notes:
-  - text c1 blue: 入力 (CH1)
-  - text c5h5 blue: コレクタ (CH2)
+  - text 1,3 blue: 入力 (CH1)
+  - text 5.5,3.7 blue: コレクタ (CH2)
 style:
   standard: jis
   grid: on

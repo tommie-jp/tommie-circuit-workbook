@@ -22,11 +22,11 @@ era: 古
 ```circuit
 title: 図1 コイルで磁界の音を拾う
 parts:
-  L1: inductor a2 c2 1H
-  EAR: earphone a6 c6 l=$\mathrm{EAR}$
+  L1: inductor 2,1 2,3 1H
+  EAR: earphone 6,1 6,3 l=$\mathrm{EAR}$
 wires:
-  - a2 -- a6
-  - c2 -- c6
+  - 2,1 -- 6,1
+  - 2,3 -- 6,3
 style:
   grid: on
   pitch: 1.2

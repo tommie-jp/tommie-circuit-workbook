@@ -23,57 +23,57 @@ LED をたくさん光らせたいときや 7 セグメント表示器 (10-7) �
 ```circuit
 title: 図1 74HC595に手動でビットを送り込む
 parts:
-  U1: ic h14 74HC595
-  VCC: vcc d14 5V
-  GND: ground l14
-  VCC: vcc c10 5V
-  SER: switch c10 e10 l=$\mathrm{SER}$
-  RpdS: resistor e10 e8 10k l=$R_\mathrm{pdS}$
-  GS: ground e8
-  VCC: vcc f4 5V
-  SRCLK: button f4 h4 l=$\mathrm{SRCLK}$
-  RpdCLK: resistor h4 j4 10k l=$R_\mathrm{pdCLK}$
-  GCLK: ground j4
-  VCC: vcc k6 5V
-  RCLK: button k8 k6 l=$\mathrm{RCLK}$
-  RpdRCLK: resistor k8 m8 10k l=$R_\mathrm{pdRCLK}$
-  GRCLK: ground m8
-  RD: resistor k17 l17 330
-  DD: led l17 m17 red
-  GD: ground m17
-  RC: resistor k19a5 l19a5 330
-  DC: led l19a5 m19a5 red
-  GC: ground m19a5
-  RB: resistor k22 l22 330
-  DB: led l22 m22 red
-  GB: ground m22
-  RA: resistor k24a5 l24a5 330
-  DA: led l24a5 m24a5 red
-  GA: ground m24a5
+  U1: ic 14,8 74HC595
+  VCC: vcc 14,4 5V
+  GND: ground 14,12
+  VCC: vcc 10,3 5V
+  SER: switch 10,3 10,5 l=$\mathrm{SER}$
+  RpdS: resistor 10,5 8,5 10k l=$R_\mathrm{pdS}$
+  GS: ground 8,5
+  VCC: vcc 4,6 5V
+  SRCLK: button 4,6 4,8 l=$\mathrm{SRCLK}$
+  RpdCLK: resistor 4,8 4,10 10k l=$R_\mathrm{pdCLK}$
+  GCLK: ground 4,10
+  VCC: vcc 6,11 5V
+  RCLK: button 8,11 6,11 l=$\mathrm{RCLK}$
+  RpdRCLK: resistor 8,11 8,13 10k l=$R_\mathrm{pdRCLK}$
+  GRCLK: ground 8,13
+  RD: resistor 17,11 17,12 330
+  DD: led 17,12 17,13 red
+  GD: ground 17,13
+  RC: resistor 19.5,11 19.5,12 330
+  DC: led 19.5,12 19.5,13 red
+  GC: ground 19.5,13
+  RB: resistor 22,11 22,12 330
+  DB: led 22,12 22,13 red
+  GB: ground 22,13
+  RA: resistor 24.5,11 24.5,12 330
+  DA: led 24.5,12 24.5,13 red
+  GA: ground 24.5,13
 wires:
   # 電源: VCC と SRCLR (クリアしない) を +5V、GND と OE (出力を常に出す) を GND へ
-  - U1.VCC |- d14
-  - U1.SRCLR |- d14a5
-  - d14 -- d14a5
-  - U1.GND |- k14
-  - U1.OE |- k14a5
-  - k14a5 -- k14 -- l14
+  - U1.VCC |- 14,4
+  - U1.SRCLR |- 14.5,4
+  - 14,4 -- 14.5,4
+  - U1.GND |- 14,11
+  - U1.OE |- 14.5,11
+  - 14.5,11 -- 14,11 -- 14,12
   # 入力: SER は上、SRCLK は左、RCLK は下のスイッチから
-  - U1.SER -| e10
-  - U1.SRCLK -| h4
-  - U1.RCLK -| k8
+  - U1.SER -| 10,5
+  - U1.SRCLK -| 4,8
+  - U1.RCLK -| 8,11
   # 出力: QA〜QD を LED へ (QA がいちばん右)
-  - U1.QA -| k24a5
-  - U1.QB -| k22
-  - U1.QC -| k19a5
-  - U1.QD -| k17
+  - U1.QA -| 24.5,11
+  - U1.QB -| 22,11
+  - U1.QC -| 19.5,11
+  - U1.QD -| 17,11
 notes:
-  - text n17 blue center: QD
-  - text n19a5 blue center: QC
-  - text n22 blue center: QB
-  - text n24a5 blue center: QA
-  - text p1 small left: "SRCLK はシフトクロック、RCLK はラッチクロック"
-  - text q1 small left: "QE-QH と直列出力 (PIN 9) は開けておく"
+  - text 17,14 blue center: QD
+  - text 19.5,14 blue center: QC
+  - text 22,14 blue center: QB
+  - text 24.5,14 blue center: QA
+  - text 1,16 small left: "SRCLK はシフトクロック、RCLK はラッチクロック"
+  - text 1,17 small left: "QE-QH と直列出力 (PIN 9) は開けておく"
 style:
   grid: on
   pitch: 1.2

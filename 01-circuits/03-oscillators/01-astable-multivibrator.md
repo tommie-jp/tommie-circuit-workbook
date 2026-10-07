@@ -23,33 +23,33 @@ era: 古
 ```circuit
 title: 図1 非安定マルチバイブレータ (Q1・Q2 を左右に、C1・C2 が中央で交差する)
 parts:
-  VCC: vcc a1 5V
-  R1: resistor a1 c1 330
-  D1: led c1 d1 red
-  Q1: npn f1 mirror 2SC1815
-  G1: ground g1
-  R4: resistor a4 c4 100k
-  R3: resistor a7 c7 100k
-  R2: resistor a10 c10 330
-  D2: led c10 d10 red
-  Q2: npn f10 2SC1815
-  G2: ground g10
-  C1: ecap d2 d3 10u
-  C2: ecap d9 d8 10u
+  VCC: vcc 1,1 5V
+  R1: resistor 1,1 1,3 330
+  D1: led 1,3 1,4 red
+  Q1: npn 1,6 mirror 2SC1815
+  G1: ground 1,7
+  R4: resistor 4,1 4,3 100k
+  R3: resistor 7,1 7,3 100k
+  R2: resistor 10,1 10,3 330
+  D2: led 10,3 10,4 red
+  Q2: npn 10,6 2SC1815
+  G2: ground 10,7
+  C1: ecap 2,4 3,4 10u
+  C2: ecap 9,4 8,4 10u
 wires:
-  - a1 -- a4 -- a7 -- a10
-  - d1 |- Q1.C
-  - d10 |- Q2.C
-  - Q1.E |- g1
-  - Q2.E |- g10
-  - d1 -- d2
-  - d10 -- d9
-  - d3 -- f7
-  - d8 -- f4
-  - c4 -- f4
-  - c7 -- f7
-  - f4 -- Q1.B
-  - f7 -- Q2.B
+  - 1,1 -- 4,1 -- 7,1 -- 10,1
+  - 1,4 |- Q1.C
+  - 10,4 |- Q2.C
+  - Q1.E |- 1,7
+  - Q2.E |- 10,7
+  - 1,4 -- 2,4
+  - 10,4 -- 9,4
+  - 3,4 -- 7,6
+  - 8,4 -- 4,6
+  - 4,3 -- 4,6
+  - 7,3 -- 7,6
+  - 4,6 -- Q1.B
+  - 7,6 -- Q2.B
 style:
   grid: on
 ```

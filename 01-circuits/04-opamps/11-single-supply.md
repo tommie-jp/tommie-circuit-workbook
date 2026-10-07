@@ -26,34 +26,34 @@ title: 図1 単電源 + 仮想GND (LM358 の片方を仮想GND、もう片方を
 parts:
   V1: vsource vcc gnd 5
   G1: ground gnd
-  R1: resistor f4 h4 10k
-  R2: resistor h4 j4 10k
-  GR2: ground j4
-  Cbyp: ecap h6 j6 10u
-  GCbyp: ground j6
-  U1: opamp h9c0b0 +up
-  V2: sine b2 d2 0.3
-  G2: ground d2
-  Cin: capacitor b2 b4 1u
-  Rbias: resistor b5 d5 100k
-  U2: opamp b9c0b0 +up
-  Rg: resistor e8 d8 10k
-  Rf: resistor d8 d11 10k
-  OUT: port b12c0b0
+  R1: resistor 4,6 4,8 10k
+  R2: resistor 4,8 4,10 10k
+  GR2: ground 4,10
+  Cbyp: ecap 6,8 6,10 10u
+  GCbyp: ground 6,10
+  U1: opamp 9,8.21 +up
+  V2: sine 2,2 2,4 0.3
+  G2: ground 2,4
+  Cin: capacitor 2,2 4,2 1u
+  Rbias: resistor 5,2 5,4 100k
+  U2: opamp 9,2.21 +up
+  Rg: resistor 8,5 8,4 10k
+  Rf: resistor 8,4 11,4 10k
+  OUT: port 12,2.21
 points:
-  vcc: f2
-  gnd: h2
+  vcc: 2,6
+  gnd: 2,8
 wires:
-  - vcc -- f4
-  - h4 -- h6 -| U1.+
-  - i8 |- U1.-
-  - i8 -- i10 -- h10c0b0
-  - U1.out -- h10c0b0 -- e10
-  - d5 -- e5 -- e8 -- e10
-  - b4 -- b5 -| U2.+
-  - d8 |- U2.-
-  - d11 -- b11c0b0
-  - U2.out -- b11c0b0 -- b12c0b0
+  - vcc -- 4,6
+  - 4,8 -- 6,8 -| U1.+
+  - 8,9 |- U1.-
+  - 8,9 -- 10,9 -- 10,8.21
+  - U1.out -- 10,8.21 -- 10,5
+  - 5,4 -- 5,5 -- 8,5 -- 10,5
+  - 4,2 -- 5,2 -| U2.+
+  - 8,4 |- U2.-
+  - 11,4 -- 11,2.21
+  - U2.out -- 11,2.21 -- 12,2.21
 style:
   grid: on
 ```

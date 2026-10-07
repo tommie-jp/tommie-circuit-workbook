@@ -24,23 +24,23 @@ title: 図1 Wavegen の 1 MHz 正弦波を抵抗で落として tinySA へ
 parts:
   X1:
     type: device
-    at: b1
+    at: 1,2
     label: Analog Discovery
     pins: [W1, GND]
     turn: mirror
-  R1: resistor b5 b7 1k
+  R1: resistor 5,2 7,2 1k
   X2:
     type: device
-    at: b9
+    at: 9,2
     label: tinySA
     pins: [RF, GND]
-  GA: ground d4
-  GM: ground d8
+  GA: ground 4,4
+  GM: ground 8,4
 wires:
-  - X1.W1 -| b5
-  - b7 -| X2.RF
-  - X1.GND -| d4
-  - X2.GND -| d8
+  - X1.W1 -| 5,2
+  - 7,2 -| X2.RF
+  - X1.GND -| 4,4
+  - X2.GND -| 8,4
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/02-center-span-rbw.svg)

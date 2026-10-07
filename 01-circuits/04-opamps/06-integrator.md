@@ -23,27 +23,27 @@ title: 図1 積分器
 parts:
   VP: vsource vp mid 5
   VN: vsource mid vm 5
-  G1: ground c2
-  V1: square c3 e3 1
-  G2: ground e3
-  Rin: resistor c3 c6 10k
-  Cf: capacitor b6 b9 100n
-  Rbleed: resistor a6 a9 1M
-  Rbias: resistor e7 f7 10k
-  GBias: ground f7
-  U1: opamp d8 +down
-  OUT: port d10
+  G1: ground 2,3
+  V1: square 3,3 3,5 1
+  G2: ground 3,5
+  Rin: resistor 3,3 6,3 10k
+  Cf: capacitor 6,2 9,2 100n
+  Rbleed: resistor 6,1 9,1 1M
+  Rbias: resistor 7,5 7,6 10k
+  GBias: ground 7,6
+  U1: opamp 8,4 +down
+  OUT: port 10,4
 points:
-  vp: a1
-  vm: e1
-  mid: c1
+  vp: 1,1
+  vm: 1,5
+  mid: 1,3
 wires:
-  - mid -- c2
-  - c6 |- U1.-
-  - e7 |- U1.+
-  - a6 -- b6 -- c6
-  - a9 -- b9 -- d9
-  - U1.out -- d9 -- d10
+  - mid -- 2,3
+  - 6,3 |- U1.-
+  - 7,5 |- U1.+
+  - 6,1 -- 6,2 -- 6,3
+  - 9,1 -- 9,2 -- 9,4
+  - U1.out -- 9,4 -- 10,4
 style:
   grid: on
 ```

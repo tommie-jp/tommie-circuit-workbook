@@ -51,18 +51,18 @@ title: 図1 Load の等価回路 (50 Ω と直列の L)
 parts:
   M1:
     type: device
-    at: b2
+    at: 2,2
     label: NanoVNA
     pins: [CH0, CH1]
     turn: mirror
-  L1: inductor a4i0i0 a6i0i0 2n
-  R1: resistor a7i0i0 c7i0i0 50
-  G1: ground c7i0i0
+  L1: inductor 4,1.88 6,1.88 2n
+  R1: resistor 7,1.88 7,3.88 50
+  G1: ground 7,3.88
 wires:
-  - M1.CH0 -| a4i0i0
-  - a6i0i0 -- a7i0i0
+  - M1.CH0 -| 4,1.88
+  - 6,1.88 -- 7,1.88
 notes:
-  - text c7f5 blue: 等価回路 (自作の例)
+  - text 7.5,3.5 blue: 等価回路 (自作の例)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/circuit/07-cal-kit-quality.svg)

@@ -28,34 +28,34 @@ board: BB
 ```circuit
 title: 図1 反転増幅と非反転増幅
 parts:
-  V1: sine a1 c1 0.2 l=$\mathrm{W1}$
-  G1: ground c1
-  Rin: resistor a3 a5 10k
-  Rf1: resistor a6 a9 100k
-  U1: opamp c7 +down TL072
-  G2: ground d6
-  OUT1: port c12
-  U2: opamp g7 +up
-  R3b: resistor i6 i9 90k
-  R2b: resistor i5 k5 10k
-  G3: ground k5
-  OUT2: port g12
+  V1: sine 1,1 1,3 0.2 l=$\mathrm{W1}$
+  G1: ground 1,3
+  Rin: resistor 3,1 5,1 10k
+  Rf1: resistor 6,1 9,1 100k
+  U1: opamp 7,3 +down TL072
+  G2: ground 6,4
+  OUT1: port 12,3
+  U2: opamp 7,7 +up
+  R3b: resistor 6,9 9,9 90k
+  R2b: resistor 5,9 5,11 10k
+  G3: ground 5,11
+  OUT2: port 12,7
 wires:
-  - a1 -- a3
-  - a5 -- a6
-  - a5 |- U1.-
-  - d6 |- U1.+
-  - a9 -- a10 -- c10
-  - U1.out -- c10 -- c12
-  - a2 |- U2.+
-  - i5 |- U2.-
-  - i5 -- i6
-  - i9 -- i10 -- g10
-  - U2.out -- g10 -- g12
+  - 1,1 -- 3,1
+  - 5,1 -- 6,1
+  - 5,1 |- U1.-
+  - 6,4 |- U1.+
+  - 9,1 -- 10,1 -- 10,3
+  - U1.out -- 10,3 -- 12,3
+  - 2,1 |- U2.+
+  - 5,9 |- U2.-
+  - 5,9 -- 6,9
+  - 9,9 -- 10,9 -- 10,7
+  - U2.out -- 10,7 -- 12,7
 notes:
-  - text c1h0 blue: 反転
-  - text h3h0 blue: 非反転
-  - text j7h0: R3b は 180 kΩ を 2 本並列 (90 kΩ)
+  - text 1,3.7 blue: 反転
+  - text 3,8.7 blue: 非反転
+  - text 7,10.7: R3b は 180 kΩ を 2 本並列 (90 kΩ)
 style:
   standard: jis
   grid: on

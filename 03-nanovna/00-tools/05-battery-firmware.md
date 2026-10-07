@@ -72,16 +72,16 @@ title: 図1 CH0 に 100 Ω の検査片をつなぐ
 parts:
   M1:
     type: device
-    at: b2
+    at: 2,2
     label: NanoVNA
     pins: [CH0, CH1]
     turn: mirror
-  R1: resistor a5i0i0 c5i0i0 100
-  G1: ground c5i0i0
+  R1: resistor 5,1.88 5,3.88 100
+  G1: ground 5,3.88
 wires:
-  - M1.CH0 -| a5i0i0
+  - M1.CH0 -| 5,1.88
 notes:
-  - text c5f5 blue: 検査片 (SMA の先)
+  - text 5.5,3.5 blue: 検査片 (SMA の先)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/circuit/05-battery-firmware.svg)

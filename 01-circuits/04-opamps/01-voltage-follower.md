@@ -30,26 +30,26 @@ OP アンプが 2 回路入った LM358 を使う。
 ```circuit
 title: 図1 ボルテージフォロア
 parts:
-  VP: vsource a1 c1 5
-  VN: vsource c1 e1 5
-  G1: ground c2
-  R1: resistor a3 c3 100k
-  R2: resistor c3 e3 47k
-  U1: opamp c6 +up
-  RL: resistor c9 e9 1k
-  G2: ground e9
+  VP: vsource 1,1 1,3 5
+  VN: vsource 1,3 1,5 5
+  G1: ground 2,3
+  R1: resistor 3,1 3,3 100k
+  R2: resistor 3,3 3,5 47k
+  U1: opamp 6,3 +up
+  RL: resistor 9,3 9,5 1k
+  G2: ground 9,5
 wires:
-  - mid -- c2
-  - vp -- a3
-  - vm -- e3
-  - c3 |- U1.+
-  - U1.out -- c8 -- c9
-  - c8 -- d8 -- d5
-  - d5 |- U1.-
+  - mid -- 2,3
+  - vp -- 3,1
+  - vm -- 3,5
+  - 3,3 |- U1.+
+  - U1.out -- 8,3 -- 9,3
+  - 8,3 -- 8,4 -- 5,4
+  - 5,4 |- U1.-
 points:
-  vp: a1
-  vm: e1
-  mid: c1
+  vp: 1,1
+  vm: 1,5
+  mid: 1,3
 style:
   grid: on
 ```

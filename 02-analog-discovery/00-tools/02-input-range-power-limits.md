@@ -33,12 +33,12 @@ LED の電流は、昔からの標準的な方法である**直列抵抗**で決
 ```circuit
 title: 図1 抵抗を直列に入れて LED を V+ につなぐ
 parts:
-  V1: vsource a1 c1 5
-  R1: resistor a1 a3 330
-  D1: led a3 a5 v=VF
-  G1: ground c1
+  V1: vsource 1,1 1,3 5
+  R1: resistor 1,1 3,1 330
+  D1: led 3,1 5,1 v=VF
+  G1: ground 1,3
 wires:
-  - a5 -- c1
+  - 5,1 -- 1,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/circuit/02-input-range-power-limits.svg)

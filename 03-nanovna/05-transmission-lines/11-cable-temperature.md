@@ -37,18 +37,18 @@ device: H4
 ```circuit
 title: 図1 CH0 と CH1 の間に 10 m のケーブル (巻いて温める)
 parts:
-  J1: sma b2 mirror CH0
-  TL1: tline b4 b7 50 l=$\mathrm{TL}_1$
-  J2: sma b9 CH1
-  G1: ground c2
-  G2: ground c9
+  J1: sma 2,2 mirror CH0
+  TL1: tline 4,2 7,2 50 l=$\mathrm{TL}_1$
+  J2: sma 9,2 CH1
+  G1: ground 2,3
+  G2: ground 9,3
 wires:
-  - J1.1 -- b4
-  - b7 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c9
+  - J1.1 -- 4,2
+  - 7,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 9,3
 notes:
-  - text b5h5 center: 10 m・20 °C / 40 °C
+  - text 5.5,2.7 center: 10 m・20 °C / 40 °C
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/11-cable-temperature.svg)

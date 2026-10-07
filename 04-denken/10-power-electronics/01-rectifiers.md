@@ -29,27 +29,27 @@ title: 図1 半波整流と全波整流ブリッジを並べて比べる
 style:
   standard: jis
 parts:
-  W1: sine c1 g1 l=$\mathrm{W1}$
-  D1: diode c1 c3 1N4148
-  RL1: resistor c3 g3 1.5k
-  M1: voltmeter c5 g5 l=$\mathrm{CH1}$
-  D2: diode e10 c13 1N4148
-  D3: diode e16 c13 1N4148
-  D4: diode g13 e10 1N4148
-  D5: diode g13 e16 1N4148
-  RL2: resistor c18 g18 1.5k
-  M2: voltmeter c20 g20 l=$\mathrm{CH2}$
-  G1: ground g1
-  G2: ground g16
+  W1: sine 1,3 1,7 l=$\mathrm{W1}$
+  D1: diode 1,3 3,3 1N4148
+  RL1: resistor 3,3 3,7 1.5k
+  M1: voltmeter 5,3 5,7 l=$\mathrm{CH1}$
+  D2: diode 10,5 13,3 1N4148
+  D3: diode 16,5 13,3 1N4148
+  D4: diode 13,7 10,5 1N4148
+  D5: diode 13,7 16,5 1N4148
+  RL2: resistor 18,3 18,7 1.5k
+  M2: voltmeter 20,3 20,7 l=$\mathrm{CH2}$
+  G1: ground 1,7
+  G2: ground 16,7
 wires:
-  - c1 -- a1 -- a10 -- e10
-  - e16 -- g16
-  - g1 -- g3
-  - c3 -- c5
-  - g3 -- g5
-  - c13 -- c18 -- c20
-  - g13 -- i13 -- i18 -- g18
-  - g18 -- g20
+  - 1,3 -- 1,1 -- 10,1 -- 10,5
+  - 16,5 -- 16,7
+  - 1,7 -- 3,7
+  - 3,3 -- 5,3
+  - 3,7 -- 5,7
+  - 13,3 -- 18,3 -- 20,3
+  - 13,7 -- 13,9 -- 18,9 -- 18,7
+  - 18,7 -- 20,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/01-rectifiers-1.svg)
@@ -157,23 +157,23 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{FG}$
-  D2: diode e4 c7 1N4148
-  D3: diode e10 c7 1N4148
-  D4: diode g7 e4 1N4148
-  D5: diode g7 e10 1N4148
-  RL2: resistor c13 i13 1.5k
-  M2: voltmeter i11 k11 l=$\mathrm{CH2}$
-  M1: voltmeter c16 k16 l=$\mathrm{CH1}$
-  G1: ground g1
-  G2: ground g10
-  G3: ground k13
+  V1: sine 1,3 1,7 l=$\mathrm{FG}$
+  D2: diode 4,5 7,3 1N4148
+  D3: diode 10,5 7,3 1N4148
+  D4: diode 7,7 4,5 1N4148
+  D5: diode 7,7 10,5 1N4148
+  RL2: resistor 13,3 13,9 1.5k
+  M2: voltmeter 11,9 11,11 l=$\mathrm{CH2}$
+  M1: voltmeter 16,3 16,11 l=$\mathrm{CH1}$
+  G1: ground 1,7
+  G2: ground 10,7
+  G3: ground 13,11
 wires:
-  - c1 -- a1 -- a4 -- e4
-  - e10 -- g10
-  - c7 -- c13 -- c16
-  - g7 -- i7 -- i11 -- i13
-  - k11 -- k13 -- k16
+  - 1,3 -- 1,1 -- 4,1 -- 4,5
+  - 10,5 -- 10,7
+  - 7,3 -- 13,3 -- 16,3
+  - 7,7 -- 7,9 -- 11,9 -- 13,9
+  - 11,11 -- 13,11 -- 16,11
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/01-rectifiers-2.svg)

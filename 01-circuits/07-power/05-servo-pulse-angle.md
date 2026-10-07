@@ -24,17 +24,17 @@ title: 図1 サーボにパルス幅で角度を指示する
 parts:
   M1:
     type: device
-    at: c5
+    at: 5,3
     label: SG90
     pins: [VCC, SIG, GND]
-  VCC: vcc b4 5V
-  G1: ground d4
-  PWM: square d2 f2 5 l=$\mathrm{PWM}$
-  G2: ground f2
+  VCC: vcc 4,2 5V
+  G1: ground 4,4
+  PWM: square 2,4 2,6 5 l=$\mathrm{PWM}$
+  G2: ground 2,6
 wires:
-  - b4 |- M1.VCC
-  - M1.GND -| d4
-  - d2 |- M1.SIG
+  - 4,2 |- M1.VCC
+  - M1.GND -| 4,4
+  - 2,4 |- M1.SIG
 style:
   grid: on
   pitch: 1.2

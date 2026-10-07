@@ -20,19 +20,19 @@ board: BB
 ```circuit
 title: 図1 2 段の RC ローパス
 parts:
-  V1: sine a1 c1 l=$\mathrm{W1}$
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  R1: resistor a5 a7 1k
-  C1: capacitor a7 c7 100n
-  R2: resistor a9 a11 10k
-  C2: capacitor a11 c11 10n
-  M2: voltmeter a13 c13 l=$\mathrm{CH2}$
-  G1: ground c1
+  V1: sine 1,1 1,3 l=$\mathrm{W1}$
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  R1: resistor 5,1 7,1 1k
+  C1: capacitor 7,1 7,3 100n
+  R2: resistor 9,1 11,1 10k
+  C2: capacitor 11,1 11,3 10n
+  M2: voltmeter 13,1 13,3 l=$\mathrm{CH2}$
+  G1: ground 1,3
 wires:
-  - a1 -- a3 -- a5
-  - c1 -- c3 -- c7 -- c11 -- c13
-  - a7 -- a9
-  - a11 -- a13
+  - 1,1 -- 3,1 -- 5,1
+  - 1,3 -- 3,3 -- 7,3 -- 11,3 -- 13,3
+  - 7,1 -- 9,1
+  - 11,1 -- 13,1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/09-two-stage-rc-40db.svg)

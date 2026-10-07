@@ -23,68 +23,68 @@ CD4511 は、2 進数 4 桁で表した 0〜9 (BCD: 10 進の 1 桁を 2 進数 
 ```circuit
 title: 図1 CD4511でBCDを7セグメントに変換する
 parts:
-  VCC: vcc a17 5V
-  SWA: switch a17 c17 l=$\mathrm{SW}_\mathrm{A}$
-  RpdA: resistor c17 c15 10k
-  GA: ground c15
-  VCC: vcc a13 5V
-  SWB: switch a13 c13 l=$\mathrm{SW}_\mathrm{B}$
-  RpdB: resistor c13 c11 10k
-  GB: ground c11
-  VCC: vcc a9 5V
-  SWC: switch a9 c9 l=$\mathrm{SW}_\mathrm{C}$
-  RpdC: resistor c9 c7 10k
-  GC: ground c7
-  VCC: vcc a5 5V
-  SWD: switch a5 c5 l=$\mathrm{SW}_\mathrm{D}$
-  RpdD: resistor c5 c3 10k
-  GD: ground c3
-  U1: ic h20 CD4511B
-  VCC: vcc d20 5V
-  GU1: ground k20
-  Ra: resistor k36 m36 330
-  Rb: resistor k34 m34 330
-  Rc: resistor k32 m32 330
-  Rd: resistor k30 m30 330
-  Re: resistor k28 m28 330
-  Rf: resistor k26 m26 330
-  Rg: resistor k24 m24 330
-  DS1: seg7 q41
-  GCOM: ground t38
+  VCC: vcc 17,1 5V
+  SWA: switch 17,1 17,3 l=$\mathrm{SW}_\mathrm{A}$
+  RpdA: resistor 17,3 15,3 10k
+  GA: ground 15,3
+  VCC: vcc 13,1 5V
+  SWB: switch 13,1 13,3 l=$\mathrm{SW}_\mathrm{B}$
+  RpdB: resistor 13,3 11,3 10k
+  GB: ground 11,3
+  VCC: vcc 9,1 5V
+  SWC: switch 9,1 9,3 l=$\mathrm{SW}_\mathrm{C}$
+  RpdC: resistor 9,3 7,3 10k
+  GC: ground 7,3
+  VCC: vcc 5,1 5V
+  SWD: switch 5,1 5,3 l=$\mathrm{SW}_\mathrm{D}$
+  RpdD: resistor 5,3 3,3 10k
+  GD: ground 3,3
+  U1: ic 20,8 CD4511B
+  VCC: vcc 20,4 5V
+  GU1: ground 20,11
+  Ra: resistor 36,11 36,13 330
+  Rb: resistor 34,11 34,13 330
+  Rc: resistor 32,11 32,13 330
+  Rd: resistor 30,11 30,13 330
+  Re: resistor 28,11 28,13 330
+  Rf: resistor 26,11 26,13 330
+  Rg: resistor 24,11 24,13 330
+  DS1: seg7 41,17
+  GCOM: ground 38,20
 wires:
   # 電源: VDD (PIN 16)・LT (PIN 3)・BL (PIN 4) を +5V、VSS (PIN 8)・LE (PIN 5) を GND へ
-  - U1.VDD |- d19a5
-  - U1.LT |- d20
-  - U1.BL |- d20a5
-  - d19a5 -- d20 -- d20a5
-  - U1.VSS |- k20
-  - U1.5 |- k20a5
-  - k20 -- k20a5
+  - U1.VDD |- 19.5,4
+  - U1.LT |- 20,4
+  - U1.BL |- 20.5,4
+  - 19.5,4 -- 20,4 -- 20.5,4
+  - U1.VSS |- 20,11
+  - U1.5 |- 20.5,11
+  - 20,11 -- 20.5,11
   # 入力: SWA〜SWD から BCD の A〜D へ (D が最も左)
-  - U1.INA -| c17
-  - U1.INB -| c13
-  - U1.INC -| c9
-  - U1.IND -| c5
+  - U1.INA -| 17,3
+  - U1.INB -| 13,3
+  - U1.INC -| 9,3
+  - U1.IND -| 5,3
   # 出力 a〜g: 下りて電流制限の抵抗 (Ra〜Rg) を通り、DS1 へ
-  - U1.Oa -| k36
-  - m36 |- DS1.a
-  - U1.Ob -| k34
-  - m34 |- DS1.b
-  - U1.Oc -| k32
-  - m32 |- DS1.c
-  - U1.Od -| k30
-  - m30 |- DS1.d
-  - U1.Oe -| k28
-  - m28 |- DS1.e
-  - U1.Of -| k26
-  - m26 |- DS1.f
-  - U1.Og -| k24
-  - m24 |- DS1.g
-  - DS1.COM1 -| t38
-  - DS1.COM2 -| t38
+  - U1.Oa -| 36,11
+  - 36,13 |- DS1.a
+  - U1.Ob -| 34,11
+  - 34,13 |- DS1.b
+  - U1.Oc -| 32,11
+  - 32,13 |- DS1.c
+  - U1.Od -| 30,11
+  - 30,13 |- DS1.d
+  - U1.Oe -| 28,11
+  - 28,13 |- DS1.e
+  - U1.Of -| 26,11
+  - 26,13 |- DS1.f
+  - U1.Og -| 24,11
+  - 24,13 |- DS1.g
+  - DS1.COM1 -| 38,20
+  - DS1.COM2 -| 38,20
 notes:
-  - text u1 small left: "VDD は PIN 16 (+5V)、VSS は PIN 8 (GND)"
-  - text v1 small left: "LT (PIN 3)・BL (PIN 4) は +5V、LE (PIN 5) は GND に固定"
+  - text 1,21 small left: "VDD は PIN 16 (+5V)、VSS は PIN 8 (GND)"
+  - text 1,22 small left: "LT (PIN 3)・BL (PIN 4) は +5V、LE (PIN 5) は GND に固定"
 style:
   grid: off
   pitch: 1.2

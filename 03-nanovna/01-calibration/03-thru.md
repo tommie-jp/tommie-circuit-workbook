@@ -22,23 +22,23 @@ title: 図1 CH0 と CH1 を Thru でつなぐ
 parts:
   M1:
     type: device
-    at: c2b0c0
+    at: 2,3.12
     label: NanoVNA
     pins: [CH0, CH1]
     turn: mirror
-  J1: sma c10
-  G1: ground d10
-  J2: sma d7
-  G2: ground e7
+  J1: sma 10,3
+  G1: ground 10,4
+  J2: sma 7,4
+  G2: ground 7,5
 wires:
   - M1.CH0 -- J1.1
-  - J1.2 -- d10
+  - J1.2 -- 10,4
   - M1.CH1 -| J2.1
-  - J2.2 -- e7
+  - J2.2 -- 7,5
 notes:
-  - text b10 blue center: CH0 側
-  - text d8 blue left: CH1 側
-  - text f9 blue center: この 2 つを Thru アダプタで直結する
+  - text 10,2 blue center: CH0 側
+  - text 8,4 blue left: CH1 側
+  - text 9,6 blue center: この 2 つを Thru アダプタで直結する
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/circuit/03-thru.svg)

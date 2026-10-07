@@ -30,20 +30,20 @@ board: BB
 ```circuit
 title: 図1 2N7000 の伝達特性を測る
 parts:
-  V1: triangle d1 f1 2 l=$\mathrm{W1}$
-  RG: resistor d1 d3 1k
-  Q1: nmos-e d5 2N7000
-  RD: resistor a5 c5 1k i=ID
-  VCC: vcc a5 5V
-  G1: ground f1
+  V1: triangle 1,4 1,6 2 l=$\mathrm{W1}$
+  RG: resistor 1,4 3,4 1k
+  Q1: nmos-e 5,4 2N7000
+  RD: resistor 5,1 5,3 1k i=ID
+  VCC: vcc 5,1 5V
+  G1: ground 1,6
 wires:
-  - d3 -| Q1.G
-  - c5 -| Q1.D
-  - Q1.S -| f5
-  - f1 -- f5
+  - 3,4 -| Q1.G
+  - 5,3 -| Q1.D
+  - Q1.S -| 5,6
+  - 1,6 -- 5,6
 notes:
-  - text c3h5 blue: ゲート (CH1)
-  - text c5h5 blue: ドレイン (CH2)
+  - text 3.5,3.7 blue: ゲート (CH1)
+  - text 5.5,3.7 blue: ドレイン (CH2)
 style:
   standard: jis
   grid: on

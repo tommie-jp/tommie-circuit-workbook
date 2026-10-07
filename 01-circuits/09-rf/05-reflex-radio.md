@@ -21,49 +21,49 @@ era: 古
 ```circuit
 title: 図1 検波した音声をベースへ戻す1石レフレックス
 parts:
-  ANT: antenna g1
-  L1: inductor g2 i2 250u
-  GL: ground i2
-  VC1: capacitor-var g4 i4 l=$\mathrm{VC}_1$
-  GVC: ground i4
-  C1: capacitor g6 g7 0.01u
-  Q1: npn g10
-  VCC: vcc a10 5V
-  Rc: resistor a10 c10 1.5k
-  Rb: resistor f10 f8 180k
-  GE: ground h10
-  D1: diode e11 e13 1N60
-  C3: capacitor e14 g14 0.001u
-  GC3: ground g14
-  R3: resistor e16 g16 100k
-  GR3: ground g16
-  Cf: capacitor i18 i16 0.1u
-  Rf: resistor i15 i11 470k
-  L2: inductor c11 c13 1m
-  C5: capacitor c13 c15 0.1u
-  EAR: earphone c23 e23 l=$\mathrm{EAR}$
-  C6: capacitor c20 e20 0.001u
-  GC6: ground e20
+  ANT: antenna 1,7
+  L1: inductor 2,7 2,9 250u
+  GL: ground 2,9
+  VC1: capacitor-var 4,7 4,9 l=$\mathrm{VC}_1$
+  GVC: ground 4,9
+  C1: capacitor 6,7 7,7 0.01u
+  Q1: npn 10,7
+  VCC: vcc 10,1 5V
+  Rc: resistor 10,1 10,3 1.5k
+  Rb: resistor 10,6 8,6 180k
+  GE: ground 10,8
+  D1: diode 11,5 13,5 1N60
+  C3: capacitor 14,5 14,7 0.001u
+  GC3: ground 14,7
+  R3: resistor 16,5 16,7 100k
+  GR3: ground 16,7
+  Cf: capacitor 18,9 16,9 0.1u
+  Rf: resistor 15,9 11,9 470k
+  L2: inductor 11,3 13,3 1m
+  C5: capacitor 13,3 15,3 0.1u
+  EAR: earphone 23,3 23,5 l=$\mathrm{EAR}$
+  C6: capacitor 20,3 20,5 0.001u
+  GC6: ground 20,5
 wires:
-  - g1 -- g6
-  - g7 -- g8
-  - g8 -- Q1.B
-  - f8 -- g8
-  - Q1.C -- f10
-  - f10 -- e10
-  - e10 -- c10
-  - c10 -- c11
-  - e10 -- e11
-  - Q1.E -- h10
-  - e13 -- e18
-  - e18 -- i18
-  - i16 -- i15
-  - i11 -- i8
-  - i8 -- g8
-  - c15 -- c21
-  - c21 -- c23
-  - e23 -- e22
-  - e22 -- e20
+  - 1,7 -- 6,7
+  - 7,7 -- 8,7
+  - 8,7 -- Q1.B
+  - 8,6 -- 8,7
+  - Q1.C -- 10,6
+  - 10,6 -- 10,5
+  - 10,5 -- 10,3
+  - 10,3 -- 11,3
+  - 10,5 -- 11,5
+  - Q1.E -- 10,8
+  - 13,5 -- 18,5
+  - 18,5 -- 18,9
+  - 16,9 -- 15,9
+  - 11,9 -- 8,9
+  - 8,9 -- 8,7
+  - 15,3 -- 21,3
+  - 21,3 -- 23,3
+  - 23,5 -- 22,5
+  - 22,5 -- 20,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/05-reflex-radio.svg)

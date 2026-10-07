@@ -21,15 +21,15 @@ ADC (アナログ→デジタル変換。電圧を数値に変える回路) を�
 ```circuit
 title: 図1 CdS分圧をADC0(GP26)で読む
 parts:
-  U1: pico2 d3
-  P1: vcc a6i0 3.3V
-  P2: vcc a5i0 3.3V
-  CDS1: photoresistor a6i0 c6i0 GL5528 l=$\mathrm{CDS1}$
-  R1: resistor c6i0 e6i0 10k
-  G1: ground e6i0
+  U1: pico2 3,4
+  P1: vcc 6,1.8 3.3V
+  P2: vcc 5,1.8 3.3V
+  CDS1: photoresistor 6,1.8 6,3.8 GL5528 l=$\mathrm{CDS1}$
+  R1: resistor 6,3.8 6,5.8 10k
+  G1: ground 6,5.8
 wires:
-  - U1.3V3 -| a5i0
-  - U1.GP26 -| c6i0
+  - U1.3V3 -| 5,1.8
+  - U1.GP26 -| 6,3.8
 style:
   pitch: 1.2
 ```

@@ -22,18 +22,18 @@ era: 古
 ```circuit
 title: 図1 ホイートストンブリッジ
 parts:
-  V1: vsource a1 e1 5
-  G0: ground e1
-  R1: resistor a3 c3 1k
-  R3: resistor-var c3 e3 2k
-  R2: resistor a7 c7 1k
-  RX: resistor c7 e7 680
-  GA: galvanometer c3 c7
+  V1: vsource 1,1 1,5 5
+  G0: ground 1,5
+  R1: resistor 3,1 3,3 1k
+  R3: resistor-var 3,3 3,5 2k
+  R2: resistor 7,1 7,3 1k
+  RX: resistor 7,3 7,5 680
+  GA: galvanometer 3,3 7,3
 wires:
-  - a1 -- a3
-  - a3 -- a7
-  - e1 -- e3
-  - e3 -- e7
+  - 1,1 -- 3,1
+  - 3,1 -- 7,1
+  - 1,5 -- 3,5
+  - 3,5 -- 7,5
 style:
   grid: on
 ```

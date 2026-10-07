@@ -33,20 +33,20 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{W1}$
-  M1: voltmeter c3 g3 l=$\mathrm{CH1}$
-  L1: inductor c5 c7 100m
-  C1: capacitor c8 c10 100n
-  R1: resistor c12 g12 150 i=I
-  M2: voltmeter c14 g14 l=$\mathrm{CH2}$
-  G1: ground g1
+  V1: sine 1,3 1,7 l=$\mathrm{W1}$
+  M1: voltmeter 3,3 3,7 l=$\mathrm{CH1}$
+  L1: inductor 5,3 7,3 100m
+  C1: capacitor 8,3 10,3 100n
+  R1: resistor 12,3 12,7 150 i=I
+  M2: voltmeter 14,3 14,7 l=$\mathrm{CH2}$
+  G1: ground 1,7
 wires:
-  - c1 -- c3 -- c5
-  - c7 -- c8
-  - c10 -- c12 -- c14
-  - g1 -- g3 -- g12 -- g14
+  - 1,3 -- 3,3 -- 5,3
+  - 7,3 -- 8,3
+  - 10,3 -- 12,3 -- 14,3
+  - 1,7 -- 3,7 -- 12,7 -- 14,7
 notes:
-  - text e5 blue: 2 回目は R1 を 470 Ω に替える
+  - text 5,5 blue: 2 回目は R1 を 470 Ω に替える
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/11-q-bandwidth.svg)

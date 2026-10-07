@@ -22,19 +22,19 @@ V<sub>F</sub> が下がって電流が増え、さらに発熱するという悪
 ```circuit
 title: 図1 LM317 の 2 端子定電流回路でパワー LED を光らせる
 parts:
-  VCC: vcc b2 9V
+  VCC: vcc 2,2 9V
   U1:
     type: ic3
-    at: c4
+    at: 4,3
     label: LM317
     pins: [IN, OUT, ADJ]
-  R1: resistor e4 e6 3.6 i=I
-  D1: led e6 g6
-  G1: ground g6
+  R1: resistor 4,5 6,5 3.6 i=I
+  D1: led 6,5 6,7
+  G1: ground 6,7
 wires:
-  - b2 |- U1.IN
-  - U1.OUT -- e4
-  - U1.ADJ -| e6
+  - 2,2 |- U1.IN
+  - U1.OUT -- 4,5
+  - U1.ADJ -| 6,5
 style:
   grid: on
   pitch: 1.2

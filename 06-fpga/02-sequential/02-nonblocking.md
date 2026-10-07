@@ -28,28 +28,28 @@ D-FF を 2 段並べる (D → Q1 → Q2) 回路を、両方の書き方で作�
 ```circuit
 title: 図1 ノンブロッキング代入の 2 段。Q1 は D を、Q2 は 1 つ前の Q1 を取り込む
 parts:
-  D: port e2
-  CLK: port h2
+  D: port 2,5
+  CLK: port 2,8
   U1:
     type: ic3
-    at: e6
+    at: 6,5
     label: D-FF
     pins: [D, CLK, Q]
   U2:
     type: ic3
-    at: e14
+    at: 14,5
     label: D-FF
     pins: [D, CLK, Q]
-  Q1: port b10
-  Q2: port e18
+  Q1: port 10,2
+  Q2: port 18,5
 wires:
-  - e2 -- U1.D
-  - h2 -- h6 -- U1.CLK
-  - h6 -- h14 -- U2.CLK
-  - U1.Q -- e10
-  - e10 -- U2.D
-  - e10 -- b10
-  - U2.Q -- e18
+  - 2,5 -- U1.D
+  - 2,8 -- 6,8 -- U1.CLK
+  - 6,8 -- 14,8 -- U2.CLK
+  - U1.Q -- 10,5
+  - 10,5 -- U2.D
+  - 10,5 -- 10,2
+  - U2.Q -- 18,5
 style:
   pitch: 1.2
 ```
@@ -62,21 +62,21 @@ style:
 ```circuit
 title: 図2 ブロッキング代入の 2 段。Q1 は配線にすぎず、Q2 も D を取り込む 1 段になる
 parts:
-  D: port e2
-  CLK: port h2
-  Q1: port b6
+  D: port 2,5
+  CLK: port 2,8
+  Q1: port 6,2
   U1:
     type: ic3
-    at: e10
+    at: 10,5
     label: D-FF
     pins: [D, CLK, Q]
-  Q2: port e14
+  Q2: port 14,5
 wires:
-  - e2 -- e5
-  - e5 -- U1.D
-  - e5 -- b6
-  - h2 -- h10 -- U1.CLK
-  - U1.Q -- e14
+  - 2,5 -- 5,5
+  - 5,5 -- U1.D
+  - 5,5 -- 6,2
+  - 2,8 -- 10,8 -- U1.CLK
+  - U1.Q -- 14,5
 style:
   pitch: 1.2
 ```

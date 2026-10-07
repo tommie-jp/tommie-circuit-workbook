@@ -24,23 +24,23 @@ era: 古
 ```circuit
 title: 図1 ツェナー + Tr のシリーズレギュレータ (CH1 は出力の電圧)
 parts:
-  V1: vsource a1 f1 12
-  G1: ground f1
-  Rz: resistor a3 c3 1.2k
-  DZ: zener f3 c3 5V1
-  Q1: npn c6 2SC1815
-  RL: resistor d8 f8 220
-  M1: voltmeter d10 f10 l=$\mathrm{CH1}$
+  V1: vsource 1,1 1,6 12
+  G1: ground 1,6
+  Rz: resistor 3,1 3,3 1.2k
+  DZ: zener 3,6 3,3 5V1
+  Q1: npn 6,3 2SC1815
+  RL: resistor 8,4 8,6 220
+  M1: voltmeter 10,4 10,6 l=$\mathrm{CH1}$
 wires:
-  - vin -- a3 -- a6
-  - a6 |- Q1.C
-  - c3 -| Q1.B
-  - Q1.E |- d8
-  - gnd -- f3 -- f8 -- f10
-  - d8 -- d10
+  - vin -- 3,1 -- 6,1
+  - 6,1 |- Q1.C
+  - 3,3 -| Q1.B
+  - Q1.E |- 8,4
+  - gnd -- 3,6 -- 8,6 -- 10,6
+  - 8,4 -- 10,4
 points:
-  vin: a1
-  gnd: f1
+  vin: 1,1
+  gnd: 1,6
 style:
   grid: on
 ```

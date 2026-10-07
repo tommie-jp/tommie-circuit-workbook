@@ -35,27 +35,27 @@ style:
 parts:
   A1:
     type: device
-    at: b1c0c0
+    at: 1,2.22
     label: AD Patterns
     pins: [DIO0, DIO1, DIO2, DIO3, GND]
     turn: mirror
   U1:
     type: device
-    at: b8
+    at: 8,2
     label: ULN2003 + 28BYJ-48
     pins: [V+, IN1, IN2, IN3, IN4, GND]
-  P1: vcc a6 5V
-  G1: ground d3
+  P1: vcc 6,1 5V
+  G1: ground 3,4
 wires:
   - A1.DIO0 -- U1.IN1
   - A1.DIO1 -- U1.IN2
   - A1.DIO2 -- U1.IN3
   - A1.DIO3 -- U1.IN4
   - A1.GND -- U1.GND
-  - A1.GND -| d3
-  - U1.V+ -| a6
+  - A1.GND -| 3,4
+  - U1.V+ -| 6,1
 notes:
-  - text a5 small: (USB)
+  - text 5,1 small: (USB)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/07-stepper-motor.svg)

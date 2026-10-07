@@ -21,20 +21,20 @@ board: BB
 ```circuit
 title: 図1 2 つの切り替えスイッチで H ブリッジを作る
 parts:
-  B1: battery a1 c1 5
-  S1: spdt b3 mirror
-  S2: spdt b11
-  M1: motor b5 b7
-  R1: resistor b7 b9 15
+  B1: battery 1,1 1,3 5
+  S1: spdt 3,2 mirror
+  S2: spdt 11,2
+  M1: motor 5,2 7,2
+  R1: resistor 7,2 9,2 15
 wires:
-  - S1.in -| b5
-  - S2.in -| b9
-  - S1.1 -| a2
-  - a1 -- a2 -- a12
-  - S1.2 -| c2
-  - c1 -- c2 -- c12
-  - S2.1 -| a12
-  - S2.2 -| c12
+  - S1.in -| 5,2
+  - S2.in -| 9,2
+  - S1.1 -| 2,1
+  - 1,1 -- 2,1 -- 12,1
+  - S1.2 -| 2,3
+  - 1,3 -- 2,3 -- 12,3
+  - S2.1 -| 12,1
+  - S2.2 -| 12,3
 style:
   grid: on
   pitch: 1.2

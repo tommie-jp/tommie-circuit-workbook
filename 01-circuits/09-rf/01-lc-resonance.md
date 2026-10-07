@@ -21,25 +21,25 @@ board: BB
 ```circuit
 title: 図1 R1 の電圧でトランジスタをオンにして LED を点ける
 parts:
-  V1: sine f1 h1 3
-  M1: voltmeter f3 h3 l=$\mathrm{CH1}$
-  L1: inductor f4 f5 10m
-  C1: capacitor f5 f6 10n
-  R1: resistor f7 h7 100 i=I
-  M2: voltmeter f9 h9 l=$\mathrm{CH2}$
-  R2: resistor f10 f11 10k
-  VCC: vcc c12 5V
-  R3: resistor c12 d12 330
-  D1: led d12 e12 red
-  Q1: npn f12 2SC1815
-  G1: ground h1
+  V1: sine 1,6 1,8 3
+  M1: voltmeter 3,6 3,8 l=$\mathrm{CH1}$
+  L1: inductor 4,6 5,6 10m
+  C1: capacitor 5,6 6,6 10n
+  R1: resistor 7,6 7,8 100 i=I
+  M2: voltmeter 9,6 9,8 l=$\mathrm{CH2}$
+  R2: resistor 10,6 11,6 10k
+  VCC: vcc 12,3 5V
+  R3: resistor 12,3 12,4 330
+  D1: led 12,4 12,5 red
+  Q1: npn 12,6 2SC1815
+  G1: ground 1,8
 wires:
-  - f1 -- f3 -- f4
-  - f6 -- f7 -- f9 -- f10
-  - f11 -- Q1.B
-  - e12 -- Q1.C
-  - Q1.E -- h12
-  - h1 -- h3 -- h7 -- h9 -- h12
+  - 1,6 -- 3,6 -- 4,6
+  - 6,6 -- 7,6 -- 9,6 -- 10,6
+  - 11,6 -- Q1.B
+  - 12,5 -- Q1.C
+  - Q1.E -- 12,8
+  - 1,8 -- 3,8 -- 7,8 -- 9,8 -- 12,8
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/01-lc-resonance.svg)

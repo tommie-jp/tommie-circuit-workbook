@@ -22,10 +22,10 @@ title: 図1 Pico 2 の UART0 を AD3 で受ける
 parts:
   AD:
     type: device
-    at: a1
+    at: 1,1
     label: Analog Discovery
     pins: [GND, DIO0]
-  MCU: pico2 c5
+  MCU: pico2 5,3
 wires:
   - AD.DIO0 -| MCU.GP0
   - AD.GND -| MCU.GND3

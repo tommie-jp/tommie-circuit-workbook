@@ -40,24 +40,24 @@ f_c = 30 MHz、R = 50 Ω での計算値と、E12 系列に丸めた値:
 ```circuit
 title: 図1 5 次チェビシェフ 0.5 dB ローパス (作る方)
 parts:
-  J1: sma b2 mirror CH0
-  C1: capacitor b4 d4 180p
-  L1: inductor b5 b7 330n
-  C2: capacitor b8 d8 270p
-  L2: inductor b9 b11 330n
-  C3: capacitor b12 d12 180p
-  J2: sma b14 CH1
-  G1: ground c2
-  G2: ground d4
-  G3: ground d8
-  G4: ground d12
-  G5: ground c14
+  J1: sma 2,2 mirror CH0
+  C1: capacitor 4,2 4,4 180p
+  L1: inductor 5,2 7,2 330n
+  C2: capacitor 8,2 8,4 270p
+  L2: inductor 9,2 11,2 330n
+  C3: capacitor 12,2 12,4 180p
+  J2: sma 14,2 CH1
+  G1: ground 2,3
+  G2: ground 4,4
+  G3: ground 8,4
+  G4: ground 12,4
+  G5: ground 14,3
 wires:
-  - J1.1 -- b4 -- b5
-  - b7 -- b8 -- b9
-  - b11 -- b12 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c14
+  - J1.1 -- 4,2 -- 5,2
+  - 7,2 -- 8,2 -- 9,2
+  - 11,2 -- 12,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 14,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/05-design-vs-measured-1.svg)
@@ -65,24 +65,24 @@ wires:
 ```circuit
 title: 図2 5 次バターワース ローパス (計算だけの参考)
 parts:
-  J1: sma b2 mirror CH0
-  C1: capacitor b4 d4 68p
-  L1: inductor b5 b7 390n
-  C2: capacitor b8 d8 220p
-  L2: inductor b9 b11 390n
-  C3: capacitor b12 d12 68p
-  J2: sma b14 CH1
-  G1: ground c2
-  G2: ground d4
-  G3: ground d8
-  G4: ground d12
-  G5: ground c14
+  J1: sma 2,2 mirror CH0
+  C1: capacitor 4,2 4,4 68p
+  L1: inductor 5,2 7,2 390n
+  C2: capacitor 8,2 8,4 220p
+  L2: inductor 9,2 11,2 390n
+  C3: capacitor 12,2 12,4 68p
+  J2: sma 14,2 CH1
+  G1: ground 2,3
+  G2: ground 4,4
+  G3: ground 8,4
+  G4: ground 12,4
+  G5: ground 14,3
 wires:
-  - J1.1 -- b4 -- b5
-  - b7 -- b8 -- b9
-  - b11 -- b12 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c14
+  - J1.1 -- 4,2 -- 5,2
+  - 7,2 -- 8,2 -- 9,2
+  - 11,2 -- 12,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 14,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/05-design-vs-measured-2.svg)

@@ -30,26 +30,26 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  Vin: vsource b1 i1 5
-  D1: schottky f3 b3 1N5819
-  L1: inductor f5 d5 1m
-  Q1: nmos-e g5
-  Vg: square i3 h3 l=$\mathrm{PWM}$
-  Cout: ecap b7 d7 10u
-  RL: resistor d10 b10 100
-  M1: voltmeter b13 d13 l=$\mathrm{CH1}$
-  G1: ground i1
+  Vin: vsource 1,2 1,9 5
+  D1: schottky 3,6 3,2 1N5819
+  L1: inductor 5,6 5,4 1m
+  Q1: nmos-e 5,7
+  Vg: square 3,9 3,8 l=$\mathrm{PWM}$
+  Cout: ecap 7,2 7,4 10u
+  RL: resistor 10,4 10,2 100
+  M1: voltmeter 13,2 13,4 l=$\mathrm{CH1}$
+  G1: ground 1,9
 wires:
-  - b1 -- b3 -- b7 -- b10 -- b13
-  - d5 -- d7 -- d10 -- d13
-  - f3 -- f5
-  - f5 -- Q1.D
-  - Q1.G -| h3
-  - Q1.S |- i5
-  - i1 -- i3 -- i5
+  - 1,2 -- 3,2 -- 7,2 -- 10,2 -- 13,2
+  - 5,4 -- 7,4 -- 10,4 -- 13,4
+  - 3,6 -- 5,6
+  - 5,6 -- Q1.D
+  - Q1.G -| 3,8
+  - Q1.S |- 5,9
+  - 1,9 -- 3,9 -- 5,9
 notes:
-  - text a8 blue: P (Vin の +)
-  - text e9 blue: X
+  - text 8,1 blue: P (Vin の +)
+  - text 9,5 blue: X
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/03-buck-chopper-1.svg)
@@ -158,27 +158,27 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  Vin: vsource b1 i1 5
-  D1: schottky f3 b3 1N5819
-  L1: inductor f5 d5 1m
-  Q1: nmos-e g5
-  Vg: square i3 h3 l=$\mathrm{FG}$
-  Cout: ecap b7 d7 10u
-  RL: resistor d10 b10 100
-  M2: voltmeter d12 i12 l=$\mathrm{CH2}$
-  M1: voltmeter b14 i14 l=$\mathrm{CH1}$
-  G1: ground i1
+  Vin: vsource 1,2 1,9 5
+  D1: schottky 3,6 3,2 1N5819
+  L1: inductor 5,6 5,4 1m
+  Q1: nmos-e 5,7
+  Vg: square 3,9 3,8 l=$\mathrm{FG}$
+  Cout: ecap 7,2 7,4 10u
+  RL: resistor 10,4 10,2 100
+  M2: voltmeter 12,4 12,9 l=$\mathrm{CH2}$
+  M1: voltmeter 14,2 14,9 l=$\mathrm{CH1}$
+  G1: ground 1,9
 wires:
-  - b1 -- b3 -- b7 -- b10 -- b14
-  - d5 -- d7 -- d10 -- d12
-  - f3 -- f5
-  - f5 -- Q1.D
-  - Q1.G -| h3
-  - Q1.S |- i5
-  - i1 -- i3 -- i5 -- i12 -- i14
+  - 1,2 -- 3,2 -- 7,2 -- 10,2 -- 14,2
+  - 5,4 -- 7,4 -- 10,4 -- 12,4
+  - 3,6 -- 5,6
+  - 5,6 -- Q1.D
+  - Q1.G -| 3,8
+  - Q1.S |- 5,9
+  - 1,9 -- 3,9 -- 5,9 -- 12,9 -- 14,9
 notes:
-  - text a8 blue: P (Vin の +)
-  - text e9 blue: X
+  - text 8,1 blue: P (Vin の +)
+  - text 9,5 blue: X
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/03-buck-chopper-2.svg)

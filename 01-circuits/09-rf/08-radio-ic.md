@@ -27,39 +27,39 @@ LMF501T (三ツ美電機)。**どちらも今は製造が終わっているが�
 ```circuit
 title: 図1 TA7642系ラジオICの標準回路
 parts:
-  ANT: antenna d1
-  L1: inductor d2 f2 250u
-  GL: ground f2
-  VC1: capacitor-var d4 f4 l=$\mathrm{VC}_1$
-  GVC: ground f4
+  ANT: antenna 1,4
+  L1: inductor 2,4 2,6 250u
+  GL: ground 2,6
+  VC1: capacitor-var 4,4 4,6 l=$\mathrm{VC}_1$
+  GVC: ground 4,6
   IC1:
     type: ic3
-    at: c9
+    at: 9,3
     label: TA7642
     pins: [GND, IN, OUT]
-  GIC1: ground c7
-  Rload: resistor c12 a12 15k
-  VCC: vcc a12 5V
-  Cout: capacitor e13 e15 0.1u
-  EAR: earphone e18 g18 l=$\mathrm{EAR}$
-  Csup: capacitor a15 c15 10u
-  GCsup: ground c15
-  GEAR: ground g18
+  GIC1: ground 7,3
+  Rload: resistor 12,3 12,1 15k
+  VCC: vcc 12,1 5V
+  Cout: capacitor 13,5 15,5 0.1u
+  EAR: earphone 18,5 18,7 l=$\mathrm{EAR}$
+  Csup: capacitor 15,1 15,3 10u
+  GCsup: ground 15,3
+  GEAR: ground 18,7
 wires:
-  - d1 -- d8
-  - d8 -| IC1.2
-  - IC1.1 -- c7
-  - IC1.3 -- c12
-  - c12 -- e12
-  - e12 -- e13
-  - a12 -- a15
-  - e15 -- e16
-  - e16 -- e18
+  - 1,4 -- 8,4
+  - 8,4 -| IC1.2
+  - IC1.1 -- 7,3
+  - IC1.3 -- 12,3
+  - 12,3 -- 12,5
+  - 12,5 -- 13,5
+  - 12,1 -- 15,1
+  - 15,5 -- 16,5
+  - 16,5 -- 18,5
 notes:
-  - text b8h0 small blue center: "PIN 1"
-  - text c8h8 small blue right: "PIN 2"
-  - text b10h0 small blue center: "PIN 3"
-  - text d13 small blue left: "PIN 3 (OUT) は出力と電源の入口"
+  - text 8,2.7 small blue center: "PIN 1"
+  - text 8.8,3.7 small blue right: "PIN 2"
+  - text 10,2.7 small blue center: "PIN 3"
+  - text 13,4 small blue left: "PIN 3 (OUT) は出力と電源の入口"
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/08-radio-ic.svg)

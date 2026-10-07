@@ -27,12 +27,12 @@ board: BB
 ```circuit
 title: 図1 倍率器
 parts:
-  V1: vsource a1 c1 5
-  Rg: resistor a1 a5 1k i=I
-  Rm: resistor a5 c5 9.1k
-  G1: ground c1
+  V1: vsource 1,1 1,3 5
+  Rg: resistor 1,1 5,1 1k i=I
+  Rm: resistor 5,1 5,3 9.1k
+  G1: ground 1,3
 wires:
-  - c1 -- c5
+  - 1,3 -- 5,3
 style:
   standard: jis
 ```
@@ -97,16 +97,16 @@ Rg を GND 側に置く** (図3)。試験の図 (検流計が電源側) とは�
 ```circuit
 title: 図3 汎用オシロでの測り方
 parts:
-  V1: vsource b2 d2 5
-  M2: voltmeter b4 d4 l=$\mathrm{CH2}$
-  Rm: resistor b4 b7 9.1k i=I
-  Rg: resistor b7 d7 1k
-  M1: voltmeter b9 d9 l=$\mathrm{CH1}$
-  G1: ground d2
+  V1: vsource 2,2 2,4 5
+  M2: voltmeter 4,2 4,4 l=$\mathrm{CH2}$
+  Rm: resistor 4,2 7,2 9.1k i=I
+  Rg: resistor 7,2 7,4 1k
+  M1: voltmeter 9,2 9,4 l=$\mathrm{CH1}$
+  G1: ground 2,4
 wires:
-  - b2 -- b4
-  - b7 -- b9
-  - d2 -- d4 -- d7 -- d9
+  - 2,2 -- 4,2
+  - 7,2 -- 9,2
+  - 2,4 -- 4,4 -- 7,4 -- 9,4
 style:
   standard: jis
 ```

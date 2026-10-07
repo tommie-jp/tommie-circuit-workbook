@@ -37,54 +37,54 @@ era: 古
 ```circuit
 title: 図1 コルピッツ発振+クエンチ回路のFM超再生受信機
 parts:
-  VCC: vcc a2 5V
-  L1: inductor a10 d10 100n
-  Cb: capacitor a3 c3 0.1u
-  GCb: ground c3
-  Cant: capacitor d14 d15 2.2p
-  ANT: antenna d16
-  VC1: capacitor-var g13 i13 l=$\mathrm{VC}_1$
-  GVC: ground j13
-  Q1: npn f10 2SC3355L
-  C1: capacitor e12 g12 33p
-  C2: capacitor h12 j12 33p
-  GC2: ground j12
-  Re: resistor h10 j10 470
-  GRe: ground j10
-  Rb1: resistor a5 d5 10k
-  Rb2: resistor f5 h5 4.7k
-  GRb2: ground h5
-  Rq: resistor f6 f8 330k
-  Cq: capacitor f8 h8 100p
-  GCq: ground h8
-  Raf: resistor b12 b15 4.7k
-  Caf: capacitor b17 e17 0.01u
-  GCaf: ground e17
-  Cout: capacitor b18 b20 1u
-  EAR: earphone c23 e23 l=$\mathrm{EAR}$
-  GEAR: ground e23
+  VCC: vcc 2,1 5V
+  L1: inductor 10,1 10,4 100n
+  Cb: capacitor 3,1 3,3 0.1u
+  GCb: ground 3,3
+  Cant: capacitor 14,4 15,4 2.2p
+  ANT: antenna 16,4
+  VC1: capacitor-var 13,7 13,9 l=$\mathrm{VC}_1$
+  GVC: ground 13,10
+  Q1: npn 10,6 2SC3355L
+  C1: capacitor 12,5 12,7 33p
+  C2: capacitor 12,8 12,10 33p
+  GC2: ground 12,10
+  Re: resistor 10,8 10,10 470
+  GRe: ground 10,10
+  Rb1: resistor 5,1 5,4 10k
+  Rb2: resistor 5,6 5,8 4.7k
+  GRb2: ground 5,8
+  Rq: resistor 6,6 8,6 330k
+  Cq: capacitor 8,6 8,8 100p
+  GCq: ground 8,8
+  Raf: resistor 12,2 15,2 4.7k
+  Caf: capacitor 17,2 17,5 0.01u
+  GCaf: ground 17,5
+  Cout: capacitor 18,2 20,2 1u
+  EAR: earphone 23,3 23,5 l=$\mathrm{EAR}$
+  GEAR: ground 23,5
 wires:
-  - a2 -- a10
-  - d10 -- Q1.C
-  - d10 -- d11
-  - d11 -- d12
-  - d12 -- d13
-  - d13 -- d14
-  - d12 -- e12
-  - d15 -- d16
-  - d13 -- g13
-  - i13 -- j13
-  - g12 -- h12
-  - Q1.E -- h10
-  - h10 -- h12
-  - d5 -- f5
-  - f5 -- f6
-  - f8 -- Q1.B
-  - d11 -- b11
-  - b11 -- b12
-  - b15 -- b18
-  - b20 -- b21
-  - b21 |- c23
+  - 2,1 -- 10,1
+  - 10,4 -- Q1.C
+  - 10,4 -- 11,4
+  - 11,4 -- 12,4
+  - 12,4 -- 13,4
+  - 13,4 -- 14,4
+  - 12,4 -- 12,5
+  - 15,4 -- 16,4
+  - 13,4 -- 13,7
+  - 13,9 -- 13,10
+  - 12,7 -- 12,8
+  - Q1.E -- 10,8
+  - 10,8 -- 12,8
+  - 5,4 -- 5,6
+  - 5,6 -- 6,6
+  - 8,6 -- Q1.B
+  - 11,4 -- 11,2
+  - 11,2 -- 12,2
+  - 15,2 -- 18,2
+  - 20,2 -- 21,2
+  - 21,2 |- 23,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/06-superregen-fm.svg)

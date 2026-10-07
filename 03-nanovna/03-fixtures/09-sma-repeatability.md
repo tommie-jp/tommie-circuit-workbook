@@ -39,16 +39,16 @@ device: H4
 ```circuit
 title: 図1 自作 Load (100 Ω を 2 本並列) を CH0 に
 parts:
-  J1: sma b2 mirror CH0
-  R1: resistor b4 d4 100
-  R2: resistor b6 d6 100
-  G1: ground c2
-  G2: ground e5
+  J1: sma 2,2 mirror CH0
+  R1: resistor 4,2 4,4 100
+  R2: resistor 6,2 6,4 100
+  G1: ground 2,3
+  G2: ground 5,5
 wires:
-  - J1.1 -- b4 -- b6
-  - d4 -- d6
-  - d5 -- e5
-  - J1.2 -- c2
+  - J1.1 -- 4,2 -- 6,2
+  - 4,4 -- 6,4
+  - 5,4 -- 5,5
+  - J1.2 -- 2,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/09-sma-repeatability.svg)

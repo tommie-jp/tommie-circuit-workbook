@@ -27,18 +27,18 @@ board: BB
 ```circuit
 title: 図1 電流計が先 (P に電圧計)
 parts:
-  V1: vsource a1 c1 5
-  Rlim: resistor a1 a5 2k
-  Ra: resistor a5 a9 51 i=I
-  Rx: resistor a9 a13 1k
-  G1: ground c1
-  Rv: resistor a5 c5 10k
+  V1: vsource 1,1 1,3 5
+  Rlim: resistor 1,1 5,1 2k
+  Ra: resistor 5,1 9,1 51 i=I
+  Rx: resistor 9,1 13,1 1k
+  G1: ground 1,3
+  Rv: resistor 5,1 5,3 10k
 wires:
-  - c1 -- c5 -- c13
-  - a13 -- c13
+  - 1,3 -- 5,3 -- 13,3
+  - 13,1 -- 13,3
 notes:
-  - text a5 blue: P
-  - text a9 blue: Q
+  - text 5,1 blue: P
+  - text 9,1 blue: Q
 style:
   standard: jis
   pitch: 1.3
@@ -113,21 +113,21 @@ CH2 (約 1.6 V) の 5 % ほどしかないので、2 本の先端で引くと 8 
 ```circuit
 title: 図3 汎用オシロでの測り方 (電流計が先)
 parts:
-  V1: vsource b2 f2 5
-  Rlim: resistor b2 b4 2k
-  M2: voltmeter b5 f5 l=$\mathrm{CH2}$
-  Rx: resistor b7 d7 1k
-  Ra: resistor d7 f7 51 i=I
-  M1: voltmeter d9 f9 l=$\mathrm{CH1}$
-  Rv: resistor b11 f11 10k
-  G1: ground f2
+  V1: vsource 2,2 2,6 5
+  Rlim: resistor 2,2 4,2 2k
+  M2: voltmeter 5,2 5,6 l=$\mathrm{CH2}$
+  Rx: resistor 7,2 7,4 1k
+  Ra: resistor 7,4 7,6 51 i=I
+  M1: voltmeter 9,4 9,6 l=$\mathrm{CH1}$
+  Rv: resistor 11,2 11,6 10k
+  G1: ground 2,6
 wires:
-  - b4 -- b5 -- b7 -- b11
-  - d7 -- d9
-  - f2 -- f5 -- f7 -- f9 -- f11
+  - 4,2 -- 5,2 -- 7,2 -- 11,2
+  - 7,4 -- 9,4
+  - 2,6 -- 5,6 -- 7,6 -- 9,6 -- 11,6
 notes:
-  - text b7 blue: P
-  - text d7 blue right: Q
+  - text 7,2 blue: P
+  - text 7,4 blue right: Q
 style:
   standard: jis
   pitch: 1.3

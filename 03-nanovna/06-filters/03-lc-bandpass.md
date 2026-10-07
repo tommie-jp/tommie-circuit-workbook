@@ -37,25 +37,25 @@ f₀ = 21 MHz、Δ = 0.10、R = 50 Ω での計算値: シャント L = 37.9 nH�
 ```circuit
 title: 図1 3 共振器バンドパス (シャント-直列-シャント)
 parts:
-  J1: sma b2 mirror CH0
-  L1: inductor b4 d4 39n
-  C1: capacitor b7 d7 1500p
-  L2: inductor b9 b11 6.8u
-  C2: capacitor b11 b13 8.2p
-  L3: inductor b16 d16 39n
-  C3: capacitor b19 d19 1500p
-  J2: sma b21 CH1
-  G1: ground c2
-  G2: ground d4
-  G3: ground d7
-  G4: ground d16
-  G5: ground d19
-  G6: ground c21
+  J1: sma 2,2 mirror CH0
+  L1: inductor 4,2 4,4 39n
+  C1: capacitor 7,2 7,4 1500p
+  L2: inductor 9,2 11,2 6.8u
+  C2: capacitor 11,2 13,2 8.2p
+  L3: inductor 16,2 16,4 39n
+  C3: capacitor 19,2 19,4 1500p
+  J2: sma 21,2 CH1
+  G1: ground 2,3
+  G2: ground 4,4
+  G3: ground 7,4
+  G4: ground 16,4
+  G5: ground 19,4
+  G6: ground 21,3
 wires:
-  - J1.1 -- b4 -- b7 -- b9
-  - b13 -- b16 -- b19 -- b21 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c21
+  - J1.1 -- 4,2 -- 7,2 -- 9,2
+  - 13,2 -- 16,2 -- 19,2 -- 21,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 21,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/03-lc-bandpass.svg)

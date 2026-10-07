@@ -32,25 +32,25 @@ device: SIM
 ```circuit
 title: 図1 a と b を連結した cat と、その一部を取り出した low と msb
 parts:
-  a1: port b1
-  a0: port d1
-  b1: port f1
-  b0: port h1
-  cat3: port b12
-  cat2: port d12
-  cat1: port f12
-  cat0: port h12
-  msb: port b17
-  low1: port f17
-  low0: port h17
+  a1: port 1,2
+  a0: port 1,4
+  b1: port 1,6
+  b0: port 1,8
+  cat3: port 12,2
+  cat2: port 12,4
+  cat1: port 12,6
+  cat0: port 12,8
+  msb: port 17,2
+  low1: port 17,6
+  low0: port 17,8
 wires:
-  - b1 -- b12
-  - d1 -- d12
-  - f1 -- f12
-  - h1 -- h12
-  - b12 -- b17
-  - f12 -- f17
-  - h12 -- h17
+  - 1,2 -- 12,2
+  - 1,4 -- 12,4
+  - 1,6 -- 12,6
+  - 1,8 -- 12,8
+  - 12,2 -- 17,2
+  - 12,6 -- 17,6
+  - 12,8 -- 17,8
 style:
   grid: off
   pitch: 1.2

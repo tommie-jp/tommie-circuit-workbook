@@ -32,18 +32,18 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  E1: battery d2 h2 1.58 l=$E$
-  Ri: resistor d2 d4 0.2 l=$r$
-  V1: voltmeter d7 h7
-  A1: ammeter d9 d11
-  RL: resistor d13 h13 l=$\mathrm{R_L}$
+  E1: battery 2,4 2,8 1.58 l=$E$
+  Ri: resistor 2,4 4,4 0.2 l=$r$
+  V1: voltmeter 7,4 7,8
+  A1: ammeter 9,4 11,4
+  RL: resistor 13,4 13,8 l=$\mathrm{R_L}$
 wires:
-  - d4 -- d7 -- d9
-  - d11 -- d13
-  - h2 -- h7 -- h13
+  - 4,4 -- 7,4 -- 9,4
+  - 11,4 -- 13,4
+  - 2,8 -- 7,8 -- 13,8
 notes:
-  - box c1f5 h5 blue
-  - text i3 blue: 単 3 電池 (等価回路)
+  - box 1.5,3.5 5,8 blue
+  - text 3,9 blue: 単 3 電池 (等価回路)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/07-battery-internal-resistance.svg)

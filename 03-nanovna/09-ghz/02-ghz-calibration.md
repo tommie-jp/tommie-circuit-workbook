@@ -42,18 +42,18 @@ title: 図1 ケーブルの先に付属の Open をつなぐ (ここが基準面
 parts:
   M1:
     type: device
-    at: c2b0c0
+    at: 2,3.12
     label: NanoVNA V2
     pins: [CH0, CH1]
     turn: mirror
-  J1: sma c8
-  G1: ground d8
+  J1: sma 8,3
+  G1: ground 8,4
 wires:
   - M1.CH0 -- J1.1
-  - J1.2 -- d8
+  - J1.2 -- 8,4
 notes:
-  - text d5 blue center: ケーブル (校正の前からつないでおく)
-  - text b8 blue center: 基準面 (標準器をつなぐ所)
+  - text 5,4 blue center: ケーブル (校正の前からつないでおく)
+  - text 8,2 blue center: 基準面 (標準器をつなぐ所)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/09-ghz/circuit/02-ghz-calibration.svg)

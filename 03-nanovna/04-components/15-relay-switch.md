@@ -25,18 +25,18 @@ device: H4
 ```circuit
 title: 図1 リレーの接点 (コイルは使わない)
 parts:
-  J1: sma e2 mirror CH0
-  K1: relay d6 G5V-2
-  J2: sma c10 CH1
-  G1: ground f2
-  G2: ground d10
+  J1: sma 2,5 mirror CH0
+  K1: relay 6,4 G5V-2
+  J2: sma 10,3 CH1
+  G1: ground 2,6
+  G2: ground 10,4
 wires:
   - J1.1 -| K1.COM1
   - K1.NC1 |- J2.1
-  - J1.2 -- f2
-  - J2.2 -- d10
+  - J1.2 -- 2,6
+  - J2.2 -- 10,4
 notes:
-  - text f7 center: "閉じた接点 (COM1 と NC1) を測るつなぎ方"
+  - text 7,6 center: "閉じた接点 (COM1 と NC1) を測るつなぎ方"
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/15-relay-switch.svg)

@@ -58,72 +58,72 @@ LO を方形波にしても、G2 で開け閉めするスイッチとして混�
 ```circuit
 title: 図01 3SK291 デュアルゲート FET ミキサー (+5 V・50 Ω 入出力・IF 455 kHz)
 parts:
-  VDD:  vcc a8 5V
-  C6:   capacitor b3 d3 100n
-  C7:   ecap b6 d6 10u
-  R4:   resistor c8 e8 33k
-  R5:   resistor f8 h8 13k
-  LO:   port f2
-  R3:   resistor f4 h4 51
-  C2:   capacitor f5 f7 10n
-  RF:   port n2
-  R1:   resistor n4 p4 51
-  C1:   capacitor n5 n7 10n
-  VDD:  vcc j8 5V
-  R2:   resistor k8 m8 1M
-  R6:   resistor n8 p8 150k
-  VR1:  resistor-var p8 r8 200k
-  U1:   nmos-dg f11 3SK291
-  L1:   inductor b13 d13 220u
-  C3:   capacitor b15 d15 560p
-  C4:   capacitor d16 d18 10n
-  R7:   resistor d19 f19 2k
-  FL1: ceramic-filter d21 455kHz
-  C5:   capacitor d23 f23 1.2n
-  L2:   inductor d23 d25 100u
-  IF:   port d27
-  G1:   ground d3
-  G2:   ground d6
-  G3:   ground h4
-  G4:   ground h8
-  G5:   ground p4
-  G6:   ground r8
-  G7:   ground h11
-  G8:   ground e21
-  G9:   ground f23
-  G10:  ground f19
+  VDD:  vcc 8,1 5V
+  C6:   capacitor 3,2 3,4 100n
+  C7:   ecap 6,2 6,4 10u
+  R4:   resistor 8,3 8,5 33k
+  R5:   resistor 8,6 8,8 13k
+  LO:   port 2,6
+  R3:   resistor 4,6 4,8 51
+  C2:   capacitor 5,6 7,6 10n
+  RF:   port 2,14
+  R1:   resistor 4,14 4,16 51
+  C1:   capacitor 5,14 7,14 10n
+  VDD:  vcc 8,10 5V
+  R2:   resistor 8,11 8,13 1M
+  R6:   resistor 8,14 8,16 150k
+  VR1:  resistor-var 8,16 8,18 200k
+  U1:   nmos-dg 11,6 3SK291
+  L1:   inductor 13,2 13,4 220u
+  C3:   capacitor 15,2 15,4 560p
+  C4:   capacitor 16,4 18,4 10n
+  R7:   resistor 19,4 19,6 2k
+  FL1: ceramic-filter 21,4 455kHz
+  C5:   capacitor 23,4 23,6 1.2n
+  L2:   inductor 23,4 25,4 100u
+  IF:   port 27,4
+  G1:   ground 3,4
+  G2:   ground 6,4
+  G3:   ground 4,8
+  G4:   ground 8,8
+  G5:   ground 4,16
+  G6:   ground 8,18
+  G7:   ground 11,8
+  G8:   ground 21,5
+  G9:   ground 23,6
+  G10:  ground 19,6
 wires:
-  - b3 -- b15
-  - a8 -- b8
-  - b8 -- c8
-  - b6 -- b8
-  - e8 -- f8
-  - f2 -- f5
-  - f7 -- f8 |- U1.G2
-  - n2 -- n5
-  - n7 -- n8
-  - j8 -- k8
-  - m8 -- n8
-  - n8 -- n10 |- U1.G1
-  - U1.D |- d11
-  - d11 -- d13
-  - d13 -- d15 -- d16
-  - d18 -- d19 -- FL1.IN
-  - FL1.OUT -- d23
-  - d25 -- d27
-  - FL1.GND -- e21
-  - U1.S |- h11
+  - 3,2 -- 15,2
+  - 8,1 -- 8,2
+  - 8,2 -- 8,3
+  - 6,2 -- 8,2
+  - 8,5 -- 8,6
+  - 2,6 -- 5,6
+  - 7,6 -- 8,6 |- U1.G2
+  - 2,14 -- 5,14
+  - 7,14 -- 8,14
+  - 8,10 -- 8,11
+  - 8,13 -- 8,14
+  - 8,14 -- 10,14 |- U1.G1
+  - U1.D |- 11,4
+  - 11,4 -- 13,4
+  - 13,4 -- 15,4 -- 16,4
+  - 18,4 -- 19,4 -- FL1.IN
+  - FL1.OUT -- 23,4
+  - 25,4 -- 27,4
+  - FL1.GND -- 21,5
+  - U1.S |- 11,8
 notes:
-  - text i1 small left: "LO IN 50Ω (0.985-2.055 MHz)"
-  - text j1 small blue left: "+7 dBm (0.71 Vp / 1.4 Vpp)"
-  - text l1 small left: "RF IN 50Ω (0.53-1.6 MHz)"
-  - text m1 small blue left: "-30 dBm (10 mVp / 20 mVpp)"
-  - text f26 small left: "IF OUT 50Ω (455 kHz)"
-  - text g26 small blue left: "RF -30 dBm で -28.6 dBm (11.7 mVp)"
-  - text e8a5 small blue left: "G2 1.41 V"
-  - text l10a5 small blue left: "G1 1.24 V (VR1 約 180 kΩ)"
-  - text a14 small left: "L1・C3 は約 454 kHz に同調"
-  - text g22 small left: "FL1 は入出力 1.5 kΩ 品"
+  - text 1,9 small left: "LO IN 50Ω (0.985-2.055 MHz)"
+  - text 1,10 small blue left: "+7 dBm (0.71 Vp / 1.4 Vpp)"
+  - text 1,12 small left: "RF IN 50Ω (0.53-1.6 MHz)"
+  - text 1,13 small blue left: "-30 dBm (10 mVp / 20 mVpp)"
+  - text 26,6 small left: "IF OUT 50Ω (455 kHz)"
+  - text 26,7 small blue left: "RF -30 dBm で -28.6 dBm (11.7 mVp)"
+  - text 8.5,5 small blue left: "G2 1.41 V"
+  - text 10.5,12 small blue left: "G1 1.24 V (VR1 約 180 kΩ)"
+  - text 14,1 small left: "L1・C3 は約 454 kHz に同調"
+  - text 22,7 small left: "FL1 は入出力 1.5 kΩ 品"
 style:
   pitch: 1.2
 ```

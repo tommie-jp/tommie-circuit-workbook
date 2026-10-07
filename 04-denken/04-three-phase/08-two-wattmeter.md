@@ -33,46 +33,46 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 e1 l=$\mathrm{W1}$
-  G1: ground e1
-  V2: sine i1 k1 l=$\mathrm{W2}$
-  G2: ground k1
-  R1: resistor c3 e3 10k
-  R2: resistor i4 g4 10k
-  U1: opamp f8 +down TL071
-  G3: ground g6
-  Rf: resistor d7 d10 10k
-  M1: voltmeter c12 f12 l=$\mathrm{CH1}$
-  Ca: capacitor c14 c16 220n
-  Ra: resistor c18 c20 1k
-  M2: voltmeter a18 a20 l=$\mathrm{CH2}$
-  Cc: capacitor f14 f16 220n
-  Rc: resistor f18 f20 1k
-  Cb: capacitor i14 i16 220n
-  Rb: resistor i18 i20 1k
+  V1: sine 1,3 1,5 l=$\mathrm{W1}$
+  G1: ground 1,5
+  V2: sine 1,9 1,11 l=$\mathrm{W2}$
+  G2: ground 1,11
+  R1: resistor 3,3 3,5 10k
+  R2: resistor 4,9 4,7 10k
+  U1: opamp 8,6 +down TL071
+  G3: ground 6,7
+  Rf: resistor 7,4 10,4 10k
+  M1: voltmeter 12,3 12,6 l=$\mathrm{CH1}$
+  Ca: capacitor 14,3 16,3 220n
+  Ra: resistor 18,3 20,3 1k
+  M2: voltmeter 18,1 20,1 l=$\mathrm{CH2}$
+  Cc: capacitor 14,6 16,6 220n
+  Rc: resistor 18,6 20,6 1k
+  Cb: capacitor 14,9 16,9 220n
+  Rb: resistor 18,9 20,9 1k
 wires:
-  - c1 -- c3 -- c12 -- c14
-  - i1 -- i4 -- i14
-  - e3 -- e4 -- e7
-  - e4 -- g4
-  - d7 -- e7
-  - e7 |- U1.-
-  - g6 |- U1.+
-  - d10 -- f10
-  - U1.out -- f10 -- f12 -- f14
-  - c16 -- c18
-  - f16 -- f18
-  - i16 -- i18
-  - a18 -- c18
-  - a20 -- c20
-  - c20 -- c22 -- f22 -- i22
-  - f20 -- f22
-  - i20 -- i22
+  - 1,3 -- 3,3 -- 12,3 -- 14,3
+  - 1,9 -- 4,9 -- 14,9
+  - 3,5 -- 4,5 -- 7,5
+  - 4,5 -- 4,7
+  - 7,4 -- 7,5
+  - 7,5 |- U1.-
+  - 6,7 |- U1.+
+  - 10,4 -- 10,6
+  - U1.out -- 10,6 -- 12,6 -- 14,6
+  - 16,3 -- 18,3
+  - 16,6 -- 18,6
+  - 16,9 -- 18,9
+  - 18,1 -- 18,3
+  - 20,1 -- 20,3
+  - 20,3 -- 22,3 -- 22,6 -- 22,9
+  - 20,6 -- 22,6
+  - 20,9 -- 22,9
 notes:
-  - text b9: 1 相目
-  - text g11: 3 相目
-  - text h9: 2 相目
-  - text d22a3: N
+  - text 9,2: 1 相目
+  - text 11,7: 3 相目
+  - text 9,8: 2 相目
+  - text 22.3,4: N
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/08-two-wattmeter-1.svg)
@@ -83,32 +83,32 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  PA: port c1
-  PB: port f1
-  PC: port i1
-  WA: wattmeter c3 c5 l=$\mathrm{P_1}$
-  WB: wattmeter f6 f8 l=$\mathrm{P_2}$
-  ZA: resistor c10 c12 l=$\mathrm{Z}$
-  ZB: resistor f10 f12 l=$\mathrm{Z}$
-  ZC: resistor i10 i12 l=$\mathrm{Z}$
+  PA: port 1,3
+  PB: port 1,6
+  PC: port 1,9
+  WA: wattmeter 3,3 5,3 l=$\mathrm{P_1}$
+  WB: wattmeter 6,6 8,6 l=$\mathrm{P_2}$
+  ZA: resistor 10,3 12,3 l=$\mathrm{Z}$
+  ZB: resistor 10,6 12,6 l=$\mathrm{Z}$
+  ZC: resistor 10,9 12,9 l=$\mathrm{Z}$
 wires:
-  - c1 -- c3
-  - f1 -- f6
-  - i1 -- i10
-  - c5 -- c10
-  - f8 -- f10
-  - c12 -- c14 -- f14 -- i14
-  - f12 -- f14
-  - i12 -- i14
+  - 1,3 -- 3,3
+  - 1,6 -- 6,6
+  - 1,9 -- 10,9
+  - 5,3 -- 10,3
+  - 8,6 -- 10,6
+  - 12,3 -- 14,3 -- 14,6 -- 14,9
+  - 12,6 -- 14,6
+  - 12,9 -- 14,9
 notes:
-  - line c5 i5 blue
-  - line f8 i8 blue
-  - text d5a3: 電圧コイル (a-c)
-  - text g8a3: 電圧コイル (b-c)
-  - text b14: N
-  - text b1: a 線
-  - text e1: b 線
-  - text h1: c 線
+  - line 5,3 5,9 blue
+  - line 8,6 8,9 blue
+  - text 5.3,4: 電圧コイル (a-c)
+  - text 8.3,7: 電圧コイル (b-c)
+  - text 14,2: N
+  - text 1,2: a 線
+  - text 1,5: b 線
+  - text 1,8: c 線
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/08-two-wattmeter-2.svg)

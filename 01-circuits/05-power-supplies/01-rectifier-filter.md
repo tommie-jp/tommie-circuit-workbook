@@ -23,24 +23,24 @@ board: BB
 ```circuit
 title: 図1 ブリッジ整流と平滑 (CH1 は Analog Discovery のオシロで C1 の両端を見る)
 parts:
-  D1: diode acL b3 1N4001
+  D1: diode acL 3,2 1N4001
   D2: diode acR dcP 1N4001
-  D3: diode f3 acL 1N4001
+  D3: diode 3,6 acL 1N4001
   D4: diode dcN acR 1N4001
-  V1: sine d4 d7 12.7
-  C1: ecap b10 f10 1000u
-  RL: resistor b13 f13 220
-  M1: voltmeter b16 f16 l=$\mathrm{CH1}$
+  V1: sine 4,4 7,4 12.7
+  C1: ecap 10,2 10,6 1000u
+  RL: resistor 13,2 13,6 220
+  M1: voltmeter 16,2 16,6 l=$\mathrm{CH1}$
 points:
-  acL: d3
-  acR: d8
-  dcP: b8
-  dcN: f8
+  acL: 3,4
+  acR: 8,4
+  dcP: 8,2
+  dcN: 8,6
 wires:
-  - acL -- d4
-  - d7 -- acR
-  - b3 -- dcP -- b10 -- b13 -- b16
-  - f3 -- dcN -- f10 -- f13 -- f16
+  - acL -- 4,4
+  - 7,4 -- acR
+  - 3,2 -- dcP -- 10,2 -- 13,2 -- 16,2
+  - 3,6 -- dcN -- 10,6 -- 13,6 -- 16,6
 style:
   grid: on
   pitch: 1.2

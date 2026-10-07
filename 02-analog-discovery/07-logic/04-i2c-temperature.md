@@ -21,35 +21,35 @@ title: 図1 LM75 を I2C で読む
 parts:
   AD:
     type: device
-    at: c2c0f0
+    at: 2,3.25
     label: Analog Discovery
     pins: [V+, DIO0, DIO1, GND]
     turn: mirror
   U1:
     type: device
-    at: d10
+    at: 10,4
     label: LM75
     pins: [SDA, SCL, OS, GND, A2, A1, A0, VDD]
-  R1: resistor a6 b6 4.7k
-  R2: resistor a8 b8 4.7k
-  G1: ground e5
+  R1: resistor 6,1 6,2 4.7k
+  R2: resistor 8,1 8,2 4.7k
+  G1: ground 5,5
 wires:
-  - AD.V+ -| a4
-  - a4 -- a6
-  - a6 -- a8
-  - a8 -- a12
-  - a12 -- f12
-  - f12 -- f9
-  - U1.VDD -| f9
-  - AD.DIO0 -| b6
-  - b6 |- U1.SDA
-  - AD.DIO1 -| b8
-  - b8 |- U1.SCL
-  - AD.GND -| e5
-  - U1.GND -| e5
-  - U1.A2 -| e5
-  - U1.A1 -| e5
-  - U1.A0 -| e5
+  - AD.V+ -| 4,1
+  - 4,1 -- 6,1
+  - 6,1 -- 8,1
+  - 8,1 -- 12,1
+  - 12,1 -- 12,6
+  - 12,6 -- 9,6
+  - U1.VDD -| 9,6
+  - AD.DIO0 -| 6,2
+  - 6,2 |- U1.SDA
+  - AD.DIO1 -| 8,2
+  - 8,2 |- U1.SCL
+  - AD.GND -| 5,5
+  - U1.GND -| 5,5
+  - U1.A2 -| 5,5
+  - U1.A1 -| 5,5
+  - U1.A0 -| 5,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/04-i2c-temperature.svg)

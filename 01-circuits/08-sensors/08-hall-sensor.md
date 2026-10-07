@@ -21,20 +21,20 @@ board: BB
 ```circuit
 title: 図1 磁石を近づけると LED が点く
 parts:
-  VCC: vcc c2 5V
+  VCC: vcc 2,3 5V
   U1:
     type: ic3
-    at: d4
+    at: 4,4
     label: A3144
     pins: [VCC, GND, OUT]
-  G1: ground e4
-  VCC: vcc b5 5V
-  R1: resistor b5 b7 330
-  D1: led b7 d7
+  G1: ground 4,5
+  VCC: vcc 5,2 5V
+  R1: resistor 5,2 7,2 330
+  D1: led 7,2 7,4
 wires:
-  - c2 |- U1.VCC
-  - U1.GND -- e4
-  - d7 -- U1.OUT
+  - 2,3 |- U1.VCC
+  - U1.GND -- 4,5
+  - 7,4 -- U1.OUT
 style:
   grid: on
   pitch: 1.2

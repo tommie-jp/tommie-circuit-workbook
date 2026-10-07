@@ -21,20 +21,20 @@ device: H4
 ```circuit
 title: 図1 1:1 トランスを CH0 と CH1 の間に
 parts:
-  J1: sma b2 mirror CH0
-  T1: transformer b5
-  J2: sma b9 CH1
-  G1: ground c2
-  G2: ground c4
-  G3: ground c7
-  G4: ground c9
+  J1: sma 2,2 mirror CH0
+  T1: transformer 5,2
+  J2: sma 9,2 CH1
+  G1: ground 2,3
+  G2: ground 4,3
+  G3: ground 7,3
+  G4: ground 9,3
 wires:
   - J1.1 -| T1.A1
-  - T1.A2 -| c4
+  - T1.A2 -| 4,3
   - T1.B1 |- J2.1
-  - T1.B2 -| c7
-  - J1.2 -- c2
-  - J2.2 -- c9
+  - T1.B2 -| 7,3
+  - J1.2 -- 2,3
+  - J2.2 -- 9,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/10-small-transformer.svg)

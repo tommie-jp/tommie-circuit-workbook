@@ -23,19 +23,19 @@ title: 図1 加害側と被害側、寄生容量と終端抵抗
 parts:
   AD:
     type: device
-    at: a1
+    at: 1,1
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
-  Cstray: capacitor c3 c9 2.5p l=$\mathrm{C_{stray}}$
-  Rterm: resistor c9 c12 100
-  G1: ground c12
+  Cstray: capacitor 3,3 9,3 2.5p l=$\mathrm{C_{stray}}$
+  Rterm: resistor 9,3 12,3 100
+  G1: ground 12,3
 wires:
-  - AD.W1 -| c3
-  - AD.1+ -| c3
-  - AD.2+ -| c9
-  - AD.1- -| c12
-  - AD.2- -| c12
-  - AD.GND -| c12
+  - AD.W1 -| 3,3
+  - AD.1+ -| 3,3
+  - AD.2+ -| 9,3
+  - AD.1- -| 12,3
+  - AD.2- -| 12,3
+  - AD.GND -| 12,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/05-crosstalk.svg)

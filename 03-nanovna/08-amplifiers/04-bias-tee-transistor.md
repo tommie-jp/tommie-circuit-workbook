@@ -57,32 +57,32 @@ Vce = 5 − 0.43 ≈ 4.6 V。
 ```circuit
 title: 図1 バイアス T 2 つで 2SC1815 に直流を与える
 parts:
-  BAT: battery a1 g1 5 l=$\mathrm{BAT}$
-  Cd: capacitor a2 c2 10u
-  J1: sma e3 mirror CH0
-  C1: capacitor e4 e5 0.1u
-  RB: resistor a6 c6 200k
-  L1: inductor c6 e6 100u
-  Q1: npn e8
-  Rs: resistor a10 b10 100
-  L2: inductor b10 d10 100u
-  C2: capacitor d11 d12 0.1u
-  J2: sma d14 CH1
-  GBAT: ground g1
-  GCd: ground c2
-  GJ1: ground f3
-  GQ1: ground g8
-  GJ2: ground e14
+  BAT: battery 1,1 1,7 5 l=$\mathrm{BAT}$
+  Cd: capacitor 2,1 2,3 10u
+  J1: sma 3,5 mirror CH0
+  C1: capacitor 4,5 5,5 0.1u
+  RB: resistor 6,1 6,3 200k
+  L1: inductor 6,3 6,5 100u
+  Q1: npn 8,5
+  Rs: resistor 10,1 10,2 100
+  L2: inductor 10,2 10,4 100u
+  C2: capacitor 11,4 12,4 0.1u
+  J2: sma 14,4 CH1
+  GBAT: ground 1,7
+  GCd: ground 2,3
+  GJ1: ground 3,6
+  GQ1: ground 8,7
+  GJ2: ground 14,5
 wires:
-  - a1 -- a2 -- a6 -- a10
-  - J1.1 -- e4
-  - J1.2 -- f3
-  - e5 -- e6 -- Q1.B
-  - Q1.E |- g8
-  - Q1.C |- d10
-  - d10 -- d11
-  - d12 -- d14 -- J2.1
-  - J2.2 -- e14
+  - 1,1 -- 2,1 -- 6,1 -- 10,1
+  - J1.1 -- 4,5
+  - J1.2 -- 3,6
+  - 5,5 -- 6,5 -- Q1.B
+  - Q1.E |- 8,7
+  - Q1.C |- 10,4
+  - 10,4 -- 11,4
+  - 12,4 -- 14,4 -- J2.1
+  - J2.2 -- 14,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/circuit/04-bias-tee-transistor.svg)

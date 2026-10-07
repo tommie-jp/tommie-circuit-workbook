@@ -24,31 +24,31 @@ board: BB
 ```circuit
 title: 図1 水晶発振 (ピアース)
 parts:
-  U1A: not c3 74HC04
-  U1B: not b8 74HC04
-  Rf: resistor b1 b5 1M
-  Rd: resistor c5 c7 330
-  X1: crystal d1 d7 4M
-  C1: capacitor d1 e1 22p
-  C2: capacitor d7 e7 22p
+  U1A: not 3,3 74HC04
+  U1B: not 8,2 74HC04
+  Rf: resistor 1,2 5,2 1M
+  Rd: resistor 5,3 7,3 330
+  X1: crystal 1,4 7,4 4M
+  C1: capacitor 1,4 1,5 22p
+  C2: capacitor 7,4 7,5 22p
   G1: ground gnd
-  OUT: port b10
-  U1C: not d9 74HC04
-  GUx: ground d8 r90
+  OUT: port 10,2
+  U1C: not 9,4 74HC04
+  GUx: ground 8,4 r90
 points:
-  gnd: e4
+  gnd: 4,5
 wires:
-  - b1 -- c1 -- d1
-  - c1 -- U1A.in
-  - U1A.out -- c5
-  - b5 -- c5
-  - c7 -- d7
-  - e1 -- gnd -- e7
-  - b5 -- U1B.in
-  - U1B.out -- b10
-  - U1C.in -| d8
+  - 1,2 -- 1,3 -- 1,4
+  - 1,3 -- U1A.in
+  - U1A.out -- 5,3
+  - 5,2 -- 5,3
+  - 7,3 -- 7,4
+  - 1,5 -- gnd -- 7,5
+  - 5,2 -- U1B.in
+  - U1B.out -- 10,2
+  - U1C.in -| 8,4
 notes:
-  - text e9 blue center: "残り4ゲート (入力はGND)"
+  - text 9,5 blue center: "残り4ゲート (入力はGND)"
 style:
   grid: on
 ```

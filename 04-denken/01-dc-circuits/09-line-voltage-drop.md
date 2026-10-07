@@ -32,20 +32,20 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  E1: vsource d2 h2 5
-  Vs: voltmeter d4 h4 l=$\mathrm{V_s}$
-  R1: resistor d6 d9 2.74 l=$\mathrm{R_1}$
-  R2: resistor h9 h6 2.74 l=$\mathrm{R_2}$
-  RL: resistor d11 h11 47 i=I
-  Vr: voltmeter d13 h13 l=$\mathrm{V_r}$
+  E1: vsource 2,4 2,8 5
+  Vs: voltmeter 4,4 4,8 l=$\mathrm{V_s}$
+  R1: resistor 6,4 9,4 2.74 l=$\mathrm{R_1}$
+  R2: resistor 9,8 6,8 2.74 l=$\mathrm{R_2}$
+  RL: resistor 11,4 11,8 47 i=I
+  Vr: voltmeter 13,4 13,8 l=$\mathrm{V_r}$
 wires:
-  - d2 -- d4 -- d6
-  - d9 -- d11 -- d13
-  - h2 -- h4 -- h6
-  - h9 -- h11 -- h13
+  - 2,4 -- 4,4 -- 6,4
+  - 9,4 -- 11,4 -- 13,4
+  - 2,8 -- 4,8 -- 6,8
+  - 9,8 -- 11,8 -- 13,8
 notes:
-  - text c4f0 left blue: 往きの線 5 m
-  - text h4f5 left blue: 帰りの線 5 m
+  - text 4,3.5 left blue: 往きの線 5 m
+  - text 4.5,8.5 left blue: 帰りの線 5 m
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/09-line-voltage-drop.svg)

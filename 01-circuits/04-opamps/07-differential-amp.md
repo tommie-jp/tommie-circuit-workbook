@@ -22,29 +22,29 @@ title: 図1 差動増幅
 parts:
   VP: vsource vp mid 5
   VN: vsource mid vm 5
-  G1: ground c2
-  V1: vsource b3 d3 0.5
-  G2: ground d3
-  V2: vsource d4 f4 0.8
-  G3: ground f4
-  R1: resistor b3 b6 10k
-  Rf: resistor a6 a9 100k
-  R3: resistor d4 d6 10k
-  R4: resistor d6 f6 100k
-  G4: ground f6
-  U1: opamp c8 +down
-  OUT: port c10
+  G1: ground 2,3
+  V1: vsource 3,2 3,4 0.5
+  G2: ground 3,4
+  V2: vsource 4,4 4,6 0.8
+  G3: ground 4,6
+  R1: resistor 3,2 6,2 10k
+  Rf: resistor 6,1 9,1 100k
+  R3: resistor 4,4 6,4 10k
+  R4: resistor 6,4 6,6 100k
+  G4: ground 6,6
+  U1: opamp 8,3 +down
+  OUT: port 10,3
 points:
-  vp: a1
-  vm: e1
-  mid: c1
+  vp: 1,1
+  vm: 1,5
+  mid: 1,3
 wires:
-  - mid -- c2
-  - b6 |- U1.-
-  - b6 -- a6
-  - d6 -- d7 |- U1.+
-  - a9 -- c9
-  - U1.out -- c9 -- c10
+  - mid -- 2,3
+  - 6,2 |- U1.-
+  - 6,2 -- 6,1
+  - 6,4 -- 7,4 |- U1.+
+  - 9,1 -- 9,3
+  - U1.out -- 9,3 -- 10,3
 style:
   grid: on
 ```

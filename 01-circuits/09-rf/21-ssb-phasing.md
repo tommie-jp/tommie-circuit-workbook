@@ -80,88 +80,88 @@ f<sub>c</sub> = 1/(2πRC) のときだけ。LO の網は f<sub>c</sub> = 1/(2π 
 ```circuit
 title: 図1 位相法の SSB 変調器 (W1 が LO、W2 が音声)
 parts:
-  W2: sine h1 j1 l=$\mathrm{W2}$
-  G4: ground j1
-  R3: resistor h3 h4 1.6k
-  C5: capacitor h5 i5 100n
-  G5: ground i5
-  C7: capacitor h7 h8 1u
-  C6: capacitor s3 s4 100n
-  R4: resistor s5 t5 1.6k
-  G6: ground t5
-  C8: capacitor s7 s8 1u
-  U1: ic j16 SA612
-  VCC: vcc g16 5V
-  G8: ground m16
-  C9: capacitor k11 l11 1u
-  G7: ground l11
-  U2: ic u16 SA612
-  VCC: vcc r16 5V
-  G10: ground x16
-  C10: capacitor v11 w11 1u
-  G9: ground w11
-  W1: sine n5 p5 l=$\mathrm{W1}$
-  G1: ground p5
-  C2: capacitor n8 n9 470p
-  R2: resistor n10 o10 680
-  G3: ground o10
-  C3: capacitor n12 n13 10n
-  R1: resistor n7 p7 680
-  C1: capacitor p7 q7 470p
-  G2: ground q7
-  C4: capacitor t9 u9 10n
-  R5: resistor m20 o20 4.7k
-  R6: resistor q20 s20 4.7k
-  C13: capacitor p22 p23 100n
-  M1: voltmeter p25 r25 l=$\mathrm{CH1}$
-  G11: ground r25
-  VCC: vcc u23 5V
-  C11: capacitor u23 w23 100n
-  G12: ground w23
-  C12: capacitor u26 w26 100n
-  G13: ground w26
+  W2: sine 1,8 1,10 l=$\mathrm{W2}$
+  G4: ground 1,10
+  R3: resistor 3,8 4,8 1.6k
+  C5: capacitor 5,8 5,9 100n
+  G5: ground 5,9
+  C7: capacitor 7,8 8,8 1u
+  C6: capacitor 3,19 4,19 100n
+  R4: resistor 5,19 5,20 1.6k
+  G6: ground 5,20
+  C8: capacitor 7,19 8,19 1u
+  U1: ic 16,10 SA612
+  VCC: vcc 16,7 5V
+  G8: ground 16,13
+  C9: capacitor 11,11 11,12 1u
+  G7: ground 11,12
+  U2: ic 16,21 SA612
+  VCC: vcc 16,18 5V
+  G10: ground 16,24
+  C10: capacitor 11,22 11,23 1u
+  G9: ground 11,23
+  W1: sine 5,14 5,16 l=$\mathrm{W1}$
+  G1: ground 5,16
+  C2: capacitor 8,14 9,14 470p
+  R2: resistor 10,14 10,15 680
+  G3: ground 10,15
+  C3: capacitor 12,14 13,14 10n
+  R1: resistor 7,14 7,16 680
+  C1: capacitor 7,16 7,17 470p
+  G2: ground 7,17
+  C4: capacitor 9,20 9,21 10n
+  R5: resistor 20,13 20,15 4.7k
+  R6: resistor 20,17 20,19 4.7k
+  C13: capacitor 22,16 23,16 100n
+  M1: voltmeter 25,16 25,18 l=$\mathrm{CH1}$
+  G11: ground 25,18
+  VCC: vcc 23,21 5V
+  C11: capacitor 23,21 23,23 100n
+  G12: ground 23,23
+  C12: capacitor 26,21 26,23 100n
+  G13: ground 26,23
 wires:
-  - h1 -- h2
-  - h2 -- h3
-  - h2 -- s2
-  - h4 -- h5
-  - h5 -- h7
-  - h8 -- h13
-  - U1.IN_A -| h13
-  - s2 -- s3
-  - s4 -- s5
-  - s5 -- s7
-  - s8 -- s13
-  - U2.IN_A -| s13
-  - U1.IN_B -| k11
-  - U2.IN_B -| v11
-  - U1.GND |- m16
-  - U2.GND |- x16
-  - U1.VCC |- g16
-  - U2.VCC |- r16
-  - n5 -- n7
-  - n7 -- n8
-  - n9 -- n10
-  - n10 -- n12
-  - U1.OSC_B -| n13
-  - p7 -- p9
-  - p9 -- t9
-  - u9 -- y9
-  - y9 -- y13
-  - U2.OSC_B -| y13
-  - U1.OUT_B -| m20
-  - o20 -- p20
-  - p20 -- q20
-  - U2.OUT_B -| s20
-  - p20 -- p22
-  - p23 -- p25
-  - u23 -- u26
+  - 1,8 -- 2,8
+  - 2,8 -- 3,8
+  - 2,8 -- 2,19
+  - 4,8 -- 5,8
+  - 5,8 -- 7,8
+  - 8,8 -- 13,8
+  - U1.IN_A -| 13,8
+  - 2,19 -- 3,19
+  - 4,19 -- 5,19
+  - 5,19 -- 7,19
+  - 8,19 -- 13,19
+  - U2.IN_A -| 13,19
+  - U1.IN_B -| 11,11
+  - U2.IN_B -| 11,22
+  - U1.GND |- 16,13
+  - U2.GND |- 16,24
+  - U1.VCC |- 16,7
+  - U2.VCC |- 16,18
+  - 5,14 -- 7,14
+  - 7,14 -- 8,14
+  - 9,14 -- 10,14
+  - 10,14 -- 12,14
+  - U1.OSC_B -| 13,14
+  - 7,16 -- 9,16
+  - 9,16 -- 9,20
+  - 9,21 -- 9,25
+  - 9,25 -- 13,25
+  - U2.OSC_B -| 13,25
+  - U1.OUT_B -| 20,13
+  - 20,15 -- 20,16
+  - 20,16 -- 20,17
+  - U2.OUT_B -| 20,19
+  - 20,16 -- 22,16
+  - 23,16 -- 25,16
+  - 23,21 -- 26,21
 notes:
-  - text m10 small center: LO +45°
-  - text o8f5 small center: LO -45°
-  - text g5 small center: 音声 -45°
-  - text r5 small center: 音声 +45°
-  - text p19 small center: 和の点
+  - text 10,13 small center: LO +45°
+  - text 8.5,15.5 small center: LO -45°
+  - text 5,7 small center: 音声 -45°
+  - text 5,18 small center: 音声 +45°
+  - text 19,16 small center: 和の点
 style:
   pitch: 1
 ```

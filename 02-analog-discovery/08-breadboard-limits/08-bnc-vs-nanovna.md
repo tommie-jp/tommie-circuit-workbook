@@ -24,30 +24,30 @@ title: 図1 SMA スルー治具を AD3 の BNC 入力へ
 parts:
   AD:
     type: device
-    at: c2
+    at: 2,3
     label: Analog Discovery
     pins: [2+, W1, 1+, GND, 1-, 2-]
     turn: mirror
-  J1: sma h5 mirror
-  J2: sma h12
-  G1: ground i5
-  G2: ground i12
-  G3: ground e5
+  J1: sma 5,8 mirror
+  J2: sma 12,8
+  G1: ground 5,9
+  G2: ground 12,9
+  G3: ground 5,5
 notes:
-  - text g5 center: P1
-  - text g12 center: P2
+  - text 5,7 center: P1
+  - text 12,7 center: P2
 wires:
-  - AD.W1 -| h8
-  - AD.1+ -| h7
-  - J1.1 -- h7 -- h8 -- h11 -- J2.1
-  - AD.2+ -| a4
-  - a4 -- a11 -- h11
-  - AD.GND -| e6
-  - AD.1- -| e5
-  - AD.2- -| e4
-  - e4 -- e5 -- e6
-  - J1.2 -- i5
-  - J2.2 -- i12
+  - AD.W1 -| 8,8
+  - AD.1+ -| 7,8
+  - J1.1 -- 7,8 -- 8,8 -- 11,8 -- J2.1
+  - AD.2+ -| 4,1
+  - 4,1 -- 11,1 -- 11,8
+  - AD.GND -| 6,5
+  - AD.1- -| 5,5
+  - AD.2- -| 4,5
+  - 4,5 -- 5,5 -- 6,5
+  - J1.2 -- 5,9
+  - J2.2 -- 12,9
 style:
   pitch: 1.2
 ```

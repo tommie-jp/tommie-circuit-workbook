@@ -22,54 +22,54 @@ PIR モジュールの出力は 3.3V なので、ロジック IC 側もツェナ
 ```circuit
 title: 図1 PIR+CdS(暗さ)をANDでMOSFETへ
 parts:
-  VCC5: vcc b2 5V
-  Rz: resistor b2 d2 330
-  Dz: zener f2 d2 3V3
-  GDz: ground f2
-  VL: vcc c5 3.3V
-  VL: vcc d3a5 3.3V
-  CDS1: photoresistor c5 e5 l=$\mathrm{CdS}$
-  R1: resistor e5 g5 10k
-  GR1: ground g5
-  U1A: not e9 CD40106
+  VCC5: vcc 2,2 5V
+  Rz: resistor 2,2 2,4 330
+  Dz: zener 2,6 2,4 3V3
+  GDz: ground 2,6
+  VL: vcc 5,3 3.3V
+  VL: vcc 3.5,4 3.3V
+  CDS1: photoresistor 5,3 5,5 l=$\mathrm{CdS}$
+  R1: resistor 5,5 5,7 10k
+  GR1: ground 5,7
+  U1A: not 9,5 CD40106
   U3:
     type: device
-    at: j8
+    at: 8,10
     label: PIR module
     pins: [VCC, OUT, GND]
     turn: mirror
-  VCC5: vcc i11 5V
-  GPIR: ground k11
-  U2A: and g14 CD4081
-  Rg: resistor g16 g18 220
-  Rgpd: resistor g18 i18 100k
-  GRgpd: ground i18
-  Q1: nmos-e f20j0
-  GQ1: ground h20
-  VCC5: vcc b20 5V
-  RLED: resistor b20 d20 330 l=$R_\mathrm{LED}$
-  DLED: led d20 e20 red l=$D_\mathrm{LED}$
+  VCC5: vcc 11,9 5V
+  GPIR: ground 11,11
+  U2A: and 14,7 CD4081
+  Rg: resistor 16,7 18,7 220
+  Rgpd: resistor 18,7 18,9 100k
+  GRgpd: ground 18,9
+  Q1: nmos-e 20,6.9
+  GQ1: ground 20,8
+  VCC5: vcc 20,2 5V
+  RLED: resistor 20,2 20,4 330 l=$R_\mathrm{LED}$
+  DLED: led 20,4 20,5 red l=$D_\mathrm{LED}$
 wires:
-  - d2 -- d3a5
-  - e5 -- e7
-  - e7 |- U1A.in
-  - U1A.out -- e12
-  - e12 |- U2A.a
-  - U3.OUT -| j12
-  - j12 |- U2A.b
-  - U3.VCC -| i11
-  - U3.GND -| k11
-  - U2A.out -- g16
-  - g18 -| Q1.G
-  - Q1.S -- h20
-  - e20 -- Q1.D
+  - 2,4 -- 3.5,4
+  - 5,5 -- 7,5
+  - 7,5 |- U1A.in
+  - U1A.out -- 12,5
+  - 12,5 |- U2A.a
+  - U3.OUT -| 12,10
+  - 12,10 |- U2A.b
+  - U3.VCC -| 11,9
+  - U3.GND -| 11,11
+  - U2A.out -- 16,7
+  - 18,7 -| Q1.G
+  - Q1.S -- 20,8
+  - 20,5 -- Q1.D
 notes:
-  - text c4 blue: "VL"
-  - text d7 blue: "暗いとH"
-  - text i12a5 blue: "動いたらH"
-  - text f15 blue: "両方Hで点灯"
-  - text m1 small left: "U1A・U2A の VDD (PIN 14) は VL (+3.3V)、VSS (PIN 7) は GND"
-  - text n1 small left: "使わない入力は GND へ (U1: PIN 3・5・9・11・13、U2: PIN 5・6・8・9・12・13)"
+  - text 4,3 blue: "VL"
+  - text 7,4 blue: "暗いとH"
+  - text 12.5,9 blue: "動いたらH"
+  - text 15,6 blue: "両方Hで点灯"
+  - text 1,13 small left: "U1A・U2A の VDD (PIN 14) は VL (+3.3V)、VSS (PIN 7) は GND"
+  - text 1,14 small left: "使わない入力は GND へ (U1: PIN 3・5・9・11・13、U2: PIN 5・6・8・9・12・13)"
 style:
   grid: on
   pitch: 1.2

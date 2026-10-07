@@ -21,21 +21,21 @@ era: 今
 ```circuit
 title: 図1 温度センサー IC の出力を取り出す
 parts:
-  VCC: vcc b2 5V
-  C1: capacitor d2 f2 100n
-  G2: ground f2
+  VCC: vcc 2,2 5V
+  C1: capacitor 2,4 2,6 100n
+  G2: ground 2,6
   U1:
     type: ic3
-    at: d4
+    at: 4,4
     label: LM35
     pins: [+Vs, Vout, GND]
-  G1: ground e5
-  OUT: port f6
+  G1: ground 5,5
+  OUT: port 6,6
 wires:
-  - b2 -- d2
-  - d2 -- U1.+Vs
-  - U1.GND -| e5
-  - U1.Vout -- f4 -- f6
+  - 2,2 -- 2,4
+  - 2,4 -- U1.+Vs
+  - U1.GND -| 5,5
+  - U1.Vout -- 4,6 -- 6,6
 style:
   grid: on
   pitch: 1.2

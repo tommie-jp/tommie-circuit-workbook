@@ -22,15 +22,15 @@ title: 図1 Pattern で作った PWM を LED と Logic で見る
 parts:
   AD:
     type: device
-    at: a1
+    at: 1,1
     label: Analog Discovery
     pins: [GND, DIO0]
-  R1: resistor n1 n3 1k
-  D1: led n3 n5 red
-  G1: ground n5
+  R1: resistor 1,14 3,14 1k
+  D1: led 3,14 5,14 red
+  G1: ground 5,14
 wires:
-  - AD.DIO0 -| n1
-  - AD.GND -| n5
+  - AD.DIO0 -| 1,14
+  - AD.GND -| 5,14
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/10-pwm-duty.svg)

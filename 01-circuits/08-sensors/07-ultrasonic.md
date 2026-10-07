@@ -23,23 +23,23 @@ title: 図1 HC-SR04 の ECHO を 3.3V 系に合わせて落とす
 parts:
   M1:
     type: device
-    at: c3
+    at: 3,3
     label: HC-SR04
     pins: [VCC, TRIG, ECHO, GND]
     turn: mirror
-  VCC: vcc b4a5 5V
-  TRIG: port b7
-  G1: ground d4a5
-  R1: resistor d5a5 f5a5 1k
-  R2: resistor f5a5 h5a5 1.5k
-  ECHO: port f7
-  G2: ground h5a5
+  VCC: vcc 4.5,2 5V
+  TRIG: port 7,2
+  G1: ground 4.5,4
+  R1: resistor 5.5,4 5.5,6 1k
+  R2: resistor 5.5,6 5.5,8 1.5k
+  ECHO: port 7,6
+  G2: ground 5.5,8
 wires:
-  - b4a5 |- M1.VCC
-  - b7 |- M1.TRIG
-  - M1.GND -| d4a5
-  - M1.ECHO -| d5a5
-  - f5a5 -- f7
+  - 4.5,2 |- M1.VCC
+  - 7,2 |- M1.TRIG
+  - M1.GND -| 4.5,4
+  - M1.ECHO -| 5.5,4
+  - 5.5,6 -- 7,6
 style:
   grid: on
   pitch: 1.2

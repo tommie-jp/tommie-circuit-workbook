@@ -24,30 +24,30 @@ era: 今
 ```circuit
 title: 図1 555 非安定でつくる方形波
 parts:
-  V1: vsource c2 f2 5
-  VCC: vcc c2 5V
-  G1: ground f2
-  U1: ic g10 NE555
-  VCC: vcc c10 5V
-  R1: resistor c6 e6 10k
-  VCC: vcc c6 5V
-  R2: resistor f6f0 h6f0 10k
-  C1: capacitor h8f0 j8f0 10n
-  G2: ground j8f0
-  G3: ground j10f0
-  OUT: port g13
+  V1: vsource 2,3 2,6 5
+  VCC: vcc 2,3 5V
+  G1: ground 2,6
+  U1: ic 10,7 NE555
+  VCC: vcc 10,3 5V
+  R1: resistor 6,3 6,5 10k
+  VCC: vcc 6,3 5V
+  R2: resistor 6,6.5 6,8.5 10k
+  C1: capacitor 8,8.5 8,10.5 10n
+  G2: ground 8,10.5
+  G3: ground 10,10.5
+  OUT: port 13,7
 wires:
-  - U1.VCC |- c10
-  - U1.RESET |- c10a5
-  - c10 -- c10a5
-  - e6 -- f6f0
-  - U1.DISCH -| f6f0
-  - U1.THRES -| g8
-  - U1.TRIG -| g8f0
-  - g8 -- h8f0
-  - h6f0 -- h8f0
-  - U1.GND |- j10f0
-  - U1.OUT -| g13
+  - U1.VCC |- 10,3
+  - U1.RESET |- 10.5,3
+  - 10,3 -- 10.5,3
+  - 6,5 -- 6,6.5
+  - U1.DISCH -| 6,6.5
+  - U1.THRES -| 8,7
+  - U1.TRIG -| 8,7.5
+  - 8,7 -- 8,8.5
+  - 6,8.5 -- 8,8.5
+  - U1.GND |- 10,10.5
+  - U1.OUT -| 13,7
 style:
   grid: on
   pitch: 1.2

@@ -22,16 +22,16 @@ title: 図1 タクトスイッチのチャタリングを Logic で見る
 parts:
   AD:
     type: device
-    at: a1
+    at: 1,1
     label: Analog Discovery
     pins: [V+, GND, DIO0]
-  R1: resistor n1 n3 10k
-  SW1: button n3 n5
-  G1: ground n5
+  R1: resistor 1,14 3,14 10k
+  SW1: button 3,14 5,14
+  G1: ground 5,14
 wires:
-  - AD.V+ -| n1
-  - AD.DIO0 -| n3
-  - AD.GND -| n5
+  - AD.V+ -| 1,14
+  - AD.DIO0 -| 3,14
+  - AD.GND -| 5,14
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/09-switch-bounce.svg)

@@ -28,27 +28,27 @@ title: 図1 30 dB パッドで信号をさらに落として tinySA へ
 parts:
   X1:
     type: device
-    at: b1
+    at: 1,2
     label: Analog Discovery
     pins: [W1, GND]
     turn: mirror
-  R1: resistor b5 b7 1k
-  P1: resistor b7 b9 47
-  P2: resistor b9 d9 3.3
-  P3: resistor b9 b11 47
+  R1: resistor 5,2 7,2 1k
+  P1: resistor 7,2 9,2 47
+  P2: resistor 9,2 9,4 3.3
+  P3: resistor 9,2 11,2 47
   X2:
     type: device
-    at: b13
+    at: 13,2
     label: tinySA
     pins: [RF, GND]
-  GA: ground d4
-  GP: ground d9
-  GM: ground d12
+  GA: ground 4,4
+  GP: ground 9,4
+  GM: ground 12,4
 wires:
-  - X1.W1 -| b5
-  - b11 -| X2.RF
-  - X1.GND -| d4
-  - X2.GND -| d12
+  - X1.W1 -| 5,2
+  - 11,2 -| X2.RF
+  - X1.GND -| 4,4
+  - X2.GND -| 12,4
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/03-noise-floor-attenuator-1.svg)
@@ -138,30 +138,30 @@ title: 図3 市販の 30 dB アッテネータ (SMA) を tinySA の入力に付�
 parts:
   X1:
     type: device
-    at: b1
+    at: 1,2
     label: Analog Discovery
     pins: [W1, GND]
     turn: mirror
-  R1: resistor b5 b7 1k
-  P1: resistor b8 b10 47
-  P2: resistor b10 d10 3.3
-  P3: resistor b10 b12 47
+  R1: resistor 5,2 7,2 1k
+  P1: resistor 8,2 10,2 47
+  P2: resistor 10,2 10,4 3.3
+  P3: resistor 10,2 12,2 47
   X2:
     type: device
-    at: b14
+    at: 14,2
     label: tinySA
     pins: [RF, GND]
-  GA: ground d4
-  GP: ground d10
-  GM: ground d13
+  GA: ground 4,4
+  GP: ground 10,4
+  GM: ground 13,4
 wires:
-  - X1.W1 -| b5
-  - b7 -- b8
-  - b12 -| X2.RF
-  - X1.GND -| d4
-  - X2.GND -| d13
+  - X1.W1 -| 5,2
+  - 7,2 -- 8,2
+  - 12,2 -| X2.RF
+  - X1.GND -| 4,4
+  - X2.GND -| 13,4
 notes:
-  - box a8 e12
+  - box 8,1 12,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/03-noise-floor-attenuator-2.svg)

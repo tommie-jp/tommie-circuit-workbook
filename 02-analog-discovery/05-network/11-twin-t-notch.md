@@ -19,25 +19,25 @@ board: BB
 ```circuit
 title: 図1 ツイン T ノッチ
 parts:
-  V1: sine a1 c1 l=$\mathrm{W1}$
-  Gv: ground c1
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  Gm1: ground c3
-  R1: resistor a5 a9 10k
-  R2: resistor a9 a13 10k
-  C3: capacitor a9 c9 20n l=$\mathrm{2C}$
-  Gc3: ground c9
-  C1: capacitor e5 e9 10n
-  C2: capacitor e9 e13 10n
-  R3: resistor e9 g9 5k
-  Gr3: ground g9
-  M2: voltmeter a15 c15 l=$\mathrm{CH2}$
-  Gm2: ground c15
+  V1: sine 1,1 1,3 l=$\mathrm{W1}$
+  Gv: ground 1,3
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  Gm1: ground 3,3
+  R1: resistor 5,1 9,1 10k
+  R2: resistor 9,1 13,1 10k
+  C3: capacitor 9,1 9,3 20n l=$\mathrm{2C}$
+  Gc3: ground 9,3
+  C1: capacitor 5,5 9,5 10n
+  C2: capacitor 9,5 13,5 10n
+  R3: resistor 9,5 9,7 5k
+  Gr3: ground 9,7
+  M2: voltmeter 15,1 15,3 l=$\mathrm{CH2}$
+  Gm2: ground 15,3
 wires:
-  - a1 -- a3 -- a5
-  - a5 -- e5
-  - a13 -- e13
-  - a13 -- a15
+  - 1,1 -- 3,1 -- 5,1
+  - 5,1 -- 5,5
+  - 13,1 -- 13,5
+  - 13,1 -- 15,1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/11-twin-t-notch.svg)

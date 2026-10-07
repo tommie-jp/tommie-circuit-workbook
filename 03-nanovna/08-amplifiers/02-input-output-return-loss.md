@@ -50,34 +50,34 @@ Rc の見かけのインピーダンスを測る。
 ```circuit
 title: 図1 8-1 と同じ回路 (S11 は J1、S22 は裏返して J2 で測る)
 parts:
-  J1: sma c2 mirror CH0
-  C1: capacitor c4 c6 0.1u
-  R1: resistor a6 c6 8k2
-  R2: resistor c6 e6 3k9
-  BAT: battery a1 e1 5
-  Q1: npn c8
-  Rc: resistor a8 b8 270
-  Re: resistor d8 f8 200
-  Ce: capacitor d9 f9 10u
-  C2: capacitor b8 b10 0.1u
-  J2: sma b12 Load
-  GJ1: ground d2
-  GBAT: ground e1
-  GR2: ground e6
-  GRE: ground f8
-  GCE: ground f9
-  GJ2: ground c12
+  J1: sma 2,3 mirror CH0
+  C1: capacitor 4,3 6,3 0.1u
+  R1: resistor 6,1 6,3 8k2
+  R2: resistor 6,3 6,5 3k9
+  BAT: battery 1,1 1,5 5
+  Q1: npn 8,3
+  Rc: resistor 8,1 8,2 270
+  Re: resistor 8,4 8,6 200
+  Ce: capacitor 9,4 9,6 10u
+  C2: capacitor 8,2 10,2 0.1u
+  J2: sma 12,2 Load
+  GJ1: ground 2,4
+  GBAT: ground 1,5
+  GR2: ground 6,5
+  GRE: ground 8,6
+  GCE: ground 9,6
+  GJ2: ground 12,3
 wires:
-  - J1.1 -- c4
-  - J1.2 -- d2
-  - a1 -- a6 -- a8
-  - c6 -- Q1.B
-  - Q1.C |- b8
-  - Q1.E |- d8
-  - d8 -- d9
-  - f8 -- f9
-  - b10 -- b12 -- J2.1
-  - J2.2 -- c12
+  - J1.1 -- 4,3
+  - J1.2 -- 2,4
+  - 1,1 -- 6,1 -- 8,1
+  - 6,3 -- Q1.B
+  - Q1.C |- 8,2
+  - Q1.E |- 8,4
+  - 8,4 -- 9,4
+  - 8,6 -- 9,6
+  - 10,2 -- 12,2 -- J2.1
+  - J2.2 -- 12,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/circuit/02-input-output-return-loss.svg)

@@ -20,33 +20,33 @@ MISO (DOUT)・CS の 4 本で、クロックも AD 自身が出す。分圧で�
 ```circuit
 title: 図1 MCP3008 を SPI で読む
 parts:
-  VCC: vcc b2 3.3V
-  R1: resistor b2 c2b0g0 10k
-  R2: resistor c2b0g0 e2 10k
-  G1: ground e2
-  U1: dip16 d6 MCP3008
-  VCC: vcc b7a5 3.3V
-  G2: ground c8g0e0 r270
-  G3: ground e7a5
+  VCC: vcc 2,2 3.3V
+  R1: resistor 2,2 2,3.16 10k
+  R2: resistor 2,3.16 2,5 10k
+  G1: ground 2,5
+  U1: dip16 6,4 MCP3008
+  VCC: vcc 7.5,2 3.3V
+  G2: ground 8,3.64 r270
+  G3: ground 7.5,5
   AD:
     type: device
-    at: d11c0f0
+    at: 11,4.25
     label: Analog Discovery
     pins: [V+, DIO3, DIO2, DIO1, DIO0, GND]
-  VCC: vcc b10 3.3V
-  G4: ground e10
+  VCC: vcc 10,2 3.3V
+  G4: ground 10,5
 wires:
-  - U1.1 -| c2b0g0
-  - U1.16 -| b7a5
-  - U1.15 -| b7a5
-  - U1.14 -| c8g0e0
-  - U1.9 -| e7a5
+  - U1.1 -| 2,3.16
+  - U1.16 -| 7.5,2
+  - U1.15 -| 7.5,2
+  - U1.14 -| 8,3.64
+  - U1.9 -| 7.5,5
   - U1.13 -| AD.DIO3
   - U1.12 -| AD.DIO2
   - U1.11 -| AD.DIO1
   - U1.10 -| AD.DIO0
-  - AD.V+ -| b10
-  - AD.GND -| e10
+  - AD.V+ -| 10,2
+  - AD.GND -| 10,5
 style:
   grid: on
 ```

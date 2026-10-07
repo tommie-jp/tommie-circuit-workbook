@@ -35,21 +35,21 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: vsource a1 e1 5
-  V2: vsource e1 i1 5
-  G1: ground e3
-  S1: switch e5 e7
-  Ra: resistor a10 e10 1k i=Ia
-  Rb: resistor e10 i10 470 i=Ib
-  M1: voltmeter a12 e12 l=$\mathrm{CH1}$
-  M2: voltmeter e12 i12 l=$\mathrm{CH2}$
+  V1: vsource 1,1 1,5 5
+  V2: vsource 1,5 1,9 5
+  G1: ground 3,5
+  S1: switch 5,5 7,5
+  Ra: resistor 10,1 10,5 1k i=Ia
+  Rb: resistor 10,5 10,9 470 i=Ib
+  M1: voltmeter 12,1 12,5 l=$\mathrm{CH1}$
+  M2: voltmeter 12,5 12,9 l=$\mathrm{CH2}$
 wires:
-  - a1 -- a10 -- a12
-  - e1 -- e3 -- e5
-  - e7 -- e10 -- e12
-  - i1 -- i10 -- i12
+  - 1,1 -- 10,1 -- 12,1
+  - 1,5 -- 3,5 -- 5,5
+  - 7,5 -- 10,5 -- 12,5
+  - 1,9 -- 10,9 -- 12,9
 notes:
-  - text d5 blue: 中性線
+  - text 5,4 blue: 中性線
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/circuit/04-single-phase-three-wire-1.svg)
@@ -124,19 +124,19 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: vsource a1 e1 5
-  V2: vsource e1 i1 5
-  G1: ground e3
-  S1: switch e5 e7
-  Ra: resistor a10 e10 1k
-  Rb: resistor e10 i10 470
-  M1: voltmeter e12 g12 l=$\mathrm{CH1}$
-  G2: ground g12
+  V1: vsource 1,1 1,5 5
+  V2: vsource 1,5 1,9 5
+  G1: ground 3,5
+  S1: switch 5,5 7,5
+  Ra: resistor 10,1 10,5 1k
+  Rb: resistor 10,5 10,9 470
+  M1: voltmeter 12,5 12,7 l=$\mathrm{CH1}$
+  G2: ground 12,7
 wires:
-  - a1 -- a10
-  - e1 -- e3 -- e5
-  - e7 -- e10 -- e12
-  - i1 -- i10
+  - 1,1 -- 10,1
+  - 1,5 -- 3,5 -- 5,5
+  - 7,5 -- 10,5 -- 12,5
+  - 1,9 -- 10,9
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/circuit/04-single-phase-three-wire-2.svg)

@@ -33,23 +33,23 @@ XOR と AND だけで作る半加算器、それを 2 つ重ねて下の桁か�
 ```circuit
 title: 図1 半加算器 (和は XOR、桁上げは AND)
 parts:
-  a: port c1
-  b: port k1
-  X1: xor c8
-  A1: and g8
-  sum: port c14
-  carry: port g14
+  a: port 1,3
+  b: port 1,11
+  X1: xor 8,3
+  A1: and 8,7
+  sum: port 14,3
+  carry: port 14,7
 wires:
-  - c1 -- c3
-  - c3 -- g3
-  - c3 |- X1.a
-  - g3 |- A1.a
-  - k1 -- k5
-  - k5 -- c5
-  - c5 |- X1.b
-  - k5 |- A1.b
-  - X1.out -- c14
-  - A1.out -- g14
+  - 1,3 -- 3,3
+  - 3,3 -- 3,7
+  - 3,3 |- X1.a
+  - 3,7 |- A1.a
+  - 1,11 -- 5,11
+  - 5,11 -- 5,3
+  - 5,3 |- X1.b
+  - 5,11 |- A1.b
+  - X1.out -- 14,3
+  - A1.out -- 14,7
 style:
   grid: off
   pitch: 1.2
@@ -62,39 +62,39 @@ style:
 ```circuit
 title: 図2 全加算器は半加算器 2 つと OR (X1 と A1 が u_ha1、X2 と A2 が u_ha2)
 parts:
-  a: port c1
-  b: port k1
-  cin: port q1
-  X1: xor c8
-  A1: and g8
-  X2: xor c20
-  A2: and k20
-  O1: or g28
-  sum: port c34
-  cout: port g34
+  a: port 1,3
+  b: port 1,11
+  cin: port 1,17
+  X1: xor 8,3
+  A1: and 8,7
+  X2: xor 20,3
+  A2: and 20,11
+  O1: or 28,7
+  sum: port 34,3
+  cout: port 34,7
 wires:
-  - c1 -- c3
-  - c3 -- g3
-  - c3 |- X1.a
-  - g3 |- A1.a
-  - k1 -- k5
-  - k5 -- c5
-  - c5 |- X1.b
-  - k5 |- A1.b
-  - X1.out -- c14
-  - c14 |- X2.a
-  - c14 -- k14
-  - k14 |- A2.a
-  - q1 -- q17
-  - q17 -- c17
-  - c17 |- X2.b
-  - k17 |- A2.b
-  - A1.out -- g25
-  - g25 |- O1.a
-  - A2.out -- k25
-  - k25 |- O1.b
-  - X2.out -- c34
-  - O1.out -- g34
+  - 1,3 -- 3,3
+  - 3,3 -- 3,7
+  - 3,3 |- X1.a
+  - 3,7 |- A1.a
+  - 1,11 -- 5,11
+  - 5,11 -- 5,3
+  - 5,3 |- X1.b
+  - 5,11 |- A1.b
+  - X1.out -- 14,3
+  - 14,3 |- X2.a
+  - 14,3 -- 14,11
+  - 14,11 |- A2.a
+  - 1,17 -- 17,17
+  - 17,17 -- 17,3
+  - 17,3 |- X2.b
+  - 17,11 |- A2.b
+  - A1.out -- 25,7
+  - 25,7 |- O1.a
+  - A2.out -- 25,11
+  - 25,11 |- O1.b
+  - X2.out -- 34,3
+  - O1.out -- 34,7
 style:
   grid: off
   pitch: 1.2

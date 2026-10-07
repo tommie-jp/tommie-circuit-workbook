@@ -201,78 +201,78 @@ IC の電源 (PIN 14 または 16) と GND (PIN 7 または 8) は、図の下�
 ```circuit
 title: 図1 発振と分周 (ユニット 1)
 parts:
-  X1: crystal c6 c16 32.768k
-  Rf: resistor e6 e11 10M
-  U18A: not g9 CD4069UB
-  Rd: resistor g12 g16 270k
-  C1: capacitor i6 k6 18p
-  C2: capacitor i16 k16 18p
-  GND1: ground k6
-  GND2: ground k16
-  U18B: not n17i0 CD4069UB
-  U19: dip16 p26 CD4040B r180
-  GND3: ground r23g8
-  CLK: port q32g0i0
-  U20: ic aa13 74HC163
-  VCC: vcc aa10 5V
-  GND4: ground y9f4 r90
-  VCC: vcc aa9h4f0 5V
-  CLK: port ab9f4
-  VCC: vcc w12g5 5V
-  LDD: port x16h6
-  GND5: ground ac13g0
-  TICK: port ab16a6
-  U46A: nor y31
-  TICK: port x27c5f0
-  RS: port y27h5f0
-  LDD: port y34
+  X1: crystal 6,3 16,3 32.768k
+  Rf: resistor 6,5 11,5 10M
+  U18A: not 9,7 CD4069UB
+  Rd: resistor 12,7 16,7 270k
+  C1: capacitor 6,9 6,11 18p
+  C2: capacitor 16,9 16,11 18p
+  GND1: ground 6,11
+  GND2: ground 16,11
+  U18B: not 17,14.8 CD4069UB
+  U19: dip16 26,16 CD4040B r180
+  GND3: ground 23.8,18.6
+  CLK: port 32,17.68
+  U20: ic 13,27 74HC163
+  VCC: vcc 10,27 5V
+  GND4: ground 9.4,25.5 r90
+  VCC: vcc 9.4,27.75 5V
+  CLK: port 9.4,28.5
+  VCC: vcc 12.5,23.6 5V
+  LDD: port 16.6,24.7
+  GND5: ground 13,29.6
+  TICK: port 16.6,28
+  U46A: nor 31,25
+  TICK: port 27.5,24.25
+  RS: port 27.5,25.75
+  LDD: port 34,25
 wires:
-  - g6 -- U18A.in
-  - g6 -- e6
-  - e6 -- c6
-  - g6 -- i6
-  - U18A.out -- g11
-  - g11 -- e11
-  - g11 -- g12
-  - g16 -- c16
-  - g16 -- i16
-  - g11 -- n11i0
-  - n11i0 -- U18B.in
+  - 6,7 -- U18A.in
+  - 6,7 -- 6,5
+  - 6,5 -- 6,3
+  - 6,7 -- 6,9
+  - U18A.out -- 11,7
+  - 11,7 -- 11,5
+  - 11,7 -- 12,7
+  - 16,7 -- 16,3
+  - 16,7 -- 16,9
+  - 11,7 -- 11,14.8
+  - 11,14.8 -- U18B.in
   - U18B.out -| U19.CLOCK
-  - U19.R -| o23c8i0
-  - o23c8i0 -- r23g8
-  - U19.Q12 -| q32g0i0
-  - U20.D -| aa10
-  - U20.A -| y10f5
-  - U20.B -| z10a5
-  - U20.C -| z10f5
-  - y10f5 -- z10a5
-  - z10a5 -- z10f5
-  - y10f5 -- y9f4
-  - U20.ENP -| aa10f5
-  - U20.ENT -| ab10a5
-  - aa10f5 -- aa10h5f0
-  - aa10h5f0 -- ab10a5
-  - aa10h5f0 -- aa9h4f0
-  - U20.CLK -| ab9f4
-  - x12c5 -| U20.VCC
-  - x13c0 -| U20.CLR
-  - x12c5 -- x13c0
-  - x12c5 -- w12g5
-  - U20.LOAD |- x16h6
-  - ac13g0 -| U20.GND
-  - U20.RCO -| ab16a6
-  - x27c5f0 |- U46A.a
-  - y27h5f0 |- U46A.b
-  - U46A.out -- y34
+  - U19.R -| 23.8,15.28
+  - 23.8,15.28 -- 23.8,18.6
+  - U19.Q12 -| 32,17.68
+  - U20.D -| 10,27
+  - U20.A -| 10.5,25.5
+  - U20.B -| 10.5,26
+  - U20.C -| 10.5,26.5
+  - 10.5,25.5 -- 10.5,26
+  - 10.5,26 -- 10.5,26.5
+  - 10.5,25.5 -- 9.4,25.5
+  - U20.ENP -| 10.5,27.5
+  - U20.ENT -| 10.5,28
+  - 10.5,27.5 -- 10.5,27.75
+  - 10.5,27.75 -- 10.5,28
+  - 10.5,27.75 -- 9.4,27.75
+  - U20.CLK -| 9.4,28.5
+  - 12.5,24.2 -| U20.VCC
+  - 13,24.2 -| U20.CLR
+  - 12.5,24.2 -- 13,24.2
+  - 12.5,24.2 -- 12.5,23.6
+  - U20.LOAD |- 16.6,24.7
+  - 13,29.6 -| U20.GND
+  - U20.RCO -| 16.6,28
+  - 27.5,24.25 |- U46A.a
+  - 27.5,25.75 |- U46A.b
+  - U46A.out -- 34,25
 notes:
-  - text l24 small left: U19 CD4040B (4096 分周)  PIN 16 は +5V、PIN 8 は GND
-  - text p10i0 small left: U18 CD4069UB  PIN 14 は +5V、PIN 7 は GND
-  - text w14b5 small left: U20 74HC163 (8 分周)
-  - text x29e9 tiny center: "2"
-  - text y29g9 tiny center: "3"
-  - text x31g7 tiny center: "1"
-  - text af4f0 small left: 74HC02 の PIN 14 は +5V、PIN 7 は GND
+  - text 24,12 small left: U19 CD4040B (4096 分周)  PIN 16 は +5V、PIN 8 は GND
+  - text 10,16.8 small left: U18 CD4069UB  PIN 14 は +5V、PIN 7 は GND
+  - text 14.5,23.1 small left: U20 74HC163 (8 分周)
+  - text 29.9,24.4 tiny center: "2"
+  - text 29.9,25.6 tiny center: "3"
+  - text 31.7,24.6 tiny center: "1"
+  - text 4,32.5 small left: 74HC02 の PIN 14 は +5V、PIN 7 は GND
 style:
   pitch: 1
 ```
@@ -288,141 +288,141 @@ style:
 ```circuit
 title: 図2 秒のカウンタ (ユニット 2)
 parts:
-  U21: ic h12 74HC163
-  GND1: ground f8f4 r90
-  TICK: port h8h4f0
-  CLK: port i8f4
-  VCC: vcc d11g5 5V
-  LDSU: port e15h6
-  GND2: ground j12g0
-  SU0: port g15a6
-  SU1: port g15f6
-  SU2: port h15a6
-  SU3: port h15f6
-  U22: ic s12 74HC163
-  GND3: ground q8f4 r90
-  ENST: port s8h4f0
-  CLK: port t8f4
-  VCC: vcc o11g5 5V
-  LDST: port p15h6
-  GND4: ground u12g0
-  ST0: port r15a6
-  ST1: port r15f6
-  ST2: port s15a6
-  ST3: port s15f6
-  U33A: and f23
-  SU3: port e19c5f0
-  SU0: port f19h5f0
-  SU9: port f26
-  U33B: and i23e0
-  SU9: port h19g5f0
-  TICK: port j19b5f0
-  ENST: port i26e0
-  U42A: nor l23i0
-  RS: port l19a5f0
-  ENST: port m19f5f0
-  LDSU: port l26i0
-  U33C: and q23
-  ST2: port p19c5f0
-  ST0: port q19h5f0
-  ST5: port q26
-  U33D: and t23e0
-  ST5: port s19g5f0
-  ENST: port u19b5f0
-  ENMU: port t26e0
-  U42B: nor w23i0
-  RS: port w19a5f0
-  ENMU: port x19f5f0
-  LDST: port w26i0
+  U21: ic 12,8 74HC163
+  GND1: ground 8.4,6.5 r90
+  TICK: port 8.4,8.75
+  CLK: port 8.4,9.5
+  VCC: vcc 11.5,4.6 5V
+  LDSU: port 15.6,5.7
+  GND2: ground 12,10.6
+  SU0: port 15.6,7
+  SU1: port 15.6,7.5
+  SU2: port 15.6,8
+  SU3: port 15.6,8.5
+  U22: ic 12,19 74HC163
+  GND3: ground 8.4,17.5 r90
+  ENST: port 8.4,19.75
+  CLK: port 8.4,20.5
+  VCC: vcc 11.5,15.6 5V
+  LDST: port 15.6,16.7
+  GND4: ground 12,21.6
+  ST0: port 15.6,18
+  ST1: port 15.6,18.5
+  ST2: port 15.6,19
+  ST3: port 15.6,19.5
+  U33A: and 23,6
+  SU3: port 19.5,5.25
+  SU0: port 19.5,6.75
+  SU9: port 26,6
+  U33B: and 23,9.4
+  SU9: port 19.5,8.65
+  TICK: port 19.5,10.15
+  ENST: port 26,9.4
+  U42A: nor 23,12.8
+  RS: port 19.5,12.05
+  ENST: port 19.5,13.55
+  LDSU: port 26,12.8
+  U33C: and 23,17
+  ST2: port 19.5,16.25
+  ST0: port 19.5,17.75
+  ST5: port 26,17
+  U33D: and 23,20.4
+  ST5: port 19.5,19.65
+  ENST: port 19.5,21.15
+  ENMU: port 26,20.4
+  U42B: nor 23,23.8
+  RS: port 19.5,23.05
+  ENMU: port 19.5,24.55
+  LDST: port 26,23.8
 wires:
-  - U21.A -| f9f5
-  - U21.B -| g9a5
-  - U21.C -| g9f5
-  - U21.D -| h9a5
-  - f9f5 -- g9a5
-  - g9a5 -- g9f5
-  - g9f5 -- h9a5
-  - f9f5 -- f8f4
-  - U21.ENP -| h9f5
-  - U21.ENT -| i9a5
-  - h9f5 -- h9h5f0
-  - h9h5f0 -- i9a5
-  - h9h5f0 -- h8h4f0
-  - U21.CLK -| i8f4
-  - e11c5 -| U21.VCC
-  - e12c0 -| U21.CLR
-  - e11c5 -- e12c0
-  - e11c5 -- d11g5
-  - U21.LOAD |- e15h6
-  - j12g0 -| U21.GND
-  - U21.QA -| g15a6
-  - U21.QB -| g15f6
-  - U21.QC -| h15a6
-  - U21.QD -| h15f6
-  - U22.A -| q9f5
-  - U22.B -| r9a5
-  - U22.C -| r9f5
-  - U22.D -| s9a5
-  - q9f5 -- r9a5
-  - r9a5 -- r9f5
-  - r9f5 -- s9a5
-  - q9f5 -- q8f4
-  - U22.ENP -| s9f5
-  - U22.ENT -| t9a5
-  - s9f5 -- s9h5f0
-  - s9h5f0 -- t9a5
-  - s9h5f0 -- s8h4f0
-  - U22.CLK -| t8f4
-  - p11c5 -| U22.VCC
-  - p12c0 -| U22.CLR
-  - p11c5 -- p12c0
-  - p11c5 -- o11g5
-  - U22.LOAD |- p15h6
-  - u12g0 -| U22.GND
-  - U22.QA -| r15a6
-  - U22.QB -| r15f6
-  - U22.QC -| s15a6
-  - U22.QD -| s15f6
-  - e19c5f0 |- U33A.a
-  - f19h5f0 |- U33A.b
-  - U33A.out -- f26
-  - h19g5f0 |- U33B.a
-  - j19b5f0 |- U33B.b
-  - U33B.out -- i26e0
-  - l19a5f0 |- U42A.a
-  - m19f5f0 |- U42A.b
-  - U42A.out -- l26i0
-  - p19c5f0 |- U33C.a
-  - q19h5f0 |- U33C.b
-  - U33C.out -- q26
-  - s19g5f0 |- U33D.a
-  - u19b5f0 |- U33D.b
-  - U33D.out -- t26e0
-  - w19a5f0 |- U42B.a
-  - x19f5f0 |- U42B.b
-  - U42B.out -- w26i0
+  - U21.A -| 9.5,6.5
+  - U21.B -| 9.5,7
+  - U21.C -| 9.5,7.5
+  - U21.D -| 9.5,8
+  - 9.5,6.5 -- 9.5,7
+  - 9.5,7 -- 9.5,7.5
+  - 9.5,7.5 -- 9.5,8
+  - 9.5,6.5 -- 8.4,6.5
+  - U21.ENP -| 9.5,8.5
+  - U21.ENT -| 9.5,9
+  - 9.5,8.5 -- 9.5,8.75
+  - 9.5,8.75 -- 9.5,9
+  - 9.5,8.75 -- 8.4,8.75
+  - U21.CLK -| 8.4,9.5
+  - 11.5,5.2 -| U21.VCC
+  - 12,5.2 -| U21.CLR
+  - 11.5,5.2 -- 12,5.2
+  - 11.5,5.2 -- 11.5,4.6
+  - U21.LOAD |- 15.6,5.7
+  - 12,10.6 -| U21.GND
+  - U21.QA -| 15.6,7
+  - U21.QB -| 15.6,7.5
+  - U21.QC -| 15.6,8
+  - U21.QD -| 15.6,8.5
+  - U22.A -| 9.5,17.5
+  - U22.B -| 9.5,18
+  - U22.C -| 9.5,18.5
+  - U22.D -| 9.5,19
+  - 9.5,17.5 -- 9.5,18
+  - 9.5,18 -- 9.5,18.5
+  - 9.5,18.5 -- 9.5,19
+  - 9.5,17.5 -- 8.4,17.5
+  - U22.ENP -| 9.5,19.5
+  - U22.ENT -| 9.5,20
+  - 9.5,19.5 -- 9.5,19.75
+  - 9.5,19.75 -- 9.5,20
+  - 9.5,19.75 -- 8.4,19.75
+  - U22.CLK -| 8.4,20.5
+  - 11.5,16.2 -| U22.VCC
+  - 12,16.2 -| U22.CLR
+  - 11.5,16.2 -- 12,16.2
+  - 11.5,16.2 -- 11.5,15.6
+  - U22.LOAD |- 15.6,16.7
+  - 12,21.6 -| U22.GND
+  - U22.QA -| 15.6,18
+  - U22.QB -| 15.6,18.5
+  - U22.QC -| 15.6,19
+  - U22.QD -| 15.6,19.5
+  - 19.5,5.25 |- U33A.a
+  - 19.5,6.75 |- U33A.b
+  - U33A.out -- 26,6
+  - 19.5,8.65 |- U33B.a
+  - 19.5,10.15 |- U33B.b
+  - U33B.out -- 26,9.4
+  - 19.5,12.05 |- U42A.a
+  - 19.5,13.55 |- U42A.b
+  - U42A.out -- 26,12.8
+  - 19.5,16.25 |- U33C.a
+  - 19.5,17.75 |- U33C.b
+  - U33C.out -- 26,17
+  - 19.5,19.65 |- U33D.a
+  - 19.5,21.15 |- U33D.b
+  - U33D.out -- 26,20.4
+  - 19.5,23.05 |- U42B.a
+  - 19.5,24.55 |- U42B.b
+  - U42B.out -- 26,23.8
 notes:
-  - text d13b5 small left: U21 74HC163 (秒の一の位)
-  - text o13b5 small left: U22 74HC163 (秒の十の位)
-  - text e21e9 tiny center: "1"
-  - text f21g9 tiny center: "2"
-  - text e23g7 tiny center: "3"
-  - text h21i9 tiny center: "4"
-  - text j21a9 tiny center: "5"
-  - text i23a7 tiny center: "6"
-  - text l21c9 tiny center: "2"
-  - text m21e9 tiny center: "3"
-  - text l23e7 tiny center: "1"
-  - text p21e9 tiny center: "9"
-  - text q21g9 tiny center: "10"
-  - text p23g7 tiny center: "8"
-  - text s21i9 tiny center: "12"
-  - text u21a9 tiny center: "13"
-  - text t23a7 tiny center: "11"
-  - text w21c9 tiny center: "5"
-  - text x21e9 tiny center: "6"
-  - text w23e7 tiny center: "4"
-  - text aa3f0 small left: 74HC08・74HC02 は PIN 14 が +5V、PIN 7 が GND
+  - text 13.5,4.1 small left: U21 74HC163 (秒の一の位)
+  - text 13.5,15.1 small left: U22 74HC163 (秒の十の位)
+  - text 21.9,5.4 tiny center: "1"
+  - text 21.9,6.6 tiny center: "2"
+  - text 23.7,5.6 tiny center: "3"
+  - text 21.9,8.8 tiny center: "4"
+  - text 21.9,10 tiny center: "5"
+  - text 23.7,9 tiny center: "6"
+  - text 21.9,12.2 tiny center: "2"
+  - text 21.9,13.4 tiny center: "3"
+  - text 23.7,12.4 tiny center: "1"
+  - text 21.9,16.4 tiny center: "9"
+  - text 21.9,17.6 tiny center: "10"
+  - text 23.7,16.6 tiny center: "8"
+  - text 21.9,19.8 tiny center: "12"
+  - text 21.9,21 tiny center: "13"
+  - text 23.7,20 tiny center: "11"
+  - text 21.9,23.2 tiny center: "5"
+  - text 21.9,24.4 tiny center: "6"
+  - text 23.7,23.4 tiny center: "4"
+  - text 3,27.5 small left: 74HC08・74HC02 は PIN 14 が +5V、PIN 7 が GND
 style:
   pitch: 1
 ```
@@ -438,140 +438,140 @@ style:
 ```circuit
 title: 図3 分のカウンタ (ユニット 3)
 parts:
-  U23: ic h12 74HC163
-  DMU0: port f8f4
-  DMU1: port g8a4
-  DMU2: port g8f4
-  DMU3: port h8a4
-  ENMU: port h8h4f0
-  CLK: port i8f4
-  VCC: vcc d11g5 5V
-  LDMU: port e15h6
-  GND1: ground j12g0
-  MU0: port g15a6
-  MU1: port g15f6
-  MU2: port h15a6
-  MU3: port h15f6
-  U24: ic s12 74HC163
-  DMT0: port q8f4
-  DMT1: port r8a4
-  DMT2: port r8f4
-  GND2: ground s8a4 r90
-  ENMT: port s8h4f0
-  CLK: port t8f4
-  VCC: vcc o11g5 5V
-  LDMT: port p15h6
-  GND3: ground u12g0
-  MT0: port r15a6
-  MT1: port r15f6
-  MT2: port s15a6
-  MT3: port s15f6
-  U34A: and f23
-  MU3: port e19c5f0
-  MU0: port f19h5f0
-  MU9: port f26
-  U34B: and i23e0
-  MU9: port h19g5f0
-  ENMU: port j19b5f0
-  ENMT: port i26e0
-  U42C: nor l23i0
-  RS: port l19a5f0
-  ENMT: port m19f5f0
-  LDMU: port l26i0
-  U34C: and q23
-  MT2: port p19c5f0
-  MT0: port q19h5f0
-  MT5: port q26
-  U34D: and t23e0
-  MT5: port s19g5f0
-  ENMT: port u19b5f0
-  CM: port t26e0
-  U42D: nor w23i0
-  RS: port w19a5f0
-  CM: port x19f5f0
-  LDMT: port w26i0
+  U23: ic 12,8 74HC163
+  DMU0: port 8.4,6.5
+  DMU1: port 8.4,7
+  DMU2: port 8.4,7.5
+  DMU3: port 8.4,8
+  ENMU: port 8.4,8.75
+  CLK: port 8.4,9.5
+  VCC: vcc 11.5,4.6 5V
+  LDMU: port 15.6,5.7
+  GND1: ground 12,10.6
+  MU0: port 15.6,7
+  MU1: port 15.6,7.5
+  MU2: port 15.6,8
+  MU3: port 15.6,8.5
+  U24: ic 12,19 74HC163
+  DMT0: port 8.4,17.5
+  DMT1: port 8.4,18
+  DMT2: port 8.4,18.5
+  GND2: ground 8.4,19 r90
+  ENMT: port 8.4,19.75
+  CLK: port 8.4,20.5
+  VCC: vcc 11.5,15.6 5V
+  LDMT: port 15.6,16.7
+  GND3: ground 12,21.6
+  MT0: port 15.6,18
+  MT1: port 15.6,18.5
+  MT2: port 15.6,19
+  MT3: port 15.6,19.5
+  U34A: and 23,6
+  MU3: port 19.5,5.25
+  MU0: port 19.5,6.75
+  MU9: port 26,6
+  U34B: and 23,9.4
+  MU9: port 19.5,8.65
+  ENMU: port 19.5,10.15
+  ENMT: port 26,9.4
+  U42C: nor 23,12.8
+  RS: port 19.5,12.05
+  ENMT: port 19.5,13.55
+  LDMU: port 26,12.8
+  U34C: and 23,17
+  MT2: port 19.5,16.25
+  MT0: port 19.5,17.75
+  MT5: port 26,17
+  U34D: and 23,20.4
+  MT5: port 19.5,19.65
+  ENMT: port 19.5,21.15
+  CM: port 26,20.4
+  U42D: nor 23,23.8
+  RS: port 19.5,23.05
+  CM: port 19.5,24.55
+  LDMT: port 26,23.8
 wires:
-  - U23.A -| f8f4
-  - U23.B -| g8a4
-  - U23.C -| g8f4
-  - U23.D -| h8a4
-  - U23.ENP -| h9f5
-  - U23.ENT -| i9a5
-  - h9f5 -- h9h5f0
-  - h9h5f0 -- i9a5
-  - h9h5f0 -- h8h4f0
-  - U23.CLK -| i8f4
-  - e11c5 -| U23.VCC
-  - e12c0 -| U23.CLR
-  - e11c5 -- e12c0
-  - e11c5 -- d11g5
-  - U23.LOAD |- e15h6
-  - j12g0 -| U23.GND
-  - U23.QA -| g15a6
-  - U23.QB -| g15f6
-  - U23.QC -| h15a6
-  - U23.QD -| h15f6
-  - U24.A -| q8f4
-  - U24.B -| r8a4
-  - U24.C -| r8f4
-  - U24.D -| s9a5
-  - s9a5 -- s8a4
-  - U24.ENP -| s9f5
-  - U24.ENT -| t9a5
-  - s9f5 -- s9h5f0
-  - s9h5f0 -- t9a5
-  - s9h5f0 -- s8h4f0
-  - U24.CLK -| t8f4
-  - p11c5 -| U24.VCC
-  - p12c0 -| U24.CLR
-  - p11c5 -- p12c0
-  - p11c5 -- o11g5
-  - U24.LOAD |- p15h6
-  - u12g0 -| U24.GND
-  - U24.QA -| r15a6
-  - U24.QB -| r15f6
-  - U24.QC -| s15a6
-  - U24.QD -| s15f6
-  - e19c5f0 |- U34A.a
-  - f19h5f0 |- U34A.b
-  - U34A.out -- f26
-  - h19g5f0 |- U34B.a
-  - j19b5f0 |- U34B.b
-  - U34B.out -- i26e0
-  - l19a5f0 |- U42C.a
-  - m19f5f0 |- U42C.b
-  - U42C.out -- l26i0
-  - p19c5f0 |- U34C.a
-  - q19h5f0 |- U34C.b
-  - U34C.out -- q26
-  - s19g5f0 |- U34D.a
-  - u19b5f0 |- U34D.b
-  - U34D.out -- t26e0
-  - w19a5f0 |- U42D.a
-  - x19f5f0 |- U42D.b
-  - U42D.out -- w26i0
+  - U23.A -| 8.4,6.5
+  - U23.B -| 8.4,7
+  - U23.C -| 8.4,7.5
+  - U23.D -| 8.4,8
+  - U23.ENP -| 9.5,8.5
+  - U23.ENT -| 9.5,9
+  - 9.5,8.5 -- 9.5,8.75
+  - 9.5,8.75 -- 9.5,9
+  - 9.5,8.75 -- 8.4,8.75
+  - U23.CLK -| 8.4,9.5
+  - 11.5,5.2 -| U23.VCC
+  - 12,5.2 -| U23.CLR
+  - 11.5,5.2 -- 12,5.2
+  - 11.5,5.2 -- 11.5,4.6
+  - U23.LOAD |- 15.6,5.7
+  - 12,10.6 -| U23.GND
+  - U23.QA -| 15.6,7
+  - U23.QB -| 15.6,7.5
+  - U23.QC -| 15.6,8
+  - U23.QD -| 15.6,8.5
+  - U24.A -| 8.4,17.5
+  - U24.B -| 8.4,18
+  - U24.C -| 8.4,18.5
+  - U24.D -| 9.5,19
+  - 9.5,19 -- 8.4,19
+  - U24.ENP -| 9.5,19.5
+  - U24.ENT -| 9.5,20
+  - 9.5,19.5 -- 9.5,19.75
+  - 9.5,19.75 -- 9.5,20
+  - 9.5,19.75 -- 8.4,19.75
+  - U24.CLK -| 8.4,20.5
+  - 11.5,16.2 -| U24.VCC
+  - 12,16.2 -| U24.CLR
+  - 11.5,16.2 -- 12,16.2
+  - 11.5,16.2 -- 11.5,15.6
+  - U24.LOAD |- 15.6,16.7
+  - 12,21.6 -| U24.GND
+  - U24.QA -| 15.6,18
+  - U24.QB -| 15.6,18.5
+  - U24.QC -| 15.6,19
+  - U24.QD -| 15.6,19.5
+  - 19.5,5.25 |- U34A.a
+  - 19.5,6.75 |- U34A.b
+  - U34A.out -- 26,6
+  - 19.5,8.65 |- U34B.a
+  - 19.5,10.15 |- U34B.b
+  - U34B.out -- 26,9.4
+  - 19.5,12.05 |- U42C.a
+  - 19.5,13.55 |- U42C.b
+  - U42C.out -- 26,12.8
+  - 19.5,16.25 |- U34C.a
+  - 19.5,17.75 |- U34C.b
+  - U34C.out -- 26,17
+  - 19.5,19.65 |- U34D.a
+  - 19.5,21.15 |- U34D.b
+  - U34D.out -- 26,20.4
+  - 19.5,23.05 |- U42D.a
+  - 19.5,24.55 |- U42D.b
+  - U42D.out -- 26,23.8
 notes:
-  - text d13b5 small left: U23 74HC163 (分の一の位)
-  - text o13b5 small left: U24 74HC163 (分の十の位)
-  - text e21e9 tiny center: "1"
-  - text f21g9 tiny center: "2"
-  - text e23g7 tiny center: "3"
-  - text h21i9 tiny center: "4"
-  - text j21a9 tiny center: "5"
-  - text i23a7 tiny center: "6"
-  - text l21c9 tiny center: "8"
-  - text m21e9 tiny center: "9"
-  - text l23e7 tiny center: "10"
-  - text p21e9 tiny center: "9"
-  - text q21g9 tiny center: "10"
-  - text p23g7 tiny center: "8"
-  - text s21i9 tiny center: "12"
-  - text u21a9 tiny center: "13"
-  - text t23a7 tiny center: "11"
-  - text w21c9 tiny center: "11"
-  - text x21e9 tiny center: "12"
-  - text w23e7 tiny center: "13"
-  - text aa3f0 small left: 74HC08・74HC02 は PIN 14 が +5V、PIN 7 が GND
+  - text 13.5,4.1 small left: U23 74HC163 (分の一の位)
+  - text 13.5,15.1 small left: U24 74HC163 (分の十の位)
+  - text 21.9,5.4 tiny center: "1"
+  - text 21.9,6.6 tiny center: "2"
+  - text 23.7,5.6 tiny center: "3"
+  - text 21.9,8.8 tiny center: "4"
+  - text 21.9,10 tiny center: "5"
+  - text 23.7,9 tiny center: "6"
+  - text 21.9,12.2 tiny center: "8"
+  - text 21.9,13.4 tiny center: "9"
+  - text 23.7,12.4 tiny center: "10"
+  - text 21.9,16.4 tiny center: "9"
+  - text 21.9,17.6 tiny center: "10"
+  - text 23.7,16.6 tiny center: "8"
+  - text 21.9,19.8 tiny center: "12"
+  - text 21.9,21 tiny center: "13"
+  - text 23.7,20 tiny center: "11"
+  - text 21.9,23.2 tiny center: "11"
+  - text 21.9,24.4 tiny center: "12"
+  - text 23.7,23.4 tiny center: "13"
+  - text 3,27.5 small left: 74HC08・74HC02 は PIN 14 が +5V、PIN 7 が GND
 style:
   pitch: 1
 ```
@@ -586,170 +586,170 @@ style:
 ```circuit
 title: 図4 時のカウンタ (ユニット 4)
 parts:
-  U25: ic h12 74HC163
-  DHU0: port f8f4
-  DHU1: port g8a4
-  DHU2: port g8f4
-  DHU3: port h8a4
-  ENH: port h8h4f0
-  CLK: port i8f4
-  VCC: vcc d11g5 5V
-  LDHU: port e15h6
-  GND1: ground j12g0
-  HU0: port g15a6
-  HU1: port g15f6
-  HU2: port h15a6
-  HU3: port h15f6
-  U26: ic u12 74HC163
-  DHT0: port s8f4
-  DHT1: port t8a4
-  GND2: ground t8f4 r90
-  ENHT: port u8h4f0
-  CLK: port v8f4
-  VCC: vcc q11g5 5V
-  LDHT: port r15h6
-  GND3: ground w12g0
-  HT0: port t15a6
-  HT1: port t15f6
-  HT2: port u15a6
-  HT3: port u15f6
-  U40C: or e23
-  CM: port d19c5f0
-  HP: port e19h5f0
-  ENH: port e26
-  U35A: and h23e0
-  HU3: port g19g5f0
-  HU0: port i19b5f0
-  HU9: port h26e0
-  U35B: and k23i0
-  HU9: port k19a5f0
-  ENH: port l19f5f0
-  ENHT: port k26i0
-  U40D: or o23c0
-  ENHT: port n19e5f0
-  WH: port o19j5f0
-  O8: port o26c0
-  U35C: and e36
-  HU1: port d32c5f0
-  HU0: port e32h5f0
-  H3: port e39
-  U35D: and h36e0
-  H3: port g32g5f0
-  HT1: port i32b5f0
-  H23: port h39e0
-  U36A: and k36i0
-  H23: port k32a5f0
-  ENH: port l32f5f0
-  WH: port k39i0
-  U43A: nor o36c0
-  SET: port n32e5f0
-  O8: port o32j5f0
-  LDHU: port o39c0
-  U43B: nor r36g0
-  SET: port q32i5f0
-  WH: port s32d5f0
-  LDHT: port r39g0
+  U25: ic 12,8 74HC163
+  DHU0: port 8.4,6.5
+  DHU1: port 8.4,7
+  DHU2: port 8.4,7.5
+  DHU3: port 8.4,8
+  ENH: port 8.4,8.75
+  CLK: port 8.4,9.5
+  VCC: vcc 11.5,4.6 5V
+  LDHU: port 15.6,5.7
+  GND1: ground 12,10.6
+  HU0: port 15.6,7
+  HU1: port 15.6,7.5
+  HU2: port 15.6,8
+  HU3: port 15.6,8.5
+  U26: ic 12,21 74HC163
+  DHT0: port 8.4,19.5
+  DHT1: port 8.4,20
+  GND2: ground 8.4,20.5 r90
+  ENHT: port 8.4,21.75
+  CLK: port 8.4,22.5
+  VCC: vcc 11.5,17.6 5V
+  LDHT: port 15.6,18.7
+  GND3: ground 12,23.6
+  HT0: port 15.6,20
+  HT1: port 15.6,20.5
+  HT2: port 15.6,21
+  HT3: port 15.6,21.5
+  U40C: or 23,5
+  CM: port 19.5,4.25
+  HP: port 19.5,5.75
+  ENH: port 26,5
+  U35A: and 23,8.4
+  HU3: port 19.5,7.65
+  HU0: port 19.5,9.15
+  HU9: port 26,8.4
+  U35B: and 23,11.8
+  HU9: port 19.5,11.05
+  ENH: port 19.5,12.55
+  ENHT: port 26,11.8
+  U40D: or 23,15.2
+  ENHT: port 19.5,14.45
+  WH: port 19.5,15.95
+  O8: port 26,15.2
+  U35C: and 36,5
+  HU1: port 32.5,4.25
+  HU0: port 32.5,5.75
+  H3: port 39,5
+  U35D: and 36,8.4
+  H3: port 32.5,7.65
+  HT1: port 32.5,9.15
+  H23: port 39,8.4
+  U36A: and 36,11.8
+  H23: port 32.5,11.05
+  ENH: port 32.5,12.55
+  WH: port 39,11.8
+  U43A: nor 36,15.2
+  SET: port 32.5,14.45
+  O8: port 32.5,15.95
+  LDHU: port 39,15.2
+  U43B: nor 36,18.6
+  SET: port 32.5,17.85
+  WH: port 32.5,19.35
+  LDHT: port 39,18.6
 wires:
-  - U25.A -| f8f4
-  - U25.B -| g8a4
-  - U25.C -| g8f4
-  - U25.D -| h8a4
-  - U25.ENP -| h9f5
-  - U25.ENT -| i9a5
-  - h9f5 -- h9h5f0
-  - h9h5f0 -- i9a5
-  - h9h5f0 -- h8h4f0
-  - U25.CLK -| i8f4
-  - e11c5 -| U25.VCC
-  - e12c0 -| U25.CLR
-  - e11c5 -- e12c0
-  - e11c5 -- d11g5
-  - U25.LOAD |- e15h6
-  - j12g0 -| U25.GND
-  - U25.QA -| g15a6
-  - U25.QB -| g15f6
-  - U25.QC -| h15a6
-  - U25.QD -| h15f6
-  - U26.A -| s8f4
-  - U26.B -| t8a4
-  - U26.C -| t9f5
-  - U26.D -| u9a5
-  - t9f5 -- u9a5
-  - t9f5 -- t8f4
-  - U26.ENP -| u9f5
-  - U26.ENT -| v9a5
-  - u9f5 -- u9h5f0
-  - u9h5f0 -- v9a5
-  - u9h5f0 -- u8h4f0
-  - U26.CLK -| v8f4
-  - r11c5 -| U26.VCC
-  - r12c0 -| U26.CLR
-  - r11c5 -- r12c0
-  - r11c5 -- q11g5
-  - U26.LOAD |- r15h6
-  - w12g0 -| U26.GND
-  - U26.QA -| t15a6
-  - U26.QB -| t15f6
-  - U26.QC -| u15a6
-  - U26.QD -| u15f6
-  - d19c5f0 |- U40C.a
-  - e19h5f0 |- U40C.b
-  - U40C.out -- e26
-  - g19g5f0 |- U35A.a
-  - i19b5f0 |- U35A.b
-  - U35A.out -- h26e0
-  - k19a5f0 |- U35B.a
-  - l19f5f0 |- U35B.b
-  - U35B.out -- k26i0
-  - n19e5f0 |- U40D.a
-  - o19j5f0 |- U40D.b
-  - U40D.out -- o26c0
-  - d32c5f0 |- U35C.a
-  - e32h5f0 |- U35C.b
-  - U35C.out -- e39
-  - g32g5f0 |- U35D.a
-  - i32b5f0 |- U35D.b
-  - U35D.out -- h39e0
-  - k32a5f0 |- U36A.a
-  - l32f5f0 |- U36A.b
-  - U36A.out -- k39i0
-  - n32e5f0 |- U43A.a
-  - o32j5f0 |- U43A.b
-  - U43A.out -- o39c0
-  - q32i5f0 |- U43B.a
-  - s32d5f0 |- U43B.b
-  - U43B.out -- r39g0
+  - U25.A -| 8.4,6.5
+  - U25.B -| 8.4,7
+  - U25.C -| 8.4,7.5
+  - U25.D -| 8.4,8
+  - U25.ENP -| 9.5,8.5
+  - U25.ENT -| 9.5,9
+  - 9.5,8.5 -- 9.5,8.75
+  - 9.5,8.75 -- 9.5,9
+  - 9.5,8.75 -- 8.4,8.75
+  - U25.CLK -| 8.4,9.5
+  - 11.5,5.2 -| U25.VCC
+  - 12,5.2 -| U25.CLR
+  - 11.5,5.2 -- 12,5.2
+  - 11.5,5.2 -- 11.5,4.6
+  - U25.LOAD |- 15.6,5.7
+  - 12,10.6 -| U25.GND
+  - U25.QA -| 15.6,7
+  - U25.QB -| 15.6,7.5
+  - U25.QC -| 15.6,8
+  - U25.QD -| 15.6,8.5
+  - U26.A -| 8.4,19.5
+  - U26.B -| 8.4,20
+  - U26.C -| 9.5,20.5
+  - U26.D -| 9.5,21
+  - 9.5,20.5 -- 9.5,21
+  - 9.5,20.5 -- 8.4,20.5
+  - U26.ENP -| 9.5,21.5
+  - U26.ENT -| 9.5,22
+  - 9.5,21.5 -- 9.5,21.75
+  - 9.5,21.75 -- 9.5,22
+  - 9.5,21.75 -- 8.4,21.75
+  - U26.CLK -| 8.4,22.5
+  - 11.5,18.2 -| U26.VCC
+  - 12,18.2 -| U26.CLR
+  - 11.5,18.2 -- 12,18.2
+  - 11.5,18.2 -- 11.5,17.6
+  - U26.LOAD |- 15.6,18.7
+  - 12,23.6 -| U26.GND
+  - U26.QA -| 15.6,20
+  - U26.QB -| 15.6,20.5
+  - U26.QC -| 15.6,21
+  - U26.QD -| 15.6,21.5
+  - 19.5,4.25 |- U40C.a
+  - 19.5,5.75 |- U40C.b
+  - U40C.out -- 26,5
+  - 19.5,7.65 |- U35A.a
+  - 19.5,9.15 |- U35A.b
+  - U35A.out -- 26,8.4
+  - 19.5,11.05 |- U35B.a
+  - 19.5,12.55 |- U35B.b
+  - U35B.out -- 26,11.8
+  - 19.5,14.45 |- U40D.a
+  - 19.5,15.95 |- U40D.b
+  - U40D.out -- 26,15.2
+  - 32.5,4.25 |- U35C.a
+  - 32.5,5.75 |- U35C.b
+  - U35C.out -- 39,5
+  - 32.5,7.65 |- U35D.a
+  - 32.5,9.15 |- U35D.b
+  - U35D.out -- 39,8.4
+  - 32.5,11.05 |- U36A.a
+  - 32.5,12.55 |- U36A.b
+  - U36A.out -- 39,11.8
+  - 32.5,14.45 |- U43A.a
+  - 32.5,15.95 |- U43A.b
+  - U43A.out -- 39,15.2
+  - 32.5,17.85 |- U43B.a
+  - 32.5,19.35 |- U43B.b
+  - U43B.out -- 39,18.6
 notes:
-  - text d13b5 small left: U25 74HC163 (時の一の位)
-  - text q13b5 small left: U26 74HC163 (時の十の位)
-  - text d21f9 tiny center: "9"
-  - text e21g9 tiny center: "10"
-  - text d23g7 tiny center: "8"
-  - text g21i9 tiny center: "1"
-  - text i21a9 tiny center: "2"
-  - text h23a7 tiny center: "3"
-  - text k21c9 tiny center: "4"
-  - text l21e9 tiny center: "5"
-  - text k23e7 tiny center: "6"
-  - text n21h9 tiny center: "12"
-  - text o21i9 tiny center: "13"
-  - text n23i7 tiny center: "11"
-  - text d34e9 tiny center: "9"
-  - text e34g9 tiny center: "10"
-  - text d36g7 tiny center: "8"
-  - text g34i9 tiny center: "12"
-  - text i34a9 tiny center: "13"
-  - text h36a7 tiny center: "11"
-  - text k34c9 tiny center: "1"
-  - text l34e9 tiny center: "2"
-  - text k36e7 tiny center: "3"
-  - text n34g9 tiny center: "2"
-  - text o34i9 tiny center: "3"
-  - text n36i7 tiny center: "1"
-  - text r34a9 tiny center: "5"
-  - text s34c9 tiny center: "6"
-  - text r36c7 tiny center: "4"
-  - text ab3f0 small left: 74HC08・74HC32・74HC02 は PIN 14 が +5V、PIN 7 が GND
+  - text 13.5,4.1 small left: U25 74HC163 (時の一の位)
+  - text 13.5,17.1 small left: U26 74HC163 (時の十の位)
+  - text 21.9,4.5 tiny center: "9"
+  - text 21.9,5.6 tiny center: "10"
+  - text 23.7,4.6 tiny center: "8"
+  - text 21.9,7.8 tiny center: "1"
+  - text 21.9,9 tiny center: "2"
+  - text 23.7,8 tiny center: "3"
+  - text 21.9,11.2 tiny center: "4"
+  - text 21.9,12.4 tiny center: "5"
+  - text 23.7,11.4 tiny center: "6"
+  - text 21.9,14.7 tiny center: "12"
+  - text 21.9,15.8 tiny center: "13"
+  - text 23.7,14.8 tiny center: "11"
+  - text 34.9,4.4 tiny center: "9"
+  - text 34.9,5.6 tiny center: "10"
+  - text 36.7,4.6 tiny center: "8"
+  - text 34.9,7.8 tiny center: "12"
+  - text 34.9,9 tiny center: "13"
+  - text 36.7,8 tiny center: "11"
+  - text 34.9,11.2 tiny center: "1"
+  - text 34.9,12.4 tiny center: "2"
+  - text 36.7,11.4 tiny center: "3"
+  - text 34.9,14.6 tiny center: "2"
+  - text 34.9,15.8 tiny center: "3"
+  - text 36.7,14.8 tiny center: "1"
+  - text 34.9,18 tiny center: "5"
+  - text 34.9,19.2 tiny center: "6"
+  - text 36.7,18.2 tiny center: "4"
+  - text 3,28.5 small left: 74HC08・74HC32・74HC02 は PIN 14 が +5V、PIN 7 が GND
 style:
   pitch: 1
 ```
@@ -766,117 +766,117 @@ style:
 ```circuit
 title: 図5 時刻を入れる DIP スイッチ (ユニット 5)
 parts:
-  SET: port c4
-  S1: switch f4 f8
-  R1: resistor f10 g10f0 10k
-  GND1: ground g10f0
-  DHT1: port f15
-  S2: switch i4 i8
-  R2: resistor i10 j10f0 10k
-  GND2: ground j10f0
-  DHT0: port i15
-  S3: switch l4 l8
-  R3: resistor l10 m10f0 10k
-  GND3: ground m10f0
-  DHU3: port l15
-  S4: switch o4 o8
-  R4: resistor o10 p10f0 10k
-  GND4: ground p10f0
-  DHU2: port o15
-  S5: switch r4 r8
-  R5: resistor r10 s10f0 10k
-  GND5: ground s10f0
-  DHU1: port r15
-  S6: switch u4 u8
-  R6: resistor u10 v10f0 10k
-  GND6: ground v10f0
-  DHU0: port u15
-  SET: port c20
-  S7: switch f20 f24
-  R7: resistor f26 g26f0 10k
-  GND7: ground g26f0
-  DMT2: port f31
-  S8: switch i20 i24
-  R8: resistor i26 j26f0 10k
-  GND8: ground j26f0
-  DMT1: port i31
-  S9: switch l20 l24
-  R9: resistor l26 m26f0 10k
-  GND9: ground m26f0
-  DMT0: port l31
-  S10: switch o20 o24
-  R10: resistor o26 p26f0 10k
-  GND10: ground p26f0
-  DMU3: port o31
-  S11: switch r20 r24
-  R11: resistor r26 s26f0 10k
-  GND11: ground s26f0
-  DMU2: port r31
-  S12: switch u20 u24
-  R12: resistor u26 v26f0 10k
-  GND12: ground v26f0
-  DMU1: port u31
-  S13: switch x20 x24
-  R13: resistor x26 y26f0 10k
-  GND13: ground y26f0
-  DMU0: port x31
+  SET: port 4,3
+  S1: switch 4,6 8,6
+  R1: resistor 10,6 10,7.5 10k
+  GND1: ground 10,7.5
+  DHT1: port 15,6
+  S2: switch 4,9 8,9
+  R2: resistor 10,9 10,10.5 10k
+  GND2: ground 10,10.5
+  DHT0: port 15,9
+  S3: switch 4,12 8,12
+  R3: resistor 10,12 10,13.5 10k
+  GND3: ground 10,13.5
+  DHU3: port 15,12
+  S4: switch 4,15 8,15
+  R4: resistor 10,15 10,16.5 10k
+  GND4: ground 10,16.5
+  DHU2: port 15,15
+  S5: switch 4,18 8,18
+  R5: resistor 10,18 10,19.5 10k
+  GND5: ground 10,19.5
+  DHU1: port 15,18
+  S6: switch 4,21 8,21
+  R6: resistor 10,21 10,22.5 10k
+  GND6: ground 10,22.5
+  DHU0: port 15,21
+  SET: port 20,3
+  S7: switch 20,6 24,6
+  R7: resistor 26,6 26,7.5 10k
+  GND7: ground 26,7.5
+  DMT2: port 31,6
+  S8: switch 20,9 24,9
+  R8: resistor 26,9 26,10.5 10k
+  GND8: ground 26,10.5
+  DMT1: port 31,9
+  S9: switch 20,12 24,12
+  R9: resistor 26,12 26,13.5 10k
+  GND9: ground 26,13.5
+  DMT0: port 31,12
+  S10: switch 20,15 24,15
+  R10: resistor 26,15 26,16.5 10k
+  GND10: ground 26,16.5
+  DMU3: port 31,15
+  S11: switch 20,18 24,18
+  R11: resistor 26,18 26,19.5 10k
+  GND11: ground 26,19.5
+  DMU2: port 31,18
+  S12: switch 20,21 24,21
+  R12: resistor 26,21 26,22.5 10k
+  GND12: ground 26,22.5
+  DMU1: port 31,21
+  S13: switch 20,24 24,24
+  R13: resistor 26,24 26,25.5 10k
+  GND13: ground 26,25.5
+  DMU0: port 31,24
 wires:
-  - f8 -- f10
-  - f10 -- f15
-  - i8 -- i10
-  - i10 -- i15
-  - l8 -- l10
-  - l10 -- l15
-  - o8 -- o10
-  - o10 -- o15
-  - r8 -- r10
-  - r10 -- r15
-  - u8 -- u10
-  - u10 -- u15
-  - c4 -- f4
-  - f4 -- i4
-  - i4 -- l4
-  - l4 -- o4
-  - o4 -- r4
-  - r4 -- u4
-  - f24 -- f26
-  - f26 -- f31
-  - i24 -- i26
-  - i26 -- i31
-  - l24 -- l26
-  - l26 -- l31
-  - o24 -- o26
-  - o26 -- o31
-  - r24 -- r26
-  - r26 -- r31
-  - u24 -- u26
-  - u26 -- u31
-  - x24 -- x26
-  - x26 -- x31
-  - c20 -- f20
-  - f20 -- i20
-  - i20 -- l20
-  - l20 -- o20
-  - o20 -- r20
-  - r20 -- u20
-  - u20 -- x20
+  - 8,6 -- 10,6
+  - 10,6 -- 15,6
+  - 8,9 -- 10,9
+  - 10,9 -- 15,9
+  - 8,12 -- 10,12
+  - 10,12 -- 15,12
+  - 8,15 -- 10,15
+  - 10,15 -- 15,15
+  - 8,18 -- 10,18
+  - 10,18 -- 15,18
+  - 8,21 -- 10,21
+  - 10,21 -- 15,21
+  - 4,3 -- 4,6
+  - 4,6 -- 4,9
+  - 4,9 -- 4,12
+  - 4,12 -- 4,15
+  - 4,15 -- 4,18
+  - 4,18 -- 4,21
+  - 24,6 -- 26,6
+  - 26,6 -- 31,6
+  - 24,9 -- 26,9
+  - 26,9 -- 31,9
+  - 24,12 -- 26,12
+  - 26,12 -- 31,12
+  - 24,15 -- 26,15
+  - 26,15 -- 31,15
+  - 24,18 -- 26,18
+  - 26,18 -- 31,18
+  - 24,21 -- 26,21
+  - 26,21 -- 31,21
+  - 24,24 -- 26,24
+  - 26,24 -- 31,24
+  - 20,3 -- 20,6
+  - 20,6 -- 20,9
+  - 20,9 -- 20,12
+  - 20,12 -- 20,15
+  - 20,15 -- 20,18
+  - 20,18 -- 20,21
+  - 20,21 -- 20,24
 notes:
-  - text e11c5 tiny left: 時 十の位 2
-  - text h11c5 tiny left: 時 十の位 1
-  - text k11c5 tiny left: 時 一の位 8
-  - text n11c5 tiny left: 時 一の位 4
-  - text q11c5 tiny left: 時 一の位 2
-  - text t11c5 tiny left: 時 一の位 1
-  - text e27c5 tiny left: 分 十の位 4
-  - text h27c5 tiny left: 分 十の位 2
-  - text k27c5 tiny left: 分 十の位 1
-  - text n27c5 tiny left: 分 一の位 8
-  - text q27c5 tiny left: 分 一の位 4
-  - text t27c5 tiny left: 分 一の位 2
-  - text w27c5 tiny left: 分 一の位 1
-  - text a4i0 small left: 時 (6 本)
-  - text a20i0 small left: 分 (7 本)
-  - text z4 small left: S1 から S13 は 8 連の DIP スイッチ 2 個。R1 から R13 は 10 kΩ
+  - text 11.5,5.2 tiny left: 時 十の位 2
+  - text 11.5,8.2 tiny left: 時 十の位 1
+  - text 11.5,11.2 tiny left: 時 一の位 8
+  - text 11.5,14.2 tiny left: 時 一の位 4
+  - text 11.5,17.2 tiny left: 時 一の位 2
+  - text 11.5,20.2 tiny left: 時 一の位 1
+  - text 27.5,5.2 tiny left: 分 十の位 4
+  - text 27.5,8.2 tiny left: 分 十の位 2
+  - text 27.5,11.2 tiny left: 分 十の位 1
+  - text 27.5,14.2 tiny left: 分 一の位 8
+  - text 27.5,17.2 tiny left: 分 一の位 4
+  - text 27.5,20.2 tiny left: 分 一の位 2
+  - text 27.5,23.2 tiny left: 分 一の位 1
+  - text 4,1.8 small left: 時 (6 本)
+  - text 20,1.8 small left: 分 (7 本)
+  - text 4,26 small left: S1 から S13 は 8 連の DIP スイッチ 2 個。R1 から R13 は 10 kΩ
 style:
   pitch: 1
 ```
@@ -890,185 +890,185 @@ style:
 ```circuit
 title: 図6 窓判定 (ユニット 6)
 parts:
-  U36C: and f8
-  ST1: port e4c5f0
-  ST0: port f4h5f0
-  XA: port f11
-  U39C: or i8e0
-  ST2: port h4g5f0
-  XA: port j4b5f0
-  X: port i11e0
-  U36D: and l8i0
-  MT1: port l4a5f0
-  MT0: port m4f5f0
-  MA: port l11i0
-  U40B: or p8c0
-  MT2: port o4e5f0
-  MA: port p4j5f0
-  M30: port p11c0
-  U36B: and s8g0
-  MT5: port r4i5f0
-  MU9: port t4d5f0
-  M59: port s11g0
-  U38A: or f21
-  MT2: port e17c5f0
-  MT1: port f17h5f0
-  OA: port f24
-  U38B: or i21e0
-  MT0: port h17g5f0
-  MU3: port j17b5f0
-  OB: port i24e0
-  U38C: or l21i0
-  MU2: port l17a5f0
-  MU1: port m17f5f0
-  OC: port l24i0
-  U38D: or p21c0
-  OA: port o17e5f0
-  OB: port p17j5f0
-  OD: port p24c0
-  U39A: or s21g0
-  OC: port r17i5f0
-  MU0: port t17d5f0
-  OE: port s24g0
-  U39B: or w21
-  OD: port v17c5f0
-  OE: port w17h5f0
-  OF: port w24
-  U37A: and f34
-  M59: port e30c5f0
-  X: port f30h5f0
-  W59: port f37
-  U43D: nor i34e0
-  OF: port h30g5f0
-  X: port j30b5f0
-  W00: port i37e0
-  U39D: or l34i0
-  W59: port l30a5f0
-  W00: port m30f5f0
-  O2: port l37i0
-  U40A: or p34c0
-  NSY: port o30e5f0
-  O2: port p30j5f0
-  O3: port p37c0
-  U37B: and s34g0
-  P: port r30i5f0
-  O3: port t30d5f0
-  ACC: port s37g0
-  U37C: and w34
-  ACC: port v30c5f0
-  M30: port w30h5f0
-  HP: port w37
+  U36C: and 8,6
+  ST1: port 4.5,5.25
+  ST0: port 4.5,6.75
+  XA: port 11,6
+  U39C: or 8,9.4
+  ST2: port 4.5,8.65
+  XA: port 4.5,10.15
+  X: port 11,9.4
+  U36D: and 8,12.8
+  MT1: port 4.5,12.05
+  MT0: port 4.5,13.55
+  MA: port 11,12.8
+  U40B: or 8,16.2
+  MT2: port 4.5,15.45
+  MA: port 4.5,16.95
+  M30: port 11,16.2
+  U36B: and 8,19.6
+  MT5: port 4.5,18.85
+  MU9: port 4.5,20.35
+  M59: port 11,19.6
+  U38A: or 21,6
+  MT2: port 17.5,5.25
+  MT1: port 17.5,6.75
+  OA: port 24,6
+  U38B: or 21,9.4
+  MT0: port 17.5,8.65
+  MU3: port 17.5,10.15
+  OB: port 24,9.4
+  U38C: or 21,12.8
+  MU2: port 17.5,12.05
+  MU1: port 17.5,13.55
+  OC: port 24,12.8
+  U38D: or 21,16.2
+  OA: port 17.5,15.45
+  OB: port 17.5,16.95
+  OD: port 24,16.2
+  U39A: or 21,19.6
+  OC: port 17.5,18.85
+  MU0: port 17.5,20.35
+  OE: port 24,19.6
+  U39B: or 21,23
+  OD: port 17.5,22.25
+  OE: port 17.5,23.75
+  OF: port 24,23
+  U37A: and 34,6
+  M59: port 30.5,5.25
+  X: port 30.5,6.75
+  W59: port 37,6
+  U43D: nor 34,9.4
+  OF: port 30.5,8.65
+  X: port 30.5,10.15
+  W00: port 37,9.4
+  U39D: or 34,12.8
+  W59: port 30.5,12.05
+  W00: port 30.5,13.55
+  O2: port 37,12.8
+  U40A: or 34,16.2
+  NSY: port 30.5,15.45
+  O2: port 30.5,16.95
+  O3: port 37,16.2
+  U37B: and 34,19.6
+  P: port 30.5,18.85
+  O3: port 30.5,20.35
+  ACC: port 37,19.6
+  U37C: and 34,23
+  ACC: port 30.5,22.25
+  M30: port 30.5,23.75
+  HP: port 37,23
 wires:
-  - e4c5f0 |- U36C.a
-  - f4h5f0 |- U36C.b
-  - U36C.out -- f11
-  - h4g5f0 |- U39C.a
-  - j4b5f0 |- U39C.b
-  - U39C.out -- i11e0
-  - l4a5f0 |- U36D.a
-  - m4f5f0 |- U36D.b
-  - U36D.out -- l11i0
-  - o4e5f0 |- U40B.a
-  - p4j5f0 |- U40B.b
-  - U40B.out -- p11c0
-  - r4i5f0 |- U36B.a
-  - t4d5f0 |- U36B.b
-  - U36B.out -- s11g0
-  - e17c5f0 |- U38A.a
-  - f17h5f0 |- U38A.b
-  - U38A.out -- f24
-  - h17g5f0 |- U38B.a
-  - j17b5f0 |- U38B.b
-  - U38B.out -- i24e0
-  - l17a5f0 |- U38C.a
-  - m17f5f0 |- U38C.b
-  - U38C.out -- l24i0
-  - o17e5f0 |- U38D.a
-  - p17j5f0 |- U38D.b
-  - U38D.out -- p24c0
-  - r17i5f0 |- U39A.a
-  - t17d5f0 |- U39A.b
-  - U39A.out -- s24g0
-  - v17c5f0 |- U39B.a
-  - w17h5f0 |- U39B.b
-  - U39B.out -- w24
-  - e30c5f0 |- U37A.a
-  - f30h5f0 |- U37A.b
-  - U37A.out -- f37
-  - h30g5f0 |- U43D.a
-  - j30b5f0 |- U43D.b
-  - U43D.out -- i37e0
-  - l30a5f0 |- U39D.a
-  - m30f5f0 |- U39D.b
-  - U39D.out -- l37i0
-  - o30e5f0 |- U40A.a
-  - p30j5f0 |- U40A.b
-  - U40A.out -- p37c0
-  - r30i5f0 |- U37B.a
-  - t30d5f0 |- U37B.b
-  - U37B.out -- s37g0
-  - v30c5f0 |- U37C.a
-  - w30h5f0 |- U37C.b
-  - U37C.out -- w37
+  - 4.5,5.25 |- U36C.a
+  - 4.5,6.75 |- U36C.b
+  - U36C.out -- 11,6
+  - 4.5,8.65 |- U39C.a
+  - 4.5,10.15 |- U39C.b
+  - U39C.out -- 11,9.4
+  - 4.5,12.05 |- U36D.a
+  - 4.5,13.55 |- U36D.b
+  - U36D.out -- 11,12.8
+  - 4.5,15.45 |- U40B.a
+  - 4.5,16.95 |- U40B.b
+  - U40B.out -- 11,16.2
+  - 4.5,18.85 |- U36B.a
+  - 4.5,20.35 |- U36B.b
+  - U36B.out -- 11,19.6
+  - 17.5,5.25 |- U38A.a
+  - 17.5,6.75 |- U38A.b
+  - U38A.out -- 24,6
+  - 17.5,8.65 |- U38B.a
+  - 17.5,10.15 |- U38B.b
+  - U38B.out -- 24,9.4
+  - 17.5,12.05 |- U38C.a
+  - 17.5,13.55 |- U38C.b
+  - U38C.out -- 24,12.8
+  - 17.5,15.45 |- U38D.a
+  - 17.5,16.95 |- U38D.b
+  - U38D.out -- 24,16.2
+  - 17.5,18.85 |- U39A.a
+  - 17.5,20.35 |- U39A.b
+  - U39A.out -- 24,19.6
+  - 17.5,22.25 |- U39B.a
+  - 17.5,23.75 |- U39B.b
+  - U39B.out -- 24,23
+  - 30.5,5.25 |- U37A.a
+  - 30.5,6.75 |- U37A.b
+  - U37A.out -- 37,6
+  - 30.5,8.65 |- U43D.a
+  - 30.5,10.15 |- U43D.b
+  - U43D.out -- 37,9.4
+  - 30.5,12.05 |- U39D.a
+  - 30.5,13.55 |- U39D.b
+  - U39D.out -- 37,12.8
+  - 30.5,15.45 |- U40A.a
+  - 30.5,16.95 |- U40A.b
+  - U40A.out -- 37,16.2
+  - 30.5,18.85 |- U37B.a
+  - 30.5,20.35 |- U37B.b
+  - U37B.out -- 37,19.6
+  - 30.5,22.25 |- U37C.a
+  - 30.5,23.75 |- U37C.b
+  - U37C.out -- 37,23
 notes:
-  - text e6e9 tiny center: "9"
-  - text f6g9 tiny center: "10"
-  - text e8g7 tiny center: "8"
-  - text h6j9 tiny center: "9"
-  - text j6a9 tiny center: "10"
-  - text i8a7 tiny center: "8"
-  - text l6c9 tiny center: "12"
-  - text m6e9 tiny center: "13"
-  - text l8e7 tiny center: "11"
-  - text o6h9 tiny center: "4"
-  - text p6i9 tiny center: "5"
-  - text o8i7 tiny center: "6"
-  - text s6a9 tiny center: "4"
-  - text t6c9 tiny center: "5"
-  - text s8c7 tiny center: "6"
-  - box b1c6 u13e0 blue
-  - text c2 small bold left: 秒・分の判定
-  - text e19f9 tiny center: "1"
-  - text f19g9 tiny center: "2"
-  - text e21g7 tiny center: "3"
-  - text h19j9 tiny center: "4"
-  - text j19a9 tiny center: "5"
-  - text i21a7 tiny center: "6"
-  - text l19d9 tiny center: "9"
-  - text m19e9 tiny center: "10"
-  - text l21e7 tiny center: "8"
-  - text o19h9 tiny center: "12"
-  - text p19i9 tiny center: "13"
-  - text o21i7 tiny center: "11"
-  - text s19b9 tiny center: "1"
-  - text t19c9 tiny center: "2"
-  - text s21c7 tiny center: "3"
-  - text v19f9 tiny center: "4"
-  - text w19g9 tiny center: "5"
-  - text v21g7 tiny center: "6"
-  - box b14c6 x26i0 blue
-  - text c15 small bold left: 分が 00 かの判定
-  - text e32e9 tiny center: "1"
-  - text f32g9 tiny center: "2"
-  - text e34g7 tiny center: "3"
-  - text h32i9 tiny center: "11"
-  - text j32a9 tiny center: "12"
-  - text i34a7 tiny center: "13"
-  - text l32d9 tiny center: "12"
-  - text m32e9 tiny center: "13"
-  - text l34e7 tiny center: "11"
-  - text o32h9 tiny center: "1"
-  - text p32i9 tiny center: "2"
-  - text o34i7 tiny center: "3"
-  - text s32a9 tiny center: "4"
-  - text t32c9 tiny center: "5"
-  - text s34c7 tiny center: "6"
-  - text v32e9 tiny center: "9"
-  - text w32g9 tiny center: "10"
-  - text v34g7 tiny center: "8"
-  - box b27c6 x39i0 blue
-  - text c28 small bold left: 窓の判定と時の +1
-  - text ad5 small left: 74HC08・74HC32・74HC02 は PIN 14 が +5V、PIN 7 が GND
+  - text 6.9,5.4 tiny center: "9"
+  - text 6.9,6.6 tiny center: "10"
+  - text 8.7,5.6 tiny center: "8"
+  - text 6.9,8.9 tiny center: "9"
+  - text 6.9,10 tiny center: "10"
+  - text 8.7,9 tiny center: "8"
+  - text 6.9,12.2 tiny center: "12"
+  - text 6.9,13.4 tiny center: "13"
+  - text 8.7,12.4 tiny center: "11"
+  - text 6.9,15.7 tiny center: "4"
+  - text 6.9,16.8 tiny center: "5"
+  - text 8.7,15.8 tiny center: "6"
+  - text 6.9,19 tiny center: "4"
+  - text 6.9,20.2 tiny center: "5"
+  - text 8.7,19.2 tiny center: "6"
+  - box 1.6,2.2 13,21.4 blue
+  - text 2,3 small bold left: 秒・分の判定
+  - text 19.9,5.5 tiny center: "1"
+  - text 19.9,6.6 tiny center: "2"
+  - text 21.7,5.6 tiny center: "3"
+  - text 19.9,8.9 tiny center: "4"
+  - text 19.9,10 tiny center: "5"
+  - text 21.7,9 tiny center: "6"
+  - text 19.9,12.3 tiny center: "9"
+  - text 19.9,13.4 tiny center: "10"
+  - text 21.7,12.4 tiny center: "8"
+  - text 19.9,15.7 tiny center: "12"
+  - text 19.9,16.8 tiny center: "13"
+  - text 21.7,15.8 tiny center: "11"
+  - text 19.9,19.1 tiny center: "1"
+  - text 19.9,20.2 tiny center: "2"
+  - text 21.7,19.2 tiny center: "3"
+  - text 19.9,22.5 tiny center: "4"
+  - text 19.9,23.6 tiny center: "5"
+  - text 21.7,22.6 tiny center: "6"
+  - box 14.6,2.2 26,24.8 blue
+  - text 15,3 small bold left: 分が 00 かの判定
+  - text 32.9,5.4 tiny center: "1"
+  - text 32.9,6.6 tiny center: "2"
+  - text 34.7,5.6 tiny center: "3"
+  - text 32.9,8.8 tiny center: "11"
+  - text 32.9,10 tiny center: "12"
+  - text 34.7,9 tiny center: "13"
+  - text 32.9,12.3 tiny center: "12"
+  - text 32.9,13.4 tiny center: "13"
+  - text 34.7,12.4 tiny center: "11"
+  - text 32.9,15.7 tiny center: "1"
+  - text 32.9,16.8 tiny center: "2"
+  - text 34.7,15.8 tiny center: "3"
+  - text 32.9,19 tiny center: "4"
+  - text 32.9,20.2 tiny center: "5"
+  - text 34.7,19.2 tiny center: "6"
+  - text 32.9,22.4 tiny center: "9"
+  - text 32.9,23.6 tiny center: "10"
+  - text 34.7,22.6 tiny center: "8"
+  - box 27.6,2.2 39,24.8 blue
+  - text 28,3 small bold left: 窓の判定と時の +1
+  - text 5,30 small left: 74HC08・74HC32・74HC02 は PIN 14 が +5V、PIN 7 が GND
 style:
   pitch: 1
 ```
@@ -1085,112 +1085,112 @@ style:
 ```circuit
 title: 図7 同期済みと設定 (ユニット 7)
 parts:
-  VCC: vcc b6 5V
-  R14: resistor c6 f6 10k
-  S14: button f6 i6
-  GND1: ground i6
-  C14: capacitor f9 i9 1u
-  GND2: ground i9
-  U45A: not f15 CD40106B
-  BTN: port f20
-  VCC: vcc n6 5V
-  R15: resistor o6 r6 100k
-  C15: ecap r9 u9 10u
-  GND3: ground u9
-  U45B: not r15 CD40106B
-  PON: port r20
-  U41C: or f26
-  BTN: port e22c5f0
-  PON: port f22h5f0
-  SET: port f29
-  U41B: or j26e0
-  ACC: port i22g5f0
-  SET: port k22b5f0
-  RS: port j29e0
-  U41A: or n26i0
-  SY: port n22a5f0
-  ACC: port o22f5f0
-  SYD1: port n29i0
-  U37D: and s26c0
-  SYD1: port r22e5f0
-  SETN: port s22j5f0
-  SYD: port s29c0
-  U45C: not w26g0 CD40106B
-  SET: port w22g5
-  SETN: port w29g0
-  U45D: not aa26 CD40106B
-  SY: port aa22a5
-  NSY: port aa29
-  R23: resistor aa31 aa35 330
-  D7: led aa35 aa39
-  GND4: ground aa39
+  VCC: vcc 6,2 5V
+  R14: resistor 6,3 6,6 10k
+  S14: button 6,6 6,9
+  GND1: ground 6,9
+  C14: capacitor 9,6 9,9 1u
+  GND2: ground 9,9
+  U45A: not 15,6 CD40106B
+  BTN: port 20,6
+  VCC: vcc 6,14 5V
+  R15: resistor 6,15 6,18 100k
+  C15: ecap 9,18 9,21 10u
+  GND3: ground 9,21
+  U45B: not 15,18 CD40106B
+  PON: port 20,18
+  U41C: or 26,6
+  BTN: port 22.5,5.25
+  PON: port 22.5,6.75
+  SET: port 29,6
+  U41B: or 26,10.4
+  ACC: port 22.5,9.65
+  SET: port 22.5,11.15
+  RS: port 29,10.4
+  U41A: or 26,14.8
+  SY: port 22.5,14.05
+  ACC: port 22.5,15.55
+  SYD1: port 29,14.8
+  U37D: and 26,19.2
+  SYD1: port 22.5,18.45
+  SETN: port 22.5,19.95
+  SYD: port 29,19.2
+  U45C: not 26,23.6 CD40106B
+  SET: port 22.5,23.6
+  SETN: port 29,23.6
+  U45D: not 26,27 CD40106B
+  SY: port 22.5,27
+  NSY: port 29,27
+  R23: resistor 31,27 35,27 330
+  D7: led 35,27 39,27
+  GND4: ground 39,27
   U44A:
     type: ic3
-    at: ae38
+    at: 38,31
     label: 74HC74
     pins: [D, CLK, Q]
-  SYD: port ae33
-  CLK: port ah38f0
-  SY: port ae43
+  SYD: port 33,31
+  CLK: port 38,34.5
+  SY: port 43,31
 wires:
-  - b6 -- c6
-  - f6 -- f9
-  - f9 -- f12
-  - f12 -- U45A.in
-  - U45A.out -- f20
-  - n6 -- o6
-  - r6 -- r9
-  - r6 -- r12
-  - r12 -- U45B.in
-  - U45B.out -- r20
-  - e22c5f0 |- U41C.a
-  - f22h5f0 |- U41C.b
-  - U41C.out -- f29
-  - i22g5f0 |- U41B.a
-  - k22b5f0 |- U41B.b
-  - U41B.out -- j29e0
-  - n22a5f0 |- U41A.a
-  - o22f5f0 |- U41A.b
-  - U41A.out -- n29i0
-  - r22e5f0 |- U37D.a
-  - s22j5f0 |- U37D.b
-  - U37D.out -- s29c0
-  - w22g5 -- U45C.in
-  - U45C.out -- w29g0
-  - aa22a5 -- U45D.in
-  - U45D.out -- aa29
-  - aa29 -- aa31
-  - ae33 -- U44A.D
-  - ah38f0 -- U44A.CLK
-  - U44A.Q -- ae43
+  - 6,2 -- 6,3
+  - 6,6 -- 9,6
+  - 9,6 -- 12,6
+  - 12,6 -- U45A.in
+  - U45A.out -- 20,6
+  - 6,14 -- 6,15
+  - 6,18 -- 9,18
+  - 6,18 -- 12,18
+  - 12,18 -- U45B.in
+  - U45B.out -- 20,18
+  - 22.5,5.25 |- U41C.a
+  - 22.5,6.75 |- U41C.b
+  - U41C.out -- 29,6
+  - 22.5,9.65 |- U41B.a
+  - 22.5,11.15 |- U41B.b
+  - U41B.out -- 29,10.4
+  - 22.5,14.05 |- U41A.a
+  - 22.5,15.55 |- U41A.b
+  - U41A.out -- 29,14.8
+  - 22.5,18.45 |- U37D.a
+  - 22.5,19.95 |- U37D.b
+  - U37D.out -- 29,19.2
+  - 22.5,23.6 -- U45C.in
+  - U45C.out -- 29,23.6
+  - 22.5,27 -- U45D.in
+  - U45D.out -- 29,27
+  - 29,27 -- 31,27
+  - 33,31 -- U44A.D
+  - 38,34.5 -- U44A.CLK
+  - U44A.Q -- 43,31
 notes:
-  - text e14d4 tiny center: "1"
-  - text e15g6 tiny center: "2"
-  - text q14d4 tiny center: "3"
-  - text q15g6 tiny center: "4"
-  - text c9e0 small left: 設定ボタン (押すと H)
-  - text o9c0 small left: 電源投入 (約 0.9 秒 H)
-  - text e24f9 tiny center: "9"
-  - text f24g9 tiny center: "10"
-  - text e26g7 tiny center: "8"
-  - text i24j9 tiny center: "4"
-  - text k24a9 tiny center: "5"
-  - text j26a7 tiny center: "6"
-  - text n24d9 tiny center: "1"
-  - text o24e9 tiny center: "2"
-  - text n26e7 tiny center: "3"
-  - text r24g9 tiny center: "12"
-  - text s24i9 tiny center: "13"
-  - text r26i7 tiny center: "11"
-  - text v25j4 tiny center: "5"
-  - text w26c6 tiny center: "6"
-  - text z25d4 tiny center: "9"
-  - text z26g6 tiny center: "8"
-  - text y31c0 small left: 未同期の LED
-  - text ab34i0 tiny left: PIN 2 は D、PIN 3 は CLK、PIN 5 は Q
-  - text aj26f0 small left: 74HC74 の PIN 1・4・10・13・14 は +5V
-  - text ak26f0 small left: PIN 11・12 は GND、PIN 7 は GND
-  - text am3f0 small left: 74HC32・74HC08・CD40106B は PIN 14 が +5V、PIN 7 が GND
+  - text 14.4,5.3 tiny center: "1"
+  - text 15.6,5.6 tiny center: "2"
+  - text 14.4,17.3 tiny center: "3"
+  - text 15.6,17.6 tiny center: "4"
+  - text 9,3.4 small left: 設定ボタン (押すと H)
+  - text 9,15.2 small left: 電源投入 (約 0.9 秒 H)
+  - text 24.9,5.5 tiny center: "9"
+  - text 24.9,6.6 tiny center: "10"
+  - text 26.7,5.6 tiny center: "8"
+  - text 24.9,9.9 tiny center: "4"
+  - text 24.9,11 tiny center: "5"
+  - text 26.7,10 tiny center: "6"
+  - text 24.9,14.3 tiny center: "1"
+  - text 24.9,15.4 tiny center: "2"
+  - text 26.7,14.4 tiny center: "3"
+  - text 24.9,18.6 tiny center: "12"
+  - text 24.9,19.8 tiny center: "13"
+  - text 26.7,18.8 tiny center: "11"
+  - text 25.4,22.9 tiny center: "5"
+  - text 26.6,23.2 tiny center: "6"
+  - text 25.4,26.3 tiny center: "9"
+  - text 26.6,26.6 tiny center: "8"
+  - text 31,25.2 small left: 未同期の LED
+  - text 34,28.8 tiny left: PIN 2 は D、PIN 3 は CLK、PIN 5 は Q
+  - text 26,36.5 small left: 74HC74 の PIN 1・4・10・13・14 は +5V
+  - text 26,37.5 small left: PIN 11・12 は GND、PIN 7 は GND
+  - text 3,39.5 small left: 74HC32・74HC08・CD40106B は PIN 14 が +5V、PIN 7 が GND
 style:
   pitch: 1
 ```
@@ -1207,99 +1207,99 @@ style:
 ```circuit
 title: 図8 表示 (1 桁ぶん。6 桁とも同じ)
 parts:
-  U27: ic i13 CD4511B
-  SU0: port h9f4
-  SU1: port i9a4
-  SU2: port i9f4
-  SU3: port j9a4
-  SEGa: port g16f6
-  SEGb: port h16a6
-  SEGc: port h16f6
-  SEGd: port i16a6
-  SEGe: port i16f6
-  SEGf: port j16a6
-  SEGg: port j16f6
-  VCC: vcc e12e5 5V
-  GND1: ground l13e0
-  SEGa: port c20
-  R16: resistor c22 c26 330
-  LEDa: port c28
-  SEGb: port d20i0
-  R17: resistor d22i0 d26i0 330
-  LEDb: port d28i0
-  SEGc: port f20g0
-  R18: resistor f22g0 f26g0 330
-  LEDc: port f28g0
-  SEGd: port h20e0
-  R19: resistor h22e0 h26e0 330
-  LEDd: port h28e0
-  SEGe: port j20c0
-  R20: resistor j22c0 j26c0 330
-  LEDe: port j28c0
-  SEGf: port l20
-  R21: resistor l22 l26 330
-  LEDf: port l28
-  SEGg: port m20i0
-  R22: resistor m22i0 m26i0 330
-  LEDg: port m28i0
-  D1: seg7 i36
-  LEDa: port f32h5f0
-  LEDb: port g32c5f0
-  LEDc: port g32h5f0
-  LEDd: port h32c5f0
-  LEDe: port h32h5f0
-  LEDf: port i32c5f0
-  LEDg: port i32h5f0
-  GND2: ground k32c5f0
+  U27: ic 13,9 CD4511B
+  SU0: port 9.4,8.5
+  SU1: port 9.4,9
+  SU2: port 9.4,9.5
+  SU3: port 9.4,10
+  SEGa: port 16.6,7.5
+  SEGb: port 16.6,8
+  SEGc: port 16.6,8.5
+  SEGd: port 16.6,9
+  SEGe: port 16.6,9.5
+  SEGf: port 16.6,10
+  SEGg: port 16.6,10.5
+  VCC: vcc 12.5,5.4 5V
+  GND1: ground 13,12.4
+  SEGa: port 20,3
+  R16: resistor 22,3 26,3 330
+  LEDa: port 28,3
+  SEGb: port 20,4.8
+  R17: resistor 22,4.8 26,4.8 330
+  LEDb: port 28,4.8
+  SEGc: port 20,6.6
+  R18: resistor 22,6.6 26,6.6 330
+  LEDc: port 28,6.6
+  SEGd: port 20,8.4
+  R19: resistor 22,8.4 26,8.4 330
+  LEDd: port 28,8.4
+  SEGe: port 20,10.2
+  R20: resistor 22,10.2 26,10.2 330
+  LEDe: port 28,10.2
+  SEGf: port 20,12
+  R21: resistor 22,12 26,12 330
+  LEDf: port 28,12
+  SEGg: port 20,13.8
+  R22: resistor 22,13.8 26,13.8 330
+  LEDg: port 28,13.8
+  D1: seg7 36,9
+  LEDa: port 32.5,6.75
+  LEDb: port 32.5,7.25
+  LEDc: port 32.5,7.75
+  LEDd: port 32.5,8.25
+  LEDe: port 32.5,8.75
+  LEDf: port 32.5,9.25
+  LEDg: port 32.5,9.75
+  GND2: ground 32.5,11.25
 wires:
-  - h9f4 |- U27.INA
-  - i9a4 |- U27.INB
-  - i9f4 |- U27.INC
-  - j9a4 |- U27.IND
-  - U27.Oa -| g16f6
-  - U27.Ob -| h16a6
-  - U27.Oc -| h16f6
-  - U27.Od -| i16a6
-  - U27.Oe -| i16f6
-  - U27.Of -| j16a6
-  - U27.Og -| j16f6
-  - f12a5 -| U27.VDD
-  - f13 -| U27.LT
-  - f13a5 -| U27.BL
-  - f12a5 -- f13
-  - f13 -- f13a5
-  - f12a5 -- e12e5
-  - k13i0 -| U27.VSS
-  - k13i5 -| U27.LE/STROBE
-  - k13i0 -- k13i5
-  - k13i0 -- l13e0
-  - c20 -- c22
-  - c26 -- c28
-  - d20i0 -- d22i0
-  - d26i0 -- d28i0
-  - f20g0 -- f22g0
-  - f26g0 -- f28g0
-  - h20e0 -- h22e0
-  - h26e0 -- h28e0
-  - j20c0 -- j22c0
-  - j26c0 -- j28c0
-  - l20 -- l22
-  - l26 -- l28
-  - m20i0 -- m22i0
-  - m26i0 -- m28i0
-  - f32h5f0 |- D1.a
-  - g32c5f0 |- D1.b
-  - g32h5f0 |- D1.c
-  - h32c5f0 |- D1.d
-  - h32h5f0 |- D1.e
-  - i32c5f0 |- D1.f
-  - i32h5f0 |- D1.g
-  - j32h5f0 |- D1.COM1
-  - k32c5f0 |- D1.COM2
-  - j32h5f0 -- k32c5f0
+  - 9.4,8.5 |- U27.INA
+  - 9.4,9 |- U27.INB
+  - 9.4,9.5 |- U27.INC
+  - 9.4,10 |- U27.IND
+  - U27.Oa -| 16.6,7.5
+  - U27.Ob -| 16.6,8
+  - U27.Oc -| 16.6,8.5
+  - U27.Od -| 16.6,9
+  - U27.Oe -| 16.6,9.5
+  - U27.Of -| 16.6,10
+  - U27.Og -| 16.6,10.5
+  - 12.5,6 -| U27.VDD
+  - 13,6 -| U27.LT
+  - 13.5,6 -| U27.BL
+  - 12.5,6 -- 13,6
+  - 13,6 -- 13.5,6
+  - 12.5,6 -- 12.5,5.4
+  - 13,11.8 -| U27.VSS
+  - 13.5,11.8 -| U27.LE/STROBE
+  - 13,11.8 -- 13.5,11.8
+  - 13,11.8 -- 13,12.4
+  - 20,3 -- 22,3
+  - 26,3 -- 28,3
+  - 20,4.8 -- 22,4.8
+  - 26,4.8 -- 28,4.8
+  - 20,6.6 -- 22,6.6
+  - 26,6.6 -- 28,6.6
+  - 20,8.4 -- 22,8.4
+  - 26,8.4 -- 28,8.4
+  - 20,10.2 -- 22,10.2
+  - 26,10.2 -- 28,10.2
+  - 20,12 -- 22,12
+  - 26,12 -- 28,12
+  - 20,13.8 -- 22,13.8
+  - 26,13.8 -- 28,13.8
+  - 32.5,6.75 |- D1.a
+  - 32.5,7.25 |- D1.b
+  - 32.5,7.75 |- D1.c
+  - 32.5,8.25 |- D1.d
+  - 32.5,8.75 |- D1.e
+  - 32.5,9.25 |- D1.f
+  - 32.5,9.75 |- D1.g
+  - 32.5,10.75 |- D1.COM1
+  - 32.5,11.25 |- D1.COM2
+  - 32.5,10.75 -- 32.5,11.25
 notes:
-  - text q3i0 small left: U27 CD4511B。LT・BL を +5V、LE を GND にすると、BCD がそのまま 7 セグの表示になる
-  - text s3c0 small left: D1 は共通カソードの 7 セグ。R16 から R22 は 330 Ω
+  - text 3,17.8 small left: U27 CD4511B。LT・BL を +5V、LE を GND にすると、BCD がそのまま 7 セグの表示になる
+  - text 3,19.2 small left: D1 は共通カソードの 7 セグ。R16 から R22 は 330 Ω
 style:
   pitch: 1
 ```

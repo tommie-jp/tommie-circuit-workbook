@@ -252,86 +252,86 @@ cursors: [1.4375s, 3.6875s]
 ```circuit
 title: 図4 同期とエッジ検出 (ユニット 1)
 parts:
-  T440: port d2
-  T880: port j2
-  CLK: port f2
+  T440: port 2,4
+  T880: port 2,10
+  CLK: port 2,6
   U5A:
     type: ic3
-    at: d7
+    at: 7,4
     label: 74HC74
     pins: [D, CLK, Q]
   U5B:
     type: ic3
-    at: d15
+    at: 15,4
     label: 74HC74
     pins: [D, CLK, Q]
   U6A:
     type: ic3
-    at: j7
+    at: 7,10
     label: 74HC74
     pins: [D, CLK, Q]
   U6B:
     type: ic3
-    at: j15
+    at: 15,10
     label: 74HC74
     pins: [D, CLK, Q]
-  U7A: not d20
-  U8A: and d25
-  U7C: not d30
-  U7B: not j20
-  U8B: and j25
-  E440: port b33
-  NE440: port d37
-  E880: port j33
+  U7A: not 20,4
+  U8A: and 25,4
+  U7C: not 30,4
+  U7B: not 20,10
+  U8B: and 25,10
+  E440: port 33,2
+  NE440: port 37,4
+  E880: port 33,10
 wires:
-  - d2 -- U5A.D
-  - U5A.Q -- d11 -- U5B.D
-  - d11 -- b11 -- b23
-  - b23 |- U8A.a
+  - 2,4 -- U5A.D
+  - U5A.Q -- 11,4 -- U5B.D
+  - 11,4 -- 11,2 -- 23,2
+  - 23,2 |- U8A.a
   - U5B.Q -- U7A.in
   - U7A.out -| U8A.b
-  - U8A.out -- d28 -- U7C.in
-  - d28 -- b28 -- b33
-  - U7C.out -- d37
-  - j2 -- U6A.D
-  - U6A.Q -- j11 -- U6B.D
-  - j11 -- h11 -- h23
-  - h23 |- U8B.a
+  - U8A.out -- 28,4 -- U7C.in
+  - 28,4 -- 28,2 -- 33,2
+  - U7C.out -- 37,4
+  - 2,10 -- U6A.D
+  - U6A.Q -- 11,10 -- U6B.D
+  - 11,10 -- 11,8 -- 23,8
+  - 23,8 |- U8B.a
   - U6B.Q -- U7B.in
   - U7B.out -| U8B.b
-  - U8B.out -- j33
-  - f2 -- f4 -- f7 -- f15
-  - U5A.CLK -- f7
-  - U5B.CLK -- f15
-  - f4 -- l4 -- l7 -- l15
-  - U6A.CLK -- l7
-  - U6B.CLK -- l15
+  - U8B.out -- 33,10
+  - 2,6 -- 4,6 -- 7,6 -- 15,6
+  - U5A.CLK -- 7,6
+  - U5B.CLK -- 15,6
+  - 4,6 -- 4,12 -- 7,12 -- 15,12
+  - U6A.CLK -- 7,12
+  - U6B.CLK -- 15,12
 notes:
-  - text c19g4 tiny center: "1"
-  - text c20g6 tiny center: "2"
-  - text c24f1 tiny center: "1"
-  - text d24g1 tiny center: "2"
-  - text c25g7 tiny center: "3"
-  - text c29g4 tiny center: "5"
-  - text c30g6 tiny center: "6"
-  - text i19g4 tiny center: "3"
-  - text i20g6 tiny center: "4"
-  - text i24e1 tiny center: "4"
-  - text j24g1 tiny center: "5"
-  - text i25g7 tiny center: "6"
-  - text c5g7 tiny center: "2"
-  - text c8g3 tiny center: "5"
-  - text d7j3 tiny center: "3"
-  - text c13g7 tiny center: "12"
-  - text c16g3 tiny center: "9"
-  - text d15j3 tiny center: "11"
-  - text i5g7 tiny center: "2"
-  - text i8g3 tiny center: "5"
-  - text j7j3 tiny center: "3"
-  - text i13g7 tiny center: "12"
-  - text i16g3 tiny center: "9"
-  - text j15j3 tiny center: "11"
-  - text a2 small left: 74HC74 は 2 個。PIN 14 は +5V、PIN 7 は GND、PIN 1・4・10・13 は +5V
+  - text 19.4,3.6 tiny center: "1"
+  - text 20.6,3.6 tiny center: "2"
+  - text 24.1,3.5 tiny center: "1"
+  - text 24.1,4.6 tiny center: "2"
+  - text 25.7,3.6 tiny center: "3"
+  - text 29.4,3.6 tiny center: "5"
+  - text 30.6,3.6 tiny center: "6"
+  - text 19.4,9.6 tiny center: "3"
+  - text 20.6,9.6 tiny center: "4"
+  - text 24.1,9.4 tiny center: "4"
+  - text 24.1,10.6 tiny center: "5"
+  - text 25.7,9.6 tiny center: "6"
+  - text 5.7,3.6 tiny center: "2"
+  - text 8.3,3.6 tiny center: "5"
+  - text 7.3,4.9 tiny center: "3"
+  - text 13.7,3.6 tiny center: "12"
+  - text 16.3,3.6 tiny center: "9"
+  - text 15.3,4.9 tiny center: "11"
+  - text 5.7,9.6 tiny center: "2"
+  - text 8.3,9.6 tiny center: "5"
+  - text 7.3,10.9 tiny center: "3"
+  - text 13.7,9.6 tiny center: "12"
+  - text 16.3,9.6 tiny center: "9"
+  - text 15.3,10.9 tiny center: "11"
+  - text 2,1 small left: 74HC74 は 2 個。PIN 14 は +5V、PIN 7 は GND、PIN 1・4・10・13 は +5V
 style:
   pitch: 1
 ```
@@ -346,62 +346,62 @@ style:
 ```circuit
 title: 図5 間隔タイマと窓 (ユニット 2)
 parts:
-  NE440: port a3
-  CLK: port f3f0
-  U9: ic e10 74HC163
-  VCC1: vcc b10 5V
-  GND1: ground h10
-  U10A: and d20
-  U11A: nor e26
-  U10C: and c32
-  U10B: and g32
-  W: port g38
-  TO: port c38
+  NE440: port 3,1
+  CLK: port 3,6.5
+  U9: ic 10,5 74HC163
+  VCC1: vcc 10,2 5V
+  GND1: ground 10,8
+  U10A: and 20,4
+  U11A: nor 26,5
+  U10C: and 32,3
+  U10B: and 32,7
+  W: port 38,7
+  TO: port 38,3
 wires:
-  - a3 -| U9.LOAD
-  - f3f0 |- U9.CLK
-  - U9.VCC |- b10
-  - U9.CLR |- b10
-  - U9.GND |- h10
-  - U9.A |- c5f0
-  - U9.B |- d5
-  - U9.C |- d5f0
-  - U9.D |- e5
-  - U9.ENP |- e5f0
-  - U9.ENT |- f5
+  - 3,1 -| U9.LOAD
+  - 3,6.5 |- U9.CLK
+  - U9.VCC |- 10,2
+  - U9.CLR |- 10,2
+  - U9.GND |- 10,8
+  - U9.A |- 5,3.5
+  - U9.B |- 5,4
+  - U9.C |- 5,4.5
+  - U9.D |- 5,5
+  - U9.ENP |- 5,5.5
+  - U9.ENT |- 5,6
   - U9.QA |- U10A.a
   - U9.QB -| U10A.b
-  - U10A.out -- d23
-  - d23 -| U11A.a
-  - U9.QC |- e24 -| U11A.b
-  - d23 -- d28 -- c28
-  - c28 |- U10C.a
-  - U9.QD |- e30f0
-  - e30f0 |- U10C.b
-  - e30f0 |- U10B.a
-  - U11A.out -- e28 |- U10B.b
-  - U10C.out -- c38
-  - U10B.out -- g38
+  - U10A.out -- 23,4
+  - 23,4 -| U11A.a
+  - U9.QC |- 24,5 -| U11A.b
+  - 23,4 -- 28,4 -- 28,3
+  - 28,3 |- U10C.a
+  - U9.QD |- 30,5.5
+  - 30,5.5 |- U10C.b
+  - 30,5.5 |- U10B.a
+  - U11A.out -- 28,5 |- U10B.b
+  - U10C.out -- 38,3
+  - U10B.out -- 38,7
 notes:
-  - text c4f0 tiny right: GND
-  - text d4 tiny right: +5V
-  - text d4f0 tiny right: GND
-  - text e4 tiny right: GND
-  - text e4f0 tiny right: +5V
-  - text f4 tiny right: +5V
-  - text i3 small left: B だけ +5V で、E440 のたびに値 2 を読み込む
-  - text c18f9 tiny center: "1"
-  - text d18g9 tiny center: "2"
-  - text c20g7 tiny center: "3"
-  - text b30e9 tiny center: "9"
-  - text c30g9 tiny center: "10"
-  - text b32g7 tiny center: "8"
-  - text f30f9 tiny center: "4"
-  - text g30g9 tiny center: "5"
-  - text f32g7 tiny center: "6"
-  - text d24f9 tiny center: "2"
-  - text e24g9 tiny center: "3"
-  - text d26g7 tiny center: "1"
+  - text 4,3.5 tiny right: GND
+  - text 4,4 tiny right: +5V
+  - text 4,4.5 tiny right: GND
+  - text 4,5 tiny right: GND
+  - text 4,5.5 tiny right: +5V
+  - text 4,6 tiny right: +5V
+  - text 3,9 small left: B だけ +5V で、E440 のたびに値 2 を読み込む
+  - text 18.9,3.5 tiny center: "1"
+  - text 18.9,4.6 tiny center: "2"
+  - text 20.7,3.6 tiny center: "3"
+  - text 30.9,2.4 tiny center: "9"
+  - text 30.9,3.6 tiny center: "10"
+  - text 32.7,2.6 tiny center: "8"
+  - text 30.9,6.5 tiny center: "4"
+  - text 30.9,7.6 tiny center: "5"
+  - text 32.7,6.6 tiny center: "6"
+  - text 24.9,4.5 tiny center: "2"
+  - text 24.9,5.6 tiny center: "3"
+  - text 26.7,4.6 tiny center: "1"
 style:
   grid: on
   pitch: 1
@@ -418,74 +418,74 @@ style:
 ```circuit
 title: 図6 状態を動かす条件 (ユニット 3)
 parts:
-  W: port a2
-  QA: port b2
-  QB: port d2
-  NE440: port e2
-  E440: port g2
-  E880: port j2
-  TO: port l2
-  S3: port n2
-  PON: port q2
-  U12A: xor c9
-  U13A: and c18
-  U14A: or f26
-  U13B: and h26
-  U14B: or k9
-  U13C: and o14
-  U14C: or m21
-  U15A: nor q27
-  LOADN: port f31
-  EN: port h31
-  CLRN: port q31
+  W: port 2,1
+  QA: port 2,2
+  QB: port 2,4
+  NE440: port 2,5
+  E440: port 2,7
+  E880: port 2,10
+  TO: port 2,12
+  S3: port 2,14
+  PON: port 2,17
+  U12A: xor 9,3
+  U13A: and 18,3
+  U14A: or 26,6
+  U13B: and 26,8
+  U14B: or 9,11
+  U13C: and 14,15
+  U14C: or 21,13
+  U15A: nor 27,17
+  LOADN: port 31,6
+  EN: port 31,8
+  CLRN: port 31,17
 wires:
-  - b2 |- U12A.a
-  - d2 |- U12A.b
-  - U12A.out -- c12 -| U13A.b
-  - a2 -- a15 |- U13A.a
-  - U13A.out -- c21
-  - c21 |- U14A.b
-  - c21 |- U13B.b
-  - e2 |- U14A.a
-  - g2 -- g6
-  - g6 |- U13B.a
-  - g6 |- U13C.b
-  - j2 |- U14B.a
-  - l2 |- U14B.b
+  - 2,2 |- U12A.a
+  - 2,4 |- U12A.b
+  - U12A.out -- 12,3 -| U13A.b
+  - 2,1 -- 15,1 |- U13A.a
+  - U13A.out -- 21,3
+  - 21,3 |- U14A.b
+  - 21,3 |- U13B.b
+  - 2,5 |- U14A.a
+  - 2,7 -- 6,7
+  - 6,7 |- U13B.a
+  - 6,7 |- U13C.b
+  - 2,10 |- U14B.a
+  - 2,12 |- U14B.b
   - U14B.out -| U14C.a
-  - n2 |- U13C.a
-  - U13C.out -- o18 |- U14C.b
+  - 2,14 |- U13C.a
+  - U13C.out -- 18,15 |- U14C.b
   - U14C.out -| U15A.a
-  - q2 |- U15A.b
-  - U14A.out -- f31
-  - U13B.out -- h31
-  - U15A.out -- q31
+  - 2,17 |- U15A.b
+  - U14A.out -- 31,6
+  - U13B.out -- 31,8
+  - U15A.out -- 31,17
 notes:
-  - text b7e8 tiny center: "1"
-  - text c7g8 tiny center: "2"
-  - text b9g7 tiny center: "3"
-  - text b16e9 tiny center: "1"
-  - text c16g9 tiny center: "2"
-  - text b18g7 tiny center: "3"
-  - text e24f9 tiny center: "1"
-  - text f24g9 tiny center: "2"
-  - text e26g7 tiny center: "3"
-  - text g24f9 tiny center: "4"
-  - text h24g9 tiny center: "5"
-  - text g26g7 tiny center: "6"
-  - text j7e8 tiny center: "4"
-  - text k7g8 tiny center: "5"
-  - text j9g7 tiny center: "6"
-  - text n12e8 tiny center: "9"
-  - text o12g8 tiny center: "10"
-  - text n14g7 tiny center: "8"
-  - text l19e9 tiny center: "9"
-  - text m19g9 tiny center: "10"
-  - text l21g7 tiny center: "8"
-  - text p25e9 tiny center: "2"
-  - text q25g9 tiny center: "3"
-  - text p27g7 tiny center: "1"
-  - text s9 small left: 74HC86、74HC08、74HC32、74HC02 は PIN 14 が +5V、PIN 7 が GND
+  - text 7.8,2.4 tiny center: "1"
+  - text 7.8,3.6 tiny center: "2"
+  - text 9.7,2.6 tiny center: "3"
+  - text 16.9,2.4 tiny center: "1"
+  - text 16.9,3.6 tiny center: "2"
+  - text 18.7,2.6 tiny center: "3"
+  - text 24.9,5.5 tiny center: "1"
+  - text 24.9,6.6 tiny center: "2"
+  - text 26.7,5.6 tiny center: "3"
+  - text 24.9,7.5 tiny center: "4"
+  - text 24.9,8.6 tiny center: "5"
+  - text 26.7,7.6 tiny center: "6"
+  - text 7.8,10.4 tiny center: "4"
+  - text 7.8,11.6 tiny center: "5"
+  - text 9.7,10.6 tiny center: "6"
+  - text 12.8,14.4 tiny center: "9"
+  - text 12.8,15.6 tiny center: "10"
+  - text 14.7,14.6 tiny center: "8"
+  - text 19.9,12.4 tiny center: "9"
+  - text 19.9,13.6 tiny center: "10"
+  - text 21.7,12.6 tiny center: "8"
+  - text 25.9,16.4 tiny center: "2"
+  - text 25.9,17.6 tiny center: "3"
+  - text 27.7,16.6 tiny center: "1"
+  - text 9,19 small left: 74HC86、74HC08、74HC32、74HC02 は PIN 14 が +5V、PIN 7 が GND
 style:
   pitch: 1
 ```
@@ -502,64 +502,64 @@ style:
 ```circuit
 title: 図7 状態レジスタと出力 (ユニット 4)
 parts:
-  LOADN: port a3
-  CLRN: port b3
-  EN: port e3f0
-  CLK: port f3f0
-  U16: ic e12 74HC163
-  GND1: ground h12
-  U17A: and d22
-  U17B: and g22
-  U17C: and e32
-  E880: port g18
-  W: port h18
-  OUT: port e38
-  QA: port b38
-  QB: port i38f0
-  S3: port c38
+  LOADN: port 3,1
+  CLRN: port 3,2
+  EN: port 3,5.5
+  CLK: port 3,6.5
+  U16: ic 12,5 74HC163
+  GND1: ground 12,8
+  U17A: and 22,4
+  U17B: and 22,7
+  U17C: and 32,5
+  E880: port 18,7
+  W: port 18,8
+  OUT: port 38,5
+  QA: port 38,2
+  QB: port 38,9.5
+  S3: port 38,3
 wires:
-  - a3 -| U16.LOAD
-  - b3 -| U16.CLR
-  - U16.VCC |- c5
-  - U16.GND |- h12
-  - f3f0 -| U16.CLK
-  - e3f0 -- e7f0
-  - e7f0 |- U16.ENP
-  - e7f0 |- U16.ENT
-  - U16.A |- c5f0
-  - U16.B |- d5
-  - U16.C |- d5f0
-  - U16.D |- e5
-  - U16.QA |- d16
-  - d16 |- U17A.a
-  - d16 -- b16 -- b38
-  - U16.QB |- d16f0
-  - d16f0 -| U17A.b
-  - d16f0 -- i16f0 -- i38f0
-  - g18 |- U17B.a
-  - h18 |- U17B.b
-  - U17A.out -- d24
-  - d24 -- d28 |- U17C.a
-  - d24 -- c24 -- c38
-  - U17B.out -- g28 |- U17C.b
-  - U17C.out -- e38
+  - 3,1 -| U16.LOAD
+  - 3,2 -| U16.CLR
+  - U16.VCC |- 5,3
+  - U16.GND |- 12,8
+  - 3,6.5 -| U16.CLK
+  - 3,5.5 -- 7,5.5
+  - 7,5.5 |- U16.ENP
+  - 7,5.5 |- U16.ENT
+  - U16.A |- 5,3.5
+  - U16.B |- 5,4
+  - U16.C |- 5,4.5
+  - U16.D |- 5,5
+  - U16.QA |- 16,4
+  - 16,4 |- U17A.a
+  - 16,4 -- 16,2 -- 38,2
+  - U16.QB |- 16,4.5
+  - 16,4.5 -| U17A.b
+  - 16,4.5 -- 16,9.5 -- 38,9.5
+  - 18,7 |- U17B.a
+  - 18,8 |- U17B.b
+  - U17A.out -- 24,4
+  - 24,4 -- 28,4 |- U17C.a
+  - 24,4 -- 24,3 -- 38,3
+  - U17B.out -- 28,7 |- U17C.b
+  - U17C.out -- 38,5
 notes:
-  - text c4f0 tiny right: +5V
-  - text d4 tiny right: GND
-  - text d4f0 tiny right: GND
-  - text e4 tiny right: GND
-  - text c4 tiny right: +5V
-  - text k3 small left: 74HC163 は E440 のたびに値 1 (A だけ +5V) を読み込む
-  - text c20f9 tiny center: "1"
-  - text d20g9 tiny center: "2"
-  - text c22g7 tiny center: "3"
-  - text f20f9 tiny center: "4"
-  - text g20g9 tiny center: "5"
-  - text f22g7 tiny center: "6"
-  - text d30f9 tiny center: "9"
-  - text e30g9 tiny center: "10"
-  - text d32g7 tiny center: "8"
-  - text j9 small left: 74HC08 は PIN 14 が +5V、PIN 7 が GND
+  - text 4,3.5 tiny right: +5V
+  - text 4,4 tiny right: GND
+  - text 4,4.5 tiny right: GND
+  - text 4,5 tiny right: GND
+  - text 4,3 tiny right: +5V
+  - text 3,11 small left: 74HC163 は E440 のたびに値 1 (A だけ +5V) を読み込む
+  - text 20.9,3.5 tiny center: "1"
+  - text 20.9,4.6 tiny center: "2"
+  - text 22.7,3.6 tiny center: "3"
+  - text 20.9,6.5 tiny center: "4"
+  - text 20.9,7.6 tiny center: "5"
+  - text 22.7,6.6 tiny center: "6"
+  - text 30.9,4.5 tiny center: "9"
+  - text 30.9,5.6 tiny center: "10"
+  - text 32.7,4.6 tiny center: "8"
+  - text 9,10 small left: 74HC08 は PIN 14 が +5V、PIN 7 が GND
 style:
   grid: on
   pitch: 1

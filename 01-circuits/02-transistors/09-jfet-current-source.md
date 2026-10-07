@@ -25,18 +25,18 @@ source: 自作
 ```circuit
 title: 図1 JFET のセルフバイアスで定電流を作る
 parts:
-  V1: vsource a1 d1 5
-  G0: ground d1
-  D1: led a4 c4
-  J1: njfet d4
-  G1: ground e3
-  RS: resistor e4 g4 470
-  G2: ground g4
+  V1: vsource 1,1 1,4 5
+  G0: ground 1,4
+  D1: led 4,1 4,3
+  J1: njfet 4,4
+  G1: ground 3,5
+  RS: resistor 4,5 4,7 470
+  G2: ground 4,7
 wires:
-  - a1 -- a4
-  - c4 -- J1.D
-  - e3 |- J1.G
-  - J1.S -- e4
+  - 1,1 -- 4,1
+  - 4,3 -- J1.D
+  - 3,5 |- J1.G
+  - J1.S -- 4,5
 style:
   grid: on
   pitch: 1.2

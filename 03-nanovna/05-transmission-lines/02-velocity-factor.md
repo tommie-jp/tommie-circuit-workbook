@@ -20,18 +20,18 @@ device: H4
 ```circuit
 title: 図1 先を開放した 1 m のスタブを T で分岐
 parts:
-  J1: sma b2 mirror CH0
-  J2: sma b8 CH1
-  TL1: tline b5 d5 50 l=$\mathrm{TL}_1$
-  G1: ground c2
-  G2: ground c8
+  J1: sma 2,2 mirror CH0
+  J2: sma 8,2 CH1
+  TL1: tline 5,2 5,4 50 l=$\mathrm{TL}_1$
+  G1: ground 2,3
+  G2: ground 8,3
 wires:
-  - J1.1 -- b5 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c8
+  - J1.1 -- 5,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 8,3
 notes:
-  - text d5c0 center: 開放
-  - text c5f3 left: 1 m・vf 0.66
+  - text 5,4.2 center: 開放
+  - text 5.3,3.5 left: 1 m・vf 0.66
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/02-velocity-factor.svg)

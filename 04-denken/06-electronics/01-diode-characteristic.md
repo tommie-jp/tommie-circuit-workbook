@@ -28,12 +28,12 @@ board: BB
 ```circuit
 title: 図1 ダイオードの電圧電流特性
 parts:
-  V1: triangle a1 c1 1.5 l=$\mathrm{W1}$
-  R1: resistor a1 a5 1k i=I
-  D1: diode a5 c5 1N4148
-  G1: ground c1
+  V1: triangle 1,1 1,3 1.5 l=$\mathrm{W1}$
+  R1: resistor 1,1 5,1 1k i=I
+  D1: diode 5,1 5,3 1N4148
+  G1: ground 1,3
 wires:
-  - c1 -- c5
+  - 1,3 -- 5,3
 style:
   standard: jis
   grid: on
@@ -115,16 +115,16 @@ R1 の両端 (電流) を読む** (図4)。ダイオードの両端 (CH1) は 1 
 ```circuit
 title: 図4 汎用オシロでの測り方
 parts:
-  V1: triangle a1 d1 1.5 l=$\mathrm{FG}$
-  M2: voltmeter a4 d4 l=$\mathrm{CH2}$
-  R1: resistor a6 a9 1k i=I
-  M1: voltmeter a11 d11 l=$\mathrm{CH1}$
-  D1: diode a14 d14 1N4148
-  G1: ground d8
+  V1: triangle 1,1 1,4 1.5 l=$\mathrm{FG}$
+  M2: voltmeter 4,1 4,4 l=$\mathrm{CH2}$
+  R1: resistor 6,1 9,1 1k i=I
+  M1: voltmeter 11,1 11,4 l=$\mathrm{CH1}$
+  D1: diode 14,1 14,4 1N4148
+  G1: ground 8,4
 wires:
-  - a1 -- a4 -- a6
-  - a9 -- a11 -- a14
-  - d1 -- d4 -- d8 -- d11 -- d14
+  - 1,1 -- 4,1 -- 6,1
+  - 9,1 -- 11,1 -- 14,1
+  - 1,4 -- 4,4 -- 8,4 -- 11,4 -- 14,4
 style:
   standard: jis
   pitch: 1.2

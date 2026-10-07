@@ -20,21 +20,21 @@ C1 を短絡すると L と R だけの回路 (RL、共振しない) に、開�
 ```circuit
 title: 図1 RL と LC の共振
 parts:
-  V1: sine a1 c1 l=$\mathrm{W1}$
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  L1: inductor a5 a7 10m
-  C1: capacitor a7 a9 100n
-  S1: switch b7 b9
-  R1: resistor a10 c10 100 i=I
-  M2: voltmeter a12 c12 l=$\mathrm{CH2}$
-  G1: ground c1
+  V1: sine 1,1 1,3 l=$\mathrm{W1}$
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  L1: inductor 5,1 7,1 10m
+  C1: capacitor 7,1 9,1 100n
+  S1: switch 7,2 9,2
+  R1: resistor 10,1 10,3 100 i=I
+  M2: voltmeter 12,1 12,3 l=$\mathrm{CH2}$
+  G1: ground 1,3
 wires:
-  - a1 -- a3 -- a5
-  - c1 -- c3 -- c10 -- c12
-  - a7 -- b7
-  - a9 -- b9
-  - a9 -- a10
-  - a10 -- a12
+  - 1,1 -- 3,1 -- 5,1
+  - 1,3 -- 3,3 -- 10,3 -- 12,3
+  - 7,1 -- 7,2
+  - 9,1 -- 9,2
+  - 9,1 -- 10,1
+  - 10,1 -- 12,1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/03-rl-lc-resonance.svg)

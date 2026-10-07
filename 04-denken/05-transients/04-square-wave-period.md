@@ -29,15 +29,15 @@ board: BB
 ```circuit
 title: 図1 RC 直列に方形波を加える (5-1 と同じ回路)
 parts:
-  V1: square b1 d1 1 l=$\mathrm{W1}$
-  R1: resistor b1 b5 10k
-  C1: capacitor b5 d5 100n
-  G1: ground d1
+  V1: square 1,2 1,4 1 l=$\mathrm{W1}$
+  R1: resistor 1,2 5,2 10k
+  C1: capacitor 5,2 5,4 100n
+  G1: ground 1,4
 wires:
-  - d1 -- d5
+  - 1,4 -- 5,4
 notes:
-  - text a1f0 blue: 入力 (CH1)
-  - text a5f0 blue: 出力 Vc (CH2)
+  - text 1,1.5 blue: 入力 (CH1)
+  - text 5,1.5 blue: 出力 Vc (CH2)
 style:
   standard: jis
   grid: on

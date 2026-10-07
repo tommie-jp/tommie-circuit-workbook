@@ -34,48 +34,48 @@ board: BB
 ```circuit
 title: 図1 555の電源に音声を混ぜてAM変調する
 parts:
-  V1: sine c2 e2 0.5
-  GV1: ground e2
-  Cmod: capacitor c2 c4 1u
-  VCC: vcc a8 5V
-  Rmod: resistor a8 c8 220
-  U555: ic g10 TLC555
-  GU555: ground j10f0
-  R1: resistor c6 e6 1k
-  R2: resistor f6f0 h6f0 10k
-  C1: capacitor h8f0 j8f0 100p
-  GC1: ground j8f0
-  Cant: capacitor g14 g16 100p
-  ANT: port g17
+  V1: sine 2,3 2,5 0.5
+  GV1: ground 2,5
+  Cmod: capacitor 2,3 4,3 1u
+  VCC: vcc 8,1 5V
+  Rmod: resistor 8,1 8,3 220
+  U555: ic 10,7 TLC555
+  GU555: ground 10,10.5
+  R1: resistor 6,3 6,5 1k
+  R2: resistor 6,6.5 6,8.5 10k
+  C1: capacitor 8,8.5 8,10.5 100p
+  GC1: ground 8,10.5
+  Cant: capacitor 14,7 16,7 100p
+  ANT: port 17,7
 wires:
-  - c4 -- c10a5
-  - U555.VDD |- c10
-  - U555.RESET |- c10a5
-  - e6 -- f6f0
-  - U555.DISCH -| f6f0
-  - U555.THRES -| g8
-  - U555.TRIG -| g8f0
-  - g8 -- h8f0
-  - h6f0 -- h8f0
-  - U555.GND |- j10f0
-  - U555.OUT -| g14
-  - g16 -- g17
+  - 4,3 -- 10.5,3
+  - U555.VDD |- 10,3
+  - U555.RESET |- 10.5,3
+  - 6,5 -- 6,6.5
+  - U555.DISCH -| 6,6.5
+  - U555.THRES -| 8,7
+  - U555.TRIG -| 8,7.5
+  - 8,7 -- 8,8.5
+  - 6,8.5 -- 8,8.5
+  - U555.GND |- 10,10.5
+  - U555.OUT -| 14,7
+  - 16,7 -- 17,7
 notes:
   # 計測点。オシロは橙、スペアナは緑 (計器の設定の表と同じ名前)
-  - arrow b1 c2 orange
-  - text a1h0 small orange left: 音声
-  - arrow b9f5 c9a5 orange
-  - text b9c5 small orange center: PIN 8
-  - arrow e12f0 g12 orange
-  - text e12c0 small orange center: PIN 3
-  - arrow h17f0 g17 orange
-  - text h17h0 small orange right: ANT
-  - arrow i12 i10 orange
-  - text i12 small orange left: オシロ GND
-  - arrow e13f5 g13a5 green
-  - text e13c5 small green center: スペアナ入力
-  - arrow i12h0 i10h0 green
-  - text i12h0 small green left: スペアナ GND
+  - arrow 1,2 2,3 orange
+  - text 1,1.7 small orange left: 音声
+  - arrow 9.5,2.5 9.5,3 orange
+  - text 9.5,2.2 small orange center: PIN 8
+  - arrow 12,5.5 12,7 orange
+  - text 12,5.2 small orange center: PIN 3
+  - arrow 17,8.5 17,7 orange
+  - text 17,8.7 small orange right: ANT
+  - arrow 12,9 10,9 orange
+  - text 12,9 small orange left: オシロ GND
+  - arrow 13.5,5.5 13.5,7 green
+  - text 13.5,5.2 small green center: スペアナ入力
+  - arrow 12,9.7 10,9.7 green
+  - text 12,9.7 small green left: スペアナ GND
 style:
   pitch: 1.2
 ```

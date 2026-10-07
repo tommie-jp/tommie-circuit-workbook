@@ -100,77 +100,77 @@ S3 = A3 ⊕ BX3 ⊕ C3 (⊕ は XOR) なので、C3 = A3 ⊕ BX3 ⊕ S3 と逆�
 ```circuit
 title: 図1 入力のスイッチと、B を反転する 74HC86
 parts:
-  VCC: vcc b2 5V
-  SA0: switch b2 b5 l=$\mathrm{SW1}_1$
-  R1: resistor b5 c5 10k
-  G1: ground c5
-  A0: port b9
-  VCC: vcc d2 5V
-  SA1: switch d2 d5 l=$\mathrm{SW1}_2$
-  R2: resistor d5 e5 10k
-  G2: ground e5
-  A1: port d9
-  VCC: vcc f2 5V
-  SA2: switch f2 f5 l=$\mathrm{SW1}_3$
-  R3: resistor f5 g5 10k
-  G3: ground g5
-  A2: port f9
-  VCC: vcc h2 5V
-  SA3: switch h2 h5 l=$\mathrm{SW1}_4$
-  R4: resistor h5 i5 10k
-  G4: ground i5
-  A3: port h9
-  VCC: vcc j2 5V
-  SB0: switch j2 j5 l=$\mathrm{SW2}_1$
-  R5: resistor j5 k5 10k
-  G5: ground k5
-  U2A: xor j9c0 74HC86
-  SUB: port k8
-  BX0: port j12c0
-  VCC: vcc l2 5V
-  SB1: switch l2 l5 l=$\mathrm{SW2}_2$
-  R6: resistor l5 m5 10k
-  G6: ground m5
-  U2B: xor l9c0 74HC86
-  SUB: port m8
-  BX1: port l12c0
-  VCC: vcc n2 5V
-  SB2: switch n2 n5 l=$\mathrm{SW2}_3$
-  R7: resistor n5 o5 10k
-  G7: ground o5
-  U2C: xor n9c0 74HC86
-  SUB: port o8
-  BX2: port n12c0
-  VCC: vcc p2 5V
-  SB3: switch p2 p5 l=$\mathrm{SW2}_4$
-  R8: resistor p5 q5 10k
-  G8: ground q5
-  U2D: xor p9c0 74HC86
-  SUB: port q8
-  BX3: port p12c0
-  VCC: vcc r2 5V
-  SS: switch r2 r5 l=$\mathrm{SW3}_1$
-  R9: resistor r5 s5 10k
-  G9: ground s5
-  SUB: port r9
+  VCC: vcc 2,2 5V
+  SA0: switch 2,2 5,2 l=$\mathrm{SW1}_1$
+  R1: resistor 5,2 5,3 10k
+  G1: ground 5,3
+  A0: port 9,2
+  VCC: vcc 2,4 5V
+  SA1: switch 2,4 5,4 l=$\mathrm{SW1}_2$
+  R2: resistor 5,4 5,5 10k
+  G2: ground 5,5
+  A1: port 9,4
+  VCC: vcc 2,6 5V
+  SA2: switch 2,6 5,6 l=$\mathrm{SW1}_3$
+  R3: resistor 5,6 5,7 10k
+  G3: ground 5,7
+  A2: port 9,6
+  VCC: vcc 2,8 5V
+  SA3: switch 2,8 5,8 l=$\mathrm{SW1}_4$
+  R4: resistor 5,8 5,9 10k
+  G4: ground 5,9
+  A3: port 9,8
+  VCC: vcc 2,10 5V
+  SB0: switch 2,10 5,10 l=$\mathrm{SW2}_1$
+  R5: resistor 5,10 5,11 10k
+  G5: ground 5,11
+  U2A: xor 9,10.2 74HC86
+  SUB: port 8,11
+  BX0: port 12,10.2
+  VCC: vcc 2,12 5V
+  SB1: switch 2,12 5,12 l=$\mathrm{SW2}_2$
+  R6: resistor 5,12 5,13 10k
+  G6: ground 5,13
+  U2B: xor 9,12.2 74HC86
+  SUB: port 8,13
+  BX1: port 12,12.2
+  VCC: vcc 2,14 5V
+  SB2: switch 2,14 5,14 l=$\mathrm{SW2}_3$
+  R7: resistor 5,14 5,15 10k
+  G7: ground 5,15
+  U2C: xor 9,14.2 74HC86
+  SUB: port 8,15
+  BX2: port 12,14.2
+  VCC: vcc 2,16 5V
+  SB3: switch 2,16 5,16 l=$\mathrm{SW2}_4$
+  R8: resistor 5,16 5,17 10k
+  G8: ground 5,17
+  U2D: xor 9,16.2 74HC86
+  SUB: port 8,17
+  BX3: port 12,16.2
+  VCC: vcc 2,18 5V
+  SS: switch 2,18 5,18 l=$\mathrm{SW3}_1$
+  R9: resistor 5,18 5,19 10k
+  G9: ground 5,19
+  SUB: port 9,18
 wires:
-  - b5 -- b9
-  - d5 -- d9
-  - f5 -- f9
-  - h5 -- h9
-  - j5 -| U2A.a
-  - k8 |- U2A.b
-  - U2A.out -- j12c0
-  - l5 -| U2B.a
-  - m8 |- U2B.b
-  - U2B.out -- l12c0
-  - n5 -| U2C.a
-  - o8 |- U2C.b
-  - U2C.out -- n12c0
-  - p5 -| U2D.a
-  - q8 |- U2D.b
-  - U2D.out -- p12c0
-  - r5 -- r9
+  - 5,2 -- 9,2
+  - 5,4 -- 9,4
+  - 5,6 -- 9,6
+  - 5,8 -- 9,8
+  - 5,10 -| U2A.a
+  - 8,11 |- U2A.b
+  - U2A.out -- 12,10.2
+  - 5,12 -| U2B.a
+  - 8,13 |- U2B.b
+  - U2B.out -- 12,12.2
+  - 5,14 -| U2C.a
+  - 8,15 |- U2C.b
+  - U2C.out -- 12,14.2
+  - 5,16 -| U2D.a
+  - 8,17 |- U2D.b
+  - U2D.out -- 12,16.2
+  - 5,18 -- 9,18
 style:
   grid: on
   pitch: 1.2
@@ -188,58 +188,58 @@ style:
 ```circuit
 title: 図2 加算器 74HC283 と、あふれを作る 74HC86
 parts:
-  U1: ic h10 CD74HC283
-  VCC: vcc d10 5V
-  GU: ground l10
-  A0: port f6
-  BX0: port f4f0
-  A1: port g6
-  BX1: port g4f0
-  A2: port h6
-  BX2: port h4f0
-  A3: port i6
-  BX3: port i4f0
-  SUB: port j6
-  S0: port g14
-  S1: port g16f0
-  S2: port h14
-  S3: port h16f0
-  C4: port i14
-  A3: port n3
-  BX3: port p5
-  U3A: xor n6c0 74HC86
-  S3: port p8
-  U3B: xor n9e0 74HC86
-  C4: port p11
-  U3C: xor n12g0 74HC86
-  V: port n15g0
+  U1: ic 10,8 CD74HC283
+  VCC: vcc 10,4 5V
+  GU: ground 10,12
+  A0: port 6,6
+  BX0: port 4,6.5
+  A1: port 6,7
+  BX1: port 4,7.5
+  A2: port 6,8
+  BX2: port 4,8.5
+  A3: port 6,9
+  BX3: port 4,9.5
+  SUB: port 6,10
+  S0: port 14,7
+  S1: port 16,7.5
+  S2: port 14,8
+  S3: port 16,8.5
+  C4: port 14,9
+  A3: port 3,14
+  BX3: port 5,16
+  U3A: xor 6,14.2 74HC86
+  S3: port 8,16
+  U3B: xor 9,14.4 74HC86
+  C4: port 11,16
+  U3C: xor 12,14.6 74HC86
+  V: port 15,14.6
 wires:
-  - U1.VCC |- d10
-  - U1.GND |- l10
-  - U1.A0 -| f6
-  - U1.B0 -| f4f0
-  - U1.A1 -| g6
-  - U1.B1 -| g4f0
-  - U1.A2 -| h6
-  - U1.B2 -| h4f0
-  - U1.A3 -| i6
-  - U1.B3 -| i4f0
-  - U1.CIN -| j6
-  - U1.S0 -| g14
-  - U1.S1 -| g16f0
-  - U1.S2 -| h14
-  - U1.S3 -| h16f0
-  - U1.COUT -| i14
-  - n3 -| U3A.a
-  - p5 |- U3A.b
+  - U1.VCC |- 10,4
+  - U1.GND |- 10,12
+  - U1.A0 -| 6,6
+  - U1.B0 -| 4,6.5
+  - U1.A1 -| 6,7
+  - U1.B1 -| 4,7.5
+  - U1.A2 -| 6,8
+  - U1.B2 -| 4,8.5
+  - U1.A3 -| 6,9
+  - U1.B3 -| 4,9.5
+  - U1.CIN -| 6,10
+  - U1.S0 -| 14,7
+  - U1.S1 -| 16,7.5
+  - U1.S2 -| 14,8
+  - U1.S3 -| 16,8.5
+  - U1.COUT -| 14,9
+  - 3,14 -| U3A.a
+  - 5,16 |- U3A.b
   - U3A.out -| U3B.a
-  - p8 |- U3B.b
+  - 8,16 |- U3B.b
   - U3B.out -| U3C.a
-  - p11 |- U3C.b
-  - U3C.out -- n15g0
+  - 11,16 |- U3C.b
+  - U3C.out -- 15,14.6
 notes:
-  - text m7f0 small blue: "P3"
-  - text m10f0 small blue: "C3"
+  - text 7,13.5 small blue: "P3"
+  - text 10,13.5 small blue: "C3"
 style:
   grid: on
   pitch: 1.2
@@ -259,37 +259,37 @@ style:
 ```circuit
 title: 図3 答えの表示 (LED 6 つ)
 parts:
-  S0: port b2
-  R10: resistor b3 b6 820
-  D1: led b6 b9 red
-  GD1: ground b9
-  S1: port d2
-  R11: resistor d3 d6 820
-  D2: led d6 d9 red
-  GD2: ground d9
-  S2: port f2
-  R12: resistor f3 f6 820
-  D3: led f6 f9 red
-  GD3: ground f9
-  S3: port h2
-  R13: resistor h3 h6 820
-  D4: led h6 h9 red
-  GD4: ground h9
-  C4: port j2
-  R14: resistor j3 j6 820
-  D5: led j6 j9 green
-  GD5: ground j9
-  V: port l2
-  R15: resistor l3 l6 820
-  D6: led l6 l9 yellow
-  GD6: ground l9
+  S0: port 2,2
+  R10: resistor 3,2 6,2 820
+  D1: led 6,2 9,2 red
+  GD1: ground 9,2
+  S1: port 2,4
+  R11: resistor 3,4 6,4 820
+  D2: led 6,4 9,4 red
+  GD2: ground 9,4
+  S2: port 2,6
+  R12: resistor 3,6 6,6 820
+  D3: led 6,6 9,6 red
+  GD3: ground 9,6
+  S3: port 2,8
+  R13: resistor 3,8 6,8 820
+  D4: led 6,8 9,8 red
+  GD4: ground 9,8
+  C4: port 2,10
+  R14: resistor 3,10 6,10 820
+  D5: led 6,10 9,10 green
+  GD5: ground 9,10
+  V: port 2,12
+  R15: resistor 3,12 6,12 820
+  D6: led 6,12 9,12 yellow
+  GD6: ground 9,12
 wires:
-  - b2 -- b3
-  - d2 -- d3
-  - f2 -- f3
-  - h2 -- h3
-  - j2 -- j3
-  - l2 -- l3
+  - 2,2 -- 3,2
+  - 2,4 -- 3,4
+  - 2,6 -- 3,6
+  - 2,8 -- 3,8
+  - 2,10 -- 3,10
+  - 2,12 -- 3,12
 style:
   grid: on
   pitch: 1.2

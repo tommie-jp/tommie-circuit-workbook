@@ -23,30 +23,30 @@ device: H4
 ```circuit
 title: 図1 ダイオードに逆向きの 4 V をかけて直列治具で測る
 parts:
-  J1: sma e2 mirror CH0
-  C1: capacitor e3 e5 100n
-  D1: diode e8 e6 1N4007
-  C2: capacitor e9 e11 100n
-  J2: sma e12 CH1
-  R1: resistor c6 e6 100k
-  R2: resistor c8 e8 100k
-  VR1: potentiometer b8 b4 l=$\mathrm{VR}_1$
-  V1: vsource a4 a8 5
-  G1: ground f2
-  G2: ground f12
+  J1: sma 2,5 mirror CH0
+  C1: capacitor 3,5 5,5 100n
+  D1: diode 8,5 6,5 1N4007
+  C2: capacitor 9,5 11,5 100n
+  J2: sma 12,5 CH1
+  R1: resistor 6,3 6,5 100k
+  R2: resistor 8,3 8,5 100k
+  VR1: potentiometer 8,2 4,2 l=$\mathrm{VR}_1$
+  V1: vsource 4,1 8,1 5
+  G1: ground 2,6
+  G2: ground 12,6
 wires:
-  - J1.1 -- e3
-  - e5 -- e6
-  - e8 -- e9
-  - e11 -- J2.1
-  - J1.2 -- f2
-  - J2.2 -- f12
-  - c6 |- VR1.w
-  - c8 -- b8
-  - b4 -- a4
-  - b8 -- a8
+  - J1.1 -- 3,5
+  - 5,5 -- 6,5
+  - 8,5 -- 9,5
+  - 11,5 -- J2.1
+  - J1.2 -- 2,6
+  - J2.2 -- 12,6
+  - 6,3 |- VR1.w
+  - 8,3 -- 8,2
+  - 4,2 -- 4,1
+  - 8,2 -- 8,1
 notes:
-  - text b5d0 center: 10 kΩ
+  - text 5,2.3 center: 10 kΩ
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/13-junction-capacitance.svg)

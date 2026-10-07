@@ -23,21 +23,21 @@ title: 図1 7805 で 5V を作る (V1 は AD3 の電源、7 から 10 V)
 parts:
   V1: vsource vin gnd 10
   G1: ground gnd
-  U1: regulator b5 7805
-  Cin: capacitor b3 d3 0.33u
-  Cout: capacitor b7 d7 0.1u
-  RL: resistor b9 d9 1k
-  Rled: resistor b11 c11 680
-  Dled: led c11 d11 red
-  M1: voltmeter b13 d13 l=$\mathrm{CH1}$
+  U1: regulator 5,2 7805
+  Cin: capacitor 3,2 3,4 0.33u
+  Cout: capacitor 7,2 7,4 0.1u
+  RL: resistor 9,2 9,4 1k
+  Rled: resistor 11,2 11,3 680
+  Dled: led 11,3 11,4 red
+  M1: voltmeter 13,2 13,4 l=$\mathrm{CH1}$
 points:
-  vin: b1
-  gnd: d1
+  vin: 1,2
+  gnd: 1,4
 wires:
-  - vin -- b3 -- U1.in
-  - U1.out -- b7 -- b9 -- b11 -- b13
-  - U1.gnd -- d5
-  - gnd -- d3 -- d5 -- d7 -- d9 -- d11 -- d13
+  - vin -- 3,2 -- U1.in
+  - U1.out -- 7,2 -- 9,2 -- 11,2 -- 13,2
+  - U1.gnd -- 5,4
+  - gnd -- 3,4 -- 5,4 -- 7,4 -- 9,4 -- 11,4 -- 13,4
 style:
   grid: on
 ```

@@ -22,23 +22,23 @@ device: H4
 ```circuit
 title: 図1 1 m + 継ぎ目 + 1 m、先は 50 Ω の Load (継ぎ目は等価回路)
 parts:
-  J1: sma b2 mirror CH0
-  TL1: tline b3 b5 50 l=$\mathrm{TL}_1$
-  L1: inductor b6 b8 5n
-  TL2: tline b9 b11 50 l=$\mathrm{TL}_2$
-  R1: resistor b12 d12 50
-  G1: ground c2
-  G2: ground d12
+  J1: sma 2,2 mirror CH0
+  TL1: tline 3,2 5,2 50 l=$\mathrm{TL}_1$
+  L1: inductor 6,2 8,2 5n
+  TL2: tline 9,2 11,2 50 l=$\mathrm{TL}_2$
+  R1: resistor 12,2 12,4 50
+  G1: ground 2,3
+  G2: ground 12,4
 wires:
-  - J1.1 -- b3
-  - b5 -- b6
-  - b8 -- b9
-  - b11 -- b12
-  - J1.2 -- c2
+  - J1.1 -- 3,2
+  - 5,2 -- 6,2
+  - 8,2 -- 9,2
+  - 11,2 -- 12,2
+  - J1.2 -- 2,3
 notes:
-  - text b4h5 center: 1 m
-  - text b10h5 center: 1 m
-  - text b7h5 center: 継ぎ目
+  - text 4.5,2.7 center: 1 m
+  - text 10.5,2.7 center: 1 m
+  - text 7.5,2.7 center: 継ぎ目
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/09-connector-discontinuity.svg)

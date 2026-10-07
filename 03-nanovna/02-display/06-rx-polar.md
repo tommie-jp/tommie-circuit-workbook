@@ -44,18 +44,18 @@ title: 図1 CH0 の先に R L C を直列 (1 端子)
 parts:
   M1:
     type: device
-    at: b2
+    at: 2,2
     label: NanoVNA
     pins: [CH0, CH1]
     turn: mirror
-  R1: resistor a4i0i0 a5i0i0 22
-  L1: inductor a6i0i0 a7i0i0 100n
-  C1: capacitor a8i0i0 c8i0i0 100p
-  G1: ground c8i0i0
+  R1: resistor 4,1.88 5,1.88 22
+  L1: inductor 6,1.88 7,1.88 100n
+  C1: capacitor 8,1.88 8,3.88 100p
+  G1: ground 8,3.88
 wires:
-  - M1.CH0 -| a4i0i0
-  - a5i0i0 -- a6i0i0
-  - a7i0i0 -- a8i0i0
+  - M1.CH0 -| 4,1.88
+  - 5,1.88 -- 6,1.88
+  - 7,1.88 -- 8,1.88
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/circuit/06-rx-polar.svg)

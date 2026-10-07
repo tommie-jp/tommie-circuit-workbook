@@ -33,18 +33,18 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 i1 l=$\mathrm{W1}$
-  M1: voltmeter c3 i3 l=$\mathrm{CH1}$
-  R1: resistor c5 g5 4.7k
-  L1: inductor c7 g7 100m i=IL
-  C1: capacitor c9 g9 100n i=IC
-  Rs: resistor g11 i11 100 i=I
-  M2: voltmeter g13 i13 l=$\mathrm{CH2}$
-  G1: ground i1
+  V1: sine 1,3 1,9 l=$\mathrm{W1}$
+  M1: voltmeter 3,3 3,9 l=$\mathrm{CH1}$
+  R1: resistor 5,3 5,7 4.7k
+  L1: inductor 7,3 7,7 100m i=IL
+  C1: capacitor 9,3 9,7 100n i=IC
+  Rs: resistor 11,7 11,9 100 i=I
+  M2: voltmeter 13,7 13,9 l=$\mathrm{CH2}$
+  G1: ground 1,9
 wires:
-  - c1 -- c3 -- c5 -- c7 -- c9
-  - g5 -- g7 -- g9 -- g11 -- g13
-  - i1 -- i3 -- i11 -- i13
+  - 1,3 -- 3,3 -- 5,3 -- 7,3 -- 9,3
+  - 5,7 -- 7,7 -- 9,7 -- 11,7 -- 13,7
+  - 1,9 -- 3,9 -- 11,9 -- 13,9
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/08-parallel-resonance.svg)

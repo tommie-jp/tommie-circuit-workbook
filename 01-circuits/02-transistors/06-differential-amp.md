@@ -20,35 +20,35 @@ board: BB
 ```circuit
 title: 図1 差動対で電流を振り分ける (2 つのコレクタを CH1・CH2 で見る)
 parts:
-  VCC: vcc b4 5V
-  R1: resistor b4 e4 10k
-  R2: resistor g4 i4 10k
-  G2: ground i4
-  VR1: potentiometer b14 f14 10k
-  G3: ground f14
-  RC1: resistor b7 d7 220
-  D1: led d7 f7
-  Q1: npn g7
-  RC2: resistor b11 d11 220
-  D2: led d11 f11
-  Q2: npn g11 mirror
-  RE: resistor i9 k9 220
-  G4: ground k9
-  M1: voltmeter f8 h8 l=$\mathrm{CH1}$
-  G5: ground h8
-  M2: voltmeter f10 h10 l=$\mathrm{CH2}$
-  G6: ground h10
+  VCC: vcc 4,2 5V
+  R1: resistor 4,2 4,5 10k
+  R2: resistor 4,7 4,9 10k
+  G2: ground 4,9
+  VR1: potentiometer 14,2 14,6 10k
+  G3: ground 14,6
+  RC1: resistor 7,2 7,4 220
+  D1: led 7,4 7,6
+  Q1: npn 7,7
+  RC2: resistor 11,2 11,4 220
+  D2: led 11,4 11,6
+  Q2: npn 11,7 mirror
+  RE: resistor 9,9 9,11 220
+  G4: ground 9,11
+  M1: voltmeter 8,6 8,8 l=$\mathrm{CH1}$
+  G5: ground 8,8
+  M2: voltmeter 10,6 10,8 l=$\mathrm{CH2}$
+  G6: ground 10,8
 wires:
-  - f7 -- f8
-  - f11 -- f10
-  - b4 -- b7 -- b11 -- b14
-  - e4 -- g4 -- Q1.B
+  - 7,6 -- 8,6
+  - 11,6 -- 10,6
+  - 4,2 -- 7,2 -- 11,2 -- 14,2
+  - 4,5 -- 4,7 -- Q1.B
   - VR1.w |- Q2.B
-  - f7 -- Q1.C
-  - f11 -- Q2.C
-  - Q1.E -- i7
-  - Q2.E -- i11
-  - i7 -- i9 -- i11
+  - 7,6 -- Q1.C
+  - 11,6 -- Q2.C
+  - Q1.E -- 7,9
+  - Q2.E -- 11,9
+  - 7,9 -- 9,9 -- 11,9
 style:
   grid: on
 ```

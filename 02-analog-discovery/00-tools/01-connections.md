@@ -21,13 +21,13 @@ GND につなぐ。ここでは同じ 2 点を、リード線の順を変えて�
 ```circuit
 title: 図1 同じ 2 点を極性を変えて読む
 parts:
-  V1: vsource a1 c1 5
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  M2: voltmeter c5 a5 l=$\mathrm{CH2}$
-  G1: ground c1
+  V1: vsource 1,1 1,3 5
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  M2: voltmeter 5,3 5,1 l=$\mathrm{CH2}$
+  G1: ground 1,3
 wires:
-  - a1 -- a3 -- a5
-  - c1 -- c3 -- c5
+  - 1,1 -- 3,1 -- 5,1
+  - 1,3 -- 3,3 -- 5,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/circuit/01-connections.svg)

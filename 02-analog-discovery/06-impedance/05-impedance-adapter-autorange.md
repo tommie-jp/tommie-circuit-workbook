@@ -23,17 +23,17 @@ title: 図1 アダプタを挟んだ接続
 parts:
   AD:
     type: device
-    at: a1
+    at: 1,1
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
   ADP:
     type: device
-    at: a9
+    at: 9,1
     label: Z Analyzer Adapter
     pins: [W1, GND, 1+, 1-, 2+, 2-, DUT+, DUT-]
   DUT:
     type: device
-    at: a17
+    at: 17,1
     label: DUT
     pins: [P1, P2]
 wires:

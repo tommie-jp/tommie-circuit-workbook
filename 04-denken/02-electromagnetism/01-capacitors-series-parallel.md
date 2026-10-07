@@ -31,20 +31,20 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  E1: battery c1 e1 5
-  R1: resistor c1 c3 10k
-  S1: switch c3 c5
-  C1: capacitor c5 c7 2.2u
-  C2: capacitor c7 c9 4.7u
-  V1: voltmeter a5 a7
-  V2: voltmeter a7 a9
-  G1: ground e1
+  E1: battery 1,3 1,5 5
+  R1: resistor 1,3 3,3 10k
+  S1: switch 3,3 5,3
+  C1: capacitor 5,3 7,3 2.2u
+  C2: capacitor 7,3 9,3 4.7u
+  V1: voltmeter 5,1 7,1
+  V2: voltmeter 7,1 9,1
+  G1: ground 1,5
 wires:
-  - a5 -- c5
-  - a7 -- c7
-  - a9 -- c9
-  - c9 -- e9
-  - e1 -- e9
+  - 5,1 -- 5,3
+  - 7,1 -- 7,3
+  - 9,1 -- 9,3
+  - 9,3 -- 9,5
+  - 1,5 -- 9,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/01-capacitors-series-parallel-1.svg)
@@ -55,15 +55,15 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  E1: battery c1 e1 5
-  R1: resistor c1 c3 10k
-  S1: switch c3 c5
-  C1: capacitor c7 e7 2.2u
-  C2: capacitor c10 e10 4.7u
-  G1: ground e1
+  E1: battery 1,3 1,5 5
+  R1: resistor 1,3 3,3 10k
+  S1: switch 3,3 5,3
+  C1: capacitor 7,3 7,5 2.2u
+  C2: capacitor 10,3 10,5 4.7u
+  G1: ground 1,5
 wires:
-  - c5 -- c7 -- c10
-  - e1 -- e7 -- e10
+  - 5,3 -- 7,3 -- 10,3
+  - 1,5 -- 7,5 -- 10,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/01-capacitors-series-parallel-2.svg)

@@ -32,20 +32,20 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  W1: sine c1 i1 l=$\mathrm{W1}$
-  L1: inductor c4 d4 l=$\mathrm{L_1}$
-  L2: inductor d4 e4f0 l=$\mathrm{L_2}$
-  M1: voltmeter c7 e7f0 l=$\mathrm{CH1}$
-  Rr: resistor e4f0 i4 150 l=$\mathrm{R_{ref}}$
-  M2: voltmeter e9f0 i9 l=$\mathrm{CH2}$
-  G1: ground i1
+  W1: sine 1,3 1,9 l=$\mathrm{W1}$
+  L1: inductor 4,3 4,4 l=$\mathrm{L_1}$
+  L2: inductor 4,4 4,5.5 l=$\mathrm{L_2}$
+  M1: voltmeter 7,3 7,5.5 l=$\mathrm{CH1}$
+  Rr: resistor 4,5.5 4,9 150 l=$\mathrm{R_{ref}}$
+  M2: voltmeter 9,5.5 9,9 l=$\mathrm{CH2}$
+  G1: ground 1,9
 wires:
-  - c1 -- c4 -- c7
-  - e4f0 -- e7f0 -- e9f0
-  - i1 -- i4 -- i9
+  - 1,3 -- 4,3 -- 7,3
+  - 4,5.5 -- 7,5.5 -- 9,5.5
+  - 1,9 -- 4,9 -- 9,9
 notes:
-  - text c4c3 left small: 始め
-  - text d4c3 left small: 始め
+  - text 4.3,3.2 left small: 始め
+  - text 4.3,4.2 left small: 始め
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/08-series-aiding-opposing.svg)

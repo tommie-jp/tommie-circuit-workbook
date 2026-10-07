@@ -136,43 +136,43 @@ ROM の列 (Op0 = ENT、Op1 = /CLR、Op2 = /LD) を U1 のピンへつなぐだ�
 ```circuit
 title: 図1 プログラムカウンタ 74HC163 とクロック
 parts:
-  U1: ic g14 74HC163
-  P0: port e6f0
-  P1: port f7
-  P2: port f8f0
-  GD: ground g12 r90
-  VE: vcc g3f0 5V
-  ENT: port h6
-  W1: square h4f0 i4f0 l=W1
-  GW: ground k4f0
-  A0: port f20
-  A1: port f21f0
-  A2: port g20
-  A3: port g21f0
-  VCC: vcc c13f5 5V
-  CLR: port b14
-  LDn: port c15
-  G1: ground k14
+  U1: ic 14,7 74HC163
+  P0: port 6,5.5
+  P1: port 7,6
+  P2: port 8,6.5
+  GD: ground 12,7 r90
+  VE: vcc 3,7.5 5V
+  ENT: port 6,8
+  W1: square 4,8.5 4,9.5 l=W1
+  GW: ground 4,11.5
+  A0: port 20,6
+  A1: port 21,6.5
+  A2: port 20,7
+  A3: port 21,7.5
+  VCC: vcc 13.5,3.5 5V
+  CLR: port 14,2
+  LDn: port 15,3
+  G1: ground 14,11
 wires:
-  - U1.A -| e6f0
-  - U1.B -| f7
-  - U1.C -| f8f0
-  - U1.D -| g12
-  - U1.ENP -| g3f0
-  - U1.ENT -| h6
-  - U1.CLK -| h4f0
-  - i4f0 -- k4f0
-  - U1.QA -| f20
-  - U1.QB -| f21f0
-  - U1.QC -| g20
-  - U1.QD -| g21f0
-  - U1.VCC |- c13f5
-  - U1.CLR |- b14
-  - U1.LOAD |- c15
-  - U1.GND |- k14
+  - U1.A -| 6,5.5
+  - U1.B -| 7,6
+  - U1.C -| 8,6.5
+  - U1.D -| 12,7
+  - U1.ENP -| 3,7.5
+  - U1.ENT -| 6,8
+  - U1.CLK -| 4,8.5
+  - 4,9.5 -- 4,11.5
+  - U1.QA -| 20,6
+  - U1.QB -| 21,6.5
+  - U1.QC -| 20,7
+  - U1.QD -| 21,7.5
+  - U1.VCC |- 13.5,3.5
+  - U1.CLR |- 14,2
+  - U1.LOAD |- 15,3
+  - U1.GND |- 14,11
 notes:
-  - text i18 small: "RCO (PIN 15) は開放"
-  - text j5 small: "W1: AD3 の波形発生器"
+  - text 18,9 small: "RCO (PIN 15) は開放"
+  - text 5,10 small: "W1: AD3 の波形発生器"
 style:
   grid: on
   pitch: 1.2
@@ -194,68 +194,68 @@ style:
 ```circuit
 title: 図2 メモリ (74HC154 + ダイオード) と命令の線
 parts:
-  U2: ic h14 74HC154
-  A0: port g6f0
-  A1: port h7
-  A2: port h6f0
-  A3: port i7
-  VCC: vcc b14f5 5V
-  GU: ground n14
-  D5: diode g24 e24
-  D6: diode g28 e28
-  VCC: vcc d22 5V
-  R7: resistor e22 g22 10k
-  LDn: port m22
-  VCC: vcc d26 5V
-  R10: resistor e26 g26 10k
-  P2: port m26
-  VCC: vcc d30 5V
-  R5: resistor e30 g30 10k
-  ENT: port m30
-  VCC: vcc d32 5V
-  R6: resistor e32 g32 10k
-  CLR: port m32
-  S1: button i33 k33
-  GR: ground k33
-  VCC: vcc d34 5V
-  R8: resistor e34 g34 10k
-  P0: port m34
-  VCC: vcc d36 5V
-  R9: resistor e36 g36 10k
-  P1: port m36
+  U2: ic 14,8 74HC154
+  A0: port 6,7.5
+  A1: port 7,8
+  A2: port 6,8.5
+  A3: port 7,9
+  VCC: vcc 14.5,2.5 5V
+  GU: ground 14,14
+  D5: diode 24,7 24,5
+  D6: diode 28,7 28,5
+  VCC: vcc 22,4 5V
+  R7: resistor 22,5 22,7 10k
+  LDn: port 22,13
+  VCC: vcc 26,4 5V
+  R10: resistor 26,5 26,7 10k
+  P2: port 26,13
+  VCC: vcc 30,4 5V
+  R5: resistor 30,5 30,7 10k
+  ENT: port 30,13
+  VCC: vcc 32,4 5V
+  R6: resistor 32,5 32,7 10k
+  CLR: port 32,13
+  S1: button 33,9 33,11
+  GR: ground 33,11
+  VCC: vcc 34,4 5V
+  R8: resistor 34,5 34,7 10k
+  P0: port 34,13
+  VCC: vcc 36,4 5V
+  R9: resistor 36,5 36,7 10k
+  P1: port 36,13
 wires:
-  - U2.A0 -| g6f0
-  - U2.A1 -| h7
-  - U2.A2 -| h6f0
-  - U2.A3 -| i7
-  - U2.VCC |- b14f5
-  - U2.GND |- n14
-  - U2.E1 |- n14
-  - U2.E2 |- n14
-  - U2.Y5 -| g18
-  - g18 -- b18 -- b28
-  - b24 -- e24
-  - b28 -- e28
-  - g24 -- g22
-  - g28 -- g26
-  - d22 -- e22
-  - g22 -- m22
-  - d26 -- e26
-  - g26 -- m26
-  - d30 -- e30
-  - g30 -- m30
-  - d32 -- e32
-  - g32 -- i32 -- m32
-  - i32 -- i33
-  - d34 -- e34
-  - g34 -- m34
-  - d36 -- e36
-  - g36 -- m36
+  - U2.A0 -| 6,7.5
+  - U2.A1 -| 7,8
+  - U2.A2 -| 6,8.5
+  - U2.A3 -| 7,9
+  - U2.VCC |- 14.5,2.5
+  - U2.GND |- 14,14
+  - U2.E1 |- 14,14
+  - U2.E2 |- 14,14
+  - U2.Y5 -| 18,7
+  - 18,7 -- 18,2 -- 28,2
+  - 24,2 -- 24,5
+  - 28,2 -- 28,5
+  - 24,7 -- 22,7
+  - 28,7 -- 26,7
+  - 22,4 -- 22,5
+  - 22,7 -- 22,13
+  - 26,4 -- 26,5
+  - 26,7 -- 26,13
+  - 30,4 -- 30,5
+  - 30,7 -- 30,13
+  - 32,4 -- 32,5
+  - 32,7 -- 32,9 -- 32,13
+  - 32,9 -- 33,9
+  - 34,4 -- 34,5
+  - 34,7 -- 34,13
+  - 36,4 -- 36,5
+  - 36,7 -- 36,13
 notes:
-  - text a20 small: "Y5 (PIN 6) だけが、アドレス 5 のとき L になる"
-  - text k24 small blue center: "D5: 命令 JUMP"
-  - text k28 small blue center: "D6: P2 を 0 にする"
-  - text n17 small: "E1・E2 (PIN 18・19) は GND につなぐと常に有効"
+  - text 20,1 small: "Y5 (PIN 6) だけが、アドレス 5 のとき L になる"
+  - text 24,11 small blue center: "D5: 命令 JUMP"
+  - text 28,11 small blue center: "D6: P2 を 0 にする"
+  - text 17,14 small: "E1・E2 (PIN 18・19) は GND につなぐと常に有効"
 style:
   grid: on
   pitch: 1.2
@@ -280,27 +280,27 @@ style:
 ```circuit
 title: 図3 アドレスの表示 (LED 4 つ)
 parts:
-  A0: port b2
-  R1: resistor b3 b6 820
-  D1: led b6 b9 red
-  GD1: ground b9
-  A1: port d2
-  R2: resistor d3 d6 820
-  D2: led d6 d9 red
-  GD2: ground d9
-  A2: port f2
-  R3: resistor f3 f6 820
-  D3: led f6 f9 red
-  GD3: ground f9
-  A3: port h2
-  R4: resistor h3 h6 820
-  D4: led h6 h9 red
-  GD4: ground h9
+  A0: port 2,2
+  R1: resistor 3,2 6,2 820
+  D1: led 6,2 9,2 red
+  GD1: ground 9,2
+  A1: port 2,4
+  R2: resistor 3,4 6,4 820
+  D2: led 6,4 9,4 red
+  GD2: ground 9,4
+  A2: port 2,6
+  R3: resistor 3,6 6,6 820
+  D3: led 6,6 9,6 red
+  GD3: ground 9,6
+  A3: port 2,8
+  R4: resistor 3,8 6,8 820
+  D4: led 6,8 9,8 red
+  GD4: ground 9,8
 wires:
-  - b2 -- b3
-  - d2 -- d3
-  - f2 -- f3
-  - h2 -- h3
+  - 2,2 -- 3,2
+  - 2,4 -- 3,4
+  - 2,6 -- 3,6
+  - 2,8 -- 3,8
 style:
   grid: on
   pitch: 1.2
@@ -634,79 +634,79 @@ measure: [vmax, vmin]
 ```circuit
 title: 図7 DIP スイッチのメモリ (アドレス 5 の語だけを書き換えられる)
 parts:
-  U2: ic l14 74HC154
-  A0: port k6f0
-  A1: port l7
-  A2: port l6f0
-  A3: port m7
-  VCC: vcc f14f5 5V
-  GU: ground r14
-  VCC: vcc d22 5V
-  R5: resistor e22 g22 10k
-  SW1a: switch h22 j22
-  ENT: port g24
-  VCC: vcc d25 5V
-  R6: resistor e25 g25 10k
-  SW1c: switch h25 j25
-  LDn: port g27
-  VCC: vcc d28 5V
-  R7: resistor e28 g28 10k
-  SW1d: switch h28 j28
-  P0: port g30
-  VCC: vcc d31 5V
-  R8: resistor e31 g31 10k
-  SW2a: switch h31 j31
-  P1: port g33
-  VCC: vcc d34 5V
-  R9: resistor e34 g34 10k
-  SW2b: switch h34 j34
-  P2: port g36
-  VCC: vcc d37 5V
-  R10: resistor e37 g37 10k
-  SW1b: switch h37 j37
-  CLR: port g43
-  S1: button h39 j39
-  GS: ground j39
+  U2: ic 14,12 74HC154
+  A0: port 6,11.5
+  A1: port 7,12
+  A2: port 6,12.5
+  A3: port 7,13
+  VCC: vcc 14.5,6.5 5V
+  GU: ground 14,18
+  VCC: vcc 22,4 5V
+  R5: resistor 22,5 22,7 10k
+  SW1a: switch 22,8 22,10
+  ENT: port 24,7
+  VCC: vcc 25,4 5V
+  R6: resistor 25,5 25,7 10k
+  SW1c: switch 25,8 25,10
+  LDn: port 27,7
+  VCC: vcc 28,4 5V
+  R7: resistor 28,5 28,7 10k
+  SW1d: switch 28,8 28,10
+  P0: port 30,7
+  VCC: vcc 31,4 5V
+  R8: resistor 31,5 31,7 10k
+  SW2a: switch 31,8 31,10
+  P1: port 33,7
+  VCC: vcc 34,4 5V
+  R9: resistor 34,5 34,7 10k
+  SW2b: switch 34,8 34,10
+  P2: port 36,7
+  VCC: vcc 37,4 5V
+  R10: resistor 37,5 37,7 10k
+  SW1b: switch 37,8 37,10
+  CLR: port 43,7
+  S1: button 39,8 39,10
+  GS: ground 39,10
 wires:
-  - U2.A0 -| k6f0
-  - U2.A1 -| l7
-  - U2.A2 -| l6f0
-  - U2.A3 -| m7
-  - U2.VCC |- f14f5
-  - U2.GND |- r14
-  - U2.E1 |- r14
-  - U2.E2 |- r14
-  - U2.Y5 -| k18
-  - k18 -- k37
-  - d22 -- e22
-  - g22 -- h22
-  - j22 -- k22
-  - g22 -- g24
-  - d25 -- e25
-  - g25 -- h25
-  - j25 -- k25
-  - g25 -- g27
-  - d28 -- e28
-  - g28 -- h28
-  - j28 -- k28
-  - g28 -- g30
-  - d31 -- e31
-  - g31 -- h31
-  - j31 -- k31
-  - g31 -- g33
-  - d34 -- e34
-  - g34 -- h34
-  - j34 -- k34
-  - g34 -- g36
-  - d37 -- e37
-  - g37 -- h37
-  - j37 -- k37
-  - g37 -- g39 -- g43
-  - g39 -- h39
+  - U2.A0 -| 6,11.5
+  - U2.A1 -| 7,12
+  - U2.A2 -| 6,12.5
+  - U2.A3 -| 7,13
+  - U2.VCC |- 14.5,6.5
+  - U2.GND |- 14,18
+  - U2.E1 |- 14,18
+  - U2.E2 |- 14,18
+  - U2.Y5 -| 18,11
+  - 18,11 -- 37,11
+  - 22,4 -- 22,5
+  - 22,7 -- 22,8
+  - 22,10 -- 22,11
+  - 22,7 -- 24,7
+  - 25,4 -- 25,5
+  - 25,7 -- 25,8
+  - 25,10 -- 25,11
+  - 25,7 -- 27,7
+  - 28,4 -- 28,5
+  - 28,7 -- 28,8
+  - 28,10 -- 28,11
+  - 28,7 -- 30,7
+  - 31,4 -- 31,5
+  - 31,7 -- 31,8
+  - 31,10 -- 31,11
+  - 31,7 -- 33,7
+  - 34,4 -- 34,5
+  - 34,7 -- 34,8
+  - 34,10 -- 34,11
+  - 34,7 -- 36,7
+  - 37,4 -- 37,5
+  - 37,7 -- 37,8
+  - 37,10 -- 37,11
+  - 37,7 -- 39,7 -- 43,7
+  - 39,7 -- 39,8
 notes:
-  - text n22 small: "SW1 と SW2 は 4 連 DIP スイッチ。SW1 の 1 から 4 番と SW2 の 1 と 2 番を使う"
-  - text o22 small: "スイッチを ON (閉) にした列は、アドレス 5 のとき L (0) になる"
-  - text p22 small: "OFF (開) の列は R で H (1) のまま"
+  - text 22,14 small: "SW1 と SW2 は 4 連 DIP スイッチ。SW1 の 1 から 4 番と SW2 の 1 と 2 番を使う"
+  - text 22,15 small: "スイッチを ON (閉) にした列は、アドレス 5 のとき L (0) になる"
+  - text 22,16 small: "OFF (開) の列は R で H (1) のまま"
 style:
   grid: off
   pitch: 1.2
@@ -900,93 +900,93 @@ DIP スイッチの接点の抵抗と定格は品による。この回路は 0.5
 ```circuit
 title: 図9 SRAM (AS6C62256) とデータ線
 parts:
-  U3: ic j14 62256
-  A0: port f6f0
-  A1: port g7
-  A2: port g8f0
-  A3: port h9
-  GA: ground o10
-  VCC: vcc c20 5V
-  R11: resistor e20 g20 10k
-  ENT: port h22f0
-  VCC: vcc c23 5V
-  R12: resistor e23 g23 10k
-  DQ1: port i25
-  VCC: vcc c26 5V
-  R13: resistor e26 g26 10k
-  LDn: port i28f0
-  VCC: vcc c29 5V
-  R14: resistor e29 g29 10k
-  P0: port j31
-  VCC: vcc c32 5V
-  R15: resistor e32 g32 10k
-  P1: port j34f0
-  VCC: vcc c35 5V
-  R16: resistor e35 g35 10k
-  P2: port k37
-  VCC: vcc c38 5V
-  R17: resistor e38 g38 10k
-  DQ6: port k40f0
-  VCC: vcc c41 5V
-  R18: resistor e41 g41 10k
-  DQ7: port l43
-  VCC: vcc d14f5 5V
-  GV: ground r14
-  OEn: port s17
-  WEn: port r18
+  U3: ic 14,10 62256
+  A0: port 6,6.5
+  A1: port 7,7
+  A2: port 8,7.5
+  A3: port 9,8
+  GA: ground 10,15
+  VCC: vcc 20,3 5V
+  R11: resistor 20,5 20,7 10k
+  ENT: port 22,8.5
+  VCC: vcc 23,3 5V
+  R12: resistor 23,5 23,7 10k
+  DQ1: port 25,9
+  VCC: vcc 26,3 5V
+  R13: resistor 26,5 26,7 10k
+  LDn: port 28,9.5
+  VCC: vcc 29,3 5V
+  R14: resistor 29,5 29,7 10k
+  P0: port 31,10
+  VCC: vcc 32,3 5V
+  R15: resistor 32,5 32,7 10k
+  P1: port 34,10.5
+  VCC: vcc 35,3 5V
+  R16: resistor 35,5 35,7 10k
+  P2: port 37,11
+  VCC: vcc 38,3 5V
+  R17: resistor 38,5 38,7 10k
+  DQ6: port 40,11.5
+  VCC: vcc 41,3 5V
+  R18: resistor 41,5 41,7 10k
+  DQ7: port 43,12
+  VCC: vcc 14.5,4.5 5V
+  GV: ground 14,18
+  OEn: port 17,19
+  WEn: port 18,18
 wires:
-  - U3.A0 -| f6f0
-  - U3.A1 -| g7
-  - U3.A2 -| g8f0
-  - U3.A3 -| h9
-  - U3.A4 -| o10
-  - U3.A5 -| o10
-  - U3.A6 -| o10
-  - U3.A7 -| o10
-  - U3.A8 -| o10
-  - U3.A9 -| o10
-  - U3.A10 -| o10
-  - U3.A11 -| o10
-  - U3.A12 -| o10
-  - U3.A13 -| o10
-  - U3.A14 -| o10
-  - U3.DQ0 -| h20f0
-  - c20 -- e20
-  - g20 -- h20f0
-  - h20f0 -- h22f0
-  - U3.DQ1 -| i23
-  - c23 -- e23
-  - g23 -- i23
-  - i23 -- i25
-  - U3.DQ2 -| i26f0
-  - c26 -- e26
-  - g26 -- i26f0
-  - i26f0 -- i28f0
-  - U3.DQ3 -| j29
-  - c29 -- e29
-  - g29 -- j29
-  - j29 -- j31
-  - U3.DQ4 -| j32f0
-  - c32 -- e32
-  - g32 -- j32f0
-  - j32f0 -- j34f0
-  - U3.DQ5 -| k35
-  - c35 -- e35
-  - g35 -- k35
-  - k35 -- k37
-  - U3.DQ6 -| k38f0
-  - c38 -- e38
-  - g38 -- k38f0
-  - k38f0 -- k40f0
-  - U3.DQ7 -| l41
-  - c41 -- e41
-  - g41 -- l41
-  - l41 -- l43
-  - U3.VCC |- d14f5
-  - U3.VSS |- r14
-  - U3.CE |- r14
-  - U3.OE |- s17
-  - U3.WE |- r18
+  - U3.A0 -| 6,6.5
+  - U3.A1 -| 7,7
+  - U3.A2 -| 8,7.5
+  - U3.A3 -| 9,8
+  - U3.A4 -| 10,15
+  - U3.A5 -| 10,15
+  - U3.A6 -| 10,15
+  - U3.A7 -| 10,15
+  - U3.A8 -| 10,15
+  - U3.A9 -| 10,15
+  - U3.A10 -| 10,15
+  - U3.A11 -| 10,15
+  - U3.A12 -| 10,15
+  - U3.A13 -| 10,15
+  - U3.A14 -| 10,15
+  - U3.DQ0 -| 20,8.5
+  - 20,3 -- 20,5
+  - 20,7 -- 20,8.5
+  - 20,8.5 -- 22,8.5
+  - U3.DQ1 -| 23,9
+  - 23,3 -- 23,5
+  - 23,7 -- 23,9
+  - 23,9 -- 25,9
+  - U3.DQ2 -| 26,9.5
+  - 26,3 -- 26,5
+  - 26,7 -- 26,9.5
+  - 26,9.5 -- 28,9.5
+  - U3.DQ3 -| 29,10
+  - 29,3 -- 29,5
+  - 29,7 -- 29,10
+  - 29,10 -- 31,10
+  - U3.DQ4 -| 32,10.5
+  - 32,3 -- 32,5
+  - 32,7 -- 32,10.5
+  - 32,10.5 -- 34,10.5
+  - U3.DQ5 -| 35,11
+  - 35,3 -- 35,5
+  - 35,7 -- 35,11
+  - 35,11 -- 37,11
+  - U3.DQ6 -| 38,11.5
+  - 38,3 -- 38,5
+  - 38,7 -- 38,11.5
+  - 38,11.5 -- 40,11.5
+  - U3.DQ7 -| 41,12
+  - 41,3 -- 41,5
+  - 41,7 -- 41,12
+  - 41,12 -- 43,12
+  - U3.VCC |- 14.5,4.5
+  - U3.VSS |- 14,18
+  - U3.CE |- 14,18
+  - U3.OE |- 17,19
+  - U3.WE |- 18,18
 style:
   grid: off
   pitch: 1.2
@@ -1005,48 +1005,48 @@ style:
 ```circuit
 title: 図10 データの書き込み側 (74HC245)
 parts:
-  U4: dip20 j16 74HC245
-  SD0: port h7g0
-  SD1: port i8
-  SD2: port i9e0
-  SD3: port i10i0
-  SD4: port j11c0
-  SD5: port j12g0
-  SD6: port k13
-  SD7: port k14e0
-  VCC: vcc e13 5V
-  VCC: vcc e17a5 5V
-  GN: ground o15
-  ENT: port i18
-  DQ1: port i19e0
-  LDn: port i20i0
-  P0: port j21c0
-  P1: port j22g0
-  P2: port k23
-  DQ6: port k24e0
-  DQ7: port k25i0
-  Yn: port h27g0
+  U4: dip20 16,10 74HC245
+  SD0: port 7,8.6
+  SD1: port 8,9
+  SD2: port 9,9.4
+  SD3: port 10,9.8
+  SD4: port 11,10.2
+  SD5: port 12,10.6
+  SD6: port 13,11
+  SD7: port 14,11.4
+  VCC: vcc 13,5 5V
+  VCC: vcc 17.5,5 5V
+  GN: ground 15,15
+  ENT: port 18,9
+  DQ1: port 19,9.4
+  LDn: port 20,9.8
+  P0: port 21,10.2
+  P1: port 22,10.6
+  P2: port 23,11
+  DQ6: port 24,11.4
+  DQ7: port 25,11.8
+  Yn: port 27,8.6
 wires:
-  - U4.A1 -| h7g0
-  - U4.A2 -| i8
-  - U4.A3 -| i9e0
-  - U4.A4 -| i10i0
-  - U4.A5 -| j11c0
-  - U4.A6 -| j12g0
-  - U4.A7 -| k13
-  - U4.A8 -| k14e0
-  - U4.DIR -| e13
-  - U4.VCC -| e17a5
-  - U4.GND -| o15
-  - U4.B1 -| i18
-  - U4.B2 -| i19e0
-  - U4.B3 -| i20i0
-  - U4.B4 -| j21c0
-  - U4.B5 -| j22g0
-  - U4.B6 -| k23
-  - U4.B7 -| k24e0
-  - U4.B8 -| k25i0
-  - U4.OE -| h27g0
+  - U4.A1 -| 7,8.6
+  - U4.A2 -| 8,9
+  - U4.A3 -| 9,9.4
+  - U4.A4 -| 10,9.8
+  - U4.A5 -| 11,10.2
+  - U4.A6 -| 12,10.6
+  - U4.A7 -| 13,11
+  - U4.A8 -| 14,11.4
+  - U4.DIR -| 13,5
+  - U4.VCC -| 17.5,5
+  - U4.GND -| 15,15
+  - U4.B1 -| 18,9
+  - U4.B2 -| 19,9.4
+  - U4.B3 -| 20,9.8
+  - U4.B4 -| 21,10.2
+  - U4.B5 -| 22,10.6
+  - U4.B6 -| 23,11
+  - U4.B7 -| 24,11.4
+  - U4.B8 -| 25,11.8
+  - U4.OE -| 27,8.6
 style:
   grid: off
   pitch: 1.2
@@ -1062,76 +1062,76 @@ style:
 ```circuit
 title: 図11 データのスイッチ (DIP スイッチ 2 個)
 parts:
-  VCC: vcc d4 5V
-  R19: resistor e4 g4 10k
-  SW1a: switch h4 j4
-  SD0: port g6
-  VCC: vcc d7 5V
-  R20: resistor e7 g7 10k
-  SW1b: switch h7 j7
-  SD1: port g9
-  VCC: vcc d10 5V
-  R21: resistor e10 g10 10k
-  SW1c: switch h10 j10
-  SD2: port g12
-  VCC: vcc d13 5V
-  R22: resistor e13 g13 10k
-  SW1d: switch h13 j13
-  SD3: port g15
-  VCC: vcc d16 5V
-  R23: resistor e16 g16 10k
-  SW2a: switch h16 j16
-  SD4: port g18
-  VCC: vcc d19 5V
-  R24: resistor e19 g19 10k
-  SW2b: switch h19 j19
-  SD5: port g21
-  VCC: vcc d22 5V
-  R25: resistor e22 g22 10k
-  SW2c: switch h22 j22
-  SD6: port g24
-  VCC: vcc d25 5V
-  R26: resistor e25 g25 10k
-  SW2d: switch h25 j25
-  SD7: port g27
-  GS: ground k25
+  VCC: vcc 4,4 5V
+  R19: resistor 4,5 4,7 10k
+  SW1a: switch 4,8 4,10
+  SD0: port 6,7
+  VCC: vcc 7,4 5V
+  R20: resistor 7,5 7,7 10k
+  SW1b: switch 7,8 7,10
+  SD1: port 9,7
+  VCC: vcc 10,4 5V
+  R21: resistor 10,5 10,7 10k
+  SW1c: switch 10,8 10,10
+  SD2: port 12,7
+  VCC: vcc 13,4 5V
+  R22: resistor 13,5 13,7 10k
+  SW1d: switch 13,8 13,10
+  SD3: port 15,7
+  VCC: vcc 16,4 5V
+  R23: resistor 16,5 16,7 10k
+  SW2a: switch 16,8 16,10
+  SD4: port 18,7
+  VCC: vcc 19,4 5V
+  R24: resistor 19,5 19,7 10k
+  SW2b: switch 19,8 19,10
+  SD5: port 21,7
+  VCC: vcc 22,4 5V
+  R25: resistor 22,5 22,7 10k
+  SW2c: switch 22,8 22,10
+  SD6: port 24,7
+  VCC: vcc 25,4 5V
+  R26: resistor 25,5 25,7 10k
+  SW2d: switch 25,8 25,10
+  SD7: port 27,7
+  GS: ground 25,11
 wires:
-  - d4 -- e4
-  - g4 -- h4
-  - j4 -- k4
-  - g4 -- g6
-  - d7 -- e7
-  - g7 -- h7
-  - j7 -- k7
-  - g7 -- g9
-  - d10 -- e10
-  - g10 -- h10
-  - j10 -- k10
-  - g10 -- g12
-  - d13 -- e13
-  - g13 -- h13
-  - j13 -- k13
-  - g13 -- g15
-  - d16 -- e16
-  - g16 -- h16
-  - j16 -- k16
-  - g16 -- g18
-  - d19 -- e19
-  - g19 -- h19
-  - j19 -- k19
-  - g19 -- g21
-  - d22 -- e22
-  - g22 -- h22
-  - j22 -- k22
-  - g22 -- g24
-  - d25 -- e25
-  - g25 -- h25
-  - j25 -- k25
-  - g25 -- g27
-  - k4 -- k25
+  - 4,4 -- 4,5
+  - 4,7 -- 4,8
+  - 4,10 -- 4,11
+  - 4,7 -- 6,7
+  - 7,4 -- 7,5
+  - 7,7 -- 7,8
+  - 7,10 -- 7,11
+  - 7,7 -- 9,7
+  - 10,4 -- 10,5
+  - 10,7 -- 10,8
+  - 10,10 -- 10,11
+  - 10,7 -- 12,7
+  - 13,4 -- 13,5
+  - 13,7 -- 13,8
+  - 13,10 -- 13,11
+  - 13,7 -- 15,7
+  - 16,4 -- 16,5
+  - 16,7 -- 16,8
+  - 16,10 -- 16,11
+  - 16,7 -- 18,7
+  - 19,4 -- 19,5
+  - 19,7 -- 19,8
+  - 19,10 -- 19,11
+  - 19,7 -- 21,7
+  - 22,4 -- 22,5
+  - 22,7 -- 22,8
+  - 22,10 -- 22,11
+  - 22,7 -- 24,7
+  - 25,4 -- 25,5
+  - 25,7 -- 25,8
+  - 25,10 -- 25,11
+  - 25,7 -- 27,7
+  - 4,11 -- 25,11
 notes:
-  - text n4 small: "SW1 と SW2 は 4 連 DIP スイッチ。ON (閉) にした位置が 0、OFF (開) が 1"
-  - text o4 small: "SD0 から SD7 の 8 ビット。カウンタへ戻るのは 6 ビット"
+  - text 4,14 small: "SW1 と SW2 は 4 連 DIP スイッチ。ON (閉) にした位置が 0、OFF (開) が 1"
+  - text 4,15 small: "SD0 から SD7 の 8 ビット。カウンタへ戻るのは 6 ビット"
 style:
   grid: off
   pitch: 1.2
@@ -1147,46 +1147,46 @@ style:
 ```circuit
 title: 図12 動作の切り替え (RUN / PROG)・書き込みボタン・CLR
 parts:
-  VCC: vcc d6 5V
-  R29: resistor e6 g6 10k
-  WEn: port g4
-  VCC: vcc d10 5V
-  R28: resistor e10 g10 10k
-  Yn: port g12
-  VCC: vcc d14 5V
-  R27: resistor e14 g14 10k
-  OEn: port g16
-  S2: button i6 i10
-  S3: spdt n17 mirror
-  GS: ground q19
-  VCC: vcc d22 5V
-  R30: resistor e22 g22 10k
-  CLR: port h24
-  S1: button i22 k22
-  GC: ground l22
-  D7: diode g22 g20
-  DQ1: port g18
+  VCC: vcc 6,4 5V
+  R29: resistor 6,5 6,7 10k
+  WEn: port 4,7
+  VCC: vcc 10,4 5V
+  R28: resistor 10,5 10,7 10k
+  Yn: port 12,7
+  VCC: vcc 14,4 5V
+  R27: resistor 14,5 14,7 10k
+  OEn: port 16,7
+  S2: button 6,9 10,9
+  S3: spdt 17,14 mirror
+  GS: ground 19,17
+  VCC: vcc 22,4 5V
+  R30: resistor 22,5 22,7 10k
+  CLR: port 24,8
+  S1: button 22,9 22,11
+  GC: ground 22,12
+  D7: diode 22,7 20,7
+  DQ1: port 18,7
 wires:
-  - d6 -- e6
-  - g6 -- i6
-  - g6 -- g4
-  - d10 -- e10
-  - g10 -- i10 -- l10
-  - g10 -- g12
-  - d14 -- e14
-  - g14 -- l14
-  - g14 -- g16
-  - S3.1 -| l14
-  - S3.2 -| l10
-  - S3.in -| q19
-  - d22 -- e22
-  - g22 -- h22
-  - h22 -- i22
-  - k22 -- l22
-  - h22 -- h24
-  - g20 -- g18
+  - 6,4 -- 6,5
+  - 6,7 -- 6,9
+  - 6,7 -- 4,7
+  - 10,4 -- 10,5
+  - 10,7 -- 10,9 -- 10,12
+  - 10,7 -- 12,7
+  - 14,4 -- 14,5
+  - 14,7 -- 14,12
+  - 14,7 -- 16,7
+  - S3.1 -| 14,12
+  - S3.2 -| 10,12
+  - S3.in -| 19,17
+  - 22,4 -- 22,5
+  - 22,7 -- 22,8
+  - 22,8 -- 22,9
+  - 22,11 -- 22,12
+  - 22,8 -- 24,8
+  - 20,7 -- 18,7
 notes:
-  - text a4 small: "S3 は RUN の位置で描いた (OEn が L、Yn は R28 で H)"
+  - text 4,1 small: "S3 は RUN の位置で描いた (OEn が L、Yn は R28 で H)"
 style:
   grid: on
   pitch: 1.2

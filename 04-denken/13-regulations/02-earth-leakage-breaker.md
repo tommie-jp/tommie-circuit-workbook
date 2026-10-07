@@ -35,27 +35,27 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 i1 l=$\mathrm{W1}$
-  Rgo: resistor c1 c4 10 i=Igo
-  M1: voltmeter a1 a4 l=$\mathrm{CH1}$
-  Rload: resistor c7 f7 220
-  Rret: resistor f7 i7 10 i=Iret
-  M2: voltmeter f9 i9 l=$\mathrm{CH2}$
-  S1: switch c12 e12
-  Rleak: resistor e12 g12 1k i=Ileak
-  Rg: resistor g12 i12 100
-  G1: ground i1
-  G2: ground i12
+  V1: sine 1,3 1,9 l=$\mathrm{W1}$
+  Rgo: resistor 1,3 4,3 10 i=Igo
+  M1: voltmeter 1,1 4,1 l=$\mathrm{CH1}$
+  Rload: resistor 7,3 7,6 220
+  Rret: resistor 7,6 7,9 10 i=Iret
+  M2: voltmeter 9,6 9,9 l=$\mathrm{CH2}$
+  S1: switch 12,3 12,5
+  Rleak: resistor 12,5 12,7 1k i=Ileak
+  Rg: resistor 12,7 12,9 100
+  G1: ground 1,9
+  G2: ground 12,9
 wires:
-  - a1 -- c1
-  - a4 -- c4
-  - c4 -- c7 -- c12
-  - f7 -- f9
-  - i1 -- i7 -- i9
+  - 1,1 -- 1,3
+  - 4,1 -- 4,3
+  - 4,3 -- 7,3 -- 12,3
+  - 7,6 -- 9,6
+  - 1,9 -- 7,9 -- 9,9
 notes:
-  - text b8 blue: 往き
-  - text j4 blue: 帰り
-  - text j12 blue: 大地
+  - text 8,2 blue: 往き
+  - text 4,10 blue: 帰り
+  - text 12,10 blue: 大地
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/13-regulations/circuit/02-earth-leakage-breaker-1.svg)
@@ -158,23 +158,23 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 i1 l=$\mathrm{FG}$
-  Rgo: resistor c1 c4 10
-  Rload: resistor c7 f7 220
-  Rret: resistor f7 i7 10 i=Iret
-  M2: voltmeter f9 i9 l=$\mathrm{CH2}$
-  S1: switch c12 e12
-  Rleak: resistor e12 g12 1k
-  Rg: resistor g12 i12 100 i=Ileak
-  M1: voltmeter g15 i15 l=$\mathrm{CH1}$
-  G1: ground i1
-  G2: ground i12
+  V1: sine 1,3 1,9 l=$\mathrm{FG}$
+  Rgo: resistor 1,3 4,3 10
+  Rload: resistor 7,3 7,6 220
+  Rret: resistor 7,6 7,9 10 i=Iret
+  M2: voltmeter 9,6 9,9 l=$\mathrm{CH2}$
+  S1: switch 12,3 12,5
+  Rleak: resistor 12,5 12,7 1k
+  Rg: resistor 12,7 12,9 100 i=Ileak
+  M1: voltmeter 15,7 15,9 l=$\mathrm{CH1}$
+  G1: ground 1,9
+  G2: ground 12,9
 wires:
-  - c4 -- c7 -- c12
-  - f7 -- f9
-  - i1 -- i7 -- i9
-  - g12 -- g15
-  - i12 -- i15
+  - 4,3 -- 7,3 -- 12,3
+  - 7,6 -- 9,6
+  - 1,9 -- 7,9 -- 9,9
+  - 12,7 -- 15,7
+  - 12,9 -- 15,9
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/13-regulations/circuit/02-earth-leakage-breaker-2.svg)

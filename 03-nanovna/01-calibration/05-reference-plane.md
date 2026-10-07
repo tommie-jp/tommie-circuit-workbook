@@ -22,18 +22,18 @@ title: 図1 30 cm のケーブルの先の Open
 parts:
   M1:
     type: device
-    at: c2b0c0
+    at: 2,3.12
     label: NanoVNA
     pins: [CH0, CH1]
     turn: mirror
-  J1: sma c9
-  G1: ground d9
+  J1: sma 9,3
+  G1: ground 9,4
 wires:
   - M1.CH0 -- J1.1
-  - J1.2 -- d9
+  - J1.2 -- 9,4
 notes:
-  - text b5 blue center: 30 cm (vf 0.66) のケーブル
-  - text b9 blue center: Open (先端)
+  - text 5,2 blue center: 30 cm (vf 0.66) のケーブル
+  - text 9,2 blue center: Open (先端)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/circuit/05-reference-plane.svg)

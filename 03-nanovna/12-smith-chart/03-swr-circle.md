@@ -42,28 +42,28 @@ Smith チャートの**中心からの距離は |Γ| (ガンマ)** で、SWR = (
 ```circuit
 title: 図1 4 段の擬似線路と 100 Ω
 parts:
-  J1: sma c2 mirror
-  G0: ground d2
-  C1: capacitor c5 e5 390p
-  L1: inductor c5 c9 2.2u
-  C2: capacitor c9 e9 820p
-  L2: inductor c9 c13 2.2u
-  C3: capacitor c13 e13 820p
-  L3: inductor c13 c17 2.2u
-  C4: capacitor c17 e17 820p
-  L4: inductor c17 c21 2.2u
-  C5: capacitor c21 e21 390p
-  R1: resistor c25 e25 100
-  G1: ground e13
+  J1: sma 2,3 mirror
+  G0: ground 2,4
+  C1: capacitor 5,3 5,5 390p
+  L1: inductor 5,3 9,3 2.2u
+  C2: capacitor 9,3 9,5 820p
+  L2: inductor 9,3 13,3 2.2u
+  C3: capacitor 13,3 13,5 820p
+  L3: inductor 13,3 17,3 2.2u
+  C4: capacitor 17,3 17,5 820p
+  L4: inductor 17,3 21,3 2.2u
+  C5: capacitor 21,3 21,5 390p
+  R1: resistor 25,3 25,5 100
+  G1: ground 13,5
 wires:
-  - J1.1 -- c5
-  - J1.2 -- d2
-  - e5 -- e9
-  - e9 -- e13
-  - e13 -- e17
-  - e17 -- e21
-  - c21 -- c25
-  - e21 -- e25
+  - J1.1 -- 5,3
+  - J1.2 -- 2,4
+  - 5,5 -- 9,5
+  - 9,5 -- 13,5
+  - 13,5 -- 17,5
+  - 17,5 -- 21,5
+  - 21,3 -- 25,3
+  - 21,5 -- 25,5
 style:
   pitch: 1.0
 ```
@@ -164,40 +164,40 @@ markers:
 ```circuit
 title: 図4 8 段の擬似線路と 100 Ω
 parts:
-  J1: sma c2 mirror
-  G0: ground d2
-  C1: capacitor c5 e5 390p
-  L1: inductor c5 c9 2.2u
-  C2: capacitor c9 e9 820p
-  L2: inductor c9 c13 2.2u
-  C3: capacitor c13 e13 820p
-  L3: inductor c13 c17 2.2u
-  C4: capacitor c17 e17 820p
-  L4: inductor c17 c21 2.2u
-  C5: capacitor c21 e21 820p
-  L5: inductor c21 c25 2.2u
-  C6: capacitor c25 e25 820p
-  L6: inductor c25 c29 2.2u
-  C7: capacitor c29 e29 820p
-  L7: inductor c29 c33 2.2u
-  C8: capacitor c33 e33 820p
-  L8: inductor c33 c37 2.2u
-  C9: capacitor c37 e37 390p
-  R1: resistor c41 e41 100
-  G1: ground e13
+  J1: sma 2,3 mirror
+  G0: ground 2,4
+  C1: capacitor 5,3 5,5 390p
+  L1: inductor 5,3 9,3 2.2u
+  C2: capacitor 9,3 9,5 820p
+  L2: inductor 9,3 13,3 2.2u
+  C3: capacitor 13,3 13,5 820p
+  L3: inductor 13,3 17,3 2.2u
+  C4: capacitor 17,3 17,5 820p
+  L4: inductor 17,3 21,3 2.2u
+  C5: capacitor 21,3 21,5 820p
+  L5: inductor 21,3 25,3 2.2u
+  C6: capacitor 25,3 25,5 820p
+  L6: inductor 25,3 29,3 2.2u
+  C7: capacitor 29,3 29,5 820p
+  L7: inductor 29,3 33,3 2.2u
+  C8: capacitor 33,3 33,5 820p
+  L8: inductor 33,3 37,3 2.2u
+  C9: capacitor 37,3 37,5 390p
+  R1: resistor 41,3 41,5 100
+  G1: ground 13,5
 wires:
-  - J1.1 -- c5
-  - J1.2 -- d2
-  - e5 -- e9
-  - e9 -- e13
-  - e13 -- e17
-  - e17 -- e21
-  - e21 -- e25
-  - e25 -- e29
-  - e29 -- e33
-  - e33 -- e37
-  - c37 -- c41
-  - e37 -- e41
+  - J1.1 -- 5,3
+  - J1.2 -- 2,4
+  - 5,5 -- 9,5
+  - 9,5 -- 13,5
+  - 13,5 -- 17,5
+  - 17,5 -- 21,5
+  - 21,5 -- 25,5
+  - 25,5 -- 29,5
+  - 29,5 -- 33,5
+  - 33,5 -- 37,5
+  - 37,3 -- 41,3
+  - 37,5 -- 41,5
 style:
   pitch: 1.0
 ```
@@ -286,25 +286,25 @@ markers:
 ```circuit
 title: 図7 4 段の擬似線路の先を開放
 parts:
-  J1: sma c2 mirror
-  G0: ground d2
-  C1: capacitor c5 e5 390p
-  L1: inductor c5 c9 2.2u
-  C2: capacitor c9 e9 820p
-  L2: inductor c9 c13 2.2u
-  C3: capacitor c13 e13 820p
-  L3: inductor c13 c17 2.2u
-  C4: capacitor c17 e17 820p
-  L4: inductor c17 c21 2.2u
-  C5: capacitor c21 e21 390p
-  G1: ground e13
+  J1: sma 2,3 mirror
+  G0: ground 2,4
+  C1: capacitor 5,3 5,5 390p
+  L1: inductor 5,3 9,3 2.2u
+  C2: capacitor 9,3 9,5 820p
+  L2: inductor 9,3 13,3 2.2u
+  C3: capacitor 13,3 13,5 820p
+  L3: inductor 13,3 17,3 2.2u
+  C4: capacitor 17,3 17,5 820p
+  L4: inductor 17,3 21,3 2.2u
+  C5: capacitor 21,3 21,5 390p
+  G1: ground 13,5
 wires:
-  - J1.1 -- c5
-  - J1.2 -- d2
-  - e5 -- e9
-  - e9 -- e13
-  - e13 -- e17
-  - e17 -- e21
+  - J1.1 -- 5,3
+  - J1.2 -- 2,4
+  - 5,5 -- 9,5
+  - 9,5 -- 13,5
+  - 13,5 -- 17,5
+  - 17,5 -- 21,5
 style:
   pitch: 1.0
 ```

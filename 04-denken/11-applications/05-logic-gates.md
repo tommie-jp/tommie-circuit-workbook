@@ -32,39 +32,39 @@ style:
   standard: jis
   pitch: 1.4
 parts:
-  VCC: vcc a1 5V
-  SA: switch a1 c1
-  RA: resistor c1 e1 10k
-  GA: ground e1
-  VCC: vcc g1 5V
-  SB: switch g1 j1
-  RB: resistor j1 l1 10k
-  GB: ground l1
-  U3A: not c7 74HC04
-  U1A: and f7 74HC08
-  U2A: or i7 74HC32
-  R3: resistor c9 c11 1k
-  D3: led c11 c13
-  G3: ground c13
-  R1: resistor f9 f11 1k
-  D1: led f11 f13
-  G1: ground f13
-  R2: resistor i9 i11 1k
-  D2: led i11 i13
-  G2: ground i13
+  VCC: vcc 1,1 5V
+  SA: switch 1,1 1,3
+  RA: resistor 1,3 1,5 10k
+  GA: ground 1,5
+  VCC: vcc 1,7 5V
+  SB: switch 1,7 1,10
+  RB: resistor 1,10 1,12 10k
+  GB: ground 1,12
+  U3A: not 7,3 74HC04
+  U1A: and 7,6 74HC08
+  U2A: or 7,9 74HC32
+  R3: resistor 9,3 11,3 1k
+  D3: led 11,3 13,3
+  G3: ground 13,3
+  R1: resistor 9,6 11,6 1k
+  D1: led 11,6 13,6
+  G1: ground 13,6
+  R2: resistor 9,9 11,9 1k
+  D2: led 11,9 13,9
+  G2: ground 13,9
 wires:
-  - c1 -- c3 -- U3A.in
-  - U1A.a -| c3
-  - U2A.a -| c3
-  - j1 -- j5
-  - U2A.b -| j5
-  - U1A.b -| j5
-  - U3A.out -- c9
-  - U1A.out -- f9
-  - U2A.out -- i9
+  - 1,3 -- 3,3 -- U3A.in
+  - U1A.a -| 3,3
+  - U2A.a -| 3,3
+  - 1,10 -- 5,10
+  - U2A.b -| 5,10
+  - U1A.b -| 5,10
+  - U3A.out -- 9,3
+  - U1A.out -- 9,6
+  - U2A.out -- 9,9
 notes:
-  - text b2 blue: A
-  - text i2 blue: B
+  - text 2,2 blue: A
+  - text 2,9 blue: B
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/11-applications/circuit/05-logic-gates.svg)

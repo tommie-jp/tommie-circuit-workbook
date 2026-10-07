@@ -32,18 +32,18 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{W1}$
-  R1: resistor c1 c3 1k
-  C1: capacitor c3 c5 100n
-  M1: voltmeter a1 a3 l=$\mathrm{CH1}$
-  M2: voltmeter e3 e5 l=$\mathrm{CH2}$
-  G1: ground g1
+  V1: sine 1,3 1,7 l=$\mathrm{W1}$
+  R1: resistor 1,3 3,3 1k
+  C1: capacitor 3,3 5,3 100n
+  M1: voltmeter 1,1 3,1 l=$\mathrm{CH1}$
+  M2: voltmeter 3,5 5,5 l=$\mathrm{CH2}$
+  G1: ground 1,7
 wires:
-  - a1 -- c1
-  - a3 -- c3
-  - c3 -- e3
-  - c5 -- e5 -- g5
-  - g1 -- g5
+  - 1,1 -- 1,3
+  - 3,1 -- 3,3
+  - 3,3 -- 3,5
+  - 5,3 -- 5,5 -- 5,7
+  - 1,7 -- 5,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/04-rc-series-1.svg)
@@ -107,16 +107,16 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{FG}$
-  M1: voltmeter c3 g3 l=$\mathrm{CH1}$
-  R1: resistor c3 c6 1k i=I
-  C1: capacitor c6 g6 100n
-  M2: voltmeter c9 g9 l=$\mathrm{CH2}$
-  G1: ground g1
+  V1: sine 1,3 1,7 l=$\mathrm{FG}$
+  M1: voltmeter 3,3 3,7 l=$\mathrm{CH1}$
+  R1: resistor 3,3 6,3 1k i=I
+  C1: capacitor 6,3 6,7 100n
+  M2: voltmeter 9,3 9,7 l=$\mathrm{CH2}$
+  G1: ground 1,7
 wires:
-  - c1 -- c3
-  - c6 -- c9
-  - g1 -- g3 -- g6 -- g9
+  - 1,3 -- 3,3
+  - 6,3 -- 9,3
+  - 1,7 -- 3,7 -- 6,7 -- 9,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/04-rc-series-2.svg)

@@ -24,56 +24,56 @@ D-FF (クロックの立ち上がりで D の値を Q に写す) として、も
 ```circuit
 title: 図1 D-FFとQバー帰還のT-FF (CD4013)
 parts:
-  U1: ic h15 CD4013B
-  VCC: vcc a6 5V
-  SWD: switch a6 c6 l=$\mathrm{SW}_\mathrm{D}$
-  RpdD: resistor c6 e6 10k l=$R_\mathrm{pdD}$
-  GD: ground e6
-  VCC: vcc a3 5V
-  SWC1: button a3 c3 l=$\mathrm{SW_{C1}}$
-  RpdC1: resistor c3 e3 10k l=$R_\mathrm{pdC1}$
-  GC1: ground e3
-  VCC: vcc k3 5V
-  SWC2: button k3 m3 l=$\mathrm{SW_{C2}}$
-  RpdC2: resistor m3 o3 10k l=$R_\mathrm{pdC2}$
-  GC2: ground o3
-  VCC: vcc c15 5V
-  GU1: ground l15
-  GS1: ground h10
-  GS2: ground j12a5
-  RQ1: resistor j25 k25 1k l=$R_\mathrm{Q1}$
-  DQ1: led k25 l25 red l=$D_\mathrm{Q1}$
-  GQ1: ground l25
-  RQ2: resistor j22 k22 1k l=$R_\mathrm{Q2}$
-  DQ2: led k22 l22 red l=$D_\mathrm{Q2}$
-  GQ2: ground l22
+  U1: ic 15,8 CD4013B
+  VCC: vcc 6,1 5V
+  SWD: switch 6,1 6,3 l=$\mathrm{SW}_\mathrm{D}$
+  RpdD: resistor 6,3 6,5 10k l=$R_\mathrm{pdD}$
+  GD: ground 6,5
+  VCC: vcc 3,1 5V
+  SWC1: button 3,1 3,3 l=$\mathrm{SW_{C1}}$
+  RpdC1: resistor 3,3 3,5 10k l=$R_\mathrm{pdC1}$
+  GC1: ground 3,5
+  VCC: vcc 3,11 5V
+  SWC2: button 3,11 3,13 l=$\mathrm{SW_{C2}}$
+  RpdC2: resistor 3,13 3,15 10k l=$R_\mathrm{pdC2}$
+  GC2: ground 3,15
+  VCC: vcc 15,3 5V
+  GU1: ground 15,12
+  GS1: ground 10,8
+  GS2: ground 12.5,10
+  RQ1: resistor 25,10 25,11 1k l=$R_\mathrm{Q1}$
+  DQ1: led 25,11 25,12 red l=$D_\mathrm{Q1}$
+  GQ1: ground 25,12
+  RQ2: resistor 22,10 22,11 1k l=$R_\mathrm{Q2}$
+  DQ2: led 22,11 22,12 red l=$D_\mathrm{Q2}$
+  GQ2: ground 22,12
 wires:
   # FF1 (D-FF): D1 と CLOCK1 を左から入れる
-  - U1.D1 -| c8
-  - c8 -- c6
-  - U1.CLOCK1 -| c4
-  - c4 -- c3
+  - U1.D1 -| 8,3
+  - 8,3 -- 6,3
+  - U1.CLOCK1 -| 4,3
+  - 4,3 -- 3,3
   # FF2 (T-FF): Qバー2 を D2 へ戻し、CLOCK2 は左のボタンから
-  - U1./Q2 -| n17
-  - n17 -- n11 -- h11f0
-  - U1.D2 -| h11f0
-  - U1.CLOCK2 -| m4
-  - m4 -- m3
+  - U1./Q2 -| 17,14
+  - 17,14 -- 11,14 -- 11,8.5
+  - U1.D2 -| 11,8.5
+  - U1.CLOCK2 -| 4,13
+  - 4,13 -- 3,13
   # 使わない SET・RESET は GND
-  - U1.SET1 -| g10f0
-  - U1.RESET1 -| h10
-  - h10 -- g10f0
-  - U1.SET2 -| j12a5
-  - U1.RESET2 -| j12a5
+  - U1.SET1 -| 10,7.5
+  - U1.RESET1 -| 10,8
+  - 10,8 -- 10,7.5
+  - U1.SET2 -| 12.5,10
+  - U1.RESET2 -| 12.5,10
   # 電源
-  - c15 |- U1.VDD
-  - U1.VSS |- l15
+  - 15,3 |- U1.VDD
+  - U1.VSS |- 15,12
   # 出力
-  - U1.Q1 -| j25
-  - U1.Q2 -| j22
+  - U1.Q1 -| 25,10
+  - U1.Q2 -| 22,10
 notes:
-  - text m25 blue center: Q1
-  - text m22 blue center: Q2
+  - text 25,13 blue center: Q1
+  - text 22,13 blue center: Q2
 style:
   grid: on
   pitch: 1.2

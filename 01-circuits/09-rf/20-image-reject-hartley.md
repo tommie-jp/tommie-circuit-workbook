@@ -62,132 +62,132 @@ I の LO を高域側 (+45°)、Q の LO を低域側 (−45°) にしたので�
 ```circuit
 title: 図1 位相法のイメージ除去 (W1 が LO、W2 が RF)
 parts:
-  U3A: opamp j25e0 +up
-  U3B: opamp t25e0 +up
-  C13: capacitor j28e0 j30e0 1u
-  R3: resistor j31e0 j34e0 6.8k
-  C14: capacitor j35e0 l35d0 470p
-  G17: ground l35d0
-  M1: voltmeter k31d0 m31d0 l=$\mathrm{CH1}$
-  VREF: port m31d0
-  C15: capacitor t28e0 t30e0 1u
-  C16: capacitor t31e0 t34e0 470p
-  R4: resistor t35e0 v35d0 6.8k
-  VREF: port v35d0
-  R7: resistor j36e0 j39e0 100k
-  R8: resistor t36e0 t38e0 91k
-  VR1: resistor-var t38e0 t40e0 20k l=$\mathrm{VR1}$
-  R9: resistor j42e0 j45e0 100k
-  U4B: opamp o44d0 +down
-  VREF: port s43
-  M2: voltmeter p49d0 r49d0 l=$\mathrm{CH2}$
-  VREF: port r49d0
-  VCC: vcc w32 5V
-  R5: resistor w32 y32 10k
-  R6: resistor y32 aa32 10k
-  G11: ground aa32
-  U4A: opamp y39d0 +up
-  VREF: port y43d0
-  VCC: vcc ab4 5V
-  C9: capacitor ab4 ad4 100n
-  C10: capacitor ab7 ad7 100n
-  C18: capacitor ab10 ad10 100n
-  C19: capacitor ab13 ad13 100n
-  G13: ground ad4
-  G14: ground ad7
-  G15: ground ad10
-  G16: ground ad13
-  W2: sine h1 j1 l=$\mathrm{W2}$
-  G4: ground j1
-  C5: capacitor h5 h6 10n
-  C6: capacitor r5 r6 10n
-  U1: ic j16 SA612
-  VCC: vcc g16 5V
-  G6: ground m16
-  C7: capacitor k11 l11 10n
-  G5: ground l11
-  C11: capacitor j19 l19 470p
-  G7: ground l19
-  U2: ic t16 SA612
-  VCC: vcc q16 5V
-  G9: ground w16
-  C8: capacitor u11 v11 10n
-  G8: ground v11
-  C12: capacitor t19 v19 470p
-  G10: ground v19
-  W1: sine n5 p5 l=$\mathrm{W1}$
-  G1: ground p5
-  C2: capacitor n8 n9 470p
-  R2: resistor n10 o10 680
-  G2: ground o10
-  C3: capacitor n12 n13 10n
-  R1: resistor n7 p7 680
-  C1: capacitor p7 q7 470p
-  G3: ground q7
-  C4: capacitor s9 t9 10n
+  U3A: opamp 25,10.4 +up
+  U3B: opamp 25,20.4 +up
+  C13: capacitor 28,10.4 30,10.4 1u
+  R3: resistor 31,10.4 34,10.4 6.8k
+  C14: capacitor 35,10.4 35,12.3 470p
+  G17: ground 35,12.3
+  M1: voltmeter 31,11.3 31,13.3 l=$\mathrm{CH1}$
+  VREF: port 31,13.3
+  C15: capacitor 28,20.4 30,20.4 1u
+  C16: capacitor 31,20.4 34,20.4 470p
+  R4: resistor 35,20.4 35,22.3 6.8k
+  VREF: port 35,22.3
+  R7: resistor 36,10.4 39,10.4 100k
+  R8: resistor 36,20.4 38,20.4 91k
+  VR1: resistor-var 38,20.4 40,20.4 20k l=$\mathrm{VR1}$
+  R9: resistor 42,10.4 45,10.4 100k
+  U4B: opamp 44,15.3 +down
+  VREF: port 43,19
+  M2: voltmeter 49,16.3 49,18.3 l=$\mathrm{CH2}$
+  VREF: port 49,18.3
+  VCC: vcc 32,23 5V
+  R5: resistor 32,23 32,25 10k
+  R6: resistor 32,25 32,27 10k
+  G11: ground 32,27
+  U4A: opamp 39,25.3 +up
+  VREF: port 43,25.3
+  VCC: vcc 4,28 5V
+  C9: capacitor 4,28 4,30 100n
+  C10: capacitor 7,28 7,30 100n
+  C18: capacitor 10,28 10,30 100n
+  C19: capacitor 13,28 13,30 100n
+  G13: ground 4,30
+  G14: ground 7,30
+  G15: ground 10,30
+  G16: ground 13,30
+  W2: sine 1,8 1,10 l=$\mathrm{W2}$
+  G4: ground 1,10
+  C5: capacitor 5,8 6,8 10n
+  C6: capacitor 5,18 6,18 10n
+  U1: ic 16,10 SA612
+  VCC: vcc 16,7 5V
+  G6: ground 16,13
+  C7: capacitor 11,11 11,12 10n
+  G5: ground 11,12
+  C11: capacitor 19,10 19,12 470p
+  G7: ground 19,12
+  U2: ic 16,20 SA612
+  VCC: vcc 16,17 5V
+  G9: ground 16,23
+  C8: capacitor 11,21 11,22 10n
+  G8: ground 11,22
+  C12: capacitor 19,20 19,22 470p
+  G10: ground 19,22
+  W1: sine 5,14 5,16 l=$\mathrm{W1}$
+  G1: ground 5,16
+  C2: capacitor 8,14 9,14 470p
+  R2: resistor 10,14 10,15 680
+  G2: ground 10,15
+  C3: capacitor 12,14 13,14 10n
+  R1: resistor 7,14 7,16 680
+  C1: capacitor 7,16 7,17 470p
+  G3: ground 7,17
+  C4: capacitor 9,19 9,20 10n
 wires:
-  - U3A.out -- j27e0 -- j28e0
-  - j27e0 -- l27 -- l24
-  - l24 |- U3A.-
-  - U3B.out -- t27e0 -- t28e0
-  - t27e0 -- v27 -- v24
-  - v24 |- U3B.-
-  - j30e0 -- j31e0
-  - j31e0 -- k31d0
-  - j34e0 -- j35e0 -- j36e0
-  - t30e0 -- t31e0
-  - t34e0 -- t35e0 -- t36e0
-  - j39e0 -- j40e0 -- j42e0
-  - j40e0 -- o40 -- t40e0
-  - o40 -| U4B.-
-  - U4B.+ -| s43
-  - j45e0 -- j47e0 -- o47d0
-  - U4B.out -- o47d0 -- o49d0 -- p49d0
-  - y32 -- y35
-  - y35 -| U4A.+
-  - U4A.out -- y41d0 -- y43d0
-  - y41d0 -- aa41 -- aa38
-  - aa38 |- U4A.-
-  - ab4 -- ab13
-  - h1 -- h3
-  - h3 -- h5
-  - h3 -- r3
-  - r3 -- r5
-  - h6 -- h13
-  - U1.IN_A -| h13
-  - r6 -- r13
-  - U2.IN_A -| r13
-  - U1.IN_B -| k11
-  - U2.IN_B -| u11
-  - U1.GND |- m16
-  - U2.GND |- w16
-  - U1.VCC |- g16
-  - U2.VCC |- q16
-  - n5 -- n7
-  - n7 -- n8
-  - n9 -- n10
-  - n10 -- n12
-  - U1.OSC_B -| n13
-  - p7 -- p9
-  - p9 -- s9
-  - t9 -- x9
-  - x9 -- x13
-  - U2.OSC_B -| x13
-  - U1.OUT_A -| j19
-  - j19 -| U3A.+
-  - U2.OUT_A -| t19
-  - t19 -| U3B.+
+  - U3A.out -- 27,10.4 -- 28,10.4
+  - 27,10.4 -- 27,12 -- 24,12
+  - 24,12 |- U3A.-
+  - U3B.out -- 27,20.4 -- 28,20.4
+  - 27,20.4 -- 27,22 -- 24,22
+  - 24,22 |- U3B.-
+  - 30,10.4 -- 31,10.4
+  - 31,10.4 -- 31,11.3
+  - 34,10.4 -- 35,10.4 -- 36,10.4
+  - 30,20.4 -- 31,20.4
+  - 34,20.4 -- 35,20.4 -- 36,20.4
+  - 39,10.4 -- 40,10.4 -- 42,10.4
+  - 40,10.4 -- 40,15 -- 40,20.4
+  - 40,15 -| U4B.-
+  - U4B.+ -| 43,19
+  - 45,10.4 -- 47,10.4 -- 47,15.3
+  - U4B.out -- 47,15.3 -- 49,15.3 -- 49,16.3
+  - 32,25 -- 35,25
+  - 35,25 -| U4A.+
+  - U4A.out -- 41,25.3 -- 43,25.3
+  - 41,25.3 -- 41,27 -- 38,27
+  - 38,27 |- U4A.-
+  - 4,28 -- 13,28
+  - 1,8 -- 3,8
+  - 3,8 -- 5,8
+  - 3,8 -- 3,18
+  - 3,18 -- 5,18
+  - 6,8 -- 13,8
+  - U1.IN_A -| 13,8
+  - 6,18 -- 13,18
+  - U2.IN_A -| 13,18
+  - U1.IN_B -| 11,11
+  - U2.IN_B -| 11,21
+  - U1.GND |- 16,13
+  - U2.GND |- 16,23
+  - U1.VCC |- 16,7
+  - U2.VCC |- 16,17
+  - 5,14 -- 7,14
+  - 7,14 -- 8,14
+  - 9,14 -- 10,14
+  - 10,14 -- 12,14
+  - U1.OSC_B -| 13,14
+  - 7,16 -- 9,16
+  - 9,16 -- 9,19
+  - 9,20 -- 9,24
+  - 9,24 -- 13,24
+  - U2.OSC_B -| 13,24
+  - U1.OUT_A -| 19,10
+  - 19,10 -| U3A.+
+  - U2.OUT_A -| 19,20
+  - 19,20 -| U3B.+
 notes:
-  - text j27 small center: I
-  - text t27 small center: Q
-  - text h32f5 small center: I は低域側 (-45°)
-  - text r32f5 small center: Q は高域側 (+45°)
-  - text m45 small left: 反転加算
-  - text w41 small center: VREF 2.5 V
-  - text aa8f5 small center: パスコン (U1 から U4 の電源ピン)
-  - text ab24 small center: U3、U4 は MCP6002 (PIN 8 は +5V、PIN 4 は GND)
-  - text m10 small center: LO_I (+45°)
-  - text o8f5 small center: LO_Q (-45°)
+  - text 27,10 small center: I
+  - text 27,20 small center: Q
+  - text 32.5,8.5 small center: I は低域側 (-45°)
+  - text 32.5,18.5 small center: Q は高域側 (+45°)
+  - text 45,13 small left: 反転加算
+  - text 41,23 small center: VREF 2.5 V
+  - text 8.5,27.5 small center: パスコン (U1 から U4 の電源ピン)
+  - text 24,28 small center: U3、U4 は MCP6002 (PIN 8 は +5V、PIN 4 は GND)
+  - text 10,13 small center: LO_I (+45°)
+  - text 8.5,15.5 small center: LO_Q (-45°)
 style:
   pitch: 1
 ```

@@ -22,26 +22,26 @@ title: 図1 微分器
 parts:
   VP: vsource vp mid 5
   VN: vsource mid vm 5
-  G1: ground c2
-  V1: triangle b3 d3 1
-  G2: ground d3
-  Rs: resistor b3 b5 1k
-  Cin: capacitor b5 b7 100n
-  Rf: resistor a7 a10 7.5k
-  U1: opamp c9 +down
-  G3: ground d8
-  OUT: port c11
+  G1: ground 2,3
+  V1: triangle 3,2 3,4 1
+  G2: ground 3,4
+  Rs: resistor 3,2 5,2 1k
+  Cin: capacitor 5,2 7,2 100n
+  Rf: resistor 7,1 10,1 7.5k
+  U1: opamp 9,3 +down
+  G3: ground 8,4
+  OUT: port 11,3
 points:
-  vp: a1
-  vm: e1
-  mid: c1
+  vp: 1,1
+  vm: 1,5
+  mid: 1,3
 wires:
-  - mid -- c2
-  - b7 |- U1.-
-  - d8 |- U1.+
-  - b7 -- a7
-  - a10 -- c10
-  - U1.out -- c10 -- c11
+  - mid -- 2,3
+  - 7,2 |- U1.-
+  - 8,4 |- U1.+
+  - 7,2 -- 7,1
+  - 10,1 -- 10,3
+  - U1.out -- 10,3 -- 11,3
 style:
   grid: on
 ```

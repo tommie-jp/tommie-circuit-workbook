@@ -23,18 +23,18 @@ D-FF の働きは 1 つだけ。**クロック (CLK) が 0 から 1 に変わる
 ```circuit
 title: 図1 D フリップフロップ。CLK が 0 から 1 に変わる瞬間の D を Q に取り込む
 parts:
-  D: port e2
-  CLK: port h2
+  D: port 2,5
+  CLK: port 2,8
   U1:
     type: ic3
-    at: e6
+    at: 6,5
     label: D-FF
     pins: [D, CLK, Q]
-  Q: port e10
+  Q: port 10,5
 wires:
-  - e2 -- U1.D
-  - h2 -- h6 -- U1.CLK
-  - U1.Q -- e10
+  - 2,5 -- U1.D
+  - 2,8 -- 6,8 -- U1.CLK
+  - U1.Q -- 10,5
 style:
   pitch: 1.2
 ```

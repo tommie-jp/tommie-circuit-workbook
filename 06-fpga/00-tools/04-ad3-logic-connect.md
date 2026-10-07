@@ -33,11 +33,11 @@ title: 図1 Pico 2 の GP14・GP15 を AD3 の DIO0・DIO1 で読む
 parts:
   AD:
     type: device
-    at: e1
+    at: 1,5
     label: AD3
     pins: [GND, DIO0, DIO1]
     turn: mirror
-  MCU: pico2 c6
+  MCU: pico2 6,3
 wires:
   - AD.GND -| MCU.GND18
   - AD.DIO0 -| MCU.GP14

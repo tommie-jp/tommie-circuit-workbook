@@ -19,12 +19,12 @@ board: BB
 ```circuit
 title: 図1 ループバック (W1 を 1+ に直結)
 parts:
-  V1: square a1 c1 l=$\mathrm{W1}$
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  G1: ground c1
+  V1: square 1,1 1,3 l=$\mathrm{W1}$
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  G1: ground 1,3
 wires:
-  - a1 -- a3
-  - c1 -- c3
+  - 1,1 -- 3,1
+  - 1,3 -- 3,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/02-square-harmonics.svg)

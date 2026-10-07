@@ -29,31 +29,31 @@ FM の信号を作り、本物の電波は使わずに原理だけを確かめ�
 ```circuit
 title: 図1 スロープ検波 (W1 の FM を L1・C1 の斜面で AM に変え、D1 で検波)
 parts:
-  W1: sine a1 c1 l=$\mathrm{W1}$
-  GW: ground c1
-  R1: resistor a3 a5 10k
-  L1: inductor a7 c7 100u
-  GL: ground c7
-  C1: capacitor a9 c9 1000p
-  GC1: ground c9
-  M2: voltmeter a12 c12 l=$\mathrm{CH2}$
-  GM2: ground c12
-  D1: diode a14 a16 l=$\mathrm{D1}$
-  C2: capacitor a18 c18 2200p
-  GC2: ground c18
-  R2: resistor a20 c20 22k
-  GR2: ground c20
-  M1: voltmeter a23 c23 l=$\mathrm{CH1}$
-  GM1: ground c23
+  W1: sine 1,1 1,3 l=$\mathrm{W1}$
+  GW: ground 1,3
+  R1: resistor 3,1 5,1 10k
+  L1: inductor 7,1 7,3 100u
+  GL: ground 7,3
+  C1: capacitor 9,1 9,3 1000p
+  GC1: ground 9,3
+  M2: voltmeter 12,1 12,3 l=$\mathrm{CH2}$
+  GM2: ground 12,3
+  D1: diode 14,1 16,1 l=$\mathrm{D1}$
+  C2: capacitor 18,1 18,3 2200p
+  GC2: ground 18,3
+  R2: resistor 20,1 20,3 22k
+  GR2: ground 20,3
+  M1: voltmeter 23,1 23,3 l=$\mathrm{CH1}$
+  GM1: ground 23,3
 wires:
-  - a1 -- a3
-  - a5 -- a7
-  - a7 -- a9
-  - a9 -- a12
-  - a12 -- a14
-  - a16 -- a18
-  - a18 -- a20
-  - a20 -- a23
+  - 1,1 -- 3,1
+  - 5,1 -- 7,1
+  - 7,1 -- 9,1
+  - 9,1 -- 12,1
+  - 12,1 -- 14,1
+  - 16,1 -- 18,1
+  - 18,1 -- 20,1
+  - 20,1 -- 23,1
 style:
   pitch: 1.2
 ```

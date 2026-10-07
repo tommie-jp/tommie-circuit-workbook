@@ -21,15 +21,15 @@ LED 2 個の回路を組み、テスターの導通チェックでつながり�
 ```circuit
 title: 図1 2 つの LED を並列に点ける
 parts:
-  V1: vsource a2 e2 5
-  G1: ground e2
-  R1: resistor a4 c4 330
-  D1: led c4 e4
-  R2: resistor a6 c6 330
-  D2: led c6 e6
+  V1: vsource 2,1 2,5 5
+  G1: ground 2,5
+  R1: resistor 4,1 4,3 330
+  D1: led 4,3 4,5
+  R2: resistor 6,1 6,3 330
+  D2: led 6,3 6,5
 wires:
-  - a2 -- a4 -- a6
-  - e2 -- e4 -- e6
+  - 2,1 -- 4,1 -- 6,1
+  - 2,5 -- 4,5 -- 6,5
 style:
   grid: on
   pitch: 1.2

@@ -29,21 +29,21 @@ board: BB
 ```circuit
 title: 図1 単相の負荷と電力計の模型 (電圧コイルは電源側)
 parts:
-  V1: sine b1 f1 1 l=$\mathrm{W1}$
-  RP: resistor b4 f4 2.2k l=$\mathrm{R_P}$
-  RC: resistor f8 f6 10 i=I l=$\mathrm{R_C}$
-  RL: resistor b9 d9 100
-  C1: capacitor d9 f9 1u
-  G1: ground f1
+  V1: sine 1,2 1,6 1 l=$\mathrm{W1}$
+  RP: resistor 4,2 4,6 2.2k l=$\mathrm{R_P}$
+  RC: resistor 8,6 6,6 10 i=I l=$\mathrm{R_C}$
+  RL: resistor 9,2 9,4 100
+  C1: capacitor 9,4 9,6 1u
+  G1: ground 1,6
 wires:
-  - b1 -- b4 -- b9
-  - f1 -- f4 -- f6
-  - f8 -- f9
+  - 1,2 -- 4,2 -- 9,2
+  - 1,6 -- 4,6 -- 6,6
+  - 8,6 -- 9,6
 notes:
-  - text a1 blue: A (CH1)
-  - text f9a5 blue: B (CH2)
-  - box a3 f8f5 orange
-  - text a5 orange: 電力計の模型
+  - text 1,1 blue: A (CH1)
+  - text 9.5,6 blue: B (CH2)
+  - box 3,1 8.5,6.5 orange
+  - text 5,1 orange: 電力計の模型
 style:
   standard: jis
   grid: on

@@ -19,15 +19,15 @@ Wavegen の W1・W2 は独立にも、**同期して逆位相**にもできる�
 ```circuit
 title: 図1 W1・W2 を差動と片側で読む
 parts:
-  V1: sine a1 c1 l=$\mathrm{W1}$
-  V2: sine a5 c5 l=$\mathrm{W2}$
-  M2: voltmeter a3 c3 l=$\mathrm{CH2}$
-  M1: voltmeter e4 e6 l=$\mathrm{CH1}$
-  G1: ground c1
+  V1: sine 1,1 1,3 l=$\mathrm{W1}$
+  V2: sine 5,1 5,3 l=$\mathrm{W2}$
+  M2: voltmeter 3,1 3,3 l=$\mathrm{CH2}$
+  M1: voltmeter 4,5 6,5 l=$\mathrm{CH1}$
+  G1: ground 1,3
 wires:
-  - a1 -- a3 -- a4 -- e4
-  - a5 -- a6 -- e6
-  - c1 -- c3 -- c5
+  - 1,1 -- 3,1 -- 4,1 -- 4,5
+  - 5,1 -- 6,1 -- 6,5
+  - 1,3 -- 3,3 -- 5,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/08-differential-signal.svg)

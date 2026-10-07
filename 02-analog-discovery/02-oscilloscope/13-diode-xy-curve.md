@@ -20,17 +20,17 @@ AD3 の Tracer（9-6）はこれを自動でやってくれる専用の計器だ
 ```circuit
 title: 図1 ダイオードの順方向特性を掃引する
 parts:
-  W1: triangle a1 e1 1.5
-  R1: resistor a1 a4 330
-  D1: diode a4 c4
-  Rs: resistor c4 e4 22
-  M2: voltmeter c6 e6 l=$\mathrm{CH2}$
-  M1: voltmeter a9 e9 l=$\mathrm{CH1}$
-  G1: ground e1
+  W1: triangle 1,1 1,5 1.5
+  R1: resistor 1,1 4,1 330
+  D1: diode 4,1 4,3
+  Rs: resistor 4,3 4,5 22
+  M2: voltmeter 6,3 6,5 l=$\mathrm{CH2}$
+  M1: voltmeter 9,1 9,5 l=$\mathrm{CH1}$
+  G1: ground 1,5
 wires:
-  - a4 -- a9
-  - c4 -- c6
-  - e1 -- e4 -- e6 -- e9
+  - 4,1 -- 9,1
+  - 4,3 -- 6,3
+  - 1,5 -- 4,5 -- 6,5 -- 9,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/13-diode-xy-curve.svg)

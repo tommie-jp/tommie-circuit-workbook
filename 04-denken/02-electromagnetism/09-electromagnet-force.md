@@ -32,18 +32,18 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  B1: battery d1 h1 3
-  S1: switch d1 d3
-  R1: resistor d3 d6 10
-  A1: ammeter d6 d8
-  La: inductor d10 f10 l=$\mathrm{100T}$
-  Lb: inductor f10 h10 l=$\mathrm{100T}$
+  B1: battery 1,4 1,8 3
+  S1: switch 1,4 3,4
+  R1: resistor 3,4 6,4 10
+  A1: ammeter 6,4 8,4
+  La: inductor 10,4 10,6 l=$\mathrm{100T}$
+  Lb: inductor 10,6 10,8 l=$\mathrm{100T}$
 wires:
-  - d8 -- d10
-  - h1 -- h10
-  - f10 -- f12
+  - 8,4 -- 10,4
+  - 1,8 -- 10,8
+  - 10,6 -- 12,6
 notes:
-  - text f12 left small: 100 回の口出し (T)
+  - text 12,6 left small: 100 回の口出し (T)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/09-electromagnet-force.svg)

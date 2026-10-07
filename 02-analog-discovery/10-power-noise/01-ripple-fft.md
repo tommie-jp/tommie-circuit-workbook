@@ -20,24 +20,24 @@ board: BB
 ```circuit
 title: 図1 ブリッジ整流と平滑
 parts:
-  V1: sine a5 e5 12.7
-  D1: diode a5 a9 1N4007
-  D2: diode e5 a9 1N4007
-  D3: diode e12 a5 1N4007
-  D4: diode e12 e5 1N4007
-  Csmooth: capacitor a9 e12 470u
-  Rload: resistor h9 h12 1k
+  V1: sine 5,1 5,5 12.7
+  D1: diode 5,1 9,1 1N4007
+  D2: diode 5,5 9,1 1N4007
+  D3: diode 12,5 5,1 1N4007
+  D4: diode 12,5 5,5 1N4007
+  Csmooth: capacitor 9,1 12,5 470u
+  Rload: resistor 9,8 12,8 1k
   AD:
     type: device
-    at: k1
+    at: 1,11
     label: Analog Discovery
     pins: [GND, 1+, 1-]
 wires:
-  - a9 -- h9
-  - e12 -- h12
-  - AD.1+ -| h9
-  - AD.1- -| h12
-  - AD.GND -| h12
+  - 9,1 -- 9,8
+  - 12,5 -- 12,8
+  - AD.1+ -| 9,8
+  - AD.1- -| 12,8
+  - AD.GND -| 12,8
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/10-power-noise/circuit/01-ripple-fft.svg)

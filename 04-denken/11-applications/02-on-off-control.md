@@ -33,24 +33,24 @@ title: 図1 サーミスタ + 比較器 + ヒータ
 style:
   standard: jis
 parts:
-  V1: vsource a1 j1 5
-  Rfix: resistor a3 e3 10k
-  NTC1: thermistor-ntc e3 j3 10k
-  VR1: potentiometer a5 j5 10k
-  U1: opamp e7 +up LM358
-  Rb: resistor e9 g9 4.7k
-  Q1: npn g11
-  Rh: resistor a13 e13 100
-  G1: ground j1
+  V1: vsource 1,1 1,10 5
+  Rfix: resistor 3,1 3,5 10k
+  NTC1: thermistor-ntc 3,5 3,10 10k
+  VR1: potentiometer 5,1 5,10 10k
+  U1: opamp 7,5 +up LM358
+  Rb: resistor 9,5 9,7 4.7k
+  Q1: npn 11,7
+  Rh: resistor 13,1 13,5 100
+  G1: ground 1,10
 wires:
-  - e3 |- U1.+
+  - 3,5 |- U1.+
   - VR1.w |- U1.-
-  - U1.out -| e9
-  - g9 |- Q1.B
-  - e13 |- Q1.C
-  - Q1.E -| j11
-  - a1 -- a3 -- a5 -- a13
-  - j1 -- j3 -- j5 -- j11
+  - U1.out -| 9,5
+  - 9,7 |- Q1.B
+  - 13,5 |- Q1.C
+  - Q1.E -| 11,10
+  - 1,1 -- 3,1 -- 5,1 -- 13,1
+  - 1,10 -- 3,10 -- 5,10 -- 11,10
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/11-applications/circuit/02-on-off-control.svg)

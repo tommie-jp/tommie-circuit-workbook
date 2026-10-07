@@ -20,16 +20,16 @@ board: BB
 ```circuit
 title: 図1 方形波にボタンで異常を作り込む
 parts:
-  W1: square a1 c1 1.65
-  R1: resistor a1 a4 1k
-  M1: voltmeter a5 c5 l=$\mathrm{CH1}$
-  SW1: button a5 a7
-  R2: resistor a7 a9 330
-  G1: ground c1
+  W1: square 1,1 1,3 1.65
+  R1: resistor 1,1 4,1 1k
+  M1: voltmeter 5,1 5,3 l=$\mathrm{CH1}$
+  SW1: button 5,1 7,1
+  R2: resistor 7,1 9,1 330
+  G1: ground 1,3
 wires:
-  - a4 -- a5
-  - c1 -- c5
-  - a9 |- c5
+  - 4,1 -- 5,1
+  - 1,3 -- 5,3
+  - 9,1 |- 5,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/12-pulse-runt-timeout-trigger.svg)

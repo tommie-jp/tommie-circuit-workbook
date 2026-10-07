@@ -23,34 +23,34 @@ title: 図1 CD4013B に Pattern で Clock と Data を入れる
 parts:
   AD:
     type: device
-    at: c3a0f0
+    at: 3,3.05
     label: Analog Discovery
     pins: [V+, DIO2, DIO0, DIO1, GND]
     turn: mirror
-  VCC: vcc b4 3.3V
-  G1: ground e4
-  U1: dip14 d10 CD4013B
-  G2: ground d9 r90
-  G3: ground d9e0i0 r90
-  VCC: vcc c11 3.3V
-  G5: ground e12
+  VCC: vcc 4,2 3.3V
+  G1: ground 4,5
+  U1: dip14 10,4 CD4013B
+  G2: ground 9,4 r90
+  G3: ground 9,4.48 r90
+  VCC: vcc 11,3 3.3V
+  G5: ground 12,5
 wires:
-  - AD.V+ -| b4
-  - AD.GND -| e4
-  - AD.DIO2 -| b7i0
-  - b7i0 |- U1.1
-  - AD.DIO0 -| c6a0f0
-  - c6a0f0 |- U1.3
-  - AD.DIO1 -| c5d0
-  - c5d0 |- U1.5
-  - U1.4 -| d9
-  - U1.6 -| d9e0i0
-  - U1.7 -| d9e0i0
-  - U1.14 -| c11
-  - U1.11 -| e12
-  - U1.10 -| e12
-  - U1.9 -| e12
-  - U1.8 -| e12
+  - AD.V+ -| 4,2
+  - AD.GND -| 4,5
+  - AD.DIO2 -| 7,2.8
+  - 7,2.8 |- U1.1
+  - AD.DIO0 -| 6,3.05
+  - 6,3.05 |- U1.3
+  - AD.DIO1 -| 5,3.3
+  - 5,3.3 |- U1.5
+  - U1.4 -| 9,4
+  - U1.6 -| 9,4.48
+  - U1.7 -| 9,4.48
+  - U1.14 -| 11,3
+  - U1.11 -| 12,5
+  - U1.10 -| 12,5
+  - U1.9 -| 12,5
+  - U1.8 -| 12,5
 style:
   grid: on
 ```

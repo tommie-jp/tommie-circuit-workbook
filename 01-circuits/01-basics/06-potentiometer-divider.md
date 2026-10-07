@@ -23,14 +23,14 @@ source: 自作
 ```circuit
 title: 図1 ポテンショメータの無負荷の出力
 parts:
-  V1: vsource a1 e1 5
-  G0: ground e1
-  P1: potentiometer a3 e3 10k
-  OUT: port c5
+  V1: vsource 1,1 1,5 5
+  G0: ground 1,5
+  P1: potentiometer 3,1 3,5 10k
+  OUT: port 5,3
 wires:
-  - a1 -- a3
-  - e1 -- e3
-  - P1.w |- b5 -- c5
+  - 1,1 -- 3,1
+  - 1,5 -- 3,5
+  - P1.w |- 5,2 -- 5,3
 style:
   grid: on
 ```
@@ -48,15 +48,15 @@ style:
 ```circuit
 title: 図2 ポテンショメータに負荷をつないだとき
 parts:
-  V1: vsource a1 e1 5
-  G0: ground e1
-  P1: potentiometer a3 e3 10k
-  RL: resistor c7 e7 10k
-  G1: ground e7
+  V1: vsource 1,1 1,5 5
+  G0: ground 1,5
+  P1: potentiometer 3,1 3,5 10k
+  RL: resistor 7,3 7,5 10k
+  G1: ground 7,5
 wires:
-  - a1 -- a3
-  - e1 -- e3
-  - P1.w |- b5 -| c7
+  - 1,1 -- 3,1
+  - 1,5 -- 3,5
+  - P1.w |- 5,2 -| 7,3
 style:
   grid: on
 ```

@@ -34,28 +34,28 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  Vd: vsource b1 h1 5
-  S1: switch b4 e4
-  S2: switch e4 h4
-  S3: switch b14 e14
-  S4: switch e14 h14
-  R1: resistor e6 e8 220
-  D1: led e8 e10
-  D2: led c10 c8
-  M1: voltmeter g7 g10 l=$\mathrm{CH1}$
-  G1: ground h1
+  Vd: vsource 1,2 1,8 5
+  S1: switch 4,2 4,5
+  S2: switch 4,5 4,8
+  S3: switch 14,2 14,5
+  S4: switch 14,5 14,8
+  R1: resistor 6,5 8,5 220
+  D1: led 8,5 10,5
+  D2: led 10,3 8,3
+  M1: voltmeter 7,7 10,7 l=$\mathrm{CH1}$
+  G1: ground 1,8
 wires:
-  - b1 -- b4 -- b14
-  - h1 -- h4 -- h14
-  - e4 -- e5 -- e6
-  - e5 -- g5 -- g7
-  - c8 -- e8
-  - c10 -- e10
-  - e10 -- e12 -- e14
-  - g10 -- g12 -- e12
+  - 1,2 -- 4,2 -- 14,2
+  - 1,8 -- 4,8 -- 14,8
+  - 4,5 -- 5,5 -- 6,5
+  - 5,5 -- 5,7 -- 7,7
+  - 8,3 -- 8,5
+  - 10,3 -- 10,5
+  - 10,5 -- 12,5 -- 14,5
+  - 10,7 -- 12,7 -- 12,5
 notes:
-  - text d4f5 blue: A
-  - text d13f5 blue: B
+  - text 4.5,4.5 blue: A
+  - text 13.5,4.5 blue: B
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/06-single-phase-inverter.svg)

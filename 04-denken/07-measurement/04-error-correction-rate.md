@@ -28,14 +28,14 @@ board: BB
 ```circuit
 title: 図1 電流計が先で Rx を測る
 parts:
-  V1: vsource a1 c1 5
-  Rlim: resistor a1 a5 3.9k
-  Ra: resistor a5 a9 100 i=I
-  Rx: resistor a9 a13 1k
-  G1: ground c1
+  V1: vsource 1,1 1,3 5
+  Rlim: resistor 1,1 5,1 3.9k
+  Ra: resistor 5,1 9,1 100 i=I
+  Rx: resistor 9,1 13,1 1k
+  G1: ground 1,3
 wires:
-  - c1 -- c13
-  - a13 -- c13
+  - 1,3 -- 13,3
+  - 13,1 -- 13,3
 style:
   standard: jis
   pitch: 1.3
@@ -103,17 +103,17 @@ AD の CH1 は R_a の両端 (100 mV) を差動で挟んでいる。CH2 (1.09 V)
 ```circuit
 title: 図3 汎用オシロでの測り方
 parts:
-  V1: vsource b2 f2 5
-  Rlim: resistor b2 b4 3.9k
-  M2: voltmeter b5 f5 l=$\mathrm{CH2}$
-  Rx: resistor b7 d7 1k
-  Ra: resistor d7 f7 100 i=I
-  M1: voltmeter d9 f9 l=$\mathrm{CH1}$
-  G1: ground f2
+  V1: vsource 2,2 2,6 5
+  Rlim: resistor 2,2 4,2 3.9k
+  M2: voltmeter 5,2 5,6 l=$\mathrm{CH2}$
+  Rx: resistor 7,2 7,4 1k
+  Ra: resistor 7,4 7,6 100 i=I
+  M1: voltmeter 9,4 9,6 l=$\mathrm{CH1}$
+  G1: ground 2,6
 wires:
-  - b4 -- b5 -- b7
-  - d7 -- d9
-  - f2 -- f5 -- f7 -- f9
+  - 4,2 -- 5,2 -- 7,2
+  - 7,4 -- 9,4
+  - 2,6 -- 5,6 -- 7,6 -- 9,6
 style:
   standard: jis
   pitch: 1.3

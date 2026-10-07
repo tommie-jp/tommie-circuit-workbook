@@ -37,22 +37,22 @@ title: 図1 CC で LED を光らせる (電流制限は電源、RS は測るだ�
 parts:
   U1:
     type: device
-    at: b2
+    at: 2,2
     label: PSU
     pins: ["+", "GND", "-"]
     turn: mirror
-  D1: led b6 d6
-  RS: resistor d6 f6 10
-  M1: voltmeter d9 f9 l=$\mathrm{CH1}$
-  M2: voltmeter b12 f12 l=$\mathrm{CH2}$
-  G1: ground f6
-  G2: ground c3
+  D1: led 6,2 6,4
+  RS: resistor 6,4 6,6 10
+  M1: voltmeter 9,4 9,6 l=$\mathrm{CH1}$
+  M2: voltmeter 12,2 12,6 l=$\mathrm{CH2}$
+  G1: ground 6,6
+  G2: ground 3,3
 wires:
-  - U1.+ -| b6
-  - U1.- -| c3
-  - d6 -- d9
-  - f6 -- f9 -- f12
-  - b6 -- b12
+  - U1.+ -| 6,2
+  - U1.- -| 3,3
+  - 6,4 -- 9,4
+  - 6,6 -- 9,6 -- 12,6
+  - 6,2 -- 12,2
 style:
   grid: on
   pitch: 1.2

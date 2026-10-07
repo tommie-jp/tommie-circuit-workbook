@@ -27,41 +27,41 @@ board: BB
 ```circuit
 title: 図1 三相電源にデルタ結線の負荷
 parts:
-  V1: sine c1 e1 1 l=$\mathrm{W1}$
-  G1: ground e1
-  V2: sine i1 k1 1 l=$\mathrm{W2}$
-  G2: ground k1
-  R1: resistor c3 e3 10k
-  R2: resistor i4 g4 10k
-  U1: opamp f8 +down TL071
-  G3: ground g6
-  Rf: resistor d7 d10 10k
-  RLA: resistor c13 c15 20 l=$\mathrm{R_{LA}}$
-  RLC: resistor f13 f15 20 l=$\mathrm{R_{LC}}$
-  RLB: resistor i13 i15 20 l=$\mathrm{R_{LB}}$
-  RCA: resistor c17 f17 1k l=$\mathrm{R_{CA}}$
-  RBC: resistor f17 i17 1k l=$\mathrm{R_{BC}}$
-  RAB: resistor c20 i20 1k l=$\mathrm{R_{AB}}$
+  V1: sine 1,3 1,5 1 l=$\mathrm{W1}$
+  G1: ground 1,5
+  V2: sine 1,9 1,11 1 l=$\mathrm{W2}$
+  G2: ground 1,11
+  R1: resistor 3,3 3,5 10k
+  R2: resistor 4,9 4,7 10k
+  U1: opamp 8,6 +down TL071
+  G3: ground 6,7
+  Rf: resistor 7,4 10,4 10k
+  RLA: resistor 13,3 15,3 20 l=$\mathrm{R_{LA}}$
+  RLC: resistor 13,6 15,6 20 l=$\mathrm{R_{LC}}$
+  RLB: resistor 13,9 15,9 20 l=$\mathrm{R_{LB}}$
+  RCA: resistor 17,3 17,6 1k l=$\mathrm{R_{CA}}$
+  RBC: resistor 17,6 17,9 1k l=$\mathrm{R_{BC}}$
+  RAB: resistor 20,3 20,9 1k l=$\mathrm{R_{AB}}$
 wires:
-  - e3 -- e4 -- e7
-  - e4 -- g4
-  - d7 -- e7
-  - e7 |- U1.-
-  - g6 |- U1.+
-  - d10 -- f10
-  - c1 -- c3 -- c13
-  - i1 -- i4 -- i13
-  - U1.out -- f10 -- f13
-  - c15 -- c17 -- c20
-  - f15 -- f17
-  - i15 -- i17 -- i20
+  - 3,5 -- 4,5 -- 7,5
+  - 4,5 -- 4,7
+  - 7,4 -- 7,5
+  - 7,5 |- U1.-
+  - 6,7 |- U1.+
+  - 10,4 -- 10,6
+  - 1,3 -- 3,3 -- 13,3
+  - 1,9 -- 4,9 -- 13,9
+  - U1.out -- 10,6 -- 13,6
+  - 15,3 -- 17,3 -- 20,3
+  - 15,6 -- 17,6
+  - 15,9 -- 17,9 -- 20,9
 notes:
-  - text b12: 1 相目
-  - text g12: 3 相目
-  - text h12: 2 相目
-  - text b17: a
-  - text f17a3: c
-  - text j17: b
+  - text 12,2: 1 相目
+  - text 12,7: 3 相目
+  - text 12,8: 2 相目
+  - text 17,2: a
+  - text 17.3,6: c
+  - text 17,10: b
 style:
   standard: jis
   pitch: 1.2
@@ -183,39 +183,39 @@ a 点の電圧の 6 % しかない。2 本の先端で引くと、ch どうし�
 ```circuit
 title: 図4 汎用オシロでの測り方
 parts:
-  U1: port a1
-  V1: sine e1 g1 1 l=$\mathrm{FG}_1$
-  G1: ground g1
-  V2: sine i1 k1 1 l=$\mathrm{FG}_2$
-  G2: ground k1
-  M2: voltmeter e4 g4 l=$\mathrm{CH2}$
-  G3: ground g4
-  RLC: resistor a6 a9 200
-  RLA: resistor e6 e9 200
-  RLB: resistor i6 i9 200
-  M1: voltmeter e11 g11 l=$\mathrm{CH1}$
-  G4: ground g11
-  M3: voltmeter i11 k11 l=$\mathrm{CH2}$
-  G5: ground k11
-  RCA: resistor a14 e14 1k
-  RAB: resistor e14 i14 1k
-  RBC: resistor a18 i18 1k
+  U1: port 1,1
+  V1: sine 1,5 1,7 1 l=$\mathrm{FG}_1$
+  G1: ground 1,7
+  V2: sine 1,9 1,11 1 l=$\mathrm{FG}_2$
+  G2: ground 1,11
+  M2: voltmeter 4,5 4,7 l=$\mathrm{CH2}$
+  G3: ground 4,7
+  RLC: resistor 6,1 9,1 200
+  RLA: resistor 6,5 9,5 200
+  RLB: resistor 6,9 9,9 200
+  M1: voltmeter 11,5 11,7 l=$\mathrm{CH1}$
+  G4: ground 11,7
+  M3: voltmeter 11,9 11,11 l=$\mathrm{CH2}$
+  G5: ground 11,11
+  RCA: resistor 14,1 14,5 1k
+  RAB: resistor 14,5 14,9 1k
+  RBC: resistor 18,1 18,9 1k
 wires:
-  - a1 -- a6
-  - a9 -- a14 -- a18
-  - e1 -- e4 -- e6
-  - e9 -- e11 -- e14
-  - i1 -- i6
-  - i9 -- i11 -- i14 -- i18
+  - 1,1 -- 6,1
+  - 9,1 -- 14,1 -- 18,1
+  - 1,5 -- 4,5 -- 6,5
+  - 9,5 -- 11,5 -- 14,5
+  - 1,9 -- 6,9
+  - 9,9 -- 11,9 -- 14,9 -- 18,9
 notes:
-  - text a2f5 blue: 3 相目
-  - text e2f5 blue: 1 相目
-  - text i2f5 blue: 2 相目
-  - text a13d6 blue: c
-  - text e13d6 blue: a
-  - text i13d6 blue: b
-  - text f5 small: 1 回目
-  - text j12 small: 2 回目
+  - text 2.5,1.5 blue: 3 相目
+  - text 2.5,5.5 blue: 1 相目
+  - text 2.5,9.5 blue: 2 相目
+  - text 13.6,1.3 blue: c
+  - text 13.6,5.3 blue: a
+  - text 13.6,9.3 blue: b
+  - text 5,6 small: 1 回目
+  - text 12,10 small: 2 回目
 style:
   standard: jis
   pitch: 1.2

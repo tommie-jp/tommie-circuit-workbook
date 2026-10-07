@@ -25,15 +25,15 @@ Analog Discovery 3 (AD3) の Wavegen の W1 はこれと**違う**。仕様の�
 ```circuit
 title: 図1 出力インピーダンスを測る
 parts:
-  V1: sine a1 c1 l=$\mathrm{W1}$
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  S1: switch a5 a7
-  RL: resistor a7 a9 50
-  G1: ground c1
+  V1: sine 1,1 1,3 l=$\mathrm{W1}$
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  S1: switch 5,1 7,1
+  RL: resistor 7,1 9,1 50
+  G1: ground 1,3
 wires:
-  - a1 -- a3 -- a5
-  - c1 -- c3 -- c9
-  - a9 -- c9
+  - 1,1 -- 3,1 -- 5,1
+  - 1,3 -- 3,3 -- 9,3
+  - 9,1 -- 9,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/05-output-impedance.svg)

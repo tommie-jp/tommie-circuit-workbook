@@ -28,39 +28,39 @@ LC も水晶も使わずに作れるのがウィーンブリッジ発振器。�
 ```circuit
 title: 図1 ウィーンブリッジ発振器 (ダイオードで振幅を安定化)
 parts:
-  VCC: vcc b2 5V
-  VEE: vee c2 5V
-  U1: opamp d9 +up
-  C1: capacitor b5 b7 10n
-  R1: resistor b8 b10 16k
-  C2: capacitor d3 f3 10n
-  G3: ground f3
-  R2: resistor d5 f5 16k
-  G2: ground f5
-  R4: resistor f7 f9 10k
-  R3: resistor f9 f11 12k
-  D1: diode h7 h9 1N4148
-  D2: diode j9 j7 1N4148
-  Rg: resistor j7 l7 10k
-  G4: ground l7
-  OUT: port d12
+  VCC: vcc 2,2 5V
+  VEE: vee 2,3 5V
+  U1: opamp 9,4 +up
+  C1: capacitor 5,2 7,2 10n
+  R1: resistor 8,2 10,2 16k
+  C2: capacitor 3,4 3,6 10n
+  G3: ground 3,6
+  R2: resistor 5,4 5,6 16k
+  G2: ground 5,6
+  R4: resistor 7,6 9,6 10k
+  R3: resistor 9,6 11,6 12k
+  D1: diode 7,8 9,8 1N4148
+  D2: diode 9,10 7,10 1N4148
+  Rg: resistor 7,10 7,12 10k
+  G4: ground 7,12
+  OUT: port 12,4
 wires:
-  - b7 -- b8
-  - b10 -- b11 -- d11
-  - U1.out -- d11 -- d12
-  - b5 -- c5g0f0 -- d5
-  - c5g0f0 |- U1.+
-  - d3 -- d5
-  - f7 |- U1.-
-  - f11 -- d11
-  - f7 -- h7 -- j7
-  - f9 -- h9 -- j9
+  - 7,2 -- 8,2
+  - 10,2 -- 11,2 -- 11,4
+  - U1.out -- 11,4 -- 12,4
+  - 5,2 -- 5,3.65 -- 5,4
+  - 5,3.65 |- U1.+
+  - 3,4 -- 5,4
+  - 7,6 |- U1.-
+  - 11,6 -- 11,4
+  - 7,6 -- 7,8 -- 7,10
+  - 9,6 -- 9,8 -- 9,10
 notes:
-  - text c7e7 tiny: PIN 3
-  - text d7f7 tiny: PIN 2
-  - text c10h0 tiny: PIN 1
-  - text a2c5 small left: U1 の PIN 8 へ
-  - text c2h5 small left: U1 の PIN 4 へ
+  - text 7.7,3.4 tiny: PIN 3
+  - text 7.7,4.5 tiny: PIN 2
+  - text 10,3.7 tiny: PIN 1
+  - text 2.5,1.2 small left: U1 の PIN 8 へ
+  - text 2.5,3.7 small left: U1 の PIN 4 へ
 style:
   grid: on
   pitch: 1.2

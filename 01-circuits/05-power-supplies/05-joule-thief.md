@@ -23,27 +23,27 @@ Joule thief (ジュールシーフ) はトランジスタ 1 石と手巻きの�
 ```circuit
 title: 図1 Joule thief (CH1 は Q1 のコレクタの電圧)
 parts:
-  B1: battery b2c0f0 d2 1.5
-  G1: ground d2
-  VBAT: vcc b2c0f0 1.5V
-  T1: transformer c5
-  D1: led e5 g5 white
-  G3: ground g5
-  Q1: npn g7 mirror 2SC1815
-  G2: ground h7
-  Rb: resistor c8 e8 2.2k
-  VBAT: vcc d6 1.5V
-  M1: voltmeter e3 g3 l=$\mathrm{CH1}$
-  G4: ground g3
+  B1: battery 2,2.25 2,4 1.5
+  G1: ground 2,4
+  VBAT: vcc 2,2.25 1.5V
+  T1: transformer 5,3
+  D1: led 5,5 5,7 white
+  G3: ground 5,7
+  Q1: npn 7,7 mirror 2SC1815
+  G2: ground 7,8
+  Rb: resistor 8,3 8,5 2.2k
+  VBAT: vcc 6,4 1.5V
+  M1: voltmeter 3,5 3,7 l=$\mathrm{CH1}$
+  G4: ground 3,7
 wires:
-  - b2c0f0 |- T1.A1
-  - T1.A2 |- e5
-  - e5 -- e7 -- Q1.C
-  - e5 -- e3
-  - T1.B2 -| d6
-  - T1.B1 -| c8
-  - e8 |- Q1.B
-  - Q1.E -- h7
+  - 2,2.25 |- T1.A1
+  - T1.A2 |- 5,5
+  - 5,5 -- 7,5 -- Q1.C
+  - 5,5 -- 3,5
+  - T1.B2 -| 6,4
+  - T1.B1 -| 8,3
+  - 8,5 |- Q1.B
+  - Q1.E -- 7,8
 style:
   grid: on
   pitch: 1.2

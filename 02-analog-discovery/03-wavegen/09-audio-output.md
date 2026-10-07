@@ -20,15 +20,15 @@ W1 は可聴域 (20 Hz〜20 kHz) の波形をそのまま出せるので、小�
 ```circuit
 title: 図1 スピーカーを電流制限抵抗で鳴らす
 parts:
-  V1: sine a1 c1 l=$\mathrm{W1}$
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  R1: resistor a5 a7 150
-  SPK: speaker a7 a9
-  G1: ground c1
+  V1: sine 1,1 1,3 l=$\mathrm{W1}$
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  R1: resistor 5,1 7,1 150
+  SPK: speaker 7,1 9,1
+  G1: ground 1,3
 wires:
-  - a1 -- a3 -- a5
-  - c1 -- c3 -- c9
-  - a9 -- c9
+  - 1,1 -- 3,1 -- 5,1
+  - 1,3 -- 3,3 -- 9,3
+  - 9,1 -- 9,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/circuit/09-audio-output.svg)

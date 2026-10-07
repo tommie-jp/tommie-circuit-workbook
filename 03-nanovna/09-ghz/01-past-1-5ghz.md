@@ -45,16 +45,16 @@ device: H4
 ```circuit
 title: 図1 ケーブル 2 本をバレルアダプタで直結
 parts:
-  J1: sma b2 mirror CH0
-  J2: sma b10 CH1
-  G1: ground c2
-  G2: ground c10
+  J1: sma 2,2 mirror CH0
+  J2: sma 10,2 CH1
+  G1: ground 2,3
+  G2: ground 10,3
 wires:
   - J1.1 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c10
+  - J1.2 -- 2,3
+  - J2.2 -- 10,3
 notes:
-  - text a6 center: バレルアダプタ (ここで 2 本のケーブルをつなぐ)
+  - text 6,1 center: バレルアダプタ (ここで 2 本のケーブルをつなぐ)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/09-ghz/circuit/01-past-1-5ghz.svg)

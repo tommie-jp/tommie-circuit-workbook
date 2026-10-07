@@ -34,27 +34,27 @@ PC の中だけで動かす (`device: SIM`)。Verilator は 5.042 で確かめ�
 ```circuit
 title: 図1 AND・OR・NOT の論理図
 parts:
-  a: port b1
-  b: port h1
-  G1: not b8
-  G2: and e8
-  G3: or h8
-  y_not: port b13
-  y_and: port e13
-  y_or: port h13
+  a: port 1,2
+  b: port 1,8
+  G1: not 8,2
+  G2: and 8,5
+  G3: or 8,8
+  y_not: port 13,2
+  y_and: port 13,5
+  y_or: port 13,8
 wires:
-  - b1 -- b3
-  - b3 -- g3
-  - b3 |- G1.in
-  - e3 |- G2.a
-  - g3 |- G3.a
-  - h1 -- h5
-  - h5 -- f5
-  - f5 |- G2.b
-  - h5 |- G3.b
-  - G1.out -- b13
-  - G2.out -- e13
-  - G3.out -- h13
+  - 1,2 -- 3,2
+  - 3,2 -- 3,7
+  - 3,2 |- G1.in
+  - 3,5 |- G2.a
+  - 3,7 |- G3.a
+  - 1,8 -- 5,8
+  - 5,8 -- 5,6
+  - 5,6 |- G2.b
+  - 5,8 |- G3.b
+  - G1.out -- 13,2
+  - G2.out -- 13,5
+  - G3.out -- 13,8
 style:
   grid: off
   pitch: 1.2

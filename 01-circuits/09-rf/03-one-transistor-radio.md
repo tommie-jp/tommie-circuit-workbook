@@ -20,34 +20,34 @@ era: 古
 ```circuit
 title: 図1 1石ラジオ
 parts:
-  ANT: antenna e1
-  L1: inductor e2 g2 250u
-  GL: ground g2
-  VC1: capacitor-var e4 g4 l=$\mathrm{VC}_1$
-  GVC: ground g4
-  C1: capacitor e6 e7 0.01u
-  Q1: npn e10
-  VCC: vcc a10 5V
-  Rc: resistor c10 a10 1.5k
-  Rb: resistor c8 c10 220k
-  GE: ground f10
-  D1: diode c11 c13 1N60
-  C3: capacitor c14 e14 0.001u
-  GC3: ground e14
-  R3: resistor c16 e16 100k
-  GR3: ground e16
-  EAR: earphone c19 e19 l=$\mathrm{EAR}$
-  GEAR: ground e19
+  ANT: antenna 1,5
+  L1: inductor 2,5 2,7 250u
+  GL: ground 2,7
+  VC1: capacitor-var 4,5 4,7 l=$\mathrm{VC}_1$
+  GVC: ground 4,7
+  C1: capacitor 6,5 7,5 0.01u
+  Q1: npn 10,5
+  VCC: vcc 10,1 5V
+  Rc: resistor 10,3 10,1 1.5k
+  Rb: resistor 8,3 10,3 220k
+  GE: ground 10,6
+  D1: diode 11,3 13,3 1N60
+  C3: capacitor 14,3 14,5 0.001u
+  GC3: ground 14,5
+  R3: resistor 16,3 16,5 100k
+  GR3: ground 16,5
+  EAR: earphone 19,3 19,5 l=$\mathrm{EAR}$
+  GEAR: ground 19,5
 wires:
-  - e1 -- e6
-  - e7 -- e8
-  - e8 -- Q1.B
-  - c8 -- e8
-  - c10 -- Q1.C
-  - Q1.E -- f10
-  - c10 -- c11
-  - c13 -- c17
-  - c17 -- c19
+  - 1,5 -- 6,5
+  - 7,5 -- 8,5
+  - 8,5 -- Q1.B
+  - 8,3 -- 8,5
+  - 10,3 -- Q1.C
+  - Q1.E -- 10,6
+  - 10,3 -- 11,3
+  - 13,3 -- 17,3
+  - 17,3 -- 19,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/03-one-transistor-radio.svg)

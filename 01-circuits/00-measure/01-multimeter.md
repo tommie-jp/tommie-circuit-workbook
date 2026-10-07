@@ -21,16 +21,16 @@ board: BB
 ```circuit
 title: 図1 分圧回路とテスターの当て方
 parts:
-  V1: vsource b2 d2 5
-  A1: ammeter b2 b4
-  R1: resistor b4 b6 10k
-  R2: resistor b6 b8 10k
-  V2: voltmeter c6 c8
-  G1: ground d2
-  G2: ground d8
+  V1: vsource 2,2 2,4 5
+  A1: ammeter 2,2 4,2
+  R1: resistor 4,2 6,2 10k
+  R2: resistor 6,2 8,2 10k
+  V2: voltmeter 6,3 8,3
+  G1: ground 2,4
+  G2: ground 8,4
 wires:
-  - b8 -- c8 -- d8
-  - b6 -- c6
+  - 8,2 -- 8,3 -- 8,4
+  - 6,2 -- 6,3
 style:
   grid: on
   pitch: 1.2

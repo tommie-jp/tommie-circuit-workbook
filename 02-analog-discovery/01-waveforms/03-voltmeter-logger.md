@@ -19,13 +19,13 @@ Data Logger (データロガー) で 1 分間記録する。オシロが「速�
 ```circuit
 title: 図1 分圧回路
 parts:
-  V1: vsource a1 c1 5
-  R1: resistor a1 a3 2.2k
-  R2: resistor a3 a5 1k
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  G1: ground c1
+  V1: vsource 1,1 1,3 5
+  R1: resistor 1,1 3,1 2.2k
+  R2: resistor 3,1 5,1 1k
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  G1: ground 1,3
 wires:
-  - c1 -- c3 -- a5
+  - 1,3 -- 3,3 -- 5,1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/circuit/03-voltmeter-logger.svg)

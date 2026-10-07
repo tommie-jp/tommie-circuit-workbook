@@ -25,21 +25,21 @@ LC 同調 (9-1 の共振) で選び、ゲルマニウムダイオードで検波
 ```circuit
 title: 図1 ゲルマラジオ
 parts:
-  ANT: antenna a1
-  L1: inductor a3 c3 250u
-  GL: ground c3
-  VC1: capacitor-var a5 c5 l=$\mathrm{VC}_1$
-  GVC: ground c5
-  D1: diode a8 a10 1N60
-  C2: capacitor a11 c11 1n
-  GC2: ground c11
-  R1: resistor a13 c13 100k
-  GR1: ground c13
-  EAR: earphone a16 c16 l=$\mathrm{EAR}$
-  GEAR: ground c16
+  ANT: antenna 1,1
+  L1: inductor 3,1 3,3 250u
+  GL: ground 3,3
+  VC1: capacitor-var 5,1 5,3 l=$\mathrm{VC}_1$
+  GVC: ground 5,3
+  D1: diode 8,1 10,1 1N60
+  C2: capacitor 11,1 11,3 1n
+  GC2: ground 11,3
+  R1: resistor 13,1 13,3 100k
+  GR1: ground 13,3
+  EAR: earphone 16,1 16,3 l=$\mathrm{EAR}$
+  GEAR: ground 16,3
 wires:
-  - a1 -- a8
-  - a10 -- a16
+  - 1,1 -- 8,1
+  - 10,1 -- 16,1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/02-crystal-radio.svg)

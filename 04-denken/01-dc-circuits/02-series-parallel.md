@@ -30,21 +30,21 @@ title: 図1 直列つなぎ (分圧)
 style:
   standard: jis
 parts:
-  B1: battery a3 a1 5
-  R1: resistor a3 a5 1k
-  R2: resistor a5 a7 2k
-  V1: voltmeter e3 e5
-  V2: voltmeter g5 g7
-  G1: ground i1
+  B1: battery 3,1 1,1 5
+  R1: resistor 3,1 5,1 1k
+  R2: resistor 5,1 7,1 2k
+  V1: voltmeter 3,5 5,5
+  V2: voltmeter 5,7 7,7
+  G1: ground 1,9
 wires:
-  - a1 -- i1
-  - a7 -- a11
-  - a11 -- i11
-  - i11 -- i1
-  - a3 -- e3
-  - a5 -- e5
-  - a5 -- g5
-  - a7 -- g7
+  - 1,1 -- 1,9
+  - 7,1 -- 11,1
+  - 11,1 -- 11,9
+  - 11,9 -- 1,9
+  - 3,1 -- 3,5
+  - 5,1 -- 5,5
+  - 5,1 -- 5,7
+  - 7,1 -- 7,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/02-series-parallel-1.svg)
@@ -57,18 +57,18 @@ title: 図2 並列つなぎ (分流)
 style:
   standard: jis
 parts:
-  B1: battery a1 c1 5
-  A0: ammeter a1 a3
-  A1: ammeter a5 c5
-  R1: resistor c5 e5 1k
-  A2: ammeter a9 c9
-  R2: resistor c9 e9 2k
-  G1: ground c1
+  B1: battery 1,1 1,3 5
+  A0: ammeter 1,1 3,1
+  A1: ammeter 5,1 5,3
+  R1: resistor 5,3 5,5 1k
+  A2: ammeter 9,1 9,3
+  R2: resistor 9,3 9,5 2k
+  G1: ground 1,3
 wires:
-  - a3 -- a9
-  - c1 -- e1
-  - e1 -- e5
-  - e5 -- e9
+  - 3,1 -- 9,1
+  - 1,3 -- 1,5
+  - 1,5 -- 5,5
+  - 5,5 -- 9,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/02-series-parallel-2.svg)

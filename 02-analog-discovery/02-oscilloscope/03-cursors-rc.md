@@ -19,16 +19,16 @@ board: BB
 ```circuit
 title: 図1 RC ローパスのステップ応答
 parts:
-  M1: voltmeter a1 c1 l=$\mathrm{CH1}$
-  W1: square a3 c3 1.65
-  R1: resistor a3 a5 10k
-  C1: capacitor a5 c5 100n
-  M2: voltmeter a7 c7 l=$\mathrm{CH2}$
-  G1: ground c3
+  M1: voltmeter 1,1 1,3 l=$\mathrm{CH1}$
+  W1: square 3,1 3,3 1.65
+  R1: resistor 3,1 5,1 10k
+  C1: capacitor 5,1 5,3 100n
+  M2: voltmeter 7,1 7,3 l=$\mathrm{CH2}$
+  G1: ground 3,3
 wires:
-  - a1 -- a3
-  - a5 -- a7
-  - c1 -- c3 -- c5 -- c7
+  - 1,1 -- 3,1
+  - 5,1 -- 7,1
+  - 1,3 -- 3,3 -- 5,3 -- 7,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/03-cursors-rc.svg)

@@ -44,38 +44,38 @@ V2 は基本波で作るので段が無い。V2 の値は版によって公表�
 ```circuit
 title: 図1 CH0 から 20 + 20 + 10 dB を通して CH1 へ
 parts:
-  J1: sma c2 mirror CH0
+  J1: sma 2,3 mirror CH0
   A1:
     type: ic3
-    at: c4
+    at: 4,3
     label: 20dB
     pins: [IN, GND, OUT]
   A2:
     type: ic3
-    at: c7
+    at: 7,3
     label: 20dB
     pins: [IN, GND, OUT]
   A3:
     type: ic3
-    at: c10
+    at: 10,3
     label: 10dB
     pins: [IN, GND, OUT]
-  J2: sma c12 CH1
-  GJ1: ground d2
-  GA1: ground d4
-  GA2: ground d7
-  GA3: ground d10
-  GJ2: ground d12
+  J2: sma 12,3 CH1
+  GJ1: ground 2,4
+  GA1: ground 4,4
+  GA2: ground 7,4
+  GA3: ground 10,4
+  GJ2: ground 12,4
 wires:
   - J1.1 -- A1.IN
-  - J1.2 -- d2
+  - J1.2 -- 2,4
   - A1.OUT -- A2.IN
   - A2.OUT -- A3.IN
   - A3.OUT -- J2.1
-  - A1.GND -- d4
-  - A2.GND -- d7
-  - A3.GND -- d10
-  - J2.2 -- d12
+  - A1.GND -- 4,4
+  - A2.GND -- 7,4
+  - A3.GND -- 10,4
+  - J2.2 -- 12,4
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/09-ghz/circuit/04-dynamic-range.svg)

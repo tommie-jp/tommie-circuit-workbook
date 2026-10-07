@@ -45,14 +45,14 @@ Tang Nano 9K のピンの電圧は、Sipeed の wiki のピン配置図で確か
 ```circuit
 title: 図1 3V3 から抵抗と LED を通して GND へ
 parts:
-  U1: pico2 e3c0
-  R1: resistor f6 i6 330
-  D1: led i6 k6 red
-  G1: ground k6
-  G2: ground h5c0
+  U1: pico2 3,5.2
+  R1: resistor 6,6 6,9 330
+  D1: led 6,9 6,11 red
+  G1: ground 6,11
+  G2: ground 5,8.2
 wires:
-  - U1.3V3 -| f6
-  - U1.GND38 -| h5c0
+  - U1.3V3 -| 6,6
+  - U1.GND38 -| 5,8.2
 style:
   pitch: 1.2
 ```

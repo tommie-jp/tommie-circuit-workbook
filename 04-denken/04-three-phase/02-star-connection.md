@@ -28,37 +28,37 @@ board: BB
 ```circuit
 title: 図1 三相電源に Y 結線の負荷
 parts:
-  V1: sine c1 e1 1 l=$\mathrm{W1}$
-  G1: ground e1
-  V2: sine i1 k1 1 l=$\mathrm{W2}$
-  G2: ground k1
-  R1: resistor c3 e3 10k
-  R2: resistor i4 g4 10k
-  U1: opamp f8 +down TL071
-  G3: ground g6
-  Rf: resistor d7 d10 10k
-  R3: resistor c16 c18 1k
-  R5: resistor f16 f18 1k
-  R4: resistor i16 i18 1k
+  V1: sine 1,3 1,5 1 l=$\mathrm{W1}$
+  G1: ground 1,5
+  V2: sine 1,9 1,11 1 l=$\mathrm{W2}$
+  G2: ground 1,11
+  R1: resistor 3,3 3,5 10k
+  R2: resistor 4,9 4,7 10k
+  U1: opamp 8,6 +down TL071
+  G3: ground 6,7
+  Rf: resistor 7,4 10,4 10k
+  R3: resistor 16,3 18,3 1k
+  R5: resistor 16,6 18,6 1k
+  R4: resistor 16,9 18,9 1k
 wires:
-  - e3 -- e4 -- e7
-  - e4 -- g4
-  - d7 -- e7
-  - e7 |- U1.-
-  - g6 |- U1.+
-  - d10 -- f10
-  - c1 -- c3 -- c16
-  - i1 -- i4 -- i16
-  - U1.out -- f10 -- f16
-  - c18 -- c20 -- f20
-  - f18 -- f20
-  - i18 -- i20
-  - f20 -- i20
+  - 3,5 -- 4,5 -- 7,5
+  - 4,5 -- 4,7
+  - 7,4 -- 7,5
+  - 7,5 |- U1.-
+  - 6,7 |- U1.+
+  - 10,4 -- 10,6
+  - 1,3 -- 3,3 -- 16,3
+  - 1,9 -- 4,9 -- 16,9
+  - U1.out -- 10,6 -- 16,6
+  - 18,3 -- 20,3 -- 20,6
+  - 18,6 -- 20,6
+  - 18,9 -- 20,9
+  - 20,6 -- 20,9
 notes:
-  - text b12: 1 相目
-  - text g12: 3 相目
-  - text h12: 2 相目
-  - text d20a3: N
+  - text 12,2: 1 相目
+  - text 12,7: 3 相目
+  - text 12,8: 2 相目
+  - text 20.3,4: N
 style:
   standard: jis
   pitch: 1.2
@@ -172,32 +172,32 @@ GND と短絡する。
 ```circuit
 title: 図4 汎用オシロでの測り方
 parts:
-  U1: port a1
-  V1: sine e1 g1 1 l=$\mathrm{FG}_1$
-  G1: ground g1
-  V2: sine i1 k1 1 l=$\mathrm{FG}_2$
-  G2: ground k1
-  M1: voltmeter e4 g4 l=$\mathrm{CH1}$
-  G3: ground g4
-  M2: voltmeter i4 k4 l=$\mathrm{CH2}$
-  G4: ground k4
-  R5: resistor a6 a9 1k
-  R3: resistor e6 e9 1k
-  R4: resistor i6 i9 1k
-  M3: voltmeter i12 k12 l=$\mathrm{CH2}$
-  G5: ground k12
+  U1: port 1,1
+  V1: sine 1,5 1,7 1 l=$\mathrm{FG}_1$
+  G1: ground 1,7
+  V2: sine 1,9 1,11 1 l=$\mathrm{FG}_2$
+  G2: ground 1,11
+  M1: voltmeter 4,5 4,7 l=$\mathrm{CH1}$
+  G3: ground 4,7
+  M2: voltmeter 4,9 4,11 l=$\mathrm{CH2}$
+  G4: ground 4,11
+  R5: resistor 6,1 9,1 1k
+  R3: resistor 6,5 9,5 1k
+  R4: resistor 6,9 9,9 1k
+  M3: voltmeter 12,9 12,11 l=$\mathrm{CH2}$
+  G5: ground 12,11
 wires:
-  - a1 -- a6
-  - e1 -- e4 -- e6
-  - i1 -- i4 -- i6
-  - a9 -- e9 -- i9 -- i12
+  - 1,1 -- 6,1
+  - 1,5 -- 4,5 -- 6,5
+  - 1,9 -- 4,9 -- 6,9
+  - 9,1 -- 9,5 -- 9,9 -- 12,9
 notes:
-  - text a2f5 blue: 3 相目
-  - text e2f5 blue: 1 相目
-  - text i2f5 blue: 2 相目
-  - text e9d4 blue: N
-  - text j5 small: 1 回目
-  - text j13 small: 2 回目
+  - text 2.5,1.5 blue: 3 相目
+  - text 2.5,5.5 blue: 1 相目
+  - text 2.5,9.5 blue: 2 相目
+  - text 9.4,5.3 blue: N
+  - text 5,10 small: 1 回目
+  - text 13,10 small: 2 回目
 style:
   standard: jis
   pitch: 1.2

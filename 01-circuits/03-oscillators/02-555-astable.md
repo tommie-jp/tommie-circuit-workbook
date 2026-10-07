@@ -22,36 +22,36 @@ C1 の電圧が電源の 2/3 (Vcc の 2/3) まで上がると出力を Low に�
 ```circuit
 title: 図1 555 非安定
 parts:
-  V1: vsource c4 i4 5
-  VCC: vcc c4 5V
-  G1: ground i4
-  U1: ic e10 NE555
-  VCC: vcc b7 5V
-  Ra: resistor b7 d7f0 10k
-  Rb: resistor d7f0 f7f0 47k
-  C1: ecap f8f0 i8 10u
-  G3: ground i8
-  VCC: vcc b10 5V
-  G2: ground i10
-  Cc: capacitor g12 i12 10n
-  G5: ground i12
-  R1: resistor e13 e15 220
-  D1: led e15 g15 red
-  G4: ground i15
+  V1: vsource 4,3 4,9 5
+  VCC: vcc 4,3 5V
+  G1: ground 4,9
+  U1: ic 10,5 NE555
+  VCC: vcc 7,2 5V
+  Ra: resistor 7,2 7,4.5 10k
+  Rb: resistor 7,4.5 7,6.5 47k
+  C1: ecap 8,6.5 8,9 10u
+  G3: ground 8,9
+  VCC: vcc 10,2 5V
+  G2: ground 10,9
+  Cc: capacitor 12,7 12,9 10n
+  G5: ground 12,9
+  R1: resistor 13,5 15,5 220
+  D1: led 15,5 15,7 red
+  G4: ground 15,9
 wires:
-  - U1.8 |- b10
-  - U1.4 |- b10a5
-  - b10 -- b10a5
-  - U1.7 -| d7f0
-  - U1.6 -| e8
-  - U1.2 -| e8f0
-  - e8 -- f8f0
-  - f7f0 -- f8f0
-  - U1.1 |- i10
-  - U1.5 |- g10a5
-  - g10a5 -- g12
-  - U1.3 -| e13
-  - g15 -- i15
+  - U1.8 |- 10,2
+  - U1.4 |- 10.5,2
+  - 10,2 -- 10.5,2
+  - U1.7 -| 7,4.5
+  - U1.6 -| 8,5
+  - U1.2 -| 8,5.5
+  - 8,5 -- 8,6.5
+  - 7,6.5 -- 8,6.5
+  - U1.1 |- 10,9
+  - U1.5 |- 10.5,7
+  - 10.5,7 -- 12,7
+  - U1.3 -| 13,5
+  - 15,7 -- 15,9
 style:
   grid: on
 ```

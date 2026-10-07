@@ -22,17 +22,17 @@ source: 自作
 ```circuit
 title: 図1 並列にしたコンデンサを充電する
 parts:
-  V1: vsource b2 d2 5
-  G0: ground d2
-  S1: switch b3 b5
-  R1: resistor b5 b7 1k
-  C1: ecap b7 d7 100u
-  C2: ecap b10 d10 100u
-  G1: ground d7
+  V1: vsource 2,2 2,4 5
+  G0: ground 2,4
+  S1: switch 3,2 5,2
+  R1: resistor 5,2 7,2 1k
+  C1: ecap 7,2 7,4 100u
+  C2: ecap 10,2 10,4 100u
+  G1: ground 7,4
 wires:
-  - b2 -- b3
-  - b7 -- b10
-  - d7 -- d10
+  - 2,2 -- 3,2
+  - 7,2 -- 10,2
+  - 7,4 -- 10,4
 style:
   grid: on
   pitch: 1.2
@@ -45,15 +45,15 @@ style:
 ```circuit
 title: 図2 直列にしたコンデンサを充電する
 parts:
-  V1: vsource b2 d2 5
-  G0: ground d2
-  S1: switch b3 b5
-  R2: resistor b5 b7 1k
-  C3: ecap b7 d7 100u
-  C4: ecap d7 f7 100u
-  G2: ground f7
+  V1: vsource 2,2 2,4 5
+  G0: ground 2,4
+  S1: switch 3,2 5,2
+  R2: resistor 5,2 7,2 1k
+  C3: ecap 7,2 7,4 100u
+  C4: ecap 7,4 7,6 100u
+  G2: ground 7,6
 wires:
-  - b2 -- b3
+  - 2,2 -- 3,2
 style:
   grid: on
   pitch: 1.2

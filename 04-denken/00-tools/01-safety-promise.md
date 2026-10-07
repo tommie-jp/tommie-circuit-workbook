@@ -42,14 +42,14 @@ title: 図1 AD の波形発生器と抵抗負荷
 style:
   standard: jis
 parts:
-  V1: sine a1 a3 l=$\mathrm{W1}$
-  A1: ammeter a3 a5
-  R1: resistor a5 a7 100
-  G1: ground a1
+  V1: sine 1,1 3,1 l=$\mathrm{W1}$
+  A1: ammeter 3,1 5,1
+  R1: resistor 5,1 7,1 100
+  G1: ground 1,1
 wires:
-  - a7 -- e7
-  - e7 -- e1
-  - e1 -- a1
+  - 7,1 -- 7,5
+  - 7,5 -- 1,5
+  - 1,5 -- 1,1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/circuit/01-safety-promise.svg)

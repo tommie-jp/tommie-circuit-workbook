@@ -46,17 +46,17 @@ device: LV64
 ```circuit
 title: 図1 の回路 (50 Ω (100 Ω の 2 本並列) と 8.2 µH の直列)
 parts:
-  J1: sma c2 mirror
-  G0: ground d2
-  R1: resistor c5 c9 100
-  R2: resistor a5 a9 100
-  L1: inductor c9 e9 8.2u
-  G1: ground e9
+  J1: sma 2,3 mirror
+  G0: ground 2,4
+  R1: resistor 5,3 9,3 100
+  R2: resistor 5,1 9,1 100
+  L1: inductor 9,3 9,5 8.2u
+  G1: ground 9,5
 wires:
-  - J1.1 -- c5
-  - J1.2 -- d2
-  - c5 -- a5
-  - c9 -- a9
+  - J1.1 -- 5,3
+  - J1.2 -- 2,4
+  - 5,3 -- 5,1
+  - 9,3 -- 9,1
 style:
   pitch: 1.0
 ```
@@ -87,17 +87,17 @@ markers:
 ```circuit
 title: 図2 の回路 (50 Ω (100 Ω の 2 本並列) と 3.3 nF の直列)
 parts:
-  J1: sma c2 mirror
-  G0: ground d2
-  R1: resistor c5 c9 100
-  R2: resistor a5 a9 100
-  C1: capacitor c9 e9 3.3n
-  G1: ground e9
+  J1: sma 2,3 mirror
+  G0: ground 2,4
+  R1: resistor 5,3 9,3 100
+  R2: resistor 5,1 9,1 100
+  C1: capacitor 9,3 9,5 3.3n
+  G1: ground 9,5
 wires:
-  - J1.1 -- c5
-  - J1.2 -- d2
-  - c5 -- a5
-  - c9 -- a9
+  - J1.1 -- 5,3
+  - J1.2 -- 2,4
+  - 5,3 -- 5,1
+  - 9,3 -- 9,1
 style:
   pitch: 1.0
 ```
@@ -129,15 +129,15 @@ f0 より下は容量性 (下半分)、上は誘導性 (上半分) で、**実�
 ```circuit
 title: 図3 の回路 (24 Ω と 8.2 µH と 3.3 nF の直列共振)
 parts:
-  J1: sma c2 mirror
-  G0: ground d2
-  R1: resistor c5 c9 24
-  L1: inductor c9 c13 8.2u
-  C1: capacitor c13 e13 3.3n
-  G1: ground e13
+  J1: sma 2,3 mirror
+  G0: ground 2,4
+  R1: resistor 5,3 9,3 24
+  L1: inductor 9,3 13,3 8.2u
+  C1: capacitor 13,3 13,5 3.3n
+  G1: ground 13,5
 wires:
-  - J1.1 -- c5
-  - J1.2 -- d2
+  - J1.1 -- 5,3
+  - J1.2 -- 2,4
 style:
   pitch: 1.0
 ```

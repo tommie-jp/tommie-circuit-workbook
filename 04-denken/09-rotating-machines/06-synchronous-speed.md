@@ -36,37 +36,37 @@ style:
 parts:
   A1:
     type: device
-    at: b1
+    at: 1,2
     label: AD Patterns
     pins: [DIO0, DIO1, DIO2, GND]
     turn: mirror
-  U1A: buffer c7
-  U1B: buffer e7
-  U1C: buffer g7
+  U1A: buffer 7,3
+  U1B: buffer 7,5
+  U1C: buffer 7,7
   M1:
     type: device
-    at: b13
+    at: 13,2
     label: BLDC 14P
     pins: [U, V, W]
-  G1: ground c2f5
+  G1: ground 2.5,3.5
 wires:
-  - A1.DIO0 -| c5
-  - c5 -- U1A.in
-  - A1.DIO1 -| e4
-  - e4 -- U1B.in
-  - A1.DIO2 -| g3
-  - g3 -- U1C.in
-  - A1.GND -| c2f5
-  - U1A.out -- c9
-  - c9 |- M1.U
-  - U1B.out -- e10
-  - e10 |- M1.V
-  - U1C.out -- g11
-  - g11 |- M1.W
+  - A1.DIO0 -| 5,3
+  - 5,3 -- U1A.in
+  - A1.DIO1 -| 4,5
+  - 4,5 -- U1B.in
+  - A1.DIO2 -| 3,7
+  - 3,7 -- U1C.in
+  - A1.GND -| 2.5,3.5
+  - U1A.out -- 9,3
+  - 9,3 |- M1.U
+  - U1B.out -- 10,5
+  - 10,5 |- M1.V
+  - U1C.out -- 11,7
+  - 11,7 |- M1.W
 notes:
-  - text c6h5 small: L293D 2 番から 3 番
-  - text e6h5 small: L293D 7 番から 6 番
-  - text g6h5 small: L293D 10 番から 11 番
+  - text 6.5,3.7 small: L293D 2 番から 3 番
+  - text 6.5,5.7 small: L293D 7 番から 6 番
+  - text 6.5,7.7 small: L293D 10 番から 11 番
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/06-synchronous-speed.svg)

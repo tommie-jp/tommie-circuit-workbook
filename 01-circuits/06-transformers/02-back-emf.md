@@ -20,16 +20,16 @@ LED の代わりにダイオードを入れて逆起電力を逃がすのが、7
 ```circuit
 title: 図1 コイルを切った瞬間に LED が光る (CH1 は L1 の上端の電圧)
 parts:
-  V1: battery b2 d2 5
-  S1: switch b2 b4
-  R1: resistor b4 b7 180 i=I
-  L1: inductor b7 d7 100m
-  D1: led d9 b9
-  M1: voltmeter b11 d11 l=$\mathrm{CH1}$
-  G1: ground d2
+  V1: battery 2,2 2,4 5
+  S1: switch 2,2 4,2
+  R1: resistor 4,2 7,2 180 i=I
+  L1: inductor 7,2 7,4 100m
+  D1: led 9,4 9,2
+  M1: voltmeter 11,2 11,4 l=$\mathrm{CH1}$
+  G1: ground 2,4
 wires:
-  - b7 -- b9 -- b11
-  - d2 -- d7 -- d9 -- d11
+  - 7,2 -- 9,2 -- 11,2
+  - 2,4 -- 7,4 -- 9,4 -- 11,4
 style:
   pitch: 1.2
 ```

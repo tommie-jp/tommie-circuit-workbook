@@ -33,28 +33,28 @@ OR (a か b が 1) から AND (両方 1) を引いた形で、`(a | b) & ~(a & b
 ```circuit
 title: 図1 my_xor の中身 (論理図)
 parts:
-  a: port b1
-  b: port j1
-  G1: or b8
-  G2: and f8
-  G3: not f13
-  G4: and d19
-  y: port d24
+  a: port 1,2
+  b: port 1,10
+  G1: or 8,2
+  G2: and 8,6
+  G3: not 13,6
+  G4: and 19,4
+  y: port 24,4
 wires:
-  - b1 -- b3
-  - b3 -- e3
-  - b3 |- G1.a
-  - e3 |- G2.a
-  - j1 -- j5
-  - j5 -- c5
-  - c5 |- G1.b
-  - i5 |- G2.b
+  - 1,2 -- 3,2
+  - 3,2 -- 3,5
+  - 3,2 |- G1.a
+  - 3,5 |- G2.a
+  - 1,10 -- 5,10
+  - 5,10 -- 5,3
+  - 5,3 |- G1.b
+  - 5,9 |- G2.b
   - G2.out -- G3.in
-  - G1.out -- b17
-  - b17 |- G4.a
-  - G3.out -- f15
-  - f15 |- G4.b
-  - G4.out -- d24
+  - G1.out -- 17,2
+  - 17,2 |- G4.a
+  - G3.out -- 15,6
+  - 15,6 |- G4.b
+  - G4.out -- 24,4
 style:
   grid: off
   pitch: 1.2
@@ -71,22 +71,22 @@ style:
 ```circuit
 title: 図2 parity3 は my_xor を 2 つつなぐ (X1 が u_ab、X2 が u_y)
 parts:
-  a: port d1
-  b: port h1
-  c: port l1
-  X1: xor f9
-  X2: xor j19
-  y: port j25
+  a: port 1,4
+  b: port 1,8
+  c: port 1,12
+  X1: xor 9,6
+  X2: xor 19,10
+  y: port 25,10
 wires:
-  - d1 -- d4
-  - d4 |- X1.a
-  - h1 -- h4
-  - h4 |- X1.b
-  - X1.out -- f14
-  - f14 |- X2.a
-  - l1 -- l4
-  - l4 |- X2.b
-  - X2.out -- j25
+  - 1,4 -- 4,4
+  - 4,4 |- X1.a
+  - 1,8 -- 4,8
+  - 4,8 |- X1.b
+  - X1.out -- 14,6
+  - 14,6 |- X2.a
+  - 1,12 -- 4,12
+  - 4,12 |- X2.b
+  - X2.out -- 25,10
 style:
   grid: off
   pitch: 1.2

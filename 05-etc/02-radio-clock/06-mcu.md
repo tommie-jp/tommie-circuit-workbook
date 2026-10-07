@@ -92,33 +92,33 @@ AM 検波の出力 ([02-radio.md](02-radio.md) の OUT) を、AC 結合で直流
 ```circuit
 title: 図1 ADC の前処理 (AC 結合、1.65 V のバイアス、約 3 kHz のローパス)
 parts:
-  IN: port c2
-  C1: capacitor c3 c7 0.1u
-  Ra: resistor a8 c8 220k
-  VCC1: vcc a8 3.3V
-  Rb: resistor c8 e8 220k
-  GB: ground e8
-  Cf: capacitor c11 e11 1n
-  GF: ground e11
+  IN: port 2,3
+  C1: capacitor 3,3 7,3 0.1u
+  Ra: resistor 8,1 8,3 220k
+  VCC1: vcc 8,1 3.3V
+  Rb: resistor 8,3 8,5 220k
+  GB: ground 8,5
+  Cf: capacitor 11,3 11,5 1n
+  GF: ground 11,5
   U1:
     type: device
-    at: c15
+    at: 15,3
     label: Pico 2
     pins: [3V3, GP26, AGND]
-  GA: ground f13
+  GA: ground 13,6
 wires:
-  - c2 -- c3
-  - c7 -- c8
-  - c8 -- c11
-  - c11 |- U1.GP26
-  - a8 -- a13 |- U1.3V3
-  - f13 |- U1.AGND
+  - 2,3 -- 3,3
+  - 7,3 -- 8,3
+  - 8,3 -- 11,3
+  - 11,3 |- U1.GP26
+  - 8,1 -- 13,1 |- U1.3V3
+  - 13,6 |- U1.AGND
 notes:
-  - text b2 small left: 検波出力
-  - text e5 small blue center: 高域の肩 約 7.6 Hz
-  - text f8 small blue left: 1.65 V のバイアス
-  - text g11 small blue center: 低域の肩 約 3.0 kHz
-  - text a15 small blue left: GP26 は ADC0
+  - text 2,2 small left: 検波出力
+  - text 5,5 small blue center: 高域の肩 約 7.6 Hz
+  - text 8,6 small blue left: 1.65 V のバイアス
+  - text 11,7 small blue center: 低域の肩 約 3.0 kHz
+  - text 15,1 small blue left: GP26 は ADC0
 style:
   grid: off
   pitch: 1.2

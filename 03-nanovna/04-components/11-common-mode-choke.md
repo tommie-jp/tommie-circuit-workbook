@@ -24,20 +24,20 @@ device: H4
 ```circuit
 title: 図1 コモンモード (2 本の巻線を並列に)
 parts:
-  J1: sma d2 mirror CH0
-  L1: transformer d6
-  J2: sma d10 CH1
-  G1: ground e2
-  G2: ground e10
+  J1: sma 2,4 mirror CH0
+  L1: transformer 6,4
+  J2: sma 10,4 CH1
+  G1: ground 2,5
+  G2: ground 10,5
 wires:
   - J1.1 -| L1.A1
-  - L1.A1 |- c6
-  - c6 -| L1.B1
-  - L1.A2 |- e6
-  - e6 -| L1.B2
+  - L1.A1 |- 6,3
+  - 6,3 -| L1.B1
+  - L1.A2 |- 6,5
+  - 6,5 -| L1.B2
   - L1.B2 -| J2.1
-  - J1.2 -- e2
-  - J2.2 -- e10
+  - J1.2 -- 2,5
+  - J2.2 -- 10,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/11-common-mode-choke-1.svg)
@@ -48,18 +48,18 @@ wires:
 ```circuit
 title: 図2 ディファレンシャルモード (A2 と B2 を結んで直列に)
 parts:
-  J1: sma d2 mirror CH0
-  L1: transformer d6
-  J2: sma d10 CH1
-  G1: ground e2
-  G2: ground e10
+  J1: sma 2,4 mirror CH0
+  L1: transformer 6,4
+  J2: sma 10,4 CH1
+  G1: ground 2,5
+  G2: ground 10,5
 wires:
   - J1.1 -| L1.A1
-  - L1.A2 |- e6
-  - e6 -| L1.B2
+  - L1.A2 |- 6,5
+  - 6,5 -| L1.B2
   - L1.B1 -| J2.1
-  - J1.2 -- e2
-  - J2.2 -- e10
+  - J1.2 -- 2,5
+  - J2.2 -- 10,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/11-common-mode-choke-2.svg)

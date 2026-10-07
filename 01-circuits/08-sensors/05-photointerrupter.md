@@ -19,26 +19,26 @@ board: BB
 ```circuit
 title: 図1 光を遮るとインジケータが点く
 parts:
-  VCC: vcc b2 5V
-  R1: resistor b2 d2 220
-  D1: led d2 f2
-  G1: ground f2
-  VCC: vcc b4 5V
-  R2: resistor b4 d4 10k
-  Q1: phototransistor e4 PT204-6C
-  G2: ground f4
-  R3: resistor d4 d6 10k
-  VCC: vcc b7 5V
-  R4: resistor b7 d7 330
-  D2: led d7 f7
-  Q2: npn g7 2SC1815
-  G3: ground h7
+  VCC: vcc 2,2 5V
+  R1: resistor 2,2 2,4 220
+  D1: led 2,4 2,6
+  G1: ground 2,6
+  VCC: vcc 4,2 5V
+  R2: resistor 4,2 4,4 10k
+  Q1: phototransistor 4,5 PT204-6C
+  G2: ground 4,6
+  R3: resistor 4,4 6,4 10k
+  VCC: vcc 7,2 5V
+  R4: resistor 7,2 7,4 330
+  D2: led 7,4 7,6
+  Q2: npn 7,7 2SC1815
+  G3: ground 7,8
 wires:
-  - d4 -- Q1.C
-  - Q1.E -- f4
-  - d6 |- Q2.B
-  - f7 -- Q2.C
-  - Q2.E -- h7
+  - 4,4 -- Q1.C
+  - Q1.E -- 4,6
+  - 6,4 |- Q2.B
+  - 7,6 -- Q2.C
+  - Q2.E -- 7,8
 style:
   grid: on
   pitch: 1.2

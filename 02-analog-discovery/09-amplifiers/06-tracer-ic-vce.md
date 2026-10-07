@@ -26,24 +26,24 @@ title: 図1 Vce を掃引し、Ib を数段階に固定して測る (アダプ�
 parts:
   AD:
     type: device
-    at: a1
+    at: 1,1
     label: Analog Discovery
     pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
-  Rb: resistor a5 c5 220k
-  Q1: npn f9 2SC1815
-  Rs: resistor c15 c18 100
-  G1: ground f21
+  Rb: resistor 5,1 5,3 220k
+  Q1: npn 9,6 2SC1815
+  Rs: resistor 15,3 18,3 100
+  G1: ground 21,6
 wires:
-  - AD.V+ -| a5
-  - c5 |- Q1.B
-  - AD.W1 -| c15
-  - AD.2+ -| c15
-  - c18 |- Q1.C
-  - AD.2- -| c18
-  - AD.1+ -| c18
-  - Q1.E -| f21
-  - AD.1- -| f21
-  - AD.GND -| f21
+  - AD.V+ -| 5,1
+  - 5,3 |- Q1.B
+  - AD.W1 -| 15,3
+  - AD.2+ -| 15,3
+  - 18,3 |- Q1.C
+  - AD.2- -| 18,3
+  - AD.1+ -| 18,3
+  - Q1.E -| 21,6
+  - AD.1- -| 21,6
+  - AD.GND -| 21,6
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/circuit/06-tracer-ic-vce.svg)

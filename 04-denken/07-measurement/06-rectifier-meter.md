@@ -30,38 +30,38 @@ board: BB
 ```circuit
 title: 図1 整流形の計器の模型 (精密全波整流と平均)
 parts:
-  V1: sine c1 h1 2 l=$\mathrm{W1}$
-  R1: resistor f2 f4 10k
-  U1: opamp g6 +down
-  R2: resistor e4 e8 10k
-  D1: diode e8 g8 1N4148
-  D2: diode i8 i4 1N4148
-  R4: resistor e8 e10 10k
-  R3: resistor c2 c10 20k
-  U2: opamp e12 +down
-  R5: resistor b10 b13 20k
-  C1: capacitor a10 a13 1u
-  OUT: port e15
-  G1: ground h1
-  G2: ground h5
-  G3: ground h11
+  V1: sine 1,3 1,8 2 l=$\mathrm{W1}$
+  R1: resistor 2,6 4,6 10k
+  U1: opamp 6,7 +down
+  R2: resistor 4,5 8,5 10k
+  D1: diode 8,5 8,7 1N4148
+  D2: diode 8,9 4,9 1N4148
+  R4: resistor 8,5 10,5 10k
+  R3: resistor 2,3 10,3 20k
+  U2: opamp 12,5 +down
+  R5: resistor 10,2 13,2 20k
+  C1: capacitor 10,1 13,1 1u
+  OUT: port 15,5
+  G1: ground 1,8
+  G2: ground 5,8
+  G3: ground 11,8
 wires:
-  - c1 -- c2 -- f2
-  - e4 -- f4 -- g4 -- i4
-  - g4 |- U1.-
-  - U1.+ -| h5
-  - U1.out -- g8 -- i8
-  - c10 -- e10
-  - e10 |- U2.-
-  - U2.+ -| h11
-  - a10 -- b10 -- c10
-  - U2.out -| a13
-  - b13 -- a13
-  - U2.out -- e15
+  - 1,3 -- 2,3 -- 2,6
+  - 4,5 -- 4,6 -- 4,7 -- 4,9
+  - 4,7 |- U1.-
+  - U1.+ -| 5,8
+  - U1.out -- 8,7 -- 8,9
+  - 10,3 -- 10,5
+  - 10,5 |- U2.-
+  - U2.+ -| 11,8
+  - 10,1 -- 10,2 -- 10,3
+  - U2.out -| 13,1
+  - 13,2 -- 13,1
+  - U2.out -- 15,5
 notes:
-  - text b1 blue: 入力 (CH1)
-  - text d8 blue: X
-  - text d14 blue: 出力 (CH2)
+  - text 1,2 blue: 入力 (CH1)
+  - text 8,4 blue: X
+  - text 14,4 blue: 出力 (CH2)
 style:
   standard: jis
   grid: on

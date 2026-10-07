@@ -36,28 +36,28 @@ Open / Short / Load・アッテネータ・フィルタを並べた練習用の�
 ```circuit
 title: 図1 スルーの等価回路 (上が自作、下が市販)
 parts:
-  J1: sma b2 mirror CH0
-  L1: inductor b4 b6 52n
-  J2: sma b8 CH1
-  G1: ground c2
-  G2: ground c8
-  J3: sma e2 mirror CH0
-  T1: tline e4 e6 50
-  J4: sma e8 CH1
-  G3: ground f2
-  G4: ground f8
+  J1: sma 2,2 mirror CH0
+  L1: inductor 4,2 6,2 52n
+  J2: sma 8,2 CH1
+  G1: ground 2,3
+  G2: ground 8,3
+  J3: sma 2,5 mirror CH0
+  T1: tline 4,5 6,5 50
+  J4: sma 8,5 CH1
+  G3: ground 2,6
+  G4: ground 8,6
 wires:
-  - J1.1 -- b4
-  - b6 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c8
-  - J3.1 -- e4
-  - e6 -- J4.1
-  - J3.2 -- f2
-  - J4.2 -- f8
+  - J1.1 -- 4,2
+  - 6,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 8,3
+  - J3.1 -- 4,5
+  - 6,5 -- J4.1
+  - J3.2 -- 2,6
+  - J4.2 -- 8,6
 notes:
-  - text a5 center: "自作 (3-6)、線がインダクタンス"
-  - text d5 center: "市販、50 Ω のマイクロストリップ"
+  - text 5,1 center: "自作 (3-6)、線がインダクタンス"
+  - text 5,4 center: "市販、50 Ω のマイクロストリップ"
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/10-commercial-test-board.svg)

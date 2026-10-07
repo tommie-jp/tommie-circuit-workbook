@@ -33,22 +33,22 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  W1: sine c1 i1 l=$\mathrm{W1}$
-  M1: voltmeter c3 i3 l=$\mathrm{CH1}$
-  RL: resistor c5 c8 470
-  M2: voltmeter a5 a8 l=$\mathrm{CH2}$
-  Q1: thyristor c10 i10 2N5064
-  RG: resistor g13 g11 1k
-  W2: square g14 i14 l=$\mathrm{W2}$
-  G1: ground i1
+  W1: sine 1,3 1,9 l=$\mathrm{W1}$
+  M1: voltmeter 3,3 3,9 l=$\mathrm{CH1}$
+  RL: resistor 5,3 8,3 470
+  M2: voltmeter 5,1 8,1 l=$\mathrm{CH2}$
+  Q1: thyristor 10,3 10,9 2N5064
+  RG: resistor 13,7 11,7 1k
+  W2: square 14,7 14,9 l=$\mathrm{W2}$
+  G1: ground 1,9
 wires:
-  - c1 -- c3 -- c5
-  - a5 -- c5
-  - a8 -- c8
-  - c8 -- c10
-  - Q1.g -| g11
-  - g13 -- g14
-  - i1 -- i3 -- i10 -- i14
+  - 1,3 -- 3,3 -- 5,3
+  - 5,1 -- 5,3
+  - 8,1 -- 8,3
+  - 8,3 -- 10,3
+  - Q1.g -| 11,7
+  - 13,7 -- 14,7
+  - 1,9 -- 3,9 -- 10,9 -- 14,9
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/circuit/05-thyristor-phase-control.svg)

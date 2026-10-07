@@ -32,22 +32,22 @@ device: H4
 ```circuit
 title: 図1 10 dB T 型アッテネータ
 parts:
-  J1: sma b2 mirror
-  R1: resistor b4 b6 27
-  R2: resistor b6 d6 36
-  R3: resistor b6 b8 27
-  J2: sma b10
-  G1: ground c2
-  G2: ground d6
-  G3: ground c10
+  J1: sma 2,2 mirror
+  R1: resistor 4,2 6,2 27
+  R2: resistor 6,2 6,4 36
+  R3: resistor 6,2 8,2 27
+  J2: sma 10,2
+  G1: ground 2,3
+  G2: ground 6,4
+  G3: ground 10,3
 wires:
-  - J1.1 -- b4
-  - b8 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c10
+  - J1.1 -- 4,2
+  - 8,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 10,3
 notes:
-  - text a2 center: CH0
-  - text a10 center: CH1
+  - text 2,1 center: CH0
+  - text 10,1 center: CH1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/05-attenuator.svg)

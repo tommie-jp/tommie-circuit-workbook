@@ -29,17 +29,17 @@ title: 図1 シャント抵抗で電流を電圧に
 style:
   standard: jis
 parts:
-  V1: vsource c1 g1 5
-  Rs: resistor c1 c5 10 i=I
-  M2: voltmeter a1 a5 l=$\mathrm{CH2}$
-  M1: voltmeter c5 g5 l=$\mathrm{CH1}$
-  R1: resistor c8 g8 470
-  G1: ground g5
+  V1: vsource 1,3 1,7 5
+  Rs: resistor 1,3 5,3 10 i=I
+  M2: voltmeter 1,1 5,1 l=$\mathrm{CH2}$
+  M1: voltmeter 5,3 5,7 l=$\mathrm{CH1}$
+  R1: resistor 8,3 8,7 470
+  G1: ground 5,7
 wires:
-  - a1 -- c1
-  - a5 -- c5
-  - c5 -- c8
-  - g1 -- g5 -- g8
+  - 1,1 -- 1,3
+  - 5,1 -- 5,3
+  - 5,3 -- 8,3
+  - 1,7 -- 5,7 -- 8,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/circuit/03-shunt-2ch-1.svg)
@@ -129,16 +129,16 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: vsource c1 g1 5
-  M1: voltmeter c3 g3 l=$\mathrm{CH1}$
-  R1: resistor c5 e5 470
-  Rs: resistor e7 g7 10 i=I
-  M2: voltmeter e9 g9 l=$\mathrm{CH2}$
-  G1: ground g1
+  V1: vsource 1,3 1,7 5
+  M1: voltmeter 3,3 3,7 l=$\mathrm{CH1}$
+  R1: resistor 5,3 5,5 470
+  Rs: resistor 7,5 7,7 10 i=I
+  M2: voltmeter 9,5 9,7 l=$\mathrm{CH2}$
+  G1: ground 1,7
 wires:
-  - c1 -- c3 -- c5
-  - e5 -- e7 -- e9
-  - g1 -- g3 -- g7 -- g9
+  - 1,3 -- 3,3 -- 5,3
+  - 5,5 -- 7,5 -- 9,5
+  - 1,7 -- 3,7 -- 7,7 -- 9,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/circuit/03-shunt-2ch-2.svg)

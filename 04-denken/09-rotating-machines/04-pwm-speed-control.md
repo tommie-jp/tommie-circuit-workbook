@@ -34,24 +34,24 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  B1: battery c1 i1 4.5
-  W1: square g3 i3 l=$\mathrm{W1}$
-  M2: voltmeter g5 i5 l=$\mathrm{CH2}$
-  RGS: resistor g7 i7 10k
-  RG: resistor g7 g10 470
-  D1: schottky f10 c10 1N5819
-  M1: motor c12 f12
-  M3: voltmeter c14 f14 l=$\mathrm{CH1}$
-  Q1: nmos-e g12 IRLZ44N
-  G1: ground i1
+  B1: battery 1,3 1,9 4.5
+  W1: square 3,7 3,9 l=$\mathrm{W1}$
+  M2: voltmeter 5,7 5,9 l=$\mathrm{CH2}$
+  RGS: resistor 7,7 7,9 10k
+  RG: resistor 7,7 10,7 470
+  D1: schottky 10,6 10,3 1N5819
+  M1: motor 12,3 12,6
+  M3: voltmeter 14,3 14,6 l=$\mathrm{CH1}$
+  Q1: nmos-e 12,7 IRLZ44N
+  G1: ground 1,9
 wires:
-  - c1 -- c10 -- c12 -- c14
-  - f10 -- f12 -- f14
-  - f12 -- Q1.D
-  - g3 -- g5 -- g7
-  - g10 -| Q1.G
-  - Q1.S |- i12
-  - i1 -- i3 -- i5 -- i7 -- i12
+  - 1,3 -- 10,3 -- 12,3 -- 14,3
+  - 10,6 -- 12,6 -- 14,6
+  - 12,6 -- Q1.D
+  - 3,7 -- 5,7 -- 7,7
+  - 10,7 -| Q1.G
+  - Q1.S |- 12,9
+  - 1,9 -- 3,9 -- 5,9 -- 7,9 -- 12,9
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/04-pwm-speed-control.svg)

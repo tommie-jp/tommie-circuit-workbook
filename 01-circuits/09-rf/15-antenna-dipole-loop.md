@@ -55,25 +55,25 @@ board: CB
 ```circuit
 title: 図1 VNA からバラン経由でダイポールへ
 parts:
-  J1: sma c2 mirror
-  G1: ground d2
-  T1: tline c3 c6 50 l=$\mathrm{1m}$
-  T2: transformer c8
-  G2: ground d7
-  ANT1: antenna a11
-  ANT2: antenna a13
+  J1: sma 2,3 mirror
+  G1: ground 2,4
+  T1: tline 3,3 6,3 50 l=$\mathrm{1m}$
+  T2: transformer 8,3
+  G2: ground 7,4
+  ANT1: antenna 11,1
+  ANT2: antenna 13,1
 wires:
-  - J1.1 -- c3
-  - J1.2 -- d2
-  - c6 -| T2.A1
-  - T2.A2 -| d7
-  - T2.B1 -| a11
-  - T2.B2 -| a13
+  - J1.1 -- 3,3
+  - J1.2 -- 2,4
+  - 6,3 -| T2.A1
+  - T2.A2 -| 7,4
+  - T2.B1 -| 11,1
+  - T2.B2 -| 13,1
 notes:
-  - text c1 right: PORT1
-  - text b10a7 right small: 片側49cm
-  - text b13a3 left small: 片側49cm
-  - text d9 left small: 1:1電流バラン
+  - text 1,3 right: PORT1
+  - text 10.7,2 right small: 片側49cm
+  - text 13.3,2 left small: 片側49cm
+  - text 9,4 left small: 1:1電流バラン
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/15-antenna-dipole-loop-1.svg)
@@ -91,18 +91,18 @@ notes:
 ```circuit
 title: 図2 共振の近くのダイポールの模型 (直列RLC)
 parts:
-  J1: sma c2 mirror
-  G1: ground d2
-  R1: resistor c4 c6 73 l=$\mathrm{R_r}$
-  L1: inductor c6 c8 801n
-  C1: capacitor c8 c10 1.504p
-  G2: ground d11
+  J1: sma 2,3 mirror
+  G1: ground 2,4
+  R1: resistor 4,3 6,3 73 l=$\mathrm{R_r}$
+  L1: inductor 6,3 8,3 801n
+  C1: capacitor 8,3 10,3 1.504p
+  G2: ground 11,4
 wires:
-  - J1.1 -- c4
-  - J1.2 -- d2
-  - c10 -- c11 -- d11
+  - J1.1 -- 4,3
+  - J1.2 -- 2,4
+  - 10,3 -- 11,3 -- 11,4
 notes:
-  - text b2 center: PORT1
+  - text 2,2 center: PORT1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/15-antenna-dipole-loop-2.svg)
@@ -113,21 +113,21 @@ L ≈ 0.25 µH) と同調コンデンサ CT が閉じた共振回路を作る。
 ```circuit
 title: 図3 小さなループと同調コンデンサ
 parts:
-  J1: sma c2 mirror
-  G1: ground d2
-  T1: transformer c6
-  G2: ground d5
-  CT: capacitor c9 c11 4.7p
+  J1: sma 2,3 mirror
+  G1: ground 2,4
+  T1: transformer 6,3
+  G2: ground 5,4
+  CT: capacitor 9,3 11,3 4.7p
 wires:
-  - J1.1 -- c3
-  - J1.2 -- d2
-  - c3 -| T1.A1
-  - T1.A2 -| d5
-  - T1.B1 -| c9
-  - T1.B2 -| c11
+  - J1.1 -- 3,3
+  - J1.2 -- 2,4
+  - 3,3 -| T1.A1
+  - T1.A2 -| 5,4
+  - T1.B1 -| 9,3
+  - T1.B2 -| 11,3
 notes:
-  - text c1 right: PORT1
-  - text d9 center small: 二次側が大ループ (0.25 µH)
+  - text 1,3 right: PORT1
+  - text 9,4 center small: 二次側が大ループ (0.25 µH)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/15-antenna-dipole-loop-3.svg)

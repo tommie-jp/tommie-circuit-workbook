@@ -27,23 +27,23 @@ parts:
   G1: ground gnd
   M1:
     type: device
-    at: c7
+    at: 7,3
     label: Buck DC-DC
     pins: [IN+, IN-, OUT+, OUT-]
-  Rload: resistor e7 g7 100
-  Rled: resistor e9 g9 330
-  Dled: led g9 i9 red
-  GD: ground i9
-  G2: ground g7
+  Rload: resistor 7,5 7,7 100
+  Rled: resistor 9,5 9,7 330
+  Dled: led 9,7 9,9 red
+  GD: ground 9,9
+  G2: ground 7,7
 points:
-  vin: b2
-  gnd: d2
+  vin: 2,2
+  gnd: 2,4
 wires:
-  - vin -- b4a5 |- M1.IN+
-  - gnd -- d3a5 |- M1.IN-
-  - M1.OUT+ -| e5
-  - e5 -- e7
-  - e7 -- e9
+  - vin -- 4.5,2 |- M1.IN+
+  - gnd -- 3.5,4 |- M1.IN-
+  - M1.OUT+ -| 5,5
+  - 5,5 -- 7,5
+  - 7,5 -- 9,5
 style:
   grid: on
   pitch: 1.2

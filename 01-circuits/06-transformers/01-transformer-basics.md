@@ -23,21 +23,21 @@ board: BB
 ```circuit
 title: 図1 トランスで昇圧する (CH1 は 1 次、CH2 は 2 次の電圧)
 parts:
-  V1: sine b2 d2 8.5
-  M1: voltmeter b5 d5 l=$\mathrm{CH1}$
-  T1: transformer c8 6V/12V
-  R1: resistor b12 d12 1k
-  M2: voltmeter b15 d15 l=$\mathrm{CH2}$
-  G1: ground d2
+  V1: sine 2,2 2,4 8.5
+  M1: voltmeter 5,2 5,4 l=$\mathrm{CH1}$
+  T1: transformer 8,3 6V/12V
+  R1: resistor 12,2 12,4 1k
+  M2: voltmeter 15,2 15,4 l=$\mathrm{CH2}$
+  G1: ground 2,4
 wires:
-  - b2 -- b5
-  - b5 -| T1.A1
-  - d2 -- d5
-  - d5 -| T1.A2
-  - b12 |- T1.B1
-  - d12 |- T1.B2
-  - b12 -- b15
-  - d12 -- d15
+  - 2,2 -- 5,2
+  - 5,2 -| T1.A1
+  - 2,4 -- 5,4
+  - 5,4 -| T1.A2
+  - 12,2 |- T1.B1
+  - 12,4 |- T1.B2
+  - 12,2 -- 15,2
+  - 12,4 -- 15,4
 style:
   grid: on
   pitch: 0.9

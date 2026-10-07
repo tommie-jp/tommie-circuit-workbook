@@ -23,31 +23,31 @@ board: BB
 ```circuit
 title: 図1 エミッタフォロア (W1 で入れ、CH2 と CH1 で比べる)
 parts:
-  VCC: vcc b8 5V
-  R1: resistor b6 d6 22k
-  R2: resistor d6 f6 10k
-  G2: ground f6
-  Q1: npn d8
-  CIN: ecap d5 d4 10u
-  W1: sine d2 f2 l=$\mathrm{W1}$
-  M2: voltmeter d4 f4 l=$\mathrm{CH2}$
-  G5: ground f4
-  RE: resistor f8 h8 1k
-  G3: ground h8
-  COUT: ecap f8 f11 10u
-  RL: resistor f11 h11 1k
-  G4: ground h11
-  OUT: port f11
-  M1: voltmeter f13 h13 l=$\mathrm{CH1}$
+  VCC: vcc 8,2 5V
+  R1: resistor 6,2 6,4 22k
+  R2: resistor 6,4 6,6 10k
+  G2: ground 6,6
+  Q1: npn 8,4
+  CIN: ecap 5,4 4,4 10u
+  W1: sine 2,4 2,6 l=$\mathrm{W1}$
+  M2: voltmeter 4,4 4,6 l=$\mathrm{CH2}$
+  G5: ground 4,6
+  RE: resistor 8,6 8,8 1k
+  G3: ground 8,8
+  COUT: ecap 8,6 11,6 10u
+  RL: resistor 11,6 11,8 1k
+  G4: ground 11,8
+  OUT: port 11,6
+  M1: voltmeter 13,6 13,8 l=$\mathrm{CH1}$
 wires:
-  - b6 -- b8
-  - b8 -- Q1.C
-  - d5 -- d6 -- Q1.B
-  - Q1.E -- f8
-  - d2 -- d4
-  - f2 -- f4
-  - f11 -- f13
-  - h11 -- h13
+  - 6,2 -- 8,2
+  - 8,2 -- Q1.C
+  - 5,4 -- 6,4 -- Q1.B
+  - Q1.E -- 8,6
+  - 2,4 -- 4,4
+  - 2,6 -- 4,6
+  - 11,6 -- 13,6
+  - 11,8 -- 13,8
 style:
   grid: on
   pitch: 1.2

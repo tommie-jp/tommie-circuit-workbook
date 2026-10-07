@@ -33,22 +33,22 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{W1}$
-  M1: voltmeter a3 a11 l=$\mathrm{CH1}$
-  R1: resistor c4 c6 100 i=I1
-  L1: inductor c7 c9 10m
-  C1: capacitor e5 e8 1u i=I2
-  Rs: resistor e11 g11 100 i=I
-  M2: voltmeter e13 g13 l=$\mathrm{CH2}$
-  G1: ground g1
+  V1: sine 1,3 1,7 l=$\mathrm{W1}$
+  M1: voltmeter 3,1 11,1 l=$\mathrm{CH1}$
+  R1: resistor 4,3 6,3 100 i=I1
+  L1: inductor 7,3 9,3 10m
+  C1: capacitor 5,5 8,5 1u i=I2
+  Rs: resistor 11,5 11,7 100 i=I
+  M2: voltmeter 13,5 13,7 l=$\mathrm{CH2}$
+  G1: ground 1,7
 wires:
-  - c1 -- c3 -- c4
-  - a3 -- c3 -- e3 -- e5
-  - c6 -- c7
-  - c9 -- c11
-  - a11 -- c11 -- e11
-  - e8 -- e11 -- e13
-  - g1 -- g11 -- g13
+  - 1,3 -- 3,3 -- 4,3
+  - 3,1 -- 3,3 -- 3,5 -- 5,5
+  - 6,3 -- 7,3
+  - 9,3 -- 11,3
+  - 11,1 -- 11,3 -- 11,5
+  - 8,5 -- 11,5 -- 13,5
+  - 1,7 -- 11,7 -- 13,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/10-symbolic-impedance.svg)

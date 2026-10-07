@@ -41,43 +41,43 @@ FM (周波数変調) は、音声で搬送波の**周波数**を変えて送る�
 ```circuit
 title: 図1 コルピッツ発振 + マイク直接FM
 parts:
-  VCC: vcc a2 5V
-  L1: inductor c10 a10 260n
-  Cb: capacitor a4 c4 0.1u
-  GCb: ground c4
-  Cant: capacitor c13 c15 2.2p
-  ANT: antenna c16
-  Q1: npn e10
-  C1: capacitor d12 f12 22p
-  C2: capacitor g12 i12 47p
-  GC2: ground i12
-  Re: resistor g10 i10 470
-  GRe: ground i10
-  Rb1: resistor a8 c8 10k
-  Rb2: resistor g7 e7 2.4k
-  GRb2: ground g7
-  C3: capacitor e8 g8 0.001u
-  GC3: ground g8
-  MIC: mic e2 g2 l=$\mathrm{MIC}$
-  GMIC: ground g2
-  Rmic: resistor a2 c2 2.2k
-  Cmic: capacitor e3 e5 0.1u
+  VCC: vcc 2,1 5V
+  L1: inductor 10,3 10,1 260n
+  Cb: capacitor 4,1 4,3 0.1u
+  GCb: ground 4,3
+  Cant: capacitor 13,3 15,3 2.2p
+  ANT: antenna 16,3
+  Q1: npn 10,5
+  C1: capacitor 12,4 12,6 22p
+  C2: capacitor 12,7 12,9 47p
+  GC2: ground 12,9
+  Re: resistor 10,7 10,9 470
+  GRe: ground 10,9
+  Rb1: resistor 8,1 8,3 10k
+  Rb2: resistor 7,7 7,5 2.4k
+  GRb2: ground 7,7
+  C3: capacitor 8,5 8,7 0.001u
+  GC3: ground 8,7
+  MIC: mic 2,5 2,7 l=$\mathrm{MIC}$
+  GMIC: ground 2,7
+  Rmic: resistor 2,1 2,3 2.2k
+  Cmic: capacitor 3,5 5,5 0.1u
 wires:
-  - a2 -- a10
-  - c10 -- Q1.C
-  - c10 -- c12
-  - c12 -- c13
-  - c12 -- d12
-  - c15 -- c16
-  - f12 -- g12
-  - Q1.E -- g10
-  - g10 -- g12
-  - c2 -- e2
-  - e2 -- e3
-  - e5 -- e7
-  - e7 -- e8
-  - e8 -- Q1.B
-  - c8 -- e8
+  - 2,1 -- 10,1
+  - 10,3 -- Q1.C
+  - 10,3 -- 12,3
+  - 12,3 -- 13,3
+  - 12,3 -- 12,4
+  - 15,3 -- 16,3
+  - 12,6 -- 12,7
+  - Q1.E -- 10,7
+  - 10,7 -- 12,7
+  - 2,3 -- 2,5
+  - 2,5 -- 3,5
+  - 5,5 -- 7,5
+  - 7,5 -- 8,5
+  - 8,5 -- Q1.B
+  - 8,3 -- 8,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/04-fm-transmitter-1.svg)
@@ -380,43 +380,43 @@ markers: [80M, 160M, 240M]
 ```circuit
 title: 図4 マイクの代わりに AD の W1 (1kHz) を分圧して入れる
 parts:
-  VCC: vcc a2 5V
-  L1: inductor c10 a10 260n
-  Cb: capacitor a4 c4 0.1u
-  GCb: ground c4
-  Cant: capacitor c13 c15 2.2p
-  ANT: antenna c16
-  Q1: npn e10
-  C1: capacitor d12 f12 22p
-  C2: capacitor g12 i12 47p
-  GC2: ground i12
-  Re: resistor g10 i10 470
-  GRe: ground i10
-  Rb1: resistor a8 c8 10k
-  Rb2: resistor g7 e7 2.4k
-  GRb2: ground g7
-  C3: capacitor e8 g8 0.001u
-  GC3: ground g8
-  W1: sine e1 g1 l=$\mathrm{W1}$
-  GW1: ground g1
-  Rin: resistor e1 e3 10k
-  Rd: resistor e3 g3 100
-  GRd: ground g3
-  Cmic: capacitor e3 e5 0.1u
+  VCC: vcc 2,1 5V
+  L1: inductor 10,3 10,1 260n
+  Cb: capacitor 4,1 4,3 0.1u
+  GCb: ground 4,3
+  Cant: capacitor 13,3 15,3 2.2p
+  ANT: antenna 16,3
+  Q1: npn 10,5
+  C1: capacitor 12,4 12,6 22p
+  C2: capacitor 12,7 12,9 47p
+  GC2: ground 12,9
+  Re: resistor 10,7 10,9 470
+  GRe: ground 10,9
+  Rb1: resistor 8,1 8,3 10k
+  Rb2: resistor 7,7 7,5 2.4k
+  GRb2: ground 7,7
+  C3: capacitor 8,5 8,7 0.001u
+  GC3: ground 8,7
+  W1: sine 1,5 1,7 l=$\mathrm{W1}$
+  GW1: ground 1,7
+  Rin: resistor 1,5 3,5 10k
+  Rd: resistor 3,5 3,7 100
+  GRd: ground 3,7
+  Cmic: capacitor 3,5 5,5 0.1u
 wires:
-  - a2 -- a10
-  - c10 -- Q1.C
-  - c10 -- c12
-  - c12 -- c13
-  - c12 -- d12
-  - c15 -- c16
-  - f12 -- g12
-  - Q1.E -- g10
-  - g10 -- g12
-  - e5 -- e7
-  - e7 -- e8
-  - e8 -- Q1.B
-  - c8 -- e8
+  - 2,1 -- 10,1
+  - 10,3 -- Q1.C
+  - 10,3 -- 12,3
+  - 12,3 -- 13,3
+  - 12,3 -- 12,4
+  - 15,3 -- 16,3
+  - 12,6 -- 12,7
+  - Q1.E -- 10,7
+  - 10,7 -- 12,7
+  - 5,5 -- 7,5
+  - 7,5 -- 8,5
+  - 8,5 -- Q1.B
+  - 8,3 -- 8,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/04-fm-transmitter-2.svg)

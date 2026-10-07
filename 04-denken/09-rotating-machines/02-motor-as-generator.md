@@ -33,14 +33,14 @@ title: 図1 モータを発電機にして開放電圧を見る
 style:
   standard: jis
 parts:
-  M1: motor c3 c7
-  M2: voltmeter a3 a7 l=$\mathrm{CH1}$
-  G1: ground c7
+  M1: motor 3,3 7,3
+  M2: voltmeter 3,1 7,1 l=$\mathrm{CH1}$
+  G1: ground 7,3
 wires:
-  - a3 |- c3
-  - a7 -- c7
+  - 3,1 |- 3,3
+  - 7,1 -- 7,3
 notes:
-  - text d5: "指で軸を回す (発電機として使う)"
+  - text 5,4: "指で軸を回す (発電機として使う)"
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/02-motor-as-generator.svg)

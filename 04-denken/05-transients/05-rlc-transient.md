@@ -31,18 +31,18 @@ R が小さいと電圧は最終値を**行き過ぎて揺れる** (減衰振動
 ```circuit
 title: 図1 RLC 直列に方形波を加える
 parts:
-  V1: square b1 d1 1 l=$\mathrm{W1}$
-  R1: resistor b1 b3 100
-  L1: inductor b4 b6 10m
-  C1: capacitor b7 d7 100n
-  G1: ground d1
+  V1: square 1,2 1,4 1 l=$\mathrm{W1}$
+  R1: resistor 1,2 3,2 100
+  L1: inductor 4,2 6,2 10m
+  C1: capacitor 7,2 7,4 100n
+  G1: ground 1,4
 wires:
-  - b3 -- b4
-  - b6 -- b7
-  - d1 -- d7
+  - 3,2 -- 4,2
+  - 6,2 -- 7,2
+  - 1,4 -- 7,4
 notes:
-  - text a1f0 blue: 入力 (CH1)
-  - text a7f0 blue: 出力 Vc (CH2)
+  - text 1,1.5 blue: 入力 (CH1)
+  - text 7,1.5 blue: 出力 Vc (CH2)
 style:
   standard: jis
   grid: on

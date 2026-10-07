@@ -23,48 +23,48 @@ D-FF を一列につなぎ、前の段の Q を次の段の D に入れる。す
 ```circuit
 title: 図1 4 段のシフトレジスタ。Q3 は 4 クロック前の DIN
 parts:
-  DIN: port e2
-  CLK: port h2
+  DIN: port 2,5
+  CLK: port 2,8
   U1:
     type: ic3
-    at: e6
+    at: 6,5
     label: D-FF
     pins: [D, CLK, Q]
   U2:
     type: ic3
-    at: e14
+    at: 14,5
     label: D-FF
     pins: [D, CLK, Q]
   U3:
     type: ic3
-    at: e22
+    at: 22,5
     label: D-FF
     pins: [D, CLK, Q]
   U4:
     type: ic3
-    at: e30
+    at: 30,5
     label: D-FF
     pins: [D, CLK, Q]
-  Q0: port b10
-  Q1: port b18
-  Q2: port b26
-  Q3: port e34
+  Q0: port 10,2
+  Q1: port 18,2
+  Q2: port 26,2
+  Q3: port 34,5
 wires:
-  - e2 -- U1.D
-  - h2 -- h6 -- U1.CLK
-  - h6 -- h14 -- U2.CLK
-  - h14 -- h22 -- U3.CLK
-  - h22 -- h30 -- U4.CLK
-  - U1.Q -- e10
-  - e10 -- U2.D
-  - U2.Q -- e18
-  - e18 -- U3.D
-  - U3.Q -- e26
-  - e26 -- U4.D
-  - e10 -- b10
-  - e18 -- b18
-  - e26 -- b26
-  - U4.Q -- e34
+  - 2,5 -- U1.D
+  - 2,8 -- 6,8 -- U1.CLK
+  - 6,8 -- 14,8 -- U2.CLK
+  - 14,8 -- 22,8 -- U3.CLK
+  - 22,8 -- 30,8 -- U4.CLK
+  - U1.Q -- 10,5
+  - 10,5 -- U2.D
+  - U2.Q -- 18,5
+  - 18,5 -- U3.D
+  - U3.Q -- 26,5
+  - 26,5 -- U4.D
+  - 10,5 -- 10,2
+  - 18,5 -- 18,2
+  - 26,5 -- 26,2
+  - U4.Q -- 34,5
 style:
   pitch: 1.2
 ```

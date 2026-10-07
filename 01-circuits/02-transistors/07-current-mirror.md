@@ -22,28 +22,28 @@ source: 自作
 ```circuit
 title: 図1 カレントミラーで LED を定電流点灯する (CH2 で RREF、CH1 で RS の電圧を見る)
 parts:
-  VCC: vcc b1 5V
-  M2: voltmeter b2 d2 l=$\mathrm{CH2}$
-  RREF: resistor b4 d4 560
-  Q1: npn f4 mirror
-  RS: resistor b7 c7 47
-  D1: led c7 d7
-  Q2: npn f7
-  M1: voltmeter b9 c9 l=$\mathrm{CH1}$
-  G0: ground g5
+  VCC: vcc 1,2 5V
+  M2: voltmeter 2,2 2,4 l=$\mathrm{CH2}$
+  RREF: resistor 4,2 4,4 560
+  Q1: npn 4,6 mirror
+  RS: resistor 7,2 7,3 47
+  D1: led 7,3 7,4
+  Q2: npn 7,6
+  M1: voltmeter 9,2 9,3 l=$\mathrm{CH1}$
+  G0: ground 5,7
 wires:
-  - b1 -- b2 -- b4 -- b7 -- b9
-  - d2 -- d4
-  - c7 -- c9
-  - d4 -- Q1.C
-  - d4 -- d5
-  - d5 -- f5
-  - Q1.B -- f5
-  - f5 -- Q2.B
-  - d7 -- Q2.C
-  - Q1.E -- g4
-  - Q2.E -- g7
-  - g4 -- g5 -- g7
+  - 1,2 -- 2,2 -- 4,2 -- 7,2 -- 9,2
+  - 2,4 -- 4,4
+  - 7,3 -- 9,3
+  - 4,4 -- Q1.C
+  - 4,4 -- 5,4
+  - 5,4 -- 5,6
+  - Q1.B -- 5,6
+  - 5,6 -- Q2.B
+  - 7,4 -- Q2.C
+  - Q1.E -- 4,7
+  - Q2.E -- 7,7
+  - 4,7 -- 5,7 -- 7,7
 style:
   grid: on
   pitch: 1.2

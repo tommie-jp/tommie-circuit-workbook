@@ -31,16 +31,16 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  W1: sine c1 h1 l=$\mathrm{W1}$
-  L1: inductor c4 e4 l=$\mathrm{L_x}$
-  M1: voltmeter c6 e6 l=$\mathrm{CH1}$
-  Rr: resistor e4 h4 150 l=$\mathrm{R_{ref}}$
-  M2: voltmeter e8 h8 l=$\mathrm{CH2}$
-  G1: ground h1
+  W1: sine 1,3 1,8 l=$\mathrm{W1}$
+  L1: inductor 4,3 4,5 l=$\mathrm{L_x}$
+  M1: voltmeter 6,3 6,5 l=$\mathrm{CH1}$
+  Rr: resistor 4,5 4,8 150 l=$\mathrm{R_{ref}}$
+  M2: voltmeter 8,5 8,8 l=$\mathrm{CH2}$
+  G1: ground 1,8
 wires:
-  - c1 -- c4 -- c6
-  - e4 -- e6 -- e8
-  - h1 -- h4 -- h8
+  - 1,3 -- 4,3 -- 6,3
+  - 4,5 -- 6,5 -- 8,5
+  - 1,8 -- 4,8 -- 8,8
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/06-self-inductance-1.svg)
@@ -136,16 +136,16 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  FG: sine c1 h1 l=$\mathrm{FG}$
-  M1: voltmeter c3 h3 l=$\mathrm{CH1}$
-  L1: inductor c5 e5 l=$\mathrm{L_x}$
-  Rr: resistor e5 h5 150 l=$\mathrm{R_{ref}}$
-  M2: voltmeter e8 h8 l=$\mathrm{CH2}$
-  G1: ground h1
+  FG: sine 1,3 1,8 l=$\mathrm{FG}$
+  M1: voltmeter 3,3 3,8 l=$\mathrm{CH1}$
+  L1: inductor 5,3 5,5 l=$\mathrm{L_x}$
+  Rr: resistor 5,5 5,8 150 l=$\mathrm{R_{ref}}$
+  M2: voltmeter 8,5 8,8 l=$\mathrm{CH2}$
+  G1: ground 1,8
 wires:
-  - c1 -- c3 -- c5
-  - e5 -- e8
-  - h1 -- h3 -- h5 -- h8
+  - 1,3 -- 3,3 -- 5,3
+  - 5,5 -- 8,5
+  - 1,8 -- 3,8 -- 5,8 -- 8,8
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/06-self-inductance-2.svg)

@@ -51,34 +51,34 @@ board: BB
 ```circuit
 title: 図1 送る側 (ボタンの状態を送る)
 parts:
-  U1: pico2 f3c0 mirror
+  U1: pico2 3,6.2 mirror
   U2:
     type: device
-    at: d12h0
+    at: 12,4.7
     label: nRF24L01+
     pins: [VCC, SCK, MOSI, MISO, CSN, CE, IRQ, GND]
-  C1: ecap a14 c14 10u
-  C2: capacitor a16 c16 100n
-  G1: ground c14
-  G2: ground c16
-  G3: ground g10
-  G4: ground j1
-  V3V3: vcc c1 3.3V
-  V3V3: vcc a10 3.3V
-  SW1: button k6 m6 l=$\mathrm{SW1}$
-  G5: ground m6
+  C1: ecap 14,1 14,3 10u
+  C2: capacitor 16,1 16,3 100n
+  G1: ground 14,3
+  G2: ground 16,3
+  G3: ground 10,7
+  G4: ground 1,10
+  V3V3: vcc 1,3 3.3V
+  V3V3: vcc 10,1 3.3V
+  SW1: button 6,11 6,13 l=$\mathrm{SW1}$
+  G5: ground 6,13
 wires:
-  - U1.3V3 -| c1
-  - a10 -- a14 -- a16
-  - a10 |- U2.VCC
-  - U1.GP2 -| c8g0 |- U2.SCK
-  - U1.GP3 -| d7a5 |- U2.MOSI
-  - U1.GP4 -| d7e0 |- U2.MISO
-  - U1.GP5 -| d6i5 |- U2.CSN
-  - U1.GP6 -| e6g0 |- U2.CE
-  - U2.GND -| g10
-  - U1.GND23 -| j1
-  - U1.GP15 -| k6
+  - U1.3V3 -| 1,3
+  - 10,1 -- 14,1 -- 16,1
+  - 10,1 |- U2.VCC
+  - U1.GP2 -| 8,3.6 |- U2.SCK
+  - U1.GP3 -| 7.5,4 |- U2.MOSI
+  - U1.GP4 -| 7,4.4 |- U2.MISO
+  - U1.GP5 -| 6.5,4.8 |- U2.CSN
+  - U1.GP6 -| 6,5.6 |- U2.CE
+  - U2.GND -| 10,7
+  - U1.GND23 -| 1,10
+  - U1.GP15 -| 6,11
 style:
   pitch: 1.2
 ```
@@ -88,35 +88,35 @@ style:
 ```circuit
 title: 図2 受ける側 (LED を点ける)
 parts:
-  U1: pico2 f3c0 mirror
+  U1: pico2 3,6.2 mirror
   U2:
     type: device
-    at: d12h0
+    at: 12,4.7
     label: nRF24L01+
     pins: [VCC, SCK, MOSI, MISO, CSN, CE, IRQ, GND]
-  C1: ecap a14 c14 10u
-  C2: capacitor a16 c16 100n
-  G1: ground c14
-  G2: ground c16
-  G3: ground g10
-  G4: ground j1
-  V3V3: vcc c1 3.3V
-  V3V3: vcc a10 3.3V
-  R1: resistor k6 m6 330
-  D1: led m6 o6 red
-  G5: ground o6
+  C1: ecap 14,1 14,3 10u
+  C2: capacitor 16,1 16,3 100n
+  G1: ground 14,3
+  G2: ground 16,3
+  G3: ground 10,7
+  G4: ground 1,10
+  V3V3: vcc 1,3 3.3V
+  V3V3: vcc 10,1 3.3V
+  R1: resistor 6,11 6,13 330
+  D1: led 6,13 6,15 red
+  G5: ground 6,15
 wires:
-  - U1.3V3 -| c1
-  - a10 -- a14 -- a16
-  - a10 |- U2.VCC
-  - U1.GP2 -| c8g0 |- U2.SCK
-  - U1.GP3 -| d7a5 |- U2.MOSI
-  - U1.GP4 -| d7e0 |- U2.MISO
-  - U1.GP5 -| d6i5 |- U2.CSN
-  - U1.GP6 -| e6g0 |- U2.CE
-  - U2.GND -| g10
-  - U1.GND23 -| j1
-  - U1.GP15 -| k6
+  - U1.3V3 -| 1,3
+  - 10,1 -- 14,1 -- 16,1
+  - 10,1 |- U2.VCC
+  - U1.GP2 -| 8,3.6 |- U2.SCK
+  - U1.GP3 -| 7.5,4 |- U2.MOSI
+  - U1.GP4 -| 7,4.4 |- U2.MISO
+  - U1.GP5 -| 6.5,4.8 |- U2.CSN
+  - U1.GP6 -| 6,5.6 |- U2.CE
+  - U2.GND -| 10,7
+  - U1.GND23 -| 1,10
+  - U1.GP15 -| 6,11
 style:
   pitch: 1.2
 ```

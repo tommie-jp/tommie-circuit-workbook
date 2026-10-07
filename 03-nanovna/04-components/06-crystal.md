@@ -21,16 +21,16 @@ device: H4
 ```circuit
 title: 図1 直列治具に水晶を挿す
 parts:
-  J1: sma b2 mirror CH0
-  X1: crystal b4 b6 10M
-  J2: sma b8 CH1
-  G1: ground c2
-  G2: ground c8
+  J1: sma 2,2 mirror CH0
+  X1: crystal 4,2 6,2 10M
+  J2: sma 8,2 CH1
+  G1: ground 2,3
+  G2: ground 8,3
 wires:
-  - J1.1 -- b4
-  - b6 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c8
+  - J1.1 -- 4,2
+  - 6,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 8,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/06-crystal.svg)

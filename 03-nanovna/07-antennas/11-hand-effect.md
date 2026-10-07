@@ -31,16 +31,16 @@ device: H4
 ```circuit
 title: 図1 ダイポールの給電点 (等価回路)。手で R1 と C1 が変わる
 parts:
-  J1: sma b2 mirror CH0
-  R1: resistor b4 b6 l=$R_1$
-  L1: inductor b6 b8 500n
-  C1: capacitor b8 b10 l=$C_1$
-  G1: ground c2
-  G2: ground c10
+  J1: sma 2,2 mirror CH0
+  R1: resistor 4,2 6,2 l=$R_1$
+  L1: inductor 6,2 8,2 500n
+  C1: capacitor 8,2 10,2 l=$C_1$
+  G1: ground 2,3
+  G2: ground 10,3
 wires:
-  - J1.1 -- b4
-  - b10 -- c10
-  - J1.2 -- c2
+  - J1.1 -- 4,2
+  - 10,2 -- 10,3
+  - J1.2 -- 2,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/11-hand-effect.svg)

@@ -20,44 +20,44 @@ OP アンプの負電源 (4 章の ± 電源) や、基準電圧を少しだけ�
 ```circuit
 title: 図1 555 チャージポンプ (負電圧)
 parts:
-  V1: vsource b3 gnd 9
-  vcc: vcc b3 9V
+  V1: vsource 3,2 gnd 9
+  vcc: vcc 3,2 9V
   G1: ground gnd
-  U1: ic g10 NE555
-  vcc: vcc c6 9V
-  Ra: resistor c6 e6 1k
-  Rb: resistor f6f0 h6f0 4k7
-  C1: capacitor h8f0 j8f0 10n
-  GC1: ground j8f0
-  vcc: vcc c10 9V
-  GU1: ground j10f0
-  Cc: capacitor i11 j11f0 10n
-  GCc: ground j11f0
-  Cp: capacitor g12 g14 1u
-  D1: diode g14 j14f0 1N4148
-  GD1: ground j14f0
-  D2: diode g16 g14 1N4148
-  Co: ecap j16f0 g16 10u
-  GCo: ground j16f0
-  RL: resistor g18 j18f0 1k
-  GRL: ground j18f0
+  U1: ic 10,7 NE555
+  vcc: vcc 6,3 9V
+  Ra: resistor 6,3 6,5 1k
+  Rb: resistor 6,6.5 6,8.5 4k7
+  C1: capacitor 8,8.5 8,10.5 10n
+  GC1: ground 8,10.5
+  vcc: vcc 10,3 9V
+  GU1: ground 10,10.5
+  Cc: capacitor 11,9 11,10.5 10n
+  GCc: ground 11,10.5
+  Cp: capacitor 12,7 14,7 1u
+  D1: diode 14,7 14,10.5 1N4148
+  GD1: ground 14,10.5
+  D2: diode 16,7 14,7 1N4148
+  Co: ecap 16,10.5 16,7 10u
+  GCo: ground 16,10.5
+  RL: resistor 18,7 18,10.5 1k
+  GRL: ground 18,10.5
 points:
-  gnd: e3
+  gnd: 3,5
 wires:
-  - U1.VCC |- c10
-  - c10 -- c10a5
-  - U1.RESET |- c10a5
-  - e6 -- f6f0
-  - U1.DISCH -| f6f0
-  - U1.THRES -| g8
-  - U1.TRIG -| g8f0
-  - g8 -- h8f0
-  - h6f0 -- h8f0
-  - U1.GND |- j10f0
-  - U1.CONT |- i10a5
-  - i10a5 -- i11
-  - U1.OUT -| g12
-  - g16 -- g18
+  - U1.VCC |- 10,3
+  - 10,3 -- 10.5,3
+  - U1.RESET |- 10.5,3
+  - 6,5 -- 6,6.5
+  - U1.DISCH -| 6,6.5
+  - U1.THRES -| 8,7
+  - U1.TRIG -| 8,7.5
+  - 8,7 -- 8,8.5
+  - 6,8.5 -- 8,8.5
+  - U1.GND |- 10,10.5
+  - U1.CONT |- 10.5,9
+  - 10.5,9 -- 11,9
+  - U1.OUT -| 12,7
+  - 16,7 -- 18,7
 style:
   grid: on
 ```

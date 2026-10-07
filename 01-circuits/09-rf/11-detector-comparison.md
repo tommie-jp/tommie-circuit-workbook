@@ -48,23 +48,23 @@ V<sub>T</sub> = 25.85 mV は室温の熱電圧 (kT/q)。歪み率 (THD) は、�
 ```circuit
 title: 図1 ダイオード検波 (W1 の AM を D1 で検波し、CH2 と CH1 で比べる)
 parts:
-  W1: sine c2 e2 l=$\mathrm{W1}$
-  GW: ground e2
-  M2: voltmeter c4 e4 l=$\mathrm{CH2}$
-  G2: ground e4
-  D1: diode c5 c8 1N60
-  C1: capacitor c10 e10 10n
-  GC: ground e10
-  R1: resistor c12 e12 10k
-  GR: ground e12
-  M1: voltmeter c14 e14 l=$\mathrm{CH1}$
-  G1: ground e14
+  W1: sine 2,3 2,5 l=$\mathrm{W1}$
+  GW: ground 2,5
+  M2: voltmeter 4,3 4,5 l=$\mathrm{CH2}$
+  G2: ground 4,5
+  D1: diode 5,3 8,3 1N60
+  C1: capacitor 10,3 10,5 10n
+  GC: ground 10,5
+  R1: resistor 12,3 12,5 10k
+  GR: ground 12,5
+  M1: voltmeter 14,3 14,5 l=$\mathrm{CH1}$
+  G1: ground 14,5
 wires:
-  - c2 -- c4
-  - c4 -- c5
-  - c8 -- c10
-  - c10 -- c12
-  - c12 -- c14
+  - 2,3 -- 4,3
+  - 4,3 -- 5,3
+  - 8,3 -- 10,3
+  - 10,3 -- 12,3
+  - 12,3 -- 14,3
 style:
   pitch: 1.2
 ```
@@ -83,36 +83,36 @@ style:
 ```circuit
 title: 図2 トランジスタ検波 (ベースで検波し、コレクタで増幅して取り出す)
 parts:
-  VCC: vcc a5 5V
-  R1: resistor a5 d5 68k
-  R2: resistor d5 f5 18k
-  G2: ground f5
-  RC: resistor a7 c7 22k
-  Q1: npn d7
-  CIN: capacitor d5 d3 0.1u
-  W1: sine d1 f1 l=$\mathrm{W1}$
-  M2: voltmeter d3 f3 l=$\mathrm{CH2}$
-  G4: ground f3
-  RE: resistor f7 h7 4.7k
-  G3: ground h7
-  CE: capacitor f9 h9 100u
-  CC: capacitor c11 e11 2.2n
-  GC: ground e11
-  M1: voltmeter c14 e14 l=$\mathrm{CH1}$
-  G5: ground e14
+  VCC: vcc 5,1 5V
+  R1: resistor 5,1 5,4 68k
+  R2: resistor 5,4 5,6 18k
+  G2: ground 5,6
+  RC: resistor 7,1 7,3 22k
+  Q1: npn 7,4
+  CIN: capacitor 5,4 3,4 0.1u
+  W1: sine 1,4 1,6 l=$\mathrm{W1}$
+  M2: voltmeter 3,4 3,6 l=$\mathrm{CH2}$
+  G4: ground 3,6
+  RE: resistor 7,6 7,8 4.7k
+  G3: ground 7,8
+  CE: capacitor 9,6 9,8 100u
+  CC: capacitor 11,3 11,5 2.2n
+  GC: ground 11,5
+  M1: voltmeter 14,3 14,5 l=$\mathrm{CH1}$
+  G5: ground 14,5
 wires:
-  - a5 -- a7
-  - d1 -- d3
-  - f1 -- f3
-  - d5 -- Q1.B
-  - c7 -- Q1.C
-  - c7 -- c11
-  - c11 -- c14
-  - Q1.E -- f7
-  - f7 -- f9
-  - h7 -- h9
+  - 5,1 -- 7,1
+  - 1,4 -- 3,4
+  - 1,6 -- 3,6
+  - 5,4 -- Q1.B
+  - 7,3 -- Q1.C
+  - 7,3 -- 11,3
+  - 11,3 -- 14,3
+  - Q1.E -- 7,6
+  - 7,6 -- 9,6
+  - 7,8 -- 9,8
 notes:
-  - text d7h5 small left: 2SC1815
+  - text 7.5,4.7 small left: 2SC1815
 style:
   pitch: 1.2
 ```

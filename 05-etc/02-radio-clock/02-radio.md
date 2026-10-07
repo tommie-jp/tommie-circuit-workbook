@@ -44,83 +44,83 @@ DET --> OUT
 ```circuit
 title: 図1 中波 AM 受信機 (同調、高周波増幅 2 段、AM 検波)
 parts:
-  VC1: capacitor-var e3 g3 l=$\mathrm{VC}_1$
-  La: inductor e5 g5 l=$L_{1a}$
-  Lb: inductor g5 i5 l=$L_{1b}$
-  GL: ground i5
-  C1: capacitor e7 e9 0.01u
-  R1: resistor a11 c11 82k
-  VCC1: vcc a11 5V
-  R2: resistor g11 i11 22k
-  GR2: ground i11
-  Q1: npn f14
-  Rc1: resistor a14 c14 2.2k l=$R_{C1}$ i=$I_C$
-  VCC2: vcc a14 5V
-  RE1: resistor h14 j14 470 l=$R_{E1}$ i=$I_E$
-  CE1: ecap h16 j16 100u l=$C_{E1}$
-  GE1: ground j15
-  C2: capacitor d16 d18 0.01u
-  R3: resistor a21 c21 82k
-  VCC3: vcc a21 5V
-  R4: resistor g21 i21 22k
-  GR4: ground i21
-  Q2: npn f24
-  Rc2: resistor a24 c24 2.2k l=$R_{C2}$ i=$I_C$
-  VCC4: vcc a24 5V
-  RE2: resistor h24 j24 470 l=$R_{E2}$ i=$I_E$
-  CE2: ecap h26 j26 100u l=$C_{E2}$
-  GE2: ground j25
-  D1: diode d26 d28 1N60
-  C4: capacitor d30 f30 0.01u
-  GC4: ground f30
-  R5: resistor d32 f32 100k i=$I$
-  GR5: ground f32
-  OUT: port d34
+  VC1: capacitor-var 3,5 3,7 l=$\mathrm{VC}_1$
+  La: inductor 5,5 5,7 l=$L_{1a}$
+  Lb: inductor 5,7 5,9 l=$L_{1b}$
+  GL: ground 5,9
+  C1: capacitor 7,5 9,5 0.01u
+  R1: resistor 11,1 11,3 82k
+  VCC1: vcc 11,1 5V
+  R2: resistor 11,7 11,9 22k
+  GR2: ground 11,9
+  Q1: npn 14,6
+  Rc1: resistor 14,1 14,3 2.2k l=$R_{C1}$ i=$I_C$
+  VCC2: vcc 14,1 5V
+  RE1: resistor 14,8 14,10 470 l=$R_{E1}$ i=$I_E$
+  CE1: ecap 16,8 16,10 100u l=$C_{E1}$
+  GE1: ground 15,10
+  C2: capacitor 16,4 18,4 0.01u
+  R3: resistor 21,1 21,3 82k
+  VCC3: vcc 21,1 5V
+  R4: resistor 21,7 21,9 22k
+  GR4: ground 21,9
+  Q2: npn 24,6
+  Rc2: resistor 24,1 24,3 2.2k l=$R_{C2}$ i=$I_C$
+  VCC4: vcc 24,1 5V
+  RE2: resistor 24,8 24,10 470 l=$R_{E2}$ i=$I_E$
+  CE2: ecap 26,8 26,10 100u l=$C_{E2}$
+  GE2: ground 25,10
+  D1: diode 26,4 28,4 1N60
+  C4: capacitor 30,4 30,6 0.01u
+  GC4: ground 30,6
+  R5: resistor 32,4 32,6 100k i=$I$
+  GR5: ground 32,6
+  OUT: port 34,4
 wires:
-  - e3 -- e5
-  - g3 -- i3 -- i5
-  - g5 -| e7
-  - e9 -- e11
-  - c11 -- g11
-  - f11 -- Q1.B
-  - c14 -- d14
-  - d14 -- Q1.C
-  - Q1.E -- h14
-  - j14 -- j15 -- j16
-  - h14 -- h16
-  - d14 -- d16
-  - d18 -- d21
-  - c21 -- g21
-  - f21 -- Q2.B
-  - c24 -- d24
-  - d24 -- Q2.C
-  - Q2.E -- h24
-  - j24 -- j25 -- j26
-  - h24 -- h26
-  - d24 -- d26
-  - d28 -- d34
+  - 3,5 -- 5,5
+  - 3,7 -- 3,9 -- 5,9
+  - 5,7 -| 7,5
+  - 9,5 -- 11,5
+  - 11,3 -- 11,7
+  - 11,6 -- Q1.B
+  - 14,3 -- 14,4
+  - 14,4 -- Q1.C
+  - Q1.E -- 14,8
+  - 14,10 -- 15,10 -- 16,10
+  - 14,8 -- 16,8
+  - 14,4 -- 16,4
+  - 18,4 -- 21,4
+  - 21,3 -- 21,7
+  - 21,6 -- Q2.B
+  - 24,3 -- 24,4
+  - 24,4 -- Q2.C
+  - Q2.E -- 24,8
+  - 24,10 -- 25,10 -- 26,10
+  - 24,8 -- 26,8
+  - 24,4 -- 26,4
+  - 28,4 -- 34,4
 notes:
-  - text c5 small center: フェライトバー
-  - text e11a8 small blue left: 約 1.0 V
-  - arrow e11a7 e11a1 blue
-  - text e14a8 small blue left: 約 3.4 V
-  - arrow e14a7 e14a1 blue
-  - text g13a2 small blue right: 約 0.34 V
-  - arrow g13a3 g14 blue
-  - text h14d6 small blue left: 0.73 mA
-  - text a14f6 small blue left: 0.73 mA
-  - text e21a8 small blue left: 約 1.0 V
-  - arrow e21a7 e21a1 blue
-  - text e24a8 small blue left: 約 3.4 V
-  - arrow e24a7 e24a1 blue
-  - text g23a2 small blue right: 約 0.34 V
-  - arrow g23a3 g24 blue
-  - text h24d6 small blue left: 0.73 mA
-  - text a24f6 small blue left: 0.73 mA
-  - text c30 small blue center: 約 3 V (直流)
-  - arrow c30f0 d30 blue
-  - text d32d6 small blue left: 30 µA
-  - text j26f0 small blue left: 青い数字は計算値 (hFE 200、無信号のとき)。電圧は GND から
+  - text 5,3 small center: フェライトバー
+  - text 11.8,5 small blue left: 約 1.0 V
+  - arrow 11.7,5 11.1,5 blue
+  - text 14.8,5 small blue left: 約 3.4 V
+  - arrow 14.7,5 14.1,5 blue
+  - text 13.2,7 small blue right: 約 0.34 V
+  - arrow 13.3,7 14,7 blue
+  - text 14.6,8.3 small blue left: 0.73 mA
+  - text 14.6,1.5 small blue left: 0.73 mA
+  - text 21.8,5 small blue left: 約 1.0 V
+  - arrow 21.7,5 21.1,5 blue
+  - text 24.8,5 small blue left: 約 3.4 V
+  - arrow 24.7,5 24.1,5 blue
+  - text 23.2,7 small blue right: 約 0.34 V
+  - arrow 23.3,7 24,7 blue
+  - text 24.6,8.3 small blue left: 0.73 mA
+  - text 24.6,1.5 small blue left: 0.73 mA
+  - text 30,3 small blue center: 約 3 V (直流)
+  - arrow 30,3.5 30,4 blue
+  - text 32.6,4.3 small blue left: 30 µA
+  - text 26,10.5 small blue left: 青い数字は計算値 (hFE 200、無信号のとき)。電圧は GND から
 style:
   grid: off
   pitch: 1.2

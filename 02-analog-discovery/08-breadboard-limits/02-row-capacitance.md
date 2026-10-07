@@ -22,23 +22,23 @@ title: 図1 基準抵抗と列間の寄生容量
 parts:
   AD:
     type: device
-    at: a1
+    at: 1,1
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
-  Rref: resistor c3 c6 330
-  Cstray: capacitor c9 c12 2.5p l=$\mathrm{C_{stray}}$
-  G1: ground c14
-  Cin: capacitor c9 e9 48p l=$\mathrm{C_{in}}$
-  G2: ground e9
+  Rref: resistor 3,3 6,3 330
+  Cstray: capacitor 9,3 12,3 2.5p l=$\mathrm{C_{stray}}$
+  G1: ground 14,3
+  Cin: capacitor 9,3 9,5 48p l=$\mathrm{C_{in}}$
+  G2: ground 9,5
 wires:
-  - AD.W1 -| c3
-  - AD.1+ -| c3
-  - AD.1- -| c6
-  - c6 -- c9
-  - AD.2+ -| c9
-  - AD.2- -| c12
-  - c12 -- c14
-  - AD.GND -| c14
+  - AD.W1 -| 3,3
+  - AD.1+ -| 3,3
+  - AD.1- -| 6,3
+  - 6,3 -- 9,3
+  - AD.2+ -| 9,3
+  - AD.2- -| 12,3
+  - 12,3 -- 14,3
+  - AD.GND -| 14,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/02-row-capacitance.svg)

@@ -56,16 +56,16 @@ title: 図1 CH0 の先に 3 m の同軸 (先は開放)
 parts:
   M1:
     type: device
-    at: b2
+    at: 2,2
     label: NanoVNA
     pins: [CH0, CH1]
     turn: mirror
-  T1: tline a4i0i0 a7i0i0 50
+  T1: tline 4,1.88 7,1.88 50
 wires:
-  - M1.CH0 -| a4i0i0
+  - M1.CH0 -| 4,1.88
 notes:
-  - text b5f5 blue center: 3 m、VF 0.66
-  - text a7f5 blue: 先は開放
+  - text 5.5,2.5 blue center: 3 m、VF 0.66
+  - text 7.5,1.5 blue: 先は開放
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/02-display/circuit/07-tdr-settings.svg)

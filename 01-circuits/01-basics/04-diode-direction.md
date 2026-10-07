@@ -21,21 +21,21 @@ LED はさらに、色によって**順方向電圧 (V<sub>F</sub>、1-1)** が�
 ```circuit
 title: 図1 色の違う LED と逆向きの LED
 parts:
-  V1: vsource a2 e2 5
-  G1: ground e2
-  R1: resistor a4 c4 330
-  D1: led c4 e4
-  R2: resistor a6 c6 330
-  D2: led c6 e6
-  R3: resistor a8 c8 330
-  D3: led e8 c8
+  V1: vsource 2,1 2,5 5
+  G1: ground 2,5
+  R1: resistor 4,1 4,3 330
+  D1: led 4,3 4,5
+  R2: resistor 6,1 6,3 330
+  D2: led 6,3 6,5
+  R3: resistor 8,1 8,3 330
+  D3: led 8,5 8,3
 wires:
-  - a2 -- a4
-  - a4 -- a6
-  - a6 -- a8
-  - e2 -- e4
-  - e4 -- e6
-  - e6 -- e8
+  - 2,1 -- 4,1
+  - 4,1 -- 6,1
+  - 6,1 -- 8,1
+  - 2,5 -- 4,5
+  - 4,5 -- 6,5
+  - 6,5 -- 8,5
 style:
   grid: on
   pitch: 1.2

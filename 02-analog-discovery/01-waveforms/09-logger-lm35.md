@@ -20,19 +20,19 @@ board: BB
 ```circuit
 title: 図1 LM35 の出力を電圧計で読む
 parts:
-  VCC: vcc a2 5V
+  VCC: vcc 2,1 5V
   U1:
     type: ic3
-    at: c4
+    at: 4,3
     label: LM35
     pins: [+Vs, Vout, GND]
-  G1: ground c7
-  M1: voltmeter e4 e7 l=$\mathrm{CH1}$
+  G1: ground 7,3
+  M1: voltmeter 4,5 7,5 l=$\mathrm{CH1}$
 wires:
-  - a2 |- U1.+Vs
-  - U1.GND -| c7
-  - U1.Vout -- e4
-  - c7 -- e7
+  - 2,1 |- U1.+Vs
+  - U1.GND -| 7,3
+  - U1.Vout -- 4,5
+  - 7,3 -- 7,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/circuit/09-logger-lm35.svg)

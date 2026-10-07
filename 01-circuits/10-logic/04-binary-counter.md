@@ -30,61 +30,61 @@ Q4 がいちばん上の桁 (MSB)。
 ```circuit
 title: 図1 555クロック + 4040バイナリカウンタ
 parts:
-  U555: ic e6 NE555
-  VCC: vcc b3 5V
-  R1: resistor b3 d3f0 10k
-  R2: resistor d3f0 f3 47k
-  C1: capacitor f4 h4 10u
-  GC1: ground h4
-  GU555: ground h6
-  U40: ic e15 CD4040B
-  VCC: vcc a15 5V
-  GU40: ground j15
-  VCC: vcc g10 5V
-  SWRST: button g10 g12 l=$\mathrm{SW_{RST}}$
-  RRST: resistor g12 i12 10k l=$R_\mathrm{RST}$
-  GRRST: ground i12
-  RQ1: resistor e27 f27 1k l=$R_\mathrm{Q1}$
-  DQ1: led f27 g27 red l=$D_\mathrm{Q1}$
-  GQ1: ground g27
-  RQ2: resistor e24 f24 1k l=$R_\mathrm{Q2}$
-  DQ2: led f24 g24 red l=$D_\mathrm{Q2}$
-  GQ2: ground g24
-  RQ3: resistor e21 f21 1k l=$R_\mathrm{Q3}$
-  DQ3: led f21 g21 red l=$D_\mathrm{Q3}$
-  GQ3: ground g21
-  RQ4: resistor e18 f18 1k l=$R_\mathrm{Q4}$
-  DQ4: led f18 g18 red l=$D_\mathrm{Q4}$
-  GQ4: ground g18
+  U555: ic 6,5 NE555
+  VCC: vcc 3,2 5V
+  R1: resistor 3,2 3,4.5 10k
+  R2: resistor 3,4.5 3,6 47k
+  C1: capacitor 4,6 4,8 10u
+  GC1: ground 4,8
+  GU555: ground 6,8
+  U40: ic 15,5 CD4040B
+  VCC: vcc 15,1 5V
+  GU40: ground 15,10
+  VCC: vcc 10,7 5V
+  SWRST: button 10,7 12,7 l=$\mathrm{SW_{RST}}$
+  RRST: resistor 12,7 12,9 10k l=$R_\mathrm{RST}$
+  GRRST: ground 12,9
+  RQ1: resistor 27,5 27,6 1k l=$R_\mathrm{Q1}$
+  DQ1: led 27,6 27,7 red l=$D_\mathrm{Q1}$
+  GQ1: ground 27,7
+  RQ2: resistor 24,5 24,6 1k l=$R_\mathrm{Q2}$
+  DQ2: led 24,6 24,7 red l=$D_\mathrm{Q2}$
+  GQ2: ground 24,7
+  RQ3: resistor 21,5 21,6 1k l=$R_\mathrm{Q3}$
+  DQ3: led 21,6 21,7 red l=$D_\mathrm{Q3}$
+  GQ3: ground 21,7
+  RQ4: resistor 18,5 18,6 1k l=$R_\mathrm{Q4}$
+  DQ4: led 18,6 18,7 red l=$D_\mathrm{Q4}$
+  GQ4: ground 18,7
 wires:
   # 555 非安定
-  - U555.VCC |- b6
-  - U555.RESET |- b6a5
-  - b3 -- b6 -- b6a5
-  - U555.DISCH -| d3f0
-  - U555.THRES -| e4
-  - U555.TRIG -| e4f0
-  - e4 -- f4
-  - f3 -- f4
-  - U555.GND |- h6
+  - U555.VCC |- 6,2
+  - U555.RESET |- 6.5,2
+  - 3,2 -- 6,2 -- 6.5,2
+  - U555.DISCH -| 3,4.5
+  - U555.THRES -| 4,5
+  - U555.TRIG -| 4,5.5
+  - 4,5 -- 4,6
+  - 3,6 -- 4,6
+  - U555.GND |- 6,8
   # クロック: 555 の OUT を 4040 の CLOCK へ
-  - U555.OUT -| e10
-  - U40.CLOCK -| e10
+  - U555.OUT -| 10,5
+  - U40.CLOCK -| 10,5
   # リセット: SWRST で +5V、離すと RRST で GND
-  - U40.R -| g12
+  - U40.R -| 12,7
   # 4040 の電源
-  - a15 |- U40.VDD
-  - U40.VSS |- j15
+  - 15,1 |- U40.VDD
+  - U40.VSS |- 15,10
   # 出力: Q1 を一番外側にして、線が交わらないように右へ
-  - U40.Q1 -| e27
-  - U40.Q2 -| e24
-  - U40.Q3 -| e21
-  - U40.Q4 -| e18
+  - U40.Q1 -| 27,5
+  - U40.Q2 -| 24,5
+  - U40.Q3 -| 21,5
+  - U40.Q4 -| 18,5
 notes:
-  - text i27 blue center: Q1 (LSB)
-  - text i24 blue center: Q2
-  - text i21 blue center: Q3
-  - text i18 blue center: Q4 (MSB)
+  - text 27,9 blue center: Q1 (LSB)
+  - text 24,9 blue center: Q2
+  - text 21,9 blue center: Q3
+  - text 18,9 blue center: Q4 (MSB)
 style:
   grid: on
   pitch: 1.2

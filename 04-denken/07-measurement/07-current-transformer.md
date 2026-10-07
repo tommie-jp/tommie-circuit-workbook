@@ -30,24 +30,24 @@ board: BB
 ```circuit
 title: 図1 CT の模型 (一次 5 回・二次 100 回)
 parts:
-  V1: sine b1 f1 5 l=$\mathrm{W1}$
-  RLN: resistor b1 b4 510 l=$\mathrm{R_{line}}$ i=I1
-  T1: transformer d6
-  RS: resistor f3 f5 10 l=$\mathrm{R_S}$
-  S1: switch b9 b11
-  RB: resistor b11 f11 10 l=$\mathrm{R_B}$
-  G1: ground f1
-  G2: ground f8
+  V1: sine 1,2 1,6 5 l=$\mathrm{W1}$
+  RLN: resistor 1,2 4,2 510 l=$\mathrm{R_{line}}$ i=I1
+  T1: transformer 6,4
+  RS: resistor 3,6 5,6 10 l=$\mathrm{R_S}$
+  S1: switch 9,2 11,2
+  RB: resistor 11,2 11,6 10 l=$\mathrm{R_B}$
+  G1: ground 1,6
+  G2: ground 8,6
 wires:
-  - b4 -| T1.A1
-  - T1.A2 |- f5
-  - f1 -- f3
-  - T1.B1 -| b9
-  - T1.B2 -| f8
-  - f8 -- f11
+  - 4,2 -| T1.A1
+  - T1.A2 |- 5,6
+  - 1,6 -- 3,6
+  - T1.B1 -| 9,2
+  - T1.B2 -| 8,6
+  - 8,6 -- 11,6
 notes:
-  - text e2 blue: CH1 (RS の電圧)
-  - text c9h5 blue: CH2
+  - text 2,5 blue: CH1 (RS の電圧)
+  - text 9.5,3.7 blue: CH2
 style:
   standard: jis
   grid: on

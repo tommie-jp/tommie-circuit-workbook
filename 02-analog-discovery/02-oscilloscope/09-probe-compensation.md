@@ -21,20 +21,20 @@ board: BB
 ```circuit
 title: 図1 10 kΩ の信号源に直結した場合とプローブ経由の場合
 parts:
-  W1: square a1 c1 1.65
-  Rs: resistor a3 a5 10k
-  M1: voltmeter a7 c7 l=$\mathrm{CH1}$
-  Rp: resistor a9 a11 9.1M
-  Cp: capacitor b9 b11 2.6p l=$C_\mathrm{trim}$
-  M2: voltmeter a13 c13 l=$\mathrm{CH2}$
-  G1: ground c1
+  W1: square 1,1 1,3 1.65
+  Rs: resistor 3,1 5,1 10k
+  M1: voltmeter 7,1 7,3 l=$\mathrm{CH1}$
+  Rp: resistor 9,1 11,1 9.1M
+  Cp: capacitor 9,2 11,2 2.6p l=$C_\mathrm{trim}$
+  M2: voltmeter 13,1 13,3 l=$\mathrm{CH2}$
+  G1: ground 1,3
 wires:
-  - a1 -- a3
-  - a5 -- a7 -- a9
-  - a9 -- b9
-  - a11 -- b11
-  - a11 -- a13
-  - c1 -- c7 -- c13
+  - 1,1 -- 3,1
+  - 5,1 -- 7,1 -- 9,1
+  - 9,1 -- 9,2
+  - 11,1 -- 11,2
+  - 11,1 -- 13,1
+  - 1,3 -- 7,3 -- 13,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/circuit/09-probe-compensation.svg)

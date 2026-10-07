@@ -31,15 +31,15 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{W1}$
-  R1: resistor c1 c3 1k
-  M1: voltmeter a1 a3 l=$\mathrm{CH1}$
-  G1: ground g1
+  V1: sine 1,3 1,7 l=$\mathrm{W1}$
+  R1: resistor 1,3 3,3 1k
+  M1: voltmeter 1,1 3,1 l=$\mathrm{CH1}$
+  G1: ground 1,7
 wires:
-  - a1 -- c1
-  - a3 -- c3
-  - c3 -- g3
-  - g3 -- g1
+  - 1,1 -- 1,3
+  - 3,1 -- 3,3
+  - 3,3 -- 3,7
+  - 3,7 -- 1,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/01-sine-wave-values.svg)

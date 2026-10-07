@@ -24,24 +24,24 @@ title: 図1 RC ローパスと並列に乗る寄生容量
 parts:
   AD:
     type: device
-    at: a1
+    at: 1,1
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
-  R1: resistor c3 c6 10k
-  C1: capacitor c9 c12 10p
-  Cstray: capacitor f9 f12 2.5p l=$\mathrm{C_{stray}}$
-  G1: ground c14
+  R1: resistor 3,3 6,3 10k
+  C1: capacitor 9,3 12,3 10p
+  Cstray: capacitor 9,6 12,6 2.5p l=$\mathrm{C_{stray}}$
+  G1: ground 14,3
 wires:
-  - AD.W1 -| c3
-  - AD.1+ -| c3
-  - AD.1- -| c14
-  - c6 -- c9
-  - c6 -- f9
-  - AD.2+ -| c9
-  - AD.2- -| c14
-  - c12 -- c14
-  - f12 -- c14
-  - AD.GND -| c14
+  - AD.W1 -| 3,3
+  - AD.1+ -| 3,3
+  - AD.1- -| 14,3
+  - 6,3 -- 9,3
+  - 6,3 -- 9,6
+  - AD.2+ -| 9,3
+  - AD.2- -| 14,3
+  - 12,3 -- 14,3
+  - 12,6 -- 14,3
+  - AD.GND -| 14,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/04-rc-lowpass-deviation.svg)

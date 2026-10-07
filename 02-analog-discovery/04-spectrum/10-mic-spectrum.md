@@ -20,24 +20,24 @@ FFT の読み方そのものは同じでも、平均化 (4-5) が使えないな
 ```circuit
 title: 図1 マイクアンプの出力を交流結合で CH1 へ
 parts:
-  VCC: vcc a1 5V
-  R1: resistor a1 a3 2.2k
-  MK1: mic a3 a5
-  G1: ground a5
-  C1: capacitor a3 d3 1u
-  VCC: vcc d1 5V
-  R2: resistor d1 d3 100k
-  Q1: npn f5
-  VCC: vcc c7 5V
-  RC: resistor c7 e7 470
-  G2: ground h5
-  C2: capacitor e7 e9 1u
-  M1: voltmeter e9 h9 l=$\mathrm{CH1}$
-  G3: ground h9
+  VCC: vcc 1,1 5V
+  R1: resistor 1,1 3,1 2.2k
+  MK1: mic 3,1 5,1
+  G1: ground 5,1
+  C1: capacitor 3,1 3,4 1u
+  VCC: vcc 1,4 5V
+  R2: resistor 1,4 3,4 100k
+  Q1: npn 5,6
+  VCC: vcc 7,3 5V
+  RC: resistor 7,3 7,5 470
+  G2: ground 5,8
+  C2: capacitor 7,5 9,5 1u
+  M1: voltmeter 9,5 9,8 l=$\mathrm{CH1}$
+  G3: ground 9,8
 wires:
-  - d3 |- Q1.B
-  - Q1.C |- e7
-  - Q1.E |- h5
+  - 3,4 |- Q1.B
+  - Q1.C |- 7,5
+  - Q1.E |- 5,8
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/10-mic-spectrum.svg)

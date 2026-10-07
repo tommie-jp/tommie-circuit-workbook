@@ -21,18 +21,18 @@ device: H4
 ```circuit
 title: 図1 CH0-CH1 間に 1 m のケーブル
 parts:
-  J1: sma b2 mirror
-  J2: sma b8
-  G1: ground c2
-  G2: ground c8
+  J1: sma 2,2 mirror
+  J2: sma 8,2
+  G1: ground 2,3
+  G2: ground 8,3
 wires:
-  - J1.1 -- b5 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c8
+  - J1.1 -- 5,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 8,3
 notes:
-  - text a2 center: CH0
-  - text a8 center: CH1
-  - text b5h0 center: 1 m の同軸ケーブル
+  - text 2,1 center: CH0
+  - text 8,1 center: CH1
+  - text 5,2.7 center: 1 m の同軸ケーブル
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/03-cable-loss.svg)

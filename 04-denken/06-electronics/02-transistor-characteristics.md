@@ -27,18 +27,18 @@ board: BB
 ```circuit
 title: 図1 固定バイアスで hFE を測る
 parts:
-  VCC: vcc a3 5V
-  RB: resistor b3 d3 470k i=IB
-  RC: resistor b7 d7 1k i=IC
-  Q1: npn f7 2SC1815
-  G1: ground h7
+  VCC: vcc 3,1 5V
+  RB: resistor 3,2 3,4 470k i=IB
+  RC: resistor 7,2 7,4 1k i=IC
+  Q1: npn 7,6 2SC1815
+  G1: ground 7,8
 wires:
-  - a3 -- a7 -- b7
-  - a3 -- b3
-  - d3 -- f3
-  - f3 -- Q1.B
-  - d7 -- Q1.C
-  - Q1.E -- h7
+  - 3,1 -- 7,1 -- 7,2
+  - 3,1 -- 3,2
+  - 3,4 -- 3,6
+  - 3,6 -- Q1.B
+  - 7,4 -- Q1.C
+  - Q1.E -- 7,8
 style:
   standard: jis
   grid: on
@@ -106,21 +106,21 @@ R_C に 5 V がそのまま掛かる ([回路の本の 0-3](../../01-circuits/00
 ```circuit
 title: 図3 汎用オシロでの測り方
 parts:
-  VCC: vcc b3 5V
-  RB: resistor b3 e3 470k i=IB
-  RC: resistor b8 e8 1k i=IC
-  Q1: npn g8 2SC1815
-  M1: voltmeter g3 j3 l=$\mathrm{CH1}$
-  G1: ground j3
-  M2: voltmeter g11 j11 l=$\mathrm{CH2}$
-  G2: ground j11
-  G3: ground j8
+  VCC: vcc 3,2 5V
+  RB: resistor 3,2 3,5 470k i=IB
+  RC: resistor 8,2 8,5 1k i=IC
+  Q1: npn 8,7 2SC1815
+  M1: voltmeter 3,7 3,10 l=$\mathrm{CH1}$
+  G1: ground 3,10
+  M2: voltmeter 11,7 11,10 l=$\mathrm{CH2}$
+  G2: ground 11,10
+  G3: ground 8,10
 wires:
-  - b3 -- b8
-  - e3 -- g3 -- Q1.B
-  - e8 -- Q1.C
-  - e8 -| g11
-  - Q1.E -- j8
+  - 3,2 -- 8,2
+  - 3,5 -- 3,7 -- Q1.B
+  - 8,5 -- Q1.C
+  - 8,5 -| 11,7
+  - Q1.E -- 8,10
 style:
   standard: jis
   pitch: 1.2

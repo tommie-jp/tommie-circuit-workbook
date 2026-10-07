@@ -21,36 +21,36 @@ board: BB
 ```circuit
 title: 図1 CR 移相発振器 (S1 でループを切る)
 parts:
-  V1: sine a1 c1 l=$\mathrm{W1}$
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  G1: ground c1
-  G2: ground c3
-  Rin: resistor a5 a7 10k l=$\mathrm{R_{in}}$
-  U1: opamp c9 +down
-  G3: ground e8
-  Rf: resistor a7 a11 300k l=$\mathrm{R_f}$
-  C1: capacitor a11 a15 10n l=$\mathrm{C_1}$
-  R1: resistor a15 c15 10k l=$\mathrm{R_1}$
-  G4: ground c15
-  C2: capacitor a15 a19 10n l=$\mathrm{C_2}$
-  R2: resistor a19 c19 10k l=$\mathrm{R_2}$
-  G5: ground c19
-  C3: capacitor a19 a23 10n l=$\mathrm{C_3}$
-  Rt: resistor a23 c23 10k l=$\mathrm{R_t}$
-  G7: ground c23
-  M2: voltmeter a25 c25 l=$\mathrm{CH2}$
-  G6: ground c25
-  S1: switch f5 f7
+  V1: sine 1,1 1,3 l=$\mathrm{W1}$
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  G1: ground 1,3
+  G2: ground 3,3
+  Rin: resistor 5,1 7,1 10k l=$\mathrm{R_{in}}$
+  U1: opamp 9,3 +down
+  G3: ground 8,5
+  Rf: resistor 7,1 11,1 300k l=$\mathrm{R_f}$
+  C1: capacitor 11,1 15,1 10n l=$\mathrm{C_1}$
+  R1: resistor 15,1 15,3 10k l=$\mathrm{R_1}$
+  G4: ground 15,3
+  C2: capacitor 15,1 19,1 10n l=$\mathrm{C_2}$
+  R2: resistor 19,1 19,3 10k l=$\mathrm{R_2}$
+  G5: ground 19,3
+  C3: capacitor 19,1 23,1 10n l=$\mathrm{C_3}$
+  Rt: resistor 23,1 23,3 10k l=$\mathrm{R_t}$
+  G7: ground 23,3
+  M2: voltmeter 25,1 25,3 l=$\mathrm{CH2}$
+  G6: ground 25,3
+  S1: switch 5,6 7,6
 wires:
-  - a1 -- a3
-  - a3 -- a5
-  - a7 |- U1.-
-  - U1.+ -| e8
-  - U1.out -| a11
-  - a23 -- a24 -- a25
-  - a24 -- f24
-  - f24 -- f7
-  - f5 -- a5
+  - 1,1 -- 3,1
+  - 3,1 -- 5,1
+  - 7,1 |- U1.-
+  - U1.+ -| 8,5
+  - U1.out -| 11,1
+  - 23,1 -- 24,1 -- 25,1
+  - 24,1 -- 24,6
+  - 24,6 -- 7,6
+  - 5,6 -- 5,1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/10-cr-oscillator-loop.svg)

@@ -33,16 +33,16 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: square c1 g1 l=$\mathrm{W1}$
-  M1: voltmeter c3 g3 l=$\mathrm{CH1}$
-  R1: resistor c4 c6 1k
-  C1: capacitor c8 g8 100n
-  M2: voltmeter c11 g11 l=$\mathrm{CH2}$
-  G1: ground g1
+  V1: square 1,3 1,7 l=$\mathrm{W1}$
+  M1: voltmeter 3,3 3,7 l=$\mathrm{CH1}$
+  R1: resistor 4,3 6,3 1k
+  C1: capacitor 8,3 8,7 100n
+  M2: voltmeter 11,3 11,7 l=$\mathrm{CH2}$
+  G1: ground 1,7
 wires:
-  - c1 -- c3 -- c4
-  - c6 -- c8 -- c11
-  - g1 -- g3 -- g8 -- g11
+  - 1,3 -- 3,3 -- 4,3
+  - 6,3 -- 8,3 -- 11,3
+  - 1,7 -- 3,7 -- 8,7 -- 11,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/13-square-wave-fft.svg)

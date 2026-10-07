@@ -34,20 +34,20 @@ S21 (通り方) はほとんど同じになる。違いが出るのは**阻止�
 ```circuit
 title: 図1 パイ型 (C-L-C)
 parts:
-  J1: sma b2 mirror CH0
-  C1: capacitor b4 d4 100p
-  L1: inductor b5 b7 560n
-  C2: capacitor b8 d8 100p
-  J2: sma b10 CH1
-  G1: ground c2
-  G2: ground d4
-  G3: ground d8
-  G4: ground c10
+  J1: sma 2,2 mirror CH0
+  C1: capacitor 4,2 4,4 100p
+  L1: inductor 5,2 7,2 560n
+  C2: capacitor 8,2 8,4 100p
+  J2: sma 10,2 CH1
+  G1: ground 2,3
+  G2: ground 4,4
+  G3: ground 8,4
+  G4: ground 10,3
 wires:
-  - J1.1 -- b4 -- b5
-  - b7 -- b8 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c10
+  - J1.1 -- 4,2 -- 5,2
+  - 7,2 -- 8,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 10,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/10-pi-and-t-1.svg)
@@ -55,20 +55,20 @@ wires:
 ```circuit
 title: 図2 T 型 (L-C-L)
 parts:
-  J1: sma b2 mirror CH0
-  L1: inductor b3 b5 270n
-  C1: capacitor b6 d6 220p
-  L2: inductor b7 b9 270n
-  J2: sma b10 CH1
-  G1: ground c2
-  G2: ground d6
-  G3: ground c10
+  J1: sma 2,2 mirror CH0
+  L1: inductor 3,2 5,2 270n
+  C1: capacitor 6,2 6,4 220p
+  L2: inductor 7,2 9,2 270n
+  J2: sma 10,2 CH1
+  G1: ground 2,3
+  G2: ground 6,4
+  G3: ground 10,3
 wires:
-  - J1.1 -- b3
-  - b5 -- b6 -- b7
-  - b9 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c10
+  - J1.1 -- 3,2
+  - 5,2 -- 6,2 -- 7,2
+  - 9,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 10,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/10-pi-and-t-2.svg)

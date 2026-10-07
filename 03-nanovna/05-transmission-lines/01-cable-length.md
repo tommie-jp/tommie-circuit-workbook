@@ -23,15 +23,15 @@ CH0 に 5 m のケーブルをつなぎ、先端は開放のまま。
 ```circuit
 title: 図1 先を開放した 5 m のケーブル
 parts:
-  J1: sma b2 mirror
-  G1: ground c2
+  J1: sma 2,2 mirror
+  G1: ground 2,3
 wires:
-  - J1.1 -- b8
-  - J1.2 -- c2
+  - J1.1 -- 8,2
+  - J1.2 -- 2,3
 notes:
-  - text a2 center: CH0
-  - text e5 center: 5 m の同軸ケーブル
-  - text b8a2: 開放
+  - text 2,1 center: CH0
+  - text 5,5 center: 5 m の同軸ケーブル
+  - text 8.2,2: 開放
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/01-cable-length.svg)

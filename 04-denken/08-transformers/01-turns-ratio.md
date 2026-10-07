@@ -33,25 +33,25 @@ style:
   standard: jis
   pitch: 1.8
 parts:
-  W1: sine c1 e1 l=$\mathrm{W1}$
-  Rs1: resistor c1 c3 100 i=I1
-  M2: voltmeter b1 b3 l=$\mathrm{CH2}$
-  M1: voltmeter c4f0 d4f0 l=$\mathrm{CH1}$
-  T1: transformer d5 10kto8
-  RL: resistor c7f0 d7f0 8
-  G1: ground e1
+  W1: sine 1,3 1,5 l=$\mathrm{W1}$
+  Rs1: resistor 1,3 3,3 100 i=I1
+  M2: voltmeter 1,2 3,2 l=$\mathrm{CH2}$
+  M1: voltmeter 4,3.5 4,4.5 l=$\mathrm{CH1}$
+  T1: transformer 5,4 10kto8
+  RL: resistor 7,3.5 7,4.5 8
+  G1: ground 1,5
 wires:
-  - b1 -- c1
-  - b3 -- c3
-  - c3 -- c4 -- c4f0
-  - c4f0 -| T1.A1
-  - T1.A2 -| d4f0
-  - d4f0 -- e4
-  - e1 -- e4
-  - T1.B1 -| c7f0
-  - T1.B2 -| d7f0
+  - 1,2 -- 1,3
+  - 3,2 -- 3,3
+  - 3,3 -- 4,3 -- 4,3.5
+  - 4,3.5 -| T1.A1
+  - T1.A2 -| 4,4.5
+  - 4,4.5 -- 4,5
+  - 1,5 -- 4,5
+  - T1.B1 -| 7,3.5
+  - T1.B2 -| 7,4.5
 notes:
-  - text d7f0e5 left small: (16 Ω を 2 本並列)
+  - text 7.05,4.54 left small: (16 Ω を 2 本並列)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/01-turns-ratio-1.svg)
@@ -155,27 +155,27 @@ title: 図5 汎用オシロでの測り方
 style:
   standard: jis
 parts:
-  FG: sine c1 g1 l=$\mathrm{FG}$
-  M1: voltmeter c3 g3 l=$\mathrm{CH1}$
-  T1: transformer d7 10kto8
-  M2: voltmeter e4 g4 l=$\mathrm{CH2}$
-  Rs1: resistor e6 g6 100 i=I1
-  RL: resistor c9 e9 8
-  M3: voltmeter c11 e11 l=$\mathrm{CH1}$
-  G1: ground g1
-  G2: ground e11
+  FG: sine 1,3 1,7 l=$\mathrm{FG}$
+  M1: voltmeter 3,3 3,7 l=$\mathrm{CH1}$
+  T1: transformer 7,4 10kto8
+  M2: voltmeter 4,5 4,7 l=$\mathrm{CH2}$
+  Rs1: resistor 6,5 6,7 100 i=I1
+  RL: resistor 9,3 9,5 8
+  M3: voltmeter 11,3 11,5 l=$\mathrm{CH1}$
+  G1: ground 1,7
+  G2: ground 11,5
 wires:
-  - c1 -- c3 -- c6 |- T1.A1
-  - e6 |- T1.A2
-  - e4 -- e6
-  - g1 -- g3 -- g4 -- g6
-  - c8 |- T1.B1
-  - e8 |- T1.B2
-  - c8 -- c9 -- c11
-  - e8 -- e9 -- e11
+  - 1,3 -- 3,3 -- 6,3 |- T1.A1
+  - 6,5 |- T1.A2
+  - 4,5 -- 6,5
+  - 1,7 -- 3,7 -- 4,7 -- 6,7
+  - 8,3 |- T1.B1
+  - 8,5 |- T1.B2
+  - 8,3 -- 9,3 -- 11,3
+  - 8,5 -- 9,5 -- 11,5
 notes:
-  - text d11a4 left: (2回目)
-  - text d9e2 left small: (16 Ω を 2 本並列)
+  - text 11.4,4 left: (2回目)
+  - text 9.2,4.4 left small: (16 Ω を 2 本並列)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/01-turns-ratio-2.svg)

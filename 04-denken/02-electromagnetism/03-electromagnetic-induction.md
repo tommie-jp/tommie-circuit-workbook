@@ -28,11 +28,11 @@ title: 図1 コイルに磁石を出し入れする
 style:
   standard: jis
 parts:
-  L1: inductor a3 c3
-  M1: voltmeter a5 c5 l=$\mathrm{CH1}$
+  L1: inductor 3,1 3,3
+  M1: voltmeter 5,1 5,3 l=$\mathrm{CH1}$
 wires:
-  - a3 -- a5
-  - c3 -- c5
+  - 3,1 -- 5,1
+  - 3,3 -- 5,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/03-electromagnetic-induction.svg)

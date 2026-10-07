@@ -22,15 +22,15 @@ source: 自作
 ```circuit
 title: 図1 コレクタ帰還バイアス
 parts:
-  VCC: vcc b5 5V
-  RC: resistor b5 d5 4.7k
-  RB: resistor d3 f3 680k
-  Q1: npn f5
-  G1: ground g5
+  VCC: vcc 5,2 5V
+  RC: resistor 5,2 5,4 4.7k
+  RB: resistor 3,4 3,6 680k
+  Q1: npn 5,6
+  G1: ground 5,7
 wires:
-  - d3 -- d5 -- Q1.C
-  - f3 -| Q1.B
-  - Q1.E -- g5
+  - 3,4 -- 5,4 -- Q1.C
+  - 3,6 -| Q1.B
+  - Q1.E -- 5,7
 style:
   grid: on
   pitch: 1.2
@@ -43,19 +43,19 @@ style:
 ```circuit
 title: 図2 分圧バイアス (2-3 と同じ形)
 parts:
-  VCC: vcc b3 5V
-  R1: resistor b3 d3 47k
-  R2: resistor d3 f3 15k
-  G1: ground f3
-  RC: resistor b6 d6 4.7k
-  Q1: npn e6
-  RE: resistor f6 h6 1k
-  G2: ground h6
+  VCC: vcc 3,2 5V
+  R1: resistor 3,2 3,4 47k
+  R2: resistor 3,4 3,6 15k
+  G1: ground 3,6
+  RC: resistor 6,2 6,4 4.7k
+  Q1: npn 6,5
+  RE: resistor 6,6 6,8 1k
+  G2: ground 6,8
 wires:
-  - b3 -- b6
-  - d3 -| Q1.B
-  - d6 -- Q1.C
-  - Q1.E -- f6
+  - 3,2 -- 6,2
+  - 3,4 -| Q1.B
+  - 6,4 -- Q1.C
+  - Q1.E -- 6,6
 style:
   grid: on
   pitch: 1.2

@@ -77,114 +77,114 @@ LO の大きさ (−5〜+16 dBm) と LO の源のインピーダンス (0 Ω で
 ```circuit
 title: 図01 2SC1815 差動対のミキサー (カレントミラーで差を 1 本に・IF 455 kHz・50 Ω 出力)
 parts:
-  VDD:  vcc b16 5V
-  C6:   capacitor c4 e4 100n
-  C7:   ecap c6 e6 10u
-  RL1:  resistor d9 f9 10k
-  RL2:  resistor m9 o9 10k
-  LO:   port l2
-  R3:   resistor l4 n4 51
-  C2:   capacitor l5 l7 10n
-  RM1:  resistor d13 f13 220
-  RM2:  resistor d19 f19 220
-  Q4:   pnp h13 mirror
-  Q5:   pnp h19
-  Q1:   npn m13
-  Q2:   npn m19 mirror
-  VDD:  vcc r26 5V
-  RR1:  resistor s26 u26 10k
-  RR2:  resistor w26 y26 10k
-  C9:   capacitor w28 y28 100n
-  RBT:  resistor d22 f22 15k
-  RBB:  resistor m24 o24 27k
-  CT:   capacitor k31 m31 100n
-  LT:   inductor o31 q31 220u
-  CTK:  capacitor o34 q34 560p
-  C4:   capacitor k35 k37 10n
-  R7:   resistor k38 m38 2k
-  FL1:  ceramic-filter k41 455kHz
-  C5:   capacitor k45 m45 1.2n
-  L2:   inductor k45 k48 100u
-  IF:   port k50
-  Q3:   npn s16
-  VDD:  vcc p11 5V
-  RB1:  resistor q11 s11 82k
-  RB2:  resistor u11 w11 22k
-  RF:   port t2
-  R1:   resistor t4 v4 51
-  C1:   capacitor t5 t7 10n
-  RE1:  resistor u16 v16 47
-  RE2:  resistor w16 y16 430
-  CE:   capacitor w18 y18 1u
-  G1:   ground e4
-  G2:   ground e6
-  G3:   ground o9
-  G4:   ground n4
-  G5:   ground y26
-  G6:   ground y28
-  G7:   ground w11
-  G8:   ground v4
-  G9:   ground y16
-  G10:  ground y18
-  G11:  ground o24
-  G12:  ground q31
-  G13:  ground q34
-  G14:  ground m38
-  G15:  ground m41
-  G16:  ground m45
+  VDD:  vcc 16,2 5V
+  C6:   capacitor 4,3 4,5 100n
+  C7:   ecap 6,3 6,5 10u
+  RL1:  resistor 9,4 9,6 10k
+  RL2:  resistor 9,13 9,15 10k
+  LO:   port 2,12
+  R3:   resistor 4,12 4,14 51
+  C2:   capacitor 5,12 7,12 10n
+  RM1:  resistor 13,4 13,6 220
+  RM2:  resistor 19,4 19,6 220
+  Q4:   pnp 13,8 mirror
+  Q5:   pnp 19,8
+  Q1:   npn 13,13
+  Q2:   npn 19,13 mirror
+  VDD:  vcc 26,18 5V
+  RR1:  resistor 26,19 26,21 10k
+  RR2:  resistor 26,23 26,25 10k
+  C9:   capacitor 28,23 28,25 100n
+  RBT:  resistor 22,4 22,6 15k
+  RBB:  resistor 24,13 24,15 27k
+  CT:   capacitor 31,11 31,13 100n
+  LT:   inductor 31,15 31,17 220u
+  CTK:  capacitor 34,15 34,17 560p
+  C4:   capacitor 35,11 37,11 10n
+  R7:   resistor 38,11 38,13 2k
+  FL1:  ceramic-filter 41,11 455kHz
+  C5:   capacitor 45,11 45,13 1.2n
+  L2:   inductor 45,11 48,11 100u
+  IF:   port 50,11
+  Q3:   npn 16,19
+  VDD:  vcc 11,16 5V
+  RB1:  resistor 11,17 11,19 82k
+  RB2:  resistor 11,21 11,23 22k
+  RF:   port 2,20
+  R1:   resistor 4,20 4,22 51
+  C1:   capacitor 5,20 7,20 10n
+  RE1:  resistor 16,21 16,22 47
+  RE2:  resistor 16,23 16,25 430
+  CE:   capacitor 18,23 18,25 1u
+  G1:   ground 4,5
+  G2:   ground 6,5
+  G3:   ground 9,15
+  G4:   ground 4,14
+  G5:   ground 26,25
+  G6:   ground 28,25
+  G7:   ground 11,23
+  G8:   ground 4,22
+  G9:   ground 16,25
+  G10:  ground 18,25
+  G11:  ground 24,15
+  G12:  ground 31,17
+  G13:  ground 34,17
+  G14:  ground 38,13
+  G15:  ground 41,13
+  G16:  ground 45,13
 wires:
-  - c4 -- c6 -- c9 -- c13 -- c16 -- c19 -- c22
-  - b16 -- c16
-  - c9 -- d9
-  - c13 -- d13
-  - c19 -- d19
-  - c22 -- d22
-  - f13 -- Q4.E
-  - f19 -- Q5.E
-  - Q4.B -- h16 -- Q5.B
-  - Q4.C -- j13 -- Q1.C
-  - j13 -- j16 -- h16
-  - Q5.C -- k19 -- Q2.C
-  - f9 -- m9
-  - l2 -- l4 -- l5
-  - l7 -- m9 -- Q1.B
-  - r26 -- s26
-  - u26 -- v26 -- w26
-  - v26 -- v28 -- w28
-  - Q2.B -- m21 -- v21 -- v26
-  - k19 -- k22
-  - k24 -- k31 -- k35
-  - f22 -- k22
-  - k22 -- k24 -- m24
-  - m31 -- o31 -- o34
-  - k37 -- k38 -- FL1.IN
-  - FL1.GND -- m41
-  - FL1.OUT -- k45
-  - k48 -- k50
-  - Q1.E -- p13
-  - Q2.E -- p19
-  - p13 -- p16 -- p19
-  - p16 -- Q3.C
-  - p11 -- q11
-  - s11 -- t11 -- u11
-  - t2 -- t4 -- t5
-  - t7 -- t11
-  - t11 -| Q3.B
-  - Q3.E -- u16
-  - v16 -- w16
-  - v16 -- v18 -- w18
+  - 4,3 -- 6,3 -- 9,3 -- 13,3 -- 16,3 -- 19,3 -- 22,3
+  - 16,2 -- 16,3
+  - 9,3 -- 9,4
+  - 13,3 -- 13,4
+  - 19,3 -- 19,4
+  - 22,3 -- 22,4
+  - 13,6 -- Q4.E
+  - 19,6 -- Q5.E
+  - Q4.B -- 16,8 -- Q5.B
+  - Q4.C -- 13,10 -- Q1.C
+  - 13,10 -- 16,10 -- 16,8
+  - Q5.C -- 19,11 -- Q2.C
+  - 9,6 -- 9,13
+  - 2,12 -- 4,12 -- 5,12
+  - 7,12 -- 9,13 -- Q1.B
+  - 26,18 -- 26,19
+  - 26,21 -- 26,22 -- 26,23
+  - 26,22 -- 28,22 -- 28,23
+  - Q2.B -- 21,13 -- 21,22 -- 26,22
+  - 19,11 -- 22,11
+  - 24,11 -- 31,11 -- 35,11
+  - 22,6 -- 22,11
+  - 22,11 -- 24,11 -- 24,13
+  - 31,13 -- 31,15 -- 34,15
+  - 37,11 -- 38,11 -- FL1.IN
+  - FL1.GND -- 41,13
+  - FL1.OUT -- 45,11
+  - 48,11 -- 50,11
+  - Q1.E -- 13,16
+  - Q2.E -- 19,16
+  - 13,16 -- 16,16 -- 19,16
+  - 16,16 -- Q3.C
+  - 11,16 -- 11,17
+  - 11,19 -- 11,20 -- 11,21
+  - 2,20 -- 4,20 -- 5,20
+  - 7,20 -- 11,20
+  - 11,20 -| Q3.B
+  - Q3.E -- 16,21
+  - 16,22 -- 16,23
+  - 16,22 -- 18,22 -- 18,23
 notes:
-  - text j2 small left: "LO IN 50Ω"
-  - text k2 small blue left: "0 dBm (0.32 Vp)"
-  - text r2 small left: "RF IN 50Ω"
-  - text s2 small blue left: "-30 dBm (10 mVp)"
-  - text i50 small left: "IF OUT 50Ω"
-  - text j50 small blue left: "RF -30 dBm で -29.7 dBm (10.4 mVp)"
-  - text i25 small blue left: "DC 3.23 V (ミラーの出力)"
-  - text e16 small blue center: "IC 0.39 mA ずつ"
-  - text q17 small blue left: "尾 1.88 V"
-  - text x3 small blue left: "Q3: B 1.00 V・E 0.37 V・IC 0.79 mA"
-  - text n35 small left: "LT・CTK は約 454 kHz に同調"
+  - text 2,10 small left: "LO IN 50Ω"
+  - text 2,11 small blue left: "0 dBm (0.32 Vp)"
+  - text 2,18 small left: "RF IN 50Ω"
+  - text 2,19 small blue left: "-30 dBm (10 mVp)"
+  - text 50,9 small left: "IF OUT 50Ω"
+  - text 50,10 small blue left: "RF -30 dBm で -29.7 dBm (10.4 mVp)"
+  - text 25,9 small blue left: "DC 3.23 V (ミラーの出力)"
+  - text 16,5 small blue center: "IC 0.39 mA ずつ"
+  - text 17,17 small blue left: "尾 1.88 V"
+  - text 3,24 small blue left: "Q3: B 1.00 V・E 0.37 V・IC 0.79 mA"
+  - text 35,14 small left: "LT・CTK は約 454 kHz に同調"
 style:
   pitch: 1.2
 ```

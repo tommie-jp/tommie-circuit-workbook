@@ -52,83 +52,83 @@ RF が上でも下でも 49.8 kHz に同じ高さの線が 1 本立つだけだ�
 ```circuit
 title: 図1 SA612 を 2 個並べた I/Q ミキサー (W2 が RF、W1 が LO)
 parts:
-  W2: sine e1 g1 l=$\mathrm{W2}$
-  G1: ground g1
-  C5: capacitor e5 e6 10n
-  C6: capacitor q5 q6 10n
-  U1: ic g16f0 SA612
-  U2: ic s16f0 SA612
-  C7: capacitor i11 j11 10n
-  G2: ground j11
-  G3: ground j16
-  C8: capacitor u11 v11 10n
-  G4: ground v11
-  G5: ground v16
-  VCC: vcc c16 5V
-  C9: capacitor c14 d14 100n
-  G6: ground d14
-  VCC: vcc o16 5V
-  C10: capacitor o14 p14 100n
-  G7: ground p14
-  C11: capacitor f22 j22 470p
-  M1: voltmeter f25 j25 l=$\mathrm{CH1}$
-  C12: capacitor r22 v22 470p
-  M2: voltmeter r25 v25 l=$\mathrm{CH2}$
-  C3: capacitor l13 l12 10n
-  C1: capacitor l9 l8 470p
-  R2: resistor l10 m10 680
-  G8: ground m10
-  R1: resistor o7 n7 680
-  C2: capacitor o7 p7 470p
-  G9: ground p7
-  C4: capacitor s9 r9 10n
-  W1: sine l5 n5 l=$\mathrm{W1}$
-  G10: ground n5
+  W2: sine 1,5 1,7 l=$\mathrm{W2}$
+  G1: ground 1,7
+  C5: capacitor 5,5 6,5 10n
+  C6: capacitor 5,17 6,17 10n
+  U1: ic 16,7.5 SA612
+  U2: ic 16,19.5 SA612
+  C7: capacitor 11,9 11,10 10n
+  G2: ground 11,10
+  G3: ground 16,10
+  C8: capacitor 11,21 11,22 10n
+  G4: ground 11,22
+  G5: ground 16,22
+  VCC: vcc 16,3 5V
+  C9: capacitor 14,3 14,4 100n
+  G6: ground 14,4
+  VCC: vcc 16,15 5V
+  C10: capacitor 14,15 14,16 100n
+  G7: ground 14,16
+  C11: capacitor 22,6 22,10 470p
+  M1: voltmeter 25,6 25,10 l=$\mathrm{CH1}$
+  C12: capacitor 22,18 22,22 470p
+  M2: voltmeter 25,18 25,22 l=$\mathrm{CH2}$
+  C3: capacitor 13,12 12,12 10n
+  C1: capacitor 9,12 8,12 470p
+  R2: resistor 10,12 10,13 680
+  G8: ground 10,13
+  R1: resistor 7,15 7,14 680
+  C2: capacitor 7,15 7,16 470p
+  G9: ground 7,16
+  C4: capacitor 9,19 9,18 10n
+  W1: sine 5,12 5,14 l=$\mathrm{W1}$
+  G10: ground 5,14
 wires:
-  - e1 -- e3
-  - e3 -- e5
-  - e3 -- q3
-  - q3 -- q5
-  - e6 -- e13
-  - U1.IN_A -| e13
-  - q6 -- q13
-  - U2.IN_A -| q13
-  - U1.IN_B -| i11
-  - U2.IN_B -| u11
-  - U1.GND |- j16
-  - U2.GND |- v16
-  - U1.VCC |- c16
-  - c16 -- c14
-  - U2.VCC |- o16
-  - o16 -- o14
-  - U1.OUT_A -| f19
-  - f19 -- f22
-  - f22 -- f25
-  - U1.OUT_B -| j20
-  - j20 -- j22
-  - j22 -- j25
-  - U2.OUT_A -| r19
-  - r19 -- r22
-  - r22 -- r25
-  - U2.OUT_B -| v20
-  - v20 -- v22
-  - v22 -- v25
-  - U1.OSC_B -| l13
-  - l12 -- l10
-  - l10 -- l9
-  - l7 -- l8
-  - l5 -- l7
-  - l7 -- n7
-  - o7 -- o9
-  - o9 -- r9
-  - s9 -- w9
-  - w9 -- w13
-  - U2.OSC_B -| w13
+  - 1,5 -- 3,5
+  - 3,5 -- 5,5
+  - 3,5 -- 3,17
+  - 3,17 -- 5,17
+  - 6,5 -- 13,5
+  - U1.IN_A -| 13,5
+  - 6,17 -- 13,17
+  - U2.IN_A -| 13,17
+  - U1.IN_B -| 11,9
+  - U2.IN_B -| 11,21
+  - U1.GND |- 16,10
+  - U2.GND |- 16,22
+  - U1.VCC |- 16,3
+  - 16,3 -- 14,3
+  - U2.VCC |- 16,15
+  - 16,15 -- 14,15
+  - U1.OUT_A -| 19,6
+  - 19,6 -- 22,6
+  - 22,6 -- 25,6
+  - U1.OUT_B -| 20,10
+  - 20,10 -- 22,10
+  - 22,10 -- 25,10
+  - U2.OUT_A -| 19,18
+  - 19,18 -- 22,18
+  - 22,18 -- 25,18
+  - U2.OUT_B -| 20,22
+  - 20,22 -- 22,22
+  - 22,22 -- 25,22
+  - U1.OSC_B -| 13,12
+  - 12,12 -- 10,12
+  - 10,12 -- 9,12
+  - 7,12 -- 8,12
+  - 5,12 -- 7,12
+  - 7,12 -- 7,14
+  - 7,15 -- 9,15
+  - 9,15 -- 9,18
+  - 9,19 -- 9,23
+  - 9,23 -- 13,23
+  - U2.OSC_B -| 13,23
 notes:
-  - text k10 small center: LO_I +45°
-  - text n9f5 small center: LO_Q -45°
-  - text h26 small center: I
-  - text t26 small center: Q
+  - text 10,11 small center: LO_I +45°
+  - text 9.5,14.5 small center: LO_Q -45°
+  - text 26,8 small center: I
+  - text 26,20 small center: Q
 style:
   pitch: 1
 ```

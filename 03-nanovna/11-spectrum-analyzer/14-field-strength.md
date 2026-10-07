@@ -235,29 +235,29 @@ title: 図4 ループを CH0 と CH1 の間に直列に挟む
 parts:
   X1:
     type: device
-    at: b1
+    at: 1,2
     label: NanoVNA
     pins: [CH0, GND]
     turn: mirror
-  L1: inductor b5 b8 50u
-  C1: capacitor d5 d8 20p
+  L1: inductor 5,2 8,2 50u
+  C1: capacitor 5,4 8,4 20p
   X2:
     type: device
-    at: b12
+    at: 12,2
     label: NanoVNA
     pins: [CH1, GND]
-  G1: ground e4
-  G2: ground e11
+  G1: ground 4,5
+  G2: ground 11,5
 wires:
-  - X1.CH0 -| b5
-  - b5 -- d5
-  - b8 -- d8
-  - b8 -| X2.CH1
-  - X1.GND -| e4
-  - X2.GND -| e11
+  - X1.CH0 -| 5,2
+  - 5,2 -- 5,4
+  - 8,2 -- 8,4
+  - 8,2 -| X2.CH1
+  - X1.GND -| 4,5
+  - X2.GND -| 11,5
 notes:
-  - text a6f5: ループ (6 回巻き)
-  - text e6f5: C1 は浮遊容量 (仮定)
+  - text 6.5,1.5: ループ (6 回巻き)
+  - text 6.5,5.5: C1 は浮遊容量 (仮定)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-1.svg)
@@ -307,36 +307,36 @@ title: 図6 小さなループ 2 つで、ゆるく結合する
 parts:
   X1:
     type: device
-    at: b1
+    at: 1,2
     label: NanoVNA
     pins: [CH0, GND]
     turn: mirror
-  L1: inductor b5 d5 0.1u
-  L2: inductor b8 d8 50u
-  C1: capacitor b10 d10 20p
-  L3: inductor b13 d13 0.1u
+  L1: inductor 5,2 5,4 0.1u
+  L2: inductor 8,2 8,4 50u
+  C1: capacitor 10,2 10,4 20p
+  L3: inductor 13,2 13,4 0.1u
   X2:
     type: device
-    at: b16
+    at: 16,2
     label: NanoVNA
     pins: [CH1, GND]
-  G1: ground e4
-  G2: ground e5
-  G3: ground e13
-  G4: ground e15
+  G1: ground 4,5
+  G2: ground 5,5
+  G3: ground 13,5
+  G4: ground 15,5
 wires:
-  - X1.CH0 -| b5
-  - X1.GND -| e4
-  - d5 -- e5
-  - b8 -- b10
-  - d8 -- d10
-  - b13 -| X2.CH1
-  - d13 -- e13
-  - X2.GND -| e15
+  - X1.CH0 -| 5,2
+  - X1.GND -| 4,5
+  - 5,4 -- 5,5
+  - 8,2 -- 10,2
+  - 8,4 -- 10,4
+  - 13,2 -| X2.CH1
+  - 13,4 -- 13,5
+  - X2.GND -| 15,5
 notes:
-  - text a9: 測るループ (線でつながない)
-  - text e6f5: 磁気結合
-  - text e11f5: 磁気結合
+  - text 9,1: 測るループ (線でつながない)
+  - text 6.5,5.5: 磁気結合
+  - text 11.5,5.5: 磁気結合
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-2.svg)
@@ -465,20 +465,20 @@ L ∝ N² は目安なので、実際の最適は ±1 回ほどずれること�
 ```circuit
 title: 図9 (a) 非同調の 2 回巻きを tinySA に直結
 parts:
-  L1: inductor b3 d3 5.6u
+  L1: inductor 3,2 3,4 5.6u
   X1:
     type: device
-    at: b5
+    at: 5,2
     label: tinySA
     pins: [RF, GND]
-  G1: ground e3
-  G2: ground e4
+  G1: ground 3,5
+  G2: ground 4,5
 wires:
-  - b3 -| X1.RF
-  - d3 -- e3
-  - X1.GND -| e4
+  - 3,2 -| X1.RF
+  - 3,4 -- 3,5
+  - X1.GND -| 4,5
 notes:
-  - text c1: 2 回巻きのループ
+  - text 1,3: 2 回巻きのループ
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-3.svg)
@@ -500,36 +500,36 @@ notes:
 ```circuit
 title: 図10 (b) 非同調の 6 回巻きを JFET のソースフォロワで受ける
 parts:
-  VCC: vcc a7 5V
-  L1: inductor c2 e2 50u
-  RG: resistor c4 e4 1M
-  J1: njfet c7
-  RS: resistor d7 f7 1k
-  C1: capacitor d7 d9 100n
-  R1: resistor d9 d11 51
-  CB: capacitor a8 b8 100n
+  VCC: vcc 7,1 5V
+  L1: inductor 2,3 2,5 50u
+  RG: resistor 4,3 4,5 1M
+  J1: njfet 7,3
+  RS: resistor 7,4 7,6 1k
+  C1: capacitor 7,4 9,4 100n
+  R1: resistor 9,4 11,4 51
+  CB: capacitor 8,1 8,2 100n
   X1:
     type: device
-    at: d13
+    at: 13,4
     label: tinySA
     pins: [RF, GND]
-  G1: ground f2
-  G2: ground f4
-  G3: ground f7
-  G4: ground f12
-  G5: ground b8
+  G1: ground 2,6
+  G2: ground 4,6
+  G3: ground 7,6
+  G4: ground 12,6
+  G5: ground 8,2
 wires:
-  - c2 -- c4
-  - c4 -| J1.G
-  - a7 -- J1.D
-  - a7 -- a8
-  - J1.S -- d7
-  - e2 -- f2
-  - e4 -- f4
-  - d11 -| X1.RF
-  - X1.GND -| f12
+  - 2,3 -- 4,3
+  - 4,3 -| J1.G
+  - 7,1 -- J1.D
+  - 7,1 -- 8,1
+  - J1.S -- 7,4
+  - 2,5 -- 2,6
+  - 4,5 -- 4,6
+  - 11,4 -| X1.RF
+  - X1.GND -| 12,6
 notes:
-  - text b1: 6 回巻きのループ (非同調)
+  - text 1,2: 6 回巻きのループ (非同調)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-4.svg)
@@ -602,31 +602,31 @@ wires:
 ```circuit
 title: 図12 (c) 同調ループをポリバリコンで合わせ、リンクで取り出す
 parts:
-  L1: inductor b3 d3 175u
-  C2: capacitor-var b5 d5 30p-280p
-  S1: switch b5 b7
-  C3: capacitor b7 d7 220p
-  L2: inductor b10 d10 1.4u
+  L1: inductor 3,2 3,4 175u
+  C2: capacitor-var 5,2 5,4 30p-280p
+  S1: switch 5,2 7,2
+  C3: capacitor 7,2 7,4 220p
+  L2: inductor 10,2 10,4 1.4u
   X1:
     type: device
-    at: b13
+    at: 13,2
     label: tinySA
     pins: [RF, GND]
-  G1: ground e3
-  G2: ground e10
-  G3: ground e12
+  G1: ground 3,5
+  G2: ground 10,5
+  G3: ground 12,5
 wires:
-  - b3 -- b5
-  - d3 -- d5
-  - d5 -- d7
-  - d3 -- e3
-  - b10 -| X1.RF
-  - d10 -- e10
-  - X1.GND -| e12
+  - 3,2 -- 5,2
+  - 3,4 -- 5,4
+  - 5,4 -- 7,4
+  - 3,4 -- 3,5
+  - 10,2 -| X1.RF
+  - 10,4 -- 10,5
+  - X1.GND -| 12,5
 notes:
-  - text a1: 11 回巻きのループ
-  - text a6: S1 を入れると 220 pF が足される (低い側)
-  - text f9: 1 回巻きのリンク (L1 に重ねて巻く)
+  - text 1,1: 11 回巻きのループ
+  - text 6,1: S1 を入れると 220 pF が足される (低い側)
+  - text 9,6: 1 回巻きのリンク (L1 に重ねて巻く)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-5.svg)
@@ -682,28 +682,28 @@ title: 図14 3 m 離して受け、同軸で tinySA へ
 parts:
   X1:
     type: device
-    at: b1
+    at: 1,2
     label: TX
     pins: [ANT, GND]
     turn: mirror
-  ANT1: antenna a4
-  ANT2: antenna a10
+  ANT1: antenna 4,1
+  ANT2: antenna 10,1
   X2:
     type: device
-    at: b13
+    at: 13,2
     label: tinySA
     pins: [RF, GND]
-  G1: ground c4
-  G2: ground c11
+  G1: ground 4,3
+  G2: ground 11,3
 wires:
-  - X1.ANT -| a4
-  - X1.GND -| c4
-  - a10 -| X2.RF
-  - X2.GND -| c11
+  - X1.ANT -| 4,1
+  - X1.GND -| 4,3
+  - 10,1 -| X2.RF
+  - X2.GND -| 11,3
 notes:
-  - arrow b5 b9
-  - text c6: 3 m
-  - text b10 small: 同軸 (損失 L)
+  - arrow 5,2 9,2
+  - text 6,3: 3 m
+  - text 10,2 small: 同軸 (損失 L)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/14-field-strength-6.svg)

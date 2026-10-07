@@ -61,53 +61,53 @@ CMP8 --> T8
 ```circuit
 title: 図1 入力増幅、基準電圧、しきい値
 parts:
-  IN: port b1
-  Cin: capacitor b2 b4 1u
-  Rin: resistor b5 b7 10k
-  Rf: resistor a9 a13 100k
-  U1: opamp d11 +down
-  AFO: port d17
-  VCCa: vcc f2 5V
-  Ra: resistor f2 h2 10k
-  Rb: resistor h2 j2 10k
-  GRb: ground j2
-  Cb: ecap h4 j4 10u
-  GCb: ground j4
-  U2: opamp h7 +up
-  VB: port j13
-  VCCt: vcc f20 5V
-  R6: resistor f20 h20 6.2k
-  VR1: potentiometer h20 j20
-  R7: resistor j20 l20 5.6k
-  GR7: ground l20
-  TH: port i24
+  IN: port 1,2
+  Cin: capacitor 2,2 4,2 1u
+  Rin: resistor 5,2 7,2 10k
+  Rf: resistor 9,1 13,1 100k
+  U1: opamp 11,4 +down
+  AFO: port 17,4
+  VCCa: vcc 2,6 5V
+  Ra: resistor 2,6 2,8 10k
+  Rb: resistor 2,8 2,10 10k
+  GRb: ground 2,10
+  Cb: ecap 4,8 4,10 10u
+  GCb: ground 4,10
+  U2: opamp 7,8 +up
+  VB: port 13,10
+  VCCt: vcc 20,6 5V
+  R6: resistor 20,6 20,8 6.2k
+  VR1: potentiometer 20,8 20,10
+  R7: resistor 20,10 20,12 5.6k
+  GR7: ground 20,12
+  TH: port 24,9
 wires:
-  - b1 -- b2
-  - b4 -- b5
-  - b7 -- b8
-  - b8 -- a8 -- a9
-  - b8 |- U1.-
-  - a13 -- a14
-  - a14 -- d14
-  - U1.out -- d14 -- d17
-  - h2 -- h4
-  - h4 -| U2.+
-  - U2.out -- h9
-  - h9 |- U1.+
-  - h9 -- j9
-  - j9 -- j6
-  - j6 |- U2.-
-  - j9 -- j13
-  - VR1.w -- i24
+  - 1,2 -- 2,2
+  - 4,2 -- 5,2
+  - 7,2 -- 8,2
+  - 8,2 -- 8,1 -- 9,1
+  - 8,2 |- U1.-
+  - 13,1 -- 14,1
+  - 14,1 -- 14,4
+  - U1.out -- 14,4 -- 17,4
+  - 2,8 -- 4,8
+  - 4,8 -| U2.+
+  - U2.out -- 9,8
+  - 9,8 |- U1.+
+  - 9,8 -- 9,10
+  - 9,10 -- 6,10
+  - 6,10 |- U2.-
+  - 9,10 -- 13,10
+  - VR1.w -- 24,9
 notes:
-  - text c9e5 tiny right: PIN 2
-  - text e9a1 tiny left: PIN 3
-  - text d12e6 tiny left: PIN 1
-  - text g5f9 tiny right: PIN 5
-  - text h5f9 tiny right: PIN 6
-  - text h9a2 tiny left: PIN 7
-  - text l3 small left: U1 と U2 は LM358 の 1 個 (PIN 8 は +5V、PIN 4 は GND)
-  - text i19a2 small right: 2 kΩ
+  - text 9.5,3.4 tiny right: PIN 2
+  - text 9.1,5 tiny left: PIN 3
+  - text 12.6,4.4 tiny left: PIN 1
+  - text 5.9,7.5 tiny right: PIN 5
+  - text 5.9,8.5 tiny right: PIN 6
+  - text 9.2,8 tiny left: PIN 7
+  - text 3,12 small left: U1 と U2 は LM358 の 1 個 (PIN 8 は +5V、PIN 4 は GND)
+  - text 19.2,9 small right: 2 kΩ
 style:
   pitch: 1.2
 ```
@@ -123,61 +123,61 @@ style:
 ```circuit
 title: 図2 440 Hz の検出 (帯域通過、整流と平滑、比較器)
 parts:
-  AFI: port d1
-  R1: resistor d3 d6 75k
-  C1: capacitor d8 d11 22n
-  C2: capacitor a8 a13 22n
-  R2: resistor-var e7 i7 2k
-  R3: resistor b12 b17 300k
-  U3A: opamp d14 +down
-  VBI: port j3
-  D1: diode d20 d23 1N4148
-  Cp: capacitor d25 f25 1u
-  GCp: ground f25
-  Rp: resistor d27 f27 100k
-  GRp: ground f27
-  Rs: resistor d28 d30 47k
-  Rh: resistor b30 b33 2.2M
-  U4A: opamp e31 +up
-  THI: port h29
-  VCC4: vcc b35 5V
-  Rpu: resistor b35 e35 10k
-  T440: port e38
+  AFI: port 1,4
+  R1: resistor 3,4 6,4 75k
+  C1: capacitor 8,4 11,4 22n
+  C2: capacitor 8,1 13,1 22n
+  R2: resistor-var 7,5 7,9 2k
+  R3: resistor 12,2 17,2 300k
+  U3A: opamp 14,4 +down
+  VBI: port 3,10
+  D1: diode 20,4 23,4 1N4148
+  Cp: capacitor 25,4 25,6 1u
+  GCp: ground 25,6
+  Rp: resistor 27,4 27,6 100k
+  GRp: ground 27,6
+  Rs: resistor 28,4 30,4 47k
+  Rh: resistor 30,2 33,2 2.2M
+  U4A: opamp 31,5 +up
+  THI: port 29,8
+  VCC4: vcc 35,2 5V
+  Rpu: resistor 35,2 35,5 10k
+  T440: port 38,5
 wires:
-  - d1 -- d3
-  - d6 -- d7
-  - d7 -- d8
-  - d7 -- a7 -- a8
-  - d7 -- e7
-  - i7 -- j7
-  - j3 -- j7
-  - j7 -- j12
-  - j12 |- U3A.+
-  - d11 -- b11
-  - b11 -- b12
-  - d11 |- U3A.-
-  - U3A.out -- d17
-  - d17 -- b17
-  - a13 -- a17
-  - a17 -- b17
-  - d17 -- d20
-  - d23 -- d25
-  - d25 -- d27
-  - d27 -- d28
-  - d30 -| U4A.+
-  - b30 -- d30
-  - b33 -- e33
-  - h29 |- U4A.-
-  - U4A.out -- e33 -- e35 -- e38
+  - 1,4 -- 3,4
+  - 6,4 -- 7,4
+  - 7,4 -- 8,4
+  - 7,4 -- 7,1 -- 8,1
+  - 7,4 -- 7,5
+  - 7,9 -- 7,10
+  - 3,10 -- 7,10
+  - 7,10 -- 12,10
+  - 12,10 |- U3A.+
+  - 11,4 -- 11,2
+  - 11,2 -- 12,2
+  - 11,4 |- U3A.-
+  - U3A.out -- 17,4
+  - 17,4 -- 17,2
+  - 13,1 -- 17,1
+  - 17,1 -- 17,2
+  - 17,4 -- 20,4
+  - 23,4 -- 25,4
+  - 25,4 -- 27,4
+  - 27,4 -- 28,4
+  - 30,4 -| U4A.+
+  - 30,2 -- 30,4
+  - 33,2 -- 33,5
+  - 29,8 |- U4A.-
+  - U4A.out -- 33,5 -- 35,5 -- 38,5
 notes:
-  - text c12e5 tiny right: PIN 2
-  - text d13g4 tiny right: PIN 3
-  - text c16g0 tiny right: PIN 1
-  - text d30f0 tiny right: PIN 3
-  - text e30g0 tiny right: PIN 2
-  - text d34g0 tiny right: PIN 1
-  - text g14 small left: U3 は LM358 (PIN 8 は +5V、PIN 4 は GND)
-  - text g31 small left: U4 は LM393 (PIN 8 は +5V、PIN 4 は GND)
+  - text 12.5,3.4 tiny right: PIN 2
+  - text 13.4,4.6 tiny right: PIN 3
+  - text 16,3.6 tiny right: PIN 1
+  - text 30,4.5 tiny right: PIN 3
+  - text 30,5.6 tiny right: PIN 2
+  - text 34,4.6 tiny right: PIN 1
+  - text 14,7 small left: U3 は LM358 (PIN 8 は +5V、PIN 4 は GND)
+  - text 31,7 small left: U4 は LM393 (PIN 8 は +5V、PIN 4 は GND)
 style:
   pitch: 1.2
 ```
@@ -201,61 +201,61 @@ style:
 ```circuit
 title: 図3 880 Hz の検出 (図2 と同じ形で、値だけ違う)
 parts:
-  AFI: port d1
-  R1: resistor d3 d6 91k
-  C1: capacitor d8 d11 10n
-  C2: capacitor a8 a13 10n
-  R2: resistor-var e7 i7 2k
-  R3: resistor b12 b17 330k
-  U3B: opamp d14 +down
-  VBI: port j3
-  D1: diode d20 d23 1N4148
-  Cp: capacitor d25 f25 1u
-  GCp: ground f25
-  Rp: resistor d27 f27 100k
-  GRp: ground f27
-  Rs: resistor d28 d30 47k
-  Rh: resistor b30 b33 2.2M
-  U4B: opamp e31 +up
-  THI: port h29
-  VCC4: vcc b35 5V
-  Rpu: resistor b35 e35 10k
-  T880: port e38
+  AFI: port 1,4
+  R1: resistor 3,4 6,4 91k
+  C1: capacitor 8,4 11,4 10n
+  C2: capacitor 8,1 13,1 10n
+  R2: resistor-var 7,5 7,9 2k
+  R3: resistor 12,2 17,2 330k
+  U3B: opamp 14,4 +down
+  VBI: port 3,10
+  D1: diode 20,4 23,4 1N4148
+  Cp: capacitor 25,4 25,6 1u
+  GCp: ground 25,6
+  Rp: resistor 27,4 27,6 100k
+  GRp: ground 27,6
+  Rs: resistor 28,4 30,4 47k
+  Rh: resistor 30,2 33,2 2.2M
+  U4B: opamp 31,5 +up
+  THI: port 29,8
+  VCC4: vcc 35,2 5V
+  Rpu: resistor 35,2 35,5 10k
+  T880: port 38,5
 wires:
-  - d1 -- d3
-  - d6 -- d7
-  - d7 -- d8
-  - d7 -- a7 -- a8
-  - d7 -- e7
-  - i7 -- j7
-  - j3 -- j7
-  - j7 -- j12
-  - j12 |- U3B.+
-  - d11 -- b11
-  - b11 -- b12
-  - d11 |- U3B.-
-  - U3B.out -- d17
-  - d17 -- b17
-  - a13 -- a17
-  - a17 -- b17
-  - d17 -- d20
-  - d23 -- d25
-  - d25 -- d27
-  - d27 -- d28
-  - d30 -| U4B.+
-  - b30 -- d30
-  - b33 -- e33
-  - h29 |- U4B.-
-  - U4B.out -- e33 -- e35 -- e38
+  - 1,4 -- 3,4
+  - 6,4 -- 7,4
+  - 7,4 -- 8,4
+  - 7,4 -- 7,1 -- 8,1
+  - 7,4 -- 7,5
+  - 7,9 -- 7,10
+  - 3,10 -- 7,10
+  - 7,10 -- 12,10
+  - 12,10 |- U3B.+
+  - 11,4 -- 11,2
+  - 11,2 -- 12,2
+  - 11,4 |- U3B.-
+  - U3B.out -- 17,4
+  - 17,4 -- 17,2
+  - 13,1 -- 17,1
+  - 17,1 -- 17,2
+  - 17,4 -- 20,4
+  - 23,4 -- 25,4
+  - 25,4 -- 27,4
+  - 27,4 -- 28,4
+  - 30,4 -| U4B.+
+  - 30,2 -- 30,4
+  - 33,2 -- 33,5
+  - 29,8 |- U4B.-
+  - U4B.out -- 33,5 -- 35,5 -- 38,5
 notes:
-  - text c12e5 tiny right: PIN 6
-  - text d13g4 tiny right: PIN 5
-  - text c16g0 tiny right: PIN 7
-  - text d30f0 tiny right: PIN 5
-  - text e30g0 tiny right: PIN 6
-  - text d34g0 tiny right: PIN 7
-  - text g14 small left: U3 は LM358 (PIN 8 は +5V、PIN 4 は GND)
-  - text g31 small left: U4 は LM393 (PIN 8 は +5V、PIN 4 は GND)
+  - text 12.5,3.4 tiny right: PIN 6
+  - text 13.4,4.6 tiny right: PIN 5
+  - text 16,3.6 tiny right: PIN 7
+  - text 30,4.5 tiny right: PIN 5
+  - text 30,5.6 tiny right: PIN 6
+  - text 34,4.6 tiny right: PIN 7
+  - text 14,7 small left: U3 は LM358 (PIN 8 は +5V、PIN 4 は GND)
+  - text 31,7 small left: U4 は LM393 (PIN 8 は +5V、PIN 4 は GND)
 style:
   pitch: 1.2
 ```

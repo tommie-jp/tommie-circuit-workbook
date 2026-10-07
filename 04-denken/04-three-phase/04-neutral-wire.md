@@ -27,39 +27,39 @@ board: BB
 ```circuit
 title: 図1 Y 結線に中性線を足す
 parts:
-  V1: sine c1 e1 1 l=$\mathrm{W1}$
-  G1: ground e1
-  V2: sine i1 k1 1 l=$\mathrm{W2}$
-  G2: ground k1
-  R1: resistor c3 e3 10k
-  R2: resistor i4 g4 10k
-  U1: opamp f8 +down TL071
-  G3: ground g6
-  Rf: resistor d7 d10 10k
-  R3: resistor c16 c18 1k
-  R5: resistor f16 f18 1k
-  R4: resistor i16 i18 1k
-  RN: resistor i20 k20 10 i=IN
-  G4: ground k20
+  V1: sine 1,3 1,5 1 l=$\mathrm{W1}$
+  G1: ground 1,5
+  V2: sine 1,9 1,11 1 l=$\mathrm{W2}$
+  G2: ground 1,11
+  R1: resistor 3,3 3,5 10k
+  R2: resistor 4,9 4,7 10k
+  U1: opamp 8,6 +down TL071
+  G3: ground 6,7
+  Rf: resistor 7,4 10,4 10k
+  R3: resistor 16,3 18,3 1k
+  R5: resistor 16,6 18,6 1k
+  R4: resistor 16,9 18,9 1k
+  RN: resistor 20,9 20,11 10 i=IN
+  G4: ground 20,11
 wires:
-  - e3 -- e4 -- e7
-  - e4 -- g4
-  - d7 -- e7
-  - e7 |- U1.-
-  - g6 |- U1.+
-  - d10 -- f10
-  - c1 -- c3 -- c16
-  - i1 -- i4 -- i16
-  - U1.out -- f10 -- f16
-  - c18 -- c20 -- f20
-  - f18 -- f20
-  - i18 -- i20
-  - f20 -- i20
+  - 3,5 -- 4,5 -- 7,5
+  - 4,5 -- 4,7
+  - 7,4 -- 7,5
+  - 7,5 |- U1.-
+  - 6,7 |- U1.+
+  - 10,4 -- 10,6
+  - 1,3 -- 3,3 -- 16,3
+  - 1,9 -- 4,9 -- 16,9
+  - U1.out -- 10,6 -- 16,6
+  - 18,3 -- 20,3 -- 20,6
+  - 18,6 -- 20,6
+  - 18,9 -- 20,9
+  - 20,6 -- 20,9
 notes:
-  - text b12: 1 相目
-  - text g12: 3 相目
-  - text h12: 2 相目
-  - text d20a3: N
+  - text 12,2: 1 相目
+  - text 12,7: 3 相目
+  - text 12,8: 2 相目
+  - text 20.3,4: N
 style:
   standard: jis
   pitch: 1.2

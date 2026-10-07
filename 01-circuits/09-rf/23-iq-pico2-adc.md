@@ -64,93 +64,93 @@ CPU は 4 ms ごとに届く 2000 個の値を計算するだけにする。
 ```circuit
 title: 図1 Tayloe 検波器 (3.3 V。A0・A1・A2・A3 は図2 の差動増幅へ)
 parts:
-  P1: vcc e6 3.3V
-  U1: ic h8 74HC74
-  G2: ground j8
-  W1: square j3a5 l3a5 l=$\mathrm{W1}$
-  G1: ground l3a5
-  U2: ic h35 74HC4052
-  P1: vcc d35 3.3V
-  G3: ground l34
-  G4: ground j38a5
-  C1: capacitor l19a5 n19a5 10n
-  G5: ground n19a5
-  C2: capacitor l23a5 n23a5 10n
-  G6: ground n23a5
-  C3: capacitor l27a5 n27a5 10n
-  G7: ground n27a5
-  C4: capacitor l31a5 n31a5 10n
-  G8: ground n31a5
+  P1: vcc 6,5 3.3V
+  U1: ic 8,8 74HC74
+  G2: ground 8,10
+  W1: square 3.5,10 3.5,12 l=$\mathrm{W1}$
+  G1: ground 3.5,12
+  U2: ic 35,8 74HC4052
+  P1: vcc 35,4 3.3V
+  G3: ground 34,12
+  G4: ground 38.5,10
+  C1: capacitor 19.5,12 19.5,14 10n
+  G5: ground 19.5,14
+  C2: capacitor 23.5,12 23.5,14 10n
+  G6: ground 23.5,14
+  C3: capacitor 27.5,12 27.5,14 10n
+  G7: ground 27.5,14
+  C4: capacitor 31.5,12 31.5,14 10n
+  G8: ground 31.5,14
   X1:
     type: device
-    at: q15
+    at: 15,17
     pins: [A0, A1, A2, A3]
     turn: mirror
-  R1: resistor h39 h41 1k
-  W2: sine h42 j42 l=$\mathrm{W2}$
-  G9: ground j42
-  P1: vcc r3 3.3V
-  C5: capacitor r3 t3 100n
-  G10: ground t3
-  P1: vcc r7 3.3V
-  C6: capacitor r7 t7 100n
-  G11: ground t7
+  R1: resistor 39,8 41,8 1k
+  W2: sine 42,8 42,10 l=$\mathrm{W2}$
+  G9: ground 42,10
+  P1: vcc 3,18 3.3V
+  C5: capacitor 3,18 3,20 100n
+  G10: ground 3,20
+  P1: vcc 7,18 3.3V
+  C6: capacitor 7,18 7,20 100n
+  G11: ground 7,20
 wires:
-  - e6 -- e9
-  - e7 |- U1.VCC
-  - e7a5 |- U1.1PRE
-  - e8 |- U1.1CLR
-  - e8a5 |- U1.2PRE
-  - e9 |- U1.2CLR
-  - U1.GND |- j8
-  - U1.1CLK -| h3a5
-  - h3a5 -- i3a5
-  - U1.2CLK -| i3a5
-  - i3a5 -- j3a5
-  - U1./2Q -| i11
-  - i11 -- n11 -- n1 -- g1f0
-  - g1f0 -| U1.1D
-  - U1.1Q -| g11f5
-  - g11f5 -- g13f0
-  - g13f0 -- t13
-  - g11f5 -- b11a5 -- b2 -- h2f0
-  - h2f0 -| U1.2D
-  - U1.2Q -| h12f0
-  - h12f0 -- u12
-  - t13 -| U2.S0
-  - u12 -| U2.S1
-  - U2.VCC |- d35
-  - l34 |- U2.GND
-  - U2.VEE |- l34a5
-  - U2.E |- l35
-  - l34 -- l35
-  - U2.BN -| j38a5
-  - U2.A0 -| f18f0
-  - f18f0 -- l18
-  - U2.A1 -| g22
-  - g22 -- l22
-  - U2.A2 -| g26f0
-  - g26f0 -- l26
-  - U2.A3 -| h30
-  - h30 -- l30
-  - l18 -- l19a5
-  - l22 -- l23a5
-  - l26 -- l27a5
-  - l30 -- l31a5
-  - X1.A0 -| l18
-  - X1.A1 -| l22
-  - X1.A2 -| l26
-  - X1.A3 -| l30
-  - U2.AN -| h39
-  - h41 -- h42
+  - 6,5 -- 9,5
+  - 7,5 |- U1.VCC
+  - 7.5,5 |- U1.1PRE
+  - 8,5 |- U1.1CLR
+  - 8.5,5 |- U1.2PRE
+  - 9,5 |- U1.2CLR
+  - U1.GND |- 8,10
+  - U1.1CLK -| 3.5,8
+  - 3.5,8 -- 3.5,9
+  - U1.2CLK -| 3.5,9
+  - 3.5,9 -- 3.5,10
+  - U1./2Q -| 11,9
+  - 11,9 -- 11,14 -- 1,14 -- 1,7.5
+  - 1,7.5 -| U1.1D
+  - U1.1Q -| 11.5,7.5
+  - 11.5,7.5 -- 13,7.5
+  - 13,7.5 -- 13,20
+  - 11.5,7.5 -- 11.5,2 -- 2,2 -- 2,8.5
+  - 2,8.5 -| U1.2D
+  - U1.2Q -| 12,8.5
+  - 12,8.5 -- 12,21
+  - 13,20 -| U2.S0
+  - 12,21 -| U2.S1
+  - U2.VCC |- 35,4
+  - 34,12 |- U2.GND
+  - U2.VEE |- 34.5,12
+  - U2.E |- 35,12
+  - 34,12 -- 35,12
+  - U2.BN -| 38.5,10
+  - U2.A0 -| 18,6.5
+  - 18,6.5 -- 18,12
+  - U2.A1 -| 22,7
+  - 22,7 -- 22,12
+  - U2.A2 -| 26,7.5
+  - 26,7.5 -- 26,12
+  - U2.A3 -| 30,8
+  - 30,8 -- 30,12
+  - 18,12 -- 19.5,12
+  - 22,12 -- 23.5,12
+  - 26,12 -- 27.5,12
+  - 30,12 -- 31.5,12
+  - X1.A0 -| 18,12
+  - X1.A1 -| 22,12
+  - X1.A2 -| 26,12
+  - X1.A3 -| 30,12
+  - U2.AN -| 39,8
+  - 41,8 -- 42,8
 notes:
-  - text k4 small left: 1.992 MHz (0 - 3.3 V)
-  - text i43 small left: 499 kHz
-  - text j43 small left: 直流 1.65 V
-  - text s15 small center: 図2 の差動増幅へ
-  - text u5 small center: パスコン (C5 は U1、C6 は U2)
-  - text s25f0 small center: LO 0° (S0)
-  - text v25 small center: LO 90° (S1)
+  - text 4,11 small left: 1.992 MHz (0 - 3.3 V)
+  - text 43,9 small left: 499 kHz
+  - text 43,10 small left: 直流 1.65 V
+  - text 15,19 small center: 図2 の差動増幅へ
+  - text 5,21 small center: パスコン (C5 は U1、C6 は U2)
+  - text 25,19.5 small center: LO 0° (S0)
+  - text 25,22 small center: LO 90° (S1)
 style:
   pitch: 1
 ```
@@ -176,91 +176,91 @@ title: 図2 I と Q の差動増幅から Pico 2 の ADC へ
 parts:
   X2:
     type: device
-    at: f4h0f0
+    at: 4,6.75
     pins: [A0, A3, A1, A2]
     turn: mirror
-  R2: resistor f9 f11 100k
-  R4: resistor h9 h11 100k
-  R3: resistor d11 f11 200k
-  VREF: vcc d11 1.65V
-  U3A: opamp g13 +up MCP6002
-  R5: resistor i11 i14 200k
-  R6: resistor o9 o11 100k
-  R8: resistor q9 q11 100k
-  R7: resistor m11 o11 200k
-  VREF: vcc m11 1.65V
-  U4A: opamp p13 +up MCP6002
-  R9: resistor r11 r14 200k
-  M1: voltmeter g18 i18 l=$\mathrm{CH1}$
-  G1: ground i18
-  M2: voltmeter p18 r18 l=$\mathrm{CH2}$
-  G2: ground r18
+  R2: resistor 9,6 11,6 100k
+  R4: resistor 9,8 11,8 100k
+  R3: resistor 11,4 11,6 200k
+  VREF: vcc 11,4 1.65V
+  U3A: opamp 13,7 +up MCP6002
+  R5: resistor 11,9 14,9 200k
+  R6: resistor 9,15 11,15 100k
+  R8: resistor 9,17 11,17 100k
+  R7: resistor 11,13 11,15 200k
+  VREF: vcc 11,13 1.65V
+  U4A: opamp 13,16 +up MCP6002
+  R9: resistor 11,18 14,18 200k
+  M1: voltmeter 18,7 18,9 l=$\mathrm{CH1}$
+  G1: ground 18,9
+  M2: voltmeter 18,16 18,18 l=$\mathrm{CH2}$
+  G2: ground 18,18
   U5:
     type: device
-    at: k25
+    at: 25,11
     label: Pico 2
     pins: [3V3, GP26, GP27, GND]
-  P1: vcc h23a5 3.3V
-  G3: ground m23a5
-  P1: vcc u3 3.3V
-  R10: resistor u3 w3 10k
-  R11: resistor w3 y3 10k
-  G4: ground y3
-  U4B: opamp w7 +down MCP6002
-  VREF: vcc u9 1.65V
-  U3B: opamp w13 +down MCP6002
-  G5: ground x11
-  P1: vcc u19 3.3V
-  C7: capacitor u19 w19 100n
-  G6: ground w19
-  P1: vcc u22 3.3V
-  C8: capacitor u22 w22 100n
-  G7: ground w22
+  P1: vcc 23.5,8 3.3V
+  G3: ground 23.5,13
+  P1: vcc 3,21 3.3V
+  R10: resistor 3,21 3,23 10k
+  R11: resistor 3,23 3,25 10k
+  G4: ground 3,25
+  U4B: opamp 7,23 +down MCP6002
+  VREF: vcc 9,21 1.65V
+  U3B: opamp 13,23 +down MCP6002
+  G5: ground 11,24
+  P1: vcc 19,21 3.3V
+  C7: capacitor 19,21 19,23 100n
+  G6: ground 19,23
+  P1: vcc 22,21 3.3V
+  C8: capacitor 22,21 22,23 100n
+  G7: ground 22,23
 wires:
-  - X2.A0 -| f9
-  - X2.A3 -| h8
-  - h8 -- h9
-  - X2.A1 -| o7
-  - o7 -- o9
-  - X2.A2 -| q6
-  - q6 -- q9
-  - U3A.+ -| f11
-  - U3A.- -| h11
-  - h11 -- i11
-  - i14 -- g14
-  - U3A.out -- g14
-  - U4A.+ -| o11
-  - U4A.- -| q11
-  - q11 -- r11
-  - r14 -- p14
-  - U4A.out -- p14
-  - g14 -- g18
-  - g18 -- g22
-  - U5.GP26 -| g22
-  - p14 -- p18
-  - p18 -- p22a5
-  - U5.GP27 -| p22a5
-  - U5.3V3 -| h23a5
-  - U5.GND -| m23a5
-  - w3 -- w5
-  - U4B.+ -| w5
-  - U4B.- -| u6
-  - u6 -- u9
-  - u9 -- w9
-  - U4B.out -- w9
-  - U3B.+ -| x11
-  - U3B.- -| u12
-  - u12 -- u15
-  - u15 -- w15
-  - U3B.out -- w15
+  - X2.A0 -| 9,6
+  - X2.A3 -| 8,8
+  - 8,8 -- 9,8
+  - X2.A1 -| 7,15
+  - 7,15 -- 9,15
+  - X2.A2 -| 6,17
+  - 6,17 -- 9,17
+  - U3A.+ -| 11,6
+  - U3A.- -| 11,8
+  - 11,8 -- 11,9
+  - 14,9 -- 14,7
+  - U3A.out -- 14,7
+  - U4A.+ -| 11,15
+  - U4A.- -| 11,17
+  - 11,17 -- 11,18
+  - 14,18 -- 14,16
+  - U4A.out -- 14,16
+  - 14,7 -- 18,7
+  - 18,7 -- 22,7
+  - U5.GP26 -| 22,7
+  - 14,16 -- 18,16
+  - 18,16 -- 22.5,16
+  - U5.GP27 -| 22.5,16
+  - U5.3V3 -| 23.5,8
+  - U5.GND -| 23.5,13
+  - 3,23 -- 5,23
+  - U4B.+ -| 5,23
+  - U4B.- -| 6,21
+  - 6,21 -- 9,21
+  - 9,21 -- 9,23
+  - U4B.out -- 9,23
+  - U3B.+ -| 11,24
+  - U3B.- -| 12,21
+  - 12,21 -- 15,21
+  - 15,21 -- 15,23
+  - U3B.out -- 15,23
 notes:
-  - text d4 small center: 図1 の C1 - C4 から
-  - text f20f0 small center: I (ADC0)
-  - text o20f0 small center: Q (ADC1)
-  - text y7 small center: U4B で VREF (+1.65 V) を作る
-  - text x20a5 small center: パスコン (C7 は U3、C8 は U4)
-  - text y17 small left: U3・U4 (MCP6002) の電源は PIN 8 が +3.3V、PIN 4 が GND
-  - text z17 small left: U3B は使わない (+ を GND、- を出力へつなぐ)
+  - text 4,4 small center: 図1 の C1 - C4 から
+  - text 20,6.5 small center: I (ADC0)
+  - text 20,15.5 small center: Q (ADC1)
+  - text 7,25 small center: U4B で VREF (+1.65 V) を作る
+  - text 20.5,24 small center: パスコン (C7 は U3、C8 は U4)
+  - text 17,25 small left: U3・U4 (MCP6002) の電源は PIN 8 が +3.3V、PIN 4 が GND
+  - text 17,26 small left: U3B は使わない (+ を GND、- を出力へつなぐ)
 style:
   pitch: 1
 ```

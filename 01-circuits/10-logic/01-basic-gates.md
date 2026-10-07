@@ -29,54 +29,54 @@ LED が点いていれば出力は 1、消えていれば 0。
 ```circuit
 title: 図1 AND・OR・NOTを並べて比べる
 parts:
-  A: switch d3 f3
-  RpdA: resistor f3 f1 10k
-  GA: ground f1
-  B: switch c6 e6
-  RpdB: resistor e6 e4 10k
-  GB: ground e4
-  C: switch b9 d9
-  RpdC: resistor d9 d7 10k
-  GC: ground d7
-  VCC: vcc d3 5V
-  VCC: vcc c6 5V
-  VCC: vcc b9 5V
-  U1: and h14 CD4081
-  U2: or h20 CD4071
-  U3: not h26 CD4069
-  R1: resistor h16 j16 1k
-  D1: led j16 k16 red
-  GD1: ground k16
-  R2: resistor h22 j22 1k
-  D2: led j22 k22 red
-  GD2: ground k22
-  R3: resistor h28 j28 1k
-  D3: led j28 k28 red
-  GD3: ground k28
+  A: switch 3,4 3,6
+  RpdA: resistor 3,6 1,6 10k
+  GA: ground 1,6
+  B: switch 6,3 6,5
+  RpdB: resistor 6,5 4,5 10k
+  GB: ground 4,5
+  C: switch 9,2 9,4
+  RpdC: resistor 9,4 7,4 10k
+  GC: ground 7,4
+  VCC: vcc 3,4 5V
+  VCC: vcc 6,3 5V
+  VCC: vcc 9,2 5V
+  U1: and 14,8 CD4081
+  U2: or 20,8 CD4071
+  U3: not 26,8 CD4069
+  R1: resistor 16,8 16,10 1k
+  D1: led 16,10 16,11 red
+  GD1: ground 16,11
+  R2: resistor 22,8 22,10 1k
+  D2: led 22,10 22,11 red
+  GD2: ground 22,11
+  R3: resistor 28,8 28,10 1k
+  D3: led 28,10 28,11 red
+  GD3: ground 28,11
 wires:
-  - f3 -- f12 -- f18
-  - e6 -- e11 -- e17
-  - d9 -- d24
-  - f12 |- U1.a
-  - e11 |- U1.b
-  - f18 |- U2.a
-  - e17 |- U2.b
-  - d24 |- U3.in
-  - U1.out -- h16
-  - U2.out -- h22
-  - U3.out -- h28
+  - 3,6 -- 12,6 -- 18,6
+  - 6,5 -- 11,5 -- 17,5
+  - 9,4 -- 24,4
+  - 12,6 |- U1.a
+  - 11,5 |- U1.b
+  - 18,6 |- U2.a
+  - 17,5 |- U2.b
+  - 24,4 |- U3.in
+  - U1.out -- 16,8
+  - U2.out -- 22,8
+  - U3.out -- 28,8
 notes:
   # IC の PIN 番号 (ゲート 1 回路目)
-  - text g12g8 small center: "1"
-  - text h12e8 small center: "2"
-  - text g14h2 small center: "3"
-  - text g18g8 small center: "1"
-  - text h18e8 small center: "2"
-  - text g20h2 small center: "3"
-  - text g25h4 small center: "1"
-  - text g26h5 small center: "2"
-  - text j1 small left: "数字は IC の PIN 番号 (1 回路目を使う)"
-  - text k1 small left: "VDD は 3 つとも PIN 14 (+5V)、VSS は PIN 7 (GND)。使わない入力は GND へ"
+  - text 12.8,7.6 small center: "1"
+  - text 12.8,8.4 small center: "2"
+  - text 14.2,7.7 small center: "3"
+  - text 18.8,7.6 small center: "1"
+  - text 18.8,8.4 small center: "2"
+  - text 20.2,7.7 small center: "3"
+  - text 25.4,7.7 small center: "1"
+  - text 26.5,7.7 small center: "2"
+  - text 1,10 small left: "数字は IC の PIN 番号 (1 回路目を使う)"
+  - text 1,11 small left: "VDD は 3 つとも PIN 14 (+5V)、VSS は PIN 7 (GND)。使わない入力は GND へ"
 style:
   grid: on
   pitch: 1.2

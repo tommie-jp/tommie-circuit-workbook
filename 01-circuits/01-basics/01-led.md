@@ -19,12 +19,12 @@ LED は**流す電流**で明るさが決まる部品で、電源に直につな
 ```circuit
 title: 図1 LED と電流を決める抵抗
 parts:
-  V1: vsource a1 c1 5
-  R1: resistor a1 a3 330 i=I
-  D1: led a3 c3 v=VF
-  G1: ground c1
+  V1: vsource 1,1 1,3 5
+  R1: resistor 1,1 3,1 330 i=I
+  D1: led 3,1 3,3 v=VF
+  G1: ground 1,3
 wires:
-  - c1 -- c3
+  - 1,3 -- 3,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/01-led.svg)

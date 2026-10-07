@@ -50,22 +50,22 @@ R1 280 Ω・R2 330 Ω と書いてある。
 ```circuit
 title: 図1 10.7 MHz のセラミックフィルタ (前後に 270 Ω)
 parts:
-  J1: sma b2 mirror CH0
-  R1: resistor b3 b5 270
-  U1: ceramic-filter b7 SFELF10M7
-  R2: resistor b9 b11 270
-  J2: sma b13 CH1
-  G1: ground c2
-  G2: ground d7
-  G3: ground c13
+  J1: sma 2,2 mirror CH0
+  R1: resistor 3,2 5,2 270
+  U1: ceramic-filter 7,2 SFELF10M7
+  R2: resistor 9,2 11,2 270
+  J2: sma 13,2 CH1
+  G1: ground 2,3
+  G2: ground 7,4
+  G3: ground 13,3
 wires:
-  - J1.1 -- b3
-  - b5 -- U1.IN
-  - U1.OUT -- b9
-  - b11 -- J2.1
-  - U1.GND -- d7
-  - J1.2 -- c2
-  - J2.2 -- c13
+  - J1.1 -- 3,2
+  - 5,2 -- U1.IN
+  - U1.OUT -- 9,2
+  - 11,2 -- J2.1
+  - U1.GND -- 7,4
+  - J1.2 -- 2,3
+  - J2.2 -- 13,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/12-ceramic-filter-1.svg)
@@ -73,22 +73,22 @@ wires:
 ```circuit
 title: 図2 455 kHz のセラミックフィルタ (前後に 1.5 kΩ)
 parts:
-  J1: sma b2 mirror CH0
-  R1: resistor b3 b5 1.5k
-  U1: ceramic-filter b7 CFULA455KE4A
-  R2: resistor b9 b11 1.5k
-  J2: sma b13 CH1
-  G1: ground c2
-  G2: ground d7
-  G3: ground c13
+  J1: sma 2,2 mirror CH0
+  R1: resistor 3,2 5,2 1.5k
+  U1: ceramic-filter 7,2 CFULA455KE4A
+  R2: resistor 9,2 11,2 1.5k
+  J2: sma 13,2 CH1
+  G1: ground 2,3
+  G2: ground 7,4
+  G3: ground 13,3
 wires:
-  - J1.1 -- b3
-  - b5 -- U1.IN
-  - U1.OUT -- b9
-  - b11 -- J2.1
-  - U1.GND -- d7
-  - J1.2 -- c2
-  - J2.2 -- c13
+  - J1.1 -- 3,2
+  - 5,2 -- U1.IN
+  - U1.OUT -- 9,2
+  - 11,2 -- J2.1
+  - U1.GND -- 7,4
+  - J1.2 -- 2,3
+  - J2.2 -- 13,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/12-ceramic-filter-2.svg)

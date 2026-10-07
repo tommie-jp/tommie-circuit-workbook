@@ -37,26 +37,26 @@ title: 図1 555 の発振器を 20 dB パッドで tinySA へ
 parts:
   X1:
     type: device
-    at: b1
+    at: 1,2
     label: NE555 189.5 kHz
     pins: [OUT, GND]
     turn: mirror
-  P1: resistor b6 b8 43
-  P2: resistor b8 d8 11
-  P3: resistor b8 b10 43
+  P1: resistor 6,2 8,2 43
+  P2: resistor 8,2 8,4 11
+  P3: resistor 8,2 10,2 43
   X2:
     type: device
-    at: b12
+    at: 12,2
     label: tinySA
     pins: [RF, GND]
-  GO: ground d5
-  GP: ground d8
-  GM: ground d11
+  GO: ground 5,4
+  GP: ground 8,4
+  GM: ground 11,4
 wires:
-  - X1.OUT -| b6
-  - b10 -| X2.RF
-  - X1.GND -| d5
-  - X2.GND -| d11
+  - X1.OUT -| 6,2
+  - 10,2 -| X2.RF
+  - X1.GND -| 5,4
+  - X2.GND -| 11,4
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/05-square-wave-harmonics-1.svg)
@@ -84,29 +84,29 @@ V<sub>OL</sub> 0.17 V から見積もった目安)。
 ```circuit
 title: 図3 40106 の RC 発振 + 74HC14 の緩衝 + パッドで tinySA へ
 parts:
-  U1: not c3 40106
-  Rf: resistor a2 a4 10k
-  C1: capacitor c2 e2 470p
-  G1: ground e2
-  U2: not c6 74HC14
-  Rs: resistor c8 c9 150
-  P1: resistor c9 c11 43
-  P2: resistor c11 e11 11
-  P3: resistor c11 c13 43
+  U1: not 3,3 40106
+  Rf: resistor 2,1 4,1 10k
+  C1: capacitor 2,3 2,5 470p
+  G1: ground 2,5
+  U2: not 6,3 74HC14
+  Rs: resistor 8,3 9,3 150
+  P1: resistor 9,3 11,3 43
+  P2: resistor 11,3 11,5 11
+  P3: resistor 11,3 13,3 43
   X2:
     type: device
-    at: c15
+    at: 15,3
     label: tinySA
     pins: [RF, GND]
-  GP: ground e11
-  GM: ground e14
+  GP: ground 11,5
+  GM: ground 14,5
 wires:
-  - a2 -- c2 -- U1.in
-  - a4 -- c4
-  - U1.out -- c4 -- U2.in
-  - U2.out -- c8
-  - c13 -| X2.RF
-  - X2.GND -| e14
+  - 2,1 -- 2,3 -- U1.in
+  - 4,1 -- 4,3
+  - U1.out -- 4,3 -- U2.in
+  - U2.out -- 8,3
+  - 13,3 -| X2.RF
+  - X2.GND -| 14,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/05-square-wave-harmonics-2.svg)

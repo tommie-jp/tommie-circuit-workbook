@@ -22,21 +22,21 @@ title: 図1 GND レールに電流を流し、区間の電位差を見る
 parts:
   AD:
     type: device
-    at: a1
+    at: 1,1
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
-  R1: resistor c3 c6 150
-  Zrail: inductor c9 c12 23n l=$\mathrm{Z_{rail}}$
-  G1: ground c14
+  R1: resistor 3,3 6,3 150
+  Zrail: inductor 9,3 12,3 23n l=$\mathrm{Z_{rail}}$
+  G1: ground 14,3
 wires:
-  - AD.W1 -| c3
-  - AD.1+ -| c3
-  - AD.1- -| c6
-  - c6 -- c9
-  - AD.2+ -| c9
-  - AD.2- -| c12
-  - c12 -- c14
-  - AD.GND -| c14
+  - AD.W1 -| 3,3
+  - AD.1+ -| 3,3
+  - AD.1- -| 6,3
+  - 6,3 -- 9,3
+  - AD.2+ -| 9,3
+  - AD.2- -| 12,3
+  - 12,3 -- 14,3
+  - AD.GND -| 14,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/06-rail-impedance.svg)

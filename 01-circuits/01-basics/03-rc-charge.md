@@ -23,19 +23,19 @@ LED を使わず、オシロスコープで充電の曲線そのものを見て�
 ```circuit
 title: 図1 充電と放電を切り替える
 parts:
-  V1: vsource a1 d1 5
-  G1: ground d1
-  S1: slide-switch b5 mirror
-  R1: resistor a1 a4 1k
-  C1: ecap b7 d7 1000u
-  G2: ground d7
-  R2: resistor c3 d3 1k
-  D1: led d3 e3
-  G3: ground e3
+  V1: vsource 1,1 1,4 5
+  G1: ground 1,4
+  S1: slide-switch 5,2 mirror
+  R1: resistor 1,1 4,1 1k
+  C1: ecap 7,2 7,4 1000u
+  G2: ground 7,4
+  R2: resistor 3,3 3,4 1k
+  D1: led 3,4 3,5
+  G3: ground 3,5
 wires:
-  - a4 |- S1.1
-  - S1.in -- b7
-  - S1.2 -| c3
+  - 4,1 |- S1.1
+  - S1.in -- 7,2
+  - S1.2 -| 3,3
 style:
   grid: on
   pitch: 1.2
@@ -132,16 +132,16 @@ LED の点き方を目で追う代わりに、コンデンサの電圧が上が�
 ```circuit
 title: 図3 方形波で RC を充放電し、2 ch で見る
 parts:
-  V1: square b1 e1 5
-  M1: voltmeter b3 e3 l=$\mathrm{CH1}$
-  R1: resistor b4 b6 1k
-  C1: capacitor b7 e7 1u
-  M2: voltmeter b9 e9 l=$\mathrm{CH2}$
-  G1: ground e1
+  V1: square 1,2 1,5 5
+  M1: voltmeter 3,2 3,5 l=$\mathrm{CH1}$
+  R1: resistor 4,2 6,2 1k
+  C1: capacitor 7,2 7,5 1u
+  M2: voltmeter 9,2 9,5 l=$\mathrm{CH2}$
+  G1: ground 1,5
 wires:
-  - b1 -- b3 -- b4
-  - b6 -- b7 -- b9
-  - e1 -- e3 -- e7 -- e9
+  - 1,2 -- 3,2 -- 4,2
+  - 6,2 -- 7,2 -- 9,2
+  - 1,5 -- 3,5 -- 7,5 -- 9,5
 style:
   grid: on
   pitch: 1.2

@@ -83,87 +83,87 @@ I と Q は差を取るので 2.5 V は消える。
 ```circuit
 title: 図1 Tayloe 検波器 (74HC74 で 4 相を作り、74HC4052 で 4 つの C に振り分ける)
 parts:
-  VCC: vcc e6 5V
-  U1: ic h8 74HC74
-  G2: ground j8
-  W1: square j3a5 l3a5 l=$\mathrm{W1}$
-  G1: ground l3a5
-  U2: ic h32 74HC4052
-  VCC: vcc d32 5V
-  G3: ground l31
-  G11: ground j35a5
-  C2: capacitor l17 n17 10n
-  G4: ground n17
-  C3: capacitor l20 n20 10n
-  G5: ground n20
-  C4: capacitor l23 n23 10n
-  G6: ground n23
-  C1: capacitor l26 n26 10n
-  G7: ground n26
-  M2: voltmeter j20 j23 l=$\mathrm{CH2}$
-  M1: voltmeter p20 p23 l=$\mathrm{CH1}$
-  R1: resistor h36 h38 1k
-  W2: sine h39 j39 l=$\mathrm{W2}$
-  G8: ground j39
-  VCC: vcc r3 5V
-  C5: capacitor r3 t3 100n
-  G9: ground t3
-  VCC: vcc r7 5V
-  C6: capacitor r7 t7 100n
-  G10: ground t7
+  VCC: vcc 6,5 5V
+  U1: ic 8,8 74HC74
+  G2: ground 8,10
+  W1: square 3.5,10 3.5,12 l=$\mathrm{W1}$
+  G1: ground 3.5,12
+  U2: ic 32,8 74HC4052
+  VCC: vcc 32,4 5V
+  G3: ground 31,12
+  G11: ground 35.5,10
+  C2: capacitor 17,12 17,14 10n
+  G4: ground 17,14
+  C3: capacitor 20,12 20,14 10n
+  G5: ground 20,14
+  C4: capacitor 23,12 23,14 10n
+  G6: ground 23,14
+  C1: capacitor 26,12 26,14 10n
+  G7: ground 26,14
+  M2: voltmeter 20,10 23,10 l=$\mathrm{CH2}$
+  M1: voltmeter 20,16 23,16 l=$\mathrm{CH1}$
+  R1: resistor 36,8 38,8 1k
+  W2: sine 39,8 39,10 l=$\mathrm{W2}$
+  G8: ground 39,10
+  VCC: vcc 3,18 5V
+  C5: capacitor 3,18 3,20 100n
+  G9: ground 3,20
+  VCC: vcc 7,18 5V
+  C6: capacitor 7,18 7,20 100n
+  G10: ground 7,20
 wires:
-  - e6 -- e9
-  - e7 |- U1.VCC
-  - e7a5 |- U1.1PRE
-  - e8 |- U1.1CLR
-  - e8a5 |- U1.2PRE
-  - e9 |- U1.2CLR
-  - U1.GND |- j8
-  - U1.1CLK -| h3a5
-  - h3a5 -- i3a5
-  - U1.2CLK -| i3a5
-  - i3a5 -- j3a5
-  - U1./2Q -| i11
-  - i11 -- n11 -- n1 -- g1f0
-  - g1f0 -| U1.1D
-  - U1.1Q -| g11f5
-  - g11f5 -- g13f0
-  - g13f0 -- t13
-  - g11f5 -- b11a5 -- b2 -- h2f0
-  - h2f0 -| U1.2D
-  - U1.2Q -| h12f0
-  - h12f0 -- u12
-  - t13 -| U2.S0
-  - u12 -| U2.S1
-  - U2.VCC |- d32
-  - l31 |- U2.GND
-  - U2.VEE |- l31a5
-  - U2.E |- l32
-  - l31 -- l32
-  - U2.BN -| j35a5
-  - U2.A0 -| f17f0
-  - f17f0 -- k17
-  - k17 -- l17
-  - U2.A1 -| g20
-  - g20 -- j20
-  - j20 -- l20
-  - U2.A2 -| g23f0
-  - g23f0 -- j23
-  - j23 -- l23
-  - U2.A3 -| h26
-  - h26 -- k26
-  - k26 -- l26
-  - k17 -- k15a5 -- p15a5 -- p20
-  - p23 -- p28 -- k28 -- k26
-  - U2.AN -| h36
-  - h38 -- h39
+  - 6,5 -- 9,5
+  - 7,5 |- U1.VCC
+  - 7.5,5 |- U1.1PRE
+  - 8,5 |- U1.1CLR
+  - 8.5,5 |- U1.2PRE
+  - 9,5 |- U1.2CLR
+  - U1.GND |- 8,10
+  - U1.1CLK -| 3.5,8
+  - 3.5,8 -- 3.5,9
+  - U1.2CLK -| 3.5,9
+  - 3.5,9 -- 3.5,10
+  - U1./2Q -| 11,9
+  - 11,9 -- 11,14 -- 1,14 -- 1,7.5
+  - 1,7.5 -| U1.1D
+  - U1.1Q -| 11.5,7.5
+  - 11.5,7.5 -- 13,7.5
+  - 13,7.5 -- 13,20
+  - 11.5,7.5 -- 11.5,2 -- 2,2 -- 2,8.5
+  - 2,8.5 -| U1.2D
+  - U1.2Q -| 12,8.5
+  - 12,8.5 -- 12,21
+  - 13,20 -| U2.S0
+  - 12,21 -| U2.S1
+  - U2.VCC |- 32,4
+  - 31,12 |- U2.GND
+  - U2.VEE |- 31.5,12
+  - U2.E |- 32,12
+  - 31,12 -- 32,12
+  - U2.BN -| 35.5,10
+  - U2.A0 -| 17,6.5
+  - 17,6.5 -- 17,11
+  - 17,11 -- 17,12
+  - U2.A1 -| 20,7
+  - 20,7 -- 20,10
+  - 20,10 -- 20,12
+  - U2.A2 -| 23,7.5
+  - 23,7.5 -- 23,10
+  - 23,10 -- 23,12
+  - U2.A3 -| 26,8
+  - 26,8 -- 26,11
+  - 26,11 -- 26,12
+  - 17,11 -- 15.5,11 -- 15.5,16 -- 20,16
+  - 23,16 -- 28,16 -- 28,11 -- 26,11
+  - U2.AN -| 36,8
+  - 38,8 -- 39,8
 notes:
-  - text k4 small left: 1.992 MHz
-  - text i40 small left: 499 kHz
-  - text u5 small center: パスコン (C5 は U1、C6 は U2)
-  - text s22f0 small center: LO 0° (S0)
-  - text v22 small center: LO 90° (S1)
-  - text r21a5 small center: CH1 は I (A0 - A3)、CH2 は Q (A1 - A2)
+  - text 4,11 small left: 1.992 MHz
+  - text 40,9 small left: 499 kHz
+  - text 5,21 small center: パスコン (C5 は U1、C6 は U2)
+  - text 22,19.5 small center: LO 0° (S0)
+  - text 22,22 small center: LO 90° (S1)
+  - text 21.5,18 small center: CH1 は I (A0 - A3)、CH2 は Q (A1 - A2)
 style:
   pitch: 1
 ```

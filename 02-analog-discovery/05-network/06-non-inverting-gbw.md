@@ -19,22 +19,22 @@ LM358 (GBW ≈ 1 MHz、データシート代表値) を使う。
 ```circuit
 title: 図1 非反転増幅
 parts:
-  V1: sine a1 c1 l=$\mathrm{W1}$
-  M1: voltmeter a3 c3 l=$\mathrm{CH1}$
-  G1: ground c1
-  G2: ground c3
-  U1: opamp b6 +up
-  Rin: resistor c7 d7 1k
-  G3: ground d7
-  Rf: resistor c7 c9 10k
-  M2: voltmeter b10 d10 l=$\mathrm{CH2}$
-  G4: ground d10
+  V1: sine 1,1 1,3 l=$\mathrm{W1}$
+  M1: voltmeter 3,1 3,3 l=$\mathrm{CH1}$
+  G1: ground 1,3
+  G2: ground 3,3
+  U1: opamp 6,2 +up
+  Rin: resistor 7,3 7,4 1k
+  G3: ground 7,4
+  Rf: resistor 7,3 9,3 10k
+  M2: voltmeter 10,2 10,4 l=$\mathrm{CH2}$
+  G4: ground 10,4
 wires:
-  - a1 -- a3
-  - a3 -- a5 |- U1.+
-  - U1.- -| c5 -- c7
-  - U1.out -- b9 -- b10
-  - c9 -- b9
+  - 1,1 -- 3,1
+  - 3,1 -- 5,1 |- U1.+
+  - U1.- -| 5,3 -- 7,3
+  - U1.out -- 9,2 -- 10,2
+  - 9,3 -- 9,2
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/circuit/06-non-inverting-gbw.svg)

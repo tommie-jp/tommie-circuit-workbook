@@ -23,24 +23,24 @@ source: 自作
 ```circuit
 title: 図1 ダイオードクリッパ (W1 で入れ、CH2 と CH1 で比べる)
 parts:
-  W1: square a2 c2 l=$\mathrm{W1}$
-  G3: ground c2
-  M2: voltmeter a4 c4 l=$\mathrm{CH2}$
-  G4: ground c4
-  R1: resistor a4 a6 1k
-  D1: diode a7 c7
-  G1: ground c7
-  D2: diode c9 a9
-  G2: ground c9
-  OUT: port a11
-  M1: voltmeter a13 c13 l=$\mathrm{CH1}$
-  G5: ground c13
+  W1: square 2,1 2,3 l=$\mathrm{W1}$
+  G3: ground 2,3
+  M2: voltmeter 4,1 4,3 l=$\mathrm{CH2}$
+  G4: ground 4,3
+  R1: resistor 4,1 6,1 1k
+  D1: diode 7,1 7,3
+  G1: ground 7,3
+  D2: diode 9,3 9,1
+  G2: ground 9,3
+  OUT: port 11,1
+  M1: voltmeter 13,1 13,3 l=$\mathrm{CH1}$
+  G5: ground 13,3
 wires:
-  - a2 -- a4
-  - a6 -- a7
-  - a7 -- a9
-  - a9 -- a11
-  - a11 -- a13
+  - 2,1 -- 4,1
+  - 6,1 -- 7,1
+  - 7,1 -- 9,1
+  - 9,1 -- 11,1
+  - 11,1 -- 13,1
 style:
   grid: on
 ```
@@ -52,24 +52,24 @@ style:
 ```circuit
 title: 図2 ダイオードクランパ (W1 で入れ、CH2 と CH1 で比べる)
 parts:
-  W1: square a2 c2 l=$\mathrm{W1}$
-  G1: ground c2
-  M2: voltmeter a4 c4 l=$\mathrm{CH2}$
-  G2: ground c4
-  C1: capacitor a4 a6 1u
-  D3: diode c7 a7
-  G3: ground c7
-  RL: resistor a9 c9 100k
-  G4: ground c9
-  OUT: port a11
-  M1: voltmeter a13 c13 l=$\mathrm{CH1}$
-  G5: ground c13
+  W1: square 2,1 2,3 l=$\mathrm{W1}$
+  G1: ground 2,3
+  M2: voltmeter 4,1 4,3 l=$\mathrm{CH2}$
+  G2: ground 4,3
+  C1: capacitor 4,1 6,1 1u
+  D3: diode 7,3 7,1
+  G3: ground 7,3
+  RL: resistor 9,1 9,3 100k
+  G4: ground 9,3
+  OUT: port 11,1
+  M1: voltmeter 13,1 13,3 l=$\mathrm{CH1}$
+  G5: ground 13,3
 wires:
-  - a2 -- a4
-  - a6 -- a7
-  - a7 -- a9
-  - a9 -- a11
-  - a11 -- a13
+  - 2,1 -- 4,1
+  - 6,1 -- 7,1
+  - 7,1 -- 9,1
+  - 9,1 -- 11,1
+  - 11,1 -- 13,1
 style:
   grid: on
 ```

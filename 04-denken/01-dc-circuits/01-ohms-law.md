@@ -27,18 +27,18 @@ title: 図1 電圧・電流・抵抗を同時に測る
 style:
   standard: jis
 parts:
-  B1: battery a3 a1 5
-  A1: ammeter a3 a5
-  R1: resistor a5 a7 1k
-  V1: voltmeter e5 e7
-  G1: ground g1
+  B1: battery 3,1 1,1 5
+  A1: ammeter 3,1 5,1
+  R1: resistor 5,1 7,1 1k
+  V1: voltmeter 5,5 7,5
+  G1: ground 1,7
 wires:
-  - a7 -- a11
-  - a11 -- g11
-  - g11 -- g1
-  - a1 -- g1
-  - a5 -- e5
-  - a7 -- e7
+  - 7,1 -- 11,1
+  - 11,1 -- 11,7
+  - 11,7 -- 1,7
+  - 1,1 -- 1,7
+  - 5,1 -- 5,5
+  - 7,1 -- 7,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/01-ohms-law.svg)

@@ -26,26 +26,26 @@ PNP 形のトランジスタは、NPN 形 (2-1) と電圧・電流の向きが�
 ```circuit
 title: 図1 B 級プッシュプル (W1 で入れ、CH2 で入力・CH1 で出力を見る)
 parts:
-  VCC: vcc b6 5V
-  VEE: vee h6 5V
-  W1: sine e2 g2 l=$\mathrm{W1}$
-  G0: ground g2
-  M2: voltmeter e4 g4 l=$\mathrm{CH2}$
-  G2: ground g4
-  Q1: npn d6
-  Q2: pnp f6
-  RL: resistor e8 g8 100
-  G1: ground g8
-  M1: voltmeter e10 g10 l=$\mathrm{CH1}$
-  G3: ground g10
+  VCC: vcc 6,2 5V
+  VEE: vee 6,8 5V
+  W1: sine 2,5 2,7 l=$\mathrm{W1}$
+  G0: ground 2,7
+  M2: voltmeter 4,5 4,7 l=$\mathrm{CH2}$
+  G2: ground 4,7
+  Q1: npn 6,4
+  Q2: pnp 6,6
+  RL: resistor 8,5 8,7 100
+  G1: ground 8,7
+  M1: voltmeter 10,5 10,7 l=$\mathrm{CH1}$
+  G3: ground 10,7
 wires:
-  - b6 -- Q1.C
-  - h6 -- Q2.C
-  - e2 -- e4 -- e5
-  - e5 |- Q1.B
-  - e5 |- Q2.B
-  - Q1.E -- e6 -- Q2.E
-  - e6 -- e8 -- e10
+  - 6,2 -- Q1.C
+  - 6,8 -- Q2.C
+  - 2,5 -- 4,5 -- 5,5
+  - 5,5 |- Q1.B
+  - 5,5 |- Q2.B
+  - Q1.E -- 6,5 -- Q2.E
+  - 6,5 -- 8,5 -- 10,5
 style:
   grid: on
   pitch: 1.2

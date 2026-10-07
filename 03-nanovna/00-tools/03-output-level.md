@@ -43,25 +43,25 @@ title: 図1 アンプの出力にアッテネータを挟んで CH1 へ
 parts:
   A1:
     type: device
-    at: b2
+    at: 2,2
     label: DUT
     pins: [IN, OUT]
     turn: mirror
-  R1: resistor c5 c7 43
-  R2: resistor c7 e7 11
-  R3: resistor c7 c9 43
-  G1: ground e7
+  R1: resistor 5,3 7,3 43
+  R2: resistor 7,3 7,5 11
+  R3: resistor 7,3 9,3 43
+  G1: ground 7,5
   M1:
     type: device
-    at: b11
+    at: 11,2
     label: NanoVNA
     pins: [CH0, CH1]
 wires:
-  - A1.OUT -| c5
-  - c9 |- M1.CH1
+  - A1.OUT -| 5,3
+  - 9,3 |- M1.CH1
 notes:
-  - text d5 blue center: 20 dB パッド
-  - text c2 blue center: 測るアンプ (DUT)
+  - text 5,4 blue center: 20 dB パッド
+  - text 2,3 blue center: 測るアンプ (DUT)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/circuit/03-output-level.svg)

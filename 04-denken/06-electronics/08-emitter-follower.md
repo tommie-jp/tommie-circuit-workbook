@@ -30,30 +30,30 @@ board: BB
 ```circuit
 title: 図1 エミッタフォロアの入出力インピーダンスを測る
 parts:
-  V1: sine d1 g1 0.1 l=$\mathrm{W1}$
-  RS: resistor d1 d3 22k
-  S2: switch b1 b3
-  Cin: capacitor d4 d5 10u
-  VCC: vcc a6 5V
-  R1: resistor a6 d6 47k
-  R2: resistor d7 g7 47k
-  Q1: npn d9 2SC1815
-  RE: resistor e9 g9 1k
-  Cout: capacitor e9 e11 100u
-  S1: switch e11 e13
-  RL: resistor e13 g13 100
-  G1: ground g1
+  V1: sine 1,4 1,7 0.1 l=$\mathrm{W1}$
+  RS: resistor 1,4 3,4 22k
+  S2: switch 1,2 3,2
+  Cin: capacitor 4,4 5,4 10u
+  VCC: vcc 6,1 5V
+  R1: resistor 6,1 6,4 47k
+  R2: resistor 7,4 7,7 47k
+  Q1: npn 9,4 2SC1815
+  RE: resistor 9,5 9,7 1k
+  Cout: capacitor 9,5 11,5 100u
+  S1: switch 11,5 13,5
+  RL: resistor 13,5 13,7 100
+  G1: ground 1,7
 wires:
-  - b1 -- d1
-  - b3 -- d3 -- d4
-  - d5 -- d6 -- d7 -| Q1.B
-  - a6 -- a9 -| Q1.C
-  - Q1.E -| e9
-  - g1 -- g7 -- g9 -- g13
+  - 1,2 -- 1,4
+  - 3,2 -- 3,4 -- 4,4
+  - 5,4 -- 6,4 -- 7,4 -| Q1.B
+  - 6,1 -- 9,1 -| Q1.C
+  - Q1.E -| 9,5
+  - 1,7 -- 7,7 -- 9,7 -- 13,7
 notes:
-  - text c1 blue: CH1
-  - text c3 blue: CH2 (1 回目)
-  - text d11f0 blue: CH2 (2 回目)
+  - text 1,3 blue: CH1
+  - text 3,3 blue: CH2 (1 回目)
+  - text 11,4.5 blue: CH2 (2 回目)
 style:
   standard: jis
   grid: on

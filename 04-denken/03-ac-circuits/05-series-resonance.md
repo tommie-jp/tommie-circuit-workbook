@@ -30,19 +30,19 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{W1}$
-  R1: resistor c1 c3 150
-  L1: inductor c3 c5 100m
-  C1: capacitor c5 c7 100n
-  M1: voltmeter a1 a3 l=$\mathrm{CH1}$
-  M2: voltmeter e3 e7 l=$\mathrm{CH2}$
-  G1: ground g1
+  V1: sine 1,3 1,7 l=$\mathrm{W1}$
+  R1: resistor 1,3 3,3 150
+  L1: inductor 3,3 5,3 100m
+  C1: capacitor 5,3 7,3 100n
+  M1: voltmeter 1,1 3,1 l=$\mathrm{CH1}$
+  M2: voltmeter 3,5 7,5 l=$\mathrm{CH2}$
+  G1: ground 1,7
 wires:
-  - a1 -- c1
-  - a3 -- c3
-  - c3 -- e3
-  - c7 -- e7 -- g7
-  - g1 -- g7
+  - 1,1 -- 1,3
+  - 3,1 -- 3,3
+  - 3,3 -- 3,5
+  - 7,3 -- 7,5 -- 7,7
+  - 1,7 -- 7,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/05-series-resonance-1.svg)
@@ -108,17 +108,17 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{FG}$
-  M2: voltmeter c3 g3 l=$\mathrm{CH2}$
-  L1: inductor c3 c5 100m
-  C1: capacitor c5 c7 100n
-  R1: resistor c9 g9 150 i=I
-  M1: voltmeter c12 g12 l=$\mathrm{CH1}$
-  G1: ground g1
+  V1: sine 1,3 1,7 l=$\mathrm{FG}$
+  M2: voltmeter 3,3 3,7 l=$\mathrm{CH2}$
+  L1: inductor 3,3 5,3 100m
+  C1: capacitor 5,3 7,3 100n
+  R1: resistor 9,3 9,7 150 i=I
+  M1: voltmeter 12,3 12,7 l=$\mathrm{CH1}$
+  G1: ground 1,7
 wires:
-  - c1 -- c3
-  - c7 -- c9 -- c12
-  - g1 -- g3 -- g9 -- g12
+  - 1,3 -- 3,3
+  - 7,3 -- 9,3 -- 12,3
+  - 1,7 -- 3,7 -- 9,7 -- 12,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/05-series-resonance-2.svg)

@@ -23,42 +23,42 @@ title: 図1 W1・W2 を抵抗で足し合わせて増幅回路へ
 parts:
   AD:
     type: device
-    at: f2
+    at: 2,6
     label: Analog Discovery
     pins: [2+, V+, W1, W2, 1+, 1-, 2-, GND]
     turn: mirror
-  Rsuma: resistor e6 e8 10k
-  Rsumb: resistor g10 g8 10k
-  Cin: capacitor e10 e12 1u
-  R1: resistor c14 e14 100k
-  R2: resistor e14 g14 100k
-  U1: opamp e17d0f0 +up LM358
-  Rf: resistor g20 g16 10k
-  Rg: resistor g16 i16 1k
-  Cg: capacitor i16 k16 10u
-  G1: ground k16
-  G2: ground g14
-  G3: ground h5
+  Rsuma: resistor 6,5 8,5 10k
+  Rsumb: resistor 10,7 8,7 10k
+  Cin: capacitor 10,5 12,5 1u
+  R1: resistor 14,3 14,5 100k
+  R2: resistor 14,5 14,7 100k
+  U1: opamp 17,5.35 +up LM358
+  Rf: resistor 20,7 16,7 10k
+  Rg: resistor 16,7 16,9 1k
+  Cg: capacitor 16,9 16,11 10u
+  G1: ground 16,11
+  G2: ground 14,7
+  G3: ground 5,8
 wires:
-  - AD.W1 -| e6
-  - AD.W2 -| g8
-  - e8 -- e10
-  - g10 -- e10
-  - AD.V+ -| c5
-  - c5 -- c14
-  - e12 -- e13 -- e14
-  - AD.1+ -| i7
-  - i7 -- i13 -- e13
-  - e14 -| U1.+
-  - U1.- -| g16
-  - U1.out -| g20
-  - AD.2+ -| b4
-  - b4 -- b21 -- g21
-  - g20 -- g21
-  - AD.GND -| h4
-  - AD.2- -| h5
-  - AD.1- -| h6
-  - h4 -- h5 -- h6
+  - AD.W1 -| 6,5
+  - AD.W2 -| 8,7
+  - 8,5 -- 10,5
+  - 10,7 -- 10,5
+  - AD.V+ -| 5,3
+  - 5,3 -- 14,3
+  - 12,5 -- 13,5 -- 14,5
+  - AD.1+ -| 7,9
+  - 7,9 -- 13,9 -- 13,5
+  - 14,5 -| U1.+
+  - U1.- -| 16,7
+  - U1.out -| 20,7
+  - AD.2+ -| 4,2
+  - 4,2 -- 21,2 -- 21,7
+  - 20,7 -- 21,7
+  - AD.GND -| 4,8
+  - AD.2- -| 5,8
+  - AD.1- -| 6,8
+  - 4,8 -- 5,8 -- 6,8
 style:
   pitch: 1.2
 ```

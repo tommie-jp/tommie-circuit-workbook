@@ -20,23 +20,23 @@ device: H4
 ```circuit
 title: 図1 自作の Open・Short・Load
 parts:
-  J1: sma a1 mirror
-  J2: sma a4 mirror
-  G2: ground c5
-  J3: sma a8 mirror
-  R1: resistor a9 c9 100
-  R2: resistor a11 c11 100
-  G3: ground c11
+  J1: sma 1,1 mirror
+  J2: sma 4,1 mirror
+  G2: ground 5,3
+  J3: sma 8,1 mirror
+  R1: resistor 9,1 9,3 100
+  R2: resistor 11,1 11,3 100
+  G3: ground 11,3
 wires:
-  - J2.1 -- a5
-  - a5 -- c5
-  - J2.2 -- c4 -- c5
-  - J3.1 -- a9 -- a11
-  - J3.2 -- c8 -- c9 -- c11
+  - J2.1 -- 5,1
+  - 5,1 -- 5,3
+  - J2.2 -- 4,3 -- 5,3
+  - J3.1 -- 9,1 -- 11,1
+  - J3.2 -- 8,3 -- 9,3 -- 11,3
 notes:
-  - text d1 blue center: Open
-  - text d4a5 blue center: Short
-  - text d9a5 blue center: "Load (50 Ω)"
+  - text 1,4 blue center: Open
+  - text 4.5,4 blue center: Short
+  - text 9.5,4 blue center: "Load (50 Ω)"
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/04-diy-cal-kit.svg)

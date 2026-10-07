@@ -35,19 +35,19 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  E1: vsource c1 i1 5
-  F1: fuse c1 c3 l=$\mathrm{F_1}$
-  RL: resistor c6 f6 220
-  S1: switch c9 d9
-  RF: resistor d9 f9 4.7
-  M1: voltmeter f3 i3 l=$\mathrm{CH1}$
-  Rs: resistor f4 i4 1 i=I
-  M2: voltmeter c11 i11 l=$\mathrm{CH2}$
-  G1: ground i1
+  E1: vsource 1,3 1,9 5
+  F1: fuse 1,3 3,3 l=$\mathrm{F_1}$
+  RL: resistor 6,3 6,6 220
+  S1: switch 9,3 9,4
+  RF: resistor 9,4 9,6 4.7
+  M1: voltmeter 3,6 3,9 l=$\mathrm{CH1}$
+  Rs: resistor 4,6 4,9 1 i=I
+  M2: voltmeter 11,3 11,9 l=$\mathrm{CH2}$
+  G1: ground 1,9
 wires:
-  - c3 -- c6 -- c9 -- c11
-  - f3 -- f4 -- f6 -- f9
-  - i1 -- i3 -- i4 -- i11
+  - 3,3 -- 6,3 -- 9,3 -- 11,3
+  - 3,6 -- 4,6 -- 6,6 -- 9,6
+  - 1,9 -- 3,9 -- 4,9 -- 11,9
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/circuit/06-fuse-current-limit.svg)

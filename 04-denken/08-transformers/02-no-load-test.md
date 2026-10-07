@@ -32,20 +32,20 @@ style:
   standard: jis
   pitch: 1.8
 parts:
-  W1: sine c1 e1 l=$\mathrm{W1}$
-  Rs1: resistor c1 c3 4.7k i=I0
-  M2: voltmeter b1 b3 l=$\mathrm{CH2}$
-  M1: voltmeter c4f0 d4f0 l=$\mathrm{CH1}$
-  T1: transformer d5 10kto8
-  G1: ground e1
+  W1: sine 1,3 1,5 l=$\mathrm{W1}$
+  Rs1: resistor 1,3 3,3 4.7k i=I0
+  M2: voltmeter 1,2 3,2 l=$\mathrm{CH2}$
+  M1: voltmeter 4,3.5 4,4.5 l=$\mathrm{CH1}$
+  T1: transformer 5,4 10kto8
+  G1: ground 1,5
 wires:
-  - b1 -- c1
-  - b3 -- c3
-  - c3 -- c4 -- c4f0
-  - c4f0 -| T1.A1
-  - T1.A2 -| d4f0
-  - d4f0 -- e4
-  - e1 -- e4
+  - 1,2 -- 1,3
+  - 3,2 -- 3,3
+  - 3,3 -- 4,3 -- 4,3.5
+  - 4,3.5 -| T1.A1
+  - T1.A2 -| 4,4.5
+  - 4,4.5 -- 4,5
+  - 1,5 -- 4,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/02-no-load-test-1.svg)
@@ -123,17 +123,17 @@ title: 図4 汎用オシロでの測り方
 style:
   standard: jis
 parts:
-  FG: sine c1 g1 l=$\mathrm{FG}$
-  M1: voltmeter c3 g3 l=$\mathrm{CH1}$
-  T1: transformer d7 10kto8
-  M2: voltmeter e4 g4 l=$\mathrm{CH2}$
-  Rs1: resistor e6 g6 4.7k i=I0
-  G1: ground g1
+  FG: sine 1,3 1,7 l=$\mathrm{FG}$
+  M1: voltmeter 3,3 3,7 l=$\mathrm{CH1}$
+  T1: transformer 7,4 10kto8
+  M2: voltmeter 4,5 4,7 l=$\mathrm{CH2}$
+  Rs1: resistor 6,5 6,7 4.7k i=I0
+  G1: ground 1,7
 wires:
-  - c1 -- c3 -- c6 |- T1.A1
-  - e6 |- T1.A2
-  - e4 -- e6
-  - g1 -- g3 -- g4 -- g6
+  - 1,3 -- 3,3 -- 6,3 |- T1.A1
+  - 6,5 |- T1.A2
+  - 4,5 -- 6,5
+  - 1,7 -- 3,7 -- 4,7 -- 6,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/02-no-load-test-2.svg)

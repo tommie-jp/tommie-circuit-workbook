@@ -41,24 +41,24 @@ style:
   standard: jis
   pitch: 1.8
 parts:
-  W1: sine c1 e1 l=$\mathrm{W1}$
-  M2: voltmeter c3 e3 l=$\mathrm{CH2}$
-  T1: transformer d5 10kto8
-  RL: resistor c7f0 d7f0 33
-  M1: voltmeter c9f0 d9f0 l=$\mathrm{CH1}$
-  G1: ground e1
+  W1: sine 1,3 1,5 l=$\mathrm{W1}$
+  M2: voltmeter 3,3 3,5 l=$\mathrm{CH2}$
+  T1: transformer 5,4 10kto8
+  RL: resistor 7,3.5 7,4.5 33
+  M1: voltmeter 9,3.5 9,4.5 l=$\mathrm{CH1}$
+  G1: ground 1,5
 wires:
-  - c1 -- c3 -- c4 -- c4f0
-  - c4f0 -| T1.A1
-  - T1.A2 -| d4f0
-  - d4f0 -- e4
-  - e1 -- e3 -- e4
-  - T1.B1 -| c7f0
-  - T1.B2 -| d7f0
-  - c7f0 -- c9f0
-  - d7f0 -- d9f0
+  - 1,3 -- 3,3 -- 4,3 -- 4,3.5
+  - 4,3.5 -| T1.A1
+  - T1.A2 -| 4,4.5
+  - 4,4.5 -- 4,5
+  - 1,5 -- 3,5 -- 4,5
+  - T1.B1 -| 7,3.5
+  - T1.B2 -| 7,4.5
+  - 7,3.5 -- 9,3.5
+  - 7,4.5 -- 9,4.5
 notes:
-  - text e7 small: (3.3 から 330 Ω に替える)
+  - text 7,5 small: (3.3 から 330 Ω に替える)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/04-efficiency.svg)

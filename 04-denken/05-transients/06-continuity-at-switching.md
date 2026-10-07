@@ -30,22 +30,22 @@ board: BB
 ```circuit
 title: 図1 C と L を切り替えて R と直列にする
 parts:
-  V1: square b1 e1 1 l=$\mathrm{W1}$
-  S1: spdt b3
-  C1: capacitor a5 a7 10n
-  L1: inductor c5 c7 10m
-  R1: resistor c9 e9 1k i=i
-  G1: ground e1
+  V1: square 1,2 1,5 1 l=$\mathrm{W1}$
+  S1: spdt 3,2
+  C1: capacitor 5,1 7,1 10n
+  L1: inductor 5,3 7,3 10m
+  R1: resistor 9,3 9,5 1k i=i
+  G1: ground 1,5
 wires:
-  - b1 -- S1.in
-  - S1.1 |- a5
-  - S1.2 |- c5
-  - a7 -- a9 -- c9
-  - c7 -- c9
-  - e1 -- e9
+  - 1,2 -- S1.in
+  - S1.1 |- 5,1
+  - S1.2 |- 5,3
+  - 7,1 -- 9,1 -- 9,3
+  - 7,3 -- 9,3
+  - 1,5 -- 9,5
 notes:
-  - text a1 blue: 入力 (CH1)
-  - text c9 blue: R の電圧 (CH2)
+  - text 1,1 blue: 入力 (CH1)
+  - text 9,3 blue: R の電圧 (CH2)
 style:
   standard: jis
   grid: on

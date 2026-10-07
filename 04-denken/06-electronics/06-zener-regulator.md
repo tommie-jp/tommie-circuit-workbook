@@ -30,18 +30,18 @@ board: BB
 ```circuit
 title: 図1 ツェナーダイオードの定電圧回路
 parts:
-  V1: triangle b1 d1 3 l=$\mathrm{W1}$
-  R1: resistor b1 b4 220 i=I
-  D1: zener d6 b6 3.3V
-  S1: switch b6 b9
-  RL: resistor b9 d9 1k
-  G1: ground d1
+  V1: triangle 1,2 1,4 3 l=$\mathrm{W1}$
+  R1: resistor 1,2 4,2 220 i=I
+  D1: zener 6,4 6,2 3.3V
+  S1: switch 6,2 9,2
+  RL: resistor 9,2 9,4 1k
+  G1: ground 1,4
 wires:
-  - b4 -- b6
-  - d1 -- d6 -- d9
+  - 4,2 -- 6,2
+  - 1,4 -- 6,4 -- 9,4
 notes:
-  - text a1f0 blue: 入力 (CH1)
-  - text a6f0 blue: 出力 (CH2)
+  - text 1,1.5 blue: 入力 (CH1)
+  - text 6,1.5 blue: 出力 (CH2)
 style:
   standard: jis
   grid: on

@@ -25,26 +25,26 @@ FM ラジオの中間周波 (10.7 MHz) の**セラミックフィルタ**は、�
 ```circuit
 title: 図1 10.7 MHz のセラミックフィルタを 270 Ω で 330 Ω 系に
 parts:
-  J1: sma b2 mirror CH0
-  R1: resistor b3 b5 270
+  J1: sma 2,2 mirror CH0
+  R1: resistor 3,2 5,2 270
   FL1:
     type: ic3
-    at: b7
+    at: 7,2
     label: SFELF10M7
     pins: [IN, GND, OUT]
-  R2: resistor b9 b11 270
-  J2: sma b12 CH1
-  G1: ground c2
-  G2: ground d7
-  G3: ground c12
+  R2: resistor 9,2 11,2 270
+  J2: sma 12,2 CH1
+  G1: ground 2,3
+  G2: ground 7,4
+  G3: ground 12,3
 wires:
-  - J1.1 -- b3
-  - b5 -- FL1.IN
-  - FL1.GND -- d7
-  - FL1.OUT -- b9
-  - b11 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c12
+  - J1.1 -- 3,2
+  - 5,2 -- FL1.IN
+  - FL1.GND -- 7,4
+  - FL1.OUT -- 9,2
+  - 11,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 12,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/circuit/12-ceramic-filter.svg)

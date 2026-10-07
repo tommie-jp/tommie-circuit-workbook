@@ -20,16 +20,16 @@ device: H4
 ```circuit
 title: 図1 直列治具
 parts:
-  J1: sma b2 mirror CH0
-  R1: resistor b4 b6 100
-  J2: sma b8 CH1
-  G1: ground c2
-  G2: ground c8
+  J1: sma 2,2 mirror CH0
+  R1: resistor 4,2 6,2 100
+  J2: sma 8,2 CH1
+  G1: ground 2,3
+  G2: ground 8,3
 wires:
-  - J1.1 -- b4
-  - b6 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c8
+  - J1.1 -- 4,2
+  - 6,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 8,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/01-series-fixture.svg)

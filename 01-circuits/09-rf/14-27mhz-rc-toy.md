@@ -41,43 +41,43 @@ W1 を 50 Hz にすると LED は 1 秒に 50 回点滅するが、目には連�
 ```circuit
 title: 図1 送信機 (水晶で決める 27.145MHz の発振器、W1 で断続)
 parts:
-  W1: square c3 e3 l=$\mathrm{W1}$
-  GW1: ground e3
-  M2: voltmeter c5 e5 l=$\mathrm{CH2}$
-  GM2: ground e5
-  Rb1: resistor c9 f9 22k
-  X1: crystal f7 i7 27.145M
-  GX1: ground i7
-  Rb2: resistor f9 i9 10k
-  GRb2: ground i9
-  Q1: npn f12
-  VCC: vcc a12 5V
-  L1: inductor a12 d12 1u
-  CT: capacitor-var a14 d14 l=$\mathrm{C_T}$
-  C1: capacitor d16 g16 22p
-  C2: capacitor g18 j18 100p
-  GC2: ground j18
-  Re: resistor h12 j12 1k
-  GRe: ground j12
-  Cant: capacitor d17 d19 2.2p
-  ANT: antenna d20
-  Cb: capacitor a22 c22 0.1u
-  GCb: ground c22
+  W1: square 3,3 3,5 l=$\mathrm{W1}$
+  GW1: ground 3,5
+  M2: voltmeter 5,3 5,5 l=$\mathrm{CH2}$
+  GM2: ground 5,5
+  Rb1: resistor 9,3 9,6 22k
+  X1: crystal 7,6 7,9 27.145M
+  GX1: ground 7,9
+  Rb2: resistor 9,6 9,9 10k
+  GRb2: ground 9,9
+  Q1: npn 12,6
+  VCC: vcc 12,1 5V
+  L1: inductor 12,1 12,4 1u
+  CT: capacitor-var 14,1 14,4 l=$\mathrm{C_T}$
+  C1: capacitor 16,4 16,7 22p
+  C2: capacitor 18,7 18,10 100p
+  GC2: ground 18,10
+  Re: resistor 12,8 12,10 1k
+  GRe: ground 12,10
+  Cant: capacitor 17,4 19,4 2.2p
+  ANT: antenna 20,4
+  Cb: capacitor 22,1 22,3 0.1u
+  GCb: ground 22,3
 wires:
-  - c3 -- c9
-  - f7 -- f9
-  - f9 -- Q1.B
-  - d12 -- Q1.C
-  - Q1.E -- g12
-  - g12 -- h12
-  - g12 -- g16
-  - a12 -- a22
-  - d12 -- d17
-  - g16 -- g18
-  - d19 -- d20
+  - 3,3 -- 9,3
+  - 7,6 -- 9,6
+  - 9,6 -- Q1.B
+  - 12,4 -- Q1.C
+  - Q1.E -- 12,7
+  - 12,7 -- 12,8
+  - 12,7 -- 16,7
+  - 12,1 -- 22,1
+  - 12,4 -- 17,4
+  - 16,7 -- 18,7
+  - 19,4 -- 20,4
 notes:
-  - text k15 blue: "L1とCTのタンク (約27MHz)"
-  - text k7 blue: "水晶 (直列共振で Bを接地)"
+  - text 15,11 blue: "L1とCTのタンク (約27MHz)"
+  - text 7,11 blue: "水晶 (直列共振で Bを接地)"
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/14-27mhz-rc-toy-1.svg)
@@ -111,43 +111,43 @@ notes:
 ```circuit
 title: 図2 受信機 (同調・検波・LM358 のコンパレータで LED)
 parts:
-  ANT: antenna c2
-  Cc: capacitor c4 c6 10p
-  L2: inductor c8 f8 1u
-  GL2: ground f8
-  CT2: capacitor-var c10 f10 l=$\mathrm{C_{T2}}$
-  GCT2: ground f10
-  C3: capacitor c12 f12 22p
-  GC3: ground f12
-  D1: diode c14 c16 1SS108
-  Cd: capacitor c17 f17 1n
-  GCd: ground f17
-  Rd: resistor c19 f19 100k
-  GRd: ground f19
-  M1: voltmeter c21 f21 l=$\mathrm{CH1}$
-  GM1: ground f21
-  U1: opamp d25 +up
-  VCC: vcc g20 5V
-  Rt1: resistor g20 i20 100k
-  Rt2: resistor i22 k22 1k
-  GRt2: ground k22
-  Rled: resistor d28 d30 470
-  LED: led d32 g32 l=$\mathrm{LED}$
-  GLED: ground g32
+  ANT: antenna 2,3
+  Cc: capacitor 4,3 6,3 10p
+  L2: inductor 8,3 8,6 1u
+  GL2: ground 8,6
+  CT2: capacitor-var 10,3 10,6 l=$\mathrm{C_{T2}}$
+  GCT2: ground 10,6
+  C3: capacitor 12,3 12,6 22p
+  GC3: ground 12,6
+  D1: diode 14,3 16,3 1SS108
+  Cd: capacitor 17,3 17,6 1n
+  GCd: ground 17,6
+  Rd: resistor 19,3 19,6 100k
+  GRd: ground 19,6
+  M1: voltmeter 21,3 21,6 l=$\mathrm{CH1}$
+  GM1: ground 21,6
+  U1: opamp 25,4 +up
+  VCC: vcc 20,7 5V
+  Rt1: resistor 20,7 20,9 100k
+  Rt2: resistor 22,9 22,11 1k
+  GRt2: ground 22,11
+  Rled: resistor 28,4 30,4 470
+  LED: led 32,4 32,7 l=$\mathrm{LED}$
+  GLED: ground 32,7
 wires:
-  - c2 -- c4
-  - c6 -- c12
-  - c12 -- c14
-  - c16 -- c21
-  - c21 -| U1.+
-  - i20 -- i22
-  - i22 -- i24
-  - i24 -| U1.-
-  - U1.out -- d28
-  - d30 -- d32
+  - 2,3 -- 4,3
+  - 6,3 -- 12,3
+  - 12,3 -- 14,3
+  - 16,3 -- 21,3
+  - 21,3 -| U1.+
+  - 20,9 -- 22,9
+  - 22,9 -- 24,9
+  - 24,9 -| U1.-
+  - U1.out -- 28,4
+  - 30,4 -- 32,4
 notes:
-  - text b26 blue: "LM358 PIN 5:+ PIN 6:- PIN 7:出力"
-  - text k26 blue: "PIN 8:+5V PIN 4:GND"
+  - text 26,2 blue: "LM358 PIN 5:+ PIN 6:- PIN 7:出力"
+  - text 26,11 blue: "PIN 8:+5V PIN 4:GND"
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/14-27mhz-rc-toy-2.svg)

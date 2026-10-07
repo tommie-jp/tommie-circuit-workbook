@@ -27,31 +27,31 @@ board: PF
 ```circuit
 title: 図1 水で橋渡しされるとダーリントンが導通しブザーが鳴る
 parts:
-  VCC: vcc a2 5V
-  Rprobe: resistor a2 d2 10k
-  P1: port d2
-  Rwater: resistor-var d2 g2
-  P2: port g2
-  Rb: resistor g4 i4 1M
-  GRb: ground i4
-  Q1: npn g7
-  Q2: npn i9
-  GQ2: ground j9
-  Buzzer: buzzer a11 c11 l=$\mathrm{Buzzer}$
-  RLED: resistor a13 c13 330 l=$R_\mathrm{LED}$
-  DLED: led c13 e13 red l=$D_\mathrm{LED}$
+  VCC: vcc 2,1 5V
+  Rprobe: resistor 2,1 2,4 10k
+  P1: port 2,4
+  Rwater: resistor-var 2,4 2,7
+  P2: port 2,7
+  Rb: resistor 4,7 4,9 1M
+  GRb: ground 4,9
+  Q1: npn 7,7
+  Q2: npn 9,9
+  GQ2: ground 9,10
+  Buzzer: buzzer 11,1 11,3 l=$\mathrm{Buzzer}$
+  RLED: resistor 13,1 13,3 330 l=$R_\mathrm{LED}$
+  DLED: led 13,3 13,5 red l=$D_\mathrm{LED}$
 wires:
-  - a2 -- a13
-  - g2 -- g4
-  - g4 -- Q1.B
+  - 2,1 -- 13,1
+  - 2,7 -- 4,7
+  - 4,7 -- Q1.B
   - Q1.E |- Q2.B
-  - Q1.C -- e7
-  - Q2.C -- e9
-  - e7 -- e9
-  - e9 -- e11
-  - e11 -- e13
-  - c11 -- e11
-  - Q2.E -- j9
+  - Q1.C -- 7,5
+  - Q2.C -- 9,5
+  - 7,5 -- 9,5
+  - 9,5 -- 11,5
+  - 11,5 -- 13,5
+  - 11,3 -- 11,5
+  - Q2.E -- 9,10
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/12-projects/circuit/03-water-alarm.svg)

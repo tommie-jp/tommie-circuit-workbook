@@ -32,20 +32,20 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{W1}$
-  L1: inductor c3 c7 10m
-  M1: voltmeter a3 a7 l=$\mathrm{CH1}$
-  Rs: resistor c9 g9 100 i=I
-  M2: voltmeter c11 g11 l=$\mathrm{CH2}$
-  G1: ground g1
+  V1: sine 1,3 1,7 l=$\mathrm{W1}$
+  L1: inductor 3,3 7,3 10m
+  M1: voltmeter 3,1 7,1 l=$\mathrm{CH1}$
+  Rs: resistor 9,3 9,7 100 i=I
+  M2: voltmeter 11,3 11,7 l=$\mathrm{CH2}$
+  G1: ground 1,7
 wires:
-  - c1 -- c3
-  - a3 -- c3
-  - a7 -- c7
-  - c7 -- c9 -- c11
-  - g1 -- g9 -- g11
+  - 1,3 -- 3,3
+  - 3,1 -- 3,3
+  - 7,1 -- 7,3
+  - 7,3 -- 9,3 -- 11,3
+  - 1,7 -- 9,7 -- 11,7
 notes:
-  - text e2 blue: 2 回目は L1 を C1 (1 µF) に替える
+  - text 2,5 blue: 2 回目は L1 を C1 (1 µF) に替える
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/09-reactance-frequency.svg)

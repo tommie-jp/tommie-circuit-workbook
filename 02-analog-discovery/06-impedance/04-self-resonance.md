@@ -22,24 +22,24 @@ title: 図1 基準抵抗と 100 µH のコイル (掃引)
 parts:
   AD:
     type: device
-    at: a1
+    at: 1,1
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
-  Rref: resistor c3 c6 10k
-  Ldut: inductor c9 c12 100u l=$\mathrm{L_{DUT}}$
-  Cp: capacitor f9 f12 5p
-  G1: ground c14
+  Rref: resistor 3,3 6,3 10k
+  Ldut: inductor 9,3 12,3 100u l=$\mathrm{L_{DUT}}$
+  Cp: capacitor 9,6 12,6 5p
+  G1: ground 14,3
 wires:
-  - AD.W1 -| c3
-  - AD.1+ -| c3
-  - AD.1- -| c6
-  - c6 -- c9
-  - c9 -- f9
-  - AD.2+ -| c9
-  - AD.2- -| c12
-  - c12 -- f12
-  - c12 -- c14
-  - AD.GND -| c14
+  - AD.W1 -| 3,3
+  - AD.1+ -| 3,3
+  - AD.1- -| 6,3
+  - 6,3 -- 9,3
+  - 9,3 -- 9,6
+  - AD.2+ -| 9,3
+  - AD.2- -| 12,3
+  - 12,3 -- 12,6
+  - 12,3 -- 14,3
+  - AD.GND -| 14,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/06-impedance/circuit/04-self-resonance.svg)

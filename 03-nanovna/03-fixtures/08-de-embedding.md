@@ -37,31 +37,31 @@ A と B は単独では測れない (片側がユニバーサル基板の上で�
 ```circuit
 title: 図1 治具ごと測った 10 Ω の等価回路
 parts:
-  J1: sma b1 mirror CH0
-  C1: capacitor b3 d3 1p
-  L1: inductor b4 b5 11.3n
-  R1: resistor b7 b8 10
-  L3: inductor b9 b10 6.8n
-  L2: inductor b12 b13 34.0n
-  C2: capacitor b14 d14 1p
-  J2: sma b16 CH1
-  G1: ground c1
-  G2: ground d3
-  G3: ground d14
-  G4: ground c16
+  J1: sma 1,2 mirror CH0
+  C1: capacitor 3,2 3,4 1p
+  L1: inductor 4,2 5,2 11.3n
+  R1: resistor 7,2 8,2 10
+  L3: inductor 9,2 10,2 6.8n
+  L2: inductor 12,2 13,2 34.0n
+  C2: capacitor 14,2 14,4 1p
+  J2: sma 16,2 CH1
+  G1: ground 1,3
+  G2: ground 3,4
+  G3: ground 14,4
+  G4: ground 16,3
 wires:
-  - J1.1 -- b3 -- b4
-  - b5 -- b7
-  - b8 -- b9
-  - b10 -- b12
-  - b13 -- b14 -- J2.1
-  - J1.2 -- c1
-  - J2.2 -- c16
+  - J1.1 -- 3,2 -- 4,2
+  - 5,2 -- 7,2
+  - 8,2 -- 9,2
+  - 10,2 -- 12,2
+  - 13,2 -- 14,2 -- J2.1
+  - J1.2 -- 1,3
+  - J2.2 -- 16,3
 notes:
-  - box a2f0 d5h5 blue
-  - box a11f5 d15h0 blue
-  - text a4 blue center: 治具 A
-  - text a13 blue center: 治具 B
+  - box 2,1.5 5.5,4.7 blue
+  - box 11.5,1.5 15,4.7 blue
+  - text 4,1 blue center: 治具 A
+  - text 13,1 blue center: 治具 B
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/circuit/08-de-embedding.svg)

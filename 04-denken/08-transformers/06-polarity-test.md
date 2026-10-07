@@ -35,27 +35,27 @@ style:
   standard: jis
   pitch: 1.8
 parts:
-  W1: sine c1 e1 l=$\mathrm{W1}$
-  M1: voltmeter c3 e3 l=$\mathrm{CH1}$
-  T1: transformer d5 10kto8
-  M2: voltmeter d8f0 f8 l=$\mathrm{CH2}$
-  G1: ground e1
-  G2: ground f8
+  W1: sine 1,3 1,5 l=$\mathrm{W1}$
+  M1: voltmeter 3,3 3,5 l=$\mathrm{CH1}$
+  T1: transformer 5,4 10kto8
+  M2: voltmeter 8,4.5 8,6 l=$\mathrm{CH2}$
+  G1: ground 1,5
+  G2: ground 8,6
 wires:
-  - c1 -- c3 -- c4 -- c4f0
-  - c4f0 -| T1.A1
-  - T1.A2 -| d4f0
-  - d4f0 -- e4
-  - e1 -- e3 -- e4
-  - c4 -- b4 -- b7 -- c7f0
-  - T1.B1 -| c7f0
-  - T1.B2 -| d7f0
-  - d7f0 -- d8f0
+  - 1,3 -- 3,3 -- 4,3 -- 4,3.5
+  - 4,3.5 -| T1.A1
+  - T1.A2 -| 4,4.5
+  - 4,4.5 -- 4,5
+  - 1,5 -- 3,5 -- 4,5
+  - 4,3 -- 4,2 -- 7,2 -- 7,3.5
+  - T1.B1 -| 7,3.5
+  - T1.B2 -| 7,4.5
+  - 7,4.5 -- 8,4.5
 notes:
-  - text c4e3 small: U
-  - text d4g3 small: V
-  - text c5e8 small: u
-  - text d5g8 small: v
+  - text 4.3,3.4 small: U
+  - text 4.3,4.6 small: V
+  - text 5.8,3.4 small: u
+  - text 5.8,4.6 small: v
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/06-polarity-test.svg)

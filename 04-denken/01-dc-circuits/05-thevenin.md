@@ -31,19 +31,19 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  E1: battery a1 e1 5
-  R1: resistor a1 a3 1.5k
-  R2: resistor a3 e3 3k
-  V1: voltmeter a5 e5
-  S1: switch a5 a7
-  RL: resistor a7 a9 1k
-  A1: ammeter a9 e9
-  G1: ground e5
+  E1: battery 1,1 1,5 5
+  R1: resistor 1,1 3,1 1.5k
+  R2: resistor 3,1 3,5 3k
+  V1: voltmeter 5,1 5,5
+  S1: switch 5,1 7,1
+  RL: resistor 7,1 9,1 1k
+  A1: ammeter 9,1 9,5
+  G1: ground 5,5
 wires:
-  - a3 -- a5
-  - e1 -- e3
-  - e3 -- e5
-  - e5 -- e9
+  - 3,1 -- 5,1
+  - 1,5 -- 3,5
+  - 3,5 -- 5,5
+  - 5,5 -- 9,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/05-thevenin-1.svg)
@@ -54,15 +54,15 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  SH1: short a1 e1
-  R1: resistor a1 a3 1.5k
-  R2: resistor a3 e3 3k
-  M1: ohmmeter a5 e5
-  G1: ground e5
+  SH1: short 1,1 1,5
+  R1: resistor 1,1 3,1 1.5k
+  R2: resistor 3,1 3,5 3k
+  M1: ohmmeter 5,1 5,5
+  G1: ground 5,5
 wires:
-  - a3 -- a5
-  - e1 -- e3
-  - e3 -- e5
+  - 3,1 -- 5,1
+  - 1,5 -- 3,5
+  - 3,5 -- 5,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/05-thevenin-2.svg)

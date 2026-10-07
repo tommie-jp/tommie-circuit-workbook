@@ -33,21 +33,21 @@ E12 系列に丸めると **L = 120 nH**、**C = 68 pF**。
 ```circuit
 title: 図1 L 型整合 (シャント C・直列 L) とダミー負荷
 parts:
-  J1: sma b2 mirror CH0
-  C1: capacitor b4 d4 68p
-  L1: inductor b4 b6 120n
-  R1: resistor b6 b8 51
-  R2: resistor d6 d8 51
-  C2: capacitor b8 b10 220p
-  G1: ground c2
-  G2: ground d4
-  G3: ground c10
+  J1: sma 2,2 mirror CH0
+  C1: capacitor 4,2 4,4 68p
+  L1: inductor 4,2 6,2 120n
+  R1: resistor 6,2 8,2 51
+  R2: resistor 6,4 8,4 51
+  C2: capacitor 8,2 10,2 220p
+  G1: ground 2,3
+  G2: ground 4,4
+  G3: ground 10,3
 wires:
-  - J1.1 -- b4
-  - b6 -- d6
-  - b8 -- d8
-  - b10 -- c10
-  - J1.2 -- c2
+  - J1.1 -- 4,2
+  - 6,2 -- 6,4
+  - 8,2 -- 8,4
+  - 10,2 -- 10,3
+  - J1.2 -- 2,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/07-antennas/circuit/04-l-network-matching.svg)

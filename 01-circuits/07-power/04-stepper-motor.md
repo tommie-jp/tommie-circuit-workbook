@@ -20,25 +20,25 @@ source: 自作
 ```circuit
 title: 図1 ULN2003 ボードでステッピングモータを駆動する
 points:
-  in1x: c2b0g0
-  in2x: c2e0
-  in3x: c2g0e0
-  in4x: c2i0i0
-  com9: d7i0e0
+  in1x: 2,3.16
+  in2x: 2,3.4
+  in3x: 2,3.64
+  in4x: 2,3.88
+  com9: 7,4.84
 parts:
-  U1: dip16 d5 ULN2003A
+  U1: dip16 5,4 ULN2003A
   IN1: port in1x
   IN2: port in2x
   IN3: port in3x
   IN4: port in4x
   M1:
     type: device
-    at: c9e0
+    at: 9,3.4
     label: 28BYJ-48
     pins: [D, C, B, A, COM]
-  G1: ground f4
+  G1: ground 4,6
   VCC: vcc com9 5V
-  VCC: vcc b8 5V
+  VCC: vcc 8,2 5V
 wires:
   - in1x -- U1.1
   - in2x -- U1.2
@@ -48,9 +48,9 @@ wires:
   - U1.15 -- M1.B
   - U1.14 -- M1.C
   - U1.13 -- M1.D
-  - U1.8 -| f4
+  - U1.8 -| 4,6
   - U1.9 -- com9
-  - b8 |- M1.COM
+  - 8,2 |- M1.COM
 style:
   grid: on
 ```

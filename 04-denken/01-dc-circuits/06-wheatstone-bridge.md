@@ -29,16 +29,16 @@ title: 図1 ホイートストンブリッジ
 style:
   standard: jis
 parts:
-  R1: resistor c9 e5 1k
-  R2: resistor e5 g9 1k
-  R3: resistor-var c9 e13 5k
-  Rx: resistor e13 g9 3300
-  GA1: galvanometer e5 e13
-  E1: battery c1 g1 5
-  G1: ground g9
+  R1: resistor 9,3 5,5 1k
+  R2: resistor 5,5 9,7 1k
+  R3: resistor-var 9,3 13,5 5k
+  Rx: resistor 13,5 9,7 3300
+  GA1: galvanometer 5,5 13,5
+  E1: battery 1,3 1,7 5
+  G1: ground 9,7
 wires:
-  - c9 -| c1
-  - g9 -| g1
+  - 9,3 -| 1,3
+  - 9,7 -| 1,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/06-wheatstone-bridge.svg)

@@ -23,19 +23,19 @@ era: 古
 ```circuit
 title: 図1 一定のベース電流でコレクタ電流を読む
 parts:
-  V1: vsource a2 c2 5
-  RB: resistor a4 c4 1M
-  A1: ammeter c4 e4
-  RC: resistor a7 c7 1k
-  A2: ammeter c7 e7
-  Q1: npn f7
-  G1: ground g7
+  V1: vsource 2,1 2,3 5
+  RB: resistor 4,1 4,3 1M
+  A1: ammeter 4,3 4,5
+  RC: resistor 7,1 7,3 1k
+  A2: ammeter 7,3 7,5
+  Q1: npn 7,6
+  G1: ground 7,7
 wires:
-  - a2 -- a4 -- a7
-  - e4 -- f4 -- Q1.B
-  - e7 -- Q1.C
-  - Q1.E -- g7
-  - c2 -- g2 -- g7
+  - 2,1 -- 4,1 -- 7,1
+  - 4,5 -- 4,6 -- Q1.B
+  - 7,5 -- Q1.C
+  - Q1.E -- 7,7
+  - 2,3 -- 2,7 -- 7,7
 style:
   grid: on
   pitch: 1.2

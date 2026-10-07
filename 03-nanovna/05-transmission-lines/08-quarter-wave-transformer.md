@@ -31,17 +31,17 @@ device: H4
 ```circuit
 title: 図1 100 Ω の負荷を 75 Ω・50 cm の同軸で CH0 へ
 parts:
-  J1: sma b2 mirror CH0
-  TL1: tline b3 b6 75 l=$\mathrm{TL}_1$
-  R1: resistor b7 d7 100
-  G1: ground c2
-  G2: ground d7
+  J1: sma 2,2 mirror CH0
+  TL1: tline 3,2 6,2 75 l=$\mathrm{TL}_1$
+  R1: resistor 7,2 7,4 100
+  G1: ground 2,3
+  G2: ground 7,4
 wires:
-  - J1.1 -- b3
-  - b6 -- b7
-  - J1.2 -- c2
+  - J1.1 -- 3,2
+  - 6,2 -- 7,2
+  - J1.2 -- 2,3
 notes:
-  - text b4h5 center: 3C-2V・50 cm
+  - text 4.5,2.7 center: 3C-2V・50 cm
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/08-quarter-wave-transformer.svg)

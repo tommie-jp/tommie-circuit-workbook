@@ -39,18 +39,18 @@ GND の戻り (L2) に半分ずつ分けて描いた。
 ```circuit
 title: 図1 perfboard のスルーの等価回路
 parts:
-  J1: sma c2 mirror CH0
-  L1: inductor c4 c7 2.5n
-  J2: sma c9 CH1
-  L2: inductor e4 e7 2.5n
-  G1: ground f2
+  J1: sma 2,3 mirror CH0
+  L1: inductor 4,3 7,3 2.5n
+  J2: sma 9,3 CH1
+  L2: inductor 4,5 7,5 2.5n
+  G1: ground 2,6
 wires:
-  - J1.1 -- c4
-  - c7 -- J2.1
-  - J1.2 -- e2
-  - e2 -- e4
-  - e2 -- f2
-  - e7 -| J2.2
+  - J1.1 -- 4,3
+  - 7,3 -- J2.1
+  - J1.2 -- 2,5
+  - 2,5 -- 4,5
+  - 2,5 -- 2,6
+  - 7,5 -| J2.2
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/09-ghz/circuit/03-ground-plane.svg)

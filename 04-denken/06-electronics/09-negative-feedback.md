@@ -30,22 +30,22 @@ AD のネットワークアナライザで確かめる。
 ```circuit
 title: 図1 非反転増幅の帰還を変える
 parts:
-  V1: sine d1 f1 10m l=$\mathrm{W1}$
-  U1: opamp c6 +up TL072
-  R1: resistor d4 f4 1k
-  Rf: resistor d5 d8 100k
-  OUT: port c11
-  G1: ground f1
+  V1: sine 1,4 1,6 10m l=$\mathrm{W1}$
+  U1: opamp 6,3 +up TL072
+  R1: resistor 4,4 4,6 1k
+  Rf: resistor 5,4 8,4 100k
+  OUT: port 11,3
+  G1: ground 1,6
 wires:
-  - U1.+ -| d1
-  - d4 |- U1.-
-  - d4 -- d5
-  - d8 -- d9 -- c9
-  - U1.out -- c9 -- c11
-  - f1 -- f4
+  - U1.+ -| 1,4
+  - 4,4 |- U1.-
+  - 4,4 -- 5,4
+  - 8,4 -- 9,4 -- 9,3
+  - U1.out -- 9,3 -- 11,3
+  - 1,6 -- 4,6
 notes:
-  - text b1 blue: 入力 (CH1)
-  - text b9 blue: 出力 (CH2)
+  - text 1,2 blue: 入力 (CH1)
+  - text 9,2 blue: 出力 (CH2)
 style:
   standard: jis
   grid: on

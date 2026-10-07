@@ -34,67 +34,67 @@ IF は局によらず同じなので、455kHz に固定した同調 (IFT、中�
 ```circuit
 title: 図1 周波数変換 局発とミキサーを1石で
 parts:
-  W1: sine e2 g2 l=$\mathrm{W1}$
-  GW1: ground g2
-  Cw: capacitor c2 c4 10p
-  VC1a: capacitor-var c5 g5 l=$\mathrm{VC}_{1a}$
-  GVa: ground g5
-  T1: transformer e7
-  VCC: vcc f9 5V
-  R1: resistor f9 h9 33k
-  R2: resistor h8 j8 10k
-  GR2: ground j8
-  Cb: capacitor h6 j6 0.01u
-  GCb: ground j6
-  Q1: npn e11
-  Re: resistor h11 j11 1k
-  GRe: ground j11
-  Cc2: capacitor h12 h13 0.01u
-  T2: transformer e15
-  VCC: vcc c15 5V
-  Cp: capacitor g17 i17 270p
-  VC1b: capacitor-var i17 k17 l=$\mathrm{VC}_{1b}$
-  GVb: ground k17
-  T3: transformer e20
-  Ci1: capacitor d18 g18 180p l=$\mathrm{C}$
-  IF: port d22
-  IFB: port g22
+  W1: sine 2,5 2,7 l=$\mathrm{W1}$
+  GW1: ground 2,7
+  Cw: capacitor 2,3 4,3 10p
+  VC1a: capacitor-var 5,3 5,7 l=$\mathrm{VC}_{1a}$
+  GVa: ground 5,7
+  T1: transformer 7,5
+  VCC: vcc 9,6 5V
+  R1: resistor 9,6 9,8 33k
+  R2: resistor 8,8 8,10 10k
+  GR2: ground 8,10
+  Cb: capacitor 6,8 6,10 0.01u
+  GCb: ground 6,10
+  Q1: npn 11,5
+  Re: resistor 11,8 11,10 1k
+  GRe: ground 11,10
+  Cc2: capacitor 12,8 13,8 0.01u
+  T2: transformer 15,5
+  VCC: vcc 15,3 5V
+  Cp: capacitor 17,7 17,9 270p
+  VC1b: capacitor-var 17,9 17,11 l=$\mathrm{VC}_{1b}$
+  GVb: ground 17,11
+  T3: transformer 20,5
+  Ci1: capacitor 18,4 18,7 180p l=$\mathrm{C}$
+  IF: port 22,4
+  IFB: port 22,7
 wires:
-  - e2 -- c2
-  - c4 -- c5
-  - c5 -| T1.A1
-  - T1.A2 |- g5
-  - T1.B1 -| e10
-  - e10 -- Q1.B
-  - T1.B2 -| h8
-  - h6 -- h8
-  - h8 -- h9
-  - Q1.E -- h11
-  - h11 -- h12
-  - h13 -| T2.A2
-  - T2.A1 -| c14
-  - c14 -- c15
-  - c15 -- c16
-  - T2.B1 -| c16
-  - T2.B2 -| g17
-  - g17 -- g18
-  - g18 -- g19
-  - g19 -| T3.A2
-  - Q1.C -- a11
-  - a11 -- a19
-  - a19 -- d19
-  - d19 |- T3.A1
-  - d18 -- d19
-  - T3.B1 -| d22
-  - T3.B2 -| g22
+  - 2,5 -- 2,3
+  - 4,3 -- 5,3
+  - 5,3 -| T1.A1
+  - T1.A2 |- 5,7
+  - T1.B1 -| 10,5
+  - 10,5 -- Q1.B
+  - T1.B2 -| 8,8
+  - 6,8 -- 8,8
+  - 8,8 -- 9,8
+  - Q1.E -- 11,8
+  - 11,8 -- 12,8
+  - 13,8 -| T2.A2
+  - T2.A1 -| 14,3
+  - 14,3 -- 15,3
+  - 15,3 -- 16,3
+  - T2.B1 -| 16,3
+  - T2.B2 -| 17,7
+  - 17,7 -- 18,7
+  - 18,7 -- 19,7
+  - 19,7 -| T3.A2
+  - Q1.C -- 11,1
+  - 11,1 -- 19,1
+  - 19,1 -- 19,4
+  - 19,4 |- T3.A1
+  - 18,4 -- 19,4
+  - T3.B1 -| 22,4
+  - T3.B2 -| 22,7
 notes:
-  - text b7 small center: バーアンテナ
-  - text b15a5 small center: 局発コイル (赤)
-  - text h20 small center: IFT1 (黄)
-  - box c17 g20 blue
-  - text b19a5 small blue left: IFT に内蔵 180pF
-  - arrow b13f0 a13 green
-  - text b13f0 small green right: スペアナ
+  - text 7,2 small center: バーアンテナ
+  - text 15.5,2 small center: 局発コイル (赤)
+  - text 20,8 small center: IFT1 (黄)
+  - box 17,3 20,7 blue
+  - text 19.5,2 small blue left: IFT に内蔵 180pF
+  - arrow 13,2.5 13,1 green
+  - text 13,2.5 small green right: スペアナ
 style:
   pitch: 1.2
 ```
@@ -160,89 +160,89 @@ Q × (1910/1000 − 1000/1910) ≈ 69 倍 (約 37dB) の計算値。
 ```circuit
 title: 図2 中間周波増幅 2段と検波
 parts:
-  IF: port c1
-  IFB: port g1
-  VCC: vcc e2 5V
-  R3: resistor e2 g2 33k
-  R4: resistor g2 i2 10k
-  GR4: ground i2
-  Cb2: capacitor g4 i4 0.01u
-  GCb2: ground i4
-  Q2: npn c6
-  Re2: resistor f6 h6 1k
-  GRe2: ground h6
-  Ce2: capacitor f8 h8 0.01u
-  GCe2: ground h8
-  T4: transformer c10
-  Ci2: capacitor b8 d8 180p l=$\mathrm{C}$
-  VCC: vcc a9 5V
-  R6: resistor g11 i11 10k
-  GR6: ground i11
-  Cb3: capacitor g13 i13 0.01u
-  GCb3: ground i13
-  VCC: vcc e15 5V
-  R5: resistor e15 g15 22k
-  Q3: npn c17
-  Re3: resistor f17 h17 1k
-  GRe3: ground h17
-  Ce3: capacitor f19 h19 0.01u
-  GCe3: ground h19
-  T5: transformer c21
-  Ci3: capacitor b19 d19 180p l=$\mathrm{C}$
-  VCC: vcc a20 5V
-  GT5: ground f22
-  CH2: voltmeter d24 f24 l=$\mathrm{CH2}$
-  GCH2: ground f24
-  D1: diode c25 c27 1N60
-  Cd: capacitor c28 e28 0.01u
-  GCd: ground e28
-  CH1: voltmeter c31 e31 l=$\mathrm{CH1}$
-  GCH1: ground e31
-  VR: potentiometer c34 e34 l=$\mathrm{VR}$
-  GVR: ground e34
-  AF: port d36
+  IF: port 1,3
+  IFB: port 1,7
+  VCC: vcc 2,5 5V
+  R3: resistor 2,5 2,7 33k
+  R4: resistor 2,7 2,9 10k
+  GR4: ground 2,9
+  Cb2: capacitor 4,7 4,9 0.01u
+  GCb2: ground 4,9
+  Q2: npn 6,3
+  Re2: resistor 6,6 6,8 1k
+  GRe2: ground 6,8
+  Ce2: capacitor 8,6 8,8 0.01u
+  GCe2: ground 8,8
+  T4: transformer 10,3
+  Ci2: capacitor 8,2 8,4 180p l=$\mathrm{C}$
+  VCC: vcc 9,1 5V
+  R6: resistor 11,7 11,9 10k
+  GR6: ground 11,9
+  Cb3: capacitor 13,7 13,9 0.01u
+  GCb3: ground 13,9
+  VCC: vcc 15,5 5V
+  R5: resistor 15,5 15,7 22k
+  Q3: npn 17,3
+  Re3: resistor 17,6 17,8 1k
+  GRe3: ground 17,8
+  Ce3: capacitor 19,6 19,8 0.01u
+  GCe3: ground 19,8
+  T5: transformer 21,3
+  Ci3: capacitor 19,2 19,4 180p l=$\mathrm{C}$
+  VCC: vcc 20,1 5V
+  GT5: ground 22,6
+  CH2: voltmeter 24,4 24,6 l=$\mathrm{CH2}$
+  GCH2: ground 24,6
+  D1: diode 25,3 27,3 1N60
+  Cd: capacitor 28,3 28,5 0.01u
+  GCd: ground 28,5
+  CH1: voltmeter 31,3 31,5 l=$\mathrm{CH1}$
+  GCH1: ground 31,5
+  VR: potentiometer 34,3 34,5 l=$\mathrm{VR}$
+  GVR: ground 34,5
+  AF: port 36,4
 wires:
-  - c1 -- Q2.B
-  - g1 -- g2
-  - g2 -- g4
-  - Q2.E -- f6
-  - f6 -- f8
-  - Q2.C -- b6
-  - b6 -- b7
-  - b7 |- d8
-  - d8 |- T4.A2
-  - T4.A1 -| b8
-  - T4.A1 -| a9
-  - T4.B1 -| c16
-  - c16 -- Q3.B
-  - T4.B2 -| g11
-  - g11 -- g13
-  - g13 -- g15
-  - Q3.E -- f17
-  - f17 -- f19
-  - Q3.C -- b17
-  - b17 -- b18
-  - b18 |- d19
-  - d19 |- T5.A2
-  - T5.A1 -| b19
-  - T5.A1 -| a20
-  - T5.B1 -| c23
-  - c23 -- c24
-  - c24 -- c25
-  - c24 -- d24
-  - T5.B2 -| f22
-  - c27 -- c28
-  - c28 -- c31
-  - c31 -- c34
-  - VR.w -| d36
+  - 1,3 -- Q2.B
+  - 1,7 -- 2,7
+  - 2,7 -- 4,7
+  - Q2.E -- 6,6
+  - 6,6 -- 8,6
+  - Q2.C -- 6,2
+  - 6,2 -- 7,2
+  - 7,2 |- 8,4
+  - 8,4 |- T4.A2
+  - T4.A1 -| 8,2
+  - T4.A1 -| 9,1
+  - T4.B1 -| 16,3
+  - 16,3 -- Q3.B
+  - T4.B2 -| 11,7
+  - 11,7 -- 13,7
+  - 13,7 -- 15,7
+  - Q3.E -- 17,6
+  - 17,6 -- 19,6
+  - Q3.C -- 17,2
+  - 17,2 -- 18,2
+  - 18,2 |- 19,4
+  - 19,4 |- T5.A2
+  - T5.A1 -| 19,2
+  - T5.A1 -| 20,1
+  - T5.B1 -| 23,3
+  - 23,3 -- 24,3
+  - 24,3 -- 25,3
+  - 24,3 -- 24,4
+  - T5.B2 -| 22,6
+  - 27,3 -- 28,3
+  - 28,3 -- 31,3
+  - 31,3 -- 34,3
+  - VR.w -| 36,4
 notes:
-  - text f34 small center: 10kΩ (A)
-  - text e9 small center: IFT2 (白)
-  - box b8 d10 blue
-  - text a10a5 small blue left: IFT に内蔵 180pF
-  - text e20 small center: IFT3 (黒)
-  - box b19 d21 blue
-  - text a21a5 small blue left: IFT に内蔵 180pF
+  - text 34,6 small center: 10kΩ (A)
+  - text 9,5 small center: IFT2 (白)
+  - box 8,2 10,4 blue
+  - text 10.5,1 small blue left: IFT に内蔵 180pF
+  - text 20,5 small center: IFT3 (黒)
+  - box 19,2 21,4 blue
+  - text 21.5,1 small blue left: IFT に内蔵 180pF
 style:
   pitch: 1.1
 ```
@@ -265,50 +265,50 @@ style:
 ```circuit
 title: 図3 低周波増幅 ドライブ1石とプッシュプル2石
 parts:
-  AF: port h1
-  C1: ecap h3 h2 10u
-  Rb2: resistor h4 k4 22k
-  GRb2: ground k4
-  Q4: npn h7
-  Re4: resistor j7 l7 100
-  GRe4: ground l7
-  VCC: vcc a9 5V
-  R7: resistor a9 c9 680
-  D2: diode c9 e9 1N4148
-  D3: diode e9 g9 1N4148
-  Q5: npn c11
-  VCC: vcc a11 5V
-  Q6: pnp g11
-  GQ6: ground j11
-  Rf: resistor m8 m10 30k
-  C2: ecap e13 e15 220u
-  SP: speaker e17 g17 l=$\mathrm{SP}$
-  GSP: ground g17
+  AF: port 1,8
+  C1: ecap 3,8 2,8 10u
+  Rb2: resistor 4,8 4,11 22k
+  GRb2: ground 4,11
+  Q4: npn 7,8
+  Re4: resistor 7,10 7,12 100
+  GRe4: ground 7,12
+  VCC: vcc 9,1 5V
+  R7: resistor 9,1 9,3 680
+  D2: diode 9,3 9,5 1N4148
+  D3: diode 9,5 9,7 1N4148
+  Q5: npn 11,3
+  VCC: vcc 11,1 5V
+  Q6: pnp 11,7
+  GQ6: ground 11,10
+  Rf: resistor 8,13 10,13 30k
+  C2: ecap 13,5 15,5 220u
+  SP: speaker 17,5 17,7 l=$\mathrm{SP}$
+  GSP: ground 17,7
 wires:
-  - h1 -- h2
-  - h3 -- h4
-  - h4 -- h6
-  - h6 -- Q4.B
-  - Q4.E -- j7
-  - Q4.C -- g7
-  - g7 -- g9
-  - g9 -- Q6.B
-  - c9 -- Q5.B
-  - Q5.C -- a11
-  - Q6.C -- j11
-  - Q5.E -- e11
-  - e11 -- Q6.E
-  - e11 -- e12
-  - e12 -- e13
-  - e12 -- m12
-  - m12 -- m10
-  - m8 -- m6
-  - m6 -- h6
-  - e15 -- e17
+  - 1,8 -- 2,8
+  - 3,8 -- 4,8
+  - 4,8 -- 6,8
+  - 6,8 -- Q4.B
+  - Q4.E -- 7,10
+  - Q4.C -- 7,7
+  - 7,7 -- 9,7
+  - 9,7 -- Q6.B
+  - 9,3 -- Q5.B
+  - Q5.C -- 11,1
+  - Q6.C -- 11,10
+  - Q5.E -- 11,5
+  - 11,5 -- Q6.E
+  - 11,5 -- 12,5
+  - 12,5 -- 13,5
+  - 12,5 -- 12,13
+  - 12,13 -- 10,13
+  - 8,13 -- 6,13
+  - 6,13 -- 6,8
+  - 15,5 -- 17,5
 notes:
-  - text f18 small left: 8Ω
-  - text c11h5 small left: 2SC2120
-  - text g10h9 small right: 2SA950
+  - text 18,6 small left: 8Ω
+  - text 11.5,3.7 small left: 2SC2120
+  - text 10.9,7.7 small right: 2SA950
 style:
   pitch: 1.2
 ```

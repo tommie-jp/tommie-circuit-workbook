@@ -49,25 +49,25 @@ L-R は C = 54 fF、L-I は C = 72 fF。
 ```circuit
 title: 図1 LO を CH0、RF を CH1 へ。IF は 50 Ω で終端
 parts:
-  J1: sma c2 mirror CH0
+  J1: sma 2,3 mirror CH0
   U1:
     type: ic3
-    at: c6
+    at: 6,3
     label: SBL-1+
     pins: [LO, IF, RF]
-  J2: sma c10 CH1
-  RL: resistor d6 f6 50 l=$\mathrm{Load}$
-  GJ1: ground d2
-  GRL: ground f6
-  GJ2: ground d10
+  J2: sma 10,3 CH1
+  RL: resistor 6,4 6,6 50 l=$\mathrm{Load}$
+  GJ1: ground 2,4
+  GRL: ground 6,6
+  GJ2: ground 10,4
 wires:
   - J1.1 -| U1.LO
-  - J1.2 -- d2
-  - U1.IF -- d6
+  - J1.2 -- 2,4
+  - U1.IF -- 6,4
   - U1.RF |- J2.1
-  - J2.2 -- d10
+  - J2.2 -- 10,4
 notes:
-  - text e7 left: J3 に挿した 50 Ω の Load (校正キット)
+  - text 7,5 left: J3 に挿した 50 Ω の Load (校正キット)
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/circuit/07-mixer-isolation.svg)

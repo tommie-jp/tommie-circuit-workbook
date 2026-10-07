@@ -30,17 +30,17 @@ L = 47 nH、C = 56 pF なら f₀ = 1 / (2π√(47n × 56p)) ≈ **98.1 MHz**
 ```circuit
 title: 図1 直列共振をシャントに入れたノッチ
 parts:
-  J1: sma b2 mirror CH0
-  L1: inductor b4 d4 47n
-  C1: capacitor d4 f4 56p
-  J2: sma b6 CH1
-  G1: ground c2
-  G2: ground f4
-  G3: ground c6
+  J1: sma 2,2 mirror CH0
+  L1: inductor 4,2 4,4 47n
+  C1: capacitor 4,4 4,6 56p
+  J2: sma 6,2 CH1
+  G1: ground 2,3
+  G2: ground 4,6
+  G3: ground 6,3
 wires:
-  - J1.1 -- b4 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c6
+  - J1.1 -- 4,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 6,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/06-notch.svg)

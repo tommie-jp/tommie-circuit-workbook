@@ -28,15 +28,15 @@ board: BB
 ```circuit
 title: 図1 RL 直列の電流の立ち上がり
 parts:
-  V1: square a1 c1 1 l=$\mathrm{W1}$
-  R1: resistor a1 a5 1k i=I
-  L1: inductor a5 c5 10m
-  G1: ground c1
+  V1: square 1,1 1,3 1 l=$\mathrm{W1}$
+  R1: resistor 1,1 5,1 1k i=I
+  L1: inductor 5,1 5,3 10m
+  G1: ground 1,3
 wires:
-  - c1 -- c5
+  - 1,3 -- 5,3
 notes:
-  - text a1 blue: 入力
-  - text a5 blue: 電流を読む点 (R1 の両端)
+  - text 1,1 blue: 入力
+  - text 5,1 blue: 電流を読む点 (R1 の両端)
 style:
   standard: jis
   grid: on
@@ -114,16 +114,16 @@ L1 を短絡して回路が変わる ([回路の本の 0-3](../../01-circuits/00
 ```circuit
 title: 図4 汎用オシロでの測り方
 parts:
-  V1: square a1 d1 1 l=$\mathrm{FG}$
-  M1: voltmeter a4 d4 l=$\mathrm{CH1}$
-  R1: resistor a6 a9 1k i=I
-  M2: voltmeter a11 d11 l=$\mathrm{CH2}$
-  L1: inductor a14 d14 10m
-  G1: ground d8
+  V1: square 1,1 1,4 1 l=$\mathrm{FG}$
+  M1: voltmeter 4,1 4,4 l=$\mathrm{CH1}$
+  R1: resistor 6,1 9,1 1k i=I
+  M2: voltmeter 11,1 11,4 l=$\mathrm{CH2}$
+  L1: inductor 14,1 14,4 10m
+  G1: ground 8,4
 wires:
-  - a1 -- a4 -- a6
-  - a9 -- a11 -- a14
-  - d1 -- d4 -- d8 -- d11 -- d14
+  - 1,1 -- 4,1 -- 6,1
+  - 9,1 -- 11,1 -- 14,1
+  - 1,4 -- 4,4 -- 8,4 -- 11,4 -- 14,4
 style:
   standard: jis
   pitch: 1.2

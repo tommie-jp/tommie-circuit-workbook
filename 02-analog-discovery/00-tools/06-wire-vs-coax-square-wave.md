@@ -20,13 +20,13 @@ board: BB
 ```circuit
 title: 図1 方形波を負荷抵抗に流す
 parts:
-  W1: square a1 c1 1
-  R1: resistor a3 c3 1k
-  M1: voltmeter a5 c5 l=$\mathrm{CH1}$
-  G1: ground c1
+  W1: square 1,1 1,3 1
+  R1: resistor 3,1 3,3 1k
+  M1: voltmeter 5,1 5,3 l=$\mathrm{CH1}$
+  G1: ground 1,3
 wires:
-  - a1 -- a3 -- a5
-  - c1 -- c3 -- c5
+  - 1,1 -- 3,1 -- 5,1
+  - 1,3 -- 3,3 -- 5,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/circuit/06-wire-vs-coax-square-wave.svg)

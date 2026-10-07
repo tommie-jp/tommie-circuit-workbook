@@ -22,28 +22,28 @@ board: BB
 ```circuit
 title: 図1 ダーリントンで作る指タッチスイッチ (CH2 でベース、CH1 でコレクタを見る)
 parts:
-  VCC: vcc b2 5V
-  TP1: port b4
-  TP2: port g3
-  RB: resistor g4 i4 1M
-  G2: ground i4
-  Q1: npn g7
-  Q2: npn h9
-  RC: resistor b9 d9 470
-  D1: led d9 f9
-  G3: ground i9
-  M2: voltmeter g3 i3 l=$\mathrm{CH2}$
-  G5: ground i3
-  M1: voltmeter f11 i11 l=$\mathrm{CH1}$
-  G4: ground i11
+  VCC: vcc 2,2 5V
+  TP1: port 4,2
+  TP2: port 3,7
+  RB: resistor 4,7 4,9 1M
+  G2: ground 4,9
+  Q1: npn 7,7
+  Q2: npn 9,8
+  RC: resistor 9,2 9,4 470
+  D1: led 9,4 9,6
+  G3: ground 9,9
+  M2: voltmeter 3,7 3,9 l=$\mathrm{CH2}$
+  G5: ground 3,9
+  M1: voltmeter 11,6 11,9 l=$\mathrm{CH1}$
+  G4: ground 11,9
 wires:
-  - b2 -- b4 -- b9
-  - g3 -- g4 -- Q1.B
+  - 2,2 -- 4,2 -- 9,2
+  - 3,7 -- 4,7 -- Q1.B
   - Q1.E |- Q2.B
-  - f9 -| Q1.C
-  - f9 -- Q2.C
-  - Q2.E -- i9
-  - f9 -- f11
+  - 9,6 -| Q1.C
+  - 9,6 -- Q2.C
+  - Q2.E -- 9,9
+  - 9,6 -- 11,6
 style:
   grid: on
   pitch: 1.2

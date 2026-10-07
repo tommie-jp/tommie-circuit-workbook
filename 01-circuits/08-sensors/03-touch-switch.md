@@ -21,26 +21,26 @@ era: 古
 ```circuit
 title: 図1 指で触れると LED が点く
 parts:
-  VCC: vcc b2 5V
-  TPA: port d2
-  TPB: port d3
-  R1: resistor d4 f4 1M
-  G1: ground f4
-  Q1: npn d6 2SC1815
-  R3: resistor g6 i6 100k
-  G2: ground i6
-  R4: resistor b8 d8 330
-  D1: led d8 f8
-  Q2: npn g8 2SC1815
-  G4: ground h8
+  VCC: vcc 2,2 5V
+  TPA: port 2,4
+  TPB: port 3,4
+  R1: resistor 4,4 4,6 1M
+  G1: ground 4,6
+  Q1: npn 6,4 2SC1815
+  R3: resistor 6,7 6,9 100k
+  G2: ground 6,9
+  R4: resistor 8,2 8,4 330
+  D1: led 8,4 8,6
+  Q2: npn 8,7 2SC1815
+  G4: ground 8,8
 wires:
-  - b2 -- d2
-  - b2 -- b6 -- b8
-  - d3 -- d4 -- Q1.B
-  - b6 -- Q1.C
-  - Q1.E -- g6 -- Q2.B
-  - f8 -- Q2.C
-  - Q2.E -- h8
+  - 2,2 -- 2,4
+  - 2,2 -- 6,2 -- 8,2
+  - 3,4 -- 4,4 -- Q1.B
+  - 6,2 -- Q1.C
+  - Q1.E -- 6,7 -- Q2.B
+  - 8,6 -- Q2.C
+  - Q2.E -- 8,8
 style:
   grid: on
   pitch: 1.2

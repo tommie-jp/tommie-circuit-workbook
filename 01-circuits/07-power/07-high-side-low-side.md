@@ -21,35 +21,35 @@ MOSFET) は、どちらもローサイドだった。同じ負荷 (LED) を今�
 ```circuit
 title: 図1 ローサイド (左) とハイサイド (右) の比較
 parts:
-  VCC: vcc b6 5V
-  R1: resistor b6 d6 330
-  D1: led d6 e6
-  Q1: nmos-e f6 2N7000
-  IN1: port f2
-  Rg1: resistor f2 f4 100
-  Rpd1: resistor f4 h4 10k
-  G1: ground g6
-  G2: ground h4
-  VCC: vcc b13 5V
-  Q2: pmos-e d13 BSS84
-  R2: resistor e13 g13 330
-  D2: led g13 h13
-  IN2: port d10
-  Rg2: resistor d10 d12 100
-  Rpu2: resistor d12 b12 10k
-  VCC: vcc b12 5V
-  G3: ground h13
+  VCC: vcc 6,2 5V
+  R1: resistor 6,2 6,4 330
+  D1: led 6,4 6,5
+  Q1: nmos-e 6,6 2N7000
+  IN1: port 2,6
+  Rg1: resistor 2,6 4,6 100
+  Rpd1: resistor 4,6 4,8 10k
+  G1: ground 6,7
+  G2: ground 4,8
+  VCC: vcc 13,2 5V
+  Q2: pmos-e 13,4 BSS84
+  R2: resistor 13,5 13,7 330
+  D2: led 13,7 13,8
+  IN2: port 10,4
+  Rg2: resistor 10,4 12,4 100
+  Rpu2: resistor 12,4 12,2 10k
+  VCC: vcc 12,2 5V
+  G3: ground 13,8
 wires:
-  - e6 -- Q1.D
-  - Q1.S -- g6
-  - f4 |- Q1.G
-  - b13 -- Q2.S
-  - Q2.D -- e13
-  - d12 |- Q2.G
+  - 6,5 -- Q1.D
+  - Q1.S -- 6,7
+  - 4,6 |- Q1.G
+  - 13,2 -- Q2.S
+  - Q2.D -- 13,5
+  - 12,4 |- Q2.G
 notes:
-  - line a8 h8 ink
-  - text a3 center: ローサイド (N ch)
-  - text a11 center: ハイサイド (P ch)
+  - line 8,1 8,8 ink
+  - text 3,1 center: ローサイド (N ch)
+  - text 11,1 center: ハイサイド (P ch)
 style:
   grid: on
   pitch: 1.2

@@ -22,15 +22,15 @@ era: 古
 ```circuit
 title: 図1 自作トランスで巻数比を確かめる
 parts:
-  V1: sine a2c0f0 b2h0f0 2
-  T1: transformer b4 15t-45t
-  G1: ground b2h0f0
-  VM1: voltmeter a6c0f0 b6h0f0
+  V1: sine 2,1.25 2,2.75 2
+  T1: transformer 4,2 15t-45t
+  G1: ground 2,2.75
+  VM1: voltmeter 6,1.25 6,2.75
 wires:
-  - a2c0f0 -| T1.A1
-  - b2h0f0 -| T1.A2
-  - T1.B1 -| a6c0f0
-  - T1.B2 -| b6h0f0
+  - 2,1.25 -| T1.A1
+  - 2,2.75 -| T1.A2
+  - T1.B1 -| 6,1.25
+  - T1.B2 -| 6,2.75
 style:
   grid: on
   pitch: 1.2

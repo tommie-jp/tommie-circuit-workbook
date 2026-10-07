@@ -29,22 +29,22 @@ board: BB
 ```circuit
 title: 図1 容量ブリッジ (ド・ソーティ) で Cx を測る
 parts:
-  V1: sine b1 f1 1 l=$\mathrm{W1}$
-  R1: resistor-var b4 d4 1k
-  CS: capacitor d4 f4 100n l=$\mathrm{C_S}$
-  R2: resistor b8 d8 1k
-  CX: capacitor d8 f8 47n l=$\mathrm{C_X}$
-  M1: voltmeter d5 d7 l=$\mathrm{CH1}$
-  G1: ground f1
+  V1: sine 1,2 1,6 1 l=$\mathrm{W1}$
+  R1: resistor-var 4,2 4,4 1k
+  CS: capacitor 4,4 4,6 100n l=$\mathrm{C_S}$
+  R2: resistor 8,2 8,4 1k
+  CX: capacitor 8,4 8,6 47n l=$\mathrm{C_X}$
+  M1: voltmeter 5,4 7,4 l=$\mathrm{CH1}$
+  G1: ground 1,6
 wires:
-  - b1 -- b4 -- b8
-  - d4 -- d5
-  - d7 -- d8
-  - f1 -- f4 -- f8
+  - 1,2 -- 4,2 -- 8,2
+  - 4,4 -- 5,4
+  - 7,4 -- 8,4
+  - 1,6 -- 4,6 -- 8,6
 notes:
-  - text c4f5 blue: P
-  - text c8f5 blue: Q
-  - text a1 blue: A (CH2)
+  - text 4.5,3.5 blue: P
+  - text 8.5,3.5 blue: Q
+  - text 1,1 blue: A (CH2)
 style:
   standard: jis
   grid: on
@@ -60,23 +60,23 @@ style:
 ```circuit
 title: 図2 マクスウェルブリッジで Lx を測る
 parts:
-  V1: sine b1 f1 1 l=$\mathrm{W1}$
-  LX: inductor b4 d4 10m l=$\mathrm{L_X}$
-  R3: resistor-var d4 f4 2k
-  R2: resistor b8 d8 1k
-  R4: resistor-var d8 f8 100k
-  C4: capacitor d10 f10 10n
-  M1: voltmeter d5 d7 l=$\mathrm{CH1}$
-  G1: ground f1
+  V1: sine 1,2 1,6 1 l=$\mathrm{W1}$
+  LX: inductor 4,2 4,4 10m l=$\mathrm{L_X}$
+  R3: resistor-var 4,4 4,6 2k
+  R2: resistor 8,2 8,4 1k
+  R4: resistor-var 8,4 8,6 100k
+  C4: capacitor 10,4 10,6 10n
+  M1: voltmeter 5,4 7,4 l=$\mathrm{CH1}$
+  G1: ground 1,6
 wires:
-  - b1 -- b4 -- b8
-  - d4 -- d5
-  - d7 -- d8 -- d10
-  - f1 -- f4 -- f8 -- f10
+  - 1,2 -- 4,2 -- 8,2
+  - 4,4 -- 5,4
+  - 7,4 -- 8,4 -- 10,4
+  - 1,6 -- 4,6 -- 8,6 -- 10,6
 notes:
-  - text c4f5 blue: P
-  - text c8f5 blue: Q
-  - text a1 blue: A (CH2)
+  - text 4.5,3.5 blue: P
+  - text 8.5,3.5 blue: Q
+  - text 1,1 blue: A (CH2)
 style:
   standard: jis
   grid: on
@@ -192,22 +192,22 @@ AD 版は CH1 を P と Q の差動で当てる。P も Q も GND ではない�
 ```circuit
 title: 図5 汎用オシロでの測り方 (容量ブリッジ)
 parts:
-  V1: sine b1 f1 1 l=$\mathrm{FG}$
-  R1: resistor-var b4 d4 1k
-  CS: capacitor d4 f4 100n l=$\mathrm{C_S}$
-  M1: voltmeter d6 f6 l=$\mathrm{CH1}$
-  R2: resistor b8 d8 1k
-  CX: capacitor d8 f8 47n l=$\mathrm{C_X}$
-  M2: voltmeter d10 f10 l=$\mathrm{CH2}$
-  G1: ground f1
+  V1: sine 1,2 1,6 1 l=$\mathrm{FG}$
+  R1: resistor-var 4,2 4,4 1k
+  CS: capacitor 4,4 4,6 100n l=$\mathrm{C_S}$
+  M1: voltmeter 6,4 6,6 l=$\mathrm{CH1}$
+  R2: resistor 8,2 8,4 1k
+  CX: capacitor 8,4 8,6 47n l=$\mathrm{C_X}$
+  M2: voltmeter 10,4 10,6 l=$\mathrm{CH2}$
+  G1: ground 1,6
 wires:
-  - b1 -- b4 -- b8
-  - d4 -- d6
-  - d8 -- d10
-  - f1 -- f4 -- f6 -- f8 -- f10
+  - 1,2 -- 4,2 -- 8,2
+  - 4,4 -- 6,4
+  - 8,4 -- 10,4
+  - 1,6 -- 4,6 -- 6,6 -- 8,6 -- 10,6
 notes:
-  - text c4f5 blue: P
-  - text c8f5 blue: Q
+  - text 4.5,3.5 blue: P
+  - text 8.5,3.5 blue: Q
 style:
   standard: jis
   grid: on

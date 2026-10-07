@@ -26,16 +26,16 @@ title: 図1 安定化電源の CV / CC の切り替わり
 parts:
   V1:
     type: device
-    at: b2
+    at: 2,2
     label: PSU
     pins: ["+", "-"]
     turn: mirror
-  RL: resistor-var b4 d4 1k
-  G1: ground d4
+  RL: resistor-var 4,2 4,4 1k
+  G1: ground 4,4
 wires:
-  - V1.+ -| b4
-  - V1.- -| d3
-  - d3 -- d4
+  - V1.+ -| 4,2
+  - V1.- -| 3,4
+  - 3,4 -- 4,4
 style:
   grid: on
   pitch: 1.2
@@ -66,31 +66,31 @@ title: 図2 電流制限を掛けた電源と FG で、トランジスタで LED
 parts:
   V1:
     type: device
-    at: b2
+    at: 2,2
     label: PSU
     pins: ["+", "-"]
     turn: mirror
-  R1: resistor b6 d6 330
-  D1: led d6 f6
-  Q1: npn g6
-  RB: resistor f3 f5 10k
+  R1: resistor 6,2 6,4 330
+  D1: led 6,4 6,6
+  Q1: npn 6,7
+  RB: resistor 3,6 5,6 10k
   V2:
     type: device
-    at: g1a5
+    at: 1.5,7
     label: FuncGen
     pins: [OUT, GND]
     turn: mirror
-  G2: ground h6
-  G3: ground c3
+  G2: ground 6,8
+  G3: ground 3,3
 wires:
-  - V1.+ -| b6
-  - f6 -- Q1.C
-  - f5 |- Q1.B
-  - Q1.E -- h6
-  - V2.OUT -| f3
-  - V1.- -| c3
-  - V2.GND -| h3
-  - h3 -- h6
+  - V1.+ -| 6,2
+  - 6,6 -- Q1.C
+  - 5,6 |- Q1.B
+  - Q1.E -- 6,8
+  - V2.OUT -| 3,6
+  - V1.- -| 3,3
+  - V2.GND -| 3,8
+  - 3,8 -- 6,8
 style:
   grid: on
   pitch: 1.2

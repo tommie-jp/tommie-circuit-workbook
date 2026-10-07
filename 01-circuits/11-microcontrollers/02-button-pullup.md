@@ -24,13 +24,13 @@ GPIO の入力は、何もつながないと電位が決まらず、0 と 1 の�
 ```circuit
 title: 図1 プルアップ抵抗とボタン
 parts:
-  U1: pico2 e3c0
-  R1: resistor f6 i6 10k
-  SW1: button i6 k6 l=$\mathrm{SW1}$
-  G1: ground k6
+  U1: pico2 3,5.2
+  R1: resistor 6,6 6,9 10k
+  SW1: button 6,9 6,11 l=$\mathrm{SW1}$
+  G1: ground 6,11
 wires:
-  - U1.3V3 -| f6
-  - U1.GP16 -| i5 -- i6
+  - U1.3V3 -| 6,6
+  - U1.GP16 -| 5,9 -- 6,9
 style:
   pitch: 1.2
 ```

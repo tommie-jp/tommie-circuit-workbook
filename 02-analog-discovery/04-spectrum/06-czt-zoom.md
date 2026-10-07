@@ -23,15 +23,15 @@ CZT でビンを細かくしても 2 本には分かれないことを確かめ�
 ```circuit
 title: 図1 W1・W2 を抵抗で足して CH1 で見る
 parts:
-  V1: sine a1 c1 l=$\mathrm{W1}$
-  V2: sine a5 c5 l=$\mathrm{W2}$
-  R1: resistor a1 a3 1k
-  R2: resistor a5 a3 1k
-  M1: voltmeter a9 c9 l=$\mathrm{CH1}$
-  G1: ground c1
+  V1: sine 1,1 1,3 l=$\mathrm{W1}$
+  V2: sine 5,1 5,3 l=$\mathrm{W2}$
+  R1: resistor 1,1 3,1 1k
+  R2: resistor 5,1 3,1 1k
+  M1: voltmeter 9,1 9,3 l=$\mathrm{CH1}$
+  G1: ground 1,3
 wires:
-  - a3 -- b3 -- b8 -- a8 -- a9
-  - c1 -- c5 -- c9
+  - 3,1 -- 3,2 -- 8,2 -- 8,1 -- 9,1
+  - 1,3 -- 5,3 -- 9,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/circuit/06-czt-zoom.svg)

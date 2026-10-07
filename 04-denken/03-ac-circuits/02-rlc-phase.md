@@ -31,17 +31,17 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{W1}$
-  Rs: resistor c1 c4 10 i=I
-  M2: voltmeter a1 a4 l=$\mathrm{CH2}$
-  M1: voltmeter c6 g6 l=$\mathrm{CH1}$
-  R1: resistor c8 g8 1k
-  G1: ground g6
+  V1: sine 1,3 1,7 l=$\mathrm{W1}$
+  Rs: resistor 1,3 4,3 10 i=I
+  M2: voltmeter 1,1 4,1 l=$\mathrm{CH2}$
+  M1: voltmeter 6,3 6,7 l=$\mathrm{CH1}$
+  R1: resistor 8,3 8,7 1k
+  G1: ground 6,7
 wires:
-  - a1 -- c1
-  - a4 -- c4
-  - c4 -- c6 -- c8
-  - g1 -- g6 -- g8
+  - 1,1 -- 1,3
+  - 4,1 -- 4,3
+  - 4,3 -- 6,3 -- 8,3
+  - 1,7 -- 6,7 -- 8,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/02-rlc-phase-1.svg)
@@ -123,16 +123,16 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  V1: sine c1 g1 l=$\mathrm{FG}$
-  M1: voltmeter c3 g3 l=$\mathrm{CH1}$
-  R1: resistor c5 e5 1k
-  Rs: resistor e7 g7 10 i=I
-  M2: voltmeter e9 g9 l=$\mathrm{CH2}$
-  G1: ground g1
+  V1: sine 1,3 1,7 l=$\mathrm{FG}$
+  M1: voltmeter 3,3 3,7 l=$\mathrm{CH1}$
+  R1: resistor 5,3 5,5 1k
+  Rs: resistor 7,5 7,7 10 i=I
+  M2: voltmeter 9,5 9,7 l=$\mathrm{CH2}$
+  G1: ground 1,7
 wires:
-  - c1 -- c3 -- c5
-  - e5 -- e7 -- e9
-  - g1 -- g3 -- g7 -- g9
+  - 1,3 -- 3,3 -- 5,3
+  - 5,5 -- 7,5 -- 9,5
+  - 1,7 -- 3,7 -- 7,7 -- 9,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/circuit/02-rlc-phase-2.svg)

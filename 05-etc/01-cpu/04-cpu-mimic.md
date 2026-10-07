@@ -127,77 +127,77 @@ PC とクロックの回路図は **1-1 の図1**、番地の LED は **1-1 の�
 ```circuit
 title: 図2 メモリ (74HC154 とダイオード 8 個) と命令の線
 parts:
-  U2: ic h6 74HC154
-  A0: port g2f0
-  A1: port h3
-  A2: port h2f0
-  A3: port i3
-  VCC: vcc c6 5V
-  GU: ground n6
-  VCC: vcc b14 5V
-  R10: resistor b14 d14 10k
-  D11: diode h15 f15
-  D12: diode k15 i15
-  D13: diode n15 l15
-  P2: port n14
-  VCC: vcc b18 5V
-  R11: resistor b18 d18 10k
-  D14: diode h19 f19
-  D15: diode k19 i19
-  ADDn: port k18
-  VCC: vcc b22 5V
-  R8: resistor b22 d22 10k
-  D16: diode k23 i23
-  P0: port k22
-  VCC: vcc b26 5V
-  R7: resistor b26 d26 10k
-  D17: diode n27 l27
-  LDn: port n26
-  VCC: vcc b30 5V
-  R9: resistor b30 d30 10k
-  D18: diode n31 l31
-  P1: port n30
-  VCC: vcc b34 5V
-  R5: resistor b34 d34 10k
-  ENT: port f34
-  VCC: vcc b38 5V
-  R6: resistor b38 d38 10k
-  S1: button f40 h40
-  GS: ground h40
-  CLR: port h38
+  U2: ic 6,8 74HC154
+  A0: port 2,7.5
+  A1: port 3,8
+  A2: port 2,8.5
+  A3: port 3,9
+  VCC: vcc 6,3 5V
+  GU: ground 6,14
+  VCC: vcc 14,2 5V
+  R10: resistor 14,2 14,4 10k
+  D11: diode 15,8 15,6
+  D12: diode 15,11 15,9
+  D13: diode 15,14 15,12
+  P2: port 14,14
+  VCC: vcc 18,2 5V
+  R11: resistor 18,2 18,4 10k
+  D14: diode 19,8 19,6
+  D15: diode 19,11 19,9
+  ADDn: port 18,11
+  VCC: vcc 22,2 5V
+  R8: resistor 22,2 22,4 10k
+  D16: diode 23,11 23,9
+  P0: port 22,11
+  VCC: vcc 26,2 5V
+  R7: resistor 26,2 26,4 10k
+  D17: diode 27,14 27,12
+  LDn: port 26,14
+  VCC: vcc 30,2 5V
+  R9: resistor 30,2 30,4 10k
+  D18: diode 31,14 31,12
+  P1: port 30,14
+  VCC: vcc 34,2 5V
+  R5: resistor 34,2 34,4 10k
+  ENT: port 34,6
+  VCC: vcc 38,2 5V
+  R6: resistor 38,2 38,4 10k
+  S1: button 40,6 40,8
+  GS: ground 40,8
+  CLR: port 38,8
 wires:
-  - U2.A0 -| g2f0
-  - U2.A1 -| h3
-  - U2.A2 -| h2f0
-  - U2.A3 -| i3
-  - U2.VCC |- c6
-  - U2.GND |- n6
-  - U2.E1 |- n6
-  - U2.E2 |- n6
-  - U2.Y0 -| f11
-  - U2.Y1 -| i10
-  - U2.Y2 -| l9
-  - h14 -- h15
-  - k14 -- k15
-  - n14 -- n15
-  - d14 -- h14 -- k14 -- n14
-  - h18 -- h19
-  - k18 -- k19
-  - d18 -- h18 -- k18
-  - k22 -- k23
-  - d22 -- k22
-  - n26 -- n27
-  - d26 -- n26
-  - n30 -- n31
-  - d30 -- n30
-  - d34 -- f34
-  - f38 -- f40
-  - d38 -- f38 -- h38
-  - f11 -- f15 -- f19
-  - i10 -- i15 -- i19 -- i23
-  - l9 -- l15 -- l27 -- l31
+  - U2.A0 -| 2,7.5
+  - U2.A1 -| 3,8
+  - U2.A2 -| 2,8.5
+  - U2.A3 -| 3,9
+  - U2.VCC |- 6,3
+  - U2.GND |- 6,14
+  - U2.E1 |- 6,14
+  - U2.E2 |- 6,14
+  - U2.Y0 -| 11,6
+  - U2.Y1 -| 10,9
+  - U2.Y2 -| 9,12
+  - 14,8 -- 15,8
+  - 14,11 -- 15,11
+  - 14,14 -- 15,14
+  - 14,4 -- 14,8 -- 14,11 -- 14,14
+  - 18,8 -- 19,8
+  - 18,11 -- 19,11
+  - 18,4 -- 18,8 -- 18,11
+  - 22,11 -- 23,11
+  - 22,4 -- 22,11
+  - 26,14 -- 27,14
+  - 26,4 -- 26,14
+  - 30,14 -- 31,14
+  - 30,4 -- 30,14
+  - 34,4 -- 34,6
+  - 38,6 -- 40,6
+  - 38,4 -- 38,6 -- 38,8
+  - 11,6 -- 15,6 -- 19,6
+  - 10,9 -- 15,9 -- 19,9 -- 23,9
+  - 9,12 -- 15,12 -- 27,12 -- 31,12
 notes:
-  - text p2 small: "E1 と E2 (PIN 18 と 19) は GND につなぐと常に有効"
+  - text 2,16 small: "E1 と E2 (PIN 18 と 19) は GND につなぐと常に有効"
 style:
   grid: on
   pitch: 1.2
@@ -215,88 +215,88 @@ style:
 ```circuit
 title: 図3 ACC (74HC273) と加算器 (74HC283) と、選ぶ 74HC157
 parts:
-  U3: ic h8 CD74HC283
-  VCC: vcc d8 5V
-  GU3: ground l8
-  ACC0: port f4
-  P0: port f2f0
-  ACC1: port g4
-  P1: port g2f0
-  ACC2: port h4
-  P2: port h2f0
-  ACC3: port i4
-  GB3: ground i5f0 r90
-  GCI: ground j5 r90
-  U4: ic h20 74HC157
-  VCC: vcc d20 5V
-  GU4: ground m20
-  ADDn: port f15
-  ACC0: port g16
-  ACC1: port h16
-  ACC2: port i16
-  ACC3: port j16
-  U5: ic i30f0 74HC273
-  VCC: vcc e30 5V
-  GU5: ground m30
-  GD5: ground i26f0 r90
-  GD6: ground j26 r90
-  GD7: ground j26f0 r90
-  GD8: ground k26 r90
-  CLK: port k26f0
-  VCC: vcc d34 5V
-  R12: resistor d34 f34 10k
-  S2: button f34 f37
-  GS2: ground f37
-  ACC0: port h34
-  ACC1: port h36f0
-  ACC2: port i34
-  ACC3: port i36f0
+  U3: ic 8,8 CD74HC283
+  VCC: vcc 8,4 5V
+  GU3: ground 8,12
+  ACC0: port 4,6
+  P0: port 2,6.5
+  ACC1: port 4,7
+  P1: port 2,7.5
+  ACC2: port 4,8
+  P2: port 2,8.5
+  ACC3: port 4,9
+  GB3: ground 5,9.5 r90
+  GCI: ground 5,10 r90
+  U4: ic 20,8 74HC157
+  VCC: vcc 20,4 5V
+  GU4: ground 20,13
+  ADDn: port 15,6
+  ACC0: port 16,7
+  ACC1: port 16,8
+  ACC2: port 16,9
+  ACC3: port 16,10
+  U5: ic 30,9.5 74HC273
+  VCC: vcc 30,5 5V
+  GU5: ground 30,13
+  GD5: ground 26,9.5 r90
+  GD6: ground 26,10 r90
+  GD7: ground 26,10.5 r90
+  GD8: ground 26,11 r90
+  CLK: port 26,11.5
+  VCC: vcc 34,4 5V
+  R12: resistor 34,4 34,6 10k
+  S2: button 34,6 37,6
+  GS2: ground 37,6
+  ACC0: port 34,8
+  ACC1: port 36,8.5
+  ACC2: port 34,9
+  ACC3: port 36,9.5
 wires:
-  - U3.VCC |- d8
-  - U3.GND |- l8
-  - U3.A0 -| f4
-  - U3.B0 -| f2f0
-  - U3.A1 -| g4
-  - U3.B1 -| g2f0
-  - U3.A2 -| h4
-  - U3.B2 -| h2f0
-  - U3.A3 -| i4
-  - U3.B3 -| i5f0
-  - U3.CIN -| j5
-  - U3.S0 -| f12f0
-  - f12f0 -| U4.1A
+  - U3.VCC |- 8,4
+  - U3.GND |- 8,12
+  - U3.A0 -| 4,6
+  - U3.B0 -| 2,6.5
+  - U3.A1 -| 4,7
+  - U3.B1 -| 2,7.5
+  - U3.A2 -| 4,8
+  - U3.B2 -| 2,8.5
+  - U3.A3 -| 4,9
+  - U3.B3 -| 5,9.5
+  - U3.CIN -| 5,10
+  - U3.S0 -| 12,6.5
+  - 12,6.5 -| U4.1A
   - U3.S1 -- U4.2A
-  - U3.S2 -| h13f0
-  - h13f0 -| U4.3A
-  - U3.S3 -| i11f0
-  - i11f0 -| U4.4A
-  - U4.VCC |- d20
-  - U4.GND |- m20
-  - U4.G |- m20
-  - U4.A/B -| f15
-  - U4.1B -| g16
-  - U4.2B -| h16
-  - U4.3B -| i16
-  - U4.4B -| j16
+  - U3.S2 -| 13,8.5
+  - 13,8.5 -| U4.3A
+  - U3.S3 -| 11,9.5
+  - 11,9.5 -| U4.4A
+  - U4.VCC |- 20,4
+  - U4.GND |- 20,13
+  - U4.G |- 20,13
+  - U4.A/B -| 15,6
+  - U4.1B -| 16,7
+  - U4.2B -| 16,8
+  - U4.3B -| 16,9
+  - U4.4B -| 16,10
   - U4.1Y -- U5.1D
   - U4.2Y -- U5.2D
   - U4.3Y -- U5.3D
   - U4.4Y -- U5.4D
-  - U5.5D -| i26f0
-  - U5.6D -| j26
-  - U5.7D -| j26f0
-  - U5.8D -| k26
-  - U5.CLK -| k26f0
-  - U5.VCC |- e30
-  - U5.GND |- m30
-  - U5.CLR |- f34
-  - U5.1Q -| h34
-  - U5.2Q -| h36f0
-  - U5.3Q -| i34
-  - U5.4Q -| i36f0
+  - U5.5D -| 26,9.5
+  - U5.6D -| 26,10
+  - U5.7D -| 26,10.5
+  - U5.8D -| 26,11
+  - U5.CLK -| 26,11.5
+  - U5.VCC |- 30,5
+  - U5.GND |- 30,13
+  - U5.CLR |- 34,6
+  - U5.1Q -| 34,8
+  - U5.2Q -| 36,8.5
+  - U5.3Q -| 34,9
+  - U5.4Q -| 36,9.5
 notes:
-  - text n2 small: "U3 の B3 と CIN は GND。operand は P0 から P2 の 3 ビット"
-  - text o2 small: "U4 は ADDn が 0 なら A (和)、1 なら B (今の ACC) を選ぶ"
+  - text 2,14 small: "U3 の B3 と CIN は GND。operand は P0 から P2 の 3 ビット"
+  - text 2,15 small: "U4 は ADDn が 0 なら A (和)、1 なら B (今の ACC) を選ぶ"
 style:
   grid: on
   pitch: 1.2
@@ -313,27 +313,27 @@ style:
 ```circuit
 title: 図4 ACC の表示 (LED 4 つ)
 parts:
-  ACC0: port b2
-  R21: resistor b3 b6 820
-  D21: led b6 b9 red
-  GA1: ground b9
-  ACC1: port d2
-  R22: resistor d3 d6 820
-  D22: led d6 d9 red
-  GA2: ground d9
-  ACC2: port f2
-  R23: resistor f3 f6 820
-  D23: led f6 f9 red
-  GA3: ground f9
-  ACC3: port h2
-  R24: resistor h3 h6 820
-  D24: led h6 h9 red
-  GA4: ground h9
+  ACC0: port 2,2
+  R21: resistor 3,2 6,2 820
+  D21: led 6,2 9,2 red
+  GA1: ground 9,2
+  ACC1: port 2,4
+  R22: resistor 3,4 6,4 820
+  D22: led 6,4 9,4 red
+  GA2: ground 9,4
+  ACC2: port 2,6
+  R23: resistor 3,6 6,6 820
+  D23: led 6,6 9,6 red
+  GA3: ground 9,6
+  ACC3: port 2,8
+  R24: resistor 3,8 6,8 820
+  D24: led 6,8 9,8 red
+  GA4: ground 9,8
 wires:
-  - b2 -- b3
-  - d2 -- d3
-  - f2 -- f3
-  - h2 -- h3
+  - 2,2 -- 3,2
+  - 2,4 -- 3,4
+  - 2,6 -- 3,6
+  - 2,8 -- 3,8
 style:
   grid: on
   pitch: 1.2

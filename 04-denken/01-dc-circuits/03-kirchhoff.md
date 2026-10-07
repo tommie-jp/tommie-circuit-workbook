@@ -30,18 +30,18 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  E1: battery a1 e1 5
-  R1: resistor a1 a3 400
-  A1: ammeter a3 a5
-  A3: ammeter a5 c5
-  R3: resistor c5 e5 100
-  A2: ammeter a5 a7
-  R2: resistor a7 a9 200
-  E2: battery a9 e9 3
-  G1: ground e5
+  E1: battery 1,1 1,5 5
+  R1: resistor 1,1 3,1 400
+  A1: ammeter 3,1 5,1
+  A3: ammeter 5,1 5,3
+  R3: resistor 5,3 5,5 100
+  A2: ammeter 5,1 7,1
+  R2: resistor 7,1 9,1 200
+  E2: battery 9,1 9,5 3
+  G1: ground 5,5
 wires:
-  - e1 -- e5
-  - e5 -- e9
+  - 1,5 -- 5,5
+  - 5,5 -- 9,5
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/03-kirchhoff.svg)

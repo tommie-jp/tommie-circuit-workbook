@@ -28,17 +28,17 @@ title: 図1 モータの端子電圧と電流
 style:
   standard: jis
 parts:
-  B1: battery c1 g1 4.5
-  Rs1: resistor c1 c3 10 i=I
-  M2: voltmeter a1 a3 l=$\mathrm{CH2}$
-  M3: voltmeter c3 g3 l=$\mathrm{CH1}$
-  M1: motor c6 g6
-  G1: ground g1
+  B1: battery 1,3 1,7 4.5
+  Rs1: resistor 1,3 3,3 10 i=I
+  M2: voltmeter 1,1 3,1 l=$\mathrm{CH2}$
+  M3: voltmeter 3,3 3,7 l=$\mathrm{CH1}$
+  M1: motor 6,3 6,7
+  G1: ground 1,7
 wires:
-  - a1 -- c1
-  - a3 -- c3
-  - c3 -- c6
-  - g1 -- g3 -- g6
+  - 1,1 -- 1,3
+  - 3,1 -- 3,3
+  - 3,3 -- 6,3
+  - 1,7 -- 3,7 -- 6,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/01-back-emf-1.svg)
@@ -119,16 +119,16 @@ style:
   standard: jis
   pitch: 1.2
 parts:
-  B1: battery c1 g1 4.5
-  M1: motor c4 e4
-  Rs1: resistor e4 g4 10 i=I
-  M2: voltmeter e6 g6 l=$\mathrm{CH2}$
-  M3: voltmeter c8 g8 l=$\mathrm{CH1}$
-  G1: ground g1
+  B1: battery 1,3 1,7 4.5
+  M1: motor 4,3 4,5
+  Rs1: resistor 4,5 4,7 10 i=I
+  M2: voltmeter 6,5 6,7 l=$\mathrm{CH2}$
+  M3: voltmeter 8,3 8,7 l=$\mathrm{CH1}$
+  G1: ground 1,7
 wires:
-  - c1 -- c4 -- c8
-  - e4 -- e6
-  - g1 -- g4 -- g6 -- g8
+  - 1,3 -- 4,3 -- 8,3
+  - 4,5 -- 6,5
+  - 1,7 -- 4,7 -- 6,7 -- 8,7
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/circuit/01-back-emf-2.svg)

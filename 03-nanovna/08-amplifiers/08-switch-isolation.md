@@ -44,31 +44,31 @@ USB の 5 V から SW1 で入れる。D1 (1N4148) はコイルを切ったとき
 ```circuit
 title: 図1 G5V-2 の 1 回路目で通し、2 回路目で出口を GND へ
 parts:
-  J1: sma e2 mirror CH0
-  K1: relay e6 r90
-  J2: sma e11 CH1
-  D1: diode a4 a7 1N4148
-  SW1: switch b7 b9 l=$\mathrm{SW1}$
-  BAT: battery b11 d11 5 l=$\mathrm{BAT}$
-  GJ1: ground f2
-  GA2: ground c4
-  GCOM2: ground f5
-  GBAT: ground d11
-  GJ2: ground f11
+  J1: sma 2,5 mirror CH0
+  K1: relay 6,5 r90
+  J2: sma 11,5 CH1
+  D1: diode 4,1 7,1 1N4148
+  SW1: switch 7,2 9,2 l=$\mathrm{SW1}$
+  BAT: battery 11,2 11,4 5 l=$\mathrm{BAT}$
+  GJ1: ground 2,6
+  GA2: ground 4,3
+  GCOM2: ground 5,6
+  GBAT: ground 11,4
+  GJ2: ground 11,6
 wires:
   - J1.1 -| K1.COM1
-  - J1.2 -- f2
-  - K1.NO1 -| e9
-  - e9 -- e11 -- J2.1
-  - J2.2 -- f11
-  - K1.NC2 -| e9
-  - K1.COM2 -| f5
-  - K1.A2 |- b4
-  - b4 -- c4
-  - b4 -- a4
-  - K1.A1 |- b7
-  - b7 -- a7
-  - b9 -- b11
+  - J1.2 -- 2,6
+  - K1.NO1 -| 9,5
+  - 9,5 -- 11,5 -- J2.1
+  - J2.2 -- 11,6
+  - K1.NC2 -| 9,5
+  - K1.COM2 -| 5,6
+  - K1.A2 |- 4,2
+  - 4,2 -- 4,3
+  - 4,2 -- 4,1
+  - K1.A1 |- 7,2
+  - 7,2 -- 7,1
+  - 9,2 -- 11,2
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/circuit/08-switch-isolation.svg)

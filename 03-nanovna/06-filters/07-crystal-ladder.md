@@ -48,24 +48,24 @@ Co = 4 pF、fs = 10.002 MHz) とする (**仮定**。実物の値は 4-6 の方�
 ```circuit
 title: 図1 水晶 3 個のラダーフィルタ (10 MHz、CW 用の幅)
 parts:
-  J1: sma b2 mirror CH0
-  X1: crystal b3 b5 10M
-  C1: capacitor b6 d6 220p
-  X2: crystal b7 b9 10M
-  C2: capacitor b10 d10 220p
-  X3: crystal b11 b13 10M
-  J2: sma b15 CH1
-  G1: ground c2
-  G2: ground d6
-  G3: ground d10
-  G4: ground c15
+  J1: sma 2,2 mirror CH0
+  X1: crystal 3,2 5,2 10M
+  C1: capacitor 6,2 6,4 220p
+  X2: crystal 7,2 9,2 10M
+  C2: capacitor 10,2 10,4 220p
+  X3: crystal 11,2 13,2 10M
+  J2: sma 15,2 CH1
+  G1: ground 2,3
+  G2: ground 6,4
+  G3: ground 10,4
+  G4: ground 15,3
 wires:
-  - J1.1 -- b3
-  - b5 -- b6 -- b7
-  - b9 -- b10 -- b11
-  - b13 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c15
+  - J1.1 -- 3,2
+  - 5,2 -- 6,2 -- 7,2
+  - 9,2 -- 10,2 -- 11,2
+  - 13,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 15,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/07-crystal-ladder.svg)

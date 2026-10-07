@@ -21,23 +21,23 @@ NTC サーミスタは、温度が上がるほど抵抗が下がる素子。CdS 
 ```circuit
 title: 図1 サーミスタが温まるとブザーが鳴る
 parts:
-  VCC: vcc b2 5V
-  TH1: thermistor-ntc b2 d2 10k l=$\mathrm{TH1}$
-  R1: resistor d2 f2 2.2k
-  G1: ground f2
-  Q1: npn d4 2SC1815
-  R2: resistor f4 h4 100k
-  G2: ground h4
-  Q2: npn f6 2SC1815
-  BZ1: buzzer b6 d6 l=$\mathrm{BZ1}$
-  G3: ground h6
+  VCC: vcc 2,2 5V
+  TH1: thermistor-ntc 2,2 2,4 10k l=$\mathrm{TH1}$
+  R1: resistor 2,4 2,6 2.2k
+  G1: ground 2,6
+  Q1: npn 4,4 2SC1815
+  R2: resistor 4,6 4,8 100k
+  G2: ground 4,8
+  Q2: npn 6,6 2SC1815
+  BZ1: buzzer 6,2 6,4 l=$\mathrm{BZ1}$
+  G3: ground 6,8
 wires:
-  - b2 -- b4 -- b6
-  - b4 -- Q1.C
-  - d2 -- Q1.B
-  - Q1.E -- f4 -- Q2.B
-  - d6 -- Q2.C
-  - Q2.E -- h6
+  - 2,2 -- 4,2 -- 6,2
+  - 4,2 -- Q1.C
+  - 2,4 -- Q1.B
+  - Q1.E -- 4,6 -- Q2.B
+  - 6,4 -- Q2.C
+  - Q2.E -- 6,8
 style:
   grid: on
   pitch: 1.2

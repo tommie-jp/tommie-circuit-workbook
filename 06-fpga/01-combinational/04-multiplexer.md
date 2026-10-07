@@ -30,31 +30,31 @@ device: SIM
 ```circuit
 title: 図1 1 ビットのマルチプレクサ (sel が 1 なら b、0 なら a)
 parts:
-  sel: port b1
-  a: port f1
-  b: port m1
-  G1: not b6
-  G2: and f12
-  G3: and k12
-  G4: or h19
-  y: port h24
+  sel: port 1,2
+  a: port 1,6
+  b: port 1,13
+  G1: not 6,2
+  G2: and 12,6
+  G3: and 12,11
+  G4: or 19,8
+  y: port 24,8
 wires:
-  - b1 -- b4
-  - b4 -- j4
-  - b4 -- G1.in
-  - j4 |- G3.a
-  - G1.out -- b9
-  - b9 -- d9
-  - d9 |- G2.b
-  - f1 -- f3
-  - f3 |- G2.a
-  - m1 -- m3
-  - m3 |- G3.b
-  - G2.out -- f16
-  - f16 |- G4.a
-  - G3.out -- k16
-  - k16 |- G4.b
-  - G4.out -- h24
+  - 1,2 -- 4,2
+  - 4,2 -- 4,10
+  - 4,2 -- G1.in
+  - 4,10 |- G3.a
+  - G1.out -- 9,2
+  - 9,2 -- 9,4
+  - 9,4 |- G2.b
+  - 1,6 -- 3,6
+  - 3,6 |- G2.a
+  - 1,13 -- 3,13
+  - 3,13 |- G3.b
+  - G2.out -- 16,6
+  - 16,6 |- G4.a
+  - G3.out -- 16,11
+  - 16,11 |- G4.b
+  - G4.out -- 24,8
 style:
   grid: off
   pitch: 1.2

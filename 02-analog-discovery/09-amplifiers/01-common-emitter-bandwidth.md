@@ -21,28 +21,28 @@ title: 図1 エミッタ接地増幅回路
 parts:
   AD:
     type: device
-    at: a1
+    at: 1,1
     label: Analog Discovery
     pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
-  Q1: npn f11 2SC1815
-  R1: resistor c9 f9 39k
-  R2: resistor f9 i9 12k
-  Rc: resistor c14 f14 1k
-  Re: resistor f17 i17 220
-  Cin: capacitor f3 f9 1u
+  Q1: npn 11,6 2SC1815
+  R1: resistor 9,3 9,6 39k
+  R2: resistor 9,6 9,9 12k
+  Rc: resistor 14,3 14,6 1k
+  Re: resistor 17,6 17,9 220
+  Cin: capacitor 3,6 9,6 1u
 wires:
-  - AD.V+ -| c9
-  - AD.V+ -| c14
-  - AD.W1 -| f3
-  - AD.1+ -| f3
-  - f9 |- Q1.B
-  - f14 |- Q1.C
-  - f17 -- f15 -- g15 -- g11 -- Q1.E
-  - AD.2+ -| e20 -| f14
-  - AD.1- |- i9
-  - AD.2- |- i9
-  - AD.GND |- i9
-  - i9 -- i17
+  - AD.V+ -| 9,3
+  - AD.V+ -| 14,3
+  - AD.W1 -| 3,6
+  - AD.1+ -| 3,6
+  - 9,6 |- Q1.B
+  - 14,6 |- Q1.C
+  - 17,6 -- 15,6 -- 15,7 -- 11,7 -- Q1.E
+  - AD.2+ -| 20,5 -| 14,6
+  - AD.1- |- 9,9
+  - AD.2- |- 9,9
+  - AD.GND |- 9,9
+  - 9,9 -- 17,9
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/circuit/01-common-emitter-bandwidth.svg)

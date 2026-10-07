@@ -88,37 +88,37 @@ CPU は計算の途中の値を**レジスタ**に覚えておく。レジスタ
 ```circuit
 title: 図1 入力のスイッチ (書き込む値 IN0 から IN3 と LOAD)
 parts:
-  VCC: vcc b2 5V
-  SI0: switch b2 b5 l=$\mathrm{SW1}_1$
-  R1: resistor b5 c5 10k
-  G1: ground c5
-  IN0: port b9
-  VCC: vcc d2 5V
-  SI1: switch d2 d5 l=$\mathrm{SW1}_2$
-  R2: resistor d5 e5 10k
-  G2: ground e5
-  IN1: port d9
-  VCC: vcc f2 5V
-  SI2: switch f2 f5 l=$\mathrm{SW1}_3$
-  R3: resistor f5 g5 10k
-  G3: ground g5
-  IN2: port f9
-  VCC: vcc h2 5V
-  SI3: switch h2 h5 l=$\mathrm{SW1}_4$
-  R4: resistor h5 i5 10k
-  G4: ground i5
-  IN3: port h9
-  VCC: vcc j2 5V
-  SL: switch j2 j5 l=$\mathrm{SW2}_1$
-  R5: resistor j5 k5 10k
-  G5: ground k5
-  LOAD: port j9
+  VCC: vcc 2,2 5V
+  SI0: switch 2,2 5,2 l=$\mathrm{SW1}_1$
+  R1: resistor 5,2 5,3 10k
+  G1: ground 5,3
+  IN0: port 9,2
+  VCC: vcc 2,4 5V
+  SI1: switch 2,4 5,4 l=$\mathrm{SW1}_2$
+  R2: resistor 5,4 5,5 10k
+  G2: ground 5,5
+  IN1: port 9,4
+  VCC: vcc 2,6 5V
+  SI2: switch 2,6 5,6 l=$\mathrm{SW1}_3$
+  R3: resistor 5,6 5,7 10k
+  G3: ground 5,7
+  IN2: port 9,6
+  VCC: vcc 2,8 5V
+  SI3: switch 2,8 5,8 l=$\mathrm{SW1}_4$
+  R4: resistor 5,8 5,9 10k
+  G4: ground 5,9
+  IN3: port 9,8
+  VCC: vcc 2,10 5V
+  SL: switch 2,10 5,10 l=$\mathrm{SW2}_1$
+  R5: resistor 5,10 5,11 10k
+  G5: ground 5,11
+  LOAD: port 9,10
 wires:
-  - b5 -- b9
-  - d5 -- d9
-  - f5 -- f9
-  - h5 -- h9
-  - j5 -- j9
+  - 5,2 -- 9,2
+  - 5,4 -- 9,4
+  - 5,6 -- 9,6
+  - 5,8 -- 9,8
+  - 5,10 -- 9,10
 style:
   grid: on
   pitch: 1.2
@@ -132,65 +132,65 @@ style:
 ```circuit
 title: 図2 74HC157 で新しい値か今の値を選び、74HC273 で覚える
 parts:
-  U2: ic h12 74HC157
-  VCC: vcc d12 5V
-  GU2: ground m12
-  LOAD: port f8
-  Q0: port f7f0
-  IN0: port g8
-  Q1: port g7f0
-  IN1: port h8
-  Q2: port h7f0
-  IN2: port i8
-  Q3: port i7f0
-  IN3: port j8
-  U1: ic i22f0 74HC273
-  VCC: vcc e22 5V
-  GU1: ground m22
-  GD5: ground i18f0 r90
-  GD6: ground j18 r90
-  GD7: ground j18f0 r90
-  GD8: ground k18 r90
-  CLK: port k18f0
-  VCC: vcc d26 5V
-  R6: resistor d26 f26 10k
-  S1: button f26 f29
-  GS: ground f29
-  Q0: port h26
-  Q1: port h28f0
-  Q2: port i26
-  Q3: port i28f0
+  U2: ic 12,8 74HC157
+  VCC: vcc 12,4 5V
+  GU2: ground 12,13
+  LOAD: port 8,6
+  Q0: port 7,6.5
+  IN0: port 8,7
+  Q1: port 7,7.5
+  IN1: port 8,8
+  Q2: port 7,8.5
+  IN2: port 8,9
+  Q3: port 7,9.5
+  IN3: port 8,10
+  U1: ic 22,9.5 74HC273
+  VCC: vcc 22,5 5V
+  GU1: ground 22,13
+  GD5: ground 18,9.5 r90
+  GD6: ground 18,10 r90
+  GD7: ground 18,10.5 r90
+  GD8: ground 18,11 r90
+  CLK: port 18,11.5
+  VCC: vcc 26,4 5V
+  R6: resistor 26,4 26,6 10k
+  S1: button 26,6 29,6
+  GS: ground 29,6
+  Q0: port 26,8
+  Q1: port 28,8.5
+  Q2: port 26,9
+  Q3: port 28,9.5
 wires:
-  - U2.VCC |- d12
-  - U2.GND |- m12
-  - U2.G |- m12
-  - U2.A/B -| f8
-  - U2.1A -| f7f0
-  - U2.1B -| g8
-  - U2.2A -| g7f0
-  - U2.2B -| h8
-  - U2.3A -| h7f0
-  - U2.3B -| i8
-  - U2.4A -| i7f0
-  - U2.4B -| j8
+  - U2.VCC |- 12,4
+  - U2.GND |- 12,13
+  - U2.G |- 12,13
+  - U2.A/B -| 8,6
+  - U2.1A -| 7,6.5
+  - U2.1B -| 8,7
+  - U2.2A -| 7,7.5
+  - U2.2B -| 8,8
+  - U2.3A -| 7,8.5
+  - U2.3B -| 8,9
+  - U2.4A -| 7,9.5
+  - U2.4B -| 8,10
   - U2.1Y -- U1.1D
   - U2.2Y -- U1.2D
   - U2.3Y -- U1.3D
   - U2.4Y -- U1.4D
-  - U1.5D -| i18f0
-  - U1.6D -| j18
-  - U1.7D -| j18f0
-  - U1.8D -| k18
-  - U1.CLK -| k18f0
-  - U1.VCC |- e22
-  - U1.GND |- m22
-  - U1.CLR |- f26
-  - U1.1Q -| h26
-  - U1.2Q -| h28f0
-  - U1.3Q -| i26
-  - U1.4Q -| i28f0
+  - U1.5D -| 18,9.5
+  - U1.6D -| 18,10
+  - U1.7D -| 18,10.5
+  - U1.8D -| 18,11
+  - U1.CLK -| 18,11.5
+  - U1.VCC |- 22,5
+  - U1.GND |- 22,13
+  - U1.CLR |- 26,6
+  - U1.1Q -| 26,8
+  - U1.2Q -| 28,8.5
+  - U1.3Q -| 26,9
+  - U1.4Q -| 28,9.5
 notes:
-  - text n2 small: "LOAD が 0 なら A (今の値 Q)、1 なら B (新しい値 IN) を選ぶ"
+  - text 2,14 small: "LOAD が 0 なら A (今の値 Q)、1 なら B (新しい値 IN) を選ぶ"
 style:
   grid: on
   pitch: 1.2
@@ -209,27 +209,27 @@ style:
 ```circuit
 title: 図3 覚えた値の表示 (LED 4 つ)
 parts:
-  Q0: port b2
-  R7: resistor b3 b6 820
-  D1: led b6 b9 red
-  GD1: ground b9
-  Q1: port d2
-  R8: resistor d3 d6 820
-  D2: led d6 d9 red
-  GD2: ground d9
-  Q2: port f2
-  R9: resistor f3 f6 820
-  D3: led f6 f9 red
-  GD3: ground f9
-  Q3: port h2
-  R10: resistor h3 h6 820
-  D4: led h6 h9 red
-  GD4: ground h9
+  Q0: port 2,2
+  R7: resistor 3,2 6,2 820
+  D1: led 6,2 9,2 red
+  GD1: ground 9,2
+  Q1: port 2,4
+  R8: resistor 3,4 6,4 820
+  D2: led 6,4 9,4 red
+  GD2: ground 9,4
+  Q2: port 2,6
+  R9: resistor 3,6 6,6 820
+  D3: led 6,6 9,6 red
+  GD3: ground 9,6
+  Q3: port 2,8
+  R10: resistor 3,8 6,8 820
+  D4: led 6,8 9,8 red
+  GD4: ground 9,8
 wires:
-  - b2 -- b3
-  - d2 -- d3
-  - f2 -- f3
-  - h2 -- h3
+  - 2,2 -- 3,2
+  - 2,4 -- 3,4
+  - 2,6 -- 3,6
+  - 2,8 -- 3,8
 style:
   grid: on
   pitch: 1.2

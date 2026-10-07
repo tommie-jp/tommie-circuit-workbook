@@ -30,32 +30,32 @@ board: BB
 ```circuit
 title: 図1 三相の信号を作る
 parts:
-  V1: sine c1 e1 1 l=$\mathrm{W1}$
-  G1: ground e1
-  V2: sine i1 k1 1 l=$\mathrm{W2}$
-  G2: ground k1
-  R1: resistor c3 e3 10k
-  R2: resistor i4 g4 10k
-  U1: opamp f8 +down TL071
-  G3: ground g6
-  Rf: resistor d7 d10 10k
-  P1: port c14
-  P3: port f14
-  P2: port i14
+  V1: sine 1,3 1,5 1 l=$\mathrm{W1}$
+  G1: ground 1,5
+  V2: sine 1,9 1,11 1 l=$\mathrm{W2}$
+  G2: ground 1,11
+  R1: resistor 3,3 3,5 10k
+  R2: resistor 4,9 4,7 10k
+  U1: opamp 8,6 +down TL071
+  G3: ground 6,7
+  Rf: resistor 7,4 10,4 10k
+  P1: port 14,3
+  P3: port 14,6
+  P2: port 14,9
 wires:
-  - e3 -- e4 -- e7
-  - e4 -- g4
-  - d7 -- e7
-  - e7 |- U1.-
-  - g6 |- U1.+
-  - d10 -- f10
-  - c1 -- c3 -- c14
-  - i1 -- i4 -- i14
-  - U1.out -- f10 -- f14
+  - 3,5 -- 4,5 -- 7,5
+  - 4,5 -- 4,7
+  - 7,4 -- 7,5
+  - 7,5 |- U1.-
+  - 6,7 |- U1.+
+  - 10,4 -- 10,6
+  - 1,3 -- 3,3 -- 14,3
+  - 1,9 -- 4,9 -- 14,9
+  - U1.out -- 10,6 -- 14,6
 notes:
-  - text b12: 1 相目
-  - text g12: 3 相目
-  - text h12: 2 相目
+  - text 12,2: 1 相目
+  - text 12,7: 3 相目
+  - text 12,8: 2 相目
 style:
   standard: jis
   pitch: 1.2

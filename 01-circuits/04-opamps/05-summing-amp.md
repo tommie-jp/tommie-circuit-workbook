@@ -21,28 +21,28 @@ title: 図1 加算アンプ
 parts:
   VP: vsource vp mid 5
   VN: vsource mid vm 5
-  G1: ground c2
-  V1: sine b3 d3 0.2
-  G2: ground d3
-  V2: sine d4 f4 0.1
-  G3: ground f4
-  R1: resistor b3 b6 10k
-  R2: resistor d4 d6 10k
-  Rf: resistor a6 a9 10k
-  U1: opamp c8c0b0 +down
-  G4: ground d7
-  OUT: port c10c0b0
+  G1: ground 2,3
+  V1: sine 3,2 3,4 0.2
+  G2: ground 3,4
+  V2: sine 4,4 4,6 0.1
+  G3: ground 4,6
+  R1: resistor 3,2 6,2 10k
+  R2: resistor 4,4 6,4 10k
+  Rf: resistor 6,1 9,1 10k
+  U1: opamp 8,3.21 +down
+  G4: ground 7,4
+  OUT: port 10,3.21
 points:
-  vp: a1
-  vm: e1
-  mid: c1
+  vp: 1,1
+  vm: 1,5
+  mid: 1,3
 wires:
-  - mid -- c2
-  - a6 -- b6 -- c6 -- d6
-  - c6 -| U1.-
-  - d7 |- U1.+
-  - a9 -- c9c0b0
-  - U1.out -- c9c0b0 -- c10c0b0
+  - mid -- 2,3
+  - 6,1 -- 6,2 -- 6,3 -- 6,4
+  - 6,3 -| U1.-
+  - 7,4 |- U1.+
+  - 9,1 -- 9,3.21
+  - U1.out -- 9,3.21 -- 10,3.21
 style:
   grid: on
 ```

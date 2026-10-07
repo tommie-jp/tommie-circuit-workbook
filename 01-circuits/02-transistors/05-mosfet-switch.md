@@ -26,26 +26,26 @@ MOSFET はゲートに電圧をかけるだけでオン・オフするスイッ�
 ```circuit
 title: 図1 2N7000 でスイッチする (CH2 でゲート、CH1 でドレインを見る)
 parts:
-  VCC: vcc b4 5V
-  R1: resistor b7 d7 330
-  D1: led d7 e7
-  Q1: nmos-e e7i0
-  SW: switch b4 d4
-  RG: resistor d4 f4 220
-  RPD: resistor f4 h4 100k
-  G2: ground h4
-  G3: ground g7
-  M2: voltmeter f2 h2 l=$\mathrm{CH2}$
-  G4: ground h2
-  M1: voltmeter e10 g10 l=$\mathrm{CH1}$
-  G5: ground g10
+  VCC: vcc 4,2 5V
+  R1: resistor 7,2 7,4 330
+  D1: led 7,4 7,5
+  Q1: nmos-e 7,5.8
+  SW: switch 4,2 4,4
+  RG: resistor 4,4 4,6 220
+  RPD: resistor 4,6 4,8 100k
+  G2: ground 4,8
+  G3: ground 7,7
+  M2: voltmeter 2,6 2,8 l=$\mathrm{CH2}$
+  G4: ground 2,8
+  M1: voltmeter 10,5 10,7 l=$\mathrm{CH1}$
+  G5: ground 10,7
 wires:
-  - b4 -- b7
-  - f2 -- f4
-  - e7 -- e10
-  - e7 -- Q1.D
-  - f4 |- Q1.G
-  - Q1.S -- g7
+  - 4,2 -- 7,2
+  - 2,6 -- 4,6
+  - 7,5 -- 10,5
+  - 7,5 -- Q1.D
+  - 4,6 |- Q1.G
+  - Q1.S -- 7,7
 style:
   grid: on
   pitch: 1.2

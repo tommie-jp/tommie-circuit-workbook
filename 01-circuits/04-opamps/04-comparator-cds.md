@@ -23,28 +23,28 @@ parts:
   VP: vsource vp mid 5
   VN: vsource mid vm 5
   G1: ground mid
-  CDS1: photoresistor a4 c4 l=$\mathrm{CDS1}$
-  RFIX: resistor d4 f4 10k
-  VR1: potentiometer a6 c6 10k l=$\mathrm{VR1}$
-  U1: opamp c9 +up
-  R1: resistor c10a5 c12a5 220
-  D1: led c12a5 e12a5 red
-  DP: diode e15a5 c15a5 1N4148
-  GD1: ground e12a5
+  CDS1: photoresistor 4,1 4,3 l=$\mathrm{CDS1}$
+  RFIX: resistor 4,4 4,6 10k
+  VR1: potentiometer 6,1 6,3 10k l=$\mathrm{VR1}$
+  U1: opamp 9,3 +up
+  R1: resistor 10.5,3 12.5,3 220
+  D1: led 12.5,3 12.5,5 red
+  DP: diode 15.5,5 15.5,3 1N4148
+  GD1: ground 12.5,5
 points:
-  vp: a2
-  vm: f2
-  mid: c2
+  vp: 2,1
+  vm: 2,6
+  mid: 2,3
 wires:
-  - vp -- a4 -- a6
-  - vm -- f4 -- f6
-  - c4 -- d4
-  - c6 -- f6
+  - vp -- 4,1 -- 6,1
+  - vm -- 4,6 -- 6,6
+  - 4,3 -- 4,4
+  - 6,3 -- 6,6
   - VR1.w |- U1.+
-  - d4 -- d7a5 |- U1.-
-  - U1.out -| c10a5
-  - c12a5 -- c15a5
-  - e12a5 -- e15a5
+  - 4,4 -- 7.5,4 |- U1.-
+  - U1.out -| 10.5,3
+  - 12.5,3 -- 15.5,3
+  - 12.5,5 -- 15.5,5
 style:
   grid: on
   pitch: 1.2

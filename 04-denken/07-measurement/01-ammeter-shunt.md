@@ -28,16 +28,16 @@ board: BB
 ```circuit
 title: 図1 分流器
 parts:
-  V1: vsource a1 c1 5
-  Rt: resistor a1 a5 1k i=Itot
-  Rg: resistor a5 a8 100 i=Ig
-  G1: galvanometer a8 c8
-  Rs: resistor a5 c5 50 i=Is
-  G2: ground c1
+  V1: vsource 1,1 1,3 5
+  Rt: resistor 1,1 5,1 1k i=Itot
+  Rg: resistor 5,1 8,1 100 i=Ig
+  G1: galvanometer 8,1 8,3
+  Rs: resistor 5,1 5,3 50 i=Is
+  G2: ground 1,3
 wires:
-  - c1 -- c5 -- c8
+  - 1,3 -- 5,3 -- 8,3
 notes:
-  - text b5e2 left small: (100 Ω を 2 本並列)
+  - text 5.2,2.4 left small: (100 Ω を 2 本並列)
 style:
   standard: jis
 ```
@@ -107,20 +107,20 @@ AD の CH2 は Rt の両端を差動で挟んでいる。汎用オシロのグ�
 ```circuit
 title: 図3 汎用オシロでの測り方
 parts:
-  V1: vsource b2 d2 5
-  M2: voltmeter b4 d4 l=$\mathrm{CH2}$
-  Rt: resistor b4 b7 1k i=Itot
-  M1: voltmeter b8 d8 l=$\mathrm{CH1}$
-  Rs: resistor b10 d10 50 i=Is
-  Rg: resistor b10 b13 100 i=Ig
-  G1: galvanometer b13 d13
-  G2: ground d2
+  V1: vsource 2,2 2,4 5
+  M2: voltmeter 4,2 4,4 l=$\mathrm{CH2}$
+  Rt: resistor 4,2 7,2 1k i=Itot
+  M1: voltmeter 8,2 8,4 l=$\mathrm{CH1}$
+  Rs: resistor 10,2 10,4 50 i=Is
+  Rg: resistor 10,2 13,2 100 i=Ig
+  G1: galvanometer 13,2 13,4
+  G2: ground 2,4
 wires:
-  - b2 -- b4
-  - b7 -- b8 -- b10
-  - d2 -- d4 -- d8 -- d10 -- d13
+  - 2,2 -- 4,2
+  - 7,2 -- 8,2 -- 10,2
+  - 2,4 -- 4,4 -- 8,4 -- 10,4 -- 13,4
 notes:
-  - text c10e2 left small: (100 Ω を 2 本並列)
+  - text 10.2,3.4 left small: (100 Ω を 2 本並列)
 style:
   standard: jis
 ```

@@ -29,20 +29,20 @@ E24 系列に丸めると **R_shunt = 100 Ω、R_series = 68 Ω**。
 ```circuit
 title: 図1 パイ型 10 dB アッテネータ
 parts:
-  J1: sma b2 mirror CH0
-  R1: resistor b4 d4 100
-  R2: resistor b4 b6 68
-  R3: resistor b6 d6 100
-  J2: sma b8 CH1
-  G1: ground c2
-  G2: ground d4
-  G3: ground d6
-  G4: ground c8
+  J1: sma 2,2 mirror CH0
+  R1: resistor 4,2 4,4 100
+  R2: resistor 4,2 6,2 68
+  R3: resistor 6,2 6,4 100
+  J2: sma 8,2 CH1
+  G1: ground 2,3
+  G2: ground 4,4
+  G3: ground 6,4
+  G4: ground 8,3
 wires:
-  - J1.1 -- b4
-  - b6 -- J2.1
-  - J1.2 -- c2
-  - J2.2 -- c8
+  - J1.1 -- 4,2
+  - 6,2 -- J2.1
+  - J1.2 -- 2,3
+  - J2.2 -- 8,3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/circuit/03-attenuator-s-parameters.svg)

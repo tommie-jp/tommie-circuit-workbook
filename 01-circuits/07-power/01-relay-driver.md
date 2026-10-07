@@ -22,32 +22,32 @@ board: BB
 ```circuit
 title: 図1 トランジスタでリレーを駆動する (IN は AD の W1、CH1 は IN、CH2 はコレクタ)
 parts:
-  VCC: vcc b5 5V
-  D1:  diode f3 c3 1N4148
-  K1:  relay e5a8a8 r180 mirror G5V-2
-  Q1:  npn h5
-  R1:  resistor h2 h4 1k
-  IN:  port h2
-  G1:  ground i5
-  R2:  resistor g7 g9 330
-  D2:  led g9 g11
-  G2:  ground h11
-  M1:  voltmeter i2 k2 l=$\mathrm{CH1}$
-  G3:  ground k2
-  M2:  voltmeter f1 i1 l=$\mathrm{CH2}$
-  G4:  ground i1
+  VCC: vcc 5,2 5V
+  D1:  diode 3,6 3,3 1N4148
+  K1:  relay 5.88,5 r180 mirror G5V-2
+  Q1:  npn 5,8
+  R1:  resistor 2,8 4,8 1k
+  IN:  port 2,8
+  G1:  ground 5,9
+  R2:  resistor 7,7 9,7 330
+  D2:  led 9,7 11,7
+  G2:  ground 11,8
+  M1:  voltmeter 2,9 2,11 l=$\mathrm{CH1}$
+  G3:  ground 2,11
+  M2:  voltmeter 1,6 1,9 l=$\mathrm{CH2}$
+  G4:  ground 1,9
 wires:
-  - b5 -- c5 -- c3
-  - K1.A2 |- c5
-  - K1.A1 |- f5
-  - f3 -- f5 -- Q1.C
-  - h4 -- Q1.B
-  - Q1.E -- i5
-  - K1.COM1 |- c5
-  - K1.NO1 |- g7
-  - g11 -- h11
-  - h2 -- i2
-  - f3 -- f1
+  - 5,2 -- 5,3 -- 3,3
+  - K1.A2 |- 5,3
+  - K1.A1 |- 5,6
+  - 3,6 -- 5,6 -- Q1.C
+  - 4,8 -- Q1.B
+  - Q1.E -- 5,9
+  - K1.COM1 |- 5,3
+  - K1.NO1 |- 7,7
+  - 11,7 -- 11,8
+  - 2,8 -- 2,9
+  - 3,6 -- 1,6
 style:
   grid: on
   pitch: 1.2
