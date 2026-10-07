@@ -346,19 +346,19 @@ parts:
     at: top
     label: 電源 5V
     pins: [+5V, GND]
-  AD:
-    type: device
-    at: top
-    label: Analog Discovery
-    pins: [GND, W1]
   BAR:
     type: device
     at: top
     label: バーアンテナ T1
     pins: [A1, A2, B2, B1]
+  AD:
+    type: device
+    at: bottom
+    label: Analog Discovery
+    pins: [GND, W1]
   VC1:
     type: device
-    at: top
+    at: bottom
     label: 2連バリコン VC1
     pins: [A, E, B]
   NEXT:
@@ -366,28 +366,29 @@ parts:
     at: bottom
     label: 図5 の基板へ
     pins: [IF, IFB]
-  Cw: capacitor/ceramic d1 d4 10p
+  Cw: capacitor/ceramic h2 h4 10p
   R1: resistor b7 b9 33k
   Q1: transistor c11(B) c12(C) c13(E) 2SC1815
   R2: resistor g7 g5 10k
-  Cb: capacitor/ceramic i7 i5 0.01u
+  Cb: capacitor/ceramic i7 i5 0.01u cap=right
   Re: resistor g13 g15 1k
   Cc2: capacitor/ceramic i13 i17 0.01u
   T2: transformer h17(A2) h18(A1) h19(B1) h20(B2)
-  Cp: capacitor/ceramic b20 b22 270p
+  Cp: capacitor/ceramic g20 g22 270p cap=above
   T3: transformer h23(A2) h24(A1) h25(B1) h26(B2)
 wires:
   - PWR.+5V -- +t1 red
   - PWR.GND -- -t2 black
-  - AD.GND -- -t3 black
-  - AD.W1 -- a1 green
-  - BAR.A1 -- b4 yellow
+  - AD.GND -- -b1 black
+  - AD.W1 -- j2 green
+  - BAR.A1 -- a4 yellow
   - BAR.A2 -- -t5 black
   - BAR.B2 -- a7 yellow
   - BAR.B1 -- a11 yellow
-  - VC1.A -- a4 yellow
-  - VC1.E -- -t6 black
-  - VC1.B -- a22 yellow
+  - e4 -- f4 yellow
+  - VC1.A -- j4 yellow
+  - VC1.E -- -b9 black
+  - VC1.B -- j22 yellow
   - +t9 -- a9 red
   - e7 -- f7 orange
   - -b5 -- j5 black
@@ -395,7 +396,6 @@ wires:
   - -b15 -- j15 black
   - +b18 -- j18 red
   - +b19 -- j19 red
-  - e20 -- f20 orange
   - i20 -- i23 blue
   - d19 -- d24 orange
   - b12 -- b19 orange
@@ -409,10 +409,11 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/10-superheterodyne-1.svg)
 
 - 上のブロックが Q1 のベース側、下のブロックがエミッタと局発。Q1 は c 行 (11 列 B・12 列 C・13 列 E)
-- 4 列にアンテナの同調 (Cw の右端 d4・VC1 の A・バーアンテナの A1)。W1 は 1 列 (a1) から Cw (10pF) を通して入る
+- 4 列にアンテナの同調 (バーアンテナの A1 を `a4`)。e4–f4 の黄色の線で下の 4 列へ渡し、VC1 の A (`j4`) と Cw の右端 (h4) をつなぐ。
+  W1 は下の 2 列 (`j2`) から Cw (10pF、h2〜h4) を通して入る。Analog Discovery と VC1 は下に置き、GND と VC1 の E は下の − レールへ
 - 7 列がベースのバイアス (R1 は 9 列の +5V へ、R2・Cb は e7–f7 の線で下の 7 列へ渡して 5 列の GND へ)
 - エミッタ (13 列) は e13–f13 で下へ。Re は 15 列の GND へ、Cc2 は 17 列の T2 の A2 (局発コイルの帰還の巻線) へ
-- T2 は h17〜h20 (A2・A1・B1・B2)。A1・B1 (18・19 列) を +5V へ。B2 (20 列) は e20–f20 で上へ渡して Cp (b20〜b22) から VC1 の B へ、
+- T2 は h17〜h20 (A2・A1・B1・B2)。A1・B1 (18・19 列) を +5V へ。B2 (20 列) は Cp (g20〜g22) を通して VC1 の B (`j22`) へ、
   i20–i23 の青い線で T3 の A2 へ
 - コレクタ (12 列) は b12–b19・d19–d24・e24–f24 の橙の線で T3 の A1 (24 列) へ
 - T3 の 2 次 (25・26 列) を次のブレッドボードの IF・IFB へ。スペアナで見るときは、コレクタの空き穴 (a12) から 10kΩ と 0.01µF を通す
@@ -421,6 +422,11 @@ wires:
 title: 図5 中間周波増幅と検波のブレッドボード Q2 Q3 D1
 board: full
 parts:
+  PREV:
+    type: device
+    at: top
+    label: 図4 の基板から
+    pins: [IFB, IF]
   PWR:
     type: device
     at: top
@@ -431,11 +437,6 @@ parts:
     at: top
     label: Analog Discovery
     pins: [GND, 1-, 2-, 2+, 1+]
-  PREV:
-    type: device
-    at: top
-    label: 図4 の基板から
-    pins: [IFB, IF]
   NEXT:
     type: device
     at: bottom
@@ -459,11 +460,11 @@ parts:
   Cd: capacitor/ceramic g31 g33 0.01u
   VR: potentiometer d35(1) d36(W) d37(3) 10k
 wires:
-  - PWR.+5V -- +t1 red
-  - PWR.GND -- -t2 black
-  - AD.GND -- -t3 black
-  - AD.1- -- -t4 black
-  - AD.2- -- -t6 black
+  - PWR.+5V -- +t9 red
+  - PWR.GND -- -t10 black
+  - AD.GND -- -t14 black
+  - AD.1- -- -t16 black
+  - AD.2- -- -t17 black
   - PREV.IFB -- a2 green
   - PREV.IF -- a7 green
   - +t5 -- a5 red
@@ -487,10 +488,11 @@ wires:
   - -b29 -- j29 black
   - f28 -- e28 orange
   - AD.2+ -- a28 pink
-  - AD.1+ -- d31 purple
+  - AD.1+ -- a31 purple
   - e31 -- f31 orange
   - -b33 -- j33 black
-  - a31 -- a35 orange
+  - i31 -- i35 orange
+  - f35 -- e35 orange
   - e36 -- f36 orange
   - NEXT.AF -- j36 green
   - -t37 -- a37 black
@@ -504,23 +506,24 @@ wires:
 - ベースの直流は前のブレッドボードの IFB (2 列) と T4 の B2 (16 列) から入る。R3・R5 は上の +5V へ、R4・Cb2・R6・Cb3 は下の GND へ
 - コレクタは b 行の橙の線で IFT (T4 は h13〜h16、T5 は h26〜h29) の A2 へ。A1 (14・27 列) を +5V へ
 - T5 の B1 (28 列) を f28–e28 で上へ渡し、D1 (b28〜b31) で検波。Cd は e31–f31 で下へ渡して 33 列の GND へ。
-  a31–a35 で VR の端子 1 へ、端子 3 (37 列) を GND へ、中点 W (36 列) を次のブレッドボードの AF へ
-- Analog Discovery の 2+ (CH2) を a28 (検波の前)、1+ (CH1) を d31 (検波の後) に挿す。1−・2−・GND は上の − レールへ
+  下の i31–i35 の線と f35–e35 の線で VR の端子 1 へ、端子 3 (37 列) を GND へ、中点 W (36 列) を次のブレッドボードの AF へ
+- Analog Discovery の 2+ (CH2) を a28 (検波の前)、1+ (CH1) を a31 (検波の後) に挿す。1−・2−・GND は上の − レール (14・16・17 列) へ
+- 箱は左から「図4 の基板から」・電源・Analog Discovery の順に置く。前のブレッドボードからの IFB・IF (2・7 列) の線が、電源とグラウンドの線と交わらないようにするため
 
 ```breadboard
 title: 図6 低周波増幅のブレッドボード Q4 Q5 Q6
 board: half
 parts:
-  PWR:
-    type: device
-    at: top
-    label: 電源 5V
-    pins: [+5V, GND]
   PREV:
     type: device
     at: top
     label: 図5 の基板から
     pins: [AF]
+  PWR:
+    type: device
+    at: top
+    label: 電源 5V
+    pins: [+5V, GND]
   SP:
     type: device
     at: top
@@ -538,7 +541,7 @@ parts:
   Rf: resistor a19 a23 30k
   C2: capacitor/electrolytic b23 b27 220u
 wires:
-  - PWR.+5V -- +t1 red
+  - PWR.+5V -- +t3 red
   - PWR.GND -- -t4 black
   - PREV.AF -- a1 green
   - -t2 -- a2 black
@@ -567,6 +570,8 @@ wires:
 - Q4 のコレクタ (5 列) は e5–f5 で上へ渡して D3 のカソード (a5) へ、d5–d21 で Q6 のベース (21 列) へ
 - D3 のアノードと D2 のカソードが 9 列、D2 のアノードが 13 列で、e13–f13 で Q5 のベースへ。R7 (b13〜b17。17 列は a17 から上の + レールへ) がここへ電流を流す
 - Q5 のエミッタ (15 列) と Q6 のエミッタ (23 列) を j15–j23 でつなぎ、e23–f23 で上の 23 列 (中点) へ。C2 (b23〜b27) からスピーカーへ
+- 箱は左から「図5 の基板から」・電源・スピーカーの順に置く。AF の線 (1 列) が電源の線と交わらないようにするため。
+  j15–j23 の線は Q6 のコレクタから − レールへの線 (22 列) と、c19–a4 の線は R7 の + の線 (17 列) と 1 か所ずつ交わる (同じ行に部品と線が並び、ほかに通す道が無い)
 
 ## 計器の設定
 
