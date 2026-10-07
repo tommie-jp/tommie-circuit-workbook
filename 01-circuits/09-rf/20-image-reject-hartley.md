@@ -287,9 +287,9 @@ wires:
   - i38 -- i39 gray
   - b39 -- b40 gray
   - SC.1+ -- j42 orange
-  - SC.1- -- i48 white
+  - SC.1- -- j48 white
   - f48 -- e48 white
-  - j48 -- j54 white
+  - j54 -- i48 white
   - d48 -- d53 white
   - b53 -- b54 gray
   - f50 -- e50 purple
