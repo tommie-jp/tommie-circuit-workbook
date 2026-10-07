@@ -85,11 +85,6 @@ wires:
 title: 図2 ブレッドボードに組む
 board: half
 parts:
-  AD:
-    type: device
-    at: top
-    label: Analog Discovery 3
-    pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
   ANT:
     type: device
     at: top
@@ -100,6 +95,11 @@ parts:
     at: top
     label: ポリバリコン 260pF
     pins: [A, E]
+  AD:
+    type: device
+    at: bottom
+    label: Analog Discovery 3
+    pins: [W1, 2+, 1+, V+, GND, 1-, 2-]
   EAR:
     type: device
     at: bottom
@@ -115,23 +115,25 @@ parts:
   C3: capacitor/ceramic g22 g26 0.001u
   R3: resistor i22 i26 100k
 wires:
-  - AD.V+ -- +t1 red
-  - AD.GND -- -t2 black
-  - AD.W1 -- a8 orange
-  - AD.2+ -- c19 blue
-  - AD.1+ -- h22 blue [h420]
-  - AD.1- -- -t3 black
-  - AD.2- -- -t4 black
-  - VC1.E -- -t14 black
-  - VC1.A -- a12 yellow
   - ANT.1 -- c12 yellow
+  - VC1.A -- a12 yellow
+  - VC1.E -- -t14 black
+  - AD.W1 -- f8 orange
+  - d8 -- f8 orange
+  - AD.2+ -- j19 blue
+  - AD.1+ -- h22 blue
+  - AD.V+ -- +b17 red
+  - AD.GND -- -b19 black
+  - AD.1- -- -b22 black
+  - AD.2- -- -b23 black
+  - +t30 -- +b30 red
   - a16 -- -t16 black
   - e18 -- f18 orange
   - f19 -- e19 blue
   - a19 -- a22 blue
   - +t26 -- a26 red
-  - j20 -- -b20 black
-  - j26 -- -b26 black
+  - j20 -- -b21 black
+  - j26 -- -b25 black
   - EAR.A -- j22 green
   - EAR.B -- -b28 black
   - -t30 -- -b30 black
@@ -139,8 +141,9 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/03-one-transistor-radio.svg)
 
-- AD3 の V+ (Supplies の 5V) を上の赤レール、GND を青レールへ入れる。上の赤レール = +5V、青レール = GND。
-  30 列で上下の − レールを渡している
+- **AD3 は下に置く** (検波出力とコレクタを測る 22 列・19 列が下のブロックにあるため、線が基板の上を長く渡らない)。
+  V+ (Supplies の 5V) を下の赤レール (17 列)、GND を下の青レール (19 列) へ入れる。赤レール = +5V、青レール = GND。
+  30 列で上下の + レールどうし、− レールどうしを渡している (上の + レールから Rc へ、上の − レールから L1・VC1 へ)
 - 前段は 12 列にアンテナ・VC1・L1・C1 をまとめる。L1 の右リード (16 列) は上の − レールへ
 - Q1 は下のブロックの h 行に、隣り合う 3 列 (18 列 B・19 列 C・20 列 E) へ挿す。ピンを大きく
   曲げずに挿せる間隔。2SC1815 は平らな面を手前にすると左から E・C・B なので、
@@ -152,7 +155,7 @@ wires:
   カソードが下 (検波出力)。下の 22 列に C3・R3 の左リードと EAR の A 端子が並ぶ。
   C3・R3 の右リード (26 列) と EAR の B 端子は下の − レールへ
 - AD3 (Analog Discovery 3) の W1 を RS (1 kΩ) 経由で同調回路の 12 列へ入れる。放送の電波の代わりの試験用で、
-  使うときは ANT の線を外してよい。1+ は検波出力 (下の 22 列)、2+ は Q1 のコレクタ (19 列)、1−・2−・GND は − レールへ入れる
+  使うときは ANT の線を外してよい。W1 は下の 8 列 (`f8`) に入れ、溝をまたぐ短い橙の線 (`d8`) で RS の左リードへ渡す。1+ は検波出力 (下の 22 列、`h22`)、2+ は Q1 のコレクタ (下の 19 列、`j19`)、1−・2−・GND は下の − レール (22・23・19 列) へ入れる
 - 1 つの穴にはピンか線を 1 本だけ挿す
 
 ## 計器の設定
