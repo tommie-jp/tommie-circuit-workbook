@@ -247,7 +247,7 @@ Analog Discovery は 1 台だが、線が交わらないよう図では箱を 2 
 | --- | --- |
 | Supplies | V+ = 5V (オン) |
 | Wavegen W1 | Sine 1MHz、Modulation: AM、1kHz の Sine、変調度 30%。振幅は CH2 の搬送波が 10mVpp になるよう絞る (目安 100mVpp — 2 次巻線で 1/10 になる) |
-| Scope | CH2 = 2 次巻線の出力 (C1 の手前、RF 入力)、5mV/div。CH1 = Q2 のコレクタ (音声出力)、0.5V/div。CH1 は約 1.9V の直流に音声が乗るので、Offset で直流を打ち消す。トリガは CH1 の立ち上がり 1.9V |
+| Scope | CH2 = 2 次巻線の出力 (C1 の手前、RF 入力)、5mV/div。CH1 = Q2 のコレクタ (音声出力)、200mV/div (0.9Vpp が 4.5 目盛になる)。CH1 は約 1.9V の直流に音声が乗るので、Offset で直流を打ち消す。トリガは CH1 の立ち上がり 1.9V |
 
 VC1 を回して CH1 の振幅が最大になる所が 1MHz の同調点。外れると CH2 も CH1 も小さくなる
 (タンクの Q が選択度そのもの)。
@@ -258,7 +258,7 @@ VC1 を回して CH1 の振幅が最大になる所が 1MHz の同調点。外�
 title: 図3 RF 入力 (CH2、1MHz を 1kHz・30% で AM) と音声出力 (CH1)
 time: 200us/div
 trigger: ch1 rising 1.9V
-ch1: {wave: sine 1kHz 0.9Vpp phase 180deg offset 1.9V, range: 0.5V/div, position: -1.8div}
+ch1: {wave: sine 1kHz 0.9Vpp phase 180deg offset 1.9V, range: 200mV/div, position: -9.5div}
 ch2: {wave: = 5mV * (1 + 0.3 * sin(2 * pi * 1kHz * t)) * sin(2 * pi * 1MHz * t), range: 5mV/div, position: -2.0div}
 measure: [vpp, freq]
 ```
