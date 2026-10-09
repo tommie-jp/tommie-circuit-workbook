@@ -1,0 +1,28 @@
+* 9-6 超再生 FM (図1)。電源 5 V を 50 ns で立ち上げ、発振の周波数・クエンチ・動作点を読む
+* Q3355 は 9-4 (sim/04-fm-transmitter.cir) と同じ 2SC3355 の代用 (目安から作った仮定。実測ではない)。bf を .param で振る
+* vc = VC1 の容量 (4.5p〜24.5p)。Cant は 50 ohm の負荷へつないだ (最も効く側の見積もり)
+.param bf=100 vc=14.5p cant=2.2p
+.model Q3355 NPN (IS=2e-14 BF={bf} NF=1 VAF=100 IKF=0.15 RB=20 RE=1 RC=5 CJE=1p CJC=0.6p TF=23p TR=50n)
+VCC vcc 0 PULSE(0 5 0 50n 50n 1)
+Cb vcc 0 0.1u
+L1 vcc c 100n
+CV1 c 0 {vc}
+C1 c e 33p
+C2 e 0 33p
+Re e 0 470
+Q1 c b e Q3355
+Rb1 vcc bi 10k
+Rb2 bi 0 4.7k
+Rq bi b 330k
+Cq b 0 100p
+Cant c a {cant}
+Rant a 0 50
+Raf c f 4.7k
+Caf f 0 0.01u
+Cout f g 1u
+CEAR g 0 15n
+Rleak g 0 100Meg
+.save V(c) V(b) V(f) V(g) I(Re)
+.options plotwinsize=0
+.tran 0 60u 0 0.5n
+.end

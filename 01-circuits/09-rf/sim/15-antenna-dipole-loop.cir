@@ -1,0 +1,10 @@
+* 9-15 ダイポールの共振付近の模型 (直列 RLC、AC 解析): R = 73 ohm、Q = 10、f0 = 145 MHz
+* L = Q R / (2π f0) = 801 nH、C = 1 / ((2π f0)^2 L) = 1.504 pF。50 ohm の信号源 (VNA) から見た入力 Z = 50 V(z) / (1 - V(z))
+* 読み値: SWR = (1+|G|)/(1-|G|)、G = (Z-50)/(Z+50) = 2 V(z) - 1
+V1 s 0 AC 1
+Rs s z 50
+Rr z a 73
+Lr a b 801n
+Cr b 0 1.504p
+.ac list 135meg 140meg 141.5meg 144meg 145meg 146meg 148.6meg 150meg 155meg
+.end

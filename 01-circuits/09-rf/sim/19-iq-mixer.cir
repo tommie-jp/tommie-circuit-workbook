@@ -1,0 +1,27 @@
+* 9-19 I/Q ミキサー (過渡解析)。SA612 は掛け算の模型 (実測ではない仮定):
+*   差動の IF の peak = 142 mV × (LO の peak / 0.25 V) を、RF 10 mV のとき出すように利得を置いた
+*   (9-12 の変換利得 17 dB = 7.08 倍、差動で 2 倍。値は目安で、確かめたいのは位相の先後と網・C11 の効き)
+* frf = 547.8 kHz (LO の上) と 448.2 kHz (LO の下) を .step で回す
+.param frf=547.8k
+.step param frf list 547.8k 448.2k
+Vlo w 0 SIN(0 0.25 498k)
+C1 w li 470p
+R2 li 0 680
+R1 w lq 680
+C2 lq 0 470p
+* LO の結合 10 nF と PIN 6 の入力 (10 kohm の仮定)
+C3 li pi 10n
+C4 lq pq 10n
+Rpi pi 0 10k
+Rpq pq 0 10k
+Vrf rf 0 SIN(0 10m {frf})
+* 掛け算: 28.4 × V(rf) × V(pin6) / 0.25
+Bi mi 0 V=28.4*V(rf)*V(pi)/0.25
+Bq mq 0 V=28.4*V(rf)*V(pq)/0.25
+* SA612 の出力 (差動 3 kohm) と C11・C12
+Ri mi oi 3k
+Rq mq oq 3k
+C11 oi 0 470p
+C12 oq 0 470p
+.tran 0 400u 0 20n
+.end

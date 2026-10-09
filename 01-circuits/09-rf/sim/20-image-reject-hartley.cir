@@ -1,0 +1,56 @@
+* 9-20 位相法のイメージ除去 (過渡解析)。SA612 は掛け算の模型、MCP6002 は GBW 1 MHz の 1 次の模型 (どちらも実測ではない仮定)
+* SA612: PIN 4 の IF の peak = 70.8 mV × (LO の peak / 0.25 V) (RF 10 mV のとき。9-12 の変換利得 17 dB = 7.08 倍の目安)、出力抵抗 1.5 kohm、470 pF を GND へ
+* frf = 448.2 kHz (LO の下、残る側) と 547.8 kHz (LO の上、消える側) を回す
+* case 0 = 理想の部品 / 1 = U2 の利得 +5 % / 2 = IF の網の C16 +5 %
+.param frf=448.2k
+.param case=0
+.step param frf list 448.2k 547.8k
+.step param case 0 2 1
+.param gq={if(case==1,1.05,1)}
+.param c16v={if(case==2,493.5p,470p)}
+.subckt opamp p n o
+E1 x 0 p n 100k
+R1 x y 1k
+C1 y 0 15.9u
+E2 o 0 y 0 1
+.ends
+Vlo w 0 SIN(0 0.25 498k)
+Vrf rf 0 SIN(0 10m {frf})
+* LO の網 (9-18)
+C1 w li 470p
+R2 li 0 680
+R1 w lq 680
+C2 lq 0 470p
+C3 li pi 10n
+C4 lq pq 10n
+Rpi pi 0 10k
+Rpq pq 0 10k
+* ミキサー (PIN 4 の直流は約 4 V)
+Bi mi 0 V=4+56.64*V(rf)*V(pi)
+Bq mq 0 V={gq}*(56.64*V(rf)*V(pq))+4
+Ri mi oi 1.5k
+Rq mq oq 1.5k
+C11 oi 0 470p
+C12 oq 0 470p
+* U3A U3B フォロア
+X3A oi fi fi opamp
+X3B oq fq fq opamp
+* IF の網
+C13 fi ci 1u
+R3 ci ni 6.8k
+C14 ni 0 470p
+C15 fq cq 1u
+C16 cq nq {c16v}
+R4 nq vref 6.8k
+Rcq cq vref 1G
+Rci ci vref 1G
+* 加算 (反転)。VR1 = 9 kohm にして Q 側も 100 kohm
+Vref vref 0 2.5
+R7 ni sn 100k
+R8 nq s8 91k
+RV1 s8 sn 9k
+R9 sn out 100k
+X4B vref sn out opamp
+.options reltol=1e-6 vntol=1n abstol=1p
+.tran 0 400u 150u 10n
+.end

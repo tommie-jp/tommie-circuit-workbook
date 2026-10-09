@@ -1,0 +1,30 @@
+* 9-24 図2 I と Q の増幅 (MCP6002 2 段)。AC 解析と、入力換算オフセット 4.5 mV を各演算増幅器に置いた直流の確かめ
+* MCP6002 は GBW 1 MHz の 1 次の模型 (開ループ利得 100 k、極 10 Hz。実測ではない仮定)
+* case 0 = 本文の 2 段 / 1 = C10 を短絡して直流を通した場合 (オフセットの比べ)
+.param case=0
+.step param case 0 1 1
+.subckt opamp p n o
+E1 x 0 p n 100k
+R1 x y 1k
+C1 y 0 15.9u
+E2 o 0 y 0 1
+.ends
+Vref vref 0 1.65
+* 入力: A0 に +0.5 (AC)、A3 に -0.5 (AC) = 差 1 V
+Va0 a0 0 DC 1.65 AC 0.5
+Va3 a3 0 DC 1.65 AC -0.5
+R10 a3 n1 100k
+R11 a0 p1 100k
+R12 p1 vref 1Meg
+R13 n1 o1 1Meg
+* 入力換算オフセット 4.5 mV を U2B の + 入力側に直列
+Vos1 p1 p1x 4.5m
+X1 p1x n1 o1 opamp
+C10 o1 m1 1u
+Rsh o1 m1 {if(case==1,1m,1G)}
+R14 m1 n2 10k
+R15 n2 out 100k
+Vos2 vref p2x 4.5m
+X2 p2x n2 out opamp
+.ac dec 20 1 1meg
+.end

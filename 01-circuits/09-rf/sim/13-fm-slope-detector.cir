@@ -1,0 +1,14 @@
+* 9-13 FM スロープ検波。W1 は式の電圧源 (波高値 4 V、搬送波 fc、音 1 kHz、偏移 ±dev)。1N60 は IS=0.5uA・n=1.2 (本文の式と同じ置き方。目安から作った仮定で実測の値ではない)
+* L1 の損失は並列の 19 kΩ (Q = 60) で置く
+.model D1N60 D (IS=0.5u N=1.2)
+.param fc=490k dev=5k
+B1 w 0 V=4*sin(2*pi*{fc}*time-{dev}/1k*cos(2*pi*1k*time))
+R1 w tank 10k
+L1 tank 0 100u
+Rp tank 0 19k
+C1 tank 0 1000p
+D1 tank out D1N60
+C2 out 0 2200p
+R2 out 0 22k
+.tran 0 6m 0 20n
+.end

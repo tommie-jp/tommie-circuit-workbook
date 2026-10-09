@@ -1,0 +1,11 @@
+* 9-11 図1 ダイオード検波 (1N60 相当: IS=0.5uA・n=1.2、本文の式と同じ置き方。目安から作った仮定で実測の値ではない)
+* 搬送波 100 kHz の波高値 vc、音 1 kHz、変調度 50 %
+.model D1N60 D (IS=0.5u N=1.2)
+.param vc=0.02
+B1 in 0 V={vc}*(1+0.5*sin(2*pi*1k*time))*sin(2*pi*100k*time)
+D1 in out D1N60
+C1 out 0 10n
+R1 out 0 10k
+.tran 0 7m 0 100n
+.meas tran vdc avg v(out) from=4m to=6m
+.end

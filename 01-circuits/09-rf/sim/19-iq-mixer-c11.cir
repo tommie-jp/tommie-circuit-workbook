@@ -1,0 +1,6 @@
+* 9-19 出力の C11 (470 pF)。SA612 の PIN 4 と PIN 5 の間の源は 1.5 kohm × 2 = 3 kohm。電圧源 1 V を 3 kohm 越しに 470 pF で受ける
+V1 s 0 AC 1
+R1 s o 3k
+C11 o 0 470p
+.ac list 49.8k 113k 946.2k 1045.8k
+.end

@@ -1,0 +1,39 @@
+* 9-21 位相法の SSB 変調器 (過渡解析)。SA612 は掛け算の模型 (実測ではない仮定):
+*   PIN 5 の各側波の peak = 7.08 × (PIN 1 の音声 peak)。LO の網の出口 (無負荷) 0.1768 V peak のとき 9-12 の変換利得 17 dB に合わせた
+*   入力抵抗 1.5 kohm、出力抵抗 1.5 kohm (データシートの代表値)
+* fa = 音声の周波数 (500 / 900 / 995 / 1100 / 2000 Hz)
+* U1 は LO 高域側 (+45°) × 音声 低域側 (-45°)、U2 は LO 低域側 (-45°) × 音声 高域側 (+45°)
+.param fa=995
+.step param fa list 500 900 995 1100 2000
+.options reltol=1e-5 vntol=1n abstol=1p
+Vlo w 0 SIN(0 0.25 498k)
+Vau a 0 SIN(0 20m {fa})
+* LO の網 (9-18)
+C1 w li 470p
+R2 li 0 680
+R1 w lq 680
+C2 lq 0 470p
+C3 li pi 10n
+C4 lq pq 10n
+Rpi pi 0 10k
+Rpq pq 0 10k
+* 音声の網 (1.6 kohm・100 nF)
+R3 a al 1.6k
+C5 al 0 100n
+C6 a ah 100n
+R4 ah 0 1.6k
+C7 al u1 1u
+C8 ah u2 1u
+Rin1 u1 0 1.5k
+Rin2 u2 0 1.5k
+* 掛け算 (PIN 5)
+B1 m1 0 V=4+80.1*V(u1)*V(pi)
+B2 m2 0 V=4+80.1*V(u2)*V(pq)
+Ro1 m1 o1 1.5k
+Ro2 m2 o2 1.5k
+R5 o1 s 4.7k
+R6 o2 s 4.7k
+C13 s c 100n
+Rscope c 0 1Meg
+.tran 0 14m 0 100n
+.end

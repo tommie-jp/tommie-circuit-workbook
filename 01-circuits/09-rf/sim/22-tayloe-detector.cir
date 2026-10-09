@@ -1,0 +1,30 @@
+* 9-22 Tayloe 検波器 (過渡解析)。74HC4052 の 4 つのスイッチを、オン抵抗 80 ohm の電圧制御スイッチで置く (実測ではない仮定)
+* LO = 498 kHz。(S1,S0) の順 00 → 01 → 11 → 10 = チャネル 0 → 1 → 3 → 2 = A0 → A1 → A3 → A2 を、1/4 周期ずつ開く (切り替えの隙間は 0.2 ns)
+* RF (W2) は 2.5 V の直流に 0.25 V peak。I = A0 - A3、Q = A1 - A2
+* f2 = 499 kHz (LO の上)、497 kHz (下)、502 kHz (Δf 4 kHz)、508 kHz (Δf 10 kHz)
+.param f2=499k
+.step param f2 list 499k 497k 502k 508k
+.param T={1/498k}
+.param Ron=80
+.model SW SW(Ron={Ron} Roff=1G Vt=2.5 Vh=0.1)
+.options reltol=1e-5 vntol=1n abstol=1p
+V2 rf 0 SIN(2.5 0.25 {f2})
+R1 rf an 1k
+* 4 相の切り替え信号 (0 か 5 V)。A0 → A1 → A3 → A2 の順
+VP0 c0 0 PULSE(0 5 0 0.1n 0.1n {T/4-0.2n} {T})
+VP1 c1 0 PULSE(0 5 {T/4} 0.1n 0.1n {T/4-0.2n} {T})
+VP3 c3 0 PULSE(0 5 {2*T/4} 0.1n 0.1n {T/4-0.2n} {T})
+VP2 c2 0 PULSE(0 5 {3*T/4} 0.1n 0.1n {T/4-0.2n} {T})
+S0 an a0 c0 0 SW
+S1 an a1 c1 0 SW
+S3 an a3 c3 0 SW
+S2 an a2 c2 0 SW
+C0 a0 0 10n
+C1 a1 0 10n
+C3 a3 0 10n
+C2 a2 0 10n
+.ic V(a0)=2.5 V(a1)=2.5 V(a2)=2.5 V(a3)=2.5 V(an)=2.5
+Bi i 0 V=V(a0)-V(a3)
+Bq q 0 V=V(a1)-V(a2)
+.tran 0 6m 0 100n uic
+.end

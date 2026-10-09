@@ -1,0 +1,26 @@
+* 9-4 FM 送信機 (図1 のコルピッツ発振)。電源 5 V を 50 ns で立ち上げて発振を起こし、搬送波の周波数・動作点を読む
+* Q3355 は 2SC3355 の代用 (agc.cir の Q1815 の IS・BF・VAF・IKF をそのまま使い、fT を 7 GHz に合わせて TF=23p、CJE=1p、CJC=0.6p、RB=20 にした仮定。実測ではない)
+* cs = COL 島の浮遊容量 (本文の見積もり 1.4〜2 pF)、lp = C1・C2 のピンのインダクタンス (本文の見積もり 14 nH) を .step で振る
+.model Q3355 NPN (IS=2e-14 BF=100 NF=1 VAF=100 IKF=0.15 RB=20 RE=1 RC=5 CJE={cje} CJC={cjc} TF={tf} TR=50n)
+.param cs=0 lp=0.001n cant=2.2p cje=1p cjc=0.6p tf=23p
+VCC vcc 0 PULSE(0 5 0 50n 50n 1)
+Cb vcc 0 0.1u
+L1 vcc c 260n
+Cs1 c 0 {cs}
+C1 c m 22p
+Lp m e {lp}
+C2 e 0 47p
+Re e 0 470
+Q1 c b e Q3355
+Rb1 vcc b 10k
+Rb2 b 0 2.4k
+C3 b 0 1n
+Cant c a {cant}
+Rant a 0 50
+.tran 0 3u 0 0.2n
+.meas tran per TRIG V(c) VAL=5 RISE=60 TARG V(c) VAL=5 RISE=100
+.meas tran vcpp PP V(c) FROM=2.5u TO=3u
+.meas tran ic AVG I(Re) FROM=2.5u TO=3u
+.meas tran vce AVG V(c)-V(e) FROM=2.5u TO=3u
+.meas tran pant AVG V(a)*V(a)/50 FROM=2.5u TO=3u
+.end

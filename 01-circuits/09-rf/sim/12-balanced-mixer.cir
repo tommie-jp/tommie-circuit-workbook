@@ -1,0 +1,25 @@
+* 9-12 簡易のギルバートセル (SA612 の中身そのものではない。トランジスタは 9-25 の 2SC1815 代用モデルで、目安から作った仮定。実測の値ではない)
+* LO 1 MHz (0.2 V 波高値)・RF 1.1 MHz (10 mV 波高値)。出力 A・B の 100 kHz / 1.9 / 2.0 / 2.1 MHz 成分と、差 A−B を読む
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.param vrf=0.01 vlo=0.2 itail=2.4m re=40
+VCC vcc 0 5
+Itail tail 0 {itail}
+* RF 対 (片側入力: Q2 のベースは直流だけ)
+Vrfb rfb 0 1.5
+Vrf rfa rfb SIN(0 {vrf} 1.1meg)
+Q1 x1 rfa ta Q1815
+Q2 x2 rfb tb Q1815
+* RF 対のエミッタ抵抗 re (SA612 は内部に持つ。ここでは変換利得 17 dB に近づける目安の値)
+Rea ta tail {re}
+Reb tb tail {re}
+* LO 対 (Q3-Q4 が x1、Q5-Q6 が x2 の電流を切り替える)
+Vlob lob 0 3
+Vlo loa lob SIN(0 {vlo} 1meg)
+Q3 outa loa x1 Q1815
+Q4 outb lob x1 Q1815
+Q5 outb loa x2 Q1815
+Q6 outa lob x2 Q1815
+Ra vcc outa 1.5k
+Rb vcc outb 1.5k
+.tran 0 120u 0 5n
+.end

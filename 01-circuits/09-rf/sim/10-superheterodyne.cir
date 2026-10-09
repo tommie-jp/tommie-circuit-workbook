@@ -1,0 +1,50 @@
+* 9-10 スーパーヘテロダイン の直流の動作点 (Q1〜Q3 のバイアス、低周波段 Q4〜Q6 の中点) と出力段の振れ
+* 2SC1815 は 9-25 と同じ代用。2SC2120・2SA950 は同じ形で hFE=200 と置いた目安から作った仮定 (実測の値ではない)。IFT・バーアンテナの巻線は直流で 0 Ω
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model Q2120 NPN (IS=2e-14 BF=200 VAF=100 RB=5 RE=0.5 RC=1 CJE=20p CJC=8p TF=2n)
+.model Q950 PNP (IS=2e-14 BF=200 VAF=100 RB=5 RE=0.5 RC=1 CJE=20p CJC=8p TF=2n)
+.model D4148 D (IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+.param vin=0.05
+VCC vcc 0 5
+* Q1 (周波数変換): R1=33k R2=10k Re=1k
+R1 vcc b1 33k
+R2 b1 0 10k
+Q1 vcc b1 e1 Q1815
+Re1 e1 0 1k
+* Q2 (IF 1 段目): R3=33k R4=10k Re2=1k
+R3 vcc b2 33k
+R4 b2 0 10k
+Q2 vcc b2 e2 Q1815
+Re2 e2 0 1k
+* Q3 (IF 2 段目): R5=22k R6=10k Re3=1k
+R5 vcc b3 22k
+R6 b3 0 10k
+Q3 vcc b3 e3 Q1815
+Re3 e3 0 1k
+* 低周波段
+Vin in 0 SIN(0 {vin} 1k)
+C1 in b4 10u
+Rb2 b4 0 22k
+Q4 c4 b4 e4 Q1815
+Re4 e4 0 100
+R7 vcc p1 680
+D2 p1 p2 D4148
+D3 p2 c4 D4148
+Q5 vcc p1 mid Q2120
+Q6 0 c4 mid Q950
+Rf mid b4 30k
+C2 mid sp 220u
+Rsp sp 0 8
+.tran 0 30m 0 1u
+.meas tran ve1 avg v(e1) from=20m to=30m
+.meas tran ve2 avg v(e2) from=20m to=30m
+.meas tran ve3 avg v(e3) from=20m to=30m
+.meas tran vb1 avg v(b1) from=20m to=30m
+.meas tran vb3 avg v(b3) from=20m to=30m
+.meas tran vmid avg v(mid) from=20m to=30m
+.meas tran vb4 avg v(b4) from=20m to=30m
+.meas tran ve4 avg v(e4) from=20m to=30m
+.meas tran vp1 avg v(p1) from=20m to=30m
+.meas tran id avg i(R7) from=20m to=30m
+.meas tran vspp pp v(sp) from=20m to=30m
+.end

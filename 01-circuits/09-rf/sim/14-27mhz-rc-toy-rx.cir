@@ -1,0 +1,17 @@
+* 9-14 図2 受信機の同調・検波 (アンテナは 50 ohm の電源と 3 pF の容量で置く)。1SS108 は目安から作った仮定 (IS=20nA・N=1.05・RS=5 ohm・CJO=1pF)、実測の値ではない
+* AC 版: 同調の山の周波数 (CT2 を ct2 で振る)。Cd・Rd の時定数 (100 us) は式で確かめる
+.model D1SS108 D (IS=20n N=1.05 RS=5 CJO=1p)
+.param ct2=12.4p vant=0.1
+Vant a 0 SIN(0 {vant} 27.145meg) AC 1
+Rs a b 50
+* 20 cm の線のアンテナの容量を 3 pF と置く (目安から作った仮定)
+Ca b ca 3p
+Cc ca tank 10p
+L2 tank 0 1u
+CT2 tank 0 {ct2}
+C3 tank 0 22p
+D1 tank det D1SS108
+Cd det 0 1n
+Rd det 0 100k
+.ac dec 200 15meg 45meg
+.end

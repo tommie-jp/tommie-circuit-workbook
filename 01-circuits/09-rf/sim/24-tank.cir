@@ -1,0 +1,14 @@
+* 9-24 バーアンテナの同調回路 (L 330 uH と VC1 + 浮遊容量)。AC 解析
+* step 0: 594 kHz に合わせる (Q 50 の目安 → 並列の損失 Rp = Q × 2π f L)。603 kHz (隣の局) は 594 kHz の何 dB 下か
+* step 1: 531 kHz に合わせる (必要な容量を本文の 272 pF と突き合わせる)
+.param L=330u
+.param f0=594k
+.step param f0 list 531k 594k
+.param Cres={1/((6.2831853*f0)**2*L)}
+.param Rp={50*6.2831853*f0*L}
+I1 0 t AC 1
+Lt t 0 {L}
+Ct t 0 {Cres}
+Rp t 0 {Rp}
+.ac list 531k 540k 585k 594k 603k
+.end

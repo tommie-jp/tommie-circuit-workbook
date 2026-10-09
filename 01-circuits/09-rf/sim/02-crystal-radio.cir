@@ -1,0 +1,17 @@
+* 9-2 ゲルマラジオ (図3 の AM 試験)。W1 の AM 信号 (1 MHz・1 V peak・1 kHz・50 %) を RS 1k 経由で同調回路 (250u // 100p) に入れる
+* 1N60 は IS=0.2u・RS=25 の仮定 (目安。実測ではない)。EAR は 15n の容量
+.model D1N60 D (IS=0.2u N=1 RS=25 CJO=1p)
+Bw w 0 V=(1+0.5*sin(2*pi*1k*time))*sin(2*pi*1Meg*time)
+RS w t 1k
+L1 t 0 250u
+CV1 t 0 100p
+D1 t d D1N60
+C2 d 0 1n
+R1 d 0 100k
+CEAR d 0 15n
+.tran 0 8m 0 10n
+.meas tran dcavg AVG V(d) FROM=4m TO=8m
+.meas tran dmax MAX V(d) FROM=4m TO=8m
+.meas tran dmin MIN V(d) FROM=4m TO=8m
+.meas tran tankmax MAX V(t) FROM=4m TO=8m
+.end

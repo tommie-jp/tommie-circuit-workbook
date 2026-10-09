@@ -1,0 +1,40 @@
+* 9-23 Tayloe 検波器 (3.3 V、Ron 100 ohm、R1 1 kohm、C 10 nF) と I の差動増幅 (100 kohm / 200 kohm)。過渡解析
+* 74HC4052 は電圧制御スイッチの模型 (実測ではない仮定)、MCP6002 は理想の演算増幅器
+* LO = 498 kHz。A0 → A1 → A3 → A2 の順に 1/4 周期ずつ開く。RF (W2) は 1.65 V の直流に 0.25 V peak
+* case 0 = 増幅器なし / 1 = 100 kohm・200 kohm (本文) / 2 = 10 kohm・20 kohm (比べ)
+* f2 = 497 / 499 / 500 / 502 kHz (LO との差 ±1 / 2 / 4 kHz)
+.param case=1
+.param f2=499k
+.step param case 0 2 1
+.step param f2 list 497k 499k 500k 502k
+.param T={1/498k}
+.param Rq={if(case==0,1e9,if(case==2,10k,100k))}
+.model SW SW(Ron=100 Roff=1G Vt=1.65 Vh=0.1)
+.options reltol=1e-5 vntol=1n abstol=1p
+V2 rf 0 SIN(1.65 0.25 {f2})
+R1 rf an 1k
+VP0 c0 0 PULSE(0 3.3 0 0.1n 0.1n {T/4-0.2n} {T})
+VP1 c1 0 PULSE(0 3.3 {T/4} 0.1n 0.1n {T/4-0.2n} {T})
+VP3 c3 0 PULSE(0 3.3 {2*T/4} 0.1n 0.1n {T/4-0.2n} {T})
+VP2 c2 0 PULSE(0 3.3 {3*T/4} 0.1n 0.1n {T/4-0.2n} {T})
+S0 an a0 c0 0 SW
+S1 an a1 c1 0 SW
+S3 an a3 c3 0 SW
+S2 an a2 c2 0 SW
+C0 a0 0 10n
+C1 a1 0 10n
+C3 a3 0 10n
+C2 a2 0 10n
+.ic V(a0)=1.65 V(a1)=1.65 V(a2)=1.65 V(a3)=1.65 V(an)=1.65
+* I の差動増幅: 出力 = VREF + 2 (A0 - A3)
+Vref vref 0 1.65
+R2 a0 np {Rq}
+R3 np vref {2*Rq}
+R4 a3 nn {Rq}
+R5 nn out {2*Rq}
+* case 0 のときは Rq を 1 Gohm にして増幅器の負荷を外す
+E1 out 0 np nn 1e6
+Bt t 0 V=V(a0)-V(a3)
+Bq q 0 V=V(a1)-V(a2)
+.tran 0 6m 0 100n uic
+.end

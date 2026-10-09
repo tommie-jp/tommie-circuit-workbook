@@ -1,0 +1,21 @@
+* 9-11 図2 トランジスタ検波 (2SC1815 代用モデル、目安から作った仮定で実測の値ではない)
+* 搬送波 100 kHz の波高値 vc、音 1 kHz、変調度 50 %。RE × CE = 0.47 s かかる直流の落ち着きは、エミッタの初期値 ve0 を .ic で与えて省く
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.param vc=0.02 ve0=0.44
+VCC vcc 0 5
+B1 w 0 V={vc}*(1+0.5*sin(2*pi*1k*time))*sin(2*pi*100k*time)
+CIN w b 0.1u
+R1 vcc b 68k
+R2 b 0 18k
+RC vcc c 22k
+Q1 c b e Q1815
+RE e 0 4.7k
+CE e 0 100u
+CC c 0 2.2n
+.ic v(e)={ve0}
+.tran 0 7m 0 100n
+.meas tran vdc avg v(c) from=4m to=6m
+.meas tran ice avg i(CE) from=4m to=6m
+.meas tran ve avg v(e) from=4m to=6m
+.meas tran ic avg ic(Q1) from=4m to=6m
+.end

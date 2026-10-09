@@ -1,0 +1,31 @@
+* 9-14 図1 送信機 (27.145 MHz 水晶のコルピッツ発振)。W1 を 5 V にして発振させ、Cant の先を tinySA の 50 ohm に見立てる
+* 2SC1815 は 9-25 と同じ代用モデル。水晶は直列共振 27.145 MHz の等価回路 (Cs=0.02pF・Ls=1/((2*pi*f)^2*Cs)・Rs=40 ohm・Cp=4pF)。どちらも目安から作った仮定で、実測の値ではない
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.param ct=12p cs=0.02p rs=40 cp=4p ls={1/((2*pi*27.145meg)**2*cs)}
+VCC vcc 0 5
+Vkey key 0 PULSE(0 5 1u 1u 1 1)
+Rb1 key base 22k
+Rb2 base 0 10k
+Lx base xa {ls}
+Cx xa xb {cs}
+Rx xb 0 {rs}
+Cpx base 0 {cp}
+Q1 col base em Q1815
+* L1 の損失: Q = 50 (27 MHz で 171 ohm の 1/50 = 3.4 ohm を直列)
+L1 vcc l1x 1u
+Rl1 l1x col 3.4
+CT vcc col {ct}
+C1 col em 22p
+C2 em 0 100p
+Re em 0 1k
+Cb vcc 0 0.1u
+* 起動の呼び水: 20 us だけ 27.145 MHz の小さな電流をベースへ注ぎ、水晶を揺らす (その後は切る)
+Bkick 0 base I=1u*sin(2*pi*27.145meg*time)*(time<30u)
+Cant col ant 2.2p
+Rant ant 0 50
+.tran 0 300u 0 0.5n
+.meas tran vcol pp v(col) from=280u to=290u
+.meas tran vant pp v(ant) from=280u to=290u
+.meas tran ie avg ie(Q1) from=280u to=300u
+.meas tran vem avg v(em) from=280u to=300u
+.end

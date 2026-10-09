@@ -1,0 +1,20 @@
+* 9-1 LC 同調 (図1)。L1 10mH (巻線 20 ohm)・C1 10n・R1 100 の直列の輪 + Q1 で LED を点ける
+* 代用モデルは agc.cir と同じ Q1815 (目安から作った仮定。実測の値ではない)。赤色 LED は 3 mA で約 1.8 V になるよう置いた仮定
+* rg = 発生器の出力抵抗 (50 または 0.01)。f を .step で振り、最後の 4 周期の CH2 (R1 の電圧) の Vpp と LED の平均電流を読む
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model LEDR D (IS=1e-18 N=1.9 RS=5)
+.param f=15.9k rg=50 tper={1/f}
+V1 w 0 SIN(0 3 {f})
+Rg w in {rg}
+L1 in m 10m Rser=20
+C1 m n 10n
+R1 n 0 100
+R2 n b 10k
+Q1 c b 0 Q1815
+VCC vcc 0 5
+R3 vcc a 330
+D1 a c LEDR
+.tran 0 {30*tper+2m} 0 {tper/200}
+.meas tran vpp PP V(n) FROM={28*tper+2m} TO={30*tper+2m}
+.meas tran iled AVG I(R3) FROM={20*tper+2m} TO={30*tper+2m}
+.end

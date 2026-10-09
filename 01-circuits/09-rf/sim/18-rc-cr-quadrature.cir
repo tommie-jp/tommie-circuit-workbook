@@ -1,0 +1,23 @@
+* 9-18 RC-CR で 90° を作る。W1 を 1 Vpp (0.5 V peak) とし、AC 解析で I (高域側) と Q (低域側) の大きさと位相差を読む
+* 読み方: 各 .step の v(i) v(q) の複素値から |v|×2 = Vpp、arg(v(i)/v(q)) = 位相差
+* case 0: 本文のとおり / 1: 信号源 50 ohm / 2: I と Q に 24 pF ずつ / 3: C1 だけ +5 % / 4: I と Q に 10 kohm ずつ
+.param case=0
+.step param case 0 4 1
+.param rs=if(case==1,50,0.001)
+.param cl=if(case==2,24p,0.01p)
+.param c1v=if(case==3,493.5p,470p)
+.param rl=if(case==4,10k,1G)
+V1 w 0 AC 0.5
+Rs w in {rs}
+* 低域側 (RC): Q
+R1 in q 680
+C2 q 0 470p
+* 高域側 (CR): I
+C1 in i {c1v}
+R2 i 0 680
+Cli i 0 {cl}
+Clq q 0 {cl}
+Rli i 0 {rl}
+Rlq q 0 {rl}
+.ac list 100k 300k 498k 800k 2meg
+.end

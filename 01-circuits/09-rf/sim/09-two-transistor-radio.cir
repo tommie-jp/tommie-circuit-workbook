@@ -1,0 +1,38 @@
+* 9-9 2 石ラジオ (2SC1815 代用モデル、1N60 は目安から作った仮定。実測の値ではない)
+* 2 次巻線の出力 (C1 の手前) に 1MHz の 30% AM を理想電源で入れる (hf = 搬送波の波高値、既定 5m = 10mVpp)。1 kHz の音声が Q2 のコレクタに出る
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model D1N60 D (IS=2.5e-7 N=1.3 RS=20 CJO=1p TT=1n BV=40)
+.param hf=5m
+VCC vcc 0 5
+B1 s2 0 V={hf}*(1+0.3*sin(2*pi*1k*time))*sin(2*pi*1meg*time)
+C1 s2 b1 10n
+Rb1 c1 b1 220k
+Q1 c1 b1 0 Q1815
+Rc1 vcc c1 1.5k
+D1 c1 det D1N60
+C3 det 0 2200p
+R3 det 0 4.7k
+C4 det b2 1u
+Rb2 c2 b2 470k
+Q2 c2 b2 0 Q1815
+Rc2 vcc c2 4.7k
+Cear c2 0 15n
+.tran 0 8m 0 20n
+.meas tran vc1 avg v(c1) from=6m to=7m
+.meas tran vc2 avg v(c2) from=6m to=7m
+.meas tran vb1 avg v(b1) from=6m to=7m
+.meas tran vdet avg v(det) from=6m to=7m
+.meas tran ic1 avg ic(Q1) from=6m to=7m
+.meas tran ic2 avg ic(Q2) from=6m to=7m
+.meas tran id1 avg i(D1) from=6m to=7m
+.meas tran vb2 avg v(b2) from=6m to=7m
+* 包絡線の山 (7.25 ms) の搬送波 3.9 mVpp 付近: 隣り合う数周期で読む
+.meas tran b1pp pp v(b1) from=7.245m to=7.255m
+.meas tran c1pp pp v(c1) from=7.249m to=7.251m
+.meas tran detpp pp v(det) from=6m to=7m
+.meas tran ch1pp pp v(c2) from=6m to=7m
+.meas tran detH avg v(det) from=7.2m to=7.3m
+.meas tran detL avg v(det) from=6.7m to=6.8m
+.meas tran c2H avg v(c2) from=7.2m to=7.3m
+.meas tran c2L avg v(c2) from=6.7m to=6.8m
+.end

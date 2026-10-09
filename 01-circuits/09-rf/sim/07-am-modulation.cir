@@ -1,0 +1,16 @@
+* 9-7 AM 変調 (図1) の音声の通り道。V1 (出力 50 ohm、振幅 0.5 V) -> Cmod 1u -> PIN 8 (Rmod 220 で VCC に吊る)。VCC は交流では GND
+* 555 自身の消費は、直流の約 2.4 mA を 4.5 V で割った 1.9k の抵抗に置き換えた仮定 (rq=1G で外す)。実測ではない
+* .ac で 1 kHz の PIN 8 の振幅と位相、300 Hz と 100 Hz の振幅を読む。-3 dB の周波数は波形から読む
+.param rq=1.9k rsrc=50
+V1 gen 0 SIN(0 0.5 1k) AC 0.5
+Rs gen cm {rsrc}
+Cmod cm vdd 1u
+Rmod 0 vdd 220
+Rq vdd 0 {rq}
+.ac dec 100 10 100k
+.meas ac g1k FIND mag(V(vdd)) AT=1k
+.meas ac ph1k FIND ph(V(vdd)) AT=1k
+.meas ac g300 FIND mag(V(vdd)) AT=300
+.meas ac g100 FIND mag(V(vdd)) AT=100
+.meas ac cm1k FIND mag(V(cm)) AT=1k
+.end

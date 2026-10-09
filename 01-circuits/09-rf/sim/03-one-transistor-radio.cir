@@ -1,0 +1,30 @@
+* 9-3 1 石ラジオ (図3 の AM 試験)。W1 の AM 信号 (1 MHz・20 mV peak・1 kHz・50 %) を RS 1k 経由で同調回路へ入れる
+* Q1815 は agc.cir と同じ 2SC1815 の代用 (目安から作った仮定。実測ではない)。bf を .param で振って BF=200 (本文の計算の仮定) も見る
+* 1N60 は IS=0.2u・RS=25 の仮定
+.param bf=200 vin=0.02 am=0.5
+.model Q1815 NPN (IS=2e-14 BF={bf} NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model D1N60 D (IS=0.2u N=1 RS=25 CJO=1p)
+VCC vcc 0 5
+Bw w 0 V={vin}*(1+am*sin(2*pi*1k*time))*sin(2*pi*1Meg*time)
+RS w t 1k
+L1 t 0 250u
+CV1 t 0 100p
+C1 t b 10n
+Rb c b 220k
+Rc vcc c 1.5k
+Q1 c b 0 Q1815
+D1 c d D1N60
+C3 d 0 1n
+R3 d 0 100k
+CEAR d 0 15n
+.tran 0 8m 0 10n
+.meas tran vc_avg AVG V(c) FROM=4m TO=8m
+.meas tran vc_max MAX V(c) FROM=4m TO=8m
+.meas tran vc_min MIN V(c) FROM=4m TO=8m
+.meas tran tank_max MAX V(t) FROM=4m TO=8m
+.meas tran tank_min MIN V(t) FROM=4m TO=8m
+.meas tran d_avg AVG V(d) FROM=4m TO=8m
+.meas tran d_max MAX V(d) FROM=4m TO=8m
+.meas tran d_min MIN V(d) FROM=4m TO=8m
+.meas tran ic_avg AVG I(Rc) FROM=4m TO=8m
+.end
