@@ -199,12 +199,13 @@ endmodule
 - `N` 本の 32 ビットのレジスタが、クロックごとに自分の番号 + 1 ずつ増える。全部の XOR を `sum` に出すので、どのレジスタも省けない
 - 規模を大きくした回路を 1 つ入れたのは、上の 4 つの規模が小さく、差が出にくいため (下の PC の参考値)
 
-lint は 4 つとも警告 0 件で通った (Verilator 5.042 の `--lint-only -Wall`、`counter.v` は `-GW=8` と `-GW=32`、`blink.v` は `-GCLK_HZ=1000`、`many.v` は既定の N = 16)。
+lint は 4 つとも警告 0 件で通った (Verilator 5.042 と 5.048 の `--lint-only -Wall`、`counter.v` は `-GW=8` と `-GW=32`、`blink.v` は `-GCLK_HZ=1000`、`many.v` は既定の N = 16)。
 5-5 の `verilate.sh` は `many.v` を `-GN=256` で C++ にする。
 
 ## Pico 2 のプログラム
 
-`board.h` `verilate.sh` `CMakeLists.txt` などは 5-5 と同じ。5 つの回路をまとめる `models.h` と、主ループの `clock56.cpp` を足す。
+作業用のフォルダは 5-5 と共通で、`board.h` `verilate.sh` `CMakeLists.txt` も 5-5 のまま。ビルドの打ち方は [5-1 の「ビルドする」](01-verilator-on-pico.md#ビルドする)。
+5 つの回路をまとめる `models.h` と、主ループの `clock56.cpp` を足す。
 
 `models.h`:
 
@@ -279,7 +280,7 @@ int main() {
 - DIP スイッチを読む・`switch` で分ける手間は、どの回路でも同じだけ 1 クロックに足される。比べるのは回路どうしの差
 - 選ばれていない回路は止まっている (クロックが来ない)
 
-`build/clock56.uf2` (107 008 バイト) までビルドが通ることを確かめた。**実機では動かしていない。**
+5-5 と共通のフォルダを空から作ってビルドし、`build/clock56.uf2` (107 008 バイト) ができた。**実機では動かしていない。**
 
 ## 回路の規模 (計算と PC の参考値)
 

@@ -189,7 +189,8 @@ wires:
 ## Pico 2 のプログラム
 
 プログラムは C++ (Pico SDK)。Verilator の出す C++ を Pico SDK から呼ぶので、この題は MicroPython では書かない。
-ビルドの仕組みは 5-1、道具は 0-2 の 2 つのコンテナ (`sfa-dev:local` と `wb-pico-sdk`)。
+ビルドの手順は 5-1 と同じ ([5-1 の「ファイル」と「ビルドする」](01-verilator-on-pico.md#ファイル))。
+5-5〜5-8 は 1 つの作業用のフォルダを共通に使い、4 題の `.uf2` をまとめてビルドする。
 
 ### 作業用のフォルダに置くもの
 
@@ -198,9 +199,10 @@ wires:
 | `counter.v` | 8 ビットのカウンタ | 2-4 の `counter.v` そのまま |
 | `board.h` | ピンの割り当てと、LED・DIP スイッチの読み書き | 下に載せる。5-6〜5-8 も同じものを使う |
 | `clock55.cpp` | この題の主ループ | 下に載せる |
-| `stub_mutex.h` `cxx_minimal.cpp` `verilated.cpp` | Verilator のランタイムを Pico 2 で通すための部品 | [Soft-FPGA-Reversi](https://github.com/tommie-jp/Soft-FPGA-Reversi) の `firmware/src/` (`verilated.cpp` は `firmware/src/verilator-runtime/`)。Verilator 5.048 用 |
-| `pico_tls.cpp` | Ubuntu の `arm-none-eabi-gcc` に無い関数を 1 つ足す | 下に載せる |
-| `verilate.sh` `CMakeLists.txt` | 変換とビルドの手順 | 下に載せる |
+| `blink.v` `TD4.v` `many.v` と `clock56.cpp` ほか | 5-6〜5-8 の回路と主ループ | 2-7・5-6〜5-8。この題だけなら要らない |
+| `verilate.sh` | Verilog を C++ にする手順。5-5〜5-8 の回路をまとめて変換する | 下に載せる |
+| `CMakeLists.txt` | ビルドの設定 | 5-1 のもの。最後の行を下の 4 行に替える |
+| `stub_mutex.h` `cxx_minimal.cpp` `verilated.cpp` `pico_tls.cpp` | Verilator のランタイムを Pico 2 で通すための部品 | 5-1 と同じ |
 
 `board.h`:
 
@@ -278,30 +280,11 @@ int main() {
 - GP16 の H の幅は立ち上がりの計算と LED の書き込み、L の幅は立ち下がりの計算とループの残り。足したものが 1 クロック
 - `top` は `static` にして、主ループの外に 1 つだけ置く
 
-`pico_tls.cpp`:
-
-```cpp
-// pico_tls.cpp — Ubuntu の arm-none-eabi-gcc (newlib) に無い __aeabi_read_tp を足す
-// Verilator のランタイムは thread_local を使う。Pico 2 では 1 スレッドなので、
-// 両方のコアで同じ TLS の領域 (リンカスクリプトの __tls_base) を返す。
-// ARM の TLS は「スレッドポインタ + 8」から始まるので 8 を引いておく。
-// .tdata が空 (初期値つきの thread_local が無い) ことを readelf で確かめて使う。
-extern "C" __attribute__((naked)) void* __aeabi_read_tp(void) {
-    __asm volatile(
-        "ldr r0, =(__tls_base - 8)\n"
-        "bx lr\n");
-}
-```
-
-Verilator のランタイム (`verilated.cpp`) は `thread_local` の変数を使う。Ubuntu の apt で入れた `arm-none-eabi-gcc` (13.2.1) では、
-その変数の置き場を返す `__aeabi_read_tp` が見つからず、リンクで止まった。上のファイルで足すと通った。
-`.tdata` (初期値つきの `thread_local`) が空で、TLS の領域が `__tls_base` から始まることは、出来た `.elf` を `arm-none-eabi-readelf` で見て確かめた。
-
-`verilate.sh` (Verilog を C++ にする。`sfa-dev:local` の中で打つ):
+`verilate.sh` (5-1 のものの最後の行を、5-5〜5-8 の回路の 5 行に替える):
 
 ```bash
 #!/bin/sh
-# Verilog を C++ にする (soft-fpga の sfa-dev コンテナの中で打つ)
+# Verilog を C++ にする (sfa-dev のコンテナの中で打つ)
 set -e
 rm -rf vlinc && cp -r /usr/local/share/verilator/include vlinc   # ランタイムのヘッダ
 verilator --cc --no-timing --no-trace -Wall --prefix Vcounter8  -GW=8        --Mdir v_counter8  counter.v
@@ -313,56 +296,19 @@ verilator --cc --no-timing --no-trace -Wall --prefix Vmany      -GN=256      --M
 
 5-6 以降の回路もここでまとめて C++ にしておく (`blink.v` は 2-7、`TD4.v` は 5-8、`many.v` は 5-6)。この題だけなら 1 行目の `counter8` だけでよい。
 
-`CMakeLists.txt`:
+`CMakeLists.txt` は 5-1 のもの。最後の行 (`add_soft_fpga(blink_pico …)`) を次の 4 行に替える。
+5-6 以降の題の `.cpp` もここで決めるので、この題だけなら 1 行目だけでよい。
 
 ```cmake
-cmake_minimum_required(VERSION 3.13)
-set(PICO_BOARD pico2 CACHE STRING "Board type")
-include(pico_sdk_import.cmake)
-project(soft_fpga_clock C CXX ASM)
-set(CMAKE_CXX_STANDARD 17)
-set(PICO_CXX_ENABLE_RTTI 1)          # Verilator の出す C++ が dynamic_cast を使う
-pico_sdk_init()
-
-set(VL_INC ${CMAKE_SOURCE_DIR}/vlinc)   # Verilator の include (sfa-dev からコピー)
-set(VL_RUNTIME ${CMAKE_SOURCE_DIR}/verilated.cpp)  # Pico 向けに直した verilated.cpp
-
-function(add_soft_fpga NAME MAIN)
-    set(SRCS ${MAIN} cxx_minimal.cpp pico_tls.cpp ${VL_RUNTIME})
-    set(DIRS "")
-    foreach(M ${ARGN})
-        file(GLOB GEN ${CMAKE_SOURCE_DIR}/v_${M}/V*.cpp)
-        list(APPEND SRCS ${GEN})
-        list(APPEND DIRS ${CMAKE_SOURCE_DIR}/v_${M})
-        set_source_files_properties(${GEN} PROPERTIES COMPILE_FLAGS "-w")
-    endforeach()
-    add_executable(${NAME} ${SRCS})
-    target_include_directories(${NAME} PRIVATE ${CMAKE_SOURCE_DIR} ${DIRS})
-    target_include_directories(${NAME} SYSTEM PRIVATE ${VL_INC} ${VL_INC}/vltstd)
-    # C++ のソースには先に stub_mutex.h を読ませる (Pico に無い mutex などの代わり)
-    target_compile_options(${NAME} PRIVATE -O2 -Wall -Wextra
-        $<$<COMPILE_LANGUAGE:CXX>:-include ${CMAKE_SOURCE_DIR}/stub_mutex.h>)
-    target_link_libraries(${NAME} pico_stdlib)
-    pico_add_extra_outputs(${NAME})
-endfunction()
-
-set_source_files_properties(${VL_RUNTIME} PROPERTIES COMPILE_FLAGS "-w")
-
 add_soft_fpga(clock55 clock55.cpp counter8)
 add_soft_fpga(clock56 clock56.cpp counter8 counter32 td4 blink many)
 add_soft_fpga(clock57 clock57.cpp counter8 counter32 td4 blink many)
 add_soft_fpga(td4_58  td4_58.cpp  td4)
 ```
 
-打つもの (作業用のフォルダで):
+打つ物は [5-1 の「ビルドする」](01-verilator-on-pico.md#ビルドする)の 2 行のまま。
 
-```bash
-docker run --rm --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work sfa-dev:local sh verilate.sh
-docker run --rm --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work wb-pico-sdk \
-  bash -c 'cp /opt/pico-sdk/external/pico_sdk_import.cmake . && cmake -S . -B build -DPICO_BOARD=pico2 && cmake --build build -j8'
-```
-
-`build/clock55.uf2` (93 696 バイト) までビルドが通ることを確かめた (Verilator 5.048、Pico SDK 2.2.0)。**実機では動かしていない。**
+空のフォルダから 5-1 の手順でビルドし、`build/clock55.uf2` (93 696 バイト) ができた (Verilator 5.048、Pico SDK 2.2.0)。**実機では動かしていない。**
 `.uf2` を Pico 2 に書く手順は 0-2 と同じ (BOOTSEL を押しながら USB をつなぎ、出てきたドライブにコピーする)。
 
 ## 計器の設定

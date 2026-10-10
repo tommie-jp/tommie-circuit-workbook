@@ -45,12 +45,9 @@ f_clk = CLK_HZ x f_led = 100 000 x f_led
 回路は 2-7 の図1 (カウンタが HALF 回数えるたびに LED を反転する) と、2-7 の `blink.v` のまま。書き換えない。
 Pico 2 で動かすときに変えるのは `CLK_HZ` だけで、Verilator に `-GCLK_HZ=100000` を渡して決める。
 
-```bash
-verilator --lint-only -Wall blink.v
-verilator --cc --no-timing -GCLK_HZ=100000 blink.v --top-module blink
-```
-
-プログラム (`main.cpp`)、`CMakeLists.txt`、ビルドの打ち方は 5-1 と同じ。`main.cpp` は LED を GP14 に出す。
+この題のビルドは 5-1 とまったく同じ。ファイル (`main.cpp`・`verilate.sh`・`CMakeLists.txt` ほか) も打つ物も、
+[5-1 の「ファイル」と「ビルドする」](01-verilator-on-pico.md#ファイル)のとおり。
+`verilate.sh` が `-GCLK_HZ=100000` を渡し、`main.cpp` は LED を GP14 に出す。5-1 で作った `build/blink_pico.uf2` (92 160 バイト) を Pico 2 に書けばよい。
 
 ### PC で主ループを数える
 
@@ -166,7 +163,7 @@ trigger: GP14 rising at 500ms
 
 ## 出典
 
-自作。`blink.v` は 2-7。Pico SDK でビルドする手は 5-1 と
-[tommie-jp/Soft-FPGA-TD4](https://github.com/tommie-jp/Soft-FPGA-TD4)。
+自作。`blink.v` は 2-7。Pico SDK でビルドする手は 5-1 と、5-1 が倣った
+[tommie-jp/Soft-FPGA-Reversi](https://github.com/tommie-jp/Soft-FPGA-Reversi)。
 Pico 2 のピン番号は Raspberry Pi の Pico 2 のピン配置図 ([Pico-2-Pinout.pdf](https://datasheets.raspberrypi.com/pico/Pico-2-Pinout.pdf))。
 AD3 の Logic の使い方は 0-4。

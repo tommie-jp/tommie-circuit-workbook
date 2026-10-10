@@ -58,11 +58,11 @@ skinparam rectangle {
 title 図1 Verilog を Verilator で C++ にし、Pico SDK で Pico 2 の .uf2 にする
 
 rectangle "blink.v\n(2-7 の Verilog)" as V #FFF8E1
-rectangle "Verilator (PC)\nverilator --cc" as VL #E8F0FE
-rectangle "obj_dir/Vblink*.cpp\n回路の計算 (eval)" as G #FFF8E1
-rectangle "verilated_pico.cpp\nVerilator のランタイム\n(1 行を外した写し)" as RT #FFF8E1
+rectangle "Verilator 5.048\n(sfa-dev の Docker)\nverilate.sh" as VL #E8F0FE
+rectangle "v_blink/Vblink*.cpp\n回路の計算 (eval)" as G #FFF8E1
+rectangle "verilated.cpp\nVerilator のランタイム\n(Soft-FPGA-Reversi の写し)" as RT #FFF8E1
 rectangle "main.cpp\n主ループ: eval と GPIO" as M #FFF8E1
-rectangle "Pico SDK (Docker)\narm-none-eabi-g++\nstub_mutex.h・pico_compat.h" as SDK #E8F0FE
+rectangle "Pico SDK 2.2.0\n(wb-pico-sdk の Docker)\nstub_mutex.h・cxx_minimal.cpp\npico_tls.cpp" as SDK #E8F0FE
 rectangle "blink_pico.uf2" as U #E6F4EA
 rectangle "Pico 2\nCPU が回路を計算し\nGP14 に出す" as P #E6F4EA
 
@@ -78,40 +78,65 @@ U --> P : BOOTSEL で\nコピー
 
 ![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/05-soft-fpga-pico/plantuml/01-verilator-on-pico.svg)
 
-- `blink.v` から C++ (`obj_dir/`) までは第 4 章と同じ。Pico SDK から右が Pico 2 のための所
-- Verilator は PC で走らせる。Pico 2 の中で動くのは、Verilator が出した C++ とランタイムだけ
+- `blink.v` から C++ (`v_blink/`) までは第 4 章と同じ。Pico SDK から右が Pico 2 のための所
+- Verilator は PC の Docker で走らせる。Pico 2 の中で動くのは、Verilator が出した C++ とランタイムだけ
+- この題の手順は、第 5 章の全部の題で使う。5-2 から先の題は、題ごとに替わる所だけを書く
 
 ## Pico SDK で通らない所と、その直し方
 
 Verilator が出す C++ とランタイム (`verilated.cpp`) は、PC の Linux で動かす前提で書かれている。
-Pico SDK でそのままビルドすると、次の 4 か所で止まった。直し方の 1 と 2 は Soft-FPGA-TD4 と同じ手で、3 と 4 はこの題で足した。
+Pico SDK でそのままビルドすると、次の所で止まる。直し方は、Pico 2 で動いている
+[Soft-FPGA-Reversi](https://github.com/tommie-jp/Soft-FPGA-Reversi) の `firmware/src/` に倣った。
+4 の `pico_tls.cpp` だけがこの本で足したファイルである。
 
-| # | 止まった所 | 原因 | 直し方 |
+| # | 止まる所 | 原因 | 直し方 |
 | --- | --- | --- | --- |
-| 1 | `'mutex' in namespace 'std' does not name a type` | Pico SDK の C++ には `std::mutex` が無い | 何もしない `mutex` を定義した `stub_mutex.h` を、`-include` で全部の C++ の先頭に差し込む (Soft-FPGA-TD4 の `verilator-TD4/stub_mutex.h` をそのまま使う) |
-| 2 | `verilated_threads.h` の中で `condition_variable_any::wait` が無い、`VlThreadPool` の二重定義 | ランタイムがスレッドの仕組みを読み込む | `verilated.cpp` を `verilated_pico.cpp` に写し、`#include "verilated_threads.h"` の 1 行を外す |
-| 3 | `expected ')' before 'PRIu64'` | Ubuntu の `arm-none-eabi` の newlib が `PRIu64` などを定義しない | `pico_compat.h` で `PRId64` `PRIu64` `PRIx64` を補う |
-| 4 | リンクで `undefined reference to '__aeabi_read_tp'` | ランタイムの `thread_local` の変数に、Pico SDK の素の環境は対応していない | `pico_compat.h` で `thread_local` を空にする。Soft-FPGA は 1 つのコアの 1 本の流れで回すので、ただの `static` で足りる |
+| 1 | `'mutex' in namespace 'std' does not name a type` | Pico SDK の C++ には `std::mutex` が無い | Soft-FPGA-Reversi の `stub_mutex.h` を、`-include` で全部の C++ の先頭に差し込む。何もしない `mutex` を定義する |
+| 2 | `verilated_threads.h` の中の `condition_variable_any` などが無い | ランタイムがスレッドの仕組みを読み込む | 同じ `stub_mutex.h` が `verilated_threads.h` と `verilated_trace.h` を読んだことにし、要る型だけを中身の無い形で置く。`verilated.cpp` の行を外さずに済む |
+| 3 | 起動の直後に「VerilatedContext thread count mismatch」で止まる (Soft-FPGA-Reversi の `doc/07-Picoビルド.md`) | Pico 2 ではスレッドの数が 0 と数えられ、ランタイムの検査に引っかかる | Soft-FPGA-Reversi の `verilated.cpp` を使う。この検査を外し、`<iostream>` と `<sstream>` も外してある |
+| 4 | リンクで `undefined reference to '__aeabi_read_tp'` | ランタイムの `thread_local` の変数の置き場を返す関数が、Ubuntu の `arm-none-eabi-gcc` 13.2.1 の newlib に無い | `pico_tls.cpp` で足す (下)。Soft-FPGA-Reversi は xPack の `arm-none-eabi-gcc` 15.2.1 を使うので、この関数を自分で書かない |
 
 ほかに、Verilator の C++ は `dynamic_cast` を使うので、`CMakeLists.txt` で RTTI を有効にする (`PICO_CXX_ENABLE_RTTI`)。
+`cxx_minimal.cpp` (Soft-FPGA-Reversi) は、C++ の例外の仕組みを何もしない関数に置き換え、`.uf2` を小さくする。
 
-Soft-FPGA-TD4 は Windows の VS Code と Raspberry Pi の拡張 (`CMakeLists.txt` に書かれた SDK は 2.2.0、
-コンパイラは 14_2_Rel1) でビルドしている。3 と 4 は、0-2 の Docker (Ubuntu 24.04 の `gcc-arm-none-eabi` 13.2.1) で出た。
-Soft-FPGA-TD4 の環境で 3 と 4 が出るかは確かめていない。
+### この手順に決めた理由
+
+この章は、初め 2 通りの手順で書いていた。もう 1 つは、PC に入れた Verilator 5.042 のランタイムを `sed` で 1 行外して写し、
+自作の `pico_compat.h` で `PRIu64` を補い、`thread_local` を空の語に置き換える手順だった。どちらも `.uf2` まではビルドできた。
+この本は次の理由で、上の表の手順に決めた。
+
+- 道具の版を固定できる。Verilator は 0-2 の `sfa-dev` (5.048)、Pico SDK は `wb-pico-sdk` (2.2.0、`arm-none-eabi-gcc` 13.2.1) の Docker で走る。
+  PC に入れた Verilator の版は人によって違う
+- 手で書くファイルが `pico_tls.cpp` の 1 つで済む。ほかの 3 つは Soft-FPGA-Reversi から写すだけ
+- Pico 2 で動いている物に倣っている。Soft-FPGA-Reversi は Verilator 5.048 のランタイムを Pico 2 で回している
+- `thread_local` の意味を変えない。空の語に置き換えると、ランタイムの変数の持ち方が変わる。`pico_tls.cpp` は置き場を 1 つ返すだけで、`thread_local` はそのまま
+- 上の表の 3 の検査を外してある。もう 1 つの手順では、この検査が残っていた (Pico 2 で止まるかは確かめていない)
+
+Soft-FPGA-Reversi の `stub_mutex.h` と `verilated.cpp` は Verilator 5.048 に合わせてある。`sfa-dev` の Verilator を上げたら、2 つも合わせ直す。
 
 ## ファイル
 
-作業用のフォルダに次を置く。`blink.v` は 2-7 のものをそのまま使う。
+作業用の空のフォルダに次を置く。`blink.v` は 2-7 のものをそのまま使う。
 
-| ファイル | 中身 |
-| --- | --- |
-| `blink.v` | 2-7 の Verilog |
-| `main.cpp` | 主ループ (下) |
-| `CMakeLists.txt` | ビルドの設定 (下) |
-| `pico_compat.h` | 上の表の 3 と 4 (下) |
-| `stub_mutex.h` | 上の表の 1。[Soft-FPGA-TD4 の `verilator-TD4/stub_mutex.h`](https://github.com/tommie-jp/Soft-FPGA-TD4/blob/master/verilator-TD4/stub_mutex.h) をコピーする |
-| `verilated_pico.cpp` | 上の表の 2。下のコマンドで作る |
-| `pico_sdk_import.cmake` | Pico SDK の `external/` からコピーする (0-2 と同じ) |
+| ファイル | 中身 | どこから |
+| --- | --- | --- |
+| `blink.v` | 2-7 の Verilog | 2-7 |
+| `main.cpp` | 主ループ | 下に載せる |
+| `verilate.sh` | Verilog を C++ にする手順 | 下に載せる |
+| `CMakeLists.txt` | ビルドの設定 | 下に載せる |
+| `pico_tls.cpp` | 上の表の 4 | 下に載せる |
+| `stub_mutex.h` `cxx_minimal.cpp` | 上の表の 1・2 と、例外の仕組みの置き換え | Soft-FPGA-Reversi の `firmware/src/` |
+| `verilated.cpp` | 上の表の 3 | Soft-FPGA-Reversi の `firmware/src/verilator-runtime/` |
+| `pico_sdk_import.cmake` | Pico SDK を読み込む設定 | ビルドのときにコンテナの中で写す (下) |
+
+Soft-FPGA-Reversi の 3 つは、この本で確かめたコミット (`5be3b16`) から取る。
+
+```bash
+R=https://raw.githubusercontent.com/tommie-jp/Soft-FPGA-Reversi/5be3b16ef907e9ce9c3b622187ad32672e432831/firmware/src
+curl -fsSLO $R/stub_mutex.h
+curl -fsSLO $R/cxx_minimal.cpp
+curl -fsSLO $R/verilator-runtime/verilated.cpp
+```
 
 `main.cpp`:
 
@@ -145,66 +170,92 @@ int main() {
 }
 ```
 
+`verilate.sh` (Verilog を C++ にする。`sfa-dev:local` の中で打つ):
+
+```bash
+#!/bin/sh
+# Verilog を C++ にする (sfa-dev のコンテナの中で打つ)
+set -e
+rm -rf vlinc && cp -r /usr/local/share/verilator/include vlinc   # ランタイムのヘッダ
+verilator --cc --no-timing --no-trace -Wall --prefix Vblink -GCLK_HZ=100000 --Mdir v_blink blink.v
+```
+
+- 1 行目でランタイムのヘッダ (`include/`) を作業用のフォルダの `vlinc/` に写す。Pico SDK の側はこれを読む
+- 2 行目が変換。`--prefix Vblink` がクラスの名前、`--Mdir v_blink` が C++ を置くフォルダになる。`-GCLK_HZ=100000` は 5-2 で使う仮の値
+- `-Wall` を付けたので、lint の警告が 1 つでもあればここで止まる。`--no-timing` は `#` の遅延などシミュレーション用の書き方を使わない指定、`--no-trace` は波形を残す仕組みを入れない指定
+
 `CMakeLists.txt`:
 
 ```cmake
 cmake_minimum_required(VERSION 3.13)
 set(PICO_BOARD pico2 CACHE STRING "Board type")
 include(pico_sdk_import.cmake)
-project(blink_pico C CXX ASM)
+project(soft_fpga C CXX ASM)
 set(CMAKE_CXX_STANDARD 17)
-set(PICO_CXX_ENABLE_RTTI 1)    # Verilator の出す C++ が dynamic_cast を使う
+set(PICO_CXX_ENABLE_RTTI 1)          # Verilator の出す C++ が dynamic_cast を使う
 pico_sdk_init()
 
-set(VL_INC /vlinc)             # Verilator の include (docker run -v で渡す)
-file(GLOB VL_SOURCES obj_dir/Vblink*.cpp)
+set(VL_INC ${CMAKE_SOURCE_DIR}/vlinc)              # Verilator の include (sfa-dev からコピー)
+set(VL_RUNTIME ${CMAKE_SOURCE_DIR}/verilated.cpp)  # Soft-FPGA-Reversi の verilated.cpp
+set_source_files_properties(${VL_RUNTIME} PROPERTIES COMPILE_FLAGS "-w")
 
-add_executable(blink_pico main.cpp ${VL_SOURCES} verilated_pico.cpp)
-target_include_directories(blink_pico PRIVATE . obj_dir ${VL_INC} ${VL_INC}/vltstd)
-set_source_files_properties(main.cpp ${VL_SOURCES} verilated_pico.cpp
-    PROPERTIES COMPILE_FLAGS "-include ${CMAKE_SOURCE_DIR}/pico_compat.h -include ${CMAKE_SOURCE_DIR}/stub_mutex.h")
-target_link_libraries(blink_pico pico_stdlib)
-pico_add_extra_outputs(blink_pico)
+# add_soft_fpga(名前 主ループの.cpp 回路 …)
+# 回路の名前 M は、verilate.sh が C++ を出したフォルダ v_M を指す
+function(add_soft_fpga NAME MAIN)
+    set(SRCS ${MAIN} cxx_minimal.cpp pico_tls.cpp ${VL_RUNTIME})
+    set(DIRS "")
+    foreach(M ${ARGN})
+        file(GLOB GEN ${CMAKE_SOURCE_DIR}/v_${M}/V*.cpp)
+        list(APPEND SRCS ${GEN})
+        list(APPEND DIRS ${CMAKE_SOURCE_DIR}/v_${M})
+        set_source_files_properties(${GEN} PROPERTIES COMPILE_FLAGS "-w")
+    endforeach()
+    add_executable(${NAME} ${SRCS})
+    target_include_directories(${NAME} PRIVATE ${CMAKE_SOURCE_DIR} ${DIRS})
+    target_include_directories(${NAME} SYSTEM PRIVATE ${VL_INC} ${VL_INC}/vltstd)
+    # C++ のソースには先に stub_mutex.h を読ませる (Pico に無い mutex などの代わり)
+    target_compile_options(${NAME} PRIVATE -O2 -Wall -Wextra
+        $<$<COMPILE_LANGUAGE:CXX>:-include ${CMAKE_SOURCE_DIR}/stub_mutex.h>)
+    target_link_libraries(${NAME} pico_stdlib)
+    pico_add_extra_outputs(${NAME})
+endfunction()
+
+# ここから下が題ごとに替わる
+add_soft_fpga(blink_pico main.cpp blink)
 ```
 
-`pico_compat.h`:
+- `add_soft_fpga` は、主ループの `.cpp`、`cxx_minimal.cpp`、`pico_tls.cpp`、ランタイム、回路の C++ をまとめて 1 つの `.uf2` にする
+- 回路を 2 つ以上使う題は、`add_soft_fpga` の後ろに回路の名前を並べる (5-6 など)
+- `-include` は、ソースの 1 行目に `#include` を書いたのと同じ働きをする。Verilator が出し直すたびにファイルを直さずに済む
+  (Soft-FPGA-TD4 の FAQ と同じ考え)。Verilator の出した C++ とランタイムは `-w` で警告を出さない
+
+`pico_tls.cpp`:
 
 ```cpp
-// Ubuntu の arm-none-eabi の newlib では PRIu64 などが定義されない。Verilator のランタイムが使うので補う
-#include <cinttypes>
-#ifndef PRIu64
-#define PRId64 "lld"
-#define PRIu64 "llu"
-#define PRIx64 "llx"
-#endif
-// Pico SDK の素の環境には thread_local の支え (__aeabi_read_tp) が無い。
-// Soft-FPGA は 1 つのコアの 1 本の流れで回すので、ただの static にしてよい
-#define thread_local
+// pico_tls.cpp — Ubuntu の arm-none-eabi-gcc (newlib) に無い __aeabi_read_tp を足す
+// Verilator のランタイムは thread_local を使う。Pico 2 では 1 スレッドなので、
+// 両方のコアで同じ TLS の領域 (リンカスクリプトの __tls_base) を返す。
+// ARM の TLS は「スレッドポインタ + 8」から始まるので 8 を引いておく。
+// .tdata が空 (初期値つきの thread_local が無い) ことを readelf で確かめて使う。
+extern "C" __attribute__((naked)) void* __aeabi_read_tp(void) {
+    __asm volatile(
+        "ldr r0, =(__tls_base - 8)\n"
+        "bx lr\n");
+}
 ```
 
-`-include` は、ソースの 1 行目に `#include` を書いたのと同じ働きをする。Verilator が出し直すたびにファイルを直さずに済む
-(Soft-FPGA-TD4 の FAQ と同じ考え)。
+Pico SDK 2.2.0 のリンカスクリプト (`memmap_default.ld`) は、`__tls_base` を `.tbss` (初期値なしの `thread_local`) の頭に置く。
+`.tbss` は起動時に 0 で埋める `.bss` の範囲に入る。`.tdata` (初期値つき) が空なら、この 1 か所を返すだけで足りる。
 
 ## ビルドする
 
-Verilator は PC で走らせる (版は 5.042 で確かめた)。`CLK_HZ` は 5-2 で使う仮の値 100 000 にしておく。
+作業用のフォルダで次の 2 行を打つ。1 行目が Verilog から C++ (`sfa-dev:local`)、2 行目が C++ から `.uf2` (`wb-pico-sdk`)。
+どちらのコンテナも 0-2 で作った物。
 
 ```bash
-verilator --lint-only -Wall blink.v
-verilator --cc --no-timing -GCLK_HZ=100000 blink.v --top-module blink
-sed 's|^#include "verilated_threads.h"|// & (Pico には thread が無いので外す)|' \
-  /usr/local/share/verilator/include/verilated.cpp > verilated_pico.cpp
-```
-
-`--no-timing` は、`#` の遅延などシミュレーション用の書き方を使わない指定。3 行目の場所は Verilator を入れた所によって変わる
-(`verilator --getenv VERILATOR_ROOT` の `include/`)。
-
-Pico SDK は 0-2 の `wb-pico-sdk` のコンテナを使う。Verilator の include を `/vlinc` に渡す。
-
-```bash
-docker run --rm --user "$(id -u):$(id -g)" -v "$PWD":/work \
-  -v /usr/local/share/verilator/include:/vlinc:ro wb-pico-sdk \
-  bash -c 'cmake -S . -B build -DPICO_BOARD=pico2 -G Ninja && cmake --build build -j8'
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work sfa-dev:local sh verilate.sh
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD":/work -w /work wb-pico-sdk \
+  bash -c 'cp /opt/pico-sdk/external/pico_sdk_import.cmake . && cmake -S . -B build -DPICO_BOARD=pico2 && cmake --build build -j8'
 ```
 
 `build/blink_pico.uf2` ができればよい。Pico 2 への書き込み (BOOTSEL を押しながら USB をつなぎ、出たドライブにコピーする) は 0-2 と同じ。
@@ -214,23 +265,27 @@ MicroPython からは Verilator の C++ を呼べないからである。
 
 ## 見るべき値
 
-PC で実際に打って得た値。Pico 2 の上では動かしていない。
+空のフォルダから上の手順でビルドし、実際に打って得た値。Pico 2 の上では動かしていない。
 
 | 確かめること | 打つ物 | 出た物 |
 | --- | --- | --- |
-| lint | `verilator --lint-only -Wall blink.v` | 警告なし (Verilation Report の 3 行だけ) |
-| C++ への変換 | `verilator --cc …` | `obj_dir/` に `Vblink.cpp` など 5 つの C++ |
-| ビルド | `cmake --build build` | エラーなし。上の表の 4 か所を直す前は止まった |
-| `.uf2` の大きさ | `ls -l build/blink_pico.uf2` | 599 040 バイト |
-| プログラムの大きさ | `arm-none-eabi-size build/blink_pico.elf` | text 303 288 バイト、bss 6 428 バイト |
-| 内訳 | `arm-none-eabi-size` で `.o` ごと | 回路 (`Vblink*.o`) は合わせて約 1.4 KB、ランタイム (`verilated_pico.cpp.o`) は約 74 KB。残りの多くは、ランタイムが引き込む C++ の標準ライブラリ (文字列の書式・ロケールなど) |
+| C++ への変換と lint | `sh verilate.sh` (`sfa-dev:local` の中) | 警告なし。Verilation Report に `Verilator 5.048`。`v_blink/` に `Vblink.cpp` など 5 つの C++ |
+| ビルド | `cmake --build build` | エラーも警告もなし |
+| `pico_tls.cpp` を外すと | 同じ | リンクで `undefined reference to '__aeabi_read_tp'` (上の表の 4) |
+| `.uf2` の大きさ | `ls -l build/blink_pico.uf2` | 92 160 バイト |
+| プログラムの大きさ | `arm-none-eabi-size build/blink_pico.elf` | text 49 828 バイト、bss 2 308 バイト |
+| 内訳 | `arm-none-eabi-size` で `.o` ごと | 回路 (`v_blink/Vblink*.o`) は合わせて text 約 1.6 KB。ランタイム (`verilated.cpp.o`) は text 約 64 KB で、使わない所はリンクで落ちる |
+| `thread_local` の置き場 | `arm-none-eabi-readelf -S build/blink_pico.elf` | `.tdata` は 0 バイト、`.tbss` は 0x44 バイト。`__tls_base` は `.tbss` の頭 |
 
 0-2 の C だけの `blink.uf2` は 12 800 バイトだった。回路そのものは小さく、大きさのほとんどはランタイムの側にある。
-Pico 2 のフラッシュ (4 MB) には十分に収まる。ランタイムを削る話は 5-13 に置く。
+もう 1 つの手順 (PC の Verilator 5.042 の `verilated.cpp` から 1 行だけ外した写し) では、同じ `blink` の `.uf2` が 599 040 バイトだった。
+差の多くは、ランタイムが `<iostream>` と `<sstream>` から引き込む C++ の標準ライブラリ (文字列の書式・ロケールなど) である。
+どちらも Pico 2 のフラッシュ (4 MB) には収まる。ランタイムを削る話は 5-13 に置く。
 
 ## 出典
 
-自作。Pico SDK でビルドする手 (`stub_mutex.h` を `-include` で差し込む、`verilated.cpp` を写して直す、RTTI を有効にする) は
-[tommie-jp/Soft-FPGA-TD4](https://github.com/tommie-jp/Soft-FPGA-TD4) の `verilator-TD4/CMakeLists.txt`・`stub_mutex.h`・`etc/92-FAQ.md` に倣った。
+自作。Pico SDK でビルドする手 (`stub_mutex.h`・`cxx_minimal.cpp`・Pico 向けに直した `verilated.cpp`、RTTI を有効にする) は
+[tommie-jp/Soft-FPGA-Reversi](https://github.com/tommie-jp/Soft-FPGA-Reversi) の `firmware/CMakeLists.txt`・`firmware/src/`・`doc/07-Picoビルド.md` (コミット `5be3b16`) に倣った。
+Soft-FPGA の方式と `-include` で差し込む考えは [tommie-jp/Soft-FPGA-TD4](https://github.com/tommie-jp/Soft-FPGA-TD4) の `verilator-TD4/` と `etc/92-FAQ.md`。
 `eval()` とモデルのクラスは Verilator の資料 ([Verilator User's Guide](https://veripool.org/guide/latest/))。
 Pico SDK は [raspberrypi/pico-sdk](https://github.com/raspberrypi/pico-sdk) の 2.2.0。

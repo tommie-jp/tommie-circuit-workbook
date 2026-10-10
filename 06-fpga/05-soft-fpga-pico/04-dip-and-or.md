@@ -91,16 +91,23 @@ module gates (
 endmodule
 ```
 
-```bash
-verilator --lint-only -Wall gates.v
-verilator --cc --no-timing gates.v --top-module gates
-```
+C++ にするのは 5-1 の `verilate.sh` で、最後の行を次に替える。`-Wall` の lint は警告なしで通った (Verilator 5.048)。
 
-lint は警告なしで通った。
+```bash
+verilator --cc --no-timing --no-trace -Wall --prefix Vgates --Mdir v_gates gates.v
+```
 
 ## Pico 2 のプログラム
 
-`main.cpp`。`CMakeLists.txt` は 5-1 のものの `blink_pico` を `gates_pico`、`Vblink*` を `Vgates*` に替える。
+ビルドの手順は 5-1 と同じ ([5-1 の「ファイル」と「ビルドする」](01-verilator-on-pico.md#ファイル))。
+題ごとに替えるのは、`verilate.sh` の最後の行 (上)、`CMakeLists.txt` の最後の行、`main.cpp` の 3 つ。
+`CMakeLists.txt` の最後の行は次にする。
+
+```cmake
+add_soft_fpga(gates_pico main.cpp gates)
+```
+
+`main.cpp`:
 
 ```cpp
 // 1-1 の gates.v を Pico 2 で回す。a・b は DIP スイッチ、出力は LED
@@ -140,7 +147,7 @@ int main() {
 }
 ```
 
-0-2 の Docker で `gates_pico.uf2` (599 552 バイト) までビルドが通った。**実機では動かしていない。**
+空のフォルダから 5-1 の手順でビルドし、`build/gates_pico.uf2` (93 184 バイト) ができた。**実機では動かしていない。**
 
 ### PC で主ループを回す
 
