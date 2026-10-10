@@ -101,8 +101,9 @@ Tang Nano 9K は在庫が 128 個、Tang Nano 20K が 71 個、Tang Primer 25K �
    (どこまで載るかは 8-8 で実測して書く)。
 3. **開いた道具**: Yosys と nextpnr (Apicula) で合成から書き込みまで通せる。
    メーカーの道具に頼らなくても動かせる。
-4. **TD4 の元との縁**: Soft-FPGA-TD4 の元にした simpleTD4 が Tang 系のボード向けである
-   (作者の記憶による。出典は 8-4 までに確かめて付ける)。
+4. **TD4 の元との縁**: Soft-FPGA-TD4 の元にした [simpleTD4](https://github.com/asfdrwe/simpleTD4) は、
+   初代の Sipeed Tang Nano (GW1N-1) で動かす手順を README に書いている。Tang Nano 9K 向けではないが、
+   同じ Gowin の FPGA なので、Verilog はそのまま載る (8-6)。
 
 欠点も書いておく。**BANK3 (右の列の IO79〜IO86) は 1.8 V** で、ほかのピンは 3.3 V。
 5 V を入れてはいけない。この 3 つの違いは 0-3 と 8-5 でも扱う。
