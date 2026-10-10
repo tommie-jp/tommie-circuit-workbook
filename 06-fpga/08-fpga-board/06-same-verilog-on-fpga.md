@@ -382,7 +382,7 @@ title: 図3 DIP スイッチは j 行の 4 本で、AD3 はヘッダの 1〜5 �
 board: full
 parts:
   U1: tang-nano-9k @ b1
-  SW1: dip-switch4 @ e28
+  SW1: dip-switch4 @ e28 r180
   AD:
     type: device
     at: bottom
@@ -395,10 +395,10 @@ wires:
   - a29 -- -t29 black
   - a30 -- -t30 black
   - a31 -- -t31 black
-  - j17 -- j28 yellow
-  - j18 -- j29 orange
-  - j19 -- j30 yellow
-  - j20 -- j31 orange
+  - j17 -- j31 yellow [v24]
+  - j18 -- j30 orange [v17]
+  - j19 -- j29 yellow [v10]
+  - j20 -- j28 orange [v3]
   - AD.DIO3 -- j1 green
   - AD.DIO2 -- j2 green
   - AD.DIO1 -- j3 green
