@@ -21,13 +21,40 @@ board: BB
 
 ## 全体の構成
 
-```text
- SW1 (A0〜A3) ------------------------------> [ U1  74HC283 ] --S0〜S3--> LED 4 つ (図3)
- SW2 (B0〜B3) --> [ U2  74HC86: B xor SUB ] --BX0〜BX3-->  |    |
- SW3 (SUB) -------+-------------------------> CIN         +----+--C4--> LED (緑)
-                                                          |
-             A3・BX3・S3・C4 --> [ U3  74HC86 × 3 ] --V--> LED (黄)
+```plantuml
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName "Noto Sans CJK JP"
+skinparam rectangle {
+  RoundCorner 6
+}
+
+rectangle "SW1\nA0〜A3" as SA #FFF8E1
+rectangle "SW2\nB0〜B3" as SB #FFF8E1
+rectangle "SW3\nSUB" as SS #FFF8E1
+rectangle "U2 74HC86\nB xor SUB" as U2 #E8F0FE
+rectangle "U1 74HC283\n4 ビット加算器" as U1 #E6F4EA
+rectangle "U3 74HC86 × 3\nあふれを作る" as U3 #E8F0FE
+rectangle "LED 4 つ (図3)\n答え S0〜S3" as LS #FDECEA
+rectangle "LED (緑)\nC4" as LC #FDECEA
+rectangle "LED (黄)\nV" as LV #FDECEA
+
+SA --> U1 : A0〜A3
+SB --> U2 : B0〜B3
+SS --> U2 : SUB
+SS --> U1 : CIN
+U2 --> U1 : BX0〜BX3
+U1 --> LS : S0〜S3
+U1 --> LC : C4
+SA --> U3 : A3
+U2 --> U3 : BX3
+U1 --> U3 : S3・C4
+U3 --> LV : V
+@enduml
 ```
+
+![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/plantuml/02-alu-like.svg)
 
 1. SUB = 0 のとき、U2 は B をそのまま通し (BX = B)、U1 の CIN は 0。U1 は **A + B** を出す
 2. SUB = 1 のとき、U2 は B の 4 ビットを全部反転し (BX = B の反転)、U1 の CIN は 1。U1 は **A + (B の反転) + 1 = A − B** を出す

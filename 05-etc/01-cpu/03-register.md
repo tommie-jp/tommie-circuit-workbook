@@ -22,13 +22,34 @@ CPU は計算の途中の値を**レジスタ**に覚えておく。レジスタ
 
 ## 全体の構成
 
-```text
- SW1 (IN0〜IN3) ----B---> [ U2  74HC157 ] --Y--> D [ U1  74HC273 ] Q --+--> LED 4 つ (図3)
-                   +-A--> [ 選択 = LOAD ]          [ CLK = W1     ]    |
-                   |                                                    |
-                   +----------------------- Q0〜Q3 (今の値) <-----------+
- SW2 の 1 番 (LOAD) --> 選択      AD3 の W1 (1 Hz) --> CLK      S1 --> CLR (0 にする)
+```plantuml
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName "Noto Sans CJK JP"
+skinparam rectangle {
+  RoundCorner 6
+}
+
+rectangle "SW1\nIN0〜IN3" as IN #FFF8E1
+rectangle "SW2 の 1 番\nLOAD" as LD #FFF8E1
+rectangle "AD3 の W1\n1 Hz" as CK #FFF8E1
+rectangle "S1\n押すと 0 にする" as CLR #FFF8E1
+rectangle "U2 74HC157\n2 → 1 のセレクタ\n選択 = LOAD" as U2 #E8F0FE
+rectangle "U1 74HC273\n4 ビットのレジスタ" as U1 #E6F4EA
+rectangle "LED 4 つ (図3)\nQ0〜Q3" as LED #FDECEA
+
+IN --> U2 : B (IN0〜IN3)
+LD --> U2 : 選択
+U2 --> U1 : Y → D
+U1 --> U2 : A (Q0〜Q3、今の値)
+CK --> U1 : CLK
+CLR --> U1 : CLR
+U1 --> LED : Q0〜Q3
+@enduml
 ```
+
+![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/plantuml/03-register.svg)
 
 1. LOAD = 1 のとき、U2 は B (スイッチの IN) を選ぶ。次のクロックの立ち上がりで U1 が IN を取り込む
 2. LOAD = 0 のとき、U2 は A (U1 の Q、今の値) を選ぶ。立ち上がりで U1 は**今の値をもう一度取り込む**ので、値は変わらない
