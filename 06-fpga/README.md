@@ -47,7 +47,7 @@
 | 1 | 組み合わせ回路を Verilog で書く | 7 | 12 | 18 | 12 |
 | 2 | 順序回路 | 7 | 11 | 19 | 11 |
 | 3 | シミュレーションと検証 | 4 | 8 | 16 | 4 |
-| 4 | Soft-FPGA ブラウザ編 | 4 | 7 | 14 | 4 |
+| 4 | Soft-FPGA ブラウザ編 | 4 | 7 | 14 | 14 |
 | 5 | Soft-FPGA Pico 2 編 | 8 | 16 | 22 | 8 |
 | 6 | 状態機械 | 3 | 8 | 16 | 3 |
 | 7 | 通信 (UART・SPI・I2C) | 3 | 7 | 17 | 3 |
@@ -56,7 +56,7 @@
 | 10 | メモリと演算 | 1 | 4 | 14 | 1 |
 | 11 | CPU を作る | 0 | 2 | 12 | 0 |
 | 12 | 作品 | 0 | 0 | 6 | 1 |
-| **計** | | **50** | **100** | **200** | **62** |
+| **計** | | **50** | **100** | **200** | **72** |
 
 ## 第 0 章 道具と準備
 
@@ -150,16 +150,16 @@
 | 4-2 | [カウンタの 8 ビットをロジックアナライザの画面で見る](04-soft-fpga-web/02-counter-logic-screen.md) | 必須 | — | WEB |
 | 4-3 | [自分の Verilog に差し替えてビルドする](04-soft-fpga-web/03-own-verilog-build.md) | 必須 | — | WEB |
 | 4-4 | [信号機の状態機械 — 今の状態が図で光る](04-soft-fpga-web/04-traffic-fsm.md) | 必須 | — | WEB |
-| 4-5 | 見たい信号を外へ引き出す — 最上位の薄いラッパ | 入門 | — | WEB |
-| 4-6 | UART のループバックを波形で見る | 入門 | — | WEB |
-| 4-7 | ボタンとスイッチを画面に付ける — JS から入力を与える | 入門 | — | WEB |
-| 4-8 | リングバッファと TypedArray — 毎クロック JS を呼ばない | 中級 | — | WEB |
-| 4-9 | Web Worker で回す — 画面を止めない | 中級 | — | WEB |
-| 4-10 | メモリが伸びるとビューが切れる | 中級 | — | WEB |
-| 4-11 | 6502 の内部を見る — マイクロシーケンサとバス | 中級 | — | WEB |
-| 4-12 | 8080 と CP/M — I/O のバスを見る | 中級 | — | WEB |
-| 4-13 | GitHub Pages に載せる | 中級 | — | WEB |
-| 4-14 | 命令エミュレータに無い信号 — T ステートを数える | 中級 | — | WEB |
+| 4-5 | [見たい信号を外へ引き出す — 最上位の薄いラッパ](04-soft-fpga-web/05-probe-wrapper.md) | 入門 | — | WEB |
+| 4-6 | [UART のループバックを波形で見る](04-soft-fpga-web/06-uart-loopback.md) | 入門 | — | WEB |
+| 4-7 | [ボタンとスイッチを画面に付ける — JS から入力を与える](04-soft-fpga-web/07-screen-switches.md) | 入門 | — | WEB |
+| 4-8 | [リングバッファと TypedArray — 毎クロック JS を呼ばない](04-soft-fpga-web/08-ring-buffer-typedarray.md) | 中級 | — | WEB |
+| 4-9 | [Web Worker で回す — 画面を止めない](04-soft-fpga-web/09-web-worker.md) | 中級 | — | WEB |
+| 4-10 | [メモリが伸びるとビューが切れる](04-soft-fpga-web/10-memory-growth-views.md) | 中級 | — | WEB |
+| 4-11 | [6502 の内部を見る — マイクロシーケンサとバス](04-soft-fpga-web/11-6502-microsequencer-bus.md) | 中級 | — | WEB |
+| 4-12 | [8080 と CP/M — I/O のバスを見る](04-soft-fpga-web/12-8080-cpm-io-bus.md) | 中級 | — | WEB |
+| 4-13 | [GitHub Pages に載せる](04-soft-fpga-web/13-github-pages.md) | 中級 | — | WEB |
+| 4-14 | [命令エミュレータに無い信号 — T ステートを数える](04-soft-fpga-web/14-count-t-states.md) | 中級 | — | WEB |
 
 ## 第 5 章 Soft-FPGA Pico 2 編
 
