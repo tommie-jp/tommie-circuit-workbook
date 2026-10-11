@@ -33,7 +33,7 @@ title: 図1 Pico 2 の GP14・GP15 を AD3 の DIO0・DIO1 で読む
 parts:
   AD:
     type: device
-    at: 1,5
+    at: 1,5.25
     label: AD3
     pins: [GND, DIO0, DIO1]
     turn: mirror

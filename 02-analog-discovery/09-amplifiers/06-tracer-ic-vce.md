@@ -26,16 +26,16 @@ title: 図1 Vce を掃引し、Ib を数段階に固定して測る (アダプ�
 parts:
   AD:
     type: device
-    at: 1,1
+    at: 1,2
     label: Analog Discovery
     pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
-  Rb: resistor 5,1 5,3 220k
+  Rb: resistor 5,1.25 5,5 220k
   Q1: npn 9,6 2SC1815
   Rs: resistor 15,3 18,3 100
   G1: ground 21,6
 wires:
-  - AD.V+ -| 5,1
-  - 5,3 |- Q1.B
+  - AD.V+ -- 5,1.25
+  - 5,5 |- Q1.B
   - AD.W1 -| 15,3
   - AD.2+ -| 15,3
   - 18,3 |- Q1.C

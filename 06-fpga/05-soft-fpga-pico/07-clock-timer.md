@@ -53,11 +53,10 @@ parts:
   G2: ground 15.4,11.2
   AD:
     type: device
-    at: 2,10.6
+    at: 2,10.8
     label: AD3
-    pins: [DIO5, DIO4, DIO3, DIO2, DIO1, DIO0, GND]
+    pins: [DIO5, DIO4, DIO3, DIO2, GND, DIO1, DIO0]
     turn: mirror
-  G4: ground 3.4,12.6
 wires:
   - U1.GP2 -| 10,2
   - 10,2 -- 13,2
@@ -85,19 +84,13 @@ wires:
   - SW1.B3 -| 15.4,10.2
   - SW1.B4 -| 15.4,10.6
   - 15.4,9.4 -- 15.4,9.8 -- 15.4,10.2 -- 15.4,10.6 -- 15.4,11.2
-  - AD.DIO5 -| 4,9.4
-  - 4,9.4 |- U1.GP21
-  - AD.DIO4 -| 4.2,9.8
-  - 4.2,9.8 |- U1.GP20
-  - AD.DIO3 -| 4.4,10.2
-  - 4.4,10.2 |- U1.GP19
-  - AD.DIO2 -| 4.6,10.6
-  - 4.6,10.6 |- U1.GP18
-  - AD.DIO1 -| 4.8,11.4
-  - 4.8,11.4 |- U1.GP17
-  - AD.DIO0 -| 5,11.8
-  - 5,11.8 |- U1.GP16
-  - AD.GND -| 3.4,12.6
+  - AD.DIO5 -- U1.GP21
+  - AD.DIO4 -- U1.GP20
+  - AD.DIO3 -- U1.GP19
+  - AD.DIO2 -- U1.GP18
+  - AD.GND -- U1.GND23
+  - AD.DIO1 -- U1.GP17
+  - AD.DIO0 -- U1.GP16
 notes:
   - text 9,12.6: GP10-GP13 は Pico 2 の内蔵プルアップ (ON で L)
 style:

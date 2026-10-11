@@ -29,7 +29,7 @@ parts:
   Rload: resistor 9,8 12,8 1k
   Radd: resistor 25,11 28,11 470
   Q1: nmos-e 28,14 2N7000
-  Rg: resistor 3,14 9,14 1k
+  Rg: resistor 3,14 8,14 1k
   Rgpd: resistor 9,14 9,17 100k
   AD:
     type: device
@@ -44,10 +44,10 @@ wires:
   - AD.1+ |- 9,8
   - AD.1- -| 12,8
   - AD.W2 -| 3,14
-  - 9,14 |- Q1.G
+  - 8,14 -- 9,14 |- Q1.G
   - 28,11 |- Q1.D
-  - Q1.S -| 9,17
-  - AD.2+ -| 9,14
+  - Q1.S -| 9.5,17 -- 9,17
+  - AD.2+ -| 8.5,14
   - AD.2- -| 9,17
   - AD.GND -| 9,17
 ```
