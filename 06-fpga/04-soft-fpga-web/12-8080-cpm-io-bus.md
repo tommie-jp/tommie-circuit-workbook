@@ -160,7 +160,7 @@ static int run_count(const std::vector<uint8_t>& prog) {
                 if (m1_at >= 0)
                     printf("%04X op=%02X T=%ld status=%s\n", m1_addr, sim_read_byte(m1_addr),
                            (i - m1_at) / 2, cycles.c_str());  // 1 T = 2 step
-                if (m1_at >= 0 && addr == 0) return 0;          // 0000 に戻ったら終わり
+                if (m1_at >= 0 && addr == 0) break;             // 0000 に戻ったら終わり
                 m1_at = i; m1_addr = addr; cycles.clear();
             }
             char b[4];
@@ -169,6 +169,7 @@ static int run_count(const std::vector<uint8_t>& prog) {
         }
         prev_sync = sync;
     }
+    printf("RAM 0080=%02X 0081=%02X\n", sim_read_byte(0x0080), sim_read_byte(0x0081));
     return 0;
 }
 
