@@ -43,9 +43,9 @@
 
 | 章 | 題名 | 必須 | 入門 | 中級 | 済 |
 | --- | --- | --- | --- | --- | --- |
-| 0 | 道具と準備 | 5 | 7 | 11 | 5 |
-| 1 | 組み合わせ回路を Verilog で書く | 7 | 12 | 18 | 7 |
-| 2 | 順序回路 | 7 | 11 | 19 | 7 |
+| 0 | 道具と準備 | 5 | 7 | 11 | 7 |
+| 1 | 組み合わせ回路を Verilog で書く | 7 | 12 | 18 | 12 |
+| 2 | 順序回路 | 7 | 11 | 19 | 11 |
 | 3 | シミュレーションと検証 | 4 | 8 | 16 | 4 |
 | 4 | Soft-FPGA ブラウザ編 | 4 | 7 | 14 | 4 |
 | 5 | Soft-FPGA Pico 2 編 | 8 | 16 | 22 | 8 |
@@ -56,7 +56,7 @@
 | 10 | メモリと演算 | 1 | 4 | 14 | 1 |
 | 11 | CPU を作る | 0 | 2 | 12 | 0 |
 | 12 | 作品 | 0 | 0 | 6 | 1 |
-| **計** | | **50** | **100** | **200** | **51** |
+| **計** | | **50** | **100** | **200** | **62** |
 
 ## 第 0 章 道具と準備
 
@@ -67,8 +67,8 @@
 | 0-3 | [3.3 V の決まり — Pico 2 と FPGA のピンに 5 V を入れない](00-tools/03-voltage-rule-3v3.md) | 必須 | BB | PICO |
 | 0-4 | [AD3 の Logic をつなぐ — DIO を 3.3 V にして GND を共通に](00-tools/04-ad3-logic-connect.md) | 必須 | BB | PICO |
 | 0-5 | [最初の 1 本 — ブラウザの soft-fpga でカウンタの波形を見る](00-tools/05-first-counter-web.md) | 必須 | — | WEB |
-| 0-6 | 波形を見る道具 — VCD と波形ビューア | 入門 | — | SIM |
-| 0-7 | Verilator の lint で書き間違いを見つける | 入門 | — | SIM |
+| 0-6 | [波形を見る道具 — VCD と波形ビューア](00-tools/06-waveform-viewer.md) | 入門 | — | SIM |
+| 0-7 | [Verilator の lint で書き間違いを見つける](00-tools/07-verilator-lint.md) | 入門 | — | SIM |
 | 0-8 | Windows (MSYS2) で道具を入れる | 中級 | — | SIM |
 | 0-9 | Debug Probe で Pico 2 に書き込み、UART のログを見る | 中級 | BB | PICO |
 | 0-10 | 開いた道具で FPGA を合成する — Yosys と nextpnr | 中級 | — | FPGA |
@@ -85,11 +85,11 @@
 | 1-5 | [always @(*) と case — デコーダ](01-combinational/05-case-decoder.md) | 必須 | — | SIM |
 | 1-6 | [半加算器と全加算器](01-combinational/06-adders.md) | 必須 | — | SIM |
 | 1-7 | [4 ビットの加算器 — 全加算器を 4 つ並べるのと + 演算子を比べる](01-combinational/07-adder4.md) | 必須 | — | SIM |
-| 1-8 | 7 セグメントのデコーダ | 入門 | — | SIM |
-| 1-9 | 比較器 — 一致と大小 | 入門 | — | SIM |
-| 1-10 | プライオリティエンコーダ | 入門 | — | SIM |
-| 1-11 | 符号付きの数 — 2 の補数と signed | 入門 | — | SIM |
-| 1-12 | parameter と generate — 幅を変えられる部品 | 入門 | — | SIM |
+| 1-8 | [7 セグメントのデコーダ](01-combinational/08-seg7-decoder.md) | 入門 | — | SIM |
+| 1-9 | [比較器 — 一致と大小](01-combinational/09-comparator.md) | 入門 | — | SIM |
+| 1-10 | [プライオリティエンコーダ](01-combinational/10-priority-encoder.md) | 入門 | — | SIM |
+| 1-11 | [符号付きの数 — 2 の補数と signed](01-combinational/11-signed.md) | 入門 | — | SIM |
+| 1-12 | [parameter と generate — 幅を変えられる部品](01-combinational/12-parameter-generate.md) | 入門 | — | SIM |
 | 1-13 | ラッチを作ってしまう書き方 — else の無い if | 中級 | — | SIM |
 | 1-14 | バレルシフタ | 中級 | — | SIM |
 | 1-15 | 桁上げ先見の加算器 — リップルと段数を比べる | 中級 | — | SIM |
@@ -108,10 +108,10 @@
 | 2-5 | [クロックイネーブル — クロックを分けずに遅く動かす](02-sequential/05-clock-enable.md) | 必須 | | SIM |
 | 2-6 | [シフトレジスタ](02-sequential/06-shift-register.md) | 必須 | | SIM |
 | 2-7 | [分周して LED を 1 Hz で点滅させる](02-sequential/07-blink-1hz.md) | 必須 | | WEB |
-| 2-8 | アップダウンカウンタとロード | 入門 | — | SIM |
-| 2-9 | 10 進カウンタと桁上げ — ストップウォッチの秒を 2 桁の 7 セグに | 入門 | — | WEB |
-| 2-10 | 立ち上がりの検出 — 1 クロックのパルスを作る | 入門 | — | SIM |
-| 2-11 | PWM — カウンタと比較器 | 入門 | — | SIM |
+| 2-8 | [アップダウンカウンタとロード](02-sequential/08-updown-load.md) | 入門 | — | SIM |
+| 2-9 | [10 進カウンタと桁上げ — ストップウォッチの秒を 2 桁の 7 セグに](02-sequential/09-decimal-counter.md) | 入門 | — | WEB |
+| 2-10 | [立ち上がりの検出 — 1 クロックのパルスを作る](02-sequential/10-edge-detect.md) | 入門 | — | SIM |
+| 2-11 | [PWM — カウンタと比較器](02-sequential/11-pwm.md) | 入門 | — | SIM |
 | 2-12 | リングカウンタとジョンソンカウンタ | 中級 | — | SIM |
 | 2-13 | LFSR — 擬似乱数 | 中級 | — | WEB |
 | 2-14 | グレイコードのカウンタ | 中級 | — | SIM |
