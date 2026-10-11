@@ -254,10 +254,10 @@ trigger: IO_REQ rising at 9ms
 
 | 時刻 (ms) | マシンサイクル | status | addr | 何が起きるか |
 | --- | --- | --- | --- | --- |
-| 0〜4 | M1 (4 T) | A2 | F2E8 | OUT の opcode を取り込む。X1 (1.5 ms) で DBIN = 1、dbus = D3 |
-| 4〜7 | M2 (3 T) | 82 | F2E9 | ポート番号 01 をメモリから読む (5〜6 ms で dbus = 01) |
+| 0〜4 | M1 (4 T) | A2 | F29B | OUT の opcode を取り込む。X1 (1.5 ms) で DBIN = 1、dbus = D3 |
+| 4〜7 | M2 (3 T) | 82 | F29C | ポート番号 01 をメモリから読む (5〜6 ms で dbus = 01) |
 | 7〜10 | M3 (3 T) | 10 | 0101 | I/O のサイクル。アドレスバスの上下 8 ビットに同じポート番号 01 が出る。X2 (9.25 ms) で WR_N = 0、io_req = 1、dbus = 41 (`A`) |
-| 10〜 | 次の M1 | A2 | F2EA | RET の取り込み |
+| 10〜 | 次の M1 | A2 | F29D | RET の取り込み |
 
 ### 読み方
 
@@ -269,8 +269,8 @@ trigger: IO_REQ rising at 9ms
 
 ## 見るべき値
 
-soft-fpga (`19c032a`) の 06-8080 を Verilator 5.042 で PC にビルドし、CP/M を起動して取った。
-ブラウザは公開中の [06-8080](https://tommie-jp.github.io/soft-fpga/06-8080/) (画面の版表示 Ver.1.0.0、2026/06/13) を Playwright の Chromium (headless) で開き、上の手順で止めた。
+soft-fpga (`f979b96`) の 06-8080 を Verilator 5.042 で PC にビルドし、CP/M を起動して取った。
+ブラウザは公開中の [06-8080](https://tommie-jp.github.io/soft-fpga/06-8080/) (画面の版表示 Ver.1.0.1、2026/10/11) を Playwright の Chromium (headless) で開き、上の手順で止めた。
 
 | 見る所 | 値 | 種類 |
 | --- | --- | --- |
@@ -280,9 +280,11 @@ soft-fpga (`19c032a`) の 06-8080 を Verilator 5.042 で PC にビルドし、C
 | 出したデータ | 41 (`A`) | 動かして確かめた (PC とブラウザ) |
 | `io_req` が 1 の長さ | `clk` 1 周期 (半 T) | 動かして確かめた (PC) |
 | CONOUT の 1 文字の長さ (飛び先の表 → RET の終わり) | JMP 10 + MOV 5 + OUT 10 + RET 10 = 35 T | 各命令は動かして確かめた。和は計算値 |
-| CP/M が起動してから `A` を出すまでの `step()` の数 | 625,408 | 動かして確かめた (PC) |
+| CP/M が起動してから `A` を出すまでの `step()` の数 | 624,941 | 動かして確かめた (PC) |
 
-- ブラウザでは OUT の opcode の番地が F2E7 になり、PC より 1 小さい。BIOS の名乗りの文字列が PC 用 (`… Linux`) とブラウザ用 (`… WASM`) で 1 文字違い、その後ろの番地がずれるため (`sw/cpm/Makefile` の `SIGNON_LINUX` と `SIGNON_WASM`)
+- CONOUT の番地 F29A (OUT の opcode は F29B) は PC とブラウザで同じ。BIOS の名乗りの文字列は PC 用 (`… Linux`) とブラウザ用 (`… WASM`) で 1 文字違うが (`sw/cpm/Makefile` の `SIGNON_LINUX` と `SIGNON_WASM`)、`bios.asm` はこの文字列を BIOS の末尾に置いているので、前にあるルーチンの番地は版で変わらない
+- 名乗りが BOOT の直後にあった以前の BIOS (ブラウザの Ver.1.0.0 まで) では、OUT の opcode が PC で F2E8、ブラウザで F2E7 と 1 ずれていた。ブラウザの画面でこの番地を見たら、その版で止めている (ブラウザの再読み込みで 1.0.1 になる)
+- `step()` の数は BIOS の DIR_BUF の番地で数百だけ変わる。BDOS が「DIR_BUF + 項目の位置」を作るとき (`ADD L` → `RNC` → `INR H`)、下位バイトの桁上がりが起きるかが番地で決まるため。名乗りを末尾へ移す前の BIOS (DIR_BUF = F3BE) では 625,409 だった
 - 8080 を 2 MHz で動かしたとすると、1 T は 0.5 µs、OUT 01h は 5 µs (計算値)。soft-fpga の速さは 3-16 で測る
 
 ## 出典
