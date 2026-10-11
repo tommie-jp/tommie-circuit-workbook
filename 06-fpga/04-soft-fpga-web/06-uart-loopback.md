@@ -31,7 +31,7 @@ skinparam defaultFontName "Noto Sans CJK JP"
 left to right direction
 
 rectangle "画面 (JS)\nSend の欄" as js
-rectangle "harness.cpp\n送信キュー (7 字まで)" as q
+rectangle "harness.cpp\n送信キュー (63 字まで)" as q
 rectangle "uart_tx\n送信機" as tx
 rectangle "uart_rx\n受信機" as rx
 rectangle "harness.cpp\nリングバッファ\n受信履歴" as ring
@@ -48,7 +48,9 @@ tx --> ring : txd, tx_state
 
 - 画面の JS は、文字を 1 字ずつ `send_byte()` で C++ のキューに積む
 - ハーネスは毎クロック、送信機が空いているか (`tx_ready`) を見て、空いていればキューから 1 字を渡す
-- キューは 8 字ぶんの配列で、満杯の見分けに 1 つ空けるので、積めるのは 7 字まで。それより長い文字列を一度に送ると、8 字目から先は捨てられる (`Hello World` を送ると、受け取るのは `Hello W` の 7 字だった。Playwright で確かめた)
+- キューは 64 字ぶんの配列で、満杯の見分けに 1 つ空けるので、積めるのは 63 字まで。送信の欄は 32 字までなので、欄に打った字は全部届く (`Hello World` の 11 字が受信履歴に全部出た。公開中の画面を Playwright で確かめた)
+- 受信した字は、ハーネスが 64 字の記録に残す。1 回の描画の間に何字届いても、画面は前の描画から増えた分を全部履歴に出す
+- 2026-10-11 より前の soft-fpga は、キューが 8 字ぶん (積めるのは 7 字) で、受信履歴も 1 回の描画で最後の 1 字しか出さなかった。古い写しで試すと `Hello World` が `Hello W` で切れる
 - 1 ビットの長さは parameter の `CLKS_PER_BIT` で、既定は 16 クロック。1 フレームは 10 × 16 = 160 クロック (計算値)
 - 実物の FPGA なら、クロック 100 MHz・115200 baud で `CLKS_PER_BIT` は 868 になる (soft-fpga の設計メモの値)。ブラウザで波形を見やすくするため 16 にしてある
 
