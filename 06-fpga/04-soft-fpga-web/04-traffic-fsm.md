@@ -23,8 +23,10 @@ soft-fpga の例 `02-traffic-fsm` は、歩行者ボタンの付いた信号機�
 
 - 上に **Run**、**Reset**、**歩行者ボタン**、速度スライダ (既定 30。1 回の描画で進めるクロックの数)
 - 状態遷移図: GREEN・YELLOW・RED・WALK の 4 つの丸。今の状態が緑や色で光る
-- 左下の欄: `State`、`Timer`、`btn_req` の値
-- 右下: ロジックアナライザの画面。`clk` `rst` `btn` `red` `yellow` `green` `walk` `state` `timer` `btn_req` の 10 レーン
+- 状態遷移図の下の欄: `State`、`Timer`、`btn_req` の値
+- その下: ロジックアナライザの画面 (Logic Analyzer)。上から `state` `timer` `green` `yellow` `red` `walk` `btn` `btn_req` の 8 レーン。
+  `state` のレーンは GREEN などの名前で出て、状態ごとに背景の色が変わる。`rst` のレーンは開いたときは隠れていて、上の札を押すと出る
+- 開いたときの倍率は 1/4x で、リングバッファの 4096 サンプルが全部入る
 
 ## 状態遷移図
 
@@ -158,7 +160,7 @@ Verilator の lint (`-Wall`) は、警告なしで通る (確かめた)。
 4. WALK が終わると `btn_req` が 0 に戻り、GREEN に戻る
 5. ボタンを押さずに 1 周すると、GREEN → YELLOW → RED → GREEN になる
 
-状態遷移図の光る丸と、右下の `state` レーンの名前、`red` `yellow` `green` `walk` の4 本のレーンが、同じ時刻に同じ向きで変わる。
+状態遷移図の光る丸と、下の `state` レーンの名前、`green` `yellow` `red` `walk` の4 本のレーンが、同じ時刻に同じ向きで変わる。
 
 ## 画面に見えるはずのもの
 
@@ -192,7 +194,9 @@ trigger: btn_req rising at 199ms
 ## 見るべき値
 
 次を実際に動かして得た。ブラウザ (Playwright の Chromium) と、PC の Verilator のシミュレーションで、状態の変わるクロックが一致した。
-`step` の数え方は、リセット直後を 0 とし、`step` を 1 回呼んだ後を 1 とする。
+ブラウザの分は soft-fpga ac6b663 (2026-10-12) の公開ページで測り直し、前と同じクロックで変わることを確かめた。
+PC 用の `cxx/main_linux.cpp` は今は自己検査になっていて、状態の移り方とトリガーを確かめて `OK: all checks passed` を出す (同じ版で確かめた)。
+`step` の数え方は、リセット直後を 0 とし、`step` を 1 回呼んだ後を 1 とする。ボタンを「N 回目に押す」は、N 回目の `step` の直前に `press_btn()` を呼ぶこと (`btn` はその `step` の 1 クロックだけ 1 になる)。
 
 | 状況 | 状態が変わる `step` の番号 |
 | --- | --- |
@@ -208,9 +212,10 @@ trigger: btn_req rising at 199ms
 | `btn_req` が 0 に戻る時刻 | WALK が終わる `step` (1000) |
 | ブラウザの画面の `Timer` | WALK に入った直後に 399 (リングバッファを読んで確認) |
 
-GREEN は最初の周回だけ 499 サンプルで、リセットで始まった 1 クロックぶんを含めると 500 クロックになる (2 周目以降は 500 サンプル)。
+GREEN は最初の周回だけ、`step` で数えて 499 (1〜499) になる。リセットで始まったクロックを含めると 500 クロック。2 周目以降は 500。
+リングバッファには、その前にリセットの 2 サンプル (`rst` = 1、`timer` = 499) が入るので、最初の GREEN は 501 サンプルに見える。画面の `cycles` も、開いた直後から 2 を数えている。
 
 ## 出典
 
-自作。例と Verilog は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `examples/02-traffic-fsm`。
+自作。例と Verilog は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `examples/02-traffic-fsm`。レーンの定義は同リポジトリの `js/sft-fsm-la-defs.js`。
 画面は [02-traffic-fsm](https://tommie-jp.github.io/soft-fpga/02-traffic-fsm/)。
