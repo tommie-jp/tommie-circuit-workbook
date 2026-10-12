@@ -91,7 +91,7 @@ endmodule
    verilator --lint-only -Wall examples/01-counter/verilog/counter.v
    ```
 
-3. PC で動かして、値を確かめる (任意)
+3. PC で動かして、差し替えが効いたかを見る (任意)
 
    ```bash
    cmake -S examples/01-counter -B /tmp/b1
@@ -99,20 +99,25 @@ endmodule
    /tmp/b1/sim
    ```
 
+   PC 用の `cxx/main_linux.cpp` は、元のカウンタを前提にした自己検査。分周器に差し替えると、
+   `FAIL: count after 100 steps` と `FAIL: count restarts at 1 after reset` の 2 つが出て、`2 check(s) failed` で終わる。
+   カウンタなら 100 クロック後に 100 のはずが、分周器では別の値になるため。この 2 つの FAIL が、差し替えが効いた印になる
+
 4. ブラウザ用にビルドする (4-1 のコマンド)
 
    ```bash
    docker compose -f docker/compose.yml run --rm build-wasm scripts/build-wasm.sh
    ```
 
-5. `examples/01-counter/web/` で Web サーバを立てて開く
+5. Web サーバを立てて開く
 
    ```bash
-   cd examples/01-counter/web
-   python3 -m http.server 8081
+   examples/01-counter/web/doStartWebServer.sh
    ```
 
    ブラウザで `http://localhost:8081/` を開き、Run を押す。
+   画面は共通の部品 (`js/rtlscope-la.js` など) を `web/js/` から読む。この台本は、リポジトリの `js/` を `web/js` に結んでから
+   サーバを立てる。`web/` で `python3 -m http.server` を打つだけだと部品が読めず、画面に「初期化に失敗しました: setupLa is not defined」と出る
 
 ビルドの手順の細部は soft-fpga のリポジトリ (`scripts/build-wasm.sh`、`examples/01-counter/web/doStartWebServer.sh`) が持っている。元のカウンタに戻すには `git checkout examples/01-counter/verilog/counter.v` を打ち、もう一度ビルドする。
 
@@ -143,20 +148,23 @@ trigger: CLK rising at 0s
 - `T0` は `ticks` の最下位ビット。`led` と同じ時刻に同じ向きで変わる
 - `T1` は `ticks` の次のビット。`T0` の倍の周期で、`Ticks` は 0 → 1 → 2 → 3 と数える (`ticks` の下位 2 ビットだけを表示している)
 - 2 つのカーソルの間隔は 8 ms で、`LED` の 1 周期に当たる
+- soft-fpga の画面の `count` のレーンは、この 8 ビットを 16 進で出す。リセットの 2 サンプルのあと、`00` `00` `02` `05` `05` `05` `07` `08` … と並ぶ
 
 ## 見るべき値
 
-soft-fpga の 01-counter に差し替えて、Verilator 5.048 のコンテナと、Playwright の Chromium で実際に動かした。
+soft-fpga ac6b663 (2026-10-12) の 01-counter に差し替えて、Verilator 5.048・Emscripten 5.0.7 のコンテナと、Playwright の Chromium で実際に動かした。
 
 | 見る所 | 値 | 種類 |
 | --- | --- | --- |
 | lint (`-Wall`) | 警告なし | 動かして確かめた |
-| PC のシミュレーション (`/tmp/b1/sim`、100 クロック後) | `last count=101` (`ticks` = 25、`tick` = 0、`led` = 1) | 動かして確かめた |
+| PC の自己検査 (`/tmp/b1/sim`) | `FAIL` が 2 つ (`count after 100 steps` と `count restarts at 1 after reset`) | 動かして確かめた |
+| 100 クロック後の `count` (ブラウザで `step()` を 100 回呼んで読む) | 101 (`ticks` = 25、`tick` = 0、`led` = 1) | 動かして確かめた |
 | 最初の 20 クロックの `led` の反転 | クロック 4、8、12、16、20 回目 | 動かして確かめた |
 | `tick` が 1 になるクロック | 3、7、11、15、19 回目 | 動かして確かめた |
-| ブラウザで 6000 クロックを走らせた後の `count` の並び | 88, 88, 90, 93, 93, 93, 95, 96 … | 動かして確かめた |
+| ブラウザで `step()` を 6000 回呼んだ後の、最後の 8 サンプルの `count` | 104, 104, 106, 109, 109, 109, 111, 112 | 動かして確かめた |
 
-ブラウザの並びを 2 進に直すと、88 は `ticks`=22・`tick`=0・`led`=0、90 は `tick`=1、93 は `ticks`=23・`led`=1。画面のレーンと同じ向きに変わっている。
+ブラウザの並びを 2 進に直すと、104 は `ticks`=26・`tick`=0・`led`=0、106 は `tick`=1、109 は `ticks`=27・`led`=1、112 は `ticks`=28・`led`=0。画面のレーンと同じ向きに変わっている。
+`ticks` は 6 ビットなので 64 で一周する。6000 クロックでは 6000 ÷ 4 = 1500 回の `tick` で、1500 を 64 で割った余りが 28。
 
 ## 出典
 
