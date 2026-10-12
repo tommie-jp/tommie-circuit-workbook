@@ -34,12 +34,12 @@ participant "Verilog\n(traffic_fsm)" as rtl
 
 ui -> wasm : click で Module._press_btn()
 note right of wasm : pending_btn = 1\n(覚えておくだけ)
-ui -> wasm : Run 中の次の描画で Module._step()
-wasm -> rtl : top->btn = pending_btn (1)\npending_btn = 0
+ui -> wasm : Run 中の次の描画で Module._sim_run_n(n)
+note right of wasm : step() を n 回呼ぶ
+wasm -> rtl : 最初の step() で\ntop->btn = pending_btn (1)\npending_btn = 0
 wasm -> rtl : clk を 0 → 1 (eval)
 note right of rtl : btn_req <= 1
-ui -> wasm : その次の Module._step()
-wasm -> rtl : top->btn = 0
+wasm -> rtl : 2 回目からの step() で\ntop->btn = 0
 @enduml
 ```
 
@@ -47,7 +47,8 @@ wasm -> rtl : top->btn = 0
 
 - `index.html` は、ボタンの `click` で `Module._press_btn()` を呼ぶだけ。C++ の関数は、ビルドのときに `EXPORTED_FUNCTIONS` に名前を書いたものだけが JS から呼べる (`scripts/build-wasm-02.sh` に `"_press_btn"` がある)
 - `harness.cpp` の `press_btn()` は、`pending_btn` を 1 にするだけで、Verilog には触らない
-- `step()` は Run を押している間、描き替えのたびに呼ばれる。その頭で `top->btn = pending_btn;` と入れ、すぐ `pending_btn = 0;` に戻す。だから `btn` が 1 になるのは、押した後の最初の 1 クロックだけ
+- Run を押している間、画面は描き替えのたびに `Module._sim_run_n(n)` を呼ぶ。n は速度のスライダの値 (1〜300、開いたときは 30)。`sim_run_n()` は C++ の中で `step()` を n 回呼ぶ
+- `step()` は 1 回で 1 クロック進める。その頭で `top->btn = pending_btn;` と入れ、すぐ `pending_btn = 0;` に戻す。だから `btn` が 1 になるのは、押した後の最初の 1 クロックだけ
 - 1 クロックの合図を覚えておくのは Verilog の側 (`if (btn) btn_req <= 1'b1;`)。押したことは `btn_req` に残る
 
 ボタンは「押した」という出来事なので、1 クロックの合図にする。
@@ -194,7 +195,13 @@ requestAnimationFrame(loop);
    - `EXAMPLE` を `examples/90-switches` に
    - `OBJ_DIR` を `obj_dir_90` に (ほかの例の生成物と混ざらないように)
    - Verilator に渡すファイルを `sw_gates.v` に
-   - `EXPORTED_FUNCTIONS` を `["_sim_init","_step","_set_sw","_press_btn","_get_out","_get_cycles"]` に
+   - `EXPORTED_FUNCTIONS` の並びを、この例の 6 つの関数だけにする。元の行は `"…"` の中に `\"` で名前を書き、末尾に `${LA_EXPORTS}` (Logic Analyzer の関数の名前) を足している。
+     この例のハーネスにはリングバッファも Logic Analyzer も無いので、`${LA_EXPORTS}` も消す。残すと、無い関数を出そうとしてリンクが `symbol exported via --export not found` で止まる (確かめた)
+
+     ```bash
+     -s EXPORTED_FUNCTIONS="[\"_sim_init\",\"_step\",\"_set_sw\",\"_press_btn\",\"_get_out\",\"_get_cycles\"]" \
+     ```
+
 3. 4-3 と同じく docker の `build-wasm` で回す
 
    ```bash
@@ -252,6 +259,7 @@ trigger: BTN rising at 9.5ms
 ## 見るべき値
 
 soft-fpga の写しに 90-switches を足し、Verilator 5.042 の PC のシミュレーションと、Verilator 5.048・Emscripten の docker でビルドしたブラウザ (Playwright の Chromium 153) で動かした。
+2026-10-13 に soft-fpga ac6b663 (2026-10-12) の写しで手順を通し直し、下の表の数がどれも変わっていないことを確かめた。02-traffic-fsm の行は、公開中の画面で確かめた。
 ブラウザでは、Playwright のスクリプトで画面の SW0・SW1・BTN を `click` し、AND・OR の丸と `presses` の欄を読んだ。
 
 | 画面の操作 | AND | OR | `presses` | 種類 |
@@ -266,12 +274,12 @@ soft-fpga の写しに 90-switches を足し、Verilator 5.042 の PC のシミ�
 | --- | --- | --- |
 | 図1 の筋書きで出力が変わる `step` | 3 で OR = 1、7 で AND = 1、10 で `presses` = 1、14 で 2、17 で AND = 0 | 動かして確かめた (PC とブラウザで一致) |
 | `step()` の前に `press_btn()` を 2 回呼ぶ | `presses` は 1 しか増えない (3 → 4) | 動かして確かめた |
-| 02-traffic-fsm の歩行者ボタン | `click` して `step()` を 1 回呼ぶと、欄の `btn_req` が 1 になる | 動かして確かめた |
+| 02-traffic-fsm の歩行者ボタン | `click` して `step()` を 1 回 (または `sim_run_n(1)` を 1 回) 呼ぶと、欄の `btn_req` が 1 になる | 動かして確かめた |
 
 - 2 回呼んでも 1 回にしかならないのは、`pending_btn` が「押したかどうか」の 1 ビットしか持たないから。この画面では、描き替えの 1 回の間に BTN を 2 回押すと 1 回に数える。人の指でそこまで速く 2 回押すことはまず無いので、この例では数を持たせなかった
 - 実物のボタンにはチャタリング (押した瞬間に接点が何度も開閉する) があり、1 回押しても何回にも数える。画面のボタンには起きない。実物の対策は 6-3 で扱う
 
 ## 出典
 
-自作。読んだ仕組みは [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `examples/02-traffic-fsm` (`cxx/harness.cpp` の `press_btn()` と `step()`、`web/index.html`、`scripts/build-wasm-02.sh`)。
+自作。読んだ仕組みは [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `examples/02-traffic-fsm` (`cxx/harness.cpp` の `press_btn()`・`step()`・`sim_run_n()`、`web/index.html`、`scripts/build-wasm-02.sh`)。
 90-switches は、それをまねてこの題のために書いた (soft-fpga のリポジトリには無い)。
