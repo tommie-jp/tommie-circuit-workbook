@@ -124,8 +124,9 @@ soft-fpga の写しで、次の 3 か所を直す。どれも元の行の名前�
    EMSCRIPTEN_KEEPALIVE uint32_t get_tx_cnt() { return top->o_tx_cnt; }
    ```
 
-2. `scripts/build-wasm-03.sh` — Verilator に渡すファイルの先頭に `uart_probe_top.v` を足し、`--top-module uart_top` を `--top-module uart_probe_top` に替え、`EXPORTED_FUNCTIONS` の並びに `"_get_tx_cnt"` を足す
-3. `examples/03-uart/web/index.html` — 右の欄に 1 行足し、描くたびに値を入れる
+2. `scripts/build-wasm-03.sh` — Verilator に渡すファイルの先頭に `uart_probe_top.v` を足し、`--top-module uart_top` を `--top-module uart_probe_top` に替え、`EXPORTED_FUNCTIONS` の並びに `_get_tx_cnt` を足す。
+   この並びは `"…"` の中に書いてあり、名前の引用符は `\"` と書く。`\"_get_ring_size\",` の後ろ、`${LA_EXPORTS}` の前に `\"_get_tx_cnt\",` を入れる
+3. `examples/03-uart/web/index.html` — 波形の下の欄 (`TX Data` から `rx_error` までが並ぶ欄) に 1 行足し、描くたびに (`loop()` の中で) 値を入れる
 
    ```html
    <div><span class="label">tx_cnt  : </span><span class="val" id="r-txcnt">-</span></div>
@@ -136,7 +137,18 @@ soft-fpga の写しで、次の 3 か所を直す。どれも元の行の名前�
    ```
 
 あとは 4-3 と同じく、docker の `build-wasm` で `scripts/build-wasm-03.sh` を回し、`examples/03-uart/web/` で Web サーバを立てて開く。
-Send で字を送ると、右の欄の `tx_cnt` が 15 から 0 へ数え下がり、0 の次でまた 15 に戻る。
+
+```bash
+docker compose -f docker/compose.yml run --rm build-wasm scripts/build-wasm-03.sh
+ln -sfn ../../../js examples/03-uart/web/js
+cd examples/03-uart/web
+python3 -m http.server 8081
+```
+
+2 行目の `ln` は、画面の Logic Analyzer の部品 (リポジトリの根の `js/`) を `web/js` として見せるシンボリックリンク。
+`index.html` は `js/rtlscope-la.js` などを読むが、03-uart にはこのリンクを張る台本が無い。張らないと部品が 404 になり、画面は何も動かない (Console に `setupLa is not defined` が出る)。
+
+Send で字を送ると、波形の下の欄の `tx_cnt` が 15 から 0 へ数え下がり、0 の次でまた 15 に戻る。
 
 ## 中の信号を直に読む書き方と比べる
 
@@ -232,6 +244,7 @@ trigger: TXD falling at 2ms
 ## 見るべき値
 
 soft-fpga の写しの 03-uart にラッパをつなぎ、Verilator 5.048・Emscripten の docker でビルドして、ブラウザ (Playwright の Chromium 153) で動かした。
+上の 3 か所の直し方は、soft-fpga ac6b663 (2026-10-12) の写しでそのまま通り、下の表の数も同じだった (2026-10-13 に測り直した)。
 `Module._send_byte(0x41)` のあと `Module._step()` を 1 回ずつ呼び、そのたびに `Module._get_tx_cnt()` を読んだ。
 `step` の数え方は 4-4 と同じで、リセット直後を 0、`step` を 1 回呼んだ後を 1 とする。
 
@@ -243,7 +256,7 @@ soft-fpga の写しの 03-uart にラッパをつなぎ、Verilator 5.048・Emsc
 | 17 | 15 | DATA に入った | 動かして確かめた |
 | 18 | 14 | `txd` が bit 0 の 1 になった | 動かして確かめた |
 | 33 | 15 | bit 1 に進んだ | 動かして確かめた |
-| 40 | 8 | 右の欄の `tx_cnt` に 8 が出た | 動かして確かめた |
+| 40 | 8 | 波形の下の欄の `tx_cnt` に 8 が出た | 動かして確かめた |
 
 | 見る所 | 値 | 種類 |
 | --- | --- | --- |
