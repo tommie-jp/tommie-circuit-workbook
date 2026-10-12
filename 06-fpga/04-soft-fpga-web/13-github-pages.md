@@ -31,11 +31,11 @@ skinparam rectangle {
   RoundCorner 6
 }
 
-rectangle "examples/01-counter/web/\nindex.html\nsim.js\nsim.wasm" as SRC #FFF8E1
-rectangle "gh-pages ブランチ\n/index.html (目次)\n/divider/index.html\n/divider/sim.js\n/divider/sim.wasm" as GH #E8F0FE
+rectangle "examples/01-counter/web/\nindex.html\nsim.js\nsim.wasm\njs/ (画面の部品 5 本)" as SRC #FFF8E1
+rectangle "gh-pages ブランチ\n/index.html (目次)\n/divider/index.html\n/divider/sim.js\n/divider/sim.wasm\n/divider/js/" as GH #E8F0FE
 rectangle "GitHub Pages\nhttps://<ユーザ>.github.io/<リポジトリ>/divider/" as PAGES #E6F4EA
 
-SRC --> GH : 3 つを写す\n(ビルドの後)
+SRC --> GH : 写す\n(ビルドの後)
 GH --> PAGES : push すると\nGitHub が配る
 @enduml
 ```
@@ -44,17 +44,22 @@ GH --> PAGES : push すると\nGitHub が配る
 
 ## 何をどこに置くか
 
-ブラウザが読むのは、ビルドの出力の 3 つだけ。
+ブラウザが読むのは、画面とビルドの出力の 3 つと、画面が読む `js/` の部品だけ。
 
 | ファイル | 中身 | Pages に置くか |
 | --- | --- | --- |
 | `index.html` | 画面。`sim.js` を読み、canvas に描く | 置く |
 | `sim.js` | Emscripten が出す読み込み係。`sim.wasm` を取ってきて初期化する | 置く |
 | `sim.wasm` | 回路 (Verilator の C++) を WebAssembly にしたもの | 置く |
+| `js/` の 5 本 | Logic Analyzer の部品 (`sft-counter-la-defs.js`・`rtlscope-la.js`・`sft-la-toolbar.js`・`sft-la-ctrl.js`・`sft-la-glue.js`)。`index.html` が `<script src="js/…">` で読む | 置く |
 | `sim-worker.js` | Worker で回す例だけにある (4-9) | あれば置く |
 | `verilog/`、`cxx/`、`obj_dir/` | ソースと中間の出力 | 置かない |
 
 soft-fpga の `scripts/doDeployPages.sh` も、例ごとに `index.html`・`sim.js`・`sim.wasm`・`sim-worker.js`・`favicon.ico`・画像・`js/` を写している。
+`js/` は、`index.html` が `src="js/…"` で読むものだけを写し、前に写した読まないものは消す (soft-fpga ac6b663 から)。
+
+`js/` の元は、soft-fpga のリポジトリの根の `js/`。手元では、`examples/01-counter/web/js` がそこへのシンボリックリンクになっている (`doStartWebServer.sh` が張る。`.gitignore` で外してある)。
+リンクのままでは Pages に載らないので、配るときは中身のファイルを写す。
 
 置き場所は 2 通りある (GitHub の資料)。
 
@@ -69,9 +74,9 @@ soft-fpga の `scripts/doDeployPages.sh` も、例ごとに `index.html`・`sim.
 
 自分のリポジトリの Pages は `https://<ユーザ>.github.io/<リポジトリ>/` の下に出る (プロジェクトサイト)。
 `index.html` で `<script src="/sim.js">` と `/` から書くと、`https://<ユーザ>.github.io/sim.js` を探しに行って 404 になる。
-01-counter の `index.html` は `<script src="sim.js">` と相対で書いてあるので、そのまま置けばよい。
+01-counter の `index.html` は `<script src="sim.js">`・`<script src="js/rtlscope-la.js">` と相対で書いてあるので、そのまま置けばよい。
 
-`sim.js` は、`sim.wasm` を「`sim.js` を読んだ場所と同じディレクトリ」から取る (Emscripten の `locateFile`)。だから 3 つは同じディレクトリに並べる。
+`sim.js` は、`sim.wasm` を「`sim.js` を読んだ場所と同じディレクトリ」から取る (Emscripten の `locateFile`)。だから 3 つは同じディレクトリに並べ、`js/` もその下に置く。
 
 URL の終わりの `/` を落とした `…/divider` を開いても、GitHub Pages は `…/divider/` へ転送する (301)。soft-fpga の公開ページで確かめた。
 
@@ -95,11 +100,13 @@ GitHub Pages は `.wasm` を `application/wasm` で返す。手元の `python3 -
 2. Pages と同じ形にファイルを並べる。`my-fpga` はリポジトリの名前の代わり
 
    ```bash
-   mkdir -p site/my-fpga/divider
+   mkdir -p site/my-fpga/divider/js
    cp examples/01-counter/web/{index.html,sim.js,sim.wasm} site/my-fpga/divider/
+   cp js/{sft-counter-la-defs,rtlscope-la,sft-la-toolbar,sft-la-ctrl,sft-la-glue}.js site/my-fpga/divider/js/
    touch site/my-fpga/.nojekyll
    ```
 
+   3 行目の `cp` で写す 5 本は、`examples/01-counter/web/index.html` の `<script src="js/…">` に並ぶもの。1 本でも欠けると、画面は動かない。
    `site/my-fpga/index.html` には、`<a href="divider/">分周器</a>` のように、例への相対のリンクを書く
 
 3. `site/` を根にして Web サーバを立て、`http://localhost:8000/my-fpga/divider/` を開く。これで、Pages の `https://<ユーザ>.github.io/my-fpga/divider/` と同じ深さになる
@@ -114,7 +121,6 @@ GitHub Pages は `.wasm` を `application/wasm` で返す。手元の `python3 -
 ### GitHub に載せる (この題では未実行)
 
 soft-fpga の `scripts/doDeployPages.sh` が行っていることを、自分のリポジトリでなぞる。
-soft-fpga の `docs/05-deploy-gh-pages.md` はこの台本を `scripts/deploy-gh-pages.sh` と書いているが、この題を書いた時点 (コミット 19c032a) の名前は `scripts/doDeployPages.sh`。
 
 1. GitHub に自分のリポジトリを作る (main に Verilog とハーネス)
 2. `gh-pages` ブランチを別のディレクトリに出す。まだ無ければ、履歴を持たないブランチ (orphan) として作る (`git worktree add --orphan -b gh-pages <ディレクトリ>`)
@@ -128,7 +134,7 @@ soft-fpga 本体の公開は `doDeployAll.sh` が受け持つ。06-8080 と 09-p
 
 ## 画面に見えるはずのもの
 
-4-3 と同じ画面。Run を押すと 8 本のレーン (`b7`〜`b0`) に分周器の波形が流れ、`b0` (`led`) が 8 クロックの周期で上下する。
+4-3 と同じ画面。Run を押すと、Logic Analyzer の `count`・`rst`・`b7`〜`b0` のレーンに分周器の波形が流れ、`b0` (`led`) が 8 クロックの周期で上下する。開いたときの倍率は 8x。
 Console には何も出ない。MIME が違うときだけ、次の 2 行が出る。
 
 ```text
@@ -140,15 +146,17 @@ falling back to ArrayBuffer instantiation
 
 手元の Web サーバ (Python 3.12 の `http.server` と、MIME を変えるために書いた小さな Python のサーバ) に Pages と同じ形で置き、Chromium 153 (Playwright 1.63 の headless) で開いて動かして確かめた。
 ビルドは Verilator 5.048、Emscripten 5.0.7 (soft-fpga の `build-wasm` 容器)。
+2026-10-13 に soft-fpga ac6b663 (2026-10-12) の写しで手順を通し直した。下の表の数は、前 (19c032a) と同じだった (1 行目の `js/` 無しの版は、このとき足した)。
 
 | 開いた URL | 結果 | 種類 |
 | --- | --- | --- |
+| `index.html`・`sim.js`・`sim.wasm` の 3 つだけを置いた版 (`js/` 無し) | `js/` の 5 本が 404。Console に `setupLa is not defined` が出て、画面は動かない | 動かして確かめた |
 | `/my-fpga/divider/` | Run で 0.5 秒回して 6600 クロック。最後の 8 個の `count` は 192, 192, 194, 197, 197, 197, 199, 200。Console にエラー無し | 動かして確かめた |
 | `/my-fpga/divider` (終わりの `/` 無し) | `/my-fpga/divider/` へ 301 で転送され、同じく動いた | 動かして確かめた |
 | `<script src="/sim.js">` に書き換えた版 | `/sim.js` が 404。`Module` が初期化されず、画面は動かない | 動かして確かめた |
 | `.wasm` を `application/octet-stream` で返すサーバ | Console に上の 2 行。ArrayBuffer に切り替えて動いた (6400 クロック) | 動かして確かめた |
 | 手元の `sim.wasm` の `Content-Type` | `application/wasm` | 動かして確かめた |
-| 公開中の `https://tommie-jp.github.io/soft-fpga/01-counter/sim.wasm` の `Content-Type` | `application/wasm` (2026-10-11 に curl で見た) | 動かして確かめた |
+| 公開中の `https://tommie-jp.github.io/soft-fpga/01-counter/sim.wasm` の `Content-Type` | `application/wasm` (2026-10-11 と 2026-10-13 に curl で見た) | 動かして確かめた |
 
 並びを 2 進に直すと、192 は `ticks` = 48・`tick` = 0・`led` = 0、194 は `tick` = 1、197 は `ticks` = 49・`led` = 1。4-3 の表と同じ向きに変わっている。
 
