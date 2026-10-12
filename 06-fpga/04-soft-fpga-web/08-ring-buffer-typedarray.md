@@ -62,11 +62,12 @@ JS -> JS : HEAPU32 の上の\nring を 1 度読む
 | D | JS が `step_n(N)` を 1 度呼ぶ。Wasm が N クロック回してリングに書く。最後に JS がリングを 1 度読む | N クロックで 1 回 |
 
 soft-fpga の README は「毎サイクルの `EM_ASM` / `EM_JS` コールバックは呼出オーバーヘッドで破綻する」と書く。それが形 B と E。
-01-counter の画面は形 C で、JS が速度スライダの数だけ `_step()` を呼ぶ。09-pdp11 の `sim-worker.js` は形 D で、`_step_n()` を 1 度呼ぶ。
+今の 01-counter の画面は形 D で、1 回の描画につき `_sim_run_n()` を 1 度呼び、速度スライダの数だけ Wasm の中で回す (soft-fpga f2f1dd2 から。それより前の 19c032a では形 C で、JS が速度スライダの数だけ `_step()` を呼んでいた)。09-pdp11 の `sim-worker.js` も形 D で、`_step_n()` を 1 度呼ぶ。
 
 ## C++
 
-01-counter の `cxx/harness.cpp` を写し、比べる形の関数を足した。回路は 01-counter の `counter.v` (8 ビットのカウンタ) のまま。
+soft-fpga 19c032a の時点の 01-counter の `cxx/harness.cpp` (リングは 1024 語) を写し、比べる形の関数を足した。回路は 01-counter の `counter.v` (8 ビットのカウンタ) のまま。
+今の 01-counter のハーネスは、リングを共通部品 `cxx/rtlscope_ring.h` の `Ring<4096, 1>` に任せ、`sim_run_n(n)` で n クロック回す (形 D)。1 サンプルを書くたびにトリガーの判定もする。この形の速さは「見るべき値」の最後に書いた。
 
 ```cpp
 // 4-8 の測定用: 01-counter の harness.cpp に、比べる形を 2 つ足したもの。
@@ -179,7 +180,7 @@ const forms = {
 ## 手順
 
 1. soft-fpga の写しを取る (0-2、4-3)。01-counter の `counter.v` は元のカウンタのまま使う
-2. 写しの直下に `bench/` を作り、上の C++ と、ビルドの手順 `bench/build.sh` を置く。`build.sh` の中身は `scripts/build-wasm.sh` の 01-counter の部分と同じで、ハーネスを差し替え、出力を `bench/bench.js` にしたもの
+2. 写しの直下に `bench/` を作り、上の C++ と、ビルドの手順 `bench/build.sh` を置く。`build.sh` の中身は `scripts/build-wasm.sh` (01-counter のビルド) と同じで、ハーネスを差し替え、出力を `bench/bench.js` にしたもの。今の `build-wasm.sh` は共通部分を `scripts/_build-wasm-common.sh` から読む (source する) ので、`build.sh` も同じように読む
 3. Emscripten の容器でビルドする
 
    ```bash
@@ -228,11 +229,21 @@ D: step_n を 1 度呼び、最後にリングを 1 度読む  15.6 ms  128.4 M 
 描く時間も同じ 16.7 ms に入るので、実際に回せる数はこれより少ない。
 09-pdp11 の上限 200 万クロックは、D の形でないと 1 回の描画に収まらない。
 
+今の 01-counter のハーネス (`Ring<4096, 1>` とトリガーの判定つき) の `sim_run_n` も測った。
+soft-fpga ac6b663 (2026-10-13) の `scripts/build-wasm.sh` でビルドした `sim.wasm` を、上と同じ手段 (7 回の中央値を 3 度) で測った。動かして確かめた。
+
+| 呼び方 | node (ns/クロック) | Chromium (ns/クロック) |
+| --- | --- | --- |
+| `sim_run_n(2000000)` を 1 度 | 8.5〜9.6 | 8.5〜9.0 |
+| `sim_run_n(200)` を 1 万回 (画面の既定の速度で 200 万クロック) | 8.5〜8.7 | 8.2〜8.9 |
+
+上の表の D より 1 クロックあたり 1 ns ほど長い。サンプルごとのトリガーの判定と、リングの作りの違いのぶんと考えられる (切り分けては測っていない)。形 A〜E の並びと読み方は変わらない。
+
 数は回路の大きさ、機械、ブラウザの版で変わる。比べるときは、同じ機械で形だけを変えて測る。
 
 ## 出典
 
 自作。設計は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の README (Design notes) と
-`docs/01-soft-FPGA-WebAssembly-設計議論メモ.md`。ハーネスと画面は `examples/01-counter` (`cxx/harness.cpp`、`web/index.html`)、
+`docs/01-soft-FPGA-WebAssembly-設計議論メモ.md`。ハーネスと画面は `examples/01-counter` (`cxx/harness.cpp`、`web/index.html`) と共通部品 `cxx/rtlscope_ring.h`、
 `step_n` の形は `examples/09-pdp11/web/sim-worker.js`。`EM_JS` と `HEAPU32` は [Emscripten の資料](https://emscripten.org/docs/)
 (Interacting with code)。
