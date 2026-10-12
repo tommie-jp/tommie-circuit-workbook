@@ -17,7 +17,7 @@ device: WEB
 回路の計算を主スレッドで長く回すと、その間は描画もボタンも待たされる。
 **Web Worker** は、ページとは別のスレッドで JavaScript と WebAssembly を動かす仕組み。回路の計算を Worker に移すと、主スレッドは描画とボタンだけを受け持てる。
 
-soft-fpga では、06-8080 と 09-pdp11 が Worker で回している (`web/sim-worker.js`)。01〜05 も Worker に移すと設計メモ `docs/93-sim-worker化とrtlscope-log設計.md` で決めてある。この題を書いた時点の soft-fpga (コミット 19c032a) では、01〜05 はまだ主スレッドで回している。
+soft-fpga では、06-8080 と 09-pdp11 が Worker で回している (`web/sim-worker.js`)。01〜05 も Worker に移すと設計メモ `docs/93-sim-worker化とrtlscope-log設計.md` で決めてある。今の公開ページ (soft-fpga ac6b663。2026-10-13 に確かめた) でも、01〜05 は主スレッドで回している。Logic Analyzer を 06-8080 と同じ RTLScopeLA に替えた後も (f2f1dd2・adc8157)、各例の `index.html` の `loop()` が `requestAnimationFrame` ごとに `_sim_run_n()` を呼び、続けて描く。
 
 この題は、4-8 のカウンタを主スレッドと Worker の 2 通りで回し、画面の更新の間隔とボタンの反応を headless の Chromium で測る。
 
@@ -99,7 +99,7 @@ self.onmessage = function (e) {
 
 ## 主スレッドの側
 
-比べる 2 つの回し方。描画 `draw()` は、01-counter と同じくリングの下位ビットを canvas に 1 本描く。
+比べる 2 つの回し方。描画 `draw()` は、リングの下位ビットを canvas に 1 本描くだけにした (今の 01-counter の画面は RTLScopeLA が count・rst・b7〜b0 などのレーンを描くので、描く手間はこれより大きい)。
 `record()` は、3 秒の間 `requestAnimationFrame` が呼ばれた時刻を記録し、毎回 `onFrame` を呼ぶ。
 
 ```js
