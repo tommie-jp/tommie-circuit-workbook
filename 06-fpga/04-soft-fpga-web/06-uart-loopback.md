@@ -157,13 +157,27 @@ endmodule
 
 ## 手順
 
-1. [https://tommie-jp.github.io/soft-fpga/03-uart/](https://tommie-jp.github.io/soft-fpga/03-uart/) を開く。自分でビルドするなら soft-fpga の `scripts/build-wasm-03.sh` (4-3 と同じく docker の `build-wasm` で回す)
-2. 速度のスライダを左いっぱい (1) にして Run を押す。1 回の描画で 1 クロックだけ進む
+1. [https://tommie-jp.github.io/soft-fpga/03-uart/](https://tommie-jp.github.io/soft-fpga/03-uart/) を開く。自分でビルドするなら soft-fpga の `scripts/build-wasm-03.sh` (4-3 と同じく docker の `build-wasm` で回す)。
+   手元で開く前に `ln -sfn ../../../js examples/03-uart/web/js` で Logic Analyzer の部品へのリンクを張る (4-5)
+2. 速度のスライダ (1〜500、開いたときは 60) を左いっぱい (1) にして Run を押す。1 回の描画で 1 クロックだけ進む
 3. 欄に `A` と打って Send を押す。`txd` のレーンにフレームが流れる
-4. フレームが右端まで来たら Run をもう一度押して止める (Pause)。画面は最新の 844 クロックぶんを 1 クロック 1 画素で描くので、1 フレームの 160 クロックが全部入る
+4. フレームが右端まで来たら Run をもう一度押して止める (Pause)。Logic Analyzer は開いたときの倍率 1x で 1 クロックを 1 画素に描き、幅いっぱい (1200 画素) の窓で最新の 976 クロックぶんが入る。1 フレームの 160 クロックは全部入る
 5. 受信履歴に `> 0x41 'A'` が出る。`Hi` を送ると `0x48 'H'` と `0x69 'i'` が続けて出る
 
-画面の右の欄 `RX Data` は最後に受けた字。`rx_error` はストップビットが 0 だったときに 1 になる (ループバックでは起きない)。
+波形の下の欄の `RX Data` は最後に受けた字。`rx_error` はストップビットが 0 だったときに 1 になる (ループバックでは起きない)。
+
+Logic Analyzer のレーンは、soft-fpga の `js/sft-uart-la-defs.js` が決めている。開いたときに見えるのは、上から次の 9 本。
+
+| レーン | 中身 |
+| --- | --- |
+| `FRAME` | 読み下し。上の段に送信のフレーム (`TX 'A'`)、下の段に受信のフレーム (`RX 'A'`) を箱で描く |
+| `txd` `rxd` | 送信の線と受信の線。ループバックなので同じ形になる |
+| `tx_rdy` | `tx_ready`。送信機が IDLE のとき 1 |
+| `rx_vld` | `rx_valid`。1 字を受け終えたクロックだけ 1 |
+| `tx_state` `rx_state` | 状態を IDLE・START・DATA・STOP の名前で出す |
+| `tx_data` `rx_data` | 送信バッファの字と、最後に受けた字 (16 進) |
+
+`tx_valid`・`rx_err` (`rx_error`)・`tx_bit`・`rx_bit`・`rst` は隠してある。レーンの上に並ぶ丸い札を押すと出る。
 
 ## 画面に見えるはずのもの
 
@@ -198,7 +212,7 @@ trigger: TXD falling at 2us
 - その後の 8 ビットは、下位から 1・0・0・0・0・0・1・0。0x41 の 2 進 0100 0001 を右から読んだ並び。1 になるのは bit 0 (18〜33 µs) と bit 6 (114〜129 µs)
 - 146 µs で 1 に戻る。これがストップビットで、そのまま 1 のアイドルに続く
 - 読み下しの箱は 0x41。ASCII で `A`
-- `tx_state` の数は 0 = IDLE、1 = START、2 = DATA、3 = STOP。`rx_state` も同じ。受信機は送信機より遅れて START に入り (3 µs)、ストップビットの真ん中 (155 µs) で IDLE に戻る
+- `tx_state` の数は 0 = IDLE、1 = START、2 = DATA、3 = STOP。`rx_state` も同じ。soft-fpga の画面のレーンは、この数の代わりに名前を出す。受信機は送信機より遅れて START に入り (3 µs)、ストップビットの真ん中 (155 µs) で IDLE に戻る
 - X1 (26 µs) は bit 0 の真ん中で `TXD` = 1、X2 (42 µs) は bit 1 の真ん中で `TXD` = 0。間隔の 16 µs が 1 ビットで、1/ΔX = 62.5 kHz は仮の目盛の 62500 baud に当たる
 
 ## 見るべき値
@@ -206,7 +220,8 @@ trigger: TXD falling at 2us
 soft-fpga の 03-uart を、Verilator 5.042 の PC のシミュレーション (ハーネスに `A` を 1 字送る `main` を足したもの) と、
 Verilator 5.048・Emscripten の docker でビルドしてブラウザ (Playwright の Chromium 153) で開いたものの両方で動かした。
 ブラウザでは `Module._send_byte(0x41)` のあと `Module._step()` を 200 回呼び、リングバッファの `txd` の変わり目を拾った。
-2 つの結果は同じだった。`step` の数え方は 4-4 と同じで、リセット直後を 0、`step` を 1 回呼んだ後を 1 とする。
+2 つの結果は同じだった。
+2026-10-13 に、soft-fpga ac6b663 (2026-10-12) の公開中の画面で同じことをして、下の表の数がどれも変わっていないことを確かめた (Playwright 1.63 の Chromium 153)。`step` の数え方は 4-4 と同じで、リセット直後を 0、`step` を 1 回呼んだ後を 1 とする。
 
 | 見る所 | `step` の番号 | 種類 |
 | --- | --- | --- |
@@ -221,7 +236,8 @@ Verilator 5.048・Emscripten の docker でビルドしてブラウザ (Playwrig
 | 1 フレームの長さ | 160 クロック (2〜161) | 計算値と一致 |
 
 - 受信機が読むのは、各ビットの始まりから 9 クロック目 (bit 0 なら 18 → 27)。16 クロックの真ん中に近い所で読んでいる
-- 画面の欄に `Hi` と打って Send を押すと、受信履歴に `0x48 'H'` と `0x69 'i'` が出た (Playwright で欄に打ち、ボタンを押して確かめた)
+- 画面の欄に `Hi` と打って Send を押すと、受信履歴に `0x48 'H'` と `0x69 'i'` が出た (Playwright で欄に打ち、ボタンを押して確かめた。ac6b663 の公開中の画面でも同じ)
+- 手順の 2〜4 のとおり速度 1 で `A` を送って止めると、`FRAME` のレーンに `TX 'A'` と `RX 'A'` の箱が出た (ac6b663 の公開中の画面を Playwright で操作して確かめた)
 
 ## 出典
 
