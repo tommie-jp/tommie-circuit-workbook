@@ -155,7 +155,7 @@ console.log('作り直したビュー', { 'ringNew.length': ringNew.length, 'rin
 ## 画面に見えるはずのもの
 
 この題は画面を描かない。端末に出る数を読む。もし soft-fpga の画面でビューが切れたら、ロジックアナライザの線が全部 0 の高さに張り付く。
-01-counter の描画は `(heapu32[ringBase + idx] >> bit) & 1` でビットを取り出す。切れたビューは `undefined` を返し、`(undefined >> bit) & 1` は 0 になるから。README の「実行中に表示が消える」は、この見え方を言っている。
+01-counter の Logic Analyzer (共通部品 RTLScopeLA、`js/rtlscope-la.js`) は、リングのビュー `heapu32` から `(heapu32[idx] >> sig.bit) & 1` でビットを取り出す。切れたビューは `undefined` を返し、`(undefined >> bit) & 1` は 0 になるから。README の「実行中に表示が消える」は、この見え方を言っている。
 
 ## 見るべき値
 
@@ -180,17 +180,17 @@ console.log('作り直したビュー', { 'ringNew.length': ringNew.length, 'rin
 
 `ALLOW_MEMORY_GROWTH=0` のとき、32 MB を取ろうとすると `Aborted(OOM)` で止まった。メモリは 16.125 MB のまま、ビューも切れない。伸ばさない設定は、ビューの心配が無い代わりに、足りなくなると止まる。
 
-soft-fpga の 01-counter (4-3 の分周器に差し替えたもの) を Chromium で開き、速度を 2000 にして 3 秒回した。`Module.HEAPU32.byteLength` は回す前も後も 16,908,288 で、メモリは伸びなかった (36 万 4000 クロック)。小さな回路では伸びることはまず無い。09-pdp11 は `INITIAL_MEMORY` を 64 MB (`67108864`) にしてから伸ばす設定にしている (`scripts/build-wasm-09.sh`)。
+soft-fpga の公開ページの 01-counter (ac6b663。リングは 4096 サンプル) を Chromium (headless) で開き、速度を 2000 にして 3 秒回した (2026-10-13)。`Module.HEAPU32.byteLength` は回す前も後も 16,908,288 で、メモリは伸びなかった (36 万 6000 クロック)。小さな回路では伸びることはまず無い。09-pdp11 は `INITIAL_MEMORY` を 64 MB (`67108864`) にしてから伸ばす設定にしている (`scripts/build-wasm-09.sh`)。
 
 ## soft-fpga の画面はどう作り直しているか
 
 ビューを長く握らず、**使うたびに `Module.HEAPU32` を読み直す**。ランタイムが伸ばすたびに `Module.HEAPU32` を作り直すので、毎回読み直せば、いつも新しいビューを使える。
 
-- 01-counter の `web/index.html`: `draw()` の頭で `const heapu32 = Module.HEAPU32;` と毎回読む。最初に覚えておくのは番地を 4 で割った添字 `ringBase` (数) だけで、ビューは覚えない
-- 02-traffic-fsm・03-uart の `web/index.html` も同じ形。04-6502 は `drawLA(laCtx, Module.HEAPU32, …)` と、描くたびに渡す
+- 01〜05 の `web/index.html`: Logic Analyzer を組み立てる共通部品 `js/sft-la-glue.js` の `draw()` を、描画ごとに呼ぶ。`draw()` は `ringView()` で `M.HEAPU32.subarray(ringBase, …)` を毎回作り直し、RTLScopeLA の `update()` に渡す。ソースのコメントも「メモリ拡張で HEAPU32 が差し替わるため毎回取り直す」と書く。最初に覚えておくのは番地を 4 で割った添字 `ringBase` (数) だけ
+- RTLScopeLA は、受け取ったビューを、マウスでずらしたときの描き直しのために覚えておく (`_lastHeapu32`)。ただし 01〜04 の画面の `loop()` は、動かしていない間も毎フレーム `draw()` を呼ぶ。05-dormann は、回路を回したあとと、リセットしたあとに必ず `draw()` を呼ぶ。どの例でも、Wasm を動かしたあとには覚えたビューが新しいものに替わる
 - 06-8080・09-pdp11 の `sim-worker.js`: 送るたびに `Module.HEAPU32` から `.slice()` で写しを作る (4-9)。`Module.HEAPU8.buffer` の上のビューも、使う場所で作ってすぐ `.slice()` する
 
-README は「ハーネス側で growth を監視しビューを再生成する」と書く。実物の画面は、伸びたかどうかを見張るのではなく、描くたびに読み直す形で同じことをしている。
+README (日本語版 `README.ja.md`) も「JS は読み口を持ち続けず、描くたびに `Module.HEAPU32` を取り直してから読む」と書く (a70e845 で今の形に直った。それより前は「ハーネス側で growth を監視しビューを再生成する」と書いていた)。伸びたかどうかを見張るのではなく、描くたびに読み直す形。
 
 自分で画面を書くときの決まりは 2 つ。
 
@@ -200,7 +200,7 @@ README は「ハーネス側で growth を監視しビューを再生成する�
 ## 出典
 
 自作。soft-fpga の書き方は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の README (Design notes)、
-`examples/01-counter/web/index.html`、`examples/04-6502/web/index.html`、`examples/09-pdp11/web/sim-worker.js`、
+`examples/01-counter/web/index.html`、`js/sft-la-glue.js`、`js/rtlscope-la.js`、`examples/09-pdp11/web/sim-worker.js`、
 `scripts/build-wasm*.sh`。メモリが伸びるときの決まりは
 [MDN の WebAssembly.Memory.prototype.grow()](https://developer.mozilla.org/ja/docs/WebAssembly/Reference/JavaScript_interface/Memory/grow) と
 [Emscripten の設定 (ALLOW_MEMORY_GROWTH)](https://emscripten.org/docs/tools_reference/settings_reference.html#allow-memory-growth)。
