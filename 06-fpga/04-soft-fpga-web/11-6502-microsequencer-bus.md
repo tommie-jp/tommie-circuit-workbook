@@ -107,6 +107,7 @@ int main(int argc, char** argv) {
     sim_init();
     for (const char* p = typed; *p; ++p) send_key((uint8_t)*p);
     for (int i = 0; i < 200000; ++i) step();  // 打ち込みが済み、0300 から走り出すまで回す
+    for (int i = 0; i < 1000 && get_state() != 22; ++i) step();  // JMP0 (22) まで進め、次の JMP1 から出す
 
     const uint32_t* ring = get_ring_ptr();
     const uint32_t  mask = (uint32_t)get_ring_size() - 1;
@@ -121,6 +122,7 @@ int main(int argc, char** argv) {
 ```
 
 - 引数を付けると、打ち込む文字列を替えられる (下の表の INC や JSR はこれで測った)
+- 20 万クロック回したあと、1 周のどこにいるかは打ち込みの速さで決まる。そこで JMP0 の状態 (番号 22) まで進めてから出し、出力の頭を JMP1 に揃えた。JMP の無いプログラムでも止まらないよう、1000 クロックで打ち切る
 - `get_state()` はハーネスが前から持っている関数で、`cpu_65c02.v` の観測用出力 `o_state` を返す
 
 ## 手順
@@ -131,7 +133,7 @@ int main(int argc, char** argv) {
 2. 端末をクリックし、`0300: A9 AA 85 10 A5 10 4C 00 03` と打って Enter、続けて `0300R` と打って Enter
 3. **Pause** を押して止め、**Step Inst** を何回か押す。1 回押すごとに、次の DECODE まで進む
 4. 右の **State** の欄が DECODE で止まり、`PC` が 0301 → 0303 → 0305 → 0307 → 0301 と進む
-5. 下の Bus Analyzer の `addr` `data` `we` `sync` の 4 本で、1 周 11 クロックの並びを見る
+5. 下の Logic Analyzer の `addr` `data` `we` `sync` の 4 本で、1 周 11 クロックの並びを見る。いちばん上の `INSTR` のレーンは、sync で命令の境目を切り、`LDA` `STA` `LDA` `JMP` と命令の名前を出す。`reset` と `A` `X` `Y` `SP` のレーンは、最初は隠れている (上の札を押すと出る)
 
 ### PC で数える
 
@@ -206,7 +208,7 @@ trigger: SYNC rising at 1ms
 
 ## 見るべき値
 
-soft-fpga (`19c032a`) の 04-6502 を、Verilator 5.042 で PC にビルドして動かした。
+soft-fpga (`ac6b663`。Logic Analyzer を RTLScopeLA に替えた後) の 04-6502 を、Verilator 5.042 で PC にビルドして動かした (2026-10-13。前の版 19c032a と同じ並びだった)。
 ブラウザは公開中の [04-6502](https://tommie-jp.github.io/soft-fpga/04-6502/) を Playwright の Chromium (headless) で開き、同じプログラムを打ち込んでリングバッファを読んだ。
 2 つの addr・data・we・sync の並びは、1 周 11 クロックぶん一致した。
 
