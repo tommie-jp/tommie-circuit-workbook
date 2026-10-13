@@ -112,7 +112,7 @@ wires:
   - AD.DIO1 -| 5.5,3.48
   - U1.IO37 |- 5.5,3.48
   - AD.GND -| 3.5,4.8
-  - U1.GND |- 10.5,8.52 -- 10.5,9
+  - U1.GND -| 10.5,9
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/08-fpga-board/circuit/03-connect-board.svg)

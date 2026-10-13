@@ -172,7 +172,7 @@ openFPGALoader -b tangnano9k top.fs
 ```
 
 **未実行。** この打ち方は FPGA の中の SRAM に書く。すぐ書けるが、電源を切ると消える。
-電源を切っても残すには `-f` を付けてボードのフラッシュに書く (8-12)。
+電源を切っても残すには、フラッシュに書く。Tang Nano 9K で `-f` がそのまま使えるかは**未確認**で、調べた結果は 06-fpga/08-fpga-board/12-sram-vs-flash.md (8-12) にある。
 試すうちは SRAM に書き、残す回路が決まってからフラッシュに書く。
 
 書き込んだら、ボードの LED が 1 秒に 1 回点滅する。4 番ピンの押しボタンを押している間は止まる (リセット中は `led` が 0 なので、LED は消えたまま)。
@@ -199,7 +199,7 @@ wires:
   - AD.DIO1 -| 5.5,3.48
   - U1.IO37 |- 5.5,3.48
   - AD.GND -| 3.5,4.8
-  - U1.GND |- 10.5,8.52 -- 10.5,9
+  - U1.GND -| 10.5,9
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/08-fpga-board/circuit/04-blink-flow.svg)
