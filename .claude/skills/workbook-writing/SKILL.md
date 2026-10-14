@@ -53,7 +53,8 @@ description: tommie-circuit-workbook の題 (1 題 1 ファイル) を新しく�
   マイクロは µ (U+00B5)、`µs` (`us` と書かない)、温度は `°C`、p-p は `Vpp`、ピークは `V<sub>p</sub>`。フェンスの中の値は各フェンスの綴り
   (`10kHz` のように詰める) に従う。2026-10-14 に決め、本文 1,900 行ほどを機械的に揃えた
 - **スペクトラム (`spectrum` フェンス) の縦軸の単位は dBm にそろえる。** FFT 型 (`ad2` `ad3`) の
-  上流の既定は dBV だが、`unit: dBm` を書き、`ref:` `floor:` `signal:` も dBm で書く
+  上流の既定も dBm (spectrum-fence 0.5.0 から。0.4.0 までは FFT 型だけ dBV だった) だが、
+  版が違っても同じ数になるよう `unit: dBm` を明示し、`ref:` `floor:` `signal:` も dBm で書く
   (dBV と dBm は +13.01 dB 違うので、本文の数と図が食い違わないようにする)。
   dBV で書いてよいのは、**dBV そのものを教える題** (汎用オシロの Math の FFT の読み方。
   04-denken/03-ac-circuits/13-square-wave-fft.md) と、マイクの感度 `dBV/Pa` のような単位の一部だけ。
