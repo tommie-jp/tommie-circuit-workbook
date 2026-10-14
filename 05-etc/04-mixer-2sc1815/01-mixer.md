@@ -251,7 +251,7 @@ R8 が無いと IF OUT の電圧が約 2 倍 (+6 dB) に出て、表の値と合
 | Wavegen W2 (LO) | Sine、1.455 MHz、振幅 0.32 V (0 dBm)、オフセット 0 V |
 | Scope CH1 | 1+ = IF OUT (R8 の上)、1− = GND。50 mV/div、時間は 1 µs/div |
 | Scope CH2 | 2+ = LO の入口 (C2 の前)、2− = GND。LO の振幅が 0.32 V かを見る。100 mV/div |
-| Spectrum | チャンネルは CH1。開始 0 Hz・終了 2.5 MHz、FFT 8192 点、窓は Flat Top、縦軸 dBV |
+| Spectrum | チャンネルは CH1。開始 0 Hz・終了 2.5 MHz、FFT 8192 点、窓は Flat Top、縦軸 dBm (50 Ω) |
 
 - W1 の振幅は、51 Ω の終端 R1 に 0 Ω の信号源が直接かかるので、そのまま RF のポートの電圧になる (LO の W2 と R3 も同じ)。
   W2 は 0.32 V でも 51 Ω に約 6 mA で、Wavegen の上限 (30 mA) に収まる
@@ -259,7 +259,7 @@ R8 が無いと IF OUT の電圧が約 2 倍 (+6 dB) に出て、表の値と合
 - RF を最初に 32 mV にするのは、10 mV (−30 dBm) だと Wavegen の分解能に近く、信号源の雑音が見えるため。
   4-3 の図 3 のとおり、−20 dBm までは利得が一定なので、32 mV でも変換利得は同じに読める
 - 標本化は 2.5 MHz × 2.56 = 6.4 MHz、分解能は 6.4 MHz ÷ 8192 ≈ 0.78 kHz。IF (455 kHz) と RF・LO は十分に分かれる
-- Spectrum の縦軸 dBV は、50 Ω の dBm から 13.0 dB を引いた値 (dBV = dBm − 13.01)。IF の −20.7 dBm は **−33.7 dBV**
+- Spectrum の縦軸 dBm は 50 Ω の電力。IF の −20.7 dBm は、そのまま **−20.7 dBm** の山として立つ
 - W1 と W2 は別々に周波数を決める。LO は RF + 455 kHz に**自分で合わせる** (RF を変えたら LO も変える)
 
 ## 想定する電圧
@@ -301,7 +301,7 @@ LO のポートの電圧はベース・エミッタ間にそのままかかる�
 
 ## 計器の画面
 
-計算値。IF OUT は 4-3 の解析 (RF −30 dBm・LO 0 dBm で IF OUT が **−20.7 dBm = 29 mV<sub>p</sub> = −33.7 dBV**) による。
+計算値。IF OUT は 4-3 の解析 (RF −30 dBm・LO 0 dBm で IF OUT が **−20.7 dBm = 29 mV<sub>p</sub>**) による。
 LO と RF の漏れは、コレクタの値 (4-3) にフィルタの阻止域の深さの**仮定** (30 dB) と L2 での減衰を掛けた**目安**で、実物では変わる (下の表)。
 
 ```spectrum
@@ -310,8 +310,8 @@ device: ad3
 sweep: 0-2.5MHz
 samples: 8192
 window: flattop
-unit: dBV
-ref: -30dBV
+unit: dBm
+ref: -17dBm
 signal:
   - sine 455kHz 29mV
   - sine 1.455MHz 0.88mV
@@ -321,7 +321,7 @@ markers: [455k, 1.455M, 1M]
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-2sc1815/spectrum/01-mixer.svg)
 
-- 455 kHz の山が一番高く、−33.7 dBV で立つ。RF −30 dBm から見て **+9.3 dB の変換利得**
+- 455 kHz の山が一番高く、−20.7 dBm で立つ。RF −30 dBm から見て **+9.3 dB の変換利得**
 - 山のほかに見えるのは LO (1.455 MHz) と RF (1.000 MHz) の漏れ。**どちらも IF より十分低い**が、
   高さはセラミックフィルタの阻止域で決まる (下の表)。図の値は仮定の目安
 - 影像側 (1.910 MHz) と和 (2.455 MHz) の成分は、フィルタと L2 で落ちて見えない
@@ -346,25 +346,25 @@ measure: [freq, vpp]
 
 | 成分 | 見積もり | IF OUT での値 |
 | --- | --- | --- |
-| LO 1.455 MHz | コレクタの LO 0.50 V<sub>p</sub> (4-3) → フィルタの阻止域 30 dB (**仮定**) → L2 (914 Ω) と 50 Ω で 25 dB 下がる | 0.88 mV<sub>p</sub> (約 −65 dBV) |
-| RF 1.000 MHz | コレクタの RF 77 mV<sub>p</sub> (4-3) → 阻止域 30 dB (**仮定**) → L2 (628 Ω) と 50 Ω で 22 dB 下がる | 0.19 mV<sub>p</sub> (約 −77 dBV) |
+| LO 1.455 MHz | コレクタの LO 0.50 V<sub>p</sub> (4-3) → フィルタの阻止域 30 dB (**仮定**) → L2 (914 Ω) と 50 Ω で 25 dB 下がる | 0.88 mV<sub>p</sub> (約 −52 dBm) |
+| RF 1.000 MHz | コレクタの RF 77 mV<sub>p</sub> (4-3) → 阻止域 30 dB (**仮定**) → L2 (628 Ω) と 50 Ω で 22 dB 下がる | 0.19 mV<sub>p</sub> (約 −64 dBm) |
 
 実物のセラミックフィルタの阻止域は未確認なので、**30 dB は仮定**。実際に測った漏れが大きければ、阻止域がもっと浅い。
 
 ## 見るべき値
 
-IF OUT の 455 kHz は、RF −30 dBm・LO 0 dBm のとき **約 −20.7 dBm (波高値 29 mV、−33.7 dBV)**。
+IF OUT の 455 kHz は、RF −30 dBm・LO 0 dBm のとき **約 −20.7 dBm (波高値 29 mV)**。
 変換利得は +9 dB 前後で、**組んだ実機では大きく外れうる** (モデルは代用)。
 上の図 03・04 のとおりに Analog Discovery 3 で測る。
 
 | 確かめること | 期待する値 |
 | --- | --- |
 | IF の周波数 | 455 kHz (RF 1.000 MHz・LO 1.455 MHz のとき。LO − RF) |
-| IF の大きさ (RF −30 dBm) | −33.7 dBV (29 mV<sub>p</sub>)。変換利得 +9.3 dB |
-| IF の大きさ (RF −20 dBm) | −23.9 dBV (91 mV<sub>p</sub>)。利得は +9.1 dB でほぼ同じ |
+| IF の大きさ (RF −30 dBm) | −20.7 dBm (29 mV<sub>p</sub>)。変換利得 +9.3 dB |
+| IF の大きさ (RF −20 dBm) | −10.9 dBm (91 mV<sub>p</sub>)。利得は +9.1 dB でほぼ同じ |
 | RF の振幅を半分に | IF も 6 dB 下がる (傾き 1。−20 dBm までは利得が一定) |
 | RF を −10 dBm にする | 利得が +7.1 dB に落ちる (圧縮が始まる)。傾きが 1 より小さくなる |
-| LO を −10 dBm (0.10 V<sub>p</sub>) | 利得 +7.3 dB (RF −30 dBm なら IF は約 −35.6 dBV) |
+| LO を −10 dBm (0.10 V<sub>p</sub>) | 利得 +7.3 dB (RF −30 dBm なら IF は約 −22.6 dBm) |
 | LO を +7 dBm (0.71 V<sub>p</sub>) | 利得 +10.6 dB (0 dBm より 1.3 dB 上がるだけ) |
 | LO を止める | IF が消える (混ぜる相手が無い) |
 | RF だけ動かして LO を固定 | IF が 455 kHz から離れ、フィルタの帯域 (約 12 kHz) の外で急に落ちる |

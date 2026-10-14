@@ -427,15 +427,15 @@ device: ad3
 sweep: 0-1kHz
 samples: 8192
 window: hann
-unit: dBV
-ref: -10dBV
+unit: dBm
+ref: 3dBm
 signal: sine 440Hz 50mV
 markers: [440Hz]
 ```
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/spectrum/02-radio-1.svg)
 
-- 440 Hz に山が 1 本立つ。50 mV (peak) の正弦波は −29.03 dBV (読み値)。1 V (peak) の正弦波が −3.01 dBV にあたる
+- 440 Hz に山が 1 本立つ。50 mV (peak) の正弦波は −16.02 dBm (読み値)。1 V (peak) の正弦波が 10.00 dBm にあたる
 - 検波出力の直流分 (約 3 V) は 0 Hz に大きな線として出る。見やすくするため、CH1 を AC 結合 (BNC アダプタのジャンパ) にして測る
 
 ```spectrum
@@ -445,8 +445,8 @@ center: 594kHz
 span: 4kHz
 samples: 65536
 window: hann
-unit: dBV
-ref: -10dBV
+unit: dBm
+ref: 3dBm
 signal:
   - sine 594kHz 100mV
   - sine 593.56kHz 15mV
@@ -458,9 +458,9 @@ markers: [594kHz, 593.56kHz, 594.44kHz]
 
 | マーカー | 周波数 | レベル (読み値) | 意味 |
 | --- | --- | --- | --- |
-| 1 | 約 594 kHz | −23.06 dBV | 搬送波 (100 mV) |
-| 2 | 約 593.56 kHz | −39.70 dBV | 下側の側波 (594 kHz − 440 Hz) |
-| 3 | 約 594.44 kHz | −39.49 dBV | 上側の側波 (594 kHz + 440 Hz) |
+| 1 | 約 594 kHz | −10.05 dBm | 搬送波 (100 mV) |
+| 2 | 約 593.56 kHz | −26.69 dBm | 下側の側波 (594 kHz − 440 Hz) |
+| 3 | 約 594.44 kHz | −26.48 dBm | 上側の側波 (594 kHz + 440 Hz) |
 
 - 側波は、搬送波から**音声の周波数 (440 Hz) だけ離れて**両側に出る。高さは、変調度 m = 0.3 のとき搬送波の m ÷ 2 = 0.15 倍で、**搬送波より約 16.5 dB 低い**
 - 音声が強いほど (変調度が大きいほど) 側波が高くなる。同調が合っていると、側波も同じように増幅される

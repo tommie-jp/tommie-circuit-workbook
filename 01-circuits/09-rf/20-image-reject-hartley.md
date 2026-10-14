@@ -361,7 +361,7 @@ Analog Discovery 3 だけを使う。LO と RF は 1 MHz より低いので W1�
 | Wavegen W1 (LO) | Sine、498 kHz、振幅 0.25 V (0.5 V<sub>pp</sub>)、オフセット 0 V |
 | Wavegen W2 (RF) | Sine、448.2 kHz (LO の下) と 547.8 kHz (LO の上) を切り替える。振幅 10 mV (9-12 と同じ)、オフセット 0 V |
 | Scope | CH1 = I (C13 の先)、CH2 = 出力。1− と 2− は VREF。どちらも 20 mV/div、5 µs/div (49.8 kHz の 2.5 周期)、トリガは CH1 の立ち上がり 0 V |
-| Spectrum | CH2。開始 0 Hz・終了 1.25 MHz、FFT 16384 点、窓は Flat Top、縦軸 dBV、Top −10 dBV、20 dB/div |
+| Spectrum | CH2。開始 0 Hz・終了 1.25 MHz、FFT 16384 点、窓は Flat Top、縦軸 dBm (50 Ω)、Top 3 dBm、20 dB/div |
 
 - Spectrum の分解能は 1.25 MHz × 2.56 ÷ 16384 = 195 Hz。49.8 kHz と、和の 946.2 kHz・1045.8 kHz、LO の漏れの 498 kHz が全部入る
 - **VR1 の合わせ方**: W2 を 547.8 kHz (消したい側) にして、Spectrum のマーカー 1 (49.8 kHz) が一番低くなるように VR1 を回す。
@@ -410,8 +410,8 @@ device: ad3
 sweep: 0-1.25MHz
 samples: 16384
 window: flattop
-unit: dBV
-ref: -10dBV
+unit: dBm
+ref: 3dBm
 scale: 20dB
 signal:
   - sine 49.8kHz 66.9mV
@@ -428,8 +428,8 @@ device: ad3
 sweep: 0-1.25MHz
 samples: 16384
 window: flattop
-unit: dBV
-ref: -10dBV
+unit: dBm
+ref: 3dBm
 scale: 20dB
 signal:
   - sine 49.8kHz 2.1mV
@@ -440,9 +440,9 @@ markers: [49.8k, 498k, 1045.8k]
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/spectrum/20-image-reject-hartley-2.svg)
 
-- 図5 と図6 は同じ尺度 (Top −10 dBV、20 dB/div) で並べた。10 dB/div だと図6 の一番高い線が上端から 4 目盛下に潰れるので、
+- 図5 と図6 は同じ尺度 (Top 3 dBm、20 dB/div) で並べた。10 dB/div だと図6 の一番高い線が上端から 4 目盛下に潰れるので、
   20 dB/div にした。図5 と高さを見比べると、49.8 kHz の線が約 1.5 目盛 (30 dB) 下がっている
-- マーカー 1 (49.8 kHz) が **−26.5 dBV から −56.6 dBV へ、約 30 dB** 下がる。これがイメージ除去の比 (±5 % の部品の目安。理想の部品なら 85 dB 以上)
+- マーカー 1 (49.8 kHz) が **−13.5 dBm から −43.6 dBm へ、約 30 dB** 下がる。これがイメージ除去の比 (±5 % の部品の目安。理想の部品なら 85 dB 以上)
 - マーカー 2 (498 kHz) は LO の漏れ、マーカー 3 は和 (448.2 + 498 = 946.2 kHz、547.8 + 498 = 1045.8 kHz)。
   片側 (PIN 4) の出力なので LO の漏れは打ち消されずに残る (9-12 の CH2 と同じ)。PIN 4 の 470 pF と U4B の帯域 (約 1 MHz の GBW を 3 倍の雑音利得で割って約 330 kHz) で下がった分を見込んだ**目安**で、
   大きさは実物で確かめる。どちらも W2 を切り替えても大きさはほぼ変わらない
@@ -455,8 +455,8 @@ markers: [49.8k, 498k, 1045.8k]
 | 確かめること | 期待する値 |
 | --- | --- |
 | I (CH1) の大きさ | 97.8 mV<sub>pp</sub> (48.9 mV peak、目安)。W2 を 448.2 kHz と 547.8 kHz で切り替えても同じ |
-| W2 = 448.2 kHz (LO の下) の出力 (CH2) | 49.8 kHz・134 mV<sub>pp</sub> (66.9 mV peak、−26.5 dBV、目安)。I の 1.37 倍 |
-| W2 = 547.8 kHz (LO の上) の出力 (CH2) | 49.8 kHz・約 4 mV<sub>pp</sub> (−56.6 dBV)。448.2 kHz のときより **25〜35 dB** 低い (±5 % の部品の目安) |
+| W2 = 448.2 kHz (LO の下) の出力 (CH2) | 49.8 kHz・134 mV<sub>pp</sub> (66.9 mV peak、−13.5 dBm、目安)。I の 1.37 倍 |
+| W2 = 547.8 kHz (LO の上) の出力 (CH2) | 49.8 kHz・約 4 mV<sub>pp</sub> (−43.6 dBm)。448.2 kHz のときより **25〜35 dB** 低い (±5 % の部品の目安) |
 | VR1 で Q 側の振幅を合わせた後 | 中央値で約 37 dB 低い (±5 % の網。位相のずれが残る)。±1 % の部品なら 46 dB 前後 |
 | 理想の部品 (LTspice) | 85 dB 以上低い (LTspice 86 dB、網の式 95 dB) |
 | 2 つの SA612 の利得が 5 % 違うだけのとき | 32 dB にとどまる |

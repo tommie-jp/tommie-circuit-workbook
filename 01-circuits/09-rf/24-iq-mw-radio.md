@@ -1041,7 +1041,7 @@ RTL-SDR などの SDR の受信機が PC に送ってくるのも、この I と
 | Logic (図7) | DIO0 = S0 (GP2)、DIO1 = S1 (GP3)。標本化 100 MHz、500 ns/div、トリガ DIO0 の立ち上がり。バスは S1 S0 (10 進) |
 | Scope (図8) | CH1 = I (GP26)、CH2 = Q (GP27)、1−・2− は GND。どちらも 100 mV/div、Offset −1.65 V。200 µs/div、トリガ CH1 の立ち上がり 1.65 V |
 | Scope の XY (図9・図10) | X = CH1 (I)、Y = CH2 (Q)。どちらも 100 mV/div、Offset −1.65 V |
-| Spectrum (図11) | CH1 (I)、0〜10 kHz、8192 点 (分解能 3.1 Hz)、窓 Flat Top、縦軸 dBV、Top 10 dBV |
+| Spectrum (図11) | CH1 (I)、0〜10 kHz、8192 点 (分解能 3.1 Hz)、窓 Flat Top、縦軸 dBm (50 Ω)、Top 23 dBm |
 
 - 試験の電波の大きさは、タンクの Q とリンク巻線の巻数で変わるので、数で決めずに **I の振幅 (0.2 V) で合わせる**。
   リンク巻線の出力に直すと 0.2 V ÷ 175 ≈ **1.1 mV** (peak、計算値)
@@ -1124,8 +1124,8 @@ device: ad3
 sweep: 0-10kHz
 samples: 8192
 window: flattop
-unit: dBV
-ref: 10dBV
+unit: dBm
+ref: 23dBm
 signal:
   - dc 1.65V
   - sine 1kHz 200mV
@@ -1158,7 +1158,7 @@ markers: [1kHz, 600Hz, 1.4kHz, 8kHz]
 | Q の遅れ (Scope のカーソル、図8) | 250.0 µs (90°)。局が LO より下なので Q が遅れる |
 | I と Q の振幅 (図8・図9) | どちらも 400 mV<sub>pp</sub> (0.2 V に合わせた)。2 本の差は 1 割以内が目安 (差が大きいと隣の局の打ち消しが浅くなる) |
 | XY の半径 (図10、AM 30 %) | 0.14〜0.26 V の間で 400 Hz で伸び縮み |
-| I のスペクトル (図11) | 1 kHz −17.0 dBV、600 Hz と 1.4 kHz −33.5 dBV、隣の局 (8 kHz) −24.6 dBV |
+| I のスペクトル (図11) | 1 kHz −4.0 dBm、600 Hz と 1.4 kHz −20.5 dBm、隣の局 (8 kHz) −11.6 dBm |
 | Tayloe の利得 | リンク巻線の peak の約 1.75 倍 (LTspice。47 nF で 1.74 倍、22 nF で 1.78 倍) |
 | Tayloe の低域の角 | 約 9.0 kHz (22 nF、計算値。47 nF なら 4.2 kHz で、AM の帯を削る) |
 | リンク巻線から ADC までの利得 | 約 175 倍 (+45 dB) |
@@ -1197,7 +1197,7 @@ markers: [1kHz, 600Hz, 1.4kHz, 8kHz]
 - 次の数は Python の算術で確かめた (LTspice は使っていない): PLL の組は sys を 100〜150 MHz に収めて 157 通り (FBDIV 63〜133、PD1・PD2 1〜7)。
   531〜1602 kHz の 120 局の Δf は 1.0〜2.88 kHz で最大は 1503 kHz。表の 7 局の LO と Δf も一致 (PLL の組は同じ LO になる別の組でもよい)。
   sys 150 MHz 固定の M = 23・24 は 1630.4・1562.5 kHz。Tayloe の角 9.04 kHz (22 nF)・4.23 kHz (47 nF)。PWM の RC の角 7.23 kHz、100 kHz で 1 段 1/13.9、2 段 1/195 (負荷込み)。7.4 kHz で 2 µs は 5.3°
-- 図11 の振幅 (200 mV から −17.0 dBV、30 mV の側波が −33.5 dBV、83 mV が −24.6 dBV) は、上の同調 (−5.1 dB) と Tayloe の角 (−2.5 dB) を掛けた算術と合う
+- 図11 の振幅 (200 mV から −4.0 dBm、30 mV の側波が −20.5 dBm、83 mV が −11.6 dBm) は、上の同調 (−5.1 dB) と Tayloe の角 (−2.5 dB) を掛けた算術と合う
 - **対象外**: バーアンテナの出力 (数百 µV〜数 mV)、LO の漏れ、ポリバリコンの実際の Q、プログラムの動き (回し戻し、低域通過、PWM) は、実物とソフトに依る値で、回路の計算では確かめられない
 
 ## 出典

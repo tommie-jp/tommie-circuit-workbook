@@ -50,4 +50,4 @@ description: tommie-circuit-workbook の題 (1 題 1 ファイル) を新しく�
   上流の既定は dBV だが、`unit: dBm` を書き、`ref:` `floor:` `signal:` も dBm で書く
   (dBV と dBm は +13.01 dB 違うので、本文の数と図が食い違わないようにする)。
   dBV にしてよいのは WaveForms の Spectrum の画面そのものを写す図だけで、その理由を本文に 1 行書く
-  (2026-10-14 に決めた。既存の `unit: dBV` の図 12 枚は、見直すときに直す)
+  (2026-10-14 に決め、同日に既存の `unit: dBV` の図 12 枚を dBm に直した。本文の dBV の数も +13.01 dB で換算済み)

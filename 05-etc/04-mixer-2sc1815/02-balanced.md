@@ -386,11 +386,11 @@ style:
 | Wavegen W2 (LO) | Sine、1.455 MHz、振幅 0.32 V (0 dBm)、オフセット 0 V |
 | Scope CH1 | 1+ = IF OUT (R8 の上)、1− = GND。IF を読む |
 | Scope CH2 | 2+ = ミラーの出力 (Q2・Q5 のコレクタ)、2− = GND。**フィルタの前**で RF が消えているかを見る |
-| Spectrum | 開始 0 Hz・終了 3 MHz、FFT 8192 点、窓は Flat Top、縦軸 dBV。CH2 (フィルタの前) と CH1 (IF OUT) を並べる |
+| Spectrum | 開始 0 Hz・終了 3 MHz、FFT 8192 点、窓は Flat Top、縦軸 dBm (50 Ω)。CH2 (フィルタの前) と CH1 (IF OUT) を並べる |
 
 - **CH2 を見るのが目的**。ミラーの出力で RF (1.000 MHz) が IF より 36 dB 低い。4-1 のコレクタでは RF が IF より 7 dB 高かった
 - 標本化は 3 MHz × 2.56 = 7.7 MHz、分解能は 7.7 MHz ÷ 8192 ≈ 0.94 kHz。IF (455 kHz)・RF・LO・和 (2.455 MHz) は十分に分かれる
-- Spectrum の縦軸 dBV は実効値。波高値 197 mV の IF は −17.1 dBV (実効値 139 mV)
+- Spectrum の縦軸 dBm は 50 Ω の電力 (実効値で数える)。波高値 197 mV の IF は −4.1 dBm (実効値 139 mV)
 - W1 と W2 は別々に周波数を決める。LO は RF + 455 kHz に**自分で合わせる**
 - CH2 のプローブ (AD3 の入力 1 MΩ・約 24 pF) はミラーの出力に容量として掛かるが、同調回路の 560 pF に比べて小さい (未確認。外して比べるとよい)
 
@@ -413,20 +413,20 @@ style:
 
 | 成分 | ミラーの出力 (フィルタの前、CH2) | IF OUT (50 Ω、CH1) |
 | --- | --- | --- |
-| IF 455 kHz | 197 mV<sub>p</sub> (−17.1 dBV) | 32 mV<sub>p</sub> (−32.8 dBV)。−19.8 dBm |
-| LO 1.455 MHz | 206 mV<sub>p</sub> (−16.7 dBV) | フィルタで落ちる (下の注) |
-| 和 2.455 MHz | 28 mV<sub>p</sub> (−34.1 dBV) | 同上 |
-| RF 1.000 MHz | 3.1 mV<sub>p</sub> (−53.2 dBV) | 同上 |
+| IF 455 kHz | 197 mV<sub>p</sub> (−4.1 dBm) | 32 mV<sub>p</sub> (−19.8 dBm) |
+| LO 1.455 MHz | 206 mV<sub>p</sub> (−3.7 dBm) | フィルタで落ちる (下の注) |
+| 和 2.455 MHz | 28 mV<sub>p</sub> (−21.1 dBm) | 同上 |
+| RF 1.000 MHz | 3.1 mV<sub>p</sub> (−40.2 dBm) | 同上 |
 
 IF OUT の LO・RF・和は、モデルのフィルタ (理想の LC 梯子) では −120 dBm より低く出る。実物のセラミックフィルタの阻止域は数十 dB のはずで (未確認)、
-4-1 と同じく 30 dB を仮定すると、LO は IF OUT で約 −80 dBV より低い。
+4-1 と同じく 30 dB を仮定すると、LO は IF OUT で約 −67 dBm より低い。
 
 ## 調整
 
 1. RF と LO を入れずに、**ミラーの出力が約 3.2 V** かを見る。2.5 V より低ければ Q5 の側、4.3 V より高ければ Q2 の側が強い。RM1・RM2 と Q4・Q5 の組を入れ替えて合わせる。Q3 の IC は RB2 で合わせる (0.79 mA の目安。エミッタ 0.37 V)
-2. W2 (LO) だけを 0 dBm で入れ、CH2 (ミラーの出力) に 1.455 MHz の LO が −17 dBV 前後で出ることを見る
+2. W2 (LO) だけを 0 dBm で入れ、CH2 (ミラーの出力) に 1.455 MHz の LO が −4 dBm 前後で出ることを見る
 3. W1 (RF) を −20 dBm で足し、CH2 で IF (455 kHz) が LO と同じくらいの高さに立ち、**RF (1.000 MHz) が IF より 36 dB 低い**ことを見る
-4. CH1 (IF OUT) で 455 kHz が −32.8 dBV (RF −20 dBm) かを見る。LO を −10 dBm から +7 dBm まで動かし、利得がほとんど変わらないことを確かめる
+4. CH1 (IF OUT) で 455 kHz が −19.8 dBm (RF −20 dBm) かを見る。LO を −10 dBm から +7 dBm まで動かし、利得がほとんど変わらないことを確かめる
 
 ## 計器の画面
 
@@ -438,8 +438,8 @@ device: ad3
 sweep: 0-3MHz
 samples: 8192
 window: flattop
-unit: dBV
-ref: 0dBV
+unit: dBm
+ref: 13dBm
 signal:
   - sine 455kHz 197mV
   - sine 1.455MHz 206mV
@@ -450,8 +450,8 @@ markers: [455k, 1M, 1.455M, 2.455M]
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-2sc1815/spectrum/02-balanced-1.svg)
 
-- IF (455 kHz) と LO (1.455 MHz) が −17 dBV 前後で並ぶ。**RF (1.000 MHz) は −53.2 dBV** で、IF より 36 dB 低い (打ち消される)
-- 和 (2.455 MHz) は −34.1 dBV。同調回路 (約 454 kHz) が 455 kHz 以外を GND へ逃がすので、IF より 17 dB 低い
+- IF (455 kHz) と LO (1.455 MHz) が −4 dBm 前後で並ぶ。**RF (1.000 MHz) は −40.2 dBm** で、IF より 36 dB 低い (打ち消される)
+- 和 (2.455 MHz) は −21.1 dBm。同調回路 (約 454 kHz) が 455 kHz 以外を GND へ逃がすので、IF より 17 dB 低い
 - LO が消えないのはシングルバランスだから (上の説明)。フィルタの後ろでは IF だけが残る (図 04)
 
 ```spectrum
@@ -460,8 +460,8 @@ device: ad3
 sweep: 0-3MHz
 samples: 8192
 window: flattop
-unit: dBV
-ref: -20dBV
+unit: dBm
+ref: -7dBm
 signal:
   - sine 455kHz 32mV
 markers: [455k]
@@ -469,19 +469,19 @@ markers: [455k]
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-2sc1815/spectrum/02-balanced-2.svg)
 
-- IF だけが −32.8 dBV で立つ。RF −20 dBm から見て **+0.2 dB の変換利得**
+- IF だけが −19.8 dBm で立つ。RF −20 dBm から見て **+0.2 dB の変換利得**
 - LO・RF・和はフィルタの阻止域の深さで決まる。モデルでは見えない高さで、図には描いていない (実物では数十 dB 下に見えるはず。未確認)
 
 ## 見るべき値
 
-RF −30 dBm・LO 0 dBm のとき、IF OUT は 10.4 mV<sub>p</sub> (−29.7 dBm、−42.7 dBV)。**変換利得 +0.3 dB** (50 Ω の負荷の電力 ÷ RF の有能電力)。
+RF −30 dBm・LO 0 dBm のとき、IF OUT は 10.4 mV<sub>p</sub> (−29.7 dBm)。**変換利得 +0.3 dB** (50 Ω の負荷の電力 ÷ RF の有能電力)。
 図 03・04 のとおりに AD3 で測る。
 
 | 確かめること | 期待する値 |
 | --- | --- |
 | IF の周波数 | 455 kHz (LO − RF) |
-| IF の大きさ (IF OUT、RF −30 dBm) | 10.4 mV<sub>p</sub> (−42.7 dBV)。利得 +0.3 dB |
-| IF の大きさ (IF OUT、RF −20 dBm) | 32 mV<sub>p</sub> (−32.8 dBV)。利得 +0.2 dB |
+| IF の大きさ (IF OUT、RF −30 dBm) | 10.4 mV<sub>p</sub> (−29.7 dBm)。利得 +0.3 dB |
+| IF の大きさ (IF OUT、RF −20 dBm) | 32 mV<sub>p</sub> (−19.8 dBm)。利得 +0.2 dB |
 | RF の漏れ (ミラーの出力) | IF より **36 dB** 低い (RF −40〜0 dBm で 33〜37 dB) |
 | LO の漏れ (ミラーの出力) | **消えない**。RF −30 dBm で IF より 10 dB 高い |
 | LO を −10 dBm | 利得 −0.8 dB (0 dBm より 1.1 dB 低い)。打ち消しは 35 dB |
