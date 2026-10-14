@@ -49,5 +49,8 @@ description: tommie-circuit-workbook の題 (1 題 1 ファイル) を新しく�
 - **スペクトラム (`spectrum` フェンス) の縦軸の単位は dBm にそろえる。** FFT 型 (`ad2` `ad3`) の
   上流の既定は dBV だが、`unit: dBm` を書き、`ref:` `floor:` `signal:` も dBm で書く
   (dBV と dBm は +13.01 dB 違うので、本文の数と図が食い違わないようにする)。
-  dBV にしてよいのは WaveForms の Spectrum の画面そのものを写す図だけで、その理由を本文に 1 行書く
-  (2026-10-14 に決め、同日に既存の `unit: dBV` の図 12 枚を dBm に直した。本文の dBV の数も +13.01 dB で換算済み)
+  dBV で書いてよいのは、**dBV そのものを教える題** (汎用オシロの Math の FFT の読み方。
+  04-denken/03-ac-circuits/13-square-wave-fft.md) と、マイクの感度 `dBV/Pa` のような単位の一部だけ。
+  理由を本文に 1 行書く
+  (2026-10-14 に決め、同日に既存の図 29 枚 (`unit: dBV` の 12 枚と、`unit` を書かない AD の FFT 型 17 枚) を
+  dBm に直した。本文の dBV の数も +13.01 dB で換算済み。AD の Spectrum の章は「単位: dBm」と教える)

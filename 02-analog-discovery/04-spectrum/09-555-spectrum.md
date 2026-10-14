@@ -107,18 +107,19 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Supplies | V+ = 5 V、Master Enable (555 は数 mA で、各レール約 50 mA に収まる) |
-| Spectrum | Source: Channel 1。Start 0 Hz、Stop 9 kHz。サンプル周波数 20 kHz、FFT 点数 32768。Window: Flat-top。単位: dBV |
+| Spectrum | Source: Channel 1。Start 0 Hz、Stop 9 kHz。サンプル周波数 20 kHz、FFT 点数 32768。Window: Flat-top。単位: dBm |
 
 出力を 0〜5 V・デューティ 52.4% の理想の方形波として描くと次のようになる。
 0 Hz の線は直流分 (平均 2.62 V) である。
 
 ```spectrum
-title: 図3 デューティが 50% からずれているので偶数次が −15 dBV ほどで残る
+title: 図3 デューティが 50% からずれているので偶数次が −2 dBm ほどで残る
 device: ad3
 sweep: 0-9kHz
 samples: 32768
 window: flattop
-ref: 20dBV
+unit: dBm
+ref: 33dBm
 signal: pulse 1008Hz 2.5V offset 2.5V duty 52.4%
 markers: [1008Hz, 2016Hz, 3024Hz, 4032Hz]
 ```
@@ -146,15 +147,15 @@ measure: [freq, avg, vpp]
 0〜Vcc (5 V) の方形波とみなす (実際は数百 mV 内側に留まる、目安)。0〜A の
 矩形波の n 次高調波の振幅は (2A/nπ)×|sin(nπD)|。
 
-| 次数 n | 周波数 | 振幅 (0-peak) | dBV |
+| 次数 n | 周波数 | 振幅 (0-peak) | dBm |
 | --- | --- | --- | --- |
-| 1 | 1008 Hz | 3.174 V | +7.02 dBV |
-| 2 | 2017 Hz | 0.237 V | −15.51 dBV |
-| 3 | 3025 Hz | 1.034 V | −2.72 dBV |
-| 4 | 4034 Hz | 0.235 V | −15.61 dBV |
-| 5 | 5042 Hz | 0.593 V | −7.55 dBV |
-| 6 | 6050 Hz | 0.230 V | −15.77 dBV |
-| 7 | 7059 Hz | 0.394 V | −11.10 dBV |
+| 1 | 1008 Hz | 3.174 V | +20.03 dBm |
+| 2 | 2017 Hz | 0.237 V | −2.50 dBm |
+| 3 | 3025 Hz | 1.034 V | +10.29 dBm |
+| 4 | 4034 Hz | 0.235 V | −2.60 dBm |
+| 5 | 5042 Hz | 0.593 V | +5.46 dBm |
+| 6 | 6050 Hz | 0.230 V | −2.76 dBm |
+| 7 | 7059 Hz | 0.394 V | +1.91 dBm |
 
 参考: DC 平均 = Vcc×D ≈ 2.62 V (Scope の Average で確かめられる、3-1 と同じ考え方)。
 

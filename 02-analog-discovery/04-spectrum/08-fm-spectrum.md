@@ -58,7 +58,7 @@ W1 と 1+ は同じ 5 列に挿し、GND と 1− は上の − レールにま�
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | Carrier: Sine **100 kHz**、Amplitude 1 V。FM: Modulation Sine **1 kHz**、Deviation **2 kHz** (3-3 と同じ、β = Δf/f<sub>m</sub> = 2) |
-| Spectrum | Source: Channel 1。**Start 90 kHz、Stop 110 kHz**。サンプル周波数 250 kHz、FFT 点数 32768。Window: **Flat-top**。単位: dBV |
+| Spectrum | Source: Channel 1。**Start 90 kHz、Stop 110 kHz**。サンプル周波数 250 kHz、FFT 点数 32768。Window: **Flat-top**。単位: dBm |
 
 画面は次のようになる (±4 次までを描いた)。搬送波より ±1 次・±2 次の側波帯のほうが高い。
 
@@ -68,6 +68,8 @@ device: ad3
 sweep: 90kHz-110kHz
 samples: 32768
 window: flattop
+unit: dBm
+ref: 13dBm
 signal:
   - sine 100kHz 0.2239V
   - sine 99kHz 0.5767V
@@ -104,13 +106,13 @@ measure: [vpp]
 n 次側波帯 (f<sub>c</sub> + n f<sub>m</sub>) の振幅は A<sub>c</sub>×|J<sub>n</sub>(β)|。
 A<sub>c</sub> = 1 V、β = 2 のときの J<sub>n</sub>(2) の値 (ベッセル関数、表引きで求まる):
 
-| n (次数) | 周波数 | J<sub>n</sub>(2) | 振幅 (0-peak) | dBV | 搬送波との差 |
+| n (次数) | 周波数 | J<sub>n</sub>(2) | 振幅 (0-peak) | dBm | 搬送波との差 |
 | --- | --- | --- | --- | --- | --- |
-| 0 (搬送波) | 100 kHz | 0.2239 | 0.2239 V | −16.01 dBV | 0 dB (基準) |
-| ±1 | 99 / 101 kHz | 0.5767 | 0.5767 V | −7.79 dBV | +8.22 dB |
-| ±2 | 98 / 102 kHz | 0.3528 | 0.3528 V | −12.06 dBV | +3.95 dB |
-| ±3 | 97 / 103 kHz | 0.1289 | 0.1289 V | −20.80 dBV | −4.79 dB |
-| ±4 | 96 / 104 kHz | 0.0340 | 0.0340 V | −32.38 dBV | −16.4 dB |
+| 0 (搬送波) | 100 kHz | 0.2239 | 0.2239 V | −3.00 dBm | 0 dB (基準) |
+| ±1 | 99 / 101 kHz | 0.5767 | 0.5767 V | +5.22 dBm | +8.22 dB |
+| ±2 | 98 / 102 kHz | 0.3528 | 0.3528 V | +0.95 dBm | +3.95 dB |
+| ±3 | 97 / 103 kHz | 0.1289 | 0.1289 V | −7.79 dBm | −4.79 dB |
+| ±4 | 96 / 104 kHz | 0.0340 | 0.0340 V | −19.37 dBm | −16.4 dB |
 | ±5 以上 | 95 kHz 以下・105 kHz 以上 | 0.0070 以下 | ほぼノイズフロアに埋もれる | — | — |
 
 分かること:

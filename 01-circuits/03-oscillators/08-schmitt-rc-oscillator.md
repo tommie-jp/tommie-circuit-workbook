@@ -233,16 +233,17 @@ device: ad3
 sweep: 0-10kHz
 samples: 32768
 window: flattop
-ref: 20dBV
+unit: dBm
+ref: 33dBm
 signal: pulse 1231Hz 2.5V offset 2.5V duty 47.94%
 markers: [1231Hz, 2462Hz, 3693Hz, 6155Hz]
 ```
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/spectrum/08-schmitt-rc-oscillator.svg)
 
-- 基本波 (1.231 kHz) は約 +7.0 dBV。3 倍 (3.693 kHz) は約 −2.7 dBV で、基本波より約 9.7 dB 低い (理想の方形波の 1/3 = −9.5 dB に近い)
-- 5 倍 (6.155 kHz) は約 −7.4 dBV (基本波より約 14.4 dB 低い。理想は 1/5 = −14 dB)
-- 2 倍 (2.462 kHz) は約 −16.8 dBV。デューティ比が 50 % からずれているので、偶数倍が残る。ずれが大きいほど、2 倍の山は高くなる
+- 基本波 (1.231 kHz) は約 +20.0 dBm。3 倍 (3.693 kHz) は約 +10.3 dBm で、基本波より約 9.7 dB 低い (理想の方形波の 1/3 = −9.5 dB に近い)
+- 5 倍 (6.155 kHz) は約 +5.6 dBm (基本波より約 14.4 dB 低い。理想は 1/5 = −14 dB)
+- 2 倍 (2.462 kHz) は約 −3.8 dBm。デューティ比が 50 % からずれているので、偶数倍が残る。ずれが大きいほど、2 倍の山は高くなる
 - 0 Hz の線は直流分 (平均約 2.4 V)
 
 ## 見るべき値

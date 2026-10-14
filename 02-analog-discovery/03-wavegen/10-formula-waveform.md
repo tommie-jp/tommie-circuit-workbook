@@ -87,7 +87,7 @@ W1 と 1+ は同じ 5 列に挿し、GND と 1− は上の − レールにま�
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | Function: Custom、上の CSV (16 点) を読み込む。**Frequency 1000 Hz**、Amplitude 1 V、Offset 0 V |
-| Spectrum | Source: Channel 1。Start 0 Hz、Stop 5 kHz。Window: Flat-top (4-1・4-3)。単位: dBV |
+| Spectrum | Source: Channel 1。Start 0 Hz、Stop 5 kHz。Window: Flat-top (4-1・4-3)。単位: dBm |
 
 Custom は CSV の 1 周期を Frequency の速さでくり返す (3-4)。CSV の中に
 sin x (1 周期ぶん) と sin 3x (3 周期ぶん) が同時に入っているので、出力の
@@ -95,11 +95,13 @@ sin x (1 周期ぶん) と sin 3x (3 周期ぶん) が同時に入っている�
 の 2 本になる。
 
 ```spectrum
-title: 図3 1000 Hz と 3000 Hz に同じ高さ (−6.76 dBV) の 2 本が立つ
+title: 図3 1000 Hz と 3000 Hz に同じ高さ (+6.25 dBm) の 2 本が立つ
 device: ad3
 sweep: 0-5kHz
 samples: 8192
 window: flattop
+unit: dBm
+ref: 13dBm
 signal:
   - sine 1kHz 0.6495V
   - sine 3kHz 0.6495V
@@ -130,8 +132,8 @@ measure: [vpp, freq]
 
 | 測る所 | 期待する値 (計算値) | 分かること |
 | --- | --- | --- |
-| 1000 Hz (基本波、sin x) | 振幅 0.6495 V、−6.76 dBV | Amplitude 1 V ÷ 1.5396 |
-| 3000 Hz (3 次、sin 3x) | 振幅 0.6495 V、−6.76 dBV | 基本波と**同じ高さ** |
+| 1000 Hz (基本波、sin x) | 振幅 0.6495 V、+6.25 dBm | Amplitude 1 V ÷ 1.5396 |
+| 3000 Hz (3 次、sin 3x) | 振幅 0.6495 V、+6.25 dBm | 基本波と**同じ高さ** |
 | 上記以外のビン | ノイズフロア付近 | 元の式に 2・4・5 次…の成分は無い |
 
 分かること:

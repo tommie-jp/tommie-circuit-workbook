@@ -58,7 +58,7 @@ W1 と 1+ は 5 列に挿すだけで、列の内側でつながる。GND と 1�
 | --- | --- |
 | Wavegen | W1: Sine、1000 Hz、Amplitude 1 V |
 | Scope | **Average: N 回** (下の表で N を変える)。Trigger を Wavegen に同期させ、毎回同じ位相で取り込む |
-| Spectrum | Source: Channel 1。**Start 0 Hz、Stop 20 kHz**。Window: Rectangular (ノイズフロアの比較は ENBW が一番狭い窓が見やすい、4-3)。単位: dBV |
+| Spectrum | Source: Channel 1。**Start 0 Hz、Stop 20 kHz**。Window: Rectangular (ノイズフロアの比較は ENBW が一番狭い窓が見やすい、4-3)。単位: dBm |
 
 ```scope
 title: 図3 同じ信号を時間で見ると 1 kHz の正弦波 (雑音は平均で減るので画面には描かない)
@@ -74,7 +74,7 @@ measure: [vpp, freq]
 
 ## 見るべき値
 
-計算値。基本波 (1000 Hz、−3.01 dBV) の高さは平均回数によらず一定。
+計算値。基本波 (1000 Hz、+10.00 dBm) の高さは平均回数によらず一定。
 ノイズフロアは**時間領域で N 回そろえて平均する**と振幅が 1/√N になるので、
 電力 (dB) では **10 log₁₀(N) dB** だけ下がる。
 

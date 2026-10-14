@@ -111,7 +111,8 @@ device: ad3
 sweep: 0-1kHz
 window: hann
 samples: 8192
-ref: -20dBV
+unit: dBm
+ref: -7dBm
 signal: sawtooth 120Hz 200mVpp
 markers: [120Hz, 240Hz, 360Hz]
 ```

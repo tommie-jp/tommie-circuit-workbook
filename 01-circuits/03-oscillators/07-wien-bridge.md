@@ -203,7 +203,8 @@ device: ad3
 sweep: 0-5kHz
 samples: 32768
 window: flattop
-ref: 10dBV
+unit: dBm
+ref: 23dBm
 signal:
   - sine 986.55Hz 1.628V
   - sine 2959.65Hz 65.2mV
@@ -212,7 +213,7 @@ markers: [986.55Hz, 2959.65Hz]
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/03-oscillators/spectrum/07-wien-bridge.svg)
 
-- 山の高さは実効値の dBV で出る。基本波は約 +1.2 dBV、3 次は約 −26.7 dBV で、差は約 27.9 dB。65.2 mV ÷ 1.628 V ≈ 4.0 % (THD の目安) と合う
+- 山の高さは 50 Ω の電力の dBm で出る。基本波は約 +14.2 dBm、3 次は約 −13.7 dBm で、差は約 27.9 dB。65.2 mV ÷ 1.628 V ≈ 4.0 % (THD の目安) と合う
 - 偶数次 (2・4 倍) がほとんど出ないのは、D1 と D2 が正負で対称に働くため。偶数次が目立つなら、2 つのダイオードの特性がそろっていない
 - 実測の 3 次は D1・D2 の個体差や電源の揺れで動く。ここで見ているのは大きさの目安
 

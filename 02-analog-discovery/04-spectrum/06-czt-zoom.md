@@ -90,6 +90,8 @@ device: ad3
 sweep: 0-10MHz
 samples: 32768
 window: flattop
+unit: dBm
+ref: 13dBm
 signal:
   - sine 5MHz 0.25V
   - sine 5.00005MHz 0.25V
@@ -105,6 +107,8 @@ center: 5MHz
 span: 20kHz
 samples: 32768
 window: flattop
+unit: dBm
+ref: 13dBm
 signal:
   - sine 5MHz 0.25V
   - sine 5.00005MHz 0.25V

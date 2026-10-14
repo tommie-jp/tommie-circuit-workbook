@@ -59,7 +59,7 @@ W1 と 1+ は同じ 5 列に挿し、GND と 1− は上の − レールにま�
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | Carrier: Sine **100 kHz**、Amplitude 1 V。AM: Modulation Sine **1 kHz**、Depth **50%** (3-3 と同じ) |
-| Spectrum | Source: Channel 1。**Start 90 kHz、Stop 110 kHz**。サンプル周波数 250 kHz、FFT 点数 32768。Window: **Flat-top** (振幅を正しく読むため、4-1・4-3)。単位: dBV |
+| Spectrum | Source: Channel 1。**Start 90 kHz、Stop 110 kHz**。サンプル周波数 250 kHz、FFT 点数 32768。Window: **Flat-top** (振幅を正しく読むため、4-1・4-3)。単位: dBm |
 
 画面は次のようになる。搬送波の両側 1 kHz に側波帯が 1 本ずつ立つ。
 
@@ -69,6 +69,8 @@ device: ad3
 sweep: 90kHz-110kHz
 samples: 32768
 window: flattop
+unit: dBm
+ref: 13dBm
 signal:
   - sine 100kHz 1V
   - sine 99kHz 0.25V
@@ -97,11 +99,11 @@ measure: [vmax]
 搬送波 A<sub>c</sub>、側波帯 A<sub>c</sub>m/2 (f<sub>c</sub> ± f<sub>m</sub>) になる
 (A<sub>c</sub> = 1 V、m = 0.5、f<sub>c</sub> = 100 kHz、f<sub>m</sub> = 1 kHz)。
 
-| 山 | 周波数 | 振幅 (0-peak) | dBV | 搬送波との差 |
+| 山 | 周波数 | 振幅 (0-peak) | dBm | 搬送波との差 |
 | --- | --- | --- | --- | --- |
-| 搬送波 | 100 kHz | 1.000 V | −3.01 dBV | 0 dB (基準) |
-| 下側側波帯 | 99 kHz | 0.250 V | −15.05 dBV | −12.04 dB |
-| 上側側波帯 | 101 kHz | 0.250 V | −15.05 dBV | −12.04 dB |
+| 搬送波 | 100 kHz | 1.000 V | +10.00 dBm | 0 dB (基準) |
+| 下側側波帯 | 99 kHz | 0.250 V | −2.04 dBm | −12.04 dB |
+| 上側側波帯 | 101 kHz | 0.250 V | −2.04 dBm | −12.04 dB |
 
 分かること:
 

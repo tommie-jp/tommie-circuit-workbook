@@ -300,7 +300,7 @@ notes:
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen | W1: Square、**500 Hz**、Amplitude 1 V、Offset 0 V、Duty 50 % |
-| Spectrum | Channel 1 と Channel 2 を表示、**Start 0 Hz、Stop 10 kHz**、Window: Flat-top、単位: dBV |
+| Spectrum | Channel 1 と Channel 2 を表示、**Start 0 Hz、Stop 10 kHz**、Window: Flat-top、単位: dBm |
 
 ```spectrum
 title: 図8 入力 (CH1) — 方形波 500 Hz の高調波
@@ -308,6 +308,8 @@ device: ad2
 sweep: 0-10kHz
 samples: 8192
 window: flattop
+unit: dBm
+ref: 13dBm
 signal: square 500Hz 1V
 markers: [500Hz, 1.5kHz, 4.5kHz, 9.5kHz]
 ```
@@ -320,6 +322,8 @@ device: ad2
 sweep: 0-10kHz
 samples: 8192
 window: flattop
+unit: dBm
+ref: 13dBm
 signal:
   - sine 500Hz 1151.76mV
   - sine 1.5kHz 245.09mV
@@ -338,10 +342,10 @@ markers: [500Hz, 1.5kHz, 4.5kHz, 9.5kHz]
 
 | 高調波 | 周波数 | CH1 (計算値) | CH2 (計算値) | 差 = フィルタの利得 |
 | --- | --- | --- | --- | --- |
-| 1 (基本波) | 500 Hz | −0.91 dBV | −1.78 dBV | −0.87 dB |
-| 3 | 1.5 kHz | −10.45 dBV | −15.22 dBV | −4.77 dB |
-| 9 | 4.5 kHz | −20.00 dBV | −32.78 dBV | −12.78 dB |
-| 19 | 9.5 kHz | −26.49 dBV | −45.58 dBV | −19.09 dB |
+| 1 (基本波) | 500 Hz | +12.10 dBm | +11.23 dBm | −0.87 dB |
+| 3 | 1.5 kHz | +2.56 dBm | −2.21 dBm | −4.77 dB |
+| 9 | 4.5 kHz | −6.99 dBm | −19.77 dBm | −12.78 dB |
+| 19 | 9.5 kHz | −13.48 dBm | −32.57 dBm | −19.09 dB |
 
 分かること:
 

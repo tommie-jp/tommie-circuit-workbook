@@ -68,7 +68,7 @@ MK1 は 2 ピンのエレクトレットコンデンサマイク (ECM、中に F
 C1 の先には Q1 の入力抵抗 h<sub>ie</sub> ≈ h<sub>FE</sub> × 26 mV ÷ 4.3 mA ≈ 0.6 kΩ が
 R1 と並列に付くので、ベースに届くのは 0.13 mV × 0.6 kΩ ÷ (2.2 kΩ + 0.6 kΩ) ≈ 0.03 mV。
 Q1 の電圧利得は g<sub>m</sub> × RC = (4.3 mA ÷ 26 mV) × 470 Ω ≈ 78 倍なので、CH1 には
-2 mV (peak) ほどが来る。図3 の基本周波数の山 (約 −57 dBV) はこの見積もり (計算値)。
+2 mV (peak) ほどが来る。図3 の基本周波数の山 (約 −44 dBm) はこの見積もり (計算値)。
 実物のデータシートがあれば、感度と推奨の負荷抵抗をそちらの値に置き換える。
 
 ## 実体配線図
@@ -123,7 +123,8 @@ device: ad3
 sweep: 0-2kHz
 samples: 8192
 window: hann
-ref: -40dBV
+unit: dBm
+ref: -27dBm
 signal:
   - sine 150Hz 2mV
   - sine 300Hz 1.4mV
