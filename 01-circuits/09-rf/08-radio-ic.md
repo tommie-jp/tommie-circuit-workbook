@@ -25,6 +25,7 @@ LMF501T (三ツ美電機)。**どちらも今は製造が終わっているが�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 TA7642系ラジオICの標準回路
 parts:
   ANT: antenna 1,4
@@ -97,6 +98,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: half
 parts:
@@ -201,6 +203,7 @@ VC1 は約 100 pF に回しておく (f<sub>0</sub> = 1 / (2π√(250 µH × 100
 | Scope 時間軸・トリガ | 200 µs/div、CH1 の立ち上がり |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 AM 試験信号 (CH2) と Cout の出口の検波出力 (CH1) — 出力の大きさは仮定
 time: 200us/div
 trigger: ch1 rising 0V

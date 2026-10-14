@@ -77,6 +77,7 @@ HOLD --> IDLE : 離した (何も出さない)
 回路は 6-2・6-3 と同じ。LED の役だけを替えた。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 GP0 で押しボタンを読み、短押し・長押し・繰り返しを GP15・GP14・GP16 の LED で見せる
 parts:
   U1: pico2 4,6 mirror
@@ -158,6 +159,7 @@ LED は 1 個ずつ 100 ms しか点かず、3 個が同時に点くことは無
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 6-3 と同じブレッドボード。D1・D2・D3 が短押し・長押し・繰り返し
 board: full
 parts:
@@ -622,6 +624,7 @@ PASS
 (押した・離した時刻だけを描いた)。LED の時刻はシミュレーションの値。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 短押しは離した所で D1、長押しは 1 s で D2、その後は 0.2 s ごとに D3
 device: ad3
 time: 400ms/div

@@ -22,6 +22,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 水晶発振 (ピアース)
 parts:
   U1A: not 3,3 74HC04
@@ -69,6 +70,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 1A (1 番) を 6 列の線で上ブロックへ上げ、水晶と C1・C2 は上、Rf・Rd は下に組む。上の赤レール = +5V、青レール = GND (上下の青レールは 1 列でつなぐ)
 board: half
@@ -152,6 +154,7 @@ wires:
 | Trigger | CH1、立ち上がり、2.5 V |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 U1B の出力 (4 番) — 4 MHz の方形波 (周期 250 ns)
 time: 50ns/div
 trigger: ch1 rising 2.5V
@@ -176,6 +179,7 @@ measure: [vpp, freq]
 見えるはずの画面 (理想の模型。HC-49/U の 4 MHz の典型値として C<sub>m</sub> = 31.66 fF、L<sub>m</sub> = 50 mH、R<sub>m</sub> = 50 Ω、C<sub>0</sub> = 5 pF を仮定した目安で、実測ではない)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: litevna64
 sweep: 3.99M-4.02M 401
 title: 図4 4 MHz 水晶の S21 — fs (通る) と fp (通らない)

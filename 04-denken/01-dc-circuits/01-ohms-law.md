@@ -23,6 +23,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 電圧・電流・抵抗を同時に測る
 style:
   standard: jis
@@ -51,6 +52,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: half
 parts:

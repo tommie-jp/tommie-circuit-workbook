@@ -30,6 +30,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ポリスイッチとシャントの回路
 style:
   standard: jis
@@ -73,6 +74,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -126,6 +128,7 @@ F1 を冷ます。ポリスイッチが働いてからの形は品と温度で�
 (働くまで 2 秒、その後 0.3 秒ほどで絞られる)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 S1 を閉じると 0.5 A 流れ、2 秒ほどで 84 mA に絞られる (後半は目安)
 time: 1s/div
 trigger: ch1 rising 250mV at -4div

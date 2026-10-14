@@ -30,6 +30,7 @@ LED の定格 (20 mA) よりずっと高い。**AD3 自体を守るものであ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 抵抗を直列に入れて LED を V+ につなぐ
 parts:
   V1: vsource 1,1 1,3 5
@@ -49,6 +50,7 @@ V+（Supplies）→ R1（330 Ω）→ LED → GND。R1 が無いと LED の順�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで抵抗ありで LED を V+ につなぐ
 board: half
 parts:
@@ -95,6 +97,7 @@ V+ を 2〜5 V で動かしたときの電流を計算で描くと、V<sub>F</su
 傾き 1/330 Ω の直線になる。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 R1 = 330 Ω のまま V+ を変える — 3 V で 3.0 mA、5 V で 9.1 mA
 x: V+ の設定 V 1.5..5.5
 y: LED の電流 mA 0..12

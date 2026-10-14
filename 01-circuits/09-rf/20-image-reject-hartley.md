@@ -60,6 +60,7 @@ I の LO を高域側 (+45°)、Q の LO を低域側 (−45°) にしたので�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 位相法のイメージ除去 (W1 が LO、W2 が RF)
 parts:
   U3A: opamp 25,10.4 +up
@@ -216,6 +217,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (full。U1・U2 が SA612、U3・U4 が MCP6002)
 board: full
 parts:
@@ -378,6 +380,7 @@ PIN 4 の 470 pF で 0.98 倍になり、**I (CH1) は 48.9 mV** (peak)。下 (4
 上 (547.8 kHz) のときは ±5 % の部品で 30 dB 下がったとして **2.1 mV** で描いた。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 W2 = 448.2 kHz (LO の下) — 出力 (CH2) に 49.8 kHz が残る
 time: 5us/div
 trigger: ch1 rising 0V
@@ -389,6 +392,7 @@ measure: [vpp, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/20-image-reject-hartley-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 W2 = 547.8 kHz (LO の上) — 出力 (CH2) はほぼ平ら
 time: 5us/div
 trigger: ch1 rising 0V
@@ -405,6 +409,7 @@ measure: [vpp, freq]
 - 時間の波形だけでは、どちらの周波数から来た 49.8 kHz かは分からない。分かるのは、W2 を切り替えると出力の大きさが変わることだ
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図5 W2 = 448.2 kHz — 49.8 kHz の線が立つ
 device: ad3
 sweep: 0-1.25MHz
@@ -423,6 +428,7 @@ markers: [49.8k, 498k, 946.2k]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/spectrum/20-image-reject-hartley-1.svg)
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図6 W2 = 547.8 kHz — 49.8 kHz の線は約 30 dB 下がる
 device: ad3
 sweep: 0-1.25MHz

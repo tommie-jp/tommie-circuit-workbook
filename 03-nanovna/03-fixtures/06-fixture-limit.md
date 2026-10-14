@@ -23,6 +23,7 @@ device: H4
 になる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 スルー治具 (3-3 と同じ形)
 parts:
   J1: sma 2,2 mirror
@@ -44,6 +45,7 @@ notes:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -98,6 +100,7 @@ wires:
 0 Ω のスルーに寄生インダクタンス 52 nH を直列に足した模型。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-100M 101
 title: 図3 52 nH が残るスルー — S11 は 31 MHz で −20 dB

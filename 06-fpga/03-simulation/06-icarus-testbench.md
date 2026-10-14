@@ -212,6 +212,7 @@ Verilator に VCD を書き出させ、その変化の時刻から作った図�
 カーソルは、比べを行う立ち下がり (40 ns と 60 ns) に置いた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 リセットを外してからの q と expected。立ち下がりの 40 ns と 60 ns で比べる
 device: generic
 time: 10ns/div

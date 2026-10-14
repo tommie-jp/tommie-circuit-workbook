@@ -19,6 +19,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Load の中心導体と外皮の間をテスターで測る
 parts:
   J1: sma 2,2 mirror
@@ -68,6 +69,7 @@ notes:
 テスターで **51.0 Ω** と読めた Load を、NanoVNA で見たときの画面。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-30M 101
 title: 図2 DC で 51.0 Ω の Load は −40.09 dB (51.0 Ω + j0.0 Ω)

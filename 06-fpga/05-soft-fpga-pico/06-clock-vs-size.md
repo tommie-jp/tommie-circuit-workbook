@@ -34,6 +34,7 @@ device: PICO
 図1・図2 は 5-5 と同じ。DIP スイッチの SW1〜SW3 で回路を選ぶ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2 に LED 4 個・DIP スイッチ・AD3 の Logic をつなぐ
 parts:
   U1: pico2 8,8 mirror
@@ -100,6 +101,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 Pico 2 の左に LED、右に DIP スイッチ、上に AD3 の Logic
 board: full
 parts:
@@ -315,6 +317,7 @@ AUX は 1000 クロックで反転するので、ΔX ÷ 2000 が 1 クロック�
 同じ画面を回路ごとに撮り、ΔX を下の表に書く。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 AUX は 1000 クロックで反転する。周期 ÷ 2000 が 1 クロック (仮の目盛)
 device: ad3
 time: 5ms/div

@@ -197,6 +197,7 @@ A3〜A0 は `addr`、D7〜D0 は `data` の各ビットで、バスの値は 16 
 窓は最初の 10 µs で、プログラムのある番地 0〜9 を描いた。番地 3 と 4 は同じ `b8` なので、DATA の箱は 1 つにつながる。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 番地 (ADDR) を 1 us ごとに進めると、prog.hex の語が DATA に出る
 device: generic
 time: 1us/div

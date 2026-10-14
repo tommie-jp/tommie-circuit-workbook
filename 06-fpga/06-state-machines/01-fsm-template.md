@@ -273,6 +273,7 @@ PASS
 | `state` | 0 | 0 | 0 | 0 | 1 | 1 | 3 | 3 | 0 | 0 | 1 | 1 | 2 | 2 | 0 |
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図1 done が 1 のクロックで next が変わり、次の立ち上がりで state が追う
 device: generic
 window: 25ms

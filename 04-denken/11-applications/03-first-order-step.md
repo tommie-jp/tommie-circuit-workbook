@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC で作る一次遅れ系
 style:
   standard: jis
@@ -61,6 +62,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -105,6 +107,7 @@ R2 を抜いた図4 は T が 2 倍になるので、Time base を 2 ms/div に�
 (1 ms/div のままだと 4.5 T で画面が切れ、定常値に届く前で終わる)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 R2 あり — 定常値は入力の半分 (K = 0.5)、1 ms で 63 %
 time: 1ms/div
 trigger: ch1 rising 2.5V at -4div
@@ -117,6 +120,7 @@ measure: [vmax, rise]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/11-applications/scope/03-first-order-step-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 R2 を抜く — K = 1、2 ms で 63 % (T が倍なので横は 2 ms/div)
 time: 2ms/div
 trigger: ch1 rising 2.5V at -4div

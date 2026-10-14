@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 エミッタフォロアの入出力インピーダンスを測る
 parts:
   V1: sine 1,4 1,7 0.1 l=$\mathrm{W1}$
@@ -72,6 +73,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -131,6 +133,7 @@ wires:
 (直流 1.69 mA) が 0 まで減って波形が欠けないようにするため (R_E ∥ R_L = 91 Ω に山で 0.94 mA 流す)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 1 回目 — R_S (22 kΩ) の後ろ (CH2) は W1 (CH1) の 0.494 倍
 time: 200us/div
 trigger: ch1 rising 0V
@@ -142,6 +145,7 @@ measure: [vmax]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/scope/08-emitter-follower-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 2 回目 — R_L = 100 Ω をつなぐと出力 (CH2) は 98.5 mV から 85.6 mV へ
 time: 200us/div
 trigger: ch1 rising 0V

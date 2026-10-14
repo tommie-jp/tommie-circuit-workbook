@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 LM75 を I2C で読む
 parts:
   AD:
@@ -62,6 +63,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -109,6 +111,7 @@ j5・j6 へ、V+・GND を下のレールへ入れる。
 | Protocol | I2C、SDA = DIO0、SCL = DIO1、Rate = 100 kHz。Read、Address = 0x48、レジスタ 0 を 2 バイト。プルアップは 5 V だが、AD3 の DIO 入力は 5 V まで耐える (5 V tolerant) |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 アドレス 0x91 を送ると、9 クロック目で LM75 が ACK (SDA = L) を返す
 time: 20us/div
 trigger: ch2 falling 2.5V at -1div

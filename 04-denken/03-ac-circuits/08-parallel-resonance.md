@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RLC 並列 (電流は Rs で読む)
 style:
   standard: jis
@@ -60,6 +61,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 # 上の段: C1 と Rs。下の段: R1 と L1 (溝を渡る緑の線で 10 列と 15 列へ)
 board: half
@@ -107,6 +109,7 @@ wires:
 共振の画面は 1 kHz の画面より CH2 を 2.5 倍に拡げてある。高さではなく位相と Measure の数を見る。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 理想のコイルの共振 (1.59 kHz) — 電流 (CH2) は 0.21 mA で電圧と同相
 time: 200us/div
 trigger: ch1 rising 0V
@@ -118,6 +121,7 @@ measure: [vmax, freq, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/08-parallel-resonance-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 理想のコイルの 1 kHz — 電流 (CH2、50 mV/div) は 0.96 mA に増え、72° 遅れる
 time: 200us/div
 trigger: ch1 rising 0V
@@ -163,6 +167,7 @@ X_L = X_C = 1000 Ω。位相は CH1 (電源の電圧) に対する CH2 (電流)�
 L1 と C1 の電流は向きが逆で、2 つの間を行ったり来たりするだけなので、電源からは見えない。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図5 電源の電流は共振 (1.59 kHz) で谷になる
 x: 周波数 Hz log 200..10k
 y: 電流の振幅 mA

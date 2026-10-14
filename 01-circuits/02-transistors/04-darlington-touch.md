@@ -20,6 +20,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ダーリントンで作る指タッチスイッチ (CH2 でベース、CH1 でコレクタを見る)
 parts:
   VCC: vcc 2,2 5V
@@ -72,6 +73,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ダーリントンタッチスイッチ
 # 5V は AD の V+ から上の + レールへ、GND は上の − レール (下のレールは使わない)
 board: half
@@ -135,6 +137,7 @@ CH1 を 1 V/div、CH2 を 500 mV/div、時間軸を 20 ms/div にする。トリ
 (0.7 V) で、1 回だけ画面を止める Single にしてから両方のブレッドボードに指で触れる (図3)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 指で触れた瞬間 — ベース (CH2) が上がり、コレクタ (CH1) が落ちる
 time: 20ms/div
 trigger: ch2 rising 0.7V

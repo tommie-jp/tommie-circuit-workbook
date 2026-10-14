@@ -126,6 +126,7 @@ M --> S : NACK と STOP
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 GP4 を SDA、GP5 を SCL につなぎ、LM75 を 3.3 V で読む
 parts:
   MCU: pico2 3,7 mirror
@@ -198,6 +199,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 Pico 2 の GP4・GP5 を LM75 につなぎ、AD3 の DIO0 から DIO2 で読む
 board: full
 parts:
@@ -728,6 +730,7 @@ verilator --binary --timing --top-module tb_i2c tb_i2c.v i2c_temp_top.v i2c_read
 シミュレーションの変わり目の時刻をそのまま写した。最初の読み出しの START (SDA の立ち下がり) を 0 s とした。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 LM75 の温度を読む 1 回の通信。START から STOP まで 2.46 ms
 device: ad3
 time: 250us/div
@@ -751,6 +754,7 @@ trigger: SDA falling at 0us
 読み終えた約 40 µs 後に、結果を UART で出す。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 読み終えた後に UART で出す 1 行。"19 80" と CR LF
 device: ad3
 time: 2ms/div

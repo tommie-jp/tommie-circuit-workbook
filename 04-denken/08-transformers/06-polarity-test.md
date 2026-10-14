@@ -30,6 +30,7 @@ V1 = 2 V (振幅) なら V2 = 2 V ÷ 35.4 = 56.6 mV (2 次は開放なので巻�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 U と u をつないで V と v の間を測る
 style:
   standard: jis
@@ -68,6 +69,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (U と u を緑の線でつなぐ)
 # 上のブロックの 15 列 = U、18 列 = V。下のブロックの 15 列 = u、18 列 = v
 board: half
@@ -112,6 +114,7 @@ wires:
 CH1 と CH2 は 1 V/div では重なって見分けられない。Math の CH2 − CH1 が、V1 と比べて逆相 (180°) なら減極性、同相 (0°) なら加極性。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 減極性 — V (CH2) は 1.943 V、CH2 − CH1 は V1 と逆相
 time: 200us/div
 trigger: ch1 rising 0V
@@ -124,6 +127,7 @@ measure: [vmax, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/scope/06-polarity-test-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 加極性 (2 次の線を入れ替えた) — V (CH2) は 2.057 V、CH2 − CH1 は V1 と同相
 time: 200us/div
 trigger: ch1 rising 0V

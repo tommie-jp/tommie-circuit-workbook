@@ -18,6 +18,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pattern で作った PWM を LED と Logic で見る
 parts:
   AD:
@@ -45,6 +46,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -76,6 +78,7 @@ DIO0 は R1 のもう一方の端 (f5 と同じ列の j5) から、GND は D1 �
 | Logic | DIO0 を Enable。Rate は 1 kHz より十分速く (1 MS/s 程度)。カーソルで H の時間と 1 周期の時間を読む |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Duty 25% — H 250 µs・周期 1000 µs
 time: 500us/div
 trigger: ch1 rising 1.65V at -4div
@@ -89,6 +92,7 @@ measure: [period, duty]
 Duty を 75% にすると、周期はそのままで H だけが 3 倍に延びる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 Duty 75% — H 750 µs・周期は同じ 1000 µs
 time: 500us/div
 trigger: ch1 rising 1.65V at -4div

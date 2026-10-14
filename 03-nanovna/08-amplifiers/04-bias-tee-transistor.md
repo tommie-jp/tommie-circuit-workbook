@@ -55,6 +55,7 @@ Vce = 5 − 0.43 ≈ 4.6 V。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 バイアス T 2 つで 2SC1815 に直流を与える
 parts:
   BAT: battery 1,1 1,7 5 l=$\mathrm{BAT}$
@@ -96,6 +97,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -170,6 +172,7 @@ NanoVNA 自身の出力と同じくらいに収まる。**パッドを 10 dB 増
 コイルには巻線の容量 (3 pF と仮定) が並列に付く。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-150M 150
 title: 図3 バイアス T 2 つだけ — S21 は 0 dB (上端)、S11 は 100 MHz まで −20 dB 以下
@@ -205,6 +208,7 @@ notes:
 見えるはずの画面。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-150M 150
 title: 図4 ベースの入口の S11 — 周波数を上げると 50 Ω に近づく (等価回路)

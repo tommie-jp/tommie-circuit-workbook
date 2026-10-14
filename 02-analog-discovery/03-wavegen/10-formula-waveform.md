@@ -46,6 +46,7 @@ Wavegen の Amplitude は −1〜1 に正規化した値に掛かるので、**�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック (W1 を 1+ に直結)
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -63,6 +64,7 @@ V1 の記号は正弦だが、実際は上の CSV を Custom で出す。
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
 board: half
 parts:
@@ -95,6 +97,7 @@ sin x (1 周期ぶん) と sin 3x (3 周期ぶん) が同時に入っている�
 の 2 本になる。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 1000 Hz と 3000 Hz に同じ高さ (+6.25 dBm) の 2 本が立つ
 device: ad3
 sweep: 0-5kHz
@@ -114,6 +117,7 @@ markers: [1kHz, 3kHz]
 和の中身が見えるように、図4 では成分の 1 kHz (上) と 3 kHz (下) も別に並べた。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 1 kHz と 3 kHz の和 — 実機の CH1 はこの中央の線 (Vpp 約 2 V)
 time: 200us/div
 trigger: ch1 rising 0V

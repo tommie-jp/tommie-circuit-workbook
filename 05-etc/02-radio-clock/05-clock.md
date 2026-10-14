@@ -199,6 +199,7 @@ IC の電源 (PIN 14 または 16) と GND (PIN 7 または 8) は、図の下�
 ### ユニット 1: 発振と分周
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 発振と分周 (ユニット 1)
 parts:
   X1: crystal 6,3 16,3 32.768k
@@ -286,6 +287,7 @@ style:
 ### ユニット 2: 秒
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 秒のカウンタ (ユニット 2)
 parts:
   U21: ic 12,8 74HC163
@@ -436,6 +438,7 @@ style:
 ### ユニット 3: 分
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 分のカウンタ (ユニット 3)
 parts:
   U23: ic 12,8 74HC163
@@ -584,6 +587,7 @@ style:
 ### ユニット 4: 時
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 時のカウンタ (ユニット 4)
 parts:
   U25: ic 12,8 74HC163
@@ -764,6 +768,7 @@ style:
 ### ユニット 5: DIP スイッチ
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図5 時刻を入れる DIP スイッチ (ユニット 5)
 parts:
   SET: port 4,3
@@ -888,6 +893,7 @@ style:
 ### ユニット 6: 窓判定
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図6 窓判定 (ユニット 6)
 parts:
   U36C: and 8,6
@@ -1083,6 +1089,7 @@ style:
 ### ユニット 7: 同期と設定
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図7 同期済みと設定 (ユニット 7)
 parts:
   VCC: vcc 6,2 5V
@@ -1205,6 +1212,7 @@ style:
 ### ユニット 8: 表示
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図8 表示 (1 桁ぶん。6 桁とも同じ)
 parts:
   U27: ic 13,9 CD4511B
@@ -1371,6 +1379,7 @@ style:
 ### ブレッドボード 1: 発振と分周
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図9 発振と分周のブレッドボード (ユニット 1)
 board: full
 parts:
@@ -1458,6 +1467,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/05-clock-1.svg)
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 title: 図9b 発振と分周のユニバーサル基板 (ユニット 1)
 board:
   size: 15x9cm
@@ -1603,6 +1613,7 @@ notes:
 ### ブレッドボード 2・3: 窓判定
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図10 窓判定のブレッドボード 1/2 (ユニット 6)
 board: half
 parts:
@@ -1680,6 +1691,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/05-clock-2.svg)
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 title: 図10b 窓判定のユニバーサル基板 1/2 (ユニット 6)
 board:
   size: 9x7cm
@@ -1830,6 +1842,7 @@ notes:
 | ACC | U37 の 6 番 2Y |
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図11 窓判定のブレッドボード 2/2 (ユニット 6)
 board: half
 parts:
@@ -1905,6 +1918,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/05-clock-3.svg)
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 title: 図11b 窓判定のユニバーサル基板 2/2 (ユニット 6)
 board:
   size: 9x7cm
@@ -2046,6 +2060,7 @@ notes:
 ### ブレッドボード 4: 同期と設定
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図12 同期済みと設定のブレッドボード (ユニット 7)
 board: full
 parts:
@@ -2131,6 +2146,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/05-clock-4.svg)
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 title: 図12b 同期済みと設定のユニバーサル基板 (ユニット 7)
 board:
   size: 15x9cm
@@ -2332,6 +2348,7 @@ ENP (PIN 7) と ENT (PIN 10) は同じ信号につなぐ。
 ### 水晶の発振波形
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図13 水晶発振の波形 (XOUT と CK32、推測)
 time: 10us/div
 trigger: ch1 rising 2.5V
@@ -2356,6 +2373,7 @@ measure: [freq, vpp, avg]
 ### 8 Hz のクロックと TICK
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図14 8 Hz の CLK と 1 Hz の TICK (推測)
 time: 125ms/div
 trigger: ch2 rising 2.5V
@@ -2378,6 +2396,7 @@ measure: [freq, duty]
 ### 秒の桁上がり
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図15 秒が 59 から 00 になり、分が +1 になる (計算)
 device: ad3
 window: 5s
@@ -2410,6 +2429,7 @@ trigger: ENMU rising
 ### 正時パルスでリセットする
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図16 正時パルスで分と秒が 0 に戻り、時が +1 になる (計算)
 device: ad3
 window: 2.5s
@@ -2443,6 +2463,7 @@ cursors: [0.5625s, 1.5625s]
 ### 水晶のずれ
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図17 水晶の温度による周波数のずれ (典型値から計算)
 x: 温度 °C -10..50
 y:

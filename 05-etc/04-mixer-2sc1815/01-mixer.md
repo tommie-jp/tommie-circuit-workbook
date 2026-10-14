@@ -45,6 +45,7 @@ LO を大きくすると、トランジスタが LO に合わせて流れたり�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図01 2SC1815 の 1 石ミキサー (+5 V・50 Ω 入出力・IF 455 kHz)
 parts:
   VDD:  vcc 10,2 5V
@@ -156,6 +157,7 @@ Q1 は上半分 (a〜e 行) の c12〜c14 に挿し、**B・C・E の 3 本を�
 下半分は 5 穴 × 1 列に 1 つずつ使えるので、ベース (10 列)・エミッタ (15 列)・コレクタ (27 列) の 3 つの節に部品をまとめられる。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図02 ブレッドボードに組む (AD3 の W1・W2・CH1・CH2 つき)
 board: full
 parts:
@@ -305,6 +307,7 @@ LO のポートの電圧はベース・エミッタ間にそのままかかる�
 LO と RF の漏れは、コレクタの値 (4-3) にフィルタの阻止域の深さの**仮定** (30 dB) と L2 での減衰を掛けた**目安**で、実物では変わる (下の表)。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図03 IF OUT のスペクトル (RF 1.000 MHz −30 dBm、LO 1.455 MHz 0 dBm)
 device: ad3
 sweep: 0-2.5MHz
@@ -327,6 +330,7 @@ markers: [455k, 1.455M, 1M]
 - 影像側 (1.910 MHz) と和 (2.455 MHz) の成分は、フィルタと L2 で落ちて見えない
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図04 IF OUT の波形 (RF −20 dBm のとき、455 kHz の正弦波)
 time: 1us/div
 trigger: ch1 rising 0V

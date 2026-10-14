@@ -310,6 +310,7 @@ yosys -p "read_verilog -sv seq_enc.v; hierarchy -top seq_enc; chparam -set ENC 1
 6-4 と同じ入力 (24 クロックぶん) で、3 つの符号の状態レジスタを並べた。1 クロックを 1 ms と置いた仮の目盛。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図1 同じ入力でも、状態レジスタのビットは 2 進・ワンホット・グレイで違う動きをする
 device: generic
 window: 24ms

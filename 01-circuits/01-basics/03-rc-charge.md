@@ -21,6 +21,7 @@ LED を使わず、オシロスコープで充電の曲線そのものを見て�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 充電と放電を切り替える
 parts:
   V1: vsource 1,1 1,4 5
@@ -61,6 +62,7 @@ C1 に貯まった電荷が R2 と LED を通して放電する。
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 スイッチで充電・放電を切り替える
 # 5V は上の +/− レールへ。下の − レールは 28 列で上の − レールとつなぐ
 board: half
@@ -130,6 +132,7 @@ LED の点き方を目で追う代わりに、コンデンサの電圧が上が�
 充電し、0 V の間に放電する、を 1 秒に 100 回繰り返すので、止まった波形として見られる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 方形波で RC を充放電し、2 ch で見る
 parts:
   V1: square 1,2 1,5 5
@@ -153,6 +156,7 @@ style:
 どちらも図の下の GND (発振器の GND と同じ点) に当てる。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 R と C を 1 つずつ挿し、発振器とオシロをつなぐ
 board: half
 parts:
@@ -198,6 +202,7 @@ AD3 の W1 は列 10、Scope の 1+ も列 10、2+ は列 15 に当てる。GND 
 | トリガ | CH1 の立ち上がり、レベル 2.5 V |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 入力 (CH1) と C の電圧 (CH2)、カーソルで 1τ を読む
 time: 1ms/div
 trigger: ch1 rising 2.5V
@@ -226,6 +231,7 @@ X1 を立ち下がり、X2 を 1 ms に置くと、CH2 は 4.97 V から **1.83 
 充電と同じ τ で、1τ ごとに残りが 37 % になる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図6 放電 — 立ち下がりから 1τ で 37 % まで下がる
 time: 1ms/div
 trigger: ch1 falling 2.5V
@@ -242,6 +248,7 @@ measure: [vpp, vmin, period]
 平均はどちらも 2.50 V のまま。時間レンジは 200 µs/div にする。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図7 1 kHz に上げると (半周期 0.5τ) 満充電に届かない
 time: 200us/div
 trigger: ch1 rising 2.5V
@@ -274,6 +281,7 @@ measure: [vpp, vmax, vmin, avg]
 図では充電の出だしを真ん中に揃えるため、立ち上がり 50 mV でトリガを掛けた形で描いた。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図8 図1 のまま (τ = 1 秒)、5 秒ごとにスイッチを切り替える
 time: 1s/div
 trigger: ch1 rising 50mV

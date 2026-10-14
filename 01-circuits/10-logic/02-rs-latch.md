@@ -22,6 +22,7 @@ CD4011 (2 入力 NAND が 4 回路入り) の 2 つのゲートだけを使う�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 NANDたすき掛けのRSラッチ
 parts:
   VCC: vcc 5,2 5V
@@ -86,6 +87,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: full
 parts:

@@ -208,6 +208,7 @@ cocotb のクロックは最初が high なので、`clk` は 0 ns から 1 で�
 X1 (64 ns) は、65 ns の谷でリセットを掛ける直前で `q` = 5。X2 (74 ns) は、70 ns の立ち上がりでリセットが効いたあとで `q` = 0。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 数えている途中でリセットを掛けると、次の立ち上がりで q が 0 に戻る
 device: generic
 time: 10ns/div

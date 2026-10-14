@@ -18,6 +18,7 @@ source: 自作
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 センタータップ 2 本ダイオードの全波整流
 parts:
   V1: sine 2,1.25 2,4 8.5
@@ -83,6 +84,7 @@ AC アダプタの中身は 1 次 100 V の小形トランスで、コンセン�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 AC アダプタ 2 台でセンタータップを作り、全波整流を組む
 # 上の青レール = センタータップ (出力の − 側)。赤レールは使わない
 board: half
@@ -149,6 +151,7 @@ CH1 のジャンパは DC、CH2 のジャンパは AC にする (AC 結合。約
 | Trigger | CH1、立ち上がり、0 V |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 V1 の端 (CH1) と出力のリップル (CH2、AC 結合) — 50 Hz 地域
 time: 5ms/div
 trigger: ch1 rising 0V

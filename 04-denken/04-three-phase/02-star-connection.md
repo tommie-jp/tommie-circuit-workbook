@@ -26,6 +26,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 三相電源に Y 結線の負荷
 parts:
   V1: sine 1,3 1,5 1 l=$\mathrm{W1}$
@@ -76,6 +77,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 # 上のブロック (a〜e) に TL071 の入力側と R1・R2、下のブロック (f〜j) に出力側と Rf
 board: full
@@ -146,6 +148,7 @@ notes:
 1 回目の画面。CH1 が相電圧、CH2 が線間電圧で、2 つは同じ V/div にしてある。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 線間電圧 (CH2) は相電圧 (CH1) の √3 倍で 30° 進む
 time: 200us/div
 trigger: ch1 rising 0V
@@ -170,6 +173,7 @@ GND と短絡する。
 測る点は 1 相目・2 相目・N の 3 つで、2 ch では 2 回に分ける。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 汎用オシロでの測り方
 parts:
   U1: port 1,1

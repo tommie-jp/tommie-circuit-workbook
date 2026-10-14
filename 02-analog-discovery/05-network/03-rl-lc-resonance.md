@@ -18,6 +18,7 @@ C1 を短絡すると L と R だけの回路 (RL、共振しない) に、開�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RL と LC の共振
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -47,6 +48,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -82,6 +84,7 @@ S1 は C1 (10〜15 列) と**同じ 2 列**の別の行 (b 行) に挿すだけ�
 | Network | S1 を閉じて (RL): Start 100 Hz、Stop 100 kHz、Log、Steps 101。S1 を開いて (LC): Start 1 kHz、Stop 20 kHz、Log、Steps 101 |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 共振点 5.03 kHz では CH2 (R の両端) が CH1 と同じ振幅・同じ位相になる
 time: 50us/div
 trigger: ch1 rising 0V
@@ -121,6 +124,7 @@ measure: [vpp, freq]
 図5 は LC の山を計器の設定と同じ 1〜20 kHz で拡げたもの。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 S1 を開くと 5.03 kHz に 0 dB の山が現れる — RL は 1.59 kHz から落ちるだけ
 x: 周波数 Hz log 100..100k
 y:
@@ -142,6 +146,7 @@ notes:
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/03-rl-lc-resonance-1.svg)
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図5 LC の山 — −3 dB の 2 点 (4.30 kHz・5.89 kHz) で位相は ±45°
 x: 周波数 Hz log 1k..20k
 y:

@@ -25,6 +25,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 電流計が先 (P に電圧計)
 parts:
   V1: vsource 1,1 1,3 5
@@ -57,6 +58,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -111,6 +113,7 @@ CH2 (約 1.6 V) の 5 % ほどしかないので、2 本の先端で引くと 8 
 (電流計が上) から変わる。直列の順を入れ替えただけなので、電流と R_測定 は変わらない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 汎用オシロでの測り方 (電流計が先)
 parts:
   V1: vsource 2,2 2,6 5

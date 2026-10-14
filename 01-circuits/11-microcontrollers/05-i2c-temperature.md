@@ -25,6 +25,7 @@ SDA・SCL・VDD・GND をピンヘッダに出したブレイクアウトモジ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 MCP9808をI2C0(GP0/GP1)で読む
 parts:
   U1: pico2 5,11 mirror
@@ -72,6 +73,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 MCP9808 モジュールを I2C0 (GP0/GP1) につなぐ (Pico 2 は USB から給電、AD3 は Scope だけ)
 board: full
 parts:
@@ -141,6 +143,7 @@ wires:
 | カーソル | X1 を 30 µs (3 ビット目のクロックの H の間)、X2 を 80 µs (8 ビット目のクロックの H の間) に置く |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 アドレス 0x18 に書く 1 バイト (0x30) と ACK — SCL (CH1) と SDA (CH2)
 time: 10us/div
 trigger: ch2 falling 1.65V at -5div

@@ -19,6 +19,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 2 つの切り替えスイッチで H ブリッジを作る
 parts:
   B1: battery 1,1 1,3 5
@@ -62,6 +63,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 スイッチ 2 つとモータ・R1 を組む (1+ と 1− は SW1 と SW2 の c)
 # 上の赤いレール = +5V、青いレール = GND
 board: half
@@ -129,6 +131,7 @@ notes:
 正転から切り替える。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 M1 と R1 の組の電圧 — 正転 (+5 V)、ブレーキ (0 V)、逆転 (−5 V)
 time: 1s/div
 trigger: ch1 falling 2.5V

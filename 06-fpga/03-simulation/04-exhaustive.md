@@ -192,6 +192,7 @@ verilator -Wall --cc --exe --build --top-module adder4_cmp -Mdir obj_pick adder4
 ```
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 桁上げが 4 桁を貫く例を含む 6 通り (Verilator の実行結果から作った計算の図)
 device: generic
 window: 6ms

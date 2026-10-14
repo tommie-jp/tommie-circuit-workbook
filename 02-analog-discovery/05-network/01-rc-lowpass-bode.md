@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC ローパス
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -38,6 +39,7 @@ R1 = 1 kΩ、C1 = 100 nF → **f<sub>c</sub> = 1 / (2πRC) ≈ 1.59 kHz**。
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -68,6 +70,7 @@ wires:
 | Network | Start 100 Hz、Stop 100 kHz、**Log**、Steps 101、Reference: Channel 1、表示: Bode (利得 dB・位相 deg) |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 10 kHz では CH2 (出力) が CH1 の 0.16 倍に減り、約 81° 遅れる
 time: 20us/div
 trigger: ch1 rising 0V
@@ -96,6 +99,7 @@ CH2 の Vpp は 0.31 V (入力 2.00 V の 0.157 倍 = −16.07 dB)、カーソ�
 | 100 kHz | −35.96 dB | −89.1° |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 RC ローパスのボード線図 — −3 dB と −45° が同じ 1.59 kHz に来る
 x: 周波数 Hz log 100..100k
 y:

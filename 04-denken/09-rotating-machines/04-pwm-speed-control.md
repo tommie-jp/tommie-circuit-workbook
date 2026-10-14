@@ -29,6 +29,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 MOSFET でモータを PWM 駆動する
 style:
   standard: jis
@@ -68,6 +69,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 # 下の赤レール = 電池の + (4.5 V)、青レール = GND (上の青レールと 28 列でつなぐ)
 board: half
@@ -136,6 +138,7 @@ wires:
 D = 50 % の画面。モータの端子は、Q1 がオンの間は電池の 4.5 V、オフの間は 0 V (理想) を行き来し、平均が 2.25 V になる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 D 50 % — モータの電圧 (CH1) の平均は 2.25 V
 time: 20us/div
 trigger: ch2 rising 2.5V

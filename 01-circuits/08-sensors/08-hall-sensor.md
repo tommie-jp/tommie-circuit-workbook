@@ -19,6 +19,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 磁石を近づけると LED が点く
 parts:
   VCC: vcc 2,3 5V
@@ -56,6 +57,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 A3144 と LED を組む
 board: half
 parts:

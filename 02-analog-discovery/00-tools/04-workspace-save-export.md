@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック配線 (0-3 と同じ)
 parts:
   W1: triangle 1,1 1,3 1
@@ -35,6 +36,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
 board: half
 parts:
@@ -68,6 +70,7 @@ Sample Rate を固定 (Base Frequency ではなく数値を直接指定) して�
 左端に寄せると、CSV の 1 行目から最後の行までが画面の端から端に並ぶ。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 記録の 1 ms (1000 点) が三角波のちょうど 1 周期
 time: 100us/div
 trigger: ch1 rising 0V at -5div

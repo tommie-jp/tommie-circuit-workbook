@@ -20,6 +20,7 @@ era: 古
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 自作トランスで巻数比を確かめる
 parts:
   V1: sine 2,1.25 2,2.75 2
@@ -56,6 +57,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 自作トランスの 1 次を W1 で駆動し、1 次と 2 次を Scope で見る
 board: half
 parts:
@@ -103,6 +105,7 @@ W1 は 5 kHz・振幅 2 V の正弦波 (オフセット 0 V)。Scope は CH1 を
 | Trigger | CH1、立ち上がり、0 V |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 1 次 (CH1) 2 V と 2 次 (CH2) 6 V — 理想の巻数比 3 倍
 time: 50us/div
 trigger: ch1 rising 0V

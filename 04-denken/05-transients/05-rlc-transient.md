@@ -29,6 +29,7 @@ R が小さいと電圧は最終値を**行き過ぎて揺れる** (減衰振動
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RLC 直列に方形波を加える
 parts:
   V1: square 1,2 1,4 1 l=$\mathrm{W1}$
@@ -61,6 +62,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -103,6 +105,7 @@ wires:
 3 枚とも同じ設定で、変えたのは R1 だけ。同じ 100 µs の時点 (X2) で出力を比べる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 R = 100 Ω (ζ = 0.16) — 3.21 V まで行き過ぎ、201 µs 周期で揺れて収まる
 time: 100us/div
 trigger: ch1 rising 1V at -4div
@@ -115,6 +118,7 @@ measure: [vmax]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/scope/05-rlc-transient-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 R = 620 Ω (ζ = 0.98) — 行き過ぎずに一番早く 2 V に届く
 time: 100us/div
 trigger: ch1 rising 1V at -4div
@@ -127,6 +131,7 @@ measure: [vmax]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/scope/05-rlc-transient-2.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 R = 2.2 kΩ (ζ = 3.5) — 揺れないが、2 V へゆっくり近づく
 time: 100us/div
 trigger: ch1 rising 1V at -4div

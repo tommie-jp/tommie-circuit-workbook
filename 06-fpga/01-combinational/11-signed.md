@@ -189,6 +189,7 @@ c c 0 0
 バス `a` は符号付き (`sint`) で、`neg` も符号付きで読んだ。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 a を 0 から F まで変えたときの a と neg (符号付きで読む。計算の図)
 device: generic
 window: 16ms

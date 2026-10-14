@@ -20,6 +20,7 @@ Network の掃引結果は Bode 線図 (周波数を横軸に利得と位相) �
 5-1 と同じ回路 (R1 = 1 kΩ、C1 = 100 nF)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC ローパス (5-1 と同じ)
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -43,6 +44,7 @@ f<sub>c</sub> = 1 / (2πRC) ≈ 1.59 kHz (5-1 と同じ)。
 5-1 と同じ配線。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -80,6 +82,7 @@ Nichols では (−45°, −3.01 dB) の点にあたる。CH2 (C1 の電圧) は
 山が 1/8 周期 (629 µs ÷ 8 ≈ 79 µs) 遅れる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 1.59 kHz の 1 点 — CH2 は 0.71 倍で 79 µs (45°) 遅れる
 time: 100us/div
 trigger: ch1 rising 0V
@@ -118,6 +121,7 @@ measure: [vpp]
 周波数の目盛りは無い (印の読み値で表の点と突き合わせる)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 Nyquist — 軌跡は中心 (0.5, 0)・半径 0.5 の下半円、fc で (0.5, −0.5)
 x: 実部 Re(H) 倍 0..1
 y: 虚部 Im(H) 倍 -0.6..0
@@ -134,6 +138,7 @@ notes:
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/graph/07-nyquist-nichols-1.svg)
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図5 Nichols — fc は (−45°, −3.01 dB) の 1 点
 x: 位相 deg -90..0
 y: 利得 dB -40..0

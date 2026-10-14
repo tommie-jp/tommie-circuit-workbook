@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 4 本のパルスを ULN2003 の基板に入れてステッピングモータを回す
 style:
   standard: jis
@@ -70,6 +71,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (ブレッドボードは配線の中継)
 # 上の赤レール = 5 V (USB)、青レール = GND
 board: half
@@ -132,6 +134,7 @@ wires:
 軸に紙の針を付け、Run の時間だけ回して止まった角度を分度器で読む。Phase の向きで回る向きが逆になるが、角度は変わらない。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 fs 200 Hz — 各入力は 50 Hz、IN2 (CH2) は IN1 (CH1) より 90° 遅れる
 time: 5ms/div
 trigger: ch1 rising 1.65V

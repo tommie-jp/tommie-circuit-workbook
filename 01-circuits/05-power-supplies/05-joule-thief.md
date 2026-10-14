@@ -21,6 +21,7 @@ Joule thief (ジュールシーフ) はトランジスタ 1 石と手巻きの�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Joule thief (CH1 は Q1 のコレクタの電圧)
 parts:
   B1: battery 2,2.25 2,4 1.5
@@ -71,6 +72,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (1+ を Q1 のコレクタ 17 列へ、1− を GND へ)
 board: half
 parts:
@@ -143,6 +145,7 @@ Joule thief の発振は磁芯の性質 (どこまで磁気をためられるか
 実物の周波数はコアと巻数で変わるので、時間軸 (5 µs/div) は測った周期に合わせて直す。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Q1 のコレクタ (SPICE をもとにした近似の形)
 time: 5us/div
 trigger: ch1 rising 1.8V

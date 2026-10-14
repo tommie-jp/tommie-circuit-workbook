@@ -21,6 +21,7 @@ D-FF を一列につなぎ、前の段の Q を次の段の D に入れる。す
 ## 論理図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 4 段のシフトレジスタ。Q3 は 4 クロック前の DIN
 parts:
   DIN: port 2,5
@@ -134,6 +135,7 @@ verilator --timescale 1us/1ns --binary --timing --trace --top-module tb_shift4 s
 ## シミュレーションの波形
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 DIN の 1 が 1 クロックごとに 1 段ずつ進む
 device: generic
 time: 10us/div

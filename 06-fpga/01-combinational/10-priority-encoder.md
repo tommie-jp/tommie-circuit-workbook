@@ -35,6 +35,7 @@ device: SIM
 - `valid` = r3 + r2 + r1 + r0
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 プライオリティエンコーダ (入力は 4 本)
 parts:
   r3: port 1,2
@@ -233,6 +234,7 @@ same が 0 の入力: 0 通り
 実機で測った波形ではなく、実行結果から作った計算の図で、入力を 0 から F まで変えた 1 回を 1 ms と見なして並べた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 req を 0 から F まで変えたときの出力 (Verilator の結果から作った計算の図)
 device: generic
 window: 16ms

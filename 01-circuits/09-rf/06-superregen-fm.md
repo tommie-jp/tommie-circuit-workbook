@@ -35,6 +35,7 @@ era: 古
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 コルピッツ発振+クエンチ回路のFM超再生受信機
 parts:
   VCC: vcc 2,1 5V
@@ -193,6 +194,7 @@ via で裏の GND の面へ直に落とす。見積もりは次のとおり (ど
 最小 1.5mm (0.3mm 以上)。商用電源は使わない。
 
 ```copper
+# 銅張り基板の寸法図 (tommie-fence の copper フェンス)
 board:
   size: 70x50mm
   ground: back
@@ -350,6 +352,7 @@ MAX HOLD にして VC1 を端から端まで回すと、山の動いた範囲が
   さらに外側は幅の広い裾になって、フロアが持ち上がって見える)。左右は同じ高さとした
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 搬送波とクエンチの側波 (30.3kHz おき)
 device: tinysa-ultra
 center: 85MHz
@@ -381,6 +384,7 @@ VC1 を端から端まで回したときの、発振の動く範囲は次のと�
 RBW 100 kHz では側波が搬送波に含まれて、山が約 0.6 dB 高く出る (−54.4 dBm)。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図4 VC1 を回したときの発振の範囲 (MAX HOLD)
 device: tinysa-ultra
 sweep: 70M-110M 450

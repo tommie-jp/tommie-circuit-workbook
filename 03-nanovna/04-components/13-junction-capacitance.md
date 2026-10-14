@@ -21,6 +21,7 @@ device: H4
 4-9 の治具のバリキャップをダイオードに替え、バイアスの電源を 5 V にしたもの。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ダイオードに逆向きの 4 V をかけて直列治具で測る
 parts:
   J1: sma 2,5 mirror CH0
@@ -62,6 +63,7 @@ notes:
 4-9 のユニバーサル基板の D1 を替え、電池を USB の 5 V にする。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -128,6 +130,7 @@ wires:
 **1N4007 (15 pF)** のときに見えるはずの画面。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 201
 title: 図3 1N4007 (15 pF) — 10 MHz で S21 は −20.6 dB
@@ -150,6 +153,7 @@ S21 の立ち上がりが左端の 10 MHz までに潰れる。**容量を読む
 まず 1〜50 MHz で、10 MHz の S21 と X = 100 Ω の 14.5 MHz を読む。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-50M 201
 title: 図4 1N5819 (110 pF) — 10 MHz で −4.9 dB (1〜50 MHz)
@@ -173,6 +177,7 @@ markers:
 位相は 0° を横切り、その上では − (コイル) になる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 201
 title: 図5 1N5819 の直列共振 — 181 MHz で S11 が谷、位相が 0°

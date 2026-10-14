@@ -38,6 +38,7 @@ f_c = 30 MHz、R = 50 Ω での計算値と、E12 系列に丸めた値:
 **作るのはチェビシェフ**。バターワースは比べるための参考 (計算だけ)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 5 次チェビシェフ 0.5 dB ローパス (作る方)
 parts:
   J1: sma 2,2 mirror CH0
@@ -63,6 +64,7 @@ wires:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/05-design-vs-measured-1.svg)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 5 次バターワース ローパス (計算だけの参考)
 parts:
   J1: sma 2,2 mirror CH0
@@ -93,6 +95,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 26x10
   slots: on
@@ -141,6 +144,7 @@ wires:
 チェビシェフ (作る方) の**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-50M 301
 title: 図4 チェビシェフ 0.5 dB (丸め後) — 35 MHz で −10.5 dB。塗りは 30 MHz まで
@@ -166,6 +170,7 @@ notes:
 バターワース (参考) の**計算だけの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-50M 301
 title: 図5 バターワース (計算のみ) — 35 MHz で −6.0 dB。塗りは 30 MHz まで

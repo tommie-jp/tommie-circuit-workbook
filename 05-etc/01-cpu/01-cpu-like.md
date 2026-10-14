@@ -134,6 +134,7 @@ ROM の列 (Op0 = ENT、Op1 = /CLR、Op2 = /LD) を U1 のピンへつなぐだ�
 `n` は負論理 (L で有効) を表し、LDn は /LD のことだ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 プログラムカウンタ 74HC163 とクロック
 parts:
   U1: ic 14,7 74HC163
@@ -192,6 +193,7 @@ style:
   以下、番地の線は A0〜A3、カウンタの出力のピンは QA〜QD と書く
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 メモリ (74HC154 + ダイオード) と命令の線
 parts:
   U2: ic 14,8 74HC154
@@ -278,6 +280,7 @@ style:
 - Y0〜Y4、Y6〜Y15 は何もつながずに開けておく (出力のピン)。E1・E2 のような入力のピンは必ず固定する
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 アドレスの表示 (LED 4 つ)
 parts:
   A0: port 2,2
@@ -324,6 +327,7 @@ full 1 枚の穴の数には入るが、A0〜A3 の 4 本、LED への 4 本、A
 図4 は、この 2 枚を 1 つの図に縦に並べて見せる (上が基板 1、下が基板 2)。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 ブレッドボード 2 枚
 sheets:
   - name: 基板1
@@ -520,6 +524,7 @@ Logic の画面は、DIO の 0 / 1 を横の線で並べる。図5 は**クロ�
 A3 は 0 のままだ。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図5 アドレスは 1 s ごとに 0 1 2 3 4 5 3 4 5 3 と進む
 device: ad3
 time: 1s/div
@@ -541,6 +546,7 @@ trigger: CLK rising at 0s
 そのとき次の立ち上がりで PC が 3 を読み込む。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図6 /LD (CH2) は番地 5 の間だけ L — CLK (CH1) は 1 Hz
 time: 1s/div
 trigger: ch1 rising 2.5V at -5div
@@ -632,6 +638,7 @@ measure: [vmax, vmin]
 別の飛び先に書き換えられる。ハンダ付けもピンの抜き差しも要らない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図7 DIP スイッチのメモリ (アドレス 5 の語だけを書き換えられる)
 parts:
   U2: ic 14,12 74HC154
@@ -753,6 +760,7 @@ style:
 つなぐ。上の組を**列の線** (プルアップと UP からの線)、下の組を **Y5** にした。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図8 ブレッドボード 2 枚 (DIP スイッチのメモリ)
 sheets:
   - name: 基板1
@@ -898,6 +906,7 @@ DIP スイッチの接点の抵抗と定格は品による。この回路は 0.5
 回路図は 4 枚に分ける。同じ名前の端子 (A0〜A3・ENT・LDn・P0〜P2・DQ1・DQ6・DQ7・SD0〜SD7・OEn・WEn・Yn・CLR) は、図をまたいで同じ線だ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図9 SRAM (AS6C62256) とデータ線
 parts:
   U3: ic 14,10 62256
@@ -1003,6 +1012,7 @@ style:
 - OEn は SRAM の OE (PIN 22)、WEn は WE (PIN 27) につなぐ端子。動作で決まる (図12)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図10 データの書き込み側 (74HC245)
 parts:
   U4: dip20 16,10 74HC245
@@ -1060,6 +1070,7 @@ style:
   ぶつからない
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図11 データのスイッチ (DIP スイッチ 2 個)
 parts:
   VCC: vcc 4,4 5V
@@ -1145,6 +1156,7 @@ style:
   SD0〜SD7 は 10 kΩ で H に引いてあり、U4 の入力を浮かせない
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図12 動作の切り替え (RUN / PROG)・書き込みボタン・CLR
 parts:
   VCC: vcc 6,4 5V
@@ -1218,6 +1230,7 @@ AS6C62256-55PCN は **600 mil (幅 0.6 インチ) の DIP** で、図13 はフ�
 基板 3 へは、DQ0〜DQ7・SD0〜SD7・Yn・CLR・電源を渡す。箱のピンの名前が同じもの (基板 2 の「基板 3 へ」の箱と、基板 3 の「基板 2 から」の箱) を 1 本ずつつなぐ。図13 は、この 2 枚を 1 つの図に縦に並べた。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図13 ブレッドボード 2 枚 (SRAM のメモリ)
 sheets:
   - name: 基板2

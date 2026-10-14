@@ -19,6 +19,7 @@ Analog Discovery 3 自体・付属ワイヤ・両方の計器が正しく動く�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック配線
 parts:
   W1: sine 1,1 1,3 1
@@ -37,6 +38,7 @@ W1 (Wavegen の出力) と M1 (オシロの CH1) を直接つなぎ、GND も共
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
 board: half
 parts:
@@ -64,6 +66,7 @@ W1 と 1+ は同じ 5 列に挿すだけで、列の内側でつながる。GND 
 | Scope (CH1) | DC、Range 500 mV/div (±2 V)、Auto トリガ |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Vpp 2.00 V・1.000 kHz が設定どおり出る
 time: 200us/div
 trigger: ch1 rising 0V

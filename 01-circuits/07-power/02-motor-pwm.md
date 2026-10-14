@@ -19,6 +19,7 @@ era: 今
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 モータを MOSFET で PWM 駆動する (CH2 は Q1 のドレインの電圧)
 parts:
   R3: resistor 11,1 11,3 15
@@ -75,6 +76,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 モータと MOSFET を組む (W1 が PWM、1+ が PWM、2+ がドレイン)
 board: half
 parts:
@@ -158,6 +160,7 @@ W1 は Simple の Square、Frequency 1 kHz、Amplitude 2.5 V、Offset 2.5 V、Sy
 CH1 (PWM) と CH2 (Q1 のドレイン) を同じ 1 V/div で重ねる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 PWM (CH1) とドレイン (CH2) — デューティ比 50 %
 time: 500us/div
 trigger: ch1 rising 2.5V

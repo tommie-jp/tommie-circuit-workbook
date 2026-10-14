@@ -182,6 +182,7 @@ openFPGALoader -b tangnano9k top.fs
 接続は 8-3 と同じ。この題では IO38 だけを測り、IO37 は 8-5 で使う。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 IO38 の点滅を AD3 の DIO0 で読む。接続は 8-3 と同じ
 parts:
   AD:
@@ -220,6 +221,7 @@ wires:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図3 配線は 8-3 のまま。IO38 (j1) を DIO0 へ
 board: half
 parts:
@@ -256,6 +258,7 @@ notes:
 ## Logic に見えるはずの画面
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 IO38 は 1 s の周期で 0.5 s ずつ H と L をくり返す
 device: ad3
 time: 250ms/div

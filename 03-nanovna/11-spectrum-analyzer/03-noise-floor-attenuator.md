@@ -24,6 +24,7 @@ device: SA
 E24 に丸めると 47 Ω・3.3 Ω・47 Ω になる (0-3 の 20 dB パッドと同じ丸め方)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 30 dB パッドで信号をさらに落として tinySA へ
 parts:
   X1:
@@ -61,6 +62,7 @@ wires:
 効き始める。高い周波数でパッドを使うなら、SMA を付けた基板で作る 3-5 か、次の節の市販品)。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (1 MHz なら浮遊容量は効かない)
 board: half
 parts:
@@ -134,6 +136,7 @@ wires:
 (Wikimedia Commons), [CC BY 2.5](https://creativecommons.org/licenses/by/2.5/)。手を加えずに載せた。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 市販の 30 dB アッテネータ (SMA) を tinySA の入力に付ける
 parts:
   X1:

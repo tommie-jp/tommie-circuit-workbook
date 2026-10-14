@@ -28,6 +28,7 @@ OP アンプが 2 回路入った LM358 を使う。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ボルテージフォロア
 parts:
   VP: vsource 1,1 1,3 5
@@ -71,6 +72,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上のレールは +5V (赤) と GND (青)。下の青レールは −5V (V−)。下の赤レールは使わない
 board: half

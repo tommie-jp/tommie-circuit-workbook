@@ -27,6 +27,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 容量ブリッジ (ド・ソーティ) で Cx を測る
 parts:
   V1: sine 1,2 1,6 1 l=$\mathrm{W1}$
@@ -58,6 +59,7 @@ style:
   C_X = C_S × R1 ÷ R2 で出す。C_X = 47 nF なら R1 = 470 Ω で平衡する
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 マクスウェルブリッジで Lx を測る
 parts:
   V1: sine 1,2 1,6 1 l=$\mathrm{W1}$
@@ -92,6 +94,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 容量ブリッジのブレッドボード
 board: half
 parts:
@@ -129,6 +132,7 @@ wires:
   CH1 の 1+ を上の段の 9 列に挿す。R1 の 3 番のピン (7 列) は使わない
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 マクスウェルブリッジのブレッドボード
 board: half
 parts:
@@ -190,6 +194,7 @@ AD 版は CH1 を P と Q の差動で当てる。P も Q も GND ではない�
 そろう所を探す。最後は Math を 10 mV/div にして最小を探す (8 bit の目安で ±1 % 程度まで詰められる)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図5 汎用オシロでの測り方 (容量ブリッジ)
 parts:
   V1: sine 1,2 1,6 1 l=$\mathrm{FG}$
@@ -236,6 +241,7 @@ style:
 | 560 Ω | 51.2 mV |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図6 容量ブリッジの検出器の振幅 (計算) — R1 = 470 Ω で 0 になる
 x: R1 Ω 0..1000
 y: 検出器の振幅 mV 0..300

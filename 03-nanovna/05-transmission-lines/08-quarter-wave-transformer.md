@@ -29,6 +29,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 100 Ω の負荷を 75 Ω・50 cm の同軸で CH0 へ
 parts:
   J1: sma 2,2 mirror CH0
@@ -58,6 +59,7 @@ notes:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -94,6 +96,7 @@ J2 に 75 Ω・50 cm の同軸 (TL1) をつなぎ、TL1 の反対側を NanoVNA 
 見えるはずの画面 (理想の模型)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 10M-250M 241
 title: 図3 λ/4 (100.4 MHz) で SWR 1.125 まで下がる。2 倍では 2 に戻る

@@ -25,6 +25,7 @@ AD の波形発生器 (Wavegen) で方形波を作り、抵抗とコンデンサ
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC 直列の充電回路
 parts:
   V1: square 1,1 1,3 1 l=$\mathrm{W1}$
@@ -51,6 +52,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -85,6 +87,7 @@ wires:
 | Scope | CH1 = 入力、CH2 = 出力。Time base は 1 ms/div 前後、Trigger は CH1 の立ち上がり |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 立ち上がりから 1τ (1 ms) で出力 (CH2) は 63 % に届く
 time: 1ms/div
 trigger: ch1 rising 1V

@@ -18,6 +18,7 @@ Wavegen は Repeat (くり返し回数) を 1 にすると、Run を押すたび
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 バースト出力で LED を光らせる
 parts:
   V1: square 1,1 1,3 l=$\mathrm{W1}$
@@ -42,6 +43,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3
 board: half
 parts:
@@ -76,6 +78,7 @@ Offset 1.5 V ± Amplitude 1.5 V なので、Idle (Low) は **0 V**、山 (High) 
 **3.0 V**。2 kHz の半周期ぶんだけ High になる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Run 1 回で 0 V から 3.0 V に 250 µs だけ上がる
 time: 100us/div
 trigger: ch1 rising 1.5V at -3div

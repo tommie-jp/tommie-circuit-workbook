@@ -29,6 +29,7 @@ NTC サーミスタで温度を電圧に変え、比較器で決めた温度と�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 サーミスタ + 比較器 + ヒータ
 style:
   standard: jis
@@ -65,6 +66,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードとヒータ
 board: half
 parts:

@@ -31,6 +31,7 @@ R<sub>crossover</sub> = V<sub>set</sub> / I<sub>limit</sub> で計算できる�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 電源 + 可変抵抗の負荷
 parts:
   U1:
@@ -62,6 +63,7 @@ R<sub>crossover</sub> = 6.0 V / 15 mA = **400 Ω** (計算値)
 2 端子の可変抵抗 (レオスタット) として使える。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 半固定抵抗を負荷にして、RS と AD3 をつなぐ
 board: half
 parts:
@@ -124,6 +126,7 @@ AD3 は Scope で電源の出力を見る。出力は直流なので、つまみ
 | トリガ | 単発 (Single)、1 ch の立ち上がりに合わせて待たせる。つまみは 8 秒ほどかけて回し切る |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 負荷を 8 秒で 1 kΩ から 0 Ω へ回す — 電流が頭打ち、電圧が下がる
 time: 1s/div
 trigger: ch1 rising 59.4mV at -5div
@@ -183,6 +186,7 @@ notes:
 小さな抵抗) を入れ、その両端の電圧 (10 Ω × 1 mA = 10 mV) を電流の代わりに見る (図4)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 シャント抵抗で電流を電圧にして XY 表示
 parts:
   U1:

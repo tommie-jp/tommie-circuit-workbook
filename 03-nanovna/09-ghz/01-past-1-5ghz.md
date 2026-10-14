@@ -43,6 +43,7 @@ device: H4
 基板は使わず、ケーブル 2 本をバレルアダプタで直結しただけ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ケーブル 2 本をバレルアダプタで直結
 parts:
   J1: sma 2,2 mirror CH0
@@ -82,6 +83,7 @@ notes:
 実際に予想される減衰は上の表の計算値で示す。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: v2
 sweep: 50k-3G 401
 title: 図2 2 本のケーブル (計 1 m) のスルー (理想、損失なし)

@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 トランジスタのスイッチ
 parts:
   V1: square 1,4 1,6 2.5 l=$\mathrm{W1}$
@@ -58,6 +59,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -101,6 +103,7 @@ wires:
 | XY (2 回目) | X = CH1、Y = CH2。入出力の線が出る |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 入力 5 V で飽和 (0.1 V)、0 V で遮断 (5 V) — 出力は入力の裏返し
 time: 200us/div
 trigger: ch1 rising 2.5V
@@ -147,6 +150,7 @@ measure: [vmax, vmin]
 - h_FE が 100 の個体でも 92.6 µA × 100 = 9.3 mA > 4.9 mA で飽和する。余裕を持たせる理由
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 入出力の関係 (計算) — 0.65 V まで遮断、1.57 V から飽和
 x: 入力 V 0..5
 y: コレクタの電圧 V 0..5.5

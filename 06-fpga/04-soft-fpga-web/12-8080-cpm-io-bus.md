@@ -232,6 +232,7 @@ PC で取った 22 サンプル (11 T ステート) を `logic` のフェンス�
 `T` は soft-fpga の `t_state` のレーンと同じ、マシンサイクルの中の T ステートの番号。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図1 OUT 01h は 4 + 3 + 3 T で、最後の I/O のサイクルで WR_N が 1 T 下がる
 device: generic
 window: 11ms

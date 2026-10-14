@@ -27,6 +27,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 電池の等価回路と負荷
 style:
   standard: jis
@@ -68,6 +69,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (10 Ω の段)
 board: half
 parts:
@@ -123,6 +125,7 @@ notes:
 端子の電圧と電流を**組で測る**限り、直線の傾きには効かない。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 端子の電圧は電流に比例して下がる (縦軸は 1.4 V から)
 x: 電流 mA 0..700
 y: 端子の電圧 V 1.4..1.6

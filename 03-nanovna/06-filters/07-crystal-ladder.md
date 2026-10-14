@@ -46,6 +46,7 @@ Co = 4 pF、fs = 10.002 MHz) とする (**仮定**。実物の値は 4-6 の方�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 水晶 3 個のラダーフィルタ (10 MHz、CW 用の幅)
 parts:
   J1: sma 2,2 mirror CH0
@@ -80,6 +81,7 @@ wires:
 部品面から見た図。水晶は i 行に直列に並べ、C1・C2 は下の l 行 (GND) へ落とす。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -128,6 +130,7 @@ wires:
 水晶の実験は狭い掃引が要る (4-6)。見えるはずの画面 (理想の模型)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 10.000M-10.005M 201
 title: 図3 3 個の水晶ラダー — −3 dB の幅は 740 Hz、損失 5.7 dB

@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック (W1 を 1+ に直結)
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -32,6 +33,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
 board: half
 parts:
@@ -68,6 +70,7 @@ AD3 のサンプル周波数は、システムクロック (既定 100 MHz、50�
 画面は次のようになる。基本波 1 本だけが立ち、ほかの周波数には何も出ない (理想)。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 1 kHz の基本波が +10.00 dBm に 1 本だけ立つ
 device: ad3
 sweep: 0-20kHz
@@ -82,6 +85,7 @@ markers: [1kHz]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/01-sine-fft.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 同じ信号を時間で見ると 1 kHz・Vpp 2.00 V の正弦波
 time: 200us/div
 trigger: ch1 rising 0V

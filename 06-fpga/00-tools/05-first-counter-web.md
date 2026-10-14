@@ -95,6 +95,7 @@ Run を押して、少し走らせてから Run をもう一度押して止め�
 ここでは 1 クロックを 1 ms と置いて描いた (数え方を見るための仮の目盛)。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図1 リセットの後、count が 1 → 2 → 3 … と数える
 device: generic
 time: 1ms/div

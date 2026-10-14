@@ -27,6 +27,7 @@ I = P / (V cos θ) に増え、線路の損失 I²r は **1 / cos²θ 倍**に�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 線路 Rs と、力率を変えられる負荷
 style:
   standard: jis
@@ -60,6 +61,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -108,6 +110,7 @@ W1 の差は 0.4 % しかない。線路の電圧降下 (I r) は受電端の電
 **電流の上限**: 線電流は最大で 6.9 mA。この本の目安 10 mA (0-1) に収まる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 S1 を開く (力率 1) — 線電流 (CH2) 5.0 mA、P は Math の Avg で 1.25 mW
 time: 200us/div
 trigger: ch1 rising 0V
@@ -120,6 +123,7 @@ measure: [vmax, rms, avg, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/scope/03-power-factor-line-loss-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 S1 を閉じる (力率 0.73) — 線電流 (CH2) は 6.9 mA に増え、P は同じ
 time: 200us/div
 trigger: ch1 rising 0V
@@ -141,6 +145,7 @@ AD の CH2 は Rs の両端を差動で挟む (2− が 10 列)。汎用オシ�
 試験の図とは位置が変わる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図5 汎用オシロでの測り方
 style:
   standard: jis

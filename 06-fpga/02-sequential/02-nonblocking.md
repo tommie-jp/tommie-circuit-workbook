@@ -26,6 +26,7 @@ D-FF を 2 段並べる (D → Q1 → Q2) 回路を、両方の書き方で作�
 `<=` で書くと、図1 のとおり D-FF が 2 つ直列になる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ノンブロッキング代入の 2 段。Q1 は D を、Q2 は 1 つ前の Q1 を取り込む
 parts:
   D: port 2,5
@@ -60,6 +61,7 @@ style:
 `q1` はただの配線になり、フリップフロップは `q2` の 1 つだけになる (図2)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 ブロッキング代入の 2 段。Q1 は配線にすぎず、Q2 も D を取り込む 1 段になる
 parts:
   D: port 2,5
@@ -172,6 +174,7 @@ verilator --lint-only -Wall shift_bl.v
 ## シミュレーションの波形
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 ノンブロッキングは 1 段遅れ、ブロッキングは遅れない
 device: generic
 time: 10us/div

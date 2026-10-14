@@ -21,6 +21,7 @@ era: 古
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 非安定マルチバイブレータ (Q1・Q2 を左右に、C1・C2 が中央で交差する)
 parts:
   VCC: vcc 1,1 5V
@@ -71,6 +72,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (回路図と同じく Q1 を左、Q2 を右に)
 board: half
 parts:
@@ -156,6 +158,7 @@ CH1 に Q1 のコレクタ、CH2 に Q2 のコレクタをつなぎ、2 つの�
 | Trigger | CH1、立ち上がり、1.8 V |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Q1 のコレクタ (CH1) と Q2 のコレクタ (CH2) — 逆の位相で交互に上下する
 time: 250ms/div
 trigger: ch1 rising 1.8V

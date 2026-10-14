@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 内部抵抗 r の電源と負荷 RL
 style:
   standard: jis
@@ -65,6 +66,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (RL = 220 Ω の段)
 board: half
 parts:
@@ -116,6 +118,7 @@ notes:
 対称 (47 Ω と 1 kΩ は r の約 1/4.7 倍と 4.5 倍で、電力はどちらも 16〜17 mW)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 負荷の電力は RL = 220 Ω で最大、そのとき効率は 50 %
 x: 負荷抵抗 Ω log 20..2k
 y:

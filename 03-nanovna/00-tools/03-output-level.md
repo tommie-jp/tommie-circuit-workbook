@@ -39,6 +39,7 @@ CH0 よりずっと大きいことがある」という前提で、**測る前�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 アンプの出力にアッテネータを挟んで CH1 へ
 parts:
   A1:
@@ -76,6 +77,7 @@ notes:
 3-5 の perfboard のアッテネータを、20 dB の値 (43・11・43 Ω) に替えた。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -124,6 +126,7 @@ R1 の発熱は 45 mA の 2 乗 × 43 Ω ≈ 0.09 W (R2 は約 0.01 W) と、0.2
 43 Ω・11 Ω・43 Ω のパッドだけを理想の模型で見ると、平らに約 20 dB 落ちる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-1.5G 101
 title: 図3 E24 (43・11・43 Ω) の 20 dB パッドは全域で平ら

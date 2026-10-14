@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 C と L を切り替えて R と直列にする
 parts:
   V1: square 1,2 1,5 1 l=$\mathrm{W1}$
@@ -62,6 +63,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -109,6 +111,7 @@ wires:
 2 枚は同じ設定で、変えたのは S1 だけ。赤の Math が C か L の電圧。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 C を入れたとき — 電流 (CH2) は跳び、C の電圧 (Math) は 0 から滑らかに上がる
 time: 10us/div
 trigger: ch1 rising 1V at -3div
@@ -122,6 +125,7 @@ measure: [vmax]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/scope/06-continuity-at-switching-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 L を入れたとき — 電流 (CH2) は 0 から滑らかに上がり、L の電圧 (Math) が跳ぶ
 time: 10us/div
 trigger: ch1 rising 1V at -3div

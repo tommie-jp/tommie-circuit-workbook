@@ -56,6 +56,7 @@ STOP --> IDLE : 16 刻み後に 1 なら valid\n0 なら frame_err
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 GP14 で受け、字を GP2 から GP9、valid を GP10、読む時刻を GP11 に出す
 parts:
   U1: pico2 4,6 mirror
@@ -129,6 +130,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図3 DIO0 から GP14 へ送り、GP2 から GP11 を DIO1 から DIO10 で読む
 board: half
 parts:
@@ -473,6 +475,7 @@ Protocol で送りながら Logic で同じ DIO を見る使い方は、02-analo
 Pico 2 のクロックと送る時刻の重なりは毎回違うので、`SMP` の位置は 1 刻み (13 µs) の幅で前後する。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 'A' を受ける。SMP は 208 µs ごと、最後に DATA が 0x41
 device: ad3
 time: 250us/div

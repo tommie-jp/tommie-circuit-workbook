@@ -65,6 +65,7 @@ Verilog の全文は 4-3 にある。ここでは置かない (二重にしな�
 図1・図2 は 5-5 と同じ。DIP スイッチは使わない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2 に LED 4 個・DIP スイッチ・AD3 の Logic をつなぐ
 parts:
   U1: pico2 8,8 mirror
@@ -134,6 +135,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 Pico 2 の左に LED、右に DIP スイッチ、上に AD3 の Logic
 board: full
 parts:
@@ -264,6 +266,7 @@ add_soft_fpga(clock516 clock516.cpp counter43)
 **値の並びは同じで、横軸の目盛だけが 10 倍違う**。ブラウザの画面の時間は仮の目盛、Pico 2 の画面はタイマの設計値。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 ブラウザ (4-3) の画面。1 クロックを 1 ms と置いた仮の目盛
 device: generic
 window: 20ms
@@ -282,6 +285,7 @@ trigger: CLK rising at 0s
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/05-soft-fpga-pico/logic/16-browser-vs-pico-1.svg)
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 Pico 2 の画面。値の並びは図3 と同じで、1 クロックが 10 ms (設計値)
 device: ad3
 time: 20ms/div

@@ -42,6 +42,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CV で LED を点ける (CH1・CH2 は Scope の当て所)
 parts:
   U1:
@@ -81,6 +82,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに R1 と LED、電源装置と AD3 をつなぐ
 board: half
 parts:
@@ -142,6 +144,7 @@ WaveForms の Scope で、1 ch (LED の電圧) と 2 ch (出力電圧) をどち
 1−・2− は電源の − (GND) につなぐ。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 出力オンで 2 ch が 5.0 V、1 ch (LED) が約 2.0 V に落ち着く
 time: 1ms/div
 trigger: ch2 rising 1V at -5div

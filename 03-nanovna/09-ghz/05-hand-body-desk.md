@@ -44,6 +44,7 @@ device: V2
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 V2 の CH0 に 2.4 GHz のアンテナを直に付ける
 parts:
   M1:
@@ -82,6 +83,7 @@ notes:
 **何も近くに無い** ときの見えるはずの画面。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: v2
 sweep: 2G-2.9G 181
 title: 図2 何も近くに無い — 2.45 GHz で SWR 1.0 (等価回路)
@@ -105,6 +107,7 @@ notes:
 **手で握った** ときの見えるはずの画面。設定は図2 と同じ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: v2
 sweep: 2G-2.9G 181
 title: 図3 手で握った — 谷が 2.35 GHz へ下がり、SWR 1.4 (R が 70 Ω に増える)

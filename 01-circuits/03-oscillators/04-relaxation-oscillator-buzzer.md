@@ -20,6 +20,7 @@ era: 古
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 弛張発振でブザー (Q1・Q2 を左右に、C1・C2 が中央で交差する。ブザーの枝は右)
 parts:
   VCC: vcc 1,1 5V
@@ -70,6 +71,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (3-1 と同じ並びに、ブザーの枝を右下に足す)
 board: half
 parts:
@@ -151,6 +153,7 @@ CH1 に Q1 のコレクタ、CH2 に Q2 のコレクタをつなぐ。3-1 と同
 | Trigger | CH1、立ち上がり、1.8 V |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Q1 (CH1) と Q2 (CH2) のコレクタ — 周期 約 1.06 ms で交互に上下する
 time: 200us/div
 trigger: ch1 rising 1.8V

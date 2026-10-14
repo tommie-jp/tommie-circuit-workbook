@@ -34,6 +34,7 @@ Open / Short / Load・アッテネータ・フィルタを並べた練習用の�
 2 つのスルーを模型で描き比べる (等価回路)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 スルーの等価回路 (上が自作、下が市販)
 parts:
   J1: sma 2,2 mirror CH0
@@ -72,6 +73,7 @@ notes:
 perfboard ではないので描かない (基板の印刷でスルーの区画を探す)。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -101,6 +103,7 @@ wires:
 **1. 自作のスルー** — 見えるはずの画面 (3-6 と同じ模型)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図3 自作のスルー — 300 MHz で S11 は −3.1 dB
@@ -119,6 +122,7 @@ markers:
 **2. 市販のテストボードのスルー** — 同じ設定で。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図4 市販のスルー — S11 は低いまま、位相は遅延で回る

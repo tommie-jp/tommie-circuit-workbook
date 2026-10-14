@@ -78,6 +78,7 @@ f<sub>c</sub> = 1/(2πRC) のときだけ。LO の網は f<sub>c</sub> = 1/(2π 
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 位相法の SSB 変調器 (W1 が LO、W2 が音声)
 parts:
   W2: sine 1,8 1,10 l=$\mathrm{W2}$
@@ -185,6 +186,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 ブレッドボードに組む (LO の網は左上、音声の網は左下、和は右)
 board: full
 parts:
@@ -298,6 +300,7 @@ Analog Discovery 3 だけを使う。LO と音声を W1・W2 で作り、498 kHz
 大きさは実物で変わるが、**上側波と下側波の比 (抑圧) は網と利得のそろい方で決まる** (上の表)。図3 は ±5 % の部品の中央値 33 dB で描いた。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 SSB (U1 + U2) — 上側波 498.995 kHz だけが立ち、下側波は 33 dB 下
 device: ad3
 sweep: 490k-506k
@@ -315,6 +318,7 @@ markers: [498.995k, 497.005k, 498k]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/spectrum/21-ssb-phasing-1.svg)
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図4 R6 を抜いて U1 だけ — 両側波帯 (搬送波を抑えた AM)、図3 と同じ尺度
 device: ad3
 sweep: 490k-506k
@@ -339,6 +343,7 @@ markers: [498.995k, 497.005k, 498k]
 - 音声の網の 2 本の出口を入れ替えると、図3 の 1 と 2 の高さが入れ替わる (下側波だけが残る)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 SSB (U1 + U2) — 包絡線は平ら (1 本の正弦)
 time: 200us/div
 trigger: ch1 rising 0V
@@ -349,6 +354,7 @@ measure: [vpp, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/21-ssb-phasing-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図6 R6 を抜いて U1 だけ — 包絡線が 995 Hz の 2 倍で膨らんでは 0 になる (図5 と同じ尺度)
 time: 200us/div
 trigger: ch1 rising 0V

@@ -44,6 +44,7 @@ NanoVNA の中の回路もケーブルも、**温度が変わるとわずかに�
 判定では、校正に使った Load をもう一度 CH0 につなぐ (Thru は 1-3 と同じつなぎ方)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 校正に使った Load を測り直す
 parts:
   M1:
@@ -81,6 +82,7 @@ notes:
 ずれは周波数によって大きさが変わる)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図2 校正し直す境目 — Load の読みが −30 dB まで上がった

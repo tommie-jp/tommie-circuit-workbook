@@ -108,6 +108,7 @@ nextpnr が `blink_out` の出力のバッファを置いた場所を `pnr37.jso
 接続は 8-3 と同じ。この題で読むのは DIO1 (IO37)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 制約ファイルを書き換えると点滅は IO37 (DIO1) に移る。接続は 8-3 と同じ
 parts:
   AD:
@@ -144,6 +145,7 @@ wires:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 配線は 8-3 のまま。IO37 (j2) を DIO1 で読む
 board: half
 parts:
@@ -182,6 +184,7 @@ notes:
 ## Logic に見えるはずの画面
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 点滅は DIO1 (IO37) に移る。周期は 8-4 と同じ 1 s
 device: ad3
 time: 250ms/div

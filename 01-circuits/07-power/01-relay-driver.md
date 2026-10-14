@@ -20,6 +20,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 トランジスタでリレーを駆動する (IN は AD の W1、CH1 は IN、CH2 はコレクタ)
 parts:
   VCC: vcc 5,2 5V
@@ -69,6 +70,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 トランジスタでリレーを動かす (W1 が IN、1+ が IN、2+ がコレクタ)
 board: half
 parts:
@@ -142,6 +144,7 @@ notes:
 CH1 (IN) と CH2 (コレクタ) を同じ 1 V/div で重ねる。WaveForms の W1 は Simple の Square、Amplitude 2.5 V、Offset 2.5 V。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 IN (CH1) とコレクタ (CH2) — 逆向きに動く
 time: 20ms/div
 trigger: ch1 rising 2.5V

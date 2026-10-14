@@ -29,6 +29,7 @@ MOSFET のオンの割合 (デューティ比 D) を上げるほど出力は高�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 昇圧チョッパ
 style:
   standard: jis
@@ -71,6 +72,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 # 上の赤レール = 5 V (AD の V+)、青レール = GND。下の青レールも 29 列でつなぐ
 board: half
@@ -126,6 +128,7 @@ D を 60 % より上げない。D = 75 % では Vout が約 20 V になり、RL 
 D = 50 % の画面。節点 X は Q1 がオンの間 0 V、オフの間 Vout + VF = 10 V で、平均が 5 V (Vin) になる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 D 50 % — 出力 (CH1) は 9.70 V、節点 X (CH2) の平均は Vin の 5 V
 time: 2us/div
 trigger: ch2 falling 5V

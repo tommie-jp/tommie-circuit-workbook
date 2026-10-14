@@ -18,6 +18,7 @@ GBW (利得帯域幅積) を確かめる。続けて **Wavegen で方形波**を
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 LM358 非反転増幅 (単電源、利得 11 倍)
 parts:
   AD:
@@ -68,6 +69,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -135,6 +137,7 @@ wires:
 振幅が 1/11 なので 50 mV/div にしてある。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 出力は 1.8 V を 6 µs かけて直線で上る (CH2)。帯域だけなら 3.85 µs (CH3)
 time: 5us/div
 trigger: ch1 rising 0V at -3div
@@ -171,6 +174,7 @@ GBW から予想した帯域と実際の立ち上がりが合わないときは�
 Network で見える利得を計算で描く (GBW 1 MHz の 1 次の極、Cg と Rg の低域も入れた)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 利得 20.8 dB、−3 dB は 90.9 kHz (計算)
 x: 周波数 Hz log 100..1M
 y: 利得 dB 0..25

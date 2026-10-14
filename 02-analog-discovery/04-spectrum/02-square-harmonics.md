@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック (W1 を 1+ に直結)
 parts:
   V1: square 1,1 1,3 l=$\mathrm{W1}$
@@ -32,6 +33,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
 board: half
 parts:
@@ -65,6 +67,7 @@ Stop を 9000 Hz よりだいぶ高い 20 kHz にしておくのは、9 次の�
 画面は次のようになる。奇数次の山が 1/n で下がりながら並び、偶数次には何も出ない (理想)。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 奇数次の山だけが 1/n で下がって並ぶ
 device: ad3
 sweep: 0-20kHz
@@ -79,6 +82,7 @@ markers: [1kHz, 3kHz, 5kHz, 9kHz]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/02-square-harmonics.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 同じ信号を時間で見ると 0〜2 V ではなく ±1 V の方形波 (Vpp 2.00 V)
 time: 200us/div
 trigger: ch1 rising 0V

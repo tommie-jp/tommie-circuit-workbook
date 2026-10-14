@@ -26,6 +26,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 電流計が先で Rx を測る
 parts:
   V1: vsource 1,1 1,3 5
@@ -53,6 +54,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -101,6 +103,7 @@ AD の CH1 は R_a の両端 (100 mV) を差動で挟んでいる。CH2 (1.09 V)
 直列の順を入れ替えただけなので、電流 (1.00 mA) も CH2 (R_a + R_x の両端、1.09 V) も変わらない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 汎用オシロでの測り方
 parts:
   V1: vsource 2,2 2,6 5

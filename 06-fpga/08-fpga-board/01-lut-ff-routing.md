@@ -42,6 +42,7 @@ AND も OR も XOR も、LUT の上では表の中身が違うだけで、同じ
 3 入力の多数決 (2 つ以上が 1 なら 1) を例にする。ゲートで描くと AND 3 個と OR 2 個になる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 3 入力の多数決をゲートで描くと AND 3 個と OR 2 個
 parts:
   a: port 1,2

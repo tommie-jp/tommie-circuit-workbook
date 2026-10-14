@@ -24,6 +24,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ホイップの給電点 (直列 RLC の等価回路)
 parts:
   J1: sma 2,2 mirror CH0
@@ -62,6 +63,7 @@ wires:
 出ればこれを超えうるので、**掃引は測る間だけにし、つないだまま掃引を続けない**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 400M-460M 121
 title: 図2 やや長いホイップ — 共振は 425 MHz、430 MHz では +jX (誘導性)

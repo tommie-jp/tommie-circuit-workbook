@@ -32,6 +32,7 @@ DUT は shunt C 68 pF – series L 180 nH – shunt C 68 pF の 3 次 LC
 ローパス (6-1 で作るものと同じ考え方)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-200M 201
 title: 図1 4 つのマーカー — LC ローパスの読み所

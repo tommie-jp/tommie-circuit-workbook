@@ -24,6 +24,7 @@ Script Editor の `Scope1.channel[0].measure("Amplitude")` のような**便利�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC ローパスを Python (SDK) から駆動・測定する
 parts:
   AD:
@@ -52,6 +53,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (11-1 と同じ配線)
 board: half
 parts:
@@ -160,6 +162,7 @@ dwf.FDwfDeviceClose(hdwf)
 同じ 2 本を WaveForms の Scope の画面で 2 周期見るとこうなる。振幅は (最大値 − 最小値) / 2 なので、Vmax と Vmin を読む。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 1 kHz で Vout (CH2) の山は約 0.85 V で、入力 (CH1) の 1 V より低い
 time: 200us/div
 trigger: ch1 rising 0V

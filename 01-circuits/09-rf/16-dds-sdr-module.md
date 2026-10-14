@@ -77,6 +77,7 @@ f<sub>out</sub> が MCLK の半分 (12.5 MHz) に近づくほど、像が目的�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2でAD9833を7MHzに設定しtinySAで見る
 parts:
   U1: pico2 3,11 mirror
@@ -139,6 +140,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: half
 parts:
@@ -328,6 +330,7 @@ C/C++ のプログラムは、この環境で `PICO_BOARD=pico2` の `.uf2` ま�
 右へ動く (幅 20 kHz の掃引で見える)。これが「周波数を数値で書く」DDS の効き目だ。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 7MHzの正弦と、MCLK 25MHzの周りの像
 device: tinysa-ultra
 sweep: 100k-50M 450

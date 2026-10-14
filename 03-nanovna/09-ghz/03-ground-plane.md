@@ -37,6 +37,7 @@ perfboard のスルーの**等価回路**。3-6 で見積もった 5 nH を、�
 GND の戻り (L2) に半分ずつ分けて描いた。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 perfboard のスルーの等価回路
 parts:
   J1: sma 2,3 mirror CH0
@@ -65,6 +66,7 @@ perfboard の側は、3-6 の図2 の基板の SMA を寄せて中心導体の�
 銅張りの側は、5×7 cm の両面基板から 40 mm × 20 mm を切り出して組む。
 
 ```copper
+# 銅張り基板の寸法図 (tommie-fence の copper フェンス)
 board:
   size: 40x20mm
   ground: back
@@ -106,6 +108,7 @@ parts:
 **perfboard のスルー** (5 nH の等価回路) の見えるはずの画面。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: v2
 sweep: 100M-3G 301
 title: 図3 perfboard のスルー — 3 GHz で S21 −2.8 dB・S11 −3.3 dB (等価回路)
@@ -125,6 +128,7 @@ markers:
 **銅張りのマイクロストリップ** (50.8 Ω・40 mm) の見えるはずの画面。設定は図3 と同じ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: v2
 sweep: 100M-3G 301
 title: 図4 銅張りのマイクロストリップ — S21 は 0 dB (上端)、S11 は −36 dB 前後

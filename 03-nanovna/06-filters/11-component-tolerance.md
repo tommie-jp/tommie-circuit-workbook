@@ -34,6 +34,7 @@ LC フィルタの周波数は **1/√(LC)** で決まる。全部の L と C �
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 5 次チェビシェフ 0.5 dB ローパス (6-5 と同じ)
 parts:
   J1: sma 2,2 mirror CH0
@@ -65,6 +66,7 @@ wires:
 ピンの数 mm の違いは効かない)。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 26x10
   slots: on
@@ -112,6 +114,7 @@ wires:
 部品の値だけ。24.8 MHz は図5 の通過帯域がいちばん落ちる所。まず設計値 (6-5 の図4 に S11 を足したもの)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-50M 301
 title: 図3 設計値 — 35 MHz で −10.4 dB、S11 は通過帯域で −9.8 dB 以下
@@ -136,6 +139,7 @@ markers:
 全部が大きいほうの端 (C は +5 %、L は +10 %) にずれたとき。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-50M 301
 title: 図4 全部 + 側 (C +5 %、L +10 %) — 形はそのまま、カットオフが下がる
@@ -161,6 +165,7 @@ markers:
 いちばん崩れる組 (C1・C3 +5 %、L1 +10 %、C2 −5 %、L2 −10 %)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-50M 301
 title: 図5 ばらばらにずれた最悪の組 — リップルが 1.1 dB、S11 が −6.5 dB まで悪化

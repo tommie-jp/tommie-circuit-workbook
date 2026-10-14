@@ -19,6 +19,7 @@ MOSFET スイッチ (2-5) を組み合わせた実用回路。ボタンを押す
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 555単安定(CMOS版)でMOSFETを約19分だけON
 parts:
   VCC: vcc 5,2 5V
@@ -84,6 +85,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: full
 parts:
@@ -160,6 +162,7 @@ wires:
 作品として仕上げるので、perfboard にも同じ回路を組む。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -261,6 +264,7 @@ Ct が電源電圧の 2/3 (約 3.33 V) に届いて OUT が L に戻るのは約
 | カーソル | X1 を 60 秒、X2 を 480 秒に置き、そのときの Ct を読む |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 押してから最初の 9 分 — OUT は H のまま、Ct の電圧が上がっていく
 time: 60s/div
 trigger: ch2 rising 2.5V at -4div

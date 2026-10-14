@@ -17,6 +17,7 @@ Scope の **Math チャネル**は、2 つの入力を演算した波形を新�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 電圧と電流をそれぞれ測る
 parts:
   M1: voltmeter 1,1 1,3 l=$\mathrm{CH1}$
@@ -39,6 +40,7 @@ W1 (1 kHz、振幅 1 V) → R1 (100 Ω) → Rs (1 Ω) → GND。CH1 は W1 の�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで電圧と電流を測る
 board: half
 parts:
@@ -75,6 +77,7 @@ Math は瞬時電力 CH1 × CH2 (1 Ω なので V² の数がそのまま W)。
 CH1 と CH2 は尺度を変えたので、画面の上ではぴったり重なる (電流は電圧と同位相)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 瞬時電力 (Math) は 2 倍の周波数で振れ、平均は 4.95 mW で 0 にならない
 time: 200us/div
 trigger: ch1 rising 0V

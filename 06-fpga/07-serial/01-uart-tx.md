@@ -86,6 +86,7 @@ SH --> TXD
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 Pico 2 の GP15 から UART の TXD を出し、AD3 の DIO0 で読む
 parts:
   MCU: pico2 3,6 mirror
@@ -114,6 +115,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図3 ブレッドボードに Pico 2 を挿し、AD3 の DIO0 と GND をつなぐ
 board: half
 parts:
@@ -393,6 +395,7 @@ PASS
 シミュレーションの変わり目の時刻をそのまま写した。`H` の始まりを 0 s とした。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 "H" (0x48) は下位ビットから 0001 0010 と出る。1 ビットは 208 µs
 device: ad3
 time: 500us/div

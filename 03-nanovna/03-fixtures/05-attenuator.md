@@ -30,6 +30,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 10 dB T 型アッテネータ
 parts:
   J1: sma 2,2 mirror
@@ -55,6 +56,7 @@ notes:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -103,6 +105,7 @@ wires:
 27 Ω・36 Ω・27 Ω で組んだときに**見えるはずの画面** (理想の模型)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図3 E24 (27・36・27 Ω) の 10 dB パッドは平ら

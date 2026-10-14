@@ -26,6 +26,7 @@ hFE が 100 なら、ベースに 1 mA 流すとコレクタに最大 100 mA 流
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 NPN トランジスタで LED をスイッチする (W1 で入れ、CH2 と CH1 で比べる)
 parts:
   VCC: vcc 9,2 5V
@@ -68,6 +69,7 @@ W1 を 0 V にすると LED は消える。CH2 は入力 (`RB` の左端)、CH1 
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 トランジスタスイッチ (W1 と CH2 を入力へ、CH1 をコレクタへ)
 # 上の + レール = +5V (AD の V+)、上の − レール = GND (下のレールは使わない)
 board: half
@@ -113,6 +115,7 @@ wires:
 W1 を 100 Hz・0 V / 5 V の方形波にし (目には半分の明るさで点きっぱなしに見える。点滅を目で見たいときは 1 Hz に下げる)、CH2 (入力) と CH1 (コレクタ) を同じ 1 V/div で重ねる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 入力 (CH2) とコレクタ (CH1) — 入力が 5 V の間だけコレクタが 0.2 V に落ちる
 time: 2ms/div
 trigger: ch2 rising 2.5V

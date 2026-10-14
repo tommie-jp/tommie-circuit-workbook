@@ -23,6 +23,7 @@ Analog Discovery 3 (AD3) の Wavegen の W1 はこれと**違う**。仕様の�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 出力インピーダンスを測る
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -47,6 +48,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3
 board: half
 parts:
@@ -80,6 +82,7 @@ S1 を抜いたまま (開放) 測ってから、挿して (短絡) もう一度
 | Scope | CH1: DC 結合、Range は振幅に合わせて調整 (0.5 V/div など)。Measure の Amplitude (0-peak) だけでなく、**波形の頭の形も目で見る** |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 50 Ω をつなぐ前 (CH1) とつないだ後 (CH2) の 1 kHz の正弦波 — 振幅の差は約 3 %
 time: 500us/div
 trigger: ch1 rising 0V
@@ -126,6 +129,7 @@ R<sub>o</sub> = 50 × (0.500 / 0.485 − 1) ≈ **1.5 Ω**。ここで測る R<s
 | 2.0 V | 40.0 mA (ハードウェアの遮断の値ちょうど) | 30 mA を超えるので仕様の範囲外。頭が潰れて見えるはず (遮断されたときの見え方は**未確認**) |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 負荷電流は Amplitude に比例し、1.5 V で歪みなしの上限 30 mA に届く
 x: Amplitude V 0..2.5
 y: 負荷電流 mA 0..60

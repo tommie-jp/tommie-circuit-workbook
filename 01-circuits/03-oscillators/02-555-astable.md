@@ -20,6 +20,7 @@ C1 の電圧が電源の 2/3 (Vcc の 2/3) まで上がると出力を Low に�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 555 非安定
 parts:
   V1: vsource 4,3 4,9 5
@@ -69,6 +70,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上のレールは +5V/GND、下のレールも +5V/GND (1 列目で上下を渡している)
 board: half
@@ -136,6 +138,7 @@ wires:
 | Trigger | CH1、立ち上がり、1.8 V |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 555 の出力 (3 番) — High が約 0.40 秒、周期が約 0.72 秒
 time: 200ms/div
 trigger: ch1 rising 1.8V

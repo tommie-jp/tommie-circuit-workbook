@@ -28,6 +28,7 @@ C を並列にした回路で、記号法の答えを先に出し、AD で大き
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 R1 + L1 と C1 の並列 (電流は Rs で読む)
 style:
   standard: jis
@@ -60,6 +61,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 # 上の段: R1 と L1 の直列。下の段: C1 と Rs (溝を渡る緑の線で 5 列と 14 列へ)
 board: half
@@ -108,6 +110,7 @@ wires:
 この本の目安 10 mA (0-1) に収まる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 電流 (CH2) は V (CH1) より 13.9° 進む — Ż は容量性
 time: 200us/div
 trigger: ch1 rising 0V

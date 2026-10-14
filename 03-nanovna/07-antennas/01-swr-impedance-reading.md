@@ -29,6 +29,7 @@ R = 50 Ω なら Γ = 0 (SWR = 1、反射なし)。R が大きくても小さく
 抵抗を SMA コネクタに直付けした 1 端子の負荷 (基板は使わない)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 抵抗 1 個の負荷
 parts:
   J1: sma 2,2 mirror CH0
@@ -45,6 +46,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -80,6 +82,7 @@ R1 を 25 Ω・50 Ω・100 Ω・200 Ω と挿し替えて、SWR と Smith チャ
 100 Ω を負荷にしたときの**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 10M-100M 101
 title: 図3 100 Ω 負荷 — Smith は r = 2 の 1 点、SWR は 2.00 で平ら (枠の上端)

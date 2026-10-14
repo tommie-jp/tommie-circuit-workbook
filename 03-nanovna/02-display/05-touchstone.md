@@ -46,6 +46,7 @@ NanoVNA-Saver・NanoVNA-App、本体の SD カード保存のどれも同じ系�
 この題ではまだ実測が無いので、理想値だけを示す。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図1 100 Ω を直列に入れた治具の理想 (保存前)

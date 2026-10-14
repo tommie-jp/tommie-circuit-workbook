@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 整流形の計器の模型 (精密全波整流と平均)
 parts:
   V1: sine 1,3 1,8 2 l=$\mathrm{W1}$
@@ -80,6 +81,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -139,6 +141,7 @@ wires:
 波形を切り替えたら 0.1 s (5 R5C1) 待ってから読む。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 正弦波 — 出力 (CH2) は平均値 1.27 V、1.11 倍すると CH1 の RMS 1.41 V と合う
 time: 200us/div
 trigger: ch1 rising 0V
@@ -150,6 +153,7 @@ measure: [vmax, rms, avg]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/scope/06-rectifier-meter-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 方形波 — 平均値 2.00 V は RMS と同じ。1.11 倍の表示 2.22 V は 11 % 大きい
 time: 200us/div
 trigger: ch1 rising 0V

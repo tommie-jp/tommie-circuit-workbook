@@ -19,6 +19,7 @@ D フリップフロップは、Clock が立ち上がる**前** (セットアッ
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CD4013B に Pattern で Clock と Data を入れる
 parts:
   AD:
@@ -70,6 +71,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -123,6 +125,7 @@ Pattern と Logic は同じマスタークロックを共有するので、Data 
 Data を Clock の立ち上がりの 100 ns 前に切り替えた所を、理想の角で描くと次のようになる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Data (CH2) が Clock (CH1) より 100 ns 先に変わる
 time: 50ns/div
 trigger: ch1 rising 1.65V

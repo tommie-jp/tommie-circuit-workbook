@@ -18,6 +18,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 直列治具にフェライトビーズを挿す
 parts:
   J1: sma 2,2 mirror CH0
@@ -41,6 +42,7 @@ notes:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -94,6 +96,7 @@ L・R・C の並列をつないだ形。
 見えるはずの画面 (理想の模型)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-900M 401
 title: 図3 フェライトビーズ (Rdc + L∥R∥C) — 164 MHz で R が山、X は正から負へ
@@ -114,6 +117,7 @@ markers:
 R が X を抜く 59 MHz と、R の山の 164 MHz を広げて見る。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 20M-200M 401
 title: 図4 20〜200 MHz に広げる — 59 MHz で R が X を抜く

@@ -18,6 +18,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 GND レールに電流を流し、区間の電位差を見る
 parts:
   AD:
@@ -52,6 +53,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -114,6 +116,7 @@ I ≈ 1 V / 150 Ω ≈ 6.7 mA と余裕を持たせてある。
 10 MHz のときの画面。CH2 は CH1 の 1/100 しか振れないので、V/div を別にした。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 10 MHz でレール区間 (CH2) に 19 mVpp が出て、電流 (CH1) より 90° 進む
 time: 50ns/div
 trigger: ch1 rising 0V

@@ -47,6 +47,7 @@ L の値は**比べるための例**で、実物の値ではない。実物は�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Load の等価回路 (50 Ω と直列の L)
 parts:
   M1:
@@ -83,6 +84,7 @@ notes:
 付属の Load の例 (0.5 nH)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 10M-1.5G 150
 title: 図2 付属の Load の例 (0.5 nH) — 1.5 GHz で −26.54 dB
@@ -107,6 +109,7 @@ notes:
 自作の Load の例 (2 nH)。設定は図 2 と同じ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 10M-1.5G 150
 title: 図3 自作の Load の例 (2 nH) — 1.5 GHz で −14.65 dB

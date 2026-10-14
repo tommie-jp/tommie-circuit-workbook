@@ -18,6 +18,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 2 段の RC ローパス
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -47,6 +48,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -91,6 +93,7 @@ H = 1 / ((1 − x²) + j2.1x) (x = f / f<sub>c</sub>、負荷込み。図4 の�
 山が 1/4 周期 (629 µs ÷ 4 ≈ 157 µs) 遅れる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 1.59 kHz の 1 点 — CH2 は 0.476 倍で 157 µs (90°) 遅れる
 time: 100us/div
 trigger: ch1 rising 0V
@@ -116,6 +119,7 @@ measure: [vpp]
 図4 は 2 段 (負荷込み) と、5-1 の 1 段を同じ枠に重ねたもの。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 2 段は 1 桁で −40 dB 落ちる (1 段は −20 dB)、fc で −6.44 dB・−90°
 x: 周波数 Hz log 100..200k
 y:

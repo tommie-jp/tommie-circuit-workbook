@@ -21,6 +21,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ブリッジ整流と平滑 (CH1 は Analog Discovery のオシロで C1 の両端を見る)
 parts:
   D1: diode acL 3,2 1N4001
@@ -60,6 +61,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (1+ を C1 の + へ、1− を GND へ)
 board: half
 parts:
@@ -109,6 +111,7 @@ wires:
 C1 を付けた状態と外した状態で、整流の波形がどう変わるかを図4 に示す (計算で描いた形。実測ではない)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 整流直後 (CH1、C1 を外す) と平滑後 (CH2、C1 を付ける)
 time: 5ms/div
 trigger: ch1 rising 5V

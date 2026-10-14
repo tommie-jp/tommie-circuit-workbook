@@ -102,6 +102,7 @@ MUX --> OUT
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 FPGA の 12 本のピンから抵抗とトランジスタを通して 4 桁の 7 セグを光らせる
 parts:
   U1: tang-nano-9k 5,6
@@ -251,6 +252,7 @@ wires:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図3 1 枚のブレッドボードに組む。電源は USB-C から Tang Nano 9K へ
 board: full
 parts:
@@ -837,6 +839,7 @@ GW1NR-9 の LUT は 8640 個、フリップフロップは 6480 個 (Sipeed の 
 ### 桁の切り替え
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 4 つの桁を 1 ms ずつ順に光らせる。1 つの桁は 4 ms に 1 回
 device: ad3
 time: 1ms/div
@@ -859,6 +862,7 @@ trigger: DIG1 rising at 0s
 ### 秒
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図5 sec は 1 s のうち前半の 0.5 s だけ 1
 device: ad3
 time: 500ms/div

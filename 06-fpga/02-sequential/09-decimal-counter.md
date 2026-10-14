@@ -280,6 +280,7 @@ sec=101 tens=0111111 ones=0000110
 ## シミュレーションの波形
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 1 の位が 9 のとき C0 が 1 になり、次の立ち上がりで 10 の位が進む
 device: generic
 time: 16us/div

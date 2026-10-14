@@ -20,6 +20,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 スルー (基準) の結線
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -39,6 +40,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ と 2+ に直結)
 board: half
 parts:
@@ -77,6 +79,7 @@ W1・1+・2+ を同じ 5 列に挿し、GND・1−・2− は上の − レー�
 これが「−3 dB・−45°」の時間波形での姿である。図は 1 次ローパスと仮定した計算の画面で、実機の帯域の形とは少し違う。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 9 MHz の 1 点 — 壁を通った線は 0.71 倍で 13.9 ns (45°) 遅れる
 time: 20ns/div
 trigger: ch1 rising 0V
@@ -103,6 +106,7 @@ measure: [vpp, freq]
 | 10 MHz | −3.49 dB | −48.0° |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 DUT なしでも 9 MHz で −3 dB・−45° — AD3 自身の帯域の壁
 x: 周波数 Hz log 100k..10M
 y:
@@ -145,6 +149,7 @@ AD では 9 MHz の壁が先に効いて、この −3 dB 点 (28.4 MHz) は読�
 見えるはずの画面 (理想の模型で、実測ではない)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: litevna64
 sweep: 1M-100M 201
 title: 図4 28.4 MHz の 7 次ローパス — AD の壁 (9 MHz) の先の −3 dB 点と阻止域

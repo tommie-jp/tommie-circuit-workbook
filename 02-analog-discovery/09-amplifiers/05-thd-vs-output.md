@@ -18,6 +18,7 @@ LM358 増幅回路に当て、**出力振幅を上げていくと THD がどう�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 LM358 非反転増幅 (9-2・9-3 と同じ、利得 11 倍)
 parts:
   AD:
@@ -63,6 +64,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (9-2・9-3 と同じ配置)
 board: half
 parts:
@@ -117,6 +119,7 @@ Spectrum の画面の前に、Scope で出力の形を見ておくとよい。�
 ときの出力を、上側だけ 3.5 V で硬く切る模型で重ねた (同じ 500 mV/div)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 入力 95 mV (CH2) では上の頭が 3.5 V で切れ、50 mV (CH1) は切れない (模型)
 time: 200us/div
 trigger: ch1 rising 2.5V
@@ -161,6 +164,7 @@ measure: [vmax, vmin]
 なだらかに始まる。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 THD は 90.9 mV までほぼ平らで、そこから急に立ち上がる (模型の計算)
 x: 入力振幅 mV 0..200
 y: THD % log 0.01..100

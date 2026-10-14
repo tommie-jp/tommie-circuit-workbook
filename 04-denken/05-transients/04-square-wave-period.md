@@ -27,6 +27,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC 直列に方形波を加える (5-1 と同じ回路)
 parts:
   V1: square 1,2 1,4 1 l=$\mathrm{W1}$
@@ -52,6 +53,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (5-1 と同じ配線)
 board: half
 parts:
@@ -90,6 +92,7 @@ wires:
 横軸はどれも 2〜2.5 周期ぶんなので、形の違いは半周期と τ の比だけから来る。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 100 Hz (半周期 5τ) — 出力 (CH2) は毎回ほぼ 0 V と 2 V に届く
 time: 2ms/div
 trigger: ch1 rising 1V
@@ -101,6 +104,7 @@ measure: [vmax, vmin, vpp]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/scope/04-square-wave-period-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 500 Hz (半周期 1τ) — 途中で折り返し、0.54〜1.46 V を往復する
 time: 500us/div
 trigger: ch1 rising 1V
@@ -112,6 +116,7 @@ measure: [vmax, vmin, vpp]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/scope/04-square-wave-period-2.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 5 kHz (半周期 0.1τ) — 1 V のまわりを 0.1 V だけ揺れる三角波
 time: 50us/div
 trigger: ch1 rising 1V
@@ -154,6 +159,7 @@ CH2 だけを 20 mV/div にし、Offset (Position) を −1 V にして 1 V を�
 | 5 kHz | 0.1 ms | 0.1 | 1.05 V | 0.95 V | 0.10 V |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図6 出力の振れ (計算) — 半周期が τ を下回ると振れが小さくなる
 x: 周波数 Hz log 20..20k
 y: 振れ V 0..2.2

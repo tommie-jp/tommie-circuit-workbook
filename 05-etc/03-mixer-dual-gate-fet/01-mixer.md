@@ -56,6 +56,7 @@ LO を方形波にしても、G2 で開け閉めするスイッチとして混�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図01 3SK291 デュアルゲート FET ミキサー (+5 V・50 Ω 入出力・IF 455 kHz)
 parts:
   VDD:  vcc 8,1 5V
@@ -191,6 +192,7 @@ LO の最大は 2.055 MHz で、ブレッドボードの上限 (3 MHz) に収ま
 AD3 を下に置いて、電源・W1 (RF)・W2 (LO)・1+ (IF OUT)・2+ (LO の入口) をつなぐ。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図02 ブレッドボードに組む (AD3 の W1・W2・CH1・CH2 つき)
 board: full
 parts:
@@ -292,6 +294,7 @@ wires:
 図は部品面から見たもの。下に半田面 (左右が逆) の図を付けた。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 unused: [J4.D+, J4.D-]
 title: 図03 ユニバーサル基板に組む (部品面から見た図。下は半田面)
 board:
@@ -504,6 +507,7 @@ LO は G2 の直流 (1.41 V) の周りを ±0.7 V (+7 dBm のとき) 振る。G1
 LO と RF の漏れは、フィルタの阻止域の深さを仮定した**目安**で、実物では変わる (下の表)。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図04 IF OUT のスペクトル (RF 1.000 MHz −30 dBm、LO 1.455 MHz +7 dBm)
 device: ad3
 sweep: 0-2.5MHz
@@ -526,6 +530,7 @@ markers: [455k, 1.455M, 1M]
 - 影像側 (1.910 MHz) と和 (2.455 MHz) の成分は、フィルタと L2 で落ちて見えない
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図05 IF OUT の波形 (RF −10 dBm のとき、455 kHz の正弦波)
 time: 1us/div
 trigger: ch1 rising 0V

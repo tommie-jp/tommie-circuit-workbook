@@ -23,6 +23,7 @@ device: LV64
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 L 形整合回路 (24 Ω を 50 Ω に見せる)
 parts:
   J1: sma 2,3 mirror
@@ -52,6 +53,7 @@ style:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -90,6 +92,7 @@ wires:
 perfboard の治具を作る前に、同じ回路をブレッドボードで組んで試せる。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2b L 形整合回路をブレッドボードで組む
 board: half
 parts:
@@ -133,6 +136,7 @@ wires:
 以下は、**理想の模型から計算した画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 500k-2M 151
 title: 図3 整合の前 — 24 Ω だけ (z = 0.48、SWR 2.08)
 dut:
@@ -148,6 +152,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/06-l-match-1.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 500k-2M 151
 title: 図4 直列に L 3.9 µH を足す — r = 0.48 の円を上へ
 dut:
@@ -164,6 +169,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/06-l-match-2.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 500k-2M 151
 title: 図5 入口に並列に C 3.3 nF を足す — g の円を下へ、中心に着く
 dut:

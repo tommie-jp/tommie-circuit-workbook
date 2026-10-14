@@ -22,6 +22,7 @@ Rectangular・Hann・Flat-top の 3 つが振幅の読み値をどれだけ悪�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック (W1 を 1+ に直結)
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -37,6 +38,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
 board: half
 parts:
@@ -74,6 +76,7 @@ W1 と 1+ は 5 列に挿すだけで、列の内側でつながる。GND と 1�
 半ビンずらした 1003.125 Hz にして、窓だけを替えて同じ尺度で並べた。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 Rectangular — 半ビンずれで山が +6.09 dBm まで下がる
 device: ad3
 sweep: 0-20kHz
@@ -88,6 +91,7 @@ markers: [peak]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/03-windows-1.svg)
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図4 Hann — 同じずれで +8.58 dBm
 device: ad3
 sweep: 0-20kHz
@@ -102,6 +106,7 @@ markers: [peak]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/03-windows-2.svg)
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図5 Flat-top — 同じずれでも +9.99 dBm とほぼ正しい
 device: ad3
 sweep: 0-20kHz
@@ -116,6 +121,7 @@ markers: [peak]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/03-windows-3.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図6 最悪ケースの 1003.125 Hz を時間で見ても、見かけは普通の正弦波
 time: 200us/div
 trigger: ch1 rising 0V

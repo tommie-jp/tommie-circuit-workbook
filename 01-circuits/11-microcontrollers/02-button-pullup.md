@@ -22,6 +22,7 @@ GPIO の入力は、何もつながないと電位が決まらず、0 と 1 の�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 プルアップ抵抗とボタン
 parts:
   U1: pico2 3,5.2
@@ -47,6 +48,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: full
 parts:
@@ -100,6 +102,7 @@ wires:
 | カーソル | X1 を離している間 (−100 ms、押す前)、X2 を押している間 (300 ms) に置く |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 ボタンを押した間だけ GP16 が 0V に落ちる (約 0.5 秒押した場合)
 time: 100ms/div
 trigger: ch1 falling 1.65V at -2div

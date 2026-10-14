@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC ローパス
 parts:
   IN: port 1,1
@@ -48,6 +49,7 @@ style:
 コンデンサで GND へ逃げて弱まり、低い周波数はそのまま出てくる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 RC ハイパス
 parts:
   IN: port 1,1
@@ -75,6 +77,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 RC ローパスを組み、AD3 の W1 と Scope をつなぐ
 board: half
 parts:
@@ -137,6 +140,7 @@ W1 を **1.06 kHz** (f<sub>c</sub> の計算値 1/(2π×1.5 kΩ×100 nF) = 1061 
 時間 200 µs/div で重ねる。ローパスの出力 (図の CH2) は、入力 (CH1) に対して振幅が 1/√2 = **0.707 倍**になり、位相が **45 度遅れる** (1 周期 943 µs の 1/8 = 118 µs)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 ローパスの遮断周波数 (1.06 kHz) — 出力 (CH2) は入力 (CH1) の 0.707 倍
 time: 200us/div
 trigger: ch1 rising 0V
@@ -194,6 +198,7 @@ CH1 (入力) に対する CH2 (出力) の利得と位相を測ってグラフ�
 操作の詳しい説明は Analog Discovery の教科書の 5-1 (ローパス)・5-2 (ハイパス)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図5 AD の W1 で掃引し、CH1 (入力) と CH2 (出力) を比べる
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -213,6 +218,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/circuit/05-rc-filter-3.svg)
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図6 図3 の基板に Analog Discovery をつなぐ
 board: half
 parts:
@@ -262,6 +268,7 @@ wires:
 Network に見えるはずのボード線図 (計算値)。上が利得、下が位相で、横軸は同じ周波数 (対数)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図7 Network のボード線図 — −3 dB の所が −45°
 x: 周波数 Hz log 10..100k
 y:
@@ -303,6 +310,7 @@ notes:
 | Spectrum | Channel 1 と Channel 2 を表示、**Start 0 Hz、Stop 10 kHz**、Window: Flat-top、単位: dBm |
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図8 入力 (CH1) — 方形波 500 Hz の高調波
 device: ad2
 sweep: 0-10kHz
@@ -317,6 +325,7 @@ markers: [500Hz, 1.5kHz, 4.5kHz, 9.5kHz]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/spectrum/05-rc-filter-1.svg)
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図9 出力 (CH2) — ローパスを通した後
 device: ad2
 sweep: 0-10kHz
@@ -380,6 +389,7 @@ VNA (ベクトルネットワークアナライザ) は CH0 から信号を出�
   f<sub>c</sub> = 1 / (2π × 100 Ω × 10 nF) = **159 kHz**
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図10 VNA の入出力の抵抗を R にしたローパス (C1 は 10 nF)
 parts:
   J1: sma 2,1 mirror CH0
@@ -411,6 +421,7 @@ C1 は 10 nF (103) のセラミックコンデンサ。ブレッドボードへ�
 | 表示 | S21 の Log Mag と Phase |
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: litevna64
 sweep: 50k-10M 201
 title: 図11 C 1 つのローパスの S21 (fc = 637 kHz)

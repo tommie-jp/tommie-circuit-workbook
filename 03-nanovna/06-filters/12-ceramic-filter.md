@@ -48,6 +48,7 @@ R1 280 Ω・R2 330 Ω と書いてある。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 10.7 MHz のセラミックフィルタ (前後に 270 Ω)
 parts:
   J1: sma 2,2 mirror CH0
@@ -71,6 +72,7 @@ wires:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/12-ceramic-filter-1.svg)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 455 kHz のセラミックフィルタ (前後に 1.5 kΩ)
 parts:
   J1: sma 2,2 mirror CH0
@@ -104,6 +106,7 @@ wires:
 **U1 は 3 ピンの部品の姿 (TO-92 の形) で代わりに描いた**。実物は平たい箱。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -132,6 +135,7 @@ wires:
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/12-ceramic-filter-1.svg)
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -175,6 +179,7 @@ wires:
 入れた。10.7 MHz 用の**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 9.7M-11.7M 201
 title: 図5 10.7 MHz 用 (等価回路) — 中心で −20.1 dB、3 dB 幅 282 kHz
@@ -205,6 +210,7 @@ notes:
 455 kHz 用。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 425k-485k 121
 title: 図6 455 kHz 用 (等価回路) — 中心で −33.8 dB、6 dB 幅 16 kHz

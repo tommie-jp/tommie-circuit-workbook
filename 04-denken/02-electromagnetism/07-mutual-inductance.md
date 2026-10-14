@@ -26,6 +26,7 @@ k が 1 に近づくのを見る。変圧器 (第 8 章) は k を 1 に近づ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 コイル 1 に流し、コイル 2 の電圧を読む
 style:
   standard: jis
@@ -62,6 +63,7 @@ notes:
 L<sub>1</sub>・L<sub>2</sub> は筒をブレッドボードの外の机に置き、両端のリードをブレッドボードの穴に挿す (リードが届かなければ、つなぎ線で延ばす)。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -118,6 +120,7 @@ wires:
 d = 0 の画面。V2 は I1 より 90° 進む (L2 の向きを逆にすると 90° 遅れる)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 d = 0 — V2 (CH2) は I1 の分 (CH1) より 90° 進む
 time: 2us/div
 trigger: ch1 rising 0V

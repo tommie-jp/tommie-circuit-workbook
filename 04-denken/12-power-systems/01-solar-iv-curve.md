@@ -24,6 +24,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 太陽電池と可変負荷
 style:
   standard: jis
@@ -55,6 +56,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと太陽電池
 board: half
 parts:
@@ -115,6 +117,7 @@ CH2 のクリップを Rs のどちらかの端に当てると、太陽電池か
 試験の図とはシャントの位置が変わるが、直列なので流れる電流は同じ。電源も発振器も使わない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 汎用オシロでの測り方
 style:
   standard: jis

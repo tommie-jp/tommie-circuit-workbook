@@ -19,6 +19,7 @@ era: 古
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 検波した音声をベースへ戻す1石レフレックス
 parts:
   ANT: antenna 1,7
@@ -119,6 +120,7 @@ C5 とイヤホン側の分圧 0.86 倍、L2 のインピーダンス (1 MHz で
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: half
 parts:

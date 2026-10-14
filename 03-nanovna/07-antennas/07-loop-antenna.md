@@ -39,6 +39,7 @@ device: H4
 **直結のときは T1 を外して J1 から R1 へ直接**。基板は使わない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 1 波長ループの給電点 (等価回路) と 75 Ω の同軸
 parts:
   J1: sma 2,2 mirror CH0
@@ -93,6 +94,7 @@ wires:
 直結のときの**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 380M-480M 101
 title: 図2 直結 — 430 MHz で共振しても SWR は 2.40 (120 Ω)
@@ -115,6 +117,7 @@ markers:
 75 Ω・11.5 cm の同軸を挟んだときの**見えるはずの画面** (設定は図2 と同じ)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 380M-480M 101
 title: 図3 75 Ω の Q マッチを挟む — 430 MHz で SWR 1.07

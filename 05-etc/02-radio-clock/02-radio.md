@@ -42,6 +42,7 @@ DET --> OUT
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 中波 AM 受信機 (同調、高周波増幅 2 段、AM 検波)
 parts:
   VC1: capacitor-var 3,5 3,7 l=$\mathrm{VC}_1$
@@ -134,6 +135,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 中波 AM 受信機のブレッドボード
 board: half
 parts:
@@ -218,6 +220,7 @@ notes:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/02-radio.svg)
 
 ```perf
+# ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
 title: 図2b 中波 AM 受信機のユニバーサル基板
 board:
   size: 7x5cm
@@ -392,6 +395,7 @@ Analog Discovery 3 のオシロスコープを、BNC アダプタを付けて使
 見えるはずの画面 (推測) を、scope フェンスで描いた。**波の大きさは仮の値で、実測ではない**。波を見やすくするため、BNC アダプタのジャンパで CH1・CH2 を AC 結合にする (約 1.6 Hz より低い成分を切る)。図もその画面で、直流分は除いてある。AD3 本体のピンの入力は DC 結合だけで、直流を打ち消す Offset も 0.5 V/div 以下の細かい目盛では ±2.5 V までしか動かせないので、約 3 V の直流は打ち消せない。直流分 (CH1 は約 3 V、CH2 は約 3.4 V) は、テスターか、ジャンパを DC に戻して Avg で読む。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 CH1 検波出力 (AC 結合。時報の 440 Hz が出ているとき、推測)
 time: 1ms/div
 trigger: ch1 rising 0V
@@ -405,6 +409,7 @@ measure: [vpp, freq]
 - 放送の音声は一定の高さではないので、普段の番組では、この形にはならない
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 CH2 Q1 のコレクタ (AC 結合。594 kHz の搬送波、推測)
 time: 2us/div
 trigger: ch2 rising 0V
@@ -422,6 +427,7 @@ measure: [vpp, freq]
 同じ 2 つの場所を、WaveForms の Spectrum (FFT) でも見られる。波形では見えない**搬送波と側波の高さ**が分かる。見えるはずの画面 (推測) を、spectrum フェンスで描いた。**振幅は仮の値 (CH1 は 50 mV、CH2 は 100 mV、変調度は 0.3) で、実測ではない。** 実測したら WaveForms の CSV を題のファイルの隣に置き、`data:` で重ねる。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図5 CH1 検波出力のスペクトル (440 Hz の音声、推測)
 device: ad3
 sweep: 0-1kHz
@@ -439,6 +445,7 @@ markers: [440Hz]
 - 検波出力の直流分 (約 3 V) は 0 Hz に大きな線として出る。見やすくするため、CH1 を AC 結合 (BNC アダプタのジャンパ) にして測る
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図6 CH2 Q1 のコレクタのスペクトル (搬送波と AM の側波、推測)
 device: ad3
 center: 594kHz

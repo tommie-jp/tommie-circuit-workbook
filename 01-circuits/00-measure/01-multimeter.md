@@ -19,6 +19,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 分圧回路とテスターの当て方
 parts:
   V1: vsource 2,2 2,4 5
@@ -49,6 +50,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 分圧回路をテスターで当たる
 # 上の赤いレール = +5V、青いレール = GND
 board: half

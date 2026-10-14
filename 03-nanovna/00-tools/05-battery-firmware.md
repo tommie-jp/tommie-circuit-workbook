@@ -68,6 +68,7 @@ H4 の中のマイコン (STM32) は、**DFU** (Device Firmware Update) とい�
 外皮の間に付けたもの。ピンは短く切る。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CH0 に 100 Ω の検査片をつなぐ
 parts:
   M1:
@@ -89,6 +90,7 @@ notes:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -123,6 +125,7 @@ J1 のねじ (SMA) に NanoVNA の CH0 のケーブルをつなぐ。R1 (100 Ω�
 | 表示 | S11 の Log Mag、S11 の Smith チャート |
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-30M 101
 title: 図3 更新の後の検査片 100 Ω は −9.54 dB (SWR 2.00)

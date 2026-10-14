@@ -18,6 +18,7 @@ DSB (両側波帯) の AM は、搬送波 1 本と、その両脇に変調周波
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック (W1 を 1+ に直結)
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -35,6 +36,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
 board: half
 parts:
@@ -64,6 +66,7 @@ W1 と 1+ は同じ 5 列に挿し、GND と 1− は上の − レールにま�
 画面は次のようになる。搬送波の両側 1 kHz に側波帯が 1 本ずつ立つ。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 側波帯は搬送波の 12 dB 下に ±1 kHz で 1 本ずつ
 device: ad3
 sweep: 90kHz-110kHz
@@ -84,6 +87,7 @@ markers: [100kHz, 99kHz, 101kHz]
 (3-3 で見たエンベロープ)。図3 の側波帯の高さ −12.04 dB は、この山と谷の振れ幅 (m = 0.5) から決まっている。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 AM 波 (深さ 50 %) のエンベロープは 1.5 V と 0.5 V の間
 time: 200us/div
 trigger: ch1 rising 0V

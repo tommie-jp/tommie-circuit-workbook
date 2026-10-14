@@ -142,6 +142,7 @@ L は線の太さ 1 mm で見積もった**目安**で、L ≈ 1.4 µH × N² �
 NanoVNA の画面は図 2 のようになる (計算値)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 100k-10M 401
 title: 図2 6 回巻きのループ — 500 kHz の X で L、5.03 MHz で X が + から −
@@ -194,6 +195,7 @@ L は f<sub>SRF</sub> より十分低い所で読む。1 MHz で読むと X は 
 自己共振の周波数で位相が 0° を横切る (図 3、計算値)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 300k-10M 401
 title: 図3 S11 の位相 — 5.03 MHz で 0° を横切る (開放の点)
@@ -231,6 +233,7 @@ markers:
 2 ポートで測るなら、ループを CH0 と CH1 の間に直列に入れる (図 4)。3-1 の直列治具と同じつなぎ方である。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 ループを CH0 と CH1 の間に直列に挟む
 parts:
   X1:
@@ -270,6 +273,7 @@ notes:
 50 Ω の 2 ポートに直列の Z を入れた通過は |S21| = 2 · 50 / |100 + Z| で、図 5 のように深い谷になる (計算値)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 100k-10M 401
 title: 図5 ループを直列に挟んだ S21 — 5.03 MHz で深い谷
@@ -303,6 +307,7 @@ markers:
 近づけて共振を探すのと同じ考えである。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図6 小さなループ 2 つで、ゆるく結合する
 parts:
   X1:
@@ -377,6 +382,7 @@ vna フェンスの模型は結合したコイルを書けないので、図 8 �
 山の高さは結合の強さで決まり、実物では置き方で数十 dB 変わる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 4.9M-5.15M 401
 title: 図8 ゆるく結合した S21 — 5.01 MHz で山 (目安の模型)
@@ -463,6 +469,7 @@ L ∝ N² は目安なので、実際の最適は ±1 回ほどずれること�
 #### (a) 非同調の 2 回巻きを直結
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図9 (a) 非同調の 2 回巻きを tinySA に直結
 parts:
   L1: inductor 3,2 3,4 5.6u
@@ -498,6 +505,7 @@ notes:
 #### (b) 非同調の 6 回巻きを JFET のソースフォロワで受ける
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図10 (b) 非同調の 6 回巻きを JFET のソースフォロワで受ける
 parts:
   VCC: vcc 7,1 5V
@@ -555,6 +563,7 @@ notes:
 **組む回路は (b) だけ**。中波帯 (3 MHz 以下) なのでブレッドボードに組める。ループの 2 本の線を、そのまま J1 のゲートと GND に付ける。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図11 (b) の JFET バッファを組む (下の赤 = +5V、青 = GND)
 board: half
 parts:
@@ -600,6 +609,7 @@ wires:
 #### (c) 同調ループをポリバリコンで合わせ、リンクで取り出す
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図12 (c) 同調ループをポリバリコンで合わせ、リンクで取り出す
 parts:
   L1: inductor 3,2 3,4 175u
@@ -678,6 +688,7 @@ notes:
 送信機とアンテナを 3 m 離して置き、受けのダイポールから同軸で tinySA へつなぐ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図14 3 m 離して受け、同軸で tinySA へ
 parts:
   X1:
@@ -755,6 +766,7 @@ AF は「この実験で使う式」のダイポールの式による**計算値
 上限に近い読みの例 (100 MHz で −65.0 dBm) の、**見えるはずの画面**。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図15 100 MHz で −65.0 dBm — 上限の読み −62.1 dBm まで 2.9 dB
 device: tinysa-ultra
 center: 100MHz

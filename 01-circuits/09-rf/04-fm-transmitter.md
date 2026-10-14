@@ -39,6 +39,7 @@ FM (周波数変調) は、音声で搬送波の**周波数**を変えて送る�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 コルピッツ発振 + マイク直接FM
 parts:
   VCC: vcc 2,1 5V
@@ -182,6 +183,7 @@ perfboard の目安 (10 MHz 以下) も大きく超える。タンクは 15 pF �
 最小 1.5mm (0.3mm 以上)。商用電源は使わない。
 
 ```copper
+# 銅張り基板の寸法図 (tommie-fence の copper フェンス)
 board:
   size: 70x50mm
   ground: back
@@ -359,6 +361,7 @@ RBW を 10 kHz 程度に狭めて読む。島の浮遊容量とピンのイン�
 ## 計器の画面
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 搬送波 80MHz と、2 倍・3 倍の高調波 (目安)
 device: tinysa-ultra
 sweep: 0-359.2M 450
@@ -400,6 +403,7 @@ markers: [80M, 160M, 240M]
 分圧の下側に並んで 100 Ω の値をずらす)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 マイクの代わりに AD の W1 (1kHz) を分圧して入れる
 parts:
   VCC: vcc 2,1 5V
@@ -451,6 +455,7 @@ MIC の島から GND の島 (via) へ渡す。図 2 にあった上の VA の島
 と一致する。
 
 ```copper
+# 銅張り基板の寸法図 (tommie-fence の copper フェンス)
 board:
   size: 70x50mm
   ground: back
@@ -547,6 +552,7 @@ J<sub>3</sub> = 0.073) を使い、合計 −50 dBm から 20 log<sub>10</sub>|J
 | ±3 kHz | 80 MHz ± 3 kHz | −72.8 dBm |
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図6 1kHz で変調した搬送波の側波 (目安)
 device: tinysa-ultra
 center: 80MHz

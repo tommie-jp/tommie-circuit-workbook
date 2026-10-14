@@ -25,6 +25,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 半波整流と全波整流ブリッジを並べて比べる
 style:
   standard: jis
@@ -62,6 +63,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 半波整流のブレッドボード
 board: half
 parts:
@@ -83,6 +85,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/breadboard/01-rectifiers-1.svg)
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 全波整流 (ブリッジ) のブレッドボード
 board: half
 parts:
@@ -125,6 +128,7 @@ wires:
 ダイオードは順電圧 0.6 V 一定の模型で描いた (半波は 1 個分、全波は 2 個分を引いて 0 V で切る)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 半波 (CH1) は 1 周期に山 1 つ、全波 (CH2) は 2 つ
 time: 5ms/div
 trigger: ch1 rising 1V
@@ -152,6 +156,7 @@ CH1 の先端を 9 列、グランドクリップを青レールに当てる。
 2 ch はこれで使い切るので、半波と全波は別々に測る (4 ch のオシロなら同時に測れる)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図5 汎用オシロでの測り方
 style:
   standard: jis

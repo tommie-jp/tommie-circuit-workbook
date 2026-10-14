@@ -37,6 +37,7 @@ Baud を正しく合わせないと何が見えるかも、シミュレーショ
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2 の GP15 から字を送り、AD3 の DIO0 (Protocol の RX) で受ける
 parts:
   MCU: pico2 3,6 mirror
@@ -64,6 +65,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 7-1 と同じ。GP15 を AD3 の DIO0、GND を GND につなぐ
 board: half
 parts:
@@ -290,6 +292,7 @@ Hex の表示では、1 行が `43 4E 54 3D 31 0D 0A` のように 7 バイト�
 シミュレーションの 2 行目 (`CNT=1`) の変わり目の時刻を写した。行の最初の立ち下がりを 0 s とした。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 1 行 "CNT=1" と CR LF。1 字は 2.106 ms ごと
 device: ad3
 time: 2ms/div

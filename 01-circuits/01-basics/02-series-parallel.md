@@ -19,6 +19,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 直列 1 本と並列 2 本
 parts:
   V1: vsource 1,1 1,3 5
@@ -48,6 +49,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 直列 1 本と並列 2 本
 # 上のレール = +5V、下のレール = GND
 board: half

@@ -28,6 +28,7 @@ Q4 がいちばん上の桁 (MSB)。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 555クロック + 4040バイナリカウンタ
 parts:
   U555: ic 6,5 NE555
@@ -115,6 +116,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: full
 parts:
@@ -223,6 +225,7 @@ wires:
 | カーソル | X1・X2 をクロックの続く 2 つの立ち下がりの直後に置く。ΔX がクロックの 1 周期 = Q1 の半周期 |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 クロック (CH1) と Q1 (CH2) — Q1 は立ち下がりで切り替わり、周波数は半分
 time: 500ms/div
 trigger: ch1 rising 1.8V at -4div

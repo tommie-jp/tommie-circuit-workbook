@@ -19,6 +19,7 @@ source: 自作
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 シュミットトリガ (CdS + ヒステリシス)
 parts:
   VP: vsource vp mid 5
@@ -73,6 +74,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上のレールは +5V (赤) と GND (青)。下の赤レールは +5V (1 列目で渡す)、下の青レールは −5V (V−)
 board: half
@@ -147,6 +149,7 @@ notes:
 | Trigger | CH1、立ち下がり、+1 V (覆い始めた直後) |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 − 入力 (CH1) を下げて上げる — 出力 (CH2) はしきい値が 2 つ
 time: 100ms/div
 trigger: ch1 falling 0.999V at -5div

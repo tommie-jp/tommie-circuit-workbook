@@ -52,6 +52,7 @@ LO 電力と G2 バイアスへの依存、入出力インピーダンス、出�
 ## 変換利得の周波数特性
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図1 変換利得の周波数特性 (RF -30 dBm、LO は RF + 455 kHz)
 x: RF 周波数 Hz 500k..1.7M
 y: 変換利得 dB -5..3
@@ -117,6 +118,7 @@ LO は RF + 455 kHz に追従させて掃引した。LO 電力が高いほど利
 ## IF の通過特性と影像応答
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図2 IF の通過特性 (LO 1.455 MHz 固定)
 x: IF 周波数 Hz 425k..485k
 y: 変換利得 dB -45..5
@@ -168,6 +170,7 @@ LO を 1.455 MHz に固定し、RF を 1.0 MHz 付近 (希望波) と 1.91 MHz �
 ## LO 電力と G2 バイアスへの依存
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 LO 電力と変換利得 (G2 1.41 V、RF 1.0 MHz)
 x: LO 電力 dBm -8..16
 y: 変換利得 dB -12..4
@@ -191,6 +194,7 @@ lines:
 LO を上げるほど利得が上がるが、+10 dBm を超えると傾きは緩む。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 G2 の直流電圧と変換利得 (LO +7 dBm)
 x: G2 の電圧 V 0.5..4.5
 y: 変換利得 dB -30..5
@@ -256,6 +260,7 @@ RF IN と LO IN は、ポートの 51 Ω (R1・R3) とゲートの高い入力�
 IF OUT の出力インピーダンスは、セラミックフィルタの通過帯域の中だけ意味がある (外は L2 と C5 の低域通過だけが見える)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図5 IF OUT の出力インピーダンス
 x: 周波数 Hz 440k..470k
 y:
@@ -387,6 +392,7 @@ RF 1.000 MHz (−30 dBm) + LO 1.455 MHz (+7 dBm) を入れたときのスペク�
 ## 入出力特性
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図6 RF 入力電力と IF 出力電力 (LO +7 dBm)
 x: RF 電力 dBm -50..0
 y: IF 出力 dBm -50..5
@@ -420,6 +426,7 @@ lines:
    R7 を外すと通過帯域の形も崩れる (下の図 7)
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図7 R7 の有無と IF の通過帯域 (LO 1.455 MHz +7 dBm)
 x: IF の周波数 Hz 435k..475k
 y: 変換利得 dB -30..10

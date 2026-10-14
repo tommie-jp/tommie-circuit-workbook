@@ -73,6 +73,7 @@ n ごとの範囲を表にすると、後ろのビットほど狭い。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2 の GP15 から UART の TXD を出し、AD3 の DIO0 で読む
 parts:
   MCU: pico2 3,6 mirror
@@ -100,6 +101,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 ブレッドボードに Pico 2 を挿し、AD3 の DIO0 と GND をつなぐ
 board: half
 parts:
@@ -290,6 +292,7 @@ skew(%)   ok  bad  lost  frame_err
 これは受け手が最大 1 クロック (13 µs) 遅れて読むぶん (1 字 160 クロックの 0.6 %) に合う。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 送り手のビットのずれと、正しく受けられた字 (256 字中)
 x: 送り手の 1 ビットのずれ % -8..8
 y: 正しく受けた字 字 0..256
@@ -448,6 +451,7 @@ verilator --binary --timing --top-module tb_rows tb_rows.v skew_top.v hello_top.
 1 ビットごとに変わる字) を 1 字送った。`SMP` は 7-2 の `sample` (線を読んだ直後に 1 クロックだけ 1)。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 ずれ +5.0 % の送り手 (0x55)。最後の読み (SMP) はストップビットの中
 device: ad3
 time: 250us/div

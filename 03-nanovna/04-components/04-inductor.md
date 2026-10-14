@@ -19,6 +19,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 直列治具にコイルを挿す
 parts:
   J1: sma 2,2 mirror CH0
@@ -38,6 +39,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -75,6 +77,7 @@ wires:
 (幅は数十 kHz)、100 kHz〜40 MHz で掃引すると R の山が 1 本の針になって形が見えない。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 35.4M-35.8M 401
 title: 図3 10 µH コイル — 35.6 MHz の SRF で X が符号を変える
@@ -94,6 +97,7 @@ notes:
 SRF より下 (100 kHz〜25 MHz) を掃引し直すと、表の 3 点が読める。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 100k-25M 401
 title: 図4 SRF より下を広げる — X は 20 MHz で 1.84 kΩ まで伸びる

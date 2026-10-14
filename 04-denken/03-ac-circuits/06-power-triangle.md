@@ -27,6 +27,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 遅れ力率の負荷 (R1 + L1)
 style:
   standard: jis
@@ -55,6 +56,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -93,6 +95,7 @@ wires:
 電流 (CH2) は数十 mV なので、CH1 と違う V/div にしてある。赤の線は Math の瞬時電力 p (単位 W)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 線電流 (CH2、20 mV/div) は 53° 遅れ、瞬時電力 (Math) の平均が P
 time: 200us/div
 trigger: ch1 rising 0V
@@ -116,6 +119,7 @@ CH1 − CH2 の引き算では 8 bit の分解能に埋もれるので、0-3 と
 (図4)。Rs は戻りの線に入っても、線路の抵抗の役はそのまま。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 汎用オシロでの測り方
 style:
   standard: jis

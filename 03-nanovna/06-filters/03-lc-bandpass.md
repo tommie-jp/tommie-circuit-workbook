@@ -35,6 +35,7 @@ f₀ = 21 MHz、Δ = 0.10、R = 50 Ω での計算値: シャント L = 37.9 nH�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 3 共振器バンドパス (シャント-直列-シャント)
 parts:
   J1: sma 2,2 mirror CH0
@@ -68,6 +69,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -122,6 +124,7 @@ wires:
 | 表示 | S21 の Log Mag (S11 は帯域の中の 2 MHz ほどでしか動かず、1〜60 MHz の掃引では針になるので出さない) |
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-60M 301
 title: 図3 バンドパスの全体 (1〜60 MHz) — 通過帯域の外を見る
@@ -144,6 +147,7 @@ markers:
 通過帯域の中を見るには、掃引を 16〜26 MHz に狭める (帯域幅の約 5 倍)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 16M-26M 201
 title: 図4 16〜26 MHz に狭めた S21 — 塗った所が −3 dB の帯域 (2.27 MHz)

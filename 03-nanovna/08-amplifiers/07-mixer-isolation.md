@@ -47,6 +47,7 @@ L-R は C = 54 fF、L-I は C = 72 fF。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 LO を CH0、RF を CH1 へ。IF は 50 Ω で終端
 parts:
   J1: sma 2,3 mirror CH0
@@ -81,6 +82,7 @@ notes:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -157,6 +159,7 @@ notes:
 **LO → RF** (図1 のつなぎ方) の見えるはずの画面 (漏れを 54 fF にした等価回路)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 3M-300M 100
 title: 図3 L-R アイソレーション — 1 けたで 20 dB 漏れが増える (54 fF の等価回路)
@@ -175,6 +178,7 @@ markers:
 **LO → IF** (CH1 を J3 へ、Load を J2 へ移す) の見えるはずの画面。設定は図3 と同じ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 3M-300M 100
 title: 図4 L-I アイソレーション — L-R より 2.5 dB 漏れやすい (72 fF の等価回路)

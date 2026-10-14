@@ -19,6 +19,7 @@ MOSFET) は、どちらもローサイドだった。同じ負荷 (LED) を今�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ローサイド (左) とハイサイド (右) の比較
 parts:
   VCC: vcc 6,2 5V
@@ -77,6 +78,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ローサイド (左) とハイサイド (右) を 1 枚のブレッドボードに組む
 board: half
 parts:
@@ -153,6 +155,7 @@ W1・W2 はどちらも Simple の Square、Frequency 100 Hz、Amplitude 2.5 V�
 目で見て確かめるときは 1 Hz にする。Scope は 1+ を IN1、2+ を Q2 のドレインにして、2 ch とも 1 V/div、2 ms/div。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 IN が H の間は D1 (ローサイド) が、L の間は D2 (ハイサイド) が点く
 time: 2ms/div
 trigger: ch1 rising 2.5V

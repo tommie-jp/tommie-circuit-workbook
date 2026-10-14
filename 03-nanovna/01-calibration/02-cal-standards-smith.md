@@ -31,6 +31,7 @@ SOLT (1-1) で使う 3 つの標準器は、Smith チャートの上でそれぞ
 **Open** — 何もつながず、先が開放。理想は Γ = 1∠0° で、Smith の**右端**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図1 Open — Smith の右端
@@ -46,6 +47,7 @@ markers:
 **Short** — 中心導体を GND に直結。理想は Γ = 1∠180° で、Smith の**左端**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図2 Short — Smith の左端
@@ -61,6 +63,7 @@ markers:
 **Load** — 50 Ω の抵抗で終端。理想は Γ = 0 で、Smith の**真ん中**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図3 Load (50 Ω) — Smith の真ん中

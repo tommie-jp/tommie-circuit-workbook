@@ -25,6 +25,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 固定バイアスで hFE を測る
 parts:
   VCC: vcc 3,1 5V
@@ -54,6 +55,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -104,6 +106,7 @@ R_C に 5 V がそのまま掛かる ([回路の本の 0-3](../../01-circuits/00
 引いた差は 4.40 V と 2.34 V で、5 V の振れの半分前後あるので 8 bit でも埋もれない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 汎用オシロでの測り方
 parts:
   VCC: vcc 3,2 5V

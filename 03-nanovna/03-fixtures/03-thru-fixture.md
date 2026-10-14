@@ -19,6 +19,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 スルー治具
 parts:
   J1: sma 2,2 mirror
@@ -40,6 +41,7 @@ notes:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -77,6 +79,7 @@ wires:
 治具だけを理想の模型 (0 Ω のスルー) で見たときの画面。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図3 治具だけの理想は平ら (実測のずれが治具の限界)

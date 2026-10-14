@@ -20,6 +20,7 @@ PIR モジュールの出力は 3.3 V なので、ロジック IC 側もツェ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 PIR+CdS(暗さ)をANDでMOSFETへ
 parts:
   VCC5: vcc 2,2 5V
@@ -116,6 +117,7 @@ style:
 作品として残すので、ブレッドボードではなくユニバーサル基板 (perfboard) に組む。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   h: 1.6mm

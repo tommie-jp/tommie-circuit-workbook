@@ -56,6 +56,7 @@ Smith はそれを「何 Ω (オーム) の抵抗と、何 Ω のコイルかコ
 **25 Ω** (Γ = −1/3、z = 0.5)。実軸の左半分、中心と左端の間の 1/3 あたり。周波数を変えても動かない (純抵抗)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 の回路 (25 Ω、12 Ω と 13 Ω の直列)
 parts:
   J1: sma 2,3 mirror
@@ -73,6 +74,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/01-map-1.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図1 25 Ω — 実軸の中心より左
 dut:
@@ -89,6 +91,7 @@ markers:
 **100 Ω** (Γ = +1/3、z = 2)。実軸の右半分。25 Ω と対称に、中心から同じ距離。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 の回路 (100 Ω)
 parts:
   J1: sma 2,3 mirror
@@ -105,6 +108,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/01-map-2.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図2 100 Ω — 実軸の中心より右
 dut:
@@ -121,6 +125,7 @@ markers:
 **8.2 µH (マイクロヘンリー) のコイル** (1 MHz で Z = +j51.5 Ω、z = +j1.03)。上半分の外周の近く。**周波数を上げると外周を時計回りに右へ**回る。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 の回路 (コイル 8.2 µH)
 parts:
   J1: sma 2,3 mirror
@@ -137,6 +142,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/01-map-3.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図3 コイル 8.2 µH — 上半分の外周
 dut:
@@ -153,6 +159,7 @@ markers:
 **3.3 nF のコンデンサ** (1 MHz で Z = −j48.2 Ω、z = −j0.96)。下半分の外周の近く。**周波数を上げると外周を時計回りに左へ**回る。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 の回路 (コンデンサ 3.3 nF)
 parts:
   J1: sma 2,3 mirror
@@ -169,6 +176,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/01-map-4.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図4 コンデンサ 3.3 nF — 下半分の外周
 dut:
@@ -189,6 +197,7 @@ markers:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図5 4 つの負荷をブレッドボードに並べる (図1 の 25 Ω を選んだ状態)
 board: half
 parts:
@@ -225,6 +234,7 @@ wires:
 線とブレッドボードの寄生は校正で差し引かれる。**測る物は、列に挿した負荷だけ**になる。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図6 校正の 3 つの標準をブレッドボードで作る (Open を取る状態)
 board: half
 parts:

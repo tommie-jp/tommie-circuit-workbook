@@ -16,6 +16,7 @@ Scope の **Measurements** (自動計測) を使う。デューティ比 30% の
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 デューティ 30% の方形波
 parts:
   W1: square 1,1 1,3 1.65
@@ -34,6 +35,7 @@ W1 は振幅 1.65 V・オフセット 1.65 V (0〜3.3 V)、デューティ 30% �
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで方形波を測る
 board: half
 parts:
@@ -60,6 +62,7 @@ wires:
 | Scope (CH1) | DC、Measurements に Vpp・Vmax・Vmin・Average・RMS・Frequency・Duty Cycle を追加 |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 デューティ 30 % の方形波は Average 0.99 V・RMS 1.81 V
 time: 200us/div
 trigger: ch1 rising 1.65V

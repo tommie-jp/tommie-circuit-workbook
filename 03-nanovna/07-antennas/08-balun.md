@@ -36,6 +36,7 @@ device: H4
 巻線のインピーダンスで止められる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 1:1 のチョーク型バランでダイポールへ
 parts:
   J1: sma 2,2 mirror CH0
@@ -66,6 +67,7 @@ CH0 と CH1 の間に入れる (3-1 の直列治具と同じ形)。2 本の巻�
 その等価回路を下に描く (R・C は損失と巻線の間の容量で、**仮定の値**)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 同相の Z を S21 で測る (等価回路)
 parts:
   J1: sma 2,2 mirror CH0
@@ -93,6 +95,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -137,6 +140,7 @@ notes:
 同相の Z を直列に入れた**見えるはずの画面** (図2 の等価回路)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 50M-250M 201
 title: 図4 同相の電流を止める力 — 144 MHz で S21 −28.9 dB (約 2.8 kΩ)

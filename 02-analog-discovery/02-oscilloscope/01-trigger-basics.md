@@ -16,6 +16,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 方形波を作って測る
 parts:
   W1: square 1,1 1,3 1.65
@@ -35,6 +36,7 @@ R1 (1 kΩ) は負荷、CH1 で読む。
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで方形波を測る
 board: half
 parts:
@@ -67,6 +69,7 @@ wires:
 立ち下がり (Falling) にすると同じ波が半周期 (250 µs) ずれて中央で下がる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Rising・1.65 V で止めると中央で立ち上がる
 time: 100us/div
 trigger: ch1 rising 1.65V
@@ -77,6 +80,7 @@ measure: [vpp, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/01-trigger-basics-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 Falling に変えると中央で立ち下がる
 time: 100us/div
 trigger: ch1 falling 1.65V

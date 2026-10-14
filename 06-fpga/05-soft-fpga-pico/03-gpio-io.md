@@ -186,6 +186,7 @@ loop 6: GP17=1 GP16=1 -> GP14=0 GP15=0
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 DIP スイッチ 2 本と LED 2 個を Pico 2 につなぐ
 parts:
   SW1: dip-switch4 4,7.02
@@ -222,6 +223,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 DIP スイッチ 2 本を GP17・GP16 に、LED 2 個を GP14・GP15 につなぐ
 board: full
 parts:
@@ -291,6 +293,7 @@ AD3 の Patterns で入力のピンに一定の速さの方形波を入れ、Log
 標本化 100 kS/s は、一番速い 100 Hz の 1000 倍。窓 40 ms は 4000 標本で、AD3 の 1 本 32 768 標本に収まる。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 入力のピンが L のビットだけ、出力のピンが H になる
 device: ad3
 time: 4ms/div

@@ -57,6 +57,7 @@ WALK --> GREEN : 5 s\nbtn_req を 0 に戻す
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 GP15・GP14・GP16 から LED を光らせ、GP0 で押しボタンを読む
 parts:
   U1: pico2 4,6 mirror
@@ -135,6 +136,7 @@ LED の電流は (3.3 V − 2.0 V) ÷ 330 Ω ≈ 4 mA (見積り。LED の順電
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図3 Pico 2 に LED 3 個と押しボタンを付け、AD3 の Logic で 4 本を測る
 board: full
 parts:
@@ -309,6 +311,7 @@ verilator --binary --timing --top-module tb_top tb_top.v traffic_top.v traffic_f
 ボタンの跳ね (チャタリング) は描いていない (6-3 で見る)。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 ボタンを押すと、黄の後の赤が 5 s (歩行者)、押さなければ 4 s
 device: ad3
 time: 3s/div

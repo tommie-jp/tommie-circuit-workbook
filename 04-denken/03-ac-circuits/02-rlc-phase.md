@@ -26,6 +26,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 DUT の電圧と電流を同時に見る (図は R のとき)
 style:
   standard: jis
@@ -55,6 +56,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -89,6 +91,7 @@ notes:
 L と C の 2 つの画面。電流 (CH2) は mV の桁なので、CH1 と違う V/div で大きく見せている。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 L — 電流 (CH2、5 mV/div) が電圧 (CH1) より 90° 遅れる
 time: 200us/div
 trigger: ch1 rising 0V
@@ -100,6 +103,7 @@ measure: [vmax, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/02-rlc-phase-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 C — 電流 (CH2、2 mV/div) が電圧 (CH1) より 90° 進む
 time: 200us/div
 trigger: ch1 rising 0V
@@ -118,6 +122,7 @@ AD の CH2 は Rs の両端を差動で挟むが、汎用オシロのグラン�
 CH1 − CH2 の引き算では 8 bit の分解能に埋もれるので、0-3 の図3 と同じく **Rs を GND 側へ移す** (図5)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図5 汎用オシロでの測り方
 style:
   standard: jis

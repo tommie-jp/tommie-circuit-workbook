@@ -19,6 +19,7 @@ LED はさらに、色によって**順方向電圧 (V<sub>F</sub>、1-1)** が�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 色の違う LED と逆向きの LED
 parts:
   V1: vsource 2,1 2,5 5
@@ -56,6 +57,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 色の違う LED と逆向きの LED
 # 上の + レール = +5V、上の − レール = GND (下のレールは使わない)
 board: half

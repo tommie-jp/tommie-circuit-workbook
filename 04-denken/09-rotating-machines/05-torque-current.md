@@ -31,6 +31,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 モータ M1 で発電機 M2 を回し、RL で負荷を掛ける
 style:
   standard: jis
@@ -68,6 +69,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (2 台のモータの軸は継手でつなぐ)
 # 上の赤レール = 電池の + (4.5 V)、青レール = GND
 board: half
@@ -165,6 +167,7 @@ T は発電機に掛かるブレーキのトルク (= Kt × I2)。
 - 実物では継手の損失と、2 台の摩擦の違いで、I1 − I0 が I2 より少し大きく出る
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 負荷のトルクに比例して電流が増え、回転数は少し下がる
 x: トルク mN·m 0..1
 y:

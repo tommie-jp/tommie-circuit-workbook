@@ -222,6 +222,7 @@ soft-fpga の設計メモ (`docs/90-rtlscope-OBSERVEマクロ設計メモ.md`) �
 4-3・4-4 と同じく、1 クロックを 1 ms と置いた仮の目盛。`clk_cnt` は 16 ビットだが、値は 0〜15 なので下位 4 ビット (`C3`〜`C0`) だけを描く。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図1 tx_cnt が 15 から 0 へ 16 クロックで数え下がり、1 ビットの長さを作る
 device: generic
 window: 20ms

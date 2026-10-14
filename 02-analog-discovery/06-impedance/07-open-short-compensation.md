@@ -21,6 +21,7 @@ board: BB
 DUT の位置 (2+/2− の手前) だけを 3 通りに変える。回路そのものは 6-1 と同じ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 DUT の位置を Open・Short・実測の 3 通りに
 parts:
   AD:
@@ -54,6 +55,7 @@ wires:
 10 kΩ の抵抗、の 3 通りに差し替える。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -98,6 +100,7 @@ CH1 は 50.5 µA × 10 kΩ = 0.505 V、CH2 は 50.5 µA × 9.88 kΩ = 0.498 V。
 CH2 が CH1 より約 9° 遅れるぶんが、Open で測った寄生容量の効き。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 補償前は CH2 が CH1 より 8.9° 遅れる
 time: 500ns/div
 trigger: ch1 rising 0V
@@ -124,6 +127,7 @@ measure: [vpp, phase]
 同じ計算を周波数に対して並べると、補償の効きが周波数とともに大きくなるのが分かる (図4)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 補償前は 1 MHz で −8.9°・9.88 kΩ にずれ、補償後は 10 kΩ・0° に戻る
 x: 周波数 Hz log 10k..10M
 y:

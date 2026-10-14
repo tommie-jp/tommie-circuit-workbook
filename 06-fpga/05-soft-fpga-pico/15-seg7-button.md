@@ -135,6 +135,7 @@ verilator --cc --no-timing --no-trace -Wall --prefix Vseg_counter --Mdir v_seg_c
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 Pico 2 の GPIO から 7 セグメントと押しボタン、AD3 へ
 parts:
   U1: pico2 12,6
@@ -251,6 +252,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 Pico 2 の右に 7 セグメントと抵抗 7 本、左に押しボタン、上に AD3 の Logic
 board: full
 parts:
@@ -405,6 +407,7 @@ AD3 の Logic で、押しボタンの電圧 (DIO0) と `count` の 4 ビット 
 図4 は、**押し 2 回** を見たもの。1 回目はきれいに押せた場合、2 回目はボタンが 1 度跳ねた場合。時間の目盛は仮 (跳ねの幅は例)。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 1 回目の押しは 1 つ進み、跳ねた 2 回目の押しは 2 つ進む (跳ねの形は例。測った波形ではない)
 device: ad3
 time: 3ms/div

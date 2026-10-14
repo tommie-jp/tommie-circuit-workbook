@@ -37,6 +37,7 @@ device: WEB
 レーンの名前は Q0〜Q7 (soft-fpga の画面では `b0`〜`b7`)。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図1 count が 8 になる所は Q0・Q1・Q2 が一斉に下がり Q3 が上がる
 device: generic
 window: 20ms

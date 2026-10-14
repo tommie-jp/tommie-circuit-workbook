@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ツェナーダイオードの定電圧回路
 parts:
   V1: triangle 1,2 1,4 3 l=$\mathrm{W1}$
@@ -59,6 +60,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -111,6 +113,7 @@ wires:
 出力 (CH2) は 3.21 V・3.33 V と読める (表の値。V_Z0 = 3.1 V、r_Z = 30 Ω の仮定)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 入力 (CH1) が 4 → 5 V のとき、出力 (CH2) は 3.21 → 3.33 V
 time: 10ms/div
 trigger: ch1 rising 2V
@@ -159,6 +162,7 @@ measure: [vmax, vmin]
   3.1 V × 1220 ÷ 1000 = 3.78 V を越えてから (それより下では R1 と R_L の分圧)
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 入出力の関係 (計算) — 3.1 V を越えると出力が頭打ちになる
 x: 入力 V -1..5
 y: 出力 V -1..4

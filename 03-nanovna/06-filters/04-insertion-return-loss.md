@@ -31,6 +31,7 @@ Q = 60 のコイル (330 nH・560 nH) の ESR は、周波数ごとに **ESR = 2
 コイルに Q = 60 の損失があるとみなす (回路図では理想の記号のまま、値だけ同じ)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 7 次 LC ローパス (コイルに Q 60 を仮定)
 parts:
   J1: sma 2,2 mirror CH0
@@ -64,6 +65,7 @@ wires:
 6-1 と同じ治具 (端面 SMA 2 つの perfboard)。C2・C3 (200 pF) は 100 pF 2 個の並列 (C2a・C2b、C3a・C3b)。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 34x10
   slots: on
@@ -126,6 +128,7 @@ wires:
 コイルに ESR (Q = 60) を入れた**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-35M 151
 title: 図3 通過帯域の S21・S11 (コイル Q 60) — 端に近いほど S11 が上がる

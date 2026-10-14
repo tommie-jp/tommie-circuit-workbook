@@ -68,6 +68,7 @@ PC の上の 1 周の時間は Pico 2 とは違うので、ここでは周回の
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 GP14 から 330 Ω と LED を通して GND へ
 parts:
   MCU: pico2 9,3 mirror
@@ -92,6 +93,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 GP14 の LED を AD3 の Logic (DIO0) で見る
 board: full
 parts:
@@ -132,6 +134,7 @@ wires:
 5 s の窓は 25 000 標本で、AD3 の 1 本 32 768 標本に収まる。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 仮の値どおりなら (1 クロック 10 µs) GP14 は 1 Hz で点滅する
 device: ad3
 time: 500ms/div

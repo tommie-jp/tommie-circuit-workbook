@@ -126,6 +126,7 @@ endmodule
 1 クロックを 1 ms と置いて、最初の 20 クロックを `logic` のフェンスで描く。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図1 4 クロックごとに led が反転し、tick は led が変わる 1 クロック前に立つ
 device: generic
 window: 20ms

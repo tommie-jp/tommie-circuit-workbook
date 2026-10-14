@@ -209,6 +209,7 @@ VCD を読んで、ロジックアナライザの画面と同じ形に描いた�
 IN はクロックと無関係に変わる入力、Q1 は 1 段目、Q は 2 段目の出力。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 Q は Q1 のちょうど 1 クロック後。700 ns と 800 ns のパルスは取りこぼされた
 device: generic
 time: 120ns/div
@@ -268,6 +269,7 @@ gowin_pack -d GW1N-9C -o t.fs p.json
 DIO0・DIO1 は Logic の入力で、IO38・IO37 を読む。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 DIO2 を IO36 へ。DIO0 は 2 段目、DIO1 は 1 段目を読む
 parts:
   AD:
@@ -307,6 +309,7 @@ AD3 の DIO は **3.3 V** にそろえる (0-4)。
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図4 配線は 8-3 のまま、DIO2 (j3) を足す。IO36 は下の列の 3 番ピン
 board: half
 parts:
@@ -351,6 +354,7 @@ notes:
 **図の値はシミュレーションの位相の例で、実測ではない。**
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図5 DIO2 の立ち上がりを 0 に。DIO1 は 32 ns、DIO0 は 72 ns の標本で 1
 device: ad3
 time: 20ns/div

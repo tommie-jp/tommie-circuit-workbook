@@ -21,6 +21,7 @@ era: 今
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 降圧 DC-DC モジュール
 parts:
   V1: vsource vin gnd 12
@@ -67,6 +68,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 モジュールの出力 5 V にブレッドボードの負荷をつなぐ
 # 上の赤レール = +5V (モジュールの出力)、青レール = GND。12 V はレールに入れず、アダプタからモジュールへ直接つなぐ
 board: half
@@ -130,6 +132,7 @@ notes:
 | Trigger | CH1、立ち上がり、0 V |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 出力のリップル (AC 結合) — 50 kHz・約 50 mVpp と仮定した目安
 time: 10us/div
 trigger: ch1 rising 0V

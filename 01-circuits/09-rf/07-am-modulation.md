@@ -32,6 +32,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 555の電源に音声を混ぜてAM変調する
 parts:
   V1: sine 2,3 2,5 0.5
@@ -149,6 +150,7 @@ PIN 8 の直流 (約 4.4〜4.5 V) は TLC555 の貫通電流など実物の値�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: half
 parts:
@@ -243,6 +245,7 @@ wires:
 ### オシロスコープのつなぎ方
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 オシロスコープをつなぐ (PIN 3 と ANT を見るとき)
 board: half
 parts:
@@ -303,6 +306,7 @@ notes:
 ### スペアナのつなぎ方
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 スペアナをつなぐ (10 kΩ と 0.01 µF を通す)
 board: half
 parts:
@@ -381,6 +385,7 @@ notes:
 信号は **音声 → PIN 8 → PIN 3 (搬送波) → ANT** の順に流れる。まず V1 を外し、搬送波と ANT を見る。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 無変調の搬送波 — PIN 3 (CH1) と ANT (CH2)
 time: 0.5us/div
 trigger: ch1 rising 2.2V
@@ -400,6 +405,7 @@ measure: [vpp, vmax, vmin, freq, duty]
 次に V1 を 1 kHz・0.5 V にして、音声が PIN 8 に届くまでを見る。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図6 音声の通り道 — 発生器の端子 (CH1) と PIN 8 (CH2、AC結合)
 time: 200us/div
 trigger: ch1 rising 0V
@@ -422,6 +428,7 @@ measure: [vpp, freq, phase]
 包絡線の山と谷で 0.5 µs/div に広げて見比べると、AM の要点が分かる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図7 PIN 3 の搬送波 — 包絡線の山 (CH1) と谷 (CH2) を重ねる
 time: 0.5us/div
 trigger: ch1 rising 2V
@@ -452,6 +459,7 @@ measure: [vmax, freq, period]
 入力に届くのは、PIN 3 の方形波 (±2.2 V) の約 1/200 (50 Ω ÷ 10 kΩ)、peak 約 10.9 mV の方形波。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図8 無変調の高調波 (100 kHz〜4 MHz)
 device: tinysa-ultra
 sweep: 100k-4M 450
@@ -469,6 +477,7 @@ markers: [686k, 1372k, 2058k, 3430k]
 - 2 次 (1372 kHz) は AM 放送帯の中。ラジオでも弱く受かる
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図9 1 kHz・0.5 V で変調した側波 (中心 686 kHz・スパン 10 kHz)
 device: tinysa-ultra
 center: 686kHz

@@ -29,6 +29,7 @@ Logic は DIO のピンの高低 (H・L) を時間順に記録して、波形と
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2 の GP14・GP15 を AD3 の DIO0・DIO1 で読む
 parts:
   AD:
@@ -53,6 +54,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに Pico 2 を挿し、AD3 の DIO0・DIO1・GND をつなぐ
 board: half
 parts:
@@ -143,6 +145,7 @@ while True:
 1 ms ごとに値が 0 → 1 → 2 → 3 → 0 と進む。bit0 は 1 ms ごとに反転、bit1 は 2 ms ごとに反転する。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 0 → 1 → 2 → 3 と数える。bit0 の周期は 2 ms
 device: ad3
 time: 1ms/div

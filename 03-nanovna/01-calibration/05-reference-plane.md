@@ -18,6 +18,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 30 cm のケーブルの先の Open
 parts:
   M1:
@@ -54,6 +55,7 @@ notes:
 Open は理想どおり位相 0°。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 50M-150M 101
 title: 図2 基準面がコネクタのときの Open は位相 0° (右端)
@@ -72,6 +74,7 @@ notes:
 **同じ Open を、30 cm のケーブルの先に置いた場合** (基準面を動かさずに測ると)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 50M-150M 101
 title: 図3 30 cm 先の Open — 基準面を動かさないと −109° 回る

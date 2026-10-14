@@ -19,6 +19,7 @@ H の時間の長さが距離に比例するので、時間を測れば距離が
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 HC-SR04 の ECHO を 3.3V 系に合わせて落とす
 parts:
   M1:
@@ -59,6 +60,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 HC-SR04 と分圧を組む (W1 が TRIG、1+ が分圧後の ECHO)
 board: half
 parts:
@@ -112,6 +114,7 @@ wires:
 W1 は Simple の Pulse、Amplitude 2.5 V、Offset 2.5 V (0〜5 V)、幅 10 µs 以上、周期 60 ms 以上。Scope は 1+ を分圧後の ECHO (14 列)、1− を GND に当て、Time base 1 ms/div、Range 1 V/div、トリガは 1+ の立ち上がり 1.5 V にする。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 分圧後の ECHO の H の幅 (物までの距離が 100 cm のとき)
 time: 1ms/div
 trigger: ch1 rising 1.5V at -2div

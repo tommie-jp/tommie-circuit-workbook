@@ -96,6 +96,7 @@ ppm と 1 日のずれ (計算値):
 図1・図2 は 5-5 と同じ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2 に LED 4 個・DIP スイッチ・AD3 の Logic をつなぐ
 parts:
   U1: pico2 8,8 mirror
@@ -164,6 +165,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 Pico 2 の左に LED、右に DIP スイッチ、上に AD3 の Logic
 board: full
 parts:
@@ -243,6 +245,7 @@ CSV からは、5-10 の `jitter.py` が、立ち上がりの間隔の最小・�
 図3 は、`led` の 1 Hz。0.5 s ずつ H と L が続く。ΔX は 4 周期 (4 s)。ずれは 0 と置いて描いた (設計値)。実機では、ΔX が 4.000 s からわずかにずれる。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 blink の led は 1 Hz。4 周期 (4 s) を X1 と X2 で挟む
 device: ad3
 time: 500ms/div

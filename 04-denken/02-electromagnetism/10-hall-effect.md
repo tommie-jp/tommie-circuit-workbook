@@ -29,6 +29,7 @@ B を測る計器になる。ここでは、ホール素子に増幅器を組み
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ホール IC (左) とコイルの電流 (右)
 style:
   standard: jis
@@ -81,6 +82,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -179,6 +181,7 @@ notes:
 出力の変化はコイルの電流に比例する (図3)。1 mA あたり 0.323 mV。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 ホール IC の出力の変化はコイルの電流に比例する
 x: コイルの電流 mA -300..300
 y: 出力の変化 mV -100..100

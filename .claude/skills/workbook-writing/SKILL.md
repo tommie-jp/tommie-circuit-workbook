@@ -36,6 +36,9 @@ description: tommie-circuit-workbook の題 (1 題 1 ファイル) を新しく�
 4. **数式と数値は確かめる**。LTspice (または ngspice) で解析し、表の値と突き合わせる。確かめていない値は「見積り」と書く
 5. 図は tommie-fence スキルと readable-schematic・breadboard-wiring・instrument-screen の点検表を通す。
    `npm run render` で出した SVG を PNG にして目で見る (check はつながりしか見ない)
+   フェンスの閉じの下の画像の行と、フェンスの 1 行目の名札のコメント
+   (`# 回路図 (tommie-fence の circuit フェンス)`) は `npm run figures` が書く。**手で書かない・直さない**
+   (フェンスを足した・動かしたら `npm run figures`。`check` が古さを言う)
 6. 実体配線図・AD3・scope を入れない題は、理由を題に 1 行 (理由になることは README の「書き方」の表)
 7. `npm run toc` で目次を直し、`npm run all` を通す。コミットは conventional commits (`docs:`)
 

@@ -18,6 +18,7 @@ AM ラジオのフェライトバーアンテナは、フェライト棒に巻�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 基準抵抗とバーアンテナのコイル
 parts:
   AD:
@@ -48,6 +49,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -96,6 +98,7 @@ AM 放送帯 (526.5 kHz〜1606.5 kHz、日本) より下の 100 kHz で測る。
 計算値 (下の表) どおりのオシロの画面。CH2 は CH1 より約 90° **進む** (コイルの電圧は電流より進むため。コンデンサの 6-2 とは逆)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 CH2 (コイルの電圧) は CH1 (電流) より 89.4° 進む
 time: 5us/div
 trigger: ch1 rising 0V

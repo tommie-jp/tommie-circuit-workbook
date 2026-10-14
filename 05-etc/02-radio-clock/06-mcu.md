@@ -90,6 +90,7 @@ AM 検波の出力 ([02-radio.md](02-radio.md) の OUT) を、AC 結合で直流
 コンデンサ 1 つのローパス (約 3 kHz) を通して Pico 2 の ADC0 (GP26) に入れる。電源は Pico 2 の 3V3 ピンから取る。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ADC の前処理 (AC 結合、1.65 V のバイアス、約 3 kHz のローパス)
 parts:
   IN: port 2,3
@@ -150,6 +151,7 @@ Ra と Rb は同じ 220 kΩ なので、節点の直流は 3.3 V の半分の 1.
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 Pico 2 と ADC の前処理のブレッドボード
 board: full
 parts:
@@ -179,6 +181,7 @@ notes:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/06-mcu.svg)
 
 ```perf
+# ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
 title: 図2b Pico 2 と ADC の前処理のユニバーサル基板
 board:
   size: 7x5cm
@@ -270,6 +273,7 @@ notes:
 ### 前処理の周波数特性
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 ADC の前処理の周波数特性 (計算)
 x: 周波数 Hz log 10..10k
 y: 利得 dB -40..0
@@ -286,6 +290,7 @@ notes:
 ### ADC 入力の波形
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 ADC 入力の最大の振れ (0〜3.3 V に収まる限度)
 time: 1ms/div
 trigger: ch1 rising 1.65V
@@ -297,6 +302,7 @@ cursors: [0, 568us]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/06-mcu-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 予報音 440 Hz の 0.1 秒のバースト (ADC 入力の交流分)
 time: 20ms/div
 trigger: ch1 rising 0V
@@ -314,6 +320,7 @@ Pico 2 の 8 kHz・512 点とは合わない (8 kHz にするには掃引の終�
 **実測ではなく、理想の正弦波から計算した値**で、−60 dB より低い所は −60 dB に切った。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図6 FFT 512 点の結果 (8 kHz、Hann 窓、計算)
 x: 周波数 Hz 300..1000
 y: 強さ dB -60..0

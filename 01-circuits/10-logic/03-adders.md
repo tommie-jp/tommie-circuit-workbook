@@ -23,6 +23,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 半加算器を全加算器に拡張する
 parts:
   A: switch 3,4 3,6
@@ -112,6 +113,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: full
 parts:

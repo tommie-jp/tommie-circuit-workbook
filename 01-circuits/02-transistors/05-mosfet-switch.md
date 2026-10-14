@@ -24,6 +24,7 @@ MOSFET はゲートに電圧をかけるだけでオン・オフするスイッ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 2N7000 でスイッチする (CH2 でゲート、CH1 でドレインを見る)
 parts:
   VCC: vcc 4,2 5V
@@ -71,6 +72,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 2N7000 でスイッチする
 # 5V は AD の V+ から上の + レールへ、GND は上の − レール (下のレールは使わない)
 board: half
@@ -123,6 +125,7 @@ CH2 (ゲート) の立ち上がり 2.5 V でトリガを掛け (Normal)、SW を
 V<sub>GS</sub> がしきい値を越えたところでドレインが落ちる (図3)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 SW を押した瞬間 — ゲート (CH2) が上がるとドレイン (CH1) が落ちる
 time: 20ns/div
 trigger: ch2 rising 2.5V

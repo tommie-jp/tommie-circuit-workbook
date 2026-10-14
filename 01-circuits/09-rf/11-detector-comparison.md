@@ -46,6 +46,7 @@ V<sub>T</sub> = 25.85 mV は室温の熱電圧 (kT/q)。歪み率 (THD) は、�
 ### ダイオード検波
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ダイオード検波 (W1 の AM を D1 で検波し、CH2 と CH1 で比べる)
 parts:
   W1: sine 2,3 2,5 l=$\mathrm{W1}$
@@ -81,6 +82,7 @@ style:
 ### トランジスタ検波
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 トランジスタ検波 (ベースで検波し、コレクタで増幅して取り出す)
 parts:
   VCC: vcc 5,1 5V
@@ -140,6 +142,7 @@ style:
 2 つの検波器を別々に組む。AD の W1 と CH1・CH2 は、測る回路へ付け替える。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 ダイオード検波を組む (W1 と CH2 を 5 列、CH1 を 10 列へ)
 board: half
 parts:
@@ -171,6 +174,7 @@ wires:
 - AD の GND・2−・1− (黒) も上の − レールへ。この回路は電源を使わない
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 トランジスタ検波を組む (W1 と CH2 を 5 列、CH1 を 20 列へ)
 board: half
 parts:
@@ -243,6 +247,7 @@ Analog Discovery だけを使う。搬送波は 100 kHz、音は 1 kHz で、ど
 ### 弱い入力 (搬送波 20 mV)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 ダイオード検波・弱い入力 — 出力は 1mVpp に届かない
 time: 200us/div
 trigger: ch1 rising 0.46mV
@@ -254,6 +259,7 @@ measure: [vpp, avg, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/11-detector-comparison-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図6 トランジスタ検波・弱い入力 — 同じ入力で約 0.66Vpp、反転して出る
 time: 200us/div
 trigger: ch1 rising 2.91V
@@ -267,6 +273,7 @@ measure: [vpp, avg]
 ### 強い入力 (搬送波 1 V)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図7 ダイオード検波・強い入力 — 包絡線をなぞる
 time: 200us/div
 trigger: ch1 rising 0.76V
@@ -278,6 +285,7 @@ measure: [vpp, avg, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/11-detector-comparison-3.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図8 トランジスタ検波・強い入力 — 0.6V と 5V の間で振り切れる
 time: 200us/div
 trigger: ch1 falling 2.8V

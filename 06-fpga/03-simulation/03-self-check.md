@@ -167,6 +167,7 @@ FAIL: 24 クロックで不一致 13 件
 カーソルは、クロック 11 の立ち上がり (図の 3.0 ms) の high の真ん中に置いた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 数え方を間違えた counter4 の q と期待値 exp (計算の図。クロック 8〜14)
 device: generic
 window: 7ms

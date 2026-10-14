@@ -22,6 +22,7 @@ USB の 5 V や電池 1 本など**単電源**しか無いことが多い。交�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 単電源 + 仮想GND (LM358 の片方を仮想GND、もう片方を増幅に使う)
 parts:
   V1: vsource vcc gnd 5
@@ -81,6 +82,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上のレールは +5V (赤) と GND (青)。下のレールも赤 +5V・青 GND (左の 1 列と 4 列の線で渡す)
 board: half
@@ -152,6 +154,7 @@ W1 は 1 kHz・振幅 0.3 V の正弦波 (オフセット 0 V。GND 基準)、Sc
 | Trigger | CH2、立ち上がり、2.5 V |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 入力 (CH1) は 0 V が中心、出力 (CH2) は 2.5 V が中心で ±0.6 V
 time: 200us/div
 trigger: ch2 rising 2.5V

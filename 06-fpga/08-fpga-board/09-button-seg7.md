@@ -252,6 +252,7 @@ gowin_pack -d GW1N-9C -o top.fs pnr.json
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 FPGA の 7 本のピンから抵抗を通して 7 セグを光らせる。押しボタンは IO25 と GND の間
 parts:
   U1: tang-nano-9k 6,6
@@ -364,6 +365,7 @@ wires:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図3 7 セグと抵抗を 1 枚のブレッドボードに組む。電源は USB-C から Tang Nano 9K へ
 board: full
 parts:
@@ -441,6 +443,7 @@ notes:
 ## Logic に見えるはずの画面
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 ボタンを押すと 20 ms 後に 0 の形 (0111111) から 1 の形 (0000110) へ変わる
 device: ad3
 time: 5ms/div

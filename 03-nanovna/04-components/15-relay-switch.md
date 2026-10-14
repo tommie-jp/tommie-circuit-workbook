@@ -23,6 +23,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 リレーの接点 (コイルは使わない)
 parts:
   J1: sma 2,5 mirror CH0
@@ -50,6 +51,7 @@ notes:
 G5V-2 は実物を上から見て、切り欠きを左に置いた並びで描く。ピンの名前は胴の外に出る。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -81,6 +83,7 @@ wires:
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/15-relay-switch-1.svg)
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -128,6 +131,7 @@ wires:
 **1. 閉じた接点** — 見えるはずの画面。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 201
 title: 図4 閉じた接点 (15 nH) — 300 MHz で S11 が −11.3 dB まで上がる
@@ -148,6 +152,7 @@ markers:
 0 dB の線から離れないので、漏れの S21 だけを出す。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 201
 title: 図5 開いた接点 (1 pF) — 周波数が上がるほど漏れる

@@ -26,6 +26,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 方形波を 2 種類のテスターで読む
 style:
   standard: jis
@@ -56,6 +57,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -118,6 +120,7 @@ AD3 の Scope で、R1 の両端の波形 (CH1) と、それを全波整流し�
 | Measurements | CH1: RMS・DC (平均)。Math: DC (平均) |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 方形波 (CH1) とその整流 (M) — 整流平均は 1 V、実効値も 1 V
 time: 500us/div
 ch1: {wave: square 1kHz 1V duty 50% offset 0V, range: 500mV/div, position: 0div}

@@ -19,6 +19,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 直列治具に 1 cm の裸銅線
 parts:
   J1: sma 2,2 mirror CH0
@@ -42,6 +43,7 @@ notes:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -83,6 +85,7 @@ i6〜i9 (3 穴ぶん、2.54 mm 間隔で約 0.76 cm) を裸銅線でまたぐ。
 見えるはずの画面 (理想の模型)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 10M-1500M 301
 title: 図3 1 cm の裸銅線 (L ≈ 7 nH) の X は周波数に比例する

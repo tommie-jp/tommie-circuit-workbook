@@ -16,6 +16,7 @@ source: 自作
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 74HC283で4bit同士を足す
 parts:
   U1: ic 14,10 CD74HC283
@@ -123,6 +124,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (U1 は 74HC283。入力は AD3 の DIO0〜7、出力は DIO8〜12 で読む)
 board: full
 parts:
@@ -198,6 +200,7 @@ wires:
 | カーソル | X1 = 0.25 秒 (5 + 3)、X2 = 1.25 秒 (9 + 9) |
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 5+3、9+1、9+9 を順に足す — Σ は 8、10、2 で、9+9 のときだけ C4 が 1 (計算)
 device: ad3
 time: 150ms/div

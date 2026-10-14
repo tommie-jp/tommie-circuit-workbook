@@ -20,6 +20,7 @@ FFT やネットワークアナライザで振幅が計算と合わなくなる�
 W1 を 1+ に直結するだけの**ループバック**。ブレッドボードに部品は載せない (配線は図2)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック (W1 を 1+ に直結)
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -40,6 +41,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
 board: half
 parts:
@@ -73,6 +75,7 @@ DC だけは Amplitude が効かず、Offset の値がそのまま出力にな�
 Sine と Ramp Up を同じ設定で読むと、形は違っても最大・最小・平均は同じ所に出る。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Sine は +2.5 V と −1.5 V の間を振れ、平均は Offset の 0.5 V
 time: 200us/div
 trigger: ch1 rising 0.5V
@@ -83,6 +86,7 @@ measure: [vmax, vmin, vpp, avg]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/01-basic-waveforms-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 Ramp Up でも最大・最小・平均は Sine と同じ
 time: 200us/div
 trigger: ch1 rising 0.5V

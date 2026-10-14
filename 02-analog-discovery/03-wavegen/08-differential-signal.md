@@ -17,6 +17,7 @@ Wavegen の W1・W2 は独立にも、**同期して逆位相**にもできる�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 W1・W2 を差動と片側で読む
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -40,6 +41,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで W1・W2 を差動と片側で読む
 board: half
 parts:
@@ -71,6 +73,7 @@ W1 (7 列)・W2 (15 列) をそれぞれ引き出し、`1+`/`1-` をこの 2 本
 | Scope | CH1 (差動): DC 結合、Range 1 V/div。CH2 (片側): DC 結合、Range 1 V/div (CH1 とそろえて 2 倍の差を見る) |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 差動の CH1 は片側の CH2 の 2 倍 (同じ 1 V/div)
 time: 200us/div
 trigger: ch2 rising 0V

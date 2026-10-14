@@ -232,6 +232,7 @@ VCD の変化の時刻から作った図で、実機で測った波形ではな�
 カーソル X1 (110 ns) は 9 のとき、X2 (120 ns) は **見張りが鳴った谷** で、`q` は 10 だった。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 9 の次が 10 になる (間違い 1)。120 ns の谷で assert が鳴る
 device: generic
 time: 15ns/div

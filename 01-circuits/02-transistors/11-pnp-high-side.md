@@ -22,6 +22,7 @@ PNP は「エミッタよりベースを下げる」と導通する。ロジッ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 PNP ハイサイドスイッチ (W1 で入れ、CH2 で入力、CH1 でコレクタを見る)
 parts:
   VCC: vcc 4,2 5V
@@ -89,6 +90,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 PNP ハイサイドスイッチ (W1 と CH2 を入力へ、CH1 をコレクタへ)
 # 上の + レール = +5V (AD の V+)、上の − レール = GND (下のレールは使わない)
 board: half
@@ -142,6 +144,7 @@ W1 を 100 Hz・0 V / 5 V の方形波にし (目には半分の明るさで点�
 CH2 (入力) と CH1 (Q1 のコレクタ) を同じ 1 V/div で重ねる (図3)。トリガは CH2 の立ち上がり 2.5 V (Normal)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 入力 (CH2) とコレクタ (CH1) — 入力が 5 V の間だけコレクタが 4.8 V に上がる
 time: 2ms/div
 trigger: ch2 rising 2.5V

@@ -21,6 +21,7 @@ source: 自作
 クリッパ (振幅を ±0.7 V あたりで削る)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ダイオードクリッパ (W1 で入れ、CH2 と CH1 で比べる)
 parts:
   W1: square 2,1 2,3 l=$\mathrm{W1}$
@@ -50,6 +51,7 @@ style:
 クランパ (波形全体を上へずらす)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 ダイオードクランパ (W1 で入れ、CH2 と CH1 で比べる)
 parts:
   W1: square 2,1 2,3 l=$\mathrm{W1}$
@@ -82,6 +84,7 @@ Analog Discovery (AD) の W1 から ±5 V・1 kHz の方形波を入れ、CH2 (2
 CH1 (1+) で出力を見る (図3・図4)。1−・2−・GND は上の − レールへ。直流の電源は要らない。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 クリッパの実体配線図 (W1 と CH2 を入力へ、CH1 を出力へ)
 board: half
 parts:
@@ -108,6 +111,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/breadboard/09-diode-clipper-clamper-1.svg)
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 クランパの実体配線図 (W1 と CH2 を入力へ、CH1 を出力へ)
 board: half
 parts:
@@ -190,6 +194,7 @@ W1 (か発振器) で ±5 V、1 kHz の方形波を入れ、オシロスコー�
 CH1 (出力) と CH2 (入力) を同じ 2 V/div で重ねる (DC 結合)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 クリッパの出力 (CH1) と入力 (CH2) — 出力は ±0.7 V で頭打ち
 time: 200us/div
 trigger: ch2 rising 0V
@@ -201,6 +206,7 @@ measure: [vmax, vmin, vpp, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/scope/09-diode-clipper-clamper-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図6 クランパの出力 (CH1) と入力 (CH2) — 形はそのまま +4.3 V 持ち上がる
 time: 200us/div
 trigger: ch2 rising 0V

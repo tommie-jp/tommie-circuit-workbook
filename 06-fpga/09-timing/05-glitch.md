@@ -251,6 +251,7 @@ D2・D45 は、a を 2 ns・45 ns 遅らせたもの。Y2・Y45 は `a ^ D`。YR
 YZ は遅れ無しの `glitch.v` の出力。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 a が変わるたびに Y2 は 2 ns、Y45 は 45 ns のパルス。FF が拾うのは Y45 だけ
 device: generic
 time: 12ns/div
@@ -312,6 +313,7 @@ gowin_pack -d GW1N-9C -o g.fs pg.json
 AD3 の DIO0・DIO1・DIO2 を Logic の入力にして、IO38 (`a_out`)・IO37 (`y_raw`)・IO36 (`y_reg`) を読む。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 DIO0・DIO1・DIO2 で a_out・y_raw・y_reg を読む
 parts:
   AD:
@@ -351,6 +353,7 @@ AD3 の DIO は **3.3 V** にそろえる (0-4)。
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図4 配線は 8-3 のまま、DIO2 (j3) を足す。IO38・IO37・IO36 を DIO0〜DIO2 へ
 board: half
 parts:
@@ -392,6 +395,7 @@ notes:
 8 ns より細ければ、Logic の画面には出ないか、1 標本だけ現れる。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図5 仮の例 (幅 24 ns)。y_raw は a_out の変わり目に細いパルス。y_reg は 0 のまま
 device: ad3
 time: 100ns/div

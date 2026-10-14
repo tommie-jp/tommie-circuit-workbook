@@ -54,6 +54,7 @@ skinparam defaultFontName "Noto Sans CJK JP"
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 GP0 で押しボタンを読み、GP15・GP14・GP16 の LED で結果を見せる
 parts:
   U1: pico2 4,6 mirror
@@ -129,6 +130,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 6-2 と同じブレッドボード。AD3 の DIO3 でボタンの跳ねを見る
 board: full
 parts:
@@ -388,6 +390,7 @@ PASS
 実物の跳ねの回数と長さはボタンごとに違う。D1〜D3 の時刻は、この跳ねを入れたシミュレーションの値。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 跳ねると D1 は 2 回反転して元に戻り、D2 は約 25 ms 後に 1 回だけ変わる (跳ねは例)
 device: ad3
 time: 5ms/div

@@ -18,6 +18,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック配線 (0-3 と同じ)
 parts:
   W1: sine 1,1 1,3 1
@@ -33,6 +34,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
 board: half
 parts:
@@ -60,6 +62,7 @@ W1 と 1+ は同じ 5 列に挿し、GND と 1− は上の − レールにま�
 | Scope (CH1) | DC、Sample Rate を **1.2 MS/s** に指定する |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 1.205 MS/s で取ると 1 MHz が 205 kHz に見える (エイリアス)
 time: 2us/div
 trigger: ch1 rising 0V
@@ -70,6 +73,7 @@ measure: [vpp, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/16-sampling-alias-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 10 MS/s に戻すと正しく 1 MHz
 time: 200ns/div
 trigger: ch1 rising 0V

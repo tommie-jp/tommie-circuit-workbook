@@ -36,6 +36,7 @@ device: PICO
 図1・図2 は 5-5 と同じ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2 に LED 4 個・DIP スイッチ・AD3 の Logic をつなぐ
 parts:
   U1: pico2 8,8 mirror
@@ -102,6 +103,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 Pico 2 の左に LED、右に DIP スイッチ、上に AD3 の Logic
 board: full
 parts:
@@ -221,6 +223,7 @@ int main() {
 図3 と図4 の周期は、プログラムで決めた設計値 (1 kHz と 1 Hz) で描いた。BUSY の幅は測っていないので描いていない。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 タイマで回すと CLK は 1 kHz に決まる
 device: ad3
 time: 500us/div
@@ -235,6 +238,7 @@ trigger: CLK rising at 0s
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/05-soft-fpga-pico/logic/07-clock-timer-1.svg)
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 2-7 の blink (CLK_HZ = 1000) は 1 Hz で点滅する
 device: ad3
 time: 500ms/div

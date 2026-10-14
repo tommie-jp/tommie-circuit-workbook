@@ -31,6 +31,7 @@ GP を給電点の等価回路 (直列 R-L-C) で表す。R1 だけがラジア�
 L1・C1 は 145 MHz で共振する値 (エレメントの長さで決まる) のまま。基板は使わない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 GP の給電点 (直列 RLC の等価回路)
 parts:
   J1: sma 2,2 mirror CH0
@@ -80,6 +81,7 @@ wires:
 ラジアルを水平に張ったときの**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 120M-170M 201
 title: 図2 ラジアル水平 — 145 MHz で 36 Ω、SWR 1.39
@@ -102,6 +104,7 @@ markers:
 ラジアルを 45° 下へ垂らしたときの**見えるはずの画面** (設定は図2 と同じ。R1 だけ 50 Ω)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 120M-170M 201
 title: 図3 ラジアル 45° 下向き — 145 MHz で 50 Ω、SWR 1.00

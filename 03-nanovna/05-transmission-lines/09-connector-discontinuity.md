@@ -20,6 +20,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 1 m + 継ぎ目 + 1 m、先は 50 Ω の Load (継ぎ目は等価回路)
 parts:
   J1: sma 2,2 mirror CH0
@@ -67,6 +68,7 @@ notes:
 見えるはずの画面 (理想の模型)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-900M 401
 title: 図2 継ぎ目だけが 1 m に小さな山。50 Ω で終えた先端 (2 m) は平ら
@@ -91,6 +93,7 @@ markers:
 物差しにする)。掃引は図2 と同じ。Log Mag は全反射で 0 dB に張り付くだけなので省いた。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-900M 401
 title: 図3 先端を開放 — 2 m の全反射の山と比べると、継ぎ目の山は小さい

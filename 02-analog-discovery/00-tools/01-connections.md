@@ -19,6 +19,7 @@ GND につなぐ。ここでは同じ 2 点を、リード線の順を変えて�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 同じ 2 点を極性を変えて読む
 parts:
   V1: vsource 1,1 1,3 5
@@ -40,6 +41,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ワイヤの色と、極性を変えた 2 系統
 # 赤 = V+ のレール、青 = GND のレール。ワイヤの色は挿さった先のレールに合わせる
 board: half
@@ -88,6 +90,7 @@ V+ の設定を 0〜5 V で動かしたときの 2 つの読みを並べると�
 鏡映しになる。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 CH2 の読みはいつも CH1 の符号を反転した値 — 5 V で +5.00 V と −5.00 V
 x: V+ の設定 V 0..5
 y: 読み値 V -6..6

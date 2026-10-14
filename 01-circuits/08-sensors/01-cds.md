@@ -17,6 +17,7 @@ CdS セル (硫化カドミウムを使った光センサー) は、当たる光
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CdS が暗いとトランジスタが ON になる
 parts:
   VCC: vcc 2,5 5V
@@ -51,6 +52,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上の赤いレール = +5V、青いレール = GND (右端で上下を渡している)
 board: half

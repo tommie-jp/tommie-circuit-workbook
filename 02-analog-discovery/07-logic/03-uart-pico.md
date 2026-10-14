@@ -18,6 +18,7 @@ UART0 (GP0) から送る文字を受けて解読する。Pico 2 には 1 秒ご�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2 の UART0 を AD3 で受ける
 parts:
   AD:
@@ -41,6 +42,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -143,6 +145,7 @@ C/C++ のプログラムは、この環境で `PICO_BOARD=pico2` の `.uf2` ま�
 スタートビット (L) の後は 1・0・1・0… と交互に並び、ストップビット (H) で終わる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 'U' の 1 フレームは 86.8 µs、1 ビットは 8.68 µs
 time: 10us/div
 trigger: ch1 falling 1.65V at -4div

@@ -22,6 +22,7 @@ D-FF (クロックの立ち上がりで D の値を Q に写す) として、も
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 D-FFとQバー帰還のT-FF (CD4013)
 parts:
   U1: ic 15,8 CD4013B
@@ -104,6 +105,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (CD4013 の D-FF と T-FF)
 board: half
 parts:
@@ -194,6 +196,7 @@ wires:
 | カーソル | X1 をクロックの High の中 (2.5 ms)、X2 をその 2 周期あと (22.5 ms) に置く。ΔX = 20 ms の逆数が Q2 の周波数 |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 クロック (CH1) と Q2 (CH2) — Q2 はクロックの立ち上がりで反転し、周波数は半分
 time: 5ms/div
 trigger: ch1 rising 1.8V at -4div

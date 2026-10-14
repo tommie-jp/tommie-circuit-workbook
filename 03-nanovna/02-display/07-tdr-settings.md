@@ -52,6 +52,7 @@ c = 3.0 × 10⁸ m/s、VF は速度係数 (5-2)。2 で割るのは往復だか�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CH0 の先に 3 m の同軸 (先は開放)
 parts:
   M1:
@@ -90,6 +91,7 @@ notes:
 | 表示 | S11 の TDR、VF 0.66 | 同左 |
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-900M 401
 title: 図2 1〜900 MHz・401 点 — 3 m の開放の山は細い
@@ -105,6 +107,7 @@ traces:
 範囲を 300 MHz まで、点数を 101 に減らす。ケーブルは同じ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図3 1〜300 MHz・101 点 — 同じ山が 3 倍太い

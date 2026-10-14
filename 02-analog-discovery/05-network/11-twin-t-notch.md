@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ツイン T ノッチ
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -59,6 +60,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: full
 parts:
@@ -116,6 +118,7 @@ H(0.9 f₀) の大きさは 0.0527 (−25.6 dB)、位相は −87.0° なので�
 一直線になる (実機は部品の誤差で数十 mV ほど残る)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 谷の手前 (1.432 kHz) — CH2 は CH1 の 1/19 まで減る
 time: 200us/div
 trigger: ch1 rising 0V
@@ -140,6 +143,7 @@ H(jω) = (1 − (ωRC)²) / (1 − (ωRC)² + 4jωRC)。
 | 15.9 kHz (10×f₀) | −0.66 dB | +22.0° |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 1.59 kHz だけに深い谷 — 谷の前後で位相が −90° 付近から +90° 付近へ跳ぶ
 x: 周波数 Hz log 150..15k
 y:

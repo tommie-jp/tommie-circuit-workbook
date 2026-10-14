@@ -126,6 +126,7 @@ AD3 の W1・W2 で試験の電波を作るときも、10 pF を通してタン�
 図1 と図2 は 3.3 V (Pico 2 の 3V3 OUT)、図3 の LM386 だけ 5 V (Pico 2 の VBUS = USB の 5 V)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 バーアンテナと Tayloe 検波器 (74HC4052、3.3V)
 parts:
   W1: sine 1,3 1,5 l=$\mathrm{W1}$
@@ -226,6 +227,7 @@ style:
   22 nF では角が上がり、1 kHz の利得も 1.78 倍に少し増える)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 I と Q の増幅 (MCP6002、差動で 10 倍と反転で 10 倍)
 parts:
   A3: port 1,4
@@ -333,6 +335,7 @@ style:
   電源は PIN 8 (+3.3 V) と PIN 4 (GND) で、C4・C5 (100 nF) をそのそばに挿す
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 Pico 2 (LO の出力・ADC・PWM) と LM386 の音声
 parts:
   U1: pico2 14,11 mirror
@@ -433,6 +436,7 @@ PIO が出す S0・S1 (LO、1.6 MHz 以下) で、どちらもこの本の決め
 電流は Pico 2 と LM386 を合わせて 150 mA ほど (目安) で、ブレッドボード全体の 500 mA にも収まる。
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図4 バーアンテナと Tayloe 検波器のブレッドボード (U1 が 74HC4052)
 board: full
 parts:
@@ -518,6 +522,7 @@ wires:
 - 3.3 V と GND は図6 の基板の Pico 2 から来る (上のレールの 45・46 列)。上下の + と − のレールは右端で渡す
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図5 I と Q の増幅のブレッドボード (左の U2 が I、右の U3 が Q)
 board: full
 parts:
@@ -599,6 +604,7 @@ wires:
   C4・C5 は上のレールの間に挿す
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図6 Pico 2 と LM386 のブレッドボード (上の + レールは 5V)
 board: full
 parts:
@@ -1052,6 +1058,7 @@ RTL-SDR などの SDR の受信機が PC に送ってくるのも、この I と
 図はどれも計算値 (理想)。594 kHz の局を W1 で作り、LO は 595.000 kHz (Δf = −1.000 kHz)。I と Q の大きさは 0.2 V<sub>p</sub> に合わせたとした。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図7 PIO が出す S0 と S1 (594 kHz を受けるとき、LO 595.000 kHz)
 device: ad3
 time: 500ns/div
@@ -1075,6 +1082,7 @@ trigger: S0 rising at 420.168ns
 - 局を変えて (エンコーダを 1 クリック回して) 周期が表のとおりに変わるのを確かめる。AD3 の Logic は 1 本 32,768 標本まで撮れるので、100 MHz なら 327 µs ぶん
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図8 I と Q (594 kHz の局、LO 595 kHz) — Q が I より 250 µs 遅れる
 time: 200us/div
 trigger: ch1 rising 1.65V
@@ -1093,6 +1101,7 @@ measure: [vpp, freq, phase]
   シリアルに出る `df` と、Scope の周波数と、Q の先・後が合うかを見る
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図9 XY で見る I と Q (変調なし) — 半径 0.2 V の円が 1 秒に 1000 回まわる
 view: xy
 ch1: {wave: sine 1kHz 200mV offset 1.65V, range: 100mV/div, position: -16.5div}
@@ -1103,6 +1112,7 @@ xy: ch1 ch2
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/24-iq-mw-radio-2.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図10 AM 30 % (400 Hz) をかけると半径が 0.14 V と 0.26 V の間で伸び縮みする
 view: xy
 ch1: {wave: = 1.65V + 0.2V * (1 + 0.3 * sin(2 * pi * 400Hz * t)) * cos(2 * pi * 1kHz * t), range: 100mV/div, position: -16.5div}
@@ -1119,6 +1129,7 @@ xy: ch1 ch2
 - 放送を受けると、半径が話し声で不規則に伸び縮みする円になる
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図11 I のスペクトル — 局は 1 kHz、隣 (603 kHz) は 8 kHz に下りる
 device: ad3
 sweep: 0-10kHz

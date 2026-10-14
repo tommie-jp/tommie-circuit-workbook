@@ -26,6 +26,7 @@ LC も水晶も使わずに作れるのがウィーンブリッジ発振器。�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ウィーンブリッジ発振器 (ダイオードで振幅を安定化)
 parts:
   VCC: vcc 2,2 5V
@@ -98,6 +99,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上の青レールが GND。−5V は GND でレールが埋まるので AD3 の V- から PIN 4 へ直接引く
 board: half
@@ -175,6 +177,7 @@ Scope:
 1+ を出力 (CH1)、2+ を + 入力 (CH2) につなぐ。同じ尺度で見るので、CH2 の高さは CH1 の 1/3 に見える。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 出力 (CH1) と + 入力 (CH2) — 振幅は 1/3 で同相、1 周期が約 1.01 ms
 time: 500us/div
 trigger: ch1 rising 0V
@@ -198,6 +201,7 @@ Spectrum を OUT に当て、周波数を 0〜5 kHz、窓を Flat top (振幅を
 見えるはずの画面 (図3 と同じ SPICE の値 — 基本波 1.628 V・3 次 65.2 mV (ピーク) — から描いた計算値で、実測ではない)。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図4 基本波と 3 次の高調波 — 3 次は基本波より約 28 dB 低い
 device: ad3
 sweep: 0-5kHz

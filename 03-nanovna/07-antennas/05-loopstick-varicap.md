@@ -41,6 +41,7 @@ L = 330 µH (実効値)、バリコン C = 20〜260 pF (2 連バリコンの片�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 タップ付きループスティックの給電点 (等価回路)
 parts:
   J1: sma 2,2 mirror CH0
@@ -65,6 +66,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -106,6 +108,7 @@ wires:
 C = 100 pF (可変範囲のほぼ中間) の**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 800k-960k 201
 title: 図3 バリコン 100 pF — 876 kHz で SWR が 2.50 まで下がり、X が 0 を横切る

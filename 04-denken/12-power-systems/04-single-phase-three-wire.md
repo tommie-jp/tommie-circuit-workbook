@@ -30,6 +30,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 単相 3 線式の模型 (S1 が中性線)
 style:
   standard: jis
@@ -63,6 +64,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -119,6 +121,7 @@ wires:
 GND 基準に測り**、Va と Vb は計算で出す (図3)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 汎用オシロでの測り方
 style:
   standard: jis

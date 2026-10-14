@@ -20,6 +20,7 @@ OP アンプは + 入力 = − 入力になるように出力を動かす。− 
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 非反転増幅
 parts:
   VP: vsource 1,1 1,3 5
@@ -62,6 +63,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上のレールは +5V (赤) と GND (青)。下の青レールは −5V (V−)。下の赤レールは使わない
 board: half
@@ -125,6 +127,7 @@ W1 は 1 kHz・振幅 0.1 V の正弦波 (オフセット 0 V) に、Scope は C
 | Trigger | CH1、立ち上がり、0 V |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 入力 (CH1) と出力 (CH2) — 出力は 11 倍で同じ向き
 time: 200us/div
 trigger: ch1 rising 0V

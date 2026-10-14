@@ -140,6 +140,7 @@ D は 1 のままにして、`rst` だけを 3 回動かす。
 ## シミュレーションの波形
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 RST が 22 us に立つと、非同期は即、同期は次のクロックで 0
 device: generic
 time: 10us/div

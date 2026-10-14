@@ -17,6 +17,7 @@ Wavegen の Function には **Noise** (乱数のような波形) もある。3-2
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC ローパス (ノイズを通す)
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -40,6 +41,7 @@ V1 の記号は正弦だが、実際は Wavegen の Function を **Noise** に�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3
 board: half
 parts:
@@ -78,6 +80,7 @@ wires:
 CH1 は入力、CH2 はフィルタ 1 の出力、CH3 はフィルタ 2 の出力で、3 本とも 500 mV/div にそろえた。Vpp は CH1 が 2.00 V、CH2 が 1.41 V (2.00 × 0.707)、CH3 が 199 mV (2.00 × 0.0996) で、計算値と一致する。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 1.59 kHz の成分は 0.71 倍 (100 nF)、約 0.1 倍 (1 µF) に減る
 time: 100us/div
 trigger: ch1 rising 0V
@@ -106,6 +109,7 @@ measure: [vpp]
 2 つのフィルタの利得を同じ図 (図4) に描くと、f<sub>c</sub> が 10 倍違う分だけ、雑音を通す帯域が狭くなるのが分かる。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 C1 を 1 µF にすると遮断周波数が 1/10 になり、雑音を通す帯域も 1/10
 x: 周波数 Hz log 10..100k
 y: 利得 dB -50..5

@@ -43,6 +43,7 @@ V2 系は基本波方式なのでこの段差が無い。
 H4 の全域を 1 本のスルー (0 Ω) で見ると、**理想値は端から端まで平ら**になる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 50k-1.5G 101
 title: 図1 H4 の全域 50 kHz〜1.5 GHz でスルーの理想は平ら
@@ -69,6 +70,7 @@ notes:
 範囲外だとお知らせで言う。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 50k-3G 101
 title: 図2 H4 で 3 GHz まで — 1.5 GHz より上は範囲の外

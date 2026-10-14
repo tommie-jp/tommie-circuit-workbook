@@ -36,6 +36,7 @@ Thru でつなぐ。9 つの手順で行い、最後にスロットへ保存す�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CH0 に Short をつなぐ (手順 3)
 parts:
   M1:
@@ -72,6 +73,7 @@ notes:
 S21 = 0 dB、S11 は検出限界以下。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図2 校正後に Thru を測り直す — 理想は平ら

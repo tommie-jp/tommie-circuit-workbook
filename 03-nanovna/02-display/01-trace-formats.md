@@ -32,6 +32,7 @@ DUT は R 35 Ω・L 220 nH・C 6.2 pF の直列共振回路 (先を短絡して�
 給電点に見立てる)。共振はおよそ 136 MHz。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 100M-180M 161
 title: 図1 Log Mag と位相 — 136 MHz の共振で谷と位相の変わり目
@@ -54,6 +55,7 @@ notes:
 同じ DUT を、残りの 2 つの形式 (Smith・SWR) で見る。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 100M-180M 161
 title: 図2 Smith と SWR — 共振しても SWR は 1.43 まで

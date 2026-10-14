@@ -26,6 +26,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RL 直列
 style:
   standard: jis
@@ -52,6 +53,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -82,6 +84,7 @@ wires:
 | Scope | CH1・CH2 とも DC 結合。Measure で CH1・CH2 の Amplitude (振幅) と、CH1 に対する CH2 の Phase を読む |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 V_R (CH1) 0.51 V に対して V_L (CH2) 0.48 V が 90° 進む
 time: 200us/div
 trigger: ch1 rising 0V
@@ -101,6 +104,7 @@ AD の CH1 は R1 の両端を差動で挟む (1− が 10 列)。汎用オシ�
 2 ch はこれで使い切る。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 汎用オシロでの測り方
 style:
   standard: jis

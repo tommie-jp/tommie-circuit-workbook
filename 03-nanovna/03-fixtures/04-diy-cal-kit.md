@@ -18,6 +18,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 自作の Open・Short・Load
 parts:
   J1: sma 1,1 mirror
@@ -53,6 +54,7 @@ notes:
 3 枚とも 8×8 の小さな基板 1 枚に SMA 端面コネクタ 1 つだけを載せる。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -68,6 +70,7 @@ parts:
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/04-diy-cal-kit-1.svg)
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -86,6 +89,7 @@ wires:
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/04-diy-cal-kit-2.svg)
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -125,6 +129,7 @@ wires:
 | 表示 | S11 の Smith チャート |
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図5 自作 Open — Smith の右端 (理想)
@@ -138,6 +143,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/vna/04-diy-cal-kit-1.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図6 自作 Short — Smith の左端 (理想)
@@ -151,6 +157,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/vna/04-diy-cal-kit-2.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図7 自作 Load (50 Ω) — Smith の真ん中 (理想)

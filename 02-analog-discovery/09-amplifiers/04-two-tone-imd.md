@@ -19,6 +19,7 @@ LM358 の非反転増幅に入れる。**増幅回路がわずかでも非線形
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 W1・W2 を抵抗で足し合わせて増幅回路へ
 parts:
   AD:
@@ -74,6 +75,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -157,6 +159,7 @@ IM3 の高さそのものは実測でしか決まらないので、図には「�
 だけを描く (どちらも今の入力を 0 dB とした増し分)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 入力を 6 dB 上げると、基本波は 6 dB、IM3 は 18 dB 上がる (弱い非線形の計算)
 x: 入力の増し分 dB 0..12
 y: 出力の増し分 dB 0..40

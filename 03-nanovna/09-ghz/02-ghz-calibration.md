@@ -38,6 +38,7 @@ Load の模型 (**仮定**): 50 Ω に 0.3 nH が直列。|S11| ≈ 2π f L / 10
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ケーブルの先に付属の Open をつなぐ (ここが基準面)
 parts:
   M1:
@@ -85,6 +86,7 @@ notes:
 思い込む。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: v2
 sweep: 50k-3G 301
 title: 図2 付属の Open (仮定の模型) — 1 GHz で −16°、3 GHz で −47° 遅れる
@@ -112,6 +114,7 @@ markers:
 付属の Load の見えるはずの画面。設定は図2 と同じ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: v2
 sweep: 50k-3G 301
 title: 図3 付属の Load (仮定の模型) — 3 GHz で −25 dB まで反射が増える

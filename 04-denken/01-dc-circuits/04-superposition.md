@@ -24,6 +24,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 E1 だけを残す (E2 は短絡)
 style:
   standard: jis
@@ -45,6 +46,7 @@ wires:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/04-superposition-1.svg)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 E2 だけを残す (E1 は短絡)
 style:
   standard: jis
@@ -75,6 +77,7 @@ wires:
 **電源を外してその 2 つの穴を線でつなぐ** (短絡)。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 E1 だけを残す配線 (E2 の代わりに線)
 board: half
 parts:

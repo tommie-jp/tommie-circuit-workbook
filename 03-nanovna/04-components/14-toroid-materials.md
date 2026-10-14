@@ -21,6 +21,7 @@ device: H4
 4-4 と同じく、3-1 の直列治具に挿して CH1 側を Short で終わらせ、1 端子の Z として測る。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 直列治具にトロイダルコイルを挿す (CH1 側は Short)
 parts:
   J1: sma 2,2 mirror CH0
@@ -51,6 +52,7 @@ L = A<sub>L</sub> × 巻き数²。巻線はポリウレタン線 0.4 mm を 10 
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -88,6 +90,7 @@ wires:
 3 つを同じ設定で並べる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 100k-30M 301
 title: 図3 FT37-43 (35 µH) — 19 MHz で自己共振
@@ -104,6 +107,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/14-toroid-materials-1.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 100k-30M 301
 title: 図4 FT37-61 (5.5 µH) — 1 MHz の |Z| は #43 の約 1/6
@@ -120,6 +124,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/vna/14-toroid-materials-2.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 100k-30M 301
 title: 図5 T37-2 (0.40 µH) — 1 MHz の |Z| は #43 の約 1/90

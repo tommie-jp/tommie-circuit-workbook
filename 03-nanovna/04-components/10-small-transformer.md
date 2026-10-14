@@ -19,6 +19,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 1:1 トランスを CH0 と CH1 の間に
 parts:
   J1: sma 2,2 mirror CH0
@@ -51,6 +52,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -96,6 +98,7 @@ wires:
 **1. 低い側** — 励磁インダクタンスが GND へ逃がす分で落ちる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 50k-1M 201
 title: 図3 低い側 — 178 kHz で −3 dB
@@ -116,6 +119,7 @@ markers:
 **2. 高い側** — 漏れインダクタンスが直列に入って落ちる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-600M 201
 title: 図4 高い側 — 漏れ 100 nH で 159 MHz あたりから落ちる

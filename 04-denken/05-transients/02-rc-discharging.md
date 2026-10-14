@@ -25,6 +25,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC 直列の放電 (5-1 と同じ回路)
 parts:
   V1: square 1,1 1,3 1 l=$\mathrm{W1}$
@@ -50,6 +51,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (5-1 と同じ配線)
 board: half
 parts:
@@ -83,6 +85,7 @@ wires:
 | Scope | CH1 = 入力、CH2 = 出力。Trigger は CH1 の**立ち下がり**にする |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 立ち下がりから 1τ (1 ms) で出力 (CH2) は 37 % まで下がる
 time: 1ms/div
 trigger: ch1 falling 1V

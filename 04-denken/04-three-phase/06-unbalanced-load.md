@@ -26,6 +26,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 三相電源と Y 負荷、中性線に RN
 style:
   standard: jis
@@ -81,6 +82,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (R4 = 2 kΩ)
 # 上のブロック: TL071 の入力側と R1・R2、右に Y 結線と中性線 RN。下のブロック: 出力側と Rf、g・h・j 行で 3 相を右へ運ぶ
 board: full
@@ -149,6 +151,7 @@ CH2 は数 mV と小さいので、CH1 と V/div を分けてある。電流は�
 W1・W2 と TL071 の出力に十分小さい。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 R4 = 2 kΩ — RN (CH2、2 mV/div) に 4.88 mV、1 相目より 60° 進む
 time: 200us/div
 trigger: ch1 rising 0V

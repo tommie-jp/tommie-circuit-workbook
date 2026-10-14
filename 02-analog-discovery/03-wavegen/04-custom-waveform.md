@@ -17,6 +17,7 @@ Wavegen の Function には **Custom** (くり返す) と **Play** (1 回だけ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック (W1 を 1+ に直結)
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -49,6 +50,7 @@ V1 の記号は正弦だが、実際は下の CSV の波形が出る。
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
 board: half
 parts:
@@ -80,6 +82,7 @@ Frequency 1 kHz なので 1 周期 = 1000 µs。8 点を均等に敷くので、
 **1 段の幅は 1000 µs ÷ 8 = 125 µs**。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Custom は 8 段の階段を 125 µs ずつくり返す
 time: 125us/div
 trigger: ch1 rising 0V at -5div

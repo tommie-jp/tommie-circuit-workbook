@@ -49,6 +49,7 @@ device: H4
 ぶん、細かい特徴を見落としにくくなる)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 404
 title: 図1 Saver の 404 点で見た Thru — 理想は平ら

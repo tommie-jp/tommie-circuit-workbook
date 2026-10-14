@@ -39,6 +39,7 @@ LO が作る電流も 2 本の出力に同じだけ流す (差を取れば消え
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 SA612 のバランスドミキサー (W2 が RF、W1 が LO)
 parts:
   W2: sine 3,5 3,7 l=$\mathrm{W2}$
@@ -106,6 +107,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (AD の W1・W2 と CH1・CH2)
 board: half
 parts:
@@ -174,6 +176,7 @@ OUT_A の IF は 10 mV × 7.08 = 70.8 mV<sub>p</sub>、差動 (CH1) はその 2 
 LO と RF の漏れは作りや配線で変わるので、図には目安 (LO 2 mV、RF 1 mV) で描いた。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 差動の出力 (CH1) — 和と差が立ち、LO と RF はほぼ消える
 device: ad3
 sweep: 0-2.5MHz

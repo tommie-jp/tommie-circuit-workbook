@@ -185,6 +185,7 @@ openFPGALoader -b tangnano9k top_count.fs
 接続は 8-3 と同じ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 q3 (IO38) を DIO0、q4 (IO37) を DIO1 で読む。接続は 8-3 と同じ
 parts:
   AD:
@@ -222,6 +223,7 @@ wires:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図3 配線は 8-3 のまま。q3 (j1) を DIO0、q4 (j2) を DIO1 へ
 board: half
 parts:
@@ -260,6 +262,7 @@ notes:
 ## Logic に見えるはずの画面
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 q3 は 27 MHz の 16 分の 1 (1.6875 MHz)。q4 はその半分
 device: ad3
 time: 400ns/div

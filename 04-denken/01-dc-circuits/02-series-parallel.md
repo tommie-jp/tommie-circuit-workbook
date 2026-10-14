@@ -26,6 +26,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 直列つなぎ (分圧)
 style:
   standard: jis
@@ -53,6 +54,7 @@ wires:
 - B1 の電流は R1 → R2 と 1 本道を通る。V1 が R1 の両端、V2 が R2 の両端
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 並列つなぎ (分流)
 style:
   standard: jis
@@ -78,6 +80,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 直列のブレッドボード
 board: half
 parts:
@@ -105,6 +108,7 @@ notes:
 - AD の Scope の 1+ / 1− を R1 の両端 (5 列・10 列) に挿してある。テスターの電圧レンジの代わりに R1 の電圧を読める
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 並列のブレッドボード
 board: half
 parts:

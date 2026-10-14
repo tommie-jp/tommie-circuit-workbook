@@ -20,6 +20,7 @@ VCC・GND・OUT の 3 本をつなぐだけで使える。8-5 の遮光検出と
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 PIR モジュールでインジケータを点ける
 parts:
   M1:
@@ -57,6 +58,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 PIR モジュールと LED を組む (1+ が OUT を見る)
 board: half
 parts:
@@ -107,6 +109,7 @@ wires:
 Scope は 1+ を OUT (10 列)、1− を GND に当て、Time base を 1 s/div、Range を 1 V/div、トリガは 1+ の立ち上がり 1.65 V (Single) にして、センサーの前で手を振る。基板の保持時間のトリマは、最短 (約 5 s) に回しておく。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 検知してから OUT が H を保つ時間 (保持時間を最短にしたとき)
 time: 1s/div
 trigger: ch1 rising 1.65V at -2div

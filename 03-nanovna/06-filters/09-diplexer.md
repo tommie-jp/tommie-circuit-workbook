@@ -35,6 +35,7 @@ g3 = 0.5 を使う。LPF と HPF の入口の素子が**どちらも直列**に�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ダイプレクサ (上が LPF の枝、下が HPF の枝)
 parts:
   J1: sma 2,4 mirror CH0
@@ -75,6 +76,7 @@ wires:
 部品面から見た図。3 つの SMA は端面に付ける (J1 は左、J2・J3 は右)。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -140,6 +142,7 @@ vna フェンスの模型は部品を 1 列に縦続する形しか書けず、�
 2 枚とも掃引とマーカー (30・50・100 MHz) を同じにする。LPF の枝だけ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-200M 199
 title: 図3 LPF の枝だけ — 50 MHz で −1.26 dB、S11 は −6 dB (単独では整合しない)
@@ -161,6 +164,7 @@ markers:
 HPF の枝だけ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-200M 199
 title: 図4 HPF の枝だけ — 50 MHz で −1.63 dB、S11 は −5 dB

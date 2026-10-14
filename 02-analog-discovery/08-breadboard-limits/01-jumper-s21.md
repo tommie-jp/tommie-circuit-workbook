@@ -19,6 +19,7 @@ S21 (出力 ÷ 入力) がどれだけ 0 dB からずれるかを見る。ここ
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ジャンパ 1 本のスルーと負荷抵抗
 parts:
   AD:
@@ -49,6 +50,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -87,6 +89,7 @@ wires:
 読むので、2 つのチャンネルが同じ帯域を持つ限り、帯域の影響は小さい (目安)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 ジャンパを通した 10 MHz — CH2 は CH1 に重なり、遅れは 0.15° (0.4 ns) しかない
 time: 20ns/div
 trigger: ch1 rising 0V
@@ -118,6 +121,7 @@ CH1 (ジャンパの手前) と CH2 (向こう側) は、100 ns の周期の中�
 (単体では小さくても、低いインピーダンスの回路に入ると効いてくる。8-3・8-4)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 ジャンパ 1 本のスルーは 10 MHz でも −0.0005 dB・−0.15° しか動かない
 x: 周波数 Hz log 100k..10M
 y:

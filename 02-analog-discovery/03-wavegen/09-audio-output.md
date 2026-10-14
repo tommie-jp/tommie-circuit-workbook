@@ -18,6 +18,7 @@ W1 は可聴域 (20 Hz〜20 kHz) の波形をそのまま出せるので、小�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 スピーカーを電流制限抵抗で鳴らす
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -39,6 +40,7 @@ CH1 は W1 の出力 (R1 + スピーカーの両端) をそのまま読む。
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (R1 とスピーカーを W1 に直列)
 board: half
 parts:
@@ -70,6 +72,7 @@ W1 → R1 (150 Ω) → スピーカー → GND の順に直列。CH1 (1+・1−)
 | Scope | CH1: DC 結合、Range 500 mV/div、Time/div 500 µs/div (440 Hz の 1 周期が画面に入る) |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 440 Hz の 1 周期は 2.273 ms
 time: 500us/div
 trigger: ch1 rising 0V

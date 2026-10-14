@@ -63,6 +63,7 @@ CH0 の出力がこれより大きいと利得が小さく読めるので、そ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 2SC1815 1 段増幅 + 出力アッテネータ
 parts:
   J1: sma 2,3 mirror CH0
@@ -110,6 +111,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 27x9
   slots: on
@@ -183,6 +185,7 @@ wires:
 (利得は描けないので、この基準を先に見る)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-30M 61
 title: 図3 出力アッテネータ単体の S21 (アンプを挟む前の基準)

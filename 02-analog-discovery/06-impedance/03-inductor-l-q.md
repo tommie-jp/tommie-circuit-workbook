@@ -17,6 +17,7 @@ L と、コイルの良さを表す **Q = ωL / Rs** を求める。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 基準抵抗と 10 mH のコイル
 parts:
   AD:
@@ -47,6 +48,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -83,6 +85,7 @@ wires:
 Rref と桁を合わせるため (1 kHz だと XL は 63 Ω しかない)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 CH2 (L の電圧) が CH1 (電流) より 89.3° 進む — 90° に足りないぶんが巻線抵抗
 time: 50us/div
 trigger: ch1 rising 0V

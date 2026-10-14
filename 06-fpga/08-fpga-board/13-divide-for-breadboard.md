@@ -237,6 +237,7 @@ FF は 21 個で、カウンタ 4 + 5 + 9 ビットと、出力の FF 3 個 (4 +
 接続は 8-3 と同じ。この題では IO38・IO37・IO36 の 3 本を測る。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 IO38・IO37・IO36 を AD3 の DIO0・DIO1・DIO2 で読む。GND は共通
 parts:
   AD:
@@ -277,6 +278,7 @@ wires:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図3 配線は 8-3 のまま。j1〜j3 を DIO0〜DIO2 へ
 board: half
 parts:
@@ -314,6 +316,7 @@ notes:
 ## Logic に見えるはずの画面
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 同じ 27 MHz から、3 MHz・1 MHz・100 kHz が立ち上がりをそろえて出る
 device: ad3
 time: 200ns/div

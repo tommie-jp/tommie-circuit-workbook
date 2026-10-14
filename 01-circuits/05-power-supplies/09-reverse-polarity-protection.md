@@ -21,6 +21,7 @@ era: 今
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ダイオード方式
 parts:
   V1: battery vin gnd 5
@@ -38,6 +39,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/05-power-supplies/circuit/09-reverse-polarity-protection-1.svg)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 P-MOSFET 方式 (ゲート接地)
 parts:
   V2: battery vin2 gnd2 5
@@ -83,6 +85,7 @@ style:
 この題は直流の電圧だけを見るので、オシロの波形の図は付けない。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 ダイオード方式 (図1) を組む。Scope 1+ を負荷、2+ を電源へ
 # 上の赤レール = +5V、青レール = GND
 board: half
@@ -118,6 +121,7 @@ notes:
 - Scope の 1+ (橙) は D1 のカソードの 14 列 (`d14`、負荷に届く電圧)、2+ (緑) は上の赤レール (電源の電圧)。1− と 2− (黒) は上の青レールへ。2 つの差が D1 の電圧降下 (約 0.4 V)
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 P-MOSFET 方式 (図2) を組む。Scope 1+ を負荷、2+ を電源へ
 # 上の赤レール = +5V、青レール = GND。IRF9540 は G・D・S の順 (図2 と同じく D を電源側、S を負荷側に)
 board: half

@@ -26,6 +26,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 分流器
 parts:
   V1: vsource 1,1 1,3 5
@@ -53,6 +54,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -105,6 +107,7 @@ AD の CH2 は Rt の両端を差動で挟んでいる。汎用オシロのグ�
 **回路はそのまま**、2 本の先端を Rt の両端に当てて CH2 − CH1 で引く (図3)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 汎用オシロでの測り方
 parts:
   V1: vsource 2,2 2,4 5

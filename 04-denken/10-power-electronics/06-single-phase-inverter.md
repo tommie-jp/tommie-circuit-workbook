@@ -29,6 +29,7 @@ Vd = 5 V なら vo は ±5 V、Vpp 10 V、実効値 5 V、基本波の実効値 
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 単相フルブリッジインバータ (スイッチは DRV8833 の中)
 style:
   standard: jis
@@ -69,6 +70,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 # 赤レール = 5 V (AD の V+)、青レール = GND。上下は 29・30 列でつなぐ
 board: half
@@ -131,6 +133,7 @@ wires:
 Frequency を 1 Hz に下げると、D1 と D2 が 0.5 秒ずつ交互に光るのが見える。50 Hz では目が追いつかず、2 つとも光って見える。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 50 Hz — 出力 vo (CH1) は ±5 V の方形波、AIN1 (CH2) と同じ向き
 time: 5ms/div
 trigger: ch2 rising 1.65V

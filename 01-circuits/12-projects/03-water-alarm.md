@@ -25,6 +25,7 @@ board: PF
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 水で橋渡しされるとダーリントンが導通しブザーが鳴る
 parts:
   VCC: vcc 2,1 5V
@@ -88,6 +89,7 @@ wires:
 水回りに置いたままにする作品なので、ブレッドボードではなくユニバーサル基板に組む。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -200,6 +202,7 @@ notes:
 | カーソル | X1 を水につかる前 (−200 ms)、X2 をつかったあと (500 ms) に置く |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 電極が水につかると、ベース (CH1) が上がりコレクタ (CH2) が落ちる
 time: 100ms/div
 trigger: ch2 falling 2.5V at -3div

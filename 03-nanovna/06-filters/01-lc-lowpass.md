@@ -30,6 +30,7 @@ C1 = C7 = 47 pF、L2 = L6 = 330 nH、C3 = C5 = 200 pF、L4 = 560 nH になる。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 7 次 LC ローパス (C-L-C-L-C-L-C)
 parts:
   J1: sma 2,2 mirror CH0
@@ -66,6 +67,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 34x10
   slots: on
@@ -132,6 +134,7 @@ wires:
 丸めた値 (47p/330n/200p/560n) で計算した**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-100M 201
 title: 図3 7 次ローパス (E12/E24 丸め後) — −3 dB は 28.4 MHz

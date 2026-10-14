@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 2N7000 の伝達特性を測る
 parts:
   V1: triangle 1,4 1,6 2 l=$\mathrm{W1}$
@@ -59,6 +60,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -108,6 +110,7 @@ wires:
 ドレイン (CH2) は 4.50 V・0.50 V と読める (表の値。V_th = 2.1 V、K = 50 mA/V² の仮定)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 ゲート 2.2 → 2.4 V でドレインは 4.50 → 0.50 V
 time: 5ms/div
 trigger: ch1 rising 2V
@@ -155,6 +158,7 @@ measure: [freq]
 | 3.0 V | 0.06 V | 4.94 mA (R_D で頭打ち) | — |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 2N7000 の伝達特性 (計算) — V_th を越えると 2 乗で増え、5 mA で頭打ち
 x: ゲート電圧 V 1.8..3.0
 y: ドレイン電流 mA 0..5.5

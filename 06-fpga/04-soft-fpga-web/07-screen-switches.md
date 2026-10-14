@@ -231,6 +231,7 @@ PC で先に確かめるなら、`main_linux.cpp` (スイッチの 4 通りと�
 `presses` は 4 ビットだが、2 回しか押さないので下位 2 ビット (`P1` `P0`) だけを描く。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図1 スイッチは入れたまま残り、ボタンは 1 クロックだけの合図になる
 device: generic
 window: 20ms

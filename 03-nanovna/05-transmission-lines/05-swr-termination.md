@@ -18,6 +18,7 @@ CH0 の先につなぐ終端 (負荷) を変えて、SWR (定在波比) がど�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CH0 の先に 50 Ω の終端 (100 Ω 2 本並列)
 parts:
   J1: sma 2,2 mirror
@@ -46,6 +47,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -86,6 +88,7 @@ R1 と R2 の所を挿し替えて、表のほかの終端を測る。ユニバ�
 見えるはずの画面 (理想の模型)。50 Ω ぴったり — SWR = 1 で図の下端に張り付く。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 10M-300M 101
 title: 図3 終端 50 Ω (整合) — SWR = 1 で下端に乗る。Smith は中心
@@ -104,6 +107,7 @@ markers:
 終端 100 Ω — SWR = 2。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 10M-300M 101
 title: 図4 終端 100 Ω — SWR = 2 で平ら (枠の上端)。Smith は 2 の点
@@ -122,6 +126,7 @@ markers:
 終端を短絡 (0 Ω) — SWR は測れる上限までずっと大きい。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 10M-300M 101
 title: 図5 終端を短絡 — SWR は上限に張り付く。Smith は左端の 1 点

@@ -60,6 +60,7 @@ PC の Verilator で同じ `TD4.v` を回し、リセットのあとの立ち上
 図1・図2 は 5-5 と同じ。USB ケーブルは Pico 2 の給電と、シリアルの両方を兼ねる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2 に LED 4 個・DIP スイッチ・AD3 の Logic をつなぐ
 parts:
   U1: pico2 8,8 mirror
@@ -129,6 +130,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 Pico 2 の左に LED、右に DIP スイッチ、上に AD3 の Logic
 board: full
 parts:
@@ -286,6 +288,7 @@ USB を付けない `build/serial514.uf2` は 95 232 バイト、text 51 432 バ
 **時間の目盛は仮** (1 クロックを 1 ms と置いた。実機の 1 クロックは、シリアルを出すと 5-5 の値より長くなる)。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 シリアルの out= と同じ並びが、OUT のバスに出る (1 クロックを 1 ms と置いた仮の目盛)
 device: ad3
 time: 1200us/div

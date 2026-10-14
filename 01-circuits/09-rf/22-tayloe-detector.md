@@ -81,6 +81,7 @@ I と Q は差を取るので 2.5 V は消える。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Tayloe 検波器 (74HC74 で 4 相を作り、74HC4052 で 4 つの C に振り分ける)
 parts:
   VCC: vcc 6,5 5V
@@ -188,6 +189,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (左が 74HC4052、右が 74HC74)
 board: half
 parts:
@@ -301,6 +303,7 @@ I と Q は 1 kHz の音なので Scope でそのまま見える。4 相の順�
 計算値 (振幅は LTspice の 0.434 V<sub>p</sub>)。I と Q の線には 498 kHz の切り替えの段が数 mV 乗るが、この尺度では見えない (計算値で約 5 mVpp)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 W2 = 499 kHz (LO より 1 kHz 上) — Q が I より 250 µs 進む
 time: 200us/div
 trigger: ch1 rising 0V
@@ -316,6 +319,7 @@ measure: [vpp, freq, phase]
 - 振幅はどちらも 0.868 Vpp (0.434 V<sub>p</sub>)。W2 の 0.5 Vpp の 1.74 倍
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 XY 表示 (W2 = 499 kHz) — 半径 0.434 V の円
 view: xy
 ch1: {wave: sine 1kHz 434mV, range: 200mV/div}
@@ -331,6 +335,7 @@ xy: ch1 ch2
 - 円がつぶれて楕円になったら、C1〜C4 の容量か、配線の長さが 4 つでそろっていない
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 W2 = 497 kHz (LO より 1 kHz 下) — Q が I より 250 µs 遅れる
 time: 200us/div
 trigger: ch1 rising 0V
@@ -347,6 +352,7 @@ measure: [vpp, freq, phase]
 - この符号の違いで、RF が LO の上 (499 kHz) か下 (497 kHz) かが分かる。I だけを見ていたら分からない
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図6 74HC74 の 4 相 — CH (S1 S0) が 1 3 2 0 と回る
 device: ad3
 time: 400ns/div

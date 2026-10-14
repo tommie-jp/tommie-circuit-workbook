@@ -48,6 +48,7 @@ C<sub>π</sub> / (g<sub>m</sub> C<sub>µ</sub>) = 330 pF / (0.165 S × 2 pF) ≈
 Rc の見かけのインピーダンスを測る。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 8-1 と同じ回路 (S11 は J1、S22 は裏返して J2 で測る)
 parts:
   J1: sma 2,3 mirror CH0
@@ -97,6 +98,7 @@ wires:
 8-1 と同じ考え方の perfboard (アッテネータは付けない。直流カットの C2 は残す)。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -161,6 +163,7 @@ wires:
 (バイアス抵抗 2.64 kΩ、r<sub>bb′</sub>、r<sub>π</sub>、346 pF)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 201
 title: 図3 入力側の S11 — 周波数を上げると 50 Ω に近づく (等価回路)
@@ -186,6 +189,7 @@ Rc 270 Ω、帰還の 1 kΩ、C<sub>µ</sub> 2 pF の並列 (**30 MHz より上�
 掃引とマーカーは図3 と同じ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 201
 title: 図4 出力側の Z (裏返して) — R は 211 Ω から 129 Ω へ、X は容量性

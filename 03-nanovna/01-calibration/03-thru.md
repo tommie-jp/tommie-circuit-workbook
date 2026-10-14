@@ -18,6 +18,7 @@ S21 の基準 (0 dB、位相 0°) が決まる。Thru を挟み違えると、�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CH0 と CH1 を Thru でつなぐ
 parts:
   M1:
@@ -64,6 +65,7 @@ notes:
 Thru の理想値は、`series R 0` (0 Ω の抵抗 = ただの導線) と同じ模型で表せる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図2 Thru の理想は平ら (減衰も反射も無い基準)

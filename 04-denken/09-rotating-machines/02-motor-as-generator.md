@@ -29,6 +29,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 モータを発電機にして開放電圧を見る
 style:
   standard: jis
@@ -51,6 +52,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードとモータ (発電機として)
 board: half
 parts:
@@ -85,6 +87,7 @@ wires:
 | Measure | CH1 の Frequency (リップルの周波数 f_ripple)、Average や Peak-Peak (振幅の目安) |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Offset で直流を打ち消すと、300 rpm のリップルは 30 Hz (振幅は目安)
 time: 10ms/div
 trigger: ch1 rising 0.2V

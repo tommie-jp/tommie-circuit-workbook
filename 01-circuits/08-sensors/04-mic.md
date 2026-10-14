@@ -19,6 +19,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 マイクの音で LED が揺れる
 parts:
   VCC: vcc 2,2 5V
@@ -56,6 +57,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上の赤いレール = +5V、青いレール = GND (29・30 列で下のレールへ渡す)
 board: half
@@ -112,6 +114,7 @@ W1 の出力は大きすぎる (最小でも数十 mV、ふつう 1 V 前後) �
 結合コンデンサ C1 から先は元のままにする。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 マイクの代わりに W1 を分圧して入れる (CH2 は入力、CH1 は出力)
 parts:
   W1: sine 2,4 2,6 l=$\mathrm{W1}$
@@ -163,6 +166,7 @@ style:
   (0.5 V/div 以下の細かい目盛で Offset が動かせるのは ±2.5 V まで。この題の直流はその中に入る)
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 マイクを外し、W1 を 10kΩ と 100Ω の分圧で入れる
 # AD の V+ (5 V) を下の + レール、GND を下の − レールへ入れ、29・30 列で上のレールへ渡す
 board: half
@@ -213,6 +217,7 @@ Analog Discovery はブレッドボードの下に置き、線は下のレール
 WaveForms の Supplies で V+ を 5 V にしてから W1 を出す。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 入力 (CH2) と出力 (CH1) — 1 kHz、入力は数 mV、出力は約 38 倍で反転
 time: 200us/div
 trigger: ch2 rising 0.2V

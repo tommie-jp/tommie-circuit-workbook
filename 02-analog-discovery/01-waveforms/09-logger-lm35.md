@@ -18,6 +18,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 LM35 の出力を電圧計で読む
 parts:
   VCC: vcc 2,1 5V
@@ -44,6 +45,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで LM35 を記録する
 board: half
 parts:
@@ -89,6 +91,7 @@ LM35 は TO-92（`ic3` の既定の姿）で、5〜7 列の `e` 行（上半分�
 | グラフの横軸 | 0〜600 s | 1-3 より 1 桁長い時間で、ゆっくりした変化を追える |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 LM35 の出力は 10 mV/°C — 25 °C で 250 mV、体温 36 °C で 360 mV
 x: 温度 °C 0..50
 y: LM35 の出力 mV 0..500

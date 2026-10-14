@@ -41,6 +41,7 @@ I を cos、Q を sin と見るのと同じ向きだ。9-19 からも同じ名�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC-CR で W1 から I (高域側 +45°) と Q (低域側 -45°) を作る
 parts:
   W1: sine 1,4 1,6 l=$\mathrm{W1}$
@@ -70,6 +71,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 W1 は 10 列、Q は 6 列、I は 14 列
 board: half
 parts:
@@ -137,6 +139,7 @@ wires:
 計算値。498 kHz では I も Q も入力の 0.707 倍 (0.707 Vpp)。I は入力より 45° 進み、Q は 45° 遅れる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 498 kHz — Q (CH2) は I (CH1) より 1/4 周期 (0.502 µs) 遅れ、振幅は同じ
 time: 500ns/div
 trigger: ch1 rising 0V
@@ -155,6 +158,7 @@ measure: [vpp, freq, phase]
 XY にすると、90° ずれた同じ大きさの 2 本は**円**を描く (2-5 と同じ)。I = cos θ、Q = sin θ なら I² + Q² = 一定だからだ。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 498 kHz の XY — 振幅がそろうので円
 view: xy
 ch1: {wave: sine 498kHz 0.707Vpp phase 45deg, range: 200mV/div}
@@ -165,6 +169,7 @@ xy: ch1 ch2
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/18-rc-cr-quadrature-2.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 300 kHz の XY — 90° のまま Q が大きく、縦長の楕円
 view: xy
 ch1: {wave: sine 300kHz 0.516Vpp phase 58.9deg, range: 200mV/div}
@@ -175,6 +180,7 @@ xy: ch1 ch2
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/18-rc-cr-quadrature-3.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図6 800 kHz の XY — 90° のまま I が大きく、横長の楕円
 view: xy
 ch1: {wave: sine 800kHz 0.849Vpp phase 31.9deg, range: 200mV/div}

@@ -31,6 +31,7 @@ E12 系列に丸めると **L = 120 nH**、**C = 68 pF**。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 L 型整合 (シャント C・直列 L) とダミー負荷
 parts:
   J1: sma 2,2 mirror CH0
@@ -58,6 +59,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -105,6 +107,7 @@ wires:
 E12 丸め後の**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 30M-70M 201
 title: 図3 L 型整合後の S11・SWR (丸め後) — 50 MHz で SWR 1.12

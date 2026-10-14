@@ -25,6 +25,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 自己バイアスのエミッタ接地増幅 (W1 で入れ、CH2 と CH1 で比べる)
 parts:
   VCC: vcc 6,2 5V
@@ -86,6 +87,7 @@ Ve が 0.2 V 程度しか残らず、hFE のばらつきで動作点が大きく
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 自己バイアスのエミッタ接地増幅 (W1 と CH2 を入力へ、CH1 を出力へ)
 # 5V は AD の V+ から上の + レールへ、上の − レール = GND (下のレールは使わない)
 board: half
@@ -139,6 +141,7 @@ W1 を 1 kHz・10 mVpp の正弦波にする。CH2 (入力) は 2 mV/div、CH1 (
 で並べる (尺度が 100 倍違うので、画面の上では入力 5 目盛・出力 4 目盛とほぼ同じ高さに見える)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 入力 (CH2) と出力 (CH1) — 出力は約 79 倍で逆位相
 time: 200us/div
 trigger: ch2 rising 0V
@@ -169,6 +172,7 @@ S21・S11・Smith チャートの読み方と THRU の校正は 2-2 と同じ。
 - 電源は今までどおり AD の V+ (5 V)
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 VNA をつなぐ (芯線と外皮を組で)
 board: half
 parts:
@@ -215,6 +219,7 @@ wires:
 (VNA の画面ではない)。測ると、VNA の画面にこれと同じ形の線が出るはず。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図5 エミッタ接地増幅の S21 (計算) — 低い所で +10.6 dB・位相 180°、13 MHz で −3 dB
 x: 周波数 Hz log 50k..100M
 y:
@@ -308,6 +313,7 @@ VNA の画面 (図6) にそのまま描ける。CH0 から順に、クリップ�
 Cπ にミラー効果の分を足した容量 (127 pF + 11 pF ≈ 138 pF) を並列に置く。エミッタは `CE` で交流の GND に落ちている。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: litevna64
 sweep: 50k-100M 201
 title: 図6 エミッタ接地増幅の入力の S11 (等価回路で計算) — 低い所は Smith の右端

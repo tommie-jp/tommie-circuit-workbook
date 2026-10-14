@@ -20,6 +20,7 @@ source: 自作
 コレクタ帰還バイアス (抵抗 2 本だけで組める、簡単だが hFE に弱い)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 コレクタ帰還バイアス
 parts:
   VCC: vcc 5,2 5V
@@ -41,6 +42,7 @@ style:
 分圧バイアス (2-3 と同じ形。抵抗 4 本要るが hFE に強い)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 分圧バイアス (2-3 と同じ形)
 parts:
   VCC: vcc 3,2 5V
@@ -103,6 +105,7 @@ Supplies の +5 V で、どちらも電流は 1 mA 未満なので各レール�
 (テスターの DCV でもよい)。この題は直流の動作点だけを見るので、オシロの波形の図は付けない。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 コレクタ帰還バイアスを組む (図1。Scope 1+ をコレクタへ)
 # 上の赤いレール = +5V、青いレール = GND
 board: half
@@ -139,6 +142,7 @@ wires:
 - Scope の 1+ (橙) をコレクタの列 6 (`c6`)、1− (黒) を GND のレールへ
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 分圧バイアスを組む (図2。Scope 1+ をコレクタ、2+ をベースへ)
 # 上の赤いレール = +5V、青いレール = GND
 board: half

@@ -29,6 +29,7 @@ Zoc = −jZ₀、Zsc = +jZ₀ と、**リアクタンスの大きさがそのま
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 中身の分からない 1 m のケーブルの先を開放・短絡
 parts:
   J1: sma 2,2 mirror CH0
@@ -66,6 +67,7 @@ notes:
 見えるはずの画面 (理想の模型)。まず先端開放。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-60M 119
 title: 図2 先端開放 (Zoc) — 24.73 MHz で X = −75 Ω
@@ -85,6 +87,7 @@ markers:
 先端短絡。掃引とマーカーは図2 と同じ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-60M 119
 title: 図3 先端短絡 (Zsc) — 24.73 MHz で X = +75 Ω

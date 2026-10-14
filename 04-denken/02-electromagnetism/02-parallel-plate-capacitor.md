@@ -26,6 +26,7 @@ board: —
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 アルミ箔のコンデンサをテスターで測る
 style:
   standard: jis

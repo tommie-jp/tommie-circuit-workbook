@@ -18,6 +18,7 @@ SRF をまたぐ様子を見る。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 基準抵抗と 100 µH のコイル (掃引)
 parts:
   AD:
@@ -51,6 +52,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -89,6 +91,7 @@ Rref よりずっと小さく、CH2 の読みが小さくなって誤差が増�
 正確な \|Z\| そのものより**位相が反転する周波数を見つけること**なので実害は小さい。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 SRF の上 (7.5 MHz) では CH2 (コイルの両端) が CH1 (電流) より約 90° 遅れる
 time: 20ns/div
 trigger: ch1 rising 0V
@@ -124,6 +127,7 @@ CH1 は 100 mV/div、CH2 は 500 mV/div と尺度を変えてあり、CH2 の Vp
 掃引で記録した \|Z\| と位相を周波数に対して並べると、次の形になる。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 7.12 MHz (SRF) で |Z| が山になり、位相が +90° から −90° へ反転する
 x: 周波数 Hz log 100k..10M
 y:

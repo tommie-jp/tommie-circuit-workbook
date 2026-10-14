@@ -19,6 +19,7 @@ WaveForms の **Impedance** (インピーダンスアナライザ) は、専用�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 基準抵抗と DUT を直列にして電流と電圧を読む
 parts:
   AD:
@@ -50,6 +51,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -92,6 +94,7 @@ Rref は **DUT と同じ桁の値**を選ぶ (ここは両方 1 kΩ)。桁が離
 2 本は同じ振幅・同じ位相なので、ぴったり重なって 1 本に見える。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 CH1 (Rref) と CH2 (DUT) が同じ振幅・同じ位相で重なる
 time: 500us/div
 trigger: ch1 rising 0V

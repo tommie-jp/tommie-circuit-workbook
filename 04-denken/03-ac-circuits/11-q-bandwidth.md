@@ -28,6 +28,7 @@ f0 / Q になる。R を 150 Ω と 470 Ω に替えて、AD の Network (ネッ
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RLC 直列 (R1 は GND の側)
 style:
   standard: jis
@@ -60,6 +61,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (1 回目 R1 = 150 Ω)
 board: half
 parts:
@@ -104,6 +106,7 @@ Network は W1 を掃引し、CH2 ÷ CH1 の大きさと位相を描く。CH1 �
 f2 (1.72 kHz、R1 = 150 Ω) の画面。V_R は電源の 0.707 倍で、45° 遅れる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 f2 (1.72 kHz) — V_R (CH2) は 0.707 倍、45° 遅れる
 time: 200us/div
 trigger: ch1 rising 0V
@@ -149,6 +152,7 @@ measure: [vmax, freq, phase]
 右の 2 列では、−3 dB は 0 dB からではなく**山の高さから** 3 dB 下を読む。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 R が小さいほど山は細い — −3 dB の幅が帯域幅
 x: 周波数 Hz log 500..5k
 y: V_R / V dB -30..0

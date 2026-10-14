@@ -71,6 +71,7 @@ DUT は 0-3 の 20 dB パッド (43 Ω・11 Ω・43 Ω、E24) を 2 段つない
 アッテネータ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 20 dB パッドを 2 段 (約 40 dB)
 parts:
   J1: sma 2,2 mirror CH0
@@ -100,6 +101,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 9x7cm
   silk: board
@@ -153,6 +155,7 @@ J1 に CH0、J2 に CH1 のケーブルをつなぐ。43・11・43 Ω の T 型�
 | 表示 | S21 の Log Mag、S11 の Log Mag |
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 404
 title: 図3 40 dB のパッドは S21 が −39.50 dB で平ら

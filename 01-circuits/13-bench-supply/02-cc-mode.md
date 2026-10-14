@@ -33,6 +33,7 @@ LED を抵抗なしで定電圧の電源に直につなぐと、LED の順方向
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CC で LED を光らせる (電流制限は電源、RS は測るだけ)
 parts:
   U1:
@@ -77,6 +78,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに LED と RS、電源装置と AD3 をつなぐ
 board: half
 parts:
@@ -140,6 +142,7 @@ WaveForms の Scope で、1 ch (RS の電圧) を 20 mV/div、2 ch (出力電圧
 1−・2− は電源の − (GND) につなぐ。電源の出力は接地から浮いているので、GND を − に挟んでよい。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 出力オンで 2 ch が約 2.1 V、1 ch が 100 mV に落ち着く
 time: 1ms/div
 trigger: ch2 rising 1V at -5div

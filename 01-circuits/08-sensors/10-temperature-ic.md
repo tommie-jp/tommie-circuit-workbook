@@ -19,6 +19,7 @@ era: 今
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 温度センサー IC の出力を取り出す
 parts:
   VCC: vcc 2,2 5V

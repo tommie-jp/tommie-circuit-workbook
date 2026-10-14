@@ -22,6 +22,7 @@ device: H4
 電流が流れ、磁束が足し合う。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 コモンモード (2 本の巻線を並列に)
 parts:
   J1: sma 2,4 mirror CH0
@@ -46,6 +47,7 @@ wires:
 戻る。行きと帰りの電流と同じで、磁束が打ち消し合う。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 ディファレンシャルモード (A2 と B2 を結んで直列に)
 parts:
   J1: sma 2,4 mirror CH0
@@ -75,6 +77,7 @@ wires:
 実物のピンの並びは品ごとに違うので、データシートのピンの図で確かめる。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -107,6 +110,7 @@ wires:
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/perfboard/11-common-mode-choke-1.svg)
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -152,6 +156,7 @@ wires:
 いちばん通らない。理想の谷は枠の下へ抜ける (印 3 は −94 dB) が、実物はコアの損失で丸まる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 50k-10M 201
 title: 図5 コモンモード — 1 MHz で −40.3 dB、1.59 MHz で谷
@@ -171,6 +176,7 @@ markers:
 **2. ディファレンシャルモード** — 同じ設定で。漏れの 2 µH しか残らず、ほとんど素通り。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 50k-10M 201
 title: 図6 ディファレンシャルモード — 1 MHz で −0.15 dB

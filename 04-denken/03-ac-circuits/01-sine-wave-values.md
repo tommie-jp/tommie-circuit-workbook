@@ -26,6 +26,7 @@ AD のオシロスコープ 1 つで、この 3 つを実測して比を確か�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 正弦波を負荷抵抗で受ける
 style:
   standard: jis
@@ -49,6 +50,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -84,6 +86,7 @@ wires:
 波形を丸ごと表示した画面。正の半周期は X1 (0) から 0.5 ms まで、X2 はその真ん中の山に置いてある。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 最大値 1 V・実効値 0.707 V、1 周期の平均は 0
 time: 200us/div
 trigger: ch1 rising 0V
@@ -98,6 +101,7 @@ measure: [vmax, rms, avg, freq]
 右端が 0.5 ms)。X2 は山 (0.25 ms) に置いてある。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 正の半周期だけを映すと、平均は 0.637 V
 time: 50us/div
 trigger: ch1 rising 0V at -5div

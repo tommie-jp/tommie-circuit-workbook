@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC ローパスのステップ応答
 parts:
   M1: voltmeter 1,1 1,3 l=$\mathrm{CH1}$
@@ -39,6 +40,7 @@ CH1 は W1 の出力そのもの (方形波)、CH2 は C1 の両端 (充放電�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで RC ローパスを測る
 board: half
 parts:
@@ -72,6 +74,7 @@ R1 と C1 は 10 列の穴で中点 (RC の接続点) を共有する。CH2 は�
 | カーソル | 縦カーソル 2 本を X (時間) モードにする |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 C の電圧 (CH2) が 2.08 V に届くまでをカーソルで読むと 1 τ = 1 ms
 time: 1ms/div
 trigger: ch1 rising 1.65V

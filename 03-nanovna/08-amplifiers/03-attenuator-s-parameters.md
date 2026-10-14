@@ -27,6 +27,7 @@ E24 系列に丸めると **R_shunt = 100 Ω、R_series = 68 Ω**。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 パイ型 10 dB アッテネータ
 parts:
   J1: sma 2,2 mirror CH0
@@ -53,6 +54,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -96,6 +98,7 @@ wires:
 抵抗だけの回路なので周波数によらず一定になる**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-1000M 201
 title: 図3 π 型 10 dB アッテネータ (E24 丸め後) — S21 −9.63 dB・S11 −49.6 dB で平ら

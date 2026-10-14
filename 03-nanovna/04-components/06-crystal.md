@@ -19,6 +19,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 直列治具に水晶を挿す
 parts:
   J1: sma 2,2 mirror CH0
@@ -38,6 +39,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -78,6 +80,7 @@ Q = (1/Rm)√(Lm/Cm) ≈ 5.3 万 — 水晶が Q の高さで知られるとお�
 見えるはずの画面 (理想の模型)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 9.99M-10.03M 401
 title: 図3 10 MHz 水晶の S21 — fs (通る) と fp (通らない)

@@ -66,6 +66,7 @@ S21 (通過) の遅れは片道ぶん (τ) だけ。
 先を開放した 10 cm のケーブルで**見えるはずの画面** (理想の模型から計算した破線)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-1G 201
 title: 図1 先を開放した 10 cm のケーブルは Smith の外周を回る
@@ -89,6 +90,7 @@ notes:
 同じケーブルの群遅延 (図2) は周波数によらず一定になる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-1G 201
 title: 図2 同じケーブルの群遅延は一定の 1.01 ns (往復の 2τ)

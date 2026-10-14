@@ -22,6 +22,7 @@ era: 今
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 555 非安定でつくる方形波
 parts:
   V1: vsource 2,3 2,6 5
@@ -74,6 +75,7 @@ R1 = R2 = 10 kΩ、C1 = 10 nF のとき、周波数と Duty 比 (1 周期のう�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 555 非安定をブレッドボードに組む
 # 上下とも赤レール = +5V、青レール = GND (上下のレールは 28・29 列でつなぐ)
 board: half
@@ -138,6 +140,7 @@ wires:
 PC オシロなら付属ソフトの Scope 画面で同じように設定する。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 555 の出力 (3 番)。High 139 µs と周期 208 µs をカーソルで読む
 time: 50us/div
 trigger: ch1 rising 1.5V

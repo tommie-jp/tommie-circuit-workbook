@@ -20,6 +20,7 @@ V<sub>F</sub> が下がって電流が増え、さらに発熱するという悪
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 LM317 の 2 端子定電流回路でパワー LED を光らせる
 parts:
   VCC: vcc 2,2 9V
@@ -62,6 +63,7 @@ LED に約 350 mA が流れるので、ブレッドボードの 1 穴 200 mA の
 ユニバーサル基板 (perfboard、5×7 cm) に半田付けする。電源の 9 V は 12 V 以下、周波数は直流なので、perfboard の範囲に収まる。
 
 ```perf
+# ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
 board:
   size: 5x7cm
   h: 1.6mm

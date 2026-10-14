@@ -38,6 +38,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 AD の波形発生器と抵抗負荷
 style:
   standard: jis
@@ -62,6 +63,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -99,6 +101,7 @@ notes:
 | Scope | CH1 (1+ / 1−) = W1 の電圧。DC 結合、500 mV/div、200 µs/div。Measure で Amplitude を読む |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 W1 の波形 (CH1) — 振幅 1 V のとき R1 = 100 Ω に 10 mA
 time: 200us/div
 trigger: ch1 rising 0V

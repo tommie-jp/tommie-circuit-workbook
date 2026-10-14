@@ -25,6 +25,7 @@ MOSFET を高い周波数でオン・オフし、コイルとコンデンサで�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 降圧チョッパ
 style:
   standard: jis
@@ -71,6 +72,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 # 上の赤レール (+t) = 電源 (5 V) の + (節点 P)、青レール (-t) = GND。電源は AD の Supplies (V+)
 board: half
@@ -131,6 +133,7 @@ CH1 に当たる)。下の CH3 は、CH1 の Offset を −2.35 V にして出�
 実機なら 5 µs/div で 5 周期を見るが、図は LC の過渡が消えるまで回す都合で 20 µs/div (20 周期) にした。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 出力 2.35 V に乗るリップルは 1.66 mVpp
 time: 20us/div
 trigger: ch1 rising 2.35V
@@ -153,6 +156,7 @@ P (5 V) の半分近くあり 8 bit でも埋もれないので、**回路はそ
 CH1 − CH2 で引く** (図4)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 汎用オシロでの測り方
 style:
   standard: jis

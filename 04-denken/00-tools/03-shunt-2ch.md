@@ -25,6 +25,7 @@ AD のオシロスコープが直に読めるのは電圧だけで、電流は�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 シャント抵抗で電流を電圧に
 style:
   standard: jis
@@ -52,6 +53,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -90,6 +92,7 @@ wires:
 | Scope | CH1・CH2 とも DC。CH2 の Range は小さめ (200 mV/div 程度) にして分解能を上げる |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 直流を見る — CH1 (R1) 4.90 V、CH2 (Rs) 104 mV
 time: 1ms/div
 trigger: ch1 rising
@@ -124,6 +127,7 @@ AD の CH2 は差動入力なので、Rs の両端 (5 列と 10 列) を 2+ と 
 試験の図は電流計を電源の + 側に描くことが多いが、直列なら電流計の位置で読みは変わらない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 汎用オシロでの測り方
 style:
   standard: jis

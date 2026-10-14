@@ -40,6 +40,7 @@ Smith チャートの**中心からの距離は |Γ| (ガンマ)** で、SWR = (
 ## 擬似線路の回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 4 段の擬似線路と 100 Ω
 parts:
   J1: sma 2,3 mirror
@@ -77,6 +78,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 4 段の擬似線路と 100 Ω をブレッドボードで組む (図3・図8)
 board: half
 parts:
@@ -127,6 +129,7 @@ wires:
 4 段の擬似線路の先に 100 Ω を付けた負荷。**半波長 (約 2.92 MHz) で 1 周**する。SWR の線は、どの周波数でも 2.0 の近く (1.8〜2.0) にとどまる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 201
 title: 図3 4 段の擬似線路と 100 Ω — 円を 1 周、SWR はほぼ 2 のまま
 dut:
@@ -162,6 +165,7 @@ markers:
 同じ負荷で擬似線路を 8 段にすると、**同じ円を 2 周**する (半波長が約 1.47 MHz に縮むため)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 8 段の擬似線路と 100 Ω
 parts:
   J1: sma 2,3 mirror
@@ -205,6 +209,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/03-swr-circle-2.svg)
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図5 8 段の擬似線路と 100 Ω (full のブレッドボード)
 board: full
 parts:
@@ -245,6 +250,7 @@ wires:
 - full のブレッドボードは、レールが中央で左右に切れている物がある。この図は上の − レールの 1〜49 列目を使うので、**中央 (32 列目と 35 列目の間) を黒い線でまたいでおく** (切れていない物なら無くてもよい)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 201
 title: 図6 8 段の擬似線路と 100 Ω — 同じ円を 2 周
 dut:
@@ -284,6 +290,7 @@ markers:
 4 段の擬似線路の先を開放する (図 2 の R1 を抜く)。|Γ| = 1 なので、**外周そのものを回る** (SWR ∞)。λ/4 (1.47 MHz) で左端 (短絡と同じ) になる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図7 4 段の擬似線路の先を開放
 parts:
   J1: sma 2,3 mirror
@@ -312,6 +319,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/03-swr-circle-3.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 201
 title: 図8 4 段の擬似線路の先を開放 — 外周を 1 周
 dut:

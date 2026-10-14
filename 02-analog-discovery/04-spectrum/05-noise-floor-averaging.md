@@ -18,6 +18,7 @@ Scope の Average (取り込みを何回も繰り返して重ねる) を使う�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック (W1 を 1+ に直結)
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -33,6 +34,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
 board: half
 parts:
@@ -61,6 +63,7 @@ W1 と 1+ は 5 列に挿すだけで、列の内側でつながる。GND と 1�
 | Spectrum | Source: Channel 1。**Start 0 Hz、Stop 20 kHz**。Window: Rectangular (ノイズフロアの比較は ENBW が一番狭い窓が見やすい、4-3)。単位: dBm |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 同じ信号を時間で見ると 1 kHz の正弦波 (雑音は平均で減るので画面には描かない)
 time: 200us/div
 trigger: ch1 rising 0V
@@ -87,6 +90,7 @@ measure: [vpp, freq]
 | 256 | −24.08 dB | 256 倍 |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 平均回数 N を 4 倍にするたびにノイズフロアが 6 dB 下がる
 x: 平均回数 回 log 1..1000
 y: ノイズフロアの下がり幅 dB -30..0

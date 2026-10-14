@@ -28,6 +28,7 @@ L = 47 nH、C = 56 pF なら f₀ = 1 / (2π√(47n × 56p)) ≈ **98.1 MHz**
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 直列共振をシャントに入れたノッチ
 parts:
   J1: sma 2,2 mirror CH0
@@ -50,6 +51,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -91,6 +93,7 @@ wires:
 コイルの Q = 50 (ESR 0.58 Ω) を入れた**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-200M 201
 title: 図3 98 MHz ノッチの S21 (コイル Q 50) — FM 帯を 12 dB 以上落とす

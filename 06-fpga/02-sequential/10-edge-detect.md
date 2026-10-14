@@ -153,6 +153,7 @@ rise pulses=3 fall pulses=3
 ## シミュレーションの波形
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 IN が 1 の間ずっと立っていても、RISE は変わった直後の 1 回だけ。FALL も 1 回だけ
 device: generic
 time: 24us/div

@@ -29,6 +29,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 短絡試験の回路 (2 次を短絡)
 style:
   standard: jis
@@ -63,6 +64,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (2 次を短絡)
 board: half
 parts:
@@ -108,6 +110,7 @@ CH2 は CH1 の約 1/10 なので、CH2 だけ 100 mV/div に上げてある。W
 取られた残りが CH1 に出る。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 I1 の分 (CH2、100 mV/div) は Vsc (CH1、1 V/div) より 18° 遅れる
 time: 200us/div
 trigger: ch1 rising 0V
@@ -129,6 +132,7 @@ AD の CH2 は Rs1 の両端を差動で挟んでいる。Rs1 の電圧 (300 mV)
 (当てても 1 点だけなら害は無いが、測る物が無い)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 汎用オシロでの測り方
 style:
   standard: jis

@@ -39,6 +39,7 @@ W1 を 50 Hz にすると LED は 1 秒に 50 回点滅するが、目には連�
 ### 送信機
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 送信機 (水晶で決める 27.145MHz の発振器、W1 で断続)
 parts:
   W1: square 3,3 3,5 l=$\mathrm{W1}$
@@ -110,6 +111,7 @@ notes:
 ### 受信機
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 受信機 (同調・検波・LM358 のコンパレータで LED)
 parts:
   ANT: antenna 2,3
@@ -215,6 +217,7 @@ Manhattan 方式で組む。島は回路図の節点ごとに 1 つで、GND の
 ### 送信機 (銅張り基板)
 
 ```copper
+# 銅張り基板の寸法図 (tommie-fence の copper フェンス)
 board:
   size: 70x50mm
   ground: back
@@ -301,6 +304,7 @@ wires:
 ### 受信機の高周波部 (銅張り基板)
 
 ```copper
+# 銅張り基板の寸法図 (tommie-fence の copper フェンス)
 board:
   size: 70x50mm
   ground: back
@@ -385,6 +389,7 @@ wires:
 図は部品面から見た図で、部品のピンはその穴を通して裏の半田面で半田付けする。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 5x7cm
   h: 1.6mm
@@ -504,6 +509,7 @@ W1 を DC 5 V (Offset 5 V・Amplitude 0 V) にして送信機を発振させた�
 ## 計器の画面
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図6 送信機の搬送波 (Cant の出口を 50Ω で受ける)
 device: tinysa-ultra
 center: 27.145MHz
@@ -524,6 +530,7 @@ Cant (2.67 kΩ) と 50 Ω の分圧のほか、コレクタの波形のひずみ
 (タンクが 27.145 MHz に合った所で一番高い)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図7 キー (CH2) と受信機の検波出力 (CH1)
 time: 5ms/div
 trigger: ch2 rising 2.5V

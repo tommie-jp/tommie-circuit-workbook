@@ -19,6 +19,7 @@ AD3 の Scope の ADC は 14 bit。公式仕様では「平均化を使うと 16
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 LED の電流を 1 Ω で測る (2-4 と同じ)
 parts:
   V1: vsource 1,1 1,4 5
@@ -40,6 +41,7 @@ Rs の両端（≈ 9.1 mV、mV の値がそのまま mA の値）。
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで LED の電流を測る (2-4 と同じ)
 board: half
 parts:

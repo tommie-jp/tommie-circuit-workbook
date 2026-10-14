@@ -18,6 +18,7 @@ CH1 と CH2 の両方に直結すれば、理想的には**どの周波数でも
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 スルー (基準) の結線
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -36,6 +37,7 @@ W1 を CH1・CH2 の両方に直結する (5-8 で使うスルー基準と同じ
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ と 2+ の両方へ)
 board: half
 parts:
@@ -65,6 +67,7 @@ W1・1+・2+ を同じ 5 列に挿す。GND・1−・2− は上の − レー�
 | Network | Start・Stop・Steps・Type (Linear/Log)・Average を下表のとおり変える |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 スルーなら CH2 は CH1 にぴったり重なる (100 kHz、0 dB・0°)
 time: 2us/div
 trigger: ch1 rising 0V
@@ -90,6 +93,7 @@ measure: [vpp, freq]
 図4 は Steps 201 の各点の周波数を、ステップの番号に対して描いたもの。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 Linear は 1 歩目で 5.1 kHz に飛び、Log は 50 歩で 1 桁ずつ進む
 x: ステップ番号 番 0..200
 y: 周波数 Hz log 100..1M

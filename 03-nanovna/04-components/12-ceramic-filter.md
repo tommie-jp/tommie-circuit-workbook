@@ -23,6 +23,7 @@ FM ラジオの中間周波 (10.7 MHz) の**セラミックフィルタ**は、�
 50 + 270 = 320 Ω (≈ 330 Ω) にする。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 10.7 MHz のセラミックフィルタを 270 Ω で 330 Ω 系に
 parts:
   J1: sma 2,2 mirror CH0
@@ -57,6 +58,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -103,6 +105,7 @@ wires:
 見えるはずの画面 (R1・R2 も入れた理想の模型)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 10.3M-11.1M 401
 title: 図3 セラミックフィルタの等価回路 — 中心 10.7 MHz で −16.1 dB、幅 280 kHz

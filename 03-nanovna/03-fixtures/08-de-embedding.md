@@ -35,6 +35,7 @@ A と B は単独では測れない (片側がユニバーサル基板の上で�
 線のインダクタンス (値は見積もり)。L3 は部品のピン (i6〜i9 の 3 穴ぶん)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 治具ごと測った 10 Ω の等価回路
 parts:
   J1: sma 1,2 mirror CH0
@@ -85,6 +86,7 @@ notes:
 残るのは「部品」と「同じ長さの線」の差になり、ピンの L3 は線のぶんで消える。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -119,6 +121,7 @@ wires:
 **1. 2x-Thru** — 見えるはずの画面。線のインダクタンスで Smith の点が中心から上へずれる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 3M-300M 100
 title: 図3 2x-Thru — 治具だけで 300 MHz に +j105.4 Ω
@@ -139,6 +142,7 @@ markers:
 **2. 3-1 の治具に 10 Ω** — 治具ごと測った値。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 3M-300M 100
 title: 図4 治具ごと測った 10 Ω — 300 MHz で 86.2 Ω + j101.8 Ω
@@ -162,6 +166,7 @@ markers:
 **3. De-embedding の後** — 治具を引くと、部品だけ (50 Ω + 10 Ω = 60 Ω の 1 点) が残る。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 3M-300M 100
 title: 図5 治具を引いた後は 60 Ω の 1 点 (X は 0)

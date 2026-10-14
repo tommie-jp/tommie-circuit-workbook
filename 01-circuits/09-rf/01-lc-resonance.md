@@ -19,6 +19,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 R1 の電圧でトランジスタをオンにして LED を点ける
 parts:
   V1: sine 1,6 1,8 3
@@ -87,6 +88,7 @@ R1 の下の端を GND にしておけば、CH2 で R1 の上の端の電圧を�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 トランジスタで LED を点ける
 board: half
 parts:
@@ -225,6 +227,7 @@ f<sub>0</sub> = 15.9 kHz で頂点になる山 (共振曲線) が描ければよ
 見えるはずの共振曲線 (上の表のシミュレーション値)。横軸は周波数 (対数)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 共振曲線 — 15.9kHz で山になり、発生器の出力抵抗が小さいほど高い
 x: 周波数 Hz log 2k..32k
 y: 電流 mA
@@ -289,6 +292,7 @@ notes:
 出力 50 Ω の発生器で見える画面。CH1 は発生器の出力、CH2 は R1 の電圧 (輪の電流 × 100 Ω)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 共振点 (15.9kHz) — CH2 が最大になり、CH1 と位相が揃う
 time: 20us/div
 trigger: ch1 rising 0V
@@ -300,6 +304,7 @@ measure: [vpp, freq, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/01-lc-resonance-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 共振より下 (12kHz) — CH2 は 1.01Vpp に下がり、CH1 より進む
 time: 20us/div
 trigger: ch1 rising 0V

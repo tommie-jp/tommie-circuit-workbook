@@ -18,6 +18,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 先を開放した 1 m のスタブを T で分岐
 parts:
   J1: sma 2,2 mirror CH0
@@ -56,6 +57,7 @@ CH0 と CH1 の間を SMA の T 型アダプタで直結し、T の 3 つ目の�
 見えるはずの画面 (理想の模型。長さ 1 m・速度係数 0.66 と仮定)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 301
 title: 図2 1 m の開放スタブ (シャント) の S21 — ノッチが並ぶ

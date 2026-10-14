@@ -20,6 +20,7 @@ era: 古
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 コイルで磁界の音を拾う
 parts:
   L1: inductor 2,1 2,3 1H
@@ -57,6 +58,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 自作コイルの両端にイヤホンと Scope をつなぐ
 board: half
 parts:
@@ -100,6 +102,7 @@ notes:
 | Trigger | CH1、立ち上がり、0 V (トリガが掛からないときは Auto にする) |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 コイルの起電力 — 50 Hz 地域で約 4.9 mV (目安の想定図)
 time: 5ms/div
 trigger: ch1 rising 0V

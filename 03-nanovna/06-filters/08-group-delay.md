@@ -31,6 +31,7 @@ NanoVNA は隣り合う 2 点の位相の差から求める。点の間隔が広
 **作るのはチェビシェフ** (6-5 と同じユニバーサル基板)。バターワース (6-5 の図2) は計算だけで比べる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 5 次チェビシェフ 0.5 dB ローパス (6-5 と同じ)
 parts:
   J1: sma 2,2 mirror CH0
@@ -60,6 +61,7 @@ wires:
 6-5 の図3 と同じユニバーサル基板。部品面から見た図。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 26x10
   slots: on
@@ -107,6 +109,7 @@ wires:
 (作る方) の**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-50M 301
 title: 図3 チェビシェフ — 群遅延は 20 ns から 30 MHz の 56 ns まで増える
@@ -132,6 +135,7 @@ markers:
 図3 (10 ns/目盛) と図4 (2.5 ns/目盛) で違う。**高さは目盛ではなく読み値の表で比べる**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-50M 301
 title: 図4 バターワース (計算のみ) — 群遅延の山は 26 ns と低く、なだらか

@@ -43,6 +43,7 @@ Tang Nano 9K のピンの電圧は、Sipeed の wiki のピン配置図で確か
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 3V3 から抵抗と LED を通して GND へ
 parts:
   U1: pico2 3,5.2
@@ -67,6 +68,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 3V3 の線を LED に引き、AD3 の DIO0 で見る
 board: full
 parts:
@@ -105,6 +107,7 @@ wires:
 AD3 の DIO は 3.3 V の信号で、Pico 2 の GPIO と電圧がそろう (AD3 の入力の許容は Digilent の仕様書で確かめる)。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 3V3 の線は H のまま動かない
 device: ad3
 time: 1ms/div

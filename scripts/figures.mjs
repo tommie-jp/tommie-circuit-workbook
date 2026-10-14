@@ -41,6 +41,16 @@ const CACHE_FILE = join(CACHE_DIR, 'render-manifest.json');
 /** このスクリプトが書いた画像の行。Pages の URL を指す画像だけの行。 */
 const FIGURE_LINE = new RegExp(`^ {0,3}!\\[[^\\]]*\\]\\(${PAGES_URL.replace(/[.]/g, '\\.')}/[^)\\s]+\\)$`);
 
+/**
+ * フェンスの 1 行目に置く名札のコメント。GitHub は言語名を出さないので、字の側でも何の図か分かるようにする。
+ * この行も `npm run figures` が書く。手で直さない。plantuml は名の知れた言語なので付けない。
+ */
+const LABEL_LINE = /^ *# .+ \(tommie-fence の \S+ フェンス\)$/;
+
+function labelLine(indent, spelling, fence) {
+  return `${indent}# ${LABELS[fence]} (tommie-fence の ${spelling} フェンス)`;
+}
+
 function loadManifest() {
   if (!existsSync(CACHE_FILE)) return {};
   try {
@@ -71,7 +81,7 @@ export function figurePaths(path, blocks) {
 /** 前に書いた画像の行を (前の空行ごと) 除く。 */
 function withoutFigures(lines) {
   return lines.filter((line, index) => {
-    if (FIGURE_LINE.test(line)) return false;
+    if (FIGURE_LINE.test(line) || LABEL_LINE.test(line)) return false;
     return !(line === '' && FIGURE_LINE.test(lines[index + 1] ?? ''));
   });
 }
@@ -82,12 +92,18 @@ export function withFigures(path, text) {
   const { blocks } = fencesIn(lines.join('\n'));
   const figures = figurePaths(path, blocks);
   const after = new Map();
+  const labels = new Map();
   blocks.forEach((block, index) => {
     if (block.close === null) return;
     const indent = /^ */.exec(lines[block.open])[0];
     after.set(block.close, `${indent}![${LABELS[block.fence]}](${PAGES_URL}/${figures[index]})`);
+    const spelling = /^ *(?:`{3,}|~{3,}) *(\S+)/.exec(lines[block.open])?.[1];
+    if (block.fence !== 'plantuml' && spelling) labels.set(block.open, labelLine(indent, spelling, block.fence));
   });
-  return lines.flatMap((line, index) => (after.has(index) ? [line, '', after.get(index)] : [line])).join('\n');
+  return lines.flatMap((line, index) => {
+    const out = labels.has(index) ? [line, labels.get(index)] : [line];
+    return after.has(index) ? [...out, '', after.get(index)] : out;
+  }).join('\n');
 }
 
 function main(args) {

@@ -31,6 +31,7 @@ Li-ion 電池はスマートフォンや携帯機器の電池で、ほかの電�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 TP4056 (保護回路つき) での Li-ion 充電
 parts:
   J1: usb-c 2,3
@@ -77,6 +78,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 充電の大電流はブレッドボードを通さず、負荷の LED だけをブレッドボードに組む
 # 上の赤レール = OUT+ (電池の電圧)、青レール = OUT− (負荷の GND)。USB の 5 V は M1 の USB ソケットへ、電池は B+ / B− へ (ブレッドボードに入れない)
 board: half

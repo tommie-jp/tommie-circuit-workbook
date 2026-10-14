@@ -19,6 +19,7 @@ NTC サーミスタは、温度が上がるほど抵抗が下がる素子。CdS 
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 サーミスタが温まるとブザーが鳴る
 parts:
   VCC: vcc 2,2 5V
@@ -58,6 +59,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上の赤いレール = +5V、青いレール = GND (40・41 列で下のレールへ渡す)
 board: full

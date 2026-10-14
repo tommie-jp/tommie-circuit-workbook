@@ -27,6 +27,7 @@ LED が点いていれば出力は 1、消えていれば 0。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 AND・OR・NOTを並べて比べる
 parts:
   A: switch 3,4 3,6
@@ -123,6 +124,7 @@ V<sub>OH</sub> は流す電流で決まる。出力の電圧の落ちと電流�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: full
 parts:

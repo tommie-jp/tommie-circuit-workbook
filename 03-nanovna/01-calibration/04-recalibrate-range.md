@@ -31,6 +31,7 @@ device: H4
 範囲を変えて**やり直した**あとの Thru は、元の範囲のときと同じ理想値になる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 300M-900M 101
 title: 図1 300〜900 MHz で再校正した後の Thru は平ら

@@ -19,6 +19,7 @@ Network の Bode 線図はふつう利得と位相を重ねて表示する。**1
 5-1 と同じ RC ローパスだが、値を変えて別の f<sub>c</sub> にする。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC ローパス (R1 2.2 kΩ、C1 47 nF)
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -40,6 +41,7 @@ f<sub>c</sub> = 1 / (2π × 2.2 kΩ × 47 nF) ≈ **1.539 kHz**。
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -70,6 +72,7 @@ wires:
 | Network | Start 100 Hz、Stop 20 kHz、Log、Steps 101、表示: 利得 (dB) と位相 (deg) を重ねる。カーソルを 3 本 (0.1×f<sub>c</sub>、f<sub>c</sub>、10×f<sub>c</sub>) 立てる |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 遮断周波数 (1539 Hz) で CH2 は CH1 の 0.71 倍、約 81 µs (45°) 遅れる
 time: 100us/div
 trigger: ch1 rising 0V
@@ -95,6 +98,7 @@ measure: [vpp]
 | 10 × f<sub>c</sub> | 15.39 kHz | −20.04 dB | −84.3° |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 −3 dB の線と −45° の線は同じ 1539 Hz で曲線を横切る
 x: 周波数 Hz log 100..20k
 y:

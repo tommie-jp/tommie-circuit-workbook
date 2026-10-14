@@ -19,6 +19,7 @@ Analog Discovery 3 (AD3) は付属の**ワイヤ**（フライングリード）
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック配線 (0-3 と同じ)
 parts:
   W1: sine 1,1 1,3 1
@@ -62,6 +63,7 @@ wires:
 ほぼ半分になる。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図2 付属ワイヤのループバックの Vpp — 9 MHz で約 1.0 V (2 段で −6 dB) まで落ちる
 x: 周波数 Hz log 100k..20M
 y: 振幅 Vpp V 0..2.2

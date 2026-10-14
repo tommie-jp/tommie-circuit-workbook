@@ -29,6 +29,7 @@ Analog Discovery (AD) の波形発生器を電源にし、2 ch のオシロス�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 遅れ力率の負荷とコンデンサ
 style:
   standard: jis
@@ -61,6 +62,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 # 上の青いレール = GND。コンデンサの枝は溝を渡って下の段へ、下の青いレールも GND
 board: half
@@ -112,6 +114,7 @@ C なしと C = 1.5 µF の 2 つの画面。電流 (CH2) は数十 mV なので
 赤の線は Math の瞬時電力 p で、その Avg が有効電力 P。Math も CH1・CH2 と同じく計算で描いた理想の線である。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 C なし — 線電流 (CH2) は 5.9 mA で 53° 遅れる。P は Math の Avg
 time: 200us/div
 trigger: ch1 rising 0V
@@ -124,6 +127,7 @@ measure: [vmax, rms, avg, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/07-power-factor-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 C = 1.5 µF — 線電流 (CH2) は 3.6 mA に減り、遅れは 6°。P は変わらない
 time: 200us/div
 trigger: ch1 rising 0V
@@ -145,6 +149,7 @@ AD の CH2 は Rs の両端を差動で挟む (2− が 10 列)。汎用オシ�
 線路の抵抗の役もそのまま。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図5 汎用オシロでの測り方
 style:
   standard: jis

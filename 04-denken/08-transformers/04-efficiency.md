@@ -36,6 +36,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 負荷 RL を替えて出力を測る回路
 style:
   standard: jis
@@ -72,6 +73,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (RL は h 行で差し替える)
 # 上のブロックの 15・18 列が 1 次、下のブロックの 15・18 列が 2 次
 board: half
@@ -118,6 +120,7 @@ RL を 5 通りに替え、そのたびに V2 を読む。表の計算で使う�
 RL = 33 Ω (最大効率の所) の画面。V2 は V1 の 1/36 ほどなので、CH1 だけ 20 mV/div に上げてある。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 RL 33 Ω — V2 (CH1、20 mV/div) は 55.3 mV、V1 (CH2) は 2 V
 time: 200us/div
 trigger: ch2 rising 0V
@@ -166,6 +169,7 @@ Pi は 8-2 の値 (1.05 µW) を全部の行で同じに使う。
 - 無負荷の V2 (56.6 mV) から、負荷をつなぐと V2 が下がる。この下がり方が 8-5 の電圧変動率
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 効率は銅損と鉄損が等しい 1.19 mA で最大 (縦軸の効率は 70 % から)
 x: 二次電流 mA log 0.05..20
 y:

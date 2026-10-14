@@ -31,6 +31,7 @@ device: H4
 同軸を直接アンテナ給電点へ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ダイポールの給電点 (直列 RLC の等価回路)
 parts:
   J1: sma 2,2 mirror CH0
@@ -71,6 +72,7 @@ wires:
 切り詰める前 (自分の共振 140 MHz、長すぎる状態) の**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 130M-160M 151
 title: 図2 長すぎるダイポール — 共振は 140 MHz、144 MHz では +jX (誘導性)

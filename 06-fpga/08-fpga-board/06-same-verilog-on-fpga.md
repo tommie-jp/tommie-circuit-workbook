@@ -308,6 +308,7 @@ openFPGALoader -b tangnano9k top_td4.fs
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 DIP スイッチで FPGA のピンを GND に落とす。AD3 は出力 4 本と TD4 のクロックを読む
 parts:
   AD:
@@ -378,6 +379,7 @@ wires:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図3 DIP スイッチは j 行の 4 本で、AD3 はヘッダの 1〜5 番から
 board: full
 parts:
@@ -434,6 +436,7 @@ notes:
 ## Logic に見えるはずの画面
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 TD4 の out は 5 Hz のクロックの立ち上がりで変わり、10 クロック (2 s) で 1 巡りする
 device: ad3
 time: 250ms/div

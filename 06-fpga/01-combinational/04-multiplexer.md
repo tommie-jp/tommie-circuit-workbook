@@ -28,6 +28,7 @@ device: SIM
 もう片方に b と sel を入れて、OR で合わせる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 1 ビットのマルチプレクサ (sel が 1 なら b、0 なら a)
 parts:
   sel: port 1,2
@@ -131,6 +132,7 @@ sel a b y
 実機で測った波形ではなく、実行結果から作った計算の図で、入力を変えた 1 回を 1 ms と見なして並べた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 sel と a と b を変えたときの y (Verilator の実行結果から作った計算の図)
 device: generic
 window: 6ms

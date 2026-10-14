@@ -20,6 +20,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 並列治具に 2 つのコンデンサ
 parts:
   J1: sma 2,2 mirror CH0
@@ -46,6 +47,7 @@ S21 (通り抜け) から、GND へ落ちている部品の合成インピーダ
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -91,6 +93,7 @@ i 行が CH0-CH1 の素通し線、l 行が GND のバス。C1・C2 とも i 行
 それぞれの SRF の間に**反共振**の山ができる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 100k-100M 401
 title: 図3 10 µF + 0.1 µF のシャントスルー — 谷 2 つと山は 20 MHz より下
@@ -112,6 +115,7 @@ notes:
 2 つの SRF と反共振の山がある 100 kHz〜20 MHz を広げる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 100k-20M 401
 title: 図4 100 kHz〜20 MHz に広げる — 2 つの SRF の間に反共振の山

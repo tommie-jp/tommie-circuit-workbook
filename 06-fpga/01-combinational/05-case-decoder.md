@@ -34,6 +34,7 @@ device: SIM
 その中から 2 本ずつを AND に入れる。4 つの AND のどれが 1 になるかが、a の値で決まる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 2 ビットから 4 本へのデコーダ
 parts:
   a1: port 1,2
@@ -146,6 +147,7 @@ a y
 実機で測った波形ではなく、実行結果から作った計算の図で、入力を変えた 1 回を 1 ms と見なして並べた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 a を 0 から 3 まで変えたときの y (Verilator の実行結果から作った計算の図)
 device: generic
 window: 4ms

@@ -27,6 +27,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 エミッタ接地増幅 (分圧バイアス)
 parts:
   VCC: vcc 6,1 5V
@@ -67,6 +68,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: full
 parts:
@@ -116,6 +118,7 @@ wires:
 入力は 50 mV と小さいので、CH1 は 20 mV/div、CH2 は 100 mV/div と V/div を分けてある。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 出力 (CH2) は入力 (CH1) の 4.68 倍で上下が逆 (V/div は別)
 time: 200us/div
 trigger: ch1 rising 0V

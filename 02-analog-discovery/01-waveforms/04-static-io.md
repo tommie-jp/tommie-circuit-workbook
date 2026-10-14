@@ -17,6 +17,7 @@ Static I/O は、AD3 のデジタル入出力ピン (`DIO0`〜) を
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 DIO0 で LED を光らせ、DIO1 でボタンを読む
 parts:
   AD:
@@ -54,6 +55,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで LED とボタンをつなぐ
 board: half
 parts:

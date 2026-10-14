@@ -27,6 +27,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 線のシャントと Y 負荷 (1 kΩ)
 style:
   standard: jis
@@ -78,6 +79,7 @@ notes:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/07-y-delta-conversion-1.svg)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 デルタ結線の負荷 (図1 の Y と入れ替える)
 style:
   standard: jis
@@ -117,6 +119,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 ブレッドボードと Analog Discovery (Y 負荷)
 # 上のブロック: TL071 の入力側と R1・R2、右に線のシャントと Y 負荷。下のブロック: 出力側と Rf、g・h・j 行で 3 相を右へ運ぶ
 board: full
@@ -187,6 +190,7 @@ notes:
 Y と Δ で同じ画面になる。線電流は 0.75 mA で、W1・W2 と TL071 の出力に十分小さい。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 Y でも Δ でも同じ — R_La (CH1) 0.248 V、端子 a (CH2) 0.752 V、同相
 time: 200us/div
 trigger: ch1 rising 0V

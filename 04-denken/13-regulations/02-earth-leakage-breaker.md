@@ -30,6 +30,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 往きと帰りにシャントを入れた漏電の模型
 style:
   standard: jis
@@ -71,6 +72,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -118,6 +120,7 @@ wires:
 | Measure | CH1・CH2・M1 の Maximum (振幅) |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 S1 を開く (漏電なし) — CH1 と CH2 が重なり、差 (Math) は 0
 time: 200us/div
 trigger: ch1 rising 0V
@@ -130,6 +133,7 @@ measure: [vmax]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/13-regulations/scope/02-earth-leakage-breaker-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 S1 を閉じる (漏電あり) — CH1 が CH2 より高く、差は 8.64 mV (0.864 mA)
 time: 200us/div
 trigger: ch1 rising 0V
@@ -153,6 +157,7 @@ Rgo の両端を 2 本の先端で挟んで CH1 − CH2 を取る手もあるが
 Rg の下の端は GND なので、先端 1 本で GND 基準に読める。往きの電流は KCL (I_go = I_ret + I_leak) で出す。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図5 汎用オシロでの測り方
 style:
   standard: jis

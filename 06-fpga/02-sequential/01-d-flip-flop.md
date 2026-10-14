@@ -21,6 +21,7 @@ D-FF の働きは 1 つだけ。**クロック (CLK) が 0 から 1 に変わる
 ## 論理図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 D フリップフロップ。CLK が 0 から 1 に変わる瞬間の D を Q に取り込む
 parts:
   D: port 2,5
@@ -105,6 +106,7 @@ verilator --timescale 1us/1ns --binary --timing --trace --top-module tb_dff dff.
 ## シミュレーションの波形
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 D の変化と Q。Q は立ち上がりの値だけ取り込む
 device: generic
 time: 10us/div

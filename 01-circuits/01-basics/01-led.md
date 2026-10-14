@@ -17,6 +17,7 @@ LED は**流す電流**で明るさが決まる部品で、電源に直につな
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 LED と電流を決める抵抗
 parts:
   V1: vsource 1,1 1,3 5
@@ -39,6 +40,7 @@ LED は光っている間、両端にほぼ一定の電圧が残る。これを*
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上の赤いレール = +5 V、青いレール = GND
 board: half

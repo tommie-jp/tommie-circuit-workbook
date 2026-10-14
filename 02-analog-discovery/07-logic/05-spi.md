@@ -18,6 +18,7 @@ MISO (DOUT)・CS の 4 本で、クロックも AD 自身が出す。分圧で�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 MCP3008 を SPI で読む
 parts:
   VCC: vcc 2,2 3.3V
@@ -63,6 +64,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -119,6 +121,7 @@ MISO は 14 クロック目の null ビット (0) の次、15 クロック目に
 つまり結果は 0b10_0000_0000 = 512 (下の表の 0b10 と 0x00)。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 SPI Mode 0 で 3 バイトを送る間の 4 本の線
 device: ad3
 time: 30us/div

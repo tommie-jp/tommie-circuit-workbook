@@ -32,6 +32,7 @@ OP アンプがこの 0.7 V を自分で上乗せし、歪みが消える。帰�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 W1 を OP アンプとプッシュプルで受ける
 style:
   standard: jis
@@ -94,6 +95,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -151,6 +153,7 @@ A の配線 (帰還が OP アンプの出力から) の画面。トランジス�
 (実際は電流で 0.6〜0.75 V ほど変わる)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 A の配線 — 0 V の前後で出力が止まる
 time: 5ms/div
 trigger: ch1 rising 0V
@@ -164,6 +167,7 @@ measure: [vmax, vmin, freq]
 B の配線 (帰還がプッシュプルの出力から) の画面。出力は入力と重なる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 B の配線 — 出力は入力と同じ
 time: 5ms/div
 trigger: ch1 rising 0V

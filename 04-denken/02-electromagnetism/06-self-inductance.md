@@ -26,6 +26,7 @@ AD で交流を流して L を測る。**L は巻数の 2 乗に比例**し、�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 コイルと基準抵抗を直列に (AD で測る)
 style:
   standard: jis
@@ -54,6 +55,7 @@ wires:
 コイルは両端の被覆をはがし、リードをブレッドボードの穴に直に挿す。R<sub>ref</sub> も同じブレッドボードに載せる。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -110,6 +112,7 @@ wires:
 100 回のコイルの画面。コイルの電圧は電流 (CH2) より 88.5° 進む (CH2 が 88.5° 遅れる)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 100 回のコイル — 電流 (CH2) はコイルの電圧 (CH1) より 88.5° 遅れる
 time: 2us/div
 trigger: ch1 rising 0V
@@ -131,6 +134,7 @@ measure: [vmax, freq, phase]
 CH2 (R<sub>ref</sub>、GND 基準) で、AD と同じに読める。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 汎用オシロでの測り方
 style:
   standard: jis
@@ -169,6 +173,7 @@ wires:
 巻数と L をグラフにすると、ほぼ L ∝ N² の放物線に乗る (図5。線は 100 回の 95.9 µH を N² 倍したもの。表の 200 回の 389 µH は、2 層目の分だけ線の 384 µH より上)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図5 L は巻数の 2 乗に比例する
 x: 巻数 回 0..220
 y: インダクタンス µH 0..450

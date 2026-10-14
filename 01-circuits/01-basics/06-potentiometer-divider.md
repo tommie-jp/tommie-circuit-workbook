@@ -21,6 +21,7 @@ source: 自作
 まずワイパーに何もつながない (無負荷) 状態。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ポテンショメータの無負荷の出力
 parts:
   V1: vsource 1,1 1,5 5
@@ -46,6 +47,7 @@ style:
 次にワイパーへ 10 kΩ の負荷 `RL` をつないで (図2)、無負荷の値とどれだけ違うかを見る。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 ポテンショメータに負荷をつないだとき
 parts:
   V1: vsource 1,1 1,5 5
@@ -82,6 +84,7 @@ Supplies の +5 V (電流は数 mA で、各レール約 50 mA の範囲に収�
 この題は直流の電圧だけを見るので、オシロの波形の図は付けない。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 ポテンショメータの分圧を AD3 の電圧計で当たる
 # 上の赤いレール = +5V、青いレール = GND
 board: half

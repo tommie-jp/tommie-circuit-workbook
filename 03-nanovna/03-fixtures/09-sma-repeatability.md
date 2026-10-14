@@ -37,6 +37,7 @@ device: H4
 1 つ目の測る物は 3-4 の自作 Load。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 自作 Load (100 Ω を 2 本並列) を CH0 に
 parts:
   J1: sma 2,2 mirror CH0
@@ -60,6 +61,7 @@ wires:
 3-4 の Load のユニバーサル基板をそのまま使う。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -95,6 +97,7 @@ wires:
 (1-7 の自作の Load の例と同じ値)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図3 自作 Load — 300 MHz で S11 は −28.5 dB
@@ -116,6 +119,7 @@ notes:
 **2. スルー治具** — 3-6 のスルーと同じ 52 nH の模型 (23 穴の線を 8-3 の経験式で見積もった値)。曲げの揺れは S21 の位相に出る。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図4 スルー治具 — 300 MHz で S21 の位相は −44.5°

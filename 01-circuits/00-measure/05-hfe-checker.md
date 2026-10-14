@@ -21,6 +21,7 @@ era: 古
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 一定のベース電流でコレクタ電流を読む
 parts:
   V1: vsource 2,1 2,3 5
@@ -60,6 +61,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 RB と RC を 5V につなぎ、Q1 のベースとコレクタへ入れる
 board: half
 parts:

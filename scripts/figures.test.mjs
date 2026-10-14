@@ -19,9 +19,9 @@ test('puts an image line right after each fence, skipping other code blocks', ()
   const text = '# t\n\n```circuit\nparts:\n```\n\n```text\n```\n\n```bread\n```\n\nend\n';
 
   assert.equal(withFigures(PATH, text), [
-    '# t', '', '```circuit', 'parts:', '```', '',
+    '# t', '', '```circuit', '# 回路図 (tommie-fence の circuit フェンス)', 'parts:', '```', '',
     `![回路図](${PAGES_URL}/01-circuits/01-basics/circuit/03-rc-charge.svg)`, '',
-    '```text', '```', '', '```bread', '```', '',
+    '```text', '```', '', '```bread', '# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)', '```', '',
     `![ブレッドボードの実体配線図](${PAGES_URL}/01-circuits/01-basics/breadboard/03-rc-charge.svg)`, '',
     'end', '',
   ].join('\n'));
@@ -31,7 +31,7 @@ test('rewriting twice changes nothing, and stale lines are replaced', () => {
   const once = withFigures(PATH, '```circuit\n```\n\ntext\n');
   assert.equal(withFigures(PATH, once), once);
 
-  const moved = once.replace('```circuit\n```\n', '```circuit\n```\n\n```circuit\n```\n');
+  const moved = `${once}\n\`\`\`circuit\n\`\`\`\n`;
   const fixed = withFigures(PATH, moved);
   assert.match(fixed, /circuit\/03-rc-charge-1\.svg/);
   assert.match(fixed, /circuit\/03-rc-charge-2\.svg/);
@@ -56,7 +56,7 @@ test('labels the copper fence as a dimension drawing', () => {
   const text = '```copper\n```\n';
 
   assert.equal(withFigures(PATH, text), [
-    '```copper', '```', '',
+    '```copper', '# 銅張り基板の寸法図 (tommie-fence の copper フェンス)', '```', '',
     `![銅張り基板の寸法図](${PAGES_URL}/01-circuits/01-basics/copper/03-rc-charge.svg)`, '',
   ].join('\n'));
 });
@@ -65,7 +65,24 @@ test('labels the logic fence as a logic analyser screen', () => {
   const text = '```logic\n```\n';
 
   assert.equal(withFigures(PATH, text), [
-    '```logic', '```', '',
+    '```logic', '# ロジックアナライザの画面 (tommie-fence の logic フェンス)', '```', '',
     `![ロジックアナライザの画面](${PAGES_URL}/01-circuits/01-basics/logic/03-rc-charge.svg)`, '',
   ].join('\n'));
+});
+
+test('writes a name comment on the first line of each fence, in the spelling the fence uses', () => {
+  const once = withFigures(PATH, '```bread\ntitle: a\n```\n\n- x\n\n  ```circuit\n  title: b\n  ```\n');
+
+  assert.match(once, /```bread\n# ブレッドボードの実体配線図 \(tommie-fence の bread フェンス\)\ntitle: a/);
+  assert.match(once, /  ```circuit\n  # 回路図 \(tommie-fence の circuit フェンス\)\n  title: b/);
+  assert.equal(withFigures(PATH, once), once);
+});
+
+test('rewrites a stale name comment, keeps the author comment, and skips plantuml', () => {
+  const stale = '```scope\n# 古い名 (tommie-fence の scope フェンス)\n# 書き手の注\ntitle: a\n```\n';
+  const fixed = withFigures(PATH, stale);
+
+  assert.match(fixed, /```scope\n# オシロスコープの画面 \(tommie-fence の scope フェンス\)\n# 書き手の注\ntitle: a/);
+  assert.doesNotMatch(fixed, /古い名/);
+  assert.doesNotMatch(withFigures(PATH, '```plantuml\n@startuml\n```\n'), /tommie-fence の/);
 });

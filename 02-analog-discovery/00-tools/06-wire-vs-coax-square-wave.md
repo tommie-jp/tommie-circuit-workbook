@@ -18,6 +18,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 方形波を負荷抵抗に流す
 parts:
   W1: square 1,1 1,3 1
@@ -39,6 +40,7 @@ BNC アダプタの出力ジャンパも 0 Ω 側のまま使う。50 Ω 側に�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで方形波を測る
 board: half
 parts:
@@ -76,6 +78,7 @@ wires:
 までしか立ち切らないため、図 3 の読みは約 51 ns と 55 ns より少し短くなる。実機の角はこれより複雑に崩れる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 付属ワイヤ — 角が丸く、立ち上がり (10→90 %) が約 51 ns
 time: 50ns/div
 trigger: ch1 rising 0V
@@ -86,6 +89,7 @@ measure: [vpp, rise]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/scope/06-wire-vs-coax-square-wave-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 BNC アダプタ + 同軸 — 立ち上がりが約 31 ns に縮み角が立つ
 time: 50ns/div
 trigger: ch1 rising 0V

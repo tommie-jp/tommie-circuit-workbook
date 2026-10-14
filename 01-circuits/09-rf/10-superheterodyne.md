@@ -32,6 +32,7 @@ IF は局によらず同じなので、455 kHz に固定した同調 (IFT、中�
 1 枚では詰まるので、信号の順に 3 枚に分けた。図1 の端子 IF・IFB は図2 の同じ名前の端子へ、図2 の AF は図3 の AF へつながる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 周波数変換 局発とミキサーを1石で
 parts:
   W1: sine 2,5 2,7 l=$\mathrm{W1}$
@@ -159,6 +160,7 @@ IFT では止められない。タンクの Q が 50 (目安) なら、1910 kHz 
 Q × (1910/1000 − 1000/1910) ≈ 69 倍 (約 37 dB) の計算値。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 中間周波増幅 2段と検波
 parts:
   IF: port 1,3
@@ -264,6 +266,7 @@ style:
   この図では省いた (強い局では VR を絞る)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 低周波増幅 ドライブ1石とプッシュプル2石
 parts:
   AF: port 1,8
@@ -339,6 +342,7 @@ style:
 1 つの穴にはピンか線を 1 本だけ挿す。赤は +5 V、黒は GND、橙はブレッドボードの中のつなぎ、緑は信号の出入り。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 周波数変換のブレッドボード Q1
 board: half
 parts:
@@ -420,6 +424,7 @@ wires:
 - T3 の 2 次 (25・26 列) を次のブレッドボードの IF・IFB へ。スペアナで見るときは、コレクタの空き穴 (a12) から 10 kΩ と 0.01 µF を通す
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図5 中間周波増幅と検波のブレッドボード Q2 Q3 D1
 board: full
 parts:
@@ -512,6 +517,7 @@ wires:
 - 箱は左から「図4 の基板から」・電源・Analog Discovery の順に置く。前のブレッドボードからの IFB・IF (2・7 列) の線が、電源とグラウンドの線と交わらないようにするため
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図6 低周波増幅のブレッドボード Q4 Q5 Q6
 board: half
 parts:
@@ -603,6 +609,7 @@ W1 は放送の代わりの AM 信号、オシロは検波の前後の波形 (�
 10 kΩ + 51 Ω の分圧 (約 1/197) をかけた値。IF と LO の周波数は計算で決まる。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図7 Q1 のコレクタ 受信 1000kHz のとき
 device: ad3
 sweep: 0-3MHz
@@ -630,6 +637,7 @@ markers: [455k, 1000k, 1455k, 2455k]
 レベルは目安 (IFT3 の 2 次で peak 0.5 V、D1 の順方向電圧を 0.1 V と置いた)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図8 検波の前後 CH2 は IFT3 の2次 CH1 は検波出力
 time: 200us/div
 trigger: ch1 rising 0.4V

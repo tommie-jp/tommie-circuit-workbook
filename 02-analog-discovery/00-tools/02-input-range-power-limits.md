@@ -31,6 +31,7 @@ LED の電流は、昔からの標準的な方法である**直列抵抗**で決
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 抵抗を直列に入れて LED を V+ につなぐ
 parts:
   V1: vsource 1,1 1,3 5
@@ -50,6 +51,7 @@ V+ (Supplies、5 V) → R1 (330 Ω) → LED → GND。抵抗を入れずに LED 
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで V+ から 330 Ω と LED を GND へ
 board: half
 parts:
@@ -93,6 +95,7 @@ LED の V<sub>F</sub> ≈ 2.0 V と仮定。電流 = (V+ − V<sub>F</sub>) ÷ 3
 (V+ = 5 V、V<sub>F</sub> = 2.0 V)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 330 Ω なら 9.1 mA・45.5 mW — 抵抗を小さくするほど電流が増える
 x: 直列抵抗 Ω log 100..10k
 y:

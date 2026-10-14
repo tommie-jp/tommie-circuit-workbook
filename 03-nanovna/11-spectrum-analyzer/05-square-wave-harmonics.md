@@ -33,6 +33,7 @@ High のほうが長い)。**40106 のシュミット RC 発振は 50% に近い
 3-2 の図 1 と同じ形**で、値だけ上のとおりに替え、LED (R1・D1) は外す。部品の配線は図 2。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 555 の発振器を 20 dB パッドで tinySA へ
 parts:
   X1:
@@ -82,6 +83,7 @@ V<sub>OL</sub> 0.17 V から見積もった目安)。
 こちらはブレッドボードには組まず、比較のための回路図だけ載せる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 40106 の RC 発振 + 74HC14 の緩衝 + パッドで tinySA へ
 parts:
   U1: not 3,3 40106
@@ -122,6 +124,7 @@ wires:
 代わりに 3 番 (OUT) を ATT 経由で tinySA へ出す。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (189.5 kHz 版)
 board: half
 parts:

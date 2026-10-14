@@ -35,6 +35,7 @@ Soft-FPGA は違う。Pico 2 の CPU が、Verilator の作った C++ (`eval()`)
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2 に LED 4 個・DIP スイッチ・AD3 の Logic をつなぐ
 parts:
   U1: pico2 8,8 mirror
@@ -122,6 +123,7 @@ LED の電流は、赤の LED の順方向電圧を 2 V とすると (3.3 − 2)
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 Pico 2 の左に LED、右に DIP スイッチ、上に AD3 の Logic
 board: full
 parts:
@@ -325,6 +327,7 @@ AD3 の DIO は 3.3 V の信号で、Pico 2 の GPIO とそろう (0-4)。
 見るものは目盛の数ではなく、**CLK の 1 周期をカーソルで挟む読み方**。実機の画面では、ΔX に測った値が出る。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 CLK の 1 周期を読む (1 クロックを仮に 10 µs として描いた。実測ではない)
 device: ad3
 time: 5us/div

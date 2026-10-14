@@ -18,6 +18,7 @@ NE555 を単安定 (monostable) 接続にする。**単安定**は、ふだん�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 555 単安定
 parts:
   V1: vsource 1,3 1,5 5
@@ -66,6 +67,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上のレールは +5V/GND、下のレールも +5V/GND (1 列目で上下を渡している)
 board: half
@@ -136,6 +138,7 @@ CH2 を 2 番 (TRIG、押したときの合図)、CH1 を 3 番 (OUT、パルス
 | Trigger | CH2、立ち下がり、2.5 V。Mode は Normal か Single にして、SW1 を押す |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 SW1 を押すと (CH2 が Low)、OUT (CH1) が約 1.1 秒だけ High になる
 time: 250ms/div
 trigger: ch2 falling 2.5V at -4div

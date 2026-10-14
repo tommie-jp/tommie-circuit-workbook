@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 光を遮るとインジケータが点く
 parts:
   VCC: vcc 2,2 5V
@@ -61,6 +62,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上の赤いレール = +5V、青いレール = GND (29 列で下の − レールへ渡す)
 board: half

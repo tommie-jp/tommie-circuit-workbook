@@ -18,6 +18,7 @@ OP アンプの負電源 (4 章の ± 電源) や、基準電圧を少しだけ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 555 チャージポンプ (負電圧)
 parts:
   V1: vsource 3,2 gnd 9
@@ -78,6 +79,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上の赤レール = +9V、青レール = GND。下の青レール = GND (左端の線で渡す)、下の赤レール = +9V (RESET 用)
 board: half
@@ -149,6 +151,7 @@ AD3 本体のピン (2×15 のヘッダー) の入力は DC 結合だけで、�
 | Trigger | CH1、立ち上がり、4.5 V |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 PIN 3 の方形波 (CH1) と出力のリップル (CH2、AC 結合) — 目安
 time: 20us/div
 trigger: ch1 rising 4.5V

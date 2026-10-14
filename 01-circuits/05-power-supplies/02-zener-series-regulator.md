@@ -22,6 +22,7 @@ era: 古
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ツェナー + Tr のシリーズレギュレータ (CH1 は出力の電圧)
 parts:
   V1: vsource 1,1 1,6 12
@@ -60,6 +61,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (1+ を出力の 7 列へ、1− を GND へ)
 board: half
 parts:

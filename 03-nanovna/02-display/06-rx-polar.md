@@ -40,6 +40,7 @@ DUT は SMA の先に、22 Ω・100 nH・100 pF を直列につないで先を G
 (共振 50.33 MHz)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CH0 の先に R L C を直列 (1 端子)
 parts:
   M1:
@@ -63,6 +64,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -101,6 +103,7 @@ L1 は 100 nH のチップかリード付きの小型品 (リードを短く切�
 | 表示 | 図 3 は S11 の R と X、図 4 は S11 の極表示と Smith |
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 25M-125M 101
 title: 図3 R は 22 Ω のまま、X は負から正へ (50.33 MHz で 0)
@@ -123,6 +126,7 @@ markers:
 同じ DUT、同じ掃引と印を、極表示と Smith で見る。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 25M-125M 101
 title: 図4 同じ点を極表示と Smith で — 共振で 0.389∠180°

@@ -27,6 +27,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 デルタ結線 (左) とスター結線 (右)
 style:
   standard: jis
@@ -77,6 +78,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 Δ (3〜13 列) と Y (18〜29 列)
 board: half
 parts:

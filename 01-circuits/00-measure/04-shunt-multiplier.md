@@ -26,6 +26,7 @@ era: 古
 分流器で 10 mA レンジの電流計を作り、5 V・510 Ω の回路に割り込ませて電流を測る。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 分流器で作った電流計
 parts:
   V1: vsource 2,2 2,4 5
@@ -67,6 +68,7 @@ E24 系列は 1 桁を 24 段に分けた並び (1.0・1.1・1.2・1.3・1.5 …
 R2 の両端を測る (図2)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 倍率器で作った電圧計 (0-1 と同じ分圧回路に当てる)
 parts:
   V1: vsource 2,2 2,5 5
@@ -118,6 +120,7 @@ style:
 図3 は図1 の電流計。`R1` の下端 (列 10) に `RS` の上端と `GA` の + を、`RS` の下端 (列 14) に `GA` の − を同じ列で集めて、並列にする。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 分流器 RS と検流計 GA を並列にして、R1 に直列に入れる
 board: half
 parts:
@@ -148,6 +151,7 @@ wires:
 `GA` と倍率器 `RV` の直列を渡す。`GA` の + を列 10、`GA` の − を列 12 に当て、`RV` を列 12 から列 15 へ挿す。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 R2 の両端に、検流計 GA と倍率器 RV の直列を当てる
 board: half
 parts:

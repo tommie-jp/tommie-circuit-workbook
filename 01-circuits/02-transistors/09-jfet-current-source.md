@@ -23,6 +23,7 @@ source: 自作
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 JFET のセルフバイアスで定電流を作る
 parts:
   V1: vsource 1,1 1,4 5
@@ -84,6 +85,7 @@ RS の両端の電圧は AD3 の Scope の 1+ / 1− を電圧計として当て
 この題は直流の電流・電圧だけを見るので、オシロの波形の図は付けない。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 JFET の定電流を組む (Scope 1+ / 1− を RS の両端へ)
 # 上の赤いレール = +5V、青いレール = GND
 board: half

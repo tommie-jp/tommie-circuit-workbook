@@ -17,6 +17,7 @@ Analog Discovery 3 (AD3) の電源から +5 V と −5 V を出し、それぞ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 2 つの電源に負荷と電圧計
 parts:
   V1: vsource 1,1 1,3 5
@@ -40,6 +41,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3
 # 上の赤いレール = +5 V (V+)、上の青いレール = GND。−5 V (V−) はレールに出さず 15 列へ直に
 board: half
@@ -97,6 +99,7 @@ USB 給電の目安の約 2 W の 1/4。上限に届くのは、USB 給電で 2 
 重い負荷のときで、この題の範囲では上限を気にしなくてよい。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 1 系統の電力 — 1 kΩ で 25 mW、100 Ω で 250 mW
 x: 負荷の抵抗 Ω log 50..5k
 y: 電力 mW 0..500

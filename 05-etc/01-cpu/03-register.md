@@ -107,6 +107,7 @@ U1 --> LED : Q0〜Q3
 **同じ名前の端子 (IN0〜IN3・LOAD・Q0〜Q3・CLK) は、図をまたいで同じ線**になる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 入力のスイッチ (書き込む値 IN0 から IN3 と LOAD)
 parts:
   VCC: vcc 2,2 5V
@@ -151,6 +152,7 @@ style:
   ON で 1 (+5 V)、OFF で 0 (10 kΩ で GND へ)。SW2 の 2〜4 番は使わない
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 74HC157 で新しい値か今の値を選び、74HC273 で覚える
 parts:
   U2: ic 12,8 74HC157
@@ -228,6 +230,7 @@ style:
 - U1 の Q (1Q〜4Q) は Q0〜Q3 の線になり、図3 の LED と、U2 の A へ戻る。**この戻る線が「覚えたまま」を作る**。5Q〜8Q は使わない
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 覚えた値の表示 (LED 4 つ)
 parts:
   Q0: port 2,2
@@ -267,6 +270,7 @@ style:
 IC 2 個 (18 列) と DIP スイッチ 2 個 (8 列) と LED 4 つ (12 列) は half (30 列) に収まらない。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 4 ビットのレジスタをブレッドボードに組む
 board: full
 parts:
@@ -437,6 +441,7 @@ Logic を走らせ、下の表のとおりにスイッチを倒す。**スイッ
 カーソルは **X1 = 3.75 s** (IN は A に変わったが、Q は 5 のまま) と **X2 = 5.25 s** (5 s の立ち上がりで A を覚えた) に置いた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図5 LOAD が 1 の間の立ち上がりだけ、IN を Q に覚える (計算)
 device: ad3
 time: 1s/div

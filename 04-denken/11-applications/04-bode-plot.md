@@ -31,6 +31,7 @@ board: BB
 11-3 と同じ回路。W1 を方形波から正弦波に替え、Network が周波数を掃引する。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 一次遅れ系 (11-3 と同じ RC)
 style:
   standard: jis
@@ -60,6 +61,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (11-3 と同じ)
 board: half
 parts:
@@ -101,6 +103,7 @@ wires:
 −20 dB/dec の傾きを見る。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 ボード線図 — 159 Hz で平らな所から 3 dB 下がり −45°、その先は −20 dB/dec
 x: 周波数 Hz log 10..100k
 y:
@@ -125,6 +128,7 @@ notes:
 CH2 は小さいので V/div を CH1 より細かく (200 mV/div) してある。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 159 Hz — CH2 は CH1 の 0.354 倍で 45° 遅れる (CH2 は 200 mV/div)
 time: 2ms/div
 trigger: ch1 rising 0V

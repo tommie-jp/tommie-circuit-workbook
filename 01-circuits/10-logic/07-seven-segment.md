@@ -21,6 +21,7 @@ CD4511 は、2 進数 4 桁で表した 0〜9 (BCD: 10 進の 1 桁を 2 進数 
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CD4511でBCDを7セグメントに変換する
 parts:
   VCC: vcc 17,1 5V
@@ -130,6 +131,7 @@ style:
 そこで電源は別の 5 V (USB アダプタ) にする。AD3 は電源に使わないので、この題の図には入れない。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 unused: [DS1.dp]
 title: 図2 perfboard に組む (部品面と半田面。電源は USB アダプタ)
 board:

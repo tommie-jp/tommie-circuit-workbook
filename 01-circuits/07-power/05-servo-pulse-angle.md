@@ -20,6 +20,7 @@ era: 今
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 サーボにパルス幅で角度を指示する
 parts:
   M1:
@@ -59,6 +60,7 @@ style:
 そこで、**サーボの電源 (赤と茶) はブレッドボードを通さず、別の 5 V 電源から直接つなぐ**。ブレッドボードを通るのは信号 (SIG) と、基準の GND だけにする。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 サーボの電源はブレッドボードを通さず、信号と GND だけをブレッドボードでつなぐ
 board: half
 parts:
@@ -111,6 +113,7 @@ W1 は Simple の Square、Frequency 50 Hz (周期 20 ms)、Amplitude 1.65 V、O
 Scope は 1+ を SIG、1 ch を 500 mV/div、500 µs/div にして、1 回のパルスの幅を見る。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 パルス幅 1.5 ms (90°、中央) をカーソルで読む
 time: 500us/div
 trigger: ch1 rising 1.65V

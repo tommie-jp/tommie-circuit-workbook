@@ -25,6 +25,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 倍率器
 parts:
   V1: vsource 1,1 1,3 5
@@ -47,6 +48,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -95,6 +97,7 @@ Rg を GND 側に置く** (図3)。試験の図 (検流計が電源側) とは�
 電流 I も倍率も変わらない。CH1 の 1 本で Rg の電圧を直に読める。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 汎用オシロでの測り方
 parts:
   V1: vsource 2,2 2,4 5

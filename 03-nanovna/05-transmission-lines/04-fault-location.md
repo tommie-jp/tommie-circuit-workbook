@@ -20,6 +20,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 4 m の所で断線 (開放) したケーブル
 parts:
   J1: sma 2,2 mirror
@@ -53,6 +54,7 @@ notes:
 見えるはずの画面 (理想の模型)。断線 (開放) の場合。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-900M 401
 title: 図2 4 m で断線 (開放) — TDR の山は 4 m に立つ
@@ -68,6 +70,7 @@ traces:
 同じ距離で、断線ではなく**芯線とシールドが短絡**した場合。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-900M 401
 title: 図3 4 m で短絡 — 山は開放と同じ 4 m・同じ上向き

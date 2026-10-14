@@ -436,6 +436,7 @@ PASS
 (`st` は 0 IDLE・1 LOAD・2 TEST・3 ADD・4 DONE。)
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 5 x 3 を回す。ld で取り込み、add を 3 回かけて積が 15 になり、zero で done
 device: generic
 window: 14ms

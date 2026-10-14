@@ -22,6 +22,7 @@ IC のほかは部品 2 個 (Rf と C1) で組める、いちばん手軽な CMO
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 40106 の RC 発振
 parts:
   U1: not 3,4 40106
@@ -86,6 +87,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (電源とオシロは Analog Discovery 3)
 # 上の + レール = +5V (AD3 の V+)、上下の − レール = GND (左端の列 1 でつなぐ)。下の + レールは使わない
 board: half
@@ -195,6 +197,7 @@ High の間が充電・Low の間が放電と 1 対 1 に並ぶから。U2 の�
 図3 は、見えるはずの画面 (しきい値の典型値で計算して描いた図)。CH1 (橙) が U1 の出力、CH2 (青) が C1 の電圧。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 C1 の電圧 (CH2) が 1.9〜2.9 V を往復し、U1 の出力 (CH1) が反転
 time: 200us/div
 trigger: ch1 rising 2.5V at -4div
@@ -228,6 +231,7 @@ notes:
 見えるはずの画面 (図3 と同じ約 1.231 kHz・デューティ 47.94 % の方形波の計算値で、実測ではない)。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図4 方形波のスペクトル — 3 倍・5 倍の山が並び、偶数倍は小さい
 device: ad3
 sweep: 0-10kHz

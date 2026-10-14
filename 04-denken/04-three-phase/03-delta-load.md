@@ -25,6 +25,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 三相電源にデルタ結線の負荷
 parts:
   V1: sine 1,3 1,5 1 l=$\mathrm{W1}$
@@ -78,6 +79,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 # 上のブロック: TL071 の入力側と R1・R2、右に d 行の線電流シャントと b・c 行の Δ の 2 辺。下のブロック: 出力側と Rf、g・h・j 行で 3 相を右へ運び、i 行に Δ の残り 1 辺 (RCA)
 board: full
@@ -155,6 +157,7 @@ RLA の両端は数十 mV しかないので、CH1 は 20 mV/div、CH2 は 500 m
 V/div を分けてある。高さではなく位相を見る。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 相電流 (CH2) は線電流 (CH1) より 30° 進む (V/div は別)
 time: 200us/div
 trigger: ch1 rising 0V
@@ -181,6 +184,7 @@ a 点の電圧の 6 % しかない。2 本の先端で引くと、ch どうし�
 位相の 30° は、シャントの値によらない (見るべき値の下の説明)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 汎用オシロでの測り方
 parts:
   U1: port 1,1

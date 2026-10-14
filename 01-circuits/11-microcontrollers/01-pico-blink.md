@@ -24,6 +24,7 @@ MicroPython の両方で点滅させる。LED を点滅させる (L チカ) の�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico2でLEDを点滅させる
 parts:
   U1: pico2 3,5.2 mirror
@@ -52,6 +53,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: full
 parts:
@@ -109,6 +111,7 @@ H のときだけ約 2.0 V (LED の順方向電圧) に上がる**のを見る�
 | カーソル | X1 を点灯の中 (250 ms)、X2 を消灯の中 (750 ms) に置く。ΔX が半周期 500 ms |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 GP15 (CH1) と LED のアノード (CH2) — 0.5 秒ごとに切り替わる
 time: 200ms/div
 trigger: ch1 rising 1.5V at -4div

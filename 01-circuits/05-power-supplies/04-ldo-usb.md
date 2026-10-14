@@ -19,6 +19,7 @@ USB 給電の基板でいちばんよく見る電源回路だ。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 USB 5V から 3.3V の LDO (CH1 は出力の電圧)
 parts:
   J1: usb-c 2,2.63
@@ -67,6 +68,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (5 V は AD の V+、1+ を OUT へ)
 board: half
 parts:
@@ -115,6 +117,7 @@ USB の 5 V の電源として使い続けるなら、ブレッドボードの�
 電圧は 5 V、電流は約 9 mA、周波数は直流なので、ユニバーサル基板の範囲 (定常 12 V・500 mA 以下) に収まる。
 
 ```perf
+# ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
 board:
   size: 7x5cm
   silk: board

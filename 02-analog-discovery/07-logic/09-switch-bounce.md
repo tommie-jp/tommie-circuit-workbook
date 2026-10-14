@@ -18,6 +18,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 タクトスイッチのチャタリングを Logic で見る
 parts:
   AD:
@@ -46,6 +47,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -92,6 +94,7 @@ Logic で押した瞬間を撮ると、図3 のような形になる。t = 0 の
 この時刻は典型的な形を見せるための**仮の値**で、押し方・個体で変わる。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 押した瞬間、DIO0 が H と L を行き来する
 device: ad3
 time: 500us/div

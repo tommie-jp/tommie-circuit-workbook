@@ -20,6 +20,7 @@ era: 古
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ホイートストンブリッジ
 parts:
   V1: vsource 1,1 1,5 5
@@ -60,6 +61,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上の赤いレール = +5 V、青いレール = GND
 board: half

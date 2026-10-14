@@ -228,6 +228,7 @@ ff ff 1 ff 1 f 1 1 1
 a と b は表に書き、図には答え (sum8・sum4) と桁上げを出す。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 幅 8 と幅 4 の答え (Verilator の実行結果から作った計算の図)
 device: generic
 window: 5ms

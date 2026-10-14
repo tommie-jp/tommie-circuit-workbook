@@ -35,6 +35,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CH0 と CH1 の間に 10 m のケーブル (巻いて温める)
 parts:
   J1: sma 2,2 mirror CH0
@@ -75,6 +76,7 @@ TL1 だけ。校正に使ったケーブルが温まると校正が狂う)。湯
 見えるはずの画面 (理想の模型、損失は見ない)。20 °C。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 425M-435M 101
 title: 図2 20 °C — 430 MHz の位相は 96.4°
@@ -91,6 +93,7 @@ markers:
 40 °C (電気長が 0.2 % 延びたと仮定)。掃引とマーカーは図2 と同じ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 425M-435M 101
 title: 図3 40 °C — 同じ 430 MHz で位相が 15.4° 遅れる (81.0°)

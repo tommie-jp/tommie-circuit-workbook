@@ -32,6 +32,7 @@ PC の中だけで動かす (`device: SIM`)。Verilator は 5.042 で確かめ�
 ゲート G1 (NOT) は a だけを使い、G2 (AND) と G3 (OR) は a と b の両方を使う。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 AND・OR・NOT の論理図
 parts:
   a: port 1,2
@@ -140,6 +141,7 @@ a b y_and y_or y_not
 Verilator の中には時間が無いので、入力を変えた 1 回を 1 ms と見なして横に並べた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 入力を 00・01・10・11 の順に変えたときの出力 (Verilator の実行結果から作った計算の図)
 device: generic
 window: 4ms

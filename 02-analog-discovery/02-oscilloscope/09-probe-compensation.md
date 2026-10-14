@@ -19,6 +19,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 10 kΩ の信号源に直結した場合とプローブ経由の場合
 parts:
   W1: square 1,1 1,3 1.65
@@ -49,6 +50,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで信号源と 2 つの入力経路を組む
 board: half
 parts:
@@ -88,6 +90,7 @@ C<sub>trim</sub> の 3 つの設定で CH2 に出る立ち上がりを重ねる�
 Time/div を 20 µs/div 程度にするのはこのためで、1 µs/div では角の後の平らな所しか映らない。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 合った 2.6 pF (CH2) は平ら、1 pF (CH3) は丸く、10 pF (CH4) は跳ねる
 time: 20us/div
 trigger: ch1 rising 1.65V at -4div

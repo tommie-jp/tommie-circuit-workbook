@@ -19,6 +19,7 @@ board: —
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 アダプタを挟んだ接続
 parts:
   AD:
@@ -74,6 +75,7 @@ DUT を 100 nF のコンデンサ、W1 の振幅を 1 V、周波数を 1 kHz と
 CH2 (DUT の両端) は 0.532 mA × 1591.5 Ω = 0.847 V、CH2 は CH1 より 90° 遅れる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図2 CH2 (100 nF の電圧) は CH1 (電流) より 90° 遅れる
 time: 200us/div
 trigger: ch1 rising 0V

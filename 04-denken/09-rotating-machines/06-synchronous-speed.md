@@ -29,6 +29,7 @@ f = 7 Hz なら N = 120 × 7 / 14 = 60 rpm (1 秒に 1 回転) で、目で数�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 3 本の方形波を L293D で強めて BLDC を回す
 style:
   standard: jis
@@ -82,6 +83,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 # 上下の赤レール = 5 V (USB)、青レール = GND。上下は 29・30 列でつなぐ
 board: half
@@ -162,6 +164,7 @@ f を 3.5 Hz・7 Hz・14 Hz と変えて回転数を数える。f を上げて�
 f = 7 Hz の画面。図は理想 (0 V と 5 V) で描いた。実物の L293D は出力の段で電圧が下がり、H は約 3.8 V、L は約 1 V になる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 f 7 Hz — V (CH2) は U (CH1) より 120° 遅れる
 time: 50ms/div
 trigger: ch1 rising 2.5V

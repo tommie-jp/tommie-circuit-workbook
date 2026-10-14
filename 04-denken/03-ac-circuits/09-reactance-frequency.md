@@ -27,6 +27,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 リアクタンスを測る (1 回目 L1、2 回目 C1)
 style:
   standard: jis
@@ -57,6 +58,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (1 回目 L1)
 board: half
 parts:
@@ -99,6 +101,7 @@ notes:
 1 kHz の 2 つの画面。L1 では電流 (CH2) が電圧 (CH1) より 90° 遅れ、C1 では 90° 進む。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 L1、1 kHz — 電流 (CH2) は V_L (CH1) より 90° 遅れる
 time: 200us/div
 trigger: ch1 rising 0V
@@ -110,6 +113,7 @@ measure: [vmax, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/09-reactance-frequency-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 C1、1 kHz — 電流 (CH2) は V_C (CH1) より 90° 進む
 time: 200us/div
 trigger: ch1 rising 0V
@@ -152,6 +156,7 @@ AD の CH1 は部品の両端を差動で挟む (1− が 12 列)。汎用オシ
 CH1 に対する CH2 の位相は、L1 で −90° (電流が遅れる)、C1 で +90° (電流が進む)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図5 X_L は右上がり、X_C は右下がり。1.59 kHz で交わる (両対数)
 x: 周波数 Hz log 300..10k
 y: リアクタンス Ω log 10..1k

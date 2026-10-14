@@ -23,6 +23,7 @@ LC 同調 (9-1 の共振) で選び、ゲルマニウムダイオードで検波
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ゲルマラジオ
 parts:
   ANT: antenna 1,1
@@ -81,6 +82,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: half
 parts:
@@ -161,6 +163,7 @@ wires:
 | Scope 時間軸・トリガ | 200 µs/div、CH1 の立ち上がり |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 AM 信号の試験 — 同調回路 (CH2) は太り細り、検波出力 (CH1) は 1 kHz
 time: 200us/div
 trigger: ch1 rising 0.99V
@@ -196,6 +199,7 @@ CH0 と CH1 の間に**直列**に挿して、S21 の Log Mag を 0.8〜1.3 MHz 
 見えるはずの画面 (理想の模型。VC1 = 100 pF、L1 の損失を並列の 158 kΩ (Q = 100) とした目安で、実測ではない)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: litevna64
 sweep: 0.8M-1.3M 401
 title: 図4 同調回路 (L1 250 µH ∥ VC1 100 pF) の S21 — f0 で深い谷

@@ -20,6 +20,7 @@ VNA の教科書 (LiteVNA64) で続ける。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 SMA スルー治具を AD3 の BNC 入力へ
 parts:
   AD:
@@ -67,6 +68,7 @@ style:
 中心導体どうしを 1 本の線でつなぐだけ)。**1 度作れば両方の計器で使い回す。**
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -105,6 +107,7 @@ S21 の変化は 0.44 dB と小さく、LOGMAG の枠 (0〜−80 dB) では上�
 (S21 の dB の値は図4 のグラフ)。X は 25 MHz で 8.2 Ω、100 MHz で 32.7 Ω と周波数に比例して増え、治具が小さなインダクタンスに見えることを示す。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 1M-100M 101
 title: 図3 100 MHz で SWR 1.90、X = 32.7 Ω
 dut: series L 52.1n
@@ -131,6 +134,7 @@ markers:
 | 100 MHz | 測れない (AD の範囲外) | **−0.44 dB** |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 AD は 25 MHz まで 0 dB、LiteVNA64 は 100 MHz で −0.44 dB
 x: 周波数 Hz log 100k..100M
 y: S21 dB -0.5..0.02

@@ -21,6 +21,7 @@ CZT でビンを細かくしても 2 本には分かれないことを確かめ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 W1・W2 を抵抗で足して CH1 で見る
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -49,6 +50,7 @@ Wavegen の半分の **0.25 V** ずつ (図 3・4 はこの値で描いた)。
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1・W2 を 1 kΩ ずつで足す)
 board: half
 parts:
@@ -85,6 +87,7 @@ R1 と R2 の片方の端を 10 列に挿して足し合わせ、その列から
 描いていない。CZT でもビンが細かくなるだけで、山は図4 と同じ 1 本のままになる。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 通常の FFT では 50 Hz 離れた 2 本が 1 本の山になる
 device: ad3
 sweep: 0-10MHz
@@ -101,6 +104,7 @@ markers: [5MHz]
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/04-spectrum/spectrum/06-czt-zoom-1.svg)
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図4 Start・Stop を 4.99〜5.01 MHz に絞っても RBW は同じで山は 1 本のまま
 device: ad3
 center: 5MHz
@@ -122,6 +126,7 @@ markers: [5MHz]
 5 MHz 正弦波 1 本に見える (図は CH1 に映る和そのものを描いた)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 CH1 は Vpp 1.00 V の 5 MHz — 50 Hz のうなりは窓に出ない
 time: 200ns/div
 trigger: ch1 rising 0V

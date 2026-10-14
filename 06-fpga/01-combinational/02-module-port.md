@@ -31,6 +31,7 @@ device: SIM
 OR (a か b が 1) から AND (両方 1) を引いた形で、`(a | b) & ~(a & b)` と書ける。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 my_xor の中身 (論理図)
 parts:
   a: port 1,2
@@ -69,6 +70,7 @@ style:
 図の X1 が Verilog の `u_ab`、X2 が `u_y` に当たる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 parity3 は my_xor を 2 つつなぐ (X1 が u_ab、X2 が u_y)
 parts:
   a: port 1,4
@@ -180,6 +182,7 @@ a b c y
 実機で測った波形ではなく、上の実行結果から作った計算の図で、入力を変えた 1 回を 1 ms と見なして並べた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 a b c を 000 から 111 まで順に変えたときの y (Verilator の実行結果から作った計算の図)
 device: generic
 window: 8ms

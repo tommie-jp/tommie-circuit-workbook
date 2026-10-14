@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 基準抵抗と電解コンデンサ
 parts:
   AD:
@@ -48,6 +49,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -91,6 +93,7 @@ Offset 0.5 V を足すと、コンデンサは 0.5 V に充電された上で ±
 Xc がまだ ESR より大きいので、位相は −90° に近いがぴったりではない。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 CH2 (C の電圧) が CH1 (電流) より 76.7° 遅れる — 90° に足りないぶんが ESR
 time: 500us/div
 trigger: ch1 rising 0V

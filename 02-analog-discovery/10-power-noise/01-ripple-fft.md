@@ -18,6 +18,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ブリッジ整流と平滑
 parts:
   V1: sine 5,1 5,5 12.7
@@ -53,6 +54,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -106,6 +108,7 @@ wires:
 0 Hz の線になるので省いた。平均の回数は描けない)。鋸歯状波の n 次は基本波の 1/n。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 リップルの線が 120 Hz とその整数倍に並ぶ (鋸歯状波の模型)
 device: ad3
 sweep: 0-1kHz
@@ -126,6 +129,7 @@ CH1 のジャンパを AC にする (AC 結合。約 1.6 Hz より低い成分�
 上の + レール、外皮を上の − レールに当てる。FFT は直流を 0 Hz の線に分けるので、Spectrum はヘッダーのまま (DC 結合) でよい。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 Rload の電圧の交流分 — 120 Hz で約 0.2 V の鋸歯状のリップル (AC 結合、計算)
 time: 5ms/div
 trigger: ch1 rising 0V

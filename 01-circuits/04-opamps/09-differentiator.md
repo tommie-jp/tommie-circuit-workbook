@@ -18,6 +18,7 @@ source: 自作
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 微分器
 parts:
   VP: vsource vp mid 5
@@ -66,6 +67,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上のレールは +5V (赤) と GND (青)。下の青レールは −5V (V−)。下の赤レールは使わない
 board: half
@@ -126,6 +128,7 @@ W1 は 1 kHz・振幅 1 V の三角波 (オフセット 0 V)、Scope は CH1 を
 | Trigger | CH1、立ち上がり、0 V |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 入力の三角波 (CH1) と出力の方形波 (CH2)
 time: 200us/div
 trigger: ch1 rising 0V

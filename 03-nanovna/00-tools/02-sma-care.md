@@ -17,6 +17,7 @@ NanoVNA の値の再現性は、**コネクタの締め方**で大きく変わ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CH0 にケーブルをつなぐ
 parts:
   M1:
@@ -64,6 +65,7 @@ notes:
 ずれで見る。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図2 正しく締めたスルーの理想は平ら (ずれを見る基準)

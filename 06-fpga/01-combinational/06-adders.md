@@ -31,6 +31,7 @@ XOR と AND だけで作る半加算器、それを 2 つ重ねて下の桁か�
 図 1 は半加算器だ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 半加算器 (和は XOR、桁上げは AND)
 parts:
   a: port 1,3
@@ -60,6 +61,7 @@ style:
 図 2 は全加算器だ。X1・A1 が 1 つ目の半加算器 (`u_ha1`)、X2・A2 が 2 つ目 (`u_ha2`) に当たり、桁上げ 2 つを O1 (OR) で合わせる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 全加算器は半加算器 2 つと OR (X1 と A1 が u_ha1、X2 と A2 が u_ha2)
 parts:
   a: port 1,3
@@ -186,6 +188,7 @@ a b cin sum cout
 実機で測った波形ではなく、実行結果から作った計算の図で、入力を変えた 1 回を 1 ms と見なして並べた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 a b cin を 000 から 111 まで順に変えたときの sum と cout (Verilator の実行結果から作った計算の図)
 device: generic
 window: 8ms

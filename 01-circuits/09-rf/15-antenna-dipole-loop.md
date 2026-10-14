@@ -53,6 +53,7 @@ board: CB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 VNA からバラン経由でダイポールへ
 parts:
   J1: sma 2,3 mirror
@@ -89,6 +90,7 @@ notes:
 共振の近くのダイポールの模型 (図6 の `dut:`)。給電点から見た 1 端子なので、最後を地へ落とす。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 共振の近くのダイポールの模型 (直列RLC)
 parts:
   J1: sma 2,3 mirror
@@ -111,6 +113,7 @@ notes:
 L ≈ 0.25 µH) と同調コンデンサ CT が閉じた共振回路を作る。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 小さなループと同調コンデンサ
 parts:
   J1: sma 2,3 mirror
@@ -152,6 +155,7 @@ notes:
 (3 mm 以上)、島どうしの溝は最小 1 mm (0.3 mm 以上)。商用電源は使わない。
 
 ```copper
+# 銅張り基板の寸法図 (tommie-fence の copper フェンス)
 board:
   size: 70x50mm
   ground: back
@@ -192,6 +196,7 @@ notes:
   f<sub>0</sub> を追い込むときは、素子を長めに付けて、銅張り基板はそのままで素子だけを切り詰める
 
 ```copper
+# 銅張り基板の寸法図 (tommie-fence の copper フェンス)
 board:
   size: 70x50mm
   ground: back
@@ -245,6 +250,7 @@ S11 と SWR を周波数ごとに測るので VNA を使う。
 ## 計器の画面
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: litevna64
 sweep: 135M-155M 101
 title: 図6 ダイポール (f0 = 145 MHz) の SWR と Smith

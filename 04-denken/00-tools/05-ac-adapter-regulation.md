@@ -31,6 +31,7 @@ AC 出力の AC アダプタは、中に小さな変圧器が入っていて、�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 AC アダプタの等価回路と負荷
 style:
   standard: jis
@@ -74,6 +75,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (3 段目、100 Ω を 2 本並列)
 board: half
 parts:
@@ -135,6 +137,7 @@ notes:
 傾きが −r。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 端子の電圧は電流に比例して下がる (縦軸は 12 V から)
 x: 電流 mA 0..300
 y: 端子の電圧 V 12..15

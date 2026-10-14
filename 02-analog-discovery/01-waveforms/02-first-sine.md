@@ -17,6 +17,7 @@ Scope (オシロスコープ) で見る。0-3 のループバックとの違い�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 正弦波を作って測る
 parts:
   W1: sine 1,1 1,3 1
@@ -36,6 +37,7 @@ W1 (Wavegen の `W1`) に負荷 R1 (1 kΩ) をつなぎ、CH1 で R1 の両端 (
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで正弦波を測る
 board: half
 parts:
@@ -66,6 +68,7 @@ wires:
 | Scope (CH1) | DC、Range ±2 V 程度、Auto トリガ、Time/div 0.2 ms 程度 (画面に 2 周期) |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 R1 の両端 — Vpp 2.00 V、カーソルの間が 1 周期 1.00 ms
 time: 200us/div
 trigger: ch1 rising 0V

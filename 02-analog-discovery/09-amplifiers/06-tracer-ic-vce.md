@@ -22,6 +22,7 @@ Vce だけを掃引する「手動の 1 本」を、Ib を替えて何度か繰�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Vce を掃引し、Ib を数段階に固定して測る (アダプタ無しのやり方)
 parts:
   AD:
@@ -59,6 +60,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -110,6 +112,7 @@ Y は Rs の両端で、Ic × 100 Ω = 3.91 mA × 100 Ω = 0.391 V の高さで�
 図の曲線は、図4 と同じ膝の丸みの模型 (Ic = 3.91 mA × (1 − e<sup>−Vce/0.0667 V</sup>)) を Y = 100 Ω × Ic にして描いた計算値。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Rb = 220 kΩ の Ic–Vce 曲線 (X = Vce、Y = Rs の電圧)
 view: xy
 ch1: {wave: triangle 10Hz 2.3V offset 2.3V, range: 1V/div, position: -2.5div}
@@ -143,6 +146,7 @@ Vce が十分大きい領域では Ic ≒ hFE × Ib で頭打ちになるとみ�
 届くように置いた模型で、平らな所の高さが上の表の hFE × Ib。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 平らな所が 1.83・3.91・8.60 mA に並ぶ (hFE 200 の模型)
 x: 電圧 Vce V 0..5
 y: コレクタ電流 Ic mA 0..10

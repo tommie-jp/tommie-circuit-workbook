@@ -124,6 +124,7 @@ verilator --timescale 1us/1ns --binary --timing --trace --top-module tb_counter 
 ## シミュレーションの波形
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 上のビットほど半分の速さで反転する
 device: generic
 time: 20us/div

@@ -20,6 +20,7 @@ device: SA
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Wavegen の 1 MHz 正弦波を抵抗で落として tinySA へ
 parts:
   X1:
@@ -61,6 +62,7 @@ wires:
 AD3 の Wavegen W1 と GND、tinySA の RF と GND に、それぞれケーブルをつなぐ。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに R1 を挿す (W1 から tinySA へ)
 board: half
 parts:

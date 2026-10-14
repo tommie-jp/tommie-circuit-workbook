@@ -95,6 +95,7 @@ openFPGALoader -b tangnano9k --detect
 8-4・8-5・8-7 は、この接続のまま測る。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Tang Nano 9K の IO38・IO37 を AD3 の DIO0・DIO1 で読む。GND は共通
 parts:
   AD:
@@ -138,6 +139,7 @@ wires:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 Tang Nano 9K を溝をまたいで挿し、AD3 をつなぐ
 board: half
 parts:

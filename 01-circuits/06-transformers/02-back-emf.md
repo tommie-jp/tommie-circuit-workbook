@@ -18,6 +18,7 @@ LED の代わりにダイオードを入れて逆起電力を逃がすのが、7
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 コイルを切った瞬間に LED が光る (CH1 は L1 の上端の電圧)
 parts:
   V1: battery 2,2 2,4 5
@@ -51,6 +52,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (5 V は AD の V+、1+ を L1 の上端へ)
 # 上の赤いレール = +5V、青いレール = GND
 board: half
@@ -104,6 +106,7 @@ notes:
 トリガは CH1 の立ち下がり (0 V) に合わせ、WaveForms の Single (1 回だけ取り込む) にして待ち、S1 を開く。時間軸は 500 µs/div、縦軸は 1 V/div。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 S1 を開いた瞬間の L1 の上端の電圧 (近似の形)
 time: 500us/div
 trigger: ch1 falling 0V

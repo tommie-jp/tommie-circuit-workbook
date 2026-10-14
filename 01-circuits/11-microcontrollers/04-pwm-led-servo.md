@@ -24,6 +24,7 @@ LED の調光は 11-1 と同じ回路 (図1) で、プログラムが単純な O
 PWM に変わるだけ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 GP15でLEDをPWM調光
 parts:
   U1: pico2 3,5.2 mirror
@@ -41,6 +42,7 @@ style:
 サーボ (図2) は別の 5 V 電源で動かし、信号線だけを Pico 2 の GPIO (GP14) につなぐ。GND は Pico 2 と共通にする。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 GP14でサーボを回す
 parts:
   U1: pico2 8,7 mirror
@@ -84,6 +86,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 LED (GP15) とサーボ (GP14) を組む (AD3 は Scope だけ、サーボは別電源)
 board: full
 parts:
@@ -157,6 +160,7 @@ wires:
 | Measurements | 図4: Frequency・Duty・Maximum。図5: Maximum・Minimum |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 GP15 の LED 用 PWM — 1kHz、デューティ比 25%
 time: 500us/div
 trigger: ch1 rising 1.65V at -4div
@@ -168,6 +172,7 @@ measure: [freq, duty, vmax]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/scope/04-pwm-led-servo-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 GP14 のサーボ信号 — 周期 20ms、パルス幅 1.5ms (中央)
 time: 500us/div
 trigger: ch1 rising 1.65V at -4div

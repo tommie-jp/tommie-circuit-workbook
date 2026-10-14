@@ -18,6 +18,7 @@ FFT の読み方そのものは同じでも、平均化 (4-5) が使えないな
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 マイクアンプの出力を交流結合で CH1 へ
 parts:
   VCC: vcc 1,1 5V
@@ -74,6 +75,7 @@ Q1 の電圧利得は g<sub>m</sub> × RC = (4.3 mA ÷ 26 mV) × 470 Ω ≈ 78 �
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードでマイクアンプを組み AD で読む
 board: half
 parts:
@@ -118,6 +120,7 @@ RC (16 列) は緑のジャンパでつなぐ。
 ## スペクトルの例
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 「あー」の声は基本周波数とその整数倍に山が並ぶ (理想の例)
 device: ad3
 sweep: 0-2kHz

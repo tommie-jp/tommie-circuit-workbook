@@ -27,6 +27,7 @@ ESL ≈ 15 nH、炭素皮膜は ESL ≈ 6 nH と見積もる (実測ではなく
 3-1 の直列治具をそのまま使う。R1 の位置に測る抵抗を挿す。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 直列治具に抵抗を挿す
 parts:
   J1: sma 2,2 mirror CH0
@@ -46,6 +47,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -85,6 +87,7 @@ Z = R + jωL が S11 から直接読める。
 金属皮膜 (ESL 15 nH) — 見えるはずの画面。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-1500M 301
 title: 図3 金属皮膜 100 Ω (ESL 15 nH) — R は平ら、X が伸びる
@@ -107,6 +110,7 @@ notes:
 炭素皮膜 (ESL 6 nH) — 見えるはずの画面。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-1500M 301
 title: 図4 炭素皮膜 100 Ω (ESL 6 nH) — X の伸びは金属皮膜の 4 割

@@ -17,6 +17,7 @@ Data Logger (データロガー) で 1 分間記録する。オシロが「速�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 分圧回路
 parts:
   V1: vsource 1,1 1,3 5
@@ -35,6 +36,7 @@ V+ (5 V) を R1 (2.2 kΩ) と R2 (1 kΩ) で分圧し、その中点を CH1 で�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで分圧回路を記録する
 board: half
 parts:
@@ -79,6 +81,7 @@ Data Logger の画面は、横軸 0〜60 s に 1.56 V の水平な線が引か�
 (計算値で描いた目安)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 分圧の 60 秒 — 1.56 V のまま動かない
 x: 時間 s 0..60
 y: CH1 の電圧 V 0..5

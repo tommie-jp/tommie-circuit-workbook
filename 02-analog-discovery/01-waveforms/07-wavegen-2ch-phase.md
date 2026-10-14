@@ -19,6 +19,7 @@ Wavegen の `W1` と `W2` は**同じ内部クロックから作られる**の�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 W1 と W2 をそれぞれ CH1・CH2 に直結
 parts:
   W1: sine 1,1 1,3 1
@@ -39,6 +40,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+、W2 を 2+ に直結)
 board: half
 parts:
@@ -74,6 +76,7 @@ W1 と 1+ は 5 列、W2 と 2+ は 8 列に挿し、列の内側でつなぐ。
 W1 より**進む**向きなので、CH2 は CH1 より左 (早い時刻) で 0 V を上に横切る。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 10 kHz — CH2 は CH1 より 25.0 μs 早く 0 V を横切る (90°)
 time: 20us/div
 trigger: ch1 rising 0V
@@ -86,6 +89,7 @@ measure: [freq, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/scope/07-wavegen-2ch-phase-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 20 kHz — 時間差は 12.5 μs に縮むが位相は 90° のまま
 time: 20us/div
 trigger: ch1 rising 0V

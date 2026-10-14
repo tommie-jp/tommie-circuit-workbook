@@ -32,6 +32,7 @@ S21 (通り方) はほとんど同じになる。違いが出るのは**阻止�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 パイ型 (C-L-C)
 parts:
   J1: sma 2,2 mirror CH0
@@ -53,6 +54,7 @@ wires:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/circuit/10-pi-and-t-1.svg)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 T 型 (L-C-L)
 parts:
   J1: sma 2,2 mirror CH0
@@ -81,6 +83,7 @@ wires:
 2 枚とも同じ大きさのユニバーサル基板に、端面 SMA 2 つ (6-1 と同じ作り)。部品面から見た図。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -111,6 +114,7 @@ wires:
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/06-filters/perfboard/10-pi-and-t-1.svg)
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -154,6 +158,7 @@ wires:
 カットオフ (30 MHz)・阻止帯域 (60 MHz・100 MHz)。π 型の**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-100M 199
 title: 図5 π 型 — 阻止帯域の Smith は左下 (容量性で低い Z)
@@ -176,6 +181,7 @@ markers:
 T 型。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-100M 199
 title: 図6 T 型 — S21 は π 型とほぼ同じ。Smith は右上 (誘導性で高い Z)

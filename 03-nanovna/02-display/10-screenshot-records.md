@@ -55,6 +55,7 @@ device: H4
 2-6 と同じ DUT。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 記録する測定 (CH0 の先に R L C を直列)
 parts:
   M1:
@@ -78,6 +79,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -119,6 +121,7 @@ wires:
 DUT の中身は写らないので、記録の表で補う。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 25M-125M 101
 title: 図3 記録する画面 — 共振 50.33 MHz で SWR 2.27

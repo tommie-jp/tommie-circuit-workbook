@@ -20,6 +20,7 @@ source: 自作
 並列 (C1 = C2 = 100 µF を並列にすると 200 µF)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 並列にしたコンデンサを充電する
 parts:
   V1: vsource 2,2 2,4 5
@@ -43,6 +44,7 @@ style:
 直列 (C1 = C2 = 100 µF を直列にすると 50 µF)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 直列にしたコンデンサを充電する
 parts:
   V1: vsource 2,2 2,4 5
@@ -79,6 +81,7 @@ style:
 つながる押しボタンにした。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 並列にした C1・C2 を、押しボタンを押している間だけ充電する
 board: half
 parts:
@@ -113,6 +116,7 @@ wires:
 図2 (直列) は、同じブレッドボードの `C2` と橙の線を外して図4 のように挿し替える。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 直列にした C3・C4 を充電する
 board: half
 parts:
@@ -146,6 +150,7 @@ wires:
 くり返させる (W1 が 0 V の間は、同じ `R` を通して放電する)。図5 は並列の場合。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図5 並列の C1・C2 に Analog Discovery をつなぐ
 board: half
 parts:
@@ -182,6 +187,7 @@ wires:
 | Scope | CH1・CH2 とも 1 V/div、時間 200 ms/div、Trigger: CH1 立ち上がり 2.5 V |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図6 並列 (200 µF、τ = 0.20 秒) — 1τ で 63 %
 time: 200ms/div
 trigger: ch1 rising 2.5V
@@ -194,6 +200,7 @@ measure: [vmax, rise]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/01-basics/scope/08-cap-series-parallel-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図7 直列 (50 µF、τ = 0.05 秒) — 同じ尺度で 4 倍速く立ち上がる
 time: 200ms/div
 trigger: ch1 rising 2.5V

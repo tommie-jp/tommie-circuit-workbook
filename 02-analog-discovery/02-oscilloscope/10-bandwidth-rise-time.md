@@ -20,6 +20,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック配線 (0-3 と同じ)
 parts:
   W1: square 1,1 1,3 1.65
@@ -38,6 +39,7 @@ W1（100 kHz、0〜3.3 V の方形波）を CH1 に直結。周期 10 µs に対
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
 board: half
 parts:
@@ -70,6 +72,7 @@ W1 と 1+ は同じ 5 列に挿す。GND と 1− は上の − レールにま�
 見えるはずの立ち上がりが図3。カーソルは 10 % (0.33 V) と 90 % (2.97 V) の所。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 カーソルで 10 %→90 % を読むと約 55 ns
 time: 20ns/div
 trigger: ch1 rising 1.65V at -4div

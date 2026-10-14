@@ -21,6 +21,7 @@ CH1 から出た線を 2 穴離して並べ、その間の容量を S21 で読�
 2 本の線の間の容量をコンデンサ C1 として描いた等価回路。部品は何も挿さない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 並んだ 2 本の線は小さなコンデンサ (等価回路)
 parts:
   J1: sma 2,2 mirror CH0
@@ -42,6 +43,7 @@ notes:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -97,6 +99,7 @@ C' ≈ 23 pF/m = 0.23 pF/cm。並んだ約 2.3 cm (10 穴の 9 間隔) で **約
 0.5 pF のときに見えるはずの画面 (直列治具に 0.5 pF)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 201
 title: 図3 0.5 pF の漏れ — 300 MHz で S21 は −20.6 dB

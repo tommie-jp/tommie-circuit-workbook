@@ -18,6 +18,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 直列治具
 parts:
   J1: sma 2,2 mirror CH0
@@ -41,6 +42,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -85,6 +87,7 @@ wires:
 100 Ω を入れたときに**見えるはずの画面** (理想の模型から計算した破線)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図3 100 Ω を直列に入れた治具の理想 (平らに −6.02 dB)

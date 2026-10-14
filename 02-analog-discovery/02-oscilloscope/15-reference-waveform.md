@@ -18,6 +18,7 @@ Scope はトレースを**参照波形（Reference）として凍結**し、そ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック配線 (0-3 と同じ)
 parts:
   W1: sine 1,1 1,3 1
@@ -33,6 +34,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
 board: half
 parts:
@@ -62,6 +64,7 @@ W1 と 1+ は同じ 5 列に挿し、GND と 1− は上の − レールにま�
 次の図3・図4は、保存した参照 (1 kHz・1 V) を CH1、生きた波形を CH2 として同じ尺度で重ねたもの。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 振幅を 1.5 V にすると参照 (CH1) より 1.5 倍高い
 time: 200us/div
 trigger: ch1 rising 0V
@@ -73,6 +76,7 @@ measure: [vpp, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/15-reference-waveform-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 1.2 kHz にすると山がずれていき、5 ms で 1 周期ぶん追い付く
 time: 500us/div
 trigger: ch1 rising 0V at -5div

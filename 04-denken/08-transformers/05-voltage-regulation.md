@@ -30,6 +30,7 @@ AC 出力の AC アダプタで同じことを見るのが 0-5 で、中身の�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 無負荷と負荷時の 2 次電圧を測る回路
 style:
   standard: jis
@@ -65,6 +66,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (RL の片ピンを抜き挿しする)
 # 上のブロックの 15・18 列が 1 次、下のブロックの 15・18 列が 2 次
 board: half
@@ -109,6 +111,7 @@ wires:
 同じ設定で、無負荷 (図3) と RL = 8 Ω (図4) の 2 回を読む。V2 は数十 mV なので、CH1 だけ 20 mV/div に上げてある。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 無負荷 — V2 (CH1、20 mV/div) は 56.6 mV
 time: 200us/div
 trigger: ch2 rising 0V
@@ -120,6 +123,7 @@ measure: [vmax, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/scope/05-voltage-regulation-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 RL 8 Ω — V2 (CH1) は 51.8 mV に下がる (図3 と同じ設定)
 time: 200us/div
 trigger: ch2 rising 0V

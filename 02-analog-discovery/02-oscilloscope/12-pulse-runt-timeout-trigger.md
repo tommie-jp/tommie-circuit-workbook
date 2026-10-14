@@ -18,6 +18,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 方形波にボタンで異常を作り込む
 parts:
   W1: square 1,1 1,3 1.65
@@ -44,6 +45,7 @@ R1 は Wavegen の出力電流を AD3 の歪みなく出せる上限（30 mA）�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで方形波とボタンを組む
 board: half
 parts:
@@ -84,6 +86,7 @@ Runt トリガで Single にし、High の途中でボタンを押したとき�
 押している半周期だけ山が 0.82 V で止まる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Runt で捕まえた 1 回 — 山が 0.5 V を越え 3.0 V に届かず 0.82 V で戻る
 time: 200us/div
 trigger: ch1 rising 500mV

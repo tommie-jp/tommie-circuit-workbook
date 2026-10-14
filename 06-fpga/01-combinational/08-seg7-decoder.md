@@ -39,6 +39,7 @@ device: SIM
 - d1·d0 の反転 (2・6・A・E)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 セグメント e のゲート
 parts:
   d3: port 1,2
@@ -230,6 +231,7 @@ same が 0 の入力: 0 通り
 実機で測った波形ではなく、実行結果から作った計算の図で、入力を変えた 1 回を 1 ms と見なして並べた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 d を 0 から F まで変えたときの a〜g (Verilator の実行結果から作った計算の図)
 device: generic
 window: 16ms

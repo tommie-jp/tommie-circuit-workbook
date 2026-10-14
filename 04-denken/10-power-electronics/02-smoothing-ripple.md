@@ -25,6 +25,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 全波整流にコンデンサを足す
 style:
   standard: jis
@@ -55,6 +56,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (コンデンサ入り)
 board: half
 parts:
@@ -99,6 +101,7 @@ Range を 50 mV/div にする。10 µF では Offset −3 V・500 mV/div (0 V �
 山の近くで一気に充電され、谷までは τ = RL·C (100 µF で 150 ms、10 µF で 15 ms) で放電する。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 100 µF — 約 3.7 V の上に 0.22 Vpp のリップル (50 mV/div)
 time: 5ms/div
 trigger: ch1 rising 3.7V
@@ -109,6 +112,7 @@ measure: [vmax, avg, vpp, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/10-power-electronics/scope/02-smoothing-ripple-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 10 µF — リップルは 1.46 Vpp に増える (500 mV/div)
 time: 5ms/div
 trigger: ch1 rising 3V
@@ -132,6 +136,7 @@ W1 は FG の OUT (High-Z、50 Hz、振幅 5 V。Vpp で入れる機種なら 10
 (図5)。出力 (約 3.3 V) は各点の振れ (約 4.5 V) の 7 割あり、Vdc は 8 bit でも埋もれない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図5 汎用オシロでの測り方
 style:
   standard: jis

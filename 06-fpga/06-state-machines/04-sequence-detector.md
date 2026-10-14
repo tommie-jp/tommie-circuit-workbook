@@ -317,6 +317,7 @@ OK: 100 cycles, last count=219
 `tb_counter.v` で `counter` を 24 クロック回し、クロックごとの値を書き出した。1 クロックを 1 ms と置いた仮の目盛で描く。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 ミーリーは 4 ビット目が来たクロックで 1、ムーアは 1 クロック遅れて 1 (重なった 2 回目も見つける)
 device: generic
 window: 24ms

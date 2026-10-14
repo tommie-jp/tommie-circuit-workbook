@@ -18,6 +18,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 基準抵抗と列間の寄生容量
 parts:
   AD:
@@ -56,6 +57,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -105,6 +107,7 @@ CH2 に現れない (ノイズに埋もれる)。
 読むので、2 つのチャンネルが同じ帯域を持つ限り、帯域の影響は小さい (目安)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 11 列の線を挿した 10 MHz — CH2 (10 列) が CH1 (Rref の両端) より 90° 遅れる
 time: 20ns/div
 trigger: ch1 rising 0V
@@ -145,6 +148,7 @@ C = I / (2πf × V<sub>CH2</sub>) で求める (CH2 は CH1 より 90° 遅れ�
 同じ計算を周波数に対して並べると、2 本が分かれるのは数 MHz より上だけだと分かる。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 CH2 の振幅は 1 MHz では挿しても抜いても同じ、10 MHz で 18 mV 分かれる
 x: 周波数 Hz log 100k..30M
 y: CH2 の振幅 V 0..1.1

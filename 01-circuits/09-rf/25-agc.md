@@ -41,6 +41,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 AGC 付きの 1 段増幅 (出力の大きさで G を引き下げる)
 parts:
   VCC: vcc 5,1 5V
@@ -105,6 +106,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 AGC 付きの 1 段増幅を組む (W1 と CH2 を 5 列、CH1 を 29 列へ)
 board: half
 parts:
@@ -179,6 +181,7 @@ CH2 (入力) は W1 の式、CH1 (出力) は計算した振幅の正弦波 (位
 (下がる 21 ms・戻る 41 ms) の指数で描いた。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 弱い入力 (5 mV) — AGC は動かず、約 32 倍で出る
 time: 20us/div
 trigger: ch2 rising
@@ -190,6 +193,7 @@ measure: [vpp, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/25-agc-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 強い入力 (100 mV) — 出力は 1.13 Vpp で止まる (AGC なしは 3 Vpp 超)
 time: 20us/div
 trigger: ch2 rising
@@ -201,6 +205,7 @@ measure: [vpp, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/25-agc-2.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 G の電圧 — 入力が 10 倍になると 21 ms で下がり、戻りは 41 ms
 time: 100ms/div
 trigger: ch1 falling 0.2V
@@ -227,6 +232,7 @@ measure: [vmax, vmin, vpp]
 | 300 mV | 1.43 Vpp | 4.39 Vpp | −0.270 V |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図6 入力と出力 — AGC を掛けると 50 dB の入力が 33 dB に縮む
 x: 入力の波高値 mV log 1..300
 y: 出力 Vpp 0..5

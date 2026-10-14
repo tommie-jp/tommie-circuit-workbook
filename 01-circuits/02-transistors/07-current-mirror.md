@@ -20,6 +20,7 @@ source: 自作
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 カレントミラーで LED を定電流点灯する (CH2 で RREF、CH1 で RS の電圧を見る)
 parts:
   VCC: vcc 1,2 5V
@@ -83,6 +84,7 @@ CH2 は `RREF` の両端、CH1 は `RS` の両端の電圧をそのまま測る�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 カレントミラーで LED を定電流点灯する
 # 5V は AD の V+ から上の + レールへ、GND は上の − レール (下のレールは使わない)
 board: half

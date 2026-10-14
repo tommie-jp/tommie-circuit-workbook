@@ -27,6 +27,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 往きと帰りの電線 (等価回路) と負荷
 style:
   standard: jis
@@ -69,6 +70,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (送り端と受け端を同じブレッドボードに)
 board: half
 parts:

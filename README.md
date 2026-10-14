@@ -39,6 +39,8 @@
 - GitHub では、各フェンス (YAML の字) の直後に、その図が画像で出る。図は main に push するたびに
   [GitHub Pages](https://tommie-jp.github.io/tommie-circuit-workbook/) へ描き直して載せる
   (`.github/workflows/pages.yml`)。push の直後の数分は前の図が出る
+- GitHub はフェンスの言語名を出さないので、各フェンスの 1 行目に `# 回路図 (tommie-fence の circuit フェンス)` の
+  ようなコメントを置く。画像の行と同じく `npm run figures` が書くので、手で書かない (図とプレビューには出ない)
 - 書きながら図を見るには VS Code 拡張 tommie-fence
   ([Release](https://github.com/tommie-jp/tommie-fence/releases) の `.vsix`) を入れて
   Markdown のプレビューを開く (プレビューでは画像の行を `.vscode/hide-github-figures.css` で隠す)

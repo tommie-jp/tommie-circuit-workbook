@@ -75,6 +75,7 @@ LO の大きさ (−5〜+16 dBm) と LO の源のインピーダンス (0 Ω で
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図01 2SC1815 差動対のミキサー (カレントミラーで差を 1 本に・IF 455 kHz・50 Ω 出力)
 parts:
   VDD:  vcc 16,2 5V
@@ -250,6 +251,7 @@ Q2・Q5 は E・C・B を左右逆に挿し (平らな面を奥に)、左右対�
 455 kHz の同調回路 (CT・LT・CTK) は右上、フィルタから先 (C4・R7・FL1・C5・L2・R8) は右下に置く。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図02 ブレッドボードに組む (AD3 の W1・W2・CH1・CH2 つき)
 board: full
 parts:
@@ -433,6 +435,7 @@ IF OUT の LO・RF・和は、モデルのフィルタ (理想の LC 梯子) で
 計算値。[sim/diff_output.py](sim/diff_output.py) の解析 (RF 1.000 MHz −20 dBm・LO 1.455 MHz 0 dBm) による。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図03 ミラーの出力 (フィルタの前、CH2) のスペクトル (RF −20 dBm、LO 0 dBm)
 device: ad3
 sweep: 0-3MHz
@@ -455,6 +458,7 @@ markers: [455k, 1M, 1.455M, 2.455M]
 - LO が消えないのはシングルバランスだから (上の説明)。フィルタの後ろでは IF だけが残る (図 04)
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図04 IF OUT (CH1、R8 51 Ω の上) のスペクトル (同じ条件)
 device: ad3
 sweep: 0-3MHz

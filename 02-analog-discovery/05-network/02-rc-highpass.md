@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC ハイパス
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -39,6 +40,7 @@ C1 = 100 nF、R1 = 1 kΩ → f<sub>c</sub> は 5-1 と同じ **≈ 1.59 kHz**
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -72,6 +74,7 @@ wires:
 | Network | Start 100 Hz、Stop 100 kHz、Log、Steps 101、Reference: Channel 1 |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 遮断周波数 (1.59 kHz) では CH2 (R の両端) が CH1 の 0.71 倍で 45° 進む
 time: 100us/div
 trigger: ch1 rising 0V
@@ -102,6 +105,7 @@ CH2 の山 (79 µs) が CH1 の山 (157 µs) より 79 µs 早く、1 周期 629
 図4 は 5-1 のローパスを同じ枠に重ねたもの。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 ハイパスとローパスは 1.59 kHz で鏡写し — 利得は同じ −3 dB、位相は ±45°
 x: 周波数 Hz log 100..100k
 y:

@@ -30,6 +30,7 @@ device: SIM
 Nb と Na は、AND の片方の入力を反転する NOT だ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 比較器の最小の形 (1 ビット)
 parts:
   a: port 1,2
@@ -248,6 +249,7 @@ f 0 0 1 0 1
 実機で測った波形ではなく、実行結果から作った計算の図で、入力を変えた 1 回を 1 ms と見なして並べた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 6 通りの比較 (Verilator の実行結果から作った計算の図)
 device: generic
 window: 6ms

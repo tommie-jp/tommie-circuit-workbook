@@ -208,6 +208,7 @@ verilator --timescale 1us/1ns --binary --timing --trace --top-module tb_fifo fif
 VCD を読んで、ロジックアナライザの画面と同じ形に描いた。実機で測った波形ではなく、シミュレーションの値だ。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 満杯 (FULL) のとき E は入らず、空 (EMPTY) のとき POP は何も起こさない
 device: generic
 time: 14us/div

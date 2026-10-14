@@ -19,6 +19,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 75 Ω のケーブルを 50 Ω 系につなぐ
 parts:
   J1: sma 2,2 mirror
@@ -51,6 +52,7 @@ notes:
 入口 (50/75 の境目) の分だけの一定の SWR になる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 301
 title: 図2 75 Ω ケーブル・先端を 75 Ω で終端 — SWR は一定
@@ -71,6 +73,7 @@ markers:
 両方で反射が起き、線路の長さぶんだけ位相が回るので、SWR が周波数で揺れる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 301
 title: 図3 75 Ω ケーブルの先を 50 Ω で終端 (間違い) — SWR が揺れる

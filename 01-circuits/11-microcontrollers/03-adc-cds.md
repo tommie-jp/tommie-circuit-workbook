@@ -19,6 +19,7 @@ ADC (アナログ→デジタル変換。電圧を数値に変える回路) を�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CdS分圧をADC0(GP26)で読む
 parts:
   U1: pico2 3,4
@@ -63,6 +64,7 @@ C/C++ の `adc_read()` はその値をそのまま返す。MicroPython の `read
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (Pico 2 は USB から給電、AD3 は Scope だけ)
 board: full
 parts:
@@ -122,6 +124,7 @@ wires:
 | カーソル | X1 を覆う前 (−200 ms)、X2 を覆っている間 (600 ms) に置く |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 CdS を覆うと分圧の点が約 1.65V から約 0.16V へ落ち、離すと戻る
 time: 200ms/div
 trigger: ch1 falling 0.9V at -3div

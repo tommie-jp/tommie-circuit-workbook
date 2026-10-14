@@ -25,6 +25,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 送電線の模型 (R + L、S1 で L を短絡)
 style:
   standard: jis
@@ -57,6 +58,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -103,6 +105,7 @@ CH2 は CH1 のちょうど 1/10 なので、CH2 を 50 mV/div にすると 2 �
 線路の L による遅れは W1 に対するもので、この 2 ch の間には出ない。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 S1 を開く (R + L の線路) — CH1 は 500 mV/div、CH2 は 50 mV/div
 time: 200us/div
 trigger: ch1 rising 0V
@@ -114,6 +117,7 @@ measure: [vmax, freq, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/12-power-systems/scope/02-transmission-line-model-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 S1 を閉じる (R だけの線路) — 同じ V/div で CH1・CH2 とも大きくなる
 time: 200us/div
 trigger: ch1 rising 0V
@@ -136,6 +140,7 @@ W1 は FG の OUT (High-Z、1 kHz、振幅 1 V。Vpp で入れる機種なら 2 
 線路の抵抗は行きと帰りのどちらにあっても、直列なので電流と損失は変わらない。試験の図とは位置が変わる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図5 汎用オシロでの測り方
 style:
   standard: jis

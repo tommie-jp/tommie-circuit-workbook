@@ -18,6 +18,7 @@ RAM やディスクへ**流し込みながら**記録するモードで、バッ
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 正弦波を作って測る (1-2 と同じ)
 parts:
   W1: sine 1,1 1,3 1
@@ -36,6 +37,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで正弦波を測る (1-2 と同じ)
 board: half
 parts:
@@ -65,6 +67,7 @@ wires:
 一部を拡大して見る。波形そのものは Repeated モードと同じで、違うのは記録の長さだけ。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 記録した 10 s のうち 5 ms を拡大 — 1.000 kHz・Vpp 2.00 V の正弦波が続く
 time: 500us/div
 trigger: ch1 rising 0V

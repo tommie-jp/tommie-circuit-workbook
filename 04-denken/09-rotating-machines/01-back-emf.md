@@ -24,6 +24,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 モータの端子電圧と電流
 style:
   standard: jis
@@ -53,6 +54,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードとモータ
 # 上の赤レール = 電池 (1〜3本) の+、青レール = GND
 board: half
@@ -114,6 +116,7 @@ CH1 − CH2 で引くと 8 bit の分解能に埋もれる。そこで **Rs1 を
 試験の図とはシャントの位置が変わるが、直列なので流れる電流は同じ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 汎用オシロでの測り方
 style:
   standard: jis

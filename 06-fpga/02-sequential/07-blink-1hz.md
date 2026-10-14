@@ -210,6 +210,7 @@ LED は 13 500 000 クロックごとに反転した。27 MHz なら 0.5 秒ご�
 ## シミュレーションの波形
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 8 回数えるたびに LED が反転する (CLK_HZ = 16)
 device: generic
 time: 300ms/div

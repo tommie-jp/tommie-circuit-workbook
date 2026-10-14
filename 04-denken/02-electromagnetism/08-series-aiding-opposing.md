@@ -27,6 +27,7 @@ L を測る。2 つの差から M が求まる。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 2 つのコイルを直列に (和動接続)
 style:
   standard: jis
@@ -67,6 +68,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (和動接続)
 board: half
 parts:
@@ -123,6 +125,7 @@ notes:
 和動接続の画面。差動接続では CH1 が 0.567 V に下がり、CH2 が 0.807 V に上がる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 和動接続 — コイルの電圧 0.663 V、電流の分 0.733 V
 time: 2us/div
 trigger: ch1 rising 0V

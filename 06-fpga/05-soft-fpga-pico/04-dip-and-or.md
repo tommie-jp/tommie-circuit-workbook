@@ -25,6 +25,7 @@ device: PICO
 ## 論理図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 AND・OR・NOT の論理図 (1-1 の図1 と同じ)
 parts:
   a: port 1,2
@@ -165,6 +166,7 @@ GP17=0 GP16=0 (a=1 b=1) -> GP14(AND)=1 GP15(OR)=1 GP25(NOT)=0
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 DIP スイッチ 2 本と LED 2 個を Pico 2 につなぐ (5-3 と同じ)
 parts:
   SW1: dip-switch4 4,7.02
@@ -199,6 +201,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 5-3 と同じ配線。SW1 が a、SW2 が b、D1 が AND、D2 が OR
 board: full
 parts:
@@ -264,6 +267,7 @@ wires:
 a・b は 00 → 01 → 10 → 11 と進む。5 ms ごとに 1 通りずつ、20 ms で 4 通りを 1 周する。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 a・b が 4 通りを回り、AND は 11 のときだけ、OR は 00 のとき以外で H
 device: ad3
 time: 4ms/div

@@ -125,6 +125,7 @@ PC とクロックの回路図は **1-1 の図1**、番地の LED は **1-1 の�
 **同じ名前の端子 (A0〜A3・ENT・CLR・LDn・P0〜P2・ADDn・ACC0〜ACC3・CLK) は、図をまたいで同じ線**になる。1-1 の図1 の同じ名前の端子ともつながる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 メモリ (74HC154 とダイオード 8 個) と命令の線
 parts:
   U2: ic 6,8 74HC154
@@ -213,6 +214,7 @@ style:
 - ENT と CLR の列には、このプログラムではダイオードが無い。S1 は 1-1 と同じく PC を 0 にするスイッチだ
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 ACC (74HC273) と加算器 (74HC283) と、選ぶ 74HC157
 parts:
   U3: ic 8,8 CD74HC283
@@ -311,6 +313,7 @@ style:
 - U3 の和の 4 本 (S0〜S3) は 0.5 マスおき、U4 の A は 1 マスおきに並ぶので、線を段にして渡した
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 ACC の表示 (LED 4 つ)
 parts:
   ACC0: port 2,2
@@ -351,6 +354,7 @@ style:
 **基板 1** は [1-1 の図4](01-cpu-like.md) のまま組む。足すのは、W1 の列の空いた穴 `c9` から基板 3 の CLK への線 1 本だけだ。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図6 基板 2 — メモリ (74HC154 とダイオード 8 個) と命令の線
 board: full
 parts:
@@ -431,6 +435,7 @@ wires:
 - 線の色: 白 = P0、緑 = P1、黄 = P2、紫 = LDn・ENT、茶 = CLR、桃 = ADDn、青 = 番地、橙 = 行
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図7 基板 3 — ACC (74HC273)・加算器 (74HC283)・74HC157 と ACC の LED
 board: full
 parts:
@@ -607,6 +612,7 @@ IC の静止電流は数 µA で、**3 枚の合計は最大でも約 37 mA**。
 カーソルは **X1 = 12.5 s** (ACC = 15) と **X2 = 14.5 s** (15 + 2 = 17 が 4 ビットに入らず 1 に戻った) に置いた。どちらも PC = 2 で、CLK は L だ。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図8 PC は 0 1 2 1 2 と回り、ACC は 2 クロックごとに 2 ずつ増える (計算)
 device: ad3
 time: 2s/div

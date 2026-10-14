@@ -157,6 +157,7 @@ verilator --timescale 1us/1ns --binary --timing --trace --top-module tb_ram ram1
 VCD を読んで、ロジックアナライザの画面と同じ形に描いた。実機で測った波形ではなく、シミュレーションの値だ。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 55 us に 5A を書いても RDATA は書く前の A5。5A は 65 us
 device: generic
 time: 8us/div

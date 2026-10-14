@@ -19,6 +19,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 LM358 非反転増幅 (9-2 と同じ、利得 11 倍)
 parts:
   AD:
@@ -64,6 +65,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (9-2 と同じ配置)
 board: half
 parts:
@@ -121,6 +123,7 @@ CH1 (入力) は 2.5 V のバイアスに 100 mV が乗る。出力の交流分�
 図は頭打ちを理想の直線で切って描いたもので、**実機は丸まりながら頭打ちになる** (3.5 V は代表値)。下側は 2.5 − 1.1 = 1.4 V まで振れて切れない。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 入力 100 mV は出力の上側が 3.5 V で頭打ち
 time: 500us/div
 trigger: ch1 rising 2.5V
@@ -160,6 +163,7 @@ LM358 は単電源 (Vcc = 5 V、バイアス 2.5 V) で、データシートの�
 実測の点はこの 2 本の交点より手前で、上の線から丸まって離れていく。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 小信号の直線が上限 1.0 V に当たるのが入力 90.9 mV (計算)
 x: 入力振幅 mV 0..120
 y: 出力の上側の振れ V 0..1.4

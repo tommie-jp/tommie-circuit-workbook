@@ -26,6 +26,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 直列つなぎ
 style:
   standard: jis
@@ -50,6 +51,7 @@ wires:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/02-electromagnetism/circuit/01-capacitors-series-parallel-1.svg)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 並列つなぎ
 style:
   standard: jis
@@ -76,6 +78,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 直列のブレッドボードと Analog Discovery
 board: half
 parts:
@@ -119,6 +122,7 @@ AD の Supplies で 5 V を出し、Scope で C1 と C2 の電圧を同時に見
 | テスター | 直流電圧レンジ。S1 を閉じて 1 秒ほど待ってから、各コンデンサの両端に当てる |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 S1 を閉じると C1 (CH1) は 3.41 V、C2 (CH2) は 1.59 V まで充電される
 time: 20ms/div
 trigger: ch1 rising 0.1V at -1div

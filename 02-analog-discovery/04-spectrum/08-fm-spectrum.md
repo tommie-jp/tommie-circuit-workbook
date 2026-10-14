@@ -17,6 +17,7 @@ AM と違って**両脇に何本も**側波帯が並び、その高さは**ベ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック (W1 を 1+ に直結)
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -34,6 +35,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
 board: half
 parts:
@@ -63,6 +65,7 @@ W1 と 1+ は同じ 5 列に挿し、GND と 1− は上の − レールにま�
 画面は次のようになる (±4 次までを描いた)。搬送波より ±1 次・±2 次の側波帯のほうが高い。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 β = 2 では搬送波より ±1 次・±2 次の側波帯が高い
 device: ad3
 sweep: 90kHz-110kHz
@@ -90,6 +93,7 @@ markers: [100kHz, 101kHz, 102kHz, 103kHz]
 変わるのは周期だけ。この周波数の揺れが、図3 の何本もの側波帯になっている。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 FM 波は振幅が一定のまま、変調の山で 1 周期が 9.804 µs (102 kHz) に縮む
 time: 2us/div
 trigger: ch1 rising 0V

@@ -144,6 +144,7 @@ duty=8/8: out was 1 for 64 of 64 clocks
 デューティを 2、4、6 の順に変え、それぞれ 2 周期ずつ出した。時刻は、周期の頭 (元のシミュレーションの 85 µs) を 0 にずらして書いてある。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 デューティを 2、4、6 にすると OUT が 1 の幅が 2、4、6 クロックになる
 device: generic
 time: 48us/div

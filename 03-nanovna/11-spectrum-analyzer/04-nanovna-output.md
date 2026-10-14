@@ -23,6 +23,7 @@ CH0 の出力を 0-3 と同じ 20 dB パッド (43 Ω・11 Ω・43 Ω) で落と
 減らせる**。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CH0 の出力を 20 dB パッドで tinySA へ
 parts:
   X1:
@@ -57,6 +58,7 @@ wires:
 J1 に NanoVNA の CH0 のケーブルを、J2 に tinySA の RF のケーブルを付ける。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board

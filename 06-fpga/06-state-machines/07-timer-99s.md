@@ -87,6 +87,7 @@ RING --> SET : SS か、鳴って 30 s
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 14 本の GPIO から 680 Ω を通して 2 個の 7 セグを直結し、GP15 でブザーを鳴らす
 parts:
   U1: pico2 4,7 mirror
@@ -250,6 +251,7 @@ GPIO の電流の合計がそのまま効く。RP2040 のデータシートは�
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図3 Pico 2 から 680 Ω を通して 2 個の 7 セグへ。電源は Pico 2 の USB
 board: full
 parts:
@@ -920,6 +922,7 @@ PASS
 シミュレーションの時刻をそのまま写した。図4 は残りを 10 s 以上にして、ボタンは跳ねずに 0.1 s 押したとした。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 押して 22.5 ms で数え始め、SEC は 1 s ごとに 0.5 s だけ 1
 device: ad3
 time: 1s/div
@@ -939,6 +942,7 @@ trigger: SS falling at 0s
 - 実機の 1 s は、5-7 で固定したクロックの正確さで決まる。1 クロックが 1.000 ms からずれれば、1 s も同じ割合でずれる
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図5 0 になると BZ が 1 ms ごとに反転する。周期 2 ms = 500 Hz
 device: ad3
 time: 1ms/div

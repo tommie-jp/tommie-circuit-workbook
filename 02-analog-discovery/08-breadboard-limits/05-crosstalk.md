@@ -19,6 +19,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 加害側と被害側、寄生容量と終端抵抗
 parts:
   AD:
@@ -49,6 +50,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -93,6 +95,7 @@ wires:
 図4 の CH2 は 1 V × 1.55 % = 15.5 mV で、被害側の抵抗 100 Ω のぶん CH1 より 80.5° 進む。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 被害側が浮いたままの 10 MHz (CH2 は 50 mV/div)
 time: 50ns/div
 trigger: ch1 rising 0V
@@ -104,6 +107,7 @@ measure: [vpp, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/scope/05-crosstalk-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 Rterm 100 Ω を足すと CH2 は 15.5 mV (CH2 は 10 mV/div)
 time: 50ns/div
 trigger: ch1 rising 0V
@@ -136,6 +140,7 @@ measure: [vpp, phase]
 通じる考え方)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図5 浮いた列の漏れは −20.5 dB で頭打ち、100 Ω の終端で 10 MHz でも −36 dB
 x: 周波数 Hz log 100..100M
 y: 漏れ dB -80..0

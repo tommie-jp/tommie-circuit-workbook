@@ -27,6 +27,7 @@ FM の信号を作り、本物の電波は使わずに原理だけを確かめ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 スロープ検波 (W1 の FM を L1・C1 の斜面で AM に変え、D1 で検波)
 parts:
   W1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -90,6 +91,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 スロープ検波 (W1 を R1 へ、CH2 をタンク、CH1 を検波の出力へ)
 # 電源は要らない。上の − レール = GND
 board: half
@@ -134,6 +136,7 @@ wires:
 ## 同調回路の山と動作点
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 タンクの振幅 (W1 4 V) — 490 kHz は斜面の中ほど、±5 kHz で振幅が上下する
 x: 周波数 Hz 440k..570k
 y: 振幅 V
@@ -169,6 +172,7 @@ W1 の出力の振幅は一定のまま (CH2 を W1 に付け替えると帯は�
 ## 計器の画面
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 タンク (CH2) は搬送波が 1 kHz で太り細り、検波 (CH1) は 1 kHz の音
 time: 200us/div
 trigger: ch1 rising 1.15V

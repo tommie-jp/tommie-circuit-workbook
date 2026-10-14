@@ -125,6 +125,7 @@ clocks=40 tick_count=10 q=10
 ## シミュレーションの波形
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 TICK が 1 の次の立ち上がりでだけ Q が増える
 device: generic
 time: 40us/div

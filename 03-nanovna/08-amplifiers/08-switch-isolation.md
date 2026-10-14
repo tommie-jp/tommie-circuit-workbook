@@ -42,6 +42,7 @@ USB の 5 V から SW1 で入れる。D1 (1N4148) はコイルを切ったとき
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 G5V-2 の 1 回路目で通し、2 回路目で出口を GND へ
 parts:
   J1: sma 2,5 mirror CH0
@@ -81,6 +82,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -148,6 +150,7 @@ wires:
 (接点を 1 pF にした**等価回路**)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図3 切ったとき (1 回路だけ) — 100 MHz で −24 dB しか切れない (1 pF の等価回路)
@@ -166,6 +169,7 @@ markers:
 **切ったとき、2 回路目で出口を GND へ落とした** 見えるはずの画面。設定は図3 と同じ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図4 2 回路目で出口を GND へ — 100 MHz で −42 dB (1 pF + 10 nH の等価回路)

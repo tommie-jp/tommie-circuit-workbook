@@ -18,6 +18,7 @@ NE555 の標準的な非安定接続は**デューティ比が必ず 50% を超�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 555 の非安定発振
 parts:
   U1: ic 6,5 NE555
@@ -65,6 +66,7 @@ CH1 (`1+`) で OUT (3 番) をそのまま Spectrum に送る。
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで 555 を組む
 board: half
 parts:
@@ -113,6 +115,7 @@ wires:
 0 Hz の線は直流分 (平均 2.62 V) である。
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図3 デューティが 50% からずれているので偶数次が −2 dBm ほどで残る
 device: ad3
 sweep: 0-9kHz
@@ -130,6 +133,7 @@ markers: [1008Hz, 2016Hz, 3024Hz, 4032Hz]
 Low は 472 µs。High のほうがわずかに長く、これが偶数次の源になる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 555 の出力 — 周期 992 µs、デューティ 52.4 % (High が 520 µs)
 time: 200us/div
 trigger: ch1 rising 2.5V

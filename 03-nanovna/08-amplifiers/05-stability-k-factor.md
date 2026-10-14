@@ -41,6 +41,7 @@ K を下げる主な原因は 2 つ。**S22 がほぼ 1** (コレクタの Z が
 C2 の先には直流が無いので、RST に直流は流れない (動作点は 8-4 と同じ)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 8-4 の治具の出力に RST (270 Ω) を足す
 parts:
   BAT: battery 1,1 1,7 5 l=$\mathrm{BAT}$
@@ -81,6 +82,7 @@ wires:
 同じユニバーサル基板で「無し」と「有り」を続けて測れる。
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -166,6 +168,7 @@ def k_factor(s11, s21, s12, s22):
 3 MHz のマーカーだけを読む。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 2M-5M 31
 title: 図3 RST 無しの S22 — |Z| 1.8 kΩ、Smith の外周すれすれ (3 MHz で合わせた等価回路)
@@ -183,6 +186,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/08-amplifiers/vna/05-stability-k-factor-1.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 2M-5M 31
 title: 図4 RST 270 Ω を足した S22 — |Z| 248 Ω、外周から内へ入る (同じ等価回路 + 270 Ω)

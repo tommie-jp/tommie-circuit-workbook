@@ -183,6 +183,7 @@ write は改行しない: q=3
 X2 (17 ns) は立ち上がりのあとで、`$strobe` が読んだ値 (`q` = 1) と同じ。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 15 ns の立ち上がり。$display は q=0、$strobe は q=1 を読む
 device: generic
 time: 5ns/div

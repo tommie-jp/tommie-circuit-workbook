@@ -22,6 +22,7 @@ era: 今
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 安定化電源の CV / CC の切り替わり
 parts:
   V1:
@@ -62,6 +63,7 @@ CC に入ると出力電圧が設定値より下がる。これが**電流制限
 (しくみは 2-1 で扱う。ここでは電源と FG の使い方だけを見る)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 電流制限を掛けた電源と FG で、トランジスタで LED を点滅させる
 parts:
   V1:
@@ -117,6 +119,7 @@ Analog Discovery 3 (AD3) は電源にも発振器にも使わず、Scope だけ�
 AD3 の Supplies には電流制限を決める設定が無いため、電源は PSU を使う。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 PSU と FG で LED を点滅させ、AD3 の Scope で入力とコレクタを見る
 # 上の + レール = +5V (PSU)、上の − レール = GND。PSU・FG・AD3 の GND は同じ − レールへ
 board: half
@@ -208,6 +211,7 @@ AD で Amplitude 1 V の題は、FG では 2 Vpp にする。
 時間は 200 ms/div (2 周期が画面に入る)、電圧は両方 1 V/div、トリガは CH2 の立ち上がり 2.5 V。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 FG の 1 Hz 方形波 (CH2) と、点滅するコレクタ (CH1)
 time: 200ms/div
 trigger: ch2 rising 2.5V

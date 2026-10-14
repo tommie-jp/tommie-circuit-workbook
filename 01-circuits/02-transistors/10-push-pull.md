@@ -24,6 +24,7 @@ PNP 形のトランジスタは、NPN 形 (2-1) と電圧・電流の向きが�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 B 級プッシュプル (W1 で入れ、CH2 で入力・CH1 で出力を見る)
 parts:
   VCC: vcc 6,2 5V
@@ -72,6 +73,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 B 級プッシュプル (W1 と CH2 を入力へ、CH1 を出力へ)
 # +5V は上の + レール、GND は上の − レール、−5V は下の − レール
 board: half
@@ -123,6 +125,7 @@ wires:
 W1 を 100 Hz・6 Vpp (±3 V) の正弦波にし、CH2 (入力) と CH1 (出力) を同じ 1 V/div で重ねる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 入力 (CH2) と出力 (CH1) — ゼロクロス付近で出力が 0V に張り付く
 time: 2ms/div
 trigger: ch2 rising 0V
@@ -139,6 +142,7 @@ measure: [vpp, vmax, vmin]
 W1 を 2 Vpp (±1 V) に下げると、すき間の幅は変わらないので歪の割合が大きくなる (図4)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 振幅を 2 Vpp に下げる — 出力は ±0.3 V の山だけが残る
 time: 2ms/div
 trigger: ch2 rising 0V

@@ -26,6 +26,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 テブナンを求める回路 (R_L をつないだ状態)
 style:
   standard: jis
@@ -49,6 +50,7 @@ wires:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/01-dc-circuits/circuit/05-thevenin-1.svg)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 内部抵抗を測る (電源を短絡)
 style:
   standard: jis
@@ -77,6 +79,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 ブレッドボードに組む
 board: half
 parts:

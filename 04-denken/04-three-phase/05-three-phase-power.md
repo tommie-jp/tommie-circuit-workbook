@@ -28,6 +28,7 @@ v × i を平均して、3 つの和と式を比べる。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 三相電源と C + R の Y 負荷 (N は GND)
 style:
   standard: jis
@@ -88,6 +89,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (1 相目を測る)
 # 上のブロック: TL071 の入力側と R1・R2、右に 3 相の C + R。下のブロック: 出力側と Rf、g・h・j 行で 3 相を右へ運ぶ
 board: full
@@ -159,6 +161,7 @@ notes:
 0.1 mA と合わせても 1 mA に届かない。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 1 相目 — 相電流 (CH2) は 35.9° 進み、p (Math) の平均 0.328 mW
 time: 200us/div
 trigger: ch1 rising 0V

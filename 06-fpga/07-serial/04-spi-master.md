@@ -73,6 +73,7 @@ END --> IDLE : CS を 1、done を 1 クロック
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 GP2 から GP5 を 74HC595 につなぎ、AD3 の DIO0 から DIO3 で読む
 parts:
   MCU: pico2 3,7 mirror
@@ -166,6 +167,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 Pico 2 の GP2 から GP5 を 74HC595 につなぎ、AD3 の DIO0 から DIO3 で読む
 board: full
 parts:
@@ -491,6 +493,7 @@ SCK rising edges: 48 (6 transfers x 8)
 シミュレーションの変わり目の時刻をそのまま写した (2 回目の送り。CS の立ち下がりを 0 s とした)。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 2 回目の送り。MOSI は 0xA5、MISO は 1 つ前の 0x5A
 device: ad3
 time: 50us/div

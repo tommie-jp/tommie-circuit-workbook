@@ -18,6 +18,7 @@ AD3 の Tracer（9-6）はこれを自動でやってくれる専用の計器だ
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ダイオードの順方向特性を掃引する
 parts:
   W1: triangle 1,1 1,5 1.5
@@ -43,6 +44,7 @@ V<sub>D</sub> は Math で CH1 − CH2 として取り出す。
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードでダイオードの特性を測る
 board: half
 parts:
@@ -83,6 +85,7 @@ CH2（`2+` / `2-`）は Rs の両端（14 列と GND）だけで、電流を mV 
 | 表示 | XY モード。X = Math（V<sub>D</sub>）、Y = CH2（電流 × 22 Ω） |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 0.6 V あたりから立ち上がり、0.7 V で CH2 が約 143 mV (6.5 mA)
 view: xy
 ch1: {wave: triangle 10Hz 0.35V offset 0.35V, range: 100mV/div, position: -3.5div}

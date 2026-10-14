@@ -46,6 +46,7 @@ NanoVNA は校正した補正係数を**複数のスロット**に保存でき�
 理想値に戻るはずである。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 130M-160M 101
 title: 図1 スロット 1 を呼び出した直後の Thru は平ら

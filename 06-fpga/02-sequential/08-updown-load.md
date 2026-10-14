@@ -168,6 +168,7 @@ load=0 d= 0 up=0 down=0 -> count=15
 ## シミュレーションの波形
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 LOAD が UP と DOWN に勝ち、UP が DOWN に勝つ。15 の次は 0、0 の次は 15
 device: generic
 time: 16us/div

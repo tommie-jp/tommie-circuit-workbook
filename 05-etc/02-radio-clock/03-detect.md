@@ -59,6 +59,7 @@ CMP8 --> T8
 ### 入力増幅、基準電圧、しきい値
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 入力増幅、基準電圧、しきい値
 parts:
   IN: port 1,2
@@ -121,6 +122,7 @@ style:
 ### 440 Hz の検出
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 440 Hz の検出 (帯域通過、整流と平滑、比較器)
 parts:
   AFI: port 1,4
@@ -199,6 +201,7 @@ style:
 ### 880 Hz の検出
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 880 Hz の検出 (図2 と同じ形で、値だけ違う)
 parts:
   AFI: port 1,4
@@ -275,6 +278,7 @@ style:
 ### 図 4: 入力増幅、基準電圧、しきい値の基板
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図4a 入力増幅・基準電圧・しきい値のブレッドボード (LM358 1 個)
 board: half
 parts:
@@ -328,6 +332,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/03-detect-1.svg)
 
 ```perf
+# ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
 title: 図4b 入力増幅・基準電圧・しきい値の基板 (ユニバーサル基板)
 board:
   size: 7x5cm
@@ -433,6 +438,7 @@ style:
 ### 図 5: 帯域通過フィルタのユニバーサル基板
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図5a 帯域通過フィルタのブレッドボード (LM358 1 個、上が 880 Hz・下が 440 Hz)
 board: half
 parts:
@@ -492,6 +498,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/03-detect-2.svg)
 
 ```perf
+# ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
 title: 図5b 帯域通過フィルタの基板 (ユニバーサル基板)
 board:
   size: 7x5cm
@@ -588,6 +595,7 @@ style:
 ### 図 6: 整流と平滑、比較器のユニバーサル基板
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図6a 整流と平滑、比較器のブレッドボード (LM393 1 個、上が 880 Hz・下が 440 Hz)
 board: half
 parts:
@@ -653,6 +661,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/03-detect-3.svg)
 
 ```perf
+# ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
 title: 図6b 整流と平滑、比較器の基板 (ユニバーサル基板)
 board:
   size: 7x5cm
@@ -792,6 +801,7 @@ MFB 帯域通過フィルタの式 (C1 = C2 = C) で決めて、抵抗を E24 �
 ### 帯域通過フィルタの周波数応答
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図7 440 Hz 側と 880 Hz 側の帯域通過フィルタの利得 (計算)
 x: 周波数 Hz log 200..2k
 y: 利得 dB -40..10
@@ -822,6 +832,7 @@ BPF の出力の振幅は 0.8 V (ピーク) と仮定した。この値は、AF 
 BPF の応答は時定数 7 ms の立ち上がりとし、しきい値 TH は 2.4 V に置いた。比較器のヒステリシス (R<sub>s</sub> = 47 kΩ、R<sub>h</sub> = 2.2 MΩ) は、C<sub>p</sub> の電圧 (CH2) が 2.45 V を超えたとき H になり、2.34 V を下回ったとき L に戻る、として計算した。CH3 は、CH2 が最初に 2.45 V に届く時刻 (7.23 ms) 以後、2.34 V を下回るまで H とした。H のあいだ帰還の電流が C<sub>p</sub> を持ち上げる分 (約 0.2 V の目標のずれ) は、図では省いた (含めると立ち下がりが約 0.5 ms 遅くなる計算)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図8 約 0.1 秒の 440 Hz の音で、BPF の出力・平滑・T440 がどう動くか (ヒステリシスあり、計算)
 time: 20ms/div
 trigger: ch3 rising 2.5V at -3div

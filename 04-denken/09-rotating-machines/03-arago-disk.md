@@ -29,6 +29,7 @@ board: —
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 磁石を回す駆動モータ
 style:
   standard: jis

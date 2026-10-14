@@ -43,6 +43,7 @@ LoRa などの無線モジュールに付ける、SMA の小さなホイップ (
 C1 (エレメントの長さ) だけ。基板は使わず、NanoVNA の CH0 に直にねじ込む。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 モジュール用ホイップの給電点 (直列 RLC の等価回路)
 parts:
   J1: sma 2,2 mirror CH0
@@ -91,6 +92,7 @@ H4 は 300 MHz より上を高調波で測るので、ダイナミックレン�
 920 MHz 用のアンテナの**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 800M-1000M 201
 title: 図2 920 MHz 用 — 920 MHz 帯で SWR 1.39
@@ -115,6 +117,7 @@ notes:
 868 MHz 用 (欧州向け) のアンテナの**見えるはずの画面** (設定は図2 と同じ。C1 だけ違う)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 800M-1000M 201
 title: 図3 868 MHz 用 — 920 MHz 帯では SWR 1.90〜2.02

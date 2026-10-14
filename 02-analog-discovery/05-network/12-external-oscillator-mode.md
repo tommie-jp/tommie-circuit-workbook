@@ -19,6 +19,7 @@ Network の **Source** 設定には、いつも使ってきた「Wavegen C1」�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 スルー (基準) の結線
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -39,6 +40,7 @@ W1 を**「外部の信号源」に見立て**、Network からは操作しな�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ と 2+ に直結)
 board: half
 parts:
@@ -72,6 +74,7 @@ Source: External のときも、W1 は Network ではなく Wavegen の画面で
 周期は 1 / 2.5 kHz = 400 µs、Vpp は両方 2.00 V で、位相差は 0° になる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 2.5 kHz のスルー — CH1 と CH2 は同じ波形 (利得 0 dB・位相 0°)
 time: 100us/div
 trigger: ch1 rising 0V

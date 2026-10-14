@@ -19,6 +19,7 @@ Wavegen の周波数を書き換え、Scope の振幅を読み、表にして出
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC ローパスを Script で掃引する
 parts:
   AD:
@@ -48,6 +49,7 @@ R = 1 kΩ、C = 100 nF で、理論の折れ点 f<sub>c</sub> = 1/(2πRC) ≒ 1.
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (5-1 と同じ配線)
 board: half
 parts:
@@ -110,6 +112,7 @@ print("-- done --");
 - `Scope1.channel[0]` が CH1、`[1]` が CH2 (0 始まり)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Script が 3 kHz を出しているときの画面 — CH2 は CH1 の 0.47 倍で約 62° 遅れる
 time: 100us/div
 trigger: ch1 rising 0V
@@ -145,6 +148,7 @@ Script が出す表の `Gain[dB]` 列がこの理論値に近ければ、配線�
 Script が出す 8 行を方眼に打つと、この線の上に乗るはずである。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 Script の Gain[dB] が乗るはずの理論の線 (計算)
 x: 周波数 Hz log 100..300k
 y: 利得 dB -50..0

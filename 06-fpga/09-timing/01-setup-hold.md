@@ -43,6 +43,7 @@ D が立ち上がりの「近く」で変わる、という時刻がそもそも
 ## 論理図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 D フリップフロップ。窓の中で D を動かさない
 parts:
   D: port 2,5
@@ -179,6 +180,7 @@ VCD (3-2) を読んで、ロジックアナライザの画面と同じ形に描�
 実機で測った波形ではなく、シミュレーションの値だ。WIN はテストベンチの `win` で、窓の中で 1 になる。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 窓 (WIN) の中で D が変わっても、Verilator の Q はきれいに決まる
 device: generic
 time: 6ns/div

@@ -26,6 +26,7 @@ era: 古
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 2 石ラジオ (W1 で AM を入れ、CH2 で RF 入力・CH1 で音声出力を見る)
 parts:
   W1: sine 2,4 2,6 l=$\mathrm{W1}$
@@ -140,6 +141,7 @@ V<sub>C2</sub> = 1.86 V、I<sub>C2</sub> = 0.67 mA。上の計算値 (hFE = 200)
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む — 左が同調と高周波増幅、右が検波と低周波増幅
 board: full
 parts:
@@ -255,6 +257,7 @@ VC1 を回して CH1 の振幅が最大になる所が 1 MHz の同調点。外�
 ## 計器の画面
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 RF 入力 (CH2、1MHz を 1kHz・30% で AM) と音声出力 (CH1)
 time: 200us/div
 trigger: ch1 rising 1.9V
@@ -271,6 +274,7 @@ measure: [vpp, freq]
   **包絡線の山で CH1 が谷**になる (位相 180°)。検波で 1 MHz は消えている
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 RF 入力 (CH2) の搬送波を拡大 — 無変調で 1MHz・10mVpp
 time: 0.5us/div
 trigger: ch2 rising 0V
@@ -293,6 +297,7 @@ W1 の代わりに LiteVNA64 を使うと、バーアンテナの 1 次 (約 530
 見えるはずの画面 (理想の模型。コイルの損失を並列の 333 kΩ (Q = 100) とした目安で、実測ではない)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: litevna64
 sweep: 0.8M-1.2M 401
 title: 図5 同調回路 (T1 の 1 次 530 µH ∥ 48 pF) の S21 — f0 で深い谷

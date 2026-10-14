@@ -51,6 +51,7 @@ device: LV64
 24 Ω (z = 0.48) の負荷に、**直列**のコイル (3.9 µH (マイクロヘンリー)) とコンデンサ (10 nF) を足す。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 の回路 (24 Ω に直列のコイル L1 3.9 µH)
 parts:
   J1: sma 2,3 mirror
@@ -71,6 +72,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/05-series-shunt-1.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図1 24 Ω に直列のコイル 3.9 µH — r = 0.48 の円の上を上へ
 dut:
@@ -89,6 +91,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/05-series-shunt-1.svg)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 の回路 (24 Ω に直列のコンデンサ C1 10 nF)
 parts:
   J1: sma 2,3 mirror
@@ -109,6 +112,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/05-series-shunt-2.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図2 24 Ω に直列のコンデンサ 10 nF — r = 0.48 の円の上を下へ
 dut:
@@ -131,6 +135,7 @@ markers:
 同じ 24 Ω の負荷の**入口に並列**にコンデンサとコイルを足す (ケーブルの側から見て、負荷と並列)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 の回路 (24 Ω に並列のコンデンサ C1 3.3 nF)
 parts:
   J1: sma 2,3 mirror
@@ -153,6 +158,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/05-series-shunt-3.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図3 24 Ω に並列のコンデンサ 3.3 nF — g = 2.08 の円の上を下へ
 dut:
@@ -171,6 +177,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/05-series-shunt-3.svg)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 の回路 (24 Ω に並列のコイル L1 3.9 µH)
 parts:
   J1: sma 2,3 mirror
@@ -193,6 +200,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/05-series-shunt-4.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図4 24 Ω に並列のコイル 3.9 µH — g = 2.08 の円の上を上へ
 dut:
@@ -216,6 +224,7 @@ markers:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図5 4 つの回路をブレッドボードに並べる (図1 を選んだ状態)
 board: half
 parts:

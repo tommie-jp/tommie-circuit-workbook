@@ -25,6 +25,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Y 結線に中性線を足す
 parts:
   V1: sine 1,3 1,5 1 l=$\mathrm{W1}$
@@ -76,6 +77,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 # 上のブロック: TL071 の入力側と R1・R2、右に Y 結線と中性線 RN。下のブロック: 出力側と Rf、g・h・j 行で 3 相を右へ運ぶ
 board: full
@@ -145,6 +147,7 @@ notes:
 CH1 は 2 mV/div、CH2 は 500 mV/div と V/div を分けてある。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 R3 を 2 kΩ にすると RN (CH1) に 1 相目と逆向きの電圧が立つ
 time: 200us/div
 trigger: ch2 rising 0V

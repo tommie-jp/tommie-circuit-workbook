@@ -29,6 +29,7 @@ device: H4
 7-6 と同じ直列 RLC の**等価回路**。手の影響は **C1 と R1 の値の変化**として表す。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ダイポールの給電点 (等価回路)。手で R1 と C1 が変わる
 parts:
   J1: sma 2,2 mirror CH0
@@ -76,6 +77,7 @@ wires:
 手を離したときの**見えるはずの画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 120M-170M 251
 title: 図2 手を離す — 144 MHz で SWR 1.40、X はほぼ 0
@@ -97,6 +99,7 @@ markers:
 エレメントの先に手を近づけたときの**見えるはずの画面** (設定は図2 と同じ。R1・C1 だけ仮定の値に)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 120M-170M 251
 title: 図3 手を近づける — 谷が 140 MHz へ下がり、144 MHz で SWR 1.82

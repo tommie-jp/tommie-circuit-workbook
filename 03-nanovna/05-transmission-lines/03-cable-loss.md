@@ -19,6 +19,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CH0-CH1 間に 1 m のケーブル
 parts:
   J1: sma 2,2 mirror
@@ -54,6 +55,7 @@ notes:
 **0 dB のまま**。実測はこの下に沈む。沈んだぶんがケーブルの損失そのもの。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 10M-500M 401
 title: 図2 1 m のケーブルの S21 (理想は 0 dB、損失は持たない)

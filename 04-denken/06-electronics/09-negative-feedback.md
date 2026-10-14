@@ -28,6 +28,7 @@ AD のネットワークアナライザで確かめる。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 非反転増幅の帰還を変える
 parts:
   V1: sine 1,4 1,6 10m l=$\mathrm{W1}$
@@ -61,6 +62,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -115,6 +117,7 @@ notes:
 A = 1 の −3 dB (約 3 MHz) はその手前で読める。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 帰還の量と帯域 (計算) — 増幅度を 1/10 にすると帯域が 10 倍に
 x: 周波数 Hz log 100..10M
 y: 増幅度 dB -10..110

@@ -18,6 +18,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 差動対で電流を振り分ける (2 つのコレクタを CH1・CH2 で見る)
 parts:
   VCC: vcc 4,2 5V
@@ -77,6 +78,7 @@ CH1 は `Q1` のコレクタ、CH2 は `Q2` のコレクタの電圧を GND 基�
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 差動対で電流を振り分ける (電源は AD の V+、CH1・CH2 を 2 つのコレクタへ)
 # 上の + レール = +5V (AD の V+)、上の − レール = GND。Q2 は左右を逆にして挿し、線が交差しないようにした
 board: full
@@ -139,6 +141,7 @@ WaveForms の Scope で CH1・CH2 を 100 mV/div・DC 結合 (中央を 2.1 V。
 (直流は時間で動かないので、動かした瞬間を捉えて前後の高さを比べる。図3)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 VR1 を 0.1 V 上げた瞬間 — CH1 は少し上がり、CH2 は少し下がる
 time: 1ms/div
 trigger: ch1 rising 2.25V

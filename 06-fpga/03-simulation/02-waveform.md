@@ -210,6 +210,7 @@ python3 vcd2out.py counter4.vcd "clk rst_n q" > out.txt
 図は実機で測った波形ではなく、この表から作った計算の図で、1 刻みを 0.5 ms と見なした。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 VCD から読み出した counter4 (1 刻みを 0.5 ms と見なした計算の図)
 device: generic
 window: 8.5ms

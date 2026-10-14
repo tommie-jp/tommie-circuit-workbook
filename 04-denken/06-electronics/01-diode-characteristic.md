@@ -26,6 +26,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ダイオードの電圧電流特性
 parts:
   V1: triangle 1,1 1,3 1.5 l=$\mathrm{W1}$
@@ -50,6 +51,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -89,6 +91,7 @@ XY 表示に出る曲線は、下の表の 5 点を通る (図3)。理想の曲�
 ダイオードの両端が動く範囲 (−1.00〜0.62 V) を三角波で往復させている。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 ダイオードの V–I — 0.5 V を越えると電流 (CH2) が急に立ち上がる
 view: xy
 ch1: {wave: triangle 100Hz 0.8114V offset -0.1886V, range: 250mV/div, position: 0div}
@@ -113,6 +116,7 @@ R1 の両端 (電流) を読む** (図4)。ダイオードの両端 (CH1) は 1 
 そちらを引き算にしない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 汎用オシロでの測り方
 parts:
   V1: triangle 1,1 1,4 1.5 l=$\mathrm{FG}$
@@ -159,6 +163,7 @@ style:
 | 2.0 V | 0.62 V | 1.38 mA |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図5 ダイオードの V–I (計算) — 0.5 V を越えると電流が急に立ち上がる
 x: 両端の電圧 V -1..0.8
 y: 電流 mA -0.5..1.5
@@ -172,6 +177,7 @@ notes:
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/graph/01-diode-characteristic-1.svg)
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図6 図5 の電流を対数の縦軸で — 立ち上がりの先はまっすぐ
 x: 両端の電圧 V 0.3..0.7
 y: 電流 mA log 1m..10

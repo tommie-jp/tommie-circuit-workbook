@@ -18,6 +18,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pattern でクロックを作り 4017 を動かす
 parts:
   U2: dip16 5,4 CD4017 r180
@@ -61,6 +62,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -110,6 +112,7 @@ DIO1〜DIO3 は入力 (Logic)** に設定を分ける。
 AD の Scope にクロック (CH1) と Q0 (CH2) を入れると、Logic で見る波形を電圧で確かめられる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Q0 (CH2) はクロック (CH1) 10 周期に 1 回、1 周期ぶんだけ H
 time: 20ms/div
 trigger: ch2 rising 1.65V at -4div

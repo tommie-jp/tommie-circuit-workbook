@@ -20,6 +20,7 @@ Generator が使う記録メモリの配分を、あらかじめ決められた*
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック配線 (0-3 と同じ)
 parts:
   W1: sine 1,1 1,3 1
@@ -38,6 +39,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結。0-3 と同じ)
 board: half
 parts:
@@ -69,6 +71,7 @@ W1 と 1+ を同じ 5 列に挿し、GND と 1− は上の − レールにま�
 どの構成でも読める 1 kHz・振幅 1 V の正弦波である。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 構成を切り替えても CH1 の波形は同じ — Vpp 2.00 V・1.000 kHz
 time: 200us/div
 trigger: ch1 rising 0V

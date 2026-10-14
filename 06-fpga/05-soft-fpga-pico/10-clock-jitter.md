@@ -55,6 +55,7 @@ Logic は 1 回の取り込みで 32 768 標本を持つ (5-5 の前提)。標�
 図1・図2 は 5-5 と同じ。DIP スイッチは、この題では起動時に動かし方を選ぶのに使う。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2 に LED 4 個・DIP スイッチ・AD3 の Logic をつなぐ
 parts:
   U1: pico2 8,8 mirror
@@ -124,6 +125,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 Pico 2 の左に LED、右に DIP スイッチ、上に AD3 の Logic
 board: full
 parts:
@@ -343,6 +345,7 @@ python3 jitter.py timer_01.csv timer_02.csv 0               # タイマ割り込
 (測れば、立ち上がりの位置が周期ごとに少しずつずれる)。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 タイマ割り込みの半周期 20 µs の CLK は 25 kHz (周期 40 µs)
 device: ad3
 time: 20us/div

@@ -27,6 +27,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 無負荷試験の回路 (2 次は開放)
 style:
   standard: jis
@@ -60,6 +61,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (2 次は開放)
 board: half
 parts:
@@ -99,6 +101,7 @@ wires:
 CH2 は CH1 の約 1/40 しかないので、CH2 だけ 20 mV/div に上げてある。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 励磁電流の分 (CH2、20 mV/div) は V1 (CH1、1 V/div) より 84° 遅れる
 time: 200us/div
 trigger: ch1 rising 0V
@@ -119,6 +122,7 @@ AD の CH2 は Rs1 の両端を差動で挟んでいる。Rs1 の電圧 (47 mV) 
 直に読む (図4)。2 次は開放のままで、どこにもクリップを当てない (1 次の GND だけが大地につながる)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 汎用オシロでの測り方
 style:
   standard: jis

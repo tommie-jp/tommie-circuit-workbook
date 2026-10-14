@@ -49,6 +49,7 @@ board: BB
 2 枚とも同じ配線で、違うのは GP15 の先 (ボタンか LED) だけ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 送る側 (ボタンの状態を送る)
 parts:
   U1: pico2 3,6.2 mirror
@@ -86,6 +87,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/17-nrf24-pico-1.svg)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 受ける側 (LED を点ける)
 parts:
   U1: pico2 3,6.2 mirror
@@ -143,6 +145,7 @@ nRF24L01+ の 2×4 のピンヘッダはブレッドボードに挿せない (2 
 モジュールはブレッドボードの外に置き、メスのジャンパ線でブレッドボードへつなぐ。2 枚とも同じ並びで、違うのは GP15 の先だけ。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 送る側をブレッドボードに組む
 board: full
 parts:
@@ -176,6 +179,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/17-nrf24-pico-1.svg)
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 受ける側をブレッドボードに組む
 board: full
 parts:
@@ -611,6 +615,7 @@ while time.ticks_diff(time.ticks_ms(), t0) < 5000:   # 5 秒で止める
 | マーカー | peak |
 
 ```spectrum
+# スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
 title: 図5 RF_CH 76 のパケットを MAX HOLD で重ねる (30cm 先)
 device: tinysa-ultra
 center: 2476MHz

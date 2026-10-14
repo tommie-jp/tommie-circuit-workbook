@@ -125,6 +125,7 @@ S3 = A3 ⊕ BX3 ⊕ C3 (⊕ は XOR) なので、C3 = A3 ⊕ BX3 ⊕ S3 と逆�
 **同じ名前の端子 (A0〜A3・BX0〜BX3・SUB・S0〜S3・C4・V) は、図をまたいで同じ線**になる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 入力のスイッチと、B を反転する 74HC86
 parts:
   VCC: vcc 2,2 5V
@@ -213,6 +214,7 @@ style:
 - U2 の VCC (PIN 14) と GND (PIN 7) は図に描いていない。PIN 14 を +5 V、PIN 7 を GND につなぐ (図4)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 加算器 74HC283 と、あふれを作る 74HC86
 parts:
   U1: ic 10,8 CD74HC283
@@ -284,6 +286,7 @@ style:
   入力の PIN 12・13 を GND につなぐ (CMOS の入力を開けておかない)。U3 の VCC と GND は U2 と同じ (図4)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 答えの表示 (LED 6 つ)
 parts:
   S0: port 2,2
@@ -335,6 +338,7 @@ style:
 ブレッドボードの順位は half → full だが、IC 3 個 (22 列) と DIP スイッチ 3 個 (12 列) と LED 6 つ (18 列) は half (30 列) に収まらない。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 4 ビット ALU もどきをブレッドボードに組む
 board: full
 parts:
@@ -524,6 +528,7 @@ AD3 の DIO は 3.3 V の LVCMOS で、5 V まで入れてよい (入力 H は 2
 バス S を 10 進 (S) と 2 の補数 (Ssigned) の 2 とおりで並べた。カーソルは **X1 = 1 s (5 + 3)**、**X2 = 3 s (5 − 3)** に置いた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図5 SUB を倒すと 5+3 が 5-3 になる。S と C4・V の並び (計算)
 device: ad3
 time: 1s/div

@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CT の模型 (一次 5 回・二次 100 回)
 parts:
   V1: sine 1,2 1,6 5 l=$\mathrm{W1}$
@@ -69,6 +70,7 @@ CT の模型 (リング) はブレッドボードの外に置き、一次の 2 �
 一次は上の半分 (a〜e 行)、二次は下の半分 (f〜j 行) を使う。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -120,6 +122,7 @@ wires:
 CH2 は 2 mV/div にし、Average で雑音を落とす。二次を開いたら CH2 を 50 mV/div に上げる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 二次を閉じた (R_B = 10 Ω) — 二次の電圧 (CH2、2 mV/div) は 4.8 mV
 time: 50us/div
 trigger: ch1 rising 0V
@@ -131,6 +134,7 @@ measure: [vmax, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/scope/07-current-transformer-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 二次を開いた — 二次の電圧 (CH2、50 mV/div) は 127 mV に跳ね、位相は 90° 進む
 time: 50us/div
 trigger: ch1 rising 0V

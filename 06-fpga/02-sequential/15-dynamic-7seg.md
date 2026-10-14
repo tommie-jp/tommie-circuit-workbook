@@ -38,6 +38,7 @@ device: PICO
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2 の 12 本のピンから抵抗とトランジスタを通して 4 桁の 7 セグを光らせる
 parts:
   U1: pico2 5,6
@@ -182,6 +183,7 @@ wires:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 1 枚のブレッドボードに組む。電源は USB から Pico 2 へ
 board: full
 parts:
@@ -710,6 +712,7 @@ FPGA の時計 (12-4) のようにクロックが速ければ、消す時間を 
 リセットから 215 s 後、カウンタが `0215` を出している所。設計値とシミュレーションの値 (上の試験) で描いた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 4 つの桁を 1 ms ずつ順に光らせる。a と f は光っている桁の数字 (0215) で変わる
 device: ad3
 time: 1ms/div
@@ -734,6 +737,7 @@ trigger: DRV1 rising at 0s
 - `SA` `SF` の変わり目は、`DRV` の変わり目と同じ時刻にある。これがずれると、ずれの間だけゴーストが出る
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 消す版 (BLANK = 1)。光る 1 ms と消す 1 ms が交互に来る
 device: ad3
 time: 2ms/div

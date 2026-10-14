@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 基準抵抗とジャンパ線 (先を GND へ)
 parts:
   AD:
@@ -49,6 +50,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -88,6 +90,7 @@ Wavegen の DC 電流の上限 (AD3 は 30 mA) の範囲内。10 MHz は AD3 の
 (9 MHz @ −3 dB) を超えるので、BNC アダプタ (Scope 30+ MHz、Wavegen 12 MHz @ −3 dB) を付ける。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 ジャンパの電圧 (CH2) が電流 (CH1) より 90° 進み、振幅は Rref と同じ
 time: 50ns/div
 trigger: ch1 rising 0V

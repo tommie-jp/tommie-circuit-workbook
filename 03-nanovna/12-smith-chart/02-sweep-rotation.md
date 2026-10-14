@@ -44,6 +44,7 @@ device: LV64
 50 Ω に 8.2 µH (マイクロヘンリー) のコイルを直列に付けた負荷 (Z = 50 + jωL)。50 Ω は E24 に無いので、**100 Ω を 2 本並列**にして作る。**R = 50 Ω の円** (中心を通る円) の上半分を、中心から右へ回る。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 の回路 (50 Ω (100 Ω の 2 本並列) と 8.2 µH の直列)
 parts:
   J1: sma 2,3 mirror
@@ -64,6 +65,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/02-sweep-rotation-1.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図1 50 Ω + 8.2 µH — r = 1 の円の上半分を中心から右へ
 dut:
@@ -85,6 +87,7 @@ markers:
 50 Ω (100 Ω の 2 本並列) に 3.3 nF のコンデンサを直列に付けた負荷 (Z = 50 − j / (ωC))。**同じ r = 1 の円の下半分**で、低い周波数では右端の近く (x が大きな負) から始まり、周波数を上げると中心へ近づく。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 の回路 (50 Ω (100 Ω の 2 本並列) と 3.3 nF の直列)
 parts:
   J1: sma 2,3 mirror
@@ -105,6 +108,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/02-sweep-rotation-2.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図2 50 Ω + 3.3 nF — r = 1 の円の下半分を右から中心へ
 dut:
@@ -127,6 +131,7 @@ markers:
 f0 より下は容量性 (下半分)、上は誘導性 (上半分) で、**実軸をちょうど f0 で横切る**。r = 0.48 の円の上を、下から上へ時計回りに動く。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 の回路 (24 Ω と 8.2 µH と 3.3 nF の直列共振)
 parts:
   J1: sma 2,3 mirror
@@ -145,6 +150,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/circuit/02-sweep-rotation-3.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 300k-3M 101
 title: 図3 24 Ω + 8.2 µH + 3.3 nF の直列共振 — r = 0.48 の円を下から上へ
 dut:
@@ -170,6 +176,7 @@ markers:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 3 つの負荷をブレッドボードに並べる (図1 の 50 Ω + 8.2 µH を選んだ状態)
 board: half
 parts:

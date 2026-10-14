@@ -58,6 +58,7 @@ TX --> TXD
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 AD3 の DIO0 から GP14 へ字を送り、GP15 から返る字を DIO1 で読む
 parts:
   MCU: pico2 3,6 mirror
@@ -94,6 +95,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 DIO0 から GP14 へ字を送り、GP15 の返りを DIO1 で読む
 board: half
 parts:
@@ -340,6 +342,7 @@ SKEW  1.04  GAP  0 クロック: 送った 256 字、返った 256 字、順番�
 シミュレーションの変わり目の時刻をそのまま写した。`A` (0x41) を 1 字送った。DIO0 の立ち下がりを 0 s とした。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 "A" (0x41) を送ると、約 2.05 ms 後に同じ "A" が返る
 device: ad3
 time: 500us/div

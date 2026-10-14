@@ -38,6 +38,7 @@ device: H4
 (50.3 pF。7.1 MHz に要る 50.2 pF が E12 に無いため)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 トラップ (L と C の並列) を直列治具で測る
 parts:
   J1: sma 2,2 mirror CH0
@@ -66,6 +67,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -106,6 +108,7 @@ wires:
 | 表示 | S21 の Log Mag、S11 の X (CH1 の 50 Ω は純抵抗なので、X はトラップの X) |
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 2M-12M 201
 title: 図3 7.1 MHz で S21 が −47 dB の谷、X の符号が + から − へ

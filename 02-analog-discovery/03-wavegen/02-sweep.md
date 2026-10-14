@@ -18,6 +18,7 @@ RC ローパスに通して Scope で眺めると、周波数が上がるにつ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC ローパス (Sweep で追う)
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -41,6 +42,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3
 board: half
 parts:
@@ -76,6 +78,7 @@ wires:
 | Scope | Time/div 100 ms/div (10 div で 1 s、掃引 1 回ぶんが画面に収まる)。CH1・CH2 とも Range 500 mV/div。Trigger: Wavegen の Sync 出力 (掃引の開始に同期) |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 掃引の中ほど (1.59 kHz) を切り出すと CH2 は CH1 の 0.71 倍で 45° 遅れる
 time: 100us/div
 trigger: ch1 rising 0V
@@ -106,6 +109,7 @@ RC の定常応答として切り出した画面。掃引中の画面は周波�
 横軸を掃引の時刻にして CH2 の Vpp を描くと、Scope の画面で見える包絡線 (外形) になる。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 CH2 の Vpp は掃引の中ほど (0.52 s) で 1.41 V に下がる
 x: 時刻 s 0..1
 y: 振幅 V 0..2.2

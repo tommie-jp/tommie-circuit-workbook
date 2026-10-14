@@ -24,6 +24,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 コイルに磁石を出し入れする
 style:
   standard: jis
@@ -43,6 +44,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 コイルを Analog Discovery の Scope につなぐ
 board: half
 parts:
@@ -87,6 +89,7 @@ wires:
 AD の Scope の CH1 (1+・1−) でコイルの両端の電圧を読む。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 磁石を近づけると正の山、遠ざけると逆符号の山 (波形は目安)
 time: 100ms/div
 trigger: ch1 rising 50mV at -2div

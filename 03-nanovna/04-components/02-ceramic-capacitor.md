@@ -19,6 +19,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 直列治具にセラミックコンデンサを挿す
 parts:
   J1: sma 2,2 mirror CH0
@@ -38,6 +39,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -75,6 +77,7 @@ wires:
 見えるはずの画面 (理想の模型)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 401
 title: 図3 0.1 µF セラミックの |Z| — 11.25 MHz の SRF で谷、上は誘導性
@@ -96,6 +99,7 @@ notes:
 SRF の近く (5〜17.5 MHz) を広げ、|Z| に X を重ねて線形の目盛で見る。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 5M-17.5M 401
 title: 図4 SRF の近くを広げる — X が 0 を横切り、|Z| は ESR まで下がる

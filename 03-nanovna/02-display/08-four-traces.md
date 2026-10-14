@@ -52,6 +52,7 @@ S21 の Smith は通過の係数を描いたもので読み方が違うので、
 フィルタの例は 2-2 と同じ 3 次 LC ローパス (68 pF・180 nH・68 pF)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CH0 と CH1 の間に 3 次 LC ローパス
 parts:
   J1: sma 2,2 mirror CH0
@@ -75,6 +76,7 @@ wires:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -123,6 +125,7 @@ J1 に CH0、J2 に CH1 のケーブルをつなぐ。C1・C2 (68 pF) は中心�
 この図は 4 本の割り当てそのものを見せるため、4 本を 1 枚に描いた。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-200M 201
 title: 図3 既定の 4 トレースで LC ローパスを見る
@@ -154,6 +157,7 @@ notes:
 等価回路 (R 35 Ω・L 220 nH・C 6.2 pF、先を短絡)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 100M-180M 161
 title: 図4 アンテナは S11 の SWR と X の 2 本に絞る

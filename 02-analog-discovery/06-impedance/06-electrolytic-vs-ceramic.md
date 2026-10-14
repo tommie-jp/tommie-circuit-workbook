@@ -19,6 +19,7 @@ ESR がずっと小さく、位相は −90° にほぼぴったり近づく。�
 6-2 と同じ回路。C<sub>DUT</sub> を電解 → セラミックに差し替える。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 基準抵抗と DUT (電解からセラミックに差し替え)
 parts:
   AD:
@@ -48,6 +49,7 @@ wires:
 に差し替えるだけ。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -95,6 +97,7 @@ I = 0.4 V / 47.3 Ω = 8.46 mA、CH1 は 8.46 mA × 33 Ω = 0.279 V (電解は 0.
 CH2 は 8.46 mA × 33.86 Ω = 0.286 V (電解は 0.262 V)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 セラミックの CH2 は CH1 より 90° 近く遅れる
 time: 500us/div
 trigger: ch1 rising 0V
@@ -121,6 +124,7 @@ measure: [vpp, avg, phase]
 同じ模型 (C + ESR) で周波数を振ると、ESR の差は位相にだけはっきり出る (図4)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 |Z| はほぼ同じでも、電解の位相は 1 kHz で −76.7° まで浅い
 x: 周波数 Hz log 100..100k
 y:

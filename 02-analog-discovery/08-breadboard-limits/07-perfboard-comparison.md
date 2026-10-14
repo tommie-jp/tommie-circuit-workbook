@@ -20,6 +20,7 @@ perfboard に組み直す**。perfboard は穴が 1 つ 1 つ独立していて�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC ローパス (基板に依らない共通の回路)
 parts:
   AD:
@@ -49,6 +50,7 @@ R = 10 kΩ、C = 10 pF は 8-4 とまったく同じ値。1+ が入力 (W1)、2+
 ## 実体配線図 (breadboard)
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (8-4 と同じ配置)
 board: half
 parts:
@@ -78,6 +80,7 @@ wires:
 ## 実体配線図 (perfboard)
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board: 16x10
 title: 図3 perfboard と Analog Discovery
 parts:
@@ -140,6 +143,7 @@ breadboard 相当 (36.5 pF) では 0.40 V・−66.4° で、波形は図4 とほ
 (0.45 dB の差は表のとおり)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 perfboard の 1 MHz は CH2 が 0.42 V で CH1 より 65.1° 遅れる
 time: 500ns/div
 trigger: ch1 rising 0V
@@ -168,6 +172,7 @@ perfboard 側は**列間容量の代わりに隣接パッド間の容量**が乗
 差 (6〜11 dB) に比べるとずっと小さい。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図5 入力容量 24 pF が共通の土台で、ユニバーサル基板の差 (36.5 pF と 34.3 pF) はその上の小さい差
 x: 周波数 Hz log 100k..10M
 y: 利得 dB -30..0

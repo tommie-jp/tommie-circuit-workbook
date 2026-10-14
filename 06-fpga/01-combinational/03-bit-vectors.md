@@ -30,6 +30,7 @@ device: SIM
 図 1 は 4 本の線の上に、`cat` の 4 ビットと、そこから取り出した `low` (2 本)・`msb` (1 本) の名前を付けたものだ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 a と b を連結した cat と、その一部を取り出した low と msb
 parts:
   a1: port 1,2
@@ -128,6 +129,7 @@ a b cat low msb
 実機で測った波形ではなく、実行結果から作った計算の図で、入力を変えた 1 回を 1 ms と見なして並べた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 a と b を 4 回変えたときの cat と low と msb (Verilator の実行結果から作った計算の図)
 device: generic
 window: 4ms

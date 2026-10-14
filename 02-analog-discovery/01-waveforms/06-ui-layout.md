@@ -16,6 +16,7 @@ WaveForms の画面そのものに慣れる題。0-3 のループバックを画
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ループバック配線 (0-3 と同じ)
 parts:
   W1: sine 1,1 1,3 1
@@ -31,6 +32,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery 3 (W1 を 1+ に直結)
 board: half
 parts:
@@ -58,6 +60,7 @@ wires:
 | Scope (CH1) | DC、Auto トリガ |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Run 中の画面 — 1 kHz・Vpp 2.00 V の正弦波 (Stop を押すとこの波形で止まる)
 time: 200us/div
 trigger: ch1 rising 0V

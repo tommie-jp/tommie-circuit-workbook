@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 方形波と RC の回路
 style:
   standard: jis
@@ -54,6 +55,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -95,6 +97,7 @@ W1 の電流は方形波の角の瞬間に最大で 2.0 mA (2 V ÷ 1 kΩ) で、
 τ = 100 µs は半周期 (500 µs) より十分短いので、CH2 は角の丸い方形波になり、山は 0.99 V まで届く。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 方形波 (CH1) と RC を通した波 (CH2)
 time: 200us/div
 trigger: ch1 rising 0V
@@ -109,6 +112,7 @@ measure: [vmax, freq]
 重ねた。3 つだけでも方形波の形に近づき、角のそばで 1.19 V まで行き過ぎる (ギブズの現象)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 計算 — 基本波 + 3 次 + 5 次の和 (CH2) は方形波 (CH1) に近づく
 time: 200us/div
 trigger: ch1 rising 0V
@@ -151,6 +155,7 @@ measure: [vmax, freq]
 CH1 の n 次 ÷ 基本波は 1/3・1/5・1/7・1/9。CH2 はそれよりずっと速く小さくなる。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図5 奇数次の山の高さ — 方形波は 1/n、RC の後は速く落ちる (両対数)
 x: 周波数 Hz log 500..10k
 y: 振幅 V log 0.01..2

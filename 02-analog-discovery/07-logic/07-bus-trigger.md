@@ -20,6 +20,7 @@ Bus を作り、その Bus が特定の値になった瞬間でトリガでき�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pattern でクロックを作り 4017 を動かす
 parts:
   U2: dip16 5,4 CD4017 r180
@@ -61,6 +62,7 @@ DIO の H は 3.3 V 固定で、5 V で動かすと VIH に届かない)。
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -105,6 +107,7 @@ wires:
 Bus1 = `2` でトリガした瞬間の Q0 (DIO1) と Q1 (DIO2) を電圧で描くと次のようになる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 t = 0 で Q0 (CH1) が下がり Q1 (CH2) が上がる。10 ms 後に Q1 が下がり Q2 へ
 time: 5ms/div
 trigger: ch2 rising 1.65V

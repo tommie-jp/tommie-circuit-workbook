@@ -28,6 +28,7 @@ AD の Math で p を画面に出し、抵抗とコンデンサで形を比べ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 瞬時電力を測る (1 回目 R1、2 回目 C1)
 style:
   standard: jis
@@ -58,6 +59,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (1 回目 R1)
 board: half
 parts:
@@ -100,6 +102,7 @@ notes:
 R1 と C1 の 2 つの画面。Math (赤) の V/div と基準は 2 枚とも同じにしてある。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 R1 — p (Math) は 2 kHz で 0〜1.46 mW を振れ、平均 0.73 mW
 time: 200us/div
 trigger: ch1 rising 0V
@@ -112,6 +115,7 @@ measure: [vmax, avg, freq, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/03-ac-circuits/scope/12-instantaneous-power-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 C1 — 電流 (CH2) は 90° 進み、p (Math) は ±0.78 mW で平均 0
 time: 200us/div
 trigger: ch1 rising 0V

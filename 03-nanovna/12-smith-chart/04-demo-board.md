@@ -21,6 +21,7 @@ device: LV64
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 デモボードの回路 (JP をどれか 1 つだけ閉じる)
 parts:
   J1: sma 2,3 mirror
@@ -79,6 +80,7 @@ style:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -157,6 +159,7 @@ perfboard の治具を作る前に、**ブレッドボードで同じ 8 つの�
 > 校正はブレッドボードの上で取る ([03-nanovna/12-smith-chart/01-map.md](01-map.md) の「測る前に」)。基準面がオレンジの線の先へ移り、線の長さは測る物に入らない。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2b デモボードをブレッドボードで組む (JP3 の 51 Ω を選んだ状態)
 board: half
 parts:
@@ -208,6 +211,7 @@ wires:
 以下は、**理想の模型から計算した画面**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図3 JP1 Open — 右端
 dut: open
@@ -220,6 +224,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-1.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図4 JP2 Short — 左端
 dut: short
@@ -232,6 +237,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-2.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図5 JP3 51 Ω — 中心 (SWR 1.02)
 dut:
@@ -246,6 +252,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-3.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図6 JP4 24 Ω — 実軸の左 (SWR 2.08)
 dut:
@@ -260,6 +267,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-4.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図7 JP5 100 Ω — 実軸の右 (SWR 2.0)
 dut:
@@ -274,6 +282,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-5.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図8 JP6 8.2 µH — 上の外周 (+j51.5 Ω)
 dut:
@@ -288,6 +297,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-6.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図9 JP7 3.3 nF — 下の外周 (−j48.2 Ω)
 dut:
@@ -302,6 +312,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-7.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 100k-3M 101
 title: 図10 JP8 51 Ω + 8.2 µH — r = 1 の円の上 (51 + j51.5 Ω)
 dut:
@@ -323,6 +334,7 @@ markers:
 **3 MHz では図の理想の位置に近く、30 MHz では回り込みが見える**。この題の掃引を 3 MHz までにしたのはこのため。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 1M-30M 101
 title: 図11 ブレッドボードの Open — 右端から下へ (2.5 pF 付き)
 dut:
@@ -338,6 +350,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-9.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 1M-30M 101
 title: 図12 ブレッドボードの Short — 左端から上へ (43 nH 付き)
 dut:
@@ -353,6 +366,7 @@ markers:
 ![NanoVNA の画面](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/12-smith-chart/vna/04-demo-board-10.svg)
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 sweep: 1M-30M 101
 title: 図13 ブレッドボードの 51 Ω — 中心の近く (2.5 pF と 43 nH 付き)
 dut:

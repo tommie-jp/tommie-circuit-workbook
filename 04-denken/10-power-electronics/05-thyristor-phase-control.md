@@ -28,6 +28,7 @@ Vm = 5 V なら、α = 90° で Vavg = 5 / (2π) = 0.796 V。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 サイリスタの半波の位相制御
 style:
   standard: jis
@@ -65,6 +66,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 # 上の青レール = GND
 board: half
@@ -112,6 +114,7 @@ W2 の Phase の向き (進みか遅れか) は画面で確かめる。W2 の立
 α = 90° の画面。CH2 は W1 の山の頂点 (90°) から後だけが出る。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 α 90° — 負荷の電圧 (CH2) は 90° から 180° だけ、平均 0.796 V
 time: 5ms/div
 trigger: ch1 rising 0V

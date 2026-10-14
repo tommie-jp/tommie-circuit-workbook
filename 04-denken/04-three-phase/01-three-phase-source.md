@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 三相の信号を作る
 parts:
   V1: sine 1,3 1,5 1 l=$\mathrm{W1}$
@@ -74,6 +75,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (1 回目)
 # 上のブロック (a〜e) に TL071 の入力側と R1・R2、下のブロック (f〜j) に出力側と Rf
 board: half
@@ -131,6 +133,7 @@ notes:
 1 回目は 2 相目が 120° 遅れ、2 回目は 3 相目が 120° 進む。振幅はどれも 1 V のままだ。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 1 回目 — 2 相目 (CH2) は 1 相目 (CH1) より 120° 遅れる
 time: 200us/div
 trigger: ch1 rising 0V
@@ -142,6 +145,7 @@ measure: [vmax, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/scope/01-three-phase-source-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 2 回目 — 3 相目 (CH2) は 1 相目 (CH1) より 120° 進む
 time: 200us/div
 trigger: ch1 rising 0V
@@ -216,6 +220,7 @@ AD-B の CH1 に **1 相目をもう一度入れる** のがこの方法の要�
 AD-B では「CH1 (基準の 1 相目) に対する CH2 (3 相目)」が読める。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図5 AD3 を 2 台 (上が AD-A、下が AD-B)
 board: half
 parts:
@@ -296,6 +301,7 @@ notes:
 その相が 1 相目に遅れる時間に合わせる (1 kHz は周期 1 ms なので、120° = 333.3 µs、240° = 666.7 µs)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図6 AD-A の画面 — CH2 (2 相目) は CH1 (1 相目) より 120° 遅れる
 time: 200us/div
 trigger: ch1 rising 0V
@@ -308,6 +314,7 @@ measure: [vmax, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/scope/01-three-phase-source-3.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図7 AD-B の画面 — CH1 は 1 相目 (基準)、CH2 は 3 相目 (120° 進み = 240° 遅れ)
 time: 200us/div
 trigger: ch1 rising 0V

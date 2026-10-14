@@ -49,6 +49,7 @@ NanoVNA の CH0・CH1 の入口は、小さな信号を測るための部品に�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 アンテナの給電点に 1 MΩ の放電抵抗
 parts:
   M1:
@@ -78,6 +79,7 @@ notes:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -121,6 +123,7 @@ J1 に NanoVNA 側の同軸ケーブル、J2 にアンテナの同軸ケーブ�
 表した**等価回路** (共振 143.4 MHz)。その給電点に 1 MΩ の放電抵抗を足した画面。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 120M-170M 101
 title: 図3 1 MΩ の放電抵抗を付けたままでも SWR は 1.11

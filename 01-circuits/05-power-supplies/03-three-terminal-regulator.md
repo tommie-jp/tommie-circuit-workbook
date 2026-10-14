@@ -19,6 +19,7 @@ board: [BB, PF]
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 7805 で 5V を作る (V1 は AD3 の電源、7 から 10 V)
 parts:
   V1: vsource vin gnd 10
@@ -56,6 +57,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (AD3 の Supplies から電源を取る)
 board: half
 parts:
@@ -105,6 +107,7 @@ wires:
 ## ユニバーサル基板の実体配線図
 
 ```perf
+# ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
 board:
   size: 7x5cm
   h: 1.6mm
@@ -213,6 +216,7 @@ style:
 3. 25 秒ごとに V+ を 0.5 V ずつ、V− も同じだけ上げる (±3.5 V → ±4 V → ±4.5 V → ±5 V)。入力は 7 V → 8 V → 9 V → 10 V と階段になる
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 電源電圧 (CH2) を 7 V から 10 V へ上げても、出力 (CH1) は 5 V のまま
 time: 10s/div
 trigger: ch2 rising 7.5V at -4div

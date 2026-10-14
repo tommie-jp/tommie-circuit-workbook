@@ -274,6 +274,7 @@ N = 9: 周期 9.000 ns (2 x N x TPD = 9.000 ns)
 図2は、N = 5 の模型の各段の出力。模型の時刻で 10 ns に `en` を 1 にしたあと、変化が 0.5 ns ずつずれて輪を回る。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 模型 (TPD = 0.5 ns, N = 5)。変化は 1 段ずつ 0.5 ns ずれ、周期は 5 ns
 device: generic
 time: 4ns/div
@@ -332,6 +333,7 @@ yosys に通した結果は、輪にあたる LUT が `LUT2` の 2 個 (NAND と
 AD3 の DIO0 (Logic) で IO38 の `div_out` を読み、DIO1 (Static IO の出力) から IO36 の `en` を 1 にする。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 DIO0 で div_out (IO38) を読み、DIO1 から en (IO36) を 1 にする
 parts:
   AD:
@@ -369,6 +371,7 @@ AD3 の DIO は **3.3 V** にそろえる (0-4)。
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図4 DIO0 (j1) で div_out を読み、DIO1 (j3) から en を 1 にする
 board: half
 parts:
@@ -409,6 +412,7 @@ notes:
 FPGA の実物がこの値になる、という意味ではない。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図5 模型の例 (1 段 0.5 ns, N = 5)。div_out は 195.3 kHz。実物の値は測って書く
 device: ad3
 time: 2us/div

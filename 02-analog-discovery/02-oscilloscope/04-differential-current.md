@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 LED の電流を 1 Ω で測る
 parts:
   V1: vsource 1,1 1,4 5
@@ -38,6 +39,7 @@ V+ (5 V) → R1 (330 Ω) → LED → Rs (1 Ω、電流検出用) → GND。CH1 (
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで LED の電流を測る
 board: half
 parts:
@@ -73,6 +75,7 @@ Range を 2 mV/div まで絞ると、9.1 mV の直流が画面の半分ほどの
 直流には縁が無いのでトリガは掛からない (トリガの Mode を Auto にしておけば流れ続ける)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Range を 2 mV/div に絞ると Rs の 9.1 mV (= 9.1 mA) が読める
 time: 1ms/div
 trigger: ch1 rising

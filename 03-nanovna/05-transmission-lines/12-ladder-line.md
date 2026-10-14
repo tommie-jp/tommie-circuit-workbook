@@ -28,6 +28,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 450 Ω のラダーライン 1 m を CH0 へ。先を開放・短絡
 parts:
   J1: sma 2,2 mirror CH0
@@ -69,6 +70,7 @@ notes:
 見えるはずの画面 (理想の模型)。まず先端開放。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-100M 199
 title: 図2 先端開放 — λ/8 で X = −450 Ω、λ/4 (68.2 MHz) で 0 を通る
@@ -90,6 +92,7 @@ markers:
 (20〜50 MHz) に絞った** (図2 と違うのは掃引とマーカーの数だけ)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 20M-50M 61
 title: 図3 先端短絡 (20〜50 MHz に絞る) — λ/8 で X = +450 Ω

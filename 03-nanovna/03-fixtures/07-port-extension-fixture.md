@@ -23,6 +23,7 @@ device: H4
 除く電気長になる。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 1 端子の治具 (SMA から部品までの線が電気長)
 parts:
   J1: sma 2,2 mirror CH0
@@ -48,6 +49,7 @@ notes:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -84,6 +86,7 @@ wires:
 **1. 部品を外した治具 (開放)** — ポート延長を入れる前に見えるはずの画面。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図3 部品を外した治具は開放なのに外周を回る
@@ -105,6 +108,7 @@ notes:
 **2. 100 Ω を挿した治具** — ポート延長を入れないまま読むと、治具の線のぶん値がずれる。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図4 100 Ω を治具ごと読むと 300 MHz で 82.5 Ω − j31.7 Ω
@@ -127,6 +131,7 @@ notes:
 **3. ポート延長を入れた後** — 治具の線が無いのと同じ、100 Ω の 1 点に戻る。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 101
 title: 図5 ポート延長の後は 100 Ω の 1 点 (遅延 0)

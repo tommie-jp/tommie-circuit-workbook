@@ -21,6 +21,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 エミッタフォロア (W1 で入れ、CH2 と CH1 で比べる)
 parts:
   VCC: vcc 8,2 5V
@@ -72,6 +73,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 エミッタフォロア (W1 と CH2 を入力へ、CH1 を出力へ)
 # 5V は AD の V+ から上の + レールへ (下のレールは使わない)
 board: half
@@ -121,6 +123,7 @@ wires:
 W1 を 1 kHz・1 Vpp の正弦波にし、CH2 (入力) と CH1 (出力) を同じ 200 mV/div で重ねる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 入力 (CH2) と出力 (CH1) — 振幅はほぼ同じ、位相も揃う
 time: 200us/div
 trigger: ch2 rising 0V
@@ -151,6 +154,7 @@ dB (1-5 で見た) で表す (0 dB が 1 倍)。S11 は入力で跳ね返って�
 - 電源は今までどおり AD の V+ (5 V)
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 VNA をつなぐ (芯線と外皮を組で、RL は外す)
 board: half
 parts:
@@ -192,6 +196,7 @@ wires:
 (VNA の画面ではない)。測ると、VNA の画面にこれと同じ形の線が出るはず。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図5 エミッタフォロアの S21 (計算) — 低い所で +1.5 dB、数 MHz から落ちる
 x: 周波数 Hz log 50k..100M
 y:
@@ -277,6 +282,7 @@ VNA の画面 (図6) にそのまま描ける。CH0 から順に、クリップ�
 (gm = Ie / 26 mV ≈ 31.9 mA/V、Cπ = gm / (2π × fT))。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: litevna64
 sweep: 50k-100M 201
 title: 図6 エミッタフォロアの入力の S11 (等価回路で計算) — 低い所は Smith の右端

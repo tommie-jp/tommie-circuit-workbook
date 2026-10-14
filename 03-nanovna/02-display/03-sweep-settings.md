@@ -46,6 +46,7 @@ NanoVNA の掃引範囲は**開始・終了**でも、**中心・スパン**で�
 考えた範囲も開始–終了に直してから書く。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 134M-154M 101
 title: 図1 中心 144 MHz・スパン 20 MHz を開始–終了に直す

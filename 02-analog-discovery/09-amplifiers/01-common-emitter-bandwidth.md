@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 エミッタ接地増幅回路
 parts:
   AD:
@@ -55,6 +56,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -111,6 +113,7 @@ Network の代わりにオシロで中域の波形を見るときは、Wavegen �
 BNC ケーブル (先がクリップのもの) の芯を 1+・2+ の所、外皮を GND に当てる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 中域 (10 kHz) で CH2 (コレクタ) は CH1 (入力 50 mV) を約 4.3 倍にして逆向きにする
 time: 20us/div
 trigger: ch1 rising 0V
@@ -146,6 +149,7 @@ measure: [vpp]
 折れ点を入れた計算の利得を図にする。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 中域 12.7 dB、−3 dB は 20.8 Hz と 6.63 MHz (計算)
 x: 周波数 Hz log 1..100M
 y: 利得 dB -20..20

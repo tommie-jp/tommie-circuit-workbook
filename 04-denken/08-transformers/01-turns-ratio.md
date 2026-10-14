@@ -28,6 +28,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 巻数比を測る回路
 style:
   standard: jis
@@ -67,6 +68,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 # 上の各列は a〜e が 1 つのネット、f〜j が別のネット。T1 は溝をまたいで 1 次・2 次を配る
 board: half
@@ -118,6 +120,7 @@ wires:
 値は巻線抵抗 (8-3) と励磁電流 (8-2) を入れた計算値 (1.98 V・18.3 mV) で描いた。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 1 回目 — V1 (CH1、1 V/div) と I1 の分 (CH2、10 mV/div) はほぼ同じ位相
 time: 200us/div
 trigger: ch1 rising 0V
@@ -131,6 +134,7 @@ measure: [vmax, freq, phase]
 2 回目は CH1 を RL の両端へ挿し替える。V2 は I1 の分と同じ桁なので、2 本とも 20 mV/div で並べる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 2 回目 — V2 (CH1) は V1 の 1/39 (巻線の電圧降下の分だけ 1/35 より小さい)
 time: 200us/div
 trigger: ch1 rising 0V
@@ -151,6 +155,7 @@ AD の CH2 は Rs1 の両端を差動で挟み、1− は巻線の下の端 (GND
 移し**、CH2 の 1 本で直に読む (図5)。直列の順を入れ替えただけなので、I1 は変わらない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図5 汎用オシロでの測り方
 style:
   standard: jis

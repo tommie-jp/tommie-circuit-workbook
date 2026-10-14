@@ -50,6 +50,7 @@ RF が上でも下でも 49.8 kHz に同じ高さの線が 1 本立つだけだ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 SA612 を 2 個並べた I/Q ミキサー (W2 が RF、W1 が LO)
 parts:
   W2: sine 1,5 1,7 l=$\mathrm{W2}$
@@ -164,6 +165,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (左が U1 = I、右が U2 = Q)
 board: half
 parts:
@@ -273,6 +275,7 @@ LO が十分に大きく切り替えが深いままなら、×0.707 は掛から
 SA612 の利得は個体差もあるので、**大きさは目安、位相の関係が本題**だ。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 W2 = 547.8 kHz (LO の上) — Q が I より 1/4 周期先
 time: 5us/div
 trigger: ch1 rising 0V
@@ -285,6 +288,7 @@ measure: [vpp, freq, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/19-iq-mixer-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 W2 = 448.2 kHz (LO の下) — Q が I より 1/4 周期後
 time: 5us/div
 trigger: ch1 rising 0V
@@ -305,6 +309,7 @@ measure: [vpp, freq, phase]
   ずれを読む 0 V の横切りでは小さいので、位相の読みには効かない
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 XY — I と Q は円になる (上でも下でも同じ円)
 view: xy
 ch1: {wave: sine 49.8kHz 91.6mV, range: 50mV/div}

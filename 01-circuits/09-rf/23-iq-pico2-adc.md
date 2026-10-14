@@ -62,6 +62,7 @@ CPU は 4 ms ごとに届く 2000 個の値を計算するだけにする。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Tayloe 検波器 (3.3 V。A0・A1・A2・A3 は図2 の差動増幅へ)
 parts:
   P1: vcc 6,5 3.3V
@@ -172,6 +173,7 @@ style:
 - C5・C6 (100 nF) は U1・U2 の電源のパスコン
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 I と Q の差動増幅から Pico 2 の ADC へ
 parts:
   X2:
@@ -280,6 +282,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 ブレッドボードに組む (Pico 2 は図4 の別のブレッドボード)
 board: full
 parts:
@@ -404,6 +407,7 @@ notes:
   電流は IC 4 個で数 mA で、Pico 2 の 3V3 (最大 300 mA) にも、ブレッドボードの 500 mA にも遠い
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図4 Pico 2 は別のブレッドボードに (USB で PC から給電)
 board: half
 parts:
@@ -709,6 +713,7 @@ MicroPython のプログラムは実行していない (未確認)。
 Tayloe の出口の I・Q は 0.417 V<sub>p</sub> (1 kHz)、差動増幅で 2 倍して ADC の入口では **1.65 V ± 0.834 V (1.67 Vpp)**。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 ADC の入口 (W2 499 kHz) — Q (CH2) が I より 250 µs 進む
 time: 200us/div
 trigger: ch1 rising 1.65V
@@ -725,6 +730,7 @@ measure: [vpp, avg, freq, phase]
   W2 を 497 kHz にすると、CH2 は 250 µs **遅れ**、−1.000 kHz と出る
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図6 XY (X = I、Y = Q) — 半径 0.834 V の円。1 秒に 1000 回まわる
 view: xy
 ch1: {wave: sine 1kHz 0.834V offset 1.65V, range: 250mV/div, position: -6.6div}

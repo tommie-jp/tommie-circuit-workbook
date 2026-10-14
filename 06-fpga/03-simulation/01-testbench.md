@@ -146,6 +146,7 @@ clk rst_n q
 カーソル X1 は 3 回目の立ち上がりの直後、X2 は 8 回目の立ち上がりの直後で、ビットの真ん中に置いた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 リセットを外してから 8 クロック (1 刻みを 0.5 ms と見なした計算の図)
 device: generic
 window: 8.5ms

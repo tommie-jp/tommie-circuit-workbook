@@ -21,6 +21,7 @@ LED をたくさん光らせたいときや 7 セグメント表示器 (10-7) �
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 74HC595に手動でビットを送り込む
 parts:
   U1: ic 14,8 74HC595
@@ -102,6 +103,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む (U1 は 74HC595。AD3 の DIO0〜2 が入力、DIO3〜6 が QA〜QD)
 board: full
 parts:
@@ -203,6 +205,7 @@ AD3 の Supplies の各レール 50 mA (USB 給電で 250 mW) に収まり、ブ
 | カーソル | X1 = 2.75 ms (2 回目の SRCLK のあと、RCLK の前)、X2 = 7.75 ms (4 回目の RCLK のあと) |
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 SRCLK を 4 回送り、そのたびに RCLK を送ると、QA から順に 1 が増える (計算)
 device: ad3
 time: 800us/div

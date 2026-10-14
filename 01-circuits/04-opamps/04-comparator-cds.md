@@ -18,6 +18,7 @@ OP アンプの基本形の 4 つ目。この題では CdS (硫化カドミウ�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 比較器 (CdS)
 parts:
   VP: vsource vp mid 5
@@ -70,6 +71,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 # 上のレールは +5V (赤) と GND (青)。下の赤レールは +5V (1 列目で渡す)、下の青レールは −5V (V−)
 board: half
@@ -147,6 +149,7 @@ notes:
 | Trigger | CH1、立ち下がり、0 V (− 入力が + 入力の 0 V を下回った瞬間) |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 CdS を覆った瞬間 — − 入力 (CH1) が 0 V を切ると出力 (CH2) が High に
 time: 100ms/div
 trigger: ch1 falling 0V

@@ -21,6 +21,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 トランスで昇圧する (CH1 は 1 次、CH2 は 2 次の電圧)
 parts:
   V1: sine 2,2 2,4 8.5
@@ -54,6 +55,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 トランスとアダプタをつなぐ (1 次を CH1、2 次を CH2 で見る)
 # トランスの 4 本のピンはブレッドボードの穴に直に挿す。レールは使わない
 board: half
@@ -117,6 +119,7 @@ AD3 の仕様書 (Analog Discovery 3 Datasheet) も、入力を差動、入力�
 片方の端が GND に寄ったとしても、もう片方は最大 ±17 V で、どちらも入力範囲の ±25 V に収まる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 1 次 (CH1) と 2 次 (CH2) の電圧 — 2 次は 1 次の 2 倍で、同じ向きに動く
 time: 5ms/div
 trigger: ch1 rising 0V

@@ -18,6 +18,7 @@ WaveForms の **Script** はボタンを毎回押す代わりに JavaScript も�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 正弦波を作って測る (1-2 と同じ)
 parts:
   W1: sine 1,1 1,3 1
@@ -34,6 +35,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで正弦波を測る (1-2 と同じ)
 board: half
 parts:
@@ -93,6 +95,7 @@ Wavegen1.stop();
 | Scope (CH1) | DC、Range 5 V、Auto トリガ (Script から `measure("Amplitude")` で読む) |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 振幅 1.0 V の設定なら Scope は Vpp 2.00 V を読む (1 kHz の正弦波)
 time: 500us/div
 trigger: ch1 rising 0V
@@ -114,6 +117,7 @@ measure: [vpp, freq]
 | 1.5 V | 3.00 V |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 Vpp は振幅の設定のちょうど 2 倍 (1.00 / 2.00 / 3.00 V)
 x: 振幅の設定 V 0..2
 y: Vpp V 0..4

@@ -18,6 +18,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 直列治具に電解コンデンサを挿す
 parts:
   J1: sma 2,2 mirror CH0
@@ -39,6 +40,7 @@ C1 は極性がある。先に書いたピン (J1 側) が +。
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -75,6 +77,7 @@ ESR ≈ 0.8 Ω (汎用品の代表値)、ESL ≈ 8 nH と見積もる。
 見えるはずの画面 (理想の模型)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 50k-50M 401
 title: 図3 100 µF 電解の |Z| — ESR 0.8 Ω で平ら、15.9 MHz から ESL で上がる

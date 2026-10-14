@@ -19,6 +19,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CR 移相発振器 (S1 でループを切る)
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -74,6 +75,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: full
 parts:
@@ -164,6 +166,7 @@ wires:
 単体の位相は ±180° で折り返して線が跳ぶので、位相はループ利得だけを描いた。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 649.7 Hz でループ利得が 0 dB (+0.29 dB) を、位相が 0° を同時に跨ぐ
 x: 周波数 Hz log 300..1k
 y:

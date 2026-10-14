@@ -26,6 +26,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 反転増幅と非反転増幅
 parts:
   V1: sine 1,1 1,3 0.2 l=$\mathrm{W1}$
@@ -73,6 +74,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -135,6 +137,7 @@ notes:
 10 倍の差を高さのまま見せる。2 回の画面で CH2 の高さは同じで、向きだけが逆になる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 1 回目 — 反転増幅の OUT1 (CH2) は 10 倍で上下が逆 (V/div は別)
 time: 200us/div
 trigger: ch1 rising 0V
@@ -146,6 +149,7 @@ measure: [vmax, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/06-electronics/scope/04-opamp-amplifiers-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 2 回目 — 非反転増幅の OUT2 (CH2) は 10 倍で同じ向き (2 ch とも 1 V/div)
 time: 200us/div
 trigger: ch1 rising 0V

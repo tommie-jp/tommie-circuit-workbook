@@ -17,6 +17,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 方形波を作って測る (2-1 と同じ)
 parts:
   W1: square 1,1 1,3 1.65
@@ -35,6 +36,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードで方形波を測る (2-1 と同じ)
 board: half
 parts:
@@ -62,6 +64,7 @@ wires:
 | 表示 | **Persistence を On**、時間を「無限 (Infinite)」か数秒に設定 |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Persistence を切った 1 本の方形波 (2 kHz、0〜3.3 V)
 time: 100us/div
 trigger: ch1 rising 1.65V

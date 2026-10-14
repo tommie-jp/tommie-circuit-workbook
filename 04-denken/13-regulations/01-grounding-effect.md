@@ -27,6 +27,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 漏電の模型 (S1 で接地の有無を切り替える)
 style:
   standard: jis
@@ -60,6 +61,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -124,6 +126,7 @@ AD の Supplies (V+) は安定化電源の 5 V に替え、電流制限は 10 mA
 (図3)。Rleak の電圧 (2.50 V / 4.58 V) は 5 V の半分以上あり、8 bit でも埋もれない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図3 汎用オシロでの測り方
 style:
   standard: jis

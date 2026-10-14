@@ -129,6 +129,7 @@ S3 --> S0 : TO、E440、または\nE880 かつ W でない (窓の外)
 ふつうの時報を入れたときの様子を、設計から**計算で出した**。440 Hz が 0.04 秒、1.04 秒、2.04 秒に立ち上がり、880 Hz が 3.04 秒に立ち上がる。実機の波形ではない。TM は間隔タイマの数、ST は状態。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図1 440 Hz を 3 回数えて 880 Hz で正時パルスが出る (計算)
 device: ad3
 window: 4s
@@ -157,6 +158,7 @@ cursors: [1.09375s, 3.21875s]
 正しい時報のほかに、**パルスを出してはいけない場合**の動きも見る。いずれも計算で、実機の波形ではない。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 440 Hz が 4 回続くと、4 回目で待機に戻り、正時パルスは出ない (計算)
 device: ad3
 window: 5s
@@ -184,6 +186,7 @@ cursors: [3.1875s, 4.1875s]
 | OUT の変わり目 | 0 | 正時パルスは出ない |
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 2 回目の音が 1.5 秒後に遅れると、時間切れで戻り、数え直しになる (計算)
 device: ad3
 window: 4.5s
@@ -250,6 +253,7 @@ cursors: [1.4375s, 3.6875s]
 ### ユニット 1: 同期とエッジ検出
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 同期とエッジ検出 (ユニット 1)
 parts:
   T440: port 2,4
@@ -344,6 +348,7 @@ style:
 ### ユニット 2: 間隔タイマと窓
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図5 間隔タイマと窓 (ユニット 2)
 parts:
   NE440: port 3,1
@@ -416,6 +421,7 @@ style:
 ### ユニット 3: 状態を動かす条件
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図6 状態を動かす条件 (ユニット 3)
 parts:
   W: port 2,1
@@ -500,6 +506,7 @@ style:
 ### ユニット 4: 状態レジスタと出力
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図7 状態レジスタと出力 (ユニット 4)
 parts:
   LOADN: port 3,1
@@ -625,6 +632,7 @@ IC は全部で 13 個。ユニットごとに 4 個以内なので、フルサ�
 ### 図 8・8b: ユニット 1 (同期とエッジ検出)
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図8 同期とエッジ検出のブレッドボード (ユニット 1)
 board: full
 parts:
@@ -734,6 +742,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/04-state-machine-1.svg)
 
 ```perf
+# ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
 title: 図8b 同期とエッジ検出のユニバーサル基板 (ユニット 1)
 board:
   size: 15x9cm
@@ -929,6 +938,7 @@ wires:
 ### 図 9・9b: ユニット 2 (間隔タイマと窓)
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図9 間隔タイマと窓のブレッドボード (ユニット 2)
 board: full
 parts:
@@ -1012,6 +1022,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/04-state-machine-2.svg)
 
 ```perf
+# ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
 title: 図9b 間隔タイマと窓のユニバーサル基板 (ユニット 2)
 board:
   size: 7x9cm
@@ -1150,6 +1161,7 @@ wires:
 ### 図 10・10b: ユニット 3 (状態を動かす条件)
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図10 状態を動かす条件のブレッドボード (ユニット 3)
 board: full
 parts:
@@ -1251,6 +1263,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/04-state-machine-3.svg)
 
 ```perf
+# ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
 title: 図10b 状態を動かす条件のユニバーサル基板 (ユニット 3)
 board:
   size: 15x9cm
@@ -1429,6 +1442,7 @@ wires:
 ### 図 11・11b: ユニット 4 (状態レジスタと出力)
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図11 状態レジスタと出力のブレッドボード (ユニット 4)
 board: half
 parts:
@@ -1492,6 +1506,7 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/04-state-machine-4.svg)
 
 ```perf
+# ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
 title: 図11b 状態レジスタと出力のユニバーサル基板 (ユニット 4)
 board:
   size: 7x5cm
@@ -1619,6 +1634,7 @@ T880 は 3 回目の T440 のあと、+5 V の線を押しボタンで触れて 
 本物の T440・T880 は検出の回路 ([03-detect.md](03-detect.md)) が作る。ここでは、それが無くても状態遷移だけを試験できるようにする。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図12 AD3 と基板 1〜4 の端子 (試験用のつなぎ)
 board: half
 parts:
@@ -1669,6 +1685,7 @@ wires:
 **OUT は T880 のあとの 3.125〜3.25 秒に 1 クロック (0.125 秒) だけ H になる。** 4 回目の T440 を出したり、間隔を 1.5 秒にしたりすると、OUT は出ない (図2・図3)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図13 T440 (CH1) が 3 回来たあと、OUT (CH2) に 0.125 s のパルスが 1 つ
 time: 500ms/div
 trigger: ch1 rising 2.5V at -5div

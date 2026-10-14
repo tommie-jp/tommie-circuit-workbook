@@ -72,6 +72,7 @@ SW1〜SW4 の値と半周期、クロックの周波数 (1 ÷ 周期 = 1 ÷ (2 �
 図1・図2 は 5-5 と同じ。DIP スイッチは、この題では半周期の選択に使う。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 Pico 2 に LED 4 個・DIP スイッチ・AD3 の Logic をつなぐ
 parts:
   U1: pico2 8,8 mirror
@@ -141,6 +142,7 @@ style:
 ## 実体配線図
 
 ```bread
+# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
 title: 図2 Pico 2 の左に LED、右に DIP スイッチ、上に AD3 の Logic
 board: full
 parts:
@@ -308,6 +310,7 @@ add_soft_fpga(clock59 clock59.cpp many)
 図3 は、半周期 100 µs (5 kHz) で動いているときの CLK。周期はプログラムで決めた設計値。**BUSY の幅は測っていないので描いていない。**
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 半周期 100 µs (SW1 だけ ON) の CLK は 5 kHz (周期 200 µs)
 device: ad3
 time: 100us/div
@@ -324,6 +327,7 @@ trigger: CLK rising at 0s
 図4 は、上限を越えたときに見えるはずの形。CLK が途中で止まり、LED の 4 本が全部 H になる。止まる時刻は仮 (遅れがたまる回数で決まる)。CLK は止まった値のままで、図では L で止まるように描いた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図4 上限を越えると CLK が止まり、LED (MON0〜MON3) が全部 H になる (止まる時刻は仮)
 device: ad3
 time: 100us/div

@@ -27,6 +27,7 @@ board: —
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 電磁石に流す電流を作る回路
 style:
   standard: jis

@@ -168,6 +168,7 @@ Verilator の lint (`-Wall`) は、警告なしで通る (確かめた)。
 ブラウザの画面には時間の単位が無いので、1 クロックを 1 ms と置いた仮の目盛。`clk` は細かすぎるので描かない。`btn` は 1 クロックだけの合図で、この目盛では見えないので、押した結果の `btn_req` から描く。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図1 ボタンを押すと YELLOW の次が RED でなく WALK になる
 device: generic
 window: 2s

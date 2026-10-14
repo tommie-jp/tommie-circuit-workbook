@@ -46,6 +46,7 @@ device: H4
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ERA-3SM+ の 1 段 (5 V、Rbias 51 Ω + RFC)
 parts:
   BAT: battery 1,1 1,7 5 l=$\mathrm{BAT}$
@@ -96,6 +97,7 @@ wires:
 J1 に CH0 のケーブルを、J2 に 20 dB アッテネータ経由で CH1 のケーブルをつなぐ。電源の 5 V は USB アダプタなどから取る。
 
 ```copper
+# 銅張り基板の寸法図 (tommie-fence の copper フェンス)
 title: 図2 ERA-3SM+ を銅張り基板に組む
 f: 1G
 sheets:
@@ -187,6 +189,7 @@ sheets:
 **先にアッテネータ単体の基準** (校正に含めない場合の −20 dB) を示す (8-1 と同じやり方)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 100M-1.5G 141
 title: 図3 20 dB アッテネータ単体の S21 (MMIC を挟む前の基準)
@@ -211,6 +214,7 @@ notes:
 (50 Ω に 3 Ω と 1.8 nH が直列) で描く。位相は合わせていない。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 100M-1.5G 141
 title: 図4 MMIC の入力の S11 — 周波数とともに −30 dB から −16 dB へ (等価回路)

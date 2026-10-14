@@ -22,6 +22,7 @@ device: H4
 挟む。直流は R1・R2 (100 kΩ) を通して D1 の両端だけにかける。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 バリキャップに逆向きの直流をかけて直列治具で測る
 parts:
   J1: sma 2,5 mirror CH0
@@ -63,6 +64,7 @@ notes:
 ## 実体配線図
 
 ```perfboard
+# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
 board:
   size: 7x5cm
   silk: board
@@ -131,6 +133,7 @@ wires:
 **1 V** のときに見えるはずの画面 (C1・C2 も入れた理想の模型)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 50k-5M 201
 title: 図3 1 V (485 pF) — 1 MHz で S21 は −10.8 dB
@@ -150,6 +153,7 @@ markers:
 **8 V** のとき (同じ設定)。容量が小さいぶん、ずっと通りにくい。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 50k-5M 201
 title: 図4 8 V (25 pF) — 1 MHz で S21 は −36.1 dB

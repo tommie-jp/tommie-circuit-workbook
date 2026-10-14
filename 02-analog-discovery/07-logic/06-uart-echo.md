@@ -21,6 +21,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 AD3 から Pico 2 へ送り、返信を受ける
 parts:
   AD:
@@ -46,6 +47,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -154,6 +156,7 @@ Protocol の送信と返信を、Logic で線の高低として見ると図3 の
 受信側 RX (DIO0) は少し遅れて 0x42 のフレームが出る。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 TX が 0x41 ('A') を送り、RX に 0x42 ('B') が返る
 device: ad3
 time: 25us/div

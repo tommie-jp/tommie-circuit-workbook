@@ -162,6 +162,7 @@ PC で取った 13 クロックを `logic` のフェンスで描く。
 アドレスは下位 8 ビットだけをバスにまとめた (上位は、$0010 を出すクロックだけ 00、ほかは 03)。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図1 11 クロックで 4 命令が 1 周し、sync は opcode が届くクロックで立つ
 device: generic
 window: 13ms

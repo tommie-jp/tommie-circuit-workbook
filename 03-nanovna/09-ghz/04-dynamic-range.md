@@ -42,6 +42,7 @@ V2 は基本波で作るので段が無い。V2 の値は版によって公表�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CH0 から 20 + 20 + 10 dB を通して CH1 へ
 parts:
   J1: sma 2,3 mirror CH0
@@ -101,6 +102,7 @@ wires:
 **H4** で 50 dB を測ったときの見えるはずの画面。帯ごとの床 (仕様の値) を注釈で書き込んだ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 50k-1.5G 301
 title: 図2 H4 で 50 dB を読む — 900 MHz より上は床 (−40 dB) に埋もれる
@@ -135,6 +137,7 @@ notes:
 **V2** で同じ 50 dB を測ったときの見えるはずの画面。設定は機種と範囲だけ変えた。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: v2
 sweep: 50k-3G 301
 title: 図3 V2 で 50 dB を読む — 床は段にならない (値は測って書き込む)

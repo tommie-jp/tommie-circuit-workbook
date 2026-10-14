@@ -169,6 +169,7 @@ GTKWave を毎回手で操作する代わりに、信号の並びを `.gtkw` (GT
 カーソル X1 は最初に `q` が 1 になったビット (250〜275 ns) の真ん中、X2 は `q` が 10 になったビット (1150〜1175 ns) の真ん中に置いた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図3 VCD から読み出した counter4 (25 ns ごとの値の計算の図)
 device: generic
 window: 1.2us

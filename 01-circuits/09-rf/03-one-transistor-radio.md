@@ -18,6 +18,7 @@ era: 古
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 1石ラジオ
 parts:
   ANT: antenna 1,5
@@ -82,6 +83,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
 board: half
 parts:
@@ -173,6 +175,7 @@ wires:
 | Scope 時間軸・トリガ | 200 µs/div、CH1 の立ち上がり |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 AM 信号の試験 — コレクタ (CH2) は増幅され、検波出力 (CH1) は 1 kHz
 time: 200us/div
 trigger: ch1 rising 2.98V

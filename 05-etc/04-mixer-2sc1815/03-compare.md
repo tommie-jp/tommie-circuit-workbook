@@ -90,6 +90,7 @@ board: —
 ## 図
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図1 LO の電力と変換利得 (RF −30 dBm、RF 1.000 MHz)
 x: LO 電力 dBm -20..10
 y: 変換利得 dB -8..14
@@ -123,6 +124,7 @@ lines:
 1 石は LO −5 dBm で利得がほぼ頭打ち。差動対は −5 dBm から上でほぼ一定 (+0.1〜+0.5 dB)。3SK291 は 3-2 の値で、LO が大きいほど増え続ける。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図2 変換利得の周波数特性 (RF −30 dBm、LO は RF + 455 kHz。3SK291 は LO +7 dBm、2SC1815 は 0 dBm)
 x: RF 周波数 Hz 500k..1.7M
 y: 変換利得 dB -2..14
@@ -159,6 +161,7 @@ lines:
 差動対と 3SK291 は中波の全域で平ら。1 石は 0.53 MHz の側で約 2 dB 低い (原因は未確認。LO が 0.985 MHz と低い側)。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図3 RF の電力と変換利得 (LO は 2SC1815 が 0 dBm、3SK291 が +7 dBm)
 x: RF 電力 dBm -40..5
 y: 変換利得 dB -14..14
@@ -230,6 +233,7 @@ RF −30 dBm、RF 1.000 MHz。単位は dB (負荷に出る IF の電力 ÷ RF �
 - 元の 4-2 (3.3 kΩ ずつ、差の電圧の比で +12.1 dB) は、片側を同じ出力回路につなぐと −20.7 dB だった。出力をカレントミラーで 1 本にまとめて +5 dB、Q3 のエミッタの 470 Ω を 47 Ω + 430 Ω (バイパス) に分けて +16 dB 上がり、今の +0.3 dB になった (4-2 の「取り出し方を比べて選んだ」)
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 同じ出力回路での変換利得 (RF −30 dBm)
 x: LO 電力 dBm -10..16
 y: 変換利得 dB -16..14

@@ -20,6 +20,7 @@ R = 10 kΩ・C = 10 pF (理想の折れ点 1.59 MHz) という高いインピー
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC ローパスと並列に乗る寄生容量
 parts:
   AD:
@@ -55,6 +56,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -95,6 +97,7 @@ wires:
 読むので、2 つのチャンネルが同じ帯域を持つ限り、帯域の影響は小さい (目安)。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 1 MHz で CH2 (出力) は 0.40 倍・約 66° 遅れ (理論は 0.85 倍・32°)
 time: 200ns/div
 trigger: ch1 rising 0V
@@ -124,6 +127,7 @@ AD3 の入力容量 24 pF を足す (34 pF) と **468 kHz**、さらに C<sub>st
 C<sub>stray</sub> だけの効き (34 pF と 36.5 pF の差) は 1 MHz で約 0.5 dB、10 MHz で約 0.6 dB。
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 折れ点は 1.59 MHz から 436 kHz へ (入力 24 pF が主因)
 x: 周波数 Hz log 100k..10M
 y:

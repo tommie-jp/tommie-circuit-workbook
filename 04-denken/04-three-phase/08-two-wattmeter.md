@@ -28,6 +28,7 @@ AD の Math を電力計の代わりにして確かめる。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 二電力計法の 1 つ目 (a 線の電流と a-c の線間電圧)
 style:
   standard: jis
@@ -78,6 +79,7 @@ notes:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/circuit/08-two-wattmeter-1.svg)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 試験の図の形 (電力計 2 つ、電圧コイルは c 線へ)
 style:
   standard: jis
@@ -122,6 +124,7 @@ notes:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図3 ブレッドボードと Analog Discovery (1 つ目の電力計)
 # 上のブロック: TL071 の入力側と R1・R2、右に 3 相の C + R。下のブロック: 出力側と Rf、g・h・j 行で 3 相を右へ運ぶ
 board: full
@@ -188,6 +191,7 @@ notes:
 | Measure | CH1・CH2 の Amplitude、CH1 に対する CH2 の Phase、M1 の Average |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 1 つ目 — 電流 (CH2) は線間電圧 (CH1) より 65.9° 進み、P_1 = 0.287 mW
 time: 200us/div
 trigger: ch1 rising 0V
@@ -200,6 +204,7 @@ measure: [vmax, avg, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/04-three-phase/scope/08-two-wattmeter-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図5 2 つ目 — 電流 (CH2) は線間電圧 (CH1) より 5.9° 進み、P_2 = 0.698 mW
 time: 200us/div
 trigger: ch1 rising 0V

@@ -187,6 +187,7 @@ Logic Analyzer のレーンは、soft-fpga の `js/sft-uart-la-defs.js` が決�
 `rxd` は `txd` と同じ線なので描かない。`clk` は 1 クロックが 2 画素ほどで塗りになるので描かない。ハーネスはクロックごとに 1 標本を記録するので、`sample:` は書かない (1 クロックより細かい変化は無い)。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図1 A (0x41) の 1 フレーム。0 で始まり、下位ビットから 1 0 0 0 0 0 1 0、1 で終わる
 device: generic
 time: 30us/div

@@ -27,6 +27,7 @@ Q が分かれば、比帯域の目安は **Δf / f₀ ≈ 1 / Q** (SWR 2 の全
 7-2 と同じ形の等価回路。今度は**ちょうど 144 MHz で共振**するように C を選ぶ。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 144 MHz にちょうど合わせたダイポール (直列 RLC の等価回路)
 parts:
   J1: sma 2,2 mirror CH0
@@ -62,6 +63,7 @@ wires:
 出ればこれを超えうるので、**掃引は測る間だけにし、つないだまま掃引を続けない**。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 120M-170M 251
 title: 図2 144 MHz ダイポールの SWR — 塗った所が SWR 2 以下 (約 11.7 MHz)

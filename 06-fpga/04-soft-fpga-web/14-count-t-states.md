@@ -102,6 +102,7 @@ PAD=$(printf '00 %.0s' $(seq 12))   # 0034〜003F の NOP
 `T` は soft-fpga の `t_state` のレーンと同じ、マシンサイクルの中の T ステートの番号。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図1 PUSH B は 5 + 3 + 3 = 11 T で、スタックへ書く 2 つのサイクルで WR_N が下がる
 device: generic
 window: 12ms

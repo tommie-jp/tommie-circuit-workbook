@@ -21,6 +21,7 @@ device: H4
 CH0 に 5 m のケーブルをつなぎ、先端は開放のまま。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 先を開放した 5 m のケーブル
 parts:
   J1: sma 2,2 mirror
@@ -54,6 +55,7 @@ notes:
 見えるはずの画面 (理想の模型)。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-900M 401
 title: 図2 TDR の山が先端の 5 m に立つ (Log Mag は 0 dB で平ら)

@@ -27,6 +27,7 @@ RL 直列 (3-3) と同じ考え方を、今度は抵抗とコンデンサの直�
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RC 直列
 style:
   standard: jis
@@ -53,6 +54,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -83,6 +85,7 @@ wires:
 | Scope | CH1・CH2 とも DC 結合。Measure で Amplitude と、CH1 に対する CH2 の Phase を読む |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 V_R (CH1) 0.53 V に対して V_C (CH2) 0.85 V が 90° 遅れる
 time: 200us/div
 trigger: ch1 rising 0V
@@ -102,6 +105,7 @@ measure: [vmax, phase]
 8 bit でも埋もれないので、**回路はそのままで 2 本の先端を当て、V_R を CH1 − CH2 で引く** (図4)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 汎用オシロでの測り方
 style:
   standard: jis

@@ -18,6 +18,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ブリッジ整流・平滑と、切り替えできる追加負荷
 parts:
   V1: sine 5,1 5,5 12.7
@@ -67,6 +68,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery (10-1 に追加負荷を足す)
 board: half
 parts:
@@ -144,6 +146,7 @@ Q1 off (τ = 1 kΩ × 470 µF) と Q1 on (τ = 320 Ω × 470 µF) の 2 つの�
 縦は直流の 11 V を差し引いて (Scope の Offset を −11 V にして) 拡大してある。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 Q1 on (CH3) ではリップルが約 3 倍になり、谷も下がる (模型)
 time: 5ms/div
 trigger: ch1 falling

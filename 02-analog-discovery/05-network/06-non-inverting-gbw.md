@@ -17,6 +17,7 @@ LM358 (GBW ≈ 1 MHz、データシート代表値) を使う。
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 非反転増幅
 parts:
   V1: sine 1,1 1,3 l=$\mathrm{W1}$
@@ -46,6 +47,7 @@ wires:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -97,6 +99,7 @@ wires:
 | Network | Start 1 kHz、Stop 1 MHz、Log、Steps 101、Reference: Channel 1 |
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 利得 11 倍 — 1 kHz で CH2 は CH1 の 11 倍 (20 mV → 220 mV)
 time: 500us/div
 trigger: ch1 rising 0V
@@ -121,6 +124,7 @@ measure: [vpp]
 | 100 kΩ | 101 | 40.1 dB | 9.90 kHz |
 
 ```graph
+# グラフ (tommie-fence の graph フェンス)
 title: 図4 利得を 11 倍 → 101 倍にすると、−3 dB 点は 90.9 kHz → 9.90 kHz に下がる
 x: 周波数 Hz log 1k..1M
 y: 利得 dB 0..60

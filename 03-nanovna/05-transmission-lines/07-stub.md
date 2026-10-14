@@ -22,6 +22,7 @@ CH0 と CH1 の間を SMA の T 型アダプタで直結し、T の 3 つ目の�
 ケーブルを挿す (3-2 の並列治具と同じ考え方)。先は開放 (図1) と短絡 (図2)。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 先端開放のスタブ (1 m) を T で分岐
 parts:
   J1: sma 2,2 mirror CH0
@@ -41,6 +42,7 @@ notes:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/05-transmission-lines/circuit/07-stub-1.svg)
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図2 先端短絡のスタブ (1 m) を T で分岐
 parts:
   J1: sma 2,2 mirror CH0
@@ -81,6 +83,7 @@ notes:
 見えるはずの画面 (理想の模型)。先端開放。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 301
 title: 図3 開放スタブ — λ/4 の奇数倍 (マーカー 1・3) で落ちる
@@ -100,6 +103,7 @@ markers:
 先端短絡。掃引もマーカーも図3 と同じ。
 
 ```vna
+# NanoVNA の画面 (tommie-fence の vna フェンス)
 device: h4
 sweep: 1M-300M 301
 title: 図4 短絡スタブ — λ/2 の倍数 (マーカー 2・4) と低い所で落ちる

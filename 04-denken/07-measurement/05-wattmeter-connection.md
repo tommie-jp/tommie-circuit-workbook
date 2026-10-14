@@ -27,6 +27,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 単相の負荷と電力計の模型 (電圧コイルは電源側)
 parts:
   V1: sine 1,2 1,6 1 l=$\mathrm{W1}$
@@ -62,6 +63,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -110,6 +112,7 @@ wires:
 Wavegen の電流は最大 5.4 mA (R_P の分を含む) で、この本の目安 10 mA に収まる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 電源側 — 電流 (CH2) は 55° 進み、読み (Math の Avg) は 1.47 mW
 time: 200us/div
 trigger: ch1 rising 0V
@@ -122,6 +125,7 @@ measure: [vmax, avg, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/07-measurement/scope/05-wattmeter-connection-1.svg)
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 負荷側 — 電流コイルに R_P の電流も入り、読み (Math の Avg) は 1.54 mW
 time: 200us/div
 trigger: ch1 rising 0V

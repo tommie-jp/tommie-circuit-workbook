@@ -26,6 +26,7 @@ board: BB
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 RL 直列の電流の立ち上がり
 parts:
   V1: square 1,1 1,3 1 l=$\mathrm{W1}$
@@ -53,6 +54,7 @@ style:
 ## 実体配線図
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
@@ -90,6 +92,7 @@ wires:
 R1 の両端 (CH2) は電流 × 1 kΩ なので、RC の充電と同じ形で τ = L / R = 10 µs で立ち上がる。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 立ち上がりから 1τ (10 µs) で電流 (CH2) は 63 % に届く
 time: 10us/div
 trigger: ch1 rising 1V
@@ -112,6 +115,7 @@ L1 を短絡して回路が変わる ([回路の本の 0-3](../../01-circuits/00
 埋もれない。
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図4 汎用オシロでの測り方
 parts:
   V1: square 1,1 1,4 1 l=$\mathrm{FG}$

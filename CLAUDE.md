@@ -42,6 +42,7 @@ AD2 と NanoVNA-H4 / V2 は歴史的な機種 (比較のために残す)。一�
   信号は左から右、電源は上・GND は下、線は箱や記号を横切らない、など。check はつながりしか見ないので、
   PNG にして点検表を 1 項目ずつ通す。既存の図を手本にするときも、先に点検表に通す
   (図のフェンスを書き込むと、`.claude/hooks/drawing-skill-reminder.sh` が Claude にこれを思い出させる)
+- フェンスの 1 行目の `# … (tommie-fence の … フェンス)` は `npm run figures` が書く名札 (GitHub は言語名を出さない)。手で書かない
 - 字の重なりや配線の見え方は check では分からない。`npm run render` の SVG か、
   VS Code 拡張のプレビューで見る
 - Analog Discovery と NanoVNA は基板の外の機器 (`type: device`) で描き、ピンの名前で配線する

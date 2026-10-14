@@ -18,6 +18,7 @@ source: 自作
 ## 回路図
 
 ```circuit
+# 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ULN2003 ボードでステッピングモータを駆動する
 points:
   in1x: 2,3.16
@@ -74,6 +75,7 @@ style:
 モータはブレッドボードに挿さず、線 (COM と A〜D の 5 本) でつなぐ。
 
 ```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ULN2003A とステッピングモータを組む
 board: half
 parts:
@@ -151,6 +153,7 @@ Patterns は DIO0〜DIO3 を Custom の 4 本のパルス (1 本ずつ順に H) 
 Scope は 1+ を IN1、2+ を IN2 にして、2 ch とも 500 mV/div、10 ms/div。
 
 ```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図3 IN1 の次に IN2 が H になる — 1 ステップ 10 ms (100 Hz)
 time: 10ms/div
 trigger: ch1 rising 1.65V

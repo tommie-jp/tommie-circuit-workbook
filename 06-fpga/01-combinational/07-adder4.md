@@ -178,6 +178,7 @@ f f 1 f 1 1
 実機で測った波形ではなく、実行結果から作った計算の図で、入力を変えた 1 回を 1 ms と見なして並べた。
 
 ```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図2 5 通りの足し算 (same は + 演算子の加算器と同じなら 1) (Verilator の実行結果から作った計算の図)
 device: generic
 window: 5ms
