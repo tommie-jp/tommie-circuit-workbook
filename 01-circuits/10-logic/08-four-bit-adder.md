@@ -194,7 +194,7 @@ wires:
 | --- | --- |
 | Supplies | V+ を 3.3 V (DIO の H が 74HC283 の V<sub>IH</sub> を超えるように。上の説明のとおり)、Master Enable を入れる |
 | Patterns | DIO0〜3 (A1〜A4) と DIO4〜7 (B1〜B4) を、Custom の数値で 0.5 秒ごとに順に送る。A = 5, 9, 9、B = 3, 1, 9 |
-| Logic | DIO0〜12 を表示。A (DIO0〜3)・B (DIO4〜7)・Σ (DIO8〜11) を 10 進のバスにまとめる。標本化 1 kHz、時間 150ms/div (全体で 1.5 秒) |
+| Logic | DIO0〜12 を表示。A (DIO0〜3)・B (DIO4〜7)・Σ (DIO8〜11) を 10 進のバスにまとめる。標本化 1 kHz、時間 150 ms/div (全体で 1.5 秒) |
 | カーソル | X1 = 0.25 秒 (5 + 3)、X2 = 1.25 秒 (9 + 9) |
 
 ```logic

@@ -124,7 +124,7 @@ measure: [vpp, freq, phase]
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/scope/06-rail-impedance.svg)
 
-CH1 の 1 V (peak) を 150 Ω で割ると電流 6.67 mA、CH2 の Vpp の半分 9.6 mV がレールの電位差。
+CH1 の 1 V<sub>p</sub> を 150 Ω で割ると電流 6.67 mA、CH2 の Vpp の半分 9.6 mV がレールの電位差。
 
 **GND レールは理想的な 0 Ω の導体ではない。** ここでは意図的に電流を流して
 確かめたが、実際の回路でも、電源のスイッチングノイズ (8-12) やデジタル回路の

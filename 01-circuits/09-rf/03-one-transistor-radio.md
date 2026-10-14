@@ -73,7 +73,7 @@ wires:
 **動作点の計算値** (V<sub>CC</sub> = 5 V、hFE = 200、V<sub>BE</sub> = 0.6 V と仮定):
 
 - I<sub>C</sub> = (V<sub>CC</sub> − V<sub>BE</sub>) / (R<sub>b</sub>/hFE + R<sub>c</sub>)
-  = (5 V − 0.6 V) / (220kΩ/200 + 1.5 kΩ) = 4.4 V / 2.6 kΩ ≈ 1.7 mA
+  = (5 V − 0.6 V) / (220 kΩ/200 + 1.5 kΩ) = 4.4 V / 2.6 kΩ ≈ 1.7 mA
 - V<sub>C</sub> = V<sub>CC</sub> − I<sub>C</sub> × R<sub>c</sub> = 5 V − 1.7 mA × 1.5 kΩ ≈ 2.5 V。
   電源のほぼ半分なので、信号で上下どちらにも振れる余地がある
 - 電圧利得 = g<sub>m</sub> × R<sub>c</sub>。g<sub>m</sub> = I<sub>C</sub> / 26 mV (2-3 で見た) なので、
@@ -167,7 +167,7 @@ wires:
 | 項目 | 値 |
 | --- | --- |
 | Supplies | V+ = 5 V、出力 ON |
-| Wavegen W1 | 搬送波 Sine 1 MHz、振幅 20 mV (peak)、Modulation: AM、変調波 Sine 1 kHz、変調度 50 % |
+| Wavegen W1 | 搬送波 Sine 1 MHz、振幅 20 mV<sub>p</sub>、Modulation: AM、変調波 Sine 1 kHz、変調度 50 % |
 | Scope CH1 (1+ = 検波出力) | Coupling DC、200 mV/div |
 | Scope CH2 (2+ = コレクタ) | Coupling DC、1 V/div |
 | Scope 時間軸・トリガ | 200 µs/div、CH1 の立ち上がり |
@@ -186,11 +186,11 @@ cursors: [250us, 750us]
 
 - 図3 は LTspice の計算 (2SC1815 は BF = 200 の汎用モデル、1N60 は IS = 0.2 µA・RS = 25 Ω と仮定) をもとにした画面。実測ではない
 - CH2 (コレクタ) は直流 約 2.45 V (上の動作点の 2.5 V とほぼ一致) に、1 MHz の搬送波が乗る。振幅は 1 kHz で太り細りして、
-  最大 約 1.2 V (peak)。入力の同調回路の振幅は最大でも約 19 mV (peak) なので、実効の利得は約 60 倍。
+  最大 約 1.2 V<sub>p</sub>。入力の同調回路の振幅は最大でも約 19 mV<sub>p</sub> なので、実効の利得は約 60 倍。
   上の 98 倍より小さいのは、タンクと Rc に D1・R3・イヤホンの負荷が付くため
 - CH1 は平均 約 3.0 V、1 kHz の振れ 約 0.6 Vpp (2.66〜3.28 V)。D1 がコレクタの山を拾い、C3・R3・イヤホンでならした出力
 
-**LTspice との突き合わせ**: `sim/03-one-transistor-radio.cir` で、図1 の回路全体 (RS 1 kΩ 越しの AM 信号 1 MHz・20 mV peak・
+**LTspice との突き合わせ**: `sim/03-one-transistor-radio.cir` で、図1 の回路全体 (RS 1 kΩ 越しの AM 信号 1 MHz・20 mV<sub>p</sub>・
 1 kHz・50 %、L1 250 µH ∥ VC1 100 pF、C1・Rb・Rc・Q1・D1・C3・R3・EAR 15 nF) を過渡解析で走らせ、最後の 4 ms を読んだ。
 Q1 は 2SC1815 の代用モデル (`sim/agc.cir` と同じ。BF だけ 200 に置いた。目安から作った仮定で、実測の値ではない)、1N60 は IS = 0.2 µA・RS = 25 Ω の仮定。
 
@@ -199,7 +199,7 @@ Q1 は 2SC1815 の代用モデル (`sim/agc.cir` と同じ。BF だけ 200 に�
 | コレクタの直流 | 約 2.5 V (計算 2.5 V、図3 は 2.45 V) | 2.46 V | 合う |
 | コレクタ電流 | 約 1.7 mA | 1.7 mA | 合う |
 | 同調回路の振幅 (peak) | 最大 約 19 mV | 約 15 mV (+13 / −16 mV) | 3 割ほど小さい (RS と回路の損失の見積もりの差。1 MHz が f<sub>0</sub> の 1.007 MHz からわずかにずれる分も含む) |
-| コレクタの搬送波の振幅 (最大) | 約 1.2 V (peak) | 約 0.97 V (peak) | 2 割ほど小さい |
+| コレクタの搬送波の振幅 (最大) | 約 1.2 V<sub>p</sub> | 約 0.97 V<sub>p</sub> | 2 割ほど小さい |
 | 実効の利得 | 約 60 倍 | 約 65 倍 (0.97 V ÷ 15 mV) | 合う |
 | 実効の利得 (無変調、同調回路の振幅を変えて) | 98 倍は上限、実効は約 60 倍 | 同調回路 0.5 mV で 39 倍、1.5 mV で 50 倍、4.7 mV で 65 倍、9 mV 以上で 66〜68 倍 | 合う。弱い局では D1 が深くバイアスされず負荷が重く、利得は 40 倍ほどまで下がる |
 | 検波出力 (CH1) の平均と振れ | 約 3.0 V、0.6 Vpp | 2.88 V、0.54 Vpp (2.59〜3.14 V) | 約 1 割差で合う |

@@ -185,10 +185,10 @@ wires:
 | --- | --- |
 | 電源 | Supplies の V+ を 5 V、V− は使わない |
 | W1 | Square、100 Hz、Amplitude 2.5 V、Offset 2.5 V (0〜5 V)。SWC2 は押さない |
-| CH1 (1+) | CLK2 (W1 と同じ点、PIN 11)。1V/div、0 V を下から 1 目盛 |
-| CH2 (2+) | Q2 (PIN 13)。CH1 と同じ 1V/div・同じ 0 V の位置 |
+| CH1 (1+) | CLK2 (W1 と同じ点、PIN 11)。1 V/div、0 V を下から 1 目盛 |
+| CH2 (2+) | Q2 (PIN 13)。CH1 と同じ 1 V/div・同じ 0 V の位置 |
 | 1−・2− | GND |
-| 時間レンジ | 5ms/div |
+| 時間レンジ | 5 ms/div |
 | トリガ | CH1 の立ち上がり、1.8 V。トリガの点を左から 1 目盛に置く |
 | Measurements | Frequency・Vmax・Vmin |
 | カーソル | X1 をクロックの High の中 (2.5 ms)、X2 をその 2 周期あと (22.5 ms) に置く。ΔX = 20 ms の逆数が Q2 の周波数 |

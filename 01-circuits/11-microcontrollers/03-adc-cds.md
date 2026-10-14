@@ -114,9 +114,9 @@ wires:
 | 項目 | 値 |
 | --- | --- |
 | 電源 | Pico 2 の USB (AD3 の Supplies は使わない) |
-| CH1 (1+) | V<sub>node</sub> (33 列)。500mV/div、0 V を下から 1 目盛 |
+| CH1 (1+) | V<sub>node</sub> (33 列)。500 mV/div、0 V を下から 1 目盛 |
 | 1− | GND |
-| 時間レンジ | 200ms/div (1 画面 2 秒) |
+| 時間レンジ | 200 ms/div (1 画面 2 秒) |
 | トリガ | CH1 の立ち下がり、0.9 V (1.65 V と 0.16 V の中ほど)、Single。トリガの点を左から 2 目盛に置く |
 | Measurements | Maximum・Minimum |
 | カーソル | X1 を覆う前 (−200 ms)、X2 を覆っている間 (600 ms) に置く |

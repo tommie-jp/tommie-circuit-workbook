@@ -135,7 +135,7 @@ V<sub>C2</sub> = 1.86 V、I<sub>C2</sub> = 0.67 mA。上の計算値 (hFE = 200)
   EAR (1 kHz で約 10.6 kΩ の容量性) の並列で |Z| ≈ 4.3 kΩ。A<sub>v2</sub> ≈ **100 倍 (40 dB)**、反転 (LTspice の小信号で 105 倍)。
   入力インピーダンスは r<sub>π</sub> (= hFE / g<sub>m2</sub>、約 8.3 kΩ) と、R<sub>b2</sub> のミラー分の並列で約 3.0 kΩ。
   コレクタからベースへ戻る R<sub>b2</sub> も、ミラー効果でベースからは 1/(1 + 利得) に小さく見え、
-  470kΩ/101 ≈ 4.7 kΩ になる
+  470 kΩ/101 ≈ 4.7 kΩ になる
 
 ## 実体配線図
 
@@ -247,7 +247,7 @@ Analog Discovery は 1 台だが、線が交わらないよう図では箱を 2 
 | --- | --- |
 | Supplies | V+ = 5 V (オン) |
 | Wavegen W1 | Sine 1 MHz、Modulation: AM、1 kHz の Sine、変調度 30%。振幅は CH2 の搬送波が 10 mVpp になるよう絞る (目安 100 mVpp — 2 次巻線で 1/10 になる) |
-| Scope | CH2 = 2 次巻線の出力 (C1 の手前、RF 入力)、5mV/div。CH1 = Q2 のコレクタ (音声出力)、200mV/div (0.9 Vpp が 4.5 目盛になる)。CH1 は約 1.9 V の直流に音声が乗るので、Offset で直流を打ち消す。トリガは CH1 の立ち上がり 1.9 V |
+| Scope | CH2 = 2 次巻線の出力 (C1 の手前、RF 入力)、5 mV/div。CH1 = Q2 のコレクタ (音声出力)、200 mV/div (0.9 Vpp が 4.5 目盛になる)。CH1 は約 1.9 V の直流に音声が乗るので、Offset で直流を打ち消す。トリガは CH1 の立ち上がり 1.9 V |
 
 VC1 を回して CH1 の振幅が最大になる所が 1 MHz の同調点。外れると CH2 も CH1 も小さくなる
 (タンクの Q が選択度そのもの)。
@@ -280,7 +280,7 @@ measure: [vpp, freq]
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/09-two-transistor-radio-2.svg)
 
-W1 の変調を切って (無変調の搬送波) 横軸を 0.5µs/div にすると、帯の中身が 1 MHz の正弦波だと分かる。
+W1 の変調を切って (無変調の搬送波) 横軸を 0.5 µs/div にすると、帯の中身が 1 MHz の正弦波だと分かる。
 AD3 のアナログ入力は、BNC アダプタ付きで帯域 30 MHz 以上 (−3 dB)、6 MHz まで −0.1 dB に収まるので、1 MHz は形のまま見える。2×15 ピンのヘッダに直接つないでも 9 MHz (−3 dB)、2.9 MHz (−0.5 dB) あり、1 MHz は読める。
 
 ### 同調回路だけを VNA で見る (補足)

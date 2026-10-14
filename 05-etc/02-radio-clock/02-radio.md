@@ -435,7 +435,7 @@ markers: [440Hz]
 
 ![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/spectrum/02-radio-1.svg)
 
-- 440 Hz に山が 1 本立つ。50 mV (peak) の正弦波は −16.02 dBm (読み値)。1 V (peak) の正弦波が 10.00 dBm にあたる
+- 440 Hz に山が 1 本立つ。50 mV<sub>p</sub> の正弦波は −16.02 dBm (読み値)。1 V<sub>p</sub> の正弦波が 10.00 dBm にあたる
 - 検波出力の直流分 (約 3 V) は 0 Hz に大きな線として出る。見やすくするため、CH1 を AC 結合 (BNC アダプタのジャンパ) にして測る
 
 ```spectrum

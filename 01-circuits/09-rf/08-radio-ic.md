@@ -195,7 +195,7 @@ VC1 は約 100 pF に回しておく (f<sub>0</sub> = 1 / (2π√(250 µH × 100
 | 項目 | 値 |
 | --- | --- |
 | Supplies V+ | +5 V (Rload を通して PIN 3 へ) |
-| Wavegen W1 | 搬送波 Sine 1 MHz、振幅 10 mV (peak)、Modulation: AM、変調波 Sine 1 kHz、変調度 50 % |
+| Wavegen W1 | 搬送波 Sine 1 MHz、振幅 10 mV<sub>p</sub>、Modulation: AM、変調波 Sine 1 kHz、変調度 50 % |
 | Scope CH1 (1+ = Cout の出口) | Coupling DC (Cout が直流を切っている)、5 mV/div |
 | Scope CH2 (2+ = W1 の出力側) | Coupling DC、10 mV/div |
 | Scope 時間軸・トリガ | 200 µs/div、CH1 の立ち上がり |

@@ -585,9 +585,9 @@ W1 は放送の代わりの AM 信号、オシロは検波の前後の波形 (�
 | W1 (Wavegen) | Sine 1 MHz、振幅 100 mV、Modulation を AM (1 kHz の Sine、30%) |
 | W1 のつなぎ方 | Cw (10 pF) を通して T1 の 1 次の上 (VC1a) へ (図1) |
 | 選局 | VC1 を回して、CH1 に 1 kHz が最も大きく出る所 (f<sub>LO</sub> = 1455 kHz) |
-| CH2 (Scope) | IFT3 の 2 次 (D1 の手前)。500mV/div、DC 結合 |
-| CH1 (Scope) | 検波出力 (VR の上)。100mV/div、DC 結合 |
-| 時間軸・トリガ | 200µs/div、CH1 の立ち上がり 0.4 V |
+| CH2 (Scope) | IFT3 の 2 次 (D1 の手前)。500 mV/div、DC 結合 |
+| CH1 (Scope) | 検波出力 (VR の上)。100 mV/div、DC 結合 |
+| 時間軸・トリガ | 200 µs/div、CH1 の立ち上がり 0.4 V |
 | Spectrum のつなぎ方 | CH2 を Q1 のコレクタへ移す。10 kΩ と 0.01 µF を直列に通し、CH2 の入力 (2+ と 2−) の間に 51 Ω を入れる。入力に届くのはコレクタの約 1/200 |
 | Spectrum の設定 | 0〜3 MHz、8192 標本 (分解能 約 0.9 kHz)、窓 Flat Top、縦軸 dBm (50 Ω)、Top −30 dBm |
 
@@ -640,7 +640,7 @@ measure: [vmax, vmin, freq]
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/10-superheterodyne.svg)
 
-- CH2 は 455 kHz の IF。200µs/div では 1 周期 (2.2 µs) は見えず、**包絡線が 1 kHz でふくらむ帯**に見える。
+- CH2 は 455 kHz の IF。200 µs/div では 1 周期 (2.2 µs) は見えず、**包絡線が 1 kHz でふくらむ帯**に見える。
   山は 0.5 × 1.3 = 0.65 V、谷は 0.5 × 0.7 = 0.35 V (変調度 30%)
 - CH1 は検波出力。包絡線をなぞった 1 kHz の正弦波が直流の上に乗る (0.25〜0.55 V)
 - 変調を 30% のまま、周波数を変えても、CH2 の包絡線の周期が変わるだけで、IF の 455 kHz は変わらない

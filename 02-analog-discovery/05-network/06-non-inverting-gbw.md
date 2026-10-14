@@ -108,7 +108,7 @@ measure: [vpp]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/05-network/scope/06-non-inverting-gbw.svg)
 
 図3 は帯域より十分低い 1 kHz の画面 (計算値)。CH1 は 10 mV/div、CH2 は 100 mV/div と尺度を 10 倍変えてあるので、
-波の高さが同じに見えても CH2 は 11 倍。Vpp は CH1 0.04 V、CH2 0.44 V。R<sub>f</sub> を 100 kΩ にすると CH2 は 2.02 V (0-peak) に増える。
+波の高さが同じに見えても CH2 は 11 倍。Vpp は CH1 0.04 V、CH2 0.44 V。R<sub>f</sub> を 100 kΩ にすると CH2 は 2.02 V<sub>p</sub> に増える。
 
 ## 見るべき値
 
@@ -145,7 +145,7 @@ notes:
 
 - **利得を 10 倍にすると帯域はほぼ 1/10 になる。** 90.9 kHz → 9.90 kHz と、
   ほぼきれいに 1/10 (GBW が一定という近似が成り立つ範囲)
-- 出力の振幅は A<sub>v</sub> = 101 のとき最大で 20 mV × 101 ≈ 2.02 V (0-peak)。
+- 出力の振幅は A<sub>v</sub> = 101 のとき最大で 20 mV × 101 ≈ 2.02 V<sub>p</sub>。
   スルーレートで必要な dV/dt は 2π × 9.9 kHz × 2.02 V ≈ 0.126 V/µs で、
   LM358 のスルーレート (0.3 V/µs 程度) の範囲内 — 波形がなまらずに測れる
 - 実測の帯域がこの計算値より低く出たら、GBW がデータシート代表値より低い

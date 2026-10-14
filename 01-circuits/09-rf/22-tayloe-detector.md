@@ -62,9 +62,9 @@ I と Q は **1 kHz の音**になる。W1 と W2 は AD3 の中の同じクロ�
   差を取って 2 倍、合わせて **1.80 倍**
 - 各コンデンサが R1 につながるのは時間の 1/4 だけなので、時定数は 4 倍に伸びる。
   低域の角は f<sub>c</sub> = 1 ÷ (2π · 4 · (R1 + R<sub>on</sub>) · C) = 1 ÷ (2π · 4 · 1080 Ω · 10 nF) **≈ 3.7 kHz**
-- W2 を振幅 0.25 V (0.5 Vpp) にすると、1 kHz での I と Q は**それぞれ 0.434 V peak (0.87 Vpp)**。
+- W2 を振幅 0.25 V (0.5 Vpp) にすると、1 kHz での I と Q は**それぞれ 0.434 V<sub>p</sub> (0.87 Vpp)**。
   入力の **1.74 倍 (+4.8 dB)** で、1.80 倍から低域の角の分 (1 kHz で 0.965 倍) だけ下がった値だ (LTspice)
-- Δf を 4 kHz (W2 = 502 kHz) にすると 0.305 V peak (−3.1 dB)、10 kHz (508 kHz) では 0.156 V peak (LTspice)。
+- Δf を 4 kHz (W2 = 502 kHz) にすると 0.305 V<sub>p</sub> (−3.1 dB)、10 kHz (508 kHz) では 0.156 V<sub>p</sub> (LTspice)。
   受けたい音の帯域より上は、このコンデンサだけで落ちる
 
 **RF の偏り。** 74HC4052 は 5 V の単電源 (VEE と GND を 0 V) で使うので、AN の電圧は 0〜5 V に収める。
@@ -298,7 +298,7 @@ I と Q は 1 kHz の音なので Scope でそのまま見える。4 相の順�
 
 ## 計器の画面
 
-計算値 (振幅は LTspice の 0.434 V peak)。I と Q の線には 498 kHz の切り替えの段が数 mV 乗るが、この尺度では見えない (計算値で約 5 mVpp)。
+計算値 (振幅は LTspice の 0.434 V<sub>p</sub>)。I と Q の線には 498 kHz の切り替えの段が数 mV 乗るが、この尺度では見えない (計算値で約 5 mVpp)。
 
 ```scope
 title: 図3 W2 = 499 kHz (LO より 1 kHz 上) — Q が I より 250 µs 進む
@@ -313,7 +313,7 @@ measure: [vpp, freq, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/22-tayloe-detector-1.svg)
 
 - 図3 は CH1 = I、CH2 = Q。Q は I より 1/4 周期 (250 µs) 早く 0 V を上に横切る (カーソル X1)。Phase は +90.0° (進み)
-- 振幅はどちらも 0.868 Vpp (0.434 V peak)。W2 の 0.5 Vpp の 1.74 倍
+- 振幅はどちらも 0.868 Vpp (0.434 V<sub>p</sub>)。W2 の 0.5 Vpp の 1.74 倍
 
 ```scope
 title: 図4 XY 表示 (W2 = 499 kHz) — 半径 0.434 V の円
@@ -378,12 +378,12 @@ trigger: CLK rising at 0s
 | LO の周波数 (Logic の 1/ΔX) | 498.0 kHz (1.992 MHz ÷ 4)。S0・S1 はデューティ 50 %、S1 が 502 ns 遅れる |
 | 4 相の順 (Logic の CH) | 0 → 1 → 3 → 2 → 0 … (A0 → A1 → A3 → A2) |
 | I と Q の周波数 (W2 = 499 kHz) | 1.000 kHz |
-| I と Q の振幅 (1 kHz) | それぞれ 0.434 V peak (0.868 Vpp)。入力の 1.74 倍 (+4.8 dB)。LTspice |
+| I と Q の振幅 (1 kHz) | それぞれ 0.434 V<sub>p</sub> (0.868 Vpp)。入力の 1.74 倍 (+4.8 dB)。LTspice |
 | Q と I の時間差 (W2 = 499 kHz) | Q が 250 µs 進む (+90°) |
 | Q と I の時間差 (W2 = 497 kHz) | Q が 250 µs 遅れる (−90°)。振幅は同じ |
 | XY 表示 | 半径 0.434 V の円 |
-| W2 = 502 kHz (Δf 4 kHz) | 4 kHz、0.305 V peak (1 kHz より −3.1 dB)。LTspice |
-| W2 = 508 kHz (Δf 10 kHz) | 10 kHz、0.156 V peak。LTspice |
+| W2 = 502 kHz (Δf 4 kHz) | 4 kHz、0.305 V<sub>p</sub> (1 kHz より −3.1 dB)。LTspice |
+| W2 = 508 kHz (Δf 10 kHz) | 10 kHz、0.156 V<sub>p</sub>。LTspice |
 | 低域の角 | 1 ÷ (2π · 4 · 1080 Ω · 10 nF) ≈ 3.7 kHz (計算値) |
 | W2 = 498.000 kHz | I と Q が直流になる (ゼロ IF)。W2 の位相を変えると、XY の点が半径 0.45 V の円の上を動く (計算値) |
 | W2 を止める (オフセット 2.5 V だけ) | I と Q が 0 V |
@@ -392,15 +392,15 @@ trigger: CLK rising at 0s
 ## LTspice で確かめた値
 
 デッキは `sim/22-tayloe-detector.cir` (過渡解析)。**74HC4052 は電圧制御スイッチの模型 (オン抵抗 80 Ω、切り替えの隙間 0.2 ns) で、実測ではない仮定**。
-(S1, S0) の順 00 → 01 → 11 → 10 を、A0 → A1 → A3 → A2 の順に 1/4 周期ずつ開く制御で置き、I = A0 − A3、Q = A1 − A2 を読んだ。W2 は 2.5 V に 0.25 V peak、R1 1 kΩ、C1〜C4 は 10 nF。
+(S1, S0) の順 00 → 01 → 11 → 10 を、A0 → A1 → A3 → A2 の順に 1/4 周期ずつ開く制御で置き、I = A0 − A3、Q = A1 − A2 を読んだ。W2 は 2.5 V に 0.25 V<sub>p</sub>、R1 1 kΩ、C1〜C4 は 10 nF。
 
 | 確かめること | 本文の数字 | LTspice | 判定 |
 | --- | --- | --- | --- |
-| I・Q の振幅 (W2 = 499 kHz) | 0.434 V peak (1.74 倍) | 0.432 V peak (1.73 倍)、I と Q は同じ | 合う (0.4 % 差) |
+| I・Q の振幅 (W2 = 499 kHz) | 0.434 V<sub>p</sub> (1.74 倍) | 0.432 V<sub>p</sub> (1.73 倍)、I と Q は同じ | 合う (0.4 % 差) |
 | Q と I の先後 (499 kHz) | Q が 90° 進む | Q − I = +90.0° | 合う |
 | Q と I の先後 (497 kHz) | Q が 90° 遅れる | Q − I = −90.0°、振幅は同じ | 合う |
-| W2 = 502 kHz (Δf 4 kHz) | 0.305 V peak | 0.303 V peak | 合う |
-| W2 = 508 kHz (Δf 10 kHz) | 0.156 V peak | 0.155 V peak | 合う |
+| W2 = 502 kHz (Δf 4 kHz) | 0.305 V<sub>p</sub> | 0.303 V<sub>p</sub> | 合う |
+| W2 = 508 kHz (Δf 10 kHz) | 0.156 V<sub>p</sub> | 0.155 V<sub>p</sub> | 合う |
 | 切り替えの段 (I の 498 kHz 成分) | 約 5 mVpp | 3〜5 mVpp | 合う |
 | 利得 1.80 倍と低域の角 3.7 kHz | 1.80 × 0.965 = 1.74 倍 | 1.73 倍 | 合う |
 

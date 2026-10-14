@@ -198,7 +198,7 @@ AD3 の Supplies の各レール 50 mA (USB 給電で 250 mW) に収まり、ブ
 | --- | --- |
 | Supplies | V+ を 5 V、Master Enable を入れる |
 | Patterns | DIO0 (SER) = 常に 1、DIO1 (SRCLK) = Clock 500 Hz・Duty 25%、DIO2 (RCLK) = SRCLK の 1 ms 後に 0.5 ms だけ 1 を出すパルス (周期 2 ms) |
-| Logic | DIO0〜6 を表示。DIO3〜6 を 1 つのバス (QD QC QB QA、2 進) にまとめる。標本化 100 kHz、時間 0.8ms/div (全体で 8 ms) |
+| Logic | DIO0〜6 を表示。DIO3〜6 を 1 つのバス (QD QC QB QA、2 進) にまとめる。標本化 100 kHz、時間 0.8 ms/div (全体で 8 ms) |
 | トリガ | DIO1 (SRCLK) の立ち上がり、時間 0 |
 | カーソル | X1 = 2.75 ms (2 回目の SRCLK のあと、RCLK の前)、X2 = 7.75 ms (4 回目の RCLK のあと) |
 

@@ -215,7 +215,7 @@ xy: ch1 ch2
 
 ## LTspice で確かめた値
 
-デッキは `sim/18-rc-cr-quadrature.cir` (AC 解析。W1 は 0.5 V peak = 1 Vpp、抵抗とコンデンサは理想)。
+デッキは `sim/18-rc-cr-quadrature.cir` (AC 解析。W1 は 0.5 V<sub>p</sub> = 1 Vpp、抵抗とコンデンサは理想)。
 本文の計算値と LTspice の値は**すべて合った**ので、本文の数字は直していない。
 
 | 確かめること | 本文の数字 | LTspice | 判定 |

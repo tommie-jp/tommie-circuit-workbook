@@ -45,13 +45,13 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/circuit/02-center-span-rbw.svg)
 
-- W1 を 1 MHz・振幅 1 V (peak) の正弦波にする。R1 (1 kΩ) を直列に入れて
+- W1 を 1 MHz・振幅 1 V<sub>p</sub> の正弦波にする。R1 (1 kΩ) を直列に入れて
   50 Ω の tinySA 入力へ落とすと、Wavegen から見た負荷は 1 kΩ + 50 Ω ≈ 1.05 kΩ
   で、流れる電流は 1 V ÷ 1.05 kΩ ≈ 0.95 mA。**Wavegen の保証駆動電流 10 mA
   (README) に対して十分小さい**ので、これだけで安全に収まる。0-3 のような
   パッド (アッテネータ) は足さなくてよい。0-3 の決まりは、**信号のレベルが
   入力の上限に近いときだけアッテネータを挟む**というもの
-- tinySA に届く電圧は 1 V × 50/(1000+50) ≈ 47.6 mV (peak)。50 Ω での電力に
+- tinySA に届く電圧は 1 V × 50/(1000+50) ≈ 47.6 mV<sub>p</sub>。50 Ω での電力に
   直すと **約 −16.4 dBm** (計算値)。tinySA Ultra の入力上限 (11-1、自動減衰で
   +0 dBm 程度) より 16 dB 以上低いので安全
 
