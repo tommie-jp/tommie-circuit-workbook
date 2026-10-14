@@ -62,7 +62,7 @@ I と Q は **1 kHz の音**になる。W1 と W2 は AD3 の中の同じクロ�
   差を取って 2 倍、合わせて **1.80 倍**
 - 各コンデンサが R1 につながるのは時間の 1/4 だけなので、時定数は 4 倍に伸びる。
   低域の角は f<sub>c</sub> = 1 ÷ (2π · 4 · (R1 + R<sub>on</sub>) · C) = 1 ÷ (2π · 4 · 1080 Ω · 10 nF) **≈ 3.7 kHz**
-- W2 を振幅 0.25 V (0.5 V<sub>pp</sub>) にすると、1 kHz での I と Q は**それぞれ 0.434 V peak (0.87 V<sub>pp</sub>)**。
+- W2 を振幅 0.25 V (0.5 Vpp) にすると、1 kHz での I と Q は**それぞれ 0.434 V peak (0.87 Vpp)**。
   入力の **1.74 倍 (+4.8 dB)** で、1.80 倍から低域の角の分 (1 kHz で 0.965 倍) だけ下がった値だ (LTspice)
 - Δf を 4 kHz (W2 = 502 kHz) にすると 0.305 V peak (−3.1 dB)、10 kHz (508 kHz) では 0.156 V peak (LTspice)。
   受けたい音の帯域より上は、このコンデンサだけで落ちる
@@ -287,7 +287,7 @@ I と Q は 1 kHz の音なので Scope でそのまま見える。4 相の順�
 | --- | --- |
 | Supplies | V+ = 5 V (V− は使わない) |
 | Wavegen W1 (LO の 4 倍) | Square、1.992 MHz、振幅 2.5 V、オフセット 2.5 V (0〜5 V)、デューティ 50 % |
-| Wavegen W2 (RF) | Sine、499 kHz、振幅 0.25 V (0.5 V<sub>pp</sub>)、オフセット 2.5 V |
+| Wavegen W2 (RF) | Sine、499 kHz、振幅 0.25 V (0.5 Vpp)、オフセット 2.5 V |
 | Scope | CH1 = 1+ を A0、1− を A3 (I)。CH2 = 2+ を A1、2− を A2 (Q)。どちらも 200 mV/div、DC 結合。時間軸 200 µs/div、トリガは CH1 の立ち上がり 0 V |
 | Scope (XY) | 表示を XY に。X = CH1 (I)、Y = CH2 (Q) |
 | Logic | DIO0 = CLK、DIO1 = S0、DIO2 = S1。標本化 100 MHz、時間軸 400 ns/div、トリガは DIO0 の立ち上がり。DIO2・DIO1 を束ねたバスを 10 進で表示 |
@@ -298,7 +298,7 @@ I と Q は 1 kHz の音なので Scope でそのまま見える。4 相の順�
 
 ## 計器の画面
 
-計算値 (振幅は LTspice の 0.434 V peak)。I と Q の線には 498 kHz の切り替えの段が数 mV 乗るが、この尺度では見えない (計算値で約 5 mV<sub>pp</sub>)。
+計算値 (振幅は LTspice の 0.434 V peak)。I と Q の線には 498 kHz の切り替えの段が数 mV 乗るが、この尺度では見えない (計算値で約 5 mVpp)。
 
 ```scope
 title: 図3 W2 = 499 kHz (LO より 1 kHz 上) — Q が I より 250 µs 進む
@@ -313,7 +313,7 @@ measure: [vpp, freq, phase]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/22-tayloe-detector-1.svg)
 
 - 図3 は CH1 = I、CH2 = Q。Q は I より 1/4 周期 (250 µs) 早く 0 V を上に横切る (カーソル X1)。Phase は +90.0° (進み)
-- 振幅はどちらも 0.868 V<sub>pp</sub> (0.434 V peak)。W2 の 0.5 V<sub>pp</sub> の 1.74 倍
+- 振幅はどちらも 0.868 Vpp (0.434 V peak)。W2 の 0.5 Vpp の 1.74 倍
 
 ```scope
 title: 図4 XY 表示 (W2 = 499 kHz) — 半径 0.434 V の円
@@ -378,7 +378,7 @@ trigger: CLK rising at 0s
 | LO の周波数 (Logic の 1/ΔX) | 498.0 kHz (1.992 MHz ÷ 4)。S0・S1 はデューティ 50 %、S1 が 502 ns 遅れる |
 | 4 相の順 (Logic の CH) | 0 → 1 → 3 → 2 → 0 … (A0 → A1 → A3 → A2) |
 | I と Q の周波数 (W2 = 499 kHz) | 1.000 kHz |
-| I と Q の振幅 (1 kHz) | それぞれ 0.434 V peak (0.868 V<sub>pp</sub>)。入力の 1.74 倍 (+4.8 dB)。LTspice |
+| I と Q の振幅 (1 kHz) | それぞれ 0.434 V peak (0.868 Vpp)。入力の 1.74 倍 (+4.8 dB)。LTspice |
 | Q と I の時間差 (W2 = 499 kHz) | Q が 250 µs 進む (+90°) |
 | Q と I の時間差 (W2 = 497 kHz) | Q が 250 µs 遅れる (−90°)。振幅は同じ |
 | XY 表示 | 半径 0.434 V の円 |
@@ -401,7 +401,7 @@ trigger: CLK rising at 0s
 | Q と I の先後 (497 kHz) | Q が 90° 遅れる | Q − I = −90.0°、振幅は同じ | 合う |
 | W2 = 502 kHz (Δf 4 kHz) | 0.305 V peak | 0.303 V peak | 合う |
 | W2 = 508 kHz (Δf 10 kHz) | 0.156 V peak | 0.155 V peak | 合う |
-| 切り替えの段 (I の 498 kHz 成分) | 約 5 mV<sub>pp</sub> | 3〜5 mV<sub>pp</sub> | 合う |
+| 切り替えの段 (I の 498 kHz 成分) | 約 5 mVpp | 3〜5 mVpp | 合う |
 | 利得 1.80 倍と低域の角 3.7 kHz | 1.80 × 0.965 = 1.74 倍 | 1.73 倍 | 合う |
 
 - 74HC74 の 4 相 (00 → 10 → 11 → 01) と、(S1, S0) = 00 → 01 → 11 → 10、チャネル 0 → 1 → 3 → 2 は、D フリップフロップの式 (D1 = /Q2、D2 = Q1) から手で追って確かめた。論理の動きは LTspice に入れていない (制御は理想のパルス)

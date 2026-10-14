@@ -26,7 +26,7 @@ RF・LO・IF の 3 つのポートはどれも **50 Ω**、電源は **5 V** の
 | --- | --- |
 | RF | 0.53〜1.6 MHz (中波)。50 Ω |
 | LO | RF + 455 kHz (0.985〜2.055 MHz)。50 Ω。+7 dBm (0.71 V 波高値) を標準にする |
-| LO の波形 | **正弦波** (標準)。G2 の直流 1.41 V の上で ±0.71 V (1.42 V<sub>pp</sub>) を振る。方形波は下の「LO の波形」 |
+| LO の波形 | **正弦波** (標準)。G2 の直流 1.41 V の上で ±0.71 V (1.42 Vpp) を振る。方形波は下の「LO の波形」 |
 | IF | 455 kHz。50 Ω |
 | 電源 | 5 V (単電源) |
 | FET | 3SK291 (東芝、デュアルゲート N チャネル MOSFET、**エンハンスメント型**、SMD 4 ピン) |
@@ -131,7 +131,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/circuit/01-mixer.svg)
 
 左から RF と LO を入れ、中央の 3SK291 (U1) で混ぜ、右のセラミックフィルタ (FL1) で 455 kHz を選んで IF OUT へ出す。
-電源の記号 (+5V) は、G1 の分圧を遠くの電源の線まで引き回さないよう 2 か所に置いた (同じ名前なので同じ電源)。
+電源の記号 (+5 V) は、G1 の分圧を遠くの電源の線まで引き回さないよう 2 か所に置いた (同じ名前なので同じ電源)。
 3SK291 はデュアルゲートの記号 (`nmos-dg`) で描いた。左の 2 本がゲートで、上が G2 (LO)、下が G1 (RF)。上がドレイン、下がソース。
 青い数字は解析で求めた動作点と信号の大きさ。
 
@@ -536,7 +536,7 @@ measure: [freq, vpp]
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/scope/01-mixer.svg)
 
-- RF を 0.1 V (−10 dBm) にしたときの波形。IF OUT は 0.12 V<sub>p</sub> (0.23 V<sub>pp</sub>) の 455 kHz の正弦波
+- RF を 0.1 V (−10 dBm) にしたときの波形。IF OUT は 0.12 V<sub>p</sub> (0.23 Vpp) の 455 kHz の正弦波
 - 1 周期は 2.2 µs。1 µs/div なら 10 目盛で 4.5 周期が見える。RF と LO の周波数の差で決まるので、
   LO を 1 kHz 動かすと 455 kHz も 1 kHz 動く
 - RF −30 dBm では振幅が 11.7 mV<sub>p</sub> しかなく、Wavegen と入力の雑音で波形が荒れる。形を見るなら −10 dBm にする

@@ -34,7 +34,7 @@ board: BB
 ## なぜ差を取ると RF が消えるのか
 
 Q1・Q2 のエミッタは Q3 のコレクタにつながる。Q3 は RF に比例した電流 I<sub>T</sub> = I<sub>0</sub> + i<sub>rf</sub> を流す電流源として働く。
-Q1・Q2 は LO の電圧で I<sub>T</sub> を左右に振り分け、**差の電流は** I<sub>T</sub> · tanh(v<sub>lo</sub> / 2V<sub>T</sub>) になる。
+Q1・Q2 は LO の電圧で I<sub>T</sub> を左右に振り分け、**差の電流は** I<sub>T</sub> · tanh(v<sub>lo</sub> / 2 V<sub>T</sub>) になる。
 LO が大きいと tanh は ±1 の方形波に近づく (**LO で電流を切り替える**)。
 
 - **i<sub>rf</sub> の項**: i<sub>rf</sub> × (±1 の方形波)。RF の符号が LO の周期で反転するので、**和と差の周波数** (f<sub>LO</sub> ± f<sub>RF</sub>) だけが出る。**RF そのものは出ない**。4-1 の 1 本では RF が出た

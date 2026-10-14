@@ -253,4 +253,4 @@ cursors: [531.25ms, 1531.25ms]
 
 自作。Tang Nano 9K の 27 MHz の水晶は Sipeed の Tang Nano 9K のページ
 ([https://wiki.sipeed.com/hardware/en/tang/Tang-Nano-9K/Nano-9K.html](https://wiki.sipeed.com/hardware/en/tang/Tang-Nano-9K/Nano-9K.html)) に
-"onboard 27MHz clock" とある。`$clog2` は IEEE 1364-2005 (Verilog) の組み込み関数。
+"onboard 27 MHz clock" とある。`$clog2` は IEEE 1364-2005 (Verilog) の組み込み関数。

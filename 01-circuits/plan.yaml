@@ -83,7 +83,7 @@
 - { id: 5-1, tier: 50, board: BB, title: 半波・全波・ブリッジ整流と平滑 (低圧 AC) }
 - { id: 5-2, tier: 50, board: BB, era: 古, title: ツェナー + Tr のシリーズレギュレータ }
 - { id: 5-3, tier: 50, board: [ BB, PF ], title: 3 端子レギュレータ (7805) }
-- { id: 5-4, tier: 50, board: [ BB, PF ], era: 今, title: LDO — USB 5V → 3.3V }
+- { id: 5-4, tier: 50, board: [ BB, PF ], era: 今, title: LDO — USB 5 V → 3.3 V }
 - { id: 5-5, tier: 50, board: BB, era: 古, title: 昇圧 — Joule thief }
 - { id: 5-6, tier: 100, board: BB, era: 今, title: 降圧スイッチング (MC34063 かモジュール) }
 - { id: 5-7, tier: 100, board: BB, title: チャージポンプ — 555 で負電圧 }
@@ -150,14 +150,14 @@
 - { id: 9-7, tier: 100, board: BB, title: AM 変調 — 555 の搬送波を音声で振る }
 - { id: 9-8, tier: 100, board: BB, title: ラジオ IC (LMF501T / TA7642) }
 - { id: 9-9, tier: 200, board: BB, era: 古, title: 2 石ラジオ — 高周波増幅 + 低周波増幅 }
-- { id: 9-10, tier: 200, board: BB, era: 古, title: スーパーヘテロダイン (6 石、IF 455kHz) }
+- { id: 9-10, tier: 200, board: BB, era: 古, title: スーパーヘテロダイン (6 石、IF 455 kHz) }
 - { id: 9-11, tier: 200, board: BB, title: ダイオード検波とトランジスタ検波の比較 }
 - { id: 9-12, tier: 200, board: BB, title: バランスドミキサー }
 - { id: 9-13, tier: 200, board: BB, era: 古, title: FM 復調 — スロープ検波 }
-- { id: 9-14, tier: 200, board: [ CB, PF ], era: 古, title: 27MHz の送受信 (トイラジコン) }
+- { id: 9-14, tier: 200, board: [ CB, PF ], era: 古, title: 27 MHz の送受信 (トイラジコン) }
 - { id: 9-15, tier: 200, board: CB, title: アンテナ — ダイポールとループ、SWR }
-- { id: 9-16, tier: 200, board: BB, era: 今, title: DDS モジュール — Pico 2 で 7MHz を出して tinySA で見る }
-- { id: 9-17, tier: 200, board: BB, era: 今, title: 2.4GHz モジュール (nRF24) と Pico 2 }
+- { id: 9-16, tier: 200, board: BB, era: 今, title: DDS モジュール — Pico 2 で 7 MHz を出して tinySA で見る }
+- { id: 9-17, tier: 200, board: BB, era: 今, title: 2.4 GHz モジュール (nRF24) と Pico 2 }
 - { id: 9-18, tier: 100, board: BB, title: RC-CR で 90° を作る — 1 本の正弦から I と Q }
 - { id: 9-19, tier: 200, board: BB, title: I/Q ミキサー — RF が LO の上か下かを知る }
 - { id: 9-20, tier: 200, board: BB, era: 古, title: イメージ除去 — 位相法 (Hartley) }

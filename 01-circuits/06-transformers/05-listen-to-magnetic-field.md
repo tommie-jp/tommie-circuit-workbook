@@ -146,5 +146,5 @@ EMF ≈ N × A × B<sub>peak</sub> × ω (N = 巻数、A = コイルの断面積
 
 自作。
 クリスタルイヤホンの容量とインピーダンスは、市販のセラミックイヤホンの仕様
-([共立電子産業 CH905](https://eleshop.jp/shop/g/gE7P361/)、容量 15000pF・インピーダンス 20MΩ 以上・周波数範囲 200〜8000Hz) と
-実測の例 ([セラミックイヤホンの特性](https://www.crystal-set.com/report/s100.htm)、100Hz で 80〜90kΩ) による。
+([共立電子産業 CH905](https://eleshop.jp/shop/g/gE7P361/)、容量 15000 pF・インピーダンス 20 MΩ 以上・周波数範囲 200〜8000 Hz) と
+実測の例 ([セラミックイヤホンの特性](https://www.crystal-set.com/report/s100.htm)、100 Hz で 80〜90 kΩ) による。

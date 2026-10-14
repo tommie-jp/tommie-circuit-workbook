@@ -253,7 +253,7 @@
 | 5-1 | [半波・全波・ブリッジ整流と平滑 (低圧 AC)](05-power-supplies/01-rectifier-filter.md) | 必須 | | BB |
 | 5-2 | [ツェナー + Tr のシリーズレギュレータ](05-power-supplies/02-zener-series-regulator.md) | 必須 | 古 | BB |
 | 5-3 | [3 端子レギュレータ (7805)](05-power-supplies/03-three-terminal-regulator.md) | 必須 | | BB / PF |
-| 5-4 | [LDO — USB 5V → 3.3V](05-power-supplies/04-ldo-usb.md) | 必須 | 今 | BB / PF |
+| 5-4 | [LDO — USB 5 V → 3.3 V](05-power-supplies/04-ldo-usb.md) | 必須 | 今 | BB / PF |
 | 5-5 | [昇圧 — Joule thief](05-power-supplies/05-joule-thief.md) | 必須 | 古 | BB |
 | 5-6 | [降圧スイッチング (MC34063 かモジュール)](05-power-supplies/06-buck-converter.md) | 入門 | 今 | BB |
 | 5-7 | [チャージポンプ — 555 で負電圧](05-power-supplies/07-charge-pump-negative.md) | 入門 | | BB |
@@ -340,14 +340,14 @@
 | 9-7 | [AM 変調 — 555 の搬送波を音声で振る](09-rf/07-am-modulation.md) | 入門 | | BB |
 | 9-8 | [ラジオ IC (LMF501T / TA7642)](09-rf/08-radio-ic.md) | 入門 | | BB |
 | 9-9 | [2 石ラジオ — 高周波増幅 + 低周波増幅](09-rf/09-two-transistor-radio.md) | 中級 | 古 | BB |
-| 9-10 | [スーパーヘテロダイン (6 石、IF 455kHz)](09-rf/10-superheterodyne.md) | 中級 | 古 | BB |
+| 9-10 | [スーパーヘテロダイン (6 石、IF 455 kHz)](09-rf/10-superheterodyne.md) | 中級 | 古 | BB |
 | 9-11 | [ダイオード検波とトランジスタ検波の比較](09-rf/11-detector-comparison.md) | 中級 | | BB |
 | 9-12 | [バランスドミキサー](09-rf/12-balanced-mixer.md) | 中級 | | BB |
 | 9-13 | [FM 復調 — スロープ検波](09-rf/13-fm-slope-detector.md) | 中級 | 古 | BB |
-| 9-14 | [27MHz の送受信 (トイラジコン)](09-rf/14-27mhz-rc-toy.md) | 中級 | 古 | CB / PF |
+| 9-14 | [27 MHz の送受信 (トイラジコン)](09-rf/14-27mhz-rc-toy.md) | 中級 | 古 | CB / PF |
 | 9-15 | [アンテナ — ダイポールとループ、SWR](09-rf/15-antenna-dipole-loop.md) | 中級 | | CB |
-| 9-16 | [DDS モジュール — Pico 2 で 7MHz を出して tinySA で見る](09-rf/16-dds-sdr-module.md) | 中級 | 今 | BB |
-| 9-17 | [2.4GHz モジュール (nRF24) と Pico 2](09-rf/17-nrf24-pico.md) | 中級 | 今 | BB |
+| 9-16 | [DDS モジュール — Pico 2 で 7 MHz を出して tinySA で見る](09-rf/16-dds-sdr-module.md) | 中級 | 今 | BB |
+| 9-17 | [2.4 GHz モジュール (nRF24) と Pico 2](09-rf/17-nrf24-pico.md) | 中級 | 今 | BB |
 | 9-18 | [RC-CR で 90° を作る — 1 本の正弦から I と Q](09-rf/18-rc-cr-quadrature.md) | 入門 | | BB |
 | 9-19 | [I/Q ミキサー — RF が LO の上か下かを知る](09-rf/19-iq-mixer.md) | 中級 | | BB |
 | 9-20 | [イメージ除去 — 位相法 (Hartley)](09-rf/20-image-reject-hartley.md) | 中級 | 古 | BB |

@@ -89,7 +89,7 @@ style:
   写される。RCLK を押すまでは、何回 SRCLK を送っても QA〜QH は変わらない。
   送っている途中の中途半端な値が LED に出ないのが、シフトと出力を分けた 74HC595 の値打ち
 - SRCLR̄ (PIN 10) はシフトレジスタを全部 0 にするクリアの入力で、負論理 (10-2) なので
-  +5V に固定して無効にする。OĒ (PIN 13) は出力を出すかどうかを決める入力で、これも
+  +5 V に固定して無効にする。OĒ (PIN 13) は出力を出すかどうかを決める入力で、これも
   負論理なので GND に固定して出力を常に有効にする
 - QA〜QD (PIN 15・1・2・3) だけ LED を付けた。QE〜QH (PIN 4〜7) も同じ考え方で
   続ければ 8 ビット全部を出せる (図1 の場所が足りないので省略)
@@ -165,42 +165,42 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/breadboard/06-shift-register.svg)
 
 - ブレッドボードは full。ブレッドボードの 1 穴 200 mA・ブレッドボード全体 500 mA の範囲に、電流は十分収まる (下の部品の節)
-- U1 (74HC595) は 34〜41 列。左下が PIN 1 (QB)、左上が PIN 16 (VCC)。VCC・SRCLR は +5V へ、GND・OE は GND へ。
+- U1 (74HC595) は 34〜41 列。左下が PIN 1 (QB)、左上が PIN 16 (VCC)。VCC・SRCLR は +5 V へ、GND・OE は GND へ。
   出力は下の列の QB・QC・QD (PIN 1〜3) をオレンジの線で左へ引き、上の LED の列へ渡す。QA (PIN 15) は上の列から直接 LED へ
 - 入力は黄の線で右へ。SER (PIN 14) は 44 列のスイッチ SER へ、SRCLK (PIN 11) は 50 列のボタンへ、RCLK (PIN 12) は 56 列のボタンへ。
-  ボタンの下のピンを +5V、上のピンを信号と 10kΩ のプルダウンにして、押すと 1 になる
-- AD3 は上に置く。V+ (赤) を +5V、GND (黒) を GND へ。DIO0〜2 (青) が SER・SRCLK・RCLK、DIO3〜6 (緑) が QA〜QD の列
-- AD3 の DIO0〜2 から入れる間は、ボタンもスイッチも触らない (押すと DIO が +5V に直結する)
+  ボタンの下のピンを +5 V、上のピンを信号と 10 kΩ のプルダウンにして、押すと 1 になる
+- AD3 は上に置く。V+ (赤) を +5 V、GND (黒) を GND へ。DIO0〜2 (青) が SER・SRCLK・RCLK、DIO3〜6 (緑) が QA〜QD の列
+- AD3 の DIO0〜2 から入れる間は、ボタンもスイッチも触らない (押すと DIO が +5 V に直結する)
 
 ## 部品
 
 | 記号 | 部品 | 値 |
 | --- | --- | --- |
 | U1 | 8 ビット シフトレジスタ | 74HC595 (DIP-16) |
-| DA〜DD | LED (赤) | 5 mm、V<sub>F</sub> 約 2.0V |
-| RA〜RD | 抵抗 (1/4 W)、LED の電流制限 | 330Ω × 4 本 |
-| RpdS・RpdCLK・RpdRCLK | 抵抗 (1/4 W)、プルダウン | 10kΩ × 3 本 |
+| DA〜DD | LED (赤) | 5 mm、V<sub>F</sub> 約 2.0 V |
+| RA〜RD | 抵抗 (1/4 W)、LED の電流制限 | 330 Ω × 4 本 |
+| RpdS・RpdCLK・RpdRCLK | 抵抗 (1/4 W)、プルダウン | 10 kΩ × 3 本 |
 | SER | スライドスイッチ | 1 個 |
 | SRCLK・RCLK | タクトスイッチ | 2 個 |
 | — | 電源・信号源・計器 | Analog Discovery 3 (下の計器の設定) |
 
-電流の見積もり。LED 1 本は (5V − 2.0V) ÷ 330Ω ≈ 9.1mA (74HC の出力が落ちないと仮定した上限の計算値)。
-4 本で 36mA、プルダウンは 1 本 0.5mA で 3 本 1.5mA、IC 自身は数 µA で、合計は 40mA に届かない。
-AD3 の Supplies の各レール 50mA (USB 給電で 250mW) に収まり、ブレッドボードの範囲にも収まる。
+電流の見積もり。LED 1 本は (5 V − 2.0 V) ÷ 330 Ω ≈ 9.1 mA (74HC の出力が落ちないと仮定した上限の計算値)。
+4 本で 36 mA、プルダウンは 1 本 0.5 mA で 3 本 1.5 mA、IC 自身は数 µA で、合計は 40 mA に届かない。
+AD3 の Supplies の各レール 50 mA (USB 給電で 250 mW) に収まり、ブレッドボードの範囲にも収まる。
 
 ## 計器の設定
 
-計器は AD3 の Supplies (+5V)・Patterns (SER・SRCLK・RCLK の信号源)・Logic (QA〜QD の観測)。手でボタンを押すと間隔がばらつき、
+計器は AD3 の Supplies (+5 V)・Patterns (SER・SRCLK・RCLK の信号源)・Logic (QA〜QD の観測)。手でボタンを押すと間隔がばらつき、
 ビットが 1 つずつ進む順序を止めて見られない。そこで Patterns でクロックを出し、Logic で 7 本を同時に見る。
 時間で動く回路で、レベルが 0 か 1 かだけが大事なので、オシロでなくロジックの画面にする。
 
 | 項目 | 値 |
 | --- | --- |
-| Supplies | V+ を 5V、Master Enable を入れる |
-| Patterns | DIO0 (SER) = 常に 1、DIO1 (SRCLK) = Clock 500Hz・Duty 25%、DIO2 (RCLK) = SRCLK の 1ms 後に 0.5ms だけ 1 を出すパルス (周期 2ms) |
-| Logic | DIO0〜6 を表示。DIO3〜6 を 1 つのバス (QD QC QB QA、2 進) にまとめる。標本化 100kHz、時間 0.8ms/div (全体で 8ms) |
+| Supplies | V+ を 5 V、Master Enable を入れる |
+| Patterns | DIO0 (SER) = 常に 1、DIO1 (SRCLK) = Clock 500 Hz・Duty 25%、DIO2 (RCLK) = SRCLK の 1 ms 後に 0.5 ms だけ 1 を出すパルス (周期 2 ms) |
+| Logic | DIO0〜6 を表示。DIO3〜6 を 1 つのバス (QD QC QB QA、2 進) にまとめる。標本化 100 kHz、時間 0.8ms/div (全体で 8 ms) |
 | トリガ | DIO1 (SRCLK) の立ち上がり、時間 0 |
-| カーソル | X1 = 2.75ms (2 回目の SRCLK のあと、RCLK の前)、X2 = 7.75ms (4 回目の RCLK のあと) |
+| カーソル | X1 = 2.75 ms (2 回目の SRCLK のあと、RCLK の前)、X2 = 7.75 ms (4 回目の RCLK のあと) |
 
 ```logic
 title: 図3 SRCLK を 4 回送り、そのたびに RCLK を送ると、QA から順に 1 が増える (計算)
@@ -223,10 +223,10 @@ trigger: SRCLK rising at 0s
 
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/logic/06-shift-register.svg)
 
-- 図3 は計算で作った理想の波形で、実測ではない (出力の遅れは数 10 ns で、この時間軸では見えない)。SRCLK は 0・2・4・6ms で立ち上がり、
-  RCLK はその 1ms 後の 1・3・5・7ms で立ち上がる
-- カーソル X1 (2.75ms) では、SRCLK を 2 回送ったのに RCLK は 1 回しか送っていないので、Q は 0001 のまま。ラッチしたものだけが LED に出る
-- カーソル X2 (7.75ms) では、4 回目のラッチのあとで Q = 1111。QA が 1ms、QB が 3ms、QC が 5ms、QD が 7ms で 1 になる階段の形が、下の「見るべき値」の表の 4 行に当たる
+- 図3 は計算で作った理想の波形で、実測ではない (出力の遅れは数 10 ns で、この時間軸では見えない)。SRCLK は 0・2・4・6 ms で立ち上がり、
+  RCLK はその 1 ms 後の 1・3・5・7 ms で立ち上がる
+- カーソル X1 (2.75 ms) では、SRCLK を 2 回送ったのに RCLK は 1 回しか送っていないので、Q は 0001 のまま。ラッチしたものだけが LED に出る
+- カーソル X2 (7.75 ms) では、4 回目のラッチのあとで Q = 1111。QA が 1 ms、QB が 3 ms、QC が 5 ms、QD が 7 ms で 1 になる階段の形が、下の「見るべき値」の表の 4 行に当たる
 
 ## 見るべき値
 

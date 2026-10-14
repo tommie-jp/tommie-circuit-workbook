@@ -45,8 +45,8 @@ S21 はこれより大きく出る。アンプの入力の Z (R1 ∥ R2 ∥ h<su
 
 **周波数を上げると利得は落ちる**。8-2・8-4 と同じハイブリッド π の**等価回路**
 (g<sub>m</sub> = Ic / 26 mV = 0.165 S、r<sub>π</sub> 1.2 kΩ、C<sub>π</sub> = g<sub>m</sub> / (2π f<sub>T</sub>) ≈ 330 pF
-(f<sub>T</sub> 80 MHz)、C<sub>μ</sub> 2 pF、r<sub>bb′</sub> 50 Ω、r<sub>o</sub> 23 kΩ) で計算すると、
-C<sub>π</sub> (とミラー効果で C<sub>μ</sub> が増えた分) がベースを交流的に短絡していき、
+(f<sub>T</sub> 80 MHz)、C<sub>µ</sub> 2 pF、r<sub>bb′</sub> 50 Ω、r<sub>o</sub> 23 kΩ) で計算すると、
+C<sub>π</sub> (とミラー効果で C<sub>µ</sub> が増えた分) がベースを交流的に短絡していき、
 **S21 は低い所の 22.0 dB から 5 MHz で 3 dB 落ち、30 MHz では 6.4 dB** になる (計算値)。
 低い所の 22.0 dB が上の目安より 0.4 dB 小さいのは、r<sub>bb′</sub> と r<sub>o</sub> のぶん。
 f<sub>T</sub> 80 MHz はデータシートの最小値なので、実物はもっと高い周波数まで伸びることが多い

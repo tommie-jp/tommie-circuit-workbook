@@ -337,7 +337,7 @@ measure: [freq, vpp]
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-2sc1815/scope/01-mixer.svg)
 
-- RF を 32 mV (−20 dBm) にしたときの波形。IF OUT は 91 mV<sub>p</sub> (0.18 V<sub>pp</sub>) の 455 kHz の正弦波
+- RF を 32 mV (−20 dBm) にしたときの波形。IF OUT は 91 mV<sub>p</sub> (0.18 Vpp) の 455 kHz の正弦波
 - 1 周期は 2.2 µs。1 µs/div なら 10 目盛で 4.5 周期が見える。RF と LO の周波数の差で決まるので、
   LO を 1 kHz 動かすと 455 kHz も 1 kHz 動く
 - RF −30 dBm では振幅が 29 mV<sub>p</sub> しかなく、Wavegen と入力の雑音で波形が荒れる。形を見るなら −20 dBm にする

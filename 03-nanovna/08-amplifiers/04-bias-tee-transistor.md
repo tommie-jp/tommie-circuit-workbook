@@ -30,7 +30,7 @@ device: H4
 | g<sub>m</sub> | Ic / 26 mV | 0.165 S |
 | r<sub>π</sub> | h<sub>FE</sub> / g<sub>m</sub> | 1.2 kΩ (h<sub>FE</sub> = 200) |
 | C<sub>π</sub> | g<sub>m</sub> / (2π f<sub>T</sub>) | 330 pF (f<sub>T</sub> = 80 MHz) |
-| C<sub>μ</sub> | データシートの C<sub>ob</sub> | 2 pF |
+| C<sub>µ</sub> | データシートの C<sub>ob</sub> | 2 pF |
 | r<sub>bb′</sub> | データシートの代表値 | 50 Ω |
 | r<sub>o</sub> | V<sub>A</sub> / Ic | 約 23 kΩ (アーリー電圧 V<sub>A</sub> 100 V と仮定) |
 
@@ -201,7 +201,7 @@ notes:
   S11 は一番小さい
 
 **トランジスタを挿した後の入力側** (S11)。ハイブリッド π のうち入力に効く部分
-(r<sub>bb′</sub>・r<sub>π</sub>・C<sub>π</sub> と、C<sub>μ</sub> のミラー効果の 18 pF) を並べた**等価回路**の
+(r<sub>bb′</sub>・r<sub>π</sub>・C<sub>π</sub> と、C<sub>µ</sub> のミラー効果の 18 pF) を並べた**等価回路**の
 見えるはずの画面。
 
 ```vna
@@ -233,7 +233,7 @@ markers:
 
 ## 見るべき値
 
-計算値 (ハイブリッド π の模型、h<sub>FE</sub> 200・f<sub>T</sub> 80 MHz・C<sub>μ</sub> 2 pF・r<sub>bb′</sub> 50 Ω・r<sub>o</sub> 23 kΩ、
+計算値 (ハイブリッド π の模型、h<sub>FE</sub> 200・f<sub>T</sub> 80 MHz・C<sub>µ</sub> 2 pF・r<sub>bb′</sub> 50 Ω・r<sub>o</sub> 23 kΩ、
 入出力とも 50 Ω で終端)。
 
 | 周波数 | S11 | S21 | S12 (裏返して) | S22 (裏返して) |
@@ -251,7 +251,7 @@ markers:
 - **S21 は 1 けたごとに 20 dB 落ちる** (5 MHz → 30 MHz で 12.7 dB)。周波数と S21 の
   倍率の積がほぼ一定 (f<sub>T</sub> の考え方)。実物の f<sub>T</sub> が高ければ、表より上に出る
 - S12 と S22 は、**ユニバーサル基板を裏返して** J2 を CH0、J1 を CH1 に挿し直して測る
-  (NanoVNA は CH0 → CH1 の 1 方向だけ。8-2 と同じ)。S12 は C<sub>μ</sub> を通って
+  (NanoVNA は CH0 → CH1 の 1 方向だけ。8-2 と同じ)。S12 は C<sub>µ</sub> を通って
   逆向きに漏れる量、S22 はコレクタの高い Z (ほぼ全反射) を見る。**4 つそろうと
   8-5 で安定性 (K 因子) が計算できる**
 - 測ったら Touchstone に保存して隣に置く。2 回 (表と裏) の `.s2p` を

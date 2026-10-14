@@ -205,7 +205,7 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/11-detector-comparison-2.svg)
 
-2-3 のブレッドボードと同じ並びで、値を検波向きに替え、CC を足した。5V は AD の V+ (赤) から上の + レールへ。
+2-3 のブレッドボードと同じ並びで、値を検波向きに替え、CC を足した。5 V は AD の V+ (赤) から上の + レールへ。
 
 - **Q1 は上のブロック** (`e19` B・`e20` C・`e21` E)
 - **入力 (5 列)**: W1 (黄) を `a5`、CH2 の 2+ (青) を `b5`。CIN (0.1 µF) が 5 列から 9 列へ渡す

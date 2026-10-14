@@ -80,12 +80,12 @@ Rs は 5〜10 列に挿し、10 列の側が信号源の節点 TP。CH1（`1+`�
 | 計器 | 設定 |
 | --- | --- |
 | Wavegen (W1) | 方形波、1 kHz、振幅 1.65 V、オフセット 1.65 V（0〜3.3 V） |
-| Scope (CH1) | DC、Range 0〜3.3 V (1 V/div)、Time/div は角の形が見える 20 μs/div 程度 |
+| Scope (CH1) | DC、Range 0〜3.3 V (1 V/div)、Time/div は角の形が見える 20 µs/div 程度 |
 | Scope (CH2) | DC、Range 0〜0.4 V (200 mV/div、1/10 に減衰されるため) |
 
 C<sub>trim</sub> の 3 つの設定で CH2 に出る立ち上がりを重ねる。角の形は
-プローブの時定数 (R<sub>p</sub> ∥ R<sub>in</sub>) × (C<sub>trim</sub> + C<sub>in</sub>) ≈ 23〜31 μs で決まる。
-Time/div を 20 μs/div 程度にするのはこのためで、1 μs/div では角の後の平らな所しか映らない。
+プローブの時定数 (R<sub>p</sub> ∥ R<sub>in</sub>) × (C<sub>trim</sub> + C<sub>in</sub>) ≈ 23〜31 µs で決まる。
+Time/div を 20 µs/div 程度にするのはこのためで、1 µs/div では角の後の平らな所しか映らない。
 
 ```scope
 title: 図3 合った 2.6 pF (CH2) は平ら、1 pF (CH3) は丸く、10 pF (CH4) は跳ねる
@@ -102,7 +102,7 @@ measure: [vmax]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/02-oscilloscope/scope/09-probe-compensation.svg)
 
 ここで 1 pF は立ち上がり直後が 3.3 V × 1/(1 + 24) ≈ 0.13 V、10 pF は
-3.3 V × 10/(10 + 24) ≈ 0.97 V で、どちらも数十 μs かけて 3.3 V ÷ 10.1 ≈ 0.33 V に落ち着く。
+3.3 V × 10/(10 + 24) ≈ 0.97 V で、どちらも数十 µs かけて 3.3 V ÷ 10.1 ≈ 0.33 V に落ち着く。
 
 ## 見るべき値
 
