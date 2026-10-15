@@ -20,6 +20,8 @@ device: WEB
 この題では、同じ作りの Pong を Verilog で書き、ブラウザの soft-fpga (第 4 章) で遊ぶ。4-7 の画面のボタンでラケットを動かし、
 回路が出す画素を JS が `<canvas>` に並べる。**命令を読む回路 (CPU) はどこにも無い。**
 
+**動くページ: <https://tommie-jp.github.io/soft-fpga/91-pong/>** (自分でビルドしなくても、ブラウザで開けば遊べる。W・S が左、↑・↓ が右のラケット、AUTO は回路が打つ。ソースは [soft-fpga の examples/91-pong](https://github.com/tommie-jp/soft-fpga/tree/main/examples/91-pong))
+
 ## 決めたこと
 
 | 項目 | 決め | 理由 |
@@ -457,7 +459,7 @@ var Module = { onRuntimeInitialized: function () {
    docker compose -f docker/compose.yml run --rm build-wasm scripts/build-wasm-91.sh
    ```
 
-4. `examples/` で Web サーバを立て (`python3 -m http.server 8081`)、`/91-pong/web/` を開く
+4. `examples/` で Web サーバを立て (`python3 -m http.server 8081`)、`/91-pong/web/` を開く。同じ物が上の URL に公開してある
 5. 左右の AUTO を入れると、回路どうしが打ち合う。AUTO を切り、W・S (左) と ↑・↓ (右) で打つ
 
 ## 画面に見えるはずのもの
