@@ -1,0 +1,5 @@
+`verilator_config
+// 借りた 65C02 のコアの警告は見ない (自分の書いた所だけ -Wall で見る)
+lint_off -file "*hoglet/*"
+// コアは reset を 1 か所だけ非同期 (always @(posedge clk or posedge reset)) で使う。その知らせ
+lint_off -rule SYNCASYNCNET
