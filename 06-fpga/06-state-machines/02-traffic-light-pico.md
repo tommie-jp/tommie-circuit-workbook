@@ -347,6 +347,26 @@ trigger: BTN falling at 1s
 
 実機の長さは、5-7 で固定したクロックの正確さで決まる。1 クロックが 1.000 ms からずれれば、6 s も同じ割合でずれる。
 
+## シミュレーションでの確かめ (対象外を含む)
+
+Verilator 5.042 で、本文の `traffic_top` と試験 `tb_top` を抜き出して走らせ直した。`traffic_fsm2` は 6-1 のもの
+(`sim/01-fsm-template.v`)。原本は `sim/02-traffic-light-pico.v` (`traffic_top`) と `sim/02-traffic-light-pico-tb.v`。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`--top-module traffic_top`、`-Wall`) | 警告なし | 警告 0 件 | 合った |
+| 30 s の変わり目 | 0・6・8・13・19・21・25 s の 7 行 | 7 行とも同じ (灯の組も同じ) | 合った |
+| GREEN・YELLOW の長さ | 6 s・2 s | 6.000 s・2.000 s (0→6→8 s、13→19→21 s) | 合った |
+| ボタンを押した後の RED (WALK) | 5 s | 5.000 s (8→13 s) | 合った |
+| 押さないときの RED | 4 s | 4.000 s (21→25 s) | 合った |
+| 押してから WALK に入るまで | 7.0 s | 1.0 s に押して 8.0 s に入る = 7.0 s | 合った |
+| LED 1 個の電流 | 約 4 mA | (3.3 − 2.0) ÷ 330 = 3.9 mA (計算のみ) | 計算値として合った |
+
+確かめられなかったもの。
+
+- Pico 2 への書き込み、LED の点灯、AD3 の Logic の画面、実機の 1 クロックの正確さ (5-7 のタイマの精度)。実機が要る
+- 回路図と実体配線図のつなぎは、この確かめでは見ていない (`npm run check` の範囲)
+
 ## 出典
 
 自作。信号機の状態機械は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `examples/02-traffic-fsm` (4-4) と 6-1。

@@ -238,6 +238,35 @@ Verilator の `--public-flat-rw` で内部の配列に C++ から書き込む方
 | `--trace` で変換して通すと | `cmake --build` | コンパイルエラー (`VerilatedTrace` が不完全な型) |
 | 5-1 の `diff` | `diff orig_verilated.cpp verilated.cpp` | 5 か所・50 行。診断文と検査だけ |
 
+## シミュレーションでの確かめ (対象外を含む)
+
+手元の Pico SDK 2.2.0 と Verilator 5.042 で確かめた。本文の `p_none.v`・`p_disp.v`・`p_rom.v`・`p_rom2.v`・`hex2init.py` を抜き出し、
+`-Wall --no-timing --no-trace` で C++ にして、PC の Verilator と Pico SDK でそれぞれ動かした
+(`sim/13-runtime-trim-*.v`・`-disp-tb.cpp`・`-rom-tb.cpp`)。主ループは本文の説明どおり (static のモデルを 1 つ、立ち下がり・立ち上がりの `eval()`) に書いた。
+`.uf2` と `arm-none-eabi-size` の値は、手元の Pico SDK 2.2.0 と arm-none-eabi-gcc 13.2.1 に、Verilator 5.042 のヘッダと、
+5.042 の `verilated.cpp` に 5-1 の表の 3 と同じ趣旨の直しを当てた写し (`sim/make-pico-runtime.py` で作る) を組み合わせて、
+本文の `.cpp` と `.v` から作り直した。本文は Verilator 5.048 (`sfa-dev`) なので、バイト数は 1 % ほど小さく出る。近い値として見る。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| 変換 (`-Wall`) | 4 つとも警告なし | 警告なし | 合った |
+| `$display` と `$finish` | 文を出して `gotFinish` が立つ。止めるのは主ループ | `count reached 9` を出し、10 クロック目で `gotFinish` = 1 | 合った |
+| `$readmemh` (`rom.hex` が有る) | ROM が読める | 0・17・34 … 255 の 16 値が読めた | 合った |
+| `$readmemh` (`rom.hex` が無い) | 警告を出して続け、ROM は 0 のまま | `$readmem file not found` を出して 16 値とも 0 | 合った |
+| `hex2init.py` | 16 行の `rom[i] = 8'hXX;` | 16 行 (`rom[0] = 8'h00;` … `rom[15] = 8'hFF;`) | 合った |
+| `p_rom2` (`initial` に置き換え) | `p_rom` と同じ中身 | 16 値とも `p_rom` と同じ | 合った |
+| `--trace` でビルド | コンパイルエラー (`VerilatedTrace` が不完全な型) | `invalid use of incomplete type 'class VerilatedTrace<...>'` と `'VerilatedTracePrefixType' was not declared` | 合った |
+| `_exit` と `_open` | `_exit` は `__breakpoint()` の無限ループ、`_open` は −1 | `newlib_interface.c` のとおり | 合った |
+| `.uf2` (`p_none`) | 93 184 バイト、text 50 372・bss 2 376 | 92 160 バイト、text 49 696・bss 2 692 | 近い値 (版と主ループの差) |
+| `$display` を足したときの text | +14 380 バイト | +10 980 バイト (60 676) | 向きと桁は合った。実数は版で違う |
+| `$readmemh` を足したときの text | +6 368 バイト | +6 488 バイト | 近い値 |
+| `initial` に直したときの text | −200 バイト | −136 バイト | 近い値 |
+
+確かめられなかったもの。
+
+- 5.048 のランタイムとの `diff` (5 か所・50 行)。手元に 5.048 が無い。本文の行番号 (3126・3295・3576) は確かめていない
+- Pico 2 の上での `$display` の出力先と `exit` で固まる動き (実機)。ソースの読みだけ
+
 ## 出典
 
 自作。ランタイムの仕組みは [Verilator User's Guide](https://veripool.org/guide/latest/) と、Verilator 5.048 の `verilated.cpp`・`verilated.h`。

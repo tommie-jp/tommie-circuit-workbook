@@ -314,6 +314,29 @@ PC の Verilator (5.042) で実際に動かして得た値。
 | `next` が変わってから `state` が追うまで | 1 クロック (図1の ΔX) |
 | 短い長さ (5・2・3・4) の 1 周目 | GREEN 5・YELLOW 2・WALK 4 クロック (0〜4・5〜6・7〜10) |
 
+## シミュレーションでの確かめ
+
+Verilator 5.042 (`--lint-only -Wall`、`--binary --timing`) と Icarus Verilog 12.0 で、本文の Verilog とテストベンチを抜き出して走らせ直した。
+原本は `sim/` に置いた。
+
+| ファイル | 中身 |
+| --- | --- |
+| `sim/01-fsm-template.v` | `traffic_fsm2` (本文の Verilog) |
+| `sim/01-fsm-template-tb.v` | 本文の試験 `tb_fsm2` |
+| `sim/01-fsm-template-ref.v` | 4-4 の `traffic_fsm`。[4-4](../04-soft-fpga-web/04-traffic-fsm.md) の Verilog をそのまま置いた |
+| `sim/01-fsm-template-wave-tb.v` | 波形の表を作る試験。本文に載っていないので、説明どおり (長さ 5・2・3・4、リセット後 2 クロック目に `btn` を 1 クロック) に書いた |
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`-Wall`) | 警告なし | 警告 0 件 | 合った |
+| `next = state;` を消した lint | `LATCH` の警告 1 件 (39:5) | `Latch inferred for signal 'traffic_fsm2.next'` 1 件 (39:5) | 合った |
+| 4-4 との食い違い (10 万クロック) | 0 | 0 | 合った |
+| 矢印 ①〜⑤ の回数 | 9605・5649・3955・5649・3955、図に無い移り方 0 | 9605・5649・3955・5649・3955、0 | 合った |
+| 波形の表 (22 クロックの `btn_req`・`done`・`next`・`state`) | 表のとおり | 表と全クロックで同じ | 合った |
+| 短い長さの 1 周目 | GREEN 5・YELLOW 2・WALK 4 クロック | `state` が 0 を 5 クロック、1 を 2 クロック、3 を 4 クロック | 合った |
+
+仮定は、4-4 の `traffic_fsm` を 4-4 の本文の Verilog のまま使ったこと。
+
 ## 出典
 
 自作。信号機の状態機械は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `examples/02-traffic-fsm` (4-4) を書き直したもの。

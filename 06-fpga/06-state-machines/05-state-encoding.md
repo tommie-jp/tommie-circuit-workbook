@@ -352,6 +352,26 @@ PC の Verilator (5.042) と yosys (0.33) で実際に動かして得た値。
 | 合成 (FF / LUT) | 2 進 3 / 4、グレイ 3 / 4、ワンホット (同じ書き方) 5 / 22、ワンホットらしく 5 / 5 |
 | 押し込んだ定義外の符号 | `seq_enc` の 3 つは次のクロックで S0。`seq_onehot` は 2 ビットのまま動き、4 クロック後に 1 ビットへ |
 
+## シミュレーションでの確かめ
+
+Verilator 5.042 と yosys 0.33 で、本文の `seq_enc.v`・`seq_onehot.v`・試験 `tb_enc` を抜き出して走らせ直した。
+原本は `sim/05-state-encoding.v`・`sim/05-state-encoding-onehot.v`・`sim/05-state-encoding-tb.v`。
+合成は本文のコマンドのまま (`synth_gowin`)。`seq_onehot` は `read_verilog -sv seq_onehot.v; synth_gowin -top seq_onehot` で数えた。
+配置配線 (nextpnr) はこの確かめに含まない。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`-Wall`、`-GENC=0/1/2`、`seq_onehot`) | 4 つとも警告なし | 警告 0 件 | 合った |
+| 10 万ビットの試験 | 基準との食い違い 0、`PASS` | 0、`PASS` | 合った |
+| 状態が変わったクロック | 72090 回 | 72090 回 | 合った |
+| 切り替わったビット数 / 回 | 2 進 1.479、ワンホット 2.000、グレイ 1.305 (合計 106657・144180・94049) | 同じ | 合った |
+| 押し込んだ定義外の符号 | `seq_enc` の 3 つは次のクロックで S0、`seq_onehot` は 4 クロック後に 1 ビット | 表のとおり (1 クロック後 000・00001・000、`seq_onehot` は 00101 → 01010 → 10010 → 00010) | 合った |
+| 合成 FF / LUT (2 進) | 3 / 4 | DFFR 3、LUT3 1 + LUT4 3 | 合った |
+| 合成 FF / LUT (グレイ) | 3 / 4 | 2 進と同じ | 合った |
+| 合成 FF / LUT (ワンホット、同じ書き方) | 5 / 22、MUX2 16 個 | DFFR 4 + DFFS 1、LUT1 11 + LUT3 1 + LUT4 10、MUX2_LUT5 11 + MUX2_LUT6 5 | 合った |
+| 合成 FF / LUT (`seq_onehot`) | 5 / 5 | DFFR 4 + DFFS 1、LUT2 2 + LUT3 1 + LUT4 2 | 合った |
+| yosys の `fsm` パス | `Not marking seq_enc.st as FSM state register` | 同じ行が出た | 合った |
+
 ## 出典
 
 自作。ワンホットの符号と「次にそのビットが 1 になる条件」を直接書く形は、ディジタル回路設計の一般的な作法である。

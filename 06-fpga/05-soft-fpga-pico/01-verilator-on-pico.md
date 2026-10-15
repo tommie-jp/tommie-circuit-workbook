@@ -282,6 +282,31 @@ MicroPython からは Verilator の C++ を呼べないからである。
 差の多くは、ランタイムが `<iostream>` と `<sstream>` から引き込む C++ の標準ライブラリ (文字列の書式・ロケールなど) である。
 どちらも Pico 2 のフラッシュ (4 MB) には収まる。ランタイムを削る話は 5-13 に置く。
 
+## シミュレーションでの確かめ (対象外を含む)
+
+手元には本文の Docker イメージ (`sfa-dev:local`、`wb-pico-sdk`) と Verilator 5.048 が無い。代わりに、手元の Pico SDK 2.2.0・arm-none-eabi-gcc 13.2.1・
+Verilator 5.042 で、2-7 の `blink.v` と本文の `main.cpp`・`CMakeLists.txt`・`pico_tls.cpp` を使ってビルドし直した。
+`stub_mutex.h`・`cxx_minimal.cpp` は手元の Soft-FPGA-Reversi (`5be3b16`) の `firmware/src/` のもの。
+`verilated.cpp` は 5.048 用で 5.042 のヘッダでは通らないため、5.042 の `verilated.cpp` に表の 3 と同じ趣旨の直し
+(`<iostream>`・`<sstream>` を外し、文字列ストリームを固定の文に替える) を当てた写しを使った (`sim/make-pico-runtime.py`)。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| C++ への変換 (`-Wall`) | 警告なし、`v_blink/` に C++ が 5 つ | 警告なし、5 つ (Verilator 5.042) | 合った |
+| ビルド | エラーも警告もなし | エラーなし | 合った |
+| `pico_tls.cpp` を外すと | リンクで `undefined reference to '__aeabi_read_tp'` | 同じエラー | 合った |
+| 回路の `.o` の text | 合わせて約 1.6 KB | 1 575 バイト (40 + 472 + 136 + 723 + 204) | 合った |
+| `thread_local` の置き場 | `.tdata` 0 バイト、`.tbss` 0x44 バイト、`__tls_base` は `.tbss` の頭 | `.tdata` 0、`.tbss` 0x44、`__tls_base` = `.tbss` の頭 (20001ac0) | 合った |
+| `.uf2` の大きさ | 92 160 バイト | 91 648 バイト (−0.6 %) | 近い値 (版の差) |
+| プログラムの大きさ | text 49 828・bss 2 308 バイト | text 49 508・bss 2 276 バイト | 近い値 (版の差) |
+| ランタイム (`verilated.cpp.o`) の text | 約 64 KB | 57 546 バイト | 近い値 (版の差。5.048 の写しではない) |
+
+確かめられなかったもの。
+
+- Pico 2 への書き込みと動作 (実機)。5-2 に続く
+- Verilator 5.048・`sfa-dev`・`wb-pico-sdk` でのビルドそのもの。別の手順の `.uf2` 599 040 バイトも、手元に 5.048 が無いので再現していない
+- Soft-FPGA-Reversi の `verilated.cpp` が 5.048 のランタイムに当てた直しの範囲 (5-13 の `diff`)
+
 ## 出典
 
 自作。Pico SDK でビルドする手 (`stub_mutex.h`・`cxx_minimal.cpp`・Pico 向けに直した `verilated.cpp`、RTTI を有効にする) は

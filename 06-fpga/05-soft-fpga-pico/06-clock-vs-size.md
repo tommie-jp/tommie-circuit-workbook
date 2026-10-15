@@ -349,6 +349,32 @@ trigger: AUX rising at 0s
 - 小さな 4 つの回路の差が、PC と同じように小さいか
 - `many` で 1 クロックがどれだけ伸びるか。5-7 でクロックを固定するとき、周期はいちばん重い回路の 1 クロックより長くとる必要がある (5-9)
 
+## シミュレーションでの確かめ (対象外を含む)
+
+yosys 0.33 (`synth_gowin`)、Verilator 5.042、手元の Pico SDK 2.2.0 で確かめた。`counter.v` (2-4)・`blink.v` (2-7)・`TD4.v` (5-8) と本文の `many.v`・
+`models.h`・`clock56.cpp` を使った。主ループの切り替えは替え玉の GPIO で PC で回した (`sim/06-clock-vs-size.v`・`sim/06-clock-vs-size-pc.cpp`)。
+`.uf2` と `arm-none-eabi-size` の値は、手元の Pico SDK 2.2.0 と arm-none-eabi-gcc 13.2.1 に、Verilator 5.042 のヘッダと、
+5.042 の `verilated.cpp` に 5-1 の表の 3 と同じ趣旨の直しを当てた写し (`sim/make-pico-runtime.py` で作る) を組み合わせて、
+本文の `.cpp` と `.v` から作り直した。本文は Verilator 5.048 (`sfa-dev`) なので、バイト数は 1 % ほど小さく出る。近い値として見る。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (4 つ、`-GW=8/32`、`-GCLK_HZ=1000`、既定の N = 16、`-GN=256`) | 警告 0 件 | 警告 0 件 | 合った |
+| 8 ビットのカウンタ FF / LUT・MUX / ALU | 8 / 0 / 8 | DFFR 8、ALU 8、LUT 0 | 合った |
+| 32 ビットのカウンタ | 32 / 0 / 32 | DFFR 32、ALU 32、LUT 0 | 合った |
+| TD4 | 12 / 58 / 8 | FF 12 (DFFC 4 + DFFCE 8)、LUT 46 + MUX2 12 = 58、ALU 8 | 合った |
+| `blink` (CLK_HZ = 1000) | 10 / 7 / 9 | FF 10 (DFFR 9 + DFFRE 1)、LUT 6 + MUX2 1 = 7、ALU 9 | 合った |
+| `many` (N = 256) の FF | 8192 (計算: 32 × 256) | 計算どおり (yosys では合成していない) | 計算値として合った |
+| `many` (N = 16) | 表では「—」 | 参考: FF 497、ALU 497、LUT4 431 (合成で一部が省かれる) | 参考 |
+| DIP の選択 (SW1〜SW3 → 回路) | 000 = counter8、001 = counter32、010 = TD4、011 = blink、1xx = many | `read_sel()` で 0・1・2・3・4 になり、それぞれの回路が回った | 合った |
+| AUX の周期 | 1000 クロックごとに反転 | 4000 周で 4 回 (どの回路も) | 合った |
+| `.uf2` の大きさ | 107 008 バイト | 105 984 バイト (版の差) | 近い値 |
+
+確かめられなかったもの。
+
+- 「PC で 1 クロック」の ns の列。CPU に依る参考値で、ここでは測り直していない (本文も Pico 2 の値ではないと書いてある)
+- Pico 2 での 1 クロックの時間 (実機)。「見るべき値」の表は空のまま
+
 ## 出典
 
 自作。TD4 は [Soft-FPGA-TD4](https://github.com/tommie-jp/Soft-FPGA-TD4) (元は asfdrwe の [simpleTD4](https://github.com/asfdrwe/simpleTD4)、MIT) を 5-8 で直したもの。

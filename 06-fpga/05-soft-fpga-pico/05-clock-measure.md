@@ -360,6 +360,31 @@ trigger: CLK rising at 0s
 測った周波数は 5-6 で回路を替えたときの基準になる。2-7 の `blink` をそのまま Pico 2 で回すと、点滅の周期は
 `CLK_HZ` ÷ (測った周波数) 倍だけずれる (計算で出せる)。これを決まった周期に直すのが 5-7。
 
+## シミュレーションでの確かめ (対象外を含む)
+
+手元の Pico SDK 2.2.0 と Verilator 5.042 で確かめた。`counter.v` (2-4) を `-GW=8` で C++ にし、本文の `board.h`・`clock55.cpp` を
+替え玉の GPIO (`sim/pcstub/`) で PC で回した (`sim/05-clock-measure-pc.cpp`)。PC 用の `clock55_pc.cpp` は本文の `.cpp` の `while (true)` を `while (g_run())` に、`int main()` を `void target_main()` に `sed` で替えた物で、
+`sim/*-pc.cpp` はこれをインクルードして 2500 周回す。他の題の `*-pc.cpp` も同じ作り方。
+`.uf2` と `arm-none-eabi-size` の値は、手元の Pico SDK 2.2.0 と arm-none-eabi-gcc 13.2.1 に、Verilator 5.042 のヘッダと、
+5.042 の `verilated.cpp` に 5-1 の表の 3 と同じ趣旨の直しを当てた写し (`sim/make-pico-runtime.py` で作る) を組み合わせて、
+本文の `.cpp` と `.v` から作り直した。本文は Verilator 5.048 (`sfa-dev`) なので、バイト数は 1 % ほど小さく出る。近い値として見る。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`counter.v -GW=8`) | 警告なし | 警告 0 件 | 合った |
+| AUX の反転 | 1000 クロックごと、周期は 2000 クロック | 1000 周と 2000 周で反転 (2500 周で 2 回) | 合った |
+| LED = `count[7:4]`、GP2 が bit3 | 並びが逆 (`rev4`) | 2500 周後の `count[7:4]` = 0xC に対し GP2〜GP5 = 1・1・0・0 (GP2 が上の桁)、GP18〜GP21 = 0xC | 合った |
+| `.uf2` の大きさ | 93 696 バイト | 92 672 バイト (版の差) | 近い値 |
+
+気付いたこと (本文の数字には影響しない)。
+
+- リセットのあと `clk` が 1 のままなので、主ループの最初の立ち上がりの `eval()` は立ち上がりにならない。`count` は周回数より 1 少ない。5-6 の `Models::reset()` も同じ
+- 「見るべき値」の表は測って書く欄なので、空欄のまま
+
+確かめられなかったもの。
+
+- 1 クロックの時間・周波数・H と L の幅・ばらつき (実機で AD3 の Logic を使う)
+
 ## 出典
 
 自作。Soft-FPGA を Pico 2 で動かす方式は [Soft-FPGA-TD4](https://github.com/tommie-jp/Soft-FPGA-TD4)、
