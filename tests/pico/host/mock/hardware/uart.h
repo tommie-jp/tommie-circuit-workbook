@@ -9,7 +9,7 @@ static inline uint uart_init(uart_inst_t *u, uint b) { M.uart_baud[u->n] = b; re
 static inline void uart_set_format(uart_inst_t *u, uint d, uint s, uart_parity_t p) { M.uart_bits[u->n] = d; M.uart_stop[u->n] = s; M.uart_parity[u->n] = (uint)p; }
 static inline void uart_set_hw_flow(uart_inst_t *u, bool a, bool b) { (void)u; (void)a; (void)b; }
 static inline void uart_set_fifo_enabled(uart_inst_t *u, bool e) { (void)u; (void)e; }
-static inline void uart_putc_raw(uart_inst_t *u, char c) { (void)u; if (M.ntx < 1024) { M.uart_tx_t[M.ntx] = M.now_us; M.uart_tx[M.ntx++] = (uint8_t)c; } }
+static inline void uart_putc_raw(uart_inst_t *u, char c) { if (M.ntx < 1024) { M.uart_tx_t[M.ntx] = M.now_us; M.uart_tx_n[M.ntx] = (uint8_t)u->n; M.uart_tx[M.ntx++] = (uint8_t)c; } }
 static inline void uart_putc(uart_inst_t *u, char c) { uart_putc_raw(u, c); }
 static inline void uart_puts(uart_inst_t *u, const char *s) { while (*s) uart_putc_raw(u, *s++); }
 static inline bool uart_is_readable(uart_inst_t *u) { (void)u; return M.rx_pos < M.nrx; }

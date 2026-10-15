@@ -31,6 +31,8 @@ B は `pip install rp2040-pio-emulator==0.88.0` が無ければ SKIP する。
 - C: `host/cases/<章>-<題>.c` を書く。1 行目に `// program: <out/pico からの相対パス>`。
   `mock_run(予算 µs)` で本文の `main` を仮想時刻で動かし、`M` (GPIO の変化・PWM・ADC・I2C・UART など) を調べる。
   使えない API はモックにない。`host/mock/hardware/*.h` に足す (本物と同じ引数で、記録するだけ)
+- stdio (USB・UART0) で話すプログラムは、`M.in` と `M.nin` に入力を置く。`getchar_timeout_us` が 1 字ずつ返し、使い切ると止まる。
+  出力 (`printf`・`stdio_put_string`) は `M.out` に溜まる。UART の部品に書いた字は `M.uart_tx` に、どの UART かは `M.uart_tx_n` に入る (12-2)
 - MicroPython: `upy/cases/<章>-<題>.py` に `PROGRAM`・`BUDGET_US`・`setup(S)`・`check(S, out, ok)`。
   C 版と同じ数を期待値にする
 - 期待値は、題の「見るべき値」の表の数と同じ量で書く。レジスタの数にしない

@@ -61,7 +61,19 @@ int mock_printf(const char *fmt, ...) {
     if (n > 0) { M.nout += (uint)n; if (M.nout >= sizeof M.out) M.nout = sizeof M.out - 1; }
     return n;
 }
-int getchar_timeout_us(uint32_t us) { advance(us); return PICO_ERROR_TIMEOUT; }
+void mock_uart_wait(void);
+int getchar_timeout_us(uint32_t us) {
+    if (M.nin == 0) { advance(us); return PICO_ERROR_TIMEOUT; }
+    if (M.in_pos >= M.nin) mock_uart_wait();    /* 入力を使い切った */
+    advance(87);                                /* 115200 bps の 1 字 (10 bit) */
+    return (unsigned char)M.in[M.in_pos++];
+}
+int stdio_put_string(const char *s, int len, bool newline, bool cr_translation) {
+    (void)cr_translation;
+    for (int i = 0; i < len && M.nout < sizeof M.out - 2; i++) M.out[M.nout++] = s[i];
+    if (newline && M.nout < sizeof M.out - 1) M.out[M.nout++] = '\n';
+    return len;
+}
 
 double mock_pwm_period_s(uint s) {
     double top = M.pwm[s].wrap + 1.0;

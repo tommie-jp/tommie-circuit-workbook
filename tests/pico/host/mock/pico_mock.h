@@ -56,7 +56,8 @@ bool add_repeating_timer_ms(int32_t d, repeating_timer_callback_t cb, void *u, r
 /* ---- stdio ---- */
 void stdio_init_all(void);
 int mock_printf(const char *fmt, ...);
-int getchar_timeout_us(uint32_t us);
+int getchar_timeout_us(uint32_t us);   /* M.in に字があれば 1 字返す。使い切ったら止まる */
+int stdio_put_string(const char *s, int len, bool newline, bool cr_translation);
 #define PICO_ERROR_TIMEOUT (-1)
 #define printf mock_printf
 
@@ -70,14 +71,15 @@ typedef struct {
     bool pull_up[MOCK_NGPIO];
     uint8_t drive[MOCK_NGPIO];
     gpio_event_t ev[8192]; uint nev;
-    char out[16384]; uint nout;        /* printf の出力 */
+    char out[16384]; uint nout;        /* printf・stdio_put_string の出力 */
+    char in[1024]; uint nin, in_pos;   /* stdio の入力 (getchar_timeout_us が読む) */
     /* PWM */
     struct { float clkdiv; uint wrap; uint level[2]; bool enabled; bool phase_correct; } pwm[12];
     /* ADC */
     bool adc_inited; uint adc_input; uint16_t adc_value; uint adc_gpio_mask;
     /* I2C / UART / SPI */
     uint i2c_baud[2]; uint uart_baud[2]; uint uart_bits[2], uart_stop[2], uart_parity[2];
-    uint8_t uart_tx[1024]; uint ntx; uint64_t uart_tx_t[1024];
+    uint8_t uart_tx[1024]; uint ntx; uint64_t uart_tx_t[1024]; uint8_t uart_tx_n[1024];  /* uart_tx_n はどの UART か */
     uint8_t uart_rx[1024]; uint nrx, rx_pos;
     uint8_t i2c_reply[16]; uint n_i2c_reply;
     uint i2c_writes, i2c_reads;
