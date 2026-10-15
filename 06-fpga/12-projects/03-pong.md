@@ -20,7 +20,7 @@ device: WEB
 この題では、同じ作りの Pong を Verilog で書き、ブラウザの soft-fpga (第 4 章) で遊ぶ。4-7 の画面のボタンでラケットを動かし、
 回路が出す画素を JS が `<canvas>` に並べる。**命令を読む回路 (CPU) はどこにも無い。**
 
-**動くページ: <https://tommie-jp.github.io/soft-fpga/91-pong/>** (自分でビルドしなくても、ブラウザで開けば遊べる。W・S が左、↑・↓ が右のラケット、AUTO は回路が打つ。ソースは [soft-fpga の examples/91-pong](https://github.com/tommie-jp/soft-fpga/tree/main/examples/91-pong))
+**動くページ: <https://tommie-jp.github.io/soft-fpga/91-pong/>** (自分でビルドしなくても、ブラウザで開けば遊べる。W・S が左、↑・↓ が右のラケット、AUTO は回路が打つ。下に Logic Analyzer が付いていて、球・ラケット・点の動きが波形で見える (「Logic Analyzer で見る」)。ソースは [soft-fpga の examples/91-pong](https://github.com/tommie-jp/soft-fpga/tree/main/examples/91-pong))
 
 ## 決めたこと
 
@@ -493,6 +493,29 @@ cursors: [6us, 78us]
 - `RACKET` と `BALL` は、ラケットと球の比較器の出力 (`racket` と `ball`)。`PIXEL` はそれと壁・ネット・点の OR。60 行めのネット (239 µs) は球と重なるので、`PIXEL` は `BALL` と同じ形になる
 - X1 (6 µs) は左のラケットの左端、X2 (78 µs) は球の左端。ΔX の 72 µs が 72 画素で、`bx` − 6 = 78 − 6 と同じ
 - 1 画面は 19 200 µs (この目盛で)。ブラウザの描き替えに合わせて回すと、実際の時間はそれと関係なく 1 画面が約 16.7 ms になる
+
+## Logic Analyzer で見る
+
+公開ページの下には、soft-fpga の Logic Analyzer (第 4 章の 4-2 と同じ画面) が付いている。本文の `pong.v` は変えず、ハーネスが Verilator の `rootp` から内部のレジスタを読んで、
+1 サンプル 3 word の ring buffer に記録している (この本文の `harness.cpp` は、記録を省いた最小の版)。
+
+記録のしかたは、ページの「Logic Analyzer の記録」で 2 通りから選ぶ。
+
+| 記録 | 1 サンプル | 見えるもの | 使いどころ |
+| --- | --- | --- | --- |
+| 1 画面ごと (既定) | 画面の最後の画素の次のクロック | `bx` `by` `left` (球)、`pl` `pr` (ラケット)、`sl` `sr` (点)、`hit_l` `hit_r` `out_l` `out_r` (出来事) | 球の動きと点が増える瞬間。4096 画面ぶん (約 68 秒) が残る |
+| 1 クロックごと | 毎クロック | `h` `v` `pixel` `line_end` `frame_end` | 走査線。1 画面は 19 200 クロックで、リングは 4096 なので約 25 行ぶん |
+
+見方の例:
+
+- **球が左のラケットで返った瞬間**: 「1 画面ごと」で `hit_l` のパルスの次の画面で、`left` が 1 から 0 になり、`bx` が増え始める
+- **点が入った瞬間**: `out_l` のパルスの次の画面で `sr` が 1 増え、`bx`・`by` が真ん中 (78・58) に戻る
+- **縦に速くなる**: ラケットの端で返すと `fast` が 1 になり、`by` が 1 画面に 2 ずつ動く
+- **形の縁**: 「1 クロックごと」で `pixel` の立ち上がりにトリガーすると、行の中で壁・ラケット・ネット・球に入った所が見える。`h` が 0〜159 を数える傾斜と、`line_end` で `v` が 1 増える段も見える
+
+Run / Pause と、トリガーでの Freeze (Trigger ボタン) もほかの例と同じ。記録は 1 画面ごとに `run_frame` が進めるので、1 クロックごとのモードで Freeze した画面は、トリガーが掛かった画素で止まる。
+この図は、ブラウザで開いて確かめた (Playwright の Chromium、1 画面ごとのモードで 3 秒に約 180 サンプル、1 クロックごとのモードで 1.5 秒に約 180 万サンプル)。
+実機の波形ではなく、PC の Verilator の模型の波形である。
 
 ## 見るべき値
 
