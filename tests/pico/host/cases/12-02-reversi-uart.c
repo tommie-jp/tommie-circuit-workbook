@@ -1,13 +1,14 @@
 // program: 06-fpga/12-projects/02-reversi-uart-1.c
 // 12-2: PC とは stdio (USB と UART0) で話し、リバーシ UART プロトコルの行に答える。
 // 受けた行の写しを UART1 (GP4、115200 8N1) に出し、行を受け終えてから答えを送り始めるまで GP2 を H にする。
+// 状態を GP16 (対局中)・GP17 (自分が白)・GP18 (直前の行に誤りを返した) に出す。
 // 本文の主ループを SOFT_FPGA なし (C の計算) で動かす。回路の版の答えは 12-2 の PC の試験と picoemu で見る。
 #include <string.h>
 #include "pico/stdlib.h"
 #include "hardware/uart.h"
 
-#define IN "PI\r\nVE\r\nSB\r\nMOe3\r\nXB\r\npi\r\nPI\nMOz9\r\nMOa1\r\nEB\r\nPA\r\n\r\nZZ\r\n"
-#define NLINES 13
+#define IN "PI\r\nVE\r\nSB\r\nMOe3\r\nXB\r\npi\r\nPI\nMOz9\r\nMOa1\r\nEB\r\nPA\r\n\r\nZZ\r\nSW\r\nEW\r\n"
+#define NLINES 15
 
 int main(void) {
     mock_reset(0);
@@ -42,5 +43,28 @@ int main(void) {
     for (uint i = 0; i < M.nev; i++) if (M.ev[i].pin == 2 && M.ev[i].level) rise++;
     mock_check(rise == NLINES, "GP2 が H になった回数 %u (期待 %u)", rise, NLINES);
     mock_check(!M.level[2], "GP2 は最後に L");
+
+    // 状態の LED: 行ごとの変わり目の並び (ピン・値)
+    const struct { uint pin; bool v; } want_ev[] = {
+        {16, 1},            // SB: 対局中
+        {18, 1},            // pi: -02 (CR の無い PI・MOz9・MOa1 の誤りの間は 1 のまま)
+        {16, 0}, {18, 0},   // EB: 対局が終わる。誤りでない行 (同じ行の中は GP16・GP17・GP18 の順に書く)
+        {18, 1},            // PA: -06
+        {18, 0},            // 空の行: 答えないが誤りでもない
+        {18, 1},            // ZZ: -01
+        {16, 1}, {17, 1}, {18, 0},   // SW: 自分が白で対局中
+        {16, 0}, {17, 0},   // EW: 対局が終わる
+    };
+    const uint nw = sizeof want_ev / sizeof want_ev[0];
+    uint k = 0;
+    bool same = true;
+    for (uint i = 0; i < M.nev; i++) {
+        uint pin = M.ev[i].pin;
+        if (pin < 16 || pin > 18) continue;
+        if (k >= nw || want_ev[k].pin != pin || want_ev[k].v != M.ev[i].level) same = false;
+        k++;
+    }
+    mock_check(same && k == nw, "GP16〜GP18 の変わり目の並びが期待どおり (%u 回、期待 %u 回)", k, nw);
+    mock_check(M.dir_out[16] && M.dir_out[17] && M.dir_out[18], "GP16〜GP18 を出力にする");
     return mock_report();
 }

@@ -2,6 +2,7 @@
 // PC とは stdio で話す。stdio は USB (CDC) と UART0 (GP0 が TX、GP1 が RX、115200 bps 8N1) の両方に出し、両方から受ける。
 // Debug Probe が無ければ USB だけ、あれば Probe の UART でも同じに話せる。リバーシ UART プロトコル v0.2 の一部を話す。
 // AD3 で見るために、受けた行の写しを UART1 (GP4) に出し、行を受け終えてから答えを送り始めるまで GP2 を H にする。
+// 内部の状態を GP16〜GP18 に出し、LED で見せる (対局中・自分が白・直前の行に誤りを返した)。AD3 でも読む。
 // 盤面の計算 (合法手・裏返す石・最善手) は accel_* の 3 つの関数に任せる。
 // SOFT_FPGA を定義したビルドでは accel.cpp が 12-1 の回路 (Verilator の C++) で答え、
 // 定義しないビルドでは下の C の関数が同じ答えを出す (比べるためと、PC の試験のため)。
@@ -16,6 +17,9 @@
 #define COPY_UART uart1
 #define PIN_COPY  4                     // UART1 の TX: 受けた行の写し (AD3 用)
 #define PIN_BUSY  2                     // 行を受け終えてから答えを送り始めるまで H (AD3 用)
+#define PIN_GAME  16                    // 対局中 (緑の LED)
+#define PIN_WHITE 17                    // 対局中で、自分が白 (黄の LED)
+#define PIN_ERR   18                    // 直前の行に誤り (-0x) を返した (赤の LED)
 #define LINE_MAX  80                    // 受ける 1 行の最大 (CR LF を除く)
 
 uint64_t accel_legal(uint64_t own, uint64_t opp);
@@ -72,12 +76,20 @@ static int      me;                     // 0 = 黒、1 = 白
 static unsigned moves;                  // 自分が考えた回数
 static unsigned long total_clocks;      // 回路が探すのに使ったクロックの合計
 static uint64_t total_us;               // 考えるのに使った時間の合計
+static bool     last_err;               // この行に誤りを返したか
 
 static void send(const char *s) {       // 1 行送る。行の終わりは CR LF
     char buf[LINE_MAX + 3];
     int n = snprintf(buf, sizeof buf, "%s\r\n", s);
     gpio_put(PIN_BUSY, 0);              // 答えを送り始める
+    last_err = (s[0] == '-');
     stdio_put_string(buf, n, false, false);  // 改行の変換をしない (CR LF をそのまま送る)
+}
+
+static void show_state(void) {          // 状態を LED に出す
+    gpio_put(PIN_GAME, state == WAIT_OPP);
+    gpio_put(PIN_WHITE, state == WAIT_OPP && me == 1);
+    gpio_put(PIN_ERR, last_err);
 }
 
 static void copy_line(const char *line, unsigned len, bool had_cr) {  // 受けた行を UART1 に写す
@@ -157,8 +169,11 @@ int main(void) {
     uart_init(COPY_UART, BAUD);
     uart_set_format(COPY_UART, 8, 1, UART_PARITY_NONE);
     gpio_set_function(PIN_COPY, GPIO_FUNC_UART);
-    gpio_init(PIN_BUSY);
-    gpio_set_dir(PIN_BUSY, GPIO_OUT);
+    static const uint OUT_PINS[] = {PIN_BUSY, PIN_GAME, PIN_WHITE, PIN_ERR};
+    for (unsigned i = 0; i < sizeof OUT_PINS / sizeof OUT_PINS[0]; i++) {
+        gpio_init(OUT_PINS[i]);
+        gpio_set_dir(OUT_PINS[i], GPIO_OUT);
+    }
     send("RE");                                               // 起きたことを知らせる
 
     char line[LINE_MAX];
@@ -169,10 +184,12 @@ int main(void) {
         if (c == PICO_ERROR_TIMEOUT) continue;
         if (c == '\n') {                                     // 行の終わり
             gpio_put(PIN_BUSY, 1);
+            last_err = false;
             copy_line(line, len, cr);
             if (too_long) send("-00 too long");
             else          handle_line(line, len, cr);
             gpio_put(PIN_BUSY, 0);                            // 答えない行 (SW・EB など) もここで L
+            show_state();
             len = 0; cr = false; too_long = false;
         } else if (c == '\r') {
             cr = true;
