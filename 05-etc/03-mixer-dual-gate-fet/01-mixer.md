@@ -582,6 +582,13 @@ IF OUT の 455 kHz は、RF −30 dBm・LO +7 dBm のとき **約 −28.6 dBm (�
 - ミキサーの出力にはセラミックフィルタ 1 つ。RF・LO・和周波を落とす深さは、フィルタの型番で決まる
 - 3SK291 はゲートが静電気に弱い。取り扱いに注意する
 
+## LTspice での確かめ
+
+特性は ngspice の代用モデルによる解析 ([3-2](02-simulation.md)) で、変換利得の 2 点 (LO +7 dBm、R7 あり・なし) だけを LTspice でも解いて突き合わせた。
+信号源 0 Ω の条件で、ngspice と LTspice は R7 ありで +1.24 / +1.20 dB、R7 なしで +6.27 / +6.20 dB と 0.1 dB 以内で合った
+(本文の +1.4 dB は RF の源が 50 Ω の条件。ネットリストと表は [../04-mixer-2sc1815/sim/ltspice/](../04-mixer-2sc1815/sim/ltspice/README.md)、デッキは `fet_r7.cir` `fet_nor7.cir`)。
+同じ代用モデルを 2 つの解析器で解いた照合で、モデルや実機の正しさの確認ではない。
+
 ## 出典
 
 - [3SK291 (RS)](https://au.rs-online.com/web/p/mosfets/7560385) — VDS 最大 12.5 V・ID 最大 30 mA

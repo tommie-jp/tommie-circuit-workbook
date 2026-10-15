@@ -504,6 +504,13 @@ RF −30 dBm・LO 0 dBm のとき、IF OUT は 10.4 mV<sub>p</sub> (−29.7 dBm)
   その解析は [sim/main.py](sim/main.py)・[sim/diff_resistive.cir](sim/diff_resistive.cir) に残した
 - RE を分けたので、RF の入力 1 dB 圧縮点は約 −13 dBm に下がった (1 石の 4-1 と同じくらい)。強い放送局の近くでは RF の前に減衰器か同調回路を置く
 
+## LTspice での確かめ
+
+差動対のミキサーの変換利得を、LO 0 dBm で R7 あり・なしの 2 点、LTspice でも解いて ngspice と突き合わせた。
+R7 ありは +0.34 / +0.33 dB (ミラーの出力で RF は IF の −35.9 / −36.1 dB)、R7 なしは +5.05 / +5.03 dB (RF の漏れ −40.6 / −40.6 dB) と、利得は 0.1 dB 以内で合い、
+表の「利得 +0.3 dB・RF の漏れ 36 dB 低い」と合う (RF −30 dBm、信号源 0 Ω。ネットリストと表は [sim/ltspice/](sim/ltspice/README.md)、デッキは `diffnew_r7.cir` `diffnew_nor7.cir`)。
+同じ代用モデルを 2 つの解析器で解いた照合で、モデルや実機の正しさの確認ではない。
+
 ## 出典
 
 - [9-12 バランスドミキサー](../../01-circuits/09-rf/12-balanced-mixer.md) — 掛け算・スイッチ・ダブルバランスの説明 (この題はシングルバランス)

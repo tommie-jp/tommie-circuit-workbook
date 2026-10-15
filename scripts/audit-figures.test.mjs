@@ -44,6 +44,7 @@ test('classifies the LTspice section of an entry with a circuit', () => {
   const fence = '```circuit\nparts:\n```\n';
   assert.equal(ltspiceStatus('# x\n'), null);
   assert.equal(ltspiceStatus(fence), 'missing');
+  assert.equal(ltspiceStatus(`---\nbook: fpga\n---\n${fence}`), null);
   assert.equal(ltspiceStatus(`${fence}## LTspice での確かめ\n`), 'checked');
   assert.equal(ltspiceStatus(`${fence}### LTspice での確かめ (対象外とした範囲)\n`), 'excluded');
 });

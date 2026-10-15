@@ -33,11 +33,6 @@ board: BB
 - **100 kHz で組む理由**: ラジオの AGC は IF (455 kHz) や中波 (0.5〜1.6 MHz) で働くが、原理は搬送波の周波数に依らない。**ブレッドボードの
   範囲 (3 MHz 以下) の中で、AD3 のオシロにそのまま入る 100 kHz** にした (9-11 と同じ)
 
-**計算の方法**: 下の値は、LTspice の過渡解析 (最大刻み 250 ns) で、入力ごとに 0.3 s 走らせ、最後の 10 ms の出力の Vpp を読んだ。
-時定数は階段状の入力 (10 mV → 100 mV → 10 mV、各 250 ms) の G の電圧から読んだ。AGC なしは C<sub>C</sub> を 1 pF にして検波を外した値。
-モデルは 05-etc 第 4 章と同じ 2SC1815 の代用 (IS = 2 × 10<sup>−14</sup>・BF = 250・VAF = 100・RB = 30 Ω・CJE = 8 pF・CJC = 2 pF・TF = 2 ns) と、
-1N4148 (IS = 2.52 nA・N = 1.752・RS = 0.568 Ω)。デッキは `sim/agc.cir` `sim/agc-step.cir` `sim/agc-am.cir`。
-
 ## 回路図
 
 ```circuit
@@ -297,6 +292,13 @@ notes:
 | D1・D2 | スイッチングダイオード | 1N4148 |
 | Q1 | NPN トランジスタ | 2SC1815 |
 | — | 信号源・オシロ・電源 | Analog Discovery 3 (W1、CH1・CH2、V+ 5 V) |
+
+## LTspice での確かめ
+
+**計算の方法**: 本文の値は、LTspice の過渡解析 (最大刻み 250 ns) で、入力ごとに 0.3 s 走らせ、最後の 10 ms の出力の Vpp を読んだ。
+時定数は階段状の入力 (10 mV → 100 mV → 10 mV、各 250 ms) の G の電圧から読んだ。AGC なしは C<sub>C</sub> を 1 pF にして検波を外した値。
+モデルは 05-etc 第 4 章と同じ 2SC1815 の代用 (IS = 2 × 10<sup>−14</sup>・BF = 250・VAF = 100・RB = 30 Ω・CJE = 8 pF・CJC = 2 pF・TF = 2 ns) と、
+1N4148 (IS = 2.52 nA・N = 1.752・RS = 0.568 Ω)。デッキは `sim/agc.cir` `sim/agc-step.cir` `sim/agc-am.cir`。
 
 ## 出典
 

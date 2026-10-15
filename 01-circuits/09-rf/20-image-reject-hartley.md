@@ -471,7 +471,7 @@ markers: [49.8k, 498k, 1045.8k]
 | W1 を止める | 49.8 kHz が消える (掛ける相手が無い) |
 | 出力の直流 | VREF と同じ 2.5 V (CH2 は VREF との差なので 0 V) |
 
-## LTspice で確かめた値
+## LTspice での確かめ
 
 デッキは `sim/20-image-reject-hartley.cir` (過渡解析。LO の網・SA612 の出力・MCP6002・IF の網・反転加算まで回路図どおり)。
 **SA612 は掛け算の模型で、実測ではない仮定**: PIN 4 の IF の peak を 70.8 mV × (LO の peak ÷ 0.25 V) (RF 10 mV のとき。9-12 の変換利得 17 dB の目安)、出力は 1.5 kΩ、PIN 6 の入力は 10 kΩ と置いた。
