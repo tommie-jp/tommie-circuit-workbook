@@ -44,6 +44,8 @@
 - 書きながら図を見るには VS Code 拡張 tommie-fence
   ([Release](https://github.com/tommie-jp/tommie-fence/releases) の `.vsix`) を入れて
   Markdown のプレビューを開く (プレビューでは画像の行を `.vscode/hide-github-figures.css` で隠す)
+- フェンスの字は YAML。読み方・直し方の要点は
+  [YAML の書き方](https://github.com/tommie-jp/tommie-fence/blob/main/examples/yaml.ja.md)
 - 手元で SVG に書き出すなら `npm ci && npm run render` (`out/` に出る。コミットしない)
 
 ## 書き方
