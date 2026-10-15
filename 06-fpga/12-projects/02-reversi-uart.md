@@ -43,7 +43,7 @@ UART を 115200 bps のビットのまま Verilog で読まないのは、Soft-F
 | PC とのつなぎ | 既定は Pico 2 の USB (CDC。PC からはシリアルポートに見える)。Debug Probe があれば、その UART の端子 (3.3 V) を GP0・GP1 につないでもよい | Debug Probe を持っていない人でも組めるようにする。Probe は持っていれば便利 (書き込み・PC が送った線そのものを AD3 で読める) なので、外さずに残す |
 | stdio | `pico_enable_stdio_usb` と `pico_enable_stdio_uart` を両方有効にする。出す字は USB と UART0 の両方に出て、受ける字はどちらからでも受ける | 1 つの `.uf2` で 2 つのつなぎ方に応じる。UART0 は GP0 が TX、GP1 が RX、115200 bps、8N1 (プロトコルの §4 の例の速さ。SDK の既定) |
 | 改行 | `stdio_put_string(…, false, false)` で送り、stdio の改行の変換 (LF を CR LF にする) を通さない | プロトコルは CR LF だけを許す (§5)。`printf("…\r\n")` だと変換で `\r\r\n` になる |
-| 受けた行の写し | 受けた行を、そのまま UART1 の TX (GP4、115200 bps 8N1) に出す | **AD3 では USB の中身を読みにくい** (USB は D+・D− の差動 12 Mbps で、線を取り出すにはケーブルを割くか変換の基板が要る。WaveForms の Logic の読み下しの一覧 (UART・SPI・I2C・CAN・I2S など) にも USB は見当たらない)。PC → Pico 2 の行を AD3 で読むために、Pico 2 が受けた字を UART で出し直す |
+| 受けた行の写し | 受けた行を、そのまま UART1 の TX (GP4、115200 bps 8N1) に出す | **AD3 では USB の中身を読めない** (USB は D+・D− の差動 12 Mbps で、線を取り出すにはケーブルを割くか変換の基板が要る。WaveForms 3.24.4 の Logic の読み下しの一覧 (UART・SPI・I2C・CAN・I2S など 19 種) にも USB は無い)。PC → Pico 2 の行を AD3 で読むために、Pico 2 が受けた字を UART で出し直す |
 | 時間の印 | 行の LF を受けてから答えを送り始めるまで GP2 を H にする | USB には 1 ms ごとの区切りがあり、PC での受け取りの時刻が揺れる。Pico 2 が考えた時間は、この印の幅で測る |
 | GP1 | プルアップする | Debug Probe をつながないと GP1 (UART0 の RX) が浮き、雑音を字として読むおそれがある |
 | 状態の LED | GP16 = 対局中 (緑)、GP17 = 対局中で自分が白 (黄)、GP18 = 直前の行に誤り (`-0x`) を返した (赤)。どれも 330 Ω を通して LED を光らせ、AD3 でも読む | 主ループの中の状態 (対局しているか・どちらの色か・行を正しく受けたか) を、PC の画面を見なくても分かるようにする。Pico 2 の上の列のピンを使うと、AD3 の線と交わらずに右の空いた所へ LED を置ける |
@@ -266,16 +266,21 @@ wires:
   - AD.GND -- -b19 black
   - b24 -- f27 pink [h50]
   - a23 -- f31 gray [v-10, h150]
-  - a21 -- f35 brown [v-20, h270]
+  - a21 -- f35 brown [v-20, h290]
   - AD.DIO3 -- j27 blue
   - AD.DIO4 -- j31 blue
   - AD.DIO5 -- j35 blue
+notes:
+  - text e27 green large bold: 対局中
+  - text e31 orange large bold: 自分が白
+  - text e36 red large bold: 誤り
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/breadboard/02-reversi-uart.svg)
 
 - `pico2 @ h5` は 7-3 と同じ向き。下の列は GP0 (1 番) が 5 列、GP1 (2 番) が 6 列、GND (3 番) が 7 列、GP2 (4 番) が 8 列、GP4 (6 番) が 10 列。上の列は GP16 (21 番) が 24 列、GP17 (22 番) が 23 列、GP18 (24 番) が 21 列
 - 状態の 3 本は、上の列のピンの a・b 行から、基板の上の縁を通して右の 27・31・35 列へ渡し、溝を越えて f 行に挿す。遠くへ行く線ほど外を回したので、3 本は交わらない
+- LED の上の大きな字が、その LED が示す状態 (緑 = 対局中、黄 = 自分が白、赤 = 直前の行に誤りを返した)
 - LED は g 行に横に挿す (左がアノード)。カソードの列の j 行から 330 Ω で − のレールへ落とす。AD3 の DIO3〜DIO5 は、LED のアノードの列 (27・31・35 列) の j 行に下から挿す
 - Pico 2 のピンは h 行に挿さり、同じ列の i・j 行の穴とつながる (f〜j 行は 1 つの列でつながっている)
 - **GND は − のレール (下) にまとめる。** Pico 2 の GND (j7) から − のレールへ 1 本渡し、AD3 と Debug Probe の GND はレールに挿す
@@ -821,14 +826,16 @@ Pico 2 を先に起こすと、`RE` の行は PC が開く前に出て捨てら�
 
 UART の読み下し (図4 の PC・PICO の行) は、WaveForms の Logic で次のように足す。
 
-1. Logic の窓の左上の **+** を押し、**UART** を選ぶ
-2. 開いた設定の窓で、名前 (Name) を `PC`、受ける DIO (RX) を **DIO0** にする
-3. Baud rate を **115200**、データのビット数を **8**、パリティを **None**、ストップビットを **1** にする (8N1)
-4. 書式 (Format) を **ASCII** にする。Hexadecimal にすると `0x53` のように 16 進で出る。どちらで読んでも同じ字で、`S` = 0x53、`B` = 0x42
-5. **Add** で閉じる。同じ手順をもう 1 回、名前 `PICO`・DIO1 で繰り返す
+1. 信号の一覧の上の緑の **+** の ▼ を押し、出た一覧から **UART** を選ぶ。「Add UART」の窓が開く
+2. **Name** を `PC`、**Data** を **DIO 0** にする
+3. **Polarity** は Standard、**Bits** は 8、**Parity** は None、**Stop** は 1 のまま (8N1)
+4. **Baud** を **Manual** に替え、**Rate** に **115200** を入れる。既定の Auto Arbitrary のままだと Rate は灰色で入れられない (速さを波形から推し量る)
+5. **Format** を **ASCII** にする (既定も ASCII)。Hexadecimal にすると 16 進で出る。`S` = 0x53、`B` = 0x42
+6. **Add** で閉じる。同じ手順をもう 1 回、Name `PICO`・Data **DIO 1** で繰り返す
 
-- **この手順は WaveForms の画面でも Digilent の資料でも照合していない。** 項目の名前 (Name・RX・Baud rate・Format など) は、UART の読み下しでよく使われる名前で書いた。手元の画面の名前に読み替える。決めるべき値は、DIO の番号・115200 bps・8N1・ASCII の 4 つ
-- CR (0x0D) と LF (0x0A) は字の形が無いので、図4 では 16 進で描いた。WaveForms の ASCII の表示でどう出るかは版による
+- 窓の項目の名前と並び、既定の値は、WaveForms 3.24.4 に付いているヘルプ (`doc/logic.html` の「4.6. UART」と、その「Add UART」の窓の画像) で確かめた。Format の選択肢 (ASCII・Decimal・Hexadecimal・Binary) と Baud の選択肢 (Manual・Auto Standard・Auto Arbitrary) は、同じ版の本体に入っている名前で確かめた。AD3 をつないだ画面では確かめていない
+- **Bit labels** に印を付けると、ビットの境目に赤の破線と番号 (スタートが S、ストップが P) が出る。ビットの長さを数えるときに使う
+- CR (0x0D) と LF (0x0A) は字の形が無いので、図4 では 16 進で描いた。WaveForms の ASCII の表示でどう出るかは、ヘルプに書かれていない
 - 図4 のフェンスでは、`decode:` の行の最後の `ascii` が同じ設定 (`hex` と書けば 16 進で描く)
 
 図4・図5 のレーンの名前は「信号の名前-Pico 2 のピン」(logic フェンスの名前に括弧は使えないので `-` でつなぐ)。AD3 の DIO との対応は次のとおり。
@@ -1008,4 +1015,4 @@ PC の比 (約 2.8〜3.4 倍) に近いが、実機の比は測って確かめ�
 - 行を読む所まで Verilog で書いた例: 同じリポジトリの `rtl/proto.v` (この題では C に置いた)
 - UART の部品の使い方 (`uart_init` `uart_putc_raw` `gpio_set_function`): Raspberry Pi の Pico SDK 2.2.0 の `hardware_uart`
 - stdio を USB と UART の両方に出す設定 (`pico_enable_stdio_usb` `pico_enable_stdio_uart`)、改行の変換 (`PICO_STDIO_DEFAULT_CRLF`)、`stdio_put_string`・`getchar_timeout_us`: Pico SDK 2.2.0 の `pico_stdio` と `pico_stdio_usb` (`stdio.h`・`stdio_usb.h`)
-- AD3 の Logic の読み下しの種類 (Signal・Bus・SPI・I2C・UART・CAN・I2S・Custom): Digilent の [WaveForms Reference Manual](https://digilent.com/reference/software/waveforms/waveforms-3/reference-manual)。USB の読み下しは見つからなかった (版によって増えるので、手元の WaveForms で確かめる)
+- AD3 の Logic の読み下しの種類と UART の設定 (Data・Polarity・Bits・Parity・Stop・Baud・Rate・Start・Format): WaveForms 3.24.4 に付いているヘルプ (`doc/logic.html` の「3. Signal Grid」と「4.6. UART」)。読み下しの一覧は Bus・SPI・SPI MOSI/MISO・I2C・UART・1-Wire・CAN・GPIB・HDMI CEC・I2S・JTAG・LIN・Manchester・PWM・QuadDec・SAE J1850・SWD・USART PS/2・Custom で、USB は無い
