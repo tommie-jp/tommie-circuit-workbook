@@ -78,12 +78,12 @@ Pong (1972) は、ビデオゲームが産業になる入口にあったゲー�
 
 | 項目 | 1972 年の Pong | この題の回路 |
 | --- | --- | --- |
-| 部品の数 | **7400 系の TTL の IC が 60 数個〜75 個ほど** (下の注) | yosys で LUT 310〜536 個 (道具の版による)、ALU 483〜573 個、フリップフロップ 69 個 |
+| 部品の数 | **7400 系の TTL の IC が 60 数個〜75 個ほど** (下の注) | yosys で LUT 342〜758 個 (道具の版による)、ALU 494〜578 個、フリップフロップ 75 個 (音を足す前は 310〜536、483〜573、69) |
 | CPU・プログラム | 無い | 無い |
 | 画面 | 白黒テレビ (家庭用の Hitachi、75 ドル) に、走査に同期した信号を出す | 160 × 120 画素、1 クロック 1 画素。VGA や HDMI の同期は含まない |
 | ラケット | 高さ 16 走査線。当たった位置で球の縦の速さが変わる (そのために、高価な IC の 1 つの 4 ビット加算器を足した) | 高さ 16 画素。端の 4 画素で縦に速くなる |
 | 点数 | 画面に 7 セグの形の数字で表示。Fairchild の点数用の MOS チップは 1 個 5 ドルで高すぎ、7 セグの各線を TTL で組んだ | 7 セグの形を比較器で描く (1-8 のデコーダと同じ) |
-| 音 | 発振器で「ピッ」と鳴らす | 無い |
+| 音 | 同期のカウンタの矩形波を、出来事の間だけ通す。ヒットは 491 Hz (16 ms)、壁で返したときと点は 246 Hz (壁は 16 ms、点は 555 のタイマーの長さ) | 同じ手。ヒット 450 Hz・壁と点 225 Hz (比は同じ 2 : 1)。ヒットと壁は 1 画面、点は 16 画面 (約 0.27 s) |
 | 部品の原価 | 目標 15 ドル、実際は約 20 ドル | — |
 
 - **IC の数は資料で違う**。Alcorn 本人は「出来上がったときには 75 個ほど」と話し、基板を数えた資料は「60 数個」「66 個」と書く。話した時期と数え方 (試作と量産、数える IC の範囲) の違いかもしれないが、確かめていない
@@ -102,6 +102,7 @@ Pong (1972) は、ビデオゲームが産業になる入口にあったゲー�
 | 返し方 | ラケットの端の 4 画素で返すと縦に速く (2 画素) なる。上半分なら上へ、下半分なら下へ | 打ち方で球の角度を変えられる。元の Pong もラケットを区切って角度を変えていた |
 | AUTO | スイッチを入れたラケットは、球の縦の真ん中を 1 画面に 1 画素ずつ追う | 1 人でも遊べる。比較器 1 つで「相手」が作れる |
 | 点数 | 0〜9 (9 の次は 0)。7 セグの形で画面の上に描く | 1-8 の 7 セグのデコーダを、そのまま絵に使える |
+| 音 | 出来事 (ヒット・壁・点) の間だけ、垂直カウンタの 1 ビットを `sound` へそのまま出す。ヒットは `v[3]` (450 Hz)・壁と点は `v[4]` (225 Hz)。ヒットと壁は 1 画面、点は 16 画面 | 1972 年の Pong と同じ手 (同期のカウンタの矩形波を、出来事の間だけ通す)。発振器を足さずに済む |
 
 ## 画面のつくり
 
@@ -172,7 +173,8 @@ HIT --> POS : 向きを返す・点を足す
 
 ```verilog
 // Pong — CPU を使わず、カウンタと比較器だけで球とラケットを描く。
-// 1 クロックで 1 画素。横 160 × 縦 120 画素を左上から順に出し、1 画面の終わりで球とラケットを 1 回動かす
+// 1 クロックで 1 画素。横 160 × 縦 120 画素を左上から順に出し、1 画面の終わりで球とラケットを 1 回動かす。
+// 音は、出来事 (ヒット・壁・点) のあいだだけ、画面のカウンタの 1 ビットをそのまま出す
 module pong (
     input        clk,
     input        rst,
@@ -185,7 +187,9 @@ module pong (
     output       line_end,         // 行の最後の画素で 1
     output       frame_end,        // 画面の最後の画素で 1
     output [3:0] score_l,
-    output [3:0] score_r
+    output [3:0] score_r,
+    output       sound,            // スピーカーへ。矩形波 (鳴らす間だけ。下の「音」)
+    output [1:0] snd_kind          // いま鳴らす音: 0 無音、1 ヒット (450 Hz)、2 壁・点 (225 Hz)。次の画面から鳴る
 );
     localparam [7:0] W = 8'd160;
     localparam [6:0] H = 7'd120;
@@ -281,6 +285,31 @@ module pong (
             end
         end
 
+    // ---- 音: 画面のカウンタの 1 ビットを、出来事の間だけスピーカーへ通す ----
+    // 1972 年の Pong と同じ手。垂直カウンタの 1 ビットは、そのまま一定の周波数の矩形波になっている。
+    // ヒットは v[3] (450 Hz)、壁で返したときと点が入ったときは v[4] (225 Hz)。比は 2 : 1 で元の Pong (491 Hz と 246 Hz) と同じ。
+    // 周波数は 1 秒に 60 画面のとき (1 行 = 160 クロック = 1 / 7 200 s)。出来事は画面の最後に決まるので、鳴るのは次の画面から。
+    wire wall_top = up  && (by <= TOP + dy - 7'd1);
+    wire wall_bot = !up && (by + 7'd3 + dy >= BOTTOM);
+    wire wall_hit = !(out_l || out_r) && (wall_top || wall_bot);
+
+    localparam [4:0] SCORE_FRAMES = 5'd16;     // 点が入ったときの音の長さ (16 画面 = 約 0.27 s)
+    reg [4:0] snd_n;                           // 鳴らす画面の残り (0 なら無音)
+    reg       snd_hit;                         // 1: ヒットの音 (v[3])、0: 壁・点の音 (v[4])
+
+    always @(posedge clk)
+        if (rst) begin
+            snd_n <= 5'd0; snd_hit <= 1'b0;
+        end else if (frame_end) begin
+            if      (out_l || out_r)  begin snd_n <= SCORE_FRAMES; snd_hit <= 1'b0; end
+            else if (hit_l || hit_r)  begin snd_n <= 5'd1;         snd_hit <= 1'b1; end   // 1 画面 = 約 16 ms
+            else if (wall_hit)        begin snd_n <= 5'd1;         snd_hit <= 1'b0; end
+            else if (snd_n != 5'd0)   snd_n <= snd_n - 5'd1;
+        end
+
+    assign sound    = (snd_n != 5'd0) && (snd_hit ? v[3] : v[4]);
+    assign snd_kind = (snd_n == 5'd0) ? 2'd0 : snd_hit ? 2'd1 : 2'd2;
+
     // ---- 絵: いまの (h, v) が何かの形の中にあるかを、比較器で調べる ----
     wire wall   = (v < TOP) || (v >= BOTTOM);
     wire net    = (h == 8'd79) && v[2];                                   // 4 画素おきの点線
@@ -332,7 +361,48 @@ endmodule
 - `function` の中の `if` も、合成すると比較器とセレクタになる (1-5)。実行の順ではない
 - 点の 7 セグは、1-8 のデコーダ `seg7` の 7 ビットで、7 本の棒 (幅 2 画素の長方形) のどれを白にするかを決める
 
+- 音は `snd_n` (鳴らす画面の残り、5 ビット) と `snd_hit` (ヒットの音か、1 ビット) の 6 ビットと、数個の比較だけ。`sound` は「残りがあるあいだ、選んだ `v` のビットを通す」だけの AND である
+
 lint (`verilator --lint-only -Wall pong.v`) は警告 0 件で通る (Verilator 5.042)。
+
+## 音のつくり
+
+1972 年の Pong には、音を作る発振器が無い。**画面を数えるカウンタの 1 ビットは、そのまま一定の周波数の矩形波**なので、出来事の間だけそれを通せばよい。
+Holden の回路解析では、ヒットは水平同期 15 731 Hz を 32 に割った 491.6 Hz (垂直カウンタの 16V のビット)、壁と点は 246 Hz (その半分) である。
+
+この題の回路は、1 画面が 120 行・1 秒に 60 画面なので 1 行は 1/7 200 s。垂直カウンタ `v` のビット k は、周期が 2^(k+1) 行の矩形波になる。
+
+| 音 | 使うビット | 周期 | 周波数 (1 秒に 60 画面) | 長さ | 元の Pong |
+| --- | --- | --- | --- | --- | --- |
+| ヒット | `v[3]` | 16 行 | 7 200 / 16 = **450 Hz** | 1 画面 (約 16.7 ms) | 491 Hz、16 ms |
+| 壁で返した | `v[4]` | 32 行 | 7 200 / 32 = **225 Hz** | 1 画面 | 246 Hz、16 ms |
+| 点が入った | `v[4]` | 32 行 | **225 Hz** | 16 画面 (約 0.27 s) | 246 Hz、555 のタイマーの長さ |
+
+- 比が 2 : 1 なのは元の Pong と同じ。周波数は元より約 8 % 低い (行の数が違うため)
+- 出来事は画面の最後 (`frame_end`) に決まるので、鳴るのは**次の 1 画面**から。元の Pong は、ヒットを垂直ブランクのあいだに検出して、次の 1 画面の間鳴らしていた
+- 3 つが同時に起きたときは、点 > ヒット > 壁の順で選ぶ (`snd_hit` と `snd_n` を 1 組しか持たない)
+- 点の音の長さ 16 画面は、この題で決めた値。元の 555 の時定数の数値は確かめられなかった (別の測定には 257 ms とするものがある)
+- `v` は 119 の次に 0 へ戻る。16 行や 32 行の整数倍でないので、画面の境目で矩形波の位相が 1 回飛び、1 画面の山は 450 Hz のとき 7 個、225 Hz のとき 4 個になる。平均すると 420 Hz と 240 Hz で、60 Hz の「うなり」が乗る
+
+```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
+title: 図3 ヒットの音。次の 1 画面だけ v[3] が sound に出る
+device: ad3
+time: 4ms/div
+start: 0s
+signals:
+  hit_l: dio0 edges 0s=1 16.6667ms=0
+  snd_on: dio1 edges 0s=0 16.6667ms=1 33.3333ms=0
+  v3: dio2 pattern 000000001111111100000000111111110000000011111111000000001111111100000000111111110000000011111111000000001111111100000000000000001111111100000000111111110000000011111111000000001111111100000000111111110000000011111111000000001111111100000000000000001111111100000000111111110000000011111111 bit 138.889us from 0s
+  sound: dio3 pattern 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111111100000000111111110000000011111111000000001111111100000000111111110000000011111111000000001111111100000000000000000000000000000000000000000000000000000000 bit 138.889us from 0s
+cursors: [16.6667ms, 33.3333ms]
+```
+
+![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/logic/03-pong-1.svg)
+
+- 左の 1 画面 (0〜16.7 ms) で、球がラケットに当たる (`hit_l`)。画面の最後 (X1) で `snd_n` に 1 が入り、次の 1 画面 (X1〜X2) だけ `snd_on` が 1 になる。X2 で残りが 0 に戻り、鳴り止む
+- `v3` は `v[3]` の矩形波で、毎画面同じ形。`sound` は `snd_on` が 1 の画面だけ、それがそのまま出る (横軸は 1 秒に 60 画面と置いた、1 行 = 138.9 µs)
+- 1 クロックごとの Logic Analyzer (下の「Logic Analyzer で見る」) では、`sound` の矩形波そのものが見える
 
 ## C++ (ハーネス)
 
@@ -353,6 +423,9 @@ static Vpong*   top;
 static uint8_t  fb[160 * 120];     // 1 画素 1 バイト (0 か 1)
 static uint32_t keys   = 0;        // bit0 左上 bit1 左下 bit2 右上 bit3 右下 bit4 左 auto bit5 右 auto
 static uint32_t frames = 0;
+static bool     snd_prev = false;   // 直前のクロックの sound (画面をまたいで覚える)
+static uint32_t snd_edges  = 0;     // この画面で sound が 0 → 1 になった数
+static uint32_t snd_clocks = 0;     // この画面で sound が 1 だったクロックの数
 
 static void tick() {
     top->clk = 0; top->eval();
@@ -365,7 +438,7 @@ EMSCRIPTEN_KEEPALIVE void sim_init() {
     top = new Vpong();
     top->rst = 1; tick();
     top->rst = 0; top->clk = 0; top->eval();
-    frames = 0;
+    frames = 0; snd_prev = false;
 }
 
 EMSCRIPTEN_KEEPALIVE void set_keys(uint32_t k) { keys = k; }
@@ -375,9 +448,14 @@ EMSCRIPTEN_KEEPALIVE void run_frame() {
     top->up_l = keys & 1;         top->dn_l = (keys >> 1) & 1;
     top->up_r = (keys >> 2) & 1;  top->dn_r = (keys >> 3) & 1;
     top->auto_l = (keys >> 4) & 1; top->auto_r = (keys >> 5) & 1;
+    snd_edges = snd_clocks = 0;
     for (int i = 0; i < 160 * 120; i++) {
         top->clk = 0; top->eval();
         fb[top->vpos * 160 + top->hpos] = top->pixel;
+        const bool s = top->sound;
+        snd_clocks += s;
+        if (s && !snd_prev) snd_edges++;
+        snd_prev = s;
         const bool last = top->frame_end;
         top->clk = 1; top->eval();
         if (last) break;
@@ -388,6 +466,10 @@ EMSCRIPTEN_KEEPALIVE void run_frame() {
 EMSCRIPTEN_KEEPALIVE uint8_t* get_fb()      { return fb; }
 EMSCRIPTEN_KEEPALIVE uint32_t get_score()   { return (uint32_t)top->score_l << 4 | top->score_r; }
 EMSCRIPTEN_KEEPALIVE uint32_t get_frames()  { return frames; }
+// 音。JS は画面ごとに get_snd_kind() を読み、次の 1 画面ぶんの音を鳴らす (0 無音・1 ヒット 450 Hz・2 壁と点 225 Hz)
+EMSCRIPTEN_KEEPALIVE uint32_t get_snd_kind()   { return top->snd_kind; }
+EMSCRIPTEN_KEEPALIVE uint32_t get_snd_edges()  { return snd_edges; }    // 試験用: 直前の 1 画面の矩形波の山の数
+EMSCRIPTEN_KEEPALIVE uint32_t get_snd_clocks() { return snd_clocks; }   // 試験用: 直前の 1 画面で 1 だったクロックの数
 
 } // extern "C"
 ```
@@ -395,6 +477,7 @@ EMSCRIPTEN_KEEPALIVE uint32_t get_frames()  { return frames; }
 - `run_frame` は 19 200 回、`clk` を 0 → 1 にする。立ち上がりの前の `hpos` `vpos` の場所に `pixel` を書く。最後の画素 (`frame_end`) を書いたら抜ける
 - ボタンとスイッチは `keys` の 6 ビットにまとめ、1 画面の初めに Verilog の入力へ入れる。位置が動くのは画面の最後のクロックだけなので、画面の途中で入力を替えても意味が無い
 - `get_fb` は配列の番地を返す。JS は WebAssembly のメモリ (`HEAPU8`) を、その番地から 19 200 バイト読む
+- `get_snd_kind` は、次の 1 画面で鳴る音 (0 無音・1 ヒット・2 壁と点)。JS が画面ごとに読む。`get_snd_edges` `get_snd_clocks` は試験用で、直前の 1 画面の `sound` の山の数と、1 だったクロックの数を返す (画面をまたいで、直前のクロックの値を覚えている)
 
 ## JS (画面)
 
@@ -419,7 +502,8 @@ EMSCRIPTEN_KEEPALIVE uint32_t get_frames()  { return frames; }
   左 <button id="ul">上 (W)</button><button id="dl">下 (S)</button><button id="al">AUTO</button>
   右 <button id="ur">上 (↑)</button><button id="dr">下 (↓)</button><button id="ar">AUTO</button>
 </div>
-<div>点 <span id="score">0 - 0</span> / <span id="frames">0</span> 画面</div>
+<div>点 <span id="score">0 - 0</span> / <span id="frames">0</span> 画面
+  <button id="snd">音 OFF</button> <span id="note"></span></div>
 <script>
 var Module = { onRuntimeInitialized: function () {
   Module._sim_init();
@@ -445,9 +529,34 @@ var Module = { onRuntimeInitialized: function () {
   }
   toggle('al', 16); toggle('ar', 32);
 
+  // 音: 回路の snd_kind (0 無音、1 ヒット 450 Hz、2 壁・点 225 Hz) を画面ごとに読み、その画面ぶんの矩形波を鳴らす。
+  // ブラウザは、利用者が操作 (クリック) したあとでないと音を出せないので、ボタンで AudioContext を作る
+  const TONE = [0, 450, 225];
+  let ac = null, osc = null, amp = null, soundOn = false;
+  document.getElementById('snd').addEventListener('click', function () {
+    soundOn = !soundOn;
+    this.textContent = soundOn ? '音 ON' : '音 OFF';
+    if (soundOn && !ac) {
+      ac = new AudioContext();
+      osc = ac.createOscillator(); osc.type = 'square';
+      amp = ac.createGain(); amp.gain.value = 0;
+      osc.connect(amp).connect(ac.destination); osc.start();
+    }
+    if (ac && ac.state === 'suspended') ac.resume();
+    if (!soundOn && amp) amp.gain.value = 0;
+  });
+  function play(kind) {
+    if (!soundOn || !amp) return;
+    const t = ac.currentTime;
+    if (kind) osc.frequency.setValueAtTime(TONE[kind], t);
+    amp.gain.setTargetAtTime(kind ? 0.06 : 0, t, 0.002);
+    document.getElementById('note').textContent = kind === 1 ? '♪ ヒット 450 Hz' : kind === 2 ? '♪ 壁・点 225 Hz' : '';
+  }
+
   function loop() {
     Module._set_keys(held | sw);
     Module._run_frame();                      // 1 画面 = 19 200 クロック
+    play(Module._get_snd_kind());             // 次の 1 画面ぶんの音
     const fb = new Uint8Array(Module.HEAPU8.buffer, Module._get_fb(), 160 * 120);
     for (let i = 0; i < fb.length; i++) {
       const c = fb[i] ? 255 : 0;
@@ -472,6 +581,8 @@ var Module = { onRuntimeInitialized: function () {
 - AUTO は 4-7 のスイッチと同じで、押すたびに入れ替わる
 - 描き替えのたびに `run_frame` を 1 回呼ぶ。ブラウザの描き替えは 1 秒に約 60 回なので、回路は 1 秒に 60 × 19 200 = 約 115 万クロック回る
 - `<canvas>` は 160 × 120 のまま、CSS で 3 倍に広げる。`image-rendering: pixelated` で、画素がぼけずに四角く出る
+- 音は、画面ごとに `get_snd_kind` を読み、**その 1 画面ぶんだけ**、`OscillatorNode` (矩形波) の周波数を 450 Hz か 225 Hz にして `GainNode` を開く。回路の `sound` を 1 クロックごとに標本化して流す方式は、描き替えの時計と音の時計が別なので、シミュレーションを音の側で進める作りにしないと途切れる。この題は 1 画面に 1 回読むだけにした
+- ブラウザは、利用者が操作 (クリック) したあとでないと音を出せない。「音 ON」のボタンで `AudioContext` を作る
 
 ## 手順
 
@@ -483,7 +594,7 @@ var Module = { onRuntimeInitialized: function () {
    verilator --cc "$EXAMPLE/verilog/pong.v" --Mdir "$OBJ_DIR"
    # … (wasm_compile_verilated_cpp まで 02 と同じ)
    em++ $COMMON_FLAGS "$OBJ_DIR"/V*.cpp "$OBJ_DIR/verilated.wasm.o" "$EXAMPLE/cxx/harness.cpp" \
-       -s EXPORTED_FUNCTIONS="[\"_sim_init\",\"_set_keys\",\"_run_frame\",\"_get_fb\",\"_get_score\",\"_get_frames\"]" \
+       -s EXPORTED_FUNCTIONS="[\"_sim_init\",\"_set_keys\",\"_run_frame\",\"_get_fb\",\"_get_score\",\"_get_frames\",\"_get_snd_kind\",\"_get_snd_edges\",\"_get_snd_clocks\"]" \
        -s EXPORTED_RUNTIME_METHODS='["HEAPU8"]' \
        -s ALLOW_MEMORY_GROWTH=1 -s EXIT_RUNTIME=0 -o "$EXAMPLE/web/sim.js"
    ```
@@ -504,7 +615,7 @@ var Module = { onRuntimeInitialized: function () {
 
 ```logic
 # ロジックアナライザの画面 (tommie-fence の logic フェンス)
-title: 図3 1 行の中で、比較器が形に入った所だけ pixel が 1 になる (1 クロック = 1 µs と置いた)
+title: 図4 1 行の中で、比較器が形に入った所だけ pixel が 1 になる (1 クロック = 1 µs と置いた)
 device: generic
 time: 40us/div
 start: -20us
@@ -516,7 +627,7 @@ signals:
 cursors: [6us, 78us]
 ```
 
-![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/logic/03-pong.svg)
+![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/logic/03-pong-2.svg)
 
 | 行 | `pixel` が 1 の `h` | 何か |
 | --- | --- | --- |
@@ -538,14 +649,15 @@ cursors: [6us, 78us]
 
 | 記録 | 1 サンプル | 見えるもの | 使いどころ |
 | --- | --- | --- | --- |
-| 1 画面ごと (既定) | 画面の最後の画素の次のクロック | `bx` `by` `left` (球)、`pl` `pr` (ラケット)、`sl` `sr` (点)、`hit_l` `hit_r` `out_l` `out_r` (出来事) | 球の動きと点が増える瞬間。4096 画面ぶん (約 68 秒) が残る |
-| 1 クロックごと | 毎クロック | `h` `v` `pixel` `line_end` `frame_end` | 走査線。1 画面は 19 200 クロックで、リングは 4096 なので約 25 行ぶん |
+| 1 画面ごと (既定) | 画面の最後の画素の次のクロック | `bx` `by` `left` (球)、`pl` `pr` (ラケット)、`sl` `sr` (点)、`hit_l` `hit_r` `out_l` `out_r` (出来事)、`snd_kind` (次の画面で鳴る音) | 球の動きと点が増える瞬間。4096 画面ぶん (約 68 秒) が残る |
+| 1 クロックごと | 毎クロック | `h` `v` `pixel` `line_end` `frame_end`、`sound` (スピーカーへの矩形波) | 走査線。1 画面は 19 200 クロックで、リングは 4096 なので約 25 行ぶん |
 
 見方の例:
 
 - **球が左のラケットで返った瞬間**: 「1 画面ごと」で `hit_l` のパルスの次の画面で、`left` が 1 から 0 になり、`bx` が増え始める
 - **点が入った瞬間**: `out_l` のパルスの次の画面で `sr` が 1 増え、`bx`・`by` が真ん中 (78・58) に戻る
 - **縦に速くなる**: ラケットの端で返すと `fast` が 1 になり、`by` が 1 画面に 2 ずつ動く
+- **音**: 「1 画面ごと」で `hit_l` のパルスの次の画面に `snd_kind` が 1 (HIT) になり、1 画面で 0 へ戻る。`out_l` の次は 2 (LOW) が 16 画面続く。「1 クロックごと」で `sound` の立ち上がりにトリガーすると、矩形波そのものが見える (ヒットは 16 行ごと、壁と点は 32 行ごと)
 - **形の縁**: 「1 クロックごと」で `pixel` の立ち上がりにトリガーすると、行の中で壁・ラケット・ネット・球に入った所が見える。`h` が 0〜159 を数える傾斜と、`line_end` で `v` が 1 増える段も見える
 
 ### トリガーで止め、再開する
@@ -590,15 +702,17 @@ soft-fpga は f89a885 の写しに 91-pong を足して確かめた。
 yosys -p "read_verilog pong.v; synth_gowin -top pong; stat"
 ```
 
-| 部品 | yosys 0.33 | yosys 0.70+16 |
-| --- | --- | --- |
-| LUT (LUT1〜LUT4) | 536 | 310 |
-| 桁上げの回路 (ALU) | 573 | 483 |
-| フリップフロップ | 69 | 69 |
+| 部品 | yosys 0.33 | yosys 0.70+16 | 音を足す前 (0.33 / 0.70+16) |
+| --- | --- | --- | --- |
+| LUT (LUT1〜LUT4) | 758 | 342 | 536 / 310 |
+| 桁上げの回路 (ALU) | 578 | 494 | 573 / 483 |
+| フリップフロップ | 75 | 75 | 69 / 69 |
 
-- フリップフロップ 69 個がゲームの記憶の全部 (カウンタ `h` `v`、位置 `bx` `by` `pl` `pr`、向き、点)。12-1 のアクセラレータ (79 個) より少ない
+- フリップフロップ 75 個がゲームの記憶の全部 (カウンタ `h` `v`、位置 `bx` `by` `pl` `pr`、向き、点、音の 6 ビット)。12-1 のアクセラレータ (79 個) より少ない
+- **音の分** は、0.70+16 で LUT +32・ALU +11・FF +6。見積り (LUT +10〜20) より多かった。壁の判定 (`wall_top` `wall_bot`) とヒットの判定を、位置の更新の側と別に比べ直しているため。0.33 では LUT が +222 と大きく振れる (道具の版で、比較器とセレクタの組み方が変わるため。この題の本来の増分は 0.70+16 の値に近いと思われるが、確かめていない)
 - ALU が多いのは、比較器 (`<` `>=`) を道具が引き算の桁上げの回路で作るため。比べる所が 40 ほどある
-- Tang Nano 9K の FPGA (GW1NR-9) の LUT 8 640 個に対して 4〜6 %。実物の FPGA に載せるなら、`pixel` を VGA や HDMI の信号にする回路 (帰線と同期の信号) が別に要る。この題では作っていない
+- Tang Nano 9K の FPGA (GW1NR-9) の LUT 8 640 個に対して 4〜9 %。実物の FPGA に載せるなら、`pixel` を VGA や HDMI の信号にする回路 (帰線と同期の信号) が別に要る。この題では作っていない
+- `sound` を実物の FPGA で鳴らすなら、3.3 V のピン 1 本から、直列の抵抗 (330 Ω 〜 1 kΩ) を通して**圧電ブザー**につなぐ。スピーカー (8 Ω) は、ピンから直に鳴らさず、2SC1815 などのトランジスタで駆動する。ピンの電流の限度を超えるため。この題は組まない題なので、図は付けない
 
 ## シミュレーションでの確かめ (対象外を含む)
 
@@ -612,8 +726,14 @@ hold up (left): 30 frames, lit pixels in frame 0 = 946, paddle hits 0, points 0 
   left paddle top after holding up: 2
 both auto: 3600 frames, lit pixels in frame 0 = 946, paddle hits 51, points 0 (first at frame -1), score 0-0
 random keys: 10000 frames, lit pixels in frame 0 = 946, paddle hits 59, points 146 (first at frame 179), score 7-9
+sound: 2660 frames (hit 110, wall/score 2550), rising edges per frame: hit tone 7..7, low tone 4..4, wall bounces 102
 PASS
 ```
+
+音は、画面ごとに、模型の `snd_n` と `snd_hit` から作った矩形波 (120 行ぶん、行ごとに 1 か 0) と、回路の `sound` を比べた。
+**山の数 (0 → 1 になった回数) と、1 だったクロックの数** (1 行 160 クロック × 1 の行の数) が、全画面で一致し、次の画面で鳴る音の種類 (`snd_kind`) も一致した。
+鳴った画面は 2 660 画面で、ヒットの音 (`v[3]`) は 1 画面に山が 7 個、壁と点の音 (`v[4]`) は 4 個。3 種類の音 (ヒット・壁・点) が、どれも鳴ったことも確かめた (壁で返したのは 102 回)。
+模型の音の長さ (点を 16 画面から 15 画面に、ヒットの音を `v[3]` から `v[4]` に) をわざと崩すと、試験が落ちることも確かめた。
 
 `random keys` は、30 画面ごとに 6 つのボタンとスイッチを乱数で替えて 10 000 画面回した (点は 9 の次に 0 に戻るので、146 点入って 7 対 9)。
 どの画面でも、回路と模型の画素が 1 つも違わず、球は上下の壁の内にいた。
@@ -625,11 +745,14 @@ PASS
 | --- | --- | --- | --- |
 | lint (`-Wall`) | 警告 0 件 | 0 件 | 合った |
 | 1 画面めの白の画素 | 946 | 946 (PC)。ブラウザは開いて 1.5 s 後の画面で 939 (点が 0 対 2 になり、「2」が「0」より 7 画素少ない) | 合った |
-| 図3の 58〜61 行の `pixel` | 6〜8・78〜80・151〜153 (61 行は 79) | 同じ (`run_frame` の配列を読んだ) | 合った |
+| 図4の 58〜61 行の `pixel` | 6〜8・78〜80・151〜153 (61 行は 79) | 同じ (`run_frame` の配列を読んだ) | 合った |
 | W キーを 1 s 押す | ラケットの上端が 2 | `<canvas>` の 7 列めの白が 2〜17 行 | 合った |
 | 左右の AUTO を入れて 5 s | 画面と点が進む | 156 → 456 画面、点 0-3 → 0-5、コンソールに誤り無し (favicon の 404 だけ) | 合った |
 | 描き替えの速さ | 約 60 画面/s | 300 画面/5 s | 合った (ヘッドレスの Chromium の値) |
-| 合成 (0.33 / 0.70+16) | LUT 536 / 310、ALU 573 / 483、FF 69 | LUT1 200 + LUT2 43 + LUT3 66 + LUT4 227 / 71 + 54 + 71 + 114、DFF 14 + DFFR 8 + DFFRE 32 + DFFSE 15 (どちらも) | 合った |
+| 合成 (0.33 / 0.70+16) | LUT 758 / 342、ALU 578 / 494、FF 75 | LUT1 338 + LUT2 79 + LUT3 109 + LUT4 232 / 86 + 65 + 62 + 129、DFF 14 + DFFR 8 + DFFRE 38 + DFFSE 15 (どちらも) | 合った |
+| 音の周波数と長さ | ヒット 450 Hz (1 画面)、壁 225 Hz (1 画面)、点 225 Hz (16 画面) | 模型と回路の山の数・1 のクロックの数が全画面で一致 (ヒット 7 山/画面、壁と点 4 山/画面) | 合った |
+| ブラウザで音の種類 | ヒット・壁・点で `get_snd_kind` が 1・2・2 になる | 両側 AUTO で 1 (ヒット) と 2 (壁・点) が画面ごとに出た。点の 2 は 16 画面続いた | 合った |
+| ブラウザの実際の音 | 450 Hz と 225 Hz の矩形波 | `AudioContext` を作り `OscillatorNode` に周波数を設定するところまで (エラー無し)。**耳では確かめていない** | 対象外 |
 | 人の指で打ったときの遊びやすさ | — | 人が見て遊ぶこと | 対象外 |
 
 ブラウザで AUTO のときに点が入ったのは、W キーで左のラケットを上の端に寄せた後に AUTO を入れたためで、PC の試験の `both auto` (リセットの直後から AUTO) とは始まりが違う。
@@ -646,6 +769,7 @@ PASS
 
 歴史の節と、実際の Pong の回路の規模の数字の出典 (2026-10-16 に確かめた):
 
+- 音の周波数・長さ・作り方 (ヒット 491.6 Hz は 16V の出力、壁と点は 246 Hz、ヒットと壁は 16 ms): H. Holden の回路解析 [ATARI PONG E CIRCUIT ANALYSIS & LAWN TENNIS](https://www.pong-story.com/LAWN_TENNIS.pdf) の「PONG SOUND SYSTEM」。点の音の長さ (555 のタイマー) の数値は、この資料から読み取れなかった。別の測定 (Caprani の解析を紹介した記事。壁 226 Hz・16 ms、ヒット 459 Hz・96 ms、点 490 Hz・257 ms) とは周波数と長さが違うが、記事そのものは読めず、確かめていない
 - Allan Alcorn 本人の話 (IC 75 個ほど、7400 系、マイクロプロセッサ無し、原価、テレビ、ラケット 16 走査線、4 ビット加算器、酒場の試作): Engineering and Technology History Wiki の [First-Hand: The Development of Pong](https://ethw.org/First-Hand:The_Development_of_Pong:_Early_Days_of_Atari_and_the_Video_Game_Industry)
 - 発売日・販売台数・Home Pong・特許訴訟・クローン: Wikipedia の [Pong](https://en.wikipedia.org/wiki/Pong)
 - 基板の IC の数 (60 数個、66 個): [PONG in a picture frame (e-basteln)](https://www.e-basteln.de/arcade/pong/pong/)、[Pong (Atari, 1972) — Arcade Archive](https://arcadearchive.miraheze.org/wiki/Pong_(Atari,_1972))

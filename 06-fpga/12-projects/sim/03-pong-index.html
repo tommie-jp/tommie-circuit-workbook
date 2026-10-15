@@ -16,7 +16,8 @@
   左 <button id="ul">上 (W)</button><button id="dl">下 (S)</button><button id="al">AUTO</button>
   右 <button id="ur">上 (↑)</button><button id="dr">下 (↓)</button><button id="ar">AUTO</button>
 </div>
-<div>点 <span id="score">0 - 0</span> / <span id="frames">0</span> 画面</div>
+<div>点 <span id="score">0 - 0</span> / <span id="frames">0</span> 画面
+  <button id="snd">音 OFF</button> <span id="note"></span></div>
 <script>
 var Module = { onRuntimeInitialized: function () {
   Module._sim_init();
@@ -42,9 +43,34 @@ var Module = { onRuntimeInitialized: function () {
   }
   toggle('al', 16); toggle('ar', 32);
 
+  // 音: 回路の snd_kind (0 無音、1 ヒット 450 Hz、2 壁・点 225 Hz) を画面ごとに読み、その画面ぶんの矩形波を鳴らす。
+  // ブラウザは、利用者が操作 (クリック) したあとでないと音を出せないので、ボタンで AudioContext を作る
+  const TONE = [0, 450, 225];
+  let ac = null, osc = null, amp = null, soundOn = false;
+  document.getElementById('snd').addEventListener('click', function () {
+    soundOn = !soundOn;
+    this.textContent = soundOn ? '音 ON' : '音 OFF';
+    if (soundOn && !ac) {
+      ac = new AudioContext();
+      osc = ac.createOscillator(); osc.type = 'square';
+      amp = ac.createGain(); amp.gain.value = 0;
+      osc.connect(amp).connect(ac.destination); osc.start();
+    }
+    if (ac && ac.state === 'suspended') ac.resume();
+    if (!soundOn && amp) amp.gain.value = 0;
+  });
+  function play(kind) {
+    if (!soundOn || !amp) return;
+    const t = ac.currentTime;
+    if (kind) osc.frequency.setValueAtTime(TONE[kind], t);
+    amp.gain.setTargetAtTime(kind ? 0.06 : 0, t, 0.002);
+    document.getElementById('note').textContent = kind === 1 ? '♪ ヒット 450 Hz' : kind === 2 ? '♪ 壁・点 225 Hz' : '';
+  }
+
   function loop() {
     Module._set_keys(held | sw);
     Module._run_frame();                      // 1 画面 = 19 200 クロック
+    play(Module._get_snd_kind());             // 次の 1 画面ぶんの音
     const fb = new Uint8Array(Module.HEAPU8.buffer, Module._get_fb(), 160 * 120);
     for (let i = 0; i < fb.length; i++) {
       const c = fb[i] ? 255 : 0;

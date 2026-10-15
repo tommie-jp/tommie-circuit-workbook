@@ -1,5 +1,6 @@
 // Pong — CPU を使わず、カウンタと比較器だけで球とラケットを描く。
-// 1 クロックで 1 画素。横 160 × 縦 120 画素を左上から順に出し、1 画面の終わりで球とラケットを 1 回動かす
+// 1 クロックで 1 画素。横 160 × 縦 120 画素を左上から順に出し、1 画面の終わりで球とラケットを 1 回動かす。
+// 音は、出来事 (ヒット・壁・点) のあいだだけ、画面のカウンタの 1 ビットをそのまま出す
 module pong (
     input        clk,
     input        rst,
@@ -12,7 +13,9 @@ module pong (
     output       line_end,         // 行の最後の画素で 1
     output       frame_end,        // 画面の最後の画素で 1
     output [3:0] score_l,
-    output [3:0] score_r
+    output [3:0] score_r,
+    output       sound,            // スピーカーへ。矩形波 (鳴らす間だけ。下の「音」)
+    output [1:0] snd_kind          // いま鳴らす音: 0 無音、1 ヒット (450 Hz)、2 壁・点 (225 Hz)。次の画面から鳴る
 );
     localparam [7:0] W = 8'd160;
     localparam [6:0] H = 7'd120;
@@ -107,6 +110,31 @@ module pong (
                 end
             end
         end
+
+    // ---- 音: 画面のカウンタの 1 ビットを、出来事の間だけスピーカーへ通す ----
+    // 1972 年の Pong と同じ手。垂直カウンタの 1 ビットは、そのまま一定の周波数の矩形波になっている。
+    // ヒットは v[3] (450 Hz)、壁で返したときと点が入ったときは v[4] (225 Hz)。比は 2 : 1 で元の Pong (491 Hz と 246 Hz) と同じ。
+    // 周波数は 1 秒に 60 画面のとき (1 行 = 160 クロック = 1 / 7 200 s)。出来事は画面の最後に決まるので、鳴るのは次の画面から。
+    wire wall_top = up  && (by <= TOP + dy - 7'd1);
+    wire wall_bot = !up && (by + 7'd3 + dy >= BOTTOM);
+    wire wall_hit = !(out_l || out_r) && (wall_top || wall_bot);
+
+    localparam [4:0] SCORE_FRAMES = 5'd16;     // 点が入ったときの音の長さ (16 画面 = 約 0.27 s)
+    reg [4:0] snd_n;                           // 鳴らす画面の残り (0 なら無音)
+    reg       snd_hit;                         // 1: ヒットの音 (v[3])、0: 壁・点の音 (v[4])
+
+    always @(posedge clk)
+        if (rst) begin
+            snd_n <= 5'd0; snd_hit <= 1'b0;
+        end else if (frame_end) begin
+            if      (out_l || out_r)  begin snd_n <= SCORE_FRAMES; snd_hit <= 1'b0; end
+            else if (hit_l || hit_r)  begin snd_n <= 5'd1;         snd_hit <= 1'b1; end   // 1 画面 = 約 16 ms
+            else if (wall_hit)        begin snd_n <= 5'd1;         snd_hit <= 1'b0; end
+            else if (snd_n != 5'd0)   snd_n <= snd_n - 5'd1;
+        end
+
+    assign sound    = (snd_n != 5'd0) && (snd_hit ? v[3] : v[4]);
+    assign snd_kind = (snd_n == 5'd0) ? 2'd0 : snd_hit ? 2'd1 : 2'd2;
 
     // ---- 絵: いまの (h, v) が何かの形の中にあるかを、比較器で調べる ----
     wire wall   = (v < TOP) || (v >= BOTTOM);

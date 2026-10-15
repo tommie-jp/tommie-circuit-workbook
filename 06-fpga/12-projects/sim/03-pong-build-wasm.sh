@@ -20,7 +20,7 @@ em++ $COMMON_FLAGS \
     "$OBJ_DIR"/V*.cpp \
     "$OBJ_DIR/verilated.wasm.o" \
     "$EXAMPLE/cxx/harness.cpp" \
-    -s EXPORTED_FUNCTIONS="[\"_sim_init\",\"_set_keys\",\"_run_frame\",\"_get_fb\",\"_get_score\",\"_get_frames\"]" \
+    -s EXPORTED_FUNCTIONS="[\"_sim_init\",\"_set_keys\",\"_run_frame\",\"_get_fb\",\"_get_score\",\"_get_frames\",\"_get_snd_kind\",\"_get_snd_edges\",\"_get_snd_clocks\"]" \
     -s EXPORTED_RUNTIME_METHODS='["HEAPU8"]' \
     -s ALLOW_MEMORY_GROWTH=1 \
     -s EXIT_RUNTIME=0 \
