@@ -326,10 +326,10 @@ module spi_top #(
 ) (
     input  clk,
     input  rst,
-    input  miso,       // GP4   74HC595 の QH' (9 番)
-    output sck,        // GP2   74HC595 の SRCLK (11 番)
-    output mosi,       // GP3   74HC595 の SER (14 番)
-    output cs_n,       // GP5   74HC595 の RCLK (12 番)。立ち上がりで出力 QA〜QH に写る
+    input  miso,       // GP2   74HC595 の QH' (9 番)
+    output sck,        // GP3   74HC595 の SRCLK (11 番)
+    output mosi,       // GP5   74HC595 の SER (14 番)
+    output cs_n,       // GP4   74HC595 の RCLK (12 番)。立ち上がりで出力 QA〜QH に写る
     output ok          // GP25  返ってきた字が 1 つ前に送った字と同じなら 1 (Pico 2 の基板の LED)
 );
     localparam integer HALF_S = CLK_HZ / 2;               // 0.5 s のクロック数
@@ -536,6 +536,26 @@ trigger: CS falling at 0s
 
 実機でぶつかりやすいのは、SCK のモードの取り違え (モード 0 のつもりで AD3 をモード 1 にすると 1 ビットずれた値になる) と、
 GND の共通を忘れること。
+
+## シミュレーションでの確かめ
+
+Verilator 5.042 で、本文の `spi_master.v` `spi_top.v` `tb_spi.v` を取り出して走らせ直した。
+置き場は `sim/04-spi-master.v` `sim/04-spi-master-top.v` `sim/04-spi-master-tb.v`。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`-Wall`、`spi_top` を最上位) | 警告 0 件 | 0 件 | 合った |
+| 6 回の送り | QA〜QH = 0x5A と 0xA5 が交互、CS 0 の長さ 429.0 µs | 同じ | 合った |
+| `ok` (GP25) | 1 回目 0、2 回目以降 1 | 同じ | 合った |
+| SCK の立ち上がり | 48 回 | 48 回 | 合った |
+| 図3 (2 回目の送りの SCK・MOSI・MISO・CS) | 26 µs 刻みの変わり目 | 同じ時刻・同じ値 | 合った |
+| 最上位のポート表 (GP 番号) | `miso` GP2・`sck` GP3・`cs_n` GP4・`mosi` GP5 | Verilog のコメントだけ別の番号だった | **直した** |
+
+直した所: `spi_top.v` のポートのコメントが GP4 = miso・GP2 = sck・GP3 = mosi・GP5 = cs_n と書いてあり、
+回路図・実体配線図・ピンの割り当て表 (GP2 = MISO・GP3 = SCK・GP4 = CS・GP5 = MOSI) と食い違っていた。
+回路図に合わせてコメントを直した。信号の動きは変わらない。
+
+74HC595 の遅れや LED の電流は実機が要るので確かめていない。
 
 ## 出典
 

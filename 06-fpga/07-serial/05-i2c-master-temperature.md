@@ -796,6 +796,24 @@ trigger: TXD falling at 2496us
 プルアップを外すと (R1 か R2 を抜くと) SDA か SCL が 1 に戻れず、アドレスの ACK が見えなくなって `ERR` になるはず
 (実機で確かめる)。AD3 の Protocol の I2C が NACK を示す。
 
+## シミュレーションでの確かめ
+
+Verilator 5.042 で、本文の `i2c_read.v` `i2c_temp_top.v` `tb_i2c.v` を取り出し、7-1 の `uart_tx.v` と合わせて走らせ直した。
+置き場は `sim/05-i2c-master-temperature.v` `sim/05-i2c-master-temperature-top.v` `sim/05-i2c-master-temperature-tb.v`
+(送信は `sim/01-uart-tx.v`)。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`-Wall`、`i2c_temp_top` を最上位) | 警告 0 件 | 0 件 | 合った |
+| UART の行 | `19 80`、`E7 00` が 2 回、`7D 00` が 2 回 | 同じ | 合った |
+| 模型のアドレスを 0x49 にしたとき | `ERR` | `ERR` が毎回 | 合った |
+| 図3 の SCL・SDA の変わり目 | START (0 µs) から STOP (2457 µs) まで | 時刻・値とも同じ (SCL 97 個、SDA 25 個) | 合った |
+| 図4 の TXD の変わり目 | 2496 µs から 17004 µs まで | 同じ | 合った |
+| 1 回の通信の長さ | 2.457 ms | STOP が 2457 µs | 合った |
+| 立ち上がり時間 | 424 ns (R = 10 kΩ、C<sub>b</sub> = 50 pF) | 0.8473 × 10 kΩ × 50 pF = 423.7 ns | 合った |
+
+LM75 の実物の応答、SDA の向き替え (GPIO) と電圧の値は、実機が要るので確かめていない。
+
 ## 出典
 
 自作。LM75B のアドレス・レジスタ・温度の形式・電圧・変換時間・プルアップの値は Texas Instruments

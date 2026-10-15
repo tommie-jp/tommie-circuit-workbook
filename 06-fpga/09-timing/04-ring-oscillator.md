@@ -456,6 +456,27 @@ trigger: div_out rising at 0s
 - 電源電圧や温度で遅れは変わる。測った日の室温をいっしょに書く
 - AD3 の Logic の周波数の読み取りは、8 ns の刻みで決まる。**1 周期だけでなく、10 周期をまとめて読む**
 
+## シミュレーションでの確かめ (対象外を含む)
+
+Verilator 5.042 と Yosys 0.33 で、本文の `ring.v` `half.v` `top_ring.v` `ring_model.v` `tb_ring_model.v` を取り出して走らせ直した。
+置き場は `sim/04-ring-oscillator.v` `sim/04-ring-oscillator-half.v` `sim/04-ring-oscillator-top.v`
+`sim/04-ring-oscillator-model.v` `sim/04-ring-oscillator-model-tb.v`。
+遅れの無い輪が止まる実行には、最上位 `top_ring` に `en` を与えるだけの `sim/04-ring-oscillator-nodelay-tb.v` を書いた。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`top_ring.v` `ring.v` `half.v`) | 警告 0 件 | 0 件 | 合った |
+| `lint_off UNOPTFLAT` を消した lint | UNOPTFLAT の警告 | UNOPTFLAT (`top_ring.r.w[0]`) | 合った |
+| 遅れの無い輪の実行 | Active region did not converge after 100 tries | 同じエラーで止まった | 合った |
+| 模型の周期 N = 3・5・7・9 | 3.000・5.000・7.000・9.000 ns | 同じ | 合った |
+| 模型 N = 5 の波形 (図2) | 10 ns に en = 1。W4 の立ち下がりは 12.5 ns、周期 5 ns | 同じ (W0 は 10.5 ns で 0、W4 は 12.5 ns で 0、15 ns で 1) | 合った |
+| 合成の LUT1 (N = 3・5・7・9) | 12・14・16・18 | 同じ | 合った |
+| 合成の LUT2・DFF | 1・10 | 1・10 | 合った |
+| 図5 の `div_out` | 200 MHz ÷ 1024 = 195.3 kHz | 計算どおり (模型の値) | 合った |
+
+確かめていない数: nextpnr の LUT4 の数と `No Fmax available`、「消されてしまう」の合成結果 (`DFFN` など)、
+実物の 1 段の遅れと `div_out` の周波数 (実機が要る。本文も「測って書く」)。
+
 ## 出典
 
 自作。

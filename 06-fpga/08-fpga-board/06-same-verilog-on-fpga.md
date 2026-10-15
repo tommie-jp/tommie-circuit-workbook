@@ -475,6 +475,26 @@ trigger: td4_clk rising at 0s
 実機で組んだら、`OUT` の並びが Pico 2 の 5-8 の並びと同じかを、Logic の図を並べて比べる。
 並びは同じで、違うのは時間の刻み (Pico 2 は主ループの `sleep_ms`、FPGA は 27 MHz の水晶) だけのはずである。
 
+## シミュレーションでの確かめ (対象外を含む)
+
+Verilator 5.042 と Yosys 0.33 で、本文の `top_gates.v` `top_td4.v` `tb_gates.v` `tb_td4.v` を走らせ直した。
+`gates.v` は 1-1、`blink.v` は 2-7、`TD4.v` は Soft-FPGA-TD4 の `verilator-TD4/TD4.v` (コミット b74bed1) を使った。
+置き場は `sim/06-same-verilog-on-fpga-gates.v` `sim/06-same-verilog-on-fpga-td4.v`
+`sim/06-same-verilog-on-fpga-gates-tb.v` `sim/06-same-verilog-on-fpga-td4-tb.v`。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`top_gates.v`、`-Wall`) | 警告 0 件 | 0 件 | 合った |
+| lint (`TD4.v`、`--no-timing`、`-Wall` なし) | 警告 0 件 | 0 件 | 合った |
+| lint (`top_td4.v blink.v TD4.v`、`-Wall`) | 10 件 (ASSIGNDLY 5・PROCASSINIT 2・SYNCASYNCNET 3) | 同じ 10 件。`top_td4.v` の `slow` が 1 件 | 合った |
+| ゲート 4 通り | out = 0010・0110・0100・1100、led_n はその反転 | 同じ | 合った |
+| TD4 の `out` の並び (12 クロック) | 0011 0110 1100 1000 1000 1100 0110 0011 0001 0001 0011 0110 | 同じ。pc は 1〜9、0、1、2 | 合った |
+| 図4 の 4 本の pattern | `out3`〜`out0` の 13 個ずつ | 上の並びから読み直して同じ | 合った |
+| 合成 `top_gates` | LUT1 × 1・LUT2 × 4・FF 0 | 同じ | 合った |
+| 合成 `top_td4` | LUT 50 (25・8・8・9)・FF 35 (DFFC 4・DFFCE 8・DFFR 22・DFFRE 1)・ALU 30 | 同じ | 合った |
+
+確かめていない数: nextpnr の最高の周波数 (150.74 MHz・226.24 MHz。nextpnr が無い)、実機の DIP スイッチ・LED・AD3 の測定。
+
 ## 出典
 
 自作。

@@ -179,6 +179,7 @@ verilator --lint-only -Wall div2m.v
 
 `div2m.v` は警告 0 件。`top_pll.v` 自体も警告 0 件だったが、`rPLL` は Gowin の部品で Verilator に中身が無い。
 `pll108.v` も合わせて lint すると、出力の接続の空き (`CLKOUTP` ほか) やパラメータを使っていない警告が `pll108.v` と部品の模型の側に出る。
+Verilator には `rPLL` の模型が無いので、最後は `Cannot find file containing module: 'rPLL'` (MODMISSING) のエラーで止まる。
 **PLL の中身はシミュレーションできない。** 分周の `div2m` だけを、108 MHz に当たるクロックで動かして確かめる。
 
 ```verilog
@@ -365,6 +366,23 @@ trigger: out_2m rising at 0s
 
 実機で測ったら、周期の ΔX を書き加える。1 周期 500 ns を 50 MS/s で測ると 20 ns 刻みで読むので、
 周波数のずれを ppm で見るには、より長い区間の測り方 (5-12・12-4) が要る。
+
+## シミュレーションでの確かめ (対象外を含む)
+
+Verilator 5.042 と Yosys 0.33 で、本文の `div2m.v` `top_pll.v` `pll108.v` `tb_div2m.v` を走らせ直した。
+置き場は `sim/10-pll-div2m.v` `sim/10-pll.v` `sim/10-pll-pll108.v` `sim/10-pll-tb.v`。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`div2m.v`、`-Wall`) | 警告 0 件 | 0 件 | 合った |
+| lint (`top_pll.v pll108.v div2m.v`) | `pll108.v` 側に出力の空き (`CLKOUTP` ほか) の警告 | PINCONNECTEMPTY 3 件。さらに `rPLL` の模型が無く MODMISSING のエラーで止まる | 合った (エラーの記述を補足) |
+| `div2m` の変わり目 | 32 クロック、その後 27 クロックごと | 同じ | 合った |
+| 合成 | rPLL 1・ALU 5・DFFR 5・DFFRE 1・LUT1 7・LUT4 2・MUX2_LUT5 3・MUX2_LUT6 1 | 同じ | 合った |
+| PLL の設定 (27 MHz × 4 = 108 MHz、VCO 432 MHz) | IDIV 0・FBDIV 3・ODIV 4 | 式で確かめた (27 × (3 + 1) ÷ (0 + 1) = 108、108 × 4 = 432) | 合った |
+
+PLL の中身はシミュレーションできないので、108 MHz が実際に出ることは確かめていない。
+確かめていない数: nextpnr の使用量と 216.73 MHz、`pnr.json` の rPLL の設定 (nextpnr が無い)、AD3 の測定。
+`gowin_pll` の出力の再現も、この環境に道具が無いので行っていない。
 
 ## 出典
 

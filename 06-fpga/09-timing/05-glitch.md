@@ -429,6 +429,24 @@ trigger: a_out rising at 0s
 AD3 の Logic で見えない幅の場合は、同じ AD3 の Scope で `y_raw` を読むことを検討する。
 その場合も、Scope の帯域と標本化が足りるかは、先に確かめる。
 
+## シミュレーションでの確かめ (対象外を含む)
+
+Verilator 5.042 と Yosys 0.33 で、本文の `glitch.v` `top_glitch.v` `glitch_model.v` `tb_glitch.v` を取り出して走らせ直した。
+置き場は `sim/05-glitch.v` `sim/05-glitch-top.v` `sim/05-glitch-model.v` `sim/05-glitch-tb.v`。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`top_glitch.v` と `glitch.v`、`glitch_model.v`) | 警告 0 件 | 0 件 | 合った |
+| a の変化 | 33 回 | 33 回 | 合った |
+| 遅れ 0 の回路のパルス | 0 個 | 0 個 | 合った |
+| 遅れ 2 ns の模型 | y 33 個、FF で受けた出力 0 個 | 同じ | 合った |
+| 遅れ 45 ns の模型 | y 33 個、FF で受けた出力 33 個 | 同じ | 合った |
+| 図2・見るべき値の時刻 | 277.8 ns で Y2・Y45 が 1、279.8 ns で Y2 が 0、314.8 ns で YR45 が 1、322.8 ns で Y45 が 0、351.9 ns で YR45 が 0 | 同じ (VCD) | 合った |
+| 合成の部品 | DFF 5・ALU 4・LUT1 17・LUT2 1 | DFF 5・ALU 4・LUT1 16・LUT2 1 | LUT1 が 1 個違う (版の違い。本文は 0.69。0.33 では遅れる経路の 16 個だけ) |
+
+確かめていない数: nextpnr の `Max frequency` 334.45 MHz と、M を変えても動かないという観察 (nextpnr が無い)。
+実物のパルスの幅は実機が要る。
+
 ## 出典
 
 自作。

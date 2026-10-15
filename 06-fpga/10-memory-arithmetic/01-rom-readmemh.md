@@ -267,6 +267,26 @@ yosys -p "read_verilog rom16x8.v; synth_gowin -top rom16x8; stat"
 - 中身を変えたら合成からやり直す。シミュレーションのように実行のときに読むのではない
 - 配置配線と、実物の Tang Nano 9K での確かめは行っていない (未実行)
 
+## シミュレーションでの確かめ
+
+Verilator 5.042 と Yosys 0.33 で、本文の `rom16x8.v` `tb_rom.v` と `prog.hex` を取り出して走らせ直した。
+置き場は `sim/01-rom-readmemh.v` (回路)、`sim/01-rom-readmemh-tb.v` (テストベンチ)、`sim/01-rom-readmemh.hex` (`prog.hex` の中身)。
+テストベンチは `prog.hex` を読むので、実行するディレクトリにこの名前で置く。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| 番地 0〜9 の語 | b3 b6 bc b8 b8 bc b6 b3 b1 f0 | 同じ | 合った |
+| 番地 a〜f の語 | 00 | 00 | 合った |
+| 検査の結果 | PASS: 16 語とも期待値と同じ | 同じ | 合った |
+| lint (`-Wall`) | 警告 0 件 | 0 件 | 合った |
+| `a5` に書き換え | FAIL: 2 語が違う | FAIL: 2 語が違う | 合った |
+| 10 行で終わるファイル | PASS (a〜f は 00) | PASS | 合った |
+| ファイルが無い | 警告 1 行のあと FAIL: 10 語が違う | 同じ | 合った |
+| 合成 (`synth_gowin`) | メモリ 0・LUT3 が 4・LUT4 が 2・IBUF 4・OBUF 8 | 同じ (cells 18) | 合った |
+| 図2 (D6 は番地 9 だけ 1、D3 は番地 3〜6 で 1) | 本文のとおり | 番地ごとの語から読み直して同じ | 合った |
+
+配置配線 (nextpnr) と実機は無いので、そこから出る数は確かめていない。
+
 ## 出典
 
 自作。ROM の 16 語は [Soft-FPGA-TD4](https://github.com/tommie-jp/Soft-FPGA-TD4) の `verilator-TD4/TD4.v` から写した

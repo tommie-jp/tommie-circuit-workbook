@@ -136,6 +136,11 @@ openFPGALoader -b tangnano9k --external-flash --verify top.fs
 | `.fs` の中身のビット数 | 2,068,592 (改行を除く) | 同上 |
 | 外付けフラッシュの使用率 | 約 6 % (計算値) | 上の数と 8-2 の 32 Mbit |
 
+## シミュレーションでの確かめ (対象外)
+
+openFPGALoader の書き込み先 (SRAM とフラッシュ) と `.fs` の大きさの題で、Verilog が無い。確かめには openFPGALoader・gowin_pack
+と実機の Tang Nano 9K が要る。この環境には無いので、`--help` の文言と `.fs` の大きさは確かめていない。
+
 ## 出典
 
 自作。

@@ -309,6 +309,23 @@ yosys -p "read_verilog mul8_seq.v; synth_gowin -top mul8_seq -json m.json; stat"
   配置配線まで通して確かめる
 - 数は合成の結果で、配置配線は通していない。実機で動かしたものではない
 
+## シミュレーションでの確かめ
+
+Verilator 5.042 と Yosys 0.33 で、本文の `mul8_op.v` `mul8_seq.v` `tb_mul.v` を取り出して走らせ直した。
+置き場は `sim/04-multiplier-op.v` `sim/04-multiplier-seq.v` `sim/04-multiplier-tb.v`。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`-Wall`、2 つの回路) | 警告 0 件 | 0 件 | 合った |
+| 13 × 11 | seq = 143、op = 143、8 クロック、PASS | 同じ | 合った |
+| `+full` | PASS: 65536 通りとも * と同じ | 同じ | 合った |
+| 25 µs〜105 µs の BUSY / P | 1 / 0x00、0x0D、0x27、0x27、0x8F … 105 µs で DONE = 1・BUSY = 0 | 同じ | 合った |
+| 合成 `mul8_op` | ALU 16、LUT と MUX2_LUT 484 | 同じ | 合った |
+| 合成 `mul8_seq` | DFF 46、ALU 20、LUT と MUX2_LUT 29 | 同じ | 合った |
+| yosys 0.69 の列 (MULT9X9 など) | MULT9X9 1 個、LUT 24 個 | この環境に 0.69 は無い | 確かめていない |
+
+配置配線 (nextpnr) と実機は無いので、そこから出る数は確かめていない。
+
 ## 出典
 
 自作。シフトと加算の掛け算 (筆算と同じ形) は、ディジタル回路の教科書にある定番の作り方である。

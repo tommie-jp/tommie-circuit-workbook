@@ -263,7 +263,7 @@ module tb_echo;
             end
             if (rx > last[7:0] || last < 0) nback = nback + 1;
             else                            nbad  = nbad + 1;
-            last = rx;
+            last = {24'd0, rx};
         end
     end
 
@@ -382,6 +382,25 @@ trigger: RXD falling at 0s
 7-6 の続きとして、**AD3 の Protocol の UART の Rate を 4800 bps からずらして**、Pico 2 の受信が読み違える境目を測れる。
 Rate = 4807.7 ÷ (1 + ずれ) で、ずれ +5.0 % なら 4579 bps、+5.55 % なら 4555 bps、−4.0 % なら 5008 bps、−4.35 % なら 5026 bps (計算値)。
 返った字が送った字と違ったら、境目を越えている。AD3 の Rate がこの細かさで設定でき、精度がどれほどかは測っていない。
+
+## シミュレーションでの確かめ
+
+Verilator 5.042 で、本文の `echo_top.v` と `tb_echo.v` を取り出し、7-1 の `uart_tx.v` と 7-2 の `uart_rx.v` と合わせて
+走らせ直した。置き場は `sim/07-echo.v` と `sim/07-echo-tb.v` (送受信は `sim/01-uart-tx.v`・`sim/02-uart-rx.v`)。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`-Wall`、`echo_top`) | 警告 0 件 | 0 件 | 合った |
+| 間をあけず 256 字 (SKEW 1.00・GAP 0) | 返った 253 字、err = 1 | 同じ | 合った |
+| 返しの遅れ | 2047.5 µs | 2047.5 µs | 合った |
+| GAP 4 クロック | 256 字、err = 0 | 同じ | 合った |
+| SKEW 0.99 / 0.96 / 1.04 | 251 / 243 / 256 字 | 同じ | 合った |
+| 本文の実行コマンド (`tb_echo.v` をそのまま組む) | 動く | `last = rx;` で WIDTHEXPAND の警告が出て組めなかった | **直した** |
+
+直した所: テストベンチの `last = rx;` (`integer` に 8 ビットを代入) を `last = {24'd0, rx};` に直した。
+直す前は、本文の組み方 (`verilator --binary --timing …`、`-Wall` なし) でも警告が致命になって組めなかった。数字は変わらない。
+
+実機の Pico 2 と AD3 の Protocol の組は、実機が要るので確かめていない。
 
 ## 出典
 
