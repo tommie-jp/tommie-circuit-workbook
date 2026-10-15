@@ -239,11 +239,11 @@ title: 図3 GND は − のレールに。状態の LED は右の 27〜36 列。
 board: full
 parts:
   MCU: pico2 @ h5
-  D1: led g27(A) g28(K) green
+  D1: led g27(A) g28(K) green cap=below:0,1
   R1: resistor j28 -b28 330
-  D2: led g31(A) g32(K) yellow
+  D2: led g31(A) g32(K) yellow cap=below:0,1
   R2: resistor j32 -b32 330
-  D3: led g35(A) g36(K) red
+  D3: led g35(A) g36(K) red cap=below:0,1
   R3: resistor j36 -b36 330
   DP:
     type: device
@@ -271,16 +271,16 @@ wires:
   - AD.DIO4 -- j31 blue
   - AD.DIO5 -- j35 blue
 notes:
-  - text e27 green large bold: 対局中
-  - text e31 orange large bold: 自分が白
-  - text e36 red large bold: 誤り
+  - text h27 green large bold: 対局中
+  - text h31 orange large bold: 自分が白
+  - text h35 red large bold: 誤り
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/breadboard/02-reversi-uart.svg)
 
 - `pico2 @ h5` は 7-3 と同じ向き。下の列は GP0 (1 番) が 5 列、GP1 (2 番) が 6 列、GND (3 番) が 7 列、GP2 (4 番) が 8 列、GP4 (6 番) が 10 列。上の列は GP16 (21 番) が 24 列、GP17 (22 番) が 23 列、GP18 (24 番) が 21 列
 - 状態の 3 本は、上の列のピンの a・b 行から、基板の上の縁を通して右の 27・31・35 列へ渡し、溝を越えて f 行に挿す。遠くへ行く線ほど外を回したので、3 本は交わらない
-- LED の上の大きな字が、その LED が示す状態 (緑 = 対局中、黄 = 自分が白、赤 = 直前の行に誤りを返した)
+- LED のすぐ下の大きな字が、その LED が示す状態 (緑 = 対局中、黄 = 自分が白、赤 = 直前の行に誤りを返した)
 - LED は g 行に横に挿す (左がアノード)。カソードの列の j 行から 330 Ω で − のレールへ落とす。AD3 の DIO3〜DIO5 は、LED のアノードの列 (27・31・35 列) の j 行に下から挿す
 - Pico 2 のピンは h 行に挿さり、同じ列の i・j 行の穴とつながる (f〜j 行は 1 つの列でつながっている)
 - **GND は − のレール (下) にまとめる。** Pico 2 の GND (j7) から − のレールへ 1 本渡し、AD3 と Debug Probe の GND はレールに挿す
