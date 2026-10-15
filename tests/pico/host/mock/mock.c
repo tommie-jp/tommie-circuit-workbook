@@ -24,7 +24,8 @@ void sleep_us(uint64_t us) { advance(us); }
 void busy_wait_us(uint64_t us) { advance(us); }
 void busy_wait_ms(uint32_t ms) { advance((uint64_t)ms * 1000); }
 void sleep_until(absolute_time_t t) { if (t.us > M.now_us) advance(t.us - M.now_us); else advance(1); }
-void tight_loop_contents(void) { advance(1); }
+void mock_advance_us(uint64_t us) { advance(us); }
+void tight_loop_contents(void) { if (M.idle_hook) M.idle_hook(); advance(1); }
 
 static void chk(uint g) { if (g >= MOCK_NGPIO) { fprintf(stderr, "mock: GPIO %u は範囲外\n", g); g_fail++; } }
 void gpio_init(uint g) { chk(g); M.init[g] = true; M.func[g] = GPIO_FUNC_SIO; M.dir_out[g] = false; M.level[g] = false; }
@@ -47,7 +48,7 @@ bool gpio_get(uint g) { chk(g); return M.dir_out[g] ? M.level[g] : (M.in_value[g
 uint32_t gpio_get_all(void) { uint32_t r = 0; for (uint g = 0; g < 32; g++) r |= (uint32_t)gpio_get(g) << g; return r; }
 
 bool add_repeating_timer_us(int64_t d, repeating_timer_callback_t cb, void *u, repeating_timer_t *t) {
-    (void)cb; t->delay_us = d; t->user_data = u; return true;
+    t->delay_us = d; t->user_data = u; M.timer = t; M.timer_cb = cb; return true;
 }
 bool add_repeating_timer_ms(int32_t d, repeating_timer_callback_t cb, void *u, repeating_timer_t *t) {
     return add_repeating_timer_us((int64_t)d * 1000, cb, u, t);
@@ -80,4 +81,14 @@ int mock_report(void) { return g_fail ? 1 : 0; }
 #include "hardware/uart.h"
 i2c_inst_t mock_i2c[2] = {{0}, {1}};
 uart_inst_t mock_uart[2] = {{0}, {1}};
+void mock_dma_deliver(uint ch) {
+    M.dma[ch].pending = true; M.dma_pending_mask |= 1u << ch;
+    if (M.irq_handler[11] && M.irq_enabled[11]) M.irq_handler[11]();
+}
 void mock_uart_wait(void) { M.done = true; longjmp(mock_exit, 1); }  /* 受信を待って止まる = 入力を使い切った */
+#include "hardware/spi.h"
+#include "hardware/pio.h"
+#include "hardware/adc.h"
+spi_inst_t mock_spi[2] = {{0}, {1}};
+pio_hw_t mock_pio[3] = {{0}, {1}, {2}};
+adc_hw_t mock_adc_hw;

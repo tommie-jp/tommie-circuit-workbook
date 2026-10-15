@@ -83,9 +83,25 @@ typedef struct {
     uint i2c_writes, i2c_reads;
     uint spi_baud; uint calls;
     uint dma_claimed;
+    /* DMA / IRQ / PIO / SPI */
+    struct { void *write; const void *read; uint count; uint size; bool irq0; bool pending; int chain; } dma[12];
+    uint dma_pending_mask;
+    void (*irq_handler[52])(void);
+    bool irq_enabled[52];
+    uint16_t pio_prog[32]; uint pio_prog_len; uint pio_origin;
+    uint pio_set_base, pio_set_count, pio_wrap_target, pio_wrap, pio_pindirs_base, pio_pindirs_count;
+    bool pio_pindirs_out, pio_sm_enabled; float pio_clkdiv; uint pio_clkdiv_restarts;
+    uint pio_gpio_mask;
+    uint spi_bits, spi_cpol, spi_cpha, spi_order;
+    uint16_t spi_tx[256]; uint nspi;
+    uint sys_pll_calls; uint32_t sys_pll_vco; uint sys_pll_pd1, sys_pll_pd2;
+    void (*idle_hook)(void);           /* tight_loop_contents・DMA 待ちから呼ぶ。DMA の到着を模す */
+    repeating_timer_t *timer; repeating_timer_callback_t timer_cb; uint timer_calls;
 } mock_t;
 extern mock_t M;
 void mock_reset(uint64_t budget_us);
+void mock_advance_us(uint64_t us);
+void mock_dma_deliver(uint ch);   /* 書き先を埋めて IRQ を上げる (データはテストが先に書く) */
 extern jmp_buf mock_exit;
 int program_main(void);               /* -Dmain=program_main された本文の main */
 /* 予算 (µs) まで本文の main を動かす。戻ったら M を調べる。 */

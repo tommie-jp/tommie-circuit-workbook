@@ -1,6 +1,9 @@
 #pragma once
 #include "../pico_mock.h"
 #define DREQ_ADC 36
+typedef struct { uint32_t fifo; } adc_hw_t;
+extern adc_hw_t mock_adc_hw;
+#define adc_hw (&mock_adc_hw)
 static inline void adc_init(void) { M.adc_inited = true; }
 static inline void adc_gpio_init(uint g) { M.adc_gpio_mask |= 1u << g; }
 static inline void adc_select_input(uint i) { M.adc_input = i; }
