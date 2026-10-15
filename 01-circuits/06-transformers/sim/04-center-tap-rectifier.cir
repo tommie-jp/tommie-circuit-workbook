@@ -1,0 +1,17 @@
+* 6-4 センタータップの全波整流 (図1)。V1・V2 は各 8.5 V (6 Vrms のピーク)・50 Hz / 60 Hz、C1 1000u、RL 220
+* 1N4001 のモデルは 5-1 と同じ (仮定。実測ではない)。f を .step で振る
+.model D1N4001 D (IS=14.11n N=1.984 RS=33.89m CJO=25.89p M=0.4423 VJ=0.3905 TT=5.7u BV=50)
+.param f=50
+V1 a 0 SINE(0 8.5 {f})
+V2 b 0 SINE(0 8.5 {f} 0 0 180)
+D1 a o D1N4001
+D2 b o D1N4001
+C1 o 0 1000u IC=0
+RL o 0 220
+.step param f list 50 60
+.tran 0 2 0 50u
+.meas tran vpk MAX V(o) FROM=1.8 TO=2
+.meas tran vavg AVG V(o) FROM=1.8 TO=2
+.meas tran vpp PP V(o) FROM=1.8 TO=2
+.meas tran iavg AVG I(RL) FROM=1.8 TO=2
+.end

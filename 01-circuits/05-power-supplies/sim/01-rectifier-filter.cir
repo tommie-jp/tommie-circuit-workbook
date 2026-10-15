@@ -1,0 +1,19 @@
+* 5-1 ブリッジ整流と平滑 (図1)。V1 12.7 V (9 Vrms のピーク)・60 Hz、C1 1000u、RL 220
+* 1N4001 は一般に出回る SPICE モデルの値 (IS=14.11n N=1.984 RS=33.89m)。実測ではない
+* cv = 1p のときは C1 を外した形 (整流直後のピークを読む)
+.model D1N4001 D (IS=14.11n N=1.984 RS=33.89m CJO=25.89p M=0.4423 VJ=0.3905 TT=5.7u BV=50)
+.param cv=1000u
+V1 acL acR SINE(0 12.7 60)
+D1 acL dcP D1N4001
+D2 acR dcP D1N4001
+D3 0 acL D1N4001
+D4 0 acR D1N4001
+C1 dcP 0 {cv} IC=0
+RL dcP 0 220
+.step param cv list 1000u 1p
+.tran 0 2 0 50u
+.meas tran vpk MAX V(dcP) FROM=1.9 TO=2
+.meas tran vmin MIN V(dcP) FROM=1.9 TO=2
+.meas tran vavg AVG V(dcP) FROM=1.9 TO=2
+.meas tran vpp PP V(dcP) FROM=1.9 TO=2
+.end

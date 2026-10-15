@@ -1,0 +1,17 @@
+* 6-3 自作トランス (図1)。1 次 15 回 (L = 350 nH x 15^2 = 78.75 uH)、2 次 45 回 (L = 350 nH x 45^2 = 709 uH)、5 kHz・振幅 2 V の信号源
+* 信号源の出力抵抗 rs (0.1 / 1 ohm) と巻線抵抗 (1 次 0.1 ohm、2 次 0.5 ohm) は仮定。2 次は開放。実測ではない
+* k = 結合係数 (1 / 0.95 / 0.9 / 0.85)。v1 = 1 次の Vpp (リアクタンス 2.5 ohm が出力抵抗と分圧する)、v2 = 2 次の Vpp。比は v2 / v1
+.param k=1 rs=1
+V1 s 0 SINE(0 2 5k)
+Rs s p {rs}
+L1 p 0 78.75u Rser=0.1
+L2 q r 709.1u Rser=0.5
+K1 L1 L2 {k}
+R2 r 0 1G
+R3 q 0 1G
+.step param k list 1 0.95 0.9 0.85
+.step param rs list 0.1 1
+.tran 0 2m 0 1u
+.meas tran v1 PP V(p) FROM=1m TO=2m
+.meas tran v2 PP V(q,r) FROM=1m TO=2m
+.end

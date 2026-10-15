@@ -1,0 +1,24 @@
+* 7-2 DC モータの PWM (図1)。電池 5 V、R3 15、M1 = RF-300CA-11440 (巻線 11.8 ohm、L は 1 mH と仮定)、D1 1N4001、Q1 2N7000、R1 100、R2 10k
+* 軸を止めた (停動) 状態 = 逆起電力 0 で見る。回っているときは巻線の電圧が逆起電力ぶん下がるので、電流はこれより小さい
+* 2N7000 は Vto 2.1 V、V_GS = 4.5 V で 4.5 ohm になる Kp (0.0926) の仮定 (データシートの典型値)。1N4001 のモデルは 5-1 と同じ。実測ではない
+* duty = 25 / 50 / 75 / 100 %。PWM は 1 kHz、0 / 5 V
+.model NM2N7000 NMOS (VTO=2.1 KP=0.0926 LAMBDA=0.01 CGSO=20p CGDO=5p)
+.model D1N4001 D (IS=14.11n N=1.984 RS=33.89m CJO=25.89p M=0.4423 VJ=0.3905 TT=5.7u BV=50)
+.param duty=0.5
+VB vb 0 5
+R3 vb m1 15
+Rm m1 m2 11.8
+Lm m2 d 1m
+D1 d vb D1N4001
+M1 d g 0 0 NM2N7000
+R1 g gi 100
+R2 g 0 10k
+VIN gi 0 PULSE(0 5 0 10n 10n {duty*1m} 1m)
+.step param duty list 0.25 0.5 0.75 0.999
+.tran 0 20m 0 1u
+.meas tran imot AVG I(R3) FROM=10m TO=20m
+.meas tran ipk MAX I(R3) FROM=10m TO=20m
+.meas tran vdlow MIN V(d) FROM=10m TO=20m
+.meas tran vdmax MAX V(d) FROM=10m TO=20m
+.meas tran vavg AVG V(vb)-V(d) FROM=10m TO=20m
+.end

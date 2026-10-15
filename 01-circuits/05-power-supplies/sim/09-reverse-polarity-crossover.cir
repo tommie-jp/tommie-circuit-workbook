@@ -1,0 +1,13 @@
+* 5-9 ダイオード方式と P-MOSFET 方式の損失が並ぶ電流 (09-reverse-polarity-protection.cir と同じモデル)
+* 負荷を電流源にして 0.05〜3 A に振り、V(a)-V(x) = ダイオードの降下、V(a)-V(y) = MOSFET の降下を読む。損失が並ぶのは約 0.35 A
+.model D1N5819 D (IS=31.7u N=1.373 RS=0.051 BV=40)
+.model IRF9540 PMOS (VTO=-3.5 KP=0.77 LAMBDA=0.01)
+.model DBODY D (IS=1e-9 N=1.2 RS=0.1 BV=100)
+V1 a 0 5
+D1 a x D1N5819
+I1 x 0 0.1
+M1 a 0 y y IRF9540
+DB a y DBODY
+B2 y 0 I=I(I1)
+.dc I1 0.05 3 0.05
+.end

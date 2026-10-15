@@ -1,0 +1,26 @@
+* 5-9 逆接続保護 (図1 ダイオード方式 / 図2 P-MOSFET 方式)。電池 5 V、RL 100 ohm。電池の向きを .dc で ±5 V に掃引する
+* 1N5819 は一般に出回る SPICE モデルの値 (IS=31.7u N=1.373 RS=0.051)。実測ではない
+* IRF9540 は Vth = -3.5 V (データシートは -2〜-4 V)、-10 V で 0.2 ohm になる Kp の仮定 (-5 V では 0.8 ohm 前後に上がる)。ボディダイオードは別に置く。実測ではない
+.model D1N5819 D (IS=31.7u N=1.373 RS=0.051 BV=40 CJO=110p M=0.35 VJ=0.4)
+.model IRF9540 PMOS (VTO=-3.5 KP=0.77 LAMBDA=0.01)
+.model DBODY D (IS=1e-9 N=1.2 RS=0.1 BV=100)
+V1 a 0 5
+* 図1 ダイオード
+D1 a x D1N5819
+RL1 x 0 100
+* 図2 P-MOSFET (D = 電池側、S = 負荷側、G = GND)
+M1 a 0 y y IRF9540
+DB a y DBODY
+RL2 y 0 100
+.dc V1 -5 5 0.01
+.meas dc ild FIND I(RL1) AT=5
+.meas dc vd FIND V(a)-V(x) AT=5
+.meas dc vl1 FIND V(x) AT=5
+.meas dc imos FIND I(RL2) AT=5
+.meas dc vl2 FIND V(y) AT=5
+.meas dc vds FIND V(a)-V(y) AT=5
+.meas dc ildr FIND I(RL1) AT=-5
+.meas dc imosr FIND I(RL2) AT=-5
+.meas dc ild2 FIND I(RL1) AT=2.5
+.meas dc imos2 FIND I(RL2) AT=2.5
+.end

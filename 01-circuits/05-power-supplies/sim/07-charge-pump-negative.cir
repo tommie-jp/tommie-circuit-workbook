@@ -1,0 +1,30 @@
+* 5-7 555 チャージポンプ (図1)。VCC 9 V、Ra 1k・Rb 4k7・C1 10n (非安定)、Cp 1u、D1・D2 1N4148、Co 10u、RL 1k
+* 555 は挙動の模型: C1 が 2/3 VCC を超えると OUT を Low・DIS を GND に落とし、1/3 VCC を下回ると戻す (スイッチのヒステリシス)
+* OUT の出力段は Ron 10 ohm の理想スイッチ。vdrop = 0 は OUT の High が VCC まで、1.5 は NE555 の High が 1.5 V 低い場合。実測ではない
+* 1N4148 は 09-rf/sim/agc.cir の D4148 と同じ仮定。Co の初期値は -7 V (定常まで待つ時間を縮めるため。定常は 70 ms 以降で読む)
+.param vdrop=0
+.model SWH SW (Ron=10 Roff=1e9 Vt=4.5 Vh=1.5)
+.model D4148 D (IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+VCC vcc 0 9
+Ra vcc dis 1k
+Rb dis c 4.7k
+C1 c 0 10n
+Bn nc 0 V=V(vcc)-V(c)
+Sdis dis 0 c 0 SWH
+Slo out 0 c 0 SWH
+Vd vh vcc {-vdrop}
+Shi vh out nc 0 SWH
+Cp out m 1u
+D1 m 0 D4148
+D2 vo m D4148
+Co vo 0 10u IC=-7
+RL vo 0 1k
+.step param vdrop list 0 1.5
+.tran 0 80m 0 0.5u uic
+.meas tran vavg AVG V(vo) FROM=70m TO=80m
+.meas tran vpp PP V(vo) FROM=70m TO=80m
+.meas tran vmin MIN V(vo) FROM=70m TO=80m
+.meas tran iload AVG I(RL) FROM=70m TO=80m
+.meas tran per20 TRIG V(out) VAL=4.5 RISE=1000 TARG V(out) VAL=4.5 RISE=1020
+.meas tran voutpp PP V(out) FROM=70m TO=80m
+.end

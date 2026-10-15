@@ -1,0 +1,30 @@
+* 5-5 Joule thief (図1)。電池 1.5 V、T1 = バイファイラ 10 回 x 2 (FT37-43, AL 350 nH/回^2 → 35 uH)、結合 0.98、Rb 2.2k、Q1 2SC1815、白色 LED
+* 2SC1815 は 09-rf/sim/agc.cir と同じ仮定 (BF=250、IKF=0.15 で 100 mA 前後は hFE 約 130)。IKF を 0.06 まで下げると周波数 250 kHz・電池 37 mA。白色 LED は 10 mA で約 3 V の仮定。磁芯の飽和は入れていない。実測ではない
+* per20 = 20 周期の時間 (周波数 = 20 / per20)。ibat = 電池の平均電流、icq = Q1 のコレクタ電流の山、pled = LED の平均電力、pq = Q1 の平均損失
+* case = 1: Rb 2.2k・1.5 V (本文の条件)、2: Rb 1k・1.5 V、3: Rb 2.2k・0.8 V
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model LEDW D (IS=1e-27 N=2.0 RS=5 CJO=30p)
+.param case=1
+.param rb={if(case==2,1k,2.2k)} vbat={if(case==3,0.8,1.5)}
+VB vb 0 {vbat}
+L1 vb c 35u
+L2 b1 vb 35u
+K1 L1 L2 0.98
+Rb b1 b {rb}
+Q1 c b 0 Q1815
+D1 c 0 LEDW
+.step param case list 1 2 3
+.tran 0 400u 0 5n
+.meas tran vpk MAX V(c) FROM=300u TO=400u
+.meas tran vlow MIN V(c) FROM=300u TO=400u
+.meas tran vavg AVG V(c) FROM=300u TO=400u
+.meas tran ibat AVG -I(VB) FROM=300u TO=400u
+.meas tran icpk MAX I(L1) FROM=300u TO=400u
+.meas tran ibpk MAX Ib(Q1) FROM=300u TO=400u
+.meas tran iled AVG I(D1) FROM=300u TO=400u
+.meas tran pq AVG V(c)*Ic(Q1) FROM=300u TO=400u
+.meas tran per20 TRIG V(c) VAL=2 RISE=20 TARG V(c) VAL=2 RISE=40
+.meas tran icq MAX Ic(Q1) FROM=300u TO=400u
+.meas tran pled AVG V(c)*I(D1) FROM=300u TO=400u
+.meas tran vcavg AVG V(c) FROM=300u TO=400u
+.end

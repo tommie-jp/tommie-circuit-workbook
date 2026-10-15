@@ -1,0 +1,22 @@
+* 5-2 ツェナー + Tr のシリーズレギュレータ (図1)。V1 12 V、Rz 1.2k、DZ 5.1 V、Q1 2SC1815、RL 220
+* Q1815 は 09-rf/sim/agc.cir と同じ仮定 (BF=250)。DZ は 1N5231B を「20 mA で 5.1 V、動作抵抗 17 ohm」に合わせた仮定。実測ではない
+* V1 を 5〜14 V に掃引して、9 V・12 V での DZ の電圧 (b)・出力 (e)・DZ の電流・Q1 の損失を読む
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model DZ D (IS=1e-14 BV=4.78 IBV=20m RS=16 CJO=100p)
+V1 vin 0 12
+Rz vin b 1.2k
+DZ 0 b DZ
+Q1 vin b e Q1815
+RL e 0 220
+.dc V1 5 14 0.1
+.meas dc vz12 FIND V(b) AT=12
+.meas dc vo12 FIND V(e) AT=12
+.meas dc iz12 FIND I(DZ) AT=12
+.meas dc ib12 FIND Ib(Q1) AT=12
+.meas dc iq12 FIND Ic(Q1) AT=12
+.meas dc vo9 FIND V(e) AT=9
+.meas dc vo6 FIND V(e) AT=6
+.meas dc iz6 FIND I(DZ) AT=6
+.meas dc iz5 FIND I(DZ) AT=5
+.meas dc vo5 FIND V(e) AT=5
+.end

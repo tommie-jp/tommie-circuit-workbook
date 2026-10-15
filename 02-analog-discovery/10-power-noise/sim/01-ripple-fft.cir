@@ -1,0 +1,21 @@
+* 10-1 / 10-2 ブリッジ整流・平滑 (図1)。V1 12.7 V・60 Hz、Csmooth 470u、Rload 1k、Q1 on のとき Radd 470 を並列
+* 1N4007 のモデルは 1N4001 と同じ値で BV だけ 1000 V (仮定。実測ではない)
+* radd = 1e9 なら Q1 off、470 なら Q1 on (2N7000 の ON 抵抗 約 4 ohm を足す)
+.model D1N4007 D (IS=14.11n N=1.984 RS=33.89m CJO=25.89p M=0.4423 VJ=0.3905 TT=5.7u BV=1000)
+.param radd=1e9
+V1 acL acR SINE(0 12.7 60)
+D1 acL dcP D1N4007
+D2 acR dcP D1N4007
+D3 0 acL D1N4007
+D4 0 acR D1N4007
+C1 dcP 0 470u IC=0
+RL dcP 0 1k
+Radd dcP 0 {radd}
+.step param radd list 1e9 474
+.tran 0 2 0 50u
+.meas tran vpk MAX V(dcP) FROM=1.9 TO=2
+.meas tran vmin MIN V(dcP) FROM=1.9 TO=2
+.meas tran vavg AVG V(dcP) FROM=1.9 TO=2
+.meas tran vpp PP V(dcP) FROM=1.9 TO=2
+.meas tran itot AVG I(RL) FROM=1.9 TO=2
+.end

@@ -1,0 +1,18 @@
+* 6-2 コイルの逆起電力 (図1)。電池 5 V、S1、R1 180、L1 100 mH (巻線抵抗 25 ohm)、D1 赤 LED を L1 と並列 (アノードが GND 側)
+* 赤 LED は 10 mA で約 1.9 V (IS=1e-18 N=1.9 RS=5) の仮定。実測ではない。S1 は 20 ms で開く
+.model LEDR D (IS=1e-18 N=1.9 RS=5 CJO=30p)
+.model SW1 SW (Ron=0.01 Roff=1e9 Vt=0.5 Vh=0)
+V1 vcc 0 5
+Vc ctl 0 PWL(0 1 20m 1 20.0001m 0)
+S1 vcc a ctl 0 SW1
+R1 a t 180
+L1 t 0 100m Rser=25
+D1 0 t LEDR
+.tran 0 24m 0 1u
+.meas tran ist AVG I(R1) FROM=15m TO=19.9m
+.meas tran vtop AVG V(t) FROM=15m TO=19.9m
+.meas tran vmin MIN V(t) FROM=20m TO=24m
+.meas tran vflat AVG V(t) FROM=20.1m TO=20.5m
+.meas tran tlow TRIG V(t) VAL=-0.3 FALL=1 TARG V(t) VAL=-0.3 RISE=1
+.meas tran idpk MAX I(D1) FROM=20m TO=24m
+.end
