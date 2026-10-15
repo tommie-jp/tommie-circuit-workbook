@@ -259,7 +259,7 @@ docker run --rm --user "$(id -u):$(id -g)" -v "$PWD":/work -v "$HOME/pico-sdk":/
   bash -c 'cp /psdk/external/pico_sdk_import.cmake . && cmake -S . -B build_usb -DPICO_BOARD=pico2 && cmake --build build_usb --target serial514'
 ```
 
-`build_usb/serial514.uf2` (123 392 バイト) ができた (Verilator 5.048、Pico SDK 2.2.0)。`arm-none-eabi-size` は text 65 272 バイト、bss 4 948 バイト。
+`build_usb/serial514.uf2` (123 392 バイト) ができた (Verilator 5.048、Pico SDK 2.2.0)。`arm-none-eabi-size` は text 65 272 バイト、bss 5 028 バイト。
 USB を付けない `build/serial514.uf2` は 95 232 バイト、text 51 432 バイトで、**USB の部品が text を約 14 KB、bss を約 2.6 KB 増やす**。**実機では動かしていない。**
 
 ## 端末で読む
@@ -340,10 +340,23 @@ PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大�
 | --- | --- | --- | --- |
 | 出す行 (12 行) | `1 pc=1 op=B6 out=3` … `12 pc=2 op=BC out=6` | 12 行とも同じ | 合った |
 | SW1 ON (1000 クロックに 1 行) | 1000 クロックごと | 1000・2000・3000 行目 (クロック数) で `pc=0 op=B3 out=1` (1000 は 10 の倍数なので `pc=0`) | 合った |
-| USB 付きの `.uf2` | 123 392 バイト、text 65 272・bss 4 948 | 123 392 バイト、text 65 272・bss 4 948 | 合った |
+| USB 付きの `.uf2` | 123 392 バイト、text 65 272・bss 5 028 | 123 392 バイト、text 65 272・bss 5 028 | 合った |
 | USB なし (UART 無効) の `.uf2` | 95 232 バイト、text 51 432 | 95 232 バイト、text 51 432 | 合った |
 | USB の部品が増やす分 | text 約 14 KB、bss 約 2.6 KB | text +13.8 KB、bss +2.6 KB | 合った |
 | TinyUSB が無いと黙って USB が付かない | CMake の警告 | `wb-pico-sdk` (TinyUSB 無し) で `pico_enable_stdio_usb` を書いてビルドすると、`TinyUSB submodule has not been initialized; USB support will be unavailable` の警告が出て、`.uf2` は USB なしと同じ 95 232 バイト、text 51 432 | 合った |
+
+### エミュレータ (picoemu) での確かめ
+
+picoemu (`danish9661/pico-emulator` の `b83786f` に `sim/picoemu-m33.patch` を当てた版。手順は [5-2](02-counter-led.md#エミュレータ-picoemu-での確かめ)) に USB 付きの `serial514.uf2` を載せ、Cortex-M33 で動かした。入力は `-script` で与えた (ms 刻み)。
+確かめは `python3 sim/picoemu-check.py --picoemu ./picoemu --uf2 <.uf2 を集めたフォルダ> 5-14`。picoemu は機能の模型で、周期・ジッタ・周波数の実時間は対象外にした。
+
+| 項目 | 本文の数字 | picoemu の結果 | 判定 |
+| --- | --- | --- | --- |
+| USB の CDC が起きるか | PC の端末で読める | picoemu が USB の列挙を代行し、CDC の出力が標準出力に出る | 動いた |
+| SW1 ON (1000 クロックに 1 行) | 1000・2000 … クロック目に `pc=0 op=B3 out=1` | 1000 から 100 行以上、`N pc=0 op=B3 out=1` (N = 1000 の倍数) | 合った |
+| SW1 OFF の最初の行 | `1 pc=1 op=B6 out=3`、`2 pc=2 op=BC out=6`、`3 pc=3 op=B8 out=C` … | 3 行目まで同じ | 部分的に合った |
+| SW1 OFF の 4 行目から 12 行目 | 本文の 12 行 | 4 行目から先は出ない。CDC の転送が止まり (CLK は回り続ける)、行は捨てられる。原因は調べていない | 確かめられなかった (picoemu の USB の限り) |
+| 1 クロックの時間 | 測って書く | — | 対象外 (実時間) |
 
 確かめられなかったもの。
 

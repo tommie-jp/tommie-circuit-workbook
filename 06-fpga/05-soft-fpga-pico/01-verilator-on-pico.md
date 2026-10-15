@@ -234,18 +234,25 @@ add_soft_fpga(blink_pico main.cpp blink)
 ```cpp
 // pico_tls.cpp — Ubuntu の arm-none-eabi-gcc (newlib) に無い __aeabi_read_tp を足す
 // Verilator のランタイムは thread_local を使う。Pico 2 では 1 スレッドなので、
-// 両方のコアで同じ TLS の領域 (リンカスクリプトの __tls_base) を返す。
-// ARM の TLS は「スレッドポインタ + 8」から始まるので 8 を引いておく。
-// .tdata が空 (初期値つきの thread_local が無い) ことを readelf で確かめて使う。
-extern "C" __attribute__((naked)) void* __aeabi_read_tp(void) {
-    __asm volatile(
-        "ldr r0, =(__tls_base - 8)\n"
-        "bx lr\n");
+// 両方のコアで同じ TLS の領域を返す。領域は自前の配列に取る。
+// リンカスクリプトの __tls_base は .bss の頭と重なるので使わない。
+// ARM の TLS は「スレッドポインタ + 8」から始まるので、8 バイトの余白を先頭に置く。
+// .tdata が空 (初期値つきの thread_local が無い) こと、.tbss が 0x44 バイトであることを
+// readelf で確かめて使う。
+alignas(8) static char tls_area[8 + 0x44];
+
+extern "C" void* __aeabi_read_tp(void) {
+    return tls_area;
 }
 ```
 
-Pico SDK 2.2.0 のリンカスクリプト (`memmap_default.ld`) は、`__tls_base` を `.tbss` (初期値なしの `thread_local`) の頭に置く。
-`.tbss` は起動時に 0 で埋める `.bss` の範囲に入る。`.tdata` (初期値つき) が空なら、この 1 か所を返すだけで足りる。
+領域を自前の配列 `tls_area` に取るのは、Pico SDK 2.2.0 のリンカスクリプト (`memmap_default.ld`) の `__tls_base` (`.tbss` の頭) をそのまま使うと、
+**`.tbss` と `.bss` が同じ番地に重なる**からである。`.tbss` は TLS の型紙で、リンカは場所を空けない。
+重なった範囲では、`.bss` の変数と `thread_local` の変数が同じ場所を使い、書き合う。
+5-1 の `blink` は、エミュレータ (5-2 の確かめ) では動いた。5-6 のように回路を 5 つ持つ `.uf2` は、重なった所の `thread_local` の変数が壊れ、
+Verilator の起動の検査 (`VerilatedSyms` が `VerilatedContext` の印を調べる所) で止まった。配列に替えると 5-6 も動いた。
+配列の大きさは ARM の決まりの 8 バイトと `.tbss` の 0x44 バイトの合計で、
+`arm-none-eabi-readelf -S build/blink_pico.elf` で `.tdata` が 0 バイト、`.tbss` が 0x44 バイトであることを確かめて使う。これらが変われば、配列の大きさを直す。
 
 ## ビルドする
 
@@ -273,9 +280,9 @@ MicroPython からは Verilator の C++ を呼べないからである。
 | ビルド | `cmake --build build` | エラーも警告もなし |
 | `pico_tls.cpp` を外すと | 同じ | リンクで `undefined reference to '__aeabi_read_tp'` (上の表の 4) |
 | `.uf2` の大きさ | `ls -l build/blink_pico.uf2` | 92 160 バイト |
-| プログラムの大きさ | `arm-none-eabi-size build/blink_pico.elf` | text 49 828 バイト、bss 2 308 バイト |
+| プログラムの大きさ | `arm-none-eabi-size build/blink_pico.elf` | text 49 828 バイト、bss 2 388 バイト |
 | 内訳 | `arm-none-eabi-size` で `.o` ごと | 回路 (`v_blink/Vblink*.o`) は合わせて text 約 1.6 KB。ランタイム (`verilated.cpp.o`) は text 約 64 KB で、使わない所はリンクで落ちる |
-| `thread_local` の置き場 | `arm-none-eabi-readelf -S build/blink_pico.elf` | `.tdata` は 0 バイト、`.tbss` は 0x44 バイト。`__tls_base` は `.tbss` の頭 |
+| `thread_local` の置き場 | `arm-none-eabi-readelf -S build/blink_pico.elf` | `.tdata` は 0 バイト、`.tbss` は 0x44 バイト (配列 `tls_area` の 8 + 0x44 バイトに収まる) |
 
 0-2 の C だけの `blink.uf2` は 12 800 バイトだった。回路そのものは小さく、大きさのほとんどはランタイムの側にある。
 もう 1 つの手順 (`sfa-dev` の Verilator 5.048 の `verilated.cpp` から 1 行だけ外した写し) では、同じ `blink` の `.uf2` が 600 576 バイトだった (Verilator 5.042 では 599 040 バイト)。
@@ -294,10 +301,10 @@ MicroPython からは Verilator の C++ を呼べないからである。
 | ビルド | エラーも警告もなし | エラーなし | 合った |
 | `pico_tls.cpp` を外すと | リンクで `undefined reference to '__aeabi_read_tp'` | 同じエラー | 合った |
 | `.uf2` の大きさ | 92 160 バイト | 92 160 バイト | 合った |
-| プログラムの大きさ | text 49 828・bss 2 308 バイト | text 49 828・bss 2 308 バイト | 合った |
+| プログラムの大きさ | text 49 828・bss 2 388 バイト | text 49 828・bss 2 388 バイト | 合った |
 | 回路の `.o` の text | 合わせて約 1.6 KB | 1 567 バイト (48 + 172 + 219 + 508 + 620) | 合った |
 | ランタイム (`verilated.cpp.o`) の text | 約 64 KB | 64 013 バイト | 合った |
-| `thread_local` の置き場 | `.tdata` 0 バイト、`.tbss` 0x44 バイト、`__tls_base` は `.tbss` の頭 | `.tdata` 0、`.tbss` 0x44、`__tls_base` = 20001ac0 (`.tbss` の頭) | 合った |
+| `thread_local` の置き場 | `.tdata` 0 バイト、`.tbss` 0x44 バイト | `.tdata` 0、`.tbss` 0x44 | 合った |
 | 別の手順の `.uf2` | 599 040 バイト (Verilator 5.042 のとき) | 600 576 バイト、text 303 896・bss 6 460 (Verilator 5.048 のとき) | 近い値 (版の差) |
 
 別の手順は、`sfa-dev` の `verilated.cpp` に `sed` で 1 行外すだけを当て、`pico_compat.h` と Soft-FPGA-TD4 の `stub_mutex.h` でビルドした。

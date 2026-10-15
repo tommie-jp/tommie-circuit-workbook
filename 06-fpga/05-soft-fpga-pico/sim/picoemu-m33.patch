@@ -1,0 +1,176 @@
+diff --git a/src/cpu.c b/src/cpu.c
+index 2ba8da0..9862ff2 100644
+--- a/src/cpu.c
++++ b/src/cpu.c
+@@ -1840,11 +1840,7 @@ void cpu_unbind_core_context(int core_id, const cpu_bind_context_t *ctx) {
+     cpu.it_mask = ctx->it_mask;
+     cpu.it_pos = ctx->it_pos;
+     cpu.it_len = ctx->it_len;
+-    memcpy(cpu.vfp_s, ctx->vfp_s, sizeof(cpu.vfp_s));
+-    cpu.vfp_fpscr = ctx->vfp_fpscr;
+-    cpu.mve_vpr = ctx->mve_vpr;
+-    cpu.dcp_x = ctx->dcp_x; cpu.dcp_y = ctx->dcp_y; cpu.dcp_ef = ctx->dcp_ef;
+-    cpu.dcp_from_int = ctx->dcp_from_int; cpu.dcp_rmode = ctx->dcp_rmode;
++    /* VFP/MVE/DCP state is not restored: single-core, results must persist. */
+ 
+     if (membus_rp2350_mode && rp2350_sram_ptr) {
+         mem_set_ram_ptr(rp2350_sram_ptr, 0x20000000, 520 * 1024);
+@@ -1872,12 +1868,6 @@ void cpu_step_core(int core_id) {
+     uint32_t saved_primask = cpu.primask;
+     uint32_t saved_faultmask = cpu.faultmask;
+     uint32_t saved_control = cpu.control;
+-    uint32_t saved_vfp_s[32];
+-    memcpy(saved_vfp_s, cpu.vfp_s, sizeof(saved_vfp_s));
+-    uint32_t saved_fpscr = cpu.vfp_fpscr;
+-    uint32_t saved_vpr = cpu.mve_vpr;
+-    uint64_t saved_dx = cpu.dcp_x, saved_dy = cpu.dcp_y, saved_def = cpu.dcp_ef;
+-    uint8_t saved_dfi = cpu.dcp_from_int, saved_drm = cpu.dcp_rmode;
+     uint32_t saved_it = (uint32_t)cpu.it_base | ((uint32_t)cpu.it_mask << 4) |
+                         ((uint32_t)cpu.it_pos << 8) | ((uint32_t)cpu.it_len << 12);
+ 
+@@ -1932,11 +1922,7 @@ void cpu_step_core(int core_id) {
+     cpu.primask = saved_primask;
+     cpu.faultmask = saved_faultmask;
+     cpu.control = saved_control;
+-    memcpy(cpu.vfp_s, saved_vfp_s, sizeof(cpu.vfp_s));
+-    cpu.vfp_fpscr = saved_fpscr;
+-    cpu.mve_vpr = saved_vpr;
+-    cpu.dcp_x = saved_dx; cpu.dcp_y = saved_dy; cpu.dcp_ef = saved_def;
+-    cpu.dcp_from_int = saved_dfi; cpu.dcp_rmode = saved_drm;
++    /* VFP/MVE/DCP state is not restored (see unbind). */
+     cpu.it_base = saved_it & 0xF;
+     cpu.it_mask = (saved_it >> 4) & 0xF;
+     cpu.it_pos = (saved_it >> 8) & 0xF;
+diff --git a/src/gpio.c b/src/gpio.c
+index f8b91f9..21cf989 100644
+--- a/src/gpio.c
++++ b/src/gpio.c
+@@ -1,3 +1,5 @@
++#include <stdlib.h>
++#include <stdio.h>
+ #include <stdio.h>
+ #include <string.h>
+ #include <stdint.h>
+@@ -678,11 +680,24 @@ void gpio_set_pin(uint8_t pin, uint8_t value) {
+     if (pin < 32) {
+         uint32_t old_pins = gpio_effective_pins();
+         uint32_t mask = 1u << (uint32_t)pin;
++        uint32_t old_out = gpio_state.gpio_out;
+         if (value) {
+             gpio_state.gpio_out |= mask;
+         } else {
+             gpio_state.gpio_out &= ~mask;
+         }
++        gpio_trace_changes(old_out, gpio_state.gpio_out);
++        {   /* PICOEMU_PUT_LOG=<pin>: print each change of that pin with the
++             * number of gpio_put calls so far (loops of a bit-banged main loop) */
++            static int log_pin = -2;
++            static unsigned long calls = 0;
++            if (log_pin == -2) { const char *e = getenv("PICOEMU_PUT_LOG"); log_pin = e ? atoi(e) : -1; }
++            if (pin == log_pin) {
++                calls++;
++                if (old_out != gpio_state.gpio_out)
++                    fprintf(stderr, "[PUT] GP%d=%u at put-call #%lu\n", pin, (unsigned)value, calls);
++            }
++        }
+         gpio_detect_events(old_pins, gpio_effective_pins());
+         /* pico-eth CSn/RSTn watch (PIO writes land here). */
+         if ((pin == 17 || pin == 20) && w5500_board_enabled()) {
+diff --git a/src/pwm.c b/src/pwm.c
+index 44d0145..f61ed81 100644
+--- a/src/pwm.c
++++ b/src/pwm.c
+@@ -1,3 +1,5 @@
++#include <stdlib.h>
++#include <stdio.h>
+ #include <string.h>
+ #include "pwm.h"
+ #include "nvic.h"
+@@ -93,6 +95,9 @@ uint32_t pwm_read32(uint32_t offset) {
+ }
+ 
+ void pwm_write32(uint32_t offset, uint32_t val) {
++    /* PICOEMU_PWM_LOG=1: print every PWM register write (the PWM counter is not
++     * emulated, so the programmed DIV/TOP/CC are the only thing to check). */
++    if (getenv("PICOEMU_PWM_LOG")) fprintf(stderr, "[PWM] +0x%02x = 0x%x\n", offset, val);
+     /* Per-slice registers */
+     if (offset < (uint32_t)(pwm_nslices() * 0x14)) {
+         int slice = offset / 0x14;
+diff --git a/src/thumb32.c b/src/thumb32.c
+index c2d9ab7..8b01cb5 100644
+--- a/src/thumb32.c
++++ b/src/thumb32.c
+@@ -1561,6 +1561,40 @@ static uint64_t dcp_mantissa(double d) {
+  * MCRR/MRRC/CDP/MRC shapes; MRC2/MRRC2 handled by t32_dcp2. */
+ static int t32_dcp(uint32_t pc, uint16_t upper, uint16_t lower) {
+     (void)pc;
++    /* RP2350 GPIO coprocessor (p0), register forms. The SDK's gpio_put_masked,
++     * gpio_xor_mask, gpio_set_dir_out_masked, gpio_get_all ... compile to
++     *   MCR p0,opc1,Rt,c0,CRm   opc1 0=put 1=xor 2=set 3=clr
++     *   MRC p0,0,Rt,c0,CRm      (get)
++     * with CRm 0=OUT lo, 4=OE lo, 8=IN lo (1/5/9 = pins 32-47, not modeled).
++     * Without this they fell through as no-ops, so masked writes never
++     * reached the pins. Cross-checked against objdump's gpioc_* names. */
++    if ((upper & 0xFF10) == 0xEE00 && (lower & 0x0F10) == 0x0010) {
++        int opc1 = (upper >> 5) & 7, crm = lower & 0xF, Rt = (lower >> 12) & 0xF;
++        if ((crm == 0 || crm == 4) && opc1 <= 3) {
++            extern void gpio_write32(uint32_t addr, uint32_t val);
++            uint32_t base = 0xD0000000u, v = cpu.r[Rt];
++            /* emulator's SIO offsets: OUT 0x10 SET 0x14 CLR 0x18 XOR 0x1C,
++             * OE 0x20 SET 0x24 CLR 0x28 XOR 0x2C */
++            static const uint8_t off[4] = {0x0, 0xC, 0x4, 0x8}; /* put xor set clr */
++            uint32_t a = base + (crm == 0 ? 0x10u : 0x20u) + off[opc1];
++            if (opc1 == 0) a = base + (crm == 0 ? 0x10u : 0x20u);
++            gpio_write32(a, v);
++            return 1;
++        }
++        if ((crm == 1 || crm == 5) && opc1 <= 3) return 1; /* pins 32-47: ignored */
++    }
++    if ((upper & 0xFF10) == 0xEE10 && (lower & 0x0F10) == 0x0010) {
++        int opc1 = (upper >> 5) & 7, crm = lower & 0xF, Rt = (lower >> 12) & 0xF;
++        if (opc1 == 0 && (crm == 0 || crm == 4 || crm == 8)) {
++            extern uint32_t gpio_read32(uint32_t addr);
++            extern uint32_t gpio_effective_pins(void);
++            uint32_t v = (crm == 0) ? gpio_read32(0xD0000010u)
++                       : (crm == 4) ? gpio_read32(0xD0000020u)
++                                    : gpio_effective_pins();
++            if (Rt != 15) cpu.r[Rt] = v;
++            return 1;
++        }
++    }
+     /* RP2350 GPIO coprocessor (p0): MCRR p0,#4,Rt,Rt2,c0/c4 (bit-out
+      * put / bit-oe put) and MCR p0,#5/6/7 (xor/set/clr). The SDK's
+      * gpio_put/digitalWrite compile to these (mcrr 0,4,r4,r5,cr0 =
+@@ -2492,7 +2526,13 @@ int thumb32_step(uint32_t pc, uint16_t upper, uint16_t lower) {
+          * (sz: 00=byte 01=half 10=word). */
+         if (((upper & 0xFFF0) == 0xE8C0 || (upper & 0xFFF0) == 0xE8D0) &&
+             (lower & 0x0F00) == 0x0F00 &&
+-            (((upper & 0x0010) != 0) == ((lower & 0x0080) != 0))) {
++            /* LDAEX has bit7 set; STREXB/H have it clear, STLEXB/H/W have it set
++             * but (unlike STLB/STLH/STL, whose Rd field is 1111) carry a real
++             * Rd. The old test required bit7 to equal the load bit, so STLEX
++             * was never decoded and its status register kept a stale value
++             * (infinite ldaex/stlex retry loop). */
++            ((upper & 0x0010) != 0 ? (lower & 0x0080) != 0
++                                   : ((lower & 0x0080) == 0 || (lower & 0x000F) != 0x000F))) {
+             int is_load = (upper & 0x0010) != 0;
+             int sz = (lower >> 4) & 0x3;
+             int Rn = upper & 0xF;
+diff --git a/src/timer.c b/src/timer.c
+index 98721be..d53e939 100644
+--- a/src/timer.c
++++ b/src/timer.c
+@@ -73,6 +73,13 @@ void timer_tick(uint32_t cycles) {
+     }
+ 
+     timer_state.time_us += cycles;
++    /* global_cycle_count was never advanced, so VCD stamps were all #0 and
++     * -script events (N ms) only fired at 0 ms. Keep it in step with TIMER. */
++    {
++        extern uint64_t global_cycle_count;
++        extern timing_config_t timing_config;
++        global_cycle_count += (uint64_t)cycles * timing_config.cycles_per_us;
++    }
+     uint32_t cur_low = (uint32_t)(timer_state.time_us & 0xFFFFFFFF);
+ 
+     /* Check armed alarms: fire if target has been reached or passed.

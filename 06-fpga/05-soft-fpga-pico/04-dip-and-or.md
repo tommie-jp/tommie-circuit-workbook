@@ -324,6 +324,18 @@ PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大�
 | Patterns の 2 本の位相から読む a・b | X1 (7.5 ms) で a = 0・b = 1、X2 (17.5 ms) で a = 1・b = 1 | 50 Hz と 100 Hz の方形波を 4 通りに割ると、7.5 ms は GP17 = H・GP16 = L、17.5 ms は L・L (計算) | 合った |
 | `.uf2` の大きさ | 93 184 バイト | 93 184 バイト | 合った |
 
+### エミュレータ (picoemu) での確かめ
+
+picoemu (`danish9661/pico-emulator` の `b83786f` に `sim/picoemu-m33.patch` を当てた版。手順は [5-2](02-counter-led.md#エミュレータ-picoemu-での確かめ)) に `gates_pico.uf2` を載せ、Cortex-M33 で動かした。入力は `-script` で与えた (ms 刻み)。
+確かめは `python3 sim/picoemu-check.py --picoemu ./picoemu --uf2 <.uf2 を集めたフォルダ> 5-4`。picoemu は機能の模型で、周期・ジッタ・周波数の実時間は対象外にした。
+
+| 項目 | 本文の数字 | picoemu の結果 | 判定 |
+| --- | --- | --- | --- |
+| a・b = 00・01・10・11 の D1 (AND、GP14) | 0・0・0・1 | 0・0・0・1 | 合った |
+| 同じ 4 通りの D2 (OR、GP15) | 0・1・1・1 | 0・1・1・1 | 合った |
+| 同じ 4 通りの基板の LED (NOT a、GP25) | 点く・点く・消える・消える | 1・1・0・0 | 合った |
+| Patterns の 2 本の位相 | 7.5 ms で a = 0・b = 1、17.5 ms で a = 1・b = 1 | picoemu には Patterns が無いので、a・b は `-script` で与えた (位相そのものは対象外) | 対象外 |
+
 確かめられなかったもの。
 
 - Pico 2 に書き込んだ LED の点き方と AD3 の画面 (実機)

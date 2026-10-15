@@ -178,6 +178,37 @@ PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大�
 | LED の電流 | 約 3.9 mA | (3.3 − 2.0) ÷ 330 = 3.9 mA (計算) | 計算値として合った |
 | `.uf2` の大きさ | 92 160 バイト (5-1 と同じ) | 92 160 バイト (5-1 と同じ) | 合った |
 
+### エミュレータ (picoemu) での確かめ
+
+RP2350 のエミュレータ [picoemu](https://github.com/danish9661/pico-emulator) (`danish9661/pico-emulator`、MIT、コミット `b83786f`) に `.uf2` を載せ、Cortex-M33 の上で動かした。
+5-3 以降の題も、同じ手順で論理で決まる値を突き合わせた (各題の同じ名前の小節)。picoemu は機能の模型で、**周期・ジッタ・周波数などの実時間は対象外**にした。
+そのままでは 5-1 の `.uf2` が動かなかったので、picoemu に次の 4 か所を直す `sim/picoemu-m33.patch` を当てた。直したのは picoemu 側で、本文のプログラムではない。これとは別に、5-6 の `.uf2` が起動で止まったことから本文の誤りが見つかり、5-1 の `pico_tls.cpp` を直した (5-1 の `pico_tls.cpp` の説明)。
+
+| # | picoemu のままの動き | 直し |
+| --- | --- | --- |
+| 1 | `ldaex`/`stlex` (SDK の排他アクセス) の `stlex` を読み違え、成功の印が戻らず、起動の検査に失敗した所で無限に再試行する | `stlex` の読み方を直す |
+| 2 | 1 命令ごとに VFP の 64 ビットのレジスタ (`d0`〜) を前の値に戻す。Verilator の `VerilatedContext` の印 (64 ビットの定数を `vldr`/`vstr` で書く) が消え、起動の検査で止まる | 戻さない (1 コアの動きに限る) |
+| 3 | GPIO コプロセッサの `mcr`/`mrc` (`gpio_put_masked`・`gpio_xor_mask`・`gpio_get_all` など) を何もしない命令として捨てる。5-5 以降の LED や AUX が動かない | 読み書きをピンに通す |
+| 4 | `-gpio-trace` が GPIO コプロセッサ経由の書き込みを記録せず、時刻も常に `#0` | 記録し、エミュレータの時間 (µs) を付ける |
+
+ほかに、PWM のレジスタ書き込み (`PICOEMU_PWM_LOG=1`) と `gpio_put` の呼び出し回数 (`PICOEMU_PUT_LOG=<ピン>`) を標準エラーに出す環境変数を足した。
+
+```bash
+git clone https://github.com/danish9661/pico-emulator && cd pico-emulator
+git checkout b83786f && git apply <このフォルダ>/sim/picoemu-m33.patch && ./build.sh
+./picoemu blink_pico.uf2 -arch m33 -clock 150 -gpio-trace blink.vcd -max-steps 30000000
+python3 sim/picoemu-check.py --picoemu ./picoemu --uf2 <.uf2 を集めたフォルダ> 5-2
+```
+
+`-gpio-trace` の VCD は GP0〜GP29 の変化を時刻 (µs) 付きで書く。入力は `-script` (`5ms: gpio17 0` の形、ms 刻み) で与える。
+
+| 項目 | 本文の数字 | picoemu の結果 | 判定 |
+| --- | --- | --- | --- |
+| `.uf2` が動くか | (5-1 でビルドまで) | 4 か所を直すと主ループが回り、GP14 が変わる | 動いた |
+| LED の反転 (`CLK_HZ` = 100 000) | 50 000 周ごと | `gpio_put` の 50 000・100 000・150 000・200 000 周目 (起動の `gpio_init` が 1 回書くので、呼び出しの番号は +1) で GP14 が 1・0・1・0 | 合った |
+| 主ループの 1 周 | 書く前には分からない | 約 228 命令 (最初の反転まで 11 363 819 命令) | 参考 |
+| 点滅の周期 | 測って書く | 150 MHz で 305 ms (3.3 Hz)。picoemu の命令ごとの周期の模型の値 | 対象外 (実時間) |
+
 確かめられなかったもの。
 
 - Pico 2 に書き込んだ LED の点滅と、AD3 での周期の測定 (実機)。「見るべき値」の測る欄は空のまま

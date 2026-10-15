@@ -138,9 +138,9 @@ endmodule
 
 | 回路 | `.uf2` | text | bss | `p_none` との差 (text) |
 | --- | --- | --- | --- | --- |
-| `p_none` | 93 184 バイト | 50 184 バイト | 2 372 バイト | — |
-| `p_disp` (`$display` + `$finish`) | 121 856 バイト | 64 524 バイト | 2 812 バイト | +14 340 バイト |
-| `p_rom` (`$readmemh`) | 105 984 バイト | 56 568 バイト | 2 400 バイト | +6 384 バイト |
+| `p_none` | 93 184 バイト | 50 184 バイト | 2 452 バイト | — |
+| `p_disp` (`$display` + `$finish`) | 121 856 バイト | 64 524 バイト | 2 892 バイト | +14 340 バイト |
+| `p_rom` (`$readmemh`) | 105 984 バイト | 56 568 バイト | 2 480 バイト | +6 384 バイト |
 
 - **3 つともビルドとリンクは通った。** Pico SDK の newlib に `fopen` や `printf` が無いことは、リンクを止めない
 - `$display` を 1 つ書くと、書式を整形する関数 (`_vl_vsformat` ほか) が引き込まれ、text が約 14 KB 増えた。フラッシュ (4 MB) には収まる
@@ -276,9 +276,9 @@ PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大�
 | `p_rom2` (`initial` に置き換え) | `p_rom` と同じ中身 | 16 値とも `p_rom` と同じ | 合った |
 | `--trace` でビルド | コンパイルエラー (`VerilatedTrace` が不完全な型) | `invalid use of incomplete type 'class VerilatedTrace<...>'` と `'VerilatedTracePrefixType' was not declared` | 合った |
 | `_exit` と `_open` | `_exit` は `__breakpoint()` の無限ループ、`_open` は −1 | `newlib_interface.c` のとおり | 合った |
-| `.uf2` (`p_none`) | 93 184 バイト、text 50 184・bss 2 372 | 93 184 バイト、text 50 184・bss 2 372 | 合った |
-| `.uf2` (`p_disp`) | 121 856 バイト、text 64 524・bss 2 812 | 121 856 バイト、text 64 524・bss 2 812 | 合った |
-| `.uf2` (`p_rom`) | 105 984 バイト、text 56 568・bss 2 400 | 105 984 バイト、text 56 568・bss 2 400 | 合った |
+| `.uf2` (`p_none`) | 93 184 バイト、text 50 184・bss 2 452 | 93 184 バイト、text 50 184・bss 2 452 | 合った |
+| `.uf2` (`p_disp`) | 121 856 バイト、text 64 524・bss 2 892 | 121 856 バイト、text 64 524・bss 2 892 | 合った |
+| `.uf2` (`p_rom`) | 105 984 バイト、text 56 568・bss 2 480 | 105 984 バイト、text 56 568・bss 2 480 | 合った |
 | `.uf2` (`p_rom2`) | 92 672 バイト、text 50 000 | 92 672 バイト、text 50 000 | 合った |
 | `$display` を足したときの text | +14 340 バイト | +14 340 バイト | 合った |
 | `$readmemh` を足したときの text | +6 384 バイト | +6 384 バイト | 合った |

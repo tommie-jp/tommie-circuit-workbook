@@ -312,7 +312,7 @@ target_link_libraries(clock511 hardware_pwm)   # PWM のハードウェアを使
 ```
 
 空のフォルダから 5-1 の手順でビルドし、`build/clock511.uf2` (96 256 バイト) ができた (Verilator 5.048、Pico SDK 2.2.0)。
-`arm-none-eabi-size` は text 51 920 バイト、bss 2 440 バイト。**実機では動かしていない。**
+`arm-none-eabi-size` は text 51 920 バイト、bss 2 520 バイト。**実機では動かしていない。**
 
 ## 計器の設定
 
@@ -376,7 +376,17 @@ PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大�
 | GP16 のスライス・チャンネル | スライス 0、チャンネル A | Pico SDK の `PWM_GPIO_SLICE_NUM` = `(16 >> 1) & 7` = 0、偶数なのでチャンネル A | 合った |
 | 割り込み番号 | `PWM_DEFAULT_IRQ_NUM()` (Pico 2 は `PWM_IRQ_WRAP_0`) | `pwm.h` の定義と同じ | 合った |
 | `.cpp` のビルド (`hardware_pwm` を足す) | エラーなし | エラーなし | 合った |
-| `.uf2` の大きさ | 96 256 バイト、text 51 920・bss 2 440 バイト | 96 256 バイト、text 51 920・bss 2 440 バイト | 合った |
+| `.uf2` の大きさ | 96 256 バイト、text 51 920・bss 2 520 バイト | 96 256 バイト、text 51 920・bss 2 520 バイト | 合った |
+
+### エミュレータ (picoemu) での確かめ
+
+picoemu (`danish9661/pico-emulator` の `b83786f` に `sim/picoemu-m33.patch` を当てた版。手順は [5-2](02-counter-led.md#エミュレータ-picoemu-での確かめ)) に `clock511.uf2` を載せ、Cortex-M33 で動かした。入力は `-script` で与えた (ms 刻み)。
+確かめは `python3 sim/picoemu-check.py --picoemu ./picoemu --uf2 <.uf2 を集めたフォルダ> 5-11`。picoemu は機能の模型で、周期・ジッタ・周波数の実時間は対象外にした。
+
+| 項目 | 本文の数字 | picoemu の結果 | 判定 |
+| --- | --- | --- | --- |
+| 150 MHz のときの `div`・`wrap`・`level` (8 行) | 10 Hz = 240・62 499・31 250 … 2 kHz = 2・37 499・18 750 | PWM のレジスタに書かれた値が 8 行とも同じ (`PICOEMU_PWM_LOG=1`)。`clock_get_hz(clk_sys)` が 150 MHz で、`find_div` が表の `div` を選ぶ | 合った |
+| CLK の周期・BUSY・`blink` の周期 | 1 kHz などの設計値 | picoemu の PWM はレジスタだけでカウンタが動かず、1 周期ごとの割り込みが入らない。CLK も BUSY も変わらなかった | 対象外 (picoemu が模型にしていない) |
 
 確かめられなかったもの。
 
