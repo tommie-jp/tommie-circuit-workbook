@@ -37,46 +37,13 @@ device: WEB
 
 ## 画面のつくり
 
-```plantuml
-@startuml
-skinparam shadowing false
-skinparam defaultFontName "Noto Sans CJK JP"
-skinparam rectangle {
-  RoundCorner 4
-}
-skinparam nodesep 10
-skinparam ranksep 10
-title 図1 画面は横 160 × 縦 120 画素。壁・ラケット・ネット・点・球を、比較器で 1 つずつ描く
+![図1 Pong の画面 (soft-fpga の公開ページのスクリーンショットに、形の名前と位置の数を重ねた)](03-pong-screen.png)
 
-rectangle "画面 (h 0〜159 が横、v 0〜119 が縦)" as SCR #FAFAFA {
-  rectangle "　　　　　　　　　　　　　　　　　　　上の壁   v 0〜1   (h は全部)　　　　　　　　　　　　　　　　　　　" as TOP #B0BEC5
-  rectangle "左のラケット\nh 6〜8 / v pl〜pl+15\n3 × 16 画素" as PL #A5D6A7
-  rectangle "点 L (sl)\n7 セグ\nh 60〜67" as SL #FFF59D
-  rectangle "ネット\nh 79\nv の 2 の位が 1 の画素" as NET #E0E0E0
-  rectangle "点 R (sr)\n7 セグ\nh 92〜99" as SR #FFF59D
-  rectangle "右のラケット\nh 151〜153 / v pr〜pr+15\n3 × 16 画素" as PR #A5D6A7
-  rectangle "球 (bx, by)\n3 × 3 画素" as BALL #FFAB91
-  rectangle "　　　　　　　　　　　　　　　　　　下の壁   v 118〜119   (h は全部)　　　　　　　　　　　　　　　　　　" as BOT #B0BEC5
-}
-TOP -[hidden]down- PL
-TOP -[hidden]down- SL
-TOP -[hidden]down- NET
-TOP -[hidden]down- SR
-TOP -[hidden]down- PR
-PL -[hidden]right- SL
-SL -[hidden]right- NET
-NET -[hidden]right- SR
-SR -[hidden]right- PR
-NET -[hidden]down- BALL
-BALL -[hidden]down- BOT
-@enduml
-```
+図1 画面は横 160 × 縦 120 画素。壁・ラケット・ネット・点・球を、比較器で 1 つずつ描く (公開ページのスクリーンショットに、形の名前と位置の数を重ねた)。
 
-![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/plantuml/03-pong-1.svg)
-
-- 左上が (h, v) = (0, 0)。h が横 (0〜159)、v が縦 (0〜119)。**図は配置の順で、縮尺は合っていない**
-- 色の違いは種類の違い (灰: 壁とネット、緑: ラケット、黄: 点、橙: 球)。位置の数は下の表の「比べる数」と同じ
-- 左右のラケットは `pl`・`pr`、球は `bx`・`by` が動く。壁・ネット・点の位置は動かない
+- 左上が (h, v) = (0, 0)、右下が (159, 119)。**h が横、v が縦**。画面は 1 画素を約 3.6 画素に拡大して写してあり、位置はこの縮尺で合っている
+- 枠の色は種類を表す。青が壁、緑がラケット、黄が点、白がネット、橙が球
+- 左右のラケットは `pl`・`pr`、球は `bx`・`by` が動く。壁・ネット・点の位置は動かない。球とラケットと点の位置は、撮った瞬間の値 (`bx` = 38、`by` = 38、点は 0 対 3)
 
 画素を 1 つ描くたびに、回路は (`h`, `v`) が次のどれかに入っているかを比べ、どれかに入っていれば白にする。
 
@@ -126,7 +93,7 @@ HIT --> POS : 向きを返す・点を足す
 @enduml
 ```
 
-![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/plantuml/03-pong-2.svg)
+![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/plantuml/03-pong.svg)
 
 - 黄の箱がレジスタ (カウンタ)、緑の箱が組み合わせ回路。左のカウンタと右の比較器だけで画面が描ける
 - 位置のレジスタは、`frame_end` のクロックでだけ書き換わる。ほかの 19 199 クロックは、描くために読まれるだけ
@@ -603,6 +570,8 @@ PASS
 
 自作。画面のボタンと WebAssembly の関数の付け方は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) (MIT) の
 `examples/02-traffic-fsm` (`cxx/harness.cpp`、`web/index.html`、`scripts/build-wasm-02.sh`) と、それをまねた 4-7 の 90-switches に倣った。
-91-pong はこの題のために書いた (soft-fpga のリポジトリには無い)。
+91-pong はこの題のために書いた。soft-fpga のリポジトリの `examples/91-pong` に足し (`pong.v`・`cxx/harness.cpp`・`web/index.html`・`scripts/build-wasm-91.sh`)、GitHub Pages に公開した。公開ページには Logic Analyzer が付いていて (「Logic Analyzer で見る」)、本文の `harness.cpp` はその記録を省いた最小の版である。
+
+図1 は、公開ページ (soft-fpga の 91-pong) のスクリーンショット (`sim/03-pong-screen-raw.png`) に、`sim/03-pong-screen-overlay.py` (Pillow) で形の名前と位置の数を重ねた。
 
 - 1972 年の Pong が TTL の回路で設計されたこと、ラケットを 8 つに区切って返す角度を変えていたこと: Wikipedia の [Pong](https://en.wikipedia.org/wiki/Pong) の項 (Development and history)。この題のラケットは端の 4 画素とそのほかの 3 つに区切った
