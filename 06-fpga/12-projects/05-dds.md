@@ -223,18 +223,18 @@ parts:
     type: device
     at: top
     label: AD3
-    pins: [GND, 2+, 1+, 1-, 2-]
+    pins: [GND, 2+, 1-, 2-, 1+]
 wires:
   - a23 -- -t23 black
   - a54 -- -t54 black
-  - j20 -- j30 purple
-  - j19 -- j33 blue
-  - j18 -- j36 green
-  - j17 -- j39 yellow
-  - j16 -- j42 orange
-  - j15 -- j45 brown
-  - j14 -- j48 gray
-  - j13 -- j51 white
+  - j20 -- j30 purple [h10, v12, h180]
+  - j19 -- j33 blue [h10, v19, h260]
+  - j18 -- j36 green [h10, v26, h340]
+  - j17 -- j39 yellow [h10, v33, h420]
+  - j16 -- j42 orange [h10, v40, h500]
+  - j15 -- j45 brown [h10, v47, h580]
+  - j14 -- j48 gray [h10, v54, h660]
+  - j13 -- j51 white [h10, v61, h740]
   - AD.GND -- -t20 black
   - AD.2+ -- a22 pink
   - AD.1+ -- a30 green
@@ -247,10 +247,10 @@ notes:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/breadboard/05-dds.svg)
 
 - Tang Nano 9K は溝をまたいで b 行と i 行に挿す (`@ b1`、12-4 と同じ)。1〜24 番が下の列で、j 行の 1 穴から線を取る
-- R-2R は回路図と左右が逆に並ぶ。`dac[7]` (20 番ピン) の R<sub>7</sub> が左の 30 列、`dac[0]` (13 番ピン) の R<sub>0</sub> が右の 51 列。こうすると 8 本の線が入れ子になり、交わり方が少ない
+- R-2R は回路図と左右が逆に並ぶ。`dac[7]` (20 番ピン) の R<sub>7</sub> が左の 30 列、`dac[0]` (13 番ピン) の R<sub>0</sub> が右の 51 列。こうすると 8 本の線が入れ子になる。内側の線 (紫) ほど浅く、外側の線 (白) ほど深く基板の下の縁へ回したので、線どうしは交わらない
 - 2R (R<sub>0</sub>〜R<sub>7</sub>) は溝をまたいで縦に挿す。下の列 (f〜j) に FPGA から線が来て、上の列 (a〜e) が R-2R の節になる。節どうしを R (R<sub>8</sub>〜R<sub>14</sub>) が b 行と c 行で交互につなぐ
 - R<sub>T</sub> は 51 列の節から 54 列へ。54 列を GND のレールへ落とす
-- 出力は 30 列の節 (`dac[7]` の節) から AD3 の 1+ へ。`sync` は上の列の 22 列 (27 番ピン、`IO32`) から 2+ へ
+- 出力は 30 列の節 (`dac[7]` の節) から AD3 の 1+ へ。`sync` は上の列の 22 列 (27 番ピン、`IO32`) から 2+ へ。AD3 のピンは左から GND・2+・1−・2−・1+ と、挿す列の順に並べた (線が交わらない)
 - 線の色: 黒は GND だけ。FPGA から R-2R への 8 本は、`dac[0]` から順に白・灰・茶・橙・黄・緑・青・紫。赤は使わない (+ の電源が無い)
 - 流れる電流は 1 本のピンで最大 0.11 mA ほど (3.3 V ÷ 30 kΩ)。信号は 3 MHz 以下で、ブレッドボードの範囲に収まる
 
