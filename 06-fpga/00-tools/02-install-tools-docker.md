@@ -154,26 +154,33 @@ docker run --rm --user "$(id -u):$(id -g)" -v "$PWD":/work wb-pico-sdk \
 | 確かめること | 打つ物 | 出た物 |
 | --- | --- | --- |
 | Verilator の版 | `verilator --version` (sfa-dev の中) | `Verilator 5.048 2026-04-26 rev v5.048` |
-| カウンタのビルドと実行 | `/tmp/b1/sim` | `OK: 100 cycles, last count=100` |
+| カウンタのビルドと実行 | `/tmp/b1/sim` | `OK: all checks passed (head=644)` |
 | lint | `verilator --lint-only -Wall …/counter.v` | 警告なし (終了コード 0) |
 | Pico SDK の版 | `git -C /opt/pico-sdk describe --tags` (wb-pico-sdk の中) | `2.2.0` |
 | コンパイラ | `arm-none-eabi-gcc --version` | `13.2.1 20231009` |
 | `.uf2` | `ls -l build/blink.uf2` | 12800 バイトのファイルができる |
 
-`count=100` は、100 クロック数えたカウンタの値。0 から数えて 100 回目の立ち上がりで 100 になる。
+`/tmp/b1/sim` は `examples/01-counter/cxx/main_linux.cpp` の自己検査で、全部通ると `OK` を 1 行出す。
+検査の 1 つが「リセットのあと 100 クロック回すと `count` が 100 になる」で、0 から数えて 100 回目の立ち上がりで 100 になる。`head=644` はそのあとの検査も含めた記録の数。
 `blink.uf2` を Pico 2 に書いて動かすことは、この題ではしていない。実機での確認は 0-3 と 0-4 に置く。
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-道具は Verilator 5.042 (この本の確認環境。本文の Docker の 5.048 とは版が違う) と Icarus Verilog 12.0。`sim/05-first-counter-web-tb.v` を流用した。
+本文のとおり、soft-fpga の `docker/Dockerfile` (`sfa-dev:local`、Verilator v5.048) と、上の `Dockerfile` の `wb-pico-sdk` を作って確かめた。
+soft-fpga は `ac6b663` と最新 (`a96633a`) の両方で同じだった。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
-| `counter.v` の lint | 警告なし、終了コード 0 | 警告なし、終了コード 0 (Verilator 5.042) | 合った |
-| 100 クロック後の count | 100 | 100 クロック目の立ち上がり後に 100 | 合った |
+| Verilator の版 | `Verilator 5.048 2026-04-26 rev v5.048` | 同じ | 合った |
+| `counter.v` の lint | 警告なし、終了コード 0 | 警告なし、終了コード 0 (Verilation Report の 3 行) | 合った |
+| カウンタのビルドと実行 | `OK: all checks passed (head=644)` | 同じ (100 クロック後の count が 100、の検査を含む) | 合った |
+| Pico SDK の版 | `2.2.0` | `2.2.0` | 合った |
+| コンパイラ | `13.2.1 20231009` | `arm-none-eabi-gcc (15:13.2.rel1-2) 13.2.1 20231009` | 合った |
+| `blink.uf2` | 12800 バイト | 12800 バイト | 合った |
 
-Docker のコンテナの作成・Verilator 5.048・Pico SDK 2.2.0・arm-none-eabi-gcc 13.2.1・`blink.uf2` の 12800 バイトは、
-この環境では Docker のコンテナを組み直していないので確かめていない (対象外)。
+確かめられなかったもの。
+
+- `blink.uf2` を Pico 2 に書いて動かすこと (実機。0-3 と 0-4)
 
 ## 出典
 

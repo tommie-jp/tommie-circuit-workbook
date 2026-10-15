@@ -279,17 +279,17 @@ int main() {
 
 ## 回路の規模 (計算と PC の参考値)
 
-規模は yosys 0.33 の `synth_gowin` (Tang Nano 9K の FPGA 向け) で数えた。PC の値は、同じ Verilog を Verilator 5.042 (`-O3`) で C++ にし、
+規模は yosys 0.33 の `synth_gowin` (Tang Nano 9K の FPGA 向け) で数えた。PC の値は、同じ Verilog を Verilator 5.048 (`-O3`、`sfa-dev`) で C++ にし、
 g++ (`-O2`) で組んで PC (Intel Core Ultra 9 285K) で回した、立ち上がりと立ち下がりの `eval()` 2 回の平均。
 
 | 回路 | FF | LUT・MUX | 加算の段 (ALU) | PC で 1 クロック (参考) |
 | --- | --- | --- | --- | --- |
-| 8 ビットのカウンタ | 8 | 0 | 8 | 約 31 ns |
-| 32 ビットのカウンタ | 32 | 0 | 32 | 約 28 ns |
-| TD4 | 12 | 58 | 8 | 約 32 ns |
-| `blink` (CLK_HZ = 1000) | 10 | 7 | 9 | 約 28 ns |
-| `many` (N = 16) | — | — | — | 約 29 ns |
-| `many` (N = 256) | 8192 (計算: 32 × 256) | — | — | 約 1300 ns |
+| 8 ビットのカウンタ | 8 | 0 | 8 | 約 29 ns |
+| 32 ビットのカウンタ | 32 | 0 | 32 | 約 32 ns |
+| TD4 | 12 | 58 | 8 | 約 31 ns |
+| `blink` (CLK_HZ = 1000) | 10 | 7 | 9 | 約 29 ns |
+| `many` (N = 16) | — | — | — | 約 30 ns |
+| `many` (N = 256) | 8192 (計算: 32 × 256) | — | — | 約 1290 ns |
 
 - PC の値は 3 回ずつ測った (2000 万クロックずつ。N = 256 は 100 万クロック)。ばらつきは 1〜2 ns ほどあった
 - **小さな回路 4 つの差は PC ではほとんど出なかった。** `eval()` を呼ぶこと自体の手間が大きく、回路の計算はその陰に隠れると考えられる。
@@ -353,9 +353,7 @@ trigger: AUX rising at 0s
 
 yosys 0.33 (`synth_gowin`)、Verilator 5.042、手元の Pico SDK 2.2.0 で確かめた。`counter.v` (2-4)・`blink.v` (2-7)・`TD4.v` (5-8) と本文の `many.v`・
 `models.h`・`clock56.cpp` を使った。主ループの切り替えは替え玉の GPIO で PC で回した (`sim/06-clock-vs-size.v`・`sim/06-clock-vs-size-pc.cpp`)。
-`.uf2` と `arm-none-eabi-size` の値は、手元の Pico SDK 2.2.0 と arm-none-eabi-gcc 13.2.1 に、Verilator 5.042 のヘッダと、
-5.042 の `verilated.cpp` に 5-1 の表の 3 と同じ趣旨の直しを当てた写し (`sim/make-pico-runtime.py` で作る) を組み合わせて、
-本文の `.cpp` と `.v` から作り直した。本文は Verilator 5.048 (`sfa-dev`) なので、バイト数は 1 % ほど小さく出る。近い値として見る。
+`.uf2` と `arm-none-eabi-size` の値は、本文の Docker イメージ (`sfa-dev:local` の Verilator 5.048 と `wb-pico-sdk` の Pico SDK 2.2.0、`arm-none-eabi-gcc` 13.2.1) で、本文の `.cpp` と `.v` からビルドし直した値。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
@@ -368,11 +366,11 @@ yosys 0.33 (`synth_gowin`)、Verilator 5.042、手元の Pico SDK 2.2.0 で確�
 | `many` (N = 16) | 表では「—」 | 参考: FF 497、ALU 497、LUT4 431 (合成で一部が省かれる) | 参考 |
 | DIP の選択 (SW1〜SW3 → 回路) | 000 = counter8、001 = counter32、010 = TD4、011 = blink、1xx = many | `read_sel()` で 0・1・2・3・4 になり、それぞれの回路が回った | 合った |
 | AUX の周期 | 1000 クロックごとに反転 | 4000 周で 4 回 (どの回路も) | 合った |
-| `.uf2` の大きさ | 107 008 バイト | 105 984 バイト (版の差) | 近い値 |
+| `.uf2` の大きさ | 107 008 バイト | 107 008 バイト | 合った |
+| PC で 1 クロック (3 回ずつの平均) | 約 29・32・31・29・30・1290 ns (本表の並び) | `sfa-dev` の Verilator 5.048 (`-O3`) と g++ (`-O2`) で Core Ultra 9 285K に回した値をそのまま書いた (28.7・32.4・31.6・28.8・29.6・1288 ns) | 合った |
 
 確かめられなかったもの。
 
-- 「PC で 1 クロック」の ns の列。CPU に依る参考値で、ここでは測り直していない (本文も Pico 2 の値ではないと書いてある)
 - Pico 2 での 1 クロックの時間 (実機)。「見るべき値」の表は空のまま
 
 ## 出典

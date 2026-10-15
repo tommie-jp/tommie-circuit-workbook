@@ -334,18 +334,16 @@ DIP スイッチを手で切り替えると、切り替えの瞬間に H と L �
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-手元の Pico SDK 2.2.0 と Verilator 5.042 で確かめた。`io_reg.v` を lint し、本文の `main.cpp` を替え玉の GPIO で PC で回した
+PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大きさは、本文の Docker でビルドし直した。`io_reg.v` を lint し、本文の `main.cpp` を替え玉の GPIO で PC で回した
 (`sim/03-gpio-io.v`・`sim/03-gpio-io-pc.cpp`。本文の `while (true)` を 6 周に替え、周ごとに入力のピンを与えた)。
-`.uf2` と `arm-none-eabi-size` の値は、手元の Pico SDK 2.2.0 と arm-none-eabi-gcc 13.2.1 に、Verilator 5.042 のヘッダと、
-5.042 の `verilated.cpp` に 5-1 の表の 3 と同じ趣旨の直しを当てた写し (`sim/make-pico-runtime.py` で作る) を組み合わせて、
-本文の `.cpp` と `.v` から作り直した。本文は Verilator 5.048 (`sfa-dev`) なので、バイト数は 1 % ほど小さく出る。近い値として見る。
+`.uf2` と `arm-none-eabi-size` の値は、本文の Docker イメージ (`sfa-dev:local` の Verilator 5.048 と `wb-pico-sdk` の Pico SDK 2.2.0、`arm-none-eabi-gcc` 13.2.1) で、本文の `.cpp` と `.v` からビルドし直した値。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
 | lint (`-Wall`) | 警告なし | 警告 0 件 | 合った |
 | PC で回した 6 周 | 本文の `text` のとおり | 6 行とも同じ | 合った |
 | ピンの番号 | GP14 = 19 番、GP15 = 20 番、GP16 = 21 番、GP17 = 22 番 | Pico の標準ピン配置と同じ | 合った |
-| `.uf2` の大きさ | 92 672 バイト | 91 648 バイト (版の差) | 近い値 |
+| `.uf2` の大きさ | 92 672 バイト | 92 672 バイト | 合った |
 | LED の電流 | 約 3.9 mA | (3.3 − 2.0) ÷ 330 = 3.9 mA (計算) | 計算値として合った |
 
 確かめられなかったもの。

@@ -452,11 +452,9 @@ trigger: BTN falling at 0s
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-手元の Pico SDK 2.2.0 と Verilator 5.042 で確かめた。`seg_counter.v` は 2-10 の `edge_detect.v` と 1-8 の `seg7_decoder.v` と合わせて lint し、
+PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大きさは、本文の Docker でビルドし直した。`seg_counter.v` は 2-10 の `edge_detect.v` と 1-8 の `seg7_decoder.v` と合わせて lint し、
 本文の `seg515.cpp` を替え玉の GPIO で PC で回して、ボタンの入れ方を 3 通り与えた (`sim/15-seg7-button.v`・`sim/15-seg7-button-pc.cpp`)。
-`.uf2` と `arm-none-eabi-size` の値は、手元の Pico SDK 2.2.0 と arm-none-eabi-gcc 13.2.1 に、Verilator 5.042 のヘッダと、
-5.042 の `verilated.cpp` に 5-1 の表の 3 と同じ趣旨の直しを当てた写し (`sim/make-pico-runtime.py` で作る) を組み合わせて、
-本文の `.cpp` と `.v` から作り直した。本文は Verilator 5.048 (`sfa-dev`) なので、バイト数は 1 % ほど小さく出る。近い値として見る。
+`.uf2` と `arm-none-eabi-size` の値は、本文の Docker イメージ (`sfa-dev:local` の Verilator 5.048 と `wb-pico-sdk` の Pico SDK 2.2.0、`arm-none-eabi-gcc` 13.2.1) で、本文の `.cpp` と `.v` からビルドし直した値。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
@@ -467,7 +465,7 @@ trigger: BTN falling at 0s
 | `seg` の値 | 0x3F・0x06・0x5B・0x4F・0x66・0x6D・0x7D・0x07・0x7F・0x6F | 同じ | 合った |
 | ピンの番号 | GP9 = 12 番 … GP26 = 31 番 | Pico の標準ピン配置と同じ | 合った |
 | 「8」の電流 | 約 27 mA | 7 × (3.3 − 2.0) ÷ 330 = 27.6 mA (計算) | 計算値として合った |
-| `.uf2` の大きさ | 93 696 バイト、text 50 476・bss 2 308 | 92 672 バイト、text 50 108・bss 2 276 (版の差) | 近い値 |
+| `.uf2` の大きさ | 93 696 バイト、text 50 476・bss 2 308 | 93 696 バイト、text 50 476・bss 2 308 | 合った |
 
 確かめられなかったもの。
 

@@ -51,7 +51,7 @@ diff orig_verilated.cpp verilated.cpp
 
 | 所 (行) | 元 | 直し | 理由 |
 | --- | --- | --- | --- |
-| `#include <iostream>`・`<sstream>` (62・66) | 標準ライブラリの入出力 | 外す | C++ のロケールなどを引き込み、`.uf2` が大きくなる (5-1 の「見るべき値」に 599 040 バイトと 92 160 バイトの差) |
+| `#include <iostream>`・`<sstream>` (62・66) | 標準ライブラリの入出力 | 外す | C++ のロケールなどを引き込み、`.uf2` が大きくなる (5-1 の「見るべき値」に 600 576 バイトと 92 160 バイトの差) |
 | スレッド数の検査 (3126) | モデルのスレッド数がコンテキストより多いと止まる | 検査を外す | Pico 2 では `hardware_concurrency()` が 0 を返し、検査に引っかかる (5-1 の表の 3) |
 | 引数の診断 `fail` (3295) | `std::stringstream` で文を作る | 固定の文にする | `Verilated::commandArgs()` を呼ばないので届かない |
 | SystemC の時間精度の診断 (3576) | `std::ostringstream` で文を作る | 固定の文にする | SystemC は使わない |
@@ -61,6 +61,27 @@ diff orig_verilated.cpp verilated.cpp
 ## 実際にビルドして確かめる
 
 次の 3 つの Verilog を、5-1 と同じ手順 (`verilate.sh` → Pico SDK) でビルドした。主ループは `static` のモデルを 1 つ置き、立ち下がり・立ち上がりの `eval()` を繰り返す形で、どれも同じ。
+`p_none` の主ループは次の形で、LED は GP14 に `count` の最下位を出す。
+
+```cpp
+#include "pico/stdlib.h"
+#include "Vp_none.h"
+static Vp_none top;
+int main() {
+    gpio_init(14); gpio_set_dir(14, GPIO_OUT);
+    top.rst = 1; top.clk = 0; top.eval(); top.clk = 1; top.eval();   // リセット
+    top.rst = 0;
+    while (true) {
+        top.clk = 0; top.eval();
+        top.clk = 1; top.eval();
+        gpio_put(14, top.count & 1);
+    }
+}
+```
+
+`p_disp` は `static VerilatedContext ctx; static Vp_disp top{&ctx};` にして、ループの条件を `while (!ctx.gotFinish())` に替える (ループのあとは `tight_loop_contents()` で待つ)。
+`p_rom`・`p_rom2` は、リセットの代わりに周回ごとに `top.addr` を 0〜15 で進め、`data` の最下位を出す。
+どれも `stdio_init_all()` は呼んでいない (表の大きさは、周りの仕事を足したぶんだけを見るため)。
 
 `p_none.v` (周りの仕事を使わない 4 ビットのカウンタ):
 
@@ -117,9 +138,9 @@ endmodule
 
 | 回路 | `.uf2` | text | bss | `p_none` との差 (text) |
 | --- | --- | --- | --- | --- |
-| `p_none` | 93 184 バイト | 50 372 バイト | 2 376 バイト | — |
-| `p_disp` (`$display` + `$finish`) | 121 856 バイト | 64 752 バイト | 2 820 バイト | +14 380 バイト |
-| `p_rom` (`$readmemh`) | 105 984 バイト | 56 740 バイト | 2 404 バイト | +6 368 バイト |
+| `p_none` | 93 184 バイト | 50 184 バイト | 2 372 バイト | — |
+| `p_disp` (`$display` + `$finish`) | 121 856 バイト | 64 524 バイト | 2 812 バイト | +14 340 バイト |
+| `p_rom` (`$readmemh`) | 105 984 バイト | 56 568 バイト | 2 400 バイト | +6 384 バイト |
 
 - **3 つともビルドとリンクは通った。** Pico SDK の newlib に `fopen` や `printf` が無いことは、リンクを止めない
 - `$display` を 1 つ書くと、書式を整形する関数 (`_vl_vsformat` ほか) が引き込まれ、text が約 14 KB 増えた。フラッシュ (4 MB) には収まる
@@ -200,7 +221,7 @@ endmodule
 
 | 回路 | `.uf2` | text | `p_none` との差 (text) |
 | --- | --- | --- | --- |
-| `p_rom2` (`initial` に置き換え) | 93 184 バイト | 50 172 バイト | −200 バイト |
+| `p_rom2` (`initial` に置き換え) | 92 672 バイト | 50 000 バイト | −184 バイト |
 
 `$readmemh` の版 (`p_rom`) より text が 6 568 バイト小さく、ファイルを読む仕組みも要らない。
 Verilator の `--public-flat-rw` で内部の配列に C++ から書き込む方法もあるが、ここでは使わない
@@ -232,20 +253,18 @@ Verilator の `--public-flat-rw` で内部の配列に C++ から書き込む方
 | 確かめること | 打つ物 | 出た物 |
 | --- | --- | --- |
 | 変換 (`-Wall`) | `sh verilate.sh` (`sfa-dev:local` の中) | `p_none`・`p_disp`・`p_rom`・`p_rom2` とも警告なし |
-| `$display` + `$finish` を足したときの text の増え方 | `arm-none-eabi-size` | +14 380 バイト (50 372 → 64 752) |
-| `$readmemh` を足したときの text の増え方 | 同じ | +6 368 バイト (50 372 → 56 740) |
-| `$readmemh` を `initial` に直したとき | 同じ | 50 172 バイト (`p_none` より 200 バイト少ない) |
+| `$display` + `$finish` を足したときの text の増え方 | `arm-none-eabi-size` | +14 340 バイト (50 184 → 64 524) |
+| `$readmemh` を足したときの text の増え方 | 同じ | +6 384 バイト (50 184 → 56 568) |
+| `$readmemh` を `initial` に直したとき | 同じ | 50 000 バイト (`p_none` より 184 バイト少ない) |
 | `--trace` で変換して通すと | `cmake --build` | コンパイルエラー (`VerilatedTrace` が不完全な型) |
 | 5-1 の `diff` | `diff orig_verilated.cpp verilated.cpp` | 5 か所・50 行。診断文と検査だけ |
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-手元の Pico SDK 2.2.0 と Verilator 5.042 で確かめた。本文の `p_none.v`・`p_disp.v`・`p_rom.v`・`p_rom2.v`・`hex2init.py` を抜き出し、
+PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大きさは、本文の Docker でビルドし直した。本文の `p_none.v`・`p_disp.v`・`p_rom.v`・`p_rom2.v`・`hex2init.py` を抜き出し、
 `-Wall --no-timing --no-trace` で C++ にして、PC の Verilator と Pico SDK でそれぞれ動かした
 (`sim/13-runtime-trim-*.v`・`-disp-tb.cpp`・`-rom-tb.cpp`)。主ループは本文の説明どおり (static のモデルを 1 つ、立ち下がり・立ち上がりの `eval()`) に書いた。
-`.uf2` と `arm-none-eabi-size` の値は、手元の Pico SDK 2.2.0 と arm-none-eabi-gcc 13.2.1 に、Verilator 5.042 のヘッダと、
-5.042 の `verilated.cpp` に 5-1 の表の 3 と同じ趣旨の直しを当てた写し (`sim/make-pico-runtime.py` で作る) を組み合わせて、
-本文の `.cpp` と `.v` から作り直した。本文は Verilator 5.048 (`sfa-dev`) なので、バイト数は 1 % ほど小さく出る。近い値として見る。
+`.uf2` と `arm-none-eabi-size` の値は、本文の Docker イメージ (`sfa-dev:local` の Verilator 5.048 と `wb-pico-sdk` の Pico SDK 2.2.0、`arm-none-eabi-gcc` 13.2.1) で、本文の `.cpp` と `.v` からビルドし直した値。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
@@ -257,14 +276,17 @@ Verilator の `--public-flat-rw` で内部の配列に C++ から書き込む方
 | `p_rom2` (`initial` に置き換え) | `p_rom` と同じ中身 | 16 値とも `p_rom` と同じ | 合った |
 | `--trace` でビルド | コンパイルエラー (`VerilatedTrace` が不完全な型) | `invalid use of incomplete type 'class VerilatedTrace<...>'` と `'VerilatedTracePrefixType' was not declared` | 合った |
 | `_exit` と `_open` | `_exit` は `__breakpoint()` の無限ループ、`_open` は −1 | `newlib_interface.c` のとおり | 合った |
-| `.uf2` (`p_none`) | 93 184 バイト、text 50 372・bss 2 376 | 92 160 バイト、text 49 696・bss 2 692 | 近い値 (版と主ループの差) |
-| `$display` を足したときの text | +14 380 バイト | +10 980 バイト (60 676) | 向きと桁は合った。実数は版で違う |
-| `$readmemh` を足したときの text | +6 368 バイト | +6 488 バイト | 近い値 |
-| `initial` に直したときの text | −200 バイト | −136 バイト | 近い値 |
+| `.uf2` (`p_none`) | 93 184 バイト、text 50 184・bss 2 372 | 93 184 バイト、text 50 184・bss 2 372 | 合った |
+| `.uf2` (`p_disp`) | 121 856 バイト、text 64 524・bss 2 812 | 121 856 バイト、text 64 524・bss 2 812 | 合った |
+| `.uf2` (`p_rom`) | 105 984 バイト、text 56 568・bss 2 400 | 105 984 バイト、text 56 568・bss 2 400 | 合った |
+| `.uf2` (`p_rom2`) | 92 672 バイト、text 50 000 | 92 672 バイト、text 50 000 | 合った |
+| `$display` を足したときの text | +14 340 バイト | +14 340 バイト | 合った |
+| `$readmemh` を足したときの text | +6 384 バイト | +6 384 バイト | 合った |
+| `initial` に直したときの text | −184 バイト | −184 バイト | 合った |
+| `verilated.cpp` の `diff` | 5 か所・50 行、行は 62・66・3126・3295・3576 | `sfa-dev` の 5.048 の `verilated.cpp` と、コミット `5be3b16` の `verilated.cpp` の `diff` が 5 か所・50 行 (`62c62,67`・`66d70`・`3126,3133c3130,3136`・`3295,3302c3298,3302`・`3576,3584c3576,3580`) | 合った |
 
 確かめられなかったもの。
 
-- 5.048 のランタイムとの `diff` (5 か所・50 行)。手元に 5.048 が無い。本文の行番号 (3126・3295・3576) は確かめていない
 - Pico 2 の上での `$display` の出力先と `exit` で固まる動き (実機)。ソースの読みだけ
 
 ## 出典

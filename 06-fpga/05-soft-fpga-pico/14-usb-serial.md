@@ -332,20 +332,18 @@ trigger: CLK rising at 0s
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-手元の Pico SDK 2.2.0 (TinyUSB 入り) と Verilator 5.042 で確かめた。`TD4.v` (5-8) と本文の `serial514.cpp` を替え玉の GPIO で PC で回し、
+PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大きさは、本文の Docker (USB 付きだけ TinyUSB 入りの Pico SDK 2.2.0) でビルドし直した。`TD4.v` (5-8) と本文の `serial514.cpp` を替え玉の GPIO で PC で回し、
 出る行を読んだ (`sim/14-usb-serial-pc.cpp`。5-5 と同じ `sed` に、`stdio_init_all()` を何もしない関数に替える行を足した `s_pc.cpp` を使う)。
-`.uf2` と `arm-none-eabi-size` の値は、手元の Pico SDK 2.2.0 と arm-none-eabi-gcc 13.2.1 に、Verilator 5.042 のヘッダと、
-5.042 の `verilated.cpp` に 5-1 の表の 3 と同じ趣旨の直しを当てた写し (`sim/make-pico-runtime.py` で作る) を組み合わせて、
-本文の `.cpp` と `.v` から作り直した。本文は Verilator 5.048 (`sfa-dev`) なので、バイト数は 1 % ほど小さく出る。近い値として見る。
+`.uf2` と `arm-none-eabi-size` の値は、本文の Docker イメージ (`sfa-dev:local` の Verilator 5.048 と `wb-pico-sdk` の Pico SDK 2.2.0、`arm-none-eabi-gcc` 13.2.1) で、本文の `.cpp` と `.v` からビルドし直した値。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
 | 出す行 (12 行) | `1 pc=1 op=B6 out=3` … `12 pc=2 op=BC out=6` | 12 行とも同じ | 合った |
 | SW1 ON (1000 クロックに 1 行) | 1000 クロックごと | 1000・2000・3000 行目 (クロック数) で `pc=0 op=B3 out=1` (1000 は 10 の倍数なので `pc=0`) | 合った |
-| USB 付きの `.uf2` | 123 392 バイト、text 65 272・bss 4 948 | 122 368 バイト、text 64 952・bss 4 916 (版の差) | 近い値 |
-| USB なし (UART 無効) の `.uf2` | 95 232 バイト、text 51 432 | 94 720 バイト、text 51 120 | 近い値 |
+| USB 付きの `.uf2` | 123 392 バイト、text 65 272・bss 4 948 | 123 392 バイト、text 65 272・bss 4 948 | 合った |
+| USB なし (UART 無効) の `.uf2` | 95 232 バイト、text 51 432 | 95 232 バイト、text 51 432 | 合った |
 | USB の部品が増やす分 | text 約 14 KB、bss 約 2.6 KB | text +13.8 KB、bss +2.6 KB | 合った |
-| TinyUSB が無いと黙って USB が付かない | CMake の警告 | 手元の SDK は TinyUSB 入りのため再現していない | 対象外 |
+| TinyUSB が無いと黙って USB が付かない | CMake の警告 | `wb-pico-sdk` (TinyUSB 無し) で `pico_enable_stdio_usb` を書いてビルドすると、`TinyUSB submodule has not been initialized; USB support will be unavailable` の警告が出て、`.uf2` は USB なしと同じ 95 232 バイト、text 51 432 | 合った |
 
 確かめられなかったもの。
 

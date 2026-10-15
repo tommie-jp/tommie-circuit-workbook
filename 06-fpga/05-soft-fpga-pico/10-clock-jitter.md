@@ -381,11 +381,9 @@ trigger: CLK rising at 0s
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-手元の Pico SDK 2.2.0 と Verilator 5.042 で確かめた。`counter.v` (2-4、`-GW=8`) と本文の `clock510.cpp` をビルドし直し、
+PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大きさは、本文の Docker でビルドし直した。`counter.v` (2-4、`-GW=8`) と本文の `clock510.cpp` をビルドし直し、
 `jitter.py` を作り物の CSV で動かし、表の数を計算し直した。
-`.uf2` と `arm-none-eabi-size` の値は、手元の Pico SDK 2.2.0 と arm-none-eabi-gcc 13.2.1 に、Verilator 5.042 のヘッダと、
-5.042 の `verilated.cpp` に 5-1 の表の 3 と同じ趣旨の直しを当てた写し (`sim/make-pico-runtime.py` で作る) を組み合わせて、
-本文の `.cpp` と `.v` から作り直した。本文は Verilator 5.048 (`sfa-dev`) なので、バイト数は 1 % ほど小さく出る。近い値として見る。
+`.uf2` と `arm-none-eabi-size` の値は、本文の Docker イメージ (`sfa-dev:local` の Verilator 5.048 と `wb-pico-sdk` の Pico SDK 2.2.0、`arm-none-eabi-gcc` 13.2.1) で、本文の `.cpp` と `.v` からビルドし直した値。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
@@ -395,7 +393,7 @@ trigger: CLK rising at 0s
 | 1 サイクル | 150 MHz で 6.67 ns | 6.67 ns | 合った |
 | `jitter.py` | 動きだけを作り物の CSV で確かめた | 周期 40 µs ± 0.1 µs の 300 周期で、周期の数 299、最小 39.900・最大 40.100・平均 39.998・標準偏差 0.072 µs。入力と同じ値 | 合った |
 | `.cpp` のビルド | エラーなし | エラーなし | 合った |
-| `.uf2` の大きさ | 94 208 バイト、text 50 720・bss 2 400 バイト | 93 184 バイト、text 50 344・bss 2 368 バイト (版の差) | 近い値 |
+| `.uf2` の大きさ | 94 208 バイト、text 50 720・bss 2 400 バイト | 94 208 バイト、text 50 720・bss 2 400 バイト | 合った |
 
 確かめられなかったもの。
 

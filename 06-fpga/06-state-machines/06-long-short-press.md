@@ -597,7 +597,7 @@ ok   glitch 5 ms: short 0 long 0 repeat 0
 PASS
 ```
 
-5 つの押し方で、出来事の数はどれも正しかった (Verilator 5.042 で実行)。
+5 つの押し方で、出来事の数はどれも正しかった (Verilator 5.042 と 5.048 で実行)。
 
 - 行の時刻は、パルスを読んだクロックの立ち上がり。LED はその同じ立ち上がりで点き、100 ms 後に消える
 - 短押し (1): 離した 300 ms から 22.5 ms 後に `short`。最後の跳ね (301.4 ms) から `debounce` の 21 ms と、状態機械の 1 クロックを足した所。跳ねても 1 回だけ
@@ -673,8 +673,8 @@ trigger: BTN falling at 0s
 
 Verilator 5.042 で、本文の `press_fsm.v`・`pulse_stretch.v`・`press_top.v`・試験 `tb_press` を抜き出して走らせ直した。`debounce.v` は 6-3 のもの
 (`sim/03-debounce.v`)。原本は `sim/06-long-short-press.v` (`press_fsm`)・`-stretch.v`・`-top.v`・`-tb.v`。
-`.uf2` は、手元の Pico SDK 2.2.0 と arm-none-eabi-gcc 13.2.1 に、Verilator 5.042 のヘッダと、5.042 の `verilated.cpp` に
-5-1 の表の 3 と同じ趣旨の直しを当てた写しを組み合わせてビルドし直した (本文は Verilator 5.048)。版が違うので、バイト数は近い値としてだけ見る。
+`.uf2` は、本文の Docker イメージ (`sfa-dev:local` の Verilator 5.048 と `wb-pico-sdk` の Pico SDK 2.2.0、`arm-none-eabi-gcc` 13.2.1) でビルドし直した。
+試験 `tb_press` も `sfa-dev` の Verilator 5.048 (`verilator --binary --timing`) で走らせ直した。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
@@ -684,13 +684,13 @@ Verilator 5.042 で、本文の `press_fsm.v`・`pulse_stretch.v`・`press_top.v
 | 短押しで離してから `short` まで | 22.5 ms (最後の跳ね 301.4 ms から 21.1 ms) | 322.5 − 300 = 22.5 ms、322.5 − 301.4 = 21.1 ms | 合った |
 | 長押しで押してから `long` まで | 1025.5 ms (跳ね有)、1022.5 ms (跳ね無し) | 1825.5 − 800 = 1025.5 ms、6522.5 − 5500 = 1022.5 ms | 合った |
 | `repeat` の間隔・数 | 200 ms ごとに 7 回 | 2025.5〜3225.5 ms の 7 回、間隔 200 ms | 合った |
-| `.uf2` の大きさ | 95 744 バイト | 94 720 バイト (Verilator 5.042 のランタイムで。−1.1 %) | 近い値 (版の差) |
+| `.uf2` の大きさ | 95 744 バイト | 95 744 バイト (text 51 504・bss 2 760) | 合った |
+| シミュレーションの出力 (39 行、5.048) | 本文の `text` のとおり | 39 行とも同じ、`PASS` | 合った |
 | `.cpp` のコンパイル | 警告なし | エラーなしでリンクまで通った (警告の有無は見ていない) | 通った |
 
 確かめられなかったもの。
 
 - Pico 2 への書き込み、AD3 での測定、実機の 1 クロックの正確さ
-- 本文の Verilator 5.048 / `sfa-dev` / `wb-pico-sdk` の Docker イメージでのビルドそのもの (手元に無い)
 
 ## 出典
 

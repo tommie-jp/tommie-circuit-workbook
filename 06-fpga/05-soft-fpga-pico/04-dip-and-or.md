@@ -312,11 +312,9 @@ FPGA のゲートなら入力が変われば ns (ナノ秒) の桁で出力が�
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-手元の Pico SDK 2.2.0 と Verilator 5.042 で確かめた。`gates.v` を lint し、本文の `main.cpp` を替え玉の GPIO で PC で回して 4 通りの入力を与えた
+PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大きさは、本文の Docker でビルドし直した。`gates.v` を lint し、本文の `main.cpp` を替え玉の GPIO で PC で回して 4 通りの入力を与えた
 (`sim/04-dip-and-or.v`・`sim/04-dip-and-or-pc.cpp`)。
-`.uf2` と `arm-none-eabi-size` の値は、手元の Pico SDK 2.2.0 と arm-none-eabi-gcc 13.2.1 に、Verilator 5.042 のヘッダと、
-5.042 の `verilated.cpp` に 5-1 の表の 3 と同じ趣旨の直しを当てた写し (`sim/make-pico-runtime.py` で作る) を組み合わせて、
-本文の `.cpp` と `.v` から作り直した。本文は Verilator 5.048 (`sfa-dev`) なので、バイト数は 1 % ほど小さく出る。近い値として見る。
+`.uf2` と `arm-none-eabi-size` の値は、本文の Docker イメージ (`sfa-dev:local` の Verilator 5.048 と `wb-pico-sdk` の Pico SDK 2.2.0、`arm-none-eabi-gcc` 13.2.1) で、本文の `.cpp` と `.v` からビルドし直した値。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
@@ -324,7 +322,7 @@ FPGA のゲートなら入力が変われば ns (ナノ秒) の桁で出力が�
 | PC で回した 4 通り | 本文の `text` のとおり (a・b = 00・01・10・11 で AND・OR・NOT) | 4 行とも同じ | 合った |
 | 「見るべき値」の表 | 真理値表のとおり | 4 通りの LED の点き方が上の結果と同じ | 合った |
 | Patterns の 2 本の位相から読む a・b | X1 (7.5 ms) で a = 0・b = 1、X2 (17.5 ms) で a = 1・b = 1 | 50 Hz と 100 Hz の方形波を 4 通りに割ると、7.5 ms は GP17 = H・GP16 = L、17.5 ms は L・L (計算) | 合った |
-| `.uf2` の大きさ | 93 184 バイト | 92 160 バイト (版の差) | 近い値 |
+| `.uf2` の大きさ | 93 184 バイト | 93 184 バイト | 合った |
 
 確かめられなかったもの。
 

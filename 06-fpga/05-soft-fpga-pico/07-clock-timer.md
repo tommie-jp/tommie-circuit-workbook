@@ -271,11 +271,9 @@ trigger: MON0 rising at 0s
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-手元の Pico SDK 2.2.0 と Verilator 5.042 で確かめた。本文の `models.h`・`clock57.cpp` を替え玉の GPIO とタイマ (`sim/pcstub/`) で PC で回し、
+PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大きさは、本文の Docker でビルドし直した。本文の `models.h`・`clock57.cpp` を替え玉の GPIO とタイマ (`sim/pcstub/`) で PC で回し、
 `blink` (`CLK_HZ` = 1000) を選んで 5000 クロック回した (`sim/07-clock-timer-pc.cpp`)。
-`.uf2` と `arm-none-eabi-size` の値は、手元の Pico SDK 2.2.0 と arm-none-eabi-gcc 13.2.1 に、Verilator 5.042 のヘッダと、
-5.042 の `verilated.cpp` に 5-1 の表の 3 と同じ趣旨の直しを当てた写し (`sim/make-pico-runtime.py` で作る) を組み合わせて、
-本文の `.cpp` と `.v` から作り直した。本文は Verilator 5.048 (`sfa-dev`) なので、バイト数は 1 % ほど小さく出る。近い値として見る。
+`.uf2` と `arm-none-eabi-size` の値は、本文の Docker イメージ (`sfa-dev:local` の Verilator 5.048 と `wb-pico-sdk` の Pico SDK 2.2.0、`arm-none-eabi-gcc` 13.2.1) で、本文の `.cpp` と `.v` からビルドし直した値。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
@@ -283,7 +281,7 @@ trigger: MON0 rising at 0s
 | 最初の反転 | リセットを放してから 500 個目の立ち上がり | 呼び出し 501 回目は 500 個目の立ち上がり (1 回目はクロックが 1 のまま変わらず立ち上がりにならない) | 合った |
 | 負の周期 | 呼び始めから次の呼び始めまで | Pico SDK 2.2.0 の `time.h` に同じ説明 (`<0` は呼び始めの間隔) | 合った |
 | `HALF_US` | 500 µs → 1 kHz | 半周期 500 µs の 2 倍 = 1 ms (計算) | 合った |
-| `.uf2` の大きさ | 107 520 バイト | 106 496 バイト (版の差) | 近い値 |
+| `.uf2` の大きさ | 107 520 バイト | 107 520 バイト | 合った |
 
 確かめられなかったもの。
 
