@@ -127,7 +127,7 @@ verilator -Wall --cc --exe --build gates.v tb_gates.cpp
 実行した結果は次のとおりだった (1 行目は列の名前)。
 
 ```text
-a b y_and y_or y_not
+# a b y_and y_or y_not
 0 0 0 0 1
 0 1 0 1 1
 1 0 0 1 0
@@ -169,6 +169,19 @@ signals:
 - y_and が 1 になるのは a と b が両方 1 の行だけ
 - y_or が 0 になるのは a と b が両方 0 の行だけ
 - y_not は b に関係なく、a の反対になる。b を変えても y_not の列は動かない
+
+## シミュレーションでの確かめ
+
+道具は Verilator 5.042 (本文のテストベンチ `sim/01-assign-gates-tb.cpp` を `--cc --exe --build` で組んで実行) と Icarus Verilog 12.0。回路は `sim/01-assign-gates.v` に置いた。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint | 警告なし | 警告なし (`verilator --lint-only -Wall`) | 合った |
+| 真理値表 4 行 | y_and = 0001、y_or = 0111、y_not = 1100 | 同じ (C++ と Icarus の両方) | 合った |
+| 図 2 のパターン | a 0011、b 0101、y_and 0001、y_or 0111、y_not 1100 | 実行結果と一致 | 合った |
+| 図 1 のつながり | G1 = NOT a、G2 = a AND b、G3 = a OR b | ネットリストと一致 | 合った |
+
+実行結果の見出し行は、テストベンチが `# a b y_and y_or y_not` と `#` を付けて出す。本文の表示には `#` が無かったので足した。
 
 ## 出典
 

@@ -163,6 +163,18 @@ docker run --rm --user "$(id -u):$(id -g)" -v "$PWD":/work wb-pico-sdk \
 `count=100` は、100 クロック数えたカウンタの値。0 から数えて 100 回目の立ち上がりで 100 になる。
 `blink.uf2` を Pico 2 に書いて動かすことは、この題ではしていない。実機での確認は 0-3 と 0-4 に置く。
 
+## シミュレーションでの確かめ (対象外を含む)
+
+道具は Verilator 5.042 (この本の確認環境。本文の Docker の 5.048 とは版が違う) と Icarus Verilog 12.0。`sim/05-first-counter-web-tb.v` を流用した。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| `counter.v` の lint | 警告なし、終了コード 0 | 警告なし、終了コード 0 (Verilator 5.042) | 合った |
+| 100 クロック後の count | 100 | 100 クロック目の立ち上がり後に 100 | 合った |
+
+Docker のコンテナの作成・Verilator 5.048・Pico SDK 2.2.0・arm-none-eabi-gcc 13.2.1・`blink.uf2` の 12800 バイトは、
+この環境では Docker のコンテナを組み直していないので確かめていない (対象外)。
+
 ## 出典
 
 自作。Verilator のコンテナは [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `docker/` と `examples/01-counter`。

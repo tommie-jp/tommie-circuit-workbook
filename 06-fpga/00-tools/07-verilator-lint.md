@@ -250,6 +250,19 @@ endmodule
 - 自分の回路を書いたら、波形を見る前に、必ず `-Wall` で lint を掛ける。警告 0 を、次の手順に進む条件にする
 - 警告の件数は、Verilator の版で変わることがある。この題の数は Verilator 5.042 のもの
 
+## シミュレーションでの確かめ
+
+道具は Verilator 5.042 (本文の版と同じ)。`sim/07-verilator-lint-bad.v` `sim/07-verilator-lint-good.v` `sim/07-verilator-lint-off.v` に本文の 3 本を置いた。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| `bad.v` を `-Wall` で | 終了コード 1、警告 9 件 | 終了コード 1、9 件 (警告の名前・行番号とも表のとおり) | 合った |
+| `bad.v` を `-Wall` なしで | 警告 5 件 | 5 件 (`IMPLICIT` `WIDTHTRUNC` `CASEINCOMPLETE` `LATCH` ×2) | 合った |
+| `good.v` | 警告なし、終了コード 0 | 警告なし、終了コード 0 | 合った |
+| `off.v` | 警告なし、終了コード 0 | 警告なし、終了コード 0 | 合った |
+| `PINMISSING` `DECLFILENAME` `WIDTHEXPAND` | 出る | 小さな回路 3 本で、それぞれの警告が出た | 合った |
+| 宣言なしの名前を式の中で使う | `%Error: Can't find definition of variable` | 同じエラー | 合った |
+
 ## 出典
 
 自作。警告の名前と意味は [Verilator のマニュアル](https://veripool.org/guide/latest/) の「Errors and Warnings」による。

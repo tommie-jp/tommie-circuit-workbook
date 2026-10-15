@@ -106,6 +106,17 @@ always @(posedge clk) q <= y;
 - Soft-FPGA で内部の信号が見えるのは、なぜか (モデルの値を直接読めるから)
 - Soft-FPGA で見えないものは何か (回路の遅れ)
 
+## シミュレーションでの確かめ (対象外を含む)
+
+道具は Icarus Verilog 12.0 と Verilator 5.042。`sim/01-fpga-vs-soft-fpga.v` に本文の 3 行を module に包んだ DUT とテストベンチを置いた。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| `q <= y` の動き | クロックの立ち上がりで q が y (= a & b) になる | a = b = 1 の立ち上がり後に q = 1、b = 0 にして次の立ち上がり後に q = 0 | 合った |
+| lint | (記載なし) | `verilator --lint-only -Wall` 警告なし | 合った |
+
+確かめられなかった範囲は、FPGA の遅れ (タイミング違反)・Soft-FPGA の実行速度・3 つの所の比べの表で、いずれも実機や配置配線 (nextpnr) が要る。
+
 ## 出典
 
 自作。soft-fpga の構成は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の README と `examples/01-counter`。

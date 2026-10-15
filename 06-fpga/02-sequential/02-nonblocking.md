@@ -121,6 +121,22 @@ endmodule
 
 2 つの違いは代入の記号だけである。
 
+`=` のまま、文の順だけを逆にした版も作る。テストベンチはこれも並べて比べる。
+
+```verilog
+module shift_bl_rev (
+    input  clk,
+    input  d,
+    output reg q1,
+    output reg q2
+);
+    always @(posedge clk) begin
+        q2 = q1;
+        q1 = d;
+    end
+endmodule
+```
+
 ## 動かす
 
 ```verilog
@@ -151,7 +167,7 @@ endmodule
 
 ```bash
 verilator --lint-only -Wall shift_nb.v
-verilator --timescale 1us/1ns --binary --timing --trace --top-module tb_nb shift_nb.v shift_bl.v tb_nb.v
+verilator --timescale 1us/1ns --binary --timing --trace --top-module tb_nb shift_nb.v shift_bl.v shift_bl_rev.v tb_nb.v
 ./obj_dir/Vtb_nb
 ```
 
@@ -203,6 +219,19 @@ cursors: [20us, 30us]
 - `=` でも、文の順を逆にして `q2 = q1; q1 = d;` と書くと、`<=` と同じ波形になった (実行して確かめた)。
   `=` は文の順で結果が変わる。`<=` は順を入れ替えても同じ。複数のフリップフロップを書くときに、順を気にしなくてよいのが `<=` の利点である
 - 規則: クロックで動く always には `<=`、組み合わせ回路の `always @(*)` (1-5) には `=`
+
+## シミュレーションでの確かめ
+
+道具は Verilator 5.042 (`--timescale 1us/1ns --binary --timing --trace`、lint は `--lint-only -Wall`)。回路は `sim/02-nonblocking.v`、テストベンチは `sim/02-nonblocking-tb.v` に置いた。本文のテストベンチは `shift_bl_rev` (文の順を逆にした版) を呼ぶが、本文にその module も組み立ての行の指定も無く、そのままでは `MODMISSING` で組めなかった。本文に module と `shift_bl_rev.v` を足して直した。図の波形 (logic フェンスの `edges`) は、実行で書き出した VCD の変化の時刻と 1 本ずつ突き合わせた。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`shift_nb.v`) | 警告 0 件 | 警告 0 件 | 合った |
+| lint (`shift_bl.v`) | `BLKSEQ` が 8・9 行目の 2 件 | 同じ 2 件 | 合った |
+| `<=` の Q2 | 25 µs で 1、35 µs で 0 | 同じ (図 3 の `edges` と一致) | 合った |
+| `=` の Q1・Q2 | どちらも 15 µs で 1、25 µs で 0 | 同じ | 合った |
+| `=` で文の順を逆にした版 | `<=` と同じ波形 | rv_q1 は 15 µs・25 µs、rv_q2 は 25 µs・35 µs で `<=` と同じ | 合った |
+| 図 1・図 2 のつながり | `<=` は D-FF 2 段、`=` は 1 段 (Q1 は配線) | ネットリストと一致 | 合った |
 
 ## 出典
 

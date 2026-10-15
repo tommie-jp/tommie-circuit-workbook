@@ -171,7 +171,7 @@ verilator -Wall --cc --exe --build full_adder.v half_adder.v tb_full_adder.cpp
 a・b・cin を 000 から 111 まで順に与えた結果は次のとおりだった。
 
 ```text
-a b cin sum cout
+# a b cin sum cout
 0 0 0 0 0
 0 0 1 1 0
 0 1 0 1 0
@@ -218,6 +218,19 @@ signals:
 - cout を 2 の位、sum を 1 の位として読むと、a + b + cin の答えになる (最後の列)
 - 最後の行 (a = b = cin = 1) だけ sum と cout が両方 1 になる。1 + 1 + 1 = 3 (2 進数で 11) で、cin を足せる全加算器でないと作れない行だ
 - 実行結果の 8 行が、この表と同じになっている
+
+## シミュレーションでの確かめ
+
+道具は Verilator 5.042 (本文のテストベンチ `sim/06-adders-tb.cpp` を `--cc --exe --build` で組んで実行) と Icarus Verilog 12.0。回路は `sim/06-adders.v` に置いた。`sim/06-adders-tb.v` は `{cout, sum} == a + b + cin` を 8 通りで見る。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint | 警告なし | 警告なし | 合った |
+| 真理値表 8 行 | sum = 01101001、cout = 00010111 | 同じ、a + b + cin との一致 8/8 | 合った |
+| 図 3 のパターン | sum 01101001、cout 00010111 | 実行結果と一致 | 合った |
+| 図 1・図 2 のつながり | 半加算器 = XOR と AND、全加算器 = 半加算器 2 つと OR | ネットリストと一致 | 合った |
+
+実行結果の見出し行は `# a b cin sum cout` と出るので、本文の表示に `#` を足した。
 
 ## 出典
 

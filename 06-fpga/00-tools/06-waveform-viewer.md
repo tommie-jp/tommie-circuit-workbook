@@ -201,6 +201,23 @@ cursors: [262.5ns,1162.5ns]
 - X1 と X2 の間隔は 900 ns で、クロック 9 周期に当たる。`q` は 1 から 10 へ 9 増えた
 - 時間は Verilator の中の時間で、実機の時間ではない。10 MHz で動く回路を見たという意味ではない
 
+## シミュレーションでの確かめ
+
+道具は Verilator 5.042 (`--binary --trace --timing`)。GTKWave・Surfer は PC にあるが、画面の操作は確かめていない。
+`sim/06-waveform-viewer.v` (counter4) と `sim/06-waveform-viewer-tb.v` (テストベンチ) を本文のとおりに置いた。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`counter4.v`) | 警告なし | 警告なし | 合った |
+| `$display` の出力 | `q = 10` | `q = 10`、`$finish` は 1 µs で止まった (175 + 1000 ns) | 合った |
+| `counter4.vcd` の大きさ | 709 バイト | 709 バイト | 合った |
+| 250 ns の q | 1 | 1 | 合った |
+| 1150 ns の q | 10 | 10 | 合った |
+| 立ち上がりの数 (250〜1150 ns) | 10 回 | 10 回 (q は 1 から 10) | 合った |
+| 図 3 のパターン (25 ns ごと) | clk・rst_n・q0〜q3 の 6 本 | VCD を 25 ns ごとに読んだ 6 本と文字列が完全に一致 | 合った |
+
+テストベンチを `--timing` 無しで lint にかけると `NEEDTIMINGOPT` のエラーになる。本文の 2 行目 (`--binary --trace -Wall --timing`) のとおりに組む。
+
 ## 出典
 
 自作。`$dumpfile` と `$dumpvars` は Verilog の標準のシステムタスク。
