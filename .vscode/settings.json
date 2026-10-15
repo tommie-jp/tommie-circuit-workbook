@@ -1,3 +1,6 @@
 {
-  "markdown.styles": [".vscode/hide-github-figures.css"]
+  "markdown.styles": [
+    ".vscode/hide-github-figures.css"
+  ],
+  "cmake.sourceDirectory": "/home/tommie/52-tommie-fence/tommie-circuit-workbook/tests/pico/uf2"
 }
