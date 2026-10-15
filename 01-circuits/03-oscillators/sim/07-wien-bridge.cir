@@ -1,0 +1,40 @@
+* 3-7 ウィーンブリッジ発振器 (図1)。R1=R2=16k C1=C2=10n R3=12k R4=10k Rg=10k、D1・D2 は R4 に逆並列 (1N4148)
+* オペアンプは 下の .subckt OPA の汎用模型 (LM358 相当の仮定: GBW 1 MHz、SR 0.3 V/us、出力 High は V+ - 1.5 V、Low は V- + 0.1 V)。実測ではない
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.model D4148 D(IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+.param gbw=1Meg
+Vp vp 0 5
+Vn vn 0 -5
+XU1 p m o vp vn OPA gbw={gbw}
+C1 o x 10n
+R1 x p 16k
+C2 p 0 10n
+R2 p 0 16k
+R3 o y 12k
+R4 y m 10k
+Rg m 0 10k
+Dd1 m y D4148
+Dd2 y m D4148
+Ikick 0 p PULSE(0 10u 0 1u 1u 20u)
+.tran 0 0.2 0 2u
+.meas tran per TRIG V(o) VAL=0 RISE=150 TARG V(o) VAL=0 RISE=190
+.meas tran vpp PP V(o) FROM=0.15 TO=0.2
+.meas tran vppp PP V(p) FROM=0.15 TO=0.2
+.meas tran vr4 MAX V(y,m) FROM=0.15 TO=0.2
+.four 995 V(o)
+
+.step param gbw list 1Meg 100Meg
+.end

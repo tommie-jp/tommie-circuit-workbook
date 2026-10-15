@@ -1,0 +1,31 @@
+* 9-3 1 dB 圧縮点 (図1)。1 kHz 正弦波の振幅 va を .step で 10-140 mV、出力の基本波を .four で読む
+* オペアンプは 下の .subckt OPA の汎用模型 (LM358 相当の仮定: GBW 1 MHz、SR 0.3 V/us、出力 High は V+ - 1.5 V、Low は V- + 0.1 V)。実測ではない
+* この模型の出力段は「直線のまま 3.5 V で切れる」だけで、実物の丸まった圧縮は再現しない
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.param va=0.01
+Vcc vcc 0 5
+Vs s 0 SINE(0 {va} 1k)
+Cin s p 1u
+R1 vcc p 100k
+R2 p 0 100k
+XU1 p m o vcc 0 OPA
+Rf o m 10k
+Rg m g 1k
+Cg g 0 10u
+.step param va list 0.01 0.04 0.08 0.0909 0.1 0.11 0.12 0.14
+.tran 0 0.25 0.2 2u
+.four 1k 3 V(o)
+.end

@@ -1,0 +1,34 @@
+* 3-3 555 単安定 (図1)。R1=100k C1=10u R2=10k、SW1 を 1 s から 50 ms 押す。2 本目: 押下を 5 s まで続けず、パルス中 (1.5 s) にもう一度押す
+* NE555 (バイポーラ) の動作模型 (仮定。実測ではない): 分圧 5k×3、比較器 2 個、SR ラッチ、出力 High = Vcc-1.5 V / Low = 0.1 V、放電は 10 ohm
+.subckt NE555B GND TRIG OUT RESET CONT THR DIS VCC
+R1 VCC CONT 5k
+R2 CONT NA 5k
+R3 NA GND 5k
+BS S 0 V = 0.5*(1+tanh((V(NA)-V(TRIG))/5m))
+BR R 0 V = 0.5*(1+tanh((V(THR)-V(CONT))/5m))
+BQ 0 Q I = 1e-3*( 1e5*( V(S)*(1-V(Q))*(1-V(R)) - V(R)*V(Q) ) + 8e3*V(Q)*(1-V(Q))*(V(Q)-0.5) )
+CQ Q 0 1n
+RQ Q 0 1e13
+BG G 0 V = 0.5*(1+tanh((V(Q)-0.5)/0.02))*0.5*(1+tanh((V(RESET)-0.7)/0.02))
+BO OUT 0 V = 0.1 + (V(VCC)-1.6)*V(G)
+BD DIS GND I = V(DIS,GND)*((1-V(G))/10 + 1n)
+.ends
+V1 vcc 0 5
+R2 vcc trg 10k
+* 押下 = trg を 100 ohm で GND へ。1 回目 1.0-1.05 s、2 回目 1.5-1.55 s (パルス中)
+Vsw sw 0 PWL(0 0 1 0 1.001 5 1.05 5 1.051 0 1.5 0 1.501 5 1.55 5 1.551 0)
+Ssw trg 0 sw 0 SWB
+.model SWB SW(Ron=100 Roff=1G Vt=2.5 Vh=0)
+R1 vcc dis 100k
+C1 dis 0 10u
+XU1 0 trg out vcc cc dis dis vcc NE555B
+Cc cc 0 10n
+R3 out a 330
+D1 a 0 DLED
+.model DLED D(IS=3e-20 N=1.9 RS=5)
+.ic V(dis)=0 V(trg)=5
+.tran 0 4 0 1m uic
+.meas tran w TRIG V(out) VAL=2 RISE=1 TARG V(out) VAL=2 FALL=1
+.meas tran vhi MAX V(out)
+.meas tran tend WHEN V(out)=2 FALL=1
+.end

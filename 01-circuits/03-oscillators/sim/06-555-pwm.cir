@@ -1,0 +1,40 @@
+* 3-6 555 PWM (図1)。P1 の充電側 (右半分) を .step で 0 / 5k / 10k に振る (放電側は 10k - 充電側)
+* NE555 (バイポーラ) の動作模型 (仮定。実測ではない): 分圧 5k×3、比較器 2 個、SR ラッチ、出力 High = Vcc-1.5 V / Low = 0.1 V、放電は 10 ohm
+.subckt NE555B GND TRIG OUT RESET CONT THR DIS VCC
+R1 VCC CONT 5k
+R2 CONT NA 5k
+R3 NA GND 5k
+BS S 0 V = 0.5*(1+tanh((V(NA)-V(TRIG))/5m))
+BR R 0 V = 0.5*(1+tanh((V(THR)-V(CONT))/5m))
+BQ 0 Q I = 1e-3*( 1e5*( V(S)*(1-V(Q))*(1-V(R)) - V(R)*V(Q) ) + 8e3*V(Q)*(1-V(Q))*(V(Q)-0.5) )
+CQ Q 0 1n
+RQ Q 0 1e13
+BG G 0 V = 0.5*(1+tanh((V(Q)-0.5)/0.02))*0.5*(1+tanh((V(RESET)-0.7)/0.02))
+BO OUT 0 V = 0.1 + (V(VCC)-1.6)*V(G)
+BD DIS GND I = V(DIS,GND)*((1-V(G))/10 + 1n)
+.ends
+.param xr=5k
+V1 vcc 0 5
+Rc vcc dis 1k
+Rr dis n1 {xr+1}
+Dc n1 c1 D4148
+Rl dis n2 {10k-xr+1}
+Dd c2 n2 D4148
+Rd c1 c2 1k
+C1 c1 0 0.1u
+XU1 0 c1 out vcc cc c1 dis vcc NE555B
+Cc cc 0 10n
+R3 out a 220
+D1 a 0 DLED
+.model D4148 D(IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+.model DLED D(IS=3e-20 N=1.9 RS=5)
+.step param xr list 0 5k 10k
+.ic V(c1)=0
+.tran 0 20m 0 1u uic
+.meas tran per TRIG V(out) VAL=1.8 RISE=3 TARG V(out) VAL=1.8 RISE=4
+.meas tran thi TRIG V(out) VAL=1.8 RISE=3 TARG V(out) VAL=1.8 FALL=3
+.meas tran vmax MAX V(c1) FROM=14m TO=20m
+.meas tran vmin MIN V(c1) FROM=14m TO=20m
+.meas tran vohi MAX V(out) FROM=14m TO=20m
+.meas tran ipk MAX I(R3) FROM=14m TO=20m
+.end

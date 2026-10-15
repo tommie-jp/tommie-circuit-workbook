@@ -1,0 +1,21 @@
+* 9-1 エミッタ接地の利得と帯域 (図1)。R1=39k R2=12k Rc=1k Re=220 Cin=1u、Vcc=5V、負荷 = AD3 入力 24 pF (出力のみ。入力側は W1/1+ に付く 24 pF)
+* Q1815 は agc.cir と同じ 2SC1815 の仮定 (BF は .step で 120/200/400)。実測ではない
+.model Q1815 NPN (IS=2e-14 BF={bf} NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.param bf=200
+Vcc vcc 0 5
+Vs s 0 DC 0 AC 1
+Cin s b 1u
+R1 vcc b 39k
+R2 b 0 12k
+Rc vcc c 1k
+Re e 0 220
+Q1 c b e Q1815
+Cl c 0 24p
+.step param bf list 120 200 400
+.ac dec 100 1 100Meg
+.meas ac gmid FIND mag(V(c)) AT=10k
+.meas ac gmax MAX mag(V(c))
+.meas ac fl WHEN mag(V(c))=0.7071*gmax RISE=1
+.meas ac fh WHEN mag(V(c))=0.7071*gmax FALL=1
+.meas ac g1m FIND mag(V(c)) AT=1Meg
+.end

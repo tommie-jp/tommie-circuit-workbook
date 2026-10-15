@@ -1,0 +1,26 @@
+* 3-4 弛張発振でブザー (図1)。R3=R4=10k C1=C2=100n、R5=100 + ブザー (20 nF の仮定)
+* Q1815 は agc.cir と同じ 2SC1815 の仮定 (BF は .step で 120/250/400)。LED は 5 mm 赤の仮定。ブザーの 20 nF は仮定 (実測ではない)
+.model Q1815 NPN (IS=2e-14 BF={bf} NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model DLED D(IS=3e-20 N=1.9 RS=5)
+.param bf=250
+V1 vcc 0 5
+R1 vcc a1 330
+D1 a1 c1 DLED
+R2 vcc a2 330
+D2 a2 c2 DLED
+R4 vcc b1 10k
+R3 vcc b2 10k
+C1 c1 b2 100n
+C2 c2 b1 100n
+Q1 c1 b1 0 Q1815
+Q2 c2 b2 0 Q1815
+R5 c2 bz 100
+Cbz bz 0 20n
+.step param bf list 120 250 400
+.ic V(c1)=0.2 V(b1)=0.7 V(c2)=3.5 V(b2)=0
+.tran 0 20m 0 2u uic
+.meas tran per TRIG V(c2) VAL=1.5 RISE=4 TARG V(c2) VAL=1.5 RISE=5
+.meas tran ton TRIG V(c2) VAL=1.5 FALL=4 TARG V(c2) VAL=1.5 RISE=5
+.meas tran vcoff MAX V(c2) FROM=10m TO=20m
+.meas tran vcon MIN V(c2) FROM=10m TO=20m
+.end

@@ -1,0 +1,25 @@
+* 3-1 非安定マルチバイブレータ (図1)。R3=R4=100k C1=C2=10u、LED 赤、5 V
+* Q1815 は agc.cir と同じ 2SC1815 の仮定 (BF は .step で 120/200/250/400)。LED は 5 mm 赤の仮定 (2 V @ 8 mA 前後)。実測ではない
+.model Q1815 NPN (IS=2e-14 BF={bf} NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model DLED D(IS=3e-20 N=1.9 RS=5)
+.param bf=250
+V1 vcc 0 5
+R1 vcc a1 330
+D1 a1 c1 DLED
+R2 vcc a2 330
+D2 a2 c2 DLED
+R4 vcc b1 100k
+R3 vcc b2 100k
+C1 c1 b2 10u
+C2 c2 b1 10u
+Q1 c1 b1 0 Q1815
+Q2 c2 b2 0 Q1815
+.step param bf list 120 200 250 400
+.ic V(c1)=0.2 V(b1)=0.7 V(c2)=3.5 V(b2)=0
+.tran 0 10 0 2m uic
+.meas tran per TRIG V(c1) VAL=1.5 RISE=6 TARG V(c1) VAL=1.5 RISE=7
+.meas tran ton TRIG V(c1) VAL=1.5 FALL=6 TARG V(c1) VAL=1.5 RISE=7
+.meas tran vcoff MAX V(c1) FROM=5 TO=10
+.meas tran vcon MIN V(c1) FROM=5 TO=10
+.meas tran iled MAX I(R1) FROM=5 TO=10
+.end

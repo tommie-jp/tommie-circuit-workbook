@@ -1,0 +1,33 @@
+* 3-2 555 非安定 (図1)。Ra=10k Rb=47k C1=10u、電源 5 V
+* NE555 (バイポーラ) の動作模型 (仮定。実測ではない): 分圧 5k×3、比較器 2 個、SR ラッチ、出力 High = Vcc-1.5 V / Low = 0.1 V、放電は 10 ohm
+.subckt NE555B GND TRIG OUT RESET CONT THR DIS VCC
+R1 VCC CONT 5k
+R2 CONT NA 5k
+R3 NA GND 5k
+BS S 0 V = 0.5*(1+tanh((V(NA)-V(TRIG))/5m))
+BR R 0 V = 0.5*(1+tanh((V(THR)-V(CONT))/5m))
+BQ 0 Q I = 1e-3*( 1e5*( V(S)*(1-V(Q))*(1-V(R)) - V(R)*V(Q) ) + 8e3*V(Q)*(1-V(Q))*(V(Q)-0.5) )
+CQ Q 0 1n
+RQ Q 0 1e13
+BG G 0 V = 0.5*(1+tanh((V(Q)-0.5)/0.02))*0.5*(1+tanh((V(RESET)-0.7)/0.02))
+BO OUT 0 V = 0.1 + (V(VCC)-1.6)*V(G)
+BD DIS GND I = V(DIS,GND)*((1-V(G))/10 + 1n)
+.ends
+V1 vcc 0 5
+Ra vcc dis 10k
+Rb dis thr 47k
+C1 thr 0 10u
+XU1 0 thr out vcc cc thr dis vcc NE555B
+Cc cc 0 10n
+R1 out a 220
+D1 a 0 DLED
+.model DLED D(IS=3e-20 N=1.9 RS=5)
+.ic V(thr)=0
+.tran 0 8 0 1m uic
+.meas tran per TRIG V(out) VAL=2 RISE=3 TARG V(out) VAL=2 RISE=4
+.meas tran thi TRIG V(out) VAL=2 RISE=4 TARG V(out) VAL=2 FALL=4
+.meas tran vhi MAX V(out) FROM=4 TO=8
+.meas tran iled MAX I(R1) FROM=4 TO=8
+.meas tran vf MAX V(a) FROM=4 TO=8
+.meas tran vlo MIN V(out) FROM=4 TO=8
+.end

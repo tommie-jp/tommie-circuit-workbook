@@ -1,0 +1,17 @@
+* 9-6 Ic-Vce 曲線 (図1)。Rb = 470k / 220k / 100k、Rs = 100 ohm、W1 を 0-5 V に掃引。Vce = V(c) (エミッタは GND)
+* Q1815 は agc.cir と同じ 2SC1815 の仮定 (BF = 200 に置き換え、9-1 の hFE 200 の仮定にそろえた)。実測ではない
+.model Q1815 NPN (IS=2e-14 BF=200 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.param rb=220k
+Vcc vcc 0 5
+Vw w 0 0
+Rb vcc b {rb}
+Rs w c 100
+Q1 c b 0 Q1815
+.step param rb list 100k 220k 470k
+.dc Vw 0 5 0.01
+.meas dc ic_vce1 FIND I(Rs) WHEN V(c)=1
+.meas dc ic_vce25 FIND I(Rs) WHEN V(c)=2.5
+.meas dc ic_vce02 FIND I(Rs) WHEN V(c)=0.2
+.meas dc ib FIND I(Rb) WHEN V(c)=2.5
+.meas dc vcmax MAX V(c)
+.end

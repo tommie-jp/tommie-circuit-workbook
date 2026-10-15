@@ -1,0 +1,37 @@
+* 4-8 シュミットトリガ (図1)。CdS を 5k-15k に往復 (周期 20 s)、VR1 は中点 (基準 0 V)。rw = ワイパーの出力抵抗 (0 または 2.5k)
+* 出力 Low は 17 mA を吸い込むので V- + 0.5 V と仮定 (LM358 の吸い込み時の電圧降下は仮定。実測ではない)
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.model D4148 D(IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+.model DLED D(IS=3e-20 N=1.9 RS=5)
+Vp vp 0 5
+Vn vn 0 -5
+.param rw=0
+Rcds vp m R={10k+5k*sin(2*3.14159265*time/20)}
+Rfix m vn 10k
+Rw 0 w {rw+1m}
+Rref w p 10k
+Rh o p 100k
+XU1 p m o vp vn OPA lo=0.5
+R1 o a 220
+D1 a 0 DLED
+DP 0 a D4148
+.step param rw list 0 2.5k
+.tran 0 40 0 1m
+.meas tran vph MAX V(p) FROM=10 TO=40
+.meas tran vpl MIN V(p) FROM=10 TO=40
+.meas tran mf FIND V(m) WHEN V(o)=0 FALL=2
+.meas tran mr FIND V(m) WHEN V(o)=0 RISE=1
+.end

@@ -1,0 +1,28 @@
+* 4-5 加算アンプ (図1)。R1=R2=Rf=10k、V1 = 1 kHz 0.2 V、V2 = 3 kHz 0.1 V (位相 0)
+* オペアンプは 下の .subckt OPA の汎用模型 (LM358 相当の仮定: GBW 1 MHz、SR 0.3 V/us、出力 High は V+ - 1.5 V、Low は V- + 0.1 V)。実測ではない
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+Vp vp 0 5
+Vn vn 0 -5
+V1 s1 0 SINE(0 0.2 1k)
+V2 s2 0 SINE(0 0.1 3k)
+R1 s1 m 10k
+R2 s2 m 10k
+Rf m o 10k
+XU1 0 m o vp vn OPA
+.tran 0 10m 0 2u
+.meas tran vo MAX V(o) FROM=5m TO=10m
+.meas tran vom MIN V(o) FROM=5m TO=10m
+.end

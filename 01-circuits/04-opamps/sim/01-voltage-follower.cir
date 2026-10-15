@@ -1,0 +1,28 @@
+* 4-1 ボルテージフォロア (図1)。R1=100k R2=47k RL=1k、±5 V
+* オペアンプは 下の .subckt OPA の汎用模型 (LM358 相当の仮定: GBW 1 MHz、SR 0.3 V/us、出力 High は V+ - 1.5 V、Low は V- + 0.1 V)。実測ではない
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+Vp vp 0 5
+Vn vn 0 -5
+R1 vp a 100k
+R2 a vn 47k
+XU1 a o o vp vn OPA
+RL o 0 1k
+Rnl a 0 1G
+.tran 0 1m
+.meas tran vin AVG V(a) FROM=0.5m TO=1m
+.meas tran vout AVG V(o) FROM=0.5m TO=1m
+.meas tran iload AVG I(RL) FROM=0.5m TO=1m
+.end

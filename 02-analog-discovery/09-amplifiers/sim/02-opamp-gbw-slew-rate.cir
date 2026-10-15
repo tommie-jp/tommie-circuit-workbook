@@ -1,0 +1,30 @@
+* 9-2 LM358 非反転増幅 利得 11 倍 (図1)。単電源 5 V、R1=R2=100k Cin=1u Rf=10k Rg=1k Cg=10u
+* オペアンプは 下の .subckt OPA の汎用模型 (LM358 相当の仮定: GBW 1 MHz、SR 0.3 V/us、出力 High は V+ - 1.5 V、Low は V- + 0.1 V)。実測ではない
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+Vcc vcc 0 5
+Vs s 0 PULSE(-0.041 0.041 20u 10n 10n 0.5m 1m) AC 0.02
+Cin s p 1u
+R1 vcc p 100k
+R2 p 0 100k
+XU1 p m o vcc 0 OPA
+Rf o m 10k
+Rg m g 1k
+Cg g 0 10u
+.ac dec 100 100 1Meg
+.meas ac gmid FIND mag(V(o)) AT=5k
+.meas ac gpk MAX mag(V(o))
+.meas ac f3 WHEN mag(V(o))=0.7071*gpk FALL=1
+.end

@@ -1,0 +1,35 @@
+* 4-4 比較器 CdS (図1)。RFIX=10k、CDS1 を .step で 1k (明) / 10k (しきい値) 200k (暗)、VR1 は中点 (wiper = 0 V)
+* オペアンプは 下の .subckt OPA の汎用模型。出力 Low は 17 mA を吸い込むので V- + 0.5 V と仮定 (LM358 の吸い込み時の電圧降下は仮定。実測ではない)
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.model D4148 D(IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+.model DLED D(IS=3e-20 N=1.9 RS=5)
+Vp vp 0 5
+Vn vn 0 -5
+.param rc=1k
+Rcds vp m {rc}
+Rfix m vn 10k
+XU1 0 m o vp vn OPA lo=0.5
+R1 o a 220
+D1 a 0 DLED
+DP 0 a D4148
+.step param rc list 1k 10k 200k
+.tran 0 1m
+.meas tran vm AVG V(m) FROM=0.5m TO=1m
+.meas tran vo AVG V(o) FROM=0.5m TO=1m
+.meas tran idled AVG I(D1) FROM=0.5m TO=1m
+.meas tran idp AVG I(DP) FROM=0.5m TO=1m
+.meas tran vr AVG V(a) FROM=0.5m TO=1m
+.end
