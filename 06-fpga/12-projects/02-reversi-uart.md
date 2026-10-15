@@ -819,16 +819,16 @@ Pico 2 を先に起こすと、`RE` の行は PC が開く前に出て捨てら�
 
 標本化は、読み取る一番短い変化 (1 bit) の 4 倍より速くした (instrument-screen の流儀)。
 
-図4・図5 のレーンの名前と、AD3 の DIO・Pico 2 のピンの対応は次のとおり。
+図4・図5 のレーンの名前は「信号の名前-Pico 2 のピン」(logic フェンスの名前に括弧は使えないので `-` でつなぐ)。AD3 の DIO との対応は次のとおり。
 
 | レーン | AD3 | Pico 2 のピン | 中身 | 図 |
 | --- | --- | --- | --- | --- |
-| COPY | DIO0 | GP4 (UART1 の TX) | PC から受けた行の写し | 図4 |
-| TX | DIO1 | GP0 (UART0 の TX) | Pico 2 の答え | 図4 |
-| BUSY | DIO2 | GP2 | 行を受けてから答えを送り始めるまで H (時間の印) | 図4 |
-| D1 | DIO3 | GP16 | 対局中 (LED の D1、緑) | 図4・図5 |
-| D2 | DIO4 | GP17 | 対局中で自分が白 (LED の D2、黄) | 図4・図5 |
-| D3 | DIO5 | GP18 | 直前の行に誤りを返した (LED の D3、赤) | 図4・図5 |
+| COPY-GP4 | DIO0 | GP4 (UART1 の TX) | PC から受けた行の写し | 図4 |
+| TX-GP0 | DIO1 | GP0 (UART0 の TX) | Pico 2 の答え | 図4 |
+| BUSY-GP2 | DIO2 | GP2 | 行を受けてから答えを送り始めるまで H (時間の印) | 図4 |
+| D1-GP16 | DIO3 | GP16 | 対局中 (LED の D1、緑) | 図4・図5 |
+| D2-GP17 | DIO4 | GP17 | 対局中で自分が白 (LED の D2、黄) | 図4・図5 |
+| D3-GP18 | DIO5 | GP18 | 直前の行に誤りを返した (LED の D3、赤) | 図4・図5 |
 | (図に無い) | DIO6 (足すとき) | GP1 (UART0 の RX) | Debug Probe から届いた字そのもの (Probe でつないだときだけ) | — |
 
 Debug Probe でつないでいるときは、DIO6 を GP1 (Probe → Pico 2 の線そのもの) に足すと、PC が送った字が届いた時刻も読める。
@@ -836,37 +836,37 @@ Debug Probe でつないでいるときは、DIO6 を GP1 (Probe → Pico 2 の�
 
 ## Logic に見えるはずの画面
 
-PC が `SB` を送り、Pico 2 が `MOd3` を返すところ。**考える時間 (図では BUSY の H の 35 µs) は仮の値**で、測って書き直す。
+PC が `SB` を送り、Pico 2 が `MOd3` を返すところ。**考える時間 (図では BUSY-GP2 の H の 35 µs) は仮の値**で、測って書き直す。
 字の並びとビットの長さ (8.68 µs) は決まりから決まる。USB でつないでも Debug Probe でつないでも、この 3 本は同じに見える。
 
 ```logic
 # ロジックアナライザの画面 (tommie-fence の logic フェンス)
-title: 図4 SB を受けて MOd3 を返す。BUSY の H の幅が考える時間 (仮)
+title: 図4 SB を受けて MOd3 を返す。BUSY-GP2 の H の幅が考える時間 (仮)
 device: ad3
 time: 100us/div
 start: 0s
 sample: 1MHz
 signals:
-  COPY: dio0 pattern 110110010101001000010101011000010010100001 bit 8.681us from 0s
-  TX: dio1 pattern 1010110010101111001010001001101011001100101011000010010100001 bit 8.681us from 36.319us
-  BUSY: dio2 edges 0s=0 10us=1 45us=0
-  D1: dio3 edges 0s=0 47us=1
-  D2: dio4 low
-  D3: dio5 low
+  COPY-GP4: dio0 pattern 110110010101001000010101011000010010100001 bit 8.681us from 0s
+  TX-GP0: dio1 pattern 1010110010101111001010001001101011001100101011000010010100001 bit 8.681us from 36.319us
+  BUSY-GP2: dio2 edges 0s=0 10us=1 45us=0
+  D1-GP16: dio3 edges 0s=0 47us=1
+  D2-GP17: dio4 low
+  D3-GP18: dio5 low
 decode:
-  PC: uart COPY baud 115200 8N1 ascii
-  PICO: uart TX baud 115200 8N1 ascii
+  PC: uart COPY-GP4 baud 115200 8N1 ascii
+  PICO: uart TX-GP0 baud 115200 8N1 ascii
 cursors: [10us, 45us]
-trigger: BUSY rising at 10us
+trigger: BUSY-GP2 rising at 10us
 ```
 
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/logic/02-reversi-uart-1.svg)
 
 - 1 字は 10 bit (スタート 1・データ 8・ストップ 1) で 86.8 µs。`SB\r\n` の 4 字は 347 µs、`MOd3\r\n` の 6 字は 521 µs で送り終わる
 - レーンの名前とピンの対応は、上の「計器の設定」の表のとおり
-- X1 (10 µs) は BUSY が H になった所 (LF を受けた所)、X2 (45 µs) は L に戻って `MOd3` の `M` のスタートビットが始まる所 (仮の位置)。**ΔX が Pico 2 の考える時間**を含む
+- X1 (10 µs) は BUSY-GP2 が H になった所 (LF を受けた所)、X2 (45 µs) は L に戻って `MOd3` の `M` のスタートビットが始まる所 (仮の位置)。**ΔX が Pico 2 の考える時間**を含む
 - D1 (対局中) は、`SB` で対局が始まるので点く。点くのは答えを送り始めた後 (図では 47 µs、仮の位置)。主ループは行を調べ終えてから LED を書き直すため。`SB` は黒番なので D2 (白) は消えたまま、誤りでもないので D3 も消えたまま
-- 写し (`COPY`) と答え (`TX`) は別の UART なので、写しを送っている間に答えが出始めてよい。写しの字の並びが PC の送った行と同じなら、Pico 2 は行を正しく受けている
+- 写し (`COPY-GP4`) と答え (`TX-GP0`) は別の UART なので、写しを送っている間に答えが出始めてよい。写しの字の並びが PC の送った行と同じなら、Pico 2 は行を正しく受けている
 - 読み下しの行に、上の「話す行」の表の字が出れば、プロトコルの行の形は合っている
 
 ### 状態の 3 本
@@ -882,11 +882,11 @@ time: 2ms/div
 start: 0s
 sample: 100kHz
 signals:
-  D1: dio3 edges 0s=0 1ms=1 17ms=0
-  D2: dio4 edges 0s=0 1ms=1 17ms=0
-  D3: dio5 edges 0s=0 9ms=1 13ms=0
+  D1-GP16: dio3 edges 0s=0 1ms=1 17ms=0
+  D2-GP17: dio4 edges 0s=0 1ms=1 17ms=0
+  D3-GP18: dio5 edges 0s=0 9ms=1 13ms=0
 cursors: [1ms, 17ms]
-trigger: D1 rising at 1ms
+trigger: D1-GP16 rising at 1ms
 ```
 
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/logic/02-reversi-uart-2.svg)
