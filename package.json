@@ -18,7 +18,12 @@
     "audit": "node scripts/audit-figures.mjs",
     "lint": "markdownlint '**/*.md' --ignore node_modules --ignore out",
     "test": "node --test scripts/*.test.mjs",
-    "all": "npm test && npm run lint && npm run check && npm run parity"
+    "all": "npm test && npm run lint && npm run check && npm run parity && npm run pico:test",
+    "pico:extract": "node scripts/pico-extract.mjs",
+    "pico:host": "node tests/pico/host/run.mjs",
+    "pico:upy": "python3 -I tests/pico/upy/run.py",
+    "pico:pio": "python3 -I tests/pico/pio/run.py",
+    "pico:test": "npm run pico:extract && npm run pico:host && npm run pico:upy && npm run pico:pio"
   },
   "devDependencies": {
     "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.43.0/breadboard-fence-0.43.0.tgz",

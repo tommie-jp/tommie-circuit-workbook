@@ -26,3 +26,7 @@ jobs:
       - run: npm run lint
       # 置き場・front matter・フェンス名・フェンスの読めない行・目次の古さ。
       - run: npm run check
+      # Pico 2 のプログラム (本文から取り出し、SDK のモック・MicroPython のスタブ・PIO エミュレータで確かめる)。
+      # docs/133 の層 A・A'・B。gcc は ubuntu-latest に入っている。
+      - run: python3 -m pip install --user rp2040-pio-emulator==0.88.0
+      - run: npm run pico:test
