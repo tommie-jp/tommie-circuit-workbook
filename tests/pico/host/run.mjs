@@ -13,6 +13,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..', '..', '..');
 const OUT = join(ROOT, 'out', 'pico');
 const BUILD = join(ROOT, 'out', 'pico-host');
+const RUN_TIMEOUT_MS = 60_000;
 mkdirSync(BUILD, { recursive: true });
 
 const filters = process.argv.slice(2);
@@ -29,8 +30,9 @@ for (const c of cases) {
   let cc = spawnSync('gcc', [...common, '-Dmain=program_main', '-c', '-o', objP, join(OUT, prog)], { encoding: 'utf8' });
   if (cc.status === 0) cc = spawnSync('gcc', [...common, '-o', exe, objP, join(HERE, 'cases', c), join(HERE, 'mock', 'mock.c'), '-lm'], { encoding: 'utf8' });
   if (cc.status !== 0) { console.log(`NG  ${c}: コンパイルできない\n${cc.stderr}`); failed++; continue; }
-  const r = spawnSync(exe, [], { encoding: 'utf8', timeout: 10000 });
-  if (r.status !== 0) { console.log(`NG  ${c}\n${r.stderr}${r.stdout}`); failed++; } else console.log(`ok  ${c}`);
+  // 09-24 は手元で約 8 s かかる。CI の機械は遅いので余裕を取る
+  const r = spawnSync(exe, [], { encoding: 'utf8', timeout: RUN_TIMEOUT_MS });
+  if (r.status !== 0) { console.log(`NG  ${c}${r.error ? ` (${r.error.code})` : ''}\n${r.stderr}${r.stdout}`); failed++; } else console.log(`ok  ${c}`);
 }
 console.log(failed ? `\n${failed} 件 NG` : `\n全 ${cases.length} 件 ok`);
 process.exit(failed ? 1 : 0);
