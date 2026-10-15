@@ -22,6 +22,54 @@ device: WEB
 
 **動くページ: <https://tommie-jp.github.io/soft-fpga/91-pong/>** (自分でビルドしなくても、ブラウザで開けば遊べる。W・S が左、↑・↓ が右のラケット、AUTO は回路が打つ。下に Logic Analyzer が付いていて、球・ラケット・点の動きが波形で見える (「Logic Analyzer で見る」)。ソースは [soft-fpga の examples/91-pong](https://github.com/tommie-jp/soft-fpga/tree/main/examples/91-pong))
 
+## Pong の歴史的な位置
+
+Pong (1972) は、ビデオゲームが産業になる入口にあったゲームである。前と後を、年と数で短く並べる (出典は末尾)。
+
+### Pong より前
+
+| 年 | もの | 作り | 位置づけ |
+| --- | --- | --- | --- |
+| 1958 | Tennis for Two (W. Higinbotham、ブルックヘブン国立研究所) | アナログ計算機とオシロスコープ | 研究所の見学者向けの展示。特許も取らず、産業にはつながらなかった |
+| 1962 | Spacewar! (MIT の学生、DEC PDP-1) | 計算機のプログラム | 大学や研究所の計算機でしか遊べない。多くの学生が見て、のちの作り手 (N. Bushnell) の源になった |
+| 1971 | Computer Space (Bushnell・Dabney) | TTL の論理回路 (CPU なし) | 最初の業務用ビデオゲーム。商業的には振るわなかった (Wikipedia) |
+| 1972 | Magnavox Odyssey (R. Baer の設計) | ダイオードとトランジスタの論理 (ディスクリート部品) | 最初の家庭用機。卓球のゲームを Bushnell が 5 月に遊び、Pong のもとになった |
+
+### Pong (1972)
+
+- Atari の Allan Alcorn が、Bushnell に与えられた練習課題として作った。**CPU もプログラムも無く、7400 系の TTL だけで組んだ** (Alcorn 本人の話)
+- 酒場 (Andy Capp's Tavern) に置いた試作は、最初の 2 週間で、これを遊ぶために人が来るほどになった (同じく Alcorn)
+- 1972 年 11 月 29 日に、北米で業務用が発売された (Wikipedia)
+
+### Pong より後
+
+| 年 | できごと | 意味 |
+| --- | --- | --- |
+| 1973〜74 | 1973 年までに 2 500 台の注文、1974 年末までに 8 000 台超 (Wikipedia) | 業務用のビデオゲームが商売になった。Ramtek・Nutting などの「Pong のそっくりさん」が数か月で出た |
+| 1974〜76 | Magnavox が特許で Atari などを提訴。Atari は 1976 年に 150 万ドル (8 回の分割) のライセンスで和解 (Wikipedia) | ゲームの回路そのものに特許と権利金が付く時代になった |
+| 1975 | 家庭用の Home Pong (Sears の Tele-Games、98.95 ドル)。その年の年末商戦で約 15 万台 (Wikipedia) | 回路を 1 個の LSI にまとめた (開発費は約 5 万ドル)。家庭にゲーム機が入った |
+| 1975 | Gun Fight (Midway)。業務用で最初にマイクロプロセッサ (Intel 8080) を使ったゲーム | 論理回路を配線して作る時代から、**CPU とプログラム**で作る時代へ。以後、CPU とプログラムで作る業務用のゲームが増えた |
+| 1976 | General Instrument の AY-3-8500 (ボールとパドルのゲーム 1 個入りの LSI)。Coleco Telstar など 200 種ほどの家庭機が使った | 「Pong の回路」が部品として買えるようになり、同じ遊びの家庭機があふれた |
+
+この題の回路は、**1972 年のやり方** (カウンタと比較器だけ。CPU もプログラムも無い) を、FPGA の中の Verilog で作り直したものである。
+つまり、Pong 以後に CPU へ移っていった流れの手前の、ゲートだけで遊びを作っていた時代の作り方を、そのまま追っている。
+
+## 実際の Pong の回路の規模
+
+| 項目 | 1972 年の Pong | この題の回路 |
+| --- | --- | --- |
+| 部品の数 | **7400 系の TTL の IC が 60 数個〜75 個ほど** (下の注) | yosys で LUT 310〜536 個 (道具の版による)、ALU 483〜573 個、フリップフロップ 69 個 |
+| CPU・プログラム | 無い | 無い |
+| 画面 | 白黒テレビ (家庭用の Hitachi、75 ドル) に、走査に同期した信号を出す | 160 × 120 画素、1 クロック 1 画素。VGA や HDMI の同期は含まない |
+| ラケット | 高さ 16 走査線。当たった位置で球の縦の速さが変わる (そのために、高価な IC の 1 つの 4 ビット加算器を足した) | 高さ 16 画素。端の 4 画素で縦に速くなる |
+| 点数 | 画面に 7 セグの形の数字で表示。Fairchild の点数用の MOS チップは 1 個 5 ドルで高すぎ、7 セグの各線を TTL で組んだ | 7 セグの形を比較器で描く (1-8 のデコーダと同じ) |
+| 音 | 発振器で「ピッ」と鳴らす | 無い |
+| 部品の原価 | 目標 15 ドル、実際は約 20 ドル | — |
+
+- **IC の数は資料で違う**。Alcorn 本人は「出来上がったときには 75 個ほど」と話し、基板を数えた資料は「60 数個」「66 個」と書く。話した時期と数え方 (試作と量産、数える IC の範囲) の違いかもしれないが、確かめていない
+- **1 個の IC の大きさは一定でない**。74 シリーズは、2 入力のゲーム 4 個入りから、4 ビットのカウンタ 1 個まで幅がある。LUT (4 入力の関数 1 個) と IC の数を、1 対 1 で比べることはできない。規模の感じをつかむ目安である
+- 1972 年の Pong も、Alcorn の説明では、画面に描くものを「球」「ラケット」「点数の数字」「ネットなどの固定物」「音」に分け、それぞれを論理回路で作って足し合わせている。この題も同じ分け方で、画面のカウンタ (水平・垂直) → 形に入ったかの比較器 → OR → 画素、とした。球とラケットの位置は 1 画面に 1 回だけ更新する (テレビなら帰線の時間に当たる。1972 年の回路がどう更新していたかは、確かめていない)
+
 ## 決めたこと
 
 | 項目 | 決め | 理由 |
@@ -575,3 +623,13 @@ PASS
 図1 は、公開ページ (soft-fpga の 91-pong) のスクリーンショット (`sim/03-pong-screen-raw.png`) に、`sim/03-pong-screen-overlay.py` (Pillow) で形の名前と位置の数を重ね、ゲーム画面の部分だけを切り出した (ボタンの行は載せていない)。
 
 - 1972 年の Pong が TTL の回路で設計されたこと、ラケットを 8 つに区切って返す角度を変えていたこと: Wikipedia の [Pong](https://en.wikipedia.org/wiki/Pong) の項 (Development and history)。この題のラケットは端の 4 画素とそのほかの 3 つに区切った
+
+歴史の節と、実際の Pong の回路の規模の数字の出典 (2026-10-16 に確かめた):
+
+- Allan Alcorn 本人の話 (IC 75 個ほど、7400 系、マイクロプロセッサ無し、原価、テレビ、ラケット 16 走査線、4 ビット加算器、酒場の試作): Engineering and Technology History Wiki の [First-Hand: The Development of Pong](https://ethw.org/First-Hand:The_Development_of_Pong:_Early_Days_of_Atari_and_the_Video_Game_Industry)
+- 発売日・販売台数・Home Pong・特許訴訟・クローン: Wikipedia の [Pong](https://en.wikipedia.org/wiki/Pong)
+- 基板の IC の数 (60 数個、66 個): [PONG in a picture frame (e-basteln)](https://www.e-basteln.de/arcade/pong/pong/)、[Pong (Atari, 1972) — Arcade Archive](https://arcadearchive.miraheze.org/wiki/Pong_(Atari,_1972))
+- Magnavox Odyssey がダイオードとトランジスタの論理であること: Wikipedia の [Magnavox Odyssey](https://en.wikipedia.org/wiki/Magnavox_Odyssey)
+- Gun Fight が業務用で最初にマイクロプロセッサを使ったこと: [Guinness World Records](https://www.guinnessworldrecords.com/world-records/98521-first-arcade-game-to-use-a-microprocessor)、Wikipedia の [Gun Fight](https://en.wikipedia.org/wiki/Gun_Fight)
+- AY-3-8500 と Coleco Telstar: Wikipedia の [Coleco Telstar series](https://en.wikipedia.org/wiki/Coleco_Telstar_series)
+- Computer Space の回路が TTL で CPU が無いこと、Tennis for Two、Spacewar!: 上の Wikipedia の Pong と、[Computer Space の解説 (pinrepair)](https://www.pinrepair.com/arcade/cspace.htm)。**Computer Space の IC の数は確かめられなかった**
