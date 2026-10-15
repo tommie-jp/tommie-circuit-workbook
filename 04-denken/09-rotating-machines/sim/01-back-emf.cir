@@ -1,0 +1,12 @@
+* 9-1 直流モータの逆起電力: Rs = 10 Ω、Ra = 3 Ω、無負荷電流 15 mA (摩擦の分。電圧によらず一定と仮定)
+* モータの中身は Ra と、一定の摩擦トルクを受け持つ 15 mA の定電流の負荷で置いた (実測ではない)
+.param VB=1.5
+Vb b 0 {VB}
+Rs b m 10
+Ra m e 3
+I0 e 0 15m
+.step param VB list 1.5 3 4.5
+.tran 0 1m 0 10u
+.meas tran v_ch1 FIND V(m) AT=1m
+.meas tran v_e FIND V(e) AT=1m
+.meas tran i_a FIND I(Rs) AT=1m

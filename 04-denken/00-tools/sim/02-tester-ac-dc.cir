@@ -1,0 +1,8 @@
+* 0-2 方形波・三角波を実効値形と平均値形で読む: 振幅 1 V、1 kHz (理想の計器)。平均値形の表示 = 整流平均値 × 1.11
+V1 sq 0 PULSE(-1 1 0 1n 1n 0.5m 1m)
+V2 tr 0 PULSE(-1 1 0 0.5m 0.5m 1n 1m)
+.tran 0 20m 0 2u
+.meas tran rms_sq RMS V(sq) FROM=1m TO=20m
+.meas tran avg_sq AVG abs(V(sq)) FROM=1m TO=20m
+.meas tran rms_tr RMS V(tr) FROM=1m TO=20m
+.meas tran avg_tr AVG abs(V(tr)) FROM=1m TO=20m

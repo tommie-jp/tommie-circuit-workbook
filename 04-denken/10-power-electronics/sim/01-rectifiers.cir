@@ -1,0 +1,26 @@
+* 10-1 半波と全波整流: 正弦波 5 V (振幅)・50 Hz、RL = 1.5 kΩ (電源は理想)
+* D6 = 順電圧が 0.6 V ほどの模型 (IS=1.6e-13、N=1)。D4148 = 1N4148 の一般的な値。実測ではない
+.model D6 D(IS=1.6e-13 N=1)
+.model D4148 D(IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n)
+V1 s 0 SIN(0 5 50)
+* 半波 (D6 と D4148)
+Dh1 s h1 D6
+Rh1 h1 0 1.5k
+Dh2 s h2 D4148
+Rh2 h2 0 1.5k
+* 全波ブリッジ: 電源の + 側 s、− 側 0 (出力は p − q)
+Da1 s p1 D6
+Da2 0 p1 D6
+Da3 q1 s D6
+Da4 q1 0 D6
+Rf1 p1 q1 1.5k
+Db1 s p2 D4148
+Db2 0 p2 D4148
+Db3 q2 s D4148
+Db4 q2 0 D4148
+Rf2 p2 q2 1.5k
+.tran 0 120m 0 10u
+.meas tran half6 AVG V(h1) FROM=20m TO=120m
+.meas tran halfR AVG V(h2) FROM=20m TO=120m
+.meas tran full6 AVG V(p1,q1) FROM=20m TO=120m
+.meas tran fullR AVG V(p2,q2) FROM=20m TO=120m

@@ -1,0 +1,13 @@
+* 12-2 送電線の模型: W1 1 V (振幅)・1 kHz、Rline = 10 Ω、Lline = 10 mH、Rload = 100 Ω。S1 開 = L あり (a 系列)、S1 閉 = L なし (b 系列)。理想の計器
+V1 s 0 AC 1
+Ra s a1 10
+La a1 b1 10m
+Rla b1 0 100
+Rb s b2 10
+Rlb b2 0 100
+.ac list 1k
+.meas ac ia FIND mag(I(Ra)) AT 1k
+.meas ac vra FIND mag(V(b1)) AT 1k
+.meas ac vda FIND mag(V(s,b1)) AT 1k
+.meas ac ib FIND mag(I(Rb)) AT 1k
+.meas ac vrb FIND mag(V(b2)) AT 1k

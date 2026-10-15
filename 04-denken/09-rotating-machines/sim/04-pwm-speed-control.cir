@@ -1,0 +1,17 @@
+* 9-4 PWM: Vs = 4.5 V、20 kHz、Q1 = IRLZ44N (オン抵抗 0.035 Ω の理想スイッチで代用)、D1 = 1N5819 (仮定のモデル)
+* モータ = Ra 3 Ω + L 2 mH (仮定) + E。E は本文の値 (D × Vs − 15 mA × 3 Ω) に固定した。実測ではない
+.param D=0.5
+.param Vs=4.5
+Vb vs 0 {Vs}
+Vg g 0 PULSE(0 5 0 10n 10n {D*50u} 50u)
+S1 m 0 g 0 SW
+.model SW SW(Ron=0.035 Roff=1Meg Vt=2.5 Vh=0)
+D1 m vs D5819
+.model D5819 D(IS=3e-7 N=1.1 RS=0.1 CJO=100p)
+Ra vs a 3
+L1 a b 2m
+Vm b m {D*Vs-0.045}
+.step param D list 0.25 0.5 0.75 0.999
+.tran 0 80m 0 0.1u
+.meas tran v_avg AVG V(vs,m) FROM=60m TO=80m
+.meas tran i_avg AVG I(Ra) FROM=60m TO=80m

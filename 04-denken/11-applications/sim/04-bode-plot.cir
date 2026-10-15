@@ -1,0 +1,14 @@
+* 11-4 ボード線図: 11-3 と同じ RC (R1 = 20 kΩ、C1 = 100 nF、R2 = 20 kΩ)。理想の計器
+V1 u 0 AC 1
+R1 u y 20k
+C1 y 0 100n
+R2 y 0 20k
+.ac list 15.9155 159.155 1591.55 15915.5
+.meas ac g1 FIND mag(V(y)) AT 15.9155
+.meas ac g2 FIND mag(V(y)) AT 159.155
+.meas ac g3 FIND mag(V(y)) AT 1591.55
+.meas ac g4 FIND mag(V(y)) AT 15915.5
+.meas ac p1 FIND ph(V(y)) AT 15.9155
+.meas ac p2 FIND ph(V(y)) AT 159.155
+.meas ac p3 FIND ph(V(y)) AT 1591.55
+.meas ac p4 FIND ph(V(y)) AT 15915.5

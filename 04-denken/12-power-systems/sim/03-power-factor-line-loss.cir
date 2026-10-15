@@ -1,0 +1,17 @@
+* 12-3 力率と線路の損失: Rs = 10 Ω、RL = 100 Ω、C1 = 1.5 µF (1 kHz)。電源 1 V で解き、受電端が 0.5 V (振幅) になるよう換算する
+* a 系列 = S1 開 (C なし)、b 系列 = S1 閉 (C あり)
+V1 s 0 AC 1
+Rsa s ra 10
+Rla ra 0 100
+Rsb s rb 10
+Rlb rb 0 100
+C1 rb 0 1.5u
+.ac list 1k
+.meas ac vra FIND mag(V(ra)) AT 1k
+.meas ac isa FIND mag(I(Rsa)) AT 1k
+.meas ac pha FIND ph(I(Rsa)) AT 1k
+.meas ac vrb FIND mag(V(rb)) AT 1k
+.meas ac isb FIND mag(I(Rsb)) AT 1k
+.meas ac ic FIND mag(I(C1)) AT 1k
+.meas ac phs FIND ph(I(Rsb)) AT 1k
+.meas ac phr FIND ph(V(rb)) AT 1k

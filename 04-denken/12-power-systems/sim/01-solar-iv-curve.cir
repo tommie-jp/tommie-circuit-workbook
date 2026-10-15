@@ -1,0 +1,15 @@
+* 12-1 太陽電池 1 枚 (屋内): 光電流 15 mA、直列 8 セルを N = 8 の 1 つのダイオードで置き、Voc = 4.5 V に合わせた (IS = 5.4 pA)
+* 直列抵抗 2 Ω・並列抵抗 5 kΩ は仮定。本文の Vmp = 0.8 Voc、Imp = 0.9 Isc は目安なので、SPICE の最大電力点と比べる。実測ではない
+.model DPV D(IS=5.4p N=8 RS=0)
+Iph 0 a 15m
+Dpv a 0 DPV
+Rsh a 0 5k
+Rser a v 2
+Rs v m 10
+Rl m 0 {RL}
+.param RL=267
+.step param RL list 50 100 150 200 267 350 500 1k 10k
+.tran 0 1m 0 10u
+.meas tran v_pv FIND V(v) AT=1m
+.meas tran i_pv FIND I(Rs) AT=1m
+.meas tran p_pv FIND V(v)*I(Rs) AT=1m

@@ -1,0 +1,18 @@
+* 0-6 ポリスイッチ RXEF010: 5 V、線と電源の抵抗 0.3 Ω、F1 = 4 Ω (動作前) / 53 Ω (動作後、本文の仮定)、RL = 220 Ω、RF = 4.7 Ω (S1)、Rs = 1 Ω
+* CASE 1 = ふだん、2 = 故障の直後 (S1 閉)、3 = F1 が動作した後 (S1 閉)、4 = S1 を開いた直後 (F1 は 53 Ω のまま)
+.param CASE=1
+.param RF1={CASE>=3?53:4}
+.param RFLT={(CASE==2)+(CASE==3)>0?4.7:1G}
+V1 v 0 5
+Rw v w 0.3
+Rf1 w c {RF1}
+RL c d 220
+RF c d {RFLT}
+Rs d 0 1
+.step param CASE list 1 2 3 4
+.tran 0 1m 0 10u
+.meas tran ch1 FIND V(d) AT=1m
+.meas tran ch2 FIND V(c) AT=1m
+.meas tran f1v FIND 5-V(c) AT=1m
+.meas tran pf1 FIND (V(w)-V(c))*(V(w)-V(c))/{RF1} AT=1m
+.meas tran prs FIND V(d)*V(d) AT=1m

@@ -182,6 +182,19 @@ notes:
 
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/09-rotating-machines/graph/05-torque-current.svg)
 
+## LTspice での確かめ
+
+`sim/05-torque-current.cir` で、2 台の同じモータ (Ra = 3 Ω、Ke = 0.67 mV/rpm) の回転数を共通にし、
+トルクのつり合い I1 − I0 − I2 = 0 (I0 = 30 mA) になるまで回転数を緩和させて解いた (4.5 V、Rs = 1 Ω)。
+モータの模型は仮定で、実測ではない。
+
+| RL | 項目 | 本文の数字 | LTspice | 判定 |
+| --- | --- | --- | --- | --- |
+| 開放 | I1 / N / CH2 | 30.0 mA / 6540 rpm / 4.38 V | 30.0 mA / 6537 rpm / 4.380 V | 合う |
+| 100 Ω | I1 / I2 / N / CH2 | 70.9 mA / 40.9 mA / 6290 rpm / 4.09 V | 70.9 mA / 40.9 mA / 6293 rpm / 4.093 V | 合う |
+| 47 Ω | I1 / I2 / N / CH2 | 111 mA / 81.1 mA / 6050 rpm / 3.81 V | 111 mA / 81.1 mA / 6053 rpm / 3.812 V | 合う |
+| 22 Ω | I1 / I2 / N / CH2 | 181 mA / 151 mA / 5640 rpm / 3.32 V | 181 mA / 151 mA / 5636 rpm / 3.323 V | 合う |
+
 ## 出典
 
 自作。

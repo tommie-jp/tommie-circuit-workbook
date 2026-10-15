@@ -1,0 +1,10 @@
+* 11-5 74HC の出力に LED (1 kΩ 直列) をつないだときの H の電圧: 出力段を 5 V + 出力抵抗 60 Ω (仮定。データシートの値ではない) で置く
+.model LED D(IS=1e-24 N=1.4 RS=2)
+Vcc vcc 0 5
+Rout vcc o 60
+R1 o c 1k
+D1 c 0 LED
+.tran 0 1m 0 10u
+.meas tran vh FIND V(o) AT=1m
+.meas tran id FIND I(R1) AT=1m
+.meas tran vf FIND V(c) AT=1m

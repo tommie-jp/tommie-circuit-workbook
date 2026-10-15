@@ -1,0 +1,8 @@
+* 0-3 シャント抵抗: 5 V、Rs = 10 Ω、R1 = 470 Ω
+V1 s 0 5
+Rs s l 10
+R1 l 0 470
+.op
+.meas op vload FIND V(l)
+.meas op vshunt FIND V(s,l)
+.meas op iload FIND I(R1)

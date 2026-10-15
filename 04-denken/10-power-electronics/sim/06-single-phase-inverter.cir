@@ -1,0 +1,21 @@
+* 10-6 単相フルブリッジ: Vd = 5 V、50 Hz、S1・S4 と S3・S2 を交互にオン (DRV8833 のオン抵抗は 0.2 Ω ずつと仮定)
+* 負荷 = 220 Ω + 逆並列の LED 2 個 (順電圧 約 1.9 V になるモデル)。実測ではない
+.model SW SW(Ron=0.2 Roff=100Meg Vt=1.5 Vh=0)
+.model LED D(IS=1e-24 N=1.4 RS=2)
+Vd vd 0 5
+* 駆動 AIN1 と AIN2 (逆位相、0〜3.3 V)
+Va ga 0 PULSE(0 3.3 0 1u 1u 10m 20m)
+Vb gb 0 PULSE(3.3 0 0 1u 1u 10m 20m)
+S1 vd a ga 0 SW
+S2 a 0 gb 0 SW
+S3 vd b gb 0 SW
+S4 b 0 ga 0 SW
+R1 a c 220
+D1 c b LED
+D2 b c LED
+.tran 0 100m 0 10u
+.meas tran vpp PP V(a,b) FROM=20m TO=100m
+.meas tran vrms RMS V(a,b) FROM=20m TO=100m
+.meas tran ipk MAX I(R1) FROM=20m TO=100m
+.meas tran vf FIND V(c,b) AT=15m
+.four 50 V(a,b)

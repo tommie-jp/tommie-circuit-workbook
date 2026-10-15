@@ -1,0 +1,17 @@
+* 10-5 サイリスタの位相制御: 5 V (振幅)・50 Hz、RL = 470 Ω、ゲートに 1 ms・5 V のパルス (1 kΩ 経由) を α に合わせて入れる
+* サイリスタは NPN + PNP の 2 トランジスタ模型 (2N5064 の代用、仮定)。オン電圧は 1 V 前後になる。実測ではない
+.model QN NPN(IS=2e-14 BF=100 BR=0.001 VAF=100 CJE=5p CJC=3p)
+.model QP PNP(IS=2e-14 BF=50 BR=0.001 VAF=100 CJE=5p CJC=3p)
+.param ALPHA=90
+V1 w 0 SIN(0 5 50)
+RL w a 470
+Q2 n2 n1 a QP
+Q1 n1 n2 0 QN
+Rg1 n2 0 10k
+Rgate gp n2 1k
+Vg gp 0 PULSE(0 5 {ALPHA/360*20m} 1u 1u 1m 20m)
+.step param ALPHA list 30 60 90 120
+.tran 0 100m 0 20u
+.meas tran vavg AVG V(w,a) FROM=40m TO=100m
+.meas tran vrms RMS V(w,a) FROM=40m TO=100m
+.meas tran von AVG V(a) FROM={0.04+ALPHA/360*20m+0.0002} TO={0.04+ALPHA/360*20m+0.0009}

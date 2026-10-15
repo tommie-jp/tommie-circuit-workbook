@@ -1,0 +1,16 @@
+* 11-3 一次遅れ系: R1 = 20 kΩ、C1 = 100 nF、R2 = 20 kΩ (あり) / 1 GΩ (抜く)、0 → 5 V のステップ (理想の計器)
+.param R2=20k
+.param K={R2/(R2+20k)}
+.param T={20k*R2/(20k+R2)*100n}
+V1 u 0 PULSE(0 5 0 1n 1n 50m 100m)
+R1 u y 20k
+C1 y 0 100n
+R2 y 0 {R2}
+.step param R2 list 20k 1G
+.tran 0 30m 0 1u
+.meas tran yss FIND V(y) AT=29m
+.meas tran y_T FIND V(y) AT={T}
+.meas tran y_3T FIND V(y) AT={3*T}
+.meas tran t10 WHEN V(y)={0.1*5*K} RISE=1
+.meas tran t90 WHEN V(y)={0.9*5*K} RISE=1
+.meas tran tr PARAM t90-t10

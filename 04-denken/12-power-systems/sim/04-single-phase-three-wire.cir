@@ -1,0 +1,16 @@
+* 12-4 単相 3 線式の模型: +5 V / −5 V、Ra = 1 kΩ、Rb = 470 Ω。CASE 1 = 中性線あり、2 = 中性線が切れた、3 = Rb を 1 kΩ にして切れた
+.param CASE=1
+.param RN={CASE==1?1u:1G}
+.param RB={CASE==3?1k:470}
+V1 p 0 5
+V2 0 m 5
+Rn 0 n {RN}
+Ra p n 1k
+Rb n m {RB}
+.step param CASE list 1 2 3
+.tran 0 1m 0 10u
+.meas tran va FIND V(p,n) AT=1m
+.meas tran vb FIND V(n,m) AT=1m
+.meas tran vn FIND V(n) AT=1m
+.meas tran ia FIND I(Ra) AT=1m
+.meas tran ib FIND I(Rb) AT=1m

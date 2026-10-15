@@ -1,0 +1,25 @@
+* 0-4 OP アンプ + プッシュプル: 50 Hz、振幅 2 V、±5 V、RL = 47 Ω。A = OP アンプの出力から帰還、B = プッシュプルの出力から帰還
+* OP アンプは理想に近い模型 (利得 10^5、GBW 1 MHz、出力は ±3.5 V で飽和 = LM358 の ±5 V 電源での目安、仮定)。
+* Q1 = 2SC1815 (Q1815)、Q2 = 2SA1015 の代用 (Q1015、仮定)。実測ではない
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model Q1015 PNP (IS=2e-14 BF=200 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.param FB=1
+Vp vcc 0 5
+Vm vee 0 -5
+Vin in 0 SIN(0 2 50)
+Bop x 0 V=1e5*(V(in)-V(fb))
+Rp x y 1k
+Cp y 0 {1/(2*3.14159*10*1k)}
+Blim z 0 V=limit(V(y),-3.5,3.5)
+Ro z o 100
+Q1 vcc o e Q1815
+Q2 vee o e Q1015
+Rl e 0 47
+* FB=1 は B (出力 e から帰還)、FB=0 は A (OP アンプの出力 o から帰還)
+Bfb fb 0 V={FB}*V(e)+(1-{FB})*V(o)
+.step param FB list 0 1
+.tran 0 80m 0 10u
+.meas tran vmax MAX V(e) FROM=40m TO=80m
+.meas tran vmin MIN V(e) FROM=40m TO=80m
+.meas tran ipk MAX I(Rl) FROM=40m TO=80m
+.meas tran pavg AVG V(e)*V(e)/47 FROM=40m TO=80m

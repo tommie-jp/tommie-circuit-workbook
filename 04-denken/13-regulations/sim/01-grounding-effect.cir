@@ -1,0 +1,11 @@
+* 13-1 接地の効果: 5 V、Rleak = 1 kΩ、Rbody = 1 kΩ、Rground = 100 Ω (S1 の開閉 = 100 Ω / 1 GΩ)
+.param RG=1G
+V1 s 0 5
+Rleak s b 1k
+Rbody b 0 1k
+Rg b 0 {RG}
+.step param RG list 1G 100
+.tran 0 1m 0 10u
+.meas tran vbody FIND V(b) AT=1m
+.meas tran ibody FIND V(b)/1k AT=1m
+.meas tran ileak FIND I(Rleak) AT=1m

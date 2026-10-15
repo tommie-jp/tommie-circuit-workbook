@@ -1,0 +1,30 @@
+* 10-2 全波整流 + 平滑: 5 V (振幅)・50 Hz、RL = 1.5 kΩ、C1 = 100 µF と 10 µF (電源は理想、0 Ω)
+* D6 = 順電圧 0.6 V ほどの模型、D4148 = 1N4148 の一般的な値。実測ではない
+.model D6 D(IS=1.6e-13 N=1)
+.model D4148 D(IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n)
+.param C=100u
+V1 s 0 SIN(0 5 50)
+Da1 s p1 D6
+Da2 0 p1 D6
+Da3 q1 s D6
+Da4 q1 0 D6
+C1 p1 q1 {C}
+Rl1 p1 q1 1.5k
+Db1 s p2 D4148
+Db2 0 p2 D4148
+Db3 q2 s D4148
+Db4 q2 0 D4148
+C2 p2 q2 {C}
+Rl2 p2 q2 1.5k
+Rb1 q1 0 100Meg
+Rb2 q2 0 100Meg
+Rb3 p1 0 100Meg
+Rb4 p2 0 100Meg
+.step param C list 100u 10u
+.tran 0 1.5 1.3 10u
+.meas tran dc6 AVG V(p1,q1)
+.meas tran pk6 MAX V(p1,q1)
+.meas tran vpp6 PP V(p1,q1)
+.meas tran dcR AVG V(p2,q2)
+.meas tran pkR MAX V(p2,q2)
+.meas tran vppR PP V(p2,q2)

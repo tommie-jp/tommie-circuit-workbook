@@ -1,0 +1,10 @@
+* 11-2 NTC 分圧とヒステリシス: Rfix = 10 kΩ、NTC 10 kΩ (25 °C)、β = 3950 K、5 V。Rf = 1 MΩ の正帰還は出力 Hi 3.5 V / Lo 0.1 V (LM358 の目安) で見る
+.param T=25
+.param RT={10k*exp(3950*(1/(T+273.15)-1/298.15))}
+V1 vcc 0 5
+Rfix vcc s 10k
+Rntc s 0 {RT}
+.step param T list 25 28 30 32
+.tran 0 1m 0 10u
+.meas tran vsense FIND V(s) AT=1m
+.meas tran rntc PARAM RT

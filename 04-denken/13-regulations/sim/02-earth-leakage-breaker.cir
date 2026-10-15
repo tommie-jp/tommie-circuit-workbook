@@ -1,0 +1,17 @@
+* 13-2 漏電の模型: W1 1 V (振幅)・1 kHz、Rgo = Rret = 10 Ω、Rload = 220 Ω、Rleak = 1 kΩ、Rg = 100 Ω。a 系列 = S1 開、b 系列 = S1 閉
+V1 s 0 AC 1
+Rgoa s aa 10
+Rloada aa ra 220
+Rreta ra 0 10
+Rgob s ab 10
+Rloadb ab rb 220
+Rretb rb 0 10
+Rleak ab g 1k
+Rg g 0 100
+.ac list 1k
+.meas ac igo_a FIND mag(I(Rgoa)) AT 1k
+.meas ac iret_a FIND mag(I(Rreta)) AT 1k
+.meas ac igo_b FIND mag(I(Rgob)) AT 1k
+.meas ac iret_b FIND mag(I(Rretb)) AT 1k
+.meas ac ileak FIND mag(I(Rg)) AT 1k
+.meas ac vg FIND mag(V(g)) AT 1k

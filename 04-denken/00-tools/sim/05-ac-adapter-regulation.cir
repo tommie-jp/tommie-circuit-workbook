@@ -1,0 +1,19 @@
+* 0-5 AC アダプタの等価回路: E0 = 14.4 V (実効値)、r = 4.8 Ω (仮定)。負荷 220 / 100 / 50 Ω と、定格電流 0.5 A の点 (24 Ω)
+V1 e 0 AC 14.4
+R1i e t1 4.8
+R1 t1 0 220
+R2i e t2 4.8
+R2 t2 0 100
+R3i e t3 4.8
+R3 t3 0 50
+R4i e t4 4.8
+R4 t4 0 24
+.ac list 50
+.meas ac v1 FIND mag(V(t1)) AT 50
+.meas ac i1 FIND mag(I(R1)) AT 50
+.meas ac v2 FIND mag(V(t2)) AT 50
+.meas ac i2 FIND mag(I(R2)) AT 50
+.meas ac v3 FIND mag(V(t3)) AT 50
+.meas ac i3 FIND mag(I(R3)) AT 50
+.meas ac v4 FIND mag(V(t4)) AT 50
+.meas ac i4 FIND mag(I(R4)) AT 50
