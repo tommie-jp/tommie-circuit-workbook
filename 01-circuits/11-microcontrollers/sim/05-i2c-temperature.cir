@@ -1,0 +1,15 @@
+* 11-5 I2C (図1): SDA のプルアップ 4.7 kΩ (3.3 V) と配線の容量で、立ち上がりの時間とバスの L の電流を読む
+* ドライバ (Pico 2 / MCP9808 のオープンドレイン) は 0.5 µs の幅で L に引く理想のスイッチ (Ron=50 Ω)。容量 C は 50 pF / 100 pF / 400 pF (I2C の上限) を振る
+.model SWD SW (Ron=50 Roff=1G Vt=0.5 Vh=0)
+V1 vcc 0 3.3
+.param cb=100p
+R1 vcc sda 4.7k
+Cb sda 0 {cb}
+S1 sda 0 g 0 SWD
+Vg g 0 PULSE(1 0 2u 1n 1n 10u 20u)
+.step param cb list 50p 100p 400p
+.tran 0 22u 0 10n
+.meas tran tr TRIG V(sda) VAL=0.99 RISE=1 TARG V(sda) VAL=2.31 RISE=1
+.meas tran il AVG I(R1) FROM=1u TO=1.9u
+.meas tran vol AVG V(sda) FROM=1u TO=1.9u
+.end

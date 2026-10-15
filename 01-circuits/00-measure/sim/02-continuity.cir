@@ -1,0 +1,15 @@
+* 0-2 LED 2 個の並列 (図1): 5 V・330 Ω。赤 LED と緑 LED の電流を読む
+* LED は 1-1 と同じ仮定のモデル (赤: VF 約 2.0 V @ 9 mA)。緑は IS を下げて VF を約 0.1 V 高くした仮定。実測ではない
+.model LEDR D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.model LEDG D (IS=4.0e-19 N=2.14 RS=0 CJO=30p)
+V1 a 0 5
+R1 a b 330
+D1 b 0 LEDR
+R2 a c 330
+D2 c 0 LEDG
+.op
+.meas op i1 PARAM I(R1)
+.meas op i2 PARAM I(R2)
+.meas op vf1 PARAM V(b)
+.meas op vf2 PARAM V(c)
+.end

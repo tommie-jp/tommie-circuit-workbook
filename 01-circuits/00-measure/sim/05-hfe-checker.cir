@@ -1,0 +1,26 @@
+* 0-5 hFE チェッカー (図1): RB=1 MΩ、RC=1 kΩ、5 V。hFE を 200・400・700 に振って I_B・I_C・V_C を読む
+* 2SC1815 の .model は 02-transistors/sim と同じ (IS=2e-14、VAF=100、IKF=0.15)。BF だけ .step で振る。実測ではない
+V1 a 0 5
+.model Q1 NPN (IS=2e-14 BF=200 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+RB1 a b1 1Meg
+RC1 a c1 1k
+Q1 c1 b1 0 Q1
+.model Q2 NPN (IS=2e-14 BF=400 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+RB2 a b2 1Meg
+RC2 a c2 1k
+Q2 c2 b2 0 Q2
+.model Q3 NPN (IS=2e-14 BF=700 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+RB3 a b3 1Meg
+RC3 a c3 1k
+Q3 c3 b3 0 Q3
+.op
+.meas op ib1 PARAM I(RB1)
+.meas op ic1 PARAM I(RC1)
+.meas op vc1 PARAM V(c1)
+.meas op ib2 PARAM I(RB2)
+.meas op ic2 PARAM I(RC2)
+.meas op vc2 PARAM V(c2)
+.meas op ib3 PARAM I(RB3)
+.meas op ic3 PARAM I(RC3)
+.meas op vc3 PARAM V(c3)
+.end

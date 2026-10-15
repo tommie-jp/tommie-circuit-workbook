@@ -1,0 +1,41 @@
+* 9-3 GND を面で取る (図3・図4): perfboard のスルー (5 nH) と銅張りのマイクロストリップ (50.8 Ω・40 mm・VF 0.55)
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く (共振が鋭いので、掃引の間を補間しない)
+.ac list 500000000 590000000 1e+09 2.06e+09 3e+09
+* 図3 perfboard: series R 0 esl 5n
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 m3_0 1e-06
+L1_1_0 m3_0 n2_0 5e-09 Rser=1u
+RL_0 n2_0 0 50
+.meas AC a0_0 FIND V(n0_0) AT 500000000
+.meas AC c0_0 FIND V(n2_0) AT 500000000
+.meas AC a0_1 FIND V(n0_0) AT 1e+09
+.meas AC c0_1 FIND V(n2_0) AT 1e+09
+.meas AC a0_2 FIND V(n0_0) AT 3e+09
+.meas AC c0_2 FIND V(n2_0) AT 3e+09
+.meas AC a0_3 FIND V(n0_0) AT 590000000
+.meas AC c0_3 FIND V(n2_0) AT 590000000
+* 図4 銅張り: line 50.8 40mm vf 0.55
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T2_1 n0_1 0 n1_1 0 Z0=50.8 TD=2.42592069e-10
+RL_1 n1_1 0 50
+.meas AC a1_0 FIND V(n0_1) AT 500000000
+.meas AC c1_0 FIND V(n1_1) AT 500000000
+.meas AC a1_1 FIND V(n0_1) AT 1e+09
+.meas AC c1_1 FIND V(n1_1) AT 1e+09
+.meas AC a1_2 FIND V(n0_1) AT 2.06e+09
+.meas AC c1_2 FIND V(n1_1) AT 2.06e+09
+.meas AC a1_3 FIND V(n0_1) AT 3e+09
+.meas AC c1_3 FIND V(n1_1) AT 3e+09
+* 長い銅張り 27 nH: series R 0 esl 27n
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+R1_0_2 n0_2 m3_2 1e-06
+L1_1_2 m3_2 n2_2 2.7e-08 Rser=1u
+RL_2 n2_2 0 50
+.meas AC a2_0 FIND V(n0_2) AT 590000000
+.meas AC c2_0 FIND V(n2_2) AT 590000000
+.end

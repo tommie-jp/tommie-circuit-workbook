@@ -1,0 +1,37 @@
+* 1-7 校正キットの質 (図2・図3): Load の等価回路 (直列 L + 50 Ω)。市販 0.2 nH・付属 0.5 nH・自作 2 nH
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く (共振が鋭いので、掃引の間を補間しない)
+.ac list 100000000 300000000 500000000 1e+09 1.5e+09
+* 市販 0.2 nH: series L 0.2n / series R 50 / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+L1_0_0 n0_0 n2_0 2e-10 Rser=1u
+R3_0_0 n2_0 n4_0 50
+Rshort_0 n4_0 0 1u
+.meas AC a0_0 FIND V(n0_0) AT 100000000
+.meas AC a0_1 FIND V(n0_0) AT 500000000
+.meas AC a0_2 FIND V(n0_0) AT 1e+09
+.meas AC a0_3 FIND V(n0_0) AT 1.5e+09
+* 付属 0.5 nH (図2): series L 0.5n / series R 50 / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+L1_0_1 n0_1 n2_1 5e-10 Rser=1u
+R3_0_1 n2_1 n4_1 50
+Rshort_1 n4_1 0 1u
+.meas AC a1_0 FIND V(n0_1) AT 100000000
+.meas AC a1_1 FIND V(n0_1) AT 500000000
+.meas AC a1_2 FIND V(n0_1) AT 1e+09
+.meas AC a1_3 FIND V(n0_1) AT 1.5e+09
+* 自作 2 nH (図3): series L 2n / series R 50 / short
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+L1_0_2 n0_2 n2_2 2e-09 Rser=1u
+R3_0_2 n2_2 n4_2 50
+Rshort_2 n4_2 0 1u
+.meas AC a2_0 FIND V(n0_2) AT 100000000
+.meas AC a2_1 FIND V(n0_2) AT 500000000
+.meas AC a2_2 FIND V(n0_2) AT 1e+09
+.meas AC a2_3 FIND V(n0_2) AT 1.5e+09
+.meas AC a2_4 FIND V(n0_2) AT 300000000
+.end

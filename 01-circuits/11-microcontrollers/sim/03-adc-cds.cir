@@ -1,0 +1,22 @@
+* 11-3 ADC で CdS を読む (図1): 3V3 - CdS - GP26 - 10 kΩ - GND。CdS を 1 kΩ (明るい)・10 kΩ (室内)・200 kΩ (真っ暗) に振る
+* 計算値の表 (V_node と ADC の値) を確かめる。ADC は 12 bit・基準 3.3 V の理想 (値 = V × 4096 / 3.3)。CdS の抵抗は目安で実測ではない
+* 3 本の分圧を並べて .op で読む (.step は .op の結果を最後しか残さないため)。Scope の入力 1 MΩ は 2 本目だけに足して負荷の影響を見る
+V1 vcc 0 3.3
+Rc1 vcc n1 1k
+R1a n1 0 10k
+Rc2 vcc n2 10k
+R1b n2 0 10k
+Rc3 vcc n3 200k
+R1c n3 0 10k
+Rc4 vcc n4 10k
+R1d n4 0 10k
+Rscope n4 0 1Meg
+.op
+.meas op v_bright PARAM V(n1)
+.meas op v_room PARAM V(n2)
+.meas op v_dark PARAM V(n3)
+.meas op v_room_scope PARAM V(n4)
+.meas op c_bright PARAM V(n1)*4096/3.3
+.meas op c_room PARAM V(n2)*4096/3.3
+.meas op c_dark PARAM V(n3)*4096/3.3
+.end

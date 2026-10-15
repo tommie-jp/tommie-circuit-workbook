@@ -1,0 +1,12 @@
+* 11-1 Pico 2 の L チカ (図1): GP15 が H (3.3 V) のときの 330 Ω + 赤 LED の電流を読む
+* GPIO の出力段は理想の 3.3 V 源 (出力抵抗は入れない。RP2350 の既定の 4 mA 設定での内部抵抗はデータシートの値で、ここでは対象外)
+* LED は 1-1 と同じ仮定のモデル (VF 約 2.0 V @ 9 mA)。実測ではない
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+V1 a 0 3.3
+R1 a b 330
+D1 b 0 LED
+.tran 0 1m
+.meas tran vr AVG V(a,b) FROM=0.5m TO=1m
+.meas tran vf AVG V(b) FROM=0.5m TO=1m
+.meas tran i AVG I(R1) FROM=0.5m TO=1m
+.end

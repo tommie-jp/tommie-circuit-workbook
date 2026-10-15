@@ -1,0 +1,85 @@
+* 12-3 水漏れアラーム (図1): 5 V、Rprobe=10 kΩ、Rb=1 MΩ、Q1・Q2 = 2SC1815 (BF=250 の代用)、ブザー 30 mA を 167 Ω の抵抗で表す、330 Ω + 赤 LED
+* 水の抵抗 Rwater を 乾き (開) / 300 Ω / 2 kΩ / 20 kΩ / 100 kΩ / 1 MΩ に振る (6 本を並べて .op で読む)。実測ではない
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+V5 vcc 0 5
+* --- dry
+Rp0 vcc p0 10k
+Rw0 p0 b0 1e12
+Rb0 b0 0 1Meg
+Q10 c0 b0 e0 Q1815
+Q20 c0 e0 0 Q1815
+Rbz0 vcc c0 167
+Rle0 vcc a0 330
+Dl0 a0 c0 LED
+* --- w300
+Rp1 vcc p1 10k
+Rw1 p1 b1 300
+Rb1 b1 0 1Meg
+Q11 c1 b1 e1 Q1815
+Q21 c1 e1 0 Q1815
+Rbz1 vcc c1 167
+Rle1 vcc a1 330
+Dl1 a1 c1 LED
+* --- w2k
+Rp2 vcc p2 10k
+Rw2 p2 b2 2k
+Rb2 b2 0 1Meg
+Q12 c2 b2 e2 Q1815
+Q22 c2 e2 0 Q1815
+Rbz2 vcc c2 167
+Rle2 vcc a2 330
+Dl2 a2 c2 LED
+* --- w20k
+Rp3 vcc p3 10k
+Rw3 p3 b3 20k
+Rb3 b3 0 1Meg
+Q13 c3 b3 e3 Q1815
+Q23 c3 e3 0 Q1815
+Rbz3 vcc c3 167
+Rle3 vcc a3 330
+Dl3 a3 c3 LED
+* --- w100k
+Rp4 vcc p4 10k
+Rw4 p4 b4 100k
+Rb4 b4 0 1Meg
+Q14 c4 b4 e4 Q1815
+Q24 c4 e4 0 Q1815
+Rbz4 vcc c4 167
+Rle4 vcc a4 330
+Dl4 a4 c4 LED
+* --- w1M
+Rp5 vcc p5 10k
+Rw5 p5 b5 1Meg
+Rb5 b5 0 1Meg
+Q15 c5 b5 e5 Q1815
+Q25 c5 e5 0 Q1815
+Rbz5 vcc c5 167
+Rle5 vcc a5 330
+Dl5 a5 c5 LED
+.op
+.meas op vb_dry PARAM V(b0)
+.meas op vc_dry PARAM V(c0)
+.meas op ib_dry PARAM I(Rp0)
+.meas op il_dry PARAM I(Rle0)
+.meas op vb_w300 PARAM V(b1)
+.meas op vc_w300 PARAM V(c1)
+.meas op ib_w300 PARAM I(Rp1)
+.meas op il_w300 PARAM I(Rle1)
+.meas op vb_w2k PARAM V(b2)
+.meas op vc_w2k PARAM V(c2)
+.meas op ib_w2k PARAM I(Rp2)
+.meas op il_w2k PARAM I(Rle2)
+.meas op vb_w20k PARAM V(b3)
+.meas op vc_w20k PARAM V(c3)
+.meas op ib_w20k PARAM I(Rp3)
+.meas op il_w20k PARAM I(Rle3)
+.meas op vb_w100k PARAM V(b4)
+.meas op vc_w100k PARAM V(c4)
+.meas op ib_w100k PARAM I(Rp4)
+.meas op il_w100k PARAM I(Rle4)
+.meas op vb_w1M PARAM V(b5)
+.meas op vc_w1M PARAM V(c5)
+.meas op ib_w1M PARAM I(Rp5)
+.meas op il_w1M PARAM I(Rle5)
+.end

@@ -1,0 +1,31 @@
+* 2-9 Saver の校正と平均化 (図3): 20 dB パッド (43・11・43 Ω) を 2 段 (40 dB)、1 段も比べる
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く (共振が鋭いので、掃引の間を補間しない)
+.ac list 1000000 100000000 300000000
+* 図3 2 段: series R 43 / shunt R 11 / series R 43 / series R 43 / shunt R 11 / series R 43
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 n2_0 43
+Rs3_0_0 n2_0 0 11
+R4_0_0 n2_0 n5_0 43
+R6_0_0 n5_0 n7_0 43
+Rs8_0_0 n7_0 0 11
+R9_0_0 n7_0 n10_0 43
+RL_0 n10_0 0 50
+.meas AC a0_0 FIND V(n0_0) AT 1000000
+.meas AC c0_0 FIND V(n10_0) AT 1000000
+.meas AC a0_1 FIND V(n0_0) AT 100000000
+.meas AC c0_1 FIND V(n10_0) AT 100000000
+.meas AC a0_2 FIND V(n0_0) AT 300000000
+.meas AC c0_2 FIND V(n10_0) AT 300000000
+* 1 段: series R 43 / shunt R 11 / series R 43
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+R1_0_1 n0_1 n2_1 43
+Rs3_0_1 n2_1 0 11
+R4_0_1 n2_1 n5_1 43
+RL_1 n5_1 0 50
+.meas AC a1_0 FIND V(n0_1) AT 100000000
+.meas AC c1_0 FIND V(n5_1) AT 100000000
+.end

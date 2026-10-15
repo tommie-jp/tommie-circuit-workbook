@@ -1,0 +1,40 @@
+* 9-5 手・体・机 (図2・図3): アンテナの等価回路 (R・L 18.8 nH・C を直列、先を短絡)。何も無い / 机 / 手で握った
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く (共振が鋭いので、掃引の間を補間しない)
+.ac list 2.3e+09 2.35e+09 2.4e+09 2.45e+09 2.4835e+09 2.6e+09
+* 何も無い (図2): series R 50 / series L 18.8n / series C 0.2245p / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 n2_0 50
+L3_0_0 n2_0 n4_0 1.88e-08 Rser=1u
+C5_0_0 n4_0 n6_0 2.245e-13
+Rshort_0 n6_0 0 1u
+.meas AC a0_0 FIND V(n0_0) AT 2.3e+09
+.meas AC a0_1 FIND V(n0_0) AT 2.35e+09
+.meas AC a0_2 FIND V(n0_0) AT 2.4e+09
+.meas AC a0_3 FIND V(n0_0) AT 2.45e+09
+.meas AC a0_4 FIND V(n0_0) AT 2.4835e+09
+.meas AC a0_5 FIND V(n0_0) AT 2.6e+09
+* 机: series R 55 / series L 18.8n / series C 0.234p / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+R1_0_1 n0_1 n2_1 55
+L3_0_1 n2_1 n4_1 1.88e-08 Rser=1u
+C5_0_1 n4_1 n6_1 2.34e-13
+Rshort_1 n6_1 0 1u
+.meas AC a1_0 FIND V(n0_1) AT 2.4e+09
+.meas AC a1_1 FIND V(n0_1) AT 2.45e+09
+.meas AC a1_2 FIND V(n0_1) AT 2.4835e+09
+* 手 (図3): series R 70 / series L 18.8n / series C 0.244p / short
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+R1_0_2 n0_2 n2_2 70
+L3_0_2 n2_2 n4_2 1.88e-08 Rser=1u
+C5_0_2 n4_2 n6_2 2.44e-13
+Rshort_2 n6_2 0 1u
+.meas AC a2_0 FIND V(n0_2) AT 2.35e+09
+.meas AC a2_1 FIND V(n0_2) AT 2.4e+09
+.meas AC a2_2 FIND V(n0_2) AT 2.45e+09
+.meas AC a2_3 FIND V(n0_2) AT 2.4835e+09
+.end

@@ -1,0 +1,53 @@
+* 11-14 第 1 部 (ループ): 面積 A = 0.1 m^2 の N 回巻きループが、上限ちょうどの電界 E = 500 µV/m (= Z0·H、Z0 = 377 Ω の等価の磁界) を受けたときの tinySA (50 Ω) の読み
+* 開放電圧 V_oc = ω N A µ0 H (実効値) の電圧源に、巻き線のインダクタンス L = 1.4 µH × N^2 (目安) を直列に入れて 50 Ω で受ける。巻き線の抵抗と浮遊容量は入れない。実測ではない
+* 読み P = V^2 / 50 Ω を dBm にしたものが、本文の「50 Ω で読む」。V_oc の列は L を無視した開放電圧 (dBm 相当)
+V1 s1 0 AC 6.28304e-07
+L1 s1 o1 1.4e-06 Rser=1u
+R1 o1 0 50
+V2 s2 0 AC 1.25661e-06
+L2 s2 o2 5.6e-06 Rser=1u
+R2 o2 0 50
+V3 s3 0 AC 3.76982e-06
+L3 s3 o3 5.04e-05 Rser=1u
+R3 o3 0 50
+V4 s4 0 AC 6.28304e-06
+L4 s4 o4 0.00014 Rser=1u
+R4 o4 0 50
+V5 s5 0 AC 1.04717e-06
+L5 s5 o5 1.4e-06 Rser=1u
+R5 o5 0 50
+V6 s6 0 AC 2.09435e-06
+L6 s6 o6 5.6e-06 Rser=1u
+R6 o6 0 50
+V7 s7 0 AC 6.28304e-06
+L7 s7 o7 5.04e-05 Rser=1u
+R7 o7 0 50
+V8 s8 0 AC 1.04717e-05
+L8 s8 o8 0.00014 Rser=1u
+R8 o8 0 50
+V9 s9 0 AC 1.57076e-06
+L9 s9 o9 1.4e-06 Rser=1u
+R9 o9 0 50
+V10 s10 0 AC 3.14152e-06
+L10 s10 o10 5.6e-06 Rser=1u
+R10 o10 0 50
+V11 s11 0 AC 9.42456e-06
+L11 s11 o11 5.04e-05 Rser=1u
+R11 o11 0 50
+V12 s12 0 AC 1.57076e-05
+L12 s12 o12 0.00014 Rser=1u
+R12 o12 0 50
+.ac list 600000 1e+06 1.5e+06
+.meas AC p1 FIND V(o1) AT 600000
+.meas AC p2 FIND V(o2) AT 600000
+.meas AC p3 FIND V(o3) AT 600000
+.meas AC p4 FIND V(o4) AT 600000
+.meas AC p5 FIND V(o5) AT 1e+06
+.meas AC p6 FIND V(o6) AT 1e+06
+.meas AC p7 FIND V(o7) AT 1e+06
+.meas AC p8 FIND V(o8) AT 1e+06
+.meas AC p9 FIND V(o9) AT 1.5e+06
+.meas AC p10 FIND V(o10) AT 1.5e+06
+.meas AC p11 FIND V(o11) AT 1.5e+06
+.meas AC p12 FIND V(o12) AT 1.5e+06
+.end

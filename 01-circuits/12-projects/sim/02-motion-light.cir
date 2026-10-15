@@ -1,0 +1,38 @@
+* 12-2 人感ライト (図1): 簡易シャント電源 Rz=330 Ω + 3.3 V ツェナー、出力段 Rg=220 Ω・Rgpd=100 kΩ・2N7000・330 Ω + LED
+* ツェナー: 3.3 V 品の代用 (BV=3.25 V、IBV=5 mA、RS=25 Ω の仮定。実測ではない)。AND の出力 H は VL (3.3 V) とする
+* 2N7000 は 02-transistors/sim と同じ LEVEL=1 の代用 (VTO を 1 / 2.1 / 3 V に振る)。LED は 1-1 と同じ仮定のモデル
+.model DZ33 D (IS=1e-14 BV=3.25 IBV=5m RS=25 CJO=100p)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.model M1 NMOS (LEVEL=1 VTO=1.0 KP=0.1 LAMBDA=0.01)
+.model M2 NMOS (LEVEL=1 VTO=2.1 KP=0.1 LAMBDA=0.01)
+.model M3 NMOS (LEVEL=1 VTO=3.0 KP=0.1 LAMBDA=0.01)
+V5 vcc 0 5
+Rz vcc vl 330
+Dz 0 vl DZ33
+* 40106・4081 の消費電流 (数 µA) と PIR 出力段は VL の負荷としてほぼ 0 (ここでは 10 µA)
+Iload vl 0 10u
+* AND の出力 H (VL) から出力段を 3 本 (VTO 違い) 並べる
+Rg1 vl g1 220
+Rp1 g1 0 100k
+Mq1 d1 g1 0 0 M1
+Rl1 vcc a1 330
+D1 a1 d1 LED
+Rg2 vl g2 220
+Rp2 g2 0 100k
+Mq2 d2 g2 0 0 M2
+Rl2 vcc a2 330
+D2 a2 d2 LED
+Rg3 vl g3 220
+Rp3 g3 0 100k
+Mq3 d3 g3 0 0 M3
+Rl3 vcc a3 330
+D3 a3 d3 LED
+.op
+.meas op vlv PARAM V(vl)
+.meas op iz PARAM I(Rz)-10u
+.meas op il1 PARAM I(Rl1)
+.meas op il2 PARAM I(Rl2)
+.meas op il3 PARAM I(Rl3)
+.meas op vds2 PARAM V(d2)
+.meas op vds3 PARAM V(d3)
+.end

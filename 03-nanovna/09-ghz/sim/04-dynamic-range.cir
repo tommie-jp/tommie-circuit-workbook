@@ -1,0 +1,27 @@
+* 9-4 ダイナミックレンジ (図2・図3): 20 + 20 + 10 dB のパッドを直列にした 50 dB の理想
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く (共振が鋭いので、掃引の間を補間しない)
+.ac list 100000000 600000000 1.2e+09 2.4e+09
+* 図2・図3 50 dB: series R 40.91 / shunt R 10.1 / series R 40.91 / series R 40.91 / shunt R 10.1 / series R 40.91 / series R 25.97 / shunt R 35.14 / series R 25.97
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 n2_0 40.91
+Rs3_0_0 n2_0 0 10.1
+R4_0_0 n2_0 n5_0 40.91
+R6_0_0 n5_0 n7_0 40.91
+Rs8_0_0 n7_0 0 10.1
+R9_0_0 n7_0 n10_0 40.91
+R11_0_0 n10_0 n12_0 25.97
+Rs13_0_0 n12_0 0 35.14
+R14_0_0 n12_0 n15_0 25.97
+RL_0 n15_0 0 50
+.meas AC a0_0 FIND V(n0_0) AT 100000000
+.meas AC c0_0 FIND V(n15_0) AT 100000000
+.meas AC a0_1 FIND V(n0_0) AT 600000000
+.meas AC c0_1 FIND V(n15_0) AT 600000000
+.meas AC a0_2 FIND V(n0_0) AT 1.2e+09
+.meas AC c0_2 FIND V(n15_0) AT 1.2e+09
+.meas AC a0_3 FIND V(n0_0) AT 2.4e+09
+.meas AC c0_3 FIND V(n15_0) AT 2.4e+09
+.end

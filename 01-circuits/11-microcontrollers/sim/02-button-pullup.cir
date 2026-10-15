@@ -1,0 +1,12 @@
+* 11-2 ボタンとプルアップ (図1): 3V3・10 kΩ・ボタン。離している間 (開) と押している間 (閉) の GP16 の電圧と R1 の電流を読む
+* GPIO 入力は理想 (電流ゼロ)。ボタンは 0.1 Ω の閉じた接点として表す
+V1 vcc 0 3.3
+R1 vcc gp 10k
+S1 gp 0 ctl 0 SWB
+Vc ctl 0 PULSE(0 1 5m 1u 1u 5m 10m)
+.model SWB SW (Ron=0.1 Roff=1G Vt=0.5 Vh=0)
+.tran 0 10m
+.meas tran vopen AVG V(gp) FROM=1m TO=4m
+.meas tran vclosed AVG V(gp) FROM=6m TO=9m
+.meas tran iclosed AVG I(R1) FROM=6m TO=9m
+.end

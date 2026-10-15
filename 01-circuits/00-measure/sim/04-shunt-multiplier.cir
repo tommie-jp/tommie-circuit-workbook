@@ -1,0 +1,26 @@
+* 0-4 分流器と倍率器 (図1・図2)。検流計は Rg=100 Ω の抵抗で表す (フルスケール 1 mA)
+* 図1: 5 V・510 Ω に 検流計+分流器 11 Ω を割り込ませる。図2: 0-1 の分圧回路の R2 に 検流計+倍率器 を並列 (RV を 4.7k / 100k で振る)
+* 図1
+V1 a 0 5
+R1 a b 510
+RG b c 100
+RS b 0 11
+Vsh c 0 0
+* 図2
+V2 p 0 5
+R3 p q 10k
+R4 q 0 10k
+RG2 q r 100
+RV r 0 4.7k
+* RV を 100k にした場合
+R5 p q2 10k
+R6 q2 0 10k
+RG3 q2 r2 100
+RV2 r2 0 100k
+.op
+.meas op ig PARAM I(Vsh)
+.meas op irs PARAM I(RS)
+.meas op itot PARAM I(R1)
+.meas op vm PARAM V(q)
+.meas op vm100 PARAM V(q2)
+.end

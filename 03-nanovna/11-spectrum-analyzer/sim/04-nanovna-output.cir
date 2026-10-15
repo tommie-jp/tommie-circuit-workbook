@@ -1,0 +1,12 @@
+* 11-4 NanoVNA の出力を測る (図1): 20 dB パッド (43・11・43 Ω) の減衰量と入口の抵抗。方形波の高調波は算術 (奇数次は 1/n) で確かめた
+* CH0 は 50 Ω の電源 (Vs・Rs)、パッドの先は tinySA の 50 Ω。S21 = 2·V(out)/Vs (dB は +6.02 dB)。入口の抵抗は 50·V(n0)/(Vs − V(n0))
+Vs s 0 AC 1
+Rs s n0 50
+R1 n0 m 43
+R2 m 0 11
+R3 m o 43
+Rl o 0 50
+.ac list 10Meg
+.meas AC vo FIND V(o) AT 10Meg
+.meas AC vn FIND V(n0) AT 10Meg
+.end

@@ -1,0 +1,24 @@
+* 12-1 おやすみタイマー (図1): TLC555 単安定。Rt=4.7 MΩ、Ct=220 µF、5 V。Ct が 2/3 VCC に届くまでの時間 T と、Q1 が ON の間の LED の電流を読む
+* 555 は理想: THRES のしきい値 2/3 VCC に Ct が届いた時刻を T とする (入力バイアス電流は CMOS 版なので 0)。電解コンデンサの漏れは Rleak (並列) で表し、.step で振る
+* Q1 は 2N7000 の代用 (02-transistors/sim と同じ LEVEL=1、VTO=2.1 V、KP=0.1)。ゲートは OUT = 約 5 V。LED は 1-1 と同じ仮定のモデル。実測ではない
+.model M2N7000 NMOS (LEVEL=1 VTO=2.1 KP=0.1 LAMBDA=0.01 CBD=10p)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.param rleak=1e12 rt=4.7Meg ct=220u
+V1 vcc 0 5
+Rt vcc ct {rt}
+Ct ct 0 {ct} IC=0
+Rleak ct 0 {rleak}
+.step param rleak list 1e12 20Meg
+.tran 2 3000 0 2 uic
+.meas tran tstop WHEN V(ct)=3.3333333 RISE=1
+.meas tran v60 FIND V(ct) AT=60
+.meas tran v480 FIND V(ct) AT=480
+* LED の枝 (OUT が H の間)
+Vg g 0 5
+Rg g gg 220
+M1 d gg 0 0 M2N7000
+RL vcc a 470
+D1 a d LED
+.meas tran iled FIND I(RL) AT=100
+.meas tran vds FIND V(d) AT=100
+.end

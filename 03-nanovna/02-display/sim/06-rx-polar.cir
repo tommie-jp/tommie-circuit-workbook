@@ -1,0 +1,16 @@
+* 2-6 R+jX と極表示 (図3・図4): R 22 Ω・L 100 nH・C 100 pF の直列共振 (先を短絡)。共振 50.33 MHz
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く (共振が鋭いので、掃引の間を補間しない)
+.ac list 30000000 50330000 100000000
+* 図3・図4 RLC: series R 22 / series L 100n / series C 100p / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 n2_0 22
+L3_0_0 n2_0 n4_0 1e-07 Rser=1u
+C5_0_0 n4_0 n6_0 1e-10
+Rshort_0 n6_0 0 1u
+.meas AC a0_0 FIND V(n0_0) AT 30000000
+.meas AC a0_1 FIND V(n0_0) AT 50330000
+.meas AC a0_2 FIND V(n0_0) AT 100000000
+.end

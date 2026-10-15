@@ -1,0 +1,27 @@
+* 0-4 静電気とアンテナの帯電 (図3): 144 MHz 帯アンテナの等価回路 (R 45 Ω・L 220 nH・C 5.6 pF の直列共振) と、給電点に 1 MΩ の放電抵抗を足した場合
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く (共振が鋭いので、掃引の間を補間しない)
+.ac list 120000000 143400000 170000000
+* 図3 放電抵抗あり: shunt R 1M / series R 45 / series L 220n / series C 5.6p / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+Rs1_0_0 n0_0 0 1000000
+R2_0_0 n0_0 n3_0 45
+L4_0_0 n3_0 n5_0 2.2e-07 Rser=1u
+C6_0_0 n5_0 n7_0 5.6e-12
+Rshort_0 n7_0 0 1u
+.meas AC a0_0 FIND V(n0_0) AT 120000000
+.meas AC a0_1 FIND V(n0_0) AT 143400000
+.meas AC a0_2 FIND V(n0_0) AT 170000000
+* 放電抵抗なし: series R 45 / series L 220n / series C 5.6p / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+R1_0_1 n0_1 n2_1 45
+L3_0_1 n2_1 n4_1 2.2e-07 Rser=1u
+C5_0_1 n4_1 n6_1 5.6e-12
+Rshort_1 n6_1 0 1u
+.meas AC a1_0 FIND V(n0_1) AT 120000000
+.meas AC a1_1 FIND V(n0_1) AT 143400000
+.meas AC a1_2 FIND V(n0_1) AT 170000000
+.end

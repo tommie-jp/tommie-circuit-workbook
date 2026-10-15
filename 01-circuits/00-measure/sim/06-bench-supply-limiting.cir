@@ -1,0 +1,28 @@
+* 0-6 電流制限つきの電源 (図1) と LED 点滅 (図2)
+* 電源は CV/CC を B ソースで表す: 出力電圧 = min(5 V, Ilimit × RL) に相当する。ここでは電流源 10 mA を 5 V でクランプした等価。
+* 図1: RL=1k と 100 Ω。図2: 5 V・330 Ω・赤 LED (VF 約 2.0 V @ 9 mA)・2SC1815 (BF=250)・RB=10k、FG は 5 V 固定で点灯時を読む。実測ではない
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+* 図1: 10 mA の電流源に 5 V のクランプダイオード (理想) を並べて CV/CC を作る
+I1 0 o 10m
+Dcl o vs DCL
+Vs vs 0 5
+.model DCL D (IS=1e-12 N=0.02 RS=0)
+RL o 0 1k
+I2 0 o2 10m
+Dcl2 o2 vs DCL
+RL2 o2 0 100
+* 図2
+V2 va 0 5
+R1 va c1 330
+D1 c1 c2 LED
+Q1 c2 bb 0 Q1815
+RB bb fg 10k
+Vfg fg 0 5
+.op
+.meas op vo PARAM V(o)
+.meas op vo2 PARAM V(o2)
+.meas op ir PARAM I(R1)
+.meas op vce PARAM V(c2)
+.meas op vr1 PARAM V(va,c1)
+.end

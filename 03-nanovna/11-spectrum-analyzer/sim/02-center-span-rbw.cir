@@ -1,0 +1,10 @@
+* 11-2 中心・スパン・RBW・基準レベル (図1): AD3 の Wavegen W1 (1 MHz・振幅 1 V の正弦波、理想の電圧源) を 1 kΩ で落として tinySA の 50 Ω へ
+* tinySA に届く電圧の振幅 (dB は 1 V 基準、-26.44 dB = 47.6 mV) と、R1 を流れる電流 (dB は 1 A 基準、-60.42 dB = 0.95 mA) を読む。
+* 電力は P = V_peak^2 / (2 × 50 Ω)。実測ではない
+V1 s 0 AC 1
+R1 s o 1k
+Rin o 0 50
+.ac list 1Meg
+.meas AC vpk FIND V(o) AT 1Meg
+.meas AC iw FIND I(R1) AT 1Meg
+.end

@@ -1,0 +1,18 @@
+* 0-3 555 非安定 (図1): R1=R2=10 kΩ、C1=10 nF、5 V。周波数・High の時間・Duty・コンデンサの振れを読む
+* 555 は理想の振る舞いモデル: THRES/TRIG のしきい値 2/3・1/3 VCC をヒステリシスつきスイッチ (放電トランジスタ) で表す。
+* 出力段の電圧降下 (本文の 0.2〜3.5 V) は入れていない (データシートの値で、ここでは対象外)。実測ではない
+.model DIS SW (Ron=10 Roff=1G Vt=2.5 Vh=0.8333)
+V1 vcc 0 5
+R1 vcc dis 10k
+R2 dis cap 10k
+C1 cap 0 10n
+* cap が 2/3 VCC を超えると放電 (S1 オン)、1/3 VCC を下回ると充電 (オフ)。Vt=2.5 V、Vh=0.833 V で 3.33 V 超でオン・1.67 V 未満でオフ
+S1 dis 0 cap 0 DIS
+.ic V(cap)=0
+.tran 0 5m 0 0.5u
+.meas tran per TRIG V(cap) VAL=2.5 RISE=5 TARG V(cap) VAL=2.5 RISE=6
+.meas tran vmax MAX V(cap) FROM=2m TO=5m
+.meas tran vmin MIN V(cap) FROM=2m TO=5m
+.meas tran thigh TRIG V(cap) VAL=1.7 RISE=5 TARG V(cap) VAL=3.3 RISE=5
+.meas tran tlow TRIG V(cap) VAL=3.3 FALL=5 TARG V(cap) VAL=1.7 FALL=5
+.end

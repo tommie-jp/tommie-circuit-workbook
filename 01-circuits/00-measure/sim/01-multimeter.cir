@@ -1,0 +1,8 @@
+* 0-1 分圧回路 (図1): 5 V・10 kΩ+10 kΩ。電流と R2 の両端を読む。電流計は 0 Ω、電圧計は理想 (内部抵抗なし)
+V1 a 0 5
+R1 a b 10k
+R2 b 0 10k
+.op
+.meas op i PARAM I(R1)
+.meas op v2 PARAM V(b)
+.end

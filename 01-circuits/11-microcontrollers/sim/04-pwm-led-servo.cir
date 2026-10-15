@@ -1,0 +1,19 @@
+* 11-4 PWM で LED 調光 (図1): GP15 が 1 kHz の PWM (3.3 V)、デューティ 25% / 50% / 100% で LED の平均電流を読む
+* サーボの信号 (図2) は 3.3 V のパルス幅を決めるだけの数字なので、パルス幅と duty_u16 の値は算術で確かめた (下の注)
+* GPIO は理想の 3.3 V 源。LED は 1-1 と同じ仮定のモデル。実測ではない
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+Va a0 0 PULSE(0 3.3 0 1n 1n 250u 1m)
+Ra a0 b0 330
+Da b0 0 LED
+Vb a1 0 PULSE(0 3.3 0 1n 1n 500u 1m)
+Rb a1 b1 330
+Db b1 0 LED
+Vc a2 0 3.3
+Rc a2 b2 330
+Dc b2 0 LED
+.tran 0 20m
+.meas tran i25 AVG I(Ra) FROM=10m TO=20m
+.meas tran i50 AVG I(Rb) FROM=10m TO=20m
+.meas tran i100 AVG I(Rc) FROM=10m TO=20m
+.meas tran duty25 AVG V(a0)/3.3 FROM=10m TO=20m
+.end

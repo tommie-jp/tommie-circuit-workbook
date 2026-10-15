@@ -1,0 +1,20 @@
+* 9-1 1.5 GHz より上へ (図2): 0.5 m・VF 0.66 の損失なし同軸 2 本のスルー。損失 (α_ref √(f/f_ref)) は SPICE の模型にせず算術で確かめた
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く (共振が鋭いので、掃引の間を補間しない)
+.ac list 50000 1.5e+09 2e+09 3e+09
+* 図2 スルー 1 m: line 50 0.5m vf 0.66 / line 50 0.5m vf 0.66
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T2_0 n0_0 0 n1_0 0 Z0=50.0 TD=2.52700072e-09
+T4_0 n1_0 0 n3_0 0 Z0=50.0 TD=2.52700072e-09
+RL_0 n3_0 0 50
+.meas AC a0_0 FIND V(n0_0) AT 50000
+.meas AC c0_0 FIND V(n3_0) AT 50000
+.meas AC a0_1 FIND V(n0_0) AT 1.5e+09
+.meas AC c0_1 FIND V(n3_0) AT 1.5e+09
+.meas AC a0_2 FIND V(n0_0) AT 2e+09
+.meas AC c0_2 FIND V(n3_0) AT 2e+09
+.meas AC a0_3 FIND V(n0_0) AT 3e+09
+.meas AC c0_3 FIND V(n3_0) AT 3e+09
+.end

@@ -1,0 +1,24 @@
+* 3-9 SMA の再現性 (図3・図4): 自作 Load (50 Ω + 2 nH) とスルー治具 (52.1 nH)
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く (共振が鋭いので、掃引の間を補間しない)
+.ac list 100000000 300000000
+* 図3 Load: series R 50 esl 2n / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 m3_0 50
+L1_1_0 m3_0 n2_0 2e-09 Rser=1u
+Rshort_0 n2_0 0 1u
+.meas AC a0_0 FIND V(n0_0) AT 100000000
+.meas AC a0_1 FIND V(n0_0) AT 300000000
+* 図4 スルー: series R 0 esl 52.1n
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+R1_0_1 n0_1 m3_1 1e-06
+L1_1_1 m3_1 n2_1 5.21e-08 Rser=1u
+RL_1 n2_1 0 50
+.meas AC a1_0 FIND V(n0_1) AT 100000000
+.meas AC c1_0 FIND V(n2_1) AT 100000000
+.meas AC a1_1 FIND V(n0_1) AT 300000000
+.meas AC c1_1 FIND V(n2_1) AT 300000000
+.end

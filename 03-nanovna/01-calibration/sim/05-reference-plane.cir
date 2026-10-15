@@ -1,0 +1,19 @@
+* 1-5 基準面 (図2・図3): 開放と、30 cm (VF 0.66) の線の先の開放
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く (共振が鋭いので、掃引の間を補間しない)
+.ac list 50000000 100000000 150000000
+* 図2 基準面がコネクタの Open: open
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+.meas AC a0_0 FIND V(n0_0) AT 50000000
+.meas AC a0_1 FIND V(n0_0) AT 100000000
+.meas AC a0_2 FIND V(n0_0) AT 150000000
+* 図3 30 cm 先の Open: line 50 30cm vf 0.66 / open
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T2_1 n0_1 0 n1_1 0 Z0=50.0 TD=1.51620043e-09
+.meas AC a1_0 FIND V(n0_1) AT 50000000
+.meas AC a1_1 FIND V(n0_1) AT 100000000
+.meas AC a1_2 FIND V(n0_1) AT 150000000
+.end

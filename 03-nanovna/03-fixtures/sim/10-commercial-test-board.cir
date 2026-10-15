@@ -1,0 +1,27 @@
+* 3-10 市販のテストボード (図3・図4): 自作のスルー (52.1 nH) と 市販 (0.5 nH + 3 cm・VF 0.55 + 0.5 nH)
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く (共振が鋭いので、掃引の間を補間しない)
+.ac list 100000000 300000000
+* 図3 自作: series R 0 esl 52.1n
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 m3_0 1e-06
+L1_1_0 m3_0 n2_0 5.21e-08 Rser=1u
+RL_0 n2_0 0 50
+.meas AC a0_0 FIND V(n0_0) AT 100000000
+.meas AC c0_0 FIND V(n2_0) AT 100000000
+.meas AC a0_1 FIND V(n0_0) AT 300000000
+.meas AC c0_1 FIND V(n2_0) AT 300000000
+* 図4 市販: series L 0.5n / line 50 3cm vf 0.55 / series L 0.5n
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+L1_0_1 n0_1 n2_1 5e-10 Rser=1u
+T4_1 n2_1 0 n3_1 0 Z0=50.0 TD=1.81944052e-10
+L5_0_1 n3_1 n6_1 5e-10 Rser=1u
+RL_1 n6_1 0 50
+.meas AC a1_0 FIND V(n0_1) AT 100000000
+.meas AC c1_0 FIND V(n6_1) AT 100000000
+.meas AC a1_1 FIND V(n0_1) AT 300000000
+.meas AC c1_1 FIND V(n6_1) AT 300000000
+.end

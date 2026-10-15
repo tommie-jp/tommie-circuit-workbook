@@ -1,0 +1,17 @@
+* 2-3 掃引の設定 (図1): 0 Ω のスルー。中心 144 MHz・スパン 20 MHz = 134〜154 MHz
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く (共振が鋭いので、掃引の間を補間しない)
+.ac list 134000000 144000000 154000000
+* 図1 スルー: series R 0
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 n2_0 1e-06
+RL_0 n2_0 0 50
+.meas AC a0_0 FIND V(n0_0) AT 134000000
+.meas AC c0_0 FIND V(n2_0) AT 134000000
+.meas AC a0_1 FIND V(n0_0) AT 144000000
+.meas AC c0_1 FIND V(n2_0) AT 144000000
+.meas AC a0_2 FIND V(n0_0) AT 154000000
+.meas AC c0_2 FIND V(n2_0) AT 154000000
+.end

@@ -1,0 +1,54 @@
+* 1-8 Load の 50 Ω を DC で測る (図2): DC の R が 45〜55 Ω の Load の S11 (10 MHz)
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く (共振が鋭いので、掃引の間を補間しない)
+.ac list 10000000
+* 45 Ω: series R 45 / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 n2_0 45
+Rshort_0 n2_0 0 1u
+.meas AC a0_0 FIND V(n0_0) AT 10000000
+* 48 Ω: series R 48 / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+R1_0_1 n0_1 n2_1 48
+Rshort_1 n2_1 0 1u
+.meas AC a1_0 FIND V(n0_1) AT 10000000
+* 49 Ω: series R 49 / short
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+R1_0_2 n0_2 n2_2 49
+Rshort_2 n2_2 0 1u
+.meas AC a2_0 FIND V(n0_2) AT 10000000
+* 49.5 Ω: series R 49.5 / short
+Vs_3 s_3 0 AC 1
+Rs_3 s_3 n0_3 50
+R1_0_3 n0_3 n2_3 49.5
+Rshort_3 n2_3 0 1u
+.meas AC a3_0 FIND V(n0_3) AT 10000000
+* 50.5 Ω: series R 50.5 / short
+Vs_4 s_4 0 AC 1
+Rs_4 s_4 n0_4 50
+R1_0_4 n0_4 n2_4 50.5
+Rshort_4 n2_4 0 1u
+.meas AC a4_0 FIND V(n0_4) AT 10000000
+* 51 Ω (図2): series R 51 / short
+Vs_5 s_5 0 AC 1
+Rs_5 s_5 n0_5 50
+R1_0_5 n0_5 n2_5 51
+Rshort_5 n2_5 0 1u
+.meas AC a5_0 FIND V(n0_5) AT 10000000
+* 52 Ω: series R 52 / short
+Vs_6 s_6 0 AC 1
+Rs_6 s_6 n0_6 50
+R1_0_6 n0_6 n2_6 52
+Rshort_6 n2_6 0 1u
+.meas AC a6_0 FIND V(n0_6) AT 10000000
+* 55 Ω: series R 55 / short
+Vs_7 s_7 0 AC 1
+Rs_7 s_7 n0_7 50
+R1_0_7 n0_7 n2_7 55
+Rshort_7 n2_7 0 1u
+.meas AC a7_0 FIND V(n0_7) AT 10000000
+.end
