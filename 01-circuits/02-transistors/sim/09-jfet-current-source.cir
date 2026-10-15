@@ -1,0 +1,16 @@
+* 2-9 JFET の定電流 (図1)。電源 vs を 2 V から 12 V に振って LED の電流を読む (RS = 470 / 220、選別した個体と V_GS(off) = -2.5 V の個体)
+* J2SK30A は 2SK30A の代用 (しきい値 VTO = V_GS(off)、BETA = IDSS / VTO^2、LAMBDA = 0.01 は仮定で、実測ではない)
+* LED は VF = 約 1.5 V (1 uA)・約 2.0 V (8.5 mA) に合わせた仮定 (0.8 mA では約 1.9 V)
+.model J2SK30A NJF (VTO={vto} BETA={idss/(vto*vto)} LAMBDA=0.01)
+.model LED D (IS=1.7e-18 N=2.14 RS=0)
+.param vs=5 rs=470 vto=-1.5 idss=1.5m
+V1 vcc 0 {vs}
+D1 vcc d LED
+J1 d 0 s J2SK30A
+RS s 0 {rs}
+.step param vs list 2 2.5 3 3.5 4 5 7 9 12
+.step param rs list 470 220
+.tran 0 1m 0 10u
+.meas tran id AVG I(RS) FROM=0.5m TO=1m
+.meas tran vds AVG V(d)-V(s) FROM=0.5m TO=1m
+.end

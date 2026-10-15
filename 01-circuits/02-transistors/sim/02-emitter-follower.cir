@@ -1,0 +1,19 @@
+* 2-2 エミッタフォロア (図1)。1 kHz の電圧利得 (rl = 1k)・VNA 配置の S21 (rl = 50、rs = 50 に替えて 2 * V(out) を読む) を .ac で読む。動作点は .dc で別に読んだ
+* Q1815 は 2SC1815 の代用 (09-rf/sim/agc.cir と同じ IS・BF・VAF・IKF。fT を 40 MHz 前後にするため TF = 2.8n、CJE = 15p、CJC = 3p とした仮定で、実測ではない)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=50 RE=1 RC=5 CJE=15p CJC=3p TF=2.8n TR=50n)
+.param rl=1k rs=0.001
+VCC vcc 0 5
+R1 vcc b 22k
+R2 b 0 10k
+Q1 vcc b e Q1815
+RE e 0 1k
+Cin in b 10u
+Cout e out 10u
+RL out 0 {rl}
+Vs in0 0 DC 0 AC 1
+Rs in0 in {rs}
+.op
+.ac dec 20 100 100Meg
+.meas ac gain1k FIND mag(V(out)) AT 1k
+* S21 は rl = 50、rs = 50 で走らせ、mag (dB 表示) に 6.02 dB を足す (= 2 * V(out))
+.end

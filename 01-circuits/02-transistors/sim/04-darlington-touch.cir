@@ -1,0 +1,22 @@
+* 2-4 ダーリントンのタッチスイッチ (図1)。指の抵抗 rf = 500k / 100k / 2M (指なし = 1G) を振って LED の電流・コレクタ・ベースの電圧を読む
+* Q1815 は 2SC1815 の代用 (09-rf/sim/agc.cir と同じ IS・BF・VAF・IKF。目安から作った仮定で、実測ではない)
+* LED は VF = 約 1.5 V (1 uA)・約 2.0 V (8.5 mA) に合わせた仮定。Rosc は オシロの入力 (1 Mohm)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.param rf=500k rosb=1G
+VCC vcc 0 5
+Rf vcc b {rf}
+RB b 0 1Meg
+Q1 c b e1 Q1815
+Q2 c e1 0 Q1815
+RC vcc a 470
+D1 a c LED
+Rosc c 0 1Meg
+Rosb b 0 {rosb}
+.step param rf list 1G 2Meg 500k 100k
+.tran 0 1m 0 10u
+.meas tran ic AVG I(RC) FROM=0.5m TO=1m
+.meas tran vc AVG V(c) FROM=0.5m TO=1m
+.meas tran vb AVG V(b) FROM=0.5m TO=1m
+.meas tran ib AVG I(Rf) FROM=0.5m TO=1m
+.end

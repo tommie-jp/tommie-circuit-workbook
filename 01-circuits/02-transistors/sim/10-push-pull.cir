@@ -1,0 +1,19 @@
+* 2-10 B 級プッシュプル (図1)。100 Hz の正弦波の振幅 va = 3 V / 1 V を振り、出力の山・谷・振幅と、出力が 0 V に張り付いている幅を読む
+* Q1815 は 2SC1815 の代用 (09-rf/sim/agc.cir と同じ IS・BF・VAF・IKF)、Q1015 は 2SA1015 の代用 (同じ値の PNP。目安から作った仮定で、実測ではない)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5)
+.model Q1015 PNP (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5)
+.param va=3
+VCC vcc 0 5
+VEE vee 0 -5
+Vin in 0 SIN(0 {va} 100)
+Q1 vcc in out Q1815
+Q2 vee in out Q1015
+RL out 0 100
+.step param va list 1 3
+.tran 0 40m 0 20u
+.meas tran vmax MAX V(out) FROM=20m TO=40m
+.meas tran vmin MIN V(out) FROM=20m TO=40m
+.meas tran vpp PP V(out) FROM=20m TO=40m
+.meas tran vzero_t FIND V(in) WHEN V(out)=0.05 RISE=1 TD=20m
+.meas tran vzero_n FIND V(in) WHEN V(out)=-0.05 FALL=1 TD=20m
+.end

@@ -1,0 +1,21 @@
+* 2-7 カレントミラー (図1)。LED 1 個・2 個直列 (rsh = 1m / 1G で D2 を短絡 / 開放)、Early 電圧 VAF を 100 V / 1e6 V (なし) で振り、RREF・RS の電圧と Q2 の C-E 間電圧を読む
+* Q1815 は 2SC1815 の代用 (09-rf/sim/agc.cir と同じ IS・BF・IKF。VAF は仮定で、実測ではない)
+* LED は VF = 約 1.5 V (1 uA)・約 2.0 V (8.5 mA) に合わせた仮定
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF={vaf} IKF=0.15 RB=30 RE=1 RC=5)
+.model LED D (IS=1.7e-18 N=2.14 RS=0)
+.param vaf=100 rsh=1m
+VCC vcc 0 5
+RREF vcc c1 560
+Q1 c1 c1 0 Q1815
+RS vcc a 47
+D1 a m LED
+D2 m d LED
+Rsh m d {rsh}
+Q2 d c1 0 Q1815
+.step param vaf list 100 1e6
+.step param rsh list 1m 1G
+.tran 0 1m 0 10u
+.meas tran vref AVG V(vcc)-V(c1) FROM=0.5m TO=1m
+.meas tran vrs AVG V(vcc)-V(a) FROM=0.5m TO=1m
+.meas tran vce2 AVG V(d) FROM=0.5m TO=1m
+.end

@@ -157,6 +157,20 @@ WaveForms の **Voltmeter** (または Scope の Measurements の Average) で C
 | D1 を 2 個直列 (V<sub>F</sub> 合計 4 V) に替えたときの CH1 | ほとんど変わらない (約 0.35 V、I<sub>out</sub> ≈ 7.5 mA) | 出力側の負荷電圧が変わっても電流は一定。Q2 の C-E 間は 5 − 0.36 − 4 ≈ 0.6 V で、まだ飽和 (約 0.2 V) していない |
 | Q2 の C-E 間電圧 (LED 1 個) | 約 2.6 V | 活性領域に十分な余裕がある |
 
+## LTspice での確かめ
+
+`sim/07-current-mirror.cir` で図1 を過渡解析し、LED 1 個と 2 個直列、Early 電圧 V<sub>AF</sub> (V<sub>CE</sub> で電流がわずかに増える効果) 100 V とその効果なしを振って読んだ。
+Q1・Q2 は 2SC1815 の代用モデル (`09-rf/sim/agc.cir` と同じ IS・BF・IKF。V<sub>AF</sub> = 100 V は仮定で、実測ではない)、
+LED は V<sub>F</sub> が約 1.5 V (1 µA)・約 2.0 V (8.5 mA) になる仮定のモデル。
+
+| 項目 | 本文の数字 | LTspice | 判定 |
+| --- | --- | --- | --- |
+| RREF の両端 (CH2) | 約 4.3 V (I<sub>ref</sub> 7.68 mA) | 4.30 V | 合う |
+| RS の両端 (CH1、LED 1 個、Early 効果なし) | 0.35〜0.36 V (I<sub>out</sub> 7.5〜7.6 mA) | 0.358 V (7.6 mA) | 合う |
+| 同じ、Early 効果あり (V<sub>AF</sub> = 100 V) | 本文では未算入 | 0.363 V (7.7 mA) | I<sub>ref</sub> より 0.6% 多い (Q2 の V<sub>CE</sub> が Q1 より 2 V 高い分) |
+| LED 2 個直列の CH1 | 変わらない (約 0.35 V) | 0.358 V | 合う |
+| Q2 の C-E 間電圧 (LED 1 個・2 個) | 約 2.6 V・約 0.6 V | 2.64 V・0.65 V | 合う (2 個でも飽和しない) |
+
 ## 出典
 
 自作。

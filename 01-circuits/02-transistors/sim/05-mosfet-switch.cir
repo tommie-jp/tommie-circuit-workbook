@@ -1,0 +1,20 @@
+* 2-5 MOSFET スイッチ (図1)。SW を押した (vg = 5 V) / 開けた (0 V)、ゲート 3.3 V の LED 電流・ドレイン電圧を読む
+* M2N7000 は 2N7000 の代用 (LEVEL=1 の仮定。しきい値 VTO を 1 V / 2.1 V / 3 V に振り、KP は VGS = 5 V・VTO = 2.1 V でオン抵抗が約 3.4 ohm になるよう置いた。実測ではない)
+* LED は VF = 約 1.5 V (1 uA)・約 2.0 V (8.5 mA) に合わせた仮定。Rosc は オシロの入力 (1 Mohm)
+.model M2N7000 NMOS (LEVEL=1 VTO={vto} KP=0.1 LAMBDA=0.01 CBD=10p)
+.param vg=5 vto=2.1
+VCC vcc 0 5
+R1 vcc a 330
+D1 a d LED
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+M1 d g 0 0 M2N7000
+RG gin g 220
+Vg gin 0 {vg}
+RPD g 0 100k
+Rosc d 0 1Meg
+.step param vg list 0 3.3 5
+.step param vto list 1 2.1 3
+.tran 0 1m 0 10u
+.meas tran id AVG I(R1) FROM=0.5m TO=1m
+.meas tran vd AVG V(d) FROM=0.5m TO=1m
+.end

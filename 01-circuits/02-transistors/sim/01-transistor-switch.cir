@@ -1,0 +1,20 @@
+* 2-1 トランジスタスイッチ (図1)。W1 = 5 V / 0 V、RB = 10k / 100k を振って LED 電流・C-E 間電圧・ベース電流を読む
+* Q1815 は 2SC1815 の代用 (09-rf/sim/agc.cir と同じ IS・BF・VAF・IKF。目安から作った仮定で、実測ではない)
+* LED は VF = 約 1.5 V (1 uA)・約 2.0 V (8.5 mA) に合わせた仮定。Rosc は オシロの入力 (1 Mohm)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.param vin=5 rb=10k rl=1Meg
+VCC vcc 0 5
+R1 vcc a 330
+D1 a c LED
+Q1 c b 0 Q1815
+RB b w {rb}
+Vw w 0 {vin}
+Rosc c 0 {rl}
+.step param vin list 5 0
+.step param rb list 10k 100k
+.tran 0 1m 0 10u
+.meas tran ic AVG I(R1) FROM=0.5m TO=1m
+.meas tran vce AVG V(c) FROM=0.5m TO=1m
+.meas tran ib AVG I(RB) FROM=0.5m TO=1m
+.end

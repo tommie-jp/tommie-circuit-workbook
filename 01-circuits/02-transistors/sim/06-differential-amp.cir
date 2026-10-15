@@ -1,0 +1,27 @@
+* 2-6 差動増幅 (図1)。VR1 の位置 x (開放電圧 5 V * x。0.484 でベースの電圧が釣り合う) を 0.44 / 0.46 / 0.484 / 0.50 に振り、LED の電流・コレクタ電圧・テール電流を読む
+* Q1815 は 2SC1815 の代用 (IS = 1e-14、BF = 150。目安から作った仮定で、実測ではない)
+* LED は VF = 約 2.0 V (4 mA) に合わせた仮定 (IS = 7.6e-19、N = 2.14)
+.model Q1815 NPN (IS=1e-14 BF=150 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5)
+.model LED D (IS=7.6e-19 N=2.14 RS=0)
+.param x=0.5
+VCC vcc 0 5
+R1 vcc b1 10k
+R2 b1 0 10k
+RC1 vcc a1 220
+D1 a1 c1 LED
+RC2 vcc a2 220
+D2 a2 c2 LED
+Q1 c1 b1 e Q1815
+Q2 c2 b2 e Q1815
+RE e 0 220
+RPa vcc b2 {10k*(1-x)}
+RPb b2 0 {10k*x}
+.step param x list 0.44 0.46 0.484 0.50
+.tran 0 1m 0 10u
+.meas tran id1 AVG I(RC1) FROM=0.5m TO=1m
+.meas tran id2 AVG I(RC2) FROM=0.5m TO=1m
+.meas tran vc1 AVG V(c1) FROM=0.5m TO=1m
+.meas tran vc2 AVG V(c2) FROM=0.5m TO=1m
+.meas tran vb1 AVG V(b1) FROM=0.5m TO=1m
+.meas tran vb2 AVG V(b2) FROM=0.5m TO=1m
+.end

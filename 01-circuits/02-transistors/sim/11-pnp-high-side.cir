@@ -1,0 +1,25 @@
+* 2-11 PNP のハイサイドスイッチ (図1)。W1 = 5 V / 0 V でコレクタ電圧・LED の電流・Q1 のベース電圧・RB2 の電流を読む
+* Q1815 は 2SC1815、Q1015 は 2SA1015 の代用 (09-rf/sim/agc.cir と同じ IS・BF・VAF・IKF の NPN と PNP。目安から作った仮定で、実測ではない)
+* LED は VF = 約 1.5 V (1 uA)・約 2.0 V (8.5 mA) に合わせた仮定。Rosc は オシロの入力 (1 Mohm)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5)
+.model Q1015 PNP (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5)
+.model LED D (IS=1.7e-18 N=2.14 RS=0)
+.param vw=5
+VCC vcc 0 5
+RB1 vcc b1 10k
+RB2 b1 c2 4.7k
+Q1 c b1 vcc Q1015
+Q2 c2 b2 0 Q1815
+RB3 b2 w 10k
+Vw w 0 {vw}
+RL c a 470
+D1 a 0 LED
+Rosc c 0 1Meg
+.step param vw list 0 5
+.tran 0 1m 0 10u
+.meas tran vc AVG V(c) FROM=0.5m TO=1m
+.meas tran vb1 AVG V(b1) FROM=0.5m TO=1m
+.meas tran ic AVG I(RL) FROM=0.5m TO=1m
+.meas tran irb2 AVG I(RB2) FROM=0.5m TO=1m
+.meas tran vce2 AVG V(c2) FROM=0.5m TO=1m
+.end
