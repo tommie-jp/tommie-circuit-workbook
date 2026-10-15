@@ -20,7 +20,7 @@ device: WEB
 この題では、同じ作りの Pong を Verilog で書き、ブラウザの soft-fpga (第 4 章) で遊ぶ。4-7 の画面のボタンでラケットを動かし、
 回路が出す画素を JS が `<canvas>` に並べる。**命令を読む回路 (CPU) はどこにも無い。**
 
-**動くページ: <https://tommie-jp.github.io/soft-fpga/91-pong/>** (自分でビルドしなくても、ブラウザで開けば遊べる。W・S が左、↑・↓ が右のラケット、AUTO は回路が打つ。下に Logic Analyzer が付いていて、球・ラケット・点の動きが波形で見える (「Logic Analyzer で見る」)。ソースは [soft-fpga の examples/91-pong](https://github.com/tommie-jp/soft-fpga/tree/main/examples/91-pong))
+**動くページ: <https://tommie-jp.github.io/soft-fpga/91-pong/>** (自分でビルドしなくても、ブラウザで開けば遊べる。開いた直後は、左右とも AUTO (回路が打つ) で打ち合う。AUTO を切ると、W・S が左、↑・↓ が右のラケット。下に Logic Analyzer が付いていて、球・ラケット・点の動きが波形で見える (「Logic Analyzer で見る」)。ソースは [soft-fpga の examples/91-pong](https://github.com/tommie-jp/soft-fpga/tree/main/examples/91-pong))
 
 [![公開ページのスクリーンショット (ゲーム画面とボタン)](03-pong-page-small.png)](03-pong-page.png)
 
@@ -509,7 +509,7 @@ var Module = { onRuntimeInitialized: function () {
   Module._sim_init();
   const ctx = document.getElementById('screen').getContext('2d');
   const img = ctx.createImageData(160, 120);
-  let held = 0, sw = 0;                       // held: 押している間のボタン (bit0〜3)、sw: AUTO のスイッチ (bit4・5)
+  let held = 0, sw = 48;                      // held: 押している間のボタン (bit0〜3)、sw: AUTO のスイッチ (bit4・5。最初は両方入れておく)
 
   function hold(id, bit, key) {               // ボタン: 押している間だけ 1
     const el = document.getElementById(id);
@@ -525,6 +525,7 @@ var Module = { onRuntimeInitialized: function () {
 
   function toggle(id, bit) {                  // スイッチ: 押すたびに入れ替わり、そのまま残る
     const el = document.getElementById(id);
+    el.classList.toggle('on', (sw & bit) !== 0);   // 最初の状態を見た目に出す
     el.addEventListener('click', () => { sw ^= bit; el.classList.toggle('on', (sw & bit) !== 0); });
   }
   toggle('al', 16); toggle('ar', 32);
@@ -578,7 +579,7 @@ var Module = { onRuntimeInitialized: function () {
 ```
 
 - ラケットのボタンは**押している間だけ 1** (`pointerdown` で立て、`pointerup` と `pointerleave` で下ろす)。キーボードの W・S と ↑・↓ でも同じ
-- AUTO は 4-7 のスイッチと同じで、押すたびに入れ替わる
+- AUTO は 4-7 のスイッチと同じで、押すたびに入れ替わる。**最初は左右とも入れてある** (`sw = 48`)。開いてすぐ回路どうしが打ち合い、音やトリガーをすぐ試せる
 - 描き替えのたびに `run_frame` を 1 回呼ぶ。ブラウザの描き替えは 1 秒に約 60 回なので、回路は 1 秒に 60 × 19 200 = 約 115 万クロック回る
 - `<canvas>` は 160 × 120 のまま、CSS で 3 倍に広げる。`image-rendering: pixelated` で、画素がぼけずに四角く出る
 - 音は、画面ごとに `get_snd_kind` を読み、**その 1 画面ぶんだけ**、`OscillatorNode` (矩形波) の周波数を 450 Hz か 225 Hz にして `GainNode` を開く。回路の `sound` を 1 クロックごとに標本化して流す方式は、描き替えの時計と音の時計が別なので、シミュレーションを音の側で進める作りにしないと途切れる。この題は 1 画面に 1 回読むだけにした
@@ -606,7 +607,7 @@ var Module = { onRuntimeInitialized: function () {
    ```
 
 4. `examples/` で Web サーバを立て (`python3 -m http.server 8081`)、`/91-pong/web/` を開く。同じ物が上の URL に公開してある
-5. 左右の AUTO を入れると、回路どうしが打ち合う。AUTO を切り、W・S (左) と ↑・↓ (右) で打つ
+5. 最初から左右の AUTO が入っていて、回路どうしが打ち合う。AUTO を切ると、W・S (左) と ↑・↓ (右) で打てる
 
 ## 画面に見えるはずのもの
 
@@ -677,7 +678,7 @@ cursors: [6us, 78us]
 
 - 1 画面ごとのモードでは `sound` を選ばない。サンプルを画面の最後に取るので `sound` はほぼ 0 で、矩形波は見えない。矩形波は 1 クロックごとのモードで見る
 - `snd_kind` の値は 16 進。`1` がヒット、`2` が壁と点。点の音は 16 画面続くが、`==` は一致し続けている間は再発火しないので、鳴り始めで 1 回だけ止まる (この信号の `↑ 立ち上がり` は、複数ビットのどのビットを見るか確かめていないので、`==` を使う)
-- ヒットで止めるには打ち合いが要る。AUTO は**ページを開いてすぐ**、左右とも入れる (点が入ったあとに入れると、打ち合いにならず点を取られ続けることがある)。手で打つなら W・S と ↑・↓
+- ヒットで止めるには打ち合いが要る。左右とも AUTO は最初から入っているので、開いてすぐ試せる。AUTO を切って手で打ったあと、途中から入れ直すと、打ち合いにならず点を取られ続けることがある (リセット直後の位置からなら打ち合う)
 - 確かめた手順: 両側 AUTO で `snd_kind == 1` を Set → 39 画面めで止まった。1 クロックごとのモードで `sound` の `↑ 立ち上がり` (post 2000) → 止まって、矩形波が見えた
 
 - 条件が `==` のとき、**一致し続けている間は再発火しない**。`sr == 3` で止めた後に再開しても、`sr` が 4 になり、また 3 に戻る (9 の次の 0 を経て 3 になる) までは止まらない
@@ -759,7 +760,8 @@ PASS
 | 1 画面めの白の画素 | 946 | 946 (PC)。ブラウザは開いて 1.5 s 後の画面で 939 (点が 0 対 2 になり、「2」が「0」より 7 画素少ない) | 合った |
 | 図4の 58〜61 行の `pixel` | 6〜8・78〜80・151〜153 (61 行は 79) | 同じ (`run_frame` の配列を読んだ) | 合った |
 | W キーを 1 s 押す | ラケットの上端が 2 | `<canvas>` の 7 列めの白が 2〜17 行 | 合った |
-| 左右の AUTO を入れて 5 s | 画面と点が進む | 156 → 456 画面、点 0-3 → 0-5、コンソールに誤り無し (favicon の 404 だけ) | 合った |
+| (AUTO が最初は切れていた版で) 左右の AUTO を入れて 5 s | 画面と点が進む | 156 → 456 画面、点 0-3 → 0-5、コンソールに誤り無し (favicon の 404 だけ) | 合った |
+| 開いて 10 s (左右の AUTO が最初から入っている版) | 打ち合う。点は入らず、ヒットが出る | 603 画面で点 0-0、ヒットの音が 9 回 (`get_snd_kind` が 1)、壁・点の音 7 画面。AUTO を切ると W キーで動いた | 合った |
 | 描き替えの速さ | 約 60 画面/s | 300 画面/5 s | 合った (ヘッドレスの Chromium の値) |
 | 合成 (0.33 / 0.70+16) | LUT 758 / 342、ALU 578 / 494、FF 75 | LUT1 338 + LUT2 79 + LUT3 109 + LUT4 232 / 86 + 65 + 62 + 129、DFF 14 + DFFR 8 + DFFRE 38 + DFFSE 15 (どちらも) | 合った |
 | 音の周波数と長さ | ヒット 450 Hz (1 画面)、壁 225 Hz (1 画面)、点 225 Hz (16 画面) | 模型と回路の山の数・1 のクロックの数が全画面で一致 (ヒット 7 山/画面、壁と点 4 山/画面) | 合った |

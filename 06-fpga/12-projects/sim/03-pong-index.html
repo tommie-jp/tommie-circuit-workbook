@@ -23,7 +23,7 @@ var Module = { onRuntimeInitialized: function () {
   Module._sim_init();
   const ctx = document.getElementById('screen').getContext('2d');
   const img = ctx.createImageData(160, 120);
-  let held = 0, sw = 0;                       // held: 押している間のボタン (bit0〜3)、sw: AUTO のスイッチ (bit4・5)
+  let held = 0, sw = 48;                      // held: 押している間のボタン (bit0〜3)、sw: AUTO のスイッチ (bit4・5。最初は両方入れておく)
 
   function hold(id, bit, key) {               // ボタン: 押している間だけ 1
     const el = document.getElementById(id);
@@ -39,6 +39,7 @@ var Module = { onRuntimeInitialized: function () {
 
   function toggle(id, bit) {                  // スイッチ: 押すたびに入れ替わり、そのまま残る
     const el = document.getElementById(id);
+    el.classList.toggle('on', (sw & bit) !== 0);   // 最初の状態を見た目に出す
     el.addEventListener('click', () => { sw ^= bit; el.classList.toggle('on', (sw & bit) !== 0); });
   }
   toggle('al', 16); toggle('ar', 32);
