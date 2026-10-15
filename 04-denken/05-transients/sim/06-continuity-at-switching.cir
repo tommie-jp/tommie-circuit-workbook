@@ -1,0 +1,17 @@
+* 5-6 切り替えの連続性: 0 → 2 V の段、R1 = 1 kΩ に C = 10 nF (a 系)・L = 10 mH (b 系) を直列 (τ = 10 µs)
+V1 s 0 PULSE(0 2 0 1n 1n 1m 2m)
+R1 s m 1k
+C1 m 0 10n
+R2 s n 1k
+L2 n 0 10m
+.step param dummy list 1 2
+.tran 0 60u 0 0.05u
+.meas tran c_r_1u FIND V(s,m) AT=1u
+.meas tran c_c_1u FIND V(m) AT=1u
+.meas tran c_r_10u FIND V(s,m) AT=10u
+.meas tran c_c_10u FIND V(m) AT=10u
+.meas tran l_r_1u FIND V(s,n) AT=1u
+.meas tran l_l_1u FIND V(n) AT=1u
+.meas tran l_r_10u FIND V(s,n) AT=10u
+.meas tran l_l_10u FIND V(n) AT=10u
+.end

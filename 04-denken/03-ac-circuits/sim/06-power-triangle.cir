@@ -1,0 +1,10 @@
+* 3-6 電力三角形: R1 = 47 Ω + L1 = 10 mH (巻線抵抗は 0 と仮定)、Rs = 10 Ω、1 kHz、振幅 0.5 V (理想の計器)
+.ac list 1k
+V1 s 0 AC 0.5
+Rs s a 10
+R1 a b 47
+L1 b 0 10m
+.meas ac m_i FIND mag(V(s,a)) AT 1k
+.meas ac p_i FIND ph(V(s,a)) AT 1k
+.meas ac m_vr FIND mag(V(a)) AT 1k
+.meas ac p_vr FIND ph(V(a)) AT 1k

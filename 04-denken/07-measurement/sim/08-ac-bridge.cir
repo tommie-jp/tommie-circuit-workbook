@@ -1,0 +1,41 @@
+* 7-8 容量ブリッジ: W1 = 1 V (振幅)、1 kHz、R2 = 1 kΩ、C_S = 100 nF、C_X = 47 nF。R1 を 390〜560 Ω で振り、検出器 (CH1) の振幅を読む
+.ac list 1k
+V390 s390 0 AC 1
+R1_390 s390 l390 390
+CS390 l390 0 100n
+R2_390 s390 r390 1k
+CX390 r390 0 47n
+.meas ac d390 FIND mag(V(l390,r390)) AT 1k
+V430 s430 0 AC 1
+R1_430 s430 l430 430
+CS430 l430 0 100n
+R2_430 s430 r430 1k
+CX430 r430 0 47n
+.meas ac d430 FIND mag(V(l430,r430)) AT 1k
+V470 s470 0 AC 1
+R1_470 s470 l470 470
+CS470 l470 0 100n
+R2_470 s470 r470 1k
+CX470 r470 0 47n
+.meas ac d470 FIND mag(V(l470,r470)) AT 1k
+V510 s510 0 AC 1
+R1_510 s510 l510 510
+CS510 l510 0 100n
+R2_510 s510 r510 1k
+CX510 r510 0 47n
+.meas ac d510 FIND mag(V(l510,r510)) AT 1k
+V560 s560 0 AC 1
+R1_560 s560 l560 560
+CS560 l560 0 100n
+R2_560 s560 r560 1k
+CX560 r560 0 47n
+.meas ac d560 FIND mag(V(l560,r560)) AT 1k
+V9 s9 0 AC 1
+Lx s9 q9 10m Rser=25
+R3 q9 0 1k
+R2m s9 p9 1k
+R4 p9 0 40k
+C4 p9 0 10n
+.meas ac det FIND mag(V(q9,p9)) AT 1k
+.meas ac vq FIND mag(V(q9)) AT 1k
+.meas ac vp FIND mag(V(p9)) AT 1k

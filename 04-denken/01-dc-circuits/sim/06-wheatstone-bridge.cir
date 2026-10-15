@@ -1,0 +1,13 @@
+* 1-6 ブリッジ: E = 5 V、R1 = R2 = 1 kΩ、Rx = 3.3 kΩ、R3 を 2.0・3.3・4.5 kΩ。検流計は 100 Ω の抵抗と仮定 (理想の計器)
+.step param r3 list 2k 3.3k 4.5k
+V1 a 0 5
+R1 a b 1k
+R2 b 0 1k
+R3 a d {r3}
+Rx d 0 3.3k
+Rg b d 100
+.tran 0 1m 0 10u
+.meas tran vb AVG V(b)
+.meas tran vd AVG V(d)
+.meas tran ig AVG I(Rg)
+.end

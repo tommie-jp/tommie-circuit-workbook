@@ -1,0 +1,13 @@
+* 1-3 キルヒホッフ: E1 = 5 V、E2 = 3 V、R1 = 400、R2 = 200、R3 = 100 Ω (理想の計器)
+V1 a 0 5
+V2 c 0 3
+R1 a b 400
+R2 c b 200
+R3 b 0 100
+.step param dummy list 1 2
+.tran 0 1m 0 10u
+.meas tran i1 AVG I(R1)
+.meas tran i2 AVG I(R2)
+.meas tran i3 AVG I(R3)
+.meas tran vb AVG V(b)
+.end

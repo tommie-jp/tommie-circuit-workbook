@@ -1,0 +1,48 @@
+* 3-9 リアクタンスの周波数: Rs = 100 Ω、振幅 0.5 V。CH1 = DUT の電圧、CH2 = Rs の電圧。L1 = 10 mH (巻線抵抗は 0 と仮定) と C1 = 1 µF を並べる (理想の計器)
+.ac list 500 1k 2k 4k 8k
+V1 s1 0 AC 0.5
+L1 s1 m1 10m
+Rs1 m1 0 100
+V2 s2 0 AC 0.5
+C2 s2 m2 1u
+Rs2 m2 0 100
+.meas ac m_l500 FIND mag(V(s1,m1)) AT 500
+.meas ac p_l500 FIND ph(V(s1,m1)) AT 500
+.meas ac m_lr500 FIND mag(V(m1)) AT 500
+.meas ac p_lr500 FIND ph(V(m1)) AT 500
+.meas ac m_c500 FIND mag(V(s2,m2)) AT 500
+.meas ac p_c500 FIND ph(V(s2,m2)) AT 500
+.meas ac m_cr500 FIND mag(V(m2)) AT 500
+.meas ac p_cr500 FIND ph(V(m2)) AT 500
+.meas ac m_l1000 FIND mag(V(s1,m1)) AT 1k
+.meas ac p_l1000 FIND ph(V(s1,m1)) AT 1k
+.meas ac m_lr1000 FIND mag(V(m1)) AT 1k
+.meas ac p_lr1000 FIND ph(V(m1)) AT 1k
+.meas ac m_c1000 FIND mag(V(s2,m2)) AT 1k
+.meas ac p_c1000 FIND ph(V(s2,m2)) AT 1k
+.meas ac m_cr1000 FIND mag(V(m2)) AT 1k
+.meas ac p_cr1000 FIND ph(V(m2)) AT 1k
+.meas ac m_l2000 FIND mag(V(s1,m1)) AT 2k
+.meas ac p_l2000 FIND ph(V(s1,m1)) AT 2k
+.meas ac m_lr2000 FIND mag(V(m1)) AT 2k
+.meas ac p_lr2000 FIND ph(V(m1)) AT 2k
+.meas ac m_c2000 FIND mag(V(s2,m2)) AT 2k
+.meas ac p_c2000 FIND ph(V(s2,m2)) AT 2k
+.meas ac m_cr2000 FIND mag(V(m2)) AT 2k
+.meas ac p_cr2000 FIND ph(V(m2)) AT 2k
+.meas ac m_l4000 FIND mag(V(s1,m1)) AT 4k
+.meas ac p_l4000 FIND ph(V(s1,m1)) AT 4k
+.meas ac m_lr4000 FIND mag(V(m1)) AT 4k
+.meas ac p_lr4000 FIND ph(V(m1)) AT 4k
+.meas ac m_c4000 FIND mag(V(s2,m2)) AT 4k
+.meas ac p_c4000 FIND ph(V(s2,m2)) AT 4k
+.meas ac m_cr4000 FIND mag(V(m2)) AT 4k
+.meas ac p_cr4000 FIND ph(V(m2)) AT 4k
+.meas ac m_l8000 FIND mag(V(s1,m1)) AT 8k
+.meas ac p_l8000 FIND ph(V(s1,m1)) AT 8k
+.meas ac m_lr8000 FIND mag(V(m1)) AT 8k
+.meas ac p_lr8000 FIND ph(V(m1)) AT 8k
+.meas ac m_c8000 FIND mag(V(s2,m2)) AT 8k
+.meas ac p_c8000 FIND ph(V(s2,m2)) AT 8k
+.meas ac m_cr8000 FIND mag(V(m2)) AT 8k
+.meas ac p_cr8000 FIND ph(V(m2)) AT 8k

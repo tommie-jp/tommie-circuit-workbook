@@ -1,0 +1,9 @@
+* 3-3 RL 直列: R = 100 Ω、L = 15 mH、1 kHz、振幅 0.7 V (理想の計器)
+.ac list 1k
+V1 a 0 AC 0.7
+R1 a b 100
+L1 b 0 15m
+.meas ac m_vr FIND mag(V(a,b)) AT 1k
+.meas ac p_vr FIND ph(V(a,b)) AT 1k
+.meas ac m_vl FIND mag(V(b)) AT 1k
+.meas ac p_vl FIND ph(V(b)) AT 1k

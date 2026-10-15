@@ -1,0 +1,9 @@
+* 1-5 R_th: 電源を短絡 (0 V) にして、端子に 1 mA を流し込んで電圧を読む
+V1 a 0 0
+R1 a x 1.5k
+R2 x 0 3k
+I1 0 x 1m
+.step param dummy list 1 2
+.tran 0 1m 0 10u
+.meas tran rth AVG V(x)/1m
+.end

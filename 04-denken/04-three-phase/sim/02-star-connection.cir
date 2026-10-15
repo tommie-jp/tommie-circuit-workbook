@@ -1,0 +1,18 @@
+* 4-2 Y 結線: 各相 1 kΩ、N は浮かせる (理想の計器)
+.ac list 1k
+* 電源: W1 (1 相目、0°)、W2 (2 相目、−120°)、反転加算の理想オペアンプ (R1 = R2 = Rf = 10 kΩ) で 3 相目 = −(v1 + v2) (+120°)
+V1 p1 0 AC 1 0
+V2 p2 0 AC 1 -120
+R1 p1 x 10k
+R2 p2 x 10k
+Rf x p3 10k
+E1 p3 0 0 x 1e6
+R3 p1 n 1k
+R5 p3 n 1k
+R4 p2 n 1k
+.meas ac m_vph FIND mag(V(p1,n)) AT 1k
+.meas ac p_vph FIND ph(V(p1,n)) AT 1k
+.meas ac m_vline FIND mag(V(p1,p2)) AT 1k
+.meas ac p_vline FIND ph(V(p1,p2)) AT 1k
+.meas ac m_vn FIND mag(V(n)) AT 1k
+.meas ac p_vn FIND ph(V(n)) AT 1k

@@ -1,0 +1,19 @@
+* 2-1 コンデンサの直列・並列: 5 V、R1 = 10 kΩ 経由で C1 = 2.2 µF と C2 = 4.7 µF を充電し、十分待った値を読む (理想の計器)
+.step param dummy list 1 2
+V1 a 0 PULSE(0 5 0 1u)
+R1 a s 10k
+* 直列
+C1 s m 2.2u
+C2 m 0 4.7u
+* 並列 (別の枝)
+R2 a p 10k
+C3 p 0 2.2u
+C4 p 0 4.7u
+.tran 0 0.5 0 5m
+.meas tran v1 FIND V(s)-V(m) AT 0.5
+.meas tran v2 FIND V(m) AT 0.5
+.meas tran q1 PARAM 2.2u*V(s)-2.2u*V(m)
+.meas tran vp FIND V(p) AT 0.5
+.meas tran qp1 PARAM 2.2u*V(p)
+.meas tran qp2 PARAM 4.7u*V(p)
+.end

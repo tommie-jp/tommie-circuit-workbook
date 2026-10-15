@@ -1,0 +1,12 @@
+* 7-1 分流器: 5 V、Rt = 1 kΩ、Rg = 100 Ω、Rs = 50 Ω (理想の計器)
+V1 a 0 5
+Rt a p 1k
+Rg p 0 100
+Rs p 0 50
+.step param dummy list 1 2
+.tran 0 1m 0 10u
+.meas tran ch1 AVG V(p)
+.meas tran ch2 AVG V(a,p)
+.meas tran ig AVG I(Rg)*1e3
+.meas tran is AVG I(Rs)*1e3
+.end

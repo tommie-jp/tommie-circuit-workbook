@@ -169,6 +169,17 @@ style:
 - I_B を増やして V_CE が V_CE(sat) (約 0.2 V) まで下がると、I_C は h_FE × I_B に届かず頭打ちになる
   (飽和。6-7 のスイッチ動作で使う領域)
 
+## LTspice での確かめ
+
+`sim/02-transistor-characteristics.cir` で 2SC1815 の代用モデル (`01-circuits/09-rf/sim/agc.cir` と同じ IS・BF = 250・VAF・IKF。実測ではない) を V_CC = 5 V、R_B = 470 kΩ、R_C = 1 kΩ で走らせた。
+
+| 項目 | 本文の数字 | LTspice | 判定 |
+| --- | --- | --- | --- |
+| CH1 (R_B の両端) | 4.40 V (V_BE = 0.6 V の仮定) | 4.34 V (V_BE = 0.66 V) | 合う (V_BE の仮定の差 0.06 V だけ) |
+| I_B | 9.36 µA | 9.23 µA | 合う |
+| CH2 (R_C の両端) | 2.34 V | 2.32 V | 合う |
+| V_CE | 2.66 V | 2.68 V | 合う |
+
 ## 出典
 
 自作。

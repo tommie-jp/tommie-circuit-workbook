@@ -1,0 +1,16 @@
+* 6-3 エミッタ接地の利得: 同じ回路、Cin = Cout = 10 µF、入力 50 mV (振幅)、1 kHz、負荷なし
+* 2SC1815 の代用: agc.cir と同じ IS・BF・VAF・IKF・RB (h_FE は 250 と仮定。実測ではない)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+VCC vcc 0 5
+R1 vcc b 39k
+R2 b 0 10k
+RC vcc c 2.2k
+RE e 0 470
+Q1 c b e Q1815
+Cin in b 10u
+Vin in 0 AC 0.05
+Cout c out 10u
+Ro out 0 1Meg
+.ac list 1k
+.meas ac mo FIND mag(V(out)) AT 1k
+.meas ac po FIND ph(V(out)) AT 1k

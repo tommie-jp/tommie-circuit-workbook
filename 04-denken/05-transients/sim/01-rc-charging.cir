@@ -1,0 +1,11 @@
+* 5-1 RC 充電: 0 → 2 V の段、R1 = 10 kΩ、C1 = 100 nF (τ = 1 ms、理想の計器)
+V1 a 0 PULSE(0 2 0 1n 1n 50m 100m)
+R1 a b 10k
+C1 b 0 100n
+.step param dummy list 1 2
+.tran 0 6m 0 1u
+.meas tran v1 FIND V(b) AT=1m
+.meas tran v2 FIND V(b) AT=2m
+.meas tran v3 FIND V(b) AT=3m
+.meas tran v5 FIND V(b) AT=5m
+.end

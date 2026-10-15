@@ -1,0 +1,15 @@
+* 1-2 直列・並列: 5 V、R1 = 1 kΩ、R2 = 2 kΩ (理想の計器)
+V1 a 0 5
+Rs1 a m 1k
+Rs2 m 0 2k
+Rp1 a 0 1k
+Rp2 a 0 2k
+.step param dummy list 1 2
+.tran 0 1m 0 10u
+.meas tran vs1 PARAM 5-V(m)
+.meas tran vs2 AVG V(m)
+.meas tran is AVG I(Rs1)
+.meas tran ip1 AVG I(Rp1)
+.meas tran ip2 AVG I(Rp2)
+.meas tran it PARAM I(Rp1)+I(Rp2)
+.end

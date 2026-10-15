@@ -1,0 +1,21 @@
+* 4-3 Δ 負荷: 線に 20 Ω のシャント、辺は 1 kΩ (理想の計器)
+.ac list 1k
+* 電源: W1 (1 相目、0°)、W2 (2 相目、−120°)、反転加算の理想オペアンプ (R1 = R2 = Rf = 10 kΩ) で 3 相目 = −(v1 + v2) (+120°)
+V1 p1 0 AC 1 0
+V2 p2 0 AC 1 -120
+R1 p1 x 10k
+R2 p2 x 10k
+Rf x p3 10k
+E1 p3 0 0 x 1e6
+RLA p1 a 20
+RLC p3 c 20
+RLB p2 b 20
+RCA c a 1k
+RBC b c 1k
+RAB a b 1k
+.meas ac m_vab FIND mag(V(a,b)) AT 1k
+.meas ac p_vab FIND ph(V(a,b)) AT 1k
+.meas ac m_vrla FIND mag(V(p1,a)) AT 1k
+.meas ac p_vrla FIND ph(V(p1,a)) AT 1k
+.meas ac m_vrab FIND mag(V(a,b)) AT 1k
+.meas ac p_vrab FIND ph(V(a,b)) AT 1k

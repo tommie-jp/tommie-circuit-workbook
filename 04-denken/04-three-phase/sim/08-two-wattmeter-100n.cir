@@ -1,0 +1,27 @@
+* 4-8 二電力計法: 各相 C = 100n + R = 1 kΩ の Y。電流 = Ra の電圧 ÷ 1 kΩ
+.ac list 1k
+* 電源: W1 (1 相目、0°)、W2 (2 相目、−120°)、反転加算の理想オペアンプ (R1 = R2 = Rf = 10 kΩ) で 3 相目 = −(v1 + v2) (+120°)
+V1 p1 0 AC 1 0
+V2 p2 0 AC 1 -120
+R1 p1 x 10k
+R2 p2 x 10k
+Rf x p3 10k
+E1 p3 0 0 x 1e6
+Ca p1 a1 100n
+Ra a1 0 1k
+Cc p3 a3 100n
+Rc a3 0 1k
+Cb p2 a2 100n
+Rb a2 0 1k
+.meas ac m_v1 FIND mag(V(p1)) AT 1k
+.meas ac p_v1 FIND ph(V(p1)) AT 1k
+.meas ac m_ia FIND mag(V(a1)) AT 1k
+.meas ac p_ia FIND ph(V(a1)) AT 1k
+.meas ac m_ib FIND mag(V(a2)) AT 1k
+.meas ac p_ib FIND ph(V(a2)) AT 1k
+.meas ac m_ic FIND mag(V(a3)) AT 1k
+.meas ac p_ic FIND ph(V(a3)) AT 1k
+.meas ac m_vac FIND mag(V(p1,p3)) AT 1k
+.meas ac p_vac FIND ph(V(p1,p3)) AT 1k
+.meas ac m_vbc FIND mag(V(p2,p3)) AT 1k
+.meas ac p_vbc FIND ph(V(p2,p3)) AT 1k

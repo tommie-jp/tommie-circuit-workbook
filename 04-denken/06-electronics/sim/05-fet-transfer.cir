@@ -1,0 +1,12 @@
+* 6-5 2N7000 (仮定: V_th = 2.1 V、K = 50 mA/V² → KP = 0.1 A/V²)。VCC = 5 V、RD = 1 kΩ、V_GS を直流で振る
+.model NM NMOS (LEVEL=1 VTO=2.1 KP=0.1 LAMBDA=0)
+VCC vcc 0 5
+VG g 0 {vgs}
+RD vcc d 1k
+M1 d g 0 0 NM
+.param vgs=2
+.step param vgs list 2.0 2.2 2.3 2.4 3.0
+.tran 0 1m 0 10u
+.meas tran vd AVG V(d)
+.meas tran id AVG I(RD)*1e3
+.end

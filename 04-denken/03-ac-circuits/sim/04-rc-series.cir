@@ -1,0 +1,9 @@
+* 3-4 RC 直列: R = 1 kΩ、C = 100 nF、1 kHz、振幅 1 V (理想の計器)
+.ac list 1k
+V1 a 0 AC 1
+R1 a b 1k
+C1 b 0 100n
+.meas ac m_vr FIND mag(V(a,b)) AT 1k
+.meas ac p_vr FIND ph(V(a,b)) AT 1k
+.meas ac m_vc FIND mag(V(b)) AT 1k
+.meas ac p_vc FIND ph(V(b)) AT 1k

@@ -1,0 +1,12 @@
+* 5-2 RC 放電: 2 V から 0 V への段 (直前は満充電)、R1 = 10 kΩ、C1 = 100 nF (理想の計器)
+V1 a 0 PULSE(2 0 0 1n 1n 50m 100m)
+R1 a b 10k
+C1 b 0 100n
+.step param dummy list 1 2
+.tran 0 6m 0 1u
+.meas tran v0 FIND V(b) AT=1n
+.meas tran v1 FIND V(b) AT=1m
+.meas tran v2 FIND V(b) AT=2m
+.meas tran v3 FIND V(b) AT=3m
+.meas tran v5 FIND V(b) AT=5m
+.end

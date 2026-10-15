@@ -1,0 +1,8 @@
+* 3-13 方形波と RC: 方形波 ±1 V (1 kHz、立ち上がり 1 ns)、R1 = 1 kΩ、C1 = 100 nF。.four で 1 kHz の高調波を読む (理想の計器)
+V1 a 0 PULSE(-1 1 0 1n 1n 0.5m 1m)
+R1 a c 1k
+C1 c 0 100n
+.step param dummy list 1 2
+.tran 0 30m 0 1u
+.four 1k 9 V(a) V(c)
+.end

@@ -1,0 +1,13 @@
+* 7-6 波形率: 山 2 V の正弦波・方形波・三角波 (1 kHz)。実効値と |v| の平均値、1.11 × 平均値
+V1 a 0 SIN(0 2 1k)
+V2 b 0 PULSE(-2 2 0 1n 1n 0.5m 1m)
+V3 c 0 PULSE(-2 2 0 0.5m 0.5m 0 1m)
+.step param dummy list 1 2
+.tran 0 10m 0 2u
+.meas tran rms_s RMS V(a) FROM=2m TO=10m
+.meas tran avg_s AVG abs(V(a)) FROM=2m TO=10m
+.meas tran rms_q RMS V(b) FROM=2m TO=10m
+.meas tran avg_q AVG abs(V(b)) FROM=2m TO=10m
+.meas tran rms_t RMS V(c) FROM=2m TO=10m
+.meas tran avg_t AVG abs(V(c)) FROM=2m TO=10m
+.end

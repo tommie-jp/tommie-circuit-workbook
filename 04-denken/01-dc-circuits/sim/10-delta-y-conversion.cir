@@ -1,0 +1,18 @@
+* 1-10 Δ-Y: Δ = Rab 1.1k、Rbc 4.3k、Rca 4.7k、Y = Ra 510、Rb 470、Rc 2000。A-B 間の合成と、A に 5 V・B 0 V のときの C の電圧
+.param mode=0
+.step param mode list 0 1
+VA a 0 5
+* 抵抗は測る端子の組ごとに別の回路で測るため、ここでは A に 5 V、B を 0 V、C を開放 (電圧 vc と電流 i)
+Rab ta tb {if(mode==0,1.1k,1G)}
+Rbc tb tc {if(mode==0,4.3k,1G)}
+Rca tc ta {if(mode==0,4.7k,1G)}
+Ra ta n {if(mode==1,510,1G)}
+Rb n tb {if(mode==1,470,1G)}
+Rc n tc {if(mode==1,2000,1G)}
+V1 ta 0 5
+V2 tb 0 0
+.tran 0 1m 0 10u
+.meas tran i AVG -I(V1)
+.meas tran vc AVG V(tc)
+.meas tran rab PARAM 5/(-I(V1))
+.end

@@ -1,0 +1,11 @@
+* 6-1 ダイオード: 1N4148 を IS = 4.4 nA、n = 1.9 の指数モデル (本文の仮定) とし、R1 = 1 kΩ 経由で直流電圧を加える
+.model D4148 D (IS=4.4n N=1.9)
+.param vin=1
+.step param vin list -1 0.5 1 1.5 2
+V1 a 0 {vin}
+R1 a b 1k
+D1 b 0 D4148
+.tran 0 1m 0 10u
+.meas tran vd AVG V(b)
+.meas tran id AVG I(R1)*1000
+.end

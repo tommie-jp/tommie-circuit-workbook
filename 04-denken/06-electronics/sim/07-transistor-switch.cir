@@ -1,0 +1,15 @@
+* 6-7 トランジスタのスイッチ: RB = 47 kΩ、RC = 1 kΩ、VCC = 5 V、h_FE = 250 (仮定)
+* 2SC1815 の代用: agc.cir と同じ IS・BF・VAF・IKF・RB (h_FE は 250 と仮定。実測ではない)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.param vin=1
+.step param vin list 0.5 1.0 1.5 5
+VCC vcc 0 5
+V1 a 0 {vin}
+RB a b 47k
+RC vcc c 1k
+Q1 c b 0 Q1815
+.tran 0 1m 0 10u
+.meas tran vc AVG V(c)
+.meas tran ib AVG I(RB)*1e6
+.meas tran ic AVG I(RC)*1e3
+.end

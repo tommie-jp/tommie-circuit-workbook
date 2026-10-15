@@ -1,0 +1,11 @@
+* 5-3 RL: 0 → 2 V の段、R1 = 1 kΩ、L1 = 10 mH (巻線抵抗は 0。τ = 10 µs。CH2 = R1 の電圧)
+V1 a 0 PULSE(0 2 0 1n 1n 1m 2m)
+R1 a b 1k
+L1 b 0 10m
+.step param dummy list 1 2
+.tran 0 80u 0 0.1u
+.meas tran v1 FIND V(a,b) AT=10u
+.meas tran v2 FIND V(a,b) AT=20u
+.meas tran v3 FIND V(a,b) AT=30u
+.meas tran v5 FIND V(a,b) AT=50u
+.end

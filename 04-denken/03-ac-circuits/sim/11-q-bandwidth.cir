@@ -1,0 +1,38 @@
+* 3-11 Q と帯域幅: L1 = 100 mH、C1 = 100 nF、R1 = 150 / 470 Ω、巻線抵抗 r = 0 / 235 Ω (本文の値。実測ではない)。W1 = 1 V。-3 dB 点は山の高さ ÷ √2 で読む
+.ac dec 400 500 5k
+Va sa 0 AC 1
+La sa ma 100m Rser=0.001
+Ca ma oa 100n
+Ra oa 0 150
+.meas ac pk_a MAX mag(V(oa))
+.meas ac f1_a WHEN mag(V(oa))=0.707102 RISE=1
+.meas ac f2_a WHEN mag(V(oa))=0.707102 FALL=1
+.meas ac a1k_a FIND mag(V(oa)) AT 1k
+.meas ac a2k_a FIND mag(V(oa)) AT 2k
+Vb sb 0 AC 1
+Lb sb mb 100m Rser=0.001
+Cb mb ob 100n
+Rb ob 0 470
+.meas ac pk_b MAX mag(V(ob))
+.meas ac f1_b WHEN mag(V(ob))=0.707105 RISE=1
+.meas ac f2_b WHEN mag(V(ob))=0.707105 FALL=1
+.meas ac a1k_b FIND mag(V(ob)) AT 1k
+.meas ac a2k_b FIND mag(V(ob)) AT 2k
+Vc sc 0 AC 1
+Lc sc mc 100m Rser=235
+Cc mc oc 100n
+Rc oc 0 150
+.meas ac pk_c MAX mag(V(oc))
+.meas ac f1_c WHEN mag(V(oc))=0.275496 RISE=1
+.meas ac f2_c WHEN mag(V(oc))=0.275496 FALL=1
+.meas ac a1k_c FIND mag(V(oc)) AT 1k
+.meas ac a2k_c FIND mag(V(oc)) AT 2k
+Vd sd 0 AC 1
+Ld sd md 100m Rser=235
+Cd md od 100n
+Rd od 0 470
+.meas ac pk_d MAX mag(V(od))
+.meas ac f1_d WHEN mag(V(od))=0.471405 RISE=1
+.meas ac f2_d WHEN mag(V(od))=0.471405 FALL=1
+.meas ac a1k_d FIND mag(V(od)) AT 1k
+.meas ac a2k_d FIND mag(V(od)) AT 2k

@@ -1,0 +1,23 @@
+* 4-7 Δ 各 3 kΩ
+.ac list 1k
+* 電源: W1 (1 相目、0°)、W2 (2 相目、−120°)、反転加算の理想オペアンプ (R1 = R2 = Rf = 10 kΩ) で 3 相目 = −(v1 + v2) (+120°)
+V1 p1 0 AC 1 0
+V2 p2 0 AC 1 -120
+R1 p1 x 10k
+R2 p2 x 10k
+Rf x p3 10k
+E1 p3 0 0 x 1e6
+RLa p1 a 330
+RLc p3 c 330
+RLb p2 b 330
+Rca c a 3k
+Rbc b c 3k
+Rab a b 3k
+.meas ac m_ch1 FIND mag(V(p1,a)) AT 1k
+.meas ac p_ch1 FIND ph(V(p1,a)) AT 1k
+.meas ac m_ch2 FIND mag(V(a)) AT 1k
+.meas ac p_ch2 FIND ph(V(a)) AT 1k
+.meas ac m_vab FIND mag(V(a,b)) AT 1k
+.meas ac p_vab FIND ph(V(a,b)) AT 1k
+.meas ac m_iab FIND mag(V(a,b)) AT 1k
+.meas ac p_iab FIND ph(V(a,b)) AT 1k

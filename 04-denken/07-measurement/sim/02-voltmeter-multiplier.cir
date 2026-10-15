@@ -1,0 +1,9 @@
+* 7-2 倍率器: 5 V、Rm = 9.1 kΩ、Rg = 1 kΩ
+V1 a 0 5
+Rm a p 9.1k
+Rg p 0 1k
+.step param dummy list 1 2
+.tran 0 1m 0 10u
+.meas tran ch1 AVG V(p)
+.meas tran i AVG I(Rg)*1e3
+.end

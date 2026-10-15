@@ -1,0 +1,10 @@
+* 1-7 電池の内部抵抗: E = 1.58 V、r = 0.20 Ω、負荷 22・10・4.7・2.2 Ω と開放 (理想の計器。電流計の抵抗は無視)
+.step param rl list 1G 22 10 4.7 2.2
+V1 e 0 1.58
+Ri e t 0.2
+RL t 0 {rl}
+.tran 0 1m 0 10u
+.meas tran i AVG I(RL)
+.meas tran v AVG V(t)
+.meas tran p PARAM V(t)*I(RL)
+.end

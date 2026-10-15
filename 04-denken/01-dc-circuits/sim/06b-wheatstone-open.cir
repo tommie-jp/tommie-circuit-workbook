@@ -1,0 +1,11 @@
+* 1-6 検流計を外したときの節点電圧 (本文の表の値)
+.step param r3 list 2k 3.3k 4.5k
+V1 a 0 5
+R1 a b 1k
+R2 b 0 1k
+R3 a d {r3}
+Rx d 0 3.3k
+.tran 0 1m 0 10u
+.meas tran vb AVG V(b)
+.meas tran vd AVG V(d)
+.end

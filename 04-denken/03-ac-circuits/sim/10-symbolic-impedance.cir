@@ -1,0 +1,28 @@
+* 3-10 記号法: (R1 100 Ω + L1 10 mH) と C1 を並列、Rs = 100 Ω、1 kHz、振幅 0.5 V。C1 = 1 µF と 470 nF の 2 組 (理想の計器)
+.ac list 1k
+V1 s1 0 AC 0.5
+Rs1 s1 p1 100
+R1 p1 q1 100
+L1 q1 0 10m
+C1 p1 0 1u
+.meas ac m_ch1_1 FIND mag(V(p1)) AT 1k
+.meas ac p_ch1_1 FIND ph(V(p1)) AT 1k
+.meas ac m_rs_1 FIND mag(V(s1,p1)) AT 1k
+.meas ac p_rs_1 FIND ph(V(s1,p1)) AT 1k
+.meas ac m_i1_1 FIND mag(V(p1,q1)) AT 1k
+.meas ac p_i1_1 FIND ph(V(p1,q1)) AT 1k
+.meas ac m_src1 FIND mag(V(s1)) AT 1k
+.meas ac p_src1 FIND ph(V(s1)) AT 1k
+V2 s2 0 AC 0.5
+Rs2 s2 p2 100
+R2 p2 q2 100
+L2 q2 0 10m
+C2 p2 0 470n
+.meas ac m_ch1_2 FIND mag(V(p2)) AT 1k
+.meas ac p_ch1_2 FIND ph(V(p2)) AT 1k
+.meas ac m_rs_2 FIND mag(V(s2,p2)) AT 1k
+.meas ac p_rs_2 FIND ph(V(s2,p2)) AT 1k
+.meas ac m_i1_2 FIND mag(V(p2,q2)) AT 1k
+.meas ac p_i1_2 FIND ph(V(p2,q2)) AT 1k
+.meas ac m_src2 FIND mag(V(s2)) AT 1k
+.meas ac p_src2 FIND ph(V(s2)) AT 1k

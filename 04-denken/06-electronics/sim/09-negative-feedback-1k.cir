@@ -1,0 +1,8 @@
+* 6-9 負帰還: 1 次遅れのオペアンプ (A0 = 1e5、GBW = 3 MHz、本文の TL072 代表値)。Rf = 100 kΩ、R1 = 1k。入力 10 mV
+.ac dec 100 1k 10Meg
+V1 p 0 AC 0.01
+E1 o 0 LAPLACE {V(p)-V(n)} = {1e5/(1+s/(2*pi*30))}
+Rf o n 100k
+R1 n 0 1k
+.meas ac g0 FIND mag(V(o)) AT 1k
+.meas ac f3 WHEN mag(V(o))=0.7071*0.01*101 FALL=1

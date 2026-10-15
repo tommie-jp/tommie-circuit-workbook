@@ -1,0 +1,11 @@
+* 7-5 電力計の接続 (src): W1 = 1 V (振幅)、1 kHz、負荷 R_L = 100 Ω + C1 = 1 µF、R_C = 10 Ω、R_P = 2.2 kΩ。電圧 = V_P の節点、電流 = R_C の電圧 ÷ 10 Ω
+.ac list 1k
+V1 s 0 AC 1
+RP s 0 2.2k
+RC s a 10
+RL a b 100
+C1 b 0 1u
+.meas ac m_vp FIND mag(V(s)) AT 1k
+.meas ac p_vp FIND ph(V(s)) AT 1k
+.meas ac m_ic FIND mag(V(s,a)) AT 1k
+.meas ac p_ic FIND ph(V(s,a)) AT 1k

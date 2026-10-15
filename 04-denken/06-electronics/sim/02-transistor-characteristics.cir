@@ -1,0 +1,16 @@
+* 6-2 固定バイアス: VCC = 5 V、RB = 470 kΩ、RC = 1 kΩ
+* 2SC1815 の代用: agc.cir と同じ IS・BF・VAF・IKF・RB (h_FE は 250 と仮定。実測ではない)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+V1 vcc 0 5
+RB vcc b 470k
+RC vcc c 1k
+Q1 c b 0 Q1815
+.step param dummy list 1 2
+.tran 0 1m 0 10u
+.meas tran vrb PARAM V(vcc)-V(b)
+.meas tran vrc PARAM V(vcc)-V(c)
+.meas tran vce AVG V(c)
+.meas tran vb AVG V(b)
+.meas tran ib AVG I(RB)*1e6
+.meas tran ic AVG I(RC)*1e3
+.end

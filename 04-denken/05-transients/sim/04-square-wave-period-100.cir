@@ -1,0 +1,10 @@
+* 5-4 方形波 100 Hz (0〜2 V、デューティ 50 %) を R1 = 10 kΩ、C1 = 100 nF に加える。定常 (最後の 10 周期) の山と谷 (理想の計器)
+V1 a 0 PULSE(0 2 0 1n 1n 0.005 0.01)
+R1 a b 10k
+C1 b 0 100n
+.step param dummy list 1 2
+.tran 0 0.4 0 2e-05
+.meas tran vh MAX V(b) FROM=0.3 TO=0.4
+.meas tran vl MIN V(b) FROM=0.3 TO=0.4
+.meas tran pp PP V(b) FROM=0.3 TO=0.4
+.end

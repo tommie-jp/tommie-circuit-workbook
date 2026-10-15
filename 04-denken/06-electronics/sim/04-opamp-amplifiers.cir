@@ -1,0 +1,13 @@
+* 6-4 反転・非反転増幅: 理想のオペアンプ (E 源、利得 1e6)。入力 0.2 V (振幅)、1 kHz。U1 反転 Rin = 10 kΩ、Rf = 100 kΩ。U2 非反転 R3b = 90 kΩ、R2b = 10 kΩ
+.ac list 1k
+V1 in 0 AC 0.2
+Rin in m1 10k
+Rf1 m1 o1 100k
+E1 o1 0 0 m1 1e6
+R3b o2 m2 90k
+R2b m2 0 10k
+E2 o2 0 in m2 1e6
+.meas ac o1 FIND mag(V(o1)) AT 1k
+.meas ac o1p FIND ph(V(o1)) AT 1k
+.meas ac o2 FIND mag(V(o2)) AT 1k
+.meas ac m1 FIND mag(V(m1)) AT 1k

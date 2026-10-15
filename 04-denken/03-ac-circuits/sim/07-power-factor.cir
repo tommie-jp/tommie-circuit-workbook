@@ -1,0 +1,35 @@
+* 3-7 力率改善: 3-6 の負荷に C を並列 (なし・1.5 µF・2.2 µF)。巻線抵抗は 0 と仮定、1 kHz、振幅 0.5 V、Rs = 10 Ω (理想の計器)
+.ac list 1k
+V1 s1 0 AC 0.5
+Rs1 s1 a1 10
+R1 a1 b1 47
+L1 b1 0 10m
+C1 a1 0 1n
+.meas ac m_i1 FIND mag(V(s1,a1)) AT 1k
+.meas ac p_i1 FIND ph(V(s1,a1)) AT 1k
+.meas ac m_v1 FIND mag(V(a1)) AT 1k
+.meas ac p_v1 FIND ph(V(a1)) AT 1k
+.meas ac m_ic1 FIND mag(V(a1)) AT 1k
+.meas ac p_ic1 FIND ph(V(a1)) AT 1k
+V2 s2 0 AC 0.5
+Rs2 s2 a2 10
+R2 a2 b2 47
+L2 b2 0 10m
+C2 a2 0 1.5u
+.meas ac m_i2 FIND mag(V(s2,a2)) AT 1k
+.meas ac p_i2 FIND ph(V(s2,a2)) AT 1k
+.meas ac m_v2 FIND mag(V(a2)) AT 1k
+.meas ac p_v2 FIND ph(V(a2)) AT 1k
+.meas ac m_ic2 FIND mag(V(a2)) AT 1k
+.meas ac p_ic2 FIND ph(V(a2)) AT 1k
+V3 s3 0 AC 0.5
+Rs3 s3 a3 10
+R3 a3 b3 47
+L3 b3 0 10m
+C3 a3 0 2.2u
+.meas ac m_i3 FIND mag(V(s3,a3)) AT 1k
+.meas ac p_i3 FIND ph(V(s3,a3)) AT 1k
+.meas ac m_v3 FIND mag(V(a3)) AT 1k
+.meas ac p_v3 FIND ph(V(a3)) AT 1k
+.meas ac m_ic3 FIND mag(V(a3)) AT 1k
+.meas ac p_ic3 FIND ph(V(a3)) AT 1k

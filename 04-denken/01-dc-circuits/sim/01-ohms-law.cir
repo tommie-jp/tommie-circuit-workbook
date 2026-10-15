@@ -1,0 +1,8 @@
+* 1-1 オームの法則: 5 V を 1 kΩ に掛ける。電流計・電圧計は理想 (SPICE の仮定、実測ではない)
+V1 a 0 5
+R1 a 0 1k
+.step param dummy list 1 2
+.tran 0 1m 0 10u
+.meas tran i AVG I(R1)
+.meas tran v AVG V(a)
+.end

@@ -1,0 +1,21 @@
+* 2-6 自己インダクタンス: 100 kHz、W1 = 1 V、Rref = 150 Ω。コイルは L と巻線の抵抗 Rw の直列 (Rw = 0.77・1.58・2.98 Ω は本文の位相差から逆算した仮定。実測ではない)
+.ac list 100k
+V1 a1 0 AC 1
+L1 a1 b1 2.42e-05 Rser=0.77
+Rr1 b1 0 150
+.meas ac ich2_1 FIND mag(V(b1)) AT 100k
+.meas ac vch1_1 FIND mag(V(a1,b1)) AT 100k
+.meas ac ph_1 FIND ph(V(b1)) AT 100k
+V2 a2 0 AC 1
+L2 a2 b2 9.59e-05 Rser=1.58
+Rr2 b2 0 150
+.meas ac ich2_2 FIND mag(V(b2)) AT 100k
+.meas ac vch1_2 FIND mag(V(a2,b2)) AT 100k
+.meas ac ph_2 FIND ph(V(b2)) AT 100k
+V3 a3 0 AC 1
+L3 a3 b3 0.000389 Rser=2.98
+Rr3 b3 0 150
+.meas ac ich2_3 FIND mag(V(b3)) AT 100k
+.meas ac vch1_3 FIND mag(V(a3,b3)) AT 100k
+.meas ac ph_3 FIND ph(V(b3)) AT 100k
+.end

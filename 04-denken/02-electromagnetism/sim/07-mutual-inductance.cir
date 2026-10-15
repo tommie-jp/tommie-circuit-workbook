@@ -1,0 +1,51 @@
+* 2-7 相互インダクタンス: L1 = L2 = 95.9 µH、k を d = 20・10・5・2・0 mm と重ね巻きで 6 組並べる (重ね巻きの組だけ L2 = 101.5 µH とし、M = 95.7 µH になる k = 0.97)。100 kHz、W1 = 1 V、Rref = 150 Ω。巻線抵抗は 1.58 Ω と仮定 (実測ではない)。L2 は開放
+.ac list 100k
+V1 a1 0 AC 1
+La1 a1 b1 95.9u Rser=1.58
+Rr1 b1 0 150
+Lb1 c1 0 95.9u Rser=1.58
+Rl1 c1 0 100Meg
+K1 La1 Lb1 0.02
+.meas ac i1_1 FIND mag(V(b1)) AT 100k
+.meas ac v2_1 FIND mag(V(c1)) AT 100k
+V2 a2 0 AC 1
+La2 a2 b2 95.9u Rser=1.58
+Rr2 b2 0 150
+Lb2 c2 0 95.9u Rser=1.58
+Rl2 c2 0 100Meg
+K2 La2 Lb2 0.043
+.meas ac i1_2 FIND mag(V(b2)) AT 100k
+.meas ac v2_2 FIND mag(V(c2)) AT 100k
+V3 a3 0 AC 1
+La3 a3 b3 95.9u Rser=1.58
+Rr3 b3 0 150
+Lb3 c3 0 95.9u Rser=1.58
+Rl3 c3 0 100Meg
+K3 La3 Lb3 0.069
+.meas ac i1_3 FIND mag(V(b3)) AT 100k
+.meas ac v2_3 FIND mag(V(c3)) AT 100k
+V4 a4 0 AC 1
+La4 a4 b4 95.9u Rser=1.58
+Rr4 b4 0 150
+Lb4 c4 0 95.9u Rser=1.58
+Rl4 c4 0 100Meg
+K4 La4 Lb4 0.097
+.meas ac i1_4 FIND mag(V(b4)) AT 100k
+.meas ac v2_4 FIND mag(V(c4)) AT 100k
+V5 a5 0 AC 1
+La5 a5 b5 95.9u Rser=1.58
+Rr5 b5 0 150
+Lb5 c5 0 95.9u Rser=1.58
+Rl5 c5 0 100Meg
+K5 La5 Lb5 0.125
+.meas ac i1_5 FIND mag(V(b5)) AT 100k
+.meas ac v2_5 FIND mag(V(c5)) AT 100k
+V6 a6 0 AC 1
+La6 a6 b6 95.9u Rser=1.58
+Rr6 b6 0 150
+Lb6 c6 0 101.5u Rser=1.58
+Rl6 c6 0 100Meg
+K6 La6 Lb6 0.97
+.meas ac i1_6 FIND mag(V(b6)) AT 100k
+.meas ac v2_6 FIND mag(V(c6)) AT 100k
+.end

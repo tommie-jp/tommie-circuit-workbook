@@ -1,0 +1,23 @@
+* 3-2 R・L・C の位相: Wavegen 1 V (振幅)、1 kHz、シャント Rs = 10 Ω。3 つの DUT を並べて走らせる (理想の計器)
+.ac list 1k
+V1 s1 0 AC 1
+Rs1 s1 d1 10
+Rd1 d1 0 1k
+.meas ac m_i1 FIND mag(V(s1,d1)) AT 1k
+.meas ac p_i1 FIND ph(V(s1,d1)) AT 1k
+.meas ac m_v1 FIND mag(V(d1)) AT 1k
+.meas ac p_v1 FIND ph(V(d1)) AT 1k
+V2 s2 0 AC 1
+Rs2 s2 d2 10
+Ld2 d2 0 100m
+.meas ac m_i2 FIND mag(V(s2,d2)) AT 1k
+.meas ac p_i2 FIND ph(V(s2,d2)) AT 1k
+.meas ac m_v2 FIND mag(V(d2)) AT 1k
+.meas ac p_v2 FIND ph(V(d2)) AT 1k
+V3 s3 0 AC 1
+Rs3 s3 d3 10
+Cd3 d3 0 100n
+.meas ac m_i3 FIND mag(V(s3,d3)) AT 1k
+.meas ac p_i3 FIND ph(V(s3,d3)) AT 1k
+.meas ac m_v3 FIND mag(V(d3)) AT 1k
+.meas ac p_v3 FIND ph(V(d3)) AT 1k

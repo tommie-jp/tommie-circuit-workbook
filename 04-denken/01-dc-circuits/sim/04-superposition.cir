@@ -1,0 +1,13 @@
+* 1-4 重ね合わせ: E1 のみ (図1)・E2 のみ (図2)・両方を .step で走らせる。計器は理想
+.param e1=5 e2=3
+.step param case list 1 2 3
+V1 a 0 {if(case==2,0,e1)}
+V2 c 0 {if(case==1,0,e2)}
+R1 a b 400
+R2 c b 200
+R3 b 0 100
+.tran 0 1m 0 10u
+.meas tran i1 AVG I(R1)
+.meas tran i2 AVG I(R2)
+.meas tran i3 AVG I(R3)
+.end

@@ -1,0 +1,22 @@
+* 7-7 CT の模型: W1 = 5 V (振幅)、10 kHz、R_line = 510 Ω、R_S = 10 Ω、一次 5 回 (L1 = 10.5 µH)・二次 100 回 (L2 = 4.2 mH、A_L = 420 nH/回² の仮定)、k = 0.9999。S1 閉 (R_B = 10 Ω) と開
+.ac list 10k
+Vc sc 0 AC 5
+Rlnc sc ac 510
+L1c ac bc 10.5u
+Rsc bc 0 10
+L2c cc 0 4.2m
+Rbc cc 0 10
+Kc L1c L2c 0.9999
+.meas ac ch1c FIND mag(V(bc)) AT 10k
+.meas ac ch2c FIND mag(V(cc)) AT 10k
+.meas ac ph2c FIND ph(V(cc)) AT 10k
+Vo so 0 AC 5
+Rlno so ao 510
+L1o ao bo 10.5u
+Rso bo 0 10
+L2o co 0 4.2m
+Rbo co 0 100Meg
+Ko L1o L2o 0.9999
+.meas ac ch1o FIND mag(V(bo)) AT 10k
+.meas ac ch2o FIND mag(V(co)) AT 10k
+.meas ac ph2o FIND ph(V(co)) AT 10k

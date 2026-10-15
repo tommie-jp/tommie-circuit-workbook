@@ -1,0 +1,17 @@
+* 7-3 電流計の位置: V1 = 5 V、Rlim = 2 kΩ、Ra = 51 Ω、Rx = 1 kΩ、Rv = 10 kΩ。P = 電流計が先 (電圧計は Ra の前)、Q = 電圧計が先 (Rx の両端)
+V1 a 0 5
+Rlim a n 2k
+RaP n x1 51
+RxP x1 0 1k
+RvP n 0 10k
+Rlim2 a n2 2k
+RaQ n2 x2 51
+RxQ x2 0 1k
+RvQ x2 0 10k
+.step param dummy list 1 2
+.tran 0 1m 0 10u
+.meas tran ip AVG I(RaP)*1e3
+.meas tran vp AVG V(n)
+.meas tran iq AVG I(RaQ)*1e3
+.meas tran vq AVG V(x2)
+.end

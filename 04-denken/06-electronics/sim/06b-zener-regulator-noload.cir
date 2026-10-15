@@ -1,0 +1,19 @@
+* 6-6 ツェナーの定電圧回路: R1 = 220 Ω、RL = 1G。入力を直流で振る
+* 3.1 V の折れ点・30 Ω の動抵抗 (逆方向)、0.65 V・10 Ω (順方向) の区分線形ツェナー (本文の仮定)
+.model DI D (Ron=1m Roff=1G Vfwd=0 Vrev=1e9)
+Dr out x1 DI
+Rz x1 x2 30
+Vz x2 0 3.1
+Df 0 y1 DI
+Rf y1 y2 10
+Vf y2 out 0.65
+.param vin=3
+.step param vin list -1 3 4 5
+V1 a 0 {vin}
+R1 a out 220
+RL out 0 1G
+.tran 0 1m 0 10u
+.meas tran vo AVG V(out)
+.meas tran i1 AVG I(R1)*1e3
+.meas tran il AVG V(out)/1e9*1e3
+.end

@@ -1,0 +1,11 @@
+* 1-8 最大電力: E = 5 V、r = 220 Ω、RL を 7 段
+.step param rl list 47 100 150 220 330 470 1k
+V1 e 0 5
+Ri e t 220
+RL t 0 {rl}
+.tran 0 1m 0 10u
+.meas tran v AVG V(t)
+.meas tran i AVG I(RL)
+.meas tran p PARAM V(t)*I(RL)*1000
+.meas tran eta PARAM V(t)/5*100
+.end

@@ -1,0 +1,20 @@
+* 3-12 瞬時電力: W1 = 0.5 V (振幅)、1 kHz、Rs = 10 Ω、R1 = 150 Ω と C1 = 1 µF (別の回路で並べる。理想の計器)。電流 = Rs の電圧 ÷ 10 Ω
+V1 s1 0 SIN(0 0.5 1k)
+R1 s1 a1 150
+Rs1 a1 0 10
+V2 s2 0 SIN(0 0.5 1k)
+C2 s2 a2 1u
+Rs2 a2 0 10
+.step param dummy list 1 2
+.tran 0 10m 0 5u
+.meas tran v1pk MAX V(s1,a1) FROM=5m TO=10m
+.meas tran i1pk MAX V(a1)/10 FROM=5m TO=10m
+.meas tran p1max MAX V(s1,a1)*V(a1)/10 FROM=5m TO=10m
+.meas tran p1min MIN V(s1,a1)*V(a1)/10 FROM=5m TO=10m
+.meas tran p1avg AVG V(s1,a1)*V(a1)/10 FROM=5m TO=10m
+.meas tran v2pk MAX V(s2,a2) FROM=5m TO=10m
+.meas tran i2pk MAX V(a2)/10 FROM=5m TO=10m
+.meas tran p2max MAX V(s2,a2)*V(a2)/10 FROM=5m TO=10m
+.meas tran p2min MIN V(s2,a2)*V(a2)/10 FROM=5m TO=10m
+.meas tran p2avg AVG V(s2,a2)*V(a2)/10 FROM=5m TO=10m
+.end

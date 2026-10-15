@@ -1,0 +1,19 @@
+* 2-8 和動・差動: L1 = L2 = 95.9 µH、k = 0.125 (M = 12.0 µH)、巻線抵抗は各 1.55 Ω (仮定)、100 kHz、W1 = 1 V、Rref = 150 Ω。差動は k の符号を逆にする
+.ac list 100k
+V1 a1 0 AC 1
+La1 a1 m1 95.9u Rser=1.55
+Lb1 m1 b1 95.9u Rser=1.55
+Rr1 b1 0 150
+K1 La1 Lb1 0.125
+.meas ac ich2_1 FIND mag(V(b1)) AT 100k
+.meas ac vch1_1 FIND mag(V(a1,b1)) AT 100k
+.meas ac ph_1 FIND ph(V(b1)) AT 100k
+V2 a2 0 AC 1
+La2 a2 m2 95.9u Rser=1.55
+Lb2 m2 b2 95.9u Rser=1.55
+Rr2 b2 0 150
+K2 La2 Lb2 -0.125
+.meas ac ich2_2 FIND mag(V(b2)) AT 100k
+.meas ac vch1_2 FIND mag(V(a2,b2)) AT 100k
+.meas ac ph_2 FIND ph(V(b2)) AT 100k
+.end

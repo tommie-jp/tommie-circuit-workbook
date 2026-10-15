@@ -1,0 +1,10 @@
+* 1-5 テブナン: E = 5 V、R1 = 1.5 kΩ、R2 = 3 kΩ、RL = 1 kΩ。RL = 1G で開放 (V_th)、電源 0 V で R_th を電流源 1 mA から読む
+.step param rl list 1G 1k
+V1 a 0 5
+R1 a x 1.5k
+R2 x 0 3k
+RL x 0 {rl}
+.tran 0 1m 0 10u
+.meas tran vx AVG V(x)
+.meas tran il PARAM V(x)/{rl}
+.end

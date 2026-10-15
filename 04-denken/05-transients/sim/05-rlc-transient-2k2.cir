@@ -1,0 +1,13 @@
+* 5-5 RLC: 0 → 2 V の段、R1 = 2200 Ω、L1 = 10 mH、C1 = 100 nF (巻線抵抗は 0。CH2 = C1 の電圧)
+V1 a 0 PULSE(0 2 0 1n 1n 5m 10m)
+R1 a b 2200
+L1 b c 10m
+C1 c 0 100n
+.step param dummy list 1 2
+.tran 0 2m 0 0.2u
+.meas tran vmax MAX V(c)
+.meas tran tpk MAX V(c) 
+.meas tran v100 FIND V(c) AT=100u
+.meas tran t90 WHEN V(c)=1.8 RISE=1
+.meas tran vend FIND V(c) AT=900u
+.end

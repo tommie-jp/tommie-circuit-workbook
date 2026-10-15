@@ -1,0 +1,36 @@
+* 3-5 RLC 直列: R = 150 Ω、L = 100 mH、C = 100 nF、振幅 1 V。CH1 = R の電圧、CH2 = L+C の電圧 (理想の計器)
+.ac list 500 800 1.3k 1.59k 2k
+V1 a 0 AC 1
+R1 a b 150
+L1 b c 100m
+C1 c 0 100n
+.meas ac m_vr500 FIND mag(V(a,b)) AT 500
+.meas ac p_vr500 FIND ph(V(a,b)) AT 500
+.meas ac m_vlc500 FIND mag(V(b)) AT 500
+.meas ac p_vlc500 FIND ph(V(b)) AT 500
+.meas ac m_vl500 FIND mag(V(b,c)) AT 500
+.meas ac p_vl500 FIND ph(V(b,c)) AT 500
+.meas ac m_vr800 FIND mag(V(a,b)) AT 800
+.meas ac p_vr800 FIND ph(V(a,b)) AT 800
+.meas ac m_vlc800 FIND mag(V(b)) AT 800
+.meas ac p_vlc800 FIND ph(V(b)) AT 800
+.meas ac m_vl800 FIND mag(V(b,c)) AT 800
+.meas ac p_vl800 FIND ph(V(b,c)) AT 800
+.meas ac m_vr1300 FIND mag(V(a,b)) AT 1.3k
+.meas ac p_vr1300 FIND ph(V(a,b)) AT 1.3k
+.meas ac m_vlc1300 FIND mag(V(b)) AT 1.3k
+.meas ac p_vlc1300 FIND ph(V(b)) AT 1.3k
+.meas ac m_vl1300 FIND mag(V(b,c)) AT 1.3k
+.meas ac p_vl1300 FIND ph(V(b,c)) AT 1.3k
+.meas ac m_vr1590 FIND mag(V(a,b)) AT 1.59k
+.meas ac p_vr1590 FIND ph(V(a,b)) AT 1.59k
+.meas ac m_vlc1590 FIND mag(V(b)) AT 1.59k
+.meas ac p_vlc1590 FIND ph(V(b)) AT 1.59k
+.meas ac m_vl1590 FIND mag(V(b,c)) AT 1.59k
+.meas ac p_vl1590 FIND ph(V(b,c)) AT 1.59k
+.meas ac m_vr2000 FIND mag(V(a,b)) AT 2k
+.meas ac p_vr2000 FIND ph(V(a,b)) AT 2k
+.meas ac m_vlc2000 FIND mag(V(b)) AT 2k
+.meas ac p_vlc2000 FIND ph(V(b)) AT 2k
+.meas ac m_vl2000 FIND mag(V(b,c)) AT 2k
+.meas ac p_vl2000 FIND ph(V(b,c)) AT 2k

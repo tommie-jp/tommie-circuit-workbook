@@ -1,0 +1,10 @@
+* 7-4 誤差と補正: 5 V、Rlim = 3.9 kΩ、Ra = 100 Ω、Rx = 992 Ω (表示 1 kΩ の真の値)
+V1 a 0 5
+Rlim a n 3.9k
+Ra n x 100
+Rx x 0 992
+.step param dummy list 1 2
+.tran 0 1m 0 10u
+.meas tran i AVG I(Ra)*1e3
+.meas tran vn AVG V(n)
+.end

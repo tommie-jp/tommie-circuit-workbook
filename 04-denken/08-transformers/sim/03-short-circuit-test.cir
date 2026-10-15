@@ -1,0 +1,18 @@
+* 8-3 短絡: W1 = 3.2 V、Rs1 = 100 Ω、2 次短絡 (RL = 1 mΩ)
+* 模型: 理想変成器 n = √(10k/8) = 35.36 に、1 次の R1 = 300 Ω・漏れ X = 300 Ω (1 kHz で 47.7 mH)、2 次 R2 = 0.5 Ω、励磁 (1 次端子に並列) G0・B0 は 8-2 の I0 = 10 µA・84° 遅れ (R_c = 1.92 MΩ、L_m = 32 H)。数値は本文の仮定で、実物のトランスの測定値ではない
+.ac list 1k
+V1 s 0 AC 3.2
+Rs s p 100
+Rc p 0 1.92Meg
+Lm p 0 32
+R1 p q 300
+L1 q x 47.7m
+E1 e 0 x 0 0.0282843
+F1 x 0 Vsen 0.0282843
+R2 e z1 0.5
+RL z1 z 1m
+Vsen z 0 0
+.meas ac m_v1 FIND mag(V(p)) AT 1k
+.meas ac p_v1 FIND ph(V(p)) AT 1k
+.meas ac m_rs FIND mag(V(s,p)) AT 1k
+.meas ac p_rs FIND ph(V(s,p)) AT 1k

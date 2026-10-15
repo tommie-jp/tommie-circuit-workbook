@@ -1,0 +1,68 @@
+* 3-8 RLC 並列: R1 = 4.7 kΩ、L1 = 100 mH、C1 = 100 nF、Rs = 100 Ω、W1 = 1 V。1 組目は理想のコイル、2 組目は巻線抵抗 r = 235 Ω (本文の値)。電流 = Rs の電圧 ÷ 100 Ω、位相は CH1 (並列部の電圧) に対する Rs の電圧
+.ac list 500 1k 1.3k 1.59k 2k 3k 5k
+V1 s1 0 AC 1
+Rs1 s1 p1 100
+R1 p1 0 4.7k
+L1 p1 0 100m Rser=0.001
+C1 p1 0 100n
+V2 s2 0 AC 1
+Rs2 s2 p2 100
+R2 p2 0 4.7k
+L2 p2 0 100m Rser=235
+C2 p2 0 100n
+.meas ac m_i1_500 FIND mag(V(s1,p1)) AT 500
+.meas ac p_i1_500 FIND ph(V(s1,p1)) AT 500
+.meas ac m_v1_500 FIND mag(V(p1)) AT 500
+.meas ac p_v1_500 FIND ph(V(p1)) AT 500
+.meas ac m_i2_500 FIND mag(V(s2,p2)) AT 500
+.meas ac p_i2_500 FIND ph(V(s2,p2)) AT 500
+.meas ac m_v2_500 FIND mag(V(p2)) AT 500
+.meas ac p_v2_500 FIND ph(V(p2)) AT 500
+.meas ac m_i1_1000 FIND mag(V(s1,p1)) AT 1k
+.meas ac p_i1_1000 FIND ph(V(s1,p1)) AT 1k
+.meas ac m_v1_1000 FIND mag(V(p1)) AT 1k
+.meas ac p_v1_1000 FIND ph(V(p1)) AT 1k
+.meas ac m_i2_1000 FIND mag(V(s2,p2)) AT 1k
+.meas ac p_i2_1000 FIND ph(V(s2,p2)) AT 1k
+.meas ac m_v2_1000 FIND mag(V(p2)) AT 1k
+.meas ac p_v2_1000 FIND ph(V(p2)) AT 1k
+.meas ac m_i1_1300 FIND mag(V(s1,p1)) AT 1.3k
+.meas ac p_i1_1300 FIND ph(V(s1,p1)) AT 1.3k
+.meas ac m_v1_1300 FIND mag(V(p1)) AT 1.3k
+.meas ac p_v1_1300 FIND ph(V(p1)) AT 1.3k
+.meas ac m_i2_1300 FIND mag(V(s2,p2)) AT 1.3k
+.meas ac p_i2_1300 FIND ph(V(s2,p2)) AT 1.3k
+.meas ac m_v2_1300 FIND mag(V(p2)) AT 1.3k
+.meas ac p_v2_1300 FIND ph(V(p2)) AT 1.3k
+.meas ac m_i1_1590 FIND mag(V(s1,p1)) AT 1.59k
+.meas ac p_i1_1590 FIND ph(V(s1,p1)) AT 1.59k
+.meas ac m_v1_1590 FIND mag(V(p1)) AT 1.59k
+.meas ac p_v1_1590 FIND ph(V(p1)) AT 1.59k
+.meas ac m_i2_1590 FIND mag(V(s2,p2)) AT 1.59k
+.meas ac p_i2_1590 FIND ph(V(s2,p2)) AT 1.59k
+.meas ac m_v2_1590 FIND mag(V(p2)) AT 1.59k
+.meas ac p_v2_1590 FIND ph(V(p2)) AT 1.59k
+.meas ac m_i1_2000 FIND mag(V(s1,p1)) AT 2k
+.meas ac p_i1_2000 FIND ph(V(s1,p1)) AT 2k
+.meas ac m_v1_2000 FIND mag(V(p1)) AT 2k
+.meas ac p_v1_2000 FIND ph(V(p1)) AT 2k
+.meas ac m_i2_2000 FIND mag(V(s2,p2)) AT 2k
+.meas ac p_i2_2000 FIND ph(V(s2,p2)) AT 2k
+.meas ac m_v2_2000 FIND mag(V(p2)) AT 2k
+.meas ac p_v2_2000 FIND ph(V(p2)) AT 2k
+.meas ac m_i1_3000 FIND mag(V(s1,p1)) AT 3k
+.meas ac p_i1_3000 FIND ph(V(s1,p1)) AT 3k
+.meas ac m_v1_3000 FIND mag(V(p1)) AT 3k
+.meas ac p_v1_3000 FIND ph(V(p1)) AT 3k
+.meas ac m_i2_3000 FIND mag(V(s2,p2)) AT 3k
+.meas ac p_i2_3000 FIND ph(V(s2,p2)) AT 3k
+.meas ac m_v2_3000 FIND mag(V(p2)) AT 3k
+.meas ac p_v2_3000 FIND ph(V(p2)) AT 3k
+.meas ac m_i1_5000 FIND mag(V(s1,p1)) AT 5k
+.meas ac p_i1_5000 FIND ph(V(s1,p1)) AT 5k
+.meas ac m_v1_5000 FIND mag(V(p1)) AT 5k
+.meas ac p_v1_5000 FIND ph(V(p1)) AT 5k
+.meas ac m_i2_5000 FIND mag(V(s2,p2)) AT 5k
+.meas ac p_i2_5000 FIND ph(V(s2,p2)) AT 5k
+.meas ac m_v2_5000 FIND mag(V(p2)) AT 5k
+.meas ac p_v2_5000 FIND ph(V(p2)) AT 5k

@@ -1,0 +1,14 @@
+* 1-9 電線の電圧降下: E = 5 V、往き帰りとも R1 (φ0.2 = 2.74 Ω、φ0.4 = 0.684 Ω)、負荷 47 Ω または 23.5 Ω
+.step param rw list 2.74 0.684
+.step param rl list 47 23.5
+V1 s 0 5
+R1 s a {rw}
+RL a b {rl}
+R2 b 0 {rw}
+.tran 0 1m 0 10u
+.meas tran i AVG I(RL)
+.meas tran vr AVG V(a)-V(b)
+.meas tran dv PARAM 5-(V(a)-V(b))
+.meas tran dvf PARAM 5-V(a)
+.meas tran ploss PARAM 2*{rw}*I(RL)*I(RL)*1000
+.end
