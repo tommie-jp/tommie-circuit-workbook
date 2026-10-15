@@ -819,7 +819,19 @@ Pico 2 を先に起こすと、`RE` の行は PC が開く前に出て捨てら�
 
 標本化は、読み取る一番短い変化 (1 bit) の 4 倍より速くした (instrument-screen の流儀)。
 
-Debug Probe でつないでいるときは、DIO3 を GP1 (Probe → Pico 2 の線そのもの) に足すと、PC が送った字が届いた時刻も読める。
+図4・図5 のレーンの名前と、AD3 の DIO・Pico 2 のピンの対応は次のとおり。
+
+| レーン | AD3 | Pico 2 のピン | 中身 | 図 |
+| --- | --- | --- | --- | --- |
+| COPY | DIO0 | GP4 (UART1 の TX) | PC から受けた行の写し | 図4 |
+| TX | DIO1 | GP0 (UART0 の TX) | Pico 2 の答え | 図4 |
+| BUSY | DIO2 | GP2 | 行を受けてから答えを送り始めるまで H (時間の印) | 図4 |
+| D1 | DIO3 | GP16 | 対局中 (LED の D1、緑) | 図4・図5 |
+| D2 | DIO4 | GP17 | 対局中で自分が白 (LED の D2、黄) | 図4・図5 |
+| D3 | DIO5 | GP18 | 直前の行に誤りを返した (LED の D3、赤) | 図4・図5 |
+| (図に無い) | DIO6 (足すとき) | GP1 (UART0 の RX) | Debug Probe から届いた字そのもの (Probe でつないだときだけ) | — |
+
+Debug Probe でつないでいるときは、DIO6 を GP1 (Probe → Pico 2 の線そのもの) に足すと、PC が送った字が届いた時刻も読める。
 写し (DIO0) は Pico 2 が受け終えてから出すので、届いた時刻は読めない。USB でつないでいるときは、届いた時刻は Logic では測れない。
 
 ## Logic に見えるはずの画面
@@ -838,6 +850,9 @@ signals:
   COPY: dio0 pattern 110110010101001000010101011000010010100001 bit 8.681us from 0s
   TX: dio1 pattern 1010110010101111001010001001101011001100101011000010010100001 bit 8.681us from 36.319us
   BUSY: dio2 edges 0s=0 10us=1 45us=0
+  D1: dio3 edges 0s=0 47us=1
+  D2: dio4 low
+  D3: dio5 low
 decode:
   PC: uart COPY baud 115200 8N1 ascii
   PICO: uart TX baud 115200 8N1 ascii
@@ -848,8 +863,9 @@ trigger: BUSY rising at 10us
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/logic/02-reversi-uart-1.svg)
 
 - 1 字は 10 bit (スタート 1・データ 8・ストップ 1) で 86.8 µs。`SB\r\n` の 4 字は 347 µs、`MOd3\r\n` の 6 字は 521 µs で送り終わる
-- レーンの名前とピン: COPY が DIO0 (GP4、受けた行の写し)、TX が DIO1 (GP0、Pico 2 の答え)、BUSY が DIO2 (GP2、時間の印)
+- レーンの名前とピンの対応は、上の「計器の設定」の表のとおり
 - X1 (10 µs) は BUSY が H になった所 (LF を受けた所)、X2 (45 µs) は L に戻って `MOd3` の `M` のスタートビットが始まる所 (仮の位置)。**ΔX が Pico 2 の考える時間**を含む
+- D1 (対局中) は、`SB` で対局が始まるので点く。点くのは答えを送り始めた後 (図では 47 µs、仮の位置)。主ループは行を調べ終えてから LED を書き直すため。`SB` は黒番なので D2 (白) は消えたまま、誤りでもないので D3 も消えたまま
 - 写し (`COPY`) と答え (`TX`) は別の UART なので、写しを送っている間に答えが出始めてよい。写しの字の並びが PC の送った行と同じなら、Pico 2 は行を正しく受けている
 - 読み下しの行に、上の「話す行」の表の字が出れば、プロトコルの行の形は合っている
 
@@ -866,20 +882,20 @@ time: 2ms/div
 start: 0s
 sample: 100kHz
 signals:
-  GAME: dio3 edges 0s=0 1ms=1 17ms=0
-  WHITE: dio4 edges 0s=0 1ms=1 17ms=0
-  ERR: dio5 edges 0s=0 9ms=1 13ms=0
+  D1: dio3 edges 0s=0 1ms=1 17ms=0
+  D2: dio4 edges 0s=0 1ms=1 17ms=0
+  D3: dio5 edges 0s=0 9ms=1 13ms=0
 cursors: [1ms, 17ms]
-trigger: GAME rising at 1ms
+trigger: D1 rising at 1ms
 ```
 
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/logic/02-reversi-uart-2.svg)
 
-- レーンの名前とピン: GAME が DIO3 (GP16)、WHITE が DIO4 (GP17)、ERR が DIO5 (GP18)
-- 1 ms の `SW` で GAME (緑) と WHITE (黄) が点く。自分が白なので答えは返さない
+- レーンの名前とピンの対応は、図4 と同じく「計器の設定」の表のとおり
+- 1 ms の `SW` で D1 (緑) と D2 (黄) が点く。自分が白なので答えは返さない
 - 5 ms の `MOd3` は合法な手なので、Pico 2 は自分の手を返し、状態は変わらない
-- 9 ms の `MOz9` は座標の書き違いで `-04` を返し、ERR (赤) が点く。13 ms の `PI` は `+PI` を返すので ERR が消える
-- 17 ms の `EW` で対局が終わり、GAME と WHITE が消える。ΔX (16 ms) が、この例の対局の長さ
+- 9 ms の `MOz9` は座標の書き違いで `-04` を返し、D3 (赤) が点く。13 ms の `PI` は `+PI` を返すので D3 が消える
+- 17 ms の `EW` で対局が終わり、D1 と D2 が消える。ΔX (16 ms) が、この例の対局の長さ
 - GP2 (BUSY) はこの図に入れていない。山の幅は数十 µs (仮の値) で、2 ms/div では塗りつぶしになって読めない。幅は図4の尺度で測る
 
 ## 見るべき値
@@ -894,7 +910,7 @@ trigger: GAME rising at 1ms
 | 1 字の時間 | 86.8 µs (115200 bps、10 bit) | 計算値 |
 | UART1 (GP4) の写し | 受けた字と 1 字も違わない (200 局で 35 602 字) | 層 A・picoemu |
 | GP2 の印 | 行ごとに 1 回 H になり、答えを送り始める前に L に戻る | 層 A |
-| 状態の 3 本 (GP16〜GP18) | `SB` で GAME が点き、`EB` で消える。`SW` では WHITE も点く。誤りの答え (`-0x`) で ERR が点き、次の誤りでない行で消える。15 行で 12 回の変わり目が期待どおりの並び | 層 A |
+| 状態の 3 本 (GP16〜GP18、LED の D1〜D3) | `SB` で D1 が点き、`EB` で消える。`SW` では D2 も点く。誤りの答え (`-0x`) で D3 が点き、次の誤りでない行で消える。15 行で 12 回の変わり目が期待どおりの並び | 層 A |
 | LED の電流 | 約 3.9 mA (1 本) | 計算 ((3.3 V − 2.0 V) ÷ 330 Ω、V<sub>F</sub> は見積り) |
 | BUSY (GP2) の H の幅 (`SB` を受けてから `MOd3` を送り始めるまで) | (測って書く) µs | 図4の ΔX |
 | 1 回考える時間 (回路の版) | (測って書く) µs | `XB` の `us` ÷ `moves` |
@@ -925,7 +941,7 @@ trigger: GAME rising at 1ms
 | UART1 | 115200 bps、8N1、GP4 を UART に。写しが受けた字 (15 行) と同じ。UART0 には直に書かない | 合った |
 | GP1 | プルアップ | 合った |
 | GP2 | 出力。15 行で 15 回 H になり、最後は L | 合った |
-| GP16〜GP18 | 出力。変わり目が `SB` で GAME↑、`pi` で ERR↑、`EB` で GAME↓・ERR↓、`PA` で ERR↑、空の行で ERR↓、`ZZ` で ERR↑、`SW` で GAME↑・WHITE↑・ERR↓、`EW` で GAME↓・WHITE↓ の 12 回 | 合った |
+| GP16〜GP18 | 出力。変わり目が `SB` で D1↑、`pi` で D3↑、`EB` で D1↓・D3↓、`PA` で D3↑、空の行で D3↓、`ZZ` で D3↑、`SW` で D1↑・D2↑・D3↓、`EW` で D1↓・D2↓ の 12 回 | 合った |
 
 ### PC で 200 局 — 回路の版と C の版
 
