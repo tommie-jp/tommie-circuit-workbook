@@ -292,9 +292,12 @@ Verilator 5.042 と Yosys 0.33 で、本文の `fifo4x4.v` `tb_fifo.v` を取り
 | 105・115 µs | COUNT 1・0、DOUT 6・B、115 µs で EMPTY = 1 | 同じ | 合った |
 | 125 µs (空で POP) | COUNT 0 のまま | 同じ | 合った |
 | 合成 | RAM16SDP4 1、LUT と MUX2_LUT 137、ALU 9 | 同じ | 合った |
-| yosys 0.69 の列 | LUT 18 個 | この環境に 0.69 は無い | 確かめていない |
+| 合成 (Yosys 0.70+16) | RAM16SDP4 1、LUT と MUX2_LUT 18、ALU 9 | RAM16SDP4 1、LUT 15 (LUT1 2 + LUT2 6 + LUT3 2 + LUT4 5) + MUX2_LUT 3 = 18、ALU 9 | 合った |
+| 配置配線 (nextpnr-himbaechel 0.11.1-63、`--freq 27`、ピンは仮の番号) | (本文に無い) | `Max frequency` 237.59 MHz (PASS at 27.00 MHz)、LUT4 35、ALU 12、DFF 14、RAM16SDP4 1 | 補足 |
 
-配置配線 (nextpnr) と実機は無いので、そこから出る数は確かめていない。
+nextpnr の LUT4 35 と ALU 12 は、桁上げの入口・出口の ALU が足された数である (9-3)。
+`Max frequency` は 1 回の実行の値で、`--seed` は振っていない (9-3 のとおり数 % 動く)。
+実機は無いので、実機で出る数は確かめていない。
 
 ## 出典
 

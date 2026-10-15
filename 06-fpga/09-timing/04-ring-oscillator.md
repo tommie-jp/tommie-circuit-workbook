@@ -473,9 +473,15 @@ Verilator 5.042 と Yosys 0.33 で、本文の `ring.v` `half.v` `top_ring.v` `r
 | 合成の LUT1 (N = 3・5・7・9) | 12・14・16・18 | 同じ | 合った |
 | 合成の LUT2・DFF | 1・10 | 1・10 | 合った |
 | 図5 の `div_out` | 200 MHz ÷ 1024 = 195.3 kHz | 計算どおり (模型の値) | 合った |
+| nextpnr の LUT4 の数 (N = 3・5・7・9) | 13・15・17・19 | 同じ | 合った |
+| nextpnr の最後の行 | `No Fmax available; no interior timing paths found in design.` | 4 つとも同じ行 | 合った |
+| 「消されてしまう」(`assign w[i] = ~w[i-1];` と `(* keep *)`、K = 8) | 輪の LUT は LUT2 の 2 個だけ、分周の 1 段目は `DFFN` | LUT2 2・DFFN 1 (ほかに DFF 7、LUT1 8) | 合った |
+| `gowin_pack` (N = 5) | ビットストリームができる (書き込みは未実行) | `.fs` ができた | 合った |
 
-確かめていない数: nextpnr の LUT4 の数と `No Fmax available`、「消されてしまう」の合成結果 (`DFFN` など)、
-実物の 1 段の遅れと `div_out` の周波数 (実機が要る。本文も「測って書く」)。
+配置配線は OSS CAD Suite の Yosys 0.70+16 と nextpnr-himbaechel 0.11.1-63 で走らせ直した (本文は 0.69+274 と 0.11.1-54)。
+制約ファイルは本文のものを `sim/04-ring-oscillator.cst` に置いた。
+「消されてしまう」の版は本文に Verilog が無いので、`ring` を `assign` と `(* keep *)` の `wire` で書き直して作った (置いていない)。
+確かめていない数: 実物の 1 段の遅れと `div_out` の周波数 (実機が要る。本文も「測って書く」)。
 
 ## 出典
 

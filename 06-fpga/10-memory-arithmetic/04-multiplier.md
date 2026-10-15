@@ -305,9 +305,9 @@ yosys -p "read_verilog mul8_seq.v; synth_gowin -top mul8_seq -json m.json; stat"
   **同じ `*` が、道具の版で全く別の回路になる。** 乗算器の部品を使うかどうかは、使う FPGA にその部品があるかにもよる
 - シフトと加算は、DFF が 46 個 (p 16 + mcand 16 + mplier 8 + n 4 + busy + done) で、ALU は 20 個で、どちらの版でも同じ。
   回路の大きさが版にあまり左右されない
-- 乗算器の部品が Tang Nano 9K にいくつあるかは、この題では確かめていない。最高の周波数 (9-3) と合わせて、
-  配置配線まで通して確かめる
-- 数は合成の結果で、配置配線は通していない。実機で動かしたものではない
+- 乗算器の部品が Tang Nano 9K にいくつあるかは、nextpnr の `Device utilisation` で 40 個と出た (見積り。メーカーの資料とは突き合わせていない)。
+  `mul8_seq` の最高の周波数は、nextpnr の見積りで 192 MHz ほどだった (9-3 の読み方と同じ。`--seed` で動く)
+- 数は合成と、nextpnr の配置配線の見積りである。実機で動かしたものではない
 
 ## シミュレーションでの確かめ
 
@@ -322,9 +322,13 @@ Verilator 5.042 と Yosys 0.33 で、本文の `mul8_op.v` `mul8_seq.v` `tb_mul.
 | 25 µs〜105 µs の BUSY / P | 1 / 0x00、0x0D、0x27、0x27、0x8F … 105 µs で DONE = 1・BUSY = 0 | 同じ | 合った |
 | 合成 `mul8_op` | ALU 16、LUT と MUX2_LUT 484 | 同じ | 合った |
 | 合成 `mul8_seq` | DFF 46、ALU 20、LUT と MUX2_LUT 29 | 同じ | 合った |
-| yosys 0.69 の列 (MULT9X9 など) | MULT9X9 1 個、LUT 24 個 | この環境に 0.69 は無い | 確かめていない |
+| 合成 `mul8_op` (Yosys 0.70+16) | MULT9X9 1 個 (LUT・ALU・DFF は 0) | 同じ | 合った |
+| 合成 `mul8_seq` (Yosys 0.70+16) | DFF 46、ALU 20、LUT の合計 24 | DFF 46 (DFFR 2 + DFFRE 44)、ALU 20、LUT 24 (LUT1 1 + LUT2 3 + LUT3 5 + LUT4 15) | 合った |
+| 配置配線 `mul8_op` (nextpnr-himbaechel 0.11.1-63、ピンは仮の番号) | (本文に無い) | MULT9X9 1 個 (40 個中)、LUT・ALU・DFF は 0、`No Fmax available` (組み合わせ回路だけ) | 補足 |
+| 配置配線 `mul8_seq` (`--freq 27`) | (本文に無い) | `Max frequency` 192.12 MHz (PASS at 27.00 MHz)、LUT4 48、ALU 24、DFF 46 | 補足 |
 
-配置配線 (nextpnr) と実機は無いので、そこから出る数は確かめていない。
+nextpnr の `Max frequency` は 1 回の実行の値で、`--seed` は振っていない。ピンは仮に割り振った。
+実機は無いので、実機で出る数は確かめていない。
 
 ## 出典
 

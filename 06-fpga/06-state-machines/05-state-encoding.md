@@ -357,7 +357,7 @@ PC の Verilator (5.042) と yosys (0.33) で実際に動かして得た値。
 Verilator 5.042 と yosys 0.33 で、本文の `seq_enc.v`・`seq_onehot.v`・試験 `tb_enc` を抜き出して走らせ直した。
 原本は `sim/05-state-encoding.v`・`sim/05-state-encoding-onehot.v`・`sim/05-state-encoding-tb.v`。
 合成は本文のコマンドのまま (`synth_gowin`)。`seq_onehot` は `read_verilog -sv seq_onehot.v; synth_gowin -top seq_onehot` で数えた。
-配置配線 (nextpnr) はこの確かめに含まない。
+配置配線は OSS CAD Suite の Yosys 0.70+16 と nextpnr-himbaechel 0.11.1-63 でも走らせた。ピンは仮の番号で、制約は `--freq 27` だけを渡した。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
@@ -371,6 +371,12 @@ Verilator 5.042 と yosys 0.33 で、本文の `seq_enc.v`・`seq_onehot.v`・�
 | 合成 FF / LUT (ワンホット、同じ書き方) | 5 / 22、MUX2 16 個 | DFFR 4 + DFFS 1、LUT1 11 + LUT3 1 + LUT4 10、MUX2_LUT5 11 + MUX2_LUT6 5 | 合った |
 | 合成 FF / LUT (`seq_onehot`) | 5 / 5 | DFFR 4 + DFFS 1、LUT2 2 + LUT3 1 + LUT4 2 | 合った |
 | yosys の `fsm` パス | `Not marking seq_enc.st as FSM state register` | 同じ行が出た | 合った |
+| 合成 FF / LUT (2 進・グレイ、Yosys 0.70+16) | 3 / 4 | DFFR 3、LUT3 1 + LUT4 4 = LUT 5 | 近い (版の差。LUT が 1 個多い) |
+| 合成 FF / LUT (ワンホット、同じ書き方、Yosys 0.70+16) | 5 / 22、MUX2 16 個 | DFFR 4 + DFFS 1、LUT1 17 + LUT4 9 = LUT 26、MUX2_LUT5 13 + MUX2_LUT6 6 = MUX2 19 個 | 近い (版の差。多い向きは同じ) |
+| 合成 FF / LUT (`seq_onehot`、Yosys 0.70+16) | 5 / 5 | DFFR 4 + DFFS 1、LUT2 2 + LUT3 1 + LUT4 2 | 合った |
+| 配置配線の `Max frequency` (2 進・グレイ) | (本文に無い) | 366.30 MHz (PASS at 27.00 MHz)。配置配線後の LUT4 5、DFF 3 | 補足 |
+| 配置配線の `Max frequency` (ワンホット、同じ書き方) | (本文に無い) | 213.68 MHz。LUT4 26、MUX2_LUT5 13、MUX2_LUT6 6、DFF 5 | 補足 |
+| 配置配線の `Max frequency` (`seq_onehot`) | (本文に無い) | 422.48 MHz。LUT4 5、DFF 5 | 補足 |
 
 ## 出典
 

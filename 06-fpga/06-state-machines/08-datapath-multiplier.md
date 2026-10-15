@@ -534,7 +534,19 @@ Verilator 5.042、Icarus Verilog 12.0、yosys 0.33 で、本文の Verilog と�
 | 合成 (分けた、`W` = 16) | 48 / 69 / 30 | ALU 48、FF 69、LUT 30 (LUT1 2・LUT2 4・LUT3 17・LUT4 7) | 合った |
 | 合成 (`mul_ctl` だけ) | 0 / 5 / 5 | ALU 0、DFF 5、LUT3 4 + LUT4 1 | 合った |
 
-配置配線 (nextpnr) と Fmax は、この確かめに含まない (手元に nextpnr が無い)。
+| 合成 (分けた、`W` = 8、Yosys 0.70+16) | 24 / 37 / 17 | ALU 24、DFF 5 + DFFRE 32、LUT2 3 + LUT3 9 + LUT4 5 = 17 | 合った |
+| 合成 (分けない、`W` = 8、Yosys 0.70+16) | 24 / 37 / 32 | ALU 24、FF 37、LUT1 1 + LUT2 18 + LUT3 11 + LUT4 3 = 33 (ほかに MUX2_LUT5 1) | 近い (版の差。1 個多い) |
+| 合成 (分けた、`W` = 4、Yosys 0.70+16) | 12 / 21 / 17 | ALU 12、FF 21、LUT2 3 + LUT3 7 + LUT4 2 = 12 | 近い (版の差。LUT が 5 個少ない) |
+| 合成 (分けた、`W` = 16、Yosys 0.70+16) | 48 / 69 / 30 | ALU 48、FF 69、LUT1 2 + LUT2 4 + LUT3 17 + LUT4 7 = 30 (ほかに MUX2_LUT5 2) | 合った |
+| 合成 (`mul_ctl` だけ、Yosys 0.70+16) | 0 / 5 / 5 | ALU 0、DFF 5、LUT3 4 + LUT4 1 | 合った |
+| 配置配線の `Max frequency` (分けた、`W` = 8、`--freq 27`) | (本文に無い) | 233.54 MHz (PASS at 27.00 MHz)。LUT4 45、ALU 28、DFF 37 | 補足 |
+| 配置配線の `Max frequency` (分けない、`W` = 8) | (本文に無い) | 422.48 MHz。LUT4 61、MUX2_LUT5 1、ALU 28、DFF 37 | 補足 |
+| 配置配線の `Max frequency` (分けた、`W` = 4) | (本文に無い) | 295.60 MHz。LUT4 28、ALU 16、DFF 21 | 補足 |
+
+配置配線は OSS CAD Suite の Yosys 0.70+16 と nextpnr-himbaechel 0.11.1-63 で走らせた。`W` を替えた合成は `hierarchy -top mul_top -chparam W n` で作った。
+ピンは仮の番号で、`--seed` は振っていない。`Max frequency` の値は 1 回の実行のもので、9-3 のとおり数 % 動く。
+分けた版の方が `Max frequency` は低く出た。理由は経路の報告まで読んでいないので確かめていない。
+`W` = 16 は、仮に割り振るピンの数が足りず走らせていない。
 
 ## 出典
 

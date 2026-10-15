@@ -400,9 +400,13 @@ Verilator 5.042 と Yosys 0.33 で、本文の `sync2.v` `top_sync2.v` `tb_sync2
 | Q1 の変化 | 129.6・425.9・870.4・907.4・1018.5 ns | 同じ | 合った |
 | 700 ns・800 ns の細いパルス | 取りこぼし | Q1・Q に変化なし | 合った |
 | 図5 (DIO1 は 32 ns、DIO0 は 72 ns の標本で 1) | 29.6 ns・66.7 ns を 8 ns 刻みで読む | 29.6 → 32、66.7 → 72 | 合った |
-| 合成 (`synth_gowin`) | DFF 2・IBUF 2・OBUF 2・LUT 0 | 同じ (cells 6) | 合った |
+| 合成 (`synth_gowin`、Yosys 0.33 と 0.70+16) | DFF 2・IBUF 2・OBUF 2・LUT 0 | 同じ (cells 6) | 合った |
+| 配置配線 (nextpnr-himbaechel 0.11.1-63、`--freq 27`) | `Max frequency` 1166.86 MHz (PASS at 27.00 MHz) | 1166.86 MHz (PASS at 27.00 MHz)、LUT4 0・DFF 2 | 合った |
+| `gowin_pack` | ビットストリームができる (書き込みは未実行) | `.fs` ができた | 合った |
 
-確かめていない数: 配置配線の `Max frequency` 1166.86 MHz (nextpnr が無い)。ピンの遅れ、AD3 での実測、メタステーブルの波形は実機が要る。
+配置配線は OSS CAD Suite の Yosys 0.70+16 と nextpnr-himbaechel 0.11.1-63 で走らせ直した (本文は 0.69+274 と 0.11.1-54)。
+制約ファイルは本文のものを `sim/02-sync-two-ff.cst` に置いた。
+確かめていない数: ピンの遅れ、AD3 での実測、メタステーブルの波形は実機が要る。
 
 ## 出典
 

@@ -821,7 +821,7 @@ yosys -p "read_verilog top.v clock.v tick.v button.v digit.v seg7dec.v; synth_go
 | 入出力のバッファ (IBUF・OBUF) | 4 + 13 |
 
 GW1NR-9 の LUT は 8640 個、フリップフロップは 6480 個 (Sipeed の Tang Nano 9K のページ) なので、どちらも 1〜2 % に収まる。
-書き込むには、配置配線 (nextpnr か Gowin の IDE) を通して `.fs` を作り、`openFPGALoader` で書く (8-4)。この題ではそこまで確かめていない。
+書き込むには、配置配線 (nextpnr か Gowin の IDE) を通して `.fs` を作り、`openFPGALoader` で書く (8-4)。この題では nextpnr と gowin_pack で `.fs` を作るところまで確かめた (Yosys 0.70+16 では LUT 113・ALU 90 と数えた。書き込みは未実行)。
 
 ## 計器の設定
 
@@ -934,7 +934,13 @@ Verilator 5.042 と Yosys 0.33 で、本文の 8 つの Verilog (`tick.v` `butto
 | 1 日のずれ | ±50 ppm で ±4.3 s、±20 ppm で ±1.7 s | 0.0864 × 50 = 4.32、0.0864 × 20 = 1.73 | 合った |
 | ベース電流 | 約 2.6 mA | (3.3 − 0.75) ÷ 1 kΩ = 2.55 mA | 合った |
 
-確かめていない数: 配置配線 (nextpnr が無い)、実機の点灯・セグメントの電流 (4〜6 mA)・発振器の ppm・図4・図5 の AD3 の測定。
+| 合成 (Yosys 0.70+16) | LUT 90 (19 + 13 + 9 + 49)、FF 110、ALU 86、IBUF・OBUF 4・13 | LUT 113 (LUT1 33 + LUT2 16 + LUT3 15 + LUT4 49)、MUX2_LUT 30、FF 110 (4 + 64 + 30 + 6 + 6)、ALU 90、IBUF 4・OBUF 13 | 近い (版の差。LUT・ALU が多い。FF・IBUF・OBUF は同じ) |
+| 配置配線 (nextpnr-himbaechel 0.11.1-63、`--freq 27`) | (本文に無い) | `Max frequency` 116.54〜133.12 MHz (`--seed` 1・2・3 と指定なしの 4 回、120.98 MHz が指定なし)、すべて PASS at 27.00 MHz。LUT4 223、ALU 110、DFF 110、IOB 17 | 補足 |
+| `gowin_pack` | ビットストリームができる (書き込みは未実行) | `.fs` ができた | 合った |
+
+配置配線は OSS CAD Suite の Yosys 0.70+16 と nextpnr-himbaechel 0.11.1-63 で走らせた (制約ファイルは本文のものを `sim/04-clock.cst` に置いた)。
+nextpnr の LUT4 223 と ALU 110 は、LUT 113 に ALU 110 (桁上げの入口・出口の分を含む) を足した数と読める。
+確かめていない数: 実機の点灯・セグメントの電流 (4〜6 mA)・発振器の ppm・図4・図5 の AD3 の測定。
 
 ## 出典
 
