@@ -1,6 +1,7 @@
 # 12-3 の図1: 公開ページのスクリーンショットに、形の名前と位置の数を重ねる
 #   python3 -I 03-pong-screen-overlay.py 03-pong-screen-raw.png ../03-pong-screen.png
 # スクリーンショット (raw) は https://tommie-jp.github.io/soft-fpga/91-pong/ を開いて撮った (625 × 514)。
+# 出力は、ゲーム画面の部分だけを切り出した画像 (ボタンの行と画面の外の余白は含めない)。
 # 画面は 1 画素 3.6 画素、左上が (x, y) = (8.4, 6.0)。フォントは Noto Sans CJK JP Bold。
 import sys
 from PIL import Image, ImageDraw, ImageFont
@@ -65,5 +66,7 @@ d.line([(330, 415), (400, 415)], fill=(255, 255, 255), width=2); d.polygon([(400
 text((418, 414), 'h (横 0〜159)', (255, 255, 255), fs, anchor='lm')
 d.line([(14, 76), (14, 108)], fill=(255, 255, 255), width=2); d.polygon([(9, 108), (14, 118), (19, 108)], fill=(255, 255, 255))
 text((24, 92), 'v (縦 0〜119)', (255, 255, 255), fs, anchor='lm')
+# ゲーム画面 (canvas) の部分だけを切り出す。下のボタンの行と、画面の外の余白は要らない
+im = im.crop((int(OX) - 1, int(OY) - 1, int(OX + 160 * S) + 3, int(OY + 120 * S) + 2))
 im.save(out, optimize=True)
 print(im.size, 'ball', bx, by)
