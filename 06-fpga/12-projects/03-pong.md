@@ -22,6 +22,10 @@ device: WEB
 
 **動くページ: <https://tommie-jp.github.io/soft-fpga/91-pong/>** (自分でビルドしなくても、ブラウザで開けば遊べる。W・S が左、↑・↓ が右のラケット、AUTO は回路が打つ。下に Logic Analyzer が付いていて、球・ラケット・点の動きが波形で見える (「Logic Analyzer で見る」)。ソースは [soft-fpga の examples/91-pong](https://github.com/tommie-jp/soft-fpga/tree/main/examples/91-pong))
 
+[![公開ページのスクリーンショット (ゲーム画面とボタン)](03-pong-page-small.png)](03-pong-page.png)
+
+(公開ページのスクリーンショット。クリックすると、ページ全体 (ゲーム画面・説明欄・Logic Analyzer) が開く)
+
 ## Pong の歴史的な位置
 
 Pong (1972) は、ビデオゲームが産業になる入口にあったゲームである。前と後を、年と数で短く並べる (出典は末尾)。
