@@ -35,15 +35,46 @@ device: WEB
 
 ## 画面のつくり
 
-```text
- x: 0      6-8        60-67  79   92-99          151-153  159
- y: 0-1    ──────────────────────── 上の壁 ─────────────────────
-           6〜19        [点 L]  ┆   [点 R]
-           ▌ 左の                ┆                    ▐ 右の
-           ▌ ラケット      ■ 球  ┆                    ▐ ラケット
-                                  ┆ ネット (4 画素おきの点線)
- y: 118-119 ──────────────────────── 下の壁 ─────────────────────
+```plantuml
+@startuml
+skinparam shadowing false
+skinparam defaultFontName "Noto Sans CJK JP"
+skinparam rectangle {
+  RoundCorner 4
+}
+skinparam nodesep 10
+skinparam ranksep 10
+title 図1 画面は横 160 × 縦 120 画素。壁・ラケット・ネット・点・球を、比較器で 1 つずつ描く
+
+rectangle "画面 (h 0〜159 が横、v 0〜119 が縦)" as SCR #FAFAFA {
+  rectangle "　　　　　　　　　　　　　　　　　　　上の壁   v 0〜1   (h は全部)　　　　　　　　　　　　　　　　　　　" as TOP #B0BEC5
+  rectangle "左のラケット\nh 6〜8 / v pl〜pl+15\n3 × 16 画素" as PL #A5D6A7
+  rectangle "点 L (sl)\n7 セグ\nh 60〜67" as SL #FFF59D
+  rectangle "ネット\nh 79\nv の 2 の位が 1 の画素" as NET #E0E0E0
+  rectangle "点 R (sr)\n7 セグ\nh 92〜99" as SR #FFF59D
+  rectangle "右のラケット\nh 151〜153 / v pr〜pr+15\n3 × 16 画素" as PR #A5D6A7
+  rectangle "球 (bx, by)\n3 × 3 画素" as BALL #FFAB91
+  rectangle "　　　　　　　　　　　　　　　　　　下の壁   v 118〜119   (h は全部)　　　　　　　　　　　　　　　　　　" as BOT #B0BEC5
+}
+TOP -[hidden]down- PL
+TOP -[hidden]down- SL
+TOP -[hidden]down- NET
+TOP -[hidden]down- SR
+TOP -[hidden]down- PR
+PL -[hidden]right- SL
+SL -[hidden]right- NET
+NET -[hidden]right- SR
+SR -[hidden]right- PR
+NET -[hidden]down- BALL
+BALL -[hidden]down- BOT
+@enduml
 ```
+
+![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/plantuml/03-pong-1.svg)
+
+- 左上が (h, v) = (0, 0)。h が横 (0〜159)、v が縦 (0〜119)。**図は配置の順で、縮尺は合っていない**
+- 色の違いは種類の違い (灰: 壁とネット、緑: ラケット、黄: 点、橙: 球)。位置の数は下の表の「比べる数」と同じ
+- 左右のラケットは `pl`・`pr`、球は `bx`・`by` が動く。壁・ネット・点の位置は動かない
 
 画素を 1 つ描くたびに、回路は (`h`, `v`) が次のどれかに入っているかを比べ、どれかに入っていれば白にする。
 
@@ -67,7 +98,7 @@ skinparam defaultFontName "Noto Sans CJK JP"
 skinparam rectangle {
   RoundCorner 6
 }
-title 図1 h・v のカウンタが画面をなぞり、比較器が形に入ったかを調べる。1 画面に 1 回、位置を動かす
+title 図2 h・v のカウンタが画面をなぞり、比較器が形に入ったかを調べる。1 画面に 1 回、位置を動かす
 
 rectangle "clk" as CLK
 rectangle "h カウンタ\n0〜159" as H #FFF8E1
@@ -93,7 +124,7 @@ HIT --> POS : 向きを返す・点を足す
 @enduml
 ```
 
-![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/plantuml/03-pong.svg)
+![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/plantuml/03-pong-2.svg)
 
 - 黄の箱がレジスタ (カウンタ)、緑の箱が組み合わせ回路。左のカウンタと右の比較器だけで画面が描ける
 - 位置のレジスタは、`frame_end` のクロックでだけ書き換わる。ほかの 19 199 クロックは、描くために読まれるだけ
@@ -436,7 +467,7 @@ var Module = { onRuntimeInitialized: function () {
 
 ```logic
 # ロジックアナライザの画面 (tommie-fence の logic フェンス)
-title: 図2 1 行の中で、比較器が形に入った所だけ pixel が 1 になる (1 クロック = 1 µs と置いた)
+title: 図3 1 行の中で、比較器が形に入った所だけ pixel が 1 になる (1 クロック = 1 µs と置いた)
 device: generic
 time: 40us/div
 start: -20us
@@ -521,7 +552,7 @@ PASS
 | --- | --- | --- | --- |
 | lint (`-Wall`) | 警告 0 件 | 0 件 | 合った |
 | 1 画面めの白の画素 | 946 | 946 (PC)。ブラウザは開いて 1.5 s 後の画面で 939 (点が 0 対 2 になり、「2」が「0」より 7 画素少ない) | 合った |
-| 図2の 58〜61 行の `pixel` | 6〜8・78〜80・151〜153 (61 行は 79) | 同じ (`run_frame` の配列を読んだ) | 合った |
+| 図3の 58〜61 行の `pixel` | 6〜8・78〜80・151〜153 (61 行は 79) | 同じ (`run_frame` の配列を読んだ) | 合った |
 | W キーを 1 s 押す | ラケットの上端が 2 | `<canvas>` の 7 列めの白が 2〜17 行 | 合った |
 | 左右の AUTO を入れて 5 s | 画面と点が進む | 156 → 456 画面、点 0-3 → 0-5、コンソールに誤り無し (favicon の 404 だけ) | 合った |
 | 描き替えの速さ | 約 60 画面/s | 300 画面/5 s | 合った (ヘッドレスの Chromium の値) |
