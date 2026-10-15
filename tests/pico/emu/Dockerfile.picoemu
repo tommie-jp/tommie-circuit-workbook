@@ -1,0 +1,10 @@
+# 層 D: RP2350 エミュレータ picoemu (danish9661/pico-emulator b83786f + picoemu-m33.patch)。
+# ビルド: docker build -f tests/pico/emu/Dockerfile.picoemu -t wb-picoemu .   (リポジトリの根で)
+# 使い方: docker run --rm -v "$PWD":/work -w /work wb-picoemu picoemu <x.uf2> -arch m33 ...
+FROM wb-pico-sdk
+RUN git clone -q https://github.com/danish9661/pico-emulator /opt/picoemu-src \
+ && cd /opt/picoemu-src && git checkout -q b83786f
+COPY 06-fpga/05-soft-fpga-pico/sim/picoemu-m33.patch /tmp/picoemu-m33.patch
+RUN cd /opt/picoemu-src && git apply /tmp/picoemu-m33.patch \
+ && cmake -S . -B build -DCMAKE_BUILD_TYPE=Release >/dev/null && cmake --build build -j8 >/dev/null 2>&1 \
+ && cp build/picoemu /usr/local/bin/picoemu

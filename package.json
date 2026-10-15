@@ -24,7 +24,9 @@
     "pico:upy": "python3 -I tests/pico/upy/run.py",
     "pico:pio": "python3 -I tests/pico/pio/run.py",
     "pico:test": "npm run pico:extract && npm run pico:host && npm run pico:upy && npm run pico:pio",
-    "pico:uf2": "npm run pico:extract && sh tests/pico/uf2/build.sh"
+    "pico:uf2": "npm run pico:extract && sh tests/pico/uf2/build.sh",
+    "pico:emu": "sh tests/pico/emu/run.sh",
+    "pico": "npm run pico:uf2 && npm run pico:emu"
   },
   "devDependencies": {
     "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.43.0/breadboard-fence-0.43.0.tgz",
