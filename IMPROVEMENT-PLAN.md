@@ -719,35 +719,29 @@ git checkout 01-circuits/01-basics/01-led.md
 
 ## 参考：既存スクリプトの依存関係
 
-```text
-check.mjs
-  ├→ entry.mjs (front matter 解析)
-  ├→ fences.mjs (フェンス名検証)
-  └→ 各 fence CLI (circuit, breadboard, ...)
+呼ぶ側 → 呼ばれる側。
 
-render.mjs
-  └→ 各 fence CLI (circuit, breadboard, ...)
-
-toc.mjs
-  └→ plan.mjs (plan.yaml 読み込み)
-
-figures.mjs
-  └→ out/ スキャン
+```mermaid
+flowchart LR
+  check[check.mjs] --> entry[entry.mjs<br/>front matter 解析]
+  check --> fences[fences.mjs<br/>フェンス名検証]
+  check --> cli[各 fence CLI<br/>circuit, breadboard, ...]
+  render[render.mjs] --> cli
+  toc[toc.mjs] --> plan[plan.mjs<br/>plan.yaml 読み込み]
+  figures[figures.mjs] --> out[out/ スキャン]
 ```
 
-**新スクリプト追加後の依存：**
+**新スクリプト追加後の依存：** (橙が新規・改造)
 
-```text
-check.mjs
-  ├→ entry.mjs
-  ├→ fences.mjs
-  ├→ validate-entry.mjs ✨ (新規)
-  └→ 各 fence CLI
-
-render.mjs ✨ (改造)
-  ├→ fence-render.mjs ✨ (新規、フェンス 1 個 render)
-  └→ 各 fence CLI
-
-figures.mjs ✨ (改造)
-  └→ manifest.json キャッシュ ✨
+```mermaid
+flowchart LR
+  check[check.mjs] --> entry[entry.mjs]
+  check --> fences[fences.mjs]
+  check --> validate[validate-entry.mjs<br/>新規]
+  check --> cli[各 fence CLI]
+  render[render.mjs<br/>改造] --> frender[fence-render.mjs<br/>新規・フェンス 1 個 render]
+  render --> cli
+  figures[figures.mjs<br/>改造] --> manifest[manifest.json<br/>キャッシュ]
+  classDef changed fill:#ffe0b2,stroke:#e65100
+  class validate,render,frender,figures,manifest changed
 ```
