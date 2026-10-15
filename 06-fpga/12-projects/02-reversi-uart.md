@@ -918,11 +918,13 @@ trigger: D1-GAME-GP16 rising at 1ms
 
 | 時刻 (LF を受けた所) | RX (PC が送った行、Debug Probe のとき) | COPY (写し) | PICO (Pico 2 の答え) | D1 GAME | D2 WHITE | D3 ERR |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 ms | `SW` | `SW` | (答えない) | 点く | 点く | 消えたまま |
-| 5 ms | `MOd3` | `MOd3` | `MOc3` | 点いたまま | 点いたまま | 消えたまま |
-| 9 ms | `MOz9` | `MOz9` | `-04 bad coord` | 点いたまま | 点いたまま | 点く |
-| 13 ms | `PI` | `PI` | `+PI` | 点いたまま | 点いたまま | 消える |
-| 17 ms | `EW` | `EW` | (答えない) | 消える | 消える | 消えたまま |
+| 1 ms | `SW` | `SW` | (答えない) | 🟢 点く | 🟡 点く | ⚫ |
+| 5 ms | `MOd3` | `MOd3` | `MOc3` | 🟢 | 🟡 | ⚫ |
+| 9 ms | `MOz9` | `MOz9` | `-04 bad coord` | 🟢 | 🟡 | 🔴 点く |
+| 13 ms | `PI` | `PI` | `+PI` | 🟢 | 🟡 | ⚫ 消える |
+| 17 ms | `EW` | `EW` | (答えない) | ⚫ 消える | ⚫ 消える | ⚫ |
+
+🟢 🟡 🔴 は点いている、⚫ は消えている。その行を受けた後の LED の様子で、字の付いた所がその行で変わった所
 
 - RX は LF を受けた時刻に送り終わり、COPY と PICO はその直後から出る (図4 と同じ順)。PICO の答えは、PC 版の主ループ (`sim/02-reversi-uart-pcstub`) に同じ 5 行を流して得た
 - 1 ms の `SW` で D1 (緑) と D2 (黄) が点く。自分が白なので答えは返さない
@@ -934,38 +936,39 @@ trigger: D1-GAME-GP16 rising at 1ms
 ### 1 行を拡大する
 
 図5 の 13 ms (`PI`) のあたりを 100 µs/div に拡大した。図5 が上の段 (全体)、図6 が下の段 (1 行の字のタイミング) の 2 段で読む。
-時刻の置き方は図4 と同じ (行を調べる時間 35 µs と、LED を書き直すまでの 2 µs は仮の値)。
+時刻の置き方は図4 と同じ (行を調べる時間 0.035 ms と、LED を書き直すまでの 0.002 ms は仮の値)。
 
 ```logic
 # ロジックアナライザの画面 (tommie-fence の logic フェンス)
 title: 図6 図5 の 13 ms を拡大。PI を受け終えて +PI を返し、D3-ERR が消える
 device: ad3
 time: 100us/div
-start: 12600us
+start: 12.6ms
 sample: 1MHz
 signals:
-  RX-GP1: dio6 pattern 11000001010101001001010101100001001010000111 bit 8.681us from 12635.398us
-  COPY-GP4: dio0 pattern 11000001010101001001010101100001001010000111 bit 8.681us from 12989.638us
-  TX-GP0: dio1 pattern 110110101001000001010101001001010101100001001010000111 bit 8.681us from 13017.638us
-  BUSY-GP2: dio2 edges 0s=0 13000us=1 13035us=0
+  RX-GP1: dio6 pattern 11000001010101001001010101100001001010000111 bit 8.681us from 12.635398ms
+  COPY-GP4: dio0 pattern 11000001010101001001010101100001001010000111 bit 8.681us from 12.989638ms
+  TX-GP0: dio1 pattern 110110101001000001010101001001010101100001001010000111 bit 8.681us from 13.017638ms
+  BUSY-GP2: dio2 edges 0s=0 13ms=1 13.035ms=0
   D1-GAME-GP16: dio3 high
   D2-WHITE-GP17: dio4 high
-  D3-ERR-GP18: dio5 edges 0s=1 13037us=0
+  D3-ERR-GP18: dio5 edges 0s=1 13.037ms=0
 decode:
   RX: uart RX-GP1 baud 115200 8N1 ascii
   COPY: uart COPY-GP4 baud 115200 8N1 ascii
   PICO: uart TX-GP0 baud 115200 8N1 ascii
-cursors: [13000us, 13035us]
-trigger: BUSY-GP2 rising at 13000us
+cursors: [13ms, 13.035ms]
+trigger: BUSY-GP2 rising at 13ms
 ```
 
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/logic/02-reversi-uart-3.svg)
 
-- `RX-GP1` で `PI` の LF を受け終えた所 (13.000 ms) で BUSY-GP2 が H になる。受け始めは 12.653 ms (4 字で 347 µs)
-- `COPY-GP4` は受け終えた 7 µs 後から写しを出す。`TX-GP0` は BUSY-GP2 が L に戻る 13.035 ms から `+PI` を返す
+- `RX-GP1` で `PI` の LF を受け終えた所 (13.000 ms) で BUSY-GP2 が H になる。受け始めは 12.653 ms (4 字で 0.347 ms)
+- `COPY-GP4` は受け終えた後の 13.007 ms から写しを出す。`TX-GP0` は BUSY-GP2 が L に戻る 13.035 ms から `+PI` を返す
 - D3-ERR は、9 ms の `MOz9` の誤りから点いていた。`PI` は誤りでない行なので、答えを送り始めた後 (13.037 ms、仮の位置) に消える
 - D1-GAME と D2-WHITE は対局中で自分が白なので、H のまま
-- ΔX (35 µs) が、`PI` を受けてから答え始めるまでの時間 (仮)。図4 と同じ測り方
+- ΔX (0.035 ms) が、`PI` を受けてから答え始めるまでの時間 (仮)。図4 と同じ測り方
+- 図の時間軸の字は µs で出る (logic フェンスは、1 目盛が 1 以上になる一番大きい単位で軸を書く。100 µs/div は 0.1 ms で 1 を下回るので µs)。本文とフェンスの時刻は ms で書いた
 
 ## 見るべき値
 
