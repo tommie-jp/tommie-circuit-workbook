@@ -139,6 +139,27 @@ npm run check -- --verbose   # ネットリストも出す。意図した回路�
 フェンスの並びと合わない画像の行で落ちる。画像の行 (Pages の図を指す `![…](https://tommie-jp.github.io/…)`) は
 `npm run figures` が書くので手で直さない。ERC (つながっていないピンなど) は出すだけで落とさない。
 
+## テストの方針
+
+教科書の「正しさ」を機械で確かめる層を、**題に書いた量と同じ量で突き合わせる**形にそろえている。
+どの層も実機の置き換えではなく、実機に持っていく前に間違いを落とす道具である。
+通っても「実機で動かしていない」の注意書きは外さない (外すのは実機で測ってから)。
+
+| 何を確かめるか | 道具 | 実行 | 題に残す節 |
+| --- | --- | --- | --- |
+| 置き場・front matter・フェンスの読み・計画とのずれ | `scripts/check.mjs` | `npm run check` (`all`) | — |
+| 回路図と実体配線図のつながりの一致 | `scripts/netlist-parity.mjs` | `npm run parity` (`all`) | — |
+| アナログ回路の数 | LTspice (または算術) | 手元 | `## LTspice での確かめ` |
+| Verilog | iverilog・Verilator・Yosys・cocotb | 手元 | `## シミュレーションでの確かめ` |
+| Pico 2 のプログラム (C・MicroPython) | SDK のモック・`machine` のスタブ・PIO エミュレータ (`tests/pico/`) | `npm run pico:test` (`all`) | `## プログラムでの確かめ` |
+| 同じ C を `.uf2` にして RP2350 エミュレータ (picoemu) で動かす | Docker (`wb-pico-sdk`・`wb-picoemu`) | `npm run pico` (Pico の CI) | 同上 |
+| 電圧・電流・実時間・外部部品 | 実機 + Analog Discovery 3 | 手 | 「測って書く」の列 |
+
+- 期待値は、題の「見るべき値」の表の数と同じ量 (周期・パルス幅・周波数・並び) で書く。レジスタの値にしない
+- 確かめていない物は節に書く。「対象外」は見出しに `(対象外)` と理由を付ける
+- `npm run audit` が、節のある題・対象外の題・未確認の題を数える (言うだけで落とさない)
+- Pico 2 のテストの足し方は [tests/pico/README.md](tests/pico/README.md)
+
 ## ライセンス
 
 本文と図は [CC BY 4.0](LICENSE)。借りた回路は front matter の `source` と本文の
