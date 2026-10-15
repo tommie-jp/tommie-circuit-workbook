@@ -34,6 +34,7 @@ description: tommie-circuit-workbook の題 (1 題 1 ファイル) を新しく�
 2. 同じ章の手本の題を 1 つ開き、本文の順をそろえる (説明 → 回路図 → 実体配線図 → 計器の設定 → 見るべき値 → 出典)
 3. 部品の値は E24、電源は 5 V。外すときは部品表に理由を 1 行
 4. **数式と数値は確かめる**。LTspice (または ngspice) で解析し、表の値と突き合わせる。確かめていない値は「見積り」と書く
+   Pico 2 のプログラムは `tests/pico/` (層 A: SDK のモック、A': MicroPython のスタブ) で表の値と突き合わせ、題に `## プログラムでの確かめ` を置く
 5. 図は tommie-fence スキルと readable-schematic・breadboard-wiring・instrument-screen の点検表を通す。
    `npm run render` で出した SVG を PNG にして目で見る (check はつながりしか見ない)
    フェンスの閉じの下の画像の行と、フェンスの 1 行目の名札のコメント
