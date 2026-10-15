@@ -1,0 +1,13 @@
+* 8-1 ジャンパ 1 本 (50 mΩ + 43 nH) のスルーと負荷 1k。S21 = V(out)/V(in)
+V1 in 0 AC 1
+Rj in a 50m
+Lj a out 43n
+Rl out 0 1k
+.ac dec 50 100k 10meg
+.meas ac s100k FIND mag(v(out)) AT=100k
+.meas ac p100k FIND ph(v(out)) AT=100k
+.meas ac s1M FIND mag(v(out)) AT=1meg
+.meas ac p1M FIND ph(v(out)) AT=1meg
+.meas ac s10M FIND mag(v(out)) AT=10meg
+.meas ac p10M FIND ph(v(out)) AT=10meg
+.end

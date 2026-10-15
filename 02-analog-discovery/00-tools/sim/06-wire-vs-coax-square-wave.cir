@@ -1,0 +1,24 @@
+* 0-6 5 MHz の方形波 (±1 V) を 1 次ローパス (本文の τ = 25 ns と 14.3 ns) に通したときの立ち上がり (10→90 %、定常に入ってから)。
+* 第 3 の経路は 9 MHz の 1 次ローパスを 2 段 (発生器 + Scope、付属ワイヤの合成) 重ねたもの。実測ではない
+.param tau1=25n tau2=14.3n
+V1 in 0 PULSE(-1 1 0 0.1n 0.1n 100n 200n)
+R1 in o1 1k
+C1 o1 0 {tau1/1k}
+R2 in o2 1k
+C2 o2 0 {tau2/1k}
+R3 in a 1k
+C3 a 0 17.684p
+E1 b 0 a 0 1
+R4 b o3 1k
+C4 o3 0 17.684p
+.tran 0 4u 0 0.1n
+.meas tran lo1 MIN v(o1) FROM=2u TO=3.5u
+.meas tran hi1 MAX v(o1) FROM=2u TO=3.5u
+.meas tran tr1 TRIG v(o1) VAL='lo1+0.1*(hi1-lo1)' RISE=14 TARG v(o1) VAL='lo1+0.9*(hi1-lo1)' RISE=14
+.meas tran lo2 MIN v(o2) FROM=2u TO=3.5u
+.meas tran hi2 MAX v(o2) FROM=2u TO=3.5u
+.meas tran tr2 TRIG v(o2) VAL='lo2+0.1*(hi2-lo2)' RISE=14 TARG v(o2) VAL='lo2+0.9*(hi2-lo2)' RISE=14
+.meas tran lo3 MIN v(o3) FROM=2u TO=3.5u
+.meas tran hi3 MAX v(o3) FROM=2u TO=3.5u
+.meas tran tr3 TRIG v(o3) VAL='lo3+0.1*(hi3-lo3)' RISE=14 TARG v(o3) VAL='lo3+0.9*(hi3-lo3)' RISE=14
+.end

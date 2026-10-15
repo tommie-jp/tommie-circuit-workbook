@@ -1,0 +1,13 @@
+* 2-13 三角波 0〜3 V → R1 330 → 1N4148 → Rs 22 → GND。D の電圧と電流の関係 (DC 掃引)。1N4148 の模型は 09-rf/sim/agc.cir の D4148 (仮定で、実測ではない)
+.model D4148 D (IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+V1 in 0 3
+R1 in d 330
+D1 d s D4148
+Rs s 0 22
+.dc V1 0 3 0.01
+.meas dc id3 FIND i(Rs) AT=3
+.meas dc vdd FIND v(d,s) AT=3
+.meas dc v2rs FIND v(s) AT=3
+.meas dc vd_at_1ma WHEN i(Rs)=1m
+.meas dc vd_at_6p5ma WHEN i(Rs)=6.5m
+.end

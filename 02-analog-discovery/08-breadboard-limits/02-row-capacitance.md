@@ -162,6 +162,18 @@ notes:
 
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/graph/02-row-capacitance.svg)
 
+## LTspice での確かめ
+
+`sim/02-row-capacitance.cir` で、Rref 330 Ω と 10 列の容量 (入力容量 48 pF に、C<sub>stray</sub> 2.5 pF を挿す / 抜く) を 10 MHz・1 MHz で解いた (容量は本文の仮定)。
+
+| 項目 | 本文の数字 (抜く / 挿す) | LTspice (抜く / 挿す) | 判定 |
+| --- | --- | --- | --- |
+| CH1 (10 MHz、Rref の両端) | 0.705 V / 0.723 V | 0.705 V / 0.723 V | 合う |
+| CH2 (10 MHz、10 列) | 0.709 V / 0.691 V | 0.709 V / 0.691 V | 合う |
+| CH2 の差 | 18 mV | 18 mV | 合う |
+| CH2 (1 MHz) | 0.995 V / 0.995 V | 0.995 V / 0.995 V | 合う |
+| 位相 (CH2 − CH1、10 MHz) | −90° | −90.0° | 合う |
+
 ## 出典
 
 自作。計器の名前と操作は Digilent の

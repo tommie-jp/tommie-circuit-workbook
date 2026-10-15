@@ -1,0 +1,15 @@
+* 5-1 RC ローパス (図1: R1 1k、C1 100n)。理想の電圧源 (Wavegen は 0 Ω) と理想の R・C で、本文の「見るべき値」の表を突き合わせる
+V1 in 0 AC 1
+R1 in out 1k
+C1 out 0 100n
+.ac dec 200 10 1meg
+.meas ac g100 FIND mag(v(out)) AT=100
+.meas ac p100 FIND ph(v(out)) AT=100
+.meas ac gfc FIND mag(v(out)) AT=1591.5
+.meas ac pfc FIND ph(v(out)) AT=1591.5
+.meas ac g10k FIND mag(v(out)) AT=10k
+.meas ac p10k FIND ph(v(out)) AT=10k
+.meas ac g100k FIND mag(v(out)) AT=100k
+.meas ac p100k FIND ph(v(out)) AT=100k
+.meas ac fc3db WHEN mag(v(out))=0.707107
+.end

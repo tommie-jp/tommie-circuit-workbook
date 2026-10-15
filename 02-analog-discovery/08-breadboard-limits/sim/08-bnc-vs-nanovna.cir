@@ -1,0 +1,18 @@
+* 8-8 スルー治具 (中心導体 52.1 nH の直列インダクタ) を 50 Ω の系 (VNA) と、AD3 の 1 MΩ 入力 (50 Ω ではなく電圧比) で見る。S21 = 2*V(out)/V(src)
+V1 s 0 AC 1
+Rs s in 50
+L1 in out 52.1n
+Rl out 0 50
+* AD 側: 発生器 0 Ω、1 MΩ ∥ 24p で読む (CH1 = 手前、CH2 = 向こう側)
+V2 w 0 AC 1
+L2 w o2 52.1n
+Rl2 o2 0 1meg
+Cl2 o2 0 24p
+.ac dec 100 1meg 100meg
+.meas ac s1M FIND mag(v(out)) AT=1meg
+.meas ac s10M FIND mag(v(out)) AT=10meg
+.meas ac s25M FIND mag(v(out)) AT=25meg
+.meas ac s100M FIND mag(v(out)) AT=100meg
+.meas ac a10M FIND mag(v(o2)) AT=10meg
+.meas ac a25M FIND mag(v(o2)) AT=25meg
+.end

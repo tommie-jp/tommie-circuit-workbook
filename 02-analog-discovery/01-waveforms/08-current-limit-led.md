@@ -114,6 +114,10 @@ notes:
 mA の Current Limit が無い以上、**抵抗を省いてよい場面は無い**。LED の
 電流は、ここで確かめたとおり電圧と直列抵抗の組み合わせで決める。
 
+## LTspice での確かめ (対象外)
+
+LED の V<sub>F</sub> を 2.0 V と仮定した直流の算術で確かめた。電流は V+ = 5 V で (5 − 2.0) / 330 = 9.09 mA (LED の電力 2.0 V × 9.09 mA = 18.2 mW)、3 V で (3 − 2.0) / 330 = 3.03 mA。本文の値 (9.1 mA・18 mW・3.0 mA) と合う。実際の V<sub>F</sub> は電流で少し動く (実機で確かめる)。
+
 ## 出典
 
 自作。Supplies の操作 (Master Enable・Positive Supply・Negative Supply・

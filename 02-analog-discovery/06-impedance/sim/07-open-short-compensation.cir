@@ -1,0 +1,12 @@
+* 6-7 基準抵抗 Rref 10k + DUT (Rdut 10k)。寄生は Cstray 2.5p が Rdut に並列、Lstray 43n が直列 (本文の仮定)。1 MHz・振幅 1 V
+V1 in 0 AC 1
+Rref in a 10k
+Ls a b 43n
+Rdut b 0 10k
+Cs b 0 2.5p
+.ac dec 50 100k 10meg
+.meas ac ch1 FIND mag(v(in)-v(a)) AT=1meg
+.meas ac ch2 FIND mag(v(a)) AT=1meg
+.meas ac zmag FIND mag(v(a)/(v(in)-v(a))) AT=1meg
+.meas ac phz FIND ph(v(a)/(v(in)-v(a))) AT=1meg
+.end

@@ -157,6 +157,19 @@ notes:
   発想**。測定治具そのものの寄生を先に測って引き算する、という基本は
   計測全般で共通する
 
+## LTspice での確かめ
+
+`sim/07-open-short-compensation.cir` で、Rref 10 kΩ に L<sub>stray</sub> 43 nH を直列、R<sub>DUT</sub> 10 kΩ に C<sub>stray</sub> 2.5 pF を並列にして 1 MHz で解いた (寄生は本文の仮定で、**実測ではない**)。
+
+| 項目 | 本文の数字 | LTspice | 判定 |
+| --- | --- | --- | --- |
+| 補償前の \|Z<sub>meas</sub>\| | 9.88 kΩ | 9.88 kΩ | 合う |
+| 補償前の位相 | −8.9° | −8.9° | 合う |
+| CH1 (Rref の両端) | 0.505 V | 0.504 V | 合う |
+| CH2 | 0.498 V | 0.498 V | 合う |
+| Z<sub>open</sub> = 1 / (2πfC) | −j63.7 kΩ | (式) 63.66 kΩ | 合う |
+| Z<sub>short</sub> = 2πfL | +j0.27 Ω | (式) 0.270 Ω | 合う |
+
 ## 出典
 
 自作。計器の名前と操作は Digilent の

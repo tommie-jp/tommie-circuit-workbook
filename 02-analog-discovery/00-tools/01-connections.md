@@ -104,6 +104,10 @@ notes:
 
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/graph/01-connections.svg)
 
+## LTspice での確かめ (対象外)
+
+電圧計の差動入力の向きで符号が変わるだけの題で、SPICE で見る回路が無い。電圧計は 2 点の差 (+ 側 − − 側) を読むので、同じ 2 点でも向きを入れ替えると +5.00 V と −5.00 V になる。大きさは入れ替えても変わらない。
+
 ## 出典
 
 自作。計器の名前と操作は Digilent の

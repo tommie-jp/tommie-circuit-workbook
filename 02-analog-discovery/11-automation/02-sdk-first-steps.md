@@ -194,6 +194,10 @@ AD3 の 1 チャンネルあたりのバッファは最大 32768 点 (Scope を 
 外部 SDK) から動かしているだけで、測っている物理量は同じだから。この一致を
 確かめておくと、11-3 以降でバッチ測定を Python 側に任せてよい根拠になる。
 
+## LTspice での確かめ
+
+11-1 と同じ RC ローパス (R 1 kΩ・C 100 nF) で、`11-automation/sim/01-script-sweep.cir` の 1 kHz の値を読んだ。利得 −1.445 dB (0.847 倍)、本文の −1.45 dB・0.847 V と合う。SDK のコード (Python) は実機で動かしておらず、SPICE の対象外 (本文のとおり実機は未確認)。
+
 ## 出典
 
 公式: [Getting Started with WaveForms SDK](https://digilent.com/reference/test-and-measurement/guides/waveforms-sdk-getting-started)

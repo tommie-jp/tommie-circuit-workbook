@@ -1,0 +1,21 @@
+* 2-9 10:1 プローブの補正。信号源 Rs 10k、Scope の入力 1M ∥ 24p (CH1 / CH2 とも)、プローブ Rp 9.1M ∥ Ctrim。
+* 図1 は CH1 が TP に直結のまま CH2 を足した形。本文の表 (直結 = 24 pF、プローブ = 約 2.3 pF) は経路ごとの値なので、ここは経路を別々に解く (sw1 = 直結だけ、sw2 = プローブだけ)
+.param ctrim=2.6p
+V1 s 0 PULSE(0 3.3 10u 1n 1n 0.5m 1m)
+Rs s tp 10k
+* 直結の経路 (CH1)
+Rin1 tp 0 1meg
+Cin1 tp 0 24p
+* プローブの経路 (CH2)
+Rp tp ch2 9.1meg
+Ct tp ch2 {ctrim}
+Rin2 ch2 0 1meg
+Cin2 ch2 0 24p
+.step param ctrim list 1p 2.6p 10p
+.tran 0 0.5m 0 50n
+.meas tran v1us FIND v(ch2) AT=10.5u
+.meas tran v2us FIND v(ch2) AT=11u
+.meas tran vend FIND v(ch2) AT=0.4m
+.meas tran vpk MAX v(ch2) FROM=10u TO=0.4m
+.meas tran vtp FIND v(tp) AT=0.4m
+.end

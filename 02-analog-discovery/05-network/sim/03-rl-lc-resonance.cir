@@ -1,0 +1,24 @@
+* 5-3 RL と LC の共振 (図1: L1 10m、C1 100n、R1 100)。S1 の閉 (C1 短絡) = rsw 1u、開 = rsw 1G。CH2 は R1 の両端
+.param rsw=1u
+V1 in 0 AC 1
+L1 in a 10m
+C1 a b 100n
+RS1 a b {rsw}
+R1 b 0 100
+.step param rsw list 1u 1G
+.ac dec 400 100 100k
+.meas ac g100 FIND mag(v(b)) AT=100
+.meas ac p100 FIND ph(v(b)) AT=100
+.meas ac g1590 FIND mag(v(b)) AT=1591.5
+.meas ac p1590 FIND ph(v(b)) AT=1591.5
+.meas ac g10k FIND mag(v(b)) AT=10k
+.meas ac p10k FIND ph(v(b)) AT=10k
+.meas ac glo FIND mag(v(b)) AT=4301
+.meas ac plo FIND ph(v(b)) AT=4301
+.meas ac g0 FIND mag(v(b)) AT=5033
+.meas ac p0 FIND ph(v(b)) AT=5033
+.meas ac ghi FIND mag(v(b)) AT=5891
+.meas ac phi FIND ph(v(b)) AT=5891
+.meas ac pk MAX mag(v(b))
+.meas ac fpk WHEN mag(v(b))=pk
+.end

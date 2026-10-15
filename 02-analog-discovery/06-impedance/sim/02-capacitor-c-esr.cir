@@ -1,0 +1,15 @@
+* 6-2 / 6-6 基準抵抗 Rref 33 + コンデンサ 4.7u (ESR 直列)。esr = 8 (電解、本文の仮定) と 0.02 (セラミック、6-6 の仮定)。W1 の振幅 0.4 V。
+* CH1 = Rref の両端、CH2 = DUT の両端。DC のオフセット 0.5 V は交流解析に出ない
+.param esr=8
+V1 in 0 AC 0.4
+Rref in a 33
+Resr a b {esr}
+C1 b 0 4.7u
+.step param esr list 8 0.02
+.ac dec 100 100 100k
+.meas ac ch1 FIND mag(v(in)-v(a)) AT=1k
+.meas ac ch2 FIND mag(v(a)) AT=1k
+.meas ac phz FIND ph(v(a)/(v(in)-v(a))) AT=1k
+.meas ac phz100k FIND ph(v(a)/(v(in)-v(a))) AT=100k
+.meas ac zmag FIND mag(v(a)/(v(in)-v(a))) AT=1k
+.end

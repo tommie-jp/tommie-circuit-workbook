@@ -1,0 +1,15 @@
+* 2-9 の表: TP の立ち上がり (10→90 %)。経路を別々に解く。cfg=0: 直結だけ (24 pF)、cfg=1: プローブだけ (Ctrim 2.6p + Cin 24p の直列 約 2.3 pF を介して Rp 9.1M)
+.param cfg=0
+V1 s 0 PULSE(0 3.3 1u 1n 1n 20u 40u)
+Rs s tp 10k
+Rin1 tp 0 {1meg+1e12*cfg}
+Cin1 tp 0 {24p*(1-cfg)+0.01f}
+Rp tp ch2 {9.1meg+1e15*(1-cfg)}
+Ct tp ch2 {2.6p*cfg+0.01f}
+Rin2 ch2 0 1meg
+Cin2 ch2 0 24p
+.step param cfg list 0 1
+.tran 0 6u 0 1n
+.meas tran vmax MAX v(tp) FROM=0.5u TO=6u
+.meas tran tr TRIG v(tp) VAL='0.1*vmax' RISE=1 TARG v(tp) VAL='0.9*vmax' RISE=1
+.end

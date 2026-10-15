@@ -1,0 +1,24 @@
+* 5-11 ツイン T (R 10k×2、2C 20n / C 10n×2、R/2 5k)。load=0 は理想 (無負荷)、load=1 は AD3 の入力 1 MΩ ∥ 24 pF を CH2 に付ける
+.param load=0
+V1 in 0 AC 1
+R1 in a 10k
+R2 a out 10k
+C3 a 0 20n
+C1 in b 10n
+C2 b out 10n
+R3 b 0 5k
+Rl out 0 {1e9/(1+999*load)}
+Cl out 0 {24p*load}
+.step param load list 0 1
+.ac dec 400 100 100k
+.meas ac g01 FIND mag(v(out)) AT=159.15
+.meas ac p01 FIND ph(v(out)) AT=159.15
+.meas ac g09 FIND mag(v(out)) AT=1432.4
+.meas ac p09 FIND ph(v(out)) AT=1432.4
+.meas ac g11 FIND mag(v(out)) AT=1750.7
+.meas ac p11 FIND ph(v(out)) AT=1750.7
+.meas ac g10 FIND mag(v(out)) AT=15915
+.meas ac p10 FIND ph(v(out)) AT=15915
+.meas ac gmin MIN mag(v(out))
+.meas ac fmin WHEN mag(v(out))=gmin
+.end

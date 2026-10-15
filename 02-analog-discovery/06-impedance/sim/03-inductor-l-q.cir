@@ -1,0 +1,11 @@
+* 6-3 基準抵抗 Rref 680 + コイル 10m (巻線抵抗 Rs 8 を直列、本文の仮定)。W1 は 10 kHz・振幅 2 V
+V1 in 0 AC 2
+Rref in a 680
+Rs a b 8
+L1 b 0 10m
+.ac dec 100 1k 100k
+.meas ac ch1 FIND mag(v(in)-v(a)) AT=10k
+.meas ac ch2 FIND mag(v(a)) AT=10k
+.meas ac phz FIND ph(v(a)/(v(in)-v(a))) AT=10k
+.meas ac zmag FIND mag(v(a)/(v(in)-v(a))) AT=10k
+.end

@@ -1,0 +1,13 @@
+* 8-2 基準抵抗 Rref 330 + 10 列の容量。Scope 2 入力の 24 pF × 2 = 48 pF (cin) に Cstray 2.5 pF を挿す (cs = 2.5p) / 抜く (cs = 0)。10 MHz・振幅 1 V (本文の仮定)
+.param cs=0
+V1 in 0 AC 1
+Rref in a 330
+Cin a 0 48p
+Cs a 0 {cs}
+.step param cs list 0 2.5p
+.ac dec 100 100k 100meg
+.meas ac ch1 FIND mag(v(in)-v(a)) AT=10meg
+.meas ac ch2 FIND mag(v(a)) AT=10meg
+.meas ac ch2_1M FIND mag(v(a)) AT=1meg
+.meas ac phz FIND ph(v(a)/(v(in)-v(a))) AT=10meg
+.end

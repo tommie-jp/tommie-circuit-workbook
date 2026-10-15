@@ -1,0 +1,10 @@
+* 3-2 RC ローパス (R1 1k、C1 100n) を Log 掃引 100 Hz〜20 kHz・1 s のチャープで駆動する。f(t) = 100 Hz × 200^t、位相 = 2π·100·(200^t − 1)/ln200 [rad]。
+* 掃引中の CH2 のピークを、掃引の中ほど (0.522 s = 1.59 kHz) と末尾 (20 kHz) で読む。交流解析の値 (定常応答) と比べる
+B1 in 0 V=sin(2*pi*100*(pow(200,time)-1)/5.298317)
+R1 in out 1k
+C1 out 0 100n
+.tran 0 1 0 20u
+.meas tran vlo MAX v(out) FROM=0.0 TO=0.01
+.meas tran vmid MAX v(out) FROM=0.512 TO=0.532
+.meas tran vend MAX v(out) FROM=0.99 TO=1
+.end

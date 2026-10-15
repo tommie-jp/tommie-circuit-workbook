@@ -1,0 +1,14 @@
+* 5-2 RC ハイパス (図1: C1 100n、R1 1k)。理想の素子での突き合わせ
+V1 in 0 AC 1
+C1 in out 100n
+R1 out 0 1k
+.ac dec 200 10 1meg
+.meas ac g100 FIND mag(v(out)) AT=100
+.meas ac p100 FIND ph(v(out)) AT=100
+.meas ac gfc FIND mag(v(out)) AT=1591.5
+.meas ac pfc FIND ph(v(out)) AT=1591.5
+.meas ac g10k FIND mag(v(out)) AT=10k
+.meas ac p10k FIND ph(v(out)) AT=10k
+.meas ac g100k FIND mag(v(out)) AT=100k
+.meas ac p100k FIND ph(v(out)) AT=100k
+.end

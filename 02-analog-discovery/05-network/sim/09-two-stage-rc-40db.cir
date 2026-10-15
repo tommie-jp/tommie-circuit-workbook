@@ -1,0 +1,16 @@
+* 5-9 2 段 RC (R1 1k C1 100n / R2 10k C2 10n)。2 段目が 1 段目を負荷する分を含めて解く
+V1 in 0 AC 1
+R1 in a 1k
+C1 a 0 100n
+R2 a out 10k
+C2 out 0 10n
+.ac dec 200 10 1meg
+.meas ac g01 FIND mag(v(out)) AT=159.15
+.meas ac p01 FIND ph(v(out)) AT=159.15
+.meas ac g1 FIND mag(v(out)) AT=1591.5
+.meas ac p1 FIND ph(v(out)) AT=1591.5
+.meas ac g10 FIND mag(v(out)) AT=15915
+.meas ac p10 FIND ph(v(out)) AT=15915
+.meas ac g100 FIND mag(v(out)) AT=159150
+.meas ac p100 FIND ph(v(out)) AT=159150
+.end

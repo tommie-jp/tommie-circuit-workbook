@@ -1,0 +1,22 @@
+* 5-7 RC ローパス (5-1 と同じ R1 1k、C1 100n)。H(jw) の実部・虚部・大きさ・位相
+V1 in 0 AC 1
+R1 in out 1k
+C1 out 0 100n
+.ac dec 200 10 1meg
+.meas ac re1 FIND re(v(out)) AT=15.9155
+.meas ac im1 FIND im(v(out)) AT=15.9155
+.meas ac re2 FIND re(v(out)) AT=795.77
+.meas ac im2 FIND im(v(out)) AT=795.77
+.meas ac re3 FIND re(v(out)) AT=1591.55
+.meas ac im3 FIND im(v(out)) AT=1591.55
+.meas ac re4 FIND re(v(out)) AT=3183.1
+.meas ac im4 FIND im(v(out)) AT=3183.1
+.meas ac re5 FIND re(v(out)) AT=15915.5
+.meas ac im5 FIND im(v(out)) AT=15915.5
+.meas ac pn1 FIND ph(v(out)) AT=15.9155
+.meas ac gn1 FIND mag(v(out)) AT=15.9155
+.meas ac pn2 FIND ph(v(out)) AT=15915.5
+.meas ac gn2 FIND mag(v(out)) AT=15915.5
+.meas ac pn3 FIND ph(v(out)) AT=159155
+.meas ac gn3 FIND mag(v(out)) AT=159155
+.end

@@ -1,0 +1,14 @@
+* 8-5 加害側 (W1、0 Ω) → Cstray 2.5p → 被害側。被害側の負荷はオシロ入力 1M ∥ 24p、rt = 1e9 (Rterm 無し) / 100 (Rterm 100 Ω 追加)
+.param rt=1e9
+V1 in 0 AC 1
+Cs in v 2.5p
+Rin v 0 1meg
+Cin v 0 24p
+Rt v 0 {rt}
+.step param rt list 1e9 100
+.ac dec 100 100 100meg
+.meas ac l1k FIND mag(v(v)) AT=1k
+.meas ac l1M FIND mag(v(v)) AT=1meg
+.meas ac l10M FIND mag(v(v)) AT=10meg
+.meas ac p10M FIND ph(v(v)) AT=10meg
+.end

@@ -1,0 +1,15 @@
+* 11-1 / 11-2 RC ローパス (R1 1k、C1 100n)。Script が測る 8 点と、11-2 の 1 kHz での利得
+V1 in 0 AC 1
+R1 in out 1k
+C1 out 0 100n
+.ac list 100 300 1k 3k 10k 30k 100k 300k
+.meas ac g100 FIND mag(v(out)) AT=100
+.meas ac g300 FIND mag(v(out)) AT=300
+.meas ac g1k FIND mag(v(out)) AT=1k
+.meas ac g3k FIND mag(v(out)) AT=3k
+.meas ac p3k FIND ph(v(out)) AT=3k
+.meas ac g10k FIND mag(v(out)) AT=10k
+.meas ac g30k FIND mag(v(out)) AT=30k
+.meas ac g100k FIND mag(v(out)) AT=100k
+.meas ac g300k FIND mag(v(out)) AT=300k
+.end

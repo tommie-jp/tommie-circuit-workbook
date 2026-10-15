@@ -1,0 +1,12 @@
+* 3-7 白色雑音 (1 V/√Hz の理想の雑音源) を R1 1k + C1 100n / 1u の RC ローパスに通す。出力の雑音電力 = ∫|H|² df (理想の矩形なら ENBW に当たる)。
+* 1.59 kHz の正弦波成分の比も読む。実際の Wavegen の Noise の中身 (分布・帯域) は非公開なので仮定
+.param c=100n
+V1 in 0 AC 1
+R1 in out 1k
+C1 out 0 {c}
+.step param c list 100n 1u
+.ac dec 400 1 10meg
+.meas ac enbw INTEG mag(v(out))*mag(v(out))
+.meas ac g1p59k FIND mag(v(out)) AT=1590
+.meas ac fc WHEN mag(v(out))=0.707107
+.end

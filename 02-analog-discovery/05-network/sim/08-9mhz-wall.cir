@@ -1,0 +1,18 @@
+* 5-8 の補足: 遮断 28.4 MHz の 7 次ローパス (03-nanovna 6-1: 47p-330n-200p-560n-200p-330n-47p) を 50 Ω の系で見る。
+* S21 = 2*V(out)/V(src) = mag(v(out))+6.0206 dB。9 MHz の壁の表 (1 次ローパスの式) は算術で確かめた。
+V1 s 0 AC 1
+Rs s in 50
+C1 in 0 47p
+L1 in a 330n
+C2 a 0 200p
+L2 a b 560n
+C3 b 0 200p
+L3 b c 330n
+C4 c 0 47p
+Rl c 0 50
+.ac dec 200 1meg 1000meg
+.meas ac g9 FIND mag(v(c)) AT=9meg
+.meas ac g284 FIND mag(v(c)) AT=28.4meg
+.meas ac g100 FIND mag(v(c)) AT=100meg
+.meas ac f3 WHEN mag(v(c))=0.353553
+.end

@@ -1,0 +1,11 @@
+* 6-8 基準抵抗 Rref 220 + バーアンテナ 330u (Q = 100 → Rs = XL/Q = 2.07 Ω を直列、本文の仮定)。100 kHz・振幅 1 V
+V1 in 0 AC 1
+Rref in a 220
+Rs a b 2.07
+L1 b 0 330u
+.ac dec 50 10k 1meg
+.meas ac ch1 FIND mag(v(in)-v(a)) AT=100k
+.meas ac ch2 FIND mag(v(a)) AT=100k
+.meas ac phz FIND ph(v(a)/(v(in)-v(a))) AT=100k
+.meas ac zmag FIND mag(v(a)/(v(in)-v(a))) AT=100k
+.end

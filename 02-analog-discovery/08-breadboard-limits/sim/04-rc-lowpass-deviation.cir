@@ -1,0 +1,14 @@
+* 8-4 / 8-7 RC ローパス R1 10k、C1 10p。載せる容量 ctot = 10p (理論) / 34p (入力 24p 込み) / 36.5p (breadboard 相当) / 34.3p (perfboard 相当)。
+* cfg=1 では AD3 入力の 1 MΩ も R1 と並列に (出力側) 入れる
+.param ctot=10p
+V1 in 0 AC 1
+R1 in out 10k
+C1 out 0 {ctot}
+.step param ctot list 10p 34p 36.5p 34.3p
+.ac dec 200 100k 100meg
+.meas ac g1M FIND mag(v(out)) AT=1meg
+.meas ac p1M FIND ph(v(out)) AT=1meg
+.meas ac g10M FIND mag(v(out)) AT=10meg
+.meas ac p10M FIND ph(v(out)) AT=10meg
+.meas ac fc WHEN mag(v(out))=0.707107
+.end

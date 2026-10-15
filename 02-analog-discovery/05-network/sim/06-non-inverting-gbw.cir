@@ -1,0 +1,16 @@
+* 5-6 非反転増幅 (Rin 1k、Rf 10k / 100k)。オペアンプは 1 次の模型 (DC 利得 100 dB、GBW 1 MHz = LM358 の代表値。仮定で実測ではない)
+.param rf=10k
+V1 in 0 AC 1
+* gm 1m S を Rd 100M と Cd で受ける: A0 = 1e5、GBW = gm/(2 pi Cd) = 1 MHz -> Cd = 159.15 pF
+G1 0 x in n 1m
+Rd x 0 100meg
+Cd x 0 159.15p
+E1 out 0 x 0 1
+Rin n 0 1k
+Rf out n {rf}
+.step param rf list 10k 100k
+.ac dec 200 100 10meg
+.meas ac g1k FIND mag(v(out)) AT=1k
+.meas ac f3db WHEN mag(v(out))='g1k*0.707107'
+.meas ac g10k FIND mag(v(out)) AT=10k
+.end

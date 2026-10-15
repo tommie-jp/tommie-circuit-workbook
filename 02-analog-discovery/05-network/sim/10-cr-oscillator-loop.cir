@@ -1,0 +1,25 @@
+* 5-10 CR 移相発振器を S1 で切ったループ。反転増幅 (Rin 10k、Rf 300k、理想オペアンプ = 利得 1e6 の VCVS) と C・R 3 段 (10n・10k、最後の R は Rt)
+V1 in 0 AC 1
+Rin in n 10k
+Rf n out 300k
+E1 out 0 0 n 1e6
+C1 out a 10n
+R1 a 0 10k
+C2 a b 10n
+R2 b 0 10k
+C3 b c 10n
+Rt c 0 10k
+.ac dec 400 100 10k
+.meas ac g300 FIND mag(v(c)) AT=300
+.meas ac p300 FIND ph(v(c)) AT=300
+.meas ac g500 FIND mag(v(c)) AT=500
+.meas ac p500 FIND ph(v(c)) AT=500
+.meas ac g650 FIND mag(v(c)) AT=649.7
+.meas ac p650 FIND ph(v(c)) AT=649.7
+.meas ac g800 FIND mag(v(c)) AT=800
+.meas ac p800 FIND ph(v(c)) AT=800
+.meas ac g1k FIND mag(v(c)) AT=1k
+.meas ac p1k FIND ph(v(c)) AT=1k
+.meas ac f0 WHEN ph(v(c))=0 CROSS=1
+.meas ac gf0 FIND mag(v(c)) WHEN ph(v(c))=0 CROSS=1
+.end

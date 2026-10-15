@@ -1,0 +1,12 @@
+* 4-10 マイクアンプのバイアス点 (hFE = 100 の仮定、交流は無し)。ECM の直流分は R1 側なのでベースには関係しない
+.model Q1815 NPN (IS=2e-14 BF=100 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+VCC vcc 0 5
+R2 vcc b 100k
+Q1 c b 0 Q1815
+RC vcc c 470
+.dc VCC 4 6 1
+.meas dc ib FIND i(R2) AT=5
+.meas dc ic FIND i(RC) AT=5
+.meas dc vce FIND v(c) AT=5
+.meas dc vbe FIND v(b) AT=5
+.end

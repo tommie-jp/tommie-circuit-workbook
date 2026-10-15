@@ -1,0 +1,10 @@
+* 2-3 100 Hz・0〜3.3 V の方形波を R1 10k・C1 100n に通す。2 周期目の立ち上がり (t = 10 ms) から 1 τ = 1 ms 後の C の電圧と、5 τ 後 (半周期の終わり)
+V1 in 0 PULSE(0 3.3 0 1n 1n 5m 10m)
+R1 in c 10k
+C1 c 0 100n
+.tran 0 40m 0 2u
+.meas tran v1tau FIND v(c) AT=11m
+.meas tran v5tau FIND v(c) AT=14.999m
+.meas tran vlow FIND v(c) AT=9.999m
+.meas tran t63 TRIG v(c) VAL='0.632*3.3' RISE=3 TARG v(in) VAL=1.65 RISE=3
+.end

@@ -1,0 +1,16 @@
+* 2-10 100 kHz・0〜3.3 V の方形波を 1 次ローパス (τ = 25 ns = 付属ワイヤの 55 ns に対応) に通したときの立ち上がり 10→90 %。
+* 9 MHz の 1 次ローパスを発生器と Scope で 2 段重ねた場合も測る。実測ではない
+V1 in 0 PULSE(0 3.3 0 1n 1n 5u 10u)
+R1 in o1 1k
+C1 o1 0 25p
+R3 in a 1k
+C3 a 0 17.684p
+E1 b 0 a 0 1
+R4 b o3 1k
+C4 o3 0 17.684p
+.tran 0 60u 0 0.2n
+.meas tran hi1 MAX v(o1) FROM=40u TO=50u
+.meas tran tr1 TRIG v(o1) VAL='0.1*hi1' RISE=5 TARG v(o1) VAL='0.9*hi1' RISE=5
+.meas tran hi3 MAX v(o3) FROM=40u TO=50u
+.meas tran tr3 TRIG v(o3) VAL='0.1*hi3' RISE=5 TARG v(o3) VAL='0.9*hi3' RISE=5
+.end

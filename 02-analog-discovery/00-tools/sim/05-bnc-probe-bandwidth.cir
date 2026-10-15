@@ -1,0 +1,17 @@
+* 0-5 付属ワイヤのループバック。発生器と Scope をそれぞれ f-3dB = 9 MHz の 1 次ローパスと見立て (仕様の 3 点は 1 次では完全に合わない)、バッファ越しに 2 段重ねる。
+* 実測ではない。1 段の値と 2 段の値を .meas で読み、本文の「仕様から計算」(dB の足し算) と並べる
+V1 in 0 AC 1
+R1 in a 1k
+C1 a 0 17.684p
+E1 b 0 a 0 1
+R2 b o 1k
+C2 o 0 17.684p
+.ac dec 200 10k 100meg
+.meas ac s1_0p8 FIND mag(v(a)) AT=0.8meg
+.meas ac s1_2p9 FIND mag(v(a)) AT=2.9meg
+.meas ac s1_9 FIND mag(v(a)) AT=9meg
+.meas ac s2_0p8 FIND mag(v(o)) AT=0.8meg
+.meas ac s2_2p9 FIND mag(v(o)) AT=2.9meg
+.meas ac s2_9 FIND mag(v(o)) AT=9meg
+.meas ac f3_2 WHEN mag(v(o))=0.707107
+.end

@@ -1,0 +1,13 @@
+* 5-4 RC ローパス (R1 2.2k、C1 47n)。fc と 0.1×・10× の利得・位相
+V1 in 0 AC 1
+R1 in out 2.2k
+C1 out 0 47n
+.ac dec 200 10 1meg
+.meas ac fc3db WHEN mag(v(out))=0.707107
+.meas ac g01 FIND mag(v(out)) AT=153.92
+.meas ac p01 FIND ph(v(out)) AT=153.92
+.meas ac g1 FIND mag(v(out)) AT=1539.2
+.meas ac p1 FIND ph(v(out)) AT=1539.2
+.meas ac g10 FIND mag(v(out)) AT=15392
+.meas ac p10 FIND ph(v(out)) AT=15392
+.end

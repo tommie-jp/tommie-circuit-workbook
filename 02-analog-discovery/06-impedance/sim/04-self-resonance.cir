@@ -1,0 +1,21 @@
+* 6-4 基準抵抗 Rref 10k + コイル 100u (巻線抵抗 Rs 3 を直列、並列に Cp 5p = 寄生容量。いずれも本文の仮定)。
+* DUT の |Z| = Rref × |V(a) / (V(in) − V(a))|、位相 = V(a) の V(in)−V(a) に対する位相 (CH2 − CH1)
+V1 in 0 AC 1
+Rref in a 10k
+Rs a b 3
+L1 b 0 100u
+Cp a 0 5p
+.ac dec 400 100k 20meg
+.meas ac z100k FIND mag(v(a)/(v(in)-v(a))) AT=100k
+.meas ac p100k FIND ph(v(a)/(v(in)-v(a))) AT=100k
+.meas ac z3M FIND mag(v(a)/(v(in)-v(a))) AT=3meg
+.meas ac p3M FIND ph(v(a)/(v(in)-v(a))) AT=3meg
+.meas ac z7M FIND mag(v(a)/(v(in)-v(a))) AT=7meg
+.meas ac p7M FIND ph(v(a)/(v(in)-v(a))) AT=7meg
+.meas ac z75M FIND mag(v(a)/(v(in)-v(a))) AT=7.5meg
+.meas ac p75M FIND ph(v(a)/(v(in)-v(a))) AT=7.5meg
+.meas ac ch1_75 FIND mag(v(in)-v(a)) AT=7.5meg
+.meas ac ch2_75 FIND mag(v(a)) AT=7.5meg
+.meas ac zpk MAX mag(v(a)/(v(in)-v(a)))
+.meas ac fpk WHEN mag(v(a)/(v(in)-v(a)))=zpk
+.end

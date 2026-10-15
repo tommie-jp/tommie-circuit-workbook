@@ -93,6 +93,10 @@ notes:
 
 ![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/01-waveforms/graph/03-voltmeter-logger.svg)
 
+## LTspice での確かめ (対象外)
+
+直流の分圧だけの題で、算術で確かめた。5 V × 1 kΩ / (2.2 kΩ + 1 kΩ) = 1.5625 V。60 点とも同じ値になる。本文の値と合う。
+
 ## 出典
 
 自作。
