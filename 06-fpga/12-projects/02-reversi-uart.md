@@ -824,12 +824,12 @@ Debug Probe でつないでいるときは、DIO3 を GP1 (Probe → Pico 2 の�
 
 ## Logic に見えるはずの画面
 
-PC が `SB` を送り、Pico 2 が `MOd3` を返すところ。**考える時間 (図では GP2 の H の 35 µs) は仮の値**で、測って書き直す。
+PC が `SB` を送り、Pico 2 が `MOd3` を返すところ。**考える時間 (図では BUSY の H の 35 µs) は仮の値**で、測って書き直す。
 字の並びとビットの長さ (8.68 µs) は決まりから決まる。USB でつないでも Debug Probe でつないでも、この 3 本は同じに見える。
 
 ```logic
 # ロジックアナライザの画面 (tommie-fence の logic フェンス)
-title: 図4 SB を受けて MOd3 を返す。GP2 の H の幅が考える時間 (仮)
+title: 図4 SB を受けて MOd3 を返す。BUSY の H の幅が考える時間 (仮)
 device: ad3
 time: 100us/div
 start: 0s
@@ -848,7 +848,8 @@ trigger: BUSY rising at 10us
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/logic/02-reversi-uart-1.svg)
 
 - 1 字は 10 bit (スタート 1・データ 8・ストップ 1) で 86.8 µs。`SB\r\n` の 4 字は 347 µs、`MOd3\r\n` の 6 字は 521 µs で送り終わる
-- X1 (10 µs) は GP2 が H になった所 (LF を受けた所)、X2 (45 µs) は L に戻って `MOd3` の `M` のスタートビットが始まる所 (仮の位置)。**ΔX が Pico 2 の考える時間**を含む
+- レーンの名前とピン: COPY が DIO0 (GP4、受けた行の写し)、TX が DIO1 (GP0、Pico 2 の答え)、BUSY が DIO2 (GP2、時間の印)
+- X1 (10 µs) は BUSY が H になった所 (LF を受けた所)、X2 (45 µs) は L に戻って `MOd3` の `M` のスタートビットが始まる所 (仮の位置)。**ΔX が Pico 2 の考える時間**を含む
 - 写し (`COPY`) と答え (`TX`) は別の UART なので、写しを送っている間に答えが出始めてよい。写しの字の並びが PC の送った行と同じなら、Pico 2 は行を正しく受けている
 - 読み下しの行に、上の「話す行」の表の字が出れば、プロトコルの行の形は合っている
 
@@ -874,6 +875,7 @@ trigger: GAME rising at 1ms
 
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/logic/02-reversi-uart-2.svg)
 
+- レーンの名前とピン: GAME が DIO3 (GP16)、WHITE が DIO4 (GP17)、ERR が DIO5 (GP18)
 - 1 ms の `SW` で GAME (緑) と WHITE (黄) が点く。自分が白なので答えは返さない
 - 5 ms の `MOd3` は合法な手なので、Pico 2 は自分の手を返し、状態は変わらない
 - 9 ms の `MOz9` は座標の書き違いで `-04` を返し、ERR (赤) が点く。13 ms の `PI` は `+PI` を返すので ERR が消える
@@ -894,7 +896,7 @@ trigger: GAME rising at 1ms
 | GP2 の印 | 行ごとに 1 回 H になり、答えを送り始める前に L に戻る | 層 A |
 | 状態の 3 本 (GP16〜GP18) | `SB` で GAME が点き、`EB` で消える。`SW` では WHITE も点く。誤りの答え (`-0x`) で ERR が点き、次の誤りでない行で消える。15 行で 12 回の変わり目が期待どおりの並び | 層 A |
 | LED の電流 | 約 3.9 mA (1 本) | 計算 ((3.3 V − 2.0 V) ÷ 330 Ω、V<sub>F</sub> は見積り) |
-| GP2 の H の幅 (`SB` を受けてから `MOd3` を送り始めるまで) | (測って書く) µs | 図4の ΔX |
+| BUSY (GP2) の H の幅 (`SB` を受けてから `MOd3` を送り始めるまで) | (測って書く) µs | 図4の ΔX |
 | 1 回考える時間 (回路の版) | (測って書く) µs | `XB` の `us` ÷ `moves` |
 | 1 回考える時間 (C の版) | (測って書く) µs | 同上 |
 
