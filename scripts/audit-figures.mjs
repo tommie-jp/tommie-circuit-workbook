@@ -13,7 +13,9 @@
  *    TDR (`tdr`)・`mark` 注釈・XY 表示 (`view: xy`) は別の手段があるので除く。
  * 6. LTspice での確かめの節: 回路図 (circuit) のある題に `## LTspice での確かめ` があるか。
  *    HDL の冊 (`book: fpga`) は、Verilog のある題に `## シミュレーションでの確かめ` (iverilog・Verilator・Yosys) があるかを見る。見出しに「対象外」とあれば算術で確かめた題として別に数える。無い題は `--verbose` で一覧する。
+ * 7. プログラムの確かめの節: Pico のプログラム (C・MicroPython) のある題に `## プログラムでの確かめ` があるか (docs/133)。
  */
+import { extractPrograms } from './pico-extract.mjs';
 import { readEntries } from './collect.mjs';
 import { fencesIn } from './fences.mjs';
 
@@ -101,15 +103,34 @@ export function ltspiceStatus(text) {
   return /対象外/.test(heading[0]) ? 'excluded' : 'checked';
 }
 
+/**
+ * Pico のプログラム (C か MicroPython) のある題の確かめの節の状態: 'checked' | 'excluded' | 'missing'。
+ * `## プログラムの確かめ` (docs/133)。FPGA の冊は `## シミュレーションでの確かめ` でもよい (Verilator と picoemu で確かめた題)。
+ * プログラムが無ければ null。
+ */
+export function programStatus(text) {
+  if (extractPrograms(text).length === 0) return null;
+  const isHdl = /^book:\s*fpga\s*$/m.test(text);
+  const heading = (isHdl ? /^#{2,3}\s+(?:プログラム|シミュレーション)での確かめ.*$/m : /^#{2,3}\s+プログラムでの確かめ.*$/m).exec(text);
+  if (!heading) return 'missing';
+  return /対象外/.test(heading[0]) ? 'excluded' : 'checked';
+}
+
 function main(args) {
   const verbose = args.includes('--verbose');
   const tally = new Map();
   const ltspice = { checked: 0, excluded: 0, missing: 0 };
+  const program = { checked: 0, excluded: 0, missing: 0 };
   for (const read of readEntries()) {
     const status = ltspiceStatus(read.text);
     if (status) {
       ltspice[status] += 1;
       if (verbose && status === 'missing') console.log(`${read.path}: [LTspice 未確認]`);
+    }
+    const pstatus = programStatus(read.text);
+    if (pstatus) {
+      program[pstatus] += 1;
+      if (verbose && pstatus === 'missing') console.log(`${read.path}: [プログラム未確認]`);
     }
     const lines = read.text.split('\n');
     const { blocks } = fencesIn(read.text);
@@ -134,6 +155,7 @@ function main(args) {
     });
   }
   console.log(`確かめの節 (回路図・Verilog のある題): 確認済み ${ltspice.checked} 題・対象外 ${ltspice.excluded} 題・未確認 ${ltspice.missing} 題`);
+  console.log(`プログラムの確かめの節 (Pico のプログラムのある題): 確認済み ${program.checked} 題・対象外 ${program.excluded} 題・未確認 ${program.missing} 題`);
   for (const [kind, count] of tally) console.log(`${kind}: ${count} 件`);
   if (tally.size === 0) console.log('指摘なし');
 }

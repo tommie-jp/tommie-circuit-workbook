@@ -177,6 +177,17 @@ notes:
 
 UART の時間の算術で確かめた。1 ビット 1 / 115200 = 8.68 µs、1 フレーム (start + 8 + stop = 10 ビット) = 86.8 µs、0x55 は LSB から 1・0・1・0… の交互で 57.6 kHz の方形波に見える。9600 bps の 1 ビット 104 µs、115200 / 9600 = 12 倍。図3 の式 (57.6 kHz、78.125 µs = 9 ビット) と合う。
 
+## プログラムでの確かめ
+
+本文のプログラムを PC で動かし、本文の表と同じ量を突き合わせた (`npm run pico:test`・`npm run pico`)。**実機では動かしていない。**
+
+| 見た物 | 結果 | 道具 |
+| --- | --- | --- |
+| UART の設定 | UART0 を 115200 baud・8N1。GP0 が TX、GP1 が RX | C: Pico SDK のモック・MicroPython: `machine` のスタブ |
+| 送る文字 | 0x55 ('U') を 1 s ごと | C: Pico SDK のモック・MicroPython: `machine` のスタブ |
+
+見ていない物: 線の上の波形。UART は picoemu の GPIO の記録に出ないので、picoemu では見ていない
+
 ## 出典
 
 自作。計器の名前と操作は Digilent の

@@ -1,0 +1,35 @@
+name: pico
+
+# Pico 2 のプログラムを wb-pico-sdk (Pico SDK 2.2.0) で .uf2 にし、picoemu (RP2350 のエミュレータ) で
+# GPIO の変化を突き合わせる (docs/133 の前提と層 D)。層 A・A'・B は check.yml が見る。
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pico:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - run: node scripts/pico-extract.mjs
+      # wb-pico-sdk は Pico SDK 2.2.0 と arm-none-eabi-gcc を入れた Docker (06-fpga/00-tools/02 の作り方)。
+      - name: build wb-pico-sdk
+        run: |
+          docker build -t wb-pico-sdk - <<'DOCKERFILE'
+          FROM ubuntu:24.04
+          ENV DEBIAN_FRONTEND=noninteractive
+          RUN apt-get update && apt-get install -y --no-install-recommends \
+                ca-certificates git cmake ninja-build build-essential python3 gcc-arm-none-eabi libnewlib-arm-none-eabi \
+                libstdc++-arm-none-eabi-newlib && rm -rf /var/lib/apt/lists/*
+          RUN git clone -q --depth 1 --branch 2.2.0 https://github.com/raspberrypi/pico-sdk /opt/pico-sdk
+          ENV PICO_SDK_PATH=/opt/pico-sdk
+          DOCKERFILE
+      - run: sh tests/pico/uf2/build.sh
+      - run: sh tests/pico/emu/run.sh

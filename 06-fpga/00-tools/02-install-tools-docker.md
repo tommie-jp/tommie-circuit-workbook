@@ -182,6 +182,16 @@ soft-fpga は `ac6b663` と最新 (`a96633a`) の両方で同じだった。
 
 - `blink.uf2` を Pico 2 に書いて動かすこと (実機。0-3 と 0-4)
 
+## プログラムでの確かめ
+
+本文のプログラムを PC で動かし、本文の表と同じ量を突き合わせた (`npm run pico:test`・`npm run pico`)。**実機では動かしていない。**
+
+| 見た物 | 結果 | 道具 |
+| --- | --- | --- |
+| L チカ | GP15 が 500 ms ごとに反転 | C: Pico SDK のモック・picoemu (Cortex-M33) |
+
+見ていない物: 実機の点灯
+
 ## 出典
 
 自作。Verilator のコンテナは [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `docker/` と `examples/01-counter`。

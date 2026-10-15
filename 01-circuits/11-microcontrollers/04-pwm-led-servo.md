@@ -348,6 +348,20 @@ LED は 1-1 と同じ仮定のモデル。実測ではない。
 `WRAP` 19999 で 20 ms。`duty_u16()` の値は 1.0 ms: 1/20 × 65535 = 3276.75 → 3276、1.5 ms: 4915.1 → 4915、2.0 ms: 6553.5 → 6553 で、
 表と合う。16 段階の最後は 15 × 62.5 = 937.5 → 937 (約 94 %)。サーボの角度とトルクは SPICE の対象外。
 
+## プログラムでの確かめ
+
+本文のプログラムを PC で動かし、本文の表と同じ量を突き合わせた (`npm run pico:test`・`npm run pico`)。**実機では動かしていない。**
+
+| 見た物 | 結果 | 道具 |
+| --- | --- | --- |
+| LED: スライスとピン | GP15 はスライス 7 の B。GPIO の機能は PWM | C: Pico SDK のモック |
+| LED: 周期 | 1 kHz (1 ms) | C: Pico SDK のモック・MicroPython: `machine` のスタブ |
+| LED: デューティ | 最後の段は 937 / 1000 = 93.7 % (MicroPython は 61440 / 65535 = 93.75 %) | C: Pico SDK のモック・MicroPython: `machine` のスタブ |
+| サーボ: 周期 | 20 ms (50 Hz) | C: Pico SDK のモック・MicroPython: `machine` のスタブ |
+| サーボ: パルス幅 | 1.5 ms → 1.0 ms → 2.0 ms の順 (誤差 1 µs 未満) | C: Pico SDK のモック・MicroPython: `machine` のスタブ |
+
+見ていない物: サーボの実際の角度・別電源・LED の明るさ。PWM の出力は picoemu の GPIO の記録に出ないので、picoemu では見ていない
+
 ## 出典
 
 自作。Pico 2 の 3V3 の負荷の目安 (300 mA 未満) は Raspberry Pi Pico 2 データシート、

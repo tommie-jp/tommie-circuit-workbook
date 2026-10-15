@@ -184,6 +184,16 @@ Pico 2 の C / MicroPython と AD3 の Logic の題で、Verilog は無い。確
 `n` を 1 ずつ増やして `n & 1` と `(n >> 1) & 1` を出すと、bit0 は 1 ms ごと (周期 2 ms)、bit1 は 2 ms ごと (周期 4 ms) に反転し、
 値は 0 → 1 → 2 → 3 → 0 と進む。これは本文の表と図 3 のパターンと合う。`sleep_ms(1)` に加わるループの時間 (500 Hz 前後) と電圧は実機が要るので確かめていない。
 
+## プログラムでの確かめ
+
+本文のプログラムを PC で動かし、本文の表と同じ量を突き合わせた (`npm run pico:test`・`npm run pico`)。**実機では動かしていない。**
+
+| 見た物 | 結果 | 道具 |
+| --- | --- | --- |
+| 2 ビットのカウンタ | bit0 (GP14) は 1 ms、bit1 (GP15) は 2 ms ごとに反転 | C: Pico SDK のモック・MicroPython: `machine` のスタブ・picoemu (Cortex-M33) |
+
+見ていない物: AD3 で見た波形・配線
+
 ## 出典
 
 自作。AD3 の Logic の使い方は Digilent の

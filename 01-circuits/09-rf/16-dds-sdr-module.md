@@ -396,6 +396,18 @@ markers: [7M, 18M, 32M, 43M]
 
 アナログ部 (AD9833 の出力段、モジュールの水晶の誤差、tinySA のフロア) は、実物とデータシートに依る値で、SPICE の模型が無い。
 
+## プログラムでの確かめ
+
+本文のプログラムを PC で動かし、本文の表と同じ量を突き合わせた (`npm run pico:test`・`npm run pico`)。**実機では動かしていない。**
+
+| 見た物 | 結果 | 道具 |
+| --- | --- | --- |
+| SPI の設定 | 1 MHz・16 bit・CPOL=1・CPHA=0。GP2 が SCK、GP3 が MOSI | C: Pico SDK のモック・MicroPython: `machine` のスタブ |
+| 送る 16 bit 語 | 0x2100・FREQ0 下位 14 bit・上位 14 bit・0xC000・0x2000 の 5 語。FREQ0 は 75161928 | C: Pico SDK のモック・MicroPython: `machine` のスタブ |
+| 実際の周波数 | 7000000.03 Hz | C: Pico SDK のモック・MicroPython: `machine` のスタブ |
+
+見ていない物: AD9833 の出力波形・振幅
+
 ## 出典
 
 自作。AD9833 の周波数レジスタ・制御語・SPI の読み取りの向き・出力電圧は
