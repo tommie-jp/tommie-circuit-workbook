@@ -261,12 +261,13 @@ lint は警告 0 件。0・1・2・255 番地を読むと、`03` `0a` `11` `fc` 
 実機で RAM を書き込んで読み戻し、読み出しの 1 クロックの遅れと初期値を Logic で見るのは、この題では行っていない。
 この題の数は、書き込む前に分かる範囲に限る。
 
-## シミュレーションでの確かめ (対象外を含む)
+## シミュレーションでの確かめ
 
-Verilator 5.042 と Yosys 0.33 で、本文の `ram.v` `tb_ram.v` `rom256.v` を走らせ直した。
+Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63 で、本文の `ram.v` `tb_ram.v` `rom256.v` を走らせ直した。
 `ramasync` は本文の記述 (`assign dout = mem[addr];`) から書き、`rom.hex` は `i × 7 + 3` の下位 8 ビットで作った。
 置き場は `sim/11-block-ram.v` `sim/11-block-ram-async.v` `sim/11-block-ram-rom.v` `sim/11-block-ram-rom.hex`
 `sim/11-block-ram-tb.v` `sim/11-block-ram-rom-tb.v`。
+配置配線の包みは `sim/11-block-ram-wrap.v` (`ramwrap`。番地・書く値・`we` を 1 本のシフトレジスタで入れ、読んだ値の排他的論理和を 1 本で出す) と `sim/11-block-ram-wrap.cst`。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
@@ -283,11 +284,19 @@ Verilator 5.042 と Yosys 0.33 で、本文の `ram.v` `tb_ram.v` `rom256.v` を
 | ROM 0・1・2・255 番地 | 03・0a・11・fc | 同じ | 合った |
 | ROM の合成 (そのまま) | LUT 33 + MUX2_LUT 26 + DFF 8 | 同じ | 合った |
 | ROM に `rom_style` / `ram_style = "block"` | SPX9 × 1 | 同じ | 合った |
+| yosys 0.70+16 の RAM の部品 (16×8 から 65,536×8、512×32) | 上の 0.33 の表と同じ部品の数 | 同じ。LUT・DFF・MUX2_LUT の付随の数も同じ | 合った |
+| 読みを組み合わせにした (0.70+16) | LUT 148・2,754、MUX2_LUT 56・2,180 (256 × 8・1,024 × 16) | 同じ | 合った |
+| ROM のそのまま (0.70+16) | LUT 33 + MUX2_LUT 26 + DFF 8 | 同じ | 合った |
+| nextpnr の BSRAM (16×8・256×8・1,024×16・2,048×16・8,192×8・16,384×8・32,768×8) | 0・1・1・2・4・8・16 / 26 | 同じ (0.70+16 の `json`) | 合った |
+| nextpnr の 65,536 × 8 | BSRAM 32 / 26 で置けない (`no BELs remaining to implement cell type 'SP'`) | 同じ | 合った |
+| nextpnr の 512 × 32 | 合成は SPX9 1 個、配置配線は hold 時間の違反で止まる | `ERROR: Hold/min time violation for clock 'posedge u.clk'` (BSRAM 1 / 26) で止まった | 合った |
 
 この表は `-json` を付けずに合成した結果である。10-2 の RAM の表は `-json` を付けた 0.33 で LUT になっていた
 (`-json` の有無で 512 語以上が LUT になるか SPX9 になるかが変わった。10-2 の確かめを参照)。
 
-確かめていない数: yosys 0.69 の列、nextpnr の BSRAM の数と「32 / 26 で置けない」エラー、512 × 32 の hold 違反 (nextpnr が無い)。
+yosys 0.33 の `json` を nextpnr に通すと、512 語以上が LUT の RAM (`RAM16SDP4`) になっているため、1,024 × 16 以上は配置が通らない
+(`Unable to place cell ... RAM16SDP4`)。これは上の `-json` の有無の差と同じ現象で、本文の BSRAM の数は 0.69+274 の結果である。
+手元の 0.70+16 はこの表の数を再現した。
 
 ## 出典
 

@@ -292,7 +292,7 @@ trigger: blink_out rising at 0s
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-Verilator 5.042 と Yosys 0.33 で、本文の `top.v` と 2-7 の `blink.v` を走らせ直した。
+Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63・gowin_pack で、本文の `top.v` と 2-7 の `blink.v` を走らせ直した。
 置き場は `sim/04-blink-flow.v` `sim/04-blink-flow-blink.v` `sim/04-blink-flow-tb.v` (27 MHz で 2.3 s 回して `blink_out` の変わり目を書く試験)。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
@@ -300,10 +300,15 @@ Verilator 5.042 と Yosys 0.33 で、本文の `top.v` と 2-7 の `blink.v` を
 | lint (`-Wall`、`top.v` と `blink.v`) | 警告 0 件 | 0 件 | 合った |
 | 点滅の周期 | 1.000 s、H の幅 0.500 s | 0.5 s ごとに反転 (1.000026 s。試験のクロックの半周期を 18.5185 ns と丸めたぶん) | 合った |
 | `led_n` | `blink_out` の反転 | 反転している | 合った |
-| 合成の部品 | DFFR 24・DFFRE 1・ALU 24・LUT1 12・LUT4 8・MUX2_LUT5/6/7 が 6・3・1・IBUF 2・OBUF 2 | 同じ | 合った |
+| 合成の部品 (0.33) | DFFR 24・DFFRE 1・ALU 24・LUT1 12・LUT4 8・MUX2_LUT5/6/7 が 6・3・1・IBUF 2・OBUF 2 | 同じ | 合った |
+| 合成の部品 (0.70+16) | 0.69 では LUT1 8・MUX2_LUT5 4・MUX2_LUT6 1・MUX2_LUT7 なし (FF と ALU は同じ) | LUT1 8・LUT4 8・MUX2_LUT5 4・MUX2_LUT6 1・MUX2_LUT7 なし。FF と ALU は同じ | 合った |
+| nextpnr の使用量 (0.33 の `top.json`) | LUT4 46・ALU 26・DFF 25・IOB 4 | 同じ | 合った |
+| 最高の周波数 (0.33 の `top.json`) | 150.31 MHz (27 MHz で PASS) | 150.31 MHz | 合った |
+| nextpnr の使用量 (0.70+16 の `top.json`) | (記載なし) | LUT4 42・ALU 26・DFF 25・IOB 4 | 合った (LUT4 は版で 46 → 42) |
+| 最高の周波数 (0.70+16 の `top.json`) | (記載なし) | 170.97 MHz (PASS at 27 MHz) | 近い (版の差。配置のシードでも数 MHz 動く) |
+| `top.fs` の大きさ | 2,069,320 バイト | 2,069,320 バイト (どちらの版でも同じ) | 合った |
 
-確かめていない数: nextpnr の使用量 (LUT4 46・ALU 26・DFF 25)・最高の周波数 150.31 MHz・`top.fs` の大きさ
-(nextpnr・gowin_pack が無い)、yosys 0.69 の数、書き込みと AD3 の測定 (実機が要る)。
+確かめていない数: 書き込みと AD3 の測定 (実機が要る)。
 
 ## 出典
 

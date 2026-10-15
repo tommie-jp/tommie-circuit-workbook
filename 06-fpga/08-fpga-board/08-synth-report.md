@@ -207,9 +207,9 @@ lint は警告 0 件。合成の結果は次のとおり。
 実機で書き込んでも、この数は変わらない (数は書き込む前の道具の出力である)。
 自分のボードの数を取るときは、同じコマンドを回して `stat` と `Device utilisation` を読む。
 
-## シミュレーションでの確かめ (対象外を含む)
+## シミュレーションでの確かめ
 
-Yosys 0.33 で、8-4 の `top.v`・8-6 の `top_td4.v`・1-8 の `seg7_decoder.v` を合成し直した。新しく起こした Verilog は無いので、`sim/` には置いていない。
+Yosys 0.33・Yosys 0.70+16 と nextpnr-himbaechel 0.11.1-63 で、8-4 の `top.v`・8-6 の `top_td4.v`・1-8 の `seg7_decoder.v` を合成し直した。新しく起こした Verilog は無いので、`sim/` には置いていない。
 TD4 を変えた `TD4_b.v` は、`TD4.v` の ROM の 10〜12 番地を `sed` で書き換えて作った (本文の 3 行)。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
@@ -219,9 +219,13 @@ TD4 を変えた `TD4_b.v` は、`TD4.v` の ROM の 10〜12 番地を `sed` で
 | `top_td4` (8-6) | LUT 50・MUX 7・ALU 30・FF 35・IBUF 6・OBUF 9 | 同じ | 合った |
 | `TD4_b.v` の lint | 警告 0 件 | 0 件 | 合った |
 | `top_td4` + `TD4_b.v` | FF 40 (DFFC 4・DFFCE 12・DFFP 1・DFFR 22・DFFRE 1)、LUT 56 | 同じ | 合った |
+| yosys 0.70+16 の `stat` の LUT / MUX2_LUT / ALU / FF | `seg7_decoder` 7・0・0・0、`top` 16・5・24・25、`top_td4` 28・0・29・35 | 同じ | 合った |
+| `top_td4` + `TD4_b.v` (0.70+16) | LUT 44 (0.69) | LUT 44・FF 40 | 合った |
+| nextpnr `top` | 0.33: LUT4 46・MUX 6/3/1・ALU 26・DFF 25。0.69: 42・4/1/0・26・25 | 同じ (IOB 4) | 合った |
+| nextpnr `top_td4` | 0.33: LUT4 86・MUX 5/2/0・ALU 36・DFF 35。0.69: 62・0/0/0・34・35 | 同じ (IOB 15) | 合った |
+| 「LUT4 = stat の LUT + nextpnr の ALU」 | 20 + 26 = 46・16 + 26 = 42・50 + 36 = 86・28 + 34 = 62 | 同じ。`TD4_b.v` でも 56 + 36 = 92 (0.33)・44 + 36 = 80 (0.70+16) | 合った |
 
-確かめていない数: yosys 0.69 の列 (LUT 16・28・44 など)、nextpnr の `Device utilisation` と
-「LUT4 = stat の LUT + nextpnr の ALU」の足し算 (nextpnr が無い。足す元の stat の LUT 数は上で合っている)。
+表の 0.69 の列は、手元の 0.70+16 で数が同じだった (本文の 0.69+274 と同じ数。版の差は見えなかった)。
 
 ## 出典
 

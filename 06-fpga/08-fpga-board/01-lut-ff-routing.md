@@ -233,7 +233,7 @@ LUT の数は、同じ Verilog でも合成の道具と版で変わることが�
 
 ## シミュレーションでの確かめ
 
-Verilator 5.042 と Yosys 0.33 で、本文の `maj3.v` `count2.v` と 1-1 の `gates.v` を走らせ直した。
+Verilator 5.042 と Yosys 0.33・0.70+16 で、本文の `maj3.v` `count2.v` と 1-1 の `gates.v` を走らせ直した。
 置き場は `sim/01-lut-ff-routing-maj3.v` と `sim/01-lut-ff-routing-count2.v` (`gates.v` は 1-1 のもの)。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
@@ -242,9 +242,11 @@ Verilator 5.042 と Yosys 0.33 で、本文の `maj3.v` `count2.v` と 1-1 の `
 | `maj3` の合成 | LUT3 × 1 (INIT 0xE8)、IBUF 3・OBUF 1 | 同じ | 合った |
 | `gates` の合成 | LUT2 × 2 (0x8・0xE)、LUT1 × 1 (0x1) | 同じ | 合った |
 | `count2` の合成 | DFFR × 2、LUT1 × 1 (0x1)、LUT2 × 1 (0x6) | 同じ | 合った |
+| 0.70+16 での `maj3`・`gates`・`count2` | (0.33 の数) | LUT3 × 1・(LUT2 × 2 と LUT1 × 1)・(DFFR × 2 と LUT1 × 1 と LUT2 × 1)。0.33 と同じ数 | 合った |
+| 点滅の回路の `MUX2_LUT5` | 6 個 | 8-4 の `top.v` を yosys 0.33 で合成して nextpnr 0.11.1-63 に通すと MUX2_LUT5 6・MUX2_LUT6 3・MUX2_LUT7 1。yosys 0.70+16 では 4・1・0 | 合った (版で減る) |
 
 Tang Nano 9K の LUT・FF の総数 (8,640・6,480) と、点滅の回路で `MUX2_LUT5` が 6 個出るという記述は、
-前者はメーカーの資料の値で、後者は 8-4 で確かめた (この環境の nextpnr は無い)。
+前者はメーカーの資料の値で、後者は 8-4 の `top.v` を nextpnr に通して確かめた (上の表。8,640・6,480 は nextpnr の `Device utilisation` の分母でも同じ値だった)。
 
 ## 出典
 

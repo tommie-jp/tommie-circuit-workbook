@@ -312,7 +312,7 @@ trigger: q3 rising at 0s
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-Verilator 5.042 と Yosys 0.33 で、本文の `top_count.v` `tb_count.v` と 2-4 の `counter.v` を走らせ直した。
+Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63 で、本文の `top_count.v` `tb_count.v` と 2-4 の `counter.v` を走らせ直した。
 置き場は `sim/07-speed-soft-vs-fpga.v` と `sim/07-speed-soft-vs-fpga-tb.v`。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
@@ -321,10 +321,13 @@ Verilator 5.042 と Yosys 0.33 で、本文の `top_count.v` `tb_count.v` と 2-
 | `q3` の変わり目 | 8 クロックごと (clock 8・16・24・32) | 同じ | 合った |
 | `q4` の変わり目 | 16 クロックごと (clock 16・32・48)、`q3` が下がるのと同じクロック | 同じ | 合った |
 | 図4 の `q4` の pattern | 00110011001100110 (296.3 ns/ビット) | 上の変わり目から読み直して同じ | 合った |
-| 合成 | DFFR 5・ALU 5・LUT1 5 | 同じ | 合った |
+| 合成 (0.33) | DFFR 5・ALU 5・LUT1 5 | 同じ | 合った |
+| 合成 (0.70+16) | (記載なし) | DFFR 5・ALU 5・LUT1 2 (LUT1 は版で 5 → 2) | 合った (版の差) |
+| nextpnr の最高の周波数 (0.33 の `json`) | 295.60 MHz | 295.60 MHz (27 MHz で PASS。LUT4 11・ALU 6・DFF 5) | 合った |
+| nextpnr の最高の周波数 (0.70+16 の `json`) | (記載なし) | 283.61 MHz (LUT4 8・ALU 6・DFF 5) | 近い (版の差) |
+| 8-6 の TD4 の 226.24 MHz | 226.24 MHz | 8-6 の表で同じ値を確かめた | 合った |
 
-確かめていない数: nextpnr の最高の周波数 295.60 MHz と 226.24 MHz (nextpnr が無い)、
-Soft-FPGA との速さの比 (本文でも未測定)、AD3 の測定 (実機が要る)。
+確かめていない数: Soft-FPGA との速さの比 (本文でも未測定)、AD3 の測定 (実機が要る)。
 
 ## 出典
 

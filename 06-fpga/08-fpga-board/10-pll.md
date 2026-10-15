@@ -369,7 +369,7 @@ trigger: out_2m rising at 0s
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-Verilator 5.042 と Yosys 0.33 で、本文の `div2m.v` `top_pll.v` `pll108.v` `tb_div2m.v` を走らせ直した。
+Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63・gowin_pack・`gowin_pll` で、本文の `div2m.v` `top_pll.v` `pll108.v` `tb_div2m.v` を走らせ直した。
 置き場は `sim/10-pll-div2m.v` `sim/10-pll.v` `sim/10-pll-pll108.v` `sim/10-pll-tb.v`。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
@@ -379,10 +379,15 @@ Verilator 5.042 と Yosys 0.33 で、本文の `div2m.v` `top_pll.v` `pll108.v` 
 | `div2m` の変わり目 | 32 クロック、その後 27 クロックごと | 同じ | 合った |
 | 合成 | rPLL 1・ALU 5・DFFR 5・DFFRE 1・LUT1 7・LUT4 2・MUX2_LUT5 3・MUX2_LUT6 1 | 同じ | 合った |
 | PLL の設定 (27 MHz × 4 = 108 MHz、VCO 432 MHz) | IDIV 0・FBDIV 3・ODIV 4 | 式で確かめた (27 × (3 + 1) ÷ (0 + 1) = 108、108 × 4 = 432) | 合った |
+| `gowin_pll` の表 (54・108・100・50・2・600 MHz) | 作れた周波数と IDIV・FBDIV・ODIV・VCO | 6 行とも同じ (100.286・50.143・3.375・594.000 MHz を含む) | 合った |
+| nextpnr の使用量 | IOB 3・LUT4 15・ALU 6・DFF 6・rPLL 1 / 2 | 同じ (0.33 と 0.70+16 の `json` で同じ) | 合った |
+| `pnr.json` の rPLL の設定 | `FCLKIN` 27.0・`IDIV_SEL` 0・`FBDIV_SEL` 3・`ODIV_SEL` 4 | 同じ | 合った |
+| `pll.clock_in` の配線 | 専用のクロックの配線だけで通る | `net was routed using global resources only` | 合った |
+| 108 MHz の最高の周波数 | 216.73 MHz (PASS at 108.00 MHz) | 216.73 MHz (0.70+16 の `json`)。0.33 の `json` では 202.88 MHz | 合った (0.33 は版の差で近い) |
+| `top.fs` の大きさ | (記載なし) | 2,069,320 バイト | 合った |
 
 PLL の中身はシミュレーションできないので、108 MHz が実際に出ることは確かめていない。
-確かめていない数: nextpnr の使用量と 216.73 MHz、`pnr.json` の rPLL の設定 (nextpnr が無い)、AD3 の測定。
-`gowin_pll` の出力の再現も、この環境に道具が無いので行っていない。
+確かめていない数: AD3 の測定 (実機が要る)。
 
 ## 出典
 

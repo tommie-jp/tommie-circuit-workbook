@@ -489,7 +489,7 @@ trigger: BTN falling at 0s
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-Verilator 5.042 と Yosys 0.33 で、本文の `top_btn_seg.v` `top_raw.v` `tb_btn_seg.v` と、6-3 の `debounce.v`・1-8 の `seg7_decoder.v` を走らせ直した。
+Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63・gowin_pack で、本文の `top_btn_seg.v` `top_raw.v` `tb_btn_seg.v` と、6-3 の `debounce.v`・1-8 の `seg7_decoder.v` を走らせ直した。
 置き場は `sim/09-button-seg7.v` `sim/09-button-seg7-raw.v` `sim/09-button-seg7-tb.v` `sim/09-button-seg7-raw-tb.v`
 (`-raw-tb.v` は `top_raw` を同じ押し方で動かす試験で、本文の `tb_btn_seg` の回路名だけ替えた)。
 
@@ -499,9 +499,12 @@ Verilator 5.042 と Yosys 0.33 で、本文の `top_btn_seg.v` `top_raw.v` `tb_b
 | 跳ねを取った回路 | n = 0・1・2・3、seg = 0111111・0000110・1011011・1001111 (3.0・207.0・411.0・615.0 ms) | 同じ | 合った |
 | 跳ねを取らない回路 | n = 0・2・4・6 | 同じ | 合った |
 | 合成 (0.33) | LUT 39・MUX 10・ALU 24・FF 35 | 同じ (FF の DFF 7 個が `seg` の分) | 合った |
+| 合成 (0.70+16) | LUT 45・MUX2_LUT 24・ALU 24・FF 35 (0.69 の列) | 同じ | 合った |
+| nextpnr (0.33 の `json`) | LUT4 67・IOB 10・126.39 MHz | 同じ | 合った |
+| nextpnr (0.70+16 の `json`) | LUT4 73・IOB 10・167.73 MHz | 同じ | 合った |
+| `top.fs` の大きさ | 2,069,320 バイト | 2,069,320 バイト | 合った |
 
-確かめていない数: yosys 0.69 の列、nextpnr の LUT4 67・最高の周波数 126.39 MHz・`top.fs` の大きさ (nextpnr が無い)、
-実機のボタンの跳ねの数。
+確かめていない数: 実機のボタンの跳ねの数。
 
 ## 出典
 

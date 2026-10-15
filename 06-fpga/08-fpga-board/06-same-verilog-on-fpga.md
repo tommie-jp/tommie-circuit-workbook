@@ -477,7 +477,7 @@ trigger: td4_clk rising at 0s
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-Verilator 5.042 と Yosys 0.33 で、本文の `top_gates.v` `top_td4.v` `tb_gates.v` `tb_td4.v` を走らせ直した。
+Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63 で、本文の `top_gates.v` `top_td4.v` `tb_gates.v` `tb_td4.v` を走らせ直した。
 `gates.v` は 1-1、`blink.v` は 2-7、`TD4.v` は Soft-FPGA-TD4 の `verilator-TD4/TD4.v` (コミット b74bed1) を使った。
 置き場は `sim/06-same-verilog-on-fpga-gates.v` `sim/06-same-verilog-on-fpga-td4.v`
 `sim/06-same-verilog-on-fpga-gates-tb.v` `sim/06-same-verilog-on-fpga-td4-tb.v`。
@@ -492,8 +492,11 @@ Verilator 5.042 と Yosys 0.33 で、本文の `top_gates.v` `top_td4.v` `tb_gat
 | 図4 の 4 本の pattern | `out3`〜`out0` の 13 個ずつ | 上の並びから読み直して同じ | 合った |
 | 合成 `top_gates` | LUT1 × 1・LUT2 × 4・FF 0 | 同じ | 合った |
 | 合成 `top_td4` | LUT 50 (25・8・8・9)・FF 35 (DFFC 4・DFFCE 8・DFFR 22・DFFRE 1)・ALU 30 | 同じ | 合った |
+| nextpnr `top_gates` | クロックが無い | `No Fmax available; no interior timing paths found`。LUT4 5・IOB 10 (どちらの版でも) | 合った |
+| nextpnr `top_td4` (0.33 の `json`) | 27 MHz のクロック 150.74 MHz、TD4 のクロック 226.24 MHz | 同じ (`div.clk` 150.74・`slow` 226.24。使用量は LUT4 86・ALU 36・DFF 35・IOB 15) | 合った |
+| nextpnr `top_td4` (0.70+16 の `json`) | (記載なし) | LUT 28 (LUT1 8・LUT2 1・LUT3 5・LUT4 14)・ALU 29・FF 35。LUT4 62。`div.clk` 207.34 MHz・`cpu.clock` 182.25 MHz (クロックの名前も版で変わる) | 近い (版の差。TD4 のクロックの数は 0.33 より低い) |
 
-確かめていない数: nextpnr の最高の周波数 (150.74 MHz・226.24 MHz。nextpnr が無い)、実機の DIP スイッチ・LED・AD3 の測定。
+確かめていない数: 実機の DIP スイッチ・LED・AD3 の測定。
 
 ## 出典
 

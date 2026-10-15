@@ -353,9 +353,9 @@ trigger: out_3m rising at 0s
 実機で測ったら、3 MHz の H の幅 (予想 148 ns) を書き加える。ΔX の読み (1 µs の窓の中の 3 周期) を 100 MS/s の 10 ns 刻みで確かめられる。
 もし 27 MHz (または 108 MHz) をピンに出して測るなら、それはこの本の範囲外で、題を分けて扱う。
 
-## シミュレーションでの確かめ (対象外を含む)
+## シミュレーションでの確かめ
 
-Verilator 5.042 と Yosys 0.33 で、本文の `clkdiv.v` `top_div.v` `tb_div.v` を走らせ直した。
+Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63・gowin_pack で、本文の `clkdiv.v` `top_div.v` `tb_div.v` を走らせ直した。
 置き場は `sim/13-divide-for-breadboard-clkdiv.v` `sim/13-divide-for-breadboard.v`
 `sim/13-divide-for-breadboard-tb.v` `sim/13-divide-for-breadboard-raw.v` (`top_raw`)。
 
@@ -367,9 +367,12 @@ Verilator 5.042 と Yosys 0.33 で、本文の `clkdiv.v` `top_div.v` `tb_div.v`
 | `out_100k` の H・L | 1350・1350 | 同じ | 合った |
 | 合成 (0.33) | LUT 56・MUX2_LUT 4・ALU 32・FF 21 | 同じ (DFFR 18・DFFS 3) | 合った |
 | `top_raw` (27 MHz をそのままピンへ) | 合成が通る | 通った (IBUF 1・OBUF 1) | 合った |
+| 合成 (0.70+16) | LUT 33・MUX2_LUT 12・ALU 30・FF 21 | 同じ | 合った |
+| nextpnr (0.33 の `json`) | LUT4 98・151.38 MHz (27 MHz で PASS) | 同じ (ALU 42・DFF 21・IOB 5) | 合った |
+| nextpnr (0.70+16 の `json`) | LUT4 75・222.22 MHz | 同じ | 合った |
+| `top_raw` の配置配線・ビットストリーム | エラー無し・IOB 2 / 276・`.fs` 2,069,320 | 同じ (`No Fmax available`。どちらの版でも) | 合った |
 
-確かめていない数: yosys 0.69 の列 (LUT 33 など)、nextpnr の LUT4 98・最高の周波数 151.38 MHz、
-`top_raw` の配置配線・ビットストリーム作り (nextpnr・gowin_pack が無い)。
+本文の 0.69+274 の列の数は、手元の 0.70+16 で同じだった。確かめていない数は無い。
 
 ## 出典
 

@@ -213,10 +213,22 @@ IO38 (DIO0) は、書き換えたあとは回路から外れる。外れたピ�
 
 実機で書き込んだら、DIO0 と DIO1 を両方 Enable にして、点滅が DIO1 だけに出ることを確かめる。
 
-## シミュレーションでの確かめ (対象外)
+## シミュレーションでの確かめ
 
-制約ファイル (`.cst`) の書き方と、nextpnr・gowin_pack が言うことを読む題で、確かめには nextpnr-himbaechel と gowin_pack
-が要る。この環境には無いので、エラーの文言と `IOBA`・`IOBB` の置き場所は確かめていない。
+nextpnr-himbaechel 0.11.1-63 と gowin_pack (OSS CAD Suite、yosys 0.70+16) で、8-4 の `top.v` と `top.cst` を書き換えて通し直した。
+制約ファイルの書き換えは配置配線から先にしか効かない (本文のとおり) ので、合成は 1 回だけ行った。実機には書き込んでいない。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| `blink_out` のバッファの置き場所 (38 番 → 37 番) | `X30Y28/IOBB` → `X30Y28/IOBA` | `pnr.json` の `NEXTPNR_BEL` が同じ | 合った |
+| `blink_out` の行を消した | `ERROR: Unconstrained IO:blink_out_OBUF_O`・止まる | 同じ | 合った |
+| 無い番号 (200) | `ERROR: Pin 200 not found (pin# style)`・止まる | 同じ (続けて `failed to parse CST file` も出る) | 合った |
+| 2 つの出力を同じピン (10) | `ERROR: Can't place blink_out_OBUF_O at X0Y14/IOBA because it's already taken by led_n_OBUF_O`・止まる | 同じ | 合った |
+| Verilog に無い名前 (`nosuch`) | `Info: Cell nosuch not found`・止まらない | 同じ。gowin_pack も `.fs` を作った | 合った |
+| 1.8 V の 79 番に `LVCMOS33` | 何も言わない・gowin_pack も `.fs` を作る | 同じ (エラーも警告も無い) | 合った |
+
+`Cell O_psram_ck[0] not found` のような `Info` が、制約ファイルが正しいときにも 26 行ほど出る (nextpnr が持つ既定の制約の分)。
+`nosuch` の行はその中から探すと 1 行見つかる。実機での確かめは、この題では行っていない。
 
 ## 出典
 
