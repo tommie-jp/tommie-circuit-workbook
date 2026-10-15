@@ -1,0 +1,55 @@
+* 10-6 74HC595 (図1): シフトレジスタ (4 段) とストレージ (4 段) を NAND 6 個の D-FF (10-5 と同じ構成) で表した。SER = 1 のまま、SRCLK のあとで RCLK を 4 回、そのあと SER = 0 で 1 回
+.subckt NAND2 a b y
+B1 y0 0 V=5*(1-(V(a)>2.5 & V(b)>2.5))
+R1 y0 y 1k
+C1 y 0 100p
+.ends
+.subckt NAND3 a b c y
+B1 y0 0 V=5*(1-(V(a)>2.5 & V(b)>2.5 & V(c)>2.5))
+R1 y0 y 1k
+C1 y 0 100p
+.ends
+.subckt DFF d clk q qb
+X1 n4 n2 n1 NAND2
+X2 n1 clk n2 NAND2
+X3 n2 clk n4 n3 NAND3
+X4 n3 d n4 NAND2
+X5 n2 qb q NAND2
+X6 q n3 qb NAND2
+.ends
+* SER は 90 us まで 1、そのあと 0
+Vser ser 0 PWL(0 5 85u 5 85.001u 0)
+* SRCLK: 10, 30, 50, 70, 90 us に 5 us のパルス。RCLK: 17, 37, 57, 77, 97 us に 5 us のパルス
+Vsr sr 0 PULSE(0 5 10u 1n 1n 5u 20u)
+Vrc rc 0 PULSE(0 5 17u 1n 1n 5u 20u)
+XS1 ser sr a1 a1b DFF
+XS2 a1 sr a2 a2b DFF
+XS3 a2 sr a3 a3b DFF
+XS4 a3 sr a4 a4b DFF
+XR1 a1 rc qa qab DFF
+XR2 a2 rc qb qbb DFF
+XR3 a3 rc qc qcb DFF
+XR4 a4 rc qd qdb DFF
+.ic V(a1)=0 V(a1b)=5 V(a2)=0 V(a2b)=5 V(a3)=0 V(a3b)=5 V(a4)=0 V(a4b)=5 V(qa)=0 V(qab)=5 V(qb)=0 V(qbb)=5 V(qc)=0 V(qcb)=5 V(qd)=0 V(qdb)=5
+.tran 0 120u
+.meas tran qa1 FIND V(qa) AT 30u
+.meas tran qb1 FIND V(qb) AT 30u
+.meas tran qc1 FIND V(qc) AT 30u
+.meas tran qd1 FIND V(qd) AT 30u
+.meas tran qa2 FIND V(qa) AT 50u
+.meas tran qb2 FIND V(qb) AT 50u
+.meas tran qc2 FIND V(qc) AT 50u
+.meas tran qd2 FIND V(qd) AT 50u
+.meas tran qa3 FIND V(qa) AT 70u
+.meas tran qb3 FIND V(qb) AT 70u
+.meas tran qc3 FIND V(qc) AT 70u
+.meas tran qd3 FIND V(qd) AT 70u
+.meas tran qa4 FIND V(qa) AT 90u
+.meas tran qb4 FIND V(qb) AT 90u
+.meas tran qc4 FIND V(qc) AT 90u
+.meas tran qd4 FIND V(qd) AT 90u
+.meas tran qa5 FIND V(qa) AT 110u
+.meas tran qb5 FIND V(qb) AT 110u
+.meas tran qc5 FIND V(qc) AT 110u
+.meas tran qd5 FIND V(qd) AT 110u
+.end

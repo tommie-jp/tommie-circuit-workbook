@@ -1,0 +1,35 @@
+* 8-1 2SC1815 1 段増幅 + 出力アッテネータ (図1): アンプ単体 (V(o)) とアッテネータ込み (V(p)) の S21 を LTspice で確かめる
+* S21 = 2·V(出力)/Vs (電源 50 Ω・出力 50 Ω 終端)。直流の動作点は Ic = 4.3 mA で小信号の模型に置いた
+* ハイブリッド π (2SC1815、Ic = 4.3 mA の仮定。実測ではない)
+* gm = Ic / 26 mV = 0.1654 S、rπ = hFE / gm = 1209 Ω (hFE = 200)、Cπ = gm / (2π fT) − Cμ = 327 pF (fT = 80 MHz)
+* Cμ = 2 pF (Cob)、rbb' = 50 Ω、ro = VA / Ic = 23.3 kΩ (VA = 100 V)
+Gm c e bp e 0.16538
+Rpi bp e 1209.3
+Cpi bp e 327p
+Cmu bp c 2p
+Ro c e 23.3k
+Rbb b bp 50
+Vs s 0 AC 1
+Rs s in 50
+C1 in b 0.1u
+R1 vcc b 8k2
+R2 b 0 3k9
+Vcc vcc 0 0
+Rc vcc c 270
+Re e 0 200
+Ce e 0 10u
+C2 c o 0.1u
+Ra1 o 0 100
+Ra2 o p 68
+Ra3 p 0 100
+RL p 0 50
+.ac dec 200 0.5Meg 40Meg
+.meas AC amp1 FIND V(o) AT 1Meg
+.meas AC att1 FIND V(p) AT 1Meg
+.meas AC amp5 FIND V(o) AT 5Meg
+.meas AC att5 FIND V(p) AT 5Meg
+.meas AC amp10 FIND V(o) AT 10Meg
+.meas AC att10 FIND V(p) AT 10Meg
+.meas AC amp30 FIND V(o) AT 30Meg
+.meas AC att30 FIND V(p) AT 30Meg
+.end

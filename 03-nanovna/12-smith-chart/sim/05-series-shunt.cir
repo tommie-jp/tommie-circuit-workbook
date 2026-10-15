@@ -1,0 +1,46 @@
+* 12-5 直列と並列 — 直列は R の円の上を、並列は G の円の上を動く: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac dec 2000 490196 3.06e+06
+* 図1: series L 3.9u / series R 24 / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+L1_0_0 n0_0 n1_0 3.900000000e-06 Rser=1u
+R2_0_0 n1_0 n2_0 2.400000000e+01
+Rend_0 n2_0 0 1u
+.meas AC a0_0 FIND V(n0_0) AT 500000
+.meas AC a0_1 FIND V(n0_0) AT 1000000
+.meas AC a0_2 FIND V(n0_0) AT 2000000
+.meas AC a0_3 FIND V(n0_0) AT 3000000
+* 図2: series C 10n / series R 24 / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+C1_0_1 n0_1 n1_1 1.000000000e-08
+R2_0_1 n1_1 n2_1 2.400000000e+01
+Rend_1 n2_1 0 1u
+.meas AC a1_0 FIND V(n0_1) AT 500000
+.meas AC a1_1 FIND V(n0_1) AT 1000000
+.meas AC a1_2 FIND V(n0_1) AT 2000000
+.meas AC a1_3 FIND V(n0_1) AT 3000000
+* 図3: shunt C 3.3n / series R 24 / short
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+C1_0_2 n0_2 0 3.300000000e-09
+R2_0_2 n0_2 n1_2 2.400000000e+01
+Rend_2 n1_2 0 1u
+.meas AC a2_0 FIND V(n0_2) AT 500000
+.meas AC a2_1 FIND V(n0_2) AT 1000000
+.meas AC a2_2 FIND V(n0_2) AT 2000000
+.meas AC a2_3 FIND V(n0_2) AT 3000000
+* 図4: shunt L 3.9u / series R 24 / short
+Vs_3 s_3 0 AC 1
+Rs_3 s_3 n0_3 50
+L1_0_3 n0_3 0 3.900000000e-06 Rser=1u
+R2_0_3 n0_3 n1_3 2.400000000e+01
+Rend_3 n1_3 0 1u
+.meas AC a3_0 FIND V(n0_3) AT 500000
+.meas AC a3_1 FIND V(n0_3) AT 1000000
+.meas AC a3_2 FIND V(n0_3) AT 2000000
+.meas AC a3_3 FIND V(n0_3) AT 3000000
+.end

@@ -1,0 +1,20 @@
+* 10-3 全加算器 (図1): S1 = A xor B、C1 = A and B、S = S1 xor Cin、C2 = S1 and Cin、Cout = C1 or C2。ゲートは B 電源の理想の論理
+* A・B・Cin を 000〜111 に振って S と Cout を読む (.step の番号は a b cin の昇順の組)
+.param a=0 b=0 c=0
+Va a 0 {5*a}
+Vb b 0 {5*b}
+Vc c 0 {5*c}
+Bs1 s1 0 V=5*((V(a)>2.5) != (V(b)>2.5))
+Bc1 c1 0 V=5*(V(a)>2.5 & V(b)>2.5)
+Bs s 0 V=5*((V(s1)>2.5) != (V(c)>2.5))
+Bc2 c2 0 V=5*(V(s1)>2.5 & V(c)>2.5)
+Bco co 0 V=5*(V(c1)>2.5 | V(c2)>2.5)
+.step param a list 0 1
+.step param b list 0 1
+.step param c list 0 1
+.tran 0 1u
+.meas tran vs1 AVG V(s1) FROM=0.5u TO=1u
+.meas tran vc1 AVG V(c1) FROM=0.5u TO=1u
+.meas tran vsum AVG V(s) FROM=0.5u TO=1u
+.meas tran vco AVG V(co) FROM=0.5u TO=1u
+.end

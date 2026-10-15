@@ -137,6 +137,18 @@ markers:
 - 測った Δφ から、**1 °C あたりの割合 k = Δφ / (360° × f × τ × 20)** が求まる。
   仮定した 100 ppm と比べてみる
 
+## LTspice での確かめ
+
+`sim/11-cable-temperature.cir` で、図の `dut:` の模型を LTspice の AC 解析にかけた (50 Ω の電源と 50 Ω の終端。LTspice のコイルに付く既定の直列抵抗は 1 µΩ に固定)。
+理想の模型どうしの比べで、実測ではない。
+
+| 図 | 周波数 | 項目 | 図の読み値 | LTspice | 判定 |
+| --- | --- | --- | --- | --- | --- |
+| 図2 | 430 MHz | S21 位相 | 96.41° | 96.4° | 合う |
+| 図3 | 430 MHz | S21 位相 | 80.97° | 81.0° | 合う |
+
+2 点すべて図の読み値と合う。
+
 ## 出典
 
 自作。ケーブルの電気長の温度係数の測定例: X. Ma ほか, "Phase-temperature stability measurement of various RF coaxial cables", IBIC2024, THP46 (doi:10.18429/JACoW-IBIC2024-THP46)。

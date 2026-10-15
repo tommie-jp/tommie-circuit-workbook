@@ -1,0 +1,64 @@
+* 12-3 Γ の円と SWR — 負荷の SWR は中心からの距離、線路を足すと円を回る: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac dec 2000 725490 2.9784e+06
+* 図3: shunt C 390p / series L 2.2u / shunt C 820p / series L 2.2u / shunt C 820p / series L 2.2u / shunt C 820p / series L 2.2u / shunt C 390p / series R 100 / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+C1_0_0 n0_0 0 3.900000000e-10
+L2_0_0 n0_0 n1_0 2.200000000e-06 Rser=1u
+C3_0_0 n1_0 0 8.200000000e-10
+L4_0_0 n1_0 n2_0 2.200000000e-06 Rser=1u
+C5_0_0 n2_0 0 8.200000000e-10
+L6_0_0 n2_0 n3_0 2.200000000e-06 Rser=1u
+C7_0_0 n3_0 0 8.200000000e-10
+L8_0_0 n3_0 n4_0 2.200000000e-06 Rser=1u
+C9_0_0 n4_0 0 3.900000000e-10
+R10_0_0 n4_0 n5_0 1.000000000e+02
+Rend_0 n5_0 0 1u
+.meas AC a0_0 FIND V(n0_0) AT 780000
+.meas AC a0_1 FIND V(n0_0) AT 1470000
+.meas AC a0_2 FIND V(n0_0) AT 2920000
+* 図6: shunt C 390p / series L 2.2u / shunt C 820p / series L 2.2u / shunt C 820p / series L 2.2u / shunt C 820p / series L 2.2u / shunt C 820p / series L 2.2u / shunt C 820p / series L 2.2u / shunt C 820p / series L 2.2u / shunt C 820p / series L 2.2u / shunt C 390p / series R 100 / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+C1_0_1 n0_1 0 3.900000000e-10
+L2_0_1 n0_1 n1_1 2.200000000e-06 Rser=1u
+C3_0_1 n1_1 0 8.200000000e-10
+L4_0_1 n1_1 n2_1 2.200000000e-06 Rser=1u
+C5_0_1 n2_1 0 8.200000000e-10
+L6_0_1 n2_1 n3_1 2.200000000e-06 Rser=1u
+C7_0_1 n3_1 0 8.200000000e-10
+L8_0_1 n3_1 n4_1 2.200000000e-06 Rser=1u
+C9_0_1 n4_1 0 8.200000000e-10
+L10_0_1 n4_1 n5_1 2.200000000e-06 Rser=1u
+C11_0_1 n5_1 0 8.200000000e-10
+L12_0_1 n5_1 n6_1 2.200000000e-06 Rser=1u
+C13_0_1 n6_1 0 8.200000000e-10
+L14_0_1 n6_1 n7_1 2.200000000e-06 Rser=1u
+C15_0_1 n7_1 0 8.200000000e-10
+L16_0_1 n7_1 n8_1 2.200000000e-06 Rser=1u
+C17_0_1 n8_1 0 3.900000000e-10
+R18_0_1 n8_1 n9_1 1.000000000e+02
+Rend_1 n9_1 0 1u
+.meas AC a1_0 FIND V(n0_1) AT 740000
+.meas AC a1_1 FIND V(n0_1) AT 1470000
+.meas AC a1_2 FIND V(n0_1) AT 2180000
+.meas AC a1_3 FIND V(n0_1) AT 2890000
+* 図8: shunt C 390p / series L 2.2u / shunt C 820p / series L 2.2u / shunt C 820p / series L 2.2u / shunt C 820p / series L 2.2u / shunt C 390p / open
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+C1_0_2 n0_2 0 3.900000000e-10
+L2_0_2 n0_2 n1_2 2.200000000e-06 Rser=1u
+C3_0_2 n1_2 0 8.200000000e-10
+L4_0_2 n1_2 n2_2 2.200000000e-06 Rser=1u
+C5_0_2 n2_2 0 8.200000000e-10
+L6_0_2 n2_2 n3_2 2.200000000e-06 Rser=1u
+C7_0_2 n3_2 0 8.200000000e-10
+L8_0_2 n3_2 n4_2 2.200000000e-06 Rser=1u
+C9_0_2 n4_2 0 3.900000000e-10
+.meas AC a2_0 FIND V(n0_2) AT 780000
+.meas AC a2_1 FIND V(n0_2) AT 1470000
+.meas AC a2_2 FIND V(n0_2) AT 2920000
+.end

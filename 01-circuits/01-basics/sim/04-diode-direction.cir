@@ -1,0 +1,19 @@
+* 1-4 ダイオードの向き (図1): 5 V・330 Ω に赤 LED (D1)・青 LED (D2)・逆向きの赤 LED (D3)
+* LED のモデルは仮定: 赤は 1-1 と同じ (VF ≈ 2.0 V @ 9 mA)、青は VF ≈ 3.2 V @ 5.5 mA になるように IS を下げた。逆向きは BV=5 V の仮定。実測ではない
+.model LEDR D (IS=1.7e-18 N=2.14 RS=0 CJO=30p BV=5)
+.model LEDB D (IS=4e-28 N=2.14 RS=0 CJO=30p BV=5)
+V1 a 0 5
+R1 a b1 330
+D1 b1 0 LEDR
+R2 a b2 330
+D2 b2 0 LEDB
+R3 a b3 330
+D3 0 b3 LEDR
+.tran 0 1m
+.meas tran vd1 AVG V(b1) FROM=0.5m TO=1m
+.meas tran vd2 AVG V(b2) FROM=0.5m TO=1m
+.meas tran vd3 AVG V(b3) FROM=0.5m TO=1m
+.meas tran i1 AVG I(R1) FROM=0.5m TO=1m
+.meas tran i2 AVG I(R2) FROM=0.5m TO=1m
+.meas tran i3 AVG I(R3) FROM=0.5m TO=1m
+.end

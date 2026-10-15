@@ -1,0 +1,42 @@
+* 2-3 時報音の検出 (図2・図3): MFB 帯域通過フィルタ (LM358: 利得帯域幅 1 MHz の 1 次の近似、出力は理想。実測ではない)。VB は交流では GND
+* 440 Hz 側 C = 22 nF・R1 = 75 kΩ・R2 = 910 Ω・R3 = 300 kΩ、880 Hz 側 C = 10 nF・R1 = 91 kΩ・R2 = 1 kΩ・R3 = 330 kΩ。入力 1 V の AC
+* 利得を 440 Hz・880 Hz・600 Hz・中心で読む。しきい値・ヒステリシスの算術は下の PARAM
+.subckt OPA inp inn out
+E1 x 0 inp inn 1e5
+R1 x y 1k
+C1 y 0 15.9u
+B1 out 0 V=V(y)
+.ends
+Vi in 0 AC 1
+* 440 Hz 側
+R1L in xl 75k
+C1L xl nl 22n
+C2L xl ol 22n
+R2L xl 0 910
+R3L ol nl 300k
+XL 0 nl ol OPA
+* 880 Hz 側
+R1H in xh 91k
+C1H xh nh 10n
+C2H xh oh 10n
+R2H xh 0 1k
+R3H oh nh 330k
+XH 0 nh oh OPA
+.ac dec 400 100 5k
+.meas AC l440 FIND mag(V(ol)) AT 440
+.meas AC l880 FIND mag(V(ol)) AT 880
+.meas AC h440 FIND mag(V(oh)) AT 440
+.meas AC h880 FIND mag(V(oh)) AT 880
+.meas AC l600 FIND mag(V(ol)) AT 600
+.meas AC h600 FIND mag(V(oh)) AT 600
+.meas AC lpk MAX mag(V(ol))
+.meas AC hpk MAX mag(V(oh))
+.meas AC l560 FIND mag(V(ol)) AT 560
+.meas AC h560 FIND mag(V(oh)) AT 560
+.meas AC l580 FIND mag(V(ol)) AT 580
+.meas AC h580 FIND mag(V(oh)) AT 580
+.meas AC l620 FIND mag(V(ol)) AT 620
+.meas AC h620 FIND mag(V(oh)) AT 620
+* しきい値・ヒステリシスの算術: ヒステリシス幅 = 5 V × 47 kΩ / (2.2 MΩ + 47 kΩ) = 0.105 V、平滑のさざ波 = 2.4 V × (1/440) / 0.1 s = 0.055 V (半波整流なので放電するのは 1 周期)
+* TH の上端 = 5 V × (2 kΩ + 5.6 kΩ) / 13.8 kΩ = 2.75 V、下端 = 5 V × 5.6 kΩ / 13.8 kΩ = 2.03 V
+.end

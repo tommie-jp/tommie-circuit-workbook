@@ -1,0 +1,23 @@
+* 2-5 時計 (図1〜8): カウンタ・窓判定の論理は SPICE の対象外。アナログの値だけを確かめる
+* (a) パワーオン: 100 kΩ と 10 uF (τ = 1 s) の立ち上がりがシュミットのインバータのしきい値 (CD40106B の VT+ は 5 V で 2.2〜3.6 V、代表 2.9 V の仮定) に届くまでの時間 = PON が H の時間
+* (b) 設定ボタンのチャタリング除去 10 kΩ × 1 uF
+* (c) 7 セグメントの電流: 330 Ω・V_F 2.0 V (赤の仮定のモデル)、CD4511B の出力抵抗 100 Ω の仮定
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+V1 vcc 0 PWL(0 0 1u 5)
+R15 vcc pon 100k
+C15 pon 0 10u
+R14 vcc btn 10k
+C14 btn 0 1u
+Vo vo 0 5
+Ron vo o 100
+Rs o a 330
+D1 a 0 LED
+.tran 0 3 0 1m
+.meas tran tpon_lo WHEN V(pon)=2.2
+.meas tran tpon_typ WHEN V(pon)=2.9
+.meas tran tpon_hi WHEN V(pon)=3.6
+.meas tran tdeb PARAM 10k*1u
+.meas tran iseg FIND I(Rs) AT 2.9
+.meas tran f8 PARAM 32768/4096
+.meas tran cload PARAM 18p*18p/(18p+18p)
+.end

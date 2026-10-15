@@ -1,0 +1,54 @@
+* 6-12 セラミックフィルタ 455 kHz / 10.7 MHz: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac dec 2000 438137 1.1424e+07
+* 図5: series R 270 / shunt L 209.8n / shunt C 1055p / series L 277.3u esr 187 / series C 0.7979p / shunt L 86.89n / shunt C 2546p / series L 114.9u esr 187 / series C 1.926p / series R 270
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 n1_0 2.700000000e+02
+L2_0_0 n1_0 0 2.098000000e-07 Rser=1u
+C3_0_0 n1_0 0 1.055000000e-09
+L4_0_0 n1_0 m4_0_0 2.773000000e-04 Rser=1u
+R4_1_0 m4_0_0 n2_0 1.870000000e+02
+C5_0_0 n2_0 n3_0 7.979000000e-13
+L6_0_0 n3_0 0 8.689000000e-08 Rser=1u
+C7_0_0 n3_0 0 2.546000000e-09
+L8_0_0 n3_0 m8_0_0 1.149000000e-04 Rser=1u
+R8_1_0 m8_0_0 n4_0 1.870000000e+02
+C9_0_0 n4_0 n5_0 1.926000000e-12
+R10_0_0 n5_0 n6_0 2.700000000e+02
+RL_0 n6_0 0 50
+.meas AC a0_0 FIND V(n0_0) AT 10560000
+.meas AC c0_0 FIND V(n6_0) AT 10560000
+.meas AC a0_1 FIND V(n0_0) AT 10700000
+.meas AC c0_1 FIND V(n6_0) AT 10700000
+.meas AC a0_2 FIND V(n0_0) AT 10842500
+.meas AC c0_2 FIND V(n6_0) AT 10842500
+.meas AC a0_3 FIND V(n0_0) AT 11200000
+.meas AC c0_3 FIND V(n6_0) AT 11200000
+* 図6: series R 1500 / shunt L 24.11u / shunt C 5076p / series L 27.57m esr 907 / series C 4.438p / shunt L 9.985u / shunt C 12250p / series L 11.42m esr 907 / series C 10.71p / series R 1500
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+R1_0_1 n0_1 n1_1 1.500000000e+03
+L2_0_1 n1_1 0 2.411000000e-05 Rser=1u
+C3_0_1 n1_1 0 5.076000000e-09
+L4_0_1 n1_1 m4_0_1 2.757000000e-02 Rser=1u
+R4_1_1 m4_0_1 n2_1 9.070000000e+02
+C5_0_1 n2_1 n3_1 4.438000000e-12
+L6_0_1 n3_1 0 9.985000000e-06 Rser=1u
+C7_0_1 n3_1 0 1.225000000e-08
+L8_0_1 n3_1 m8_0_1 1.142000000e-02 Rser=1u
+R8_1_1 m8_0_1 n4_1 9.070000000e+02
+C9_0_1 n4_1 n5_1 1.071000000e-11
+R10_0_1 n5_1 n6_1 1.500000000e+03
+RL_1 n6_1 0 50
+.meas AC a1_0 FIND V(n0_1) AT 446900
+.meas AC c1_0 FIND V(n6_1) AT 446900
+.meas AC a1_1 FIND V(n0_1) AT 455000
+.meas AC c1_1 FIND V(n6_1) AT 455000
+.meas AC a1_2 FIND V(n0_1) AT 463300
+.meas AC c1_2 FIND V(n6_1) AT 463300
+.meas AC a1_3 FIND V(n0_1) AT 480000
+.meas AC c1_3 FIND V(n6_1) AT 480000
+.end

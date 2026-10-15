@@ -1,0 +1,19 @@
+* 2-6 マイコン (図2): 検波出力 (R5 = 100 kΩ の源) → C1 = 0.1 uF → Ra = Rb = 220 kΩ のバイアス (3.3 V)・Cf = 1 nF → ADC。入力 1 V の AC で利得を読む
+* 検波の C4 (0.01 uF) は含めない (本文と同じ)。FFT のビンの算術: 8 kHz / 512 = 15.625 Hz、440 Hz は 28.2 番目、880 Hz は 56.3 番目
+V1 src 0 DC 0 AC 1
+R5 src in 100k
+C1 in n 0.1u
+Ra 3v3 n 220k
+Rb n 0 220k
+Cf n 0 1n
+V3 3v3 0 3.3
+.ac dec 400 1 100k
+.meas AC g440 FIND mag(V(n)) AT 440
+.meas AC g880 FIND mag(V(n)) AT 880
+.meas AC g4k FIND mag(V(n)) AT 4000
+.meas AC gmid FIND mag(V(n)) AT 1500
+.meas AC fl WHEN mag(V(n))=0.3707 RISE=1
+.meas AC fh WHEN mag(V(n))=0.3707 FALL=1
+.meas AC k440 PARAM 440/(8000/512)
+.meas AC k880 PARAM 880/(8000/512)
+.end

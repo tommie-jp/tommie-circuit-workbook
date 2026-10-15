@@ -1,0 +1,16 @@
+* 7-4 L 型整合: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac lin 20001 49019607.8 61200000
+* 図3: shunt C 68p / series L 120n / series R 25.5 / series C 220p / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+C1_0_0 n0_0 0 6.800000000e-11
+L2_0_0 n0_0 n1_0 1.200000000e-07 Rser=1u
+R3_0_0 n1_0 n2_0 2.550000000e+01
+C4_0_0 n2_0 n3_0 2.200000000e-10
+Rend_0 n3_0 0 1u
+.meas AC a0_0 FIND V(n0_0) AT 50000000
+.meas AC a0_1 FIND V(n0_0) AT 60000000
+.end

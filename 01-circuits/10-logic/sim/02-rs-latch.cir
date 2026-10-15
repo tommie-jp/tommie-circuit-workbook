@@ -1,0 +1,26 @@
+* 10-2 RS ラッチ (図1): NAND 2 個のたすき掛け。NAND は B 電源 (しきい値 2.5 V) と出力の RC (100 ns) で表す。
+* S・R は Low で有効。順に: 待機 (S = R = 1) → S を押す → 離す → R を押す → 離す → 両方押す。各区間の終わりの Q・Qバー を読む
+* 両方を同時に離したあとは理想の NAND では落ち着き先が決まらず (計算が収束しない)、本文の「不定」と同じ。ここでは離す前まで走らせる
+.param t1=10u
+Vs s 0 PWL(0 5 {t1} 5 {t1+1n} 0 {2*t1} 0 {2*t1+1n} 5 {5*t1} 5 {5*t1+1n} 0 {6*t1} 0 {6*t1+1n} 5 {8*t1} 5)
+Vr r 0 PWL(0 5 {3*t1} 5 {3*t1+1n} 0 {4*t1} 0 {4*t1+1n} 5 {5*t1} 5 {5*t1+1n} 0 {6*t1} 0 {6*t1+1n} 5 {8*t1} 5)
+Bq q0 0 V=5*(1-(V(s)>2.5 & V(qb)>2.5))
+Rq q0 q 1k
+Cq q 0 100p
+Bqb qb0 0 V=5*(1-(V(r)>2.5 & V(q)>2.5))
+Rqb qb0 qb 1k
+Cqb qb 0 100p
+* 初期状態は Q = 0・Qバー = 1 (電源投入直後の落ち着き先は不定)
+.ic V(q)=0 V(qb)=5
+.tran 0 59.5u
+.meas tran q_idle FIND V(q) AT 0.9e-5
+.meas tran qb_idle FIND V(qb) AT 0.9e-5
+.meas tran q_set FIND V(q) AT 1.9e-5
+.meas tran qb_set FIND V(qb) AT 1.9e-5
+.meas tran q_hold FIND V(q) AT 2.9e-5
+.meas tran qb_hold FIND V(qb) AT 2.9e-5
+.meas tran q_reset FIND V(q) AT 3.9e-5
+.meas tran qb_reset FIND V(qb) AT 3.9e-5
+.meas tran q_both FIND V(q) AT 5.9e-5
+.meas tran qb_both FIND V(qb) AT 5.9e-5
+.end

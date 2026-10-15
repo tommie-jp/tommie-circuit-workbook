@@ -1,0 +1,25 @@
+* 1-8 コンデンサの直列・並列 (図1・図2): 5 V・R = 1 kΩ。並列 (100 uF × 2 = 200 uF、τ = 0.20 s) と直列 (100 uF ÷ 2 = 50 uF、τ = 0.05 s) の充電率
+V1 a 0 5
+R1 a p 1k
+C1 p 0 100u
+C2 p 0 100u
+R2 a s 1k
+C3 s m 100u
+C4 m 0 100u
+.ic V(p)=0 V(s)=0 V(m)=0
+.tran 0 1.2 0 1m
+.meas tran p005 FIND V(p) AT 0.05
+.meas tran p02 FIND V(p) AT 0.2
+.meas tran p06 FIND V(p) AT 0.6
+.meas tran p1 FIND V(p) AT 1
+.meas tran s005 FIND V(s) AT 0.05
+.meas tran s02 FIND V(s) AT 0.2
+.meas tran s06 FIND V(s) AT 0.6
+.meas tran s1 FIND V(s) AT 1
+.meas tran pt63 WHEN V(p)=3.16
+.meas tran st63 WHEN V(s)=3.16
+.meas tran pr1 WHEN V(p)=0.5
+.meas tran pr2 WHEN V(p)=4.5
+.meas tran sr1 WHEN V(s)=0.5
+.meas tran sr2 WHEN V(s)=4.5
+.end

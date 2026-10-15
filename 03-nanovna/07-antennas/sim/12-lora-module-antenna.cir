@@ -1,0 +1,26 @@
+* 7-12 433 / 920 MHz のモジュール用アンテナ (LoRa): vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac lin 20001 850980392 946560000
+* 図2: series R 36 / series L 37n / series C 0.802p / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 n1_0 3.600000000e+01
+L2_0_0 n1_0 n2_0 3.700000000e-08 Rser=1u
+C3_0_0 n2_0 n3_0 8.020000000e-13
+Rend_0 n3_0 0 1u
+.meas AC a0_0 FIND V(n0_0) AT 868000000
+.meas AC a0_1 FIND V(n0_0) AT 920600000
+.meas AC a0_2 FIND V(n0_0) AT 928000000
+* 図3: series R 36 / series L 37n / series C 0.909p / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+R1_0_1 n0_1 n1_1 3.600000000e+01
+L2_0_1 n1_1 n2_1 3.700000000e-08 Rser=1u
+C3_0_1 n2_1 n3_1 9.090000000e-13
+Rend_1 n3_1 0 1u
+.meas AC a1_0 FIND V(n0_1) AT 868000000
+.meas AC a1_1 FIND V(n0_1) AT 920600000
+.meas AC a1_2 FIND V(n0_1) AT 928000000
+.end

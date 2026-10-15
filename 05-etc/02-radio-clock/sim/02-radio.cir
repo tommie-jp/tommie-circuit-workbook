@@ -1,0 +1,31 @@
+* 2-2 AM ラジオ (図1): 2 段の共通エミッタ。直流の動作点 (2SC1815 の代用モデル、BF = 200。目安から作った仮定で実測ではない) と、同調 (L1 = 260 uH) の C の値
+* 5 V、R1 = 82 kΩ、R2 = 22 kΩ、RC1 = 2.2 kΩ、RE1 = 470 Ω。2 段目も同じ値 (R3 = 82 kΩ、R4 = 22 kΩ、RC2 = 2.2 kΩ、RE2 = 470 Ω)
+.model Q1815 NPN (IS=2e-14 BF=200 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+VCC vcc 0 5
+R1 vcc b1 82k
+R2 b1 0 22k
+RC1 vcc c1 2.2k
+RE1 e1 0 470
+Q1 c1 b1 e1 Q1815
+R3 vcc b2 82k
+R4 b2 0 22k
+RC2 vcc c2 2.2k
+RE2 e2 0 470
+Q2 c2 b2 e2 Q1815
+.tran 0 1m
+.meas tran vb AVG V(b1) FROM=0.5m TO=1m
+.meas tran ic AVG I(RC1) FROM=0.5m TO=1m
+.meas tran ve AVG V(e1) FROM=0.5m TO=1m
+.meas tran vc AVG V(c1) FROM=0.5m TO=1m
+.meas tran itot AVG I(VCC) FROM=0.5m TO=1m
+* 同調: f = 1 / (2π √(L C)) から、L = 260 uH で 540 kHz・594 kHz・1600 kHz に合う C
+.meas tran c540 PARAM 1/((2*3.14159265*540k)**2*260u)
+.meas tran c594 PARAM 1/((2*3.14159265*594k)**2*260u)
+.meas tran c1600 PARAM 1/((2*3.14159265*1600k)**2*260u)
+* 画面の数値の算術: 594 kHz の周期、440 Hz の周期、50 mVp の 50 Ω での dBm、100 mVp (搬送波)、側波 (m = 0.3 で搬送波の 0.15 倍)
+.meas tran tc PARAM 1/594k
+.meas tran ta PARAM 1/440
+.meas tran p50m PARAM 10*log10((0.05**2/2/50)/1m)
+.meas tran p100m PARAM 10*log10((0.1**2/2/50)/1m)
+.meas tran sb PARAM 20*log10(0.15)
+.end

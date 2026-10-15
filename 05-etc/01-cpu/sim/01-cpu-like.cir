@@ -1,0 +1,30 @@
+* 1-1 CPU もどき (図1〜3): カウンタ・ROM の論理は SPICE の対象外で、アナログの値だけを確かめる
+* (a) 74HC163 の出力 → 820 Ω → 赤 LED の電流 (V_F = 1.9 V の仮定。出力は 5 V とみなす)、680 Ω に替えた場合
+* (b) ROM の列 (10 kΩ で +5 V に引く) の L の高さ: Y5 の L 0.1 V + ダイオード 1N4148 (D4148 の代用モデル)、電流
+* (c) 列が H に戻る時間: 10 kΩ × 30 pF (ブレッドボード、図の見積り) で 0.65 V → 3.15 V、SRAM 版は 10 kΩ × 45 pF で 0.7 V → 3.15 V
+.model LED19 D (IS=6.5e-22 N=1.7 RS=0)
+.model D4148 D (IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+.param r=820
+V1 vcc 0 5
+Vq q 0 5
+R1 q a {r}
+D1 a 0 LED19
+.step param r list 680 820
+* ROM の列
+R10 vcc col 10k
+Vy y 0 0.1
+D5 col y D4148
+* 列の立ち上がり (0.65 V から)
+R11 vcc c2 10k
+C11 c2 0 30p
+R12 vcc c3 10k
+C12 c3 0 45p
+.ic V(c2)=0.65 V(c3)=0.7
+.tran 0 2u 0 1n
+.meas tran iled AVG I(R1) FROM=1u TO=2u
+.meas tran vf AVG V(a) FROM=1u TO=2u
+.meas tran vcol AVG V(col) FROM=1u TO=2u
+.meas tran icol AVG I(R10) FROM=1u TO=2u
+.meas tran t30 WHEN V(c2)=3.15
+.meas tran t45 WHEN V(c3)=3.15
+.end

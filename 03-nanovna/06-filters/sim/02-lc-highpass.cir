@@ -1,0 +1,19 @@
+* 6-2 LC ハイパス: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac dec 2000 980392 3.06e+07
+* 図3: shunt L 820n / series C 150p / shunt L 820n
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+L1_0_0 n0_0 0 8.200000000e-07 Rser=1u
+C2_0_0 n0_0 n1_0 1.500000000e-10
+L3_0_0 n1_0 0 8.200000000e-07 Rser=1u
+RL_0 n1_0 0 50
+.meas AC a0_0 FIND V(n0_0) AT 1000000
+.meas AC c0_0 FIND V(n1_0) AT 1000000
+.meas AC a0_1 FIND V(n0_0) AT 10300000
+.meas AC c0_1 FIND V(n1_0) AT 10300000
+.meas AC a0_2 FIND V(n0_0) AT 30000000
+.meas AC c0_2 FIND V(n1_0) AT 30000000
+.end

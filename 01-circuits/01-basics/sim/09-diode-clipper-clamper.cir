@@ -1,0 +1,15 @@
+* 1-9 クリッパ (図1) とクランパ (図2): ±5 V・1 kHz の方形波。ダイオードは 1N4148 の代用モデル (09-rf/sim/agc.cir の D4148。実測ではない)
+.model D4148 D (IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+Vin in 0 PULSE(-5 5 0 1n 1n 0.5m 1m)
+R1 in o1 1k
+D1 o1 0 D4148
+D2 0 o1 D4148
+C1 in o2 1u
+D3 0 o2 D4148
+RL o2 0 100k
+.tran 0 20m
+.meas tran c1max MAX V(o1) FROM=10m TO=20m
+.meas tran c1min MIN V(o1) FROM=10m TO=20m
+.meas tran c2max MAX V(o2) FROM=10m TO=20m
+.meas tran c2min MIN V(o2) FROM=10m TO=20m
+.end

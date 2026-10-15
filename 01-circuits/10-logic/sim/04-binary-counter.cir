@@ -1,0 +1,11 @@
+* 10-4 バイナリカウンタ: クロックは 555 の非安定 (R1 = 10 kΩ、R2 = 47 kΩ、C1 = 10 uF)。555 と 4040 の内部は SPICE の対象外で、算術を .meas の PARAM に残した
+* T = ln2 × (R1 + 2 R2) × C1、f = 1 / T、デューティ = (R1 + R2) / (R1 + 2 R2)、16 クロックで 1 周する時間 = 16 T
+V1 a 0 1
+R1 a 0 1k
+.tran 0 1u
+.meas tran period PARAM 0.693147*(10k+2*47k)*10u
+.meas tran freq PARAM 1/(0.693147*(10k+2*47k)*10u)
+.meas tran duty PARAM (10k+47k)/(10k+2*47k)
+.meas tran cycle16 PARAM 16*0.693147*(10k+2*47k)*10u
+.meas tran freq_q1 PARAM 0.5/(0.693147*(10k+2*47k)*10u)
+.end

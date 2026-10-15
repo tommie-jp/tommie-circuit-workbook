@@ -1,0 +1,13 @@
+* 1-1 LED を点ける (図1): 5 V・330 Ω・赤 LED。抵抗の電圧と電流、LED の両端の電圧を読む。1 kΩ に替えた場合も .step で見る
+* LED は 1-1〜1-4 の仮定: 02-transistors/sim と同じ IS=1.7e-18 N=2.14 (VF は約 1.5 V (1 uA)・約 2.0 V (8.5 mA))。実測ではない
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.param r=330
+V1 a 0 5
+R1 a b {r}
+D1 b 0 LED
+.step param r list 330 1k
+.tran 0 1m
+.meas tran vr AVG V(a,b) FROM=0.5m TO=1m
+.meas tran vf AVG V(b) FROM=0.5m TO=1m
+.meas tran i AVG I(R1) FROM=0.5m TO=1m
+.end

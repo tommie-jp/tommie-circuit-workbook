@@ -1,0 +1,22 @@
+* 1-3 充放電 (図1): 5 V・R1 = 1 kΩ・C1 = 1000 uF を 0〜5 s 充電し、5 s で R2 = 1 kΩ + LED の放電へ切り替える (スイッチ 2 個で S1 の 1 / 2 を表す)
+* 充電: 1 s・5 s の C1 の電圧。放電: 切り替え直後の LED の電流と、1・2・3 s 後の電流。LED は 1-1 と同じ仮定のモデル (実測ではない)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.model SWN SW (Ron=1m Roff=1G Vt=0.5 Vh=0)
+V1 a 0 5
+Vch ch 0 PWL(0 1 5 1 5.0001 0)
+Vdi di 0 PWL(0 0 5 0 5.0001 1)
+S1 a b ch 0 SWN
+R1 b c 1k
+C1 c 0 1000u
+S2 c d di 0 SWN
+R2 d e 1k
+D1 e 0 LED
+.ic V(c)=0
+.tran 0 8 0 1m
+.meas tran v1 FIND V(c) AT 1
+.meas tran v5 FIND V(c) AT 4.99
+.meas tran id0 FIND I(R2) AT 5.01
+.meas tran id1 FIND I(R2) AT 6
+.meas tran id2 FIND I(R2) AT 7
+.meas tran id3 FIND I(R2) AT 8
+.end

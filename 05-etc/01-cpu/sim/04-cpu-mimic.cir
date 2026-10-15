@@ -1,0 +1,9 @@
+* 1-4 CPU もどき: LED の電流・全体の電流の算術 (V_F = 1.9 V の仮定)。列が H に戻る時間は 1-1 と同じ 10 kΩ × 30 pF
+V1 a 0 1
+R1 a 0 1k
+.tran 0 1u
+.meas tran iled PARAM (5-1.9)/820
+.meas tran iboard2 PARAM 3*(5-0.65)/10k
+.meas tran iall PARAM 20m+iboard2+4*iled
+.meas tran tpath PARAM 41n+35n+0.3u+53n+25n+20n
+.end

@@ -1,0 +1,20 @@
+* 8-3 タッチスイッチ (図1): 5 V、指の抵抗 RF (470 kΩ。目安)、R1 = 1 MΩ、Q1・Q2 のダーリントン (hFE = 100 の仮定で BF=100)、R3 = 100 kΩ、R4 = 330 Ω + LED
+* 触れたときの Q1 のベース電流・LED の電流・Q2 の C-E 間電圧。指が 1.6 MΩ・3 MΩ のときも見る
+.model QT NPN (IS=2e-14 BF=100 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.param rf=470k
+VCC vcc 0 5
+RF vcc b {rf}
+R1 b 0 1Meg
+Q1 vcc b e QT
+R3 e 0 100k
+Q2 c e 0 QT
+R4 vcc a 330
+D1 a c LED
+.step param rf list 470k 1.6Meg 3Meg
+.tran 0 1m
+.meas tran ib1 AVG I(RF) FROM=0.5m TO=1m
+.meas tran iled AVG I(R4) FROM=0.5m TO=1m
+.meas tran vc AVG V(c) FROM=0.5m TO=1m
+.meas tran vb AVG V(b) FROM=0.5m TO=1m
+.end

@@ -1,0 +1,27 @@
+* 8-4 バイアス T を理想の結合に置いた 2SC1815 の 2 ポート (8-2・8-5 も同じ模型)。S11・S21 は Vs1 を 1、Vs2 を 0 にして読む。
+* S22・S12 は Vs1 と Vs2 の AC を入れ替える。S11 = 2·V(p1)/Vs1 − 1、S21 = 2·V(p2)/Vs1、S22 = 2·V(p2)/Vs2 − 1、S12 = 2·V(p1)/Vs2
+* 8-5 の RST は p2 と GND の間の 270 Ω (下の Rst のコメントを外す)
+* ハイブリッド π (2SC1815、Ic = 4.3 mA の仮定。実測ではない)
+* gm = Ic / 26 mV = 0.1654 S、rπ = hFE / gm = 1209 Ω (hFE = 200)、Cπ = gm / (2π fT) − Cμ = 327 pF (fT = 80 MHz)
+* Cμ = 2 pF (Cob)、rbb' = 50 Ω、ro = VA / Ic = 23.3 kΩ (VA = 100 V)
+Gm c 0 bp 0 0.16538
+Rpi bp 0 1209.3
+Cpi bp 0 327p
+Cmu bp c 2p
+Ro c 0 23.3k
+Rbb b bp 50
+Vs1 s1 0 AC 1
+Vs2 s2 0 AC 0
+Rs1 s1 p1 50
+Rs2 s2 p2 50
+C1 p1 b 0.1u
+C2 p2 c 0.1u
+*Rst p2 0 270
+.ac dec 200 1Meg 100Meg
+.meas AC v1_5 FIND V(p1) AT 5Meg
+.meas AC v2_5 FIND V(p2) AT 5Meg
+.meas AC v1_30 FIND V(p1) AT 30Meg
+.meas AC v2_30 FIND V(p2) AT 30Meg
+.meas AC v1_100 FIND V(p1) AT 100Meg
+.meas AC v2_100 FIND V(p2) AT 100Meg
+.end

@@ -1,0 +1,14 @@
+* 8-7 HC-SR04 の ECHO の分圧 (図1): ECHO が 5 V のとき R1 = 1 kΩ・R2 = 1.5 kΩ で 3.0 V (後ろは 3.3 V ロジックの入力。ここでは 1 MΩ の負荷とした)
+* 距離 → H の時間は t = 2d / 343 m/s の算術で、SPICE の対象外 (下の .param で式だけ残す)
+VE echo 0 5
+R1 echo p 1k
+R2 p 0 1.5k
+RL p 0 1Meg
+.param d=1
+.tran 0 1m
+.meas tran vp AVG V(p) FROM=0.5m TO=1m
+.meas tran t10 PARAM 2*0.1/343
+.meas tran t50 PARAM 2*0.5/343
+.meas tran t100 PARAM 2*1/343
+.meas tran t400 PARAM 2*4/343
+.end

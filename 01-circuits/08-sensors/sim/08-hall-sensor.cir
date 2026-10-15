@@ -1,0 +1,11 @@
+* 8-8 ホール素子 (図1): A3144 は OUT がオープンコレクタ。磁石あり = 0.2 V の電圧源 (飽和)、なし = 開放。5 V、R1 = 330 Ω + LED
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+VO out 0 PWL(0 5 0.5m 5 0.5001m 0.2)
+Rhi out 0 1Meg
+VCC vcc 0 5
+R1 vcc a 330
+D1 a out LED
+.tran 0 1m
+.meas tran ion AVG I(R1) FROM=0.8m TO=1m
+.meas tran ioff AVG I(R1) FROM=0.2m TO=0.4m
+.end

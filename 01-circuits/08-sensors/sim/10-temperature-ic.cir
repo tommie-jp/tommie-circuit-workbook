@@ -1,0 +1,15 @@
+* 8-10 温度センサー IC (LM35 / TMP36): IC の内部は SPICE の対象外。Vout = 0.01 × T (LM35)、0.5 + 0.01 × T (TMP36) の算術を .meas の PARAM で並べた
+.param t=25
+V1 a 0 1
+R1 a 0 1k
+.tran 0 1u
+.meas tran lm0 PARAM 0.01*0
+.meas tran lm25 PARAM 0.01*25
+.meas tran lm37 PARAM 0.01*37
+.meas tran lm100 PARAM 0.01*100
+.meas tran tmp0 PARAM 0.5+0.01*0
+.meas tran tmp25 PARAM 0.5+0.01*25
+.meas tran tmp37 PARAM 0.5+0.01*37
+.meas tran tmp100 PARAM 0.5+0.01*100
+.meas tran tmpm10 PARAM 0.5-0.01*10
+.end

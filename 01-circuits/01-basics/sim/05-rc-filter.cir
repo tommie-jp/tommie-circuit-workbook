@@ -1,0 +1,22 @@
+* 1-5 RC フィルタ: (a) 1.5 kΩ + 100 nF のローパス・ハイパスの利得と位相 (図1・図2、AD の Network の表)
+* (b) 500 Hz の方形波 (振幅 1 V) の基本波・3・9・19 次の高調波がローパスで何 dB 減るか = そのままの周波数の利得 (図8・図9 の表)
+* (c) VNA の 50 Ω を R にした 10 nF のローパス (並列 C、R = 25 Ω) とハイパス (直列 C、R = 100 Ω) の S21 (図10・図11 の表)
+V1 in 0 AC 1
+R1 in lp 1.5k
+C1 lp 0 100n
+C2 in hp 100n
+R2 hp 0 1.5k
+.ac dec 1000 10 100k
+.meas AC lpg100 FIND mag(V(lp)) AT 100
+.meas AC lpg1k06 FIND mag(V(lp)) AT 1061
+.meas AC lpg10k FIND mag(V(lp)) AT 10k
+.meas AC lpg100k FIND mag(V(lp)) AT 100k
+.meas AC hpg100 FIND mag(V(hp)) AT 100
+.meas AC hpg1k06 FIND mag(V(hp)) AT 1061
+.meas AC hpg10k FIND mag(V(hp)) AT 10k
+.meas AC lph1k06 FIND ph(V(lp)) AT 1061
+.meas AC lpg500 FIND mag(V(lp)) AT 500
+.meas AC lpg1500 FIND mag(V(lp)) AT 1500
+.meas AC lpg4500 FIND mag(V(lp)) AT 4500
+.meas AC lpg9500 FIND mag(V(lp)) AT 9500
+.end

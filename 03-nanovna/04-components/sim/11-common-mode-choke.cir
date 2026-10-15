@@ -1,0 +1,32 @@
+* 4-11 コモンモードチョーク: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac dec 2000 98039.2 1.6218e+06
+* 図5: series L 1m esr 0.5 cp 10p
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+L1_0_0 n0_0 m1_0_0 1.000000000e-03 Rser=1u
+R1_1_0 m1_0_0 n1_0 5.000000000e-01
+Ccp1_0 n0_0 n1_0 1.000000000e-11
+RL_0 n1_0 0 50
+.meas AC a0_0 FIND V(n0_0) AT 100000
+.meas AC c0_0 FIND V(n1_0) AT 100000
+.meas AC a0_1 FIND V(n0_0) AT 1000000
+.meas AC c0_1 FIND V(n1_0) AT 1000000
+.meas AC a0_2 FIND V(n0_0) AT 1590000
+.meas AC c0_2 FIND V(n1_0) AT 1590000
+* 図6: series L 2u esr 1 cp 5p
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+L1_0_1 n0_1 m1_0_1 2.000000000e-06 Rser=1u
+R1_1_1 m1_0_1 n1_1 1.000000000e+00
+Ccp1_1 n0_1 n1_1 5.000000000e-12
+RL_1 n1_1 0 50
+.meas AC a1_0 FIND V(n0_1) AT 100000
+.meas AC c1_0 FIND V(n1_1) AT 100000
+.meas AC a1_1 FIND V(n0_1) AT 1000000
+.meas AC c1_1 FIND V(n1_1) AT 1000000
+.meas AC a1_2 FIND V(n0_1) AT 1590000
+.meas AC c1_2 FIND V(n1_1) AT 1590000
+.end

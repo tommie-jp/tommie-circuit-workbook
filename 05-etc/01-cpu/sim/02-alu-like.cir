@@ -1,0 +1,9 @@
+* 1-2 ALU もどき: 加減算の論理は SPICE の対象外。LED の電流 (74HC の出力 5 V・820 Ω・V_F 1.9 V)・全体の電流の算術を .meas の PARAM に置いた
+* 74HC283 の遅れ (SUB → V) は データシートの最大値の足し算 (20 + 49 + 20 ns)
+V1 a 0 1
+R1 a 0 1k
+.tran 0 1u
+.meas tran iled PARAM (5-1.9)/820
+.meas tran iall PARAM 6*(5-1.9)/820+9*5/10k
+.meas tran tsub PARAM 20n+49n+20n
+.end

@@ -1,0 +1,23 @@
+* 10-1 AND / OR / NOT (図1): ゲートは B 電源の理想の論理 (しきい値 2.5 V)、出力段は CD4000 系の出力抵抗 Ron とみなして 1 kΩ + LED を駆動する
+* Ron = 400 Ω / 800 Ω の 2 通り (CD4000B の出力電流のデータシートからの見積り。実測ではない)。LED は 02-transistors/sim と同じ仮定のモデル
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.param a=5 b=5 ron=400
+Va a 0 {a}
+Vb b 0 {b}
+Bnd and 0 V=5*(V(a)>2.5 & V(b)>2.5)
+Bor or 0 V=5*(V(a)>2.5 | V(b)>2.5)
+Rand and po 400
+R1 po p1 1k
+D1 p1 0 LED
+Rron or po2 {ron}
+R2 po2 p2 1k
+D2 p2 0 LED
+.step param a list 0 5
+.step param b list 0 5
+.step param ron list 400 800
+.tran 0 1m
+.meas tran vand AVG V(and) FROM=0.5m TO=1m
+.meas tran vor AVG V(or) FROM=0.5m TO=1m
+.meas tran vpo AVG V(po2) FROM=0.5m TO=1m
+.meas tran ild AVG I(R2) FROM=0.5m TO=1m
+.end

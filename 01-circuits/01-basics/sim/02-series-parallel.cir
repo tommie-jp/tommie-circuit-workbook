@@ -1,0 +1,11 @@
+* 1-2 直列・並列と分圧 (図1): 5 V、R1 = 1 kΩ、R2 = R3 = 2 kΩ (並列)。R1 の電圧・並列部分の電圧・電源の電流・R2 の電流
+V1 a 0 5
+R1 a b 1k
+R2 b 0 2k
+R3 b 0 2k
+.tran 0 1m
+.meas tran vr1 AVG V(a,b) FROM=0.5m TO=1m
+.meas tran vpar AVG V(b) FROM=0.5m TO=1m
+.meas tran itot AVG I(V1) FROM=0.5m TO=1m
+.meas tran ir2 AVG I(R2) FROM=0.5m TO=1m
+.end

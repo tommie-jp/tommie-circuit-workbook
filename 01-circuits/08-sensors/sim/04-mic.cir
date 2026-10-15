@@ -1,0 +1,21 @@
+* 8-4 マイクで音に反応 (図1・図3): 5 V、R2 = 100 kΩ、Q1 = 2SC1815 (hFE = 100 の仮定で BF=100)、R3 = 220 Ω + LED。図3 は W1 (1 kHz・2 Vpp) を RS = 10 kΩ、R1 = 2.2 kΩ ∥ RD = 100 Ω で分圧して C1 から入れる
+* 無音時の Q1 のベース電流・コレクタ電流・C-E 間電圧と、1 kHz の入力 (CH2) と出力 (CH1) の Vpp。モデルは仮定 (実測ではない)
+.model QT NPN (IS=2e-14 BF=100 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+VCC vcc 0 5
+VW1 w 0 SINE(0 1 1k)
+RS w m 10k
+R1 vcc m 2.2k
+RD m 0 100
+C1 m b 1u
+R2 vcc b 100k
+Q1 c b 0 QT
+R3 vcc a 220
+D1 a c LED
+.tran 0 20m 0 2u
+.meas tran ib AVG I(R2) FROM=10m TO=20m
+.meas tran ic AVG I(R3) FROM=10m TO=20m
+.meas tran vce AVG V(c) FROM=10m TO=20m
+.meas tran vinpp PP V(m) FROM=10m TO=20m
+.meas tran voutpp PP V(c) FROM=10m TO=20m
+.end

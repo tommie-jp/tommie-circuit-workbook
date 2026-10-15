@@ -1,0 +1,11 @@
+* 1-7 ブリッジ (図1): 5 V、R1 = R2 = 1 kΩ、RX = 680 Ω、R3 を 1000 / 800 / 680 / 600 Ω に振って検流計の両端の電圧 V(A) − V(B) を読む
+.param r3=680
+V1 v 0 5
+R1 v a 1k
+R3 a 0 {r3}
+R2 v b 1k
+RX b 0 680
+.step param r3 list 1000 800 680 600
+.tran 0 1m
+.meas tran vab AVG V(a,b) FROM=0.5m TO=1m
+.end

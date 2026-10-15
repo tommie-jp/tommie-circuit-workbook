@@ -1,0 +1,10 @@
+* 10-7 CD4511 (図1): 内部のデコード (BCD → 7 セグメント) は SPICE の対象外で、出力段だけを置いた。出力は Ron = 100 Ω (仮定) の 5 V、Ra〜Rg = 330 Ω、セグメントは赤 LED (V<sub>F</sub> 約 2.0 V @ 7 mA の仮定のモデル)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+V1 vo 0 5
+Ron vo o 100
+Ra o a 330
+D1 a 0 LED
+.tran 0 1m
+.meas tran vra AVG V(o,a) FROM=0.5m TO=1m
+.meas tran ira AVG I(Ra) FROM=0.5m TO=1m
+.end

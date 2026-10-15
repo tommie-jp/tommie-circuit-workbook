@@ -1,0 +1,35 @@
+* 12-2 周波数を掃くと点が回る — 直列の L は上半分、C は下半分を時計回りに: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac dec 2000 98039.2 3.06e+06
+* 図1: series R 50 / series L 8.2u / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 n1_0 5.000000000e+01
+L2_0_0 n1_0 n2_0 8.200000000e-06 Rser=1u
+Rend_0 n2_0 0 1u
+.meas AC a0_0 FIND V(n0_0) AT 100000
+.meas AC a0_1 FIND V(n0_0) AT 1000000
+.meas AC a0_2 FIND V(n0_0) AT 3000000
+* 図2: series R 50 / series C 3.3n / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+R1_0_1 n0_1 n1_1 5.000000000e+01
+C2_0_1 n1_1 n2_1 3.300000000e-09
+Rend_1 n2_1 0 1u
+.meas AC a1_0 FIND V(n0_1) AT 100000
+.meas AC a1_1 FIND V(n0_1) AT 1000000
+.meas AC a1_2 FIND V(n0_1) AT 3000000
+* 図3: series R 24 / series L 8.2u / series C 3.3n / short
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+R1_0_2 n0_2 n1_2 2.400000000e+01
+L2_0_2 n1_2 n2_2 8.200000000e-06 Rser=1u
+C3_0_2 n2_2 n3_2 3.300000000e-09
+Rend_2 n3_2 0 1u
+.meas AC a2_0 FIND V(n0_2) AT 500000
+.meas AC a2_1 FIND V(n0_2) AT 968000
+.meas AC a2_2 FIND V(n0_2) AT 1500000
+.meas AC a2_3 FIND V(n0_2) AT 3000000
+.end

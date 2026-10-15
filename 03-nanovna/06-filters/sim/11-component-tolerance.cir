@@ -1,0 +1,57 @@
+* 6-11 部品の許容差の影響: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac dec 2000 9.80392e+06 3.57e+07
+* 図3: shunt C 180p / series L 330n / shunt C 270p / series L 330n / shunt C 180p
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+C1_0_0 n0_0 0 1.800000000e-10
+L2_0_0 n0_0 n1_0 3.300000000e-07 Rser=1u
+C3_0_0 n1_0 0 2.700000000e-10
+L4_0_0 n1_0 n2_0 3.300000000e-07 Rser=1u
+C5_0_0 n2_0 0 1.800000000e-10
+RL_0 n2_0 0 50
+.meas AC a0_0 FIND V(n0_0) AT 10000000
+.meas AC c0_0 FIND V(n2_0) AT 10000000
+.meas AC a0_1 FIND V(n0_0) AT 24800000
+.meas AC c0_1 FIND V(n2_0) AT 24800000
+.meas AC a0_2 FIND V(n0_0) AT 28000000
+.meas AC c0_2 FIND V(n2_0) AT 28000000
+.meas AC a0_3 FIND V(n0_0) AT 35000000
+.meas AC c0_3 FIND V(n2_0) AT 35000000
+* 図4: shunt C 189p / series L 363n / shunt C 283.5p / series L 363n / shunt C 189p
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+C1_0_1 n0_1 0 1.890000000e-10
+L2_0_1 n0_1 n1_1 3.630000000e-07 Rser=1u
+C3_0_1 n1_1 0 2.835000000e-10
+L4_0_1 n1_1 n2_1 3.630000000e-07 Rser=1u
+C5_0_1 n2_1 0 1.890000000e-10
+RL_1 n2_1 0 50
+.meas AC a1_0 FIND V(n0_1) AT 10000000
+.meas AC c1_0 FIND V(n2_1) AT 10000000
+.meas AC a1_1 FIND V(n0_1) AT 24800000
+.meas AC c1_1 FIND V(n2_1) AT 24800000
+.meas AC a1_2 FIND V(n0_1) AT 28000000
+.meas AC c1_2 FIND V(n2_1) AT 28000000
+.meas AC a1_3 FIND V(n0_1) AT 35000000
+.meas AC c1_3 FIND V(n2_1) AT 35000000
+* 図5: shunt C 189p / series L 363n / shunt C 256.5p / series L 297n / shunt C 189p
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+C1_0_2 n0_2 0 1.890000000e-10
+L2_0_2 n0_2 n1_2 3.630000000e-07 Rser=1u
+C3_0_2 n1_2 0 2.565000000e-10
+L4_0_2 n1_2 n2_2 2.970000000e-07 Rser=1u
+C5_0_2 n2_2 0 1.890000000e-10
+RL_2 n2_2 0 50
+.meas AC a2_0 FIND V(n0_2) AT 10000000
+.meas AC c2_0 FIND V(n2_2) AT 10000000
+.meas AC a2_1 FIND V(n0_2) AT 24800000
+.meas AC c2_1 FIND V(n2_2) AT 24800000
+.meas AC a2_2 FIND V(n0_2) AT 28000000
+.meas AC c2_2 FIND V(n2_2) AT 28000000
+.meas AC a2_3 FIND V(n0_2) AT 35000000
+.meas AC c2_3 FIND V(n2_2) AT 35000000
+.end

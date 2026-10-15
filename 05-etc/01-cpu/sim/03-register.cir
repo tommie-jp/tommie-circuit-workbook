@@ -1,0 +1,8 @@
+* 1-3 レジスタ (74HC273): LED の電流・全体の電流の算術 (V_F = 1.9 V の仮定)。クロックの上限はデータシートの値 (CLK → Q 32 ns、準備時間 20 ns、データの伝わり 74HC273 だけ) から
+V1 a 0 1
+R1 a 0 1k
+.tran 0 1u
+.meas tran iled PARAM (5-1.9)/820
+.meas tran iall PARAM 4*(5-1.9)/820+5*5/10k+5/10k
+.meas tran fmax PARAM 1/(32n+20n+25n)
+.end

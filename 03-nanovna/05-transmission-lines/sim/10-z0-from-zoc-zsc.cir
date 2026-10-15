@@ -1,0 +1,19 @@
+* 5-10 特性インピーダンスの測定 (Zoc と Zsc から): vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac lin 20001 9803921.57 25224600
+* 図2: line 75 1m vf 0.66 / open
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T1_0 n0_0 0 n1_0 0 Z0=75.0 TD=5.054001e-09
+.meas AC a0_0 FIND V(n0_0) AT 10000000
+.meas AC a0_1 FIND V(n0_0) AT 24730000
+* 図3: line 75 1m vf 0.66 / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T1_1 n0_1 0 n1_1 0 Z0=75.0 TD=5.054001e-09
+Rend_1 n1_1 0 1u
+.meas AC a1_0 FIND V(n0_1) AT 10000000
+.meas AC a1_1 FIND V(n0_1) AT 24730000
+.end

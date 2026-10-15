@@ -1,0 +1,17 @@
+* 10-8 74HC283 (図1): 内部は SPICE の対象外で、加算の算術を .meas の PARAM に置いた。S = (A + B + C0) mod 16、C4 = (A + B + C0) >= 16
+V1 a 0 1
+R1 a 0 1k
+.tran 0 1u
+.meas tran sum1 PARAM (5+3+0)
+.meas tran s1 PARAM (5+3+0)-16*floor((5+3+0)/16)
+.meas tran c41 PARAM floor((5+3+0)/16)
+.meas tran sum2 PARAM (9+1+0)
+.meas tran s2 PARAM (9+1+0)-16*floor((9+1+0)/16)
+.meas tran c42 PARAM floor((9+1+0)/16)
+.meas tran sum3 PARAM (9+9+0)
+.meas tran s3 PARAM (9+9+0)-16*floor((9+9+0)/16)
+.meas tran c43 PARAM floor((9+9+0)/16)
+.meas tran sum4 PARAM (7+1+1)
+.meas tran s4 PARAM (7+1+1)-16*floor((7+1+1)/16)
+.meas tran c44 PARAM floor((7+1+1)/16)
+.end

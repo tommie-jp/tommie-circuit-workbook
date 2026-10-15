@@ -1,0 +1,17 @@
+* 7-8 バランの有無: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac lin 20001 110294118 146880000
+* 図4: series L 2u esr 180 cp 1p
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+L1_0_0 n0_0 m1_0_0 2.000000000e-06 Rser=1u
+R1_1_0 m1_0_0 n1_0 1.800000000e+02
+Ccp1_0 n0_0 n1_0 1.000000000e-12
+RL_0 n1_0 0 50
+.meas AC a0_0 FIND V(n0_0) AT 112500000
+.meas AC c0_0 FIND V(n1_0) AT 112500000
+.meas AC a0_1 FIND V(n0_0) AT 144000000
+.meas AC c0_1 FIND V(n1_0) AT 144000000
+.end

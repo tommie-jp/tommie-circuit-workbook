@@ -1,0 +1,15 @@
+* 8-9 水位・土壌湿度 (図1): 5 V、電極間の抵抗 RS、R1 = 10 kΩ、Q1 = 2SC1815 (代用モデル)、R2 = 330 Ω + LED。RS = 1 MΩ / 50 kΩ / 2 kΩ / 300 Ω
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.param rs=1Meg
+VCC vcc 0 5
+RS vcc b {rs}
+R1 b 0 10k
+Q1 c b 0 Q1815
+R2 vcc a 330
+D1 a c LED
+.step param rs list 300 2k 50k 1Meg
+.tran 0 1m
+.meas tran vmid AVG V(b) FROM=0.5m TO=1m
+.meas tran iled AVG I(R2) FROM=0.5m TO=1m
+.end

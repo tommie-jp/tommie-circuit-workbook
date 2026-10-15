@@ -1,0 +1,24 @@
+* 8-5 フォトインタラプタ (図1): 5 V、R1 = 220 Ω + 赤外線 LED、フォトトランジスタ Q1 (NPN で代用。光あり = ベースに 20 uA の電流源、遮光 = 0)、R2 = 10 kΩ、R3 = 10 kΩ、Q2 = 2SC1815、R4 = 330 Ω + LED (D2)
+* 赤外線 LED は VF = 1.2 V (17 mA) の仮定のモデル。光電流・hFE は仮定 (PT204-6C の 1 mW/cm² で 0.7〜2.0 mA のコレクタ電流が出る範囲)。実測ではない
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.model IRLED D (IS=6.5e-16 N=1.5 RS=0 CJO=30p)
+.model PT NPN (IS=2e-14 BF=100 NF=1 VAF=100)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.param ilight=20u
+VCC vcc 0 5
+R1 vcc ir 220
+D1 ir 0 IRLED
+R2 vcc p 10k
+QP p bp 0 PT
+IB 0 bp {ilight}
+R3 p b2 10k
+Q2 c b2 0 Q1815
+R4 vcc a 330
+D2 a c LED
+.step param ilight list 20u 0.001u
+.tran 0 1m
+.meas tran id1 AVG I(R1) FROM=0.5m TO=1m
+.meas tran vp AVG V(p) FROM=0.5m TO=1m
+.meas tran ib2 AVG I(R3) FROM=0.5m TO=1m
+.meas tran id2 AVG I(R4) FROM=0.5m TO=1m
+.end

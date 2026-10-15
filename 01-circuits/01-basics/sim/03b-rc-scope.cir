@@ -1,0 +1,15 @@
+* 1-3 後半 (図3〜図7): 方形波 0〜5 V を R = 1 kΩ・C = 1 uF (τ = 1 ms) に入れる。100 Hz と 1 kHz を .step で見る
+* v1tau = 立ち上がりの 1τ 後の電圧、vend = 高い側の終わりの電圧、vfall = 立ち下がりの 1τ 後、vmax・vmin = 定常状態の振れ、rise = 10〜90 % (0.5 V→4.5 V) の時間
+.param f=100
+V1 in 0 PULSE(0 5 0 1n 1n {0.5/f} {1/f})
+R1 in out 1k
+C1 out 0 1u
+.step param f list 100 1000
+.tran 0 {20/f}
+.meas tran v1tau FIND V(out) AT {10/f+0.001}
+.meas tran vend FIND V(out) AT {10.5/f-1u}
+.meas tran vfall FIND V(out) AT {10.5/f+0.001}
+.meas tran vmax MAX V(out) FROM={15/f} TO={20/f}
+.meas tran vmin MIN V(out) FROM={15/f} TO={20/f}
+.meas tran rise TRIG V(out) VAL=0.5 RISE=10 TARG V(out) VAL=4.5 RISE=10
+.end

@@ -1,0 +1,42 @@
+* 4-13 ダイオードの接合容量: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac dec 2000 9.80392e+06 1.8462e+08
+* 図3: series C 100n / series C 15p esl 7n / series C 100n
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+C1_0_0 n0_0 n1_0 1.000000000e-07
+C2_0_0 n1_0 m2_0_0 1.500000000e-11
+L2_1_0 m2_0_0 n2_0 7.000000000e-09 Rser=1u
+C3_0_0 n2_0 n3_0 1.000000000e-07
+RL_0 n3_0 0 50
+.meas AC a0_0 FIND V(n0_0) AT 10000000
+.meas AC c0_0 FIND V(n3_0) AT 10000000
+.meas AC a0_1 FIND V(n0_0) AT 106000000
+.meas AC c0_1 FIND V(n3_0) AT 106000000
+* 図4: series C 100n / series C 110p esl 7n / series C 100n
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+C1_0_1 n0_1 n1_1 1.000000000e-07
+C2_0_1 n1_1 m2_0_1 1.100000000e-10
+L2_1_1 m2_0_1 n2_1 7.000000000e-09 Rser=1u
+C3_0_1 n2_1 n3_1 1.000000000e-07
+RL_1 n3_1 0 50
+.meas AC a1_0 FIND V(n0_1) AT 10000000
+.meas AC c1_0 FIND V(n3_1) AT 10000000
+.meas AC a1_1 FIND V(n0_1) AT 14500000
+.meas AC c1_1 FIND V(n3_1) AT 14500000
+* 図5: series C 100n / series C 110p esl 7n / series C 100n
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+C1_0_2 n0_2 n1_2 1.000000000e-07
+C2_0_2 n1_2 m2_0_2 1.100000000e-10
+L2_1_2 m2_0_2 n2_2 7.000000000e-09 Rser=1u
+C3_0_2 n2_2 n3_2 1.000000000e-07
+RL_2 n3_2 0 50
+.meas AC a2_0 FIND V(n0_2) AT 10000000
+.meas AC c2_0 FIND V(n3_2) AT 10000000
+.meas AC a2_1 FIND V(n0_2) AT 181000000
+.meas AC c2_1 FIND V(n3_2) AT 181000000
+.end

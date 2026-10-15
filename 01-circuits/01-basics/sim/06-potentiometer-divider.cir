@@ -1,0 +1,11 @@
+* 1-6 ポテンショメータの分圧 (図1・図2): 5 V・10 kΩ。ワイパーの位置 x = 0.25 / 0.5 / 0.75 の無負荷 (RL = 1 GΩ) と RL = 10 kΩ、x = 0.5 で RL = 1 kΩ
+.param x=0.5 rl=1G
+V1 a 0 5
+Rup a w {10k*(1-x)}
+Rlo w 0 {10k*x}
+RL w 0 {rl}
+.step param x list 0.25 0.5 0.75
+.step param rl list 1G 10k 1k
+.tran 0 1m
+.meas tran vout AVG V(w) FROM=0.5m TO=1m
+.end

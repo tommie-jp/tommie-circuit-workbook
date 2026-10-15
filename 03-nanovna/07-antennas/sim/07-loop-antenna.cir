@@ -1,0 +1,27 @@
+* 7-7 ループアンテナ: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac lin 20001 402647059 458694000
+* 図2: series R 120 / series L 360n / series C 0.381p / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 n1_0 1.200000000e+02
+L2_0_0 n1_0 n2_0 3.600000000e-07 Rser=1u
+C3_0_0 n2_0 n3_0 3.810000000e-13
+Rend_0 n3_0 0 1u
+.meas AC a0_0 FIND V(n0_0) AT 410700000
+.meas AC a0_1 FIND V(n0_0) AT 430000000
+.meas AC a0_2 FIND V(n0_0) AT 449700000
+* 図3: line 75 11.5cm vf 0.66 / series R 120 / series L 360n / series C 0.381p / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T1_1 n0_1 0 n1_1 0 Z0=75.0 TD=5.812102e-10
+R2_0_1 n1_1 n2_1 1.200000000e+02
+L3_0_1 n2_1 n3_1 3.600000000e-07 Rser=1u
+C4_0_1 n3_1 n4_1 3.810000000e-13
+Rend_1 n4_1 0 1u
+.meas AC a1_0 FIND V(n0_1) AT 410700000
+.meas AC a1_1 FIND V(n0_1) AT 430000000
+.meas AC a1_2 FIND V(n0_1) AT 449700000
+.end

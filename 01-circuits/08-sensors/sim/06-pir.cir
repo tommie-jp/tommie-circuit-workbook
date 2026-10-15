@@ -1,0 +1,9 @@
+* 8-6 PIR モジュール (図1): OUT は 3.3 V (検知) / 0 V、R1 = 150 Ω + 赤 LED。モジュール内部は SPICE の対象外で、OUT の電圧を電源として置いた
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+VO out 0 3.3
+R1 out a 150
+D1 a 0 LED
+.tran 0 1m
+.meas tran iled AVG I(R1) FROM=0.5m TO=1m
+.meas tran vf AVG V(a) FROM=0.5m TO=1m
+.end

@@ -1,0 +1,16 @@
+* 8-1 CdS で暗くなると点く (図1): 5 V、R1 = 10 kΩ、CdS (照度ごとの抵抗の目安)、Q1 = 2SC1815 (代用モデル)、R2 = 330 Ω + LED
+* 中点の電圧 (Q1 を付けた実際の値) と LED の電流を、CdS の抵抗 650 Ω / 2 kΩ / 10 kΩ / 500 kΩ で読む。モデルは 02-transistors/sim と同じ仮定 (実測ではない)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.param rcds=10k
+VCC vcc 0 5
+R1 vcc b 10k
+RC b 0 {rcds}
+Q1 c b 0 Q1815
+R2 vcc a 330
+D1 a c LED
+.step param rcds list 650 2k 10k 500k
+.tran 0 1m
+.meas tran vmid AVG V(b) FROM=0.5m TO=1m
+.meas tran iled AVG I(R2) FROM=0.5m TO=1m
+.end

@@ -1,0 +1,16 @@
+* 6-9 ダイプレクサを組んだとき: 入口で LPF (L 220n・C 82p・L 82n) と HPF (C 43p・L 120n・C 130p) をつなぎ、出口を 50 Ω で終端。周波数は .meas の AT を書き換えて 10・30・50・100・150 MHz を読んだ (理想の部品、実測ではない)
+Vs s 0 AC 1
+Rs s a 50
+L1 a b 220n Rser=1u
+C2 b 0 82p
+L3 b o1 82n Rser=1u
+RL1 o1 0 50
+C1 a c 43p
+L2 c 0 120n Rser=1u
+C3 c o2 130p
+RL2 o2 0 50
+.ac lin 3 29.99e6 30.01e6
+.meas AC a1 FIND V(a) AT 30e6
+.meas AC l1 FIND V(o1) AT 30e6
+.meas AC h1 FIND V(o2) AT 30e6
+.end

@@ -1,0 +1,24 @@
+* 4-9 バリキャップの C vs 電圧: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* 伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+.ac lin 20001 980392.157 1020000
+* 図3: series C 100n / series C 485p / series C 100n
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+C1_0_0 n0_0 n1_0 1.000000000e-07
+C2_0_0 n1_0 n2_0 4.850000000e-10
+C3_0_0 n2_0 n3_0 1.000000000e-07
+RL_0 n3_0 0 50
+.meas AC a0_0 FIND V(n0_0) AT 1000000
+.meas AC c0_0 FIND V(n3_0) AT 1000000
+* 図4: series C 100n / series C 25p / series C 100n
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+C1_0_1 n0_1 n1_1 1.000000000e-07
+C2_0_1 n1_1 n2_1 2.500000000e-11
+C3_0_1 n2_1 n3_1 1.000000000e-07
+RL_1 n3_1 0 50
+.meas AC a1_0 FIND V(n0_1) AT 1000000
+.meas AC c1_0 FIND V(n3_1) AT 1000000
+.end

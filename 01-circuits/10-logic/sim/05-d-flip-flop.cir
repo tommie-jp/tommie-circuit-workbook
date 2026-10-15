@@ -1,0 +1,39 @@
+* 10-5 D フリップフロップ (図1): CD4013 の代わりに NAND 6 個の立ち上がりエッジの D-FF (7474 と同じ構成。NAND は B 電源、しきい値 2.5 V、出力に 1 kΩ + 100 pF の遅れ) を置いた
+* FF1 = D-FF (D は SWD、クロックは SWC1)、FF2 = Q バーを D へ戻した T-FF (クロックは SWC2)。順に操作して Q1・Q2 を読む
+.subckt NAND2 a b y
+B1 y0 0 V=5*(1-(V(a)>2.5 & V(b)>2.5))
+R1 y0 y 1k
+C1 y 0 100p
+.ends
+.subckt NAND3 a b c y
+B1 y0 0 V=5*(1-(V(a)>2.5 & V(b)>2.5 & V(c)>2.5))
+R1 y0 y 1k
+C1 y 0 100p
+.ends
+.subckt DFF d clk q qb
+X1 n4 n2 n1 NAND2
+X2 n1 clk n2 NAND2
+X3 n2 clk n4 n3 NAND3
+X4 n3 d n4 NAND2
+X5 n2 qb q NAND2
+X6 q n3 qb NAND2
+.ends
+* D-FF
+Vd d 0 PWL(0 0 10u 0 10.001u 5 40u 5 40.001u 0 100u 0 100.001u 5 120u 5)
+Vc1 c1 0 PWL(0 0 20u 0 20.001u 5 30u 5 30.001u 0 50u 0 50.001u 5 60u 5 60.001u 0 80u 0 80.001u 5 90u 5 90.001u 0)
+XF1 d c1 q1 q1b DFF
+* T-FF (D に Q バーを戻す)
+Vc2 c2 0 PWL(0 0 120u 0 120.001u 5 130u 5 130.001u 0 150u 0 150.001u 5 160u 5 160.001u 0)
+XF2 q2b c2 q2 q2b DFF
+.ic V(q1)=0 V(q1b)=5 V(q2)=0 V(q2b)=5
+.tran 0 175u
+.meas tran q1_a FIND V(q1) AT 9u
+.meas tran q1_b FIND V(q1) AT 25u
+.meas tran q1_c FIND V(q1) AT 45u
+.meas tran q1_d FIND V(q1) AT 55u
+.meas tran q1_e FIND V(q1) AT 85u
+.meas tran q1_f FIND V(q1) AT 110u
+.meas tran q2_a FIND V(q2) AT 115u
+.meas tran q2_b FIND V(q2) AT 140u
+.meas tran q2_c FIND V(q2) AT 170u
+.end
