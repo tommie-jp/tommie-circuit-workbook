@@ -88,6 +88,22 @@ trigger: CLK rising at 0s
 
 数は soft-fpga ac6b663 (2026-10-12) の公開ページを、Playwright の Chromium (窓の幅 1280) で開いて確かめた。値の欄の幅は、マーカーを出すと 1 本ごとに増える。
 
+## シミュレーションでの確かめ (対象外を含む)
+
+soft-fpga の ac6b663 の画面の部品 (`js/rtlscope-la.js`、`js/sft-counter-la-defs.js`、`examples/01-counter/web/index.html`) を読み、
+PC 用の Verilator 5.042 で 01-counter の自己検査を走らせた。画面そのものをブラウザで開いての確認はしていない。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| 開いたときのレーン | 10 本 (count、rst、b7〜b0)、`count10` は隠れている | 定義の `on:true` が 10 本、`count_dec` だけ `on:false` | 合った |
+| 開いたときの倍率 | 8x | `zoomIdx: 5` で倍率の表 `[0.25 … 64]` の 8 | 合った |
+| 倍率の範囲 | 1/4x〜64x | `LA_ZOOM_LEVELS = [0.25, 0.5, 1, 2, 4, 8, 16, 32, 64]` | 合った |
+| 画面の幅・名前の欄・値の欄 | 1200・72・44 | `width: 1200`、`labelWidth: 72`、`valColW` の既定 44 | 合った |
+| 見えるサンプル数 | 8x で約 135、1x で 1084 | (1200 − 72 − 44) = 1084、1084 ÷ 8 = 135.5 | 合った |
+| `b7` の反転 | 128 クロックごと、1x で約 8 回 | 1084 ÷ 128 = 8.5 | 合った |
+| 図 1 の読み (0x08 と 0x10) | 7.25 ms と 15.25 ms で 8 と 16 | PC の自己検査 (100 クロック後の count が 100 など) と同じ数え方で、1 クロックごとに 1 増える | 合った |
+| マーカー A・B・C の操作、値の欄の増え方 | 画面の操作 | ブラウザが要る | 対象外 |
+
 ## 出典
 
 自作。画面の仕様は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `examples/01-counter/web/index.html` と、レーンの定義 `js/sft-counter-la-defs.js`、画面の部品 `js/rtlscope-la.js`。

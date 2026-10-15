@@ -100,6 +100,20 @@ docker compose -f docker/compose.yml run --rm build-wasm scripts/build-wasm.sh
 
 `sim.wasm` の大きさは、使った版や最適化の設定で変わる。
 
+## シミュレーションでの確かめ (対象外を含む)
+
+soft-fpga の ac6b663 (4-1 の本文と同じ版) を手元に取り、PC 用の Verilator (5.042) で 01-counter を組んで確かめた。
+Emscripten による WebAssembly 化とブラウザでの描画は、この環境では動かせないので確かめていない。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| リングバッファの大きさ | 4096 | `cxx/harness.cpp` が `rtlscope::Ring<4096, 1>`、`js/sft-counter-la-defs.js` が `ringSize: 4096` | 合った |
+| 速度スライダの既定 | 200 | `web/index.html` の `value="200"` | 合った |
+| サンプルの構成 | `count` (0〜7 ビット) と `rst` (8 ビット) | `harness.cpp` の `record_sample()` と同じ | 合った |
+| 開いたときのリセットのサンプル数 | 2 | `sim_init()` 直後の `head` が 2 (PC 用の自己検査が `OK: all checks passed`) | 合った |
+| `head_ & (SIZE - 1)` の書き方 | 4096 は 2 のべき乗 | `static_assert` で 2 のべき乗を要求している | 合った |
+| 半秒後の `cycles` = 6002、`sim.wasm` の大きさ | 6002、147,688 バイト | ブラウザと Emscripten が要る | 対象外 |
+
 ## 出典
 
 自作。構成は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の README (Design notes) と

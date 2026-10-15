@@ -179,6 +179,17 @@ async function runWorker(steps, durationMs, sched) {
 - soft-fpga の 06-8080・09-pdp11 の画面そのものでは測っていない。どちらもサブモジュールの取得とディスクの用意が要る。ここでは同じ形を最小にした `demo-worker.js` で測った
 - `SharedArrayBuffer` で主スレッドと Worker がメモリを分け合う形 (設計メモ 01・93 に名前が出る) は試していない。使うには、Web サーバが COOP・COEP の見出しを返す必要がある
 
+## シミュレーションでの確かめ (対象外)
+
+この題は Web Worker と `requestAnimationFrame` の振る舞いを headless の Chromium で測った数字だけでできていて、HDL のシミュレーションで確かめられる数字は無い。
+ブラウザと Emscripten の `bench.wasm` が要るので走らせ直していない。本文の計算値だけ読み直した。
+
+| 項目 | 本文の数字 | 読み直し | 判定 |
+| --- | --- | --- | --- |
+| 1200 万クロックの `_step_n` の時間 | 約 100 ms | 1200 万 × 約 8 ns = 約 96 ms (4-8 の D の形の値から) | 合った |
+| `setTimeout` で `steps` = 200 のときのクロック数 | 1 秒に 4 万 8 千、240 回 | 4 ms 待ちなら 1 秒に最大 250 回で 250 × 200 = 5 万。240 回 × 200 = 4 万 8 千 | 合った |
+| 描画の回数、間隔、ボタンの反応、`MessageChannel` の効果 | 表のとおり | ブラウザが要る | 対象外 |
+
 ## 出典
 
 自作。形は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `examples/09-pdp11/web/sim-worker.js`、

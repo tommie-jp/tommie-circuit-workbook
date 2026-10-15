@@ -280,6 +280,25 @@ soft-fpga の写しに 90-switches を足し、Verilator 5.042 の PC のシミ�
 - 2 回呼んでも 1 回にしかならないのは、`pending_btn` が「押したかどうか」の 1 ビットしか持たないから。この画面では、描き替えの 1 回の間に BTN を 2 回押すと 1 回に数える。人の指でそこまで速く 2 回押すことはまず無いので、この例では数を持たせなかった
 - 実物のボタンにはチャタリング (押した瞬間に接点が何度も開閉する) があり、1 回押しても何回にも数える。画面のボタンには起きない。実物の対策は 6-3 で扱う
 
+## シミュレーションでの確かめ (対象外を含む)
+
+本文の `sw_gates.v` と C++ のハーネスを取り出し、PC 用の Verilator 5.042 で組んで、本文の筋書きを `sim/07-screen-switches-tb.cpp` から流した
+(`sim/07-screen-switches.v`、`sim/07-screen-switches-harness.cpp`)。02-traffic-fsm の歩行者ボタンの道筋は、
+soft-fpga の ac6b663 の `harness.cpp` を読んで確かめた (4-4 のシミュレーションでも `press_btn()` の次の `step()` だけ `btn` が 1 になっている)。
+JS と画面 (`index.html`、Emscripten のビルド) は動かしていない。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`-Wall`) | 警告なし | 警告なし | 合った |
+| 開いた直後 | AND 0、OR 0、`presses` 0 | 同じ | 合った |
+| SW0 を押す、SW1 を押す、SW0 を切る | (0, 1)、(1, 1)、(0, 1) | 同じ | 合った |
+| BTN を 3 回押す | `presses` = 3 | 3 | 合った |
+| 図 1 の筋書きで出力が変わる `step` | 3 で OR = 1、7 で AND = 1、10 で `presses` = 1、14 で 2、17 で AND = 0 | 同じ | 合った |
+| `press_btn()` を 2 回呼んでから `step()` | `presses` は 1 しか増えない | 1 | 合った |
+| 図 1 の edges | スイッチは立ち上がりの 0.5 ms 前に変わる | 筋書きの `step` に 0.5 ms を引いた値と一致 | 合った |
+| 02-traffic-fsm の `btn_req` を画面から押す | `click` して `step()` 1 回で 1 | `harness.cpp` の `press_btn()` と `step()` の読みで同じ (画面のクリックは対象外) | 合った (画面は対象外) |
+| Emscripten の `EXPORTED_FUNCTIONS` のリンクエラー、画面の AND・OR の丸 | 手順 2・5 | Emscripten とブラウザが要る | 対象外 |
+
 ## 出典
 
 自作。読んだ仕組みは [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `examples/02-traffic-fsm` (`cxx/harness.cpp` の `press_btn()`・`step()`・`sim_run_n()`、`web/index.html`、`scripts/build-wasm-02.sh`)。

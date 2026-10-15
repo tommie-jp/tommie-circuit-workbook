@@ -288,6 +288,26 @@ soft-fpga (`f979b96`) の 06-8080 を Verilator 5.042 で PC にビルドし、C
 - `step()` の数は BIOS の DIR_BUF の番地で数百だけ変わる。BDOS が「DIR_BUF + 項目の位置」を作るとき (`ADD L` → `RNC` → `INR H`)、下位バイトの桁上がりが起きるかが番地で決まるため。名乗りを末尾へ移す前の BIOS (DIR_BUF = F3BE) では 625,409 だった
 - 8080 を 2 MHz で動かしたとすると、1 T は 0.5 µs、OUT 01h は 5 µs (計算値)。soft-fpga の速さは 3-16 で測る
 
+## シミュレーションでの確かめ (対象外を含む)
+
+soft-fpga の ac6b663 の `examples/06-8080` に、サブモジュール `verilog/vm80a` (ad04fd7) を取り、BIOS (`make -C examples/06-8080/sw/cpm`) と
+CCP+BDOS (`scripts/setup-cpm22.sh` と同じ手順で作った `cpm22.bin`。MD5 は `62239bb0…` で一致) を用意して、Verilator 5.042 で PC にビルドした。
+本文の C++ をそのまま `probe8080 out` として走らせた (`sim/12-8080-cpm-io-bus-probe.cpp`)。ブラウザの画面 (Trigger の設定、M-CYC の帯) は動かしていない。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| 22 サンプルの T 番号 | 1 1 2 2 3 3 4 4 / 1 1 2 2 3 3 / 1 1 2 2 3 3 / 1 1 | 同じ | 合った |
+| マシンサイクルの status と addr | M1 A2 (F29B)、M2 82 (F29C)、M3 10 (0101) | 同じ | 合った |
+| SYNC・DBIN の edges | SYNC は 0・4・7・10 ms、DBIN は 1〜2 ms と 5〜6 ms | 同じ | 合った |
+| `WR_N` の下がる長さ | 8.5〜9.5 ms (1 T) | サンプル 17〜18 の 2 サンプル (1 T) | 合った |
+| `io_req` | 9 ms に半 T だけ | サンプル 18 の 1 つだけ | 合った |
+| dbus (`0A`・D3・01・41) | 図 1 の D の並び | 全サンプル一致 | 合った |
+| OUT 01h の長さ | 10 T (4 + 3 + 3) | 同じ | 合った |
+| `A` を出すまでの `step()` の数 | 624,941 | 624,941 | 合った |
+| 各命令 (JMP 10 + MOV 5 + OUT 10 + RET 10 = 35 T) | 計算値 | 各命令の T は 4-14 の実行結果と一致 | 合った |
+| ブラウザ版との番地の一致、Ver.1.0.0 の 1 ずれ、Trigger の操作 | 本文のとおり | ブラウザが要る | 対象外 |
+| 実機の 2 MHz での 5 µs | 計算値 | 1 T = 0.5 µs × 10 T の計算のみ | 合った (計算) |
+
 ## 出典
 
 自作。例と RTL は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `examples/06-8080`

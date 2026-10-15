@@ -197,6 +197,22 @@ README (日本語版 `README.ja.md`) も「JS は読み口を持ち続けず、�
 1. 番地 (数) は覚えてよい。ビュー (TypedArray) は覚えない
 2. `Module.HEAPU32` などは、描く・送るたびに読み直す
 
+## シミュレーションでの確かめ (対象外を含む)
+
+この題は Emscripten の `ALLOW_MEMORY_GROWTH` と node での読み出しが主題で、HDL のシミュレーションで確かめられる数字は無い。
+Emscripten の容器は動かしていないので、本文の数 (16.125 MB、16,908,288、33,685,504、番地 1040 など) は走らせ直していない。
+確かめたのは、仕組みの核心だけ。Emscripten を使わず、node (v22.23.0) の `WebAssembly.Memory` で、同じ手順を再現した (`sim/10-memory-growth-views-tb.mjs`)。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| 伸ばす前の `ringOld` | `byteLength` 4096、`length` 1024、`[5]` = 1005 | 同じ | 合った |
+| 伸びる前の丸ごとのビュー | 16,908,288 バイト (258 ページ = 16.125 MB) | 16,908,288 | 合った |
+| `memory.grow()` の後の古いビュー | 長さ 0、`[5]` は `undefined`、例外は出ない | 同じ。`buffer.detached` は `true` | 合った |
+| `ringOld.buffer === Module.HEAPU32.buffer` に当たる比較 | `false` | `false` | 合った |
+| 同じ番地から作り直したビュー | `ringNew[5]` = 1005 | 1005 | 合った |
+| Emscripten での 32 MB 取得後の大きさ、`ALLOW_MEMORY_GROWTH=0` の `Aborted(OOM)` | 表のとおり | Emscripten の容器が要る | 対象外 |
+| 公開ページでメモリが伸びないこと、`js/sft-la-glue.js` の読み直し | 本文のとおり | ブラウザが要る | 対象外 |
+
 ## 出典
 
 自作。soft-fpga の書き方は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の README (Design notes)、

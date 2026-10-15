@@ -240,6 +240,29 @@ Verilator 5.048・Emscripten の docker でビルドしてブラウザ (Playwrig
 - 画面の欄に `Hi` と打って Send を押すと、受信履歴に `0x48 'H'` と `0x69 'i'` が出た (Playwright で欄に打ち、ボタンを押して確かめた。ac6b663 の公開中の画面でも同じ)
 - 手順の 2〜4 のとおり速度 1 で `A` を送って止めると、`FRAME` のレーンに `TX 'A'` と `RX 'A'` の箱が出た (ac6b663 の公開中の画面を Playwright で操作して確かめた)
 
+## シミュレーションでの確かめ (対象外を含む)
+
+soft-fpga の ac6b663 の `examples/03-uart` を PC 用の Verilator 5.042 で組み、`A` (0x41) を 1 字送って `sim/06-uart-loopback-tb.cpp` で読み取った。
+`sim/06-uart-loopback-tb.cpp` は、`harness.cpp` の `send_byte()`・`step()` を呼んでリングバッファを読む短い C++ で、`main_linux.cpp` の代わりに組んだ。
+`step` の数え方は本文と同じ。本文の Verilog (`uart_tx.v`) は `examples/03-uart/verilog/uart_tx.v` と一致した。
+ブラウザの画面 (`FRAME` のレーンの箱、受信履歴の表示、倍率) は動かしていない。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (3 ファイル、`-Wall`) | 警告なし | 警告なし | 合った |
+| 元の自己検査 (`main_linux.cpp`) | (記載なし) | `OK: all checks passed` | 合った |
+| `tx_valid` が 1 | step 1 | step 1 | 合った |
+| `txd` の変わり目 (0x41) | 2 で 0、18 で 1、34 で 0、114 で 1、130 で 0、146 で 1 | 同じ | 合った |
+| ストップビットの始まり、IDLE に戻る | 146、161 (`tx_ready` = 1) | 146、161 | 合った |
+| 受信機が bit *k* を読む | 27 + 16 *k* (bit 0 は 27、bit 7 は 139) | `rx_bit` の変わり目が 27、43、59、…、123、受信機が STOP に入るのが 139 | 合った |
+| `rx_valid`、`rx_data` | step 155、0x41 | step 155、0x41 | 合った |
+| 1 フレームの長さ | 160 クロック (2〜161) | 2〜161 | 合った |
+| `Hi` を送る | `0x48 'H'` と `0x69 'i'` | 同じ 2 字 | 合った |
+| `Hello World` | 11 字が全部届く | 11 字 `Hello World` | 合った |
+| 送信キュー | 積めるのは 63 字まで | 70 字を積んで 63 字が届いた | 合った |
+| 図 1 の `tx_state`・`rx_state` の edges | TS 1〜161、RS 3・11・139・155 | 同じ | 合った |
+| 速度スライダ・倍率 1x・`FRAME` の表示・公開ページ | 画面の操作 | ブラウザが要る | 対象外 |
+
 ## 出典
 
 自作。例と Verilog は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `examples/03-uart`

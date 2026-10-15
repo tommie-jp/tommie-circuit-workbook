@@ -213,6 +213,23 @@ cursors: [13ns, 17ns]
 - `$monitor` の行は 45・55・65 ns の 3 本で、`q` が 4・5・6 になった時刻と一致する (図 2 は 50 ns まで描いたので、45 ns の `q` = 4 だけが見える)
 - `$monitoroff` を書いた 66 ns のあとは、75 ns の立ち上がりを過ぎても何も出なかった
 
+## シミュレーションでの確かめ
+
+Verilator 5.042 と Icarus Verilog 12.0 の両方で、本文の `counter4` と `tb_display.v` を走らせ直した
+(`sim/01-testbench.v`、`sim/05-display-tb.v`)。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| `counter4.v` の lint | 警告なし | 警告なし | 合った |
+| テストベンチ込みの `-Wall` | `SYNCASYNCNET` で止まる | 同じ警告で止まる | 合った |
+| Verilator の出力 11 行 | 本文の実行結果 | 全行一致 | 合った |
+| 15 ns の `$display` と `$strobe` | q=0 と q=1 | 同じ | 合った |
+| `$monitor` の行 | 45・55・65 ns | 同じ | 合った |
+| `log.txt` | 0・1・2 | 同じ | 合った |
+| Icarus Verilog の差 | 1 ns は `q=x`、36 ns に `$monitor` の 1 行 | 同じ | 合った |
+| 書式の表 (q = 3) | `%d` は空白 1 つ + 3、`%0d` と `%h` は 3、`%b` は 0011、`%t` は 15 ns | 同じ (両方の道具で) | 合った |
+| 図 2 の edges (VCD の変化の時刻) | q は 15・25・35・45 ns で変わる、rst_n は 12 ns | Icarus の VCD と一致 | 合った |
+
 ## 出典
 
 自作。`$display`・`$strobe`・`$monitor` の定義は IEEE 1800-2017 の 21 章 (入出力のシステムタスク)。

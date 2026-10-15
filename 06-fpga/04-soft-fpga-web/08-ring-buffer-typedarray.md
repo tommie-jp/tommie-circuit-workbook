@@ -241,6 +241,21 @@ soft-fpga ac6b663 (2026-10-13) の `scripts/build-wasm.sh` でビルドした `s
 
 数は回路の大きさ、機械、ブラウザの版で変わる。比べるときは、同じ機械で形だけを変えて測る。
 
+## シミュレーションでの確かめ (対象外を含む)
+
+この題の数字の大半は、node と Chromium で測った時間 (ns/クロック、描画の回数など) で、Emscripten とブラウザが要るので走らせ直していない。
+確かめたのは、C++ の側の値の正しさと、本文の計算値だけ。Verilator 5.042 で、本文の C++ から `EM_JS` と `emscripten.h` だけを外した版を PC 用に組み、
+200 万クロック回した (`sim/08-ring-buffer-typedarray-harness.cpp`、`sim/08-ring-buffer-typedarray-tb.cpp`)。回路は 01-counter の `counter.v`。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| 200 万クロック後の最後の `count` (形 A、C、D) | 回したクロックの数を 256 で割った余りと一致 (128) | どれも 128 | 合った |
+| `head` | 200 万 | 2000000 | 合った |
+| リングの大きさ | 1024 語 | `get_ring_size()` が 1024 | 合った |
+| 16.7 ms に回せるクロック (計算値) | A 約 126 万、E 約 61 万、D 約 211 万 | 16.7 ms ÷ 13.2 ns = 126 万、÷ 27.2 ns = 61 万、÷ 7.9 ns = 211 万 | 合った |
+| 既定の速さの 1 回の描画 (計算値) | 200 × 47 ns ≒ 9.4 µs | 9.4 µs | 合った |
+| 各形の ns/クロック、node と Chromium の差、`sim_run_n` の時間 | 表のとおり | node・Chromium・Emscripten が要る | 対象外 |
+
 ## 出典
 
 自作。設計は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の README (Design notes) と

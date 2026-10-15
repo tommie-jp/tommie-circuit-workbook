@@ -216,6 +216,26 @@ PC 用の `cxx/main_linux.cpp` は今は自己検査になっていて、状態�
 GREEN は最初の周回だけ、`step` で数えて 499 (1〜499) になる。リセットで始まったクロックを含めると 500 クロック。2 周目以降は 500。
 リングバッファには、その前にリセットの 2 サンプル (`rst` = 1、`timer` = 499) が入るので、最初の GREEN は 501 サンプルに見える。画面の `cycles` も、開いた直後から 2 を数えている。
 
+## シミュレーションでの確かめ (対象外を含む)
+
+soft-fpga の ac6b663 の `examples/02-traffic-fsm` を PC 用の Verilator 5.042 で組み、本文の表と同じ入力を `sim/04-traffic-fsm-tb.cpp` で与えて走らせ直した。
+`sim/04-traffic-fsm-tb.cpp` は、`harness.cpp` の `sim_init()`・`press_btn()`・`step()` を呼んでリングバッファを読む短い C++ で、`main_linux.cpp` の代わりに組んだ。
+`step` の数え方は本文と同じ (リセット直後を 0)。Verilog は本文のフェンスと `examples/02-traffic-fsm/verilog/traffic_fsm.v` が一致した。
+ブラウザの画面の見え方は動かしていない。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`-Wall`) | 警告なし | 警告なし (ファイル名を `traffic_fsm.v` にして) | 合った |
+| 元の自己検査 (`main_linux.cpp`) | `OK: all checks passed` | `OK: all checks passed` | 合った |
+| ボタンを押さない | 500 で YELLOW、600 で RED、900 で GREEN、1400 で YELLOW、1500 で RED | 同じ | 合った |
+| 200 回目に押す | 500 で YELLOW、600 で WALK、1000 で GREEN | 同じ (`btn_req` は 200 で 1、1000 で 0) | 合った |
+| 700 回目に押す | 900 で GREEN、1400 で YELLOW、1500 で WALK、1900 で GREEN | 同じ | 合った |
+| 継続クロック | YELLOW 100、RED 300、WALK 400 | 500〜599、600〜899、600〜999 | 合った |
+| WALK に入った直後の `timer` | 399 | 399 (YELLOW は 99、RED は 299、GREEN は 499) | 合った |
+| 最初の GREEN の `step` 数とサンプル数 | 499 (1〜499)、リセットの 2 サンプルと合わせて 501 | 同じ (リセット中の `timer` は 499、`rst` は 1) | 合った |
+| 図 1 の edges (200 回目に押した場合) | btn_req 199 ms、YELLOW 499 ms、WALK 599 ms、GREEN 999 ms、2 周目 YELLOW 1499 ms、RED 1599 ms、GREEN 1899 ms | 上の表の `step` から 1 を引いた値と一致 | 合った |
+| ブラウザの状態遷移図の光り方、`Timer` の表示 | 画面の見え方 | ブラウザが要る | 対象外 |
+
 ## 出典
 
 自作。例と Verilog は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `examples/02-traffic-fsm`。レーンの定義は同リポジトリの `js/sft-fsm-la-defs.js`。

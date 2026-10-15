@@ -167,6 +167,24 @@ soft-fpga ac6b663 (2026-10-12) の 01-counter に差し替えて、Verilator 5.0
 ブラウザの並びを 2 進に直すと、104 は `ticks`=26・`tick`=0・`led`=0、106 は `tick`=1、109 は `ticks`=27・`led`=1、112 は `ticks`=28・`led`=0。画面のレーンと同じ向きに変わっている。
 `ticks` は 6 ビットなので 64 で一周する。6000 クロックでは 6000 ÷ 4 = 1500 回の `tick` で、1500 を 64 で割った余りが 28。
 
+## シミュレーションでの確かめ (対象外を含む)
+
+soft-fpga の ac6b663 の `examples/01-counter` で、`counter.v` だけを本文の分周器に差し替え、PC 用の Verilator 5.042 で走らせ直した
+(`sim/03-own-verilog-build.v`、`sim/03-own-verilog-build-tb.cpp`)。`sim/03-own-verilog-build-tb.cpp` は、`harness.cpp` の `step()` を呼んで
+リングバッファを読む短い C++ で、`main_linux.cpp` の代わりに組んだ。Emscripten とブラウザの部分は動かしていない。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| lint (`-Wall`) | 警告なし | 警告なし | 合った |
+| PC の自己検査 (元の `main_linux.cpp`) | `FAIL` が 2 つ (`count after 100 steps`、`count restarts at 1 after reset`)、`2 check(s) failed` | 同じ 2 つ | 合った |
+| `led` が反転する `step` | 4、8、12、16、20 | 4、8、12、16、20 (24 も) | 合った |
+| `tick` が 1 になる `step` | 3、7、11、15、19 | 3、7、11、15、19 (23 も) | 合った |
+| 100 クロック後の `count` | 101 (`ticks` 25、`tick` 0、`led` 1) | 101 (25、0、1) | 合った |
+| 画面の `count` の並び | リセットの 2 サンプルのあと `00 00 02 05 05 05 07 08` | 同じ | 合った |
+| 6000 クロック後の最後の 8 サンプル | 104, 104, 106, 109, 109, 109, 111, 112 | 同じ | 合った |
+| 図 1 の LED・TICK・T0・T1 の edges | 3 ms で LED が立つなど | 上の `count` の並びのビット (bit0 が led、bit1 が tick、bit2・3 が T0・T1) と一致 | 合った |
+| ブラウザ側のビルド・Web サーバ・画面の表示 | 手順 4・5 | Emscripten とブラウザが要る | 対象外 |
+
 ## 出典
 
 自作。差し替え先は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `examples/01-counter`。

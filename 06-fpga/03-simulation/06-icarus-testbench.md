@@ -246,6 +246,22 @@ cursors: [40ns, 60ns]
 - リセットを書き忘れた `counter4` では、両方の道具で `FAIL: 不一致 21 件` になる。Icarus の `q` は x、Verilator の `q` は 1、2、3 と数える
 - `!=` で比べると、Icarus では x が混ざった間違いが PASS になる。比べるときは `!==` を使う
 
+## シミュレーションでの確かめ
+
+Icarus Verilog 12.0 と Verilator 5.042 の両方で、本文の `counter4`・`tb_counter4.v` と、リセットを書き忘れた回路を走らせ直した
+(`sim/01-testbench.v`、`sim/06-icarus-testbench-tb.v`、`sim/06-icarus-testbench-bad.v`)。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| 正しい回路 (Icarus) | `PASS: 不一致 0 件`、`$finish` は 216000 (1ps) | 同じ | 合った |
+| 正しい回路 (Verilator) | `PASS: 不一致 0 件` | 同じ | 合った |
+| 間違えた回路 (Icarus) | q=x、`FAIL: 不一致 21 件` | 同じ (10・20・30 ns の 3 行も一致) | 合った |
+| 間違えた回路 (Verilator) | q=1・2・3、21 件 | 同じ | 合った |
+| lint の警告 | `rst_n` の `UNUSEDSIGNAL` | `counter4.v:3:23` で同じ | 合った |
+| `!=` に替えた Icarus の結果 | `PASS: 不一致 0 件` (見逃す) | 同じ | 合った |
+| `-Wno-timescale` を外した警告 | 動作は変わらない | 警告が出るだけで結果は同じ | 合った |
+| 図 2 の edges | 立ち下がり 40 ns で q=2、60 ns で q=4、rst_n は 16 ns | VCD の読みと一致 | 合った |
+
 ## 出典
 
 自作。Icarus Verilog は [steveicarus.github.io/iverilog](https://steveicarus.github.io/iverilog/) による。

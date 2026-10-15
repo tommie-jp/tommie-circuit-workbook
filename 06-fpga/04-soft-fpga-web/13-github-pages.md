@@ -162,6 +162,20 @@ falling back to ArrayBuffer instantiation
 
 GitHub への push と、公開された URL を開くことは確かめていない (未実行)。
 
+## シミュレーションでの確かめ (対象外を含む)
+
+この題は GitHub Pages への載せ方と、Web サーバの MIME・相対パスの話で、HDL のシミュレーションで確かめられる数字はほとんど無い。
+Emscripten の容器とブラウザを動かしていないので、手元の Web サーバでの結果 (404、301、MIME の警告) は走らせ直していない。
+確かめたのは、ソースの記述と、分周器の `count` の並びだけ。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| `js/` の 5 本 | `sft-counter-la-defs`・`rtlscope-la`・`sft-la-toolbar`・`sft-la-ctrl`・`sft-la-glue` | `examples/01-counter/web/index.html` の `<script src="js/…">` が同じ 5 本 (残りは `sim.js`) | 合った |
+| `doDeployPages.sh` の写し方 | `index.html` が参照する `js/` だけを写す | `src="js/…"` を grep して写す記述がある | 合った |
+| 6600 クロック後の最後の 8 個の `count` | 192, 192, 194, 197, 197, 197, 199, 200 | 4-3 の分周器を 6600 `step` 回した結果と一致 | 合った |
+| 192・194・197 の中身 | `ticks` = 48 → 49、`tick` = 1 が 194 | 192 = 48 × 4、194 = 192 + 2、197 = 49 × 4 + 1 | 合った |
+| 手元の `python3 -m http.server`・Pages の MIME、301、404 の挙動 | 表のとおり | ブラウザと Web サーバが要る | 対象外 |
+
 ## 出典
 
 自作。手順の元は [tommie-jp/soft-fpga](https://github.com/tommie-jp/soft-fpga) の `docs/05-deploy-gh-pages.md`、

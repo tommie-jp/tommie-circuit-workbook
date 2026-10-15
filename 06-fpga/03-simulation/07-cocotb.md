@@ -237,6 +237,20 @@ cursors: [64ns, 74ns]
 - リセットを書き忘れた回路では 2 つとも FAIL、1 つ目は 15 ns で `q` が `XXXX`
 - 同じ Python のテストが、Icarus Verilog でも Verilator でも PASS だった
 
+## シミュレーションでの確かめ
+
+cocotb 2.1.0 (Python 3.12) を venv に入れ、Icarus Verilog 12.0 と Verilator 5.042 で、本文の `test_counter4.py` と `Makefile` を走らせ直した
+(`sim/01-testbench.v`、`sim/07-cocotb-test.py`、`sim/07-cocotb.mk`、`sim/07-cocotb-bad.v`)。
+`sim/07-cocotb-test.py` は `test_counter4.py`、`sim/07-cocotb.mk` は `Makefile` の名前で置いて使う。
+
+| 項目 | 本文の数字 | 実行結果 | 判定 |
+| --- | --- | --- | --- |
+| 正しい回路 (Icarus) | 2 つとも PASS、215 ns と 75 ns、合計 290 ns | 同じ | 合った |
+| 正しい回路 (`SIM=verilator`) | 同じテストが PASS | 2 つとも PASS (215 ns、75 ns) | 合った |
+| 間違えた回路 | 2 つとも FAIL、1 つ目は 15 ns で `XXXX` | 1 つ目は 15 ns で `XXXX`、2 つ目は 65 ns で FAIL、合計 80 ns | 合った |
+| `make` の終わり方 | `Error 2` | `Error 2` | 合った |
+| 図 2 の変化の時刻 | rst_n は 15 ns で 1、65 ns で 0。q は 5 から 70 ns で 0 | テストの動きから読んだ時刻と一致 (VCD は取らず、`assert` の時刻と q の値で確かめた) | 合った |
+
 ## 出典
 
 自作。cocotb の書き方は [docs.cocotb.org](https://docs.cocotb.org/) による。
