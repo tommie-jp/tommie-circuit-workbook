@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>91-pong</title>
+<style>
+  body { background: #222; color: #ddd; font-family: sans-serif; }
+  canvas { image-rendering: pixelated; border: 1px solid #555; }
+  button { min-width: 4em; margin: 2px; }
+  button.on { background: #6c6; }
+</style>
+</head>
+<body>
+<canvas id="screen" width="160" height="120" style="width:480px;height:360px"></canvas>
+<div>
+  左 <button id="ul">上 (W)</button><button id="dl">下 (S)</button><button id="al">AUTO</button>
+  右 <button id="ur">上 (↑)</button><button id="dr">下 (↓)</button><button id="ar">AUTO</button>
+</div>
+<div>点 <span id="score">0 - 0</span> / <span id="frames">0</span> 画面</div>
+<script>
+var Module = { onRuntimeInitialized: function () {
+  Module._sim_init();
+  const ctx = document.getElementById('screen').getContext('2d');
+  const img = ctx.createImageData(160, 120);
+  let held = 0, sw = 0;                       // held: 押している間のボタン (bit0〜3)、sw: AUTO のスイッチ (bit4・5)
+
+  function hold(id, bit, key) {               // ボタン: 押している間だけ 1
+    const el = document.getElementById(id);
+    const on = () => { held |= bit; el.classList.add('on'); };
+    const off = () => { held &= ~bit; el.classList.remove('on'); };
+    el.addEventListener('pointerdown', on);
+    el.addEventListener('pointerup', off);
+    el.addEventListener('pointerleave', off);
+    addEventListener('keydown', (e) => { if (e.key === key) on(); });
+    addEventListener('keyup', (e) => { if (e.key === key) off(); });
+  }
+  hold('ul', 1, 'w'); hold('dl', 2, 's'); hold('ur', 4, 'ArrowUp'); hold('dr', 8, 'ArrowDown');
+
+  function toggle(id, bit) {                  // スイッチ: 押すたびに入れ替わり、そのまま残る
+    const el = document.getElementById(id);
+    el.addEventListener('click', () => { sw ^= bit; el.classList.toggle('on', (sw & bit) !== 0); });
+  }
+  toggle('al', 16); toggle('ar', 32);
+
+  function loop() {
+    Module._set_keys(held | sw);
+    Module._run_frame();                      // 1 画面 = 19 200 クロック
+    const fb = new Uint8Array(Module.HEAPU8.buffer, Module._get_fb(), 160 * 120);
+    for (let i = 0; i < fb.length; i++) {
+      const c = fb[i] ? 255 : 0;
+      img.data[i * 4] = img.data[i * 4 + 1] = img.data[i * 4 + 2] = c;
+      img.data[i * 4 + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+    const s = Module._get_score();
+    document.getElementById('score').textContent = (s >> 4) + ' - ' + (s & 15);
+    document.getElementById('frames').textContent = Module._get_frames();
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+} };
+</script>
+<script src="sim.js"></script>
+</body>
+</html>
