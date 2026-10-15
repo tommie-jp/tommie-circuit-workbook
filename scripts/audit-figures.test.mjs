@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { auditCircuitText, auditInstrument, auditWireColors, inSeries, parseValue } from './audit-figures.mjs';
+import { auditCircuitText, auditInstrument, auditWireColors, inSeries, ltspiceStatus, parseValue } from './audit-figures.mjs';
 
 test('parses engineering suffixes and infix notation', () => {
   assert.equal(parseValue('4k7'), 4700);
@@ -38,4 +38,12 @@ test('flags vna without markers but allows tdr and scope xy', () => {
   assert.equal(auditInstrument('vna', ['traces:', '  - S11 tdr vf 0.66']).length, 0);
   assert.equal(auditInstrument('scope', ['view: xy']).length, 0);
   assert.equal(auditInstrument('scope', ['ch1: {wave: sine 1kHz 1V}']).length, 1);
+});
+
+test('classifies the LTspice section of an entry with a circuit', () => {
+  const fence = '```circuit\nparts:\n```\n';
+  assert.equal(ltspiceStatus('# x\n'), null);
+  assert.equal(ltspiceStatus(fence), 'missing');
+  assert.equal(ltspiceStatus(`${fence}## LTspice での確かめ\n`), 'checked');
+  assert.equal(ltspiceStatus(`${fence}### LTspice での確かめ (対象外とした範囲)\n`), 'excluded');
 });

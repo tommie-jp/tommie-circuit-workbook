@@ -11,6 +11,8 @@
  * 4. 実体配線図の線の色: 赤は + だけ・黒は − (GND) だけ (breadboard-wiring)。極性の逆挿しを見せる題は除く。
  * 5. 計器の画面 (instrument-screen): vna / spectrum は本文の数字の所にマーカー、scope はカーソルか Measure。
  *    TDR (`tdr`)・`mark` 注釈・XY 表示 (`view: xy`) は別の手段があるので除く。
+ * 6. LTspice での確かめの節: 回路図 (circuit) のある題に `## LTspice での確かめ` があるか。
+ *    見出しに「対象外」とあれば算術で確かめた題として別に数える。無い題は `--verbose` で一覧する。
  */
 import { readEntries } from './collect.mjs';
 import { fencesIn } from './fences.mjs';
@@ -90,10 +92,24 @@ export function auditInstrument(fence, block) {
   return [];
 }
 
+/** 回路図のある題の LTspice 節の状態: 'checked' | 'excluded' | 'missing'。回路図が無ければ null。 */
+export function ltspiceStatus(text) {
+  if (!/^```circuit\s*$/m.test(text)) return null;
+  const heading = /^#{2,3}\s+LTspice.*$/m.exec(text);
+  if (!heading) return 'missing';
+  return /対象外/.test(heading[0]) ? 'excluded' : 'checked';
+}
+
 function main(args) {
   const verbose = args.includes('--verbose');
   const tally = new Map();
+  const ltspice = { checked: 0, excluded: 0, missing: 0 };
   for (const read of readEntries()) {
+    const status = ltspiceStatus(read.text);
+    if (status) {
+      ltspice[status] += 1;
+      if (verbose && status === 'missing') console.log(`${read.path}: [LTspice 未確認]`);
+    }
     const lines = read.text.split('\n');
     const { blocks } = fencesIn(read.text);
     for (const block of blocks) {
@@ -116,6 +132,7 @@ function main(args) {
       }
     });
   }
+  console.log(`LTspice (回路図のある題): 確認済み ${ltspice.checked} 題・対象外 ${ltspice.excluded} 題・未確認 ${ltspice.missing} 題`);
   for (const [kind, count] of tally) console.log(`${kind}: ${count} 件`);
   if (tally.size === 0) console.log('指摘なし');
 }
