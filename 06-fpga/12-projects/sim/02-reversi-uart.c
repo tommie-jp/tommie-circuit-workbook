@@ -1,5 +1,7 @@
 // 12-2 リバーシを UART で PC と対戦させる — Pico 2 の主ループ
-// UART0 (GP0 が TX、GP1 が RX) を 115200 bps 8N1 で使い、リバーシ UART プロトコル v0.2 の一部を話す。
+// PC とは stdio で話す。stdio は USB (CDC) と UART0 (GP0 が TX、GP1 が RX、115200 bps 8N1) の両方に出し、両方から受ける。
+// Debug Probe が無ければ USB だけ、あれば Probe の UART でも同じに話せる。リバーシ UART プロトコル v0.2 の一部を話す。
+// AD3 で見るために、受けた行の写しを UART1 (GP4) に出し、行を受け終えてから答えを送り始めるまで GP2 を H にする。
 // 盤面の計算 (合法手・裏返す石・最善手) は accel_* の 3 つの関数に任せる。
 // SOFT_FPGA を定義したビルドでは accel.cpp が 12-1 の回路 (Verilator の C++) で答え、
 // 定義しないビルドでは下の C の関数が同じ答えを出す (比べるためと、PC の試験のため)。
@@ -9,11 +11,12 @@
 #include "pico/stdlib.h"
 #include "hardware/uart.h"
 
-#define UART_ID  uart0
-#define BAUD     115200
-#define PIN_TX   0
-#define PIN_RX   1
-#define LINE_MAX 80                    // 受ける 1 行の最大 (CR LF を除く)
+#define BAUD      115200
+#define PIN_RX0   1                     // UART0 の RX (stdio が使う)。Probe をつながないときに浮かせない
+#define COPY_UART uart1
+#define PIN_COPY  4                     // UART1 の TX: 受けた行の写し (AD3 用)
+#define PIN_BUSY  2                     // 行を受け終えてから答えを送り始めるまで H (AD3 用)
+#define LINE_MAX  80                    // 受ける 1 行の最大 (CR LF を除く)
 
 uint64_t accel_legal(uint64_t own, uint64_t opp);
 uint64_t accel_flip(uint64_t own, uint64_t opp, unsigned move);
@@ -71,8 +74,16 @@ static unsigned long total_clocks;      // 回路が探すのに使ったクロ�
 static uint64_t total_us;               // 考えるのに使った時間の合計
 
 static void send(const char *s) {       // 1 行送る。行の終わりは CR LF
-    uart_puts(UART_ID, s);
-    uart_puts(UART_ID, "\r\n");
+    char buf[LINE_MAX + 3];
+    int n = snprintf(buf, sizeof buf, "%s\r\n", s);
+    gpio_put(PIN_BUSY, 0);              // 答えを送り始める
+    stdio_put_string(buf, n, false, false);  // 改行の変換をしない (CR LF をそのまま送る)
+}
+
+static void copy_line(const char *line, unsigned len, bool had_cr) {  // 受けた行を UART1 に写す
+    for (unsigned i = 0; i < len; i++) uart_putc_raw(COPY_UART, line[i]);
+    if (had_cr) uart_putc_raw(COPY_UART, '\r');
+    uart_putc_raw(COPY_UART, '\n');
 }
 
 static void new_game(int side) {
@@ -141,25 +152,32 @@ static void handle_line(const char *line, unsigned len, bool had_cr) {
 }
 
 int main(void) {
-    uart_init(UART_ID, BAUD);
-    uart_set_format(UART_ID, 8, 1, UART_PARITY_NONE);
-    gpio_set_function(PIN_TX, GPIO_FUNC_UART);
-    gpio_set_function(PIN_RX, GPIO_FUNC_UART);
+    stdio_init_all();                                         // USB と UART0 (GP0・GP1、115200 8N1)
+    gpio_pull_up(PIN_RX0);
+    uart_init(COPY_UART, BAUD);
+    uart_set_format(COPY_UART, 8, 1, UART_PARITY_NONE);
+    gpio_set_function(PIN_COPY, GPIO_FUNC_UART);
+    gpio_init(PIN_BUSY);
+    gpio_set_dir(PIN_BUSY, GPIO_OUT);
     send("RE");                                               // 起きたことを知らせる
 
     char line[LINE_MAX];
     unsigned len = 0;
     bool cr = false, too_long = false;
     while (true) {
-        char c = uart_getc(UART_ID);
-        if (c == '\n') {                                      // 行の終わり
+        int c = getchar_timeout_us(1000000);                  // USB か UART0 から 1 字
+        if (c == PICO_ERROR_TIMEOUT) continue;
+        if (c == '\n') {                                     // 行の終わり
+            gpio_put(PIN_BUSY, 1);
+            copy_line(line, len, cr);
             if (too_long) send("-00 too long");
             else          handle_line(line, len, cr);
+            gpio_put(PIN_BUSY, 0);                            // 答えない行 (SW・EB など) もここで L
             len = 0; cr = false; too_long = false;
         } else if (c == '\r') {
             cr = true;
         } else {
-            if (len < LINE_MAX) line[len++] = c;
+            if (len < LINE_MAX) line[len++] = (char)c;
             else                too_long = true;
             cr = false;
         }

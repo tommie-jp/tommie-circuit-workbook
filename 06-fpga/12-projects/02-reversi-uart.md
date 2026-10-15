@@ -13,11 +13,14 @@ device: PICO
 
 > [!WARNING]
 > **この題は実機で組んでいない。** Pico 2 のプログラムは `.uf2` までビルドし、RP2350 のエミュレータ (picoemu) に載せて
-> UART 越しに 200 局を打たせた。PC では同じプログラムを替え玉の UART で動かし、PC の側のプログラムと 200 局を打たせた。
-> 実物の Pico 2 への書き込み、Debug Probe と PC の端末での対局、AD3 での測定はしていない。
+> UART0 越しに 200 局を打たせた。PC では同じプログラムを替え玉の stdio で動かし、PC の側のプログラムと 200 局を打たせた。
+> 実物の Pico 2 への書き込み、USB と Debug Probe での PC との対局、AD3 での測定はしていない。
+> picoemu は USB を外に出さないので、USB の道は picoemu でも確かめていない。
 > 「見るべき値」の時間の欄は、測って書く。
 
-12-1 で作ったリバーシのアクセラレータを Pico 2 の Soft-FPGA に載せ、**PC と UART で対戦させる**。
+12-1 で作ったリバーシのアクセラレータを Pico 2 の Soft-FPGA に載せ、**PC と対戦させる**。
+PC とは Pico 2 の **USB** (仮想のシリアルポート) でつなぐ。USB ケーブル 1 本で給電と書き込みと対局ができ、ほかの機器は要らない。
+Raspberry Pi Debug Probe を持っていれば、Pico 2 の UART0 (GP0・GP1) にもつなげる。同じ `.uf2` のまま、どちらからでも同じに話せる。
 PC からは「黒で始めて」「相手は d3 に打った」と 1 行ずつ送り、Pico 2 は自分の手を 1 行で返す。
 行の決まりは、自作の CPU を PC と対戦させるために決められた [リバーシ UART プロトコル](https://github.com/tommie-jp/reversi-uart-protocol) (v0.2) に従う。
 同じ決まりを話す物どうしなら、相手が PC のソフトでも、別の人が FPGA で作った CPU でも対戦できる。
@@ -26,7 +29,7 @@ PC からは「黒で始めて」「相手は d3 に打った」と 1 行ずつ�
 
 | 仕事 | 誰がするか | 理由 |
 | --- | --- | --- |
-| UART のビットを字にする | Pico 2 の UART の部品 (ハードウェア) | 7-1・7-2 では Verilog で書いた。この題では盤の計算に絞るため、Pico 2 に元からある部品に任せる |
+| USB・UART のビットを字にする | Pico 2 の USB と UART の部品 (ハードウェア) と、SDK の stdio | 7-1・7-2 では UART を Verilog で書いた。この題では盤の計算に絞るため、Pico 2 に元からある部品に任せる |
 | 行を読み、決まりどおりに答える | C の主ループ | 字の並びを比べて分かれる仕事。分かれ道の多い仕事は CPU が得意 |
 | 合法手・裏返す石・最善手 | 12-1 の回路 (Verilator の C++) | 64 マスを同時に調べる仕事。回路が得意 |
 
@@ -37,8 +40,12 @@ UART を 115200 bps のビットのまま Verilog で読まないのは、Soft-F
 
 | 項目 | 決め | 理由 |
 | --- | --- | --- |
-| UART | Pico 2 の UART0。GP0 が TX (送る)、GP1 が RX (受ける)。115200 bps、8N1、流れの制御なし | プロトコルの §4 の例の速さ。GP0・GP1 は UART0 の既定のピン (7-3 と同じ) |
-| PC とのつなぎ | Raspberry Pi Debug Probe の UART の端子 (3.3 V) | Pico 2 のピンは 3.3 V (0-3)。Debug Probe は Pico 2 への書き込みにも使える (0-9) |
+| PC とのつなぎ | 既定は Pico 2 の USB (CDC。PC からはシリアルポートに見える)。Debug Probe があれば、その UART の端子 (3.3 V) を GP0・GP1 につないでもよい | Debug Probe を持っていない人でも組めるようにする。Probe は持っていれば便利 (書き込み・PC が送った線そのものを AD3 で読める) なので、外さずに残す |
+| stdio | `pico_enable_stdio_usb` と `pico_enable_stdio_uart` を両方有効にする。出す字は USB と UART0 の両方に出て、受ける字はどちらからでも受ける | 1 つの `.uf2` で 2 つのつなぎ方に応じる。UART0 は GP0 が TX、GP1 が RX、115200 bps、8N1 (プロトコルの §4 の例の速さ。SDK の既定) |
+| 改行 | `stdio_put_string(…, false, false)` で送り、stdio の改行の変換 (LF を CR LF にする) を通さない | プロトコルは CR LF だけを許す (§5)。`printf("…\r\n")` だと変換で `\r\r\n` になる |
+| 受けた行の写し | 受けた行を、そのまま UART1 の TX (GP4、115200 bps 8N1) に出す | **AD3 では USB の中身を読みにくい** (USB は D+・D− の差動 12 Mbps で、線を取り出すにはケーブルを割くか変換の基板が要る。WaveForms の Logic の読み下しの一覧 (UART・SPI・I2C・CAN・I2S など) にも USB は見当たらない)。PC → Pico 2 の行を AD3 で読むために、Pico 2 が受けた字を UART で出し直す |
+| 時間の印 | 行の LF を受けてから答えを送り始めるまで GP2 を H にする | USB には 1 ms ごとの区切りがあり、PC での受け取りの時刻が揺れる。Pico 2 が考えた時間は、この印の幅で測る |
+| GP1 | プルアップする | Debug Probe をつながないと GP1 (UART0 の RX) が浮き、雑音を字として読むおそれがある |
 | 話す行 | 必須の `SB` `SW` `MO` `PA` `EB` `EW` `ED` `VE` `PI` と、`CA` `XB`。`BO` (盤を丸ごと送る) は受けない | プロトコルで任意とされた行を減らし、主ループを短くした |
 | 打つ手 | 12-1 の `reversi_accel` の最善手 (角を先に、次に裏返る数の多い手) | 12-1 で C の参照実装と突き合わせ済み |
 | 回路を使わないビルド | `SOFT_FPGA` を定義しないと、同じ答えを C の関数で出す | 回路の版と C の版で同じ棋譜になることを確かめる。速さを比べる |
@@ -90,19 +97,26 @@ skinparam defaultFontName "Noto Sans CJK JP"
 skinparam rectangle {
   RoundCorner 6
 }
-title 図1 PC の play.py と Pico 2 が UART で 1 行ずつ話し、盤の計算は 12-1 の回路が受け持つ
+title 図1 PC の play.py と Pico 2 が USB か UART で 1 行ずつ話し、盤の計算は 12-1 の回路が受け持つ
 
 rectangle "PC\nplay.py\n(盤を数え直して確かめる)" as PC #E8F0FE
-rectangle "Debug Probe\nUSB ⇔ UART 3.3 V" as DP
+rectangle "Debug Probe\n(あれば)\nUSB ⇔ UART 3.3 V" as DP
+rectangle "USB (CDC)\n既定のつなぎ" as USB #E6F4EA
 rectangle "UART0\nGP1 (RX)・GP0 (TX)\n115200 bps" as UART #E6F4EA
+rectangle "stdio\nUSB と UART0 の\n両方に出し、両方から受ける" as STDIO #E6F4EA
 rectangle "主ループ (C)\n行を読む・盤を持つ" as MAIN #FFF8E1
+rectangle "AD3 Logic\nGP0・GP4 (写し)・GP2 (印)" as AD #F3E5F5
 rectangle "accel.cpp\naccel_legal / flip / pick" as ACC #FFF8E1
 rectangle "reversi_accel\n(12-1 の Verilog を\nVerilator の C++ に)" as RTL #E6F4EA
 
+PC --> USB : USB ケーブル
 PC --> DP : USB
 DP --> UART : TX → GP1
 UART --> DP : GP0 → RX
-UART --> MAIN : 1 字ずつ
+USB --> STDIO
+UART --> STDIO
+STDIO --> MAIN : 1 字ずつ
+MAIN --> AD : 写し (UART1)・印
 MAIN --> ACC : own・opp
 ACC --> RTL : eval()・クロック
 RTL --> ACC : legal・flip・best
@@ -111,7 +125,7 @@ RTL --> ACC : legal・flip・best
 
 ![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/plantuml/02-reversi-uart.svg)
 
-- 主ループは字を 1 つずつ受け、LF が来たら 1 行として調べる。盤 (`black` と `white` の 64 ビット 2 つ) は主ループが持つ
+- 主ループは stdio から字を 1 つずつ受け、LF が来たら 1 行として調べる。字が USB から来たか UART0 から来たかは区別しない。盤 (`black` と `white` の 64 ビット 2 つ) は主ループが持つ
 - 盤の計算は `accel_legal` `accel_flip` `accel_pick` の 3 つの関数だけを呼ぶ。中身が回路か C かを、主ループは知らない
 - 最善手を探す `accel_pick` だけクロックを回す (合法手の数 + 1 クロック、12-1)。`accel_legal` と `accel_flip` は組み合わせ回路なので `eval()` 1 回で答えが出る
 
@@ -119,51 +133,66 @@ RTL --> ACC : legal・flip・best
 
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
-title: 図2 Debug Probe と AD3 を GP0・GP1 につなぐ
+title: 図2 AD3 は GP0・GP4・GP2 を読む。Debug Probe はあれば GP0・GP1 に
 parts:
   MCU: pico2 3,6 mirror
+  TX0: port 5.4,2.4
+  RX0: port 5.4,2.8
+  G1: ground 5.4,3.2 r270
+  BUSY: port 5.4,3.6
+  COPY: port 5.4,4.4
   DP:
     type: device
     at: 13,2.8
-    label: Debug Probe (UART)
+    label: Debug Probe
     pins: [RX, TX, GND]
+  TX0: port 10.6,2.4
+  RX0: port 10.6,2.8
+  G2: ground 10.6,3.2 r90
   AD:
     type: device
-    at: 13,6
+    at: 13,5.2
     label: AD3
-    pins: [DIO1, DIO0, GND]
-  G1: ground 7.4,4
-  G2: ground 11,4
-  G3: ground 11,7
+    pins: [DIO1, DIO0, DIO2, GND]
+  TX0: port 10.6,4.8
+  COPY: port 10.6,5.2
+  BUSY: port 10.6,5.6
+  G3: ground 10.6,6 r90
 wires:
-  - MCU.GP0 -- 9.4,2.4 -- DP.RX
-  - MCU.GP1 -- 8.6,2.8 -- DP.TX
-  - MCU.GND3 -| 7.4,4
-  - DP.GND -| 11,4
-  - 9.4,2.4 |- AD.DIO1
-  - 8.6,2.8 |- AD.DIO0
-  - AD.GND -| 11,7
+  - MCU.GP0 -- 5.4,2.4
+  - MCU.GP1 -- 5.4,2.8
+  - MCU.GND3 -- 5.4,3.2
+  - MCU.GP2 -- 5.4,3.6
+  - MCU.GP4 -- 5.4,4.4
+  - 10.6,2.4 -- DP.RX
+  - 10.6,2.8 -- DP.TX
+  - 10.6,3.2 -- DP.GND
+  - 10.6,4.8 -- AD.DIO1
+  - 10.6,5.2 -- AD.DIO0
+  - 10.6,5.6 -- AD.DIO2
+  - 10.6,6 -- AD.GND
 style:
   pitch: 1.2
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/circuit/02-reversi-uart.svg)
 
-- Debug Probe の TX (Probe が送る) を Pico 2 の GP1 (受ける) へ、Pico 2 の GP0 (送る) を Probe の RX へ。**送ると受けるを交差させる**
-- AD3 は同じ 2 本を読むだけ。DIO0 が PC → Pico 2 (GP1)、DIO1 が Pico 2 → PC (GP0)
-- 3 つの GND を共通にする。どれも 3.3 V の信号で、レベル変換は要らない
-- Pico 2 の電源は USB (PC と別のポートでよい)。Debug Probe も PC の USB につなぐ
+- 線で結ぶ代わりに、**同じ名前の端子 (白丸と名前) どうしがつながっている** (12-4 と同じ書き方)。`TX0` は GP0、`RX0` は GP1、`BUSY` は GP2、`COPY` は GP4
+- PC とは Pico 2 の USB でつなぐので、回路図に PC は出てこない。Pico 2 の電源も同じ USB から取る
+- AD3 は 3 本を読むだけ。DIO1 が Pico 2 → PC (GP0)、DIO0 が PC → Pico 2 の行の写し (GP4)、DIO2 が時間の印 (GP2)
+- Debug Probe は**あれば**つなぐ。Probe の TX (Probe が送る) を Pico 2 の GP1 (受ける) へ、Pico 2 の GP0 (送る) を Probe の RX へ。**送ると受けるを交差させる**
+- GND はどれも共通にする。どれも 3.3 V の信号で、レベル変換は要らない
 
 ## 部品表
 
 | 部品 | 値・型番 | 数 | 役 |
 | --- | --- | --- | --- |
 | MCU | Raspberry Pi Pico 2 | 1 | Soft-FPGA (12-1 の回路) と主ループ |
-| DP | Raspberry Pi Debug Probe | 1 | PC の USB と Pico 2 の UART (3.3 V) をつなぐ。書き込みにも使える |
+| DP | Raspberry Pi Debug Probe (**あれば**。無くても組める) | 1 | PC の USB と Pico 2 の UART (3.3 V) をつなぐ。書き込みにも使える |
 | — | ブレッドボード (half) | 1 | |
-| — | ジャンパ線 | 6 本 | Debug Probe の UART の端子から 3 本 (端子の線の先をブレッドボードに挿す)、AD3 から 3 本 |
-| AD | Analog Discovery 3 | 1 | Logic で TX と RX の字を読む |
-| — | USB ケーブル | 2 本 | Pico 2 の給電と書き込み、Debug Probe と PC |
+| — | ジャンパ線 | 1 本 + 機器の線 | Pico 2 の GND (3 番) から − のレールへ 1 本。AD3 の線 4 本と、Probe の UART の端子の線 3 本 (あれば) は、先をブレッドボードに挿す |
+| AD | Analog Discovery 3 | 1 | Logic で Pico 2 が送った字・受けた字の写し・時間の印を読む |
+| — | USB ケーブル | 1 本 (Probe があれば 2 本) | Pico 2 と PC (給電・書き込み・対局)。Debug Probe と PC |
 
 電源は教科書の既定の 5 V ではなく **3.3 V** (Pico 2 のピン)。Pico 2 のピンに 5 V を入れると壊れるため (0-3)。
 3.3 V でない USB-UART の変換器 (5 V のもの) をつながない。
@@ -172,34 +201,39 @@ style:
 
 ```bread
 # ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
-title: 図3 GP0 (TX)・GP1 (RX)・GND の 3 列に Debug Probe と AD3 をつなぐ
+title: 図3 GND は − のレールにまとめる。Debug Probe はあれば i5・j6 に挿す
 board: half
 parts:
   MCU: pico2 @ h5
   DP:
     type: device
     at: bottom
-    label: Debug Probe (UART)
-    pins: [RX, TX, GND]
+    label: Debug Probe (あれば)
+    pins: [RX, GND, TX]
   AD:
     type: device
     at: bottom
     label: AD3 Logic
-    pins: [DIO1, DIO0, GND]
+    pins: [DIO2, DIO0, DIO1, GND]
 wires:
-  - DP.RX -- j5 green
+  - j7 -- -b7 black
+  - DP.RX -- i5 green [h0]
+  - DP.GND -- -b3 black
   - DP.TX -- j6 yellow
-  - DP.GND -- j7 black
-  - AD.DIO1 -- i5 white
-  - AD.DIO0 -- i6 orange
-  - AD.GND -- i7 black
+  - AD.DIO1 -- j5 white [h10, v-130, h-205]
+  - AD.DIO2 -- j8 purple
+  - AD.DIO0 -- j10 orange
+  - AD.GND -- -b17 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/breadboard/02-reversi-uart.svg)
 
-- `pico2 @ h5` は 7-3 と同じ向き。GP0 (1 番) が 5 列、GP1 (2 番) が 6 列、GND (3 番) が 7 列
-- Pico 2 のピンは h 行に挿さり、同じ列の i・j 行の穴とつながる (f〜j 行は 1 つの列でつながっている)。Debug Probe は j 行、AD3 は i 行から取る
-- 線の色: 黄が PC → Pico 2 (RX)、緑が Pico 2 → PC (TX)、黒が GND。AD3 の線は橙 (DIO0) と白 (DIO1)。赤は使わない (電源を配らない)
+- `pico2 @ h5` は 7-3 と同じ向き。GP0 (1 番) が 5 列、GP1 (2 番) が 6 列、GND (3 番) が 7 列、GP2 (4 番) が 8 列、GP4 (6 番) が 10 列
+- Pico 2 のピンは h 行に挿さり、同じ列の i・j 行の穴とつながる (f〜j 行は 1 つの列でつながっている)
+- **GND は − のレール (下) にまとめる。** Pico 2 の GND (j7) から − のレールへ 1 本渡し、AD3 と Debug Probe の GND はレールに挿す
+- AD3 の DIO1 (白) は、i 行と j 行の間を通して j5 へ入れる。ほかの線の端 (j 行) より上を通るので、線どうしが交差しない
+- Debug Probe が無ければ、緑・黄と Probe の黒の 3 本を挿さないだけでよい。ほかの線は変わらない
+- 線の色: 緑が Pico 2 → Probe (GP0)、黄が Probe → Pico 2 (GP1)、黒が GND。AD3 の線は白 (DIO1、GP0)、橙 (DIO0、写し)、紫 (DIO2、印)。赤は使わない (電源を配らない)
 - 流れる電流は UART のピンのごく小さな電流。信号は 115200 bps (1 bit 8.7 µs) で、ブレッドボードの範囲 (3 MHz 以下) に収まる
 
 ## Pico 2 のプログラム
@@ -213,7 +247,9 @@ C/C++ を第 1、MicroPython を第 2 にする決まりがあるが、この題
 
 ```c
 // 12-2 リバーシを UART で PC と対戦させる — Pico 2 の主ループ
-// UART0 (GP0 が TX、GP1 が RX) を 115200 bps 8N1 で使い、リバーシ UART プロトコル v0.2 の一部を話す。
+// PC とは stdio で話す。stdio は USB (CDC) と UART0 (GP0 が TX、GP1 が RX、115200 bps 8N1) の両方に出し、両方から受ける。
+// Debug Probe が無ければ USB だけ、あれば Probe の UART でも同じに話せる。リバーシ UART プロトコル v0.2 の一部を話す。
+// AD3 で見るために、受けた行の写しを UART1 (GP4) に出し、行を受け終えてから答えを送り始めるまで GP2 を H にする。
 // 盤面の計算 (合法手・裏返す石・最善手) は accel_* の 3 つの関数に任せる。
 // SOFT_FPGA を定義したビルドでは accel.cpp が 12-1 の回路 (Verilator の C++) で答え、
 // 定義しないビルドでは下の C の関数が同じ答えを出す (比べるためと、PC の試験のため)。
@@ -223,11 +259,12 @@ C/C++ を第 1、MicroPython を第 2 にする決まりがあるが、この題
 #include "pico/stdlib.h"
 #include "hardware/uart.h"
 
-#define UART_ID  uart0
-#define BAUD     115200
-#define PIN_TX   0
-#define PIN_RX   1
-#define LINE_MAX 80                    // 受ける 1 行の最大 (CR LF を除く)
+#define BAUD      115200
+#define PIN_RX0   1                     // UART0 の RX (stdio が使う)。Probe をつながないときに浮かせない
+#define COPY_UART uart1
+#define PIN_COPY  4                     // UART1 の TX: 受けた行の写し (AD3 用)
+#define PIN_BUSY  2                     // 行を受け終えてから答えを送り始めるまで H (AD3 用)
+#define LINE_MAX  80                    // 受ける 1 行の最大 (CR LF を除く)
 
 uint64_t accel_legal(uint64_t own, uint64_t opp);
 uint64_t accel_flip(uint64_t own, uint64_t opp, unsigned move);
@@ -285,8 +322,16 @@ static unsigned long total_clocks;      // 回路が探すのに使ったクロ�
 static uint64_t total_us;               // 考えるのに使った時間の合計
 
 static void send(const char *s) {       // 1 行送る。行の終わりは CR LF
-    uart_puts(UART_ID, s);
-    uart_puts(UART_ID, "\r\n");
+    char buf[LINE_MAX + 3];
+    int n = snprintf(buf, sizeof buf, "%s\r\n", s);
+    gpio_put(PIN_BUSY, 0);              // 答えを送り始める
+    stdio_put_string(buf, n, false, false);  // 改行の変換をしない (CR LF をそのまま送る)
+}
+
+static void copy_line(const char *line, unsigned len, bool had_cr) {  // 受けた行を UART1 に写す
+    for (unsigned i = 0; i < len; i++) uart_putc_raw(COPY_UART, line[i]);
+    if (had_cr) uart_putc_raw(COPY_UART, '\r');
+    uart_putc_raw(COPY_UART, '\n');
 }
 
 static void new_game(int side) {
@@ -355,25 +400,32 @@ static void handle_line(const char *line, unsigned len, bool had_cr) {
 }
 
 int main(void) {
-    uart_init(UART_ID, BAUD);
-    uart_set_format(UART_ID, 8, 1, UART_PARITY_NONE);
-    gpio_set_function(PIN_TX, GPIO_FUNC_UART);
-    gpio_set_function(PIN_RX, GPIO_FUNC_UART);
+    stdio_init_all();                                         // USB と UART0 (GP0・GP1、115200 8N1)
+    gpio_pull_up(PIN_RX0);
+    uart_init(COPY_UART, BAUD);
+    uart_set_format(COPY_UART, 8, 1, UART_PARITY_NONE);
+    gpio_set_function(PIN_COPY, GPIO_FUNC_UART);
+    gpio_init(PIN_BUSY);
+    gpio_set_dir(PIN_BUSY, GPIO_OUT);
     send("RE");                                               // 起きたことを知らせる
 
     char line[LINE_MAX];
     unsigned len = 0;
     bool cr = false, too_long = false;
     while (true) {
-        char c = uart_getc(UART_ID);
-        if (c == '\n') {                                      // 行の終わり
+        int c = getchar_timeout_us(1000000);                  // USB か UART0 から 1 字
+        if (c == PICO_ERROR_TIMEOUT) continue;
+        if (c == '\n') {                                     // 行の終わり
+            gpio_put(PIN_BUSY, 1);
+            copy_line(line, len, cr);
             if (too_long) send("-00 too long");
             else          handle_line(line, len, cr);
+            gpio_put(PIN_BUSY, 0);                            // 答えない行 (SW・EB など) もここで L
             len = 0; cr = false; too_long = false;
         } else if (c == '\r') {
             cr = true;
         } else {
-            if (len < LINE_MAX) line[len++] = c;
+            if (len < LINE_MAX) line[len++] = (char)c;
             else                too_long = true;
             cr = false;
         }
@@ -382,7 +434,11 @@ int main(void) {
 ```
 
 - 盤は主ループの `black` と `white` が持つ。`accel_*` には「打つ側」と「相手」の順に渡す。相手の手を確かめるときは、相手の石を `own` にして渡す (`opponent_move`)
-- `uart_getc` は字が来るまで待つ。主ループは字を 1 つずつ見て、CR を覚え、LF で 1 行を調べる。LF の前に CR が無ければ `-03`
+- `stdio_init_all` が USB と UART0 の両方を用意する (どちらを使うかは CMake の `pico_enable_stdio_*` で決まる)。`getchar_timeout_us` は USB と UART0 のどちらに来た字も返す
+- 主ループは字を 1 つずつ見て、CR を覚え、LF で 1 行を調べる。LF の前に CR が無ければ `-03`
+- 送るのは `send` だけ。`stdio_put_string` の 4 つめの引数 `false` が改行の変換を止める。止めないと CR LF の CR がもう 1 つ増える
+- LF を受けたら GP2 を H にし、受けた行を UART1 に写す (`copy_line`)。`send` が送り始める前に GP2 を L にする。答えない行 (`SW` `EB` など) は、行を調べ終えた所で L にする
+- PC がポートを開くまで、USB への出力は捨てられる (SDK の stdio_usb は、PC が DTR を立てたのを見て送り始める)。起きたときの `RE` は、PC が後から開くと届かない。play.py は `PI` から始めるので困らない
 - 自分の手の座標は、番号 `m` の `m % 8` が列 (`a`〜`h`)、`m / 8` が行 (`1`〜`8`)
 - `XB` の `us` は、`accel_pick` と `accel_flip` を呼んでいた時間の合計 (`time_us_64` の µs)。行を送る時間は含まない
 - `#ifndef SOFT_FPGA` の中は 12-1 の参照実装と同じ考え方 (8 方向を 1 マスずつ辿る)。`clocks` は、回路なら何クロックかかったかを同じ数え方で出す
@@ -457,24 +513,33 @@ add_soft_fpga(reversi122 reversi.c reversi_accel)
 target_sources(reversi122 PRIVATE accel.cpp)
 target_compile_definitions(reversi122 PRIVATE SOFT_FPGA)
 target_link_libraries(reversi122 hardware_uart)
+pico_enable_stdio_usb(reversi122 1)          # stdio を USB (CDC) にも出す
+pico_enable_stdio_uart(reversi122 1)         # stdio を UART0 (GP0・GP1) にも出す (Debug Probe・AD3 用)
 
 # 比べるための C だけの版
 add_executable(reversi122_c reversi.c)
 target_link_libraries(reversi122_c pico_stdlib hardware_uart)
+pico_enable_stdio_usb(reversi122_c 1)
+pico_enable_stdio_uart(reversi122_c 1)
 pico_add_extra_outputs(reversi122_c)
 ```
 
 - `add_soft_fpga` の主ループは `.c` でもよい。`stub_mutex.h` を先に読ませる指定は C++ のファイルにだけ掛かる (5-1 の `$<COMPILE_LANGUAGE:CXX>`)
 - `target_compile_definitions` で `SOFT_FPGA` を定義すると、`reversi.c` の C の関数が消え、`accel.cpp` の関数がつながる
+- `pico_enable_stdio_usb` と `pico_enable_stdio_uart` を両方 1 にする。片方だけにすると、もう片方のつなぎ方では話せない
 
 ビルドの打ち方は [5-1 の「ビルドする」](../05-soft-fpga-pico/01-verilator-on-pico.md#ビルドする) と同じ 2 行。
+ただし **USB を使うので、TinyUSB 入りの Pico SDK でビルドする** (5-14)。5-1 の `wb-pico-sdk` の Pico SDK には TinyUSB が入っておらず、
+CMake が「TinyUSB submodule has not been initialized」と警告して、黙って USB の無い `.uf2` ができる。
+手元の Pico SDK 2.2.0 (`git clone --recurse-submodules`) を `-v "$HOME/pico-sdk":/psdk:ro -e PICO_SDK_PATH=/psdk` で差し込む打ち方は 5-14 と同じ。
 
 | できた物 | 大きさ | text | bss |
 | --- | --- | --- | --- |
-| `build/reversi122.uf2` (回路の版) | 126 976 バイト | 67 272 バイト | 2 944 バイト |
-| `build/reversi122_c.uf2` (C だけの版) | 36 352 バイト | 21 888 バイト | 1 256 バイト |
+| `build/reversi122.uf2` (回路の版) | 158 208 バイト | 82 784 バイト | 5 532 バイト |
+| `build/reversi122_c.uf2` (C だけの版) | 66 560 バイト | 37 072 バイト | 3 848 バイト |
 
-回路の版は、5-1 の `blink` (`.uf2` 92 160 バイト) より 35 KB ほど大きい。Verilator のランタイムに、回路の C++ と UART の部品が足された分である。
+回路の版は、5-1 の `blink` (`.uf2` 92 160 バイト) より 65 KB ほど大きい。Verilator のランタイムに、回路の C++ と USB (TinyUSB)・UART の部品が足された分である。
+USB を入れる前 (UART0 だけ) は回路の版が 126 976 バイト、C の版が 36 352 バイトだったので、USB の部品で約 30 KB 増えた。
 `arm-none-eabi-readelf -S` で `.tdata` が 0 バイト、`.tbss` が 0x44 バイトなので、5-1 の `pico_tls.cpp` の配列のままでよい。**実機では動かしていない。**
 
 ## PC の側 — play.py
@@ -656,51 +721,69 @@ if __name__ == "__main__":
 
 ## 動かす
 
+### Debug Probe が無いとき (既定)
+
 1. Pico 2 の BOOTSEL を押しながら USB をつなぎ、出たドライブに `reversi122.uf2` を写す (0-2)
-2. Debug Probe を PC につなぐ。Linux なら `/dev/ttyACM0` などの名前で見える (Debug Probe は書き込みの口と UART の口の 2 つを出す。UART の方を選ぶ)
-3. 端末ソフト (115200 bps、改行を CR LF で送る設定) で `PI` を打ち、`+PI` が返るのを見る
+2. 書き込むと Pico 2 が起き直し、USB のシリアルポートが出る。Linux なら `/dev/ttyACM0` など、Windows なら `COM3` など
+3. 端末ソフト (改行を CR LF で送る設定) で `PI` を打ち、`+PI` が返るのを見る。USB なので速さ (bps) の設定は何でもよい
 4. `python3 play.py /dev/ttyACM0` で対局する。乱数の相手と 5 局なら `python3 play.py /dev/ttyACM0 --random 5`
 
+Pico 2 を書き直したり BOOTSEL で止めたりすると、USB のシリアルポートは一度消えて出直す。play.py を開いたままにしていたら、開き直す。
+
+### Debug Probe があるとき
+
+同じ `.uf2` のまま、図3 の緑・黄・黒の 3 本を挿して、Probe の UART の口を開く。
+
+1. Debug Probe を PC につなぐ。Probe は書き込みの口と UART の口の 2 つを出す。Linux なら Pico 2 の USB と合わせて `/dev/ttyACM0` と `/dev/ttyACM1` が出る。番号はつなぐ順で変わるので、次の手順で名前から選ぶ
+2. `ls /dev/serial/by-id/` で `Debug_Probe` を含む名前を探し、`python3 play.py /dev/serial/by-id/<その名前>` で対局する (115200 bps は play.py の既定)
+3. Probe から書き込むなら BOOTSEL は要らない (0-9)
+
+答えは USB と UART0 の両方に出る。Probe で対局している間に Pico 2 の USB のポートを別の端末で開いても、同じ答えが見える。
 Pico 2 を先に起こすと、`RE` の行は PC が開く前に出て捨てられる。play.py は `RE` を読み飛ばすので、どちらの順でもよい。
 
 ## 計器の設定
 
 | 計器 | 設定 |
 | --- | --- |
-| Logic | DIO0 (GP1、PC → Pico 2)・DIO1 (GP0、Pico 2 → PC) を Enable。DIO は 3.3 V。GND を共通にする (0-4) |
+| Logic | DIO0 (GP4、PC → Pico 2 の行の写し)・DIO1 (GP0、Pico 2 → PC)・DIO2 (GP2、時間の印) を Enable。DIO は 3.3 V。GND を共通にする (0-4) |
 | 標本化 | 1 MHz (1 bit 8.68 µs に 8 標本ほど)、窓 1 ms (100 µs/div) |
-| トリガ | DIO0 の立ち下がり (PC が送る行の始まりのスタートビット) |
+| トリガ | DIO2 の立ち上がり (Pico 2 が行の LF を受けた所) |
 | 読み下し | Logic に UART を 2 つ足す。DIO0 と DIO1、115200 bps、8N1 |
-| 測る値 | DIO0 の LF の終わりから、DIO1 の `M` のスタートビットまでの時間 (Pico 2 が考えた時間 + 行を送り始めるまで) |
+| 測る値 | DIO2 の H の幅 (行を受けてから答えを送り始めるまで = Pico 2 が考えた時間 + 行を調べる時間) |
 
 標本化は、読み取る一番短い変化 (1 bit) の 4 倍より速くした (instrument-screen の流儀)。
 
+Debug Probe でつないでいるときは、DIO3 を GP1 (Probe → Pico 2 の線そのもの) に足すと、PC が送った字が届いた時刻も読める。
+写し (DIO0) は Pico 2 が受け終えてから出すので、届いた時刻は読めない。USB でつないでいるときは、届いた時刻は Logic では測れない。
+
 ## Logic に見えるはずの画面
 
-PC が `SB` を送り、Pico 2 が `MOd3` を返すところ。**返し始めるまでの間 (図では 35 µs) は仮の値**で、測って書き直す。
-字の並びとビットの長さ (8.68 µs) は決まりから決まる。
+PC が `SB` を送り、Pico 2 が `MOd3` を返すところ。**考える時間 (図では GP2 の H の 35 µs) は仮の値**で、測って書き直す。
+字の並びとビットの長さ (8.68 µs) は決まりから決まる。USB でつないでも Debug Probe でつないでも、この 3 本は同じに見える。
 
 ```logic
 # ロジックアナライザの画面 (tommie-fence の logic フェンス)
-title: 図4 PC の SB に、Pico 2 が MOd3 を返す (返し始めまでの間は仮)
+title: 図4 SB を受けて MOd3 を返す。GP2 の H の幅が考える時間 (仮)
 device: ad3
 time: 100us/div
 start: 0s
 sample: 1MHz
 signals:
-  RX: dio0 pattern 110110010101001000010101011000010010100001 bit 8.681us from 0s
-  TX: dio1 pattern 1010110010101111001010001001101011001100101011000010010100001 bit 8.681us from 391.319us
+  COPY: dio0 pattern 110110010101001000010101011000010010100001 bit 8.681us from 0s
+  TX: dio1 pattern 1010110010101111001010001001101011001100101011000010010100001 bit 8.681us from 36.319us
+  BUSY: dio2 edges 0s=0 10us=1 45us=0
 decode:
-  PC: uart RX baud 115200 8N1 ascii
+  PC: uart COPY baud 115200 8N1 ascii
   PICO: uart TX baud 115200 8N1 ascii
-cursors: [364.6us, 400us]
-trigger: RX falling at 17.362us
+cursors: [10us, 45us]
+trigger: BUSY rising at 10us
 ```
 
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/logic/02-reversi-uart.svg)
 
 - 1 字は 10 bit (スタート 1・データ 8・ストップ 1) で 86.8 µs。`SB\r\n` の 4 字は 347 µs、`MOd3\r\n` の 6 字は 521 µs で送り終わる
-- X1 (364.6 µs) は `SB\r\n` の LF のストップビットの終わり、X2 (400 µs) は `MOd3` の `M` のスタートビットの始まり (仮の位置)。**ΔX が Pico 2 の考える時間**を含む
+- X1 (10 µs) は GP2 が H になった所 (LF を受けた所)、X2 (45 µs) は L に戻って `MOd3` の `M` のスタートビットが始まる所 (仮の位置)。**ΔX が Pico 2 の考える時間**を含む
+- 写し (`COPY`) と答え (`TX`) は別の UART なので、写しを送っている間に答えが出始めてよい。写しの字の並びが PC の送った行と同じなら、Pico 2 は行を正しく受けている
 - 読み下しの行に、上の「話す行」の表の字が出れば、プロトコルの行の形は合っている
 
 ## 見るべき値
@@ -713,7 +796,9 @@ trigger: RX falling at 17.362us
 | 乱数の相手と 200 局 (Pico 2 が黒 100・白 100) | 最後まで打ち切り、Pico 2 の 5 582 手がすべて合法。Pico 2 の勝ち 165・引き分け 2・負け 33 | PC の試験 (回路の版と C の版で同じ) と picoemu |
 | 200 局で回路が探すのに使ったクロック | 41 387 (考えた回数 5 774、1 回あたり平均 7.2) | `XB` の `clocks` |
 | 1 字の時間 | 86.8 µs (115200 bps、10 bit) | 計算値 |
-| `SB` を送り終えてから `MOd3` が出始めるまで | (測って書く) µs | 図4の ΔX |
+| UART1 (GP4) の写し | 受けた字と 1 字も違わない (200 局で 35 602 字) | 層 A・picoemu |
+| GP2 の印 | 行ごとに 1 回 H になり、答えを送り始める前に L に戻る | 層 A |
+| GP2 の H の幅 (`SB` を受けてから `MOd3` を送り始めるまで) | (測って書く) µs | 図4の ΔX |
 | 1 回考える時間 (回路の版) | (測って書く) µs | `XB` の `us` ÷ `moves` |
 | 1 回考える時間 (C の版) | (測って書く) µs | 同上 |
 
@@ -730,37 +815,47 @@ trigger: RX falling at 17.362us
 ### 層 A — SDK のモック
 
 `npm run pico:test` の層 A (`tests/pico/host/cases/12-02-reversi-uart.c`)。本文の `reversi.c` を SDK のモックにつなぎ、
-`SOFT_FPGA` なし (C の計算) で動かす。UART に決まった行を流し、返した字を 1 字ずつ比べた。
+`SOFT_FPGA` なし (C の計算) で動かす。stdio に決まった行を流し、返した字・UART1 の写し・GP2 の変化を比べた。
+モックは USB と UART0 を分けない (どちらも stdio の 1 本の入口と出口)。
 
 | 確かめること | 期待値 | 結果 |
 | --- | --- | --- |
-| UART の設定 | 115200 bps、8N1、GP0・GP1 を UART に | 合った |
-| `PI` `VE` `SB` `MOe3` `XB` への答え | `RE` `+PI` `+VE02wb-reversi-12-2` `MOd3` `MOf3` `+XB moves=2 clocks=11 us=0` | 合った (モックの時刻は進まないので `us=0`) |
+| `PI` `VE` `SB` `MOe3` `XB` への答え | `RE` `+PI` `+VE02wb-reversi-12-2` `MOd3` `MOf3` `+XB moves=2 clocks=11 us=0` | 合った (考える間はモックの時刻が進まないので `us=0`) |
 | 誤った行 (`pi`、CR の無い `PI`、`MOz9`、`MOa1`、終局後の `PA`、`ZZ`) | `-02` `-03` `-04` `-05` `-06` `-01`。空の行には答えない | 合った |
+| 改行 | 答えの行の終わりが CR LF のまま (CR が増えない) | 合った |
+| UART1 | 115200 bps、8N1、GP4 を UART に。写しが受けた字 (13 行) と同じ。UART0 には直に書かない | 合った |
+| GP1 | プルアップ | 合った |
+| GP2 | 出力。13 行で 13 回 H になり、最後は L | 合った |
 
 ### PC で 200 局 — 回路の版と C の版
 
-`sim/02-reversi-uart-run.sh` が、本文の `reversi.c` を PC 用の替え玉 (`sim/02-reversi-uart-pcstub/`。`uart_getc` を標準入力、`uart_puts` を標準出力にする) で 2 通りにビルドし、
+`sim/02-reversi-uart-run.sh` が、本文の `reversi.c` を PC 用の替え玉 (`sim/02-reversi-uart-pcstub/`。`getchar_timeout_us` を標準入力、`stdio_put_string` を標準出力にし、UART1 と GPIO は何もしない) で 2 通りにビルドし、
 `sim/02-reversi-uart-test.py` で play.py と対局させる。回路の版は、12-1 の Verilog を Verilator 5.042 で C++ にして `accel.cpp` とつないだ。
 
 ```text
 ok  ./reversi_fpga: 決まった応答 ['RE', '+PI', '+VE02wb-reversi-12-2', 'MOd3', 'MOf3', '-02 lowercase', '-03 need CR LF', '-04 bad coord', '-05 illegal move', '-06 not my game', '-01 unknown']
 ok  ./reversi_c: 決まった応答 (同じ 11 行)
 ok  ./reversi_fpga: 200 局を最後まで打った。Pico 2 の手 5582、パス 192、すべて合法
-    Pico 2 の勝ち 165、引き分け 2、負け 33  +XB moves=5774 clocks=41387 us=13438
+    Pico 2 の勝ち 165、引き分け 2、負け 33  +XB moves=5774 clocks=41387 us=11599
 ok  ./reversi_c: 200 局を最後まで打った。Pico 2 の手 5582、パス 192、すべて合法
-    Pico 2 の勝ち 165、引き分け 2、負け 33  +XB moves=5774 clocks=41387 us=4886
+    Pico 2 の勝ち 165、引き分け 2、負け 33  +XB moves=5774 clocks=41387 us=4189
 ok  2 つのビルドの記録が同じ (11848 行)
 PASS
 ```
 
-`us=` は PC の時間で、走らせるたびに少し変わる (2 回で回路の版 13 438・13 629、C の版 4 066・4 886)。
+`us=` は PC の時間で、走らせるたびに少し変わる (3 回で回路の版 13 438・13 629・11 599、C の版 4 066・4 886・4 189)。
 2 つのビルドの記録 (PC と Pico 2 が送った全部の行) が 1 字も違わないので、回路の版と C の版は 200 局の全部の局面で同じ手を選んだ。
 
 ### picoemu — `.uf2` を丸ごと動かす
 
-`.uf2` を RP2350 のエミュレータ picoemu (`wb-picoemu` のイメージ。5-2 と同じ版) に Cortex-M33 として載せ、`-net-uart0` で UART0 を TCP につないだ。
-`sim/02-reversi-uart-emu.py` が play.py の `game()` を TCP で回し、同じ乱数の相手と PC の版 (`reversi_c`) とも打って、記録を比べる。
+USB 付きでビルドした `.uf2` を RP2350 のエミュレータ picoemu (`wb-picoemu` のイメージ。5-2 と同じ版) に Cortex-M33 として載せ、
+`-net-uart0` で UART0 を、`-net-uart1` で UART1 (写し) を TCP につないだ。
+`sim/02-reversi-uart-emu.py` が play.py の `game()` を UART0 の TCP で回し、同じ乱数の相手と PC の版 (`reversi_c`) とも打って、記録を比べる。
+UART1 に届いた写しが、UART0 に送った字と同じかも比べる。
+
+**picoemu は USB の CDC を外に出さない** (USB の列挙を始めるところまでは動く)。なので PC とは UART0、つまり Debug Probe の道で話させた。
+主ループは USB か UART0 かを区別しないので、UART0 で通れば行の扱いは同じ。USB の道そのもの (TinyUSB の動き・ポートを開く前の出力が捨てられること) は実機で確かめる。
+GP2 の印は picoemu では見ていない。picoemu は走り切って終わるときにしか `-gpio-trace` の VCD を閉じず、対局の途中で止めると書きかけで切れるため (層 A で見た)。
 
 ```bash
 docker run --rm -v "$PWD":/w -w /w wb-picoemu python3 -I 02-reversi-uart-emu.py build/reversi122.uf2 ./reversi_c 200
@@ -768,13 +863,13 @@ docker run --rm -v "$PWD":/w -w /w wb-picoemu python3 -I 02-reversi-uart-emu.py 
 
 | `.uf2` | 結果 |
 | --- | --- |
-| `reversi122.uf2` (回路の版) | 200 局、Pico 2 の手 5 582 がすべて合法。PC の記録と同じ。`+XB moves=5774 clocks=41387 us=351357889` |
-| `reversi122_c.uf2` (C の版) | 200 局、同じく PC の記録と同じ。`+XB moves=5774 clocks=41387 us=91437902` |
+| `reversi122.uf2` (回路の版) | 200 局、Pico 2 の手 5 582 がすべて合法。PC の記録と同じ。UART1 の写しが送った字 35 602 字と同じ。`+XB moves=5774 clocks=41387 us=351346938` |
+| `reversi122_c.uf2` (C の版) | 200 局、同じく PC の記録と同じ。写しも同じ。`+XB moves=5774 clocks=41387 us=91432320` |
 
 picoemu の `us` は、picoemu が命令を数えて進める時刻で、実機の時間ではない (5-2)。picoemu の中では回路の版が C の版の約 3.8 倍の時間を数えた。
 PC の比 (約 2.8〜3.4 倍) に近いが、実機の比は測って確かめる。
 
-確かめていないもの: 実物の Pico 2 での動き、Debug Probe と PC の端末で読めること、`XB` の実機の時間、図4の返し始めまでの間、AD3 での読み下し。
+確かめていないもの: 実物の Pico 2 での動き、USB と Debug Probe のそれぞれで PC の端末から読めること、`XB` の実機の時間、図4の GP2 の H の幅、AD3 での読み下し。
 
 ## 出典
 
@@ -783,4 +878,6 @@ PC の比 (約 2.8〜3.4 倍) に近いが、実機の比は測って確かめ�
 - 行の決まり: [tommie-jp/reversi-uart-protocol](https://github.com/tommie-jp/reversi-uart-protocol) の README (ドラフト v0.2、CC BY 4.0)。§4 リンク層、§5 文字と改行、§7 行の書式と答えのコード、§8 座標、§11 CPU の状態、§12 状態遷移表
 - Pico SDK で Verilator の C++ をビルドする手 (`stub_mutex.h`・`cxx_minimal.cpp`・`verilated.cpp`): [tommie-jp/Soft-FPGA-Reversi](https://github.com/tommie-jp/Soft-FPGA-Reversi) (MIT、コミット `5be3b16`)。5-1 と同じ
 - 行を読む所まで Verilog で書いた例: 同じリポジトリの `rtl/proto.v` (この題では C に置いた)
-- UART の部品の使い方 (`uart_init` `uart_getc` `uart_puts` `gpio_set_function`): Raspberry Pi の Pico SDK 2.2.0 の `hardware_uart`
+- UART の部品の使い方 (`uart_init` `uart_putc_raw` `gpio_set_function`): Raspberry Pi の Pico SDK 2.2.0 の `hardware_uart`
+- stdio を USB と UART の両方に出す設定 (`pico_enable_stdio_usb` `pico_enable_stdio_uart`)、改行の変換 (`PICO_STDIO_DEFAULT_CRLF`)、`stdio_put_string`・`getchar_timeout_us`: Pico SDK 2.2.0 の `pico_stdio` と `pico_stdio_usb` (`stdio.h`・`stdio_usb.h`)
+- AD3 の Logic の読み下しの種類 (Signal・Bus・SPI・I2C・UART・CAN・I2S・Custom): Digilent の [WaveForms Reference Manual](https://digilent.com/reference/software/waveforms/waveforms-3/reference-manual)。USB の読み下しは見つからなかった (版によって増えるので、手元の WaveForms で確かめる)
