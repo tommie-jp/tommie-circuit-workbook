@@ -814,10 +814,22 @@ Pico 2 を先に起こすと、`RE` の行は PC が開く前に出て捨てら�
 | Logic | DIO0 (GP4、PC → Pico 2 の行の写し)・DIO1 (GP0、Pico 2 → PC)・DIO2 (GP2、時間の印)・DIO3〜DIO5 (GP16〜GP18、状態) を Enable。DIO は 3.3 V。GND を共通にする (0-4) |
 | 標本化 | 1 MHz (1 bit 8.68 µs に 8 標本ほど)、窓 1 ms (100 µs/div) |
 | トリガ | DIO2 の立ち上がり (Pico 2 が行の LF を受けた所) |
-| 読み下し | Logic に UART を 2 つ足す。DIO0 と DIO1、115200 bps、8N1 |
+| 読み下し | Logic に UART を 2 つ足す。DIO0 (名前 PC) と DIO1 (名前 PICO)、115200 bps、8N1、書式は ASCII (手順は下) |
 | 測る値 | DIO2 の H の幅 (行を受けてから答えを送り始めるまで = Pico 2 が考えた時間 + 行を調べる時間)。状態の 3 本は窓を 20 ms (2 ms/div) に広げ、どの行で変わったかを見る (図5) |
 
 標本化は、読み取る一番短い変化 (1 bit) の 4 倍より速くした (instrument-screen の流儀)。
+
+UART の読み下し (図4 の PC・PICO の行) は、WaveForms の Logic で次のように足す。
+
+1. Logic の窓の左上の **+** を押し、**UART** を選ぶ
+2. 開いた設定の窓で、名前 (Name) を `PC`、受ける DIO (RX) を **DIO0** にする
+3. Baud rate を **115200**、データのビット数を **8**、パリティを **None**、ストップビットを **1** にする (8N1)
+4. 書式 (Format) を **ASCII** にする。Hexadecimal にすると `0x53` のように 16 進で出る。どちらで読んでも同じ字で、`S` = 0x53、`B` = 0x42
+5. **Add** で閉じる。同じ手順をもう 1 回、名前 `PICO`・DIO1 で繰り返す
+
+- **この手順は WaveForms の画面でも Digilent の資料でも照合していない。** 項目の名前 (Name・RX・Baud rate・Format など) は、UART の読み下しでよく使われる名前で書いた。手元の画面の名前に読み替える。決めるべき値は、DIO の番号・115200 bps・8N1・ASCII の 4 つ
+- CR (0x0D) と LF (0x0A) は字の形が無いので、図4 では 16 進で描いた。WaveForms の ASCII の表示でどう出るかは版による
+- 図4 のフェンスでは、`decode:` の行の最後の `ascii` が同じ設定 (`hex` と書けば 16 進で描く)
 
 図4・図5 のレーンの名前は「信号の名前-Pico 2 のピン」(logic フェンスの名前に括弧は使えないので `-` でつなぐ)。AD3 の DIO との対応は次のとおり。
 
