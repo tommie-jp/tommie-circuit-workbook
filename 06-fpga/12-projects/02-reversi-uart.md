@@ -824,7 +824,7 @@ Pico 2 を先に起こすと、`RE` の行は PC が開く前に出て捨てら�
 
 標本化は、読み取る一番短い変化 (1 bit) の 4 倍より速くした (instrument-screen の流儀)。
 
-UART の読み下し (図4 の RX・COPY・PICO の行) は、WaveForms の Logic で次のように足す。
+UART の読み下し (図4・図6 の RX・COPY・PICO の行) は、WaveForms の Logic で次のように足す。
 
 1. 信号の一覧の上の緑の **+** の ▼ を押し、出た一覧から **UART** を選ぶ。「Add UART」の窓が開く
 2. **Name** を `COPY`、**Data** を **DIO 0** にする
@@ -838,17 +838,17 @@ UART の読み下し (図4 の RX・COPY・PICO の行) は、WaveForms の Logi
 - CR (0x0D) と LF (0x0A) は字の形が無いので、図4 では 16 進で描いた。WaveForms の ASCII の表示でどう出るかは、ヘルプに書かれていない
 - 図4 のフェンスでは、`decode:` の行の最後の `ascii` が同じ設定 (`hex` と書けば 16 進で描く)
 
-図4・図5 のレーンの名前は「信号の名前-Pico 2 のピン」(LED は「LED の番号-状態-ピン」。状態は図2・図3 の GAME・WHITE・ERR と同じ)(logic フェンスの名前に括弧は使えないので `-` でつなぐ)。AD3 の DIO との対応は次のとおり。
+図4〜図6 のレーンの名前は「信号の名前-Pico 2 のピン」(LED は「LED の番号-状態-ピン」。状態は図2・図3 の GAME・WHITE・ERR と同じ)(logic フェンスの名前に括弧は使えないので `-` でつなぐ)。AD3 の DIO との対応は次のとおり。
 
 | レーン | AD3 | Pico 2 のピン | 中身 | 図 |
 | --- | --- | --- | --- | --- |
-| COPY-GP4 | DIO0 | GP4 (UART1 の TX) | PC から受けた行の写し。読み下しの行は COPY | 図4 (図5 は表) |
-| TX-GP0 | DIO1 | GP0 (UART0 の TX) | Pico 2 の答え。読み下しの行は PICO | 図4 (図5 は表) |
-| BUSY-GP2 | DIO2 | GP2 | 行を受けてから答えを送り始めるまで H (時間の印) | 図4 |
-| D1-GAME-GP16 | DIO3 | GP16 | 対局中 (LED の D1、緑) | 図4・図5 |
-| D2-WHITE-GP17 | DIO4 | GP17 | 対局中で自分が白 (LED の D2、黄) | 図4・図5 |
-| D3-ERR-GP18 | DIO5 | GP18 | 直前の行に誤りを返した (LED の D3、赤) | 図4・図5 |
-| RX-GP1 | DIO6 | GP1 (UART0 の RX) | PC が送った字そのもの。**Debug Probe でつないだときだけ**見える (USB のときは線に何も来ない)。読み下しの行は RX | 図4 (図5 は表) |
+| COPY-GP4 | DIO0 | GP4 (UART1 の TX) | PC から受けた行の写し。読み下しの行は COPY | 図4・図6 |
+| TX-GP0 | DIO1 | GP0 (UART0 の TX) | Pico 2 の答え。読み下しの行は PICO | 図4・図6 |
+| BUSY-GP2 | DIO2 | GP2 | 行を受けてから答えを送り始めるまで H (時間の印) | 図4・図6 |
+| D1-GAME-GP16 | DIO3 | GP16 | 対局中 (LED の D1、緑) | 図4・図5・図6 |
+| D2-WHITE-GP17 | DIO4 | GP17 | 対局中で自分が白 (LED の D2、黄) | 図4・図5・図6 |
+| D3-ERR-GP18 | DIO5 | GP18 | 直前の行に誤りを返した (LED の D3、赤) | 図4・図5・図6 |
+| RX-GP1 | DIO6 | GP1 (UART0 の RX) | PC が送った字そのもの。**Debug Probe でつないだときだけ**見える (USB のときは線に何も来ない)。読み下しの行は RX | 図4・図6 |
 
 Debug Probe でつないでいるときは、DIO6 を GP1 (Probe → Pico 2 の線そのもの) に足すと、PC が送った字が届いた時刻も読める。
 写し (DIO0) は Pico 2 が受け終えてから出すので、届いた時刻は読めない。USB でつないでいるときは、届いた時刻は Logic では測れない。
@@ -914,7 +914,7 @@ trigger: D1-GAME-GP16 rising at 1ms
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/logic/02-reversi-uart-2.svg)
 
 - レーンの名前とピンの対応は、図4 と同じく「計器の設定」の表のとおり
-- 行き来した行は図に描かず、次の表に書いた。2 ms/div では 1 字が約 3 px で、UART の線 (`RX-GP1`・`COPY-GP4`・`TX-GP0`) は塗りつぶしになり、読み下しの箱にも字が入らないため。字の中身は図4 の尺度 (100 µs/div) で読む
+- 行き来した行は図に描かず、次の表に書いた。2 ms/div では 1 字が約 3 px で、UART の線 (`RX-GP1`・`COPY-GP4`・`TX-GP0`) は塗りつぶしになり、読み下しの箱にも字が入らないため。字の中身は図6 のように 100 µs/div に拡大して読む
 
 | 時刻 (LF を受けた所) | RX (PC が送った行、Debug Probe のとき) | COPY (写し) | PICO (Pico 2 の答え) | D1 GAME | D2 WHITE | D3 ERR |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -930,6 +930,42 @@ trigger: D1-GAME-GP16 rising at 1ms
 - 9 ms の `MOz9` は座標の書き違いで `-04 bad coord` を返し、D3 (赤) が点く。13 ms の `PI` は `+PI` を返すので D3 が消える
 - 17 ms の `EW` で対局が終わり、D1 と D2 が消える。ΔX (16 ms) が、この例の対局の長さ
 - GP2 (BUSY) はこの図に入れていない。山の幅は数十 µs (仮の値) で、2 ms/div では塗りつぶしになって読めない。幅は図4の尺度で測る
+
+### 1 行を拡大する
+
+図5 の 13 ms (`PI`) のあたりを 100 µs/div に拡大した。図5 が上の段 (全体)、図6 が下の段 (1 行の字のタイミング) の 2 段で読む。
+時刻の置き方は図4 と同じ (行を調べる時間 35 µs と、LED を書き直すまでの 2 µs は仮の値)。
+
+```logic
+# ロジックアナライザの画面 (tommie-fence の logic フェンス)
+title: 図6 図5 の 13 ms を拡大。PI を受け終えて +PI を返し、D3-ERR が消える
+device: ad3
+time: 100us/div
+start: 12600us
+sample: 1MHz
+signals:
+  RX-GP1: dio6 pattern 11000001010101001001010101100001001010000111 bit 8.681us from 12635.398us
+  COPY-GP4: dio0 pattern 11000001010101001001010101100001001010000111 bit 8.681us from 12989.638us
+  TX-GP0: dio1 pattern 110110101001000001010101001001010101100001001010000111 bit 8.681us from 13017.638us
+  BUSY-GP2: dio2 edges 0s=0 13000us=1 13035us=0
+  D1-GAME-GP16: dio3 high
+  D2-WHITE-GP17: dio4 high
+  D3-ERR-GP18: dio5 edges 0s=1 13037us=0
+decode:
+  RX: uart RX-GP1 baud 115200 8N1 ascii
+  COPY: uart COPY-GP4 baud 115200 8N1 ascii
+  PICO: uart TX-GP0 baud 115200 8N1 ascii
+cursors: [13000us, 13035us]
+trigger: BUSY-GP2 rising at 13000us
+```
+
+![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/12-projects/logic/02-reversi-uart-3.svg)
+
+- `RX-GP1` で `PI` の LF を受け終えた所 (13.000 ms) で BUSY-GP2 が H になる。受け始めは 12.653 ms (4 字で 347 µs)
+- `COPY-GP4` は受け終えた 7 µs 後から写しを出す。`TX-GP0` は BUSY-GP2 が L に戻る 13.035 ms から `+PI` を返す
+- D3-ERR は、9 ms の `MOz9` の誤りから点いていた。`PI` は誤りでない行なので、答えを送り始めた後 (13.037 ms、仮の位置) に消える
+- D1-GAME と D2-WHITE は対局中で自分が白なので、H のまま
+- ΔX (35 µs) が、`PI` を受けてから答え始めるまでの時間 (仮)。図4 と同じ測り方
 
 ## 見るべき値
 
