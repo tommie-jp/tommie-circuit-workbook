@@ -41,6 +41,22 @@ Pong (1972) は、ビデオゲームが産業になる入口にあったゲー�
 - 酒場 (Andy Capp's Tavern) に置いた試作は、最初の 2 週間で、これを遊ぶために人が来るほどになった (同じく Alcorn)
 - 1972 年 11 月 29 日に、北米で業務用が発売された (Wikipedia)
 
+![写真1 Atari Pong の筐体 (ベルリンのコンピュータゲーム博物館)](03-pong-photo-cabinet.jpg)
+
+写真1 Atari Pong の筐体 (コンピュータゲーム博物館、ベルリン)。木目の筐体の上に、黄色の前面と白黒テレビの画面、ラケットを動かす 2 つのつまみ、コイン投入口が付く。
+
+![写真2 Pong の画面と操作盤](03-pong-photo-screen.jpg)
+
+写真2 Pong の画面と操作盤。白黒テレビに、左の点 (15)・ネットの点線・右の点 (10) が出ている。操作は PLAYER 1 と PLAYER 2 のつまみ 1 つずつだけで、回すとラケットが縦に動く。
+
+写真の出どころとライセンスは、末尾の出典にある。
+
+**動画** (外部のサイトなので、リンクが切れることがある):
+
+- [Atari Pong Video Arcade Game (1972) — Vimeo、93 秒](https://vimeo.com/427804665): 黄色の筐体で子どもたちが遊ぶ映像。投稿者の説明は 1972 年の Atari Pong。機体が当時の物か復元品かは、確かめていない
+- [The Evolution of Video Games: Pong's 50-Year Legacy — YouTube (The Sydney Morning Herald と The Age、2022 年)](https://www.youtube.com/watch?v=763CFRuxovo): Pong の 50 年を扱った解説。業務用から家庭用への流れ
+- [50 Years of Fun With Pong — Computer History Museum の記事](https://computerhistory.org/blog/50-years-of-fun-with-pong/): 試作機は同館が所蔵している (Alcorn の 2012 年のインタビュー [The Register](https://www.theregister.com/2012/03/05/pong_anniversary_al_alcorn/) による)
+
 ### Pong より後
 
 | 年 | できごと | 意味 |
@@ -632,4 +648,7 @@ PASS
 - Magnavox Odyssey がダイオードとトランジスタの論理であること: Wikipedia の [Magnavox Odyssey](https://en.wikipedia.org/wiki/Magnavox_Odyssey)
 - Gun Fight が業務用で最初にマイクロプロセッサを使ったこと: [Guinness World Records](https://www.guinnessworldrecords.com/world-records/98521-first-arcade-game-to-use-a-microprocessor)、Wikipedia の [Gun Fight](https://en.wikipedia.org/wiki/Gun_Fight)
 - AY-3-8500 と Coleco Telstar: Wikipedia の [Coleco Telstar series](https://en.wikipedia.org/wiki/Coleco_Telstar_series)
+- 写真 (Wikimedia Commons。写真ごとの権利は撮影者にあり、この教科書の CC BY 4.0 とは別):
+  - 写真1: Hanno Böck 撮影、CC0 (パブリックドメイン相当)。[Computerspielemuseum-pong.jpg](https://commons.wikimedia.org/wiki/File:Computerspielemuseum-pong.jpg)。筐体の部分を切り出して縮小した
+  - 写真2: [Digital Game Museum](https://commons.wikimedia.org/wiki/File:Atari_Pong_and_Computer_Space.jpg) 撮影の "Atari Pong and Computer Space"、[CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)。画面と操作盤の部分を切り出して縮小した (元の写真には右に Computer Space の筐体が写っている)
 - Computer Space の回路が TTL で CPU が無いこと、Tennis for Two、Spacewar!: 上の Wikipedia の Pong と、[Computer Space の解説 (pinrepair)](https://www.pinrepair.com/arcade/cspace.htm)。**Computer Space の IC の数は確かめられなかった**
