@@ -20,7 +20,7 @@ device: WEB
 この題では、同じ作りの Pong を Verilog で書き、ブラウザの soft-fpga (第 4 章) で遊ぶ。4-7 の画面のボタンでラケットを動かし、
 回路が出す画素を JS が `<canvas>` に並べる。**命令を読む回路 (CPU) はどこにも無い。**
 
-**動くページ: <https://tommie-jp.github.io/soft-fpga/91-pong/>** (自分でビルドしなくても、ブラウザで開けば遊べる。開いた直後は、左右とも AUTO (回路が打つ) で打ち合う。AUTO を切ると、W・S が左、↑・↓ が右のラケット。下に Logic Analyzer が付いていて、遊んでいる最中の球・ラケット・点の動きが、その場で波形で見える。シミュレーションを走らせ終えてから波形を開く、ふつうの RTL シミュレーションとはここが違う (「Logic Analyzer で見る」)。ソースは [soft-fpga の examples/91-pong](https://github.com/tommie-jp/soft-fpga/tree/main/examples/91-pong))
+**動くページ: <https://tommie-jp.github.io/soft-fpga/91-pong/>** (自分でビルドしなくても、ブラウザで開けば遊べる。開いた直後は、左右とも AUTO (回路が打つ) で打ち合う。AUTO を切ると、W・S が左、↑・↓ が右のラケット。スマホでも開けて、画面の下の左右の端にある ▲・▼ のボタンで打つ。下に Logic Analyzer が付いていて、遊んでいる最中の球・ラケット・点の動きが、その場で波形で見える。シミュレーションを走らせ終えてから波形を開く、ふつうの RTL シミュレーションとはここが違う (「Logic Analyzer で見る」)。ソースは [soft-fpga の examples/91-pong](https://github.com/tommie-jp/soft-fpga/tree/main/examples/91-pong))
 
 [![公開ページのスクリーンショット (ゲーム画面とボタン)](03-pong-page-small.png)](03-pong-page.png)
 
@@ -584,6 +584,7 @@ var Module = { onRuntimeInitialized: function () {
 - `<canvas>` は 160 × 120 のまま、CSS で 3 倍に広げる。`image-rendering: pixelated` で、画素がぼけずに四角く出る
 - 音は、画面ごとに `get_snd_kind` を読み、**その 1 画面ぶんだけ**、`OscillatorNode` (矩形波) の周波数を 450 Hz か 225 Hz にして `GainNode` を開く。回路の `sound` を 1 クロックごとに標本化して流す方式は、描き替えの時計と音の時計が別なので、シミュレーションを音の側で進める作りにしないと途切れる。この題は 1 画面に 1 回読むだけにした
 - ブラウザは、利用者が操作 (クリック) したあとでないと音を出せない。「音 ON」のボタンで `AudioContext` を作る
+- 上の URL の公開ページは、この短い版に Logic Analyzer とスマホ向けの手当てを足してある。スマホ向けの手当ては 3 つ。画面の幅に合わせて縮め、ボタンを親指で押せる大きさで左右の端に置く。長押しで押したままにならないよう `pointercancel` でも下ろす。iPhone の Web Audio は既定では消音スイッチで黙るので、「音 ON」のタップの中で `navigator.audioSession.type` を `playback` にし、それより前の iOS 向けに無音の `<audio>` も繰り返し鳴らす
 
 ## 手順
 
