@@ -68,17 +68,15 @@ module pong (
 
     // ラケットを 1 画面ぶん動かす。auto なら球の真ん中を 1 画素ずつ追い、手で動かすときは 2 画素ずつ
     function [6:0] paddle(input [6:0] p, input u, input d, input auto);
-        reg [6:0] q;
         begin
-            q = p;
+            paddle = p;
             if (auto) begin
-                if      (bc < p + 7'd8 && p > TOP)          q = p - 7'd1;
-                else if (bc > p + 7'd8 && p < BOTTOM - PH)  q = p + 7'd1;
+                if      (bc < p + 7'd8 && p > TOP)          paddle = p - 7'd1;
+                else if (bc > p + 7'd8 && p < BOTTOM - PH)  paddle = p + 7'd1;
             end else begin
-                if      (u && p >= TOP + 7'd2)              q = p - 7'd2;
-                else if (d && p + 7'd2 <= BOTTOM - PH)      q = p + 7'd2;
+                if      (u && p >= TOP + 7'd2)              paddle = p - 7'd2;
+                else if (d && p + 7'd2 <= BOTTOM - PH)      paddle = p + 7'd2;
             end
-            paddle = q;
         end
     endfunction
 
