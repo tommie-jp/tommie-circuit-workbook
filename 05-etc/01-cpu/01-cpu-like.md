@@ -337,26 +337,26 @@ sheets:
         type: device
         at: top
         label: Analog Discovery 3
-        pins: [V+, GND, W1, DIO0, DIO1, DIO2, DIO3, DIO4]
+        pins: [V+, GND, W1, DIO4, DIO0, DIO1, DIO2, DIO3]
       UP:
         type: device
         at: top
         label: 基板 2 へ (上)
-        pins: [A0, A1, ENT, LDn, A2, A3, +5V, GND]
+        pins: [ENT, LDn, A3, A2, A1, A0, GND, +5V]
       DN:
         type: device
         at: bottom
         label: 基板 2 へ (下)
         pins: [CLR, P0, P1, P2]
       U1: dip16 @ e10 74HC163
-      R1: resistor e2 g2 820
-      D1: led h2(A) h3(K) red
-      R2: resistor e6 g6 820
-      D2: led h6(A) h7(K) red
+      R4: resistor e18 g18 820
+      D4: led h18(A) h19(K) red
       R3: resistor e21 g21 820
       D3: led h21(A) h22(K) red
-      R4: resistor e25 g25 820
-      D4: led h25(A) h26(K) red
+      R2: resistor e24 g24 820
+      D2: led h24(A) h25(K) red
+      R1: resistor e27 g27 820
+      D1: led h27(A) h28(K) red
     wires:
       - AD.V+ -- +t1 red
       - AD.GND -- -t2 black
@@ -368,28 +368,28 @@ sheets:
       - j15 -- -b15 black
       - j16 -- +b16 red
       - j17 -- -b17 black
-      - j3 -- -b3 black
-      - j7 -- -b7 black
+      - j19 -- -b19 black
       - j22 -- -b22 black
-      - j26 -- -b26 black
+      - j25 -- -b25 black
+      - j28 -- -b28 black
       - AD.W1 -- a9 yellow
-      - b9 -- g9 yellow
+      - AD.DIO4 -- b9 orange
+      - c9 -- g9 yellow
       - h9 -- h11 yellow
-      - c12 -- c2 green
-      - d13 -- d6 green
-      - a14 -- a21 green
-      - b15 -- b25 green
-      - AD.DIO0 -- b12 orange
-      - AD.DIO1 -- b13 orange
-      - AD.DIO2 -- b14 orange
-      - AD.DIO3 -- c15 orange
-      - AD.DIO4 -- i11 orange
-      - UP.A0 -- a2 blue
-      - UP.A1 -- a6 blue
-      - UP.A2 -- b21 blue
-      - UP.A3 -- c25 blue
-      - UP.ENT -- c16 purple
-      - UP.LDn -- c17 purple
+      - b12 -- b27 green [v-10, h300]
+      - b13 -- b24 green
+      - c14 -- c21 green
+      - d15 -- d18 green
+      - AD.DIO0 -- a12 orange
+      - AD.DIO1 -- a13 orange
+      - AD.DIO2 -- a14 orange
+      - AD.DIO3 -- a15 orange
+      - UP.A0 -- a27 blue
+      - UP.A1 -- a24 blue
+      - UP.A2 -- a21 blue
+      - UP.A3 -- a18 blue
+      - UP.ENT -- a16 purple
+      - UP.LDn -- a17 purple
       - DN.CLR -- i10 white
       - DN.P0 -- i12 white
       - DN.P1 -- i13 white
@@ -451,9 +451,9 @@ sheets:
 - U1 (74HC163) は基板 1 の 10〜17 列、切り欠きが左。PIN 16 (10 列の上) が左上、PIN 1 (10 列の下) が左下。
   PIN 16 を + レールへ、PIN 8 と PIN 6 を − レールへ、PIN 7 を + レールへ落とす (`j15`・`j16`・`j17`)
 - AD3 の W1 (黄) は 9 列の上の穴に入れ、溝をまたぐ線 (9 列) と下の線 (h 行) で **PIN 2 (CLK、11 列の下)** へ渡す。
-  DIO0〜DIO3 (橙) は A0〜A3 の列 (12〜15 列の上) に、**DIO4 (橙) は CLK の列 (11 列の下の `i11`) に当てる**
-- A0〜A3 の LED は、A0・A1 が左の 2 列と 6 列、A2・A3 が右の 21 列と 25 列。緑の線が U1 の出力の列
-  から LED の列へ渡し、抵抗 (820 Ω) は溝をまたいで下の LED (`h` 行) へつながる。LED のピンは隣の列どうし、
+  DIO0〜DIO3 (橙) は A0〜A3 の列 (12〜15 列の上) に、**DIO4 (橙) は W1 と同じ 9 列の上 (`b9`) に当てる** (CLK と同じ線)
+- A0〜A3 の LED は U1 の右に、左から A3・A2・A1・A0 の順に並べた (R4・R3・R2・R1 が 18・21・24・27 列。左から読むと 2 進数)。
+  緑の線が U1 の出力の列 (12〜15 列) から LED の列へ渡し、抵抗 (820 Ω) は溝をまたいで下の LED (`h` 行) へつながる。LED のピンは隣の列どうし、
   長いピン (アノード) が抵抗側で、短いピン (カソード) の列から黒線で下の − レールへ落とす
 - **基板 2 へ渡す線**: 基板 1 の上の箱の A0〜A3・ENT・LDn・+5 V・GND と、下の箱の CLR・P0〜P2 を、基板 2 の「基板 1 から」の
   同じ名前へ 1 本ずつつなぐ (青 = アドレス、紫 = ENT・LDn、白 = CLR・P0〜P2)
@@ -471,10 +471,10 @@ sheets:
 
 | 線の名前 | 回路図 | 基板 1 | 基板 2 |
 | --- | --- | --- | --- |
-| A0 | U1 QA (PIN 14) → U2 A0 (PIN 23)、R1 | 12 列の上 (U1 PIN 14)、DIO0、R1 は 2 列 | 4 列の上 (U2 PIN 23) |
-| A1 | U1 QB (PIN 13) → U2 A1 (PIN 22)、R2 | 13 列の上 (PIN 13)、DIO1、R2 は 6 列 | 5 列の上 (PIN 22) |
+| A0 | U1 QA (PIN 14) → U2 A0 (PIN 23)、R1 | 12 列の上 (U1 PIN 14)、DIO0、R1 は 27 列 | 4 列の上 (U2 PIN 23) |
+| A1 | U1 QB (PIN 13) → U2 A1 (PIN 22)、R2 | 13 列の上 (PIN 13)、DIO1、R2 は 24 列 | 5 列の上 (PIN 22) |
 | A2 | U1 QC (PIN 12) → U2 A2 (PIN 21)、R3 | 14 列の上 (PIN 12)、DIO2、R3 は 21 列 | 6 列の上 (PIN 21) |
-| A3 | U1 QD (PIN 11) → U2 A3 (PIN 20)、R4 | 15 列の上 (PIN 11)、DIO3、R4 は 25 列 | 7 列の上 (PIN 20) |
+| A3 | U1 QD (PIN 11) → U2 A3 (PIN 20)、R4 | 15 列の上 (PIN 11)、DIO3、R4 は 18 列 | 7 列の上 (PIN 20) |
 | CLK | W1 → U1 CLK (PIN 2) | 11 列の下 (PIN 2) | — |
 | CLR | U1 CLR (PIN 1)、R6、S1 | 10 列の下 (PIN 1) | 31 列 (R6)、33 列 (S1) |
 | P0 / P1 / P2 | U1 A / B / C (PIN 3 / 4 / 5)、R8 / R9 / R10 | 12 / 13 / 14 列の下 | 41 / 37 / 19 列 (P2 は D6 も) |
@@ -770,26 +770,26 @@ sheets:
         type: device
         at: top
         label: Analog Discovery 3
-        pins: [V+, GND, W1, DIO0, DIO1, DIO2, DIO3, DIO4]
+        pins: [V+, GND, W1, DIO4, DIO0, DIO1, DIO2, DIO3]
       UP:
         type: device
         at: top
         label: 基板 2 へ (上)
-        pins: [A0, A1, ENT, LDn, A2, A3, +5V, GND]
+        pins: [ENT, LDn, A3, A2, A1, A0, GND, +5V]
       DN:
         type: device
         at: bottom
         label: 基板 2 へ (下)
         pins: [CLR, P0, P1, P2]
       U1: dip16 @ e10 74HC163
-      R1: resistor e2 g2 820
-      D1: led h2(A) h3(K) red
-      R2: resistor e6 g6 820
-      D2: led h6(A) h7(K) red
+      R4: resistor e18 g18 820
+      D4: led h18(A) h19(K) red
       R3: resistor e21 g21 820
       D3: led h21(A) h22(K) red
-      R4: resistor e25 g25 820
-      D4: led h25(A) h26(K) red
+      R2: resistor e24 g24 820
+      D2: led h24(A) h25(K) red
+      R1: resistor e27 g27 820
+      D1: led h27(A) h28(K) red
     wires:
       - AD.V+ -- +t1 red
       - AD.GND -- -t2 black
@@ -801,28 +801,28 @@ sheets:
       - j15 -- -b15 black
       - j16 -- +b16 red
       - j17 -- -b17 black
-      - j3 -- -b3 black
-      - j7 -- -b7 black
+      - j19 -- -b19 black
       - j22 -- -b22 black
-      - j26 -- -b26 black
+      - j25 -- -b25 black
+      - j28 -- -b28 black
       - AD.W1 -- a9 yellow
-      - b9 -- g9 yellow
+      - AD.DIO4 -- b9 orange
+      - c9 -- g9 yellow
       - h9 -- h11 yellow
-      - c12 -- c2 green
-      - d13 -- d6 green
-      - a14 -- a21 green
-      - b15 -- b25 green
-      - AD.DIO0 -- b12 orange
-      - AD.DIO1 -- b13 orange
-      - AD.DIO2 -- b14 orange
-      - AD.DIO3 -- c15 orange
-      - AD.DIO4 -- i11 orange
-      - UP.A0 -- a2 blue
-      - UP.A1 -- a6 blue
-      - UP.A2 -- b21 blue
-      - UP.A3 -- c25 blue
-      - UP.ENT -- c16 purple
-      - UP.LDn -- c17 purple
+      - b12 -- b27 green [v-10, h300]
+      - b13 -- b24 green
+      - c14 -- c21 green
+      - d15 -- d18 green
+      - AD.DIO0 -- a12 orange
+      - AD.DIO1 -- a13 orange
+      - AD.DIO2 -- a14 orange
+      - AD.DIO3 -- a15 orange
+      - UP.A0 -- a27 blue
+      - UP.A1 -- a24 blue
+      - UP.A2 -- a21 blue
+      - UP.A3 -- a18 blue
+      - UP.ENT -- a16 purple
+      - UP.LDn -- a17 purple
       - DN.CLR -- i10 white
       - DN.P0 -- i12 white
       - DN.P1 -- i13 white

@@ -75,7 +75,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: ["2+", "1+", "2-", "1-"]
+    pins: ["1-", "2+", "2-", "1+"]
 wires:
   - BAT.+ -- +t2 red
   - BAT.- -- -t3 black
@@ -83,7 +83,7 @@ wires:
   - MOT.+ -- a11 orange
   - MOT.- -- -t13 black
   - AD.1+ -- d11 blue
-  - AD.1- -- -t16 black
+  - AD.1- -- -t6 black
   - AD.2+ -- a7 white
   - AD.2- -- e11 green
 ```

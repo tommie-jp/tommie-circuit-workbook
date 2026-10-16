@@ -257,65 +257,67 @@ title: 図3 1 枚のブレッドボードに組む。電源は USB-C から Tang
 board: full
 parts:
   U1: tang-nano-9k @ b1
-  Q1: transistor c27(B) c28(C) c29(E) 2SC1815 cap=above
-  Q2: transistor d29(E) d30(C) d31(B) 2SC1815 cap=below
-  Q3: transistor c32(E) c33(C) c34(B) 2SC1815 cap=above:1,0
-  Q4: transistor h28(E) h29(C) h30(B) 2SC1815 cap=right
-  R9: resistor e27 f27 1k
-  R10: resistor e31 f31 1k cap=right
-  R11: resistor e34 f34 1k
-  R12: resistor g30 g32 1k cap=above
-  R1: resistor e35 f35 220 cap=above:0,-2
-  R6: resistor e36 f36 220 cap=above:0,-1
-  R2: resistor e37 f37 220 cap=above
-  R5: resistor e38 f38 220 cap=above:0,-2
-  R4: resistor e39 f39 220 cap=above:0,-1
-  R8: resistor e40 f40 220 cap=above
-  R3: resistor e41 f41 220 cap=above:0,-2
-  R7: resistor e42 f42 220 cap=above:0,-1
+  R7: resistor e27 f27 220 cap=above:0.6,0
+  R3: resistor e28 f28 220 cap=above:0,-1
+  R8: resistor e29 f29 220 cap=above:0,-2
+  R4: resistor e30 f30 220 cap=above
+  R5: resistor e31 f31 220 cap=above:0,-1
+  R2: resistor e32 f32 220 cap=above:0,-2
+  R6: resistor e33 f33 220 cap=above
+  R1: resistor e34 f34 220 cap=above:0,-1
+  Q3: transistor d35(B) d36(C) d37(E) 2SC1815 cap=above:0.2,0.6
+  R11: resistor e35 f35 1k cap=right
+  Q2: transistor c37(E) c38(C) c39(B) 2SC1815 cap=above:0,0.3
+  R10: resistor e39 f39 1k cap=left
+  Q1: transistor d40(B) d41(C) d42(E) 2SC1815 cap=above:-0.35,0.6
+  R9: resistor e40 f40 1k cap=right
   DS1: seg7x4 @ b50
+  Q4: transistor h56(E) h57(C) h58(B) 2SC1815 cap=above
+  R12: resistor i58 i61 1k
   AD:
     type: device
     at: bottom
     label: AD3
-    pins: [GND, DIO0, DIO1, DIO3, DIO2, DIO4, DIO5]
+    pins: [GND, DIO4, DIO5, DIO2, DIO1, DIO0, DIO3]
 wires:
   - a23 -- -t23 black
-  - a29 -- -t29 black
-  - a32 -- -t32 black
-  - j28 -- -b28 black
+  - e37 -- f37 black
+  - j37 -- -b37 black
+  - e42 -- f42 black
+  - j42 -- -b42 black
+  - j56 -- -b56 black
   - -t63 -- -b63 black
-  - j16 -- j27 blue
-  - j17 -- j31 blue
-  - j18 -- j32 blue
-  - j19 -- j34 blue
-  - j20 -- j35 yellow
-  - j21 -- j36 gray
-  - j22 -- j37 yellow
-  - a35 -- a51 yellow
-  - a36 -- a52 gray
-  - a37 -- a55 yellow
-  - a28 -- a50 white
-  - a30 -- a53 white
-  - a33 -- a54 white
-  - a17 -- a38 orange
-  - a19 -- a39 brown
-  - a20 -- a40 orange
-  - a21 -- a41 brown
-  - a22 -- a42 orange
-  - g38 -- g50 orange
-  - h39 -- h51 brown
-  - i40 -- i52 orange
-  - j41 -- j53 brown
-  - j42 -- j54 orange
-  - j29 -- j55 white
-  - AD.GND -- -b45 black
-  - AD.DIO0 -- i27 green
-  - AD.DIO1 -- i31 green
-  - AD.DIO3 -- i32 green
-  - AD.DIO2 -- i34 green
+  - a22 -- a27 orange [v-41]
+  - a21 -- a28 brown [v-49]
+  - a20 -- a29 orange [v-63]
+  - a19 -- a30 brown [v-71]
+  - a17 -- a31 orange [v-79]
+  - a32 -- a55 yellow
+  - a33 -- a52 gray
+  - a34 -- a51 yellow
+  - a36 -- a54 white
+  - a38 -- a53 white
+  - a41 -- a50 white
+  - g27 -- g54 orange [v-10]
+  - g28 -- g53 brown
+  - h29 -- h52 orange [v-10]
+  - h30 -- h51 brown
+  - i31 -- i50 orange [v-10]
+  - i57 -- i55 white
+  - j22 -- j32 yellow [v12]
+  - j21 -- j33 gray [v20]
+  - j20 -- j34 yellow [v28]
+  - j19 -- j35 blue [v65]
+  - j17 -- j39 blue [v73]
+  - j16 -- j40 blue [v81]
+  - j18 -- j61 blue [v89]
+  - AD.GND -- -b12 black
   - AD.DIO4 -- j14 purple
   - AD.DIO5 -- j15 purple
+  - AD.DIO2 -- i35 green
+  - AD.DIO1 -- i39 green
+  - AD.DIO0 -- i40 green
+  - AD.DIO3 -- g61 green
 notes:
   - text: 給電は Tang Nano 9K の USB-C (5 V)。電源レールは GND (−) だけ使う
 ```
@@ -325,7 +327,11 @@ notes:
 - Tang Nano 9K は溝をまたいで b 行と i 行に挿す (`@ b1`)。1〜24 番が下の列 (i 行)、25〜48 番が上の列 (b 行)。基板の外側の 1 穴 (a 行・j 行) から線を取る。内側の穴はボードの基板の下になるので使わない
 - 7 セグ (DS1) も溝をまたぐ。胴は 50 mm あり、ピンの列の左右に約 7 列ずつはみ出す。胴の下 (b〜f 行) の穴は使えないので、上のピンは a 行、下のピンは g〜j 行から線を取る
 - R1〜R8 は溝をまたいで縦に挿す。上の列と下の列が別のネットになるので、片方に FPGA、もう片方に 7 セグをつなぐ
-- Q1 と Q2 はエミッタの列 (29 列) を共有する (どちらも GND)。Q4 だけ下の列にある (DIG4 は 7 セグの下のピン)
+- 抵抗の並べ方で線の交差を減らした。FPGA の上の列のピン (e・d・dp・c・g) から来る R7・R3・R8・R4・R5 を 27〜31 列に、ピンの並びと逆の順に置く。上の橙と茶の線が入れ子になり、FPGA の GND の黒い線 (23 列) をまたいで − レールの上を通る。この 5 本は、7 セグの下のピンへ板の f〜i 行の間を束にして渡す
+- 7 セグの上のピンへ行く線 (R2・R6・R1 の黄と灰、Q3・Q2・Q1 の白) は、7 セグのピンの並び (DIG1・a・f・DIG2・DIG3・b) の逆の順に出す。ただし R6・R1 (f・a) は、FPGA から来る下の線の並びに合わせて左に置いたので、上で Q3・Q2 の白い線と 4 か所で交わる
+- Q3 と Q2 はエミッタの列 (37 列) を共有する (どちらも GND)。エミッタの列 (37 列・42 列) は、溝をまたぐ黒の短い線で下の列へ渡し、j 行から下の − レールへ落とす。上の − レールへ落とすと、7 セグへ行く線をまたぐため
+- Q4 だけ 7 セグの右下 (56〜58 列の h 行) にあり、R12 も板の右下に置く (DIG4 は 7 セグの下のピン)。FPGA から R12 へ行く青い線は、R9・R10 へ行く青い線と 2 か所で交わる
+- AD3 の DIO0〜DIO2 の緑の線は、FPGA から抵抗へ行く青い線と交わる (FPGA の出力を抵抗の手前で読むので、板の上では避けられない)
 - 線の色: 黒は GND だけ。青と白はトランジスタの道 (青が FPGA → ベース抵抗、白がコレクタ → 7 セグの DIG)。黄と灰は a・f・b、橙と茶は e・d・dp・c・g。緑と紫は AD3。赤は使わない (+ の電源が無い)
 - 上と下の GND のレールは右端 (63 列) で 1 本の線でつなぐ
 - 流れる電流は 1 本の線で最大 50 mA 前後 (トランジスタのコレクタ)、ブレッドボード全体でも 0.1 A 以下 (見積り)。信号は 1 kHz 以下で、ブレッドボードの範囲 (3 MHz 以下) に収まる

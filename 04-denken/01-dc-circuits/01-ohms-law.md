@@ -56,7 +56,7 @@ wires:
 title: 図2 ブレッドボードに組む
 board: half
 parts:
-  R1: resistor a5 a10 1k
+  R1: resistor b5 b10 1k
   AM:
     type: device
     at: bottom
@@ -68,13 +68,13 @@ parts:
     label: Analog Discovery
     pins: [GND, V+, "1+", "1-"]
 wires:
-  - AD.V+ -- b3 red
-  - AM.+ -- c3 orange
-  - AM.- -- b5 orange
-  - b10 -- -t10 black
-  - AD.GND -- -t5 black
-  - AD.1+ -- d5 blue
-  - AD.1- -- d10 white
+  - AD.V+ -- a3 red
+  - AM.+ -- e3 orange
+  - AM.- -- e5 orange
+  - a10 -- -t10 black
+  - AD.GND -- -t2 black
+  - AD.1+ -- a5 blue
+  - AD.1- -- -t12 white
 notes:
   - text: "R1 の両端 (5 列・10 列) にテスター (電圧レンジ) を当てる"
 ```
@@ -83,7 +83,7 @@ notes:
 
 - AM (テスターの電流レンジ) を電源と R1 の間に直列に入れる。3 列 (電源側) と
   5 列 (R1 側) が離れているのは、テスターを挟むため
-- 電圧計は R1 の両端 (5 列・10 列) に当てるだけでよい (回路を切らない)。AD の Scope の 1+ / 1− も同じ 5 列・10 列に挿してあり、テスターの代わりに電圧を読める
+- 電圧計は R1 の両端 (5 列・10 列) に当てるだけでよい (回路を切らない)。AD の Scope の 1+ は同じ 5 列に、1− は 10 列から落とした − レールに挿してあり、テスターの代わりに電圧を読める
 - AD の Supplies V+ を 5 V にして電源に使う。流れる電流は 5 mA で、各レール約 50 mA (USB 給電で 250 mW) に収まる。ブレッドボードの電流もブレッドボードの範囲 (1 穴 200 mA) に収まる
 
 ## 計器の設定

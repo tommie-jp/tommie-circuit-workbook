@@ -69,7 +69,7 @@ parts:
     type: device
     at: bottom
     label: Analog Discovery (Scope)
-    pins: [1+, 1-, 2+, 2-, GND]
+    pins: [1+, 1-, GND, 2+, 2-]
   T1: transformer a5(A1) a8(A2) a13(B1) a16(B2)
   R1: resistor c13 c16 1k
 wires:

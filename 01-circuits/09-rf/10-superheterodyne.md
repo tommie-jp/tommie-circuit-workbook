@@ -538,12 +538,12 @@ parts:
     pins: ["1", "2"]
   C1: capacitor/electrolytic d4 d1 10u
   Rb2: resistor b4 b2 22k
-  D3: diode a9(A) a5(K) 1N4148
+  D3: diode a9(A) a5(K) 1N4148 cap=below:1,1
   D2: diode c13(A) c9(K) 1N4148
   R7: resistor b13 b17 680
   Q4: transistor g4(B) g5(C) g6(E) 2SC1815
   Re4: resistor j6 j9 100
-  Q5: transistor g13(B) g14(C) g15(E) 2SC2120
+  Q5: transistor g13(B) g14(C) g15(E) 2SC2120 cap=below:3,1
   Q6: transistor g21(B) g22(C) g23(E) 2SA950
   Rf: resistor a19 a23 30k
   C2: capacitor/electrolytic b23 b27 220u
@@ -561,9 +561,9 @@ wires:
   - d5 -- d21 orange [v10]
   - e21 -- f21 orange
   - -b22 -- j22 black
-  - j15 -- j23 orange
+  - i15 -- i23 orange
   - e23 -- f23 orange
-  - c19 -- a4 orange
+  - c19 -- a4 orange [v-30]
   - SP.1 -- a27 green
   - SP.2 -- -t28 black
   - +t29 -- +b29 red
@@ -576,9 +576,9 @@ wires:
 - 4 列がベース (C1 の +・Rb2・e4–f4)。Rf (a19〜a23) は c19–a4 の線でベースへ戻る
 - Q4 のコレクタ (5 列) は e5–f5 で上へ渡して D3 のカソード (a5) へ、d5–d21 で Q6 のベース (21 列) へ
 - D3 のアノードと D2 のカソードが 9 列、D2 のアノードが 13 列で、e13–f13 で Q5 のベースへ。R7 (b13〜b17。17 列は a17 から上の + レールへ) がここへ電流を流す
-- Q5 のエミッタ (15 列) と Q6 のエミッタ (23 列) を j15–j23 でつなぎ、e23–f23 で上の 23 列 (中点) へ。C2 (b23〜b27) からスピーカーへ
+- Q5 のエミッタ (15 列) と Q6 のエミッタ (23 列) を i 行の i15–i23 でつなぎ、e23–f23 で上の 23 列 (中点) へ。C2 (b23〜b27) からスピーカーへ
 - 箱は左から「図5 の基板から」・電源・スピーカーの順に置く。AF の線 (1 列) が電源の線と交わらないようにするため。
-  j15–j23 の線は Q6 のコレクタから − レールへの線 (22 列) と、c19–a4 の線は R7 の + の線 (17 列) と 1 か所ずつ交わる (同じ行に部品と線が並び、ほかに通す道が無い)
+  c19–a4 の線は a 行と b 行の間を通して、R7 の + の線 (17 列) と交わらないようにした
 
 ## 計器の設定
 

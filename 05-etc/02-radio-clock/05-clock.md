@@ -1486,8 +1486,8 @@ parts:
   U19: dip16 y21 CD4040B
   U20: dip16 ai21 74HC163
   U46: dip14 as21 74HC02
-  X1: crystal/cylinder d21 g21
-  C1: capacitor/ceramic d19 g19 18p
+  X1: crystal/cylinder d20 g20
+  C1: capacitor/ceramic b22 b19 18p
   C2: capacitor/ceramic d17 g17 18p
   Rf: resistor i20 m20 10M
   Rd: resistor i18 m18 270k
@@ -1534,7 +1534,7 @@ wires:
   - t16 -- g16 black
   - g16 -- b16 black
   - g16 -- g17 black
-  - g17 -- g19 black
+  - b16 -- b19 black
   - ak18 -- al18 black
   - al18 -- am18 black
   - aw18 -- ax18 black
@@ -1542,7 +1542,9 @@ wires:
   - ay21 -- ax21 black
   - av22 -- av21 black
   - av21 -- au21 black
-  - w22 -- ad22 black
+  - ad22 -- ag22 black
+  - ag22 -- ag18 black
+  - ag18 -- af18 black
   - w22 -- u22 black
   - u22 -- s22 black
   - u22 -- u21 black
@@ -1559,12 +1561,12 @@ wires:
   - y17 -- aj17 yellow
   - aj17 -- aj18 yellow
   - p18 -- o18 blue
-  - o18 -- o21 blue
-  - o21 -- i21 blue
-  - i21 -- i20 blue
-  - i21 -- g21 blue
-  - i20 -- d20 blue
-  - d20 -- d19 blue
+  - o18 -- o22 blue
+  - o22 -- h22 blue
+  - h22 -- b22 blue
+  - h22 -- h20 blue
+  - h20 -- g20 blue
+  - h20 -- i20 blue
   - q18 -- r18 purple
   - q18 -- q17 purple
   - q17 -- m17 purple
@@ -1578,11 +1580,9 @@ wires:
   - ap21 -- aq21 pink
   - aq21 -- aq18 pink
   - aq18 -- as18 pink
-  - d21 -- c21 brown
-  - c21 -- c18 brown
-  - c18 -- c17 brown
-  - c18 -- i18 brown
-  - c17 -- d17 brown
+  - d20 -- d18 brown
+  - d18 -- i18 brown
+  - d18 -- d17 brown
 style:
   check: off
 notes:
@@ -1729,56 +1729,54 @@ parts:
   U40: dip14 m17 74HC32
   U37: dip14 w17 74HC08
 wires:
-  - ac19 -- w19 red
-  - w19 -- m19 red
-  - w19 -- w17 red
+  - w17 -- w18 red
+  - m17 -- m18 red
+  - c17 -- c19 red
   - m19 -- c19 red
-  - m19 -- m17 red
-  - c19 -- c17 red
+  - m19 -- m18 red
   - c19 -- VCC red
-  - VCC -- a11 red
-  - a11 -- ab11 red
+  - w18 -- m18 red
+  - ac14 -- ac15 black
+  - ac14 -- ad14 black
+  - ac14 -- ac10 black
+  - i16 -- a16 black
+  - i16 -- i14 black
+  - s14 -- v14 black
+  - ad14 -- ad20 black
+  - v15 -- v14 black
+  - v15 -- ac15 black
   - GND -- ad20 black
-  - ad20 -- ad14 black
-  - ad14 -- ac14 black
-  - ad14 -- ad12 black
-  - ad12 -- s12 black
-  - s12 -- s14 black
-  - s12 -- i12 black
-  - i12 -- i14 black
-  - i12 -- b12 black
-  - d14 -- d10 blue
-  - d10 -- ae10 blue
-  - ae10 -- ae15 blue
-  - ae15 -- v15 blue
-  - v15 -- v17 blue
-  - v17 -- s17 blue
+  - ac10 -- a10 black
+  - a16 -- a10 black
+  - s17 -- t17 blue
+  - t17 -- t12 blue
+  - d12 -- t12 blue
+  - d12 -- d14 blue
+  - n17 -- n16 purple
   - e14 -- e13 purple
-  - e13 -- k13 purple
-  - k13 -- k18 purple
-  - k18 -- n18 purple
-  - n18 -- n17 purple
-  - ab14 -- ab17 blue
-  - h14 -- h16 purple
-  - h16 -- t16 purple
-  - t16 -- t14 purple
-  - t14 -- w14 purple
-  - f17 -- f18 white
-  - f18 -- j18 white
-  - j18 -- j15 white
-  - j15 -- q15 white
+  - l16 -- n16 purple
+  - l16 -- l13 purple
+  - l13 -- e13 purple
+  - ab17 -- ab14 blue
+  - h14 -- h15 purple
+  - b15 -- b11 purple
+  - b15 -- h15 purple
+  - w11 -- w14 purple
+  - w11 -- b11 purple
+  - f18 -- k18 white
+  - f18 -- f17 white
+  - k15 -- k18 white
+  - k15 -- q15 white
   - q15 -- q14 white
-  - o14 -- o13 pink
-  - o13 -- aa13 pink
   - aa13 -- aa14 pink
-  - r14 -- r15 brown
-  - r15 -- u15 brown
-  - u15 -- u16 brown
-  - u16 -- aa16 brown
+  - aa13 -- o13 pink
+  - o13 -- o14 pink
+  - r16 -- r14 brown
+  - r16 -- aa16 brown
   - aa16 -- aa17 brown
-  - q17 -- q18 gray
-  - q18 -- ac18 gray
-  - ac18 -- ac17 gray
+  - q17 -- q19 gray
+  - q19 -- ac19 gray
+  - ac17 -- ac19 gray
 style:
   check: off
 notes:
@@ -1811,7 +1809,7 @@ notes:
 
 図10b は、上の図10 と同じ回路をユニバーサル基板に組む図だ。U36・U40・U37 の 3 個を、9×7 cm (31 列 × 26 行) のユニバーサル基板に 1 列に並べた。5×7 cm (24 × 18) には 3 個の IC が横に入らない。7×9 cm の横置きで、上下の電源筋と信号の道が通った。
 
-- 電源 (赤) はユニバーサル基板の上と下の筋に、GND (黒) も上と下の筋に通し、各 IC の電源と GND のピンへ短い線で枝を出した。筋どうしはユニバーサル基板の端で結ぶ。
+- 電源 (赤) は上の筋 (19 行) から各 IC の 14 番 (VCC) へ短い枝を出した。GND (黒) は上の筋 (20 行) から右の端を下り、IC の下 (10 行) と左の端を回して各 IC の 7 番 (GND) へつないだ。線の交差が少なくなる道を選んだので、一部の線は IC の胴の下 (ピンの列の間) を通る。
 - 線の交差は、半円で跨いだ側を被覆線にする。
 - 黄色の丸は、ユニバーサル基板の外へ出る信号のピンだ。そのピンへ直接半田付けして線を出す。信号の名前は次の表のとおり (図の中には名前を書いていない)。ブレッドボードの図の上の箱と同じ信号である。
 - 使わない出力のピンは、どこにもつながない。
@@ -2080,7 +2078,7 @@ parts:
     label: 他の基板へ (下)
     pins: [SET, SETN, ACC, SYD1, RS, SYD, CLK]
   R14: resistor b4 b8 10k
-  S14: switch d4 d7 
+  S14: switch e4 e7
   C14: capacitor/ceramic b10 b12 1u
   R15: resistor b15 b19 100k
   C15: capacitor/electrolytic d15 d18 10u
@@ -2132,7 +2130,7 @@ wires:
   - h15 -- h26 green
   - h28 -- h38 purple
   - d31 -- d39 yellow
-  - c4 -- c10 orange
+  - d4 -- d10 orange
   - g25 -- g31 yellow
   - c32 -- c38 blue
   - i27 -- i32 blue
@@ -2175,94 +2173,91 @@ parts:
   R15: resistor j21 n21 100k
   C15: capacitor/electrolytic j19 m19 10u
 wires:
-  - az23 -- au23 red
-  - au23 -- au21 red
-  - au23 -- ar23 red
-  - ar23 -- ar21 red
-  - ar23 -- ap23 red
-  - ap23 -- ap18 red
-  - ap23 -- ae23 red
-  - ae23 -- ae21 red
-  - ae23 -- r23 red
-  - r23 -- n23 red
-  - r23 -- r21 red
-  - n23 -- n21 red
-  - n23 -- h23 red
-  - h23 -- h21 red
+  - n25 -- a25 red
+  - n25 -- n24 red
+  - h21 -- h23 red
+  - aq18 -- aq20 red
+  - aq21 -- aq20 red
+  - aq21 -- ar21 red
+  - at20 -- at18 red
+  - at20 -- au20 red
+  - at20 -- aq20 red
+  - n21 -- r21 red
+  - n21 -- n24 red
+  - au21 -- au20 red
+  - au21 -- au24 red
+  - n24 -- ae24 red
+  - au24 -- ae24 red
   - h23 -- VCC red
-  - VCC -- a15 red
-  - a15 -- ay15 red
-  - ar21 -- aq21 red
-  - ap18 -- aq18 red
-  - aq18 -- aq17 red
-  - aq17 -- at17 red
-  - at17 -- at18 red
-  - GND -- at24 black
-  - at24 -- at21 black
-  - at24 -- ba24 black
-  - ba24 -- ba16 black
-  - ba16 -- aw16 black
-  - aw16 -- aw18 black
-  - aw16 -- al16 black
-  - al16 -- al22 black
-  - al16 -- ak16 black
-  - ak16 -- ak18 black
-  - ak16 -- y16 black
-  - y16 -- y22 black
-  - y16 -- x16 black
-  - x16 -- m16 black
-  - x16 -- x18 black
-  - m16 -- g16 black
-  - m16 -- m19 black
-  - g16 -- b16 black
-  - g16 -- g17 black
-  - g17 -- g19 black
-  - y22 -- u22 black
+  - VCC -- a25 red
+  - ae21 -- ae24 red
+  - am18 -- am17 black
+  - am18 -- ak18 black
+  - am18 -- am22 black
+  - g17 -- i17 black
   - u22 -- s22 black
   - u22 -- u21 black
-  - s22 -- s21 black
-  - al22 -- ag22 black
-  - ag22 -- ag21 black
-  - ag21 -- af21 black
-  - at21 -- as21 black
-  - v18 -- v17 yellow
-  - v17 -- ai17 yellow
-  - ai17 -- ai18 yellow
-  - ai18 -- ai19 yellow
-  - ai19 -- ak19 yellow
-  - ak19 -- ak21 yellow
-  - af18 -- af19 blue
-  - af19 -- ah19 blue
-  - ah19 -- ah18 blue
-  - d21 -- d20 gray
-  - d20 -- n20 gray
-  - d20 -- d19 gray
+  - u22 -- u23 black
+  - i17 -- i18 black
+  - s21 -- s22 black
+  - af21 -- af20 black
+  - af21 -- af22 black
+  - af21 -- ag21 black
+  - x20 -- x18 black
+  - x20 -- u20 black
+  - g19 -- i19 black
+  - am17 -- aw17 black
+  - u21 -- u20 black
+  - as21 -- at21 black
+  - i19 -- i18 black
+  - i19 -- i22 black
+  - ad23 -- ad20 black
+  - ad23 -- u23 black
+  - af20 -- ad20 black
+  - i22 -- s22 black
+  - i22 -- i24 black
+  - m18 -- m19 black
+  - m18 -- i18 black
+  - aw18 -- aw17 black
+  - at22 -- am22 black
+  - at22 -- at21 black
+  - am22 -- af22 black
+  - i24 -- GND black
+  - v18 -- v16 yellow
+  - al16 -- ai16 yellow
+  - al16 -- al21 yellow
+  - ai16 -- v16 yellow
+  - ai16 -- ai18 yellow
+  - ak21 -- al21 yellow
+  - ah17 -- af17 blue
+  - ah17 -- ah18 blue
+  - af17 -- af18 blue
+  - d16 -- d17 gray
+  - d16 -- r16 gray
   - d19 -- d17 gray
-  - n20 -- n18 gray
-  - n18 -- r18 gray
-  - j21 -- j19 orange
-  - j19 -- j17 orange
-  - j17 -- t17 orange
+  - d19 -- d21 gray
+  - r16 -- r18 gray
+  - j21 -- j20 orange
+  - n17 -- n20 orange
+  - n17 -- t17 orange
   - t17 -- t18 orange
+  - n20 -- j20 orange
+  - j20 -- j19 orange
   - s18 -- s19 yellow
-  - s19 -- q19 yellow
-  - q19 -- q25 yellow
-  - q25 -- am25 yellow
-  - am25 -- am20 yellow
-  - am20 -- aj20 yellow
-  - aj20 -- aj21 yellow
-  - u18 -- u19 green
-  - u19 -- aa19 green
-  - aa19 -- aa20 green
-  - aa20 -- ai20 green
-  - ai20 -- ai21 green
-  - w21 -- w20 blue
-  - w20 -- z20 blue
-  - z20 -- z18 blue
-  - z18 -- ae18 blue
-  - ae18 -- ae14 blue
-  - ae14 -- au14 blue
-  - au14 -- au18 blue
+  - s19 -- aj19 yellow
+  - aj19 -- aj21 yellow
+  - ax23 -- ai23 green
+  - ax23 -- ax14 green
+  - ai23 -- ai21 green
+  - u18 -- u14 green
+  - u14 -- ax14 green
+  - w22 -- w21 blue
+  - w22 -- ac22 blue
+  - ac22 -- ac18 blue
+  - ac18 -- ae18 blue
+  - au18 -- au15 blue
+  - ae18 -- ae15 blue
+  - au15 -- ae15 blue
 style:
   check: off
 notes:
@@ -2281,7 +2276,7 @@ notes:
 
 図12b は、上の図12 と同じ回路をユニバーサル基板に組む図だ。設定ボタンとパワーオンの RC (R14・S14・C14・R15・C15) を左に、U45・U41・U44 を右に、15×9 cm (54 列 × 33 行) のユニバーサル基板に並べた。5×7 cm と 7×9 cm は、部品と IC 3 個で 40 穴ほど要るので収まらない。
 
-- 電源 (赤) はユニバーサル基板の上と下の筋に、GND (黒) も上と下の筋に通し、各 IC の電源と GND のピンへ短い線で枝を出した。筋どうしはユニバーサル基板の端で結ぶ。
+- 電源 (赤) と GND (黒) は、各 IC と部品の電源と GND のピンへ、ほかの線と交わりにくい道で引いた (交差を減らすため、上と下の筋にはしていない)。一部の線は IC の胴の下 (ピンの列の間) を通る。
 - 線の交差は、半円で跨いだ側を被覆線にする。
 - 黄色の丸は、ユニバーサル基板の外へ出る信号のピンだ。そのピンへ直接半田付けして線を出す。信号の名前は次の表のとおり (図の中には名前を書いていない)。ブレッドボードの図の上の箱と同じ信号である。
 - 使わない出力のピンは、どこにもつながない。

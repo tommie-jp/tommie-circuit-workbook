@@ -82,26 +82,25 @@ parts:
     type: device
     at: bottom
     label: AD3 Scope
-    pins: [1-, 2-, 2+, 1+]
+    pins: [2+, 2-, 1-, 1+]
   U1: dip8 @ e10 LM358
-  Cf: capacitor j19 j22 100n
-  Rbleed: resistor g19 g22 1M
-  Rin: resistor j11 j7 10k
-  Rbias: resistor g12 g15 10k
+  Cf: capacitor g11 g7 100n cap=above:-1,0
+  Rbleed: resistor i11 i7 1M cap=below:-1.5,0
+  Rin: resistor h11 h18 10k cap=below:2.2,0
+  Rbias: resistor g12 g14 10k cap=above:3,0
 wires:
   - AD3.V+ -- +t1 red
   - AD3.GND -- -t2 black
   - AD3.V- -- -b3 blue
-  - AD3.W1 -- g7 yellow
-  - SC.1+ -- h7 orange
+  - AD3.W1 -- g18 yellow
+  - SC.1+ -- j18 orange
   - SC.2+ -- j10 green
-  - SC.1- -- j15 black
-  - SC.2- -- h15 black
-  - i10 -- i22 green
-  - h11 -- h19 yellow
+  - SC.1- -- j14 black
+  - SC.2- -- i14 black
+  - h7 -- h10 green
   - +t10 -- a10 red
   - j13 -- -b13 blue
-  - f15 -- -t15 black
+  - f14 -- -t14 black
 notes:
   - text below: 上の赤レール = +5V、上の青レール = GND、下の青レール = −5V (V−)
 ```
@@ -110,11 +109,12 @@ notes:
 
 - 図2 の AD3 は、Supplies (V+・V−) が図1 の VP・VN、W1 が V1 (方形波) に当たる。電源のレールの分け方は 4-2 と同じ
   (下の青レールは −5 V で、GND ではない)。OP アンプ 1 個と抵抗の電流は数 mA で、各レール約 50 mA の範囲に収まる
-- W1 (黄) は 7 列へ。Rin (10 kΩ) が 7 列から IN− (PIN 2、11 列) へ渡す
-- 帰還の 2 本は IC のピンの隣では部品を挿せないので、線で右へ広げる。IN− (11 列) は `h11 → h19`、出力 (PIN 1、10 列) は `i10 → i22`。
-  Cf (100 nF) は 19 列と 22 列の間 (`j19`・`j22`)、Rbleed (1 MΩ) も 19 列と 22 列の間 (`g19`・`g22`) に挿す (並列)
-- Rbias (10 kΩ) は IN+ (PIN 3、12 列) から 15 列へ。15 列は黒の線 `f15 → -t15` で GND へ落とす
-- Scope はブレッドボードの下に別の箱で描いた。1+ (橙) は入力の 7 列 (`h7`)、2+ (緑) は出力の 10 列 (`j10`)。1− と 2− (黒) は GND の 15 列 (`j15`・`h15`) へ
+- W1 (黄) は 18 列へ。Rin (10 kΩ) が 18 列から IN− (PIN 2、11 列) へ渡す (`h18`〜`h11`)
+- 帰還の 2 本は IN− (11 列) から左の 7 列へ挿す。Cf (100 nF) は `g11`〜`g7`、Rbleed (1 MΩ) は `i11`〜`i7` (並列)。
+  7 列は緑の短い線 `h7 → h10` で出力 (PIN 1、10 列) へつなぐ
+- Rbias (10 kΩ) は IN+ (PIN 3、12 列) から 14 列へ。14 列は黒の線 `f14 → -t14` で GND へ落とす
+- Scope はブレッドボードの下に別の箱で描いた。1+ (橙) は入力の 18 列 (`j18`)、2+ (緑) は出力の 10 列 (`j10`)。1− と 2− (黒) は GND の 14 列 (`j14`・`i14`) へ。
+  箱のピンは、下ろす先の列の順 (2+・2−・1−・1+) に並べ、線が交差しないようにした
 - PIN 8 (10 列) は `+t10 → a10` で +5 V へ、PIN 4 (13 列) は `j13 → -b13` で −5 V へ
 
 ## 計器の設定
@@ -125,7 +125,7 @@ W1 は 1 kHz・振幅 1 V の方形波 (オフセット 0 V)、Scope は CH1 を
 | 設定 | 値 |
 | --- | --- |
 | Wavegen W1 | Square、1 kHz、振幅 1 V、オフセット 0 V、デューティ 50 % |
-| Scope CH1 (入力、7 列) | DC、500 mV/div |
+| Scope CH1 (入力、18 列) | DC、500 mV/div |
 | Scope CH2 (出力、10 列) | DC、200 mV/div |
 | Time | 200 µs/div (1 kHz が 2 周期) |
 | Trigger | CH1、立ち上がり、0 V |
@@ -161,7 +161,7 @@ measure: [vpp, freq]
 
 ## 見るべき値
 
-発振器は AD3 の W1 (1 kHz・±1 V の方形波)。オシロの CH1 を入力 (7 列)、CH2 を出力 (10 列) に当て、
+発振器は AD3 の W1 (1 kHz・±1 V の方形波)。オシロの CH1 を入力 (18 列)、CH2 を出力 (10 列) に当て、
 同じ時間軸で重ねる (図3)。表の値は計算値。傾き = Vin / (Rin×Cf)。RinCf = 10 kΩ × 100 nF = 1 ms。
 
 | 測る所 | 期待する値 | 分かること |

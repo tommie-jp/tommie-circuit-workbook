@@ -371,48 +371,48 @@ board: full
 parts:
   U1: tang-nano-9k @ b1
   SW1: button @ e28
-  R1: resistor e34 f34 330
-  R2: resistor e35 f35 330
-  R3: resistor e36 f36 330
-  R4: resistor e37 f37 330
-  R5: resistor e39 f39 330
-  R6: resistor e40 f40 330
-  R7: resistor e41 f41 330
+  R4: resistor e34 f34 330 cap=above
+  R3: resistor e35 f35 330 cap=below:0,0.6
+  R2: resistor e36 f36 330 cap=above:0,-1
+  R1: resistor e37 f37 330 cap=below:0,1.8
   DS1: seg7 @ b46
+  R5: resistor e52 f52 330 cap=right
+  R6: resistor e54 f54 330 cap=right
+  R7: resistor e56 f56 330 cap=right
   AD:
     type: device
     at: bottom
     label: AD3 Logic
-    pins: [DIO0, DIO1, DIO2, DIO3, DIO4, DIO5, DIO6, DIO7, GND]
+    pins: [DIO0, DIO4, DIO3, DIO2, DIO1, DIO7, DIO6, DIO5, GND]
 wires:
   - a23 -- -t23 black
   - a28 -- -t28 black
   - a48 -- -t48 black
-  - -t60 -- -b60 black
-  - j5 -- j30 purple
-  - j1 -- j34 blue
-  - j2 -- j35 blue
-  - j3 -- j36 blue
-  - j4 -- j37 blue
-  - a22 -- a39 orange
-  - a21 -- a40 orange
-  - a20 -- a41 orange
-  - a34 -- a46 yellow
-  - a35 -- a47 yellow
-  - a36 -- a49 yellow
-  - a37 -- a50 yellow
-  - g39 -- g46 white
-  - g40 -- g47 white
-  - g41 -- g49 white
+  - -t62 -- -b62 black
+  - j5 -- j30 purple [v12]
+  - j4 -- j34 blue [v22]
+  - j3 -- j35 blue [v65]
+  - j2 -- j36 blue [v73]
+  - j1 -- j37 blue [v81]
+  - a22 -- a52 orange [v-63]
+  - a21 -- a54 orange [v-71]
+  - a20 -- a56 orange [v-79]
+  - a34 -- a50 yellow [v-49]
+  - a35 -- a49 yellow [v-41]
+  - a36 -- a47 yellow
+  - a37 -- a46 yellow
+  - g52 -- g46 white
+  - h54 -- h47 white
+  - i56 -- i49 white
   - AD.DIO0 -- i30 green
-  - AD.DIO1 -- i34 green
-  - AD.DIO2 -- i35 green
-  - AD.DIO3 -- i36 green
-  - AD.DIO4 -- i37 green
-  - AD.DIO5 -- d39 green
-  - AD.DIO6 -- d40 green
-  - AD.DIO7 -- d41 green
-  - AD.GND -- -b55 black
+  - AD.DIO4 -- i34 green
+  - AD.DIO3 -- i35 green
+  - AD.DIO2 -- i36 green
+  - AD.DIO1 -- i37 green
+  - AD.DIO7 -- d56 green [v-46, h246, v-216]
+  - AD.DIO6 -- c54 green [v-36, h226, v-246]
+  - AD.DIO5 -- b52 green [v-26, h206, v-276]
+  - AD.GND -- -b61 black [v-16, h196]
 notes:
   - text: 給電は Tang Nano 9K の USB-C (5 V)。電源レールは GND (−) だけ使う
 ```
@@ -420,13 +420,16 @@ notes:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/08-fpga-board/breadboard/09-button-seg7.svg)
 
 - Tang Nano 9K の置き方は 8-3 と同じ (`@ b1`)。1〜24 番が下の列 (j 行から線を取る)、25〜48 番が上の列 (a 行から線を取る)
-- ボードは 27 列あたりまで覆うので、押しボタンは 28 列から、抵抗と 7 セグはその右に置く
+- ボードは 27 列あたりまで覆うので、押しボタンは 28 列から置く。R1〜R4 は 34〜37 列、7 セグは 46〜50 列、R5〜R7 は 7 セグの右 (52・54・56 列) に置く
 - 抵抗は溝をまたいで縦に挿す。R1〜R4 の下の端 (f〜j 行) に FPGA の線 (青)、上の端 (a〜e 行) から 7 セグの上のピン (黄) へ。
   R5〜R7 は逆で、上の端に FPGA の線 (橙)、下の端から 7 セグの下のピン (白) へ
-- 7 セグ (DS1) も溝をまたぐ。胴の下 (b〜f 行) の穴は使えないので、上のピンは a 行、下のピンは g 行から線を取る。
+- 線が交わらないように並べてある。R1〜R4 は 7 セグの上のピンの並び (g・f・a・b) と逆の順 (R4・R3・R2・R1) に置き、黄の線を入れ子にする。
+  R5〜R7 を 7 セグの右に置くので、FPGA から来る橙の線は板の上を大きく回り、黄の線と GND の黒い線の外側を通る
+- 7 セグ (DS1) も溝をまたぐ。胴の下 (b〜f 行) の穴は使えないので、上のピンは a 行、下のピンは g〜i 行から線を取る。
   上の列は g・f・COM2・a・b、下の列は e・d・COM1・c・dp (5161AS の並び)
-- 黒は GND だけ。FPGA の GND (26 番) は a23、押しボタンは 28 列、7 セグの COM2 は 48 列から上の − レールへ。上と下の − レールは 60 列でつなぐ。赤は使わない
-- AD3 の緑の線は、抵抗の FPGA 側の穴から取る。R5〜R7 の FPGA 側は上の列にあるので、線は溝をこえて上の d 行まで上がる
+- 黒は GND だけ。FPGA の GND (26 番) は a23、押しボタンは 28 列、7 セグの COM2 は 48 列から上の − レールへ。上と下の − レールは 62 列でつなぐ。赤は使わない
+- AD3 の緑の線は、抵抗の FPGA 側の穴から取る。R5〜R7 の FPGA 側は上の列にあるので、線は 57〜59 列の右を通って溝をこえ、b〜d 行から左へ入る。
+  DIO0〜DIO4 の緑の線は、FPGA から抵抗とボタンへ行く青と紫の線と交わる (FPGA の出力を抵抗の手前で読むので、板の上では避けられない)
 - 抵抗の後ろ (7 セグ側) では読まない。そこは LED の電圧 (2 V 前後) になり、Logic の H の判定にかからないことがある
 - 信号は押したときだけ変わる低い周波数で、ブレッドボードの範囲 (3 MHz 以下) に収まる
 

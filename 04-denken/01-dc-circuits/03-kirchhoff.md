@@ -66,7 +66,7 @@ parts:
     type: device
     at: top
     label: "Analog Discovery (E1)"
-    pins: [GND, V+]
+    pins: [V+, GND]
   E2:
     type: device
     at: top

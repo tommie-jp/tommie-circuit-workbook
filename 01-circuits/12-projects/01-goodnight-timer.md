@@ -102,7 +102,7 @@ parts:
     type: device
     at: top
     label: AD3 Supplies 5V / Scope 1
-    pins: [V+, GND, 1+, 1-]
+    pins: [V+, GND, 1-, 1+]
   SC:
     type: device
     at: bottom
@@ -111,7 +111,7 @@ parts:
 wires:
   - PS.V+ -- +t1 red
   - PS.GND -- -t1 black
-  - PS.1+ -- d11 yellow
+  - PS.1+ -- a11 yellow
   - SC.2+ -- j12 blue
   - PS.1- -- -t3 black
   - SC.2- -- -b21 black
@@ -120,7 +120,7 @@ wires:
   - a10 -- +t10 red
   - j10 -- -b10 black
   - j13 -- +b13 red
-  - a11 -- a12 orange
+  - d11 -- d12 orange
   - a15 -- +t15 red
   - a8 -- -t8 black
   - h11 -- h6 orange
@@ -142,7 +142,7 @@ wires:
   PIN 4 (13 列の下) を + レール、PIN 1 (10 列の下) を下の − レール (GND) へ
 - PIN 2 (TRIG、11 列の下) はオレンジの線で 6 列を通って上ブロックの 5 列へ上げる。
   そこで Rtrig が + レールへプルアップし、SWtrig (e3) を押すと下の − レールへ落ちる
-- PIN 6・7 (THRES・DISCH、12 列・11 列の上) は a 行で結ぶ。Rt (4.7 MΩ) は 12 列から
+- PIN 6・7 (THRES・DISCH、12 列・11 列の上) は d 行で結ぶ。Rt (4.7 MΩ) は 12 列から
   赤い + レールへ、Ct (220 µF) は 11 列から 8 列の − レールへ。ここが時定数ノード
 - PIN 3 (OUT、12 列の下) は青の線 (i 行) で 46 列へ運び、Rg を通して Q1 のゲート
   (41 列) へ。Q1 は上ブロック (40〜42 列の b 行) に挿し、ピンは e 行から溝をまたぐ
@@ -152,7 +152,7 @@ wires:
   ※ **実物で確かめる: onsemi の 2007 年版の図は S G D、2022 年版の表は D G S で食い違い、表は 2007 年版 (S G D) に従う。実物はテスタで確かめる**
 - 1 つの穴にはピンか線を 1 本だけ挿す (部品のピンのある列へは、同じ列の空いた穴から線を出す)
 - 電源は Analog Discovery 3 (AD3、0-3 で使った USB 計測器) の Supplies で、V+ を 5 V にして上の赤レール (1 列)、
-  GND を上の青レール (1 列の下) へ。AD3 のオシロ (Scope) は 2 つの点を見る。1+ を Ct と THRES・DISCH の列 (11 列、`d11`) に、
+  GND を上の青レール (1 列の下) へ。AD3 のオシロ (Scope) は 2 つの点を見る。1+ を Ct と THRES・DISCH の列 (11 列、`a11`) に、
   2+ を OUT の列 (12 列の下、`j12`) に挿し、1− と 2− (黒) は − レール (GND) へ。図2 では同じ AD3 を 2 つの箱 (上と下) に描いた。
   ブレッドボードを流れる電流は DLED の約 6.4 mA に TLC555 の数百 µA を足した 7 mA ほどで、ブレッドボードの範囲 (1 穴 200 mA・ブレッドボード全体 500 mA) にも、
   AD3 の V+ を USB 給電で使うときの目安 (5 V で 50 mA) にも収まる

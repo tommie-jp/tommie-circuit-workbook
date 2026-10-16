@@ -72,12 +72,12 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, W1, "1+", "1-"]
+    pins: [GND, "1-", "1+", W1]
 wires:
   - AD.GND -- -t2 black
-  - AD.W1 -- a5 yellow
-  - AD.1+ -- b5 blue
-  - AD.1- -- -t3 black [h-10]
+  - AD.W1 -- b5 yellow
+  - AD.1+ -- a5 blue
+  - AD.1- -- -t3 black
   - c15 -- -t15 black
 notes:
   - text: "テスターの電流レンジ (A1) を 5 列と 10 列の間に挿す。R1 と直列になる"

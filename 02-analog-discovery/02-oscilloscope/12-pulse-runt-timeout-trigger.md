@@ -59,8 +59,8 @@ parts:
     pins: [W1, 1+, 1-, GND]
 wires:
   - AD.W1 -- a5 yellow
-  - AD.1+ -- b10 orange
-  - a10 -- a15 purple
+  - AD.1+ -- a10 orange
+  - b10 -- b15 purple
   - AD.1- -- -t18 black
   - AD.GND -- -t20 black
   - j20 -- -b20 black

@@ -82,7 +82,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, W1, 2+, 2-, 1-, 1+]
+    pins: [GND, 2+, W1, 2-, 1-, 1+]
   BAT:
     type: device
     at: bottom

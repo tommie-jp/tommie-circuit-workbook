@@ -25,7 +25,7 @@ parts:
     type: device
     at: 1,1
     label: Analog Discovery
-    pins: [GND, DIO0]
+    pins: [DIO0, GND]
   R1: resistor 1,14 3,14 1k
   D1: led 3,14 5,14 red
   G1: ground 5,14
@@ -56,7 +56,7 @@ parts:
     type: device
     at: bottom
     label: Analog Discovery
-    pins: [GND, DIO0]
+    pins: [DIO0, GND]
 wires:
   - AD.DIO0 -- j5 yellow
   - AD.GND -- -b6 black

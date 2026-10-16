@@ -267,6 +267,7 @@ style:
 ## 実体配線図
 
 **ブレッドボードは full 1 枚。** 左から、DIP スイッチ 2 個と集合抵抗、U2 (74HC157)、U1 (74HC273)、S1、LED 4 つの順に置く。
+線は交差させていない (行に沿う線と、行と行の間を通す線で入れ子にした)。
 IC 2 個 (18 列) と DIP スイッチ 2 個 (8 列) と LED 4 つ (12 列) は half (30 列) に収まらない。
 
 ```breadboard
@@ -278,125 +279,132 @@ parts:
     type: device
     at: top
     label: Analog Discovery 3
-    pins: [V+, GND, DIO6, DIO7, DIO8, DIO9, DIO5, W1, DIO4, DIO3, DIO2, DIO1, DIO0]
-  RN1: sip9 @ b1 l=10k-8
-  SW1: dip-switch4 @ e2
-  SW2: dip-switch4 @ e6
-  U2: dip16 @ e13 74HC157
-  U1: dip20 @ e24 74HC273
-  S1: button @ e36
-  R6: resistor j36 +b36 10k
-  R10: resistor e41 g41 820
-  D4: led h41(A) h42(K) red
-  R9: resistor e44 g44 820
-  D3: led h44(A) h45(K) red
-  R8: resistor e47 g47 820
-  D2: led c47(A) c48(K) red
-  R7: resistor e50 g50 820
-  D1: led c50(A) c51(K) red
+    pins: [V+, GND, DIO6, DIO7, DIO8, DIO9, DIO5, DIO3, DIO2, DIO1, DIO0, W1, DIO4]
+  RN1: sip9 @ b3 l=10k-8 cap=right
+  SW1: dip-switch4 @ e4
+  SW2: dip-switch4 @ e8
+  U2: dip16 @ e14 74HC157
+  U1: dip20 @ e24 r180 74HC273
+  S1: button @ f35
+  R6: resistor a37 +t37 10k cap=left
+  R10: resistor b46 b43 820 cap=below:-1.5,0
+  D4: led a43(A) -t43(K) red
+  R9: resistor b51 b48 820
+  D3: led a48(A) -t48(K) red
+  R8: resistor e54 g54 820
+  D2: led c54(A) c55(K) red
+  R7: resistor e57 g57 820
+  D1: led c57(A) c58(K) red
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black
   - +t63 -- +b63 red
   - -t63 -- -b63 black
-  - a1 -- -t1 black
-  - j2 -- +b2 red
-  - j3 -- +b3 red
+  - a3 -- -t3 black
   - j4 -- +b4 red
   - j5 -- +b5 red
   - j6 -- +b6 red
-  - a13 -- +t13 red
-  - a14 -- -t14 black
-  - j20 -- -b20 black
-  - a24 -- +t24 red
-  - j33 -- -b33 black
-  - a26 -- -t26 black
-  - a27 -- -t27 black
-  - a30 -- -t30 black
-  - a31 -- -t31 black
-  - a36 -- -t36 black
-  - j42 -- -b42 black
-  - j45 -- -b45 black
-  - a48 -- -t48 black
-  - a51 -- -t51 black
-  - c2 -- h15 blue
-  - c3 -- h18 blue
-  - c4 -- c19 blue
-  - c5 -- c16 blue
-  - c6 -- h13 white
-  - AD.DIO6 -- a2 orange
-  - AD.DIO7 -- a3 orange
-  - AD.DIO8 -- a4 orange
-  - AD.DIO9 -- a5 orange
-  - AD.DIO5 -- a6 orange
-  - g16 -- g26 green
-  - i19 -- i27 green
-  - b20 -- b22 green
-  - e22 -- f22 green
-  - h22 -- h30 green
-  - d17 -- d23 green
-  - e23 -- f23 green
-  - i23 -- i31 green
-  - g25 -- g14 yellow
-  - h25 -- h50 yellow
-  - g28 -- g17 yellow
-  - h28 -- h47 yellow
-  - i29 -- i21 yellow
-  - e21 -- f21 yellow
-  - c21 -- c18 yellow
-  - h32 -- h34 yellow
-  - e34 -- f34 yellow
-  - c34 -- c15 yellow
-  - b34 -- b41 yellow
-  - b21 -- b44 yellow
-  - i24 -- i36 white
-  - AD.W1 -- a33 purple
-  - AD.DIO4 -- b33 orange
-  - AD.DIO0 -- i50 orange
-  - AD.DIO1 -- i47 orange
-  - AD.DIO2 -- a44 orange
-  - AD.DIO3 -- a41 orange
+  - j7 -- +b7 red
+  - j8 -- +b8 red
+  - a14 -- +t14 red
+  - a15 -- -t15 black
+  - j21 -- -b21 black
+  - a24 -- -t24 black
+  - j26 -- -b26 black
+  - j27 -- -b27 black
+  - j30 -- -b30 black
+  - j31 -- -b31 black
+  - j33 -- +b33 red
+  - j35 -- -b35 black
+  - a55 -- -t55 black
+  - a58 -- -t58 black
+  - AD.DIO6 -- a4 orange
+  - AD.DIO7 -- a5 orange
+  - AD.DIO8 -- a6 orange
+  - AD.DIO9 -- a7 orange
+  - AD.DIO5 -- a8 orange
+  - c4 -- c2 blue
+  - e2 -- f2 blue
+  - h2 -- h16 blue
+  - d5 -- d1 blue
+  - e1 -- f1 blue
+  - i1 -- i19 blue
+  - d6 -- d20 blue [v-10]
+  - c7 -- c17 blue
+  - d8 -- d12 white
+  - e12 -- f12 white
+  - g12 -- g14 white
+  - b16 -- b25 yellow
+  - a18 -- b26 green [v10]
+  - c19 -- b28 yellow [v-10]
+  - d21 -- d27 green
+  - c25 -- c46 yellow [v10]
+  - d28 -- d51 yellow
+  - b29 -- b39 yellow
+  - a30 -- a38 green [v10]
+  - c31 -- b40 green [v-10]
+  - c32 -- c41 yellow
+  - a33 -- a35 white
+  - e38 -- f38 green
+  - e39 -- f39 yellow
+  - e40 -- f40 green
+  - e41 -- f41 yellow
+  - g15 -- h41 yellow [v10]
+  - h17 -- h40 green [v10]
+  - h18 -- h39 yellow
+  - j20 -- j38 green [v-10]
+  - i24 -- i52 purple
+  - e52 -- f52 purple
+  - AD.W1 -- a52 purple
+  - AD.DIO4 -- b52 orange
+  - g39 -- g54 yellow
+  - j41 -- j57 yellow
+  - AD.DIO3 -- a25 orange
+  - AD.DIO2 -- a28 orange
+  - AD.DIO1 -- a29 orange
+  - AD.DIO0 -- a32 orange
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/03-register.svg)
 
 - **電源**: AD3 の V+ (5 V、赤) を上の + レールの 1 列に、GND (黒) を上の − レールの 2 列に入れる。上と下のレールは、
   右の端 (63 列) で + どうしと − どうしをつなぐ。**赤は +5 V の線だけ、黒は GND の線だけ**に使った
-- **DIP スイッチ**: SW1 (IN0〜IN3) は 2〜5 列、SW2 は 6〜9 列 (使うのは 1 番 = 6 列の LOAD だけ)。下の組を +5 V (赤の線で下の + レールへ)、
-  上の組を入力の線にした。集合抵抗 RN1 (10 kΩ × 8、9 ピン) は b 行の 1〜9 列で、共通のピン (1 列) を上の − レールへ落とす。
+- **DIP スイッチ**: SW1 (IN0〜IN3) は 4〜7 列、SW2 は 8〜11 列 (使うのは 1 番 = 8 列の LOAD だけ)。下の組を +5 V (赤の線で下の + レールへ)、
+  上の組を入力の線にした。集合抵抗 RN1 (10 kΩ × 8、9 ピン) は b 行の 3〜11 列で、共通のピン (3 列) を上の − レールへ落とす。
   RN1 の 7〜9 番のピンは、使わない SW2 の 2〜4 番の列に入るだけで、何もしない
-- **IC の向き**: 2 個とも切り欠きが左。U2 (74HC157) は 13〜20 列、U1 (74HC273) は 24〜33 列。
-  U2 は VCC (13 列の上) を上の + レールへ、G (14 列の上) を上の − レールへ、GND (20 列の下) を下の − レールへ落とす。
-  U1 は VCC (24 列の上) を上の + レールへ、GND (33 列の下) を下の − レールへ、5D〜8D (26・27・30・31 列の上) を上の − レールへ落とす
-- **列をまたぐ線**: U2 の 3Y・4Y は上の組に、U1 の 3D・4D は下の組にある。21〜23 列と 34 列を中継に使い、溝をまたぐ短い線
-  (`e22 -- f22` など) で上と下をつなぐ。21 列が Q2、22 列が 3Y → 3D、23 列が 4Y → 4D、34 列が Q3 の中継だ
+- **IC の向き**: U2 (74HC157) は切り欠きが左で 14〜21 列。U1 (74HC273) は**切り欠きを右にして** 24〜33 列に挿す
+  (`r180`)。こうすると U1 の Q と D がすべて上の組に来て、U2 の上の組の 3A・3Y・4A・4Y と同じ側で向き合う。
+  U2 は VCC (14 列の上) を上の + レールへ、G (15 列の上) を上の − レールへ、GND (21 列の下) を下の − レールへ落とす。
+  U1 は GND (24 列の上) を上の − レールへ、VCC (33 列の下) を下の + レールへ、5D〜8D (26・27・30・31 列の下) を下の − レールへ落とす
+- **溝をまたぐ短い線**: 上の組と下の組を渡すのは、溝の両側 (e 行と f 行) を結ぶ 2 穴の線だけにした。
+  1・2 列が IN1・IN0、12 列が LOAD、38〜41 列が 2Y・2Q (Q1)・1Y・1Q (Q0)、52 列が CLK の中継だ
 - **線の色**: 青 = IN0〜IN3、白 = LOAD と CLR、緑 = Y → D、黄 = Q0〜Q3、紫 = CLK (AD3 の W1)、橙 = AD3 の DIO
-- **S1 (CLR)**: 36〜38 列。下の組 (36 列の下) を U1 の CLR (24 列の下) と R6 (10 kΩ、+5 V へ) に、上の組を上の − レールにつなぐ。
-  押すと下の組と上の組がつながり、CLR が GND に落ちる
-- **LED**: 41 列から 3 列おきに Q3・Q2・Q1・Q0 (左が上の桁)。Q3・Q2 は上の組から抵抗が溝をまたぎ、LED は下 (h 行) でカソードを下の − レールへ。
-  Q1・Q0 は線が下の組に来るので、抵抗を下から上へ渡し、LED は上 (c 行) でカソードを上の − レールへ落とす。
-  どちらも LED の長いピン (アノード) が抵抗の側だ
-- 下の組 (g〜j 行) の線は、行き先の間の穴がふさがっているので、図ではブレッドボードの下の縁に沿って回してある。
-  実物では、**下の「回路図との対応」の表の穴どうしを 1 本ずつ**つなげばよい
-- **1 つの穴には 1 本だけ**挿している
+- **S1 (CLR)**: 35〜37 列。`f35` に挿して、押す側の組 (2a・2b) を上 (35・37 列の上) にした。上の組を U1 の CLR (33 列の上) と
+  R6 (10 kΩ、37 列から上の + レールへ) に、下の組を下の − レールにつなぐ。押すと上の組と下の組がつながり、CLR が GND に落ちる
+- **CLK**: AD3 の W1 を `a52` に、DIO4 を `b52` に入れ、52 列の溝をまたぐ線で下の組へ渡し、i 行で U1 の CLK (24 列の下) へ引く
+- **LED**: 43 列から Q3・Q2・Q1・Q0 (左が上の桁)。Q3・Q2 は上の組だけで組む。抵抗を b 行に寝かせ、LED は a 行から上の − レールへ立てる
+  (Q3 は R10 が `b46`〜`b43`、D4 が `a43`。Q2 は R9 が `b51`〜`b48`、D3 が `a48`)。Q1・Q0 は線が下の組に来るので、
+  抵抗を下から上へ渡し (R8 は 54 列、R7 は 57 列)、LED は上 (c 行) でカソードを上の − レールへ落とす。
+  どれも LED の長いピン (アノード) が抵抗の側だ
+- **1 つの穴には 1 本だけ**挿している。R8 は `g54` に Q1 の線が来るので、図では `e54`〜`f54` に寄せて描かれる (同じ列なので同じつながり)
 
 ### 回路図との対応
 
 | 線の名前 | 回路図 | ブレッドボード (始め → 終わり) |
 | --- | --- | --- |
-| IN0 / IN1 | SW1₁・SW1₂ → U2 1B・2B (PIN 3・6) | `c2` → `h15`、`c3` → `h18` |
-| IN2 / IN3 | SW1₃・SW1₄ → U2 3B・4B (PIN 10・13) | `c4` → `c19`、`c5` → `c16` |
-| LOAD | SW2₁ → U2 A/B (PIN 1) | `c6` → `h13` |
-| 1Y → 1D | U2 PIN 4 → U1 PIN 3 | `g16` → `g26` |
-| 2Y → 2D | U2 PIN 7 → U1 PIN 4 | `i19` → `i27` |
-| 3Y → 3D | U2 PIN 9 → U1 PIN 7 | `b20` → `b22`、`e22` → `f22`、`h22` → `h30` |
-| 4Y → 4D | U2 PIN 12 → U1 PIN 8 | `d17` → `d23`、`e23` → `f23`、`i23` → `i31` |
-| Q0 | U1 1Q (PIN 2) → U2 1A (PIN 2)、R7 | `g25` → `g14`、`h25` → `h50` |
-| Q1 | U1 2Q (PIN 5) → U2 2A (PIN 5)、R8 | `g28` → `g17`、`h28` → `h47` |
-| Q2 | U1 3Q (PIN 6) → U2 3A (PIN 11)、R9 | `i29` → `i21`、`e21` → `f21`、`c21` → `c18`、`b21` → `b44` |
-| Q3 | U1 4Q (PIN 9) → U2 4A (PIN 14)、R10 | `h32` → `h34`、`e34` → `f34`、`c34` → `c15`、`b34` → `b41` |
-| CLR | U1 PIN 1、R6、S1 | `i24` → `i36`、R6 は `j36` → 下の + レール |
-| CLK | W1 → U1 PIN 11 | AD3 の W1 → `a33` |
+| IN0 / IN1 | SW1₁・SW1₂ → U2 1B・2B (PIN 3・6) | `c4` → `c2`、`e2` → `f2`、`h2` → `h16` / `d5` → `d1`、`e1` → `f1`、`i1` → `i19` |
+| IN2 / IN3 | SW1₃・SW1₄ → U2 3B・4B (PIN 10・13) | `d6` → `d20`、`c7` → `c17` |
+| LOAD | SW2₁ → U2 A/B (PIN 1) | `d8` → `d12`、`e12` → `f12`、`g12` → `g14` |
+| 1Y → 1D | U2 PIN 4 → U1 PIN 3 | `h17` → `h40`、`e40` → `f40`、`c31` → `b40` |
+| 2Y → 2D | U2 PIN 7 → U1 PIN 4 | `j20` → `j38`、`e38` → `f38`、`a30` → `a38` |
+| 3Y → 3D | U2 PIN 9 → U1 PIN 7 | `d21` → `d27` |
+| 4Y → 4D | U2 PIN 12 → U1 PIN 8 | `a18` → `b26` |
+| Q0 | U1 1Q (PIN 2) → U2 1A (PIN 2)、R7 | `c32` → `c41`、`e41` → `f41`、`g15` → `h41`、`j41` → `j57` |
+| Q1 | U1 2Q (PIN 5) → U2 2A (PIN 5)、R8 | `b29` → `b39`、`e39` → `f39`、`h18` → `h39`、`g39` → `g54` |
+| Q2 | U1 3Q (PIN 6) → U2 3A (PIN 11)、R9 | `c19` → `b28`、`d28` → `d51` |
+| Q3 | U1 4Q (PIN 9) → U2 4A (PIN 14)、R10 | `b16` → `b25`、`c25` → `c46` |
+| CLR | U1 PIN 1、R6、S1 | `a33` → `a35`、R6 は `a37` → 上の + レール |
+| CLK | W1 → U1 PIN 11 | AD3 の W1 → `a52`、`e52` → `f52`、`i52` → `i24` |
 
 `breadboard-fence check` のネットリストは、この表のとおりだった (たとえば Q2 の線は `AD.DIO2, U2.3A, U1.3Q, R9.1`、
 CLR の線は `U1.CLR, S1.2a, S1.2b, R6.1`)。このネットリストと回路図 (図2) のネットリストを Python で読み、

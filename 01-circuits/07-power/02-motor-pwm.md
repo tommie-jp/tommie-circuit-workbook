@@ -99,7 +99,7 @@ parts:
     type: device
     at: bottom
     label: Analog Discovery (W1 と Scope)
-    pins: [W1, 1+, 1-, 2+, 2-, GND]
+    pins: [2+, W1, 1+, 1-, 2-, GND]
 wires:
   - PSU.+ -- +t1 red
   - PSU.- -- -t3 black
@@ -114,9 +114,9 @@ wires:
   - AD.W1 -- c14 yellow
   - AD.1+ -- e14 blue
   - AD.2+ -- j8 green
-  - AD.1- -- -b14 black
-  - AD.2- -- -b16 black
-  - AD.GND -- -b18 black
+  - AD.1- -- -b17 black
+  - AD.2- -- -b19 black
+  - AD.GND -- -b21 black
 notes:
   - text: R1 の右端 (14 列) が PWM 信号の入り口。AD の W1 かマイコンをつなぐ
 ```

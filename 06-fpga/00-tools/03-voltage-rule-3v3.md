@@ -81,11 +81,11 @@ parts:
     label: AD3 Logic
     pins: [DIO0, GND]
 wires:
-  - AD.DIO0 -- b30 yellow
+  - AD.DIO0 -- c30 yellow
   - AD.GND -- -t42 black
   - MCU.3V3 -- +t9 red
   - MCU.GND38 -- -t7 black
-  - +t30 -- c30 red
+  - +t30 -- b30 red
   - d36 -- -t36 black
 ```
 

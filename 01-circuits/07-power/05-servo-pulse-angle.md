@@ -83,17 +83,17 @@ wires:
   - PSU.+ -- MTR.VCC red
   - PSU.- -- MTR.GND black
   - PSU.- -- -t2 black
-  - AD.W1 -- a8 yellow
-  - MTR.SIG -- b8 orange
-  - AD.1+ -- c8 blue
-  - AD.1- -- -t10 black
-  - AD.GND -- -t12 black
+  - AD.W1 -- a15 yellow
+  - MTR.SIG -- b15 orange
+  - AD.1+ -- c15 blue
+  - AD.1- -- -t24 black
+  - AD.GND -- -t26 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/breadboard/05-servo-pulse-angle.svg)
 
 - 5 V の電源は別の電源 (USB アダプタなど。1 A 以上流せるもの)。サーボの赤 (VCC) を + へ、茶 (GND) を − へ、ブレッドボードを通さずに直接つなぐ
-- ブレッドボードに入る線は、AD3 の W1 (黄、PWM の信号源) を 8 列の `a8` へ、サーボの橙 (SIG) を同じ 8 列の `b8` へ、Scope の 1+ (青) を `c8` へ。この 3 本が同じ 5 穴の組なので、W1 の信号がそのままサーボと Scope に届く
+- ブレッドボードに入る線は、AD3 の W1 (黄、PWM の信号源) を 15 列の `a15` へ、サーボの橙 (SIG) を同じ 15 列の `b15` へ、Scope の 1+ (青) を `c15` へ。この 3 本が同じ 5 穴の組なので、W1 の信号がそのままサーボと Scope に届く
 - 電源の − と AD3 の GND (1−・GND を含む) は、上の − レールで共通にする。これが「GND はマイコンと共通にする」の実物。ブレッドボードを通る電流は SIG の数 mA だけで、ブレッドボードの上限の内側
 - AD3 の Supplies は各 50 mA までなので、サーボには使えない。W1 は 3.3 V のパルス (Amplitude 1.65 V、Offset 1.65 V) を出し、SG90 の SIG (3.3 V でも 5 V でもよい) に直結する
 

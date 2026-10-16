@@ -258,33 +258,33 @@ parts:
   MCU: pico2 @ h10
   SW1: button @ e5
   SW2: button @ e1
-  BZ1: buzzer g31 g33
-  R1: resistor e40 f40 680 cap=above:0,-1
-  R2: resistor e41 f41 680 cap=above
-  R3: resistor e37 f37 680 cap=above:0,-1
-  R4: resistor e36 f36 680 cap=above:0,-2
-  R5: resistor e35 f35 680 cap=above
-  R6: resistor e39 f39 680 cap=above:0,-2
-  R7: resistor e38 f38 680 cap=above
-  R8: resistor e47 f47 680 cap=above
-  R9: resistor e48 f48 680 cap=above:0,-2
-  R10: resistor e44 f44 680 cap=above
-  R11: resistor e43 f43 680 cap=above:0,-1
-  R12: resistor e42 f42 680 cap=above:0,-2
-  R13: resistor e46 f46 680 cap=above:0,-1
-  R14: resistor e45 f45 680 cap=above:0,-2
-  DS1: seg7 @ b51
+  BZ1: buzzer f37 e37 cap=above:0,-1
+  R5: resistor e31 f31 680 cap=above
+  R4: resistor e32 f32 680 cap=above:-1,-1
+  R3: resistor e33 f33 680 cap=above:1,-2
+  R12: resistor e34 f34 680 cap=above
+  R11: resistor e35 f35 680 cap=above:-1,-1
+  R10: resistor e36 f36 680 cap=above:1,-2
+  R9: resistor e38 f38 680 cap=above
+  R8: resistor e39 f39 680 cap=above:1,-1
+  R13: resistor e40 f40 680 cap=above:0,-2
+  R14: resistor e41 f41 680 cap=above
+  R2: resistor e42 f42 680 cap=above:1,-1
+  R1: resistor e43 f43 680 cap=above:1,0
+  R6: resistor e44 f44 680 cap=above:2,-1
+  R7: resistor e45 f45 680 cap=above:2,0
+  DS1: seg7 @ c51
   DS2: seg7 @ b58
   AD:
     type: device
     at: bottom
     label: AD3 Logic
-    pins: [DIO2, DIO0, DIO1, GND]
+    pins: [DIO2, GND, DIO0, DIO1]
 wires:
   - a12 -- -t12 black
   - a5 -- -t5 black
   - a1 -- -t1 black
-  - j33 -- -b33 black
+  - a37 -- -t37 black
   - a53 -- -t53 black
   - a60 -- -t60 black
   - j53 -- -b53 black
@@ -292,37 +292,37 @@ wires:
   - -t63 -- -b63 black
   - j10 -- j7 brown
   - i11 -- i3 brown
-  - i29 -- i31 gray
-  - a29 -- a35 orange
-  - a28 -- a36 orange
-  - a26 -- a37 orange
-  - j13 -- j38 orange
-  - j14 -- j39 orange
-  - j15 -- j40 orange
-  - j16 -- j41 orange
-  - g35 -- g51 yellow
-  - h36 -- h52 yellow
-  - i37 -- i54 yellow
-  - a38 -- a51 yellow
-  - a39 -- a52 yellow
-  - a40 -- a54 yellow
-  - a41 -- a55 yellow
-  - a25 -- a42 blue
-  - a24 -- a43 blue
-  - a23 -- a44 blue
-  - j18 -- j45 blue
-  - j19 -- j46 blue
-  - j20 -- j47 blue
-  - j21 -- j48 blue
-  - g42 -- g58 white
-  - h43 -- h59 white
-  - i44 -- i61 white
-  - a45 -- a58 white
-  - a46 -- a59 white
-  - a47 -- a61 white
-  - a48 -- a62 white
+  - i29 -- i37 gray
+  - b29 -- b31 orange
+  - b28 -- b32 orange [v-10]
+  - a26 -- a33 orange
+  - a25 -- a34 blue [v-7]
+  - a24 -- a35 blue [v-14]
+  - a23 -- a36 blue [v-21]
+  - b45 -- b51 yellow
+  - a44 -- a52 yellow
+  - b43 -- a54 yellow [v-10]
+  - b42 -- b55 yellow [v10]
+  - a41 -- a58 white [v-6]
+  - a40 -- a59 white [v-12]
+  - a39 -- a61 white [v-18]
+  - a38 -- a62 white [v-24]
+  - j21 -- j38 blue [v-8]
+  - j20 -- j39 blue [v-14]
+  - j19 -- j40 blue [v5]
+  - j18 -- j41 blue [v9]
+  - j16 -- j42 orange [v14]
+  - j15 -- j43 orange [v18]
+  - j14 -- j44 orange [v23]
+  - j13 -- j45 orange [v27]
+  - g31 -- h51 yellow [v-12, h350, v32]
+  - g32 -- h52 yellow [v-6, h320, v32]
+  - g33 -- h54 yellow [h290, v32]
+  - h34 -- i58 white [v-12, h260, v32]
+  - h35 -- i59 white [v-4, h230, v34]
+  - h36 -- i61 white [v4, h200, v41, h270, v-15]
   - AD.DIO0 -- j28 green
-  - AD.DIO1 -- j31 green
+  - AD.DIO1 -- j29 green
   - AD.DIO2 -- j11 purple
   - AD.GND -- -b25 black
 ```
@@ -331,13 +331,13 @@ wires:
 
 - Pico 2 は USB を左に向けて `@ h10` に挿す。下の列 (h 行) の 1 番 GP0 が 10 列、20 番 GP15 が 29 列。上の列 (c 行) の 21 番 GP16 が 29 列、38 番 GND が 12 列。ボードの外側の a・b 行と i・j 行から線を取る
 - 押しボタンは左端で溝をまたぐ。SW1 (「+」、5〜7 列) は GP0 から j 行の茶の線、SW2 (「スタート/ストップ」、1〜3 列) は GP1 から i 行の茶の線。どちらも上の側から上の − レールへ黒の線
-- R1〜R14 は 35〜48 列で溝をまたいで縦に挿す。上の列と下の列が別のネットになるので、片方に Pico 2、もう片方に 7 セグをつなぐ
-  - 7 セグの**上のピン** (g・f・a・b) の抵抗は、Pico 2 の下の列 (GP2〜GP9) から j 行の線で抵抗の下の側へ入り、抵抗の上の側から a 行の線で 7 セグの上のピンへ
-  - 7 セグの**下のピン** (e・d・c) の抵抗は、Pico 2 の上の列 (GP16〜GP21) から a 行の線で抵抗の上の側へ入り、抵抗の下の側から g〜i 行の線で 7 セグの下のピンへ
-- 7 セグは 6 穴離れた b 行と f 行に挿す (DS1 は 51〜55 列、DS2 は 58〜62 列)。胴の下 (c〜e 行) は使えないので、上のピンは a 行、下のピンは g〜j 行から線を取る。COM2 (上の真ん中) は上の − レール、COM1 (下の真ん中) は下の − レールへ
-- 圧電サウンダ BZ1 は 31・33 列の g 行。GP15 (29 列) から i 行の灰の線、33 列から下の − レールへ黒の線
+- 抵抗 14 本は溝をまたいで縦に挿す。上の列と下の列が別のネットになるので、片方に Pico 2、もう片方に 7 セグをつなぐ。並びは線が交わらない順にした
+  - 31〜36 列の 6 本 (左から R5・R4・R3・R12・R11・R10) は 7 セグの**下のピン** (e・d・c) の抵抗。Pico 2 の上の列 (GP16〜GP21) から a・b 行とその上の線で抵抗の上の側へ入り、抵抗の下の側から g・h 行の線で 7 セグの下のピンへ。線は 46〜49 列で一段ずつ下がる
+  - 38〜45 列の 8 本 (左から R9・R8・R13・R14・R2・R1・R6・R7) は 7 セグの**上のピン** (g・f・a・b) の抵抗。Pico 2 の下の列 (GP2〜GP9) から i・j 行の下の線で抵抗の下の側へ入る。抵抗の上の側からは、右の 4 本 (DS1 用) が a・b 行とその間・下の線で DS1 へ、左の 4 本 (DS2 用) が a 行の上の線で DS1 の上を越えて DS2 へ
+- DS1 は c 行と g 行、DS2 は b 行と f 行に挿す (どちらも 6 穴離れた 2 行。DS1 は 51〜55 列、DS2 は 58〜62 列)。DS1 を 1 行下げたのは、上のピンへ来る 4 本を a・b 行とその間・下の 4 段に分けて、COM2 の黒の線をまたがずに届けるため。胴の下は使えないので、DS1 は上のピンを a・b 行、下のピンを h〜j 行から、DS2 は上のピンを a 行、下のピンを g〜j 行から線を取る。COM2 (上の真ん中) は上の − レール、COM1 (下の真ん中) は下の − レールへ
+- 圧電サウンダ BZ1 は 37 列で溝をまたぐ (下の足が GP15、上の足が GND)。GP15 (29 列) から i 行の灰の線で下の足の列へ、上の足の列から上の − レールへ黒の線
 - 線の色: 黒は GND だけ。橙と黄は 10 の位 (橙が Pico 2 → 抵抗、黄が抵抗 → DS1)、青と白は 1 の位 (青が Pico 2 → 抵抗、白が抵抗 → DS2)。茶はボタン、灰はブザー、緑と紫は AD3。赤は使わない (+ の電源をブレッドボードに配らない)
-- AD3 の DIO0 (緑) は GP14 の 28 列、DIO1 (緑) はブザーの 31 列、DIO2 (紫) は GP1 の 11 列に j 行で挿す。上と下の − レールは右端 (63 列) でつなぐ
+- AD3 の DIO0 (緑) は GP14 の 28 列、DIO1 (緑) は GP15 の 29 列、DIO2 (紫) は GP1 の 11 列に j 行で挿す。上と下の − レールは右端 (63 列) でつなぐ
 - 電源は Pico 2 の USB。ブレッドボードを流れる電流は 7 セグの合計で 31 mA 以下 (見積り)、信号は 500 Hz 以下で、ブレッドボードの範囲 (3 MHz 以下) に収まる
 
 ## Verilog

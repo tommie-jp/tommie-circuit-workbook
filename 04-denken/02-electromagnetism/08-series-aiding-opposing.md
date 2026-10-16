@@ -77,7 +77,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [W1, 1+, 1-, 2+, 2-, GND]
+    pins: [1+, W1, 1-, 2+, 2-, GND]
   L1:
     type: device
     at: bottom

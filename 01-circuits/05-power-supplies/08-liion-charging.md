@@ -87,12 +87,12 @@ parts:
     type: device
     at: top
     label: TP4056 + 保護 (USB 入力は基板の USB ソケットへ)
-    pins: [B+, B-, OUT+, OUT-]
+    pins: [OUT+, OUT-, B+, B-]
   PK:
     type: device
     at: top
     label: Li-ion 電池 (18650・保護つき)
-    pins: ["+", "-"]
+    pins: ["-", "+"]
   SC:
     type: device
     at: bottom
@@ -107,8 +107,8 @@ wires:
   - M1.OUT- -- -t2 black
   - +t10 -- a10 red
   - a18 -- -t18 black
-  - SC.1+ -- +t12 orange
-  - SC.1- -- -t13 black
+  - SC.1+ -- e10 orange
+  - SC.1- -- e18 black
 notes:
   - text below: 上の赤レール = OUT+ (電池の電圧、約 3.0〜4.2 V)。USB の 5 V と電池はブレッドボードに入れない
 ```
@@ -119,7 +119,7 @@ notes:
 - 図2 で USB の 5 V は、M1 の基板に付いている USB ソケット (図1 の J1 に当たる。IN+/IN− がここにつながる) へ USB ケーブルで入れる。電池 (PK) は B+/B- に太めの線で直接つなぐ。B+/B- と OUT+/OUT- をブレッドボードの上で近づけない
   (短絡すると数十 A が流れる。本文冒頭の注意を読み返す)
 - OUT+ は上の赤レール、OUT- は上の青レールへ。Rled (390 Ω、10 列〜14 列) は `+t10 → a10` で OUT+ から、Dled (LED) はアノードを 14 列、カソードを 18 列に挿し、`a18 → -t18` で OUT- へ
-- AD3 の Supplies は使わない (5 V は USB 充電器が出し、電池が負荷を動かす)。Scope の 1+ (橙) を上の赤レール (OUT+)、1− (黒) を上の青レール (OUT−) につなぐ。AD3 の入力は ±25 V まで (電池の 4.2 V は余裕で入る)
+- AD3 の Supplies は使わない (5 V は USB 充電器が出し、電池が負荷を動かす)。Scope の 1+ (橙) を `e10` (Rled と同じ 10 列 = OUT+)、1− (黒) を `e18` (Dled のカソードと同じ 18 列 = OUT−) に、板の下からつなぐ。AD3 の入力は ±25 V まで (電池の 4.2 V は余裕で入る)
 
 ## 計器の設定
 

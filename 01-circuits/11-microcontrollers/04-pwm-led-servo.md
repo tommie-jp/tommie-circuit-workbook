@@ -51,7 +51,7 @@ parts:
     type: device
     at: 12,10.4
     label: Servo
-    pins: [VCC, SIG, GND]
+    pins: [VCC, GND, SIG]
   V5: vcc 11,9 5V
   GM: ground 11,12
 wires:
@@ -91,46 +91,46 @@ title: 図3 LED (GP15) とサーボ (GP14) を組む (AD3 は Scope だけ、サ
 board: full
 parts:
   MCU: pico2 @ h5
-  R1: resistor j24 j28 330
-  D1: led i28(A) i30(K) red
+  R1: resistor i24 i28 330 cap=above
+  D1: led h28(A) h30(K) red
   PS:
     type: device
     at: bottom
     label: 電源 5V (別電源)
-    pins: ["+", "-"]
+    pins: ["-", "+"]
   SV:
     type: device
     at: bottom
     label: サーボ SG90
-    pins: [VCC, SIG, GND]
+    pins: [VCC, GND, SIG]
   SC:
     type: device
     at: bottom
     label: AD3 Scope
-    pins: [1+, 1-, 2+, 2-]
+    pins: [2+, 1+, 1-, 2-]
 wires:
-  - SC.1+ -- g24 yellow
-  - SC.2+ -- g23 blue
-  - SC.1- -- -b26 black
-  - SC.2- -- -b27 black
+  - SC.1+ -- j24 yellow [v-46, h-116]
+  - SC.2+ -- i23 blue [v-36, h-86, v-100]
+  - SC.1- -- -b33 black
+  - SC.2- -- -b35 black
   - j30 -- -b30 black
   - j22 -- -b22 black
-  - j23 -- SV.SIG yellow
+  - SV.SIG -- j23 yellow [v-26, h-40]
   - PS.+ -- SV.VCC red
   - PS.- -- SV.GND black
-  - PS.- -- -b40 black
+  - PS.- -- -b4 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/breadboard/04-pwm-led-servo.svg)
 
-- LED の部分は 11-1 と同じ。R1 は GP15 (ピン 20、24 列) から 28 列へ、LED のアノードが 28 列 (i28)、カソードが 30 列で、j30 から − レールへ。
+- LED の部分は 11-1 と同じ回路 (AD3 の線を下から挿せるように、R1 は i 行、LED は h 行に置く)。R1 は GP15 (ピン 20、24 列) から 28 列へ、LED のアノードが 28 列 (h28)、カソードが 30 列で、j30 から − レールへ。
   Pico 2 の GND (ピン 18、22 列) も j22 から − レールへ渡す
 - サーボの信号線 (SIG) は GP14 (ピン 19、23 列) の j23 から出す。電源線 (VCC) は別の 5 V 電源の + へ、GND は電源の − へ直接つなぎ、
-  その電源の − をブレッドボードの − レール (b40) にも 1 本つないで Pico 2 の GND と共通にする。
+  その電源の − をブレッドボードの − レール (4 列) にも 1 本つないで Pico 2 の GND と共通にする。
   サーボの電流 (SG90 の目安: 動作中 100〜250 mA、起動や停止で 500 mA 超) はブレッドボードを通らない。ブレッドボードを流れるのは LED の約 3.9 mA と信号の電流だけで、
   ブレッドボードの範囲 (1 穴 200 mA・ブレッドボード全体 500 mA) に収まる
 - 電源は Pico 2 の USB (VBUS ピン 40 の 5 V を基板上のレギュレータが 3.3 V にして使う)。AD3 は電源に使わず、**オシロ (Scope) だけ**をつなぐ。
-  1+ (黄) を GP15 の列 (`g24`) に、2+ (青) を GP14 の列 (`g23`) に、1− と 2− (黒) を − レール (GND) へ挿す。
+  1+ (黄) を GP15 の列 (`j24`) に、2+ (青) を GP14 の列 (`i23`) に、1− と 2− (黒) を − レール (GND) へ挿す。
   GP14 と GP15 は同じスライスで周期が共通なので、LED とサーボは別々に動かす (プログラムの節)。測るのも 1 回に 1 つ
 
 ## 部品

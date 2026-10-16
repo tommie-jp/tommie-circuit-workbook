@@ -187,79 +187,89 @@ wires:
 title: 図2 1 枚のブレッドボードに組む。電源は USB から Pico 2 へ
 board: full
 parts:
-  U1: pico2 @ g5
-  Q1: transistor c27(B) c28(C) c29(E) 2SC1815 cap=above
-  Q2: transistor d29(E) d30(C) d31(B) 2SC1815 cap=below
-  Q3: transistor c32(E) c33(C) c34(B) 2SC1815 cap=above:1,0
-  Q4: transistor h28(E) h29(C) h30(B) 2SC1815 cap=right
-  R9: resistor e27 f27 1k
-  R10: resistor e31 f31 1k cap=right
-  R11: resistor e34 f34 1k
-  R12: resistor g30 g32 1k cap=above
-  R2: resistor e35 f35 220 cap=above:0,-2
-  R6: resistor e36 f36 220 cap=above:0,-1
-  R1: resistor e37 f37 220 cap=above
-  R5: resistor e38 f38 220 cap=above:0,-2
-  R4: resistor e39 f39 220 cap=above:0,-1
-  R8: resistor e40 f40 220 cap=above
-  R3: resistor e41 f41 220 cap=above:0,-2
-  R7: resistor e42 f42 220 cap=above:0,-1
-  DS1: seg7x4 @ b50
+  U1: pico2 @ g2
+  R2: resistor e27 f27 220 cap=left
+  Q3: transistor f28(B) e29(C) f30(E) 2SC1815 cap=above:-2.5,1.1
+  Q2: transistor f31(B) e32(C) f33(E) 2SC1815 cap=above:2.6,1.1
+  R6: resistor e34 f34 220 cap=left
+  R1: resistor e35 f35 220 cap=right
+  Q1: transistor f36(E) e37(C) f38(B) 2SC1815 cap=above:2.6,1.1
+  R11: resistor h28 h29 1k
+  R10: resistor h31 h32 1k
+  R9: resistor h38 h37 1k
+  R7: resistor e39 f39 220 cap=below:0,4
+  R3: resistor e40 f40 220 cap=below:1.5,5
+  R8: resistor e41 f41 220 cap=below:2,4
+  R4: resistor e42 f42 220 cap=below:3.5,5
+  R5: resistor e43 f43 220 cap=below:4,4
+  DS1: seg7x4 @ b51
+  Q4: transistor h60(B) h61(C) h62(E) 2SC1815 cap=left
+  R12: resistor g60 g57 1k
   AD:
     type: device
     at: bottom
     label: AD3
-    pins: [GND, DIO0, DIO1, DIO3, DIO2, DIO4, DIO5]
+    pins: [DIO4, DIO2, DIO1, DIO5, DIO0, GND, DIO3]
 wires:
-  - a22 -- -t22 black
-  - a29 -- -t29 black
-  - a32 -- -t32 black
-  - j28 -- -b28 black
-  - -t63 -- -b63 black
-  - j24 -- j27 blue
-  - j23 -- j31 blue [v68]
-  - j21 -- j32 blue [v77]
-  - j20 -- j34 blue [v86]
-  - j19 -- j35 yellow [v95]
-  - j18 -- j36 gray [v104]
-  - j16 -- j37 yellow [v113]
-  - a35 -- a55 yellow
-  - a36 -- a52 gray
-  - a37 -- a51 yellow
-  - a28 -- a50 white
-  - a30 -- a53 white
-  - a33 -- a54 white
-  - a23 -- a38 orange
-  - a21 -- a39 brown
-  - a20 -- a40 orange
-  - a19 -- a41 brown
-  - a18 -- a42 orange
-  - g38 -- g50 orange
-  - h39 -- h51 brown
-  - i40 -- i52 orange
-  - j41 -- j53 brown
-  - j42 -- j54 orange
-  - j29 -- j55 white
-  - AD.GND -- -b45 black
-  - AD.DIO0 -- i27 green
-  - AD.DIO1 -- i31 green
-  - AD.DIO3 -- i32 green
-  - AD.DIO2 -- i34 green
-  - AD.DIO4 -- i37 purple
-  - AD.DIO5 -- i36 purple
+  - a19 -- -t19 black
+  - -t1 -- -b1 black
+  - a20 -- a22 yellow
+  - a18 -- a23 orange [v-8]
+  - a17 -- a24 brown [v-13]
+  - a16 -- a25 orange [v-18]
+  - a15 -- a26 brown [v-23]
+  - b22 -- b43 yellow [v-10, h420]
+  - c23 -- c42 orange [v-10, h380]
+  - b24 -- b41 brown [h340]
+  - c25 -- c40 orange [h300]
+  - d26 -- d39 brown [h260]
+  - a27 -- a56 yellow [v-28]
+  - a29 -- a55 white [v-23]
+  - a32 -- a54 white [v-18]
+  - a34 -- a53 gray [v-13]
+  - a35 -- a52 yellow [v-8]
+  - a37 -- a51 white
+  - j13 -- j35 yellow [v24, h440]
+  - j15 -- j34 gray [v12, h380]
+  - h16 -- h27 yellow [v10, h220]
+  - j17 -- j29 blue
+  - i18 -- i57 blue [v10, h780]
+  - i20 -- i25 blue
+  - g25 -- g32 blue
+  - h21 -- h23 blue
+  - f23 -- g37 blue [v10, h280]
+  - j30 -- j33 black
+  - h33 -- h36 black
+  - j36 -- -b36 black
+  - g43 -- g51 orange
+  - h42 -- h52 brown
+  - i41 -- i53 orange
+  - g40 -- g54 yellow [v10, h280]
+  - h39 -- h55 gray [v10, h320]
+  - j61 -- j56 white [v24, h-100]
+  - j62 -- -b62 black
+  - AD.DIO4 -- i13 orange [v-40, h-336, v-86]
+  - AD.DIO5 -- i34 gray
+  - AD.DIO2 -- i29 green
+  - AD.DIO1 -- i32 green
+  - AD.DIO0 -- j37 green
+  - AD.GND -- -b49 black
+  - AD.DIO3 -- j57 green
 notes:
   - text: 給電は Pico 2 の USB (5 V)。ピンは 3.3 V。電源レールは GND (−) だけ使う
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/02-sequential/breadboard/15-dynamic-7seg.svg)
 
-- Pico 2 は USB を左に向け、溝をまたいで b 行と g 行に挿す (`@ g5`)。1〜20 番ピンが下の列 (g 行、5〜24 列)、40〜21 番ピンが上の列 (b 行)。ボードの下の穴は使えないので、下の列は j 行、上の列は a 行から線を取る
-- 7 セグ (DS1) も溝をまたぐ。胴は 50 mm あり、ピンの列の左右に約 7 列ずつはみ出す。胴の下 (b〜f 行) の穴は使えないので、上のピンは a 行、下のピンは g〜j 行から線を取る
-- 7 セグ・トランジスタ・抵抗の並びは 12-4 の図3 と同じ。Tang Nano 9K を Pico 2 に替え、Pico 2 から抵抗への線だけを引き直した
-- R1〜R8 は溝をまたいで縦に挿す。上の列と下の列が別のネットになるので、片方に Pico 2、もう片方に 7 セグをつなぐ
-- Pico 2 の下の列から出す 7 本は、遠くへ行く線ほど外側を回す (左のピンほど右の行き先へ)。線どうしは交わらない。AD3 の緑と紫の線とは交わる
-- 線の色: 黒は GND だけ。青と白はトランジスタの道 (青が Pico 2 → ベース抵抗、白がコレクタ → 7 セグの DIG)。黄と灰は a・f・b、橙と茶は e・d・dp・c・g。緑と紫は AD3 (緑が桁、紫がセグメント)。赤は使わない (+ の電源が無い)
-- 上と下の GND のレールは右端 (63 列) で 1 本の線でつなぐ。Pico 2 の GND は 23 番ピン (a 行の 22 列) から上の − レールへ
+- Pico 2 は USB を左に向け、溝をまたいで b 行と g 行に挿す (`@ g2`)。1〜20 番ピンが下の列 (g 行、2〜21 列)、40〜21 番ピンが上の列 (b 行)。ボードの下の穴は使えないので、上の列は a 行、下の列は h〜j 行から線を取る
+- 7 セグ (DS1) は溝をまたぐ (`@ b51`)。胴の下 (b〜f 行) の穴は使えないので、上のピン (DIG1・a・f・DIG2・DIG3・b、51〜56 列) は a 行、下のピン (e・d・dp・c・g・DIG4) は g〜j 行から線を取る
+- 上の段 (a〜e 行) は、左から Pico 2 → セグメントの抵抗の行き先 (22〜26 列) → 7 セグの上のピンへ行く部品 (27〜38 列) → セグメントの抵抗 (39〜43 列) → 7 セグの順。Pico 2 の上の列の 5 本 (橙と茶と黄) は 22〜26 列へ渡し、そこから b・c・d 行と行の間を通る 5 本の線で 39〜43 列の抵抗 (R7・R3・R8・R4・R5) へ運ぶ。抵抗は溝をまたいで縦に挿し、下の段の 39〜43 列から 7 セグの下のピン (e〜g) へ g〜i 行の線で入る
+- 7 セグの上のピンへは、R2 (27 列)・Q3 のコレクタ (29 列)・Q2 のコレクタ (32 列)・R6 (34 列)・R1 (35 列)・Q1 のコレクタ (37 列) から、a 行の上を入れ子の弧で渡す (遠いピンほど外側。DIG1 だけ a 行をまっすぐ)。Q1〜Q3 はコレクタだけを上の段 (e 行) に挿し、ベースとエミッタの足を溝の向こう (f 行) へ広げる
+- 下の段: Pico 2 の下の列から、R2・R6・R1 の下の端 (27・34・35 列) とベース抵抗 R11・R10・R9 (28〜29・31〜32・37〜38 列) へ線を引く。GP9 (黄) と GP10 (灰) の 2 本は、ほかの線とピンの下を避けて、レールのそばを回る
+- エミッタは 30・33・36 列を黒い線でつなぎ、36 列から下の − レールへ落とす。Q4 (60〜62 列) は 7 セグの右に置き、コレクタから DIG4 (56 列) へ白い線、ベースへ R12 (57〜60 列) を挿す
+- 線の色: 黒は GND だけ。青は Pico 2 → ベース抵抗、白はコレクタ → 7 セグの DIG。黄・灰・橙・茶はセグメント a〜g・dp。AD3 の線は DIO0〜DIO3 (桁) が緑、DIO4 (a) が橙、DIO5 (f) が灰。赤は使わない (+ の電源が無い)
+- 上と下の GND のレールは左の端 (1 列) で 1 本の線でつなぐ。Pico 2 の GND は 23 番ピン (a 行の 19 列) から上の − レールへ
+- 線が交わるのは 2 種類だけ。上は、Pico 2 の GND (23 番ピン) が GP18〜GP21 と同じ a 行に並ぶので、GND の黒い線を 4 本がまたぐ。下は、AD3 の DIO1・DIO2・DIO5 の線が、レールのそばを回る GP9・GP10 の線をまたぎ、DIO3 の線が DIG4 の白い線をまたぐ
 - 流れる電流は 1 本の線で最大 50 mA 前後 (トランジスタのコレクタ)、ブレッドボード全体でも 0.1 A 以下 (見積り)。信号は 1 kHz 以下で、ブレッドボードの範囲 (3 MHz 以下) に収まる
 
 ### Pico 2 のピン

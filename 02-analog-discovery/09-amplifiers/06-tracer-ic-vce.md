@@ -77,7 +77,7 @@ wires:
   - AD.GND -- -t3 black
   - AD.W1 -- a5 yellow [h-10]
   - AD.2+ -- b5 orange [h10]
-  - AD.2- -- a11 white
+  - AD.2- -- a11 white [h27]
   - AD.1+ -- b11 purple [h10]
   - AD.1- -- -t13 black
   - e11 -- f11 gray

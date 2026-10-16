@@ -25,7 +25,7 @@ parts:
     type: device
     at: 1,1
     label: Analog Discovery
-    pins: [V+, GND, DIO0]
+    pins: [DIO0, GND, V+]
   R1: resistor 1,14 3,14 10k
   SW1: button 3,14 5,14
   G1: ground 5,14
@@ -52,12 +52,12 @@ title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
   SW1: button @ e5
-  R1: resistor g5 g9 10k
+  R1: resistor h5 h9 10k
   AD:
     type: device
     at: bottom
     label: Analog Discovery
-    pins: [V+, GND, DIO0]
+    pins: [DIO0, GND, V+]
 wires:
   - -t5 -- a5 black
   - -t20 -- -b20 black
@@ -74,11 +74,12 @@ wires:
   (下ブロック側) も同様に 1 本のピン**として動く (実物では見えない結線)
 - 上ブロック側 (e5) を `-t5 -- a5` で GND の上のレールへ。下ブロック側
   (f5) が DIO0 のプルアップ先の節点。**R1 のピンを f5 に重ねると部品同士が
-  同じ穴を取り合うので、同じネットの別の穴 (g5) から取る**
-- R1 (g5〜g9) はプルアップ。g9 側を `j9 -- +b9` で V+ のレールへ。
+  同じ穴を取り合うので、同じネットの別の穴 (h5) から取る**。g 行は SW1 の名札にかかるので空ける
+- R1 (h5〜h9) はプルアップ。9 列の側を `j9 -- +b9` で V+ のレールへ。
   スイッチの節点 (f5 と同じ列・同じ下ブロックのネット) は `i5` から DIO0 へ
   引き出す
 - 上下のレールは 20 列 (GND) で渡す。V+ は下のレールだけで足りる
+- AD のピンの並びは、行き先の左から DIO0・GND・V+ にした (線が交わらない並び。実物の並びとは違う)
 
 ## 計器の設定
 

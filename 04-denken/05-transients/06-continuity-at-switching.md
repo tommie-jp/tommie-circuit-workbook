@@ -67,7 +67,7 @@ style:
 title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
-  SW1: slide-switch c8(1) c9(C) c10(2)
+  SW1: slide-switch c8(2) c9(C) c10(1)
   C1: capacitor/film c12 c14 10n
   L1: inductor/axial h12 h17 10m
   R1: resistor c20 c25 1k
@@ -80,10 +80,10 @@ wires:
   - AD.GND -- -t2 black
   - AD.W1 -- a9 yellow
   - AD.1+ -- b9 yellow
-  - AD.1- -- -t6 black
-  - b8 -- b12 green
-  - e10 -- f10 green
-  - g10 -- g12 green
+  - AD.1- -- -t12 black
+  - b10 -- b12 green
+  - e8 -- f8 green
+  - g8 -- g12 green
   - b14 -- b20 green
   - g17 -- g20 green
   - f20 -- e20 green
@@ -94,8 +94,8 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/05-transients/breadboard/06-continuity-at-switching.svg)
 
-- SW1 (スライドスイッチ) の真ん中 (9 列) に W1 と CH1 (1+)。1 側 (8 列) から C1 (12〜14 列、上の段)、
-  2 側 (10 列) から溝を渡って L1 (12〜17 列、下の段) へ
+- SW1 (スライドスイッチ) の真ん中 (9 列) に W1 と CH1 (1+)。1 側 (10 列) から C1 (12〜14 列、上の段)、
+  2 側 (8 列) から溝を渡って L1 (12〜17 列、下の段) へ
 - C1 と L1 の出口は 20 列で合わさり、R1 (20〜25 列) を通って GND のレールへ。CH2 (2+) は 20 列
 - 1− と 2− は GND のレール。S1 を倒して C と L を入れ替え、2 回測る
 

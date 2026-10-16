@@ -90,14 +90,14 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, V+, "1+", "1-"]
+    pins: [GND, "1+", V+, "1-"]
 wires:
   - AD.V+ -- b5 red
   - b10 -- b12 orange
   - b17 -- -t17 black
-  - AD.GND -- -t7 black
-  - AD.1+ -- d5 blue
-  - AD.1- -- d10 white
+  - AD.GND -- -t3 black
+  - AD.1+ -- c5 blue
+  - AD.1- -- c10 white
 notes:
   - text: "R1 の両端 (5・10 列) と R2 の両端 (12・17 列) にテスターの電圧レンジを当てる"
   - text: "共通の電流を読むにはここ (10-12 列の橙の線) を外してテスターの電流レンジを挟む"

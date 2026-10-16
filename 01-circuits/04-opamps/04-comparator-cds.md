@@ -85,7 +85,7 @@ parts:
     type: device
     at: bottom
     label: AD3 Scope
-    pins: [1+, 2+, 1-, 2-]
+    pins: [2+, 1+, 1-, 2-]
   U1: dip8 @ e12 LM358
   CDS1: photoresistor i16 i13
   RFIX: resistor h13 h9 10k
@@ -112,8 +112,8 @@ wires:
   - a6 -- -t6 black
   - SC.1+ -- j13 orange
   - SC.2+ -- j12 green
-  - SC.1- -- -t19 black
-  - SC.2- -- -t20 black
+  - SC.1- -- -t29 black
+  - SC.2- -- -t30 black
 notes:
   - text below: 上は 赤 +5V・青 GND、下は 赤 +5V・青 −5V (V−)
 ```
@@ -132,7 +132,7 @@ notes:
   自動的に同じネットになる)。出力が −V に張り付いたときの逆電圧を DP の順方向降下
   (約 0.7 V) までクランプする。VR1 を回してしきい値の明るさを変える
 - Scope はブレッドボードの下に別の箱 (AD3 Scope) で描いた。1+ (橙) は − 入力の 13 列 (`j13`)、2+ (緑) は出力の 12 列 (`j12`) に挿し、
-  1− と 2− (黒) はブレッドボードの右の空いた所から上の青レール (GND) へ戻す
+  1− と 2− (黒) はブレッドボードの右の縁を回して、上の青レール (GND) の 29・30 列へ戻す
 - AD3 の Supplies の電流は、+5 V 側が LED の約 7 mA と CdS・VR1・OP アンプの数 mA、−5 V 側が
   明所で R1・DP を通って吸い込む約 17 mA が最大。どちらも USB 給電の目安 50 mA (250 mW) に収まる
 

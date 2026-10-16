@@ -24,7 +24,7 @@ parts:
     type: device
     at: 1,1
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [GND, W1, 1+, 1-, 2+, 2-]
   Rref: resistor 3,3 6,3 2.7
   Ljumper: inductor 9,3 12,3 43n l=$\mathrm{L_{jumper}}$
   G1: ground 14,3
@@ -60,7 +60,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [GND, W1, 1+, 1-, 2+, 2-]
 wires:
   - AD.W1 -- a5 yellow [h-10]
   - AD.GND -- -t2 black

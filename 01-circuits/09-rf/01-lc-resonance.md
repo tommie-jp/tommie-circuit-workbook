@@ -107,7 +107,7 @@ parts:
 wires:
   - AD.W1 -- b3 yellow
   - AD.1+ -- a3 orange
-  - AD.2+ -- a10 blue
+  - AD.2+ -- a10 blue [h13]
   - AD.1- -- -t12 black
   - AD.2- -- -t13 black
   - AD.GND -- -t11 black

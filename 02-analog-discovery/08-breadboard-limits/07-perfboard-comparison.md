@@ -60,7 +60,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [GND, W1, 1+, 1-, 2+, 2-]
 wires:
   - AD.W1 -- a5 yellow [h-10]
   - AD.GND -- -t1 black
@@ -90,23 +90,25 @@ parts:
     type: device
     at: -c3
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [W1, 1+, 2+, GND, 1-, 2-]
 wires:
   - AD.W1 -- a3 yellow
   - a3 -- d3 yellow
   - d3 -- f3 yellow
-  - AD.1+ -- a5 white
-  - a5 -- d5 white
-  - d5 -- d3 white
-  - AD.2+ -- a7 gray
-  - a7 -- f7 gray
+  - AD.1+ -- a4 white
+  - a4 -- d4 white
+  - d4 -- d3 white
+  - AD.2+ -- a5 gray
+  - a5 -- e5 gray
+  - e5 -- e7 gray
+  - e7 -- f7 gray
   - f7 -- f8 gray
-  - AD.GND -- a4 black
-  - a4 -- b4 black
-  - b4 -- b6 black
-  - AD.1- -- a6 black
+  - AD.GND -- a6 black
   - a6 -- b6 black
-  - b6 -- b8 black
+  - b6 -- b7 black
+  - AD.1- -- a7 black
+  - a7 -- b7 black
+  - b7 -- b8 black
   - AD.2- -- a8 black
   - a8 -- b8 black
   - b8 -- b11 black
@@ -115,7 +117,8 @@ wires:
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/perfboard/07-perfboard-comparison.svg)
 
-- AD のピンはユニバーサル基板の真上 (3〜8 列) に並べ、それぞれ a 行へまっすぐ降ろす
+- AD のピンはユニバーサル基板の真上 (3〜8 列) に並べ、それぞれ a 行へまっすぐ降ろす。
+  並びは信号 (W1・1+・2+) を左、GND (GND・1−・2−) を右にまとめ、線が交わらないようにした (実物の並びとは違う。ピンの名前で探す)
 - R1 (f 行、3〜7 列) と C1 (f 行、8〜11 列) の中点をつなぐ配線は隣の穴へ渡す
   (f7 → f8) だけの最短の 1 本。breadboard のように**長い金属レールと並走する区間が
   無い**ので、隣に寄生が乗る心配がほとんど無い

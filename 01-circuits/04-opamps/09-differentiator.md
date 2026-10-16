@@ -76,7 +76,7 @@ parts:
     type: device
     at: top
     label: AD3 (Supplies ±5V・W1)
-    pins: [V+, GND, V-, W1]
+    pins: [V+, GND, W1, V-]
   SC:
     type: device
     at: bottom
@@ -89,15 +89,16 @@ parts:
 wires:
   - AD3.V+ -- +t1 red
   - AD3.GND -- -t2 black
-  - AD3.V- -- -b3 blue
+  - AD3.V- -- -b24 blue
   - AD3.W1 -- g4 yellow
   - SC.1+ -- h4 orange
   - SC.2+ -- i10 green
-  - SC.1- -- -t20 black
-  - SC.2- -- -t21 black
+  - SC.1- -- j12 black
+  - SC.2- -- j19 black
   - h11 -- h15 orange
   - g10 -- g18 green
-  - i12 -- -t13 black
+  - -t19 -- f19 black
+  - i19 -- i12 black
   - +t10 -- a10 red
   - j13 -- -b13 blue
 notes:
@@ -111,8 +112,8 @@ notes:
 - W1 (黄) は 4 列へ。Rs (1 kΩ、4 列〜7 列) の先に Cin (100 nF、7 列〜IN− の 11 列) を直列に挿す
 - 帰還の Rf (7.5 kΩ) は IC のピンの隣に挿せないので、線で右へ広げる。IN− (PIN 2、11 列) は `h11 → h15`、
   出力 (PIN 1、10 列) は `g10 → g18`。Rf は 15 列と 18 列の間に挿す
-- IN+ (PIN 3、12 列) は黒の線 `i12 → -t13` で GND (上の青レール) へ。PIN 8 (10 列) は `+t10 → a10` で +5 V へ、PIN 4 (13 列) は `j13 → -b13` で −5 V へ
-- Scope はブレッドボードの下に別の箱で描いた。1+ (橙) は入力の 4 列 (`h4`)、2+ (緑) は出力の 10 列 (`i10`)。1− と 2− (黒) は上の青レール (GND) へ
+- IN+ (PIN 3、12 列) は黒の線 `i12 → i19` で 19 列へ運び、19 列は `-t19 → f19` で GND (上の青レール) へつなぐ (IC の上を通らないように、帰還の線の右を回す)。PIN 8 (10 列) は `+t10 → a10` で +5 V へ、PIN 4 (13 列) は `j13 → -b13` で −5 V へ
+- Scope はブレッドボードの下に別の箱で描いた。1+ (橙) は入力の 4 列 (`h4`)、2+ (緑) は出力の 10 列 (`i10`)。1− (黒) は IN+ の 12 列 (`j12`)、2− (黒) は 19 列 (`j19`) で GND につなぐ。−5 V (青) は AD3 の V− から 24 列で下の青レールへ下ろす
 
 ## 計器の設定
 

@@ -60,7 +60,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery 3
-    pins: [W1, W2, GND, 1+, 1-]
+    pins: [GND, W1, 1-, 1+, W2]
 wires:
   - AD.W1 -- a6 yellow
   - AD.W2 -- a14 green

@@ -69,8 +69,8 @@ title: 図2 ブレッドボードに組む (Pico 2 は USB から給電、AD3 �
 board: full
 parts:
   MCU: pico2 @ h5
-  CDS1: photoresistor a30 a33 GL5528
-  R1: resistor c33 c37 10k
+  CDS1: photoresistor b33 b30 GL5528 cap=right
+  R1: resistor c30 c40 10k
   SC:
     type: device
     at: top
@@ -79,10 +79,10 @@ parts:
 wires:
   - MCU.3V3 -- +t9 red
   - MCU.GND38 -- -t7 black
-  - +t30 -- b30 red
-  - MCU.GP26 -- d33 yellow
-  - d37 -- -t37 black
-  - SC.1+ -- e33 yellow
+  - +t33 -- a33 red
+  - MCU.GP26 -- e30 yellow [v-48, h310, v92]
+  - d40 -- -t40 black
+  - SC.1+ -- a30 yellow [v10, h-80, v92]
   - SC.1- -- -t42 black
 ```
 
@@ -90,9 +90,10 @@ wires:
 
 - 電源は Pico 2 の USB。`3V3` (ピン 36、9 列の上) を上の + レールへ、`GND` (ピン 38、7 列の上) を上の − レールへ出す
   (11-2 と同じ。USB を挿しただけではレールに出ない)
-- CdS (CDS1) は 30〜33 列、R1 は 33〜37 列。33 列が分圧の点 (V<sub>node</sub>) で、GP26 (ピン 31) からの黄の線、
-  AD3 の 1+ (黄) も同じ 33 列に挿す。CDS1 の左端 (30 列) は + レール、R1 の右端 (37 列) は − レールへ
-- AD3 は電源に使わず、**オシロ (Scope) だけ**をつなぐ。1+ は V<sub>node</sub> (33 列) に、1− (黒) は − レール (GND) へ。
+- CdS (CDS1) は 30〜33 列 (b 行)、R1 は 30〜40 列 (c 行)。30 列が分圧の点 (V<sub>node</sub>) で、GP26 (ピン 31) からの黄の線 (e30)、
+  AD3 の 1+ (黄、a30) も同じ 30 列に挿す。CDS1 の右端 (33 列) は + レール、R1 の右端 (40 列) は − レールへ。
+  赤い線 (+ レールへ) を分圧の点の右に置いたので、GP26 からの黄の線と交わらない
+- AD3 は電源に使わず、**オシロ (Scope) だけ**をつなぐ。1+ は V<sub>node</sub> (30 列) に、1− (黒) は − レール (GND) へ。
   Scope の入力は 1 MΩ なので、10 kΩ の分圧にほとんど負荷をかけない (ずれは 1% ほど)
 - ブレッドボードを流れる電流は、CdS が 1 kΩ (明るい) のとき最大でも 3.3 V ÷ (1 kΩ + 10 kΩ) = 0.3 mA。
   ブレッドボードの範囲 (1 穴 200 mA・ブレッドボード全体 500 mA) に収まる
@@ -116,7 +117,7 @@ wires:
 | 項目 | 値 |
 | --- | --- |
 | 電源 | Pico 2 の USB (AD3 の Supplies は使わない) |
-| CH1 (1+) | V<sub>node</sub> (33 列)。500 mV/div、0 V を下から 1 目盛 |
+| CH1 (1+) | V<sub>node</sub> (30 列)。500 mV/div、0 V を下から 1 目盛 |
 | 1− | GND |
 | 時間レンジ | 200 ms/div (1 画面 2 秒) |
 | トリガ | CH1 の立ち下がり、0.9 V (1.65 V と 0.16 V の中ほど)、Single。トリガの点を左から 2 目盛に置く |

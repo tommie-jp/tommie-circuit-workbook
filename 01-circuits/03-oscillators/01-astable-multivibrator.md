@@ -85,7 +85,7 @@ parts:
     type: device
     at: bottom
     label: AD3 Scope
-    pins: [1+, 2+, 1-, 2-]
+    pins: [1+, 1-, 2-, 2+]
   R1: resistor b2 b5 330
   D1: led c5(A) c7(K) red
   R4: resistor b8 b12 100k

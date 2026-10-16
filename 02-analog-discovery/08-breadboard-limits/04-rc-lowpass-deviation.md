@@ -27,7 +27,7 @@ parts:
     type: device
     at: 1,1
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [GND, W1, 1+, 1-, 2+, 2-]
   R1: resistor 3,3 6,3 10k
   C1: capacitor 9,3 12,3 10p
   Cstray: capacitor 9,6 12,6 2.5p l=$\mathrm{C_{stray}}$
@@ -66,7 +66,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [GND, W1, 1+, 1-, 2+, 2-]
 wires:
   - AD.W1 -- a5 yellow [h-10]
   - AD.GND -- -t1 black

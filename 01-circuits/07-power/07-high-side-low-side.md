@@ -96,7 +96,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery 3 (Supplies V+ = 5V、Wavegen、Scope)
-    pins: [V+, GND, W1, W2, 1+, 2+, 1-, 2-]
+    pins: [V+, GND, 1-, 2-, W1, 1+, W2, 2+]
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black
@@ -119,7 +119,7 @@ wires:
   - AD.2+ -- f21 green
   - AD.1- -- -t4 black
   - AD.2- -- -t6 black
-  - AD.GND -- -t8 black
+  - AD.GND -- -t3 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/breadboard/07-high-side-low-side.svg)

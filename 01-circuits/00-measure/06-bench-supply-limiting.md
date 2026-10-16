@@ -133,20 +133,20 @@ parts:
     at: top
     label: 安定化電源 (5 V、制限 20 mA)
     pins: ["+", "-"]
-  V2:
-    type: device
-    at: top
-    label: FG (0〜5 V、1 Hz)
-    pins: [OUT, GND]
   AD:
     type: device
     at: top
     label: Analog Discovery 3 (Scope)
     pins: [1+, 1-, 2+, 2-]
+  V2:
+    type: device
+    at: top
+    label: FG (0〜5 V、1 Hz)
+    pins: [OUT, GND]
 wires:
   - V1.+ -- +t1 red
   - V1.- -- -t2 black
-  - V2.GND -- -t3 black
+  - V2.GND -- -t20 black
   - V2.OUT -- a17 yellow
   - +t5 -- a5 red
   - a14 -- -t14 black

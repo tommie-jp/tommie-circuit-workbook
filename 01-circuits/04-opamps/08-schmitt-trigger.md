@@ -88,7 +88,7 @@ parts:
     type: device
     at: bottom
     label: AD3 Scope
-    pins: [1+, 2+, 1-, 2-]
+    pins: [2+, 1+, 1-, 2-]
   U1: dip8 @ e12 LM358
   CDS1: photoresistor i16 i13
   RFIX: resistor h13 h9 10k
@@ -116,8 +116,8 @@ wires:
   - a6 -- -t6 black
   - SC.1+ -- j13 orange
   - SC.2+ -- j12 green
-  - SC.1- -- -t19 black
-  - SC.2- -- -t20 black
+  - SC.1- -- -t29 black
+  - SC.2- -- -t30 black
 notes:
   - text below: 上は 赤 +5V・青 GND、下は 赤 +5V・青 −5V (V−)
 ```

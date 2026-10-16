@@ -576,7 +576,7 @@ parts:
     type: device
     at: bottom
     label: 6 回巻きのループ
-    pins: [A, B]
+    pins: [B, A]
   SA:
     type: device
     at: bottom

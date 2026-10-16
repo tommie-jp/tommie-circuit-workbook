@@ -82,7 +82,7 @@ parts:
     type: device
     at: top
     label: Buck DC-DC モジュール (5 V に調整済み)
-    pins: [IN+, IN-, OUT+, OUT-]
+    pins: [IN+, OUT+, OUT-, IN-]
   SC:
     type: device
     at: bottom
@@ -94,15 +94,15 @@ parts:
 wires:
   - ADP.12V -- M1.IN+ red
   - ADP.GND -- -t1 black
-  - M1.IN- -- -t2 black
-  - M1.OUT+ -- +t3 red
-  - M1.OUT- -- -t4 black
+  - M1.IN- -- -t26 black
+  - M1.OUT+ -- +t3 red [v36, h-272]
+  - M1.OUT- -- -t4 black [v50, h-325]
   - +t10 -- a10 red
   - a14 -- -t14 black
   - +t18 -- a18 red
   - a24 -- -t24 black
-  - SC.1+ -- +t12 orange
-  - SC.1- -- -t13 black
+  - SC.1+ -- +t8 orange
+  - SC.1- -- -t17 black
 notes:
   - text below: 上の赤レール = +5V (OUT+)、青レール = GND。12 V は赤レールに入れない
 ```

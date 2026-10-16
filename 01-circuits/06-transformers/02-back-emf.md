@@ -61,19 +61,19 @@ parts:
     type: device
     at: top
     label: Analog Discovery (Supplies V+ と Scope)
-    pins: [V+, GND, 1+, 1-]
+    pins: [V+, GND, 1-, 1+]
   S1: switch b3 b5
-  R1: resistor b8 b12 180
+  R1: resistor b8 b12 180 cap=above:1,0
   L1: inductor/axial b15 b20 100m
   D1: led d20(A) d15(K)
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black
-  - AD.1+ -- c15 orange
+  - AD.1+ -- a15 orange
   - AD.1- -- -t10 black
   - +t3 -- a3 red
   - a5 -- a8 orange
-  - a12 -- a15 yellow
+  - c12 -- c15 yellow
   - a20 -- -t20 black
 notes:
   - text: D1 は L1 と同じ 15・20 列 (別の行) に置き、コイルと並列にする
@@ -83,7 +83,7 @@ notes:
 
 - 5 V は Analog Discovery の Supplies の V+ (WaveForms で 5 V にする) から上の + レールへ、GND は − レールへ入れる。
   回路の電流は約 24 mA で、Supplies の各レール 50 mA (USB 給電で 250 mW) に収まる。
-  Scope の 1+ (橙) は L1 の上端の 15 列 (`c15`)、1− (黒) は − レール (`-t10`) へつなぐ
+  Scope の 1+ (橙) は L1 の上端の 15 列 (`a15`)、1− (黒) は − レール (`-t10`) へつなぐ
 - 電源の + は 3 列から S1 (3・5 列) → R1 (8・12 列) → L1 (15・20 列) と線でつなぎ、20 列を − レールへ落とす
 - D1 (LED) は L1 と同じ 15・20 列の別の行 (d 行) に置くだけで、同じ列の
   導通でコイルと並列につながる

@@ -136,7 +136,7 @@ parts:
     type: device
     at: top
     label: AD3 Scope
-    pins: [1+, 1-, 2+, 2-]
+    pins: [1-, 1+, 2+, 2-]
   RQ1: resistor a32 a34 1k
   DQ1: led c34(A) c36(K) red
   RQ2: resistor a38 a40 1k

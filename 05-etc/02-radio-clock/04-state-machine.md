@@ -770,7 +770,7 @@ parts:
     type: device
     at: aa36
     label: 他ユニット
-    pins: [CLK, T440, E440, NE440, E880]
+    pins: [CLK, T440, NE440, E440, E880]
   LINKB:
     type: device
     at: p-1
@@ -789,8 +789,8 @@ wires:
   - PS.+5V -- ba1 red
   - LINKT.CLK -- aa33 yellow
   - LINKT.T440 -- ab33 blue
-  - LINKT.E440 -- ac33 blue
-  - LINKT.NE440 -- ad33 purple
+  - LINKT.NE440 -- ac33 purple
+  - LINKT.E440 -- ad33 blue
   - LINKT.E880 -- ae33 brown
   - LINKB.T880 -- p1 green
   - LINKB.CLK -- q1 yellow
@@ -861,77 +861,81 @@ wires:
   - ac4 -- an4 black
   - an4 -- ay4 black
   - ay4 -- az4 black
-  - w12 -- w10 blue
-  - w10 -- t10 blue
-  - t10 -- t32 blue
-  - t32 -- ab32 blue
-  - ab32 -- ab33 blue
-  - z12 -- z14 green
-  - z14 -- x14 green
-  - x14 -- x15 green
-  - x15 -- x18 green
-  - x18 -- aq18 green
-  - aq18 -- aq12 green
-  - aq12 -- ar12 green
-  - ai12 -- ai8 orange
-  - ai8 -- m8 orange
-  - m8 -- m17 orange
-  - m17 -- j17 orange
-  - j17 -- j15 orange
-  - y15 -- y31 yellow
-  - y31 -- c31 yellow
-  - c31 -- c10 yellow
-  - c10 -- g10 yellow
-  - g10 -- g12 yellow
-  - g10 -- g2 yellow
-  - g2 -- q2 yellow
-  - q2 -- q1 yellow
   - f12 -- f1 green
   - f1 -- p1 green
-  - aw12 -- aw10 brown
-  - aw10 -- az10 brown
-  - az10 -- az33 brown
-  - az33 -- ae33 brown
-  - al12 -- al10 purple
-  - al10 -- ao10 purple
-  - ao10 -- ao31 purple
-  - ao31 -- ad31 purple
-  - ad31 -- ad33 purple
-  - i12 -- i14 orange
-  - i14 -- g14 orange
-  - g14 -- g15 orange
-  - i12 -- i3 orange
-  - i3 -- au3 orange
-  - au3 -- au12 orange
-  - at12 -- at9 blue
-  - at9 -- ap9 blue
-  - ap9 -- ak9 blue
-  - ak9 -- ak12 blue
-  - ap9 -- ap32 blue
-  - ap32 -- ac32 blue
-  - ac32 -- ac33 blue
-  - aa15 -- aa17 pink
-  - aa17 -- af17 pink
-  - af17 -- af12 pink
-  - af12 -- ag12 pink
-  - x12 -- x9 yellow
-  - x9 -- n9 yellow
-  - n9 -- n18 yellow
-  - n18 -- h18 yellow
-  - h18 -- h15 yellow
-  - n18 -- n33 yellow
   - n33 -- aa33 yellow
-  - av12 -- av8 white
-  - av8 -- aj8 white
-  - aj8 -- aj12 white
-  - as12 -- as7 purple
-  - as7 -- ah7 purple
-  - ah7 -- ah12 purple
+  - n33 -- n18 yellow
+  - h18 -- h15 yellow
+  - h18 -- n18 yellow
+  - n18 -- n10 yellow
+  - x12 -- x10 yellow
+  - n10 -- x10 yellow
+  - ab33 -- ab32 blue
+  - t32 -- t11 blue
+  - t32 -- ab32 blue
+  - w12 -- w11 blue
+  - t11 -- w11 blue
+  - g15 -- g14 orange
+  - g14 -- i14 orange
+  - i14 -- i12 orange
+  - i12 -- i3 orange
+  - au12 -- au3 orange
+  - i3 -- au3 orange
+  - aa15 -- aa13 pink
+  - aa13 -- ae13 pink
+  - ae13 -- ae12 pink
+  - ae12 -- ag12 pink
+  - af18 -- ao18 purple
+  - af18 -- af13 purple
+  - ao18 -- ao11 purple
+  - af13 -- ah13 purple
+  - ah13 -- ah12 purple
+  - as12 -- as11 purple
+  - ao11 -- as11 purple
+  - x19 -- x15 green
+  - x19 -- ap19 green
+  - ap19 -- ap12 green
+  - x15 -- x14 green
+  - x14 -- z14 green
+  - z14 -- z12 green
+  - ap12 -- ar12 green
+  - ad33 -- ad32 blue
+  - ad32 -- aq32 blue
+  - aq32 -- aq13 blue
+  - aq13 -- at13 blue
+  - at13 -- at12 blue
+  - ak12 -- ak10 blue
+  - at12 -- at10 blue
+  - ak10 -- at10 blue
+  - j17 -- m17 orange
+  - j17 -- j15 orange
+  - m17 -- m9 orange
+  - ai12 -- ai9 orange
+  - m9 -- ai9 orange
+  - ae33 -- az33 brown
+  - az33 -- az11 brown
+  - aw12 -- aw11 brown
+  - aw11 -- az11 brown
+  - aj12 -- aj9 white
+  - av12 -- av9 white
+  - aj9 -- av9 white
+  - y17 -- ad17 yellow
+  - y17 -- y15 yellow
+  - ad17 -- ad1 yellow
+  - g12 -- g2 yellow
+  - g2 -- q2 yellow
+  - q2 -- q1 yellow
+  - q1 -- ad1 yellow
+  - ac33 -- ac31 purple
+  - ac31 -- ae31 purple
+  - ae31 -- ae14 purple
+  - ae14 -- al14 purple
+  - al14 -- al12 purple
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/04-state-machine-1.svg)
 
-- 図 8b: 9×15 cm のユニバーサル基板を横に置く (54 列 × 33 行)。+ の筋を上 (30 行)、GND の筋を下 (4 行) に通し、IC は左から U6 が `e15`、U5 が `v15`、U7 が `ag15`、U8 が `ar15` に向きをそろえて 1 列に並べた (回していない)。74HC74 の 1Q→2D と 1PRE→1CLR は胴の下 (半田面) で結ぶ。交差は 29 か所。check のネットリストは図 8 と同じ
+- 図 8b: 9×15 cm のユニバーサル基板を横に置く (54 列 × 33 行)。+ の筋を上 (30 行)、GND の筋を下 (4 行) に通し、IC は左から U6 が `e15`、U5 が `v15`、U7 が `ag15`、U8 が `ar15` に向きをそろえて 1 列に並べた (回していない)。74HC74 の 1Q→2D と 1PRE→1CLR は胴の下 (半田面) で結ぶ。信号線の道筋と他ユニットの箱のピンの並びは、交差が少なくなるように選んだ (+ と GND の筋と各 IC への電源の線が基板を区切るので、いくつかは跨ぐ)。check のネットリストは図 8 と同じ
 
 - IC は 74HC74 が 2 個 (U5、U6)、74HC04 (U7)、74HC08 (U8)。CLK は 4 つのフリップフロップの CLK ピン (PIN 3、11) へ、箱の CLK から 1 本ずつ引く。
 
@@ -1038,17 +1042,17 @@ points:
 parts:
   PS:
     type: device
-    at: -b17
+    at: -c17
     label: 電源 5V
     pins: [GND, +5V]
   LINKT:
     type: device
-    at: -b5
+    at: -c5
     label: 他ユニット
     pins: [W, NE440]
   LINKB:
     type: device
-    at: -b25
+    at: -c25
     label: 他ユニット
     pins: [CLK, TO]
   U11: dip14 f6 74HC02
@@ -1064,19 +1068,6 @@ wires:
   - LINKT.NE440 -- a6 orange
   - LINKB.CLK -- a25 yellow
   - LINKB.TO -- a26 brown
-  - m6 -- m12 pink
-  - m6 -- i6 pink
-  - o12 -- m12 pink
-  - i7 -- l7 orange
-  - l9 -- l7 orange
-  - l9 -- l14 orange
-  - l9 -- s9 orange
-  - r11 -- s11 orange
-  - s11 -- s9 orange
-  - l14 -- o14 orange
-  - h20 -- j20 blue
-  - j20 -- j8 blue
-  - j8 -- i8 blue
   - f11 -- e11 black
   - f11 -- f12 black
   - e13 -- d13 black
@@ -1127,34 +1118,47 @@ wires:
   - h24 -- t24 red
   - c18 -- a18 red
   - c24 -- e24 red
-  - e23 -- a23 yellow
-  - a25 -- a23 yellow
-  - h16 -- h17 orange
-  - h16 -- a16 orange
-  - a6 -- a16 orange
-  - k19 -- k17 green
-  - k19 -- h19 green
-  - k13 -- o13 green
-  - k13 -- k17 green
-  - k17 -- s17 green
-  - r12 -- s12 green
-  - s12 -- s17 green
-  - o15 -- m15 white
-  - m15 -- m21 white
-  - h21 -- m21 white
+  - h22 -- o22 blue
   - o16 -- o22 blue
-  - o22 -- h22 blue
-  - n11 -- n5 purple
-  - n11 -- o11 purple
+  - a23 -- a25 yellow
+  - a23 -- e23 yellow
   - a5 -- n5 purple
-  - v26 -- a26 brown
-  - v26 -- v10 brown
-  - v10 -- r10 brown
+  - n5 -- n11 purple
+  - n11 -- o11 purple
+  - h21 -- n21 white
+  - n15 -- n21 white
+  - n15 -- o15 white
+  - i6 -- m6 pink
+  - m6 -- m12 pink
+  - m12 -- o12 pink
+  - a6 -- a16 orange
+  - a16 -- h16 orange
+  - h16 -- h17 orange
+  - h20 -- j20 blue
+  - i8 -- j8 blue
+  - j8 -- j20 blue
+  - a26 -- u26 brown
+  - r10 -- u10 brown
+  - u10 -- u26 brown
+  - i7 -- l7 orange
+  - l7 -- l14 orange
+  - l14 -- o14 orange
+  - o14 -- q14 orange
+  - q11 -- r11 orange
+  - q11 -- q14 orange
+  - h19 -- m19 green
+  - m13 -- m19 green
+  - m13 -- o13 green
+  - o13 -- p13 green
+  - p9 -- s9 green
+  - p9 -- p13 green
+  - r12 -- s12 green
+  - s9 -- s12 green
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/04-state-machine-2.svg)
 
-- 図 9b: 7×9 cm のユニバーサル基板 (26 列 × 31 行)。IC は U11 が `f6`、U9 が `h24`、U10 が `r16` (U9・U10 は 180 度回した)。交差は 20 か所。check のネットリストは図 9 と同じ
+- 図 9b: 7×9 cm のユニバーサル基板 (26 列 × 31 行)。IC は U11 が `f6`、U9 が `h24`、U10 が `r16` (U9・U10 は 180 度回した)。信号線の道筋と箱のピンの並びは交差が少なくなるように選んだ (+ と GND の筋と各 IC への電源の線が基板を区切るので、いくつかは跨ぐ)。check のネットリストは図 9 と同じ
 
 - 74HC163 (U9) のデータ入力は、B (PIN 4) だけ +5 V、A・C・D (PIN 3、5、6) は GND で、値 2 を読み込む。CLR (PIN 1)、ENP (PIN 7)、ENT (PIN 10) は +5 V。
 
@@ -1291,7 +1295,7 @@ parts:
     type: device
     at: t-1
     label: 他ユニット
-    pins: [QA, QB, W, EN, E440, NE440, LOADN, E880, TO, CLRN, PON]
+    pins: [QA, QB, W, E440, EN, NE440, LOADN, E880, TO, CLRN, PON]
   LINKB:
     type: device
     at: u36
@@ -1311,8 +1315,8 @@ wires:
   - LINKT.QA -- t1 pink
   - LINKT.QB -- u1 green
   - LINKT.W -- v1 pink
-  - LINKT.EN -- w1 green
-  - LINKT.E440 -- x1 blue
+  - LINKT.E440 -- w1 blue
+  - LINKT.EN -- x1 green
   - LINKT.NE440 -- y1 blue
   - LINKT.LOADN -- z1 purple
   - LINKT.E880 -- aa1 brown
@@ -1373,69 +1377,66 @@ wires:
   - p25 -- p20 red
   - ad25 -- ad20 red
   - ar25 -- ar20 red
+  - p17 -- p3 pink
+  - p3 -- v3 pink
+  - v3 -- v1 pink
+  - ah17 -- ah3 white
+  - ab3 -- ah3 white
+  - ab3 -- ab1 white
+  - e17 -- e2 green
+  - e2 -- u2 green
+  - u2 -- u1 green
+  - ar17 -- ar2 blue
+  - ac2 -- ac1 blue
+  - ac2 -- ar2 blue
+  - ai20 -- ai17 purple
+  - o18 -- o15 white
+  - o18 -- q18 white
+  - q18 -- q17 white
   - f17 -- f15 white
-  - f15 -- q15 white
-  - q15 -- q17 white
-  - r17 -- r15 brown
-  - r15 -- t15 brown
-  - t15 -- ae15 brown
-  - ae15 -- ae17 brown
-  - t17 -- t15 brown
-  - v20 -- v21 yellow
-  - v21 -- ah21 yellow
-  - ah21 -- ah20 yellow
-  - ai17 -- ai16 purple
-  - ai16 -- al16 purple
-  - al16 -- al22 purple
-  - al22 -- ai22 purple
-  - ai22 -- ai20 purple
-  - aj20 -- aj21 green
-  - aj21 -- am21 green
-  - am21 -- am15 green
-  - am15 -- as15 green
-  - as15 -- as17 green
+  - f15 -- o15 white
+  - ag17 -- ag4 brown
+  - aa4 -- aa1 brown
+  - aa4 -- ag4 brown
+  - at17 -- at1 orange
+  - ad1 -- at1 orange
+  - d17 -- d1 pink
+  - d1 -- t1 pink
+  - y17 -- y1 blue
+  - y17 -- ad17 blue
+  - aj20 -- al20 green
+  - al20 -- al18 green
+  - al18 -- as18 green
+  - as18 -- as17 green
+  - v20 -- x20 yellow
+  - x20 -- x19 yellow
+  - ah20 -- ah19 yellow
+  - x19 -- ah19 yellow
+  - af17 -- af5 purple
+  - z5 -- z1 purple
+  - z5 -- af5 purple
   - u33 -- u20 orange
-  - d17 -- d2 pink
-  - d2 -- t2 pink
-  - t2 -- t1 pink
-  - e17 -- e3 green
-  - e3 -- u3 green
-  - u3 -- u1 green
-  - p17 -- p4 pink
-  - p4 -- v4 pink
-  - v4 -- v1 pink
-  - s17 -- s5 blue
-  - s5 -- x5 blue
-  - x5 -- x22 blue
-  - x22 -- t22 blue
-  - t22 -- t20 blue
-  - x5 -- x1 blue
-  - u17 -- u6 green
-  - u6 -- w6 green
-  - w6 -- w1 green
-  - at17 -- at2 orange
-  - at2 -- ad2 orange
-  - ad2 -- ad1 orange
-  - ar17 -- ar3 blue
-  - ar3 -- ac3 blue
-  - ac3 -- ac1 blue
-  - ah17 -- ah4 white
-  - ah4 -- ab4 white
-  - ab4 -- ab1 white
-  - ag17 -- ag5 brown
-  - ag5 -- aa5 brown
-  - aa5 -- aa1 brown
-  - af17 -- af6 purple
-  - af6 -- z6 purple
-  - z6 -- z1 purple
-  - ad17 -- ad7 blue
-  - ad7 -- y7 blue
-  - y7 -- y1 blue
+  - t20 -- t19 blue
+  - s19 -- s17 blue
+  - s19 -- t19 blue
+  - s17 -- s4 blue
+  - s4 -- w4 blue
+  - w4 -- w1 blue
+  - x18 -- ae18 brown
+  - x18 -- x16 brown
+  - ae18 -- ae17 brown
+  - r17 -- r16 brown
+  - t17 -- t16 brown
+  - r16 -- t16 brown
+  - t16 -- x16 brown
+  - u17 -- u5 green
+  - u5 -- x5 green
+  - x5 -- x1 green
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/04-state-machine-3.svg)
 
-- 図 10b: 9×15 cm のユニバーサル基板を横に置く (54 列 × 33 行)。IC は U12 が `d20`、U13 が `p20`、U14 が `ad20`、U15 が `ar20` で、信号の流れの順に横一列に並べた。+5 V と GND の筋は IC の上側に、他ユニットへの線は IC の下側にまとめ、交差は 22 か所。check のネットリストは図 10 と同じ
+- 図 10b: 9×15 cm のユニバーサル基板を横に置く (54 列 × 33 行)。IC は U12 が `d20`、U13 が `p20`、U14 が `ad20`、U15 が `ar20` で、信号の流れの順に横一列に並べた。+5 V と GND の筋は IC の上側に、他ユニットへの線は IC の下側にまとめ、信号線の道筋と箱のピンの並びは交差が少なくなるように選んだ (+ と GND の筋と各 IC への電源の線が基板を区切るので、いくつかは跨ぐ)。check のネットリストは図 10 と同じ
 
 - IC は 74HC86 (U12)、74HC08 (U13)、74HC32 (U14)、74HC02 (U15)。入力が 9 本と出力が 3 本ある。入力は上の箱、S3 だけ下の箱から入れる。
 
@@ -1553,31 +1554,6 @@ wires:
   - LINKB.QB -- j18 white
   - LINKB.QA -- k18 orange
   - LINKB.LOADN -- l18 green
-  - k18 -- k13 orange
-  - k13 -- n13 orange
-  - n13 -- n10 orange
-  - j15 -- j13 white
-  - j15 -- j18 white
-  - j15 -- o15 white
-  - o15 -- o10 white
-  - f2 -- f8 orange
-  - f2 -- k2 orange
-  - f10 -- f8 orange
-  - i15 -- c15 orange
-  - i15 -- i13 orange
-  - c15 -- c8 orange
-  - k2 -- k1 orange
-  - c8 -- f8 orange
-  - h16 -- h13 brown
-  - h16 -- i16 brown
-  - i18 -- i16 brown
-  - g18 -- h18 pink
-  - g18 -- g13 pink
-  - f14 -- b14 green
-  - f14 -- f13 green
-  - g7 -- g10 green
-  - g7 -- b7 green
-  - b7 -- b14 green
   - p7 -- o7 black
   - p7 -- q7 black
   - i5 -- i8 black
@@ -1595,8 +1571,6 @@ wires:
   - t3 -- t1 black
   - t3 -- s3 black
   - s3 -- s7 black
-  - j1 -- e1 blue
-  - e10 -- e1 blue
   - s2 -- s1 red
   - s2 -- q2 red
   - q2 -- q5 red
@@ -1607,22 +1581,43 @@ wires:
   - q5 -- n5 red
   - k5 -- n5 red
   - n5 -- n7 red
-  - l7 -- l1 blue
-  - m1 -- m7 yellow
-  - r5 -- r7 purple
-  - r5 -- r1 purple
-  - r5 -- u5 purple
-  - r11 -- u11 purple
-  - r11 -- r10 purple
-  - u11 -- u5 purple
-  - r1 -- n1 purple
+  - g18 -- g13 pink
+  - g18 -- h18 pink
+  - j18 -- j13 white
+  - j13 -- j12 white
+  - j12 -- o12 white
+  - o12 -- o10 white
+  - l18 -- s18 green
   - s18 -- s10 green
-  - s18 -- l18 green
+  - l7 -- l1 blue
+  - k18 -- k13 orange
+  - k13 -- n13 orange
+  - n13 -- n10 orange
+  - c14 -- c9 green
+  - c14 -- f14 green
+  - f14 -- f13 green
+  - g10 -- g9 green
+  - c9 -- g9 green
+  - m7 -- m1 yellow
+  - i18 -- i17 brown
+  - h17 -- i17 brown
+  - h17 -- h13 brown
+  - r10 -- r7 purple
+  - r7 -- r1 purple
+  - n1 -- r1 purple
+  - i13 -- i11 orange
+  - f11 -- i11 orange
+  - f11 -- f10 orange
+  - f10 -- f2 orange
+  - f2 -- k2 orange
+  - k2 -- k1 orange
+  - e10 -- e1 blue
+  - e1 -- j1 blue
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/04-state-machine-4.svg)
 
-- 図 11b: 5×7 cm のユニバーサル基板を横に置く (24 列 × 18 行)。IC は U16 が `l10`、U17 が `k10` (U17 は 180 度回した)。交差は 21 か所。check のネットリストは図 11 と同じ
+- 図 11b: 5×7 cm のユニバーサル基板を横に置く (24 列 × 18 行)。IC は U16 が `l10`、U17 が `k10` (U17 は 180 度回した)。信号線の道筋と箱のピンの並びは交差が少なくなるように選んだ (+ と GND の筋と各 IC への電源の線が基板を区切るので、いくつかは跨ぐ)。check のネットリストは図 11 と同じ
 
 - 74HC163 (U16) のデータ入力は、A (PIN 3) だけ +5 V、B〜D は GND で、値 1 を読み込む。ENP (PIN 7) と ENT (PIN 10) は、EN を 1 本の線で受ける。
 

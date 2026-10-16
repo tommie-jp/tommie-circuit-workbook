@@ -112,8 +112,8 @@ wires:
   - AD.V- -- -b1 purple
   - AD.V+ -- +t3 red
   - AD.GND -- -t4 black
-  - AD.W1 -- b6 yellow
   - AD.1+ -- a6 yellow
+  - AD.W1 -- b6 yellow
   - AD.1- -- -t8 black
   - AD.2+ -- a20 green
   - AD.2- -- -t22 black
@@ -127,10 +127,10 @@ wires:
   - e17 -- f17 green
   - b17 -- b20 green
   - a25 -- -t25 black
-  - d12 -- d17 white
+  - a12 -- a17 white [v-14]
 notes:
   - text small: Q1 = 2SC1815、Q2 = 2SA1015 (平らな面を向こうに挿す。左から B・C・E)
-  - text small: 白い線 (d12–d17) が B の帰還。A は白い線を外して d11–d12 をつなぐ
+  - text small: 白い線 (a12–a17) が B の帰還。A は白い線を外して d11–d12 をつなぐ
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/00-tools/breadboard/04-opamp-push-pull-ac.svg)

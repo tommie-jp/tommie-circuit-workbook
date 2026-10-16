@@ -59,7 +59,7 @@ parts:
   R1: resistor c5 c10 1k
   R2: resistor d10 d15 1k
   Rx: resistor b33 b38 3300
-  R3: potentiometer/trimmer d30(1) d33(W) d36(2) 5k
+  R3: potentiometer/trimmer d30(1) d33(W) d36(2) 5k cap=below:-2,0
   GA:
     type: device
     at: bottom
@@ -69,7 +69,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, V+]
+    pins: [V+, GND]
 wires:
   - AD.V+ -- a5 red
   - AD.GND -- -t8 black

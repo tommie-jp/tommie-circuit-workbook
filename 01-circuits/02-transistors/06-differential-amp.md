@@ -112,11 +112,11 @@ wires:
   - a10 -- -t10 black
   - a23 -- -t23 black
   - a34 -- -t34 black
-  - d6 -- g25 orange
-  - d17 -- g26 yellow
-  - d20 -- g27 green
-  - c20 -- g29 green
-  - d29 -- g30 yellow
+  - d6 -- g25 orange [v48]
+  - d17 -- g26 yellow [v38]
+  - d20 -- g27 green [v28]
+  - c20 -- g29 green [v30, h170]
+  - d29 -- g30 yellow [h10]
   - c33 -- g31 blue
 ```
 

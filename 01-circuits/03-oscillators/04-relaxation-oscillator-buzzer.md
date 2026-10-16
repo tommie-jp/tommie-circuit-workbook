@@ -84,7 +84,7 @@ parts:
     type: device
     at: bottom
     label: AD3 Scope
-    pins: [1+, 2+, 1-, 2-]
+    pins: [1+, 1-, 2-, 2+]
   R1: resistor b2 b5 330
   D1: led c5(A) c7(K) red
   R4: resistor b8 b12 10k
@@ -95,7 +95,7 @@ parts:
   D2: led c25(A) c23(K) red
   Q1: transistor h6(E) h7(C) h8(B) 2SC1815
   Q2: transistor h22(B) h23(C) h24(E) 2SC1815
-  R5: resistor h26 h29 100
+  R5: resistor h26 h29 100 cap=above:0.6,0
   BZ1: buzzer j27 j29
 wires:
   - AD3.V+ -- +t1 red
@@ -115,7 +115,7 @@ wires:
   - d19 -- d8 green
   - e11 -- d22 yellow [v-10, h220, v-10]
   - g23 -- g26 purple
-  - i27 -- -b27 black
+  - i27 -- -b27 black [h-10]
   - -t30 -- -b30 black
   - SC.1+ -- j7 orange
   - SC.2+ -- j23 green
