@@ -1,14 +1,23 @@
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { ROOT, readEntries } from './collect.mjs';
 import { listEnglish } from './en-check.mjs';
+import { CJK } from './en.mjs';
 import { cliPath, fencesIn } from './fences.mjs';
 import { renderPlantuml } from './plantuml.mjs';
 
 const CACHE_DIR = join('out', '.cache');
 const CACHE_FILE = join(CACHE_DIR, 'render-manifest.json');
+
+/** `out` の下の SVG で、日本語の字を含む物のファイル名。 */
+function japaneseLeft(out) {
+  if (!existsSync(out)) return [];
+  return readdirSync(out)
+    .filter((name) => name.endsWith('.svg') && CJK.test(readFileSync(join(out, name), 'utf8')))
+    .sort();
+}
 
 function hashText(text) {
   return createHash('sha256').update(text).digest('hex');
@@ -82,12 +91,21 @@ function main(args) {
       [
         cliPath(ROOT, fence), 'render', ...items.map((item) => item.path), '--out', out,
         ...(embedFonts && fence === 'circuit' ? ['--embed-fonts'] : []),
+        ...(english ? ['--lang', 'en'] : []),
       ],
       { cwd: ROOT, encoding: 'utf8' },
     );
     if (run.status !== 0) {
       failed += 1;
       console.error(`--- ${out}\n${run.stderr.trimEnd()}`);
+      continue;
+    }
+
+    // 英語版の図に日本語が残ってはいけない (フェンスが出す字は `--lang en` で英語になる)
+    const leftover = english ? japaneseLeft(out) : [];
+    if (leftover.length > 0) {
+      failed += 1;
+      console.error(`--- ${out}\n英語版の図に日本語が残っています: ${leftover.join(', ')}`);
       continue;
     }
 
