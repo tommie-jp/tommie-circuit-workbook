@@ -185,7 +185,7 @@ Fig. 3 shows the ideal shape. CH2 moves opposite to PWM. While Q1 is ON, the dra
 OFF, the drain returns to 5 V. The 0.2 V during ON is an estimate, the product of the 4.5 Ω ON resistance of the
 2N7000 and a running motor current of tens of mA (a rough guide). It is not measured (at the stall current of 0.16 A
 it would be about 0.7 V). At the moment of turn-off, D1 passes the back EMF of the motor, so the drain rises for an
-instant to about 0.7 V above 5 V. When you change the duty cycle to 25 % or 75 %, the ON width of CH1 and the average
+instant to about 0.8 V above 5 V. When you change the duty cycle to 25 % or 75 %, the ON width of CH1 and the average
 voltage in the table below (5 V × duty cycle) change in proportion.
 
 ## Values to check
@@ -219,7 +219,7 @@ V<sub>GS</sub> = 4.5 V; PWM at 1 kHz; not measured), the average current at duty
 The average voltage across the motor and R3 is 1.05, 2.12, 3.20 and 4.30 V, lower than 5 V × duty cycle in the table
 (1.25–5.0 V) by the drop in Q1 (about 0.7 V at stall).
 While the motor runs, the current is small and so is the drop in Q1, so the values approach those in the table.
-The drain spike at turn-off is 5.8 V (5 V + the forward voltage of D1, about 0.8 V), close to the "about 0.7 V" in the
+The drain spike at turn-off is 5.8 V (5 V + the forward voltage of D1, about 0.8 V), matches the "about 0.8 V" in the
 figure (the deck is `sim/02-motor-pwm.cir`).
 
 ## Sources

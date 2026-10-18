@@ -135,7 +135,7 @@ notes:
 
 ## Instrument settings
 
-The instrument is Scope of the Analog Discovery 3 (1+ = left end of M1, 1− = right end of R1). Switching is by hand,
+The instrument is Scope of the Analog Discovery 3 (1+ = c of SW1, 1− = c of SW2; the voltage across the M1 and R1 pair). Switching is by hand,
 and the difference between direction and brake shows in the sign of the voltage, so the oscilloscope suits this better
 than a multimeter. Set Scope in WaveForms to Single (one capture), time base 1 s/div, vertical 2 V/div, and trigger on
 a falling edge of CH1 at 2.5 V. Wait for the trigger, then switch from forward.

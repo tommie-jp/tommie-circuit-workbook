@@ -66,7 +66,7 @@ style:
 ```breadboard
 # Breadboard wiring diagram (tommie-fence breadboard fence)
 title: Fig. 2 Building it on the breadboard
-# Top red rail = +5V, blue rail = GND (carried over to the bottom − rail at column 29)
+# Top red rail = +5V, blue rail = GND (carried over to the bottom − rail at column 30)
 board: half
 parts:
   AD:

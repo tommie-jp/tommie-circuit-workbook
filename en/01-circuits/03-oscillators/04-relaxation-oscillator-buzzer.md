@@ -187,7 +187,7 @@ The rough formula is T = 1.386 × R × C (the same formula as 3-1), which gives 
 LED (the collector on the off side stops at about 3.3 V). A SPICE check (LTspice, with models of the 2SC1815 and the red LED and
 the buzzer assumed to be 20 nF) gives a period of **about 1.06 ms (about 940 Hz)**. The base current is large,
 (5 − 0.7) V ÷ 10 kΩ ≈ 0.43 mA, so unlike 3-1 the result was the same for any hFE from 120 to 400.
-Read the frequency from the period of the waveform at the collector of Q2 (column 22) on the oscilloscope (0-3), or measure it with a
+Read the frequency from the period of the waveform at the collector of Q2 (column 23) on the oscilloscope (0-3), or measure it with a
 multimeter that has a frequency range (Hz).
 
 | Measure | Expected value | What it shows |
