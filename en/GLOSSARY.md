@@ -163,7 +163,7 @@ MicroPython, Verilator, Yosys, nextpnr.
 - Do not write `1s` / `2s` / `0s` for digits (en-check reads them as seconds): use "ones place", "twos place", "zeros and ones".
 - Title limits are by width, not only by count: a `scope`, `spectrum`, `vna`, `graph` or `copper` title is cut with "…" past
   about 55 characters, a `breadboard` title or `notes:` past about 55–60. Shorten the title and render the figure to check.
-- Inside a figure `title:` and `- text:` annotation do not use `: ` (colon and space), `=` or `;` — YAML breaks (the annotation
+- Inside a figure `title:` and `- text:` annotation do not use a colon followed by a space, `=` or `;` — YAML breaks (the annotation
   disappears from the figure) or the fence's own check refuses it. Use a comma or a dash.
 - Cross-book references: write the book name ("10-3 of the Analog Discovery book").
 
