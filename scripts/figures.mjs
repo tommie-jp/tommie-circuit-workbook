@@ -14,7 +14,7 @@
  *   node scripts/figures.mjs --verify <dir>  書き出した図 (<dir>) に、画像の行の指す SVG が全部あるか
  */
 
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, readEntries } from './collect.mjs';
@@ -173,6 +173,7 @@ function main(args) {
     writeFileSync(join(ROOT, read.path), nextText);
   }
 
+  mkdirSync(CACHE_DIR, { recursive: true });
   writeFileSync(CACHE_FILE, JSON.stringify(manifest, null, 2));
   console.log(`${reads.length} 題のうち ${stale.length} 題の画像の行を書き直した`);
 }

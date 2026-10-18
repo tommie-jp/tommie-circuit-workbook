@@ -96,10 +96,42 @@ Alerts keep their kind (`> [!WARNING]`, `> [!NOTE]`). "実機で動かしてい�
 | 接地 / GND | ground / GND | draw it as GND in figures |
 | 部品表 | parts list | |
 | 手持ちの部品 | parts you have | |
+| 順方向 / 逆方向 | forward / reverse direction | |
+| 順方向電圧 | forward voltage (V<sub>F</sub>) | |
+| 逆耐圧 | reverse breakdown voltage | |
+| アノード / カソード | anode / cathode | |
+| 発光ダイオード | light-emitting diode (LED) | |
+| テスター | multimeter | |
+| 直流電圧レンジ / 電流レンジ | DC voltage range / current range | |
+| 合成抵抗 | combined resistance | |
+| 直列 / 並列 | series / parallel | |
+| 分圧 | voltage divider | |
+| 直列抵抗 | series resistor | |
+| ジャンパ線 | jumper wire | |
+| 単 3 電池 | AA battery | |
+| 電源レール (ブレッドボード) | power rail | "top + rail", "GND rail" |
+| 電源の箱 (図の機器) | power supply box | the label in the figure is "Analog Discovery 3 (Supplies)" |
+| 整流 / 保護の回路 | rectifier / protection circuits | |
+| 発振器 (0-6 の計器) | signal generator | as in the instrument list |
+| ロール表示 | roll mode | |
+| 共通 (端子) | common | |
+| 1 回路 2 接点 | 1 pole, 2 throw (SPDT) | |
+| 帯のある側 (ダイオード) | striped side | the cathode end |
+| 電源装置 | bench power supply | 01-circuits chapter 13 |
 
 Instruments and tools keep their names: Analog Discovery 3 (AD3), WaveForms (menu names Scope, Wavegen, Supplies,
 Logic, Spectrum, Network, Patterns, Protocol), LiteVNA64, NanoVNA, tinySA Ultra, LTspice, Pico 2, Pico SDK,
 MicroPython, Verilator, Yosys, nextpnr.
+
+## Decisions made while translating
+
+- Cross references to other exercises keep their number: "(0-4)" stays "(0-4)"; add "see" only when the sentence needs it
+  ("see 0-4"). A chapter reference "(第 N 章)" is "(Chapter N)".
+- The front matter `source` value is copied as it is (`自作`). The Sources section says "Original work."
+- Table column headings for parts lists: Symbol / Part / Value.
+- Figure `title:` length: a `circuit` title is at most 60 characters (the fence refuses more). A `scope` title is cut
+  off with "…" past about 45 characters and a `breadboard` title past about 65. Do not put a `:` in a `title:` (YAML).
+  Use a comma or a dash instead. `npm run en:check` runs each fence's own `check`, which finds these.
 
 ## Style
 

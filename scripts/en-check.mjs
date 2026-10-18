@@ -13,12 +13,15 @@
  * - 本文に日本語の字が残っていない (「Sources」の節は書名のために許す)
  * - 単位の書き方 (README の「単位の書き方」)
  * - 題どうしのリンクの先がある (英語か、無ければ日本語の題)
+ * - 図のフェンスを各フェンスの CLI の `check` に掛ける (`title:` の長さ・綴りなど。日本語の題と同じ検査)
  */
 
+import { spawnSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { BOOKS } from './books.mjs';
+import { FENCES, cliPath, fencesIn } from './fences.mjs';
 import { CJK, blobHash, compareFence, parseBlocks, splitFrontMatter, unitProblems } from './en.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
@@ -138,6 +141,24 @@ export function staleReport(root = ROOT) {
   return { missing, stale, translated: english.size };
 }
 
+/** 英語の題の図のフェンスを、日本語の題と同じ CLI の `check` に掛ける。落ちた CLI の出力を返す。 */
+export function fenceProblems(paths) {
+  const byFence = new Map();
+  for (const path of paths) {
+    const text = readFileSync(join(ROOT, path), 'utf8');
+    for (const fence of fencesIn(text).found) {
+      if (fence === 'plantuml' || !FENCES.includes(fence)) continue;
+      byFence.set(fence, [...(byFence.get(fence) ?? []), path]);
+    }
+  }
+  const problems = [];
+  for (const [fence, files] of byFence) {
+    const run = spawnSync(process.execPath, [cliPath(ROOT, fence), 'check', ...files], { cwd: ROOT, encoding: 'utf8' });
+    if (run.status !== 0) problems.push(`${fence} フェンスの check が落ちました:\n${(run.stderr || run.stdout).trimEnd()}`);
+  }
+  return problems;
+}
+
 function main(args) {
   if (args.includes('--stale')) {
     const { missing, stale, translated } = staleReport();
@@ -159,7 +180,13 @@ function main(args) {
       console.error(`${path}:\n${errors.map((error) => `  ${error}`).join('\n')}`);
     }
   }
-  console.log(`${paths.length} 題を検査した (エラー ${failed} 題 / 警告 ${warned})`);
+  if (paths.length > 0) {
+    for (const problem of fenceProblems(paths)) {
+      failed += 1;
+      console.error(problem);
+    }
+  }
+  console.log(`${paths.length} 題を検査した (エラー ${failed} 件 / 警告 ${warned})`);
   if (failed > 0) process.exit(1);
 }
 
