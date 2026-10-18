@@ -15,3 +15,9 @@
 - { id: 4-1, tier: 200, board: BB, title: 1 石ミキサー — 2SC1815 で中波を 455 kHz の IF に変える }
 - { id: 4-2, tier: 200, board: BB, title: 差動対のミキサー — 2SC1815 の差動対とカレントミラーで RF を打ち消す }
 - { id: 4-3, tier: 200, board: —, title: 3 つのミキサーをシミュレーションで比べる — 変換利得・漏れ・P1dB }
+- { id: 5-1, tier: 200, board: —, title: リンクパルスを見る — 使わなくなったルータの 10BASE-T の対をオシロで見る }
+- { id: 5-2, tier: 200, board: PF, title: 送信 — Raspberry Pi Pico 2 の PIO と抵抗だけでリンクパルスとフレームを送り、ルータにリンクさせる }
+- { id: 5-3, tier: 200, board: PF, title: 受信回路 — 100 Ω 終端と 74HC14 で差動を 3.3 V の論理に戻し、ロジアナで読む }
+- { id: 5-4, tier: 200, board: PF, title: フレームを読み下す — マンチェスターを PIO で復号し、MAC と IP のヘッダを USB シリアルに出す }
+- { id: 5-5, tier: 200, board: PF, title: ARP と ping に答える — Pico 2 に IP アドレスを持たせ、応答までの時間をオシロで測る }
+- { id: 5-6, tier: 200, board: PF, title: パルストランスを足す — トランス内蔵の RJ45 に差し替えて絶縁し、波形の違いを比べる }

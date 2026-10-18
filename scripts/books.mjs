@@ -114,13 +114,14 @@ export const BOOKS = [
     number: 5,
     slug: 'etc',
     title: '番外の工作',
-    summary: '4 冊の部品を組み合わせて作る工作。CPU もどき、中波ラジオの時報で動く時計、デュアルゲート FET ミキサー、2SC1815 のミキサー',
+    summary: '4 冊の部品を組み合わせて作る工作。CPU もどき、中波ラジオの時報で動く時計、デュアルゲート FET ミキサー、2SC1815 のミキサー、ディスクリート部品と Raspberry Pi Pico 2 で作る 10BASE-T',
     columns: ['board'],
     chapters: [
       [1, 'cpu', 'CPU もどき'],
       [2, 'radio-clock', '中波ラジオの時報で動く時計'],
       [3, 'mixer-dual-gate-fet', 'デュアルゲート FET ミキサー'],
       [4, 'mixer-2sc1815', '2SC1815 のミキサー'],
+      [5, 'ethernet-10base-t', '10BASE-T のイーサネット'],
     ],
   },
   {
