@@ -153,14 +153,14 @@ wires:
   - h40 -- a40 yellow
   - i33 -- i41 yellow
   - i41 -- a41 yellow
-  - AD.DIO9 -- a26 green
-  - AD.DIO5 -- a27 blue
-  - AD.DIO1 -- a28 blue
-  - AD.DIO6 -- a31 blue
-  - AD.DIO2 -- a32 blue
-  - AD.DIO10 -- a33 green
-  - AD.DIO3 -- a34 blue
-  - AD.DIO7 -- a35 blue
+  - AD.DIO9 -- a26 green [v45, h163]
+  - AD.DIO5 -- a27 blue [v39, h139]
+  - AD.DIO1 -- a28 blue [v33, h114]
+  - AD.DIO6 -- a31 blue [v27, h130]
+  - AD.DIO2 -- a32 blue [v21, h105]
+  - AD.DIO10 -- a33 green [v15, h81]
+  - AD.DIO3 -- a34 blue [v9, h56]
+  - AD.DIO7 -- a35 blue [v3, h32]
   - AD.DIO11 -- a36 green
   - AD.DIO12 -- a37 green
   - AD.DIO0 -- a39 blue

@@ -73,11 +73,11 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, W1, 1+, 1-, 2+, 2-]
+    pins: [GND, 1+, W1, 1-, 2-, 2+]
 wires:
   - AD.GND -- -t2 black
-  - AD.W1 -- b5 yellow [h-10]
-  - AD.1+ -- a5 yellow
+  - AD.W1 -- a5 yellow
+  - AD.1+ -- b5 orange
   - AD.1- -- -t9 black
   - b10 -- b13 green
   - b18 -- b21 green

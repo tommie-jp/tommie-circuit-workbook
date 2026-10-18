@@ -156,7 +156,7 @@ parts:
     type: device
     at: top
     label: AD3 Scope (DC 電圧計)
-    pins: [1+, 2+, 1-, 2-]
+    pins: [2+, 1+, 1-, 2-]
   R1: resistor a19 +t19 47k
   R2: resistor c20 c16 15k
   RC: resistor b21 b24 4.7k

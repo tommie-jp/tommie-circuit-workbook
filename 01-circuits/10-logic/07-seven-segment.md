@@ -145,9 +145,9 @@ style:
 parts:
   PSU:
     type: device
-    at: c30
+    at: c-1
     label: 5V USB アダプタ
-    pins: [GND, +5V]
+    pins: [+5V, GND]
   U1: dip16 s17 r90 CD4511B
   DS1: seg7 z15
   Rf: resistor t16 v16 330
@@ -157,67 +157,62 @@ parts:
   Rc: resistor t12 v12 330
   Rd: resistor w11 y11 330
   Re: resistor t10 v10 330
-  SWB: switch f23 f20
-  RpdB: resistor f19 f17 10k
-  SWC: switch i19 i16
-  RpdC: resistor i15 i13 10k
-  SWD: switch k15 k12
-  RpdD: resistor k11 k9 10k
-  SWA: switch m11 m8
-  RpdA: resistor m7 m5 10k
+  SWB: switch c21 f21
+  RpdB: resistor g21 g18 10k
+  SWC: switch n15 k15
+  RpdC: resistor k14 h14 10k
+  SWD: switch c12 f12
+  RpdD: resistor f11 f8 10k
+  SWA: switch c6 f6
+  RpdA: resistor f5 f2 10k
 notes:
   - text aa17: DS1 5161AS
 wires:
-  # 電源
-  - PSU.+5V -- d25 red
-  - d25 -- f25 red
-  - f25 -- s25 red
+  # 電源 (+ は左の縁の C 列と上の 25 行、GND は下の 2 行)
+  - PSU.+5V -- c2 red
+  - c2 -- c6 red
+  - c6 -- c12 red
+  - c12 -- c21 red
+  - c21 -- c25 red
+  - c25 -- n25 red
+  - n25 -- s25 red
   - s25 -- s17 red
-  - PSU.GND -- c25 black
-  - c25 -- c2 black
-  - c2 -- k2 black
-  - k2 -- ab2 black
+  - n25 -- n15 red
+  - n15 -- p15 red
+  - p15 -- p14 red
+  - PSU.GND -- d2 black
+  - d2 -- f2 black
+  - f2 -- g2 black
+  - g2 -- p2 black
+  - p2 -- ab2 black
   - ab2 -- ae2 black
   - ae16 -- ae2 black
   - ab16 -- ae16 black
   - ab15 -- ab16 black
   - ab9 -- ab2 black
-  # + の階段
-  - f25 -- f23 red
-  - f23 -- i23 red
-  - i23 -- i19 red
-  - i19 -- k19 red
-  - k19 -- k15 red
-  - k15 -- m15 red
-  - m15 -- p15 red
-  - m15 -- m11 red
-  - p15 -- p14 red
-  # GND の階段
-  - k5 -- k2 black
-  - m5 -- k5 black
-  - k5 -- k9 black
-  - k9 -- i9 black
-  - i9 -- i13 black
-  - i13 -- f13 black
-  - f13 -- f17 black
-  - p13 -- o13 black
-  - o13 -- o10 black
-  - o10 -- p10 black
-  - o10 -- o5 black
-  - o5 -- m5 black
+  # LE と VSS を GND へ
+  - p13 -- h13 black
+  - h13 -- g13 black
+  - g13 -- g8 black
+  - g8 -- g2 black
+  - p10 -- p2 black
+  - g18 -- g13 black
+  - h14 -- h13 black
+  - f8 -- g8 black
   # 入力
-  - f20 -- f19 gray
-  - p17 -- o17 gray
-  - o17 -- o20 gray
-  - o20 -- f20 gray
-  - i16 -- i15 pink
-  - p16 -- i16 pink
-  - "k12 -- k11 #00aaaa"
-  - "p12 -- k12 #00aaaa"
-  - "m8 -- m7 #c8a000"
-  - "n8 -- m8 #c8a000"
-  - "n11 -- n8 #c8a000"
-  - "p11 -- n11 #c8a000"
+  - f21 -- g21 gray
+  - g21 -- m21 gray
+  - m21 -- m17 gray
+  - m17 -- p17 gray
+  - p16 -- k16 pink
+  - k16 -- k15 pink
+  - k15 -- k14 pink
+  - "f12 -- p12 #00aaaa"
+  - "f12 -- f11 #00aaaa"
+  - "p11 -- h11 #c8a000"
+  - "h11 -- h6 #c8a000"
+  - "h6 -- f6 #c8a000"
+  - "f6 -- f5 #c8a000"
   # 出力
   - s16 -- t16 yellow
   - s15 -- w15 orange
@@ -245,22 +240,27 @@ wires:
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/10-logic/perfboard/07-seven-segment.svg)
 
 - ユニバーサル基板は 7×9 cm (1.6mm の FR-4) を横に置く。5×7 cm は、外周の 1 穴と電源の筋を残すと、入力の 4 組と出力の 7 本を線が重ならない間隔で置けない。
+  番地は基板の刷りどおりで、英字が列 (左から A〜AE、縁の銅箔は左が 0、右が AF)、数字が行 (下から 1〜26)。
   左から入力 (スイッチと 10 kΩ)・U1・Ra〜Rg・DS1 の順に並べ、信号が左から右へ流れる
-- U1 (CD4511B) は縦に立てて切り欠きを上にする。左の列が上から PIN 1 (INB)〜PIN 8 (VSS)、右の列が上から PIN 16 (VDD)〜PIN 9 (Oe)。
-  電源は左上の 5 V USB アダプタ。+5 V (赤) は B 行を右へ運んで VDD (J19) へ。
-  左の「+ の階段」は、B 行から SWB・SWC・SWD・SWA の上のピン (D6・H9・L11・P13) と、LT・BL (L16・M16) へ配る
-- GND (黒) は 3 列を下って Y 行へ。左の「GND の階段」は、RpdB・RpdC・RpdD・RpdA の下のピン (J6・N9・R11・V13) と、
-  LE・VSS (N16・Q16) を結んで Y 行へ落とす。DS1 の COM2 (L28) は K 行を右へ出て 31 列を下り、COM1 (R28) は 28 列を下って、どちらも Y 行へ
-- 入力は階段状の 4 組。上のピンを + の階段へ、下のピンを GND の階段へつなぎ、スイッチと 10 kΩ の間 (G6/H6・K9/L9・O11/P11・S13/T13) から、
-  色の付いた線で U1 の入力 (灰 INB・桃 INC・水色 IND・金 INA) へ運ぶ
+- U1 (CD4511B) は縦に立てて切り欠きを上にする。左の P 列が上から PIN 1 (INB、P17)〜PIN 8 (VSS、P10)、右の S 列が上から PIN 16 (VDD、S17)〜PIN 9 (Oe、S10)
+- 電源は左下の 5 V USB アダプタ。+5 V (赤) は左の縁の C 列を C2 から C25 まで上り、25 行を右へ運んで S 列を VDD (S17) へ下りる。
+  途中の N25 から N 列を N15 まで下ろし、LT・BL (P15・P14) へ配る。スイッチの + の側は、SWB・SWD・SWA が C 列 (C21・C12・C6)、SWC が N 列の下の端 (N15)
+- GND (黒) は下の 2 行 (D2〜AE2)。LE (P13) は 13 行を左へ G13 まで出て、G 列を G2 まで下る。VSS (P10) は P 列を P2 へ下る。
+  プルダウンの下のピンは、RpdB (G18) が G 列を G13 へ、RpdC (H14) が H13 へ、RpdD (F8) が G8 へつなぎ、RpdA (F2) は 2 行に直に挿す。
+  DS1 の COM2 (AB15) は AB16 から 16 行を右へ出て AE 列を下り、COM1 (AB9) は AB 列を下って、どちらも 2 行へ
+- 入力のスイッチは左の縁に寄せ、スイッチと 10 kΩ の間 (節) から色の付いた線で U1 の入力へ運ぶ。
+  灰 (INB) は SWB (C21〜F21) の節から 21 行を M21 まで、M 列を M17 まで下って P17 へ (RpdB は G21〜G18)。
+  桃 (INC) は SWC (K15〜N15) の節 K15 から K16 を通り、16 行を P16 へ (RpdC は K14〜H14)。
+  水色 (IND) は SWD (C12〜F12) の節 F12 から 12 行を P12 へ (RpdD は F11〜F8)。
+  金 (INA) は SWA (C6〜F6) の節 F6 から H6 へ、H 列を H11 まで上って 11 行を P11 へ (RpdA は F5〜F2)
 - 出力 Ra〜Rg は、U1 の右の列から 1 行ずつ右へ出る。隣の行の字が重ならないよう、Rf・Ra・Rc・Re と Rg・Rb・Rd を 2 列にずらして置いた。
   線は実物の被覆の色で描き分ける (f 黄・g 橙・a 緑・b 青・c 紫・d 茶・e 白)
-- DS1 は 5161AS (コモンカソード)。上の列が左から g・f・COM2・a・b、下の列が左から e・d・COM1・c・dp。dp は使わない (`unused:` に並べて、ERC の「つながっていない」から外した)
+- DS1 は 5161AS (コモンカソード)。上の列 (15 行) が左から g・f・COM2・a・b (Z15〜AD15)、下の列 (9 行) が左から e・d・COM1・c・dp (Z9〜AD9)。dp は使わない (`unused:` に並べて、ERC の「つながっていない」から外した)
 - DS1 のピンは上と下の 2 列だけで、間の穴は空いている。a・b・c・d の 4 本は半田面で DS1 の下を通し、
   上の列の a・b と下の列の c・d のピンへ運ぶ。f・g・e は DS1 の外を通る
-- 交差は 5 か所で、どれも被覆線で跨ぐ。灰 (INB) が + の階段 (SWC へ) を、桃 (INC) が + の階段 (SWD へ) を、
-  水色 (IND) が + の階段 (SWA へ) と GND の線 (LE・VSS を結ぶ線) を、金 (INA) が GND の線を跨ぐ。
-  このピンの並びで、交差を 0 にする配置は見つけられなかった
+- 跨ぎは、どれも信号の線が電源の枝を被覆線で跨ぐ所。灰 (INB) と桃 (INC) が N 列の + (LT・BL への枝) を、
+  水色 (IND) と金 (INA) が G 列の GND (LE からの線) を跨ぐ。
+  入力のピンの間に LT・BL (+) と LE (GND) が挟まっているので、このピンの並びでは入力の線がこの 2 本を跨ぐ
 - ユニバーサル基板を流れる電流は、セグメント 7 本で最大約 47 mA (回路図の見積もり)、プルダウンで約 2 mA で、合計は 50 mA 前後
   (5 V で見積もっても 7 × 9.1 mA ≈ 64 mA)。perfboard の範囲 (1 本の線・ランドごとに 500 mA、ユニバーサル基板全体で 2A) には余裕で収まる。
   USB アダプタは 500 mA 以上のものを使う

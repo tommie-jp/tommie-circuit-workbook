@@ -386,8 +386,8 @@ parts:
   D18: diode d38(A) d32(K)
   S1: button @ e46
 wires:
-  - UP.+5V -- +t61 red
-  - UP.GND -- -t60 black
+  - UP.+5V -- +t61 red [v2]
+  - UP.GND -- -t60 black [v10]
   - DN.+5V -- +b40 red
   - DN.GND -- -b15 black
   - +t62 -- +b62 red
@@ -412,10 +412,10 @@ wires:
   - h28 -- h29 yellow
   - UP.P0 -- c16 white
   - UP.P2 -- b28 yellow
-  - UP.LDn -- c35 purple
-  - UP.P1 -- b38 green
-  - UP.ENT -- c41 purple
-  - UP.CLR -- b44 brown
+  - UP.LDn -- c35 purple [v42, h115]
+  - UP.P1 -- b38 green [v34, h135]
+  - UP.ENT -- c41 purple [v26, h155]
+  - UP.CLR -- b44 brown [v18, h175]
   - c44 -- c46 brown
   - e16 -- f16 white
   - e22 -- f22 pink

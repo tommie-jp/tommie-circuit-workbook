@@ -127,7 +127,7 @@ wires:
   - e17 -- f17 green
   - b17 -- b20 green
   - a25 -- -t25 black
-  - a12 -- a17 white [v-14]
+  - a12 -- a17 white [v10]
 notes:
   - text small: Q1 = 2SC1815、Q2 = 2SA1015 (平らな面を向こうに挿す。左から B・C・E)
   - text small: 白い線 (a12–a17) が B の帰還。A は白い線を外して d11–d12 をつなぐ

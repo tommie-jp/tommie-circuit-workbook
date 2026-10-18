@@ -95,7 +95,7 @@ parts:
     type: device
     at: bottom
     label: AD3 Scope (DC 電圧計)
-    pins: [1-, 1+]
+    pins: [1+, 1-]
   PS:
     type: device
     at: top

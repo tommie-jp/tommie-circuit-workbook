@@ -86,7 +86,7 @@ parts:
   R2: resistor c25 c21 10k
   Rf: resistor i21 i14 10k
   U1: dip8 @ f13 r180 TL071
-  R3: resistor b35 b39 1k
+  R3: resistor b35 b39 1k cap=above
   R4: resistor b42 b46 1k
   R5: resistor b49 b53 1k
   RN: resistor d53 d57 10
@@ -117,10 +117,10 @@ wires:
   - f35 -- e35 yellow
   - f42 -- e42 orange
   - f49 -- e49 blue
-  - a28 -- a39 green
+  - c28 -- c39 green
   - d39 -- d46 green
   - a46 -- a53 green
-  - AD.1+ -- b28 pink
+  - AD.1+ -- a28 pink
   - c57 -- -t57 black
 notes:
   - text small: R3・R4・R5 が Y 結線。列 53 が中性点 N。RN が N と GND (−t レール) の間
@@ -130,7 +130,7 @@ notes:
 
 - 中性点 N (列 53) から RN (10 Ω) を通って 57 列 (c57) へ、そこから GND レール (−t、AD.GND と同じ) へつなぐ。
   N を GND に直結せず、必ず RN を挟むことで電流を電圧として読める
-- Scope の CH1 は 1+ を N (a 行の緑の線で 28 列まで延ばした b28)、1- を GND レール
+- Scope の CH1 は 1+ を N (c 行の緑の線で 28 列まで延ばした a28)、1- を GND レール
   (RN の GND 側とつながる) に当てて RN の両端を差動で読む。CH2 (2+) は 1 相目 (W1、17 列) につなぐ
 
 ## 計器の設定

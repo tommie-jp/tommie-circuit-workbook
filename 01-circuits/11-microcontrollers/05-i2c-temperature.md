@@ -97,7 +97,7 @@ wires:
   - a37 -- -t37 black
   - a31 -- +t31 red
   - a40 -- +t40 red
-  - MCU.GP0 -- e36 yellow
+  - MCU.GP0 -- e36 yellow [v10, h650]
   - MCU.GP1 -- e35 green
   - SC.1+ -- a35 green
   - SC.2+ -- a36 yellow

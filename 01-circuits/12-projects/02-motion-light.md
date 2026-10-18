@@ -126,15 +126,15 @@ board:
 title: 図2 perfboardに組む (部品面から見た図)
 unused: [U1.H, U1.I, U1.J, U1.K, U1.L, U2.K, U2.L, U2.M]
 points:
-  PWR: a18
+  PWR: a17
   GND: a1
 parts:
   PIR:
     type: device
-    at: l23
+    at: m23
     label: PIR
-    pins: GND VCC OUT
-  Rz: resistor a18 a15 330
+    pins: VCC OUT GND
+  Rz: resistor a17 a15 330
   Dz: zener b13 b15 3V3
   CDS1: photoresistor d15 d13
   R1: resistor d10 d7 10k
@@ -143,12 +143,12 @@ parts:
   Rg: resistor q9 q6 220
   Rgpd: resistor o6 o3 100k
   Q1: transistor s4 s5 s6 2N7000
-  RLED: resistor w18 w15 330
+  RLED: resistor w17 w15 330
   DLED: led w14 w12 red
 wires:
-  # 5V (18 行・赤)、VL 3.3V (15 行・橙)、GND (1 行・黒) の筋
-  - PWR -- m18 red
-  - m18 -- w18 red
+  # 5V (17 行・赤)、VL 3.3V (15 行・橙)、GND (1 行・黒) の筋
+  - PWR -- m17 red
+  - m17 -- w17 red
   - a15 -- b15 orange
   - b15 -- d15 orange
   - d15 -- f15 orange
@@ -159,6 +159,7 @@ wires:
   - m1 -- o1 black
   - o1 -- u1 black
   - u1 -- v1 black
+  - v1 -- x1 black
   # Dz のアノードと R1 の下端を GND へ
   - b13 -- b1 black
   - d7 -- d1 black
@@ -174,8 +175,7 @@ wires:
   - k13 -- k14 black
   - g14 -- i14 black
   - i14 -- k14 black
-  - k14 -- l14 black
-  - l14 -- m14 black
+  - k14 -- m14 black
   - m14 -- m9 black
   - h10 -- h9 black
   - j10 -- j9 black
@@ -201,9 +201,11 @@ wires:
   - t9 -- u9 black
   - u9 -- v9 black
   - v9 -- v1 black
-  # PIR: VCC は 5V の筋へ、GND は U1 の GND の筋 (l14) へ、OUT は U2 の PIN 1 へ
-  - PIR.VCC -- m18 red
-  - PIR.GND -- l14 black
+  # PIR: VCC は 5V の筋へ、GND は 18 行と X 列を回って 1 行の GND へ、OUT は U2 の PIN 1 へ
+  - PIR.VCC -- m17 red
+  - PIR.GND -- o18 black
+  - o18 -- x18 black
+  - x18 -- x1 black
   - PIR.OUT -- n10 green
   - n10 -- o10 green
   # U1 の PIN 2 (暗いと H) → U2 の PIN 2
@@ -231,9 +233,10 @@ wires:
   並べずに 2 個とも横のまま並べ、使わない入力をまとめる線を DIP の上 (14 行) と下 (9 行) に置いて、
   GND へ下りる線を U1 と U2 の右隣の 1 列ずつ (M 列・V 列) に絞ったので、5×7cm に収まった。
   出力の段 (Rg・Rgpd・Q1) は U2 の下に置いた
-- 部品面から見た図。5 V (PWR) は上の 18 行 (赤)、VL (3.3 V) は 15 行 (橙)、GND は下の
-  1 行 (黒) に 1 本ずつ筋を通し、部品はそこから縦に配る。電源は左端の a18・a1 に入れる
-- Rz (a18〜a15) が 5 V の筋から VL の筋へ、Dz (b13〜b15、カソードが上) が VL から B 列を
+- 部品面から見た図。5 V (PWR) は 17 行 (赤)、VL (3.3 V) は 15 行 (橙)、GND は下の
+  1 行 (黒) に 1 本ずつ筋を通し、部品はそこから縦に配る。電源は左端の a17・a1 に入れる。
+  いちばん上の 18 行は、PIR の GND を 1 行へ回すために空けてある
+- Rz (a17〜a15) が 5 V の筋から VL の筋へ、Dz (b13〜b15、カソードが上) が VL から B 列を
   下って GND へ。これで VL (3.3 V) ができ、15 行で U1・U2 の PIN 14 (f13・o13) と
   CDS1 (d15〜d13) へ配る。CDS1 の下端 d13 から D 列を下り、d10 で R1 (d10〜d7、下は GND) と
   U1 の PIN 1 (f10) へ分ける
@@ -242,8 +245,9 @@ wires:
   U2 (o13 アンカー) は PIN 14=o13、PIN 8=u13、PIN 1=o10、PIN 7=u10
 - U1 の PIN 2 (暗いと H、g10) は青の線で 8 行を右へ運び、P 列を上って U2 の PIN 2 (p10) へ。
   PIR の OUT (緑) は n10 に下ろし、隣の o10 で U2 の PIN 1 へ
-- PIR はユニバーサル基板の外 (上、`l23`) に置き、ケーブルの 3 本を真下の穴へ下ろす:
-  GND は l14 (U1 の使わない入力をまとめた 14 行の筋)、VCC は m18 (5 V の筋)、OUT は n10
+- PIR はユニバーサル基板の外 (上、`m23`) に置き、ケーブルの 3 本を真下の穴へ下ろす:
+  VCC は m17 (5 V の筋)、OUT は n10、GND は o18 から 18 行を右へ x18 まで、X 列を x1 まで下って 1 行の GND へ。
+  GND は 5 V と VL の筋の右端の外を回るので、電源の筋どうしは交わらない (ピンの並びは図の都合で VCC・OUT・GND にした。実物の並びは PIR の基板で確かめる)
 - 使わない入力は黒の線で GND へ。U1 の PIN 13・11・9 (g13・i13・k13) は 14 行、PIN 3・5
   (h10・j10) と PIN 7 (l10) は 9 行でまとめ、14 行の右端 (m14) と 9 行の右端 (m9) を M 列で
   つないで 1 行へ下ろす。U2 の PIN 13・12・9・8 (p13・q13・t13・u13) は 14 行、PIN 5・6
@@ -254,13 +258,11 @@ wires:
   1 行の GND へ
 - Q1 (2N7000) は S・G・D を縦に並べて置く (s4・s5・s6、下から S・G・D)。ソースは 4 行を右へ出し、
   U 列を下って GND へ、ドレインは 6 行を右へ運び、W 列を上って DLED のカソード (w12) へ。DLED の
-  アノード (w14) は RLED (w18〜w15) を通して 5 V の筋へ
+  アノード (w14) は RLED (w17〜w15) を通して 5 V の筋へ
   ※ **実物で確かめる: onsemi の 2007 年版の図は S G D、2022 年版の表は D G S で食い違い、表は 2007 年版 (S G D) に従う。実物はテスタで確かめる**
-- 交差は被覆線で跨ぐ。6 か所。(1) 青 (U1 の PIN 2) が M 列の GND を跨ぐ。(2) Q1 のドレインの線が
-  V 列の GND を跨ぐ。(3) (4) PIR の GND (黒) が 18 行の 5 V と 15 行の VL の筋を跨ぐ。(5) (6) PIR の
-  OUT (緑) も同じ 2 本の筋を跨ぐ。(1)(2) は U1・U2 の使わない入力を GND へ集める線が出力の
-  ピンの向こう側にあるため、(3)〜(6) は PIR のケーブルが上から基板の中ほどへ下りるため
-  で、ピンの並びと PIR の置き場からは避けられない
+- 残る跨ぎは、どれも信号の線が電源の枝を被覆線で跨ぐ所。青 (U1 の PIN 2) が M 列の GND を、Q1 のドレインの線が
+  V 列の GND を、PIR の OUT (緑) が 17 行の 5 V と 15 行の VL の筋を跨ぐ。前の 2 つは U1・U2 の使わない入力を
+  GND へ集める線が出力のピンの向こう側にあるため、OUT は PIR のケーブルが上から基板の中ほどへ下りるため
 
 ## 見るべき値
 

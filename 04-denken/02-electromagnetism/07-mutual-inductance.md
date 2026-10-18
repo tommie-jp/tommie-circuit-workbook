@@ -77,7 +77,7 @@ parts:
     pins: [GND, W1, "1+", "1-", "2+", "2-"]
 wires:
   - AD.GND -- -t2 black
-  - AD.W1 -- b5 yellow [h-10]
+  - AD.W1 -- b5 yellow [h-20]
   - AD.1+ -- a10 blue
   - AD.1- -- -t12 black
   - AD.2+ -- b25 white [h-10]

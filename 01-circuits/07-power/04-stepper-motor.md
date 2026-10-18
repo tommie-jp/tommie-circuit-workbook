@@ -90,16 +90,16 @@ parts:
     at: top
     label: ステッピングモータ 28BYJ-48
     pins: [A, B, C, D, COM]
-  ADS:
-    type: device
-    at: bottom
-    label: AD3 (Scope)
-    pins: [1-, 2-, GND, 2+, 1+]
   ADP:
     type: device
     at: bottom
     label: AD3 (Patterns)
-    pins: [DIO0, DIO1, DIO2, DIO3, GND]
+    pins: [GND, DIO0, DIO1, DIO2, DIO3]
+  ADS:
+    type: device
+    at: bottom
+    label: AD3 (Scope)
+    pins: [1+, 2+, 1-, 2-, GND]
 wires:
   - PSU.+ -- +t1 red
   - PSU.- -- -t2 black
@@ -116,12 +116,12 @@ wires:
   - ADP.DIO1 -- j6 yellow
   - ADP.DIO2 -- j7 yellow
   - ADP.DIO3 -- j8 yellow
-  - ADP.GND -- -b13 black
-  - ADS.1+ -- h5 blue
-  - ADS.2+ -- g6 green
-  - ADS.1- -- -b1 black
-  - ADS.2- -- -b2 black
-  - ADS.GND -- -b3 black
+  - ADP.GND -- -b3 black
+  - ADS.1+ -- h5 blue [v-10, h-42]
+  - ADS.2+ -- g6 green [v-20, h-62]
+  - ADS.1- -- -b14 black
+  - ADS.2- -- -b15 black
+  - ADS.GND -- -b16 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/breadboard/04-stepper-motor.svg)
@@ -130,8 +130,8 @@ wires:
   8 番 (GND、12 列の下段) を下の − レールへつなぐ。上下の + レール (29 列) と − レール (20 列) は、それぞれ線でつなぐ (レールは上下でつながっていない)
 - モータはブレッドボードに挿さず、A・B・C・D の 4 本 (橙) を U1 の出力 (16〜13 番 = 5〜8 列の上段) へ、COM を + レールへ線でつなぐ
 - U1 の入力 (1〜4 番 = 5〜8 列の下段、`j` 行) へ、AD3 の Patterns の DIO0〜DIO3 (黄) を入れる。AD3 の DIO は 3.3 V のロジック出力で、U1 の入力は 2.7 kΩ が内蔵されているので、抵抗なしで直結できる
-  (入力に流れる電流は 1 mA 以下の目安。実測ではない)。GND (黒) は下の − レールへ
-- Scope の 1+ (青) は 5 列の IN1、2+ (緑) は 6 列の IN2 を見る (`h5`・`g6`)。1−・2−・GND (黒) は下の − レールの左端 (1〜3 列) へ。図の箱のピンの並び (モータの A〜D・COM、Scope の 1−・2−・GND・2+・1+) は、線が交わらない順に並べたもので、実物のコネクタの並びではない。AD3 の GND は 5 V の電源の − と、ブレッドボードの − レールで共通になる
+  (入力に流れる電流は 1 mA 以下の目安。実測ではない)。GND (黒) は下の − レールの 3 列へ
+- Scope の 1+ (青) は 5 列の IN1、2+ (緑) は 6 列の IN2 を見る (`h5`・`g6`)。1−・2−・GND (黒) は下の − レールの 14〜16 列へ。図の箱のピンの並び (モータの A〜D・COM、Patterns の GND・DIO0〜DIO3、Scope の 1+・2+・1−・2−・GND) は、線が交わらない順に並べたもので、実物のコネクタの並びではない。AD3 の GND は 5 V の電源の − と、ブレッドボードの − レールで共通になる
 - 電源は別の 5 V (USB アダプタなど) にする。1 相 ON で約 80 mA、2 相励磁で約 160 mA が流れ、AD3 の Supplies の各 50 mA (USB 給電で 250 mW) を超えるため。
   ブレッドボードの中は、COM の線と U1 の 9 番・8 番の穴を通る電流が最大約 160 mA (2 相励磁) で、1 穴 200 mA・ブレッドボード全体 500 mA の内側
 

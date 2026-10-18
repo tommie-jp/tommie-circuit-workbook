@@ -117,8 +117,8 @@ parts:
 wires:
   - U1.VCC -- +t3 red
   - U1.GND -- -t5 black
-  - U1.VOUT -- a8 orange
-  - AD.1+ -- b8 orange
+  - U1.VOUT -- a8 orange [h0]
+  - AD.1+ -- b8 orange [h-40]
   - AD.1- -- -t10 black
   - AD.GND -- -t12 black
   - AD.V+ -- +t14 red

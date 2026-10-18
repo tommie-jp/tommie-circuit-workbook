@@ -86,10 +86,10 @@ parts:
   R1: resistor b2 b6 10k
   R2: resistor c6 c10 10k
   RC1: resistor b13 b16 220
-  D1: led c16(A) c17(K) red
+  D1: led c16(A) c17(K) red cap=below:-1,0
   RE: resistor b20 b23 220
   RC2: resistor b25 b28 220
-  D2: led c28(A) c29(K) red
+  D2: led c28(A) c29(K) red cap=below:-1,0
   VR1: potentiometer b32(1) b33(w) b34(3) 10k
   Q1: transistor g25(B) g26(C) g27(E) 2SC1815
   Q2: transistor g31(B) g30(C) g29(E) 2SC1815
@@ -100,7 +100,7 @@ parts:
     pins: [V+, GND, 1-, 1+, 2-, 2+]
 wires:
   - AD.V+ -- +t1 red
-  - AD.GND -- -t2 black
+  - AD.GND -- -t3 black
   - AD.1- -- -t15 black
   - AD.1+ -- a17 orange
   - AD.2- -- -t27 black
@@ -126,7 +126,7 @@ wires:
 `Q1`・`Q2` は溝の下のブロックに挿し、上のブロックの部品と 6 本の線 (橙・黄・緑・緑・黄・青) でつなぐ。
 **`Q2` は左右を逆にして (左から E・C・B の順に) 挿す**。上の部品の並びと、下のピンの並びが同じ順になり、6 本が交差しない。
 
-- 電源: AD の V+ (赤) を `+t1`、GND (黒) を `-t2` へ。上の + レールが +5 V、− レールが GND
+- 電源: AD の V+ (赤) を `+t1`、GND (黒) を `-t3` へ。上の + レールが +5 V、− レールが GND
   (下のレールは使わない)。LED 2 つで 10 mA 弱なので V+ で足りる
 - 基準: `d6` (R1・R2 の中点) → `g25` (`Q1` のベース、橙)。つまみ: `c33` → `g31` (`Q2` のベース、青)
 - コレクタ: `d17` (D1 のカソード) → `g26` (`Q1` の C)、`d29` (D2 のカソード) → `g30` (`Q2` の C) (黄)

@@ -83,7 +83,7 @@ parts:
     type: device
     at: bottom
     label: Analog Discovery (W1 と Scope)
-    pins: [W1, 1+, 1-, 2+, 2-, GND]
+    pins: [1+, W1, 2+, 1-, 2-, GND]
   K1: relay @ f10
   Q1: transistor i4(E) i5(C) i6(B) 2SC1815
   R1: resistor f1 f6 1k

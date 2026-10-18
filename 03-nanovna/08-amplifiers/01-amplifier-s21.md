@@ -125,7 +125,7 @@ parts:
   Q1: transistor f12 f11 f10
   Rc: resistor c11 e11 270
   Re: resistor g12 i12 200
-  Ce: capacitor g13 h13 10u
+  Ce: capacitor g14 i14 10u
   C2: capacitor e15 e17 100n
   PR1: resistor e19 h19 100
   PR2: resistor e20 e22 68
@@ -142,9 +142,7 @@ wires:
   - e11 -- f11
   - e11 -- e15
   - f12 -- g12
-  - g12 -- g13
-  - i12 -- h12
-  - h13 -- h12
+  - g12 -- g14
   - e17 -- e19
   - e19 -- e20
   - e22 -- e23
@@ -155,8 +153,11 @@ wires:
   - f0 -- f2 black
   - f2 -- h2 black
   - h2 -- h8 black
-  - h8 -- h12 black
-  - h12 -- h19 black
+  - h8 -- i8 black
+  - i8 -- i12 black
+  - i12 -- i14 black
+  - i14 -- i19 black
+  - i19 -- h19 black
   - h19 -- h23 black
   - f27 -- f25 black
   - f25 -- h25 black

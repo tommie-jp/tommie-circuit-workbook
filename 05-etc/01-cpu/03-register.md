@@ -279,7 +279,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery 3
-    pins: [V+, GND, DIO6, DIO7, DIO8, DIO9, DIO5, DIO3, DIO2, DIO1, DIO0, W1, DIO4]
+    pins: [DIO6, DIO7, DIO8, DIO9, DIO5, DIO3, DIO2, DIO1, DIO0, DIO4, W1, GND, V+]
   RN1: sip9 @ b3 l=10k-8 cap=right
   SW1: dip-switch4 @ e4
   SW2: dip-switch4 @ e8
@@ -296,8 +296,8 @@ parts:
   R7: resistor e57 g57 820
   D1: led c57(A) c58(K) red
 wires:
-  - AD.V+ -- +t1 red
-  - AD.GND -- -t2 black
+  - AD.V+ -- +t62 red
+  - AD.GND -- -t61 black
   - +t63 -- +b63 red
   - -t63 -- -b63 black
   - a3 -- -t3 black
@@ -367,7 +367,8 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/03-register.svg)
 
-- **電源**: AD3 の V+ (5 V、赤) を上の + レールの 1 列に、GND (黒) を上の − レールの 2 列に入れる。上と下のレールは、
+- **電源**: AD3 の V+ (5 V、赤) を上の + レールの 62 列に、GND (黒) を上の − レールの 61 列に入れる
+  (AD3 の線を左右に振り分けて、箱から下りる線どうしが重ならないようにした)。上と下のレールは、
   右の端 (63 列) で + どうしと − どうしをつなぐ。**赤は +5 V の線だけ、黒は GND の線だけ**に使った
 - **DIP スイッチ**: SW1 (IN0〜IN3) は 4〜7 列、SW2 は 8〜11 列 (使うのは 1 番 = 8 列の LOAD だけ)。下の組を +5 V (赤の線で下の + レールへ)、
   上の組を入力の線にした。集合抵抗 RN1 (10 kΩ × 8、9 ピン) は b 行の 3〜11 列で、共通のピン (3 列) を上の − レールへ落とす。

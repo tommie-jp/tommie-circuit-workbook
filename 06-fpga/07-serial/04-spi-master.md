@@ -172,7 +172,7 @@ title: 図2 Pico 2 の GP2 から GP5 を 74HC595 につなぎ、AD3 の DIO0 �
 board: full
 parts:
   MCU: pico2 @ h5
-  U1: dip16 @ e28 r180 74HC595
+  U1: dip16 @ e30 r180 74HC595
   RA: resistor j42 -b42 330
   DA: led h40(A) h42(K) red
   RB: resistor a42 -t42 330
@@ -191,33 +191,35 @@ wires:
   - +t63 -- +b63 red
   - -t63 -- -b63 black
   - a7 -- -t7 black
-  - i8 -- j28 blue
-  - i9 -- g30 green
-  - i10 -- h31 orange
-  - i11 -- g33 yellow
-  - j35 -- +b35 red
-  - j29 -- +b29 red
-  - j32 -- -b32 black
-  - a28 -- -t28 black
-  - g34 -- g40 purple
-  - a35 -- a40 purple
-  - b34 -- b44 purple
-  - c33 -- c48 purple
-  - AD.DIO2 -- j8 blue
-  - AD.DIO0 -- j9 green
-  - AD.DIO3 -- j10 orange
-  - AD.DIO1 -- j11 yellow
-  - AD.GND -- -b14 black
+  - j8 -- i30 blue [v12, h10, v88, h400, v-110]
+  - j9 -- i32 green [v12, h10, v80, h360, v-122]
+  - j10 -- h33 orange [v12, h10, v72, h320, v-134]
+  - j11 -- g35 yellow [v12, h10, v64, h280, v-146]
+  - j37 -- +b37 red
+  - j31 -- +b31 red
+  - j34 -- -b34 black
+  - a30 -- -t30 black
+  - g36 -- g40 purple
+  - a37 -- a40 purple
+  - b36 -- b44 purple
+  - c35 -- c48 purple
+  - AD.DIO2 -- j30 blue
+  - AD.DIO0 -- j32 green
+  - AD.DIO3 -- j33 orange
+  - AD.DIO1 -- j35 yellow
+  - AD.GND -- -b39 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/07-serial/breadboard/04-spi-master.svg)
 
 - Pico 2 は USB を左に向けて `@ h5` に挿す (0-4 と同じ)。下の列 (h 行) の 4 番 GP2 が 8 列、5 番 GP3 が 9 列、6 番 GP4 が 10 列、7 番 GP5 が 11 列。上の列 (c 行) の 36 番 3V3 が 9 列、38 番 GND が 7 列
-- 74HC595 は溝をまたぎ、切り欠きを右にして `@ e28 r180` に挿す。下の列 (f 行) に 9 番 QH' (28 列)・10 番 SRCLR (29 列)・11 番 SRCLK (30 列)・12 番 RCLK (31 列)・13 番 OE (32 列)・14 番 SER (33 列)・15 番 QA (34 列)・16 番 VCC (35 列)、
-  上の列 (e 行) に 8 番 GND (28 列) から 1 番 QB (35 列)
-- 信号の線 (Pico 2 の下の列から 74HC595 の下の列へ): GP2 → QH' は青、GP3 → SRCLK は緑、GP4 → RCLK は橙、GP5 → SER は黄。AD3 の線も同じ色で、同じ列に挿す
-- 電源: 3V3 (9 列) から上の + レールへ赤。74HC595 の VCC (35 列) と SRCLR (29 列) は下の + レールへ赤で短く。GND は Pico 2 の 38 番 (7 列) と 74HC595 の 8 番 (28 列) を上の − レールへ、OE (32 列) を下の − レールへ黒。上下のレールは右端 (63 列) でつなぐ
-- LED は 4 個とも、長いほう (アノード) を左にして挿す。QA (34 列) は g 行の紫の線で 40 列の LED (h 行) へ。QB (35 列) は a 行、QC (34 列) は b 行、QD (33 列) は c 行の紫の線で、上の列の 40・44・48 列の LED (d 行) へ。
+- 74HC595 は溝をまたぎ、切り欠きを右にして `@ e30 r180` に挿す。下の列 (f 行) に 9 番 QH' (30 列)・10 番 SRCLR (31 列)・11 番 SRCLK (32 列)・12 番 RCLK (33 列)・13 番 OE (34 列)・14 番 SER (35 列)・15 番 QA (36 列)・16 番 VCC (37 列)、
+  上の列 (e 行) に 8 番 GND (30 列) から 1 番 QB (37 列)
+- 信号の線 (Pico 2 の下の列から 74HC595 の下の列へ): GP2 → QH' は青、GP3 → SRCLK は緑、GP4 → RCLK は橙、GP5 → SER は黄。
+  線は Pico 2 の j 行から板の下へ出て、25〜28 列の右から下の段へ上がり、行の間を右へ入る (`i30`・`i32`・`h33`・`g35`)。
+  AD3 の線も同じ色で、74HC595 側の同じ列の j 行 (`j30`・`j32`・`j33`・`j35`) に挿す。AD3 の GND は下の − レールの 39 列へ
+- 電源: 3V3 (9 列) から上の + レールへ赤。74HC595 の VCC (37 列) と SRCLR (31 列) は下の + レールへ赤で短く。GND は Pico 2 の 38 番 (7 列) と 74HC595 の 8 番 (30 列) を上の − レールへ、OE (34 列) を下の − レールへ黒。上下のレールは右端 (63 列) でつなぐ
+- LED は 4 個とも、長いほう (アノード) を左にして挿す。QA (36 列) は g 行の紫の線で 40 列の LED (h 行) へ。QB (37 列) は a 行、QC (36 列) は b 行、QD (35 列) は c 行の紫の線で、上の列の 40・44・48 列の LED (d 行) へ。
   カソードの列から 330 Ω を − レールへ立てる (QA は下の − レール、QB〜QD は上の − レール)
 - 流れる電流は LED 4 個で 16 mA 以下 (計算値)。信号は 19 kHz で、ブレッドボードの範囲 (3 MHz 以下) に収まる
 

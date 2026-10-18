@@ -102,7 +102,7 @@ parts:
   R2: resistor j14 -b14 10k
   Cbyp: capacitor/electrolytic h14(+) h17(-) 10u
   Rbias: resistor b13 b8 100k
-  Rg: resistor d12 d8 10k
+  Rg: resistor d12 d8 10k cap=left
   Cin: capacitor d13 d16 1u
   Rf: resistor d17 d20 10k cap=above:1,0
 wires:
@@ -114,8 +114,8 @@ wires:
   - b22 -- b16 yellow
   - SC.1+ -- e16 orange
   - SC.2+ -- e20 green
-  - SC.1- -- -t26 black
-  - SC.2- -- -t27 black
+  - SC.1- -- -b26 black
+  - SC.2- -- -b27 black
   - g10 -- g11 green
   - h10 -- c8 green
   - g12 -- g14 orange
@@ -138,7 +138,7 @@ notes:
   PIN 4 (13 列) は `j13 → -b13` で GND、PIN 8 (10 列) は `+t10 → a10` で +5 V
 - 仮想 GND の出力 (10 列) は緑の線 `h10 → c8` で上ブロックの 8 列へ上げる。Rbias (100 kΩ、b 段) は 8 列と U2 の + 入力 (PIN 5、13 列)、Rg (10 kΩ、d 段) は 8 列と U2 の − 入力 (PIN 6、12 列) の間
 - Cin (1 µF) は + 入力の 13 列から 16 列へ。W1 (黄) は 22 列 (`a22`) へ入れ、黄の線 `b22 → b16` で 16 列へ渡す (出力の緑の線をまたがないため)。Rf (10 kΩ、`d17`〜`d20`) は − 入力 (橙の線 `c12 → c17` で 17 列へ) と出力 (緑の線 `a11 → a20` で 20 列へ) の間
-- Scope の 1+ (橙) は入力の 16 列 (`e16`)、2+ (緑) は出力の 20 列 (`e20`)。1− と 2− (黒) は上の青レール (GND) へ
+- Scope の 1+ (橙) は入力の 16 列 (`e16`)、2+ (緑) は出力の 20 列 (`e20`)。1− と 2− (黒) は下の青レール (GND) へ
 
 ## 計器の設定
 

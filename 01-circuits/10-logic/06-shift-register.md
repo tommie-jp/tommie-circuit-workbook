@@ -124,9 +124,9 @@ parts:
   SER: switch h44 h47
   RpdS: resistor i44 i41 10k
   SRCLK: button @ e50
-  RpdCLK: resistor b50 b53 10k
+  RpdCLK: resistor c52 c55 10k
   RCLK: button @ e56
-  RpdRCLK: resistor b56 b59 10k
+  RpdRCLK: resistor c56 c59 10k cap=right
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black
@@ -146,14 +146,14 @@ wires:
   - a21 -- -t21 black
   - a13 -- -t13 black
   - a5 -- -t5 black
-  - b36 -- b44 yellow
-  - b44 -- g44 yellow
+  - d36 -- d44 yellow
+  - d44 -- g44 yellow
   - c39 -- c50 yellow
-  - d38 -- d56 yellow
+  - b38 -- b56 yellow
   - j47 -- +b47 red
   - j50 -- +b50 red
   - j56 -- +b56 red
-  - a53 -- -t53 black
+  - a55 -- -t55 black
   - a59 -- -t59 black
   - AD.DIO6 -- a11 green
   - AD.DIO5 -- a19 green

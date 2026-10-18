@@ -73,18 +73,19 @@ parts:
     pins: ["+", "-"]
   AD:
     type: device
-    at: top
+    at: bottom
     label: Analog Discovery
-    pins: ["1-", "2+", "2-", "1+"]
+    pins: ["2+", "1-", "2-", "1+"]
 wires:
   - BAT.+ -- +t2 red
   - BAT.- -- -t3 black
   - +t4 -- a4 red
+  - -t1 -- -b1 black
   - MOT.+ -- a11 orange
   - MOT.- -- -t13 black
-  - AD.1+ -- d11 blue
-  - AD.1- -- -t6 black
-  - AD.2+ -- a7 white
+  - AD.1+ -- d11 blue [h10]
+  - AD.1- -- -b9 black
+  - AD.2+ -- e7 white
   - AD.2- -- e11 green
 ```
 
@@ -93,8 +94,8 @@ wires:
 - S1 で電池を入り切りする。Rs1 (10 Ω) はモータの電流を電圧に変えるシャント
 - 電池 (BAT) とモータ (MOT) はブレッドボードの外の機器として描く。電池は上の赤・青レールへ、
   モータの + 側は 11 列 (Rs1 の右)、− 側は青レールにつながる
-- AD の CH1 (1+・1−) は 11 列 (モータの +) と GND (青レール) の間、CH2 (2+・2−) は Rs1 の両端
-  (7 列と 11 列) につなぐ
+- AD の CH1 (1+・1−) は 11 列 (モータの +) と GND (下の青レール。1 列の黒い線で上の青レールとつなぐ) の間、
+  CH2 (2+・2−) は Rs1 の両端 (7 列と 11 列) につなぐ。AD は基板の下に置き、線を下から e 行・d 行へ入れる
 - 電源は AD の Supplies ではなく電池にする。回転を指で止めたとき (Ra の測定) に 0.5 A 流れ、
   Supplies の 1 レール (50 mA まで) では足りない。AD は Scope だけを使う
 

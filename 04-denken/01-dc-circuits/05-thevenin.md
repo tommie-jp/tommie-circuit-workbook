@@ -84,7 +84,7 @@ title: 図3 ブレッドボードに組む
 board: half
 parts:
   R1: resistor c5 c10 1.5k
-  R2: resistor f10 f15 3k
+  R2: resistor g10 g15 3k
   S1: switch d10 d12
   RL: resistor e12 e17 1k
   AM:
@@ -96,14 +96,14 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, V+, "1+", "1-"]
+    pins: [V+, GND, "1+", "1-"]
 wires:
   - AD.V+ -- a5 red
   - AD.GND -- -t7 black
-  - AD.1+ -- b10 blue
+  - AD.1+ -- a10 blue
   - AD.1- -- -t11 white
-  - a10 -- g10 green
-  - g15 -- -b15 black
+  - e10 -- f10 green
+  - h15 -- -b15 black
   - -b27 -- -t27 black
   - AM.+ -- b17 orange
   - AM.- -- -b22 black

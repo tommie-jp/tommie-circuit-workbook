@@ -450,12 +450,12 @@ wires:
   - h30 -- h47 yellow
   - e47 -- f47 yellow
   - c47 -- c57 yellow
-  - AD.DIO3 -- a48 orange
-  - AD.DIO2 -- a51 orange
-  - AD.DIO1 -- a54 orange
-  - AD.DIO0 -- a57 orange
-  - AD.DIO4 -- a59 orange
-  - AD.DIO5 -- a61 orange
+  - AD.DIO3 -- a48 orange [v38, h223]
+  - AD.DIO2 -- a51 orange [v31, h243]
+  - AD.DIO1 -- a54 orange [v24, h263]
+  - AD.DIO0 -- a57 orange [v17, h283]
+  - AD.DIO4 -- a59 orange [v10, h283]
+  - AD.DIO5 -- a61 orange [v3, h283]
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/02-alu-like.svg)

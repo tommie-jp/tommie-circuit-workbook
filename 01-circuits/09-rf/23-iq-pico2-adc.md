@@ -310,7 +310,7 @@ parts:
   U2: dip16 @ e12 r180 74HC4052
   U3: dip8 @ e30 MCP6002
   U4: dip8 @ e50 MCP6002
-  R1: resistor i9 i16 1k
+  R1: resistor i9 i16 1k cap=left
   C1: capacitor/ceramic j15 -b15 10n
   C2: capacitor/ceramic j17 -b17 10n
   C3: capacitor/ceramic j18 -b18 10n
@@ -318,11 +318,11 @@ parts:
   R4: resistor g23 g31 100k
   R2: resistor i22 i32 100k
   R5: resistor j30 j31 200k
-  R3: resistor h32 h38 200k
+  R3: resistor h32 h38 200k cap=above
   R8: resistor g43 g51 100k
-  R6: resistor i42 i52 100k
+  R6: resistor i42 i52 100k cap=left
   R9: resistor j50 j51 200k
-  R7: resistor h52 h58 200k
+  R7: resistor h52 h58 200k cap=above
   R10: resistor d55 d60 10k
   R11: resistor a55 -t55 10k
   C5: capacitor/ceramic +t11 -t11 100n
@@ -330,7 +330,7 @@ parts:
   C7: capacitor/ceramic +t29 -t29 100n
   C8: capacitor/ceramic +t49 -t49 100n
 wires:
-  - +t1 -- +b1 red
+  - +t63 -- +b63 red
   - -t62 -- -b62 black
   - a2 -- +t2 red
   - a3 -- +t3 red
@@ -338,14 +338,12 @@ wires:
   - j2 -- +b2 red
   - j5 -- +b5 red
   - j8 -- -b8 black
-  - AD.W1 -- b5 green
-  - c5 -- i4 green [h-70, v137, h50]
-  - g6 -- g13 blue
-  - h6 -- d4 blue
-  - d7 -- h12 purple
-  - c8 -- c10 white
-  - e10 -- f10 white
-  - h10 -- j3 white [v30, h-140]
+  - AD.W1 -- a5 green
+  - c5 -- i4 green [h-70, v136, h50]
+  - j6 -- j13 blue [v-10, h140]
+  - b4 -- g13 blue [h130, v116, h50]
+  - d7 -- h12 purple [h50, v96, h50]
+  - a8 -- j3 white [v10, h-150, v176, h50]
   - AD.W2 -- a9 yellow
   - e9 -- f9 yellow
   - AD.GND -- -t26 black
@@ -354,14 +352,14 @@ wires:
   - a14 -- -t14 black
   - a17 -- -t17 black
   - j19 -- +b19 red
-  - h14 -- h23 orange
-  - g15 -- g22 orange
-  - i17 -- b20 brown [v10, h70]
-  - i18 -- c21 pink
-  - b20 -- b42 brown
-  - c21 -- c43 pink
-  - d42 -- h42 brown
-  - d43 -- h43 pink
+  - h14 -- h23 orange [v10, h180]
+  - h15 -- h22 orange
+  - g17 -- c21 brown [v10, h80]
+  - g18 -- b20 pink [h40]
+  - c21 -- c42 brown
+  - b20 -- b43 pink
+  - d42 -- f42 brown
+  - d43 -- f43 pink
   - a30 -- +t30 red
   - j33 -- -b33 black
   - d31 -- d32 gray
@@ -371,12 +369,12 @@ wires:
   - c51 -- c52 gray
   - c55 -- c53 gray
   - a60 -- +t60 red
-  - a51 -- i38 gray
+  - d51 -- f38 gray [v-10, h-260]
   - b51 -- i58 gray [h170]
-  - h30 -- PI.I orange [h-25]
-  - h50 -- PQ.Q brown [h-10]
-  - PP.3V3 -- +b61 red
-  - PP.GND -- -b60 black
+  - h30 -- PI.I orange [v10, h70]
+  - h50 -- PQ.Q brown [v10, h70]
+  - PP.3V3 -- +b60 red
+  - PP.GND -- -b61 black
 notes:
   - text: レールは上下とも 赤 = +3.3V (図4 の Pico 2 の 3V3)、青 = GND
 ```
@@ -386,10 +384,11 @@ notes:
 - ブレッドボードは **full (63 列)**。部品が多いので、Pico 2 は図4 の別のハーフのブレッドボードに挿し、
   I・Q・3V3・GND の 4 本のジャンパ線でつなぐ (図3 の下の 3 つの箱)
 - **電源**: 図4 の Pico 2 の 3V3 を図3 の下の + レールへ (赤)、GND を − レールへ (黒)。
-  上下のレールは 1 列 (+、赤) と 62 列 (−、黒) で渡す。**図3 の + レールはどれも +3.3 V** (5 V ではない)
+  上下のレールは 63 列 (+、赤) と 62 列 (−、黒) で渡す。**図3 の + レールはどれも +3.3 V** (5 V ではない)
 - **U1 (74HC74)** は 2〜8 列。VCC・2CLR・2PRE (上の列) と 1CLR・1PRE (下の列) は + レールへ、GND (8 列の下) は − レールへ。
-  W1 (緑) は 2CLK (5 列の上) に挿し、緑の線で 1CLK (4 列の下) へも渡す。この緑の線は U1 の左の外を回して下の段へ下ろす (青と交わらないように)。
-  1Q (6 列の下) は青で S0 と 2D へ、2Q (7 列の上) は紫で S1 へ、/2Q (8 列の上、`c8`) は白で 1D (3 列の下、`j3`) へ。IC の下をくぐらないよう、右の空いた 10 列へ回す (`c8` → `c10`、溝をまたぐ `e10` → `f10`、`h10` → `j3` の白い線 3 本。最後の 1 本は i 行の下を通して緑・青と交わらないようにする)
+  W1 (緑) は 2CLK (5 列の上、`a5`) に挿し、緑の線で 1CLK (4 列の下、`i4`) へも渡す。/2Q (8 列の上、`a8`) は白で 1D (3 列の下、`j3`) へ。
+  緑と白は U1 の左の外を回して下の段へ下ろす (白が外側)。1Q (6 列の下) は青で S0 (`j6` → `j13`) と 2D (`g13` → `b4`) へ、
+  2Q (7 列の上、`d7`) は紫で S1 (`h12`) へ。2D と S1 への 2 本は U1 と U2 の間の 10 列の両脇の隙間で溝をまたぐ (IC の下はくぐらない)
 - **U2 (74HC4052)** は 12〜19 列に**逆向き (切り欠きが右)** に挿す。信号のピン (S1・S0・A3・A0・AN・A1・A2) が下の列に、
   GND・VEE・E・BN が上の列に並び、上の − レールへ短く落とせるため。VCC (19 列の下) は下の + レールへ。
   B0〜B3 は使わない (開けておく。スイッチの B 側は BN = GND とつながるだけ)
@@ -397,12 +396,13 @@ notes:
 - **I の差動増幅 (U3 の下の半分、30〜33 列)**: A3 (14 列) を橙で 23 列へ運び R4 (g23〜g31) で VINA− へ。
   A0 (15 列) を橙で 22 列へ運び R2 (i22〜i32) で VINA+ へ。R5 (j30〜j31) は VOUTA と VINA− の間に**立てて**挿す。
   R3 (h32〜h38) は VINA+ から VREF (38 列) へ
-- **Q の差動増幅 (U4 の下の半分、50〜53 列)**: A1 (17 列、茶) と A2 (18 列、桃) は、I の部品をよけて上の段の b・c 行を通し、
-  42・43 列で下の段へ下ろす。R6 (i42〜i52) で VINA+、R8 (g43〜g51) で VINA−。R9 は j50〜j51 に立てる。R7 (h52〜h58) は VREF (58 列) へ
+- **Q の差動増幅 (U4 の下の半分、50〜53 列)**: A1 (17 列、茶、`g17`) と A2 (18 列、桃、`g18`) は、U2 のすぐ右の 21・20 列で溝をまたいで
+  上の段の c・b 行を通し、42・43 列で下の段へ下ろす。A3・A0 の橙の線はその下 (A0 は h 行、A3 は h 行と i 行の間) を通るので交わらない。R6 (i42〜i52) で VINA+、R8 (g43〜g51) で VINA−。R9 は j50〜j51 に立てる。R7 (h52〜h58) は VREF (58 列) へ
 - **VREF**: R10 (d55〜d60、60 列は + レール)・R11 (a55 から − レール) の中点を U4 の VINB+ へ。
-  U4 の VOUTB (51 列の上) と VINB− をつないでフォロワにし、灰色の線で 38 列と 58 列の VREF へ配る。
+  U4 の VOUTB (51 列の上) と VINB− をつないでフォロワにし、VOUTB から灰色の線を 2 本出す。1 本は右を回して 58 列 (R7) へ、
+  もう 1 本は上の段の c 行と d 行の間を左へ通して 38 列 (R3) へ下ろす。
   U3 の上の半分 (VINB+ を − レール、VOUTB と VINB− をつなぐ) は使わない
-- **出力**: U3 の VOUTA (30 列) を橙で Pico 2 の GP26 へ、U4 の VOUTA (50 列) を茶で GP27 へ
+- **出力**: U3 の VOUTA (30 列) を橙で Pico 2 の GP26 へ、U4 の VOUTA (50 列) を茶で GP27 へ。どちらも R2・R6 をよけて 33・53 列の右から下ろす
 - **ブレッドボードで組んでよい理由**: いちばん高い周波数は W1 の 1.992 MHz で、ブレッドボードの 3 MHz 以下に収まる。
   電流は IC 4 個で数 mA で、Pico 2 の 3V3 (最大 300 mA) にも、ブレッドボードの 500 mA にも遠い
 
@@ -420,8 +420,8 @@ parts:
     type: device
     at: top
     label: Analog Discovery 3 (Scope)
-    pins: [2+, 1+, 1-, 2-]
-  U5: pico2 @ h5
+    pins: [1+, 2+, 1-, 2-]
+  U5: pico2 @ i5
 wires:
   - b9 -- +t9 red
   - a7 -- -t7 black
@@ -429,8 +429,8 @@ wires:
   - BB.3V3 -- +t4 red
   - BB.Q -- a13 brown
   - BB.I -- a14 orange
-  - AD.2+ -- b13 brown
-  - AD.1+ -- b14 orange
+  - AD.2+ -- c13 brown [h-10]
+  - AD.1+ -- b14 orange [h10]
   - AD.1- -- -t27 black
   - AD.2- -- -t28 black
 notes:
@@ -440,7 +440,8 @@ notes:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/23-iq-pico2-adc-2.svg)
 
 - Pico 2 は PC の USB から給電し、プログラムの表示もこの USB のシリアルで受ける。GND38 (PIN 38) を − レールへ、3V3 (PIN 36) を + レールへ
-- GP26 (PIN 31) と GP27 (PIN 32) の a 行に図3 からの I・Q を挿し、b 行に AD3 の 1+・2+ を挿す。1−・2− は GND
+- Pico 2 はピンが d 行と i 行に来るように挿し、上の a〜c 行を空ける。GP26 (PIN 31、14 列) と GP27 (PIN 32、13 列) の a 行に図3 からの I・Q を挿し、
+  AD3 の 1+ を `b14`、2+ を `c13` に挿す (右から入れて、図3 からの線と交わらないようにする)。1−・2− は GND
 - **電源を入れる順**: 先に Pico 2 の USB をつなぎ (3.3 V が立ってから)、そのあと AD3 の W1・W2 を出す。
   電源の無い 74HC74・74HC4052 に W1・W2 を入れると、入力の保護ダイオードを通して電源の側へ電流が流れ込む
 

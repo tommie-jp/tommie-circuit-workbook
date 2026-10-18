@@ -90,7 +90,7 @@ parts:
     type: device
     at: bottom
     label: Analog Discovery
-    pins: [DIO0, 1+, DIO1, 2+, DIO2, DIO3, GND, 1-, 2-]
+    pins: [1+, DIO0, 2+, DIO1, DIO2, DIO3, GND, 1-, 2-]
 wires:
   - USB.+5V -- +t2 red
   - USB.GND -- -t3 black

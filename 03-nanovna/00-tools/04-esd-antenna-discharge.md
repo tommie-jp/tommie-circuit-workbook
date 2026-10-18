@@ -99,7 +99,7 @@ wires:
   - b9 -- GND black
   - y9 -- o9 black
   - o9 -- o7 black
-  - o7 -- GND black
+  - o7 -- h7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/00-tools/perfboard/04-esd-antenna-discharge.svg)

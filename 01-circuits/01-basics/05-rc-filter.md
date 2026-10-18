@@ -90,11 +90,11 @@ parts:
     pins: [GND, W1, 1+, 1-, 2+, 2-]
 wires:
   - a13 -- -t13 black
-  - AD.W1 -- a5 yellow
+  - AD.W1 -- a5 yellow [h23, v106]
   - AD.GND -- -t3 black
-  - AD.1+ -- e5 orange
+  - AD.1+ -- b5 orange [h-7, v126]
   - AD.1- -- -t7 black
-  - AD.2+ -- e10 green
+  - AD.2+ -- a10 green
   - AD.2- -- -t12 black
 ```
 

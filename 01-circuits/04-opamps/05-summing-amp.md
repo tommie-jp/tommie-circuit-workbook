@@ -88,8 +88,8 @@ wires:
   - AD3.W2 -- a6 green
   - SC.2+ -- c4 orange
   - SC.1+ -- j10 green
-  - SC.1- -- i15 black
-  - SC.2- -- j15 black
+  - SC.1- -- j15 black [v-20, h51]
+  - SC.2- -- i15 black [v-10, h31]
   - +t10 -- a10 red
   - e9 -- f9 orange
   - i9 -- i11 orange

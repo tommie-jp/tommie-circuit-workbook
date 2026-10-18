@@ -78,7 +78,7 @@ parts:
     type: device
     at: bottom
     label: AD3 Scope (DC 電圧計)
-    pins: [1-, 1+]
+    pins: [1+, 1-]
   U1: dip8 @ e10 LM358
   R1: resistor j11 j7 10k
   Rf: resistor j15 j18 100k

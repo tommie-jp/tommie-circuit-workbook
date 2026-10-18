@@ -71,7 +71,7 @@ wires:
   - AD.GND -- -t3 black
   - AD.W1 -- a5 yellow
   - c10 -- -t10 black
-  - AD.1+ -- b5 blue
+  - AD.1+ -- b5 blue [v20, h-17, v106]
   - AD.1- -- -t12 black
 notes:
   - text: "R1 の両端 (5・10 列) にテスターを当てる。実効値形と平均値形を順に 2 回読む"

@@ -73,7 +73,7 @@ parts:
     type: device
     at: top
     label: サーボ SG90
-    pins: [GND, VCC, SIG]
+    pins: [VCC, GND, SIG]
   AD:
     type: device
     at: top
@@ -82,7 +82,7 @@ parts:
 wires:
   - PSU.+ -- MTR.VCC red
   - PSU.- -- MTR.GND black
-  - PSU.- -- -t2 black
+  - PSU.- -- -t1 black [h-15, v72]
   - AD.W1 -- a15 yellow
   - MTR.SIG -- b15 orange
   - AD.1+ -- c15 blue

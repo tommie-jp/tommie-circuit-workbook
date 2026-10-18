@@ -77,7 +77,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [1+, W1, 1-, 2+, 2-, GND]
+    pins: [1+, W1, 2+, 1-, 2-, GND]
   L1:
     type: device
     at: bottom
@@ -97,8 +97,8 @@ wires:
   - AD.GND -- -t22 black
   - e3 -- f3 yellow
   - L1.● -- j3 yellow
-  - L1.終 -- i7 green
-  - L2.● -- j7 green
+  - L1.終 -- j7 green [h-2]
+  - L2.● -- i7 green [h-12]
   - L2.終 -- j12 white
   - e12 -- f12 white
   - j17 -- -b17 black

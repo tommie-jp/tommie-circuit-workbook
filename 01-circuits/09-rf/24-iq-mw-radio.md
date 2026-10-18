@@ -549,20 +549,20 @@ parts:
   R12: resistor a23 a27 1M
   C10: capacitor/ceramic e16 f16 1u
   R14: resistor g16 g21 10k
-  R15: resistor i20 i21 100k
+  R15: resistor i20 i21 100k cap=right
   U3: dip8 @ e50 MCP6002
   R20: resistor c36 c52 100k
   R21: resistor c59 c53 100k
   R23: resistor a51 a52 1M
   R22: resistor a53 a57 1M
   C20: capacitor/ceramic e46 f46 1u
-  R24: resistor g46 g51 10k
-  R25: resistor i50 i51 100k
+  R24: resistor g46 g51 10k cap=left
+  R25: resistor i50 i51 100k cap=right
 wires:
   - IN.3V3 -- +t1 red
   - IN.GND -- -t2 black
   - IN.VREF -- b27 white
-  - c27 -- c57 white
+  - h27 -- h57 white
   - +t20 -- a20 red
   - IN.A3 -- a6 blue
   - IN.A0 -- a29 blue
@@ -570,7 +570,7 @@ wires:
   - e27 -- f27 white
   - g22 -- g27 white
   - j23 -- -b23 black
-  - OUT.I -- h20 yellow
+  - OUT.I -- j20 yellow
   - +t50 -- a50 red
   - IN.A2 -- a36 green
   - IN.A1 -- a59 green
@@ -578,7 +578,7 @@ wires:
   - e57 -- f57 white
   - g52 -- g57 white
   - j53 -- -b53 black
-  - OUT.Q -- h50 purple
+  - OUT.Q -- j50 purple
   - -t63 -- -b63 black
   - a3 -- -t3 black
   - a32 -- -t32 black
@@ -596,11 +596,11 @@ wires:
   A0〜A3 の線を流れるのは 22 nF の充電の電流で、線が 10〜20 cm 延びても、線のインダクタンス (100〜200 nH の目安) は 1 MHz で 1 Ω ほどと、
   R1 + R<sub>on</sub> (200 Ω) に比べて小さい。I と Q の 4 本を同じ長さにそろえる
 - **1 段目**: R13 (a21〜a22、1 MΩ) が出力 (PIN 7、21 列) と − の間の帰還。R12 (a23〜a27、1 MΩ) が + を VREF (27 列) へ。
-  VREF は図4 から白い線で b27 に来て、c27〜c57 の白い線で U3 の側 (57 列) へも渡す
+  VREF は図4 から白い線で b27 に来て、溝の下の h27〜h57 の白い線で U3 の側 (57 列) へも渡す (27 列と 57 列は、それぞれ e〜f の白い線で上と下がつながっている)
 - **2 段目**: 1 段目の出力 (21 列) から d21〜d16 の橙の線で 16 列へ、C10 (1 µF) は溝をまたいで e16〜f16 に挿す。
   R14 (g16〜g21) で 2 段目の − (PIN 2、21 列の下) へ。R15 (i20〜i21) が出力 (PIN 1、20 列の下) との帰還。
   非反転の入力 (PIN 3、22 列の下) は g22〜g27 の白い線で VREF へ (e27〜f27 の白い線が上と下の 27 列を渡す)
-- 出力 I (h20、黄) と Q (h50、紫) を図6 の基板へ。電源は PIN 8 (20・50 列の上) を上の + レールへ、PIN 4 (23・53 列の下) を下の − レールへ。
+- 出力 I (j20、黄) と Q (j50、紫) を図6 の基板へ。電源は PIN 8 (20・50 列の上) を上の + レールへ、PIN 4 (23・53 列の下) を下の − レールへ。
   C4・C5 は上のレールの間に挿す
 
 ```bread
@@ -660,17 +660,17 @@ wires:
   - a5 -- -t5 black
   - PWR.3V3 -- a7 red
   - PWR.GND -- -t8 black
-  - IQ.Q -- a11 green
-  - IQ.I -- a12 yellow
-  - SC.2+ -- b11 pink
-  - SC.1+ -- b12 orange
-  - SC.1- -- -t13 black
-  - SC.2- -- -t14 black
-  - LO.S0 -- i6 purple
-  - LO.S1 -- i7 brown
-  - LA.DIO0 -- j6 purple
-  - LA.DIO1 -- j7 brown
-  - LA.GND -- -b9 black
+  - IQ.Q -- a11 green [v10, h-56]
+  - IQ.I -- a12 yellow [v20, h-96]
+  - SC.2+ -- b11 pink [v30, h-142, v94]
+  - SC.1+ -- b12 orange [v40, h-162, v90]
+  - SC.1- -- -t24 black
+  - SC.2- -- -t26 black
+  - LO.S0 -- j6 purple [v-10, h15]
+  - LO.S1 -- j7 brown [v-10, h-35]
+  - LA.DIO0 -- i6 purple [v-20, h-86, v-104]
+  - LA.DIO1 -- i7 brown [v-30, h-106, v-101]
+  - LA.GND -- -b14 black
   - X1.A -- i16 blue
   - X1.B -- i17 blue
   - X1.C -- -b18 black
@@ -690,7 +690,7 @@ wires:
 - U1 (Pico 2) は 3〜22 列 (下の h 行が PIN 1〜20、上の c 行が PIN 40〜21)。上の + レールは **5 V** (VBUS、3 列から赤い線)
 - 3V3 (PIN 36、7 列) は a7 から図4 の基板へ (赤)。GND は GND38 (5 列) から上の − レールへ
 - **I と Q**: 図5 の基板から I (黄) を a12 (GP26)、Q (緑) を a11 (GP27) へ。AD3 の Scope の 1+ を b12、2+ を b11 に挿す (1−・2− は GND)
-- **S0 と S1**: GP2 (6 列)・GP3 (7 列) の i 行から図4 の基板へ (紫・茶)。AD3 の Logic の DIO0・DIO1 を j6・j7 に挿す
+- **S0 と S1**: GP2 (6 列)・GP3 (7 列) の j 行から図4 の基板へ (紫・茶)。AD3 の Logic の DIO0・DIO1 を i6・i7 に挿す (GND は下の − レール)
 - **エンコーダ**: A を i16 (GP10)、B を i17 (GP11)、C を下の − レールへ
 - **音声**: GP15 (22 列) から R30 (i22〜i26)・C30 (26 列から − レール)・R31 (g26〜g30)・C31 (30 列から − レール)・C32 (h30〜h33)。
   VR1 は f33〜f35 (33 列が上、35 列が GND、34 列がワイパー)。ワイパーから i34〜i39 の橙の線で LM386 の -INPUT (PIN 2、39 列の下) へ

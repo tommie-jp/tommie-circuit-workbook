@@ -81,7 +81,7 @@ parts:
     type: device
     at: bottom
     label: AD3 Scope
-    pins: [1+, 2+, 1-, 2-]
+    pins: [2+, 1+, 1-, 2-]
   U1: dip8 @ e10 LM358
   R1: resistor c22 c26 10k
   R2: resistor j17 j22 10k

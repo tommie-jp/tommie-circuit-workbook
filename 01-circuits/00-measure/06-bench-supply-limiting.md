@@ -125,7 +125,7 @@ title: 図3 PSU と FG で LED を点滅させ、AD3 の Scope で入力とコ�
 board: half
 parts:
   R1: resistor b5 b11 330
-  D1: led c11(A) c13(K) red
+  D1: led c11(A) c13(K) red cap=left
   Q1: transistor e12(B) e13(C) e14(E) 2SC1815
   RB: resistor b12 b17 10k
   V1:
@@ -137,7 +137,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery 3 (Scope)
-    pins: [1+, 1-, 2+, 2-]
+    pins: [1-, 1+, 2+, 2-]
   V2:
     type: device
     at: top

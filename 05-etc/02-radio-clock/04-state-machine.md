@@ -704,7 +704,7 @@ wires:
   - LINKR.T440 -- a51 orange
   - LINKB.T880 -- j6 orange
   - LINKB.CLK -- j7 yellow
-  - LINKB.CLK -- j49 yellow
+  - LINKB.CLK -- j49 yellow [h10, v-27]
   - h9 -- h3 green
   - e3 -- f3 green
   - c3 -- c7 green
@@ -1044,7 +1044,7 @@ parts:
     type: device
     at: -c17
     label: 電源 5V
-    pins: [GND, +5V]
+    pins: [+5V, GND]
   LINKT:
     type: device
     at: -c5
@@ -1062,62 +1062,67 @@ parts:
   C2: capacitor/ceramic t18 t16 100n
   C3: capacitor/ceramic e15 e13 100n
 wires:
-  - PS.GND -- a17 black
-  - PS.+5V -- a18 red
+  - PS.+5V -- a17 red
+  - PS.GND -- a18 black
   - LINKT.W -- a5 purple
   - LINKT.NE440 -- a6 orange
   - LINKB.CLK -- a25 yellow
   - LINKB.TO -- a26 brown
-  - f11 -- e11 black
-  - f11 -- f12 black
-  - e13 -- d13 black
-  - e13 -- e11 black
+  - a17 -- c17 red
+  - c17 -- c15 red
+  - a18 -- d18 black
+  - d18 -- d17 black
+  - d19 -- d18 black
+  - e18 -- g18 red
+  - e21 -- g21 red
+  - e24 -- g24 red
+  - g18 -- g21 red
+  - g21 -- g24 red
+  - g24 -- h24 red
+  - h18 -- g18 red
+  - f8 -- g8 black
+  - f9 -- g9 black
+  - f11 -- g11 black
+  - f12 -- g12 black
+  - g8 -- g9 black
+  - g9 -- g11 black
+  - g11 -- g12 black
+  - g12 -- h12 black
+  - h12 -- i12 black
+  - i11 -- h11 black
+  - i10 -- h10 black
+  - h10 -- h11 black
+  - h11 -- h12 black
+  - i10 -- o10 black
+  - t14 -- v14 black
+  - v14 -- v25 black
+  - v25 -- d25 black
+  - d25 -- d22 black
   - e13 -- g13 black
   - t16 -- t14 black
-  - o8 -- o4 black
   - o8 -- o10 black
   - o8 -- t8 black
   - g13 -- i13 black
   - d19 -- d22 black
   - d19 -- e19 black
-  - d19 -- d17 black
   - e19 -- e20 black
   - t8 -- t14 black
-  - i10 -- i11 black
-  - i11 -- i12 black
-  - o4 -- e4 black
   - t14 -- r14 black
-  - e9 -- e11 black
-  - e9 -- e4 black
-  - e9 -- f9 black
   - i12 -- i13 black
-  - f8 -- f9 black
   - r14 -- r15 black
   - d17 -- e17 black
-  - d17 -- a17 black
-  - d17 -- d13 black
   - d22 -- e22 black
   - g15 -- e15 red
   - g15 -- i15 red
-  - c21 -- c24 red
-  - c21 -- e21 red
-  - c21 -- c18 red
   - t18 -- t24 red
   - t18 -- r18 red
-  - e18 -- c18 red
   - i15 -- i18 red
-  - e25 -- e24 red
-  - e25 -- h25 red
   - f6 -- c6 red
   - h18 -- i18 red
-  - c15 -- c18 red
   - c15 -- e15 red
   - c15 -- c6 red
-  - h25 -- h24 red
   - r16 -- r18 red
   - h24 -- t24 red
-  - c18 -- a18 red
-  - c24 -- e24 red
   - h22 -- o22 blue
   - o16 -- o22 blue
   - a23 -- a25 yellow
@@ -1276,162 +1281,171 @@ board:
   material: FR-4
   slots: on
 points:
-  NC_U15_10: av20
-  NC_U15_13: as20
-  NC_U15_4: au17
-  U14_9_6: ai20
-  NC_U14_11: ag20
-  NC_U12_8: j20
-  NC_U12_11: g20
-  NC_U12_6: i17
-  NC_U13_11: s20
+  NC_U15_10: aw20
+  NC_U15_13: at20
+  NC_U15_4: av17
+  U14_9_6: aj20
+  NC_U14_11: ah20
+  NC_U12_8: i20
+  NC_U12_11: f20
+  NC_U12_6: h17
+  NC_U13_11: t20
 parts:
   PS:
     type: device
-    at: a36
+    at: az36
     label: 電源 5V
-    pins: [GND, +5V]
+    pins: [+5V, GND]
   LINKT:
     type: device
-    at: t-1
+    at: r-1
     label: 他ユニット
-    pins: [QA, QB, W, E440, EN, NE440, LOADN, E880, TO, CLRN, PON]
+    pins: [E440, QA, QB, W, EN, NE440, LOADN, E880, TO, CLRN, PON]
   LINKB:
     type: device
-    at: u36
+    at: v36
     label: 他ユニット
     pins: [S3]
-  U15: dip14 ar20 74HC02
-  U14: dip14 ad20 74HC32
-  U12: dip14 d20 74HC86
-  U13: dip14 p20 74HC08
-  C1: capacitor/ceramic b25 b23 100n
-  C2: capacitor/ceramic n25 n23 100n
-  C3: capacitor/ceramic ab25 ab23 100n
-  C4: capacitor/ceramic ap25 ap23 100n
+  U12: dip14 c20 74HC86
+  U13: dip14 q20 74HC08
+  U14: dip14 ae20 74HC32
+  U15: dip14 as20 74HC02
+  C1: capacitor/ceramic c22 d22 100n
+  C2: capacitor/ceramic q22 r22 100n
+  C3: capacitor/ceramic ae22 af22 100n
+  C4: capacitor/ceramic as22 au22 100n
 wires:
-  - PS.+5V -- b33 red
-  - PS.GND -- a33 black
-  - LINKT.QA -- t1 pink
-  - LINKT.QB -- u1 green
-  - LINKT.W -- v1 pink
-  - LINKT.E440 -- w1 blue
-  - LINKT.EN -- x1 green
-  - LINKT.NE440 -- y1 blue
-  - LINKT.LOADN -- z1 purple
-  - LINKT.E880 -- aa1 brown
-  - LINKT.TO -- ab1 white
-  - LINKT.CLRN -- ac1 blue
-  - LINKT.PON -- ad1 orange
-  - LINKB.S3 -- u33 orange
-  - a33 -- a23 black
-  - a23 -- b23 black
-  - b23 -- e23 black
-  - e23 -- i23 black
-  - i23 -- k23 black
-  - k23 -- n23 black
-  - n23 -- q23 black
-  - q23 -- w23 black
-  - w23 -- ab23 black
-  - ab23 -- ae23 black
-  - ae23 -- ak23 black
-  - ak23 -- ap23 black
-  - ap23 -- at23 black
-  - at23 -- ay23 black
-  - e23 -- e20 black
-  - e20 -- f20 black
-  - i23 -- i20 black
-  - i20 -- h20 black
-  - k23 -- k17 black
-  - k17 -- k16 black
-  - k16 -- h16 black
-  - h16 -- h17 black
-  - h17 -- g17 black
-  - k17 -- j17 black
-  - q23 -- q20 black
-  - q20 -- r20 black
-  - w23 -- w17 black
-  - w17 -- v17 black
-  - ae23 -- ae20 black
-  - ae20 -- af20 black
-  - ak23 -- ak17 black
-  - ak17 -- aj17 black
-  - at23 -- at20 black
-  - at20 -- au20 black
-  - ay23 -- ay20 black
-  - ay20 -- ay17 black
-  - ay17 -- ax17 black
-  - ax17 -- aw17 black
-  - aw17 -- av17 black
-  - ay20 -- ax20 black
-  - ax20 -- aw20 black
-  - b33 -- b25 red
-  - b25 -- d25 red
-  - d25 -- n25 red
-  - n25 -- p25 red
-  - p25 -- ab25 red
-  - ab25 -- ad25 red
-  - ad25 -- ap25 red
-  - ap25 -- ar25 red
-  - d25 -- d20 red
-  - p25 -- p20 red
-  - ad25 -- ad20 red
-  - ar25 -- ar20 red
-  - p17 -- p3 pink
-  - p3 -- v3 pink
-  - v3 -- v1 pink
-  - ah17 -- ah3 white
-  - ab3 -- ah3 white
-  - ab3 -- ab1 white
-  - e17 -- e2 green
-  - e2 -- u2 green
-  - u2 -- u1 green
-  - ar17 -- ar2 blue
-  - ac2 -- ac1 blue
-  - ac2 -- ar2 blue
-  - ai20 -- ai17 purple
-  - o18 -- o15 white
-  - o18 -- q18 white
-  - q18 -- q17 white
-  - f17 -- f15 white
-  - f15 -- o15 white
-  - ag17 -- ag4 brown
-  - aa4 -- aa1 brown
-  - aa4 -- ag4 brown
-  - at17 -- at1 orange
-  - ad1 -- at1 orange
-  - d17 -- d1 pink
-  - d1 -- t1 pink
-  - y17 -- y1 blue
-  - y17 -- ad17 blue
-  - aj20 -- al20 green
-  - al20 -- al18 green
-  - al18 -- as18 green
-  - as18 -- as17 green
-  - v20 -- x20 yellow
-  - x20 -- x19 yellow
-  - ah20 -- ah19 yellow
-  - x19 -- ah19 yellow
-  - af17 -- af5 purple
-  - z5 -- z1 purple
-  - z5 -- af5 purple
-  - u33 -- u20 orange
-  - t20 -- t19 blue
-  - s19 -- s17 blue
-  - s19 -- t19 blue
-  - s17 -- s4 blue
-  - s4 -- w4 blue
-  - w4 -- w1 blue
-  - x18 -- ae18 brown
-  - x18 -- x16 brown
-  - ae18 -- ae17 brown
-  - r17 -- r16 brown
-  - t17 -- t16 brown
-  - r16 -- t16 brown
-  - t16 -- x16 brown
-  - u17 -- u5 green
-  - u5 -- x5 green
-  - x5 -- x1 green
+  - PS.+5V -- az33 red
+  - PS.GND -- ba33 black
+  - LINKT.E440 -- r1 blue
+  - LINKT.QA -- s1 pink
+  - LINKT.QB -- t1 green
+  - LINKT.W -- u1 pink
+  - LINKT.EN -- v1 green
+  - LINKT.NE440 -- w1 blue
+  - LINKT.LOADN -- x1 purple
+  - LINKT.E880 -- y1 brown
+  - LINKT.TO -- z1 white
+  - LINKT.CLRN -- aa1 blue
+  - LINKT.PON -- ab1 orange
+  - LINKB.S3 -- v33 orange
+  - az33 -- az30 red
+  - az30 -- as30 red
+  - as30 -- ae30 red
+  - ae30 -- q30 red
+  - q30 -- c30 red
+  - c30 -- c22 red
+  - c22 -- c20 red
+  - q30 -- q22 red
+  - q22 -- q20 red
+  - ae30 -- ae22 red
+  - ae22 -- ae20 red
+  - as30 -- as22 red
+  - as22 -- as20 red
+  - d22 -- d20 black
+  - r22 -- r20 black
+  - af22 -- af20 black
+  - au22 -- au20 black
+  - ba33 -- ba9 black
+  - ba9 -- ay9 black
+  - ay9 -- ak9 black
+  - ak9 -- w9 black
+  - w9 -- i9 black
+  - i9 -- i17 black
+  - w9 -- w17 black
+  - ak9 -- ak17 black
+  - ay9 -- ay17 black
+  - d20 -- d19 black
+  - e20 -- e19 black
+  - g20 -- g19 black
+  - h20 -- h19 black
+  - d19 -- e19 black
+  - e19 -- g19 black
+  - g19 -- h19 black
+  - h19 -- i19 black
+  - i19 -- i18 black
+  - i18 -- i17 black
+  - f17 -- f18 black
+  - g17 -- g18 black
+  - f18 -- g18 black
+  - g18 -- i18 black
+  - r20 -- r19 black
+  - s20 -- s19 black
+  - r19 -- s19 black
+  - s19 -- w19 black
+  - w19 -- w17 black
+  - af20 -- af19 black
+  - ag20 -- ag19 black
+  - af19 -- ag19 black
+  - ag19 -- ak19 black
+  - ak19 -- ak17 black
+  - au20 -- au19 black
+  - av20 -- av19 black
+  - ax20 -- ax19 black
+  - au19 -- av19 black
+  - av19 -- ax19 black
+  - ax19 -- ay19 black
+  - ay20 -- ay19 black
+  - ay19 -- ay18 black
+  - ay18 -- ay17 black
+  - aw17 -- aw18 black
+  - ax17 -- ax18 black
+  - aw18 -- ax18 black
+  - ax18 -- ay18 black
+  - t17 -- t18 blue
+  - t18 -- u18 blue
+  - u18 -- u20 blue
+  - aj17 -- aj20 purple
+  - r1 -- r2 blue
+  - r2 -- b2 blue
+  - b2 -- b24 blue
+  - b24 -- u24 blue
+  - u24 -- u20 blue
+  - s1 -- s3 pink
+  - s3 -- c3 pink
+  - c3 -- c17 pink
+  - t1 -- t4 green
+  - t4 -- d4 green
+  - d4 -- d17 green
+  - u1 -- u5 pink
+  - u5 -- q5 pink
+  - q5 -- q17 pink
+  - v1 -- v17 green
+  - e17 -- e16 white
+  - e16 -- r16 white
+  - r16 -- r17 white
+  - s17 -- s15 brown
+  - s15 -- u15 brown
+  - u15 -- u17 brown
+  - u15 -- af15 brown
+  - af15 -- af17 brown
+  - w1 -- w8 blue
+  - w8 -- ae8 blue
+  - ae8 -- ae17 blue
+  - x1 -- x7 purple
+  - x7 -- ag7 purple
+  - ag7 -- ag17 purple
+  - y1 -- y6 brown
+  - y6 -- ah6 brown
+  - ah6 -- ah17 brown
+  - z1 -- z5 white
+  - z5 -- ai5 white
+  - ai5 -- ai17 white
+  - aa1 -- aa4 blue
+  - aa4 -- as4 blue
+  - as4 -- as17 blue
+  - ab1 -- ab3 orange
+  - ab3 -- au3 orange
+  - au3 -- au17 orange
+  - v33 -- v20 orange
+  - w20 -- w24 yellow
+  - w24 -- ai24 yellow
+  - ai24 -- ai20 yellow
+  - ak20 -- ak21 green
+  - ak21 -- al21 green
+  - al21 -- al16 green
+  - al16 -- at16 green
+  - at16 -- at17 green
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/04-state-machine-3.svg)
@@ -1516,103 +1530,116 @@ board:
   material: FR-4
   slots: on
 points:
-  NC_U16_11: q10
-  NC_U16_12: p10
-  NC_U16_15: m10
-  U17_6_10: f13
-  NC_U17_11: h10
+  NC_U16_11: f8
+  NC_U16_12: g8
+  NC_U16_15: j8
+  U17_6_10: s8
+  NC_U17_11: q11
 parts:
   PS:
     type: device
-    at: s-1
+    at: v21
     label: 電源 5V
     pins: [+5V, GND]
   LINKT:
     type: device
-    at: j-1
+    at: m21
     label: 他ユニット
-    pins: [OUT, S3, CLRN, CLK, EN]
+    pins: [EN, CLK, CLRN, S3, OUT]
   LINKB:
     type: device
-    at: h21
+    at: j-1
     label: 他ユニット
-    pins: [W, E880, QB, QA, LOADN]
-  U17: dip14 k10 r180 74HC08
-  U16: dip16 l10 74HC163
-  C1: capacitor/ceramic j6 j8 100n
-  C2: capacitor/ceramic k5 i5 100n
+    pins: [LOADN, QB, QA, E880, W]
+  U16: dip16 k8 r180 74HC163
+  U17: dip14 n11 74HC08
+  C1: capacitor/ceramic i12 h12 100n
+  C2: capacitor/ceramic n12 o12 100n
 wires:
-  - PS.+5V -- s1 red
-  - PS.GND -- t1 black
-  - LINKT.OUT -- j1 blue
-  - LINKT.S3 -- k1 orange
-  - LINKT.CLRN -- l1 blue
-  - LINKT.CLK -- m1 yellow
-  - LINKT.EN -- n1 purple
-  - LINKB.W -- h18 pink
-  - LINKB.E880 -- i18 brown
-  - LINKB.QB -- j18 white
-  - LINKB.QA -- k18 orange
-  - LINKB.LOADN -- l18 green
-  - p7 -- o7 black
-  - p7 -- q7 black
-  - i5 -- i8 black
-  - i5 -- g5 black
-  - g5 -- g3 black
-  - g5 -- d5 black
-  - o3 -- o7 black
-  - o3 -- g3 black
-  - o3 -- s3 black
-  - i8 -- j8 black
-  - i8 -- i10 black
-  - i10 -- j10 black
-  - d13 -- e13 black
-  - d13 -- d5 black
-  - t3 -- t1 black
-  - t3 -- s3 black
-  - s3 -- s7 black
-  - s2 -- s1 red
-  - s2 -- q2 red
-  - q2 -- q5 red
-  - k6 -- k5 red
-  - k6 -- k10 red
-  - k6 -- j6 red
-  - k10 -- l10 red
-  - q5 -- n5 red
-  - k5 -- n5 red
-  - n5 -- n7 red
-  - g18 -- g13 pink
-  - g18 -- h18 pink
-  - j18 -- j13 white
-  - j13 -- j12 white
-  - j12 -- o12 white
-  - o12 -- o10 white
-  - l18 -- s18 green
-  - s18 -- s10 green
-  - l7 -- l1 blue
-  - k18 -- k13 orange
-  - k13 -- n13 orange
-  - n13 -- n10 orange
-  - c14 -- c9 green
-  - c14 -- f14 green
-  - f14 -- f13 green
-  - g10 -- g9 green
-  - c9 -- g9 green
-  - m7 -- m1 yellow
-  - i18 -- i17 brown
-  - h17 -- i17 brown
-  - h17 -- h13 brown
-  - r10 -- r7 purple
-  - r7 -- r1 purple
-  - n1 -- r1 purple
-  - i13 -- i11 orange
-  - f11 -- i11 orange
-  - f11 -- f10 orange
-  - f10 -- f2 orange
-  - f2 -- k2 orange
-  - k2 -- k1 orange
-  - e10 -- e1 blue
-  - e1 -- j1 blue
+  - PS.+5V -- v18 red
+  - v18 -- v14 red
+  - v14 -- n14 red
+  - n14 -- l14 red
+  - l14 -- i14 red
+  - n14 -- n12 red
+  - n12 -- n11 red
+  - i14 -- i12 red
+  - i12 -- i11 red
+  - l14 -- l8 red
+  - l8 -- k8 red
+  - PS.GND -- w18 black
+  - w18 -- w3 black
+  - w3 -- t3 black
+  - t3 -- c3 black
+  - t3 -- t8 black
+  - c3 -- c11 black
+  - c11 -- d11 black
+  - f11 -- f12 black
+  - g11 -- g12 black
+  - h11 -- h12 black
+  - f12 -- g12 black
+  - g12 -- h12 black
+  - f12 -- d12 black
+  - d12 -- d11 black
+  - o11 -- o12 black
+  - p11 -- p12 black
+  - o12 -- p12 black
+  - p12 -- u12 black
+  - u12 -- u8 black
+  - u8 -- t8 black
+  - e11 -- e8 purple
+  - p8 -- p9 green
+  - p9 -- s9 green
+  - s9 -- s11 green
+  - s8 -- s7 gray
+  - s7 -- v7 gray
+  - v7 -- v13 gray
+  - v13 -- r13 gray
+  - r13 -- r11 gray
+  - LINKT.EN -- m18 purple
+  - m18 -- m17 purple
+  - m17 -- e17 purple
+  - e17 -- e11 purple
+  - LINKT.CLK -- n18 yellow
+  - n18 -- n16 yellow
+  - n16 -- j16 yellow
+  - j16 -- j11 yellow
+  - LINKT.CLRN -- o18 blue
+  - o18 -- o15 blue
+  - o15 -- k15 blue
+  - k15 -- k11 blue
+  - LINKT.S3 -- p18 green
+  - p18 -- p16 green
+  - p16 -- s16 green
+  - s16 -- s11 green
+  - LINKT.OUT -- q18 orange
+  - q18 -- q17 orange
+  - q17 -- t17 orange
+  - t17 -- t11 orange
+  - LINKB.LOADN -- j1 green
+  - j1 -- j5 green
+  - j5 -- d5 green
+  - d5 -- d8 green
+  - LINKB.QB -- k1 white
+  - k1 -- k6 white
+  - h8 -- h6 white
+  - h6 -- k6 white
+  - k6 -- o6 white
+  - o6 -- o8 white
+  - LINKB.QA -- l1 orange
+  - l1 -- l7 orange
+  - i8 -- i7 orange
+  - i7 -- l7 orange
+  - l7 -- n7 orange
+  - n7 -- n8 orange
+  - LINKB.E880 -- m1 brown
+  - m1 -- m5 brown
+  - m5 -- q5 brown
+  - q5 -- q8 brown
+  - LINKB.W -- n1 pink
+  - n1 -- n4 pink
+  - n4 -- r4 pink
+  - r4 -- r8 pink
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/04-state-machine-4.svg)

@@ -86,7 +86,7 @@ parts:
     label: Analog Discovery
     pins: [GND, 2-, 1-, W1, 2+, 1+]
 wires:
-  - AD.W1 -- a15 yellow
+  - AD.W1 -- a15 yellow [h13, v106]
   - AD.GND -- -t5 black
   - a18 -- -t18 black
   - AD.1+ -- a21 orange
@@ -95,7 +95,7 @@ wires:
   - AD.1- -- a12 white
   - e12 -- f12 white
   - j12 -- j15 white
-  - AD.2+ -- b15 blue
+  - AD.2+ -- b15 blue [h-7, v126]
   - AD.2- -- -t9 black
 ```
 

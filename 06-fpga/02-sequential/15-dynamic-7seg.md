@@ -188,73 +188,73 @@ title: 図2 1 枚のブレッドボードに組む。電源は USB から Pico 2
 board: full
 parts:
   U1: pico2 @ g2
-  R2: resistor e27 f27 220 cap=left
-  Q3: transistor f28(B) e29(C) f30(E) 2SC1815 cap=above:-2.5,1.1
-  Q2: transistor f31(B) e32(C) f33(E) 2SC1815 cap=above:2.6,1.1
+  R2: resistor e28 f28 220 cap=left
+  Q3: transistor f29(B) e30(C) f30(E) 2SC1815
+  R11: resistor j29 j27 1k
+  Q2: transistor f31(E) e32(C) f32(B) 2SC1815
+  R10: resistor g32 g33 1k shift=up
   R6: resistor e34 f34 220 cap=left
   R1: resistor e35 f35 220 cap=right
-  Q1: transistor f36(E) e37(C) f38(B) 2SC1815 cap=above:2.6,1.1
-  R11: resistor h28 h29 1k
-  R10: resistor h31 h32 1k
-  R9: resistor h38 h37 1k
-  R7: resistor e39 f39 220 cap=below:0,4
-  R3: resistor e40 f40 220 cap=below:1.5,5
-  R8: resistor e41 f41 220 cap=below:2,4
-  R4: resistor e42 f42 220 cap=below:3.5,5
-  R5: resistor e43 f43 220 cap=below:4,4
-  DS1: seg7x4 @ b51
-  Q4: transistor h60(B) h61(C) h62(E) 2SC1815 cap=left
-  R12: resistor g60 g57 1k
+  Q1: transistor f36(E) e37(C) f37(B) 2SC1815
+  R9: resistor h37 h38 1k
+  R7: resistor e39 f39 220 cap=above:-1.2,0
+  R3: resistor e40 f40 220 cap=above:-1.2,-1
+  R8: resistor e41 f41 220 cap=above:1.2,0
+  R4: resistor e42 f42 220 cap=above:1.2,-1
+  R5: resistor e43 f43 220 cap=right
+  DS1: seg7x4 @ b52
+  Q4: transistor h58(E) h59(C) h60(B) 2SC1815
+  R12: resistor g60 g63 1k
   AD:
     type: device
     at: bottom
     label: AD3
-    pins: [DIO4, DIO2, DIO1, DIO5, DIO0, GND, DIO3]
+    pins: [DIO4, DIO5, DIO2, DIO1, DIO0, GND, DIO3]
 wires:
-  - a19 -- -t19 black
-  - -t1 -- -b1 black
   - a20 -- a22 yellow
-  - a18 -- a23 orange [v-8]
-  - a17 -- a24 brown [v-13]
-  - a16 -- a25 orange [v-18]
-  - a15 -- a26 brown [v-23]
+  - a19 -- a23 black [v-8]
+  - a18 -- a24 orange [v-13]
+  - a17 -- a25 brown [v-18]
+  - a16 -- a26 orange [v-23]
+  - a15 -- a27 brown [v-28]
+  - e23 -- f23 black
   - b22 -- b43 yellow [v-10, h420]
-  - c23 -- c42 orange [v-10, h380]
-  - b24 -- b41 brown [h340]
-  - c25 -- c40 orange [h300]
-  - d26 -- d39 brown [h260]
-  - a27 -- a56 yellow [v-28]
-  - a29 -- a55 white [v-23]
-  - a32 -- a54 white [v-18]
-  - a34 -- a53 gray [v-13]
-  - a35 -- a52 yellow [v-8]
-  - a37 -- a51 white
-  - j13 -- j35 yellow [v24, h440]
-  - j15 -- j34 gray [v12, h380]
-  - h16 -- h27 yellow [v10, h220]
-  - j17 -- j29 blue
-  - i18 -- i57 blue [v10, h780]
-  - i20 -- i25 blue
-  - g25 -- g32 blue
-  - h21 -- h23 blue
-  - f23 -- g37 blue [v10, h280]
-  - j30 -- j33 black
-  - h33 -- h36 black
+  - c24 -- c42 orange [v-10, h360]
+  - b25 -- b41 brown [h320]
+  - c26 -- c40 orange [h280]
+  - d27 -- d39 brown [h240]
+  - a28 -- a57 yellow [v-28]
+  - a30 -- a56 white [v-23]
+  - a32 -- a55 white [v-18]
+  - a34 -- a54 gray [v-13]
+  - a35 -- a53 yellow [v-8]
+  - a37 -- a52 white
+  - h13 -- h35 yellow [v10, h440]
+  - h15 -- h34 gray
+  - i16 -- i28 yellow [v10, h240]
+  - i17 -- i27 blue
+  - j18 -- i63 blue [v24, h230, v-34, h670]
+  - j20 -- i33 blue [v12, h170, v-32, h90]
+  - j21 -- j22 blue
+  - g22 -- g38 blue [v10, h320]
+  - g23 -- g31 black
+  - h30 -- h31 black
+  - j31 -- -b31 black
   - j36 -- -b36 black
-  - g43 -- g51 orange
-  - h42 -- h52 brown
-  - i41 -- i53 orange
-  - g40 -- g54 yellow [v10, h280]
-  - h39 -- h55 gray [v10, h320]
-  - j61 -- j56 white [v24, h-100]
-  - j62 -- -b62 black
-  - AD.DIO4 -- i13 orange [v-40, h-336, v-86]
-  - AD.DIO5 -- i34 gray
-  - AD.DIO2 -- i29 green
-  - AD.DIO1 -- i32 green
-  - AD.DIO0 -- j37 green
-  - AD.GND -- -b49 black
-  - AD.DIO3 -- j57 green
+  - g43 -- g52 orange
+  - g42 -- g53 brown [v10, h220]
+  - h41 -- h54 orange
+  - h40 -- h55 yellow [v10, h300]
+  - i39 -- h56 gray [h340]
+  - i59 -- i57 white
+  - j58 -- -b58 black
+  - AD.DIO4 -- j13 orange
+  - AD.DIO5 -- j15 gray
+  - AD.DIO2 -- j17 green
+  - AD.DIO1 -- j33 green
+  - AD.DIO0 -- j38 green
+  - AD.GND -- -b45 black
+  - AD.DIO3 -- j63 green
 notes:
   - text: 給電は Pico 2 の USB (5 V)。ピンは 3.3 V。電源レールは GND (−) だけ使う
 ```

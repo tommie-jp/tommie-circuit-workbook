@@ -93,7 +93,7 @@ parts:
     type: device
     at: bottom
     label: AD3 Scope + BNC アダプタ (CH2 は AC 結合)
-    pins: [1+, 2+, 1-, 2-]
+    pins: [1+, 1-, 2-, 2+]
   U1: dip8 @ e10 NE555
   Ra: resistor a11 +t11 1k
   Rb: resistor b11 b17 4.7k

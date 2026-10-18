@@ -118,7 +118,7 @@ wires:
   - SV.SIG -- j23 yellow [v-26, h-40]
   - PS.+ -- SV.VCC red
   - PS.- -- SV.GND black
-  - PS.- -- -b4 black
+  - PS.- -- -b4 black [h-17, v-72]
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/breadboard/04-pwm-led-servo.svg)

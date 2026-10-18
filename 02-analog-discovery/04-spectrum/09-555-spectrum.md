@@ -71,7 +71,7 @@ title: 図2 ブレッドボードで 555 を組む
 board: half
 parts:
   U1: dip8 @ e10 NE555
-  Ra: resistor b7 b11 1k
+  Ra: resistor b7 b11 1k cap=below:-2,0
   Rb: resistor a11 a12 10k
   Ct: capacitor i9 i6 68n
   Ccv: capacitor d13 d17 10n
@@ -86,8 +86,8 @@ wires:
   - +t1 -- +b1 red
   - -t2 -- -b2 black
   - a10 -- +t10 red
-  - d12 -- d9 purple
-  - c9 -- g9 purple
+  - c12 -- c9 purple
+  - d9 -- g9 purple
   - h9 -- h11 purple
   - j6 -- -b6 black
   - +t7 -- a7 red

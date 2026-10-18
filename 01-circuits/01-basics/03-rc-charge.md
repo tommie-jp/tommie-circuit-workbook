@@ -169,7 +169,7 @@ parts:
     pins: [GND, 1+, W1, 1-, 2+, 2-]
 wires:
   - AD.W1 -- c10 yellow
-  - AD.GND -- -t8 black
+  - AD.GND -- -t5 black
   - a18 -- -t18 black
   - AD.1+ -- e10 orange
   - AD.1- -- -t11 black

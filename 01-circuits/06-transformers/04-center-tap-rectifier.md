@@ -93,7 +93,7 @@ parts:
     type: device
     at: top
     label: AC アダプタ 1 (AC 6V)
-    pins: [OUT1, OUT2]
+    pins: [OUT2, OUT1]
   V2:
     type: device
     at: top
@@ -112,7 +112,7 @@ wires:
   - V1.OUT1 -- a8 yellow
   - V2.OUT2 -- a14 yellow
   - V1.OUT2 -- -t1 black
-  - V2.OUT1 -- -t2 black
+  - V2.OUT1 -- -t12 black
   - c12 -- c20 orange
   - a24 -- -t24 black
   - SC.1+ -- c8 blue

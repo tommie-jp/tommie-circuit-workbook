@@ -82,7 +82,7 @@ parts:
   Cin: capacitor/electrolytic c12(+) c9 10u
   R1: resistor a12 +t12 47k
   R2: resistor j12 -b12 47k
-  Q1: transistor e14(B) e15(C) e16(E) 2SC1815
+  Q1: transistor e14(B) e15(C) e16(E) 2SC1815 cap=below
   RE: resistor a17 -t17 1k
   Cout: capacitor/electrolytic c16(+) c20 100u
   S1: switch c21 c23
@@ -95,7 +95,7 @@ parts:
 wires:
   - AD.GND -- -t2 black
   - AD.W1 -- a3 yellow
-  - AD.1+ -- b3 yellow [h10]
+  - AD.1+ -- b3 yellow [v29, h-61]
   - AD.1- -- -t1 black
   - b8 -- b9 green
   - e12 -- f12 green

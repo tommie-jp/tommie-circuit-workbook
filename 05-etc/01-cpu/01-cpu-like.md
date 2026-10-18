@@ -372,28 +372,28 @@ sheets:
       - j22 -- -b22 black
       - j25 -- -b25 black
       - j28 -- -b28 black
-      - AD.W1 -- a9 yellow
-      - AD.DIO4 -- b9 orange
+      - AD.W1 -- a9 yellow [v40, h81, v66]
+      - AD.DIO4 -- b9 orange [v32, h62, v94]
       - c9 -- g9 yellow
       - h9 -- h11 yellow
       - b12 -- b27 green [v-10, h300]
       - b13 -- b24 green
       - c14 -- c21 green
       - d15 -- d18 green
-      - AD.DIO0 -- a12 orange
-      - AD.DIO1 -- a13 orange
-      - AD.DIO2 -- a14 orange
-      - AD.DIO3 -- a15 orange
-      - UP.A0 -- a27 blue
-      - UP.A1 -- a24 blue
-      - UP.A2 -- a21 blue
-      - UP.A3 -- a18 blue
-      - UP.ENT -- a16 purple
-      - UP.LDn -- a17 purple
-      - DN.CLR -- i10 white
-      - DN.P0 -- i12 white
-      - DN.P1 -- i13 white
-      - DN.P2 -- i14 white
+      - AD.DIO0 -- a12 orange [v24, h63, v82]
+      - AD.DIO1 -- a13 orange [v16, h45, v90]
+      - AD.DIO2 -- a14 orange [v8, h26, v98]
+      - AD.DIO3 -- a15 orange [v8, h7, v98]
+      - UP.A0 -- a27 blue [v8, h19, v98]
+      - UP.A1 -- a24 blue [h-2, v106]
+      - UP.A2 -- a21 blue [v8, h-23, v98]
+      - UP.A3 -- a18 blue [v16, h-45, v90]
+      - UP.ENT -- a16 purple [h-7, v106]
+      - UP.LDn -- a17 purple [v8, h-26, v98]
+      - DN.CLR -- i10 white [v-8, h5, v-118]
+      - DN.P0 -- i12 white [v-8, h5, v-118]
+      - DN.P1 -- i13 white [v-8, h5, v-118]
+      - DN.P2 -- i14 white [v-8, h-15, v-118]
   - name: 基板2
     board: full
     parts:
@@ -401,7 +401,7 @@ sheets:
         type: device
         at: top
         label: 基板 1 から
-        pins: [A0, A1, A2, A3, P2, LDn, ENT, CLR, P1, P0, +5V, GND]
+        pins: [A0, A1, A2, A3, P2, LDn, ENT, CLR, P1, P0, GND, +5V]
       U2: dip24 @ e3 74HC154
       D6: diode b19(A) b25(K)
       D5: diode d22(A) d25(K)
@@ -421,12 +421,12 @@ sheets:
       - a8 -- -t8 black
       - a9 -- -t9 black
       - j14 -- -b14 black
-      - UQ.A0 -- a4 blue
-      - UQ.A1 -- a5 blue
-      - UQ.A2 -- a6 blue
-      - UQ.A3 -- a7 blue
-      - UQ.P2 -- a19 white
-      - UQ.LDn -- a22 purple
+      - UQ.A0 -- a4 blue [v6, h-245, v100]
+      - UQ.A1 -- a5 blue [v14, h-265, v92]
+      - UQ.A2 -- a6 blue [v22, h-285, v84]
+      - UQ.A3 -- a7 blue [v30, h-305, v76]
+      - UQ.P2 -- a19 white [v38, h-85, v68]
+      - UQ.LDn -- a22 purple [v46, h-65, v60]
       - UQ.ENT -- a28 purple
       - UQ.CLR -- a31 white
       - UQ.P1 -- a37 white
@@ -805,28 +805,28 @@ sheets:
       - j22 -- -b22 black
       - j25 -- -b25 black
       - j28 -- -b28 black
-      - AD.W1 -- a9 yellow
-      - AD.DIO4 -- b9 orange
+      - AD.W1 -- a9 yellow [v40, h81, v66]
+      - AD.DIO4 -- b9 orange [v32, h62, v94]
       - c9 -- g9 yellow
       - h9 -- h11 yellow
       - b12 -- b27 green [v-10, h300]
       - b13 -- b24 green
       - c14 -- c21 green
       - d15 -- d18 green
-      - AD.DIO0 -- a12 orange
-      - AD.DIO1 -- a13 orange
-      - AD.DIO2 -- a14 orange
-      - AD.DIO3 -- a15 orange
-      - UP.A0 -- a27 blue
-      - UP.A1 -- a24 blue
-      - UP.A2 -- a21 blue
-      - UP.A3 -- a18 blue
-      - UP.ENT -- a16 purple
-      - UP.LDn -- a17 purple
-      - DN.CLR -- i10 white
-      - DN.P0 -- i12 white
-      - DN.P1 -- i13 white
-      - DN.P2 -- i14 white
+      - AD.DIO0 -- a12 orange [v24, h63, v82]
+      - AD.DIO1 -- a13 orange [v16, h45, v90]
+      - AD.DIO2 -- a14 orange [v8, h26, v98]
+      - AD.DIO3 -- a15 orange [v8, h7, v98]
+      - UP.A0 -- a27 blue [v8, h19, v98]
+      - UP.A1 -- a24 blue [h-2, v106]
+      - UP.A2 -- a21 blue [v8, h-23, v98]
+      - UP.A3 -- a18 blue [v16, h-45, v90]
+      - UP.ENT -- a16 purple [h-7, v106]
+      - UP.LDn -- a17 purple [v8, h-26, v98]
+      - DN.CLR -- i10 white [v-8, h5, v-118]
+      - DN.P0 -- i12 white [v-8, h5, v-118]
+      - DN.P1 -- i13 white [v-8, h5, v-118]
+      - DN.P2 -- i14 white [v-8, h-15, v-118]
   - name: 基板2
     board: full
     parts:
@@ -834,7 +834,7 @@ sheets:
         type: device
         at: top
         label: 基板 1 から
-        pins: [A0, A1, A2, A3, ENT, CLR, LDn, P0, P1, P2, +5V, GND]
+        pins: [A0, A1, A2, A3, ENT, CLR, LDn, P0, P1, P2, GND, +5V]
       U2: dip24 @ e3 74HC154
       SW1: dip8 @ e21 l=DIP1
       SW2: dip8 @ e25 l=DIP2
@@ -848,16 +848,16 @@ sheets:
       - a8 -- -t8 black
       - a9 -- -t9 black
       - j14 -- -b14 black
-      - UQ.A0 -- a4 blue
-      - UQ.A1 -- a5 blue
-      - UQ.A2 -- a6 blue
-      - UQ.A3 -- a7 blue
-      - UQ.ENT -- a21 purple
-      - UQ.CLR -- a22 white
-      - UQ.LDn -- a23 purple
-      - UQ.P0 -- a24 white
-      - UQ.P1 -- a25 white
-      - UQ.P2 -- a26 white
+      - UQ.A0 -- a4 blue [v8, h-183, v98]
+      - UQ.A1 -- a5 blue [v16, h-203, v90]
+      - UQ.A2 -- a6 blue [v24, h-223, v82]
+      - UQ.A3 -- a7 blue [v32, h-243, v74]
+      - UQ.ENT -- a21 purple [h-3, v106]
+      - UQ.CLR -- a22 white [h-3, v106]
+      - UQ.LDn -- a23 purple [v8, h-23, v98]
+      - UQ.P0 -- a24 white [v16, h-43, v90]
+      - UQ.P1 -- a25 white [v24, h-63, v82]
+      - UQ.P2 -- a26 white [v32, h-83, v74]
       - a20 -- +t20 red
       - i8 -- i21 orange
       - g21 -- g22 orange
@@ -1250,7 +1250,7 @@ sheets:
         type: device
         at: top
         label: 基板 1 から・基板 3 へ (上)
-        pins: [DQ7, DQ6, DQ5, P2, DQ4, P1, DQ3, P0]
+        pins: [DQ6, DQ7, DQ5, P2, P1, DQ4, P0, DQ3]
       TSD:
         type: device
         at: top
@@ -1260,7 +1260,7 @@ sheets:
         type: device
         at: bottom
         label: 基板 1 から・基板 3 へ (下)
-        pins: [Yn, A3, A2, A1, A0, ENT, DQ0, DQ1, LDn, DQ2]
+        pins: [Yn, A3, A2, A1, A0, DQ0, ENT, DQ1, LDn, DQ2]
       U3: dip28/wide @ d15 AS6C62256-55PCN
       S3: slide-switch h6 h7 h8
       R27: resistor j6 +b6 10k
@@ -1293,14 +1293,14 @@ sheets:
       - b21 -- b6 green
       - c6 -- g6 green
       - c16 -- c10 green
-      - T13.DQ7 -- c24 orange
-      - T13.DQ6 -- c25 orange
-      - T13.DQ5 -- c26 orange
-      - T13.P2 -- a26 white
-      - T13.DQ4 -- c27 orange
-      - T13.P1 -- a27 white
-      - T13.DQ3 -- c28 orange
-      - T13.P0 -- a28 white
+      - T13.DQ7 -- a24 orange [v40, h157, v66]
+      - T13.DQ6 -- c25 orange [v46, h177, v100]
+      - T13.DQ5 -- b26 orange [v34, h137, v92]
+      - T13.P2 -- a26 white [v28, h117, v78]
+      - T13.DQ4 -- b27 orange [v16, h77, v110]
+      - T13.P1 -- a27 white [v22, h97, v84]
+      - T13.DQ3 -- c28 orange [v4, h37, v142]
+      - T13.P0 -- a28 white [v10, h57, v96]
       - j15 -- -b15 black
       - j16 -- -b16 black
       - j17 -- -b17 black
@@ -1309,15 +1309,15 @@ sheets:
       - j20 -- -b20 black
       - j28 -- -b28 black
       - B13.Yn -- i8 blue
-      - B13.A3 -- j21 purple
-      - B13.A2 -- j22 purple
-      - B13.A1 -- j23 purple
-      - B13.A0 -- j24 purple
-      - B13.ENT -- j25 purple
-      - B13.DQ0 -- i25 orange
-      - B13.DQ1 -- j26 orange
-      - B13.LDn -- j27 purple
-      - B13.DQ2 -- i27 orange
+      - B13.A3 -- j21 purple [v-38, h94, v-64]
+      - B13.A2 -- j22 purple [v-31, h74, v-71]
+      - B13.A1 -- j23 purple [v-24, h54, v-78]
+      - B13.A0 -- j24 purple [v-17, h34, v-85]
+      - B13.ENT -- j25 purple [v-10, h-6, v-92]
+      - B13.DQ0 -- i25 orange [v-10, h14, v-116]
+      - B13.DQ1 -- j26 orange [v-24, h-26, v-78]
+      - B13.LDn -- j27 purple [v-31, h-46, v-71]
+      - B13.DQ2 -- i27 orange [v-38, h-66, v-88]
       - a33 -- +t33 red
       - TSD.SD0 -- a34 yellow
       - TSD.SD1 -- a35 yellow
@@ -1341,17 +1341,17 @@ sheets:
       PW:
         type: device
         at: top
-        label: 基板 2 から (電源・CLR)
+        label: 基板 2 から
         pins: [+5V, GND, CLR]
       TA:
         type: device
         at: top
-        label: 基板 2 から (Yn・DQ0〜DQ3)
+        label: 基板 2 から (Yn・DQ0〜3)
         pins: [Yn, DQ0, DQ1, DQ2, DQ3]
       TB:
         type: device
         at: top
-        label: 基板 2 から (DQ4〜DQ7)
+        label: 基板 2 から (DQ4〜7)
         pins: [DQ4, DQ5, DQ6, DQ7]
       BB:
         type: device
@@ -1370,15 +1370,15 @@ sheets:
       - a8 -- +t8 red
       - j8 -- +b8 red
       - j17 -- -b17 black
-      - TA.Yn -- a9 blue
-      - TA.DQ0 -- a10 orange
-      - TA.DQ1 -- a11 orange
-      - TA.DQ2 -- a12 orange
-      - TA.DQ3 -- a13 orange
-      - TB.DQ4 -- a14 orange
-      - TB.DQ5 -- a15 orange
-      - TB.DQ6 -- a16 orange
-      - TB.DQ7 -- a17 orange
+      - TA.Yn -- a9 blue [v4, h7, v102]
+      - TA.DQ0 -- a10 orange [v4, h7, v102]
+      - TA.DQ1 -- a11 orange [v4, h-13, v102]
+      - TA.DQ2 -- a12 orange [v4, h-33, v102]
+      - TA.DQ3 -- a13 orange [v11, h-53, v95]
+      - TB.DQ4 -- a14 orange [v18, h-90, v88]
+      - TB.DQ5 -- a15 orange [v25, h-112, v81]
+      - TB.DQ6 -- a16 orange [v32, h-134, v74]
+      - TB.DQ7 -- a17 orange [v39, h-156, v67]
       - a18 -- +t18 red
       - d11 -- d3 orange
       - BB.SD0 -- j9 yellow
@@ -1400,7 +1400,8 @@ sheets:
 - **番地**: 基板 1 の A0〜A3 を、下の箱から下の行の 24〜21 列 (`j24`〜`j21`、PIN 10〜7) へ入れる (紫)
 - **DQ**: 下の行の DQ0〜DQ2 (25〜27 列) と、上の行の DQ3〜DQ7 (28〜24 列) を、基板 3 の U4 の B 側へ渡す (橙)。
   下の行の穴は各列に `i` と `j` の 2 つだけなので、基板 1 の線 (ENT は 25 列、LDn は 27 列、紫) と DQ の線 (橙) を 1 つずつ入れる。
-  上の行の DQ3〜DQ5 (28・27・26 列) には、基板 1 の P0・P1・P2 (白) を `a` 行に、DQ の線 (橙) を `c` 行に入れる。
+  上の行の DQ3〜DQ5 (28・27・26 列) には、基板 1 の P0・P1・P2 (白) を `a` 行に、DQ の線 (橙) を `c28`・`b27`・`b26` に入れる。
+  DQ6・DQ7 (25・24 列) の線は `c25`・`a24` に入れる (箱の線が交わらない穴を選んだ)。
   10 kΩ のプルアップ (図9 の R11〜R18) は、基板 3 の U4 の B 側に付けた
 - **OE と WE**: OE (PIN 22、21 列) の `b21` から緑の線を 6 列へ引き (`b6`)、`c6` から溝をまたぐ縦の線で 6 列の下 (`g6`) へ渡す。
   WE (PIN 27、16 列) の `c16` から緑の線を S2 の上のピンの列 (10 列) へ引く
@@ -1444,7 +1445,7 @@ sheets:
 | 名前 | 基板 2 の穴 | 基板 3 の穴 |
 | --- | --- | --- |
 | DQ0・DQ1・DQ2 | `i25`・`j26`・`i27` (U3 の PIN 11・12・13 の列) | `a10`・`a11`・`a12` (U4 の B1・B2・B3) |
-| DQ3〜DQ7 | `c28`・`c27`・`c26`・`c25`・`c24` (U3 の PIN 15〜19 の列) | `a13`〜`a17` (U4 の B4〜B8) |
+| DQ3〜DQ7 | `c28`・`b27`・`b26`・`c25`・`a24` (U3 の PIN 15〜19 の列) | `a13`〜`a17` (U4 の B4〜B8) |
 | SD0〜SD7 | `a34`〜`a41` (SW の上の組、RN1) | `j9`〜`j16` (U4 の A1〜A8) |
 | Yn | `i8` (S2 の下のピンと S3 の 3 番の列) | `a9` (U4 の OE) |
 | CLR | `b54` (S1 の上のピンの列) | `b7` (D7 のアノードの列) |

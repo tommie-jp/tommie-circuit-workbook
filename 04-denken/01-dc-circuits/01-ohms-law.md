@@ -66,9 +66,10 @@ parts:
     type: device
     at: top
     label: Analog Discovery
-    pins: [GND, V+, "1+", "1-"]
+    pins: [V+, GND, "1+", "1-"]
 wires:
-  - AD.V+ -- a3 red
+  - AD.V+ -- +t1 red
+  - +t3 -- a3 red
   - AM.+ -- e3 orange
   - AM.- -- e5 orange
   - a10 -- -t10 black

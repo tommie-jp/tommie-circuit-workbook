@@ -293,7 +293,7 @@ parts:
     type: device
     at: bottom
     label: Analog Discovery 3
-    pins: [W2, V+, GND, 2+, W1, 1+, 1-, 2-]
+    pins: [W2, V+, GND, W1, 2+, 1+, 1-, 2-]
 wires:
   - AD.V+ -- +b8 red
   - AD.GND -- -b10 black

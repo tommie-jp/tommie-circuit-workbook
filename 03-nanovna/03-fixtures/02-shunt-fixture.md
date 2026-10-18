@@ -64,14 +64,14 @@ wires:
   - b9 -- GND black
   - y9 -- o9 black
   - o9 -- o7 black
-  - o7 -- GND black
+  - o7 -- h7 black
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/03-fixtures/perfboard/02-shunt-fixture.svg)
 
-- i 行を CH0 から CH1 まで一直線に通す。R1 は i8 から下 (l8) へ枝分かれし、
-  GND のまとめ (l2) へつながる
-- **中心導体の枝分かれの根元 (i8) から部品までを短く**する。3-1 と同じ理由で、
+- 10 行を J1 (CH0) から J2 (CH1) まで一直線に通す。R1 は h10 から下 (h7) へ枝分かれし、
+  7 行の GND のまとめ (b7〜o7) へつながる
+- **中心導体の枝分かれの根元 (h10) から部品までを短く**する。3-1 と同じ理由で、
   長い枝はインダクタンスになり高い周波数でずれる (3-6)
 
 ## 掃引の設定

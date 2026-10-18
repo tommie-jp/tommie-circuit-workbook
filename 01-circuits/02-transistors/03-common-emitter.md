@@ -95,10 +95,10 @@ parts:
   R1: resistor b3 b9 20k
   R2: resistor c9 c13 10k
   RC: resistor b15 b20 2.2k
-  Q1: transistor e19(B) e20(C) e21(E) 2SC1815
+  Q1: transistor e19(B) e20(C) e21(E) 2SC1815 cap=below
   CIN: capacitor d5(-) d9(+) 1uF
-  RE: resistor a21 -t21 1k
-  CE: capacitor/electrolytic b21(+) b26(-) 100uF
+  RE: resistor a21 -t21 1k cap=left
+  CE: capacitor/electrolytic b21(+) b26(-) 100uF cap=above
   COUT: capacitor d20(+) d27(-) 1uF
   AD:
     type: device
@@ -179,10 +179,10 @@ parts:
   R1: resistor b3 b9 20k
   R2: resistor c9 c13 10k
   RC: resistor b15 b20 2.2k
-  Q1: transistor e19(B) e20(C) e21(E) 2SC1815
+  Q1: transistor e19(B) e20(C) e21(E) 2SC1815 cap=below
   CIN: capacitor d5(-) d9(+) 1uF
-  RE: resistor a21 -t21 1k
-  CE: capacitor/electrolytic b21(+) b26(-) 100uF
+  RE: resistor a21 -t21 1k cap=left
+  CE: capacitor/electrolytic b21(+) b26(-) 100uF cap=above
   COUT: capacitor d20(+) d27(-) 1uF
   AD:
     type: device

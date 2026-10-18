@@ -371,10 +371,10 @@ board: full
 parts:
   U1: tang-nano-9k @ b1
   SW1: button @ e28
-  R4: resistor e34 f34 330 cap=above
-  R3: resistor e35 f35 330 cap=below:0,0.6
-  R2: resistor e36 f36 330 cap=above:0,-1
-  R1: resistor e37 f37 330 cap=below:0,1.8
+  R4: resistor e34 f34 330 cap=left
+  R3: resistor e35 f35 330 cap=above:0,-1
+  R2: resistor e36 f36 330 cap=above:0,-2
+  R1: resistor e37 f37 330 cap=right
   DS1: seg7 @ b46
   R5: resistor e52 f52 330 cap=right
   R6: resistor e54 f54 330 cap=right
@@ -383,7 +383,7 @@ parts:
     type: device
     at: bottom
     label: AD3 Logic
-    pins: [DIO0, DIO4, DIO3, DIO2, DIO1, DIO7, DIO6, DIO5, GND]
+    pins: [DIO4, DIO3, DIO2, DIO1, DIO0, DIO7, DIO6, DIO5, GND]
 wires:
   - a23 -- -t23 black
   - a28 -- -t28 black
@@ -404,11 +404,11 @@ wires:
   - g52 -- g46 white
   - h54 -- h47 white
   - i56 -- i49 white
-  - AD.DIO0 -- i30 green
-  - AD.DIO4 -- i34 green
-  - AD.DIO3 -- i35 green
-  - AD.DIO2 -- i36 green
-  - AD.DIO1 -- i37 green
+  - AD.DIO4 -- i34 green [v-28, h52, v-98, h-90]
+  - AD.DIO3 -- i35 green [v-16, h32, v-130, h-90]
+  - AD.DIO2 -- h36 green [v-20, h12, v-146, h-90]
+  - AD.DIO1 -- g37 green [v-20, h-8, v-166, h-90]
+  - AD.DIO0 -- g30 green [v-20, h12, v-223, h-260, v77, h-30]
   - AD.DIO7 -- d56 green [v-46, h246, v-216]
   - AD.DIO6 -- c54 green [v-36, h226, v-246]
   - AD.DIO5 -- b52 green [v-26, h206, v-276]
@@ -429,7 +429,9 @@ notes:
   上の列は g・f・COM2・a・b、下の列は e・d・COM1・c・dp (5161AS の並び)
 - 黒は GND だけ。FPGA の GND (26 番) は a23、押しボタンは 28 列、7 セグの COM2 は 48 列から上の − レールへ。上と下の − レールは 62 列でつなぐ。赤は使わない
 - AD3 の緑の線は、抵抗の FPGA 側の穴から取る。R5〜R7 の FPGA 側は上の列にあるので、線は 57〜59 列の右を通って溝をこえ、b〜d 行から左へ入る。
-  DIO0〜DIO4 の緑の線は、FPGA から抵抗とボタンへ行く青と紫の線と交わる (FPGA の出力を抵抗の手前で読むので、板の上では避けられない)
+  DIO1〜DIO4 の緑の線は箱から右へ寄って 38〜41 列の右を 1 本ずつ上り、下の段の行の間を左へ入る (R4 は `i34`、R3 は `i35`、R2 は `h36`、R1 は `g37`)。
+  DIO0 は 44 列の右を上って溝をこえ、d・e 行の間を左へ通り、31 列の右で下りて押しボタンの `g30` へ入る。こうすると青と紫の線の下をくぐらずに済む。
+  箱のピンの並び (DIO4・DIO3・DIO2・DIO1・DIO0・DIO7・DIO6・DIO5・GND) は線が交わらない順に並べたもので、実物のコネクタの並びではない
 - 抵抗の後ろ (7 セグ側) では読まない。そこは LED の電圧 (2 V 前後) になり、Logic の H の判定にかからないことがある
 - 信号は押したときだけ変わる低い周波数で、ブレッドボードの範囲 (3 MHz 以下) に収まる
 

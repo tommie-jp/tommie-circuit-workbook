@@ -401,7 +401,7 @@ points:
 parts:
   PREV:
     type: device
-    at: y2
+    at: z2
     label: 図4 の基板から
     pins: DET GND
   AD:
@@ -411,14 +411,14 @@ parts:
     pins: V+ GND
   SC:
     type: device
-    at: y9
+    at: z9
     label: AD CH1
     pins: 1+ 1-
   U1: dip8 i9 r90 LM358
   Rt1: resistor e12 i12 100k
   Rt2: resistor k12 q12 1k
-  Rled: resistor j15 n15 470
-  LED: led o15 s15 red
+  Rled: resistor d15 h15 470
+  LED: led i15 m15 red
 wires:
   - AD.V+ -- c4 red
   - c4 -- c9 red
@@ -430,7 +430,8 @@ wires:
   - a18 -- w18 black
   - w18 -- w15 black
   - w15 -- w12 black
-  - w12 -- w6 black
+  - w12 -- w10 black
+  - w10 -- w6 black
   - w6 -- w5 black
   - w5 -- w3 black
   - PREV.GND -- w3 black
@@ -438,24 +439,25 @@ wires:
   - j6 -- k6 black
   - k6 -- l6 black
   - q12 -- w12 black
-  - s15 -- w15 black
+  - m15 -- w15 black
   - PREV.DET -- n2 green
   - n2 -- n4 green
   - n4 -- n9 green
   - SC.1+ -- n9 blue
   - SC.1- -- w10 black
-  - w10 -- w12 black
   - n9 -- l9 green
   - i12 -- k12 orange
   - k9 -- k12 orange
-  - j9 -- j15 white
-  - n15 -- o15 white
+  - j9 -- j10 white
+  - j10 -- d10 white
+  - d10 -- d15 white
+  - h15 -- i15 white
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/perfboard/14-27mhz-rc-toy.svg)
 
 - 上の c 行の赤い筋が +5 V (AD の V+)、下の w 行の黒い筋が GND。AD の GND は上の a 行を右へ回して 18 列を降ろし、w18 へ。
-  計器の箱は 2 つで、左上が電源 (V+・GND)、下の中ほどが CH1 の 1+・1− (AD CH1。1+ は 9 列で n9、1− は w10 へ。
+  AD の箱は 2 つで、左上が電源 (V+・GND)、下の中ほどが CH1 の 1+・1− (AD CH1。1+ は 9 列で n9、1− は 10 列で w10 へ。
   1+ の線は w 行の GND の筋を 1 か所だけ渡る)。
   図4 の基板からの GND はユニバーサル基板の下から w3 へ (2 枚のユニバーサル基板の GND を 1 か所でつなぐ)
 - U1 (LM358、DIP8) は 6 列と 9 列をまたいで立て、左の列が上から PIN 1・2・3・4、
@@ -464,12 +466,13 @@ wires:
   PIN 4 と線で結んで GND へ。PIN 1 (OUT1) は何もつながない
 - **検波の出力 (緑)**: 図4 の基板から来る DET を n2 に受け、n 行を右へ走らせて n9、そこから l9
   (LM358 の **PIN 5**) へ上げる。途中で 6 列の GND の線を跨ぐ (図の半円)。
-  CH1 の 1+ (青) は 4 列から降ろして n4 に当てる (図4 の DET の島と同じ電位)。1− (黒) は 5 列を降ろし、
-  n 行の緑の線を跨いで w5 の GND の筋へ
+  CH1 の 1+ (青) は 9 列を上って n9 に当てる (図4 の DET の島と同じ電位)。1− (黒) は 10 列を上って w10 の GND の筋へ
 - **PIN 6 (k9)** に Rt1 (12 列、上端は c12 から降ろした +5 V) と Rt2 (12 列、下端は w12 の GND の筋へ)。
-  PIN 6 から橙の線を k12 へ、Rt1 の下端 i12 からも橙の線を k12 へ (j12 で白い線を跨ぐ)。
+  PIN 6 から橙の線を k12 へ、Rt1 の下端 i12 からも橙の線を k12 へ。
   ここが 49.5 mV のしきい値
-- PIN 7 (j9) から白の線を j15 へ、15 列を降ろして Rled → LED。LED のカソード (s15) は w15 で GND の筋へ
+- PIN 7 (j9) から白の線を j10 へ出し、10 列を d10 まで上って d 行を右へ d15 へ (Rt1 への +5 V の枝 (12 列) を跨ぐ)。
+  15 列を下って Rled (d15〜h15) → LED (i15〜m15)。LED のカソード (m15) は 15 列を w15 まで下って GND の筋へ。
+  白の線を j 行のまま右へ出すと、Rt1 と Rt2 をつなぐ橙の線 (12 列) と交わるので、上へ回した
 
 `copper-fence check` と `perfboard-fence check` のネットリストを合わせると、回路図 (図1・図2) と
 同じつながりになる。図3 は図1 のとおり (AD の V+ は VCC、W1 と 2+ は KEY、2− と GND は GND、

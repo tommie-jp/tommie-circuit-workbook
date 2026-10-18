@@ -81,7 +81,7 @@ parts:
     type: device
     at: bottom
     label: Analog Discovery (Supplies V+ と Scope)
-    pins: [V+, GND, 1+, 1-]
+    pins: [GND, V+, 1+, 1-]
 wires:
   - AD.V+ -- i8 red
   - e8 -- f8 red
@@ -127,7 +127,7 @@ board:
 unused: [J1.D+, J1.D-, J2.D+, J2.D-]
 title: 図3 ユニバーサル基板に組む (部品面から見た図。黄色の丸は AD3 を挟む所)
 parts:
-  J1: usb-c/female b5 c5 d5 e5
+  J1: usb-c/female e5 d5 c5 b5
   J2: usb-c/female t5 u5 v5 w5
   U1: regulator i14 j14 k14
   Cin: capacitor g14 g11 10u
@@ -135,8 +135,8 @@ parts:
   Rled: resistor q17 q14 150
   Dled: led q12 q9 red
 wires:
-  - b5 -- b6 black
-  - b6 -- g6 black
+  - e5 -- e6 black
+  - e6 -- g6 black
   - g11 -- g6 black
   - g6 -- j6 black
   - j14 -- j6 black
@@ -146,8 +146,8 @@ wires:
   - q9 -- q6 black
   - q6 -- t6 black
   - t5 -- t6 black
-  - e5 -- e17 red
-  - e17 -- g17 red
+  - b5 -- b17 red
+  - b17 -- g17 red
   - g17 -- i17 red
   - g17 -- g14 red
   - i17 -- i14 red
@@ -178,8 +178,10 @@ style:
   上の図は部品面から見た図で、17 行が + の筋 (赤の 5 V と橙の 3.3 V)、6 行が GND の筋 (黒)。
   下の図は半田面 (裏返した基板) で、列が左右逆になる。半田付けは半田面で行う
 - 入力の J1 は左下端 (B5〜E5)、出力の J2 は右下端 (T5〜W5) に置く。どちらも USB-C の電源取り出しモジュールで、
-  受け口は 2 つとも下の縁を向き、基板の中に収まる (ケーブルは 2 本とも下から出る)。J1 の置き場は 05-etc の 3-1 (`05-etc/03-mixer-dual-gate-fet/01-mixer.md`) の図03 と同じ
-- J1 の VBUS (E5) は E 列を上って 17 行の + の筋 (5 V) へ、GND (B5) は B6 を経て 6 行の GND の筋へ行く。
+  受け口は 2 つとも下の縁を向き、基板の中に収まる (ケーブルは 2 本とも下から出る)。
+  J1 はパッドの並びが左から VBUS・D−・D+・GND の品 (VBUS が左端の B5、GND が右端の E5)、J2 は左から GND・D+・D−・VBUS の品 (GND が T5、VBUS が W5) にした。
+  どちらも GND のパッドが基板の内側に来るので、6 行の GND の筋へ短く入り、VBUS の線は外側の縁を上る。手持ちの品の並びが違うときは、パッドの刷り字に合わせて線を読み替える
+- J1 の VBUS (B5) は B 列を上って 17 行の + の筋 (5 V) へ、GND (E5) は E6 を経て 6 行の GND の筋へ行く。
   J2 の VBUS (W5) へは U1 の OUT (3.3 V) を 17 行で右へ運んで W 列を下ろし、GND (T5) は T6 で 6 行の GND の筋に入る。
   線をパッドから縦に出すのは、パッドの横の刷り字 (V・D−・D+・GND) を隠さないため。D+ と D− は使わない (`unused:` に並べて、ERC の「つながっていない」から外した)
 - J1 のモジュールは、CC に 5.1 kΩ が載ったものを選ぶ (図2の注と同じ。充電器から 5 V をもらう側)
@@ -195,8 +197,7 @@ style:
 - AD3 は半田付けしない。測るときだけ、J2 のパッドにクリップで挟む。1+ は VBUS につながる W6 (3.3 V)、1− は GND の筋の T6 で、どちらも黄色の丸で囲み、
   `AD3 1+` は W6 の丸の右、`AD3 1-` は T6 の丸の 1 行上 (T7 の真上に中心。6 行目は GND の筋が通るので避けた) に、赤の大きな太字で書いた。出力のコネクタで測るので、出力の 3.3 V が実際に出ているかを見られる。
   AD は測るだけで、この基板に電力は供給しない
-- 線は縦と横だけで、交差は E6 の 1 か所。J1 の VBUS の赤い線が、GND の筋 (6 行) を弧で跨ぐ。
-  実物では、赤い線を被覆線にして GND の筋の上を渡すか、部品面のジャンパにする
+- 線は縦と横だけで、交わる線は無い。J1 の VBUS の赤い線は左の縁 (B 列) を上るので、GND の筋 (6 行) を跨がない
 
 ## 部品
 
