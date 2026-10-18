@@ -257,7 +257,7 @@ sheets:
       - j17 -- m17 red
       - m17 -- n17 red
       - m14 -- m17 red
-      - GND -- k7 black
+      - GND -- k6 black
       - e7 -- g7 black
       - g7 -- k7 black
       - k7 -- k6 black

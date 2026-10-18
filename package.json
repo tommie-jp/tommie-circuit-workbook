@@ -29,7 +29,7 @@
     "pico": "npm run pico:uf2 && npm run pico:emu"
   },
   "devDependencies": {
-    "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.43.0/breadboard-fence-0.43.0.tgz",
+    "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.43.1/breadboard-fence-0.43.1.tgz",
     "circuit-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/circuit-fence-v0.38.1/circuit-fence-0.38.1.tgz",
     "copper-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/copper-fence-v0.10.0/copper-fence-0.10.0.tgz",
     "graph-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/graph-fence-v0.3.0/graph-fence-0.3.0.tgz",
