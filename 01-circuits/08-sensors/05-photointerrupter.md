@@ -64,7 +64,7 @@ style:
 ```breadboard
 # ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 ブレッドボードに組む
-# 上の赤いレール = +5V、青いレール = GND (29 列で下の − レールへ渡す)
+# 上の赤いレール = +5V、青いレール = GND (30 列で下の − レールへ渡す)
 board: half
 parts:
   AD:
