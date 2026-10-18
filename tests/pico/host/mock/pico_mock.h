@@ -13,6 +13,7 @@ typedef unsigned int uint;
 enum { GPIO_FUNC_XIP = 0, GPIO_FUNC_SPI = 1, GPIO_FUNC_UART = 2, GPIO_FUNC_I2C = 3, GPIO_FUNC_PWM = 4,
        GPIO_FUNC_SIO = 5, GPIO_FUNC_PIO0 = 6, GPIO_FUNC_PIO1 = 7, GPIO_FUNC_PIO2 = 8, GPIO_FUNC_NULL = 0x1f };
 enum { GPIO_DRIVE_STRENGTH_2MA, GPIO_DRIVE_STRENGTH_4MA, GPIO_DRIVE_STRENGTH_8MA, GPIO_DRIVE_STRENGTH_12MA };
+enum { GPIO_SLEW_RATE_SLOW, GPIO_SLEW_RATE_FAST };
 #define MOCK_NGPIO 48
 #define MOCK_SYS_HZ 150000000u   /* Pico 2 (RP2350) の clk_sys。RP2040 は 125 MHz */
 
@@ -42,6 +43,7 @@ void gpio_pull_up(uint g);
 void gpio_pull_down(uint g);
 void gpio_disable_pulls(uint g);
 void gpio_set_drive_strength(uint g, uint s);
+void gpio_set_slew_rate(uint g, uint s);
 void gpio_put(uint g, bool v);
 void gpio_put_masked(uint32_t mask, uint32_t v);
 bool gpio_get(uint g);
@@ -94,6 +96,11 @@ typedef struct {
     uint pio_set_base, pio_set_count, pio_wrap_target, pio_wrap, pio_pindirs_base, pio_pindirs_count;
     bool pio_pindirs_out, pio_sm_enabled; float pio_clkdiv; uint pio_clkdiv_restarts;
     uint pio_gpio_mask;
+    /* PIO の out/side-set・シフト・FIFO と、TX FIFO に書いた語 (5-2) */
+    uint pio_out_base, pio_out_count, pio_sideset_base, pio_sideset_count; bool pio_shift_right, pio_autopull; uint pio_pull_thresh; int pio_fifo_join;
+    uint32_t pio_tx[4096]; uint64_t pio_tx_t[4096]; uint npio_tx;
+    uint32_t sys_khz;                  /* set_sys_clock_khz の値 (0 なら MOCK_SYS_HZ) */
+    uint8_t slew[MOCK_NGPIO];
     uint spi_bits, spi_cpol, spi_cpha, spi_order;
     uint16_t spi_tx[256]; uint nspi;
     uint sys_pll_calls; uint32_t sys_pll_vco; uint sys_pll_pd1, sys_pll_pd2;

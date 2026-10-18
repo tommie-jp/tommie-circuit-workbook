@@ -185,6 +185,7 @@ def install(state):
 
     class PIO:
         OUT_LOW, OUT_HIGH, IN_LOW, IN_HIGH, SHIFT_LEFT, SHIFT_RIGHT = 0, 1, 2, 3, 0, 1
+        JOIN_NONE, JOIN_TX, JOIN_RX = 0, 1, 2
 
     def asm_pio(**kw):
         def deco(fn):
@@ -194,8 +195,12 @@ def install(state):
 
     class StateMachine:
         def __init__(self, id, prog=None, freq=-1, **kw):
-            self.rec = {'id': id, 'prog': getattr(prog, '__name__', None), 'freq': freq, 'kw': kw, 'active': None}
+            self.rec = {'id': id, 'prog': getattr(prog, '__name__', None), 'freq': freq, 'kw': kw, 'active': None, 'puts': []}
             S.sm.append(self.rec)
+
+        def put(self, w, shift=0):       # TX FIFO に書いた語と時刻 (深さは模さない)
+            for x in (w if isinstance(w, (list, tuple, bytes, bytearray)) or hasattr(w, '__iter__') else [w]):
+                self.rec['puts'].append((S.now_us, int(x)))
 
         def active(self, a=None):
             if a is not None:

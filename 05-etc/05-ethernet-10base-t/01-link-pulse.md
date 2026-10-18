@@ -13,7 +13,7 @@ board: —
 > [!WARNING]
 > **この工作 (5 章 ethernet-10base-t) は、まだ実機で測っていない。** 波形の図と数値は規格 (IEEE 802.3) の値から計算で作ったもので、手元のルータと PC で同じに見えるかは確かめていない。測ったら WaveForms の CSV を題の隣に置いて `data:` で重ねる。
 
-この題は実体配線図を付けない — 組む回路が無い (RJ45 ブレークアウト基板と Analog Discovery 3 だけで、信号はルータと PC が出す)。Analog Discovery 3 とオシロの図は付ける。
+この題で組むのは RJ45 のブレークアウト (線に触れるための基板) だけで、回路は無い。買った物を使うなら組まなくてよい。自作するときのユニバーサル基板の図を「つなぎ方」に付けた。
 
 ## この章の意図
 
@@ -150,6 +150,59 @@ notes:
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/05-ethernet-10base-t/circuit/01-link-pulse.svg)
+
+ブレークアウト基板は買える物 (RJ45 ジャック 2 つの間の 8 本が端子に出ている物) でよい。
+自作するなら、DIP 化した RJ45 (8 ピンが 2.54 mm で 1 列に出る物) を 2 つユニバーサル基板に挿し、
+8 本をスズめっき線で渡す。対に触れる 4 本だけ、下の行に被覆線で引き出してオシロを当てる。
+
+```perf
+# ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
+title: 図3 自作のブレークアウト — DIP 化した RJ45 を 2 つ渡し、下の行で対に触れる
+board:
+  size: 5x7cm
+  silk: board
+  h: 1.6mm
+  material: FR-4
+  slots: on
+parts:
+  J1: sip8 c6 RJ45
+  J2: sip8 v6 RJ45
+  AD:
+    type: device
+    at: bottom
+    label: AD3 Scope
+    pins: 2+ 2- 1+ 1-
+wires:
+  - c6 -- v6 white
+  - c7 -- v7 white
+  - c8 -- v8 white
+  - c9 -- v9 white
+  - c10 -- v10 white
+  - c11 -- v11 white
+  - c12 -- v12 white
+  - c13 -- v13 white
+  - v6 -- w6 orange
+  - v7 -- w7 orange
+  - v8 -- w8 blue
+  - v11 -- w11 blue
+  - AD.2+ -- w6 orange
+  - AD.2- -- w7 orange
+  - AD.1+ -- w8 blue
+  - AD.1- -- w11 blue
+notes:
+  - text a16 left: ルータへ
+  - text x16 left: PC へ
+```
+
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/05-ethernet-10base-t/perfboard/01-link-pulse.svg)
+
+- 5×7 cm のユニバーサル基板 (18 列 × 24 行) を縦に置き、J1 (ルータ側) を C 行、J2 (PC 側) を V 行に挿す。
+  ピン 1〜8 が 6〜13 列に並ぶ。8 本とも渡すので、10BASE-T 以外のケーブルをつないでも通る
+- オシロは W 行に出した 4 本に当てる。青が ch1 (ピン 3・6 = ルータから PC)、橙が ch2 (ピン 1・2 = PC からルータ)。
+  被覆線は短くし、対の 2 本は撚る
+- 信号は 10 MHz までで、ユニバーサル基板の範囲 (10 MHz 以下、短い配線) に収まる。渡す線は 5 cm ほどで、
+  100 Ω の対の中に 1 か所だけインピーダンスの乱れが入るが、10BASE-T の 100 ns のビットには影響しない
+  (100BASE-TX 以上では、この作りは使えない)
 
 - オシロは**差動で**掛ける。1+ をピン 3 (TX+)、1− をピン 6 (TX−) につなぎ、**GND はどこにもつながない**。
   対は両端のトランスで浮いているので、片側を GND に落とすと信号が崩れる。

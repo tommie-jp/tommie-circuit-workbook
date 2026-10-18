@@ -1,0 +1,14 @@
+* 5-2 10BASE-T の送信 (図1): GP17 = 3.3 V・GP16 = 0 V (HIGH のシンボル) のときの線路の差動電圧
+* GPIO は理想の電圧源 (内部抵抗 0)。相手のトランスは理想で、100 Ω の終端だけが見える
+* 下半分は R1・R2 を 100 Ω にした場合
+Vp txp 0 3.3
+Vm txm 0 0
+R2 txp lp 47
+R1 txm lm 47
+Rload lp lm 100
+Vp2 txp2 0 3.3
+R2b txp2 lp2 100
+R1b 0 lm2 100
+Rload2 lp2 lm2 100
+.op
+.end

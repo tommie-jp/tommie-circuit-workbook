@@ -37,6 +37,7 @@ void gpio_pull_up(uint g) { chk(g); M.pull_up[g] = true; }
 void gpio_pull_down(uint g) { chk(g); M.pull_up[g] = false; }
 void gpio_disable_pulls(uint g) { chk(g); M.pull_up[g] = false; }
 void gpio_set_drive_strength(uint g, uint s) { chk(g); M.drive[g] = (uint8_t)s; }
+void gpio_set_slew_rate(uint g, uint s) { chk(g); M.slew[g] = (uint8_t)s; }
 void gpio_put(uint g, bool v) {
     chk(g);
     if (M.func[g] != GPIO_FUNC_SIO || !M.dir_out[g]) { /* 出力に切り替える前の書き込みは実機でも出ない */ }
