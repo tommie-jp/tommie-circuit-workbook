@@ -91,7 +91,7 @@ function main(args) {
       [
         cliPath(ROOT, fence), 'render', ...items.map((item) => item.path), '--out', out,
         ...(embedFonts && fence === 'circuit' ? ['--embed-fonts'] : []),
-        ...(english ? ['--lang', 'en'] : []),
+        ...(english && fence !== 'circuit' ? ['--lang', 'en'] : []),
       ],
       { cwd: ROOT, encoding: 'utf8' },
     );
