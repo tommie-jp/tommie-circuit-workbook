@@ -2,14 +2,14 @@
 book: circuits
 chapter: 8
 id: 8-1
-title: A CdS Cell Lights an LED When It Gets Dark
+title: A CdS cell lights an LED when it gets dark
 tier: 50
 source: 自作
 board: BB
 ja: 1c9133c8e04968eedf48f130392f0595914ca375
 ---
 
-# 8-1 A CdS Cell Lights an LED When It Gets Dark
+# 8-1 A CdS cell lights an LED when it gets dark
 
 A CdS cell (a light sensor made of cadmium sulfide) has a higher resistance the weaker the light that falls on it.
 Combined with a fixed resistor in a voltage divider, it turns brightness into a voltage.
@@ -81,7 +81,7 @@ wires:
   - +t30 -- +b30 red
   - -t29 -- -b29 black
 notes:
-  - text: Column 7 (between R1 and CDS1) is the midpoint of the divider. A green wire carries it to the base of Q1
+  - text: Column 7 is the divider midpoint. Green wire to Q1 base
 ```
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/08-sensors/breadboard/01-cds.svg)

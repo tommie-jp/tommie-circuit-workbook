@@ -13,8 +13,8 @@ ja: 1435a81c82cca105eec2330558aa7bab879365cc
 
 The signal enters the − input through a resistor (Rin), and a second resistor (Rf) feeds the output back to the same
 − input. The non-inverting input (+ input) is tied directly to GND. The gain is −Rf/Rin, so the **sign is inverted**.
-This is the third basic op amp configuration. Here we apply a 1 kHz sine wave and check that the output is 10 times
-larger and upside down.
+This is the third basic op amp circuit. In this exercise you feed in a 1 kHz sine wave and check that the output is 10 times
+as large and in the opposite direction.
 
 ## Schematic
 
@@ -49,8 +49,8 @@ style:
 
 ![Schematic](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/04-opamps/circuit/03-inverting-amp.svg)
 
-- VP and VN on the left are the ±5 V supply for the op amp. They come from V+ and V− of Supplies on the AD3 (same as in 4-1)
-- **Tying the + input directly to GND** is what marks an inverting amplifier. The op amp moves its output until the
+- VP and VN on the left are the ±5 V supply for the op amp. They are made with V+ and V− of the AD3 Supplies, as in 4-1
+- **Tying the + input directly to GND** is the mark of an inverting amplifier. The op amp moves its output until the
   + input and the − input are at the same voltage, so the − input stays at 0 V even though it is not connected to GND.
   This is called a **virtual ground**
 - Rin (10 kΩ) sets the input impedance and Rf (100 kΩ) is the feedback.
@@ -96,24 +96,24 @@ wires:
   - f15 -- e15 black
   - a15 -- -t15 black
 notes:
-  - text below: Top red rail = +5V, top blue rail = GND, bottom blue rail = −5V (V−)
+  - text below: Top red +5V, top blue GND, bottom blue −5V (V−)
 ```
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/04-opamps/breadboard/03-inverting-amp.svg)
 
-- In Fig. 2, Supplies (V+, V−) on the AD3 correspond to VP and VN in Fig. 1, and W1 corresponds to V1 (the signal generator).
+- In Fig. 2, the AD3 Supplies (V+, V−) correspond to VP and VN in Fig. 1, and W1 corresponds to V1 (the signal generator).
   The rails are split as in 4-1 (the bottom blue rail is −5 V, not GND)
-- **IN+ (PIN 3, column 12) is tied directly to GND.** Three black wires, `h12--h15`, the wire across the center gap, and
+- **IN+ (pin 3, column 12) is tied directly to GND.** Three black wires, `h12--h15`, the wire across the trench, and
   `a15--(-t15)`, take it to the top blue rail. No voltage divider is needed
-- **Both Rin and Rf meet at IN− (PIN 2, column 11).** The W1 signal crosses the center gap at column 6 to the lower block
-  and enters through Rin (columns 6 to 11). Rf goes from here back to the output (PIN 1, column 10)
+- **Both Rin and Rf meet at IN− (pin 2, column 11).** The W1 signal crosses the trench at column 6 to the lower block
+  and enters through Rin (columns 6 to 11). Rf goes from here back to the output (pin 1, column 10)
 - The Scope is drawn as a separate box (AD3 Scope) below the breadboard. 1+ (orange) goes to column 6 (`j6`), the input,
   and 2+ (green) goes to column 10 (`j10`), the output. 1− and 2− (black) go to column 15 (`j15`, `i15`), which is connected to GND
 - There is no capacitor (DC block). The signal generator swings around 0 V, so a direct connection is fine
 
 ## Instrument settings
 
-Use the Scope of the AD3 as the oscilloscope. This exercise looks at the amplitude and the direction (inversion) of a 1 kHz sine wave, far below 10 MHz.
+Use the AD3 Scope as the oscilloscope. This exercise looks at the amplitude and the direction (inversion) of a 1 kHz sine wave, far lower than 10 MHz.
 W1 is the same as in 4-2: 1 kHz, amplitude 0.1 V, offset 0 V. Scope CH1 reads the input (column 6) and CH2 reads the output (column 10).
 
 | Setting | Value |
@@ -122,11 +122,11 @@ W1 is the same as in 4-2: 1 kHz, amplitude 0.1 V, offset 0 V. Scope CH1 reads th
 | Scope CH1 (input, column 6) | DC, 500 mV/div |
 | Scope CH2 (output, column 10) | DC, 500 mV/div |
 | Time | 200 µs/div |
-| Trigger | CH1, rising, 0 V |
+| Trigger | CH1, rising edge, 0 V |
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
-title: Fig. 3 In (CH1) and out (CH2), x10 inverted
+title: Fig. 3 CH2 is 10 times CH1, inverted
 time: 200us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 1kHz 0.1V, range: 500mV/div}
@@ -143,38 +143,38 @@ When the input rises, the output falls, so peaks and troughs are swapped (phase 
 
 | Symbol | Part | Value |
 | --- | --- | --- |
-| U1 | Op amp (one half of a dual) | LM358 |
+| U1 | Op amp (one of two in the package) | LM358 |
 | Rin | Resistor (input) | 10 kΩ |
 | Rf | Resistor (feedback) | 100 kΩ |
 | — | Signal source | 1 kHz, amplitude 0.1 V |
-| — | Power supply | ±5 V (Supplies on the AD3; V+ = +5 V, V− = −5 V) |
-| — | Instruments | W1 of the AD3 (signal source), Scope 1+/2+ (input and output) |
+| — | Power supply | ±5 V (AD3 Supplies; V+ = +5 V, V− = −5 V) |
+| — | Instrument | AD3 W1 (signal source) and Scope 1+/2+ (input and output) |
 
 ## Values to check
 
-Measure as in 4-2 (signal generator is W1 of the AD3, Scope CH1 on the input at column 6, CH2 on the output at column 10; Fig. 3). The values in the table are calculated values. Gain A = −Rf/Rin.
+Measure as in 4-2 (the signal generator is the AD3 W1, Scope CH1 on the input at column 6, CH2 on the output at column 10; Fig. 3). The values in the table are calculated. Gain A = −Rf/Rin.
 
-| Measure | Expected value | What it tells you |
+| Measure | Expected value | What it shows |
 | --- | --- | --- |
 | Output amplitude | 1.0 V | 0.1 V × 10 |
-| Phase | 180° from the input (inverted) | The origin of the name "inverting amplifier" |
+| Phase | 180° from the input (inverted) | Where the name "inverting amplifier" comes from |
 | Gain | −10 (20 dB) | −Rf/Rin = −100k/10k |
-| Input impedance | 10 kΩ (Rin itself) | Lower than 4-2 (non-inverting, Rb = 100 kΩ) |
+| Input impedance | 10 kΩ (Rin itself) | Lower than in 4-2 (non-inverting, Rb = 100 kΩ) |
 
-**The input impedance is fixed by Rin.** This is the weakness of the inverting amplifier.
+**The input impedance is fixed by Rin.** This is the weak point of the inverting amplifier.
 For a signal source that needs a high impedance, use the non-inverting amplifier of 4-2.
 
 ## Verification with LTspice
 
 `sim/03-inverting-amp.cir` runs Fig. 1 as a transient analysis (1 kHz, 0.1 V). The op amp is a simple one-pole model
-(GBW 1 MHz, SR 0.3 V/µs, output clipped at V+ − 1.5 V and V− + 0.1 V). This is an **assumption** equivalent to an LM358, not a measurement.
+(GBW 1 MHz, SR 0.3 V/µs, the output tops out at V+ − 1.5 V and V− + 0.1 V). It is an **assumption** modeled on the LM358, not a measurement.
 
-| Item | Value in the text | LTspice | Verdict |
+| Item | Value in the text | LTspice | Result |
 | --- | --- | --- | --- |
-| Output amplitude | 1.0 V | 1.000 V (2.00 Vpp) | agrees |
-| Phase | 180° | Inverted (the output zero crossing is only 1.7 µs late, a phase lag of 0.6° at 1 kHz) | agrees |
-| − input (virtual ground) | Held at 0 V | ±1.0 mV | agrees |
-| Input impedance | 10 kΩ | (Rin itself; arithmetic) | as in the text |
+| Output amplitude | 1.0 V | 1.000 V (2.00 Vpp) | Match |
+| Phase | 180° | inverted (the output zero crossing is only 1.7 µs late, a phase lag of 0.6° at 1 kHz) | Match |
+| − input (virtual ground) | held at 0 V | ±1.0 mV | Match |
+| Input impedance | 10 kΩ | (Rin itself; arithmetic) | As in the text |
 
 ## Sources
 

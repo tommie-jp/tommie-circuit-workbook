@@ -2,14 +2,14 @@
 book: circuits
 chapter: 7
 id: 7-1
-title: Relay Driver — Transistor and Flyback Diode
+title: Relay driver — transistor and flyback diode
 tier: 50
 source: 自作
 board: BB
 ja: c880e2446a5474a7d63322c5a067105bfeeed1f0
 ---
 
-# 7-1 Relay Driver — Transistor and Flyback Diode
+# 7-1 Relay driver — transistor and flyback diode
 
 A relay is a part in which current through a coil makes an electromagnet pull a contact, switching a separate circuit
 on and off. A small signal can then drive a motor or a high-current appliance.
@@ -108,7 +108,7 @@ wires:
   - +t30 -- +b30 red
   - -t29 -- -b29 black
 notes:
-  - text: The orange wire (column 1) is IN. When W1 is at 5 V, Q1 turns on, the relay pulls, and the LED lights
+  - text: Orange wire = IN. W1 at 5 V pulls the relay, LED lights
 ```
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/07-power/breadboard/01-relay-driver.svg)
@@ -125,8 +125,8 @@ notes:
   which exceeds the 50 mA per rail of Supplies on the Analog Discovery (250 mW on USB power), so the AD3 is used only for
   the signal (W1) and the oscilloscope (Scope)
 - Feed IN (column 1) from W1 of the AD (orange). 1+ (blue) is in the same column 1 (`i1`) and reads IN, and 2+ (green)
-  is on column 5 (`j5`), the collector of Q1. 1−, 2− and GND (black) go to the lower − rail. W1 outputs up to about 0 Ω
-  and 30 mA, so the base current of about 4.3 mA is well within its reach
+  is on column 5 (`j5`), the collector of Q1. 1−, 2− and GND (black) go to the lower − rail. W1 has an output impedance of about 0 Ω
+  and supplies up to 30 mA, so the base current of about 4.3 mA is well within its reach
 - Leave the unused second circuit (`COM2`, `NC2`, `NO2`) empty
 
 ## Parts
@@ -163,9 +163,9 @@ measure: [vmax, vmin, freq]
 Fig. 3 shows the ideal shape. CH2 moves opposite to CH1, between 5 V (Q1 off, so the coil end sits at 5 V) and 0.3 V
 (saturated; the SPICE value below). In a real circuit, at the moment Q1 turns off, the back EMF of the coil turns D1
 on and the collector rises briefly to about 5.8 V (= 5 V + the forward voltage of D1, about 0.8 V; SPICE).
-Without D1 this spike could reach tens of volts (this book does not remove it to try). The width of the spike is set by
-the inductance of the coil. The value for this relay has not been checked, so Fig. 3 does not draw it. The click of
-the LED and the relay lasts only while CH1 is at 5 V.
+Without D1 this spike could reach tens of volts (this book does not try it with D1 removed). The width of the spike is set by
+the inductance of the coil. The value for this relay has not been checked, so Fig. 3 does not draw it. The relay stays
+pulled and the LED stays lit only while CH1 is at 5 V.
 
 ## Values to check
 
@@ -179,11 +179,11 @@ When the relay pulls, it clicks and the LED (D2) lights.
 | Measure | Expected value | What it tells you |
 | --- | --- | --- |
 | Base current (IN = 5 V) | about 4.3 mA (= (5 − 0.7) / 1 kΩ) | Set by R1 |
-| Minimum base current needed to saturate | about 1.4 mA (= 100 mA / 70) | 4.3 mA is well above this, so Q1 saturates for certain |
+| Minimum base current needed to saturate | about 1.4 mA (= 100 mA / 70) | 4.3 mA is well above this, so Q1 saturates reliably |
 | Coil current (relay pulled) | about 100 mA (= 5 V / 50 Ω) | As rated in the datasheet |
 | Collector-emitter voltage of Q1 (saturated) | 0.3 V or less (SPICE value; the datasheet gives a maximum V<sub>CE(sat)</sub> of 0.25 V at I<sub>B</sub> = 10 mA) | Almost the full supply voltage falls across the coil |
 | The moment current flows in D1 | Only just after Q1 turns OFF | Otherwise D1 sees only a reverse voltage and carries no current |
-| With D1 removed | A brief high voltage appears across the collector and emitter of Q1 (it may be destroyed) | Why the flyback diode is needed. **This book does not remove it to try** |
+| With D1 removed | A brief high voltage appears across the collector and emitter of Q1 (it may be destroyed) | Why the flyback diode is needed. **This book does not try it with D1 removed** |
 
 ## Verification with LTspice
 

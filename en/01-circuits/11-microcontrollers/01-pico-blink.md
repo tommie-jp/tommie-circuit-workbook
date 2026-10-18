@@ -15,10 +15,10 @@ ja: f0efa83cdba2e36702555e73f8147d49f38dde47
 A microcontroller is an IC that switches pin voltages between H and L, or reads pin voltages, as a program tells it to.
 The zeros and ones that Chapter 10 set with switches and wiring can now be set by a program.
 
-In this exercise we connect an LED to one GPIO (general-purpose input/output pin, usable as an input or an output) of a
-Raspberry Pi Pico 2 (a small board carrying the RP2350 microcontroller; Pico 2 below) and blink it using both
+This exercise connects an LED to one GPIO (general-purpose input/output pin, usable as an input or an output) of a
+Raspberry Pi Pico 2 (a small board carrying the RP2350 microcontroller; Pico 2 below) and blinks it using both
 C/C++ (Pico SDK) and MicroPython. Blinking an LED is the standard first program for a microcontroller.
-We use an external LED, not the on-board one
+The LED is an external one, not the on-board one
 (the on-board LED is fixed to GP25 inside the board, so it gives no practice in wiring).
 
 ## Schematic
@@ -111,7 +111,7 @@ so set the time range to 200 ms/div (2 s per screen, 2 periods).
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
-title: Fig. 3 GP15 (CH1) and the LED anode (CH2), toggling every 0.5 s
+title: Fig. 3 GP15 (CH1) and LED anode (CH2), every 0.5 s
 time: 200ms/div
 trigger: ch1 rising 1.5V at -4div
 ch1: {wave: square 1Hz 1.65V offset 1.65V duty 50%, range: 1V/div, position: -3div}
@@ -220,8 +220,8 @@ while True:
     sleep(0.5)
 ```
 
-We confirmed in this environment that the C/C++ program builds as far as the `.uf2` with `PICO_BOARD=pico2`. It has
-not been run on hardware yet. The MicroPython program has not been run (not verified).
+In this environment, the C/C++ program was confirmed to build as far as the `.uf2` with `PICO_BOARD=pico2`. It has
+not yet been tested on hardware. The MicroPython program has not been run (not verified).
 
 ## Verification with LTspice
 
@@ -230,16 +230,16 @@ not been run on hardware yet. The MicroPython program has not been run (not veri
 
 | Item | Value in the text | LTspice | Verdict |
 | --- | --- | --- | --- |
-| Across R1 | about 1.3 V | 1.34 V | agrees |
-| Across the LED | about 2.0 V | 1.96 V (V<sub>F</sub> is also lower because the current is below 9 mA) | agrees |
-| Current | about 3.9 mA | 4.06 mA | agrees (4 % from the arithmetic that takes V<sub>F</sub> as 2.0 V) |
+| Across R1 | about 1.3 V | 1.34 V | Agrees |
+| Across the LED | about 2.0 V | 1.96 V (V<sub>F</sub> is also lower because the current is below 9 mA) | Agrees |
+| Current | about 3.9 mA | 4.06 mA | Agrees (4 % from the arithmetic that takes V<sub>F</sub> as 2.0 V) |
 
 4.06 mA still nearly fits the rough guide of the default 4 mA setting. The H/L switching and the 1 Hz period come from
 two `sleep_ms(500)` calls in the program, not from circuit values (outside what SPICE handles).
 
 ## Verification with the program
 
-We ran the program from the text on a PC and compared the same quantities as in the text's table (`npm run pico:test`, `npm run pico`). **It has not been run on hardware.**
+The program from the text was run on a PC, and the same quantities as in the text's table were compared (`npm run pico:test`, `npm run pico`). **It has not yet been tested on hardware.**
 
 | What was checked | Result | Tool |
 | --- | --- | --- |

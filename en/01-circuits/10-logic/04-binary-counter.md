@@ -15,8 +15,8 @@ Watch a counter that counts pulses in binary on LEDs. In clocks, timers and micr
 this circuit does the counting.
 
 The slow square wave made by the 555 astable in 3-2 goes into the clock input of a CD4040
-(a 12-stage binary counter); the clock is the pulse that tells the counter to count. We watch the lower 4 bits (Q1 to Q4) on LEDs
-and check that the count runs from 0000 to 1111 in binary. Q1 is the lowest digit (LSB)
+(a 12-stage binary counter); the clock is the pulse that tells the counter to count. Watch the lower 4 bits (Q1 to Q4) on LEDs
+to check that the count runs from 0000 to 1111 in binary. Q1 is the lowest digit (LSB)
 and Q4 is the highest (MSB).
 
 ## Equations checked in this experiment
@@ -96,18 +96,18 @@ style:
 
 - The 555 is a standard astable (R1 10 kΩ, R2 47 kΩ, C1 10 µF).
   T ≈ 0.69 × (10 kΩ + 2 × 47 kΩ) × 10 µF ≈ 0.72 s, f = 1/T ≈ 1.4 Hz (calculated value)
-- The 555 output (pin 3) is the clock of the 4040 (pin 10). The count advances by one on each falling edge
-- Pressing SWRST brings pin 11 (RESET) to +5 V (H) and the counter returns to 0000.
-  When released, RRST (10 kΩ) pulls pin 11 down to GND (L)
-- Q1 (pin 9), Q2 (pin 7), Q3 (pin 6) and Q4 (pin 5) are the lower 4 bits. The 5th bit and above
+- The 555 output (PIN 3) is the clock of the 4040 (PIN 10). The count advances by one on each falling edge
+- Pressing SWRST brings PIN 11 (RESET) to +5 V (H) and the counter returns to 0000.
+  When released, RRST (10 kΩ) pulls PIN 11 down to GND (L)
+- Q1 (PIN 9), Q2 (PIN 7), Q3 (PIN 6) and Q4 (PIN 5) are the lower 4 bits. The 5th bit and above
   are not used in this exercise
-- The CD4040 has only two inputs, CLK (pin 10) and RESET (pin 11), and both are connected
+- The CD4040 has only two inputs, CLK (PIN 10) and RESET (PIN 11), and both are connected
   (RESET goes to GND through RRST). A CMOS input must not be left floating, but this IC has
   no unused inputs. The unused Q5 to Q12 are outputs, so leave them unconnected
-- Power pins: on the 4040, VDD is pin 16 and VSS is pin 8; on the 555, VCC is pin 8 and GND is pin 1
+- Power pins: on the 4040, VDD is PIN 16 and VSS is PIN 8; on the 555, VCC is PIN 8 and GND is PIN 1
 - The 4040 (U40) and the 555 (U555) in Fig. 1 are drawn as boxes with the pins arranged by function.
   The top is power (VDD, VCC), the left is inputs (CLOCK, R), the right is outputs (Q1 to Q4), and the bottom is GND (VSS, GND).
-  The pin numbers are written inside the box. The unused Q5 to Q12 have no wires and are left open.
+  The PIN numbers are written inside the box. The unused Q5 to Q12 have no wires and are left open.
   The LEDs are arranged with Q1 on the far right and Q4 on the far left so that the output wires do not cross
 - The series resistors RQ1 to RQ4 for the LEDs are 1 kΩ. As in 10-1, the output of a 5 V CD4000-series gate can source
   only a few mA (the CD4040B is also a standard CD4000B-series output, with a minimum I<sub>OH</sub> of 1.6 mA at an
@@ -189,19 +189,19 @@ wires:
 - The power supply is Supplies on the Analog Discovery 3 (AD3, the USB instrument used in 0-3), with V+ set to 5 V.
   Connect V+ of the AD3 at the upper left to the top red rail (column 1) and GND to the top blue rail (column 2).
   The bottom rails are joined to the top rails by blue at column 1 and by red at column 62 (the right end)
-- U555 (NE555) occupies columns 5 to 8 and U40 (CD4040) columns 22 to 29. Both have the notch on the left, with pin 1 at the lower left (row f). On U555, pin 8 (upper side of column 5) is at the upper left; on U40, pin 16 (upper side of column 22) is at the upper left
-- U555: pin 8 (upper side of column 5) and pin 4 (RESET, lower side of column 8) go to +5 V, and pin 1 (lower side of column 5) goes to GND.
-  R1 runs from pin 7 (upper side of column 6) to +5 V at column 3, and R2 runs from pin 7 to column 9. Column 9 is
-  joined on row b to pin 6 (upper side of column 7) and is also carried across the center gap by an orange wire to pin 2 (lower side of column 6).
-  C1 (+ at the lower side of column 9) goes to GND. Pin 5 (CONT) is not used
-- U40: pin 16 (upper side of column 22) goes to +5 V and pin 8 (lower side of column 29) to GND. Pin 10 (CLK, upper side of column 28)
-  is fed from pin 3 of the 555 (lower side of column 7) by a blue wire (row h → crosses the center gap at column 21 → row d).
-  Pin 11 (RESET, upper side of column 27) is carried by a green wire on row c to column 19, goes to GND through RRST (10 kΩ),
+- U555 (NE555) occupies columns 5 to 8 and U40 (CD4040) columns 22 to 29. Both have the notch on the left, with PIN 1 at the lower left (row f). On U555, PIN 8 (upper side of column 5) is at the upper left; on U40, PIN 16 (upper side of column 22) is at the upper left
+- U555: PIN 8 (upper side of column 5) and PIN 4 (RESET, lower side of column 8) go to +5 V, and PIN 1 (lower side of column 5) goes to GND.
+  R1 runs from PIN 7 (upper side of column 6) to +5 V at column 3, and R2 runs from PIN 7 to column 9. Column 9 is
+  joined on row b to PIN 6 (upper side of column 7) and is also carried across the center gap by an orange wire to PIN 2 (lower side of column 6).
+  C1 (+ at the lower side of column 9) goes to GND. PIN 5 (CONT) is not used
+- U40: PIN 16 (upper side of column 22) goes to +5 V and PIN 8 (lower side of column 29) to GND. PIN 10 (CLK, upper side of column 28)
+  is fed from PIN 3 of the 555 (lower side of column 7) by a blue wire (row h → crosses the center gap at column 21 → row d).
+  PIN 11 (RESET, upper side of column 27) is carried by a green wire on row c to column 19, goes to GND through RRST (10 kΩ),
   and goes to +5 V when SWRST (e17) is pressed
-- Q1 (pin 9, upper side of column 29), Q2 (pin 7, lower side of column 28), Q3 (pin 6, lower side of column 27) and Q4 (pin 5,
+- Q1 (PIN 9, upper side of column 29), Q2 (PIN 7, lower side of column 28), Q3 (PIN 6, lower side of column 27) and Q4 (PIN 5,
   lower side of column 26) are carried by yellow wires to columns 32, 38, 44 and 50 (the lower three run along rows g, h and i
   and cross the center gap), and go to GND through a 1 kΩ resistor and an LED
-- The AD3 oscilloscope: plug 1+ (yellow) into the clock column 21 (`a21`, partway along the blue wire from pin 3 of the 555 to pin 10 of U40),
+- The AD3 oscilloscope: plug 1+ (yellow) into the clock column 21 (`a21`, partway along the blue wire from PIN 3 of the 555 to PIN 10 of U40),
   and 2+ (blue) into the Q1 column 29 (`b29`). 1− and 2− (black) go to the top blue rail (GND)
 - The current through the breadboard is about 2.2 mA × 4 ≈ 9 mA with all four LEDs lit, plus about 3 mA for the NE555 itself (datasheet typical value)
   and a few hundred µA in R1, about 13 mA in total. This is within the breadboard limits (200 mA per hole, 500 mA for the whole breadboard) and within the rough guide for
@@ -217,8 +217,8 @@ or set the time range to 500 ms/div to fit about 7 periods on one screen.
 | Item | Value |
 | --- | --- |
 | Power | V+ of Supplies at 5 V; V− is not used |
-| CH1 (1+) | Clock (555 pin 3 = 4040 pin 10). 1 V/div, 0 V one division up from the bottom |
-| CH2 (2+) | Q1 (4040 pin 9). Same 1 V/div and same 0 V position as CH1 |
+| CH1 (1+) | Clock (555 PIN 3 = 4040 PIN 10). 1 V/div, 0 V one division up from the bottom |
+| CH2 (2+) | Q1 (4040 PIN 9). Same 1 V/div and same 0 V position as CH1 |
 | 1−, 2− | GND |
 | Time range | 500 ms/div |
 | Trigger | Rising edge of CH1, 1.8 V. Place the trigger point one division from the left |
@@ -268,10 +268,10 @@ The insides of the 555 and the 4040 are outside what SPICE handles (LTspice has 
 
 | Item | Value in the text | Arithmetic | Verdict |
 | --- | --- | --- | --- |
-| Period T | about 0.72 s | 0.721 s (1.387 Hz) | agrees |
-| Duty cycle | about 54.8 % (Fig. 3) | 54.8 % | agrees |
-| One cycle of 16 clocks | about 11.5 s | 11.5 s | agrees |
-| Frequency of Q1 (half the clock) | about 0.69 Hz (0.697 Hz in Fig. 3) | 0.694 Hz | agrees (Fig. 3 uses ln 2 rounded to 0.69) |
+| Period T | about 0.72 s | 0.721 s (1.387 Hz) | Agrees |
+| Duty cycle | about 54.8 % (Fig. 3) | 54.8 % | Agrees |
+| One cycle of 16 clocks | about 11.5 s | 11.5 s | Agrees |
+| Frequency of Q1 (half the clock) | about 0.69 Hz (0.697 Hz in Fig. 3) | 0.694 Hz | Agrees (Fig. 3 uses ln 2 rounded to 0.69) |
 
 The count sequence (0000 → 0101 → 1010 → 1111 → 0000) is ordinary binary counting, not something to check with SPICE.
 

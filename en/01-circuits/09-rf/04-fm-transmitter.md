@@ -94,7 +94,7 @@ wires:
 - **Common base**: C3 (0.001 µF) drops the base to GND at high frequency (about 2 Ω at 80 MHz).
   Fixing the base to GND at high frequency, feeding in at the emitter and taking out at the collector is called common-base operation.
   This makes a common-base Colpitts, and the feedback returned to the emitter through the C1 and C2 divider
-  takes effect. At audio frequencies (about 160 kΩ at 1 kHz) it has almost no effect, so the audio of the microphone
+  takes effect. C3 has almost no effect at audio frequencies (about 160 kΩ at 1 kHz), so the audio of the microphone
   stays on the base. Cb (0.1 µF) is the supply bypass capacitor and drops the supply side of L1 to GND at high frequency.
 - **Direct FM**: The audio of MIC (electret microphone) is coupled to the base through Cmic.
   When the DC potential of the base wobbles slightly, the base-emitter capacitance (C<sub>be</sub>) of Q1 also
@@ -285,7 +285,7 @@ wires:
 | MIC | Electret microphone | When trying it with your voice |
 | Rin, Rd | 10 kΩ, 100 Ω | When trying it with W1 of the AD in place of the microphone (remove Rmic) |
 | Signal source | W1 of the Analog Discovery 3 | 1 kHz, 1 Vpp sine wave |
-| Power supply | 5 V (V+ of Supplies on the AD3) | Consumption is about 1–3 mA (it rises while oscillating, as in "Comparison with LTspice" below), within about 50 mA for one supply rail of the AD3. The current in the copper-clad board is also within the range of the copper-clad board (500 mA) |
+| Power supply | 5 V (V+ of Supplies on the AD3) | Consumption is about 1–3 mA (it rises while oscillating, as in "Comparison with LTspice" below), within about 50 mA for one supply channel of the AD3. The current in the copper-clad board is also within the range of the copper-clad board (500 mA) |
 | Instrument | tinySA Ultra | For confirming Fig. 3. It picks up with its supplied antenna (not connected directly to the copper-clad board) |
 
 **Why the 2SC3355 was chosen for Q1**: This circuit oscillates at around 80 MHz. Oscillation requires that the current gain |h<sub>fe</sub>| of the
@@ -340,7 +340,7 @@ you **spread the turns of the coil a little to tune to 80 MHz** (spreading raise
 
 ```spectrum
 # Spectrum analyzer screen (tommie-fence spectrum fence)
-title: Fig. 3 80MHz carrier and its 2nd and 3rd harmonics (rough guide)
+title: Fig. 3 80MHz carrier and harmonics (estimate)
 device: tinysa-ultra
 sweep: 0-359.2M 450
 rbw: 100kHz
@@ -436,7 +436,7 @@ The netlist of `copper-fence check` agrees with the schematic of Fig. 4 (VIN = t
 board:
   size: 70x50mm
   ground: back
-title: Fig. 5 Mic removed, W1 of the AD divided down to the MIC island
+title: Fig. 5 Mic removed, W1 divided down to MIC island
 f: 80M
 copper:
   VCC: pad 31,7 46x4mm
@@ -501,7 +501,7 @@ However, **in a wide sweep it stays a single line**: at RBW 100 kHz (Fig. 3) the
 **the frequency swing cannot be seen** (even with a span of 200 kHz and RBW 3 kHz, ±1 kHz is narrower than the RBW and the line only gets a little thicker without separating).
 To see the ±1 kHz sidebands separately, **center on the carrier and narrow to a span of 10 kHz and RBW 200 Hz** (the narrowest RBW of the tinySA Ultra).
 With RBW 200 Hz, ±1 kHz is 5 times the RBW away and appears as separate peaks. The sweep is slow (tens of seconds), so
-do not let your hand or the desk touch the copper-clad board so the carrier does not move, and look after warming up for about 5 minutes. Even so, a free-running LC oscillator can drift
+do not let your hand or the desk touch the copper-clad board, so the carrier does not move, and let it warm up for about 5 minutes before you look. Even so, a free-running LC oscillator can drift
 by a few kHz, and when a peak leaves the screen, center it again.
 
 **Assumptions for the calculated values** (the modulation depth is an estimate and the real one can be off by a factor of a few in either direction).
@@ -512,7 +512,7 @@ by a few kHz, and when a peak leaves the screen, center it again.
    35 Ω / (470 Ω + 35 Ω) ≈ 0.07), so ΔV<sub>BE</sub> ≈ 0.23 mV
 4. That change alters the collector current by 0.9% (ΔV<sub>BE</sub> / 26 mV), and the diffusion capacitance (the capacitance that appears between base and emitter in
    proportion to the current; gm·τ<sub>F</sub> ≈ 29 mS × 23 ps ≈ 0.66 pF, with τ<sub>F</sub> ≈ 1/(2πf<sub>T</sub>) from
-   f<sub>T</sub> = 7 GHz) moves by about 6 fF. Through the divider of C1 and C2, 0.1 times of it, (C1/(C1 + C2))², about 0.6 fF, reaches C<sub>s</sub>,
+   f<sub>T</sub> = 7 GHz) moves by about 6 fF. Through the divider of C1 and C2, only (C1/(C1 + C2))² ≈ 0.1 of it, about 0.6 fF, reaches C<sub>s</sub>,
    giving Δf/f = ΔC<sub>s</sub> / 2C<sub>s</sub> ≈ 2×10<sup>−5</sup>.
    The change of the junction capacitance is not included.
 
@@ -530,7 +530,7 @@ J<sub>3</sub> = 0.073), and subtracting 20 log<sub>10</sub>|J<sub>n</sub>| from 
 
 ```spectrum
 # Spectrum analyzer screen (tommie-fence spectrum fence)
-title: Fig. 6 Sidebands of a carrier modulated at 1kHz (rough guide)
+title: Fig. 6 1kHz sidebands of the carrier (estimate)
 device: tinysa-ultra
 center: 80MHz
 span: 10kHz

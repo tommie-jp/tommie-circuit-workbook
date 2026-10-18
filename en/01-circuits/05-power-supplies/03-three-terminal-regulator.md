@@ -11,7 +11,7 @@ ja: ddd18b5ee60b6cdaa8133b201f28507acaa06ea7
 
 # 5-3 Three-terminal regulator (7805)
 
-Make 5 V from a 9 V battery with a single IC, the 7805. The three-terminal regulator packs the Zener + transistor
+Make 5 V from a 9 V battery with a single IC, the 7805. The three-terminal regulator packs the zener and transistor
 regulator of 5-2 into one IC, including the mechanism that corrects the error. You only connect its three pins:
 input (IN), GND and output (OUT). The output stays at 5 V even when the input wanders a little, so it is the standard
 power source for circuits that run on 5 V. In this exercise the power comes from Supplies on the Analog Discovery 3
@@ -62,7 +62,7 @@ style:
 
 ```breadboard
 # Breadboard wiring diagram (tommie-fence breadboard fence)
-title: Fig. 2 Building it on the breadboard (power from AD3 Supplies)
+title: Fig. 2 Breadboard build (power from AD3 Supplies)
 board: half
 parts:
   U1: regulator/to220 e8(in) e9(gnd) e10(out) 7805
@@ -101,7 +101,7 @@ wires:
   and the heat sink (the metal tab with a hole) is at the top. The 7805 in the figure is drawn in this orientation,
   with the part number printed on the body
 - The pins of U1 (IN, GND, OUT = columns 8, 9, 10) are carried from row e of the upper block to the lower block by wires
-- V+ of Supplies (red) goes to the lower + rail and V− (black) to the lower − rail. From the lower + rail go to column 8
+- V+ of Supplies (red) goes to the lower + rail and V− (black) to the lower − rail. From the lower + rail, run a wire to column 8
   (IN) (`j8`). Always connect the GND pin (column 9) to the − rail (`j9`). If it floats, the output is not 5 V
 - Cin (columns 5 and 8) goes between IN and GND, and Cout (columns 10 and 13) goes between OUT and GND. Keep the
   leads short and plug them in right next to the regulator
@@ -121,7 +121,7 @@ board:
   material: FR-4
   slots: on
 unused: [J2.D+, J2.D-]
-title: Fig. 3 Building it on a perfboard (component side; yellow circles mark AD3 clip points)
+title: Fig. 3 Perfboard build (yellow circles = AD3 clips)
 parts:
   J1: sip2 b15
   J2: usb-c/female t5 u5 v5 w5
@@ -183,7 +183,7 @@ style:
   the board's printing: letters are columns (A to X from the left) and numbers are rows (1 to 18 from the bottom). The
   figure above is the view from the component side, and the figure below it is the solder side (columns reversed
   left to right)
-- J1 (2-pin pin header, B15 and C15) is where you clip on Supplies of the AD3. B15 is V+ and C15 is V−. V+ goes along
+- J1 (2-pin pin header, B15 and C15) is where you clip on the Supplies of the AD3. B15 is V+ and C15 is V−. V+ goes along
   the strip on row 17 (red), down column E to E9 (IN). V− goes down column C to the GND strip on row 3 (black)
 - The 7805 (TO-220, F9, G9, H9 = IN, GND, OUT) stands with its heat sink up. GND (G9) goes down column G to the GND
   strip. OUT (H9) is carried to the right along row 9 (orange) and distributed to Cout (K9, K6), RL (M9, M5), Rled (P9, P6)
@@ -193,7 +193,7 @@ style:
   (through S5 to row 3) to GND (T5). D+ and D− are not used (they are listed under `unused:`)
 - J2 is not a USB-standard output. It is only a breakout that passes power, and with no source resistor (Rp) on CC, a
   USB-C device such as a smartphone does not recognize it as a power source. Do not connect a USB device, a PC or a
-  charger to J2 (its 5 V would collide with yours and may destroy it). Use it as an outlet that passes power by cable to
+  charger to J2 (its 5 V would collide with yours and may damage it). Use it as an outlet that passes power by cable to
   a 5 V experimental circuit. Write `OUT 5V` on the real board as well
 - The GND sides of Cin (E9, E6), Cout (K9, K6), RL (M5) and the cathode of Dled (P3) all connect to the GND strip on row 3
 - The yellow circles are **where you clip the AD3 only while measuring**, and they are never wired permanently. V+ and V−

@@ -75,7 +75,7 @@ L1, C1 and R1 form one series loop. The LED is outside this loop and is lit from
   (with a 50 Ω output), so some individual parts would not turn on. Every bipolar transistor
   turns on at about 0.6 V, so this circuit uses one.
 
-**The LED is not put inside the loop.** An LED in series with the loop still lights, but it disturbs the resonance.
+**Keep the LED out of the loop.** An LED in series with the loop still lights, but it disturbs the resonance.
 The LED passes no current until about 1.8 V is exceeded, so it chops the loop current into narrow peaks, one per half cycle.
 LTspice shows that with two LEDs in opposite directions in the loop, the current at f<sub>0</sub> falls
 from 17.6 mA to 4.5 mA and the resonance curve is no longer symmetric (2.3 mA at 8 kHz, 1.2 mA at 32 kHz).
@@ -138,7 +138,7 @@ wires:
 
 | Symbol | Part | Value |
 | --- | --- | --- |
-| V1 | Signal generator (Wavegen W1 of the AD3; output about 0 Ω) | Sine wave, 6 Vpp (the 3 V in Fig. 1 is the peak), 2 kHz to 32 kHz, output resistance of W1 on the AD3 ≈ 0 Ω (a generator with a 50 Ω output also works; values for both are the 2 columns in the "Values to check" table) |
+| V1 | Signal generator (Wavegen W1 of the AD3; output about 0 Ω) | Sine wave, 6 Vpp (the 3 V in Fig. 1 is the peak), 2 kHz to 32 kHz, output resistance of W1 on the AD3 ≈ 0 Ω (a generator with a 50 Ω output also works; values for both are the two columns in the "Values to check" table) |
 | L1 | Inductor (axial) | 10 mH |
 | C1 | Ceramic capacitor | 10 nF (103), 50 V rating |
 | R1 | Resistor (1/4 W) | 100 Ω |
@@ -170,7 +170,7 @@ Oscilloscope:
 | Trigger | CH1, rising edge, level 0 V |
 | Measurement | Vpp of CH2 (use the automatic measurement if available) |
 
-On the AD3, set these with Wavegen (W1), Scope and Supplies (V+ = 5 V) in WaveForms. A PC oscilloscope works with the same settings. The 5 V current that lights the LED (about 3–9 mA) fits within about 50 mA for one supply rail of the AD3.
+On the AD3, set these with Wavegen (W1), Scope and Supplies (V+ = 5 V) in WaveForms. A PC oscilloscope works with the same settings. The 5 V current that lights the LED (about 3–9 mA) fits within about 50 mA for one supply channel of the AD3.
 Away from resonance CH2 shrinks to about 0.1 Vpp, so lower the CH2 range if it is hard to read.
 
 ## Values to check
@@ -220,7 +220,7 @@ The resonance curve you should see (the simulation values in the table above). T
 
 ```graph
 # Graph (tommie-fence graph fence)
-title: Fig. 3 Resonance curve, peak at 15.9kHz, higher for a lower output resistance
+title: Fig. 3 Resonance curve, peak at 15.9kHz
 x: Frequency Hz log 2k..32k
 y: Current mA
 lines:
@@ -285,7 +285,7 @@ The screen seen with a generator of 50 Ω output. CH1 is the generator output, a
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
-title: Fig. 4 Resonance (15.9kHz), CH2 peaks and is in phase with CH1
+title: Fig. 4 Resonance (15.9kHz), CH2 peaks, in phase with CH1
 time: 20us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 15.9kHz 4.23Vpp, range: 2V/div}
@@ -297,7 +297,7 @@ measure: [vpp, freq, phase]
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
-title: Fig. 5 Below resonance (12kHz), CH2 drops to 1.01Vpp, leads CH1
+title: Fig. 5 Below resonance (12kHz), CH2 smaller, leads CH1
 time: 20us/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 12kHz 5.88Vpp, range: 2V/div}

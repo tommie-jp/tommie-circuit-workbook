@@ -14,7 +14,7 @@ ja: 8e07ab3d28f7dc0490001f35cd3f53b88d81e012
 A practical circuit that combines the 555 monostable (3-3; a mode in which a trigger holds the output at H for a fixed time) with
 a MOSFET switch (2-5). Press the button and a night-light LED comes on, then turns itself off
 after about 19 minutes. Press it before going to sleep and you have a "goodnight timer" that works as a reading light and then switches itself off.
-Chapter 12 turns circuits from the earlier chapters into finished projects: we check them on a
+Chapter 12 turns circuits from the earlier chapters into finished projects: you check them on a
 breadboard, then solder them onto a perfboard to keep them.
 
 ## Schematic
@@ -60,9 +60,9 @@ style:
 
 ![Schematic](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/12-projects/circuit/01-goodnight-timer.svg)
 
-- Pin 2 (TRIG) of U1 is normally H through Rtrig (100 kΩ). The moment SWtrig is pressed it goes L
+- PIN 2 (TRIG) of U1 is normally H through Rtrig (100 kΩ). The moment SWtrig is pressed it goes L
   and the monostable starts
-- Rt (4.7 MΩ) and Ct (220 µF), connected to pins 6 and 7 (THRES and DISCH), set the time:
+- Rt (4.7 MΩ) and Ct (220 µF), connected to PIN 6 and 7 (THRES and DISCH), set the time:
   T = 1.1 × Rt × Ct = 1.1 × 4.7 MΩ × 220 µF ≈ 1137 s (about 19 minutes, calculated value)
 - U1 is the CMOS TLC555, not an ordinary (bipolar) NE555.
   When Rt is large, even the small current that flows into the THRES and TRIG inputs (the input bias current) can no
@@ -79,9 +79,9 @@ style:
   electrolytic capacitor rated 25 V or more, or a low-leakage part, and apply voltage for a few minutes after assembly before use.
   Raising the capacitance 10 times raises the leakage about 10 times, so get the time from Rt rather than from C
   and keep C at 220 µF
-- Pin 3 (OUT) is H during the monostable period and drives the gate of Q1 (2N7000) through Rg (220 Ω).
+- PIN 3 (OUT) is H during the monostable period and drives the gate of Q1 (2N7000) through Rg (220 Ω).
   While Q1 is on, DLED (the night light) is lit
-- Pin 4 (RESET) is tied directly to pin 8 (VDD) to disable it (so the timer can always run)
+- PIN 4 (RESET) is tied directly to PIN 8 (VDD) to disable it (so the timer can always run)
 
 ## Wiring diagram
 
@@ -139,13 +139,13 @@ wires:
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/12-projects/breadboard/01-goodnight-timer.svg)
 
-- The top and bottom rails are joined by wires at the right end (columns 62 and 63). Connect pin 8 of U1 (upper side of column 10) and
-  pin 4 (lower side of column 13) to the + rail, and pin 1 (lower side of column 10) to the bottom − rail (GND)
-- Pin 2 (TRIG, lower side of column 11) goes up to column 5 of the upper block through column 6 by an orange wire.
+- The top and bottom rails are joined by wires at the right end (columns 62 and 63). Connect PIN 8 of U1 (upper side of column 10) and
+  PIN 4 (lower side of column 13) to the + rail, and PIN 1 (lower side of column 10) to the bottom − rail (GND)
+- PIN 2 (TRIG, lower side of column 11) goes up to column 5 of the upper block through column 6 by an orange wire.
   There Rtrig pulls up to the + rail, and pressing SWtrig (e3) pulls it down to the bottom − rail
-- Pins 6 and 7 (THRES and DISCH, upper side of columns 12 and 11) are joined on row d. Rt (4.7 MΩ) goes from column 12 to
+- PIN 6 and 7 (THRES and DISCH, upper side of columns 12 and 11) are joined on row d. Rt (4.7 MΩ) goes from column 12 to
   the red + rail, and Ct (220 µF) goes from column 11 to the − rail at column 8. This is the time-constant node
-- Pin 3 (OUT, lower side of column 12) is carried by a blue wire (row i) to column 46 and goes through Rg to the gate of Q1
+- PIN 3 (OUT, lower side of column 12) is carried by a blue wire (row i) to column 46 and goes through Rg to the gate of Q1
   (column 41). Q1 is plugged into the upper block (row b, columns 40 to 42), and its pins go down across the center gap by
   short wires from row e (S from column 40 to GND, G at column 41 to Rg). D (column 42) is carried by a green wire to column 46
   and on to the cathode of DLED (the night light); the anode goes through RLED to the + rail.
@@ -160,7 +160,7 @@ wires:
 
 ## Building it on a perfboard
 
-Since this is a finished project, we also build the same circuit on a perfboard.
+Since this is a finished project, build the same circuit on a perfboard as well.
 
 ```perfboard
 # Perfboard wiring diagram (tommie-fence perfboard fence)
@@ -168,7 +168,7 @@ board:
   size: 7x5cm
   silk: board
   slots: on
-title: Fig. 3 Building it on a perfboard (seen from the component side)
+title: Fig. 3 Building it on a perfboard (component side)
 unused: [U1.CONT]
 points:
   VCC: a18
@@ -193,26 +193,26 @@ wires:
   - b5 -- e5 black
   - e5 -- m5 black
   - m5 -- u5 black
-  # Power for U1: pin 8 (VDD) goes up, pin 1 (GND) goes down
+  # Power for U1: PIN 8 (VDD) goes up, PIN 1 (GND) goes down
   - e14 -- e18 red
   - e11 -- e5 black
-  # Pin 4 (RESET) goes up column J to VCC. From j14 on the way, VCC is also distributed to the output stage
+  # PIN 4 (RESET) goes up column J to VCC. From j14 on the way, VCC is also distributed to the output stage
   - h11 -- j11 red
   - j11 -- j14 red
   - j14 -- j18 red
   - j14 -- r14 red
-  # TRIG (pin 2): to VCC through Rtrig, to GND through SWtrig
+  # TRIG (PIN 2): to VCC through Rtrig, to GND through SWtrig
   - b15 -- b9 yellow
   - b7 -- b5 black
   - f11 -- f9 yellow
   - f9 -- d9 yellow
-  # THRES and DISCH (pins 6 and 7): to VCC through Rt, to GND through Ct
+  # THRES and DISCH (PIN 6 and 7): to VCC through Rt, to GND through Ct
   - f14 -- f15 orange
   - f15 -- g15 orange
   - g14 -- g15 orange
   - g15 -- u15 orange
   - u13 -- u5 black
-  # OUT (pin 3) → Rg → gate of Q1. Drain of Q1 → DLED → RLED → VCC
+  # OUT (PIN 3) → Rg → gate of Q1. Drain of Q1 → DLED → RLED → VCC
   - g11 -- g10
   - g10 -- l10
   - p10 -- p8
@@ -227,24 +227,24 @@ wires:
 
 - Seen from the component side. Run one rail each for power along row 18 (top, red) and GND along row 5 (bottom, black),
   and connect the supply at a18 and a5 at the left end. The parts are distributed vertically from these two rails
-- Insert U1 (e14, DIP8) with the notch on the left. The upper row, from the left, is pin 8 (VDD), 7 (DISCH),
-  6 (THRES) and 5 (CONT) at e14 to h14, and the lower row, from the left, is pin 1 (GND), 2 (TRIG), 3 (OUT) and
-  4 (RESET) at e11 to h11. Pin 8 goes up column E to row 18, and pin 1 goes down column E to row 5
-- Pin 4 (RESET) exits to column J on row 11 and goes up column J to row 18 (VCC). From j14 on the way,
-  row 14 runs out to the right to carry VCC to RLED in the output stage. Pin 5 (CONT) is not connected anywhere (it is listed in `unused:` to exclude it from the ERC "not connected" warning).
+- Insert U1 (e14, DIP8) with the notch on the left. The upper row, from the left, is PIN 8 (VDD), 7 (DISCH),
+  6 (THRES) and 5 (CONT) at e14 to h14, and the lower row, from the left, is PIN 1 (GND), 2 (TRIG), 3 (OUT) and
+  4 (RESET) at e11 to h11. PIN 8 goes up column E to row 18, and PIN 1 goes down column E to row 5
+- PIN 4 (RESET) exits to column J on row 11 and goes up column J to row 18 (VCC). From j14 on the way,
+  row 14 runs out to the right to carry VCC to RLED in the output stage. PIN 5 (CONT) is not connected anywhere (it is listed in `unused:` to exclude it from the ERC "not connected" warning).
   It is not required for the monostable to work and it works even if left floating (to connect it, add 0.01 µF
   from here to GND)
-- Pin 2 (TRIG, yellow) is carried from f11 to the left along row 9 to SWtrig (b9). The lower pin of SWtrig goes from b7 to
+- PIN 2 (TRIG, yellow) is carried from f11 to the left along row 9 to SWtrig (b9). The lower pin of SWtrig goes from b7 to
   GND on row 5, and the upper pin b9 goes up column B and is pulled up through Rtrig (b18 to b15) to VCC on row 18
-- Pins 6 and 7 (THRES and DISCH, orange) each go up to row 15 and are joined at f15 to g15, and go to VCC through Rt (g18 to g15).
+- PIN 6 and 7 (THRES and DISCH, orange) each go up to row 15 and are joined at f15 to g15, and go to VCC through Rt (g18 to g15).
   From the same g15, row 15 runs to the right to Ct (u15, + at the top), and the − of Ct goes down column U to GND
-- Pin 3 (OUT) goes along row 10 to Rg (l10 to p10), and from Rg down column P to the gate of Q1 (p8).
+- PIN 3 (OUT) goes along row 10 to Rg (l10 to p10), and from Rg down column P to the gate of Q1 (p8).
   Looking at the flat face of Q1 (2N7000), the pins are S, G, D from the left, so o8 is the source, p8 is the gate and
   q8 is the drain. The source goes down column M to GND, and the drain goes from r8 up column R to
   the cathode of DLED (r9). The anode of DLED (r11) goes through RLED (r14 to r12) to VCC on row 14
 - There are 2 crossings, and both are bridged with insulated wire. The orange row 15 (to Ct) crosses the red column J (RESET), and
   the yellow row 9 (TRIG) crosses the black column E (GND of U1). With this pin arrangement the circuit cannot be built with
-  0 crossings (the VCC of pin 4 and the GND from pins 6 and 7 to Ct must meet at the right of U1)
+  0 crossings (the VCC of PIN 4 and the GND from PIN 6 and 7 to Ct must meet at the right of U1)
 
 ## Instrument settings
 
@@ -256,8 +256,8 @@ Ct reaches 2/3 of the supply voltage (about 3.33 V) and OUT returns to L at abou
 | Item | Value |
 | --- | --- |
 | Power | V+ of Supplies at 5 V; V− is not used |
-| CH1 (1+) | Voltage of Ct (pins 6 and 7 of U1). 1 V/div, 0 V one division up from the bottom |
-| CH2 (2+) | OUT (pin 3 of U1). Same 1 V/div and same 0 V position as CH1 |
+| CH1 (1+) | Voltage of Ct (PIN 6 and 7 of U1). 1 V/div, 0 V one division up from the bottom |
+| CH2 (2+) | OUT (PIN 3 of U1). Same 1 V/div and same 0 V position as CH1 |
 | 1−, 2− | GND |
 | Time range | 60 s/div (Record mode, first 9 minutes in Fig. 3). To see T, lengthen the record to 20 minutes or more |
 | Trigger | Rising edge of CH2, 2.5 V. Place the trigger point one division from the left (the time SWtrig is pressed is t = 0) |
@@ -290,10 +290,10 @@ Calculated values. Measure voltages against GND with the multimeter on a DC volt
 
 | Where to measure | Expected value |
 | --- | --- |
-| Pin 3 (OUT) of U1 just after SWtrig is pressed | Goes H and DLED lights. About 5 V (the TLC555 has a CMOS output and drives only a gate, so it is almost the same as +5 V) |
+| PIN 3 (OUT) of U1 just after SWtrig is pressed | Goes H and DLED lights. About 5 V (the TLC555 has a CMOS output and drives only a gate, so it is almost the same as +5 V) |
 | Time lit | T = 1.1 × 4.7 MΩ × 220 µF ≈ 1137 s (about 19 minutes, calculated value) |
 | Current in DLED | About 6.4 mA ((5 V − 2.0 V) / 470 Ω, red LED, calculated value). Check by dividing the voltage across RLED (about 3.0 V) by 470 Ω |
-| Pin 3 after 19 minutes | Returns to L (0 V) and DLED goes out |
+| PIN 3 after 19 minutes | Returns to L (0 V) and DLED goes out |
 
 Replacing Ct (220 µF) with 100 µF gives T ≈ 8.6 minutes (calculated value). The capacitance tolerance of an electrolytic
 capacitor is about ±20% and leakage also lengthens the time, so the actual time is a rough guide.
@@ -311,11 +311,11 @@ for C<sub>t</sub> to reach 2/3 V<sub>CC</sub>. The 555 is ideal (no input bias c
 
 | Item | Value in the text | LTspice | Verdict |
 | --- | --- | --- | --- |
-| T (no leakage) | about 1137 s (about 19 minutes) | 1136 s | agrees |
-| C<sub>t</sub> at 60 s | about 0.28 V | 0.28 V | agrees |
-| C<sub>t</sub> at 480 s | about 1.86 V | 1.86 V | agrees |
-| Current in DLED (OUT = 5 V) | about 6.4 mA | 6.37 mA (0.02 V across D-S of Q1) | agrees |
-| T when the leakage of the electrolytic capacitor is represented by a 20 MΩ parallel resistor (about 0.25 µA at 5 V) | "gets longer" (no number) | 1451 s (about 24 minutes) | addendum (below) |
+| T (no leakage) | about 1137 s (about 19 minutes) | 1136 s | Agrees |
+| C<sub>t</sub> at 60 s | about 0.28 V | 0.28 V | Agrees |
+| C<sub>t</sub> at 480 s | about 1.86 V | 1.86 V | Agrees |
+| Current in DLED (OUT = 5 V) | about 6.4 mA | 6.37 mA (0.02 V across D-S of Q1) | Agrees |
+| T when the leakage of the electrolytic capacitor is represented by a 20 MΩ parallel resistor (about 0.25 µA at 5 V) | "gets longer" (no number) | 1451 s (about 24 minutes) | Added note (below) |
 
 Even a leakage of about 0.25 µA lengthens T by about 30 %, from 19 to 24 minutes. This is an example of the text's statement that "if the leakage gets close to the charging current (1.06 µA), the time gets longer".
 For Rt = 2.2 MΩ, T = 1.1 × 2.2 MΩ × 220 µF ≈ 532 s (about 9 minutes) and the charging current is 5 V / 2.2 MΩ ≈ 2.3 µA;

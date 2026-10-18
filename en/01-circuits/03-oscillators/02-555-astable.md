@@ -65,14 +65,14 @@ style:
 - **Pin 7 (DISCH) is the midpoint of Ra and Rb.** C1 charges through Ra + Rb, and
   when it discharges, the internal transistor pulls pin 7 to GND and the current goes through Rb only.
   Discharging is faster than charging, so the 555 astable **always has a longer High time**
-- Cc (0.01 µF = 10 nF) is noise suppression for pin 5 (CONT). The circuit oscillates without it,
+- Cc (0.01 µF = 10 nF) suppresses noise on pin 5 (CONT). The circuit oscillates without it,
   but it is standard practice to add it
 
 ## Wiring diagram
 
 ```breadboard
 # Breadboard wiring diagram (tommie-fence breadboard fence)
-title: Fig. 2 Built on a breadboard
+title: Fig. 2 Building it on the breadboard
 # Top rails are +5V/GND, and the bottom rails are also +5V/GND (joined top to bottom in column 1)
 board: half
 parts:
@@ -121,15 +121,15 @@ wires:
   the orange wires going around the left of the IC (`d12 -- d9`, `e9 -- f9`, `g9 -- g11`). The + of C1 goes into this column 9
 - Rb (47 kΩ) spans 4 holes to the right from the right end of Ra (column 11, pin 7) and goes into column 15, and a short orange wire returns from column 15 to column 12 (pin 6)
 - Pin 4 (RESET) is not used, so it is fixed to +5 V (`i13 -- +b13`). Left floating, it
-  can cause malfunction
+  can cause malfunctions
 
-- Power comes from Supplies of the AD3 (set V+ to 5 V). The circuit draws about 6.8 mA for the LED and a few mA for the 555, within the 50 mA of V+ (250 mW on USB power).
+- Power comes from the Supplies tool of the AD3 (set V+ to 5 V). The circuit draws about 6.8 mA for the LED and a few mA for the 555, within the 50 mA of V+ (250 mW on USB power).
   V+ goes to the top + rail and GND to the top − rail, and the wires in column 1 carry them to the bottom rails
 - The Scope is drawn as a separate box (AD3 Scope) below the breadboard. Plug 1+ (yellow) into `j12` of pin 3 (OUT, column 12), and plug 1− (black) into the bottom − rail (GND)
 
 ## Instrument settings
 
-Use the Scope of the AD3 as the oscilloscope. This exercise looks at the shape and timing of a slow square wave of about 1 Hz, far slower than 10 MHz.
+Use the AD3 Scope as the oscilloscope. This exercise looks at the shape and timing of a slow square wave of about 1 Hz, far slower than 10 MHz.
 Connect pin 3 (OUT) to CH1 and read the High time and the period.
 
 | Setting | Value |
@@ -164,12 +164,12 @@ Subtracting it from one period (about 0.72 s) leaves the Low time of about 0.33 
 | Cc | Ceramic capacitor (noise suppression for CONT) | 0.01 µF |
 | R1 | Resistor (LED current limit) | 220 Ω |
 | D1 | LED (red, 5 mm) | V<sub>F</sub> ≈ 2.0 V |
-| — | Power supply | 5 V (V+ of Supplies of the AD3) |
-| — | Instrument | Scope 1+ of the AD3 (pin 3 OUT) |
+| — | Power supply | 5 V (V+ of the AD3 Supplies) |
+| — | Instrument | AD3 Scope 1+ (pin 3 OUT) |
 
 ## Values to check
 
-Time the on and off periods with a stopwatch over 10 cycles and divide by 10, or look at the waveform of pin 3 on the oscilloscope (0-3) (Fig. 3).
+Time the on and off intervals with a stopwatch over 10 cycles and divide by 10, or look at the waveform of pin 3 on the oscilloscope (0-3) (Fig. 3).
 
 Calculated values. f = 1.44 / {(Ra + 2Rb) × C}, the High time is (Ra + Rb) × C × 0.693, and
 the Low time is Rb × C × 0.693.
@@ -184,7 +184,7 @@ the Low time is Rb × C × 0.693.
 
 As Ra approaches 0 the duty cycle approaches 50 %, but if Ra is too small,
 a large current flows from Vcc through Ra into pin 7 during discharge and damages the IC (the lower limit is about 1 kΩ).
-To change the duty cycle freely, see the PWM with a diode in 3-6.
+To set the duty cycle freely, see the PWM circuit with a diode in 3-6.
 
 ## Verification with LTspice
 

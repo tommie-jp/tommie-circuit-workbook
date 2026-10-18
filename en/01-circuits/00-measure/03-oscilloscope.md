@@ -154,7 +154,7 @@ measure: [vpp, vmax, vmin, freq]
 
 ### Reading AD terminals on a general-purpose oscilloscope
 
-This section is a correspondence table for people who use an oscilloscope other than the AD to refer back to in later chapters.
+This section is a lookup table for readers who use an oscilloscope other than the AD and come back to it in later chapters.
 You do not need it for this experiment.
 This book and the Denken Level 3 book have exercises whose wiring is written with the terminal names of the Analog Discovery (AD).
 When you build them with a bench oscilloscope and a function generator (an oscillator that outputs a wave of a fixed shape),

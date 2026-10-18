@@ -11,7 +11,7 @@ ja: 3557e26492fcd8f3b6dd311af195f1d03024cfe0
 
 # 3-3 555 monostable — a timer
 
-Wire the NE555 as a monostable. A **monostable** circuit rests in one state (output Low). Only when a trigger arrives does it
+Wire the NE555 as a monostable. A **monostable** circuit normally rests in one state (output Low). Only when a trigger arrives does it
 go to the other state (High) for a fixed time. Press the button once, and the LED lights for a set time and then turns
 off by itself. This is the basic form of "press it and it runs for a fixed time", as in a stairwell light or a bedtime timer.
 
@@ -62,7 +62,7 @@ style:
   That is the trigger, and pin 3 (OUT) goes High
 - **Pins 7 and 6 are one node, shared by R1 and C1.** Only while OUT is High, R1 charges C1. When C1 reaches
   2/3 Vcc, the 555 returns OUT to Low by itself (releasing SW1 does not stop it)
-- Pin 4 (RESET) is tied to Vcc. Pin 5 (CONT) is decoupled to GND by Cc (0.01 µF) against noise
+- Pin 4 (RESET) is tied to Vcc. Pin 5 (CONT) is bypassed to GND with Cc (0.01 µF) to suppress noise
 
 ## Wiring diagram
 
@@ -114,20 +114,20 @@ wires:
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/03-oscillators/breadboard/03-555-monostable.svg)
 
-- In Fig. 2, **the right lead of R1 (column 11) is pin 7, and pin 6 (column 12) is joined to it by a single wire, `a11--a12`**
+- In Fig. 2, **the right pin of R1 (column 11) is pin 7, and pin 6 (column 12) is joined to it by a single wire, `a11--a12`**
   (both are the same node of R1 and C1)
-- SW1 (tactile switch) is a 4-pin part that straddles the center gap and occupies `e4`, `f4`, `e6` and `f6`.
-  **Connect the near side of the gap (row f, lower block) to pin 2 (column 11) and the far side (row e, upper block) to
+- SW1 (tactile switch) is a 4-pin part that straddles the trench and occupies `e4`, `f4`, `e6` and `f6`.
+  **Connect the near side of the trench (row f, lower block) to pin 2 (column 11) and the far side (row e, upper block) to
   GND.** The two pins on the same side (the same block) are connected inside even when the switch is not pressed
 - Pin 4 (RESET) is unused, so it is tied to +5 V (`i13 -- +b13`)
 
-- The power comes from the AD3 Supplies (set V+ to 5 V). The circuit draws about 6 mA for the LED and a few mA for the 555, within the 50 mA of V+ (250 mW on USB power)
+- Power comes from the AD3 Supplies (set V+ to 5 V). The circuit draws about 6 mA for the LED and a few mA for the 555, within the 50 mA of V+ (250 mW on USB power)
 - The Scope is drawn as a separate box (AD3 Scope) below the breadboard. 2+ (green) goes to `j11`, pin 2 (TRIG, column 11), and 1+ (yellow) goes to `j12`, pin 3 (OUT, column 12).
   1− and 2− (black) go to the bottom − rail (GND)
 
 ## Instrument settings
 
-Use the AD3 Scope as the oscilloscope. This exercise shows a single pulse about 1 s long, much slower than 10 MHz.
+Use the AD3 Scope as the oscilloscope. This exercise shows a single pulse about 1 s long, far slower than 10 MHz.
 Connect CH2 to pin 2 (TRIG, the press signal) and CH1 to pin 3 (OUT, the pulse), so that one screen covers the time from the trigger to the end of the pulse.
 
 | Setting | Value |
@@ -174,12 +174,12 @@ The 1.10 s gap between the cursors is the pulse width.
 Calculated values. The pulse width (the time OUT is High) is T = 1.1 × R1 × C1. Measure the time with a stopwatch or with the oscilloscope of Fig. 3.
 Measure the voltage at pin 3 with the multimeter's DC voltage range, between pin 3 and GND while the LED is lit.
 
-| Where to measure | Expected value | What it tells you |
+| Measure | Expected value | What it shows |
 | --- | --- | --- |
-| Time from pressing SW1 until the LED goes off | About 1.1 s | R1 × C1 × 1.1 (independent of the Vcc value) |
-| Voltage at pin 3 (OUT) during the pulse | About 3.5 V (equivalent to Vcc − 1.5 V) | The High output of a bipolar 555 does not swing up to Vcc. It tops out around Vcc − 1.5 V |
-| SW1 released during the pulse | Unchanged: goes off after about 1.1 s | Once a monostable has started, **releasing the trigger does not stop it** |
-| SW1 pressed again in the middle of the pulse | Not extended. Goes off about 1.1 s after the first press | The 555 monostable cannot be retriggered. A trigger during the pulse is ignored (but if the button is held down until the time is up, OUT stays High until it is released) |
+| Time from pressing SW1 until the LED goes off | about 1.1 s | R1 × C1 × 1.1 (independent of the Vcc value) |
+| Voltage at pin 3 (OUT) during the pulse | about 3.5 V (equivalent to Vcc − 1.5 V) | The High output of a bipolar 555 does not swing up to Vcc. It tops out around Vcc − 1.5 V |
+| SW1 released during the pulse | unchanged, goes off after about 1.1 s | Once a monostable has started, **releasing the trigger does not stop it** |
+| SW1 pressed again in the middle of the pulse | not extended, goes off about 1.1 s after the first press | A 555 monostable cannot be retriggered. A trigger during the pulse is ignored (but if the button is held down until the time is up, OUT stays High until it is released) |
 
 With R1 = 1 MΩ the pulse stretches to about 11 s (as long as the internal DISCH transistor of the 555 and the
 leakage current of C1 are negligible compared with the current through R1). The "bedtime timer" in 12-1 is an application of this circuit.
@@ -187,13 +187,13 @@ leakage current of C1 are negligible compared with the current through R1). The 
 ## Verification with LTspice
 
 `sim/03-555-monostable.cir` runs Fig. 1 as a transient analysis. SW1 is pressed for 50 ms at 1 s and again at 1.5 s.
-The NE555 is a behavioral model (the same as `sim/02-555-astable.cir` of 3-2: comparators and an SR latch, High output of V<sub>CC</sub> − 1.5 V). It is an **assumption, not a measurement**.
+The NE555 is a behavioral model (the same as `sim/02-555-astable.cir` in 3-2: comparators and an SR latch, High output of V<sub>CC</sub> − 1.5 V). It is an **assumption and not a measurement**.
 
-| Item | Value in the text | LTspice | Verdict |
+| Item | Value in the text | LTspice | Result |
 | --- | --- | --- | --- |
-| Pulse width | About 1.1 s | 1.09 s (rises at 1.0005 s, falls at 2.091 s) | Agrees |
-| Voltage at pin 3 during the pulse | About 3.5 V | 3.5 V (assumption) | As set in the model |
-| Pressing again during the pulse (1.5 s) | Not extended | Goes off at 2.091 s (not extended) | Agrees |
+| Pulse width | about 1.1 s | 1.09 s (rises at 1.0005 s, falls at 2.091 s) | Match |
+| Voltage at pin 3 during the pulse | about 3.5 V | 3.5 V (assumed) | As set in the model |
+| Pressing again during the pulse (1.5 s) | not extended | goes off at 2.091 s (not extended) | Match |
 
 ## Sources
 

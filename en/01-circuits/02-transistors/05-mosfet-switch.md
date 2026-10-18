@@ -56,7 +56,7 @@ style:
 ![Schematic](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/02-transistors/circuit/05-mosfet-switch.svg)
 
 The +5 V in Fig. 1 is the supply output V+ of the Analog Discovery (set it to 5 V in Supplies in WaveForms).
-The only current is the LED's roughly 9 mA, so V+ is enough. CH2 measures the gate voltage and CH1 the drain voltage, both from GND.
+The only current drawn is the LED's roughly 9 mA, so V+ is enough. CH2 measures the gate voltage and CH1 the drain voltage, both from GND.
 
 When `SW` is closed, 5 V is applied to the gate, the MOSFET turns on and the LED lights.
 `RPD` (100 kΩ, pull-down) pulls the gate firmly down to 0 V when `SW` is open.
@@ -111,7 +111,7 @@ As in Fig. 2, the 5 V goes from V+ (red) of the Analog Discovery to `+t1` of the
 - **Q1 goes into row e of the upper block, rotated 180 degrees** (`e13` D, `e14` G, `e15` S).
   The 2N7000, **viewed from the flat face, is S, G, D from the left** (the order differs from the 2SC1815, so be careful), so
   after rotating it is D, G, S from the left and the wires do not overlap
-  Note: **verify on the real part. The 2007 edition of the onsemi drawing says S G D and the 2022 edition of the table says D G S, which disagree; the table here follows the 2007 edition (S G D). Check the real part with a multimeter**
+  Note: **verify on the real part. The 2007 edition of the onsemi drawing says S G D and the 2022 edition of the table says D G S, which disagree; this text follows the 2007 edition (S G D). Check the real part with a multimeter**
 - **Drain (column 13)**: an orange wire `b9`–`b13` from the LED cathode (column 9). Plug 1+ of CH1 (orange) into `a9`
 - **Gate (column 14)**: the left end of `RG` (`b14`) and `RPD`, inserted vertically to the − rail (`a14`), are in the same column.
   Plug 2+ of CH2 (blue) into `a16` and carry it over to the gate column with the blue wire `d16`–`d14`

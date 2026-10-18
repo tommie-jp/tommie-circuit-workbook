@@ -74,12 +74,12 @@ wires:
 - The power comes from V+ of Supplies on the Analog Discovery 3 (AD) (set it to 5 V in WaveForms). Connect V+ to the top + rail and
   GND to the top − rail. Two LEDs draw about 18 mA, within what the AD supply can deliver (up to about 50 mA per rail).
 - In Fig. 2, `R1` is plugged into `b8` in column 8, and `R2` into `c8`, also in column 8. They are different holes, but in the same column
-  (upper block, a to e), so they are connected inside without a wire. The supply needs to be plugged into
-  only one of them (in the figure, the free hole `a8`). `R1` extends to the right and
+  (upper block, a to e), so they are connected inside without a wire. Plug the supply wire into
+  just one of them (in the figure, the free hole `a8`). `R1` extends to the right and
   `R2` to the left, so that the pins of the two branches do not land in the same row of holes.
 - By the same logic, the other end of `R1` (`b13`) and the anode of `D1` (`d13`) are connected in column 13.
   The other end of `R2` (`c4`) and the anode of `D2` (`e4`) are connected in column 4.
-  You do not need a jumper wire between part pins
+  You can skip the jumper wire between part pins
   **only when they are plugged into the same column**.
 - The long rows of holes along the top and bottom edges of the breadboard (the **rails**) are lines for distributing power and GND.
   The top red rail is one net running from end to end of the breadboard. The blue rail is the same.

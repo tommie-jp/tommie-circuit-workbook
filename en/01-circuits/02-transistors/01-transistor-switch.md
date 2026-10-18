@@ -70,7 +70,7 @@ When W1 goes to 0 V, the LED goes out. CH2 reads the input (the left end of `RB`
 
 ```breadboard
 # Breadboard wiring diagram (tommie-fence breadboard fence)
-title: Fig. 2 Transistor switch (W1 and CH2 on the input, CH1 on the collector)
+title: Fig. 2 Transistor switch (W1 and CH2 in, CH1 on collector)
 # Top + rail = +5V (V+ of the AD), top − rail = GND (the bottom rails are not used)
 board: half
 parts:
@@ -116,7 +116,7 @@ Set W1 to a 100 Hz, 0 V / 5 V square wave (to the eye the LED stays lit at half 
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
-title: Fig. 3 Input (CH2) and collector (CH1), collector drops to 0.2 V only while input is 5 V
+title: Fig. 3 Input (CH2) and collector (CH1), 0.2 V while on
 time: 2ms/div
 trigger: ch2 rising 2.5V
 ch1: {wave: square 100Hz 1.65V offset 1.85V phase 180deg, range: 1V/div, position: -3div}

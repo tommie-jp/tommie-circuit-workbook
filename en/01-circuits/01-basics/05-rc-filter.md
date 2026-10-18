@@ -19,7 +19,7 @@ blocking DC to pass only AC. Here you change the frequency of a sine wave and re
 The flow of this exercise:
 
 - First half (Schematic to Values to check): build the low-pass and the high-pass, and read the output at three frequencies
-  with the oscillator and oscilloscope of the AD3 and with a multimeter (Fig. 3 and Fig. 4). This covers the aim of the exercise
+  with the signal generator and oscilloscope of the AD3 and with a multimeter (Fig. 3 and Fig. 4). This covers the aim of the exercise
 - Second half, "Viewing the frequency response with instruments": ways to see the frequency response (the gain at each frequency) all at once.
   After a conclusion on choosing an instrument, it shows a Bode plot with the Network of the Analog Discovery (Fig. 5 to Fig. 7),
   how the harmonics of a square wave are reduced with a spectrum analyzer (Fig. 8 and Fig. 9), and the MHz band with a VNA (LiteVNA64) with the values changed
@@ -104,7 +104,7 @@ In Fig. 3, the right end of `R1` (`c10`) and the left end of `C1` (`d10`) are co
 Column 13, the right end of `C1`, is dropped to the top − rail (GND) with a black wire.
 The instrument for this exercise is the Analog Discovery 3 (AD3). Connect the output of the waveform generator W1 to column 5, the left end of `R1`,
 and the GND of the AD3 to the top − rail. Scope 1+ goes to column 5 (input) and 2+ to column 10 (output),
-and 1− and 2− are dropped to the top − rail. The GND of the oscillator and that of the oscilloscope become one at the same − rail.
+and 1− and 2− are dropped to the top − rail. The GND of the signal generator and that of the oscilloscope become one at the same − rail.
 The output of W1 is 100 µA or less, well within what the breadboard can take.
 When reading with a multimeter, touch the black lead to the − rail and the red lead
 in turn to column 5 (input) and column 10 (output).
@@ -118,13 +118,13 @@ take the output from the top end of R.
 | --- | --- | --- |
 | R1 (R2) | Resistor (1/4 W) | 1.5 kΩ |
 | C1 (C2) | Ceramic capacitor | 100 nF (0.1 µF) |
-| — | Oscillator and oscilloscope | Analog Discovery 3 (W1 and Scope) |
+| — | Signal generator and oscilloscope | Analog Discovery 3 (W1 and Scope) |
 
 ## Values to check
 
-Feed in a sine wave of about 1 V amplitude from the oscillator (0-6; a tone-generator app on a phone also works), read the input (column 5) and the output (column 10)
+Feed in a sine wave of about 1 V amplitude from the signal generator (0-6; a tone-generator app on a phone also works), read the input (column 5) and the output (column 10)
 with the multimeter's AC voltage range or with the Scope of the AD3 (the input is a sine wave without DC, so DC coupling can stay as it is), and calculate output ÷ input.
-Read the input again at each frequency (depending on the oscillator, the amplitude changes a little with frequency). The table below is for the **low-pass**.
+Read the input again at each frequency (depending on the signal generator, the amplitude changes a little with frequency). The table below is for the **low-pass**.
 
 | Input frequency | Expected output (input = 1) | What it tells you |
 | --- | --- | --- |
@@ -167,7 +167,7 @@ For a filter with f<sub>c</sub> around 1 kHz, the recommended order is as follow
 1. **The Network (network analyzer) of the Analog Discovery.** It sweeps 10 Hz to 100 kHz in about
    a minute and draws the gain and the phase on one graph. Its input is 1 MΩ, so it does not disturb a 1.5 kΩ circuit.
    It can measure this circuit as it is
-2. **An oscillator and a 2-channel oscilloscope.** Change the frequency by hand and read the amplitude ratio of CH1 (input) and CH2 (output)
+2. **A signal generator and a 2-channel oscilloscope.** Change the frequency by hand and read the amplitude ratio of CH1 (input) and CH2 (output)
    at a few points. An oscilloscope with a function that draws a Bode plot (called Bode Plot, FRA and so on) gives the same graph as 1
 3. **A phone tone generator and a multimeter.** This is enough if you only want to check the three points of "Values to check" above roughly.
    The AC voltage range of a multimeter reads correctly only up to a few hundred Hz to a few kHz depending on the model
@@ -182,7 +182,7 @@ Recommendation by frequency band:
 
 | Band containing f<sub>c</sub> | Recommended | Next option | Not suitable |
 | --- | --- | --- | --- |
-| up to 100 kHz (audio band) | Network of the AD | Oscillator + 2-channel oscilloscope. Up to a few hundred Hz, a multimeter | VNA and tinySA (outside the lower limit) |
+| up to 100 kHz (audio band) | Network of the AD | Signal generator + 2-channel oscilloscope. Up to a few hundred Hz, a multimeter | VNA and tinySA (outside the lower limit) |
 | 100 kHz to a few MHz | Network of the AD (at the top, around 9 MHz, the AD's own bandwidth takes effect; see 5-8 of the Analog Discovery book) | VNA. Rebuild the circuit with 50 Ω input and output (see "Viewing with a VNA" below) | Multimeter |
 | a few MHz to 6.3 GHz | VNA (LiteVNA64) | tinySA and a signal source (such as CH0 of the VNA; Chapter 11 of the NanoVNA book). Above 800 MHz, the Ultra mode of the tinySA Ultra | AD (outside its bandwidth), breadboard (from several tens of MHz the parasitics of the breadboard take effect) |
 
@@ -243,7 +243,7 @@ wires:
 
 The parts are plugged in as in Fig. 3. Plug W1 (yellow) and 1+ (orange) of CH1 into column 5, the input, and 2+ (blue) of CH2 into
 column 10, the output. Drop the GND of the AD and the − sides of CH1 and CH2 (1− and 2−) to the top − rail.
-One AD takes the place of the oscillator and the oscilloscope.
+One AD takes the place of the signal generator and the oscilloscope.
 
 | Instrument | Settings |
 | --- | --- |
@@ -290,7 +290,7 @@ notes:
 Fig. 7 was written with the graph fence. The four frequencies of the marks are the same as the four rows of the table above,
 and the readings under the figure are the same numbers as the table.
 
-Some general-purpose oscilloscopes also have a function that draws a Bode plot in combination with an oscillator
+Some general-purpose oscilloscopes also have a function that draws a Bode plot in combination with a signal generator
 (called Bode Plot, frequency response analysis, FRA and so on). The meaning of the settings is the same:
 put the input on CH1 and the output on CH2.
 
@@ -447,7 +447,7 @@ markers:
 
 Above **3 MHz**, which exceeds the rough limit for a circuit on a breadboard (3 MHz or less), the values
 include the stray inductance and stray capacitance of the breadboard, and the calculated values above should be read as rough guides
-(the 6.37 MHz row falls here. The effect of the parasitics grows further at several tens of MHz).
+(the 6.37 MHz row applies here. The effect of the parasitics grows further at several tens of MHz).
 
 What it shows:
 

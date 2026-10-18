@@ -90,7 +90,7 @@ wires:
   - -t29 -- -b29 black
   - +t30 -- +b30 red
 notes:
-  - text: Blow on the microphone or clap your hands and the brightness of the LED wavers
+  - text: Blow on the mic or clap your hands, and the LED wavers
 ```
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/08-sensors/breadboard/04-mic-1.svg)
@@ -223,7 +223,7 @@ lower rails and row j.
 
 - W1 (yellow): to `j3`. It passes through R<sub>S</sub> (10 kΩ, `i3` to `i7`) and joins the input node (column 7 of the
   lower block)
-- Column 7 holds the yellow wire to column 7 of the upper block (`f7`), R<sub>D</sub> (`h7`), the right lead of
+- Column 7 holds the yellow wire to column 7 of the upper block (`f7`), R<sub>D</sub> (`h7`), the right pin of
   R<sub>S</sub> (`i7`) and 2+ of CH2 (blue, `j7`) (one pin per hole)
 - 1+ of CH1 (orange): `j13`, on the collector of Q1 (column 13)
 - V+ of the AD goes to the lower + rail (red), and GND, 2− and 1− go to the lower − rail (black). The upper and lower
@@ -244,8 +244,8 @@ measure: [vpp, freq, avg]
 ![Oscilloscope screen](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/08-sensors/scope/04-mic.svg)
 
 CH2 (the node) is a 1 kHz sine wave of about 16.8 mVpp and CH1 (the collector) one of about 0.50 Vpp. The gain (output
-amplitude ÷ input amplitude) is about 30 (h<sub>FE</sub> = 100, collector current 4.3 mA; the LTspice value, which is
-g<sub>m</sub> × 233 Ω ≈ 38 times the division 0.78 by the 160 Ω of C1 and r<sub>π</sub>, r<sub>bb′</sub>). The output is
+amplitude ÷ input amplitude) is about 30 (h<sub>FE</sub> = 100, collector current 4.3 mA; this is the LTspice value:
+g<sub>m</sub> × 233 Ω ≈ 38, times 0.78 for the division by the 160 Ω of C1 and r<sub>π</sub>, r<sub>bb′</sub>). The output is
 nearly inverted: when CH1 is at a trough, CH2 is at a peak (they are about 13° off because of C1 and the input
 resistance).
 At 1 kHz the wavering of the LED is too fast to see, and it looks almost steadily lit.

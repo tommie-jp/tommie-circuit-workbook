@@ -72,7 +72,7 @@ style:
 
 ```breadboard
 # Breadboard wiring diagram (tommie-fence breadboard fence)
-title: Fig. 2 Building it on the breadboard (5 V from AD V+, 1+ to OUT)
+title: Fig. 2 Breadboard build (5 V from AD V+, 1+ to OUT)
 board: half
 parts:
   U1: regulator/to220 c8(in) c9(gnd) c10(out) AMS1117-3.3
@@ -130,7 +130,7 @@ board:
   material: FR-4
   slots: on
 unused: [J1.D+, J1.D-, J2.D+, J2.D-]
-title: Fig. 3 Building it on a perfboard (component side; yellow circles mark AD3 clip points)
+title: Fig. 3 Perfboard build (yellow circles = AD3 clips)
 parts:
   J1: usb-c/female b5 c5 d5 e5
   J2: usb-c/female t5 u5 v5 w5
@@ -195,9 +195,9 @@ style:
 - Choose a J1 module with 5.1 kΩ on CC (the same note as for Fig. 2; it is the side that takes 5 V from a charger)
 - Two receptacles of the same shape sit side by side on the lower edge, so the figure labels them `IN 5V` and `OUT 3.3V`
   in large bold red. Write the same text on the real board. If you plug a charger into J2, 5 V enters the output of
-  the AMS1117 from the wrong side and may destroy it
+  the AMS1117 from the wrong side and may damage it
 - **J2 is not a USB-standard output.** VBUS carries 3.3 V, so do not connect a USB device such as a smartphone, a PC or a
-  charger to J2 (its VBUS would collide with the 3.3 V and may be destroyed). Use J2 as an outlet that passes power by
+  charger to J2 (its VBUS would collide with the 3.3 V and may damage that device). Use J2 as an outlet that passes power by
   cable to a 3.3 V experimental circuit (such as 3V3 of the Pico 2 in Chapter 11), and make the other end a power
   breakout module too
 - U1 is an AMS1117 3.3 V module (IN, GND, OUT = I14, J14, K14). IN comes from the + strip on row 17, GND goes down to row 6,

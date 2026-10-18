@@ -2,7 +2,7 @@
 book: circuits
 chapter: 7
 id: 7-2
-title: PWM Control of a DC Motor (MOSFET)
+title: PWM control of a DC motor (MOSFET)
 tier: 50
 source: 自作
 board: BB
@@ -10,7 +10,7 @@ era: 今
 ja: 69ba289b8c61580e8c7d82817b87bdd59a11bfb6
 ---
 
-# 7-2 PWM Control of a DC Motor (MOSFET)
+# 7-2 PWM control of a DC motor (MOSFET)
 
 One MOSFET changes the speed of a 5 V DC motor. A motor's speed is set roughly by the average voltage across it.
 Lowering the voltage with a resistor wastes power as heat. Instead, a MOSFET (the switch from 2-5) is turned ON and OFF
@@ -123,7 +123,7 @@ wires:
   - AD.2- -- -b19 black
   - AD.GND -- -b21 black
 notes:
-  - text: The right end of R1 (column 14) is the PWM input. Connect W1 of the AD or a microcontroller
+  - text: Right end of R1 (column 14) is the PWM input
 ```
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/07-power/breadboard/02-motor-pwm.svg)
@@ -209,7 +209,7 @@ View the PWM waveform on the oscilloscope of the Analog Discovery (1+ on PWM, 2+
 | Current with the shaft lightly stopped by a finger (100 %) | About 0.16 A (calculated) | 5 V ÷ (11.8 + 15 + 4.5) Ω. Within the 0.2 A of the 2N7000 and the 200 mA per hole. Do not leave it stopped for long |
 | PWM frequency of 1 kHz | The motor makes a whining sound | The windings vibrate at the switching frequency. 1 kHz is inside the range of human hearing (about 20 Hz–20 kHz) |
 | PWM frequency of 15–20 kHz or higher | The sound almost disappears | This approaches the upper edge of the audible range. Most adults hear poorly above 15 kHz |
-| D1 removed and the duty cycle suddenly set to 0 | Q1 may overheat or be destroyed | Why the flyback diode is needed (**this book does not remove it to try**) |
+| D1 removed and the duty cycle suddenly set to 0 | Q1 may overheat or be destroyed | Why the flyback diode is needed (**this book does not try it with D1 removed**) |
 
 ## Verification with LTspice
 

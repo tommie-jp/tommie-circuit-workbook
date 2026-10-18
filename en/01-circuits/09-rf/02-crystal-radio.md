@@ -138,10 +138,10 @@ wires:
 - **The antenna wire is 5–10 m** of insulated wire, strung outdoors or by a window. The longer it is, the more stations you can receive.
 - Connect the top −t rail (blue) to a **real earth ground**. Run a wire to a water pipe or a ground rod
   (this is not only the common line of the circuit; it is a path that really sends current into the earth).
-- Columns 3 and 5 are the antenna net (ANT, A of VC1, the left lead of L1, the anode of D1, the upper lead of RS).
-  Columns 3 and 5 are joined by a short yellow wire in row c. The right lead of L1 (column 9) goes to the − rail.
-- Column 12 is the detector-output net (the cathode of D1, the left lead of C2, A of EAR). The right lead of C2 (column 14) and B of EAR go to the top − rail.
-  Column 12 is carried to column 12 of the lower half by a short green wire across the center gap, and R1 (100 kΩ) sits in row h of the lower half. The right lead of R1 (column 17) goes to the bottom − rail.
+- Columns 3 and 5 are the antenna net (ANT, A of VC1, the left pin of L1, the anode of D1, the upper pin of RS).
+  Columns 3 and 5 are joined by a short yellow wire in row c. The right pin of L1 (column 9) goes to the − rail.
+- Column 12 is the detector-output net (the cathode of D1, the left pin of C2, A of EAR). The right pin of C2 (column 14) and B of EAR go to the top − rail.
+  Column 12 is carried to column 12 of the lower half by a short green wire across the center gap, and R1 (100 kΩ) sits in row h of the lower half. The right pin of R1 (column 17) goes to the bottom − rail.
 - The top and bottom − rails are joined by the black wire at column 30.
 - The AD3 was added for **testing**, for when the broadcast waves are weak and the waveform is hard to see. The AM signal of W1 (Wavegen) goes into the tuned circuit
   through RS (1 kΩ). RS is inserted vertically across the gap at column 3 (`e3` and `i3`), and W1 goes into column 3 of the lower half (`j3`).
@@ -165,7 +165,7 @@ The signal has a 1 MHz carrier, which is within the range of Scope (10 MHz or le
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
-title: Fig. 3 AM test, tuned circuit (CH2) swells and shrinks, detector (CH1) 1 kHz
+title: Fig. 3 AM test, CH2 swells and shrinks, CH1 is 1kHz
 time: 200us/div
 trigger: ch1 rising 0.99V
 ch1: {wave: = 0.99V + 0.197V * sin(2 * pi * 1kHz * t), range: 100mV/div, position: -10div}
@@ -196,7 +196,7 @@ The screen you should see (an ideal model: VC1 = 100 pF, with the loss of L1 tak
 # NanoVNA screen (tommie-fence vna fence)
 device: litevna64
 sweep: 0.8M-1.3M 401
-title: Fig. 4 S21 of the tuned circuit (L1 250 µH ∥ VC1 100 pF), deep dip at f0
+title: Fig. 4 S21 of the tuned circuit, deep dip at f0
 dut:
   - series L 250u cp 100p rp 158k
 traces:

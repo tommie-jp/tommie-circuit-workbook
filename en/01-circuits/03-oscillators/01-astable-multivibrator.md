@@ -12,10 +12,10 @@ ja: 380d6aa95eb7908c4b1b7392c9700a46915fbf2c
 
 # 3-1 Astable Multivibrator, LEDs Blinking Alternately
 
-This is the most classic oscillator circuit, made of just two transistors (a "two-transistor" circuit) and two capacitors.
+This is the most classic oscillator circuit, made of just two transistors and two capacitors.
 **Oscillation** means that a circuit repeats a change in voltage on its own, without a signal fed in from outside.
 This circuit cannot rest in either of its two states, "Q1 on and Q2 off" and the reverse, and keeps going back and forth,
-so it is called "astable". Two LEDs blink alternately. This is the entrance exercise of Chapter 3: combining
+so it is called "astable". Two LEDs blink alternately. This is the opening exercise of Chapter 3: combining
 the transistor switch (2-1) with the charging and discharging of a capacitor (1-3) gives an oscillator.
 
 ## Schematic
@@ -73,7 +73,7 @@ style:
 
 ```breadboard
 # Breadboard wiring diagram (tommie-fence breadboard fence)
-title: Fig. 2 Built on a breadboard (Q1 on the left, Q2 on the right, as in the schematic)
+title: Fig. 2 Building it on the breadboard (Q1 left, Q2 right)
 board: half
 parts:
   AD3:
@@ -124,7 +124,7 @@ Fig. 2 has the same layout as the schematic: the Q1 group (R1, D1, C1, R4) on th
 as a mirror image. The upper half of the breadboard (rows a to e) corresponds to the upper half of the schematic (resistors, LEDs, capacitors), and the lower half (rows f to j)
 to the transistors.
 
-- Power comes from Supplies of the AD3 (set V+ to 5 V). V+ goes to the top + rail and GND to the top − rail. The circuit draws only
+- Power comes from the Supplies tool of the AD3 (set V+ to 5 V). V+ goes to the top + rail and GND to the top − rail. The circuit draws only
   about 8.5 mA, one LED's worth, so it stays within the 50 mA of V+ (250 mW on USB power). To each resistor's supply-side pin,
   run one red wire straight down from the + rail (columns 2, 12, 18, 28). The emitters go to the bottom − rail with black wires (columns 6 and 24),
   and the top and bottom − rails are joined by the black wire in column 29 at the right end
@@ -134,7 +134,7 @@ to the transistors.
 - The five holes in the same column are connected. The upper and lower blocks are separated by the trench, so the collector (columns 7 and 23) and
   the base (columns 8 and 22) are lifted to the upper block with short wires (orange, blue) across the trench
 - In the upper block, column 7 (collector of Q1) takes the cathode of D1 and the + of C1, and column 8 (base of Q1) takes the
-  pin of R4. D1 has its anode in column 5, the same as R1, and its pin is spread over one empty hole to column 7.
+  pin of R4. D1 has its anode in column 5, the same column as R1, and the cathode pin skips one hole to reach column 7.
   The right side has the same form: column 23 is the collector of Q2 and column 22 is the base of Q2
 - **The two cross-coupling wires run in different rows in parallel so that they do not cross.** Green (row d) goes from the − side of C2 (column 19) to
   the base of Q1 (column 8), and yellow (row e) goes from the − side of C1 (column 11) to the base of Q2 (column 22).
@@ -142,12 +142,12 @@ to the transistors.
 - Point the `+` of the electrolytic capacitors toward the collector (column 7 for C1, column 23 for C2); reversing them can damage the capacitors.
   Their pins are 4 holes apart, so spread them to about 10 mm and plug them into row a
 
-- The Scope is drawn as a separate box (AD3 Scope) below the breadboard. Plug 1+ (orange) into column 7 of the collector of Q1 (`j7`) and 2+ (green) into column 23 of the collector of Q2 (`j23`),
+- The Scope is drawn as a separate box (AD3 Scope) below the breadboard. Plug 1+ (orange) into column 7 (`j7`), the collector of Q1, and 2+ (green) into column 23 (`j23`), the collector of Q2,
   and plug 1− and 2− (black) into the bottom − rail (GND)
 
 ## Instrument settings
 
-Use the Scope of the AD3 as the oscilloscope. This exercise looks at a slow square wave with a period of about 1 second, far slower than 10 MHz.
+Use the AD3 Scope as the oscilloscope. This exercise looks at a slow square wave with a period of about 1 second, far slower than 10 MHz.
 Connect the collector of Q1 to CH1 and the collector of Q2 to CH2, and view the two collectors moving up and down alternately, overlaid.
 
 | Setting | Value |
@@ -183,8 +183,8 @@ The LED on the side where CH2 is low lights, so D2 lights while CH1 is high.
 | R3, R4 | Resistor (base) | 100 kΩ |
 | C1, C2 | Electrolytic capacitor | 10 µF |
 | D1, D2 | LED (red, 5 mm) | V<sub>F</sub> ≈ 2.0 V |
-| — | Power supply | 5 V (V+ of Supplies of the AD3) |
-| — | Instrument | Scope 1+/2+ of the AD3 (collectors of Q1 and Q2) |
+| — | Power supply | 5 V (V+ of the AD3 Supplies) |
+| — | Instrument | AD3 Scope 1+/2+ (collectors of Q1 and Q2) |
 
 ## Values to check
 
@@ -207,7 +207,7 @@ at an hFE of 150 it shrinks to 0.39 s per side. In the model with an hFE of 120 
 fell into a different behavior with a period of about 4 ms (it does not blink).
 
 Measure the LED on-time and the period by timing 10 cycles with a stopwatch and dividing by 10 (if you measure with the oscilloscope, use the cursors in Fig. 3). Voltages are measured with the multimeter's
-DC voltage range, but they switch every 0.5 s, so the reading is only a rough guide within what the display can follow.
+DC voltage range, but they switch every 0.5 s, so the reading is only a rough guide, limited by how fast the display can follow.
 
 | Measure | Expected value | What it shows |
 | --- | --- | --- |

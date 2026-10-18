@@ -95,8 +95,8 @@ On a breadboard, the five holes in a vertical column (a to e of the same column)
   to GND at the lower end (`d15`), and read the voltage across `R2`.
 
 To measure current, first pull out the red-rail wire (`a5`) that is connected to the upper end of `R1` (`b5`).
-Touch the current terminal (mA) lead of the multimeter to the end of the pulled wire (the +5 V side) and the COM lead to `a5`,
-so that the multimeter becomes part of the circuit. Move the red lead to the mA terminal, which is a different jack from the one used for voltage.
+Touch the red lead, plugged into the multimeter's current (mA) jack, to the end of the pulled wire (the +5 V side) and the COM lead to `a5`,
+so that the multimeter becomes part of the circuit. Move the red lead to the mA jack, which is a different jack from the one used for voltage.
 To measure resistance, disconnect the power, pull `R1` and `R2` out of the breadboard,
 and measure them one at a time on the multimeter's Ω range.
 

@@ -12,13 +12,13 @@ ja: 38a85b1e53733264aed31475a21fe39b0f245dde
 
 # 11-2 Button Input and a Pull-Up
 
-In 11-1 we used a GPIO as an output. In this exercise we use a GPIO as an input and
-read from the program whether a button is pressed.
+11-1 used a GPIO as an output. This exercise uses a GPIO as an input and
+reads from the program whether a button is pressed.
 
 If nothing is connected to a GPIO input, its potential is undefined and it wanders between 0 and 1 (the same as the CMOS
-inputs in 10-1). So we pull it up to 3.3 V through a resistor (a pull-up), which makes the GPIO a solid H (3.3 V)
+inputs in 10-1). So it is pulled up to 3.3 V through a resistor (a pull-up), which keeps the GPIO at a solid H (3.3 V)
 while the button is not pressed. The Pico 2 also has built-in pull-ups (32 to 86 kΩ in the datasheet), but
-here we use an external resistor so that you can follow by eye how the resistor sets the potential.
+here an external resistor is used so that you can follow by eye how the resistor sets the potential.
 
 ## Schematic
 
@@ -104,7 +104,7 @@ and fit the time from press to release (about 0.5 s) on one screen.
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
-title: Fig. 3 GP16 drops to 0V only while pressed (about 0.5 s press)
+title: Fig. 3 GP16 is 0V only while pressed (about 0.5 s)
 time: 100ms/div
 trigger: ch1 falling 1.65V at -2div
 ch1: {wave: = 3.3V - 3.3V * step(t) + 3.3V * step(t - 500ms), range: 1V/div, position: -3div}
@@ -200,8 +200,8 @@ while True:
 
 To switch to the built-in pull-up, use `Pin(16, Pin.IN, Pin.PULL_UP)`.
 
-We confirmed that the C/C++ program builds as far as the `.uf2` with `PICO_BOARD=pico2`.
-It has not been run on hardware yet. The MicroPython program has not been run (not verified).
+The C/C++ program was confirmed to build as far as the `.uf2` with `PICO_BOARD=pico2`.
+It has not yet been tested on hardware. The MicroPython program has not been run (not verified).
 
 ## Verification with LTspice
 
@@ -209,13 +209,13 @@ It has not been run on hardware yet. The MicroPython program has not been run (n
 
 | Item | Value in the text | LTspice | Verdict |
 | --- | --- | --- | --- |
-| GP16 while released | about 3.3 V (H) | 3.30 V | agrees |
-| GP16 while pressed | 0 V (L) | 0.03 mV | agrees |
-| Current in R1 while pressed | about 0.33 mA | 0.330 mA | agrees |
+| GP16 while released | about 3.3 V (H) | 3.30 V | Agrees |
+| GP16 while pressed | 0 V (L) | 0.03 mV | Agrees |
+| Current in R1 while pressed | about 0.33 mA | 0.330 mA | Agrees |
 
 ## Verification with the program
 
-We ran the program from the text on a PC and compared the same quantities as in the text's table (`npm run pico:test`, `npm run pico`). **It has not been run on hardware.**
+The program from the text was run on a PC, and the same quantities as in the text's table were compared (`npm run pico:test`, `npm run pico`). **It has not yet been tested on hardware.**
 
 | What was checked | Result | Tool |
 | --- | --- | --- |

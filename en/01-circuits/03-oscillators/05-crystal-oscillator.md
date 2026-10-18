@@ -16,7 +16,7 @@ The 74HC04 is an IC with six **CMOS** inverters. CMOS is a circuit style that pa
 almost no current flows except at the instant the output switches. Almost no current flows into the input either, so the operating point does not collapse even with a 1 MΩ resistor attached.
 Run one of these inverters in its linear region (the range where the output changes in proportion to the input, so it works as an amplifier)
 with a feedback resistor, and let a **crystal** (a part that vibrates strongly only at one fixed frequency) set the
-oscillation frequency. This is the "Pierce oscillator". It is the basic form used for microcontroller clocks (the beat that times operation) and for the local oscillator of a radio,
+oscillation frequency. This is the "Pierce oscillator". It is the basic form used for microcontroller clocks (the timing signal that paces operation) and for the local oscillator of a radio,
 and its frequency is orders of magnitude more accurate than the RC oscillators (3-1 to 3-3). A second inverter
 buffers the signal before it goes out.
 
@@ -117,8 +117,8 @@ wires:
 
 - **U1 in Fig. 2 is a 14-pin 74HC04. Only two gates are used: pins 1 and 2 (the oscillator, U1A of Fig. 1) and pins 3 and 4
   (the buffer, U1B of Fig. 1).** Pin 7 is GND and pin 14 is VCC
-- The crystal (HC-49/U) has no polarity, so either direction works. **Keep the leads short.** Place it between column 6 (the wire
-  lifted from pin 1) and column 16 (the node of Rd and C2, joined to Rd below by a wire across the gap)
+- The crystal (HC-49/U) has no polarity, so it can go in either way around. **Keep its pins short.** Place it between column 6 (the wire
+  lifted from pin 1) and column 16 (the node of Rd and C2, joined to Rd below by a wire across the trench)
 - **Tie unused inputs to GND.** Connect the inputs of the remaining 4 gates (pins 5, 9, 11 and 13) to GND.
   A floating CMOS input swings on its own, raises the supply current, and can disturb the oscillation.
   Pin 5 (below column 12) goes from row j to the bottom blue rail, and pins 13, 11 and 9 (above columns 13, 11 and 9) go from
@@ -129,17 +129,17 @@ wires:
 guideline for a breadboard (circuits on a breadboard are 3 MHz or lower). It is an exception on purpose.
 The crystal sets the frequency, and a low-impedance CMOS inverter drives the crystal, so the stray capacitance of the breadboard only
 pulls the frequency slightly, and the oscillation itself does not break down.
-The leads are short, the supply is 5 V and the current is a few mA, well within the voltage and current range of a breadboard.
+The pins are short, the supply is 5 V and the current is a few mA, well within the voltage and current range of a breadboard.
 What this experiment is meant to show is how the oscillator works and its waveform, not the accuracy of the frequency
 (a reading slightly off 4.000 MHz does not defeat the purpose of the experiment).
 
-- The power comes from the AD3 Supplies (set V+ to 5 V). The 74HC04 draws a few mA at 4 MHz, within the 50 mA of V+ (250 mW on USB power).
+- Power comes from the AD3 Supplies (set V+ to 5 V). The 74HC04 draws a few mA at 4 MHz, within the 50 mA of V+ (250 mW on USB power).
   V+ goes to the top + rail and GND to the top − rail
 - The Scope is drawn as a separate box (AD3 Scope) below the breadboard. 1+ (gray) goes to the output of U1B (pin 4, column 11, `j11`), and 1− (black) goes to the bottom − rail (GND)
 
 ## Instrument settings
 
-Use the AD3 Scope as the oscilloscope. 4 MHz is below 10 MHz, and the shape of the waveform is also of interest. Check the bandwidth and the sampling first, though.
+Use the AD3 Scope as the oscilloscope. 4 MHz is below 10 MHz, and the shape of the waveform is also of interest. Check the bandwidth and the sampling first.
 
 - **Bandwidth**: when the AD3 is plugged directly into the breadboard with the supplied wires, its bandwidth is 9 MHz (−3 dB, the value measured in 0-5). A 4 MHz sine wave drops to about 91 % (−0.8 dB)
   (as a first-order lag, 1 ÷ √(1 + (4/9)²) ≈ 0.91). The flat part of a square wave reaches almost 5 V, because the half period of 125 ns is 7 times the time constant of 17.7 ns.
@@ -152,11 +152,11 @@ Use the AD3 Scope as the oscilloscope. 4 MHz is below 10 MHz, and the shape of t
 | --- | --- |
 | Scope CH1 (output of U1B, pin 4) | DC, 1 V/div |
 | Time | 50 ns/div (2 periods in 500 ns). Set Sample Rate to the maximum |
-| Trigger | CH1, rising, 2.5 V |
+| Trigger | CH1, rising edge, 2.5 V |
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
-title: Fig. 3 Output of U1B (pin 4), a 4 MHz square wave (250 ns period)
+title: Fig. 3 U1B output (pin 4), 4 MHz square wave, 250 ns
 time: 50ns/div
 trigger: ch1 rising 2.5V
 ch1: {wave: square 4MHz 2.5V offset 2.5V | rc 17.7ns, range: 1V/div}
@@ -166,8 +166,8 @@ measure: [vpp, freq]
 
 ![Oscilloscope screen](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/03-oscillators/scope/05-crystal-oscillator.svg)
 
-Fig. 3 is an expected figure from calculation, not a measurement. A 5 V square wave is overlaid with the 9 MHz bandwidth of the AD3 as a first-order lag (time constant 17.7 ns = 1 ÷ (2π × 9 MHz)).
-The 250 ns gap between the cursors is one period, which is 4 MHz. The rounded edges come almost entirely from the bandwidth of the instrument, not from the delay of the 74HC04 itself.
+Fig. 3 is an expected waveform from calculation, not a measurement. A 5 V square wave is overlaid with the 9 MHz bandwidth of the AD3 as a first-order lag (time constant 17.7 ns = 1 ÷ (2π × 9 MHz)).
+The 250 ns gap between the cursors is one period, which corresponds to 4 MHz. The rounded edges come almost entirely from the bandwidth of the instrument, not from the delay of the 74HC04 itself.
 
 ### Looking at the crystal alone with a VNA (supplement)
 
@@ -177,7 +177,7 @@ At the series resonance f<sub>s</sub> the signal passes well, and at the paralle
 The frequency of the oscillator comes between these two (at the point set by the 22 pF load capacitance). For the measurement method and how to read the result, see
 03-nanovna/04-components/06-crystal.md (4-6).
 
-The screen you should see (an ideal model; a rough guide assuming typical values for a 4 MHz HC-49/U: C<sub>m</sub> = 31.66 fF, L<sub>m</sub> = 50 mH, R<sub>m</sub> = 50 Ω, C<sub>0</sub> = 5 pF. It is not a measurement).
+The expected screen (an ideal model; a rough guide assuming typical values for a 4 MHz HC-49/U: C<sub>m</sub> = 31.66 fF, L<sub>m</sub> = 50 mH, R<sub>m</sub> = 50 Ω, C<sub>0</sub> = 5 pF. It is not a measurement).
 
 ```vna
 # NanoVNA screen (tommie-fence vna fence)
@@ -217,12 +217,12 @@ so it is correct for it to fall between the f<sub>s</sub> and f<sub>p</sub> meas
 
 Calculated and measured values. The frequency is the one marked on the crystal and cannot be changed by resistors or capacitors.
 
-| Where to measure | Expected value | What it tells you |
+| Measure | Expected value | What it shows |
 | --- | --- | --- |
 | Frequency at the output of U1B (OUT) | 4.000 MHz ± 30 ppm (about ± 120 Hz) | The accuracy of the crystal itself. The accuracy of the resistors is irrelevant |
-| Waveform | Close to a square wave (edges slightly rounded) | Buffered output of a CMOS inverter |
-| DC voltage at the input of U1A (pin 1, column 8) | About Vcc/2 (2.5 V) | Rf's feedback biases the inverter near its threshold |
-| With Rd removed | It still oscillates, but the crystal heats up more | Evidence that the damping works (do not leave it this way for long) |
+| Waveform | close to a square wave (edges slightly rounded) | Buffered output of a CMOS inverter |
+| DC voltage at the input of U1A (pin 1, column 8) | about Vcc/2 (2.5 V) | Rf's feedback biases the inverter near its threshold |
+| With Rd removed | it still oscillates, but the crystal heats up more | Evidence that the damping works (do not leave it this way for long) |
 
 With a frequency counter (0-9) you can count OUT directly. With only an oscilloscope (Fig. 3),
 read the period and take the reciprocal (a reading near 0.25 µs is enough). A difference of ±30 ppm cannot be seen
@@ -233,9 +233,9 @@ DC voltage range, between pin 1 (column 8) and GND.
 
 This exercise is out of scope for LTspice. The oscillation frequency is the marking on the crystal (4.000 MHz) itself and is not set by the parts of the circuit.
 The inside of the 74HC04 (the gain and phase of the inverter) and the values of the crystal's equivalent circuit would be assumptions, so a model would not replace a measurement.
-Two things can be checked by arithmetic.
+Two things can be checked by arithmetic:
 
-- Load capacitance: C1 and C2 (22 pF) in series make 11 pF. Adding the stray capacitance of the board and pins puts it within the crystal's specification (around 18–22 pF)
+- Load capacitance: C1 and C2 (22 pF) in series make 11 pF. Adding the stray capacitance of the board and pins brings it within the crystal's specification (around 18–22 pF)
 - DC at the input of U1A: the current through Rf (1 MΩ) is the input leakage current (a few nA or less), so the voltage at pin 1 settles at the point where the input and output of U1A are equal (about V<sub>CC</sub>/2)
 
 ## Sources

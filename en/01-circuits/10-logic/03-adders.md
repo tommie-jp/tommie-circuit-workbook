@@ -13,10 +13,10 @@ ja: b15efd0b8851423ffbea1aeb1660eabc75b835f7
 
 Build binary addition from gates. The arithmetic inside a computer is a stack of circuits like this one.
 
-First we build a half adder, which computes A + B for two single bits. As in 1 + 1 = 10 (binary),
+First, build a half adder, which computes A + B for two single bits. As in 1 + 1 = 10 (binary),
 adding one bit gives two outputs: the sum of that bit and a carry to the next bit up.
 The sum is made with an XOR (exclusive OR: 1 only when the two inputs differ) and the carry with an AND (10-1).
-Next we add a second XOR and AND plus an OR, which extends the circuit to a full adder that also adds the carry
+Next, add a second XOR and AND plus an OR. This extends the circuit to a full adder that also adds the carry
 from the bit below (Cin). Three CMOS ICs (XOR, AND, OR) are enough.
 
 In the equations, ⊕ means XOR, · means AND and + means OR.
@@ -81,8 +81,8 @@ notes:
   - text 26,11 blue: C2
   - text 32,12 blue: Cout
   - text 35,7 blue: S
-  - text 1,18 small left: "Numbers are IC pin numbers"
-  - text 1,19 small left: "VDD is pin 14 (+5V) on all three, VSS is pin 7 (GND)"
+  - text 1,18 small left: "Numbers are IC PIN numbers"
+  - text 1,19 small left: "VDD is PIN 14 (+5V) on all three, VSS is PIN 7 (GND)"
   - text 1,20 small left: "Unused inputs to GND (U1, U2: 8 9 12 13, U3: 5 6 8 9 12 13)"
 style:
   grid: off
@@ -91,17 +91,17 @@ style:
 
 ![Schematic](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/10-logic/circuit/03-adders.svg)
 
-- Half adder: U1A (XOR, pins 1, 2 → 3) gives the sum S1 = A⊕B, and U2A (AND, pins 1, 2 → 3) gives the carry C1 = A·B
-- Extension to a full adder: U1B (XOR, pins 5, 6 → 4) gives the sum S = Cin⊕S1, U2B (AND, pins 5, 6 → 4)
-  gives C2 = Cin·S1, and U3A (OR, pins 1, 2 → 3) gives the carry Cout = C2 + C1.
+- Half adder: U1A (XOR, PIN 1, 2 → 3) gives the sum S1 = A⊕B, and U2A (AND, PIN 1, 2 → 3) gives the carry C1 = A·B
+- Extension to a full adder: U1B (XOR, PIN 5, 6 → 4) gives the sum S = Cin⊕S1, U2B (AND, PIN 5, 6 → 4)
+  gives C2 = Cin·S1, and U3A (OR, PIN 1, 2 → 3) gives the carry Cout = C2 + C1.
   C1 and C2 are never 1 at the same time, so combining them with an OR is fine
-- Fig. 1 draws the gates as logic symbols and adds the IC pin numbers to the symbol inputs and outputs. U1A and U1B are two
+- Fig. 1 draws the gates as logic symbols and adds the IC PIN numbers to the symbol inputs and outputs. U1A and U1B are two
   circuits of the same CD4070 (U1), and U2A and U2B are two circuits of the same CD4081 (U2)
-- The power pins do not appear on the symbols, so they are written below the figure. On all three ICs, pin 14 is VDD (+5 V)
-  and pin 7 is VSS (GND). If you forget to connect them, the IC does not work
-- Connect unused inputs to GND (10-1). For U1 and U2 these are the inputs of the remaining two gates (pins 8, 9, 12, 13);
-  for U3 they are the inputs of the remaining three gates (pins 5, 6, 8, 9, 12, 13). Leave the output pins (pins 10 and 11
-  of U1 and U2; pins 4, 10 and 11 of U3) unconnected
+- The power pins do not appear on the symbols, so they are written below the figure. On all three ICs, PIN 14 is VDD (+5 V)
+  and PIN 7 is VSS (GND). If you forget to connect them, the IC does not work
+- Connect unused inputs to GND (10-1). For U1 and U2 these are the inputs of the remaining two gates (PIN 8, 9, 12, 13);
+  for U3 they are the inputs of the remaining three gates (PIN 5, 6, 8, 9, 12, 13). Leave the output pins (PIN 10 and 11
+  of U1 and U2; PIN 4, 10 and 11 of U3) unconnected
 - The series resistors for the LEDs (RS1, RC1, RS, RCO) are 1 kΩ. As in 10-1, the output of a 5 V CD4000-series gate can
   source only a few mA, so the LED current is kept to 1.5 to 2.2 mA (the rough guide worked out in 10-1).
   If the LEDs are too dim, use high-brightness LEDs or switch to the 74HC series (74HC86, 74HC08, 74HC32)
@@ -167,7 +167,7 @@ wires:
   - e34 -- f34 green
   - i35 -- i37 yellow
   - h34 -- h38 green
-  # U1: pin 3 → pin 5 (S1); S1 and S go to the LEDs; S1 and Cin go to U2
+  # U1: PIN 3 → PIN 5 (S1); S1 and S go to the LEDs; S1 and Cin go to U2
   - g16 -- g18 orange
   - i18 -- i21 orange
   - f21 -- e21 orange
@@ -177,13 +177,13 @@ wires:
   - g19 -- g42 blue
   - a26 -- -t26 black
   - a33 -- -t33 black
-  # U2: pin 3 (C1) goes to the LED and to pin 1 of U3; pin 4 (C2) goes to pin 2 of U3
+  # U2: PIN 3 (C1) goes to the LED and to PIN 1 of U3; PIN 4 (C2) goes to PIN 2 of U3
   - h39 -- h45
   - f45 -- e45
   - a49 -- -t49 black
   - g45 -- g51
   - i40 -- i52
-  # U3: pin 3 (Cout) goes to the LED
+  # U3: PIN 3 (Cout) goes to the LED
   - g53 -- g58
   - f58 -- e58
   - a62 -- -t62 black
@@ -207,29 +207,29 @@ wires:
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/10-logic/breadboard/03-adders.svg)
 
 - U1 (CD4070, XOR) occupies columns 14 to 20, U2 (CD4081, AND) columns 37 to 43, and U3 (CD4071, OR)
-  columns 51 to 57. All have the notch on the left, with pin 1 at the lower left (row f) and pin 14 at the upper left (row e).
+  columns 51 to 57. All have the notch on the left, with PIN 1 at the lower left (row f) and PIN 14 at the upper left (row e).
   From the left the order is inputs → U1 and U2 → U3 → output LEDs
 - The power supply is Supplies on the Analog Discovery 3 (AD3, the USB instrument used in 0-3), with V+ set to 5 V.
   Connect V+ (red) of the AD3 at the upper left of the breadboard to column 1 of the top + rail, and GND (black) to column 2 of the top − rail
-- Power: pin 14 of each IC (columns 14, 37 and 51) goes from row a to the top + rail (red), and pin 7 (columns 20, 43
+- Power: PIN 14 of each IC (columns 14, 37 and 51) goes from row a to the top + rail (red), and PIN 7 (columns 20, 43
   and 57) goes from row j to the bottom − rail (black). The LEDs and pull-down resistors go to the top − rail, so one column
   joins the top and bottom − rails
 - Switches A, B and Cin (row d, columns 2 to 4, 6 to 8 and 10 to 12) are fed from the top + rail.
   The pull-down resistors are placed vertically between row a of the switch-side columns (4, 8 and 12) and the top − rail.
-  Short e→f wires bring the switch-side columns below the center gap, and rows g, h and j carry them into pins 1, 2 and 6 of U1
+  Short e→f wires bring the switch-side columns below the center gap, and rows g, h and j carry them into PIN 1, 2 and 6 of U1
   (columns 14, 15 and 19)
 - A (yellow) and B (green) run along rows b and c of the upper block, over the top of U1, to columns 35 and 34,
-  where they come down below the center gap and enter pins 1 and 2 of U2 (columns 37 and 38) on rows i and h. Cin (blue) goes straight
-  from pin 6 of U1 (column 19) along row g to pin 6 of U2 (column 42)
-- Pin 3 of U1 (S1, column 16) goes along row g to pin 5 (column 18). S1 (orange) is carried along row i to column 21,
-  goes up to RS1 and DS1, and from the same column 21 goes along row j to pin 5 of U2 (column 41). Pin 4 of U1 (S, column 17) is carried
+  where they come down below the center gap and enter PIN 1 and 2 of U2 (columns 37 and 38) on rows i and h. Cin (blue) goes straight
+  from PIN 6 of U1 (column 19) along row g to PIN 6 of U2 (column 42)
+- PIN 3 of U1 (S1, column 16) goes along row g to PIN 5 (column 18). S1 (orange) is carried along row i to column 21,
+  goes up to RS1 and DS1, and from the same column 21 goes along row j to PIN 5 of U2 (column 41). PIN 4 of U1 (S, column 17) is carried
   along row h to column 28 and goes up to RS and DS. RS1 and RS sit in row d and DS1 and DS in row e, lined up under the
   A and B wires that run along rows b and c. The LED cathodes go from row a to the top − rail
-- Pin 3 of U2 (C1, column 39) is carried along row h to column 45, goes up to RC1 and DC1, and along row g to pin 1 of U3
-  (column 51). Pin 4 (C2, column 40) goes along row i to pin 2 of U3 (column 52). Pin 3 of U3 (Cout,
+- PIN 3 of U2 (C1, column 39) is carried along row h to column 45, goes up to RC1 and DC1, and along row g to PIN 1 of U3
+  (column 51). PIN 4 (C2, column 40) goes along row i to PIN 2 of U3 (column 52). PIN 3 of U3 (Cout,
   column 53) is carried along row g to column 58 and goes up to RCO and DCO
-- Unused inputs go to GND with short black wires. Pins 13, 12, 9 and 8 of U1, U2 and U3 (columns 15, 16, 19, 20;
-  38, 39, 42, 43; 52, 53, 56, 57, upper side) go from row a to the top − rail, and pins 5 and 6 of U3
+- Unused inputs go to GND with short black wires. PIN 13, 12, 9 and 8 of U1, U2 and U3 (columns 15, 16, 19, 20;
+  38, 39, 42, 43; 52, 53, 56, 57, upper side) go from row a to the top − rail, and PIN 5 and 6 of U3
   (columns 55 and 56, lower side) go from row j to the bottom − rail
 - No wires cross, and the only wires that cross the center gap are short ones running straight up and down a column
 
@@ -267,14 +267,14 @@ and only a full adder that can add Cin can represent it.
 
 | A B C<sub>in</sub> | S1 (text / LTspice) | C1 (text / LTspice) | S (text / LTspice) | C<sub>out</sub> (text / LTspice) | Verdict |
 | --- | --- | --- | --- | --- | --- |
-| 0 0 0 | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 | agrees |
-| 0 0 1 | 0 / 0 | 0 / 0 | 1 / 1 | 0 / 0 | agrees |
-| 0 1 0 | 1 / 1 | 0 / 0 | 1 / 1 | 0 / 0 | agrees |
-| 0 1 1 | 1 / 1 | 0 / 0 | 0 / 0 | 1 / 1 | agrees |
-| 1 0 0 | 1 / 1 | 0 / 0 | 1 / 1 | 0 / 0 | agrees |
-| 1 0 1 | 1 / 1 | 0 / 0 | 0 / 0 | 1 / 1 | agrees |
-| 1 1 0 | 0 / 0 | 1 / 1 | 0 / 0 | 1 / 1 | agrees |
-| 1 1 1 | 0 / 0 | 1 / 1 | 1 / 1 | 1 / 1 | agrees |
+| 0 0 0 | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 | Agrees |
+| 0 0 1 | 0 / 0 | 0 / 0 | 1 / 1 | 0 / 0 | Agrees |
+| 0 1 0 | 1 / 1 | 0 / 0 | 1 / 1 | 0 / 0 | Agrees |
+| 0 1 1 | 1 / 1 | 0 / 0 | 0 / 0 | 1 / 1 | Agrees |
+| 1 0 0 | 1 / 1 | 0 / 0 | 1 / 1 | 0 / 0 | Agrees |
+| 1 0 1 | 1 / 1 | 0 / 0 | 0 / 0 | 1 / 1 | Agrees |
+| 1 1 0 | 0 / 0 | 1 / 1 | 0 / 0 | 1 / 1 | Agrees |
+| 1 1 1 | 0 / 0 | 1 / 1 | 1 / 1 | 1 / 1 | Agrees |
 
 ## Sources
 

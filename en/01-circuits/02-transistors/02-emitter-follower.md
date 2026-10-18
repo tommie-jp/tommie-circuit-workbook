@@ -12,7 +12,7 @@ ja: 84d04ae089681a3129605e16a44b692124a047f7
 # 2-2 Emitter Follower
 
 This circuit connects the collector directly to the supply and takes the output from the emitter. **It leaves the voltage almost
-unchanged, at about 1 times, and increases only the current it can deliver.** In this exercise you feed in a 1 kHz sine wave from W1
+unchanged (a gain of about 1) and increases only the current it can deliver.** In this exercise you feed in a 1 kHz sine wave from W1
 and use the oscilloscope to confirm that a wave of almost the same size appears at the output.
 
 It is used when a signal source that cannot supply much current has to drive a load with a low resistance.
@@ -136,7 +136,7 @@ measure: [vpp, freq, phase]
 ![Oscilloscope screen](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/02-transistors/scope/02-emitter-follower.svg)
 
 CH1 in Fig. 3 is about 0.94 times CH2 (0.94 Vpp), and the peaks and troughs of the two traces almost coincide. You can see at a glance that the signal is not inverted
-and that the voltage comes out at almost 1 times. The cutoff frequency of the coupling capacitor (10 µF) and 1 kΩ
+and that the voltage comes out almost unchanged. The cutoff frequency of the coupling capacitor (10 µF) and 1 kΩ
 is about 16 Hz, so at 1 kHz the phase shift is only about 1°, which cannot be seen on the screen.
 
 ## Viewing the frequency response with a VNA
@@ -198,7 +198,7 @@ Fig. 5 is a graph of S21 **calculated** by replacing the transistor with a small
 
 ```graph
 # Graph (tommie-fence graph fence)
-title: Fig. 5 Emitter follower S21 (calculated), +1.5 dB at low end, falls from a few MHz
+title: Fig. 5 S21 (calculated), +1.5 dB low, falls from a few MHz
 x: Frequency Hz log 50k..100M
 y:
   - Magnitude dB
@@ -263,14 +263,14 @@ notes:
   **about +1.5 dB at low frequencies (|S21| ≈ 1.19)**. The voltage gain is below 1 times, yet S21 exceeds 1, because
   the input has a high impedance (about 4.4 kΩ at low frequencies) and hardly loads the 50 Ω of CH0, while the output has a low
   impedance (about 32 Ω) and can drive the 50 Ω of CH1. The circuit receives twice the voltage it would get when
-  connected directly to a 50 Ω line, and hands 0.6 times of that to the 50 Ω — this is impedance conversion
+  connected directly to a 50 Ω line, and hands 0.6 of that to the 50 Ω — this is impedance conversion
 - **It falls from a few MHz.** It is +1.5 dB at 1 MHz, about 0 dB at 20 MHz (the same as the through) and about −2.3 dB at 50 MHz.
   Three reasons add up:
   - The fT of the 2SC1815 falls as the current and V<sub>CE</sub> get smaller. The datasheet's 80 MHz (minimum) is the value at
     V<sub>CE</sub> 10 V and I<sub>C</sub> 1 mA, and for this circuit (0.83 mA, about 4.2 V) it was assumed to be around 40 MHz
     (fT is the frequency at which the current gain falls to 1). As the frequency rises, the AC current gain β falls and the output impedance rises
   - The base spreading resistance (rbb′ about 50 Ω) and C<sub>ob</sub> (3 pF at VCB about 4 V) also create a pole on the input side
-  - The lead of the SMA-to-clip cable (about 80 nH for 10 cm) and the stray capacitance of the breadboard holes (a few pF per place)
+  - The clip lead of the SMA cable (about 80 nH per 10 cm) and the stray capacitance of the breadboard holes (a few pF per place)
 - The values used in the calculation for Fig. 5: Ie 0.83 mA, hFE 150, fT 40 MHz, Cob 3 pF and rbb′ 50 Ω, with the 80 nH of the clip leads (input and output)
   and 5 pF of stray capacitance at each node added. Where it actually starts to fall depends on the lead length and how it is assembled —
   the shorter the leads, the higher the frequency to which the response stays flat
@@ -286,7 +286,7 @@ and finally the transistor input (rπ ∥ Cπ). The emitter moves together with 
 # NanoVNA screen (tommie-fence vna fence)
 device: litevna64
 sweep: 50k-100M 201
-title: Fig. 6 Emitter follower input S11 (from the equivalent circuit), right edge of Smith chart at low end
+title: Fig. 6 Input S11 (equivalent circuit), right end of Smith
 dut:
   - series L 80n
   - shunt C 5p

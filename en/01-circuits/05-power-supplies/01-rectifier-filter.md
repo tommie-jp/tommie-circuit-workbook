@@ -11,12 +11,12 @@ ja: 627d9623816c4339fa08229bec0f885dd70c14cc
 
 # 5-1 Half-wave, full-wave and bridge rectification with smoothing (low-voltage AC)
 
-As a first step toward turning AC into DC, we build a **bridge rectifier** from four diodes and smooth it with an
-electrolytic capacitor. The goal is to learn how a circuit's power supply is made from AC instead of a battery.
+As a first step toward turning AC into DC, you build a **bridge rectifier** from four diodes and smooth it with an
+electrolytic capacitor. The goal is to learn how a circuit's power is made from AC instead of a battery.
 Rectification makes the current flow in one direction only. Smoothing fills the valleys with charge stored in the capacitor
 and evens out the pulsating voltage.
 
-Do not connect to the mains. Use a 9 V AC adapter (or the output of a signal generator) as the AC source.
+Do not connect it directly to the mains. Use a 9 V AC adapter (or the output of a signal generator) as the AC source.
 9 V is an **RMS value**: the DC voltage that would produce the same heat in the same resistor. For a sine wave it is 1/√2 of the amplitude (peak).
 With 9 V, the rectified voltage stays at or below 12 V and the peak at or below 20 V, which is within what a breadboard can handle.
 
@@ -103,10 +103,10 @@ wires:
   DC+ goes out to the bottom + rail and DC− to the top − rail. C1 and RL are taken from the rails at columns 16 and 20.
   The upper and lower − rails are joined at column 29
 - The AC enters at columns 5 and 11 and is passed from the upper block to the lower block with yellow wires
-- 1+ (orange) of the Analog Discovery goes to the column on the + side of C1 (`h16`), and 1− (black) goes to the bottom − rail (`-b22`).
+- The Analog Discovery 1+ (orange) goes to the column on the + side of C1 (`h16`), and 1− (black) goes to the bottom − rail (`-b22`).
   The AC source is the AC adapter. The Wavegen of the AD3 is not used (its output is at most ±5 V, 30 mA, so it cannot serve as a 9 V AC source)
 - Always check the direction of the rectifier diodes (the striped side is the cathode). If one is reversed,
-  no current flows and the AC adapter and C1 are stressed
+  no current flows and the AC adapter and C1 are put under strain
 
 ## Viewing on the oscilloscope
 
@@ -131,18 +131,18 @@ measure: [vmax, vmin, vpp, freq]
 | D1 to D4 | Rectifier diodes | 1N4001 |
 | C1 | Electrolytic capacitor (smoothing) | 1000 µF (rated 25 V or more; about 11 V after rectification) |
 | RL | Resistor (load, **1 W**, because it dissipates about 0.54 W) | 220 Ω |
-| — | Instruments | Scope of the Analog Discovery 3 (1+ = + of C1, 1− = GND) |
+| — | Instrument | Analog Discovery 3 Scope (1+ = + of C1, 1− = GND) |
 | — | AC source | 9 V AC adapter (or a signal generator, 9 V RMS). Low-voltage AC input, as in the transformer experiment (Chapter 6) |
 
 ## Values to check
 
-The values in the table are calculated values. Take the forward voltage of one diode (seen in 1-4) as 0.8 V. In the bridge, the current always passes through two diodes in series.
-The remaining ripple after smoothing is called the **ripple**. The peak-to-peak ripple (from peak to valley) of full-wave rectification is estimated by the following formula.
+The values in the table are calculated. Take the forward voltage of one diode (seen in 1-4) as 0.8 V. In the bridge, the current always passes through two diodes in series.
+The waveform that remains after smoothing is called the **ripple**. The peak-to-peak ripple (from peak to valley) of full-wave rectification is estimated by the following formula.
 
 - V<sub>ripple(pp)</sub> ≈ I<sub>dc</sub> / (f<sub>ripple</sub> × C)
 - f<sub>ripple</sub> = 2 × the mains frequency (120 Hz for 60 Hz). The table is calculated for 60 Hz. In 50 Hz regions it is 100 Hz and the ripple is about 0.50 V
 
-The instrument is the oscilloscope (Scope) of the Analog Discovery 3. It reads the difference between peak and valley from the time waveform, which suits it better than a multimeter
+The instrument is the Analog Discovery 3 oscilloscope (Scope). It reads the difference between peak and valley from the time waveform, which suits it better than a multimeter
 (the DC average can also be measured on the DC voltage range of a multimeter). Connect 1+ to the + of C1 and 1− to GND (Fig. 2),
 and read the ripple as the difference between peak and valley. For the peak right after rectification, remove C1 and read the top of the waveform across RL.
 
@@ -152,7 +152,7 @@ The readings in Fig. 4 are a peak of 11.1 V, a valley of 10.7 V and a ripple of 
 The 0.41 V from the formula is an estimate that uses the whole discharge time down to the valley. The figure excludes the charging time (around the peak), so its value is a little smaller
 (both are calculated values, not measurements).
 
-| Measure | Expected value | What it tells you |
+| Measure | Expected value | What it shows |
 | --- | --- | --- |
 | Peak voltage right after rectification | about 11.1 V (12.7 V − 2 × 0.8 V) | The voltage drop of two diodes |
 | DC voltage (average) after C1 and RL | about 10.9 V | Lower than the peak by half the ripple |
@@ -162,7 +162,7 @@ The 0.41 V from the formula is an estimate that uses the whole discharge time do
 Half-wave rectification can be made by connecting one terminal of the AC source through a single diode to the + side of C1 and RL,
 and the other terminal directly to the − side of C1 and RL. It has fewer parts than the bridge, but it uses only one half cycle of the
 AC adapter, so the ripple is larger and the efficiency is worse.
-If you remove D2 and D3 from the board of Fig. 2, the current takes only the path D1 → RL → D4, and you can check half-wave rectification
+If you remove D2 and D3 from the breadboard of Fig. 2, the current takes only the path D1 → RL → D4, and you can check half-wave rectification
 (it still passes two diodes, so the peak is about 11.1 V, the same as full-wave).
 
 ## Verification with LTspice

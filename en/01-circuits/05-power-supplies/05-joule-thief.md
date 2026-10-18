@@ -73,7 +73,7 @@ style:
 
 ```breadboard
 # Breadboard wiring diagram (tommie-fence breadboard fence)
-title: Fig. 2 Building it on the breadboard (1+ to Q1 collector, column 17; 1− to GND)
+title: Fig. 2 Breadboard build (1+ to Q1 collector, 1− to GND)
 board: half
 parts:
   T1: transformer c5(A1) c7(A2) c9(B1) c11(B2)
@@ -117,8 +117,8 @@ wires:
   block. The emitter (column 16) goes to the lower − rail
 - The 1+ (orange) of the Analog Discovery goes to column 17 of the Q1 collector (`h17`) and 1− (black) goes to the lower
   − rail (`-b20`). The power is one battery. The average battery current is about 50 mA (SPICE; the peak is about 90 mA),
-  which leaves no margin against the 50 mA per rail of Supplies (250 mW on USB power), so the AD3 Supplies is not used
-  and only Scope is
+  which leaves no margin against the 50 mA per rail of Supplies (250 mW on USB power), so the Supplies of the AD3 is not used
+  and only the Scope is used
 - Q1 (2SC1815) has pins E, C, B from the left when you look at it with the flat face toward you (the row j side). Plug
   it as it is into columns 16, 17, 18 of row g
 - Plug the LED with the anode in column 7 (connected to the same node as the collector) and the cathode in column 3, and

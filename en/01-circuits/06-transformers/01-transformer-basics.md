@@ -61,7 +61,7 @@ style:
 
 ```breadboard
 # Breadboard wiring diagram (tommie-fence breadboard fence)
-title: Fig. 2 Connecting the transformer and adapter (CH1 primary, CH2 secondary)
+title: Fig. 2 Transformer and adapter (CH1 in, CH2 out)
 # The four pins of the transformer plug straight into breadboard holes. The rails are not used
 board: half
 parts:
@@ -86,7 +86,7 @@ wires:
   - AD.2- -- d16 black
   - AD.GND -- e8 black
 notes:
-  - text: Primary (columns 5 to 8) to the adapter, load R1 on the secondary (columns 13 to 16)
+  - text: Primary to adapter (columns 5–8), R1 on secondary (13–16)
 ```
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/06-transformers/breadboard/01-transformer-basics.svg)
@@ -128,12 +128,12 @@ With the connection of this exercise, B1 and B2 of the secondary connect to the 
 (through 2+ and 2−). The two 1 MΩ are in parallel as seen from GND, so the secondary side connects to GND through about
 0.5 MΩ. This does not short the isolation of the transformer, but the secondary side is not completely floating either.
 The potentials of the two ends of the secondary settle, where the two 1 MΩ balance, at about ±8.5 V with respect to GND
-(half of the peak value, V<sub>p</sub> = 17 V, each). Even if one end is pulled toward GND, the other is at most ±17 V, and both stay inside the
+(each is half of V<sub>p</sub> = 17 V). Even if one end is pulled toward GND, the other is at most ±17 V, and both stay inside the
 input range of ±25 V.
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
-title: Fig. 3 Primary (CH1) and secondary (CH2), secondary 2x and in phase
+title: Fig. 3 Secondary (CH2) is 2x primary (CH1)
 time: 5ms/div
 trigger: ch1 rising 0V
 ch1: {wave: sine 60Hz 8.49V, range: 5V/div}

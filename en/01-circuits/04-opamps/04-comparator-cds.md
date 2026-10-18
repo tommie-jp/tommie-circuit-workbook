@@ -13,7 +13,7 @@ ja: cbb3c84493bfd39d4782bad3bf57f3e96d2e156a
 
 An op amp used without feedback is a **comparator**. An op amp amplifies the difference between its inputs by tens of
 thousands of times or more, so its output snaps to the positive or the negative supply depending only on which input,
-+ or −, is higher. This is the fourth basic op amp configuration. Here a CdS cell (cadmium sulfide cell, whose
++ or −, is higher. This is the fourth basic op amp circuit. In this exercise a CdS cell (cadmium sulfide cell, whose
 resistance changes with light) measures brightness, and an LED lights when it gets dark.
 
 ## Schematic
@@ -54,12 +54,12 @@ style:
 
 ![Schematic](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/04-opamps/circuit/04-comparator-cds.svg)
 
-- VP and VN on the left are the ±5 V supply. They come from V+ and V− of Supplies on the AD3 (same as in 4-1). In Fig. 1 they also power CDS1, RFIX and VR1
+- VP and VN on the left are the ±5 V supply. They are made with V+ and V− of the AD3 Supplies, as in 4-1. In Fig. 1 they also power CDS1, RFIX and VR1
 - **The divider point of CDS1 and RFIX is the − input.** In the light CDS1 has a low resistance (about 1 kΩ) and in the
   dark a high resistance (about 200 kΩ), so the voltage at the divider point moves over a wide range
 - **The midpoint (wiper) of VR1 (threshold adjustment) is the + input.** There is no feedback, so when the +
   input is higher than the − input the output sticks near +V, and when it is lower the output sticks near −V
-- R1 and D1 form an LED that lights only when the output is high. **A comparator with no feedback has no
+- R1 and D1 are an LED branch that lights only when the output is high. **A comparator with no feedback has no
   hysteresis** (a mechanism that shifts the switching point depending on whether the input is rising or falling), so the
   LED may flicker right at the threshold (to fix this, use the Schmitt trigger of 4-8)
 - **When the output sticks to the −V side (about −4.5 V), a reverse voltage of about 4.5 V is applied to D1,
@@ -121,24 +121,24 @@ notes:
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/04-opamps/breadboard/04-comparator-cds.svg)
 
-- Supplies of the AD3 at the upper left of Fig. 2 correspond to VP and VN (the ±5 V supply) in Fig. 1. V+ goes to the top red rail and GND to the top blue rail.
+- The AD3 Supplies at the upper left of Fig. 2 correspond to VP and VN (the ±5 V supply) in Fig. 1. V+ goes to the top red rail and GND to the top blue rail.
   V− is brought down along the left edge of the breadboard into the bottom blue rail. The bottom red rail gets +5 V from the top red rail through the red wire at column 1
-- **V− is the bottom blue rail.** Do not confuse it with GND (the top blue rail). PIN 4 (column 15), RFIX and terminal 3
-  of VR1 connect to it. PIN 8 (column 12) goes to +5 V through `+t12--a12`
-- **The divider point of the CdS (column 13) and RFIX (column 13) is IN− (PIN 2).** The other end of the CdS (column 16) goes to the bottom red rail (+5 V).
-  The wiper of VR1 (column 27, at the right end of the upper block) goes to IN+ (PIN 3, column 14) through the orange wire across the center gap and `g27--g14`
-- The output (PIN 1, column 12) is raised to column 11 of the upper block by `g12--g11` and the wire across the center gap. From there it passes
+- **V− is the bottom blue rail.** Do not confuse it with GND (the top blue rail). Pin 4 (column 15), RFIX and terminal 3
+  of VR1 connect to it. Pin 8 (column 12) goes to +5 V through `+t12--a12`
+- **The divider point of the CdS (column 13) and RFIX (column 13) is IN− (pin 2).** The other end of the CdS (column 16) goes to the bottom red rail (+5 V).
+  The wiper of VR1 (column 27, at the right end of the upper block) goes to IN+ (pin 3, column 14) through the orange wire across the trench and `g27--g14`
+- The output (pin 1, column 12) is raised to column 11 of the upper block by `g12--g11` and a wire across the trench. From there it passes
   through R1 (220 Ω) and D1 (LED) to GND (column 6, the top blue rail). **DP (1N4148) is connected in anti-parallel with D1.** DP uses the same columns as D1, 6 and 9,
   so it needs no wiring (column 9 is automatically the same net as the anode side of D1 and column 6 the same net as the cathode side).
   It clamps the reverse voltage, when the output sticks to −V, to the forward drop of DP (about 0.7 V). Turn VR1 to change the brightness at the threshold
 - The Scope is drawn as a separate box (AD3 Scope) below the breadboard. 1+ (orange) goes to column 13 (`j13`), the − input,
   and 2+ (green) goes to column 12 (`j12`), the output. 1− and 2− (black) go around the right edge of the breadboard and return to columns 29 and 30 of the top blue rail (GND)
-- The current from Supplies of the AD3 peaks as follows. On the +5 V side it is about 7 mA for the LED plus a few mA for the CdS, VR1 and the op amp. On the −5 V side
+- The current from the AD3 Supplies peaks as follows. On the +5 V side it is about 7 mA for the LED plus a few mA for the CdS, VR1 and the op amp. On the −5 V side
   it is about 17 mA, sunk through R1 and DP in the light. Both are within the rough USB-power limit of 50 mA (250 mW)
 
 ## Instrument settings
 
-Instead of a multimeter, use the Scope of the AD3 to watch how the − input (CH1) and the output (CH2) change at the moment you cover the CdS with your hand.
+Instead of a multimeter, use the AD3 Scope to watch how the − input (CH1) and the output (CH2) change at the moment you cover the CdS with your hand.
 The voltage changes greatly only once, far more slowly than 10 MHz (the observation lasts a few seconds). Set VR1 to its midpoint (threshold 0 V).
 
 | Setting | Value |
@@ -146,7 +146,7 @@ The voltage changes greatly only once, far more slowly than 10 MHz (the observat
 | Scope CH1 (− input, column 13) | DC, 2 V/div |
 | Scope CH2 (output, column 12) | DC, 2 V/div |
 | Time | 100 ms/div. Set Mode to Single or Screen, not Repeated, and cover the CdS by hand |
-| Trigger | CH1, falling, 0 V (the moment the − input falls below the 0 V of the + input) |
+| Trigger | CH1, falling edge, 0 V (the moment the − input falls below the 0 V of the + input) |
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
@@ -171,27 +171,27 @@ so this screen also shows the flicker right at the threshold (the lack of hyster
 
 | Symbol | Part | Value |
 | --- | --- | --- |
-| U1 | Op amp (one half of a dual, used as a comparator) | LM358 |
+| U1 | Op amp (one of two in the package, used as a comparator) | LM358 |
 | CDS1 | Cadmium sulfide cell (CdS) | Light: about 1 kΩ / dark: about 200 kΩ (typical values) |
 | RFIX | Resistor | 10 kΩ |
 | VR1 | Trimmer potentiometer (threshold adjustment) | 10 kΩ |
 | R1 | Resistor (LED current limit) | 220 Ω |
 | D1 | LED (red, 5 mm) | V<sub>F</sub> ≈ 2.0 V |
 | DP | Protection diode (anti-parallel with D1) | 1N4148 |
-| — | Power supply | ±5 V (Supplies on the AD3; V+ = +5 V, V− = −5 V) |
-| — | Instruments | Scope 1+/2+ of the AD3 (− input and output), multimeter |
+| — | Power supply | ±5 V (AD3 Supplies; V+ = +5 V, V− = −5 V) |
+| — | Instrument | AD3 Scope 1+/2+ (− input and output), multimeter |
 
 ## Values to check
 
-While covering the CdS with your hand and shining a light on it, measure the − input (column 13) and the output (column 12) against GND with the multimeter on a DC voltage range or with the Scope of the AD3 (Fig. 3), and watch the LED. The values in the table are calculated values. Voltage at the divider point = V− + (V+ − V−) × RFIX / (CDS1 + RFIX), with VR1 at its midpoint
+While covering the CdS with your hand and shining a light on it, measure the − input (column 13) and the output (column 12) against GND with the multimeter on a DC voltage range or with the AD3 Scope (Fig. 3), and watch the LED. The values in the table are calculated. Voltage at the divider point = V− + (V+ − V−) × RFIX / (CDS1 + RFIX), with VR1 at its midpoint
 (threshold 0 V). With almost no load, the LM358 output swings **to about 1.5 V below the supply on the +V side (≈ +3.5 V) and almost to V− on the −V side (≈ −4.5 V)** (typical values).
 
-| Measure | Expected value | What it tells you |
+| Measure | Expected value | What it shows |
 | --- | --- | --- |
 | − input in the light (CDS1 ≈ 1 kΩ) | about +4.1 V | RFIX dominates, so it is near +V |
 | − input in the dark (CDS1 ≈ 200 kΩ) | about −4.5 V | CDS1 dominates, so it is near −V |
-| Output and LED in the light | Output about −4.5 V, LED off | − input (+4.1 V) > + input (0 V), so the output is Low. The reverse voltage on D1 is clamped by DP to about −0.7 V (calculated value, below the rough 5 V reverse breakdown voltage) |
-| Output and LED in the dark | Output about +3.5 V, LED on | − input (−4.5 V) < + input (0 V), so the output is High. LED current ≈ (3.5 − 2.0) / 220 ≈ **6.8 mA** (calculated value) |
+| Output and LED in the light | output about −4.5 V, LED off | − input (+4.1 V) > + input (0 V), so the output is Low. The reverse voltage on D1 is clamped by DP to about −0.7 V (calculated value, below the rough 5 V reverse breakdown voltage) |
+| Output and LED in the dark | output about +3.5 V, LED on | − input (−4.5 V) < + input (0 V), so the output is High. LED current ≈ (3.5 − 2.0) / 220 ≈ **6.8 mA** (calculated value) |
 | Value of CDS1 at which it switches | 10 kΩ (with VR1 at its midpoint) | The point where − input = + input (0 V). VR1 changes this value (it does not depend on the supply voltage) |
 | Current through R1 in the light (via DP) | about 17 mA (calculated value) | (4.5 − 0.7) / 220 ≈ 17.3 mA. Within the current the LM358 can sink (typically around 20 mA). Power in R1 ≈ 0.066 W |
 
@@ -200,18 +200,18 @@ Measure CDS1 with the multimeter in the light and in the dark before adjusting V
 
 ## Verification with LTspice
 
-`sim/04-comparator-cds.cir` solves the DC operation of Fig. 1 (CDS1 swept over 1 kΩ, 10 kΩ and 200 kΩ; VR1 at its midpoint, so the + input is 0 V).
+`sim/04-comparator-cds.cir` solves the DC operating point of Fig. 1 (CDS1 swept over 1 kΩ, 10 kΩ and 200 kΩ; VR1 at its midpoint, so the + input is 0 V).
 The op amp is a simple one-pole model. The output High is V+ − 1.5 V = 3.5 V, and Low is V− + 0.5 V = −4.5 V because the op amp sinks 17 mA; both are **assumptions**
 (assumed voltage drops of the LM358 when sinking, not measurements). The LED is a model with 2 V (near 8 mA) and DP is the standard 1N4148 model.
 
-| Item | Value in the text | LTspice | Verdict |
+| Item | Value in the text | LTspice | Result |
 | --- | --- | --- | --- |
-| − input in the light (1 kΩ) | about +4.1 V | +4.09 V | agrees |
-| − input in the dark (200 kΩ) | about −4.5 V | −4.52 V | agrees |
-| Output in the light and reverse voltage on D1 | −4.5 V, about −0.7 V | −4.5 V (assumed), −0.72 V | agrees |
-| Output in the dark and LED current | +3.5 V, about 6.8 mA | +3.5 V (assumed), 6.83 mA | agrees |
-| Threshold (CDS1 = 10 kΩ) | − input = 0 V | 0 V, output 0 V (the switching point) | agrees |
-| Current through R1 in the light (via DP) | about 17 mA | 17.2 mA | agrees |
+| − input in the light (1 kΩ) | about +4.1 V | +4.09 V | Match |
+| − input in the dark (200 kΩ) | about −4.5 V | −4.52 V | Match |
+| Output in the light and reverse voltage on D1 | −4.5 V, about −0.7 V | −4.5 V (assumed), −0.72 V | Match |
+| Output in the dark and LED current | +3.5 V, about 6.8 mA | +3.5 V (assumed), 6.83 mA | Match |
+| Threshold (CDS1 = 10 kΩ) | − input = 0 V | 0 V, output 0 V (the switching point) | Match |
+| Current through R1 in the light (via DP) | about 17 mA | 17.2 mA | Match |
 
 ## Sources
 

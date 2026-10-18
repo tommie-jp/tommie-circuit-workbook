@@ -2,19 +2,19 @@
 book: circuits
 chapter: 8
 id: 8-2
-title: A Temperature Alarm with a Thermistor
+title: A temperature alarm with a thermistor
 tier: 50
 source: 自作
 board: BB
 ja: cda55bc06cd975edc4c663e45df7bb9fd18354fb
 ---
 
-# 8-2 A Temperature Alarm with a Thermistor
+# 8-2 A temperature alarm with a thermistor
 
 This exercise builds a temperature alarm that sounds a buzzer when the temperature rises above about 40 °C.
 An NTC thermistor is an element whose resistance falls as the temperature rises. The same voltage-divider idea as for
 the CdS cell (8-1) turns temperature into a voltage, but with one transistor stage as in 8-1 the change-over is too
-gradual. So the circuit uses two transistor stages (a Darlington connection, seen in 2-4) to gain amplification, and
+gradual. So the circuit uses two transistor stages (a Darlington connection, seen in 2-4) to raise the gain, and
 the buzzer sounds clearly once the set temperature is exceeded.
 
 ## Schematic
@@ -52,9 +52,9 @@ style:
   (the same idea as the CdS cell in 8-1, only with top and bottom swapped)
 - Q1 and Q2 are in a Darlington connection (the emitter of Q1 is the base of Q2). R2 (100 kΩ) is a bleeder resistor
   (a resistor that drains the leakage current of Q1 to GND): it pulls the base of Q2 lightly to GND so that Q2 is
-  surely OFF when Q1 is OFF
+  reliably OFF when Q1 is OFF
 - The combined gain of the two stages is h<sub>FE1</sub> × h<sub>FE2</sub>, which is very large. So when the midpoint of
-  the divider exceeds just slightly two base-emitter voltages (about 1.4 V), Q2 saturates at once and the buzzer
+  the divider exceeds two base-emitter voltages (about 1.4 V) by only a little, Q2 saturates at once and the buzzer
   switches clearly ON and OFF
 
 ## Wiring diagram
@@ -93,7 +93,7 @@ wires:
   - +t40 -- +b40 red
   - -t41 -- -b41 black
 notes:
-  - text: Warm TH1 (pinch it with your fingers or blow warm air from a hair dryer) and the buzzer starts to sound
+  - text: Warm TH1 with fingers or a hair dryer and the buzzer sounds
 ```
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/08-sensors/breadboard/02-thermistor-alarm.svg)
@@ -172,7 +172,7 @@ be a 100 Ω resistor (this is not the current of a real buzzer).
 | 35 °C | 6.5 kΩ | 6.5 kΩ | 1.26 V | 1.26 V | 9.5 mA | agrees (the text was corrected to "starts to sound") |
 | 38 °C | 5.7 kΩ | 5.7 kΩ | 1.38 V | 1.38 V | 40 mA | agrees (ON) |
 | 40 °C | 5.3 kΩ | 5.3 kΩ | 1.47 V | 1.46 V | 46 mA | agrees |
-| 50 °C | 3.6 kΩ | 3.6 kΩ | 1.90 V | 1.84 V (the base of Q1 draws on the divider) | 47 mA | agrees |
+| 50 °C | 3.6 kΩ | 3.6 kΩ | 1.90 V | 1.84 V (the base of Q1 loads the divider) | 47 mA | agrees |
 
 The Darlington starts to conduct from about 1.2 V, lower than the "midpoint 1.4 V" in the text (0.8 mA at 30 °C, 2 mA
 at 33 °C, 9.5 mA at 35 °C), and is fully ON at 38 °C. Changing h<sub>FE</sub> to 100 moves this by only about 1 °C.

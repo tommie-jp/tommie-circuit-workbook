@@ -2,14 +2,14 @@
 book: circuits
 chapter: 7
 id: 7-3
-title: H-Bridge — Forward and Reverse
+title: H-bridge — forward and reverse
 tier: 50
 source: 自作
 board: BB
 ja: 7a789f382f9614b381d82a9f88130b665ea95708
 ---
 
-# 7-3 H-Bridge — Forward and Reverse
+# 7-3 H-bridge — forward and reverse
 
 The same small motor as in 7-2 (Mabuchi RF-300CA-11440) turns forward and in reverse on 5 V. A DC motor turns the
 other way when the polarity of the applied voltage is reversed. To change the direction, switch each end of the
@@ -70,7 +70,7 @@ style:
 
 ```breadboard
 # Breadboard wiring diagram (tommie-fence breadboard fence)
-title: Fig. 2 Two switches, the motor and R1 (1+ and 1− on c of SW1, SW2)
+title: Fig. 2 Two switches, motor and R1 (Scope on c)
 # Top red rail = +5V, blue rail = GND
 board: half
 parts:
@@ -104,7 +104,7 @@ wires:
   - AD.1+ -- e6 blue
   - AD.1- -- e13 green
 notes:
-  - text: On both SW1 and SW2, 1 (left pin) is +5V, 2 (right pin) is GND, and c (center) goes to the motor and R1
+  - text: On SW1 and SW2, 1 = +5V, 2 = GND, c to motor and R1
 ```
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/07-power/breadboard/03-h-bridge.svg)

@@ -2,7 +2,7 @@
 book: circuits
 chapter: 8
 id: 8-3
-title: Touch Switch (Human Body)
+title: Touch switch (human body)
 tier: 50
 source: 自作
 board: BB
@@ -10,7 +10,7 @@ era: 古
 ja: 516f1333849312872d49f9687bcc503cce8f6e8d
 ---
 
-# 8-3 Touch Switch (Human Body)
+# 8-3 Touch switch (human body)
 
 This exercise builds a circuit in which an LED lights just by touching two terminals with a finger. Human skin has a
 large resistance of several hundred kΩ, and the current through a finger is only a few µA. Two transistor stages (a
@@ -54,7 +54,7 @@ style:
   a small current flows in through the resistance of the skin (several hundred kΩ). R1 (1 MΩ) is a pull-down that
   pulls the base lightly to GND, and when the current from the finger wins over it, the base voltage of Q1 rises
 - Connecting the emitter of Q1 directly to the base of Q2 is the Darlington connection. R3 (100 kΩ) is a bleeder
-  resistor (seen in 8-2) that pulls the base of Q2 lightly to GND, so that Q2 is surely OFF when Q1 is OFF
+  resistor (seen in 8-2) that pulls the base of Q2 lightly to GND, so that Q2 is reliably OFF when Q1 is OFF
 - D1 (the LED) is in series with R4 on the collector of Q2 (+5 V → R4 → D1 → Q2 → GND). With no touch, Q2 is OFF, the
   path through D1 is cut, and the LED is dark. When touched, Q2 turns ON, the path forms, and D1 lights
 - The gain of the two stages is h<sub>FE1</sub> × h<sub>FE2</sub> (about 10,000 for two 2SC1815). Amplifying the base
@@ -97,7 +97,7 @@ wires:
   - -t29 -- -b29 black
   - +t30 -- +b30 red
 notes:
-  - text: The two points to touch are column 11 (base side) and column 13 (+5V side) of the lower block
+  - text: Touch columns 11 (base side) and 13 (+5V side)
 ```
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/08-sensors/breadboard/03-touch-switch.svg)

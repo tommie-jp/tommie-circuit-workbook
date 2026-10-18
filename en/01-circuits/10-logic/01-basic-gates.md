@@ -225,7 +225,7 @@ wires:
 
 ## Instrument settings
 
-The only instrument is Supplies (power supply) of the AD3, and the 0 or 1 of the outputs are read from the LEDs and a multimeter.
+The only instrument is Supplies (power supply) of the AD3, and the 0 or 1 of each output is read from the LEDs and a multimeter.
 This exercise has no oscilloscope figure. It only looks at DC voltages (0 or 1) while the switches are held, and nothing changes with time.
 
 The current through the breadboard is about 2.2 mA × 3 ≈ 7 mA even with all 3 LEDs lit, plus the pull-down of the closed switches,

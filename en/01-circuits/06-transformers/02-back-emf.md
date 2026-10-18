@@ -53,7 +53,7 @@ style:
 
 ```breadboard
 # Breadboard wiring diagram (tommie-fence breadboard fence)
-title: Fig. 2 Building it on the breadboard (5 V from AD V+, 1+ to the top of L1)
+title: Fig. 2 Breadboard build (5 V from AD V+, 1+ to L1 top)
 # Top red rail = +5V, blue rail = GND
 board: half
 parts:
@@ -76,7 +76,7 @@ wires:
   - c12 -- c15 yellow
   - a20 -- -t20 black
 notes:
-  - text: D1 goes in columns 15 and 20 (another row), the same as L1, in parallel with the coil
+  - text: D1 sits across L1, in columns 15 and 20 (row d)
 ```
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/06-transformers/breadboard/02-back-emf.svg)

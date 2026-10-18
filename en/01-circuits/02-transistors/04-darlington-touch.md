@@ -120,7 +120,7 @@ wires:
 
 As in Fig. 2, all the parts go in the upper block. The 5 V goes from the supply output V+ of the Analog Discovery 3 (red, `+t29` at the right end) to
 the top + rail (set V+ to 5 V in Supplies in WaveForms).
-The only current is the LED's about 4.7 mA, so V+ is enough. Only the top − rail is used for GND.
+The only current drawn is the LED's about 4.7 mA, so V+ is enough. Only the top − rail is used for GND.
 
 - `Q1` and `Q2` are in row e of the upper block (`e12` to `e14` and `e17` to `e19`). Rows a to d above the pins serve as paths for the wires
 - **Base (column 12)**: the right end of `RB` (`b12`) is in the same column as B of `Q1`. The left end of `RB` goes from `a7` to the − rail.
@@ -135,7 +135,7 @@ The only current is the LED's about 4.7 mA, so V+ is enough. Only the top − ra
 ## Viewing on the oscilloscope
 
 Set CH1 to 1 V/div, CH2 to 500 mV/div and the time base to 20 ms/div. Trigger on the rising edge of CH2
-(0.7 V) in Single, which freezes the screen once, and then touch both breadboards with a finger (Fig. 3).
+(0.7 V) in Single, which freezes the screen once, and then touch both plates with a finger (Fig. 3).
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
@@ -173,7 +173,7 @@ measure: [vmax, vmin]
 | Measure | Expected value | What it shows |
 | --- | --- | --- |
 | LED when not touched | Off | RB pulls the base of Q1 to GND |
-| LED when both breadboards are touched with a finger | On (about 4.7 mA, calculated value) | Even a tiny finger current saturates the transistors fully |
+| LED when both plates are touched with a finger | On (about 4.7 mA, calculated value) | Even a tiny finger current saturates the transistors fully |
 | CH1 (collector) / CH2 (base) before the touch | about 3.5 V (rough guide) / 0 V | The transistors are OFF and the base is at GND through RB |
 | CH2 (base of Q1) at the touch | about 1.4 V | Capped at the V<sub>BE</sub> of two stages |
 | CH1 (C-E voltage of Q2) at the touch | about 0.8 V | A Darlington pair keeps a larger saturation voltage than a single transistor (about 0.1 to 0.2 V) |

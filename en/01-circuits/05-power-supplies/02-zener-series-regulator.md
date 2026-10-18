@@ -101,7 +101,7 @@ wires:
 - Insert Q1 with E, C and B in columns 7, 8 and 9. The collector (column 8) goes directly from j8 to the bottom + rail (+12 V), and
   the base (column 9) connects to the junction of DZ and Rz with the wire from e9 to g9. The emitter (column 7) is the output, and
   RL (220 Ω, columns 7 to 13) is the load. Column 13 goes down to the − rail from j13
-- The 12 V comes from an AC adapter (or a bench power supply). Supplies of the Analog Discovery gives +5 V with up to 50 mA per rail (250 mW on USB power),
+- The 12 V comes from an AC adapter (or a bench power supply). The Supplies of the Analog Discovery gives +5 V with up to 50 mA per rail (250 mW on USB power),
   so it cannot give 12 V. The AD3 is used only as an instrument to watch the output (1+ on output column 7, `i7`, and 1− on the GND − rail, `-b20`)
 - The upper and lower rails are joined at the right end (+ at column 29, − at column 30)
 
@@ -114,7 +114,7 @@ wires:
 | Q1 | NPN transistor | 2SC1815 |
 | RL | Resistor (load, equivalent to an output current of 19.5 mA) | 220 Ω |
 | — | Instruments | Scope of the Analog Discovery 3 (1+ = output, 1− = GND), used as a voltmeter that reads DC voltage |
-| — | Input supply | 12 V (AC adapter; Supplies of the AD3 gives only up to 5 V, so it is not used). A regulator throws away the difference between input and output as heat in Q1, so the input must be higher than the output (about 4.3 V) |
+| — | Input supply | 12 V (AC adapter; the Supplies of the AD3 gives only up to 5 V, so it is not used). A regulator throws away the difference between input and output as heat in Q1, so the input must be higher than the output (about 4.3 V) |
 
 ## Instrument settings
 
@@ -157,7 +157,7 @@ When the output can no longer be held because the input has fallen, this is call
 
 In LTspice (input 12 V, DZ a model matched to 5.1 V at 20 mA and 17 Ω dynamic resistance, Q1 an approximate model of the 2SC1815; not measured),
 the voltage across DZ is 4.84 V and the DZ current is 5.9 mA, which agree with the calculation above (4.9 V, 5.8 mA). The output is 4.11 V and the output current 18.7 mA, a little lower than the 4.3 V and 19.5 mA in the table.
-The table took V<sub>BE</sub> as 0.6 V, but at 19 mA the V<sub>BE</sub> of Q1 is 0.73 V in the model. A real output falls between 4.1 and 4.3 V.
+The table took V<sub>BE</sub> as 0.6 V, but at 19 mA the V<sub>BE</sub> of Q1 is 0.73 V in the model. A real output lands between 4.1 and 4.3 V.
 With a 9 V input the output is 4.05 V, and even at 6 V it is 3.98 V, so lowering the input by 6 V moves the output by only 0.13 V.
 The zener current falls to 1.0 mA at 6 V, which agrees with the estimate above (0.9 mA) (the deck is `sim/02-zener-series-regulator.cir`).
 

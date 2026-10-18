@@ -96,14 +96,14 @@ wires:
   - j23 -- -b23 black
   - -t30 -- -b30 black
 notes:
-  - text: Place D1 (IR LED) and Q1 (phototransistor) facing each other, and pass a sheet of paper between them
+  - text: Aim D1 (IR LED) at Q1, pass paper between them
 ```
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/08-sensors/breadboard/05-photointerrupter.svg)
 
 - Connect V+ (+5 V) and GND of the AD3 to the top rails, and carry them over to the bottom − rail at the right end (column 30).
 - Insert D1 (IR LED, columns 6→9) and Q1 (phototransistor, columns 16→19) in the upper block,
-  and bend their leads so that the emitting face and the receiving face point at each other. Fig. 2 draws D1 in the shape of a red LED, but the real part usually has a clear or pale blue body.
+  and bend their pins so that the emitting face and the receiving face point at each other. Fig. 2 draws D1 in the shape of a red LED, but the real part usually has a clear or pale blue body.
   How to tell C from E on Q1 (pin length, flat side) differs from part to part, so check the datasheet.
 - Carry the divider point (column 16) to the lower block with the yellow wire, and connect it through R3 (columns 16→20) and the green wire to the base of Q2 (column 21).
 - Seen with its flat face toward you, Q2 (2SC1815) has E, C, B from the left. Here it is inserted with the flat face toward the back (the f-row side),
@@ -115,7 +115,7 @@ notes:
 
 The instruments are the Supplies (power supply) of the Analog Discovery 3 and a multimeter. Set V+ of the AD3 to 5 V and turn the output ON.
 The supply current is about 17.3 mA for D1, about 8.5 mA for D2 while the light is blocked, and under 1 mA for everything else, about 26 mA in total.
-This fits within about 50 mA for one supply rail of the AD3, and within the 200 mA per hole of the breadboard.
+This fits within about 50 mA of one supply channel of the AD3, and within the 200 mA per hole of the breadboard.
 
 This exercise has no oscilloscope figure. What you read is a DC voltage that depends on whether the light is blocked, not a waveform that changes with time.
 Multimeter readings are enough.

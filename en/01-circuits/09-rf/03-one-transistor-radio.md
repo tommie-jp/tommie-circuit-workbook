@@ -147,16 +147,16 @@ wires:
 - **Place the AD3 at the bottom** (columns 22 and 19, where you measure the detector output and the collector, are in the lower block, so the wires do not run a long way across the board).
   Put V+ (5 V of Supplies) in the bottom red rail (column 17) and GND in the bottom blue rail (column 19). Red rail = +5 V, blue rail = GND.
   At column 30 the top and bottom + rails are joined, and so are the − rails (from the top + rail to Rc, and from the top − rail to L1 and VC1).
-- In the front stage, column 12 collects the antenna, VC1, L1 and C1. The right lead of L1 (column 16) goes to the top − rail.
+- In the front stage, column 12 collects the antenna, VC1, L1 and C1. The right pin of L1 (column 16) goes to the top − rail.
 - Q1 goes in row h of the lower block, in three adjacent columns (column 18 B, column 19 C, column 20 E). This spacing lets you insert it without
   bending the pins much. Seen with its flat face toward you, the 2SC1815 has E, C, B from the left, so
   with the flat face toward the upper block it reads B, C, E from the left. The emitter (column 20) goes to the bottom − rail.
-- The base (column 18) comes out to column 18 of the upper block with a short e–f wire, and the left leads of C1 and Rb go there.
+- The base (column 18) comes out to column 18 of the upper block with a short e–f wire, and the left pins of C1 and Rb go there.
   The collector (column 19) also comes out to column 19 of the upper block with an e–f wire, and goes to column 22 with a blue wire in row a.
-  Column 22 collects the right lead of Rb, Rc and D1. Because B and C are adjacent, Rb is not run across directly; column 22 is used instead.
-- The right lead of Rc (column 26) goes to the top + rail. D1 crosses the gap at column 22, with the anode on top (collector) and
-  the cathode below (detector output). In the lower column 22 the left leads of C3 and R3 line up, and terminal A of EAR goes through column 24 (`j24`) to column 22 (`j22`) (to reduce crossings with the wires of 1− and 2− of the AD3).
-  The right leads of C3 and R3 (column 26) and terminal B of EAR go to the bottom − rail.
+  Column 22 collects the right pin of Rb, Rc and D1. Because B and C are adjacent, Rb is not run across directly; column 22 is used instead.
+- The right pin of Rc (column 26) goes to the top + rail. D1 crosses the gap at column 22, with the anode on top (collector) and
+  the cathode below (detector output). In column 22 of the lower block, the left pins of C3 and R3 line up, and terminal A of EAR goes through column 24 (`j24`) to column 22 (`j22`) (to reduce crossings with the wires of 1− and 2− of the AD3).
+  The right pins of C3 and R3 (column 26) and terminal B of EAR go to the bottom − rail.
 - W1 of the AD3 (Analog Discovery 3) goes through RS (1 kΩ) to column 12 of the tuned circuit. This is for testing in place of broadcast waves,
   and you may disconnect the ANT wire when you use it. RS is inserted vertically across the gap (`e12` and `i12`), and W1 goes into column 12 of the lower half (`j12`). 1+ is the detector output (lower column 22, `h22`), 2+ is the collector of Q1 (lower column 19, `j19`), and 1−, 2− and GND go to the bottom − rail (columns 22, 23 and 19).
 - Put only one pin or wire in each hole.
@@ -164,7 +164,7 @@ wires:
 ## Instrument settings
 
 The instrument is the Analog Discovery 3. One unit provides the power supply (V+ = 5 V of Supplies), the signal source (W1 of Wavegen) and the oscilloscope (Scope),
-and the 1 MHz carrier is within the range of Scope (10 MHz or less). The supply current is about I<sub>C</sub> ≈ 1.7 mA, within about 50 mA for one supply rail,
+and the 1 MHz carrier is within the range of Scope (10 MHz or less). The supply current is about I<sub>C</sub> ≈ 1.7 mA, within the about 50 mA of one supply channel,
 and within the 200 mA per hole of the breadboard. Turn VC1 to about 100 pF (f<sub>0</sub> ≈ 1.007 MHz).
 
 | Item | Value |
@@ -177,7 +177,7 @@ and within the 200 mA per hole of the breadboard. Turn VC1 to about 100 pF (f<su
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
-title: Fig. 3 AM test, collector (CH2) amplified, detector (CH1) 1 kHz
+title: Fig. 3 AM test, collector CH2 amplified, detector CH1
 time: 200us/div
 trigger: ch1 rising 2.98V
 ch1: {wave: = 2.98V + 0.31V * sin(2 * pi * 1kHz * t), range: 200mV/div, position: -14.9div}
@@ -245,7 +245,7 @@ Q1 is a substitute model for the 2SC1815 (the same as in `sim/agc.cir`, with onl
 | --- | --- | --- | --- |
 | Collector DC | About 2.5 V (calculated 2.5 V, Fig. 3 2.45 V) | 2.46 V | Agrees |
 | Collector current | About 1.7 mA | 1.7 mA | Agrees |
-| Amplitude of the tuned circuit (peak) | At most about 19 mV | About 15 mV (+13 / −16 mV) | About 30% smaller (the difference in the estimate of the losses of RS and the circuit; includes the small offset of 1 MHz from the f<sub>0</sub> of 1.007 MHz) |
+| Amplitude of the tuned circuit (peak) | At most about 19 mV | About 15 mV (+13 / −16 mV) | About 30% smaller (the estimates of the losses in RS and the circuit differ; this includes the small offset of 1 MHz from the f<sub>0</sub> of 1.007 MHz) |
 | Carrier amplitude at the collector (maximum) | About 1.2 V<sub>p</sub> | About 0.97 V<sub>p</sub> | About 20% smaller |
 | Effective gain | About 60 times | About 65 times (0.97 V ÷ 15 mV) | Agrees |
 | Effective gain (unmodulated, varying the tuned-circuit amplitude) | 98 times is an upper limit, effective about 60 times | 39 times at 0.5 mV of the tuned circuit, 50 times at 1.5 mV, 65 times at 4.7 mV, 66–68 times at 9 mV and above | Agrees. For weak stations D1 is not deeply biased and the load is heavy, so the gain falls to about 40 times |

@@ -90,7 +90,7 @@ Therefore **R1 was lowered to 20 kΩ** to restore the open-circuit voltage of th
 
 ```breadboard
 # Breadboard wiring diagram (tommie-fence breadboard fence)
-title: Fig. 2 Self-bias common emitter (W1 and CH2 to the input, CH1 to the output)
+title: Fig. 2 Self-bias common emitter (W1 and CH2 in, CH1 out)
 # 5V goes from V+ of the AD to the top + rail; top − rail = GND (the bottom rails are not used)
 board: half
 parts:
@@ -128,7 +128,7 @@ wires:
 As in Fig. 2, the 5 V goes from the supply output V+ (red) of the Analog Discovery to the top + rail
 (set V+ to 5 V in Supplies in WaveForms). This circuit draws only about 1 mA, so V+ is enough.
 
-- **Q1 is in the upper block** (`e19` B, `e20` C, `e21` E). No wire has to cross the center trench
+- **Q1 is in the upper block** (`e19` B, `e20` C, `e21` E). No wire has to cross the center gap
 - **Base (column 9)**: the bottom end of `R1`, the top end of `R2` and the + side of `CIN` are in the same column. One orange wire (`e9`–`d19`) goes to B of Q1
 - **Collector (column 20)**: the bottom end of `RC` and the + side of `COUT` are in the same column as C of Q1
 - **Emitter (column 21)**: `RE` is inserted vertically down to the − rail, and the + side of `CE` is in the same column
@@ -145,7 +145,7 @@ side by side (the scales differ by a factor of 100, so on the screen the input a
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
-title: Fig. 3 Input (CH2) and output (CH1), 79 times, opposite phase
+title: Fig. 3 Input (CH2), output (CH1), 79 times, inverted
 time: 200us/div
 trigger: ch2 rising 0V
 ch1: {wave: sine 1kHz 790mVpp phase -180deg, range: 200mV/div}
@@ -178,7 +178,7 @@ How to read S21, S11 and the Smith chart, and the THRU calibration, are the same
 
 ```breadboard
 # Breadboard wiring diagram (tommie-fence breadboard fence)
-title: Fig. 4 Connecting the VNA (center conductor and shield as a pair)
+title: Fig. 4 VNA connection (center and shield as a pair)
 board: half
 parts:
   R1: resistor b3 b9 20k
@@ -225,7 +225,7 @@ Fig. 5 is a graph of S21 **calculated** by replacing the transistor with a small
 
 ```graph
 # Graph (tommie-fence graph fence)
-title: Fig. 5 S21 of the common emitter (calculated), +10.6 dB and phase 180° at low frequency, −3 dB at 13 MHz
+title: Fig. 5 S21 (calculated), +10.6 dB at 180°, −3 dB at 13 MHz
 x: Frequency Hz log 50k..100M
 y:
   - Magnitude dB
@@ -308,7 +308,7 @@ notes:
     gain) it appears as about 11 pF, (1 + gm × 48.9 Ω) ≈ 2.8 times larger. With the 50 Ω load the gain is small, so the Miller effect is much lighter than when the load is 2.2 kΩ (about 80 times)
   - The sum is charged through the base spreading resistance (rbb′ about 50 Ω) and the 50 Ω of the source, so
     1 / (2π × about 100 Ω × about 138 pF) ≈ 12 MHz gives a pole (the frequency where the gain starts to fall)
-  - The lead of the SMA-to-clip cable (about 80 nH per 10 cm) and the stray capacitance of the breadboard holes (a few pF per spot)
+  - The clip lead of the SMA cable (about 80 nH per 10 cm) and the stray capacitance of the breadboard holes (a few pF per spot)
 - Values used for the calculation in Fig. 5: Ic 0.93 mA, hFE 150, fT 45 MHz, Cob 4 pF, rbb′ 50 Ω, plus 80 nH of clip lead (input and output)
   and 5 pF of stray capacitance at each node. The actual onset of the roll-off changes with the lead length and how it is wired
 
@@ -321,7 +321,7 @@ in parallel with the capacitance of Cπ plus the Miller part (127 pF + 11 pF ≈
 # NanoVNA screen (tommie-fence vna fence)
 device: litevna64
 sweep: 50k-100M 201
-title: Fig. 6 S11 at the input of the common emitter (equivalent circuit), right end of Smith at low frequency
+title: Fig. 6 Input S11 (equivalent circuit), right end of Smith
 dut:
   - series L 80n
   - shunt C 5p
