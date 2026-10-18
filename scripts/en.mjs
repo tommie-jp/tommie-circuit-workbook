@@ -132,6 +132,25 @@ export function compareLines(lang, ja, en) {
   return errors;
 }
 
+/**
+ * circuit の `parts:` は `VCC` `GND` などの名前を何度でも書ける (circuit-fence の文法)。YAML としては鍵の重複なので、
+ * 2 つ目からは `VCC#2` のように番号を付けて、全部を別の鍵として比べる。
+ */
+export function numberRepeatedKeys(body) {
+  const seen = new Map();
+  return body
+    .split('\n')
+    .map((line) => {
+      const match = /^( +)([A-Za-z][\w.-]*):( |$)/.exec(line);
+      if (match === null) return line;
+      const id = `${match[1].length}:${match[2]}`;
+      const count = (seen.get(id) ?? 0) + 1;
+      seen.set(id, count);
+      return count === 1 ? line : line.replace(`${match[2]}:`, `${match[2]}#${count}:`);
+    })
+    .join('\n');
+}
+
 /** 1 組のフェンス (日本語・英語) の食い違い。 */
 export function compareFence(ja, en) {
   if (ja.lang !== en.lang) return [`フェンスの言語が違います (${ja.lang} / ${en.lang})`];
@@ -139,8 +158,9 @@ export function compareFence(ja, en) {
     let a;
     let b;
     try {
-      a = parse(ja.body);
-      b = parse(en.body);
+      const prepare = ja.lang === 'circuit' ? numberRepeatedKeys : (text) => text;
+      a = parse(prepare(ja.body));
+      b = parse(prepare(en.body));
     } catch (error) {
       return [`YAML が読めません: ${error.message.split('\n')[0]}`];
     }

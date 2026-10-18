@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { test } from 'node:test';
 import { parse } from 'yaml';
-import { CJK, blobHash, compareFence, compareLines, compareYaml, parseBlocks, splitFrontMatter, unitProblems } from './en.mjs';
+import { CJK, blobHash, compareFence, compareLines, compareYaml, numberRepeatedKeys, parseBlocks, splitFrontMatter, unitProblems } from './en.mjs';
 
 test('blobHash is the same as git hash-object', () => {
   const text = '---\nid: 1-1\n---\n# 1-1 LED と抵抗\n';
@@ -64,4 +64,13 @@ test('CJK finds Japanese text only', () => {
   assert.ok(CJK.test('あ'));
   assert.ok(CJK.test('、'));
   assert.ok(!CJK.test('Ω µ − °C'));
+});
+
+test('numberRepeatedKeys numbers a repeated part name so each one is compared', () => {
+  const body = 'parts:\n  VCC: vcc 1,3 5V\n  R1: resistor 1,3 1,5 1k\n  VCC: vcc 3,3 5V\n';
+  const numbered = numberRepeatedKeys(body);
+  assert.match(numbered, /VCC#2: vcc 3,3 5V/);
+  assert.equal(compareFence({ lang: 'circuit', body }, { lang: 'circuit', body }).length, 0);
+  const changed = body.replace('vcc 3,3 5V', 'vcc 4,3 5V');
+  assert.notEqual(compareFence({ lang: 'circuit', body }, { lang: 'circuit', body: changed }).length, 0);
 });
