@@ -3,6 +3,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { ROOT, readEntries } from './collect.mjs';
+import { listEnglish } from './en-check.mjs';
 import { cliPath, fencesIn } from './fences.mjs';
 import { renderPlantuml } from './plantuml.mjs';
 
@@ -36,15 +37,20 @@ function groupHash(items) {
 
 function main(args) {
   const embedFonts = args.includes('--embed-fonts');
+  const english = args.includes('--en');
   const books = new Set(args.filter((arg) => !arg.startsWith('--')));
-  const reads = readEntries().filter((read) => books.size === 0 || books.has(read.path.split('/')[0]));
+  // `--en` は英語版 (`en/`) の図を `out/en/` に書き出す。日本語版と同じ `<冊>/<章>/<フェンス>/<名前>.svg`
+  const reads = (english
+    ? listEnglish().map((path) => ({ path, text: readFileSync(join(ROOT, path), 'utf8') }))
+    : readEntries()
+  ).filter((read) => books.size === 0 || books.has(read.path.split('/')[english ? 1 : 0]));
   const manifest = loadManifest();
 
   const groups = new Map();
   for (const read of reads) {
-    const [book, chapter] = read.path.split('/');
+    const [book, chapter] = read.path.split('/').slice(english ? 1 : 0);
     for (const fence of fencesIn(read.text).found) {
-      const out = join('out', book, chapter, fence);
+      const out = join('out', ...(english ? ['en'] : []), book, chapter, fence);
       groups.set(out, [...(groups.get(out) ?? []), { fence, path: read.path }]);
     }
   }

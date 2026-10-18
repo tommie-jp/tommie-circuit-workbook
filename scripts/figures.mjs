@@ -18,6 +18,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, readEntries } from './collect.mjs';
+import { listEnglish } from './en-check.mjs';
 import { fencesIn } from './fences.mjs';
 
 export const PAGES_URL = 'https://tommie-jp.github.io/tommie-circuit-workbook';
@@ -35,6 +36,22 @@ const LABELS = {
   plantuml: 'ブロック図',
 };
 
+/** 英語版 (`en/`) の名札と画像の alt。決めは en/GLOSSARY.md の「Figures」。 */
+const LABELS_EN = {
+  circuit: 'Schematic',
+  breadboard: 'Breadboard wiring diagram',
+  perfboard: 'Perfboard wiring diagram',
+  copper: 'Copper-clad board dimension drawing',
+  vna: 'NanoVNA screen',
+  scope: 'Oscilloscope screen',
+  spectrum: 'Spectrum analyzer screen',
+  graph: 'Graph',
+  logic: 'Logic analyzer screen',
+  plantuml: 'Block diagram',
+};
+
+const isEnglish = (path) => path.startsWith('en/');
+
 const CACHE_DIR = join('out', '.cache');
 const CACHE_FILE = join(CACHE_DIR, 'render-manifest.json');
 
@@ -45,10 +62,12 @@ const FIGURE_LINE = new RegExp(`^ {0,3}!\\[[^\\]]*\\]\\(${PAGES_URL.replace(/[.]
  * フェンスの 1 行目に置く名札のコメント。GitHub は言語名を出さないので、字の側でも何の図か分かるようにする。
  * この行も `npm run figures` が書く。手で直さない。plantuml は名の知れた言語なので付けない。
  */
-const LABEL_LINE = /^ *# .+ \(tommie-fence の \S+ フェンス\)$/;
+const LABEL_LINE = /^ *# .+ \((?:tommie-fence の \S+ フェンス|tommie-fence \S+ fence)\)$/;
 
-function labelLine(indent, spelling, fence) {
-  return `${indent}# ${LABELS[fence]} (tommie-fence の ${spelling} フェンス)`;
+function labelLine(indent, spelling, fence, english = false) {
+  return english
+    ? `${indent}# ${LABELS_EN[fence]} (tommie-fence ${spelling} fence)`
+    : `${indent}# ${LABELS[fence]} (tommie-fence の ${spelling} フェンス)`;
 }
 
 function loadManifest() {
@@ -65,7 +84,9 @@ function loadManifest() {
  * 1 つのファイルに同じフェンスが 1 枚ならファイル名のまま、2 枚以上なら `-1` `-2` … を付ける。
  */
 export function figurePaths(path, blocks) {
-  const [book, chapter, file] = path.split('/');
+  // 英語版は `en/<冊>/<章>/<題>.md`。図も `en/<冊>/<章>/<フェンス>/<名前>.svg` に置く
+  const parts = path.split('/');
+  const [prefix, book, chapter, file] = isEnglish(path) ? ['en/', ...parts.slice(1)] : ['', ...parts];
   const base = file.replace(/\.md$/, '');
   const totals = new Map();
   for (const { fence } of blocks) totals.set(fence, (totals.get(fence) ?? 0) + 1);
@@ -74,7 +95,7 @@ export function figurePaths(path, blocks) {
     const nth = (seen.get(fence) ?? 0) + 1;
     seen.set(fence, nth);
     const name = totals.get(fence) === 1 ? base : `${base}-${nth}`;
-    return `${book}/${chapter}/${fence}/${name}.svg`;
+    return `${prefix}${book}/${chapter}/${fence}/${name}.svg`;
   });
 }
 
@@ -91,14 +112,16 @@ export function withFigures(path, text) {
   const lines = withoutFigures(text.split('\n'));
   const { blocks } = fencesIn(lines.join('\n'));
   const figures = figurePaths(path, blocks);
+  const english = isEnglish(path);
+  const labelsOf = english ? LABELS_EN : LABELS;
   const after = new Map();
   const labels = new Map();
   blocks.forEach((block, index) => {
     if (block.close === null) return;
     const indent = /^ */.exec(lines[block.open])[0];
-    after.set(block.close, `${indent}![${LABELS[block.fence]}](${PAGES_URL}/${figures[index]})`);
+    after.set(block.close, `${indent}![${labelsOf[block.fence]}](${PAGES_URL}/${figures[index]})`);
     const spelling = /^ *(?:`{3,}|~{3,}) *(\S+)/.exec(lines[block.open])?.[1];
-    if (block.fence !== 'plantuml' && spelling) labels.set(block.open, labelLine(indent, spelling, block.fence));
+    if (block.fence !== 'plantuml' && spelling) labels.set(block.open, labelLine(indent, spelling, block.fence, english));
   });
   return lines.flatMap((line, index) => {
     const out = labels.has(index) ? [line, labels.get(index)] : [line];
@@ -106,8 +129,14 @@ export function withFigures(path, text) {
   }).join('\n');
 }
 
+/** 日本語の題と、英語版の題 (`en/`)。英語版は front matter の検査をここでは掛けない (en-check.mjs が見る)。 */
+function allEntries() {
+  const english = listEnglish().map((path) => ({ path, text: readFileSync(join(ROOT, path), 'utf8') }));
+  return [...readEntries(), ...english];
+}
+
 function main(args) {
-  const reads = readEntries();
+  const reads = allEntries();
   const manifest = loadManifest();
 
   if (args[0] === '--verify') {

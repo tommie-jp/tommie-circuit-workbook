@@ -86,3 +86,18 @@ test('rewrites a stale name comment, keeps the author comment, and skips plantum
   assert.doesNotMatch(fixed, /古い名/);
   assert.doesNotMatch(withFigures(PATH, '```plantuml\n@startuml\n```\n'), /tommie-fence の/);
 });
+
+test('English entries get English labels and figures under en/', () => {
+  const path = `en/${PATH}`;
+  const text = '# t\n\n```circuit\nparts:\n```\n\n```scope\n```\n';
+
+  const written = withFigures(path, text);
+
+  assert.equal(written, [
+    '# t', '', '```circuit', '# Schematic (tommie-fence circuit fence)', 'parts:', '```', '',
+    `![Schematic](${PAGES_URL}/en/01-circuits/01-basics/circuit/03-rc-charge.svg)`, '',
+    '```scope', '# Oscilloscope screen (tommie-fence scope fence)', '```', '',
+    `![Oscilloscope screen](${PAGES_URL}/en/01-circuits/01-basics/scope/03-rc-charge.svg)`, '',
+  ].join('\n'));
+  assert.equal(withFigures(path, written), written);
+});

@@ -29,6 +29,8 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends plantuml graphviz fonts-noto-cjk
       # circuit はフォントを埋め込む。埋め込まないと GitHub で Ω や µ が化ける。
       - run: npm run render -- --embed-fonts
+      # 英語版 (en/) の図は out/en/ に書き出す。
+      - run: npm run render -- --embed-fonts --en
       - run: node scripts/figures.mjs --verify out
       # 載せるのは SVG だけ (circuit の .tex は要らない)。
       - run: |

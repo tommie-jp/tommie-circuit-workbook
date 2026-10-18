@@ -4,6 +4,8 @@
 > この本は AI (Claude) が書いたもので、人間の専門家の校正を受けていない。
 > 回路・数値・手順が間違っている可能性がある。組む前に自分で確かめてほしい。
 
+[English edition](en/README.md) (翻訳中。日本語が原本で、英語は訳)
+
 回路・Analog Discovery・NanoVNA・電験三種・FPGA の 5 冊と番外の工作の実験帳。回路図と実体配線図は
 [tommie-fence](https://github.com/tommie-jp/tommie-fence) の Markdown フェンス
 (` ```circuit ` / ` ```breadboard ` / ` ```perfboard `)、銅張り基板の寸法図は ` ```copper `、NanoVNA の画面は ` ```vna `、オシロスコープの画面は ` ```scope `、ロジックアナライザの画面は ` ```logic `、

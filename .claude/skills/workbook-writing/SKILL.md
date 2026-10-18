@@ -60,6 +60,7 @@ description: tommie-circuit-workbook の題 (1 題 1 ファイル) を新しく�
 - **単位の書き方は README の「単位の書き方」に従う。** 数と単位の間は空白を 1 つ (`10 kΩ`・`100 kHz`・`25 °C`)、
   マイクロは µ (U+00B5)、`µs` (`us` と書かない)、温度は `°C`、p-p は `Vpp`、ピークは `V<sub>p</sub>`。フェンスの中の値は各フェンスの綴り
   (`10kHz` のように詰める) に従う。2026-10-14 に決め、本文 1,900 行ほどを機械的に揃えた
+- 英語版 (`en/`) でも同じ規則に従う。決めと用語は `en/GLOSSARY.md` (下の 4)
 - **スペクトラム (`spectrum` フェンス) の縦軸の単位は dBm にそろえる。** FFT 型 (`ad2` `ad3`) の
   上流の既定も dBm (spectrum-fence 0.5.0 から。0.4.0 までは FFT 型だけ dBV だった) だが、
   版が違っても同じ数になるよう `unit: dBm` を明示し、`ref:` `floor:` `signal:` も dBm で書く
@@ -69,3 +70,29 @@ description: tommie-circuit-workbook の題 (1 題 1 ファイル) を新しく�
   理由を本文に 1 行書く
   (2026-10-14 に決め、同日に既存の図 29 枚 (`unit: dBV` の 12 枚と、`unit` を書かない AD の FFT 型 17 枚) を
   dBm に直した。本文の dBV の数も +13.01 dB で換算済み。AD の Spectrum の章は「単位: dBm」と教える)
+
+## 4. 英語版 (`en/`) を訳す・直す
+
+**日本語の題が原本。英語は訳で、英語だけを直さない** (直すときは日本語を直して訳し直す)。決めと用語は
+`en/GLOSSARY.md`、検査は `npm run en:check` (`npm run all` に入る)、一覧は `npm run i18n:stale`。
+訳さない冊は 04-denken (試験の範囲と JIS の記号が前提)。
+
+1. **訳す前に読む**: `en/GLOSSARY.md`・この skill の 1〜3・README の「単位の書き方」・tommie-fence skill
+   (フェンスの綴り)・図の描画 skill (readable-schematic・breadboard-wiring・perfboard-wiring・copper-board・
+   instrument-screen・readable-graph)。日本語の規則 (基板・ピン・信号発生器と発振回路の書き分け・単位・
+   Greek 文字) は英語でも同じ決めを `en/GLOSSARY.md` に置いてある
+2. **置き場と front matter**: `en/<冊>/<章>/<題>.md` (日本語と同じ名前)。front matter は日本語の題の鍵と値を
+   全部写し、**`title` だけ英語**にして、`ja: <日本語の題の git blob hash>` を足す (`git hash-object <日本語の題>`)。
+   最初の見出しは `# <id> <title>`
+3. **本文**: 順と節は日本語と同じ (節の見出しは GLOSSARY の表)。事実・数値・出典を足さない・落とさない。
+   測った値の `.s2p` や CSV は写さず、`data:` で日本語の側の物を相対パスで指す。コードは同じ物を置き、
+   **コメントだけ訳す**
+4. **図**: フェンスの部品・値・番地・配線・`board:` `device:` は変えない。訳すのは `title:`・注釈・人が読む字だけ。
+   `en-check` が日本語の図との差を見る。訳したら `npm run render -- --en` で SVG にして PNG にし、
+   **点検表を通して目で見る** (英語は日本語より長いことが多い。札の重なり・図からのはみ出しを見る。
+   `circuit` の `title:` は 60 字まで)。名札の行と画像の行は `npm run figures` が書く (手で書かない)
+5. **単位・用語**: 日本語と同じ (`10 kΩ`・`µs`・`°C`・`Vpp`・`V<sub>p</sub>`・spectrum は dBm)。`en-check` が見る
+6. **日本語を直したら**: `ja:` の hash が古くなる。`npm run i18n:stale` で一覧し、訳し直して `ja:` を更新する
+   (警告で、落とさない)
+7. **進め方**: 冊ごとに「訳す → 別の目で日本語と突き合わせて見直す → `npm run en:check` と `npm run all` →
+   コミット (`docs:`)」。冊を並行しない。英語の目次 (`en/README.md`) は `npm run toc` の対象にまだ入っていない
