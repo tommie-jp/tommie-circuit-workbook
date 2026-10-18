@@ -51,7 +51,7 @@ style:
 
 - VP and VN on the left are the ±5 V supply for the op amp. They are made with V+ and V− of the AD3 Supplies, as in 4-1
 - **Tying the + input directly to GND** is the mark of an inverting amplifier. The op amp moves its output until the
-  + input and the − input are at the same voltage, so the − input stays at 0 V even though it is not connected to GND.
+  two inputs (+ and −) are at the same voltage, so the − input stays at 0 V even though it is not connected to GND.
   This is called a **virtual ground**
 - Rin (10 kΩ) sets the input impedance and Rf (100 kΩ) is the feedback.
   **Gain = −Rf/Rin = −10**

@@ -12,8 +12,8 @@ ja: cbb3c84493bfd39d4782bad3bf57f3e96d2e156a
 # 4-4 Comparator — a CdS cell sets the threshold
 
 An op amp used without feedback is a **comparator**. An op amp amplifies the difference between its inputs by tens of
-thousands of times or more, so its output snaps to the positive or the negative supply depending only on which input,
-+ or −, is higher. This is the fourth basic op amp circuit. In this exercise a CdS cell (cadmium sulfide cell, whose
+thousands of times or more, so its output snaps to the positive or the negative supply depending only on which input (the + input
+or the − input) is higher. This is the fourth basic op amp circuit. In this exercise a CdS cell (cadmium sulfide cell, whose
 resistance changes with light) measures brightness, and an LED lights when it gets dark.
 
 ## Schematic
