@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 古
-ja: b1d494c9f5a74f230b2c1a6ab64e7f80087d39b0
+ja: 1f0449d083c9dd17e9318f9ea09a6a7f82a93916
 ---
 
 # 3-4 Relaxation oscillation — a buzzer with two transistors
@@ -125,9 +125,9 @@ wires:
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/03-oscillators/breadboard/04-relaxation-oscillator-buzzer.svg)
 
 - Fig. 2 has the same layout as Fig. 2 of 3-1 (the Q1 group on the left, the Q2 group on the right). Only the values differ: R3 and R4 are 10 kΩ and
-  C1 and C2 are 100 nF. The collectors (columns 7 and 23) and the bases (columns 8 and 22) are lifted to the upper block by short wires across the trench,
+  C1 and C2 are 100 nF. The collectors (columns 7 and 23) and the bases (columns 8 and 22) are lifted to the upper block by short wires across the gap,
   and the two cross-coupling wires (green and yellow) run in parallel on different rows
-- In this figure the emitters (columns 6 and 24) are also lifted to the upper block by black wires across the trench and dropped to the top − rail.
+- In this figure the emitters (columns 6 and 24) are also lifted to the upper block by black wires across the gap and dropped to the top − rail.
   This leaves the lower right free for the buzzer branch
 - **R5 and BZ1 branch off from the collector of Q2 (column 23) through the purple wire to column 26. The path is R5 (columns 26 to 29) → the BZ1 pin in column 29 → the BZ1 pin in column 27, which goes down to the bottom − rail.**
   Only one extra branch that makes the sound is added, in parallel with the LED (D2). The top and bottom − rails are joined at column 30 on the right edge

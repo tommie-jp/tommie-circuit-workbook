@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 古
-ja: 380d6aa95eb7908c4b1b7392c9700a46915fbf2c
+ja: 116de8efb99a35bc2baa72017d9984415715a70a
 ---
 
 # 3-1 Astable Multivibrator, LEDs Blinking Alternately
@@ -131,8 +131,8 @@ to the transistors.
 - **The 2SC1815, viewed from the flat face, is E, C, B from the left.** Q1 has the flat face toward you (the row j side), with
   E, C, B from the left in columns 6, 7, 8 of row h. Q2 has the flat face toward the back (the row f side), the opposite of Q1, so
   columns 22, 23, 24 are B, C, E from the left
-- The five holes in the same column are connected. The upper and lower blocks are separated by the trench, so the collector (columns 7 and 23) and
-  the base (columns 8 and 22) are lifted to the upper block with short wires (orange, blue) across the trench
+- The five holes in the same column are connected. The upper and lower blocks are separated by the gap, so the collector (columns 7 and 23) and
+  the base (columns 8 and 22) are lifted to the upper block with short wires (orange, blue) across the gap
 - In the upper block, column 7 (collector of Q1) takes the cathode of D1 and the + of C1, and column 8 (base of Q1) takes the
   pin of R4. D1 has its anode in column 5, the same column as R1, and the cathode pin skips one hole to reach column 7.
   The right side has the same form: column 23 is the collector of Q2 and column 22 is the base of Q2

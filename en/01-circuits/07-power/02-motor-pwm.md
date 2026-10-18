@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 今
-ja: 69ba289b8c61580e8c7d82817b87bdd59a11bfb6
+ja: d5a9e6247eb5578a59d9739beb5fe2dce1f7f39d
 ---
 
 # 7-2 PWM control of a DC motor (MOSFET)

@@ -126,8 +126,8 @@ notes:
 - **V− is the bottom blue rail.** Do not confuse it with GND (the top blue rail). Pin 4 (column 15), RFIX and terminal 3
   of VR1 connect to it. Pin 8 (column 12) goes to +5 V through `+t12--a12`
 - **The divider point of the CdS (column 13) and RFIX (column 13) is IN− (pin 2).** The other end of the CdS (column 16) goes to the bottom red rail (+5 V).
-  The wiper of VR1 (column 27, at the right end of the upper block) goes to IN+ (pin 3, column 14) through the orange wire across the trench and `g27--g14`
-- The output (pin 1, column 12) is raised to column 11 of the upper block by `g12--g11` and a wire across the trench. From there it passes
+  The wiper of VR1 (column 27, at the right end of the upper block) goes to IN+ (pin 3, column 14) through the orange wire across the gap and `g27--g14`
+- The output (pin 1, column 12) is raised to column 11 of the upper block by `g12--g11` and a wire across the gap. From there it passes
   through R1 (220 Ω) and D1 (LED) to GND (column 6, the top blue rail). **DP (1N4148) is connected in anti-parallel with D1.** DP uses the same columns as D1, 6 and 9,
   so it needs no wiring (column 9 is automatically the same net as the anode side of D1 and column 6 the same net as the cathode side).
   It clamps the reverse voltage, when the output sticks to −V, to the forward drop of DP (about 0.7 V). Turn VR1 to change the brightness at the threshold

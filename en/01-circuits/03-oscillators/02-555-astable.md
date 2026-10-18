@@ -115,7 +115,7 @@ wires:
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/03-oscillators/breadboard/02-555-astable.svg)
 
-- In Fig. 2, the **DIP8 (8-pin IC) is plugged in across the trench** (rows e and f). Pin 1 (GND) is f10 at the lower left and pin 8 (VCC) is
+- In Fig. 2, the **DIP8 (8-pin IC) is plugged in across the gap** (rows e and f). Pin 1 (GND) is f10 at the lower left and pin 8 (VCC) is
   e10 at the upper left. Point the notch to the left
 - Pin 2 (TRIG, f11) is in the lower block, so it is carried to pin 6 (THRES, e12) in the upper part of the breadboard by
   the orange wires going around the left of the IC (`d12 -- d9`, `e9 -- f9`, `g9 -- g11`). The + of C1 goes into this column 9

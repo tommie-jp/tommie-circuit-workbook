@@ -118,6 +118,30 @@ Alerts keep their kind (`> [!WARNING]`, `> [!NOTE]`). "実機で動かしてい�
 | 1 回路 2 接点 | 1 pole, 2 throw (SPDT) | |
 | 帯のある側 (ダイオード) | striped side | the cathode end |
 | 電源装置 | bench power supply | 01-circuits chapter 13 |
+| ブレッドボード中央の溝 | center gap ("the gap", "across the gap") | not "trench" |
+| 電源 1 系統 (AD3 の Supplies の 1 つ) | supply channel | not "rail". "rail" is only a power rail of the breadboard |
+| テスターの棒 / リード線 | lead (meter lead, clip lead) | a part's terminal is a pin, never a lead |
+| IC のピン番号 (10・12 章、ブレッドボード図) | PIN N | uppercase, as in the Japanese. Pico 2 pins are `pin N` |
+| 触れる板 (金属板、2-4) | touch plate | |
+| 弛張発振 | relaxation oscillation | |
+| 突入電流 | inrush current | |
+| 帰還 / 負帰還 / 正帰還 | feedback / negative feedback / positive feedback | |
+| 開ループ利得 | open-loop gain | |
+| 入力バイアス電流 | input bias current | |
+| 仮想接地 | virtual ground | |
+| 比較器 / ヒステリシス | comparator / hysteresis | |
+| ツェナー電圧 / シリーズレギュレータ | zener voltage / series regulator | |
+| リップル / ドロップアウト | ripple / dropout | |
+| 逆起電力 / フライバック電圧 | back EMF / flyback voltage | |
+| 1 次 / 2 次 / 巻数比 | primary / secondary / turns ratio | |
+| 差動対 / テール抵抗 | differential pair / tail resistor | |
+| 動作点 / バイアス | operating point / bias | |
+| ダーリントン接続 | Darlington connection | |
+| 搬送波 / 側波 / 変調指数 | carrier / sidebands / modulation index | |
+| 禁止入力 / 負論理 | forbidden input / active low | |
+| 方形波 / ボード線図 | square wave / Bode plot | |
+| 遮断周波数 / 利得 | cutoff frequency / gain | |
+| 電験三種 (冊の名) | Denken Level 3 | |
 
 Instruments and tools keep their names: Analog Discovery 3 (AD3), WaveForms (menu names Scope, Wavegen, Supplies,
 Logic, Spectrum, Network, Patterns, Protocol), LiteVNA64, NanoVNA, tinySA Ultra, LTspice, Pico 2, Pico SDK,
@@ -132,6 +156,16 @@ MicroPython, Verilator, Yosys, nextpnr.
 - Figure `title:` length: a `circuit` title is at most 60 characters (the fence refuses more). A `scope` title is cut
   off with "…" past about 45 characters and a `breadboard` title past about 65. Do not put a `:` in a `title:` (YAML).
   Use a comma or a dash instead. `npm run en:check` runs each fence's own `check`, which finds these.
+
+- Table headings for check tables: Measure / What it shows / Result / Match. Cells start with a lowercase letter; the
+  result word at the start of a cell (`Agrees`) is capitalized. `50 %` has a space.
+- Section and table headings use sentence case ("Parts list", not "Parts List").
+- Do not write `1s` / `2s` / `0s` for digits (en-check reads them as seconds): use "ones place", "twos place", "zeros and ones".
+- Title limits are by width, not only by count: a `scope`, `spectrum`, `vna`, `graph` or `copper` title is cut with "…" past
+  about 55 characters, a `breadboard` title or `notes:` past about 55–60. Shorten the title and render the figure to check.
+- Inside a figure `title:` and `- text:` annotation do not use `: ` (colon and space), `=` or `;` — YAML breaks (the annotation
+  disappears from the figure) or the fence's own check refuses it. Use a comma or a dash.
+- Cross-book references: write the book name ("10-3 of the Analog Discovery book").
 
 ## Style
 

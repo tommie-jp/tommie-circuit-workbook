@@ -103,9 +103,9 @@ notes:
 
 - In Fig. 2, the AD3 Supplies (V+, V−) correspond to VP and VN in Fig. 1, and W1 corresponds to V1 (the signal generator).
   The rails are split as in 4-1 (the bottom blue rail is −5 V, not GND)
-- **IN+ (pin 3, column 12) is tied directly to GND.** Three black wires, `h12--h15`, the wire across the trench, and
+- **IN+ (pin 3, column 12) is tied directly to GND.** Three black wires, `h12--h15`, the wire across the gap, and
   `a15--(-t15)`, take it to the top blue rail. No voltage divider is needed
-- **Both Rin and Rf meet at IN− (pin 2, column 11).** The W1 signal crosses the trench at column 6 to the lower block
+- **Both Rin and Rf meet at IN− (pin 2, column 11).** The W1 signal crosses the gap at column 6 to the lower block
   and enters through Rin (columns 6 to 11). Rf goes from here back to the output (pin 1, column 10)
 - The Scope is drawn as a separate box (AD3 Scope) below the breadboard. 1+ (orange) goes to column 6 (`j6`), the input,
   and 2+ (green) goes to column 10 (`j10`), the output. 1− and 2− (black) go to column 15 (`j15`, `i15`), which is connected to GND

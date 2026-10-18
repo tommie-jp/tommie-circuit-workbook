@@ -124,7 +124,7 @@ wires:
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/02-transistors/breadboard/06-differential-amp.svg)
 
 In Fig. 2, the divider of `R1`/`R2` (column 6) is the base of `Q1` (the reference) and the knob of `VR1` (column 33) is the base of `Q2`.
-`Q1` and `Q2` go into the block below the trench and are connected to the parts in the upper block with 6 wires (orange, yellow, green, green, yellow, blue).
+`Q1` and `Q2` go into the block below the gap and are connected to the parts in the upper block with 6 wires (orange, yellow, green, green, yellow, blue).
 **Insert `Q2` mirrored (in the order E, C, B from the left)**. The order of the upper parts and the order of the lower pins then match, and the 6 wires do not cross.
 
 - Power: V+ (red) of the AD to `+t1` and GND (black) to `-t2`. The top + rail is +5 V and the − rail is GND

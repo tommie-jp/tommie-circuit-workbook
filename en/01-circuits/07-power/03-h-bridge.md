@@ -6,7 +6,7 @@ title: H-bridge — forward and reverse
 tier: 50
 source: 自作
 board: BB
-ja: 7a789f382f9614b381d82a9f88130b665ea95708
+ja: 1933f0c86ffb89f006189cc6a33efc5203020d71
 ---
 
 # 7-3 H-bridge — forward and reverse

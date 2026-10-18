@@ -118,7 +118,7 @@ wires:
 - **U1 in Fig. 2 is a 14-pin 74HC04. Only two gates are used: pins 1 and 2 (the oscillator, U1A of Fig. 1) and pins 3 and 4
   (the buffer, U1B of Fig. 1).** Pin 7 is GND and pin 14 is VCC
 - The crystal (HC-49/U) has no polarity, so it can go in either way around. **Keep its pins short.** Place it between column 6 (the wire
-  lifted from pin 1) and column 16 (the node of Rd and C2, joined to Rd below by a wire across the trench)
+  lifted from pin 1) and column 16 (the node of Rd and C2, joined to Rd below by a wire across the gap)
 - **Tie unused inputs to GND.** Connect the inputs of the remaining 4 gates (pins 5, 9, 11 and 13) to GND.
   A floating CMOS input swings on its own, raises the supply current, and can disturb the oscillation.
   Pin 5 (below column 12) goes from row j to the bottom blue rail, and pins 13, 11 and 9 (above columns 13, 11 and 9) go from

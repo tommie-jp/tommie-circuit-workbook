@@ -107,9 +107,9 @@ notes:
 - In Fig. 2, the AD3 Supplies (V+, V−) correspond to VP and VN in Fig. 1, W1 to V1 and W2 to V2.
   The rails are split as in 4-1 (the bottom blue rail is −5 V, not GND)
 - **R1 (from W1, columns 4 to 9 of the upper block) and R2 (from W2, columns 6 to 9) join at one point, column 9.**
-  From there a wire across the trench and `i9--i11` take it to IN− (pin 2, column 11).
+  From there a wire across the gap and `i9--i11` take it to IN− (pin 2, column 11).
   Rf (columns 11 to 10) feeds back to the output (pin 1, column 10)
-- IN+ (pin 3, column 12) is tied directly to GND by three black wires: `h12--h15`, a wire across the trench, and `a15--(-t15)`
+- IN+ (pin 3, column 12) is tied directly to GND by three black wires: `h12--h15`, a wire across the gap, and `a15--(-t15)`
 - The Scope is drawn as a separate box (AD3 Scope) below the breadboard. 2+ (orange) goes to column 4 (`c4`), which receives V1,
   and 1+ (green) goes to column 10 (`j10`), the output. 1− and 2− (black) go to column 15 (`i15`, `j15`), which is connected to GND
 

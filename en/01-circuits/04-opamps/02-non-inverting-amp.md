@@ -108,10 +108,10 @@ notes:
 - In Fig. 2, the AD3 Supplies (V+, V−) correspond to VP and VN of Fig. 1, and W1 corresponds to V1 (the signal generator).
   The rails are used as in 4-1 (the bottom blue rail is −5 V, not GND).
   The Scope is drawn as a separate box (AD3 Scope) below the breadboard. 1+ (orange) goes to column 12, IN+ (`j12`), and 2+ (green) goes to column 10, the output (`j10`). 1− and 2− (black) go to column 7, the GND side of R2 (`h7` and `j7`; column 7 is connected to the top blue rail)
-- **C1 receives the W1 signal (column 19). From column 15, a wire across the trench and `g15--g12` take it to IN+ (pin 3, column 12).**
+- **C1 receives the W1 signal (column 19). From column 15, a wire across the gap and `g15--g12` take it to IN+ (pin 3, column 12).**
   Rb is a bias resistor standing from hole a of column 15 up to the top blue rail (GND). It lets only DC escape to GND
 - R3 (feedback) joins the output (pin 1, column 10) and IN− (pin 2, column 11). R2 goes from column 11 to column 7,
-  and from column 7 a black wire across the trench and `a7--(-t7)` take it down to GND
+  and from column 7 a black wire across the gap and `a7--(-t7)` take it down to GND
 - Pin 8 (column 10) goes to +5 V with `+t10--a10`, and pin 4 (column 13) goes to −5 V with `j13--(-b13)`
 
 ## Instrument settings

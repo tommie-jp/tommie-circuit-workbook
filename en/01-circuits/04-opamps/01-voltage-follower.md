@@ -113,9 +113,9 @@ notes:
   pin 8 V+). The other one (pins 5 to 7) is left floating. Pin 8 (column 10) goes to +5 V with `+t10--a10`,
   and pin 4 (column 13) goes to −5 V with `j13--(-b13)`
 - R1 (100 kΩ) comes down from +5 V in columns 15 to 19 of the upper block, and R2 (47 kΩ) goes to
-  −5 V in columns 15 to 19 of the lower block. The two divider nodes (column 15) are joined across the trench by a wire, and `h15--h12` takes them to IN+ (pin 3, column 12)
+  −5 V in columns 15 to 19 of the lower block. The two divider nodes (column 15) are joined across the gap by a wire, and `h15--h12` takes them to IN+ (pin 3, column 12)
 - **The follower just returns the output (pin 1, column 10) to IN− (pin 2, column 11)** (`g10--g11`)
-- RL (1 kΩ) is in columns 4 to 8 of the upper block. The output (column 10) is lifted to column 8 with `h8--h10` and a wire across the trench,
+- RL (1 kΩ) is in columns 4 to 8 of the upper block. The output (column 10) is lifted to column 8 with `h8--h10` and a wire across the gap,
   and column 4 goes down to GND (the top blue rail)
 
 ## Instrument settings

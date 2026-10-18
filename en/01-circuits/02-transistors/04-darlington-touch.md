@@ -6,7 +6,7 @@ title: Darlington Pair, Lit by a Finger Touch
 tier: 50
 source: 自作
 board: BB
-ja: 93ce3731f74d067ec8d4bc8f8dc32a4c034419e2
+ja: 42aaeafd86693b6e7f99dca618611bd55f901ff1
 ---
 
 # 2-4 Darlington Pair, Lit by a Finger Touch

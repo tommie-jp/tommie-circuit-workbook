@@ -116,8 +116,8 @@ wires:
 
 - In Fig. 2, **the right pin of R1 (column 11) is pin 7, and pin 6 (column 12) is joined to it by a single wire, `a11--a12`**
   (both are the same node of R1 and C1)
-- SW1 (tactile switch) is a 4-pin part that straddles the trench and occupies `e4`, `f4`, `e6` and `f6`.
-  **Connect the near side of the trench (row f, lower block) to pin 2 (column 11) and the far side (row e, upper block) to
+- SW1 (tactile switch) is a 4-pin part that straddles the gap and occupies `e4`, `f4`, `e6` and `f6`.
+  **Connect the near side of the gap (row f, lower block) to pin 2 (column 11) and the far side (row e, upper block) to
   GND.** The two pins on the same side (the same block) are connected inside even when the switch is not pressed
 - Pin 4 (RESET) is unused, so it is tied to +5 V (`i13 -- +b13`)
 
