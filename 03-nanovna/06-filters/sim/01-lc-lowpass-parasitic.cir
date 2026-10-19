@@ -1,0 +1,51 @@
+* 6-1 LC ローパス (7 次): 図2 の配線どおりに寄生成分を足して、アキシアル・手巻き・チップを比べる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(out, g7) (CH1 の端子間)
+* QF: 30 MHz でのコイルの Q (直列抵抗に直す)。KG: h 行の GND バスの L の倍率 (0 = ベタ GND)。LPAR: コンデンサのリード + 本体の ESL の倍率 (1 = 5.6 nH)
+* 題の表の条件: 理想 QF=1e9 KG=0 LPAR=0 / アキシアル QF=50 KG=1 LPAR=1 / ベタ GND QF=50 KG=0 LPAR=0.36 / 手巻き QF=150 KG=1 LPAR=1 / チップ QF=40 KG=0 LPAR=0.1
+* すべて計算値 (実測ではない)。阻止帯域の底 (コイル間の結合・浮遊容量) はこの模型に入っていない
+.param QF=50 KG=1 LPAR=1
+.param W0={2*pi*30e6}
+.param LCAP={max(LPAR*5.6n,1f)}
+.param CPC=0.5p
+Vs s 0 AC 1
+Rs s in 50
+* shunt C1 47p (two-hole lead to bus node g1)
+C1 in c1 47p
+Lc1 c1 g1 {LCAP}
+* series L1 330n with ESR and Cp
+L1 in n1 330n Rser={W0*330n/QF}
+Cp1 in n1 {CPC}
+* shunt C2 = 2x100p, each with own lead
+C2a n1 c2a 100p
+Lc2a c2a g2 {LCAP}
+C2b n1 c2b 100p
+Lc2b c2b g3 {LCAP}
+L2 n1 n2 560n Rser={W0*560n/QF}
+Cp2 n1 n2 {CPC}
+C3a n2 c3a 100p
+Lc3a c3a g4 {LCAP}
+C3b n2 c3b 100p
+Lc3b c3b g5 {LCAP}
+L3 n2 out 330n Rser={W0*330n/QF}
+Cp3 n2 out {CPC}
+C4 out c4 47p
+Lc4 c4 g6 {LCAP}
+RL out g7 50
+* ground bus chain along row h (7 nH/cm, 2.54 mm pitch)
+Lg01 0 g1 {max(KG*9n,1f)}
+Lg12 g1 g2 {max(KG*12.4n,1f)}
+Lg23 g2 g3 {max(KG*3.6n,1f)}
+Lg34 g3 g4 {max(KG*12.4n,1f)}
+Lg45 g4 g5 {max(KG*3.6n,1f)}
+Lg56 g5 g6 {max(KG*12.4n,1f)}
+Lg67 g6 g7 {max(KG*16n,1f)}
+* S21 as seen by CH1 across its connector
+Es21 s21 0 out g7 2
+.ac dec 400 1meg 300meg
+.meas AC s21_20 FIND V(s21) AT 20meg
+.meas AC s21_284 FIND V(s21) AT 28.4meg
+.meas AC s21_40 FIND V(s21) AT 40meg
+.meas AC s21_100 FIND V(s21) AT 100meg
+.meas AC s21_200 FIND V(s21) AT 200meg
+.meas AC s21_1 FIND V(s21) AT 1meg
+.end
