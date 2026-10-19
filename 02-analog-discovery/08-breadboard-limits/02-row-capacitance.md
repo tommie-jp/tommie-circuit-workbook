@@ -42,12 +42,12 @@ wires:
   - 15,4 -- 17,4
   - AD.GND -| 17,4
 notes:
-  - box 12.7,3.2 14.5,4.5 orange
-  - text 13.6,2.4 orange center: 列間の寄生容量
-  - text 13.6,2.8 orange center: 部品ではない
-  - box 11.2,4.6 12.65,5.9 orange
-  - text 13.3,5.3 orange left: AD の入力容量
-  - text 13.3,5.7 orange left: 部品ではない
+  - box 13.5,3.4 13.95,4.4 orange
+  - text 13.7,2.5 orange center: 列間の寄生容量
+  - text 13.7,2.9 orange center: 部品ではない
+  - box 11.45,4.6 12.45,5.9 orange
+  - text 13.5,5.3 orange left: AD の入力容量
+  - text 13.5,5.7 orange left: 部品ではない
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/02-row-capacitance.svg)
