@@ -63,7 +63,7 @@ points:
 parts:
   J1: sma/female-edge a10 011 09
   J2: sma/female-edge x10 y9
-  T1: transformer/toroid f10 f8 k10 k8 FT37-43
+  T1: transformer/toroid f10 f8 k10 k8 FT37-43 8t
 wires:
   - a10 -- f10
   - k10 -- x10

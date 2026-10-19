@@ -106,7 +106,7 @@ points:
   ANT_B: l8
 parts:
   J1: sma/female-edge a10 09
-  T1: transformer/toroid d10 h10 d8 h8 FT37-61
+  T1: transformer/toroid d10 h10 d8 h8 FT37-61 6t
 wires:
   - a10 -- d10
   - 09 -- b9 black
