@@ -131,7 +131,7 @@ style:
   check: off
 parts:
   MCU: pico2 c9
-  J1: sip8 h24 r90 105404
+  J1: sip8 h24 r90 105404 blue
   R2: resistor l24 p24 47
   R1: resistor l23 p23 47
   R3a: resistor k21 o21 51

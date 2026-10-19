@@ -304,7 +304,7 @@ board:
   material: FR-4
   slots: on
 parts:
-  U1: dip4 n13 3SK291
+  U1: dip4 n13 3SK291 blue
   R1: resistor b16 b13 51
   R2: resistor k12 k15 1M
   R3: resistor b7 b10 51

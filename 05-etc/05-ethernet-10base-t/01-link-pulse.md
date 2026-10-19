@@ -205,8 +205,8 @@ board:
   material: FR-4
   slots: on
 parts:
-  J1: sip8 f16 r90 105404
-  J2: sip8 s9 r270 105404
+  J1: sip8 f16 r90 105404 blue
+  J2: sip8 s9 r270 105404 blue
 wires:
   # ピン 1 (白): J1 の f16 から J 列を下りて、J2 の s9 へ (I 列と P 列はピンの名前の列なので縦に通さない)
   - f16 -- j16 white
