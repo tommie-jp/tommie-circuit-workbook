@@ -5,3 +5,8 @@ log/
 # Python のキャッシュ (試験を回すたびに書き換わる。追跡すると作業ツリーが汚れて doDeploy.sh が止まる)
 __pycache__/
 *.pyc
+
+# 作業の道具 (MCP サーバー) が教科書の根に書く記録と設定 (教科書の中身ではない)
+.playwright-mcp/
+.ltspice-mcp/
+ltspice-mcp.toml
