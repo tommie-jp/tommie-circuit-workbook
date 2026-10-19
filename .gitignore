@@ -1,3 +1,7 @@
 node_modules/
 out/
 log/
+
+# Python のキャッシュ (試験を回すたびに書き換わる。追跡すると作業ツリーが汚れて doDeploy.sh が止まる)
+__pycache__/
+*.pyc
