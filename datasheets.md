@@ -104,6 +104,12 @@
 | Raspberry Pi Pico 2 | ボード | build d4e0f1799616 | [PDF](https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf) | — |
 | HC-49 系の水晶 | 水晶振動子 (例: Abracon ABL) | REVISED 03-31-23 | [PDF](https://www.abracon.com/Resonators/ABL.pdf) | — |
 
+### コネクタ・モジュール
+
+| 型番 | 内容 | 版 | データシート | 控え |
+| --- | --- | --- | --- | --- |
+| AE-RJ-45-LAN-DIP-A (秋月 105404) | LAN コネクターDIP化キットの基板。25.36 × 15 mm、8 ピンを 2.54 mm の 1 列に出す | 記載なし | [PDF](https://akizukidenshi.com/goodsaffix/AE-RJ-45-LAN-DIP-A.pdf)。基板の穴加工図・パターン図・実装参考図の 9 ページだけで、ピンの番号と電気の仕様は書かれていない。ヘッダ 1〜8 番とジャックの 1〜8 番の対応は、組む前にテスターで確かめる | — |
+
 ## 未確認 (ブラウザで開いて確かめる)
 
 | 型番 | 内容 | 探し方 |
@@ -122,6 +128,7 @@
 | DS3231 | RTC (I2C) | Analog Devices (analog.com) の製品ページ |
 | GL5528 | CdS 光センサー | メーカーの資料 (型番で検索) |
 | DHT11 / MT3608 | 温湿度センサー / 昇圧モジュール | 型番で検索 |
+| AE-pulse-DIP_K (秋月 109374) | パルストランス内蔵モジュラージャックDIP化キット (5-6 で使う) | 商品ページ [akizukidenshi.com/catalog/g/g109374/](https://akizukidenshi.com/catalog/g/g109374/) のデータシートのリンク (RJLD-260YC1.pdf) は、取得すると PDF でなく HTML が返った。ブラウザで開いてピンの並びを確かめる |
 
 ## 計器
 

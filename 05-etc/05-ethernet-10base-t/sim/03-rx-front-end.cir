@@ -1,18 +1,14 @@
-* 5-3 受信回路 (図1): 終端 51 Ω × 2 (中点を 1.65 V にバイアス) + R6 470 Ω → 74HC14 の入力 (5 pF)
+* 5-3 受信回路 (図1): 終端 51 Ω × 2 (中点を 1.65 V にバイアス) → 74HC14 の入力 (5 pF)
 * 相手の信号は浮いた差動電圧源 (±2.5 V の 5 MHz 方形波。規格は 100 Ω の負荷で 2.2〜2.8 V なので内部抵抗 0 とした)
 Vcc vcc 0 3.3
 R4 vcc vb 1k
 R5 vb 0 1k
-C2 vb 0 100n
 Vsig rxp rxm PULSE(-2.5 2.5 0 2n 2n 98n 200n)
 R3a rxp vb 51
 R3b vb rxm 51
-R6 rxp in 470
-Cin in 0 5p
+Cin rxp 0 5p
 .tran 0.1n 2u
 .meas tran vvb AVG V(vb) FROM=1u TO=2u
-.meas tran vmax MAX V(in) FROM=1u TO=2u
-.meas tran vmin MIN V(in) FROM=1u TO=2u
-.meas tran t10 WHEN V(in)=0.65 RISE=5
-.meas tran t90 WHEN V(in)=2.65 RISE=5
+.meas tran vmax MAX V(rxp) FROM=1u TO=2u
+.meas tran vmin MIN V(rxp) FROM=1u TO=2u
 .end

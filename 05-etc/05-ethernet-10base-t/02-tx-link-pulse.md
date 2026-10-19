@@ -40,7 +40,7 @@ parts:
   J1:
     type: device
     at: 9,6
-    label: RJ45
+    label: RJ45 (105404)
     pins: [P1, P2, P3, P6]
   SC:
     type: device
@@ -75,7 +75,7 @@ notes:
 | --- | --- | --- |
 | MCU | Raspberry Pi Pico 2 | GP17 = TX+、GP16 = TX−。GPIO は 12 mA 設定・高速スルーレート |
 | R1・R2 | 47 Ω (オーム) | 直列抵抗。GPIO の電流を抑え、線路 (100 Ω) との分圧で振幅 1.7 V にする |
-| J1 | RJ45 (DIP 化した物) | ピン 1 = TX+、2 = TX−。3・6 (受信) は 5-3 で使う |
+| J1 | 秋月 LAN コネクターDIP化キット ([105404](https://akizukidenshi.com/catalog/g/g105404/)) | ヘッダのピン 1 = TX+、2 = TX−。3・6 (受信) は 5-3 で使う。5-1 に仕様と導通の確かめ方 |
 | 電源 | USB 5 V → Pico 2 の 3.3 V | 回路は Pico 2 の 3.3 V で動くので、別の電源は要らない |
 
 - 相手 (ルータの LAN ポート) の受信側にはパルストランスと 100 Ω の終端がある。GPIO の 3.3 V を
@@ -92,9 +92,9 @@ notes:
 
 ```perf
 # ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
-title: 図2 送信回路のユニバーサル基板 (7×5 cm を横置き、部品面)
+title: 図2 送信回路のユニバーサル基板 (9×7 cm 横置き、部品面)
 board:
-  size: 7x5cm
+  size: 9x7cm
   silk: board
   h: 1.6mm
   material: FR-4
@@ -103,40 +103,38 @@ style:
   check: off
 parts:
   MCU: pico2 c9
-  J1:
-    type: device
-    at: h21
-    label: RJ45 (DIP 化)
-    pins: P3 P6 P1 P2
-  R2: resistor u13 u10 47
-  R1: resistor v13 v10 47
+  J1: sip8 a26 r90 RJ45
+  R2: resistor m26 q26 47
+  R1: resistor m25 q25 47
 wires:
-  - J1.P1 -- j17 white
-  - j17 -- u17 white
-  - u17 -- u13 white
-  - u10 -- u9 white
-  - J1.P2 -- k18 green
-  - k18 -- v18 green
-  - v18 -- v13 green
-  - v10 -- v9 green
+  - a26 -- m26 white
+  - q26 -- t26 white
+  - t26 -- u26 white
+  - u26 -- u9 white
+  - a25 -- m25 green
+  - q25 -- t25 green
+  - t25 -- v25 green
+  - v25 -- v9 green
 notes:
-  - mark u13 orange
-  - mark v13 blue
-  - text s13 orange: 1+ (TX+)
-  - text s12 blue: 1- (TX-)
-unused: [J1.P3, J1.P6]
+  - mark t26 orange
+  - mark t25 blue
+  - text l-1 black: 橙の丸 (T26) はオシロの 1+ (TX+)、青の丸 (T25) は 1- (TX-)
+unused: [J1.3, J1.4, J1.5, J1.6, J1.7, J1.8]
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/05-ethernet-10base-t/perfboard/02-tx-link-pulse.svg)
 
-- ユニバーサル基板は 5×7 cm (18 列 × 24 行) を**横に置く** (24 列 × 18 行、英字が列・数字は下から)。
-  Pico 2 は C〜V 列の 2〜9 行に載り、USB が左。上の列のピン (21〜40 番) が 9 行に出る
-- RJ45 は DIP 化した物 (8 ピンが 2.54 mm で 1 列に出る物) を基板の上端の外に置き、ピン 1・2 を
-  J 列・K 列から基板に下ろす。この題で使うのはピン 1 (TX+) と 2 (TX−) だけ。ピン 3・6 は
-  5-3 の受信回路で使うので、H 列・I 列を空けておく
-- GP17 (22 番、U 列 9 行) → R2 (U 列 10〜13 行) → 17 行を白い線で J 列へ → RJ45 のピン 1。
-  GP16 (21 番、V 列 9 行) → R1 (V 列 10〜13 行) → 18 行を緑の線で K 列へ → RJ45 のピン 2
-- 橙と青の丸が、オシロの 1+ と 1− を当てる所 (抵抗の先 = 線路の側)。ロジアナの DIO1・DIO0 は
+- 基板は **7×9 cm を横に置いた 9×7 cm** (31 列 × 26 行、英字が列・数字は下から)。この章の 5-6 までを 1 枚の基板に組むので、
+  5-3 の受信回路が入る大きさにした (5×7 cm では受信回路と 74HC14 の配線が収まらない)。Pico 2 は C〜V 列の 2〜9 行に載り、
+  USB が左。上の列のピン (21〜40 番) が 9 行に出る
+- **RJ45 は 5-1 で紹介した秋月の LAN コネクターDIP化キット (105404)** を使う。ヘッダの 8 本を左の縁の A 列、26〜19 行に挿す
+  (上からピン 1〜8)。ジャックの口は基板の外 (左) を向き、本体 (15 mm) は基板の縁から張り出す。
+  この題で使うのはピン 1 (TX+) と 2 (TX−) だけ。ピン 3・6 は 5-3 の受信回路で使う
+- ピン 1 (A26) の白い線は 26 行を M 列まで走り、R2 (M〜Q 列) を通って U 列を下り、GP17 (22 番、`u9`) へ。
+  ピン 2 (A25) の緑の線は 25 行を M 列まで走り、R1 (M〜Q 列) を通って V 列を下り、GP16 (21 番、`v9`)。
+  **U 列の白い線が 25 行の緑の線を 1 か所跨ぐ**ので、被覆線にする (図では半円の跨ぎ)。
+  GP17 が GP16 より左にあるのに、ピン 1 がピン 2 より上にあるため、避けられない
+- 橙と青の丸 (`t26`・`t25`) が、オシロの 1+ と 1− を当てる所 (抵抗の先 = 線路の側)。ロジアナの DIO1・DIO0 は
   Pico 2 の GP17・GP16 のピンに直接当て、GND はピン 23 (T 列 9 行)
 - Pico 2 の使わないピンは ERC が言い続けるので `style: check: off` で検査を外した。
   つなぐ 2 本は check のネットリストで確かめた。周波数は 10 MHz 以下、電圧は 3.3 V なのでユニバーサル基板の範囲
