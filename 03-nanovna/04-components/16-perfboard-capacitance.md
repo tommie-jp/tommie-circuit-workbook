@@ -5,7 +5,7 @@ id: 4-16
 title: perfboard のパターンの容量
 tier: 100
 source: 自作
-board: PF
+board: [PF, BB]
 device: H4
 ---
 
@@ -74,6 +74,54 @@ notes:
 - 間隔を 1 穴 (2.54 mm、g 行の代わりに h 行) にしたときも測って比べる
 - 2 本の線は片方の端が浮いている。部品をつながないのがこの題の中身なので、
   J1・J2 の中心導体は `unused:` に並べて、検査 (ERC) の「つながっていない」から外してある
+
+## ブレッドボードと比べる
+
+同じ測り方で、**ブレッドボードの隣り合う 2 列**も測って比べる。ブレッドボードの列は長い金属の板で、隣の列の板と
+約 1.5 cm 並んで走る。perfboard の細い線 2 本より、向かい合う金属がずっと広い。
+
+```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
+title: 図4 隣り合う 2 列に CH0 と CH1 の線を挿す (つなげない)
+board: half
+parts:
+  P0:
+    type: device
+    at: top
+    label: CH0 (SMA 変換基板)
+    pins: [GND, RF]
+  P1:
+    type: device
+    at: top
+    label: CH1 (SMA 変換基板)
+    pins: [GND, RF]
+wires:
+  - P0.GND -- -t1 black
+  - P1.GND -- -t2 black
+  - P0.RF -- e10 orange
+  - P1.RF -- e11 yellow
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/04-components/breadboard/16-perfboard-capacitance.svg)
+
+- 10 列と 11 列は**どこでもつながっていない**。SMA の変換基板から出る線は 5 cm 以下にし、両方の線は離して挿す
+- 校正と掃引の設定は perfboard と同じ。線を挿さない状態 (変換基板だけ) を先に測って基準にする
+- 2.5 pF は [8-2](../../02-analog-discovery/08-breadboard-limits/02-row-capacitance.md) の列間容量の値 (仮定)。
+  読んだ |S21| から 4-9 と同じ式で C を出し、perfboard の約 0.5 pF と比べる
+- perfboard の 8-7 では、この差を AD3 の入力容量が隠していた。VNA の 50 Ω の系なら、**差がそのまま S21 に出る**
+
+計算値 (直列治具、S21 = 100 / (100 + 1/(jωC)))。
+
+| 周波数 | perfboard 2 穴 (0.5 pF) | perfboard 1 穴 (0.7 pF) | ブレッドボード (2.5 pF) |
+| --- | --- | --- | --- |
+| 10 MHz | −50.1 dB | −47.1 dB | −36.1 dB |
+| 100 MHz | −30.1 dB | −27.1 dB | −16.2 dB |
+| 300 MHz | −20.6 dB | −17.7 dB | −7.4 dB |
+
+- 1 穴の 0.7 pF は、上の式で D = 2.54 mm (arccosh(5.08) ≈ 2.31、C' ≈ 0.30 pF/cm)、長さ約 2.3 cm とした見積もり
+- 100 MHz で、ブレッドボードは perfboard より **約 14 dB (5 倍) 多く漏れる**。
+  読む周波数は 100 MHz がよい。300 MHz では変換基板の線のインダクタンスが乗り、容量だけの比べでなくなる
+- 銅張り基板では、線の下に GND の面があるので向かいの線へは漏れにくい。島と GND 面の容量は 3-11、面で GND を取る差は 9-3 で扱う
 
 ## 容量の見積もり
 
@@ -155,3 +203,5 @@ markers:
 ## 出典
 
 自作。平行 2 線の容量の式は電磁気学の教科書にある一般的なもの。
+
+参考: [Wikipedia「寄生容量」](https://ja.wikipedia.org/wiki/寄生容量)、[Wikipedia「ユニバーサル基板」](https://ja.wikipedia.org/wiki/ユニバーサル基板)

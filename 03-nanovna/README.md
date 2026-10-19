@@ -146,7 +146,7 @@ GHz 帯の作法をまとめる。
 | 4-13 | [ダイオードの接合容量](04-components/13-junction-capacitance.md) | 入門 | H4 | PF |
 | 4-14 | [トロイダルコアの材質比較](04-components/14-toroid-materials.md) | 入門 | H4 | PF |
 | 4-15 | [リレー・スイッチの S21](04-components/15-relay-switch.md) | 入門 | H4 | PF |
-| 4-16 | [perfboard のパターンの容量](04-components/16-perfboard-capacitance.md) | 入門 | H4 | PF |
+| 4-16 | [perfboard のパターンの容量](04-components/16-perfboard-capacitance.md) | 入門 | H4 | PF / BB |
 | 4-17 | チップ部品 (0603 / 0805) の SRF を GHz で | 中級 | V2 | CB |
 | 4-18 | フェライトビーズの GHz 特性 | 中級 | V2 | CB |
 | 4-19 | 空芯コイルの Q を 1 GHz 手前まで | 中級 | H4 | CB |

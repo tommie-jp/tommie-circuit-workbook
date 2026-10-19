@@ -72,7 +72,7 @@
 - { id: 4-13, tier: 100, board: PF, device: H4, title: ダイオードの接合容量 }
 - { id: 4-14, tier: 100, board: PF, device: H4, title: トロイダルコアの材質比較 }
 - { id: 4-15, tier: 100, board: PF, device: H4, title: リレー・スイッチの S21 }
-- { id: 4-16, tier: 100, board: PF, device: H4, title: perfboard のパターンの容量 }
+- { id: 4-16, tier: 100, board: [PF, BB], device: H4, title: perfboard のパターンの容量 }
 - { id: 4-17, tier: 200, board: CB, device: V2, title: チップ部品 (0603 / 0805) の SRF を GHz で }
 - { id: 4-18, tier: 200, board: CB, device: V2, title: フェライトビーズの GHz 特性 }
 - { id: 4-19, tier: 200, board: CB, device: H4, title: 空芯コイルの Q を 1 GHz 手前まで }
