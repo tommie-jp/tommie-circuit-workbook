@@ -1,11 +1,11 @@
-"""3-2 の残りの 2 点を調べる。ngspice は Docker (ngspice-py) で回す。結果は r7_g2_probe.json。
+"""4-2 の残りの 2 点を調べる。ngspice は Docker (ngspice-py) で回す。結果は r7_g2_probe.json。
 1. R7 (2 kΩ) の有無で IF OUT の通過帯域 (中心・−3 dB 幅・リップル) がどう変わるか (RF をずらす過渡解析)
 2. LO 0 dBm で G2 の最適が 1.6 V 付近にずれる原因 (M1 の gm の LO による振れ・M1 が飽和にいる時間の割合・平均電流)"""
 import os, sys, json, subprocess, hashlib, numpy as np
 from concurrent.futures import ThreadPoolExecutor
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(HERE, "..", "..", "04-mixer-2sc1815", "sim"))
-import compare_gain as cg   # 3SK291 の回路 (3-2 と同じ値) と FFT を共用する
+sys.path.insert(0, os.path.join(HERE, "..", "..", "03-mixer-2sc1815", "sim"))
+import compare_gain as cg   # 3SK291 の回路 (4-2 と同じ値) と FFT を共用する
 WORK = os.path.join(HERE, "_work"); os.makedirs(WORK, exist_ok=True)
 VTO = 0.4
 

@@ -1,19 +1,26 @@
 ---
 book: etc
-chapter: 3
-id: 3-1
+chapter: 4
+id: 4-1
 title: デュアルゲート FET ミキサー — 3SK291 で中波を 455 kHz の IF に変える
 tier: 200
 source: 自作
 board: [BB, PF]
 ---
 
-# 3-1 デュアルゲート FET ミキサー — 3SK291 で中波を 455 kHz の IF に変える
+# 4-1 デュアルゲート FET ミキサー — 3SK291 で中波を 455 kHz の IF に変える
 
 中波 (0.53〜1.6 MHz) の信号 (RF) に局部発振 (LO) を混ぜ、**455 kHz の中間周波 (IF)** に変える回路。
 デュアルゲート FET の 3SK291 の G1 に RF、G2 に LO を入れ、ドレインに出る差の周波数をセラミックフィルタで選ぶ。
 RF・LO・IF の 3 つのポートはどれも **50 Ω**、電源は **5 V** の単電源。
-特性をシミュレーションで見た結果は [3-2](02-simulation.md)。
+特性をシミュレーションで見た結果は [4-2](02-simulation.md)。
+
+> [!NOTE]
+> **この章は参考。** 3SK291 は入手しにくく (面実装、国内の通販で扱いが少ない)、LO に +7 dBm、電流に約 10 mA 要る。
+> 中波のミキサーを 1 つ組むなら、手に入りやすい 2SC1815 で組む第 3 章 (おすすめは差動対の [3-2](../03-mixer-2sc1815/02-balanced.md)) を先に読む。
+> 3SK291 の利点は入力 1 dB 圧縮点が高いことと、RF と LO を別のゲートから入れられること ([3-3](../03-mixer-2sc1815/03-compare.md) の表)。
+
+組み立てや測り方は第 3 章の 2 題と同じ流儀で書いてある。
 
 > [!WARNING]
 > 3SK291 の SPICE モデルが無かったので、特性は**代用のモデル**で解析した。**実機では測っていない**。
@@ -33,7 +40,7 @@ RF・LO・IF の 3 つのポートはどれも **50 Ω**、電源は **5 V** の
 
 ## LO の波形
 
-標準は**正弦波**。[3-2](02-simulation.md) の解析も正弦波の LO で行った。
+標準は**正弦波**。[4-2](02-simulation.md) の解析も正弦波の LO で行った。
 Analog Discovery 3 (AD3) の Wavegen W2 を Sine、振幅 0.71 V、オフセット 0 V にする。
 C2 が直流を切るので、G2 の直流 (1.41 V) は R4・R5 の分圧のまま変わらない。
 Wavegen の出力は 0 Ω で、51 Ω の終端 R3 に 0.71 V を加えると約 14 mA 流れる (Wavegen の上限 30 mA の内)。
@@ -46,11 +53,11 @@ LO を方形波にしても、G2 で開け閉めするスイッチとして混�
   前置の同調回路が無いので、これを落とせない。正弦波ならこの経路はほぼ無い
 - **基本波が大きくなる。** 同じ波高値なら方形波の基本波は正弦波の 4/π 倍 (+2.1 dB)。
   基本波を正弦波の +7 dBm に揃えるなら、方形波の振幅は 0.71 V × π/4 ≒ 0.56 V (G2 は 0.85〜1.97 V を跳ぶ)
-- **G2 の上側の跳びに余裕が無い。** 代用モデルでは G2 が約 2.2 V を超えると変換が落ちる (3-2 の図 4)。
+- **G2 の上側の跳びに余裕が無い。** 代用モデルでは G2 が約 2.2 V を超えると変換が落ちる (4-2 の図 4)。
   方形波の高い側はこれに近づくので、振幅を決め直す必要がある
 
 > [!WARNING]
-> **方形波での解析と実測はしていない。** 上は高調波の計算と 3-2 の図からの見積もりで、
+> **方形波での解析と実測はしていない。** 上は高調波の計算と 4-2 の図からの見積もりで、
 > 変換利得が何 dB になるかは分からない。試すときは 0.56 V から始めて、IF OUT の 455 kHz を見ながら動かす。
 
 ## 回路図
@@ -129,7 +136,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/circuit/01-mixer.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-dual-gate-fet/circuit/01-mixer.svg)
 
 左から RF と LO を入れ、中央の 3SK291 (U1) で混ぜ、右のセラミックフィルタ (FL1) で 455 kHz を選んで IF OUT へ出す。
 電源の記号 (+5 V) は、G1 の分圧を遠くの電源の線まで引き回さないよう 2 か所に置いた (同じ名前なので同じ電源)。
@@ -142,7 +149,7 @@ style:
   (IDSS は最大 0.1 mA)。VDD から 1 MΩ で引き上げ、150 kΩ と可変抵抗 VR1 (200 kΩ) で分けて、
   VR1 で ID を 10 mA 前後に合わせる。ソースは直接 GND
 - **G2 は低い電圧 (約 1.4 V) に置く。** データシートの測定条件の VG2S = 4.5 V は増幅器の条件で、
-  LO で G2 を振るミキサーでは変換が起きない (3-2 の図 3)。33 kΩ と 13 kΩ の分圧で 1.41 V にした
+  LO で G2 を振るミキサーでは変換が起きない (4-2 の図 3)。33 kΩ と 13 kΩ の分圧で 1.41 V にした
 - **ドレインは 220 µH と 560 pF の並列に給電する。** 約 454 kHz に同調し、RF と LO に低いインピーダンスを
   見せる。1 mH と 120 pF では RF の周波数で利得が約 5 dB 揺れた。フィルタの入力には 2 kΩ (R7) を並列にして、
   フィルタの源のインピーダンスを決める。R7 が無いと IF OUT が 50 Ω にならない
@@ -257,7 +264,7 @@ wires:
   - c48 -- c50 blue
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/breadboard/01-mixer.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-dual-gate-fet/breadboard/01-mixer.svg)
 
 - 電源: AD3 の V+ (Supplies で 5 V) を赤で +t2 へ、GND を黒で -b4 へ。上下のレールは右端で渡す (赤 +t62〜+b62、黒 -t61〜-b61)
 - 上のブロック (a〜e 行): 左から C1・R1 (RF の入口)、U1 の D (31 列) から右へ C3 と L1 の並列タンク、C4、R7、FL1、C5、L2、R8 (IF の出口)
@@ -399,7 +406,7 @@ style:
   back: on
 ```
 
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/perfboard/01-mixer.svg)
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-dual-gate-fet/perfboard/01-mixer.svg)
 
 5×7 cm に収めるために、次のようにした。
 
@@ -460,7 +467,7 @@ R8 が無いと、出力が 50 Ω の IF OUT は負荷が軽くなり、電圧�
 | Spectrum | チャンネルは CH1。開始 0 Hz・終了 2.5 MHz、FFT 8192 点、窓は Flat Top、縦軸 dBm (50 Ω) |
 
 - RF を最初に 0.1 V にするのは、10 mV (−30 dBm) だと Wavegen の分解能に近く、信号源の雑音が見えるため。
-  3-2 の図 6 のとおり、−10 dBm までは利得が一定なので、0.1 V でも変換利得は同じに読める
+  4-2 の図 6 のとおり、−10 dBm までは利得が一定なので、0.1 V でも変換利得は同じに読める
 - 標本化は 2.5 MHz × 2.56 = 6.4 MHz、分解能は 6.4 MHz ÷ 8192 ≈ 0.78 kHz。IF (455 kHz) と RF・LO は十分に分かれる
 - Spectrum の縦軸 dBm は 50 Ω の電力。IF の −28.6 dBm は、そのまま **−28.6 dBm** の山として立つ
 - W1 と W2 は別々に周波数を決める。LO は RF + 455 kHz に**自分で合わせる** (RF を変えたら LO も変える)
@@ -504,7 +511,7 @@ LO は G2 の直流 (1.41 V) の周りを ±0.7 V (+7 dBm のとき) 振る。G1
 
 ## 計器の画面
 
-計算値。IF OUT は 3-2 の解析 (RF −30 dBm・LO +7 dBm のとき **−28.6 dBm** = 11.7 mV<sub>p</sub>) による。
+計算値。IF OUT は 4-2 の解析 (RF −30 dBm・LO +7 dBm のとき **−28.6 dBm** = 11.7 mV<sub>p</sub>) による。
 LO と RF の漏れは、フィルタの阻止域の深さを仮定した**目安**で、実物では変わる (下の表)。
 
 ```spectrum
@@ -523,7 +530,7 @@ signal:
 markers: [455k, 1.455M, 1M]
 ```
 
-![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/spectrum/01-mixer.svg)
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-dual-gate-fet/spectrum/01-mixer.svg)
 
 - 455 kHz の山が一番高く、−28.6 dBm で立つ。RF −30 dBm から見て **+1.4 dB の変換利得**
 - 山のほかに見えるのは LO (1.455 MHz) と RF (1.000 MHz) の漏れ。**どちらも IF より十分低い**が、
@@ -540,7 +547,7 @@ cursors: [0, 2.2us]
 measure: [freq, vpp]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/scope/01-mixer.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-dual-gate-fet/scope/01-mixer.svg)
 
 - RF を 0.1 V (−10 dBm) にしたときの波形。IF OUT は 0.12 V<sub>p</sub> (0.23 Vpp) の 455 kHz の正弦波
 - 1 周期は 2.2 µs。1 µs/div なら 10 目盛で 4.5 周期が見える。RF と LO の周波数の差で決まるので、
@@ -551,16 +558,16 @@ measure: [freq, vpp]
 
 | 成分 | 見積もり | IF OUT での値 |
 | --- | --- | --- |
-| LO 1.455 MHz | ドレインの LO 1.17 V<sub>p</sub> (3-2) = 11.3 dBm → フィルタの阻止域 30 dB (**仮定**) → L2 (914 Ω) と 50 Ω で 25 dB 下がる | 約 −44 dBm |
+| LO 1.455 MHz | ドレインの LO 1.17 V<sub>p</sub> (4-2) = 11.3 dBm → フィルタの阻止域 30 dB (**仮定**) → L2 (914 Ω) と 50 Ω で 25 dB 下がる | 約 −44 dBm |
 | RF 1.000 MHz | ドレインの RF 52 mV<sub>p</sub> = −15.7 dBm → 阻止域 30 dB (**仮定**) → L2 (628 Ω) と 50 Ω で 22 dB 下がる | 約 −68 dBm |
 
-3-2 の FFT は、モデルのフィルタが理想的で阻止域が深すぎる (−120 dBm 以下)。実物のセラミックフィルタの
+4-2 の FFT は、モデルのフィルタが理想的で阻止域が深すぎる (−120 dBm 以下)。実物のセラミックフィルタの
 阻止域は未確認なので、**30 dB は仮定**。実際に測った漏れが大きければ、阻止域がもっと浅い。
 
 ## 見るべき値
 
 IF OUT の 455 kHz は、RF −30 dBm・LO +7 dBm のとき **約 −28.6 dBm (波高値 11.7 mV)**。
-変換利得は +1 dB 前後で、**組んだ実機では大きく外れうる** (3-2 の「確かめていないこと」)。
+変換利得は +1 dB 前後で、**組んだ実機では大きく外れうる** (4-2 の「確かめていないこと」)。
 上の図 04・05 のとおりに Analog Discovery 3 で測る。
 
 | 確かめること | 期待する値 |
@@ -585,9 +592,9 @@ IF OUT の 455 kHz は、RF −30 dBm・LO +7 dBm のとき **約 −28.6 dBm (�
 
 ## LTspice での確かめ
 
-特性は ngspice の代用モデルによる解析 ([3-2](02-simulation.md)) で、変換利得の 2 点 (LO +7 dBm、R7 あり・なし) だけを LTspice でも解いて突き合わせた。
+特性は ngspice の代用モデルによる解析 ([4-2](02-simulation.md)) で、変換利得の 2 点 (LO +7 dBm、R7 あり・なし) だけを LTspice でも解いて突き合わせた。
 信号源 0 Ω の条件で、ngspice と LTspice は R7 ありで +1.24 / +1.20 dB、R7 なしで +6.27 / +6.20 dB と 0.1 dB 以内で合った
-(本文の +1.4 dB は RF の源が 50 Ω の条件。ネットリストと表は [../04-mixer-2sc1815/sim/ltspice/](../04-mixer-2sc1815/sim/ltspice/README.md)、デッキは `fet_r7.cir` `fet_nor7.cir`)。
+(本文の +1.4 dB は RF の源が 50 Ω の条件。ネットリストと表は [../03-mixer-2sc1815/sim/ltspice/](../03-mixer-2sc1815/sim/ltspice/README.md)、デッキは `fet_r7.cir` `fet_nor7.cir`)。
 同じ代用モデルを 2 つの解析器で解いた照合で、モデルや実機の正しさの確認ではない。
 
 ## 出典

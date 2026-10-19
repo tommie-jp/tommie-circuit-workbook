@@ -1,37 +1,37 @@
 ---
 book: etc
-chapter: 3
-id: 3-2
+chapter: 4
+id: 4-2
 title: ミキサーの特性をシミュレーションで見る — 変換利得・インピーダンス・FFT
 tier: 200
 source: 自作
 board: —
 ---
 
-# 3-2 ミキサーの特性をシミュレーションで見る — 変換利得・インピーダンス・FFT
+# 4-2 ミキサーの特性をシミュレーションで見る — 変換利得・インピーダンス・FFT
 
-[3-1](01-mixer.md) のミキサーを ngspice で解析した結果。変換利得の周波数特性、IF の通過特性、
+[4-1](01-mixer.md) のミキサーを ngspice で解析した結果。変換利得の周波数特性、IF の通過特性、
 LO 電力と G2 バイアスへの依存、入出力インピーダンス、出力の FFT、入出力特性を見る。
 
 > [!WARNING]
 > 3SK291 の SPICE モデルが無かったので、**代用のモデル**の上での値。利得・最適な G2・P1dB は
 > 実機で変わる。変換利得の主な点 (LO +7 dBm、R7 あり・なし) は LTspice でも解析し、ngspice と 0.1 dB 以内で合った
-> ([4-3](../04-mixer-2sc1815/03-compare.md) の「照合したこと」)。実機で測ったら、図のフェンスに `data:` で重ねる。
+> ([3-3](../03-mixer-2sc1815/03-compare.md) の「照合したこと」)。実機で測ったら、図のフェンスに `data:` で重ねる。
 
-この題は実体配線図・Analog Discovery 3・オシロの図を付けない — シミュレーションの結果だけを見る題で、組む回路が無い (組む回路は 3-1 の図)。
+この題は実体配線図・Analog Discovery 3・オシロの図を付けない — シミュレーションの結果だけを見る題で、組む回路が無い (組む回路は 4-1 の図)。
 
 ## 解析の方法
 
 - 道具: ngspice 42。ネットリストは SPICE の標準の素子だけで書いてあり、LTspice でも読める
-  (変換利得を 2 点照合した。4-3)。[sim/mixer.cir](sim/mixer.cir) に置いた
+  (変換利得を 2 点照合した。3-3)。[sim/mixer.cir](sim/mixer.cir) に置いた
 - 3SK291 の代用モデル: Level 1 の N チャネル MOSFET を 2 つ直列 (M1 が G1 側、M2 が G2 側)
-- データシートに合わせた値 (出典は 3-1): VDS = 6 V・VG2S = 4.5 V・ID = 10 mA のとき |Yfs| = 26 mS、
+- データシートに合わせた値 (出典は 4-1): VDS = 6 V・VG2S = 4.5 V・ID = 10 mA のとき |Yfs| = 26 mS、
   Ciss = 2 pF、Crss = 0.016 pF
 - **仮定した値** (出典なし): しきい値 0.4 V、λ = 0.03、G2 側の容量、M2 の寸法
 - セラミックフィルタ: 1.5 kΩ・帯域 約 12 kHz・Q 約 1500 の 3 次の LC 梯子に置き換えた
   (実物の型番のモデルではない。阻止域は実物より深すぎる)
 - 条件: RF −30 dBm、LO +7 dBm (どちらも 50 Ω の有能電力、**LO も RF も正弦波**。LO を方形波にした解析はしていない)、LO = RF + 455 kHz。過渡解析 1.4 ms の最後の 1 ms を FFT
-- 変換利得 = IF OUT の 455 kHz の電力 (50 Ω 負荷) − RF の有能電力。基準は整合した 50 Ω の源がポートに作る電圧なので、RF 側の 51 Ω の分圧による約 6 dB の減衰は含まない (信号源の起電力を基準にすれば 6 dB 小さく出る)。1 石・差動対と同じ条件にそろえて比べ直した値は [4-3](../04-mixer-2sc1815/03-compare.md) の「3SK291 の利得が小さい理由」
+- 変換利得 = IF OUT の 455 kHz の電力 (50 Ω 負荷) − RF の有能電力。基準は整合した 50 Ω の源がポートに作る電圧なので、RF 側の 51 Ω の分圧による約 6 dB の減衰は含まない (信号源の起電力を基準にすれば 6 dB 小さく出る)。1 石・差動対と同じ条件にそろえて比べ直した値は [3-3](../03-mixer-2sc1815/03-compare.md) の「3SK291 の利得が小さい理由」
 - 入出力インピーダンスはバイアス点の小信号 AC 解析 (LO を加えたときの時間変化は含まない)
 - 再現: [sim/](sim/) の `main2.py` と `ac.py` を回し、`export_points.py` で下の点列を書く
 
@@ -111,7 +111,7 @@ lines:
     - 1.6M 2.25
 ```
 
-![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/graph/02-simulation-1.svg)
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-dual-gate-fet/graph/02-simulation-1.svg)
 
 LO は RF + 455 kHz に追従させて掃引した。LO 電力が高いほど利得が上がり、中波の全域で平ら。
 
@@ -160,7 +160,7 @@ notes:
   - peak
 ```
 
-![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/graph/02-simulation-2.svg)
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-dual-gate-fet/graph/02-simulation-2.svg)
 
 LO を 1.455 MHz に固定し、RF を 1.0 MHz 付近 (希望波) と 1.91 MHz 付近 (影像) で動かした。
 2 つの応答は IF 周波数で見ると**重なる**。この回路は影像を落とさない。通過帯域は
@@ -189,7 +189,7 @@ lines:
     - 14 2.71
 ```
 
-![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/graph/02-simulation-3.svg)
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-dual-gate-fet/graph/02-simulation-3.svg)
 
 LO を上げるほど利得が上がるが、+10 dBm を超えると傾きは緩む。
 
@@ -216,7 +216,7 @@ notes:
   - band 4.4 4.5
 ```
 
-![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/graph/02-simulation-4.svg)
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-dual-gate-fet/graph/02-simulation-4.svg)
 
 **G2 の電圧が最も大きく効く。** 1.3〜1.4 V で利得が最大 (+1.2〜+1.4 dB)、**2.5 V 以上では変換がほぼ起きない** (−27 dB)。
 データシートの測定条件の VG2S = 4.5 V (図の右端の帯) は増幅器の条件で、G2 を LO で振るミキサーにはならない。
@@ -224,7 +224,7 @@ notes:
 
 ### LO が小さいと G2 の最適が上へずれる理由
 
-LO 0 dBm では、G2 の最適が 1.41 V から 1.6 V 付近へずれる (4-3 の表)。M1 (G1 側) の動作点と g<sub>m</sub> の波形を解析で取り出して確かめた。
+LO 0 dBm では、G2 の最適が 1.41 V から 1.6 V 付近へずれる (3-3 の表)。M1 (G1 側) の動作点と g<sub>m</sub> の波形を解析で取り出して確かめた。
 再現は [sim/r7_g2_probe.py](sim/r7_g2_probe.py) (結果は [sim/r7_g2_probe.json](sim/r7_g2_probe.json)。信号源 0 Ω、出力は短絡して IF の電流を測った)。
 
 2 段の FET の中点 (M1 のドレイン) の電圧は、G2 の電圧から M2 の V<sub>GS</sub> を引いた所に来る。
@@ -367,7 +367,7 @@ notes:
   - mark 455k
 ```
 
-![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/graph/02-simulation-5.svg)
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-dual-gate-fet/graph/02-simulation-5.svg)
 
 455 kHz で 50.2 − j5.2 Ω、リターンロスは 25.7 dB。リターンロス 10 dB 以上の範囲は 452.5〜458.5 kHz と狭い。
 フィルタの通過帯域の外では 50 Ω にならない。
@@ -411,7 +411,7 @@ lines:
     - 0 -0.2
 ```
 
-![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/graph/02-simulation-6.svg)
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-dual-gate-fet/graph/02-simulation-6.svg)
 
 小信号では傾き 1 (利得一定)。RF 0 dBm で利得が 1.5 dB 落ちる。代用モデルは平方則の MOSFET なので、
 実機よりも楽観的に出る。
@@ -479,7 +479,7 @@ notes:
   - mark 455k
 ```
 
-![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/03-mixer-dual-gate-fet/graph/02-simulation-7.svg)
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/04-mixer-dual-gate-fet/graph/02-simulation-7.svg)
 
 | 項目 | R7 あり (2 kΩ) | R7 なし |
 | --- | --- | --- |
@@ -508,4 +508,4 @@ RF を動かして IF を 435〜475 kHz に振った。R7 を外すと、中心�
 
 ## 出典
 
-3-1 の出典に同じ。
+4-1 の出典に同じ。

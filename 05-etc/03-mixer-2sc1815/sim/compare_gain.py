@@ -1,4 +1,4 @@
-"""4-3 の「条件をそろえた変換利得」を出す。3 つのミキサー (1 石・差動対・3SK291) を同じ関数で組み、
+"""3-3 の「条件をそろえた変換利得」を出す。3 つのミキサー (1 石・差動対・3SK291) を同じ関数で組み、
 信号源・出力の負荷・利得の定義を揃えて過渡解析する。ngspice は Docker (ngspice-py) で回す。
 使い方: python3 compare_gain.py (結果は compare_gain.json)。"""
 import subprocess, os, json, hashlib, numpy as np
@@ -144,7 +144,7 @@ if __name__ == "__main__":
     def add(name, kind, **kw): jobs[name] = (kind, kw)
     KINDS = ("single", "diff", "fet", "diffse")
     LOS = (-10, -5, 0, 4, 7, 10, 13, 16)
-    # E1 公表値の再現と、信号源の違い (src: 0 = 0 Ω の源 = Wavegen、50 = 50 Ω の源 = 3-2 の条件)。RF と LO を別々にも変える
+    # E1 公表値の再現と、信号源の違い (src: 0 = 0 Ω の源 = Wavegen、50 = 50 Ω の源 = 4-2 の条件)。RF と LO を別々にも変える
     for kind, plo in (("single", 0), ("diff", 0), ("fet", 7), ("fet", 0)):
         for src in ("0", "50"):
             add(f"pub_{kind}_lo{plo}_src{src}", kind, plo=plo, src=src)

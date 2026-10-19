@@ -1,4 +1,4 @@
-"""4-2 の差動対の出力を、トランスを使わずに 1 本 (単端) にする方法を比べる。
+"""3-2 の差動対の出力を、トランスを使わずに 1 本 (単端) にする方法を比べる。
 どの方法も同じ出力回路 (セラミックフィルタ相当・L 型整合・50 Ω の負荷) につなぎ、
 変換利得 (50 Ω の負荷の電力 ÷ RF の有能電力)・RF の打ち消し・電源の電流を出す。
 信号源は 0 Ω (Wavegen と同じ)。使い方: python3 diff_output.py (結果は diff_output.json)。"""
@@ -13,7 +13,7 @@ QP = ".model Q1015 PNP (IS=2e-14 BF=200 NF=1 VAF=50 IKF=0.15 RB=30 RE=1 RC=5 CJE
 TANK_GND = "Ct d t1 100n\nLt t1 0 220u\nRLt t1 0 1G\nCtk t1 0 560p\n"   # 455 kHz の並列同調を C で DC を切って GND へ
 
 def core(o):
-    """差動対の下半分 (Q3 の電流源・Q1/Q2・バイアス) は元の 4-2 と同じ。re_split: RE をバイパスしない側の抵抗 (None なら 470 Ω 1 本)、re_b: バイパスする側"""
+    """差動対の下半分 (Q3 の電流源・Q1/Q2・バイアス) は元の 3-2 と同じ。re_split: RE をバイパスしない側の抵抗 (None なら 470 Ω 1 本)、re_b: バイパスする側"""
     re3 = "RE3 e3 0 470" if not o.get("re_split") else f"RE3a e3 e3b {o['re_split']}\nRE3b e3b 0 {o.get('re_b', 470 - o['re_split'])}\nCE e3b 0 1u"
     return f"""{Q}
 {QP}
@@ -38,7 +38,7 @@ R3 lo 0 51
 def output(m, o):
     """m: 出力の取り出し方。どれも fin から先 (R7・フィルタ・50 Ω) は同じ。出力の前のノードは d"""
     chain = ("R7 fin 0 2k\n" if o.get("r7", True) else "") + FILTER + "Rload out 0 50\nRleak fin 0 1G\n"
-    if m == "open":       # 元の 4-2: 3.3 kΩ ずつ、差を見る (フィルタ無し)
+    if m == "open":       # 元の 3-2: 3.3 kΩ ずつ、差を見る (フィルタ無し)
         return "Q1 c1 b1 t Q1815\nQ2 c2 b2 t Q1815\nRC1 vdd c1 3.3k\nRC2 vdd c2 3.3k\n", False
     if m == "se_tank":    # 片側のコレクタに 1 石と同じ同調回路 (もう片側は 3.3 kΩ)
         return ("Q1 c1 b1 t Q1815\nQ2 d b2 t Q1815\nRC1 vdd c1 3.3k\n"

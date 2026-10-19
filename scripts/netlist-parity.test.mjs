@@ -5,7 +5,7 @@ import { compareDiagrams, judge, parseCheckOutput, pairBoards } from './netlist-
 /** check の出力から図を 1 枚作る (ネットの行だけ見る)。 */
 const diagram = (kind, title, lines) => ({ kind, title, ...parseCheckOutput(`x (1 行目)\n  ネットリスト:\n${lines.map((l) => `    ${l}`).join('\n')}\n`)[0] });
 
-// 912008b^ の 05-etc/03-mixer-dual-gate-fet/01-mixer.md から抜いた、取り違えのある組。
+// 912008b^ の 05-etc/03-mixer-dual-gate-fet/01-mixer.md (今の 04-mixer-dual-gate-fet) から抜いた、取り違えのある組。
 const MIXER_CIRCUIT = diagram('circuit', '図1 ミキサ', [
   'VDD : VDD, C6.1, C7.1, R4.1, R2.1, L1.1, C3.1',
   'GND : C6.2, C7.2, R5.2, R3.2, R1.2, VR1.2, R7.2, C5.2, G1, FL1.GND, U1.source',
