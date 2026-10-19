@@ -53,17 +53,17 @@ parts:
     label: AD3 Logic
     pins: [DIO1, DIO0, GND]
     turn: mirror
+  G1: ground 3,10.25
 wires:
   - MCU.GP17 -- 3,6.25 -- 4,6.25
   - MCU.GP16 -| 3.25,7.5 -- 4,7.5
   - 6,6.25 -- 7,6.25 -| J1.P1
-  - 6,7.5 -- 7,7.5 -| J1.P2
-  - SC.1+ |- 7,6.25
-  - SC.1- |- 7,7.5
-  - LA.DIO1 |- 3,6.25
-  - LA.DIO0 |- 3.25,7.5
-  - MCU.GND23 -- 2.75,6
-  - LA.GND |- 2.75,6
+  - 6,7.5 -- 6.5,7.5 -| J1.P2
+  - SC.1+ -| 7,6.25
+  - SC.1- -| 6.5,7.5
+  - LA.DIO1 -| 3,6.25
+  - LA.DIO0 -| 3.25,7.5
+  - LA.GND -| 3,10.25
 notes:
   - text 3,5.5 small left: GP17 が TX+ (ピン 1)、GP16 が TX- (ピン 2)。線は 100 Ω の対
   - text 4,11.25 small left: 差動の振幅は 3.3 V の 100 / 194 で 1.70 V (計算)
