@@ -40,6 +40,9 @@ description: tommie-circuit-workbook の題 (1 題 1 ファイル) を新しく�
    フェンスの閉じの下の画像の行と、フェンスの 1 行目の名札のコメント
    (`# 回路図 (tommie-fence の circuit フェンス)`) は `npm run figures` が書く。**手で書かない・直さない**
    (フェンスを足した・動かしたら `npm run figures`。`check` が古さを言う)
+   **ユニバーサル基板の図では、キットやモジュールの基板・面実装の変換基板に、ユニバーサル基板 (緑) と別の色を書く**
+   (`J1: sip8 f16 r90 105404 blue`・`U1: dip4 n13 3SK291 blue`)。既定は実物の緑で、ユニバーサル基板と同じ色だと
+   部品の基板の縁が読めない。標準は `blue`。もとから緑でない物 (USB の紺・SFU455B の橙) とブレッドボード (白) には書かない
 6. 実体配線図・AD3・scope を入れない題は、理由を題に 1 行 (理由になることは README の「書き方」の表)
 7. `npm run toc` で目次を直し、`npm run all` を通す。コミットは conventional commits (`docs:`)
 
