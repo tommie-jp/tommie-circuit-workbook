@@ -302,6 +302,8 @@ nextpnr の LUT4 35 と ALU 12 は、桁上げの入口・出口の ALU が足�
 ## 出典
 
 自作。ポインタを 1 ビット余分に持って空と満杯を見分ける形は、同期 FIFO の定番の作り方である
-(例: Clifford E. Cummings の FIFO の論文 "Simulation and Synthesis Techniques for Asynchronous FIFO Design" にも、
+(例: Clifford E. Cummings の FIFO の論文 [Simulation and Synthesis Techniques for Asynchronous FIFO Design](https://www.paradigm-works.com/technical-library) にも、
 ポインタを 1 ビット広げて空と満杯を比べる説明がある)。ここで作ったのは、読み書きが同じクロックの同期 FIFO で、
 その論文が扱う非同期 FIFO (9-8) ではない。
+
+参考: [FIFO (Wikipedia)](https://ja.wikipedia.org/wiki/FIFO)

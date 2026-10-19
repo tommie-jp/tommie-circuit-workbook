@@ -277,3 +277,5 @@ Q2 はその 2 倍、Q3 は 4 倍、Q4 は 8 倍の間隔で入れ替わる。
 ## 出典
 
 自作。
+
+参考: [CD4040B データシート](https://www.ti.com/lit/ds/symlink/cd4040b.pdf)、[NE555 データシート](https://www.ti.com/lit/ds/symlink/ne555.pdf)、[カウンタ (Wikipedia)](https://ja.wikipedia.org/wiki/カウンタ)

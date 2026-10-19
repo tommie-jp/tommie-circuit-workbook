@@ -182,3 +182,5 @@ Vmp ≒ 0.8 × Voc、Imp ≒ 0.9 × Isc とした (結晶シリコン太陽電�
 ## 出典
 
 自作。
+
+参考: [太陽電池 (Wikipedia)](https://ja.wikipedia.org/wiki/太陽電池)、[最大電力点追従制御 (Wikipedia)](https://ja.wikipedia.org/wiki/最大電力点追従制御)

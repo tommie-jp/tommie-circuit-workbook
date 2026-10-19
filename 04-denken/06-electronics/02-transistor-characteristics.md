@@ -183,3 +183,5 @@ style:
 ## 出典
 
 自作。
+
+参考: [バイポーラトランジスタ (Wikipedia)](https://ja.wikipedia.org/wiki/バイポーラトランジスタ)、[Bipolar junction transistor (Wikipedia)](https://en.wikipedia.org/wiki/Bipolar_junction_transistor)

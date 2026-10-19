@@ -372,3 +372,5 @@ xy: ch1 ch2
 NXP の SA612A データシートと応用ノート AN1983 による。RC-CR 網の位相差と振幅、I と Q の先後は、
 網の式と掛け算の三角関数からの計算値 (LTspice で 300 k・498 k・800 kHz の 90.0° を確かめた)。
 IF の大きさは 9-12 の見積もりからの目安で、実測していない。
+
+参考: [I/Q data (Wikipedia)](https://en.wikipedia.org/wiki/I/Q_data)、[Image frequency (Wikipedia)](https://en.wikipedia.org/wiki/Image_frequency)

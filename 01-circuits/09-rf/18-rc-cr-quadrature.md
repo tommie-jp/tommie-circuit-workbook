@@ -241,3 +241,5 @@ xy: ch1 ch2
 
 自作。RC と CR の位相 (−45° と +45°) と 2 つの出力の比 jωRC は、1 次の低域・高域フィルタの伝達関数からの計算。
 数値は手計算と LTspice で確かめた。
+
+参考: [Polyphase filter (Wikipedia)](https://en.wikipedia.org/wiki/Polyphase_filter)、[I/Q data (Wikipedia)](https://en.wikipedia.org/wiki/I/Q_data)

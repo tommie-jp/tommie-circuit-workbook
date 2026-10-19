@@ -220,3 +220,4 @@ VR1 のワイパーの出力抵抗は、0 Ω (表の計算) と 2.5 kΩ (中点�
 ## 出典
 
 自作。
+参考: [シュミットトリガ (Wikipedia)](https://ja.wikipedia.org/wiki/シュミットトリガ)、[TI LM358 のデータシート](https://www.ti.com/lit/ds/symlink/lm358.pdf)

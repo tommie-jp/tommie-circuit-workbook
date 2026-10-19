@@ -168,3 +168,5 @@ markers:
 
 自作。中波放送帯 (531〜1602 kHz)、ループスティックの実効インダクタンスの目安は
 一般的なラジオ工作の資料による。
+
+参考: [Loop antenna (Wikipedia)](https://en.wikipedia.org/wiki/Loop_antenna)、[バリキャップ (Wikipedia)](https://ja.wikipedia.org/wiki/バリキャップ)、[中波放送 (Wikipedia)](https://ja.wikipedia.org/wiki/中波放送)

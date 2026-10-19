@@ -229,3 +229,5 @@ y は、a・b・c のうち 1 になっている数が奇数のときに 1 に�
 ## 出典
 
 自作。
+
+参考: [Verilog HDL (Wikipedia)](https://ja.wikipedia.org/wiki/Verilog_HDL)

@@ -89,3 +89,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [アラゴの円盤 (Wikipedia)](https://ja.wikipedia.org/wiki/アラゴの円盤)、[誘導電動機 (Wikipedia)](https://ja.wikipedia.org/wiki/誘導電動機)

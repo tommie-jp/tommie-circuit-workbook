@@ -119,3 +119,5 @@ measure: [freq, phase]
 ## 出典
 
 自作。
+
+参考: [WaveForms Wavegen (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-waveform-generator)、[位相 (Wikipedia)](https://ja.wikipedia.org/wiki/位相)、[WaveForms Oscilloscope (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-oscilloscope)

@@ -237,3 +237,5 @@ buses:
 ## 出典
 
 自作。
+
+参考: [加算器 (Wikipedia)](https://ja.wikipedia.org/wiki/加算器)、[Verilog (Wikipedia)](https://ja.wikipedia.org/wiki/Verilog)

@@ -186,4 +186,4 @@ L = 5 nH で 2π f L = 100 Ω になる周波数 3.2 GHz も合う (算術)。
 
 ## 出典
 
-自作。マイクロストリップの Z0 と実効比誘電率は Hammerstad の近似式で計算した。
+自作。[マイクロストリップ](https://en.wikipedia.org/wiki/Microstrip)の Z0 と実効比誘電率は Hammerstad の近似式で計算した。

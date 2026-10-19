@@ -203,3 +203,5 @@ LED は V<sub>F</sub> が約 1.5 V (1 µA)・約 2.0 V (8.5 mA) になる仮定�
 ## 出典
 
 自作。
+
+参考: [バイポーラトランジスタ (Wikipedia)](https://ja.wikipedia.org/wiki/バイポーラトランジスタ)、[Lessons in Electric Circuits Vol. III 第 4 章 Bipolar junction transistors](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_4.html)

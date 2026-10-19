@@ -182,3 +182,5 @@ buses:
 ## 出典
 
 自作。
+
+参考: [Verilog HDL (Wikipedia)](https://ja.wikipedia.org/wiki/Verilog_HDL)

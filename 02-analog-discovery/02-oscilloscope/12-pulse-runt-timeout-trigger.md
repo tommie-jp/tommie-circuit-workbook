@@ -121,3 +121,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [WaveForms Oscilloscope (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-oscilloscope)、[トリガ (Wikipedia)](https://ja.wikipedia.org/wiki/トリガ)

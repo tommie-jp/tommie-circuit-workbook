@@ -334,3 +334,5 @@ nextpnr の `Max frequency` は 1 回の実行の値で、`--seed` は振って�
 
 自作。シフトと加算の掛け算 (筆算と同じ形) は、ディジタル回路の教科書にある定番の作り方である。
 `MULT9X9` は yosys の `synth_gowin` が出した部品名で、実行して確かめた (上の表)。
+
+参考: [Binary multiplier (Wikipedia)](https://en.wikipedia.org/wiki/Binary_multiplier)、[Yosys のドキュメント](https://yosyshq.readthedocs.io/projects/yosys/en/latest/)

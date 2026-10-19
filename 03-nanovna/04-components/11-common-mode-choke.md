@@ -236,3 +236,5 @@ markers:
 ## 出典
 
 自作。
+
+参考: [Wikipedia "Common-mode choke"](https://en.wikipedia.org/wiki/Common-mode_choke)、[Wikipedia「変成器」](https://ja.wikipedia.org/wiki/変成器)

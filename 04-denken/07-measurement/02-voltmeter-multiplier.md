@@ -154,3 +154,5 @@ style:
 ## 出典
 
 自作。
+
+参考: [倍率器 (Wikipedia)](https://ja.wikipedia.org/wiki/倍率器)、[電圧計 (Wikipedia)](https://ja.wikipedia.org/wiki/電圧計)

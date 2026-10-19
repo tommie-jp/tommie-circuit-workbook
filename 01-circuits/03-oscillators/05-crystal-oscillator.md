@@ -240,3 +240,4 @@ f<sub>p</sub> (4.013 MHz) で −76 dB。
 ## 出典
 
 自作。
+参考: [水晶発振器 (Wikipedia)](https://ja.wikipedia.org/wiki/水晶発振器)、[Pierce oscillator (Wikipedia)](https://en.wikipedia.org/wiki/Pierce_oscillator)、[TI SN74HC04 のデータシート](https://www.ti.com/lit/ds/symlink/sn74hc04.pdf)

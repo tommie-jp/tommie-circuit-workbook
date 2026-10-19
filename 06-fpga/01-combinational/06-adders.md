@@ -235,3 +235,5 @@ signals:
 ## 出典
 
 自作。回路の考え方は、回路の冊の 10-3 (半加算器と全加算器) による。
+
+参考: [加算器 (Wikipedia)](https://ja.wikipedia.org/wiki/加算器)

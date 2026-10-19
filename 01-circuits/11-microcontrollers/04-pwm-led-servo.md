@@ -364,5 +364,5 @@ LED は 1-1 と同じ仮定のモデル。実測ではない。
 
 ## 出典
 
-自作。Pico 2 の 3V3 の負荷の目安 (300 mA 未満) は Raspberry Pi Pico 2 データシート、
-PWM の API は Pico SDK (`hardware_pwm`) による。
+自作。Pico 2 の 3V3 の負荷の目安 (300 mA 未満) は [Raspberry Pi Pico 2 データシート](https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf)、
+PWM の API は [Pico SDK](https://github.com/raspberrypi/pico-sdk) (`hardware_pwm`) による。

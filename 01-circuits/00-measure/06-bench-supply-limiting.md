@@ -255,3 +255,5 @@ CH2 が 5 V の 0.5 秒だけ LED が点き、その間コレクタは約 0.2 V 
 ## 出典
 
 自作。
+
+参考: [安定化電源 (Wikipedia)](https://ja.wikipedia.org/wiki/安定化電源)、[ファンクションジェネレータ (Wikipedia)](https://ja.wikipedia.org/wiki/ファンクションジェネレータ)、[Bench power supply (Wikipedia)](https://en.wikipedia.org/wiki/Bench_power_supply)

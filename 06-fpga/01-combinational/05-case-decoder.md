@@ -193,3 +193,5 @@ buses:
 ## 出典
 
 自作。
+
+参考: [デコーダ (Wikipedia)](https://ja.wikipedia.org/wiki/デコーダ)、[Verilog (Wikipedia)](https://ja.wikipedia.org/wiki/Verilog)

@@ -174,3 +174,5 @@ measure: [rms, avg]
 
 自作。テスターの平均値形・実効値形の違いは市販テスターの取扱説明書に共通する
 一般的な説明 (固有の製品名は挙げていない)。
+
+参考: [テスター](https://ja.wikipedia.org/wiki/%E3%83%86%E3%82%B9%E3%82%BF%E3%83%BC)、[実効値](https://ja.wikipedia.org/wiki/%E5%AE%9F%E5%8A%B9%E5%80%A4)

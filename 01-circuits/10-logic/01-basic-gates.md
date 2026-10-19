@@ -265,3 +265,5 @@ GND の間を測る。LED が点いているときは約 3.3〜4 V (1)、消え�
 ## 出典
 
 自作。
+
+参考: [CD4081B データシート](https://www.ti.com/lit/ds/symlink/cd4081b.pdf)、[CD4071B データシート](https://www.ti.com/lit/ds/symlink/cd4071b.pdf)、[論理ゲート (Wikipedia)](https://ja.wikipedia.org/wiki/論理ゲート)

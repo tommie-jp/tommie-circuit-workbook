@@ -130,3 +130,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [オームの法則](https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%BC%E3%83%A0%E3%81%AE%E6%B3%95%E5%89%87)、[電気抵抗](https://ja.wikipedia.org/wiki/%E9%9B%BB%E6%B0%97%E6%8A%B5%E6%8A%97)

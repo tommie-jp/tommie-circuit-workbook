@@ -194,3 +194,4 @@ W1 の周波数を変えながらオシロで振幅を読む。表の値は計�
 ## 出典
 
 自作。
+参考: [Sallen–Key topology (Wikipedia)](https://en.wikipedia.org/wiki/Sallen%E2%80%93Key_topology)、[TI LM358 のデータシート](https://www.ti.com/lit/ds/symlink/lm358.pdf)

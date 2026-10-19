@@ -233,5 +233,5 @@ markers:
 
 ## 出典
 
-自作。接合容量の代表値は Vishay のデータシート (1N4001〜1N4007: 4.0 V・1 MHz で 15 pF、
-1N5817〜1N5819: 同じ条件で 1N5819 は 110 pF、1N4148: 0 V・1 MHz で 4 pF 以下) による。
+自作。接合容量の代表値は Vishay のデータシート ([1N4001〜1N4007](https://www.vishay.com/docs/88503/1n4001.pdf): 4.0 V・1 MHz で 15 pF、
+[1N5817〜1N5819](https://www.vishay.com/docs/88525/1n5817.pdf): 同じ条件で 1N5819 は 110 pF、[1N4148](https://www.vishay.com/docs/81857/1n4148.pdf): 0 V・1 MHz で 4 pF 以下) による。

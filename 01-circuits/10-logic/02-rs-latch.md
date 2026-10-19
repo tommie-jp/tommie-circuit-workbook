@@ -196,3 +196,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [CD4011B データシート](https://www.ti.com/lit/ds/symlink/cd4011b.pdf)、[ラッチ回路 (Wikipedia)](https://ja.wikipedia.org/wiki/ラッチ回路)、[SR latch (Wikipedia)](https://en.wikipedia.org/wiki/SR_latch)

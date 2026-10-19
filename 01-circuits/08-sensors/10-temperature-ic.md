@@ -97,3 +97,5 @@ LM35・TMP36 の内部は SPICE の対象外で、データシートの式 V<sub
 ## 出典
 
 自作。
+
+参考: [Texas Instruments LM35 データシート](https://www.ti.com/lit/ds/symlink/lm35.pdf)、[TMP36 データシート (Analog Devices、Adafruit のミラー)](https://cdn-learn.adafruit.com/assets/assets/000/010/131/original/TMP35_36_37.pdf)

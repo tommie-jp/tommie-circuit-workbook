@@ -191,3 +191,4 @@ Rbleed を小さくして低域の利得を抑えるほど、この下限が上�
 ## 出典
 
 自作。
+参考: [積分回路 (Wikipedia)](https://ja.wikipedia.org/wiki/積分回路)、[Op amp integrator (Wikipedia)](https://en.wikipedia.org/wiki/Op_amp_integrator)、[TI LM358 のデータシート](https://www.ti.com/lit/ds/symlink/lm358.pdf)

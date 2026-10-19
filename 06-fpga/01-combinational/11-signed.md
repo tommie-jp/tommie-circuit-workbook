@@ -252,3 +252,5 @@ buses:
 ## 出典
 
 自作。
+
+参考: [2 の補数 (Wikipedia)](https://ja.wikipedia.org/wiki/2の補数)、[Verilog (Wikipedia)](https://ja.wikipedia.org/wiki/Verilog)

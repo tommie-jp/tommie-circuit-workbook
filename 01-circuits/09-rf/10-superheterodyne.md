@@ -731,4 +731,4 @@ VC1 は同容量の 2 連で計算した。アンテナ側と局発側の容量�
 
 自作。中間周波数 455 kHz と IFT・局発コイルの色分けは、日本の中波スーパーの慣習による。
 2SC2120・2SA950 の最大コレクタ電流 (800 mA) は東芝のデータシート、
-Analog Discovery の Wavegen の AM 変調と電源の上限は Digilent の資料による。
+Analog Discovery の Wavegen の AM 変調と電源の上限は [Digilent の資料](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Specifications_1123.pdf)による。

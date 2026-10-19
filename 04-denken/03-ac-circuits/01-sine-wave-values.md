@@ -160,3 +160,5 @@ SPICE の対象外 (正弦波の定義値の題。係数を算術で確かめた
 ## 出典
 
 自作。
+
+参考: [実効値](https://ja.wikipedia.org/wiki/%E5%AE%9F%E5%8A%B9%E5%80%A4)、[交流](https://ja.wikipedia.org/wiki/%E4%BA%A4%E6%B5%81)

@@ -224,5 +224,5 @@ C/C++ は `PICO_BOARD=pico2` の `.uf2` までビルドが通ることを確か�
 
 ## 出典
 
-自作。GPIO のプルアップ抵抗値 (32〜86 kΩ、IOVDD=3.3 V) は RP2350 データシート
+自作。GPIO のプルアップ抵抗値 (32〜86 kΩ、IOVDD=3.3 V) は [RP2350 データシート](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf)
 (14.9 電気的特性、Digital IO) による。

@@ -298,3 +298,5 @@ FPGA の水晶 (Tang Nano 9K の 27 MHz の発振器) との比べは 12-4。
 ## 出典
 
 自作。水晶のずれと時計の関係 (ppm と秒) は計算による。PWM の設定は 5-11。AD3 の Logic と Record は 0-4・02-analog-discovery/02-oscilloscope/11-record-mode.md。
+
+参考: [水晶振動子 (Wikipedia)](https://ja.wikipedia.org/wiki/水晶振動子)、[ppm (Wikipedia)](https://ja.wikipedia.org/wiki/ppm)

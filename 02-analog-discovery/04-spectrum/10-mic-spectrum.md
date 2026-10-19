@@ -191,3 +191,5 @@ markers: [150Hz, 300Hz, 450Hz, 600Hz]
 ## 出典
 
 自作。マイクアンプの段は回路の教科書 8-4 (マイクで音に反応) と同じ。
+
+参考: [Electret microphone (Wikipedia)](https://en.wikipedia.org/wiki/Electret_microphone)、[高速フーリエ変換 (Wikipedia)](https://ja.wikipedia.org/wiki/高速フーリエ変換)、[Analog Discovery 3 Reference Manual (Digilent、PDF)](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Reference-Manual_1123.pdf)

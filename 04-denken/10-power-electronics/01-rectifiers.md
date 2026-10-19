@@ -222,3 +222,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [整流器 (Wikipedia)](https://ja.wikipedia.org/wiki/整流器)、[Rectifier (Wikipedia)](https://en.wikipedia.org/wiki/Rectifier)

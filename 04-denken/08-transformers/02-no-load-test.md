@@ -184,3 +184,5 @@ mW 〜 W のオーダーになる。ここでは AD の電流制限に収める�
 ## 出典
 
 自作。
+
+参考: [変圧器 (Wikipedia)](https://ja.wikipedia.org/wiki/変圧器)、[Open-circuit test (Wikipedia)](https://en.wikipedia.org/wiki/Open-circuit_test)

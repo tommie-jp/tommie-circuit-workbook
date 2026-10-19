@@ -155,3 +155,5 @@ LM317 の消費は (9 V − 3.2 V − 1.25 V) × 0.347 A ≈ 1.6 W、7.5 V で�
 ## 出典
 
 自作。
+
+参考: [Texas Instruments LM317 データシート](https://www.ti.com/lit/ds/symlink/lm317.pdf)、[Current source (Wikipedia)](https://en.wikipedia.org/wiki/Current_source)

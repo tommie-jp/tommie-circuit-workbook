@@ -396,3 +396,5 @@ picoemu (`danish9661/pico-emulator` の `b83786f` に `sim/picoemu-m33.patch` �
 
 自作。繰り返しタイマの時刻の数え方は Raspberry Pi の Pico SDK の `pico_time` (`time.c` の `alarm_pool_irq_handler`、SDK 2.2.0)。
 `many.v` は 5-6、タイマ割り込みの組み方は 5-7。
+
+参考: [Raspberry Pi Pico SDK (GitHub)](https://github.com/raspberrypi/pico-sdk)

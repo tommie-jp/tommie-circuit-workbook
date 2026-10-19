@@ -212,3 +212,4 @@ V<sub>F</sub> が 0.35 V ほどの 0.35 A あたりで並ぶ (LTspice。電流�
 ## 出典
 
 自作。
+参考: [Vishay IRF9540 のデータシート](https://www.vishay.com/docs/91078/91078.pdf)、[Vishay 1N5817〜1N5819 のデータシート](https://www.vishay.com/docs/88525/1n5817.pdf)、[MOSFET (Wikipedia)](https://ja.wikipedia.org/wiki/MOSFET)

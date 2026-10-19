@@ -171,3 +171,5 @@ LED の点灯は目で見る。Q2 のコレクタの電圧 (21 列と GND の間
 ## 出典
 
 自作。
+
+参考: [タッチセンサー (Wikipedia)](https://ja.wikipedia.org/wiki/タッチセンサー)、[ダーリントン接続 (Wikipedia)](https://ja.wikipedia.org/wiki/ダーリントン接続)

@@ -176,3 +176,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [RC回路](https://ja.wikipedia.org/wiki/RC%E5%9B%9E%E8%B7%AF)、[位相](https://ja.wikipedia.org/wiki/%E4%BD%8D%E7%9B%B8)

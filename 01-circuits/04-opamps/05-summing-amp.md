@@ -181,3 +181,4 @@ R1・R2 を別の値にすると「CH1 を大きく、CH2 を小さく」のよ�
 ## 出典
 
 自作。
+参考: [Summing amplifier (Wikipedia)](https://en.wikipedia.org/wiki/Summing_amplifier)、[TI LM358 のデータシート](https://www.ti.com/lit/ds/symlink/lm358.pdf)、[Lessons In Electric Circuits Vol. III 第 8 章 (演算増幅器)](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_8.html)

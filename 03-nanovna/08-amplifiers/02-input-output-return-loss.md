@@ -272,3 +272,5 @@ S11 は 0.1 dB 以内で合う。入力の S11 の 30・100・300 MHz と出力�
 
 自作。2SC1815 の f<sub>T</sub> (最小値)・C<sub>ob</sub> はデータシートの値。ハイブリッド π の模型は
 8-4 と同じ (標準的な電子回路の教科書による)。
+
+参考: [Hybrid-pi model (Wikipedia)](https://en.wikipedia.org/wiki/Hybrid-pi_model)、[Return loss (Wikipedia)](https://en.wikipedia.org/wiki/Return_loss)

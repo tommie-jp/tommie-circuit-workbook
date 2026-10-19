@@ -155,3 +155,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [Wikipedia「セラミックコンデンサ」](https://ja.wikipedia.org/wiki/セラミックコンデンサ)、[Wikipedia "Equivalent series resistance"](https://en.wikipedia.org/wiki/Equivalent_series_resistance)

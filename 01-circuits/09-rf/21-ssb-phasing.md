@@ -415,5 +415,5 @@ measure: [vpp]
 
 自作。SA612A のピンの並び (PIN 1・2 = RF 入力、3 = GND、4・5 = 出力、6・7 = 発振、8 = VCC)、入力と出力の抵抗 1.5 kΩ、
 変換利得 (代表 17 dB)、外部 LO の 200 mVpp 以上は NXP の SA612A データシートと応用ノート AN1983 による。
-位相法 (phasing method) の SSB は R. V. L. Hartley の特許 (1920 年代) による古典の方式。
+位相法 (phasing method) の SSB は R. V. L. Hartley の特許 ([US 1,666,206](https://patents.google.com/patent/US1666206A/en)、1920 年代) による古典の方式。
 抑圧の dB は、網の伝達関数 (SA612 の入力 1.5 kΩ を負荷に含む) と、R・C を一様にずらした 2 万回の計算 (Python) による計算値。

@@ -120,3 +120,5 @@ vf = 2 × 1 × 98.93×10⁶ / (2.998×10⁸) ≈ 0.660
 ## 出典
 
 自作。
+
+参考: [Wikipedia「速度係数」](https://ja.wikipedia.org/wiki/速度係数)、[Wikipedia「同軸ケーブル」](https://ja.wikipedia.org/wiki/同軸ケーブル)

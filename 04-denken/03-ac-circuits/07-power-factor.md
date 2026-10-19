@@ -223,3 +223,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [力率](https://ja.wikipedia.org/wiki/%E5%8A%9B%E7%8E%87)、[皮相電力](https://ja.wikipedia.org/wiki/%E7%9A%AE%E7%9B%B8%E9%9B%BB%E5%8A%9B)

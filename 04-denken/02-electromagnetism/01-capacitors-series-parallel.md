@@ -181,3 +181,5 @@ C1 の電圧は Math の CH1 − CH2 で読む。
 ## 出典
 
 自作。
+
+参考: [コンデンサ](https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%83%87%E3%83%B3%E3%82%B5)、[静電容量](https://ja.wikipedia.org/wiki/%E9%9D%99%E9%9B%BB%E5%AE%B9%E9%87%8F)

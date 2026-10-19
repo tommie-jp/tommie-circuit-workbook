@@ -163,3 +163,5 @@ notes:
 ## 出典
 
 自作。L 型整合の設計式 (連立方程式) は標準的なインピーダンス整合の教科書による。
+
+参考: [インピーダンス整合 (Wikipedia)](https://ja.wikipedia.org/wiki/インピーダンス整合)、[Lessons In Electric Circuits Vol. II, Chapter 14 (Transmission Lines)](https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_14.html)

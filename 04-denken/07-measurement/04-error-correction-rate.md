@@ -176,3 +176,5 @@ style:
 ## 出典
 
 自作。
+
+参考: [誤差 (Wikipedia)](https://ja.wikipedia.org/wiki/誤差)

@@ -113,3 +113,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [分圧器 (Wikipedia)](https://ja.wikipedia.org/wiki/分圧器)、[Lessons in Electric Circuits Vol. I 第 5 章 Series-parallel combination circuits](https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_5.html)

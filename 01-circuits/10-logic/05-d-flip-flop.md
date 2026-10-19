@@ -244,3 +244,5 @@ T-FF の Q2 は、CLK2 を 2 回押してようやく 1 周する。CLK2 に一�
 ## 出典
 
 自作。
+
+参考: [CD4013B データシート](https://www.ti.com/lit/ds/symlink/cd4013b.pdf)、[フリップフロップ (Wikipedia)](https://ja.wikipedia.org/wiki/フリップフロップ)

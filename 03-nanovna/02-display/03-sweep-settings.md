@@ -81,3 +81,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [Network analyzer (electrical) (Wikipedia)](https://en.wikipedia.org/wiki/Network_analyzer_(electrical))、[NanoVNA V2 Official Site](https://nanorfe.com/nanovna-v2.html)

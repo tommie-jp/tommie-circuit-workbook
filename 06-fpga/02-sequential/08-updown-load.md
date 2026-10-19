@@ -226,3 +226,5 @@ cursors: [60us, 110us]
 ## 出典
 
 自作。優先の順は `if` / `else if` の並びで決める書き方で、Verilog の一般的な作法である。
+
+参考: [Counter (digital) (Wikipedia)](https://en.wikipedia.org/wiki/Counter_(digital))

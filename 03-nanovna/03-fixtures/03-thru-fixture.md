@@ -115,3 +115,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [S パラメータ (Wikipedia)](https://ja.wikipedia.org/wiki/Sパラメータ)、[特性インピーダンス (Wikipedia)](https://ja.wikipedia.org/wiki/特性インピーダンス)

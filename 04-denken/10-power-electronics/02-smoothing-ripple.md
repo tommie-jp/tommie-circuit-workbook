@@ -217,3 +217,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [リップル (Wikipedia)](https://ja.wikipedia.org/wiki/リップル)、[Ripple (electrical) (Wikipedia)](https://en.wikipedia.org/wiki/Ripple_%28electrical%29)

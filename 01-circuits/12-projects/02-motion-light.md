@@ -298,3 +298,5 @@ V<sub>GS(th)</sub> を 1 / 2.1 / 3 V に振った)、AND の H は VL とした�
 ## 出典
 
 自作。
+
+参考: [TI CD40106B データシート](https://www.ti.com/lit/ds/symlink/cd40106b.pdf)、[人感センサー (Wikipedia)](https://ja.wikipedia.org/wiki/人感センサー)、[光導電セル (Wikipedia)](https://ja.wikipedia.org/wiki/光導電セル)

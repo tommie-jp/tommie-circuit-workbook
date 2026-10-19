@@ -161,3 +161,5 @@ SRF ≈ 1 / (2π√(10 µH × 2 pF)) ≈ 35.6 MHz。この模型は損失が小�
 ## 出典
 
 自作。
+
+参考: [Wikipedia「インダクタ」](https://ja.wikipedia.org/wiki/インダクタ)、[Wikipedia「寄生容量」](https://ja.wikipedia.org/wiki/寄生容量)

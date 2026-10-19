@@ -138,3 +138,5 @@ Co を大きくする (水晶に並列にコンデンサを足す) と fp は fs
 ## 出典
 
 自作。
+
+参考: [Wikipedia「水晶振動子」](https://ja.wikipedia.org/wiki/水晶振動子)、[Abracon ABL シリーズ (HC-49 水晶) のデータシート](https://www.abracon.com/Resonators/ABL.pdf)

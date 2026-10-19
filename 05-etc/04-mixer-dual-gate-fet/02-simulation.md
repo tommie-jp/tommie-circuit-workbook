@@ -509,3 +509,5 @@ RF を動かして IF を 435〜475 kHz に振った。R7 を外すと、中心�
 ## 出典
 
 4-1 の出典に同じ。
+
+参考: [ミキサ (Wikipedia)](https://ja.wikipedia.org/wiki/ミキサ)、[Frequency mixer (Wikipedia)](https://en.wikipedia.org/wiki/Frequency_mixer)

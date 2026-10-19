@@ -232,3 +232,5 @@ R3 だけを 2 kΩ に替えると、RN の両端に 4.88 mV (計算値) が立�
 ## 出典
 
 自作。
+
+参考: [三相交流 (Wikipedia)](https://ja.wikipedia.org/wiki/三相交流)、[Neutral conductor (Wikipedia)](https://en.wikipedia.org/wiki/Neutral_conductor)

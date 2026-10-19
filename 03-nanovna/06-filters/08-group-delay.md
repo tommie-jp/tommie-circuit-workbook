@@ -204,4 +204,6 @@ markers:
 
 ## 出典
 
-自作。5 次バターワース・チェビシェフ (0.5 dB) の g 値は標準的なフィルタ設計表による。
+自作。5 次バターワース・チェビシェフ (0.5 dB) の g 値は[標準的なフィルタ設計表](https://en.wikipedia.org/wiki/Prototype_filter)による。
+
+参考: [Group delay and phase delay (Wikipedia)](https://en.wikipedia.org/wiki/Group_delay_and_phase_delay)

@@ -257,3 +257,5 @@ markers:
 ## 出典
 
 自作。安定係数 K (Rollett の安定係数) と Δ の式は標準的な RF 回路の教科書による。
+
+参考: [S パラメータ (Wikipedia)](https://ja.wikipedia.org/wiki/Sパラメータ)

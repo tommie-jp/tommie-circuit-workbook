@@ -188,3 +188,5 @@ buses:
 ## 出典
 
 自作。
+
+参考: [マルチプレクサ (Wikipedia)](https://ja.wikipedia.org/wiki/マルチプレクサ)、[Verilog (Wikipedia)](https://ja.wikipedia.org/wiki/Verilog)

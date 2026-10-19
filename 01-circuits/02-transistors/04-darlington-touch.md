@@ -199,3 +199,5 @@ CH2 のプローブ (1 MΩ) が R<sub>B</sub> に並ぶので、指 2 MΩ では
 ## 出典
 
 自作。
+
+参考: [ダーリントン接続 (Wikipedia)](https://ja.wikipedia.org/wiki/ダーリントン接続)、[バイポーラトランジスタ (Wikipedia)](https://ja.wikipedia.org/wiki/バイポーラトランジスタ)

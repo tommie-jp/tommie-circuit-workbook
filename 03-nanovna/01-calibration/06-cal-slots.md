@@ -83,3 +83,5 @@ Thru を測り直して確かめてから使う。
 ## 出典
 
 自作。
+
+参考: [NanoVNA V2 Official Site](https://nanorfe.com/nanovna-v2.html)、[LiteVNA](https://www.zeenko.tech/litevna)

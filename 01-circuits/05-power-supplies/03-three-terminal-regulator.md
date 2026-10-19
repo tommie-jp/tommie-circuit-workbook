@@ -259,3 +259,4 @@ U1 の損失は (10 V − 5 V) × 約 14 mA = 約 70 mW (約 14 mA は負荷の 
 ## 出典
 
 自作。
+参考: [TI LM340 (7805 系) のデータシート](https://www.ti.com/lit/ds/symlink/lm340.pdf)、[三端子レギュレータ (Wikipedia)](https://ja.wikipedia.org/wiki/三端子レギュレータ)、[リニアレギュレータ (Wikipedia)](https://ja.wikipedia.org/wiki/リニアレギュレータ)

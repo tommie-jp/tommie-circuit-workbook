@@ -169,3 +169,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [Wikipedia「抵抗器」](https://ja.wikipedia.org/wiki/抵抗器)、[Wikipedia「寄生容量」](https://ja.wikipedia.org/wiki/寄生容量)

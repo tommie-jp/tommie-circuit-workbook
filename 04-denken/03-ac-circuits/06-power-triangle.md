@@ -196,3 +196,5 @@ R1 に足して計算し直すとよい。
 ## 出典
 
 自作。
+
+参考: [皮相電力](https://ja.wikipedia.org/wiki/%E7%9A%AE%E7%9B%B8%E9%9B%BB%E5%8A%9B)、[有効電力](https://ja.wikipedia.org/wiki/%E6%9C%89%E5%8A%B9%E9%9B%BB%E5%8A%9B)

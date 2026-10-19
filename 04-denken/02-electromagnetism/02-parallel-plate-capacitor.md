@@ -104,3 +104,5 @@ SPICE の対象外 (平行板の式 C = ε0 εr A / d の計算だけの題)。�
 ## 出典
 
 自作。
+
+参考: [コンデンサ](https://ja.wikipedia.org/wiki/コンデンサ)、[静電容量](https://ja.wikipedia.org/wiki/%E9%9D%99%E9%9B%BB%E5%AE%B9%E9%87%8F)

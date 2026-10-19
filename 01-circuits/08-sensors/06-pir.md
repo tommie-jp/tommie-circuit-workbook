@@ -150,3 +150,5 @@ PIR モジュールの内部は SPICE の対象外で、OUT を 3.3 V の電圧�
 ## 出典
 
 自作。
+
+参考: [人感センサー (Wikipedia)](https://ja.wikipedia.org/wiki/人感センサー)、[Passive infrared sensor (Wikipedia)](https://en.wikipedia.org/wiki/Passive_infrared_sensor)

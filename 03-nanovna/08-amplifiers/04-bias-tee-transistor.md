@@ -292,3 +292,5 @@ S11 だけ 0.05〜0.1 dB 本文より小さく出る (本文の S11 は図4 の�
 
 自作。2SC1815 の f<sub>T</sub> (最小値)・C<sub>ob</sub>・r<sub>bb′</sub> はデータシートの値。
 ハイブリッド π の模型は標準的な電子回路の教科書による。
+
+参考: [Bias tee (Wikipedia)](https://en.wikipedia.org/wiki/Bias_tee)、[Hybrid-pi model (Wikipedia)](https://en.wikipedia.org/wiki/Hybrid-pi_model)

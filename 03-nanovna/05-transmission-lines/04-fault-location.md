@@ -110,3 +110,5 @@ TDR の山は LTspice の AC 解析では直接出ないので、算術で確か
 ## 出典
 
 自作。
+
+参考: [Wikipedia "Time-domain reflectometry"](https://en.wikipedia.org/wiki/Time-domain_reflectometry)、[Wikipedia「ネットワーク・アナライザ」](https://ja.wikipedia.org/wiki/ネットワーク・アナライザ)

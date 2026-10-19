@@ -270,6 +270,7 @@ LM358 は 1 極の簡易模型 (GBW 1 MHz・SR 0.3 V/µs、出力は V+ − 1.5 
 
 ## 出典
 
-自作。ウィーンブリッジ発振器は 1939 年に William Hewlett が豆電球で振幅を
+自作。ウィーンブリッジ発振器は 1939 年に [William Hewlett](https://en.wikipedia.org/wiki/William_Hewlett) が豆電球で振幅を
 安定化した形 (のちの HP 200A) で発表した。ここではそれをダイオードによる
 安定化に置き換えた。
+参考: [ウィーンブリッジ (Wikipedia)](https://ja.wikipedia.org/wiki/ウィーンブリッジ)、[Wien bridge oscillator (Wikipedia)](https://en.wikipedia.org/wiki/Wien_bridge_oscillator)、[TI LM358 のデータシート](https://www.ti.com/lit/ds/symlink/lm358.pdf)

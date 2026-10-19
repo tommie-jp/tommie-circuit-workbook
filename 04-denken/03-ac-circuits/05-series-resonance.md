@@ -181,3 +181,5 @@ V_L = V_C = I × X_L = 6.67 mA × 1000 Ω = 6.67 V (電源電圧の 1 V より�
 ## 出典
 
 自作。
+
+参考: [RLC回路](https://ja.wikipedia.org/wiki/RLC%E5%9B%9E%E8%B7%AF)、[共振](https://ja.wikipedia.org/wiki/%E5%85%B1%E6%8C%AF)

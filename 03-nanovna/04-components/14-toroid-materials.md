@@ -181,3 +181,5 @@ markers:
 
 自作。A<sub>L</sub> と初透磁率はトロイダルコアのメーカーの表 (フェライト #43・#61、
 鉄粉 #2、外径 0.375 インチ) の値。使いどころは同じ表の推奨周波数を目安にまとめた。
+
+参考: [Wikipedia "Ferrite core"](https://en.wikipedia.org/wiki/Ferrite_core)、[Wikipedia "Toroidal inductors and transformers"](https://en.wikipedia.org/wiki/Toroidal_inductors_and_transformers)

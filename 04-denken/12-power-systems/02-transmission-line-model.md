@@ -205,3 +205,5 @@ Vs の 1 V を超えてしまう — 両者の位相がずれているため、�
 ## 出典
 
 自作。
+
+参考: [送電 (Wikipedia)](https://ja.wikipedia.org/wiki/送電)、[電圧降下 (Wikipedia)](https://ja.wikipedia.org/wiki/電圧降下)

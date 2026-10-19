@@ -323,3 +323,5 @@ C<sub>t</sub> = 100 µF では 1.1 × 4.7 MΩ × 100 µF ≈ 517 秒 (約 8.6 �
 ## 出典
 
 自作。
+
+参考: [TI TLC555 データシート](https://www.ti.com/lit/ds/symlink/tlc555.pdf)、[Vishay 2N7000 データシート](https://www.vishay.com/docs/70226/70226.pdf)、[NE555 (Wikipedia)](https://ja.wikipedia.org/wiki/NE555)

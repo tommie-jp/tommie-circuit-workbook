@@ -103,3 +103,5 @@ SMA の締め方の手順の題で、計算する回路が無い。トルクの�
 ## 出典
 
 自作。SMA のトルクの目安は一般的な RF コネクタの資料 (8 in-lb ≈ 0.9 N·m) による。
+
+参考: [SMA connector (Wikipedia)](https://en.wikipedia.org/wiki/SMA_connector)、[特性インピーダンス (Wikipedia)](https://ja.wikipedia.org/wiki/特性インピーダンス)

@@ -102,3 +102,5 @@ TDR の山 (時間領域に直した反射) は LTspice の AC 解析では直�
 ## 出典
 
 自作。
+
+参考: [Wikipedia「同軸ケーブル」](https://ja.wikipedia.org/wiki/同軸ケーブル)、[Wikipedia「伝送線路」](https://ja.wikipedia.org/wiki/伝送線路)

@@ -162,3 +162,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [Maximum power transfer theorem (Wikipedia)](https://en.wikipedia.org/wiki/Maximum_power_transfer_theorem)、[インピーダンス整合](https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%83%94%E3%83%BC%E3%83%80%E3%83%B3%E3%82%B9%E6%95%B4%E5%90%88)

@@ -155,3 +155,5 @@ notes:
 ## 出典
 
 自作。3 次バターワースの g 値、双対変換の式は標準的なフィルタ設計表による。
+
+参考: [Wikipedia「ハイパスフィルタ」](https://ja.wikipedia.org/wiki/ハイパスフィルタ)、[Wikipedia「バターワースフィルタ」](https://ja.wikipedia.org/wiki/バターワースフィルタ)

@@ -158,3 +158,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [重ね合わせの原理](https://ja.wikipedia.org/wiki/%E9%87%8D%E3%81%AD%E5%90%88%E3%82%8F%E3%81%9B%E3%81%AE%E5%8E%9F%E7%90%86)

@@ -188,3 +188,5 @@ markers:
 ## 出典
 
 自作。
+
+参考: [スミスチャート (Wikipedia)](https://ja.wikipedia.org/wiki/スミスチャート)、[S パラメータ (Wikipedia)](https://ja.wikipedia.org/wiki/Sパラメータ)

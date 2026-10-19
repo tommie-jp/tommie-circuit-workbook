@@ -188,3 +188,4 @@ L = 350 nH × 10² = 35 µH、結合係数 0.98 とし、2SC1815 は電流増幅
 
 自作。Talking Electronics の Joule Thief 系の回路 (バイファイラトランス +
 Tr 1 石) を参考に構成した。
+参考: [Joule thief (Wikipedia)](https://en.wikipedia.org/wiki/Joule_thief)

@@ -163,3 +163,4 @@ DZ の両端は 4.84 V、DZ の電流は 5.9 mA で、上の計算 (4.9 V・5.8 
 ## 出典
 
 自作。
+参考: [ツェナーダイオード (Wikipedia)](https://ja.wikipedia.org/wiki/ツェナーダイオード)、[Linear regulator (Wikipedia)](https://en.wikipedia.org/wiki/Linear_regulator)、[Lessons In Electric Circuits Vol. III 第 3 章 (ダイオードと整流)](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_3.html)

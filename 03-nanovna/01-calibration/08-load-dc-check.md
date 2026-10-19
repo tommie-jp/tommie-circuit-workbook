@@ -133,3 +133,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [特性インピーダンス (Wikipedia)](https://ja.wikipedia.org/wiki/特性インピーダンス)、[Network analyzer (electrical) (Wikipedia)](https://en.wikipedia.org/wiki/Network_analyzer_(electrical))

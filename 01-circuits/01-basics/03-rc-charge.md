@@ -311,3 +311,5 @@ measure: [vmax, vmin, rise]
 ## 出典
 
 自作。
+
+参考: [時定数 (Wikipedia)](https://ja.wikipedia.org/wiki/時定数)、[RC回路 (Wikipedia)](https://ja.wikipedia.org/wiki/RC回路)、[Lessons in Electric Circuits Vol. I 第 16 章 RC and L/R time constants](https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_16.html)

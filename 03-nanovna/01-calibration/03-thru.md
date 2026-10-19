@@ -101,3 +101,5 @@ Thru (0 Ω のスルー) の理想値を言う題で、計算する回路が無�
 ## 出典
 
 自作。
+
+参考: [S パラメータ (Wikipedia)](https://ja.wikipedia.org/wiki/Sパラメータ)、[Network analyzer (electrical) (Wikipedia)](https://en.wikipedia.org/wiki/Network_analyzer_(electrical))

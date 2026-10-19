@@ -195,3 +195,5 @@ IN1・IN2 は、GPIO の代わりに線で 5 V か GND につないで試せる�
 ## 出典
 
 自作。
+
+参考: [MOSFET (Wikipedia)](https://ja.wikipedia.org/wiki/MOSFET)、[Power MOSFET (Wikipedia)](https://en.wikipedia.org/wiki/Power_MOSFET)

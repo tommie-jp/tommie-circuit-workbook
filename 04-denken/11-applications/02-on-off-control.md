@@ -170,3 +170,5 @@ Vsense の傾きは約 −53 mV/℃ なので、温度に直すと約 ±0.15 °C
 ## 出典
 
 自作。
+
+参考: [Bang-bang control (Wikipedia)](https://en.wikipedia.org/wiki/Bang%E2%80%93bang_control)、[ヒステリシス (Wikipedia)](https://ja.wikipedia.org/wiki/ヒステリシス)、[サーミスタ (Wikipedia)](https://ja.wikipedia.org/wiki/サーミスタ)

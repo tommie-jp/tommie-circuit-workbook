@@ -144,3 +144,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [Wikipedia「インダクタ」](https://ja.wikipedia.org/wiki/インダクタ)、[Wikipedia「インピーダンス」](https://ja.wikipedia.org/wiki/インピーダンス)

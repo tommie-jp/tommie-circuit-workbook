@@ -154,3 +154,5 @@ S12 = S21。裏返して測り直す必要がない)。
 ## 出典
 
 自作。π 型アッテネータの設計式は標準的な RF 回路の教科書による。
+
+参考: [Attenuator (electronics) (Wikipedia)](https://en.wikipedia.org/wiki/Attenuator_(electronics))

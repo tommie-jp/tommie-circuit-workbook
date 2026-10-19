@@ -357,3 +357,4 @@ IF の負荷を 20 kΩ にそろえた値 (フィルタの前の電力) では�
 
 - 4-2 の解析の値 (3SK291) と、3-1・3-2 の解析
 - 2SC1815・2SA1015 のモデルは目安から作った代用 (データシートの本文は直接読んでいない)
+- 参考: [ミキサ (Wikipedia)](https://ja.wikipedia.org/wiki/ミキサ)、[Frequency mixer (Wikipedia)](https://en.wikipedia.org/wiki/Frequency_mixer)

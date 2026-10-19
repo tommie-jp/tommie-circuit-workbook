@@ -241,4 +241,6 @@ markers:
 
 ## 出典
 
-自作。片側終端のバターワースの g 値は標準的なフィルタ設計表による。
+自作。片側終端のバターワースの g 値は[標準的なフィルタ設計表](https://en.wikipedia.org/wiki/Prototype_filter)による。
+
+参考: [Diplexer (Wikipedia)](https://en.wikipedia.org/wiki/Diplexer)

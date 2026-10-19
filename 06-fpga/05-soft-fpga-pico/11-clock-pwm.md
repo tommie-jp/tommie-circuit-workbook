@@ -394,5 +394,7 @@ picoemu (`danish9661/pico-emulator` の `b83786f` に `sim/picoemu-m33.patch` �
 
 ## 出典
 
-自作。PWM のスライス・割り込み・分周の仕様は Raspberry Pi の Pico SDK の `hardware_pwm` と RP2350 のデータシート (PWM の章)。
+自作。PWM のスライス・割り込み・分周の仕様は Raspberry Pi の Pico SDK の `hardware_pwm` と [RP2350 のデータシート](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf) (PWM の章)。
 システムクロックの既定 (150 MHz、12 MHz の水晶) は Pico SDK 2.2.0 の `hardware/platform_defs.h`。`blink.v` は 2-7、`counter.v` は 2-4。
+
+参考: [Raspberry Pi Pico SDK (GitHub)](https://github.com/raspberrypi/pico-sdk)、[パルス幅変調 (Wikipedia)](https://ja.wikipedia.org/wiki/パルス幅変調)

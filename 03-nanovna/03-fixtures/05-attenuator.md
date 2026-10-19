@@ -153,3 +153,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [アッテネータ (Wikipedia)](https://ja.wikipedia.org/wiki/アッテネータ)、[S パラメータ (Wikipedia)](https://ja.wikipedia.org/wiki/Sパラメータ)

@@ -219,3 +219,4 @@ W1 (1 kHz・振幅 0.3 V の正弦波) を入れてオシロで見る。オシ�
 ## 出典
 
 自作。
+参考: [Microchip MCP6002 のデータシート](https://ww1.microchip.com/downloads/en/DeviceDoc/MCP6001-1R-1U-2-4-1-MHz-Low-Power-Op-Amp-DS20001733L.pdf)、[TI LM358 のデータシート](https://www.ti.com/lit/ds/symlink/lm358.pdf)、[オペアンプ (Wikipedia)](https://ja.wikipedia.org/wiki/オペアンプ)

@@ -106,3 +106,5 @@ measure: [vmax, avg]
 ## 出典
 
 自作。
+
+参考: [WaveForms Oscilloscope (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-oscilloscope)、[積分回路 (Wikipedia)](https://ja.wikipedia.org/wiki/積分回路)

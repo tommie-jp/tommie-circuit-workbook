@@ -218,3 +218,5 @@ LED は 2 V (8 mA 付近) の模型、ブザーは R5 の先の 20 nF とした�
 ## 出典
 
 自作。
+
+参考: [Relaxation oscillator (Wikipedia)](https://en.wikipedia.org/wiki/Relaxation_oscillator)、[マルチバイブレータ (Wikipedia)](https://ja.wikipedia.org/wiki/マルチバイブレータ)

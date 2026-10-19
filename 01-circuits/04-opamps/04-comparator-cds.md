@@ -218,3 +218,4 @@ CdS の抵抗値は個体差が大きい (データシートの代表値から�
 ## 出典
 
 自作。
+参考: [コンパレータ (Wikipedia)](https://ja.wikipedia.org/wiki/コンパレータ)、[光導電セル (Wikipedia)](https://ja.wikipedia.org/wiki/光導電セル)、[TI LM358 のデータシート](https://www.ti.com/lit/ds/symlink/lm358.pdf)

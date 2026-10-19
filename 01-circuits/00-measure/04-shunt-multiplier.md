@@ -220,3 +220,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [分流器 (Wikipedia)](https://ja.wikipedia.org/wiki/分流器)、[倍率器 (Wikipedia)](https://ja.wikipedia.org/wiki/倍率器)、[Lessons in Electric Circuits Vol. I 第 8 章 DC metering circuits](https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_8.html)

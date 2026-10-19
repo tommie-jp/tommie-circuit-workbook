@@ -146,3 +146,5 @@ SUP (AD の Supplies 5 V) は安定化電源の 5 V に替え、電流制限は 
 ## 出典
 
 自作。
+
+参考: [逆二乗の法則 (Wikipedia)](https://ja.wikipedia.org/wiki/逆二乗の法則)、[照度 (Wikipedia)](https://ja.wikipedia.org/wiki/照度)

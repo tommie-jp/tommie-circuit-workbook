@@ -206,4 +206,4 @@ markers:
 
 ## 出典
 
-自作。G5V-2 のピンの並びと接点の構成はオムロンのデータシートによる。
+自作。G5V-2 のピンの並びと接点の構成は[オムロンのデータシート G5V-2](https://omronfs.omron.com/en_US/ecb/products/pdf/en-g5v_2.pdf)による。

@@ -108,3 +108,5 @@ measure: [vpp, period]
 ## 出典
 
 自作。
+
+参考: [WaveForms Oscilloscope (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-oscilloscope)、[Analog Discovery 3 Reference Manual](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Reference-Manual_1123.pdf)、[CSV (Wikipedia)](https://ja.wikipedia.org/wiki/CSV)

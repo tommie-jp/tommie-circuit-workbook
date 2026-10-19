@@ -244,5 +244,5 @@ ADC は 12 bit・基準 3.3 V の理想として、値 = V × 4096 / 3.3 で計�
 
 ## 出典
 
-自作。ADC の仕様 (12 bit・500kS/s) は RP2350 データシート (12.4 ADC)、
-`ADC_VREF` の説明は Raspberry Pi Pico 2 データシートによる。
+自作。ADC の仕様 (12 bit・500kS/s) は [RP2350 データシート](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf) (12.4 ADC)、
+`ADC_VREF` の説明は [Raspberry Pi Pico 2 データシート](https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf)による。

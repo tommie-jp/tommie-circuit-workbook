@@ -670,4 +670,6 @@ Python 3.12・Verilator 5.042・iverilog 12・Yosys 0.70+16 で `sim/10-cpu8i-ru
 ## 出典
 
 自作。命令の切れ目で受け付け、戻り番地を退避してベクタへ飛び、専用の命令で戻る形は、多くの CPU に共通の割り込みの作り方である。
-`EI` の次の 1 命令の間は受け付けない決め方は、Z80 の `EI` の働き (Zilog の Z80 CPU User Manual) にならった。
+`EI` の次の 1 命令の間は受け付けない決め方は、Z80 の `EI` の働き ([Zilog の Z80 CPU User Manual](https://www.zilog.com/docs/z80/um0080.pdf)) にならった。
+
+参考: [割り込み (Wikipedia)](https://ja.wikipedia.org/wiki/割り込み)

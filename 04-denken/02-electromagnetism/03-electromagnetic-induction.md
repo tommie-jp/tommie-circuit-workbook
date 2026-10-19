@@ -150,3 +150,5 @@ SPICE の対象外 (磁石の運動は回路の素子にならず、波形の形
 ## 出典
 
 自作。
+
+参考: [電磁誘導](https://ja.wikipedia.org/wiki/%E9%9B%BB%E7%A3%81%E8%AA%98%E5%B0%8E)、[ファラデーの電磁誘導の法則](https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%83%A9%E3%83%87%E3%83%BC%E3%81%AE%E9%9B%BB%E7%A3%81%E8%AA%98%E5%B0%8E%E3%81%AE%E6%B3%95%E5%89%87)

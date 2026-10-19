@@ -128,3 +128,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [ダイオード (Wikipedia)](https://ja.wikipedia.org/wiki/ダイオード)、[発光ダイオード (Wikipedia)](https://ja.wikipedia.org/wiki/発光ダイオード)、[Lessons in Electric Circuits Vol. III 第 3 章 Diodes and rectifiers](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_3.html)

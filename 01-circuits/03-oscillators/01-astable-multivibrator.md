@@ -236,3 +236,5 @@ Q1・Q2 は `09-rf/sim/agc.cir` と同じ 2SC1815 の模型 (IS・VAF・IKF・RB
 ## 出典
 
 自作。
+
+参考: [マルチバイブレータ (Wikipedia)](https://ja.wikipedia.org/wiki/マルチバイブレータ)、[発振回路 (Wikipedia)](https://ja.wikipedia.org/wiki/発振回路)

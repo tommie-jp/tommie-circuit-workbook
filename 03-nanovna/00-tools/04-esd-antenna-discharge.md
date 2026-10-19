@@ -177,3 +177,5 @@ notes:
 ## 出典
 
 自作。人体モデルの 100 pF・1.5 kΩ は静電気放電の試験で広く使われる値。
+
+参考: [静電気放電 (Wikipedia)](https://ja.wikipedia.org/wiki/静電気放電)、[Human-body model (Wikipedia)](https://en.wikipedia.org/wiki/Human-body_model)

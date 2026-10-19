@@ -253,5 +253,5 @@ C/C++ のプログラムは、この環境で `PICO_BOARD=pico2` の `.uf2` ま�
 ## 出典
 
 自作。Pico 2 の仕様 (RP2350A、4MB フラッシュ、最大 150 MHz、SRAM 520kB) は
-Raspberry Pi Pico 2 データシート、GPIO の電流 (最大 12 mA・全ピン合計 100 mA・既定 4 mA)
-は RP2350 データシート (14.9 電気的特性) による。
+[Raspberry Pi Pico 2 データシート](https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf)、GPIO の電流 (最大 12 mA・全ピン合計 100 mA・既定 4 mA)
+は [RP2350 データシート](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf) (14.9 電気的特性) による。

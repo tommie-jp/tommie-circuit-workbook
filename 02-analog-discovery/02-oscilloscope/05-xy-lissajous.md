@@ -118,3 +118,5 @@ xy: ch1 ch2
 ## 出典
 
 自作。
+
+参考: [リサジュー図形 (Wikipedia)](https://ja.wikipedia.org/wiki/リサジュー図形)、[WaveForms Oscilloscope (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-oscilloscope)、[WaveForms Wavegen (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-waveform-generator)

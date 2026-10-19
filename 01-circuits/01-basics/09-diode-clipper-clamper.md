@@ -234,3 +234,5 @@ measure: [vmax, vmin, vpp, freq]
 ## 出典
 
 自作。
+
+参考: [クリッパー (Wikipedia)](https://ja.wikipedia.org/wiki/クリッパー)、[Clamper (electronics) (Wikipedia)](https://en.wikipedia.org/wiki/Clamper_(electronics))、[1N4148 データシート (Vishay, 81857)](https://www.vishay.com/docs/81857/1n4148.pdf)

@@ -195,3 +195,5 @@ H4 の床 (70 / 60 / 40 dB) と、平均 4 倍で 6 dB という数字 (10 log�
 
 - NanoVNA-H4 のダイナミックレンジ (70 / 60 / 40 dB) は販売元の製品ページの仕様の値
 - V2 の値は公表の版で違うので、この題で測る
+
+参考: [ダイナミックレンジ (Wikipedia)](https://ja.wikipedia.org/wiki/ダイナミックレンジ)、[ネットワークアナライザ (Wikipedia)](https://ja.wikipedia.org/wiki/ネットワークアナライザ)

@@ -236,5 +236,5 @@ markers:
 
 ## 出典
 
-- OMRON, G5V-2 データシート: ピンの配置、コイルの定格 (5 V 品 100 mA・50 Ω、高感度品 30 mA)
+- [OMRON, G5V-2 データシート](https://omronfs.omron.com/en_US/ecb/products/pdf/en-g5v_2.pdf): ピンの配置、コイルの定格 (5 V 品 100 mA・50 Ω、高感度品 30 mA)
 - 接点の容量・線のインダクタンス・PIN ダイオードの容量は仮定の値。実測で置き換える

@@ -288,3 +288,5 @@ Icarus Verilog 12.0 と Verilator 5.042 の両方で、本文の `dec_counter`�
 
 自作。`assert`・`$error`・`$fatal` は IEEE 1800-2017 の 16 章 (アサーション) と 20 章 (システムタスク) による。
 Verilator の `--assert` と、Icarus Verilog が並行アサーションに対応していないことは、それぞれのマニュアルと、手元での実行結果による。
+
+参考: [Verilator のマニュアル](https://www.verilator.org/guide/latest/)、[SystemVerilog (Wikipedia)](https://ja.wikipedia.org/wiki/SystemVerilog)

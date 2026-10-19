@@ -653,3 +653,5 @@ Python 3.12・Verilator 5.042・iverilog 12・yosys 0.33・Yosys 0.70+16 で `si
 
 自作。アキュムレータ 1 つに、メモリか即値を相手にする命令を並べる形は、小さな CPU の定番の作り方である。
 引き算の桁上げを「借りが無い」で 1 にする決め方は、11-5 と同じ。
+
+参考: [Accumulator (computing) (Wikipedia)](https://en.wikipedia.org/wiki/Accumulator_(computing))、[中央処理装置 (Wikipedia)](https://ja.wikipedia.org/wiki/中央処理装置)

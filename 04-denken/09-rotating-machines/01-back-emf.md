@@ -180,3 +180,5 @@ V を上げるほどモータの回る音・見た目の速さもはっきり増
 ## 出典
 
 自作。
+
+参考: [直流モーター (Wikipedia)](https://ja.wikipedia.org/wiki/直流モーター)、[Back EMF (Wikipedia)](https://en.wikipedia.org/wiki/Back_EMF)

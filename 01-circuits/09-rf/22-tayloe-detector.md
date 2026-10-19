@@ -415,8 +415,8 @@ trigger: CLK rising at 0s
 
 ## 出典
 
-自作。Tayloe 検波器は Dan Tayloe の米国特許 6,230,000 (2001 年) の形を、AD3 で動く周波数に置き直した。
+自作。Tayloe 検波器は Dan Tayloe の米国特許 [6,230,000](https://patents.google.com/patent/US6230000B1/en) (2001 年) の形を、AD3 で動く周波数に置き直した。
 74HC4052 のピンの並び (PIN 13 = AN、PIN 12・14・15・11 = A0〜A3、PIN 10・9 = S0・S1、PIN 6 = E) とオン抵抗、
 74HC74 の真理値表 (CLK の立ち上がりで D を Q へ、CLR・PRE は L で効く)、入力の H の電圧 (5 V で 3.15 V 以上) は
-各社の 74HC4052・74HC74 のデータシートによる。振幅と低域の角は、4 個のスイッチと 1 kΩ・10 nF の模型の LTspice と、
+各社の [74HC4052](https://www.ti.com/lit/ds/symlink/cd74hc4052.pdf)・[74HC74](https://www.ti.com/lit/ds/symlink/sn74hc74.pdf) のデータシートによる。振幅と低域の角は、4 個のスイッチと 1 kΩ・10 nF の模型の LTspice と、
 1/4 周期の平均 (sin(π/4) ÷ (π/4)) からの計算値。

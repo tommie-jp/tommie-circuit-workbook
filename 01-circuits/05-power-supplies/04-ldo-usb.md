@@ -248,3 +248,4 @@ AMS1117-3.3 は IC の内部で出力を保つ部品で、SPICE で確かめら�
 ## 出典
 
 自作。
+参考: [TI LM1117 のデータシート](https://www.ti.com/lit/ds/symlink/lm1117.pdf)、[AMS1117 のデータシート](http://www.advanced-monolithic.com/pdf/ds1117.pdf)、[Low-dropout regulator (Wikipedia)](https://en.wikipedia.org/wiki/Low-dropout_regulator)

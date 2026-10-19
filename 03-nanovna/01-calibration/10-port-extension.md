@@ -172,3 +172,5 @@ VF = 2L / (c × 2τ) の式も、0.1 m ÷ (0.66 × c) × 2 = 1.011 ns と合う 
 ## 出典
 
 自作。
+
+参考: [Electrical length (Wikipedia)](https://en.wikipedia.org/wiki/Electrical_length)、[特性インピーダンス (Wikipedia)](https://ja.wikipedia.org/wiki/特性インピーダンス)

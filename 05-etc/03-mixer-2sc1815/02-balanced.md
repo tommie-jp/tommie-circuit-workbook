@@ -517,3 +517,4 @@ R7 ありは +0.34 / +0.33 dB (ミラーの出力で RF は IF の −35.9 / −
 - [2-7 カレントミラー](../../01-circuits/02-transistors/07-current-mirror.md) — ミラーの働き (NPN の例)
 - 2SC1815・2SA1015 の電気的特性は一般に知られた目安 (データシートの本文は直接読んでいない)
 - 回路は 3-1 の 2SC1815 の 1 石ミキサーと、一般に知られた差動対ミキサー (ギルバートセルの半分) とカレントミラーの能動負荷を組み合わせて描き起こした
+- 参考: [Frequency mixer (Wikipedia)](https://en.wikipedia.org/wiki/Frequency_mixer)、[Gilbert cell (Wikipedia)](https://en.wikipedia.org/wiki/Gilbert_cell)、[カレントミラー (Wikipedia)](https://ja.wikipedia.org/wiki/カレントミラー)

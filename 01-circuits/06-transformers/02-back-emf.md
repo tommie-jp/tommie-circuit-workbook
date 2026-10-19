@@ -147,3 +147,4 @@ LTspice (赤 LED は 10 mA で約 1.9 V のダイオードのモデル、L1 は 
 ## 出典
 
 自作。
+参考: [Counter-electromotive force (Wikipedia)](https://en.wikipedia.org/wiki/Counter-electromotive_force)、[Flyback diode (Wikipedia)](https://en.wikipedia.org/wiki/Flyback_diode)

@@ -254,3 +254,5 @@ trigger: CLK rising at 0s
 ## 出典
 
 自作。
+
+参考: [TI CD74HC283 データシート](https://www.ti.com/lit/ds/symlink/cd74hc283.pdf)、[加算器 (Wikipedia)](https://ja.wikipedia.org/wiki/加算器)

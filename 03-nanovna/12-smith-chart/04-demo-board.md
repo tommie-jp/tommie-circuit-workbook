@@ -433,3 +433,5 @@ markers:
 ## 出典
 
 自作。
+
+参考: [スミスチャート](https://ja.wikipedia.org/wiki/%E3%82%B9%E3%83%9F%E3%82%B9%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88)、[Smith chart (Wikipedia)](https://en.wikipedia.org/wiki/Smith_chart)

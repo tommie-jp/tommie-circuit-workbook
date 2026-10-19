@@ -163,3 +163,5 @@ x = 0.5 のまま RL を 1 kΩ に替えると、出力は 5 V × (5k∥1k) / (5
 ## 出典
 
 自作。
+
+参考: [ポテンショメータ (Wikipedia)](https://ja.wikipedia.org/wiki/ポテンショメータ)、[分圧器 (Wikipedia)](https://ja.wikipedia.org/wiki/分圧器)

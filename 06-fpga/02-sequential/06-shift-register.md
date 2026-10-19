@@ -181,3 +181,5 @@ cursors: [40us, 60us]
 ## 出典
 
 自作。連結 `{ }` の書き方は IEEE 1364-2005 (Verilog) の連結演算子の節による。
+
+参考: [シフトレジスタ (Wikipedia)](https://ja.wikipedia.org/wiki/シフトレジスタ)

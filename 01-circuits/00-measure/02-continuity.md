@@ -131,3 +131,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [ブレッドボード (Wikipedia)](https://ja.wikipedia.org/wiki/ブレッドボード)、[Continuity test (Wikipedia)](https://en.wikipedia.org/wiki/Continuity_test)

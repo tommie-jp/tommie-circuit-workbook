@@ -146,3 +146,5 @@ E = Ke × N の直接の証拠になる。9-1 では電源電圧を手掛かり�
 ## 出典
 
 自作。
+
+参考: [直流モーター (Wikipedia)](https://ja.wikipedia.org/wiki/直流モーター)、[発電機 (Wikipedia)](https://ja.wikipedia.org/wiki/発電機)

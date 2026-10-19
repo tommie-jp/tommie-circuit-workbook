@@ -189,3 +189,5 @@ L が 4 倍で反射も 4 倍 (+12 dB) も合う (−26.54 dB と −14.65 dB �
 ## 出典
 
 自作。
+
+参考: [scikit-rf Documentation: Calibration](https://scikit-rf.readthedocs.io/en/latest/tutorials/Calibration.html)、[Network analyzer (electrical) (Wikipedia)](https://en.wikipedia.org/wiki/Network_analyzer_(electrical))

@@ -166,3 +166,4 @@ AD3 の Scope (または テスターの直流電圧レンジ) で、GND を基�
 ## 出典
 
 自作。
+参考: [差動増幅回路 (Wikipedia)](https://ja.wikipedia.org/wiki/差動増幅回路)、[Differential amplifier (Wikipedia)](https://en.wikipedia.org/wiki/Differential_amplifier)、[TI LM358 のデータシート](https://www.ti.com/lit/ds/symlink/lm358.pdf)

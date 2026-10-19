@@ -172,3 +172,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [テブナンの定理](https://ja.wikipedia.org/wiki/%E3%83%86%E3%83%96%E3%83%8A%E3%83%B3%E3%81%AE%E5%AE%9A%E7%90%86)

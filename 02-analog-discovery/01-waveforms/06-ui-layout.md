@@ -102,3 +102,5 @@ measure: [vpp, freq]
 ## 出典
 
 自作。
+
+参考: [Analog Discovery 3 Reference Manual](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Reference-Manual_1123.pdf)、[WaveForms Oscilloscope (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-oscilloscope)、[WaveForms Wavegen (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-waveform-generator)

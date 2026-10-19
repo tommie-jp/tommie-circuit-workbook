@@ -179,3 +179,5 @@ markers:
 
 自作。市販のテストボードの中身は製品ごとに違うので、特定の製品の値ではなく、
 マイクロストリップの線と perfboard の線の違いを模型で比べた。
+
+参考: [特性インピーダンス (Wikipedia)](https://ja.wikipedia.org/wiki/特性インピーダンス)、[インピーダンス整合 (Wikipedia)](https://ja.wikipedia.org/wiki/インピーダンス整合)

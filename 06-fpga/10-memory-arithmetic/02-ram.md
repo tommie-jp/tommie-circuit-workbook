@@ -266,3 +266,5 @@ nextpnr-himbaechel 0.11.1-63 には、512 語の合成結果をピンを仮に�
 
 自作。`<=` で書く前の値が読める振る舞いは、Verilog の言語としての決まり (IEEE 1364-2005 の 9 章、ノンブロッキング代入) による。
 部品名 (RAM16SDP4・SPX9) は yosys の `synth_gowin` が出した名前で、実行して確かめた (上の表)。
+
+参考: [ランダムアクセスメモリ (Wikipedia)](https://ja.wikipedia.org/wiki/ランダムアクセスメモリ)、[Yosys のドキュメント](https://yosyshq.readthedocs.io/projects/yosys/en/latest/)

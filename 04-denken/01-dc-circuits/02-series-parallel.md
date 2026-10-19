@@ -202,3 +202,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [直列回路と並列回路](https://ja.wikipedia.org/wiki/%E7%9B%B4%E5%88%97%E5%9B%9E%E8%B7%AF%E3%81%A8%E4%B8%A6%E5%88%97%E5%9B%9E%E8%B7%AF)

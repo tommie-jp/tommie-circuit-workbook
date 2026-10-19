@@ -243,3 +243,5 @@ L1 の Q とコンデンサの誤差で f<sub>0</sub> は数 % ずれる。ま�
 ## 出典
 
 自作。
+
+参考: [周波数変調 (Wikipedia)](https://ja.wikipedia.org/wiki/周波数変調)、[検波 (Wikipedia)](https://ja.wikipedia.org/wiki/検波)

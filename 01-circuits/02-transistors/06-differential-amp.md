@@ -209,3 +209,5 @@ D2 は消えきらない (0.2 V 下げた x = 0.44 で 5.7 mA・1.1 mA)。本文
 ## 出典
 
 自作。
+
+参考: [差動増幅回路 (Wikipedia)](https://ja.wikipedia.org/wiki/差動増幅回路)、[増幅回路 (Wikipedia)](https://ja.wikipedia.org/wiki/増幅回路)

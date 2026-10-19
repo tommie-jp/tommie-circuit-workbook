@@ -170,3 +170,5 @@ markers:
 
 自作。標準器の模型 (遅れ + 容量・インダクタンス) は一般的な VNA の校正キットの定義の考え方による。
 数値は仮定。
+
+参考: [ネットワークアナライザ (Wikipedia)](https://ja.wikipedia.org/wiki/ネットワークアナライザ)、[Network analyzer (electrical) (Wikipedia)](https://en.wikipedia.org/wiki/Vector_network_analyzer)

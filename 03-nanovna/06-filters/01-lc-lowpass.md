@@ -224,3 +224,5 @@ h 行の GND バス (4-7 の 7 nH/cm)。
 ## 出典
 
 自作。7 次バターワースの g 値は標準的なフィルタ設計表による。
+
+参考: [Wikipedia「ローパスフィルタ」](https://ja.wikipedia.org/wiki/ローパスフィルタ)、[Wikipedia「バターワースフィルタ」](https://ja.wikipedia.org/wiki/バターワースフィルタ)

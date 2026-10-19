@@ -174,4 +174,6 @@ markers:
 
 ## 出典
 
-自作。FT37-43 の A<sub>L</sub> はフェライトコアのメーカーの表 (#43 材、外径 0.375 インチ) の値。
+自作。FT37-43 の A<sub>L</sub> は[フェライトコアのメーカー (Fair-Rite) の 43 材のデータシート](https://www.fair-rite.com/43-material-data-sheet/)の表 (#43 材、外径 0.375 インチ) の値。
+
+参考: [Wikipedia "Toroidal inductors and transformers"](https://en.wikipedia.org/wiki/Toroidal_inductors_and_transformers)

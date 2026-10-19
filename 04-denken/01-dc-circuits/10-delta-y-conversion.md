@@ -144,3 +144,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [Y-Δ変換](https://ja.wikipedia.org/wiki/Y-%CE%94%E5%A4%89%E6%8F%9B)

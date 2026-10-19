@@ -310,3 +310,5 @@ AD-B は測るだけ (Wavegen も Supplies も使わない)。
 ## 出典
 
 自作。
+
+参考: [三相交流](https://ja.wikipedia.org/wiki/%E4%B8%89%E7%9B%B8%E4%BA%A4%E6%B5%81)、[Y-Δ変換](https://ja.wikipedia.org/wiki/Y-%CE%94%E5%A4%89%E6%8F%9B)

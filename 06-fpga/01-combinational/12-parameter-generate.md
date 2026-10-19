@@ -290,3 +290,5 @@ buses:
 ## 出典
 
 自作。
+
+参考: [Verilog (Wikipedia)](https://ja.wikipedia.org/wiki/Verilog)

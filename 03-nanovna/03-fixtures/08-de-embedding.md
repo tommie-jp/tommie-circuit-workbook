@@ -267,4 +267,4 @@ CH1 は 50 Ω で終端した。
 ## 出典
 
 自作。De-embedding の手順は IEEE Std 370-2020 (電気的な治具の S パラメータの規格)、
-計算は scikit-rf (`skrf.calibration.IEEEP370_SE_NZC_2xThru`) の実装による。
+計算は [scikit-rf](https://scikit-rf.readthedocs.io/en/latest/) (`skrf.calibration.IEEEP370_SE_NZC_2xThru`) の実装による。

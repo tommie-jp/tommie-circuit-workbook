@@ -379,3 +379,5 @@ markers:
 ## 出典
 
 自作。λ/4 の線による変換 (Zin = Z0² / ZL) と、LC のはしごによる擬似線路 (定 K 形の π 形の段) は、伝送線路とフィルタの教科書に共通する内容による。
+
+参考: [スミスチャート (Wikipedia)](https://ja.wikipedia.org/wiki/スミスチャート)、[定在波比 (Wikipedia)](https://ja.wikipedia.org/wiki/定在波比)、[Lessons In Electric Circuits Vol. II, Chapter 14 (Transmission Lines)](https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_14.html)

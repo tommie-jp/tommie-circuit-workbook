@@ -189,3 +189,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [SMA connector (Wikipedia)](https://en.wikipedia.org/wiki/SMA_connector)、[定在波比 (Wikipedia)](https://ja.wikipedia.org/wiki/定在波比)

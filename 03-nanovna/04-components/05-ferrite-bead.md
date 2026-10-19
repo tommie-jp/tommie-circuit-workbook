@@ -182,3 +182,5 @@ markers:
 ## 出典
 
 自作。
+
+参考: [Wikipedia "Ferrite bead"](https://en.wikipedia.org/wiki/Ferrite_bead)、[Wikipedia「フェライト」](https://ja.wikipedia.org/wiki/フェライト)

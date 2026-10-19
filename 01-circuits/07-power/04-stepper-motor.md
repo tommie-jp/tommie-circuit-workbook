@@ -205,3 +205,5 @@ ULN2003 はトランジスタ 7 回路を内蔵した IC で、ステッピン�
 ## 出典
 
 自作。
+
+参考: [Texas Instruments ULN2003A データシート](https://www.ti.com/lit/ds/symlink/uln2003a.pdf)、[ステッピングモーター (Wikipedia)](https://ja.wikipedia.org/wiki/ステッピングモーター)

@@ -187,3 +187,4 @@ OFF の瞬間のコレクタの山は 5.84 V (D1 に約 90 mA が流れ、順方
 ## 出典
 
 自作。
+参考: [Flyback diode (Wikipedia)](https://en.wikipedia.org/wiki/Flyback_diode)、[リレー (Wikipedia)](https://ja.wikipedia.org/wiki/リレー)、[Vishay 1N4148 のデータシート](https://www.vishay.com/docs/81857/1n4148.pdf)

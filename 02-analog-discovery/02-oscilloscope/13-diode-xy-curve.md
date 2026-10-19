@@ -131,3 +131,5 @@ I<sub>peak</sub> ≈ (3 V − 0.7 V) / (330 Ω + 22 Ω) ≈ **6.5 mA（計算値
 ## 出典
 
 自作。
+
+参考: [WaveForms Oscilloscope (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-oscilloscope)、[ダイオード (Wikipedia)](https://ja.wikipedia.org/wiki/ダイオード)

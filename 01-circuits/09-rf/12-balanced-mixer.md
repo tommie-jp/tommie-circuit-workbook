@@ -256,3 +256,5 @@ SA612 の変換利得 17 dB と入出力の 1.5 kΩ はデータシートの代�
 電源電圧 4.5〜8 V、入力と出力の抵抗 1.5 kΩ、変換利得 (代表 17 dB)、外部 LO の 200 mVpp 以上は
 NXP の SA612A データシートと応用ノート AN1983 による。ダイオードリングの変換損失 (理想 3.9 dB) は
 スイッチの関数のフーリエ級数からの計算値。
+
+参考: [Frequency mixer (Wikipedia)](https://en.wikipedia.org/wiki/Frequency_mixer)、[ミキサ (Wikipedia)](https://ja.wikipedia.org/wiki/ミキサ)

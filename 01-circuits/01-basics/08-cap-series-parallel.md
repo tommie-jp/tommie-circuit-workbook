@@ -255,3 +255,5 @@ CH2 が 3.16 V になる時間は並列 0.200 秒・直列 0.050 秒。Rise (10�
 ## 出典
 
 自作。
+
+参考: [コンデンサ (Wikipedia)](https://ja.wikipedia.org/wiki/コンデンサ)、[時定数 (Wikipedia)](https://ja.wikipedia.org/wiki/時定数)、[Lessons in Electric Circuits Vol. I 第 13 章 Capacitors](https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_13.html)

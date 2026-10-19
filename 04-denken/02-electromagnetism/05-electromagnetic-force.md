@@ -94,3 +94,5 @@ SPICE の対象外 (力の題)。F = B I L を算術で確かめた (I = 0.273 A
 ## 出典
 
 自作。
+
+参考: [ローレンツ力](https://ja.wikipedia.org/wiki/%E3%83%AD%E3%83%BC%E3%83%AC%E3%83%B3%E3%83%84%E5%8A%9B)

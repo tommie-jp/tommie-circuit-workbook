@@ -150,3 +150,5 @@ markers:
 ## 出典
 
 自作。
+
+参考: [Wikipedia "Ladder line"](https://en.wikipedia.org/wiki/Ladder_line)、[Wikipedia「フィーダー線」](https://ja.wikipedia.org/wiki/フィーダー線)

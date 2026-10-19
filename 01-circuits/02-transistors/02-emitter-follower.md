@@ -356,3 +356,5 @@ R<sub>L</sub> を外した VNA の配置で、クリップのリード線と浮�
 ## 出典
 
 自作。
+
+参考: [エミッタフォロワ (Wikipedia)](https://ja.wikipedia.org/wiki/エミッタフォロワ)、[Lessons in Electric Circuits Vol. III 第 4 章 Bipolar junction transistors](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_4.html)

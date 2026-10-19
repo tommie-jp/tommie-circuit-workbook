@@ -104,3 +104,5 @@ SPICE の対象外 (磁界の幾何の題)。B = µ0 I / 2πr と tan θ = B / B
 ## 出典
 
 自作。
+
+参考: [アンペールの法則](https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%83%9A%E3%83%BC%E3%83%AB%E3%81%AE%E6%B3%95%E5%89%87)、[ビオ・サバールの法則](https://ja.wikipedia.org/wiki/%E3%83%93%E3%82%AA%E3%83%BB%E3%82%B5%E3%83%90%E3%83%BC%E3%83%AB%E3%81%AE%E6%B3%95%E5%89%87)

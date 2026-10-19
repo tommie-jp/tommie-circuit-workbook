@@ -137,3 +137,5 @@ ESR の組み合わせでは、H4 で掃引できる範囲はほぼ最初から 
 ## 出典
 
 自作。
+
+参考: [Wikipedia「電解コンデンサ」](https://ja.wikipedia.org/wiki/電解コンデンサ)、[Wikipedia "Equivalent series resistance"](https://en.wikipedia.org/wiki/Equivalent_series_resistance)

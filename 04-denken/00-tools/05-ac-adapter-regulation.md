@@ -176,3 +176,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [ACアダプタ](https://ja.wikipedia.org/wiki/AC%E3%82%A2%E3%83%80%E3%83%97%E3%82%BF)、[内部抵抗](https://ja.wikipedia.org/wiki/%E5%86%85%E9%83%A8%E6%8A%B5%E6%8A%97)、[Voltage regulation (Wikipedia)](https://en.wikipedia.org/wiki/Voltage_regulation)

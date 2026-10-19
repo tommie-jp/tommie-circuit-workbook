@@ -198,3 +198,5 @@ NE555 は動作の模型 (3-2 の `sim/02-555-astable.cir` と同じ。比較器
 ## 出典
 
 自作。
+
+参考: [555 (Wikipedia)](https://ja.wikipedia.org/wiki/555)、[NE555 データシート (Texas Instruments, SLFS022K)](https://www.ti.com/lit/ds/symlink/ne555.pdf)

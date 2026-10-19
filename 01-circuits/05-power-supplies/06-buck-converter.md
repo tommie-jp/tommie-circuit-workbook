@@ -187,3 +187,4 @@ MC34063 単体を自分で組む場合は、発振周波数を決める外付け
 ## 出典
 
 自作。
+参考: [TI MC34063A のデータシート](https://www.ti.com/lit/ds/symlink/mc34063a.pdf)、[DC-DCコンバータ (Wikipedia)](https://ja.wikipedia.org/wiki/DC-DCコンバータ)、[Buck converter (Wikipedia)](https://en.wikipedia.org/wiki/Buck_converter)

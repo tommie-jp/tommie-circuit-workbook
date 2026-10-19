@@ -120,3 +120,5 @@ a ≈ 0.405 mm、誘電体外径から求めた外部導体内半径 b ≈ 1.43 
 ## 出典
 
 自作。減衰の見積りは表皮効果の式 (導体損失) による計算。
+
+参考: [Wikipedia「表皮効果」](https://ja.wikipedia.org/wiki/表皮効果)、[Wikipedia「同軸ケーブル」](https://ja.wikipedia.org/wiki/同軸ケーブル)

@@ -105,3 +105,5 @@ SOLT の 9 手順の題で、計算する回路が無い。図2 の校正後の 
 ## 出典
 
 自作。SOLT の手順は NanoVNA V2 系ユーザーマニュアルの校正の節を参考にした。
+
+参考: [NanoVNA V2 Official Site](https://nanorfe.com/nanovna-v2.html)、[Network analyzer (electrical) (Wikipedia)](https://en.wikipedia.org/wiki/Network_analyzer_(electrical))

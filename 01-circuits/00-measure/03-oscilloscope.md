@@ -211,3 +211,5 @@ measure: [vpp, vmax, vmin, freq]
 ## 出典
 
 自作。
+
+参考: [オシロスコープ (Wikipedia)](https://ja.wikipedia.org/wiki/オシロスコープ)、[NE555 データシート (Texas Instruments, SLFS022K)](https://www.ti.com/lit/ds/symlink/ne555.pdf)

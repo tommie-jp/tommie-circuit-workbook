@@ -412,3 +412,5 @@ Verilator 5.042 と Yosys 0.33 で、本文の `sync2.v` `top_sync2.v` `tb_sync2
 
 自作。2 段の同期回路 (2-FF シンクロナイザ) は、非同期の 1 ビットの信号をクロックに合わせる定番の作り方である。
 シミュレーションは Verilator 5.042 で実行した。AD3 の Logic の標本化の上限 (125 MS/s) は logic-fence の早見表の `ad3` の欄による。
+
+参考: [Clock domain crossing (Wikipedia)](https://en.wikipedia.org/wiki/Clock_domain_crossing)、[Metastability (electronics) (Wikipedia)](https://en.wikipedia.org/wiki/Metastability_(electronics))、[Verilator のマニュアル](https://www.verilator.org/guide/latest/)

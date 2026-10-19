@@ -170,5 +170,6 @@ Dled は (3.9 V − 2.0 V) ÷ 390 Ω ≈ 4.9 mA。
 
 ## 出典
 
-自作。TP4056 (Nanjing Top Power ASIC Corp.) と保護 IC DW01A + FS8205A を
+自作。[TP4056](https://dlnmh9ip6v2uc.cloudfront.net/datasheets/Prototyping/TP4056.pdf) (Nanjing Top Power ASIC Corp.) と保護 IC DW01A + FS8205A を
 組み合わせた汎用モジュール基板の一般的な構成を参考にした。
+参考: [リチウムイオン電池 (Wikipedia)](https://ja.wikipedia.org/wiki/リチウムイオン電池)

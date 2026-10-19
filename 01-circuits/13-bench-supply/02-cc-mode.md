@@ -180,3 +180,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [定電流源 (Wikipedia)](https://ja.wikipedia.org/wiki/定電流源)、[安定化電源 (Wikipedia)](https://ja.wikipedia.org/wiki/安定化電源)、[WaveForms Oscilloscope (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-oscilloscope)

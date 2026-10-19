@@ -104,3 +104,5 @@ Range をいつもどおり (±5 V など) にしたままだと、9 mV は画�
 ## 出典
 
 自作。
+
+参考: [WaveForms Oscilloscope (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-oscilloscope)、[差動増幅回路 (Wikipedia)](https://ja.wikipedia.org/wiki/差動増幅回路)

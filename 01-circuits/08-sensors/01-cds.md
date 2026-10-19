@@ -145,3 +145,5 @@ Q1 が ON になると、中点は V<sub>BE</sub> (約 0.7 V) あたりに抑え
 ## 出典
 
 自作。
+
+参考: [光導電セル (Wikipedia)](https://ja.wikipedia.org/wiki/光導電セル)、[Photoresistor (Wikipedia)](https://en.wikipedia.org/wiki/Photoresistor)

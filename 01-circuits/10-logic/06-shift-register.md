@@ -265,3 +265,5 @@ QH' (PIN 9、次の IC へ渡す直列出力) にも出ている。ここを次�
 ## 出典
 
 自作。
+
+参考: [Texas Instruments SN74HC595 データシート](https://www.ti.com/lit/ds/symlink/sn74hc595.pdf)、[シフトレジスタ (Wikipedia)](https://ja.wikipedia.org/wiki/シフトレジスタ)

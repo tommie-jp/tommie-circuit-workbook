@@ -204,3 +204,5 @@ notes:
 ## 出典
 
 自作。水晶の等価回路は 4-6 の代表値による。
+
+参考: [水晶振動子 (Wikipedia)](https://ja.wikipedia.org/wiki/水晶振動子)、[Crystal filter (Wikipedia)](https://en.wikipedia.org/wiki/Crystal_filter)

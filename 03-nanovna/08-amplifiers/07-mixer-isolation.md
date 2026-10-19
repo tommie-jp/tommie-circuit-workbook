@@ -233,5 +233,5 @@ markers:
 
 ## 出典
 
-- Mini-Circuits, SBL-1+ データシート (Rev. B): ピンの割り当て、外形図、アイソレーションの代表値、最大定格
-- DBM の働きは標準的な RF 回路の教科書による
+- [Mini-Circuits, SBL-1+ データシート (Rev. B)](https://www.minicircuits.com/pdfs/SBL-1+.pdf): ピンの割り当て、外形図、アイソレーションの代表値、最大定格
+- [DBM](https://en.wikipedia.org/wiki/Frequency_mixer) の働きは標準的な RF 回路の教科書による

@@ -181,3 +181,5 @@ R1 の両端の電圧は 2 ch − 1 ch = 5.0 V − 2.0 V = 3.0 V。
 ## 出典
 
 自作。
+
+参考: [安定化電源 (Wikipedia)](https://ja.wikipedia.org/wiki/安定化電源)、[WaveForms Oscilloscope (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-oscilloscope)

@@ -497,7 +497,7 @@ LTspice は `reltol = 1e-6` で走らせた (既定の 1e-3 だと、深い打�
 
 ## 出典
 
-自作。位相法のイメージ除去 (I と Q を 90° ずらして足す) は R. V. L. Hartley の米国特許 US 1,666,206 (1928 年) の考え方による。
+自作。位相法のイメージ除去 (I と Q を 90° ずらして足す) は R. V. L. Hartley の米国特許 [US 1,666,206](https://patents.google.com/patent/US1666206A/en) (1928 年) の考え方による。
 SA612A のピンの並び、変換利得 (代表 17 dB)、外部 LO の 200 mVpp 以上、出力の 1.5 kΩ は NXP の SA612A データシート、
-MCP6002 のピンの並びとレール to レールの入出力、GBW 1 MHz は Microchip の MCP6001/2/4 データシートによる。
+MCP6002 のピンの並びとレール to レールの入出力、GBW 1 MHz は Microchip の [MCP6001/2/4 データシート](https://ww1.microchip.com/downloads/en/DeviceDoc/MCP6001-1R-1U-2-4-1-MHz-Low-Power-Op-Amp-DS20001733L.pdf)による。
 抑圧の dB は網の R・C をばらつかせた計算と、掛け算を式で置いた LTspice の模型による計算値。

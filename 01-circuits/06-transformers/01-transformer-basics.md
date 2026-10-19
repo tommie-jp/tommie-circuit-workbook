@@ -163,3 +163,4 @@ CH1 の読み値は 17.0 Vpp・6.00 V、CH2 は 34.0 Vpp・12.0 V で、下の�
 ## 出典
 
 自作。
+参考: [変圧器 (Wikipedia)](https://ja.wikipedia.org/wiki/変圧器)、[Lessons In Electric Circuits Vol. II 第 9 章 (変圧器)](https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_9.html)

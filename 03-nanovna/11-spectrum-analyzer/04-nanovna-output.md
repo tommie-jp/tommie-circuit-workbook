@@ -146,3 +146,5 @@ CH0 の実際の出力 (内部のフィルタや高調波方式) は計器の性
 ## 出典
 
 自作。パッドの値と考え方は 0-3 と同じ。方形波の高調波の式は Analog Discovery の教科書の 4-2。
+
+参考: [スペクトラムアナライザ (Wikipedia)](https://ja.wikipedia.org/wiki/スペクトラムアナライザ)、[高調波 (Wikipedia)](https://ja.wikipedia.org/wiki/高調波)

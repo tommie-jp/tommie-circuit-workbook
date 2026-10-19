@@ -163,3 +163,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [Wikipedia "Quarter-wave impedance transformer"](https://en.wikipedia.org/wiki/Quarter-wave_impedance_transformer)、[Wikipedia「インピーダンス整合」](https://ja.wikipedia.org/wiki/インピーダンス整合)

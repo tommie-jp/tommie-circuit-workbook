@@ -114,3 +114,5 @@ LM35 は IC (出力 10 mV/°C) で、内部の模型を持たないので SPICE 
 ## 出典
 
 自作。
+
+参考: [TI LM35 データシート](https://www.ti.com/lit/ds/symlink/lm35.pdf)、[WaveForms Logger (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-data-logger)

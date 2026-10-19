@@ -151,4 +151,4 @@ markers:
 
 ## 出典
 
-自作。ケーブルの電気長の温度係数の測定例: X. Ma ほか, "Phase-temperature stability measurement of various RF coaxial cables", IBIC2024, THP46 (doi:10.18429/JACoW-IBIC2024-THP46)。
+自作。ケーブルの電気長の温度係数の測定例: X. Ma ほか, "Phase-temperature stability measurement of various RF coaxial cables", IBIC2024, THP46 ([doi:10.18429/JACoW-IBIC2024-THP46](https://doi.org/10.18429/JACoW-IBIC2024-THP46))。

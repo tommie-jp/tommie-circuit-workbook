@@ -310,6 +310,6 @@ MCP9808 のレジスタの値 (0x0190 → 25.0 °C、0x1F60 → −10.0 °C) と
 
 ## 出典
 
-自作。MCP9808 のレジスタ読み出しは Microchip のデータシート
+自作。MCP9808 のレジスタ読み出しは [Microchip の MCP9808 データシート](https://ww1.microchip.com/downloads/en/DeviceDoc/25095A.pdf)
 (Ambient Temperature Register, 05h) の手順による。I2C0 の GP0/GP1 と
-`i2c_write_blocking` / `i2c_read_blocking` は Pico SDK (`hardware_i2c`) による。
+`i2c_write_blocking` / `i2c_read_blocking` は [Pico SDK](https://github.com/raspberrypi/pico-sdk) (`hardware_i2c`) による。

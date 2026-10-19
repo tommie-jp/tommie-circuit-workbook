@@ -208,3 +208,5 @@ CH2 の位相で読む。
 ## 出典
 
 自作。
+
+参考: [変圧器 (Wikipedia)](https://ja.wikipedia.org/wiki/変圧器)、[Short-circuit test (Wikipedia)](https://en.wikipedia.org/wiki/Short-circuit_test)

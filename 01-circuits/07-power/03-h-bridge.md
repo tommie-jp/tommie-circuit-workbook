@@ -168,3 +168,4 @@ H ブリッジはスイッチの切り替えで向きを変えるだけの回路
 ## 出典
 
 自作。
+参考: [H-bridge (Wikipedia)](https://en.wikipedia.org/wiki/H-bridge)、[直流モーター (Wikipedia)](https://ja.wikipedia.org/wiki/直流モーター)

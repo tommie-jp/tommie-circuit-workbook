@@ -177,3 +177,5 @@ SAW フィルタ (315 MHz・433.92 MHz などの受信機の前段用) も同じ
 自作。SFELF10M7FA00-B0 の値 (中心 10.700 MHz ± 30 kHz、3 dB 帯域幅 280 ± 50 kHz、
 挿入損失 4.0 ± 2.0 dB、入出力 330 Ω) とピンの並びは、村田製作所のカタログ
 「CERAFIL (Filters/Traps/Discriminators) for Audio/Visual」(Cat.No.P50E) による。
+
+参考: [Wikipedia「圧電」](https://ja.wikipedia.org/wiki/圧電)

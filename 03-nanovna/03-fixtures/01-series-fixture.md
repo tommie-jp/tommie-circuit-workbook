@@ -138,3 +138,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [S パラメータ (Wikipedia)](https://ja.wikipedia.org/wiki/Sパラメータ)、[Network analyzer (electrical) (Wikipedia)](https://en.wikipedia.org/wiki/Network_analyzer_(electrical))

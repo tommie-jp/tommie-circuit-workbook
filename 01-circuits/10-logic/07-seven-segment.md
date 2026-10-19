@@ -312,3 +312,5 @@ CD4511 のデコード (BCD → 7 セグメント) は SPICE の対象外で、�
 ## 出典
 
 自作。
+
+参考: [TI CD4511B データシート](https://www.ti.com/lit/ds/symlink/cd4511b.pdf)、[7セグメントディスプレイ (Wikipedia)](https://ja.wikipedia.org/wiki/7セグメントディスプレイ)、[デコーダ (Wikipedia)](https://ja.wikipedia.org/wiki/デコーダ)

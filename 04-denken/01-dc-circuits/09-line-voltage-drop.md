@@ -156,3 +156,5 @@ notes:
 ## 出典
 
 自作。銅の抵抗率 (1.72 × 10⁻⁸ Ω·m、20 °C) は JIS C 3001 の標準軟銅の値。
+
+参考: [電圧降下](https://ja.wikipedia.org/wiki/%E9%9B%BB%E5%9C%A7%E9%99%8D%E4%B8%8B)、[電気抵抗率](https://ja.wikipedia.org/wiki/%E9%9B%BB%E6%B0%97%E6%8A%B5%E6%8A%97%E7%8E%87)

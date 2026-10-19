@@ -193,3 +193,5 @@ LED は V<sub>F</sub> が約 1.5 V (1 µA)・約 2.0 V (8.5 mA) になる仮定�
 ## 出典
 
 自作。
+
+参考: [JFET (Wikipedia)](https://ja.wikipedia.org/wiki/JFET)、[定電流源 (Wikipedia)](https://ja.wikipedia.org/wiki/定電流源)、[Lessons in Electric Circuits Vol. III 第 5 章 Junction field-effect transistors](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_5.html)

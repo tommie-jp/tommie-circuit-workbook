@@ -134,3 +134,5 @@ markers:
 ## 出典
 
 自作。
+
+参考: [Wikipedia「特性インピーダンス」](https://ja.wikipedia.org/wiki/特性インピーダンス)、[Wikipedia「電圧定在波比」](https://ja.wikipedia.org/wiki/電圧定在波比)、[Lessons in Electric Circuits Vol. II 第 14 章 伝送線路](https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_14.html)

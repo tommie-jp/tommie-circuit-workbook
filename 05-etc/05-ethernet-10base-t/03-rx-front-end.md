@@ -301,7 +301,8 @@ RXD が全く動かないときは、対が逆 (ルータの Auto-MDIX) の可�
 
 ## 出典
 
-- 自作。74HC14 の数値 (しきい値・伝搬遅延) は Nexperia / TI の 74HC14 データシートの 2.0 V・4.5 V の代表値から
+- 自作。74HC14 の数値 (しきい値・伝搬遅延) は Nexperia のデータシートと [TI の 74HC14 データシート (SN74HC14, SCLS085)](https://www.ti.com/lit/ds/symlink/sn74hc14.pdf) の 2.0 V・4.5 V の代表値から
   3.3 V を内挿した (データシートに 3.3 V の値は無い。**実物で確かめる**)
 - IEEE 802.3-2022 Clause 14 — 14.3.1.3.1 (受信の振幅とスケルチ)、14.4 (MDI のピン配置)
 - 5-1・5-2 の本文
+- 参考: [10BASE-T (Wikipedia)](https://ja.wikipedia.org/wiki/10BASE-T)、[Link pulse (Wikipedia)](https://en.wikipedia.org/wiki/Link_pulse)、[Schmitt trigger (Wikipedia)](https://en.wikipedia.org/wiki/Schmitt_trigger)

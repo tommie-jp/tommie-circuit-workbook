@@ -278,5 +278,5 @@ markers:
 
 ## 出典
 
-- Mini-Circuits, ERA-3SM+ データシート (Rev. R): 利得・反射損失・Vd・推奨電流・最大定格・推奨回路
-- マイクロストリップの幅は Hammerstad の近似式で計算した
+- [Mini-Circuits, ERA-3SM+ データシート (Rev. R)](https://www.minicircuits.com/pdfs/ERA-3SM+.pdf): 利得・反射損失・Vd・推奨電流・最大定格・推奨回路
+- [マイクロストリップ](https://en.wikipedia.org/wiki/Microstrip)の幅は Hammerstad の近似式で計算した

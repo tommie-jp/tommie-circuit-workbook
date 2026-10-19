@@ -172,3 +172,4 @@ LTspice (1N4001 の標準的なモデル、V1 = 12.7 V・60 Hz) では、整流�
 ## 出典
 
 自作。
+参考: [整流回路 (Wikipedia)](https://ja.wikipedia.org/wiki/整流回路)、[Smoothing capacitor (Wikipedia)](https://en.wikipedia.org/wiki/Smoothing_capacitor)、[Vishay 1N4001 のデータシート](https://www.vishay.com/docs/88503/1n4001.pdf)、[Lessons In Electric Circuits Vol. III 第 3 章 (ダイオードと整流)](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_3.html)

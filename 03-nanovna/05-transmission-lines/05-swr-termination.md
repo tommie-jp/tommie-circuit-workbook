@@ -183,3 +183,5 @@ markers:
 ## 出典
 
 自作。
+
+参考: [Wikipedia「電圧定在波比」](https://ja.wikipedia.org/wiki/電圧定在波比)、[Wikipedia「インピーダンス整合」](https://ja.wikipedia.org/wiki/インピーダンス整合)、[Lessons in Electric Circuits Vol. II 第 14 章 伝送線路](https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_14.html)

@@ -192,3 +192,5 @@ CH1 の Mean (オフセット) を引いてから電流に直す。
 ## 出典
 
 自作。
+
+参考: [電流計 (Wikipedia)](https://ja.wikipedia.org/wiki/電流計)、[電圧計 (Wikipedia)](https://ja.wikipedia.org/wiki/電圧計)

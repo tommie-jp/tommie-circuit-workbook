@@ -173,3 +173,5 @@ CH2 は Rt の電圧ではなく電源の電圧 (5.00 V、計算値) を読む�
 ## 出典
 
 自作。
+
+参考: [分流器 (Wikipedia)](https://ja.wikipedia.org/wiki/分流器)、[電流計 (Wikipedia)](https://ja.wikipedia.org/wiki/電流計)

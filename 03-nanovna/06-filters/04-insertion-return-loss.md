@@ -205,3 +205,5 @@ markers:
 ## 出典
 
 自作。
+
+参考: [S パラメータ (Wikipedia)](https://ja.wikipedia.org/wiki/Sパラメータ)、[Insertion loss (Wikipedia)](https://en.wikipedia.org/wiki/Insertion_loss)、[Return loss (Wikipedia)](https://en.wikipedia.org/wiki/Return_loss)

@@ -103,3 +103,5 @@ Short (Z = 0) は Γ = −1 = 1∠180° (左端)、Load (Z = 50 Ω) は Γ = 0 (
 ## 出典
 
 自作。
+
+参考: [スミスチャート (Wikipedia)](https://ja.wikipedia.org/wiki/スミスチャート)、[Network analyzer (electrical) (Wikipedia)](https://en.wikipedia.org/wiki/Network_analyzer_(electrical))

@@ -173,3 +173,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [Wikipedia「バイパスコンデンサ」](https://ja.wikipedia.org/wiki/バイパスコンデンサ)、[Wikipedia "Decoupling capacitor"](https://en.wikipedia.org/wiki/Decoupling_capacitor)

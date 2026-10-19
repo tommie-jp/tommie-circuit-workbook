@@ -139,3 +139,5 @@ RB を 100 kΩ に替えると I<sub>B</sub> は 10 倍 (約 43 µA) になる�
 ## 出典
 
 自作。
+
+参考: [hFE (Wikipedia)](https://ja.wikipedia.org/wiki/hFE)、[バイポーラトランジスタ (Wikipedia)](https://ja.wikipedia.org/wiki/バイポーラトランジスタ)、[Lessons in Electric Circuits Vol. III 第 4 章 Bipolar junction transistors](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_4.html)

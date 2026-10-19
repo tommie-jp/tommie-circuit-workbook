@@ -143,3 +143,5 @@ Supplies の +5 V (電流は約 5 mA で、各レール約 50 mA の範囲に収
 ## 出典
 
 自作。
+
+参考: [ホイートストンブリッジ (Wikipedia)](https://ja.wikipedia.org/wiki/ホイートストンブリッジ)、[Lessons in Electric Circuits Vol. I 第 8 章 DC metering circuits](https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_8.html)

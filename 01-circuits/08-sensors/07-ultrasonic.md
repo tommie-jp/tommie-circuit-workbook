@@ -165,3 +165,5 @@ HC-SR04 の内部 (超音波の送受信) は SPICE の対象外で、ECHO の�
 ## 出典
 
 自作。
+
+参考: [HC-SR04 データシート](https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf)、[Ultrasonic transducer (Wikipedia)](https://en.wikipedia.org/wiki/Ultrasonic_transducer)

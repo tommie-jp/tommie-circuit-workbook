@@ -138,3 +138,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [テスター (Wikipedia)](https://ja.wikipedia.org/wiki/テスター)、[オームの法則 (Wikipedia)](https://ja.wikipedia.org/wiki/オームの法則)、[Lessons in Electric Circuits Vol. I 第 8 章 DC metering circuits](https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_8.html)

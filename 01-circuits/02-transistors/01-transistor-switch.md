@@ -173,3 +173,5 @@ hFE を 100 に下げたモデルなら RB = 100 kΩ では I<sub>C</sub> が 4 
 ## 出典
 
 自作。
+
+参考: [バイポーラトランジスタ (Wikipedia)](https://ja.wikipedia.org/wiki/バイポーラトランジスタ)、[Lessons in Electric Circuits Vol. III 第 4 章 Bipolar junction transistors](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_4.html)

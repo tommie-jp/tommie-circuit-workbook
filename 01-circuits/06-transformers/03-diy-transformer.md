@@ -159,3 +159,4 @@ LTspice (1 次 78.75 µH・2 次 709 µH は A<sub>L</sub> = 350 nH/回² から
 ## 出典
 
 自作。
+参考: [変圧器 (Wikipedia)](https://ja.wikipedia.org/wiki/変圧器)、[Lessons In Electric Circuits Vol. II 第 9 章 (変圧器)](https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_9.html)

@@ -181,3 +181,5 @@ SPICE の対象外 (極性は巻き方向の向きの話で、等価回路では
 ## 出典
 
 自作。
+
+参考: [変圧器 (Wikipedia)](https://ja.wikipedia.org/wiki/変圧器)、[Dot convention (Wikipedia)](https://en.wikipedia.org/wiki/Dot_convention)

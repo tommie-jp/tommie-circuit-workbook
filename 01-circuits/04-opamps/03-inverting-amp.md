@@ -176,3 +176,4 @@ measure: [vpp, freq, phase]
 ## 出典
 
 自作。
+参考: [TI LM358 のデータシート](https://www.ti.com/lit/ds/symlink/lm358.pdf)、[Inverting amplifier (Wikipedia)](https://en.wikipedia.org/wiki/Inverting_amplifier)、[Lessons In Electric Circuits Vol. III 第 8 章 (演算増幅器)](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_8.html)

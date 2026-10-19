@@ -173,3 +173,4 @@ notes:
 ## 出典
 
 自作。
+参考: [TI LM358 のデータシート](https://www.ti.com/lit/ds/symlink/lm358.pdf)、[Voltage follower (Wikipedia)](https://en.wikipedia.org/wiki/Voltage_follower)、[オペアンプ (Wikipedia)](https://ja.wikipedia.org/wiki/オペアンプ)

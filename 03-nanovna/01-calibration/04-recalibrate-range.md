@@ -75,3 +75,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [Network analyzer (electrical) (Wikipedia)](https://en.wikipedia.org/wiki/Network_analyzer_(electrical))、[scikit-rf Documentation: Calibration](https://scikit-rf.readthedocs.io/en/latest/tutorials/Calibration.html)

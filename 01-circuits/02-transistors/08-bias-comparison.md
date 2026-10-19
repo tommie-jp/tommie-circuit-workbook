@@ -223,3 +223,5 @@ Q1 は 2SC1815 の代用モデル (`09-rf/sim/agc.cir` と同じ IS・VAF・IKF 
 ## 出典
 
 自作。
+
+参考: [バイアス (Wikipedia)](https://ja.wikipedia.org/wiki/バイアス)、[Bias (electronics) (Wikipedia)](https://en.wikipedia.org/wiki/Bias_(electronics))

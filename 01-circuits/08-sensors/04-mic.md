@@ -301,3 +301,5 @@ W1 の振幅を下げると、出力もそれに比例して小さくなる。
 ## 出典
 
 自作。
+
+参考: [マイクロホン (Wikipedia)](https://ja.wikipedia.org/wiki/マイクロホン)、[Electret microphone (Wikipedia)](https://en.wikipedia.org/wiki/Electret_microphone)

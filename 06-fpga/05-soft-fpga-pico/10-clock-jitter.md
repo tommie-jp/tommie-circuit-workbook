@@ -414,3 +414,5 @@ picoemu (`danish9661/pico-emulator` の `b83786f` に `sim/picoemu-m33.patch` �
 
 自作。繰り返しタイマの時刻の数え方は Raspberry Pi の Pico SDK の `pico_time` (5-9)。Pico 2 の既定のシステムクロックは同じ SDK の
 `hardware/platform_defs.h` (`SYS_CLK_HZ` 150 MHz)。AD3 の Logic の使い方は 0-4。
+
+参考: [Raspberry Pi Pico SDK (GitHub)](https://github.com/raspberrypi/pico-sdk)、[ジッタ (Wikipedia)](https://ja.wikipedia.org/wiki/ジッタ)、[Analog Discovery 3 リファレンスマニュアル](https://assets.testequity.com/te1/Documents/pdf/digilent/Digilent_Analog-Discovery-3-Reference-Manual_1123.pdf)

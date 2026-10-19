@@ -201,3 +201,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [Electrical length (Wikipedia)](https://en.wikipedia.org/wiki/Electrical_length)、[scikit-rf Documentation](https://scikit-rf.readthedocs.io/en/latest/)

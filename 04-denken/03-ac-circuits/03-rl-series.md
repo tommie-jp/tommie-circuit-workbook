@@ -174,3 +174,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [リアクタンス](https://ja.wikipedia.org/wiki/リアクタンス)、[インダクタンス](https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%83%80%E3%82%AF%E3%82%BF%E3%83%B3%E3%82%B9)

@@ -183,3 +183,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [接地 (Wikipedia)](https://ja.wikipedia.org/wiki/接地)、[漏電 (Wikipedia)](https://ja.wikipedia.org/wiki/漏電)

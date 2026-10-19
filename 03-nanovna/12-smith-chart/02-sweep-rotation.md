@@ -247,3 +247,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [スミスチャート (Wikipedia)](https://ja.wikipedia.org/wiki/スミスチャート)

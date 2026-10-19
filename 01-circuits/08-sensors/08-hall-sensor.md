@@ -125,3 +125,5 @@ A3144 の内部 (ホール素子とヒステリシス) は SPICE の対象外で
 ## 出典
 
 自作。
+
+参考: [ホール効果 (Wikipedia)](https://ja.wikipedia.org/wiki/ホール効果)、[Hall-effect sensor (Wikipedia)](https://en.wikipedia.org/wiki/Hall-effect_sensor)

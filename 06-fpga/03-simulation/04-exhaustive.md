@@ -255,3 +255,5 @@ Verilator 5.042 で、1-6・1-7 の 5 つのモジュールと本文の `tb_exha
 ## 出典
 
 自作。
+
+参考: [Icarus Verilog のドキュメント](https://steveicarus.github.io/iverilog/)、[Verilator のマニュアル](https://www.verilator.org/guide/latest/)

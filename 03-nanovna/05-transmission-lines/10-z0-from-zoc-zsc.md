@@ -143,3 +143,5 @@ markers:
 ## 出典
 
 自作。
+
+参考: [Wikipedia「特性インピーダンス」](https://ja.wikipedia.org/wiki/特性インピーダンス)、[Wikipedia「伝送線路」](https://ja.wikipedia.org/wiki/伝送線路)

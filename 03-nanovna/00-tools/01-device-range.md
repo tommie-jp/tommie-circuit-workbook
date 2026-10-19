@@ -111,3 +111,5 @@ notes:
 ## 出典
 
 自作。機種の周波数範囲は各社の製品ページ・ユーザーガイドに載っている値。
+
+参考: [NanoVNA V2 Official Site](https://nanorfe.com/nanovna-v2.html)、[LiteVNA](https://www.zeenko.tech/litevna)

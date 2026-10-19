@@ -180,3 +180,5 @@ measure: [vmax, freq]
 ## 出典
 
 自作。
+
+参考: [変圧器 (Wikipedia)](https://ja.wikipedia.org/wiki/変圧器)、[Voltage regulation (Wikipedia)](https://en.wikipedia.org/wiki/Voltage_regulation)

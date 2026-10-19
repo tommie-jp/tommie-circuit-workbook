@@ -156,3 +156,5 @@ TDR の山の位置 (0.989 m・2.020 m・3 m のこだま) は AC 解析では�
 ## 出典
 
 自作。
+
+参考: [Wikipedia "SMA connector"](https://en.wikipedia.org/wiki/SMA_connector)、[Wikipedia "Reflection coefficient"](https://en.wikipedia.org/wiki/Reflection_coefficient)

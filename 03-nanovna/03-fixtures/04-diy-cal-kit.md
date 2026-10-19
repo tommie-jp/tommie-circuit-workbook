@@ -191,3 +191,5 @@ markers:
 ## 出典
 
 自作。
+
+参考: [scikit-rf Documentation: Calibration](https://scikit-rf.readthedocs.io/en/latest/tutorials/Calibration.html)、[Network analyzer (electrical) (Wikipedia)](https://en.wikipedia.org/wiki/Network_analyzer_(electrical))

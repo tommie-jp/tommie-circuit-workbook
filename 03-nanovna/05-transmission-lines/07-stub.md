@@ -174,3 +174,5 @@ Z が 0 になる所で信号は地へ逃げ、S21 が落ちる。
 ## 出典
 
 自作。
+
+参考: [Wikipedia「伝送線路」](https://ja.wikipedia.org/wiki/伝送線路)、[Wikipedia "Stub (electronics)"](https://en.wikipedia.org/wiki/Stub_%28electronics%29)

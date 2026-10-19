@@ -304,3 +304,5 @@ buses:
 ## 出典
 
 自作。
+
+参考: [Digital comparator (Wikipedia)](https://en.wikipedia.org/wiki/Digital_comparator)、[Verilog (Wikipedia)](https://ja.wikipedia.org/wiki/Verilog)

@@ -332,3 +332,5 @@ Q の値 5.9・8.3 や C1 の電圧 17.6 V は式の計算で、シミュレー�
 ## 出典
 
 自作。
+
+参考: [LC回路 (Wikipedia)](https://ja.wikipedia.org/wiki/LC回路)、[同調回路 (Wikipedia)](https://ja.wikipedia.org/wiki/同調回路)

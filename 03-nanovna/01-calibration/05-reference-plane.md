@@ -124,3 +124,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [Electrical length (Wikipedia)](https://en.wikipedia.org/wiki/Electrical_length)、[Network analyzer (electrical) (Wikipedia)](https://en.wikipedia.org/wiki/Network_analyzer_(electrical))

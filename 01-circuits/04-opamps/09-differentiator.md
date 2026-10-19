@@ -187,3 +187,4 @@ measure: [vpp, freq]
 ## 出典
 
 自作。
+参考: [微分回路 (Wikipedia)](https://ja.wikipedia.org/wiki/微分回路)、[Differentiator (Wikipedia)](https://en.wikipedia.org/wiki/Differentiator)、[TI LM358 のデータシート](https://www.ti.com/lit/ds/symlink/lm358.pdf)

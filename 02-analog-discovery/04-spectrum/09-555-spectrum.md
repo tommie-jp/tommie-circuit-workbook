@@ -196,3 +196,5 @@ NE555 は IC なので、出力を 0〜5 V・デューティ 11 / 21 = 52.4 % �
 
 自作。矩形波のフーリエ級数 (振幅 (2A/nπ)|sin(nπD)|) は信号処理の教科書に
 載っている標準的な導出。555 の発振の式は 2-8 で使ったものと同じ。
+
+参考: [フーリエ級数 (Wikipedia)](https://ja.wikipedia.org/wiki/フーリエ級数)、[TI NE555 データシート](https://www.ti.com/lit/ds/symlink/ne555.pdf)、[WaveForms Spectrum Analyzer (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-spectrum-analyzer)

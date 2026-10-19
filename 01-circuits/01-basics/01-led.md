@@ -102,3 +102,5 @@ wires:
 ## 出典
 
 自作。
+
+参考: [発光ダイオード (Wikipedia)](https://ja.wikipedia.org/wiki/発光ダイオード)、[オームの法則 (Wikipedia)](https://ja.wikipedia.org/wiki/オームの法則)

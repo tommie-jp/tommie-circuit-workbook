@@ -198,3 +198,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [トルク (Wikipedia)](https://ja.wikipedia.org/wiki/トルク)、[直流モーター (Wikipedia)](https://ja.wikipedia.org/wiki/直流モーター)

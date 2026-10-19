@@ -114,3 +114,5 @@ CH1 と CH2 は同じ 500 mV/div・同じ基準で重ねてある。画面の左
 ## 出典
 
 自作。
+
+参考: [WaveForms Oscilloscope (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-oscilloscope)、[時定数 (Wikipedia)](https://ja.wikipedia.org/wiki/時定数)、[RC回路 (Wikipedia)](https://ja.wikipedia.org/wiki/RC回路)

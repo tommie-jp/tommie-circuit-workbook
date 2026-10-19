@@ -94,3 +94,5 @@ Average と RMS が Vpp や Vmax と全く違う値になることを確かめ�
 ## 出典
 
 自作。
+
+参考: [WaveForms Oscilloscope (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-oscilloscope)、[オシロスコープ (Wikipedia)](https://ja.wikipedia.org/wiki/オシロスコープ)、[デューティ比 (Wikipedia)](https://ja.wikipedia.org/wiki/デューティ比)

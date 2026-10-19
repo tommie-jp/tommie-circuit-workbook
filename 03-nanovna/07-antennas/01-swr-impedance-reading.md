@@ -134,3 +134,5 @@ markers:
 ## 出典
 
 自作。
+
+参考: [定在波比 (Wikipedia)](https://ja.wikipedia.org/wiki/定在波比)、[スミスチャート (Wikipedia)](https://ja.wikipedia.org/wiki/スミスチャート)

@@ -98,3 +98,5 @@ AD3 自体のジッタなのか、外の回路 (この題では方形波と
 ## 出典
 
 自作。
+
+参考: [WaveForms Oscilloscope (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-oscilloscope)、[ジッタ (Wikipedia)](https://ja.wikipedia.org/wiki/ジッタ)、[オシロスコープ (Wikipedia)](https://ja.wikipedia.org/wiki/オシロスコープ)

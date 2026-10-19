@@ -192,3 +192,5 @@ Q1 は 2SC1815、Q2 は 2SA1015 の代用モデル (`09-rf/sim/agc.cir` と同�
 ## 出典
 
 自作。
+
+参考: [プッシュプル (Wikipedia)](https://ja.wikipedia.org/wiki/プッシュプル)、[Crossover distortion (Wikipedia)](https://en.wikipedia.org/wiki/Crossover_distortion)

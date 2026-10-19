@@ -220,3 +220,4 @@ OUT の High が電源より 1.5 V 低い NE555 では、RL = 1 kΩ の出力が
 ## 出典
 
 自作。
+参考: [チャージポンプ (Wikipedia)](https://ja.wikipedia.org/wiki/チャージポンプ)、[TI NE555 のデータシート](https://www.ti.com/lit/ds/symlink/ne555.pdf)、[Vishay 1N4148 のデータシート](https://www.vishay.com/docs/81857/1n4148.pdf)

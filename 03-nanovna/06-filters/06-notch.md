@@ -149,3 +149,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [バンドストップフィルタ (Wikipedia)](https://ja.wikipedia.org/wiki/ノッチフィルタ)、[S パラメータ (Wikipedia)](https://ja.wikipedia.org/wiki/Sパラメータ)

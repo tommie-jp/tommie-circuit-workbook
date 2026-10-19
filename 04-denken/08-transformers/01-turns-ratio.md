@@ -233,3 +233,5 @@ n より大きく出る。巻線抵抗を無視した理想変成器なら V2 = 
 ## 出典
 
 自作。
+
+参考: [変圧器 (Wikipedia)](https://ja.wikipedia.org/wiki/変圧器)、[Transformer (Wikipedia)](https://en.wikipedia.org/wiki/Transformer)

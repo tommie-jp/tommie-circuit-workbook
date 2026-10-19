@@ -150,3 +150,5 @@ Symmetry を 5 % にすると幅は 1.0 ms (0°)、10 % にすると 2.0 ms (180
 ## 出典
 
 自作。
+
+参考: [SG90 データシート](https://www.friendlywire.com/projects/ne555-servo-safe/SG90-datasheet.pdf)、[サーボモーター (Wikipedia)](https://ja.wikipedia.org/wiki/サーボモーター)、[パルス幅変調 (Wikipedia)](https://ja.wikipedia.org/wiki/パルス幅変調)

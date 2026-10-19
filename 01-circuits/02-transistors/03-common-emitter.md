@@ -386,3 +386,5 @@ S21 は信号源と負荷を 50 Ω にした VNA の配置 (20 dB ATT なしの�
 ## 出典
 
 自作。
+
+参考: [エミッタ接地回路 (Wikipedia)](https://ja.wikipedia.org/wiki/エミッタ接地回路)、[Common emitter (Wikipedia)](https://en.wikipedia.org/wiki/Common_emitter)

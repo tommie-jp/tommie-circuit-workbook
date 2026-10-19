@@ -278,3 +278,5 @@ Cout を 2 の位、S を 1 の位として読むと、A + B + Cin の答えに�
 ## 出典
 
 自作。
+
+参考: [CD4070B データシート](https://www.ti.com/lit/ds/symlink/cd4070b.pdf)、[CD4081B データシート](https://www.ti.com/lit/ds/symlink/cd4081b.pdf)、[加算器 (Wikipedia)](https://ja.wikipedia.org/wiki/加算器)

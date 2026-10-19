@@ -166,3 +166,5 @@ AD3 の電源 1 系統の約 50 mA に収まる。ブレッドボードの 1 穴
 ## 出典
 
 自作。
+
+参考: [サーミスタ (Wikipedia)](https://ja.wikipedia.org/wiki/サーミスタ)、[Thermistor (Wikipedia)](https://en.wikipedia.org/wiki/Thermistor)

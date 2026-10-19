@@ -158,3 +158,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [特性インピーダンス (Wikipedia)](https://ja.wikipedia.org/wiki/特性インピーダンス)、[インピーダンス整合 (Wikipedia)](https://ja.wikipedia.org/wiki/インピーダンス整合)

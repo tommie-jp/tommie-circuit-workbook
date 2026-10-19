@@ -567,3 +567,4 @@ links:
 ## 出典
 
 - 自作。回路と各基板の図は [02-radio.md](02-radio.md)・[03-detect.md](03-detect.md)・[04-state-machine.md](04-state-machine.md) から写した
+- 参考: [電波時計 (Wikipedia)](https://ja.wikipedia.org/wiki/電波時計)、[NICT 日本標準時グループ 標準電波](https://www.nict.go.jp/sts/)

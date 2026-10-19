@@ -293,3 +293,5 @@ notes:
 自作。セラミックフィルタの規格と測定回路は Murata のカタログ
 「CERAFIL (Filters/Traps/Discriminators) for Audio/Visual」(Cat.No.P50E、SFELF10M7FA00-B0 の行) と
 「Ceramic Filters (CERAFIL) / Ceramic Discriminators」(Cat.No.P05E-16、CFULA455KE4A-B0 の行) による。
+
+参考: [Ceramic filter (Wikipedia)](https://en.wikipedia.org/wiki/Ceramic_filter)

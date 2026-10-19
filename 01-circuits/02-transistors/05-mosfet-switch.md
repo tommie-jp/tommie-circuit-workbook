@@ -183,3 +183,5 @@ LED は V<sub>F</sub> が約 1.5 V (1 µA)・約 2.0 V (8.5 mA) になる仮定�
 ## 出典
 
 自作。
+
+参考: [MOSFET (Wikipedia)](https://ja.wikipedia.org/wiki/MOSFET)、[2N7000 / BS170 データシート (Vishay, 70226)](https://www.vishay.com/docs/70226/70226.pdf)

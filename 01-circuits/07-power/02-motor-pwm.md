@@ -209,3 +209,4 @@ OFF の瞬間のドレインの山は 5.8 V (5 V + D1 の順方向電圧 約 0.8
 ## 出典
 
 自作。
+参考: [パルス幅変調 (Wikipedia)](https://ja.wikipedia.org/wiki/パルス幅変調)、[直流モーター (Wikipedia)](https://ja.wikipedia.org/wiki/直流モーター)、[Vishay 2N7000 のデータシート](https://www.vishay.com/docs/70226/70226.pdf)

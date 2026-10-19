@@ -100,3 +100,5 @@ notes:
 ## 出典
 
 自作。
+
+参考: [WaveForms Voltmeter (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-voltmeter)、[WaveForms Logger (Digilent)](https://digilent.com/reference/test-and-measurement/guides/waveforms-data-logger)、[分圧 (Wikipedia)](https://ja.wikipedia.org/wiki/分圧)

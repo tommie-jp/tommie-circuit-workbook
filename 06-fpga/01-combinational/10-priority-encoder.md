@@ -285,3 +285,5 @@ buses:
 ## 出典
 
 自作。
+
+参考: [Priority encoder (Wikipedia)](https://en.wikipedia.org/wiki/Priority_encoder)

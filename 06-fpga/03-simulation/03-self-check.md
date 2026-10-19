@@ -217,3 +217,5 @@ Verilator 5.042 で、正しい `counter4` と、わざと間違えた `counter4
 ## 出典
 
 自作。
+
+参考: [Icarus Verilog のドキュメント](https://steveicarus.github.io/iverilog/)、[Verilog (Wikipedia)](https://ja.wikipedia.org/wiki/Verilog)

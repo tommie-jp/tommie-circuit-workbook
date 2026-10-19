@@ -753,3 +753,5 @@ Python 3.12・Verilator 5.042・iverilog 12 で `sim/06-asm-run.sh` を走らせ
 
 自作。2 回読んでラベルを解くアセンブラは、アセンブラの定番の作り方である。
 `$readmemh` の形 (16 進を空白か改行で区切り、`//` から後は注釈) は IEEE 1364 の Verilog の規格による。
+
+参考: [アセンブラ (Wikipedia)](https://ja.wikipedia.org/wiki/アセンブラ)

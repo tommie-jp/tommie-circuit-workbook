@@ -184,3 +184,4 @@ CH2 を出力 (10 列) に当て、2 本を重ねて振幅と向きを比べる 
 ## 出典
 
 自作。
+参考: [TI LM358 のデータシート](https://www.ti.com/lit/ds/symlink/lm358.pdf)、[演算増幅器 (Wikipedia)](https://ja.wikipedia.org/wiki/演算増幅器)、[Lessons In Electric Circuits Vol. III 第 8 章 (演算増幅器)](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_8.html)

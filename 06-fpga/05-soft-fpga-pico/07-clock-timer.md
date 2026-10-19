@@ -301,3 +301,5 @@ picoemu (`danish9661/pico-emulator` の `b83786f` に `sim/picoemu-m33.patch` �
 ## 出典
 
 自作。繰り返しタイマは Raspberry Pi の Pico SDK の `pico_time` (`add_repeating_timer_us`)。`blink.v` は 2-7、回路の切り替えは 5-6。
+
+参考: [Raspberry Pi Pico SDK (GitHub)](https://github.com/raspberrypi/pico-sdk)

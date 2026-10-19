@@ -114,3 +114,5 @@ R が小さいので、SWR は 1 まで下がらない。同じ 1 つの測定�
 ## 出典
 
 自作。
+
+参考: [スミスチャート (Wikipedia)](https://ja.wikipedia.org/wiki/スミスチャート)、[定在波比 (Wikipedia)](https://ja.wikipedia.org/wiki/定在波比)、[S パラメータ (Wikipedia)](https://ja.wikipedia.org/wiki/Sパラメータ)
