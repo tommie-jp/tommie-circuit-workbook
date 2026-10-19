@@ -25,21 +25,22 @@ parts:
     type: device
     at: 1,1
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
-  Rref: resistor 3,3 6,3 330
-  Cstray: capacitor 9,3 12,3 2.5p l=$\mathrm{C_{stray}}$
-  G1: ground 14,3
-  Cin: capacitor 9,3 9,5 48p l=$\mathrm{C_{in}}$
-  G2: ground 9,5
+    pins: [GND, 2-, 2+, 1-, 1+, W1]
+    turn: mirror
+  Rref: resistor 6,4 9,4 330
+  Cstray: capacitor 12,4 15,4 2.5p l=$\mathrm{C_{stray}}$
+  G1: ground 17,4
+  Cin: capacitor 12,4 12,6 48p l=$\mathrm{C_{in}}$
+  G2: ground 12,6
 wires:
-  - AD.W1 -| 3,3
-  - AD.1+ -| 3,3
-  - AD.1- -| 6,3
-  - 6,3 -- 9,3
-  - AD.2+ -| 9,3
-  - AD.2- -| 12,3
-  - 12,3 -- 14,3
-  - AD.GND -| 14,3
+  - AD.W1 -| 6,4
+  - AD.1+ -| 6,4
+  - AD.1- -| 9,4
+  - 9,4 -- 12,4
+  - AD.2+ -| 12,4
+  - AD.2- -| 15,4
+  - 15,4 -- 17,4
+  - AD.GND -| 17,4
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/circuit/02-row-capacitance.svg)
