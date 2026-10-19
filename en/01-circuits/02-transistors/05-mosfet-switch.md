@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 era: 今
 board: BB
-ja: d38090ffa626167ff7e236d6db10127c04d53980
+ja: 51e7779fe4cd827733476dabe1c2ad4e8f3cf261
 ---
 
 # 2-5 MOSFET Switch (2N7000, Logic Level)
@@ -184,3 +184,5 @@ The gate rise time (a few tens of ns) is a value based on an assumed input capac
 ## Sources
 
 Original work.
+
+See also: [MOSFET (Wikipedia)](https://ja.wikipedia.org/wiki/MOSFET), [2N7000 / BS170 datasheet (Vishay, 70226)](https://www.vishay.com/docs/70226/70226.pdf)

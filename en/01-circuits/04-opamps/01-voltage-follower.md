@@ -6,7 +6,7 @@ title: Voltage follower
 tier: 50
 source: 自作
 board: BB
-ja: 23dbc57c2b9160cca4e2d3987709cd0c9cc54ec6
+ja: e8df65c9fd0239fad2ab44721b3f5fabc0020d31
 ---
 
 # 4-1 Voltage follower
@@ -174,3 +174,5 @@ so LTspice does not check the output impedance in the text (300 Ω ÷ (1 + A)); 
 ## Sources
 
 Original work.
+
+See also: [TI LM358 datasheet](https://www.ti.com/lit/ds/symlink/lm358.pdf), [Voltage follower (Wikipedia)](https://en.wikipedia.org/wiki/Voltage_follower), [Operational amplifier (Wikipedia)](https://ja.wikipedia.org/wiki/オペアンプ)

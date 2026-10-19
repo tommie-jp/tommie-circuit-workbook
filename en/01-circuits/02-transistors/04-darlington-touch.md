@@ -6,7 +6,7 @@ title: Darlington Pair, Lit by a Finger Touch
 tier: 50
 source: 自作
 board: BB
-ja: 42aaeafd86693b6e7f99dca618611bd55f901ff1
+ja: d593e484be206ac03e8fb7d2aad9dd6143b05368
 ---
 
 # 2-4 Darlington Pair, Lit by a Finger Touch
@@ -200,3 +200,5 @@ The CH2 probe (1 MΩ) is in parallel with R<sub>B</sub>, so with a 2 MΩ finger 
 ## Sources
 
 Original work.
+
+See also: [Darlington transistor (Wikipedia)](https://ja.wikipedia.org/wiki/ダーリントン接続), [Bipolar junction transistor (Wikipedia)](https://ja.wikipedia.org/wiki/バイポーラトランジスタ)

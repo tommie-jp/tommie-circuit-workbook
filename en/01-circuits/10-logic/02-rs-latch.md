@@ -6,7 +6,7 @@ title: RS Latch (NAND)
 tier: 50
 source: 自作
 board: BB
-ja: 0dbb0d3e59e151a5e27f2f8171b2b1d924ec796f
+ja: 5ceb1be96c3241747c7f862c8d59ee5f4144e49f
 ---
 
 # 10-2 RS Latch (NAND)
@@ -197,3 +197,5 @@ After releasing both at the same time, ideal NANDs do not decide where it settle
 ## Sources
 
 Original work.
+
+See also: [CD4011B datasheet](https://www.ti.com/lit/ds/symlink/cd4011b.pdf), [Latch circuit (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/ラッチ回路), [SR latch (Wikipedia)](https://en.wikipedia.org/wiki/SR_latch)

@@ -6,7 +6,7 @@ title: Comparator — a CdS cell sets the threshold
 tier: 50
 source: 自作
 board: BB
-ja: cbb3c84493bfd39d4782bad3bf57f3e96d2e156a
+ja: 1ceb718ee740ece7cb0c29e160bdc62a2650d281
 ---
 
 # 4-4 Comparator — a CdS cell sets the threshold
@@ -216,3 +216,5 @@ The op amp is a simple one-pole model. The output High is V+ − 1.5 V = 3.5 V, 
 ## Sources
 
 Original work.
+
+See also: [Comparator (Wikipedia)](https://ja.wikipedia.org/wiki/コンパレータ), [Photoresistor (Wikipedia)](https://ja.wikipedia.org/wiki/光導電セル), [TI LM358 datasheet](https://www.ti.com/lit/ds/symlink/lm358.pdf)

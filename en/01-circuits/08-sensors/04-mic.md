@@ -6,7 +6,7 @@ title: Responding to Sound with a Microphone
 tier: 50
 source: 自作
 board: BB
-ja: ee8da19ac68c18d2e25d1283a5e54c583e6af174
+ja: 604d51e5da6fc5cf02606f171493aa58b6216683
 ---
 
 # 8-4 Responding to Sound with a Microphone
@@ -326,3 +326,5 @@ and the table were corrected to this value.
 ## Sources
 
 Original work.
+
+See also: [Microphone (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/マイクロホン), [Electret microphone (Wikipedia)](https://en.wikipedia.org/wiki/Electret_microphone)

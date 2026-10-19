@@ -6,7 +6,7 @@ title: Summing amplifier (mixer)
 tier: 50
 source: 自作
 board: BB
-ja: c7e19a74385f2f34bec9585fcb2e53c4fca18619
+ja: 760db2d2652d00370dd49c188cce5ca5b84607be
 ---
 
 # 4-5 Summing amplifier (mixer)
@@ -89,8 +89,8 @@ wires:
   - AD3.W2 -- a6 green
   - SC.2+ -- c4 orange
   - SC.1+ -- j10 green
-  - SC.1- -- i15 black
-  - SC.2- -- j15 black
+  - SC.1- -- j15 black [v-20, h51]
+  - SC.2- -- i15 black [v-10, h31]
   - +t10 -- a10 red
   - e9 -- f9 orange
   - i9 -- i11 orange
@@ -182,3 +182,5 @@ The op amp is a simple one-pole model (GBW 1 MHz, SR 0.3 V/µs). It is an **assu
 ## Sources
 
 Original work.
+
+See also: [Summing amplifier (Wikipedia)](https://en.wikipedia.org/wiki/Summing_amplifier), [TI LM358 datasheet](https://www.ti.com/lit/ds/symlink/lm358.pdf), [Lessons In Electric Circuits Vol. III, Chapter 8 (Operational amplifiers)](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_8.html)

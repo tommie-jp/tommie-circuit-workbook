@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 古
-ja: 1f0449d083c9dd17e9318f9ea09a6a7f82a93916
+ja: 74fc06ac005a9f6b7609e31d046c2f303fc36dfe
 ---
 
 # 3-4 Relaxation oscillation — a buzzer with two transistors
@@ -217,3 +217,5 @@ the LED is a 2 V model (near 8 mA), and the buzzer is 20 nF beyond R5. **All of 
 ## Sources
 
 Original work.
+
+See also: [Relaxation oscillator (Wikipedia)](https://en.wikipedia.org/wiki/Relaxation_oscillator), [Multivibrator (Wikipedia)](https://ja.wikipedia.org/wiki/マルチバイブレータ)

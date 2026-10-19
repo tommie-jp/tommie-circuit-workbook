@@ -6,7 +6,7 @@ title: Series, Parallel and Voltage Dividers
 tier: 50
 source: 自作
 board: BB
-ja: f78b2497c9e3e7873586b8bffa92a490f516f3c4
+ja: caf8ec2f43152e1776ddeee5f7d497a4e6e28114
 ---
 
 # 1-2 Series, Parallel and Voltage Dividers
@@ -118,3 +118,5 @@ the original one, so the meter is in series with the circuit (0-1).
 ## Sources
 
 Original work.
+
+See also: [Voltage divider (Wikipedia)](https://ja.wikipedia.org/wiki/分圧器), [Lessons in Electric Circuits Vol. I, Chapter 5: Series-parallel combination circuits](https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_5.html)

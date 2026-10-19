@@ -6,7 +6,7 @@ title: Charging and Discharging a Capacitor — Seeing the RC Time Constant with
 tier: 50
 source: 自作
 board: BB
-ja: 0f419d01487c570d677e9c795113902fbb1c9d69
+ja: b41e38ec3c015537877f48394b4eb779ab579ca3
 ---
 
 # 1-3 Charging and Discharging a Capacitor — Seeing the RC Time Constant with an LED
@@ -172,7 +172,7 @@ parts:
     pins: [GND, 1+, W1, 1-, 2+, 2-]
 wires:
   - AD.W1 -- c10 yellow
-  - AD.GND -- -t8 black
+  - AD.GND -- -t5 black
   - a18 -- -t18 black
   - AD.1+ -- e10 orange
   - AD.1- -- -t11 black
@@ -314,3 +314,5 @@ measure: [vmax, vmin, rise]
 ## Sources
 
 Original work.
+
+See also: [Time constant (Wikipedia)](https://ja.wikipedia.org/wiki/時定数), [RC circuit (Wikipedia)](https://ja.wikipedia.org/wiki/RC回路), [Lessons in Electric Circuits Vol. I, Chapter 16: RC and L/R time constants](https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_16.html)

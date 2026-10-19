@@ -6,7 +6,7 @@ title: Transformer basics — step-up, step-down and isolation with low-voltage 
 tier: 50
 source: 自作
 board: BB
-ja: 8f02de36e5a6a8909224c685b5f6655f07ba2453
+ja: 75d7c5c45c2302071d4faa6df3ecf10900145e75
 ---
 
 # 6-1 Transformer basics — step-up, step-down and isolation with low-voltage AC
@@ -81,10 +81,10 @@ wires:
   - ADP.OUT1 -- b5 yellow
   - ADP.OUT2 -- b8 orange
   - AD.1+ -- d5 blue
-  - AD.1- -- d8 black
+  - AD.1- -- e8 black [h1]
   - AD.2+ -- d13 green
   - AD.2- -- d16 black
-  - AD.GND -- e8 black
+  - AD.GND -- d8 black [h-30]
 notes:
   - text: Primary to adapter (columns 5–8), R1 on secondary (13–16)
 ```
@@ -98,9 +98,9 @@ notes:
   cannot produce 6 V AC (V<sub>p</sub> = 8.5 V). If you drive with Wavegen, keep the primary at 3.5 V or less, and the secondary
   falls in proportion to 7 V or less
 - The 1+ (blue) of the Analog Discovery goes to the column of the primary A1 (`d5`) and 1− (black) to the column of A2
-  (`d8`). 2+ (green) goes to the column of the secondary B1 (`d13`) and 2− (black) to the column of B2 (`d16`). With no
+  (`e8`). 2+ (green) goes to the column of the secondary B1 (`d13`) and 2− (black) to the column of B2 (`d16`). With no
   wire between the primary and the secondary, the two channels each see their own voltage
-- The GND (black) of the AD goes to the column of the primary A2 (`e8`). It is the same point as the ground symbol G1 in
+- The GND (black) of the AD goes to the column of the primary A2 (`d8`). It is the same point as the ground symbol G1 in
   Fig. 1, and puts the reference of Scope (the common ground) at a single place on the primary side
 - The Scope inputs of the AD3 are differential, and 1− and 2− are not tied together inside. Each pin is pulled down to
   the GND of the AD through about 1 MΩ (details in "Instrument settings" below). So even if you measure the primary and the
@@ -180,3 +180,5 @@ and 3 mA on the adapter side.
 ## Sources
 
 Original work.
+
+See also: [Transformer (Wikipedia)](https://ja.wikipedia.org/wiki/変圧器), [Lessons In Electric Circuits Vol. II, Chapter 9 (Transformers)](https://www.ibiblio.org/kuphaldt/electricCircuits/AC/AC_9.html)

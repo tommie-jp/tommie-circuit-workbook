@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 今
-ja: f0efa83cdba2e36702555e73f8147d49f38dde47
+ja: bdca15c28401d05d20e236fc8a7447eb298af0e8
 ---
 
 # 11-1 Blinking an LED on the Pico 2
@@ -64,9 +64,9 @@ parts:
     type: device
     at: bottom
     label: AD3 Scope
-    pins: [1+, 1-, 2+, 2-]
+    pins: [1+, 1-, 2-, 2+]
 wires:
-  - SC.1+ -- g24 yellow
+  - SC.1+ -- i24 yellow [h-10]
   - SC.2+ -- g28 blue
   - SC.1- -- -b26 black
   - SC.2- -- -b27 black
@@ -88,7 +88,7 @@ wires:
   so bringing out any one of them to the rail is enough). The top and bottom − rails are joined at column 50
 - Power comes from the USB of the Pico 2 (the 5 V arriving at the VBUS pin 40 is turned into 3.3 V by the regulator on the board).
   The Analog Discovery 3 (AD3, the USB instrument used in 0-3) is not used for power; connect **only the oscilloscope (Scope)**.
-  Plug 1+ (yellow) into the GP15 column (column 24, `g24`) and 2+ (blue) into the LED anode column (column 28, `g28`),
+  Plug 1+ (yellow) into the GP15 column (column 24, `i24`) and 2+ (blue) into the LED anode column (column 28, `g28`),
   and connect 1− and 2− (black) to the bottom − rail (GND). The only current through the breadboard is about 3.9 mA for the LED,
   within the breadboard limits (200 mA per hole, 500 mA for the whole breadboard)
 
@@ -250,5 +250,5 @@ Not checked: LED brightness and current; the lighting on real hardware
 ## Sources
 
 Original work. The specifications of the Pico 2 (RP2350A, 4 MB flash, up to 150 MHz, 520 kB SRAM) come from the
-Raspberry Pi Pico 2 datasheet, and the GPIO current (up to 12 mA, 100 mA in total over all pins, 4 mA by default)
-from the RP2350 datasheet (14.9 Electrical characteristics).
+[Raspberry Pi Pico 2 datasheet](https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf), and the GPIO current (up to 12 mA, 100 mA in total over all pins, 4 mA by default)
+from the [RP2350 datasheet](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf) (14.9 Electrical characteristics).

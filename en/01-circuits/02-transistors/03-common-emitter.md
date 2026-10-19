@@ -6,7 +6,7 @@ title: Common-Emitter Amplifier (Self-Bias)
 tier: 50
 source: 自作
 board: BB
-ja: 7c95b6b9b1074da7938e04ac38599bffacbc4dbd
+ja: 09fec6085563f7355a0758653bac45c7170f6c8b
 ---
 
 # 2-3 Common-Emitter Amplifier (Self-Bias)
@@ -97,10 +97,10 @@ parts:
   R1: resistor b3 b9 20k
   R2: resistor c9 c13 10k
   RC: resistor b15 b20 2.2k
-  Q1: transistor e19(B) e20(C) e21(E) 2SC1815
+  Q1: transistor e19(B) e20(C) e21(E) 2SC1815 cap=below
   CIN: capacitor d5(-) d9(+) 1uF
-  RE: resistor a21 -t21 1k
-  CE: capacitor/electrolytic b21(+) b26(-) 100uF
+  RE: resistor a21 -t21 1k cap=left
+  CE: capacitor/electrolytic b21(+) b26(-) 100uF cap=above
   COUT: capacitor d20(+) d27(-) 1uF
   AD:
     type: device
@@ -184,10 +184,10 @@ parts:
   R1: resistor b3 b9 20k
   R2: resistor c9 c13 10k
   RC: resistor b15 b20 2.2k
-  Q1: transistor e19(B) e20(C) e21(E) 2SC1815
+  Q1: transistor e19(B) e20(C) e21(E) 2SC1815 cap=below
   CIN: capacitor d5(-) d9(+) 1uF
-  RE: resistor a21 -t21 1k
-  CE: capacitor/electrolytic b21(+) b26(-) 100uF
+  RE: resistor a21 -t21 1k cap=left
+  CE: capacitor/electrolytic b21(+) b26(-) 100uF cap=above
   COUT: capacitor d20(+) d27(-) 1uF
   AD:
     type: device
@@ -391,3 +391,5 @@ The emitter and collector differ by 0.07 to 0.15 V because of the difference in 
 ## Sources
 
 Original work.
+
+See also: [Common emitter (Wikipedia)](https://ja.wikipedia.org/wiki/エミッタ接地回路), [Common emitter (Wikipedia)](https://en.wikipedia.org/wiki/Common_emitter)

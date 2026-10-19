@@ -6,7 +6,7 @@ title: Goodnight Timer — 555 Monostable + MOSFET
 tier: 50
 source: 自作
 board: [BB, PF]
-ja: 8e07ab3d28f7dc0490001f35cd3f53b88d81e012
+ja: d0e91d876fc8dc902b0dcb5aa2ed8dfce04c222e
 ---
 
 # 12-1 Goodnight Timer — 555 Monostable + MOSFET
@@ -242,9 +242,9 @@ wires:
   Looking at the flat face of Q1 (2N7000), the pins are S, G, D from the left, so o8 is the source, p8 is the gate and
   q8 is the drain. The source goes down column M to GND, and the drain goes from r8 up column R to
   the cathode of DLED (r9). The anode of DLED (r11) goes through RLED (r14 to r12) to VCC on row 14
-- There are 2 crossings, and both are bridged with insulated wire. The orange row 15 (to Ct) crosses the red column J (RESET), and
-  the yellow row 9 (TRIG) crosses the black column E (GND of U1). With this pin arrangement the circuit cannot be built with
-  0 crossings (the VCC of PIN 4 and the GND from PIN 6 and 7 to Ct must meet at the right of U1)
+- In both crossings a signal wire is bridged over a branch of the power wiring with insulated wire. The orange row 15 (to Ct) crosses the red column J (RESET), and
+  the yellow row 9 (TRIG) crosses the black column E (GND of U1). The VCC of PIN 4 and the line from PIN 6 and 7 to Ct must
+  meet at the right of U1, and PIN 2 leaves from beside PIN 1 (GND) to SWtrig on the left, so this pin arrangement cannot avoid them
 
 ## Instrument settings
 
@@ -324,3 +324,5 @@ for C<sub>t</sub> = 100 µF, 1.1 × 4.7 MΩ × 100 µF ≈ 517 s (about 8.6 minu
 ## Sources
 
 Original work.
+
+See also: [TI TLC555 datasheet](https://www.ti.com/lit/ds/symlink/tlc555.pdf), [Vishay 2N7000 datasheet](https://www.vishay.com/docs/70226/70226.pdf), [NE555 (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/NE555)

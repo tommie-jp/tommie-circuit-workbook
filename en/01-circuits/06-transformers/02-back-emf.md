@@ -6,7 +6,7 @@ title: Back EMF of a coil — an LED lights the moment you switch off, the flyba
 tier: 50
 source: 自作
 board: BB
-ja: ccef818cfbb3cdd0146f6de1f5471f8a5e778e3b
+ja: 0a5f851347e950416d6949b0acd21f3405ac283f
 ---
 
 # 6-2 Back EMF of a coil — an LED lights the moment you switch off, the flyback diode
@@ -153,3 +153,5 @@ falls a little as the current falls, this is slightly longer than the 1.06 ms es
 ## Sources
 
 Original work.
+
+See also: [Counter-electromotive force (Wikipedia)](https://en.wikipedia.org/wiki/Counter-electromotive_force), [Flyback diode (Wikipedia)](https://en.wikipedia.org/wiki/Flyback_diode)

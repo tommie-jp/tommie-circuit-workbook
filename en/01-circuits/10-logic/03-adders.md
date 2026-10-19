@@ -6,7 +6,7 @@ title: Half Adder and Full Adder (XOR + AND)
 tier: 50
 source: 自作
 board: BB
-ja: b15efd0b8851423ffbea1aeb1660eabc75b835f7
+ja: 9405ddbf6df1484711ecbd819411a7500bdf0351
 ---
 
 # 10-3 Half Adder and Full Adder (XOR + AND)
@@ -143,7 +143,7 @@ parts:
 wires:
   # Power: top + rail, bottom - rail. One column joins the top and bottom - rails
   - PS.V+ -- +t1 red
-  - PS.GND -- -t2 black
+  - PS.GND -- -t3 black
   - -t1 -- -b1 black
   - +t2 -- a2 red
   - +t6 -- a6 red
@@ -210,7 +210,7 @@ wires:
   columns 51 to 57. All have the notch on the left, with PIN 1 at the lower left (row f) and PIN 14 at the upper left (row e).
   From the left the order is inputs → U1 and U2 → U3 → output LEDs
 - The power supply is Supplies on the Analog Discovery 3 (AD3, the USB instrument used in 0-3), with V+ set to 5 V.
-  Connect V+ (red) of the AD3 at the upper left of the breadboard to column 1 of the top + rail, and GND (black) to column 2 of the top − rail
+  Connect V+ (red) of the AD3 at the upper left of the breadboard to column 1 of the top + rail, and GND (black) to column 3 of the top − rail
 - Power: PIN 14 of each IC (columns 14, 37 and 51) goes from row a to the top + rail (red), and PIN 7 (columns 20, 43
   and 57) goes from row j to the bottom − rail (black). The LEDs and pull-down resistors go to the top − rail, so one column
   joins the top and bottom − rails
@@ -279,3 +279,5 @@ and only a full adder that can add Cin can represent it.
 ## Sources
 
 Original work.
+
+See also: [CD4070B datasheet](https://www.ti.com/lit/ds/symlink/cd4070b.pdf), [CD4081B datasheet](https://www.ti.com/lit/ds/symlink/cd4081b.pdf), [Adder (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/加算器)

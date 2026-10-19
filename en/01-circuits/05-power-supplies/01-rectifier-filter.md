@@ -6,7 +6,7 @@ title: Half-wave, full-wave and bridge rectification with smoothing (low-voltage
 tier: 50
 source: 自作
 board: BB
-ja: 627d9623816c4339fa08229bec0f885dd70c14cc
+ja: 7bb23600c7a77b49cff92f3f92f7e7799138b5d5
 ---
 
 # 5-1 Half-wave, full-wave and bridge rectification with smoothing (low-voltage AC)
@@ -174,3 +174,5 @@ The ripple is smaller because the discharge time is shorter than the whole time 
 ## Sources
 
 Original work.
+
+See also: [Rectifier (Wikipedia)](https://ja.wikipedia.org/wiki/整流回路), [Smoothing capacitor (Wikipedia)](https://en.wikipedia.org/wiki/Smoothing_capacitor), [Vishay 1N4001 datasheet](https://www.vishay.com/docs/88503/1n4001.pdf), [Lessons In Electric Circuits Vol. III, Chapter 3 (Diodes and rectifiers)](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_3.html)

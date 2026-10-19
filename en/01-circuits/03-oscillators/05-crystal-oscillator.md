@@ -6,7 +6,7 @@ title: Crystal oscillation — CMOS inverter plus crystal
 tier: 50
 source: 自作
 board: BB
-ja: 9db52f521cb2542a5be1493198bbaade489be5cf
+ja: 133e209b837661ef4c67f98b373e7ad1623ec336
 ---
 
 # 3-5 Crystal oscillation — CMOS inverter plus crystal
@@ -241,3 +241,5 @@ Two things can be checked by arithmetic:
 ## Sources
 
 Original work.
+
+See also: [Crystal oscillator (Wikipedia)](https://ja.wikipedia.org/wiki/水晶発振器), [Pierce oscillator (Wikipedia)](https://en.wikipedia.org/wiki/Pierce_oscillator), [TI SN74HC04 datasheet](https://www.ti.com/lit/ds/symlink/sn74hc04.pdf)

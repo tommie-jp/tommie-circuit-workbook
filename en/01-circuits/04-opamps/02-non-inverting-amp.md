@@ -6,7 +6,7 @@ title: Non-inverting amplifier
 tier: 50
 source: 自作
 board: BB
-ja: 0b8732b205d865c216af5fc2cca972ca9f2cf63f
+ja: 53ead628f88887fce4fe6adcb184833c3248797a
 ---
 
 # 4-2 Non-inverting amplifier
@@ -185,3 +185,5 @@ The non-inverting amplifier can be seen as the general form of the follower.
 ## Sources
 
 Original work.
+
+See also: [TI LM358 datasheet](https://www.ti.com/lit/ds/symlink/lm358.pdf), [Operational amplifier (Wikipedia)](https://ja.wikipedia.org/wiki/演算増幅器), [Lessons In Electric Circuits Vol. III, Chapter 8 (Operational amplifiers)](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_8.html)

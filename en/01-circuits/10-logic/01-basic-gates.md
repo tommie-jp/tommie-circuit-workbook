@@ -6,7 +6,7 @@ title: Basic Gates — AND / OR / NOT with Switches and LEDs
 tier: 50
 source: 自作
 board: BB
-ja: 629b5e7216c65024fc0236fed7d3b992ba3b10a6
+ja: 3e5e1b04bc89fe2ace82e4285ea56f845f2d3c2e
 ---
 
 # 10-1 Basic Gates — AND / OR / NOT with Switches and LEDs
@@ -266,3 +266,5 @@ In `sim/01-basic-gates.cir`, the gates are ideal logic of B sources (threshold 2
 ## Sources
 
 Original work.
+
+See also: [CD4081B datasheet](https://www.ti.com/lit/ds/symlink/cd4081b.pdf), [CD4071B datasheet](https://www.ti.com/lit/ds/symlink/cd4071b.pdf), [Logic gate (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/論理ゲート)

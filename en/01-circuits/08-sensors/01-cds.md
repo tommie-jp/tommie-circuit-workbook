@@ -6,7 +6,7 @@ title: A CdS cell lights an LED when it gets dark
 tier: 50
 source: 自作
 board: BB
-ja: 1c9133c8e04968eedf48f130392f0595914ca375
+ja: f9d1de46ea79b649ba4957544e0f48ad76af59af
 ---
 
 # 8-1 A CdS cell lights an LED when it gets dark
@@ -157,3 +157,5 @@ agrees with the 1.5 kΩ (about 0.65 V) in the text.
 ## Sources
 
 Original work.
+
+See also: [Photoconductive cell (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/光導電セル), [Photoresistor (Wikipedia)](https://en.wikipedia.org/wiki/Photoresistor)

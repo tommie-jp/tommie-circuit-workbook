@@ -6,7 +6,7 @@ title: A temperature alarm with a thermistor
 tier: 50
 source: 自作
 board: BB
-ja: cda55bc06cd975edc4c663e45df7bb9fd18354fb
+ja: b36782d2cbf840aca2e0f3cae62743e96c621b4b
 ---
 
 # 8-2 A temperature alarm with a thermistor
@@ -180,3 +180,5 @@ at 33 °C, 9.5 mA at 35 °C), and is fully ON at 38 °C. Changing h<sub>FE</sub>
 ## Sources
 
 Original work.
+
+See also: [Thermistor (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/サーミスタ), [Thermistor (Wikipedia)](https://en.wikipedia.org/wiki/Thermistor)

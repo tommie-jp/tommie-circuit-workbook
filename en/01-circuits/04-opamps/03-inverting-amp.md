@@ -6,7 +6,7 @@ title: Inverting amplifier
 tier: 50
 source: 自作
 board: BB
-ja: 1435a81c82cca105eec2330558aa7bab879365cc
+ja: 87eaa497fa7d828364d7f93e447645e721df19d6
 ---
 
 # 4-3 Inverting amplifier
@@ -76,7 +76,7 @@ parts:
     type: device
     at: bottom
     label: AD3 Scope
-    pins: [1+, 2+, 1-, 2-]
+    pins: [1+, 2+, 2-, 1-]
   U1: dip8 @ e10 LM358
   Rin: resistor g6 g11 10k
   Rf: resistor i10 i11 100k
@@ -179,3 +179,5 @@ For a signal source that needs a high impedance, use the non-inverting amplifier
 ## Sources
 
 Original work.
+
+See also: [TI LM358 datasheet](https://www.ti.com/lit/ds/symlink/lm358.pdf), [Inverting amplifier (Wikipedia)](https://en.wikipedia.org/wiki/Inverting_amplifier), [Lessons In Electric Circuits Vol. III, Chapter 8 (Operational amplifiers)](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_8.html)

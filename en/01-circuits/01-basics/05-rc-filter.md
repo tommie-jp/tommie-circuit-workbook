@@ -6,7 +6,7 @@ title: RC Low-Pass and High-Pass
 tier: 50
 source: 自作
 board: BB
-ja: 4a52650e42e147b433ceff32935a1901d6369eeb
+ja: 9cea4bd42d32d06a2ad6d5526c91a2c3c7d9f6f5
 ---
 
 # 1-5 RC Low-Pass and High-Pass
@@ -90,11 +90,11 @@ parts:
     pins: [GND, W1, 1+, 1-, 2+, 2-]
 wires:
   - a13 -- -t13 black
-  - AD.W1 -- a5 yellow
+  - AD.W1 -- a5 yellow [h23, v106]
   - AD.GND -- -t3 black
-  - AD.1+ -- e5 orange
+  - AD.1+ -- b5 orange [h-7, v126]
   - AD.1- -- -t7 black
-  - AD.2+ -- e10 green
+  - AD.2+ -- a10 green
   - AD.2- -- -t12 black
 ```
 
@@ -473,3 +473,5 @@ What it shows:
 ## Sources
 
 Original work.
+
+See also: [Low-pass filter (Wikipedia)](https://ja.wikipedia.org/wiki/ローパスフィルタ), [High-pass filter (Wikipedia)](https://ja.wikipedia.org/wiki/ハイパスフィルタ)

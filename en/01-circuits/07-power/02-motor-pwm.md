@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 今
-ja: d5a9e6247eb5578a59d9739beb5fe2dce1f7f39d
+ja: 8c5d4030fbd794f1777652d23e2090309e5f1998
 ---
 
 # 7-2 PWM control of a DC motor (MOSFET)
@@ -116,8 +116,8 @@ wires:
   - e9 -- f9 green
   - j10 -- -b10 black
   - -t27 -- -b27 black
-  - AD.W1 -- c14 yellow
-  - AD.1+ -- e14 blue
+  - AD.W1 -- e14 yellow
+  - AD.1+ -- c14 blue
   - AD.2+ -- j8 green
   - AD.1- -- -b17 black
   - AD.2- -- -b19 black
@@ -146,8 +146,8 @@ notes:
 - Use a separate 5 V supply (a 5 V AC adapter or a bench power supply). The running current is tens of mA, and with
   the shaft stopped it is about 0.16 A (the calculation above), which exceeds the 50 mA per rail of Supplies on the
   Analog Discovery (250 mW on USB power). So the AD3 is used only for the PWM signal (W1) and the oscilloscope (Scope)
-- Feed the PWM from W1 of the AD (yellow) into column 14 (`c14`), the right end of R1. 1+ (blue) is in the same
-  column 14 (`e14`) and reads PWM, and 2+ (green) is on column 8 (`j8`), the drain of Q1. 1−, 2− and GND (black) go to
+- Feed the PWM from W1 of the AD (yellow) into column 14 (`e14`), the right end of R1. 1+ (blue) is in the same
+  column 14 (`c14`) and reads PWM, and 2+ (green) is on column 8 (`j8`), the drain of Q1. 1−, 2− and GND (black) go to
   the lower − rail. W1 supplies up to 30 mA, and the current the gate needs (about 0.5 mA through R2) is far smaller
 
 ## Parts
@@ -225,3 +225,5 @@ figure (the deck is `sim/02-motor-pwm.cir`).
 ## Sources
 
 Original work.
+
+See also: [Pulse-width modulation (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/パルス幅変調), [DC motor (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/直流モーター), [Vishay 2N7000 datasheet](https://www.vishay.com/docs/70226/70226.pdf)

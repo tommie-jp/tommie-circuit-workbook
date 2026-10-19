@@ -6,7 +6,7 @@ title: H-bridge — forward and reverse
 tier: 50
 source: 自作
 board: BB
-ja: 1933f0c86ffb89f006189cc6a33efc5203020d71
+ja: f2589817fa89bf06f559fe5d39cd76586fbcbd02
 ---
 
 # 7-3 H-bridge — forward and reverse
@@ -182,3 +182,5 @@ current is 5 V ÷ (11.8 + 15) Ω ≈ 0.19 A = about 190 mA.
 ## Sources
 
 Original work.
+
+See also: [H-bridge (Wikipedia)](https://en.wikipedia.org/wiki/H-bridge), [DC motor (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/直流モーター)

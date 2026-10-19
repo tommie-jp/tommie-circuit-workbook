@@ -6,7 +6,7 @@ title: Infrared LED and Phototransistor — Detecting Interrupted Light
 tier: 50
 source: 自作
 board: BB
-ja: 7aa9e6e23d163d8e40ef49a95d2a2124464e4445
+ja: 9d0ab5b2a6f6aec01610a7e8211f7ea49540f612
 ---
 
 # 8-5 Infrared LED and Phototransistor — Detecting Interrupted Light
@@ -162,3 +162,5 @@ The values in the table are calculated values. Measure voltages with the DC volt
 ## Sources
 
 Original work.
+
+See also: [Photointerrupter (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/フォトインタラプタ)

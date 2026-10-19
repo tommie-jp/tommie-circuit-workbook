@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 今
-ja: 321b48f6ebfc6188f1832b50f28d4afbd78584ae
+ja: 8e01d9d63d43eb65e63294f1a1787332df77637d
 ---
 
 # 0-3 Viewing Waveforms on an Oscilloscope — The 555 Output on a PC Oscilloscope or the AD3
@@ -213,3 +213,5 @@ The output High of about 3.5 V and Low of about 0.2 V are the datasheet values o
 ## Sources
 
 Original work.
+
+See also: [Oscilloscope (Wikipedia)](https://ja.wikipedia.org/wiki/オシロスコープ), [NE555 datasheet (Texas Instruments, SLFS022K)](https://www.ti.com/lit/ds/symlink/ne555.pdf)

@@ -6,7 +6,7 @@ title: Emitter Follower
 tier: 50
 source: 自作
 board: BB
-ja: 84d04ae089681a3129605e16a44b692124a047f7
+ja: d05a6e9e525ab67d17911b3c9df187a3adc83c7f
 ---
 
 # 2-2 Emitter Follower
@@ -357,3 +357,5 @@ so read it as "about 0.8 to 0.9 V".
 ## Sources
 
 Original work.
+
+See also: [Common collector (Wikipedia)](https://ja.wikipedia.org/wiki/エミッタフォロワ), [Lessons in Electric Circuits Vol. III, Chapter 4: Bipolar junction transistors](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_4.html)

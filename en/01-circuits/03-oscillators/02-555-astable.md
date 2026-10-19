@@ -6,7 +6,7 @@ title: 555 Astable, Blinking an LED
 tier: 50
 source: 自作
 board: BB
-ja: 952e08121fa259cf7a3893597afad7330fd7208a
+ja: a8a69d6884799795b4ca615d6f9957e7e068b27b
 ---
 
 # 3-2 555 Astable, Blinking an LED
@@ -204,3 +204,5 @@ from datasheet values, so it is an **assumption and not a measurement**. The LED
 ## Sources
 
 Original work.
+
+See also: [555 timer IC (Wikipedia)](https://ja.wikipedia.org/wiki/555), [NE555 datasheet (Texas Instruments, SLFS022K)](https://www.ti.com/lit/ds/symlink/ne555.pdf)

@@ -6,7 +6,7 @@ title: Measuring Voltage, Current and Resistance with a Multimeter — Using a V
 tier: 50
 source: 自作
 board: BB
-ja: 6ba611d0fbbc7b68677e833fbfe1f4e45987a598
+ja: b548c2a67d3c9e5b9c0c0da1a31b6d173044a428
 ---
 
 # 0-1 Measuring Voltage, Current and Resistance with a Multimeter — Using a Voltage Divider
@@ -141,3 +141,5 @@ The effect of the internal resistance of a real multimeter is covered in 0-4.
 ## Sources
 
 Original work.
+
+See also: [Multimeter (Wikipedia)](https://ja.wikipedia.org/wiki/テスター), [Ohm's law (Wikipedia)](https://ja.wikipedia.org/wiki/オームの法則), [Lessons in Electric Circuits Vol. I, Chapter 8: DC metering circuits](https://www.ibiblio.org/kuphaldt/electricCircuits/DC/DC_8.html)

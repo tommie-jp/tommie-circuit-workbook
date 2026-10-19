@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 古
-ja: 108c1cc4b917a86dd5be08b1f162647aba960853
+ja: c55dfb092610b4b9852d7ddbd72e1e892f6fa768
 ---
 
 # 5-2 Series regulator with a zener diode and a transistor
@@ -164,3 +164,5 @@ The zener current falls to 1.0 mA at 6 V, which agrees with the estimate above (
 ## Sources
 
 Original work.
+
+See also: [Zener diode (Wikipedia)](https://ja.wikipedia.org/wiki/ツェナーダイオード), [Linear regulator (Wikipedia)](https://en.wikipedia.org/wiki/Linear_regulator), [Lessons In Electric Circuits Vol. III, Chapter 3 (Diodes and rectifiers)](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_3.html)

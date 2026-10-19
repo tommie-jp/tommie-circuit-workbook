@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 古
-ja: 43bc70a0a16544531aaa9ef2f0beec5973500867
+ja: 211d923cb5d0fb6fc2dd17acd962f761541e1d4e
 ---
 
 # 5-5 Boost converter — Joule thief
@@ -101,7 +101,7 @@ wires:
   - j3 -- -b3 black
   - j16 -- -b16 black
   - -t29 -- -b29 black
-  - AD.1+ -- h17 orange
+  - AD.1+ -- j17 orange
   - AD.1- -- -b20 black
 ```
 
@@ -115,7 +115,7 @@ wires:
   collector (column 17)
 - B1 (column 9) goes through Rb (columns 9 to 18) and a green wire connects it to the base (column 18) in the lower
   block. The emitter (column 16) goes to the lower − rail
-- The 1+ (orange) of the Analog Discovery goes to column 17 of the Q1 collector (`h17`) and 1− (black) goes to the lower
+- The 1+ (orange) of the Analog Discovery goes to column 17 of the Q1 collector (`j17`) and 1− (black) goes to the lower
   − rail (`-b20`). The power is one battery. The average battery current is about 50 mA (SPICE; the peak is about 90 mA),
   which leaves no margin against the 50 mA per rail of Supplies (250 mW on USB power), so the Supplies of the AD3 is not used
   and only the Scope is used
@@ -200,3 +200,5 @@ assumption for the current gain, the frequency moves within 200 to 250 kHz and t
 
 Original work. Composed with reference to the Joule thief family of circuits from Talking Electronics (a bifilar
 transformer + one transistor).
+
+See also: [Joule thief (Wikipedia)](https://en.wikipedia.org/wiki/Joule_thief)

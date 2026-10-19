@@ -6,7 +6,7 @@ title: Diode Direction and Forward Voltage — Comparing LED Colors
 tier: 50
 source: 自作
 board: BB
-ja: adf8805ec76bc6a6d9026ec0bd92b6110dd45a3e
+ja: fc1c622e8e5372e4a2c815a447d29ec4917094fe
 ---
 
 # 1-4 Diode Direction and Forward Voltage — Comparing LED Colors
@@ -131,4 +131,6 @@ Use the DC voltage range of a multimeter to measure across each LED and each res
 
 ## Sources
 
-Original work (自作).
+Original work.
+
+See also: [Diode (Wikipedia)](https://ja.wikipedia.org/wiki/ダイオード), [Light-emitting diode (Wikipedia)](https://ja.wikipedia.org/wiki/発光ダイオード), [Lessons in Electric Circuits Vol. III, Chapter 3: Diodes and rectifiers](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_3.html)

@@ -6,7 +6,7 @@ title: Breadboard Continuity and Reading a Schematic — Columns, Rails and Nets
 tier: 50
 source: 自作
 board: BB
-ja: 068e4d75b6d58aa7fc9881c4c309104d91d8ee7d
+ja: 982fb1b4238162264d0184c20cfa36cae686b849
 ---
 
 # 0-2 Breadboard Continuity and Reading a Schematic — Columns, Rails and Nets
@@ -132,3 +132,5 @@ The continuity table (which holes are connected) is about wiring, not circuit va
 ## Sources
 
 Original work.
+
+See also: [Breadboard (Wikipedia)](https://ja.wikipedia.org/wiki/ブレッドボード), [Continuity test (Wikipedia)](https://en.wikipedia.org/wiki/Continuity_test)

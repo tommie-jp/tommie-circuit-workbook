@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: [BB, PF]
 era: 今
-ja: ed089fd83bf3730e26170af31dccdcc81ed51d02
+ja: 6c32b3bf8cbb897c4e308b3ff0d6c62e662cfefa
 ---
 
 # 5-4 LDO — USB 5 V → 3.3 V
@@ -84,7 +84,7 @@ parts:
     type: device
     at: bottom
     label: Analog Discovery (Supplies V+ and Scope)
-    pins: [V+, GND, 1+, 1-]
+    pins: [GND, V+, 1+, 1-]
 wires:
   - AD.V+ -- i8 red
   - e8 -- f8 red
@@ -132,7 +132,7 @@ board:
 unused: [J1.D+, J1.D-, J2.D+, J2.D-]
 title: Fig. 3 Perfboard build (yellow circles = AD3 clips)
 parts:
-  J1: usb-c/female b5 c5 d5 e5
+  J1: usb-c/female e5 d5 c5 b5
   J2: usb-c/female t5 u5 v5 w5
   U1: regulator i14 j14 k14
   Cin: capacitor g14 g11 10u
@@ -140,8 +140,8 @@ parts:
   Rled: resistor q17 q14 150
   Dled: led q12 q9 red
 wires:
-  - b5 -- b6 black
-  - b6 -- g6 black
+  - e5 -- e6 black
+  - e6 -- g6 black
   - g11 -- g6 black
   - g6 -- j6 black
   - j14 -- j6 black
@@ -151,8 +151,8 @@ wires:
   - q9 -- q6 black
   - q6 -- t6 black
   - t5 -- t6 black
-  - e5 -- e17 red
-  - e17 -- g17 red
+  - b5 -- b17 red
+  - b17 -- g17 red
   - g17 -- i17 red
   - g17 -- g14 red
   - i17 -- i14 red
@@ -186,8 +186,13 @@ style:
   (the board turned over), where the columns are reversed left to right. Soldering is done on the solder side
 - The input J1 goes at the lower left end (B5 to E5) and the output J2 at the lower right end (T5 to W5). Both are USB-C
   power breakout modules, and both receptacles face the lower edge and stay within the board (both cables leave from
-  below). The placement of J1 is the same as in Fig. 03 of 3-1 in 05-etc (`05-etc/03-mixer-dual-gate-fet/01-mixer.md`)
-- VBUS of J1 (E5) goes up column E to the + strip (5 V) on row 17, and GND (B5) goes through B6 to the GND strip on row 6.
+  below).
+  J1 is a module whose pads run VBUS, D−, D+, GND from the left (VBUS at the left end, B5; GND at the right end, E5), and
+  J2 is a module whose pads run GND, D+, D−, VBUS from the left (GND at T5, VBUS at W5).
+  In both, the GND pad lies on the inner side of the board, so it enters the GND strip on row 6 with a short wire, and the
+  VBUS wire runs up along the outer edge. If your module has a different pad order, read the wires again against the
+  printing on its pads
+- VBUS of J1 (B5) goes up column B to the + strip (5 V) on row 17, and GND (E5) goes through E6 to the GND strip on row 6.
   To reach VBUS of J2 (W5), the OUT (3.3 V) of U1 is carried to the right along row 17 and brought down column W, and GND
   (T5) joins the GND strip on row 6 at T6. Wires leave the pads vertically so as not to hide the printing beside the
   pads (V, D−, D+, GND). D+ and D− are not used (they are listed under `unused:` to remove them from the ERC
@@ -210,9 +215,8 @@ style:
   circle at W6, and `AD3 1-` one row above the circle at T6 (centered right above T7; row 6 is avoided because the GND
   strip runs there). Measuring at the output connector shows whether the 3.3 V output is actually present. The AD only
   measures and supplies no power to this board
-- The wires are only vertical and horizontal, with one crossing, at E6: the red wire from VBUS of J1 hops over the GND
-  strip (row 6) with an arc. On the real board, make the red wire an insulated wire passing over the GND strip, or use a
-  jumper on the component side
+- The wires are only vertical and horizontal, and no wires cross. The red wire from VBUS of J1 runs up the left edge
+  (column B), so it does not cross the GND strip (row 6)
 
 ## Parts
 
@@ -266,3 +270,5 @@ The AMS1117-3.3 is a part that holds its output through the inside of the IC, an
 ## Sources
 
 Original work.
+
+See also: [TI LM1117 datasheet](https://www.ti.com/lit/ds/symlink/lm1117.pdf), [AMS1117 datasheet](http://www.advanced-monolithic.com/pdf/ds1117.pdf), [Low-dropout regulator (Wikipedia)](https://en.wikipedia.org/wiki/Low-dropout_regulator)

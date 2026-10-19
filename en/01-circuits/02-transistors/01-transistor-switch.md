@@ -6,7 +6,7 @@ title: Transistor Switch (LED)
 tier: 50
 source: 自作
 board: BB
-ja: 1d77e2097df210f575b65473e376341c44231e76
+ja: e87a5c015251092b4face6f4891ceaa35116aad2
 ---
 
 # 2-1 Transistor Switch (LED)
@@ -173,3 +173,5 @@ With the model's hFE lowered to 100, RB = 100 kΩ cuts I<sub>C</sub> to the 4 mA
 ## Sources
 
 Original work.
+
+See also: [Bipolar junction transistor (Wikipedia)](https://ja.wikipedia.org/wiki/バイポーラトランジスタ), [Lessons in Electric Circuits Vol. III, Chapter 4: Bipolar junction transistors](https://www.ibiblio.org/kuphaldt/electricCircuits/Semi/SEMI_4.html)

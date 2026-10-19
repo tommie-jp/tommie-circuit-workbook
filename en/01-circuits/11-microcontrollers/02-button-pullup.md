@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 今
-ja: 38a85b1e53733264aed31475a21fe39b0f245dde
+ja: b4527fe0a33ddcfc1a04dc834b68b173f21690dc
 ---
 
 # 11-2 Button Input and a Pull-Up
@@ -226,5 +226,5 @@ Not checked: the actual voltage when the button is pressed; chattering
 
 ## Sources
 
-Original work. The pull-up resistance of the GPIO (32 to 86 kΩ, IOVDD=3.3 V) comes from the RP2350 datasheet
+Original work. The pull-up resistance of the GPIO (32 to 86 kΩ, IOVDD=3.3 V) comes from the [RP2350 datasheet](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf)
 (14.9 Electrical characteristics, Digital IO).

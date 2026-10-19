@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 古
-ja: 516f1333849312872d49f9687bcc503cce8f6e8d
+ja: 43a2b180b3070db7829c1c9b1ed3f2e67be78178
 ---
 
 # 8-3 Touch switch (human body)
@@ -178,3 +178,5 @@ Q1 and Q2 are substitute models fitted to h<sub>FE</sub> = 100 (not measured).
 ## Sources
 
 Original work.
+
+See also: [Touch sensor (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/タッチセンサー), [Darlington connection (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/ダーリントン接続)

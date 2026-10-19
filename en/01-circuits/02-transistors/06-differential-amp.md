@@ -6,7 +6,7 @@ title: Differential Amplifier
 tier: 50
 source: 自作
 board: BB
-ja: 094829544a3b49cacfc0d3937e93d6d63a975f97
+ja: b3977ba33001bd6ddc047703ac347753ecd0c422
 ---
 
 # 2-6 Differential Amplifier
@@ -87,10 +87,10 @@ parts:
   R1: resistor b2 b6 10k
   R2: resistor c6 c10 10k
   RC1: resistor b13 b16 220
-  D1: led c16(A) c17(K) red
+  D1: led c16(A) c17(K) red cap=below:-1,0
   RE: resistor b20 b23 220
   RC2: resistor b25 b28 220
-  D2: led c28(A) c29(K) red
+  D2: led c28(A) c29(K) red cap=below:-1,0
   VR1: potentiometer b32(1) b33(w) b34(3) 10k
   Q1: transistor g25(B) g26(C) g27(E) 2SC1815
   Q2: transistor g31(B) g30(C) g29(E) 2SC1815
@@ -101,7 +101,7 @@ parts:
     pins: [V+, GND, 1-, 1+, 2-, 2+]
 wires:
   - AD.V+ -- +t1 red
-  - AD.GND -- -t2 black
+  - AD.GND -- -t3 black
   - AD.1- -- -t15 black
   - AD.1+ -- a17 orange
   - AD.2- -- -t27 black
@@ -127,7 +127,7 @@ In Fig. 2, the divider of `R1`/`R2` (column 6) is the base of `Q1` (the referenc
 `Q1` and `Q2` go into the block below the gap and are connected to the parts in the upper block with 6 wires (orange, yellow, green, green, yellow, blue).
 **Insert `Q2` mirrored (in the order E, C, B from the left)**. The order of the upper parts and the order of the lower pins then match, and the 6 wires do not cross.
 
-- Power: V+ (red) of the AD to `+t1` and GND (black) to `-t2`. The top + rail is +5 V and the − rail is GND
+- Power: V+ (red) of the AD to `+t1` and GND (black) to `-t3`. The top + rail is +5 V and the − rail is GND
   (the bottom rails are not used). The two LEDs take a little under 10 mA, so V+ is enough
 - Reference: `d6` (the midpoint of R1 and R2) → `g25` (base of `Q1`, orange). Knob: `c33` → `g31` (base of `Q2`, blue)
 - Collectors: `d17` (cathode of D1) → `g26` (C of `Q1`), `d29` (cathode of D2) → `g30` (C of `Q2`) (yellow)
@@ -210,3 +210,5 @@ When you set it with the knob, turn it until the LED goes out.
 ## Sources
 
 Original work.
+
+See also: [Differential amplifier (Wikipedia)](https://ja.wikipedia.org/wiki/差動増幅回路), [Amplifier (Wikipedia)](https://ja.wikipedia.org/wiki/増幅回路)

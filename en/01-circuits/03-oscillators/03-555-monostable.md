@@ -6,7 +6,7 @@ title: 555 monostable — a timer
 tier: 50
 source: 自作
 board: BB
-ja: 3557e26492fcd8f3b6dd311af195f1d03024cfe0
+ja: 4aa56925db0853cb9c584d636090cf6e08d18d16
 ---
 
 # 3-3 555 monostable — a timer
@@ -198,3 +198,5 @@ The NE555 is a behavioral model (the same as `sim/02-555-astable.cir` in 3-2: co
 ## Sources
 
 Original work.
+
+See also: [555 timer IC (Wikipedia)](https://ja.wikipedia.org/wiki/555), [NE555 datasheet (Texas Instruments, SLFS022K)](https://www.ti.com/lit/ds/symlink/ne555.pdf)

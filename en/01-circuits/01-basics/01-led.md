@@ -6,7 +6,7 @@ title: Lighting an LED — a resistor sets the current
 tier: 50
 source: 自作
 board: BB
-ja: 33b0210c8b95a1efd660af7d64f1a32a0c97d199
+ja: 93c0cf03eb0e37ea45fe51799a320c9697ab8173
 ---
 
 # 1-1 Lighting an LED — a resistor sets the current
@@ -104,3 +104,5 @@ voltage across the resistor by 330 Ω to get the current.
 ## Sources
 
 Original work.
+
+See also: [Light-emitting diode (Wikipedia)](https://ja.wikipedia.org/wiki/発光ダイオード), [Ohm's law (Wikipedia)](https://ja.wikipedia.org/wiki/オームの法則)

@@ -6,7 +6,7 @@ title: Three-terminal regulator (7805)
 tier: 50
 source: 自作
 board: [BB, PF]
-ja: ddd18b5ee60b6cdaa8133b201f28507acaa06ea7
+ja: 13a918260db7e067c483271ed0efe659dead3054
 ---
 
 # 5-3 Three-terminal regulator (7805)
@@ -279,3 +279,5 @@ is 5 V ÷ 1 kΩ = 5 mA, that in Dled is (5 V − 2.0 V) ÷ 680 Ω ≈ 4.4 mA, an
 ## Sources
 
 Original work.
+
+See also: [TI LM340 (7805 family) datasheet](https://www.ti.com/lit/ds/symlink/lm340.pdf), [Three-terminal regulator (Wikipedia)](https://ja.wikipedia.org/wiki/三端子レギュレータ), [Linear regulator (Wikipedia)](https://ja.wikipedia.org/wiki/リニアレギュレータ)

@@ -6,7 +6,7 @@ title: Relay driver — transistor and flyback diode
 tier: 50
 source: 自作
 board: BB
-ja: c880e2446a5474a7d63322c5a067105bfeeed1f0
+ja: e190d7e06d47d1785bcb9b17ae80b26e58559536
 ---
 
 # 7-1 Relay driver — transistor and flyback diode
@@ -84,7 +84,7 @@ parts:
     type: device
     at: bottom
     label: Analog Discovery (W1 and Scope)
-    pins: [W1, 1+, 1-, 2+, 2-, GND]
+    pins: [1+, W1, 2+, 1-, 2-, GND]
   K1: relay @ f10
   Q1: transistor i4(E) i5(C) i6(B) 2SC1815
   R1: resistor f1 f6 1k
@@ -198,3 +198,5 @@ The deck is `sim/01-relay-driver.cir`.
 ## Sources
 
 Original work.
+
+See also: [Flyback diode (Wikipedia)](https://en.wikipedia.org/wiki/Flyback_diode), [Relay (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/リレー), [Vishay 1N4148 datasheet](https://www.vishay.com/docs/81857/1n4148.pdf)

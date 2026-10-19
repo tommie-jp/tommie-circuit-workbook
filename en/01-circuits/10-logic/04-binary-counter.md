@@ -6,7 +6,7 @@ title: Binary Counter (4 bits, 4040)
 tier: 50
 source: 自作
 board: BB
-ja: fb640482e525e7816a925a714f0f6a62b70b5f31
+ja: 44c336489ea081d7d0ce0b8228379927c336b647
 ---
 
 # 10-4 Binary Counter (4 bits, 4040)
@@ -278,3 +278,5 @@ The count sequence (0000 → 0101 → 1010 → 1111 → 0000) is ordinary binary
 ## Sources
 
 Original work.
+
+See also: [CD4040B datasheet](https://www.ti.com/lit/ds/symlink/cd4040b.pdf), [NE555 datasheet](https://www.ti.com/lit/ds/symlink/ne555.pdf), [Counter (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/カウンタ)

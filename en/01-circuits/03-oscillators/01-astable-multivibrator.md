@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 古
-ja: 116de8efb99a35bc2baa72017d9984415715a70a
+ja: add9afcf89af455152aab36865ffb775cdc2718a
 ---
 
 # 3-1 Astable Multivibrator, LEDs Blinking Alternately
@@ -236,3 +236,5 @@ Q1 and Q2 are the same 2SC1815 model as `09-rf/sim/agc.cir` (IS, VAF, IKF, RB an
 ## Sources
 
 Original work.
+
+See also: [Multivibrator (Wikipedia)](https://ja.wikipedia.org/wiki/マルチバイブレータ), [Electronic oscillator (Wikipedia)](https://ja.wikipedia.org/wiki/発振回路)

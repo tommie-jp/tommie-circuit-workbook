@@ -6,7 +6,7 @@ title: LC Tuning — Seeing Resonance with an LED
 tier: 50
 source: 自作
 board: BB
-ja: ced01a37263203586fe72a73df0e05594e6316bd
+ja: 390d0acc4d15d0609c57200c4e881c5da88ec370
 ---
 
 # 9-1 LC Tuning — Seeing Resonance with an LED
@@ -334,3 +334,5 @@ The Q values 5.9 and 8.3 and the 17.6 V across C1 are calculated from the formul
 ## Sources
 
 Original work.
+
+See also: [LC circuit (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/LC回路), [Tuned circuit (Wikipedia, Japanese)](https://ja.wikipedia.org/wiki/同調回路)
