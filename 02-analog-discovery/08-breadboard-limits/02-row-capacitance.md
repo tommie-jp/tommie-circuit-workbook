@@ -83,6 +83,10 @@ wires:
   - AD.2+ -- b10 purple [h-10]
   - AD.2- -- -t14 black
   - a11 -- -t11 black
+notes:
+  - box a10 e11 orange
+  - text g10 orange left bold: 10 列と 11 列の間の寄生容量 C_stray
+  - text h10 orange left bold: (部品ではない。差し込む部品はない)
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/08-breadboard-limits/breadboard/02-row-capacitance.svg)
