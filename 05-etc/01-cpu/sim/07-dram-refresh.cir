@@ -1,0 +1,31 @@
+* 1-7 DRAM のリフレッシュ: 555 の周期と H の時間 (10 k + 47 k + 1 uF)、CLKn の RC 遅延 (10 k + 22 nF) が 74HC14 のしきい値を切るまで、書き戻しの整定、一周の時間の算術
+* 555 は 1/3・2/3 VCC で切り替わるスイッチで模す (放電のトランジスタ = Sdis、出力は放電の線の電圧から作る)
+VCC vcc 0 5
+RA vcc dis 10k
+RB dis cap 47k
+C1 cap 0 1u
+Sdis dis 0 cap 0 SWD
+.model SWD SW(Ron=1 Roff=1G Vt=2.5 Vh=0.8333)
+Bout clk 0 V=if(V(dis)<0.5, 0, 5)
+* CLKn と遅延の RC (74HC14 の入力はほぼ電流を食わない)
+Bn clkn 0 V=5-V(clk)
+R15 clkn node 10k
+C35 node 0 22n
+* 書き戻し: 3.4 V まで漏れたセルを、オン抵抗 180 Ω を通して 5 V へ
+VWB wb 0 PULSE(3.4 5 1m 1n 1n 1 2)
+Ron wb cell 180
+C6 cell 0 100n
+.ic V(cell)=3.4 V(cap)=0
+.tran 0 400m 0 2u
+* 2 周目以降で測る (1 周目は C1 を 0 V から充てるので長い)
+.meas tran period TRIG V(clk) VAL=2.5 RISE=2 TARG V(clk) VAL=2.5 RISE=3
+.meas tran thigh TRIG V(clk) VAL=2.5 RISE=2 TARG V(clk) VAL=2.5 FALL=3
+.meas tran freq PARAM 1/period
+.meas tran tround PARAM 16*period
+* CLK が上がってから node が VT- (代表 1.6 V) を切るまで = 書き戻しが始まるまでの遅れ
+.meas tran tdelay TRIG V(clk) VAL=2.5 RISE=2 TARG V(node) VAL=1.6 FALL=2
+.meas tran tdelay_min PARAM 10k*22n*ln(5/2.45)
+.meas tran tdelay_max PARAM 10k*22n*ln(5/0.9)
+.meas tran twb TRIG V(wb) VAL=4.2 RISE=1 TARG V(cell) VAL=4.95 RISE=1
+.meas tran margin100n PARAM ((5-5*3.3/13.3)/(100n/100n))/(16*period)
+.end
