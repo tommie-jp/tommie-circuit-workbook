@@ -1,0 +1,16 @@
+* 1-6 DRAM の配列 (74HC4051 + 100 nF): 書き込みの整定 (オン抵抗 180 Ω と 100 nF)、保持時間、基準電圧、LED の電流、読み出しの電荷の分配の算術
+VBL bl 0 PULSE(0 5 10u 1n 1n 1 2)
+Ron bl cell 180
+C1 cell 0 100n
+.tran 0 500u 0 0.1u
+.meas tran t99 WHEN V(cell)=4.95 RISE=1
+.meas tran tau PARAM 180*100n
+.meas tran slope10n PARAM 10n/100n
+.meas tran slope100n PARAM 100n/100n
+.meas tran vref PARAM 5*3.3/13.3
+.meas tran t_hold10n PARAM (5-5*3.3/13.3)/(10n/100n)
+.meas tran t_hold100n PARAM (5-5*3.3/13.3)/(100n/100n)
+.meas tran iled PARAM (5-1.9-0.1)/820
+.meas tran dv_share PARAM 5*30p/(100n+30p)
+.meas tran i_total PARAM 2*(5-1.9-0.1)/820+6*5/10k+5/13.3k+4*0.5m
+.end

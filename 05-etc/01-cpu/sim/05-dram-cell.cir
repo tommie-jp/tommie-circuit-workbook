@@ -1,0 +1,20 @@
+* 1-5 DRAM のセル (2N7000 + 100 nF): ワード線 5 V を 0.5 s 入れてビット線 5 V を書き、セルの電圧と、漏れ・基準電圧・LED の算術を見る
+* 2N7000 のモデルは LTspice の standard.mos に無いので、同じ TO-92 の N ch MOSFET の BS170 のモデル (standard.mos の値を写した) で代用。V_GS(th) 2.14 V
+.model BS170 NMOS (Level=3 W=200u L=1u Tox=0.05u Vto=2.14 Kp=4e-4 Vmax=0 Uo=700 Phi=0.6 NSUB=1e15 NFS=9e11 Gamma=0.1 Delta=0 Eta=0 Theta=0 Kappa=0.005 Rg=0 Rs=0 Rd=0.0 Rb=0 Rds=50e9 Cgso=140n Cgdo=10n Cgbo=10n Cbd=100p Cj=2e-4 Cjsw=1n Is=10f N=1 Pb=.8)
+VBL bl 0 5
+VWL wl 0 PULSE(0 5 10m 1u 1u 0.5 100)
+M1 bl wl cell cell BS170
+C1 cell 0 100n
+* 漏れは M1 のモデルでは小さすぎるので、10 nA 相当 (3 V / 300 MΩ) の抵抗で置く
+Rleak cell 0 300Meg
+.tran 0 20 0 1m
+.meas tran vcell_w FIND V(cell) AT 0.5
+.meas tran vcell_10 FIND V(cell) AT 10
+.meas tran vcell_20 FIND V(cell) AT 20
+.meas tran slope PARAM 10n/100n
+.meas tran slope_max PARAM 1u/100n
+.meas tran vref PARAM 5*3.3/13.3
+.meas tran iled PARAM (5-1.9)/820
+.meas tran tau_probe PARAM 1Meg*100n
+.meas tran t_charge PARAM 100n*3.55/6m
+.end

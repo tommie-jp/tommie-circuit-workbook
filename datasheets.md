@@ -65,9 +65,11 @@
 | 74HC74 | D フリップフロップ | SCLS094F (2021-06) | [PDF](https://www.ti.com/lit/ds/symlink/sn74hc74.pdf) | [Wayback](https://web.archive.org/web/20261006200013/https://www.ti.com/lit/ds/symlink/sn74hc74.pdf) |
 | 74HC161 | 4 ビットカウンタ (同期、非同期クリア) | SCLS297D (2003-09) | [PDF](https://www.ti.com/lit/ds/symlink/sn74hc161.pdf) | [Wayback](https://web.archive.org/web/20261006200055/https://www.ti.com/lit/ds/symlink/sn74hc161.pdf) |
 | 74HC163 | 4 ビットカウンタ (同期クリア) | SCLS298D (2003-10) | [PDF](https://www.ti.com/lit/ds/symlink/sn74hc163.pdf) | [Wayback](https://web.archive.org/web/20261006200156/https://www.ti.com/lit/ds/symlink/sn74hc163.pdf) |
+| 74HC138 | 3 線→8 線デコーダ | SCLS107G (2021-10) | [PDF](https://www.ti.com/lit/ds/symlink/sn74hc138.pdf) | [Wayback](https://web.archive.org/web/20261006111054/https://www.ti.com/lit/ds/symlink/sn74hc138.pdf) |
 | 74HC154 | 4 線→16 線デコーダ | Nexperia Rev. 10 (2024-08) | [PDF](https://assets.nexperia.com/documents/data-sheet/74HC_HCT154.pdf) | [Wayback](https://web.archive.org/web/20261006200256/https://assets.nexperia.com/documents/data-sheet/74HC_HCT154.pdf) |
 | 74HC194 | 4 ビットシフトレジスタ | SCHS164G (2006-05) | [PDF](https://www.ti.com/lit/ds/symlink/cd74hc194.pdf) | [Wayback](https://web.archive.org/web/20260923170717/https://www.ti.com/lit/ds/symlink/cd74hc194.pdf) |
 | 74HC245 | バスバッファ | SCLS131F (2022-08) | [PDF](https://www.ti.com/lit/ds/symlink/sn74hc245.pdf) | [Wayback](https://web.archive.org/web/20260923015019/https://www.ti.com/lit/ds/symlink/sn74hc245.pdf) |
+| 74HC4051 | 8 チャネル アナログマルチプレクサ | SCHS122O (2026-01) | [PDF](https://www.ti.com/lit/ds/symlink/cd74hc4051.pdf) | [Wayback](https://web.archive.org/web/20261012102112/https://www.ti.com/lit/ds/symlink/cd74hc4051.pdf) |
 | 74HC283 | 4 ビット全加算器 | SCHS176E (2022-07) | [PDF](https://www.ti.com/lit/ds/symlink/cd74hc283.pdf) | [Wayback](https://web.archive.org/web/20261006200944/https://www.ti.com/lit/ds/symlink/cd74hc283.pdf) |
 | 74HC595 | シフトレジスタ (ラッチ付き) | SCLS041J (2021-10) | [PDF](https://www.ti.com/lit/ds/symlink/sn74hc595.pdf) | — |
 | CD4011 | NAND (CMOS 4000 系) | SCHS021D (2003-09) | [PDF](https://www.ti.com/lit/ds/symlink/cd4011b.pdf) | [Wayback](https://web.archive.org/web/20260828011251/https://www.ti.com/lit/ds/symlink/cd4011b.pdf) |
