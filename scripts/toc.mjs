@@ -23,6 +23,9 @@ const END = '<!-- toc:end -->';
 /** front matter の欄 → 目次の表の見出し。 */
 const COLUMN_NAMES = { era: '印', board: '基板', device: '機種' };
 
+/** 段の名前。`scale: large` の題は「中級 (大規模)」(知識は中級で、回路の規模が上限を超える)。 */
+const tierName = (entry) => (entry.scale === 'large' ? `${TIER_NAMES[entry.tier]} (大規模)` : TIER_NAMES[entry.tier]);
+
 const WRITTEN = '済';
 
 /** 段ごとの数 (入れ子) と書いた数。`[必須, 入門, 中級, 済]`。 */
@@ -81,7 +84,7 @@ export function bookToc(book, rows) {
       ...inChapter.map((entry) => row([
         entry.id,
         titleCell(book, entry),
-        TIER_NAMES[entry.tier],
+        tierName(entry),
         ...book.columns.map((column) => cell(entry[column])),
       ])),
     ].join('\n'));

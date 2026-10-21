@@ -1,14 +1,14 @@
 ---
 book: etc
 chapter: 2
-id: 2-6
+id: 2-8
 title: マイコン版 — ① 受信のあとを Raspberry Pi Pico 2 の FFT とプログラムで作る
 tier: 200
 source: 自作
 board: [BB, PF]
 ---
 
-# 2-6 マイコン版 — ① 受信のあとを Raspberry Pi Pico 2 の FFT とプログラムで作る
+# 2-8 マイコン版 — ① 受信のあとを Raspberry Pi Pico 2 の FFT とプログラムで作る
 
 > [!WARNING]
 > **この題は、まだ実際の回路で検証していない。** 回路図・実体配線図・数値 (利得、波形、スペクトル) は、計算と見積りで作ったもので、正しく動くかどうかは確実ではない。Pico 2 のプログラムも、動かして確かめるまでは動作確認済みとは書かない。
@@ -52,7 +52,7 @@ CLK --> DISP
 @enduml
 ```
 
-![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/plantuml/06-mcu.svg)
+![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/plantuml/08-mcu.svg)
 
 ## ADC と FFT の設計値 (案)
 
@@ -125,7 +125,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/06-mcu.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/08-mcu.svg)
 
 左から、AC 結合の C1、3.3 V を Ra と Rb で半分にするバイアス、低域をなだらかに落とす Cf、ADC の入力の順に並べた。
 Ra と Rb は同じ 220 kΩ なので、節点の直流は 3.3 V の半分の 1.65 V になる。
@@ -178,7 +178,7 @@ notes:
   - text tiny ink: "橙の丸はオシロ (AD3) の CH1 を当てる ADC 入力 (ADC0)。黒い線は GND"
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/06-mcu.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/08-mcu.svg)
 
 ```perf
 # ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
@@ -223,7 +223,7 @@ notes:
   - mark o11 black
 ```
 
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/06-mcu.svg)
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/08-mcu.svg)
 
 図2 はブレッドボード、図2b は同じ回路をユニバーサル基板に組む図。次の説明は図2 のもので、図2b は「ユニバーサル基板に組むとき」に書く。
 
@@ -287,7 +287,7 @@ notes:
   - mark 4k
 ```
 
-![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/graph/06-mcu-1.svg)
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/graph/08-mcu-1.svg)
 
 ### ADC 入力の波形
 
@@ -301,7 +301,7 @@ measure: [vpp, avg, freq]
 cursors: [0, 568us]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/06-mcu-1.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/08-mcu-1.svg)
 
 ```scope
 # オシロスコープの画面 (tommie-fence の scope フェンス)
@@ -312,7 +312,7 @@ ch1: {wave: "= 26mV * sin(2 * pi * 440Hz * t) * (step(t + 50ms) - step(t - 50ms)
 measure: [vpp, freq]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/06-mcu-2.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/08-mcu-2.svg)
 
 ### FFT 512 点の結果
 
@@ -424,7 +424,7 @@ notes:
   - mark 875
 ```
 
-![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/graph/06-mcu-2.svg)
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/graph/08-mcu-2.svg)
 
 ## 見るべき値
 
@@ -448,7 +448,7 @@ check の読み値と突き合わせた値。
 
 ## LTspice での確かめ
 
-`sim/06-mcu.cir` で、AC 結合・バイアス・ローパス (図2) を AC 解析した。FFT は SPICE の対象外で、ビンの算術だけを確かめた。
+`sim/08-mcu.cir` で、AC 結合・バイアス・ローパス (図2) を AC 解析した。FFT は SPICE の対象外で、ビンの算術だけを確かめた。
 
 | 項目 | 本文の数字 | LTspice | 判定 |
 | --- | --- | --- | --- |

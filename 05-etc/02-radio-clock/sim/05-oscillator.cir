@@ -1,0 +1,10 @@
+* 2-5 発振と分周 (図1): 分周の論理は SPICE の対象外。水晶の負荷容量と分周比の算術だけを確かめる
+* C1・C2 (18 pF) の直列と、CD4040B の Q12 (÷ 4096)・74HC163 (÷ 8)
+V1 vcc 0 5
+R1 vcc 0 1k
+.tran 0 1m
+.meas tran cload PARAM 18p*18p/(18p+18p)
+.meas tran f8 PARAM 32768/4096
+.meas tran ftick PARAM 32768/4096/8
+.meas tran tick_high PARAM 1/(32768/4096)
+.end

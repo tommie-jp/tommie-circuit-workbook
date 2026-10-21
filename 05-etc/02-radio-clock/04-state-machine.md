@@ -51,7 +51,7 @@ OUT --> PULSE
 
 ![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/plantuml/04-state-machine-1.svg)
 
-入力は [03-detect.md](03-detect.md) の T440 と T880。出力は [05-clock.md](05-clock.md) の正時パルス。
+入力は [03-detect.md](03-detect.md) の T440 と T880。出力は [07-clock.md](07-clock.md) へ行く正時パルス。
 
 図の信号の意味は、次のとおり。
 
@@ -245,7 +245,7 @@ cursors: [1.4375s, 3.6875s]
 | 3 状態を動かす条件 | イベントと窓から、状態レジスタへの命令を作る | U12 (74HC86)、U13 (74HC08)、U14 (74HC32)、U15 (74HC02) | QA、QB、S3、W、TO、NE440、E440、E880、PON | LOADN、EN、CLRN |
 | 4 状態レジスタと出力 | 状態 ST (QA・QB) を持ち、正時パルス OUT を出す | U16 (74HC163)、U17 (74HC08) | LOADN、EN、CLRN、CLK、E880、W | QA、QB、S3、OUT |
 
-- CLK は 8 Hz のクロック、PON は電源投入のとき H になる信号 ([05-clock.md](05-clock.md) の電源投入のリセット)
+- CLK は 8 Hz のクロック ([05-oscillator.md](05-oscillator.md) で作る)、PON は電源投入のとき H になる信号 ([07-clock.md](07-clock.md) の電源投入のリセット)
 - NE440 と LOADN、CLRN は、**L のとき働く**信号 (N は反転の印)
 - すべての IC の電源は 5 V。IC の電源のピン (74HC74、74HC08 などの PIN 14、74HC163 の PIN 16) は +5 V、GND のピン (PIN 7、74HC163 の PIN 8) は GND
 - ゲートのピンの番号は、74HC74、74HC04、74HC08、74HC86、74HC32、74HC02 の使うゲートの番号を図に書いた (使わないゲートの入力は GND につなぐ)

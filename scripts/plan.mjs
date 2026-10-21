@@ -5,7 +5,7 @@
  * なり、まだの題は字だけ。計画に無い題を書いたら、書いた題の title や tier が計画から
  * ずれたら、検査 (`check.mjs`) で言う — 計画が目次の元なので、直すのは計画の側。
  *
- * 1 題は `{ id, tier, title }` に印 (`board` / `device` / `era` / `tools`) を足したもの。
+ * 1 題は `{ id, tier, title }` に印 (`board` / `device` / `era` / `tools` / `scale`) を足したもの。
  * 印の決まりは題の front matter と同じ (`entry.mjs`)。
  */
 
@@ -17,7 +17,7 @@ import { checkMarks, isText } from './entry.mjs';
 
 export const PLAN_FILE = 'plan.yaml';
 
-const KEYS = new Set(['id', 'title', 'tier', 'board', 'device', 'era', 'tools']);
+const KEYS = new Set(['id', 'title', 'tier', 'board', 'device', 'era', 'tools', 'scale']);
 const ID = /^(\d+)-(\d+)$/;
 
 /**
@@ -82,6 +82,7 @@ export function mergePlan(items, entries) {
     if (entry === undefined) return { ...item, path: null };
     if (entry.title !== item.title) errors.push(`${item.id}: title が plan.yaml と違います (plan.yaml を直す)`);
     if (entry.tier !== item.tier) errors.push(`${item.id}: tier が plan.yaml と違います (plan.yaml を直す)`);
+    if ((entry.scale ?? null) !== item.scale) errors.push(`${item.id}: scale が plan.yaml と違います (plan.yaml を直す)`);
     return { ...item, ...entry };
   });
   for (const entry of entries) {
@@ -122,6 +123,7 @@ function validateItem(book, raw) {
     tools: raw.tools ?? null,
     device: raw.device ?? null,
     era: raw.era ?? null,
+    scale: raw.scale ?? null,
   };
   return { item, errors };
 }

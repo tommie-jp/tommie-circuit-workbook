@@ -24,7 +24,7 @@
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | Analog Discovery 3 と WaveForms で DC〜10 MHz を測る | 50 | 100 | 200 | 100 |
 | [NanoVNA の教科書](03-nanovna/README.md) | LiteVNA64 で 50 kHz〜6.3 GHz を測る (NanoVNA-H4 / V2 は比較用)。治具・部品・フィルタ・アンテナ・GHz 帯。第 11 章でスペクトラムアナライザ (tinySA など) | 50 | 109 | 220 | 112 |
 | [電験三種の教科書](04-denken/README.md) | 理論・機械・電力・法規の範囲を、低い電圧の実験で測って式を確かめる | 50 | 100 | 200 | 100 |
-| [番外の工作](05-etc/README.md) | 4 冊の部品を組み合わせて作る工作。CPU もどき、中波ラジオの時報で動く時計、2SC1815 のミキサー、デュアルゲート FET ミキサー、ディスクリート部品と Raspberry Pi Pico 2 で作る 10BASE-T | 0 | 0 | 23 | 20 |
+| [番外の工作](05-etc/README.md) | 4 冊の部品を組み合わせて作る工作。CPU もどき、中波ラジオの時報で動く時計、2SC1815 のミキサー、デュアルゲート FET ミキサー、ディスクリート部品と Raspberry Pi Pico 2 で作る 10BASE-T | 0 | 0 | 25 | 22 |
 | [FPGA の教科書](06-fpga/README.md) | 1 本の Verilog をブラウザ・Raspberry Pi Pico 2 (Soft-FPGA)・実物の FPGA で動かし、Analog Discovery 3 の Logic で測って比べる | 50 | 100 | 200 | 124 |
 
 <!-- toc:end -->
@@ -68,6 +68,7 @@ board: BB               # 任意。BB = ブレッドボード / PF = perfboard /
 device: LV64            # nanovna は必須 (LV64 標準 / H4・V2 は歴史的)。analog-discovery は AD3 でしかできない題だけ AD3
 era: 古                 # circuits だけ、任意。古 = 知っておきたい古典 / 今 = 今の定番 / 古/今
 tools: [AD, VNA]        # 任意。2 つの計器を両方使う題
+scale: large            # 任意。中級 (tier: 200) で、回路の規模が上限を超える題。目次に「中級 (大規模)」と出る
 ---
 ```
 

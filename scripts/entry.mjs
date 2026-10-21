@@ -10,7 +10,7 @@ import { parse } from 'yaml';
 import { TIERS, findBook, findChapter } from './books.mjs';
 
 /** front matter に書ける鍵。ここに無い鍵は書き間違いとして断る。 */
-const KEYS = new Set(['book', 'chapter', 'id', 'title', 'tier', 'source', 'board', 'tools', 'device', 'era']);
+const KEYS = new Set(['book', 'chapter', 'id', 'title', 'tier', 'source', 'board', 'tools', 'device', 'era', 'scale']);
 
 /** 板の印。BB = ブレッドボード、PF = perfboard、CB = 銅張り基板、— = 板を使わない。 */
 const BOARDS = new Set(['BB', 'PF', 'CB', '—']);
@@ -77,6 +77,7 @@ export function validateEntry({ path, text }) {
     tools: data.tools ?? null,
     device: data.device ?? null,
     era: data.era ?? null,
+    scale: data.scale ?? null,
   };
   return { entry, errors };
 }
@@ -140,7 +141,10 @@ function checkValues(data, bookSlug) {
   return [...errors, ...checkMarks(data, bookSlug)];
 }
 
-/** 印 (board / tools / era / device) の値。計画 (`plan.mjs`) も同じ決まりで見る。 */
+/**
+ * 印 (board / tools / era / device / scale) の値。計画 (`plan.mjs`) も同じ決まりで見る。
+ * `scale: large` は中級の題で、回路の規模が上限を超える物 (知識は中級。目次に「中級 (大規模)」と出る)。
+ */
 export function checkMarks(data, bookSlug) {
   const errors = [];
   if (data.board !== undefined && !listOf(data.board).every((board) => BOARDS.has(board))) {
@@ -151,6 +155,10 @@ export function checkMarks(data, bookSlug) {
   }
   if (data.era !== undefined && (bookSlug !== 'circuits' || !ERAS.has(data.era))) {
     errors.push(`era は回路の冊だけに書き、${[...ERAS].join(' / ')} のどれかです`);
+  }
+
+  if (data.scale !== undefined && (data.scale !== 'large' || data.tier !== 200)) {
+    errors.push('scale は中級 (tier: 200) の題だけに large と書きます');
   }
 
   const device = DEVICES[bookSlug];

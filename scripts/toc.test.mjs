@@ -101,3 +101,10 @@ test('replaces only the text between the markers', () => {
   assert.equal(fillMarkers(text, 'new'), 'head\n<!-- toc:start -->\n\nnew\n\n<!-- toc:end -->\ntail\n');
   assert.throws(() => fillMarkers('no markers', 'new'), /toc:start/);
 });
+
+test('marks a large intermediate entry next to its tier', () => {
+  const toc = bookToc(circuits, [row(circuits, 1, 1, { tier: 200, scale: 'large' }), row(circuits, 1, 2, { tier: 200 })]);
+
+  assert.match(toc, /\| 1-1 \| 題 1-1 \| 中級 \(大規模\) \|/);
+  assert.match(toc, /\| 1-2 \| 題 1-2 \| 中級 \|/);
+});

@@ -84,3 +84,13 @@ test('reports a written entry whose title or tier drifted from the plan', () => 
   // 目次はファイルの言い分で出す (直すのは plan.yaml の側)。
   assert.equal(rows[0].title, 'Supplies (改)');
 });
+
+test('reads scale from the plan and reports a written entry whose scale drifted', () => {
+  const { items, errors } = validatePlan(ad, [item({ tier: 200, scale: 'large' })]);
+  assert.deepEqual(errors, []);
+  assert.equal(items[0].scale, 'large');
+  assert.ok(errorsOf(ad, [item({ scale: 'large' })]).some((error) => /scale/.test(error)));
+
+  const drifted = { ...items[0], scale: null, path: 'x.md' };
+  assert.ok(mergePlan(items, [drifted]).errors.some((error) => /1-1.*scale/.test(error)));
+});

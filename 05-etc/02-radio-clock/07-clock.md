@@ -1,21 +1,27 @@
 ---
 book: etc
 chapter: 2
-id: 2-5
+id: 2-7
 title: 時計 — 32.768 kHz を数えて時分秒を出し、正時パルスで合わせる
 tier: 200
+scale: large
 source: 自作
 board: BB
 ---
 
-# 2-5 時計 — 32.768 kHz を数えて時分秒を出し、正時パルスで合わせる
+# 2-7 時計 — 32.768 kHz を数えて時分秒を出し、正時パルスで合わせる
 
 > [!WARNING]
-> **この題は、まだ実際の回路で検証していない。** 回路図・実体配線図・波形・数値は、設計から計算と見積りで作ったもので、組んで測ったものではない。水晶の負荷容量、パワーオンの時間、表示の電流は典型値からの見積りだ。組むときは、ユニットごとに確かめながら進めてほしい。
+> **この題は、まだ実際の回路で検証していない。** 回路図・実体配線図・波形・数値は、設計から計算と見積りで作ったもので、組んで測ったものではない。パワーオンの時間と表示の電流は典型値からの見積りだ。組むときは、ユニットごとに確かめながら進めてほしい。
 
 全体の中の位置は [01-block.md](01-block.md) の ④ 時計。水晶の 32.768 kHz を分周して 1 Hz にし、
 時・分・秒を数えて表示する。[04-state-machine.md](04-state-machine.md) の正時パルスが来たら、
 時計を正時に合わせる。
+
+> [!NOTE]
+> **中級 (大規模) の題。** 使う知識は中級までだが、回路の規模が中級の上限 (1 題で IC 6 個・ブレッドボード full 2 枚まで) を大きく超える
+> (IC 29 個、8 ユニット)。**発振と分周 (ユニット 1) を [2-5](05-oscillator.md)、秒 (ユニット 2) を [2-6](06-seconds.md) で先に組んで動かし**、
+> この題では残りのユニット (分・時・DIP・窓判定・同期と設定・表示) を足す。ユニットごとに単独で確かめながら進める。
 
 ## ブロック図
 
@@ -68,7 +74,7 @@ GATE --> HOUR : 時を +1
 @enduml
 ```
 
-![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/plantuml/05-clock.svg)
+![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/plantuml/07-clock.svg)
 
 ## 時刻の初期設定 — 時と分は DIP スイッチで、秒は最初の正時パルスで
 
@@ -126,14 +132,14 @@ RTC の IC (DS3231 など) は使わない。I2C で時刻を読み書きする�
 | 上の外 | — | 何もしない |
 
 時の +1 は 23 時から 0 時へ回る (23 → 00)。判定のゲートは、分の「59」「00」の検出と、
-X の判定、AND と OR をあわせて十数個になる (次の「回路図」の図6)。
+X の判定、AND と OR をあわせて十数個になる (次の「回路図」の図4)。
 
 ## 回路の組み立て
 
 ### 同期式にする
 
 時計の部分は、**すべてのカウンタとフリップフロップを、8 Hz の CLK の立ち上がりで動かす**。
-CLK は図1の CD4040B の Q12 で、[04-state-machine.md](04-state-machine.md) の CLK と同じものだ。
+CLK は2-5 の図1の CD4040B の Q12 で、[04-state-machine.md](04-state-machine.md) の CLK と同じものだ。
 1 Hz は、別の信号 TICK で表す。TICK は 8 クロックに 1 回、1 クロックぶんだけ H になる。
 各桁は「下の桁が最大の値で、TICK が来た」ときにだけ数える (イネーブルの鎖)。
 ゲートの遅れ (数十 ns) は 125 ms に比べて無視できるので、ゲートの出力は次のクロックまでに必ず落ち着く。
@@ -160,14 +166,20 @@ CLK は図1の CD4040B の Q12 で、[04-state-machine.md](04-state-machine.md) 
 
 | ユニット | 図 | 主な IC | 役目 |
 | --- | --- | --- | --- |
-| 1 発振と分周 | 図1 | U18 (CD4069UB)、U19 (CD4040B)、U20 (74HC163)、U46 (74HC02) | 32.768 kHz → 8 Hz の CLK → 1 Hz の TICK |
-| 2 秒 | 図2 | U21・U22 (74HC163)、U33 (74HC08)、U42 (74HC02) | 秒の一の位 (0〜9) と十の位 (0〜5) |
-| 3 分 | 図3 | U23・U24 (74HC163)、U34 (74HC08)、U42 (74HC02) | 分の一の位と十の位 |
-| 4 時 | 図4 | U25・U26 (74HC163)、U35・U36 (74HC08)、U40 (74HC32)、U43 (74HC02) | 時の一の位 (0〜9) と十の位 (0〜2)、23 → 00 |
-| 5 DIP | 図5 | S1〜S13、R1〜R13 | 時刻の入力 (13 ビット) |
-| 6 窓判定 | 図6 | U36・U37 (74HC08)、U38〜U40 (74HC32)、U43 (74HC02) | 正時パルスを受け付けるか、時を +1 するか |
-| 7 同期と設定 | 図7 | U41 (74HC32)、U44 (74HC74)、U45 (CD40106B) | 同期済み、設定ボタン、パワーオン |
-| 8 表示 | 図8 | U27〜U32 (CD4511B)、D1〜D6 | BCD を 7 セグメントにする (6 桁) |
+| 1 発振と分周 | 2-5 の図1 | U18 (CD4069UB)、U19 (CD4040B)、U20 (74HC163)、U46 (74HC02) | 32.768 kHz → 8 Hz の CLK → 1 Hz の TICK |
+| 2 秒 | 2-6 の図1 | U21・U22 (74HC163)、U33 (74HC08)、U42 (74HC02) | 秒の一の位 (0〜9) と十の位 (0〜5) |
+| 3 分 | 図1 | U23・U24 (74HC163)、U34 (74HC08)、U42 (74HC02) | 分の一の位と十の位 |
+| 4 時 | 図2 | U25・U26 (74HC163)、U35・U36 (74HC08)、U40 (74HC32)、U43 (74HC02) | 時の一の位 (0〜9) と十の位 (0〜2)、23 → 00 |
+| 5 DIP | 図3 | S1〜S13、R1〜R13 | 時刻の入力 (13 ビット) |
+| 6 窓判定 | 図4 | U36・U37 (74HC08)、U38〜U40 (74HC32)、U43 (74HC02) | 正時パルスを受け付けるか、時を +1 するか |
+| 7 同期と設定 | 図5 | U41 (74HC32)、U44 (74HC74)、U45 (CD40106B) | 同期済み、設定ボタン、パワーオン |
+| 8 表示 | 図6 | U27〜U32 (CD4511B)、D1〜D6 | BCD を 7 セグメントにする (6 桁) |
+
+| ユニット | 組む題 |
+| --- | --- |
+| 1 発振と分周 | [2-5](05-oscillator.md) の図1・図2 |
+| 2 秒 | [2-6](06-seconds.md) の図1〜図3 |
+| 3〜8 | この題 |
 
 ### 信号の名前
 
@@ -192,254 +204,16 @@ CLK は図1の CD4040B の Q12 で、[04-state-machine.md](04-state-machine.md) 
 
 ## 回路図
 
-回路は 8 つの図に分ける。ゲートは論理記号で描き、記号のピンに IC のピンの番号 (PIN) を添えた。
+回路は 8 つのユニットに分ける。ユニット 1 は 2-5 の図1、ユニット 2 は 2-6 の図1 にあり、この題ではユニット 3〜8 を図1〜図6 に描く。
+ゲートは論理記号で描き、記号のピンに IC のピンの番号 (PIN) を添えた。
 IC の電源 (PIN 14 または 16) と GND (PIN 7 または 8) は、図の下の注記か本文に書く。
 使わないゲートの入力は GND につなぐ。
-
-### ユニット 1: 発振と分周
-
-```circuit
-# 回路図 (tommie-fence の circuit フェンス)
-title: 図1 発振と分周 (ユニット 1)
-parts:
-  X1: crystal 6,3 16,3 32.768k
-  Rf: resistor 6,5 11,5 10M
-  U18A: not 9,7 CD4069UB
-  Rd: resistor 12,7 16,7 270k
-  C1: capacitor 6,9 6,11 18p
-  C2: capacitor 16,9 16,11 18p
-  GND1: ground 6,11
-  GND2: ground 16,11
-  U18B: not 17,14.8 CD4069UB
-  U19: dip16 26,16 CD4040B r180
-  GND3: ground 23.8,18.6
-  CLK: port 32,17.68
-  U20: ic 13,27 74HC163
-  VCC: vcc 10,27 5V
-  GND4: ground 9.4,25.5 r90
-  VCC: vcc 9.4,27.75 5V
-  CLK: port 9.4,28.5
-  VCC: vcc 12.5,23.6 5V
-  LDD: port 16.6,24.7
-  GND5: ground 13,29.6
-  TICK: port 16.6,28
-  U46A: nor 31,25
-  TICK: port 27.5,24.25
-  RS: port 27.5,25.75
-  LDD: port 34,25
-wires:
-  - 6,7 -- U18A.in
-  - 6,7 -- 6,5
-  - 6,5 -- 6,3
-  - 6,7 -- 6,9
-  - U18A.out -- 11,7
-  - 11,7 -- 11,5
-  - 11,7 -- 12,7
-  - 16,7 -- 16,3
-  - 16,7 -- 16,9
-  - 11,7 -- 11,14.8
-  - 11,14.8 -- U18B.in
-  - U18B.out -| U19.CLOCK
-  - U19.R -| 23.8,15.28
-  - 23.8,15.28 -- 23.8,18.6
-  - U19.Q12 -| 32,17.68
-  - U20.D -| 10,27
-  - U20.A -| 10.5,25.5
-  - U20.B -| 10.5,26
-  - U20.C -| 10.5,26.5
-  - 10.5,25.5 -- 10.5,26
-  - 10.5,26 -- 10.5,26.5
-  - 10.5,25.5 -- 9.4,25.5
-  - U20.ENP -| 10.5,27.5
-  - U20.ENT -| 10.5,28
-  - 10.5,27.5 -- 10.5,27.75
-  - 10.5,27.75 -- 10.5,28
-  - 10.5,27.75 -- 9.4,27.75
-  - U20.CLK -| 9.4,28.5
-  - 12.5,24.2 -| U20.VCC
-  - 13,24.2 -| U20.CLR
-  - 12.5,24.2 -- 13,24.2
-  - 12.5,24.2 -- 12.5,23.6
-  - U20.LOAD |- 16.6,24.7
-  - 13,29.6 -| U20.GND
-  - U20.RCO -| 16.6,28
-  - 27.5,24.25 |- U46A.a
-  - 27.5,25.75 |- U46A.b
-  - U46A.out -- 34,25
-notes:
-  - text 24,12 small left: U19 CD4040B (4096 分周)  PIN 16 は +5V、PIN 8 は GND
-  - text 10,16.8 small left: U18 CD4069UB  PIN 14 は +5V、PIN 7 は GND
-  - text 14.5,23.1 small left: U20 74HC163 (8 分周)
-  - text 29.9,24.4 tiny center: "2"
-  - text 29.9,25.6 tiny center: "3"
-  - text 31.7,24.6 tiny center: "1"
-  - text 4,32.5 small left: 74HC02 の PIN 14 は +5V、PIN 7 は GND
-style:
-  pitch: 1
-```
-
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/05-clock-1.svg)
-
-- 水晶 X1 (32.768 kHz) と CD4069UB の 1 つ目のインバータ U18A で、ピアース発振回路を作る。R<sub>f</sub> (10 MΩ) はインバータの入出力を結んで動作点を決め、R<sub>d</sub> (270 kΩ) は水晶に加わる電力を抑える。C1・C2 (18 pF) と基板の浮遊容量が水晶の負荷容量になる。
-- 2 つ目のインバータ U18B で四角い波 (CK32) に整え、CD4040B (U19) に入れる。CD4040B は立ち下がりで数え、Q12 は 32768 ÷ 4096 で **8 Hz** になる。これが CLK だ。U19 の R は GND につなぎ、リセットしない。
-- U20 (74HC163) は 8 Hz を 8 分周して TICK を作る。データ入力は 8 (D だけ +5 V)。数は 8〜15 で、15 のあいだだけ RCO が H になる。これが TICK で、次のクロックで 8 に戻る。LOAD は LDD で、RS が H のときも 8 を読み込む。
-
-### ユニット 2: 秒
-
-```circuit
-# 回路図 (tommie-fence の circuit フェンス)
-title: 図2 秒のカウンタ (ユニット 2)
-parts:
-  U21: ic 12,8 74HC163
-  GND1: ground 8.4,6.5 r90
-  TICK: port 8.4,8.75
-  CLK: port 8.4,9.5
-  VCC: vcc 11.5,4.6 5V
-  LDSU: port 15.6,5.7
-  GND2: ground 12,10.6
-  SU0: port 15.6,7
-  SU1: port 15.6,7.5
-  SU2: port 15.6,8
-  SU3: port 15.6,8.5
-  U22: ic 12,19 74HC163
-  GND3: ground 8.4,17.5 r90
-  ENST: port 8.4,19.75
-  CLK: port 8.4,20.5
-  VCC: vcc 11.5,15.6 5V
-  LDST: port 15.6,16.7
-  GND4: ground 12,21.6
-  ST0: port 15.6,18
-  ST1: port 15.6,18.5
-  ST2: port 15.6,19
-  ST3: port 15.6,19.5
-  U33A: and 23,6
-  SU3: port 19.5,5.25
-  SU0: port 19.5,6.75
-  SU9: port 26,6
-  U33B: and 23,9.4
-  SU9: port 19.5,8.65
-  TICK: port 19.5,10.15
-  ENST: port 26,9.4
-  U42A: nor 23,12.8
-  RS: port 19.5,12.05
-  ENST: port 19.5,13.55
-  LDSU: port 26,12.8
-  U33C: and 23,17
-  ST2: port 19.5,16.25
-  ST0: port 19.5,17.75
-  ST5: port 26,17
-  U33D: and 23,20.4
-  ST5: port 19.5,19.65
-  ENST: port 19.5,21.15
-  ENMU: port 26,20.4
-  U42B: nor 23,23.8
-  RS: port 19.5,23.05
-  ENMU: port 19.5,24.55
-  LDST: port 26,23.8
-wires:
-  - U21.A -| 9.5,6.5
-  - U21.B -| 9.5,7
-  - U21.C -| 9.5,7.5
-  - U21.D -| 9.5,8
-  - 9.5,6.5 -- 9.5,7
-  - 9.5,7 -- 9.5,7.5
-  - 9.5,7.5 -- 9.5,8
-  - 9.5,6.5 -- 8.4,6.5
-  - U21.ENP -| 9.5,8.5
-  - U21.ENT -| 9.5,9
-  - 9.5,8.5 -- 9.5,8.75
-  - 9.5,8.75 -- 9.5,9
-  - 9.5,8.75 -- 8.4,8.75
-  - U21.CLK -| 8.4,9.5
-  - 11.5,5.2 -| U21.VCC
-  - 12,5.2 -| U21.CLR
-  - 11.5,5.2 -- 12,5.2
-  - 11.5,5.2 -- 11.5,4.6
-  - U21.LOAD |- 15.6,5.7
-  - 12,10.6 -| U21.GND
-  - U21.QA -| 15.6,7
-  - U21.QB -| 15.6,7.5
-  - U21.QC -| 15.6,8
-  - U21.QD -| 15.6,8.5
-  - U22.A -| 9.5,17.5
-  - U22.B -| 9.5,18
-  - U22.C -| 9.5,18.5
-  - U22.D -| 9.5,19
-  - 9.5,17.5 -- 9.5,18
-  - 9.5,18 -- 9.5,18.5
-  - 9.5,18.5 -- 9.5,19
-  - 9.5,17.5 -- 8.4,17.5
-  - U22.ENP -| 9.5,19.5
-  - U22.ENT -| 9.5,20
-  - 9.5,19.5 -- 9.5,19.75
-  - 9.5,19.75 -- 9.5,20
-  - 9.5,19.75 -- 8.4,19.75
-  - U22.CLK -| 8.4,20.5
-  - 11.5,16.2 -| U22.VCC
-  - 12,16.2 -| U22.CLR
-  - 11.5,16.2 -- 12,16.2
-  - 11.5,16.2 -- 11.5,15.6
-  - U22.LOAD |- 15.6,16.7
-  - 12,21.6 -| U22.GND
-  - U22.QA -| 15.6,18
-  - U22.QB -| 15.6,18.5
-  - U22.QC -| 15.6,19
-  - U22.QD -| 15.6,19.5
-  - 19.5,5.25 |- U33A.a
-  - 19.5,6.75 |- U33A.b
-  - U33A.out -- 26,6
-  - 19.5,8.65 |- U33B.a
-  - 19.5,10.15 |- U33B.b
-  - U33B.out -- 26,9.4
-  - 19.5,12.05 |- U42A.a
-  - 19.5,13.55 |- U42A.b
-  - U42A.out -- 26,12.8
-  - 19.5,16.25 |- U33C.a
-  - 19.5,17.75 |- U33C.b
-  - U33C.out -- 26,17
-  - 19.5,19.65 |- U33D.a
-  - 19.5,21.15 |- U33D.b
-  - U33D.out -- 26,20.4
-  - 19.5,23.05 |- U42B.a
-  - 19.5,24.55 |- U42B.b
-  - U42B.out -- 26,23.8
-notes:
-  - text 13.5,4.1 small left: U21 74HC163 (秒の一の位)
-  - text 13.5,15.1 small left: U22 74HC163 (秒の十の位)
-  - text 21.9,5.4 tiny center: "1"
-  - text 21.9,6.6 tiny center: "2"
-  - text 23.7,5.6 tiny center: "3"
-  - text 21.9,8.8 tiny center: "4"
-  - text 21.9,10 tiny center: "5"
-  - text 23.7,9 tiny center: "6"
-  - text 21.9,12.2 tiny center: "2"
-  - text 21.9,13.4 tiny center: "3"
-  - text 23.7,12.4 tiny center: "1"
-  - text 21.9,16.4 tiny center: "9"
-  - text 21.9,17.6 tiny center: "10"
-  - text 23.7,16.6 tiny center: "8"
-  - text 21.9,19.8 tiny center: "12"
-  - text 21.9,21 tiny center: "13"
-  - text 23.7,20 tiny center: "11"
-  - text 21.9,23.2 tiny center: "5"
-  - text 21.9,24.4 tiny center: "6"
-  - text 23.7,23.4 tiny center: "4"
-  - text 3,27.5 small left: 74HC08・74HC02 は PIN 14 が +5V、PIN 7 が GND
-style:
-  pitch: 1
-```
-
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/05-clock-2.svg)
-
-- U33A は秒の一の位が 9 (SU3 かつ SU0)。U33B は、9 で TICK が来たとき (ENST) で、十の位を 1 つ進める。同時に、U42A が一の位に 0 を読み込ませる (LDSU が L)。
-- U33C は十の位が 5。U33D は、5 で ENST が来たとき (ENMU) で、分の一の位を 1 つ進める。U42B が十の位に 0 を読み込ませる。
-- 一の位は TICK で数える。十の位は ENST で、データ入力はどちらも GND。
 
 ### ユニット 3: 分
 
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
-title: 図3 分のカウンタ (ユニット 3)
+title: 図1 分のカウンタ (ユニット 3)
 parts:
   U23: ic 12,8 74HC163
   DMU0: port 8.4,6.5
@@ -579,7 +353,7 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/05-clock-3.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/07-clock-1.svg)
 
 - 秒とほぼ同じ作りで、イネーブルは ENMU から始まる。データ入力は DIP スイッチ (DMU0〜DMU3、DMT0〜DMT2) につながる。分の十の位は 3 ビットなので、D は GND。
 - U34D の CM (分が 59 で桁上がり) は、時のユニットへ行く。
@@ -588,7 +362,7 @@ style:
 
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
-title: 図4 時のカウンタ (ユニット 4)
+title: 図2 時のカウンタ (ユニット 4)
 parts:
   U25: ic 12,8 74HC163
   DHU0: port 8.4,6.5
@@ -758,7 +532,7 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/05-clock-4.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/07-clock-2.svg)
 
 - 時のイネーブル ENH は、分の桁上がり CM と、正時の +1 (HP) の OR だ (U40C)。
 - U35A は時の一の位が 9。U35B は、9 で ENH が来たとき (ENHT) で、十の位を 1 つ進める。
@@ -769,7 +543,7 @@ style:
 
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
-title: 図5 時刻を入れる DIP スイッチ (ユニット 5)
+title: 図3 時刻を入れる DIP スイッチ (ユニット 5)
 parts:
   SET: port 4,3
   S1: switch 4,6 8,6
@@ -886,7 +660,7 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/05-clock-5.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/07-clock-3.svg)
 
 - COM は SET につなぐ。設定中だけ H になり、ON のスイッチのビットが 1 としてカウンタのデータ入力に入る。それ以外は 10 kΩ で 0 になる。
 
@@ -894,7 +668,7 @@ style:
 
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
-title: 図6 窓判定 (ユニット 6)
+title: 図4 窓判定 (ユニット 6)
 parts:
   U36C: and 8,6
   ST1: port 4.5,5.25
@@ -1079,9 +853,9 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/05-clock-6.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/07-clock-4.svg)
 
-- 左の列は「秒が 30 以上か」(XA、X)、「分が 30 以上か」(MA、M30)、「分が 59 か」(M59 = MT5 かつ MU9。MT5・MU9 は図3の U34 から来る)。
+- 左の列は「秒が 30 以上か」(XA、X)、「分が 30 以上か」(MA、M30)、「分が 59 か」(M59 = MT5 かつ MU9。MT5・MU9 は図1の U34 から来る)。
 - 中の列は、分の 7 ビットのどれか 1 つでも 1 かどうか (OA〜OF)。0 のときだけ、分は 00。
 - 右の列は、窓の判定。W59 は「59 分かつ X」、W00 は「分が 00 かつ X でない」(NOR)。O2 はその OR、O3 は未同期 (NSY) との OR。ACC = P かつ O3。HP = ACC かつ M30 (分が 30 以上のときだけ時を +1)。
 - 未同期なら O3 は 1 になるので、ACC = P で、窓を見ずに受け付ける。
@@ -1090,7 +864,7 @@ style:
 
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
-title: 図7 同期済みと設定 (ユニット 7)
+title: 図5 同期済みと設定 (ユニット 7)
 parts:
   VCC: vcc 6,2 5V
   R14: resistor 6,3 6,6 10k
@@ -1202,7 +976,7 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/05-clock-7.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/07-clock-5.svg)
 
 - 設定ボタンは、10 kΩ で +5 V に引き上げ、1 µF で 10 ms ほどのチャタリング除去を入れ、シュミットのインバータ (U45A) で BTN にする。押すと BTN が H。
 - パワーオンは、100 kΩ と 10 µF (時定数 1 秒) の立ち上がりをシュミットのインバータ (U45B) に通す。電源を入れてから約 0.9 秒、PON が H になる。
@@ -1213,7 +987,7 @@ style:
 
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
-title: 図8 表示 (1 桁ぶん。6 桁とも同じ)
+title: 図6 表示 (1 桁ぶん。6 桁とも同じ)
 parts:
   U27: ic 13,9 CD4511B
   SU0: port 9.4,8.5
@@ -1312,7 +1086,7 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/05-clock-8.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/07-clock-6.svg)
 
 - CD4511B は BCD を 7 セグメントの信号にする。LT と BL を +5 V、LE を GND にすると、入力がそのまま表示になる。
 - 図は秒の一の位 (SU0〜SU3) の例。ほかの 5 桁も同じ回路で、入力だけが下の表のとおり違う。1 セグメントに 330 Ω を直列に入れ、約 9 mA で光らせる。7 セグメントは共通カソード。
@@ -1358,259 +1132,31 @@ style:
 
 ## 実体配線図
 
-ブレッドボードに載せる回路の周波数は、発振の 32.768 kHz が最高で、ブレッドボードの目安の 3 MHz 以下に収まる。
-電源は 5 V で、電流は水晶・ロジックの部分で数 mA (見積り)。7 セグメントの表示は 1 桁で最大 60 mA ほど、
+ブレッドボードに載せる回路の周波数は、8 Hz のクロックが最高で (発振は 2-5 の基板)、ブレッドボードの目安の 3 MHz 以下に収まる。
+電源は 5 V で、電流はロジックの部分で数 mA (見積り)。7 セグメントの表示は 1 桁で最大 60 mA ほど、
 6 桁ではブレッドボード全体の目安 500 mA に近くなるので、**表示はブレッドボードの外に別に組む**。
 
-描くのは、動きを確かめたい**発振と分周 (図9)**、**窓判定 (図10・図11)**、**同期と設定 (図12)** の 4 枚だ。
-図9 と図12 は IC と部品が 30 列に収まらないので full のブレッドボード、図10・図11 は 3 個ずつに分けて half のブレッドボードにした。
+**発振と分周 (ユニット 1) は 2-5 の図2、秒 (ユニット 2) は 2-6 の図2・図3 をそのまま使う。** この題で新しく描くのは、
+**窓判定 (図7・図8)** と **同期と設定 (図9)** の 3 枚だ。
+図9 は IC と部品が 30 列に収まらないので full のブレッドボード、図7・図8 は 3 個ずつに分けて half のブレッドボードにした。
 窓判定は 6 個の IC が互いに線でつながり、1 枚に描くと線が重なって追えなくなる。
 ブレッドボードとブレッドボードのあいだの線は、「他の基板へ」の箱の端子の名前で渡す (同じ名前どうしをつなぐ)。
 各 IC の電源のそばには 0.1 µF を挿す (図には描いていない)。電源と GND は、どの図でも上と下のレールの両方に渡す。
+2-5・2-6 の基板の RS は、この題では GND から外して窓判定の RS につなぐ。2-6 のゲートの基板の U42 の C・D の入力も GND から外し、分のカウンタの線をつなぐ。
 
-ブレッドボードの 4 枚のあとに、同じ回路のユニバーサル基板の図 (図9b・図10b・図11b・図12b) を足した。
+ブレッドボードの 3 枚のあとに、同じ回路のユニバーサル基板の図 (図7b・図8b・図9b) を足した。
 基板は永続的な工作なので、組み上げるなら全体を次のように分けて何枚かの基板にする。
-図に描いた 4 枚 (発振と分周、窓判定の 2 枚、同期と設定) はこの分け方のまま 1 枚ずつ基板になる。
+窓判定の 2 枚と同期と設定はこの分け方のまま 1 枚ずつ基板になり、発振と分周は 2-5 の図2b の基板になる。
 カウンタ (U21〜U26)・ゲート (U33〜U35・U42)・表示 (U27〜U32) は図に描かず、下の配線表で示す。基板に載せるなら、秒・分・時のカウンタとゲートを 1 ユニットずつ 1 枚、表示を 6 桁で 1 枚にし、基板どうしは信号の名前でつなぐ。
 ユニバーサル基板は在庫の順 (5×7 → 7×9 → 9×15 cm) に、配置が収まる最初のものを選んだ。厚みと基材は書いていないので 1.6 mm の FR-4 である。
 半田面から見た図ではなく、部品面から見た配置と配線の図で、線は半田面に通す。
 使わない出力のピンがつながっていないという検査の知らせは、組み立てとして正しいので止めてある (`style: check: off`)。ネットは、ブレッドボードの図と同じであることを `check` のネットリストで突き合わせた。
 
-### ブレッドボード 1: 発振と分周
-
-```bread
-# ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
-title: 図9 発振と分周のブレッドボード (ユニット 1)
-board: full
-parts:
-  PS:
-    type: device
-    at: top
-    label: 電源 5V
-    pins: [+5V, GND]
-  XT:
-    type: device
-    at: top
-    label: 他の基板へ (上)
-    pins: [TICK]
-  XB:
-    type: device
-    at: bottom
-    label: 他の基板へ (下)
-    pins: [CLK, RS]
-  U18: dip14 @ e28 CD4069UB
-  U19: dip16 @ e37 CD4040B
-  U20: dip16 @ e47 74HC163
-  U46: dip14 @ e56 74HC02
-  X1: crystal/cylinder c6 c10 32.768k
-  Rf: resistor b10 b13 10M
-  Rd: resistor e6 e13 270k
-  C2: capacitor/ceramic a6 -t6 18p
-  C1: capacitor/ceramic a10 -t10 18p
-wires:
-  - PS.+5V -- +t1 red
-  - PS.GND -- -t1 black
-  - +t2 -- +b2 red
-  - -t2 -- -b2 black
-  - XT.TICK -- a48 green
-  - XB.CLK -- j37 pink
-  - XB.RS -- j58 brown
-  - j47 -- +b47 red
-  - j52 -- +b52 red
-  - j53 -- +b53 red
-  - a28 -- +t28 red
-  - a37 -- +t37 red
-  - a47 -- +t47 red
-  - a53 -- +t53 red
-  - a56 -- +t56 red
-  - j32 -- -b32 black
-  - j34 -- -b34 black
-  - j44 -- -b44 black
-  - j49 -- -b49 black
-  - j50 -- -b50 black
-  - j51 -- -b51 black
-  - j54 -- -b54 black
-  - j60 -- -b60 black
-  - j61 -- -b61 black
-  - j62 -- -b62 black
-  - a29 -- -t29 black
-  - a31 -- -t31 black
-  - a33 -- -t33 black
-  - a42 -- -t42 black
-  - a58 -- -t58 black
-  - a59 -- -t59 black
-  - a61 -- -t61 black
-  - a62 -- -t62 black
-  - e35 -- f35 orange
-  - e55 -- f55 yellow
-  - e46 -- f46 green
-  - e5 -- f5 blue
-  - e14 -- f14 purple
-  - e15 -- f15 white
-  - g14 -- g28 purple
-  - h15 -- h29 white
-  - g37 -- g48 pink
-  - h46 -- h57 green
-  - d35 -- d43 orange
-  - g31 -- g35 orange
-  - d10 -- d14 purple
-  - d46 -- d48 green
-  - c13 -- c15 white
-  - i13 -- i15 white
-  - d54 -- d55 yellow
-  - g55 -- g56 yellow
-  - d5 -- d6 blue
-  - g5 -- g6 blue
-  - g29 -- g30 white
-```
-
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/05-clock-1.svg)
-
-```perfboard
-# ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
-title: 図9b 発振と分周のユニバーサル基板 (ユニット 1)
-board:
-  size: 15x9cm
-  silk: board
-  h: 1.6mm
-  material: FR-4
-  slots: on
-points:
-  TICK: ak21
-  CLK: z18
-  RS: av18
-  VCC: a24
-  GND: a12
-parts:
-  U18: dip14 q21 CD4069UB
-  U19: dip16 z21 CD4040B
-  U20: dip16 aj21 74HC163
-  U46: dip14 at21 74HC02
-  X1: crystal/cylinder d17 g17
-  C2: capacitor/ceramic b17 b14 18p
-  C1: capacitor/ceramic i16 i14 18p
-  Rf: resistor k16 o16 10M
-  Rd: resistor k14 o14 270k
-wires:
-  - r22 -- r21 black
-  - r22 -- t22 black
-  - t22 -- v22 black
-  - t22 -- t21 black
-  - v22 -- v21 black
-  - v22 -- x22 black
-  - x22 -- x18 black
-  - ae22 -- ae21 black
-  - ae22 -- ah22 black
-  - ah22 -- ah18 black
-  - aw22 -- aw21 black
-  - aw22 -- ay22 black
-  - ay22 -- ay21 black
-  - av21 -- aw21 black
-  - ay21 -- az21 black
-  - az21 -- ba21 black
-  - ba21 -- ba18 black
-  - u18 -- u17 black
-  - w18 -- w17 black
-  - w18 -- x18 black
-  - ag18 -- ag12 black
-  - ag18 -- ah18 black
-  - al18 -- am18 black
-  - al18 -- al12 black
-  - am18 -- an18 black
-  - aq18 -- aq12 black
-  - ax18 -- ay18 black
-  - ax18 -- ax12 black
-  - ay18 -- az18 black
-  - az18 -- ba18 black
-  - u17 -- w17 black
-  - w17 -- w12 black
-  - b14 -- b12 black
-  - i14 -- i12 black
-  - GND -- b12 black
-  - b12 -- i12 black
-  - i12 -- w12 black
-  - w12 -- ag12 black
-  - ag12 -- al12 black
-  - al12 -- aq12 black
-  - aq12 -- ax12 black
-  - ax12 -- bb12 black
-  - VCC -- q24 red
-  - q24 -- q21 red
-  - q24 -- z24 red
-  - z24 -- z21 red
-  - z24 -- aj24 red
-  - aj24 -- at24 red
-  - aj24 -- aj21 red
-  - at24 -- bb24 red
-  - at24 -- at22 red
-  - ap22 -- ap21 red
-  - ap22 -- at22 red
-  - at22 -- at21 red
-  - aj21 -- aj18 red
-  - ap21 -- ap18 red
-  - ao18 -- ap18 red
-  - k18 -- q18 blue
-  - k18 -- k16 blue
-  - g17 -- g16 blue
-  - g16 -- i16 blue
-  - i16 -- k16 blue
-  - b17 -- d17 orange
-  - d17 -- d13 orange
-  - k14 -- k13 orange
-  - d13 -- k13 orange
-  - r18 -- s18 green
-  - r18 -- r16 green
-  - o16 -- r16 green
-  - o16 -- o14 green
-  - y23 -- y16 purple
-  - y23 -- af23 purple
-  - af23 -- af21 purple
-  - t18 -- t16 purple
-  - t16 -- y16 purple
-  - CLK -- z17 yellow
-  - ak18 -- ak17 yellow
-  - z17 -- ak17 yellow
-  - aq21 -- ar21 pink
-  - ar21 -- ar18 pink
-  - ar18 -- at18 pink
-  - ak23 -- bb23 brown
-  - ak23 -- TICK brown
-  - bb23 -- bb17 brown
-  - au18 -- au17 brown
-  - au17 -- bb17 brown
-style:
-  check: off
-notes:
-  - mark ak21 yellow
-  - mark z18 yellow
-  - mark av18 yellow
-  - parts
-```
-
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/05-clock-1.svg)
-
-図9b は、上の図9 と同じ回路をユニバーサル基板に組む図だ。発振と分周の 4 個の IC (U18・U19・U20・U46) と水晶まわりの 5 部品を、15×9 cm (54 列 × 33 行) のユニバーサル基板に 1 列に並べた。5×7 cm と 7×9 cm は、IC が 4 個で 1 列に 50 穴ほど要るので収まらない。
-
-- 電源 (赤) は上の縁の筋 (24 行)、GND (黒) は下の縁の筋 (12 行) に通した。各 IC の VCC (左上のピン) からは上へ、GND (右下のピン) からは下へ、IC の真横の 1 列で枝を出す。
-- U20 (74HC163) は、+5 V につなぐ D・ENP (6・7 番) が、GND につなぐ C (5 番) と GND (8 番) の間にある。外側で結ぶと + と GND の線が交わるので、CLR (1 番) と VCC (16 番)、ENP (7 番) と ENT (10 番) は、半田面で胴の下を通る短い線で結んだ (同じ IC のピンどうし)。D と ENP は隣のピンどうしを短い線で結ぶ。
-- 信号どうしの交差と、+ と GND の交差は無い。残る交差は信号が電源の枝を跨ぐところだけで、半円で跨いだ側を被覆線にする。
-- 黄色の丸は、ユニバーサル基板の外へ出る信号のピンだ。そのピンへ直接半田付けして線を出す。信号の名前は次の表のとおり (図の中には名前を書いていない)。ブレッドボードの図の上と下の箱 (他の基板へ) と同じ信号である。
-- 使わない出力のピン (CD4040B の Q の多くなど) は、どこにもつながない。
-
-| 信号 | 印を付けたピン |
-| --- | --- |
-| TICK | U20 の 15 番 RCO |
-| CLK | U19 の 1 番 Q12 |
-| RS | U46 の 3 |
-
-- 水晶 X1 のまわりは、部品を左の端にまとめ、U18 の 1・2・3 番ピンへ線で渡した。C1 と C2 は下の GND の筋へつなぐ。C1 から筋へ下りる線は、R<sub>d</sub> へ行く線を跨ぐ。
-- 発振の部分の線は短いほどよい。長いと、浮遊容量で発振の周波数が変わり、時計が狂う。
-
 ### ブレッドボード 2・3: 窓判定
 
 ```bread
 # ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
-title: 図10 窓判定のブレッドボード 1/2 (ユニット 6)
+title: 図7 窓判定のブレッドボード 1/2 (ユニット 6)
 board: half
 parts:
   PS:
@@ -1684,11 +1230,11 @@ wires:
   - g19 -- g21 green
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/05-clock-2.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/07-clock-1.svg)
 
 ```perfboard
 # ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
-title: 図10b 窓判定のユニバーサル基板 1/2 (ユニット 6)
+title: 図7b 窓判定のユニバーサル基板 1/2 (ユニット 6)
 board:
   size: 9x7cm
   silk: board
@@ -1796,9 +1342,9 @@ notes:
   - parts
 ```
 
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/05-clock-2.svg)
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/07-clock-1.svg)
 
-図10b は、上の図10 と同じ回路をユニバーサル基板に組む図だ。U36・U40・U37 の 3 個を、9×7 cm (31 列 × 26 行) のユニバーサル基板に 1 列に並べた。5×7 cm (24 × 18) には 3 個の IC が横に入らない。7×9 cm の横置きで、上下の電源筋と信号の道が通った。
+図7b は、上の図7 と同じ回路をユニバーサル基板に組む図だ。U36・U40・U37 の 3 個を、9×7 cm (31 列 × 26 行) のユニバーサル基板に 1 列に並べた。5×7 cm (24 × 18) には 3 個の IC が横に入らない。7×9 cm の横置きで、上下の電源筋と信号の道が通った。
 
 - 電源 (赤) は上の筋 (21 行)、GND (黒) は下の筋 (8 行) に通し、各 IC の 14 番 (VCC) から上へ、7 番 (GND) から下へ、IC の真横の 1 列で枝を出した。
 - IC は左から U37・U40・U36 の順に置いた。U37 の 2Y (6 番) と 3A (9 番) は、半田面で胴の下を通る短い線で結ぶ (同じ IC のピンどうし)。外側で結ぶと、間の 3Y (8 番) の線が必ず跨ぐため。
@@ -1833,7 +1379,7 @@ notes:
 
 ```bread
 # ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
-title: 図11 窓判定のブレッドボード 2/2 (ユニット 6)
+title: 図8 窓判定のブレッドボード 2/2 (ユニット 6)
 board: half
 parts:
   PS:
@@ -1905,11 +1451,11 @@ wires:
   - i16 -- i18 gray
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/05-clock-3.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/07-clock-2.svg)
 
 ```perfboard
 # ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
-title: 図11b 窓判定のユニバーサル基板 2/2 (ユニット 6)
+title: 図8b 窓判定のユニバーサル基板 2/2 (ユニット 6)
 board:
   size: 9x7cm
   silk: board
@@ -2015,9 +1561,9 @@ notes:
   - parts
 ```
 
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/05-clock-3.svg)
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/07-clock-2.svg)
 
-図11b は、上の図11 と同じ回路をユニバーサル基板に組む図だ。U38・U39・U43 の 3 個を、9×7 cm (31 列 × 26 行) のユニバーサル基板に 1 列に並べた。5×7 cm (24 × 18) には 3 個の IC が横に入らない。7×9 cm の横置きで、上下の電源筋と信号の道が通った。
+図8b は、上の図8 と同じ回路をユニバーサル基板に組む図だ。U38・U39・U43 の 3 個を、9×7 cm (31 列 × 26 行) のユニバーサル基板に 1 列に並べた。5×7 cm (24 × 18) には 3 個の IC が横に入らない。7×9 cm の横置きで、上下の電源筋と信号の道が通った。
 
 - 電源 (赤) は上の筋 (21 行)、GND (黒) は下の筋 (8 行) に通し、各 IC の 14 番 (VCC) から上へ、7 番 (GND) から下へ、IC の真横の 1 列で枝を出した。
 - IC は左から U38・U39・U43 の順に置いた。U38 の 2Y (6 番) と 4B (13 番)、U39 の 1Y (3 番) と 2B (5 番) は、半田面で胴の下を通る短い線で結ぶ (同じ IC のピンどうし)。外側で結ぶと、間のピンの線が必ず跨ぐため。
@@ -2046,13 +1592,13 @@ notes:
 | WH | U43 の 6 |
 
 - 2 枚で窓判定の 6 個の IC (U36〜U40、U43) を載せる。ユニバーサル基板の外から来る信号 (ST0〜ST2、MT0〜MT2、MU0〜MU3 など) は、上の箱から入れ、出す信号 (ACC、LDHU など) は下の箱へ出す。
-- ACC は図10 の基板で作り、図12 の基板 (U41・U44) へ渡す。
+- ACC は図7 の基板で作り、図9 の基板 (U41・U44) へ渡す。
 
 ### ブレッドボード 4: 同期と設定
 
 ```bread
 # ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
-title: 図12 同期済みと設定のブレッドボード (ユニット 7)
+title: 図9 同期済みと設定のブレッドボード (ユニット 7)
 board: full
 parts:
   PS:
@@ -2134,11 +1680,11 @@ wires:
   - i33 -- i34 white
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/05-clock-4.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/07-clock-3.svg)
 
 ```perfboard
 # ユニバーサル基板の実体配線図 (tommie-fence の perfboard フェンス)
-title: 図12b 同期済みと設定のユニバーサル基板 (ユニット 7)
+title: 図9b 同期済みと設定のユニバーサル基板 (ユニット 7)
 board:
   size: 15x9cm
   silk: board
@@ -2263,9 +1809,9 @@ notes:
   - parts
 ```
 
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/05-clock-4.svg)
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/07-clock-3.svg)
 
-図12b は、上の図12 と同じ回路をユニバーサル基板に組む図だ。設定ボタンとパワーオンの RC (R14・S14・C14・R15・C15) を左に、U45・U44・U41 を右に、15×9 cm (54 列 × 33 行) のユニバーサル基板に並べた。5×7 cm と 7×9 cm は、部品と IC 3 個で 40 穴ほど要るので収まらない。
+図9b は、上の図9 と同じ回路をユニバーサル基板に組む図だ。設定ボタンとパワーオンの RC (R14・S14・C14・R15・C15) を左に、U45・U44・U41 を右に、15×9 cm (54 列 × 33 行) のユニバーサル基板に並べた。5×7 cm と 7×9 cm は、部品と IC 3 個で 40 穴ほど要るので収まらない。
 
 - 電源 (赤) は上の縁の筋 (25 行)、GND (黒) は下の縁の筋 (11 行) に通した。各 IC の 14 番 (VCC) から上へ、7 番 (GND) から下へ、IC の真横の 1 列で枝を出す。R14・R15 は上の筋から、S14・C14・C15 は下の筋へ、縦に挿した。
 - U44 (74HC74) は、+5 V につなぐピン (1・4・10・13・14 番) と GND につなぐピン (7・11・12 番) が交互に並ぶ。外側で結ぶと + と GND の線が交わるので、1CLR (1 番) と VCC (14 番)、1PRE (4 番) と 2CLR (13 番)、2CLK (11 番) と GND (7 番) は、半田面で胴の下を通る短い線で結んだ (同じ IC のピンどうし)。2D (12 番) と 2CLK は隣のピンどうしを短い線で結ぶ。
@@ -2285,13 +1831,13 @@ notes:
 | CLK | U44 の 3 |
 
 - 設定ボタンとパワーオンの RC を左に、IC を右に置いた。PON と BTN はユニバーサル基板の中で U41 に入る。
-- 外へ出る信号は、SET (設定中)、SETN、RS、SYD1 (図10 の U37D へ)、NSY (未同期の LED へ)。入るのは ACC、SYD、CLK。
+- 外へ出る信号は、SET (設定中)、SETN、RS、SYD1 (図7 の U37D へ)、NSY (未同期の LED へ)。入るのは ACC、SYD、CLK。
 
 ### カウンタと表示は配線表で示す
 
 秒・分・時のカウンタ (U21〜U26) と、そのゲート (U33〜U35、U42)、表示 (U27〜U32) は、同じ形の繰り返しで、
 1 桁あたり IC が 2〜3 個、線が 30 本ほど要る。基板 1 枚に 2 桁以上を描くと線が重なって読めないので、
-実体配線図は描かず、配線表で示す。**回路図の図2〜図4・図8を、次の表の順に、IC のピンへ線でつなぐ。**
+実体配線図は描かず、配線表で示す。**回路図の2-6 の図1〜図2・図6を、次の表の順に、IC のピンへ線でつなぐ。**
 
 74HC163 のカウンタ。PIN 1 (CLR) と PIN 16 (VCC) は +5 V、PIN 2 (CLK) は CLK、PIN 8 (GND) は GND、PIN 15 (RCO) は使わない (U20 だけ TICK)。
 ENP (PIN 7) と ENT (PIN 10) は同じ信号につなぐ。
@@ -2329,95 +1875,15 @@ ENP (PIN 7) と ENT (PIN 10) は同じ信号につなぐ。
 
 ## 調べる
 
-計器は Analog Discovery 3 (AD3) に決める。発振の 32.768 kHz も、8 Hz のクロックも、AD3 の範囲に入る。
-ロジックの信号はロジックアナライザ (DIO) で見る。次の図は、**設計から計算で出した見えるはずの画面**で、実測ではない。
-
-### 水晶の発振波形
-
-```scope
-# オシロスコープの画面 (tommie-fence の scope フェンス)
-title: 図13 水晶発振の波形 (XOUT と CK32、推測)
-time: 10us/div
-trigger: ch1 rising 2.5V
-ch1: sine 32.768kHz 2.2V offset 2.5V
-ch2: square 32.768kHz 2.5V offset 2.5V phase 180deg
-cursors: [0, 30.52us]
-measure: [freq, vpp, avg]
-```
-
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/05-clock-1.svg)
-
-| 見る所 | 見るべき値 | check の読み値 |
-| --- | --- | --- |
-| CH1 (XOUT、U18 の PIN 2) の周波数 | 32.768 kHz | 32.77 kHz |
-| CH1 の振幅 | 仮の値 4.4 Vpp。中心は 2.5 V 付近 | Vpp 4.40 V、Avg 2.50 V |
-| CH2 (CK32、U18 の PIN 4) | 0 V と 5 V の四角い波、周波数 32.768 kHz | Vpp 5.00 V、32.77 kHz |
-| カーソル | 1 周期 = 1 ÷ 32.768 kHz = 30.52 µs | ΔX 30.52 µs (32.77 kHz) |
-
-- 周波数は **CK32 (PIN 4) で測る**。XOUT にプローブを当てると、プローブの容量 (10 pF 前後) が負荷容量に加わり、周波数が数 ppm 以上ずれる。XOUT は形を見るだけにする。
-- CH1 の振幅 4.4 Vpp は仮の値で、実測ではない。発振が弱いときは Rd を小さく、強すぎるときは大きくする。
-
-### 8 Hz のクロックと TICK
-
-```scope
-# オシロスコープの画面 (tommie-fence の scope フェンス)
-title: 図14 8 Hz の CLK と 1 Hz の TICK (推測)
-time: 125ms/div
-trigger: ch2 rising 2.5V
-ch1: square 8Hz 2.5V offset 2.5V
-ch2: pulse 1Hz 2.5V offset 2.5V duty 12.5%
-cursors: [31.25ms, 156.25ms]
-measure: [freq, duty]
-```
-
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/05-clock-2.svg)
-
-| 見る所 | 見るべき値 | check の読み値 |
-| --- | --- | --- |
-| CH1 (CLK) | 8 Hz、デューティ 50 % | 8.000 Hz、50.0 % |
-| CH2 (TICK) | 1 Hz、デューティ 12.5 % (125 ms) | 1.000 Hz、12.5 % |
-| カーソル X1 (31.25 ms) | CLK も TICK も H | CH1 5.00 V、CH2 5.00 V |
-| カーソル X2 (156.3 ms) | CLK は H、TICK は L | CH1 5.00 V、CH2 0 V |
-| ΔX | 125 ms = 1 ÷ 8 Hz | 125.0 ms (8.000 Hz) |
-
-### 秒の桁上がり
-
-```logic
-# ロジックアナライザの画面 (tommie-fence の logic フェンス)
-title: 図15 秒が 59 から 00 になり、分が +1 になる (計算)
-device: ad3
-window: 5s
-sample: 1kHz
-signals:
-  CLK: dio0 clock 8Hz
-  TICK: pattern 00000001 bit 125ms repeat
-  SU: dio1..dio4 counter on CLK rising sequence 7 7 7 7 7 7 7 7 8 8 8 8 8 8 8 8 9 9 9 9 9 9 9 9 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 2
-  ST: dio5..dio7 counter on CLK rising sequence 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-  MU: dio8..dio11 counter on CLK rising sequence 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
-  ENMU: edges 0s=0 2.875s=1 3s=0
-buses:
-  Sec1: SU3..SU0 dec
-  Sec10: ST2..ST0 dec
-  Min1: MU3..MU0 dec
-cursors: [2.9375s, 3.46875s]
-trigger: ENMU rising
-```
-
-![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/logic/05-clock-1.svg)
-
-| 見る所 | 見るべき値 | check の読み値 |
-| --- | --- | --- |
-| 秒の一の位 (Sec1) の並び | 1 秒ごとに 7 → 8 → 9 → 0 → 1 | 7@0 s、8@1 s、9@2 s、0@3 s、1@4 s |
-| カーソル X1 (2.938 s、桁上がりの手前) | 秒 59、分の一の位 4、ENMU が H | Sec1 9、Sec10 5、Min1 4、ENMU 1 |
-| カーソル X2 (3.469 s、桁上がりの後) | 秒 00、分の一の位 5、ENMU が L | Sec1 0、Sec10 0、Min1 5、ENMU 0 |
-
-- 桁が変わるのは、TICK が H だった 1 クロックのあとの、CLK の立ち上がりだけだ。ENMU が H のクロックで、秒の 59 が 00 に、分の一の位が +1 になる。
+計器は Analog Discovery 3 (AD3) に決める。ロジックの信号はロジックアナライザ (DIO) で見る。
+水晶の発振波形と 8 Hz・TICK は 2-5 の図3・図4、秒の桁上がりは 2-6 の図4 で見た。この題では、全体を組んだときに初めて見える正時のリセットを見る。
+次の図は、**設計から計算で出した見えるはずの画面**で、実測ではない。
 
 ### 正時パルスでリセットする
 
 ```logic
 # ロジックアナライザの画面 (tommie-fence の logic フェンス)
-title: 図16 正時パルスで分と秒が 0 に戻り、時が +1 になる (計算)
+title: 図10 正時パルスで分と秒が 0 に戻り、時が +1 になる (計算)
 device: ad3
 window: 2.5s
 sample: 1kHz
@@ -2436,7 +1902,7 @@ buses:
 cursors: [0.5625s, 1.5625s]
 ```
 
-![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/logic/05-clock-2.svg)
+![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/logic/07-clock.svg)
 
 | 見る所 | 見るべき値 | check の読み値 |
 | --- | --- | --- |
@@ -2447,43 +1913,12 @@ cursors: [0.5625s, 1.5625s]
 
 - ACC が H だった 1 クロックのあと、0.625 s の立ち上がりで、秒・分が 0 になり、÷ 8 が 8 を読み込んで数え直す。最初の TICK は、そこから 8 クロック後 (1.5 秒) に H になり、1.625 s に秒が 01 になる。時の一の位は 0 → 1 (10 → 11 時)。
 
-### 水晶のずれ
-
-```graph
-# グラフ (tommie-fence の graph フェンス)
-title: 図17 水晶の温度による周波数のずれ (典型値から計算)
-x: 温度 °C -10..50
-y:
-  - 周波数偏差 ppm
-  - 一日のずれ s
-lines:
-  周波数偏差 ppm: -0.034 * (x - 25)^2
-  一日のずれ s: -0.034 * (x - 25)^2 * 0.0864
-notes:
-  - mark 0
-  - mark 25
-  - mark 45
-```
-
-![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/graph/05-clock.svg)
-
-| 見る所 | 見るべき値 | check の読み値 |
-| --- | --- | --- |
-| 25 °C | ずれ 0 | 0 ppm、0 s |
-| 0 °C | − 0.034 ppm/°C² × (25 °C)² | − 21.3 ppm、− 1.84 s/日 |
-| 45 °C | − 0.034 ppm/°C² × (20 °C)² | − 13.6 ppm、− 1.18 s/日 |
-
-- 32.768 kHz の音叉型の水晶は、25 °C 付近で最も速く、温度が離れると遅れる (放物線)。係数 − 0.034 ppm/°C² は典型値で、実物の規格を確かめる。
-- 1 ppm は 1 日で 0.0864 秒。20 ppm なら 1 日で約 1.7 秒、1 時間で 0.07 秒ずれる。正時の窓 ±30 秒に対して十分小さく、毎正時に合わせ直すので、ずれは積もらない。
-
 ## 計算・見積り (未検証)
 
 次の数は、設計からの計算と典型値からの見積りで、実測ではない。
 
 | 項目 | 見積り | 根拠 |
 | --- | --- | --- |
-| 水晶の負荷容量 | 約 12 pF | C1・C2 = 18 pF の直列 9 pF + 浮遊容量 3 pF (仮)。水晶は 12.5 pF を想定 |
-| 直列抵抗 R<sub>d</sub> | 270 kΩ | C2 のリアクタンス 1 ÷ (2π × 32768 Hz × 18 pF) = 270 kΩ に合わせた |
 | 設定ボタンのチャタリング除去 | 10 ms | 10 kΩ × 1 µF |
 | パワーオンの H の長さ | 約 0.9 秒 (0.6〜1.3 秒) | RC = 1 秒、シュミットのしきい値 2.9 V (典型値) で 1 × ln (5 ÷ (5 − 2.9)) |
 | 設定ボタンを押す時間 | 0.125 秒以上 | CLK の 1 周期。パワーオンは約 0.9 秒で足りる |
@@ -2492,18 +1927,18 @@ notes:
 
 組むときの注意は、次のとおり。
 
-- 発振がかからないときは、C1・C2 を 12 pF〜22 pF で替え、R<sub>d</sub> を 100 kΩ〜470 kΩ で替えてみる。CD4069UB の代わりにバッファつきの 74HC04 を使うと、発振が不安定になることがある。
+- 水晶の発振と負荷容量の見積りは 2-5 の「見るべき値」。
 - ゲートの IC の使わない入力は、必ず GND につなぐ。浮かせると、消費電流が増え、動きが不安定になる。
 - 設定ボタンで時刻を合わせたあと、最初の正時パルスまでは「未同期」の LED が点く。
 
 ## LTspice での確かめ
 
-カウンタ・窓判定・同期の論理は SPICE の対象外。アナログの値だけを `sim/05-clock.cir` で確かめた (LED は赤の仮定のモデル、CD4511B の出力抵抗 100 Ω は仮定。実測ではない)。
+カウンタ・窓判定・同期の論理は SPICE の対象外。アナログの値だけを `sim/07-clock.cir` で確かめた (LED は赤の仮定のモデル、CD4511B の出力抵抗 100 Ω は仮定。実測ではない)。
 
 | 項目 | 本文の数字 | LTspice | 判定 |
 | --- | --- | --- | --- |
 | パワーオンの PON が H の時間 (100 kΩ × 10 µF、しきい値 2.9 V) | 約 0.9 秒 | 0.87 秒 (しきい値 2.2〜3.6 V で 0.58〜1.27 秒) | 合う |
 | 設定ボタンのチャタリング除去 (10 kΩ × 1 µF) | 約 10 ms | 10 ms | 合う |
 | 7 セグメント 1 セグメントの電流 (330 Ω) | 約 9 mA | 7.0 mA (出力抵抗 100 Ω のとき。0 Ω なら 9.1 mA) | 合う (CD4511B の出力抵抗で 7〜9 mA) |
-| 水晶の負荷容量 (18 pF 2 個の直列) | 12.5 pF を想定 | 9 pF + 浮遊容量 約 3.5 pF | 合う |
-| 8 Hz | 32768 / 4096 | 8 Hz | 合う |
+
+水晶の負荷容量と 8 Hz の分周比は、2-5 の「LTspice での確かめ」で確かめた。
