@@ -479,12 +479,12 @@ parts:
     type: device
     at: top
     label: 制御の基板から (図6)
-    pins: [S0, S1, S2]
+    pins: [S2, S1, S0]
   CB:
     type: device
     at: bottom
     label: 制御の基板から (図6)
-    pins: [E0, E1, BL0, BL1, GND, +5V]
+    pins: [BL0, E0, BL1, E1, GND, +5V]
   U1: dip16 @ e2 74HC4051
   C1: capacitor a3 -t3 100n
   C2: capacitor a4 -t4 100n
@@ -581,13 +581,33 @@ parts:
   AD:
     type: device
     at: top
-    label: Analog Discovery 3
-    pins: [1+, 1-, 2+, 2-, V+, GND]
-  CT:
+    label: Analog Discovery 3 (Scope)
+    pins: [2+, 2-, 1-, 1+]
+  AP:
+    type: device
+    at: top
+    label: Analog Discovery 3 (電源)
+    pins: [V+, GND]
+  CS:
     type: device
     at: top
     label: メモリの基板へ (図5)
-    pins: [S0, S1, S2, E0, E1, BL0, BL1, GND, +5V]
+    pins: [S0, S1, S2]
+  CE:
+    type: device
+    at: top
+    label: メモリの基板へ (図5)
+    pins: [E0, E1]
+  CL:
+    type: device
+    at: top
+    label: メモリの基板へ (図5)
+    pins: [BL0, BL1]
+  CP:
+    type: device
+    at: top
+    label: メモリの基板へ (図5)
+    pins: [GND, +5V]
   RN1: sip5 @ b1 l=10k-4 cap=right
   SW1: dip-switch4 @ e2
   SB: button @ f8
@@ -606,10 +626,10 @@ parts:
   R7: resistor a54 +t54 820
   D2: led b54(A) b52(K) red
 wires:
-  - AD.V+ -- +t58 red
-  - AD.GND -- -t57 black
-  - CT.+5V -- +t60 red
-  - CT.GND -- -t59 black
+  - AP.V+ -- +t58 red
+  - AP.GND -- -t57 black
+  - CP.+5V -- +t60 red
+  - CP.GND -- -t59 black
   - +t62 -- +b62 red
   - -t62 -- -b62 black
   - a1 -- -t1 black
@@ -617,9 +637,9 @@ wires:
   - j3 -- +b3 red
   - j4 -- +b4 red
   - j5 -- +b5 red
-  - CT.S0 -- c2 yellow
-  - CT.S1 -- c3 green
-  - CT.S2 -- c4 blue
+  - CS.S0 -- a2 yellow
+  - CS.S1 -- a3 green
+  - CS.S2 -- a4 blue
   - c5 -- c12 purple
   - e12 -- f12 purple
   - g12 -- g13 purple
@@ -631,10 +651,10 @@ wires:
   - j17 -- -b17 black
   - j18 -- +b18 red
   - j20 -- -b20 black
-  - CT.E0 -- a14 white
-  - CT.E1 -- a15 purple
+  - CE.E0 -- a14 white
+  - CE.E1 -- a15 purple
   - AD.2+ -- b14 white
-  - AD.2- -- -t12 black
+  - AD.2- -- -t16 black
   - a23 -- +t23 red
   - a24 -- +t24 red
   - a25 -- -t25 black
@@ -652,8 +672,8 @@ wires:
   - j35 -- -b35 black
   - j36 -- -b36 black
   - j37 -- -b37 black
-  - CT.BL0 -- a30 orange
-  - CT.BL1 -- a31 brown
+  - CL.BL0 -- a30 orange
+  - CL.BL1 -- a31 brown
   - AD.1+ -- b30 orange
   - AD.1- -- -t29 black
   - c30 -- c39 orange
@@ -673,7 +693,7 @@ wires:
 
 - **電源**: AD3 の V+ (5 V、赤) を上の + レールの 58 列に、GND (黒) を 57 列に入れる。メモリの基板への +5 V と GND は 59・60 列から出す。上と下のレールは右端 (62 列) でつなぐ
 - **SW1 (番地、2〜5 列)**: 下の組を +5 V (赤 4 本)、上の組が A0〜A3。集合抵抗 RN1 (10 kΩ × 4、5 ピン) を b 行の 1〜5 列に置き、共通のピン (1 列、`a1`) を上の − レールへ落とす。
-  A0〜A2 (`c2`〜`c4`) はそのままメモリの基板の S0〜S2 へ。A3 は `c5`〜`c12` の紫で 12 列に送り、溝をまたいで下の組に下ろし、`g12`〜`g13` で U5 の A (13 列の下) へ
+  A0〜A2 (`a2`〜`a4`) はそのままメモリの基板の S0〜S2 へ。A3 は `c5`〜`c12` の紫で 12 列に送り、溝をまたいで下の組に下ろし、`g12`〜`g13` で U5 の A (13 列の下) へ
 - **SB (STROBE、8・10 列)**: 下の組がストローブの線で、R5 (10 kΩ) で下の + レールへ引く (押していないと H)。上の組は `a8` から上の − レールへ。押すと L になる。
   `h10`〜`h16` の白で U5 の G2A (16 列の下) へ
 - **U5 (74HC138、13〜20 列)**: 切り欠きが左。下の組に A・B・C・G2A・G2B・G1・Y7・GND (1 番から 8 番)、上の組に VCC・Y0〜Y6 (16 番から 9 番)。
@@ -698,7 +718,7 @@ wires:
 
 | 線の名前 | 回路図 | ブレッドボード |
 | --- | --- | --- |
-| S0〜S2 | SW1₁〜SW1₃ → 4051 の S0〜S2 | 図6 の `c2` `c3` `c4` → 図5 の各 IC の 6〜8 列め (上) |
+| S0〜S2 | SW1₁〜SW1₃ → 4051 の S0〜S2 | 図6 の `a2` `a3` `a4` → 図5 の各 IC の 6〜8 列め (上) |
 | A3 | SW1₄ → 74HC138 の A | `c5` → `c12`、`e12` → `f12`、`g12` → `g13` |
 | STROBE | SB → 74HC138 の G2A | `h10` → `h16` |
 | E0 / E1 | 74HC138 の Y0 / Y1 → 4051 の E | 図6 の `a14` / `a15` → 図5 の U1・U3 / U2・U4 の 6 列め (下) |
