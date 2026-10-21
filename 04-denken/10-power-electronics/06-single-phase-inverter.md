@@ -80,9 +80,10 @@ parts:
   R1: resistor h10 h16 220
   DRV:
     type: device
+    model: DRV8833-POLOLU
     at: top
     label: DRV8833 モジュール
-    pins: [AIN1, VM, AIN2, nSLEEP, GND, AOUT1, AOUT2]
+    pins: [AIN1, VIN, AIN2, SLP, GND, AOUT1, AOUT2]
   AD:
     type: device
     at: bottom
@@ -93,8 +94,8 @@ wires:
   - AD.GND -- -b3 black
   - +b29 -- +t29 red
   - -b30 -- -t30 black
-  - DRV.VM -- +t5 red
-  - DRV.nSLEEP -- +t7 red
+  - DRV.VIN -- +t5 red
+  - DRV.SLP -- +t7 red
   - DRV.GND -- -t8 black
   - DRV.AIN1 -- a4 yellow
   - e4 -- f4 yellow

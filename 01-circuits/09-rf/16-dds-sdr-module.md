@@ -83,6 +83,7 @@ parts:
   U1: pico2 3,11 mirror
   U2:
     type: device
+    model: GY-9833
     at: 11,9
     label: AD9833
     pins: [VCC, SCLK, SDATA, FSYNC, DGND, AGND, OUT]
@@ -147,6 +148,7 @@ parts:
   U1: pico2 @ h2
   U2:
     type: device
+    model: GY-9833
     at: bottom
     label: AD9833モジュール
     pins: [SCLK, SDATA, FSYNC, DGND, AGND, VCC, OUT]

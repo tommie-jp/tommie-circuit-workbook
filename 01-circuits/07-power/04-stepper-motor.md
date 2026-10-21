@@ -34,9 +34,10 @@ parts:
   IN4: port in4x
   M1:
     type: device
+    model: 28BYJ-48
     at: 9,3.4
     label: 28BYJ-48
-    pins: [D, C, B, A, COM]
+    pins: [BLUE, PINK, YELLOW, ORANGE, RED]
   G1: ground 4,6
   VCC: vcc com9 5V
   VCC: vcc 8,2 5V
@@ -45,13 +46,13 @@ wires:
   - in2x -- U1.2
   - in3x -- U1.3
   - in4x -- U1.4
-  - U1.16 -- M1.A
-  - U1.15 -- M1.B
-  - U1.14 -- M1.C
-  - U1.13 -- M1.D
+  - U1.16 -- M1.BLUE
+  - U1.15 -- M1.PINK
+  - U1.14 -- M1.YELLOW
+  - U1.13 -- M1.ORANGE
   - U1.8 -| 4,6
   - U1.9 -- com9
-  - 8,2 |- M1.COM
+  - 8,2 |- M1.RED
 style:
   grid: on
 ```
@@ -87,9 +88,10 @@ parts:
     pins: ["+", "-"]
   MTR:
     type: device
+    model: 28BYJ-48
     at: top
     label: ステッピングモータ 28BYJ-48
-    pins: [A, B, C, D, COM]
+    pins: [BLUE, PINK, YELLOW, ORANGE, RED]
   ADP:
     type: device
     at: bottom
@@ -105,11 +107,11 @@ wires:
   - PSU.- -- -t2 black
   - +t29 -- +b29 red
   - -t20 -- -b20 black
-  - MTR.COM -- +t14 red
-  - MTR.A -- a5 orange
-  - MTR.B -- a6 orange
-  - MTR.C -- a7 orange
-  - MTR.D -- a8 orange
+  - MTR.RED -- +t14 red
+  - MTR.BLUE -- a5 orange
+  - MTR.PINK -- a6 orange
+  - MTR.YELLOW -- a7 orange
+  - MTR.ORANGE -- a8 orange
   - a12 -- +t12 red
   - j12 -- -b12 black
   - ADP.DIO0 -- j5 yellow

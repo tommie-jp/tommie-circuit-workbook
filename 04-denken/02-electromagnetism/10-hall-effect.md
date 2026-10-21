@@ -37,6 +37,7 @@ style:
 parts:
   U1:
     type: ic3
+    model: A1324
     at: 5,5
     label: A1324
     pins: [VCC, GND, VOUT]
@@ -91,6 +92,7 @@ parts:
   R1: resistor f6 f11 10
   U1:
     type: device
+    model: A1324
     at: top
     label: A1324 (筒の中)
     pins: [VCC, GND, VOUT]

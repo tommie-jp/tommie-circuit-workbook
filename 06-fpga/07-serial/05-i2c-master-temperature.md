@@ -134,9 +134,10 @@ parts:
   SCL: port 7.5,5.8
   U1:
     type: device
+    model: LM75
     at: 17,6.2
     label: LM75
-    pins: [VDD, SDA, SCL, OS, A0, A1, A2, GND]
+    pins: [VS, SDA, SCL, OS, A0, A1, A2, GND]
   V1: vcc 12,3 3.3V
   R1: resistor 9,3.2 9,5.4 10k
   R2: resistor 10.5,3.2 10.5,5.8 10k
@@ -158,7 +159,7 @@ wires:
   - MCU.GP5 -- 7.5,5.8 -- 10.5,5.8 -- U1.SCL
   - 9,3.2 -- 9,3 -- 13.4,3
   - 10.5,3.2 -- 10.5,3
-  - U1.VDD -- 12,5 -- 12,3
+  - U1.VS -- 12,5 -- 12,3
   - U1.A0 -- 13.8,6.6
   - U1.A1 -- 13.8,7
   - U1.A2 -- 13.8,7.4

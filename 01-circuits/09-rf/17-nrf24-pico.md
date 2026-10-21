@@ -55,6 +55,7 @@ parts:
   U1: pico2 3,6.2 mirror
   U2:
     type: device
+    model: NRF24L01+
     at: 12,4.7
     label: nRF24L01+
     pins: [VCC, SCK, MOSI, MISO, CSN, CE, IRQ, GND]
@@ -93,6 +94,7 @@ parts:
   U1: pico2 3,6.2 mirror
   U2:
     type: device
+    model: NRF24L01+
     at: 12,4.7
     label: nRF24L01+
     pins: [VCC, SCK, MOSI, MISO, CSN, CE, IRQ, GND]
@@ -152,6 +154,7 @@ parts:
   MCU: pico2 @ h5
   RF:
     type: device
+    model: NRF24L01+
     at: bottom
     label: nRF24L01+ (技適付き)
     pins: [SCK, MOSI, MISO, CSN, CE, VCC, GND, IRQ]
@@ -186,6 +189,7 @@ parts:
   MCU: pico2 @ h5
   RF:
     type: device
+    model: NRF24L01+
     at: bottom
     label: nRF24L01+ (技適付き)
     pins: [SCK, MOSI, MISO, CSN, CE, VCC, GND, IRQ]

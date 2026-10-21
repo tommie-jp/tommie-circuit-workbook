@@ -27,16 +27,17 @@ parts:
   G2: ground 2,6
   U1:
     type: ic3
+    model: LM35
     at: 4,4
     label: LM35
-    pins: [+Vs, Vout, GND]
+    pins: [VS, VOUT, GND]
   G1: ground 5,5
   OUT: port 6,6
 wires:
   - 2,2 -- 2,4
-  - 2,4 -- U1.+Vs
+  - 2,4 -- U1.VS
   - U1.GND -| 5,5
-  - U1.Vout -- 4,6 -- 6,6
+  - U1.VOUT -- 4,6 -- 6,6
 style:
   grid: on
   pitch: 1.2

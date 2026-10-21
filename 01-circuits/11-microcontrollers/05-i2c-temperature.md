@@ -33,6 +33,7 @@ parts:
   G1: ground 7.5,9
   U2:
     type: device
+    model: ADAFRUIT-1782
     at: 14,7.4
     label: MCP9808
     pins: [VDD, SDA, SCL, GND]
@@ -78,13 +79,9 @@ title: 図2 MCP9808 モジュールを I2C0 (GP0/GP1) につなぐ (Pico 2 は U
 board: full
 parts:
   MCU: pico2 @ h5
-  M1:
-    type: sip4
-    holes: [b34]
-    pins: [VDD, SCL, SDA, GND]
-    label: MCP9808
-  Rsda: resistor c36 c40 4.7k
-  Rscl: resistor d35 d31 4.7k
+  M1: sip8 @ b34 ADAFRUIT-1782
+  Rsda: resistor d37 d44 4.7k
+  Rscl: resistor d36 d31 4.7k
   SC:
     type: device
     at: top
@@ -94,13 +91,13 @@ wires:
   - MCU.3V3 -- +t9 red
   - MCU.GND38 -- -t7 black
   - a34 -- +t34 red
-  - a37 -- -t37 black
+  - a35 -- -t35 black
   - a31 -- +t31 red
-  - a40 -- +t40 red
-  - MCU.GP0 -- e36 yellow [v10, h650]
-  - MCU.GP1 -- e35 green
-  - SC.1+ -- a35 green
-  - SC.2+ -- a36 yellow
+  - a44 -- +t44 red
+  - MCU.GP0 -- e37 yellow [v10, h650]
+  - MCU.GP1 -- e36 green
+  - SC.1+ -- a36 green
+  - SC.2+ -- a37 yellow
   - SC.1- -- -t43 black
   - SC.2- -- -t44 black
 ```
@@ -108,11 +105,13 @@ wires:
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/breadboard/05-i2c-temperature.svg)
 
 - 電源は Pico 2 の USB。`3V3` (ピン 36、9 列の上) を上の + レールへ、`GND` (ピン 38、7 列の上) を上の − レールへ出す (11-2 と同じ)
-- モジュール (M1) は 34〜37 列の b 行に挿す。ピンの並びは図の `VDD` `SCL` `SDA` `GND` の順にしたが、**モジュールによって並びが違う**ので、
-  手元の基板の印字を見て配線する。VDD (34 列) は `a34` から + レールへ、GND (37 列) は `a37` から − レールへ
-- SDA (36 列) は GP0 (ピン 1) へ黄の線 (`e36`)、SCL (35 列) は GP1 (ピン 2) へ緑の線 (`e35`)。プルアップ Rsda (36〜40 列、c 行) と Rscl (31〜35 列、d 行) は、
-  もう一方の端 (40 列・31 列) を + レールへ上げる。モジュールが内蔵のプルアップを持つなら、外付けは省いてよい
-- AD3 は電源に使わず、**オシロ (Scope) だけ**をつなぐ。1+ (緑) を SCL の 35 列 (`a35`)、2+ (黄) を SDA の 36 列 (`a36`) に挿し、
+- モジュール (M1) は Adafruit 1782 (8 本のピンヘッダ) で、34〜41 列の b 行に挿す。並びは左から `VDD` `GND` `SCL` `SDA` `ALERT` `A0` `A1` `A2`
+  (Adafruit の基板データの並び)。**ほかの品は並びが違う**ので、手元の基板の印字を見て配線する。VDD (34 列) は `a34` から + レールへ、GND (35 列) は `a35` から − レールへ。
+  `ALERT` と `A0`〜`A2` (38〜41 列) には何もつながない (A0〜A2 は基板の中で L に引かれ、アドレスは 0x18)
+- SDA (37 列) は GP0 (ピン 1) へ黄の線 (`e37`)、SCL (36 列) は GP1 (ピン 2) へ緑の線 (`e36`)。プルアップ Rsda (37〜44 列、d 行) と Rscl (31〜36 列、d 行) は、
+  もう一方の端 (44 列・31 列) を + レールへ上げる。Rsda の端を A0〜A2 の列に置くと、アドレスのピンが H になって 0x18 で応えなくなる。
+  Adafruit 1782 は基板に 10 kΩ のプルアップを持つので、外付けは省いてもよい
+- AD3 は電源に使わず、**オシロ (Scope) だけ**をつなぐ。1+ (緑) を SCL の 36 列 (`a36`)、2+ (黄) を SDA の 37 列 (`a37`) に挿し、
   1− と 2− (黒) は − レールへ
 - ブレッドボードを流れる電流は、モジュール (動作時 数百 µA、目安) と、プルアップが SDA・SCL を L に引かれたときの 3.3 V ÷ 4.7 kΩ ≈ 0.7 mA が 2 本分だけで、
   ブレッドボードの範囲 (1 穴 200 mA・ブレッドボード全体 500 mA) に収まる
@@ -122,7 +121,7 @@ wires:
 | 記号 | 部品 | 値 |
 | --- | --- | --- |
 | U1 | マイコン | Raspberry Pi Pico 2 (USB で給電) |
-| M1 | 温度センサーのモジュール | MCP9808 ブレイクアウト (I2C アドレス 0x18) |
+| M1 | 温度センサーのモジュール | MCP9808 ブレイクアウト (Adafruit 1782。I2C アドレス 0x18) |
 | Rsda・Rscl | プルアップ抵抗 | 4.7 kΩ |
 | — | 計器 | Analog Discovery 3 の Scope (1+ = SCL、2+ = SDA、1−・2− = GND) |
 

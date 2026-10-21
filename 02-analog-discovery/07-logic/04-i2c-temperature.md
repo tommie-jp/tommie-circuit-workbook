@@ -28,9 +28,10 @@ parts:
     turn: mirror
   U1:
     type: device
+    model: LM75
     at: 10,4
     label: LM75
-    pins: [SDA, SCL, OS, GND, A2, A1, A0, VDD]
+    pins: [SDA, SCL, OS, GND, A2, A1, A0, VS]
   R1: resistor 6,1 6,2 4.7k
   R2: resistor 8,1 8,2 4.7k
   G1: ground 5,5
@@ -41,7 +42,7 @@ wires:
   - 8,1 -- 12,1
   - 12,1 -- 12,6
   - 12,6 -- 9,6
-  - U1.VDD -| 9,6
+  - U1.VS -| 9,6
   - AD.DIO0 -| 6,2
   - 6,2 |- U1.SDA
   - AD.DIO1 -| 8,2

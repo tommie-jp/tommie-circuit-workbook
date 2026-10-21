@@ -24,15 +24,16 @@ parts:
   VCC: vcc 2,1 5V
   U1:
     type: ic3
+    model: LM35
     at: 4,3
     label: LM35
-    pins: [+Vs, Vout, GND]
+    pins: [VS, VOUT, GND]
   G1: ground 7,3
   M1: voltmeter 4,5 7,5 l=$\mathrm{CH1}$
 wires:
-  - 2,1 |- U1.+Vs
+  - 2,1 |- U1.VS
   - U1.GND -| 7,3
-  - U1.Vout -- 4,5
+  - U1.VOUT -- 4,5
   - 7,3 -- 7,5
 ```
 

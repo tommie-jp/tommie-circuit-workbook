@@ -25,6 +25,7 @@ title: 図1 PIR モジュールでインジケータを点ける
 parts:
   M1:
     type: device
+    model: HC-SR501
     at: 3,3
     label: HC-SR501
     pins: [VCC, OUT, GND]
@@ -64,6 +65,7 @@ board: half
 parts:
   M1:
     type: device
+    model: HC-SR501
     at: top
     label: HC-SR501 (PIR モジュール)
     pins: [VCC, OUT, GND]

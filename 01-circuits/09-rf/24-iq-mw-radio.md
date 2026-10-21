@@ -348,6 +348,7 @@ parts:
   S1: port 18,8.36
   X1:
     type: device
+    model: EC11
     at: 22,13.18
     label: EC11
     pins: [A, B, C]
@@ -640,6 +641,7 @@ parts:
     pins: [DIO0, DIO1, GND]
   X1:
     type: device
+    model: EC11
     at: bottom
     label: エンコーダ EC11
     pins: [A, B, C]

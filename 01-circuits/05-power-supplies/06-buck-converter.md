@@ -28,6 +28,7 @@ parts:
   G1: ground gnd
   M1:
     type: device
+    model: MBC2596-01
     at: 7,3
     label: Buck DC-DC
     pins: [IN+, IN-, OUT+, OUT-]
@@ -80,6 +81,7 @@ parts:
     pins: [GND, 12V]
   M1:
     type: device
+    model: MBC2596-01
     at: top
     label: Buck DC-DC モジュール (5 V に調整済み)
     pins: [IN+, OUT+, OUT-, IN-]

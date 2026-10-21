@@ -37,6 +37,7 @@ parts:
   J1: usb-c 2,3
   M1:
     type: device
+    model: TP4056-MODULE
     at: 11,3
     label: TP4056 + Protect
     pins: [IN+, IN-, B+, B-, OUT+, OUT-]
@@ -85,6 +86,7 @@ board: half
 parts:
   M1:
     type: device
+    model: TP4056-MODULE
     at: top
     label: TP4056 + 保護 (USB 入力は基板の USB ソケットへ)
     pins: [OUT+, OUT-, B+, B-]

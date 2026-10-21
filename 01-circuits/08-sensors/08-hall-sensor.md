@@ -25,6 +25,7 @@ parts:
   VCC: vcc 2,3 5V
   U1:
     type: ic3
+    model: A3144
     at: 4,4
     label: A3144
     pins: [VCC, GND, OUT]

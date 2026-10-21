@@ -35,6 +35,7 @@ parts:
   GVC: ground 4,6
   IC1:
     type: ic3
+    model: TA7642
     at: 9,3
     label: TA7642
     pins: [GND, IN, OUT]

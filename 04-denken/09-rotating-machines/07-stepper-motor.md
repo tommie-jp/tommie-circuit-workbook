@@ -42,9 +42,10 @@ parts:
     turn: mirror
   U1:
     type: device
+    model: ULN2003-BOARD
     at: 8,2
     label: ULN2003 + 28BYJ-48
-    pins: [V+, IN1, IN2, IN3, IN4, GND]
+    pins: [VCC, IN1, IN2, IN3, IN4, GND]
   P1: vcc 6,1 5V
   G1: ground 3,4
 wires:
@@ -54,7 +55,7 @@ wires:
   - A1.DIO3 -- U1.IN4
   - A1.GND -- U1.GND
   - A1.GND -| 3,4
-  - U1.V+ -| 6,1
+  - U1.VCC -| 6,1
 notes:
   - text 5,1 small: (USB)
 ```
@@ -83,9 +84,10 @@ parts:
     pins: ["+5V", GND]
   ULN:
     type: device
+    model: ULN2003-BOARD
     at: top
     label: ULN2003 基板
-    pins: [IN1, IN2, IN3, IN4, "-", "+"]
+    pins: [IN1, IN2, IN3, IN4, GND, VCC]
   AD:
     type: device
     at: bottom
@@ -98,8 +100,8 @@ wires:
   - ULN.IN2 -- a12 green
   - ULN.IN3 -- a14 blue
   - ULN.IN4 -- a16 purple
-  - ULN.- -- -t20 black
-  - ULN.+ -- +t22 red
+  - ULN.GND -- -t20 black
+  - ULN.VCC -- +t22 red
   - e10 -- f10 yellow
   - e12 -- f12 green
   - e14 -- f14 blue
