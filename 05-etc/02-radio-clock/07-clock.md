@@ -222,47 +222,33 @@ parts:
   ENM: port 8.4,8.75
   CLK: port 8.4,9.5
   VCC: vcc 11.5,4.6 5V
-  LDMU: port 15.6,5.7
   GND1: ground 12,10.6
-  MU0: port 15.6,7
-  MU1: port 15.6,7.5
-  MU2: port 15.6,8
-  MU3: port 15.6,8.5
+  MU0: port 31,7
+  MU1: port 31,7.5
+  MU2: port 31,8
+  MU3: port 31,8.5
+  U34A: and 20,10.75 74HC08
+  U34B: and 26,11.05 74HC08
+  ENM: port 22.5,11.35
+  U42C: nor 32,11.35 74HC02
+  RS: port 30,9.8
   U24: ic 12,19 74HC163
   GND2: ground 8.4,17.5 r90
   ENMT: port 8.4,19.75
   CLK: port 8.4,20.5
   VCC: vcc 11.5,15.6 5V
-  LDMT: port 15.6,16.7
   GND3: ground 12,21.6
-  MT0: port 15.6,18
-  MT1: port 15.6,18.5
-  MT2: port 15.6,19
-  MT3: port 15.6,19.5
-  U34A: and 23,6
-  MU3: port 19.5,5.25
-  MU0: port 19.5,6.75
-  MU9: port 26,6
-  U34B: and 23,9.4
-  MU9: port 19.5,8.65
-  ENM: port 19.5,10.15
-  ENMT: port 26,9.4
-  U42C: nor 23,12.8
-  RS: port 19.5,12.05
-  ENMT: port 19.5,13.55
-  LDMU: port 26,12.8
-  U34C: and 23,17
-  MT2: port 19.5,16.25
-  MT0: port 19.5,17.75
-  MT5: port 26,17
-  U34D: and 23,20.4
-  MT5: port 19.5,19.65
-  ENMT: port 19.5,21.15
-  CM: port 26,20.4
-  U42D: nor 23,23.8
-  RS: port 19.5,23.05
-  CM: port 19.5,24.55
-  LDMT: port 26,23.8
+  MT0: port 31,18
+  MT1: port 31,18.5
+  MT2: port 31,19
+  MT3: port 31,19.5
+  U34C: and 20,21.75 74HC08
+  U34D: and 26,22.05 74HC08
+  ENMT: port 22.5,22.35
+  U42D: nor 32,22.35 74HC02
+  RS: port 30,20.8
+  ENMT: port 36,13.5
+  CM: port 36,24.5
 wires:
   - U23.A -| 9.5,6.5
   - U23.B -| 9.5,7
@@ -282,12 +268,25 @@ wires:
   - 12,5.2 -| U23.CLR
   - 11.5,5.2 -- 12,5.2
   - 11.5,5.2 -- 11.5,4.6
-  - U23.LOAD |- 15.6,5.7
   - 12,10.6 -| U23.GND
-  - U23.QA -| 15.6,7
-  - U23.QB -| 15.6,7.5
-  - U23.QC -| 15.6,8
-  - U23.QD -| 15.6,8.5
+  - U23.QA -| 14.5,7
+  - 14.5,7 -- 31,7
+  - U23.QB -| 31,7.5
+  - U23.QC -| 31,8
+  - U23.QD -| 15.5,8.5
+  - 15.5,8.5 -- 31,8.5
+  - 15.5,8.5 |- U34A.a
+  - 14.5,7 |- U34A.b
+  - U34A.out -- 23.5,10.75
+  - 23.5,10.75 |- U34B.a
+  - 22.5,11.35 |- U34B.b
+  - U34B.out -| 29,11.65
+  - 29,11.65 |- U42C.b
+  - 29,11.65 -- 29,13.5
+  - 29,13.5 -- 36,13.5
+  - 30,9.8 |- U42C.a
+  - U42C.out -| 34,5.7
+  - U23.LOAD |- 34,5.7
   - U24.A -| 9.5,17.5
   - U24.B -| 9.5,18
   - U24.C -| 9.5,18.5
@@ -306,51 +305,32 @@ wires:
   - 12,16.2 -| U24.CLR
   - 11.5,16.2 -- 12,16.2
   - 11.5,16.2 -- 11.5,15.6
-  - U24.LOAD |- 15.6,16.7
   - 12,21.6 -| U24.GND
-  - U24.QA -| 15.6,18
-  - U24.QB -| 15.6,18.5
-  - U24.QC -| 15.6,19
-  - U24.QD -| 15.6,19.5
-  - 19.5,5.25 |- U34A.a
-  - 19.5,6.75 |- U34A.b
-  - U34A.out -- 26,6
-  - 19.5,8.65 |- U34B.a
-  - 19.5,10.15 |- U34B.b
-  - U34B.out -- 26,9.4
-  - 19.5,12.05 |- U42C.a
-  - 19.5,13.55 |- U42C.b
-  - U42C.out -- 26,12.8
-  - 19.5,16.25 |- U34C.a
-  - 19.5,17.75 |- U34C.b
-  - U34C.out -- 26,17
-  - 19.5,19.65 |- U34D.a
-  - 19.5,21.15 |- U34D.b
-  - U34D.out -- 26,20.4
-  - 19.5,23.05 |- U42D.a
-  - 19.5,24.55 |- U42D.b
-  - U42D.out -- 26,23.8
+  - U24.QA -| 14.5,18
+  - 14.5,18 -- 31,18
+  - U24.QB -| 31,18.5
+  - U24.QC -| 15.5,19
+  - 15.5,19 -- 31,19
+  - U24.QD -| 31,19.5
+  - 15.5,19 |- U34C.a
+  - 14.5,18 |- U34C.b
+  - U34C.out -- 23.5,21.75
+  - 23.5,21.75 |- U34D.a
+  - 22.5,22.35 |- U34D.b
+  - U34D.out -| 29,22.65
+  - 29,22.65 |- U42D.b
+  - 29,22.65 -- 29,24.5
+  - 29,24.5 -- 36,24.5
+  - 30,20.8 |- U42D.a
+  - U42D.out -| 34,16.7
+  - U24.LOAD |- 34,16.7
 notes:
   - text 13.5,4.1 small left: U23 74HC163 (分の一の位)
   - text 13.5,15.1 small left: U24 74HC163 (分の十の位)
-  - text 21.9,5.4 tiny center: "1"
-  - text 21.9,6.6 tiny center: "2"
-  - text 23.7,5.6 tiny center: "3"
-  - text 21.9,8.8 tiny center: "4"
-  - text 21.9,10 tiny center: "5"
-  - text 23.7,9 tiny center: "6"
-  - text 21.9,12.2 tiny center: "8"
-  - text 21.9,13.4 tiny center: "9"
-  - text 23.7,12.4 tiny center: "10"
-  - text 21.9,16.4 tiny center: "9"
-  - text 21.9,17.6 tiny center: "10"
-  - text 23.7,16.6 tiny center: "8"
-  - text 21.9,19.8 tiny center: "12"
-  - text 21.9,21 tiny center: "13"
-  - text 23.7,20 tiny center: "11"
-  - text 21.9,23.2 tiny center: "11"
-  - text 21.9,24.4 tiny center: "12"
-  - text 23.7,23.4 tiny center: "13"
+  - text 22,5.3 tiny left: LDMU
+  - text 22,16.3 tiny left: LDMT
+  - text 22.5,10.4 tiny left: MU9
+  - text 22.5,21.4 tiny left: MT5
   - text 3,27.5 small left: 74HC08・74HC02 は PIN 14 が +5V、PIN 7 が GND
 style:
   pitch: 1
@@ -359,6 +339,7 @@ style:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/07-clock-1.svg)
 
 - 秒とほぼ同じ作りで、イネーブルは ENM (秒からの桁上がり ENMU と、分 +1 のボタンの OR。図3) から始まる。データ入力はすべて GND。
+- 一の位 (U23) の出力 MU0〜MU3 を右へ伸ばし、その下の U34A (9 の判定 MU9)・U34B (十の位を進める ENMT)・U42C (LOAD を作る LDMU) へ直接つないだ。LDMU は上を回って U23 の LOAD へ戻る。十の位 (U24・U34C・U34D・U42D) も同じ形で、U34D の出力が時へ行く桁上がり CM。
 - U34D の CM (分が 59 で桁上がり) は、時のユニットへ行く。
 
 ### ユニット 4: 時
