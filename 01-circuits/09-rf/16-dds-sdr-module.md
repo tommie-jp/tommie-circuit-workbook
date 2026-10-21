@@ -376,7 +376,7 @@ markers: [7M, 18M, 32M, 43M]
 | 部品 | 値・型番 | 備考 |
 | --- | --- | --- |
 | U1 | Raspberry Pi Pico 2 | C/C++ の `.uf2` か MicroPython を書き込む。USB から給電 |
-| U2 | AD9833 モジュール | 25 MHz 水晶発振器つき。VCC・DGND・SDATA・SCLK・FSYNC・AGND・OUT のピンヘッダ |
+| U2 | AD9833 モジュール (GY-9833) | 25 MHz 水晶発振器つき。VCC・DGND・SDATA・SCLK・FSYNC・AGND・OUT のピンヘッダ。※ **実物で確かめる: 製造元の図が無く、並びは個人の KiCad データ 5 つの一致による。CJMCU-9833 の名の基板は REF VCC GND DAT CLK FNC OUT の別の並びが多い。実物は基板の印字で確かめる** |
 | U3 | tinySA Ultra ZS405 | SMA 入力。通常モード 100 kHz〜800 MHz。ブレッドボードの外 |
 | SMA ケーブル | 50 Ω | U2 の OUT から U3 へ (SMA 変換ケーブル)。減衰器は入れない |
 
