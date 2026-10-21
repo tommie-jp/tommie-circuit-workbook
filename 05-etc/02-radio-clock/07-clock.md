@@ -228,9 +228,9 @@ parts:
   MU2: port 31,8
   MU3: port 31,8.5
   U34A: and 20,10.75 74HC08
-  U34B: and 26,11.05 74HC08
-  ENM: port 22.5,11.35
-  U42C: nor 32,11.35 74HC02
+  U34B: and 26,10.99 74HC08
+  ENM: port 22.5,11.23
+  U42C: nor 32,11.41 74HC02
   RS: port 30,9.8
   U24: ic 12,19 74HC163
   GND2: ground 8.4,17.5 r90
@@ -243,9 +243,9 @@ parts:
   MT2: port 31,19
   MT3: port 31,19.5
   U34C: and 20,21.75 74HC08
-  U34D: and 26,22.05 74HC08
-  ENMT: port 22.5,22.35
-  U42D: nor 32,22.35 74HC02
+  U34D: and 26,21.99 74HC08
+  ENMT: port 22.5,22.23
+  U42D: nor 32,22.41 74HC02
   RS: port 30,20.8
   ENMT: port 36,13.5
   CM: port 36,24.5
@@ -279,7 +279,7 @@ wires:
   - 14.5,7 |- U34A.b
   - U34A.out -- 23.5,10.75
   - 23.5,10.75 |- U34B.a
-  - 22.5,11.35 |- U34B.b
+  - 22.5,11.23 |- U34B.b
   - U34B.out -| 29,11.65
   - 29,11.65 |- U42C.b
   - 29,11.65 -- 29,13.5
@@ -316,7 +316,7 @@ wires:
   - 14.5,18 |- U34C.b
   - U34C.out -- 23.5,21.75
   - 23.5,21.75 |- U34D.a
-  - 22.5,22.35 |- U34D.b
+  - 22.5,22.23 |- U34D.b
   - U34D.out -| 29,22.65
   - 29,22.65 |- U42D.b
   - 29,22.65 -- 29,24.5
@@ -325,6 +325,25 @@ wires:
   - U42D.out -| 34,16.7
   - U24.LOAD |- 34,16.7
 notes:
+  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
+  - arrow 8.65,8.75 9.3,8.75 ink
+  - arrow 8.65,9.5 9.3,9.5 ink
+  - arrow 29.15,7 29.8,7 ink
+  - arrow 29.15,7.5 29.8,7.5 ink
+  - arrow 29.15,8 29.8,8 ink
+  - arrow 29.15,8.5 29.8,8.5 ink
+  - arrow 22.75,11.23 23.4,11.23 ink
+  - arrow 30,10.05 30,10.7 ink
+  - arrow 8.65,19.75 9.3,19.75 ink
+  - arrow 8.65,20.5 9.3,20.5 ink
+  - arrow 29.15,18 29.8,18 ink
+  - arrow 29.15,18.5 29.8,18.5 ink
+  - arrow 29.15,19 29.8,19 ink
+  - arrow 29.15,19.5 29.8,19.5 ink
+  - arrow 22.75,22.23 23.4,22.23 ink
+  - arrow 30,21.05 30,21.7 ink
+  - arrow 34.15,13.5 34.8,13.5 ink
+  - arrow 34.15,24.5 34.8,24.5 ink
   - text 13.5,4.1 small left: U23 74HC163 (分の一の位)
   - text 13.5,15.1 small left: U24 74HC163 (分の十の位)
   - text 22,5.3 tiny left: LDMU
@@ -348,65 +367,53 @@ style:
 # 回路図 (tommie-fence の circuit フェンス)
 title: 図2 時のカウンタ (ユニット 4)
 parts:
+  U40C: or 4.5,8.75 74HC32
+  CMB: port 1,7.6
+  HP: port 1,9.9
   U25: ic 12,8 74HC163
   GND4: ground 8.4,6.5 r90
-  ENH: port 8.4,8.75
   CLK: port 8.4,9.5
   VCC: vcc 11.5,4.6 5V
-  LDHU: port 15.6,5.7
   GND1: ground 12,10.6
-  HU0: port 15.6,7
-  HU1: port 15.6,7.5
-  HU2: port 15.6,8
-  HU3: port 15.6,8.5
+  HU0: port 40,7
+  HU1: port 40,7.5
+  HU2: port 40,8
+  HU3: port 40,8.5
+  U35A: and 20,10.75 74HC08
+  U35B: and 26,10.99 74HC08
+  ENHT: port 35,9.5
+  U40D: or 38,11.23 74HC32
+  U43A: nor 44,10.99 74HC02
+  SET: port 41,9.8
+  U35C: and 20,14.5 74HC08
+  U35D: and 26,14.74 74HC08
+  U36A: and 32,14.98 74HC08
+  U43B: nor 44,14.74 74HC02
+  SET: port 41.5,13.5
   U26: ic 12,21 74HC163
   GND2: ground 8.4,19.5 r90
   ENHT: port 8.4,21.75
   CLK: port 8.4,22.5
   VCC: vcc 11.5,17.6 5V
-  LDHT: port 15.6,18.7
   GND3: ground 12,23.6
-  HT0: port 15.6,20
-  HT1: port 15.6,20.5
-  HT2: port 15.6,21
-  HT3: port 15.6,21.5
-  U40C: or 23,5
-  CMB: port 19.5,4.25
-  HP: port 19.5,5.75
-  ENH: port 26,5
-  U35A: and 23,8.4
-  HU3: port 19.5,7.65
-  HU0: port 19.5,9.15
-  HU9: port 26,8.4
-  U35B: and 23,11.8
-  HU9: port 19.5,11.05
-  ENH: port 19.5,12.55
-  ENHT: port 26,11.8
-  U40D: or 23,15.2
-  ENHT: port 19.5,14.45
-  WH: port 19.5,15.95
-  O8: port 26,15.2
-  U35C: and 36,5
-  HU1: port 32.5,4.25
-  HU0: port 32.5,5.75
-  H3: port 39,5
-  U35D: and 36,8.4
-  H3: port 32.5,7.65
-  HT1: port 32.5,9.15
-  H23: port 39,8.4
-  U36A: and 36,11.8
-  H23: port 32.5,11.05
-  ENH: port 32.5,12.55
-  WH: port 39,11.8
-  U43A: nor 36,15.2
-  SET: port 32.5,14.45
-  O8: port 32.5,15.95
-  LDHU: port 39,15.2
-  U43B: nor 36,18.6
-  SET: port 32.5,17.85
-  WH: port 32.5,19.35
-  LDHT: port 39,18.6
+  HT0: port 40,20
+  HT1: port 40,20.5
+  HT2: port 40,21
+  HT3: port 40,21.5
 wires:
+  - 1,7.6 |- U40C.a
+  - 1,9.9 |- U40C.b
+  - U40C.out -- 7,8.75
+  - 7,8.75 -- 9.5,8.75
+  - U25.ENP -| 9.5,8.5
+  - U25.ENT -| 9.5,9
+  - 9.5,8.5 -- 9.5,8.75
+  - 9.5,8.75 -- 9.5,9
+  - 7,8.75 -- 7,12.8
+  - 7,12.8 -- 24.5,12.8
+  - 24.5,12.8 |- U35B.b
+  - 24.5,12.8 -- 30,12.8
+  - 30,12.8 |- U36A.b
   - U25.A -| 9.5,6.5
   - U25.B -| 9.5,7
   - U25.C -| 9.5,7.5
@@ -415,22 +422,46 @@ wires:
   - 9.5,7 -- 9.5,7.5
   - 9.5,7.5 -- 9.5,8
   - 9.5,6.5 -- 8.4,6.5
-  - U25.ENP -| 9.5,8.5
-  - U25.ENT -| 9.5,9
-  - 9.5,8.5 -- 9.5,8.75
-  - 9.5,8.75 -- 9.5,9
-  - 9.5,8.75 -- 8.4,8.75
   - U25.CLK -| 8.4,9.5
   - 11.5,5.2 -| U25.VCC
   - 12,5.2 -| U25.CLR
   - 11.5,5.2 -- 12,5.2
   - 11.5,5.2 -- 11.5,4.6
-  - U25.LOAD |- 15.6,5.7
   - 12,10.6 -| U25.GND
-  - U25.QA -| 15.6,7
-  - U25.QB -| 15.6,7.5
-  - U25.QC -| 15.6,8
-  - U25.QD -| 15.6,8.5
+  - U25.QA -| 14.5,7
+  - 14.5,7 -- 40,7
+  - U25.QB -| 16.5,7.5
+  - 16.5,7.5 -- 40,7.5
+  - U25.QC -| 40,8
+  - U25.QD -| 15.5,8.5
+  - 15.5,8.5 -- 40,8.5
+  - 15.5,8.5 |- U35A.a
+  - 14.5,7 -- 14.5,10.99
+  - 14.5,10.99 |- U35A.b
+  - 14.5,10.99 -- 14.5,14.74
+  - 14.5,14.74 |- U35C.b
+  - 16.5,7.5 |- U35C.a
+  - U35A.out -- 23.5,10.75
+  - 23.5,10.75 |- U35B.a
+  - U35B.out -- 35,10.99
+  - 35,10.99 |- U40D.a
+  - 35,10.99 -- 35,9.5
+  - U40D.out -- 41.5,11.23
+  - 41.5,11.23 |- U43A.b
+  - 41,9.8 |- U43A.a
+  - U43A.out -| 47,5.7
+  - U25.LOAD |- 47,5.7
+  - U35C.out -- 23.5,14.5
+  - 23.5,14.5 |- U35D.a
+  - U35D.out -- 29.5,14.74
+  - 29.5,14.74 |- U36A.a
+  - U36A.out -- 36.5,14.98
+  - 36.5,14.98 |- U40D.b
+  - 36.5,14.98 -- 41,14.98
+  - 41,14.98 |- U43B.b
+  - 41.5,13.5 |- U43B.a
+  - U43B.out -| 48,18.7
+  - U26.LOAD |- 48,18.7
   - U26.A -| 9.5,19.5
   - U26.B -| 9.5,20
   - U26.C -| 9.5,20.5
@@ -449,70 +480,42 @@ wires:
   - 12,18.2 -| U26.CLR
   - 11.5,18.2 -- 12,18.2
   - 11.5,18.2 -- 11.5,17.6
-  - U26.LOAD |- 15.6,18.7
   - 12,23.6 -| U26.GND
-  - U26.QA -| 15.6,20
-  - U26.QB -| 15.6,20.5
-  - U26.QC -| 15.6,21
-  - U26.QD -| 15.6,21.5
-  - 19.5,4.25 |- U40C.a
-  - 19.5,5.75 |- U40C.b
-  - U40C.out -- 26,5
-  - 19.5,7.65 |- U35A.a
-  - 19.5,9.15 |- U35A.b
-  - U35A.out -- 26,8.4
-  - 19.5,11.05 |- U35B.a
-  - 19.5,12.55 |- U35B.b
-  - U35B.out -- 26,11.8
-  - 19.5,14.45 |- U40D.a
-  - 19.5,15.95 |- U40D.b
-  - U40D.out -- 26,15.2
-  - 32.5,4.25 |- U35C.a
-  - 32.5,5.75 |- U35C.b
-  - U35C.out -- 39,5
-  - 32.5,7.65 |- U35D.a
-  - 32.5,9.15 |- U35D.b
-  - U35D.out -- 39,8.4
-  - 32.5,11.05 |- U36A.a
-  - 32.5,12.55 |- U36A.b
-  - U36A.out -- 39,11.8
-  - 32.5,14.45 |- U43A.a
-  - 32.5,15.95 |- U43A.b
-  - U43A.out -- 39,15.2
-  - 32.5,17.85 |- U43B.a
-  - 32.5,19.35 |- U43B.b
-  - U43B.out -- 39,18.6
+  - U26.QA -| 40,20
+  - U26.QB -| 23,20.5
+  - 23,20.5 -- 40,20.5
+  - 23,20.5 |- U35D.b
+  - U26.QC -| 40,21
+  - U26.QD -| 40,21.5
 notes:
+  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
+  - arrow 1,7.81 1,8.46 ink
+  - arrow 1,9.69 1,9.04 ink
+  - arrow 8.65,9.5 9.3,9.5 ink
+  - arrow 38.15,7 38.8,7 ink
+  - arrow 38.15,7.5 38.8,7.5 ink
+  - arrow 38.15,8 38.8,8 ink
+  - arrow 38.15,8.5 38.8,8.5 ink
+  - arrow 35,10.94 35,10.29 ink
+  - arrow 41,10.05 41,10.7 ink
+  - arrow 41.5,13.75 41.5,14.4 ink
+  - arrow 8.65,21.75 9.3,21.75 ink
+  - arrow 8.65,22.5 9.3,22.5 ink
+  - arrow 38.15,20 38.8,20 ink
+  - arrow 38.15,20.5 38.8,20.5 ink
+  - arrow 38.15,21 38.8,21 ink
+  - arrow 38.15,21.5 38.8,21.5 ink
   - text 13.5,4.1 small left: U25 74HC163 (時の一の位)
   - text 13.5,17.1 small left: U26 74HC163 (時の十の位)
-  - text 21.9,4.5 tiny center: "9"
-  - text 21.9,5.6 tiny center: "10"
-  - text 23.7,4.6 tiny center: "8"
-  - text 21.9,7.8 tiny center: "1"
-  - text 21.9,9 tiny center: "2"
-  - text 23.7,8 tiny center: "3"
-  - text 21.9,11.2 tiny center: "4"
-  - text 21.9,12.4 tiny center: "5"
-  - text 23.7,11.4 tiny center: "6"
-  - text 21.9,14.7 tiny center: "12"
-  - text 21.9,15.8 tiny center: "13"
-  - text 23.7,14.8 tiny center: "11"
-  - text 34.9,4.4 tiny center: "9"
-  - text 34.9,5.6 tiny center: "10"
-  - text 36.7,4.6 tiny center: "8"
-  - text 34.9,7.8 tiny center: "12"
-  - text 34.9,9 tiny center: "13"
-  - text 36.7,8 tiny center: "11"
-  - text 34.9,11.2 tiny center: "1"
-  - text 34.9,12.4 tiny center: "2"
-  - text 36.7,11.4 tiny center: "3"
-  - text 34.9,14.6 tiny center: "2"
-  - text 34.9,15.8 tiny center: "3"
-  - text 36.7,14.8 tiny center: "1"
-  - text 34.9,18 tiny center: "5"
-  - text 34.9,19.2 tiny center: "6"
-  - text 36.7,18.2 tiny center: "4"
-  - text 3,28.5 small left: 74HC08・74HC32・74HC02 は PIN 14 が +5V、PIN 7 が GND
+  - text 5.5,12.4 tiny left: ENH
+  - text 22,10.4 tiny left: HU9
+  - text 39.5,10.7 tiny left: O8
+  - text 30,5.3 tiny left: LDHU
+  - text 22,14.1 tiny left: H3
+  - text 28,14.3 tiny left: H23
+  - text 34,14.6 tiny left: WH
+  - text 30,18.3 tiny left: LDHT
+  - text 3,26.5 small left: 74HC08・74HC32・74HC02 は PIN 14 が +5V、PIN 7 が GND
 style:
   pitch: 1
 ```
@@ -570,6 +573,11 @@ wires:
   - 22.5,16 |- U48B.a
   - U48B.out -- 30,16.75
 notes:
+  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
+  - arrow 20.25,6 20.9,6 ink
+  - arrow 28.15,6.75 28.8,6.75 ink
+  - arrow 20.25,16 20.9,16 ink
+  - arrow 28.15,16.75 28.8,16.75 ink
   - text 10,4.6 small left: 分 +1 (押しているあいだ 8 Hz で進む)
   - text 10,14.6 small left: 時 +1
   - text 18,7.1 tiny left: BM
@@ -594,194 +602,140 @@ style:
 # 回路図 (tommie-fence の circuit フェンス)
 title: 図4 窓判定 (ユニット 6)
 parts:
-  U36C: and 8,6
-  ST1: port 4.5,5.25
-  ST0: port 4.5,6.75
-  XA: port 11,6
-  U39C: or 8,9.4
-  ST2: port 4.5,8.65
-  XA: port 4.5,10.15
-  X: port 11,9.4
-  U36D: and 8,12.8
-  MT1: port 4.5,12.05
-  MT0: port 4.5,13.55
-  MA: port 11,12.8
-  U40B: or 8,16.2
-  MT2: port 4.5,15.45
-  MA: port 4.5,16.95
-  M30: port 11,16.2
-  U36B: and 8,19.6
-  MT5: port 4.5,18.85
-  MU9: port 4.5,20.35
-  M59: port 11,19.6
-  U38A: or 21,6
-  MT2: port 17.5,5.25
-  MT1: port 17.5,6.75
-  OA: port 24,6
-  U38B: or 21,9.4
-  MT0: port 17.5,8.65
-  MU3: port 17.5,10.15
-  OB: port 24,9.4
-  U38C: or 21,12.8
-  MU2: port 17.5,12.05
-  MU1: port 17.5,13.55
-  OC: port 24,12.8
-  U38D: or 21,16.2
-  OA: port 17.5,15.45
-  OB: port 17.5,16.95
-  OD: port 24,16.2
-  U39A: or 21,19.6
-  OC: port 17.5,18.85
-  MU0: port 17.5,20.35
-  OE: port 24,19.6
-  U39B: or 21,23
-  OD: port 17.5,22.25
-  OE: port 17.5,23.75
-  OF: port 24,23
-  U37A: and 34,6
-  M59: port 30.5,5.25
-  X: port 30.5,6.75
-  W59: port 37,6
-  U43D: nor 34,9.4
-  OF: port 30.5,8.65
-  X: port 30.5,10.15
-  W00: port 37,9.4
-  U39D: or 34,12.8
-  W59: port 30.5,12.05
-  W00: port 30.5,13.55
-  O2: port 37,12.8
-  U40A: or 34,16.2
-  NSY: port 30.5,15.45
-  O2: port 30.5,16.95
-  O3: port 37,16.2
-  U37B: and 34,19.6
-  P: port 30.5,18.85
-  O3: port 30.5,20.35
-  ACC: port 37,19.6
-  U37C: and 34,23
-  ACC: port 30.5,22.25
-  M30: port 30.5,23.75
-  HP: port 37,23
+  U36C: and 8,4 74HC08
+  ST1: port 4.5,3.7
+  ST0: port 4.5,4.3
+  U39C: or 15,3.76 74HC32
+  ST2: port 11.5,2.6
+  U36D: and 8,8 74HC08
+  MT1: port 4.5,7.7
+  MT0: port 4.5,8.3
+  U40B: or 15,7.76 74HC32
+  MT2: port 11.5,6.6
+  U36B: and 8,12 74HC08
+  MT5: port 4.5,11.7
+  MU9: port 4.5,12.3
+  U38A: or 8,16 74HC32
+  MT2: port 4.5,15.7
+  MT1: port 4.5,16.3
+  U38B: or 8,19.4 74HC32
+  MT0: port 4.5,19.1
+  MU3: port 4.5,19.7
+  U38C: or 8,22.8 74HC32
+  MU2: port 4.5,22.5
+  MU1: port 4.5,23.1
+  U38D: or 15,17.7 74HC32
+  U39A: or 15,23.04 74HC32
+  MU0: port 11.5,24.4
+  U39B: or 22,20.6 74HC32
+  U37A: and 30,9 74HC08
+  U43D: nor 30,14 74HC02
+  U39D: or 37,11.5 74HC32
+  U40A: or 44,11.26 74HC32
+  NSY: port 41.5,10
+  U37B: and 51,11.02 74HC08
+  P: port 48.5,9.8
+  U37C: and 58,11.26 74HC08
+  ACC: port 62,9.5
+  HP: port 62,11.26
 wires:
-  - 4.5,5.25 |- U36C.a
-  - 4.5,6.75 |- U36C.b
-  - U36C.out -- 11,6
-  - 4.5,8.65 |- U39C.a
-  - 4.5,10.15 |- U39C.b
-  - U39C.out -- 11,9.4
-  - 4.5,12.05 |- U36D.a
-  - 4.5,13.55 |- U36D.b
-  - U36D.out -- 11,12.8
-  - 4.5,15.45 |- U40B.a
-  - 4.5,16.95 |- U40B.b
-  - U40B.out -- 11,16.2
-  - 4.5,18.85 |- U36B.a
-  - 4.5,20.35 |- U36B.b
-  - U36B.out -- 11,19.6
-  - 17.5,5.25 |- U38A.a
-  - 17.5,6.75 |- U38A.b
-  - U38A.out -- 24,6
-  - 17.5,8.65 |- U38B.a
-  - 17.5,10.15 |- U38B.b
-  - U38B.out -- 24,9.4
-  - 17.5,12.05 |- U38C.a
-  - 17.5,13.55 |- U38C.b
-  - U38C.out -- 24,12.8
-  - 17.5,15.45 |- U38D.a
-  - 17.5,16.95 |- U38D.b
-  - U38D.out -- 24,16.2
-  - 17.5,18.85 |- U39A.a
-  - 17.5,20.35 |- U39A.b
-  - U39A.out -- 24,19.6
-  - 17.5,22.25 |- U39B.a
-  - 17.5,23.75 |- U39B.b
-  - U39B.out -- 24,23
-  - 30.5,5.25 |- U37A.a
-  - 30.5,6.75 |- U37A.b
-  - U37A.out -- 37,6
-  - 30.5,8.65 |- U43D.a
-  - 30.5,10.15 |- U43D.b
-  - U43D.out -- 37,9.4
-  - 30.5,12.05 |- U39D.a
-  - 30.5,13.55 |- U39D.b
-  - U39D.out -- 37,12.8
-  - 30.5,15.45 |- U40A.a
-  - 30.5,16.95 |- U40A.b
-  - U40A.out -- 37,16.2
-  - 30.5,18.85 |- U37B.a
-  - 30.5,20.35 |- U37B.b
-  - U37B.out -- 37,19.6
-  - 30.5,22.25 |- U37C.a
-  - 30.5,23.75 |- U37C.b
-  - U37C.out -- 37,23
+  - 4.5,3.7 |- U36C.a
+  - 4.5,4.3 |- U36C.b
+  - U36C.out -- 12.5,4
+  - 12.5,4 |- U39C.b
+  - 11.5,2.6 |- U39C.a
+  - 4.5,7.7 |- U36D.a
+  - 4.5,8.3 |- U36D.b
+  - U36D.out -- 12.5,8
+  - 12.5,8 |- U40B.b
+  - 11.5,6.6 |- U40B.a
+  - 4.5,11.7 |- U36B.a
+  - 4.5,12.3 |- U36B.b
+  - 4.5,15.7 |- U38A.a
+  - 4.5,16.3 |- U38A.b
+  - 4.5,19.1 |- U38B.a
+  - 4.5,19.7 |- U38B.b
+  - 4.5,22.5 |- U38C.a
+  - 4.5,23.1 |- U38C.b
+  - U38A.out -- 12.5,16
+  - 12.5,16 |- U38D.a
+  - U38B.out -- 13,19.4
+  - 13,19.4 |- U38D.b
+  - U38C.out -- 12.5,22.8
+  - 12.5,22.8 |- U39A.a
+  - 11.5,24.4 |- U39A.b
+  - U38D.out -- 19.5,17.7
+  - 19.5,17.7 |- U39B.a
+  - U39A.out -- 20,23.04
+  - 20,23.04 |- U39B.b
+  - U39C.out -- 27.5,3.76
+  - 27.5,3.76 -- 27.5,9.24
+  - 27.5,9.24 |- U37A.b
+  - 27.5,9.24 -- 27.5,14.24
+  - 27.5,14.24 |- U43D.b
+  - U36B.out -- 26,12
+  - 26,12 |- U37A.a
+  - U39B.out -- 27,20.6
+  - 27,20.6 |- U43D.a
+  - U37A.out -- 34,9
+  - 34,9 |- U39D.a
+  - U43D.out -- 34.5,14
+  - 34.5,14 |- U39D.b
+  - U39D.out -- 41,11.5
+  - 41,11.5 |- U40A.b
+  - 41.5,10 |- U40A.a
+  - U40A.out -- 48,11.26
+  - 48,11.26 |- U37B.b
+  - 48.5,9.8 |- U37B.a
+  - U37B.out -- 54.5,11.02
+  - 54.5,11.02 |- U37C.a
+  - 54.5,11.02 -- 54.5,9.5
+  - 54.5,9.5 -- 62,9.5
+  - U40B.out -- 55.5,7.76
+  - 55.5,7.76 |- U37C.b
+  - U37C.out -- 62,11.26
 notes:
-  - text 6.9,5.4 tiny center: "9"
-  - text 6.9,6.6 tiny center: "10"
-  - text 8.7,5.6 tiny center: "8"
-  - text 6.9,8.9 tiny center: "9"
-  - text 6.9,10 tiny center: "10"
-  - text 8.7,9 tiny center: "8"
-  - text 6.9,12.2 tiny center: "12"
-  - text 6.9,13.4 tiny center: "13"
-  - text 8.7,12.4 tiny center: "11"
-  - text 6.9,15.7 tiny center: "4"
-  - text 6.9,16.8 tiny center: "5"
-  - text 8.7,15.8 tiny center: "6"
-  - text 6.9,19 tiny center: "4"
-  - text 6.9,20.2 tiny center: "5"
-  - text 8.7,19.2 tiny center: "6"
-  - box 1.6,2.2 13,21.4 blue
-  - text 2,3 small bold left: 秒・分の判定
-  - text 19.9,5.5 tiny center: "1"
-  - text 19.9,6.6 tiny center: "2"
-  - text 21.7,5.6 tiny center: "3"
-  - text 19.9,8.9 tiny center: "4"
-  - text 19.9,10 tiny center: "5"
-  - text 21.7,9 tiny center: "6"
-  - text 19.9,12.3 tiny center: "9"
-  - text 19.9,13.4 tiny center: "10"
-  - text 21.7,12.4 tiny center: "8"
-  - text 19.9,15.7 tiny center: "12"
-  - text 19.9,16.8 tiny center: "13"
-  - text 21.7,15.8 tiny center: "11"
-  - text 19.9,19.1 tiny center: "1"
-  - text 19.9,20.2 tiny center: "2"
-  - text 21.7,19.2 tiny center: "3"
-  - text 19.9,22.5 tiny center: "4"
-  - text 19.9,23.6 tiny center: "5"
-  - text 21.7,22.6 tiny center: "6"
-  - box 14.6,2.2 26,24.8 blue
-  - text 15,3 small bold left: 分が 00 かの判定
-  - text 32.9,5.4 tiny center: "1"
-  - text 32.9,6.6 tiny center: "2"
-  - text 34.7,5.6 tiny center: "3"
-  - text 32.9,8.8 tiny center: "11"
-  - text 32.9,10 tiny center: "12"
-  - text 34.7,9 tiny center: "13"
-  - text 32.9,12.3 tiny center: "12"
-  - text 32.9,13.4 tiny center: "13"
-  - text 34.7,12.4 tiny center: "11"
-  - text 32.9,15.7 tiny center: "1"
-  - text 32.9,16.8 tiny center: "2"
-  - text 34.7,15.8 tiny center: "3"
-  - text 32.9,19 tiny center: "4"
-  - text 32.9,20.2 tiny center: "5"
-  - text 34.7,19.2 tiny center: "6"
-  - text 32.9,22.4 tiny center: "9"
-  - text 32.9,23.6 tiny center: "10"
-  - text 34.7,22.6 tiny center: "8"
-  - box 27.6,2.2 39,24.8 blue
-  - text 28,3 small bold left: 窓の判定と時の +1
-  - text 5,30 small left: 74HC08・74HC32・74HC02 は PIN 14 が +5V、PIN 7 が GND
+  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
+  - arrow 4.75,3.76 5.4,3.76 ink
+  - arrow 4.75,4.24 5.4,4.24 ink
+  - arrow 11.5,2.82 11.5,3.47 ink
+  - arrow 4.75,7.76 5.4,7.76 ink
+  - arrow 4.75,8.24 5.4,8.24 ink
+  - arrow 11.5,6.82 11.5,7.47 ink
+  - arrow 4.75,11.76 5.4,11.76 ink
+  - arrow 4.75,12.24 5.4,12.24 ink
+  - arrow 4.75,15.76 5.4,15.76 ink
+  - arrow 4.75,16.24 5.4,16.24 ink
+  - arrow 4.75,19.16 5.4,19.16 ink
+  - arrow 4.75,19.64 5.4,19.64 ink
+  - arrow 4.75,22.56 5.4,22.56 ink
+  - arrow 4.75,23.04 5.4,23.04 ink
+  - arrow 11.5,24.15 11.5,23.5 ink
+  - arrow 41.5,10.25 41.5,10.9 ink
+  - arrow 48.5,10.05 48.5,10.7 ink
+  - arrow 60.15,9.5 60.8,9.5 ink
+  - arrow 60.15,11.26 60.8,11.26 ink
+  - text 16.5,3.1 tiny left: X
+  - text 16.5,7.1 tiny left: M30
+  - text 9.5,11.4 tiny left: M59
+  - text 23.5,20 tiny left: OF
+  - text 31.5,8.4 tiny left: W59
+  - text 31.5,13.4 tiny left: W00
+  - text 38.5,10.9 tiny left: O2
+  - text 45.5,11.5 tiny left: O3
+  - text 2,1.2 small bold left: 秒・分が 30 以上か、分が 59 か
+  - text 2,14.4 small bold left: 分が 00 か (どれか 1 ビットでも 1 なら OF が H)
+  - text 29,6.2 small bold left: 窓の判定と時の +1
+  - text 3,27 small left: 74HC08・74HC32・74HC02 は PIN 14 が +5V、PIN 7 が GND
 style:
   pitch: 1
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/circuit/07-clock-4.svg)
 
-- 左の列は「秒が 30 以上か」(XA、X)、「分が 30 以上か」(MA、M30)、「分が 59 か」(M59 = MT5 かつ MU9。MT5・MU9 は図1の U34 から来る)。
-- 中の列は、分の 7 ビットのどれか 1 つでも 1 かどうか (OA〜OF)。0 のときだけ、分は 00。
-- 右の列は、窓の判定。W59 は「59 分かつ X」、W00 は「分が 00 かつ X でない」(NOR)。O2 はその OR、O3 は未同期 (NSY) との OR。ACC = P かつ O3。HP = ACC かつ M30 (分が 30 以上のときだけ時を +1)。
+- 左上は「秒が 30 以上か」(U36C・U39C で X)、「分が 30 以上か」(U36D・U40B で M30)、「分が 59 か」(U36B で M59 = MT5 かつ MU9。MT5・MU9 は図1の U34 から来る)。
+- 左下は、分の 7 ビットのどれか 1 つでも 1 かどうか (U38A〜U38D・U39A・U39B で OF)。OF が L のときだけ、分は 00。
+- 右は、窓の判定。W59 は「59 分かつ X」、W00 は「分が 00 かつ X でない」(NOR)。O2 はその OR、O3 は未同期 (NSY) との OR。ACC = P かつ O3。HP = ACC かつ M30 (分が 30 以上のときだけ時を +1)。
 - 未同期なら O3 は 1 になるので、ACC = P で、窓を見ずに受け付ける。
 
 ### ユニット 7: 同期と設定
@@ -797,105 +751,90 @@ parts:
   C14: capacitor 9,6 9,9 1u
   GND2: ground 9,9
   U45A: not 15,6 CD40106B
-  BTN: port 20,6
-  VCC: vcc 6,14 5V
-  R15: resistor 6,15 6,18 100k
-  C15: ecap 9,18 9,21 10u
-  GND3: ground 9,21
-  U45B: not 15,18 CD40106B
-  PON: port 20,18
-  U41C: or 26,6
-  BTN: port 22.5,5.25
-  PON: port 22.5,6.75
-  SET: port 29,6
-  U41B: or 26,10.4
-  ACC: port 22.5,9.65
-  SET: port 22.5,11.15
-  RS: port 29,10.4
-  U41A: or 26,14.8
-  SY: port 22.5,14.05
-  ACC: port 22.5,15.55
-  SYD1: port 29,14.8
-  U37D: and 26,19.2
-  SYD1: port 22.5,18.45
-  SETN: port 22.5,19.95
-  SYD: port 29,19.2
-  U45C: not 26,23.6 CD40106B
-  SET: port 22.5,23.6
-  SETN: port 29,23.6
-  U45D: not 26,27 CD40106B
-  SY: port 22.5,27
-  NSY: port 29,27
-  R23: resistor 31,27 35,27 330
-  D7: led 35,27 39,27
-  GND4: ground 39,27
+  VCC: vcc 6,11 5V
+  R15: resistor 6,12 6,15 100k
+  C15: ecap 9,15 9,18 10u
+  GND3: ground 9,18
+  U45B: not 15,15 CD40106B
+  U41C: or 22,6.24 74HC32
+  U41B: or 30,6 74HC32
+  ACC: port 27,4.6
+  RS: port 33,6
+  U45C: not 29,9.5 CD40106B
+  SET: port 31,12.5
+  U41A: or 36,8 74HC32
+  ACC: port 32.5,8.24
+  U37D: and 42,8.24 74HC08
   U44A:
     type: ic3
-    at: 38,31
+    at: 49,8.24
     label: 74HC74
     pins: [D, CLK, Q]
-  SYD: port 33,31
-  CLK: port 38,34.5
-  SY: port 43,31
+  CLK: port 49,11.74
+  U45D: not 56,12 CD40106B
+  R23: resistor 59,12 63,12 330
+  D7: led 63,12 67,12
+  GND4: ground 67,12
+  NSY: port 63,14
 wires:
   - 6,2 -- 6,3
   - 6,6 -- 9,6
   - 9,6 -- 12,6
   - 12,6 -- U45A.in
-  - U45A.out -- 20,6
-  - 6,14 -- 6,15
-  - 6,18 -- 9,18
-  - 6,18 -- 12,18
-  - 12,18 -- U45B.in
-  - U45B.out -- 20,18
-  - 22.5,5.25 |- U41C.a
-  - 22.5,6.75 |- U41C.b
-  - U41C.out -- 29,6
-  - 22.5,9.65 |- U41B.a
-  - 22.5,11.15 |- U41B.b
-  - U41B.out -- 29,10.4
-  - 22.5,14.05 |- U41A.a
-  - 22.5,15.55 |- U41A.b
-  - U41A.out -- 29,14.8
-  - 22.5,18.45 |- U37D.a
-  - 22.5,19.95 |- U37D.b
-  - U37D.out -- 29,19.2
-  - 22.5,23.6 -- U45C.in
-  - U45C.out -- 29,23.6
-  - 22.5,27 -- U45D.in
-  - U45D.out -- 29,27
-  - 29,27 -- 31,27
-  - 33,31 -- U44A.D
-  - 38,34.5 -- U44A.CLK
-  - U44A.Q -- 43,31
+  - 6,11 -- 6,12
+  - 6,15 -- 9,15
+  - 9,15 -- 12,15
+  - 12,15 -- U45B.in
+  - U45A.out -- 19,6
+  - 19,6 |- U41C.a
+  - U45B.out -- 19.5,15
+  - 19.5,15 |- U41C.b
+  - U41C.out -- 26,6.24
+  - 26,6.24 |- U41B.b
+  - 27,4.6 |- U41B.a
+  - U41B.out -- 33,6
+  - 26,6.24 -- 26,9.5
+  - 26,9.5 |- U45C.in
+  - 26,9.5 -- 26,12.5
+  - 26,12.5 -- 31,12.5
+  - U45C.out -- 40,9.5
+  - 40,9.5 |- U37D.b
+  - 32.5,8.24 |- U41A.b
+  - U41A.out -- 39.5,8
+  - 39.5,8 |- U37D.a
+  - U37D.out -- 45,8.24
+  - 45,8.24 -- U44A.D
+  - 49,11.74 -- U44A.CLK
+  - U44A.Q -- 53,8.24
+  - 53,8.24 -- 53,3.5
+  - 53,3.5 -- 34.5,3.5
+  - 34.5,3.5 |- U41A.a
+  - 53,8.24 -- 53,12
+  - 53,12 |- U45D.in
+  - U45D.out -- 59,12
+  - 59,12 -- 59,14
+  - 59,14 -- 63,14
 notes:
-  - text 14.4,5.3 tiny center: "1"
-  - text 15.6,5.6 tiny center: "2"
-  - text 14.4,17.3 tiny center: "3"
-  - text 15.6,17.6 tiny center: "4"
+  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
+  - arrow 27,4.85 27,5.5 ink
+  - arrow 31.15,6 31.8,6 ink
+  - arrow 29.15,12.5 29.8,12.5 ink
+  - arrow 32.75,8.24 33.4,8.24 ink
+  - arrow 48.8,11.74 48.6,11.74 ink
+  - arrow 61.15,14 61.8,14 ink
   - text 9,3.4 small left: 設定ボタン (押すと H)
-  - text 9,15.2 small left: 電源投入 (約 0.9 秒 H)
-  - text 24.9,5.5 tiny center: "9"
-  - text 24.9,6.6 tiny center: "10"
-  - text 26.7,5.6 tiny center: "8"
-  - text 24.9,9.9 tiny center: "4"
-  - text 24.9,11 tiny center: "5"
-  - text 26.7,10 tiny center: "6"
-  - text 24.9,14.3 tiny center: "1"
-  - text 24.9,15.4 tiny center: "2"
-  - text 26.7,14.4 tiny center: "3"
-  - text 24.9,18.6 tiny center: "12"
-  - text 24.9,19.8 tiny center: "13"
-  - text 26.7,18.8 tiny center: "11"
-  - text 25.4,22.9 tiny center: "5"
-  - text 26.6,23.2 tiny center: "6"
-  - text 25.4,26.3 tiny center: "9"
-  - text 26.6,26.6 tiny center: "8"
-  - text 31,25.2 small left: 未同期の LED
-  - text 34,28.8 tiny left: PIN 2 は D、PIN 3 は CLK、PIN 5 は Q
-  - text 26,36.5 small left: 74HC74 の PIN 1・4・10・13・14 は +5V
-  - text 26,37.5 small left: PIN 11・12 は GND、PIN 7 は GND
-  - text 3,39.5 small left: 74HC32・74HC08・CD40106B は PIN 14 が +5V、PIN 7 が GND
+  - text 9,12.2 small left: 電源投入 (約 0.9 秒 H)
+  - text 16.5,5.4 tiny left: BTN
+  - text 16.5,14.4 tiny left: PON
+  - text 23.5,5.6 tiny left: SET
+  - text 30.5,9 tiny left: SETN
+  - text 37.5,7.4 tiny left: SYD1
+  - text 43.5,7.6 tiny left: SYD
+  - text 50.5,7.6 tiny left: SY
+  - text 60,11.2 small left: 未同期の LED
+  - text 44,15.5 tiny left: U44A は PIN 2 が D、PIN 3 が CLK、PIN 5 が Q
+  - text 3,21 small left: 74HC74 の PIN 1・4・10・13・14 は +5V、PIN 11・12・7 は GND
+  - text 3,22.2 small left: 74HC32・74HC08・CD40106B は PIN 14 が +5V、PIN 7 が GND
 style:
   pitch: 1
 ```
@@ -918,57 +857,22 @@ parts:
   SU1: port 9.4,9
   SU2: port 9.4,9.5
   SU3: port 9.4,10
-  SEGa: port 16.6,7.5
-  SEGb: port 16.6,8
-  SEGc: port 16.6,8.5
-  SEGd: port 16.6,9
-  SEGe: port 16.6,9.5
-  SEGf: port 16.6,10
-  SEGg: port 16.6,10.5
   VCC: vcc 12.5,5.4 5V
   GND1: ground 13,12.4
-  SEGa: port 20,3
-  R16: resistor 22,3 26,3 330
-  LEDa: port 28,3
-  SEGb: port 20,4.8
-  R17: resistor 22,4.8 26,4.8 330
-  LEDb: port 28,4.8
-  SEGc: port 20,6.6
-  R18: resistor 22,6.6 26,6.6 330
-  LEDc: port 28,6.6
-  SEGd: port 20,8.4
-  R19: resistor 22,8.4 26,8.4 330
-  LEDd: port 28,8.4
-  SEGe: port 20,10.2
-  R20: resistor 22,10.2 26,10.2 330
-  LEDe: port 28,10.2
-  SEGf: port 20,12
-  R21: resistor 22,12 26,12 330
-  LEDf: port 28,12
-  SEGg: port 20,13.8
-  R22: resistor 22,13.8 26,13.8 330
-  LEDg: port 28,13.8
+  R16: resistor 20,3 24,3 330
+  R17: resistor 20,4.8 24,4.8 330
+  R18: resistor 20,6.6 24,6.6 330
+  R19: resistor 20,8.5 24,8.5 330
+  R20: resistor 20,10.2 24,10.2 330
+  R21: resistor 20,12 24,12 330
+  R22: resistor 20,13.8 24,13.8 330
   D1: seg7 36,9
-  LEDa: port 32.5,6.75
-  LEDb: port 32.5,7.25
-  LEDc: port 32.5,7.75
-  LEDd: port 32.5,8.25
-  LEDe: port 32.5,8.75
-  LEDf: port 32.5,9.25
-  LEDg: port 32.5,9.75
-  GND2: ground 32.5,11.25
+  GND2: ground 32.5,11.5
 wires:
   - 9.4,8.5 |- U27.INA
   - 9.4,9 |- U27.INB
   - 9.4,9.5 |- U27.INC
   - 9.4,10 |- U27.IND
-  - U27.Oa -| 16.6,7.5
-  - U27.Ob -| 16.6,8
-  - U27.Oc -| 16.6,8.5
-  - U27.Od -| 16.6,9
-  - U27.Oe -| 16.6,9.5
-  - U27.Of -| 16.6,10
-  - U27.Og -| 16.6,10.5
   - 12.5,6 -| U27.VDD
   - 13,6 -| U27.LT
   - 13.5,6 -| U27.BL
@@ -979,33 +883,45 @@ wires:
   - 13.5,11.8 -| U27.LE/STROBE
   - 13,11.8 -- 13.5,11.8
   - 13,11.8 -- 13,12.4
-  - 20,3 -- 22,3
-  - 26,3 -- 28,3
-  - 20,4.8 -- 22,4.8
-  - 26,4.8 -- 28,4.8
-  - 20,6.6 -- 22,6.6
-  - 26,6.6 -- 28,6.6
-  - 20,8.4 -- 22,8.4
-  - 26,8.4 -- 28,8.4
-  - 20,10.2 -- 22,10.2
-  - 26,10.2 -- 28,10.2
-  - 20,12 -- 22,12
-  - 26,12 -- 28,12
-  - 20,13.8 -- 22,13.8
-  - 26,13.8 -- 28,13.8
-  - 32.5,6.75 |- D1.a
-  - 32.5,7.25 |- D1.b
-  - 32.5,7.75 |- D1.c
-  - 32.5,8.25 |- D1.d
-  - 32.5,8.75 |- D1.e
-  - 32.5,9.25 |- D1.f
-  - 32.5,9.75 |- D1.g
-  - 32.5,10.75 |- D1.COM1
-  - 32.5,11.25 |- D1.COM2
-  - 32.5,10.75 -- 32.5,11.25
+  - U27.Oa -| 16.5,3
+  - 16.5,3 -- 20,3
+  - 24,3 -| 31.5,7
+  - 31.5,7 |- D1.a
+  - U27.Ob -| 17,4.8
+  - 17,4.8 -- 20,4.8
+  - 24,4.8 -| 31,7.5
+  - 31,7.5 |- D1.b
+  - U27.Oc -| 17.5,6.6
+  - 17.5,6.6 -- 20,6.6
+  - 24,6.6 -| 30.5,8
+  - 30.5,8 |- D1.c
+  - U27.Od -| 18,8.5
+  - 18,8.5 -- 20,8.5
+  - 24,8.5 -- 30,8.5
+  - 30,8.5 |- D1.d
+  - U27.Oe -| 17.5,10.2
+  - 17.5,10.2 -- 20,10.2
+  - 24,10.2 -| 28.5,9
+  - 28.5,9 |- D1.e
+  - U27.Of -| 17,12
+  - 17,12 -- 20,12
+  - 24,12 -| 29,9.5
+  - 29,9.5 |- D1.f
+  - U27.Og -| 16.5,13.8
+  - 16.5,13.8 -- 20,13.8
+  - 24,13.8 -| 29.5,10
+  - 29.5,10 |- D1.g
+  - 32.5,11 |- D1.COM1
+  - 32.5,11.5 |- D1.COM2
+  - 32.5,11 -- 32.5,11.5
 notes:
+  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
+  - arrow 9.65,8.5 10.3,8.5 ink
+  - arrow 9.65,9 10.3,9 ink
+  - arrow 9.65,9.5 10.3,9.5 ink
+  - arrow 9.65,10 10.3,10 ink
   - text 3,17.8 small left: U27 CD4511B。LT・BL を +5V、LE を GND にすると、BCD がそのまま 7 セグの表示になる
-  - text 3,19.2 small left: D1 は共通カソードの 7 セグ。R16 から R22 は 330 Ω
+  - text 3,19.2 small left: D1 は共通カソードの 7 セグ。R16 から R22 は 330 Ω (上から a から g)
 style:
   pitch: 1
 ```

@@ -98,6 +98,14 @@ wires:
   - 27.5,25.75 |- U46A.b
   - U46A.out -- 34,25
 notes:
+  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
+  - arrow 30.15,17.68 30.8,17.68 ink
+  - arrow 9.65,28.5 10.3,28.5 ink
+  - arrow 16.35,24.7 15.7,24.7 ink
+  - arrow 14.75,28 15.4,28 ink
+  - arrow 27.75,24.76 28.4,24.76 ink
+  - arrow 27.75,25.24 28.4,25.24 ink
+  - arrow 32.15,25 32.8,25 ink
   - text 24,12 small left: U19 CD4040B (4096 分周)  PIN 16 は +5V、PIN 8 は GND
   - text 10,16.8 small left: U18 CD4069UB  PIN 14 は +5V、PIN 7 は GND
   - text 14.5,23.1 small left: U20 74HC163 (8 分周)
