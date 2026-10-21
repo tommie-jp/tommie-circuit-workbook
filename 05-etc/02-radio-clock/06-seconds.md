@@ -36,50 +36,50 @@ title: 図1 秒のカウンタ (ユニット 2)
 parts:
   U21: ic 12,8 74HC163
   GND1: ground 8.4,6.5 r90
-  TICK: port 8.4,8.75
-  CLK: port 8.4,9.5
+  TICK: port 8.4,8.75 in
+  CLK: port 8.4,9.5 in
   VCC: vcc 11.5,4.6 5V
-  LDSU: port 15.6,5.7
+  LDSU: port 15.6,5.7 in
   GND2: ground 12,10.6
-  SU0: port 15.6,7
-  SU1: port 15.6,7.5
-  SU2: port 15.6,8
-  SU3: port 15.6,8.5
+  SU0: port 15.6,7 out
+  SU1: port 15.6,7.5 out
+  SU2: port 15.6,8 out
+  SU3: port 15.6,8.5 out
   U22: ic 12,19 74HC163
   GND3: ground 8.4,17.5 r90
-  ENST: port 8.4,19.75
-  CLK: port 8.4,20.5
+  ENST: port 8.4,19.75 in
+  CLK: port 8.4,20.5 in
   VCC: vcc 11.5,15.6 5V
-  LDST: port 15.6,16.7
+  LDST: port 15.6,16.7 in
   GND4: ground 12,21.6
-  ST0: port 15.6,18
-  ST1: port 15.6,18.5
-  ST2: port 15.6,19
-  ST3: port 15.6,19.5
+  ST0: port 15.6,18 out
+  ST1: port 15.6,18.5 out
+  ST2: port 15.6,19 out
+  ST3: port 15.6,19.5 out
   U33A: and 23,6
-  SU3: port 19.5,5.25
-  SU0: port 19.5,6.75
-  SU9: port 26,6
+  SU3: port 19.5,5.25 in
+  SU0: port 19.5,6.75 in
+  SU9: port 26,6 out
   U33B: and 23,9.4
-  SU9: port 19.5,8.65
-  TICK: port 19.5,10.15
-  ENST: port 26,9.4
+  SU9: port 19.5,8.65 in
+  TICK: port 19.5,10.15 in
+  ENST: port 26,9.4 out
   U42A: nor 23,12.8
-  RS: port 19.5,12.05
-  ENST: port 19.5,13.55
-  LDSU: port 26,12.8
+  RS: port 19.5,12.05 in
+  ENST: port 19.5,13.55 in
+  LDSU: port 26,12.8 out
   U33C: and 23,17
-  ST2: port 19.5,16.25
-  ST0: port 19.5,17.75
-  ST5: port 26,17
+  ST2: port 19.5,16.25 in
+  ST0: port 19.5,17.75 in
+  ST5: port 26,17 out
   U33D: and 23,20.4
-  ST5: port 19.5,19.65
-  ENST: port 19.5,21.15
-  ENMU: port 26,20.4
+  ST5: port 19.5,19.65 in
+  ENST: port 19.5,21.15 in
+  ENMU: port 26,20.4 out
   U42B: nor 23,23.8
-  RS: port 19.5,23.05
-  ENMU: port 19.5,24.55
-  LDST: port 26,23.8
+  RS: port 19.5,23.05 in
+  ENMU: port 19.5,24.55 in
+  LDST: port 26,23.8 out
 wires:
   - U21.A -| 9.5,6.5
   - U21.B -| 9.5,7
@@ -148,39 +148,6 @@ wires:
   - 19.5,24.55 |- U42B.b
   - U42B.out -- 26,23.8
 notes:
-  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
-  - arrow 8.65,8.75 9.3,8.75 ink
-  - arrow 8.65,9.5 9.3,9.5 ink
-  - arrow 15.35,5.7 14.7,5.7 ink
-  - arrow 13.75,7 14.4,7 ink
-  - arrow 13.75,7.5 14.4,7.5 ink
-  - arrow 13.75,8 14.4,8 ink
-  - arrow 13.75,8.5 14.4,8.5 ink
-  - arrow 8.65,19.75 9.3,19.75 ink
-  - arrow 8.65,20.5 9.3,20.5 ink
-  - arrow 15.35,16.7 14.7,16.7 ink
-  - arrow 13.75,18 14.4,18 ink
-  - arrow 13.75,18.5 14.4,18.5 ink
-  - arrow 13.75,19 14.4,19 ink
-  - arrow 13.75,19.5 14.4,19.5 ink
-  - arrow 19.75,5.76 20.4,5.76 ink
-  - arrow 19.75,6.24 20.4,6.24 ink
-  - arrow 24.15,6 24.8,6 ink
-  - arrow 19.75,9.16 20.4,9.16 ink
-  - arrow 19.75,9.64 20.4,9.64 ink
-  - arrow 24.15,9.4 24.8,9.4 ink
-  - arrow 19.75,12.56 20.4,12.56 ink
-  - arrow 19.75,13.04 20.4,13.04 ink
-  - arrow 24.15,12.8 24.8,12.8 ink
-  - arrow 19.75,16.76 20.4,16.76 ink
-  - arrow 19.75,17.24 20.4,17.24 ink
-  - arrow 24.15,17 24.8,17 ink
-  - arrow 19.75,20.16 20.4,20.16 ink
-  - arrow 19.75,20.64 20.4,20.64 ink
-  - arrow 24.15,20.4 24.8,20.4 ink
-  - arrow 19.75,23.56 20.4,23.56 ink
-  - arrow 19.75,24.04 20.4,24.04 ink
-  - arrow 24.15,23.8 24.8,23.8 ink
   - text 13.5,4.1 small left: U21 74HC163 (秒の一の位)
   - text 13.5,15.1 small left: U22 74HC163 (秒の十の位)
   - text 21.9,5.4 tiny center: "1"

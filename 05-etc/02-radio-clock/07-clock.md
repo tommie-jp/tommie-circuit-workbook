@@ -219,36 +219,36 @@ title: 図1 分のカウンタ (ユニット 3)
 parts:
   U23: ic 12,8 74HC163
   GND4: ground 8.4,6.5 r90
-  ENM: port 8.4,8.75
-  CLK: port 8.4,9.5
+  ENM: port 8.4,8.75 in
+  CLK: port 8.4,9.5 in
   VCC: vcc 11.5,4.6 5V
   GND1: ground 12,10.6
-  MU0: port 31,7
-  MU1: port 31,7.5
-  MU2: port 31,8
-  MU3: port 31,8.5
+  MU0: port 31,7 out
+  MU1: port 31,7.5 out
+  MU2: port 31,8 out
+  MU3: port 31,8.5 out
   U34A: and 20,10.75 74HC08
   U34B: and 26,10.99 74HC08
-  ENM: port 22.5,11.23
+  ENM: port 22.5,11.23 in
   U42C: nor 32,11.41 74HC02
-  RS: port 30,9.8
+  RS: port 30,9.8 in
   U24: ic 12,19 74HC163
   GND2: ground 8.4,17.5 r90
-  ENMT: port 8.4,19.75
-  CLK: port 8.4,20.5
+  ENMT: port 8.4,19.75 in
+  CLK: port 8.4,20.5 in
   VCC: vcc 11.5,15.6 5V
   GND3: ground 12,21.6
-  MT0: port 31,18
-  MT1: port 31,18.5
-  MT2: port 31,19
-  MT3: port 31,19.5
+  MT0: port 31,18 out
+  MT1: port 31,18.5 out
+  MT2: port 31,19 out
+  MT3: port 31,19.5 out
   U34C: and 20,21.75 74HC08
   U34D: and 26,21.99 74HC08
-  ENMT: port 22.5,22.23
+  ENMT: port 22.5,22.23 in
   U42D: nor 32,22.41 74HC02
-  RS: port 30,20.8
-  ENMT: port 36,13.5
-  CM: port 36,24.5
+  RS: port 30,20.8 in
+  ENMT: port 36,13.5 out
+  CM: port 36,24.5 out
 wires:
   - U23.A -| 9.5,6.5
   - U23.B -| 9.5,7
@@ -325,25 +325,6 @@ wires:
   - U42D.out -| 34,16.7
   - U24.LOAD |- 34,16.7
 notes:
-  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
-  - arrow 8.65,8.75 9.3,8.75 ink
-  - arrow 8.65,9.5 9.3,9.5 ink
-  - arrow 29.15,7 29.8,7 ink
-  - arrow 29.15,7.5 29.8,7.5 ink
-  - arrow 29.15,8 29.8,8 ink
-  - arrow 29.15,8.5 29.8,8.5 ink
-  - arrow 22.75,11.23 23.4,11.23 ink
-  - arrow 30,10.05 30,10.7 ink
-  - arrow 8.65,19.75 9.3,19.75 ink
-  - arrow 8.65,20.5 9.3,20.5 ink
-  - arrow 29.15,18 29.8,18 ink
-  - arrow 29.15,18.5 29.8,18.5 ink
-  - arrow 29.15,19 29.8,19 ink
-  - arrow 29.15,19.5 29.8,19.5 ink
-  - arrow 22.75,22.23 23.4,22.23 ink
-  - arrow 30,21.05 30,21.7 ink
-  - arrow 34.15,13.5 34.8,13.5 ink
-  - arrow 34.15,24.5 34.8,24.5 ink
   - text 13.5,4.1 small left: U23 74HC163 (分の一の位)
   - text 13.5,15.1 small left: U24 74HC163 (分の十の位)
   - text 22,5.3 tiny left: LDMU
@@ -368,38 +349,38 @@ style:
 title: 図2 時のカウンタ (ユニット 4)
 parts:
   U40C: or 4.5,8.75 74HC32
-  CMB: port 1,7.6
-  HP: port 1,9.9
+  CMB: port 1,7.6 in
+  HP: port 1,9.9 in
   U25: ic 12,8 74HC163
   GND4: ground 8.4,6.5 r90
-  CLK: port 8.4,9.5
+  CLK: port 8.4,9.5 in
   VCC: vcc 11.5,4.6 5V
   GND1: ground 12,10.6
-  HU0: port 40,7
-  HU1: port 40,7.5
-  HU2: port 40,8
-  HU3: port 40,8.5
+  HU0: port 40,7 out
+  HU1: port 40,7.5 out
+  HU2: port 40,8 out
+  HU3: port 40,8.5 out
   U35A: and 20,10.75 74HC08
   U35B: and 26,10.99 74HC08
-  ENHT: port 35,9.5
+  ENHT: port 35,9.5 out
   U40D: or 38,11.23 74HC32
   U43A: nor 44,10.99 74HC02
-  SET: port 41,9.8
+  SET: port 41,9.8 in
   U35C: and 20,14.5 74HC08
   U35D: and 26,14.74 74HC08
   U36A: and 32,14.98 74HC08
   U43B: nor 44,14.74 74HC02
-  SET: port 41.5,13.5
+  SET: port 41.5,13.5 in
   U26: ic 12,21 74HC163
   GND2: ground 8.4,19.5 r90
-  ENHT: port 8.4,21.75
-  CLK: port 8.4,22.5
+  ENHT: port 8.4,21.75 in
+  CLK: port 8.4,22.5 in
   VCC: vcc 11.5,17.6 5V
   GND3: ground 12,23.6
-  HT0: port 40,20
-  HT1: port 40,20.5
-  HT2: port 40,21
-  HT3: port 40,21.5
+  HT0: port 40,20 out
+  HT1: port 40,20.5 out
+  HT2: port 40,21 out
+  HT3: port 40,21.5 out
 wires:
   - 1,7.6 |- U40C.a
   - 1,9.9 |- U40C.b
@@ -488,23 +469,6 @@ wires:
   - U26.QC -| 40,21
   - U26.QD -| 40,21.5
 notes:
-  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
-  - arrow 1,7.81 1,8.46 ink
-  - arrow 1,9.69 1,9.04 ink
-  - arrow 8.65,9.5 9.3,9.5 ink
-  - arrow 38.15,7 38.8,7 ink
-  - arrow 38.15,7.5 38.8,7.5 ink
-  - arrow 38.15,8 38.8,8 ink
-  - arrow 38.15,8.5 38.8,8.5 ink
-  - arrow 35,10.94 35,10.29 ink
-  - arrow 41,10.05 41,10.7 ink
-  - arrow 41.5,13.75 41.5,14.4 ink
-  - arrow 8.65,21.75 9.3,21.75 ink
-  - arrow 8.65,22.5 9.3,22.5 ink
-  - arrow 38.15,20 38.8,20 ink
-  - arrow 38.15,20.5 38.8,20.5 ink
-  - arrow 38.15,21 38.8,21 ink
-  - arrow 38.15,21.5 38.8,21.5 ink
   - text 13.5,4.1 small left: U25 74HC163 (時の一の位)
   - text 13.5,17.1 small left: U26 74HC163 (時の十の位)
   - text 5.5,12.4 tiny left: ENH
@@ -540,9 +504,9 @@ parts:
   C3: capacitor 9,7.5 9,10.5 1u
   GND2: ground 9,10.5
   U47A: not 15,7.5 74HC14
-  ENMU: port 20,6
+  ENMU: port 20,6 in
   U48A: or 26,6.75 74HC32
-  ENM: port 30,6.75
+  ENM: port 30,6.75 out
   VCC: vcc 6,13.5 5V
   R2: resistor 6,14.5 6,17.5 10k
   S2: button 6,17.5 6,20.5
@@ -550,9 +514,9 @@ parts:
   C4: capacitor 9,17.5 9,20.5 1u
   GND4: ground 9,20.5
   U47B: not 15,17.5 74HC14
-  CM: port 20,16
+  CM: port 20,16 in
   U48B: or 26,16.75 74HC32
-  CMB: port 30,16.75
+  CMB: port 30,16.75 out
 wires:
   - 6,3.5 -- 6,4.5
   - 6,7.5 -- 9,7.5
@@ -573,11 +537,6 @@ wires:
   - 22.5,16 |- U48B.a
   - U48B.out -- 30,16.75
 notes:
-  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
-  - arrow 20.25,6 20.9,6 ink
-  - arrow 28.15,6.75 28.8,6.75 ink
-  - arrow 20.25,16 20.9,16 ink
-  - arrow 28.15,16.75 28.8,16.75 ink
   - text 10,4.6 small left: 分 +1 (押しているあいだ 8 Hz で進む)
   - text 10,14.6 small left: 時 +1
   - text 18,7.1 tiny left: BM
@@ -603,41 +562,41 @@ style:
 title: 図4 窓判定 (ユニット 6)
 parts:
   U36C: and 8,4 74HC08
-  ST1: port 4.5,3.7
-  ST0: port 4.5,4.3
+  ST1: port 4.5,3.7 in
+  ST0: port 4.5,4.3 in
   U39C: or 15,3.76 74HC32
-  ST2: port 11.5,2.6
+  ST2: port 11.5,2.6 in
   U36D: and 8,8 74HC08
-  MT1: port 4.5,7.7
-  MT0: port 4.5,8.3
+  MT1: port 4.5,7.7 in
+  MT0: port 4.5,8.3 in
   U40B: or 15,7.76 74HC32
-  MT2: port 11.5,6.6
+  MT2: port 11.5,6.6 in
   U36B: and 8,12 74HC08
-  MT5: port 4.5,11.7
-  MU9: port 4.5,12.3
+  MT5: port 4.5,11.7 in
+  MU9: port 4.5,12.3 in
   U38A: or 8,16 74HC32
-  MT2: port 4.5,15.7
-  MT1: port 4.5,16.3
+  MT2: port 4.5,15.7 in
+  MT1: port 4.5,16.3 in
   U38B: or 8,19.4 74HC32
-  MT0: port 4.5,19.1
-  MU3: port 4.5,19.7
+  MT0: port 4.5,19.1 in
+  MU3: port 4.5,19.7 in
   U38C: or 8,22.8 74HC32
-  MU2: port 4.5,22.5
-  MU1: port 4.5,23.1
+  MU2: port 4.5,22.5 in
+  MU1: port 4.5,23.1 in
   U38D: or 15,17.7 74HC32
   U39A: or 15,23.04 74HC32
-  MU0: port 11.5,24.4
+  MU0: port 11.5,24.4 in
   U39B: or 22,20.6 74HC32
   U37A: and 30,9 74HC08
   U43D: nor 30,14 74HC02
   U39D: or 37,11.5 74HC32
   U40A: or 44,11.26 74HC32
-  NSY: port 41.5,10
+  NSY: port 41.5,10 in
   U37B: and 51,11.02 74HC08
-  P: port 48.5,9.8
+  P: port 48.5,9.8 in
   U37C: and 58,11.26 74HC08
-  ACC: port 62,9.5
-  HP: port 62,11.26
+  ACC: port 62,9.5 out
+  HP: port 62,11.26 out
 wires:
   - 4.5,3.7 |- U36C.a
   - 4.5,4.3 |- U36C.b
@@ -695,26 +654,6 @@ wires:
   - 55.5,7.76 |- U37C.b
   - U37C.out -- 62,11.26
 notes:
-  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
-  - arrow 4.75,3.76 5.4,3.76 ink
-  - arrow 4.75,4.24 5.4,4.24 ink
-  - arrow 11.5,2.82 11.5,3.47 ink
-  - arrow 4.75,7.76 5.4,7.76 ink
-  - arrow 4.75,8.24 5.4,8.24 ink
-  - arrow 11.5,6.82 11.5,7.47 ink
-  - arrow 4.75,11.76 5.4,11.76 ink
-  - arrow 4.75,12.24 5.4,12.24 ink
-  - arrow 4.75,15.76 5.4,15.76 ink
-  - arrow 4.75,16.24 5.4,16.24 ink
-  - arrow 4.75,19.16 5.4,19.16 ink
-  - arrow 4.75,19.64 5.4,19.64 ink
-  - arrow 4.75,22.56 5.4,22.56 ink
-  - arrow 4.75,23.04 5.4,23.04 ink
-  - arrow 11.5,24.15 11.5,23.5 ink
-  - arrow 41.5,10.25 41.5,10.9 ink
-  - arrow 48.5,10.05 48.5,10.7 ink
-  - arrow 60.15,9.5 60.8,9.5 ink
-  - arrow 60.15,11.26 60.8,11.26 ink
   - text 16.5,3.1 tiny left: X
   - text 16.5,7.1 tiny left: M30
   - text 9.5,11.4 tiny left: M59
@@ -758,24 +697,24 @@ parts:
   U45B: not 15,15 CD40106B
   U41C: or 22,6.24 74HC32
   U41B: or 30,6 74HC32
-  ACC: port 27,4.6
-  RS: port 33,6
+  ACC: port 27,4.6 in
+  RS: port 33,6 out
   U45C: not 29,9.5 CD40106B
-  SET: port 31,12.5
+  SET: port 31,12.5 out
   U41A: or 36,8 74HC32
-  ACC: port 32.5,8.24
+  ACC: port 32.5,8.24 in
   U37D: and 42,8.24 74HC08
   U44A:
     type: ic3
     at: 49,8.24
     label: 74HC74
     pins: [D, CLK, Q]
-  CLK: port 49,11.74
+  CLK: port 49,11.74 in
   U45D: not 56,12 CD40106B
   R23: resistor 59,12 63,12 330
   D7: led 63,12 67,12
   GND4: ground 67,12
-  NSY: port 63,14
+  NSY: port 63,14 out
 wires:
   - 6,2 -- 6,3
   - 6,6 -- 9,6
@@ -815,13 +754,6 @@ wires:
   - 59,12 -- 59,14
   - 59,14 -- 63,14
 notes:
-  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
-  - arrow 27,4.85 27,5.5 ink
-  - arrow 31.15,6 31.8,6 ink
-  - arrow 29.15,12.5 29.8,12.5 ink
-  - arrow 32.75,8.24 33.4,8.24 ink
-  - arrow 48.8,11.74 48.6,11.74 ink
-  - arrow 61.15,14 61.8,14 ink
   - text 9,3.4 small left: 設定ボタン (押すと H)
   - text 9,12.2 small left: 電源投入 (約 0.9 秒 H)
   - text 16.5,5.4 tiny left: BTN
@@ -853,10 +785,10 @@ style:
 title: 図6 表示 (1 桁ぶん。6 桁とも同じ)
 parts:
   U27: ic 13,9 CD4511B
-  SU0: port 9.4,8.5
-  SU1: port 9.4,9
-  SU2: port 9.4,9.5
-  SU3: port 9.4,10
+  SU0: port 9.4,8.5 in
+  SU1: port 9.4,9 in
+  SU2: port 9.4,9.5 in
+  SU3: port 9.4,10 in
   VCC: vcc 12.5,5.4 5V
   GND1: ground 13,12.4
   R16: resistor 20,3 24,3 330
@@ -915,11 +847,6 @@ wires:
   - 32.5,11.5 |- D1.COM2
   - 32.5,11 -- 32.5,11.5
 notes:
-  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
-  - arrow 9.65,8.5 10.3,8.5 ink
-  - arrow 9.65,9 10.3,9 ink
-  - arrow 9.65,9.5 10.3,9.5 ink
-  - arrow 9.65,10 10.3,10 ink
   - text 3,17.8 small left: U27 CD4511B。LT・BL を +5V、LE を GND にすると、BCD がそのまま 7 セグの表示になる
   - text 3,19.2 small left: D1 は共通カソードの 7 セグ。R16 から R22 は 330 Ω (上から a から g)
 style:

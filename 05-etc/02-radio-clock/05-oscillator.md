@@ -44,20 +44,20 @@ parts:
   U18B: not 17,14.8 CD4069UB
   U19: dip16 26,16 CD4040B r180
   GND3: ground 23.8,18.6
-  CLK: port 32,17.68
+  CLK: port 32,17.68 out
   U20: ic 13,27 74HC163
   VCC: vcc 10,27 5V
   GND4: ground 9.4,25.5 r90
   VCC: vcc 9.4,27.75 5V
-  CLK: port 9.4,28.5
+  CLK: port 9.4,28.5 in
   VCC: vcc 12.5,23.6 5V
-  LDD: port 16.6,24.7
+  LDD: port 16.6,24.7 in
   GND5: ground 13,29.6
-  TICK: port 16.6,28
+  TICK: port 16.6,28 out
   U46A: nor 31,25
-  TICK: port 27.5,24.25
-  RS: port 27.5,25.75
-  LDD: port 34,25
+  TICK: port 27.5,24.25 in
+  RS: port 27.5,25.75 in
+  LDD: port 34,25 out
 wires:
   - 6,7 -- U18A.in
   - 6,7 -- 6,5
@@ -98,14 +98,6 @@ wires:
   - 27.5,25.75 |- U46A.b
   - U46A.out -- 34,25
 notes:
-  # 端子の向き (矢印が信号の流れ。入力は回路へ、出力は端子へ)
-  - arrow 30.15,17.68 30.8,17.68 ink
-  - arrow 9.65,28.5 10.3,28.5 ink
-  - arrow 16.35,24.7 15.7,24.7 ink
-  - arrow 14.75,28 15.4,28 ink
-  - arrow 27.75,24.76 28.4,24.76 ink
-  - arrow 27.75,25.24 28.4,25.24 ink
-  - arrow 32.15,25 32.8,25 ink
   - text 24,12 small left: U19 CD4040B (4096 分周)  PIN 16 は +5V、PIN 8 は GND
   - text 10,16.8 small left: U18 CD4069UB  PIN 14 は +5V、PIN 7 は GND
   - text 14.5,23.1 small left: U20 74HC163 (8 分周)

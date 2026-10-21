@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.52.0/breadboard-fence-0.52.0.tgz",
-    "circuit-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/circuit-fence-v0.43.0/circuit-fence-0.43.0.tgz",
+    "circuit-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/circuit-fence-v0.44.0/circuit-fence-0.44.0.tgz",
     "copper-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/copper-fence-v0.11.0/copper-fence-0.11.0.tgz",
     "graph-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/graph-fence-v0.4.0/graph-fence-0.4.0.tgz",
     "logic-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/logic-fence-v0.4.0/logic-fence-0.4.0.tgz",
