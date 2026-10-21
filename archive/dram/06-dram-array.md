@@ -10,7 +10,7 @@ board: BB
 
 # 1-6 DRAM の配列 — 74HC4051 で 2 ビット × 16 語を組み、書いて読んで消えるまでを見る
 
-[1-5](05-dram-cell.md) のセル (スイッチ 1 個とコンデンサ 1 個) を 32 個並べて、**2 ビット × 16 語のメモリ**にする。
+[1-5](../../05-etc/01-cpu/05-dram-cell.md) のセル (スイッチ 1 個とコンデンサ 1 個) を 32 個並べて、**2 ビット × 16 語のメモリ**にする。
 セルを 32 個も 2N7000 で組むと半田付けもジャンパも多すぎるので、
 **CMOS のスイッチが 8 個と、3 ビットの番地で 1 個を選ぶデコーダが 1 つの IC に入った 74HC4051** を使う。
 74HC4051 の中身は、DRAM の 1 行 (ワード線のデコーダとパストランジスタ 8 個) そのものだ。
@@ -22,7 +22,7 @@ board: BB
 2. **74HC245** (バスドライバ): WE (書く) のとき、スイッチの値をビット線 BL0・BL1 に出す。WE でないときは切り離し、ビット線は浮く
 3. **MCP6002** (コンパレータ × 2): ビット線の電圧を 1.24 V と比べ、LED に 1 / 0 を出す
 
-同じメモリの基板を 4 枚作ると 8 ビット × 16 語になり、[1-4](04-cpu-mimic.md) の CPU もどきのダイオード ROM (8 ビット × 16 語) を
+同じメモリの基板を 4 枚作ると 8 ビット × 16 語になり、[1-4](../../05-etc/01-cpu/04-cpu-mimic.md) の CPU もどきのダイオード ROM (8 ビット × 16 語) を
 **書き換えられるメモリ**に置き換えられる。それは別の題で扱う。
 
 ## 全体の構成
@@ -56,7 +56,7 @@ CMP --> LED
 @enduml
 ```
 
-![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/plantuml/06-dram-array.svg)
+![ブロック図](plantuml/06-dram-array.svg)
 
 | 動き | すること | 何が起きるか |
 | --- | --- | --- |
@@ -183,7 +183,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/06-dram-array-1.svg)
+![回路図](circuit/06-dram-array-1.svg)
 
 - **74HC4051 の中身**: S0〜S2 の 3 ビットで A0〜A7 のどれか 1 つを共通端子 A につなぐ。E が L の間だけつながり、H なら全部切れる。
   つまり **S0〜S2 がワード線のデコーダ、A0〜A7 が 8 本のワード線の先のスイッチ、A がビット線**だ
@@ -302,7 +302,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/06-dram-array-2.svg)
+![回路図](circuit/06-dram-array-2.svg)
 
 - ビット 1 は、ビット 0 と同じ回路の名前を変えただけだ。S0〜S2・E0・E1 はビット 0 と共通で、ビット線だけ BL1 になる。
   ビットを増やすときも同じで、**番地の線は共通、ビット線だけが増える**
@@ -369,7 +369,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/06-dram-array-3.svg)
+![回路図](circuit/06-dram-array-3.svg)
 
 - SW1 の 1〜3 番 (A0〜A2) は、そのままメモリの S0〜S2 になる。ON で 1 (+5 V)、OFF で 0 (10 kΩ で GND へ)
 - **4 番 (A3) は 74HC138 の A に入り、B・C は 0**。G2A (L で働く) にストローブのボタン SB をつないだ。
@@ -459,7 +459,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/06-dram-array-4.svg)
+![回路図](circuit/06-dram-array-4.svg)
 
 - **書く側**: SW2 の 1・2 番が D0・D1 (ON で 1)。3 番が WE で、**ON にすると 74HC245 の OE が L** になり、A1・A2 の値が B1・B2 = BL0・BL1 に出る。
   OFF なら R3 で OE が H になり、B 側は切り離されてビット線が浮く。DIR は H (A → B) に固定。使わない A3〜A8 は GND につなぐ
@@ -566,7 +566,7 @@ wires:
   - CB.BL1 -- h34 brown
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/06-dram-array-1.svg)
+![ブレッドボードの実体配線図](breadboard/06-dram-array-1.svg)
 
 - **電源**: 制御の基板の +5 V (赤) を下の + レールの 45 列に、GND (黒) を下の − レールの 46 列に入れる。上と下のレールは右端 (60 列) でつなぐ。
   **赤は +5 V の線だけ、黒は GND の線だけ**に使った
@@ -695,7 +695,7 @@ wires:
   - c42 -- c52 yellow
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/06-dram-array-2.svg)
+![ブレッドボードの実体配線図](breadboard/06-dram-array-2.svg)
 
 - **電源**: AD3 の V+ (5 V、赤) を上の + レールの 58 列に、GND (黒) を 57 列に入れる。メモリの基板への +5 V と GND は 59・60 列から出す。上と下のレールは右端 (62 列) でつなぐ
 - **SW1 (番地、2〜5 列)**: 下の組を +5 V (赤 4 本)、上の組が A0〜A3。集合抵抗 RN1 (10 kΩ × 4、5 ピン) を b 行の 1〜5 列に置き、共通のピン (1 列、`a1`) を上の − レールへ落とす。
@@ -783,7 +783,7 @@ notes:
   - text 4.2s 5.3V: 読む
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/scope/06-dram-array.svg)
+![オシロスコープの画面](scope/06-dram-array.svg)
 
 ## 見るべき値 (目安)
 

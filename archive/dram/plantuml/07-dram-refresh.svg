@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="245px" preserveAspectRatio="none" style="width:1891px;height:245px;" version="1.1" viewBox="0 0 1891 245" width="1891px" zoomAndPan="magnify"><defs/><g><!--MD5=[08ba871042f7c3b9549b048a11da1ac7]
+entity REF--><rect fill="#FFF8E1" height="60.5438" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.5;" width="118" x="6" y="174"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="73" x="16" y="200.2399">SW2 の 4 番</text><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="98" x="16" y="220.5118">REFRESH (REF)</text><!--MD5=[83e6fde2c466b0f7832ebbd1a10c642c]
+entity CLK--><rect fill="#FDECEA" height="60.5438" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.5;" width="102" x="226" y="118"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="236" y="144.2399">U8 555</text><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="82" x="236" y="164.5118">14 Hz の CLK</text><!--MD5=[71cbb07e9ac74a5682697571108dc8c7]
+entity DLY--><rect fill="#FDECEA" height="60.5438" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.5;" width="145" x="389" y="117"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="72" x="399" y="143.2399">U9 74HC14</text><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="125" x="399" y="163.5118">CLKn・遅延 (CLKd)</text><!--MD5=[24e5efaa205de7a5a1dceb8c5d0039b3]
+entity CNT--><rect fill="#E8F0FE" height="60.5438" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.5;" width="108" x="629.5" y="119"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="88" x="639.5" y="145.2399">U10 74HC163</text><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="84" x="639.5" y="165.5118">番地を数える</text><!--MD5=[55d3b0a90c5f84155f5367fad5496924]
+entity MUX--><rect fill="#E8F0FE" height="60.5438" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.5;" width="146" x="801" y="160"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="88" x="811" y="186.2399">U11 74HC157</text><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="126" x="811" y="206.5118">手の番地と切り替え</text><!--MD5=[9d0f3863afae1f0f03d6383ef0ea2973]
+entity GATE--><rect fill="#FDECEA" height="60.5438" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.5;" width="136" x="806" y="18"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="80" x="816" y="44.2399">U12 74HC00</text><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="116" x="816" y="64.5118">ROW・WBn・OEn</text><!--MD5=[5ceda9279414f57783e95166b8d927b7]
+entity MEM--><rect fill="#E6F4EA" height="60.5438" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.5;" width="138" x="1742" y="94"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="118" x="1752" y="120.2399">メモリの基板 (1-6)</text><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="106" x="1752" y="140.5118">2 ビット × 16 語</text><!--MD5=[8585fdafa543e33d11cc6f67771babd1]
+entity CTL--><rect fill="#E6F4EA" height="60.5438" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.5;" width="180" x="1105" y="94"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="104" x="1115" y="120.2399">制御の基板 (1-6)</text><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="160" x="1115" y="140.5118">138・245・コンパレータ</text><!--MD5=[982de69445d84d4b8faaa266c63ddcde]
+entity WB--><rect fill="#FDECEA" height="60.5438" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.5;" width="108" x="1513" y="8"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="88" x="1523" y="34.2399">U13 74HC245</text><text fill="#000000" font-family="Noto Sans CJK JP" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="1523" y="54.5118">書き戻し</text><!--MD5=[34e142b2e8c7b318fe195a362fb6fcfb]
+link REF to CLK--><path d="M124.22,188.98 C154.4,180.93 191.05,171.15 220.78,163.22 " fill="none" id="REF-&gt;CLK" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="225.87,161.87,216.1449,160.3133,221.0374,163.153,218.1977,168.0455,225.87,161.87" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="40" x="155" y="166.58">RESET</text><!--MD5=[df52c1fa72e4ecf2f7192004897c6345]
+link REF to MUX--><path d="M124.09,216.88 C166.09,224.76 224.29,233.5 276,233.5 C276,233.5 276,233.5 684.5,233.5 C721.77,233.5 762.17,225.41 795.98,216.25 " fill="none" id="REF-&gt;MUX" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="800.92,214.89,791.1802,213.4283,796.1002,216.2201,793.3084,221.1401,800.92,214.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="22" x="450.5" y="229.58">A/B</text><!--MD5=[4bbf257b0b9dd8a5190cef26913194b3]
+link CLK to DLY--><path d="M328.35,148.22 C345.42,148.13 364.9,148.02 383.56,147.92 " fill="none" id="CLK-&gt;DLY" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="388.8,147.89,379.7773,143.9415,383.8001,147.9186,379.823,151.9414,388.8,147.89" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[c1601a2b8873aae41a436c0b9ad5dddb]
+link DLY to CNT--><path d="M534.23,148.15 C563.39,148.42 596.64,148.72 624.26,148.97 " fill="none" id="DLY-&gt;CNT" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="629.35,149.02,620.3846,144.943,624.3502,148.9771,620.316,152.9427,629.35,149.02" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="31" x="565" y="144.58">CLKn</text><!--MD5=[afe9eb47a771bca8979d3c84f809ff55]
+link CNT to MUX--><path d="M737.51,161.03 C755.58,164.96 776.17,169.44 795.74,173.7 " fill="none" id="CNT-&gt;MUX" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="800.7,174.77,792.7495,168.9571,795.8131,173.7126,791.0576,176.7762,800.7,174.77" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[4e9aa567b61cc2b51cc76b8498aabe29]
+link MUX to MEM--><path d="M947.27,188.36 C1029.22,185.7 1166.82,180.49 1285,172.5 C1446.42,161.58 1635.23,142.86 1736.64,132.31 " fill="none" id="MUX-&gt;MEM" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="1741.7,131.78,1732.3362,128.7273,1736.7265,132.2945,1733.1594,136.6849,1741.7,131.78" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="43" x="1377.5" y="153.58">S0〜S2</text><!--MD5=[65b806857904e8b0da753d2d85bd962f]
+link MUX to CTL--><path d="M947.39,175.52 C992.53,166.18 1051.1,154.07 1099.83,143.98 " fill="none" id="MUX-&gt;CTL" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="1104.82,142.95,1095.2019,140.8304,1099.921,143.9498,1096.8016,148.6689,1104.82,142.95" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="15" x="1018.5" y="146.58">S3</text><!--MD5=[43384a307847a5b59ff27ef4f3e2ce7b]
+link DLY to GATE--><path d="M534.32,126.4 C563.04,118.23 596.49,109.05 627,101.5 C685.22,87.1 751.75,72.9 800.92,62.83 " fill="none" id="DLY-&gt;GATE" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="805.93,61.81,796.3119,59.6904,801.031,62.8098,797.9116,67.5289,805.93,61.81" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="111" x="628" y="72.58">CLK・CLKn・CLKd</text><!--MD5=[ac75245f7619538e76d8debc67c04a3f]
+link GATE to CTL--><path d="M942.26,64.52 C987.95,75.41 1049.01,89.96 1099.56,102 " fill="none" id="GATE-&gt;CTL" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="1104.73,103.23,1096.902,97.2532,1099.8661,102.0713,1095.048,105.0354,1104.73,103.23" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="978" y="69.58">ROW (138 の G1)</text><!--MD5=[9c08befb7cc97655823e561224fd36c0]
+link CTL to MEM--><path d="M1285.28,124.5 C1407.24,124.5 1623.64,124.5 1736.66,124.5 " fill="none" id="CTL-&gt;MEM" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="1741.96,124.5,1732.96,120.5,1736.96,124.5,1732.96,128.5,1741.96,124.5" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="43" x="1545.5" y="120.58">E0・E1</text><!--MD5=[0b3695987eddc59a54ef062e0b6c482f]
+link CTL to WB--><path d="M1285.08,109.12 C1355.05,96.72 1446.55,79.72 1483,69.5 C1491.09,67.23 1499.52,64.52 1507.76,61.65 " fill="none" id="CTL-&gt;WB" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="1512.86,59.85,1503.0414,59.0781,1508.1458,61.5163,1505.7076,66.6207,1512.86,59.85" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="166" x="1316" y="65.58">RD0n・RD1n (コンパレータ)</text><!--MD5=[2693740ec54ee31e0cea8b9b5fedf8db]
+link GATE to WB--><path d="M942.21,46.36 C953.81,46.03 965.75,45.73 977,45.5 C1171.3,41.49 1401.71,39.58 1507.54,38.86 " fill="none" id="GATE-&gt;WB" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="1512.8,38.82,1503.7773,34.8715,1507.8001,38.8486,1503.823,42.8714,1512.8,38.82" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="57" x="1166.5" y="37.58">WBn (OE)</text><!--MD5=[d6cf212e489dcf5ab846254481c67600]
+link WB to MEM--><path d="M1621.11,57.37 C1655.06,69.44 1699.56,85.25 1736.84,98.5 " fill="none" id="WB-&gt;MEM" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="1741.82,100.27,1734.6805,93.4856,1737.109,98.5947,1732,101.0232,1741.82,100.27" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Noto Sans CJK JP" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="59" x="1652" y="65.58">BL0・BL1</text><!--MD5=[91f132d7966c79addc4428862cf73824]
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName "Noto Sans CJK JP"
+skinparam rectangle {
+  RoundCorner 6
+}
+
+rectangle "SW2 の 4 番\nREFRESH (REF)" as REF #FFF8E1
+rectangle "U8 555\n14 Hz の CLK" as CLK #FDECEA
+rectangle "U9 74HC14\nCLKn・遅延 (CLKd)" as DLY #FDECEA
+rectangle "U10 74HC163\n番地を数える" as CNT #E8F0FE
+rectangle "U11 74HC157\n手の番地と切り替え" as MUX #E8F0FE
+rectangle "U12 74HC00\nROW・WBn・OEn" as GATE #FDECEA
+rectangle "メモリの基板 (1-6)\n2 ビット × 16 語" as MEM #E6F4EA
+rectangle "制御の基板 (1-6)\n138・245・コンパレータ" as CTL #E6F4EA
+rectangle "U13 74HC245\n書き戻し" as WB #FDECEA
+
+REF - -> CLK : RESET
+REF - -> MUX : A/B
+CLK - -> DLY
+DLY - -> CNT : CLKn
+CNT - -> MUX
+MUX - -> MEM : S0〜S2
+MUX - -> CTL : S3
+DLY - -> GATE : CLK・CLKn・CLKd
+GATE - -> CTL : ROW (138 の G1)
+CTL - -> MEM : E0・E1
+CTL - -> WB : RD0n・RD1n (コンパレータ)
+GATE - -> WB : WBn (OE)
+WB - -> MEM : BL0・BL1
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 19:22:07 JST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.12.1+1-1-24.04.4-Ubuntu
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

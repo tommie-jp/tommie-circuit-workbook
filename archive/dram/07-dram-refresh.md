@@ -14,7 +14,7 @@ board: BB
 この題では、**消える前に全部の行を順に読み、読んだ値を書き戻す回路 (リフレッシュ回路)** を足して、値を持ち続けさせる。
 1-6 のメモリの基板と制御の基板はそのまま使い、**リフレッシュの基板**を 1 枚足して、制御の基板の線を数本つなぎ替える。
 
-中身は [1-5](05-dram-cell.md) の「読んで書き戻す」ボタン (S3) を、16 行ぶん自動で回すことだ。1 行ぶんの動きは次の 4 つ。
+中身は [1-5](../../05-etc/01-cpu/05-dram-cell.md) の「読んで書き戻す」ボタン (S3) を、16 行ぶん自動で回すことだ。1 行ぶんの動きは次の 4 つ。
 
 1. **行を開く**: 555 のクロック (CLK) が H になると、カウンタの番地の行の 4051 が開き、セルの電圧がビット線に出る
 2. **読む**: 1-6 のコンパレータ (MCP6002) が、ビット線の電圧を 1.24 V と比べる
@@ -68,7 +68,7 @@ WB --> MEM : BL0・BL1
 @enduml
 ```
 
-![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/plantuml/07-dram-refresh.svg)
+![ブロック図](plantuml/07-dram-refresh.svg)
 
 | 時刻 (CLK の立ち上がりから) | 信号 | 何が起きるか |
 | --- | --- | --- |
@@ -132,7 +132,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/07-dram-refresh-1.svg)
+![回路図](circuit/07-dram-refresh-1.svg)
 
 - **555 (U8) は 1-1 と同じ非安定の発振**。R13 = 10 kΩ、R14 = 47 kΩ、C33 = 1 µF で、
   H の時間は 0.693 × (10 k + 47 k) × 1 µ = 39.5 ms、L の時間は 0.693 × 47 k × 1 µ = 32.6 ms、周期 72.1 ms (13.9 Hz)
@@ -216,7 +216,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/07-dram-refresh-2.svg)
+![回路図](circuit/07-dram-refresh-2.svg)
 
 - **74HC163 (U10) は 4 ビットのカウンタ**。CLKn の立ち上がり (= CLK の立ち下がり = 行を閉じた所) で 1 進む。
   CLR・LOAD・ENP・ENT は +5 V (数えるだけ)、使わない A〜D は GND
@@ -303,7 +303,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/07-dram-refresh-3.svg)
+![回路図](circuit/07-dram-refresh-3.svg)
 
 - **ROW = NAND(CLKn, STBn) = CLK または ボタン**。U12B (PIN 4・5 → 6)。ROW は制御の基板の 74HC138 の G1 に入る (1-6 では +5 V に固定していた)。
   74HC138 は G1 が H、G2A・G2B が L のときだけ開くので、**CLK が H の間か、STROBE を押している間**に行が開く
@@ -385,7 +385,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/07-dram-refresh-4.svg)
+![回路図](circuit/07-dram-refresh-4.svg)
 
 - 1-6 の図3 から変えたのは 4 か所。**SW1 の 4 本 (M0〜M3) はリフレッシュの基板へ**行き、74HC138 の A には 157 の出力 **S3** が戻ってくる
 - **G1 は ROW へ**、**G2A は GND へ** (1-6 では G1 が +5 V、G2A がボタン)。ボタンの線 **STBn** はリフレッシュの基板の U12B へ行く。
@@ -487,7 +487,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/circuit/07-dram-refresh-5.svg)
+![回路図](circuit/07-dram-refresh-5.svg)
 
 - **SW2 の 4 番を REFRESH のスイッチにする**。1・2 番 (D0・D1) と同じ向きで、ON で REF が H (+5 V)、OFF で R16 (10 kΩ) が GND に引く
 - **WE の線 (WEn) はリフレッシュの基板へ**行き、U6 の OE には戻ってきた **OEn** が入る。REFRESH を切っていれば、OEn は WEn と同じ (WE を入れると L)
@@ -646,7 +646,7 @@ wires:
   - MB2.S1 -- j62 green
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/07-dram-refresh-1.svg)
+![ブレッドボードの実体配線図](breadboard/07-dram-refresh-1.svg)
 
 - **電源**: 制御の基板の +5 V と GND を、上のレールの左端 (2 列・1 列) に入れる。上と下のレールは左端 (3 列と 4 列) でつなぐ。
   **赤は +5 V の線だけ、黒は GND の線だけ**に使った
@@ -808,7 +808,7 @@ wires:
   - c42 -- c52 yellow
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/breadboard/07-dram-refresh-2.svg)
+![ブレッドボードの実体配線図](breadboard/07-dram-refresh-2.svg)
 
 - 1-6 の図6 から外す線: SW1 から 74HC138 の A への紫 (`c5`〜`c12`・`e12`〜`f12`・`g12`〜`g13`)、STROBE の白 (`h10`〜`h16`)、G1 の赤 (`j18`)、WE の灰 (`g25`〜`g38`・`e38`〜`f38`・`d29`〜`d38`)。
   そして SW1 からメモリの基板へ行っていた S0〜S2 の 12 本
@@ -897,7 +897,7 @@ notes:
   - text 0.3ms 5.5V: 書き戻す
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/01-cpu/scope/07-dram-refresh.svg)
+![オシロスコープの画面](scope/07-dram-refresh.svg)
 
 ## 見るべき値 (目安)
 
