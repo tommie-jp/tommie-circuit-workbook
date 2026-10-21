@@ -582,26 +582,25 @@ parts:
     at: bottom
     label: tinySA
     pins: [RF, GND]
-  J1: transistor f8(S) f9(G) f10(D) J310
-  RS: resistor j8 -b8 1k
-  RG: resistor g9 g4 1M
+  J1: transistor f8 f9 f10 J310
+  RS: resistor j9 -b9 1k
+  RG: resistor j10 -b10 1M
   CB: capacitor +b17 -b18 100n
-  C1: capacitor i8 i12 100n
+  C1: capacitor h9 h12 100n cap=right
   R1: resistor j12 j16 51
 wires:
   - PS.+ -- +b1 red
   - PS.GND -- -b1 black
-  - LP.A -- j9 orange
+  - LP.A -- i10 orange
   - LP.B -- -b6 black
-  - j4 -- -b4 black
-  - +b10 -- j10 red
+  - +b8 -- j8 red
   - SA.RF -- j16 orange
   - SA.GND -- -b21 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/11-spectrum-analyzer/breadboard/14-field-strength.svg)
 
-- J1 は左から S・G・D の順に挿す (図の向き)。J310 のピンの並びは品とメーカーで違うので、データシートで確かめてから挿す
+- J1 は平らな面を手前にして、左から D・S・G の順に挿す (onsemi の J310 の並び。ゲートは端)。InterFET の品は S・D・G で D と S が逆 (入れ替えても働く)。買った品のデータシートで確かめてから挿す
 - RS (1 kΩ) は S の列から GND のレールへ、RG (1 MΩ) は G の列から GND のレールへ、立てて挿す。C1 は S の列から R1 (51 Ω) へ、R1 の先を tinySA の RF に付ける
 - 電源の 5 V は USB アダプタなどから取る。ドレイン電流は数 mA で、ブレッドボードの範囲 (1 穴 200 mA) に収まる
 - (a) の 2 回巻き、(c) のポリバリコンつきのループ、第 2 部のダイポールは、アンテナそのものを受ける物でブレッドボードに載せる回路が無いので、実体配線図を付けない。計器は tinySA Ultra。AD3 は Wavegen (校正と S21 の測定) にだけ使い、オシロは使わない (周波数領域を見る題)
