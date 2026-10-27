@@ -194,12 +194,14 @@
 - { id: 11-10, tier: 200, board: —, device: SIM, title: 割り込み }
 - { id: 11-11, tier: 200, board: —, device: SIM, title: 自分の 8 ビット CPU を設計する }
 - { id: 11-12, tier: 200, board: BB, device: FPGA, title: 6502 を実物の FPGA に載せる }
-# 11-13〜11-16 の RISC-V は CPU を PicoRV32 で始め、メモリと UART の枠 (番地・バス) を CPU から切り離して作る。
-# 自分で設計した RV32I を後で差し込めるようにするため (その題は今は置かない)。
+# 11-13〜11-18 の RISC-V は、メモリと UART の枠 (番地・バス) を CPU から切り離して作り、CPU を差し替える。
+# 最初は PicoRV32 を差し (11-13)、自作の CPU に替える (11-14 は 4 命令でアセンブラ、11-15 は 8 命令で GCC の出力)。
 - { id: 11-13, tier: 200, board: —, device: SIM, title: C を RV32I の機械語にして PicoRV32 で Hello を出す — CPU を差し替えられる枠を作る }
-- { id: 11-14, tier: 200, board: BB, device: PICO, title: PicoRV32 を Pico 2 の Soft-FPGA で動かす — 1 秒に何命令か測る }
-- { id: 11-15, tier: 200, board: BB, device: FPGA, title: PicoRV32 を実物の FPGA に載せる — 同じ機械語を Soft-FPGA と比べる }
-- { id: 11-16, tier: 200, board: BB, device: PICO, title: Pico 2 の中の RISC-V (Hazard3) で同じ機械語を走らせる }
+- { id: 11-14, tier: 200, board: —, device: SIM, title: 4 命令の RV32I を自作する — ADDI・LBU・SW・BEQ だけで Hello を出す }
+- { id: 11-15, tier: 200, board: —, device: SIM, title: 自作の RV32I を 8 命令に広げる — GCC の出した Hello を動かす }
+- { id: 11-16, tier: 200, board: BB, device: PICO, title: PicoRV32 を Pico 2 の Soft-FPGA で動かす — 1 秒に何命令か測る }
+- { id: 11-17, tier: 200, board: BB, device: FPGA, title: PicoRV32 を実物の FPGA に載せる — 同じ機械語を Soft-FPGA と比べる }
+- { id: 11-18, tier: 200, board: BB, device: PICO, title: Pico 2 の中の RISC-V (Hazard3) で同じ機械語を走らせる }
 - { id: 12-1, tier: 200, board: —, device: SIM, title: リバーシのアクセラレータ — 合法手と裏返しを回路で }
 - { id: 12-2, tier: 200, board: BB, device: PICO, title: リバーシを UART で PC と対戦させる }
 - { id: 12-3, tier: 200, board: —, device: WEB, title: Pong — ゲートだけで動くゲーム }
