@@ -160,8 +160,8 @@ wires:
 notes:
   - mark w6 yellow
   - mark t6 yellow
-  - text w6 red large bold right: AD3 1+
-  - text t7 red large bold center: AD3 1-
+  - text w7 red large bold center: AD3 1+
+  - text t7 red large bold left: AD3 1-
   - text b3 red large bold: IN 5V
   - text w3 red large bold: OUT 3.3V
   - parts
@@ -195,7 +195,7 @@ style:
 - Cin (10 µF、G14・G11) は 5 V の筋と GND の筋の間、Cout (22 µF、N17・N13) は 3.3 V の筋と GND の筋の間。
   Cout は極性があり、+ 側を 17 行 (OUT) につなぐ。Rled (Q17・Q14) と Dled (Q12・Q9) は 3.3 V の表示
 - AD3 は半田付けしない。測るときだけ、J2 のパッドにクリップで挟む。1+ は VBUS につながる W6 (3.3 V)、1− は GND の筋の T6 で、どちらも黄色の丸で囲み、
-  `AD3 1+` は W6 の丸の右、`AD3 1-` は T6 の丸の 1 行上 (T7 の真上に中心。6 行目は GND の筋が通るので避けた) に、赤の大きな太字で書いた。出力のコネクタで測るので、出力の 3.3 V が実際に出ているかを見られる。
+  どちらも丸の 1 行上 (7 行目。6 行目は GND の筋が通るので避けた) に、赤の大きな太字で書いた。`AD3 1+` は W7 の真上に中心、`AD3 1-` は T7 で終わるように左へ (基板の右端からはみ出さないように)。出力のコネクタで測るので、出力の 3.3 V が実際に出ているかを見られる。
   AD は測るだけで、この基板に電力は供給しない
 - 線は縦と横だけで、交わる線は無い。J1 の VBUS の赤い線は左の縁 (B 列) を上るので、GND の筋 (6 行) を跨がない
 
