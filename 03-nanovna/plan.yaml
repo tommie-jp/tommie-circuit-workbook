@@ -177,7 +177,7 @@
 - { id: 8-18, tier: 200, board: PF, device: H4, title: エミッタフォロアの出力インピーダンス }
 - { id: 8-19, tier: 200, board: PF, device: LV64, title: 広帯域帰還アンプ — 帰還抵抗とエミッタ抵抗で入出力を 50 Ω にそろえる (2N5109・4:1 トランス) }
 - { id: 8-20, tier: 100, board: BB, device: LV64, title: コレクタ負荷を差し替える — 抵抗・チョーク・LC 同調・広帯域トランスで S21 の利得と帯域を比べる (1.9 MHz 帯) }
-- { id: 8-21, tier: 200, board: PF, device: LV64, title: 同調負荷のタップで 50 Ω に合わせる — タップの位置で利得と選択度 (Q) が入れ替わる (7 MHz) }
+- { id: 8-21, tier: 200, board: PF, device: LV64, title: 同調負荷のリンク巻線で 50 Ω に合わせる — 巻数比で選択度 (Q) が変わり、利得には最適の巻数がある (7 MHz) }
 - { id: 9-1, tier: 50, board: —, device: H4, title: 1.5 GHz より上へ — スルーで 3 GHz まで見る (ケーブルとコネクタで何 dB 落ちるか) }
 - { id: 9-2, tier: 100, board: —, device: V2, title: GHz の校正 — 付属キットの限界と基準面 }
 - { id: 9-3, tier: 100, board: CB, device: V2, title: GND を面で取る — perfboard と銅張りの差を S21 で }

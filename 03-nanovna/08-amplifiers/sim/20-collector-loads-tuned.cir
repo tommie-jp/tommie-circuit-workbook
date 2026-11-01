@@ -1,0 +1,37 @@
+* C 同調負荷 FT37-61 14t:3t + 680 pF
+Lp c vcc 10.8u Rser=1u
+Ls o2 0 0.495u Rser=1u
+K1 Lp Ls 1
+Rq c vcc 12.9k
+Ct c vcc 680p
+Rlk o2 o 0.001
+* 8-20 コレクタ負荷の比べ: ハイブリッド π (2SC1815、Ic = 4.3 mA、fT 80 MHz、hFE 200。8-1 と同じ模型。実測ではない)
+* S21 = 2·V(o)/Vs (電源 50 Ω・出力 50 Ω 終端)。パッドは校正に含めるので模型に入れない
+Gm c e bp e 0.16538
+Rpi bp e 1209.3
+Cpi bp e 327p
+Cmu bp c 2p
+Ro c e 23.3k
+Rbb b bp 50
+Vs s 0 AC 1
+Rs s in 50
+C1 in b 0.1u
+R1 vcc b 8k2
+R2 b 0 3k9
+Vcc vcc 0 0
+Re e 0 200
+Ce e 0 1u
+RL o 0 50
+.ac dec 400 100k 30Meg
+.meas AC s1 FIND V(o) AT 1Meg
+.meas AC s186 FIND V(o) AT 1.857Meg
+.meas AC s5 FIND V(o) AT 5Meg
+.meas AC s10 FIND V(o) AT 10Meg
+.meas AC s30 FIND V(o) AT 30Meg
+.meas AC pk MAX mag(V(o))
+.meas AC fpk WHEN mag(V(o))=pk
+.meas AC in1 FIND V(b) AT 1Meg
+.meas AC in186 FIND V(b) AT 1.857Meg
+.meas AC flo WHEN mag(V(o))=pk*0.70711 RISE=1
+.meas AC fhi WHEN mag(V(o))=pk*0.70711 FALL=1
+.end

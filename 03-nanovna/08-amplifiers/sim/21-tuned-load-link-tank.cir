@@ -1,0 +1,13 @@
+* 8-21 図3 同調回路だけを直列に (vna フェンスの dut: series L 2.12u cp 220p rp 15.3k) を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(n1)/Vs。コイルの直列抵抗は 1 µΩ に固定し、損失は rp (Qu 150 の仮定) で入れる。実測ではない
+Vs s 0 AC 1
+Rs s n0 50
+L1 n0 n1 2.12u Rser=1u
+Cp n0 n1 220p
+Rp n0 n1 15.3k
+RL n1 0 50
+.ac lin 801 6.5Meg 8.5Meg
+.meas AC m1 FIND V(n1) AT 7.37Meg
+.meas AC m2 FIND V(n1) AT 7.345Meg
+.meas AC m3 FIND V(n1) AT 7.395Meg
+.end

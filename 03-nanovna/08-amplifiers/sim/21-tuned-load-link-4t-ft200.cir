@@ -1,0 +1,33 @@
+* 4t: 23t:4t (2.12u:64n)
+Ls o2 0 64n Rser=1u
+K1 Lp Ls 1
+* 8-21 同調負荷のリンク巻線: ハイブリッド π (2SC1815、Ic = 4.3 mA、fT 200 MHz、hFE 200。8-1 と同じ模型。実測ではない)
+* S21 = 2·V(o)/Vs (電源 50 Ω・出力 50 Ω 終端)
+Gm c e bp e 0.16538
+Rpi bp e 1209.3
+Cpi bp e 129p
+Cmu bp c 2p
+Ro c e 23.3k
+Rbb b bp 50
+Vs s 0 AC 1
+Rs s in 50
+C1 in b 10n
+R1 vcc b 8k2
+R2 b 0 3k9
+Vcc vcc 0 0
+Re e 0 200
+Ce e 0 1u
+RL o 0 50
+Lp c vcc 2.12u Rser=1u
+Rq c vcc 15.3k
+Ct c vcc 220p
+Rlk o2 o 0.001
+.ac dec 1000 3Meg 15Meg
+.meas AC s7 FIND V(o) AT 7.07Meg
+.meas AC pk MAX mag(V(o))
+.meas AC fpk WHEN mag(V(o))=pk
+.meas AC flo WHEN mag(V(o))=pk*0.70711 RISE=1
+.meas AC fhi WHEN mag(V(o))=pk*0.70711 FALL=1
+.meas AC in7 FIND V(b) AT 7.07Meg
+.meas AC vc7 FIND V(c) AT 7.07Meg
+.end
