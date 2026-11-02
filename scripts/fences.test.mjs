@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fencesIn } from './fences.mjs';
+import { fencesIn, tallySaid } from './fences.mjs';
 
 test('finds the three fences a file uses', () => {
   const { found, misspelled } = fencesIn('# t\n\n```circuit\nparts:\n```\n\n```breadboard\n```\n\n```text\n```\n');
@@ -82,4 +82,16 @@ test('reads the logic fence and flags a near miss', () => {
 
   assert.deepEqual([...found], ['logic']);
   assert.deepEqual(misspelled, [{ name: 'logik', line: 4 }]);
+});
+
+test('tallySaid counts the head lines by tier and skips the indented source lines', () => {
+  const stderr = [
+    'perf: 21 行目: [想定どおり: 見本としてわざと重ねた] R1 と R2 の胴が重なっています',
+    '      R2: resistor a5 c5 470',
+    'perf: 66 行目: [情報] T1: 1 次 8 回で約 22.4 µH',
+    'vna: NanoVNA-H4 は 1.5 GHz までです (掃引の終わりが 3 GHz)',
+    '',
+  ].join('\n');
+
+  assert.deepEqual(tallySaid(stderr, { notices: 0, expected: 0, info: 0 }), { notices: 1, expected: 1, info: 1 });
 });

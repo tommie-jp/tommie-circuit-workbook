@@ -106,3 +106,19 @@ export function fencesIn(text) {
 
   return { found, misspelled, blocks };
 }
+
+/**
+ * フェンスの言うことを段ごとに数える。数えるのは `perf: 21 行目: …` のような頭の行だけで、
+ * その下に字下げで添える行の中身は数えない。`[想定どおり: 理由]` は図の `expect:` で書き手が
+ * 承知したもの、`[情報]` は計算した値の知らせ (トロイダルの L の目安など)。
+ */
+export function tallySaid(stderr, said) {
+  for (const line of stderr.split('\n')) {
+    const head = /^[a-z]+: (?:\d+ 行目: )?(.*)$/.exec(line);
+    if (head === null) continue;
+    if (head[1].startsWith('[想定どおり: ')) said.expected += 1;
+    else if (head[1].startsWith('[情報] ')) said.info += 1;
+    else said.notices += 1;
+  }
+  return said;
+}

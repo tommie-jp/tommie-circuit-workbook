@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process';
 import { ROOT, readEntries } from './collect.mjs';
 import { duplicateIds } from './entry.mjs';
-import { FENCES, cliPath, fencesIn } from './fences.mjs';
+import { FENCES, cliPath, fencesIn, tallySaid } from './fences.mjs';
 import { withFigures } from './figures.mjs';
 import { PLAN_FILE } from './plan.mjs';
 import { checkPlantuml } from './plantuml.mjs';
@@ -36,6 +36,8 @@ function main(args) {
   }
 
   const byFence = new Map(FENCES.map((fence) => [fence, []]));
+  /** フェンスの言うことの段ごとの数 (tommie-fence の docs/145。想定どおり・情報は直すものではない)。 */
+  const said = { notices: 0, expected: 0, info: 0 };
   for (const read of reads) {
     const { found, misspelled } = fencesIn(read.text);
     for (const fence of found) byFence.get(fence).push(read.path);
@@ -55,6 +57,7 @@ function main(args) {
     if (verbose && run.stdout.trim() !== '') console.log(`--- ${fence} (${paths.length})\n${run.stdout.trimEnd()}`);
     if (run.status === 0) {
       if (run.stderr.trim() !== '') console.error(`--- ${fence} の言うこと\n${run.stderr.trimEnd()}`);
+      tallySaid(run.stderr, said);
       continue;
     }
     for (const path of paths) {
@@ -84,6 +87,7 @@ function main(args) {
     process.exit(1);
   }
   console.log(`${reads.length} 題を検査した (フェンスのあるファイル: ${counts})。問題なし`);
+  console.log(`フェンスの言うこと: お知らせ ${said.notices} 件 (ほかに想定どおり ${said.expected} 件・情報 ${said.info} 件)`);
 }
 
 main(process.argv.slice(2));
