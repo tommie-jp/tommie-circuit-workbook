@@ -20,6 +20,9 @@ device: H4
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
 title: 図1 自作の Open・Short・Load
+points:
+  open1: 2,1
+  open2: 1,2
 parts:
   J1: sma 1,1 mirror
   J2: sma 4,1 mirror
@@ -29,6 +32,8 @@ parts:
   R2: resistor 11,1 11,3 100
   G3: ground 11,3
 wires:
+  - J1.1 -- open1
+  - J1.2 -- open2
   - J2.1 -- 5,1
   - 5,1 -- 5,3
   - J2.2 -- 4,3 -- 5,3

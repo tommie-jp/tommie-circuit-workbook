@@ -6,7 +6,7 @@ title: Crystal oscillation — CMOS inverter plus crystal
 tier: 50
 source: 自作
 board: BB
-ja: 133e209b837661ef4c67f98b373e7ad1623ec336
+ja: b53cfda4d3e55578d9164b83143c7874e14f373a
 ---
 
 # 3-5 Crystal oscillation — CMOS inverter plus crystal
@@ -39,6 +39,7 @@ parts:
   GUx: ground 8,4 r90
 points:
   gnd: 4,5
+  nc: 10,4
 wires:
   - 1,2 -- 1,3 -- 1,4
   - 1,3 -- U1A.in
@@ -49,6 +50,7 @@ wires:
   - 5,2 -- U1B.in
   - U1B.out -- 10,2
   - U1C.in -| 8,4
+  - U1C.out -- nc
 notes:
   - text 9,5 blue center: "Other 4 gates (inputs to GND)"
 style:

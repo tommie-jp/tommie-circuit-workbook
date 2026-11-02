@@ -20,10 +20,12 @@ device: H4
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
 title: 図1 先を開放した 1 m のスタブを T で分岐
+points:
+  open: 5,4
 parts:
   J1: sma 2,2 mirror CH0
   J2: sma 8,2 CH1
-  TL1: tline 5,2 5,4 50 l=$\mathrm{TL}_1$
+  TL1: tline 5,2 open 50 l=$\mathrm{TL}_1$
   G1: ground 2,3
   G2: ground 8,3
 wires:

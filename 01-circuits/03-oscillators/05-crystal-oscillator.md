@@ -38,6 +38,7 @@ parts:
   GUx: ground 8,4 r90
 points:
   gnd: 4,5
+  nc: 10,4
 wires:
   - 1,2 -- 1,3 -- 1,4
   - 1,3 -- U1A.in
@@ -48,6 +49,7 @@ wires:
   - 5,2 -- U1B.in
   - U1B.out -- 10,2
   - U1C.in -| 8,4
+  - U1C.out -- nc
 notes:
   - text 9,5 blue center: "残り4ゲート (入力はGND)"
 style:

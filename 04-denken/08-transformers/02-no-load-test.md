@@ -32,6 +32,9 @@ title: 図1 無負荷試験の回路 (2 次は開放)
 style:
   standard: jis
   pitch: 1.8
+points:
+  open1: 6,3.5
+  open2: 6,4.5
 parts:
   W1: sine 1,3 1,5 l=$\mathrm{W1}$
   Rs1: resistor 1,3 3,3 4.7k i=I0
@@ -47,6 +50,8 @@ wires:
   - T1.A2 -| 4,4.5
   - 4,4.5 -- 4,5
   - 1,5 -- 4,5
+  - T1.B1 -| open1
+  - T1.B2 -| open2
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/02-no-load-test-1.svg)
@@ -126,6 +131,9 @@ AD の CH2 は Rs1 の両端を差動で挟んでいる。Rs1 の電圧 (47 mV) 
 title: 図4 汎用オシロでの測り方
 style:
   standard: jis
+points:
+  open1: 8,3.55
+  open2: 8,4.45
 parts:
   FG: sine 1,3 1,7 l=$\mathrm{FG}$
   M1: voltmeter 3,3 3,7 l=$\mathrm{CH1}$
@@ -138,6 +146,8 @@ wires:
   - 6,5 |- T1.A2
   - 4,5 -- 6,5
   - 1,7 -- 3,7 -- 4,7 -- 6,7
+  - T1.B1 -| open1
+  - T1.B2 -| open2
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/04-denken/08-transformers/circuit/02-no-load-test-2.svg)

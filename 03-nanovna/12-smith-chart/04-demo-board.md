@@ -23,10 +23,12 @@ device: LV64
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
 title: 図1 デモボードの回路 (JP をどれか 1 つだけ閉じる)
+points:
+  open: 5,5
 parts:
   J1: sma 2,3 mirror
   G0: ground 2,4
-  JP1: switch 5,3 5,5
+  JP1: switch 5,3 open
   JP2: switch 8,3 8,5
   G2: ground 8,5
   JP3: switch 11,3 11,5

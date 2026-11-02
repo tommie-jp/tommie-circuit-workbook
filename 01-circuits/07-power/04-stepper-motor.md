@@ -21,11 +21,11 @@ source: 自作
 # 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ULN2003 ボードでステッピングモータを駆動する
 points:
-  in1x: 2,3.16
-  in2x: 2,3.4
-  in3x: 2,3.64
-  in4x: 2,3.88
-  com9: 7,4.84
+  in1x: 2,3.25
+  in2x: 2,3.5
+  in3x: 2,3.75
+  in4x: 2,4
+  com9: 7,5
 parts:
   U1: dip16 5,4 ULN2003A
   IN1: port in1x
@@ -35,7 +35,7 @@ parts:
   M1:
     type: device
     model: 28BYJ-48
-    at: 9,3.4
+    at: 9,3.75
     label: 28BYJ-48
     pins: [BLUE, PINK, YELLOW, ORANGE, RED]
   G1: ground 4,6

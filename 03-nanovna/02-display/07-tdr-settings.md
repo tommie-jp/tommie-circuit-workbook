@@ -54,6 +54,8 @@ c = 3.0 × 10⁸ m/s、VF は速度係数 (5-2)。2 で割るのは往復だか�
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
 title: 図1 CH0 の先に 3 m の同軸 (先は開放)
+points:
+  open: 7,1.88
 parts:
   M1:
     type: device
@@ -61,7 +63,7 @@ parts:
     label: NanoVNA
     pins: [CH0, CH1]
     turn: mirror
-  T1: tline 4,1.88 7,1.88 50
+  T1: tline 4,1.88 open 50
 wires:
   - M1.CH0 -| 4,1.88
 notes:
