@@ -362,7 +362,6 @@ time: 200ms/div
 start: -200ms
 sample: 10kHz
 signals:
-  CLK: dio0 clock 1kHz
   AUX: dio1 edges 0s=0 1.634s=1
   MON0: dio2 edges 0s=0 0.544s=1
   MON1: dio3 edges 0s=0 1.089s=1
@@ -376,7 +375,7 @@ trigger: AUX rising at 1.634s
 
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/11-cpu/logic/03-td4-timer-1.svg)
 
-- CLK は 1 ms ごとで、2 s の窓には細かすぎて塗りに見える。数は CLK ではなく OUT と AUX の時刻で読む
+- CLK (DIO0) は図に入れていない。1 ms ごとの変わり目は 2 s の窓には細かすぎて、実機の画面でも塗りに見える。数は CLK ではなく OUT と AUX の時刻で読む
 - ΔX = 1.090 s は、1 分たった (544 番め) から 3 分たった (1634 番め) までの 1090 クロック。1 クロックが 1 ms なので、時刻の ms がそのまま命令の数になる
 
 ### 3 分のタイマー (SW4 OFF)

@@ -146,7 +146,7 @@ dut:
   - short
 traces:
   - S11 smith
-  - S11 swr
+  - S11 swr 0.25
 markers:
   - 780k
   - 1.47M
