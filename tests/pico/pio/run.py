@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """層 B: PIO プログラムを rp2040-pio-emulator (pioemu) で回し、出力の並びとサイクル数を確かめる。
-対象: 09-rf 24 の LO (set pins 0→1→3→2)。命令は本文の C (out/pico) の lo_insn から読む。
+対象: 14-iq 7 (14-7) の LO (set pins 0→1→3→2)。命令は本文の C (out/pico) の lo_insn から読む。
 使い方: python3 -I tests/pico/pio/run.py   (pioemu が無ければ SKIP して 0 で終わる)"""
 import os
 import re
@@ -8,7 +8,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
-PROG = os.path.join(ROOT, 'out', 'pico', '01-circuits', '09-rf', '24-iq-mw-radio-1.c')
+PROG = os.path.join(ROOT, 'out', 'pico', '01-circuits', '14-iq', '07-iq-mw-radio-1.c')
 
 try:
     from pioemu import emulate, State
@@ -51,4 +51,4 @@ if fails:
     for f in fails:
         print('NG:', f)
     sys.exit(1)
-print('ok  09-24 LO: 00→01→11→10 を 4 サイクルで繰り返す')
+print('ok  14-07 LO: 00→01→11→10 を 4 サイクルで繰り返す')

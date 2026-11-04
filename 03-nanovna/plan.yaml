@@ -1,5 +1,5 @@
 # 03-nanovna の計画 — 必須 50 ⊂ 入門 100 ⊂ 中級 200 の 200 題。目次 (README) はここと題のファイルから npm run toc が組む。
-- { id: 0-1, tier: 50, board: —, device: H4, title: 機種と範囲 — H4 (〜1.5 GHz) と V2 (〜3 / 4.4 GHz)、どちらで何が測れるか }
+- { id: 0-1, tier: 50, board: —, device: H4, title: 機種と範囲 — LiteVNA64 (標準、〜6.3 GHz) と H4・V2 (比較用)、どれで何が測れるか }
 - { id: 0-2, tier: 50, board: —, device: H4, title: SMA の締め方・トルク・ケーブルの扱い }
 - { id: 0-3, tier: 50, board: —, device: H4, title: 出力レベルと CH1 の最大入力 — アンプの出力にはアッテネータ }
 - { id: 0-4, tier: 100, board: —, device: H4, title: 静電気とアンテナの帯電 — 放電してから繋ぐ }
@@ -12,7 +12,7 @@
 - { id: 1-3, tier: 50, board: —, device: H4, title: Thru と S21 の 0 dB }
 - { id: 1-4, tier: 50, board: —, device: H4, title: 範囲を変えたら再校正 — 変えずに測るとどう狂うか }
 - { id: 1-5, tier: 50, board: —, device: H4, title: ケーブルの先端で校正する意味 (基準面) }
-- { id: 1-6, tier: 50, board: —, device: H4, title: 校正の保存スロットと呼び出し }
+- { id: 1-6, tier: 100, board: —, device: H4, title: 校正の保存スロットと呼び出し }
 - { id: 1-7, tier: 100, board: —, device: H4, title: 校正キットの質 — 付属 / 自作 / 市販 }
 - { id: 1-8, tier: 100, board: —, device: H4, title: Load の 50 Ω を DC で測って確かめる }
 - { id: 1-9, tier: 100, board: —, device: H4, title: 校正の有効期間 — 温度と時間 }
@@ -215,8 +215,8 @@
 - { id: 11-11, tier: 200, board: BB, device: SA, title: ゼロスパン — 時間の軸で見る }
 - { id: 11-12, tier: 200, board: —, device: SA, title: アンテナで受ける — FM 放送帯と 430 MHz }
 - { id: 11-13, tier: 200, board: —, device: SA, title: PC から操作して記録する }
-- { id: 11-14, tier: 200, board: —, device: SA, title: 微弱電波の電界強度を見積もる — アンテナ係数とケーブルの損失 }
-- { id: 12-1, tier: 100, board: BB, device: LV64, title: Smith チャートの地図 — 外周・実軸・R の円・X の円 }
+- { id: 11-14, tier: 300, board: —, device: SA, title: 微弱電波の電界強度を見積もる — アンテナ係数とケーブルの損失 }
+- { id: 12-1, tier: 50, board: BB, device: LV64, title: Smith チャートの地図 — 外周・実軸・R の円・X の円 }
 - { id: 12-2, tier: 100, board: BB, device: LV64, title: 周波数を掃くと点が回る — 直列の L は上半分、C は下半分を時計回りに }
 - { id: 12-3, tier: 100, board: BB, device: LV64, title: Γ の円と SWR — 負荷の SWR は中心からの距離、線路を足すと円を回る }
 - { id: 12-4, tier: 100, board: [PF, BB], device: LV64, title: Smith チャートデモボード — 8 つの負荷を差し替えて 1 点ずつ測る }

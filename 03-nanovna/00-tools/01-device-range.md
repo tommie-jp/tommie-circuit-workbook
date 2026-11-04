@@ -2,27 +2,28 @@
 book: nanovna
 chapter: 0
 id: 0-1
-title: 機種と範囲 — H4 (〜1.5 GHz) と V2 (〜3 / 4.4 GHz)、どちらで何が測れるか
+title: 機種と範囲 — LiteVNA64 (標準、〜6.3 GHz) と H4・V2 (比較用)、どれで何が測れるか
 tier: 50
 source: 自作
 board: —
 device: H4
 ---
 
-# 0-1 機種と範囲 — H4 (〜1.5 GHz) と V2 (〜3 / 4.4 GHz)、どちらで何が測れるか
+# 0-1 機種と範囲 — LiteVNA64 (標準、〜6.3 GHz) と H4・V2 (比較用)、どれで何が測れるか
 
-NanoVNA には主に 2 系統ある。**NanoVNA-H4** は 1.5 GHz まで、**NanoVNA V2**
-(SAA-2N や Plus4 など) は 3〜4.4 GHz まで測れる。この教科書の**必須 50 題は
-全部 H4 で測れる**。まずどちらの機種で何が測れるかを表で確かめ、範囲を超えた
-掃引を組んだときに何が起きるかを見る。
+この教科書の標準の機種は **LiteVNA64** で、50 kHz〜6.3 GHz を測れる。
+NanoVNA-H4 (1.5 GHz まで) と NanoVNA V2 (SAA-2N や Plus4 など、3〜4.4 GHz まで) は
+歴史的な機種で、比べるために残す。図の多くは H4 で書いてあり (`device: H4` の印)、
+LiteVNA64 でも同じ手順で測れる。この教科書の**必須 50 題は全部 H4 でも測れる**。
+まずどの機種で何が測れるかを表で確かめ、範囲を超えた掃引を組んだときに何が起きるかを見る。
 
 ## 機種
 
-| | NanoVNA-H4 | NanoVNA V2 (SAA-2N) | NanoVNA V2 Plus4 |
-| --- | --- | --- | --- |
-| 周波数範囲 | 50 kHz〜1.5 GHz | 50 kHz〜3 GHz | 50 kHz〜4.4 GHz |
-| 方式 | si5351 の高調波 (300 / 900 MHz で段差) | ADF4350 + ミキサ | 同左 |
-| この教科書の印 | `device: H4` | `device: V2` | `device: V2` |
+| | LiteVNA64 (標準) | NanoVNA-H4 | NanoVNA V2 (SAA-2N) | NanoVNA V2 Plus4 |
+| --- | --- | --- | --- | --- |
+| 周波数範囲 | 50 kHz〜6.3 GHz | 50 kHz〜1.5 GHz | 50 kHz〜3 GHz | 50 kHz〜4.4 GHz |
+| 方式 | — (この本では扱わない) | si5351 の高調波 (300 / 900 MHz で段差) | ADF4350 + ミキサ | 同左 |
+| この教科書の印 | `device: LV64` | `device: H4` | `device: V2` | `device: V2` |
 
 **H4 は 300 MHz と 900 MHz で高調波の次数が変わる** (この段差は 9-10 で測る)。
 V2 系は基本波方式なのでこの段差が無い。
@@ -99,15 +100,15 @@ expect:
 
 ## 見るべき値
 
-| 掃引の上限 | `device: H4` | `device: V2` |
-| --- | --- | --- |
-| 1.5 GHz まで | お知らせ無し | お知らせ無し |
-| 1.5 GHz 〜 3 GHz | **お知らせが出る** (範囲外。図2 は `expect:` で想定どおりと出る) | お知らせ無し |
-| 3 GHz 〜 4.4 GHz | お知らせが出る | お知らせ無し (Plus4 のみ) |
-| 4.4 GHz より上 | お知らせが出る | お知らせが出る |
+| 掃引の上限 | `device: H4` | `device: V2` | LiteVNA64 (実機) |
+| --- | --- | --- | --- |
+| 1.5 GHz まで | お知らせ無し | お知らせ無し | 範囲内 |
+| 1.5 GHz 〜 3 GHz | **お知らせが出る** (範囲外。図2 は `expect:` で想定どおりと出る) | お知らせ無し | 範囲内 |
+| 3 GHz 〜 4.4 GHz | お知らせが出る | お知らせ無し (Plus4 のみ) | 範囲内 |
+| 4.4 GHz 〜 6.3 GHz | お知らせが出る | お知らせが出る | 範囲内 |
 
-必須 50 題はすべて 1.5 GHz 以下なので H4 だけで進められる。V2 が要る題には
-`device: V2` の印が付く (中級の GHz 帯、第 9 章にまとまっている)。
+必須 50 題はすべて 1.5 GHz 以下なので、標準の LiteVNA64 でも、H4 だけでも進められる。V2 が要る題には
+`device: V2` の印が付く (中級の GHz 帯、第 9 章にまとまっている)。LiteVNA64 ならその題も測れる。
 
 ## LTspice での確かめ (対象外)
 
@@ -118,4 +119,4 @@ expect:
 
 自作。機種の周波数範囲は各社の製品ページ・ユーザーガイドに載っている値。
 
-参考: [NanoVNA V2 Official Site](https://nanorfe.com/nanovna-v2.html)、[LiteVNA](https://www.zeenko.tech/litevna)
+参考: [NanoVNA V2 Official Site](https://nanorfe.com/nanovna-v2.html)、[LiteVNA](https://www.zeenko.tech/litevna) (LiteVNA64 の 50 kHz〜6.3 GHz)

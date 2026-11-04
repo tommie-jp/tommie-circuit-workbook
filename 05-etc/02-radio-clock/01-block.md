@@ -3,7 +3,7 @@ book: etc
 chapter: 2
 id: 2-1
 title: 中波ラジオの時報を検出するブロック図
-tier: 200
+tier: 300
 source: 自作
 board: —
 ---

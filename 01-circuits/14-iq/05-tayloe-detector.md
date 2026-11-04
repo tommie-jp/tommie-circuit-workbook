@@ -1,7 +1,7 @@
 ---
 book: circuits
-chapter: 9
-id: 9-22
+chapter: 14
+id: 14-5
 title: Tayloe 検波器 — 74HC4052 で I/Q を音にする (直接変換)
 tier: 200
 source: 自作
@@ -9,9 +9,9 @@ board: BB
 era: 今
 ---
 
-# 9-22 Tayloe 検波器 — 74HC4052 で I/Q を音にする (直接変換)
+# 14-5 Tayloe 検波器 — 74HC4052 で I/Q を音にする (直接変換)
 
-9-19 では SA612 を 2 個使い、LO を 90° ずらした 2 つのミキサーで I と Q を作った。
+14-2 では SA612 を 2 個使い、LO を 90° ずらした 2 つのミキサーで I と Q を作った。
 この題では、同じ I と Q を **アナログスイッチ 1 個とコンデンサ 4 個**で作る。
 **Tayloe 検波器** (Dan Tayloe の特許、2001 年) と呼ばれる回路で、SoftRock など初期の SDR の入口に使われた。
 
@@ -31,7 +31,7 @@ LO の 1 周期を 4 つに分け、各 1/4 周期だけ 4 つのコンデンサ
   差を取ると、2.5 V の偏りと、4 つに同じだけ乗る揺れが消え、振幅は 2 倍になる
 
 **4 相の LO を 74HC74 で作る。** スイッチを 4 つ順に回すには、90° ずつずれた方形波が要る。
-9-18 の RC-CR 網は正弦の 90° しか作れないので、ここではデジタルで作る。
+14-1 の RC-CR 網は正弦の 90° しか作れないので、ここではデジタルで作る。
 AD3 の W1 から **1.992 MHz** の方形波 (0〜5 V) を出し、74HC74 の D フリップフロップ 2 個を
 **ジョンソンカウンタ** (FF1 の D ← FF2 の /Q、FF2 の D ← FF1 の Q、クロックは共通) にして 4 分の 1 にする。
 
@@ -50,8 +50,8 @@ AD3 の W1 から **1.992 MHz** の方形波 (0〜5 V) を出し、74HC74 の D 
 I と Q は **1 kHz の音**になる。W1 と W2 は AD3 の中の同じクロックから作るので、差はぴったり 1.000 kHz だ。
 
 - **W2 = 499 kHz なら Q が I より 90° 進み、497 kHz なら 90° 遅れる** (1 kHz の 90° は 250 µs)。
-  I だけ (ミキサー 1 個) では、どちらも同じ 1 kHz で区別できない。これは 9-19 と同じ話で、
-  9-19 の IF (49.8 kHz) がここでは音になった
+  I だけ (ミキサー 1 個) では、どちらも同じ 1 kHz で区別できない。これは 14-2 と同じ話で、
+  14-2 の IF (49.8 kHz) がここでは音になった
 - W2 = 498.000 kHz ちょうどなら差は 0 で、I と Q は**直流**になる (ゼロ IF)。値は W2 と LO の位相の関係で決まり、
   W2 の位相を変えると、I と Q の組が円の上を動く。74HC74 が電源を入れたときどの状態から始まるかで、
   位相の基準は 90° 単位でずれる
@@ -169,7 +169,7 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/22-tayloe-detector.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/circuit/05-tayloe-detector.svg)
 
 図1 の `+5V` は AD3 の電源出力 V+ (Supplies で 5 V)。74HC74 と 74HC4052 を合わせても流す電流は 1 mA に届かない。
 
@@ -248,7 +248,7 @@ style:
   text-size: 8
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/22-tayloe-detector.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/breadboard/05-tayloe-detector.svg)
 
 - U2 (74HC4052) は 13〜20 列、U1 (74HC74) は 22〜28 列で溝をまたぐ (切り欠きを左、PIN 1 は左下)。
   U2 の上の列は左から VCC・A2・A1・AN・A0・A3・S0・S1、下の列は B0・B2・BN・B3・B1・E・VEE・GND
@@ -313,7 +313,7 @@ cursors: [-250us, 0]
 measure: [vpp, freq, phase]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/22-tayloe-detector-1.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/05-tayloe-detector-1.svg)
 
 - 図3 は CH1 = I、CH2 = Q。Q は I より 1/4 周期 (250 µs) 早く 0 V を上に横切る (カーソル X1)。Phase は +90.0° (進み)
 - 振幅はどちらも 0.868 Vpp (0.434 V<sub>p</sub>)。W2 の 0.5 Vpp の 1.74 倍
@@ -327,7 +327,7 @@ ch2: {wave: sine 1kHz 434mV phase 90deg, range: 200mV/div}
 xy: ch1 ch2
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/22-tayloe-detector-2.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/05-tayloe-detector-2.svg)
 
 - I を横、Q を縦にすると、振幅が等しく 90° ずれているので**円**になる (2-5 のリサージュ図形と同じ)。
   点は 1 秒に 1000 回、円を回る
@@ -345,7 +345,7 @@ cursors: [0, 250us]
 measure: [vpp, freq, phase]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/22-tayloe-detector-3.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/05-tayloe-detector-3.svg)
 
 - 図5 は図3 と同じ設定で、W2 だけを 497 kHz にした。音は同じ 1 kHz で、振幅も同じ。
   違うのは Q の位置だけで、I より 250 µs 遅れる (カーソル X2)。Phase は −90.0°
@@ -366,7 +366,7 @@ cursors: [125ns, 2133ns]
 trigger: CLK rising at 0s
 ```
 
-![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/logic/22-tayloe-detector.svg)
+![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/logic/05-tayloe-detector.svg)
 
 - CLK (1.992 MHz) の立ち上がりごとに、S1 S0 を束ねたバス CH (= つながるチャネルの番号) が **1 → 3 → 2 → 0** と回る。
   A1 → A3 → A2 → A0 の順で、図の左端の立ち上がりから 4 状態で LO の 1 周期だ
@@ -397,7 +397,7 @@ trigger: CLK rising at 0s
 
 ## LTspice での確かめ
 
-デッキは `sim/22-tayloe-detector.cir` (過渡解析)。**74HC4052 は電圧制御スイッチの模型 (オン抵抗 80 Ω、切り替えの隙間 0.2 ns) で、実測ではない仮定**。
+デッキは `sim/05-tayloe-detector.cir` (過渡解析)。**74HC4052 は電圧制御スイッチの模型 (オン抵抗 80 Ω、切り替えの隙間 0.2 ns) で、実測ではない仮定**。
 (S1, S0) の順 00 → 01 → 11 → 10 を、A0 → A1 → A3 → A2 の順に 1/4 周期ずつ開く制御で置き、I = A0 − A3、Q = A1 − A2 を読んだ。W2 は 2.5 V に 0.25 V<sub>p</sub>、R1 1 kΩ、C1〜C4 は 10 nF。
 
 | 確かめること | 本文の数字 | LTspice | 判定 |

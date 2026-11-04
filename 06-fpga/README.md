@@ -38,25 +38,25 @@
 
 <!-- toc:start -->
 
-必須・入門・中級は計画の数で、入れ子で数える (入門は必須を含み、中級は全部)。
+必須・入門・中級・発展は計画の数で、入れ子で数える (入門は必須を含み、中級は入門を含み、発展は全部)。
 済 は書き終えた題の数。書き終えた題は link になっている。
 
-| 章 | 題名 | 必須 | 入門 | 中級 | 済 |
-| --- | --- | --- | --- | --- | --- |
-| 0 | 道具と準備 | 5 | 7 | 11 | 7 |
-| 1 | 組み合わせ回路を Verilog で書く | 7 | 12 | 18 | 12 |
-| 2 | 順序回路 | 7 | 11 | 19 | 12 |
-| 3 | シミュレーションと検証 | 4 | 8 | 16 | 8 |
-| 4 | Soft-FPGA ブラウザ編 | 4 | 7 | 14 | 14 |
-| 5 | Soft-FPGA Pico 2 編 | 8 | 16 | 22 | 16 |
-| 6 | 状態機械 | 3 | 8 | 16 | 8 |
-| 7 | 通信 (UART・SPI・I2C) | 3 | 7 | 17 | 7 |
-| 8 | 実物の FPGA | 7 | 13 | 21 | 13 |
-| 9 | タイミング | 1 | 5 | 14 | 5 |
-| 10 | メモリと演算 | 1 | 4 | 14 | 4 |
-| 11 | CPU を作る | 0 | 2 | 18 | 12 |
-| 12 | 作品 | 0 | 0 | 6 | 6 |
-| **計** | | **50** | **100** | **206** | **124** |
+| 章 | 題名 | 必須 | 入門 | 中級 | 発展 | 済 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | 道具と準備 | 5 | 7 | 11 | 11 | 7 |
+| 1 | 組み合わせ回路を Verilog で書く | 7 | 12 | 18 | 18 | 12 |
+| 2 | 順序回路 | 7 | 11 | 19 | 19 | 12 |
+| 3 | シミュレーションと検証 | 4 | 8 | 16 | 16 | 8 |
+| 4 | Soft-FPGA ブラウザ編 | 4 | 7 | 14 | 14 | 14 |
+| 5 | Soft-FPGA Pico 2 編 | 6 | 16 | 22 | 22 | 16 |
+| 6 | 状態機械 | 3 | 8 | 16 | 16 | 8 |
+| 7 | 通信 (UART・SPI・I2C) | 3 | 7 | 17 | 17 | 7 |
+| 8 | 実物の FPGA | 7 | 13 | 21 | 21 | 13 |
+| 9 | タイミング | 2 | 5 | 14 | 14 | 5 |
+| 10 | メモリと演算 | 2 | 4 | 14 | 14 | 4 |
+| 11 | CPU を作る | 0 | 2 | 10 | 18 | 12 |
+| 12 | 作品 | 0 | 0 | 0 | 6 | 6 |
+| **計** | | **50** | **100** | **192** | **206** | **124** |
 
 ## 第 0 章 道具と準備
 
@@ -169,8 +169,8 @@
 | 5-2 | [カウンタを Pico 2 で回して LED を点ける](05-soft-fpga-pico/02-counter-led.md) | 必須 | BB | PICO |
 | 5-3 | [Verilog の入出力を GPIO につなぐ — 入力を読み、eval し、出力を書く](05-soft-fpga-pico/03-gpio-io.md) | 必須 | BB | PICO |
 | 5-4 | [DIP スイッチと LED で AND・OR を確かめる](05-soft-fpga-pico/04-dip-and-or.md) | 必須 | BB | PICO |
-| 5-5 | [Soft-FPGA のクロックを測る — 1 クロックに何 µs かかるか](05-soft-fpga-pico/05-clock-measure.md) | 必須 | BB | PICO |
-| 5-6 | [回路の規模でクロックは変わる — カウンタと TD4 で比べる](05-soft-fpga-pico/06-clock-vs-size.md) | 必須 | BB | PICO |
+| 5-5 | [Soft-FPGA のクロックを測る — 1 クロックに何 µs かかるか](05-soft-fpga-pico/05-clock-measure.md) | 入門 | BB | PICO |
+| 5-6 | [回路の規模でクロックは変わる — カウンタと TD4 で比べる](05-soft-fpga-pico/06-clock-vs-size.md) | 入門 | BB | PICO |
 | 5-7 | [クロックを固定する — タイマ割り込みで一定の間隔で回す](05-soft-fpga-pico/07-clock-timer.md) | 必須 | BB | PICO |
 | 5-8 | [4 ビット CPU の TD4 を動かす — DIP スイッチで入力、LED で出力](05-soft-fpga-pico/08-td4.md) | 必須 | BB | PICO |
 | 5-9 | [固定できるクロックの上限 — いちばん重い 1 クロックより長い周期を選ぶ](05-soft-fpga-pico/09-clock-limit.md) | 入門 | BB | PICO |
@@ -262,7 +262,7 @@
 | # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 9-1 | [セットアップとホールド — クロックの前後で動かしてはいけない時間](09-timing/01-setup-hold.md) | 必須 | — | SIM |
-| 9-2 | [外から来る信号はフリップフロップ 2 段で受ける](09-timing/02-sync-two-ff.md) | 入門 | BB | FPGA |
+| 9-2 | [外から来る信号はフリップフロップ 2 段で受ける](09-timing/02-sync-two-ff.md) | 必須 | BB | FPGA |
 | 9-3 | [最高の動作周波数 — タイミングの報告を読む](09-timing/03-fmax-report.md) | 入門 | — | FPGA |
 | 9-4 | [伝搬の遅れを測る — インバータを並べたリングオシレータ](09-timing/04-ring-oscillator.md) | 入門 | BB | FPGA |
 | 9-5 | [グリッチ — 組み合わせの出力に出る細いパルス](09-timing/05-glitch.md) | 入門 | BB | FPGA |
@@ -281,7 +281,7 @@
 | # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
 | 10-1 | [ROM — 配列と $readmemh](10-memory-arithmetic/01-rom-readmemh.md) | 必須 | — | SIM |
-| 10-2 | [RAM — クロックに合わせて読み書きする](10-memory-arithmetic/02-ram.md) | 入門 | — | SIM |
+| 10-2 | [RAM — クロックに合わせて読み書きする](10-memory-arithmetic/02-ram.md) | 必須 | — | SIM |
 | 10-3 | [FIFO](10-memory-arithmetic/03-fifo.md) | 入門 | — | SIM |
 | 10-4 | [掛け算 — 演算子と、シフトと加算の繰り返し](10-memory-arithmetic/04-multiplier.md) | 入門 | — | SIM |
 | 10-5 | 固定小数点 | 中級 | — | SIM |
@@ -306,27 +306,27 @@
 | 11-5 | [TD4 に命令を足す](11-cpu/05-td4-add-instructions.md) | 中級 | — | SIM |
 | 11-6 | [アセンブラを作る](11-cpu/06-assembler.md) | 中級 | — | SIM |
 | 11-7 | [6502 を読む — Apple-I の wozmon を動かす](11-cpu/07-wozmon.md) | 中級 | — | WEB |
-| 11-8 | [6502 で Integer BASIC を動かす](11-cpu/08-integer-basic.md) | 中級 | — | WEB |
-| 11-9 | [8080 で CP/M 2.2 を動かす](11-cpu/09-cpm22.md) | 中級 | — | WEB |
+| 11-8 | [6502 で Integer BASIC を動かす](11-cpu/08-integer-basic.md) | 発展 | — | WEB |
+| 11-9 | [8080 で CP/M 2.2 を動かす](11-cpu/09-cpm22.md) | 発展 | — | WEB |
 | 11-10 | [割り込み](11-cpu/10-interrupt.md) | 中級 | — | SIM |
 | 11-11 | [自分の 8 ビット CPU を設計する](11-cpu/11-cpu8-design.md) | 中級 | — | SIM |
 | 11-12 | [6502 を実物の FPGA に載せる](11-cpu/12-6502-fpga.md) | 中級 | BB | FPGA |
-| 11-13 | C を RV32I の機械語にして PicoRV32 で Hello を出す — CPU を差し替えられる枠を作る | 中級 | — | SIM |
-| 11-14 | 4 命令の RV32I を自作する — ADDI・LBU・SW・BEQ だけで Hello を出す | 中級 | — | SIM |
-| 11-15 | 自作の RV32I を 8 命令に広げる — GCC の出した Hello を動かす | 中級 | — | SIM |
-| 11-16 | PicoRV32 を Pico 2 の Soft-FPGA で動かす — 1 秒に何命令か測る | 中級 | BB | PICO |
-| 11-17 | PicoRV32 を実物の FPGA に載せる — 同じ機械語を Soft-FPGA と比べる | 中級 | BB | FPGA |
-| 11-18 | Pico 2 の中の RISC-V (Hazard3) で同じ機械語を走らせる | 中級 | BB | PICO |
+| 11-13 | C を RV32I の機械語にして PicoRV32 で Hello を出す — CPU を差し替えられる枠を作る | 発展 | — | SIM |
+| 11-14 | 4 命令の RV32I を自作する — ADDI・LBU・SW・BEQ だけで Hello を出す | 発展 | — | SIM |
+| 11-15 | 自作の RV32I を 8 命令に広げる — GCC の出した Hello を動かす | 発展 | — | SIM |
+| 11-16 | PicoRV32 を Pico 2 の Soft-FPGA で動かす — 1 秒に何命令か測る | 発展 | BB | PICO |
+| 11-17 | PicoRV32 を実物の FPGA に載せる — 同じ機械語を Soft-FPGA と比べる | 発展 | BB | FPGA |
+| 11-18 | Pico 2 の中の RISC-V (Hazard3) で同じ機械語を走らせる | 発展 | BB | PICO |
 
 ## 第 12 章 作品
 
 | # | 題 | 段 | 基板 | 機種 |
 | --- | --- | --- | --- | --- |
-| 12-1 | [リバーシのアクセラレータ — 合法手と裏返しを回路で](12-projects/01-reversi-accel.md) | 中級 | — | SIM |
-| 12-2 | [リバーシを UART で PC と対戦させる](12-projects/02-reversi-uart.md) | 中級 | BB | PICO |
-| 12-3 | [Pong — ゲートだけで動くゲーム](12-projects/03-pong.md) | 中級 | — | WEB |
-| 12-4 | [時計 — 27 MHz を数えて時分秒を 4 桁の 7 セグに出し、時報で合わせる](12-projects/04-clock.md) | 中級 | BB | FPGA |
-| 12-5 | [DDS の信号発生器](12-projects/05-dds.md) | 中級 | BB | FPGA |
-| 12-6 | [小さいロジックアナライザを作る](12-projects/06-logic-analyzer.md) | 中級 | BB | FPGA |
+| 12-1 | [リバーシのアクセラレータ — 合法手と裏返しを回路で](12-projects/01-reversi-accel.md) | 発展 | — | SIM |
+| 12-2 | [リバーシを UART で PC と対戦させる](12-projects/02-reversi-uart.md) | 発展 | BB | PICO |
+| 12-3 | [Pong — ゲートだけで動くゲーム](12-projects/03-pong.md) | 発展 | — | WEB |
+| 12-4 | [時計 — 27 MHz を数えて時分秒を 4 桁の 7 セグに出し、時報で合わせる](12-projects/04-clock.md) | 発展 | BB | FPGA |
+| 12-5 | [DDS の信号発生器](12-projects/05-dds.md) | 発展 | BB | FPGA |
+| 12-6 | [小さいロジックアナライザを作る](12-projects/06-logic-analyzer.md) | 発展 | BB | FPGA |
 
 <!-- toc:end -->

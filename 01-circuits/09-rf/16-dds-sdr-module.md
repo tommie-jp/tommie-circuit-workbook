@@ -3,7 +3,7 @@ book: circuits
 chapter: 9
 id: 9-16
 title: DDS モジュール — Pico 2 で 7 MHz を出して tinySA で見る
-tier: 200
+tier: 300
 source: 自作
 board: BB
 era: 今

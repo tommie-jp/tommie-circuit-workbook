@@ -1,5 +1,5 @@
-// program: 01-circuits/09-rf/23-iq-pico2-adc-1.c
-// 9-23: ADC0・ADC1 を DMA で受け、I・Q の位相の進みから LO との差を kHz で出す。
+// program: 01-circuits/14-iq/06-iq-pico2-adc-1.c
+// 14-6: ADC0・ADC1 を DMA で受け、I・Q の位相の進みから LO との差を kHz で出す。
 // 合成した I・Q (振幅 0.5 V・LO より +1.000 kHz 上) を DMA の到着として与え、表示を確かめる。
 #include "pico/stdlib.h"
 #include "hardware/dma.h"

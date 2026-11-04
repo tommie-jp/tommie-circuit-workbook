@@ -3,7 +3,7 @@ book: nanovna
 chapter: 12
 id: 12-1
 title: Smith チャートの地図 — 外周・実軸・R の円・X の円
-tier: 100
+tier: 50
 source: 自作
 board: BB
 device: LV64

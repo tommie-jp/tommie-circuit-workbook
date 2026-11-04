@@ -3,7 +3,7 @@ book: etc
 chapter: 2
 id: 2-3
 title: 時報音の検出 — 440 Hz と 880 Hz の帯域通過フィルタとしきい値比較
-tier: 200
+tier: 300
 source: 自作
 board: [BB, PF]
 ---

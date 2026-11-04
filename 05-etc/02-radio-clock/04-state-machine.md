@@ -3,7 +3,7 @@ book: etc
 chapter: 2
 id: 2-4
 title: 時報の状態遷移 — 440 Hz を 3 回数えて 880 Hz で正時パルス
-tier: 200
+tier: 300
 source: 自作
 board: [BB, PF]
 ---

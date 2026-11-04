@@ -3,7 +3,7 @@ book: etc
 chapter: 1
 id: 1-3
 title: レジスタ — 4 ビットを D フリップフロップで覚える
-tier: 200
+tier: 300
 source: 自作
 board: BB
 ---

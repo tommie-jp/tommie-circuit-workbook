@@ -129,12 +129,13 @@ test('finds ids used by more than one file in the same book', () => {
   ]);
 });
 
-test('accepts scale: large only on an intermediate entry', () => {
+test('accepts scale: large only on an intermediate or advanced entry', () => {
   const big = (tier, extra) => check('01-circuits/01-basics/01-led.md', LED.replace('tier: 50', `tier: ${tier}`).replace('board: BB', `board: BB\n${extra}`));
 
   assert.deepEqual(big(200, 'scale: large').errors, []);
   assert.equal(big(200, 'scale: large').entry.scale, 'large');
   assert.equal(check('01-circuits/01-basics/01-led.md', LED).entry.scale, null);
+  assert.deepEqual(big(300, 'scale: large').errors, []);
   assert.ok(big(100, 'scale: large').errors.some((error) => /scale/.test(error)));
   assert.ok(big(200, 'scale: huge').errors.some((error) => /scale/.test(error)));
 });

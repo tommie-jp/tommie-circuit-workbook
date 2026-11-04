@@ -3,7 +3,7 @@ book: etc
 chapter: 3
 id: 3-1
 title: 1 石ミキサー — 2SC1815 で中波を 455 kHz の IF に変える
-tier: 200
+tier: 300
 source: 自作
 board: BB
 ---

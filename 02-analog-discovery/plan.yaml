@@ -149,6 +149,12 @@
 - { id: 7-18, tier: 200, board: BB, title: マイコンの起動ログ (UART) を長時間 Record }
 - { id: 7-19, tier: 200, board: BB, title: 真理値表を当てる — Pattern で入力を全部出し、Logic で 74HC00 の出力と突き合わせる }
 - { id: 7-20, tier: 200, board: BB, title: 静止電流で品種を見分ける — 74LS00 と 74HC00 の電源電流をシャントで測る }
+- { id: 7-21, tier: 200, board: BB, title: Pico の ADC の特性 (直線性・雑音) }
+- { id: 7-22, tier: 200, board: BB, title: PWM + RC で DAC }
+- { id: 7-23, tier: 200, board: BB, title: クロックのオーバーシュートとリンギング }
+- { id: 7-24, tier: 200, board: BB, title: ジッタ }
+- { id: 7-25, tier: 200, board: BB, title: アイパターンのまね }
+- { id: 7-26, tier: 200, board: BB, title: ADC のサンプリングとエイリアスを Pico で }
 - { id: 8-1, tier: 50, board: BB, title: ジャンパ 1 本のスルーの S21 を 100 kHz〜10 MHz }
 - { id: 8-2, tier: 50, board: BB, title: 隣の列との容量 (数 pF) を測る }
 - { id: 8-3, tier: 50, board: BB, title: ジャンパ線のインダクタンス }
@@ -195,9 +201,3 @@
 - { id: 11-6, tier: 200, board: BB, title: Script で合否判定 (検査もどき) }
 - { id: 11-7, tier: 200, board: BB, title: ロガーの長期記録 (1 日) }
 - { id: 11-8, tier: 200, board: —, title: 測った値を tommie-fence の図に注釈で載せる }
-- { id: 12-1, tier: 200, board: BB, title: Pico の ADC の特性 (直線性・雑音) }
-- { id: 12-2, tier: 200, board: BB, title: PWM + RC で DAC }
-- { id: 12-3, tier: 200, board: BB, title: クロックのオーバーシュートとリンギング }
-- { id: 12-4, tier: 200, board: BB, title: ジッタ }
-- { id: 12-5, tier: 200, board: BB, title: アイパターンのまね }
-- { id: 12-6, tier: 200, board: BB, title: ADC のサンプリングとエイリアスを Pico で }

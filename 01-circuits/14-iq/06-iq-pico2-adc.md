@@ -1,17 +1,17 @@
 ---
 book: circuits
-chapter: 9
-id: 9-23
+chapter: 14
+id: 14-6
 title: I/Q をマイコンで読む — Pico 2 の ADC で位相と大きさを計算する
-tier: 200
+tier: 300
 source: 自作
 board: BB
 era: 今
 ---
 
-# 9-23 I/Q をマイコンで読む — Pico 2 の ADC で位相と大きさを計算する
+# 14-6 I/Q をマイコンで読む — Pico 2 の ADC で位相と大きさを計算する
 
-9-22 の Tayloe 検波器は、RF を LO の周りの低い周波数の **I と Q** の 2 本に下ろした。
+14-5 の Tayloe 検波器は、RF を LO の周りの低い周波数の **I と Q** の 2 本に下ろした。
 2 本の先後で「RF が LO の上か下か」が分かり、2 本の大きさで RF の強さが分かる。
 ここまではオシロで目で読んでいた。この題では、I と Q を **Raspberry Pi Pico 2 の ADC で読み、
 位相・周波数・大きさを式で計算する**。検波も復調も、ここから先は計算になる。これがソフトウェア無線 (SDR) の入口だ。
@@ -26,13 +26,13 @@ RF と LO の差が Δf なら、点は半径一定のまま 1 秒に Δf 回ま
 1 本 (I だけ) では、cos は Δf の符号で変わらず、振幅も位相と一緒に揺れるので、この 3 つを分けられない。
 2 本そろって初めて計算できる。
 
-**符号に注意。** 9-22 と同じ配線 (1Q → S0、2Q → S1、I = A0 − A3、Q = A1 − A2) では、
+**符号に注意。** 14-5 と同じ配線 (1Q → S0、2Q → S1、I = A0 − A3、Q = A1 − A2) では、
 RF が LO より上 (499 kHz) のとき **Q が I より 90° 進む**。I = cos ωt、Q = −sin ωt なので、
 I + jQ = e<sup>−jωt</sup> は**負の向き**に回り、atan2(Q, I) は減っていく。
 そこでプログラムは **atan2(−Q, I)** を使い、上なら正 (+1.000 kHz) と出るようにした。
 I と Q を入れ替える、または S0 と S1 の線を入れ替えると、符号は逆になる。
 
-**この題で変えたこと** (9-22 から):
+**この題で変えたこと** (14-5 から):
 
 - **電源を Pico 2 の 3V3 (3.3 V) にした。** Pico 2 の ADC が読めるのは 0〜3.3 V なので、
   74HC74・74HC4052・オペアンプをすべて同じ 3.3 V で動かし、出口がこの範囲に収まるようにする。
@@ -156,19 +156,19 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/23-iq-pico2-adc-1.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/circuit/06-iq-pico2-adc-1.svg)
 
 回路図は 2 枚に分けた。図1 が Tayloe 検波器、図2 が I と Q の差動増幅と Pico 2 だ。
 図1 の左下の箱 X1 と図2 の左の箱 X2 は部品ではなく、A0〜A3 の 4 本の線が図をまたいで続くことを示す。
 
 - **右**: W2 (RF) を R1 (1 kΩ) を通して U2 (74HC4052) の AN (PIN 13) へ。W2 は 0.5 Vpp・直流 1.65 V にして、
-  部品を足さずに 3.3 V の電源の真ん中に偏らせる。A0〜A3 は C1〜C4 (10 nF) で GND へ (9-22 と同じ)
+  部品を足さずに 3.3 V の電源の真ん中に偏らせる。A0〜A3 は C1〜C4 (10 nF) で GND へ (14-5 と同じ)
 - U2 はピンを働きで並べた箱で描いた (左にチャネル、右に共通の AN、下に GND・VEE・E・S0・S1)。
   この箱は左右を裏返せず、共通の AN が右にあるので、**RF は右から入り、左の C1〜C4 へ流れる**
 - **左**: W1 (1.992 MHz、0〜3.3 V の方形波) で 74HC74 の 2 つのフリップフロップを同時に叩く。
   1D ← /2Q、2D ← 1Q のジョンソンカウンタで、(Q1, Q2) が 00 → 10 → 11 → 01 と回る。
   **S0 ← 1Q、S1 ← 2Q** なので (S1, S0) は 00 → 01 → 11 → 10 で、選ばれる出口は **A0 → A1 → A3 → A2** (0°・90°・180°・270°)。
-  番号の順ではない。だから **I = A0 − A3、Q = A1 − A2** (9-22 と同じ)。帰還の 2 本は箱の上と下を回り、
+  番号の順ではない。だから **I = A0 − A3、Q = A1 − A2** (14-5 と同じ)。帰還の 2 本は箱の上と下を回り、
   線の交差が 2 か所ある (黒丸の無い交差はつながっていない)
 - C5・C6 (100 nF) は U1・U2 の電源のパスコン
 
@@ -267,7 +267,7 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/23-iq-pico2-adc-2.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/circuit/06-iq-pico2-adc-2.svg)
 
 - **上**: U3A が I の差動増幅。R2 (100 kΩ)・R3 (200 kΩ) で + 入力を (2·A0 + VREF)/3 にし、
   R4 (100 kΩ)・R5 (200 kΩ) で出力 = **VREF + 2 × (A0 − A3)**。出力は Pico 2 の **GP26 (ADC0)** へ
@@ -379,7 +379,7 @@ notes:
   - text: レールは上下とも 赤 = +3.3V (図4 の Pico 2 の 3V3)、青 = GND
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/23-iq-pico2-adc-1.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/breadboard/06-iq-pico2-adc-1.svg)
 
 - ブレッドボードは **full (63 列)**。部品が多いので、Pico 2 は図4 の別のハーフのブレッドボードに挿し、
   I・Q・3V3・GND の 4 本のジャンパ線でつなぐ (図3 の下の 3 つの箱)
@@ -437,7 +437,7 @@ notes:
   - text: GP26 (ADC0) = I、GP27 (ADC1) = Q。赤レール = +3.3V (3V3 OUT)
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/23-iq-pico2-adc-2.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/breadboard/06-iq-pico2-adc-2.svg)
 
 - Pico 2 は PC の USB から給電し、プログラムの表示もこの USB のシリアルで受ける。GND38 (PIN 38) を − レールへ、3V3 (PIN 36) を + レールへ
 - Pico 2 はピンが d 行と i 行に来るように挿し、上の a〜c 行を空ける。GP26 (PIN 31、14 列) と GP27 (PIN 32、13 列) の a 行に図3 からの I・Q を挿し、
@@ -453,7 +453,7 @@ notes:
 | U2 | アナログマルチプレクサ (4 チャネル ×2) | 74HC4052 | A 側だけ使う。B0〜B3 は開け、BN・E・VEE は GND |
 | U3・U4 | オペアンプ (2 回路、レールツーレール) | MCP6002 (DIP-8) | U3A = I、U4A = Q、U4B = VREF、U3B は使わない |
 | U5 | マイコンボード | Raspberry Pi Pico 2 | 3V3 で全体に給電。別のハーフのブレッドボード (図4) |
-| R1 | 抵抗 | 1 kΩ | 9-22 と同じ |
+| R1 | 抵抗 | 1 kΩ | 14-5 と同じ |
 | R2・R4・R6・R8 | 抵抗 | 100 kΩ | 金属皮膜 ±1 % をすすめる (下の注) |
 | R3・R5・R7・R9 | 抵抗 | 200 kΩ (E24) | 同上 |
 | R10・R11 | 抵抗 | 10 kΩ | VREF の分圧 |
@@ -724,7 +724,7 @@ cursors: [-250us, 0]
 measure: [vpp, avg, freq, phase]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/23-iq-pico2-adc-1.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/06-iq-pico2-adc-1.svg)
 
 - CH1 (GP26 = I) と CH2 (GP27 = Q) は同じ 1 kHz・1.67 Vpp・平均 1.65 V。0〜3.3 V の ADC の範囲の真ん中に収まる
 - CH2 は CH1 より 250 µs (90°) **早く**同じ所を通る。これが「RF が LO より上」の印で、プログラムは +1.000 kHz と出す。
@@ -739,7 +739,7 @@ ch2: {wave: sine 1kHz 0.834V offset 1.65V phase 90deg, range: 250mV/div, positio
 xy: ch1 ch2
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/23-iq-pico2-adc-2.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/06-iq-pico2-adc-2.svg)
 
 - 中心が (1.65 V, 1.65 V) の円。プログラムはこの中心 (VREF) を引いて、点の向き φ と半径 A を計算している
 - 回る向きは止まった画面では分からない (時間の図5 で先後を見る)。円がつぶれていれば I と Q の利得か位相がずれている
@@ -772,7 +772,7 @@ xy: ch1 ch2
 
 ## LTspice での確かめ
 
-デッキは `sim/23-iq-pico2-adc.cir` (過渡解析。Tayloe 検波器と I の差動増幅)。**74HC4052 は電圧制御スイッチの模型 (オン抵抗 100 Ω) で、実測ではない仮定**。MCP6002 は理想の演算増幅器と置いた。
+デッキは `sim/06-iq-pico2-adc.cir` (過渡解析。Tayloe 検波器と I の差動増幅)。**74HC4052 は電圧制御スイッチの模型 (オン抵抗 100 Ω) で、実測ではない仮定**。MCP6002 は理想の演算増幅器と置いた。
 3.3 V、W2 は 1.65 V に 0.25 V<sub>p</sub>、R1 1 kΩ、C1〜C4 は 10 nF。Δf は 497・499・500・502 kHz の 4 点。
 
 | 確かめること | 本文の数字 | LTspice | 判定 |
@@ -803,7 +803,7 @@ xy: ch1 ch2
 ## 出典
 
 自作。I/Q を複素数とみて atan2 で位相を、√(I² + Q²) で大きさを出す考え方は、直交検波の一般的な式による。
-スイッチとコンデンサの直交検波器は D. Tayloe が 2001 年ごろに発表した形 (Tayloe 検波器) で、回路は 9-22 を 3.3 V にしたもの。
+スイッチとコンデンサの直交検波器は D. Tayloe が 2001 年ごろに発表した形 (Tayloe 検波器) で、回路は 14-5 を 3.3 V にしたもの。
 74HC4052 のピンの並びと電源電圧は [TI CD74HC4052 データシート](https://www.ti.com/lit/ds/symlink/cd74hc4052.pdf)、
 74HC74 は [TI SN74HC74 データシート](https://www.ti.com/lit/ds/symlink/sn74hc74.pdf)、
 MCP6002 の電源電圧 (1.8〜6 V)・レールツーレール・GBW (1 MHz)・入力電流は [Microchip MCP6002 の製品ページとデータシート](https://www.microchip.com/en-us/product/MCP6002)、

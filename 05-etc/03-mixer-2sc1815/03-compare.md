@@ -3,7 +3,7 @@ book: etc
 chapter: 3
 id: 3-3
 title: 3 つのミキサーをシミュレーションで比べる — 変換利得・漏れ・P1dB
-tier: 200
+tier: 300
 source: 自作
 board: —
 ---

@@ -3,11 +3,11 @@ book: circuits
 chapter: 9
 id: 9-4
 title: FM Transmitter (1 Transistor)
-tier: 50
+tier: 100
 source: 自作
 board: CB
 era: 古
-ja: 5293be87de0d0baaa9e960da16773840d2c45f14
+ja: 003faa62c8f81aac23f611329eeac0c9157be5d0
 ---
 
 # 9-4 FM Transmitter (1 Transistor)

@@ -3,7 +3,7 @@ book: etc
 chapter: 1
 id: 1-1
 title: 4 ビット CPU のようなもの — カウンタとメモリと命令
-tier: 200
+tier: 300
 source: 自作
 board: BB
 ---

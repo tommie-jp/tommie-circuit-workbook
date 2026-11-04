@@ -3,7 +3,7 @@ book: etc
 chapter: 2
 id: 2-8
 title: マイコン版 — ① 受信のあとを Raspberry Pi Pico 2 の FFT とプログラムで作る
-tier: 200
+tier: 300
 source: 自作
 board: [BB, PF]
 ---

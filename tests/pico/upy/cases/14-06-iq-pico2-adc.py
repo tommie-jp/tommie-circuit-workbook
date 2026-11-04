@@ -1,5 +1,5 @@
 import math
-PROGRAM = '01-circuits/09-rf/23-iq-pico2-adc-1.py'
+PROGRAM = '01-circuits/14-iq/06-iq-pico2-adc-1.py'
 BUDGET_US = 400_000
 
 

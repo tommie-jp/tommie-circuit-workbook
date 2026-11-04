@@ -3,7 +3,7 @@ book: etc
 chapter: 2
 id: 2-2
 title: 中波ラジオの受信と AM 検波 — 2SC1815 の高周波増幅 2 段
-tier: 200
+tier: 300
 source: 自作
 board: [BB, PF]
 ---

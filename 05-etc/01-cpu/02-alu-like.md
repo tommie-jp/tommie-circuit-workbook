@@ -3,7 +3,7 @@ book: etc
 chapter: 1
 id: 1-2
 title: 4 ビット ALU もどき — 加算と減算 (2 の補数)
-tier: 200
+tier: 300
 source: 自作
 board: BB
 ---

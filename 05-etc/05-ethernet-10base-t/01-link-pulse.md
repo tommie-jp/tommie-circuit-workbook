@@ -3,7 +3,7 @@ book: etc
 chapter: 5
 id: 5-1
 title: リンクパルスを見る — 使わなくなったルータの 10BASE-T の対をオシロで見る
-tier: 200
+tier: 300
 source: 自作 (数値は IEEE 802.3 の Clause 14 と Clause 28)
 board: —
 ---

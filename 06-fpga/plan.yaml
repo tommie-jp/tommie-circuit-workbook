@@ -82,8 +82,8 @@
 - { id: 5-2, tier: 50, board: BB, device: PICO, title: カウンタを Pico 2 で回して LED を点ける }
 - { id: 5-3, tier: 50, board: BB, device: PICO, title: Verilog の入出力を GPIO につなぐ — 入力を読み、eval し、出力を書く }
 - { id: 5-4, tier: 50, board: BB, device: PICO, title: DIP スイッチと LED で AND・OR を確かめる }
-- { id: 5-5, tier: 50, board: BB, device: PICO, title: Soft-FPGA のクロックを測る — 1 クロックに何 µs かかるか }
-- { id: 5-6, tier: 50, board: BB, device: PICO, title: 回路の規模でクロックは変わる — カウンタと TD4 で比べる }
+- { id: 5-5, tier: 100, board: BB, device: PICO, title: Soft-FPGA のクロックを測る — 1 クロックに何 µs かかるか }
+- { id: 5-6, tier: 100, board: BB, device: PICO, title: 回路の規模でクロックは変わる — カウンタと TD4 で比べる }
 - { id: 5-7, tier: 50, board: BB, device: PICO, title: クロックを固定する — タイマ割り込みで一定の間隔で回す }
 - { id: 5-8, tier: 50, board: BB, device: PICO, title: 4 ビット CPU の TD4 を動かす — DIP スイッチで入力、LED で出力 }
 - { id: 5-9, tier: 100, board: BB, device: PICO, title: 固定できるクロックの上限 — いちばん重い 1 クロックより長い周期を選ぶ }
@@ -155,7 +155,7 @@
 - { id: 8-20, tier: 200, board: BB, device: FPGA, title: 5 V の回路とつなぐ — レベル変換 }
 - { id: 8-21, tier: 200, board: —, device: FPGA, title: 配置を図で見る }
 - { id: 9-1, tier: 50, board: —, device: SIM, title: セットアップとホールド — クロックの前後で動かしてはいけない時間 }
-- { id: 9-2, tier: 100, board: BB, device: FPGA, title: 外から来る信号はフリップフロップ 2 段で受ける }
+- { id: 9-2, tier: 50, board: BB, device: FPGA, title: 外から来る信号はフリップフロップ 2 段で受ける }
 - { id: 9-3, tier: 100, board: —, device: FPGA, title: 最高の動作周波数 — タイミングの報告を読む }
 - { id: 9-4, tier: 100, board: BB, device: FPGA, title: 伝搬の遅れを測る — インバータを並べたリングオシレータ }
 - { id: 9-5, tier: 100, board: BB, device: FPGA, title: グリッチ — 組み合わせの出力に出る細いパルス }
@@ -169,7 +169,7 @@
 - { id: 9-13, tier: 200, board: BB, device: FPGA, title: 外の IC とのセットアップ — 入出力の遅れ }
 - { id: 9-14, tier: 200, board: BB, device: PICO, title: Soft-FPGA にタイミングはあるか — 計算の順と遅れ }
 - { id: 10-1, tier: 50, board: —, device: SIM, title: ROM — 配列と $readmemh }
-- { id: 10-2, tier: 100, board: —, device: SIM, title: RAM — クロックに合わせて読み書きする }
+- { id: 10-2, tier: 50, board: —, device: SIM, title: RAM — クロックに合わせて読み書きする }
 - { id: 10-3, tier: 100, board: —, device: SIM, title: FIFO }
 - { id: 10-4, tier: 100, board: —, device: SIM, title: 掛け算 — 演算子と、シフトと加算の繰り返し }
 - { id: 10-5, tier: 200, board: —, device: SIM, title: 固定小数点 }
@@ -189,22 +189,22 @@
 - { id: 11-5, tier: 200, board: —, device: SIM, title: TD4 に命令を足す }
 - { id: 11-6, tier: 200, board: —, device: SIM, title: アセンブラを作る }
 - { id: 11-7, tier: 200, board: —, device: WEB, title: 6502 を読む — Apple-I の wozmon を動かす }
-- { id: 11-8, tier: 200, board: —, device: WEB, title: 6502 で Integer BASIC を動かす }
-- { id: 11-9, tier: 200, board: —, device: WEB, title: 8080 で CP/M 2.2 を動かす }
+- { id: 11-8, tier: 300, board: —, device: WEB, title: 6502 で Integer BASIC を動かす }
+- { id: 11-9, tier: 300, board: —, device: WEB, title: 8080 で CP/M 2.2 を動かす }
 - { id: 11-10, tier: 200, board: —, device: SIM, title: 割り込み }
 - { id: 11-11, tier: 200, board: —, device: SIM, title: 自分の 8 ビット CPU を設計する }
 - { id: 11-12, tier: 200, board: BB, device: FPGA, title: 6502 を実物の FPGA に載せる }
 # 11-13〜11-18 の RISC-V は、メモリと UART の枠 (番地・バス) を CPU から切り離して作り、CPU を差し替える。
 # 最初は PicoRV32 を差し (11-13)、自作の CPU に替える (11-14 は 4 命令でアセンブラ、11-15 は 8 命令で GCC の出力)。
-- { id: 11-13, tier: 200, board: —, device: SIM, title: C を RV32I の機械語にして PicoRV32 で Hello を出す — CPU を差し替えられる枠を作る }
-- { id: 11-14, tier: 200, board: —, device: SIM, title: 4 命令の RV32I を自作する — ADDI・LBU・SW・BEQ だけで Hello を出す }
-- { id: 11-15, tier: 200, board: —, device: SIM, title: 自作の RV32I を 8 命令に広げる — GCC の出した Hello を動かす }
-- { id: 11-16, tier: 200, board: BB, device: PICO, title: PicoRV32 を Pico 2 の Soft-FPGA で動かす — 1 秒に何命令か測る }
-- { id: 11-17, tier: 200, board: BB, device: FPGA, title: PicoRV32 を実物の FPGA に載せる — 同じ機械語を Soft-FPGA と比べる }
-- { id: 11-18, tier: 200, board: BB, device: PICO, title: Pico 2 の中の RISC-V (Hazard3) で同じ機械語を走らせる }
-- { id: 12-1, tier: 200, board: —, device: SIM, title: リバーシのアクセラレータ — 合法手と裏返しを回路で }
-- { id: 12-2, tier: 200, board: BB, device: PICO, title: リバーシを UART で PC と対戦させる }
-- { id: 12-3, tier: 200, board: —, device: WEB, title: Pong — ゲートだけで動くゲーム }
-- { id: 12-4, tier: 200, board: BB, device: FPGA, title: 時計 — 27 MHz を数えて時分秒を 4 桁の 7 セグに出し、時報で合わせる }
-- { id: 12-5, tier: 200, board: BB, device: FPGA, title: DDS の信号発生器 }
-- { id: 12-6, tier: 200, board: BB, device: FPGA, title: 小さいロジックアナライザを作る }
+- { id: 11-13, tier: 300, board: —, device: SIM, title: C を RV32I の機械語にして PicoRV32 で Hello を出す — CPU を差し替えられる枠を作る }
+- { id: 11-14, tier: 300, board: —, device: SIM, title: 4 命令の RV32I を自作する — ADDI・LBU・SW・BEQ だけで Hello を出す }
+- { id: 11-15, tier: 300, board: —, device: SIM, title: 自作の RV32I を 8 命令に広げる — GCC の出した Hello を動かす }
+- { id: 11-16, tier: 300, board: BB, device: PICO, title: PicoRV32 を Pico 2 の Soft-FPGA で動かす — 1 秒に何命令か測る }
+- { id: 11-17, tier: 300, board: BB, device: FPGA, title: PicoRV32 を実物の FPGA に載せる — 同じ機械語を Soft-FPGA と比べる }
+- { id: 11-18, tier: 300, board: BB, device: PICO, title: Pico 2 の中の RISC-V (Hazard3) で同じ機械語を走らせる }
+- { id: 12-1, tier: 300, board: —, device: SIM, title: リバーシのアクセラレータ — 合法手と裏返しを回路で }
+- { id: 12-2, tier: 300, board: BB, device: PICO, title: リバーシを UART で PC と対戦させる }
+- { id: 12-3, tier: 300, board: —, device: WEB, title: Pong — ゲートだけで動くゲーム }
+- { id: 12-4, tier: 300, board: BB, device: FPGA, title: 時計 — 27 MHz を数えて時分秒を 4 桁の 7 セグに出し、時報で合わせる }
+- { id: 12-5, tier: 300, board: BB, device: FPGA, title: DDS の信号発生器 }
+- { id: 12-6, tier: 300, board: BB, device: FPGA, title: 小さいロジックアナライザを作る }

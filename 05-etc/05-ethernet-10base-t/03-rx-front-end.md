@@ -3,7 +3,7 @@ book: etc
 chapter: 5
 id: 5-3
 title: 受信回路 — 100 Ω 終端と 74HC14 で差動を 3.3 V の論理に戻し、ロジアナで読む
-tier: 200
+tier: 300
 source: 自作
 board: PF
 ---

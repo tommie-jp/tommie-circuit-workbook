@@ -3,7 +3,7 @@ book: fpga
 chapter: 10
 id: 10-2
 title: RAM — クロックに合わせて読み書きする
-tier: 100
+tier: 50
 source: 自作
 board: —
 device: SIM

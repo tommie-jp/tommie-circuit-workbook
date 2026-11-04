@@ -3,7 +3,7 @@ book: etc
 chapter: 1
 id: 1-5
 title: DRAM のセル — 2N7000 1 個とコンデンサ 1 個で 1 ビットを覚え、漏れて消えるのを見る
-tier: 200
+tier: 300
 source: 自作
 board: BB
 ---

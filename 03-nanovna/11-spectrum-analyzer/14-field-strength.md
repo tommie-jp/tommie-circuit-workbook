@@ -3,7 +3,7 @@ book: nanovna
 chapter: 11
 id: 11-14
 title: 微弱電波の電界強度を見積もる — アンテナ係数とケーブルの損失
-tier: 200
+tier: 300
 source: 自作
 board: —
 device: SA

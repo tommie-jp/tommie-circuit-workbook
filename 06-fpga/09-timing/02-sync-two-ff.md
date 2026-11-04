@@ -3,7 +3,7 @@ book: fpga
 chapter: 9
 id: 9-2
 title: 外から来る信号はフリップフロップ 2 段で受ける
-tier: 100
+tier: 50
 source: 自作
 board: BB
 device: FPGA

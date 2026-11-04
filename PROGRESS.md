@@ -14,7 +14,7 @@
 | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 219 | 120 | 0 | 0 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 100 | 0 | 0 |
-| [NanoVNA の教科書](03-nanovna/README.md) | 223 | 114 | 0 | 0 |
+| [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 223 | 114 | 0 | 0 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 |
 | [番外の工作](05-etc/README.md) | 25 | 22 | 0 | 0 |
 | [FPGA の教科書](06-fpga/README.md) | 206 | 124 | 0 | 0 |
@@ -231,13 +231,6 @@
 | 9-15 | [アンテナ — ダイポールとループ、SWR](01-circuits/09-rf/15-antenna-dipole-loop.md) | ✓ | [ ] | — |
 | 9-16 | [DDS モジュール — Pico 2 で 7 MHz を出して tinySA で見る](01-circuits/09-rf/16-dds-sdr-module.md) | ✓ | [ ] | — |
 | 9-17 | [2.4 GHz モジュール (nRF24) と Pico 2](01-circuits/09-rf/17-nrf24-pico.md) | ✓ | [ ] | — |
-| 9-18 | [RC-CR で 90° を作る — 1 本の正弦から I と Q](01-circuits/09-rf/18-rc-cr-quadrature.md) | ✓ | [ ] | — |
-| 9-19 | [I/Q ミキサー — RF が LO の上か下かを知る](01-circuits/09-rf/19-iq-mixer.md) | ✓ | [ ] | — |
-| 9-20 | [イメージ除去 — 位相法 (Hartley)](01-circuits/09-rf/20-image-reject-hartley.md) | ✓ | [ ] | — |
-| 9-21 | [SSB を作る — 位相法の送信側](01-circuits/09-rf/21-ssb-phasing.md) | ✓ | [ ] | — |
-| 9-22 | [Tayloe 検波器 — 74HC4052 で I/Q を音にする (直接変換)](01-circuits/09-rf/22-tayloe-detector.md) | ✓ | [ ] | — |
-| 9-23 | [I/Q をマイコンで読む — Pico 2 の ADC で位相と大きさを計算する](01-circuits/09-rf/23-iq-pico2-adc.md) | ✓ | [ ] | — |
-| 9-24 | [IQ 中波ラジオ — バーアンテナと 74HC4052 と Pico 2 で NHK を聞く](01-circuits/09-rf/24-iq-mw-radio.md) | ✓ | [ ] | — |
 | 9-25 | [AGC — 強い局で音量が跳ねないように利得を自動で下げる](01-circuits/09-rf/25-agc.md) | ✓ | [ ] | — |
 | 9-26 | 送信のファイナルを並列にする — エミッタバラスト抵抗で電流をそろえる (2N3866) | | | |
 
@@ -310,6 +303,18 @@
 | 13-6 | 出力の内部抵抗と負荷変動 | | | |
 | 13-7 | 電流制限で回路を守る — 短絡・逆接続・起動時の突入電流 | | | |
 | 13-8 | 定電流で充電する — NiMH と、やってはいけない Li-ion | | | |
+
+### 第 14 章 I/Q と直接変換 — 90° の 2 本で受ける
+
+| # | 題 | 作成 | 目で確認 | Fable で確認 |
+| --- | --- | --- | --- | --- |
+| 14-1 | [RC-CR で 90° を作る — 1 本の正弦から I と Q](01-circuits/14-iq/01-rc-cr-quadrature.md) | ✓ | [ ] | — |
+| 14-2 | [I/Q ミキサー — RF が LO の上か下かを知る](01-circuits/14-iq/02-iq-mixer.md) | ✓ | [ ] | — |
+| 14-3 | [イメージ除去 — 位相法 (Hartley)](01-circuits/14-iq/03-image-reject-hartley.md) | ✓ | [ ] | — |
+| 14-4 | [SSB を作る — 位相法の送信側](01-circuits/14-iq/04-ssb-phasing.md) | ✓ | [ ] | — |
+| 14-5 | [Tayloe 検波器 — 74HC4052 で I/Q を音にする (直接変換)](01-circuits/14-iq/05-tayloe-detector.md) | ✓ | [ ] | — |
+| 14-6 | [I/Q をマイコンで読む — Pico 2 の ADC で位相と大きさを計算する](01-circuits/14-iq/06-iq-pico2-adc.md) | ✓ | [ ] | — |
+| 14-7 | [IQ 中波ラジオ — バーアンテナと 74HC4052 と Pico 2 で NHK を聞く](01-circuits/14-iq/07-iq-mw-radio.md) | ✓ | [ ] | — |
 
 ## Analog Discovery の教科書
 
@@ -502,6 +507,12 @@
 | 7-18 | マイコンの起動ログ (UART) を長時間 Record | | | |
 | 7-19 | 真理値表を当てる — Pattern で入力を全部出し、Logic で 74HC00 の出力と突き合わせる | | | |
 | 7-20 | 静止電流で品種を見分ける — 74LS00 と 74HC00 の電源電流をシャントで測る | | | |
+| 7-21 | Pico の ADC の特性 (直線性・雑音) | | | |
+| 7-22 | PWM + RC で DAC | | | |
+| 7-23 | クロックのオーバーシュートとリンギング | | | |
+| 7-24 | ジッタ | | | |
+| 7-25 | アイパターンのまね | | | |
+| 7-26 | ADC のサンプリングとエイリアスを Pico で | | | |
 
 ### 第 8 章 ブレッドボードの限界と perfboard
 
@@ -569,24 +580,13 @@
 | 11-7 | ロガーの長期記録 (1 日) | | | |
 | 11-8 | 測った値を tommie-fence の図に注釈で載せる | | | |
 
-### 第 12 章 デジタルと混合信号
-
-| # | 題 | 作成 | 目で確認 | Fable で確認 |
-| --- | --- | --- | --- | --- |
-| 12-1 | Pico の ADC の特性 (直線性・雑音) | | | |
-| 12-2 | PWM + RC で DAC | | | |
-| 12-3 | クロックのオーバーシュートとリンギング | | | |
-| 12-4 | ジッタ | | | |
-| 12-5 | アイパターンのまね | | | |
-| 12-6 | ADC のサンプリングとエイリアスを Pico で | | | |
-
-## NanoVNA の教科書
+## NanoVNA と tinySA の教科書
 
 ### 第 0 章 道具と安全
 
 | # | 題 | 作成 | 目で確認 | Fable で確認 |
 | --- | --- | --- | --- | --- |
-| 0-1 | [機種と範囲 — H4 (〜1.5 GHz) と V2 (〜3 / 4.4 GHz)、どちらで何が測れるか](03-nanovna/00-tools/01-device-range.md) | ✓ | [ ] | — |
+| 0-1 | [機種と範囲 — LiteVNA64 (標準、〜6.3 GHz) と H4・V2 (比較用)、どれで何が測れるか](03-nanovna/00-tools/01-device-range.md) | ✓ | [ ] | — |
 | 0-2 | [SMA の締め方・トルク・ケーブルの扱い](03-nanovna/00-tools/02-sma-care.md) | ✓ | [ ] | — |
 | 0-3 | [出力レベルと CH1 の最大入力 — アンプの出力にはアッテネータ](03-nanovna/00-tools/03-output-level.md) | ✓ | [ ] | — |
 | 0-4 | [静電気とアンテナの帯電 — 放電してから繋ぐ](03-nanovna/00-tools/04-esd-antenna-discharge.md) | ✓ | [ ] | — |

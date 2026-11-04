@@ -3,7 +3,7 @@ book: etc
 chapter: 4
 id: 4-1
 title: デュアルゲート FET ミキサー — 3SK291 で中波を 455 kHz の IF に変える
-tier: 200
+tier: 300
 source: 自作
 board: [BB, PF]
 ---

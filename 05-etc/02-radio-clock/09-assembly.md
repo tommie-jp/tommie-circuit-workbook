@@ -3,7 +3,7 @@ book: etc
 chapter: 2
 id: 2-9
 title: 組み立て — 受信・検波・状態遷移のユニバーサル基板をつなぐ
-tier: 200
+tier: 300
 source: 自作
 board: PF
 ---

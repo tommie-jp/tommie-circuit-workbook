@@ -3,7 +3,7 @@ book: nanovna
 chapter: 1
 id: 1-6
 title: 校正の保存スロットと呼び出し
-tier: 50
+tier: 100
 source: 自作
 board: —
 device: H4

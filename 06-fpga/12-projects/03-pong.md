@@ -3,7 +3,7 @@ book: fpga
 chapter: 12
 id: 12-3
 title: Pong — ゲートだけで動くゲーム
-tier: 200
+tier: 300
 source: 自作。画面とボタンの付け方は tommie-jp/soft-fpga (MIT) の examples/02-traffic-fsm に倣った
 board: —
 device: WEB

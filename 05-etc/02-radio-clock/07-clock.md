@@ -3,7 +3,7 @@ book: etc
 chapter: 2
 id: 2-7
 title: 時計 — 32.768 kHz を数えて時分秒を出し、正時パルスで合わせる
-tier: 200
+tier: 300
 scale: large
 source: 自作
 board: BB

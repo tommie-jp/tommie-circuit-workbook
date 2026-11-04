@@ -37,12 +37,12 @@ test('counts the plan cumulatively, counts the written ones, and lists only chap
     row(circuits, 3, 1, { tier: 100 }),
   ]);
 
-  // 必須・入門・中級は計画の数 (入れ子)。済 は書いた題の数。
-  assert.match(toc, /\| 章 \| 題名 \| 必須 \| 入門 \| 中級 \| 済 \|/);
-  assert.match(toc, /\| 1 \| 基本 — 直流と受動部品 \| 1 \| 1 \| 2 \| 1 \|/);
-  assert.match(toc, /\| 3 \| 発振とタイマー \| 0 \| 1 \| 1 \| 0 \|/);
-  assert.match(toc, /\| 0 \| 測定と道具 \| 0 \| 0 \| 0 \| 0 \|/);
-  assert.match(toc, /\| \*\*計\*\* \| \| \*\*1\*\* \| \*\*2\*\* \| \*\*3\*\* \| \*\*1\*\* \|/);
+  // 必須・入門・中級・発展は計画の数 (入れ子)。済 は書いた題の数。
+  assert.match(toc, /\| 章 \| 題名 \| 必須 \| 入門 \| 中級 \| 発展 \| 済 \|/);
+  assert.match(toc, /\| 1 \| 基本 — 直流と受動部品 \| 1 \| 1 \| 2 \| 2 \| 1 \|/);
+  assert.match(toc, /\| 3 \| 発振とタイマー \| 0 \| 1 \| 1 \| 1 \| 0 \|/);
+  assert.match(toc, /\| 0 \| 測定と道具 \| 0 \| 0 \| 0 \| 0 \| 0 \|/);
+  assert.match(toc, /\| \*\*計\*\* \| \| \*\*1\*\* \| \*\*2\*\* \| \*\*3\*\* \| \*\*3\*\* \| \*\*1\*\* \|/);
 
   assert.ok(toc.includes('## 第 1 章 基本 — 直流と受動部品'));
   assert.ok(!toc.includes('## 第 0 章'));
@@ -76,10 +76,10 @@ test('escapes a pipe in a title', () => {
 test('summarises every book at the root', () => {
   const toc = rootToc(new Map([[circuits.dir, [written(circuits, 1, 1), row(circuits, 1, 2, { tier: 200 })]]]));
 
-  assert.match(toc, /\| 冊 \| 内容 \| 必須 \| 入門 \| 中級 \| 済 \|/);
-  assert.match(toc, /\| \[回路の教科書\]\(01-circuits\/README\.md\) \| .* \| 1 \| 1 \| 2 \| 1 \|/);
-  assert.match(toc, /\| \[NanoVNA の教科書\]\(03-nanovna\/README\.md\) \| .* \| 0 \| 0 \| 0 \| 0 \|/);
-  assert.match(toc, /\| \[電験三種の教科書\]\(04-denken\/README\.md\) \| .* \| 0 \| 0 \| 0 \| 0 \|/);
+  assert.match(toc, /\| 冊 \| 内容 \| 必須 \| 入門 \| 中級 \| 発展 \| 済 \|/);
+  assert.match(toc, /\| \[回路の教科書\]\(01-circuits\/README\.md\) \| .* \| 1 \| 1 \| 2 \| 2 \| 1 \|/);
+  assert.match(toc, /\| \[NanoVNA と tinySA の教科書\]\(03-nanovna\/README\.md\) \| .* \| 0 \| 0 \| 0 \| 0 \| 0 \|/);
+  assert.match(toc, /\| \[電験三種の教科書\]\(04-denken\/README\.md\) \| .* \| 0 \| 0 \| 0 \| 0 \| 0 \|/);
 });
 
 test('names each chapter of the fourth book after its exam subject', () => {
@@ -107,4 +107,12 @@ test('marks a large intermediate entry next to its tier', () => {
 
   assert.match(toc, /\| 1-1 \| 題 1-1 \| 中級 \(大規模\) \|/);
   assert.match(toc, /\| 1-2 \| 題 1-2 \| 中級 \|/);
+});
+
+test('names the advanced tier and marks a large advanced entry', () => {
+  const toc = bookToc(circuits, [row(circuits, 1, 1, { tier: 300, scale: 'large' }), row(circuits, 1, 2, { tier: 300 })]);
+
+  assert.match(toc, /\| 1-1 \| 題 1-1 \| 発展 \(大規模\) \|/);
+  assert.match(toc, /\| 1-2 \| 題 1-2 \| 発展 \|/);
+  assert.match(toc, /\| 1 \| 基本 — 直流と受動部品 \| 0 \| 0 \| 0 \| 2 \| 0 \|/);
 });

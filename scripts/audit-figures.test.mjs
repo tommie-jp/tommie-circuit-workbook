@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { auditCircuitText, auditInstrument, auditWireColors, inSeries, ltspiceStatus, parseValue } from './audit-figures.mjs';
+import { auditCircuitText, auditInstrument, auditWireColors, inSeries, lengthOver, ltspiceStatus, parseValue, proseLength } from './audit-figures.mjs';
 
 test('parses engineering suffixes and infix notation', () => {
   assert.equal(parseValue('4k7'), 4700);
@@ -51,4 +51,16 @@ test('classifies the LTspice section of an entry with a circuit', () => {
   assert.equal(ltspiceStatus(`${hdl}## シミュレーションでの確かめ (対象外)\n`), 'excluded');
   assert.equal(ltspiceStatus(`${fence}## LTspice での確かめ\n`), 'checked');
   assert.equal(ltspiceStatus(`${fence}### LTspice での確かめ (対象外とした範囲)\n`), 'excluded');
+});
+
+test('counts prose outside fences, front matter and image lines, without whitespace', () => {
+  const text = '---\ntier: 50\n---\n# 1-1 題\n\nあい う\n\n```circuit\nparts: 長い字\n```\n![図](x.svg)\n';
+  assert.equal(proseLength(text), '#1-1題あいう'.length);
+});
+
+test('reports an entry longer than the limit of its tier', () => {
+  const long = `---\ntier: 50\n---\n${'あ'.repeat(5001)}\n`;
+  assert.deepEqual(lengthOver(long, 50), { length: 5001, limit: 5000 });
+  assert.equal(lengthOver(long, 200), null);
+  assert.equal(lengthOver(long, 999), null);
 });

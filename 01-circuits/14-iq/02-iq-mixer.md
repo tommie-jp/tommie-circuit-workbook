@@ -1,14 +1,14 @@
 ---
 book: circuits
-chapter: 9
-id: 9-19
+chapter: 14
+id: 14-2
 title: I/Q ミキサー — RF が LO の上か下かを知る
 tier: 200
 source: 自作
 board: BB
 ---
 
-# 9-19 I/Q ミキサー — RF が LO の上か下かを知る
+# 14-2 I/Q ミキサー — RF が LO の上か下かを知る
 
 9-12 のバランスドミキサーは、RF と LO を掛けて**差の周波数 (IF)** を取り出した。
 ところが掛け算 1 つでは、**RF が LO の上にあるか下にあるかが分からない**。
@@ -23,9 +23,9 @@ cos は偶関数なので cos(+Δωt) と cos(−Δωt) が同じ波になり、
   49.8 kHz の 1/4 周期は **5.02 µs** で、オシロの 2 本の波のずれで上下が読める
 - I と Q の組は、横を I、縦を Q とした平面の上を回る 1 つの点と見なせる。点は 49.8 kHz で回り、
   **回る向きが周波数の符号**を持つ (この題の名前の付け方では、RF が上なら右回り、下なら左回り)。
-  これがイメージ除去 (9-20)、SSB (9-21)、ソフトウェアラジオ (9-22〜9-24) の土台になる
+  これがイメージ除去 (14-3)、SSB (14-4)、ソフトウェアラジオ (14-5〜14-7) の土台になる
 
-**90° の作り方は 9-18 の RC-CR 網**を使う。R 680 Ω・C 470 pF の網は、高域側 (C が直列、R が GND へ) で
+**90° の作り方は 14-1 の RC-CR 網**を使う。R 680 Ω・C 470 pF の網は、高域側 (C が直列、R が GND へ) で
 +45°、低域側 (R が直列、C が GND へ) で −45° ずらし、2 本の差は**どの周波数でも 90°** になる。
 振幅がそろうのは f<sub>c</sub> = 1/(2πRC) = **497.9 kHz** だけだ。そこで 90° ずらすのは、
 周波数が変わる RF ではなく、**固定の LO** の側にする。LO を f<sub>c</sub> に合わせた 498 kHz に置けば、
@@ -134,7 +134,7 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/19-iq-mixer.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/circuit/02-iq-mixer.svg)
 
 図1 の `+5V` は AD3 の電源出力 V+ (Supplies で 5 V)。SA612 は 4.5〜8 V で動き、1 個 2.4 mA ほど (データシートの代表値)。
 2 個で 5 mA ほどなので、AD3 の Supplies で足りる。
@@ -142,7 +142,7 @@ style:
 - **RF (W2、左上)** は 1 本の線を 2 つに分け、C5 と C6 (10 nF) を通して U1 と U2 の PIN 1 (IN_A) へ入れる。
   PIN 2 (IN_B) は C7・C8 で交流だけ GND に落とす。ここまでは 9-12 と同じ使い方を 2 組並べただけだ。
   PIN 1 を 1 本の C でまとめないのは、2 個の IC の入力の直流の偏りどうしをつながないため
-- **LO (W1、左)** は 9-18 の RC-CR 網で 2 本に分ける。高域側は C1 (470 pF) が直列で R2 (680 Ω) が GND へ — ここが **LO<sub>I</sub> (+45°)**。
+- **LO (W1、左)** は 14-1 の RC-CR 網で 2 本に分ける。高域側は C1 (470 pF) が直列で R2 (680 Ω) が GND へ — ここが **LO<sub>I</sub> (+45°)**。
   低域側は R1 (680 Ω) が直列で C2 (470 pF) が GND へ — ここが **LO<sub>Q</sub> (−45°)**。
   それぞれ C3・C4 (10 nF) を通して U1・U2 の PIN 6 へ入れる。498 kHz での 10 nF は 32 Ω で、網にはほとんど効かない
 - 図は RF と LO が左から入り、出力は各 IC の右に出る。SA612 は IN_A・IN_B・OSC_B が左の辺に上から並ぶので、
@@ -213,7 +213,7 @@ wires:
   - AD.2+ -- a26 purple
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/19-iq-mixer.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/breadboard/02-iq-mixer.svg)
 
 - U1 は 4〜7 列、U2 は 22〜25 列で溝をまたぐ (切り欠きを左、PIN 1 は左下)。どちらも下の列が PIN 1〜4、上の列が PIN 8〜5。
   胴にはピンの番号と名前が出る
@@ -285,7 +285,7 @@ cursors: [-5.02us, 0]
 measure: [vpp, freq, phase]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/19-iq-mixer-1.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/02-iq-mixer-1.svg)
 
 ```scope
 # オシロスコープの画面 (tommie-fence の scope フェンス)
@@ -298,7 +298,7 @@ cursors: [0, 5.02us]
 measure: [vpp, freq, phase]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/19-iq-mixer-2.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/02-iq-mixer-2.svg)
 
 - 図3 と図4 は同じ尺度 (50 mV/div・5 µs/div・CH1 の立ち上がりでトリガ) で、W2 だけを替えた
 - **図3 (上)**: CH2 (Q) は CH1 (I) より 5.02 µs 早く 0 V を上へ横切る。カーソル X1 を Q の、X2 を I の立ち上がりの 0 V に置くと
@@ -317,7 +317,7 @@ ch2: {wave: sine 49.8kHz 91.6mV phase 90deg, range: 50mV/div}
 xy: ch1 ch2
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/19-iq-mixer-3.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/02-iq-mixer-3.svg)
 
 - 横 I、縦 Q で描くと、振幅がそろって 90° 離れた 2 本は**円**になる (02-analog-discovery/02-oscilloscope/05-xy-lissajous.md の図3 と同じ)。
   網の振幅がずれると楕円に、90° からずれると斜めの楕円になるので、I/Q がそろっているかの点検に使える
@@ -337,22 +337,22 @@ xy: ch1 ch2
 | W2 = 547.8 kHz (上) の Q と I のずれ | Q が **5.02 µs 先** (Phase +90°、図3) |
 | W2 = 448.2 kHz (下) の Q と I のずれ | Q が **5.02 µs 後** (Phase −90°、図4) |
 | XY (図5) | 円。振幅比 1:1 (網の振幅が 498 kHz でそろうため) |
-| 網の出口の LO (各 PIN 6 の手前) | 0.354 Vpp、2 本の差は 90.0° (9-18 と同じ網) |
+| 網の出口の LO (各 PIN 6 の手前) | 0.354 Vpp、2 本の差は 90.0° (14-1 と同じ網) |
 | C11・C12 の低域の角 | 1/(2π × 3 kΩ × 470 pF) ≈ 113 kHz。IF は ×0.915、和の成分は ×0.11 |
 | 2 つのチャンネルのどちらか片方を逆に挿す | 波が 180° 返り、先と後が入れ替わって見える (上と下を取り違える) |
-| W1 を 300 kHz、W2 を 349.8 kHz にする (LO を網の f<sub>c</sub> から外す) | 網の振幅が 0.856 : 0.516 になり、XY は円から軸のそろった楕円になる。位相差は 90° のまま (9-18) |
+| W1 を 300 kHz、W2 を 349.8 kHz にする (LO を網の f<sub>c</sub> から外す) | 網の振幅が 0.856 : 0.516 になり、XY は円から軸のそろった楕円になる。位相差は 90° のまま (14-1) |
 | 片方のミキサーだけ (9-12) の Spectrum | 上でも下でも 49.8 kHz の線が同じ高さで 1 本。上下は分からない |
 
 ## LTspice での確かめ
 
-デッキは `sim/19-iq-mixer-lo.cir` (LO の網、AC 解析)、`sim/19-iq-mixer-c11.cir` (出力の C11、AC 解析)、`sim/19-iq-mixer.cir` (I/Q ミキサー全体、過渡解析)。
+デッキは `sim/02-iq-mixer-lo.cir` (LO の網、AC 解析)、`sim/02-iq-mixer-c11.cir` (出力の C11、AC 解析)、`sim/02-iq-mixer.cir` (I/Q ミキサー全体、過渡解析)。
 **SA612 は掛け算の模型で、実測ではない仮定**: 差動の IF の peak を 142 mV × (LO の peak ÷ 0.25 V) とし (9-12 の変換利得 17 dB の目安)、出力は 1.5 kΩ × 2、PIN 6 の入力は 10 kΩ と置いた。
 位相の先後と網・C11 の効きは回路で決まる値で、IF の大きさは模型の仮定による目安のままだ。
 
 | 確かめること | 本文の数字 | LTspice | 判定 |
 | --- | --- | --- | --- |
 | 網の出口の LO (498 kHz、無負荷) | 0.354 Vpp、差 90.0° | 0.3536 Vpp・0.3535 Vpp、90.0° | 合う |
-| 300 kHz・800 kHz の網の出口 (I : Q、W1 が 0.5 Vpp) | 300 kHz は 0.516 : 0.856 を 0.5 倍した 0.258 : 0.428、800 kHz は 0.849 : 0.528 を 0.5 倍した 0.425 : 0.264 (9-18)、差は 90° | 300 kHz は 0.258 : 0.428 Vpp、800 kHz は 0.4245 : 0.2642 Vpp、どちらも 90.0° | 合う |
+| 300 kHz・800 kHz の網の出口 (I : Q、W1 が 0.5 Vpp) | 300 kHz は 0.516 : 0.856 を 0.5 倍した 0.258 : 0.428、800 kHz は 0.849 : 0.528 を 0.5 倍した 0.425 : 0.264 (14-1)、差は 90° | 300 kHz は 0.258 : 0.428 Vpp、800 kHz は 0.4245 : 0.2642 Vpp、どちらも 90.0° | 合う |
 | 10 kΩ で受けたときの網の出口 | 0.707 → 0.683 | 0.3417 Vpp (÷ 0.5 Vpp = 0.683)、2 本とも同じ、90.0° | 合う |
 | C11 の低域の角 (3 kΩ・470 pF) | 113 kHz | 113 kHz で 0.707 倍 | 合う |
 | 49.8 kHz の IF が C11 で | 0.915 倍、位相 −24° | 0.915 倍、−23.8° | 合う |
@@ -363,7 +363,7 @@ xy: ch1 ch2
 
 - IF の大きさの差 (183 → 177.6 mVpp、3 %) は、本文の見積りが LO の網の出口を 0.707 倍としたのに対し、LTspice は PIN 6 の 10 kΩ の負荷で 0.683 倍に下がった分を含むため。
   PIN 6 の入力抵抗は実物で確かめていないので、本文の数字は目安のまま直していない。位相の関係は負荷に左右されない
-- 本文の「網の 90° は 300 k・498 k・800 kHz とも 90.0°」は、`sim/18-rc-cr-quadrature.cir` と上の 2 つの AC 解析で再確認した
+- 本文の「網の 90° は 300 k・498 k・800 kHz とも 90.0°」は、`sim/01-rc-cr-quadrature.cir` と上の 2 つの AC 解析で再確認した
 
 ## 出典
 

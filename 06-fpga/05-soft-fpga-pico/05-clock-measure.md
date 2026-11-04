@@ -3,7 +3,7 @@ book: fpga
 chapter: 5
 id: 5-5
 title: Soft-FPGA のクロックを測る — 1 クロックに何 µs かかるか
-tier: 50
+tier: 100
 source: 自作
 board: BB
 device: PICO

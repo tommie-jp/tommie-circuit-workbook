@@ -6,7 +6,7 @@
  *   node scripts/toc.mjs          README を書き換える
  *   node scripts/toc.mjs --check  書き換えが要るなら 1 で終わる (CI)
  *
- * 必須・入門・中級は計画の数で、**入れ子で数える** — 入門は必須を含み、中級は全部。
+ * 必須・入門・中級・発展は計画の数で、**入れ子で数える** — 入門は必須を含み、中級は入門を含み、発展は全部。
  * 「済」は書いた題の数。書いた題は link になり、まだの題は字だけ。
  */
 
@@ -23,12 +23,12 @@ const END = '<!-- toc:end -->';
 /** front matter の欄 → 目次の表の見出し。 */
 const COLUMN_NAMES = { era: '印', board: '基板', device: '機種' };
 
-/** 段の名前。`scale: large` の題は「中級 (大規模)」(知識は中級で、回路の規模が上限を超える)。 */
+/** 段の名前。`scale: large` の題は「中級 (大規模)」など (知識はその段で、回路の規模が上限を超える)。 */
 const tierName = (entry) => (entry.scale === 'large' ? `${TIER_NAMES[entry.tier]} (大規模)` : TIER_NAMES[entry.tier]);
 
 const WRITTEN = '済';
 
-/** 段ごとの数 (入れ子) と書いた数。`[必須, 入門, 中級, 済]`。 */
+/** 段ごとの数 (入れ子) と書いた数。`[必須, 入門, 中級, 発展, 済]`。 */
 function counts(rows) {
   return [
     ...TIERS.map((limit) => rows.filter((row) => row.tier <= limit).length),
@@ -90,7 +90,7 @@ export function bookToc(book, rows) {
     ].join('\n'));
 
   return [
-    `必須・入門・中級は計画の数で、入れ子で数える (入門は必須を含み、中級は全部)。
+    `必須・入門・中級・発展は計画の数で、入れ子で数える (入門は必須を含み、中級は入門を含み、発展は全部)。
 ${WRITTEN} は書き終えた題の数。書き終えた題は link になっている。`,
     '',
     overview.join('\n'),

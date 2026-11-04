@@ -3,7 +3,7 @@ book: etc
 chapter: 4
 id: 4-2
 title: ミキサーの特性をシミュレーションで見る — 変換利得・インピーダンス・FFT
-tier: 200
+tier: 300
 source: 自作
 board: —
 ---

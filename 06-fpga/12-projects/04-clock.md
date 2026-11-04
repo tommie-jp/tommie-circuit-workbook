@@ -3,7 +3,7 @@ book: fpga
 chapter: 12
 id: 12-4
 title: 時計 — 27 MHz を数えて時分秒を 4 桁の 7 セグに出し、時報で合わせる
-tier: 200
+tier: 300
 source: 自作
 board: BB
 device: FPGA

@@ -145,10 +145,10 @@
 - { id: 9-1, tier: 50, board: BB, title: LC 同調 — 共振を LED で見る }
 - { id: 9-2, tier: 50, board: BB, era: 古, title: ゲルマラジオ }
 - { id: 9-3, tier: 50, board: BB, era: 古, title: 1 石ラジオ — トランジスタの高周波増幅とダイオード検波 }
-- { id: 9-4, tier: 50, board: CB, era: 古, title: FM 送信機 (1 石) }
+- { id: 9-4, tier: 100, board: CB, era: 古, title: FM 送信機 (1 石) }
 - { id: 9-5, tier: 100, board: BB, era: 古, title: 1 石レフレックスラジオ }
 - { id: 9-6, tier: 100, board: CB, era: 古, title: 超再生 FM ラジオ }
-- { id: 9-7, tier: 100, board: BB, title: AM 変調 — 555 の搬送波を音声で振る }
+- { id: 9-7, tier: 50, board: BB, title: AM 変調 — 555 の搬送波を音声で振る }
 - { id: 9-8, tier: 100, board: BB, title: ラジオ IC (LMF501T / TA7642) }
 - { id: 9-9, tier: 200, board: BB, era: 古, title: 2 石ラジオ — 高周波増幅 + 低周波増幅 }
 - { id: 9-10, tier: 200, board: BB, era: 古, title: スーパーヘテロダイン (6 石、IF 455 kHz) }
@@ -157,15 +157,8 @@
 - { id: 9-13, tier: 200, board: BB, era: 古, title: FM 復調 — スロープ検波 }
 - { id: 9-14, tier: 200, board: [ CB, PF ], era: 古, title: 27 MHz の送受信 (トイラジコン) }
 - { id: 9-15, tier: 200, board: CB, title: アンテナ — ダイポールとループ、SWR }
-- { id: 9-16, tier: 200, board: BB, era: 今, title: DDS モジュール — Pico 2 で 7 MHz を出して tinySA で見る }
-- { id: 9-17, tier: 200, board: BB, era: 今, title: 2.4 GHz モジュール (nRF24) と Pico 2 }
-- { id: 9-18, tier: 100, board: BB, title: RC-CR で 90° を作る — 1 本の正弦から I と Q }
-- { id: 9-19, tier: 200, board: BB, title: I/Q ミキサー — RF が LO の上か下かを知る }
-- { id: 9-20, tier: 200, board: BB, era: 古, title: イメージ除去 — 位相法 (Hartley) }
-- { id: 9-21, tier: 200, board: BB, era: 古, title: SSB を作る — 位相法の送信側 }
-- { id: 9-22, tier: 200, board: BB, era: 今, title: Tayloe 検波器 — 74HC4052 で I/Q を音にする (直接変換) }
-- { id: 9-23, tier: 200, board: BB, era: 今, title: I/Q をマイコンで読む — Pico 2 の ADC で位相と大きさを計算する }
-- { id: 9-24, tier: 200, board: BB, era: 今, title: IQ 中波ラジオ — バーアンテナと 74HC4052 と Pico 2 で NHK を聞く }
+- { id: 9-16, tier: 300, board: BB, era: 今, title: DDS モジュール — Pico 2 で 7 MHz を出して tinySA で見る }
+- { id: 9-17, tier: 300, board: BB, era: 今, title: 2.4 GHz モジュール (nRF24) と Pico 2 }
 - { id: 9-25, tier: 200, board: BB, title: AGC — 強い局で音量が跳ねないように利得を自動で下げる }
 - { id: 9-26, tier: 200, board: PF, title: 送信のファイナルを並列にする — エミッタバラスト抵抗で電流をそろえる (2N3866) }
 - { id: 10-1, tier: 50, board: BB, title: ゲートの基本 — スイッチと LED で AND / OR / NOT }
@@ -218,3 +211,10 @@
 - { id: 13-6, tier: 200, title: 出力の内部抵抗と負荷変動 }
 - { id: 13-7, tier: 200, title: 電流制限で回路を守る — 短絡・逆接続・起動時の突入電流 }
 - { id: 13-8, tier: 200, title: 定電流で充電する — NiMH と、やってはいけない Li-ion }
+- { id: 14-1, tier: 100, board: BB, title: RC-CR で 90° を作る — 1 本の正弦から I と Q }
+- { id: 14-2, tier: 200, board: BB, title: I/Q ミキサー — RF が LO の上か下かを知る }
+- { id: 14-3, tier: 200, board: BB, era: 古, title: イメージ除去 — 位相法 (Hartley) }
+- { id: 14-4, tier: 200, board: BB, era: 古, title: SSB を作る — 位相法の送信側 }
+- { id: 14-5, tier: 200, board: BB, era: 今, title: Tayloe 検波器 — 74HC4052 で I/Q を音にする (直接変換) }
+- { id: 14-6, tier: 300, board: BB, era: 今, title: I/Q をマイコンで読む — Pico 2 の ADC で位相と大きさを計算する }
+- { id: 14-7, tier: 300, board: BB, era: 今, title: IQ 中波ラジオ — バーアンテナと 74HC4052 と Pico 2 で NHK を聞く }

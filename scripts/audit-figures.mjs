@@ -14,6 +14,7 @@
  * 6. LTspice での確かめの節: 回路図 (circuit) のある題に `## LTspice での確かめ` があるか。
  *    HDL の冊 (`book: fpga`) は、Verilog のある題に `## シミュレーションでの確かめ` (iverilog・Verilator・Yosys) があるかを見る。見出しに「対象外」とあれば算術で確かめた題として別に数える。無い題は `--verbose` で一覧する。
  * 7. プログラムの確かめの節: Pico のプログラム (C・MicroPython) のある題に `## プログラムでの確かめ` があるか (docs/133)。
+ * 8. 1 題の長さ: 本文のフェンスの外の字 (空白を除く) が段の上限 (`LENGTH_LIMITS`、README の「1 題の長さ」) を超えていないか。
  */
 import { extractPrograms } from './pico-extract.mjs';
 import { readEntries } from './collect.mjs';
@@ -94,6 +95,24 @@ export function auditInstrument(fence, block) {
   return [];
 }
 
+/** 段ごとの本文の字数の上限 (README の「1 題の長さ」)。必須・入門 5,000 字、中級 8,000 字、発展 12,000 字。 */
+export const LENGTH_LIMITS = { 50: 5000, 100: 5000, 200: 8000, 300: 12000 };
+
+/** 本文の字数。front matter とフェンス (``` で囲んだ所) と画像の行を除き、空白を数えない。 */
+export function proseLength(text) {
+  const body = text.replace(/^---\n[\s\S]*?\n---\n/, '');
+  const prose = body.replace(/^```[^\n]*\n[\s\S]*?^```\s*$/gm, '').replace(/^!\[.*$/gm, '');
+  return prose.replace(/\s/g, '').length;
+}
+
+/** 上限を超えていれば `{ length, limit }`、収まっていれば null。段の分からない題は見ない。 */
+export function lengthOver(text, tier) {
+  const limit = LENGTH_LIMITS[tier];
+  if (limit === undefined) return null;
+  const length = proseLength(text);
+  return length > limit ? { length, limit } : null;
+}
+
 /** 回路図のある題の LTspice 節の状態: 'checked' | 'excluded' | 'missing'。回路図が無ければ null。 */
 export function ltspiceStatus(text) {
   const isHdl = /^book:\s*fpga\s*$/m.test(text);
@@ -131,6 +150,11 @@ function main(args) {
     if (pstatus) {
       program[pstatus] += 1;
       if (verbose && pstatus === 'missing') console.log(`${read.path}: [プログラム未確認]`);
+    }
+    const over = read.entry ? lengthOver(read.text, read.entry.tier) : null;
+    if (over) {
+      tally.set('題の長さ', (tally.get('題の長さ') ?? 0) + 1);
+      if (verbose) console.log(`${read.path}: [題の長さ] 本文 ${over.length} 字 (上限 ${over.limit} 字)。題を分ける`);
     }
     const lines = read.text.split('\n');
     const { blocks } = fencesIn(read.text);

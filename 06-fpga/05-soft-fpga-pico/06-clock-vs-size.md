@@ -3,7 +3,7 @@ book: fpga
 chapter: 5
 id: 5-6
 title: 回路の規模でクロックは変わる — カウンタと TD4 で比べる
-tier: 50
+tier: 100
 source: 自作
 board: BB
 device: PICO

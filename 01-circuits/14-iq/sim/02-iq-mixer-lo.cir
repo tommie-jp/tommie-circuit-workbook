@@ -1,4 +1,4 @@
-* 9-19 LO の RC-CR 網 (AC) と、出力の C11 (470 pF) の低域
+* 14-2 LO の RC-CR 網 (AC) と、出力の C11 (470 pF) の低域
 * W1 0.25 V peak (0.5 Vpp)。step: 0 = 網の出口が無負荷 / 1 = 10 kohm で受ける / 2 = C3 (10 nF) 越しに 10 kohm で受ける
 .param case=0
 .step param case 0 2 1

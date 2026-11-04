@@ -3,7 +3,7 @@ book: etc
 chapter: 1
 id: 1-4
 title: CPU もどき — PC と ROM に ACC と加算器を足して足し算する
-tier: 200
+tier: 300
 source: 自作
 board: BB
 ---

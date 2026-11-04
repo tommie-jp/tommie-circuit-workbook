@@ -3,7 +3,7 @@ book: etc
 chapter: 2
 id: 2-5
 title: 発振と分周 — 32.768 kHz の水晶を 8 Hz のクロックと 1 秒の TICK にする
-tier: 200
+tier: 300
 source: 自作
 board: [BB, PF]
 ---

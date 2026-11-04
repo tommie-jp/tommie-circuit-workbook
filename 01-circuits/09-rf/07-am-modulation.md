@@ -3,7 +3,7 @@ book: circuits
 chapter: 9
 id: 9-7
 title: AM 変調 — 555 の搬送波を音声で振る
-tier: 100
+tier: 50
 source: 自作
 board: BB
 ---

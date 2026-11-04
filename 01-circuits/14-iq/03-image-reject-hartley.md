@@ -1,7 +1,7 @@
 ---
 book: circuits
-chapter: 9
-id: 9-20
+chapter: 14
+id: 14-3
 title: イメージ除去 — 位相法 (Hartley)
 tier: 200
 board: BB
@@ -9,27 +9,27 @@ source: 自作
 era: 古
 ---
 
-# 9-20 イメージ除去 — 位相法 (Hartley)
+# 14-3 イメージ除去 — 位相法 (Hartley)
 
 9-10 のスーパーヘテロダインは、受けた電波 (RF) と局部発振 (LO) を混ぜて、差の中間周波数 (IF) を取り出していた。
 LO が 498 kHz、IF が 49.8 kHz なら、**LO の上の 547.8 kHz も、LO の下の 448.2 kHz も、同じ 49.8 kHz になる**。
 片方が受けたい局で、もう片方は**イメージ** (影の局) と呼ぶ。ミキサーが 1 つだと、出てきた 49.8 kHz がどちらから来たかは区別できない (9-12)。
 9-10 は、ミキサーの前の同調回路で片方を落としていた。
 
-9-19 では、LO を 90° ずらしたミキサーをもう 1 つ足した (I/Q ミキサー)。すると 2 つの IF の**位相の先後**で、RF が LO の上か下かが分かった。
+14-2 では、LO を 90° ずらしたミキサーをもう 1 つ足した (I/Q ミキサー)。すると 2 つの IF の**位相の先後**で、RF が LO の上か下かが分かった。
 **上か下かが分かれば、片方だけを消せる**。I と Q の IF をもう一度 90° ずらしてから足すと、片方の側は同じ向きで足し合わさり、
 反対側は逆向きで打ち消し合う。これが**位相法**のイメージ除去で、Hartley が 1920 年代に考えた形だ。
 同調回路を使わず、位相だけでイメージを消す。この題では、LO の下 (448.2 kHz) を残し、上 (547.8 kHz) を消す。
 
-- **前半は 9-19 と同じ**。W1 (LO、498 kHz) を 9-18 の RC-CR 網 (680 Ω・470 pF、fc = 497.9 kHz) で 2 つに分ける。
+- **前半は 14-2 と同じ**。W1 (LO、498 kHz) を 14-1 の RC-CR 網 (680 Ω・470 pF、fc = 497.9 kHz) で 2 つに分ける。
   高域側 (+45°) で U1 を動かした出力が **I**、低域側 (−45°) で U2 を動かした出力が **Q**。RF (W2) は U1 と U2 の両方に入れる
-- 9-19 と違うのは、出力を**片側 (PIN 4) だけ**取ること。PIN 4 には 470 pF を GND へ付けて、1 MHz 付近の和の成分を減らす
+- 14-2 と違うのは、出力を**片側 (PIN 4) だけ**取ること。PIN 4 には 470 pF を GND へ付けて、1 MHz 付近の和の成分を減らす
   (内部の 1.5 kΩ と組んで fc ≈ 226 kHz。49.8 kHz では 0.98 倍で、I と Q で同じなので位相の差は変わらない)
 - I と Q は MCP6002 のボルテージフォロア (U3) で受ける。次の網の負荷で SA612 の出力が変わらないようにするためだ。
   MCP6002 の GBW は約 1 MHz なので、498 kHz の LO を通す所には使わない。ここを通るのは主に 49.8 kHz の IF だ
 - 1 µF で直流を切ってから、**IF の 90° 網** (R 6.8 kΩ・C 470 pF、fc = 1/(2π·6.8 kΩ·470 pF) = 49.80 kHz) に通す。
   **I は低域側** (6.8 kΩ が直列、470 pF が下) で −45°、**Q は高域側** (470 pF が直列、6.8 kΩ が下) で +45°。
-  9-18 と同じく、2 本の位相差はどの周波数でも 90° で、振幅がそろうのは fc の 49.8 kHz だけ
+  14-1 と同じく、2 本の位相差はどの周波数でも 90° で、振幅がそろうのは fc の 49.8 kHz だけ
 - 最後に U4B の反転加算で足す (R7・R8 + VR1・R9 がどれも約 100 kΩ で、出力 = −(I 側 + Q 側))。
   U4A は 10 kΩ・10 kΩ の分圧をバッファした **VREF = 2.5 V** を作る。5 V の単電源で交流を扱うための仮の GND で (4-11 の形)、
   加算の + 入力と、Q 側の網の 6.8 kΩ の下の端をここに返す
@@ -37,7 +37,7 @@ LO が 498 kHz、IF が 49.8 kHz なら、**LO の上の 547.8 kHz も、LO の�
 ## 下だけが残るわけ
 
 I の LO を高域側 (+45°)、Q の LO を低域側 (−45°) にしたので、I の LO は Q の LO より 90° 進んでいる。
-掛け算の差の成分は、RF が LO の上なら RF − LO の向き、下なら LO − RF の向きで回るので、9-19 で見たとおり
+掛け算の差の成分は、RF が LO の上なら RF − LO の向き、下なら LO − RF の向きで回るので、14-2 で見たとおり
 **RF が上 (547.8 kHz) なら Q が I より 90° 進み、下 (448.2 kHz) なら Q が 90° 遅れる**。
 
 - 下 (448.2 kHz): Q = I を 90° 遅らせた波。I は低域側で −45°、Q は高域側で +45° 進むので、Q は −90° + 45° = **−45°**。
@@ -193,15 +193,15 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/20-image-reject-hartley.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/circuit/03-image-reject-hartley.svg)
 
 図1 の `+5V` は AD3 の Supplies の V+ (5 V)。W1 と W2 も AD3 の Wavegen。
 
-- **左の中ほどが LO の 90° 網** (9-18 と同じ)。W1 から C2 (470 pF) → R2 (680 Ω) が高域側で LO_I (+45°)、R1 (680 Ω) → C1 (470 pF) が低域側で LO_Q (−45°)。
+- **左の中ほどが LO の 90° 網** (14-1 と同じ)。W1 から C2 (470 pF) → R2 (680 Ω) が高域側で LO_I (+45°)、R1 (680 Ω) → C1 (470 pF) が低域側で LO_Q (−45°)。
   それぞれ C3・C4 (10 nF) を通して U1・U2 の PIN 6 (発振のトランジスタのベース) へ。W1 は 0.5 Vpp (振幅 0.25 V) で、
   網の出口は 0.354 Vpp。SA612 が外からの LO に求める 200 mVpp 以上に足りる
 - **RF (W2)** は C5・C6 (10 nF) を通して U1・U2 の PIN 1 へ。PIN 2 は C7・C8 (10 nF) で交流だけ GND に落とす (9-12 と同じ片側入力)
-- 9-19 と同じく、RF は各 IC の上から、LO は IC の下から回して入れる。U2 へ行く LO_Q の線は、U2 へ行く RF の線と 1 か所で交わる
+- 14-2 と同じく、RF は各 IC の上から、LO は IC の下から回して入れる。U2 へ行く LO_Q の線は、U2 へ行く RF の線と 1 か所で交わる
   (黒丸の無い交差で、つながっていない)
 - **出力は PIN 4 だけ**。PIN 5 は使わない (開けておく)。PIN 7 も開けておく。PIN 4 の直流は 4 V ほどで、MCP6002 はレール to レールの入力なのでそのまま受けられる
 - U3A・U3B (MCP6002 の 2 回路) はフォロア。C13・C15 (1 µF) で直流を切り、IF の網へ
@@ -301,7 +301,7 @@ wires:
   - SC.2- -- j54 white
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/20-image-reject-hartley.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/breadboard/03-image-reject-hartley.svg)
 
 - ブレッドボードは full (63 列)。IC が 4 個あるので half には収まらない。上の 2 本のレールが +5 V (外側の赤) と GND (内側の青)。
   下の青い GND レールは 63 列の黒い線で上の GND とつなぐ。下の赤いレールは使わない。full のレールが途中で切れている製品なら、切れ目を線で渡す
@@ -374,7 +374,7 @@ Analog Discovery 3 だけを使う。LO と RF は 1 MHz より低いので W1�
 ## 計器の画面
 
 数は計算値 (目安)。PIN 4 の IF は、9-12 の変換利得 17 dB (7.08 倍、片側の出力・1 側波あたり、データシートの代表値) と、
-LO の網で LO が 0.707 倍になる分から、10 mV × 7.08 × 0.707 = **50.1 mV** (peak) と見込む (9-19 と同じ見積もり)。
+LO の網で LO が 0.707 倍になる分から、10 mV × 7.08 × 0.707 = **50.1 mV** (peak) と見込む (14-2 と同じ見積もり)。
 PIN 4 の 470 pF で 0.98 倍になり、**I (CH1) は 48.9 mV** (peak)。下 (448.2 kHz) のときの出力は、I 側と Q 側がそれぞれ 0.683 倍
 (網の 0.707 倍が加算の 100 kΩ の負荷でわずかに下がる) で同じ向きに足し合わさり、**48.9 mV × 1.37 = 66.9 mV** (peak)。
 上 (547.8 kHz) のときは ±5 % の部品で 30 dB 下がったとして **2.1 mV** で描いた。
@@ -389,7 +389,7 @@ ch2: {wave: sine 49.8kHz 66.9mV phase 136.9deg, range: 20mV/div}
 measure: [vpp, freq]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/20-image-reject-hartley-1.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/03-image-reject-hartley-1.svg)
 
 ```scope
 # オシロスコープの画面 (tommie-fence の scope フェンス)
@@ -401,7 +401,7 @@ ch2: {wave: sine 49.8kHz 2.1mV, range: 20mV/div}
 measure: [vpp, freq]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/20-image-reject-hartley-2.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/03-image-reject-hartley-2.svg)
 
 - 図3 と図4 は同じ尺度 (どちらも 20 mV/div・5 µs/div)。CH1 の I は W2 を切り替えても同じ 97.8 mVpp で、出力 (CH2) だけが 134 mVpp から 4.2 mVpp に下がる
 - 図3 の出力は I より 136.9° 進んで見える。I 側の網の −43.1° と、反転加算の 180° を足した値 (理想の演算増幅器の計算値)。MCP6002 の GBW 1 MHz を入れた LTspice では約 8° 遅れて 128.6° になる
@@ -425,7 +425,7 @@ signal:
 markers: [49.8k, 498k, 946.2k]
 ```
 
-![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/spectrum/20-image-reject-hartley-1.svg)
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/spectrum/03-image-reject-hartley-1.svg)
 
 ```spectrum
 # スペクトラムアナライザの画面 (tommie-fence の spectrum フェンス)
@@ -444,7 +444,7 @@ signal:
 markers: [49.8k, 498k, 1045.8k]
 ```
 
-![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/spectrum/20-image-reject-hartley-2.svg)
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/spectrum/03-image-reject-hartley-2.svg)
 
 - 図5 と図6 は同じ尺度 (Top 3 dBm、20 dB/div) で並べた。10 dB/div だと図6 の一番高い線が上端から 4 目盛下に潰れるので、
   20 dB/div にした。図5 と高さを見比べると、49.8 kHz の線が約 1.5 目盛 (30 dB) 下がっている
@@ -473,7 +473,7 @@ markers: [49.8k, 498k, 1045.8k]
 
 ## LTspice での確かめ
 
-デッキは `sim/20-image-reject-hartley.cir` (過渡解析。LO の網・SA612 の出力・MCP6002・IF の網・反転加算まで回路図どおり)。
+デッキは `sim/03-image-reject-hartley.cir` (過渡解析。LO の網・SA612 の出力・MCP6002・IF の網・反転加算まで回路図どおり)。
 **SA612 は掛け算の模型で、実測ではない仮定**: PIN 4 の IF の peak を 70.8 mV × (LO の peak ÷ 0.25 V) (RF 10 mV のとき。9-12 の変換利得 17 dB の目安)、出力は 1.5 kΩ、PIN 6 の入力は 10 kΩ と置いた。
 **MCP6002 は GBW 1 MHz の 1 次の模型** (開ループ利得 100 k、極 10 Hz) で、これも実測ではない。
 LTspice は `reltol = 1e-6` で走らせた (既定の 1e-3 だと、深い打ち消しの数字は数値の誤差で 70 dB 付近に頭打ちになる)。

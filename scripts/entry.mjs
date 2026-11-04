@@ -166,7 +166,7 @@ export function isDate(value) {
 
 /**
  * 印 (board / tools / era / device / scale) の値。計画 (`plan.mjs`) も同じ決まりで見る。
- * `scale: large` は中級の題で、回路の規模が上限を超える物 (知識は中級。目次に「中級 (大規模)」と出る)。
+ * `scale: large` は中級・発展の題で、回路の規模が上限を超える物 (目次に「中級 (大規模)」「発展 (大規模)」と出る)。
  */
 export function checkMarks(data, bookSlug) {
   const errors = [];
@@ -180,8 +180,8 @@ export function checkMarks(data, bookSlug) {
     errors.push(`era は回路の冊だけに書き、${[...ERAS].join(' / ')} のどれかです`);
   }
 
-  if (data.scale !== undefined && (data.scale !== 'large' || data.tier !== 200)) {
-    errors.push('scale は中級 (tier: 200) の題だけに large と書きます');
+  if (data.scale !== undefined && (data.scale !== 'large' || data.tier < 200)) {
+    errors.push('scale は中級・発展 (tier: 200 / 300) の題だけに large と書きます');
   }
 
   const device = DEVICES[bookSlug];

@@ -3,7 +3,7 @@ book: fpga
 chapter: 12
 id: 12-2
 title: リバーシを UART で PC と対戦させる
-tier: 200
+tier: 300
 source: 自作。プロトコルは tommie-jp/reversi-uart-protocol v0.2 (CC BY 4.0)。Pico SDK でのビルドは tommie-jp/Soft-FPGA-Reversi (MIT) に倣った
 board: BB
 device: PICO

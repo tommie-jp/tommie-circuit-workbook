@@ -21,7 +21,7 @@ AD2 と NanoVNA-H4 / V2 は歴史的な機種 (比較のために残す)。一�
 - 題を足す手順と、段ごとの周波数の絞り (必須・入門は 3 MHz 以下) は `.claude/skills/workbook-writing/SKILL.md`
 - **英語版は `en/` に置く** (日本語が原本で、英語は訳。04-denken は訳さない)。決めと用語は `en/GLOSSARY.md`、
   訳し方と検査は workbook-writing skill の 4 と `npm run en:check`。英語だけを直さない
-- 各冊の 200 題の計画は `<NN-冊>/plan.yaml` (1 行 1 題)。題を書くときは計画の `id` `title`
+- 各冊の題の計画は `<NN-冊>/plan.yaml` (1 行 1 題。段は必須 50 ⊂ 入門 約 100 ⊂ 中級 約 200 ⊂ 発展、README の「冊」)。題を書くときは計画の `id` `title`
   `tier` を front matter に写し、題を書き換えたら計画も直す (ずれは `check` が言う)
 - 各冊の `README.md` の `<!-- toc:start -->` 〜 `<!-- toc:end -->` の間は
   `npm run toc` が `plan.yaml` と front matter から書く。**手で直さない**

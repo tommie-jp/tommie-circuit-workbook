@@ -13,10 +13,14 @@ function numbered(number, slug) {
   return `${String(number).padStart(2, '0')}-${slug}`;
 }
 
-export const TIERS = /** @type {const} */ ([50, 100, 200]);
+/**
+ * 段。入れ子で、必須 ⊂ 入門 ⊂ 中級 ⊂ 発展。発展 (300) は、中級の回路の知識に加えて
+ * プログラムの道具一式 (Pico SDK・FPGA の合成・複数の計器の組み合わせ) が前提になる題と、番外の工作。
+ */
+export const TIERS = /** @type {const} */ ([50, 100, 200, 300]);
 
 /** 段の呼び名。目次と本文で同じ字を使う。 */
-export const TIER_NAMES = { 50: '必須', 100: '入門', 200: '中級' };
+export const TIER_NAMES = { 50: '必須', 100: '入門', 200: '中級', 300: '発展' };
 
 export const BOOKS = [
   {
@@ -40,6 +44,7 @@ export const BOOKS = [
       [11, 'microcontrollers', 'マイコンと現代の定番'],
       [12, 'projects', '実用回路 — 作品'],
       [13, 'bench-supply', '電源装置 — 定電圧・定電流の使い方'],
+      [14, 'iq', 'I/Q と直接変換 — 90° の 2 本で受ける'],
     ],
   },
   {
@@ -61,13 +66,12 @@ export const BOOKS = [
       [9, 'amplifiers', 'アンプの特性'],
       [10, 'power-noise', '電源と雑音'],
       [11, 'automation', '自動化'],
-      [12, 'mixed-signal', 'デジタルと混合信号'],
     ],
   },
   {
     number: 3,
     slug: 'nanovna',
-    title: 'NanoVNA の教科書',
+    title: 'NanoVNA と tinySA の教科書',
     summary: 'LiteVNA64 で 50 kHz〜6.3 GHz を測る (NanoVNA-H4 / V2 は比較用)。治具・部品・フィルタ・アンテナ・GHz 帯。第 11 章でスペクトラムアナライザ (tinySA など)',
     columns: ['device', 'board'],
     chapters: [

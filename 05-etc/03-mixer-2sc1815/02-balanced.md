@@ -3,7 +3,7 @@ book: etc
 chapter: 3
 id: 3-2
 title: 差動対のミキサー — 2SC1815 の差動対とカレントミラーで RF を打ち消す
-tier: 200
+tier: 300
 source: 自作
 board: BB
 ---

@@ -3,7 +3,7 @@ book: fpga
 chapter: 11
 id: 11-8
 title: 6502 で Integer BASIC を動かす
-tier: 200
+tier: 300
 source: 自作 (6502 の RTL は 11-7 と同じ cpu_65c02.v。Apple-1 の Integer BASIC は Steve Wozniak が 1976 年に書いた 4 KB のインタプリタで、像は soft-fpga の harness.cpp にある物を使い、この題には写さない)
 board: —
 device: WEB

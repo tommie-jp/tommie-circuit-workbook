@@ -3,7 +3,7 @@ book: circuits
 chapter: 9
 id: 9-4
 title: FM 送信機 (1 石)
-tier: 50
+tier: 100
 source: 自作
 board: CB
 era: 古

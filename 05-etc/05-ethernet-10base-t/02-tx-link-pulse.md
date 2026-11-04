@@ -3,7 +3,7 @@ book: etc
 chapter: 5
 id: 5-2
 title: 送信 — Raspberry Pi Pico 2 の PIO と抵抗だけでリンクパルスとフレームを送り、ルータにリンクさせる
-tier: 200
+tier: 300
 source: 回路と PIO の方式は kingyoPiyo の Pico-10BASE-T (MIT)。プログラムは書き直した
 board: PF
 ---

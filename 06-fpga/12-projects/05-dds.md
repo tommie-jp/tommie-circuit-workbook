@@ -3,7 +3,7 @@ book: fpga
 chapter: 12
 id: 12-5
 title: DDS の信号発生器
-tier: 200
+tier: 300
 source: 自作
 board: BB
 device: FPGA

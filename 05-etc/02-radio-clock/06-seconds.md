@@ -3,7 +3,7 @@ book: etc
 chapter: 2
 id: 2-6
 title: 秒のカウンタ — 74HC163 を 2 個つないで 00〜59 を数え、分へ桁上げを出す
-tier: 200
+tier: 300
 source: 自作
 board: BB
 ---

@@ -3,7 +3,7 @@ book: circuits
 chapter: 9
 id: 9-17
 title: 2.4 GHz モジュール (nRF24) と Pico 2
-tier: 200
+tier: 300
 source: 自作
 era: 今
 board: BB

@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import { parse } from 'yaml';
+import { TIERS } from './books.mjs';
 
 const REQUIRED = ['book', 'chapter', 'id', 'title', 'tier', 'source'];
 
@@ -32,8 +33,8 @@ export function validateFrontMatter(data) {
     errors.push('title は空にできません');
   }
 
-  if (![50, 100, 200].includes(data.tier)) {
-    errors.push('tier は 50 / 100 / 200 のどれかにしてください');
+  if (!TIERS.includes(data.tier)) {
+    errors.push(`tier は ${TIERS.join(' / ')} のどれかにしてください`);
   }
 
   if (typeof data.source !== 'string' || data.source.trim() === '') {

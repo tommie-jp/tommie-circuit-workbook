@@ -3,7 +3,7 @@ book: fpga
 chapter: 12
 id: 12-6
 title: 小さいロジックアナライザを作る
-tier: 200
+tier: 300
 source: 自作
 board: BB
 device: FPGA

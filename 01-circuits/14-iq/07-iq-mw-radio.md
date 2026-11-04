@@ -1,24 +1,24 @@
 ---
 book: circuits
-chapter: 9
-id: 9-24
+chapter: 14
+id: 14-7
 title: IQ 中波ラジオ — バーアンテナと 74HC4052 と Pico 2 で NHK を聞く
-tier: 200
+tier: 300
 source: 自作
 board: BB
 era: 今
 ---
 
-# 9-24 IQ 中波ラジオ — バーアンテナと 74HC4052 と Pico 2 で NHK を聞く
+# 14-7 IQ 中波ラジオ — バーアンテナと 74HC4052 と Pico 2 で NHK を聞く
 
-第 9 章の IQ の題の仕上げ。9-22 の Tayloe 検波器と 9-23 の Pico 2 の計算をつなぎ、バーアンテナを付けて
+第 14 章の IQ の題の仕上げ。14-5 の Tayloe 検波器と 14-6 の Pico 2 の計算をつなぎ、バーアンテナを付けて
 **中波の放送 (531〜1602 kHz、9 kHz おき) を聞く**。IQ の題の中で、本物の電波を受けるのはこの題だけだ。
 受けるだけで、電波は出さない。
 
 信号の道は次のとおり。
 
 - **バーアンテナ + ポリバリコン** (9-10 の T1 と 9-2〜9-5 のポリバリコン) で局のあたりに同調し、リンク巻線から取り出す
-- **74HC4052 の Tayloe 検波器** (9-22 と同じ形) で、LO と同じ周波数まで一気に下ろす。出てくる I と Q は音声帯の信号
+- **74HC4052 の Tayloe 検波器** (14-5 と同じ形) で、LO と同じ周波数まで一気に下ろす。出てくる I と Q は音声帯の信号
 - **MCP6002 の増幅** (I と Q のそれぞれ 10 倍 × 10 倍) で、Pico 2 の ADC が読める大きさにする
 - **Pico 2** が LO を作り (PIO)、I と Q を読み (ADC)、計算で AM を復調し、PWM で音にする
 - **LM386** (5 V) でスピーカーを鳴らす
@@ -34,9 +34,9 @@ era: 今
 
 Tayloe 検波器は、74HC4052 の 4 つの出口 A0〜A3 を LO の 1 周期に 1 回ずつ順に開く。選ぶのは S1・S0 の 2 本で、
 **(S1, S0) を 00 → 01 → 11 → 10 (Gray の順) で回すと、出口は A0 → A1 → A3 → A2 の順に開く** (チャネル = 2·S1 + S0)。
-A0・A1・A3・A2 が 0°・90°・180°・270° なので、**I = A0 − A3、Q = A1 − A2** になる。番号の順 (A0 → A1 → A2 → A3) で組むと I と Q にならない。9-22 と同じ組だ。
+A0・A1・A3・A2 が 0°・90°・180°・270° なので、**I = A0 − A3、Q = A1 − A2** になる。番号の順 (A0 → A1 → A2 → A3) で組むと I と Q にならない。14-5 と同じ組だ。
 
-9-22 は 4 倍のクロックを 74HC74 で 1/4 にして S0・S1 を作った。中波の上の端 1602 kHz でそれをすると、
+14-5 は 4 倍のクロックを 74HC74 で 1/4 にして S0・S1 を作った。中波の上の端 1602 kHz でそれをすると、
 クロックは 1602 × 4 = **6.4 MHz** になり、ブレッドボードの 3 MHz を超える。
 そこでこの題は、**Pico 2 の PIO (プログラムで動く入出力の小さな回路) が S0 (GP2) と S1 (GP3) を LO の周波数で直に出す**。
 プログラムは `set pins, 0` → `set pins, 1` → `set pins, 3` → `set pins, 2` の 4 命令の繰り返しだけで、1 命令が 1 状態。
@@ -80,7 +80,7 @@ f<sub>sys</sub> = 12 MHz × FBDIV ÷ PD1 ÷ PD2 (VCO = 12 MHz × FBDIV は 750�
 
 **I と Q の回る向き。** この題の並び ((S1, S0) が 00 → 01 → 11 → 10、I = A0 − A3、Q = A1 − A2) では、局が LO より上にある (Δf > 0) と
 **Q が I より 90° 進み**、I + jQ = e<sup>−j2πΔf t</sup> と時計回りに回る。だから回し戻すには e<sup>**+**j2πΔf t</sup> を掛ける。
-atan2(Q, I) から周波数を出すときは符号が逆になる (9-23 の式と同じ向きで読むなら − を付ける)。
+atan2(Q, I) から周波数を出すときは符号が逆になる (14-6 の式と同じ向きで読むなら − を付ける)。
 **I と Q を入れ替えるか、S0 と S1 を入れ替えると、この向きは逆になる**。図2 の 2 段目は I も Q も反転するが、
 両方が同じだけ反転する (180° 回るだけ) なので、回る向きは変わらない。√(I² + Q²) はどの向きでも変わらない。
 
@@ -112,7 +112,7 @@ Tayloe 検波器が方形波で切り替えるので、**LO の 3 倍 (1785 kHz)
 - **`e` = √(I² + Q²)** (この題の既定): cos と sin の 2 乗の和は 1 なので、δ も φ も消え、AM の包絡線 m(t) がそのまま出る。
   回し戻しを切っても包絡線は変わらない (隣の局が低域通過を抜けてくるだけ)
 
-9-12 と 9-19 で見た「掛け算 1 つでは足りない」が、ここで耳で分かる。
+9-12 と 14-2 で見た「掛け算 1 つでは足りない」が、ここで耳で分かる。
 
 **受けるだけ — 送信の免許は要らない。**
 
@@ -205,7 +205,7 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/24-iq-mw-radio-1.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/circuit/07-iq-mw-radio-1.svg)
 
 - **T1 (バーアンテナ)** は 9-10 の T1 と同じ中波用 (主巻線 約 330 µH + 結合巻線 (リンク巻線))。
   主巻線と VC1 (ポリバリコン 20〜260 pF) で 531〜1602 kHz に同調する。531 kHz で VC1 + 浮遊容量 ≈ 272 pF (計算値)
@@ -319,7 +319,7 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/24-iq-mw-radio-2.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/circuit/07-iq-mw-radio-2.svg)
 
 - I は U2、Q は U3 (どちらも MCP6002、レール to レールの 2 回路入り)。3.3 V で 0〜3.3 V を振れるので、Pico 2 の ADC の範囲を使い切れる。
   LM358 は出力が電源より 1.5 V 低い所までしか上がらず、TL072 は ± の電源が要るので使わない
@@ -411,7 +411,7 @@ style:
   pitch: 1
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/24-iq-mw-radio-3.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/circuit/07-iq-mw-radio-3.svg)
 
 - **U1 (Pico 2)** は PC の USB から給電する。**3V3 (PIN 36)** から図1・図2 の 3.3 V を、**VBUS (PIN 40)** から LM386 の 5 V を取る
 - **GP2 (PIN 4) = S0、GP3 (PIN 5) = S1**。PIO が LO の 4 状態を出す
@@ -433,7 +433,7 @@ style:
 白は VREF、緑と青は A0〜A3、黄と紫は I と Q、橙はブレッドボードの中のつなぎ。
 
 **ブレッドボードで組んでよい理由。** ブレッドボードの上を通る一番高い周波数は、アンテナからの中波 (1.6 MHz 以下) と、
-PIO が出す S0・S1 (LO、1.6 MHz 以下) で、どちらもこの本の決めの 3 MHz に収まる。9-22 のように 4 倍のクロック (6.4 MHz) を通さないのは、このためだ。
+PIO が出す S0・S1 (LO、1.6 MHz 以下) で、どちらもこの本の決めの 3 MHz に収まる。14-5 のように 4 倍のクロック (6.4 MHz) を通さないのは、このためだ。
 電流は Pico 2 と LM386 を合わせて 150 mA ほど (目安) で、ブレッドボード全体の 500 mA にも収まる。
 
 ```bread
@@ -509,7 +509,7 @@ wires:
   - -t62 -- -b62 black
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/24-iq-mw-radio-1.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/breadboard/07-iq-mw-radio-1.svg)
 
 - U1 (74HC4052) は 30〜37 列で溝をまたぐ (切り欠きを左、PIN 1 は左下の f30)。下の列が PIN 1〜8、上の列が PIN 16〜9
 - **アンテナの側は下の段**: AD3 の W1 (黄、j2) は Cw1 (h2〜h9) で、W2 (緑、j6) は Cw2 (f6〜f9) で 9 列のタンクへ入る。
@@ -587,7 +587,7 @@ wires:
   - a62 -- -t62 black
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/24-iq-mw-radio-2.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/breadboard/07-iq-mw-radio-2.svg)
 
 - U2 (I) は 20〜23 列、U3 (Q) は 50〜53 列で溝をまたぐ。同じ並びを 30 列ずらしただけ
 - **入口**: 図4 の基板の A3 (青、a6) と A0 (青、a29) から、R10 (c6〜c22) と R11 (c29〜c23) で 1 段目の − (PIN 6、22 列) と + (PIN 5、23 列) へ。
@@ -687,7 +687,7 @@ wires:
   - -t63 -- -b63 black
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/24-iq-mw-radio-3.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/breadboard/07-iq-mw-radio-3.svg)
 
 - U1 (Pico 2) は 3〜22 列 (下の h 行が PIN 1〜20、上の c 行が PIN 40〜21)。上の + レールは **5 V** (VBUS、3 列から赤い線)
 - 3V3 (PIN 36、7 列) は a7 から図4 の基板へ (赤)。GND は GND38 (5 列) から上の − レールへ
@@ -1036,7 +1036,7 @@ while True:
 
 **PC のサウンドカードで聞く手もある。** ステレオのライン入力がある PC なら、図5 の I と Q (直流を 1 µF で切って) を左と右に入れ、
 SDR のソフト (HDSDR など) で聞ける。昔の SoftRock の形だ。今の PC はマイク (モノラル) の入力しか無いことが多いので、この題は Pico 2 で閉じた。
-RTL-SDR などの SDR の受信機が PC に送ってくるのも、この I と Q の標本の列だ (9-23)。
+RTL-SDR などの SDR の受信機が PC に送ってくるのも、この I と Q の標本の列だ (14-6)。
 
 ### AD3 の設定
 
@@ -1075,7 +1075,7 @@ cursors: [630.252ns, 2310.924ns]
 trigger: S0 rising at 420.168ns
 ```
 
-![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/logic/24-iq-mw-radio.svg)
+![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/logic/07-iq-mw-radio.svg)
 
 - S0 は LO の周波数の方形波 (デューティ 50 %)、S1 は S0 より **1/4 周期 (420 ns) 遅れた**同じ方形波
 - 下のバス (S1 S0 の 10 進) が **0 → 1 → 3 → 2** と回る。これが 74HC4052 の開く出口 A0 → A1 → A3 → A2 の順
@@ -1094,7 +1094,7 @@ cursors: [0, 250us]
 measure: [vpp, freq, phase]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/24-iq-mw-radio-1.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/07-iq-mw-radio-1.svg)
 
 - I も Q も 1.000 kHz の正弦。局 (594 kHz) と LO (595 kHz) の差 |Δf| が、そのまま音の周波数になって出てくる (直接変換)
 - **Q が I より 90° (250 µs) 遅れる**。局が LO より**下**にあるとき Q が遅れ、上にあると進む (説明の「I と Q の回る向き」)。
@@ -1111,7 +1111,7 @@ ch2: {wave: sine 1kHz 200mV offset 1.65V phase -90deg, range: 100mV/div, positio
 xy: ch1 ch2
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/24-iq-mw-radio-2.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/07-iq-mw-radio-2.svg)
 
 ```scope
 # オシロスコープの画面 (tommie-fence の scope フェンス)
@@ -1122,7 +1122,7 @@ ch2: {wave: = 1.65V + 0.2V * (1 + 0.3 * sin(2 * pi * 400Hz * t)) * sin(2 * pi * 
 xy: ch1 ch2
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/24-iq-mw-radio-3.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/07-iq-mw-radio-3.svg)
 
 - 図9: 変調の無い局は**半径 0.2 V の円**になり、Δf = 1 kHz の速さ (1 秒に 1000 回) で回る。静止した絵では向きは見えないので、向きは図8 の先後で見る
 - 図10: W1 に AM (400 Hz、30 %) を掛けると、**半径が 0.2 × (1 ± 0.3) = 0.14〜0.26 V の間で伸び縮み**する。
@@ -1148,7 +1148,7 @@ signal:
 markers: [1kHz, 600Hz, 1.4kHz, 8kHz]
 ```
 
-![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/spectrum/24-iq-mw-radio.svg)
+![スペクトラムアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/spectrum/07-iq-mw-radio.svg)
 
 - 図11 は I だけのスペクトル。1 kHz (マーカー 1) が局の搬送波で、600 Hz と 1.4 kHz (マーカー 2・3) が 400 Hz の AM の側波
 - 8 kHz (マーカー 4) が隣の局 (W2 の 603 kHz)。LO から +8 kHz で、タンク (−5.1 dB、Q 50 の目安) と Tayloe の 9 kHz の角 (−2.5 dB) で少し落ちた。
@@ -1187,7 +1187,7 @@ markers: [1kHz, 600Hz, 1.4kHz, 8kHz]
 
 ## LTspice での確かめ
 
-デッキは `sim/24-tayloe.cir` (Tayloe 検波器、過渡解析)、`sim/24-amp.cir` (図2 の 2 段の増幅、AC 解析とオフセット)、`sim/24-tank.cir` (バーアンテナの同調、AC 解析)。
+デッキは `sim/07-tayloe.cir` (Tayloe 検波器、過渡解析)、`sim/07-amp.cir` (図2 の 2 段の増幅、AC 解析とオフセット)、`sim/07-tank.cir` (バーアンテナの同調、AC 解析)。
 **74HC4052 は電圧制御スイッチの模型 (オン抵抗 100 Ω) で、MCP6002 は GBW 1 MHz の 1 次の模型。どちらも実測ではない仮定**。
 リンク巻線は 1.65 V の直流に 0.1 V<sub>p</sub> の電圧源、R1 100 Ω、LO は 595 kHz で置いた。
 

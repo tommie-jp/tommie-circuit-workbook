@@ -3,7 +3,7 @@ book: fpga
 chapter: 12
 id: 12-1
 title: リバーシのアクセラレータ — 合法手と裏返しを回路で
-tier: 200
+tier: 300
 source: 自作。ビットボードの 8 方向のずらし方は tommie-jp/Soft-FPGA-Reversi (MIT) の rtl/legal_bb.v・flip_calc.v を読んで書き直した
 board: —
 device: SIM

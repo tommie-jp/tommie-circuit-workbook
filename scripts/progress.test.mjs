@@ -41,7 +41,7 @@ test('tables each entry with a checkbox for 目で確認, links the written ones
 
   assert.match(text, /\| 冊 \| 計画 \| 作成 \| 目で確認 \| Fable で確認 \|/);
   assert.match(text, /\| \[回路の教科書\]\(01-circuits\/README\.md\) \| 4 \| 3 \| 1 \| 2 \|/);
-  assert.match(text, /\| \[NanoVNA の教科書\]\(03-nanovna\/README\.md\) \| 0 \| 0 \| 0 \| 0 \|/);
+  assert.match(text, /\| \[NanoVNA と tinySA の教科書\]\(03-nanovna\/README\.md\) \| 0 \| 0 \| 0 \| 0 \|/);
   assert.match(text, /\| \*\*計\*\* \| \*\*4\*\* \| \*\*3\*\* \| \*\*1\*\* \| \*\*2\*\* \|/);
 
   assert.ok(text.includes('## 回路の教科書'));
@@ -74,7 +74,7 @@ test('escapes a pipe in a title and lists the books in order', () => {
   ]);
 
   assert.ok(text.includes('[\\|Z\\| を測る]'));
-  assert.ok(text.indexOf('## 回路の教科書') < text.indexOf('## NanoVNA の教科書'));
+  assert.ok(text.indexOf('## 回路の教科書') < text.indexOf('## NanoVNA と tinySA の教科書'));
 });
 
 test('finds the boxes the reader toggled since the last run, by book and id', () => {
@@ -93,7 +93,7 @@ test('finds the boxes the reader toggled since the last run, by book and id', ()
 | 1-5 | [題 1-5](01-circuits/01-basics/05-x.md) | ✓ | [ ] | ✓ 2026-10-25 |
 | 1-6 | 題 1-6 | | | |
 
-## NanoVNA の教科書
+## NanoVNA と tinySA の教科書
 
 ### 第 3 章
 

@@ -1,17 +1,17 @@
 ---
 book: circuits
-chapter: 9
-id: 9-18
+chapter: 14
+id: 14-1
 title: RC-CR で 90° を作る — 1 本の正弦から I と Q
 tier: 100
 source: 自作
 board: BB
 ---
 
-# 9-18 RC-CR で 90° を作る — 1 本の正弦から I と Q
+# 14-1 RC-CR で 90° を作る — 1 本の正弦から I と Q
 
 位相が **90° ずれた 2 本の正弦**を、ひと組で **I と Q** と呼ぶ。I は in-phase (同相)、Q は quadrature (直交、90° ずれ) の頭文字。
-9-19〜9-24 の I/Q の回路は、どれもこの 2 本から始まる。この題では、抵抗 2 本とコンデンサ 2 個だけで、
+14-2〜14-7 の I/Q の回路は、どれもこの 2 本から始まる。この題では、抵抗 2 本とコンデンサ 2 個だけで、
 1 本の正弦から I と Q を作る。Analog Discovery 3 (AD3) のスコープで、時間の波形と XY の円を見る。
 
 **RC-CR の回路**は、信号源から 2 本の枝を出す。
@@ -32,11 +32,11 @@ j は位相を 90° 進める印だ。だから**位相の差は、どの周波�
   振幅は大きく違うが、**位相の差は 90° のまま** (LTspice でも 300 k・498 k・800 kHz の 3 点とも 90.0°)
 
 この題では、**高域側 (+45°) を I、低域側 (−45°) を Q** と呼ぶ。Q は I より 90° 遅れる。
-I を cos、Q を sin と見るのと同じ向きだ。9-19 からも同じ名前で使う。
+I を cos、Q を sin と見るのと同じ向きだ。14-2 からも同じ名前で使う。
 
 **90° の回路は、決まった 1 つの周波数に使う。** 振幅がそろうのは f<sub>c</sub> の近くだけなので、
 周波数が動く信号 (受けたい電波 RF) をこの回路に通すと、I と Q の振幅がずれる。
-受信機では、**周波数の決まった局部発振 (LO) のほうを 90° ずらす**。9-19 では、この題の回路をそのまま LO の 90° に使う。
+受信機では、**周波数の決まった局部発振 (LO) のほうを 90° ずらす**。14-2 では、この題の回路をそのまま LO の 90° に使う。
 
 ## 回路図
 
@@ -66,7 +66,7 @@ style:
   pitch: 1.2
 ```
 
-![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/circuit/18-rc-cr-quadrature.svg)
+![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/circuit/01-rc-cr-quadrature.svg)
 
 ## 実体配線図
 
@@ -95,7 +95,7 @@ wires:
   - AD.1- -- -t16 black
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/18-rc-cr-quadrature.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/breadboard/01-rc-cr-quadrature.svg)
 
 - 10 列の真ん中に W1 (黄) を挿す。**左へ R1 (b6〜b10) で Q の 6 列、右へ C1 (c10〜c14) で I の 14 列**へ分ける。
   図1 の低域側を左、高域側を右に置いた形だ
@@ -149,7 +149,7 @@ cursors: [0, 502ns]
 measure: [vpp, freq, phase]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/18-rc-cr-quadrature-1.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/01-rc-cr-quadrature-1.svg)
 
 - カーソルの X1 は CH1 (I) が 0 V を上へ横切る点 (トリガ)、X2 は CH2 (Q) が 0 V を上へ横切る点。
   差は **0.502 µs = 498 kHz の周期 2.008 µs の 1/4**。角度にすると 0.502 ÷ 2.008 × 360° = 90°
@@ -166,7 +166,7 @@ ch2: {wave: sine 498kHz 0.707Vpp phase -45deg, range: 200mV/div}
 xy: ch1 ch2
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/18-rc-cr-quadrature-2.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/01-rc-cr-quadrature-2.svg)
 
 ```scope
 # オシロスコープの画面 (tommie-fence の scope フェンス)
@@ -177,7 +177,7 @@ ch2: {wave: sine 300kHz 0.856Vpp phase -31.1deg, range: 200mV/div}
 xy: ch1 ch2
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/18-rc-cr-quadrature-3.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/01-rc-cr-quadrature-3.svg)
 
 ```scope
 # オシロスコープの画面 (tommie-fence の scope フェンス)
@@ -188,7 +188,7 @@ ch2: {wave: sine 800kHz 0.528Vpp phase -58.1deg, range: 200mV/div}
 xy: ch1 ch2
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/18-rc-cr-quadrature-4.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/01-rc-cr-quadrature-4.svg)
 
 - 図5・図6 の楕円は、**軸が画面の縦と横にそろう** (傾かない)。位相の差がちょうど 90° のとき、楕円は傾かない。
   差が 90° からずれると、楕円は右上か左上へ傾く。傾きがあれば、R か C の値が 2 組でそろっていない
@@ -214,14 +214,14 @@ xy: ch1 ch2
 | C1 だけ 5 % 大きい | 498 kHz で差 88.6°、I 0.724 Vpp・Q 0.707 Vpp (計算値)。XY の円がわずかに傾いた楕円になる |
 
 - **90° はどの周波数でも保たれる**のに、**振幅がそろうのは f<sub>c</sub> だけ**。これが 1 つ目の要点だ
-- だから、受信機では周波数の決まった LO を 90° ずらす (9-19)。この題の回路の 680 Ω と 470 pF は、9-19〜9-21 の LO の 498 kHz にそのまま使う
+- だから、受信機では周波数の決まった LO を 90° ずらす (14-2)。この題の回路の 680 Ω と 470 pF は、14-2〜14-4 の LO の 498 kHz にそのまま使う
 - 信号源の出力抵抗と、2 つの節点に**等しく**付く負荷は、振幅を下げるが位相の差を変えない。
   出力抵抗が効かないのは、2 つの出力の比 V<sub>高域</sub> / V<sub>低域</sub> = jωRC が、2 本の枝の分かれ目の電圧に関係しないからだ。
   等しい負荷 (10 kΩ ずつ、24 pF ずつ) を付けても、100 kHz〜2 MHz で差は 90.0° のままだった (計算値)
 
 ## LTspice での確かめ
 
-デッキは `sim/18-rc-cr-quadrature.cir` (AC 解析。W1 は 0.5 V<sub>p</sub> = 1 Vpp、抵抗とコンデンサは理想)。
+デッキは `sim/01-rc-cr-quadrature.cir` (AC 解析。W1 は 0.5 V<sub>p</sub> = 1 Vpp、抵抗とコンデンサは理想)。
 本文の計算値と LTspice の値は**すべて合った**ので、本文の数字は直していない。
 
 | 確かめること | 本文の数字 | LTspice | 判定 |
@@ -231,7 +231,7 @@ xy: ch1 ch2
 | 800 kHz の I・Q の Vpp と位相の差 | 0.849 V・0.528 V、90° | 0.849 V・0.528 V、90.0° | 合う |
 | 50 Ω の信号発生器 (498 kHz) | I・Q とも 0.657 V、差 90° | 0.657 V・0.657 V、90.0° | 合う |
 | I と Q に 24 pF ずつ (498 kHz) | I・Q とも 0.689 V、差 90° | 0.689 V・0.689 V、90.0° | 合う |
-| I と Q に 10 kΩ ずつ (498 kHz) | 0.683 倍の系 (9-19 が使う値) | 0.683 V・0.683 V、90.0° | 合う |
+| I と Q に 10 kΩ ずつ (498 kHz) | 0.683 倍の系 (14-2 が使う値) | 0.683 V・0.683 V、90.0° | 合う |
 | C1 だけ 5 % 大きい (498 kHz) | 差 88.6°、I 0.724 V・Q 0.707 V | 88.6°、0.724 V・0.707 V | 合う |
 
 - 300 kHz・800 kHz でも差は 90.0° のまま。C1 だけ 5 % 大きいときは 300 kHz で 88.75°、800 kHz で 88.76° になる (本文は 498 kHz の値だけを書いている)
