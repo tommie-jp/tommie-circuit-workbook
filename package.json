@@ -32,13 +32,13 @@
     "i18n:stale": "node scripts/en-check.mjs --stale"
   },
   "devDependencies": {
-    "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.56.1/breadboard-fence-0.56.1.tgz",
-    "circuit-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/circuit-fence-v0.47.0/circuit-fence-0.47.0.tgz",
+    "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.57.0/breadboard-fence-0.57.0.tgz",
+    "circuit-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/circuit-fence-v0.48.0/circuit-fence-0.48.0.tgz",
     "copper-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/copper-fence-v0.12.0/copper-fence-0.12.0.tgz",
     "graph-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/graph-fence-v0.5.0/graph-fence-0.5.0.tgz",
     "logic-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/logic-fence-v0.5.0/logic-fence-0.5.0.tgz",
     "markdownlint-cli": "^0.49.1",
-    "perfboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/perfboard-fence-v0.54.1/perfboard-fence-0.54.1.tgz",
+    "perfboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/perfboard-fence-v0.55.0/perfboard-fence-0.55.0.tgz",
     "scope-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/scope-fence-v0.9.0/scope-fence-0.9.0.tgz",
     "spectrum-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/spectrum-fence-v0.7.0/spectrum-fence-0.7.0.tgz",
     "subset-font": "^2.9.0",
