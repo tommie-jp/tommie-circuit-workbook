@@ -6,15 +6,20 @@
  *
  * 章ごとの表で、1 行は 1 題 (計画の全部)。書いた題の「目で確認」の欄が **チェックボックス**:
  *
- *   | 1-1 | [題](path) | ✓ | [x] 2026-11-01 | ✓ 2026-10-30 |
- *   | 1-2 | [題](path) | ✓ | [ ] | — |
- *   | 1-3 | 題 | | | |                       ← まだの題 (箱なし)
+ *   | 1-1 | [題](path) | ✓ | [x] 2026-11-01 | ✓ 2026-10-30 | ✓ 2026-11-02 |
+ *   | 1-2 | [題](path) | ✓ | [ ] | — | — |
+ *   | 1-3 | 題 | | | | |                     ← まだの題 (箱なし)
  *
  * - **作成** — 題のファイルがあれば ✓ と link。まだの題は字だけ (手で書かない)
  * - **目で確認** (箱) — front matter の `seen: YYYY-MM-DD` (人が目で確認した日)。
  *   読む人が箱を `[x]` にして (括弧の中に x を打つ) このスクリプトを回すと、題の front matter に
  *   `seen: <今日>` が入る。`[ ]` に戻せば `seen` が消える
  * - **Fable で確認** — front matter の `reviewed: YYYY-MM-DD` (Claude (Fable) で確認した日)
+ * - **実測** — front matter の `measured: YYYY-MM-DD` (作者が実機で組んで測った日。手で書く)
+ *
+ * 冊の表には **1.0 まで** の欄を出す。冊の完成 1.0 = 必須 50 が全部 実測、入門が全部 目で確認、
+ * 中級が全部 作成 (README の「完成の基準」)。足りない数を「必須の実測 N・入門の確認 N・中級の執筆 N」で言い、
+ * 全部 0 なら「1.0」。必須の無い冊 (番外) は —。
  *
  * 確認した日より後にファイルが変わっていれば (git の最後の commit の日か、作業ツリーで変えた今日が
  * 日付より後なら) ✓ でなく △ で出し、箱を空にして数に入れない — 確認し直す題がひと目で分かるように。
@@ -32,7 +37,8 @@ import { cell, mergedRows, row } from './toc.mjs';
 
 export const PROGRESS_FILE = 'PROGRESS.md';
 
-const MARK_NAMES = { seen: '目で確認', reviewed: 'Fable で確認' };
+const MARK_NAMES = { seen: '目で確認', reviewed: 'Fable で確認', measured: '実測' };
+const RELEASE = '1.0 まで';
 const WRITTEN = '作成';
 const DONE = '✓';
 const STALE = '△';
@@ -47,6 +53,8 @@ const HEADER = `# 進捗
   **目で確認したら箱を \`[x]\` にして** (括弧の中に x を打つ) \`npm run progress\` を回す。
   題の front matter に \`seen: <今日>\` が入り、日付がここに出る。\`[ ]\` に戻せば \`seen\` が消える
 - **${MARK_NAMES.reviewed}** — 題の front matter の \`reviewed: YYYY-MM-DD\` (Claude (Fable) で確認した日。${NONE} はまだ)
+- **${MARK_NAMES.measured}** — 題の front matter の \`measured: YYYY-MM-DD\` (作者が実機で組んで測った日。測った値を題に書いてから手で書く。${NONE} はまだ)
+- **${RELEASE}** — 冊の完成 1.0 (必須が全部 ${MARK_NAMES.measured}、入門が全部 ${MARK_NAMES.seen}、中級が全部 ${WRITTEN}。README の「完成の基準」) に足りない数。全部そろえば 1.0
 
 確認した日より後に題を書き換えていれば ${DONE} でなく ${STALE} で出し、箱を空にして数に入れない (確認し直して、また箱を付ける)。`;
 
@@ -74,6 +82,29 @@ function counts(rows, changed) {
 const COUNT_NAMES = ['計画', WRITTEN, ...REVIEW_MARKS.map((mark) => MARK_NAMES[mark])];
 const ROW_NAMES = ['#', '題', ...COUNT_NAMES.slice(1)];
 
+/**
+ * 冊の完成 1.0 に足りない数。必須 (tier 50) で実測していない題、入門 (tier 100) で目で確認していない題、
+ * 中級 (tier 200) でまだ書いていない題。△ (確認の後に書き換えた) は足りない側に数える。
+ * 必須の無い冊 (番外) は 1.0 を持たないので null。
+ */
+export function releaseGap(rows, changed) {
+  const lacks = (tier, done) => rows.filter((entry) => entry.tier === tier && !done(entry)).length;
+  if (rows.every((entry) => entry.tier !== 50)) return null;
+  return {
+    measured: lacks(50, (entry) => entry.path !== null && markState(entry, 'measured', changed).done),
+    seen: lacks(100, (entry) => entry.path !== null && markState(entry, 'seen', changed).done),
+    written: lacks(200, (entry) => entry.path !== null),
+  };
+}
+
+/** 1.0 までの欄の字。 */
+function releaseCell(rows, changed) {
+  const gap = releaseGap(rows, changed);
+  if (gap === null) return NONE;
+  if (gap.measured + gap.seen + gap.written === 0) return '1.0';
+  return `必須の${MARK_NAMES.measured} ${gap.measured}・入門の確認 ${gap.seen}・中級の執筆 ${gap.written}`;
+}
+
 /** 目で確認の欄。箱と、確認した日 (△ は確認の後に書き換えた題)。 */
 function seenCell(entry, changed) {
   const seen = markState(entry, 'seen', changed);
@@ -83,14 +114,18 @@ function seenCell(entry, changed) {
 
 /** 1 題の行。書いた題は ✓ と link と箱、まだの題は字だけで欄は空。 */
 function entryRow(entry, changed) {
-  if (entry.path === null) return row([entry.id, cell(entry.title), '', '', '']);
-  const reviewed = markState(entry, 'reviewed', changed);
+  if (entry.path === null) return row([entry.id, cell(entry.title), '', '', '', '']);
+  const dated = (mark) => {
+    const state = markState(entry, mark, changed);
+    return state.text === '' ? NONE : state.text;
+  };
   return row([
     entry.id,
     `[${cell(entry.title)}](${entry.path})`,
     DONE,
     seenCell(entry, changed),
-    reviewed.text === '' ? NONE : reviewed.text,
+    dated('reviewed'),
+    dated('measured'),
   ]);
 }
 
@@ -117,13 +152,14 @@ function bookSection(book, rows, changed) {
 export function progressTable(rowsByBook, changed = new Map()) {
   const all = BOOKS.flatMap((book) => rowsByBook.get(book.dir) ?? []);
   const summary = [
-    row(['冊', ...COUNT_NAMES]),
-    row(['---', ...COUNT_NAMES.map(() => '---')]),
+    row(['冊', ...COUNT_NAMES, RELEASE]),
+    row(['---', ...COUNT_NAMES.map(() => '---'), '---']),
     ...BOOKS.map((book) => row([
       `[${book.title}](${book.dir}/README.md)`,
       ...counts(rowsByBook.get(book.dir) ?? [], changed).map(String),
+      releaseCell(rowsByBook.get(book.dir) ?? [], changed),
     ])),
-    row(['**計**', ...counts(all, changed).map((count) => `**${count}**`)]),
+    row(['**計**', ...counts(all, changed).map((count) => `**${count}**`), '']),
   ];
 
   const sections = BOOKS

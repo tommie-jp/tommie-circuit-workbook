@@ -12,14 +12,16 @@ import { TIERS, findBook, findChapter } from './books.mjs';
 /** front matter に書ける鍵。ここに無い鍵は書き間違いとして断る。 */
 const KEYS = new Set([
   'book', 'chapter', 'id', 'title', 'tier', 'source', 'board', 'tools', 'device', 'era', 'scale',
-  'seen', 'reviewed',
+  'seen', 'reviewed', 'measured',
 ]);
 
 /**
- * 確認の印。`seen` は人が目で確認した日、`reviewed` は Claude (Fable) で確認した日。どちらも `YYYY-MM-DD`。
+ * 確認の印。`seen` は人が目で確認した日、`reviewed` は Claude (Fable) で確認した日、
+ * `measured` は作者が実機で組んで測った日。どれも `YYYY-MM-DD`。
  * 進捗の表 (`progress.mjs`) がこれを読み、確認した後にファイルが変わっていれば △ で言う。
+ * 冊の完成 (1.0) の条件 (README の「完成の基準」) もこの印で数える。
  */
-export const REVIEW_MARKS = ['seen', 'reviewed'];
+export const REVIEW_MARKS = ['seen', 'reviewed', 'measured'];
 const DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
 
 /** 板の印。BB = ブレッドボード、PF = perfboard、CB = 銅張り基板、— = 板を使わない。 */
@@ -90,6 +92,7 @@ export function validateEntry({ path, text }) {
     scale: data.scale ?? null,
     seen: data.seen ?? null,
     reviewed: data.reviewed ?? null,
+    measured: data.measured ?? null,
   };
   return { entry, errors };
 }

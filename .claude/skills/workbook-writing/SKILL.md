@@ -89,6 +89,9 @@ CPU に載せる OS や言語処理系) か、複数の計器の組み合わせ�
 8. 確認の印: 人が目で見たら `PROGRESS.md` の箱を `[x]` にする (括弧の中に x を打つ)。Claude (Fable) で見直したら front matter に
    `reviewed: YYYY-MM-DD` を書く。`npm run progress` が箱を front matter の `seen: <今日>` に書き戻し、表を書き直す。
    確認の後に題を直すと △ で出て箱が空くので、見直してまた箱を付ける
+   実機で組んで測ったら、「見るべき値」に実測を書き、計器の画面に `data:` で実測を重ねてから front matter に
+   `measured: YYYY-MM-DD` を書く。測って合わなければ本文を実測に合わせ、差の理由を 1 行書く。
+   冊の完成 1.0 の条件 (必須が全部 `measured`・入門が全部 `seen`・中級が全部書けた) は README の「完成の基準」
 
 ## 3. 言葉
 

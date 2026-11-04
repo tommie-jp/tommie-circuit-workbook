@@ -10,9 +10,9 @@ test('blobHash is the same as git hash-object', () => {
   assert.equal(blobHash(text), git);
 });
 
-test('sourceHash ignores the review marks (seen / reviewed) and is otherwise the blob hash', () => {
+test('sourceHash ignores the review marks (seen / reviewed / measured) and is otherwise the blob hash', () => {
   const text = '---\nid: 1-1\nboard: BB\n---\n# 1-1 LED と抵抗\n';
-  const marked = '---\nid: 1-1\nseen: 2026-11-01\nboard: BB\nreviewed: 2026-11-01\n---\n# 1-1 LED と抵抗\n';
+  const marked = '---\nid: 1-1\nseen: 2026-11-01\nboard: BB\nreviewed: 2026-11-01\nmeasured: 2026-11-02\n---\n# 1-1 LED と抵抗\n';
 
   assert.equal(sourceHash(text), blobHash(text));
   assert.equal(sourceHash(marked), blobHash(text));

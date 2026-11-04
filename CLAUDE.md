@@ -71,7 +71,9 @@ npm run all   # 試験・lint・全題の検査 (CI と同じ)
 - `npm run all` の最後の `parity` は、同じ題の回路図と実体配線図のネットリストを部品の組で比べる。
   等価回路・電流計の隙間などの見かけの違いは `scripts/netlist-parity-allow.json` に図の題と理由を書いて許す
 - 題を目で確認したら `PROGRESS.md` の箱を `[x]` にする (`npm run progress` が front matter に `seen: <今日>` を書き戻す)。
-  Claude (Fable) で確認したら front matter に `reviewed: YYYY-MM-DD` を書く。確認の後に書き換えた題は △ で出て箱が空く
+  Claude (Fable) で確認したら front matter に `reviewed: YYYY-MM-DD` を書く。確認の後に書き換えた題は △ で出て箱が空く。
+  実機で組んで測ったら、測った値を題に書いてから front matter に `measured: YYYY-MM-DD` を書く。
+  冊の完成 1.0 = 必須が全部 `measured`・入門が全部 `seen`・中級が全部書けた (README の「完成の基準」。足りない数は PROGRESS.md の「1.0 まで」)
 - `out/` (図) はコミットしない。測った値 (Touchstone・CSV) はコミットする
 - コミットは conventional commits (`docs:` が中心、スクリプトは `feat:` / `fix:`)。
   マージは fast-forward のみ
