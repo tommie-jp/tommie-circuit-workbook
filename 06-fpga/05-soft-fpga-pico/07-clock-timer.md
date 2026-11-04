@@ -155,7 +155,7 @@ wires:
 - 配線は 5-5 と同じ。AD3 は DIO0 (CLK)・DIO1 (BUSY)・DIO2 (OUT0、`blink` の LED) を読む
 - `blink` を選ぶと、ブレッドボードの左端の LED (OUT0) が点滅する
 
-## 部品表
+## 部品
 
 5-5 と同じ。電源は 3.3 V (Pico 2 の GPIO)。
 

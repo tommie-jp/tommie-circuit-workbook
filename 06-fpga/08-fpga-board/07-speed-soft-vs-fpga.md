@@ -208,7 +208,7 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/08-fpga-board/circuit/07-speed-soft-vs-fpga.svg)
 
-## 部品表
+## 部品
 
 | 部品 | 値・型番 | 数 | 役 |
 | --- | --- | --- | --- |
