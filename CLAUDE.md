@@ -60,7 +60,7 @@ AD2 と NanoVNA-H4 / V2 は歴史的な機種 (比較のために残す)。一�
 
 ```bash
 npm run toc   # 題を足した・動かしたら
-npm run progress   # 題を足した・確認の印 (front matter の seen / reviewed) を書いたら (PROGRESS.md)
+npm run progress   # 題を足した・PROGRESS.md の箱を付けた・reviewed を書いたら (箱を seen に書き戻して表を書き直す)
 npm run all   # 試験・lint・全題の検査 (CI と同じ)
 ```
 
@@ -70,8 +70,8 @@ npm run all   # 試験・lint・全題の検査 (CI と同じ)
   層が通っても「実機で動かしていない」の注意書きは外さない (外すのは実機で測ってから)
 - `npm run all` の最後の `parity` は、同じ題の回路図と実体配線図のネットリストを部品の組で比べる。
   等価回路・電流計の隙間などの見かけの違いは `scripts/netlist-parity-allow.json` に図の題と理由を書いて許す
-- 題を目で確認したら front matter に `seen: YYYY-MM-DD`、Claude (Fable) で確認したら `reviewed: YYYY-MM-DD` を書く。
-  進捗は `PROGRESS.md` (`npm run progress` が書く。確認の後に書き換えた題は △ で出る)
+- 題を目で確認したら `PROGRESS.md` の箱を `[x]` にする (`npm run progress` が front matter に `seen: <今日>` を書き戻す)。
+  Claude (Fable) で確認したら front matter に `reviewed: YYYY-MM-DD` を書く。確認の後に書き換えた題は △ で出て箱が空く
 - `out/` (図) はコミットしない。測った値 (Touchstone・CSV) はコミットする
 - コミットは conventional commits (`docs:` が中心、スクリプトは `feat:` / `fix:`)。
   マージは fast-forward のみ

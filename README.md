@@ -147,7 +147,7 @@ USB アダプタやモバイルバッテリー、単 3 電池 3 本で用意で�
 npm ci
 npm run all    # 試験・Markdown の lint・全題の検査 (CI と同じ)
 npm run toc    # 題を足したら目次を書き直す (README の印の間だけ)
-npm run progress   # 題を足した・確認の印 (seen / reviewed) を書いたら進捗の表 (PROGRESS.md) を書き直す
+npm run progress   # 題を足した・PROGRESS.md の箱を付けた・reviewed を書いたら。箱を題の seen に書き戻してから表を書き直す
 npm run figures   # フェンスを足した・消した・動かしたら、GitHub で見せる画像の行を書き直す
 npm run check -- --verbose   # ネットリストも出す。意図した回路と突き合わせる
 ```
@@ -157,9 +157,10 @@ npm run check -- --verbose   # ネットリストも出す。意図した回路�
 フェンスの並びと合わない画像の行で落ちる。画像の行 (Pages の図を指す `![…](https://tommie-jp.github.io/…)`) は
 `npm run figures` が書くので手で直さない。ERC (つながっていないピンなど) は出すだけで落とさない。
 
-進捗は [PROGRESS.md](PROGRESS.md) (1 行 1 題。作成はファイルの有無、目で確認・Fable で確認は front matter の
-`seen` / `reviewed` の日付)。確認した日より後に題を書き換えると △ になる (git の commit の日で見る)。
-`npm run progress` が書くので手で直さない。
+進捗は [PROGRESS.md](PROGRESS.md) (1 行 1 題。作成はファイルの有無、目で確認は箱、Fable で確認は front matter の
+`reviewed` の日付)。**目で確認したら箱を `[x]` にして** (VS Code なら行で Alt+C) `npm run progress` を回すと、
+題の front matter に `seen: <今日>` が入る。確認した日より後に題を書き換えると △ になり箱が空く (git の commit の日で見る)。
+箱以外は `npm run progress` が書くので手で直さない。
 
 ## テストの方針
 
