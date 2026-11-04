@@ -34,7 +34,7 @@ parts:
   R1: resistor 7,2 7,4 820
   D1: led 7,4 7,5
   Q1: nigbt 7,7
-  VEE: vee 7,10
+  VEE: vee 7,10 5V
   W1: square 1,7 1,10 l=$\mathrm{W1}$
   G1: ground 1,10
   RG: resistor 1,7 3,7 2.2k

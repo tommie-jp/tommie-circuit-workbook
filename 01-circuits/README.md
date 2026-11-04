@@ -149,22 +149,22 @@
 
 | 章 | 題名 | 必須 | 入門 | 中級 | 発展 | 済 |
 | --- | --- | --- | --- | --- | --- | --- |
-| 0 | 測定と道具 | 3 | 6 | 10 | 10 | 9 |
-| 1 | 基本 — 直流と受動部品 | 5 | 10 | 17 | 17 | 16 |
-| 2 | トランジスタ — BJT と FET | 6 | 12 | 21 | 21 | 20 |
+| 0 | 測定と道具 | 3 | 6 | 10 | 10 | 10 |
+| 1 | 基本 — 直流と受動部品 | 5 | 10 | 17 | 17 | 17 |
+| 2 | トランジスタ — BJT と FET | 6 | 12 | 21 | 21 | 21 |
 | 3 | 発振とタイマー | 5 | 9 | 16 | 16 | 15 |
 | 4 | OP アンプ | 5 | 11 | 20 | 20 | 20 |
 | 5 | 電源 | 5 | 9 | 17 | 17 | 15 |
 | 6 | トランスとコイル | 2 | 5 | 10 | 10 | 5 |
 | 7 | パワー | 3 | 7 | 14 | 14 | 14 |
-| 8 | センサー | 5 | 10 | 20 | 20 | 18 |
+| 8 | センサー | 5 | 10 | 20 | 20 | 20 |
 | 9 | RF — ラジオと送信 | 4 | 14 | 24 | 26 | 26 |
 | 10 | ロジック | 4 | 8 | 20 | 20 | 15 |
-| 11 | マイコンと現代の定番 | 2 | 6 | 13 | 13 | 6 |
-| 12 | 実用回路 — 作品 | 1 | 3 | 10 | 10 | 3 |
+| 11 | マイコンと現代の定番 | 2 | 6 | 13 | 13 | 13 |
+| 12 | 実用回路 — 作品 | 1 | 3 | 10 | 10 | 5 |
 | 13 | 電源装置 — 定電圧・定電流の使い方 | 0 | 3 | 8 | 8 | 3 |
 | 14 | I/Q と直接変換 — 90° の 2 本で受ける | 0 | 1 | 6 | 10 | 10 |
-| **計** | | **50** | **114** | **226** | **232** | **195** |
+| **計** | | **50** | **114** | **226** | **232** | **209** |
 
 ## 第 0 章 測定と道具
 
@@ -178,7 +178,7 @@
 | 0-6 | [安定化電源とファンクションジェネレータ — 電流制限を掛けて実験する](00-measure/06-bench-supply-limiting.md) | 入門 | 今 | BB |
 | 0-7 | [テブナン等価を測って確かめる](00-measure/07-thevenin.md) | 中級 | | BB |
 | 0-8 | [コンデンサ容量計 — ブリッジで測る](00-measure/08-capacitance-bridge.md) | 中級 | 古 | BB |
-| 0-9 | 周波数カウンタ (CMOS) | 中級 | | |
+| 0-9 | [周波数カウンタ (CMOS)](00-measure/09-frequency-counter.md) | 中級 | | BB |
 | 0-10 | [ロジックプローブと音で聞く検出器](00-measure/10-logic-probe.md) | 中級 | 古 | BB |
 
 ## 第 1 章 基本 — 直流と受動部品
@@ -196,7 +196,7 @@
 | 1-9 | [ダイオードのクリッパとクランパ](01-basics/09-diode-clipper-clamper.md) | 入門 | | BB |
 | 1-10 | [倍電圧 — ダイオードとコンデンサで (コッククロフト)](01-basics/10-cockcroft-walton.md) | 中級 | 古 | BB |
 | 1-11 | [LC 共振 — 直列と並列](01-basics/11-lc-resonance.md) | 中級 | | BB |
-| 1-12 | 保護素子 — ヒューズ・PTC・バリスタ | 中級 | | |
+| 1-12 | [保護素子 — ヒューズ・PTC・バリスタ](01-basics/12-protection-devices.md) | 中級 | | BB |
 | 1-13 | [ツェナーで基準電圧](01-basics/13-zener-reference.md) | 中級 | | BB |
 | 1-14 | [じゃがいも電池・レモン電池](01-basics/14-lemon-battery.md) | 中級 | 古 | BB |
 | 1-15 | [熱電対 — 2 種の金属で電圧](01-basics/15-thermocouple.md) | 中級 | 古 | BB |
@@ -226,7 +226,7 @@
 | 2-17 | [MOSFET のゲート駆動 — ゲート抵抗・プルダウン・ミラー容量](02-transistors/17-mosfet-gate-drive.md) | 中級 | 今 | |
 | 2-18 | [IGBT スイッチ](02-transistors/18-igbt-switch.md) | 中級 | 今 | |
 | 2-19 | [フォトカプラで絶縁](02-transistors/19-photocoupler.md) | 中級 | 今 | |
-| 2-20 | サイリスタ・トライアックの点弧 (低圧 AC) | 中級 | 古 | |
+| 2-20 | [サイリスタ・トライアックの点弧 (低圧 AC)](02-transistors/20-thyristor-triac-trigger.md) | 中級 | 古 | |
 | 2-21 | [エミッタ抵抗を分ける — バイアスと利得を別々に決める](02-transistors/21-split-emitter.md) | 入門 | | BB |
 
 ## 第 3 章 発振とタイマー
@@ -347,11 +347,11 @@
 | 8-10 | [温度センサー IC (LM35 / TMP36)](08-sensors/10-temperature-ic.md) | 入門 | 今 | BB |
 | 8-11 | [リードスイッチ](08-sensors/11-reed-switch.md) | 中級 | | BB |
 | 8-12 | [圧電 (ノック)](08-sensors/12-piezo-knock.md) | 中級 | | BB |
-| 8-13 | 加速度 (モジュール) | 中級 | 今 | |
+| 8-13 | [加速度 (モジュール)](08-sensors/13-accelerometer.md) | 中級 | 今 | BB |
 | 8-14 | [静電容量タッチ — 発振周波数の変化](08-sensors/14-capacitive-touch.md) | 中級 | 今 | BB |
 | 8-15 | [ロータリーエンコーダ](08-sensors/15-rotary-encoder.md) | 中級 | | BB |
 | 8-16 | [湿度 (DHT)](08-sensors/16-dht11.md) | 中級 | 今 | BB |
-| 8-17 | 気圧 (I2C) | 中級 | 今 | |
+| 8-17 | [気圧 (I2C)](08-sensors/17-bmp280-i2c.md) | 中級 | 今 | BB |
 | 8-18 | [太陽電池を光センサーに](08-sensors/18-solar-cell-sensor.md) | 中級 | | BB |
 | 8-19 | [フォトダイオードの短絡電流](08-sensors/19-photodiode.md) | 中級 | | BB |
 | 8-20 | [LED を受光素子に](08-sensors/20-led-light-sensor.md) | 中級 | 古 | BB |
@@ -421,13 +421,13 @@
 | 11-3 | [ADC で CdS を読む](11-microcontrollers/03-adc-cds.md) | 入門 | 今 | BB |
 | 11-4 | [PWM で LED 調光とサーボ](11-microcontrollers/04-pwm-led-servo.md) | 入門 | 今 | BB |
 | 11-5 | [I2C センサー (温度)](11-microcontrollers/05-i2c-temperature.md) | 入門 | 今 | BB |
-| 11-6 | SPI (シフトレジスタ / 表示) | 中級 | 今 | |
-| 11-7 | UART — Pico 2 台で通信 | 中級 | 今 | |
-| 11-8 | 割り込みとロータリーエンコーダ | 中級 | 今 | |
-| 11-9 | モータドライバ (DRV8833) | 中級 | 今 | |
-| 11-10 | Pico 2 W で しきい値を通知 | 中級 | 今 | |
-| 11-11 | USB 給電と電源設計 (VSYS / VBUS) | 中級 | 今 | |
-| 11-12 | デカップリングとグラウンド | 中級 | 今 | |
+| 11-6 | [SPI (シフトレジスタ / 表示)](11-microcontrollers/06-spi-shift-register.md) | 中級 | 今 | |
+| 11-7 | [UART — Pico 2 台で通信](11-microcontrollers/07-uart-two-picos.md) | 中級 | 今 | |
+| 11-8 | [割り込みとロータリーエンコーダ](11-microcontrollers/08-rotary-encoder-irq.md) | 中級 | 今 | |
+| 11-9 | [モータドライバ (DRV8833)](11-microcontrollers/09-drv8833-motor.md) | 中級 | 今 | |
+| 11-10 | [Pico 2 W で しきい値を通知](11-microcontrollers/10-pico2w-threshold-notify.md) | 中級 | 今 | |
+| 11-11 | [USB 給電と電源設計 (VSYS / VBUS)](11-microcontrollers/11-usb-vsys-power.md) | 中級 | 今 | |
+| 11-12 | [デカップリングとグラウンド](11-microcontrollers/12-decoupling-ground.md) | 中級 | 今 | |
 | 11-13 | [サーボの角度を PWM のパルス幅で決める](11-microcontrollers/13-pwm-servo.md) | 入門 | 今 | BB |
 
 ## 第 12 章 実用回路 — 作品
@@ -438,12 +438,12 @@
 | 12-2 | [人感ライト — PIR + CdS + MOSFET](12-projects/02-motion-light.md) | 入門 | 今 | PF |
 | 12-3 | [水漏れ・水位アラーム](12-projects/03-water-alarm.md) | 入門 | | PF |
 | 12-4 | 電子ホタル — フェードイン・アウト | 中級 | | PF |
-| 12-5 | ドアチャイム / メロディ IC | 中級 | 古 | PF |
+| 12-5 | [ドアチャイム / メロディ IC](12-projects/05-door-chime-melody.md) | 中級 | 古 | PF |
 | 12-6 | インターホン (LM386) | 中級 | | PF |
 | 12-7 | 電池チェッカー | 中級 | | PF |
 | 12-8 | 植物の水やりアラーム | 中級 | 古 | PF |
 | 12-9 | LED イルミネーション (4017) | 中級 | | PF |
-| 12-10 | ソーラーガーデンライト | 中級 | 今 | PF |
+| 12-10 | [ソーラーガーデンライト](12-projects/10-solar-garden-light.md) | 中級 | 今 | PF |
 
 ## 第 13 章 電源装置 — 定電圧・定電流の使い方
 

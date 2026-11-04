@@ -1,0 +1,26 @@
+* 12-5 ドアチャイム / メロディ IC (図1): SW1 を押した状態。5 V → R1 1 kΩ → DZ (3.0 V) と C1 → UM66T の VDD
+* UM66T は VDD から 50 µA (データシートの最大) を引く電流源 + 出力 (VDD と GND の間を 440 Hz で切り替える源、内部抵抗 300 Ω の仮定) で表した
+* DZ は 3.0 V のツェナー (仮定の模型)、Q1 は 2SC1815 の代用 (02-transistors/sim と同じ)、スピーカーは 8 Ω の抵抗。実測ではない
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model DZ30 D (IS=1e-14 N=1 BV=3.0 IBV=1m RS=5)
+V5 vcc 0 5
+R1 vcc vdd 1k
+DZ 0 vdd DZ30
+C1 vdd 0 100u
+Iic vdd 0 50u
+* 出力: VDD × (0/1 の 440 Hz)
+Vsq sq 0 PULSE(0 1 0 1u 1u 1.136m 2.273m)
+Bo o1 0 V={V(vdd)*V(sq)}
+Ro o1 out 300
+R2 out b 4.7k
+Q1 c b 0 Q1815
+R3 vcc s 100
+Rsp s c 8
+.tran 0 200m 0 2u
+.meas tran vdd AVG V(vdd) FROM=100m TO=200m
+.meas tran ib MAX I(R2) FROM=100m TO=200m
+.meas tran icpk MAX I(R3) FROM=100m TO=200m
+.meas tran vce MIN V(c) FROM=100m TO=200m
+.meas tran p3 AVG I(R3)*I(R3)*100 FROM=100m TO=200m
+.meas tran itot AVG I(V5) FROM=100m TO=200m
+.end

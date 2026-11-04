@@ -33,9 +33,7 @@ parts:
   U1A: led 4.4,2.8 4.4,4
   Q1: nmos-e 4.4,4.81 2N7000
   W1: square 1.2,5 1.2,6.6 l=$\mathrm{W1}$
-  RPD: resistor 2.6,5 2.6,6.6 10k
   G1: ground 1.2,6.6
-  G2: ground 2.6,6.6
   G3: ground 4.4,6.6
   TR1: triac 9.6,2.8 9.6,5.2 Z0103MA
   R2: resistor 12.8,2 12.8,3.2 330
@@ -48,8 +46,7 @@ parts:
 wires:
   - 4.4,4 -- Q1.D
   - Q1.S -- 4.4,6.6
-  - 1.2,5 -- 2.6,5
-  - 2.6,5 -| Q1.G
+  - 1.2,5 -| Q1.G
   - 9.6,2 -- 9.6,2.8
   - 9.6,2 -- 12.8,2 -- 14,2
   - 15.6,2 -- 17,2
@@ -90,42 +87,41 @@ board: half
 parts:
   U1: dip6 @ e10 MOC3021
   R1: resistor j10 +b10 180
-  Q1: transistor h17 h18 h19 2N7000
-  RPD: resistor f17 f18 10k
-  TR1: triac b16(T2) b17(G) b18(T1) Z0103MA cap=above
+  Q1: transistor h13(D) h14(G) h15(S) 2N7000
+  TR1: triac b16(T2) b17(G) b18(T1) Z0103MA cap=above:4,0
   R2: resistor c10 c16 330
-  RGK: resistor d17 d21 1k
-  RL: resistor d16 d24 220
-  ACA:
-    type: device
-    at: top
-    label: AC アダプタ 12V (交流出力)
-    pins: [AC2, AC1]
+  RGK: resistor e17 e21 1k
+  RL: resistor d16 d24 220 cap=above
   ADS:
     type: device
     at: top
     label: AD3 (Scope 2)
     pins: [2-, 2+]
+  ACA:
+    type: device
+    at: top
+    label: AC アダプタ 12V (交流出力)
+    pins: [AC1, AC2]
   ADW:
     type: device
     at: bottom
     label: AD3 (V+・W1・Scope 1)
-    pins: [V+, 1+, W1, 1-, GND]
+    pins: [V+, GND, 1-, 1+, W1]
 wires:
-  - ACA.AC2 -- -t2 black
+  - ACA.AC2 -- -t28 black
   - ACA.AC1 -- a24 orange
   - a12 -- a17 orange
   - a18 -- -t18 black
   - a21 -- -t21 black
-  - g11 -- g19 white
-  - j17 -- -b17 black
+  - i11 -- i13 white
+  - j15 -- -b15 black
   - -t30 -- -b30 black
-  - ADS.2+ -- b24 yellow
+  - ADS.2+ -- e24 yellow
   - ADS.2- -- e16 green
   - ADW.V+ -- +b6 red
   - ADW.GND -- -b8 black
-  - ADW.W1 -- j18 yellow
-  - ADW.1+ -- i18 blue
+  - ADW.W1 -- j14 yellow
+  - ADW.1+ -- i14 blue
   - ADW.1- -- -b12 black
 ```
 
@@ -133,13 +129,14 @@ wires:
 
 - U1 (MOC3021、DIP-6) は 10〜12 列で、溝をまたぐ。下の段が入力 (f10 が 1 番 A、f11 が 2 番 K、f12 が 3 番 NC)、上の段が出力 (e10 が 6 番、e11 が 5 番 (基板の中の基板につながるピンで、どこにもつながない)、e12 が 4 番)。
   資料のピンの並び (1 アノード・2 カソード・3 NC・4 主端子・5 基板・6 主端子) で確かめる
-- 入力の側 (下のブロック): 下の + レールが AD3 の V+ (5 V)、下の − レールが AD3 の GND。R1 は + レールから 1 番 (10 列) へ。2 番 (11 列) から白の線で Q1 のドレイン (19 列) へ。
-  Q1 (2N7000) は印字面を手前にして左から S・G・D で 17・18・19 列。G (18 列) に W1 (黄) と Scope の 1+ (青)、RPD は G と S の間。
+- 入力の側 (下のブロック): 下の + レールが AD3 の V+ (5 V)、下の − レールが AD3 の GND。R1 は + レールから 1 番 (10 列) へ。2 番 (11 列) から白の線で Q1 のドレイン (13 列) へ。
+  Q1 (2N7000) は、ドレインを左にするため印字面を奥に向けて挿す (左から D・G・S で 13・14・15 列。7-2 と同じ向き)。G (14 列) に W1 (黄) と Scope の 1+ (青)、S (15 列) は − レールへ。
   **実物で確かめる: onsemi の 2007 年版の図は S G D、2022 年版の表は D G S で食い違い、表は 2007 年版 (S G D) に従う。実物はテスタで確かめる**
+- Q1 のゲートのプルダウンは省いた (W1 をいつもつないでおくため。W1 を外すときは先に V+ を切る。外したまま V+ を入れると、ゲートが浮いて LED が点くことがある)
 - 出力の側 (上のブロック): 上の − レールが AC の片側 (AC2) で、MT1 の側。TR1 は 16・17・18 列 (16 列 T2 = MT2、17 列 G、18 列 T1 = MT1)。
   **TO-92 のトライアックはピンの並びが作る会社で違う** (7-13 と同じ注意)。18 列は − レールへ
 - R2 は U1 の 6 番 (10 列) から MT2 (16 列) へ。U1 の 4 番 (12 列) から橙の線で TR1 のゲート (17 列) へ。RGK はゲート (17 列) から 21 列 (− レール) へ
-- RL は MT2 (16 列) から 24 列へ、24 列に AC の片側 (AC1、橙)。Scope の 2+ (黄) を 24 列、2− (緑) を 16 列 (`e16`) に当て、RL の両端の電圧を差動で読む
+- RL は MT2 (16 列) から 24 列へ、24 列に AC の片側 (AC1、橙)。Scope の 2+ (黄) を 24 列 (`e24`)、2− (緑) を 16 列 (`e16`) に当て、RL の両端の電圧を差動で読む
 - 上下の − レールは 30 列でつなぐ (AC の共通と AD3 の GND を共通にする。回路図の注意)。ブレッドボードの範囲 (定常 12 V・ピーク 20 V 以下、1 穴 200 mA) の内側
 
 ## 計器の設定
@@ -157,8 +154,8 @@ time: 20ms/div
 trigger: ch1 rising 2.5V at -3div
 ch1: {wave: pulse 4Hz 2.5V offset 2.5V duty 50%, range: 2V/div, position: 1div}
 ch2: {wave: "= 16.97V * sin(2 * pi * 50Hz * t - 0.9425) * step(t) * step(133ms - t) * step(0.9823 - cos(2 * pi * 100Hz * (t - 3ms) - 0.1885))", range: 10V/div, position: -2div}
-cursors: [125ms, 133ms]
-measure: [vmax, vmin, rms]
+cursors: [125.5ms, 133.5ms]
+measure: [vmax, vmin, freq]
 ```
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/07-power/scope/14-ssr.svg)
@@ -167,7 +164,7 @@ measure: [vmax, vmin, rms]
 
 - t = 0 で W1 が H になると、その瞬間に TR1 が点き、負荷に AC が掛かる (MOC3021 はゼロクロスを待たない)
 - ON の間は、各半周期の始めに MT2 が数 V になるまで点かないので、ゼロクロスの直後に 0.5〜0.7 ms の切れ目ができる (位相で 9〜12°)
-- **X1 (125 ms) で W1 が L になっても、負荷の電流は X2 (133 ms) のゼロクロスまで流れ続ける**。遅れは 0〜10 ms (50 Hz の半周期) のどこかで、
+- **W1 が 125 ms で L になっても (X1 はその直後)、負荷の電流は 133 ms のゼロクロスまで流れ続ける (X2 はその直後で 0 V)**。遅れは 0〜10 ms (50 Hz の半周期) のどこかで、
   入力を切った瞬間の AC の位相で決まる。60 Hz なら 0〜8.3 ms
 
 ## 部品
@@ -180,7 +177,6 @@ measure: [vmax, vmin, rms]
 | R1 | 抵抗 (LED の電流) | 180 Ω (21 mA) |
 | R2 | 抵抗 (ゲートの電流の制限) | 330 Ω |
 | RGK | 抵抗 (ゲートと MT1 の間) | 1 kΩ |
-| RPD | 抵抗 (Q1 のゲートのプルダウン) | 10 kΩ |
 | RL | 抵抗 (負荷、2 W) | 220 Ω (全部 ON で 0.65 W) |
 | — | 電源 | 入力は Analog Discovery 3 の V+ (5 V、21 mA)。出力は 12 V の AC アダプタ (出力が交流のトランス式。7-13 と同じ) |
 | — | 信号源・計器 | Analog Discovery 3 の W1 (0〜5 V、4 Hz) と Scope (1+ = Q1 のゲート、2+・2− = RL の両端) |

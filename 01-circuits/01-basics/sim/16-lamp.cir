@@ -1,0 +1,25 @@
+* 1-16 電球の非線形 (図1)。5 V (USB の電源)・押しボタン・電球・検出抵抗 RS 10 ohm・直列の rx
+* 電球は「定格 5 V・40 mA、冷えたとき 12 ohm」の仮定の模型 (実測ではない):
+*   抵抗 R = 12 ohm x (T / 300 K)^1.2 (タングステン)、放射で逃げる電力 k (T^4 - 300^4)、熱容量 cth
+*   k は 5 V・40 mA (125 ohm、T = 2115 K) で釣り合うように決め、cth は小信号の熱の時定数が約 20 ms になる値 (仮定)
+* t = 1 ms にボタンを押す (V1 が 0 -> 5 V)。rx を 0・22・47・100・220・470 ohm に替えて、1 s 後の電圧と電流を読む
+.param rx=1m k=1.0e-14 cth=7.6u
+V1 vs 0 PULSE(0 5 1m 1u 1u 10 20)
+RX vs a {rx}
+B1 a b I = V(a,b)/(12*pow(max(V(t),300)/300,1.2))
+RS b 0 10
+BTH 0 t I = V(a,b)*V(a,b)/(12*pow(max(V(t),300)/300,1.2)) - k*(pow(V(t),4)-8.1e9)
+CTH t 0 {cth}
+RTH t 0 1G
+.ic V(t)=300
+.tran 0 1 0 20u
+.meas tran ipk MAX I(RS) FROM 0 TO 0.2
+.meas tran tpk WHEN I(RS)=ipk
+.meas tran iend FIND I(RS) AT 0.99
+.meas tran vlamp FIND V(a,b) AT 0.99
+.meas tran tlamp FIND V(t) AT 0.99
+.meas tran i10 FIND I(RS) AT 11m
+.meas tran i20 FIND I(RS) AT 21m
+.meas tran i50 FIND I(RS) AT 51m
+.meas tran thalf WHEN I(RS)=(ipk+iend)/2 FALL=1
+.end

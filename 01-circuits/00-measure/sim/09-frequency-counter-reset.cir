@@ -1,0 +1,15 @@
+* 0-9 周波数カウンタ (図1) のリセットの山。ゲート G (74HC393 の 1QB、0.5 Hz の 0〜5 V) を C3 1 nF・R3 10 kΩ で微分し、D1 (1N5819、ショットキー。模型は LTspice の標準ライブラリの 1N5819 の値) で負の側を押さえる
+* G の出力は 50 ohm の出力抵抗と 10 ns の立ち上がりの電圧源とみなす (仮定)。74HC390 の CLR の入力は高インピーダンスとして省く
+* 74HC の 5 V での H のしきい値 3.5 V (データシートの VIH の最小) を超えている時間を読む
+.model D1N5819 D (IS=31.7u N=1.373 RS=0.051 BV=40 CJO=110p M=0.35 VJ=0.4)
+VG g0 0 PULSE(0 5 1u 10n 10n 1 2)
+RO g0 g 50
+C3 g r 1n
+R3 r 0 10k
+D1 0 r D1N5819
+.tran 0 2.1 0 1u
+.meas tran vpk MAX V(r) FROM 1.9 TO 2.1
+.meas tran vpk1 MAX V(r) FROM 0 TO 0.5
+.meas tran tw TRIG V(r) VAL=3.5 RISE=2 TARG V(r) VAL=3.5 FALL=2
+.meas tran vneg MIN V(r) FROM 0.9 TO 1.1
+.end

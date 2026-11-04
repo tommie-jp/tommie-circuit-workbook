@@ -1,0 +1,23 @@
+* 11-9 モータドライバ DRV8833 (図1): 前進・スロー減衰。AIN1 = H のまま、AIN2 を 20 kHz の PWM にする
+* AIN2 = L の間は AOUT1 = VM (5 V)・AOUT2 = L (駆動)、AIN2 = H の間は AOUT1・AOUT2 とも L (ブレーキ。電流は下の FET を回る)
+* DRV8833 の FET は 1 個 0.18 Ω のスイッチ (上下の 2 個で 0.36 Ω、Pololu 2130 の資料の値)
+* モータ RF-300CA は止めた状態 (逆起電力 0) の巻線を R 11.8 Ω (2 V で停動 0.17 A から) + L 1 mH (仮定) で表した。実測ではない
+.param d=0.5
+.model SWF SW (Ron=0.18 Roff=1G Vt=1.65 Vh=0)
+VM vm 0 5
+* AIN2 (3.3 V の PWM、20 kHz)。H の時間 = (1 - d) × 50 µs
+Vin2 ain2 0 PULSE(0 3.3 0 10n 10n {(1-d)*50u-20n} 50u)
+* ain2 が L で上の FET が入る (反転は B 源で作る)
+Binv nin2 0 V={3.3-V(ain2)}
+SH1 vm out1 nin2 0 SWF
+SL1 out1 0 ain2 0 SWF
+RL2 out2 0 0.18
+R1 out1 m1 15
+Rm m1 m2 11.8
+Lm m2 out2 1m
+.step param d list 0.5 0.8
+.tran 0 20m 0 0.1u
+.meas tran im AVG I(R1) FROM=10m TO=20m
+.meas tran vout1 AVG V(out1) FROM=10m TO=20m
+.meas tran ipp PP I(R1) FROM=15m TO=20m
+.end

@@ -1,0 +1,26 @@
+* 11-12 デカップリングとグラウンド (図1): 74HC04 の 1 回路が 100 pF を 1 MHz で充放電する
+* 3V3 から 74HC04 の VCC までのジャンパ線 15 cm を 150 nH + 0.1 Ω (仮定: 線 1 cm あたり 10 nH の目安) で表す
+* 74HC04 の出力は、入力の反転を VCC の高さで出す源 + 出力の内部抵抗 40 Ω (3.3 V での目安。仮定)。H を出して C2 を充電する電流は VCC から引く
+* C1 (100 nF、ESL 2 nH の仮定) あり・なしを比べる
+* 実測ではない
+.param c1=100n
+V3 v3 0 3.3
+Lw v3 a 150n
+Rw a vcc 0.1
+C1 vcc c1n {c1}
+L1 c1n 0 2n
+* 入力 (Pico 2 の GP15): 1 MHz、縁 3 ns
+Vin in 0 PULSE(0 3.3 0 3n 3n 497n 1u)
+Bout o1 0 V={V(vcc)*(1-V(in)/3.3)}
+Rout o1 out 40
+* 充電の電流 (Rout を出力へ流れる正の分) を VCC から取る
+Bsup vcc 0 I={max(I(Rout),0)}
+C2 out 0 100p
+* 74HC04 の中の小さな容量 (目安 10 pF) も VCC と GND の間に置く
+Cic vcc 0 10p
+.step param c1 list 100n 1p
+.tran 0 40u 0 0.2n
+.meas tran vpp PP V(vcc) FROM=30u TO=40u
+.meas tran vmin MIN V(vcc) FROM=30u TO=40u
+.meas tran ipk MAX I(Lw) FROM=30u TO=40u
+.end

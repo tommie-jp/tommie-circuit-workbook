@@ -1,0 +1,16 @@
+* 11-8 割り込みとロータリーエンコーダ (図1): KY-040 の CLK の 1 本
+* プルアップ 10 kΩ (モジュールの基板の上、目安) + C1 10 nF。接点は GND へ落とすスイッチ (Ron 1 Ω)
+* 接点のはね (チャタリング) を仮定して入れる: 閉じた直後に 20 µs 開くのを 2 回、開いた直後に 20 µs 閉じるのを 1 回
+* GPIO の入力は電流ゼロの理想。実測ではない
+.model SWC SW (Ron=1 Roff=1G Vt=0.5 Vh=0)
+V1 vcc 0 3.3
+Rp vcc clk 10k
+C1 clk 0 10n
+* ctl が 1 V なら接点が閉じる
+Vctl ctl 0 PWL(0 0 1m 0 1.0001m 1 1.05m 1 1.0501m 0 1.07m 0 1.0701m 1 1.12m 1 1.1201m 0 1.14m 0 1.1401m 1 5m 1 5.0001m 0 5.03m 0 5.0301m 1 5.05m 1 5.0501m 0 10m 0)
+S1 clk 0 ctl 0 SWC
+.tran 0 10m 0 0.5u
+.meas tran vbounce MAX V(clk) FROM=1.01m TO=1.5m
+.meas tran tr TRIG V(clk) VAL=0.33 RISE=LAST TARG V(clk) VAL=2.97 RISE=LAST
+.meas tran vrel MIN V(clk) FROM=5.031m TO=5.05m
+.end

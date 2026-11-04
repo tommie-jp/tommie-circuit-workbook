@@ -14,13 +14,13 @@
 
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 | 実測 | 1.0 まで |
 | --- | --- | --- | --- | --- | --- | --- |
-| [回路の教科書](01-circuits/README.md) | 232 | 195 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 37 |
+| [回路の教科書](01-circuits/README.md) | 232 | 209 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 23 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 102 |
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1118** | **686** | **0** | **0** | **0** | |
+| **計** | **1118** | **700** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -36,7 +36,7 @@
 | 0-6 | [安定化電源とファンクションジェネレータ — 電流制限を掛けて実験する](01-circuits/00-measure/06-bench-supply-limiting.md) | ✓ | [ ] | — | — |
 | 0-7 | [テブナン等価を測って確かめる](01-circuits/00-measure/07-thevenin.md) | ✓ | [ ] | — | — |
 | 0-8 | [コンデンサ容量計 — ブリッジで測る](01-circuits/00-measure/08-capacitance-bridge.md) | ✓ | [ ] | — | — |
-| 0-9 | 周波数カウンタ (CMOS) | | | | |
+| 0-9 | [周波数カウンタ (CMOS)](01-circuits/00-measure/09-frequency-counter.md) | ✓ | [ ] | — | — |
 | 0-10 | [ロジックプローブと音で聞く検出器](01-circuits/00-measure/10-logic-probe.md) | ✓ | [ ] | — | — |
 
 ### 第 1 章 基本 — 直流と受動部品
@@ -54,7 +54,7 @@
 | 1-9 | [ダイオードのクリッパとクランパ](01-circuits/01-basics/09-diode-clipper-clamper.md) | ✓ | [ ] | — | — |
 | 1-10 | [倍電圧 — ダイオードとコンデンサで (コッククロフト)](01-circuits/01-basics/10-cockcroft-walton.md) | ✓ | [ ] | — | — |
 | 1-11 | [LC 共振 — 直列と並列](01-circuits/01-basics/11-lc-resonance.md) | ✓ | [ ] | — | — |
-| 1-12 | 保護素子 — ヒューズ・PTC・バリスタ | | | | |
+| 1-12 | [保護素子 — ヒューズ・PTC・バリスタ](01-circuits/01-basics/12-protection-devices.md) | ✓ | [ ] | — | — |
 | 1-13 | [ツェナーで基準電圧](01-circuits/01-basics/13-zener-reference.md) | ✓ | [ ] | — | — |
 | 1-14 | [じゃがいも電池・レモン電池](01-circuits/01-basics/14-lemon-battery.md) | ✓ | [ ] | — | — |
 | 1-15 | [熱電対 — 2 種の金属で電圧](01-circuits/01-basics/15-thermocouple.md) | ✓ | [ ] | — | — |
@@ -84,7 +84,7 @@
 | 2-17 | [MOSFET のゲート駆動 — ゲート抵抗・プルダウン・ミラー容量](01-circuits/02-transistors/17-mosfet-gate-drive.md) | ✓ | [ ] | — | — |
 | 2-18 | [IGBT スイッチ](01-circuits/02-transistors/18-igbt-switch.md) | ✓ | [ ] | — | — |
 | 2-19 | [フォトカプラで絶縁](01-circuits/02-transistors/19-photocoupler.md) | ✓ | [ ] | — | — |
-| 2-20 | サイリスタ・トライアックの点弧 (低圧 AC) | | | | |
+| 2-20 | [サイリスタ・トライアックの点弧 (低圧 AC)](01-circuits/02-transistors/20-thyristor-triac-trigger.md) | ✓ | [ ] | — | — |
 | 2-21 | [エミッタ抵抗を分ける — バイアスと利得を別々に決める](01-circuits/02-transistors/21-split-emitter.md) | ✓ | [ ] | — | — |
 
 ### 第 3 章 発振とタイマー
@@ -205,11 +205,11 @@
 | 8-10 | [温度センサー IC (LM35 / TMP36)](01-circuits/08-sensors/10-temperature-ic.md) | ✓ | [ ] | — | — |
 | 8-11 | [リードスイッチ](01-circuits/08-sensors/11-reed-switch.md) | ✓ | [ ] | — | — |
 | 8-12 | [圧電 (ノック)](01-circuits/08-sensors/12-piezo-knock.md) | ✓ | [ ] | — | — |
-| 8-13 | 加速度 (モジュール) | | | | |
+| 8-13 | [加速度 (モジュール)](01-circuits/08-sensors/13-accelerometer.md) | ✓ | [ ] | — | — |
 | 8-14 | [静電容量タッチ — 発振周波数の変化](01-circuits/08-sensors/14-capacitive-touch.md) | ✓ | [ ] | — | — |
 | 8-15 | [ロータリーエンコーダ](01-circuits/08-sensors/15-rotary-encoder.md) | ✓ | [ ] | — | — |
 | 8-16 | [湿度 (DHT)](01-circuits/08-sensors/16-dht11.md) | ✓ | [ ] | — | — |
-| 8-17 | 気圧 (I2C) | | | | |
+| 8-17 | [気圧 (I2C)](01-circuits/08-sensors/17-bmp280-i2c.md) | ✓ | [ ] | — | — |
 | 8-18 | [太陽電池を光センサーに](01-circuits/08-sensors/18-solar-cell-sensor.md) | ✓ | [ ] | — | — |
 | 8-19 | [フォトダイオードの短絡電流](01-circuits/08-sensors/19-photodiode.md) | ✓ | [ ] | — | — |
 | 8-20 | [LED を受光素子に](01-circuits/08-sensors/20-led-light-sensor.md) | ✓ | [ ] | — | — |
@@ -279,13 +279,13 @@
 | 11-3 | [ADC で CdS を読む](01-circuits/11-microcontrollers/03-adc-cds.md) | ✓ | [ ] | — | — |
 | 11-4 | [PWM で LED 調光とサーボ](01-circuits/11-microcontrollers/04-pwm-led-servo.md) | ✓ | [ ] | — | — |
 | 11-5 | [I2C センサー (温度)](01-circuits/11-microcontrollers/05-i2c-temperature.md) | ✓ | [ ] | — | — |
-| 11-6 | SPI (シフトレジスタ / 表示) | | | | |
-| 11-7 | UART — Pico 2 台で通信 | | | | |
-| 11-8 | 割り込みとロータリーエンコーダ | | | | |
-| 11-9 | モータドライバ (DRV8833) | | | | |
-| 11-10 | Pico 2 W で しきい値を通知 | | | | |
-| 11-11 | USB 給電と電源設計 (VSYS / VBUS) | | | | |
-| 11-12 | デカップリングとグラウンド | | | | |
+| 11-6 | [SPI (シフトレジスタ / 表示)](01-circuits/11-microcontrollers/06-spi-shift-register.md) | ✓ | [ ] | — | — |
+| 11-7 | [UART — Pico 2 台で通信](01-circuits/11-microcontrollers/07-uart-two-picos.md) | ✓ | [ ] | — | — |
+| 11-8 | [割り込みとロータリーエンコーダ](01-circuits/11-microcontrollers/08-rotary-encoder-irq.md) | ✓ | [ ] | — | — |
+| 11-9 | [モータドライバ (DRV8833)](01-circuits/11-microcontrollers/09-drv8833-motor.md) | ✓ | [ ] | — | — |
+| 11-10 | [Pico 2 W で しきい値を通知](01-circuits/11-microcontrollers/10-pico2w-threshold-notify.md) | ✓ | [ ] | — | — |
+| 11-11 | [USB 給電と電源設計 (VSYS / VBUS)](01-circuits/11-microcontrollers/11-usb-vsys-power.md) | ✓ | [ ] | — | — |
+| 11-12 | [デカップリングとグラウンド](01-circuits/11-microcontrollers/12-decoupling-ground.md) | ✓ | [ ] | — | — |
 | 11-13 | [サーボの角度を PWM のパルス幅で決める](01-circuits/11-microcontrollers/13-pwm-servo.md) | ✓ | [ ] | — | — |
 
 ### 第 12 章 実用回路 — 作品
@@ -296,12 +296,12 @@
 | 12-2 | [人感ライト — PIR + CdS + MOSFET](01-circuits/12-projects/02-motion-light.md) | ✓ | [ ] | — | — |
 | 12-3 | [水漏れ・水位アラーム](01-circuits/12-projects/03-water-alarm.md) | ✓ | [ ] | — | — |
 | 12-4 | 電子ホタル — フェードイン・アウト | | | | |
-| 12-5 | ドアチャイム / メロディ IC | | | | |
+| 12-5 | [ドアチャイム / メロディ IC](01-circuits/12-projects/05-door-chime-melody.md) | ✓ | [ ] | — | — |
 | 12-6 | インターホン (LM386) | | | | |
 | 12-7 | 電池チェッカー | | | | |
 | 12-8 | 植物の水やりアラーム | | | | |
 | 12-9 | LED イルミネーション (4017) | | | | |
-| 12-10 | ソーラーガーデンライト | | | | |
+| 12-10 | [ソーラーガーデンライト](01-circuits/12-projects/10-solar-garden-light.md) | ✓ | [ ] | — | — |
 
 ### 第 13 章 電源装置 — 定電圧・定電流の使い方
 

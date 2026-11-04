@@ -1,0 +1,11 @@
+* 1-12 バリスタの働き (図4)。5 V の線に、内部抵抗 10 ohm の源から 1 ms・60 V の山 (サージ) が来る。VR1 あり / なしで負荷の電圧を比べる
+* バリスタは 12-protection.cir と同じ行動模型 (1 mA で 22 V、指数 30。仮定)。ブレッドボードには組まない (20 V を超えるため)
+.param vr=1
+V1 s 0 PWL(0 5 1m 5 1.01m 60 2m 60 2.01m 5 5m 5)
+RSRC s a 10
+BVR a 0 I = if(vr, 1m*pow(abs(V(a))/22,30)*sgn(V(a)), 0)
+RL a 0 22
+.tran 0 5m 0 1u
+.meas tran vmax MAX V(a)
+.meas tran ivr MAX I(BVR)
+.end

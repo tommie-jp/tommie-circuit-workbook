@@ -1,0 +1,19 @@
+* 8-13 加速度 (モジュール) (図1)。ADXL335 の基板の X 出力を「1.65 V + 0.33 V × sin(傾き)」の電圧源で置く (感度 330 mV/g は仮定)
+* 時刻 1 s を傾き 1° と読む (0〜90 s で 0〜90°)。3Vo は 3.3 V。LM393 は開放コレクタの出力を電圧制御スイッチで置いた
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.model SWC SW(Ron=10 Roff=100Meg Vt=0 Vh=0.001)
+VCC vcc 0 5
+V3 v3 0 3.3
+Bx x 0 V=1.65+0.33*sin(time*pi/180)
+R1 v3 th 9.1k
+R2 th 0 11k
+* - 入力 = x、+ 入力 = th。x > th で出力が L (LED が点く)
+S1 out 0 x th SWC
+R3 vcc a 1k
+D1 a out LED
+.tran 0 90 0 0.05
+.meas tran vth FIND V(th) AT 1
+.meas tran ang_on FIND time WHEN V(x)=V(th) RISE=1
+.meas tran iled MAX I(D1)
+.meas tran ith AVG I(R1) FROM 1 TO 2
+.end

@@ -43,7 +43,7 @@ parts:
   Q2: npn 13,8
   Q3: npn 11,10 mirror
   RS: resistor 13,10 13,12 200
-  VEE: vee 9,13
+  VEE: vee 9,13 5V
 wires:
   - 1,3 -- 3,3
   - 1,6 -- 3,6

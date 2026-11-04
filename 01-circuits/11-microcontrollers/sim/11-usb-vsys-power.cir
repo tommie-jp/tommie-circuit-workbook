@@ -1,0 +1,29 @@
+* 11-11 USB 給電と電源設計 (図1): VBUS → D1 (基板の中) → VSYS と、外の 5 V → DEXT (1N5819) → VSYS の OR
+* 基板の中の D1 も 1N5819 と同じショットキーの模型で表した (仮定。品番は Pico 2 の回路図で確かめる)
+* Pico 2 の消費は VSYS から 25 mA の定電流 (仮定、何もつながない Pico 2 の目安)。VSYS/3 の分圧 (200 kΩ + 100 kΩ 相当) も入れる
+* 3 通り: (a) USB だけ 5.0 V、(b) 外の 5 V だけ、(c) 両方 (USB 5.1 V・外 5.0 V)。実測ではない
+.model D1N5819 D (IS=31.7u RS=0.051 N=1.373 CJO=110p M=0.35 VJ=0.3 BV=40)
+* (a)
+Vbus_a vbus_a 0 5.0
+D1a vbus_a vsys_a D1N5819
+Ia vsys_a 0 25m
+Rta vsys_a adc_a 200k
+Rba adc_a 0 100k
+* (b)
+Vext_b vext_b 0 5.0
+Dxb vext_b vsys_b D1N5819
+Ib vsys_b 0 25m
+* (c)
+Vbus_c vbus_c 0 5.1
+Vext_c vext_c 0 5.0
+D1c vbus_c vsys_c D1N5819
+Dxc vext_c vsys_c D1N5819
+Ic vsys_c 0 25m
+.op
+.meas op vsys_usb PARAM V(vsys_a)
+.meas op vadc_usb PARAM V(adc_a)
+.meas op vsys_ext PARAM V(vsys_b)
+.meas op vsys_both PARAM V(vsys_c)
+.meas op i_usb_both PARAM I(D1c)
+.meas op i_ext_both PARAM I(Dxc)
+.end

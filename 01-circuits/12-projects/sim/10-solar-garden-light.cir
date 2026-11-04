@@ -1,0 +1,25 @@
+* 12-10 ソーラーガーデンライト (図1): 太陽電池の電圧 Vpv を 0 → 3.3 V に振り (AD3 の W1 の代わり)、白い LED の電流と Q2 のコレクタを見る
+* 電池は 3.6 V (NiMH 3 本の公称、AD3 の V+ で代わり)。Q1・Q2 は 2SC1815 の代用、白い LED は仮定の模型 (10 mA で約 3.0 V)
+* 太陽電池の内部は表さない (理想の電圧源)。D1 は 1N5819 の模型。実測ではない
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model DW D (IS=4e-27 N=2.0 RS=10)
+.model D1N5819 D (IS=31.7u RS=0.051 N=1.373 CJO=110p M=0.35 VJ=0.3 BV=40)
+Vbat bat 0 3.6
+Vpv pv 0 0
+D1 pv bat D1N5819
+R2 pv b1 100k
+R3 b1 0 100k
+Q1 b2 b1 0 Q1815
+R4 bat b2 10k
+Q2 k b2 0 Q1815
+R5 bat a 47
+D2 a k DW
+.dc Vpv 0 3.3 0.01
+.meas dc vth FIND V(pv) WHEN I(R5)=2m FALL=1
+.meas dc iled0 FIND I(R5) AT=0
+.meas dc vk0 FIND V(k) AT=0
+.meas dc vf0 FIND V(a)-V(k) AT=0
+.meas dc iled3 FIND I(R5) AT=3.3
+.meas dc vk3 FIND V(k) AT=3.3
+.meas dc ibat0 FIND -I(Vbat) AT=0
+.end

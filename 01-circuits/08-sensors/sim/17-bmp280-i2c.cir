@@ -1,0 +1,20 @@
+* 8-17 気圧 (I2C) (図1)。I2C の SCL を「開放ドレインの L + プルアップ Rp + 線の容量 Cb」で置き、立ち上がりの時間を読む
+* Cb (BMP280 の基板・ジャンパ線・AD3 の DIO の入力を合わせた容量) は 50 pF と仮定した (実測ではない)。SCL は 100 kHz (H と L が 5 us ずつ)
+* rp: 4.7 kΩ (この題) と 47 kΩ (大きすぎる比べ)
+.param rp=4.7k
+.model SWO SW(Ron=20 Roff=1G Vt=0.5 Vh=0)
+VDD vdd 0 3.3
+* 1 = 開放ドレインが L に引く
+VK k 0 PULSE(1 0 5u 1n 1n 5u 10u)
+S1 scl 0 k 0 SWO
+RP vdd scl {rp}
+CB scl 0 50p
+.step param rp list 4.7k 47k
+.tran 0 40u 0 5n
+.meas tran t30 FIND time WHEN V(scl)=0.99 RISE=2
+.meas tran t70 FIND time WHEN V(scl)=2.31 RISE=2
+.meas tran tr PARAM t70-t30
+.meas tran vh2 FIND V(scl) AT 24.99u
+.meas tran vol FIND V(scl) AT 29u
+.meas tran isink FIND I(RP) AT 29u
+.end

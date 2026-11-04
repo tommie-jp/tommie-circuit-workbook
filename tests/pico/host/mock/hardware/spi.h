@@ -10,3 +10,5 @@ typedef enum { SPI_LSB_FIRST = 0, SPI_MSB_FIRST = 1 } spi_order_t;
 static inline uint spi_init(spi_inst_t *s, uint b) { (void)s; M.spi_baud = b; return b; }
 static inline void spi_set_format(spi_inst_t *s, uint bits, spi_cpol_t p, spi_cpha_t a, spi_order_t o) { (void)s; M.spi_bits = bits; M.spi_cpol = (uint)p; M.spi_cpha = (uint)a; M.spi_order = (uint)o; }
 static inline int spi_write16_blocking(spi_inst_t *s, const uint16_t *src, size_t n) { (void)s; for (size_t i = 0; i < n; i++) if (M.nspi < 256) M.spi_tx[M.nspi++] = src[i]; return (int)n; }
+/* 8 bit の送り (01-circuits 11-6)。送ったバイトを spi_tx に並べる */
+static inline int spi_write_blocking(spi_inst_t *s, const uint8_t *src, size_t n) { (void)s; for (size_t i = 0; i < n; i++) if (M.nspi < 256) M.spi_tx[M.nspi++] = src[i]; return (int)n; }

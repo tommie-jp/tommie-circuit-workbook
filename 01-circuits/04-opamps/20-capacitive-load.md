@@ -95,9 +95,9 @@ parts:
     label: AD3 (Supplies −5V・Scope 1)
     pins: [1+, V-, 1-]
   U1: dip8 @ e14 LM358
-  CL1: capacitor j14 -b14 470p
+  CL1: capacitor j14 -b14 470p cap=left
   Riso: resistor b15 b20 1k
-  CL2: capacitor a20 -t20 470p
+  CL2: capacitor a20 -t20 470p cap=left
 wires:
   - AD3.V+ -- +t2 red
   - AD3.GND -- -t3 black
@@ -148,9 +148,9 @@ W1 は 10 kHz・±0.1 V の方形波。CH1 で U1 の出力、CH2 で C<sub>L2</
 title: 図3 CL を直に (CH1) は 43 % 跳ねて揺れ、Riso を挟む (CH2) は跳ねない
 time: 1us/div
 trigger: ch2 rising 0V at -4div
-ch1: {wave: square 10kHz 0.1V | lc 640kHz 1.9, range: 50mV/div}
-ch2: {wave: square 10kHz 0.1V | rc 0.4us, range: 50mV/div}
-cursors: [0.9us, 2.6us]
+ch1: {wave: square 10kHz 0.1V | lc 640kHz 1.9, range: 50mV/div, position: 0div}
+ch2: {wave: square 10kHz 0.1V | rc 0.4us, range: 50mV/div, position: 0div}
+cursors: [0.52us, 2.15us]
 measure: [vmax, vmin]
 ```
 
@@ -158,7 +158,7 @@ measure: [vmax, vmin]
 
 図3 は LTspice の波形に合わせた想定図 (CH1 は 2 次のローパス、CH2 は 1 次のローパスで近似した)。CH1 は −0.1 V から +0.1 V へ上がるとき、
 最初の山で約 0.186 V まで行き過ぎ (段の 0.2 V の 43 %)、周期 約 1.6 µs で揺れながら 10 µs ほどかけて収まる。CH2 は行き過ぎずに 0.1 V へ近づく。
-カーソル X1・X2 は CH1 の 1 つ目の山と 2 つ目の山の近く。間が揺れの周期で、周波数は約 0.6 MHz (OP アンプの帯域の 1 MHz の少し下)。
+カーソル X1 (0.52 µs)・X2 (2.15 µs) は CH1 の 1 つ目の山と 2 つ目の山。間が揺れの周期で、周波数は約 0.6 MHz (OP アンプの帯域の 1 MHz の少し下)。
 
 ## 部品
 

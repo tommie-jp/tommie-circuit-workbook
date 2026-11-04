@@ -1,0 +1,26 @@
+* 2-20 サイリスタの点弧 (図1 の SCR の側)。mode 1: 12 V (実効値)・50 Hz の交流でゲートを押し続ける / mode 2: 交流で 21〜22 ms だけ押す /
+* mode 3: 直流 5 V で 21〜22 ms だけ押す。アノードの電圧・負荷の電流・ゲートの電流を .tran で読む
+* サイリスタは 04-denken の sim/05-thyristor-phase-control.cir と同じ NPN + PNP の 2 トランジスタ模型 (2N5064 の代用、仮定)。RGK 1 kohm はゲート-カソード間。
+* 交流アダプタは理想の 12 V 実効値 (振幅 17 V) とした。どれも実測ではない
+.param mode=1
+.model QN NPN(IS=2e-14 BF=100 BR=0.001 VAF=100 CJE=5p CJC=3p)
+.model QP PNP(IS=2e-14 BF=50 BR=0.001 VAF=100 CJE=5p CJC=3p)
+V1 w 0 SIN({if(mode==3,5,0)} {if(mode==3,0,17)} 50)
+RL w a 680
+Q2 n2 n1 a QP
+Q1 n1 n2 0 QN
+RGK n2 0 1k
+RG gp n2 1k
+B1 gp 0 V={if(mode==1, 5, if(time>21m & time<22m, 5, 0))}
+.step param mode list 1 2 3
+.tran 0 100m 0 10u
+.meas tran ig AVG I(RG) FROM=60m TO=61m
+.meas tran ion MAX I(RL) FROM=60m TO=80m
+.meas tran von FIND V(a) AT=65m
+.meas tran vrev MIN V(a) FROM=60m TO=80m
+.meas tran vavg AVG V(w,a) FROM=60m TO=100m
+.meas tran ia21 FIND I(RL) AT=21.5m
+.meas tran ia45 FIND I(RL) AT=45m
+.meas tran ia25 FIND I(RL) AT=25m
+.meas tran toff WHEN I(RL)=0.5m FALL=1 TD=22m
+.end

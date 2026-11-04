@@ -1,0 +1,17 @@
+* 11-10 Pico 2 W で しきい値を通知 (図1): 11-3 と同じ CdS の分圧。CdS を抵抗で表し、10 kΩ・200 kΩ・23 kΩ・56 kΩ の 4 本を並べる
+* しきい値 0.5 V・1.0 V になる CdS = 10 kΩ × (3.3 V - V) / V = 56 kΩ・23 kΩ を確かめる。ADC の入力は電流ゼロの理想。実測ではない
+V1 vcc 0 3.3
+Ra vcc na 10k
+R1a na 0 10k
+Rb vcc nb 200k
+R1b nb 0 10k
+Rc vcc nc 23k
+R1c nc 0 10k
+Rd vcc nd 56k
+R1d nd 0 10k
+.op
+.meas op v10k PARAM V(na)
+.meas op v200k PARAM V(nb)
+.meas op v23k PARAM V(nc)
+.meas op v56k PARAM V(nd)
+.end

@@ -1,0 +1,24 @@
+* 11-7 UART — Pico 2 台 (図1): A の TX → R1 (1 kΩ) → B の RX
+* (1) 9600 bps の 1 ビット (104 µs) に対して、R1 と RX の入力の容量 (仮定 20 pF: 入力 5 pF + 配線) で縁がどれだけなまるか
+* (2) TX どうしをつないでしまったとき (A が H・B が L を出してぶつかる) の電流。R1 あり (1 kΩ) と直結を比べる
+* GPIO の出力は理想の 3.3 V の源 + 内部抵抗 40 Ω (仮定)。実測ではない
+.model DESD D (IS=1e-14 N=1)
+* --- (1) 縁のなまり
+Vtx tx 0 PULSE(0 3.3 10u 1n 1n 104.17u 208.33u)
+Rout1 tx a1 40
+R1 a1 rx 1k
+Crx rx 0 20p
+* --- (2) TX どうしがぶつかる: R1 あり
+V2 t2 0 3.3
+Ro2 t2 a2 40
+R12 a2 b2 1k
+Rb2 b2 0 40
+* --- (2) 直結
+V3 t3 0 3.3
+Ro3 t3 a3 40
+Rb3 a3 0 40
+.tran 0 300u 0 10n
+.meas tran trise TRIG V(rx) VAL=0.33 RISE=1 TARG V(rx) VAL=2.97 RISE=1
+.meas tran i_with AVG I(R12) FROM=100u TO=200u
+.meas tran i_without AVG I(Ro3) FROM=100u TO=200u
+.end

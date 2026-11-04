@@ -1,0 +1,42 @@
+* 11-6 SPI と 74HC595 (図1): 3.3 V の 74HC595 の出力 1 本 → 470 Ω → 7 セグの 1 セグメント (赤)
+* 74HC595 の出力は 3.3 V の理想の源と内部抵抗 Rout (仮定: 3.3 V で 50 Ω 前後。データシートの VOH の目安から)
+* LED は 1-1 と同じ仮定のモデル (赤、Vf 約 1.9 V)。1 本だけ点けた場合と 7 本 (数字の 8) の場合の電流を比べる
+* 7 本のときは VCC・GND のピンに 7 本ぶん流れるので、電源の線の内部抵抗 Rvcc (仮定 5 Ω) で落ちる電圧も見る
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.param rout=50
+* --- 1 本
+V1 v1 0 3.3
+Ro1 v1 o1 {rout}
+R1 o1 a1 470
+D1 a1 0 LED
+* --- 7 本 (電源側で 5 Ω を共有)
+V7 v7 0 3.3
+Rv v7 vcc7 5
+Ro71 vcc7 o71 {rout}
+R71 o71 a71 470
+D71 a71 0 LED
+Ro72 vcc7 o72 {rout}
+R72 o72 a72 470
+D72 a72 0 LED
+Ro73 vcc7 o73 {rout}
+R73 o73 a73 470
+D73 a73 0 LED
+Ro74 vcc7 o74 {rout}
+R74 o74 a74 470
+D74 a74 0 LED
+Ro75 vcc7 o75 {rout}
+R75 o75 a75 470
+D75 a75 0 LED
+Ro76 vcc7 o76 {rout}
+R76 o76 a76 470
+D76 a76 0 LED
+Ro77 vcc7 o77 {rout}
+R77 o77 a77 470
+D77 a77 0 LED
+.op
+.meas op i1 PARAM I(R1)
+.meas op vf1 PARAM V(a1)
+.meas op i7each PARAM I(R71)
+.meas op i7total PARAM I(Rv)
+.meas op vcc7 PARAM V(vcc7)
+.end
