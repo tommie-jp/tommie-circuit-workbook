@@ -31,7 +31,7 @@ const written = (book, chapterNumber, number, extra = {}) => {
 
 const table = (rowsByBook, changed = new Map()) => progressTable(new Map(rowsByBook), changed);
 
-test('lists each entry as a checkbox for 目で確認, links the written ones, and counts each book', () => {
+test('tables each entry with a checkbox for 目で確認, links the written ones, and counts each book', () => {
   const text = table([[circuits.dir, [
     written(circuits, 1, 1, { seen: '2026-11-01', reviewed: '2026-10-30' }),
     written(circuits, 1, 2),
@@ -47,12 +47,14 @@ test('lists each entry as a checkbox for 目で確認, links the written ones, a
   assert.ok(text.includes('## 回路の教科書'));
   assert.ok(text.includes('### 第 1 章 基本 — 直流と受動部品'));
   assert.ok(!text.includes('### 第 0 章'));
-  assert.ok(text.includes('- [x] 1-1 [題 1-1](01-circuits/01-basics/01-x.md) ✓ 2026-11-01 · Fable ✓ 2026-10-30\n'));
+  assert.match(text, /\| # \| 題 \| 作成 \| 目で確認 \| Fable で確認 \|/);
+  assert.ok(text.includes('| 1-1 | [題 1-1](01-circuits/01-basics/01-x.md) | ✓ | [x] 2026-11-01 | ✓ 2026-10-30 |\n'));
   // Fable の欄は印が無くても出す (— はまだ)。
-  assert.ok(text.includes('- [ ] 1-2 [題 1-2](01-circuits/01-basics/02-x.md) · Fable —\n'));
-  assert.ok(text.includes('- [ ] 1-3 [題 1-3](01-circuits/01-basics/03-x.md) · Fable ✓ 2026-10-30\n'));
-  // まだの題は箱なし (押しても作成にはならない)。
-  assert.ok(text.includes('- 1-4 題 1-4 (まだ)\n'));
+  assert.ok(text.includes('| 1-2 | [題 1-2](01-circuits/01-basics/02-x.md) | ✓ | [ ] | — |\n'));
+  assert.ok(text.includes('| 1-3 | [題 1-3](01-circuits/01-basics/03-x.md) | ✓ | [ ] | ✓ 2026-10-30 |\n'));
+  // まだの題は箱なし (押しても作成にはならない)。空の欄は空白 1 つ (markdownlint の MD060)。
+  assert.ok(text.includes('| 1-4 | 題 1-4 | | | |\n'));
+  assert.ok(!text.includes('|  |'));
 });
 
 test('unchecks a stale review (△) when the file changed after the date', () => {
@@ -60,7 +62,7 @@ test('unchecks a stale review (△) when the file changed after the date', () =>
   const text = table([[circuits.dir, [entry]]], new Map([[entry.path, '2026-10-25']]));
 
   // 確認した日より後に書き換えた → △ で箱は空。同じ日なら ✓。
-  assert.ok(text.includes('- [ ] 1-1 [題 1-1](01-circuits/01-basics/01-x.md) △ 2026-10-20 · Fable ✓ 2026-10-25\n'));
+  assert.ok(text.includes('| 1-1 | [題 1-1](01-circuits/01-basics/01-x.md) | ✓ | [ ] △ 2026-10-20 | ✓ 2026-10-25 |\n'));
   // △ は数に入れない。
   assert.match(text, /\| \[回路の教科書\]\(01-circuits\/README\.md\) \| 1 \| 1 \| 0 \| 1 \|/);
 });
@@ -82,18 +84,22 @@ test('finds the boxes the reader toggled since the last run, by book and id', ()
 
 ### 第 1 章
 
-- [x] 1-1 [題 1-1](01-circuits/01-basics/01-x.md) ✓ 2026-11-01 · Fable ✓ 2026-10-30
-- [x] 1-2 [題 1-2](01-circuits/01-basics/02-x.md) · Fable —
-- [ ] 1-3 [題 1-3](01-circuits/01-basics/03-x.md) ✓ 2026-11-01
-- [X] 1-4 [題 1-4](01-circuits/01-basics/04-x.md) △ 2026-10-20 · Fable ✓ 2026-10-25
-- [ ] 1-5 [題 1-5](01-circuits/01-basics/05-x.md) · Fable ✓ 2026-10-25
-- 1-6 題 1-6 (まだ)
+| # | 題 | 作成 | 目で確認 | Fable で確認 |
+| --- | --- | --- | --- | --- |
+| 1-1 | [題 1-1](01-circuits/01-basics/01-x.md) | ✓ | [x] 2026-11-01 | ✓ 2026-10-30 |
+| 1-2 | [題 1-2](01-circuits/01-basics/02-x.md) | ✓ | [x] | — |
+| 1-3 | [題 1-3](01-circuits/01-basics/03-x.md) | ✓ | [ ] 2026-11-01 | — |
+| 1-4 | [題 \\|1-4\\|](01-circuits/01-basics/04-x.md) | ✓ | [X] △ 2026-10-20 | ✓ 2026-10-25 |
+| 1-5 | [題 1-5](01-circuits/01-basics/05-x.md) | ✓ | [ ] | ✓ 2026-10-25 |
+| 1-6 | 題 1-6 | | | |
 
 ## NanoVNA の教科書
 
 ### 第 3 章
 
-- [x] 1-2 [題 1-2](03-nanovna/03-fixtures/02-x.md)
+| # | 題 | 作成 | 目で確認 | Fable で確認 |
+| --- | --- | --- | --- | --- |
+| 1-2 | [題 1-2](03-nanovna/03-fixtures/02-x.md) | ✓ | [x] | — |
 `;
   assert.deepEqual(toggledMarks(text), [
     { book: circuits, id: '1-2', path: '01-circuits/01-basics/02-x.md', checked: true },

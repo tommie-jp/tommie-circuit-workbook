@@ -4,14 +4,15 @@
  *   node scripts/progress.mjs          箱の変化を題に書き戻してから、PROGRESS.md を書き直す
  *   node scripts/progress.mjs --check  書き直し (か書き戻し) が要るなら 1 で終わる。題には触らない
  *
- * 1 行は 1 題 (計画の全部)。書いた題は **目で確認のチェックボックス** で、まだの題は箱なし:
+ * 章ごとの表で、1 行は 1 題 (計画の全部)。書いた題の「目で確認」の欄が **チェックボックス**:
  *
- *   - [x] 1-1 [題](path) ✓ 2026-11-01 · Fable ✓ 2026-10-30
- *   - [ ] 1-2 [題](path) · Fable —
+ *   | 1-1 | [題](path) | ✓ | [x] 2026-11-01 | ✓ 2026-10-30 |
+ *   | 1-2 | [題](path) | ✓ | [ ] | — |
+ *   | 1-3 | 題 | | | |                       ← まだの題 (箱なし)
  *
- * - **作成** — 題のファイルがあれば link (箱つき)。まだの題は字だけ (手で書かない)
+ * - **作成** — 題のファイルがあれば ✓ と link。まだの題は字だけ (手で書かない)
  * - **目で確認** (箱) — front matter の `seen: YYYY-MM-DD` (人が目で確認した日)。
- *   読む人が箱を `[x]` にして (VS Code なら行で Alt+C) このスクリプトを回すと、題の front matter に
+ *   読む人が箱を `[x]` にして (括弧の中に x を打つ) このスクリプトを回すと、題の front matter に
  *   `seen: <今日>` が入る。`[ ]` に戻せば `seen` が消える
  * - **Fable で確認** — front matter の `reviewed: YYYY-MM-DD` (Claude (Fable) で確認した日)
  *
@@ -35,16 +36,15 @@ const MARK_NAMES = { seen: '目で確認', reviewed: 'Fable で確認' };
 const WRITTEN = '作成';
 const DONE = '✓';
 const STALE = '△';
-const NOT_YET = '(まだ)';
 const NONE = '—';
 
 const HEADER = `# 進捗
 
 \`npm run progress\` が計画 (\`plan.yaml\`) と題の front matter から書く。**箱以外は手で直さない。**
 
-- **${WRITTEN}** — 題のファイルがあれば link と箱。まだの題は字だけ
+- **${WRITTEN}** — 題のファイルがあれば ${DONE} と link。まだの題は字だけ
 - **${MARK_NAMES.seen}** (箱) — 題の front matter の \`seen: YYYY-MM-DD\` (人が目で確認した日)。
-  **目で確認したら箱を \`[x]\` にして** (VS Code なら行で Alt+C) \`npm run progress\` を回す。
+  **目で確認したら箱を \`[x]\` にして** (括弧の中に x を打つ) \`npm run progress\` を回す。
   題の front matter に \`seen: <今日>\` が入り、日付がここに出る。\`[ ]\` に戻せば \`seen\` が消える
 - **${MARK_NAMES.reviewed}** — 題の front matter の \`reviewed: YYYY-MM-DD\` (Claude (Fable) で確認した日。${NONE} はまだ)
 
@@ -72,17 +72,26 @@ function counts(rows, changed) {
 }
 
 const COUNT_NAMES = ['計画', WRITTEN, ...REVIEW_MARKS.map((mark) => MARK_NAMES[mark])];
+const ROW_NAMES = ['#', '題', ...COUNT_NAMES.slice(1)];
 
-/** 1 題の行。書いた題は箱と link、まだの題は字だけ。 */
-function entryLine(entry, changed) {
-  if (entry.path === null) return `- ${entry.id} ${cell(entry.title)} ${NOT_YET}`;
+/** 目で確認の欄。箱と、確認した日 (△ は確認の後に書き換えた題)。 */
+function seenCell(entry, changed) {
   const seen = markState(entry, 'seen', changed);
+  if (seen.text === '') return '[ ]';
+  return seen.done ? `[x] ${entry.seen}` : `[ ] ${seen.text}`;
+}
+
+/** 1 題の行。書いた題は ✓ と link と箱、まだの題は字だけで欄は空。 */
+function entryRow(entry, changed) {
+  if (entry.path === null) return row([entry.id, cell(entry.title), '', '', '']);
   const reviewed = markState(entry, 'reviewed', changed);
-  return [
-    `- [${seen.done ? 'x' : ' '}] ${entry.id} [${cell(entry.title)}](${entry.path})`,
-    ...(seen.text === '' ? [] : [seen.text]),
-    `· Fable ${reviewed.text === '' ? NONE : reviewed.text}`,
-  ].join(' ');
+  return row([
+    entry.id,
+    `[${cell(entry.title)}](${entry.path})`,
+    DONE,
+    seenCell(entry, changed),
+    reviewed.text === '' ? NONE : reviewed.text,
+  ]);
 }
 
 function bookSection(book, rows, changed) {
@@ -93,7 +102,9 @@ function bookSection(book, rows, changed) {
     .map(([chapter, inChapter]) => [
       `### 第 ${chapter.number} 章 ${chapter.title}`,
       '',
-      ...inChapter.map((entry) => entryLine(entry, changed)),
+      row(ROW_NAMES),
+      row(ROW_NAMES.map(() => '---')),
+      ...inChapter.map((entry) => entryRow(entry, changed)),
     ].join('\n'));
 }
 
@@ -123,11 +134,12 @@ export function progressTable(rowsByBook, changed = new Map()) {
 }
 
 const BOOK_HEADING = /^## (.+)$/;
-const BOX_LINE = /^- \[([ xX])\] (\d+-\d+) \[.*\]\((\S+\.md)\)((?: [✓△] \d{4}-\d{2}-\d{2})?)(?: · Fable (?:[✓△] \d{4}-\d{2}-\d{2}|—))?$/;
+/** 書いた題の行。`| id | [題](path) | ✓ | [x] 日付 | … |`。箱の後ろは「日付」(✓) か「△ 日付」か空。 */
+const BOX_LINE = /^\| (\d+-\d+) \| \[.*?\]\((\S+\.md)\) \| ✓ \| \[([ xX])\]((?: (?:△ )?\d{4}-\d{2}-\d{2})?) \| /;
 
 /**
  * 今の PROGRESS.md で、読む人が前回の書き出しから変えた箱。
- * 書き出した時の箱は「✓ の日付があれば [x]」なので、それと今の箱が違う行だけを返す。
+ * 書き出した時の箱は「△ でない日付があれば [x]」なので、それと今の箱が違う行だけを返す。
  *
  * @returns {{ book: object, id: string, path: string, checked: boolean }[]}
  */
@@ -142,9 +154,9 @@ export function toggledMarks(text) {
     }
     const box = BOX_LINE.exec(line);
     if (box === null || book === null) continue;
-    const checked = box[1] !== ' ';
-    const rendered = box[4].includes(DONE);
-    if (checked !== rendered) toggled.push({ book, id: box[2], path: box[3], checked });
+    const checked = box[3] !== ' ';
+    const rendered = box[4] !== '' && !box[4].includes(STALE);
+    if (checked !== rendered) toggled.push({ book, id: box[1], path: box[2], checked });
   }
   return toggled;
 }

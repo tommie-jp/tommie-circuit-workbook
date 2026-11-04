@@ -158,7 +158,7 @@ npm run check -- --verbose   # ネットリストも出す。意図した回路�
 `npm run figures` が書くので手で直さない。ERC (つながっていないピンなど) は出すだけで落とさない。
 
 進捗は [PROGRESS.md](PROGRESS.md) (1 行 1 題。作成はファイルの有無、目で確認は箱、Fable で確認は front matter の
-`reviewed` の日付)。**目で確認したら箱を `[x]` にして** (VS Code なら行で Alt+C) `npm run progress` を回すと、
+`reviewed` の日付)。**目で確認したら箱を `[x]` にして** (括弧の中に x を打つ) `npm run progress` を回すと、
 題の front matter に `seen: <今日>` が入る。確認した日より後に題を書き換えると △ になり箱が空く (git の commit の日で見る)。
 箱以外は `npm run progress` が書くので手で直さない。
 

@@ -75,7 +75,7 @@ description: tommie-circuit-workbook の題 (1 題 1 ファイル) を新しく�
    部品の基板の縁が読めない。標準は `blue`。もとから緑でない物 (USB の紺・SFU455B の橙) とブレッドボード (白) には書かない
 6. 実体配線図・AD3・scope を入れない題は、理由を題に 1 行 (理由になることは README の「書き方」の表)
 7. `npm run toc` で目次を直し、`npm run all` を通す。コミットは conventional commits (`docs:`)
-8. 確認の印: 人が目で見たら `PROGRESS.md` の箱を `[x]` にする (行で Alt+C)。Claude (Fable) で見直したら front matter に
+8. 確認の印: 人が目で見たら `PROGRESS.md` の箱を `[x]` にする (括弧の中に x を打つ)。Claude (Fable) で見直したら front matter に
    `reviewed: YYYY-MM-DD` を書く。`npm run progress` が箱を front matter の `seen: <今日>` に書き戻し、表を書き直す。
    確認の後に題を直すと △ で出て箱が空くので、見直してまた箱を付ける
 
