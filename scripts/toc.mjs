@@ -36,14 +36,14 @@ function counts(rows) {
   ];
 }
 
-const cell = (value) => {
+export const cell = (value) => {
   if (value === null || value === undefined) return '';
   const text = Array.isArray(value) ? value.join(' / ') : String(value);
   return text.replaceAll('|', '\\|');
 };
 
 /** 表の 1 行。空の欄は `| |` (空白 1 つ) にする — 2 つだと markdownlint の MD060 に掛かる。 */
-const row = (cells) => `|${cells.map((text) => (text === '' ? ' ' : ` ${text} `)).join('|')}|`;
+export const row = (cells) => `|${cells.map((text) => (text === '' ? ' ' : ` ${text} `)).join('|')}|`;
 
 const byNumber = (a, b) => a.chapter.number - b.chapter.number || a.number - b.number;
 

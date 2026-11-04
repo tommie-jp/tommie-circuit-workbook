@@ -2,12 +2,22 @@ import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { test } from 'node:test';
 import { parse } from 'yaml';
-import { CJK, blobHash, compareFence, compareLines, compareYaml, numberRepeatedKeys, parseBlocks, splitFrontMatter, unitProblems } from './en.mjs';
+import { CJK, blobHash, compareFence, sourceHash, compareLines, compareYaml, numberRepeatedKeys, parseBlocks, splitFrontMatter, unitProblems } from './en.mjs';
 
 test('blobHash is the same as git hash-object', () => {
   const text = '---\nid: 1-1\n---\n# 1-1 LED と抵抗\n';
   const git = execFileSync('git', ['hash-object', '--stdin'], { input: text }).toString().trim();
   assert.equal(blobHash(text), git);
+});
+
+test('sourceHash ignores the review marks (seen / reviewed) and is otherwise the blob hash', () => {
+  const text = '---\nid: 1-1\nboard: BB\n---\n# 1-1 LED と抵抗\n';
+  const marked = '---\nid: 1-1\nseen: 2026-11-01\nboard: BB\nreviewed: 2026-11-01\n---\n# 1-1 LED と抵抗\n';
+
+  assert.equal(sourceHash(text), blobHash(text));
+  assert.equal(sourceHash(marked), blobHash(text));
+  assert.notEqual(sourceHash(marked.replace('BB', 'PF')), blobHash(text));
+  assert.equal(sourceHash('no front matter\n'), blobHash('no front matter\n'));
 });
 
 test('compareYaml lets a Japanese string become English but nothing else change', () => {

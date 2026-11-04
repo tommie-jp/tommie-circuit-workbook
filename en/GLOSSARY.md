@@ -213,5 +213,6 @@ by `npm run figures`, not by hand.
 ## Staleness
 
 `ja: <hash>` in the front matter is the git blob hash of the Japanese file the translation was made from
-(`git hash-object <file>`). `npm run en:check` warns when the Japanese file has changed since. A warning does not
+(`git hash-object <file>`, taken with the review marks `seen:` / `reviewed:` removed from the front matter: they track the
+Japanese file's progress, not the translation). `npm run en:check` warns when the Japanese file has changed since. A warning does not
 fail the check. `npm run i18n:stale` lists the stale and the missing translations.

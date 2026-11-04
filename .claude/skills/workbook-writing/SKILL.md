@@ -75,6 +75,8 @@ description: tommie-circuit-workbook の題 (1 題 1 ファイル) を新しく�
    部品の基板の縁が読めない。標準は `blue`。もとから緑でない物 (USB の紺・SFU455B の橙) とブレッドボード (白) には書かない
 6. 実体配線図・AD3・scope を入れない題は、理由を題に 1 行 (理由になることは README の「書き方」の表)
 7. `npm run toc` で目次を直し、`npm run all` を通す。コミットは conventional commits (`docs:`)
+8. 確認したら front matter に印を書く: 人が目で見たら `seen: YYYY-MM-DD`、Claude (Fable) で見直したら `reviewed: YYYY-MM-DD`。
+   `npm run progress` で `PROGRESS.md` (進捗の表) を書き直す。確認の後に題を直したら印の日付も直す (古いと △ で出る)
 
 ## 3. 言葉
 
@@ -109,7 +111,8 @@ description: tommie-circuit-workbook の題 (1 題 1 ファイル) を新しく�
    instrument-screen・readable-graph)。日本語の規則 (基板・ピン・信号発生器と発振回路の書き分け・単位・
    Greek 文字) は英語でも同じ決めを `en/GLOSSARY.md` に置いてある
 2. **置き場と front matter**: `en/<冊>/<章>/<題>.md` (日本語と同じ名前)。front matter は日本語の題の鍵と値を
-   全部写し、**`title` だけ英語**にして、`ja: <日本語の題の git blob hash>` を足す (`git hash-object <日本語の題>`)。
+   全部写し、**`title` だけ英語**にして、`ja: <日本語の題の git blob hash>` を足す (`git hash-object <日本語の題>`。確認の印 `seen:` / `reviewed:` の行は除いて取る —
+   印は訳に関わらないので、印を書いても hash は古くならない)。
    最初の見出しは `# <id> <title>`
 3. **本文**: 順と節は日本語と同じ (節の見出しは GLOSSARY の表)。事実・数値・出典を足さない・落とさない。
    測った値の `.s2p` や CSV は写さず、`data:` で日本語の側の物を相対パスで指す。コードは同じ物を置き、

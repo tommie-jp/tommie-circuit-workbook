@@ -138,3 +138,25 @@ test('accepts scale: large only on an intermediate entry', () => {
   assert.ok(big(100, 'scale: large').errors.some((error) => /scale/.test(error)));
   assert.ok(big(200, 'scale: huge').errors.some((error) => /scale/.test(error)));
 });
+
+test('accepts the review marks (seen / reviewed) as dates and returns them', () => {
+  const marked = check('01-circuits/01-basics/01-led.md', LED.replace('board: BB', 'board: BB\nseen: 2026-11-01\nreviewed: 2026-10-30'));
+
+  assert.deepEqual(marked.errors, []);
+  assert.equal(marked.entry.seen, '2026-11-01');
+  assert.equal(marked.entry.reviewed, '2026-10-30');
+  // 書かなければ null (まだ確認していない)。
+  const plain = check('01-circuits/01-basics/01-led.md', LED).entry;
+  assert.equal(plain.seen, null);
+  assert.equal(plain.reviewed, null);
+});
+
+test('rejects a review mark that is not a real YYYY-MM-DD date', () => {
+  const errorsOf = (line) => check('01-circuits/01-basics/01-led.md', LED.replace('board: BB', `board: BB\n${line}`)).errors;
+
+  assert.ok(errorsOf('seen: ✓').some((error) => /seen/.test(error)));
+  assert.ok(errorsOf('seen: 2026-13-01').some((error) => /seen/.test(error)));
+  assert.ok(errorsOf('seen: 2026-11-31').some((error) => /seen/.test(error)));
+  assert.ok(errorsOf('reviewed: 11/01').some((error) => /reviewed/.test(error)));
+  assert.ok(errorsOf('reviewed: true').some((error) => /reviewed/.test(error)));
+});

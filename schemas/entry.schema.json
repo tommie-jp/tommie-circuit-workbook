@@ -7,7 +7,7 @@
   "properties": {
     "book": {
       "type": "string",
-      "enum": ["circuits", "analog-discovery", "nanovna", "denken", "etc"]
+      "enum": ["circuits", "analog-discovery", "nanovna", "denken", "etc", "fpga"]
     },
     "chapter": {
       "type": "integer",
@@ -47,6 +47,16 @@
     "era": {
       "type": "string",
       "enum": ["古", "今", "古/今"]
+    },
+    "seen": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "人が目で確認した日 (YYYY-MM-DD)"
+    },
+    "reviewed": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "Claude (Fable) で確認した日 (YYYY-MM-DD)"
     }
   }
 }

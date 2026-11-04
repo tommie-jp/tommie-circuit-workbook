@@ -10,7 +10,17 @@ import { parse } from 'yaml';
 import { TIERS, findBook, findChapter } from './books.mjs';
 
 /** front matter に書ける鍵。ここに無い鍵は書き間違いとして断る。 */
-const KEYS = new Set(['book', 'chapter', 'id', 'title', 'tier', 'source', 'board', 'tools', 'device', 'era', 'scale']);
+const KEYS = new Set([
+  'book', 'chapter', 'id', 'title', 'tier', 'source', 'board', 'tools', 'device', 'era', 'scale',
+  'seen', 'reviewed',
+]);
+
+/**
+ * 確認の印。`seen` は人が目で確認した日、`reviewed` は Claude (Fable) で確認した日。どちらも `YYYY-MM-DD`。
+ * 進捗の表 (`progress.mjs`) がこれを読み、確認した後にファイルが変わっていれば △ で言う。
+ */
+export const REVIEW_MARKS = ['seen', 'reviewed'];
+const DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
 
 /** 板の印。BB = ブレッドボード、PF = perfboard、CB = 銅張り基板、— = 板を使わない。 */
 const BOARDS = new Set(['BB', 'PF', 'CB', '—']);
@@ -78,6 +88,8 @@ export function validateEntry({ path, text }) {
     device: data.device ?? null,
     era: data.era ?? null,
     scale: data.scale ?? null,
+    seen: data.seen ?? null,
+    reviewed: data.reviewed ?? null,
   };
   return { entry, errors };
 }
@@ -138,7 +150,18 @@ function checkValues(data, bookSlug) {
   if (!isText(data.title)) errors.push('title を書きます');
   if (!TIERS.includes(data.tier)) errors.push(`tier は ${TIERS.join(' / ')} のどれかです`);
   if (!isText(data.source)) errors.push('source (出典。自分で起こしたなら「自作」) を書きます');
+  for (const mark of REVIEW_MARKS) {
+    if (data[mark] !== undefined && !isDate(data[mark])) errors.push(`${mark} は確認した日を YYYY-MM-DD で書きます`);
+  }
   return [...errors, ...checkMarks(data, bookSlug)];
+}
+
+/** `YYYY-MM-DD` で、暦にある日。yaml は日付を字のまま読むので、字として見る。 */
+export function isDate(value) {
+  const match = typeof value === 'string' ? DATE.exec(value) : null;
+  if (match === null) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
 }
 
 /**

@@ -12,6 +12,7 @@
     "check": "node scripts/check.mjs",
     "validate-entry": "node scripts/validate-entry.mjs",
     "toc": "node scripts/toc.mjs",
+    "progress": "node scripts/progress.mjs",
     "render": "node scripts/render.mjs",
     "figures": "node scripts/figures.mjs",
     "parity": "node scripts/netlist-parity.mjs",

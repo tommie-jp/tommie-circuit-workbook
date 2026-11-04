@@ -69,6 +69,8 @@ device: LV64            # nanovna は必須 (LV64 標準 / H4・V2 は歴史的)
 era: 古                 # circuits だけ、任意。古 = 知っておきたい古典 / 今 = 今の定番 / 古/今
 tools: [AD, VNA]        # 任意。2 つの計器を両方使う題
 scale: large            # 任意。中級 (tier: 200) で、回路の規模が上限を超える題。目次に「中級 (大規模)」と出る
+seen: 2026-11-01        # 任意。人が目で確認した日。進捗の表 (PROGRESS.md) の「目で確認」
+reviewed: 2026-11-01    # 任意。Claude (Fable) で確認した日。同「Fable で確認」
 ---
 ```
 
@@ -145,6 +147,7 @@ USB アダプタやモバイルバッテリー、単 3 電池 3 本で用意で�
 npm ci
 npm run all    # 試験・Markdown の lint・全題の検査 (CI と同じ)
 npm run toc    # 題を足したら目次を書き直す (README の印の間だけ)
+npm run progress   # 題を足した・確認の印 (seen / reviewed) を書いたら進捗の表 (PROGRESS.md) を書き直す
 npm run figures   # フェンスを足した・消した・動かしたら、GitHub で見せる画像の行を書き直す
 npm run check -- --verbose   # ネットリストも出す。意図した回路と突き合わせる
 ```
@@ -153,6 +156,10 @@ npm run check -- --verbose   # ネットリストも出す。意図した回路�
 読めない行、`plan.yaml` とのずれ (計画に無い題、違う title や tier)、古い目次、
 フェンスの並びと合わない画像の行で落ちる。画像の行 (Pages の図を指す `![…](https://tommie-jp.github.io/…)`) は
 `npm run figures` が書くので手で直さない。ERC (つながっていないピンなど) は出すだけで落とさない。
+
+進捗は [PROGRESS.md](PROGRESS.md) (1 行 1 題。作成はファイルの有無、目で確認・Fable で確認は front matter の
+`seen` / `reviewed` の日付)。確認した日より後に題を書き換えると △ になる (git の commit の日で見る)。
+`npm run progress` が書くので手で直さない。
 
 ## テストの方針
 

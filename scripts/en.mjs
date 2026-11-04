@@ -7,6 +7,7 @@
 
 import { createHash } from 'node:crypto';
 import { parse } from 'yaml';
+import { REVIEW_MARKS } from './entry.mjs';
 
 /** 日本語の字 (かな・漢字・全角の記号と英数)。英語版の本文に残ってはいけない。 */
 export const CJK = /[　-ヿ㐀-鿿＀-￯]/;
@@ -23,6 +24,18 @@ export function blobHash(text) {
 }
 
 /** front matter と本文に分ける。無ければ null。 */
+/**
+ * 日本語の題の hash (`ja:` に書く物)。front matter の確認の印 (`seen:` / `reviewed:`) の行を除いて取る —
+ * 印は日本語の題の進捗で、訳に関わらない。印の無い題では `git hash-object` と同じ。
+ */
+export function sourceHash(text) {
+  const matter = FRONT_MATTER.exec(text);
+  if (matter === null) return blobHash(text);
+  const isMark = (line) => REVIEW_MARKS.some((mark) => line.startsWith(`${mark}:`));
+  const kept = matter[1].split('\n').filter((line) => !isMark(line)).join('\n');
+  return blobHash(`---\n${kept}\n---\n${text.slice(matter[0].length)}`);
+}
+
 export function splitFrontMatter(text) {
   const matter = FRONT_MATTER.exec(text);
   if (matter === null) return null;

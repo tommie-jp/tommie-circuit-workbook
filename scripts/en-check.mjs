@@ -21,8 +21,9 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { BOOKS } from './books.mjs';
+import { REVIEW_MARKS } from './entry.mjs';
 import { FENCES, cliPath, fencesIn } from './fences.mjs';
-import { CJK, blobHash, compareFence, parseBlocks, splitFrontMatter, unitProblems } from './en.mjs';
+import { CJK, compareFence, parseBlocks, sourceHash, splitFrontMatter, unitProblems } from './en.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const EN = 'en';
@@ -83,17 +84,17 @@ export function checkEntry(enPath, root = ROOT) {
 }
 
 function checkFrontMatter(ja, en, jaText, errors, warnings) {
-  const keys = new Set([...Object.keys(ja), 'ja']);
+  const keys = new Set([...Object.keys(ja), 'ja', ...REVIEW_MARKS]);
   for (const key of Object.keys(en)) if (!keys.has(key)) errors.push(`front matter に日本語の題に無い鍵があります: ${key}`);
   for (const key of Object.keys(ja)) {
-    if (key === 'title') continue;
+    if (key === 'title' || REVIEW_MARKS.includes(key)) continue;
     if (JSON.stringify(ja[key]) !== JSON.stringify(en[key])) errors.push(`front matter の ${key} が日本語の題と違います (${JSON.stringify(ja[key])} / ${JSON.stringify(en[key])})`);
   }
   if (typeof en.title !== 'string' || en.title.trim() === '') errors.push('title (英語) を書きます');
   else if (CJK.test(en.title)) errors.push('title に日本語が残っています');
 
   if (typeof en.ja !== 'string') errors.push('ja: <日本語の題の blob hash> を書きます (git hash-object <日本語の題>)');
-  else if (en.ja !== blobHash(jaText)) warnings.push('日本語の題が訳したあとに変わっています (ja: の hash が古い)');
+  else if (en.ja !== sourceHash(jaText)) warnings.push('日本語の題が訳したあとに変わっています (ja: の hash が古い)');
 }
 
 function checkBody(jaBody, enBody, data, errors, root, enPath) {
@@ -136,7 +137,7 @@ export function staleReport(root = ROOT) {
     const jaPath = jaPathOf(path);
     if (!existsSync(join(root, jaPath))) continue;
     const en = splitFrontMatter(readFileSync(join(root, path), 'utf8'));
-    if (en === null || en.data === null || en.data.ja !== blobHash(readFileSync(join(root, jaPath), 'utf8'))) stale.push(path);
+    if (en === null || en.data === null || en.data.ja !== sourceHash(readFileSync(join(root, jaPath), 'utf8'))) stale.push(path);
   }
   return { missing, stale, translated: english.size };
 }
