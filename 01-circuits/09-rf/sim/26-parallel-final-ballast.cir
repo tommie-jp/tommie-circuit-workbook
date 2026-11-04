@@ -1,0 +1,33 @@
+* 9-26 送信のファイナルを並列にする (図1)。2N3866 を 2 石並列、3.5 MHz・0.5 Vpp の入力で出力の振幅と、各石のエミッタ電流を .tran で読む
+* cfg と t2 は .param で与える (1 条件ずつ 4 回走らせる: cfg 1・2 × t2 27・45)
+* cfg=1: 各エミッタにバラスト 22 Ω。cfg=2: バラストを外し、同じ直流になる共通の 11 Ω にまとめる (比べるため)
+* t2 は Q2 だけの温度 (27 °C と 45 °C)。指で温めたときの見立て
+* Q3866 は 2N3866 の代用 (hFE 80・fT 約 500 MHz・Cob 3.5 pF の目安から作った仮定で、実測ではない)
+.model Q3866 NPN (IS=5e-14 BF=80 NF=1 VAF=80 IKF=0.6 RB=5 RE=0.3 RC=1 CJE=12p CJC=3.5p VJC=0.6 MJC=0.33 TF=0.3n TR=20n)
+.param cfg=1 t2=27
+.param rb=table(cfg,1,22,2,0.001)
+.param rc=table(cfg,1,0.001,2,11)
+VCC vcc 0 5
+Cvcc vcc 0 0.1u
+R1 vcc b 680
+R2 b 0 220
+Cin in b 0.1u
+Vs in 0 SINE(0 0.25 3.5Meg)
+RB1 b b1 10
+RB2 b b2 10
+Q1 c b1 e1 Q3866
+Q2 c b2 e2 Q3866 temp={t2}
+RE1 e1 ec {rb}
+RE2 e2 ec {rb}
+REC ec 0 {rc}
+L1 c vcc 100u
+Cout c out 0.1u
+RL out 0 51
+.tran 0 6u 0 1n
+.meas tran vopp PP V(out) FROM 4u TO 6u
+.meas tran vinpp PP V(in) FROM 4u TO 6u
+.meas tran ie1 AVG I(RE1) FROM 4u TO 6u
+.meas tran ie2 AVG I(RE2) FROM 4u TO 6u
+.meas tran vb AVG V(b) FROM 4u TO 6u
+.meas tran vc AVG V(c) FROM 4u TO 6u
+.end

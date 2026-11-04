@@ -1,0 +1,24 @@
+* 2-21 エミッタ抵抗を分ける (図1) の歪み。出力 1 Vpp (1 kHz) のときの歪み率を、分割 (RE1 100 Ω) と全バイパス (2-3 の形) で比べる
+* cfg=1: RE1 100 Ω・RE2 910 Ω (この題)。cfg=2: RE1 0 Ω・RE2 1 kΩ (2-3 の全バイパス)。vin は出力が 1 Vpp になる入力の振幅 (0-peak)
+* 模型は 21-split-emitter.cir と同じ (実測ではない)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=50 RE=1 RC=5 CJE=15p CJC=4p TF=2.8n TR=50n)
+.param cfg=1
+.param re1=table(cfg,1,100,2,0.001)
+.param re2=table(cfg,1,910,2,1000)
+.param vin=table(cfg,1,0.0294,2,0.00637)
+VCC vcc 0 5
+R1 vcc b 20k
+R2 b 0 10k
+RC vcc c 2.2k
+Q1 c b e Q1815
+RE1 e e2 {re1}
+RE2 e2 0 {re2}
+CE e2 0 100u
+Cin in b 1u
+Cout c out 1u
+RL out 0 1Meg
+Vs in 0 SINE(0 {vin} 1k)
+.tran 0 60m 50m 2u
+.meas tran vopp PP V(out) FROM 52m TO 60m
+.four 1k 5 V(out)
+.end

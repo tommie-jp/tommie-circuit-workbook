@@ -1,0 +1,16 @@
+* 2-21 エミッタ抵抗を分ける (図1) の動作点 (.op)。模型は 21-split-emitter.cir と同じ
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=50 RE=1 RC=5 CJE=15p CJC=4p TF=2.8n TR=50n)
+VCC vcc 0 5
+R1 vcc b 20k
+R2 b 0 10k
+RC vcc c 2.2k
+Q1 c b e Q1815
+RE1 e e2 100
+RE2 e2 0 910
+CE e2 0 100u
+.op
+.meas op vb FIND V(b)
+.meas op ve FIND V(e)
+.meas op vc FIND V(c)
+.meas op ie FIND I(RE2)
+.end

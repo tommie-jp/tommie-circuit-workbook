@@ -18,6 +18,8 @@
 | --- | --- | --- | --- | --- |
 | 2N7000 / BS170 | N ch MOSFET (TO-92) | Vishay 70226 Rev. F (2001-07) | [PDF](https://www.vishay.com/docs/70226/70226.pdf)。2N7000 のピンの並びは実物で確かめる: onsemi の 2007 年版の図は S G D、2022 年版の表は D G S で食い違い、表は 2007 年版 (S G D) に従う。実物はテスタで確かめる | [Wayback](https://web.archive.org/web/20260326171844/https://www.vishay.com/docs/70226/70226.pdf) |
 | 2SC3355 / 2SC3355L | 高周波 NPN (fT 7 GHz) | NEC P10355EJ3V1DS00 (第 3 版) | [PDF](https://static.chipdip.ru/lib/225/DOC000225164.pdf) | [Wayback](https://web.archive.org/web/20261006192755/https://static.chipdip.ru/lib/225/DOC000225164.pdf) |
+| 2N5109 | 高周波 NPN (TO-39、fT 1.2 GHz。広帯域帰還アンプ) | Advanced Power Technology 2N5109 Rev. - (2004-06) | [PDF](https://www.electrokit.com/upload/product/40325/40325109/2N5109_REV.pdf)。ピンは 1 E・2 B・3 C (出っ張りの隣が 1)。缶がどのピンとつながるかは書かれていないので、実物はテスタで確かめる | — |
+| 2N3866 / 2N3866A | 高周波 NPN (TO-39、fT 500 / 800 MHz。小電力の送信) | Central Semiconductor 2N3866 series R2 (2010-09-15) | [PDF](https://www.triopak.fi/files/product/Central%20Semiconductor/2N3866_series.pdf)。TO-39 の外形図で 1 E・2 B・3 C。缶の接続は書かれていないので、実物はテスタで確かめる | — |
 | IRF9540 | P ch パワー MOSFET | Vishay 91078 Rev. C (2021-08) | [PDF](https://www.vishay.com/docs/91078/91078.pdf) | [Wayback](https://web.archive.org/web/20260430150732/https://www.vishay.com/docs/91078/91078.pdf) |
 
 ### ダイオード

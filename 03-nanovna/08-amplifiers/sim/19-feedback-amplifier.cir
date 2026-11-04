@@ -1,0 +1,56 @@
+* 8-19 広帯域帰還アンプ (図1)。S21 と S11 を .ac で読む。Vs = 2 (AC) で Rs = 50 なので入射波は 1: S21 = V(o)、S11 = V(in) − 1
+* Q5109 は 2N5109 の代用 (hFE 80・fT 約 1.2 GHz・Cob 3 pF の目安から作った仮定で、実測ではない)
+* T1 は FT37-43 に 10 回 + 10 回 (バイファイラ) の単巻き 4:1。35 µH + 35 µH、結合 0.995 の仮定
+.model Q5109 NPN (IS=2e-14 BF=80 NF=1 VAF=60 IKF=0.8 RB=3 RE=0.2 RC=1 CJE=10p CJC=3p VJC=0.6 MJC=0.33 TF=0.13n TR=10n)
+VCC vcc 0 5
+Cvcc vcc 0 0.1u
+Vs s 0 DC 0 AC 2
+Rs s in 50
+C1 in b 0.1u
+RF c b 750
+R2 b 0 470
+Q1 c b e Q5109
+RE1 e e2 10
+RE2 e2 0 47
+CE e2 0 1u
+La c tap 35u Rser=0.05
+Lb tap vcc 35u Rser=0.05
+K1 La Lb 0.995
+Cout tap o 0.1u
+RL o 0 50
+.ac dec 100 100k 300Meg
+.meas ac ph21_1 FIND ph(V(o)) AT 1Meg
+.meas ac ph21_30 FIND ph(V(o)) AT 30Meg
+.meas ac zin_1 FIND V(in)/I(Rs) AT 1Meg
+.meas ac zin_30 FIND V(in)/I(Rs) AT 30Meg
+.meas ac pk MAX mag(V(o))
+.meas ac f3db WHEN mag(V(o))=pk*0.70711 FALL=1
+.meas ac s21_1 FIND mag(V(o)) AT 1Meg
+.meas ac s21_1p5 FIND mag(V(o)) AT 1.5Meg
+.meas ac s21_2 FIND mag(V(o)) AT 2Meg
+.meas ac s21_3 FIND mag(V(o)) AT 3Meg
+.meas ac s21_3p5 FIND mag(V(o)) AT 3.5Meg
+.meas ac s21_5 FIND mag(V(o)) AT 5Meg
+.meas ac s21_7 FIND mag(V(o)) AT 7Meg
+.meas ac s21_10 FIND mag(V(o)) AT 10Meg
+.meas ac s21_14 FIND mag(V(o)) AT 14Meg
+.meas ac s21_21 FIND mag(V(o)) AT 21Meg
+.meas ac s21_30 FIND mag(V(o)) AT 30Meg
+.meas ac s21_50 FIND mag(V(o)) AT 50Meg
+.meas ac s21_70 FIND mag(V(o)) AT 70Meg
+.meas ac s21_100 FIND mag(V(o)) AT 100Meg
+.meas ac s11_1 FIND mag(V(in)-1) AT 1Meg
+.meas ac s11_1p5 FIND mag(V(in)-1) AT 1.5Meg
+.meas ac s11_2 FIND mag(V(in)-1) AT 2Meg
+.meas ac s11_3 FIND mag(V(in)-1) AT 3Meg
+.meas ac s11_3p5 FIND mag(V(in)-1) AT 3.5Meg
+.meas ac s11_5 FIND mag(V(in)-1) AT 5Meg
+.meas ac s11_7 FIND mag(V(in)-1) AT 7Meg
+.meas ac s11_10 FIND mag(V(in)-1) AT 10Meg
+.meas ac s11_14 FIND mag(V(in)-1) AT 14Meg
+.meas ac s11_21 FIND mag(V(in)-1) AT 21Meg
+.meas ac s11_30 FIND mag(V(in)-1) AT 30Meg
+.meas ac s11_50 FIND mag(V(in)-1) AT 50Meg
+.meas ac s11_70 FIND mag(V(in)-1) AT 70Meg
+.meas ac s11_100 FIND mag(V(in)-1) AT 100Meg
+.end

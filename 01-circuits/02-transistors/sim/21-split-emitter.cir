@@ -1,0 +1,23 @@
+* 2-21 エミッタ抵抗を分ける (図1)。1 kHz の電圧利得を .ac で読み、hFE (BF) を 120・250・400 に振って利得が動かないことを見る。動作点は 21-split-emitter-op.cir
+* Q1815 は 2SC1815 の代用 (2-3 の sim/03-common-emitter.cir と同じ。実測ではない)
+.param bf=250
+.model Q1815 NPN (IS=2e-14 BF={bf} NF=1 VAF=100 IKF=0.15 RB=50 RE=1 RC=5 CJE=15p CJC=4p TF=2.8n TR=50n)
+VCC vcc 0 5
+R1 vcc b 20k
+R2 b 0 10k
+RC vcc c 2.2k
+Q1 c b e Q1815
+RE1 e e2 100
+RE2 e2 0 910
+CE e2 0 100u
+Cin in b 1u
+Cout c out 1u
+RL out 0 1Meg
+Vs in 0 DC 0 AC 1
+.ac dec 20 10 10Meg
+.step param bf list 120 250 400
+.meas ac gain1k FIND mag(V(out)) AT 1k
+.meas ac ph1k FIND ph(V(out)) AT 1k
+.meas ac gain100 FIND mag(V(out)) AT 100
+.meas ac gain100k FIND mag(V(out)) AT 100k
+.end

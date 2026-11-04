@@ -1,0 +1,36 @@
+* 8-19 広帯域帰還アンプ (図1) の出力側の反射 S22。信号源を出力側 (50 Ω) に置き、入力は 50 Ω で終端。Vs = 2 で入射波は 1: S22 = V(o) − 1
+* 模型は 19-feedback-amplifier.cir と同じ
+.model Q5109 NPN (IS=2e-14 BF=80 NF=1 VAF=60 IKF=0.8 RB=3 RE=0.2 RC=1 CJE=10p CJC=3p VJC=0.6 MJC=0.33 TF=0.13n TR=10n)
+VCC vcc 0 5
+Cvcc vcc 0 0.1u
+Rs in 0 50
+C1 in b 0.1u
+RF c b 750
+R2 b 0 470
+Q1 c b e Q5109
+RE1 e e2 10
+RE2 e2 0 47
+CE e2 0 1u
+La c tap 35u Rser=0.05
+Lb tap vcc 35u Rser=0.05
+K1 La Lb 0.995
+Cout tap o 0.1u
+Vs s 0 DC 0 AC 2
+RL s o 50
+.ac dec 100 100k 300Meg
+.meas ac zout_1 FIND V(o)/I(RL) AT 1Meg
+.meas ac s22_1 FIND mag(V(o)-1) AT 1Meg
+.meas ac s22_1p5 FIND mag(V(o)-1) AT 1.5Meg
+.meas ac s22_2 FIND mag(V(o)-1) AT 2Meg
+.meas ac s22_3 FIND mag(V(o)-1) AT 3Meg
+.meas ac s22_3p5 FIND mag(V(o)-1) AT 3.5Meg
+.meas ac s22_5 FIND mag(V(o)-1) AT 5Meg
+.meas ac s22_7 FIND mag(V(o)-1) AT 7Meg
+.meas ac s22_10 FIND mag(V(o)-1) AT 10Meg
+.meas ac s22_14 FIND mag(V(o)-1) AT 14Meg
+.meas ac s22_21 FIND mag(V(o)-1) AT 21Meg
+.meas ac s22_30 FIND mag(V(o)-1) AT 30Meg
+.meas ac s22_50 FIND mag(V(o)-1) AT 50Meg
+.meas ac s22_70 FIND mag(V(o)-1) AT 70Meg
+.meas ac s22_100 FIND mag(V(o)-1) AT 100Meg
+.end
