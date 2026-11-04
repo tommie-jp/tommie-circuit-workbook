@@ -1,0 +1,35 @@
+* 6-10 ワイヤレス給電 (図1)。送りと受けに同じ空芯コイル (直径 40 mm・30 回で約 47 uH の目安) と 3.3 nF の直列共振 (約 404 kHz)
+* 送り: W1 (0/5 V の方形波) を RB1 1k で 2SC1815 と 2SA1015 のプッシュプル (エミッタフォロア) に入れ、RS 22 ohm・C1・L1 へ。5 V
+* 受け: L2・C2 → D1 (1N5819) で整流 → CF 1 uF → R2 47 ohm と赤 LED
+* コイルの値と交流の抵抗 (1 ohm)、結合係数 k (.step で 0.05〜0.3、距離の代わり) は仮定。トランジスタの模型は 3-1 と同じ 2SC1815 の仮定と、その PNP 版。実測ではない
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model Q1015 PNP (IS=2e-14 BF=200 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=10p CJC=4p TF=3n TR=50n)
+.model D5819 D(IS=1u RS=0.04 N=1.1 CJO=110p BV=40)
+.model DLED D(IS=3e-20 N=1.9 RS=5)
+.param k=0.2 f0=404k
+V1 vcc 0 5
+VW1 w1 0 PULSE(0 5 0 20n 20n {0.5/f0-20n} {1/f0})
+RB1 w1 b 1k
+Q1 vcc b e Q1815
+Q2 0 b e Q1015
+RS e x 22
+C1 x y 3.3n
+L1 y 0 47u Rser=1
+L2 p 0 47u Rser=1
+K1 L1 L2 {k}
+C2 p q 3.3n
+D1 q r D5819
+CF r 0 1u
+R2 r a 47
+DL a 0 DLED
+D3 0 q D5819
+.step param k list 0.05 0.1 0.2 0.3
+.tran 0 2m 0 20n
+.meas tran iled AVG I(DL) FROM=1.5m TO=2m
+.meas tran vr AVG V(r) FROM=1.5m TO=2m
+.meas tran iin AVG I(V1) FROM=1.5m TO=2m
+.meas tran ipk1 MAX I(L1) FROM=1.5m TO=2m
+.meas tran vypp PP V(y) FROM=1.5m TO=2m
+.meas tran ipk2 MAX I(L2) FROM=1.5m TO=2m
+.meas tran pled AVG V(a)*I(DL) FROM=1.5m TO=2m
+.end

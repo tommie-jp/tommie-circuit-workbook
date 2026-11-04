@@ -14,13 +14,13 @@
 
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 | 実測 | 1.0 まで |
 | --- | --- | --- | --- | --- | --- | --- |
-| [回路の教科書](01-circuits/README.md) | 232 | 209 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 23 |
+| [回路の教科書](01-circuits/README.md) | 232 | 215 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 17 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 102 |
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1118** | **700** | **0** | **0** | **0** | |
+| **計** | **1118** | **706** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -105,7 +105,7 @@
 | 3-12 | [555 を 2 段 — サイレン](01-circuits/03-oscillators/12-555-siren.md) | ✓ | [ ] | — | — |
 | 3-13 | [VCO — 555 の 5 番ピン](01-circuits/03-oscillators/13-555-vco.md) | ✓ | [ ] | — | — |
 | 3-14 | [LM3909 (古典) と自動点滅 LED (現代) を並べる](01-circuits/03-oscillators/14-lm3909-flasher.md) | ✓ | [ ] | — | — |
-| 3-15 | リングオシレータ (インバータ 3 段) | | | | |
+| 3-15 | [リングオシレータ (インバータ 3 段)](01-circuits/03-oscillators/15-ring-oscillator.md) | ✓ | [ ] | — | — |
 | 3-16 | [シュミット発振の出力を調べる — 方形波の高調波と LED の電流](01-circuits/03-oscillators/16-schmitt-square-spectrum.md) | ✓ | [ ] | — | — |
 
 ### 第 4 章 OP アンプ
@@ -164,11 +164,11 @@
 | 6-3 | [自作トランス — 巻数比を測る](01-circuits/06-transformers/03-diy-transformer.md) | ✓ | [ ] | — | — |
 | 6-4 | [センタータップと全波整流](01-circuits/06-transformers/04-center-tap-rectifier.md) | ✓ | [ ] | — | — |
 | 6-5 | [磁界を聞く — コイル + 音](01-circuits/06-transformers/05-listen-to-magnetic-field.md) | ✓ | [ ] | — | — |
-| 6-6 | フライバックコンバータ (小型) | | | | |
-| 6-7 | インダクタの飽和 | | | | |
-| 6-8 | 相互誘導と極性 (ドット) | | | | |
-| 6-9 | 電流トランス | | | | |
-| 6-10 | ワイヤレス給電 — 共振コイルで LED | | | | |
+| 6-6 | [フライバックコンバータ (小型)](01-circuits/06-transformers/06-flyback.md) | ✓ | [ ] | — | — |
+| 6-7 | [インダクタの飽和](01-circuits/06-transformers/07-inductor-saturation.md) | ✓ | [ ] | — | — |
+| 6-8 | [相互誘導と極性 (ドット)](01-circuits/06-transformers/08-mutual-dot.md) | ✓ | [ ] | — | — |
+| 6-9 | [電流トランス](01-circuits/06-transformers/09-current-transformer.md) | ✓ | [ ] | — | — |
+| 6-10 | [ワイヤレス給電 — 共振コイルで LED](01-circuits/06-transformers/10-wireless-power.md) | ✓ | [ ] | — | — |
 
 ### 第 7 章 パワー
 

@@ -1,0 +1,32 @@
+* 6-6 小さなフライバックコンバータ (図1)。FT37-43 に 1 次 20 回 (140 uH)・2 次 40 回 (560 uH)、W1 = 0/5 V・50 kHz・デューティ 20 % で 2N7000 を開閉、5 V
+* L は A_L = 350 nH/回^2 (6-3 と同じ)、結合係数 k = 0.95、巻線抵抗 1 次 0.2 / 2 次 0.5 ohm は仮定。M2N7000 は 2-17 と同じ LEVEL=1 の代用。実測ではない
+* RCD のクランプ (DC・CC・RC) でドレインの跳ね上がりを抑える。2 次は向きを逆に巻く (L2 の点は GND の側。オンの間は D2 が逆向きで切れる)
+.model M2N7000 NMOS (LEVEL=1 VTO=2.1 KP=0.1 LAMBDA=0.01 CBD=10p)
+.model D5819 D(IS=1u RS=0.04 N=1.1 CJO=110p BV=40)
+.model D4148 D(IS=2.52n RS=0.568 N=1.752 CJO=4p TT=20n)
+.param d=0.2 rl=1.2k k=0.95
+V1 vcc 0 5
+VW1 w1 0 PULSE(0 5 0 20n 20n {d*20u-20n} 20u)
+RG w1 g 100
+RGS g 0 10k
+M1 dr g 0 0 M2N7000
+L1 vcc dr 140u Rser=0.2
+L2 0 s 560u Rser=0.5
+K1 L1 L2 {k}
+D2 s out D5819
+CO out 0 10u
+RL out 0 {rl}
+DC dr cl D4148
+CC cl vcc 10n
+RC cl vcc 10k
+.step param d list 0.1 0.2 0.3
+.tran 0 20m 0 20n
+.meas tran vout AVG V(out) FROM=18m TO=20m
+.meas tran vrip PP V(out) FROM=18m TO=20m
+.meas tran vdmax MAX V(dr) FROM=18m TO=20m
+.meas tran ipk MAX I(L1) FROM=18m TO=20m
+.meas tran iin AVG I(V1) FROM=18m TO=20m
+.meas tran pin param -iin*5
+.meas tran pout param vout*vout/rl
+.meas tran eff param pout/pin
+.end

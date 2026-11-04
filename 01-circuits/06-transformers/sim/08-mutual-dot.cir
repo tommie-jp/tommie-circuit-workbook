@@ -1,0 +1,33 @@
+* 6-8 相互誘導と極性 (図1)。FT37-43 に A・B の 2 つの巻線を 20 回ずつ (A_L 350 nH/回^2 で 140 uH ずつ)、W1 = 20 kHz・振幅 1 V を RA 220 ohm から
+* 結合係数 k = 0.95、巻線抵抗 0.2 ohm ずつは仮定。実測ではない
+* (1) A に W1、B は開放 (Scope の 1 Mohm だけ)。(2) A2 と B1 をつないだ直列 (和動)。(3) A2 と B2 をつないだ直列 (差動)
+.param k=0.95
+* (1)
+V1 w1 0 SINE(0 1 20k)
+RA1 w1 a1 220
+LA1 a1 0 140u Rser=0.2
+LB1 b1 0 140u Rser=0.2
+RS1 b1 0 1Meg
+K1 LA1 LB1 {k}
+* (2) 和動: a2 - [A] - m2 - [B] - 0 、点は A の上と B の上
+V2 w2 0 SINE(0 1 20k)
+RA2 w2 a2 220
+LA2 a2 m2 140u Rser=0.2
+LB2 m2 0 140u Rser=0.2
+K2 LA2 LB2 {k}
+* (3) 差動: B を逆向きにつなぐ
+V3 w3 0 SINE(0 1 20k)
+RA3 w3 a3 220
+LA3 a3 m3 140u Rser=0.2
+LB3 0 m3 140u Rser=0.2
+K3 LA3 LB3 {k}
+.tran 0 2m 1m 0.2u
+.meas tran va1 PP V(a1)
+.meas tran vb1 PP V(b1)
+.meas tran ta WHEN V(a1)=0 RISE=5
+.meas tran tb WHEN V(b1)=0 RISE=5
+.meas tran va2 PP V(a2)
+.meas tran va3 PP V(a3)
+.meas tran ia2 PP I(RA2)
+.meas tran ia3 PP I(RA3)
+.end

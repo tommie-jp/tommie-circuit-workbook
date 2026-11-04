@@ -1,0 +1,40 @@
+* 3-14 LM3909 の 1.5 V 点滅回路 (図1 の左)。CT=330u、LED 赤、電源 1.5 V。1 番と 8 番は外でつなぐ (同じ節点 p8)
+* LM3909 の中は National Semiconductor のデータシート (TL/H/7969、1995) の内部回路図の抵抗値で組んだ。
+* トランジスタは汎用の NPN・PNP の模型、ツェナーは 6.5 V の模型で、どれも仮定 (実測ではない)。Q2 は 2 つのコレクタの横型 PNP を、
+* 同じ大きさの PNP 2 個 (片方はコレクタをベースへ戻す) で表した (仮定)
+.model QN NPN (IS=1e-15 BF=150 VAF=80 CJE=1p CJC=1p TF=1n)
+.model QP PNP (IS=1e-15 BF=40 VAF=50 CJE=1p CJC=1p TF=20n)
+.model DZ65 D(IS=1e-14 BV=6.5 IBV=1m)
+.model DLED D(IS=3e-20 N=1.9 RS=5)
+.subckt LM3909 P1 P2 P4 P5 P6 P8
+R12 P6 P5 12
+Q4 P5 B4 E4 QN
+RA P5 B4 400
+RB B4 P2 400
+RC B4 B1 20k
+RD B1 E4 10k
+RE E4 P4 20k
+Q1 C1 B1 E1 QN
+R100 E1 P8 100
+Q2A B3 C1 P5 QP
+Q2B C1 C1 P5 QP
+Q3 P2 B3 P4 QN
+D1 P4 P2 DZ65
+R6 P8 P1 6k
+R3 P1 P4 3k
+.ends
+V1 vp 0 1.5
+XU1 p8 p2 0 vp p6 p8 LM3909
+D1 p6 p8 DLED
+CT p2 p8 330u
+.tran 0 12 0 0.1m
+.meas tran ta WHEN I(D1)=2m RISE=3
+.meas tran tb WHEN I(D1)=2m RISE=5
+.meas tran fflash param 2/(tb-ta)
+.meas tran ipk MAX I(D1) FROM=4 TO=12
+.meas tran vledmax MAX V(p6,p8) FROM=4 TO=12
+.meas tran vp8min MIN V(p8) FROM=4 TO=12
+.meas tran vp2max MAX V(p2) FROM=4 TO=12
+.meas tran iavg AVG I(V1) FROM=4 TO=12
+.meas tran pwidth TRIG I(D1) VAL=7.9m RISE=5 TARG I(D1) VAL=7.9m FALL=5
+.end

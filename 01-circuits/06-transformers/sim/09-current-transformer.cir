@@ -1,0 +1,20 @@
+* 6-9 電流トランス (図1)。FT37-43 に 2 次 100 回 (3.5 mH)、1 次は線を 5 回くぐらせる (8.75 uH)。2 次に RB 100 ohm
+* 1 次の回路: W1 (振幅 2 V) → R1 220 ohm → RS 10 ohm (比べる用の分流器) → 1 次 → GND
+* L は A_L 350 nH/回^2 の目安、結合係数 0.98・巻線抵抗 (1 次 0.02 / 2 次 1 ohm) は仮定。実測ではない
+.param f=20k
+V1 w1 0 SINE(0 2 {f})
+R1 w1 a 220
+RS a p 10
+L1 p 0 8.75u Rser=0.02
+L2 s 0 3.5m Rser=1
+K1 L1 L2 0.98
+RB s 0 100
+.step param f list 1k 5k 20k 100k
+.tran 0 {20/f} {10/f} {1/f/200}
+.meas tran vsh PP V(a,p)
+.meas tran vct PP V(s)
+.meas tran ratio param vct/vsh
+.meas tran t1 WHEN V(a,p)=0 RISE=5
+.meas tran t2 WHEN V(s)=0 RISE=5
+.meas tran lead param (t1-t2)*f*360
+.end

@@ -1,0 +1,34 @@
+* 6-7 インダクタの飽和 (図1)。FT37-43 に 80 回、W1 の 0/5 V のパルス (幅 tw、1 kHz) で 2N7000 を開き、RS (1 ohm) で電流を見る、5 V
+* コアの飽和は鎖交磁束の式で表した: N*A*Bs*tanh(I/I0) + 空芯の分。N=80、断面積 A=7.6 mm2・磁路長 21.5 mm (FT37 の寸法からの目安)、
+* 初透磁率 850・飽和の磁束密度 Bs=0.29 T (43 材の目安) から、小さい電流の L = 2.41 mH、I0 = 0.0731 A。どれも仮定 (実測ではない)
+* M2N7000 は 2-17 と同じ LEVEL=1 の代用。CB (470 uF) が電源の代わりにパルスの電流を出す
+.model M2N7000 NMOS (LEVEL=1 VTO=2.1 KP=0.1 LAMBDA=0.01 CBD=10p)
+.model D4148 D(IS=2.52n RS=0.568 N=1.752 CJO=4p TT=20n)
+.param tw=20u
+V1 vin 0 5
+RV vin vcc 1
+CB vcc 0 470u
+VW1 w1 0 PULSE(0 5 100u 20n 20n {tw} 1m)
+RG w1 g 100
+RGS g 0 10k
+L1 vcc xl Flux={80*7.6e-6*0.29*tanh(x/0.0731) + 2.84u*x}
+RW xl x 1
+R1 x dr 15
+DF dr vcc D4148
+M1 dr g s 0 M2N7000
+RS s 0 1
+.step param tw list 20u 40u 60u 80u
+.ic V(vcc)=5
+.tran 0 3.2m 0 20n
+.meas tran ipk MAX I(RS) FROM=3.05m TO=3.2m
+.meas tran i10 FIND I(RS) AT={3.1m+10u}
+.meas tran i20 FIND I(RS) AT={3.1m+20u}
+.meas tran i30 FIND I(RS) AT={3.1m+30u}
+.meas tran i40 FIND I(RS) AT={3.1m+40u}
+.meas tran i50 FIND I(RS) AT={3.1m+50u}
+.meas tran i60 FIND I(RS) AT={3.1m+60u}
+.meas tran i70 FIND I(RS) AT={3.1m+70u}
+.meas tran i79 FIND I(RS) AT={3.1m+79u}
+.meas tran vsmax MAX V(s) FROM=3.05m TO=3.2m
+.meas tran dvcc PP V(vcc) FROM=3.05m TO=3.2m
+.end

@@ -1,0 +1,32 @@
+* 3-15 リングオシレータ (CD4069UB のインバータ 3 段、図1)。各段に R=10k と C=1n (.step で 2.2n も)、5 V
+* インバータは CD4069UB の動作の模型 (仮定。実測ではない): しきい値 2.5 V・利得 約 25 倍 (バッファ無し)、出力抵抗 1 kohm、入力容量 10 pF
+.subckt INV IN OUT
+B1 X 0 V = 2.5 - 2.5*tanh((V(IN)-2.5)/0.1)
+RO X OUT 1k
+CI IN 0 10p
+.ends
+.param c=1n
+V1 vdd 0 5
+XA n3 o1 INV
+R1 o1 n1 10k
+C1 n1 0 {c}
+XB n1 o2 INV
+R2 o2 n2 10k
+C2 n2 0 {c}
+XC n2 o3 INV
+R3 o3 n3 10k
+C3 n3 0 {c}
+.step param c list 1n 2.2n
+.ic V(n3)=0 V(n1)=5 V(n2)=0
+.tran 0 4m 0 50n
+.meas tran ta WHEN V(o1)=2.5 RISE=10
+.meas tran tb WHEN V(o1)=2.5 RISE=30
+.meas tran fo param 20/(tb-ta)
+.meas tran tf WHEN V(o1)=2.5 FALL=11
+.meas tran duty param (tf-ta)*fo
+.meas tran n1max MAX V(n1) FROM=3m TO=4m
+.meas tran n1min MIN V(n1) FROM=3m TO=4m
+.meas tran o1max MAX V(o1) FROM=3m TO=4m
+.meas tran o1min MIN V(o1) FROM=3m TO=4m
+.meas tran tdel TRIG V(o1) VAL=2.5 RISE=20 TARG V(o2) VAL=2.5 FALL=20
+.end
