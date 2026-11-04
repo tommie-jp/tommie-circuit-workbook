@@ -7,6 +7,7 @@
  * 1 行は 1 題 (計画の全部)。書いた題は **目で確認のチェックボックス** で、まだの題は箱なし:
  *
  *   - [x] 1-1 [題](path) ✓ 2026-11-01 · Fable ✓ 2026-10-30
+ *   - [ ] 1-2 [題](path) · Fable —
  *
  * - **作成** — 題のファイルがあれば link (箱つき)。まだの題は字だけ (手で書かない)
  * - **目で確認** (箱) — front matter の `seen: YYYY-MM-DD` (人が目で確認した日)。
@@ -35,6 +36,7 @@ const WRITTEN = '作成';
 const DONE = '✓';
 const STALE = '△';
 const NOT_YET = '(まだ)';
+const NONE = '—';
 
 const HEADER = `# 進捗
 
@@ -44,7 +46,7 @@ const HEADER = `# 進捗
 - **${MARK_NAMES.seen}** (箱) — 題の front matter の \`seen: YYYY-MM-DD\` (人が目で確認した日)。
   **目で確認したら箱を \`[x]\` にして** (VS Code なら行で Alt+C) \`npm run progress\` を回す。
   題の front matter に \`seen: <今日>\` が入り、日付がここに出る。\`[ ]\` に戻せば \`seen\` が消える
-- **${MARK_NAMES.reviewed}** — 題の front matter の \`reviewed: YYYY-MM-DD\` (Claude (Fable) で確認した日)
+- **${MARK_NAMES.reviewed}** — 題の front matter の \`reviewed: YYYY-MM-DD\` (Claude (Fable) で確認した日。${NONE} はまだ)
 
 確認した日より後に題を書き換えていれば ${DONE} でなく ${STALE} で出し、箱を空にして数に入れない (確認し直して、また箱を付ける)。`;
 
@@ -79,7 +81,7 @@ function entryLine(entry, changed) {
   return [
     `- [${seen.done ? 'x' : ' '}] ${entry.id} [${cell(entry.title)}](${entry.path})`,
     ...(seen.text === '' ? [] : [seen.text]),
-    ...(reviewed.text === '' ? [] : [`· Fable ${reviewed.text}`]),
+    `· Fable ${reviewed.text === '' ? NONE : reviewed.text}`,
   ].join(' ');
 }
 
@@ -121,7 +123,7 @@ export function progressTable(rowsByBook, changed = new Map()) {
 }
 
 const BOOK_HEADING = /^## (.+)$/;
-const BOX_LINE = /^- \[([ xX])\] (\d+-\d+) \[.*\]\((\S+\.md)\)((?: [✓△] \d{4}-\d{2}-\d{2})?)(?: · Fable [✓△] \d{4}-\d{2}-\d{2})?$/;
+const BOX_LINE = /^- \[([ xX])\] (\d+-\d+) \[.*\]\((\S+\.md)\)((?: [✓△] \d{4}-\d{2}-\d{2})?)(?: · Fable (?:[✓△] \d{4}-\d{2}-\d{2}|—))?$/;
 
 /**
  * 今の PROGRESS.md で、読む人が前回の書き出しから変えた箱。

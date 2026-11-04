@@ -48,7 +48,8 @@ test('lists each entry as a checkbox for 目で確認, links the written ones, a
   assert.ok(text.includes('### 第 1 章 基本 — 直流と受動部品'));
   assert.ok(!text.includes('### 第 0 章'));
   assert.ok(text.includes('- [x] 1-1 [題 1-1](01-circuits/01-basics/01-x.md) ✓ 2026-11-01 · Fable ✓ 2026-10-30\n'));
-  assert.ok(text.includes('- [ ] 1-2 [題 1-2](01-circuits/01-basics/02-x.md)\n'));
+  // Fable の欄は印が無くても出す (— はまだ)。
+  assert.ok(text.includes('- [ ] 1-2 [題 1-2](01-circuits/01-basics/02-x.md) · Fable —\n'));
   assert.ok(text.includes('- [ ] 1-3 [題 1-3](01-circuits/01-basics/03-x.md) · Fable ✓ 2026-10-30\n'));
   // まだの題は箱なし (押しても作成にはならない)。
   assert.ok(text.includes('- 1-4 題 1-4 (まだ)\n'));
@@ -82,7 +83,7 @@ test('finds the boxes the reader toggled since the last run, by book and id', ()
 ### 第 1 章
 
 - [x] 1-1 [題 1-1](01-circuits/01-basics/01-x.md) ✓ 2026-11-01 · Fable ✓ 2026-10-30
-- [x] 1-2 [題 1-2](01-circuits/01-basics/02-x.md)
+- [x] 1-2 [題 1-2](01-circuits/01-basics/02-x.md) · Fable —
 - [ ] 1-3 [題 1-3](01-circuits/01-basics/03-x.md) ✓ 2026-11-01
 - [X] 1-4 [題 1-4](01-circuits/01-basics/04-x.md) △ 2026-10-20 · Fable ✓ 2026-10-25
 - [ ] 1-5 [題 1-5](01-circuits/01-basics/05-x.md) · Fable ✓ 2026-10-25
