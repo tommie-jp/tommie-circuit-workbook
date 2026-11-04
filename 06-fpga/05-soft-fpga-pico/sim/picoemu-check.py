@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""5 章・6-6・6-17 の .uf2 を RP2350 エミュレータ picoemu (Cortex-M33) に載せ、
+"""5 章・6-18・6-17 の .uf2 を RP2350 エミュレータ picoemu (Cortex-M33) に載せ、
 論理で決まる値 (出力の並び・反転の回数・分周比・押し方への反応) を突き合わせる。
 
 使い方:
   python3 picoemu-check.py --picoemu ./picoemu --uf2 <.uf2 を集めたフォルダ> [題 ...]
-  題: 5-2 5-3 5-4 5-5 5-6 5-7 5-8 5-9 5-10 5-11 5-14 5-15 6-6 6-17 (省くと全部)
+  題: 5-2 5-3 5-4 5-5 5-6 5-7 5-8 5-25 5-9 5-10 5-11 5-14 5-27 6-18 6-17 (省くと全部)
 
 .uf2 のファイル名: blink_pico io_reg_pico gates_pico clock55 clock56 clock57
-  td4_58 (プログラム A) td4_58_b (プログラム B) clock59 clock510 clock511
+  td4_58 (プログラム A) td4_58_b (5-25 のプログラム B) clock59 clock510 clock511
   serial514 (USB 付き) seg515 press66 timer99_pico
 
 picoemu は sim/picoemu-m33.patch を当てた版 (danish9661/pico-emulator b83786f)。
@@ -224,13 +224,17 @@ def c58():
     want = [0] + [3, 6, 12, 8, 8, 12, 6, 3, 1, 1] * 3
     check("5-8 プログラム A の OUT = 3 6 C 8 8 C 6 3 1 1 の繰り返し", per[:31] == want, " ".join("%X" % x for x in per[:21]))
     check("5-8 CLK の周期は 100 ms", abs((rises[1] - rises[0]) - 100000) <= 10, "%d us" % (rises[1] - rises[0]))
+
+
+# ---------------------------------------------------------------- 5-25 (5-8 のプログラム B)
+def c525():
     sc = dip(5) + dip(15, at_ms=1530)
     per, rises = td4_out("td4_58_b", sc)
     first6 = next(i for i, v in enumerate(per) if v == 6)
-    check("5-8 プログラム B、DIP = 5 -> OUT = 6、リセットのあと 4 クロック目から", first6 == 4 and per[4:19] == [6] * 15,
+    check("5-25 プログラム B、DIP = 5 -> OUT = 6、リセットのあと 4 クロック目から", first6 == 4 and per[4:19] == [6] * 15,
           "最初の 6 は %d 番目の立ち上がり (1 番目がリセット)" % (first6 + 1))
     first0 = next(i for i, v in enumerate(per) if i > first6 and v == 0)
-    check("5-8 プログラム B、DIP を F に替えると 0.5 s 以内に OUT = 0", (rises[first0] - 1530000) <= 500000,
+    check("5-25 プログラム B、DIP を F に替えると 0.5 s 以内に OUT = 0", (rises[first0] - 1530000) <= 500000,
           "%.0f ms 後" % ((rises[first0] - 1530000) / 1000))
 
 
@@ -293,22 +297,22 @@ def c514():
           len(lines) > 100 and all(l == "%d pc=0 op=B3 out=1" % (1000 * (i + 1)) for i, l in enumerate(lines[:100])), str(lines[:2]))
 
 
-# ---------------------------------------------------------------- 5-15
+# ---------------------------------------------------------------- 5-27 (5-15 の seg515)
 def c515():
     seg_pins = [11, 12, 16, 17, 18, 10, 9]
     mon_pins = [22, 21, 20, 19]
     exp = [0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F]
     sc = "".join("%dms: gpio26 0\n%dms: gpio26 1\n" % (10 + 10 * k, 15 + 10 * k) for k in range(11))
     ev, _ = run("seg515", 40_000_000, script=sc)
-    check("5-15 電源を入れると 0", (level_at(ev, seg_pins, 5000), level_at(ev, mon_pins, 5000)) == (0x3F, 0))
+    check("5-27 電源を入れると 0", (level_at(ev, seg_pins, 5000), level_at(ev, mon_pins, 5000)) == (0x3F, 0))
     got = [(level_at(ev, seg_pins, (18 + 10 * k) * 1000), level_at(ev, mon_pins, (18 + 10 * k) * 1000)) for k in range(11)]
     want = [(exp[(k + 1) % 10], (k + 1) % 10) for k in range(11)]
-    check("5-15 11 回押す: 1 → … → 9 → 0 → 1、seg の値も合う", got == want)
+    check("5-27 11 回押す: 1 → … → 9 → 0 → 1、seg の値も合う", got == want)
     ev, _ = run("seg515", 40_000_000, script="100ms: gpio26 0\n101ms: gpio26 1\n102ms: gpio26 0\n150ms: gpio26 1\n")
-    check("5-15 跳ねる押し方 (L H L) は 1 回で 2 つ進む", level_at(ev, mon_pins, 140000) == 2)
+    check("5-27 跳ねる押し方 (L H L) は 1 回で 2 つ進む", level_at(ev, mon_pins, 140000) == 2)
 
 
-# ---------------------------------------------------------------- 6-6
+# ---------------------------------------------------------------- 6-18 (6-6 の長押しと短押しを Pico 2 で)
 def c66():
     def seq(t0, ms_down, bounce):
         e = [(t0, 0), (t0 + 1, 1), (t0 + 2, 0), (t0 + 3, 1), (t0 + 4, 0)] if bounce else [(t0, 0)]
@@ -325,13 +329,13 @@ def c66():
     rise = lambda pin: [t / 1000 for (t, p, v) in ev if p == pin and v == 1]
     for name, e, a, b, want in scen:
         got = tuple(len([t for t in rise(pin) if a <= t < b]) for pin in (15, 14, 16))
-        check("6-6 %s -> short/long/repeat = %s" % (name, want), got == want, "実行 %s" % (got,))
+        check("6-18 %s -> short/long/repeat = %s" % (name, want), got == want, "実行 %s" % (got,))
     r = [t for t in rise(16) if 800 <= t < 4000]
-    check("6-6 repeat の間隔は 200 ms", [round(y - x, 1) for x, y in zip(r, r[1:])] == [200.0] * 6)
+    check("6-18 repeat の間隔は 200 ms", [round(y - x, 1) for x, y in zip(r, r[1:])] == [200.0] * 6)
     s = [t for t in rise(15) if 100 <= t < 800][0]
-    check("6-6 短押しで離してから D1 まで約 22.5 ms (ms 刻みの跳ねで 22.8 ms)", 21 < s - 402 < 25, "%.1f ms" % (s - 402))
+    check("6-18 短押しで離してから D1 まで約 22.5 ms (ms 刻みの跳ねで 22.8 ms)", 21 < s - 402 < 25, "%.1f ms" % (s - 402))
     l = [t for t in rise(14) if 5500 <= t < 7000][0]
-    check("6-6 跳ねない 1.1 s の長押しで押してから D2 まで約 1022.5 ms", 1021 < l - 5500 < 1025, "%.1f ms" % (l - 5500))
+    check("6-18 跳ねない 1.1 s の長押しで押してから D2 まで約 1022.5 ms", 1021 < l - 5500 < 1025, "%.1f ms" % (l - 5500))
 
 
 # ---------------------------------------------------------------- 6-17 (6-7 の 99 秒タイマーを Pico 2 で)
@@ -380,8 +384,8 @@ def c67():
     check("6-17 RING に入るのは 26 395 ms 付近 (本文 26 394 ms)", abs(bz[0] / 1000 - 26395) < 5, "%.1f ms" % (bz[0] / 1000))
 
 
-CHECKS = {"5-2": c52, "5-3": c53, "5-4": c54, "5-5": c55, "5-6": c56, "5-7": c57, "5-8": c58, "5-9": c59,
-          "5-10": c510, "5-11": c511, "5-14": c514, "5-15": c515, "6-6": c66, "6-17": c67}
+CHECKS = {"5-2": c52, "5-3": c53, "5-4": c54, "5-5": c55, "5-6": c56, "5-7": c57, "5-8": c58, "5-25": c525, "5-9": c59,
+          "5-10": c510, "5-11": c511, "5-14": c514, "5-27": c515, "6-18": c66, "6-17": c67}
 
 
 def main():

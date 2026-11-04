@@ -12,16 +12,15 @@ device: FPGA
 # 8-6 Pico 2 で動かした同じ Verilog を FPGA で動かす
 
 > [!WARNING]
-> **この題は実機で組んでいない。** 2 つの回路とも、Verilator で動かして値を確かめ、合成・配置配線・ビットストリーム作りまで
+> **この題は実機で組んでいない。** Verilator で動かして値を確かめ、合成・配置配線・ビットストリーム作りまで
 > 手元の PC で通した。書き込みと、DIP スイッチ・LED・AD3 での確かめは実行していない。
-> 「見るべき値」はシミュレーションの値と計算値で、測った値ではない。
+> 「見るべき値」はシミュレーションの値で、測った値ではない。
 
 第 5 章では、1-1 のゲート (5-4) と 4 ビット CPU の TD4 (5-8) を Pico 2 の Soft-FPGA で動かした。
-この題では、**同じ `gates.v` と `TD4.v` を 1 行も変えずに** Tang Nano 9K に載せる。
+この題では、**同じ `gates.v` を 1 行も変えずに** Tang Nano 9K に載せる。TD4 の `TD4.v` を同じように載せるのは 8-22 に分けた (8-7 が 8-22 の TD4 の数を使うので、8-22 は 8-7 より先に読む)。
 
-変えるのは、Verilog の外側だけである。
-Pico 2 では C++ の主ループ (`main.cpp`) が、GPIO を読んで Verilog の入力に渡し、出力を GPIO に書き、クロックを刻んでいた (5-3)。
-FPGA では、その役を最上位のモジュール (`top_*.v`) と制約ファイル (`*.cst`) が受け持つ。
+変えるのは Verilog の外側だけである。Pico 2 では C++ の主ループ (`main.cpp`) が GPIO を読んで Verilog の入力に渡し、
+出力を GPIO に書き、クロックを刻んでいた (5-3)。FPGA では、その役を最上位のモジュール (`top_*.v`) と制約ファイル (`*.cst`) が受け持つ。
 
 | 役 | Pico 2 (Soft-FPGA-TD4 の `main.cpp`) | Tang Nano 9K |
 | --- | --- | --- |
@@ -32,52 +31,12 @@ FPGA では、その役を最上位のモジュール (`top_*.v`) と制約フ�
 | リセット | 主ループの 1・2 クロック目で `reset_n` を 0 にする | ボードの押しボタン (4 番ピン、押すと 0) をそのまま `reset_n` へ |
 | LED | ブレッドボードの LED 4 個 | ボードに載っている LED 6 個のうち 4 個 (0 で点く) |
 
-Pico 2 の列は [Soft-FPGA-TD4](https://github.com/tommie-jp/Soft-FPGA-TD4) の `verilator-TD4/main.cpp` から読んだ。
-LED はボードに載っている物を使うので、ブレッドボードには DIP スイッチだけを挿す。
-同じ値をヘッダのピンにも出し、AD3 で読む。
-
-## 論理図
-
-```plantuml
-@startuml
-left to right direction
-skinparam shadowing false
-skinparam defaultFontName "Noto Sans CJK JP"
-skinparam rectangle {
-  RoundCorner 6
-}
-title 図1 top_td4 は TD4.v を変えずに入れ、クロック・入力・出力の向きだけを合わせる
-
-rectangle "52 番ピン\n27 MHz" as CLK
-rectangle "4 番ピン\n押しボタン (押すと 0)" as BTN
-rectangle "DIP スイッチ\nsw_n[3:0] (ON で 0)" as SW
-rectangle "blink\nBLINK_HZ = 5" as DIV #FFF8E1
-rectangle "NOT × 4" as INV #E6F4EA
-rectangle "TD4\n(Soft-FPGA-TD4 の TD4.v)" as CPU #FFF8E1
-rectangle "NOT × 4" as INV2 #E6F4EA
-rectangle "ボードの LED\nled_n[3:0] (0 で点く)" as LED
-rectangle "ヘッダ out[3:0]\n→ AD3 の DIO3〜DIO0" as OUT
-rectangle "ヘッダ td4_clk\n→ AD3 の DIO4" as TCK
-
-CLK --> DIV : clk
-BTN --> DIV : rst (反転して)
-BTN --> CPU : reset_n
-SW --> INV
-INV --> CPU : in_port
-DIV --> CPU : clock (5 Hz)
-DIV --> TCK
-CPU --> INV2 : out_port
-INV2 --> LED
-CPU --> OUT : out_port
-@enduml
-```
-
-![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/08-fpga-board/plantuml/06-same-verilog-on-fpga.svg)
+Pico 2 の列は [Soft-FPGA-TD4](https://github.com/tommie-jp/Soft-FPGA-TD4) の `verilator-TD4/main.cpp` から読んだ (クロックとリセットの行は 8-22 の TD4 で使う)。
+LED はボードの物を使うので、ブレッドボードには DIP スイッチだけを挿す。同じ値をヘッダのピンにも出し、AD3 で読む。
 
 ## Verilog
 
-`TD4.v` は Soft-FPGA-TD4 の `verilator-TD4/TD4.v`、`gates.v` は 1-1、`blink.v` は 2-7 のものをそのまま使う (ここには写さない)。
-新しく書くのは最上位の 2 つだけ。
+`gates.v` は 1-1 のものをそのまま使う (ここには写さない)。新しく書くのは最上位だけ。
 
 ### top_gates.v — 1-1 のゲート
 
@@ -99,41 +58,6 @@ module top_gates (
     assign out   = y;
 endmodule
 ```
-
-### top_td4.v — TD4
-
-```verilog
-// Tang Nano 9K に TD4 を載せる最上位。TD4.v は Soft-FPGA-TD4 のまま変えない
-module top_td4 #(
-    parameter CLK_HZ = 27_000_000
-) (
-    input        clk,       // 52 番ピン。ボードの 27 MHz
-    input        rst_n,     // 4 番ピン。ボードの押しボタン (押すと 0)
-    input  [3:0] sw_n,      // DIP スイッチ。ON で 0 (FPGA の中でプルアップ)
-    output [3:0] led_n,     // ボードの LED。0 で点く
-    output [3:0] out,       // out_port をヘッダにも出す。AD3 で読む
-    output       td4_clk    // TD4 のクロック。AD3 で読む
-);
-    wire       slow;
-    wire [3:0] out_port;
-
-    // 2-7 の blink を 5 Hz で回して TD4 のクロックにする (Pico 2 の 100 ms ごとの反転と同じ 200 ms の周期)
-    blink #(.CLK_HZ(CLK_HZ), .BLINK_HZ(5)) div (.clk(clk), .rst(~rst_n), .led(slow));
-
-    /* verilator lint_off PINCONNECTEMPTY */    // pc_out・op・alu_data はピンに出さない
-    TD4 cpu (.clock(slow), .reset_n(rst_n), .in_port(~sw_n), .out_port(out_port),
-             .pc_out(), .op(), .alu_data());
-    /* verilator lint_on PINCONNECTEMPTY */
-
-    assign led_n   = ~out_port;
-    assign out     = out_port;
-    assign td4_clk = slow;
-endmodule
-```
-
-**TD4 のクロックに、分周した信号 (`slow`) をそのまま使っている。** 2-17 で「やってはいけない」とする書き方である。
-`TD4.v` はクロックイネーブルの入力を持たないので、変えずに載せるにはこうするしかない。
-5 Hz なら間に合いの心配は無いが、速い回路ではクロックイネーブル (2-5) に書き直す。
 
 ### 制約ファイル
 
@@ -180,19 +104,11 @@ IO_PORT "td4_clk" IO_TYPE=LVCMOS33 DRIVE=8;
 
 ```bash
 verilator --lint-only -Wall top_gates.v gates.v
-verilator --lint-only -Wall --no-timing top_td4.v blink.v TD4.v
-verilator --lint-only --no-timing TD4.v
 ```
 
-- `top_gates.v` と `gates.v` は警告 0 件
-- `TD4.v` だけを `-Wall` 無しで lint すると警告 0 件 (Soft-FPGA-TD4 と同じ `--no-timing`)
-- `-Wall` を付けると、`TD4.v` の中に 9 件 (`#1` の遅れを無視する `ASSIGNDLY` 5 件、初期値のある変数への代入 `PROCASSINIT` 2 件、
-  非同期のリセットとの混ざり `SYNCASYNCNET` 2 件) と、`top_td4.v` の `slow` に `SYNCASYNCNET` が 1 件、計 10 件出る。
-  `TD4.v` の分はこの題では直さない (変えずに載せるのが題の主旨)。`slow` の 1 件は、上の「分周した信号をクロックに使う」ことを言っている
+`top_gates.v` と `gates.v` は警告 0 件。
 
 ## 動かす (シミュレーション)
-
-### ゲート
 
 DIP スイッチの 1 番・2 番の 4 通りで、`out` を見る。
 
@@ -230,86 +146,16 @@ DIP1=1 DIP2=1  out=1100 (AND OR NOT 0)  led_n=0011
 
 1-1 の真理値表と同じ (`out[1]` の NOT は DIP の 1 番だけを見る)。`led_n` は `out` の反転で、1 の LED が点く。
 
-### TD4
-
-`CLK_HZ` を 10 にして、TD4 のクロックを 1 クロックおきに反転させ、`out` の並びを見る。
-
-```verilog
-// CLK_HZ = 10 にして、TD4 のクロック (5 Hz の分周) を 1 クロックおきに反転させ、out の並びを見る
-module tb_td4;
-    reg clk = 0;
-    reg rst_n = 0;
-    wire [3:0] led_n;
-    wire [3:0] out;
-    wire       td4_clk;
-    integer n = 0;
-
-    top_td4 #(.CLK_HZ(10)) u (.clk(clk), .rst_n(rst_n), .sw_n(4'b1111),
-                              .led_n(led_n), .out(out), .td4_clk(td4_clk));
-
-    always #1 clk = ~clk;
-
-    always @(posedge td4_clk) if (rst_n) begin
-        #2 $display("after TD4 clock %2d: pc=%h out=%b", n, u.cpu.pc, out);
-        n = n + 1;
-        if (n == 12) $finish;
-    end
-
-    initial #5 rst_n = 1;
-endmodule
-```
-
-```bash
-verilator --binary --timing -Wno-fatal --top-module tb_td4 tb_td4.v top_td4.v blink.v TD4.v
-./obj_dir/Vtb_td4 | grep after
-```
-
-```text
-after TD4 clock  0: pc=1 out=0011
-after TD4 clock  1: pc=2 out=0110
-after TD4 clock  2: pc=3 out=1100
-after TD4 clock  3: pc=4 out=1000
-after TD4 clock  4: pc=5 out=1000
-after TD4 clock  5: pc=6 out=1100
-after TD4 clock  6: pc=7 out=0110
-after TD4 clock  7: pc=8 out=0011
-after TD4 clock  8: pc=9 out=0001
-after TD4 clock  9: pc=0 out=0001
-after TD4 clock 10: pc=1 out=0011
-after TD4 clock 11: pc=2 out=0110
-```
-
-- `TD4.v` の ROM の中身は、`OUT` を 9 回並べて最後に `JMP 0000` で頭に戻る LED の模様。10 クロックで 1 巡りする
-- この ROM は入力ポートを読まないので、DIP スイッチを動かしても模様は変わらない。DIP スイッチが効くのは、ROM を `IN` を使うプログラムに替えたとき (10-1)
-- `TD4.v` には `$monitor` があり、シミュレーションでは毎クロックの行も出る (上では `grep` で外した)。合成では yosys が無視する
-
 ## 合成・配置配線
 
-8-4 と同じ 3 手を通した (yosys 0.33・nextpnr 0.11.1-54・gowin_pack。書き込みは未実行)。
-
-```bash
-yosys -p "read_verilog top_td4.v blink.v TD4.v; synth_gowin -top top_td4 -json top_td4.json; stat"
-nextpnr-himbaechel --json top_td4.json --write pnr_td4.json \
-    --device GW1NR-LV9QN88PC6/I5 --vopt family=GW1N-9C --vopt cst=td4.cst --freq 27
-gowin_pack -d GW1N-9C -o top_td4.fs pnr_td4.json
-openFPGALoader -b tangnano9k top_td4.fs
-```
-
-| 回路 | 合成した結果 (yosys 0.33) | nextpnr の最高の周波数の見積り |
-| --- | --- | --- |
-| `top_gates` | LUT1 × 1・LUT2 × 4。FF は 0 | クロックが無い |
-| `top_td4` | LUT 50 (LUT1 25・LUT2 8・LUT3 8・LUT4 9)・FF 35 (DFFC 4・DFFCE 8・DFFR 22・DFFRE 1)・ALU 30 | 27 MHz のクロック 150.74 MHz、TD4 のクロック 226.24 MHz |
-
-- `top_td4` の FF のうち DFFR・DFFRE の 23 個は `blink` (22 ビットのカウンタと `slow`)、DFFC・DFFCE の 12 個が TD4 の分
-- TD4 のレジスタは A・B・OUT・PC の 4 ビット × 4 と桁上げの 1 ビットで 17 ビットあるが、合成すると 12 個になった。
-  ROM の中身が決まっていて、どこにも効かないレジスタを yosys が消したと見られる。どう消えたかは 8-8 で報告を読む
-- TD4 のクロックは 5 Hz で使うので、最高の周波数の見積りより 4 千万倍以上遅い。間に合いの心配は無い
+8-4 と同じ 3 手を通した (yosys 0.33・nextpnr 0.11.1-54・gowin_pack。最上位は `top_gates`、制約は `gates.cst`。書き込みは未実行)。
+合成すると LUT1 × 1・LUT2 × 4 で、FF は 0。クロックが無いので、nextpnr の最高の周波数の見積りは出ない。
 
 ## 回路図
 
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
-title: 図2 DIP スイッチで FPGA のピンを GND に落とす。AD3 は出力 4 本と TD4 のクロックを読む
+title: 図1 DIP スイッチで FPGA のピンを GND に落とす。AD3 は出力 4 本と TD4 のクロックを読む
 parts:
   AD:
     type: device
@@ -361,6 +207,7 @@ wires:
 
 - 線で結ぶ代わりに、**同じ名前の端子 (白丸と名前) どうしがつながっている**。U1 の 17 番ピン (IO51) の `DIP1` は、SW1 の A1 の `DIP1` とつながる
 - DIP スイッチの k 番は `Ak` と `Bk` の間の接点。B の側をまとめて GND に落とす。プルアップの抵抗は FPGA の中 (`PULL_MODE=UP`) なので、図に抵抗は無い
+- DIP スイッチの 3・4 番と `td4_clk` (IO25 → DIO4) は 8-22 の TD4 で使う。この題では 1・2 番と `out` だけを見る
 - 図に無い物: ボードの LED (10・11・13・14 番)・27 MHz のクロック (52 番)・押しボタン (4 番) は、ボードの上で FPGA につながっている
 
 ## 部品
@@ -380,7 +227,7 @@ wires:
 
 ```bread
 # ブレッドボードの実体配線図 (tommie-fence の bread フェンス)
-title: 図3 DIP スイッチは j 行の 4 本で、AD3 はヘッダの 1〜5 番から
+title: 図2 DIP スイッチは j 行の 4 本で、AD3 はヘッダの 1〜5 番から
 board: full
 parts:
   U1: tang-nano-9k @ b1
@@ -427,74 +274,30 @@ notes:
 | --- | --- |
 | Logic | DIO0〜DIO4 を Enable。DIO は 3.3 V。GND を共通にする (0-4) |
 | バス | `OUT` を DIO3 (上位)〜DIO0 (下位) で作り、2 進で表示 |
-| 時間軸 | 250 ms/div (窓 2.5 s)。10 クロック (2 s) の 1 巡りが入る |
-| 標本化 | 1 kS/s。見る一番速い変化 (5 Hz のクロックの 100 ms ごとの切り替え) よりずっと速い |
-| トリガ | DIO4 (`td4_clk`) の立ち上がり。`JMP` で頭に戻るクロックに合わせる (下の図の t = 0) |
 
 ゲートの回路は時間で変わらないので、Logic の図は描かない。DIP スイッチを動かし、`out` と LED が上のシミュレーションの表のとおりかを見る。
 
-## Logic に見えるはずの画面
-
-```logic
-# ロジックアナライザの画面 (tommie-fence の logic フェンス)
-title: 図4 TD4 の out は 5 Hz のクロックの立ち上がりで変わり、10 クロック (2 s) で 1 巡りする
-device: ad3
-time: 250ms/div
-start: -150ms
-sample: 1kHz
-signals:
-  td4_clk: dio4 clock 5Hz
-  out3: dio3 pattern 0000111100000 bit 200ms from -200ms
-  out2: dio2 pattern 0001100110000 bit 200ms from -200ms
-  out1: dio1 pattern 0011000011001 bit 200ms from -200ms
-  out0: dio0 pattern 1110000001111 bit 200ms from -200ms
-buses:
-  OUT: out3..out0 bin
-cursors: [150ms, 2150ms]
-trigger: td4_clk rising at 0s
-```
-
-![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/08-fpga-board/logic/06-same-verilog-on-fpga.svg)
-
-- t = 0 の立ち上がりは `JMP 0000` を実行するクロック。`OUT` は 0001 のまま残り、次の立ち上がり (200 ms) から 0011 → 0110 → 1100 → 1000 と進む
-- カーソルはクロックの L の真ん中 (立ち上がりから 150 ms) に、10 クロックあけて置いた。ΔX が 1 巡りの 2 s になる
-- 値の並びは、上の Verilator の表 (`after TD4 clock 0`〜) と同じ
-
 ## 見るべき値
 
-シミュレーションの値と計算値。実機で測っていない。
+シミュレーションの値。実機で測っていない。
 
 | 項目 | 見るべき値 | どこで得たか |
 | --- | --- | --- |
-| `td4_clk` の周期 | 200 ms (5 Hz) (計算値) | `blink` の `HALF` = 27 000 000 / 10 = 2 700 000 クロック |
-| `OUT` の並び | 0011 → 0110 → 1100 → 1000 → 1000 → 1100 → 0110 → 0011 → 0001 → 0001 | TD4 のシミュレーション |
-| 1 巡りの時間 (ΔX) | 2.000 s (10 クロック) (計算値) | 同上 |
 | ゲートの `out` | DIP 1・2 が ON・ON で 1100、ON・OFF で 0100、OFF・ON で 0110、OFF・OFF で 0010 | ゲートのシミュレーション |
-| Pico 2 と比べて変えた Verilog の行 | 0 行 (`gates.v`・`TD4.v` とも) | 書いた物 |
-
-実機で組んだら、`OUT` の並びが Pico 2 の 5-8 の並びと同じかを、Logic の図を並べて比べる。
-並びは同じで、違うのは時間の刻み (Pico 2 は主ループの `sleep_ms`、FPGA は 27 MHz の水晶) だけのはずである。
+| Pico 2 と比べて変えた Verilog の行 | 0 行 (`gates.v`) | 書いた物 |
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63 で、本文の `top_gates.v` `top_td4.v` `tb_gates.v` `tb_td4.v` を走らせ直した。
-`gates.v` は 1-1、`blink.v` は 2-7、`TD4.v` は Soft-FPGA-TD4 の `verilator-TD4/TD4.v` (コミット b74bed1) を使った。
-置き場は `sim/06-same-verilog-on-fpga-gates.v` `sim/06-same-verilog-on-fpga-td4.v`
-`sim/06-same-verilog-on-fpga-gates-tb.v` `sim/06-same-verilog-on-fpga-td4-tb.v`。
+Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63 で、本文の `top_gates.v` `tb_gates.v` を走らせ直した。
+`gates.v` は 1-1 のものを使った。置き場は `sim/06-same-verilog-on-fpga-gates.v` `sim/06-same-verilog-on-fpga-gates-tb.v`
+(TD4 の分は 8-22)。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
 | lint (`top_gates.v`、`-Wall`) | 警告 0 件 | 0 件 | 合った |
-| lint (`TD4.v`、`--no-timing`、`-Wall` なし) | 警告 0 件 | 0 件 | 合った |
-| lint (`top_td4.v blink.v TD4.v`、`-Wall`) | 10 件 (ASSIGNDLY 5・PROCASSINIT 2・SYNCASYNCNET 3) | 同じ 10 件。`top_td4.v` の `slow` が 1 件 | 合った |
 | ゲート 4 通り | out = 0010・0110・0100・1100、led_n はその反転 | 同じ | 合った |
-| TD4 の `out` の並び (12 クロック) | 0011 0110 1100 1000 1000 1100 0110 0011 0001 0001 0011 0110 | 同じ。pc は 1〜9、0、1、2 | 合った |
-| 図4 の 4 本の pattern | `out3`〜`out0` の 13 個ずつ | 上の並びから読み直して同じ | 合った |
 | 合成 `top_gates` | LUT1 × 1・LUT2 × 4・FF 0 | 同じ | 合った |
-| 合成 `top_td4` | LUT 50 (25・8・8・9)・FF 35 (DFFC 4・DFFCE 8・DFFR 22・DFFRE 1)・ALU 30 | 同じ | 合った |
 | nextpnr `top_gates` | クロックが無い | `No Fmax available; no interior timing paths found`。LUT4 5・IOB 10 (どちらの版でも) | 合った |
-| nextpnr `top_td4` (0.33 の `json`) | 27 MHz のクロック 150.74 MHz、TD4 のクロック 226.24 MHz | 同じ (`div.clk` 150.74・`slow` 226.24。使用量は LUT4 86・ALU 36・DFF 35・IOB 15) | 合った |
-| nextpnr `top_td4` (0.70+16 の `json`) | (記載なし) | LUT 28 (LUT1 8・LUT2 1・LUT3 5・LUT4 14)・ALU 29・FF 35。LUT4 62。`div.clk` 207.34 MHz・`cpu.clock` 182.25 MHz (クロックの名前も版で変わる) | 近い (版の差。TD4 のクロックの数は 0.33 より低い) |
 
 確かめていない数: 実機の DIP スイッチ・LED・AD3 の測定。
 
@@ -502,7 +305,5 @@ Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63 で�
 
 自作。
 
-- TD4 の Verilog と Pico 2 での動かし方: [tommie-jp/Soft-FPGA-TD4](https://github.com/tommie-jp/Soft-FPGA-TD4) の `verilator-TD4/TD4.v` と `main.cpp`。
-  TD4.v の元は [asfdrwe/simpleTD4](https://github.com/asfdrwe/simpleTD4) (MIT ライセンス)。simpleTD4 の README は、
-  初代の Sipeed Tang Nano (Tang Nano 9K の前の機種) で動かす手順を書いている
+- Pico 2 での動かし方: [tommie-jp/Soft-FPGA-TD4](https://github.com/tommie-jp/Soft-FPGA-TD4) の `verilator-TD4/main.cpp`
 - ボードの LED (10・11・13・14 番)・クロック (52 番)・押しボタン (4 番): Sipeed の [TangNano-9K-example](https://github.com/sipeed/TangNano-9K-example) の `led/src/9K_LED_project.cst`

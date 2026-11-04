@@ -6,14 +6,14 @@ title: Goodnight Timer — 555 Monostable + MOSFET
 tier: 50
 source: 自作
 board: [BB, PF]
-ja: d0e91d876fc8dc902b0dcb5aa2ed8dfce04c222e
+ja: 9ea6987ef9986e4aa4d0355b862ed8636dfb5fbd
 ---
 
 # 12-1 Goodnight Timer — 555 Monostable + MOSFET
 
 A practical circuit that combines the 555 monostable (3-3; a mode in which a trigger holds the output at H for a fixed time) with
 a MOSFET switch (2-5). Press the button and a night-light LED comes on, then turns itself off
-after about 19 minutes. Press it before going to sleep and you have a "goodnight timer" that works as a reading light and then switches itself off.
+after about 19 minutes. Press it before going to sleep and it works as a reading light that switches itself off: a "goodnight timer".
 Chapter 12 turns circuits from the earlier chapters into finished projects: you check them on a
 breadboard, then solder them onto a perfboard to keep them.
 
@@ -73,7 +73,7 @@ style:
   Ct has trouble reaching 2/3 of the supply voltage (the voltage at which the 555 stops) and the time gets longer.
   If the leakage exceeds it, the timer never ends
 - The datasheet upper limit for leakage, 0.01 × C × V (V is the rated voltage, 2 minutes after applying the voltage), comes to
-  0.01 × 220 × 25 = 55 µA for a 220 µF, 25 V part. But this is the upper limit with the rated voltage applied.
+  0.01 × 220 × 25 = 55 µA for a 220 µF, 25 V part.
   Use a part with margin in its rating (25 V or more) at 5 V and leave the voltage applied for a while, and the
   actual leakage is normally far below 1 µA (rough guide). So use an
   electrolytic capacitor rated 25 V or more, or a low-leakage part, and apply voltage for a few minutes after assembly before use.
@@ -81,7 +81,7 @@ style:
   and keep C at 220 µF
 - PIN 3 (OUT) is H during the monostable period and drives the gate of Q1 (2N7000) through Rg (220 Ω).
   While Q1 is on, DLED (the night light) is lit
-- PIN 4 (RESET) is tied directly to PIN 8 (VDD) to disable it (so the timer can always run)
+- PIN 4 (RESET) is tied directly to PIN 8 (VDD) to disable it
 
 ## Wiring diagram
 
@@ -144,7 +144,7 @@ wires:
 - PIN 2 (TRIG, lower side of column 11) goes up to column 5 of the upper block through column 6 by an orange wire.
   There Rtrig pulls up to the + rail, and pressing SWtrig (e3) pulls it down to the bottom − rail
 - PIN 6 and 7 (THRES and DISCH, upper side of columns 12 and 11) are joined on row d. Rt (4.7 MΩ) goes from column 12 to
-  the red + rail, and Ct (220 µF) goes from column 11 to the − rail at column 8. This is the time-constant node
+  the red + rail, and Ct (220 µF) goes from column 11 to the − rail at column 8
 - PIN 3 (OUT, lower side of column 12) is carried by a blue wire (row i) to column 46 and goes through Rg to the gate of Q1
   (column 41). Q1 is plugged into the upper block (row b, columns 40 to 42), and its pins go down across the center gap by
   short wires from row e (S from column 40 to GND, G at column 41 to Rg). D (column 42) is carried by a green wire to column 46
@@ -152,10 +152,10 @@ wires:
   Looking at the flat face of the 2N7000, the pins are S, G, D from the left (the same as in 2-5)
   Note: **verify on the real part: onsemi's 2007 figure shows S G D but its 2022 table shows D G S, and they disagree; this book follows the 2007 version (S G D). Check the real part with a multimeter**
 - Plug only one pin or wire into a hole (to take a wire from a column that already holds a part's pin, use a free hole in the same column)
-- The power supply is Supplies on the Analog Discovery 3 (AD3, the USB instrument used in 0-3), with V+ set to 5 V going to the top red rail (column 1) and
-  GND going to the top blue rail (below column 1). The AD3 oscilloscope (Scope) watches two points: plug 1+ into the column of Ct and THRES/DISCH (column 11, `a11`) and
+- The power supply is Supplies on the Analog Discovery 3 (AD3, 0-3), with V+ set to 5 V going to the top red rail (column 1) and
+  GND going to the top blue rail (below column 1). On the AD3 Scope, plug 1+ into the column of Ct and THRES/DISCH (column 11, `a11`) and
   2+ into the OUT column (lower side of column 12, `j12`), and connect 1− and 2− (black) to the − rail (GND). Fig. 2 draws the same AD3 as two boxes (top and bottom).
-  The current through the breadboard is about 6.4 mA in DLED plus a few hundred µA in the TLC555, about 7 mA, within the breadboard limits (200 mA per hole, 500 mA for the whole breadboard) and within
+  The current through the breadboard is about 6.4 mA in DLED plus a few hundred µA in the TLC555, about 7 mA, within the breadboard limits and within
   the rough guide for V+ of the AD3 on USB power (50 mA at 5 V)
 
 ## Building it on a perfboard
@@ -231,7 +231,7 @@ wires:
   6 (THRES) and 5 (CONT) at e14 to h14, and the lower row, from the left, is PIN 1 (GND), 2 (TRIG), 3 (OUT) and
   4 (RESET) at e11 to h11. PIN 8 goes up column E to row 18, and PIN 1 goes down column E to row 5
 - PIN 4 (RESET) exits to column J on row 11 and goes up column J to row 18 (VCC). From j14 on the way,
-  row 14 runs out to the right to carry VCC to RLED in the output stage. PIN 5 (CONT) is not connected anywhere (it is listed in `unused:` to exclude it from the ERC "not connected" warning).
+  row 14 runs out to the right to carry VCC to RLED in the output stage. PIN 5 (CONT) is not connected anywhere.
   It is not required for the monostable to work and it works even if left floating (to connect it, add 0.01 µF
   from here to GND)
 - PIN 2 (TRIG, yellow) is carried from f11 to the left along row 9 to SWtrig (b9). The lower pin of SWtrig goes from b7 to
@@ -243,15 +243,14 @@ wires:
   q8 is the drain. The source goes down column M to GND, and the drain goes from r8 up column R to
   the cathode of DLED (r9). The anode of DLED (r11) goes through RLED (r14 to r12) to VCC on row 14
 - In both crossings a signal wire is bridged over a branch of the power wiring with insulated wire. The orange row 15 (to Ct) crosses the red column J (RESET), and
-  the yellow row 9 (TRIG) crosses the black column E (GND of U1). The VCC of PIN 4 and the line from PIN 6 and 7 to Ct must
-  meet at the right of U1, and PIN 2 leaves from beside PIN 1 (GND) to SWtrig on the left, so this pin arrangement cannot avoid them
+  the yellow row 9 (TRIG) crosses the black column E (GND of U1).
+  This pin arrangement cannot avoid them
 
 ## Instrument settings
 
 The instruments are Supplies on the AD3 (the power supply) and the oscilloscope (Scope). In one press, watch **OUT go H from the moment SWtrig is pressed while the voltage of Ct slowly rises toward 5 V**.
 The phenomenon takes about 19 minutes, so put the Scope in Record mode (2-11 in the Analog Discovery book).
-Fig. 3 shows the first 9 minutes after the press (time range 60 s/div, the longest range that can be drawn in a figure), with OUT staying H while Ct rises.
-Ct reaches 2/3 of the supply voltage (about 3.33 V) and OUT returns to L at about 1137 s (about 19 minutes), which is outside the figure. On real hardware, lengthen the record to 20 minutes or more to check.
+Fig. 3 shows the first 9 minutes after the press (60 s/div, the longest range that can be drawn in a figure).
 
 | Item | Value |
 | --- | --- |
@@ -282,7 +281,7 @@ measure: [vmax]
 - The cursor readings are, at X1 (60 s), 5 V × (1 − e<sup>−60/1034</sup>) ≈ 0.28 V and, at X2 (480 s), 5 V × (1 − e<sup>−480/1034</sup>) ≈ 1.86 V (calculated values)
 - At T = 1.1 × τ ≈ 1137 s, Ct reaches 5 V × (1 − e<sup>−1.1</sup>) ≈ 3.33 V (2/3 of the supply), the 555 stops and OUT returns to L.
   DISCH then discharges Ct back to 0 V. This change is outside Fig. 3 (about 19 divisions from the origin) and is to be checked by a record on real hardware
-- The real T varies with the capacitance tolerance of the electrolytic capacitor (about ±20%) and with leakage (see the note under "Values to check" below). The figure shows the calculated values
+- The real T varies with the capacitance tolerance of the electrolytic capacitor (about ±20%) and with leakage. The figure shows the calculated values
 
 ## Values to check
 
@@ -290,13 +289,12 @@ Calculated values. Measure voltages against GND with the multimeter on a DC volt
 
 | Where to measure | Expected value |
 | --- | --- |
-| PIN 3 (OUT) of U1 just after SWtrig is pressed | Goes H and DLED lights. About 5 V (the TLC555 has a CMOS output and drives only a gate, so it is almost the same as +5 V) |
+| PIN 3 (OUT) of U1 just after SWtrig is pressed | Goes H and DLED lights. About 5 V (a CMOS output driving only a gate, so almost the same as +5 V) |
 | Time lit | T = 1.1 × 4.7 MΩ × 220 µF ≈ 1137 s (about 19 minutes, calculated value) |
 | Current in DLED | About 6.4 mA ((5 V − 2.0 V) / 470 Ω, red LED, calculated value). Check by dividing the voltage across RLED (about 3.0 V) by 470 Ω |
 | PIN 3 after 19 minutes | Returns to L (0 V) and DLED goes out |
 
-Replacing Ct (220 µF) with 100 µF gives T ≈ 8.6 minutes (calculated value). The capacitance tolerance of an electrolytic
-capacitor is about ±20% and leakage also lengthens the time, so the actual time is a rough guide.
+Replacing Ct (220 µF) with 100 µF gives T ≈ 8.6 minutes (calculated value).
 
 If the LED does not go out after 30 minutes, the leakage is beating the charging current. Lowering Rt to
 2.2 MΩ (charging current about 2.3 µA, T ≈ 9 minutes) gives some margin. If you need a long time, such as 40 minutes,
@@ -317,7 +315,7 @@ for C<sub>t</sub> to reach 2/3 V<sub>CC</sub>. The 555 is ideal (no input bias c
 | Current in DLED (OUT = 5 V) | about 6.4 mA | 6.37 mA (0.02 V across D-S of Q1) | Agrees |
 | T when the leakage of the electrolytic capacitor is represented by a 20 MΩ parallel resistor (about 0.25 µA at 5 V) | "gets longer" (no number) | 1451 s (about 24 minutes) | Added note (below) |
 
-Even a leakage of about 0.25 µA lengthens T by about 30 %, from 19 to 24 minutes. This is an example of the text's statement that "if the leakage gets close to the charging current (1.06 µA), the time gets longer".
+Even a leakage of about 0.25 µA lengthens T by about 30 %, from 19 to 24 minutes.
 For Rt = 2.2 MΩ, T = 1.1 × 2.2 MΩ × 220 µF ≈ 532 s (about 9 minutes) and the charging current is 5 V / 2.2 MΩ ≈ 2.3 µA;
 for C<sub>t</sub> = 100 µF, 1.1 × 4.7 MΩ × 100 µF ≈ 517 s (about 8.6 minutes). Both agree with the numbers in the text (arithmetic).
 

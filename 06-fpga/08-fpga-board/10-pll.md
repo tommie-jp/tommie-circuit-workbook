@@ -12,35 +12,30 @@ device: FPGA
 # 8-10 PLL でクロックを作る
 
 > [!WARNING]
-> **この題は実機で組んでいない。** PLL の設定値は Apicula の道具 (`gowin_pll`) で求め、分周の回路は Verilator で動かし、
+> **この題は実機で組んでいない。** PLL の設定値は `gowin_pll` で求め、分周の回路は Verilator で動かし、
 > 合成・配置配線・ビットストリーム作りまで手元の PC で通した。書き込みと、LED・AD3 での測定は実行していない。
 > 「見るべき値」は計算値と道具の値で、測った値ではない。
 
-Tang Nano 9K の水晶は 27 MHz の 1 つだけである。回路が別の周波数のクロックを欲しいとき、FPGA の中の **PLL** で作る。
-PLL は、入ってきたクロックを整数倍・整数分の 1 にして出す回路で、Tang Nano 9K の FPGA には 2 つ載っている (8-2、nextpnr の報告で `rPLL: 1/2`)。
+Tang Nano 9K の水晶は 27 MHz だけで、別の周波数は FPGA の中の **PLL** (クロックを整数倍・整数分の 1 にして出す回路) で作る。PLL は 2 つある (8-2、nextpnr の報告で `rPLL: 1/2`)。
 
-この題で作るのは **2 MHz の方形波**である。27 MHz を整数で割って 2 MHz にはならない (27 ÷ 2 = 13.5)。
-そこで、PLL で 27 MHz を 108 MHz (4 倍) にしてから、54 分周する。2 MHz はブレッドボードの範囲 (3 MHz 以下) に収まる。
+**2 MHz の方形波**を作る。27 MHz を整数で割っても 2 MHz にならない (27 ÷ 2 = 13.5) ので、PLL で 108 MHz (4 倍) にしてから 54 分周する。2 MHz はブレッドボードの範囲 (3 MHz 以下) の内側。
 
 ## PLL の設定値の求め方
 
-Gowin の FPGA の PLL (`rPLL`) は、3 つの分周比で出力を決める。
+Gowin の PLL (`rPLL`) は 3 つの分周比で出力を決める。
 
 ```text
 CLKOUT = FCLKIN × (FBDIV_SEL + 1) ÷ (IDIV_SEL + 1)
 VCO    = CLKOUT × ODIV_SEL
 ```
 
-`IDIV_SEL` は入口の分周、`FBDIV_SEL` は戻しの分周 (倍率に当たる)、`ODIV_SEL` は出口の分周である。
-`VCO` は PLL の中の発振器の周波数で、決まった範囲の中に入れる。
-値は手で計算せず、OSS CAD Suite に入っている `gowin_pll` (Apicula の道具) に頼む。
+`IDIV_SEL` は入口の分周、`FBDIV_SEL` は戻しの分周 (倍率)、`ODIV_SEL` は出口の分周。`VCO` は PLL の中の発振器の周波数で、決まった範囲に入れる。値は OSS CAD Suite の `gowin_pll` (Apicula の道具) で求める。
 
 ```bash
 gowin_pll -d "GW1NR-9 C6/I5" -i 27 -o 108 -f pll108.v -m pll108
 ```
 
-`-d` の名前は `gowin_pll -l` の一覧にある。Tang Nano 9K の FPGA は `GW1NR-9 C6/I5` の行で、
-一覧には「tested on TangNano9K Board」と書いてあった。出る `pll108.v` の中身は次のとおり。
+`-d` は `gowin_pll -l` の一覧の `GW1NR-9 C6/I5` (「tested on TangNano9K Board」とある)。出る `pll108.v` は次のとおり。
 
 ```verilog
 module pll108(
@@ -63,13 +58,11 @@ module pll108(
 endmodule
 ```
 
-- 108 MHz = 27 MHz × (3 + 1) ÷ (0 + 1)。VCO は 108 × 4 = 432 MHz
-- コメントの `range` は、道具が持っている範囲の値。入口 (PFD) が 3〜400 MHz、出力 (CLKOUT) が 3.125〜600 MHz、VCO が 400〜1200 MHz
-- `LOCK` (`locked`) は、PLL が安定して出力が使えるようになったら 1 になる。それまでの出力は使わない
+- 108 MHz = 27 MHz × (3 + 1) ÷ (0 + 1)、VCO は 108 × 4 = 432 MHz
+- コメントの `range` は道具の持つ範囲。入口 (PFD) が 3〜400 MHz、出力 (CLKOUT) が 3.125〜600 MHz、VCO が 400〜1200 MHz
+- `LOCK` (`locked`) は PLL が安定すると 1 になる
 
-### 作れる周波数は飛び飛び
-
-27 MHz から作れる周波数を、`gowin_pll` に頼んだ結果で並べる。
+### 作れる周波数は飛び飛び (27 MHz から `gowin_pll` で)
 
 | 頼んだ周波数 | 作れた周波数 | `IDIV_SEL` | `FBDIV_SEL` | `ODIV_SEL` | VCO |
 | --- | --- | --- | --- | --- | --- |
@@ -80,9 +73,8 @@ endmodule
 | 2 MHz | **3.375 MHz** | 7 | 0 | 128 | 432 MHz |
 | 600 MHz | **594.000 MHz** | 0 | 21 | 2 | 1188 MHz |
 
-- **100 MHz は作れない。** 27 MHz からだと 100.286 MHz が最も近い。0.29 % の差で、UART のボーレートなど周波数を合わせたい回路では効く
-- 2 MHz は、PLL の出力の下限 (3.125 MHz) より低いので直接は作れない。道具は 3.375 MHz を返した。この題で一度 108 MHz にしてから割るのは、これが理由
-- 数字を手で見積もるより、先に `gowin_pll` に頼み、頼んだ値と作れた値が違わないかを見る
+- **100 MHz は作れない。** 最も近い 100.286 MHz は 0.29 % の差で、UART のボーレートなどでは効く。頼んだ値と作れた値が違わないかを見る
+- 2 MHz は PLL の出力の下限 (3.125 MHz) より低く、道具は 3.375 MHz を返した。108 MHz にしてから割る理由である
 
 ## 論理図
 
@@ -114,7 +106,7 @@ PLL --> LED : locked (反転)
 
 ## Verilog
 
-PLL の部品 (`pll108.v`) は上の `gowin_pll` の出力をそのまま使う。新しく書くのは分周の `div2m.v` と最上位の `top_pll.v`。
+`pll108.v` は `gowin_pll` の出力のまま。新しく書くのは分周の `div2m.v` と最上位の `top_pll.v`。
 
 ```verilog
 // 108 MHz のクロックを 54 分周して 2 MHz (50 %) を作る。27 クロックごとに反転する
@@ -156,11 +148,11 @@ module top_pll (
 endmodule
 ```
 
-- 27 クロックごとに反転するので、周期は 54 クロック。半周期が整数のクロック数になるので、デューティ比は 50 % になる。
-  54 MHz から作ると半周期が 13.5 クロックで割り切れない。108 MHz を選んだ理由
-- `locked` はクロックと関係なく変わる信号を `div2m` のリセットにつないでいる。2 MHz の信号を出すだけの回路なので、このままにした
+- 27 クロックごとに反転し、周期は 54 クロック。半周期が整数なのでデューティ比は 50 %。
+  54 MHz からだと半周期が 13.5 クロックで割り切れない。108 MHz を選んだ理由
+- クロックと関係なく変わる `locked` を `div2m` のリセットにつないだ。2 MHz を出すだけなので、このままにした
 
-制約ファイル `top.cst` は、クロック・LED・IO38 の 3 行だけ。
+制約ファイル `top.cst` はクロック・LED・IO38 の 3 行。
 
 ```text
 IO_LOC "clk" 52;
@@ -177,10 +169,9 @@ IO_PORT "led_n" PULL_MODE=UP DRIVE=8;
 verilator --lint-only -Wall div2m.v
 ```
 
-`div2m.v` は警告 0 件。`top_pll.v` 自体も警告 0 件だったが、`rPLL` は Gowin の部品で Verilator に中身が無い。
-`pll108.v` も合わせて lint すると、出力の接続の空き (`CLKOUTP` ほか) やパラメータを使っていない警告が `pll108.v` と部品の模型の側に出る。
-Verilator には `rPLL` の模型が無いので、最後は `Cannot find file containing module: 'rPLL'` (MODMISSING) のエラーで止まる。
-**PLL の中身はシミュレーションできない。** 分周の `div2m` だけを、108 MHz に当たるクロックで動かして確かめる。
+`div2m.v` と `top_pll.v` は警告 0 件。`pll108.v` も合わせると、出力の空き (`CLKOUTP` ほか) や未使用のパラメータの警告が `pll108.v` と部品の模型の側に出て、
+`rPLL` (Gowin の部品) の模型が無いので `Cannot find file containing module: 'rPLL'` (MODMISSING) のエラーで止まる。
+**PLL の中身はシミュレーションできない。** `div2m` だけを、108 MHz に当たるクロックで動かして確かめる。
 
 ```verilog
 // 108 MHz のクロックで div2m を動かし、out の変わり目の間のクロック数を数える
@@ -228,12 +219,11 @@ out=1  前の変わり目から 27 クロック
 out=0  前の変わり目から 27 クロック
 ```
 
-最初の 32 は、リセットを解くまでの待ちを含む。2 回目からは 27 クロックごとに反転している。108 MHz なら 27 クロックは 250 ns なので、
-周期は 500 ns、2 MHz になる (計算値)。
+最初の 32 はリセットの待ちを含み、以後は 27 クロックごとに反転する。108 MHz で 27 クロックは 250 ns、周期は 500 ns で 2 MHz (計算値)。
 
 ## 合成・配置配線
 
-8-4 と同じ 3 手を通した (書き込みは未実行)。PLL を使うので、配置配線のクロックの指定は PLL の出力に合わせて 108 MHz にした。
+8-4 と同じ 3 手を通した (書き込みは未実行)。配置配線のクロックの指定は PLL の出力の 108 MHz にした。
 
 ```bash
 yosys -p "read_verilog top_pll.v pll108.v div2m.v; synth_gowin -top top_pll -json top.json; stat"
@@ -249,13 +239,13 @@ gowin_pack -d GW1N-9C -o top.fs pnr.json
 | `pnr.json` の rPLL の設定 | `FCLKIN` 27.0・`IDIV_SEL` 0・`FBDIV_SEL` 3・`ODIV_SEL` 4 |
 | 108 MHz の最高の周波数の見積り | 216.73 MHz (0.69 の結果。PASS at 108.00 MHz) |
 
-- 配置配線のあとの `pnr.json` で、`gowin_pll` の出した 3 つの設定値がそのまま rPLL に入っていることを確かめた
-- 27 MHz の入口 (`pll.clock_in`) は、nextpnr が「専用のクロックの配線だけで通した」と報告した
-- 108 MHz の PASS は配線後の見積り。最高の見積り値は打ち直すと変わる (8-4)
+- `pnr.json` の rPLL に、`gowin_pll` の 3 つの設定値がそのまま入っていた
+- 27 MHz の入口 (`pll.clock_in`) は専用のクロックの配線だけで通った (nextpnr の報告)
+- PASS は配線後の見積りで、最高の見積り値は打ち直すと変わる (8-4)
 
 ## 回路図
 
-接続は 8-3 と同じ。この題では IO38 だけを測る。
+接続は 8-3 と同じで、IO38 だけを測る。
 
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
@@ -279,8 +269,7 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/08-fpga-board/circuit/10-pll.svg)
 
-ボードの LED (10 番ピン) とクロック (52 番) は、ボードの上で FPGA につながっていて、ヘッダには出ていない。
-`DIO1` は使わない。
+ボードの LED (10 番ピン) とクロック (52 番) はボードの上でつながっていて、ヘッダに出ていない。`DIO1` は使わない。
 
 ## 部品
 
@@ -291,7 +280,7 @@ wires:
 | — | ジャンパ線 | 3 本 | GND の 2 本と IO38 の 1 本 |
 | AD | Analog Discovery 3 | 1 | Logic で IO38 を測る |
 
-電源は教科書の既定の 5 V ではなく **3.3 V** (FPGA のピン)。FPGA のピンに 5 V を入れると壊れるため (0-3)。
+電源は既定の 5 V でなく **3.3 V** (FPGA のピン。5 V を入れると壊れる。0-3)。
 
 ## 実体配線図
 
@@ -317,17 +306,16 @@ notes:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/08-fpga-board/breadboard/10-pll.svg)
 
-- 置き方と線の色は 8-3 と同じ。IO38 は 1 番ピンで、下の列の 1 列 (j1)
-- 108 MHz の信号はボードの中だけを走る。ブレッドボードに出る信号は 2 MHz で、範囲 (3 MHz 以下) に収まる。PLL の出力 108 MHz を
-  ピンに出すと範囲を超えるので、出さない (8-13)
+- 置き方と線の色は 8-3 と同じ。IO38 は 1 番ピン (j1)
+- 108 MHz は範囲 (3 MHz 以下) を超えるのでピンに出さない (8-13)
 
 ## 計器の設定
 
 | 計器 | 設定 |
 | --- | --- |
 | Logic | DIO0 を Enable。DIO は 3.3 V。GND を共通にする (0-4) |
-| 時間軸 | 500 ns/div (窓 5 µs (マイクロ秒))。数周期が入る |
-| 標本化 | 50 MS/s。見る一番速い変化 (2 MHz の半周期 250 ns) の 12 標本 |
+| 時間軸 | 500 ns/div (窓 5 µs)。数周期が入る |
+| 標本化 | 50 MS/s。一番速い変化 (半周期 250 ns) の 12 標本 |
 | トリガ | DIO0 の立ち上がり |
 
 ## Logic に見えるはずの画面
@@ -347,7 +335,7 @@ trigger: out_2m rising at 0s
 
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/08-fpga-board/logic/10-pll.svg)
 
-カーソルは H の真ん中 (立ち上がりから 250 ns 後) に 2 本、1 周期あけて置いた。ΔX が 1 周期、1/ΔX が周波数になる。
+カーソルは H の真ん中 (立ち上がりから 250 ns 後) に、1 周期あけて置いた。ΔX が周期、1/ΔX が周波数。
 
 ## 見るべき値
 
@@ -359,35 +347,32 @@ trigger: out_2m rising at 0s
 | `IDIV_SEL`・`FBDIV_SEL`・`ODIV_SEL` | 0・3・4 | 同上 |
 | VCO | 432 MHz (400〜1200 MHz の内側) | 同上 |
 | 2 MHz の周期 (ΔX) | 500 ns (計算値) | 27 クロック × 2 ÷ 108 MHz |
-| 周波数 (1/ΔX) | 2.000 MHz (目安) | 同上。実際はボードの 27 MHz の水晶のずれ (ppm) の分だけずれる |
+| 周波数 (1/ΔX) | 2.000 MHz (目安) | 同上。実際は水晶のずれ (ppm) の分ずれる |
 | H の幅 | 250 ns (目安) | 27 クロック ÷ 108 MHz |
 | ボードの LED | PLL が locked してから点く (目安) | `led_n = ~locked` |
 | nextpnr の使った量 | rPLL 1 / 2・LUT4 15・DFF 6 | 配置配線の出力 |
 
-実機で測ったら、周期の ΔX を書き加える。1 周期 500 ns を 50 MS/s で測ると 20 ns 刻みで読むので、
-周波数のずれを ppm で見るには、より長い区間の測り方 (5-12・12-4) が要る。
+実機で測ったら ΔX を書き加える。50 MS/s では 20 ns 刻みなので、周波数のずれを ppm で見るには長い区間の測り方 (5-12・12-4) が要る。
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63・gowin_pack・`gowin_pll` で、本文の `div2m.v` `top_pll.v` `pll108.v` `tb_div2m.v` を走らせ直した。
-置き場は `sim/10-pll-div2m.v` `sim/10-pll.v` `sim/10-pll-pll108.v` `sim/10-pll-tb.v`。
+Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63・gowin_pack・`gowin_pll` で、本文の 4 つのファイルを走らせ直した。置き場は `sim/10-pll-div2m.v` `sim/10-pll.v` `sim/10-pll-pll108.v` `sim/10-pll-tb.v`。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
 | lint (`div2m.v`、`-Wall`) | 警告 0 件 | 0 件 | 合った |
-| lint (`top_pll.v pll108.v div2m.v`) | `pll108.v` 側に出力の空き (`CLKOUTP` ほか) の警告 | PINCONNECTEMPTY 3 件。さらに `rPLL` の模型が無く MODMISSING のエラーで止まる | 合った (エラーの記述を補足) |
+| lint (`top_pll.v pll108.v div2m.v`) | `pll108.v` 側に出力の空きの警告 | PINCONNECTEMPTY 3 件。`rPLL` の模型が無く MODMISSING のエラーで止まる | 合った |
 | `div2m` の変わり目 | 32 クロック、その後 27 クロックごと | 同じ | 合った |
 | 合成 | rPLL 1・ALU 5・DFFR 5・DFFRE 1・LUT1 7・LUT4 2・MUX2_LUT5 3・MUX2_LUT6 1 | 同じ | 合った |
 | PLL の設定 (27 MHz × 4 = 108 MHz、VCO 432 MHz) | IDIV 0・FBDIV 3・ODIV 4 | 式で確かめた (27 × (3 + 1) ÷ (0 + 1) = 108、108 × 4 = 432) | 合った |
 | `gowin_pll` の表 (54・108・100・50・2・600 MHz) | 作れた周波数と IDIV・FBDIV・ODIV・VCO | 6 行とも同じ (100.286・50.143・3.375・594.000 MHz を含む) | 合った |
-| nextpnr の使用量 | IOB 3・LUT4 15・ALU 6・DFF 6・rPLL 1 / 2 | 同じ (0.33 と 0.70+16 の `json` で同じ) | 合った |
+| nextpnr の使用量 | IOB 3・LUT4 15・ALU 6・DFF 6・rPLL 1 / 2 | 同じ (0.33 と 0.70+16 の `json` とも) | 合った |
 | `pnr.json` の rPLL の設定 | `FCLKIN` 27.0・`IDIV_SEL` 0・`FBDIV_SEL` 3・`ODIV_SEL` 4 | 同じ | 合った |
 | `pll.clock_in` の配線 | 専用のクロックの配線だけで通る | `net was routed using global resources only` | 合った |
 | 108 MHz の最高の周波数 | 216.73 MHz (PASS at 108.00 MHz) | 216.73 MHz (0.70+16 の `json`)。0.33 の `json` では 202.88 MHz | 合った (0.33 は版の差で近い) |
 | `top.fs` の大きさ | (記載なし) | 2,069,320 バイト | 合った |
 
-PLL の中身はシミュレーションできないので、108 MHz が実際に出ることは確かめていない。
-確かめていない数: AD3 の測定 (実機が要る)。
+確かめていない数: 108 MHz が実際に出ること (PLL の中身はシミュレーションできない)、AD3 の測定 (実機が要る)。
 
 ## 出典
 

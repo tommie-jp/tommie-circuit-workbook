@@ -12,29 +12,25 @@ device: PICO
 # 5-14 USB シリアルで内部の信号を出す
 
 > [!WARNING]
-> **この題は実機で組んでいない。** Pico 2 のプログラムは `.uf2` までのビルドを確かめたが、書き込んで動かしてはいない。
-> 表示の行は PC の Verilator で同じ回路を回した値。USB シリアルを出したときの 1 クロックの時間は**測っていない**。
-> 「見るべき値」の空欄は、測って書き込む。
+> **この題は実機で組んでいない。** Pico 2 のプログラムは `.uf2` までビルドしたが、動かしていない。
+> 表示の行は PC の Verilator で同じ回路を回した値。1 クロックの時間は**測っていない** (表の空欄は測って書く)。
 
-Logic で見られるのは、ピンに出した信号だけ。TD4 の PC (命令の番地) や、いま実行中の命令 (`op`) のような**回路の内部の値**は、
-ピンに出さない限り見えない。この題では、内部の値を USB のシリアルに**字で**出す。
-Pico 2 は USB の CDC (仮想のシリアルポート) として見え、PC の端末ソフトで読める。配線は USB ケーブルだけで増えない。
+Logic で見られるのはピンに出した信号だけで、TD4 の PC (命令の番地) や実行中の命令 (`op`) のような**回路の内部の値**は見えない。
+この題では、内部の値を USB のシリアルに**字で**出す。Pico 2 は USB の CDC (仮想のシリアルポート) として見え、PC の端末ソフトで読める。配線は増えない。
 
-代わりに、**字を送る時間が 1 クロックに足される**。1 クロックに 1 行出すと、クロックは 5-5 で測った値より大きく遅くなるはずで、
-その大きさを同じ測り方 (AUX の周期 ÷ 2000) で測り直す。
+代わりに、**字を送る時間が 1 クロックに足される**。その大きさを 5-5 と同じ測り方 (AUX の周期 ÷ 2000) で測る。
 
 | 決め | 内容 |
 | --- | --- |
-| 回路 | 5-8 の TD4 (プログラム A)。`TD4.v` の出力ポートの `pc_out`・`op`・`out_port` を字にする |
+| 回路 | 5-8 の TD4 (プログラム A)。出力ポートの `pc_out`・`op`・`out_port` を字にする |
 | 出す形 | `<立ち上がりの回数> pc=<PC> op=<命令 2 桁> out=<OUT>`。1 行に 1 クロック |
 | SW1 OFF | 1 クロックごとに 1 行 |
-| SW1 ON | 1000 クロックごとに 1 行 (出す回数を減らす) |
-| CLK のピン (GP16) | 主ループで立ち上がりの前に H、立ち下がりの前に L (5-5 と同じ) |
-| AUX のピン (GP17) | 1000 クロックごとに反転 (5-5 と同じ)。AUX の周期 ÷ 2000 が 1 クロックの平均 |
+| SW1 ON | 1000 クロックごとに 1 行 |
+| CLK・AUX のピン (GP16・GP17) | 5-5 と同じ。AUX は 1000 クロックごとに反転 |
 
 ## 出す行の読み方
 
-PC の Verilator で同じ `TD4.v` を回し、リセットのあとの立ち上がりごとに同じ形で出した行 (12 行)。
+PC の Verilator で同じ `TD4.v` を回し、リセットのあとの立ち上がりごとに出した行 (12 行)。
 
 ```text
 1 pc=1 op=B6 out=3
@@ -51,13 +47,13 @@ PC の Verilator で同じ `TD4.v` を回し、リセットのあとの立ち上
 12 pc=2 op=BC out=6
 ```
 
-- `pc` は立ち上がりのあとの番地、`op` はその番地の ROM の命令 (8 ビット)。`out` は `OUT` 命令が書いた出力ポート。5-8 の LED の並び (3・6・C・8・8・C・6・3・1・1) と同じ
-- 9 行めの `op=F0` は `JMP 0000`。次の行で `pc=0` に戻る。`JMP` は `OUT` を書かないので、10 行めの `out` は 9 行めと同じ 1
-- 命令の読み方は 5-8 の「TD4 の命令」。`B` で始まる命令は `OUT <4 ビットの値>`
+- `pc` は立ち上がりのあとの番地、`op` はその番地の ROM の命令。`out` は出力ポートで、5-8 の LED の並びと同じ
+- 9 行めの `op=F0` は `JMP 0000` で、次の行で `pc=0` に戻る。`JMP` は `OUT` を書かないので、10 行めの `out` は 1 のまま
+- 命令の読み方は 5-8。`B` で始まる命令は `OUT <4 ビットの値>`
 
 ## 回路図
 
-図1・図2 は 5-5 と同じ。USB ケーブルは Pico 2 の給電と、シリアルの両方を兼ねる。
+図1・図2 は 5-5 と同じ。USB ケーブルが給電とシリアルを兼ねる。
 
 ```circuit
 # 回路図 (tommie-fence の circuit フェンス)
@@ -124,8 +120,8 @@ style:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/05-soft-fpga-pico/circuit/14-usb-serial.svg)
 
-- 配線は 5-5 と同じ。DIP スイッチ SW1 が表示の頻度、SW2〜SW4 が TD4 の IN に入る (プログラム A は IN を読まない)
-- AD3 は GP16 (CLK) と GP17 (AUX)、GP18〜GP21 (OUT の写し) を読む
+- SW1 が表示の頻度、SW2〜SW4 が TD4 の IN (プログラム A は IN を読まない)
+- AD3 は GP16 (CLK)・GP17 (AUX)・GP18〜GP21 (OUT の写し) を読む
 
 ## 実体配線図
 
@@ -179,17 +175,17 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/05-soft-fpga-pico/breadboard/14-usb-serial.svg)
 
-- 配線は 5-5 と同じ。PC につなぐのは Pico 2 の USB コネクタ (図の左端)。AD3 は上、LED は左、DIP スイッチは右
+- PC につなぐのは Pico 2 の USB コネクタ (図の左端)
 - DIP スイッチは下の列の左から 4・3・2・1。**右端が SW1**
 
 ## 部品
 
-5-5 と同じ (Pico 2、330 Ω (オーム) の抵抗 4 本、赤の LED 4 個、4 連の DIP スイッチ、full のブレッドボード、AD3)。USB ケーブル (PC 側の端子による) が 1 本いる。
+5-5 と同じ (Pico 2、330 Ω の抵抗 4 本、赤の LED 4 個、4 連の DIP スイッチ、full のブレッドボード、AD3) と USB ケーブル 1 本。
 電源は USB の 5 V から Pico 2 が 3.3 V を作る。GPIO は 3.3 V (0-3)。
 
 ## Pico 2 のプログラム
 
-作業用のフォルダは 5-5 と共通で、`board.h` と `TD4.v` は 5-8 のまま。ビルドの打ち方は [5-1 の「ビルドする」](01-verilator-on-pico.md#ビルドする)。
+作業用のフォルダは 5-5、`board.h` と `TD4.v` は 5-8 のまま。ビルドは [5-1 の「ビルドする」](01-verilator-on-pico.md#ビルドする)。
 
 `serial514.cpp`:
 
@@ -231,8 +227,7 @@ int main() {
 }
 ```
 
-`CMakeLists.txt` の最後に次の 3 行を足す。`pico_enable_stdio_usb` が USB の CDC を有効にし、`pico_enable_stdio_uart` が既定の UART を止める
-(5-13 の表のとおり、`printf` の出る先は stdio の設定で決まる)。
+`CMakeLists.txt` の最後に次の 3 行を足す。`pico_enable_stdio_usb` が USB の CDC を有効にし、`pico_enable_stdio_uart` が既定の UART を止める。
 
 ```cmake
 add_soft_fpga(serial514 serial514.cpp td4)
@@ -240,52 +235,46 @@ pico_enable_stdio_usb(serial514 1)
 pico_enable_stdio_uart(serial514 0)
 ```
 
-- `printf` は**主ループの中だけ**で呼ぶ。5-7 のタイマ割り込みの中では呼ばない。USB の出力は、PC が読むのを待つ間に時間を使い (最大 0.5 s)、
-  割り込みの中でそれをすると 5-9 の「間に合わない」に直結する (Pico SDK の `stdio_usb.c` を読んだ)
-- PC の端末ソフトを開いていないとき、出力は**すぐ捨てられる** (`stdio_usb_connected()` が偽の間は何もしない)。端末を開く前の行は読めない。
-  端末を開いてから Pico 2 をリセットするか、最初の行を急がない作りにする
-- 端末を開いているのに読まないとき (表示が止まっているとき) は、最大 0.5 s 待ってから捨てる。**1 行ごとに 0.5 s の待ちになる**ことはない (1 度待って捨てたあとは、読み出されるまでの間は書かずに捨てる。ソースの読み)
+- `printf` は**主ループの中だけ**で呼ぶ。USB の出力は PC が読むのを待って時間を使い (最大 0.5 s)、割り込みの中でそれをすると 5-9 の「間に合わない」に直結する (Pico SDK の `stdio_usb.c` を読んだ)
+- 端末ソフトを開いていないとき、出力は**すぐ捨てられる** (`stdio_usb_connected()` が偽の間)。端末を開いてから Pico 2 をリセットする
+- 端末を開いて読まないときは、最大 0.5 s 待って捨てる。1 度捨てたあとは読み出されるまで書かずに捨てるので、**1 行ごとに 0.5 s 待つ**ことはない (ソースの読み)
 
 ### 手元のビルド環境の注意
 
-5-1 の `wb-pico-sdk` には TinyUSB (USB の部品) が入っていない。CMake が「TinyUSB submodule has not been initialized; USB support will be unavailable」と警告し、
-`pico_enable_stdio_usb` を書いても**黙って USB が付かない**。USB が付いたことは、`.uf2` の大きさで確かめられる (下の表)。
-
-TinyUSB 入りの Pico SDK (`git clone --recurse-submodules`、または `git submodule update --init`) を使う。ここでは手元の Pico SDK 2.2.0 を `-v ... :/psdk:ro`
-でコンテナに渡して、`PICO_SDK_PATH=/psdk` でビルドした。
+5-1 の `wb-pico-sdk` には TinyUSB (USB の部品) が入っていない。CMake が警告を出すだけで、**黙って USB が付かない** (付いたかは `.uf2` の大きさで分かる)。
+TinyUSB 入りの Pico SDK (`git clone --recurse-submodules` か `git submodule update --init`) を `-v ... :/psdk:ro` でコンテナに渡し、`PICO_SDK_PATH=/psdk` でビルドした。
 
 ```bash
 docker run --rm --user "$(id -u):$(id -g)" -v "$PWD":/work -v "$HOME/pico-sdk":/psdk:ro -w /work -e PICO_SDK_PATH=/psdk wb-pico-sdk \
   bash -c 'cp /psdk/external/pico_sdk_import.cmake . && cmake -S . -B build_usb -DPICO_BOARD=pico2 && cmake --build build_usb --target serial514'
 ```
 
-`build_usb/serial514.uf2` (123 392 バイト) ができた (Verilator 5.048、Pico SDK 2.2.0)。`arm-none-eabi-size` は text 65 272 バイト、bss 5 028 バイト。
-USB を付けない `build/serial514.uf2` は 95 232 バイト、text 51 432 バイトで、**USB の部品が text を約 14 KB、bss を約 2.6 KB 増やす**。**実機では動かしていない。**
+`build_usb/serial514.uf2` は 123 392 バイト、text 65 272・bss 5 028 バイト (Verilator 5.048、Pico SDK 2.2.0)。
+USB なしの `build/serial514.uf2` は 95 232 バイト、text 51 432 バイトで、**USB の部品で text が約 14 KB、bss が約 2.6 KB 増える**。**実機では動かしていない。**
 
 ## 端末で読む
 
 | 環境 | 開き方 |
 | --- | --- |
-| Linux | `ls /dev/ttyACM*` で出た名前に、`screen /dev/ttyACM0 115200` (または `minicom`)。USB の CDC なので速度の数は無視される |
-| Windows | デバイスマネージャーで COM 番号を見て、Tera Term などで開く |
+| Linux | `ls /dev/ttyACM*` で出た名前を `screen /dev/ttyACM0 115200` (か `minicom`) で開く。CDC なので速度の数は無視される |
+| Windows | デバイスマネージャーの COM 番号を Tera Term などで開く |
 
-行が流れ始めたら成功。SW1 を ON にすると、行が 1000 クロックに 1 行になる (クロックが速ければ、行は読めない速さで流れる)。
+行が流れ始めたら成功。
 
 ## 計器の設定
 
-計器は AD3 の Logic。5-6 と同じ測り方で、AUX の周期から 1 クロックの平均を出す。
+計器は AD3 の Logic。5-6 と同じく、AUX の周期から 1 クロックの平均を出す。
 
 | 計器 | 設定 |
 | --- | --- |
-| Logic | DIO1 (AUX)・DIO0 (CLK) を Enable。標本化は AUX の 2 周期が窓 (32 768 標本) に入る値。回路・SW1 を替えるたびに、窓に 2 周期入るように合わせ直す |
+| Logic | DIO1 (AUX)・DIO0 (CLK) を Enable。標本化は AUX の 2 周期が窓 (32 768 標本) に入る値。SW1 を替えるたびに合わせ直す |
 | Logic のトリガ | DIO1 の立ち上がり |
-| カーソル | X1 と X2 を、続く 2 つの H の真ん中に置く。ΔX が 2000 クロック。ΔX ÷ 2000 が 1 クロックの平均 |
-| 端末 | 端末ソフトを**開いた状態と閉じた状態**の両方で測る。閉じていれば出力が捨てられるので、`printf` の時間が短くなる (見込み) |
+| カーソル | 続く 2 つの H の真ん中に置く。ΔX ÷ 2000 が 1 クロックの平均 |
+| 端末 | 端末ソフトを**開いた状態と閉じた状態**の両方で測る。閉じれば出力が捨てられ、`printf` が短くなる (見込み) |
 
 ## Logic に見えるはずの画面
 
-図3 は、シリアルの `out=` の並びを Logic で見たもの。TD4 の OUT (DIO5〜DIO2 を 1 本のバスにして 16 進で見る) は、上の 12 行の `out=` と同じ並びになる。
-**時間の目盛は仮** (1 クロックを 1 ms と置いた。実機の 1 クロックは、シリアルを出すと 5-5 の値より長くなる)。
+図3 は TD4 の OUT (DIO5〜DIO2 を 16 進のバスにした)。上の 12 行の `out=` と同じ並びになる。**時間の目盛は仮** (1 クロックを 1 ms と置いた)。
 
 ```logic
 # ロジックアナライザの画面 (tommie-fence の logic フェンス)
@@ -308,62 +297,62 @@ trigger: CLK rising at 0s
 
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/05-soft-fpga-pico/logic/14-usb-serial.svg)
 
-- OUT のバスは立ち上がりのたびに書き直される。`8` が 2 クロック続くのは `OUT 1000` が 2 つ並ぶため、`1` が 2 クロック続くのは `JMP 0000` では OUT が変わらないため (5-8 と同じ)
-- シリアルの行は、`out=` の値だけでなく `pc` と `op` も出す。Logic に出していない**内部の値**が、字で読める
+- `8` が 2 クロック続くのは `OUT 1000` が 2 つ並ぶため、`1` が 2 クロック続くのは `JMP 0000` で OUT が変わらないため (5-8)
+- シリアルの行は Logic に出していない `pc` と `op` も字で読める
 
 ## 見るべき値
 
-**測っていない。測って空欄を埋める。** 数を決め打たないのは、この冊の決め (1 クロックの時間は実測してから書く)。
+**空欄は測っていない。測って埋める** (1 クロックの時間は実測してから書く、がこの冊の決め)。
 
 | 測る所 | 見るべき値 | 分かること |
 | --- | --- | --- |
 | 端末の行の並び | 上の 12 行と同じ (Verilator の値) | 内部の値が字で読める。`out=` が LED と合う |
-| SW1 ON (1000 クロックに 1 行) の 1 クロック | (測って書く) µs (マイクロ秒) | シリアルの出力の頻度を減らしたときの 1 クロック |
+| SW1 ON (1000 クロックに 1 行) の 1 クロック | (測って書く) µs | 出力の頻度を減らしたときの 1 クロック |
 | SW1 OFF (1 クロックに 1 行) の 1 クロック | (測って書く) µs | 毎クロック字を出したときの 1 クロック。SW1 ON より長いはず (見込み) |
-| 5-5 で測った `counter8` の 1 クロック | (5-5 の値) µs | 比べる基準。TD4 とカウンタは回路が違うので、5-6 の TD4 の値と比べる |
+| 5-5 で測った `counter8` の 1 クロック | (5-5 の値) µs | 比べる基準。回路が違うので、5-6 の TD4 の値と比べる |
 | 端末を閉じたときの 1 クロック | (測って書く) µs | 出力が捨てられるときの時間 |
-| 端末を開いたまま読まない (止めた) ときの 1 クロック | (測って書く) µs | 0.5 s の待ちが入るか |
+| 端末を開いて読まないときの 1 クロック | (測って書く) µs | 0.5 s の待ちが入るか |
 
 見るとよいこと:
 
-- 行を出すと 1 クロックがどれだけ長くなるか。**回路の計算 (5-6) より字を送る時間のほうが大きい**かどうか
+- 1 クロックがどれだけ長くなるか。**回路の計算 (5-6) より字を送る時間が大きい**か
 - 1000 クロックに 1 行にすると、1 クロックが 5-6 の値にどこまで戻るか
-- 速さの数を測る道具としては、このプログラムは Logic で測る値を**変えてしまう**。**測るときは SW1 を ON、または USB シリアルを付けないビルド (5-6) で測る**
+- このプログラムは Logic で測る速さを**変えてしまう**。**速さを測るときは SW1 を ON にするか、USB シリアルを付けないビルド (5-6) で測る**
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大きさは、本文の Docker (USB 付きだけ TinyUSB 入りの Pico SDK 2.2.0) でビルドし直した。`TD4.v` (5-8) と本文の `serial514.cpp` を替え玉の GPIO で PC で回し、
-出る行を読んだ (`sim/14-usb-serial-pc.cpp`。5-5 と同じ `sed` に、`stdio_init_all()` を何もしない関数に替える行を足した `s_pc.cpp` を使う)。
-`.uf2` と `arm-none-eabi-size` の値は、本文の Docker イメージ (`sfa-dev:local` の Verilator 5.048 と `wb-pico-sdk` の Pico SDK 2.2.0、`arm-none-eabi-gcc` 13.2.1) で、本文の `.cpp` と `.v` からビルドし直した値。
+`TD4.v` (5-8) と本文の `serial514.cpp` を替え玉の GPIO で PC で回し (手元の Verilator 5.042)、出る行を読んだ
+(`sim/14-usb-serial-pc.cpp`。5-5 と同じ `sed` に、`stdio_init_all()` を何もしない関数に替える行を足した)。
+`.uf2` と `arm-none-eabi-size` は本文の Docker イメージ (5-9 と同じ。USB 付きだけ TinyUSB 入りの Pico SDK 2.2.0) でのビルド。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
 | 出す行 (12 行) | `1 pc=1 op=B6 out=3` … `12 pc=2 op=BC out=6` | 12 行とも同じ | 合った |
-| SW1 ON (1000 クロックに 1 行) | 1000 クロックごと | 1000・2000・3000 行目 (クロック数) で `pc=0 op=B3 out=1` (1000 は 10 の倍数なので `pc=0`) | 合った |
+| SW1 ON (1000 クロックに 1 行) | 1000 クロックごと | 1000・2000・3000 クロック目で `pc=0 op=B3 out=1` (10 の倍数なので `pc=0`) | 合った |
 | USB 付きの `.uf2` | 123 392 バイト、text 65 272・bss 5 028 | 123 392 バイト、text 65 272・bss 5 028 | 合った |
 | USB なし (UART 無効) の `.uf2` | 95 232 バイト、text 51 432 | 95 232 バイト、text 51 432 | 合った |
 | USB の部品が増やす分 | text 約 14 KB、bss 約 2.6 KB | text +13.8 KB、bss +2.6 KB | 合った |
-| TinyUSB が無いと黙って USB が付かない | CMake の警告 | `wb-pico-sdk` (TinyUSB 無し) で `pico_enable_stdio_usb` を書いてビルドすると、`TinyUSB submodule has not been initialized; USB support will be unavailable` の警告が出て、`.uf2` は USB なしと同じ 95 232 バイト、text 51 432 | 合った |
+| TinyUSB が無いと黙って USB が付かない | CMake の警告 | `wb-pico-sdk` (TinyUSB 無し) では `TinyUSB submodule has not been initialized; USB support will be unavailable` の警告が出て、`.uf2` は USB なしと同じ 95 232 バイト、text 51 432 | 合った |
 
 ### エミュレータ (picoemu) での確かめ
 
-picoemu (`danish9661/pico-emulator` の `b83786f` に `sim/picoemu-m33.patch` を当てた版。手順は [5-2](02-counter-led.md#エミュレータ-picoemu-での確かめ)) に USB 付きの `serial514.uf2` を載せ、Cortex-M33 で動かした。入力は `-script` で与えた (ms 刻み)。
-確かめは `python3 sim/picoemu-check.py --picoemu ./picoemu --uf2 <.uf2 を集めたフォルダ> 5-14`。picoemu は機能の模型で、周期・ジッタ・周波数の実時間は対象外にした。
+picoemu (版と手順は [5-2](02-counter-led.md#エミュレータ-picoemu-での確かめ)) に USB 付きの `serial514.uf2` を載せて動かし、入力は `-script` で与えた。
+確かめは `python3 sim/picoemu-check.py --picoemu ./picoemu --uf2 <.uf2 を集めたフォルダ> 5-14`。picoemu は機能の模型で、実時間は対象外。
 
 | 項目 | 本文の数字 | picoemu の結果 | 判定 |
 | --- | --- | --- | --- |
-| USB の CDC が起きるか | PC の端末で読める | picoemu が USB の列挙を代行し、CDC の出力が標準出力に出る | 動いた |
+| USB の CDC が起きるか | PC の端末で読める | picoemu が USB の列挙を代行し、出力が標準出力に出る | 動いた |
 | SW1 ON (1000 クロックに 1 行) | 1000・2000 … クロック目に `pc=0 op=B3 out=1` | 1000 から 100 行以上、`N pc=0 op=B3 out=1` (N = 1000 の倍数) | 合った |
 | SW1 OFF の最初の行 | `1 pc=1 op=B6 out=3`、`2 pc=2 op=BC out=6`、`3 pc=3 op=B8 out=C` … | 3 行目まで同じ | 部分的に合った |
-| SW1 OFF の 4 行目から 12 行目 | 本文の 12 行 | 4 行目から先は出ない。CDC の転送が止まり (CLK は回り続ける)、行は捨てられる。原因は調べていない | 確かめられなかった (picoemu の USB の限り) |
+| SW1 OFF の 4 行目から 12 行目 | 本文の 12 行 | 4 行目から先は出ない。CDC の転送が止まり (CLK は回り続ける)、原因は調べていない | 確かめられなかった (picoemu の USB の限り) |
 | 1 クロックの時間 | 測って書く | — | 対象外 (実時間) |
 
 確かめられなかったもの。
 
-- PC の端末ソフトで読めること、`printf` の待ち時間、1 クロックの時間 (実機)
-- `stdio_usb.c` の動き (0.5 s の待ち) はソースの読みで、手元では実行していない
+- 端末ソフトで読めること、`printf` の待ち時間、1 クロックの時間 (実機)
+- `stdio_usb.c` の 0.5 s の待ちはソースの読みで、実行していない
 
 ## 出典
 
-自作。TD4 は 5-8 ([Soft-FPGA-TD4](https://github.com/tommie-jp/Soft-FPGA-TD4))。USB の CDC は Raspberry Pi の Pico SDK の `pico_stdio_usb`
+自作。TD4 は 5-8 ([Soft-FPGA-TD4](https://github.com/tommie-jp/Soft-FPGA-TD4))。USB の CDC は Pico SDK の `pico_stdio_usb`
 (`stdio_usb.h`・`stdio_usb.c`、SDK 2.2.0) と、`pico_enable_stdio_usb` / `pico_enable_stdio_uart` の CMake 関数。行の値は PC の Verilator 5.042 で回した。

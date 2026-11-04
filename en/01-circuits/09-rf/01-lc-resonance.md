@@ -6,7 +6,7 @@ title: LC Tuning — Seeing Resonance with an LED
 tier: 50
 source: 自作
 board: BB
-ja: 390d0acc4d15d0609c57200c4e881c5da88ec370
+ja: 861d71506d5e7d38ea2208aded23dfa22d722928
 ---
 
 # 9-1 LC Tuning — Seeing Resonance with an LED
@@ -50,41 +50,30 @@ L1, C1 and R1 form one series loop. The LED is outside this loop and is lit from
 
 - Resonant frequency f<sub>0</sub> = 1 / (2π√(10 mH × 10 nF)) **≈ 15.9 kHz**
 - How much a coil or a capacitor opposes AC is called its **reactance**. A coil has
-  X<sub>L</sub> = 2πfL, which grows with frequency. A capacitor has X<sub>C</sub> = 1/(2πfC), which grows as
+  X<sub>L</sub> = 2πfL, which grows with frequency, and a capacitor has X<sub>C</sub> = 1/(2πfC), which grows as
   the frequency falls. In series the two act in opposite directions and partly cancel.
-- At f<sub>0</sub>, X<sub>L</sub> and X<sub>C</sub> are equal (both about 1 kΩ) and
-  cancel exactly. All that remains in the loop is R1 and the winding resistance of the coil (about 20 Ω as measured
-  for a small 10 mH coil).
-- Away from resonance they no longer cancel, the impedance jumps by the amount of the reactance,
-  and the current falls.
+- At f<sub>0</sub>, X<sub>L</sub> and X<sub>C</sub> are equal (both about 1 kΩ) and cancel, and
+  all that remains in the loop is R1 and the winding resistance of the coil (about 20 Ω as measured for a small 10 mH coil).
+  Away from resonance they no longer cancel, the impedance jumps, and the current falls.
 
 **The voltage across R1 lights the LED.** The loop current I produces a voltage of I × 100 Ω across R1.
 
-- In the positive half cycle, when this exceeds about 0.6 V, current flows into the base of Q1 and Q1 turns on
-  (passes collector current). Current then flows through the LED along the path VCC (5 V) → R3 → D1 → Q1.
-- The base current is limited by R2 (10 kΩ) to about 0.2 mA at most. That is under 1% of the loop current
-  (17.6–24.9 mA at resonance), so the loop current hardly changes. In LTspice (a free simulator that calculates
-  the voltages and currents of a circuit on a PC), the difference from the case with Q1 removed is under 0.5%.
-- The LED current is set by R3. While Q1 is on it is (5 V − 1.8 V − 0.2 V) ÷ 330 Ω ≈ 9 mA
+- In the positive half cycle, when this exceeds about 0.6 V, Q1 turns on, and current flows through the LED along the path VCC (5 V) → R3 → D1 → Q1.
+- The base current is limited by R2 (10 kΩ) to about 0.2 mA at most, under 1% of the loop current
+  (17.6–24.9 mA at resonance). In LTspice (a free simulator that calculates the voltages and currents of a circuit on a PC),
+  the difference from the case with Q1 removed is under 0.5%.
+- While Q1 is on, the LED current is (5 V − 1.8 V − 0.2 V) ÷ 330 Ω ≈ 9 mA
   (1.8 V is the forward voltage of the LED, and 0.2 V is the voltage left across Q1 when on).
-  Q1 turns on only near the top of the positive half cycle, so the average is about 3 mA.
-- In the negative half cycle the voltage across R1 pushes the base of Q1 in the reverse direction. It is at most 2.5 V
+  Q1 is on only near the top of the positive half cycle, so the average is about 3 mA.
+- In the negative half cycle the voltage across R1 pushes the base of Q1 in the reverse direction, but at most by 2.5 V
   (with a generator of ≈ 0 Ω output), which is below the 5 V emitter-base breakdown voltage of the 2SC1815.
-- A MOSFET (such as the 2N7000) draws no gate current, so its effect on the loop would be even smaller.
-  However, the gate threshold voltage varies from 0.8 to 3 V, and the voltage across R1 is only about 1.8 V even at resonance
-  (with a 50 Ω output), so some individual parts would not turn on. Every bipolar transistor
-  turns on at about 0.6 V, so this circuit uses one.
+- A MOSFET (such as the 2N7000) is not used: its threshold voltage varies from 0.8 to 3 V, and at the voltage across R1 (about 1.8 V at resonance, with a 50 Ω output)
+  some individual parts would not turn on.
 
-**Keep the LED out of the loop.** An LED in series with the loop still lights, but it disturbs the resonance.
-The LED passes no current until about 1.8 V is exceeded, so it chops the loop current into narrow peaks, one per half cycle.
-LTspice shows that with two LEDs in opposite directions in the loop, the current at f<sub>0</sub> falls
-from 17.6 mA to 4.5 mA and the resonance curve is no longer symmetric (2.3 mA at 8 kHz, 1.2 mA at 32 kHz).
-With just one LED, C1 is charged to one side by the current the LED passes, and within a few cycles it
-holds the LED in reverse and the LED goes out. To separate the job of lighting from the job of resonating, the LED stays outside the loop.
+**Keep the LED out of the loop.** It chops the loop current into narrow peaks, one per half cycle, and disturbs the resonance (the LTspice values are in 9-32).
 
-**R1 goes on the GND side.** The GND clip of an oscilloscope probe can only be attached to GND.
-With the lower end of R1 at GND, measuring the voltage at the upper end of R1 with CH2 is enough to find
-the loop current as I = V<sub>R1</sub> / 100 Ω. CH1 watches the generator output.
+**R1 goes on the GND side.** The GND clip of a probe can only be attached to GND. With the lower end of R1 at GND,
+measuring the upper end of R1 with CH2 is enough to find the loop current as I = V<sub>R1</sub> / 100 Ω. CH1 watches the generator output.
 
 ## Wiring diagram
 
@@ -123,22 +112,19 @@ wires:
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/09-rf/breadboard/01-lc-resonance.svg)
 
-- W1 (Wavegen) of the AD3 is V1 in Fig. 1. It outputs a sine wave, and you move the frequency between 2 kHz and 32 kHz (details in the parts list). The oscilloscope uses 1 (CH1) and 2 (CH2) of Scope.
-- The upper half is the resonant loop. Column 3 collects W1 (b3), 1+ of CH1 (a3) and the left pin of L1.
-  Column 10 collects C1, R1 and CH2 (a10). The right end of R1 (column 14) goes to the top − rail.
+- W1 (Wavegen) of the AD3 is V1 in Fig. 1, and the oscilloscope uses 1 (CH1) and 2 (CH2) of Scope.
+- The upper half is the resonant loop. Column 3 collects W1 (b3), 1+ of CH1 (a3) and the left pin of L1, and
+  column 10 collects C1, R1 and CH2 (a10). The right end of R1 (column 14) goes to the top − rail.
 - The loop voltage at column 10 is carried to the lower half by the blue wire and goes through R2 to the base of Q1 (column 15).
-  Seen with its flat face toward you, the 2SC1815 has E, C, B from the left. To insert it as in the figure, with B, C, E from the left,
-  turn the flat face toward the back (the f-row side).
-- The collector (column 16) returns to the upper half through the green wire and connects to the cathode of D1.
-  From the anode of D1 (column 17), go through R3 to the top + rail (5 V).
-- The emitter (column 17 of the lower half) goes to the bottom − rail. The top − rail (GND, 1− and 2− of the AD3) and
-  the bottom − rail are joined by the black wire at column 29. Only V+ (5 V) of the AD3 goes to the top + rail.
+  Seen with its flat face toward you, the 2SC1815 has E, C, B from the left, so turn the flat face toward the back (the f-row side) to insert it with B, C, E from the left.
+- The collector (column 16) goes through the green wire to the cathode of D1 in the upper half. From the anode of D1 (column 17), go through R3 to the top + rail (5 V).
+- The emitter (column 17 of the lower half) goes to the bottom − rail. The top and bottom − rails are joined by the black wire at column 29. Only V+ (5 V) of the AD3 goes to the top + rail.
 
 ## Parts
 
 | Symbol | Part | Value |
 | --- | --- | --- |
-| V1 | Signal generator (Wavegen W1 of the AD3; output about 0 Ω) | Sine wave, 6 Vpp (the 3 V in Fig. 1 is the peak), 2 kHz to 32 kHz, output resistance of W1 on the AD3 ≈ 0 Ω (a generator with a 50 Ω output also works; values for both are the two columns in the "Values to check" table) |
+| V1 | Signal generator (W1 of the AD3, output about 0 Ω; a generator with a 50 Ω output also works) | Sine wave, 6 Vpp (the 3 V in Fig. 1 is the peak), 2 kHz to 32 kHz |
 | L1 | Inductor (axial) | 10 mH |
 | C1 | Ceramic capacitor | 10 nF (103), 50 V rating |
 | R1 | Resistor (1/4 W) | 100 Ω |
@@ -150,7 +136,7 @@ wires:
 
 ## Instrument settings
 
-The instrument is the Analog Discovery 3 (AD3). One unit provides the signal source (Wavegen), the oscilloscope (Scope) and 5 V (Supplies), and the waveforms at 2–32 kHz are within the range of the Scope.
+The instruments are Wavegen (W1), Scope and Supplies (V+ = 5 V) of the Analog Discovery 3 (AD3), and 2–32 kHz is within the range of the Scope. A PC oscilloscope works with the same settings.
 
 Generator:
 
@@ -170,18 +156,16 @@ Oscilloscope:
 | Trigger | CH1, rising edge, level 0 V |
 | Measurement | Vpp of CH2 (use the automatic measurement if available) |
 
-On the AD3, set these with Wavegen (W1), Scope and Supplies (V+ = 5 V) in WaveForms. A PC oscilloscope works with the same settings. The 5 V current that lights the LED (about 3–9 mA) fits within about 50 mA for one supply channel of the AD3.
+The 5 V current that lights the LED (about 3–9 mA) fits within about 50 mA for one supply channel of the AD3.
 Away from resonance CH2 shrinks to about 0.1 Vpp, so lower the CH2 range if it is hard to read.
 
 ## Values to check
 
-Read the Vpp of CH2 at each frequency and convert it to the peak current.
+Read the Vpp of CH2 at each frequency and convert it to the peak current I<sub>peak</sub> = (Vpp of CH2 ÷ 2) ÷ 100 Ω (example: 3.52 Vpp → 17.6 mA).
 
-I<sub>peak</sub> = (Vpp of CH2 ÷ 2) ÷ 100 Ω (example: 3.52 Vpp → 17.6 mA)
-
-These are LTspice simulation values. The LED is red (forward voltage about 1.8 V), and the winding resistance of the coil is 20 Ω.
-Many function generators have a 50 Ω resistor at the output, and it adds in series with the loop.
-The values for a generator with an output resistance of nearly 0 Ω (such as W1 on the AD3) are also listed. The LED current is the average with a 50 Ω output.
+The table gives LTspice simulation values (the LED is red with a forward voltage of about 1.8 V, and the winding resistance of the coil is 20 Ω).
+Many function generators have a 50 Ω resistor at the output, and it adds in series with the loop, so
+the values for a generator with an output resistance of nearly 0 Ω (such as W1 on the AD3) are also listed. The LED current is the average with a 50 Ω output.
 
 | Frequency | CH2 (50 Ω output) | I<sub>peak</sub> (50 Ω output) | Average LED current | CH2 (≈ 0 Ω output) | I<sub>peak</sub> (≈ 0 Ω output) | Measured CH2 | Measured I<sub>peak</sub> |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -201,22 +185,18 @@ The values for a generator with an output resistance of nearly 0 Ω (such as W1 
 | 32 kHz | 0.39 Vpp | 2.0 mA | 0 | 0.40 Vpp | 2.0 mA | | |
 
 - **The current is largest at f<sub>0</sub>.** The only resistance left in the loop is R1, the winding, and the 50 Ω output of the generator, 170 Ω in total.
-  The sharpness of the peak is expressed by a number Q. For series resonance Q = (1/R) × √(L/C), where R is the total resistance in the loop.
+  The sharpness of the peak is expressed by Q. For series resonance Q = (1/R) × √(L/C), where R is the total resistance in the loop.
   Q = (1/170 Ω) × √(10 mH / 10 nF) = 1000 Ω / 170 Ω ≈ 5.9 (with ≈ 0 Ω output the total is 120 Ω and Q ≈ 8.3)
-- **The LED lights only between 14 and 18 kHz.** Q1 does not turn on until the voltage across R1 exceeds about 0.6 V,
-  so the LED shows only a slice near the top of the peak. The brightness does not tell you how sharp the peak is,
-  so read the shape of the peak from CH2.
-- **At resonance, about Q times the generator voltage appears across C1.** The reactance of C1 at 15.9 kHz is
-  about 1 kΩ, so 17.6 mA × 1 kΩ ≈ 17.6 V<sub>peak</sub> (about 25 V<sub>peak</sub> with ≈ 0 Ω output).
-  This is far larger than the 3 V<sub>peak</sub> of the generator. Use a ceramic capacitor rated 50 V for C1.
+- **The LED lights only between 14 and 18 kHz.** It shows only the slice near the top of the peak where the voltage across R1 exceeds about 0.6 V,
+  so the brightness does not tell you how sharp the peak is. Read the shape of the peak from CH2.
+- **At resonance, about Q times the generator voltage appears across C1.** The reactance of C1 at 15.9 kHz is about 1 kΩ, so
+  17.6 mA × 1 kΩ ≈ 17.6 V<sub>peak</sub> (about 25 V<sub>peak</sub> with ≈ 0 Ω output), far larger than the 3 V<sub>peak</sub> of the generator.
+  Use a ceramic capacitor rated 50 V for C1.
 
 ### Drawing the graph
 
-Plot the measured I<sub>peak</sub> with frequency on the horizontal axis and current on the vertical axis
-(the frequency spans a 16-fold range from 2 kHz to 32 kHz, so semi-log paper with a logarithmic horizontal axis is easier to read).
-You should get a peak (the resonance curve) with its top at f<sub>0</sub> = 15.9 kHz.
-
-The resonance curve you should see (the simulation values in the table above). The horizontal axis is frequency (logarithmic).
+Plot the measured I<sub>peak</sub> on semi-log paper with frequency on the horizontal axis (logarithmic, since 2–32 kHz is a 16-fold range) and current on the vertical axis,
+and look for a peak (the resonance curve) with its top at f<sub>0</sub> = 15.9 kHz. The curve you should see is Fig. 3 (the simulation values in the table above).
 
 ```graph
 # Graph (tommie-fence graph fence)
@@ -263,21 +243,11 @@ notes:
 
 ![Graph](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/09-rf/graph/01-lc-resonance.svg)
 
-Plot the measured I<sub>peak</sub> as points on graph paper with the same axes and compare with these 2 curves.
+Plot the measured points on the same axes and compare with these 2 curves.
 
-- If the frequency of the peak is off from the calculated 15.9 kHz, the actual values of L1 and C1 are off
-  (f<sub>0</sub> is inversely proportional to √(LC), so if L and C are both 10% larger, f<sub>0</sub> becomes 1/1.1 times, about 9% lower).
+- If the peak is off from 15.9 kHz, the actual values of L1 and C1 are off
+  (f<sub>0</sub> is inversely proportional to √(LC), so if L and C are both 10% larger, it is about 9% lower).
 - With a logarithmic horizontal axis the peak is symmetric. At f<sub>0</sub>/2 = 8 kHz and 2f<sub>0</sub> = 32 kHz the current is 2.0 mA in both cases.
-- Overlaying the 50 Ω output and ≈ 0 Ω output columns of the table (Fig. 3) shows the difference in Q.
-  The skirts (below 12 kHz and above 20 kHz) are almost the same, and only the top differs, 17.6 mA against 24.9 mA.
-  The 50 Ω of the generator also counts as resistance in the loop, so the peak is lower and flatter by that amount.
-- The sharpness of the peak (the height of Q) increases as the loop resistance decreases. If you replace R1 with 47 Ω,
-  the current at f<sub>0</sub> rises from 17.6 mA to 25.6 mA, but it hardly changes at 12 kHz (5.0 → 5.1 mA) and 20 kHz (6.1 → 6.3 mA)
-  (simulation values with a 50 Ω output. Read the current as Vpp of CH2 ÷ 2 ÷ 47 Ω, and
-  set CH2 to 0.5 V/div). The voltage across R1 is about 1.2 V<sub>peak</sub> at resonance, so Q1 turns on and the LED lights.
-- Use 47 Ω for R1 only with a generator of 50 Ω output. With a generator of ≈ 0 Ω output,
-  the current at f<sub>0</sub> would be about 45 mA, above the 30 mA that the Wavegen of the Analog Discovery 3 can output without distortion.
-  The voltage across C1 would also be about 45 V<sub>peak</sub>, close to the 50 V rating.
 
 ### Looking at the waveform shape too
 
@@ -293,36 +263,15 @@ ch2: {wave: sine 15.9kHz 3.52Vpp, range: 1V/div}
 measure: [vpp, freq, phase]
 ```
 
-![Oscilloscope screen](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/09-rf/scope/01-lc-resonance-1.svg)
+![Oscilloscope screen](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/09-rf/scope/01-lc-resonance.svg)
 
-```scope
-# Oscilloscope screen (tommie-fence scope fence)
-title: Fig. 5 Below resonance (12kHz), CH2 smaller, leads CH1
-time: 20us/div
-trigger: ch1 rising 0V
-ch1: {wave: sine 12kHz 5.88Vpp, range: 2V/div}
-ch2: {wave: sine 12kHz 1.01Vpp phase 78deg, range: 200mV/div}
-measure: [vpp, freq, phase]
-```
-
-![Oscilloscope screen](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/09-rf/scope/01-lc-resonance-2.svg)
-
-- **CH2 is a clean sine wave at every frequency.** The loop contains only L1, C1 and R1,
-  so the current has the same shape as the generator voltage.
-- **At the resonance point CH1 and CH2 are in phase (Fig. 4).** The reactances of L1 and C1 cancel,
-  and the loop looks like a resistor alone.
-- **Below resonance CH2 leads CH1 (Fig. 5, about 78°).** The reactance of C1 wins, and the loop behaves like a capacitor.
-  Above resonance the coil wins instead and CH2 lags (about 75° of lag at 20 kHz).
-  Read the phase from Phase in Measurements, or as the time difference between the peaks of the two waves ÷ the period × 360°.
-- With a generator of 50 Ω output, the amplitude of CH1 drops at the resonance point (6.0 → about 4.2 Vpp, Fig. 4).
-  The larger current drops voltage across the 50 Ω inside the generator. With a generator of ≈ 0 Ω output it does not drop.
-- In Fig. 5, CH2 is lowered to 200 mV/div, so it looks larger than CH1 on the screen. At 1 V/div it would be
-  only about one division. Compare sizes by the Vpp readings, not by the divisions.
+- **At the resonance point CH1 and CH2 are in phase (Fig. 4).** The reactances cancel, and the loop looks like a resistor alone.
+- How the phase shifts on either side of resonance, and the effect of the output resistance of the generator, are split out into 9-32.
 
 ## Verification with LTspice
 
-**Checking the calculation (LTspice)**: The values in the table above were checked by running `sim/01-lc-resonance.cir` again as a transient analysis (30 periods; the Vpp of CH2 and the average current in R3 are read over the last 2 periods).
-It includes everything in Fig. 1: L1 (10 mH, winding 20 Ω), C1, R1, R2, R3, D1 and Q1. Q1 is a substitute model for the 2SC1815
+**Checking the calculation (LTspice)**: The table above was checked by running `sim/01-lc-resonance.cir` again as a transient analysis (30 periods; the Vpp of CH2 and the average current in R3 are read over the last 2 periods).
+It includes all the parts of Fig. 1 (L1 with a winding of 20 Ω). Q1 is a substitute model for the 2SC1815
 (the same as in `sim/agc.cir`; an assumption made from typical values, not measured), and the red LED is a provisional diode that gives about 1.8 V at 3 mA.
 The Vpp of CH2 agreed with the table within 0.03 V at all 14 frequencies × 2 output resistances (example: at 15.9 kHz, 3.52 Vpp with a 50 Ω output and 4.99 Vpp with ≈ 0 Ω; 0.077 Vpp at 2 kHz and 0.39 Vpp at 32 kHz).
 The average LED current (50 Ω output) also flows only between 14 and 18 kHz: 1.2 mA at 14 kHz, 2.6 mA at 15 kHz, 3.0 mA at 15.9 kHz, 2.5 mA at 17 kHz and 1.3 mA at 18 kHz,

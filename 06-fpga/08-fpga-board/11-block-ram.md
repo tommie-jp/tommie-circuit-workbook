@@ -15,19 +15,16 @@ device: FPGA
 > **この題は実機が要らない。** 数はすべて合成 (yosys) と配置配線 (nextpnr) の結果で、書き込みと測定は行っていない。
 > Verilog は Verilator で動かして確かめた。
 
-FPGA には、LUT と FF のほかに、データを溜めるための**ブロック RAM** が入っている。
-Tang Nano 9K の FPGA (GW1NR-9) は、nextpnr の報告で `BSRAM: 26` 個 (8-8 の表)、8-2 では 468 kbit と書いた。
+FPGA には LUT と FF のほかに、データを溜める**ブロック RAM** がある。
+Tang Nano 9K の GW1NR-9 は nextpnr の報告で `BSRAM: 26` 個 (8-8 の表)、8-2 では 468 kbit。
 468 kbit ÷ 26 = **1 個が 18 kbit (18,432 ビット)** である。
+Verilog の書き方でブロック RAM に入るか LUT になるかが変わることを、合成の報告で読む。
 
-この題では、Verilog の書き方でブロック RAM に入るか LUT で作られるかが変わることを、合成の報告で読む。
-
-**組まない題である。** 実体配線図・Analog Discovery 3・`logic` の図は入れない。
-メモリの配置の話で、ピンを使う回路は作らないため。
+実体配線図・Analog Discovery 3・`logic` の図は入れない (**組まない題**。メモリの配置の話で、ピンを使う回路は作らない)。
 
 ## ブロック RAM に入る形
 
-yosys が Gowin のブロック RAM に対応づける形は、yosys の `share/yosys/gowin/brams.txt` に書いてある。
-その中の 1 ポートの RAM (`$__GOWIN_SP_`) を読むと、次のとおり。
+yosys が Gowin のブロック RAM に対応づける形は `share/yosys/gowin/brams.txt` にある。1 ポートの RAM (`$__GOWIN_SP_`) は次のとおり。
 
 ```text
 ram block $__GOWIN_SP_ {
@@ -42,11 +39,11 @@ ram block $__GOWIN_SP_ {
 - 1 個のブロックは、**番地 14 ビット (16,384 語)** までで、**語の幅が 1・2・4・9・18・36 ビット**のどれか。
   16K × 1、8K × 2、4K × 4、2K × 9、1K × 18、512 × 36 の 6 通りで、容量はどれも 18,432 ビットまで
 - ポートは `clock posedge` と書いてある。**クロックの立ち上がりに合わせて読み書きする**形だけが、ブロック RAM になる
-- 同じファイルに、2 ポートの RAM (`$__GOWIN_DP_`。幅は 1・2・4・9・18) もある。この題では 1 ポートだけ扱う
+- 同じファイルに 2 ポートの RAM (`$__GOWIN_DP_`。幅は 1・2・4・9・18) もある。ここでは 1 ポートだけ扱う
 
 ## 論理図
 
-RAM の中身は、番地を入れると 1 語が出る箱で、書くときは `we` を 1 にして `din` を入れる。
+RAM は番地を入れると 1 語が出る箱で、書くときは `we` を 1 にして `din` を入れる。
 
 ```plantuml
 @startuml
@@ -96,7 +93,7 @@ module ram #(
 endmodule
 ```
 
-- `mem` の 2 次元の配列が RAM になる。`ABITS` が番地のビット数、`WIDTH` が語の幅
+- `mem` の配列が RAM になる。`ABITS` が番地のビット数、`WIDTH` が語の幅
 - **読み (`dout <= mem[addr]`) もクロックの `always` の中に書いた。** これがブロック RAM に入る形である
 - 書いたのと同じクロックで同じ番地を読むと、`dout` には書く前の古い値が出る (`<=` なので)
 
@@ -161,18 +158,18 @@ t=76  we=0 addr=20 din=00  dout=00
 ```
 
 - 書いたクロックの `dout` は 00 (書く前の値)。読むときは、**番地を与えたクロックの立ち上がりのあとに** 書いた値が出る
-- 書いていない番地 (0x20) は 00。シミュレーションでは `mem` の初期値が 0 になるだけで、実物の RAM が 0 から始まるとは限らない (下の ROM の節)
+- 書いていない番地 (0x20) は 00。シミュレーションでは `mem` の初期値が 0 になるだけで、実物の RAM が 0 から始まるとは限らない (初期値は 8-24)
 
 ## 合成して、何に入ったかを読む
 
-`ABITS` と `WIDTH` を変えて合成した。コマンドは 8-4 と同じ形で、`chparam` で値を渡す。
+`ABITS` と `WIDTH` を `chparam` で変えて合成した (ほかは 8-4 と同じ)。
 
 ```bash
 yosys -p "read_verilog ram.v; chparam -set ABITS 8 -set WIDTH 8 ram; synth_gowin -top ram; stat"
 ```
 
-配置配線は、ピンの数を少なくするため、番地と書く値を 1 本のシフトレジスタで入れる小さな最上位で包んで通した
-(`stat` の数にはこの包みの FF や LUT が入らない。下の表は RAM の部品の数だけ)。
+配置配線は、ピンを減らすため、番地と書く値を 1 本のシフトレジスタで入れる小さな最上位で包んで通した
+(下の表は RAM の部品の数だけで、包みの FF や LUT は入らない)。
 
 | 番地 × 幅 | 容量 | yosys の部品 | nextpnr の BSRAM |
 | --- | --- | --- | --- |
@@ -188,12 +185,12 @@ yosys -p "read_verilog ram.v; chparam -set ABITS 8 -set WIDTH 8 ram; synth_gowin
 - yosys 0.33 と 0.69+274 で、RAM の部品の数は同じだった (LUT の数は版で変わる。8-8)
 - **16 語の小さな RAM は、ブロック RAM を使わない。** LUT で作る RAM (`RAM16SDP4` = 16 語 × 4 ビット) が 2 個で、
   読みの出力に FF が 8 個付く。ブロックは 18 kbit 単位なので、128 ビットの RAM は LUT のほうに回された
-- **256 語 × 8 は 1 ブロック。** 2,048 ビットしか使わないが、ブロックは 1 個丸ごと使う。残りの 16 kbit は、ほかの RAM と共有できない
+- **256 語 × 8 は 1 ブロック。** 2,048 ビットしか使わないが、ブロックは 1 個丸ごと使い、残りの 16 kbit はほかの RAM と共有できない
 - 容量が大きくなると、ブロックの数は容量 ÷ 16,384 に近い数で増える (8 ビット幅の 65,536 ビットで 4 個)
 - **65,536 語 × 8 (512 kbit) は FPGA に入らない。** 合成は通るが、配置配線が `Unable to place cell ... no BELs remaining to implement cell type 'SP'` と言って止まった。
   ブロックが 26 個しか無い。8-2 の 468 kbit の中に入る RAM を設計する
 - 512 語 × 32 ビットは、合成は SPX9 1 個で通ったが、配置配線 (上の包みを付けた形) が hold 時間の違反で止まった。
-  原因は包みの作りか、この題では調べていない
+  原因 (包みの作りか) は調べていない
 
 ### 読みをクロックに合わせないと
 
@@ -207,46 +204,13 @@ yosys -p "read_verilog ram.v; chparam -set ABITS 8 -set WIDTH 8 ram; synth_gowin
 
 読みを組み合わせ回路で出す形は、ブロック RAM に入らない。LUT で RAM を作って、読み出しの選択を LUT と切り替えで組む。
 **256 語 × 8 は、読みをクロックに合わせればブロック RAM 1 個と LUT 0 個で済むのに、LUT 180 個ほどになった。**
-8,640 個の LUT しかない FPGA で 1,024 語 × 16 は 2 千個を超え、LUT 全体の 1/4〜1/3 になる。
+LUT が 8,640 個の FPGA で、1,024 語 × 16 は 2 千個を超え、全体の 1/4〜1/3 になる。
 
-## 初期値を入れる — `$readmemh`
-
-ROM の中身は、16 進のファイルから `$readmemh` で入れる (10-1)。ここでは、中身が `i × 7 + 3` の下位 8 ビットのファイル (`rom.hex`。
-0 番地から 03・0a・11・18 …) で、256 語 × 8 の ROM を作る。
-
-```verilog
-// 256 語 × 8 ビットの ROM。中身は rom.hex から読む
-module rom256 (
-    input            clk,
-    input      [7:0] addr,
-    output reg [7:0] dout
-);
-    reg [7:0] mem [0:255];
-
-    initial $readmemh("rom.hex", mem);
-
-    always @(posedge clk) dout <= mem[addr];
-endmodule
-```
-
-lint は警告 0 件。0・1・2・255 番地を読むと、`03` `0a` `11` `fc` が出た (255 × 7 + 3 = 1788 の下位 8 ビットは 0xfc)。
-
-合成した結果は、**ブロック RAM でなく LUT** だった。
-
-| 書き方 | yosys 0.33 | yosys 0.69 |
-| --- | --- | --- |
-| そのまま (`reg [7:0] mem [0:255];`) | LUT 33 + MUX2_LUT 26 + DFF 8 | LUT 33 + MUX2_LUT 26 + DFF 8 |
-| `(* rom_style = "block" *)` を付ける | SPX9 × 1 | SPX9 × 1 |
-
-- 書き込みのポートが無い (ROM の) メモリは、yosys は LUT の表に直す。256 語では LUT が 33 個ほど
-- `(* rom_style = "block" *)` を `reg` の前に付けると、ブロック RAM 1 個になった。`(* ram_style = "block" *)` でも同じ結果だった (yosys 0.33 で確かめた)
-- 付けたときの SPX9 の初期値のパラメータ (`INIT_RAM_00`) の先頭の 3 語は、`rom.hex` と同じ `03` `0a` `11` だった (`top.json` の中身を読んだ)。
-  ブロック RAM の初期値はビットストリームに入って、電源を入れたときから入っている
-- 小さな ROM は LUT に直すほうが、読みが速く、ブロックを使わない。大きな ROM を `block` にすると、LUT が空く
+ROM に `$readmemh` で初期値を入れ、ブロック RAM に入るか LUT になるかを読むのは 8-24 に分けた。
 
 ## 見るべき値
 
-すべて合成と配置配線の結果で、実機で測った値ではない。道具は yosys 0.33 と 0.69+274、nextpnr-himbaechel 0.11.1-54。
+合成と配置配線の結果 (測った値ではない)。道具は yosys 0.33 と 0.69+274、nextpnr-himbaechel 0.11.1-54。
 
 | 項目 | 見るべき値 | どこで得たか |
 | --- | --- | --- |
@@ -256,22 +220,19 @@ lint は警告 0 件。0・1・2・255 番地を読むと、`03` `0a` `11` `fc` 
 | 8,192 語 × 8 | SP 4 個。BSRAM 4 / 26 | 同上 |
 | 65,536 語 × 8 | BSRAM 32 / 26 で置けない | nextpnr のエラー |
 | 読みをクロックに合わせない 256 語 × 8 | ブロックを使わず LUT 180 個 (0.33) | yosys の `stat` |
-| 256 語 × 8 の ROM | 既定で LUT 33 個、`rom_style = "block"` で SPX9 1 個 | yosys の `stat` |
 
-実機で RAM を書き込んで読み戻し、読み出しの 1 クロックの遅れと初期値を Logic で見るのは、この題では行っていない。
-この題の数は、書き込む前に分かる範囲に限る。
+実機で RAM を書いて読み戻し、読み出しの 1 クロックの遅れを Logic で見るのは行っていない。数は書き込む前に分かる範囲に限る。
 
 ## シミュレーションでの確かめ
 
-Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63 で、本文の `ram.v` `tb_ram.v` `rom256.v` を走らせ直した。
-`ramasync` は本文の記述 (`assign dout = mem[addr];`) から書き、`rom.hex` は `i × 7 + 3` の下位 8 ビットで作った。
-置き場は `sim/11-block-ram.v` `sim/11-block-ram-async.v` `sim/11-block-ram-rom.v` `sim/11-block-ram-rom.hex`
-`sim/11-block-ram-tb.v` `sim/11-block-ram-rom-tb.v`。
+Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63 で、本文の `ram.v` `tb_ram.v` を走らせ直した。
+`ramasync` は本文の記述 (`assign dout = mem[addr];`) から書いた。
+置き場は `sim/11-block-ram.v` `sim/11-block-ram-async.v` `sim/11-block-ram-tb.v` (ROM の分は 8-24)。
 配置配線の包みは `sim/11-block-ram-wrap.v` (`ramwrap`。番地・書く値・`we` を 1 本のシフトレジスタで入れ、読んだ値の排他的論理和を 1 本で出す) と `sim/11-block-ram-wrap.cst`。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
-| lint (`ram.v`・`rom256.v`) | 警告 0 件 | 0 件 | 合った |
+| lint (`ram.v`) | 警告 0 件 | 0 件 | 合った |
 | `tb_ram` の 7 行 | dout = 00・00・00・a5・3c・7e・00 | 同じ | 合った |
 | 合成 16 × 8 | RAM16SDP4 × 2 + DFF × 8 | 同じ | 合った |
 | 合成 256 × 8・1024 × 16 | SPX9 × 1 | 同じ | 合った |
@@ -281,12 +242,8 @@ Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63 で�
 | 合成 65536 × 8 | SP × 32 + LUT 36 + MUX2_LUT 24 + DFF 2 | 同じ | 合った |
 | 合成 512 × 32 | SPX9 × 1 | 同じ | 合った |
 | 読みを組み合わせにした (16 × 8・256 × 8・1024 × 16) | RAM16SDP4 が 2・32・256、LUT 0・180・2,064、MUX2_LUT 0・120・1,312 | 同じ | 合った |
-| ROM 0・1・2・255 番地 | 03・0a・11・fc | 同じ | 合った |
-| ROM の合成 (そのまま) | LUT 33 + MUX2_LUT 26 + DFF 8 | 同じ | 合った |
-| ROM に `rom_style` / `ram_style = "block"` | SPX9 × 1 | 同じ | 合った |
 | yosys 0.70+16 の RAM の部品 (16×8 から 65,536×8、512×32) | 上の 0.33 の表と同じ部品の数 | 同じ。LUT・DFF・MUX2_LUT の付随の数も同じ | 合った |
 | 読みを組み合わせにした (0.70+16) | LUT 148・2,754、MUX2_LUT 56・2,180 (256 × 8・1,024 × 16) | 同じ | 合った |
-| ROM のそのまま (0.70+16) | LUT 33 + MUX2_LUT 26 + DFF 8 | 同じ | 合った |
 | nextpnr の BSRAM (16×8・256×8・1,024×16・2,048×16・8,192×8・16,384×8・32,768×8) | 0・1・1・2・4・8・16 / 26 | 同じ (0.70+16 の `json`) | 合った |
 | nextpnr の 65,536 × 8 | BSRAM 32 / 26 で置けない (`no BELs remaining to implement cell type 'SP'`) | 同じ | 合った |
 | nextpnr の 512 × 32 | 合成は SPX9 1 個、配置配線は hold 時間の違反で止まる | `ERROR: Hold/min time violation for clock 'posedge u.clk'` (BSRAM 1 / 26) で止まった | 合った |
@@ -295,7 +252,7 @@ Verilator 5.042・Yosys 0.33・Yosys 0.70+16・nextpnr-himbaechel 0.11.1-63 で�
 (`-json` の有無で 512 語以上が LUT になるか SPX9 になるかが変わった。10-2 の確かめを参照)。
 
 yosys 0.33 の `json` を nextpnr に通すと、512 語以上が LUT の RAM (`RAM16SDP4`) になっているため、1,024 × 16 以上は配置が通らない
-(`Unable to place cell ... RAM16SDP4`)。これは上の `-json` の有無の差と同じ現象で、本文の BSRAM の数は 0.69+274 の結果である。
+(`Unable to place cell ... RAM16SDP4`)。上の `-json` の差と同じ現象で、本文の BSRAM の数は 0.69+274 の結果である。
 手元の 0.70+16 はこの表の数を再現した。
 
 ## 出典
@@ -306,4 +263,3 @@ yosys 0.33 の `json` を nextpnr に通すと、512 語以上が LUT の RAM (`
   `share/yosys/gowin/brams.txt`。LUT RAM (`$__GOWIN_LUTRAM_`、`abits 4`・`width 4`) は同じ場所の `lutrams.txt`
 - 個数 (26 個)・容量 (468 kbit): nextpnr の `Device utilisation` の `BSRAM` の行と、8-2 の表
   (Sipeed の [Tang Nano 9K のページ](https://wiki.sipeed.com/hardware/en/tang/Tang-Nano-9K/Nano-9K.html))
-- `rom_style` / `ram_style` の属性: yosys の `memory_libmap` が受けた (結果を `stat` で確かめた)

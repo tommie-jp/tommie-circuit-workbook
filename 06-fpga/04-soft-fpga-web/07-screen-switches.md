@@ -14,10 +14,10 @@ device: WEB
 この題は実体配線図と Analog Discovery 3 の図を付けない。ブラウザの中で動く題で、組む物が無いから。
 
 5-4 では、DIP スイッチで Verilog の入力を切り替え、出力を LED で見た。
-ブラウザの soft-fpga には DIP スイッチが無い。代わりに、**画面のボタンを押して、Verilog の入力ポートを動かす**。
+ブラウザの soft-fpga では、代わりに **画面のボタンで Verilog の入力ポートを動かす**。
 
-まず 02-traffic-fsm の歩行者ボタン (4-4) が、どうやって `btn` の入力まで届くかを読む。
-そのあと、自分の soft-fpga の写しに小さな例を足す。画面のスイッチ 2 個とボタン 1 個で、AND・OR と押した回数を見る。
+まず 02-traffic-fsm の歩行者ボタン (4-4) が `btn` の入力まで届く道筋を読む。
+そのあと soft-fpga の写しに、画面のスイッチ 2 個とボタン 1 個で AND・OR と押した回数を見る例を足す。
 
 ## 歩行者ボタンの道筋 (02-traffic-fsm)
 
@@ -45,18 +45,18 @@ wasm -> rtl : 2 回目からの step() で\ntop->btn = 0
 
 ![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/04-soft-fpga-web/plantuml/07-screen-switches.svg)
 
-- `index.html` は、ボタンの `click` で `Module._press_btn()` を呼ぶだけ。C++ の関数は、ビルドのときに `EXPORTED_FUNCTIONS` に名前を書いたものだけが JS から呼べる (`scripts/build-wasm-02.sh` に `"_press_btn"` がある)
-- `harness.cpp` の `press_btn()` は、`pending_btn` を 1 にするだけで、Verilog には触らない
-- Run を押している間、画面は描き替えのたびに `Module._sim_run_n(n)` を呼ぶ。n は速度のスライダの値 (1〜300、開いたときは 30)。`sim_run_n()` は C++ の中で `step()` を n 回呼ぶ
-- `step()` は 1 回で 1 クロック進める。その頭で `top->btn = pending_btn;` と入れ、すぐ `pending_btn = 0;` に戻す。だから `btn` が 1 になるのは、押した後の最初の 1 クロックだけ
-- 1 クロックの合図を覚えておくのは Verilog の側 (`if (btn) btn_req <= 1'b1;`)。押したことは `btn_req` に残る
+- `index.html` はボタンの `click` で `Module._press_btn()` を呼ぶだけ。JS から呼べる C++ の関数は、ビルドで `EXPORTED_FUNCTIONS` に書いたものだけ (`scripts/build-wasm-02.sh` に `"_press_btn"` がある)
+- `harness.cpp` の `press_btn()` は、`pending_btn` を 1 にするだけで Verilog には触らない
+- Run の間、画面は描き替えのたびに `Module._sim_run_n(n)` を呼び、C++ の中で `step()` を n 回回す。n は速度のスライダの値 (1〜300、開いたときは 30)
+- `step()` は 1 クロック進める。その頭で `top->btn = pending_btn;` と入れ、すぐ `pending_btn = 0;` に戻すので、`btn` が 1 になるのは押した後の最初の 1 クロックだけ
+- 1 クロックの合図は、Verilog の側が `btn_req` に覚える (`if (btn) btn_req <= 1'b1;`)
 
 ボタンは「押した」という出来事なので、1 クロックの合図にする。
-スイッチは「今どちらか」という状態なので、JS が書き換えるまで同じ値を毎クロック入れ続ける。この違いを、次の例で並べて見る。
+スイッチは「今どちらか」という状態なので、JS が書き換えるまで同じ値を毎クロック入れ続ける。次の例で 2 つを並べる。
 
 ## 足す例 (90-switches)
 
-soft-fpga の写しに `examples/90-switches` を作る。番号の 90 は、元の例と重ならないように選んだだけ。
+soft-fpga の写しに `examples/90-switches` を作る。90 は元の例と重ならない番号。
 
 ### Verilog
 
@@ -96,7 +96,7 @@ lint (`verilator --lint-only -Wall sw_gates.v`) は、警告なしで通る (確
 
 ### C++ (ハーネス)
 
-`examples/90-switches/cxx/harness.cpp`。02-traffic-fsm の `harness.cpp` の形をまねて、リングバッファを省いた。
+`examples/90-switches/cxx/harness.cpp`。02-traffic-fsm の `harness.cpp` をまね、リングバッファを省いた。
 
 ```cpp
 #include "Vsw_gates.h"
@@ -186,38 +186,33 @@ requestAnimationFrame(loop);
 ```
 
 この JS は `var Module = { onRuntimeInitialized: function () { Module._sim_init(); … } };` の中に書き、そのあと `<script src="sim.js"></script>` で読み込む (02-traffic-fsm の `index.html` と同じ形)。
-画面には SW0・SW1・BTN の 3 つのボタンと、AND・OR の丸 (LED の代わり)、押した回数の数を置いた。
+画面には SW0・SW1・BTN のボタン、AND・OR の丸 (LED の代わり)、押した回数を置いた。
 
 ## 手順
 
 1. soft-fpga を写す (0-2)。上の 3 つのファイルを `examples/90-switches/` の下に置く
 2. ビルドのスクリプトを `scripts/build-wasm-02.sh` から写して `scripts/build-wasm-90.sh` を作り、次の 4 か所を替える
    - `EXAMPLE` を `examples/90-switches` に
-   - `OBJ_DIR` を `obj_dir_90` に (ほかの例の生成物と混ざらないように)
+   - `OBJ_DIR` を `obj_dir_90` に (ほかの例の生成物と混ぜない)
    - Verilator に渡すファイルを `sw_gates.v` に
-   - `EXPORTED_FUNCTIONS` の並びを、この例の 6 つの関数だけにする。元の行は `"…"` の中に `\"` で名前を書き、末尾に `${LA_EXPORTS}` (Logic Analyzer の関数の名前) を足している。
-     この例のハーネスにはリングバッファも Logic Analyzer も無いので、`${LA_EXPORTS}` も消す。残すと、無い関数を出そうとしてリンクが `symbol exported via --export not found` で止まる (確かめた)
+   - `EXPORTED_FUNCTIONS` の並びを、この例の 6 つの関数だけにする。元の行の末尾の `${LA_EXPORTS}` (Logic Analyzer の関数の名前) も消す (この例にはリングバッファも Logic Analyzer も無い)。
+     残すと、無い関数を出そうとしてリンクが `symbol exported via --export not found` で止まる (確かめた)
 
      ```bash
      -s EXPORTED_FUNCTIONS="[\"_sim_init\",\"_step\",\"_set_sw\",\"_press_btn\",\"_get_out\",\"_get_cycles\"]" \
      ```
 
-3. 4-3 と同じく docker の `build-wasm` で回す
-
-   ```bash
-   docker compose -f docker/compose.yml run --rm build-wasm scripts/build-wasm-90.sh
-   ```
-
-4. `examples/` で Web サーバを立てて、`/90-switches/web/` を開く
-
-   ```bash
-   cd examples
-   python3 -m http.server 8081
-   ```
-
+3. 4-3 と同じく docker の `build-wasm` で回す (下の 1 行目)
+4. `examples/` で Web サーバを立てて、`/90-switches/web/` を開く (下の 2・3 行目)
 5. SW0 と SW1 を押して、AND と OR の丸が 5-4 の真理値表どおりに点くのを見る。BTN を押すたびに `presses` が 1 増える
 
-PC で先に確かめるなら、`main_linux.cpp` (スイッチの 4 通りとボタン 3 回を流して出力を印字する小さな `main`) を足し、
+```bash
+docker compose -f docker/compose.yml run --rm build-wasm scripts/build-wasm-90.sh
+cd examples
+python3 -m http.server 8081
+```
+
+PC で先に確かめるなら、`main_linux.cpp` (スイッチの 4 通りとボタン 3 回を流して印字する小さな `main`) を足し、
 `verilator --cc --exe --build sw_gates.v harness.cpp main_linux.cpp` でビルドして動かす。
 
 ## 画面に見えるはずのもの
@@ -227,7 +222,7 @@ PC で先に確かめるなら、`main_linux.cpp` (スイッチの 4 通りと�
 - クロック 3 の前に SW0 を入れ、7 の前に SW1 を入れ、17 の前に SW0 を切る
 - クロック 10 と 14 で BTN を押す
 
-`CLK` の立ち上がりが、`step()` の中の `clk` 0 → 1 に当たる。入力は、その前の low の間 (立ち上がりの 0.5 ms 前) に変わるように描いた。
+`CLK` の立ち上がりが `step()` の中の `clk` 0 → 1 で、入力はその 0.5 ms 前 (low の間) に変わるように描いた。
 `presses` は 4 ビットだが、2 回しか押さないので下位 2 ビット (`P1` `P0`) だけを描く。
 
 ```logic
@@ -252,16 +247,16 @@ trigger: BTN rising at 9.5ms
 
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/04-soft-fpga-web/logic/07-screen-switches.svg)
 
-- `SW0` `SW1` は、押した後ずっと同じ値に残る。`AND` と `OR` は、スイッチと同じ時刻に変わる (組み合わせ回路なので、クロックを待たない)
-- `BTN` は 1 クロック (1 ms) だけ 1 になる。`presses` は、その間の `CLK` の立ち上がり (10 ms・14 ms) で 1 増える
+- `SW0` `SW1` は押した後も値が残り、`AND` `OR` はスイッチと同じ時刻に変わる (組み合わせ回路)
+- `BTN` は 1 クロック (1 ms) だけ 1 で、`presses` はその間の `CLK` の立ち上がり (10 ms・14 ms) で 1 増える
 - X1 (8.25 ms) は SW0 と SW1 が両方 1 で `AND` = 1、`presses` = 0。X2 (12.25 ms) は 1 回押した後で `presses` = 1
 - 17 ms の手前で SW0 を切ると、`AND` だけが 0 に戻り、`OR` は SW1 が 1 なので 1 のまま
 
 ## 見るべき値
 
-soft-fpga の写しに 90-switches を足し、Verilator 5.042 の PC のシミュレーションと、Verilator 5.048・Emscripten の docker でビルドしたブラウザ (Playwright の Chromium 153) で動かした。
-2026-10-13 に soft-fpga ac6b663 (2026-10-12) の写しで手順を通し直し、下の表の数がどれも変わっていないことを確かめた。02-traffic-fsm の行は、公開中の画面で確かめた。
-ブラウザでは、Playwright のスクリプトで画面の SW0・SW1・BTN を `click` し、AND・OR の丸と `presses` の欄を読んだ。
+soft-fpga の写しに 90-switches を足し、Verilator 5.042 の PC のシミュレーションと、Verilator 5.048・Emscripten でビルドしたブラウザ (Playwright の Chromium 153) で動かした。
+ブラウザでは Playwright で SW0・SW1・BTN を `click` し、AND・OR の丸と `presses` の欄を読んだ。
+2026-10-13 に soft-fpga ac6b663 (2026-10-12) の写しで通し直し、表の数は変わらなかった。02-traffic-fsm の行は公開中の画面で確かめた。
 
 | 画面の操作 | AND | OR | `presses` | 種類 |
 | --- | --- | --- | --- | --- |
@@ -277,14 +272,13 @@ soft-fpga の写しに 90-switches を足し、Verilator 5.042 の PC のシミ�
 | `step()` の前に `press_btn()` を 2 回呼ぶ | `presses` は 1 しか増えない (3 → 4) | 動かして確かめた |
 | 02-traffic-fsm の歩行者ボタン | `click` して `step()` を 1 回 (または `sim_run_n(1)` を 1 回) 呼ぶと、欄の `btn_req` が 1 になる | 動かして確かめた |
 
-- 2 回呼んでも 1 回にしかならないのは、`pending_btn` が「押したかどうか」の 1 ビットしか持たないから。この画面では、描き替えの 1 回の間に BTN を 2 回押すと 1 回に数える。人の指でそこまで速く 2 回押すことはまず無いので、この例では数を持たせなかった
-- 実物のボタンにはチャタリング (押した瞬間に接点が何度も開閉する) があり、1 回押しても何回にも数える。画面のボタンには起きない。実物の対策は 6-3 で扱う
+- 1 回にしかならないのは、`pending_btn` が「押したかどうか」の 1 ビットだから。描き替えの 1 回の間に BTN を 2 回押すと 1 回に数えるが、人の指でそこまで速く押すことはまず無いので、数は持たせなかった
+- 実物のボタンにはチャタリング (押した瞬間に接点が何度も開閉する) があり、1 回押しても何回にも数える。画面のボタンには起きない (実物の対策は 6-3)
 
 ## シミュレーションでの確かめ (対象外を含む)
 
-本文の `sw_gates.v` と C++ のハーネスを取り出し、PC 用の Verilator 5.042 で組んで、本文の筋書きを `sim/07-screen-switches-tb.cpp` から流した
-(`sim/07-screen-switches.v`、`sim/07-screen-switches-harness.cpp`)。02-traffic-fsm の歩行者ボタンの道筋は、
-soft-fpga の ac6b663 の `harness.cpp` を読んで確かめた (4-4 のシミュレーションでも `press_btn()` の次の `step()` だけ `btn` が 1 になっている)。
+本文の `sw_gates.v` とハーネス (`sim/07-screen-switches.v`、`sim/07-screen-switches-harness.cpp`) を PC の Verilator 5.042 で組み、筋書きを `sim/07-screen-switches-tb.cpp` から流した。
+02-traffic-fsm の道筋は ac6b663 の `harness.cpp` を読んで確かめた (4-4 のシミュレーションでも `press_btn()` の次の `step()` だけ `btn` が 1)。
 JS と画面 (`index.html`、Emscripten のビルド) は動かしていない。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
@@ -296,7 +290,7 @@ JS と画面 (`index.html`、Emscripten のビルド) は動かしていない�
 | 図 1 の筋書きで出力が変わる `step` | 3 で OR = 1、7 で AND = 1、10 で `presses` = 1、14 で 2、17 で AND = 0 | 同じ | 合った |
 | `press_btn()` を 2 回呼んでから `step()` | `presses` は 1 しか増えない | 1 | 合った |
 | 図 1 の edges | スイッチは立ち上がりの 0.5 ms 前に変わる | 筋書きの `step` に 0.5 ms を引いた値と一致 | 合った |
-| 02-traffic-fsm の `btn_req` を画面から押す | `click` して `step()` 1 回で 1 | `harness.cpp` の `press_btn()` と `step()` の読みで同じ (画面のクリックは対象外) | 合った (画面は対象外) |
+| 02-traffic-fsm の `btn_req` を画面から押す | `click` して `step()` 1 回で 1 | `harness.cpp` を読んで同じ | 合った (画面のクリックは対象外) |
 | Emscripten の `EXPORTED_FUNCTIONS` のリンクエラー、画面の AND・OR の丸 | 手順 2・5 | Emscripten とブラウザが要る | 対象外 |
 
 ## 出典

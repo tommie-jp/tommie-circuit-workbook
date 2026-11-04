@@ -160,6 +160,11 @@ parts:
     at: top
     label: 検波出力 (02-radio.md)
     pins: [OUT, GND]
+  AD:
+    type: device
+    at: top
+    label: Analog Discovery 3
+    pins: [1+, 1-]
   MCU: pico2 @ h5
   C1: capacitor/ceramic d29 d34 0.1u
   Ra: resistor a34 +t34 220k
@@ -173,9 +178,8 @@ wires:
   - c34 -- c39 blue
   - d39 -- d44 blue
   - b34 -- b14 white
-notes:
-  - circle b14 orange
-  - text tiny ink: "橙の丸はオシロ (AD3) の CH1 を当てる ADC 入力 (ADC0)。黒い線は GND"
+  - AD.1+ -- a14 orange
+  - AD.1- -- -t16 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/08-mcu.svg)
@@ -233,7 +237,7 @@ notes:
 | --- | --- |
 | 9 列 | Pico 2 の 3V3 (36 番) から赤い線で上の + レールへ |
 | 12 列 | AGND (33 番) から黒い線で上の − レールへ |
-| 14 列 | GP26 (31 番)。`b14` から白い線で 34 列へ |
+| 14 列 | GP26 (31 番)。`b14` から白い線で 34 列へ。`a14` に AD3 の 1+ (橙) |
 | 29〜31 列 | 検波出力の OUT (白) を `a29`、GND (黒) を − レールの 31 列へ |
 | 29〜34 列 | C1 (`d29` と `d34`)。34 列が節点 |
 | 34 列 | Ra (`a34` から + レール)。`b34` から GP26 への白い線 |
@@ -270,7 +274,7 @@ notes:
 
 ## 測定値のグラフとスペクトル
 
-計器は Analog Discovery 3 (AD3)。入力は ADC0 のピン (橙の丸) に CH1 を当て、GND のクリップを − レールにつなぐ。
+計器は Analog Discovery 3 (AD3)。図2 のとおり、Scope の 1+ (橙) を ADC0 (GP26) の 14 列の `a14` に、1− (黒) を上の − レールの 16 列につなぐ (図2b では橙の丸 `n17` と黒い丸 `o11`)。
 
 ### 前処理の周波数特性
 

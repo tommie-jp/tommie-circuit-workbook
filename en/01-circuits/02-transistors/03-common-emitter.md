@@ -6,7 +6,7 @@ title: Common-Emitter Amplifier (Self-Bias)
 tier: 50
 source: 自作
 board: BB
-ja: 09fec6085563f7355a0758653bac45c7170f6c8b
+ja: d5aefc86346d77218a5c42b680b99df1de116697
 ---
 
 # 2-3 Common-Emitter Amplifier (Self-Bias)
@@ -21,7 +21,7 @@ current is called the **operating point**, and setting the operating point is ca
 `R1`/`R2` voltage divider sets the base voltage, and the resistor `RE` in the emitter keeps the operating point from
 moving even when hFE varies from one transistor to another (self-bias). When the collector current tries to
 increase, the voltage across `RE` rises, the base-emitter voltage falls, and the current is pulled back.
-Because a voltage divider sets the base, 2-8 calls this form divider bias and compares it with other methods.
+2-8 calls this form divider bias and compares it with other methods.
 
 ## Schematic
 
@@ -64,14 +64,12 @@ style:
 
 ![Schematic](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/02-transistors/circuit/03-common-emitter.svg)
 
-The `+5V` in Fig. 1 is the supply output V+ of the Analog Discovery (set it to 5 V in Supplies in WaveForms).
-The input goes from W1 to `CIN`, and CH2 reads the input while CH1 reads the output. `RE` (the emitter resistor)
-stabilizes the operating point, and `CE` (the bypass capacitor) lets only the AC bypass `RE` so that the gain is at its
-maximum. The `R1`/`R2` voltage divider sets the operating point.
+The input goes from W1 to `CIN`, and CH2 reads the input while CH1 reads the output. `CE` (the bypass capacitor)
+lets only the AC bypass `RE` so that the gain is at its maximum.
 
 With the values commonly used for a 9 V supply (R1 = 47 kΩ), a 5 V supply would pull Vb down by almost 0.9 V and leave
 only about 0.2 V at Ve, so the operating point would swing widely with the spread in hFE.
-Therefore **R1 was lowered to 20 kΩ** to restore the open-circuit voltage of the divider.
+Therefore **R1 was lowered to 20 kΩ**.
 
 - Open-circuit voltage of the divider: 5 V × 10k/30k ≈ **1.67 V** (the divider current of 167 µA is much larger than
   the base current, so this approximation is fine)
@@ -83,8 +81,7 @@ Therefore **R1 was lowered to 20 kΩ** to restore the open-circuit voltage of th
   base-emitter voltage changes by 1 V (the transconductance): gm = Ic / 26 mV (26 mV is the thermal voltage seen in 2-2) ≈ 35.8 mA/V
   → Av ≈ −35.8m × 2.2k ≈ **−79 times** (it **inverts**. Input 10 mVpp → output
   about 790 mVpp, calculated value)
-- With CE removed (`RE` now acts), Av ≈ −RC/RE = −2.2k/1k ≈ **−2.2 times**.
-  This comparison shows the effect of the bypass clearly
+- With CE removed (`RE` now acts), Av ≈ −RC/RE = −2.2k/1k ≈ **−2.2 times**
 
 ## Wiring diagram
 
@@ -140,8 +137,7 @@ As in Fig. 2, the 5 V goes from the supply output V+ (red) of the Analog Discove
 ## Viewing on the oscilloscope
 
 Set W1 to a 1 kHz, 10 mVpp sine wave. Put CH2 (input) at 2 mV/div and CH1 (output) at 200 mV/div
-side by side (the scales differ by a factor of 100, so on the screen the input at 5 divisions and the output at
-4 divisions look about the same height).
+side by side.
 
 ```scope
 # Oscilloscope screen (tommie-fence scope fence)
@@ -155,13 +151,12 @@ measure: [vpp, freq, phase]
 
 ![Oscilloscope screen](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/02-transistors/scope/03-common-emitter.svg)
 
-In Fig. 3, CH1 is about 790 mVpp, about 79 times CH2 (10 mVpp). CH1 has a trough where CH2 has a peak (phase 180°)
-— it is plain to see that this is an inverting amplifier. 10 mVpp is a small setting for W1 of the AD, so if the
+In Fig. 3, CH1 is about 790 mVpp, about 79 times CH2 (10 mVpp). CH1 has a trough where CH2 has a peak (phase 180°, inverting amplification). 10 mVpp is a small setting for W1 of the AD, so if the
 waveform looks finely disturbed, use Average.
 
 ## Frequency response on the VNA
 
-Instead of W1, CH1 and CH2 of the AD, connect a VNA (this book's standard is the LiteVNA64) (Fig. 4) and look at the
+Instead of W1, CH1 and CH2 of the AD, connect a VNA (LiteVNA64) (Fig. 4) and look at the
 transmission (S21) from 50 kHz to 100 MHz (Fig. 5).
 How to read S21, S11 and the Smith chart, and the THRU calibration, are the same as in 2-2.
 
@@ -174,7 +169,6 @@ How to read S21, S11 and the Smith chart, and the THRU calibration, are the same
   amplifier with a gain of 79 should stay within a few mV. **Stack two 20 dB SMA attenuators (40 dB in total) on CH0
   and calibrate THRU with them attached** (the attenuators drop out in the calibration). With 40 dB the amplitude at the base is
   about 6 mVpp (with one 20 dB attenuator it is about 55 mVpp, the collector current saturates and the waveform is crushed)
-- The power supply is the V+ (5 V) of the AD as before
 
 ```breadboard
 # Breadboard wiring diagram (tommie-fence breadboard fence)
@@ -221,7 +215,7 @@ wires:
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/02-transistors/breadboard/03-common-emitter-2.svg)
 
 Fig. 5 is a graph of S21 **calculated** by replacing the transistor with a small-signal model (hybrid π)
-(it is not a VNA screen). If you measure, a line of the same shape should appear on the VNA screen.
+(it is not a VNA screen).
 
 ```graph
 # Graph (tommie-fence graph fence)
@@ -290,7 +284,7 @@ notes:
 - The dashed 0 dB line is the through connection, with CH0 and CH1 joined directly. At low frequency S21 is **about +10.6 dB
   (|S21| ≈ 3.4) with phase 180°** (inverted). It is much smaller than the 79 times (+38 dB) seen on the oscilloscope because
   **the 50 Ω of CH1 loads the collector through `COUT`**. The gain falls to gm × (RC ‖ 50 Ω)
-  = 35.8 mA/V × 48.9 Ω ≈ **1.75 times** (50 Ω is far smaller than RC = 2.2 kΩ)
+  = 35.8 mA/V × 48.9 Ω ≈ **1.75 times**
 - On the input side, the input impedance of the amplifier seen from the 50 Ω of CH0 is as high as R1 ‖ R2 ‖ β·re
   = 6.7 kΩ ‖ 4.2 kΩ ≈ **2.6 kΩ**. It hardly draws any current from the 50 Ω, so the base gets about twice the voltage it would get
   when connected directly to a 50 Ω line. S21 ≈ 2 × 1.75 ≈ 3.4 (+10.6 dB) is the product of these two.
@@ -305,7 +299,7 @@ notes:
     is for V<sub>CE</sub> of 10 V and I<sub>C</sub> of 1 mA, so for this circuit (0.93 mA, about 2 V) around 45 MHz was assumed.
     Because gm is large, the base-emitter capacitance Cπ = gm / (2π fT) ≈ 127 pF is large
   - C<sub>ob</sub> (Cµ) is 4 pF at a VCB of about 1.3 V. With the Miller effect (the capacitance between base and collector looks larger by the
-    gain) it appears as about 11 pF, (1 + gm × 48.9 Ω) ≈ 2.8 times larger. With the 50 Ω load the gain is small, so the Miller effect is much lighter than when the load is 2.2 kΩ (about 80 times)
+    gain) it appears as about 11 pF, (1 + gm × 48.9 Ω) ≈ 2.8 times larger (much lighter than the about 80 times with a 2.2 kΩ load)
   - The sum is charged through the base spreading resistance (rbb′ about 50 Ω) and the 50 Ω of the source, so
     1 / (2π × about 100 Ω × about 138 pF) ≈ 12 MHz gives a pole (the frequency where the gain starts to fall)
   - The clip lead of the SMA cable (about 80 nH per 10 cm) and the stray capacitance of the breadboard holes (a few pF per spot)
@@ -341,8 +335,7 @@ markers:
 
 ![NanoVNA screen](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/02-transistors/vna/03-common-emitter.svg)
 
-- Fig. 5 and Fig. 6 are calculated, not measured. After measuring, put the VNA's Touchstone file (`.s2p`) next to the file of this exercise
-  and write `data: <file name>.s2p` in the fence of Fig. 6, and the measured line is drawn over it as a solid line (the ideal turns into a dashed line)
+- Fig. 5 and Fig. 6 are calculated, not measured. After measuring, put the Touchstone file (`.s2p`) next to the file of this exercise and overlay it on Fig. 6 with `data:`
 
 ## Parts
 
@@ -386,7 +379,7 @@ S21 uses the VNA arrangement with 50 Ω source and load (small signal, without t
 | S21 (13 MHz) | +7.6 dB (the −3 dB point) | +7.6 dB | Match |
 | S21 (50 MHz) | about −1.0 dB | −1.7 dB | Match (Fig. 5 includes the 80 nH lead and 5 pF stray capacitance) |
 
-The emitter and collector differ by 0.07 to 0.15 V because of the difference in the model's V<sub>BE</sub>, within 10 %. This stays within the "about" of the text.
+The differences at the emitter and collector (0.07 to 0.15 V) are within 10 % and stay within the "about" of the text.
 
 ## Sources
 

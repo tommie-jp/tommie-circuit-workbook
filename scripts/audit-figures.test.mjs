@@ -64,3 +64,8 @@ test('reports an entry longer than the limit of its tier', () => {
   assert.equal(lengthOver(long, 200), null);
   assert.equal(lengthOver(long, 999), null);
 });
+
+test('does not count a fence indented inside a list item', () => {
+  const text = '---\ntier: 50\n---\n- 手順\n\n  ```bash\n  npm run all\n  ```\n';
+  assert.equal(proseLength(text), '-手順'.length);
+});

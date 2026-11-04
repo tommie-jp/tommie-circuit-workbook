@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 古
-ja: 7d42c2d620fb7ef87fb3e1933bbd862522ff6844
+ja: 55292dc0a557dd515677e7482cae96a6be146295
 ---
 
 # 9-3 One-Transistor Radio — RF Amplification and Diode Detection
@@ -148,14 +148,14 @@ wires:
   Put V+ (5 V of Supplies) in the bottom red rail (column 17) and GND in the bottom blue rail (column 19). Red rail = +5 V, blue rail = GND.
   At column 30 the top and bottom + rails are joined, and so are the − rails (from the top + rail to Rc, and from the top − rail to L1 and VC1).
 - In the front stage, column 12 collects the antenna, VC1, L1 and C1. The right pin of L1 (column 16) goes to the top − rail.
-- Q1 goes in row h of the lower block, in three adjacent columns (column 18 B, column 19 C, column 20 E). This spacing lets you insert it without
-  bending the pins much. Seen with its flat face toward you, the 2SC1815 has E, C, B from the left, so
+- Q1 goes in row h of the lower block, in three adjacent columns (column 18 B, column 19 C, column 20 E).
+  Seen with its flat face toward you, the 2SC1815 has E, C, B from the left, so
   with the flat face toward the upper block it reads B, C, E from the left. The emitter (column 20) goes to the bottom − rail.
 - The base (column 18) comes out to column 18 of the upper block with a short e–f wire, and the left pins of C1 and Rb go there.
   The collector (column 19) also comes out to column 19 of the upper block with an e–f wire, and goes to column 22 with a blue wire in row a.
   Column 22 collects the right pin of Rb, Rc and D1. Because B and C are adjacent, Rb is not run across directly; column 22 is used instead.
 - The right pin of Rc (column 26) goes to the top + rail. D1 crosses the gap at column 22, with the anode on top (collector) and
-  the cathode below (detector output). In column 22 of the lower block, the left pins of C3 and R3 line up, and terminal A of EAR goes through column 24 (`j24`) to column 22 (`j22`) (to reduce crossings with the wires of 1− and 2− of the AD3).
+  the cathode below (detector output). In column 22 of the lower block, the left pins of C3 and R3 line up, and terminal A of EAR goes through column 24 (`j24`) to column 22 (`j22`).
   The right pins of C3 and R3 (column 26) and terminal B of EAR go to the bottom − rail.
 - W1 of the AD3 (Analog Discovery 3) goes through RS (1 kΩ) to column 12 of the tuned circuit. This is for testing in place of broadcast waves,
   and you may disconnect the ANT wire when you use it. RS is inserted vertically across the gap (`e12` and `i12`), and W1 goes into column 12 of the lower half (`j12`). 1+ is the detector output (lower column 22, `h22`), 2+ is the collector of Q1 (lower column 19, `j19`), and 1−, 2− and GND go to the bottom − rail (columns 22, 23 and 19).
@@ -163,7 +163,7 @@ wires:
 
 ## Instrument settings
 
-The instrument is the Analog Discovery 3. One unit provides the power supply (V+ = 5 V of Supplies), the signal source (W1 of Wavegen) and the oscilloscope (Scope),
+The instrument is the Analog Discovery 3,
 and the 1 MHz carrier is within the range of Scope (10 MHz or less). The supply current is about I<sub>C</sub> ≈ 1.7 mA, within the about 50 mA of one supply channel,
 and within the 200 mA per hole of the breadboard. Turn VC1 to about 100 pF (f<sub>0</sub> ≈ 1.007 MHz).
 
@@ -188,7 +188,7 @@ cursors: [250us, 750us]
 
 ![Oscilloscope screen](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/09-rf/scope/03-one-transistor-radio.svg)
 
-- Fig. 3 is a screen based on an LTspice calculation (the 2SC1815 as a general-purpose model with BF = 200, and the 1N60 assumed to have IS = 0.2 µA and RS = 25 Ω). It is not a measurement.
+- Fig. 3 is a screen based on an LTspice calculation (the assumptions are in "Verification with LTspice" below). It is not a measurement.
 - CH2 (collector) shows a DC level of about 2.45 V (nearly the same as the 2.5 V operating point above) with the 1 MHz carrier on top. The amplitude swells and shrinks at 1 kHz,
   with a maximum of about 1.2 V<sub>p</sub>. The amplitude of the input tuned circuit is at most about 19 mV<sub>p</sub>, so the effective gain is about 60 times.
   It is smaller than the 98 times above because the load of D1, R3 and the earphone is added to the tank and Rc.
@@ -196,7 +196,7 @@ cursors: [250us, 750us]
 
 ### Looking at the tuned circuit alone with the VNA (supplement)
 
-The tuned circuit of L1 and VC1 is the same as in 9-2, and with VC1 turned to about 100 pF, f<sub>0</sub> is about 1.007 MHz.
+The tuned circuit of L1 and VC1 is the same as in 9-2.
 Even without broadcast waves or the signal of W1, you can measure f<sub>0</sub> and the sharpness of the dip as a dip in S21 by removing only the parallel L1 and VC1 from the circuit
 and inserting them in series between CH0 and CH1 of the LiteVNA64. How to connect, the screen you should see (figure) and how to read it are
 the same as in "Looking at the tuned circuit alone with the VNA" in 01-circuits/09-rf/02-crystal-radio.md (9-2). The dip moves when you turn VC1.
@@ -252,7 +252,7 @@ Q1 is a substitute model for the 2SC1815 (the same as in `sim/agc.cir`, with onl
 | Average and swing of the detector output (CH1) | About 3.0 V, 0.6 Vpp | 2.88 V, 0.54 Vpp (2.59–3.14 V) | Agrees to within about 10% |
 
 With BF = 250 (agc.cir as it is), the collector is 2.24 V and I<sub>C</sub> is 1.8 mA; the direction that a larger h<sub>FE</sub> raises the current and lowers the collector is as calculated.
-The operating point and the size of the gain agree, so the numbers in the text are not changed (the gain of 98 times was already written as "an upper limit that does not count the load of R3 and the earphone", and the effective value with D1 and C3 counted as the load is 40–68 times, as in the table above). The amplitudes in Fig. 3 (1.2 V, 0.6 Vpp) are, as above, 10–20% larger than the recalculation,
+The operating point and the size of the gain agree, so the numbers in the text are not changed (98 times is an upper limit that does not count the load, and the effective gain is 40–68 times, as in the table above). The amplitudes in Fig. 3 (1.2 V, 0.6 Vpp) are, as above, 10–20% larger than the recalculation,
 and are within a range that moves with the assumed transistor and coil losses, so read them as "rough guides". The VNA figure and reception of real broadcasts are outside the scope.
 
 ## Sources

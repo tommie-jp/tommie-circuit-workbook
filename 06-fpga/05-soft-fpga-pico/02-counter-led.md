@@ -45,8 +45,7 @@ f_clk = CLK_HZ x f_led = 100 000 x f_led
 回路は 2-7 の図1 (カウンタが HALF 回数えるたびに LED を反転する) と、2-7 の `blink.v` のまま。書き換えない。
 Pico 2 で動かすときに変えるのは `CLK_HZ` だけで、Verilator に `-GCLK_HZ=100000` を渡して決める。
 
-この題のビルドは 5-1 とまったく同じ。ファイル (`main.cpp`・`verilate.sh`・`CMakeLists.txt` ほか) も打つ物も、
-[5-1 の「ファイル」と「ビルドする」](01-verilator-on-pico.md#ファイル)のとおり。
+この題のビルドは、ファイルも打つ物も [5-1 の「ファイル」と「ビルドする」](01-verilator-on-pico.md#ファイル)のとおり。
 `verilate.sh` が `-GCLK_HZ=100000` を渡し、`main.cpp` は LED を GP14 に出す。5-1 で作った `build/blink_pico.uf2` (92 160 バイト) を Pico 2 に書けばよい。
 
 ### PC で主ループを数える
@@ -182,7 +181,7 @@ PC で回す確かめは手元の Verilator 5.042 で行った。`.uf2` の大�
 
 RP2350 のエミュレータ [picoemu](https://github.com/danish9661/pico-emulator) (`danish9661/pico-emulator`、MIT、コミット `b83786f`) に `.uf2` を載せ、Cortex-M33 の上で動かした。
 5-3 以降の題も、同じ手順で論理で決まる値を突き合わせた (各題の同じ名前の小節)。picoemu は機能の模型で、**周期・ジッタ・周波数などの実時間は対象外**にした。
-そのままでは 5-1 の `.uf2` が動かなかったので、picoemu に次の 4 か所を直す `sim/picoemu-m33.patch` を当てた。直したのは picoemu 側で、本文のプログラムではない。これとは別に、5-6 の `.uf2` が起動で止まったことから本文の誤りが見つかり、5-1 の `pico_tls.cpp` を直した (5-1 の `pico_tls.cpp` の説明)。
+そのままでは 5-1 の `.uf2` が動かなかったので、picoemu に次の 4 か所を直す `sim/picoemu-m33.patch` を当てた。直したのは picoemu 側で、本文のプログラムではない。これとは別に、5-6 の `.uf2` が起動で止まったことから 5-1 の `pico_tls.cpp` の誤りが見つかり、直した (5-23)。
 
 | # | picoemu のままの動き | 直し |
 | --- | --- | --- |

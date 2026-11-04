@@ -7,13 +7,13 @@ tier: 100
 source: 自作
 board: CB
 era: 古
-ja: 222ba005680078481b2186bc1f74abb850664286
+ja: c1699102ca71e0e20afb3d9818165494eb35fd8a
 ---
 
 # 9-18 Modulating the FM Transmitter with the AD Signal Generator — 1 kHz in Place of the Microphone
 
 **Build 9-4 (FM transmitter, 1 transistor) first.** This exercise checks the modulation of the 9-4 transmitter with signal generator W1
-of the AD3 in place of the microphone. How the circuit works, the layout of the islands on the copper-clad board, how the tinySA picks up the signal and the Radio Act cautions stay as in 9-4.
+of the AD3 in place of the microphone. How the circuit works, the layout of the islands on the copper-clad board and the Radio Act cautions stay as in 9-4, and how the tinySA picks up the signal stays as in 9-28.
 The circuit works at 80 MHz (the FM broadcast band), above 3 MHz, but the subject is the FM broadcast band and it is built on the same copper-clad board as 9-4, so it is placed at the Introductory tier.
 
 A voice is different every time, so to check how the modulation looks it is more repeatable to put in **a 1 kHz sine wave from signal generator W1 of the Analog Discovery 3 (AD3)** in place of

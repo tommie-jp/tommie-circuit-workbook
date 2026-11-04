@@ -48,6 +48,7 @@
 - { id: 2-17, tier: 200, board: —, device: SIM, title: 分周した信号をクロックに使わない理由 }
 - { id: 2-18, tier: 200, board: —, device: SIM, title: 初期値 — initial とリセットの違い }
 - { id: 2-19, tier: 200, board: —, device: SIM, title: パイプライン — 長い組み合わせをレジスタで切る }
+- { id: 2-20, tier: 200, board: BB, device: PICO, title: 7 セグのゴースト — 桁を替える間に消す時間を入れる }
 - { id: 3-1, tier: 50, board: —, device: SIM, title: テストベンチ — クロックとリセットを C++ から与える }
 - { id: 3-2, tier: 50, board: —, device: SIM, title: 波形を書き出して読む }
 - { id: 3-3, tier: 50, board: —, device: SIM, title: 期待値と比べる — 自分で合否を言うテストベンチ }
@@ -78,6 +79,7 @@
 - { id: 4-12, tier: 200, board: —, device: WEB, title: 8080 と CP/M — I/O のバスを見る }
 - { id: 4-13, tier: 200, board: —, device: WEB, title: GitHub Pages に載せる }
 - { id: 4-14, tier: 200, board: —, device: WEB, title: 命令エミュレータに無い信号 — T ステートを数える }
+- { id: 4-15, tier: 100, board: —, device: SIM, title: 中の信号を C++ から直に読む — Verilator の版で変わる名前 }
 - { id: 5-1, tier: 50, board: —, device: PICO, title: Pico 2 で Verilog を動かす仕組み — Verilator の C++ を Pico SDK でビルドする }
 - { id: 5-2, tier: 50, board: BB, device: PICO, title: カウンタを Pico 2 で回して LED を点ける }
 - { id: 5-3, tier: 50, board: BB, device: PICO, title: Verilog の入出力を GPIO につなぐ — 入力を読み、eval し、出力を書く }
@@ -100,13 +102,18 @@
 - { id: 5-20, tier: 200, board: BB, device: PICO, title: 速い所を PIO に任せる — UART の送信 }
 - { id: 5-21, tier: 200, board: BB, device: PICO, title: 最適化で何倍速くなるか }
 - { id: 5-22, tier: 200, board: —, device: PICO, title: 結線の表でゲートを真似る — Verilog を使わない方式 }
+- { id: 5-23, tier: 100, board: —, device: PICO, title: Pico SDK で通す手順を選ぶ — もう 1 つの手順と thread_local の置き場 }
+- { id: 5-24, tier: 100, board: —, device: SIM, title: 回路の規模を数える — yosys の合成と、PC で回した 1 クロック }
+- { id: 5-25, tier: 100, board: BB, device: PICO, title: TD4 で入力を使う — DIP スイッチの値に 1 を足して LED に出す }
+- { id: 5-26, tier: 100, board: —, device: PICO, title: $display・$finish・$readmemh を Pico で使う — ビルドして確かめ、ROM は initial に埋める }
+- { id: 5-27, tier: 100, board: BB, device: PICO, title: 7 セグと押しボタンを確かめる — エミュレータで数え方、実機で電流と跳ね }
 - { id: 6-1, tier: 50, board: —, device: SIM, title: 状態機械の書き方 — 状態のレジスタと、次の状態の case }
 - { id: 6-2, tier: 50, board: BB, device: PICO, title: 信号機 — 青・黄・赤と歩行者ボタン }
 - { id: 6-3, tier: 50, board: BB, device: PICO, title: 押しボタンのチャタリングを取る }
 - { id: 6-4, tier: 100, board: —, device: WEB, title: 系列検出 — 1011 を見つける (ムーアとミーリー) }
 - { id: 6-5, tier: 100, board: —, device: SIM, title: 状態の符号 — 2 進・ワンホット・グレイ }
-- { id: 6-6, tier: 100, board: BB, device: PICO, title: 時間を持つ状態機械 — 長押しと短押し }
-- { id: 6-7, tier: 100, board: BB, device: PICO, title: 99 秒タイマー — 設定・計数・鳴るの 3 状態、0 でブザー }
+- { id: 6-6, tier: 100, board: —, device: SIM, title: 時間を持つ状態機械 — 長押しと短押し }
+- { id: 6-7, tier: 100, board: —, device: SIM, title: 99 秒タイマー — 設定・計数・鳴るの 3 状態、0 でブザー }
 - { id: 6-8, tier: 100, board: —, device: SIM, title: 状態機械とデータパスを分ける — 掛け算を足し算の繰り返しで }
 - { id: 6-9, tier: 200, board: —, device: WEB, title: 自動販売機 }
 - { id: 6-10, tier: 200, board: —, device: SIM, title: valid と ready の受け渡し }
@@ -117,12 +124,15 @@
 - { id: 6-15, tier: 200, board: BB, device: PICO, title: 文字の LCD を初期化する手順 }
 - { id: 6-16, tier: 200, board: BB, device: PICO, title: 電子サイコロ }
 - { id: 6-17, tier: 100, board: BB, device: PICO, title: 99 秒タイマーを Pico 2 で動かす — Soft-FPGA の主ループとクロックの固定 }
+- { id: 6-18, tier: 100, board: BB, device: PICO, title: 長押しと短押しを Pico 2 で動かす — ボタン 1 つと LED 3 個 }
+- { id: 6-19, tier: 100, board: BB, device: PICO, title: 99 秒タイマーを組む — 7 セグ 2 個の直結と圧電サウンダ }
+- { id: 6-20, tier: 100, board: —, device: SIM, title: 合成して回路の大きさを数える — 状態の符号と、制御器・データパスの分け方 }
 - { id: 7-1, tier: 50, board: BB, device: PICO, title: UART の送信 — ボーレートの分周とシフトレジスタ }
 - { id: 7-2, tier: 50, board: BB, device: PICO, title: UART の受信 — 16 倍で刻んでビットの真ん中を読む }
 - { id: 7-3, tier: 50, board: BB, device: PICO, title: AD3 の Protocol で UART の字を読む }
-- { id: 7-4, tier: 100, board: BB, device: PICO, title: SPI のマスタ }
-- { id: 7-5, tier: 100, board: BB, device: PICO, title: I2C のマスタ — 温度センサーを読む }
-- { id: 7-6, tier: 100, board: BB, device: PICO, title: ボーレートのずれは何 % まで許されるか }
+- { id: 7-4, tier: 100, board: —, device: SIM, title: SPI のマスタ }
+- { id: 7-5, tier: 100, board: —, device: SIM, title: I2C のマスタ — 温度センサーを読む }
+- { id: 7-6, tier: 100, board: —, device: SIM, title: ボーレートのずれは何 % まで許されるか }
 - { id: 7-7, tier: 100, board: BB, device: PICO, title: エコーバック — 受けた字を返す }
 - { id: 7-8, tier: 200, board: BB, device: PICO, title: SPI のスレーブ — 74HC595 を真似る }
 - { id: 7-9, tier: 200, board: BB, device: PICO, title: I2C のスレーブ }
@@ -134,6 +144,9 @@
 - { id: 7-15, tier: 200, board: BB, device: PICO, title: マンチェスタ符号 }
 - { id: 7-16, tier: 200, board: —, device: SIM, title: CRC を回路で計算する }
 - { id: 7-17, tier: 200, board: BB, device: PICO, title: Soft-FPGA の UART は何 bps まで出るか }
+- { id: 7-18, tier: 100, board: BB, device: PICO, title: SPI のマスタを Pico 2 に載せる — 74HC595 の LED と AD3 で見る }
+- { id: 7-19, tier: 100, board: BB, device: PICO, title: I2C の温度センサーを Pico 2 で読む — LM75 を組んで AD3 で見る }
+- { id: 7-20, tier: 100, board: BB, device: PICO, title: ボーレートのずれを Pico 2 で作り、AD3 で読めるかを見る }
 - { id: 8-1, tier: 50, board: —, title: FPGA の中身 — LUT とフリップフロップと配線 }
 - { id: 8-2, tier: 50, board: —, device: FPGA, title: おすすめの FPGA ボード — 規模・出来ること・価格・情報の多さで比べる }
 - { id: 8-3, tier: 50, board: BB, device: FPGA, title: ボードと書き込みの道具をつなぐ }
@@ -155,6 +168,9 @@
 - { id: 8-19, tier: 200, board: —, device: FPGA, title: HDMI に絵を出す }
 - { id: 8-20, tier: 200, board: BB, device: FPGA, title: 5 V の回路とつなぐ — レベル変換 }
 - { id: 8-21, tier: 200, board: —, device: FPGA, title: 配置を図で見る }
+- { id: 8-22, tier: 100, board: BB, device: FPGA, title: TD4 を FPGA で動かす — TD4.v を変えずに、分周した 5 Hz をクロックに }
+- { id: 8-23, tier: 100, board: —, device: FPGA, title: 使われないレジスタは合成で消える — TD4 の 17 ビットが 12 個になる理由 }
+- { id: 8-24, tier: 100, board: —, device: FPGA, title: ROM の初期値を $readmemh で入れる — ブロック RAM に入れるか LUT にするか }
 - { id: 9-1, tier: 50, board: —, device: SIM, title: セットアップとホールド — クロックの前後で動かしてはいけない時間 }
 - { id: 9-2, tier: 50, board: BB, device: FPGA, title: 外から来る信号はフリップフロップ 2 段で受ける }
 - { id: 9-3, tier: 100, board: —, device: FPGA, title: 最高の動作周波数 — タイミングの報告を読む }
@@ -169,6 +185,7 @@
 - { id: 9-12, tier: 200, board: BB, device: FPGA, title: クロックのスキューとジッタ }
 - { id: 9-13, tier: 200, board: BB, device: FPGA, title: 外の IC とのセットアップ — 入出力の遅れ }
 - { id: 9-14, tier: 200, board: BB, device: PICO, title: Soft-FPGA にタイミングはあるか — 計算の順と遅れ }
+- { id: 9-15, tier: 100, board: —, device: SIM, title: リングオシレータの模型 — 遅れの無いシミュレーションでは発振しない }
 - { id: 10-1, tier: 50, board: —, device: SIM, title: ROM — 配列と $readmemh }
 - { id: 10-2, tier: 50, board: —, device: SIM, title: RAM — クロックに合わせて読み書きする }
 - { id: 10-3, tier: 100, board: —, device: SIM, title: FIFO }
@@ -203,6 +220,8 @@
 - { id: 11-16, tier: 300, board: BB, device: PICO, title: PicoRV32 を Pico 2 の Soft-FPGA で動かす — 1 秒に何命令か測る }
 - { id: 11-17, tier: 300, board: BB, device: FPGA, title: PicoRV32 を実物の FPGA に載せる — 同じ機械語を Soft-FPGA と比べる }
 - { id: 11-18, tier: 300, board: BB, device: PICO, title: Pico 2 の中の RISC-V (Hazard3) で同じ機械語を走らせる }
+- { id: 11-19, tier: 100, board: —, device: WEB, title: TD4 の中をブラウザの画面に出す — ハーネスにレーンを足す }
+- { id: 11-20, tier: 200, board: —, device: FPGA, title: 6502 の FPGA を PC で確かめる — UART のピンの試験台と合成 }
 - { id: 12-1, tier: 300, board: —, device: SIM, title: リバーシのアクセラレータ — 合法手と裏返しを回路で }
 - { id: 12-2, tier: 300, board: BB, device: PICO, title: リバーシを UART で PC と対戦させる }
 - { id: 12-3, tier: 300, board: —, device: WEB, title: Pong — ゲートだけで動くゲーム }
@@ -211,3 +230,5 @@
 - { id: 12-6, tier: 300, board: BB, device: FPGA, title: 小さいロジックアナライザを作る }
 - { id: 12-7, tier: 300, board: —, title: Pong とテレビの画面 — 1972 年の回路の規模と NTSC の走査 }
 - { id: 12-8, tier: 300, board: BB, device: PICO, title: リバーシを PC から指す — play.py で対戦し、200 局で回路と C を突き合わせる }
+- { id: 12-9, tier: 300, board: BB, device: PICO, title: リバーシの UART を Logic で読む — 読み下しの足し方と状態の 3 本 }
+- { id: 12-10, tier: 300, board: —, device: WEB, title: Pong の信号を Logic Analyzer で見る — 遊んでいる最中にトリガーで止める }

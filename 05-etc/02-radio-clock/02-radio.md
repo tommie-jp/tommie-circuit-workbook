@@ -139,11 +139,11 @@ style:
 title: 図2 中波 AM 受信機のブレッドボード
 board: half
 parts:
-  PS:
+  AD:
     type: device
     at: top
-    label: 電源 5V
-    pins: [+5V, GND]
+    label: Analog Discovery 3
+    pins: [2+, V+, GND, 2-, 1-, 1+]
   BAR:
     type: device
     at: top
@@ -177,14 +177,18 @@ parts:
   C4: capacitor/ceramic a27 -t27 0.01u
   R5: resistor a29 -t29 100k
 wires:
-  - PS.+5V -- +t1 red
-  - PS.GND -- -t1 black [v2, h-52]
-  - VC1.B -- -t2 black [v10, h-108]
-  - VC1.A -- a3 yellow [v18, h-149]
+  - AD.V+ -- +t12 red
+  - AD.GND -- -t16 black
+  - AD.2+ -- b10 green
+  - AD.2- -- -t18 black
+  - AD.1- -- -t26 black
+  - AD.1+ -- a28 orange
+  - VC1.B -- -t2 black [v10, h18]
+  - VC1.A -- a3 yellow [v12, h-22]
   - c3 -- c4 yellow
-  - BAR.TOP -- a4 yellow [v26, h-196]
-  - BAR.TAP -- a5 purple [v34, h-216]
-  - BAR.GND -- -t8 black [v42, h-196]
+  - BAR.TOP -- a4 yellow [v20, h-66]
+  - BAR.TAP -- a5 purple [v30, h-86]
+  - BAR.GND -- -t8 black [v40, h-64]
   - c6 -- c7 blue
   - b13 -- b14 green
   - c17 -- c19 blue
@@ -208,13 +212,7 @@ notes:
   - text f23 tiny blue bold left: 約 0.34 V
   - arrow f27 e27 blue
   - text f27 tiny blue bold right: 約 3 V
-  - circle c10 green
-  - text c11 small green left: CH2
-  - circle e27 orange
-  - text e28 small orange left: CH1
-  - circle -t15 ink
   - text tiny blue: "青い数字は計算値 (hFE 200、無信号のとき)。電圧は GND から"
-  - text tiny ink: "オシロ (AD3): 橙の丸は CH1 (検波出力)、緑の丸は CH2 (Q1 のコレクタ)、黒い丸は GND"
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/02-radio.svg)
@@ -318,12 +316,12 @@ notes:
 
 図2 はブレッドボード、図2b は同じ回路をユニバーサル基板に組む図。次の説明は図2 のもので、図2b は「ユニバーサル基板に組むとき」に書く。
 
-半分の大きさ (30 列) のブレッドボード 1 枚に収まる。電源の 5 V は左上から、上の赤いレール (+) と青いレール (−) の
-左端へ入れる。部品の電源側と GND 側のピンは、それぞれのレールまで縦に 1 本で届く。
+半分の大きさ (30 列) のブレッドボード 1 枚に収まる。電源の 5 V は AD3 の Supplies の V+ から (電流は約 1.6 mA)、上の赤いレール (+) の 12 列と青いレール (−) の 14 列へ入れる。
+部品の電源側と GND 側のピンは、それぞれのレールまで縦に 1 本で届く。
 
 | 場所 | 挿すもの |
 | --- | --- |
-| 1 列 (上のレール) | 電源の + (赤) と GND (黒) |
+| 12・14 列 (上のレール) | AD3 の V+ (赤) と GND (黒) |
 | 2 列 (上のレール) | VC1 の B 端子 (黒)。− レール |
 | 3・4 列 | 同調回路の上端。バリコンの A (黄) を `a3` に、フェライトバーの TOP (黄) を `a4` に挿し、3 列と 4 列を黄の線 (`c3`〜`c4`) でつなぐ |
 | 5 列 | フェライトバーのタップ (紫) を `a5` に、C1 の左リードを `d5` に |
@@ -380,13 +378,13 @@ notes:
 
 **計器は Analog Discovery 3 (AD3) に決める。** 見たいのは 440 Hz の音声と 594 kHz の搬送波で、どちらも AD3 の範囲 (30 MHz まで) に入る。入力は 1 MΩ で、Q1 のコレクタ (2.2 kΩ) に当てても負荷がほとんど増えず、FFT の分解能 (最小 23 Hz) で 440 Hz 離れた側波も分けられる。tinySA Ultra は使わない。入力が 50 Ω で、高インピーダンスの節点に直接つなげない。通常モードが 100 kHz からなので、440 Hz の音声が見えない。分解能 (RBW) の最小も 200 Hz で、側波を分けにくい。
 
-Analog Discovery 3 のオシロスコープを、BNC アダプタを付けて使う。プローブの先を次の場所に当て、GND のクリップを黒い丸の − レール (15 列) につなぐ。
+Analog Discovery 3 のオシロスコープを、BNC アダプタを付けて使う。図2 の AD3 の箱の 1+・2+ の線がプローブの先、1−・2− の黒い線が GND のクリップだ。
 
-| チャンネル | 場所 (図の丸) | 見えるもの |
+| チャンネル | 場所 (図2 の線) | 見えるもの |
 | --- | --- | --- |
-| CH1 (橙) | 27 列の `e27` (検波出力) | 約 3 V の直流に、放送の音声 (包絡線) が乗る |
-| CH2 (緑) | 10 列の `c10` (Q1 のコレクタ) | 約 3.4 V の直流に、594 kHz の AM 波が乗る。同調を合わせると振幅が大きくなる |
-| GND クリップ | 15 列の − レール | 基準 (0 V) |
+| CH1 (橙) | 28 列の `a28` (検波出力。27 列と白い線でつながる) | 約 3 V の直流に、放送の音声 (包絡線) が乗る |
+| CH2 (緑) | 10 列の `b10` (Q1 のコレクタ) | 約 3.4 V の直流に、594 kHz の AM 波が乗る。同調を合わせると振幅が大きくなる |
+| 1−・2− (黒) | 26 列・15 列の − レール | 基準 (0 V) |
 
 - 値は計算値の動作点 (図の青い数字) で、**波の大きさは受信した電波の強さで変わる** (測っていない)
 - CH2 のプローブは、高周波の部分に容量 (数 pF〜十数 pF) を足すので、同調が少しずれる。測るときだけ当て、離したら合わせ直す

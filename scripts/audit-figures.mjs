@@ -98,10 +98,10 @@ export function auditInstrument(fence, block) {
 /** 段ごとの本文の字数の上限 (README の「1 題の長さ」)。必須・入門 5,000 字、中級 8,000 字、発展 12,000 字。 */
 export const LENGTH_LIMITS = { 50: 5000, 100: 5000, 200: 8000, 300: 12000 };
 
-/** 本文の字数。front matter とフェンス (``` で囲んだ所) と画像の行を除き、空白を数えない。 */
+/** 本文の字数。front matter とフェンス (``` で囲んだ所。リストの中で字下げしたフェンスも) と画像の行を除き、空白を数えない。 */
 export function proseLength(text) {
   const body = text.replace(/^---\n[\s\S]*?\n---\n/, '');
-  const prose = body.replace(/^```[^\n]*\n[\s\S]*?^```\s*$/gm, '').replace(/^!\[.*$/gm, '');
+  const prose = body.replace(/^([ \t]*)```[^\n]*\n[\s\S]*?^\1```\s*$/gm, '').replace(/^!\[.*$/gm, '');
   return prose.replace(/\s/g, '').length;
 }
 

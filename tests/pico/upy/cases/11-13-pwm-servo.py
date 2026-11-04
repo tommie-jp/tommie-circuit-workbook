@@ -1,4 +1,4 @@
-PROGRAM = '01-circuits/11-microcontrollers/04-pwm-led-servo-2.py'
+PROGRAM = '01-circuits/11-microcontrollers/13-pwm-servo-1.py'
 BUDGET_US = 3_000_000
 
 

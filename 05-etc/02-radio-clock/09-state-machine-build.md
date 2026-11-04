@@ -1,14 +1,14 @@
 ---
 book: etc
 chapter: 2
-id: 2-10
+id: 2-9
 title: 時報の状態遷移を基板に組む — 4 ユニットの実体配線図と AD3 での試験
 tier: 300
 source: 自作
 board: [BB, PF]
 ---
 
-# 2-10 時報の状態遷移を基板に組む — 4 ユニットの実体配線図と AD3 での試験
+# 2-9 時報の状態遷移を基板に組む — 4 ユニットの実体配線図と AD3 での試験
 
 > [!WARNING]
 > **この題の実体配線図 (ブレッドボードとユニバーサル基板) は、まだ実際の回路で検証していない。** 配線は回路図のつながりを写し、check のネットリストで突き合わせたもので、組んで確かめてはいない。数値 (タイミング) も計算とシミュレーションで作ったもので、正しく動くかどうかは確実ではない。
@@ -162,7 +162,7 @@ wires:
   - a27 -- a24 pink
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/10-state-machine-build-1.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/09-state-machine-build-1.svg)
 
 ```perf
 # ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
@@ -356,7 +356,7 @@ wires:
   - al14 -- al12 purple
 ```
 
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/10-state-machine-build-1.svg)
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/09-state-machine-build-1.svg)
 
 - 図 1b: 9×15 cm のユニバーサル基板を横に置く (54 列 × 33 行)。+ の筋を上 (30 行)、GND の筋を下 (4 行) に通し、IC は左から U6 が `e15`、U5 が `v15`、U7 が `ag15`、U8 が `ar15` に向きをそろえて 1 列に並べた (回していない)。74HC74 の 1Q→2D と 1PRE→1CLR は胴の下 (半田面) で結ぶ。IC のあいだの列が縦の線で埋まるので、隣の IC へ渡る 4 本 (A5 の `aa13`〜`ae13`、B1 の `af13`〜`ah13`、NE440 の `ae14`〜`al14`、E440 の `aq13`〜`at13`) も半田面で胴の下を通す。信号線の道筋と他ユニットの箱のピンの並びは、交差が少なくなるように選んだ (+ と GND の筋と各 IC への電源の線が基板を区切るので、いくつかは跨ぐ)。check のネットリストは図 1 と同じ
 
@@ -446,7 +446,7 @@ wires:
   - i21 -- i15 green
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/10-state-machine-build-2.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/09-state-machine-build-2.svg)
 
 ```perf
 # ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
@@ -584,7 +584,7 @@ wires:
   - s9 -- s12 green
 ```
 
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/10-state-machine-build-2.svg)
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/09-state-machine-build-2.svg)
 
 - 図 2b: 7×9 cm のユニバーサル基板 (26 列 × 31 行)。IC は U11 が `f6`、U9 が `h24`、U10 が `r16` (U9・U10 は 180 度回した)。+5 V は上の `c` 行から U11 の VCC と U9 の ENT へ配り、U9 の中を通って VCC (`h24`) から U10 へ回す。GND は U9 の上の `d` 行の筋から右の縁の 25 列を下りて U10 へ、U10 から 10 列を上がって U11 へ回す。+ と GND の線は交わらない。半田面で胴の下を通す線は、どれも同じ IC の中の結線: U9 の CLR・B・ENP・ENT を VCC へ、U11 の使わないゲートの入力を GND へ、U10 の 1Y→3A と 2A→3B。U10 の 2A→3B (QD) の線は、ピンの並びの都合で QC・1Y・TO の線と交わる。ほかの交差は、信号が電源の枝を跨ぐ所。check のネットリストは図 2 と同じ
 
@@ -692,7 +692,7 @@ wires:
   - b26 -- b38 green
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/10-state-machine-build-3.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/09-state-machine-build-3.svg)
 
 ```perf
 # ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
@@ -871,7 +871,7 @@ wires:
   - at16 -- at17 green
 ```
 
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/10-state-machine-build-3.svg)
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/09-state-machine-build-3.svg)
 
 - 図 3b: 9×15 cm のユニバーサル基板を横に置く (54 列 × 33 行)。IC は U12 が `c20`、U13 が `q20`、U14 が `ae20`、U15 が `as20` で、信号の流れの順に横一列に向きをそろえて並べた (回していない)。+ の筋を上 (30 行)、GND の筋を下 (9 行) に通し、各 IC の VCC (左上) は上の筋へ、GND (右下) は下の筋へ短い枝で結ぶ。S3 の箱は上、ほかの箱は下に置いた。半田面で胴の下を通す線は、どれも同じ IC の中の結線: 4 個とも使わないゲートの入力を GND へ、U13 の 2A→3B (E440)、U14 の 2Y→3A。信号どうしが交わるのは、同じ箱へ行く 2 本のピンに挟まれたピン (U13 と U14 の 1B、U15 の 1A) へ、別の IC から線が来る所。ほかの交差は、信号が電源の枝を跨ぐ所。check のネットリストは図 3 と同じ
 
@@ -941,7 +941,7 @@ wires:
   - b23 -- b20 green
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/10-state-machine-build-4.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/09-state-machine-build-4.svg)
 
 ```perf
 # ユニバーサル基板の実体配線図 (tommie-fence の perf フェンス)
@@ -1065,7 +1065,7 @@ wires:
   - r4 -- r8 pink
 ```
 
-![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/10-state-machine-build-4.svg)
+![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/perfboard/09-state-machine-build-4.svg)
 
 - 図 4b: 5×7 cm のユニバーサル基板を横に置く (24 列 × 18 行)。IC は U16 が `k8` (180 度回した)、U17 が `n11` (回していない)。+ の筋を上 (14 行)、GND の筋を下 (3 行) に通し、U16 の VCC (右下) は 12 列を上がって + の筋へ、U17 の VCC (左上) は上の筋へ結ぶ。半田面で胴の下を通す線は、どれも同じ IC の中の結線: U16 の ENP→ENT (EN) と、U17 の 1Y→3A (S3)。信号どうしが交わるのは、QA と QB が U16 と U17 で同じ向きに並ぶ所と、U17 の 2Y→3B が胴の外を回るので OUT と 3A がそれを跨ぐ所。ほかの交差は、信号が電源の枝を跨ぐ所。check のネットリストは図 4 と同じ
 
@@ -1115,7 +1115,7 @@ wires:
   - AD.2- -- -t18 black
 ```
 
-![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/10-state-machine-build-5.svg)
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/breadboard/09-state-machine-build-5.svg)
 
 - 基板 1〜4 の電源 (5 V と GND) と、4 枚のブレッドボードの間の信号は、これまでの図のとおり。AD3 とつなぐのは、基板 1 の CLK・T440・T880 の入力と、基板 4 の OUT の出力
 - 押しボタン S1 (12 列) は +5 V につなぎ、T880 (8 列) へ渡す。R1 (10 kΩ) は、押さないとき T880 を L に保つプルダウン
@@ -1140,7 +1140,7 @@ cursors: [1.5s, 3.2s]
 measure: [vmax, vmin]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/10-state-machine-build.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/scope/09-state-machine-build.svg)
 
 ## 見るべき値
 

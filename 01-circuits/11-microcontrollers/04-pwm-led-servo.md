@@ -16,7 +16,7 @@ era: 今
 1 周期のうち H の時間の割合 (デューティ比) で「平均の電圧」や「角度」を伝える。
 3-6 では 555 で作った PWM を、ここではマイコンで作る。11-1 の L チカと同じ回路で LED を
 調光し、サーボモータ (信号で決めた角度まで回って止まるモータ) の角度も PWM の
-パルス幅で指定する。
+パルス幅で指定する。サーボを動かすプログラムと、GP14 のパルスの測り方は 11-13 に分けた。
 
 ## 回路図
 
@@ -147,7 +147,7 @@ wires:
 ## 計器の設定
 
 計器は AD3 のオシロ (Scope)。LED の PWM は 1 kHz の方形波で、デューティ比が変わるのは時間の波形でしか見えない。
-サーボの信号は周期 20 ms のうち 1〜2 ms しか H にならない細いパルスなので、同じくオシロで幅を測る。
+サーボの信号 (GP14) の測り方は 11-13。
 
 | 項目 | 値 |
 | --- | --- |
@@ -156,8 +156,7 @@ wires:
 | CH2 (2+) | GP14 (サーボ)。同じ 1 V/div |
 | 1−・2− | GND |
 | LED のとき (図4) | 時間レンジ 500 µs/div (1 画面 5 ms、5 周期)、トリガ CH1 の立ち上がり 1.65 V。カーソル X1 を H の中 (100 µs)、X2 を L の中 (600 µs) に置く。Duty の読みが 25% |
-| サーボのとき (図5) | 時間レンジ 500 µs/div、トリガ CH2 の立ち上がり 1.65 V。パルスの幅 (1.5 ms = 3 目盛) を目盛で読む。カーソル X1 を H の中 (750 µs)、X2 を L の中 (3 ms) に置く。周期 20 ms は 5 ms/div に替えると 2 周期見える |
-| Measurements | 図4: Frequency・Duty・Maximum。図5: Maximum・Minimum |
+| Measurements | Frequency・Duty・Maximum |
 
 ```scope
 # オシロスコープの画面 (tommie-fence の scope フェンス)
@@ -169,24 +168,11 @@ cursors: [100us, 600us]
 measure: [freq, duty, vmax]
 ```
 
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/scope/04-pwm-led-servo-1.svg)
-
-```scope
-# オシロスコープの画面 (tommie-fence の scope フェンス)
-title: 図5 GP14 のサーボ信号 — 周期 20ms、パルス幅 1.5ms (中央)
-time: 500us/div
-trigger: ch1 rising 1.65V at -4div
-ch1: {wave: pulse 50Hz 1.65V offset 1.65V duty 7.5%, range: 1V/div, position: -3div}
-cursors: [750us, 3ms]
-measure: [vmax, vmin]
-```
-
-![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/scope/04-pwm-led-servo-2.svg)
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/scope/04-pwm-led-servo.svg)
 
 - 図4 の読み値は Frequency 1 kHz、Duty 25.0% (H の幅 250 µs ÷ 周期 1 ms)、Maximum 3.30 V。X1 は H の中で 3.3 V、X2 は L の中で 0 V。「見るべき値」の表で 25% のとき LED の平均電流は約 1.0 mA。
   H の高さは 3.3 V (GP15 の出力)。デューティ比を 50% にすると H の幅は 500 µs になる
-- 図5 の H の幅は 1.5 ms (500 µs/div で 3 目盛) で、周期 20 ms の 7.5%。X1 は H の中で 3.30 V、X2 は L の中で 0 V。1.0 ms なら 5%、2.0 ms なら 10%。トリガを立ち上がりにするとパルスの始まりが左端に固定される
-- 2 つの図は理想の形。実機のエッジはなまり、H は 3.3 V に少し足りないことがある
+- 図は理想の形。実機のエッジはなまり、H は 3.3 V に少し足りないことがある
 
 ## プログラム
 
@@ -197,8 +183,8 @@ measure: [vmax, vmin]
 
 Pico 2 の PWM は、スライスと呼ぶ発生器がいくつか並んで受け持つ。1 つのスライスは A・B の
 2 本のピンに出せるが、周期 (周波数) は 2 本で共通になる。GP14 と GP15 は同じスライス 7 の
-A・B 出力なので、1 kHz の LED と 50 Hz のサーボを同時に出すことはできない。下の 2 つの
-プログラムは別々に使う (同時に使うなら、どちらかのピンを別のスライスのピンに替える)。
+A・B 出力なので、1 kHz の LED と 50 Hz のサーボを同時に出すことはできない。下の LED の
+プログラムと 11-13 のサーボのプログラムは別々に使う (同時に使うなら、どちらかのピンを別のスライスのピンに替える)。
 
 ### LED の調光
 
@@ -255,57 +241,6 @@ for duty in range(0, 65536, 4096):   # 徐々に明るく
     time.sleep(0.05)
 ```
 
-### サーボの角度
-
-C/C++ (Pico SDK): `main.c` (20 ms 周期、1 カウントを 1 µs にしてパルス幅をそのまま指定する)。
-分周比 150 でカウンタは 1 MHz (1 カウント 1 µs) で進み、`WRAP` を 19999 にすると 20000 カウント
-= 20 ms で 1 周期になる。レベルを 1500 にすれば H が 1500 µs = 1.5 ms 続く。
-
-```c
-#include "pico/stdlib.h"
-#include "hardware/pwm.h"
-
-#define SERVO_PIN 14
-#define WRAP 19999          // 20000 カウント = 20ms 周期
-
-static void set_pulse_us(uint16_t us) {
-    pwm_set_gpio_level(SERVO_PIN, us);   // 1 カウント = 1µs
-}
-
-int main(void) {
-    gpio_set_function(SERVO_PIN, GPIO_FUNC_PWM);
-    uint slice = pwm_gpio_to_slice_num(SERVO_PIN);
-    pwm_set_clkdiv(slice, 150.0f);     // 150MHz ÷ 150 = 1MHz (1 カウント 1µs)
-    pwm_set_wrap(slice, WRAP);
-    pwm_set_enabled(slice, true);
-
-    set_pulse_us(1500); sleep_ms(1000);   // 中央 (0°)
-    set_pulse_us(1000); sleep_ms(1000);   // -90°
-    set_pulse_us(2000);                   // +90°
-    while (true) tight_loop_contents();
-}
-```
-
-MicroPython: `duty_u16()` は 20 ms を 65535 とする割合で書くので、パルス幅 ms を
-`ms / 20 × 65535` に直す。
-
-```python
-from machine import Pin, PWM
-import time
-
-servo = PWM(Pin(14))
-servo.freq(50)          # 20ms周期
-
-def set_pulse_ms(ms):
-    servo.duty_u16(int(ms / 20 * 65535))
-
-set_pulse_ms(1.5)   # 中央 (0°)
-time.sleep(1)
-set_pulse_ms(1.0)   # -90°
-time.sleep(1)
-set_pulse_ms(2.0)   # +90°
-```
-
 ## 見るべき値
 
 LED の電流は、テスターの直流電圧レンジで R1 の両端を測り、330 Ω で割って求める
@@ -322,14 +257,6 @@ LED の電流は、テスターの直流電圧レンジで R1 の両端を測り
 平均電流はデューティ比にほぼ比例する (3.9 mA × デューティ比) が、人の目に見える明るさは
 比例しない。目は対数に近く反応するので、50% デューティは「半分の明るさ」には見えにくい。
 
-サーボのパルス幅と、プログラムに書く値:
-
-| パルス幅 | `pwm_set_gpio_level()` の値 (C/C++、1 µs 単位) | `duty_u16()` の値 (MicroPython、`int()` で切り捨てた計算値) | 角度の目安 |
-| --- | --- | --- | --- |
-| 1.0 ms | 1000 | 3276 | −90° |
-| 1.5 ms | 1500 | 4915 | 0° (中央) |
-| 2.0 ms | 2000 | 6553 | +90° |
-
 C/C++ は `PICO_BOARD=pico2` の `.uf2` までビルドが通ることを確かめた。
 実機では動かしていない。MicroPython は実行していない (未確認)。
 
@@ -344,9 +271,8 @@ LED は 1-1 と同じ仮定のモデル。実測ではない。
 | 50 % | 約 2.0 mA | 2.03 mA | 合う |
 | 100 % | 約 3.9 mA | 4.06 mA | 合う (11-1 と同じ差) |
 
-サーボのパルス幅と値は算術で確かめた。分周比 150 で 150 MHz → 1 MHz (1 カウント 1 µs)、`WRAP` 999 で 1 kHz、
-`WRAP` 19999 で 20 ms。`duty_u16()` の値は 1.0 ms: 1/20 × 65535 = 3276.75 → 3276、1.5 ms: 4915.1 → 4915、2.0 ms: 6553.5 → 6553 で、
-表と合う。16 段階の最後は 15 × 62.5 = 937.5 → 937 (約 94 %)。サーボの角度とトルクは SPICE の対象外。
+PWM の値は算術で確かめた。分周比 150 で 150 MHz → 1 MHz (1 カウント 1 µs)、`WRAP` 999 で 1 kHz。
+16 段階の最後は 15 × 62.5 = 937.5 → 937 (約 94 %)。
 
 ## プログラムでの確かめ
 
@@ -357,10 +283,8 @@ LED は 1-1 と同じ仮定のモデル。実測ではない。
 | LED: スライスとピン | GP15 はスライス 7 の B。GPIO の機能は PWM | C: Pico SDK のモック |
 | LED: 周期 | 1 kHz (1 ms) | C: Pico SDK のモック・MicroPython: `machine` のスタブ |
 | LED: デューティ | 最後の段は 937 / 1000 = 93.7 % (MicroPython は 61440 / 65535 = 93.75 %) | C: Pico SDK のモック・MicroPython: `machine` のスタブ |
-| サーボ: 周期 | 20 ms (50 Hz) | C: Pico SDK のモック・MicroPython: `machine` のスタブ |
-| サーボ: パルス幅 | 1.5 ms → 1.0 ms → 2.0 ms の順 (誤差 1 µs 未満) | C: Pico SDK のモック・MicroPython: `machine` のスタブ |
 
-見ていない物: サーボの実際の角度・別電源・LED の明るさ。PWM の出力は picoemu の GPIO の記録に出ないので、picoemu では見ていない
+見ていない物: 別電源・LED の明るさ。PWM の出力は picoemu の GPIO の記録に出ないので、picoemu では見ていない
 
 ## 出典
 

@@ -1,5 +1,5 @@
-// program: 01-circuits/11-microcontrollers/04-pwm-led-servo-2.c
-// 11-4 図 サーボ: GP14 (スライス 7 の A) に周期 20 ms、パルス幅 1.5 → 1.0 → 2.0 ms。
+// program: 01-circuits/11-microcontrollers/13-pwm-servo-1.c
+// 11-13 サーボ: GP14 (スライス 7 の A) に周期 20 ms、パルス幅 1.5 → 1.0 → 2.0 ms。
 #include "pico/stdlib.h"
 #include "hardware/pwm.h"
 #include <math.h>

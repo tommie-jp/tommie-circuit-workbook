@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: [BB, PF]
 era: 今
-ja: e6031bd8caf54208fa94c933d3e686ce495434c7
+ja: 74eb16c9194d08e467a5216cfd3ae07325ebefdc
 ---
 
 # 5-4 LDO — USB 5 V → 3.3 V
@@ -211,9 +211,8 @@ style:
   3.3 V strip and the GND strip. Cout is polarized, and the + side connects to row 17 (OUT). Rled (Q17, Q14) and
   Dled (Q12, Q9) are the 3.3 V indicator
 - The AD3 is not soldered. Only while measuring, clip it onto the pads of J2. 1+ goes to W6 (3.3 V), connected to VBUS,
-  and 1− to T6 on the GND strip. Both are circled in yellow. Both labels are in large bold red one row above their
-  circles (row 7; row 6 is avoided because the GND strip runs there): `AD3 1+` centered on W7, and `AD3 1-` ending at
-  T7 so that neither label runs off the right edge of the board. Measuring at the output connector shows whether the 3.3 V output is actually present. The AD only
+  and 1− to T6 on the GND strip. Both are circled in yellow, with bold red labels one row above their
+  circles (row 7; the GND strip runs along row 6). Measuring at the output connector shows whether the 3.3 V output is actually present. The AD only
   measures and supplies no power to this board
 - The wires are only vertical and horizontal, and no wires cross. The red wire from VBUS of J1 runs up the left edge
   (column B), so it does not cross the GND strip (row 6)

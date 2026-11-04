@@ -347,9 +347,8 @@ measure: [vpp, freq, phase]
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/14-iq/scope/05-tayloe-detector-3.svg)
 
-- 図5 は図3 と同じ設定で、W2 だけを 497 kHz にした。音は同じ 1 kHz で、振幅も同じ。
-  違うのは Q の位置だけで、I より 250 µs 遅れる (カーソル X2)。Phase は −90.0°
-- この符号の違いで、RF が LO の上 (499 kHz) か下 (497 kHz) かが分かる。I だけを見ていたら分からない
+- 図5 は図3 の W2 だけを 497 kHz にした。違うのは Q の位置だけで、I より 250 µs 遅れる (カーソル X2)。Phase は −90.0°
+- この符号の違いで、RF が LO の上 (499 kHz) か下 (497 kHz) かが分かる
 
 ```logic
 # ロジックアナライザの画面 (tommie-fence の logic フェンス)

@@ -45,18 +45,18 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | 0 | 道具と準備 | 5 | 7 | 11 | 11 | 7 |
 | 1 | 組み合わせ回路を Verilog で書く | 7 | 12 | 18 | 18 | 12 |
-| 2 | 順序回路 | 7 | 11 | 19 | 19 | 12 |
+| 2 | 順序回路 | 7 | 11 | 20 | 20 | 13 |
 | 3 | シミュレーションと検証 | 4 | 8 | 16 | 16 | 8 |
-| 4 | Soft-FPGA ブラウザ編 | 4 | 7 | 14 | 14 | 14 |
-| 5 | Soft-FPGA Pico 2 編 | 6 | 16 | 22 | 22 | 16 |
-| 6 | 状態機械 | 3 | 9 | 17 | 17 | 9 |
-| 7 | 通信 (UART・SPI・I2C) | 3 | 7 | 17 | 17 | 7 |
-| 8 | 実物の FPGA | 7 | 13 | 21 | 21 | 13 |
-| 9 | タイミング | 2 | 5 | 14 | 14 | 5 |
+| 4 | Soft-FPGA ブラウザ編 | 4 | 8 | 15 | 15 | 15 |
+| 5 | Soft-FPGA Pico 2 編 | 6 | 21 | 27 | 27 | 21 |
+| 6 | 状態機械 | 3 | 12 | 20 | 20 | 12 |
+| 7 | 通信 (UART・SPI・I2C) | 3 | 10 | 20 | 20 | 10 |
+| 8 | 実物の FPGA | 7 | 16 | 24 | 24 | 16 |
+| 9 | タイミング | 2 | 6 | 15 | 15 | 6 |
 | 10 | メモリと演算 | 2 | 4 | 14 | 14 | 4 |
-| 11 | CPU を作る | 0 | 2 | 10 | 18 | 12 |
-| 12 | 作品 | 0 | 0 | 0 | 8 | 8 |
-| **計** | | **50** | **101** | **193** | **209** | **127** |
+| 11 | CPU を作る | 0 | 3 | 12 | 20 | 14 |
+| 12 | 作品 | 0 | 0 | 0 | 10 | 10 |
+| **計** | | **50** | **118** | **212** | **230** | **148** |
 
 ## 第 0 章 道具と準備
 
@@ -120,6 +120,7 @@
 | 2-17 | 分周した信号をクロックに使わない理由 | 中級 | — | SIM |
 | 2-18 | 初期値 — initial とリセットの違い | 中級 | — | SIM |
 | 2-19 | パイプライン — 長い組み合わせをレジスタで切る | 中級 | — | SIM |
+| 2-20 | [7 セグのゴースト — 桁を替える間に消す時間を入れる](02-sequential/20-seven-seg-ghost.md) | 中級 | BB | PICO |
 
 ## 第 3 章 シミュレーションと検証
 
@@ -160,6 +161,7 @@
 | 4-12 | [8080 と CP/M — I/O のバスを見る](04-soft-fpga-web/12-8080-cpm-io-bus.md) | 中級 | — | WEB |
 | 4-13 | [GitHub Pages に載せる](04-soft-fpga-web/13-github-pages.md) | 中級 | — | WEB |
 | 4-14 | [命令エミュレータに無い信号 — T ステートを数える](04-soft-fpga-web/14-count-t-states.md) | 中級 | — | WEB |
+| 4-15 | [中の信号を C++ から直に読む — Verilator の版で変わる名前](04-soft-fpga-web/15-read-internal-signal.md) | 入門 | — | SIM |
 
 ## 第 5 章 Soft-FPGA Pico 2 編
 
@@ -187,6 +189,11 @@
 | 5-20 | 速い所を PIO に任せる — UART の送信 | 中級 | BB | PICO |
 | 5-21 | 最適化で何倍速くなるか | 中級 | BB | PICO |
 | 5-22 | 結線の表でゲートを真似る — Verilog を使わない方式 | 中級 | — | PICO |
+| 5-23 | [Pico SDK で通す手順を選ぶ — もう 1 つの手順と thread_local の置き場](05-soft-fpga-pico/23-build-choice-tls.md) | 入門 | — | PICO |
+| 5-24 | [回路の規模を数える — yosys の合成と、PC で回した 1 クロック](05-soft-fpga-pico/24-size-yosys-pc.md) | 入門 | — | SIM |
+| 5-25 | [TD4 で入力を使う — DIP スイッチの値に 1 を足して LED に出す](05-soft-fpga-pico/25-td4-input.md) | 入門 | BB | PICO |
+| 5-26 | [$display・$finish・$readmemh を Pico で使う — ビルドして確かめ、ROM は initial に埋める](05-soft-fpga-pico/26-system-tasks.md) | 入門 | — | PICO |
+| 5-27 | [7 セグと押しボタンを確かめる — エミュレータで数え方、実機で電流と跳ね](05-soft-fpga-pico/27-seg7-button-measure.md) | 入門 | BB | PICO |
 
 ## 第 6 章 状態機械
 
@@ -197,8 +204,8 @@
 | 6-3 | [押しボタンのチャタリングを取る](06-state-machines/03-debounce.md) | 必須 | BB | PICO |
 | 6-4 | [系列検出 — 1011 を見つける (ムーアとミーリー)](06-state-machines/04-sequence-detector.md) | 入門 | — | WEB |
 | 6-5 | [状態の符号 — 2 進・ワンホット・グレイ](06-state-machines/05-state-encoding.md) | 入門 | — | SIM |
-| 6-6 | [時間を持つ状態機械 — 長押しと短押し](06-state-machines/06-long-short-press.md) | 入門 | BB | PICO |
-| 6-7 | [99 秒タイマー — 設定・計数・鳴るの 3 状態、0 でブザー](06-state-machines/07-timer-99s.md) | 入門 | BB | PICO |
+| 6-6 | [時間を持つ状態機械 — 長押しと短押し](06-state-machines/06-long-short-press.md) | 入門 | — | SIM |
+| 6-7 | [99 秒タイマー — 設定・計数・鳴るの 3 状態、0 でブザー](06-state-machines/07-timer-99s.md) | 入門 | — | SIM |
 | 6-8 | [状態機械とデータパスを分ける — 掛け算を足し算の繰り返しで](06-state-machines/08-datapath-multiplier.md) | 入門 | — | SIM |
 | 6-9 | 自動販売機 | 中級 | — | WEB |
 | 6-10 | valid と ready の受け渡し | 中級 | — | SIM |
@@ -209,6 +216,9 @@
 | 6-15 | 文字の LCD を初期化する手順 | 中級 | BB | PICO |
 | 6-16 | 電子サイコロ | 中級 | BB | PICO |
 | 6-17 | [99 秒タイマーを Pico 2 で動かす — Soft-FPGA の主ループとクロックの固定](06-state-machines/17-timer-99s-pico.md) | 入門 | BB | PICO |
+| 6-18 | [長押しと短押しを Pico 2 で動かす — ボタン 1 つと LED 3 個](06-state-machines/18-long-short-press-pico.md) | 入門 | BB | PICO |
+| 6-19 | [99 秒タイマーを組む — 7 セグ 2 個の直結と圧電サウンダ](06-state-machines/19-timer-99s-wiring.md) | 入門 | BB | PICO |
+| 6-20 | [合成して回路の大きさを数える — 状態の符号と、制御器・データパスの分け方](06-state-machines/20-synthesis-size.md) | 入門 | — | SIM |
 
 ## 第 7 章 通信 (UART・SPI・I2C)
 
@@ -217,9 +227,9 @@
 | 7-1 | [UART の送信 — ボーレートの分周とシフトレジスタ](07-serial/01-uart-tx.md) | 必須 | BB | PICO |
 | 7-2 | [UART の受信 — 16 倍で刻んでビットの真ん中を読む](07-serial/02-uart-rx.md) | 必須 | BB | PICO |
 | 7-3 | [AD3 の Protocol で UART の字を読む](07-serial/03-uart-protocol.md) | 必須 | BB | PICO |
-| 7-4 | [SPI のマスタ](07-serial/04-spi-master.md) | 入門 | BB | PICO |
-| 7-5 | [I2C のマスタ — 温度センサーを読む](07-serial/05-i2c-master-temperature.md) | 入門 | BB | PICO |
-| 7-6 | [ボーレートのずれは何 % まで許されるか](07-serial/06-baud-tolerance.md) | 入門 | BB | PICO |
+| 7-4 | [SPI のマスタ](07-serial/04-spi-master.md) | 入門 | — | SIM |
+| 7-5 | [I2C のマスタ — 温度センサーを読む](07-serial/05-i2c-master-temperature.md) | 入門 | — | SIM |
+| 7-6 | [ボーレートのずれは何 % まで許されるか](07-serial/06-baud-tolerance.md) | 入門 | — | SIM |
 | 7-7 | [エコーバック — 受けた字を返す](07-serial/07-echo.md) | 入門 | BB | PICO |
 | 7-8 | SPI のスレーブ — 74HC595 を真似る | 中級 | BB | PICO |
 | 7-9 | I2C のスレーブ | 中級 | BB | PICO |
@@ -231,6 +241,9 @@
 | 7-15 | マンチェスタ符号 | 中級 | BB | PICO |
 | 7-16 | CRC を回路で計算する | 中級 | — | SIM |
 | 7-17 | Soft-FPGA の UART は何 bps まで出るか | 中級 | BB | PICO |
+| 7-18 | [SPI のマスタを Pico 2 に載せる — 74HC595 の LED と AD3 で見る](07-serial/18-spi-master-pico.md) | 入門 | BB | PICO |
+| 7-19 | [I2C の温度センサーを Pico 2 で読む — LM75 を組んで AD3 で見る](07-serial/19-i2c-temperature-pico.md) | 入門 | BB | PICO |
+| 7-20 | [ボーレートのずれを Pico 2 で作り、AD3 で読めるかを見る](07-serial/20-baud-skew-pico.md) | 入門 | BB | PICO |
 
 ## 第 8 章 実物の FPGA
 
@@ -257,6 +270,9 @@
 | 8-19 | HDMI に絵を出す | 中級 | — | FPGA |
 | 8-20 | 5 V の回路とつなぐ — レベル変換 | 中級 | BB | FPGA |
 | 8-21 | 配置を図で見る | 中級 | — | FPGA |
+| 8-22 | [TD4 を FPGA で動かす — TD4.v を変えずに、分周した 5 Hz をクロックに](08-fpga-board/22-td4-on-fpga.md) | 入門 | BB | FPGA |
+| 8-23 | [使われないレジスタは合成で消える — TD4 の 17 ビットが 12 個になる理由](08-fpga-board/23-unused-registers.md) | 入門 | — | FPGA |
+| 8-24 | [ROM の初期値を $readmemh で入れる — ブロック RAM に入れるか LUT にするか](08-fpga-board/24-rom-readmemh.md) | 入門 | — | FPGA |
 
 ## 第 9 章 タイミング
 
@@ -276,6 +292,7 @@
 | 9-12 | クロックのスキューとジッタ | 中級 | BB | FPGA |
 | 9-13 | 外の IC とのセットアップ — 入出力の遅れ | 中級 | BB | FPGA |
 | 9-14 | Soft-FPGA にタイミングはあるか — 計算の順と遅れ | 中級 | BB | PICO |
+| 9-15 | [リングオシレータの模型 — 遅れの無いシミュレーションでは発振しない](09-timing/15-ring-oscillator-model.md) | 入門 | — | SIM |
 
 ## 第 10 章 メモリと演算
 
@@ -318,6 +335,8 @@
 | 11-16 | PicoRV32 を Pico 2 の Soft-FPGA で動かす — 1 秒に何命令か測る | 発展 | BB | PICO |
 | 11-17 | PicoRV32 を実物の FPGA に載せる — 同じ機械語を Soft-FPGA と比べる | 発展 | BB | FPGA |
 | 11-18 | Pico 2 の中の RISC-V (Hazard3) で同じ機械語を走らせる | 発展 | BB | PICO |
+| 11-19 | [TD4 の中をブラウザの画面に出す — ハーネスにレーンを足す](11-cpu/19-td4-browser-lanes.md) | 入門 | — | WEB |
+| 11-20 | [6502 の FPGA を PC で確かめる — UART のピンの試験台と合成](11-cpu/20-6502-fpga-verify.md) | 中級 | — | FPGA |
 
 ## 第 12 章 作品
 
@@ -331,5 +350,7 @@
 | 12-6 | [小さいロジックアナライザを作る](12-projects/06-logic-analyzer.md) | 発展 | BB | FPGA |
 | 12-7 | [Pong とテレビの画面 — 1972 年の回路の規模と NTSC の走査](12-projects/07-pong-tv-ntsc.md) | 発展 | — | |
 | 12-8 | [リバーシを PC から指す — play.py で対戦し、200 局で回路と C を突き合わせる](12-projects/08-reversi-play-pc.md) | 発展 | BB | PICO |
+| 12-9 | [リバーシの UART を Logic で読む — 読み下しの足し方と状態の 3 本](12-projects/09-reversi-uart-logic.md) | 発展 | BB | PICO |
+| 12-10 | [Pong の信号を Logic Analyzer で見る — 遊んでいる最中にトリガーで止める](12-projects/10-pong-logic-analyzer.md) | 発展 | — | WEB |
 
 <!-- toc:end -->

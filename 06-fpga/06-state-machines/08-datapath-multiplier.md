@@ -134,7 +134,7 @@ endmodule
 - 箱は 3 つ。足す数 `a_r`、残りの回数 `cnt`、積 `acc`。`ld` で全部を入れ替え、`add` で `acc` と `cnt` を更新する
 - `ld` も `add` も 0 のとき、箱は何も変えない。データパスは、命令が来ない間は黙っている
 - `W` はデータパスだけが持つ。積の幅は `2 * W`
-- `zero` は `cnt` が 0 かどうか。これが制御器へ戻る状態信号で、6-7 の `zero` (値が 0 になったら ALARM) と同じ形である
+- `zero` は `cnt` が 0 かどうか。これが制御器へ戻る状態信号で、6-7 で「01 から 00 になった」ことが RUN から RING へ移る条件になるのと同じ形である
 
 ### mul_ctl.v — 制御器
 
@@ -274,6 +274,7 @@ endmodule
 動きは同じだが、`case` の各行に「状態を進める」と「数を更新する」が混ざっている。
 たとえば「`a` が 0 なら足さずに終わる」と手順を直したくなったとき、数の更新式を読み分けながら状態の進め方を探すことになる。
 分けた版なら、手順の直しは `mul_ctl.v` だけ、数の直しは `mul_dp.v` だけで済む。
+yosys で合成した大きさを 2 つの版で比べるのは 6-20 に分けた (分けても回路が小さくなるとは言えない)。
 
 ## 試験 — 全 65536 組
 
@@ -471,25 +472,6 @@ trigger: START rising at 1ms
 - `ZERO` は `CNT` が 0 になった周期 (9 ms) に立つ。次の周期 (10 ms) で TEST から DONE に進み、`DONE` が 1 クロックだけ立つ
 - `ACC` は DONE のあとも 15 のまま残り、次の `LD` まで変わらない。`done` が 1 の間に読めなくても、`p` は残っている
 
-## 合成した大きさ
-
-```bash
-yosys -p "read_verilog -sv mul_top.v mul_ctl.v mul_dp.v; hierarchy -top mul_top; synth_gowin -top mul_top; stat"
-```
-
-| 書き方 | ALU | FF | LUT |
-| --- | --- | --- | --- |
-| 分けた (`mul_top`、`W = 8`) | 24 | 37 | 17 |
-| 分けない (`mul_flat`、`W = 8`) | 24 | 37 | 32 |
-| 分けた、`W = 4` | 12 | 21 | 17 |
-| 分けた、`W = 16` | 48 | 69 | 30 |
-| 制御器だけ (`mul_ctl`) | 0 | 5 | 5 |
-
-(yosys 0.33、`synth_gowin`。FF は DFF と DFFRE の合計、LUT は LUT1〜LUT4 の合計。)
-
-- ALU は 3 × `W` 個 (残りの回数の引き算が `W`、積の足し算が `2 * W`)、FF は 5 + 4 × `W` 個。幅を替えると、データパスだけが大きくなり、制御器の 5 FF は変わらない
-- 分けない版の LUT が 15 個多い。差の原因は調べていない。**分けると回路が小さくなる、とは言えない**。この題で得るのは回路の小ささでなく、直す場所が分かれることである
-
 ## 分けると何ができるか
 
 - **幅を替える**: `W = 4` を試験で動かしたとおり、`mul_ctl.v` は無修正のまま。直したのは `mul_top` の `.W(...)` だけ
@@ -510,15 +492,13 @@ PC の Verilator (5.042) と yosys (0.33) で実際に動かして得た値。�
 | `start` から `done` まで | `2 * b + 2` クロック (全 65536 組で一致) |
 | 最も遅い組 | `255 × 255` の 512 クロック。平均 257 クロック |
 | `5 × 3` | 8 クロック、積 15 |
-| 合成 (ALU / FF / LUT) | 分けた版 24 / 37 / 17、分けない版 24 / 37 / 32 |
 
 ## シミュレーションでの確かめ
 
-Verilator 5.042、Icarus Verilog 12.0、yosys 0.33 で、本文の Verilog とテストベンチを抜き出して走らせ直した。
+Verilator 5.042 と Icarus Verilog 12.0 で、本文の Verilog とテストベンチを抜き出して走らせ直した。
 原本は `sim/08-datapath-multiplier.v` (`mul_top`)・`-dp.v`・`-ctl.v`・`-flat.v`・`-tb.v`。
 波形の表は本文に試験が無いので、説明どおり (`a` = 5、`b` = 3、`start` を 1 クロックだけ) に書いた
-`sim/08-datapath-multiplier-wave-tb.v` で読んだ (Icarus Verilog)。合成は本文のコマンドのまま (`synth_gowin`)。
-`W` を替えた合成は `hierarchy -top mul_top -chparam W 4` (16) を付けて数えた。
+`sim/08-datapath-multiplier-wave-tb.v` で読んだ (Icarus Verilog)。合成 (yosys) の確かめは 6-20。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
@@ -528,29 +508,9 @@ Verilator 5.042、Icarus Verilog 12.0、yosys 0.33 で、本文の Verilog と�
 | 例の表 (6 行) | 本文のとおり | 6 行とも同じ | 合った |
 | 4 ビット版の全 256 組 | すべて一致 | `all match` | 合った |
 | 波形の表 (14 クロック) | 本文のとおり | 14 行とも同じ | 合った |
-| 合成 ALU / FF / LUT (分けた、`W` = 8) | 24 / 37 / 17 | ALU 24、DFF 5 + DFFRE 32、LUT2 3 + LUT3 9 + LUT4 5 | 合った |
-| 合成 (分けない、`W` = 8) | 24 / 37 / 32 | ALU 24、FF 37、LUT2 18 + LUT3 9 + LUT4 5 | 合った |
-| 合成 (分けた、`W` = 4) | 12 / 21 / 17 | ALU 12、FF 21、LUT 17 (LUT1 6・LUT2 2・LUT3 6・LUT4 3) | 合った |
-| 合成 (分けた、`W` = 16) | 48 / 69 / 30 | ALU 48、FF 69、LUT 30 (LUT1 2・LUT2 4・LUT3 17・LUT4 7) | 合った |
-| 合成 (`mul_ctl` だけ) | 0 / 5 / 5 | ALU 0、DFF 5、LUT3 4 + LUT4 1 | 合った |
-
-| 合成 (分けた、`W` = 8、Yosys 0.70+16) | 24 / 37 / 17 | ALU 24、DFF 5 + DFFRE 32、LUT2 3 + LUT3 9 + LUT4 5 = 17 | 合った |
-| 合成 (分けない、`W` = 8、Yosys 0.70+16) | 24 / 37 / 32 | ALU 24、FF 37、LUT1 1 + LUT2 18 + LUT3 11 + LUT4 3 = 33 (ほかに MUX2_LUT5 1) | 近い (版の差。1 個多い) |
-| 合成 (分けた、`W` = 4、Yosys 0.70+16) | 12 / 21 / 17 | ALU 12、FF 21、LUT2 3 + LUT3 7 + LUT4 2 = 12 | 近い (版の差。LUT が 5 個少ない) |
-| 合成 (分けた、`W` = 16、Yosys 0.70+16) | 48 / 69 / 30 | ALU 48、FF 69、LUT1 2 + LUT2 4 + LUT3 17 + LUT4 7 = 30 (ほかに MUX2_LUT5 2) | 合った |
-| 合成 (`mul_ctl` だけ、Yosys 0.70+16) | 0 / 5 / 5 | ALU 0、DFF 5、LUT3 4 + LUT4 1 | 合った |
-| 配置配線の `Max frequency` (分けた、`W` = 8、`--freq 27`) | (本文に無い) | 233.54 MHz (PASS at 27.00 MHz)。LUT4 45、ALU 28、DFF 37 | 補足 |
-| 配置配線の `Max frequency` (分けない、`W` = 8) | (本文に無い) | 422.48 MHz。LUT4 61、MUX2_LUT5 1、ALU 28、DFF 37 | 補足 |
-| 配置配線の `Max frequency` (分けた、`W` = 4) | (本文に無い) | 295.60 MHz。LUT4 28、ALU 16、DFF 21 | 補足 |
-
-配置配線は OSS CAD Suite の Yosys 0.70+16 と nextpnr-himbaechel 0.11.1-63 で走らせた。`W` を替えた合成は `hierarchy -top mul_top -chparam W n` で作った。
-ピンは仮の番号で、`--seed` は振っていない。`Max frequency` の値は 1 回の実行のもので、9-3 のとおり数 % 動く。
-分けた版の方が `Max frequency` は低く出た。理由は経路の報告まで読んでいないので確かめていない。
-`W` = 16 は、仮に割り振るピンの数が足りず走らせていない。
 
 ## 出典
 
 自作。制御器とデータパスに分ける設計は、ディジタル回路設計の一般的な作法で、制御信号と状態信号でつなぐ形は
 FSMD (finite state machine with datapath、データパスを持つ有限状態機械) と呼ばれる。
 足し算を繰り返す掛け算は、最も素朴な逐次乗算である。
-yosys の `synth_gowin` は [Yosys のマニュアル](https://yosyshq.readthedocs.io/projects/yosys/en/latest/cmd/synth_gowin.html)。

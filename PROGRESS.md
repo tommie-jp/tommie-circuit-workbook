@@ -12,13 +12,13 @@
 
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 |
 | --- | --- | --- | --- | --- |
-| [回路の教科書](01-circuits/README.md) | 221 | 124 | 0 | 0 |
+| [回路の教科書](01-circuits/README.md) | 232 | 135 | 0 | 0 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 100 | 0 | 0 |
-| [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 224 | 116 | 0 | 0 |
+| [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 |
-| [番外の工作](05-etc/README.md) | 28 | 25 | 0 | 0 |
-| [FPGA の教科書](06-fpga/README.md) | 209 | 127 | 0 | 0 |
-| **計** | **1084** | **592** | **0** | **0** |
+| [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 |
+| [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 |
+| **計** | **1118** | **626** | **0** | **0** |
 
 ## 回路の教科書
 
@@ -57,6 +57,7 @@
 | 1-14 | じゃがいも電池・レモン電池 | | | |
 | 1-15 | 熱電対 — 2 種の金属で電圧 | | | |
 | 1-16 | 電球の非線形 — 抵抗の温度係数 | | | |
+| 1-17 | [RC フィルタを Spectrum と VNA で見る — 計器の選び方](01-circuits/01-basics/17-rc-filter-spectrum-vna.md) | ✓ | [ ] | — |
 
 ### 第 2 章 トランジスタ — BJT と FET
 
@@ -103,6 +104,7 @@
 | 3-13 | VCO — 555 の 5 番ピン | | | |
 | 3-14 | LM3909 (古典) と自動点滅 LED (現代) を並べる | | | |
 | 3-15 | リングオシレータ (インバータ 3 段) | | | |
+| 3-16 | [シュミット発振の出力を調べる — 方形波の高調波と LED の電流](01-circuits/03-oscillators/16-schmitt-square-spectrum.md) | ✓ | [ ] | — |
 
 ### 第 4 章 OP アンプ
 
@@ -227,13 +229,19 @@
 | 9-11 | [ダイオード検波とトランジスタ検波の比較](01-circuits/09-rf/11-detector-comparison.md) | ✓ | [ ] | — |
 | 9-12 | [バランスドミキサー](01-circuits/09-rf/12-balanced-mixer.md) | ✓ | [ ] | — |
 | 9-13 | [FM 復調 — スロープ検波](01-circuits/09-rf/13-fm-slope-detector.md) | ✓ | [ ] | — |
-| 9-14 | [27 MHz の送受信 (トイラジコン)](01-circuits/09-rf/14-27mhz-rc-toy.md) | ✓ | [ ] | — |
+| 9-14 | [27 MHz の送信機 (トイラジコン)](01-circuits/09-rf/14-27mhz-rc-toy.md) | ✓ | [ ] | — |
 | 9-15 | [アンテナ — ダイポールとループ、SWR](01-circuits/09-rf/15-antenna-dipole-loop.md) | ✓ | [ ] | — |
 | 9-16 | [DDS モジュール — Pico 2 で 7 MHz を出して tinySA で見る](01-circuits/09-rf/16-dds-sdr-module.md) | ✓ | [ ] | — |
 | 9-17 | [2.4 GHz モジュール (nRF24) と Pico 2](01-circuits/09-rf/17-nrf24-pico.md) | ✓ | [ ] | — |
 | 9-18 | [FM 送信機を AD の信号発生器で変調する — マイクの代わりに 1 kHz を入れる](01-circuits/09-rf/18-fm-transmitter-wavegen.md) | ✓ | [ ] | — |
 | 9-25 | [AGC — 強い局で音量が跳ねないように利得を自動で下げる](01-circuits/09-rf/25-agc.md) | ✓ | [ ] | — |
 | 9-26 | [送信のファイナルを並列にする — エミッタバラスト抵抗で電流をそろえる (2N3866)](01-circuits/09-rf/26-parallel-final-ballast.md) | ✓ | [ ] | — |
+| 9-27 | [FM 送信機の石と基板 — 2SC3355 と銅張り基板を選ぶ理由、発振周波数が下がる見積もり](01-circuits/09-rf/27-fm-transmitter-parts-and-board.md) | ✓ | [ ] | — |
+| 9-28 | [FM 送信機の搬送波と高調波を tinySA で見る](01-circuits/09-rf/28-fm-transmitter-tinysa.md) | ✓ | [ ] | — |
+| 9-29 | [AM 変調を測る — 音声の通り道とスペアナの側波](01-circuits/09-rf/29-am-modulation-measure.md) | ✓ | [ ] | — |
+| 9-30 | [超再生 FM ラジオの発振を tinySA で見る — クエンチの側波と同調の範囲](01-circuits/09-rf/30-superregen-fm-tinysa.md) | ✓ | [ ] | — |
+| 9-31 | [27 MHz の受信機 (トイラジコン) — 同調・検波・コンパレータで LED を点ける](01-circuits/09-rf/31-27mhz-rc-toy-receiver.md) | ✓ | [ ] | — |
+| 9-32 | [LC 共振の電流の波 — 共振の前後の位相、発生器の出力抵抗、LED を輪に入れない理由](01-circuits/09-rf/32-lc-resonance-phase.md) | ✓ | [ ] | — |
 
 ### 第 10 章 ロジック
 
@@ -276,6 +284,7 @@
 | 11-10 | Pico 2 W で しきい値を通知 | | | |
 | 11-11 | USB 給電と電源設計 (VSYS / VBUS) | | | |
 | 11-12 | デカップリングとグラウンド | | | |
+| 11-13 | [サーボの角度を PWM のパルス幅で決める](01-circuits/11-microcontrollers/13-pwm-servo.md) | ✓ | [ ] | — |
 
 ### 第 12 章 実用回路 — 作品
 
@@ -317,6 +326,8 @@
 | 14-6 | [I/Q をマイコンで読む — Pico 2 の ADC で位相と大きさを計算する](01-circuits/14-iq/06-iq-pico2-adc.md) | ✓ | [ ] | — |
 | 14-7 | [IQ 中波ラジオ — バーアンテナと 74HC4052 と Pico 2 で NHK を聞く](01-circuits/14-iq/07-iq-mw-radio.md) | ✓ | [ ] | — |
 | 14-8 | [IQ 中波ラジオのプログラム — PIO の LO と DMA の ADC で AM を復調する](01-circuits/14-iq/08-iq-mw-radio-program.md) | ✓ | [ ] | — |
+| 14-9 | [イメージ除去の深さ — Spectrum で抑圧を読み、VR1 で合わせる](01-circuits/14-iq/09-image-reject-depth.md) | ✓ | [ ] | — |
+| 14-10 | [IQ 中波ラジオの選択度 — 前置の同調と I のスペクトルで隣の局を見る](01-circuits/14-iq/10-iq-mw-radio-selectivity.md) | ✓ | [ ] | — |
 
 ## Analog Discovery の教科書
 
@@ -805,8 +816,9 @@
 | 8-17 | S パラメータを Touchstone で回路シミュレータへ | | | |
 | 8-18 | エミッタフォロアの出力インピーダンス | | | |
 | 8-19 | [広帯域帰還アンプ — 帰還抵抗とエミッタ抵抗で入出力を 50 Ω にそろえる (2N5109・4:1 トランス)](03-nanovna/08-amplifiers/19-feedback-amplifier.md) | ✓ | [ ] | — |
-| 8-20 | [コレクタ負荷を差し替える — 抵抗・チョーク・LC 同調・広帯域トランスで S21 の利得と帯域を比べる (1.9 MHz 帯)](03-nanovna/08-amplifiers/20-collector-loads.md) | ✓ | [ ] | — |
+| 8-20 | [コレクタ負荷を差し替える — 抵抗とチョークで S21 の利得と帯域を比べる (1.9 MHz 帯)](03-nanovna/08-amplifiers/20-collector-loads.md) | ✓ | [ ] | — |
 | 8-21 | [同調負荷のリンク巻線で 50 Ω に合わせる — 巻数比で選択度 (Q) が変わり、利得には最適の巻数がある (7 MHz)](03-nanovna/08-amplifiers/21-tuned-load-link.md) | ✓ | [ ] | — |
+| 8-22 | [コレクタ負荷で 50 Ω を高く見せる — LC 同調と広帯域トランスで S21 の利得と帯域を比べる (1.9 MHz 帯)](03-nanovna/08-amplifiers/22-impedance-transforming-loads.md) | ✓ | [ ] | — |
 
 ### 第 9 章 GHz 帯の作法
 
@@ -1171,8 +1183,9 @@
 | 2-6 | [秒のカウンタ — 74HC163 を 2 個つないで 00〜59 を数え、分へ桁上げを出す](05-etc/02-radio-clock/06-seconds.md) | ✓ | [ ] | — |
 | 2-7 | [時計 — 32.768 kHz を数えて時分秒を出し、正時パルスで合わせる](05-etc/02-radio-clock/07-clock.md) | ✓ | [ ] | — |
 | 2-8 | [マイコン版 — ① 受信のあとを Raspberry Pi Pico 2 の FFT とプログラムで作る](05-etc/02-radio-clock/08-mcu.md) | ✓ | [ ] | — |
-| 2-9 | [組み立て — 受信・検波・状態遷移のユニバーサル基板をつなぐ](05-etc/02-radio-clock/09-assembly.md) | ✓ | [ ] | — |
-| 2-10 | [時報の状態遷移を基板に組む — 4 ユニットの実体配線図と AD3 での試験](05-etc/02-radio-clock/10-state-machine-build.md) | ✓ | [ ] | — |
+| 2-9 | [時報の状態遷移を基板に組む — 4 ユニットの実体配線図と AD3 での試験](05-etc/02-radio-clock/09-state-machine-build.md) | ✓ | [ ] | — |
+| 2-10 | [組み立て — 受信・検波・状態遷移のユニバーサル基板をつなぐ](05-etc/02-radio-clock/10-assembly.md) | ✓ | [ ] | — |
+| 2-11 | [時計をユニバーサル基板に組む — 窓判定と同期・設定の 3 枚](05-etc/02-radio-clock/11-clock-perfboard.md) | ✓ | [ ] | — |
 
 ### 第 3 章 2SC1815 のミキサー
 
@@ -1264,6 +1277,7 @@
 | 2-17 | 分周した信号をクロックに使わない理由 | | | |
 | 2-18 | 初期値 — initial とリセットの違い | | | |
 | 2-19 | パイプライン — 長い組み合わせをレジスタで切る | | | |
+| 2-20 | [7 セグのゴースト — 桁を替える間に消す時間を入れる](06-fpga/02-sequential/20-seven-seg-ghost.md) | ✓ | [ ] | — |
 
 ### 第 3 章 シミュレーションと検証
 
@@ -1304,6 +1318,7 @@
 | 4-12 | [8080 と CP/M — I/O のバスを見る](06-fpga/04-soft-fpga-web/12-8080-cpm-io-bus.md) | ✓ | [ ] | — |
 | 4-13 | [GitHub Pages に載せる](06-fpga/04-soft-fpga-web/13-github-pages.md) | ✓ | [ ] | — |
 | 4-14 | [命令エミュレータに無い信号 — T ステートを数える](06-fpga/04-soft-fpga-web/14-count-t-states.md) | ✓ | [ ] | — |
+| 4-15 | [中の信号を C++ から直に読む — Verilator の版で変わる名前](06-fpga/04-soft-fpga-web/15-read-internal-signal.md) | ✓ | [ ] | — |
 
 ### 第 5 章 Soft-FPGA Pico 2 編
 
@@ -1331,6 +1346,11 @@
 | 5-20 | 速い所を PIO に任せる — UART の送信 | | | |
 | 5-21 | 最適化で何倍速くなるか | | | |
 | 5-22 | 結線の表でゲートを真似る — Verilog を使わない方式 | | | |
+| 5-23 | [Pico SDK で通す手順を選ぶ — もう 1 つの手順と thread_local の置き場](06-fpga/05-soft-fpga-pico/23-build-choice-tls.md) | ✓ | [ ] | — |
+| 5-24 | [回路の規模を数える — yosys の合成と、PC で回した 1 クロック](06-fpga/05-soft-fpga-pico/24-size-yosys-pc.md) | ✓ | [ ] | — |
+| 5-25 | [TD4 で入力を使う — DIP スイッチの値に 1 を足して LED に出す](06-fpga/05-soft-fpga-pico/25-td4-input.md) | ✓ | [ ] | — |
+| 5-26 | [$display・$finish・$readmemh を Pico で使う — ビルドして確かめ、ROM は initial に埋める](06-fpga/05-soft-fpga-pico/26-system-tasks.md) | ✓ | [ ] | — |
+| 5-27 | [7 セグと押しボタンを確かめる — エミュレータで数え方、実機で電流と跳ね](06-fpga/05-soft-fpga-pico/27-seg7-button-measure.md) | ✓ | [ ] | — |
 
 ### 第 6 章 状態機械
 
@@ -1353,6 +1373,9 @@
 | 6-15 | 文字の LCD を初期化する手順 | | | |
 | 6-16 | 電子サイコロ | | | |
 | 6-17 | [99 秒タイマーを Pico 2 で動かす — Soft-FPGA の主ループとクロックの固定](06-fpga/06-state-machines/17-timer-99s-pico.md) | ✓ | [ ] | — |
+| 6-18 | [長押しと短押しを Pico 2 で動かす — ボタン 1 つと LED 3 個](06-fpga/06-state-machines/18-long-short-press-pico.md) | ✓ | [ ] | — |
+| 6-19 | [99 秒タイマーを組む — 7 セグ 2 個の直結と圧電サウンダ](06-fpga/06-state-machines/19-timer-99s-wiring.md) | ✓ | [ ] | — |
+| 6-20 | [合成して回路の大きさを数える — 状態の符号と、制御器・データパスの分け方](06-fpga/06-state-machines/20-synthesis-size.md) | ✓ | [ ] | — |
 
 ### 第 7 章 通信 (UART・SPI・I2C)
 
@@ -1375,6 +1398,9 @@
 | 7-15 | マンチェスタ符号 | | | |
 | 7-16 | CRC を回路で計算する | | | |
 | 7-17 | Soft-FPGA の UART は何 bps まで出るか | | | |
+| 7-18 | [SPI のマスタを Pico 2 に載せる — 74HC595 の LED と AD3 で見る](06-fpga/07-serial/18-spi-master-pico.md) | ✓ | [ ] | — |
+| 7-19 | [I2C の温度センサーを Pico 2 で読む — LM75 を組んで AD3 で見る](06-fpga/07-serial/19-i2c-temperature-pico.md) | ✓ | [ ] | — |
+| 7-20 | [ボーレートのずれを Pico 2 で作り、AD3 で読めるかを見る](06-fpga/07-serial/20-baud-skew-pico.md) | ✓ | [ ] | — |
 
 ### 第 8 章 実物の FPGA
 
@@ -1401,6 +1427,9 @@
 | 8-19 | HDMI に絵を出す | | | |
 | 8-20 | 5 V の回路とつなぐ — レベル変換 | | | |
 | 8-21 | 配置を図で見る | | | |
+| 8-22 | [TD4 を FPGA で動かす — TD4.v を変えずに、分周した 5 Hz をクロックに](06-fpga/08-fpga-board/22-td4-on-fpga.md) | ✓ | [ ] | — |
+| 8-23 | [使われないレジスタは合成で消える — TD4 の 17 ビットが 12 個になる理由](06-fpga/08-fpga-board/23-unused-registers.md) | ✓ | [ ] | — |
+| 8-24 | [ROM の初期値を $readmemh で入れる — ブロック RAM に入れるか LUT にするか](06-fpga/08-fpga-board/24-rom-readmemh.md) | ✓ | [ ] | — |
 
 ### 第 9 章 タイミング
 
@@ -1420,6 +1449,7 @@
 | 9-12 | クロックのスキューとジッタ | | | |
 | 9-13 | 外の IC とのセットアップ — 入出力の遅れ | | | |
 | 9-14 | Soft-FPGA にタイミングはあるか — 計算の順と遅れ | | | |
+| 9-15 | [リングオシレータの模型 — 遅れの無いシミュレーションでは発振しない](06-fpga/09-timing/15-ring-oscillator-model.md) | ✓ | [ ] | — |
 
 ### 第 10 章 メモリと演算
 
@@ -1462,6 +1492,8 @@
 | 11-16 | PicoRV32 を Pico 2 の Soft-FPGA で動かす — 1 秒に何命令か測る | | | |
 | 11-17 | PicoRV32 を実物の FPGA に載せる — 同じ機械語を Soft-FPGA と比べる | | | |
 | 11-18 | Pico 2 の中の RISC-V (Hazard3) で同じ機械語を走らせる | | | |
+| 11-19 | [TD4 の中をブラウザの画面に出す — ハーネスにレーンを足す](06-fpga/11-cpu/19-td4-browser-lanes.md) | ✓ | [ ] | — |
+| 11-20 | [6502 の FPGA を PC で確かめる — UART のピンの試験台と合成](06-fpga/11-cpu/20-6502-fpga-verify.md) | ✓ | [ ] | — |
 
 ### 第 12 章 作品
 
@@ -1475,3 +1507,5 @@
 | 12-6 | [小さいロジックアナライザを作る](06-fpga/12-projects/06-logic-analyzer.md) | ✓ | [ ] | — |
 | 12-7 | [Pong とテレビの画面 — 1972 年の回路の規模と NTSC の走査](06-fpga/12-projects/07-pong-tv-ntsc.md) | ✓ | [ ] | — |
 | 12-8 | [リバーシを PC から指す — play.py で対戦し、200 局で回路と C を突き合わせる](06-fpga/12-projects/08-reversi-play-pc.md) | ✓ | [ ] | — |
+| 12-9 | [リバーシの UART を Logic で読む — 読み下しの足し方と状態の 3 本](06-fpga/12-projects/09-reversi-uart-logic.md) | ✓ | [ ] | — |
+| 12-10 | [Pong の信号を Logic Analyzer で見る — 遊んでいる最中にトリガーで止める](06-fpga/12-projects/10-pong-logic-analyzer.md) | ✓ | [ ] | — |
