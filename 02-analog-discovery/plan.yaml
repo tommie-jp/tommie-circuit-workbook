@@ -147,6 +147,8 @@
 - { id: 7-16, tier: 200, board: BB, title: パターンで状態機械 (ROM もどき) }
 - { id: 7-17, tier: 200, board: BB, title: デバウンス回路の評価 (Static I/O + Scope) }
 - { id: 7-18, tier: 200, board: BB, title: マイコンの起動ログ (UART) を長時間 Record }
+- { id: 7-19, tier: 200, board: BB, title: 真理値表を当てる — Pattern で入力を全部出し、Logic で 74HC00 の出力と突き合わせる }
+- { id: 7-20, tier: 200, board: BB, title: 静止電流で品種を見分ける — 74LS00 と 74HC00 の電源電流をシャントで測る }
 - { id: 8-1, tier: 50, board: BB, title: ジャンパ 1 本のスルーの S21 を 100 kHz〜10 MHz }
 - { id: 8-2, tier: 50, board: BB, title: 隣の列との容量 (数 pF) を測る }
 - { id: 8-3, tier: 50, board: BB, title: ジャンパ線のインダクタンス }
