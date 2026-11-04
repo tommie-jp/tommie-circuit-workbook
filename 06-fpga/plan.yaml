@@ -1,4 +1,4 @@
-# 06-fpga の計画 — 必須 50 ⊂ 入門 100 ⊂ 中級 200 の 200 題。目次 (README) はここと題のファイルから npm run toc が組む。
+# 06-fpga の計画 — 必須 50 ⊂ 入門 約 100 ⊂ 中級 約 200 ⊂ 発展 の題。目次 (README) はここと題のファイルから npm run toc が組む。
 # device は動かす所: SIM = PC の Verilator だけ / WEB = ブラウザの soft-fpga / PICO = Pico 2 の Soft-FPGA / FPGA = 実物の FPGA。
 - { id: 0-1, tier: 50, board: —, title: FPGA と Soft-FPGA の違い — 回路を並べる物と、回路を計算で真似る物 }
 - { id: 0-2, tier: 50, board: —, device: SIM, title: 道具を入れる — Verilator と Pico SDK を Docker で }
@@ -116,6 +116,7 @@
 - { id: 6-14, tier: 200, board: BB, device: PICO, title: キーパッドの走査 }
 - { id: 6-15, tier: 200, board: BB, device: PICO, title: 文字の LCD を初期化する手順 }
 - { id: 6-16, tier: 200, board: BB, device: PICO, title: 電子サイコロ }
+- { id: 6-17, tier: 100, board: BB, device: PICO, title: 99 秒タイマーを Pico 2 で動かす — Soft-FPGA の主ループとクロックの固定 }
 - { id: 7-1, tier: 50, board: BB, device: PICO, title: UART の送信 — ボーレートの分周とシフトレジスタ }
 - { id: 7-2, tier: 50, board: BB, device: PICO, title: UART の受信 — 16 倍で刻んでビットの真ん中を読む }
 - { id: 7-3, tier: 50, board: BB, device: PICO, title: AD3 の Protocol で UART の字を読む }
@@ -208,3 +209,5 @@
 - { id: 12-4, tier: 300, board: BB, device: FPGA, title: 時計 — 27 MHz を数えて時分秒を 4 桁の 7 セグに出し、時報で合わせる }
 - { id: 12-5, tier: 300, board: BB, device: FPGA, title: DDS の信号発生器 }
 - { id: 12-6, tier: 300, board: BB, device: FPGA, title: 小さいロジックアナライザを作る }
+- { id: 12-7, tier: 300, board: —, title: Pong とテレビの画面 — 1972 年の回路の規模と NTSC の走査 }
+- { id: 12-8, tier: 300, board: BB, device: PICO, title: リバーシを PC から指す — play.py で対戦し、200 局で回路と C を突き合わせる }

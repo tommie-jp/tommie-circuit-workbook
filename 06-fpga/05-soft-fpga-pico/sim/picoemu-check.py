@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""5 章・6-6・6-7 の .uf2 を RP2350 エミュレータ picoemu (Cortex-M33) に載せ、
+"""5 章・6-6・6-17 の .uf2 を RP2350 エミュレータ picoemu (Cortex-M33) に載せ、
 論理で決まる値 (出力の並び・反転の回数・分周比・押し方への反応) を突き合わせる。
 
 使い方:
   python3 picoemu-check.py --picoemu ./picoemu --uf2 <.uf2 を集めたフォルダ> [題 ...]
-  題: 5-2 5-3 5-4 5-5 5-6 5-7 5-8 5-9 5-10 5-11 5-14 5-15 6-6 6-7 (省くと全部)
+  題: 5-2 5-3 5-4 5-5 5-6 5-7 5-8 5-9 5-10 5-11 5-14 5-15 6-6 6-17 (省くと全部)
 
 .uf2 のファイル名: blink_pico io_reg_pico gates_pico clock55 clock56 clock57
   td4_58 (プログラム A) td4_58_b (プログラム B) clock59 clock510 clock511
@@ -334,7 +334,7 @@ def c66():
     check("6-6 跳ねない 1.1 s の長押しで押してから D2 まで約 1022.5 ms", 1021 < l - 5500 < 1025, "%.1f ms" % (l - 5500))
 
 
-# ---------------------------------------------------------------- 6-7
+# ---------------------------------------------------------------- 6-17 (6-7 の 99 秒タイマーを Pico 2 で)
 def c67():
     DEC = {0x3F: 0, 0x06: 1, 0x5B: 2, 0x4F: 3, 0x66: 4, 0x6D: 5, 0x7D: 6, 0x07: 7, 0x7F: 8, 0x6F: 9}
     tens = [4, 5, 18, 17, 16, 3, 2]
@@ -367,21 +367,21 @@ def c67():
     ev = after0(ev)
     for tm, want, name in marks:
         got = (DEC.get(level_at(ev, tens, tm * 1000)), DEC.get(level_at(ev, ones, tm * 1000)))
-        check("6-7 %s" % name, got == want, "実行 %s" % (got,))
+        check("6-17 %s" % name, got == want, "実行 %s" % (got,))
     sec = [t_ / 1000 for (t_, p, v) in ev if p == 14 and v == 1]
     g = sorted({round(b - a) for a, b in zip(sec, sec[1:])})
-    check("6-7 SEC の周期は 1000 ms (間に止めた 3 s を除く)", 1000 in g and all(x == 1000 or x > 3000 for x in g), str(g))
+    check("6-17 SEC の周期は 1000 ms (間に止めた 3 s を除く)", 1000 in g and all(x == 1000 or x > 3000 for x in g), str(g))
     bz = [t_ for (t_, p, v) in ev if p == 15 and v == 1]
     one_s = [x for x in bz if bz[0] <= x < bz[0] + 1_000_000]
     gaps = {round((b - a) / 1000, 1) for a, b in zip(one_s, one_s[1:])}
-    check("6-7 ブザーは 1 s に 250 回の立ち上がり、周期 2 ms", len(one_s) == 250 and gaps == {2.0}, "%d 回 %s" % (len(one_s), gaps))
+    check("6-17 ブザーは 1 s に 250 回の立ち上がり、周期 2 ms", len(one_s) == 250 and gaps == {2.0}, "%d 回 %s" % (len(one_s), gaps))
     bins = [len([x for x in bz if bz[0] + k * 100_000 <= x < bz[0] + (k + 1) * 100_000]) for k in range(10)]
-    check("6-7 鳴る 0.5 s と休む 0.5 s", bins == [50] * 5 + [0] * 5, str(bins))
-    check("6-7 RING に入るのは 26 395 ms 付近 (本文 26 394 ms)", abs(bz[0] / 1000 - 26395) < 5, "%.1f ms" % (bz[0] / 1000))
+    check("6-17 鳴る 0.5 s と休む 0.5 s", bins == [50] * 5 + [0] * 5, str(bins))
+    check("6-17 RING に入るのは 26 395 ms 付近 (本文 26 394 ms)", abs(bz[0] / 1000 - 26395) < 5, "%.1f ms" % (bz[0] / 1000))
 
 
 CHECKS = {"5-2": c52, "5-3": c53, "5-4": c54, "5-5": c55, "5-6": c56, "5-7": c57, "5-8": c58, "5-9": c59,
-          "5-10": c510, "5-11": c511, "5-14": c514, "5-15": c515, "6-6": c66, "6-7": c67}
+          "5-10": c510, "5-11": c511, "5-14": c514, "5-15": c515, "6-6": c66, "6-17": c67}
 
 
 def main():

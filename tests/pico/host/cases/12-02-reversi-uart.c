@@ -2,7 +2,7 @@
 // 12-2: PC とは stdio (USB と UART0) で話し、リバーシ UART プロトコルの行に答える。
 // 受けた行の写しを UART1 (GP4、115200 8N1) に出し、行を受け終えてから答えを送り始めるまで GP2 を H にする。
 // 状態を GP16 (対局中)・GP17 (自分が白)・GP18 (直前の行に誤りを返した) に出す。
-// 本文の主ループを SOFT_FPGA なし (C の計算) で動かす。回路の版の答えは 12-2 の PC の試験と picoemu で見る。
+// 本文の主ループを SOFT_FPGA なし (C の計算) で動かす。回路の版の答えは 12-8 の PC の試験と picoemu で見る。
 #include <string.h>
 #include "pico/stdlib.h"
 #include "hardware/uart.h"

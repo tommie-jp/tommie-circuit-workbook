@@ -1,4 +1,4 @@
-# 02-analog-discovery の計画 — 必須 50 ⊂ 入門 100 ⊂ 中級 200 の 200 題。目次 (README) はここと題のファイルから npm run toc が組む。
+# 02-analog-discovery の計画 — 必須 50 ⊂ 入門 約 100 ⊂ 中級 約 200 ⊂ 発展 の題。目次 (README) はここと題のファイルから npm run toc が組む。
 - { id: 0-1, tier: 50, board: BB, title: 接続と極性 — ワイヤの色、1+ / 1- の差動入力、GND を共通に }
 - { id: 0-2, tier: 50, board: BB, title: 入力範囲 ±25 V と電源の限界 — 電流は直列抵抗で決める }
 - { id: 0-3, tier: 50, board: BB, title: ループバック — W1 を 1+ に直結して発生器とオシロを確かめる }
@@ -195,6 +195,7 @@
 - { id: 10-8, tier: 200, board: BB, title: グラウンドループ }
 - { id: 11-1, tier: 50, board: BB, title: Script で掃引と測定を自動化 (1-5 の続き) }
 - { id: 11-2, tier: 100, board: BB, title: WaveForms SDK (Python) の最初 }
+# 11-3 と 11-8 は 03-nanovna の 10-3・10-8 と題名が同じ。こちら (AD) を本体に書き、NanoVNA の側は VNA で変わる所 (Touchstone・校正) だけを書く
 - { id: 11-3, tier: 200, board: BB, title: 部品 10 個のバッチ測定 }
 - { id: 11-4, tier: 200, board: —, title: CSV をグラフにする (matplotlib) }
 - { id: 11-5, tier: 200, board: —, title: SDK でオシロを取り込み、FFT を自分で書く }

@@ -1,4 +1,4 @@
-PROGRAM = '01-circuits/14-iq/07-iq-mw-radio-1.py'
+PROGRAM = '01-circuits/14-iq/08-iq-mw-radio-program-1.py'
 BUDGET_US = 1_000_000
 
 

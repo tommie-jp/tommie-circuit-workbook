@@ -57,7 +57,7 @@ Alerts keep their kind (`> [!WARNING]`, `> [!NOTE]`). "実機で動かしてい�
 
 | Japanese | English | Note |
 | --- | --- | --- |
-| 必須 / 入門 / 中級 | Essential / Introductory / Intermediate | the three tiers |
+| 必須 / 入門 / 中級 / 発展 | Essential / Introductory / Intermediate / Advanced | the four tiers (発展 = Advanced: entries that also need a program toolchain, and the extra projects in 05-etc) |
 | 冊 / 章 / 題 | book / chapter / exercise | |
 | 基板 (総称) | board | generic. Name the real thing when you can |
 | ブレッドボード | breadboard | |

@@ -1,5 +1,5 @@
-// program: 01-circuits/14-iq/07-iq-mw-radio-1.c
-// 14-7: 594 kHz に合わせる。LO は PIO の 4 状態 (set pins 0→1→3→2)、f_LO = sys / (4 × M)。
+// program: 01-circuits/14-iq/08-iq-mw-radio-program-1.c
+// 14-8: 594 kHz に合わせる。LO は PIO の 4 状態 (set pins 0→1→3→2)、f_LO = sys / (4 × M)。
 #include "pico/stdlib.h"
 #include "hardware/pio.h"
 #include "hardware/pwm.h"

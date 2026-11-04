@@ -5,6 +5,7 @@ id: 8-10
 title: 温度センサー IC (LM35 / TMP36)
 tier: 100
 source: 自作
+board: BB
 era: 今
 ---
 
@@ -56,13 +57,57 @@ style:
 - C1 (0.1 µF) は電源のバイパスコンデンサ (電源のノイズを GND へ逃がすコンデンサ) で、+Vs と GND の間に、IC の近くに置く。
   V<sub>out</sub> には付けない (LM35 の出力に容量を直接つなぐと発振しやすい)。データシートが指定する定石の値だ
 
+## 実体配線図
+
+電源は Analog Discovery 3 (AD3) の Supplies の +5 V (LM35 の消費電流は 60 µA 未満 (データシート) で、各レール約 50 mA の範囲に収まる)。
+V<sub>out</sub> は AD3 の Scope の 1+ / 1− を直流の電圧計として当てて読む (テスターの DCV でも同じ値が読める)。
+この題は直流の電圧だけを見るので、オシロの波形の図は付けない。
+
+```breadboard
+# ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
+title: 図2 LM35 の出力を AD3 の電圧計で読む
+board: half
+parts:
+  PS:
+    type: device
+    at: top
+    label: AD3 Supplies 5V
+    pins: [V+, GND]
+  SC:
+    type: device
+    at: bottom
+    label: AD3 Scope (DC 電圧計)
+    pins: [1+, 1-]
+  U1: ic3 b8(VS) b9(VOUT) b10(GND) LM35
+  C1: capacitor/ceramic c13 c16 100n
+wires:
+  - PS.V+ -- +t1 red
+  - PS.GND -- -t2 black
+  - +t8 -- a8 red
+  - a10 -- -t10 black
+  - +t13 -- a13 red
+  - a16 -- -t16 black
+  - SC.1+ -- e9 orange
+  - SC.1- -- e10 gray
+```
+
+![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/08-sensors/breadboard/10-temperature-ic.svg)
+
+- U1 (LM35、TO-92) は、平らな印字面を手前にして左から +Vs・Vout・GND (データシートの TO-92 の底面図の 1・2・3 と同じ並び)。
+  8・9・10 列の b 行に挿す。+Vs (8 列) は赤の線で上の + レール、GND (10 列) は黒の線で上の − レールへ短く引く
+- C1 (0.1 µF) は IC のすぐ右の 13 列と 16 列に挿し、13 列を赤の線で + レール、16 列を黒の線で − レールへつなぐ。
+  レールを通して +Vs と GND の間に入り、IC の近くでバイパスする。Vout (9 列) には何も付けない
+- AD3 Scope の 1+ を `e9` (Vout の列)、1− を `e10` (GND の列) につなぐ。Scope は DC カップリング、100 mV/div 程度で、
+  画面の Measurements の平均値 (DC) を読む。TMP36 を試すときは、同じ 3 つの穴に挿し替える
+
 ## 部品
 
 | 記号 | 部品 | 値 |
 | --- | --- | --- |
 | U1 | 温度センサー IC (LM35DZ、TO-92) | +Vs 4〜30 V、10 mV/°C (0 °C で 0 V) |
 | C1 | 積層セラミックコンデンサ (バイパス) | 0.1 µF |
-| — | 電源 | 5 V |
+| — | 電源 | 5 V (AD3 の Supplies の V+) |
+| — | 計器 | AD3 の Scope 1+ / 1− (直流の電圧を読む)。テスターでもよい |
 
 ## 見るべき値
 

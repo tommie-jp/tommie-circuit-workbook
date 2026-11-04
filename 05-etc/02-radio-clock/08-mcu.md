@@ -459,3 +459,11 @@ check の読み値と突き合わせた値。
 | 低域の折れ点 | 約 3.04 kHz | 3.02 kHz | 合う |
 | 通過する割合 (中域) | 0.524 (−5.6 dB) | 0.524 (−5.6 dB) | 合う |
 | FFT のビン (8 kHz / 512 = 15.6 Hz) | 440 Hz は第 28 ビン、880 Hz は第 56 ビン | 28.2・56.3 | 合う |
+
+## 出典
+
+自作。参考: [Raspberry Pi Pico 2 データシート](https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf)、
+[RP2350 データシート](https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf)、
+[Raspberry Pi Pico-series C/C++ SDK](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf)、
+[MicroPython の RP2 クイックリファレンス](https://docs.micropython.org/en/latest/rp2/quickref.html)、
+[高速フーリエ変換 (Wikipedia)](https://ja.wikipedia.org/wiki/高速フーリエ変換)。

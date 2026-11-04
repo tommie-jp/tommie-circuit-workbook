@@ -119,6 +119,11 @@ parts:
     at: top
     label: ポリバリコン 260pF
     pins: [A, E]
+  AD:
+    type: device
+    at: bottom
+    label: Analog Discovery 3
+    pins: [W1, V+, GND, 2-, 2+, 1-, 1+]
   EAR:
     type: device
     at: bottom
@@ -126,6 +131,7 @@ parts:
     pins: [A, B]
   L1: inductor/axial b8 b12 250u
   C1: capacitor/ceramic d8 d14 0.01u
+  RS: resistor e8 i8 1k
   Q1: transistor j14(B) j15(C) j16(E) 2SC1815 cap=left
   Rf: resistor b14 b19 470k
   Rc: resistor d18 d15 1.5k
@@ -139,6 +145,14 @@ parts:
   C6: capacitor/ceramic h24 h28 0.001u
 wires:
   - ANT.1 -- a6 yellow
+  - AD.W1 -- j8 orange
+  - AD.2+ -- i15 blue
+  - AD.1+ -- i24 blue
+  - AD.V+ -- +b10 red
+  - AD.GND -- -b12 black
+  - AD.1- -- -b20 black
+  - AD.2- -- -b13 black
+  - +t29 -- +b29 red
   - c6 -- c8 yellow
   - VC1.A -- a8 yellow
   - VC1.E -- -t10 black
@@ -158,7 +172,8 @@ wires:
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/breadboard/05-reflex-radio.svg)
 
-- 上の赤レール = +5 V (USB や電池)、青レール = GND。30 列で上下の − レールを渡している
+- **AD3 は下に置く** (イヤホンの A 端子とコレクタを測る 24 列・15 列が下のブロックにあるため)。V+ (Supplies の 5 V) を下の赤レール (10 列)、
+  GND を下の青レール (12 列) へ入れる。赤レール = +5 V、青レール = GND。29 列で上下の + レールを、30 列で上下の − レールを渡している
 - 前段は 9-3 と同じく、8 列に VC1・L1・C1 をまとめる。アンテナは 6 列 (`a6`) に入れ、c 行の黄色の短い線で 8 列へつなぐ
 - Q1 は下のブロックの j 行に、隣り合う 3 列 (14 列 B・15 列 C・16 列 E) へ挿す。ピンを大きく曲げずに挿せる間隔。
   2SC1815 は平らな面を手前にすると左から E・C・B なので、平らな面を上のブロック側へ向けて挿すと左から B・C・E になる
@@ -167,7 +182,44 @@ wires:
 - エミッタ (16 列) は f 行の短い線で 17 列へ渡し、17 列から下の − レールへ
 - レフレックスの帰還は D1 のカソード (24 列) → Cf → 19 列 → Rf → ベース (14 列)。
   コレクタ (i18) から L2 で 21 列へ、C5 で EAR の A 端子 (24 列、下) へ。C6 が残った高周波を GND へ逃がす
+- AD3 の W1 を RS (1 kΩ) 経由で同調回路の 8 列へ入れる。放送の電波の代わりの試験用で、使うときは ANT の線を外してよい。
+  RS は溝をまたいで縦に挿し (`e8` と `i8`)、W1 は下の 8 列 (`j8`) へ入れる。1+ はイヤホンの A 端子 (下の 24 列、`i24`)、
+  2+ は Q1 のコレクタ (下の 15 列、`i15`)、1−・2−・GND は下の − レール (20・13・12 列) へ入れる
 - 1 つの穴にはピンか線を 1 本だけ挿す
+
+## 計器の設定
+
+計器は Analog Discovery 3。電源 (Supplies の V+ = 5 V)、信号源 (Wavegen の W1)、オシロ (Scope) が 1 台で足り、
+搬送波 1 MHz は Scope の範囲 (10 MHz 以下) に入る。消費電流は I<sub>C</sub> ≈ 1.8 mA ほどで、電源 1 系統の約 50 mA に収まる。
+W1 の試験信号は 9-3 と同じ。VC1 は約 100 pF に回しておく (f<sub>0</sub> ≈ 1.007 MHz)。
+
+| 項目 | 値 |
+| --- | --- |
+| Supplies | V+ = 5 V、出力 ON |
+| Wavegen W1 | 搬送波 Sine 1 MHz、振幅 20 mV<sub>p</sub>、Modulation: AM、変調波 Sine 1 kHz、変調度 50 % |
+| Scope CH1 (1+ = イヤホンの A 端子) | Coupling DC、50 mV/div、位置 +2 div (画面の上半分) |
+| Scope CH2 (2+ = コレクタ) | Coupling DC、1 V/div、位置 −4.18 div (直流の 2.18 V が画面の下半分の中央に来る) |
+| Scope 時間軸・トリガ | 200 µs/div、CH1 の立ち上がり |
+
+```scope
+# オシロスコープの画面 (tommie-fence の scope フェンス)
+title: 図3 AM 信号の試験 — イヤホン (CH1) に 1 kHz、コレクタ (CH2) には搬送波と音声が重なる
+time: 200us/div
+trigger: ch1 rising 0V
+ch1: {wave: = 0.0557V * sin(2 * pi * 1kHz * t), range: 50mV/div, position: 2div}
+ch2: {wave: = 2.18V + 0.67V * (1 + 0.5 * sin(2 * pi * 1kHz * t)) * sin(2 * pi * 1MHz * t), range: 1V/div, position: -4.18div}
+measure: [vpp, avg, freq]
+cursors: [250us, 750us]
+```
+
+![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/09-rf/scope/05-reflex-radio.svg)
+
+- 図3 は下の「LTspice での確かめ」と同じ `sim/05-reflex-radio.cir` の結果 (最後の 6 ms) をもとにした見込みの画面。実測ではない
+- CH1 (イヤホン) は 1 kHz、約 0.11 Vpp (LTspice で 0.111 Vpp)。C5 で直流を切った後なので 0 V を中心に振れる。
+  Cf を外すと約 0.012 Vpp まで小さくなり (約 19 dB)、50 mV/div ではほぼ平らに見える。帰還の効果を目で比べられる
+- CH2 (コレクタ) は直流 約 2.2 V (LTspice で 2.18 V、上の計算の 2.3 V に近い) に 1 MHz の搬送波が乗り、振幅は 1 kHz で太り細りする。
+  LTspice ではコレクタの山と谷が 1.04〜3.05 V で、搬送波の振幅は最大 約 1 V<sub>p</sub>。図3 は 0.67 V<sub>p</sub> × (1 ± 0.5) の目安で描いた。
+  実際の波形は、戻した音声の分だけ包絡線の中心も 1 kHz で揺れる
 
 ## 同調回路だけを VNA で見る (補足)
 

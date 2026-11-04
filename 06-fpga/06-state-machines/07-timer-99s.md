@@ -14,7 +14,6 @@ device: PICO
 > [!WARNING]
 > **この題は実機で組んでいない。** Verilog は Verilator の lint を警告 0 件で通し、PC のシミュレーションで
 > 設定 → 計数 → 0 で鳴る → 30 秒で戻る、一時停止、長押しの速送り、99 での頭打ちを回して、自分で合否を言う試験を通した。
-> Pico 2 のプログラムは `.uf2` までのビルドを確かめたが、書き込んで動かしてはいない。7 セグの点灯、ブザーの音、AD3 での測定はしていない。
 > 「見るべき値」は設計値・シミュレーションの値・計算値で、測った値ではない。
 
 第 2 章と第 6 章で作った部品を 1 台にまとめて、**キッチンタイマーのような 99 秒タイマー**を作る。
@@ -347,7 +346,7 @@ wires:
 
 ## Verilog
 
-モジュールは 5 つ。1 ファイル 1 モジュールにした。`debounce.v` は 6-3、`seg7dec.v` は 12-4 のものをそのまま使う (下に再び載せる)。
+モジュールは 5 つ。1 ファイル 1 モジュールにした。`debounce.v` は [6-3](03-debounce.md) のものをそのまま使う (ここには載せない。6-3 の本文のコードブロックを写す)。`seg7dec.v` は 12-4 と同じ中身だが、12-4 より先に読む題なのでここに載せる。
 
 ### timer99.v — タイマーの本体
 
@@ -521,51 +520,6 @@ endmodule
 - 6-6 の `press_fsm` は、長押しと見分けるために短押しを**離したときに**出す。タイマーの「+」は押した瞬間に 1 進めたいので、見分けずに済むこの小さな形にした。
   押し続けた時間を数えて繰り返す考えは 6-6 と同じ
 
-### debounce.v — チャタリングを取る (6-3 と同じ)
-
-```verilog
-// 押しボタン (押すと 0) を 2 段で受け、同じ値が N クロック続いたら採る (6-3 と同じ)。
-// 押した瞬間に 1 クロックだけ press を 1 にする
-module debounce #(
-    parameter N = 20                 // 何クロック続いたら採るか (1 kHz なら 20 ms)
-) (
-    input      clk,
-    input      rst,
-    input      btn_n,
-    output reg clean_n,              // チャタリングを取った値 (押すと 0)
-    output     press
-);
-    localparam W = $clog2(N);
-    localparam [W-1:0] LAST = N[W-1:0] - 1'b1;
-
-    reg [1:0]   sync;                // クロックと関係なく変わる入力を 2 段で受ける
-    reg [W-1:0] cnt;                 // clean_n と違う値が何クロック続いたか
-    reg         clean_d;             // 1 クロック前の clean_n
-
-    always @(posedge clk)
-        if (rst) begin
-            sync    <= 2'b11;
-            cnt     <= {W{1'b0}};
-            clean_n <= 1'b1;
-        end else begin
-            sync <= {sync[0], btn_n};
-            if (sync[1] == clean_n)
-                cnt <= {W{1'b0}};            // 同じ値に戻ったら数え直す
-            else if (cnt == LAST) begin
-                clean_n <= sync[1];          // N クロック続いたので採る
-                cnt     <= {W{1'b0}};
-            end else
-                cnt <= cnt + 1'b1;
-        end
-
-    always @(posedge clk)
-        if (rst) clean_d <= 1'b1;
-        else     clean_d <= clean_n;
-
-    assign press = clean_d & ~clean_n;       // 1 → 0 に変わったクロックだけ 1
-endmodule
-```
-
 ### seg7dec.v — 0〜9 を a〜g に (12-4 と同じ)
 
 ```verilog
@@ -593,142 +547,6 @@ endmodule
 
 Verilator の lint は警告 0 件 (`verilator --lint-only -Wall --top-module timer99 timer99.v debounce.v key_repeat.v seg7dec.v`、確かめた)。
 `-GCLK_HZ=27000000 -GTONE_HZ=4000` を足しても 0 件。
-
-## Pico 2 のプログラム
-
-組み方は 5-1 (ビルドの道具) と 5-7 (繰り返しタイマで 1 kHz に固定する)。作業用の空のフォルダに、上の 4 つの `.v` と次のファイルを置く。
-
-| ファイル | 中身 | どこから |
-| --- | --- | --- |
-| `main.cpp` | 主ループとピンの割り当て | 下に載せる |
-| `verilate.sh` | Verilog を C++ にする手順 | 下に載せる |
-| `CMakeLists.txt` | ビルドの設定 | 5-1 のもの。最後の行を下の 1 行に替える |
-| `pico_tls.cpp` `stub_mutex.h` `cxx_minimal.cpp` `verilated.cpp` | Pico 2 で Verilator の C++ を動かす部品 | 5-1 と同じ |
-
-`main.cpp`:
-
-```cpp
-// 6-7 99 秒タイマー — timer99.v を繰り返しタイマの割り込みで 1 kHz で回す (5-7)
-#include "pico/stdlib.h"
-#include "Vtimer99.h"
-
-constexpr int64_t HALF_US = 500;              // 半周期 500 µs → クロック 1 kHz
-
-constexpr uint PIN_PLUS = 0;                  // 「+」(押すと 0)
-constexpr uint PIN_SS   = 1;                  // 「スタート/ストップ」(押すと 0)
-constexpr uint PIN_SEC  = 14;                 // 1 秒の印 (AD3 の DIO0)
-constexpr uint PIN_BZ   = 15;                 // 圧電サウンダ (AD3 の DIO1)
-//                              a   b   c   d   e   f   g
-constexpr uint PIN_TENS[7] = {  4,  5, 18, 17, 16,  3,  2 };   // 10 の位 (DS1)
-constexpr uint PIN_ONES[7] = {  8,  9, 21, 20, 19,  7,  6 };   // 1 の位 (DS2)
-
-static VerilatedContext ctx;
-static Vtimer99 top{&ctx};
-static unsigned g_clk = 0;
-
-static void out_init(uint pin) {
-    gpio_init(pin);
-    gpio_set_dir(pin, GPIO_OUT);
-    gpio_put(pin, 0);
-}
-
-static void in_init(uint pin) {
-    gpio_init(pin);
-    gpio_set_dir(pin, GPIO_IN);
-    gpio_pull_up(pin);                        // 外に抵抗を付けない (6-2)
-}
-
-static void put_outputs() {
-    for (int i = 0; i < 7; i++) {
-        gpio_put(PIN_TENS[i], (top.seg_tens >> i) & 1u);
-        gpio_put(PIN_ONES[i], (top.seg_ones >> i) & 1u);
-    }
-    gpio_put(PIN_SEC, top.sec);
-    gpio_put(PIN_BZ, top.buzzer);
-}
-
-static bool on_half(repeating_timer_t*) {
-    g_clk ^= 1u;                              // 立ち上がりと立ち下がりを交互に
-    if (g_clk) {                              // 立ち上がりの前にボタンを読む
-        top.btn_plus_n = gpio_get(PIN_PLUS);
-        top.btn_ss_n   = gpio_get(PIN_SS);
-    }
-    top.clk = g_clk;
-    top.eval();
-    put_outputs();
-    return true;                              // 次も呼ぶ
-}
-
-int main() {
-    for (int i = 0; i < 7; i++) { out_init(PIN_TENS[i]); out_init(PIN_ONES[i]); }
-    out_init(PIN_SEC);
-    out_init(PIN_BZ);
-    in_init(PIN_PLUS);
-    in_init(PIN_SS);
-
-    // リセットを 2 クロック掛ける
-    top.btn_plus_n = 1;
-    top.btn_ss_n   = 1;
-    top.rst = 1;
-    for (int i = 0; i < 2; i++) {
-        top.clk = 0; top.eval();
-        top.clk = 1; top.eval();
-    }
-    top.rst = 0;
-    top.clk = 0; top.eval();
-
-    repeating_timer_t timer;
-    // 負の周期は「呼び始めから次の呼び始めまで」。計算の長さで周期がずれない
-    add_repeating_timer_us(-HALF_US, on_half, nullptr, &timer);
-
-    while (true)
-        tight_loop_contents();
-}
-```
-
-- 500 µs ごとの割り込みで `clk` を 0 と 1 に交互に変えて `eval()` する (5-7)。クロックは 1 kHz で、`timer99` の 1 秒は 1000 回の立ち上がり
-- ボタンは立ち上がりの前に読む。1 ms に 1 回しか読まないが、`debounce` が 20 ms 続いたかを見るので足りる (6-3)
-- セグメントは `seg_tens` と `seg_ones` のビット 0〜6 (a〜g) を、表の GPIO に 1 本ずつ出す
-
-| Verilog | Pico 2 | 向き | 設定 |
-| --- | --- | --- | --- |
-| `clk` | (ピンなし) | — | 500 µs ごとのタイマ割り込みで 0 と 1 を交互に入れて評価する (5-7)。1 kHz |
-| `rst` | (ピンなし) | — | 起動して最初の 2 クロックだけ 1 |
-| `btn_plus_n` | GP0 | 入力 | 中のプルアップを有効に。SW1 |
-| `btn_ss_n` | GP1 | 入力 | 中のプルアップを有効に。SW2 |
-| `seg_tens[0]`〜`[6]` (a〜g) | GP4・GP5・GP18・GP17・GP16・GP3・GP2 | 出力 | DS1 (10 の位) |
-| `seg_ones[0]`〜`[6]` (a〜g) | GP8・GP9・GP21・GP20・GP19・GP7・GP6 | 出力 | DS2 (1 の位) |
-| `sec` | GP14 | 出力 | AD3 の DIO0 |
-| `buzzer` | GP15 | 出力 | BZ1 と AD3 の DIO1 |
-| `o_state` `o_count` | (ピンなし) | — | 使わない |
-
-セグメントの並びが飛び飛びなのは、ブレッドボードで Pico 2 の上の列と下の列から 7 セグの下のピンと上のピンへ、線を交差させずに運ぶため (図3)。
-
-`verilate.sh` (`sfa-dev:local` の中で打つ):
-
-```bash
-#!/bin/sh
-# Verilog を C++ にする (sfa-dev のコンテナの中で打つ)
-set -e
-rm -rf vlinc && cp -r /usr/local/share/verilator/include vlinc
-verilator --cc --no-timing --no-trace -Wall --prefix Vtimer99 --top-module timer99 --Mdir v_timer99 \
-  timer99.v debounce.v key_repeat.v seg7dec.v
-```
-
-`CMakeLists.txt` の最後の行:
-
-```cmake
-add_soft_fpga(timer99_pico main.cpp timer99)
-```
-
-ビルドは 5-1 の「ビルドする」の 2 行と同じ。空のフォルダから打って、次のとおりになった。**実機では動かしていない。**
-
-| 確かめること | 出た物 |
-| --- | --- |
-| C++ への変換と lint (`sh verilate.sh`) | 警告なし。Verilation Report に `Verilator 5.048` |
-| ビルド (`cmake --build build`) | エラーなし。`main.cpp` からの警告なし |
-| `.uf2` の大きさ | `build/timer99_pico.uf2` が 97 280 バイト |
-| プログラムの大きさ (`arm-none-eabi-size`) | text 52 456 バイト、bss 2 840 バイト |
 
 ## 動かす — PC のシミュレーション
 
@@ -910,74 +728,18 @@ PASS
 スタートを押してから数え始めるまでの遅れは、跳ねずに押すと 22.5 ms だった (別の短い試験。押す時刻を 300 ms、クロックの立ち上がりを 0.5 ms・1.5 ms … に置いた)。
 チャタリング取りの 2 段の受け (2 ms) と、20 ms 続いたかを見る分。
 
-## 計器の設定
+## Pico 2 で動かす
 
-計器は AD3 の Logic。見たいのは 0 / 1 の並びと時刻で、電圧の形ではないので Logic にした。
-
-| 計器 | 設定 |
-| --- | --- |
-| Logic | DIO0 (`SEC`)・DIO1 (`BZ`)・DIO2 (`SS`) を Enable。DIO は 3.3 V。GND を共通にする (0-4) |
-| 1 秒を見る (図4) | 時間軸 1 s/div (10 目盛で 10 s)。標本化 1 kS/s (10 s で 1 万標本。AD3 の 1 本 32 768 標本に入る)。トリガは DIO2 の立ち下がり (スタートを押した所)。トリガの前を 1 s 見せる |
-| ブザーの音を見る (図5) | 時間軸 1 ms/div (10 目盛で 10 ms)。標本化 100 kS/s。トリガは DIO1 の立ち上がり。トリガの前を 3 ms 見せる |
-
-一番速い変化は、図4 ではボタンを押していた 0.1 s、図5 では 1 ms ごとの反転。標本化はどちらもその 4 倍より十分速い。
-
-## Logic に見えるはずの画面
-
-シミュレーションの時刻をそのまま写した。図4 は残りを 10 s 以上にして、ボタンは跳ねずに 0.1 s 押したとした。
-
-```logic
-# ロジックアナライザの画面 (tommie-fence の logic フェンス)
-title: 図4 押して 22.5 ms で数え始め、SEC は 1 s ごとに 0.5 s だけ 1
-device: ad3
-time: 1s/div
-start: -1s
-sample: 1kHz
-signals:
-  SEC: dio0 edges -1s=0 22.5ms=1 522.5ms=0 1022.5ms=1 1522.5ms=0 2022.5ms=1 2522.5ms=0 3022.5ms=1 3522.5ms=0 4022.5ms=1 4522.5ms=0 5022.5ms=1 5522.5ms=0 6022.5ms=1 6522.5ms=0 7022.5ms=1 7522.5ms=0 8022.5ms=1 8522.5ms=0
-  SS: dio2 edges -1s=1 0s=0 100ms=1
-cursors: [272.5ms, 1272.5ms]
-trigger: SS falling at 0s
-```
-
-![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/06-state-machines/logic/07-timer-99s-1.svg)
-
-- X1 (272.5 ms) と X2 (1.2725 s) は、1 秒目と 2 秒目の `SEC` の 1 の真ん中。ΔX は 1.000 s、1/ΔX は 1.000 Hz
-- `SEC` はスタートを押してから 22.5 ms で 1 になり、以後 1 s ごとに 0.5 s だけ 1。表示はこの立ち上がりの 1 s 後ごとに 1 減る
-- 実機の 1 s は、5-7 で固定したクロックの正確さで決まる。1 クロックが 1.000 ms からずれれば、1 s も同じ割合でずれる
-
-```logic
-# ロジックアナライザの画面 (tommie-fence の logic フェンス)
-title: 図5 0 になると BZ が 1 ms ごとに反転する。周期 2 ms = 500 Hz
-device: ad3
-time: 1ms/div
-start: -3ms
-sample: 100kHz
-signals:
-  SEC: dio0 low
-  BZ: dio1 pattern 0001010101 bit 1ms from -3ms
-cursors: [500us, 2.5ms]
-trigger: BZ rising at 0s
-```
-
-![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/06-fpga/06-state-machines/logic/07-timer-99s-2.svg)
-
-- t = 0 は `BZ` の最初の立ち上がり。`RING` に入ったのはその 1 ms 前 (`01` が `00` になったクロック) で、`SEC` は `RUN` の最後の秒の後半なので 0 のまま
-- X1 (0.5 ms) と X2 (2.5 ms) は、続く 2 つの 1 の真ん中。ΔX は 2.000 ms、1/ΔX は 500.0 Hz
-- `BZ` はこのあと 0.5 s 鳴り、0.5 s 休む。1 s/div で見ると 1 ms ごとの反転は細かすぎて塗りになるので、鳴る区間と休む区間は図にせず表に書いた
+Pico 2 のプログラム (`main.cpp`・ビルドの手順)、AD3 の Logic の設定と見えるはずの画面、picoemu での確かめは [6-17](17-timer-99s-pico.md) に分けた。この題に Logic の図と計器の設定を置かないのは、どちらも Pico 2 に載せて測る 6-17 の物だから。
 
 ## 見るべき値
 
-設計値・シミュレーションの値・計算値。実機では測っていない。実機では Logic で次の値を読み、表に書き加える。
+設計値・シミュレーションの値・計算値。実機では測っていない。実機では次の値を読み、表に書き加える。`SEC` の周期とブザーの音の周波数など Logic で読む値は 6-17 の「見るべき値」。
 
 | 見る所 | 設計値・シミュレーション | どこで得たか | 実機 (測って書く) |
 | --- | --- | --- | --- |
-| `SEC` の周期 | 1.000 s (1000 クロック)、1 の間は 0.5 s | 試験・図4 | |
-| スタートを押してから数え始めるまで | 22.5 ms (跳ねずに押したとき) | 短い試験・図4 | |
 | 15 s から `RING` まで | 15.000 s | 試験 | |
 | `RING` の長さ (押さないとき) | 30.000 s で `SET` に戻る | 試験 | |
-| ブザーの方形波 | 500 Hz (周期 2 ms、1 ms ごとに反転) | 試験・図5 | |
-| 鳴る区間と休む区間 | 0.5 s ずつ (1 s に 250 周期) | 試験 | |
 | 「+」の長押し | 0.5 s で 1 回、以後 0.1 s ごと (2 s で +17) | 試験 | |
 | 99 で「+」を押したとき | 99 のまま | 試験 | |
 | セグメント 1 本の電流 | 1.9〜2.2 mA (見積り) | 部品表の下の計算 | |
@@ -992,7 +754,7 @@ trigger: BZ rising at 0s
 Verilator 5.042 で、本文の `timer99.v`・`key_repeat.v`・`seg7dec.v`・試験 `tb_timer99` を抜き出して走らせ直した。`debounce.v` は 6-3 のもの
 (`sim/03-debounce.v`)。原本は `sim/07-timer-99s.v` (`timer99`)・`-key-repeat.v`・`-seg7dec.v`・`-tb.v`。
 本文の「別の短い試験」(スタートの遅れが 22.5 ms) は `sim/07-timer-99s-start-tb.v` として書き直した (300 ms で押す)。
-`.uf2` は、本文の Docker イメージ (`sfa-dev:local` の Verilator 5.048 と `wb-pico-sdk`) で 6-6 と同じ手順でビルドし直した。試験 `tb_timer99` も `sfa-dev` の 5.048 で走らせ直した。
+試験 `tb_timer99` は `sfa-dev:local` の Verilator 5.048 でも走らせ直した。
 
 | 項目 | 本文の数字 | 実行結果 | 判定 |
 | --- | --- | --- | --- |
@@ -1006,24 +768,8 @@ Verilator 5.042 で、本文の `timer99.v`・`key_repeat.v`・`seg7dec.v`・試
 | スタートを押してから数え始めるまで | 22.5 ms | 322.5 ms (300 ms に押す) = 22.5 ms | 合った |
 | ブザーの最初の立ち上がり | `RING` に入った 1 ms 後 | 1322.5 ms に `RING`、1323.5 ms に最初の立ち上がり | 合った |
 | 「+」の長押し (2 s で +17)、99 での頭打ち | `20`、`99` のまま | 試験の `ok` どおり | 合った |
-| `.uf2` の大きさ | 97 280 バイト | 97 280 バイト | 合った |
-| プログラムの大きさ | text 52 456・bss 2 840 バイト | text 52 456・bss 2 840 バイト | 合った |
 | 抵抗の電流・合計 (680 Ω で 1.9〜2.2 mA、27〜31 mA) | 表のとおり | (3.3 − 2.0)/680 = 1.91 mA、(3.3 − 1.8)/680 = 2.21 mA、×14 = 26.8〜30.9 mA | 計算値として合った |
 | ブザーの平均の電流 | 500 Hz で約 18 µA | 5.5 nF × 3.3 V × 1000 /s = 18 µA | 計算値として合った |
-
-### エミュレータ (picoemu) での確かめ
-
-picoemu (`danish9661/pico-emulator` の `b83786f` に `sim/picoemu-m33.patch` を当てた版。手順は [5-2](../05-soft-fpga-pico/02-counter-led.md#エミュレータ-picoemu-での確かめ)) に `timer99_pico.uf2` を載せ、Cortex-M33 で動かした。入力は `-script` で与えた (ms 刻み)。
-確かめは `python3 sim/picoemu-check.py --picoemu ./picoemu --uf2 <.uf2 を集めたフォルダ> 6-7`。picoemu は機能の模型で、周期・ジッタ・周波数の実時間は対象外にした。
-
-| 項目 | 本文の数字 | picoemu の結果 | 判定 |
-| --- | --- | --- | --- |
-| 設定の状態の表示 | スタートは 00 では無視。「+」3 回で 03、2 s 押し続けて 20 | 00・03・20 | 合った |
-| 走る間 | 5.5 s で 15、止めると 15 のまま、3 s 後も 15 | 15・15・15 | 合った |
-| `SEC` の周期、H の幅 | 1000 ms、500 ms | 1000 ms、500 ms (止めた間の 3.68 s を除く) | 合った |
-| `RING` に入る時刻とブザー | `RING` は 26 394 ms、ブザーの最初の立ち上がりは 1 ms 後 | ブザーの最初の立ち上がりが 26 395 ms。表示は 15 s 後に 00 | 合った |
-| ブザー | 1 s に 250 回の立ち上がり、周期 2 ms、鳴る 0.5 s と休む 0.5 s | 250 回、2.0 ms、50 回/100 ms が 5 区間 → 休み 5 区間 | 合った |
-| 30 s で `SET` に戻る・99 での頭打ち | 試験のとおり | この確かめでは 56 s まで (ブザーの最後が 55.9 s)。99 での頭打ちは回していない | 確かめなかった |
 
 確かめられなかったもの。
 
@@ -1036,7 +782,4 @@ picoemu (`danish9661/pico-emulator` の `b83786f` に `sim/picoemu-m33.patch` �
 
 - PKM13EPYH4000-A0 の駆動・共振周波数・音圧・容量・最大入力: 村田製作所の Product Search Data Sheet (2024-05-28)。秋月電子通商の通販コード P-04118
 - 5161AS のピン配置: tommie-fence の `seg7` (`5161as`) の表 (e・d・COM・c・dp・b・a・COM・f・g)
-- Pico 2 で Verilog を動かす形は [tommie-jp/Soft-FPGA-TD4](https://github.com/tommie-jp/Soft-FPGA-TD4) の `verilator-TD4/main.cpp`、ビルドの手は
-  [tommie-jp/Soft-FPGA-Reversi](https://github.com/tommie-jp/Soft-FPGA-Reversi) (5-1)
-- 繰り返しタイマは Raspberry Pi の Pico SDK の `pico_time` (`add_repeating_timer_us`、5-7)
 - GPIO の電流の合計の目安 50 mA は Raspberry Pi の RP2040 のデータシートの値。RP2350 の値は確かめていない

@@ -12,13 +12,13 @@
 
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 |
 | --- | --- | --- | --- | --- |
-| [回路の教科書](01-circuits/README.md) | 219 | 120 | 0 | 0 |
+| [回路の教科書](01-circuits/README.md) | 221 | 122 | 0 | 0 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 100 | 0 | 0 |
-| [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 223 | 114 | 0 | 0 |
+| [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 224 | 115 | 0 | 0 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 |
-| [番外の工作](05-etc/README.md) | 25 | 22 | 0 | 0 |
-| [FPGA の教科書](06-fpga/README.md) | 206 | 124 | 0 | 0 |
-| **計** | **1075** | **580** | **0** | **0** |
+| [番外の工作](05-etc/README.md) | 28 | 25 | 0 | 0 |
+| [FPGA の教科書](06-fpga/README.md) | 209 | 127 | 0 | 0 |
+| **計** | **1084** | **589** | **0** | **0** |
 
 ## 回路の教科書
 
@@ -231,6 +231,7 @@
 | 9-15 | [アンテナ — ダイポールとループ、SWR](01-circuits/09-rf/15-antenna-dipole-loop.md) | ✓ | [ ] | — |
 | 9-16 | [DDS モジュール — Pico 2 で 7 MHz を出して tinySA で見る](01-circuits/09-rf/16-dds-sdr-module.md) | ✓ | [ ] | — |
 | 9-17 | [2.4 GHz モジュール (nRF24) と Pico 2](01-circuits/09-rf/17-nrf24-pico.md) | ✓ | [ ] | — |
+| 9-18 | [FM 送信機を AD の信号発生器で変調する — マイクの代わりに 1 kHz を入れる](01-circuits/09-rf/18-fm-transmitter-wavegen.md) | ✓ | [ ] | — |
 | 9-25 | [AGC — 強い局で音量が跳ねないように利得を自動で下げる](01-circuits/09-rf/25-agc.md) | ✓ | [ ] | — |
 | 9-26 | 送信のファイナルを並列にする — エミッタバラスト抵抗で電流をそろえる (2N3866) | | | |
 
@@ -315,6 +316,7 @@
 | 14-5 | [Tayloe 検波器 — 74HC4052 で I/Q を音にする (直接変換)](01-circuits/14-iq/05-tayloe-detector.md) | ✓ | [ ] | — |
 | 14-6 | [I/Q をマイコンで読む — Pico 2 の ADC で位相と大きさを計算する](01-circuits/14-iq/06-iq-pico2-adc.md) | ✓ | [ ] | — |
 | 14-7 | [IQ 中波ラジオ — バーアンテナと 74HC4052 と Pico 2 で NHK を聞く](01-circuits/14-iq/07-iq-mw-radio.md) | ✓ | [ ] | — |
+| 14-8 | [IQ 中波ラジオのプログラム — PIO の LO と DMA の ADC で AM を復調する](01-circuits/14-iq/08-iq-mw-radio-program.md) | ✓ | [ ] | — |
 
 ## Analog Discovery の教科書
 
@@ -858,6 +860,7 @@
 | 11-12 | アンテナで受ける — FM 放送帯と 430 MHz | | | |
 | 11-13 | PC から操作して記録する | | | |
 | 11-14 | [微弱電波の電界強度を見積もる — アンテナ係数とケーブルの損失](03-nanovna/11-spectrum-analyzer/14-field-strength.md) | ✓ | [ ] | — |
+| 11-15 | [ループアンテナの自己共振を NanoVNA で測る — S11 と S21 の 4 つの読み方](03-nanovna/11-spectrum-analyzer/15-loop-self-resonance.md) | ✓ | [ ] | — |
 
 ### 第 12 章 Smith チャート — 読み方から整合まで
 
@@ -1153,6 +1156,8 @@
 | 1-3 | [レジスタ — 4 ビットを D フリップフロップで覚える](05-etc/01-cpu/03-register.md) | ✓ | [ ] | — |
 | 1-4 | [CPU もどき — PC と ROM に ACC と加算器を足して足し算する](05-etc/01-cpu/04-cpu-mimic.md) | ✓ | [ ] | — |
 | 1-5 | [DRAM のセル — 2N7000 1 個とコンデンサ 1 個で 1 ビットを覚え、漏れて消えるのを見る](05-etc/01-cpu/05-dram-cell.md) | ✓ | [ ] | — |
+| 1-6 | [メモリを DIP スイッチで作る — 番地 5 の語をスイッチで書き換える](05-etc/01-cpu/06-dip-switch-memory.md) | ✓ | [ ] | — |
+| 1-7 | [メモリを SRAM で作る — 74HC245 でバスを分けて手で書き込む](05-etc/01-cpu/07-sram-memory.md) | ✓ | [ ] | — |
 
 ### 第 2 章 中波ラジオの時報で動く時計
 
@@ -1167,6 +1172,7 @@
 | 2-7 | [時計 — 32.768 kHz を数えて時分秒を出し、正時パルスで合わせる](05-etc/02-radio-clock/07-clock.md) | ✓ | [ ] | — |
 | 2-8 | [マイコン版 — ① 受信のあとを Raspberry Pi Pico 2 の FFT とプログラムで作る](05-etc/02-radio-clock/08-mcu.md) | ✓ | [ ] | — |
 | 2-9 | [組み立て — 受信・検波・状態遷移のユニバーサル基板をつなぐ](05-etc/02-radio-clock/09-assembly.md) | ✓ | [ ] | — |
+| 2-10 | [時報の状態遷移を基板に組む — 4 ユニットの実体配線図と AD3 での試験](05-etc/02-radio-clock/10-state-machine-build.md) | ✓ | [ ] | — |
 
 ### 第 3 章 2SC1815 のミキサー
 
@@ -1346,6 +1352,7 @@
 | 6-14 | キーパッドの走査 | | | |
 | 6-15 | 文字の LCD を初期化する手順 | | | |
 | 6-16 | 電子サイコロ | | | |
+| 6-17 | [99 秒タイマーを Pico 2 で動かす — Soft-FPGA の主ループとクロックの固定](06-fpga/06-state-machines/17-timer-99s-pico.md) | ✓ | [ ] | — |
 
 ### 第 7 章 通信 (UART・SPI・I2C)
 
@@ -1466,3 +1473,5 @@
 | 12-4 | [時計 — 27 MHz を数えて時分秒を 4 桁の 7 セグに出し、時報で合わせる](06-fpga/12-projects/04-clock.md) | ✓ | [ ] | — |
 | 12-5 | [DDS の信号発生器](06-fpga/12-projects/05-dds.md) | ✓ | [ ] | — |
 | 12-6 | [小さいロジックアナライザを作る](06-fpga/12-projects/06-logic-analyzer.md) | ✓ | [ ] | — |
+| 12-7 | [Pong とテレビの画面 — 1972 年の回路の規模と NTSC の走査](06-fpga/12-projects/07-pong-tv-ntsc.md) | ✓ | [ ] | — |
+| 12-8 | [リバーシを PC から指す — play.py で対戦し、200 局で回路と C を突き合わせる](06-fpga/12-projects/08-reversi-play-pc.md) | ✓ | [ ] | — |

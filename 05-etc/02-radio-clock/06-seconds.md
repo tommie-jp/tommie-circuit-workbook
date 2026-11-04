@@ -406,9 +406,14 @@ trigger: ENMU rising
 
 ![ロジックアナライザの画面](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/02-radio-clock/logic/06-seconds.svg)
 
+## 見るべき値
+
+図4 (計算) の読み値。ロジックアナライザで当てる。
+
 | 見る所 | 見るべき値 | check の読み値 |
 | --- | --- | --- |
 | 秒の一の位 (Sec1) の並び | 1 秒ごとに 7 → 8 → 9 → 0 → 1 | 7@0 s、8@1 s、9@2 s、0@3 s、1@4 s |
+| ENMU の H の長さ | 0.125 秒 (1 クロック)。秒が 59 で TICK が H のクロック | 図4 の ENMU (2.875〜3 s) |
 | カーソル X1 (2.938 s、桁上がりの手前) | 秒 59、ENMU が H | Sec1 9、Sec10 5、ENMU 1 |
 | カーソル X2 (3.469 s、桁上がりの後) | 秒 00、ENMU が L | Sec1 0、Sec10 0、ENMU 0 |
 
