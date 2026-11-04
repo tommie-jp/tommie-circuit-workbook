@@ -1,0 +1,34 @@
+* 5-15 電源の保護 (図1)。電源装置 (CV 5 V → 2 s で 9 V に上げる、電流制限 200 mA) → PTC (MF-R005) → 5 V の回路 (R1 330 ohm + 赤の LED)
+* と TVS (P6KE6.8A) を並列。RS 1 ohm は電流を見るシャント
+* 電源装置は CV/CC の模型: 200 mA の電流源と、設定電圧 VSET へ逃がす理想ダイオード (出力は VSET を超えず、電流は 200 mA を超えない)
+* PTC は仮定の熱の模型 (実測ではない): 冷えた抵抗 9.2 ohm (データシートの 7.3〜11.1 ohm の中ほど)、熱抵抗 600 K/W、熱容量 0.1 J/K、
+* 80 degC を超えると抵抗が急に上がる。周りは 23 degC。TVS は BV 6.8 V (10 mA)・動作抵抗 0.065 ohm の仮定。LED は他の題と同じ仮定
+.model DI D (Ron=1m Roff=1G Vfwd=0)
+.model DTVS D (IS=1e-12 BV=6.8 IBV=10m RS=0.065)
+.model LEDR D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+VSET vset 0 PWL(0 5 2 5 2.01 9)
+ILIM 0 vo 0.2
+DCL vo vset DI
+COUT vo 0 10u
+BPTC vo vl I = V(vo,vl) / (9.2 * (1 + 1e4 / (1 + exp(-(V(dt) + 23 - 80) / 2))))
+BHEAT 0 dt I = V(vo,vl) * V(vo,vl) / (9.2 * (1 + 1e4 / (1 + exp(-(V(dt) + 23 - 80) / 2))))
+CTH dt 0 0.1
+RTH dt 0 600
+DTVS rs vl DTVS
+R1 vl a 330
+DL a rs LEDR
+RS rs 0 1
+.tran 0 50 0 5m
+.meas tran vl1 FIND V(vl) AT=1.5
+.meas tran i1 FIND I(RS) AT=1.5
+.meas tran vlpk MAX V(vl) FROM=2.1 TO=4
+.meas tran ipk MAX I(RS) FROM=2.1 TO=4
+.meas tran vo3 FIND V(vo) AT=3
+.meas tran itvs3 FIND I(DTVS) AT=3
+.meas tran ttrip WHEN I(RS)=0.1 FALL=1
+.meas tran i45 FIND I(RS) AT=45
+.meas tran vl45 FIND V(vl) AT=45
+.meas tran vo45 FIND V(vo) AT=45
+.meas tran t45 FIND V(dt)+23 AT=45
+.meas tran ptc45 FIND V(vo,vl)*I(BPTC) AT=45
+.end

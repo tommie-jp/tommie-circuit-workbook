@@ -1,0 +1,42 @@
+* 7-9 ブラシレスの原理 (図1)。5 V、U1 = ULN2003A の 3 回路、R1〜R3 47 ohm、モータの 3 相の巻線 (星形、中点 COM を 5 V へ)
+* 巻線は 1 相 2 ohm・1 mH と仮定 (品で違う。テスターで測る)。回っているときの逆起電力は入れていない (止めて見る)
+* ULN2003A の 1 回路は 2.7k + ダーリントン (B-E に 7.2k と 3k) + 出力から COM へのダイオードの模型 (仮定)。NPN は 7-1 と同じ Q1815 の代用。実測ではない
+* 入力は AD3 の DIO (0 / 3.3 V、2 Hz、デューティ比 50 %、位相 0・120・240 度)
+.model QD NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.3 RB=30 RE=0.5 RC=1 CJE=8p CJC=2p TF=2n TR=50n)
+.model DCL D (IS=2.52n N=1.752 RS=0.5 BV=100)
+.subckt ULNCH in out com gnd
+Rin in b1 2.7k
+Q1 out b1 e1 QD
+R1 b1 e1 7.2k
+Q2 out e1 gnd QD
+R2 e1 gnd 3k
+D1 out com DCL
+.ends
+.param T=500m
+VCC vcc 0 5
+VA a 0 PULSE(0 3.3 0 1u 1u {T/2} {T})
+VB b 0 PULSE(0 3.3 {T/3} 1u 1u {T/2} {T})
+VC c 0 PULSE(0 3.3 {2*T/3} 1u 1u {T/2} {T})
+XU1 a ou vcc 0 ULNCH
+XU2 b ov vcc 0 ULNCH
+XU3 c ow vcc 0 ULNCH
+R1 ou pu 47
+R2 ov pv 47
+R3 ow pw 47
+Lu pu u1 1m
+Ru u1 com 2
+Lv pv v1 1m
+Rv v1 com 2
+Lw pw w1 1m
+Rw w1 com 2
+Vcom vcc com 0
+.tran 0 2 0 50u
+.meas tran iu_on AVG -I(R1) FROM=1.05 TO=1.15
+.meas tran vou_on AVG V(ou) FROM=1.05 TO=1.15
+.meas tran icom_max MAX I(Vcom) FROM=1 TO=2
+.meas tran icom_avg AVG I(Vcom) FROM=1 TO=2
+.meas tran vou_pk MAX V(ou) FROM=1 TO=2
+.meas tran tdel TRIG V(ou) VAL=2.5 FALL=3 TARG V(ov) VAL=2.5 FALL=3
+.meas tran pr1 AVG I(R1)*I(R1)*47 FROM=1 TO=2
+.meas tran iin AVG I(VA) FROM=1.05 TO=1.15
+.end

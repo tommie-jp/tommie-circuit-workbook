@@ -1,0 +1,14 @@
+* 1-14 レモン電池 (図1)。1 個を「開放 0.90 V・内部抵抗 1.0 kΩ」の電圧源 + 抵抗とみなす (仮定。果物・電極の大きさ・差し込む深さで大きく変わる)
+* n 個を直列にして、負荷 (1 kΩ か赤 LED) をつなぐ。LED は 1-1 と同じ模型 (仮定)
+.param n=4 rint=1k vc=0.9 load=0
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+V1 a 0 {n*vc}
+Rint a b {n*rint}
+* load=0: 赤 LED、load=1: 1 kΩ
+RL b c {if(load,1k,1m)}
+D1 c 0 LED
+RS c 0 {if(load,1m,1G)}
+.op
+.meas op vb FIND V(b)
+.meas op i FIND I(Rint)
+.end

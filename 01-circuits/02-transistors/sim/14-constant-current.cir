@@ -1,0 +1,41 @@
+* 2-14 定電流源 (図1)。A = Tr + ツェナー、B = Tr 2 石。負荷 (680 ohm) の上を W1 で -5〜+5 V に振り (.dc)、負荷の電圧 (= 電流 × 680 ohm)・RE と RS の電圧と、負荷の電流が 1 % 落ちる W1 の電圧を読む
+* Q1815 は 2SC1815 の代用 (2-3 の sim/03-common-emitter.cir と同じ)。DZ51 は 5.1 V ツェナー (1N5231B 相当、20 mA で 5.1 V・17 ohm) の仮定。どちらも実測ではない
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=50 RE=1 RC=5 CJE=15p CJC=4p TF=2.8n TR=50n)
+.model DZ51 D (IS=1e-14 RS=17 BV=4.76 IBV=1m NBV=1.5)
+VP vp 0 5
+VN vn 0 -5
+VW1 w1 0 0
+* A: Tr + ツェナー
+RZ vp za 1k
+DZ1 vn za DZ51
+Q1 ca za ea Q1815
+RE ea vn 1.3k
+RL1 w1 ca 680
+* B: Tr 2 石
+RB 0 bb 10k
+Q2 cb bb eb Q1815
+Q3 bb eb vn Q1815
+RS eb vn 200
+RL2 w1 cb 680
+.dc VW1 -5 5 0.01
+.meas dc va FIND V(ea,vn) AT 5
+.meas dc vb FIND V(eb,vn) AT 5
+.meas dc vz FIND V(za,vn) AT 5
+.meas dc ia FIND I(RE) AT 5
+.meas dc ib FIND I(RS) AT 5
+.meas dc la FIND V(w1,ca) AT 5
+.meas dc lb FIND V(w1,cb) AT 5
+.meas dc wa WHEN V(w1,ca)=0.99*la RISE=1
+.meas dc wb WHEN V(w1,cb)=0.99*lb RISE=1
+.meas dc la0 FIND V(w1,ca) AT 0
+.meas dc lb0 FIND V(w1,cb) AT 0
+.meas dc la1 FIND V(w1,ca) AT 1
+.meas dc la25 FIND V(w1,ca) AT 2.5
+.meas dc lb25 FIND V(w1,cb) AT 2.5
+.meas dc vca5 FIND V(ca) AT 5
+.meas dc vea FIND V(ea) AT 5
+.meas dc vcb5 FIND V(cb) AT 5
+.meas dc veb FIND V(eb) AT 5
+.meas dc vbb FIND V(bb) AT 5
+.meas dc iz FIND I(RZ) AT 5
+.end

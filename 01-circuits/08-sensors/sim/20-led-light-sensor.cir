@@ -1,0 +1,18 @@
+* 8-20 LED を受光素子に (図1)。受光の赤い LED (D1) を「光電流 Iph + LED のダイオード + 接合容量 30 pF」で置き、2SC1815 のベースへ入れる
+* 光電流は 1 kHz の方形で 0〜ipk (0.5 uA と 1.5 uA)。値は仮定で、実測ではない (LED の明るさ・距離・向きで 1 桁以上変わる)
+* Q1815 は 2-21 と同じ 2SC1815 の代用の模型 (仮定)
+.param ipk=0.5u
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=50 RE=1 RC=5 CJE=15p CJC=4p TF=2.8n TR=50n)
+.model LEDR D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+VCC vcc 0 5
+Iph 0 b PULSE(0 {ipk} 100u 100n 100n 500u 1m)
+D1 b 0 LEDR
+Q1 c b 0 Q1815
+RC vcc c 10k
+.step param ipk list 0.5u 1.5u
+.tran 0 3m 0 0.2u
+.meas tran vc_dark AVG V(c) FROM 2.8m TO 3.0m
+.meas tran vc_lit AVG V(c) FROM 2.4m TO 2.6m
+.meas tran vb_lit AVG V(b) FROM 2.4m TO 2.6m
+.meas tran ic_lit AVG Ic(Q1) FROM 2.4m TO 2.6m
+.end

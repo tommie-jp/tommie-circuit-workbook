@@ -1,0 +1,36 @@
+* 3-13 VCO — 555 の 5 番ピン (図1)。Ra=10k Rb=10k C1=68n、5 番を W1 の直流 (vc) で動かす、5 V
+* NE555 は 3-2 と同じ動作の模型 (仮定。実測ではない)。圧電スピーカーは 22 nF の容量と仮定し、R3=1k を直列に入れた
+.subckt NE555B GND TRIG OUT RESET CONT THR DIS VCC
+R1 VCC CONT 5k
+R2 CONT NA 5k
+R3 NA GND 5k
+BS S 0 V = 0.5*(1+tanh((V(NA)-V(TRIG))/5m))
+BR R 0 V = 0.5*(1+tanh((V(THR)-V(CONT))/5m))
+BQ 0 Q I = 1e-3*( 1e5*( V(S)*(1-V(Q))*(1-V(R)) - V(R)*V(Q) ) + 8e3*V(Q)*(1-V(Q))*(V(Q)-0.5) )
+CQ Q 0 1n
+RQ Q 0 1e13
+BG G 0 V = 0.5*(1+tanh((V(Q)-0.5)/0.02))*0.5*(1+tanh((V(RESET)-0.7)/0.02))
+BO OUT 0 V = 0.1 + (V(VCC)-1.6)*V(G)
+BD DIS GND I = V(DIS,GND)*((1-V(G))/10 + 1n)
+.ends
+V1 vcc 0 5
+VW1 w1 0 {vc}
+Ra vcc dis 10k
+Rb dis thr 10k
+C1 thr 0 68n
+XU1 0 thr out vcc w1 thr dis vcc NE555B
+R3 out sp 1k
+CSP sp 0 22n
+.param vc=3
+.step param vc list 1.5 2 2.5 3 3.5 4
+.ic V(thr)=0
+.tran 0 60m 0 1u
+.meas tran ta WHEN V(out)=2 RISE=5
+.meas tran tb WHEN V(out)=2 RISE=25
+.meas tran fo param 20/(tb-ta)
+.meas tran tf WHEN V(out)=2 FALL=6
+.meas tran duty param (tf-ta)*fo
+.meas tran vthmax MAX V(thr) FROM=40m TO=60m
+.meas tran vthmin MIN V(thr) FROM=40m TO=60m
+.meas tran iw1 AVG I(VW1) FROM=40m TO=60m
+.end

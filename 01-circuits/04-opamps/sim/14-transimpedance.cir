@@ -1,0 +1,39 @@
+* 4-14 トランスインピーダンス増幅 (図1)。フォトダイオード BPW34 (CD 70 pF @ 0 V、データシートの代表値) を
+* 光電流の電流源 (方形波 1 kHz、0 と 20 uA。LED を近づけた目安で、実測ではない) + 70 pF で表す
+* cf で帰還のコンデンサ Cf を 100p / 0 に振る。比べ: 同じ光電流を 10 kΩ の抵抗だけで受ける (Vpd = Iph × R)
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.param cf=100p
+Vp vp 0 5
+Vn vn 0 -5
+* フォトダイオード (陽極 GND、陰極 = − 入力)。光電流は陰極から陽極へ (陰極の節点から引き抜く)
+Iph k 0 PULSE(0 20u 100u 50n 50n 500u 1m)
+Cd k 0 70p
+Rf out k 10k
+Cfb out k {cf+1f}
+XU1 0 k out vp vn OPA
+* 比べ: 抵抗だけで受ける
+Iph2 k2 0 PULSE(0 20u 100u 50n 50n 500u 1m)
+Cd2 k2 0 70p
+Rl 0 k2 10k
+.step param cf list 100p 0
+.tran 0 3m 0 20n
+.meas tran vhi AVG V(out) FROM=2.3m TO=2.55m
+.meas tran vlo AVG V(out) FROM=2.8m TO=3m
+.meas tran vmax MAX V(out) FROM=2.1m TO=2.3m
+.meas tran tr TRIG V(out) VAL=0.02 RISE=3 TARG V(out) VAL=0.18 RISE=3
+.meas tran v2 AVG V(k2) FROM=2.3m TO=2.55m
+.meas tran vk MAX V(k) FROM=2.3m TO=2.55m
+.end

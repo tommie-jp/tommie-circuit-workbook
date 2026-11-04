@@ -1,0 +1,46 @@
+* 10-16 オープンドレインと配線 AND: 2N7000 2 個のドレインを 1 本の線 LINE にまとめ、Rp で 5 V へ引き上げる
+* C1 1 nF は線の容量の代わり (配線と相手の入力の容量をまとめた見積り)
+* 2N7000 は他の題と同じ LEVEL 1 の近似 (VTO 2.1 V、仮定)。Rp は .step で 10 kΩ と 1 kΩ
+* ゲートは W1 = 10 kHz の方形波 (0-5 V)、W2 = 0 V (Q2 は切れたまま)。真理値は 2 本目の組 (W1b・W2b) で 4 通り
+.model M2N7000 NMOS (LEVEL=1 VTO=2.1 KP=0.1 LAMBDA=0.01 CBD=10p)
+.param rp=10k
+V1 vcc 0 5
+VW1 g1 0 PULSE(0 5 0 10n 10n 50u 100u)
+VW2 g2 0 0
+M1 line g1 0 0 M2N7000
+M2 line g2 0 0 M2N7000
+Rp vcc line {rp}
+C1 line 0 1n
+* 真理値: 4 組の直流
+.subckt OD ga gb out vdd
+M1 out ga 0 0 M2N7000
+M2 out gb 0 0 M2N7000
+Rp vdd out 10k
+.ends
+V00a a00 0 0
+V00b b00 0 0
+X00 a00 b00 l00 vcc OD
+V01a a01 0 0
+V01b b01 0 5
+X01 a01 b01 l01 vcc OD
+V10a a10 0 5
+V10b b10 0 0
+X10 a10 b10 l10 vcc OD
+V11a a11 0 5
+V11b b11 0 5
+X11 a11 b11 l11 vcc OD
+.step param rp list 10k 1k
+.tran 0 300u 0 20n
+.meas tran t10 WHEN V(line)=0.5 RISE=2
+.meas tran t90 WHEN V(line)=4.5 RISE=2
+.meas tran trise PARAM t90-t10
+.meas tran f90 WHEN V(line)=4.5 FALL=2
+.meas tran f10 WHEN V(line)=0.5 FALL=2
+.meas tran tfall PARAM f10-f90
+.meas tran vlow FIND V(line) AT 140u
+.meas tran ilow FIND I(Rp) AT 140u
+.meas tran l00 FIND V(l00) AT 140u
+.meas tran l01 FIND V(l01) AT 140u
+.meas tran l10 FIND V(l10) AT 140u
+.meas tran l11 FIND V(l11) AT 140u
+.end

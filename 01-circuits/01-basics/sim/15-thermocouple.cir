@@ -1,0 +1,25 @@
+* 1-15 熱電対 (K 形) の増幅 (図1)。LM358 の非反転増幅 101 倍 (R2 100k / R1 1k)。電源 ±5 V (AD3)
+* 熱電対は熱起電力 vtc (= 測温接点の E − 冷接点の E) の電圧源 (冷接点 25 °C、NIST ITS-90 の K 形の表: 0 °C 0、25 °C 1.000 mV、80 °C 3.267 mV、100 °C 4.096 mV)
+* オペアンプは 04-opamps/sim の汎用模型 OPA (LM358 相当の仮定) に、入力オフセット vos を外付けの電圧源で足した (仮定。実測ではない)
+.param vtc=0 vos=0
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+Vp vp 0 5
+Vn vn 0 -5
+VTC tc 0 {vtc}
+VOS p tc {vos}
+XU1 p m o vp vn OPA
+R1 m 0 1k
+R2 o m 100k
+.op
+.meas op vo FIND V(o)
+.end

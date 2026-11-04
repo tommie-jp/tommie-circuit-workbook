@@ -1,0 +1,28 @@
+* 1-11 LC 共振 — 直列 (図1 左) と並列 (図1 右)。L 10 mH (巻線抵抗 20 ohm、9-1 の実測の値を仮定)・C 10 nF
+* 直列: W1 -> R1 100 -> L1 -> m -> C1 -> GND。V(m) が C1 の電圧。並列: W1 -> R2 10k -> p -> (L2 + 20 ohm) || C2 -> GND
+* 計器の入力 1 MΩ を m と p に入れる。W1 は振幅 1 (比を読む)
+VW1 w 0 AC 1
+R1 w s1 100
+L1 s1 x1 10m
+RL1 x1 m 20
+C1 m 0 10n
+RS1 m 0 1Meg
+R2 w p 10k
+L2 p x2 10m
+RL2 x2 0 20
+C2 p 0 10n
+RS2 p 0 1Meg
+.ac dec 400 2k 100k
+.meas ac fs MAX mag(V(m))
+.meas ac f0s WHEN ph(V(m))=-90
+.meas ac fp MAX mag(V(p))
+.meas ac f0p WHEN ph(V(p))=0 FALL=1
+.meas ac i0 FIND mag(I(R1)) AT 15.915k
+.meas ac vm0 FIND mag(V(m)) AT 15.915k
+.meas ac vp0 FIND mag(V(p)) AT 15.915k
+.meas ac vm10k FIND mag(V(m)) AT 10k
+.meas ac vp10k FIND mag(V(p)) AT 10k
+.meas ac vm25k FIND mag(V(m)) AT 25k
+.meas ac vp25k FIND mag(V(p)) AT 25k
+.meas ac bwlo WHEN mag(V(p))=0.7071*0.8 RISE=1
+.end

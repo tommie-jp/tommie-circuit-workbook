@@ -1,0 +1,31 @@
+* 2-12 カスコード (図1) の過渡。W1 = 20 kHz・20 mVpp の方形波で、出力の立ち下がり (入力の立ち上がりで出力は下がる) の 10-90 % の時間を読む。直流の電圧も平均で読む
+* Q1815 は 2SC1815 の代用 (2-3 の sim/03-common-emitter.cir と同じ。実測ではない)。Cpr はオシロの入力容量の仮定 (20 pF)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=50 RE=1 RC=5 CJE=15p CJC=4p TF=2.8n TR=50n)
+.param rj=1G
+VCC vcc 0 5
+R1 vcc b2 22k
+R2 b2 b1 6.8k
+R3 b1 0 12k
+CB b2 0 10u
+Q2 c b2 e2 Q1815
+Q1 e2 b1 e Q1815
+RE e 0 820
+CE e 0 100u
+RC vcc c 2.2k
+RJ c e2 {rj}
+Cpr c 0 20p
+Vs w1 0 DC 0 AC 1 PULSE(-10m 10m 0 10n 10n 25u 50u)
+RS w1 s 10k
+CIN s b1 1u
+.step param rj list 1m 1G
+.tran 0 300u 0 20n
+.meas tran vlo AVG V(c) FROM=270u TO=275u
+.meas tran vhi AVG V(c) FROM=295u TO=300u
+.meas tran tr TRIG V(c) VAL=vhi+0.1*(vlo-vhi) TD=250u FALL=1 TARG V(c) VAL=vhi+0.9*(vlo-vhi) TD=250u FALL=1
+.meas tran vb1 AVG V(b1) FROM=200u TO=300u
+.meas tran vb2 AVG V(b2) FROM=200u TO=300u
+.meas tran ve AVG V(e) FROM=200u TO=300u
+.meas tran ve2 AVG V(e2) FROM=200u TO=300u
+.meas tran vc AVG V(c) FROM=200u TO=300u
+.meas tran ic AVG I(RC) FROM=200u TO=300u
+.end

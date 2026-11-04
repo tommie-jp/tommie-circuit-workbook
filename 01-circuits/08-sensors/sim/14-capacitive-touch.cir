@@ -1,0 +1,28 @@
+* 8-14 静電容量タッチ (図1)。40106 の RC 発振を 2 組 (A は基準、B に電極)。B に触れると電極の容量 CT が C2 に並ぶ
+* 40106 は LTspice の SCHMITT で置く (TI CD40106B の 5 V の典型値 VT+ 2.9 V・VT- 1.9 V。3-8 と同じ)
+* 浮遊容量 Cs (配線・電極・入力の容量) は 10 pF、触れたときの CT は 30 pF と仮定した (実測ではない)
+.param ct=0
+VDD vdd 0 5
+* 起動のきっかけ: LTspice の論理素子は入力がしきい値を跨ぐまで出力を決めないので、最初に 1 µs だけ 1 mA を入れて C をしきい値の上まで上げる
+Ika 0 ca PULSE(0 1m 1u 1n 1n 1u)
+Ikb 0 cb PULSE(0 1m 1u 1n 1n 1u)
+* 基準の発振 A
+A1 ca 0 0 0 0 oa qa 0 SCHMITT Vt=2.4 Vh=0.5 Vhigh=5 Vlow=0 Td=100n Trise=50n Tfall=50n
+RfA oa ca 1Meg
+C1 ca 0 100p
+CsA ca 0 10p
+* 電極つきの発振 B
+A2 cb 0 0 0 0 ob qb 0 SCHMITT Vt=2.4 Vh=0.5 Vhigh=5 Vlow=0 Td=100n Trise=50n Tfall=50n
+RfB ob cb 1Meg
+C2 cb 0 100p
+CsB cb 0 10p
+CT cb 0 {ct+1f}
+.step param ct list 0 30p
+.tran 0 2m 0 200n
+.meas tran ta TRIG V(oa) VAL=2.5 RISE=5 TARG V(oa) VAL=2.5 RISE=15
+.meas tran tb TRIG V(ob) VAL=2.5 RISE=5 TARG V(ob) VAL=2.5 RISE=15
+.meas tran fa PARAM 10/ta
+.meas tran fb PARAM 10/tb
+.meas tran vcmax MAX V(cb) FROM 1m TO 2m
+.meas tran vcmin MIN V(cb) FROM 1m TO 2m
+.end

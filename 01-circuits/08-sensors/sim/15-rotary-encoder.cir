@@ -1,0 +1,38 @@
+* 8-15 ロータリーエンコーダ (図1)。KY-040 の接点 (A = CLK、B = DT) を GND への電圧制御スイッチ + 基板の 10 kΩ のプルアップで置く
+* dir=1: 時計回り (CLK が DT より 1/4 周期先に閉じる)。dir=-1: 反時計回り (DT が先)。1 クリックぶんの周期 40 ms (仮定)
+* 74HC14 は SCHMITT (VT+ 2.77 V・VT- 1.73 V、8-11 と同じ目安)。74HC74 は LTspice の DFLOP (立ち上がりで D を取り込む)
+.param dir=1
+.param ta=if(dir>0,10m,20m)
+.param tb=if(dir>0,20m,10m)
+.model SW SW(Ron=50 Roff=100Meg Vt=0.5 Vh=0.1)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+VCC vcc 0 5
+VKA ka 0 PULSE(0 1 {ta} 1u 1u 20m 1)
+VKB kb 0 PULSE(0 1 {tb} 1u 1u 20m 1)
+SA clk 0 ka 0 SW
+SB dt 0 kb 0 SW
+RPA vcc clk 10k
+RPB vcc dt 10k
+R1 clk a 10k
+C1 a 0 10n
+R2 dt b 10k
+C2 b 0 10n
+A1 a 0 0 0 0 na qa 0 SCHMITT Vt=2.25 Vh=0.52 Vhigh=5 Vlow=0 Td=10n
+A2 b 0 0 0 0 nb qb 0 SCHMITT Vt=2.25 Vh=0.52 Vhigh=5 Vlow=0 Td=10n
+* DFLOP: D、(空き)、CLK、PRE、CLR、/Q、Q
+A3 nb 0 na 0 0 qn q 0 DFLOP Vhigh=5 Vlow=0 Td=20n
+R3 q d1 1k
+D1 d1 0 LED
+R4 qn d2 1k
+D2 d2 0 LED
+.step param dir list 1 -1
+.tran 0 50m 0 2u
+.meas tran pdir PARAM dir
+.meas tran pta PARAM ta
+.meas tran tcl FIND time WHEN V(na)=2.5 RISE=1
+.meas tran dly PARAM tcl-ta
+.meas tran vq FIND V(q) AT 45m
+.meas tran vqn FIND V(qn) AT 45m
+.meas tran iled MAX I(D1) FROM 40m TO 50m
+.meas tran iled2 MAX I(D2) FROM 40m TO 50m
+.end

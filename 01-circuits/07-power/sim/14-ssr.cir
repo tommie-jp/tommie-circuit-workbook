@@ -1,0 +1,58 @@
+* 7-14 ソリッドステートリレー (図1)。U1 = MOC3021 (フォトトライアック)、TR1 = Z0103MA、RL 220、R2 330、RGK 1k、AC 12 V 実効値 50 Hz
+* 入力: AD3 の V+ 5 V から R1 180 ohm と U1 の LED、Q1 2N7000 (ゲートは W1、0 / 5 V、4 Hz)。
+* トライアックは 7-13 と同じ 2 組のサイリスタの模型 (仮定)。U1 の出力も同じ形で、LED の電流の 1/10 を両方の組のベースへ送る (光で点く、の仮定)。
+* LED は VF 1.15 V @ 10 mA に寄せた模型。2N7000 は 7-2 と同じ。実測ではない
+.model QN NPN (IS=1e-14 BF=50 CJE=5p CJC=5p TF=50n)
+.model QP PNP (IS=1e-14 BF=10 CJE=5p CJC=5p TF=200n)
+.model DG D (IS=1e-12 N=1.5)
+.model DLED D (IS=1e-18 N=1.6 RS=3)
+.model NM2N7000 NMOS (VTO=2.1 KP=0.0926 LAMBDA=0.01 CGSO=20p CGDO=5p)
+.subckt TRIAC mt2 mt1 g
+Q1n n1 b1 mt1 QN
+Q1p b1 n1 mt2 QP
+Rb1 b1 mt1 470
+Rn1 mt2 n1 10k
+Q2n n2 b2 mt2 QN
+Q2p b2 n2 mt1 QP
+Rb2 b2 mt2 470
+Rn2 mt1 n2 10k
+Vgs g gi 0
+Dg1 gi b1 DG
+Dg2 mt1 gi DG
+Bi2 mt2 b2 I=max(-I(Vgs),0)
+.ends
+* 光で点くトライアック (ゲートの代わりに LED の電流 iled を両方の組へ)
+.subckt PTRIAC mt6 mt4 led_p led_n
+Dl led_p ln DLED
+Vl ln led_n 0
+Q1n n1 b1 mt4 QN
+Q1p b1 n1 mt6 QP
+Rb1 b1 mt4 470
+Rn1 mt6 n1 10k
+Q2n n2 b2 mt6 QN
+Q2p b2 n2 mt4 QP
+Rb2 b2 mt6 470
+Rn2 mt4 n2 10k
+B1 mt4 b1 I=0.1*max(I(Vl),0)
+B2 mt6 b2 I=0.1*max(I(Vl),0)
+.ends
+VAC l 0 SINE(0 {12*sqrt(2)} 50 0 0 -54)
+RL l mt2 220
+XTR1 mt2 0 g TRIAC
+RGK g 0 1k
+R2 mt2 m6 330
+XU1 m6 g a k PTRIAC
+VP vp 0 5
+R1 vp a 180
+M1 k gq 0 0 NM2N7000
+VW gq 0 PULSE(0 5 0 1u 1u 125m 250m)
+.tran 0 260m 0 5u
+.meas tran iled AVG I(R1) FROM=50m TO=100m
+.meas tran ipk MAX I(RL) FROM=0 TO=125m
+.meas tran ig_pk MAX I(R2) FROM=0 TO=125m
+.meas tran t_on WHEN I(RL)=-0.01 FALL=1
+.meas tran t_off WHEN I(RL)=0.001 FALL=1 TD=125m
+.meas tran t_rf WHEN I(RL)=0.01 RISE=1 TD=3m
+.meas tran vload RMS V(l,mt2) FROM=20m TO=120m
+.meas tran vmt2 FIND V(mt2) AT=55m
+.end

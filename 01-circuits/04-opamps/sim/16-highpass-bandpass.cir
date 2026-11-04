@@ -1,0 +1,42 @@
+* 4-16 ハイパス (サレンキー、fc 約 300 Hz) + ローパス (サレンキー、fc 約 3 kHz) = 帯域通過 (図1)。±5 V
+* HP: C1 = C2 = 47n、R1 = 8.2k (帰還)、R2 = 16k (GND へ)。LP: R3 = R4 = 16k、C3 = 4.7n (帰還)、C4 = 2.2n (GND へ)
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+Vp vp 0 5
+Vn vn 0 -5
+Vs in 0 AC 1 SINE(0 1 100)
+C1 in x 47n
+C2 x p1 47n
+R1 x hp 8.2k
+R2 p1 0 16k
+XU1 p1 hp hp vp vn OPA
+R3 hp y 16k
+R4 y p2 16k
+C3 y out 4.7n
+C4 p2 0 2.2n
+XU2 p2 out out vp vn OPA
+.ac dec 50 10 100k
+.meas ac g100 FIND mag(V(out)) AT 100
+.meas ac p100 FIND ph(V(out)) AT 100
+.meas ac g300 FIND mag(V(out)) AT 300
+.meas ac g1k FIND mag(V(out)) AT 1k
+.meas ac g3k FIND mag(V(out)) AT 3k
+.meas ac g10k FIND mag(V(out)) AT 10k
+.meas ac g30 FIND mag(V(out)) AT 30
+.meas ac gmax MAX mag(V(out))
+.meas ac flo WHEN mag(V(out))=0.7071 RISE=1
+.meas ac fhi WHEN mag(V(out))=0.7071 FALL=1
+.meas ac hp300 FIND mag(V(hp)) AT 296
+.end

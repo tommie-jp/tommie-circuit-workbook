@@ -1,0 +1,77 @@
+* 4-13 計装アンプ (OP アンプ 3 つ、図1)。ブリッジ (10k/10k と 10k/11k) を W1 (1 kHz・振幅 2 V) で励振、±5 V
+* 前段 U1・U2 (Rf1 = Rf2 = 10k、Rg = 2.2k) + 差動段 U3 (4 本とも 10k)。利得 = (1 + 2×10k/2.2k) × 1
+* 比べ 1: 同じブリッジに 4-7 の差動増幅 (10k / 100k、利得 10) を直接つなぐ (XD)
+* 比べ 2: mis で差動段の R14 (と 4-7 の R4) を 1 % ずらし、同相の漏れを見る
+* オペアンプは LM324 相当の仮定 (汎用模型)
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.param mis=1
+Vp vp 0 5
+Vn vn 0 -5
+Vs t 0 SINE(0 2 1k)
+* ブリッジ (図1)
+R7 t a 10k
+R8 a 0 10k
+R5 t b 10k
+R6 b 0 11k
+* 前段
+XU1 a n1 voa vp vn OPA
+XU2 b n2 vob vp vn OPA
+Rf1 voa n1 10k
+Rg n1 n2 2.2k
+Rf2 vob n2 10k
+* 差動段
+R11 voa m 10k
+R12 m out 10k
+R13 vob p 10k
+R14 p 0 {10k*mis}
+XU3 p m out vp vn OPA
+* 比べ 1: 同じ形のブリッジをもう 1 組作り、4-7 の差動増幅を直接つなぐ
+R7d t ad 10k
+R8d ad 0 10k
+R5d t bd 10k
+R6d bd 0 11k
+R1d ad md 10k
+Rfd md outd 100k
+R3d bd pd 10k
+R4d pd 0 {100k*mis}
+XD pd md outd vp vn OPA
+* 比べ 3: 同相だけを入れる (ブリッジを 10k/10k の釣り合いにした計装アンプ)
+R7c t ac 10k
+R8c ac 0 10k
+R5c t bc 10k
+R6c bc 0 10k
+XC1 ac n1c voac vp vn OPA
+XC2 bc n2c vobc vp vn OPA
+Rf1c voac n1c 10k
+Rgc n1c n2c 2.2k
+Rf2c vobc n2c 10k
+R11c voac mc 10k
+R12c mc outc 10k
+R13c vobc pc 10k
+R14c pc 0 {10k*mis}
+XC3 pc mc outc vp vn OPA
+.step param mis list 1 1.01
+.tran 0 10m 5m 1u
+.meas tran va_pk MAX V(a)
+.meas tran vb_pk MAX V(b)
+.meas tran voa_pk MAX V(voa)
+.meas tran vob_pk MAX V(vob)
+.meas tran out_pk MAX V(out)
+.meas tran outd_pk MAX V(outd)
+.meas tran outc_pp PP V(outc)
+.meas tran ad_pk MAX V(ad)
+.meas tran bd_pk MAX V(bd)
+.end

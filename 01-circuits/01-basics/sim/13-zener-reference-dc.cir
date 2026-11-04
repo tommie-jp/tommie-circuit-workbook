@@ -1,0 +1,15 @@
+* 1-13 ツェナーで基準電圧 (図1) の入力の電圧を振る .dc。負荷なし (rl 1G) と 2.2k。模型は 13-zener-reference.cir と同じ (仮定)
+.param rl=1G
+.model DZ D (IS=1e-14 BV=4.78 IBV=20m RS=16 CJO=100p)
+VB vin 0 9
+R1 vin k 680
+DZ 0 k DZ
+RL k 0 {rl}
+.dc VB 4 12 0.05
+.meas dc vz6 FIND V(k) AT 6
+.meas dc vz8 FIND V(k) AT 8
+.meas dc vz9 FIND V(k) AT 9
+.meas dc vz10 FIND V(k) AT 10
+.meas dc iz9 FIND I(DZ) AT 9
+.meas dc vz5 FIND V(k) AT 5
+.end

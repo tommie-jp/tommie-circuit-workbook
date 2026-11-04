@@ -1,0 +1,19 @@
+* 0-8 ド・ソーティのブリッジ (図1)。CS 0.1u・CX 47n、R1 = 1k + ra、R2 = 1k + (10k - ra)、ワイパーが GND
+* ra を 5k (真ん中)・2.837k (釣り合い)・2.937k (+100 ohm) に替え、1 kHz の P - Q を読む。W1 は振幅 1 V (2 Vpp)
+.param ra=5k
+VW1 a 0 AC 1
+CS a p 100n
+CX a q 47n
+R1 p n1 1k
+RA n1 0 {ra}
+R2 q n2 1k
+RB n2 0 {10k-ra}
+.ac list 500 1k 2k
+.meas ac dpq1k FIND mag(V(p)-V(q)) AT 1k
+.meas ac php FIND ph(V(p)) AT 1k
+.meas ac phq FIND ph(V(q)) AT 1k
+.meas ac redpq FIND re(V(p)-V(q)) AT 1k
+.meas ac imdpq FIND im(V(p)-V(q)) AT 1k
+.meas ac dpq500 FIND mag(V(p)-V(q)) AT 500
+.meas ac dpq2k FIND mag(V(p)-V(q)) AT 2k
+.end

@@ -1,0 +1,63 @@
+* 10-18 I2C バスの電気: SCL の線を 2N7000 (オープンドレインの出力の代わり) で引き、Rp で 5 V へ引き上げる。Cb はバスの容量の代わり
+* (Rp, Cb) の 6 通りを同じ回路 6 組で並べた: 1 = (2.2k,100p) 2 = (4.7k,100p) 3 = (10k,100p) 4 = (2.2k,330p) 5 = (4.7k,330p) 6 = (10k,330p)
+* 2N7000 は他の題と同じ LEVEL 1 の近似 (仮定、ドレインの容量 10 pF を含む)。ゲートは W1 = 100 kHz の方形波 (0-5 V)
+* 立ち上がりは I2C の決まりどおり 30 % -> 70 % (1.5 V -> 3.5 V) で測る。tcN は 0.8473 Rp Cb の算術 (10 pF を含めない)
+.model M2N7000 NMOS (LEVEL=1 VTO=2.1 KP=0.1 LAMBDA=0.01 CBD=10p)
+V1 vcc 0 5
+VW1 g 0 PULSE(0 5 0 10n 10n 5u 10u)
+M1 s1 g 0 0 M2N7000
+Rp1 vcc s1 2.2k
+Cb1 s1 0 100p
+M2 s2 g 0 0 M2N7000
+Rp2 vcc s2 4.7k
+Cb2 s2 0 100p
+M3 s3 g 0 0 M2N7000
+Rp3 vcc s3 10k
+Cb3 s3 0 100p
+M4 s4 g 0 0 M2N7000
+Rp4 vcc s4 2.2k
+Cb4 s4 0 330p
+M5 s5 g 0 0 M2N7000
+Rp5 vcc s5 4.7k
+Cb5 s5 0 330p
+M6 s6 g 0 0 M2N7000
+Rp6 vcc s6 10k
+Cb6 s6 0 330p
+.tran 0 40u 0 5n
+.meas tran a1 WHEN V(s1)=1.5 RISE=2
+.meas tran b1 WHEN V(s1)=3.5 RISE=2
+.meas tran tr1 PARAM b1-a1
+.meas tran tc1 PARAM 0.8473*2.2e3*100e-12
+.meas tran il1 FIND I(Rp1) AT 13u
+.meas tran vl1 FIND V(s1) AT 13u
+.meas tran a2 WHEN V(s2)=1.5 RISE=2
+.meas tran b2 WHEN V(s2)=3.5 RISE=2
+.meas tran tr2 PARAM b2-a2
+.meas tran tc2 PARAM 0.8473*4.7e3*100e-12
+.meas tran il2 FIND I(Rp2) AT 13u
+.meas tran vl2 FIND V(s2) AT 13u
+.meas tran a3 WHEN V(s3)=1.5 RISE=2
+.meas tran b3 WHEN V(s3)=3.5 RISE=2
+.meas tran tr3 PARAM b3-a3
+.meas tran tc3 PARAM 0.8473*10e3*100e-12
+.meas tran il3 FIND I(Rp3) AT 13u
+.meas tran vl3 FIND V(s3) AT 13u
+.meas tran a4 WHEN V(s4)=1.5 RISE=2
+.meas tran b4 WHEN V(s4)=3.5 RISE=2
+.meas tran tr4 PARAM b4-a4
+.meas tran tc4 PARAM 0.8473*2.2e3*330e-12
+.meas tran il4 FIND I(Rp4) AT 13u
+.meas tran vl4 FIND V(s4) AT 13u
+.meas tran a5 WHEN V(s5)=1.5 RISE=2
+.meas tran b5 WHEN V(s5)=3.5 RISE=2
+.meas tran tr5 PARAM b5-a5
+.meas tran tc5 PARAM 0.8473*4.7e3*330e-12
+.meas tran il5 FIND I(Rp5) AT 13u
+.meas tran vl5 FIND V(s5) AT 13u
+.meas tran a6 WHEN V(s6)=1.5 RISE=2
+.meas tran b6 WHEN V(s6)=3.5 RISE=2
+.meas tran tr6 PARAM b6-a6
+.meas tran tc6 PARAM 0.8473*10e3*330e-12
+.meas tran il6 FIND I(Rp6) AT 13u
+.meas tran vl6 FIND V(s6) AT 13u
+.end

@@ -1,0 +1,70 @@
+* 10-15 RTL の NOR と DTL の NAND (2SC1815 と 1N4148) の真理値
+* RTL: 入力 A・B から 10 kΩ で Q1・Q2 のベースへ、コレクタは共通の Rc1 1 kΩ で 5 V へ
+* DTL: 入力 A・B に D1・D2 (カソードが入力)、アノードの節点 P を R1 4.7 kΩ で 5 V へ、P から D3・D4 を通して Q3 のベース、ベースは Rbd 10 kΩ で GND、Rc2 1 kΩ
+* 2SC1815 と 1N4148 は他の題と同じ近似モデル (仮定)。入力 (A, B) の 4 通りを、同じ回路を 4 組並べて .op で解く (末尾の数字が組: 0 = (0,0) 1 = (0,5) 2 = (5,0) 3 = (5,5) V)
+* 伝達特性は 15-rtl-dtl-sweep.cir
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model D4148 D (IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+V1 vcc 0 5
+VA0 a0 0 0
+VB0 b0 0 0
+Rb1_0 a0 b1_0 10k
+Rb2_0 b0 b2_0 10k
+Q1_0 nor0 b1_0 0 Q1815
+Q2_0 nor0 b2_0 0 Q1815
+Rc1_0 vcc nor0 1k
+D1_0 p0 a0 D4148
+D2_0 p0 b0 D4148
+R1_0 vcc p0 4.7k
+D3_0 p0 m0 D4148
+D4_0 m0 bs0 D4148
+Rbd_0 bs0 0 10k
+Q3_0 nand0 bs0 0 Q1815
+Rc2_0 vcc nand0 1k
+VA1 a1 0 0
+VB1 b1 0 5
+Rb1_1 a1 b1_1 10k
+Rb2_1 b1 b2_1 10k
+Q1_1 nor1 b1_1 0 Q1815
+Q2_1 nor1 b2_1 0 Q1815
+Rc1_1 vcc nor1 1k
+D1_1 p1 a1 D4148
+D2_1 p1 b1 D4148
+R1_1 vcc p1 4.7k
+D3_1 p1 m1 D4148
+D4_1 m1 bs1 D4148
+Rbd_1 bs1 0 10k
+Q3_1 nand1 bs1 0 Q1815
+Rc2_1 vcc nand1 1k
+VA2 a2 0 5
+VB2 b2 0 0
+Rb1_2 a2 b1_2 10k
+Rb2_2 b2 b2_2 10k
+Q1_2 nor2 b1_2 0 Q1815
+Q2_2 nor2 b2_2 0 Q1815
+Rc1_2 vcc nor2 1k
+D1_2 p2 a2 D4148
+D2_2 p2 b2 D4148
+R1_2 vcc p2 4.7k
+D3_2 p2 m2 D4148
+D4_2 m2 bs2 D4148
+Rbd_2 bs2 0 10k
+Q3_2 nand2 bs2 0 Q1815
+Rc2_2 vcc nand2 1k
+VA3 a3 0 5
+VB3 b3 0 5
+Rb1_3 a3 b1_3 10k
+Rb2_3 b3 b2_3 10k
+Q1_3 nor3 b1_3 0 Q1815
+Q2_3 nor3 b2_3 0 Q1815
+Rc1_3 vcc nor3 1k
+D1_3 p3 a3 D4148
+D2_3 p3 b3 D4148
+R1_3 vcc p3 4.7k
+D3_3 p3 m3 D4148
+D4_3 m3 bs3 D4148
+Rbd_3 bs3 0 10k
+Q3_3 nand3 bs3 0 Q1815
+Rc2_3 vcc nand3 1k
+.op
+.end

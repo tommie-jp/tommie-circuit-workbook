@@ -1,0 +1,38 @@
+* 5-11 MT3608 の昇圧モジュール (図1)。入力 3 V と 5 V (RS 1 ohm を通す)、出力 9 V、負荷 1 kohm
+* MT3608 は挙動の模型 (仮定。実測ではない): 1.2 MHz の固定周波数の PWM。FB 0.6 V と比べる誤差増幅 (gm 0.1 mS、100 kohm + 100 nF) の出力を
+* のこぎり波 (0〜1 V) と比べてスイッチを入れる。最大のデューティ 90 % (データシートの最小値)。スイッチのオン抵抗 80 mohm (代表値)
+* モジュールの部品は L 22 uH (DCR 0.1 ohm、仮定)・ショットキー (1N5819 の模型を代わりに使う、仮定)・出力 22 uF。帰還の分圧は 140k / 10k (9.0 V)
+.param vin=3
+.param T=833.33n
+.model D1N5819 D (IS=31.7u N=1.373 RS=0.051 BV=40 CJO=110p M=0.35 VJ=0.4)
+.model SWM SW (Ron=0.08 Roff=1Meg Vt=0.5 Vh=0)
+V1 vs 0 {vin}
+RS vs vi 1
+CIN vi 0 22u
+L1 vi sw 22u Rser=0.1
+S1 sw 0 drv 0 SWM
+D1 sw out D1N5819
+COUT out 0 22u IC=9
+RL out 0 1k
+RF1 out fb 140k
+RF2 fb 0 10k
+Vramp ramp 0 PULSE(0 1 0 {T-2n} 1n 0.5n {T})
+B1 0 c I=1e-4*(0.6-V(fb))
+RZ c cz 100k
+CC cz 0 100n IC=0.6
+DCL1 c ch DIDEAL
+Vch ch 0 0.9
+.model DIDEAL D (Ron=1 Roff=1G Vfwd=0)
+Bdrv drv 0 V=if(V(c) > V(ramp), 1, 0)
+.step param vin list 3 4 5
+.tran 0 40m 0 5n uic
+.meas tran vout AVG V(out) FROM=36m TO=40m
+.meas tran voutpp PP V(out) FROM=39.9m TO=40m
+.meas tran iin AVG I(V1) FROM=36m TO=40m
+.meas tran pin AVG -V(vs)*I(V1) FROM=36m TO=40m
+.meas tran pout AVG V(out)*V(out)/1k FROM=36m TO=40m
+.meas tran eff PARAM pout/pin
+.meas tran duty AVG V(drv) FROM=36m TO=40m
+.meas tran ilpk MAX I(L1) FROM=39.9m TO=40m
+.meas tran ilmin MIN I(L1) FROM=39.9m TO=40m
+.end

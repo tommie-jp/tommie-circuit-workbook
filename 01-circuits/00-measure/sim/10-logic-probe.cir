@@ -1,0 +1,29 @@
+* 0-10 ロジックプローブ (図1)。LM393 の窓コンパレータ (しきい値は 4.3k・3.0k・3.0k の分圧で 2.91 V と 1.46 V)
+* LM393 は開コレクタの比較器の行動模型 (仮定: 出力は 25 ohm で GND へ引く・入力電流 0。実測ではない)
+* LED は 01-basics/sim の LED 模型 (赤・緑とも同じ形、仮定)。vin を 0 V・5 V・開放 (1 G ohm) にして LED の電流を読む
+* イヤホンの道 (C3 0.1u・R6 10k) は 1 kHz の 0〜5 V の方形波で .tran
+.param vin=5 rsrc=1
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.model SWC SW (Ron=25 Roff=1G Vt=0 Vh=-1m)
+VCC vcc 0 5
+Ra vcc v1 4.3k
+Rb v1 v2 3.0k
+Rc v2 0 3.0k
+Vs s 0 {vin}
+Rsrc s x {rsrc}
+R4 vcc x 1Meg
+R5 x 0 1Meg
+* 比較器 A (H): x > v1 で出力 o1 が GND へ。比較器 B (L): x < v2 で o2 が GND へ
+S1 o1 0 x v1 SWC
+S2 o2 0 v2 x SWC
+R7 vcc a1 680
+D1 a1 o1 LED
+R8 vcc a2 680
+D2 a2 o2 LED
+.op
+.meas op vx FIND V(x)
+.meas op vv1 FIND V(v1)
+.meas op vv2 FIND V(v2)
+.meas op ired FIND I(D1)
+.meas op igreen FIND I(D2)
+.end

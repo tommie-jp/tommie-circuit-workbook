@@ -1,0 +1,40 @@
+* 4-15 定電流の LED ドライバ (図1)。5 V 単電源。+ 入力に W1 (三角波 0〜1 V、100 Hz)、I = Vin / Rs (Rs = 100 Ω)
+* Q1815 は 2SC1815 の代用 (2-3 の sim/03-common-emitter.cir と同じ。実測ではない)、LED は赤の代用モデル
+* two = 1 で LED を 2 本直列にし (D2 の短絡を外す)、電圧が足りなくなって電流が頭打ちになる所を見る
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.02
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=50 RE=1 RC=5 CJE=15p CJC=4p TF=2.8n TR=50n)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.param two=0
+Vcc vcc 0 5
+Vin in 0 PULSE(0 1 0 5m 5m 0 10m)
+XU1 in e b0 vcc 0 OPA
+Rb b0 b 1k
+Q1 c b e Q1815
+Rs e 0 100
+D1 vcc a LED
+D2 a c LED
+Rbyp a c {if(two,1T,1m)}
+.step param two list 0 1
+.tran 0 30m 10m 2u
+.meas tran imax MAX I(Rs)
+.meas tran imin MIN I(Rs)
+.meas tran vemax MAX V(e)
+.meas tran vcmin MIN V(c)
+.meas tran vcmax MAX V(c)
+.meas tran vb0max MAX V(b0)
+.meas tran i500 FIND I(Rs) WHEN V(in)=0.5 RISE=2
+.meas tran vfmax MAX V(vcc,a)
+.end

@@ -14,13 +14,13 @@
 
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 | 実測 | 1.0 まで |
 | --- | --- | --- | --- | --- | --- | --- |
-| [回路の教科書](01-circuits/README.md) | 232 | 135 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 97 |
+| [回路の教科書](01-circuits/README.md) | 232 | 195 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 37 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 102 |
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1118** | **626** | **0** | **0** | **0** | |
+| **計** | **1118** | **686** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -34,10 +34,10 @@
 | 0-4 | [自作テスター — 分流器と倍率器](01-circuits/00-measure/04-shunt-multiplier.md) | ✓ | [ ] | — | — |
 | 0-5 | [hFE チェッカー](01-circuits/00-measure/05-hfe-checker.md) | ✓ | [ ] | — | — |
 | 0-6 | [安定化電源とファンクションジェネレータ — 電流制限を掛けて実験する](01-circuits/00-measure/06-bench-supply-limiting.md) | ✓ | [ ] | — | — |
-| 0-7 | テブナン等価を測って確かめる | | | | |
-| 0-8 | コンデンサ容量計 — ブリッジで測る | | | | |
+| 0-7 | [テブナン等価を測って確かめる](01-circuits/00-measure/07-thevenin.md) | ✓ | [ ] | — | — |
+| 0-8 | [コンデンサ容量計 — ブリッジで測る](01-circuits/00-measure/08-capacitance-bridge.md) | ✓ | [ ] | — | — |
 | 0-9 | 周波数カウンタ (CMOS) | | | | |
-| 0-10 | ロジックプローブと音で聞く検出器 | | | | |
+| 0-10 | [ロジックプローブと音で聞く検出器](01-circuits/00-measure/10-logic-probe.md) | ✓ | [ ] | — | — |
 
 ### 第 1 章 基本 — 直流と受動部品
 
@@ -52,13 +52,13 @@
 | 1-7 | [ホイートストンブリッジ](01-circuits/01-basics/07-wheatstone-bridge.md) | ✓ | [ ] | — | — |
 | 1-8 | [コンデンサの直列・並列と時定数の比較](01-circuits/01-basics/08-cap-series-parallel.md) | ✓ | [ ] | — | — |
 | 1-9 | [ダイオードのクリッパとクランパ](01-circuits/01-basics/09-diode-clipper-clamper.md) | ✓ | [ ] | — | — |
-| 1-10 | 倍電圧 — ダイオードとコンデンサで (コッククロフト) | | | | |
-| 1-11 | LC 共振 — 直列と並列 | | | | |
+| 1-10 | [倍電圧 — ダイオードとコンデンサで (コッククロフト)](01-circuits/01-basics/10-cockcroft-walton.md) | ✓ | [ ] | — | — |
+| 1-11 | [LC 共振 — 直列と並列](01-circuits/01-basics/11-lc-resonance.md) | ✓ | [ ] | — | — |
 | 1-12 | 保護素子 — ヒューズ・PTC・バリスタ | | | | |
-| 1-13 | ツェナーで基準電圧 | | | | |
-| 1-14 | じゃがいも電池・レモン電池 | | | | |
-| 1-15 | 熱電対 — 2 種の金属で電圧 | | | | |
-| 1-16 | 電球の非線形 — 抵抗の温度係数 | | | | |
+| 1-13 | [ツェナーで基準電圧](01-circuits/01-basics/13-zener-reference.md) | ✓ | [ ] | — | — |
+| 1-14 | [じゃがいも電池・レモン電池](01-circuits/01-basics/14-lemon-battery.md) | ✓ | [ ] | — | — |
+| 1-15 | [熱電対 — 2 種の金属で電圧](01-circuits/01-basics/15-thermocouple.md) | ✓ | [ ] | — | — |
+| 1-16 | [電球の非線形 — 抵抗の温度係数](01-circuits/01-basics/16-lamp-nonlinear.md) | ✓ | [ ] | — | — |
 | 1-17 | [RC フィルタを Spectrum と VNA で見る — 計器の選び方](01-circuits/01-basics/17-rc-filter-spectrum-vna.md) | ✓ | [ ] | — | — |
 
 ### 第 2 章 トランジスタ — BJT と FET
@@ -76,14 +76,14 @@
 | 2-9 | [JFET の定電流](01-circuits/02-transistors/09-jfet-current-source.md) | ✓ | [ ] | — | — |
 | 2-10 | [プッシュプル (B 級) とクロスオーバー歪](01-circuits/02-transistors/10-push-pull.md) | ✓ | [ ] | — | — |
 | 2-11 | [PNP のハイサイドスイッチ](01-circuits/02-transistors/11-pnp-high-side.md) | ✓ | [ ] | — | — |
-| 2-12 | カスコード | | | | |
-| 2-13 | シュミットトリガ (Tr 2 石) | | | | |
-| 2-14 | 定電流源 — Tr + ツェナー / 2 石 | | | | |
-| 2-15 | 2 段増幅と負帰還 | | | | |
-| 2-16 | A 級パワーアンプ (スピーカーを鳴らす) | | | | |
-| 2-17 | MOSFET のゲート駆動 — ゲート抵抗・プルダウン・ミラー容量 | | | | |
-| 2-18 | IGBT スイッチ | | | | |
-| 2-19 | フォトカプラで絶縁 | | | | |
+| 2-12 | [カスコード](01-circuits/02-transistors/12-cascode.md) | ✓ | [ ] | — | — |
+| 2-13 | [シュミットトリガ (Tr 2 石)](01-circuits/02-transistors/13-schmitt-2tr.md) | ✓ | [ ] | — | — |
+| 2-14 | [定電流源 — Tr + ツェナー / 2 石](01-circuits/02-transistors/14-constant-current.md) | ✓ | [ ] | — | — |
+| 2-15 | [2 段増幅と負帰還](01-circuits/02-transistors/15-two-stage-feedback.md) | ✓ | [ ] | — | — |
+| 2-16 | [A 級パワーアンプ (スピーカーを鳴らす)](01-circuits/02-transistors/16-class-a-amp.md) | ✓ | [ ] | — | — |
+| 2-17 | [MOSFET のゲート駆動 — ゲート抵抗・プルダウン・ミラー容量](01-circuits/02-transistors/17-mosfet-gate-drive.md) | ✓ | [ ] | — | — |
+| 2-18 | [IGBT スイッチ](01-circuits/02-transistors/18-igbt-switch.md) | ✓ | [ ] | — | — |
+| 2-19 | [フォトカプラで絶縁](01-circuits/02-transistors/19-photocoupler.md) | ✓ | [ ] | — | — |
 | 2-20 | サイリスタ・トライアックの点弧 (低圧 AC) | | | | |
 | 2-21 | [エミッタ抵抗を分ける — バイアスと利得を別々に決める](01-circuits/02-transistors/21-split-emitter.md) | ✓ | [ ] | — | — |
 
@@ -99,12 +99,12 @@
 | 3-6 | [555 の PWM — ボリュームで LED 調光](01-circuits/03-oscillators/06-555-pwm.md) | ✓ | [ ] | — | — |
 | 3-7 | [ウィーンブリッジ — OP アンプで正弦波](01-circuits/03-oscillators/07-wien-bridge.md) | ✓ | [ ] | — | — |
 | 3-8 | [シュミット CMOS (40106) の RC 発振](01-circuits/03-oscillators/08-schmitt-rc-oscillator.md) | ✓ | [ ] | — | — |
-| 3-9 | 単安定 (Tr 2 石) | | | | |
-| 3-10 | コルピッツ | | | | |
-| 3-11 | 移相発振 (RC 3 段) | | | | |
-| 3-12 | 555 を 2 段 — サイレン | | | | |
-| 3-13 | VCO — 555 の 5 番ピン | | | | |
-| 3-14 | LM3909 (古典) と自動点滅 LED (現代) を並べる | | | | |
+| 3-9 | [単安定 (Tr 2 石)](01-circuits/03-oscillators/09-transistor-monostable.md) | ✓ | [ ] | — | — |
+| 3-10 | [コルピッツ](01-circuits/03-oscillators/10-colpitts.md) | ✓ | [ ] | — | — |
+| 3-11 | [移相発振 (RC 3 段)](01-circuits/03-oscillators/11-phase-shift.md) | ✓ | [ ] | — | — |
+| 3-12 | [555 を 2 段 — サイレン](01-circuits/03-oscillators/12-555-siren.md) | ✓ | [ ] | — | — |
+| 3-13 | [VCO — 555 の 5 番ピン](01-circuits/03-oscillators/13-555-vco.md) | ✓ | [ ] | — | — |
+| 3-14 | [LM3909 (古典) と自動点滅 LED (現代) を並べる](01-circuits/03-oscillators/14-lm3909-flasher.md) | ✓ | [ ] | — | — |
 | 3-15 | リングオシレータ (インバータ 3 段) | | | | |
 | 3-16 | [シュミット発振の出力を調べる — 方形波の高調波と LED の電流](01-circuits/03-oscillators/16-schmitt-square-spectrum.md) | ✓ | [ ] | — | — |
 
@@ -123,15 +123,15 @@
 | 4-9 | [微分器](01-circuits/04-opamps/09-differentiator.md) | ✓ | [ ] | — | — |
 | 4-10 | [アクティブ ローパス (サレンキー)](01-circuits/04-opamps/10-sallen-key-lowpass.md) | ✓ | [ ] | — | — |
 | 4-11 | [単電源での使い方 — 仮想 GND、レール to レール](01-circuits/04-opamps/11-single-supply.md) | ✓ | [ ] | — | — |
-| 4-12 | 精密整流とピークホールド | | | | |
-| 4-13 | 計装アンプ (OP アンプ 3 つ) | | | | |
-| 4-14 | 電流→電圧 (トランスインピーダンス、フォトダイオード) | | | | |
-| 4-15 | 電圧→電流 (定電流 LED ドライバ) | | | | |
-| 4-16 | ハイパス・バンドパス | | | | |
-| 4-17 | コンパレータ IC (LM393、オープンコレクタ) | | | | |
-| 4-18 | ウィンドウコンパレータ | | | | |
-| 4-19 | 三角波・方形波発生器 (積分 + シュミット) | | | | |
-| 4-20 | 帰還の安定性 — 容量負荷と位相補償 | | | | |
+| 4-12 | [精密整流とピークホールド](01-circuits/04-opamps/12-precision-rectifier.md) | ✓ | [ ] | — | — |
+| 4-13 | [計装アンプ (OP アンプ 3 つ)](01-circuits/04-opamps/13-instrumentation-amp.md) | ✓ | [ ] | — | — |
+| 4-14 | [電流→電圧 (トランスインピーダンス、フォトダイオード)](01-circuits/04-opamps/14-transimpedance.md) | ✓ | [ ] | — | — |
+| 4-15 | [電圧→電流 (定電流 LED ドライバ)](01-circuits/04-opamps/15-led-current-driver.md) | ✓ | [ ] | — | — |
+| 4-16 | [ハイパス・バンドパス](01-circuits/04-opamps/16-highpass-bandpass.md) | ✓ | [ ] | — | — |
+| 4-17 | [コンパレータ IC (LM393、オープンコレクタ)](01-circuits/04-opamps/17-lm393-open-collector.md) | ✓ | [ ] | — | — |
+| 4-18 | [ウィンドウコンパレータ](01-circuits/04-opamps/18-window-comparator.md) | ✓ | [ ] | — | — |
+| 4-19 | [三角波・方形波発生器 (積分 + シュミット)](01-circuits/04-opamps/19-triangle-square-generator.md) | ✓ | [ ] | — | — |
+| 4-20 | [帰還の安定性 — 容量負荷と位相補償](01-circuits/04-opamps/20-capacitive-load.md) | ✓ | [ ] | — | — |
 
 ### 第 5 章 電源
 
@@ -146,12 +146,12 @@
 | 5-7 | [チャージポンプ — 555 で負電圧](01-circuits/05-power-supplies/07-charge-pump-negative.md) | ✓ | [ ] | — | — |
 | 5-8 | [Li-ion 充電 (TP4056 モジュール) と保護](01-circuits/05-power-supplies/08-liion-charging.md) | ✓ | [ ] | — | — |
 | 5-9 | [逆接続保護 — ダイオード / P-MOSFET](01-circuits/05-power-supplies/09-reverse-polarity-protection.md) | ✓ | [ ] | — | — |
-| 5-10 | 定電流 (LM317) | | | | |
-| 5-11 | 昇圧スイッチング (MT3608) | | | | |
-| 5-12 | 電池残量チェッカー | | | | |
-| 5-13 | ソーラー + スーパーキャパシタ | | | | |
-| 5-14 | リップルとデカップリングの実測 | | | | |
-| 5-15 | 電源の保護 — ヒューズ・PTC・TVS | | | | |
+| 5-10 | [定電流 (LM317)](01-circuits/05-power-supplies/10-lm317-constant-current.md) | ✓ | [ ] | — | — |
+| 5-11 | [昇圧スイッチング (MT3608)](01-circuits/05-power-supplies/11-mt3608-boost.md) | ✓ | [ ] | — | — |
+| 5-12 | [電池残量チェッカー](01-circuits/05-power-supplies/12-battery-checker.md) | ✓ | [ ] | — | — |
+| 5-13 | [ソーラー + スーパーキャパシタ](01-circuits/05-power-supplies/13-solar-supercap.md) | ✓ | [ ] | — | — |
+| 5-14 | [リップルとデカップリングの実測](01-circuits/05-power-supplies/14-ripple-decoupling.md) | ✓ | [ ] | — | — |
+| 5-15 | [電源の保護 — ヒューズ・PTC・TVS](01-circuits/05-power-supplies/15-ptc-tvs-protection.md) | ✓ | [ ] | — | — |
 | 5-16 | 負電源 (ICL7660) | | | | |
 | 5-17 | 電流制限 (フォールドバック) | | | | |
 
@@ -181,13 +181,13 @@
 | 7-5 | [サーボ — パルス幅で角度](01-circuits/07-power/05-servo-pulse-angle.md) | ✓ | [ ] | — | — |
 | 7-6 | [パワー LED の定電流](01-circuits/07-power/06-power-led-constant-current.md) | ✓ | [ ] | — | — |
 | 7-7 | [ハイサイドとローサイド](01-circuits/07-power/07-high-side-low-side.md) | ✓ | [ ] | — | — |
-| 7-8 | ゲートドライバ IC | | | | |
-| 7-9 | ブラシレスの原理 (3 相、簡略) | | | | |
-| 7-10 | ソレノイド | | | | |
-| 7-11 | 電子負荷 | | | | |
-| 7-12 | 熱設計 — 放熱と温度の実測 | | | | |
-| 7-13 | トライアックの位相制御 (低圧 AC) | | | | |
-| 7-14 | ソリッドステートリレー (フォトトライアック) | | | | |
+| 7-8 | [ゲートドライバ IC](01-circuits/07-power/08-gate-driver.md) | ✓ | [ ] | — | — |
+| 7-9 | [ブラシレスの原理 (3 相、簡略)](01-circuits/07-power/09-bldc-3phase.md) | ✓ | [ ] | — | — |
+| 7-10 | [ソレノイド](01-circuits/07-power/10-solenoid.md) | ✓ | [ ] | — | — |
+| 7-11 | [電子負荷](01-circuits/07-power/11-electronic-load.md) | ✓ | [ ] | — | — |
+| 7-12 | [熱設計 — 放熱と温度の実測](01-circuits/07-power/12-thermal.md) | ✓ | [ ] | — | — |
+| 7-13 | [トライアックの位相制御 (低圧 AC)](01-circuits/07-power/13-triac-phase.md) | ✓ | [ ] | — | — |
+| 7-14 | [ソリッドステートリレー (フォトトライアック)](01-circuits/07-power/14-ssr.md) | ✓ | [ ] | — | — |
 
 ### 第 8 章 センサー
 
@@ -203,16 +203,16 @@
 | 8-8 | [ホール素子 (磁石)](01-circuits/08-sensors/08-hall-sensor.md) | ✓ | [ ] | — | — |
 | 8-9 | [水位・土壌湿度 (電極)](01-circuits/08-sensors/09-water-level-electrodes.md) | ✓ | [ ] | — | — |
 | 8-10 | [温度センサー IC (LM35 / TMP36)](01-circuits/08-sensors/10-temperature-ic.md) | ✓ | [ ] | — | — |
-| 8-11 | リードスイッチ | | | | |
-| 8-12 | 圧電 (ノック) | | | | |
+| 8-11 | [リードスイッチ](01-circuits/08-sensors/11-reed-switch.md) | ✓ | [ ] | — | — |
+| 8-12 | [圧電 (ノック)](01-circuits/08-sensors/12-piezo-knock.md) | ✓ | [ ] | — | — |
 | 8-13 | 加速度 (モジュール) | | | | |
-| 8-14 | 静電容量タッチ — 発振周波数の変化 | | | | |
-| 8-15 | ロータリーエンコーダ | | | | |
-| 8-16 | 湿度 (DHT) | | | | |
+| 8-14 | [静電容量タッチ — 発振周波数の変化](01-circuits/08-sensors/14-capacitive-touch.md) | ✓ | [ ] | — | — |
+| 8-15 | [ロータリーエンコーダ](01-circuits/08-sensors/15-rotary-encoder.md) | ✓ | [ ] | — | — |
+| 8-16 | [湿度 (DHT)](01-circuits/08-sensors/16-dht11.md) | ✓ | [ ] | — | — |
 | 8-17 | 気圧 (I2C) | | | | |
-| 8-18 | 太陽電池を光センサーに | | | | |
-| 8-19 | フォトダイオードの短絡電流 | | | | |
-| 8-20 | LED を受光素子に | | | | |
+| 8-18 | [太陽電池を光センサーに](01-circuits/08-sensors/18-solar-cell-sensor.md) | ✓ | [ ] | — | — |
+| 8-19 | [フォトダイオードの短絡電流](01-circuits/08-sensors/19-photodiode.md) | ✓ | [ ] | — | — |
+| 8-20 | [LED を受光素子に](01-circuits/08-sensors/20-led-light-sensor.md) | ✓ | [ ] | — | — |
 
 ### 第 9 章 RF — ラジオと送信
 
@@ -257,17 +257,17 @@
 | 10-6 | [シフトレジスタ (74HC595)](01-circuits/10-logic/06-shift-register.md) | ✓ | [ ] | — | — |
 | 10-7 | [7 セグメントとデコーダ (4511)](01-circuits/10-logic/07-seven-segment.md) | ✓ | [ ] | — | — |
 | 10-8 | [4 bit 加算器 (74HC283)](01-circuits/10-logic/08-four-bit-adder.md) | ✓ | [ ] | — | — |
-| 10-9 | チャタリング除去 — RC + シュミット | | | | |
-| 10-10 | ジョンソンカウンタ (4017) — LED 順送り | | | | |
+| 10-9 | [チャタリング除去 — RC + シュミット](01-circuits/10-logic/09-debounce.md) | ✓ | [ ] | — | — |
+| 10-10 | [ジョンソンカウンタ (4017) — LED 順送り](01-circuits/10-logic/10-johnson-counter.md) | ✓ | [ ] | — | — |
 | 10-11 | 4 bit ALU もどき — 加算と減算 (2 の補数) (05-etc の 1-2 へ移した) | | | | |
 | 10-12 | CPU もどき — レジスタ + 加算器 + クロック (05-etc の 1-4 へ移した) | | | | |
 | 10-13 | メモリ — フリップフロップ 4 bit (05-etc の 1-3 へ移した) | | | | |
 | 10-14 | プログラムカウンタ (05-etc の 1-1 が担う) | | | | |
-| 10-15 | トランジスタで作るゲート (RTL / DTL) | | | | |
-| 10-16 | オープンドレインと配線 AND、プルアップ | | | | |
-| 10-17 | レベル変換 (3.3V ↔ 5V) | | | | |
-| 10-18 | I2C バスの電気 — プルアップと容量 | | | | |
-| 10-19 | 電子サイコロ (4017 + 555) | | | | |
+| 10-15 | [トランジスタで作るゲート (RTL / DTL)](01-circuits/10-logic/15-rtl-dtl.md) | ✓ | [ ] | — | — |
+| 10-16 | [オープンドレインと配線 AND、プルアップ](01-circuits/10-logic/16-open-drain.md) | ✓ | [ ] | — | — |
+| 10-17 | [レベル変換 (3.3V ↔ 5V)](01-circuits/10-logic/17-level-shift.md) | ✓ | [ ] | — | — |
+| 10-18 | [I2C バスの電気 — プルアップと容量](01-circuits/10-logic/18-i2c-pullup.md) | ✓ | [ ] | — | — |
+| 10-19 | [電子サイコロ (4017 + 555)](01-circuits/10-logic/19-dice.md) | ✓ | [ ] | — | — |
 | 10-20 | 4 ビット CPU のようなもの — カウンタとメモリと命令 (05-etc の 1-1 へ移した) | | | | |
 
 ### 第 11 章 マイコンと現代の定番

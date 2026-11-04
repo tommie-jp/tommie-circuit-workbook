@@ -1,0 +1,32 @@
+* 7-10 ソレノイド (図1)。5 V、L1 = ソレノイド (巻線 33 ohm、L 30 mH と仮定。プランジャの動きは入れていない)、Q1 2N7000、Rs 1 ohm (5 V と巻線の間。CH2 で差動に読む)
+* D1 1N4007 (フライバック)、DZ 12 V ツェナー。sw=1 で S1 を閉じる (D1 だけ)、sw=0 で開く (D1 + DZ)
+* 2N7000 は 7-2 と同じ近似の模型、1N4007 は 7-2 の 1N4001 と同じ模型、ツェナーは BV 12 V の仮定。実測ではない
+.model NM2N7000 NMOS (VTO=2.1 KP=0.0926 LAMBDA=0.01 CGSO=20p CGDO=5p)
+.model D1N4007 D (IS=14.11n N=1.984 RS=33.89m CJO=25.89p M=0.4423 VJ=0.3905 TT=5.7u BV=1000)
+.model DZ12 D (IS=1n N=1.5 RS=2 BV=12 IBV=5m)
+.param sw=1
+VCC vcc 0 5
+Rs vcc t 1
+Ls t s1 30m
+Rcoil s1 d 33
+D1 d k D1N4007
+DZ vcc k DZ12
+Rsw k vcc {if(sw>0.5,1m,1G)}
+M1 d g 0 0 NM2N7000
+Rg in g 100
+Rpd g 0 10k
+VIN in 0 PULSE(0 5 1m 1u 1u 49m 100m)
+.step param sw list 0 1
+.tran 0 100m 0 2u
+.meas tran ion AVG I(Ls) FROM=40m TO=50m
+.meas tran vdon AVG V(d) FROM=40m TO=50m
+.meas tran tau_on TRIG V(in) VAL=2.5 RISE=1 TARG I(Ls) VAL={0.632*0.130} RISE=1
+.meas tran vdpk MAX V(d) FROM=50m TO=60m
+.meas tran toff90 TRIG V(in) VAL=2.5 FALL=1 TARG I(Ls) VAL={0.1*0.133} FALL=1
+.meas tran toff0 TRIG V(in) VAL=2.5 FALL=1 TARG I(Ls) VAL=0.001 FALL=1
+* 波形の点 (図3・図4 の式の元)
+.meas tran i05 FIND I(Ls) AT=50.5m
+.meas tran i10 FIND I(Ls) AT=51m
+.meas tran vd05 FIND V(d) AT=50.5m
+.meas tran vd10 FIND V(d) AT=51m
+.end

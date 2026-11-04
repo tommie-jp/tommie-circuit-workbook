@@ -1,0 +1,13 @@
+* 0-10 音で聞く検出器 (図1 の C3・R6)。0〜5 V・1 kHz の方形波を C3 0.1u に入れ、R6 10k (とイヤホン) の電圧を読む。イヤホンは高インピーダンスとして省く (仮定)
+VW1 w 0 PULSE(0 5 0 1u 1u 0.499m 1m)
+R4 vcc w 1Meg
+VCC vcc 0 5
+R5 w 0 1Meg
+C3 w e 0.1u
+R6 e 0 10k
+.tran 0 30m 20m 1u
+* 20〜30 ms の V(e) の最大・最小・p-p を読む (下の .meas か、波形の統計で)
+.meas tran vemax MAX V(e) FROM=20m TO=30m
+.meas tran vemin MIN V(e) FROM=20m TO=30m
+.meas tran vepp PP V(e) FROM=20m TO=30m
+.end

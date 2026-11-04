@@ -1,0 +1,19 @@
+* 0-7 テブナン等価 (図1)。元の回路 (5 V・R1 2.2k・R2 3.3k・R3 1k) と等価回路 (3.0 V・2.2k + 120) に同じ負荷をつなぐ
+* VW1 は AD3 の W1 (DC 3.0 V)。負荷 rl を 1G (開放)・10k・2.2k・1k・1m (短絡) に振り、端子の電圧と電流を読む
+.param rl=2.2k
+V1 vcc 0 5
+R1 vcc a 2.2k
+R2 a 0 3.3k
+R3 a b 1k
+RL1 b 0 {rl}
+VW1 w 0 3
+R4 w m 2.2k
+R5 m b2 120
+RL2 b2 0 {rl}
+* 負荷は rl を 1G・10k・2.2k・1k・1m に替えて 5 回走らせる (.step の代わりに 1 回ずつ)
+.op
+.meas op vb FIND V(b)
+.meas op vb2 FIND V(b2)
+.meas op ib FIND I(RL1)
+.meas op ib2 FIND I(RL2)
+.end

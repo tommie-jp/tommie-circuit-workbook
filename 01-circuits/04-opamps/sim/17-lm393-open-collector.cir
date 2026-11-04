@@ -1,0 +1,29 @@
+* 4-17 コンパレータ IC (LM393) のオープンコレクタ出力 (図1)。5 V 単電源
+* IN+ = 基準 2.5 V (10k/10k)、IN- = W1 (方形波 2.0〜3.0 V、1 kHz)。出力は Rpu で 5 V へ、CL 1 nF (配線と次の入力の容量の代わり)
+* rpu を 10k / 1k に振り、立ち上がり (τ = Rpu × CL) と立ち下がりの差を見る
+* コンパレータの模型 (LM393 相当の仮定。実測ではない): 入力の差で内部の 0/1 を決め、RC (τ 1.9 us) で
+* 応答時間 約 1.3 us (データシートの代表値) を作り、オープンコレクタの出力を 27 Ω (4 mA で 0.11 V) で GND に落とす
+.subckt CMP393 inp inm out
+B1 d0 0 V = if(V(inm) > V(inp), 1, 0)
+R1 d0 d 1k
+C1 d 0 1.9n
+B2 out 0 I = if(V(d) > 0.5, max(V(out),0)/27, 0)
+.ends
+.param rpu=10k
+Vcc vcc 0 5
+R1 vcc ref 10k
+R2 ref 0 10k
+Vs in 0 PULSE(2 3 0 50n 50n 500u 1m)
+X1 ref in out CMP393
+Rpu vcc out {rpu}
+CL out 0 1n
+.step param rpu list 10k 1k
+.tran 0 3m 1m 20n
+.meas tran vol MIN V(out) FROM=1.1m TO=1.5m
+.meas tran voh MAX V(out) FROM=1.6m TO=2m
+.meas tran tr TRIG V(out) VAL=0.5 RISE=2 TARG V(out) VAL=4.5 RISE=2
+.meas tran tf TRIG V(out) VAL=4.5 FALL=2 TARG V(out) VAL=0.5 FALL=2
+.meas tran tdr TRIG V(in) VAL=2.5 FALL=2 TARG V(out) VAL=2.5 RISE=2
+.meas tran tdf TRIG V(in) VAL=2.5 RISE=2 TARG V(out) VAL=2.5 FALL=2
+.meas tran isink MAX I(Rpu) FROM=1.1m TO=1.5m
+.end

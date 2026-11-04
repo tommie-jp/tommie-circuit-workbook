@@ -1,0 +1,30 @@
+* 1-10 コッククロフト・ウォルトン 2 段 (図1)。W1 は ±3 V・1 kHz の方形波、RS 560 ohm で電流を絞る
+* D は 1N4148 の代用模型 (09-rf/sim/agc.cir の D4148。実測ではない)。C は 1 uF (フィルム)、負荷 RL 100k
+.param rl=100k
+.param rs=560
+.param vfin=9.0
+.model D4148 D (IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+VW1 w 0 PULSE(-3 3 0 1u 1u 0.499m 1m)
+RS w s {rs}
+C1 s a 1u
+D1 0 a D4148
+D2 a b D4148
+C2 b 0 1u
+C3 a c 1u
+D3 b c D4148
+D4 c d D4148
+C4 d b 1u
+RL d 0 {rl}
+.tran 0 400m 0 5u
+.meas tran vb AVG V(b) FROM 380m TO 400m
+.meas tran vd AVG V(d) FROM 380m TO 400m
+.meas tran vdpp PP V(d) FROM 380m TO 400m
+.meas tran iw MAX I(RS) FROM 380m TO 400m
+.meas tran iwmin MIN I(RS) FROM 380m TO 400m
+.meas tran t90 WHEN V(d)=0.9*vfin RISE=1
+.meas tran t63 WHEN V(d)=0.632*vfin RISE=1
+.meas tran istart MAX I(RS) FROM 0 TO 5m
+.meas tran istartn MIN I(RS) FROM 0 TO 5m
+.meas tran vd5 FIND V(d) AT 5m
+.meas tran vd20 FIND V(d) AT 20m
+.end

@@ -1,0 +1,32 @@
+* 8-12 圧電 (ノック) (図1)。圧電素子を「起電力 + 直列の容量 Cp」の等価回路で置く (仮定。実測ではない)
+* ノック: t = 1 ms から、振幅 20 V・4 kHz・減衰の時定数 1 ms の振動 (直径 27 mm の圧電ブザーの素子を指で弾いた目安)
+* 1N4148 は LTspice 標準の模型。LM393 は出力が開放コレクタの比較器を電圧制御スイッチで置いた
+.model D1N4148 D(Is=2.52n Rs=0.568 N=1.752 Cjo=4p M=0.4 tt=20n Iave=200m Vpk=75)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.model SWC SW(Ron=10 Roff=100Meg Vt=0 Vh=0.001)
+VCC vcc 0 5
+B1 e 0 V=if(time>1m, 20*exp(-(time-1m)/1m)*sin(2*pi*4k*(time-1m)), 0)
+Cp e p 20n
+R1 p 0 1Meg
+R2 p q 10k
+D1 q vcc D1N4148
+D2 0 q D1N4148
+D3 q h D1N4148
+C1 h 0 100n
+R3 h 0 1Meg
+R4 vcc ref 100k
+R5 ref 0 10k
+* 比較器: - 入力 = h、+ 入力 = ref。h > ref で出力が L (LED が点く)
+S1 out 0 h ref SWC
+R6 vcc a 1k
+D4 a out LED
+.tran 0 400m 0 2u
+.meas tran vp_max MAX V(p) FROM 1m TO 3m
+.meas tran vq_max MAX V(q) FROM 1m TO 3m
+.meas tran vq_min MIN V(q) FROM 1m TO 3m
+.meas tran vh_max MAX V(h)
+.meas tran vref FIND V(ref) AT 0.5m
+.meas tran t_led_off FIND time WHEN V(h)=V(ref) FALL=1
+.meas tran iled MAX I(D4)
+.meas tran id1 MAX I(D1)
+.end

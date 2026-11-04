@@ -1,0 +1,45 @@
+* 3-12 555 を 2 段 — サイレン (図1)。U1: Ra1=10k Rb1=68k C1=10u、U2: Ra2=10k Rb2=10k C2=68n、U1 の出力から RM=10k で U2 の 5 番へ、5 V
+* NE555 は 3-2 と同じ動作の模型 (仮定。実測ではない)。圧電スピーカーは 22 nF の容量と仮定し、R3=1k を直列に入れた
+.subckt NE555B GND TRIG OUT RESET CONT THR DIS VCC
+R1 VCC CONT 5k
+R2 CONT NA 5k
+R3 NA GND 5k
+BS S 0 V = 0.5*(1+tanh((V(NA)-V(TRIG))/5m))
+BR R 0 V = 0.5*(1+tanh((V(THR)-V(CONT))/5m))
+BQ 0 Q I = 1e-3*( 1e5*( V(S)*(1-V(Q))*(1-V(R)) - V(R)*V(Q) ) + 8e3*V(Q)*(1-V(Q))*(V(Q)-0.5) )
+CQ Q 0 1n
+RQ Q 0 1e13
+BG G 0 V = 0.5*(1+tanh((V(Q)-0.5)/0.02))*0.5*(1+tanh((V(RESET)-0.7)/0.02))
+BO OUT 0 V = 0.1 + (V(VCC)-1.6)*V(G)
+BD DIS GND I = V(DIS,GND)*((1-V(G))/10 + 1n)
+.ends
+V1 vcc 0 5
+Ra1 vcc dis1 10k
+Rb1 dis1 thr1 68k
+C1 thr1 0 10u
+Cc1 cc1 0 10n
+XU1 0 thr1 out1 vcc cc1 thr1 dis1 vcc NE555B
+RM out1 cc2 10k
+Ra2 vcc dis2 10k
+Rb2 dis2 thr2 10k
+C2 thr2 0 68n
+XU2 0 thr2 out2 vcc cc2 thr2 dis2 vcc NE555B
+R3 out2 sp 1k
+CSP sp 0 22n
+.ic V(thr1)=0 V(thr2)=0
+.tran 0 4 0 2u
+.meas tran r2 WHEN V(out1)=2 RISE=2
+.meas tran f3 WHEN V(out1)=2 FALL=3
+.meas tran t1hi param f3-r2
+.meas tran r3 WHEN V(out1)=2 RISE=3
+.meas tran t1per param r3-r2
+.meas tran vchi AVG V(cc2) FROM=2.6 TO=2.7
+.meas tran vclo AVG V(cc2) FROM=3.1 TO=3.2
+.meas tran ta WHEN V(out2)=2 RISE=1 TD=2.6
+.meas tran tb WHEN V(out2)=2 RISE=51 TD=2.6
+.meas tran fhi param 50/(tb-ta)
+.meas tran tc WHEN V(out2)=2 RISE=1 TD=3.1
+.meas tran td WHEN V(out2)=2 RISE=51 TD=3.1
+.meas tran flo param 50/(td-tc)
+.meas tran icc AVG I(V1) FROM=2 TO=4
+.end

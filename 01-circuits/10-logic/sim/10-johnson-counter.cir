@@ -1,0 +1,65 @@
+* 10-10 ジョンソンカウンタ (4017): 中の 5 段のジョンソンカウンタ (D-FF 5 個、最後の段の Q バーを先頭の D へ戻す) と、10 本の 2 入力の解読
+* D-FF は 10-5 と同じ NAND 6 個の立ち上がりエッジの D-FF (B 電源の理想の NAND + 遅れ)。クロックは時間を縮めて 1 kHz (並びだけを見る)
+* 555 の周期は R1 = 10 kΩ、R2 = 68 kΩ、C1 = 2.2 µF の算術を .meas の PARAM に残した
+.subckt NAND2 a b y
+B1 y0 0 V=5*(1-(V(a)>2.5 & V(b)>2.5))
+R1 y0 y 1k
+C1 y 0 100p
+.ends
+.subckt NAND3 a b c y
+B1 y0 0 V=5*(1-(V(a)>2.5 & V(b)>2.5 & V(c)>2.5))
+R1 y0 y 1k
+C1 y 0 100p
+.ends
+.subckt DFF d clk q qb
+X1 n4 n2 n1 NAND2
+X2 n1 clk n2 NAND2
+X3 n2 clk n4 n3 NAND3
+X4 n3 d n4 NAND2
+X5 n2 qb q NAND2
+X6 q n3 qb NAND2
+.ends
+Vclk clk 0 PULSE(0 5 0.5m 1u 1u 0.5m 1m)
+XF1 d5b clk d1 d1b DFF
+XF2 d1 clk d2 d2b DFF
+XF3 d2 clk d3 d3b DFF
+XF4 d3 clk d4 d4b DFF
+XF5 d4 clk d5 d5b DFF
+* 解読 (1-of-10) と桁上げ CO
+Bq0 q0 0 V=5*(V(d1)<2.5 & V(d5)<2.5)
+Bq1 q1 0 V=5*(V(d1)>2.5 & V(d2)<2.5)
+Bq2 q2 0 V=5*(V(d2)>2.5 & V(d3)<2.5)
+Bq3 q3 0 V=5*(V(d3)>2.5 & V(d4)<2.5)
+Bq4 q4 0 V=5*(V(d4)>2.5 & V(d5)<2.5)
+Bq5 q5 0 V=5*(V(d1)>2.5 & V(d5)>2.5)
+Bq6 q6 0 V=5*(V(d1)<2.5 & V(d2)>2.5)
+Bq7 q7 0 V=5*(V(d2)<2.5 & V(d3)>2.5)
+Bq8 q8 0 V=5*(V(d3)<2.5 & V(d4)>2.5)
+Bq9 q9 0 V=5*(V(d4)<2.5 & V(d5)>2.5)
+Bco co 0 V=5*(V(d5)<2.5)
+Bsum sum 0 V=V(q0)+V(q1)+V(q2)+V(q3)+V(q4)+V(q5)+V(q6)+V(q7)+V(q8)+V(q9)
+.ic V(d1)=0 V(d1b)=5 V(d2)=0 V(d2b)=5 V(d3)=0 V(d3b)=5 V(d4)=0 V(d4b)=5 V(d5)=0 V(d5b)=5
+.tran 0 22m 0 5u
+* クロックの立ち上がりは 0.5 ms + n ms。n 回目の後 (n + 0.9 ms) に Qn だけが H のはず
+.meas tran q0_at0 FIND V(q0) AT 0.3m
+.meas tran q1_at1 FIND V(q1) AT 0.9m
+.meas tran q2_at2 FIND V(q2) AT 1.9m
+.meas tran q3_at3 FIND V(q3) AT 2.9m
+.meas tran q4_at4 FIND V(q4) AT 3.9m
+.meas tran q5_at5 FIND V(q5) AT 4.9m
+.meas tran q6_at6 FIND V(q6) AT 5.9m
+.meas tran q7_at7 FIND V(q7) AT 6.9m
+.meas tran q8_at8 FIND V(q8) AT 7.9m
+.meas tran q9_at9 FIND V(q9) AT 8.9m
+.meas tran q0_at10 FIND V(q0) AT 9.9m
+.meas tran sum_min MIN V(sum) FROM 0.6m TO 20m
+.meas tran sum_max MAX V(sum) FROM 0.6m TO 20m
+.meas tran co_rise1 WHEN V(co)=2.5 RISE=1
+.meas tran co_rise2 WHEN V(co)=2.5 RISE=2
+.meas tran co_period PARAM co_rise2-co_rise1
+.meas tran co_fall1 WHEN V(co)=2.5 FALL=1
+.meas tran t555 PARAM 0.693147*(10k+2*68k)*2.2u
+.meas tran f555 PARAM 1/(0.693147*(10k+2*68k)*2.2u)
+.meas tran th555 PARAM 0.693147*(10k+68k)*2.2u
+.meas tran tl555 PARAM 0.693147*68k*2.2u
+.end

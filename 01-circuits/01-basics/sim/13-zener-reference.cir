@@ -1,0 +1,17 @@
+* 1-13 ツェナーで基準電圧 (図1)。電池 9 V の - を W1 (100 Hz・1 Vpp) に載せ、R1 680 ohm で 1N5231B (5.1 V) へ
+* DZ は 05-power-supplies/sim/02-zener-series-regulator.cir と同じ「20 mA で 5.1 V、動作抵抗 17 ohm」の仮定の模型。実測ではない
+* rl を 1G (負荷なし)・2.2k・1k に替え、出力の平均とリップル、DZ の電流を読む
+.param rl=1G
+.model DZ D (IS=1e-14 BV=4.78 IBV=20m RS=16 CJO=100p)
+VW1 w 0 SINE(0 0.5 100)
+VB vin w 9
+R1 vin k 680
+DZ 0 k DZ
+RL k 0 {rl}
+.tran 0 60m 20m 10u
+.meas tran vz AVG V(k) FROM 20m TO 60m
+.meas tran vzpp PP V(k) FROM 20m TO 60m
+.meas tran vinpp PP V(vin) FROM 20m TO 60m
+.meas tran iz AVG I(DZ) FROM 20m TO 60m
+.meas tran ir1 AVG I(R1) FROM 20m TO 60m
+.end

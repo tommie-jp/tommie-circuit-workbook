@@ -1,0 +1,36 @@
+* 2-15 2 段増幅と負帰還 (図1) の過渡。出力が約 1 Vpp になる入力 (帰還あり 44 mVpp、なし 1 mVpp) で 1 kHz を入れ、
+* 動作点 (平均) と、最後の 10 周期の出力から歪み率を読む (rj = 1m が帰還あり、1G がなし)
+* Q1815 は 2SC1815 の代用 (2-3 の sim/03-common-emitter.cir と同じ。実測ではない)
+.param rj=1m
+.param vin={if(rj<1,22m,0.5m)}
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=50 RE=1 RC=5 CJE=15p CJC=4p TF=2.8n TR=50n)
+VCC vcc 0 5
+Vs w1 0 SIN(0 {vin} 1k)
+CIN w1 b1 1u
+R1 vcc b1 33k
+R2 b1 0 10k
+Q1 c1 b1 e1 Q1815
+RC1 vcc c1 4.7k
+RE1A e1 e1b 100
+RE1B e1b 0 910
+CE1 e1b 0 100u
+C12 c1 b2 1u
+R3 vcc b2 20k
+R4 b2 0 10k
+Q2 out b2 e2 Q1815
+RC2 vcc out 2.2k
+RE2 e2 0 1k
+CE2 e2 0 100u
+CF out f1 10u
+RJ f1 f2 {rj}
+RF f2 e1 2.2k
+.step param rj list 1m 1G
+.tran 0 300m 0 2u
+.four 1k 5 1 V(out)
+.meas tran vb1 AVG V(b1) FROM=280m TO=300m
+.meas tran ve1 AVG V(e1) FROM=280m TO=300m
+.meas tran vc1 AVG V(c1) FROM=280m TO=300m
+.meas tran vb2 AVG V(b2) FROM=280m TO=300m
+.meas tran vout AVG V(out) FROM=280m TO=300m
+.meas tran vpp PP V(out) FROM=290m TO=300m
+.end

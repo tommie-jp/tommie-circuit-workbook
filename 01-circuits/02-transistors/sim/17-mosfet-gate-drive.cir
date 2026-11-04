@@ -1,0 +1,36 @@
+* 2-17 MOSFET のゲート駆動 (図1)。W1 = 0/5 V・10 kHz の方形波を RG で 2N7000 のゲートへ入れ、ゲートとドレインの過渡を読む。
+* RG を 1k・10k に、CM (ゲート-ドレインに足すミラー容量) を 0・100p に振り、ミラーの平らな所の電圧と、ドレインの立ち下がり (90→10 %) の時間を見る
+* M2N7000 は 2-5 の sim/05-mosfet-switch.cir と同じ LEVEL=1 の代用 (しきい値 2.1 V)。内部の容量は外に CGS 20 pF・CGD 5 pF として置いた仮定。
+* Cpg・Cpd は AD3 のオシロの入力容量の仮定 (各 20 pF)。どれも実測ではない
+.param rg=10k cm=100p
+.model M2N7000 NMOS (LEVEL=1 VTO=2.1 KP=0.1 LAMBDA=0.01 CBD=10p)
+VCC vcc 0 5
+VW1 w1 0 PULSE(0 5 10u 10n 10n 50u 100u)
+RG w1 g {rg}
+RPD g 0 100k
+M1 d g 0 0 M2N7000
+CGS g 0 20p
+CGD g d 5p
+CM g d {cm}
+RD vcc d 330
+Cpg g 0 20p
+Cpd d 0 20p
+.step param cm list 0 100p
+.step param rg list 1k 10k
+.tran 0 120u 0 5n
+.meas tran vdon AVG V(d) FROM=50u TO=59u
+.meas tran idon AVG I(RD) FROM=50u TO=59u
+.meas tran tf TRIG V(d) VAL=4.5 FALL=1 TARG V(d) VAL=0.5 FALL=1
+.meas tran tg50 WHEN V(g)=2.5 RISE=1
+.meas tran td50 WHEN V(d)=2.5 FALL=1
+.meas tran vpl FIND V(g) AT=td50
+.meas tran tr TRIG V(d) VAL=0.5 RISE=1 TARG V(d) VAL=4.5 RISE=1
+.meas tran tgoff WHEN V(g)=2.5 FALL=1
+.meas tran td90 WHEN V(d)=4.5 FALL=1
+.meas tran td10 WHEN V(d)=0.5 FALL=1
+.meas tran tg2 WHEN V(g)=2 RISE=1
+.meas tran tg4 WHEN V(g)=4 RISE=1
+.meas tran vgon AVG V(g) FROM=50u TO=59u
+.meas tran tdr90 WHEN V(d)=4.5 RISE=1
+.meas tran tdr10 WHEN V(d)=0.5 RISE=1
+.end

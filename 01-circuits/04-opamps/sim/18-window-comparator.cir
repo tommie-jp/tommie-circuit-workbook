@@ -1,0 +1,36 @@
+* 4-18 ウィンドウコンパレータ (図1)。5 V 単電源。LM393 の 2 回路の出力を直結 (ワイヤード AND) し、Rpu 10k で 5 V へ
+* しきい値: 5 V - R1 20k - VH - R2 10k - VL - R3 10k - GND で VH = 2.5 V、VL = 1.25 V
+* 入力 W1: 三角波 0.5〜3.0 V、100 Hz。LED (R4 1k 直列) は出力が Low (窓の外) で点く
+* コンパレータの模型 (LM393 相当の仮定。実測ではない): 入力の差で内部の 0/1 を決め、RC (τ 1.9 us) で
+* 応答時間 約 1.3 us (データシートの代表値) を作り、オープンコレクタの出力を 27 Ω (4 mA で 0.11 V) で GND に落とす
+.subckt CMP393 inp inm out
+B1 d0 0 V = if(V(inm) > V(inp), 1, 0)
+R1 d0 d 1k
+C1 d 0 1.9n
+B2 out 0 I = if(V(d) > 0.5, max(V(out),0)/27, 0)
+.ends
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+Vcc vcc 0 5
+R1 vcc vh 20k
+R2 vh vl 10k
+R3 vl 0 10k
+Vs in 0 PULSE(0.5 3.0 0 5m 5m 0 10m)
+* U1A: + = 入力、- = VL (入力 > VL で手を離す)。U1B: + = VH、- = 入力 (入力 < VH で手を離す)
+XA in vl out CMP393
+XB vh in out CMP393
+Rpu vcc out 10k
+D1 vcc k LED
+R4 k out 1k
+.tran 0 30m 10m 1u
+.meas tran vhv AVG V(vh)
+.meas tran vlv AVG V(vl)
+.meas tran t1 WHEN V(out)=2.5 RISE=1
+.meas tran t2 WHEN V(out)=2.5 FALL=1
+.meas tran t3 WHEN V(out)=2.5 RISE=2
+.meas tran t4 WHEN V(out)=2.5 FALL=2
+.meas tran vin1 FIND V(in) WHEN V(out)=2.5 RISE=1
+.meas tran vin2 FIND V(in) WHEN V(out)=2.5 FALL=1
+.meas tran voh MAX V(out)
+.meas tran vol MIN V(out)
+.meas tran iled MAX I(D1)
+.end

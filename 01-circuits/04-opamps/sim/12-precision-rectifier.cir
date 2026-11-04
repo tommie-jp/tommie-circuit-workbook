@@ -1,0 +1,45 @@
+* 4-12 精密整流 (U1、反転型の半波) とピークホールド (U2 + D3 + C1・R3) (図1)。入力 1 kHz・振幅 0.5 V、±5 V
+* C1 の放電は R3 100k と Scope の入力 1 MΩ の並列 (rs で 1 MΩ の有り無しを振る)
+* plain: 比べのため、ふつうのダイオード 1 本 + 10 kΩ の半波整流も同じ入力で解く
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.model D4148 D(IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+.param rs=1Meg
+Vp vp 0 5
+Vn vn 0 -5
+Vs in 0 SINE(0 0.5 1k)
+R1 in n 10k
+XU1 0 n x vp vn OPA
+D1 n x D4148
+D2 x rect D4148
+R2 rect n 10k
+XU2 rect hold y vp vn OPA
+D3 y hold D4148
+C1 hold 0 1u
+R3 hold 0 100k
+Rscope hold 0 {rs}
+* ふつうのダイオードの半波 (比べ)
+Dp in pl D4148
+Rp pl 0 10k
+.step param rs list 1Meg 1T
+.tran 0 1 0 2u
+.meas tran rmax MAX V(rect) FROM=0.9 TO=1
+.meas tran rmin MIN V(rect) FROM=0.9 TO=1
+.meas tran hmax MAX V(hold) FROM=0.9 TO=1
+.meas tran hmin MIN V(hold) FROM=0.9 TO=1
+.meas tran plmax MAX V(pl) FROM=0.9 TO=1
+.meas tran xmin MIN V(x) FROM=0.9 TO=1
+.meas tran xmax MAX V(x) FROM=0.9 TO=1
+.end

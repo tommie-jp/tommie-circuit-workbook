@@ -1,0 +1,26 @@
+* 2-18 IGBT スイッチ (図1)。エミッタを V- (-5 V) に置き、W1 (-5/+5 V・1 kHz) で V_GE を 0 / 8.2 V に切り替える。
+* 負荷は 820 ohm + 赤 LED (+5 V から)。V_GE を 0・4.1 (5 V の信号のとき)・5・5.5・6・8.2 V に振り (.step)、C-E 間の電圧と負荷の電流を読む
+* IGBT は等価回路 (N ch MOSFET が PNP のベース電流を流す形) で置いた仮定。しきい値 VTO = 5.2 V (IRGB4062D の 4.0〜6.5 V の中ほど)。
+* PNP の IS は小電流で V_CE(on) が pn 接合 1 つ分になるよう置いた。LED は 2-5 と同じ仮定。どれも実測ではない
+.param vge=8.2
+.model MIG NMOS (LEVEL=1 VTO=5.2 KP=2 LAMBDA=0.01)
+.model QIG PNP (IS=1e-14 BF=5 NF=1 RE=0.05 RC=0.05)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+VP vp 0 5
+VN vn 0 -5
+* W1 は GND 基準の -5/+5 V。RG 2.2k と RGE 10k (ゲート-エミッタ) で分圧 (vge = (W1 + 5) x 10 / 12.2)
+VW1 w1 0 {vge*1.22-5}
+RG w1 g 2.2k
+RGE g vn 10k
+R1 vp a 820
+D1 a c LED
+* IGBT: C = c、G = g、E = vn
+QP vn bp c QIG
+MN bp g vn vn MIG
+Rosc c vn 1Meg
+.step param vge list 0 4.1 5 5.5 6 8.2
+.tran 0 10u 0 1u
+.meas tran vce FIND V(c,vn) AT=10u
+.meas tran ic FIND I(R1) AT=10u
+.meas tran vgeo FIND V(g,vn) AT=10u
+.end

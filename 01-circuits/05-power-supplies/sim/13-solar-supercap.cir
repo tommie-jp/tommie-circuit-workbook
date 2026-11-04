@@ -1,0 +1,38 @@
+* 5-13 ソーラー + スーパーキャパシタ (図1)。太陽電池 → D1 (1N5819) → C1 (1 F、ESR 0.5 ohm) と DZ (5.1 V)。0〜120 s は充電、
+* 120 s で光を遮って (Isc = 0) SW1 を入れ、R1 220 ohm + 赤の LED を C1 で光らせる
+* 太陽電池は仮定の模型 (実測ではない): 短絡電流 60 mA の電流源と、開放電圧が 6.0 V になるダイオード (N=10 = 10 セル直列のつもり)、
+* 直列 1 ohm・並列 1 kohm。DZ は 1N4733A (5.1 V、1 W) を「49 mA で 5.1 V、動作抵抗 7 ohm」に合わせた仮定。LED は他の題と同じ仮定
+.model D1N5819 D (IS=31.7u N=1.373 RS=0.051 BV=40 CJO=110p M=0.35 VJ=0.4)
+.model DPV D (IS=5e-12 N=10)
+.model DZ51 D (IS=1e-14 BV=4.75 IBV=49m RS=7)
+.model LEDR D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+IPV 0 pv PWL(0 60m 120 60m 120.01 0)
+DPV pv 0 DPV
+RSH pv 0 1k
+RSER pv pva 1
+D1 pva vc D1N5819
+C1 vci 0 1 IC=0
+RESR vc vci 0.5
+DZ 0 vc DZ51
+S1 vc sw ctl 0 SWX
+.model SWX SW (Ron=0.1 Roff=100Meg Vt=0.5 Vh=0)
+VCTL ctl 0 PWL(0 0 120 0 120.01 1)
+R1 sw a 220
+DL a 0 LEDR
+.tran 0 600 0 0.1 uic
+.meas tran t2v WHEN V(vc)=2 RISE=1
+.meas tran t4v WHEN V(vc)=4 RISE=1
+.meas tran t5v WHEN V(vc)=5 RISE=1
+.meas tran vcmax MAX V(vc) FROM=0 TO=119
+.meas tran ipv0 FIND I(D1) AT=10
+.meas tran ipv4 FIND I(D1) WHEN V(vc)=4 RISE=1
+.meas tran izmax FIND I(DZ) AT=119
+.meas tran vpv119 FIND V(pv) AT=119
+.meas tran iled0 FIND I(DL) AT=121
+.meas tran vc220 FIND V(vc) AT=220
+.meas tran t3v WHEN V(vc)=3 FALL=1
+.meas tran t25 WHEN V(vc)=2.5 FALL=1
+.meas tran iled25 FIND I(DL) WHEN V(vc)=2.5 FALL=1
+.meas tran vc600 FIND V(vc) AT=599
+.meas tran vc320 FIND V(vc) AT=320
+.end

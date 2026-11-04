@@ -1,0 +1,25 @@
+* 5-14 リップルとデカップリング (図1)。V+ 5 V → RW 2.2 ohm (細く長い電源の線の代わり) → VL。VL に 220 ohm の負荷を 2N7000 で 10 kHz に開け閉め
+* cfg で VL のコンデンサを替える: 1 なし / 2 0.1 uF / 3 10 uF / 4 100 uF (ESR 0) / 5 100 uF (ESR 0.3 ohm、仮定) + 0.1 uF
+* 2N7000 は 02-transistors/sim/05-mosfet-switch.cir と同じ仮定の模型。コンデンサの ESL・ブレッドボードのインダクタンスは入れていない
+.param cfg=1
+.param cbulk=table(cfg,1,1p,2,1p,3,10u,4,100u,5,100u)
+.param esr=table(cfg,1,1m,2,1m,3,1m,4,1m,5,0.3)
+.param cdec=table(cfg,1,1p,2,0.1u,3,1p,4,1p,5,0.1u)
+.model M2N7000 NMOS (LEVEL=1 VTO=2.1 KP=0.1 LAMBDA=0.01 CBD=10p)
+VS vs 0 5
+RW vs vl 2.2
+CB vl cb {cbulk}
+RESR cb 0 {esr}
+CD vl 0 {cdec}
+RD vl d 220
+M1 d g 0 0 M2N7000
+VW1 g 0 PULSE(0 5 0 100n 100n 49.9u 100u)
+RG g 0 100k
+.step param cfg list 1 2 3 4 5
+.tran 0 20m 0 20n
+.meas tran droop_pp PP V(vl) FROM=19m TO=20m
+.meas tran vlmin MIN V(vl) FROM=19m TO=20m
+.meas tran vlmax MAX V(vl) FROM=19m TO=20m
+.meas tran ion MAX I(RD) FROM=19m TO=20m
+.meas tran vlavg AVG V(vl) FROM=19m TO=20m
+.end

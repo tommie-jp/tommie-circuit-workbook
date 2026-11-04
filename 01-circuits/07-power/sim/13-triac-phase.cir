@@ -1,0 +1,42 @@
+* 7-13 トライアックの位相制御 (図1)。12 V 実効値の AC (トランスの AC アダプタ、50 Hz と 60 Hz)、RL 220 ohm、TR1 = Z0103MA (感度の高いゲート)
+* 位相をずらす RC: R1 1k + VR (B10K、rv で振る) と C1 1u、ゲート抵抗 RG 1k
+* トライアックは 2 組のサイリスタ (PNP + NPN の組) を逆向きに並べた模型 (仮定)。ゲートが正なら MT2 が正の側の組を、
+* ゲートが負なら MT1 が正の側の組を点ける (負のゲート電流を B 電源でもう一方の組のベースへ送る)。ベース - エミッタの 470 ohm で
+* 点ける電流 (約 1.5 mA) と保持電流を決めた。資料 (Z0103: IGT 最大 3 mA、IH 最大 7 mA) の内側に寄せた仮定で、実測ではない
+.param rv=20k f=50
+.model QN NPN (IS=1e-14 BF=50 CJE=5p CJC=5p TF=50n)
+.model QP PNP (IS=1e-14 BF=10 CJE=5p CJC=5p TF=200n)
+.model DG D (IS=1e-12 N=1.5)
+VAC l 0 SINE(0 {12*sqrt(2)} {f})
+RL l mt2 220
+* 組 1 (MT2 が正のとき)
+Q1n n1 b1 0 QN
+Q1p b1 n1 mt2 QP
+Rb1 b1 0 470
+Rn1 mt2 n1 10k
+* 組 2 (MT1 が正のとき)
+Q2n n2 b2 mt2 QN
+Q2p b2 n2 0 QP
+Rb2 b2 mt2 470
+Rn2 0 n2 10k
+* ゲート (MT1 = 0 に対して)
+Vgs g gi 0
+Dg1 gi b1 DG
+Dg2 0 gi DG
+Bi2 mt2 b2 I=max(-I(Vgs),0)
+* 位相をずらす RC
+R1 mt2 a 1k
+Rvr a x {rv}
+C1 x 0 1u
+RG x g 1k
+.step param rv list 1 2k 4k 6k 8k 9k 10k
+.step param f list 50 60
+.tran 0 140m 0 2u
+.meas tran ion1 WHEN I(RL)=0.01 RISE=1 TD=100m
+.meas tran ang1 PARAM (ion1-100m)*f*360
+.meas tran ion2 WHEN I(RL)=-0.01 FALL=1 TD={100m+0.5/f}
+.meas tran vload RMS V(l,mt2) FROM=100m TO=140m
+.meas tran ipk MAX I(RL) FROM=100m TO=140m
+.meas tran igpk MAX I(Vgs) FROM=100m TO=140m
+.meas tran vtm FIND V(mt2) AT={100m+0.4/f}
+.end

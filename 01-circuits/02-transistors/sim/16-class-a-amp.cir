@@ -1,0 +1,25 @@
+* 2-16 A 級パワーアンプ (図1)。エミッタフォロアで 8 ohm のスピーカーを鳴らす。W1 の振幅 (va) を振り、スピーカーの電圧・電源の電流・歪み率を .tran で読む
+* Q1815 は 2SC1815 の代用 (2-3 の sim/03-common-emitter.cir と同じ。実測ではない)。スピーカーは 8 ohm の抵抗とした (仮定。コイルのインダクタンスは入れない)
+.param va=0.25
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=50 RE=1 RC=5 CJE=15p CJC=4p TF=2.8n TR=50n)
+VCC vcc 0 5
+Vs w1 0 SIN(0 {va} 1k)
+CIN w1 b 10u
+R1 vcc b 1.2k
+R2 b 0 1.8k
+Q1 vcc b e Q1815
+RE e 0 56
+COUT e spk 470u
+RSP spk 0 8
+.step param va list 0.25 0.4 0.6
+.tran 0 200m 0 2u
+.meas tran vb AVG V(b) FROM=180m TO=200m
+.meas tran ve AVG V(e) FROM=180m TO=200m
+.meas tran icc AVG I(VCC) FROM=180m TO=200m
+.meas tran vpp PP V(spk) FROM=190m TO=200m
+.meas tran vmin MIN V(spk) FROM=190m TO=200m
+.meas tran vmax MAX V(spk) FROM=190m TO=200m
+.meas tran pspk AVG V(spk)*V(spk)/8 FROM=180m TO=200m
+.meas tran pq AVG V(vcc,e)*Ic(Q1) FROM=180m TO=200m
+.meas tran iw1 MAX I(Vs) FROM=190m TO=200m
+.end

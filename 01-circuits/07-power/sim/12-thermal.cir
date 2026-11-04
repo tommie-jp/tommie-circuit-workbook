@@ -1,0 +1,21 @@
+* 7-12 熱設計 — Q1 (IRLZ44N、TO-220) の熱を電気の回路に置き換えた模型 (熱の等価回路)
+* 電流 1 A = 熱の流れ 1 W、電圧 1 V = 周りとの温度差 1 °C、抵抗 1 ohm = 熱抵抗 1 °C/W、容量 1 F = 熱容量 1 J/K
+* P = 0.395 W (7-11 の LTspice の Q1 の熱、100 mA)。熱抵抗はデータシート (R_thJC 1.4、R_thCS 0.5、R_thJA 62 °C/W)
+* 放熱器の R_thSA 20 °C/W、熱容量 (TO-220 の胴 1.5 J/K・放熱器 10 J/K) は仮定。実測ではない
+* hs=0: 放熱器なし (ケースから周りへ 62 - 1.4 = 60.6 °C/W)、hs=1: 放熱器あり
+.param hs=0
+.param P=0.395
+I1 0 tj PWL(0 0 1 {P})
+Rjc tj tc 1.4
+Ccase tc 0 1.5
+Rca tc 0 {if(hs>0.5,1G,60.6)}
+Rcs tc ts {if(hs>0.5,0.5,1G)}
+Rsa ts 0 20
+Csink ts 0 10
+.step param hs list 0 1
+.tran 0 1800 0 0.5
+.meas tran tc_end FIND V(tc) AT=1800
+.meas tran tj_end FIND V(tj) AT=1800
+.meas tran tc_600 FIND V(tc) AT=600
+.meas tran t63 TRIG V(tj) VAL=0.001 RISE=1 TARG V(tc) VAL={if(hs>0.5,0.632*0.395*20.5,0.632*0.395*60.6)} RISE=1
+.end

@@ -1,0 +1,43 @@
+* 8-19 フォトダイオードの短絡電流 (図1)。BPW34 を「光電流 Iph + ダイオード + 接合容量 70 pF」で置く
+* ダイオードは Vishay の値 (Ee = 1 mW/cm2 で Ik 47 uA・Vo 350 mV) に合うよう IS = 6.3e-11 A・N = 1 とした (仮定、実測ではない)
+* mode=0: MCP6002 の電流電圧変換 (Rf 47 kΩ・Cf 22 pF)。mode=1: 47 kΩ の負荷抵抗だけ (比べ)
+* MCP6002 は GBW 1 MHz の 1 次の模型 (14-7 と同じ考え方に、スルーレートと出力の頭打ちを足した仮定)。光は 1 kHz の方形で ipk まで点く
+.param mode=0
+.param ipk=20u
+.model DPD D(IS=6.3e-11 N=1 CJO=70p RS=10)
+.subckt opamp p n o
+* 積分器: GBW 1 MHz・開ループ利得 100 k・スルーレート 0.6 V/us (MCP6002 の典型値)。出力は 5 mV〜4.975 V
+Bi 0 y I=limit(6.283*(V(p)-V(n)), -0.6, 0.6)
+Cy y 0 1u
+Ry y 0 15.9k
+Dhi y vh DCL
+Vh vh 0 4.975
+Dlo vl y DCL
+Vl vl 0 0.005
+E2 o 0 y 0 1
+.model DCL D(Ron=0.01 Roff=1G Vfwd=0)
+.ends
+Iph k a PULSE(0 {ipk} 100u 100n 100n 500u 1m)
+D1 a k DPD
+Va a 0 0
+* mode=0: 増幅器あり。mode=1: k を 47k だけで受ける (増幅器の出力は切り離す)
+X1 0 k o opamp
+Rf o kf 47k
+Cf o kf 22p
+Sw kf k sel 0 SWM
+Vsel sel 0 {1-mode}
+.model SWM SW(Ron=1m Roff=1T Vt=0.5 Vh=0)
+RL k 0 {if(mode>0,47k,1T)}
+.step param mode list 0 1
+.step param ipk list 20u 70u
+.tran 0 2.5m 0 50n
+.meas tran vout_on AVG V(o) FROM 2.3m TO 2.55m
+.meas tran vk_on AVG V(k) FROM 2.3m TO 2.55m
+.meas tran vk_mode1 AVG V(k) FROM 2.3m TO 2.55m
+.meas tran tr10 FIND time WHEN V(o)={0.1*ipk*47k} RISE=2
+.meas tran tr90 FIND time WHEN V(o)={0.9*ipk*47k} RISE=2
+.meas tran trise PARAM tr90-tr10
+.meas tran vmax MAX V(o) FROM 2.1m TO 2.3m
+.meas tran tk10 FIND time WHEN V(k)={0.1*0.39} RISE=2
+.meas tran tk90 FIND time WHEN V(k)={0.9*0.39} RISE=2
+.end

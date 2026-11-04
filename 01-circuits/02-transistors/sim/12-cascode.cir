@@ -1,0 +1,26 @@
+* 2-12 カスコード (図1)。J1 を外した形 (rj = 1G、カスコード) と挿した形 (rj = 1m、Q2 の C-E を短絡してエミッタ接地) で、
+* 動作点・1 kHz の利得・-3 dB の帯域 (.ac) と、方形波の立ち上がり (.tran) を読む
+* Q1815 は 2SC1815 の代用 (2-3 の sim/03-common-emitter.cir と同じ。実測ではない)。Cpr はオシロの入力容量の仮定 (20 pF)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=50 RE=1 RC=5 CJE=15p CJC=4p TF=2.8n TR=50n)
+.param rj=1G
+VCC vcc 0 5
+R1 vcc b2 22k
+R2 b2 b1 6.8k
+R3 b1 0 12k
+CB b2 0 10u
+Q2 c b2 e2 Q1815
+Q1 e2 b1 e Q1815
+RE e 0 820
+CE e 0 100u
+RC vcc c 2.2k
+RJ c e2 {rj}
+Cpr c 0 20p
+Vs w1 0 DC 0 AC 1 PULSE(-10m 10m 0 10n 10n 25u 50u)
+RS w1 s 10k
+CIN s b1 1u
+.step param rj list 1m 1G
+.ac dec 50 10 100Meg
+.meas ac g1k FIND mag(V(c)) AT 1k
+.meas ac gmax MAX mag(V(c))
+.meas ac f3db WHEN mag(V(c))=gmax/sqrt(2) FALL=1
+.end

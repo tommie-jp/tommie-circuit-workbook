@@ -1,0 +1,16 @@
+* 8-18 太陽電池を光センサーに (図1)。4 セル直列の小型の太陽電池を「光電流 Iph + ダイオード + 接合容量」の等価回路で置く
+* ダイオード: 1 セルで「短絡 40 mA のとき開放 0.5 V」(N=1.5) になるよう IS=1e-7 A。4 セル直列なので N=6。接合容量は合わせて 50 nF。どれも仮定で、実測ではない
+* 光: W1 で点滅させた白の LED を 1 cm から当てて、光電流 ipk (0.1 mA と 0.5 mA) が 100 Hz の方形で流れると仮定
+* rl: 受ける抵抗。100 Ω (短絡電流を読む) と 1 MΩ (AD3 のオシロの入力だけ = 開放電圧を読む)
+.param ipk=0.5m
+.param rl=100
+.model DSC D(IS=1e-7 N=6 CJO=50n RS=2)
+Iph 0 p PULSE(0 {ipk} 1m 1u 1u 5m 10m)
+D1 p 0 DSC
+RL p 0 {rl}
+.step param rl list 100 1Meg
+.step param ipk list 0.1m 0.5m
+.tran 0 40m 0 2u
+.meas tran v_on AVG V(p) FROM 35m TO 36m
+.meas tran v_off AVG V(p) FROM 30.5m TO 31m
+.end

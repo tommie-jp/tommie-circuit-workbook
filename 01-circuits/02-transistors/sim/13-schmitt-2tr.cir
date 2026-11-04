@@ -1,0 +1,25 @@
+* 2-13 シュミットトリガ (Tr 2 石、図1)。W1 = 100 Hz・0〜5 V の三角波で、出力が切り替わる入力の電圧 (上と下のしきい値) と、出力の高・低の電圧を .tran で読む
+* Q1815 は 2SC1815 の代用 (2-3 の sim/03-common-emitter.cir と同じ。実測ではない)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=50 RE=1 RC=5 CJE=15p CJC=4p TF=2.8n TR=50n)
+VCC vcc 0 5
+Vw1 in 0 PULSE(0 5 0 5m 5m 0 10m)
+RB in b1 10k
+Q1 c1 b1 e Q1815
+RC1 vcc c1 2.2k
+R1 c1 b2 10k
+R2 b2 0 22k
+Q2 out b2 e Q1815
+RC2 vcc out 470
+RE e 0 1k
+.tran 0 40m 0 2u
+.meas tran vhi MAX V(out) FROM=20m TO=40m
+.meas tran vlo MIN V(out) FROM=20m TO=40m
+.meas tran vtp FIND V(in) WHEN V(out)=(vhi+vlo)/2 RISE=2
+.meas tran vtm FIND V(in) WHEN V(out)=(vhi+vlo)/2 FALL=2
+.meas tran ttp WHEN V(out)=(vhi+vlo)/2 RISE=2
+.meas tran ttm WHEN V(out)=(vhi+vlo)/2 FALL=2
+.meas tran ve_lo MIN V(e) FROM=20m TO=40m
+.meas tran ve_hi MAX V(e) FROM=20m TO=40m
+.meas tran iin MAX I(RB) FROM=20m TO=40m
+.meas tran icc AVG I(VCC) FROM=20m TO=40m
+.end

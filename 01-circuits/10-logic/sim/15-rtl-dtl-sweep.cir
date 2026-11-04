@@ -1,0 +1,30 @@
+* 10-15 伝達特性: A を 0〜5 V で掃く。NOR は B = 0 V、NAND は B = 5 V (15-rtl-dtl.cir と同じ回路と値)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model D4148 D (IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+V1 vcc 0 5
+VA a 0 0
+Rb1 a b1 10k
+Rb2 0 b2 10k
+Q1 nor b1 0 Q1815
+Q2 nor b2 0 Q1815
+Rc1 vcc nor 1k
+D1 p a D4148
+D2 p vcc D4148
+R1 vcc p 4.7k
+D3 p m D4148
+D4 m bs D4148
+Rbd bs 0 10k
+Q3 nand bs 0 Q1815
+Rc2 vcc nand 1k
+.dc VA 0 5 0.01
+.meas dc nor_th WHEN V(nor)=2.5 FALL=1
+.meas dc nand_th WHEN V(nand)=2.5 FALL=1
+.meas dc nor_low FIND V(nor) AT 5
+.meas dc nand_low FIND V(nand) AT 5
+.meas dc nor_09 FIND V(nor) AT 0.9
+.meas dc nand_09 FIND V(nand) AT 0.9
+.meas dc nor_05 FIND V(nor) AT 0.5
+.meas dc nand_15 FIND V(nand) AT 1.5
+.meas dc nand_10 FIND V(nand) AT 1.0
+.meas dc ia0 FIND I(VA) AT 0
+.end

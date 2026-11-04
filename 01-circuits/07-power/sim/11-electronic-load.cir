@@ -1,0 +1,38 @@
+* 7-11 電子負荷 (図1)。U1 = LM358 (5 V 単電源、AD3 の V+)、Q1 IRLZ44N、Rs 10 ohm、R2 1k、C1 10n (帰還の補償)、Rg 100
+* 被試験物 (DUT) は 5 V の電源と内部抵抗 rdut (既定 0.5 ohm と仮定)。設定は W1 の方形波 0.2 V / 1.0 V (500 Hz)
+* オペアンプは 4-11 と同じ汎用模型 (LM358 相当の仮定: GBW 1 MHz、SR 0.3 V/us、出力は V+ - 1.5 V まで)。IRLZ44N は VDMOS の模型 (仮定:
+* Vto 1.5 V、Ciss 約 1.7 nF)。実測ではない
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+B3 n2 0 I=max(0,V(n2)-(V(vp)-hi))-max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.model IRLZx VDMOS (Vto=1.5 Kp=20 Rd=0.01 Rs=0.01 Rg=2 Cgs=1.5n Cgdmax=1.2n Cgdmin=0.1n a=0.5 Cjo=0.5n Is=10n Rb=0.01)
+.param cc2=10n rdut=0.5 vdut=5
+VP vp 0 5
+VDUT dutp 0 {vdut}
+Rdut dutp dut {rdut}
+VSET set 0 PULSE(0.2 1.0 0.5m 1u 1u 1m 2m)
+XU1 set inm out vp 0 OPA
+Rg out g 100
+M1 dut g s IRLZx
+Rs s 0 10
+R2 s inm 1k
+C1 out inm {cc2}
+.step param cc2 list 1n 10n 100n
+.tran 0 10m 0 0.5u
+.meas tran ilo AVG I(Rs) FROM=4.2m TO=4.4m
+.meas tran ihi AVG I(Rs) FROM=5.2m TO=5.4m
+.meas tran vgate_hi AVG V(g) FROM=5.2m TO=5.4m
+.meas tran vdut_lo AVG V(dut) FROM=4.2m TO=4.4m
+.meas tran vdut_hi AVG V(dut) FROM=5.2m TO=5.4m
+.meas tran ipk MAX I(Rs) FROM=4.5m TO=5.4m
+.meas tran trise TRIG I(Rs) VAL=0.028 RISE=3 TARG I(Rs) VAL=0.092 RISE=3
+.meas tran pq AVG (V(dut)-V(s))*I(Rs) FROM=5.2m TO=5.4m
+.end

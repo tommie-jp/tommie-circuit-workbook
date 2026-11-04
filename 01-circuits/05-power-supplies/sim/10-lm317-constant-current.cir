@@ -1,0 +1,45 @@
+* 5-10 LM317 の定電流 (図1)。V1 10 V (AD3 の V+ と V- の間)、R1 100 ohm、RL を 0 / 100 / 250 / 460 / 750 / 1000 ohm
+* (同じ回路を RL だけ変えて 6 つ並べ、.op で一度に読む。末尾の数字が RL の組)
+* LM317 は挙動の模型 (仮定。実測ではない): OUT = ADJ + 1.25 V。ただし OUT は IN - 3 V を超えない
+* (データシートが 1.25 V を保証する入出力差の下限 3 V で頭打ちにした保守側の模型)。ADJ のピンから 50 uA (代表値) が出る
+V1 in 0 10
+CIN in 0 0.1u
+B0 out0 0 V=min(V(adj0)+1.25, V(in)-3)
+IADJ0 in adj0 50u
+R1_0 out0 adj0 100
+RL0 adj0 0 0.001
+B1 out1 0 V=min(V(adj1)+1.25, V(in)-3)
+IADJ1 in adj1 50u
+R1_1 out1 adj1 100
+RL1 adj1 0 100
+B2 out2 0 V=min(V(adj2)+1.25, V(in)-3)
+IADJ2 in adj2 50u
+R1_2 out2 adj2 100
+RL2 adj2 0 250
+B3 out3 0 V=min(V(adj3)+1.25, V(in)-3)
+IADJ3 in adj3 50u
+R1_3 out3 adj3 100
+RL3 adj3 0 460
+B4 out4 0 V=min(V(adj4)+1.25, V(in)-3)
+IADJ4 in adj4 50u
+R1_4 out4 adj4 100
+RL4 adj4 0 750
+B5 out5 0 V=min(V(adj5)+1.25, V(in)-3)
+IADJ5 in adj5 50u
+R1_5 out5 adj5 100
+RL5 adj5 0 1000
+.op
+.meas op i0 FIND I(RL0)
+.meas op i100 FIND I(RL1)
+.meas op i250 FIND I(RL2)
+.meas op v250 FIND V(adj2)
+.meas op i460 FIND I(RL3)
+.meas op v460 FIND V(adj3)
+.meas op i750 FIND I(RL4)
+.meas op v750 FIND V(adj4)
+.meas op vr1_750 FIND V(out4)-V(adj4)
+.meas op i1k FIND I(RL5)
+.meas op v1k FIND V(adj5)
+.meas op vr1_250 FIND V(out2)-V(adj2)
+.meas op p0 FIND (V(in)-V(out0))*I(R1_0)
+.end

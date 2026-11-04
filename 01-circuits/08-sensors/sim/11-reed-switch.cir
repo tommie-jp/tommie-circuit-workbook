@@ -1,0 +1,24 @@
+* 8-11 リードスイッチ (図1)。磁石で接点が閉じ、跳ね (チャタリング) を R2・C1 と 74HC14 (シュミット) で消す
+* 接点は電圧で開閉するスイッチ (閉 0.1 Ω・開 100 MΩ)。跳ねは閉じた直後の 3 回の開き (各 30〜50 µs) と仮定した (実測ではない)
+* 74HC14 は LTspice の SCHMITT (しきい値 VT+ 2.77 V・VT- 1.73 V、TI SN74HC14 の 4.5 V と 6 V の典型値から 5 V を内挿した目安)
+.model SW SW(Ron=0.1 Roff=100Meg Vt=0.5 Vh=0.1)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+VCC vcc 0 5
+* 制御: 1 = 閉。t=1ms で閉じ、跳ねて 1.2 ms に落ち着く。t=6ms で開く
+VK k 0 PWL(0 0 1m 0 1.0001m 1 1.06m 1 1.0601m 0 1.1m 0 1.1001m 1 1.14m 1 1.1401m 0 1.17m 0 1.1701m 1 1.2m 1 1.2001m 0 1.23m 0 1.2301m 1 6m 1 6.0001m 0)
+S1 sw 0 k 0 SW
+R1 vcc sw 10k
+R2 sw in 10k
+C1 in 0 100n
+A1 in 0 0 0 0 out q 0 SCHMITT Vt=2.25 Vh=0.52 Vhigh=4.8 Vlow=0 Trise=10n Tfall=10n
+R3 out a 1k
+D1 a 0 LED
+.tran 0 12m 0 1u
+.meas tran t_on FIND time WHEN V(out)=2.4 RISE=1
+.meas tran t_off FIND time WHEN V(out)=2.4 FALL=1
+.meas tran d_on PARAM t_on-1m
+.meas tran d_off PARAM t_off-6m
+.meas tran vin_min MIN V(in) FROM 1m TO 1.3m
+.meas tran iled AVG I(D1) FROM 4m TO 5m
+.meas tran nrise FIND V(out) AT 1.25m
+.end

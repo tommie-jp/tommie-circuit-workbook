@@ -1,0 +1,28 @@
+* 2-19 フォトカプラで絶縁 (図1)。W1 = 0/5 V・1 kHz を RIN で PC817 の LED に入れ、2 次側は電池 4.5 V と RL で受ける。
+* LED の電流・2 次側の出力の Low/High・出力の立ち上がり (10->90 %)・立ち下がり と、遅れを .tran で読む。RL を 100 ohm (資料の測り方) と 4.7k に振る
+* PC817 は「LED + 電流で動く電流源 (受光の電流) + 光トランジスタ (NPN)」の模型で置いた仮定: 受光の電流 = 0.2 % x I_F、hFE 500 で CTR 約 100 %。
+* 光トランジスタの容量 (CJC 20p・CJE 30p・TF 5n) は RL 100 ohm で資料の tr 4 us・tf 3 us に近くなるよう置いた。どれも実測ではない
+.param rl=4.7k
+.model DIR D (IS=1e-18 N=1.25 RS=2)
+.model QPT NPN (IS=1e-14 BF=500 VAF=100 CJC=20p CJE=30p TF=5n)
+VW1 w1 0 PULSE(0 5 10u 50n 50n 500u 1m)
+RIN w1 a 680
+D1 a k DIR
+VS k 0 0
+* 受光の電流 (ベースへ)
+F1 e2 bt VS 0.002
+Q1 c2 bt e2 QPT
+VBT p2 e2 4.5
+RL p2 c2 {rl}
+Cpr c2 e2 20p
+RISO e2 0 10Meg
+.step param rl list 100 4.7k
+.tran 0 2.2m 0 0.2u
+.meas tran ifon AVG I(RIN) FROM=1.2m TO=1.5m
+.meas tran vlo AVG V(c2,e2) FROM=1.4m TO=1.5m
+.meas tran vhi AVG V(c2,e2) FROM=1.9m TO=2.0m
+.meas tran tf TRIG V(c2,e2) VAL=0.9*vhi FALL=2 TARG V(c2,e2) VAL=0.1*vhi+0.9*vlo FALL=2
+.meas tran tr TRIG V(c2,e2) VAL=0.1*vhi+0.9*vlo RISE=2 TARG V(c2,e2) VAL=0.9*vhi RISE=2
+.meas tran tdoff WHEN V(c2,e2)=vhi/2 RISE=2
+.meas tran tdon WHEN V(c2,e2)=vhi/2 FALL=2
+.end

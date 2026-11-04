@@ -1,0 +1,34 @@
+* 7-8 ゲートドライバ IC (図1)。VDD 12 V、U1 = TC4427 (1 回路だけ使う)、Rg 100 / 1k (.step)、RGS 10k、Q1 IRF520、RL 220 (12 V から)
+* TC4427 は振る舞いの模型 (仮定): 入力のしきい値 1.6 V (VIH 2.4 V・VIL 0.8 V の間)、出力抵抗 7 ohm (データシートの典型)、遅れ 20 ns。実測ではない
+* IRF520 は VDMOS の模型 (仮定): Vto 3.0 V (データシートの 2.0〜4.0 V の中ほど)、Ciss 約 360 pF・Crss 34 pF (25 V) に寄せた容量。実測ではない
+* 入力 W1 は 0 / 3.3 V、10 kHz、デューティ比 50 %。比べ: 「直結」は W1 を 100 ohm でじかにゲートへ入れたときのドレイン電流 (Vto 2 / 3 / 4 V)
+.model IRF520x VDMOS (Vto={vto} Kp=3 Rd=0.12 Rs=0.05 Rg=3 Cgs=330p Cgdmax=250p Cgdmin=25p a=0.5 Cjo=300p Is=10n Rb=0.02)
+.param rg=100 vto=3.0
+VDD vdd 0 12
+VIN in 0 PULSE(0 3.3 5u 5n 5n 50u 100u)
+* TC4427 の 1 回路 (非反転)
+B1 nb 0 V=V(vdd)*0.5*(1+tanh((V(ind)-1.6)*20))
+Rd1 in ind 1k
+Cd1 ind 0 20p
+Ro nb oa 7
+Rgate oa g {rg}
+RGS g 0 10k
+RL vdd d 220
+M1 d g 0 IRF520x
+* 直結の比べ (別の MOSFET。ゲートは W1 から 100 ohm)
+Rg2 in g2 100
+RGS2 g2 0 10k
+RL2 vdd d2 220
+M2 d2 g2 0 IRF520x
+.step param rg list 100 1k
+.step param vto list 2 3 4
+.tran 0 300u 0 2n
+.meas tran vg_on AVG V(g) FROM=215u TO=250u
+.meas tran vd_on AVG V(d) FROM=215u TO=250u
+.meas tran id_on AVG I(RL) FROM=215u TO=250u
+.meas tran tfall TRIG V(d) VAL=10.8 FALL=2 TARG V(d) VAL=1.2 FALL=2
+.meas tran trise TRIG V(d) VAL=1.2 RISE=2 TARG V(d) VAL=10.8 RISE=2
+.meas tran tplat TRIG V(in) VAL=1.65 RISE=2 TARG V(d) VAL=6 FALL=2
+.meas tran vd2_on AVG V(d2) FROM=215u TO=250u
+.meas tran id2_on AVG I(RL2) FROM=215u TO=250u
+.end

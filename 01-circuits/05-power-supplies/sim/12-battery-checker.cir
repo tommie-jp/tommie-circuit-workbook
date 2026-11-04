@@ -1,0 +1,48 @@
+* 5-12 電池残量チェッカー (図1)。5 V、分圧 36k / 2k / 2k / 10k で 1.4・1.2・1.0 V、LM324 の 3 回路 + 330 ohm + LED
+* W1 は三角波 0.9〜1.6 V・0.1 Hz (t = 0 で 1.25 V から上り。図3 と同じ時刻)
+* オペアンプは 04-opamps/sim/03-inverting-amp.cir と同じ汎用模型 (LM358 / LM324 相当の仮定: GBW 1 MHz、SR 0.3 V/us、
+* 出力 High は V+ - 1.5 V、Low は V- + 0.1 V)。LED は 01-circuits の他の題と同じ仮定の模型。実測ではない
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.model LEDG D (IS=4.0e-19 N=2.14 RS=0 CJO=30p)
+.model LEDY D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.model LEDR D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+VCC vcc 0 5
+RA vcc t14 36k
+RB t14 t12 2k
+RC t12 t10 2k
+RD t10 0 10k
+VW vb 0 PWL(0 1.25 1.0714 1.4 2.5 1.6 7.5 0.9 10 1.25)
+XU1A vb t14 o1 vcc 0 OPA
+XU1B vb t12 o2 vcc 0 OPA
+XU1C vb t10 o3 vcc 0 OPA
+R1 o1 a1 330
+D1 a1 0 LEDG
+R2 o2 a2 330
+D2 a2 0 LEDY
+R3 o3 a3 330
+D3 a3 0 LEDR
+.tran 0 10 0 1m
+.meas tran v14 FIND V(t14) AT=1
+.meas tran v12 FIND V(t12) AT=1
+.meas tran v10 FIND V(t10) AT=1
+.meas tran ton1 FIND V(vb) WHEN V(o1)=1.75 RISE=1
+.meas tran toff1 FIND V(vb) WHEN V(o1)=1.75 FALL=1
+.meas tran toff2 FIND V(vb) WHEN V(o2)=1.75 FALL=1
+.meas tran toff3 FIND V(vb) WHEN V(o3)=1.75 FALL=1
+.meas tran ton3 FIND V(vb) WHEN V(o3)=1.75 RISE=1
+.meas tran voh FIND V(o1) AT=2.5
+.meas tran iled1 FIND I(D1) AT=2.5
+.meas tran vf1 FIND V(a1) AT=2.5
+.meas tran iled3 FIND I(D3) AT=2.5
+.meas tran idiv FIND I(RA) AT=1
+.end

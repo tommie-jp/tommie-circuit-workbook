@@ -1,0 +1,42 @@
+* 10-19 電子サイコロ: 4017 の中の 5 段のジョンソンカウンタ (LTspice の DFLOP 5 個) と解読。Q6 を RESET (全段の CLR) に戻して 6 進にする
+* クロックは時間を縮めて 1 kHz (並びだけを見る)。555 の周波数は R1 = 1 kΩ、R2 = 10 kΩ、C1 = 100 nF の算術を .meas の PARAM に残した
+* DFLOP の端子: D、(空き)、CLK、PRE、CLR、Q バー、Q、共通。出力は 0 V / 5 V
+Vclk clk 0 PULSE(0 5 0.5m 1u 1u 0.5m 1m)
+A1 d5b 0 clk 0 rst d1b d1 0 DFLOP Vhigh=5 Vlow=0 Td=50n
+A2 d1 0 clk 0 rst d2b d2 0 DFLOP Vhigh=5 Vlow=0 Td=50n
+A3 d2 0 clk 0 rst d3b d3 0 DFLOP Vhigh=5 Vlow=0 Td=50n
+A4 d3 0 clk 0 rst d4b d4 0 DFLOP Vhigh=5 Vlow=0 Td=50n
+A5 d4 0 clk 0 rst d5b d5 0 DFLOP Vhigh=5 Vlow=0 Td=50n
+Bq0 q0 0 V=5*(V(d1)<2.5 & V(d5)<2.5)
+Bq1 q1 0 V=5*(V(d1)>2.5 & V(d2)<2.5)
+Bq2 q2 0 V=5*(V(d2)>2.5 & V(d3)<2.5)
+Bq3 q3 0 V=5*(V(d3)>2.5 & V(d4)<2.5)
+Bq4 q4 0 V=5*(V(d4)>2.5 & V(d5)<2.5)
+Bq5 q5 0 V=5*(V(d1)>2.5 & V(d5)>2.5)
+Bq6 q6 0 V=5*(V(d1)<2.5 & V(d2)>2.5)
+* Q6 を RESET へ (配線の遅れ 20 ns)
+Rr q6 rst 20
+Cr rst 0 1n
+Bsum sum 0 V=V(q0)+V(q1)+V(q2)+V(q3)+V(q4)+V(q5)
+.tran 0 14m 0 1u
+* n 回目のクロックの立ち上がりは 0.5 ms + (n-1) ms。n 回目の後に H の出力は Q(n mod 6)
+.meas tran q0_at0 FIND V(q0) AT 0.3m
+.meas tran q1_at1 FIND V(q1) AT 0.9m
+.meas tran q2_at2 FIND V(q2) AT 1.9m
+.meas tran q3_at3 FIND V(q3) AT 2.9m
+.meas tran q4_at4 FIND V(q4) AT 3.9m
+.meas tran q5_at5 FIND V(q5) AT 4.9m
+.meas tran q0_at6 FIND V(q0) AT 5.9m
+.meas tran q1_at7 FIND V(q1) AT 6.9m
+.meas tran q0_at12 FIND V(q0) AT 11.9m
+.meas tran q6_max MAX V(q6) FROM 5.6m TO 14m
+.meas tran q6_width WHEN V(q6)=2.5 FALL=1
+.meas tran q6_rise WHEN V(q6)=2.5 RISE=1
+.meas tran q6_pulse PARAM q6_width-q6_rise
+.meas tran sum_min MIN V(sum) FROM 0.6m TO 14m
+.meas tran sum_max MAX V(sum) FROM 0.6m TO 14m
+.meas tran f555 PARAM 1/(0.693147*(1k+2*10k)*100n)
+.meas tran th555 PARAM 0.693147*(1k+10k)*100n
+.meas tran tl555 PARAM 0.693147*10k*100n
+.meas tran f6 PARAM 1/(6*0.693147*(1k+2*10k)*100n)
+.end

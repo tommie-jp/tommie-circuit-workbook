@@ -1,0 +1,33 @@
+* 3-10 コルピッツ発振回路 (ベース接地、図1)。L1=47u C1=820p C2=2.2n、5 V
+* Q1815 は 3-1 と同じ 2SC1815 の仮定 (BF は .step で 120/250/400)。L1 の直列抵抗 6 ohm (1 MHz で Q 約 50) は仮定。実測ではない
+* Scope の入力 (1 Mohm と 20 pF の目安) を CH1 (エミッタ) と CH2 (コレクタ) に置いた (仮定)
+.model Q1815 NPN (IS=2e-14 BF={bf} NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.param bf=250
+V1 vcc 0 5
+R1 vcc b 22k
+R2 b 0 10k
+CB b 0 100n
+L1 vcc lx 47u Rser=6
+Q1 lx b e Q1815
+C1 lx e 820p
+C2 e 0 2.2n
+RE e 0 1k
+RS1 e 0 1Meg
+CS1 e 0 20p
+RS2 lx 0 1Meg
+CS2 lx 0 20p
+.step param bf list 120 250 400
+.ic V(lx)=5.1
+.tran 0 2m 0 5n
+.meas tran t1 WHEN V(lx)=5 RISE=1500
+.meas tran t2 WHEN V(lx)=5 RISE=1600
+.meas tran fo param 100/(t2-t1)
+.meas tran vepp PP V(e) FROM=1.9m TO=2m
+.meas tran vemax MAX V(e) FROM=1.9m TO=2m
+.meas tran vemin MIN V(e) FROM=1.9m TO=2m
+.meas tran vcpp PP V(lx) FROM=1.9m TO=2m
+.meas tran vcmax MAX V(lx) FROM=1.9m TO=2m
+.meas tran vcmin MIN V(lx) FROM=1.9m TO=2m
+.meas tran icc AVG I(V1) FROM=1.9m TO=2m
+.meas tran vbavg AVG V(b) FROM=1.9m TO=2m
+.end
