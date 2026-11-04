@@ -1,0 +1,34 @@
+* 13-7 電流制限で守る (図1)。電源装置 5.00 V・電流制限 100 mA を t = 0 で入れ、C1 470 uF (ESR 0.1 ohm、仮定) と RL 1 kohm を充電する。
+* RS 1 ohm は電流を見るシャント。D1 (1N5819) は逆接続のときに電流を流して C1 を守るダイオード (ふだんは逆向きで流れない)
+* 電源装置は CV/CC の模型 (5-15 と同じ。出力の立ち上がりは 1 us、出力のコンデンサは入れていない)
+* 後半 (rev) は同じ回路の電源を逆向きにつないだ場合: 電源の + が回路の GND 側に来る
+.model DI D (Ron=1m Roff=1G Vfwd=0)
+.model D1N5819 D (IS=31.7u N=1.373 RS=0.051 BV=40 CJO=110p M=0.35 VJ=0.4)
+VSET vset 0 PWL(0 0 1u 5)
+ILIM 0 vo 0.1
+DCL vo vset DI
+C1 vo c1 470u IC=0
+RC1 c1 rs 0.1
+RL vo rs 1k
+D1 rs vo D1N5819
+RS rs 0 1
+* 逆接続 (電源の出力が回路の vo2 に対して逆): 回路の vo2 を 0 V に、電源の + を rs2 側へ
+VSET2 vset2 0 5
+ILIM2 0 p2 0.1
+DCL2 p2 vset2 DI
+RS2 p2 rs2 1
+D2 rs2 vo2 D1N5819
+C2 vo2 c2 470u IC=0
+RC2 c2 rs2 0.1
+RL2 vo2 rs2 1k
+VG vo2 0 0
+.tran 0 60m 0 10u uic
+.meas tran i1 FIND I(RS) AT=1m
+.meas tran t5 WHEN V(vo)-V(rs)=4.9 RISE=1
+.meas tran t25 WHEN V(vo)-V(rs)=2.5 RISE=1
+.meas tran vend FIND V(vo)-V(rs) AT=59m
+.meas tran iend FIND I(RS) AT=59m
+.meas tran irev FIND I(RS2) AT=59m
+.meas tran vcrev FIND V(vo2)-V(rs2) AT=59m
+.meas tran vpsu_rev FIND V(p2) AT=59m
+.end

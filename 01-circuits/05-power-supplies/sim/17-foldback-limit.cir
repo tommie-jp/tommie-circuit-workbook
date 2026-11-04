@@ -1,0 +1,41 @@
+* 5-17 フォールドバックの電流制限 (図1)。VIN 12 V、基準 DZ 5.1 V (RZ 680)、U1 (LM358) のフォロア、RB 4.7k、Q1 (2SC1815)、RSC 120 ohm、
+* 分圧 R1 3.9k / R2 6.8k、Q2 (2SC1815)。負荷 RL を 8 秒で 1 kohm から 0 ohm へ回す (図3 と同じ)
+* Q1815 は 5-2 の sim/02-zener-series-regulator.cir と同じ仮定の模型。DZ は 5-2 と同じ「20 mA で 5.1 V、動作抵抗 16 ohm」の仮定 (この題では 10 mA で使う)
+* オペアンプは 04-opamps の題と同じ汎用模型 (LM358 相当の仮定: 出力 High は V+ - 1.5 V)。実測ではない
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model DZ D (IS=1e-14 BV=4.78 IBV=20m RS=16 CJO=100p)
+VIN vin 0 12
+RZ vin ref 680
+DZ 0 ref DZ
+XU1 ref out ua vin 0 OPA
+RB ua b1 4.7k
+Q1 vin b1 e1 Q1815
+RSC e1 out 120
+R1 e1 b2 3.9k
+R2 b2 0 6.8k
+Q2 b1 b2 out Q1815
+COUT out 0 0.1u
+BL out 0 I = V(out) / max(0.01, 1000 * (1 - time / 8))
+.tran 0 8.5 0 1m
+.meas tran vref FIND V(ref) AT=0.5
+.meas tran vout0 FIND V(out) AT=0.5
+.meas tran imax MAX I(BL) FROM=0 TO=8.4
+.meas tran vat_imax FIND V(out) WHEN I(BL)=0.031 RISE=1
+.meas tran isc FIND I(BL) AT=8.3
+.meas tran vce_sc FIND V(vin)-V(e1) AT=8.3
+.meas tran pq1_sc FIND (V(vin)-V(e1))*Ic(Q1) AT=8.3
+.meas tran pq1max MAX (V(vin)-V(e1))*Ic(Q1) FROM=0 TO=8.4
+.meas tran prsc MAX I(RSC)*I(RSC)*120 FROM=0 TO=8.4
+.meas tran iin FIND -I(VIN) AT=0.5
+.end

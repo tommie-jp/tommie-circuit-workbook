@@ -1,0 +1,26 @@
+* 5-16 ICL7660 の負電源 (図1)。V+ 5 V、C1・C2 10 uF (ESR 0.5 ohm、仮定)、RL を 1 kohm と 470 ohm で比べる
+* ICL7660 は挙動の模型 (仮定。実測ではない): 発振 10 kHz を 2 で割った 5 kHz で、相 A は S1 (V+ → CAP+) と S3 (CAP- → GND)、
+* 相 B は S2 (CAP+ → GND) と S4 (CAP- → VOUT) を入れる。スイッチ 1 個のオン抵抗 5.75 ohm (データシートの近似
+* RO = 2 RSW + 1/(fPUMP C1) + 4 ESR1 + ESR2 の、4 個の合計 RSW の典型 23 ohm を 4 等分)
+.param rl=1k
+.model SWA SW (Ron=5.75 Roff=100Meg Vt=0.5 Vh=0)
+V1 vp 0 5
+VA pa 0 PULSE(0 1 0 50n 50n 99.9u 200u)
+BB pb 0 V=1-V(pa)
+S1 vp cp pa 0 SWA
+S3 cm 0 pa 0 SWA
+S2 cp 0 pb 0 SWA
+S4 cm vo pb 0 SWA
+C1 cp c1m 10u
+R1E c1m cm 0.5
+C2 c2p vo 10u IC=4.6
+R2E 0 c2p 0.5
+RL vo 0 {rl}
+.step param rl list 470 1000
+.tran 0 60m 0 0.5u uic
+.meas tran vout AVG V(vo) FROM=50m TO=60m
+.meas tran vpp PP V(vo) FROM=58m TO=60m
+.meas tran iout AVG -I(RL) FROM=50m TO=60m
+.meas tran iin AVG -I(V1) FROM=50m TO=60m
+.meas tran cpp PP V(cp) FROM=58m TO=60m
+.end

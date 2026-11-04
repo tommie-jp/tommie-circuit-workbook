@@ -14,13 +14,13 @@
 
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 | 実測 | 1.0 まで |
 | --- | --- | --- | --- | --- | --- | --- |
-| [回路の教科書](01-circuits/README.md) | 232 | 215 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 17 |
+| [回路の教科書](01-circuits/README.md) | 232 | 222 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 10 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 102 |
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1118** | **706** | **0** | **0** | **0** | |
+| **計** | **1118** | **713** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -152,8 +152,8 @@
 | 5-13 | [ソーラー + スーパーキャパシタ](01-circuits/05-power-supplies/13-solar-supercap.md) | ✓ | [ ] | — | — |
 | 5-14 | [リップルとデカップリングの実測](01-circuits/05-power-supplies/14-ripple-decoupling.md) | ✓ | [ ] | — | — |
 | 5-15 | [電源の保護 — ヒューズ・PTC・TVS](01-circuits/05-power-supplies/15-ptc-tvs-protection.md) | ✓ | [ ] | — | — |
-| 5-16 | 負電源 (ICL7660) | | | | |
-| 5-17 | 電流制限 (フォールドバック) | | | | |
+| 5-16 | [負電源 (ICL7660)](01-circuits/05-power-supplies/16-icl7660-negative.md) | ✓ | [ ] | — | — |
+| 5-17 | [電流制限 (フォールドバック)](01-circuits/05-power-supplies/17-foldback-current-limit.md) | ✓ | [ ] | — | — |
 
 ### 第 6 章 トランスとコイル
 
@@ -310,11 +310,11 @@
 | 13-1 | [定電圧 (CV) で使う — 電圧を決めて電流制限を掛ける](01-circuits/13-bench-supply/01-cv-mode.md) | ✓ | [ ] | — | — |
 | 13-2 | [定電流 (CC) で使う — 抵抗なしで LED を光らせる](01-circuits/13-bench-supply/02-cc-mode.md) | ✓ | [ ] | — | — |
 | 13-3 | [CV と CC の切り替わりを負荷で見る](01-circuits/13-bench-supply/03-cv-cc-crossover.md) | ✓ | [ ] | — | — |
-| 13-4 | ±電源を作る — 2 ch の直列と GND の取り方 | | | | |
-| 13-5 | 並列と直列で電流・電圧を足す | | | | |
-| 13-6 | 出力の内部抵抗と負荷変動 | | | | |
-| 13-7 | 電流制限で回路を守る — 短絡・逆接続・起動時の突入電流 | | | | |
-| 13-8 | 定電流で充電する — NiMH と、やってはいけない Li-ion | | | | |
+| 13-4 | [±電源を作る — 2 ch の直列と GND の取り方](01-circuits/13-bench-supply/04-dual-supply-series.md) | ✓ | [ ] | — | — |
+| 13-5 | [並列と直列で電流・電圧を足す](01-circuits/13-bench-supply/05-parallel-series.md) | ✓ | [ ] | — | — |
+| 13-6 | [出力の内部抵抗と負荷変動](01-circuits/13-bench-supply/06-output-resistance.md) | ✓ | [ ] | — | — |
+| 13-7 | [電流制限で回路を守る — 短絡・逆接続・起動時の突入電流](01-circuits/13-bench-supply/07-inrush-short-reverse.md) | ✓ | [ ] | — | — |
+| 13-8 | [定電流で充電する — NiMH と、やってはいけない Li-ion](01-circuits/13-bench-supply/08-nimh-cc-charge.md) | ✓ | [ ] | — | — |
 
 ### 第 14 章 I/Q と直接変換 — 90° の 2 本で受ける
 

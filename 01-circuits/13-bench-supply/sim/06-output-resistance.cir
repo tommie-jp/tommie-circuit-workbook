@@ -1,0 +1,22 @@
+* 13-6 出力の内部抵抗と線の抵抗 (図1)。電源装置 5.00 V (出力の抵抗 5 mohm、仮定)、+ と - の線とクリップ・ブレッドボードの接触を 0.1 ohm ずつ (仮定)、
+* 負荷 RL 56 ohm を 2N7000 で 100 Hz に開け閉めする。2N7000 は 02-transistors の題と同じ仮定の模型 (KP は 05-mosfet-switch.cir の 0.1)
+.model M2N7000 NMOS (LEVEL=1 VTO=2.1 KP=0.1 LAMBDA=0.01 CBD=10p)
+VS vs 0 5
+ROUT vs tp 5m
+RWP tp lp 0.1
+RWN ln 0 0.1
+RL lp d 56
+M1 d g ln ln M2N7000
+VW1 g ln PULSE(0 5 1m 1u 1u 5m 10m)
+RG g ln 100k
+.tran 0 30m 0 5u
+.meas tran ion FIND I(RL) AT=25m
+.meas tran ioff FIND I(RL) AT=29m
+.meas tran vplus FIND V(tp)-V(lp) AT=25m
+.meas tran vminus FIND V(ln) AT=25m
+.meas tran vterm_on FIND V(tp) AT=25m
+.meas tran vterm_off FIND V(tp) AT=29m
+.meas tran vload_on FIND V(lp)-V(ln) AT=25m
+.meas tran vload_off FIND V(lp)-V(ln) AT=29m
+.meas tran vds FIND V(d)-V(ln) AT=25m
+.end

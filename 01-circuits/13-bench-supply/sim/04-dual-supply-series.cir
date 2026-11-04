@@ -1,0 +1,33 @@
+* 13-4 2 ch を直列にして +-5 V (図1)。CH1 (5 V) の - と CH2 (5 V) の + をつないだ所が GND
+* 負荷は TL072 の反転増幅 (Rin 10k、Rf 20k、利得 -2)、入力は W1 の 1 kHz・1 Vpp
+* TL072 は 04-opamps の題と同じ汎用模型 (仮定: GBW 3 MHz、SR 13 V/us、出力は電源から 1.5 V 内側まで)。IC 自身の電流 2.8 mA (1 回路 1.4 mA x 2、データシートの典型の仮定) は電流源で足した
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+VCH1 vp 0 5
+VCH2 0 vn 5
+IQ vp vn 2.8m
+C1 vp 0 0.1u
+C2 0 vn 0.1u
+VW1 w 0 SINE(0 0.5 1k)
+RIN w m 10k
+RF m o 20k
+XU1 0 m o vp vn OPA gbw=3Meg sr=13Meg hi=1.5 lo=1.5
+RLOAD o 0 10k
+.tran 0 10m 0 1u
+.meas tran vpp PP V(o) FROM=5m TO=10m
+.meas tran vavg AVG V(o) FROM=5m TO=10m
+.meas tran tin WHEN V(w)=0 RISE=6
+.meas tran tout WHEN V(o)=0 FALL=6
+.meas tran ich1 AVG -I(VCH1) FROM=5m TO=10m
+.meas tran ich2 AVG -I(VCH2) FROM=5m TO=10m
+.meas tran vspan FIND V(vp)-V(vn) AT=5m
+.end

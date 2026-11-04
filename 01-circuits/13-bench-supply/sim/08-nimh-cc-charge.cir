@@ -1,0 +1,17 @@
+* 13-8 NiMH (単 4、800 mAh) を 80 mA の定電流で充電する (図1)。電源装置は電圧の上限 1.65 V・電流制限 80 mA を t = 1 s で入れる
+* 電池は仮定の模型 (実測ではない): 充電の途中の起電力 1.25 V〜1.45 V を電圧源で、内部抵抗 0.1 ohm。RS 1 ohm は電流を見るシャント
+* 電源装置は CV/CC の模型 (5-15 と同じ)。.step で電池の起電力を 1.25 V (始め) と 1.45 V (終わりの目安) と 1.60 V (もし電圧が上がりすぎたら) に振る
+.model DI D (Ron=1m Roff=1G Vfwd=0)
+.param ebat=1.25
+VSET vset 0 PWL(0 0 1 0 1.001 1.65)
+ILIM 0 vo PWL(0 0 1 0 1.001 80m)
+DCL vo vset DI
+RIB vo b 0.1
+VB b n {ebat}
+RS n 0 1
+.step param ebat list 1.25 1.45 1.6
+.tran 0 3 0 1m
+.meas tran ich FIND I(RS) AT=2.5
+.meas tran vterm FIND V(vo)-V(n) AT=2.5
+.meas tran vpsu FIND V(vo) AT=2.5
+.end
