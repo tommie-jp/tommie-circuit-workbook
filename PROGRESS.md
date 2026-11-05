@@ -15,12 +15,12 @@
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 | 実測 | 1.0 まで |
 | --- | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 232 | 227 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 5 |
-| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 187 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 15 |
+| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 194 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 8 |
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1118** | **805** | **0** | **0** | **0** | |
+| **計** | **1118** | **812** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -513,13 +513,13 @@
 | 7-9 | [チャタリングを捕まえる](02-analog-discovery/07-logic/09-switch-bounce.md) | ✓ | [ ] | — | — |
 | 7-10 | [PWM のデューティを測る](02-analog-discovery/07-logic/10-pwm-duty.md) | ✓ | [ ] | — | — |
 | 7-11 | [74HC595 を叩いて 7 セグを点ける](02-analog-discovery/07-logic/11-shift-register-7seg.md) | ✓ | [ ] | — | — |
-| 7-12 | ゲートの伝搬遅延を Pattern + Scope で | | | | |
-| 7-13 | I2C のプルアップと立ち上がり (アナログ ch 併用) | | | | |
-| 7-14 | 1-Wire (DS18B20) | | | | |
-| 7-15 | ロジックのしきい値 (3.3 V / 5 V) と判定 | | | | |
-| 7-16 | パターンで状態機械 (ROM もどき) | | | | |
-| 7-17 | デバウンス回路の評価 (Static I/O + Scope) | | | | |
-| 7-18 | マイコンの起動ログ (UART) を長時間 Record | | | | |
+| 7-12 | [ゲートの伝搬遅延を Pattern + Scope で](02-analog-discovery/07-logic/12-gate-delay.md) | ✓ | [ ] | — | — |
+| 7-13 | [I2C のプルアップと立ち上がり (アナログ ch 併用)](02-analog-discovery/07-logic/13-i2c-pullup-rise.md) | ✓ | [ ] | — | — |
+| 7-14 | [1-Wire (DS18B20)](02-analog-discovery/07-logic/14-onewire-ds18b20.md) | ✓ | [ ] | — | — |
+| 7-15 | [ロジックのしきい値 (3.3 V / 5 V) と判定](02-analog-discovery/07-logic/15-logic-threshold.md) | ✓ | [ ] | — | — |
+| 7-16 | [パターンで状態機械 (ROM もどき)](02-analog-discovery/07-logic/16-rom-state-machine.md) | ✓ | [ ] | — | — |
+| 7-17 | [デバウンス回路の評価 (Static I/O + Scope)](02-analog-discovery/07-logic/17-debounce-evaluation.md) | ✓ | [ ] | — | — |
+| 7-18 | [マイコンの起動ログ (UART) を長時間 Record](02-analog-discovery/07-logic/18-boot-log-record.md) | ✓ | [ ] | — | — |
 | 7-19 | [真理値表を当てる — Pattern で入力を全部出し、Logic で 74HC00 の出力と突き合わせる](02-analog-discovery/07-logic/19-nand-truth-table.md) | ✓ | [ ] | — | — |
 | 7-20 | [静止電流で品種を見分ける — 74LS00 と 74HC00 の電源電流をシャントで測る](02-analog-discovery/07-logic/20-quiescent-current-ls-hc.md) | ✓ | [ ] | — | — |
 | 7-21 | [Pico の ADC の特性 (直線性・雑音)](02-analog-discovery/07-logic/21-pico-adc-linearity.md) | ✓ | [ ] | — | — |

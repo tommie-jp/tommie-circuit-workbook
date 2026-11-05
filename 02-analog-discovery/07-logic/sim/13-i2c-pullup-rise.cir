@@ -1,0 +1,17 @@
+* 7-13 I2C の SCL の立ち上がり (図1)。プルアップ Rp と バスの容量 Cb の 1 次の充電
+* Cb = 220 pF (C1) + 30 pF (ブレッドボード・LM75・AD3 の入力の容量の仮定) = 250 pF
+* 出力は オープンドレイン を理想のスイッチ (オン 20 Ω、仮定) で表し、t = 2 us で手を離す
+* 立ち上がりは I2C の仕様の定義どおり 0.3 VDD から 0.7 VDD まで。10-90 % も読む
+.param rp=4.7k
+VDD vdd 0 3.3
+Rp vdd scl {rp}
+Cb scl 0 250p
+Vg g 0 PULSE(3.3 0 2u 1n 1n 20u 40u)
+S1 scl 0 g 0 SW1
+.model SW1 SW(Ron=20 Roff=1G Vt=1.65 Vh=0.1)
+.step param rp list 1k 2.2k 4.7k 10k
+.tran 0 20u 0 2n
+.meas tran vlow FIND V(scl) AT 1.9u
+.meas tran tr3070 TRIG V(scl) VAL=0.99 RISE=1 TARG V(scl) VAL=2.31 RISE=1
+.meas tran tr1090 TRIG V(scl) VAL=0.33 RISE=1 TARG V(scl) VAL=2.97 RISE=1
+.end

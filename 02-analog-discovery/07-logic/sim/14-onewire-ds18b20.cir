@@ -1,0 +1,17 @@
+* 7-14 1-Wire の DQ (図1)。4.7 kΩ のプルアップと線の容量 Cl の充電
+* Cl は 50 pF (ブレッドボード・DS18B20・AD3 の DIO と 1+ の入力の容量の仮定) と、長い線を足した 500 pF
+* AD3 の DIO0 (Output OD) を理想のスイッチ (オン 50 Ω、仮定) で表す。読みのスロット: 5 us だけ L にして離す
+* DS18B20 の入力の H の下限 VIH = 2.2 V (データシート、VDD を電源につないだとき)
+.param cl=50p
+VDD vdd 0 3.3
+Rp vdd dq 4.7k
+Cl dq 0 {cl}
+Vg g 0 PULSE(0 3.3 10u 1n 1n 5u 65u)
+S1 dq 0 g 0 SWOD
+.model SWOD SW(Ron=50 Roff=1G Vt=1.65 Vh=0.1)
+.step param cl list 50p 500p
+.tran 0 100u 0 5n
+.meas tran vlow FIND V(dq) AT 14u
+.meas tran tvih TRIG V(g) VAL=1.65 FALL=1 TARG V(dq) VAL=2.2 RISE=1
+.meas tran ipull PARAM 3.3/4.7k
+.end

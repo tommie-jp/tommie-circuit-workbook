@@ -1,0 +1,17 @@
+* 7-15 CMOS インバータのしきい値は電源電圧の半分ほど (図1 の 74HC04 の 1 段の代わり)
+* 74HC04 の中身は公開されていないので、NMOS・PMOS の 1 次の模型 (仮定: VTO ±0.8 V、KP は両方 100 uA/V^2 で対称) で表す
+* 入力を 0〜5 V で掃引し、出力が電源の半分を切る入力電圧と、入力 3.3 V のときの出力と電源の電流を読む
+.param vcc=5
+VCC vdd 0 {vcc}
+Vin in 0 0
+M1 out in 0 0 NM
+M2 out in vdd vdd PM
+.model NM NMOS (LEVEL=1 VTO=0.8 KP=100u LAMBDA=0.01)
+.model PM PMOS (LEVEL=1 VTO=-0.8 KP=100u LAMBDA=0.01)
+.dc Vin 0 5 1m
+.step param vcc list 5 3.3
+.meas dc vth FIND V(in) WHEN V(out)={vcc}/2
+.meas dc vout33 FIND V(out) AT 3.3
+.meas dc icc33 FIND -I(VCC) AT 3.3
+.meas dc icc0 FIND -I(VCC) AT 0
+.end

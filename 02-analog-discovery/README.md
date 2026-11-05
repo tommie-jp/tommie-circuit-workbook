@@ -35,12 +35,12 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 4 | FFT とスペクトラム | 5 | 10 | 20 | 20 | 20 |
 | 5 | ネットワークアナライザ | 6 | 12 | 22 | 22 | 22 |
 | 6 | インピーダンス測定 | 4 | 8 | 16 | 16 | 16 |
-| 7 | ロジックとプロトコル | 4 | 10 | 26 | 26 | 19 |
+| 7 | ロジックとプロトコル | 4 | 10 | 26 | 26 | 26 |
 | 8 | ブレッドボードの限界と perfboard | 4 | 8 | 14 | 14 | 14 |
 | 9 | アンプの特性 | 2 | 6 | 16 | 16 | 8 |
 | 10 | 電源と雑音 | 1 | 2 | 8 | 8 | 8 |
 | 11 | 自動化 | 1 | 2 | 8 | 8 | 8 |
-| **計** | | **50** | **100** | **202** | **202** | **187** |
+| **計** | | **50** | **100** | **202** | **202** | **194** |
 
 ## 第 0 章 道具と安全
 
@@ -222,13 +222,13 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 7-9 | [チャタリングを捕まえる](07-logic/09-switch-bounce.md) | 入門 | BB | |
 | 7-10 | [PWM のデューティを測る](07-logic/10-pwm-duty.md) | 入門 | BB | |
 | 7-11 | [74HC595 を叩いて 7 セグを点ける](07-logic/11-shift-register-7seg.md) | 中級 | BB | |
-| 7-12 | ゲートの伝搬遅延を Pattern + Scope で | 中級 | BB | |
-| 7-13 | I2C のプルアップと立ち上がり (アナログ ch 併用) | 中級 | BB | |
-| 7-14 | 1-Wire (DS18B20) | 中級 | BB | |
-| 7-15 | ロジックのしきい値 (3.3 V / 5 V) と判定 | 中級 | BB | |
-| 7-16 | パターンで状態機械 (ROM もどき) | 中級 | BB | |
-| 7-17 | デバウンス回路の評価 (Static I/O + Scope) | 中級 | BB | |
-| 7-18 | マイコンの起動ログ (UART) を長時間 Record | 中級 | BB | |
+| 7-12 | [ゲートの伝搬遅延を Pattern + Scope で](07-logic/12-gate-delay.md) | 中級 | BB | |
+| 7-13 | [I2C のプルアップと立ち上がり (アナログ ch 併用)](07-logic/13-i2c-pullup-rise.md) | 中級 | BB | |
+| 7-14 | [1-Wire (DS18B20)](07-logic/14-onewire-ds18b20.md) | 中級 | BB | |
+| 7-15 | [ロジックのしきい値 (3.3 V / 5 V) と判定](07-logic/15-logic-threshold.md) | 中級 | BB | |
+| 7-16 | [パターンで状態機械 (ROM もどき)](07-logic/16-rom-state-machine.md) | 中級 | BB | |
+| 7-17 | [デバウンス回路の評価 (Static I/O + Scope)](07-logic/17-debounce-evaluation.md) | 中級 | BB | |
+| 7-18 | [マイコンの起動ログ (UART) を長時間 Record](07-logic/18-boot-log-record.md) | 中級 | BB | |
 | 7-19 | [真理値表を当てる — Pattern で入力を全部出し、Logic で 74HC00 の出力と突き合わせる](07-logic/19-nand-truth-table.md) | 中級 | BB | |
 | 7-20 | [静止電流で品種を見分ける — 74LS00 と 74HC00 の電源電流をシャントで測る](07-logic/20-quiescent-current-ls-hc.md) | 中級 | BB | |
 | 7-21 | [Pico の ADC の特性 (直線性・雑音)](07-logic/21-pico-adc-linearity.md) | 中級 | BB | |

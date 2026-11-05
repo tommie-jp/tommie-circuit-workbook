@@ -1,0 +1,40 @@
+* 7-12 74HC04 の 6 段の伝搬遅延を Scope で読む (図1)
+* 74HC04 の 1 段は理想のインバータ (B 電源の u() と delay()) で、1 段の遅れを 12 ns と仮定 (td 9.5 ns + 縁の RC の 2.5 ns。3.3 V の目安。
+*   データシートは 4.5 V で典型 9 ns・2 V で 45 ns (CL 50 pF))。出力の縁は 1 k・3.6 p の RC (10-90 % 8 ns、仮定)
+* Scope の入力は 9 MHz の 1 次の低域 (tau = 1/(2 pi 9 MHz) = 17.7 ns) と仮定。CH1 は 1 番、CH2 は 12 番
+* 入口は Pattern の 1 MHz の方形波 (0 / 3.3 V、縁 2 ns)
+.param td=9.5n
+Vin in 0 PULSE(0 3.3 100n 2n 2n 498n 1u)
+B1 x1 0 V=3.3*u(1.65-delay(V(in),{td}))
+Rt1 x1 n1 1k
+Ct1 n1 0 3.6p
+B2 x2 0 V=3.3*u(1.65-delay(V(n1),{td}))
+Rt2 x2 n2 1k
+Ct2 n2 0 3.6p
+B3 x3 0 V=3.3*u(1.65-delay(V(n2),{td}))
+Rt3 x3 n3 1k
+Ct3 n3 0 3.6p
+B4 x4 0 V=3.3*u(1.65-delay(V(n3),{td}))
+Rt4 x4 n4 1k
+Ct4 n4 0 3.6p
+B5 x5 0 V=3.3*u(1.65-delay(V(n4),{td}))
+Rt5 x5 n5 1k
+Ct5 n5 0 3.6p
+B6 x6 0 V=3.3*u(1.65-delay(V(n5),{td}))
+Rt6 x6 out 1k
+Ct6 out 0 3.6p
+* Scope の 2 本 (同じ帯域。入力は高インピーダンスなので E で受けてから RC)
+E1 b1 0 in 0 1
+R1 b1 ch1 1k
+C1 ch1 0 17.68p
+E2 b2 0 out 0 1
+R2 b2 ch2 1k
+C2 ch2 0 17.68p
+.tran 0 2.2u 0 0.2n
+.meas tran dly_raw TRIG V(in) VAL=1.65 RISE=1 TD=1.05u TARG V(out) VAL=1.65 RISE=1 TD=1.05u
+.meas tran dly_scope TRIG V(ch1) VAL=1.65 RISE=1 TD=1.05u TARG V(ch2) VAL=1.65 RISE=1 TD=1.05u
+.meas tran dly_fall TRIG V(ch1) VAL=1.65 FALL=1 TD=1.05u TARG V(ch2) VAL=1.65 FALL=1 TD=1.05u
+.meas tran dly_1 TRIG V(in) VAL=1.65 RISE=1 TD=1.05u TARG V(n1) VAL=1.65 FALL=1 TD=1.05u
+.meas tran tr_ch1 TRIG V(ch1) VAL=0.33 RISE=1 TD=1.05u TARG V(ch1) VAL=2.97 RISE=1 TD=1.05u
+.meas tran tr_ch2 TRIG V(ch2) VAL=0.33 RISE=1 TD=1.05u TARG V(ch2) VAL=2.97 RISE=1 TD=1.05u
+.end

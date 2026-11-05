@@ -1,0 +1,22 @@
+* 7-17 デバウンス回路の評価 (図1): 回路の教科書の 10-9 の RC + 74HC14 を 3 回押し、74HC393 が数える立ち下がりの数を比べる
+* R1 10k (5 V から A)、R2 10k (A から B)、C1 (B から GND) を 1u・100n・10n に振る。ボタン SW は A と GND の間
+* ボタンの跳ね (10-9 と同じ仮定): 押した直後 0.3-0.6 ms と 1.0-1.3 ms に開き、離した直後 0.3-0.6 ms と 1.0-1.3 ms に閉じる
+* 押すのは 0・150・300 ms から 50 ms ずつ
+* 74HC14 は A 素子の SCHMITT (VT+ 2.8 V・VT- 1.7 V、5 V での目安。10-9 と同じ) の反転出力。Y1 は B、Yraw は A を入れた出力
+* 74HC393 は立ち下がりで数える (データシート) ので、Y1 と Yraw の立ち下がりの数を数える
+.param c1=1u
+V1 vcc 0 5
+R1 vcc a 10k
+R2 a b 10k
+C1 b 0 {c1}
+S1 a 0 ctl 0 SW
+.model SW SW(Ron=0.1 Roff=100Meg Vt=0.5 Vh=0.1)
+Vctl ctl 0 PWL REPEAT FOR 3 (0 0 0.001m 1 0.3m 1 0.301m 0 0.6m 0 0.601m 1 1.0m 1 1.001m 0 1.3m 0 1.301m 1 50m 1 50.001m 0 50.3m 0 50.301m 1 50.6m 1 50.601m 0 51.0m 0 51.001m 1 51.3m 1 51.301m 0 150m 0) ENDREPEAT
+A1 b 0 0 0 0 y1 yb 0 SCHMITT Vt=2.25 Vh=0.55 Vhigh=5 Vlow=0
+A2 a 0 0 0 0 yraw yrawb 0 SCHMITT Vt=2.25 Vh=0.55 Vhigh=5 Vlow=0
+.ic V(b)=5
+.step param c1 list 1u 100n 10n
+.tran 0 450m 0 10u uic
+.meas tran t_press WHEN V(y1)=2.5 RISE=1
+.meas tran t_rel WHEN V(y1)=2.5 FALL=1
+.end
