@@ -1,0 +1,23 @@
+* 9-14 LM386 の周波数特性 (図1)。LM386 は振る舞いの模型 (仮定): 入力抵抗 50 kΩ、利得 20 倍 (26 dB)、
+* 帯域 300 kHz の 1 極 (資料の Vs = 6 V の代表値)、出力の直流 2.5 V、出力抵抗 0.2 Ω。ひずみは入っていない。実測ではない
+* 外付け: Cout 470u、RL 8.2、Zobel 10 Ω + 47n
+Vw in 0 DC 0 AC 1
+Rin in 0 50k
+Gm 0 n1 in 0 1m
+Rn n1 0 20k
+Cn n1 0 {1/(6.2832*300k*20k)}
+Eo x 0 n1 0 1
+Vdc y x DC 2.5
+Ro y out 0.2
+Cout out o 470u
+RL o 0 8.2
+Rz out z 10
+Cz z 0 47n
+.ac dec 100 1 10Meg
+.meas ac g1k FIND mag(V(o)) AT=1k
+.meas ac gmax MAX mag(V(o))
+.meas ac fl WHEN mag(V(o))=0.7071*gmax RISE=1
+.meas ac fh WHEN mag(V(o))=0.7071*gmax FALL=1
+.meas ac g20 FIND mag(V(o)) AT=20
+.meas ac g20k FIND mag(V(o)) AT=20k
+.end

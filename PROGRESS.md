@@ -15,12 +15,12 @@
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 | 実測 | 1.0 まで |
 | --- | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 232 | 227 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 5 |
-| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 194 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 8 |
+| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 202 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 0 |
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1118** | **812** | **0** | **0** | **0** | |
+| **計** | **1118** | **820** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -560,14 +560,14 @@
 | 9-6 | [Tracer でトランジスタの Ic–Vce 曲線](02-analog-discovery/09-amplifiers/06-tracer-ic-vce.md) | ✓ | [ ] | — | — |
 | 9-7 | [hFE の実測](02-analog-discovery/09-amplifiers/07-hfe.md) | ✓ | [ ] | — | — |
 | 9-8 | [MOSFET の Id–Vgs](02-analog-discovery/09-amplifiers/08-mosfet-id-vgs.md) | ✓ | [ ] | — | — |
-| 9-9 | 位相余裕 (ループを切る) | | | | |
-| 9-10 | 入力インピーダンス (直列抵抗法) | | | | |
-| 9-11 | 出力インピーダンス (負荷法) | | | | |
-| 9-12 | PSRR | | | | |
-| 9-13 | CMRR (差動) | | | | |
-| 9-14 | LM386 の周波数特性と歪 | | | | |
-| 9-15 | プッシュプルのクロスオーバー歪を FFT で | | | | |
-| 9-16 | 入力換算雑音 | | | | |
+| 9-9 | [位相余裕 (ループを切る)](02-analog-discovery/09-amplifiers/09-phase-margin.md) | ✓ | [ ] | — | — |
+| 9-10 | [入力インピーダンス (直列抵抗法)](02-analog-discovery/09-amplifiers/10-input-impedance.md) | ✓ | [ ] | — | — |
+| 9-11 | [出力インピーダンス (負荷法)](02-analog-discovery/09-amplifiers/11-output-impedance.md) | ✓ | [ ] | — | — |
+| 9-12 | [PSRR](02-analog-discovery/09-amplifiers/12-psrr.md) | ✓ | [ ] | — | — |
+| 9-13 | [CMRR (差動)](02-analog-discovery/09-amplifiers/13-cmrr.md) | ✓ | [ ] | — | — |
+| 9-14 | [LM386 の周波数特性と歪](02-analog-discovery/09-amplifiers/14-lm386.md) | ✓ | [ ] | — | — |
+| 9-15 | [プッシュプルのクロスオーバー歪を FFT で](02-analog-discovery/09-amplifiers/15-crossover-fft.md) | ✓ | [ ] | — | — |
+| 9-16 | [入力換算雑音](02-analog-discovery/09-amplifiers/16-input-noise.md) | ✓ | [ ] | — | — |
 
 ### 第 10 章 電源と雑音
 

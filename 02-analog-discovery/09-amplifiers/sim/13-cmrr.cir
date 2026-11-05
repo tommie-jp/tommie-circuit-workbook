@@ -1,0 +1,31 @@
+* 9-13 CMRR (図1)。差動増幅 R1 = R3 = 10k、R2 = 100k (r2 で 99k に替える)、R4 = 200k ∥ 200k (V+ 5 V から)。V2 = W1、V1 = W2 (2.5 V)
+* cm = 0: V1 は 2.5 V (差動の試験)、cm = 1: V1 = W1 (同相の試験)。オペアンプは 9-2 と同じ汎用模型 (この模型の CMRR は無限大。抵抗の分だけを見る)
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.param r2=100k
+.param cm=0
+Vcc vcc 0 5
+Vw1 w1 0 DC 2.5 AC 1
+Bv1 v1 0 V = 2.5 + {cm}*(V(w1)-2.5)
+R3 w1 p 10k
+R4a vcc p 200k
+R4b p 0 200k
+R1 v1 m 10k
+R2 m o {r2}
+XU1 p m o vcc 0 OPA
+.ac list 100 1k 10k
+.meas ac g1k FIND mag(V(o)) AT=1k
+.meas ac g100 FIND mag(V(o)) AT=100
+.end

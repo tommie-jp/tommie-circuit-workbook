@@ -1,0 +1,32 @@
+* 9-9 位相余裕 (図1) の閉じたループの段の応答 (過渡)。LM358 非反転 利得 11 倍 (9-2 と同じ) の帰還点 fb に Cp を足す。cp を 1p (無し相当)・2.2n・10n に替えて走らせる
+* ループ利得 T = V(fb) / (V(p) - V(fb)) (CH2 / CH1)。オペアンプは 9-2 と同じ汎用模型 (GBW 1 MHz、SR 0.3 V/us の仮定。実測ではない)
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.param cp=2.2n
+Vcc vcc 0 5
+Vs s 0 PULSE(-0.005 0.005 100u 10n 10n 250u 500u) AC 0.02
+Cin s p 1u
+R1 vcc p 100k
+R2 p 0 100k
+XU1 p fb o vcc 0 OPA
+Rf o fb 10k
+Rg fb g 1k
+Cg g 0 10u
+Cp fb 0 {cp}
+.tran 0 1.2m 0 20n
+.meas tran vfin FIND V(fb) AT=0.849m
+.meas tran vmax MAX V(fb) FROM=0.6m TO=0.849m
+.meas tran vstart FIND V(fb) AT=0.599m
+.end

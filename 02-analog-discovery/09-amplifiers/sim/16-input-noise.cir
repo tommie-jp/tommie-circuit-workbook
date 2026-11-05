@@ -1,0 +1,33 @@
+* 9-16 入力換算雑音 (図1)。LM358 非反転 交流利得 101 倍 (Rf 100k Rg 1k Cg 10u)、+ 入力は 33k/22k で 2.0 V、Cb 10u で交流を GND へ
+* オペアンプの電圧雑音 40 nV/√Hz (資料の代表値、1 kHz) は、+ 入力に直列の抵抗 Ren = 96.6k の熱雑音で置いた (Ren に電流は流れない)。
+* 1/f 雑音と電流雑音は入っていない。オペアンプは 9-2 と同じ汎用模型 (雑音の無い B 電源)。仮定で、実測ではない
+* 汎用オペアンプ模型 (仮定。実測ではない): 1 極、GBW・SR・出力振幅の限界をパラメータで与える
+* DC 利得 = 1e5。出力は V+ - hi ... V- + lo に頭打ち。入力電流・入力オフセットは無し
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+* 内部ノード n2 も出力の限界 +-0.0 V の外へ巻き上がらないよう 1 S で引き戻す (積分の巻き上がりを避ける)
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+Vcc vcc 0 5
+R1 vcc p 33k
+R2 p 0 22k
+Cb p 0 10u
+Ren p pi 96.6k
+Rleak pi 0 1T noiseless
+XU1 pi m o vcc 0 OPA
+Rf o m 100k
+Rg m g 1k
+Cg g 0 10u
+.noise V(o) Vcc dec 50 10 100k
+.meas noise en1k FIND V(onoise) AT=1k
+.meas noise en100 FIND V(onoise) AT=100
+.meas noise en9k FIND V(onoise) AT=9.9k
+.meas noise vrms INTEG V(onoise) FROM=10 TO=10k
+.end

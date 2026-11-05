@@ -1,0 +1,20 @@
+* 9-11 出力インピーダンス (過渡)。図1 の回路に 10 kHz・20 mV (振幅) を入れ、RL 47 Ω を付けたときの出力の振れと形を見る
+* Q1815 は 9-1 と同じ 2SC1815 の仮定 (BF 150)。実測ではない
+.model Q1815 NPN (IS=2e-14 BF=150 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.param rl=47
+.param amp=0.02
+Vcc vcc 0 5
+Vs w 0 SINE(0 {amp} 10k)
+Cin w b 10u
+R1 vcc b 22k
+R2 b 0 10k
+Q1 vcc b e Q1815
+Re e 0 1k
+Cout e o 100u
+Rl o 0 {rl}
+Rp2 o 0 1Meg
+.tran 0 60m 0 0.5u
+.meas tran vmax MAX V(o) FROM=55m TO=60m
+.meas tran vmin MIN V(o) FROM=55m TO=60m
+.meas tran ie AVG I(Re) FROM=55m TO=60m
+.end

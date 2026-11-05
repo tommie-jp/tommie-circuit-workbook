@@ -1,0 +1,28 @@
+* 9-10 入力インピーダンス (図1)。9-1 のエミッタ接地の手前に Rs = 7.5k。CH2 (1 MΩ ∥ 24 pF の仮定) を節点 n に付ける
+* Zin = Rs × V(n) / (V(w) - V(n))。Q1815 は 9-1 と同じ 2SC1815 の仮定 (BF は 200、比べるとき 120・400)。実測ではない
+.model Q1815 NPN (IS=2e-14 BF={bf} NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.param bf=200
+Vcc vcc 0 5
+Vs w 0 DC 0 AC 1
+Rs w n 7.5k
+Rp2 n 0 1Meg
+Cp2 n 0 24p
+Cin n b 1u
+R1 vcc b 39k
+R2 b 0 12k
+Rc vcc c 1k
+Re e 0 220
+Q1 c b e Q1815
+Cl c 0 24p
+.ac dec 100 10 1Meg
+.meas ac h1k FIND mag(V(n)) AT=1k
+.meas ac z1k FIND mag(7.5k*V(n)/(V(w)-V(n))) AT=1k
+.meas ac z20 FIND mag(7.5k*V(n)/(V(w)-V(n))) AT=20
+.meas ac z100 FIND mag(7.5k*V(n)/(V(w)-V(n))) AT=100
+.meas ac z100k FIND mag(7.5k*V(n)/(V(w)-V(n))) AT=100k
+.meas ac z1meg FIND mag(7.5k*V(n)/(V(w)-V(n))) AT=1Meg
+.meas ac z10 FIND mag(7.5k*V(n)/(V(w)-V(n))) AT=10
+.meas ac z50 FIND mag(7.5k*V(n)/(V(w)-V(n))) AT=50
+.meas ac z10k FIND mag(7.5k*V(n)/(V(w)-V(n))) AT=10k
+.meas ac z300k FIND mag(7.5k*V(n)/(V(w)-V(n))) AT=300k
+.end

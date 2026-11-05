@@ -53,7 +53,7 @@ wires:
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/09-amplifiers/circuit/08-mosfet-id-vgs.svg)
 
-- W1 → Rg (100 Ω) → ゲート。Rg はゲートと配線の容量で発振しないように入れる止め抵抗で、直流の電圧は落ちない
+- W1 → Rg (100 Ω、Ω はオーム) → ゲート。Rg はゲートと配線の容量で発振しないように入れる止め抵抗で、直流の電圧は落ちない
 - CH1 (1+) はゲート、1− は GND。ソースが GND なので CH1 がそのまま V<sub>gs</sub>
 - V+ (5 V) → Rd (330 Ω) → ドレイン。CH2 (2+・2−) は Rd の両端で、V<sub>Rd</sub> = I<sub>d</sub> × 330 Ω。
   Rd は I<sub>d</sub> を最大 5 V / 330 Ω = 15 mA に抑える役も持つ (しきい値の低い個体で W1 を上げすぎても壊さない)

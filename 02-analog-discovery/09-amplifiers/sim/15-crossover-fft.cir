@@ -1,0 +1,15 @@
+* 9-15 プッシュプルのクロスオーバー歪 (図1)。回路の教科書の 2-10 と同じ B 級 (±5 V、RL 100 Ω)、W1 を 1 kHz・振幅 va にする
+* Q1815・Q1015 は 2-10 と同じ代用の模型 (BF 250 の仮定で、実測ではない)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5)
+.model Q1015 PNP (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5)
+.param va=3
+VCC vcc 0 5
+VEE vee 0 -5
+Vin in 0 SIN(0 {va} 1k)
+Q1 vcc in out Q1815
+Q2 vee in out Q1015
+RL out 0 100
+.tran 0 12m 2m 1u
+.four 1k 9 V(out)
+.meas tran vpp PP V(out) FROM=2m TO=12m
+.end
