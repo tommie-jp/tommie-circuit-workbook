@@ -1,0 +1,15 @@
+* 6-16 サーミスタ・CdS。基準抵抗 Rref 10k + センサー (抵抗。値は本文の式と仮定: 33.62k 0 °C / 7.379k 32 °C / 398 1000 lux / 50.12k 1 lux)
+* CH1 = Rref の両端、CH2 = センサーの両端。W1 の振幅 0.5 V、1 kHz
+* rin = 計器の入力 (1- と 2+ の 1 MΩ が 2 本で 500 kΩ)。1T は「付けない」
+.param rdut=10k rin=1T
+V1 in 0 AC 0.5
+Rref in a 10k
+Rdut a 0 {rdut}
+Rin a 0 {rin}
+.step param rdut list 33.62k 7.379k 398 50.12k
+.step param rin list 1T 500k
+.ac dec 10 100 10k
+.meas ac ch1 FIND mag(v(in)-v(a)) AT=1k
+.meas ac ch2 FIND mag(v(a)) AT=1k
+.meas ac rread FIND mag(10k*v(a)/(v(in)-v(a))) AT=1k
+.end

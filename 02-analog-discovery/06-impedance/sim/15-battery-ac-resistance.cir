@@ -1,0 +1,19 @@
+* 6-15 電池の内部抵抗 (AC)。基準抵抗 Rref 150 + 直流を止める Cb 470u + 電池の等価回路 (R0 + (Rct || Cdl)。値は本文の仮定)
+* 電池の直流 (3 V / 1.5 V) と W1 のオフセットは交流解析に出ないので入れない。CH1 = Rref の両端、CH2 = 電池の両端。W1 の振幅 1 V
+* .step で CR2032 (R0 10, Rct 20, Cdl 20u) と単 3 アルカリ (R0 0.12, Rct 0.1, Cdl 0.5) を解く
+.param r0=10
+V1 in 0 AC 1
+Rref in a 150
+Cb a b 470u
+R0 b c {r0}
+Rct c 0 {rct}
+Cdl c 0 {cdl}
+.step param r0 list 10 0.12
+.param rct={if(r0>1,20,0.1)} cdl={if(r0>1,20u,0.5)}
+.ac dec 200 10 10k
+.meas ac z10 FIND mag(150*v(b)/(v(in)-v(a))) AT=10
+.meas ac z1k FIND mag(150*v(b)/(v(in)-v(a))) AT=1k
+.meas ac z10k FIND mag(150*v(b)/(v(in)-v(a))) AT=10k
+.meas ac ch1 FIND mag(v(in)-v(a)) AT=1k
+.meas ac ch2 FIND mag(v(b)) AT=1k
+.end

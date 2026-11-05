@@ -1,0 +1,14 @@
+* 6-12 フェライトビーズ。基準抵抗 Rref 100 + ビーズ (等価回路: L 2.2u と Rp 100 の並列に Rdc 0.02 を直列。値は本文の仮定)
+* CH1 = Rref の両端、CH2 = ビーズの両端。W1 の振幅 1 V。LTspice のコイルの既定の Rser (1m) は 0 にする
+V1 in 0 AC 1
+Rref in a 100
+Rdc a b 0.02
+Lb b 0 2.2u Rser=0
+Rp b 0 100
+.ac dec 400 100k 10meg
+.meas ac z1M FIND mag(100*v(a)/(v(in)-v(a))) AT=1meg
+.meas ac zfc FIND mag(100*v(a)/(v(in)-v(a))) AT=7.2343meg
+.meas ac ch1fc FIND mag(v(in)-v(a)) AT=7.2343meg
+.meas ac ch2fc FIND mag(v(a)) AT=7.2343meg
+.meas ac z10M FIND mag(100*v(a)/(v(in)-v(a))) AT=10meg
+.end

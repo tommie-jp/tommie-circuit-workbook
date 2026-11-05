@@ -15,12 +15,12 @@
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 | 実測 | 1.0 まで |
 | --- | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 232 | 224 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 8 |
-| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 143 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 59 |
+| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 151 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 51 |
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1118** | **758** | **0** | **0** | **0** | |
+| **計** | **1118** | **766** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -493,10 +493,10 @@
 | 6-10 | [25 MHz まで — 0.1 µF の SRF](02-analog-discovery/06-impedance/10-srf-25mhz.md) | ✓ | [ ] | — | — |
 | 6-11 | [水晶の fs / fp (10 MHz 以下)](02-analog-discovery/06-impedance/11-crystal-fs-fp.md) | ✓ | [ ] | — | — |
 | 6-12 | [フェライトビーズ (10 MHz まで)](02-analog-discovery/06-impedance/12-ferrite-bead.md) | ✓ | [ ] | — | — |
-| 6-13 | スピーカーのインピーダンス曲線 | | | | |
-| 6-14 | 圧電ブザーの共振 | | | | |
-| 6-15 | 電池の内部抵抗 (AC) | | | | |
-| 6-16 | サーミスタ・CdS のインピーダンス vs 温度・光 | | | | |
+| 6-13 | [スピーカーのインピーダンス曲線](02-analog-discovery/06-impedance/13-speaker-impedance.md) | ✓ | [ ] | — | — |
+| 6-14 | [圧電ブザーの共振](02-analog-discovery/06-impedance/14-piezo-resonance.md) | ✓ | [ ] | — | — |
+| 6-15 | [電池の内部抵抗 (AC)](02-analog-discovery/06-impedance/15-battery-ac-resistance.md) | ✓ | [ ] | — | — |
+| 6-16 | [サーミスタ・CdS のインピーダンス vs 温度・光](02-analog-discovery/06-impedance/16-thermistor-cds.md) | ✓ | [ ] | — | — |
 
 ### 第 7 章 ロジックとプロトコル
 
@@ -541,12 +541,12 @@
 | 8-6 | [レールの GND インピーダンス](02-analog-discovery/08-breadboard-limits/06-rail-impedance.md) | ✓ | [ ] | — | — |
 | 8-7 | [同じ回路を perfboard で作って比べる](02-analog-discovery/08-breadboard-limits/07-perfboard-comparison.md) | ✓ | [ ] | — | — |
 | 8-8 | [同じスルーを BNC で 25 MHz まで、LiteVNA64 で 1〜100 MHz](02-analog-discovery/08-breadboard-limits/08-bnc-vs-nanovna.md) | ✓ | [ ] | — | — |
-| 8-9 | デカップリングの置き場所 (近い / 遠い) | | | | |
+| 8-9 | [デカップリングの置き場所 (近い / 遠い)](02-analog-discovery/08-breadboard-limits/09-decoupling-placement.md) | ✓ | [ ] | — | — |
 | 8-10 | [GND の取り回し — 1 点接地とループ](02-analog-discovery/08-breadboard-limits/10-ground-loop.md) | ✓ | [ ] | — | — |
 | 8-11 | [長いワイヤのアンテナ効果 (放送波の混入)](02-analog-discovery/08-breadboard-limits/11-wire-antenna.md) | ✓ | [ ] | — | — |
-| 8-12 | 電源レールのノイズ (スイッチング電源を載せる) | | | | |
-| 8-13 | perfboard の GND 面 (銅テープ) の効果 | | | | |
-| 8-14 | 10 MHz の方形波が届くジャンパの長さ | | | | |
+| 8-12 | [電源レールのノイズ (スイッチング電源を載せる)](02-analog-discovery/08-breadboard-limits/12-switching-rail-noise.md) | ✓ | [ ] | — | — |
+| 8-13 | [perfboard の GND 面 (銅テープ) の効果](02-analog-discovery/08-breadboard-limits/13-copper-tape-plane.md) | ✓ | [ ] | — | — |
+| 8-14 | [10 MHz の方形波が届くジャンパの長さ](02-analog-discovery/08-breadboard-limits/14-jumper-length.md) | ✓ | [ ] | — | — |
 
 ### 第 9 章 アンプの特性
 

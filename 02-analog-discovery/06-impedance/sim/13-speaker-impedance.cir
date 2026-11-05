@@ -1,0 +1,20 @@
+* 6-13 スピーカーのインピーダンス曲線。アダプタの中の基準抵抗を 10 の 1 本で置き換え、W1 の振幅 0.1 V
+* スピーカーの等価回路 (本文の仮定): Re 7.2 + Le 0.15m の直列に、Res 24 / Lces 3.183m / Cmes 88.42u の並列
+* CH1 = Rref の両端、CH2 = スピーカーの両端。LTspice のコイルの既定の Rser (1m) は 0 にする
+V1 in 0 AC 0.1
+Rref in a 10
+Re a b 7.2
+Le b c 0.15m Rser=0
+Res c 0 24
+Lces c 0 3.1831m Rser=0
+Cmes c 0 88.419u
+.ac dec 2000 20 20k
+.meas ac zmax MAX mag(10*v(a)/(v(in)-v(a)))
+.meas ac z300 FIND mag(10*v(a)/(v(in)-v(a))) AT=300
+.meas ac ch1 FIND mag(v(in)-v(a)) AT=300
+.meas ac ch2 FIND mag(v(a)) AT=300
+.meas ac z1k FIND mag(10*v(a)/(v(in)-v(a))) AT=1k
+.meas ac z10k FIND mag(10*v(a)/(v(in)-v(a))) AT=10k
+.meas ac f1 WHEN mag(10*v(a)/(v(in)-v(a)))=14.988 CROSS=1
+.meas ac f2 WHEN mag(10*v(a)/(v(in)-v(a)))=14.988 CROSS=2
+.end

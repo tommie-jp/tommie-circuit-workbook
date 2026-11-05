@@ -86,7 +86,7 @@ wires:
 | 計器 | 設定 |
 | --- | --- |
 | Spectrum | 0〜2 MHz、CH1、Window Flat Top、単位 dBm、Average 8 回 |
-| Scope | CH1、Range 1 mV/div (いちばん細かい Range)、時間軸 500 ns/div |
+| Scope | CH1、Range 1 mV/div (細かい Range の目安)、時間軸 500 ns/div |
 | 手順 | ワイヤ 10 cm → 1 m に替える → R<sub>T</sub> を挿す、の 3 通りを読む |
 
 線の周波数は地域で違う。東京なら NHK 第 1 の 594 kHz と第 2 の 693 kHz、ほかの地域は近くの局の周波数の線を探す

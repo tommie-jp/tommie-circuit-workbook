@@ -1,0 +1,27 @@
+* 8-9 デカップリングの置き場所。W1 -> Rinj 100 -> IC の VCC 点 (vcc)。
+* 近い: C2 100n (ESR 50m・ESL 5n、仮定) を vcc の列に直に。
+* 遠い: C1 100n (同じ) を、レールとジャンパの経路 Lpath 100n (仮定) の先に。
+* near=1 で近い、near=0 で遠い (片方だけ挿す)
+.param near=1
+V1 w1 0 AC 1
+Rinj w1 vcc 100
+* 近い
+Rsw2 vcc n2 {if(near>0.5,1m,1e9)}
+L2 n2 n2a 5n
+R2 n2a n2b 50m
+C2 n2b 0 100n
+* 遠い
+Rsw1 vcc p1 {if(near>0.5,1e9,1m)}
+Lp p1 n1 100n
+L1 n1 n1a 5n
+R1 n1a n1b 50m
+C1 n1b 0 100n
+.step param near list 1 0
+.ac dec 200 100k 10meg
+.meas ac h100k FIND mag(v(vcc)) AT=100k
+.meas ac h1M FIND mag(v(vcc)) AT=1meg
+.meas ac h5M FIND mag(v(vcc)) AT=5meg
+.meas ac p5M FIND ph(v(vcc)) AT=5meg
+.meas ac h10M FIND mag(v(vcc)) AT=10meg
+.meas ac hmin MIN mag(v(vcc))
+.end

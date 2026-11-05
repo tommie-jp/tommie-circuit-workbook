@@ -1,0 +1,16 @@
+* 6-14 圧電ブザーの共振。基準抵抗 Rref 1k + 圧電サウンダー (等価回路: Lm 0.71961 + Cm 2.2n + Rm 200 の直列に C0 22n を並列。値は本文の仮定)
+* CH1 = Rref の両端、CH2 = ブザーの両端。W1 の振幅 1 V。LTspice のコイルの既定の Rser (1m) は 0 にする
+V1 in 0 AC 1
+Rref in a 1k
+Lm a b 0.71961 Rser=0
+Cm b c 2.2n
+Rm c 0 200
+C0 a 0 22n
+.ac lin 90001 1k 10k
+.meas ac zmin MIN mag(1k*v(a)/(v(in)-v(a))) FROM=3.5k TO=4.1k
+.meas ac zmax MAX mag(1k*v(a)/(v(in)-v(a))) FROM=4.1k TO=4.5k
+.meas ac ch1 FIND mag(v(in)-v(a)) AT=4k
+.meas ac ch2 FIND mag(v(a)) AT=4k
+.meas ac z1k FIND mag(1k*v(a)/(v(in)-v(a))) AT=1k
+.meas ac z10k FIND mag(1k*v(a)/(v(in)-v(a))) AT=10k
+.end

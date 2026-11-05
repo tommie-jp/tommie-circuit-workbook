@@ -1,0 +1,13 @@
+* 8-13 perfboard の GND 面 (銅テープ)。W1 (30 mV、10 MHz) -> Rref 2.7 -> 輪 (Lloop) -> GND
+* 輪のインダクタンス (仮定): 戻りの線を 10.16 mm 離して引く 63.2n / 銅テープの面の上 22.7n
+.param ll=63.2n
+V1 w1 0 AC 30m
+Rref w1 a 2.7
+Lloop a 0 {ll}
+.step param ll list 63.2n 22.7n
+.ac lin 3 9.99meg 10.01meg
+.meas ac v1 FIND mag(v(w1)-v(a)) AT=10meg
+.meas ac v2 FIND mag(v(a)) AT=10meg
+.meas ac p21 FIND ph(v(a))-ph(v(w1)-v(a)) AT=10meg
+.meas ac i FIND mag(I(Rref)) AT=10meg
+.end

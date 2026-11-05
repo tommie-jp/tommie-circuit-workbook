@@ -9,5 +9,6 @@
   { "file": "03-nanovna/07-antennas/05-loopstick-varicap.md", "board": "図2 perfboard に組む (コイルとバリコン)", "reason": "回路図は損失 R1 を入れた等価回路、実体配線図には R1 が無い" },
   { "file": "03-nanovna/08-amplifiers/07-mixer-isolation.md", "board": "図2 SBL-1+ と端面 SMA 3 つ (部品面。ピンは 2 穴おき)", "reason": "実体配線図はミキサ (SBL-1+) をピンの穴だけで描くので、GND が実体配線図の上ではつながらない" },
   { "file": "04-denken/01-dc-circuits/03-kirchhoff.md", "board": "図2 ブレッドボードに組む", "reason": "電流計の隙間を実体配線図では開けたまま (テスターを入れる)。R1 は実体配線図で R1a・R1b の 2 本" },
-  { "file": "04-denken/01-dc-circuits/04-superposition.md", "board": "図3 E1 だけを残す配線 (E2 の代わりに線)", "reason": "電流計の隙間を実体配線図では開けたまま (テスターを入れる)。R1 は実体配線図で R1a・R1b の 2 本" }
+  { "file": "04-denken/01-dc-circuits/04-superposition.md", "board": "図3 E1 だけを残す配線 (E2 の代わりに線)", "reason": "電流計の隙間を実体配線図では開けたまま (テスターを入れる)。R1 は実体配線図で R1a・R1b の 2 本" },
+  { "file": "02-analog-discovery/08-breadboard-limits/09-decoupling-placement.md", "board": "図2 近い C2 (20・22 列) と遠い C1 (2・4 列)。どちらか 1 個だけ挿す", "reason": "回路図はレールとジャンパのインダクタンスを Lpath の等価回路で描き、実体配線図では + と − のレールそのものになる。C1 と C2 は同じ部品を挿す場所の違いで、回路図では等価回路の側に入る" }
 ]

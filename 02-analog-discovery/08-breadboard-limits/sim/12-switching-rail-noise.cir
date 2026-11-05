@@ -1,0 +1,27 @@
+* 8-12 電源レールのノイズ。AD3 の V+ 5 V -> 線 20 cm (230n、仮定) -> + レール 1 列 (rin)
+* -> レール 4 列ぶん (5.5n) -> 5 列 (q、静かな回路への枝)
+* -> レール 15 列ぶん (30.7n) -> 20 列 (tap、MT3608 モジュールの VIN+ の線。CH2 は 19 列)
+* -> モジュールへの線 5 cm (43n) -> モジュールの入力 (mod)。モジュールの中は仮定:
+*    入力のコンデンサ 22u (ESR 10m・ESL 2n) と、入力の電流 (DCM の三角、1.2 MHz、ピーク 56.5 mA、平均 19 mA)
+* 静かな側: q -> flt=1 で Lf 10u (DCR 0.1) と Cf 10u (ESR 10m)、flt=0 で Lf を線に替え Cf を抜く -> 9 列 (qa、CH1)。
+*    静かな回路の代わりに RQ 20k
+.param flt=0
+Vs s 0 5
+Rs s s1 50m
+Ls s1 rin 230n
+Lr1 rin q 5.5n
+Lr2 q tap 30.7n
+Lj tap mod 43n
+Cin mod c1 22u
+Rc c1 c2 10m
+Lc c2 0 2n
+Iin mod 0 PULSE(0 56.5m 0 249n 311n 0 833.33n)
+Rbyp q qa {if(flt>0.5,1e9,1m)}
+Rf q f1 {if(flt>0.5,0.1,1e9)}
+Lf f1 qa 10u
+Cf qa f2 10u
+Rcf f2 0 {if(flt>0.5,10m,1e9)}
+RQ qa 0 20k
+.step param flt list 0 1
+.tran 0 1.0m 0.9m 1n
+.end

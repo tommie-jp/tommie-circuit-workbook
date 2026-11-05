@@ -34,13 +34,13 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 3 | 波形発生器 | 5 | 10 | 18 | 18 | 18 |
 | 4 | FFT とスペクトラム | 5 | 10 | 20 | 20 | 12 |
 | 5 | ネットワークアナライザ | 6 | 12 | 22 | 22 | 15 |
-| 6 | インピーダンス測定 | 4 | 8 | 16 | 16 | 12 |
+| 6 | インピーダンス測定 | 4 | 8 | 16 | 16 | 16 |
 | 7 | ロジックとプロトコル | 4 | 10 | 26 | 26 | 12 |
-| 8 | ブレッドボードの限界と perfboard | 4 | 8 | 14 | 14 | 10 |
+| 8 | ブレッドボードの限界と perfboard | 4 | 8 | 14 | 14 | 14 |
 | 9 | アンプの特性 | 2 | 6 | 16 | 16 | 8 |
 | 10 | 電源と雑音 | 1 | 2 | 8 | 8 | 4 |
 | 11 | 自動化 | 1 | 2 | 8 | 8 | 2 |
-| **計** | | **50** | **100** | **202** | **202** | **143** |
+| **計** | | **50** | **100** | **202** | **202** | **151** |
 
 ## 第 0 章 道具と安全
 
@@ -202,10 +202,10 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 6-10 | [25 MHz まで — 0.1 µF の SRF](06-impedance/10-srf-25mhz.md) | 中級 | PF | AD3 |
 | 6-11 | [水晶の fs / fp (10 MHz 以下)](06-impedance/11-crystal-fs-fp.md) | 中級 | BB | |
 | 6-12 | [フェライトビーズ (10 MHz まで)](06-impedance/12-ferrite-bead.md) | 中級 | BB | |
-| 6-13 | スピーカーのインピーダンス曲線 | 中級 | — | |
-| 6-14 | 圧電ブザーの共振 | 中級 | BB | |
-| 6-15 | 電池の内部抵抗 (AC) | 中級 | — | |
-| 6-16 | サーミスタ・CdS のインピーダンス vs 温度・光 | 中級 | BB | |
+| 6-13 | [スピーカーのインピーダンス曲線](06-impedance/13-speaker-impedance.md) | 中級 | — | |
+| 6-14 | [圧電ブザーの共振](06-impedance/14-piezo-resonance.md) | 中級 | BB | |
+| 6-15 | [電池の内部抵抗 (AC)](06-impedance/15-battery-ac-resistance.md) | 中級 | — | |
+| 6-16 | [サーミスタ・CdS のインピーダンス vs 温度・光](06-impedance/16-thermistor-cds.md) | 中級 | BB | |
 
 ## 第 7 章 ロジックとプロトコル
 
@@ -250,12 +250,12 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 8-6 | [レールの GND インピーダンス](08-breadboard-limits/06-rail-impedance.md) | 入門 | BB | |
 | 8-7 | [同じ回路を perfboard で作って比べる](08-breadboard-limits/07-perfboard-comparison.md) | 入門 | BB / PF | |
 | 8-8 | [同じスルーを BNC で 25 MHz まで、LiteVNA64 で 1〜100 MHz](08-breadboard-limits/08-bnc-vs-nanovna.md) | 入門 | PF | |
-| 8-9 | デカップリングの置き場所 (近い / 遠い) | 中級 | BB | |
+| 8-9 | [デカップリングの置き場所 (近い / 遠い)](08-breadboard-limits/09-decoupling-placement.md) | 中級 | BB | |
 | 8-10 | [GND の取り回し — 1 点接地とループ](08-breadboard-limits/10-ground-loop.md) | 中級 | BB | |
 | 8-11 | [長いワイヤのアンテナ効果 (放送波の混入)](08-breadboard-limits/11-wire-antenna.md) | 中級 | BB | |
-| 8-12 | 電源レールのノイズ (スイッチング電源を載せる) | 中級 | BB | |
-| 8-13 | perfboard の GND 面 (銅テープ) の効果 | 中級 | PF | |
-| 8-14 | 10 MHz の方形波が届くジャンパの長さ | 中級 | BB | |
+| 8-12 | [電源レールのノイズ (スイッチング電源を載せる)](08-breadboard-limits/12-switching-rail-noise.md) | 中級 | BB | |
+| 8-13 | [perfboard の GND 面 (銅テープ) の効果](08-breadboard-limits/13-copper-tape-plane.md) | 中級 | PF | |
+| 8-14 | [10 MHz の方形波が届くジャンパの長さ](08-breadboard-limits/14-jumper-length.md) | 中級 | BB | |
 
 ## 第 9 章 アンプの特性
 

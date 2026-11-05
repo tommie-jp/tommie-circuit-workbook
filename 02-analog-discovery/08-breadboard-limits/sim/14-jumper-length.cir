@@ -1,0 +1,17 @@
+* 8-14 10 MHz の方形波が届くジャンパの長さ。
+* 74HC14 の出力 = 0→5 V の台形 (立ち上がり・立ち下がり 5 ns、仮定) と出力抵抗 50 Ω (仮定)
+* -> 直列の Rs (case 5 だけ 100 Ω) -> ジャンパ L (8-3 の式、仮定) -> 受け側: 74HC14 の入力 3 pF (データシートの typ) + CH2 の 24 pF = 27 pF
+* case 1〜4: 5・10・20・30 cm (43・100・227・366 nH)、case 5: 20 cm + Rs 100 Ω
+.param case=1
+.param ll={table(case,1,43n,2,100n,3,227n,4,366n,5,227n)}
+.param rs={if(case>4.5,100,1m)}
+Vd d 0 PULSE(0 5 0 5n 5n 45n 100n)
+Rout d o 50
+Rs o o2 {rs}
+Lj o2 r {ll}
+Cl r 0 27p
+.step param case 1 5 1
+.tran 0 400n 0 0.05n
+.meas tran vmax MAX V(r) FROM 300n TO 350n
+.meas tran vmin MIN V(r) FROM 350n TO 400n
+.end
