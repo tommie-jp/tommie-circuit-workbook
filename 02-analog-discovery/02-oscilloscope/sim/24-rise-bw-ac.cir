@@ -1,0 +1,26 @@
+* 2-24 立ち上がり時間から帯域を逆算する — 帯域 10 MHz にそろえた 3 つの低域と、AD3 の経路の等価 (τ = 14.3 ns)
+* 理想の素子。入力は AC 1 V。-3 dB の周波数を読む
+.param tau=14.3n
+V1 in 0 DC 0 AC 1
+* (1) 1 次 RC: f3dB = 1/(2 pi R C) = 10 MHz
+R1 in a 1k
+C1 a 0 15.915p
+* (2) 同じ極 2 つ (間を理想のバッファで切る): 全体で 10 MHz → 1 段は 10 MHz / 0.6436
+R2 in b1 1k
+C2 b1 0 10.243p
+E2 b2 0 b1 0 1
+R3 b2 b 1k
+C3 b 0 10.243p
+* (3) 2 次 Butterworth (zeta = 0.707): f0 = 10 MHz
+R4 in c1 225.1
+L4 c1 c2 2.533u
+C4 c2 0 100p
+* (4) AD3 の BNC の経路の等価: 1 次で tau = 14.3 ns
+R5 in d 1k
+C5 d 0 {tau/1k}
+.ac dec 200 100k 100Meg
+.meas AC f1 WHEN mag(V(a))=0.7071 FALL=1
+.meas AC f2 WHEN mag(V(b))=0.7071 FALL=1
+.meas AC f3 WHEN mag(V(c2))=0.7071 FALL=1
+.meas AC f4 WHEN mag(V(d))=0.7071 FALL=1
+.end

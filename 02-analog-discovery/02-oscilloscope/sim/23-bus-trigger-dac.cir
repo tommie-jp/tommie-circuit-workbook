@@ -1,0 +1,20 @@
+* 2-23 デジタル ch (バスの値) でトリガする — 重みの抵抗 4 本の DAC (図1)
+* 74HC393 の出力は 0 V / 3.3 V の理想の電圧源 (出力抵抗は 0 と仮定)。CH1 は 1 MΩ
+* V(n) を 0〜15 に振り、各ビットを B 電源で作って OUT の電圧を読む
+Vn n 0 0
+BA qa 0 V=3.3*(floor(V(n)+0.01) - 2*floor((V(n)+0.01)/2))
+BB qb 0 V=3.3*(floor((V(n)+0.01)/2) - 2*floor((V(n)+0.01)/4))
+BC qc 0 V=3.3*(floor((V(n)+0.01)/4) - 2*floor((V(n)+0.01)/8))
+BD qd 0 V=3.3*(floor((V(n)+0.01)/8) - 2*floor((V(n)+0.01)/16))
+RA qa out 82k
+RB qb out 39k
+RC qc out 20k
+RD qd out 10k
+RCH1 out 0 1Meg
+.dc Vn 0 15 1
+.meas DC v1 FIND V(out) AT 1
+.meas DC v7 FIND V(out) AT 7
+.meas DC v8 FIND V(out) AT 8
+.meas DC v14 FIND V(out) AT 14
+.meas DC v15 FIND V(out) AT 15
+.end

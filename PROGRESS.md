@@ -15,12 +15,12 @@
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 | 実測 | 1.0 まで |
 | --- | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 232 | 224 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 8 |
-| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 151 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 51 |
+| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 155 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 47 |
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1118** | **766** | **0** | **0** | **0** | |
+| **計** | **1118** | **770** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -397,10 +397,10 @@
 | 2-22 | [ロックインアンプ ch で埋もれた信号を取り出す](02-analog-discovery/02-oscilloscope/22-lockin.md) | ✓ | [ ] | — | — |
 | 2-23 | [デジタル ch (バスの値) でトリガする](02-analog-discovery/02-oscilloscope/23-digital-bus-trigger.md) | ✓ | [ ] | — | — |
 | 2-24 | [立ち上がり時間から帯域を逆算する (tr = 0.35 / BW)](02-analog-discovery/02-oscilloscope/24-rise-time-bandwidth.md) | ✓ | [ ] | — | — |
-| 2-25 | プローブの GND リードのリンギング | | | | |
-| 2-26 | 2 ch の時間差 — ゲートの伝搬遅延 | | | | |
-| 2-27 | 測定のヒストグラムと統計 | | | | |
-| 2-28 | 30 MHz の正弦を BNC で見る (perfboard) | | | | |
+| 2-25 | [プローブの GND リードのリンギング](02-analog-discovery/02-oscilloscope/25-probe-ground-ringing.md) | ✓ | [ ] | — | — |
+| 2-26 | [2 ch の時間差 — ゲートの伝搬遅延](02-analog-discovery/02-oscilloscope/26-gate-propagation-delay.md) | ✓ | [ ] | — | — |
+| 2-27 | [測定のヒストグラムと統計](02-analog-discovery/02-oscilloscope/27-histogram-statistics.md) | ✓ | [ ] | — | — |
+| 2-28 | [30 MHz の正弦を BNC で見る (perfboard)](02-analog-discovery/02-oscilloscope/28-30mhz-sine-bnc.md) | ✓ | [ ] | — | — |
 
 ### 第 3 章 波形発生器
 

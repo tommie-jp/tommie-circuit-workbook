@@ -1,0 +1,19 @@
+* 2-28 図1 の低域の周波数特性 (.ac)。信号源は 470 Ω ∥ 56 Ω = 50 Ω と同じ。同軸と終端は 28-30mhz-lpf.cir と同じ
+V1 o 0 AC 1
+C2 o a 100n
+R1 a n 470
+R2 n 0 56
+C3 n 0 82p
+L1 n b 390n
+C4 b 0 82p
+T1 b 0 c 0 Z0=50 Td=2.5n
+RT c 0 50
+Cin c 0 24p
+Rin c 0 1Meg
+.ac dec 200 1Meg 300Meg
+.meas AC g30 FIND mag(V(c)) AT 30Meg
+.meas AC g90 FIND mag(V(c)) AT 90Meg
+.meas AC g150 FIND mag(V(c)) AT 150Meg
+.meas AC g1 FIND mag(V(c)) AT 1Meg
+.meas AC f3 WHEN mag(V(c))=0.0376 FALL=1
+.end

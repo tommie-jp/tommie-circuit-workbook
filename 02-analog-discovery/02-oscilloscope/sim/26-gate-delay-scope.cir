@@ -1,0 +1,19 @@
+* 2-26 2 ch の時間差 — ゲートの伝搬遅延 (74HC04 は模型が無いので、出力を理想のパルスで置く)
+* 1Y: 立ち下がり (t = 10 ns)、6Y: 40 ns 遅れて立ち上がり。どちらも立ち上がり・立ち下がり 8 ns (データシートの tt 典型、4.5 V)
+* CH1・CH2 の入力経路を 1 次の低域で置く: 付属ワイヤ 9 MHz (tau = 17.7 ns)。片方だけ 30 MHz (tau = 5.3 ns) にした場合も見る
+.param tau2=17.7n
+V1 y1 0 PULSE(5 0 10n 8n 8n 400n 1u)
+V6 y6 0 PULSE(0 5 50n 8n 8n 400n 1u)
+R1 y1 c1 1k
+C1 c1 0 17.7p
+R2 y6 c2 1k
+C2 c2 0 {tau2/1k}
+.step param tau2 list 17.7n 5.3n
+.tran 0 300n 0 0.05n
+.meas TRAN t1 WHEN V(c1)=2.5 FALL=1
+.meas TRAN t2 WHEN V(c2)=2.5 RISE=1
+.meas TRAN dly PARAM t2-t1
+.meas TRAN t1t WHEN V(y1)=2.5 FALL=1
+.meas TRAN t2t WHEN V(y6)=2.5 RISE=1
+.meas TRAN dtrue PARAM t2t-t1t
+.end

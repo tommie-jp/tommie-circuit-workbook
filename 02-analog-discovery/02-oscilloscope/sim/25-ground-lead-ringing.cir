@@ -1,0 +1,20 @@
+* 2-25 プローブの GND リードのリンギング — 22 µH と 220 pF の模型 (図1)
+* W1: 0→2 V の方形波 50 kHz (立ち上がり 30 ns)、出力抵抗 1.5 Ω (3-5 の読み方の例)
+* L1 の損失は 2.2 MHz で Q = 40 と仮定して直列 7.5 Ω。CH1 の入力 1 MΩ ∥ 24 pF を C1 に足す
+.param rd=1m
+V1 w 0 PULSE(0 2 1u 30n 30n 9.97u 20u)
+Ro w a 1.5
+RD a b {rd}
+L1 b c 22u Rser=7.5
+C1 p 0 220p
+Rw c p 1m
+Cin p 0 24p
+Rin p 0 1Meg
+.tran 0 12u 0 2n
+.step param rd list 1m 150 620
+.meas TRAN vpk MAX V(p) FROM 1u TO 6u
+.meas TRAN t1 WHEN V(p)=2 CROSS=1
+.meas TRAN t3 WHEN V(p)=2 CROSS=3
+.meas TRAN period PARAM t3-t1
+.meas TRAN vend FIND V(p) AT 10.9u
+.end

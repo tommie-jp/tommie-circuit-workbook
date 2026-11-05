@@ -1,0 +1,21 @@
+* 2-28 30 MHz の正弦を BNC で見る — 水晶発振器 → C2 → R1/R2 (50 Ω 相当) → 3 次の低域 → 同軸 → 50 Ω 終端 (図1)
+* 発振器は 0/5 V の方形波 30 MHz、立ち上がり・立ち下がり 2 ns、出力抵抗 20 Ω と仮定 (型番のデータシートで確かめる)
+* 同軸は 50 Ω・50 cm (遅れ 2.5 ns) の理想の線路。CH1 の入力 1 MΩ ∥ 24 pF を 50 Ω の終端に並べる
+V1 osc 0 PULSE(0 5 0 2n 2n 14.67n 33.33n)
+Ro osc o 20
+C2 o a 100n
+R1 a n 470
+R2 n 0 56
+C3 n 0 82p
+L1 n b 390n
+C4 b 0 82p
+T1 b 0 c 0 Z0=50 Td=2.5n
+RT c 0 50
+Cin c 0 24p
+Rin c 0 1Meg
+.tran 0 4u 0 0.1n
+.four 30Meg 7 -1 V(c)
+.meas TRAN vmax MAX V(c) FROM 3u TO 4u
+.meas TRAN vmin MIN V(c) FROM 3u TO 4u
+.meas TRAN vpp PARAM vmax-vmin
+.end

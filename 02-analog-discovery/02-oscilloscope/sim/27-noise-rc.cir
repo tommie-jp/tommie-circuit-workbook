@@ -1,0 +1,18 @@
+* 2-27 測定のヒストグラムと統計 — W1 の Noise を RC (10 kΩ・10 nF、τ = 100 µs) に通す (図1)
+* W1 の Noise は ±1 V の一様分布を 100 kHz で更新すると仮定し、rand() で作る (rand(x) は x の整数部ごとに 0〜1 の一様な数)
+B1 in 0 V=2*rand(time*100k)-1
+R1 in out 10k
+C1 out 0 10n
+RCH2 out 0 1Meg
+.tran 0 202m 0 1u
+.meas TRAN rmsin RMS V(in) FROM 2m TO 202m
+.meas TRAN rmsout RMS V(out) FROM 2m TO 202m
+.meas TRAN avgout AVG V(out) FROM 2m TO 202m
+.meas TRAN maxout MAX V(out) FROM 2m TO 202m
+.meas TRAN minout MIN V(out) FROM 2m TO 202m
+.meas TRAN r1 RMS V(out) FROM 2m TO 12m
+.meas TRAN r2 RMS V(out) FROM 12m TO 22m
+.meas TRAN r3 RMS V(out) FROM 22m TO 32m
+.meas TRAN r4 RMS V(out) FROM 32m TO 42m
+.meas TRAN r5 RMS V(out) FROM 42m TO 52m
+.end
