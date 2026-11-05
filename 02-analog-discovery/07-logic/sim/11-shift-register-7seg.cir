@@ -1,0 +1,57 @@
+* 7-11 74HC595 を AD3 の Supplies (3.3 V) で動かし、7 セグを点ける (図1)
+* 74HC595 の出力は 3.3 V の理想の源と内部抵抗 Rout (仮定 50 Ω。回路の教科書の 11-6 の sim と同じ)
+* LED は同じ仮定のモデル (赤、Vf 約 1.9 V)。数字の 3 (5 本) と 8 (7 本) の電流と Supplies の電力を読む
+* 電源の線とブレッドボードの抵抗は Rv (仮定 5 Ω)
+.model LED D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.param rout=50
+* --- 数字の 3 (5 本)
+V3 s3 0 3.3
+Rv3 s3 vcc3 5
+Ro30 vcc3 o30 {rout}
+R30 o30 a30 470
+D30 a30 0 LED
+Ro31 vcc3 o31 {rout}
+R31 o31 a31 470
+D31 a31 0 LED
+Ro32 vcc3 o32 {rout}
+R32 o32 a32 470
+D32 a32 0 LED
+Ro33 vcc3 o33 {rout}
+R33 o33 a33 470
+D33 a33 0 LED
+Ro34 vcc3 o34 {rout}
+R34 o34 a34 470
+D34 a34 0 LED
+* --- 数字の 8 (7 本)
+V8 s8 0 3.3
+Rv8 s8 vcc8 5
+Ro80 vcc8 o80 {rout}
+R80 o80 a80 470
+D80 a80 0 LED
+Ro81 vcc8 o81 {rout}
+R81 o81 a81 470
+D81 a81 0 LED
+Ro82 vcc8 o82 {rout}
+R82 o82 a82 470
+D82 a82 0 LED
+Ro83 vcc8 o83 {rout}
+R83 o83 a83 470
+D83 a83 0 LED
+Ro84 vcc8 o84 {rout}
+R84 o84 a84 470
+D84 a84 0 LED
+Ro85 vcc8 o85 {rout}
+R85 o85 a85 470
+D85 a85 0 LED
+Ro86 vcc8 o86 {rout}
+R86 o86 a86 470
+D86 a86 0 LED
+.op
+.meas op i3each PARAM I(R30)
+.meas op i3total PARAM I(Rv3)
+.meas op p3 PARAM 3.3*I(Rv3)
+.meas op i8each PARAM I(R80)
+.meas op i8total PARAM I(Rv8)
+.meas op p8 PARAM 3.3*I(Rv8)
+.meas op vf8 PARAM V(a80)
+.end

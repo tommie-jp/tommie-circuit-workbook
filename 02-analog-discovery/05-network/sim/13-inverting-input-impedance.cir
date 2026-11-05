@@ -1,0 +1,29 @@
+* 5-13 反転増幅の入力インピーダンス (Rs 10k で W1 から X へ、Rin 10k、Rf 100k)。
+* オペアンプは 1 次の模型 (DC 利得 100 dB、GBW 1 MHz = LM358 の代表値。仮定で実測ではない。5-6 と同じ)
+* cp は CH2 の入力容量 (AD3 の仕様 1 MΩ || 24 pF)。1f = 無し
+.param cp=24p
+V1 w 0 AC 1
+Rs w x 10k
+Rsc x 0 1meg
+Csc x 0 {cp}
+Rin x n 10k
+G1 0 o 0 n 1m
+Rd o 0 100meg
+Cd o 0 159.15p
+E1 out 0 o 0 1
+Rf out n 100k
+.step param cp list 1f 24p
+.ac dec 200 100 3meg
+.meas ac h1k FIND mag(v(x)) AT=1k
+.meas ac h10k FIND mag(v(x)) AT=10k
+.meas ac h100k FIND mag(v(x)) AT=100k
+.meas ac p100k FIND ph(v(x)) AT=100k
+.meas ac h300k FIND mag(v(x)) AT=300k
+.meas ac h1meg FIND mag(v(x)) AT=1meg
+.meas ac z10k FIND mag(v(x)/I(Rin)) AT=10k
+.meas ac z100k FIND mag(v(x)/I(Rin)) AT=100k
+.meas ac zp100k FIND ph(v(x)/I(Rin)) AT=100k
+.meas ac z1meg FIND mag(v(x)/I(Rin)) AT=1meg
+.meas ac zn10k FIND mag(v(n)/I(Rin)) AT=10k
+.meas ac g1k FIND mag(v(out)/v(x)) AT=1k
+.end

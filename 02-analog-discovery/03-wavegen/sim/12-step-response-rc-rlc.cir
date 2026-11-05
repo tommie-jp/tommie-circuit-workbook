@@ -1,0 +1,26 @@
+* 3-12 任意波形でステップ応答 (RC・RLC)。図1 の 2 つの回路を同じ W1 で駆動する
+* RC: R1 1k + C1 100n (tau = 100 us)。RLC: R2 100 + L1 10m (巻線の抵抗 25 ohm は仮定) + C2 100n
+* W1 は理想の電圧源 (出力インピーダンス 0 と見る)。tr = 1 ns の段 (step) か、tr = 203 us の傾き (ramp、減衰振動の 1 周期) で 0 -> 1 V
+.param tr=1n
+VW w 0 PWL(0 0 1m 0 {1m+tr} 1)
+R1 w rc 1k
+C1 rc 0 100n
+R2 w a 100
+RL a b 25
+L1 b rlc 10m
+C2 rlc 0 100n
+.tran 0 3m 0 0.2u
+.meas tran rc63 FIND V(rc) AT=1.1m
+.meas tran rc10 WHEN V(rc)=0.1 RISE=1
+.meas tran rc90 WHEN V(rc)=0.9 RISE=1
+.meas tran rcrise PARAM rc90-rc10
+.meas tran pk1 MAX V(rlc) FROM=1m TO=1.2m
+.meas tran tpk1 WHEN V(rlc)=pk1 CROSS=1
+.meas tran vmin1 MIN V(rlc) FROM=1.15m TO=1.3m
+.meas tran pk2 MAX V(rlc) FROM=1.25m TO=1.45m
+.meas tran tpk2 WHEN V(rlc)=pk2 CROSS=1
+.meas tran pkall MAX V(rlc) FROM=1m TO=3m
+.meas tran iw MAX I(VW) FROM=1m TO=3m
+.meas tran iwn MIN I(VW) FROM=1m TO=3m
+* 走らせ方: tr = 1n (段) と 203u (傾き) を 1 つずつ
+.end

@@ -1,0 +1,23 @@
+* 2-19 リレーの接点バウンス (図1)。駆動側は回路の教科書 7-1 と同じ (VCC 5 V、K1 = G5V-2 のコイル 50 ohm、L は 100 mH と仮定、D1 1N4148、Q1 2SC1815、R1 1k)
+* 接点のはね (機械の動き) は SPICE では描けないので、ここでは電気の側だけを見る: コイルの電流が立ち上がる速さと、切ったあと D1 を通って減る速さ
+* 接点側は NO1 -> R2 1k -> GND (COM1 は 5 V)。閉じれば 5 mA。コイルとは別の回路なので、合計電流にだけ足す
+* Q1815・D4148 は 7-1 の模型 (仮定。実測ではない)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=1 CJE=8p CJC=2p TF=2n TR=50n)
+.model D4148 D (IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+VCC vcc 0 5
+* W1 = 0 / 5 V の方形波 5 Hz (1 ms で立ち上げ、100 ms で下げる)
+VIN in 0 PULSE(0 5 1m 10n 10n 100m 200m)
+R1 in b 1k
+Q1 c b 0 Q1815
+Lk vcc k 100m
+Rk k c 50
+D1 c vcc D4148
+.tran 0 200m 0 2u
+.meas tran ibase AVG I(R1) FROM=60m TO=100m
+.meas tran vcesat AVG V(c) FROM=60m TO=100m
+.meas tran icoil AVG I(Rk) FROM=60m TO=100m
+.meas tran t75 TRIG V(in) VAL=2.5 RISE=1 TARG I(Rk) VAL=75m RISE=1
+.meas tran t50 TRIG V(in) VAL=2.5 RISE=1 TARG I(Rk) VAL=47m RISE=1
+.meas tran vcpk MAX V(c) FROM=101m TO=110m
+.meas tran tdec10 TRIG V(in) VAL=2.5 FALL=1 TARG I(Rk) VAL=10m FALL=1
+.end

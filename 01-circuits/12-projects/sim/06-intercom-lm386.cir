@@ -1,0 +1,31 @@
+* 12-6 インターホン (図1)。S1 を「話す (2)」にした状態: SP1 (親機) がマイク、SP2 (子機) が鳴る
+* AD3 の W1 (1 kHz、振幅 2 V) を R1 10 kΩ から SP1 (8 Ω の抵抗) に入れ、LM386 の + 入力に 1.6 mV ほどを入れる
+* LM386 は仮定の模型 (データシートの値で作った振る舞いの模型。実測ではない): 入力抵抗 50 kΩ、利得 200 (1-8 番に 10 µF)、
+* 出力の静止点は電源の半分 (2.5 V)、出力は 0.5〜4.5 V で頭打ち。静止電流 4 mA (データシートの標準) を電源に足す
+* .step で 1 kHz と 90 Hz (C6 と SP2 の 8 Ω の低域の端) を比べる
+.param f=1k
+VCC vcc 0 5
+VW w1 0 SIN(0 2 {f})
+R1 w1 sp1 10k
+RSP1 sp1 0 8
+* LM386: + 入力 (3 番) は SP1 の上に直結、- 入力 (2 番) は GND
+Rin sp1 0 50k
+Bo vo 0 V=limit(2.5+200*V(sp1),0.5,4.5)
+Ro vo out 0.2
+Iq vcc 0 4m
+* Zobel (R2 10 Ω + C5 47 nF) と出力のコンデンサ C6 220 µF、SP2 (8 Ω)
+R2 out z 10
+C5 z 0 47n
+C6 out sp2 220u
+RSP2 sp2 0 8
+* 電源の電流: 出力が吐き出す側の半分だけ電源から来る (B 級の近似) + 静止電流
+Bsup sup 0 V=4m+max(I(C6),0)
+.step param f list 1k 90
+.tran 0 {20m+40/f} {20m+30/f} {1/(f*200)}
+.meas tran vin PP V(sp1)
+.meas tran vout PP V(out)
+.meas tran vsp2pp PP V(sp2)
+.meas tran psp2 AVG V(sp2)*V(sp2)/8
+.meas tran isup AVG V(sup)
+.meas tran gain PARAM vout/vin
+.end

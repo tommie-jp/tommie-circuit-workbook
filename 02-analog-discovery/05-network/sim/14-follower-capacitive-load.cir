@@ -1,0 +1,25 @@
+* 5-14 ボルテージフォロアの容量負荷とピーキング。W1 (AC 1) を + 入力に
+* オペアンプは線形の 2 極 + 出力抵抗の模型 (仮定。実測ではない): GBW 1.2 MHz、第 2 極 1.63 MHz、開ループの出力抵抗 270 Ω。
+* TI の LM358B のデータシートの位相余裕 (利得 1 倍で 0 pF のとき約 58°、330 pF のとき約 33°) に合うように選んだ
+* cl は出力の容量 (CH2 の 24 pF を含めた値で振る)。riso は 0.001 (直結) か 1k
+.param cl=494p riso=0.001
+V1 in 0 AC 1
+* 積分器: gm 1 mS を C で受ける。GBW = gm/(2 pi C) = 1.2 MHz -> C = 132.63 pF。DC 利得 1e5 (R = 100 MΩ)
+G1 0 x in a 1m
+Rx x 0 100meg
+Cx x 0 132.63p
+* 第 2 極 1.63 MHz (1 kΩ と 97.64 pF)
+E2 y1 0 x 0 1
+R2 y1 y 1k
+C2 y 0 97.64p
+E3 y3 0 y 0 1
+Ro y3 a 270
+Riso a c {riso}
+CL c 0 {cl}
+.ac dec 400 1k 10meg
+.meas ac gpk MAX mag(v(a))
+.meas ac f3 WHEN mag(v(a))=0.707107 CROSS=LAST
+.meas ac gc MAX mag(v(c))
+.meas ac fc3 WHEN mag(v(c))=0.707107 FALL=1
+.meas ac g100k FIND mag(v(a)) AT=100k
+.end

@@ -1,0 +1,14 @@
+* 10-3 の直流の動作点 (03-psrr.cir と同じ回路)
+Vp vp 0 5
+Vm vm 0 -5
+Rs vp in 100
+Cin in vm 0.33u
+E1 x vm in vm 8.91e-5
+V5 int x 5
+Ro int b 8m
+Vsense b out 0
+B1 in vm I=5m+I(Vsense)
+Cout out vm 0.1u
+RL out vm 1k
+.op
+.end

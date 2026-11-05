@@ -1,0 +1,44 @@
+* 10-3 7805 の PSRR を Network で測る (図1)
+* V+ = +5 V、V- = -5 V、7805 の GND は V- (入力は V+ - V- - Rs の降下)
+* 7805 は TI LM340 のデータシートの図5 (リップル除去) と図7 (出力インピーダンス) に合わせた模型 (仮定)
+*   リップル除去: 低い周波数で 81 dB、2 kHz から 20 dB/dec で下がる
+*   出力インピーダンス: 8 mohm + 0.32 uH (1.2 ohm と並列)、消費電流 5 mA
+Vp vp 0 5
+Vm vm 0 -5
+Rs vp in 100
+Cin in vm 0.33u
+VW1 w 0 AC 1
+Rinj w wc 150
+Cinj wc in 100u
+* リップルの伝わり k*(1 + s/wz)、k = 8.91e-5 (-81 dB)、wz = 2*pi*2 kHz
+Ea a1 vm in vm 8.91e-5
+Ed d 0 in vm 1
+Cz d zz {8.91e-5/(2*pi*2e3)}
+Rz zz 0 1
+B5 int vm V=5+V(a1,vm)+V(zz)
+Lo int a 0.32u
+Rhf int a 1.2
+Ro a b 8m
+Vsense b out 0
+B1 in vm I=5m+I(Vsense)
+Cout out vm 0.1u
+RL out vm 1k
+.ac dec 50 10 1meg
+.meas ac vin120 FIND mag(V(in,vm)) AT 120
+.meas ac vin1k FIND mag(V(in,vm)) AT 1k
+.meas ac vin10k FIND mag(V(in,vm)) AT 10k
+.meas ac vin100k FIND mag(V(in,vm)) AT 100k
+.meas ac g120 FIND db(V(out,vm)/V(in,vm)) AT 120
+.meas ac g1k FIND db(V(out,vm)/V(in,vm)) AT 1k
+.meas ac g10k FIND db(V(out,vm)/V(in,vm)) AT 10k
+.meas ac g100k FIND db(V(out,vm)/V(in,vm)) AT 100k
+.meas ac vo120 FIND mag(V(out,vm)) AT 120
+.meas ac vo100k FIND mag(V(out,vm)) AT 100k
+.meas ac iw100k FIND mag(I(Rinj)) AT 100k
+.meas ac iw1meg FIND mag(I(Rinj)) AT 1meg
+.meas ac g10 FIND db(V(out,vm)/V(in,vm)) AT 10
+.meas ac g300 FIND db(V(out,vm)/V(in,vm)) AT 300
+.meas ac g3k FIND db(V(out,vm)/V(in,vm)) AT 3k
+.meas ac g30k FIND db(V(out,vm)/V(in,vm)) AT 30k
+.meas ac g300k FIND db(V(out,vm)/V(in,vm)) AT 300k
+.end

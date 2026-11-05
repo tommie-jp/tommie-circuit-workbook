@@ -1,0 +1,21 @@
+* 6-11 水晶の fs / fp。基準抵抗 Rref 1k + 4 MHz の水晶 (等価回路: Lm 0.1055429 + Cm 15f + Rm 40 の直列に C0 4p を並列。値は本文の仮定)
+* CH1 = Rref の両端、CH2 = 水晶の両端。W1 の振幅 1 V。LTspice のコイルの既定の Rser (1m) は 0 にする
+* C0 = 6p (ブレッドボードの浮遊容量 2p を足した) も .step で解く
+.param c0=4p
+V1 in 0 AC 1
+Rref in a 1k
+Lm a b 0.1055429 Rser=0
+Cm b c 15f
+Rm c 0 40
+C0 a 0 {c0}
+.step param c0 list 4p 6p
+.ac lin 300001 3.99meg 4.02meg
+.meas ac zmin MIN mag(1k*v(a)/(v(in)-v(a)))
+.meas ac fs WHEN mag(1k*v(a)/(v(in)-v(a)))=zmin
+.meas ac zmax MAX mag(1k*v(a)/(v(in)-v(a)))
+.meas ac fp WHEN mag(1k*v(a)/(v(in)-v(a)))=zmax
+.meas ac ch1fs FIND mag(v(in)-v(a)) AT=4meg
+.meas ac ch2fs FIND mag(v(a)) AT=4meg
+.meas ac z399 FIND mag(1k*v(a)/(v(in)-v(a))) AT=3.99meg
+.meas ac z4004 FIND mag(1k*v(a)/(v(in)-v(a))) AT=4.004meg
+.end

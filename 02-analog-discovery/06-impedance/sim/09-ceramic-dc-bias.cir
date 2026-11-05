@@ -1,0 +1,15 @@
+* 6-9 セラミックの DC バイアス依存 (X7R)。基準抵抗 Rref 22 + C_DUT (ESR 0.02 は 6-6 の仮定)。W1 の振幅 0.2 V、1 kHz。
+* SPICE の C は電圧で変わらないので、バイアスごとの仮定の容量 C(V) = 10u / (1 + (V/5)^2) を .step で振る
+* 0 V: 10u、1 V: 9.615u、2 V: 8.621u、3 V: 7.353u、4 V: 6.098u。CH1 = Rref の両端、CH2 = C の両端
+.param cdut=10u
+V1 in 0 AC 0.2
+Rref in a 22
+Resr a b 0.02
+C1 b 0 {cdut}
+.step param cdut list 10u 9.615u 8.621u 7.353u 6.098u
+.ac dec 100 100 10k
+.meas ac ch1 FIND mag(v(in)-v(a)) AT=1k
+.meas ac ch2 FIND mag(v(a)) AT=1k
+.meas ac phz FIND ph(v(a)/(v(in)-v(a))) AT=1k
+.meas ac ratio FIND mag(v(a)/(v(in)-v(a))) AT=1k
+.end

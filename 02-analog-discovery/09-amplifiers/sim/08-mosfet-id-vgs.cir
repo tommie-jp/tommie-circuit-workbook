@@ -1,0 +1,20 @@
+* 9-8 MOSFET の Id-Vgs (図1)。W1 を 0-3 V に掃引、Rg = 100、Rd = 330、V+ = 5 V
+* M2N7000 は他の題と同じ 2N7000 の仮定 (LEVEL 1、VTO 2.1 V、KP 0.1 A/V^2)。実測ではない
+.model M2N7000 NMOS (LEVEL=1 VTO=2.1 KP=0.1 LAMBDA=0.01 CBD=10p)
+Vcc vcc 0 5
+Vw w 0 0
+Rg w g 100
+Rd vcc d 330
+M1 d g 0 0 M2N7000
+.dc Vw 0 3 0.005
+.meas dc id22 FIND I(Rd) WHEN V(g)=2.2
+.meas dc id24 FIND I(Rd) WHEN V(g)=2.4
+.meas dc id25 FIND I(Rd) WHEN V(g)=2.5
+.meas dc id26 FIND I(Rd) WHEN V(g)=2.6
+.meas dc id28 FIND I(Rd) WHEN V(g)=2.8
+.meas dc id30 FIND I(Rd) WHEN V(g)=3
+.meas dc vds26 FIND V(d) WHEN V(g)=2.6
+.meas dc vds30 FIND V(d) WHEN V(g)=3
+.meas dc vg1ma FIND V(g) WHEN I(Rd)=1m
+.meas dc vg10ma FIND V(g) WHEN I(Rd)=10m
+.end

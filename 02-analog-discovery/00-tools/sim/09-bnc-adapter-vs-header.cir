@@ -1,0 +1,14 @@
+* 0-9 74HC14 の出力 (10-90 % が 8 ns の台形の段、仮定) を、オシロの段の 1 次ローパス (9 MHz と 30 MHz、仮定) に通す
+* 10-90 % の立ち上がり時間を .meas で読み、本文の二乗和の平方根の見積り (39.7 ns・14.2 ns) と並べる
+V1 in 0 PWL(0 0 100n 0 110n 5)
+* ヘッダ直結: f-3dB = 9 MHz (R 1k・C 17.684p)
+R1 in a 1k
+C1 a 0 17.684p
+* BNC アダプタ: f-3dB = 30 MHz (R 1k・C 5.3052p)
+R2 in b 1k
+C2 b 0 5.3052p
+.tran 0 400n 0 0.05n
+.meas tran tin TRIG v(in) VAL=0.5 RISE=1 TARG v(in) VAL=4.5 RISE=1
+.meas tran tr9 TRIG v(a) VAL=0.5 RISE=1 TARG v(a) VAL=4.5 RISE=1
+.meas tran tr30 TRIG v(b) VAL=0.5 RISE=1 TARG v(b) VAL=4.5 RISE=1
+.end

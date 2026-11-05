@@ -28,19 +28,19 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 
 | 章 | 題名 | 必須 | 入門 | 中級 | 発展 | 済 |
 | --- | --- | --- | --- | --- | --- | --- |
-| 0 | 道具と安全 | 4 | 6 | 10 | 10 | 6 |
+| 0 | 道具と安全 | 4 | 6 | 10 | 10 | 10 |
 | 1 | WaveForms の基本 | 6 | 10 | 16 | 16 | 10 |
-| 2 | オシロスコープ | 8 | 16 | 28 | 28 | 16 |
-| 3 | 波形発生器 | 5 | 10 | 18 | 18 | 10 |
-| 4 | FFT とスペクトラム | 5 | 10 | 20 | 20 | 10 |
-| 5 | ネットワークアナライザ | 6 | 12 | 22 | 22 | 12 |
-| 6 | インピーダンス測定 | 4 | 8 | 16 | 16 | 8 |
-| 7 | ロジックとプロトコル | 4 | 10 | 26 | 26 | 10 |
-| 8 | ブレッドボードの限界と perfboard | 4 | 8 | 14 | 14 | 8 |
-| 9 | アンプの特性 | 2 | 6 | 16 | 16 | 6 |
-| 10 | 電源と雑音 | 1 | 2 | 8 | 8 | 2 |
+| 2 | オシロスコープ | 8 | 16 | 28 | 28 | 21 |
+| 3 | 波形発生器 | 5 | 10 | 18 | 18 | 14 |
+| 4 | FFT とスペクトラム | 5 | 10 | 20 | 20 | 12 |
+| 5 | ネットワークアナライザ | 6 | 12 | 22 | 22 | 15 |
+| 6 | インピーダンス測定 | 4 | 8 | 16 | 16 | 12 |
+| 7 | ロジックとプロトコル | 4 | 10 | 26 | 26 | 12 |
+| 8 | ブレッドボードの限界と perfboard | 4 | 8 | 14 | 14 | 10 |
+| 9 | アンプの特性 | 2 | 6 | 16 | 16 | 8 |
+| 10 | 電源と雑音 | 1 | 2 | 8 | 8 | 4 |
 | 11 | 自動化 | 1 | 2 | 8 | 8 | 2 |
-| **計** | | **50** | **100** | **202** | **202** | **100** |
+| **計** | | **50** | **100** | **202** | **202** | **130** |
 
 ## 第 0 章 道具と安全
 
@@ -52,10 +52,10 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 0-4 | [ワークスペースの保存、CSV と画像の書き出し](00-tools/04-workspace-save-export.md) | 必須 | BB | |
 | 0-5 | [BNC アダプタと 10:1 プローブ — 帯域 9 MHz と 30 MHz の違い](00-tools/05-bnc-probe-bandwidth.md) | 入門 | — | |
 | 0-6 | [付属ワイヤと同軸で同じ 5 MHz の方形波を見比べる](00-tools/06-wire-vs-coax-square-wave.md) | 入門 | BB | |
-| 0-7 | 外部電源で電源ツールを 700 mA まで使う | 中級 | BB | |
-| 0-8 | トリガ入出力 (T1 / T2) で 2 台を同期する | 中級 | — | |
-| 0-9 | AD3 の BNC アダプタ有りと無し (ヘッダ直結) を比べる (帯域・バッファ長) | 中級 | BB | |
-| 0-10 | デバイスの校正 (WaveForms の Calibration) | 中級 | — | |
+| 0-7 | [外部電源で電源ツールを 700 mA まで使う](00-tools/07-external-power-700ma.md) | 中級 | BB | |
+| 0-8 | [トリガ入出力 (T1 / T2) で 2 台を同期する](00-tools/08-trigger-io-dual.md) | 中級 | — | |
+| 0-9 | [AD3 の BNC アダプタ有りと無し (ヘッダ直結) を比べる (帯域・バッファ長)](00-tools/09-bnc-adapter-vs-header.md) | 中級 | BB | |
+| 0-10 | [デバイスの校正 (WaveForms の Calibration)](00-tools/10-calibration.md) | 中級 | — | |
 
 ## 第 1 章 WaveForms の基本
 
@@ -98,14 +98,14 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 2-14 | [平均化と 14 bit の分解能](02-oscilloscope/14-averaging-resolution.md) | 入門 | BB | |
 | 2-15 | [参照波形と重ねて比べる](02-oscilloscope/15-reference-waveform.md) | 入門 | BB | |
 | 2-16 | [サンプリングとエイリアス — 1 MHz を 1.2 MS/s で見る](02-oscilloscope/16-sampling-alias.md) | 入門 | BB | |
-| 2-17 | シュミットトリガのヒステリシスを XY で | 中級 | BB | |
-| 2-18 | 電源投入の突入電流 (Single トリガ) | 中級 | BB | |
-| 2-19 | リレーの接点バウンス | 中級 | BB | |
+| 2-17 | [シュミットトリガのヒステリシスを XY で](02-oscilloscope/17-schmitt-xy.md) | 中級 | BB | |
+| 2-18 | [電源投入の突入電流 (Single トリガ)](02-oscilloscope/18-inrush-single.md) | 中級 | BB | |
+| 2-19 | [リレーの接点バウンス](02-oscilloscope/19-relay-bounce.md) | 中級 | BB | |
 | 2-20 | 充放電を Math の log で直線にする | 中級 | BB | |
 | 2-21 | FIR フィルタ ch でノイズを除く | 中級 | BB | AD3 |
 | 2-22 | ロックインアンプ ch で埋もれた信号を取り出す | 中級 | BB | AD3 |
-| 2-23 | デジタル ch (バスの値) でトリガする | 中級 | BB | |
-| 2-24 | 立ち上がり時間から帯域を逆算する (tr = 0.35 / BW) | 中級 | — | |
+| 2-23 | [デジタル ch (バスの値) でトリガする](02-oscilloscope/23-digital-bus-trigger.md) | 中級 | BB | |
+| 2-24 | [立ち上がり時間から帯域を逆算する (tr = 0.35 / BW)](02-oscilloscope/24-rise-time-bandwidth.md) | 中級 | — | |
 | 2-25 | プローブの GND リードのリンギング | 中級 | BB | |
 | 2-26 | 2 ch の時間差 — ゲートの伝搬遅延 | 中級 | BB | |
 | 2-27 | 測定のヒストグラムと統計 | 中級 | BB | |
@@ -125,10 +125,10 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 3-8 | [2 ch で差動信号](03-wavegen/08-differential-signal.md) | 入門 | BB | |
 | 3-9 | [音を出す (オーディオ出力)](03-wavegen/09-audio-output.md) | 入門 | BB | |
 | 3-10 | [数式で波形 (sin x + sin 3x) を作って FFT へ](03-wavegen/10-formula-waveform.md) | 入門 | BB | |
-| 3-11 | PWM 波形で MOSFET 経由のモータ | 中級 | BB | |
-| 3-12 | 任意波形でステップ応答 (RC・RLC) | 中級 | BB | |
-| 3-13 | 変調度と側波帯 (FFT と対) | 中級 | — | |
-| 3-14 | 位相変調と PSK | 中級 | — | |
+| 3-11 | [PWM 波形で MOSFET 経由のモータ](03-wavegen/11-pwm-mosfet-motor.md) | 中級 | BB | |
+| 3-12 | [任意波形でステップ応答 (RC・RLC)](03-wavegen/12-step-response-rc-rlc.md) | 中級 | BB | |
+| 3-13 | [変調度と側波帯 (FFT と対)](03-wavegen/13-am-depth-sidebands.md) | 中級 | — | |
+| 3-14 | [位相変調と PSK](03-wavegen/14-pm-psk.md) | 中級 | — | |
 | 3-15 | 出力の帯域 (12 MHz) — 10 MHz の方形波はどう見えるか | 中級 | — | |
 | 3-16 | DC オフセットでバイアス点を振る (トランジスタの動作点) | 中級 | BB | |
 | 3-17 | 波形発生器をシリアル信号源にする (Pattern の代替) | 中級 | BB | |
@@ -148,8 +148,8 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 4-8 | [FM 波のスペクトル](04-spectrum/08-fm-spectrum.md) | 入門 | BB | |
 | 4-9 | [555 の出力スペクトル](04-spectrum/09-555-spectrum.md) | 入門 | BB | |
 | 4-10 | [マイクの音のスペクトル](04-spectrum/10-mic-spectrum.md) | 入門 | BB | |
-| 4-11 | 分解能帯域幅とサンプル数 | 中級 | — | |
-| 4-12 | SFDR | 中級 | — | |
+| 4-11 | [分解能帯域幅とサンプル数](04-spectrum/11-rbw-samples.md) | 中級 | — | |
+| 4-12 | [SFDR](04-spectrum/12-sfdr.md) | 中級 | — | |
 | 4-13 | 抵抗の熱雑音と 1/f ノイズ (増幅して) | 中級 | BB | |
 | 4-14 | 2 トーンで相互変調 (IMD) の入口 | 中級 | BB | |
 | 4-15 | PWM のスペクトルとローパス | 中級 | BB | |
@@ -175,9 +175,9 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 5-10 | [CR 発振器の帰還路をループを切って測る](05-network/10-cr-oscillator-loop.md) | 入門 | BB | |
 | 5-11 | [ツイン T ノッチ](05-network/11-twin-t-notch.md) | 入門 | BB | |
 | 5-12 | [外部発振器モード (Wavegen を使わない)](05-network/12-external-oscillator-mode.md) | 入門 | BB | |
-| 5-13 | 反転増幅の入力インピーダンスと周波数 | 中級 | BB | |
-| 5-14 | ボルテージフォロアの容量負荷とピーキング | 中級 | BB | |
-| 5-15 | サレンキー LPF の Q | 中級 | BB | |
+| 5-13 | [反転増幅の入力インピーダンスと周波数](05-network/13-inverting-input-impedance.md) | 中級 | BB | |
+| 5-14 | [ボルテージフォロアの容量負荷とピーキング](05-network/14-follower-capacitive-load.md) | 中級 | BB | |
+| 5-15 | [サレンキー LPF の Q](05-network/15-sallen-key-q.md) | 中級 | BB | |
 | 5-16 | 状態変数フィルタ | 中級 | BB | |
 | 5-17 | 位相余裕 (ループを切る) | 中級 | BB | |
 | 5-18 | トランスの周波数特性 | 中級 | BB | |
@@ -198,10 +198,10 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 6-6 | [電解とセラミックの違い](06-impedance/06-electrolytic-vs-ceramic.md) | 入門 | BB | |
 | 6-7 | [Open / Short 補償](06-impedance/07-open-short-compensation.md) | 入門 | BB | |
 | 6-8 | [バーアンテナの L と Q](06-impedance/08-bar-antenna-l-q.md) | 入門 | BB | |
-| 6-9 | セラミックの DC バイアス依存 (X7R) | 中級 | BB | |
-| 6-10 | 25 MHz まで — 0.1 µF の SRF | 中級 | PF | AD3 |
-| 6-11 | 水晶の fs / fp (10 MHz 以下) | 中級 | BB | |
-| 6-12 | フェライトビーズ (10 MHz まで) | 中級 | BB | |
+| 6-9 | [セラミックの DC バイアス依存 (X7R)](06-impedance/09-ceramic-dc-bias.md) | 中級 | BB | |
+| 6-10 | [25 MHz まで — 0.1 µF の SRF](06-impedance/10-srf-25mhz.md) | 中級 | PF | AD3 |
+| 6-11 | [水晶の fs / fp (10 MHz 以下)](06-impedance/11-crystal-fs-fp.md) | 中級 | BB | |
+| 6-12 | [フェライトビーズ (10 MHz まで)](06-impedance/12-ferrite-bead.md) | 中級 | BB | |
 | 6-13 | スピーカーのインピーダンス曲線 | 中級 | — | |
 | 6-14 | 圧電ブザーの共振 | 中級 | BB | |
 | 6-15 | 電池の内部抵抗 (AC) | 中級 | — | |
@@ -221,7 +221,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 7-8 | [セットアップ・ホールド時間を測る](07-logic/08-setup-hold.md) | 入門 | BB | |
 | 7-9 | [チャタリングを捕まえる](07-logic/09-switch-bounce.md) | 入門 | BB | |
 | 7-10 | [PWM のデューティを測る](07-logic/10-pwm-duty.md) | 入門 | BB | |
-| 7-11 | 74HC595 を叩いて 7 セグを点ける | 中級 | BB | |
+| 7-11 | [74HC595 を叩いて 7 セグを点ける](07-logic/11-shift-register-7seg.md) | 中級 | BB | |
 | 7-12 | ゲートの伝搬遅延を Pattern + Scope で | 中級 | BB | |
 | 7-13 | I2C のプルアップと立ち上がり (アナログ ch 併用) | 中級 | BB | |
 | 7-14 | 1-Wire (DS18B20) | 中級 | BB | |
@@ -229,7 +229,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 7-16 | パターンで状態機械 (ROM もどき) | 中級 | BB | |
 | 7-17 | デバウンス回路の評価 (Static I/O + Scope) | 中級 | BB | |
 | 7-18 | マイコンの起動ログ (UART) を長時間 Record | 中級 | BB | |
-| 7-19 | 真理値表を当てる — Pattern で入力を全部出し、Logic で 74HC00 の出力と突き合わせる | 中級 | BB | |
+| 7-19 | [真理値表を当てる — Pattern で入力を全部出し、Logic で 74HC00 の出力と突き合わせる](07-logic/19-nand-truth-table.md) | 中級 | BB | |
 | 7-20 | 静止電流で品種を見分ける — 74LS00 と 74HC00 の電源電流をシャントで測る | 中級 | BB | |
 | 7-21 | Pico の ADC の特性 (直線性・雑音) | 中級 | BB | |
 | 7-22 | PWM + RC で DAC | 中級 | BB | |
@@ -251,8 +251,8 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 8-7 | [同じ回路を perfboard で作って比べる](08-breadboard-limits/07-perfboard-comparison.md) | 入門 | BB / PF | |
 | 8-8 | [同じスルーを BNC で 25 MHz まで、LiteVNA64 で 1〜100 MHz](08-breadboard-limits/08-bnc-vs-nanovna.md) | 入門 | PF | |
 | 8-9 | デカップリングの置き場所 (近い / 遠い) | 中級 | BB | |
-| 8-10 | GND の取り回し — 1 点接地とループ | 中級 | BB | |
-| 8-11 | 長いワイヤのアンテナ効果 (放送波の混入) | 中級 | BB | |
+| 8-10 | [GND の取り回し — 1 点接地とループ](08-breadboard-limits/10-ground-loop.md) | 中級 | BB | |
+| 8-11 | [長いワイヤのアンテナ効果 (放送波の混入)](08-breadboard-limits/11-wire-antenna.md) | 中級 | BB | |
 | 8-12 | 電源レールのノイズ (スイッチング電源を載せる) | 中級 | BB | |
 | 8-13 | perfboard の GND 面 (銅テープ) の効果 | 中級 | PF | |
 | 8-14 | 10 MHz の方形波が届くジャンパの長さ | 中級 | BB | |
@@ -267,8 +267,8 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 9-4 | [2 トーン IMD (Wavegen 2 ch + FFT)](09-amplifiers/04-two-tone-imd.md) | 入門 | BB | |
 | 9-5 | [THD vs 出力](09-amplifiers/05-thd-vs-output.md) | 入門 | BB | |
 | 9-6 | [Tracer でトランジスタの Ic–Vce 曲線](09-amplifiers/06-tracer-ic-vce.md) | 入門 | BB | |
-| 9-7 | hFE の実測 | 中級 | BB | |
-| 9-8 | MOSFET の Id–Vgs | 中級 | BB | |
+| 9-7 | [hFE の実測](09-amplifiers/07-hfe.md) | 中級 | BB | |
+| 9-8 | [MOSFET の Id–Vgs](09-amplifiers/08-mosfet-id-vgs.md) | 中級 | BB | |
 | 9-9 | 位相余裕 (ループを切る) | 中級 | BB | |
 | 9-10 | 入力インピーダンス (直列抵抗法) | 中級 | BB | |
 | 9-11 | 出力インピーダンス (負荷法) | 中級 | BB | |
@@ -284,8 +284,8 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | --- | --- | --- | --- | --- |
 | 10-1 | [リップルを FFT で](10-power-noise/01-ripple-fft.md) | 必須 | BB | |
 | 10-2 | [負荷過渡応答](10-power-noise/02-load-transient.md) | 入門 | BB | |
-| 10-3 | レギュレータの PSRR | 中級 | BB | |
-| 10-4 | 出力インピーダンス vs 周波数 | 中級 | BB | |
+| 10-3 | [レギュレータの PSRR](10-power-noise/03-psrr.md) | 中級 | BB | |
+| 10-4 | [出力インピーダンス vs 周波数](10-power-noise/04-output-impedance.md) | 中級 | BB | |
 | 10-5 | デカップリングの効果 | 中級 | BB | |
 | 10-6 | スイッチングノイズ | 中級 | BB | |
 | 10-7 | LDO vs スイッチング | 中級 | BB | |

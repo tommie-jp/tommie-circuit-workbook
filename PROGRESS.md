@@ -14,13 +14,13 @@
 
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 | 実測 | 1.0 まで |
 | --- | --- | --- | --- | --- | --- | --- |
-| [回路の教科書](01-circuits/README.md) | 232 | 222 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 10 |
-| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 102 |
+| [回路の教科書](01-circuits/README.md) | 232 | 224 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 8 |
+| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 130 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 72 |
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1118** | **713** | **0** | **0** | **0** | |
+| **計** | **1118** | **745** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -295,9 +295,9 @@
 | 12-1 | [おやすみタイマー — 555 単安定 + MOSFET](01-circuits/12-projects/01-goodnight-timer.md) | ✓ | [ ] | — | — |
 | 12-2 | [人感ライト — PIR + CdS + MOSFET](01-circuits/12-projects/02-motion-light.md) | ✓ | [ ] | — | — |
 | 12-3 | [水漏れ・水位アラーム](01-circuits/12-projects/03-water-alarm.md) | ✓ | [ ] | — | — |
-| 12-4 | 電子ホタル — フェードイン・アウト | | | | |
+| 12-4 | [電子ホタル — フェードイン・アウト](01-circuits/12-projects/04-electronic-firefly.md) | ✓ | [ ] | — | — |
 | 12-5 | [ドアチャイム / メロディ IC](01-circuits/12-projects/05-door-chime-melody.md) | ✓ | [ ] | — | — |
-| 12-6 | インターホン (LM386) | | | | |
+| 12-6 | [インターホン (LM386)](01-circuits/12-projects/06-intercom-lm386.md) | ✓ | [ ] | — | — |
 | 12-7 | 電池チェッカー | | | | |
 | 12-8 | 植物の水やりアラーム | | | | |
 | 12-9 | LED イルミネーション (4017) | | | | |
@@ -343,10 +343,10 @@
 | 0-4 | [ワークスペースの保存、CSV と画像の書き出し](02-analog-discovery/00-tools/04-workspace-save-export.md) | ✓ | [ ] | — | — |
 | 0-5 | [BNC アダプタと 10:1 プローブ — 帯域 9 MHz と 30 MHz の違い](02-analog-discovery/00-tools/05-bnc-probe-bandwidth.md) | ✓ | [ ] | — | — |
 | 0-6 | [付属ワイヤと同軸で同じ 5 MHz の方形波を見比べる](02-analog-discovery/00-tools/06-wire-vs-coax-square-wave.md) | ✓ | [ ] | — | — |
-| 0-7 | 外部電源で電源ツールを 700 mA まで使う | | | | |
-| 0-8 | トリガ入出力 (T1 / T2) で 2 台を同期する | | | | |
-| 0-9 | AD3 の BNC アダプタ有りと無し (ヘッダ直結) を比べる (帯域・バッファ長) | | | | |
-| 0-10 | デバイスの校正 (WaveForms の Calibration) | | | | |
+| 0-7 | [外部電源で電源ツールを 700 mA まで使う](02-analog-discovery/00-tools/07-external-power-700ma.md) | ✓ | [ ] | — | — |
+| 0-8 | [トリガ入出力 (T1 / T2) で 2 台を同期する](02-analog-discovery/00-tools/08-trigger-io-dual.md) | ✓ | [ ] | — | — |
+| 0-9 | [AD3 の BNC アダプタ有りと無し (ヘッダ直結) を比べる (帯域・バッファ長)](02-analog-discovery/00-tools/09-bnc-adapter-vs-header.md) | ✓ | [ ] | — | — |
+| 0-10 | [デバイスの校正 (WaveForms の Calibration)](02-analog-discovery/00-tools/10-calibration.md) | ✓ | [ ] | — | — |
 
 ### 第 1 章 WaveForms の基本
 
@@ -389,14 +389,14 @@
 | 2-14 | [平均化と 14 bit の分解能](02-analog-discovery/02-oscilloscope/14-averaging-resolution.md) | ✓ | [ ] | — | — |
 | 2-15 | [参照波形と重ねて比べる](02-analog-discovery/02-oscilloscope/15-reference-waveform.md) | ✓ | [ ] | — | — |
 | 2-16 | [サンプリングとエイリアス — 1 MHz を 1.2 MS/s で見る](02-analog-discovery/02-oscilloscope/16-sampling-alias.md) | ✓ | [ ] | — | — |
-| 2-17 | シュミットトリガのヒステリシスを XY で | | | | |
-| 2-18 | 電源投入の突入電流 (Single トリガ) | | | | |
-| 2-19 | リレーの接点バウンス | | | | |
+| 2-17 | [シュミットトリガのヒステリシスを XY で](02-analog-discovery/02-oscilloscope/17-schmitt-xy.md) | ✓ | [ ] | — | — |
+| 2-18 | [電源投入の突入電流 (Single トリガ)](02-analog-discovery/02-oscilloscope/18-inrush-single.md) | ✓ | [ ] | — | — |
+| 2-19 | [リレーの接点バウンス](02-analog-discovery/02-oscilloscope/19-relay-bounce.md) | ✓ | [ ] | — | — |
 | 2-20 | 充放電を Math の log で直線にする | | | | |
 | 2-21 | FIR フィルタ ch でノイズを除く | | | | |
 | 2-22 | ロックインアンプ ch で埋もれた信号を取り出す | | | | |
-| 2-23 | デジタル ch (バスの値) でトリガする | | | | |
-| 2-24 | 立ち上がり時間から帯域を逆算する (tr = 0.35 / BW) | | | | |
+| 2-23 | [デジタル ch (バスの値) でトリガする](02-analog-discovery/02-oscilloscope/23-digital-bus-trigger.md) | ✓ | [ ] | — | — |
+| 2-24 | [立ち上がり時間から帯域を逆算する (tr = 0.35 / BW)](02-analog-discovery/02-oscilloscope/24-rise-time-bandwidth.md) | ✓ | [ ] | — | — |
 | 2-25 | プローブの GND リードのリンギング | | | | |
 | 2-26 | 2 ch の時間差 — ゲートの伝搬遅延 | | | | |
 | 2-27 | 測定のヒストグラムと統計 | | | | |
@@ -416,10 +416,10 @@
 | 3-8 | [2 ch で差動信号](02-analog-discovery/03-wavegen/08-differential-signal.md) | ✓ | [ ] | — | — |
 | 3-9 | [音を出す (オーディオ出力)](02-analog-discovery/03-wavegen/09-audio-output.md) | ✓ | [ ] | — | — |
 | 3-10 | [数式で波形 (sin x + sin 3x) を作って FFT へ](02-analog-discovery/03-wavegen/10-formula-waveform.md) | ✓ | [ ] | — | — |
-| 3-11 | PWM 波形で MOSFET 経由のモータ | | | | |
-| 3-12 | 任意波形でステップ応答 (RC・RLC) | | | | |
-| 3-13 | 変調度と側波帯 (FFT と対) | | | | |
-| 3-14 | 位相変調と PSK | | | | |
+| 3-11 | [PWM 波形で MOSFET 経由のモータ](02-analog-discovery/03-wavegen/11-pwm-mosfet-motor.md) | ✓ | [ ] | — | — |
+| 3-12 | [任意波形でステップ応答 (RC・RLC)](02-analog-discovery/03-wavegen/12-step-response-rc-rlc.md) | ✓ | [ ] | — | — |
+| 3-13 | [変調度と側波帯 (FFT と対)](02-analog-discovery/03-wavegen/13-am-depth-sidebands.md) | ✓ | [ ] | — | — |
+| 3-14 | [位相変調と PSK](02-analog-discovery/03-wavegen/14-pm-psk.md) | ✓ | [ ] | — | — |
 | 3-15 | 出力の帯域 (12 MHz) — 10 MHz の方形波はどう見えるか | | | | |
 | 3-16 | DC オフセットでバイアス点を振る (トランジスタの動作点) | | | | |
 | 3-17 | 波形発生器をシリアル信号源にする (Pattern の代替) | | | | |
@@ -439,8 +439,8 @@
 | 4-8 | [FM 波のスペクトル](02-analog-discovery/04-spectrum/08-fm-spectrum.md) | ✓ | [ ] | — | — |
 | 4-9 | [555 の出力スペクトル](02-analog-discovery/04-spectrum/09-555-spectrum.md) | ✓ | [ ] | — | — |
 | 4-10 | [マイクの音のスペクトル](02-analog-discovery/04-spectrum/10-mic-spectrum.md) | ✓ | [ ] | — | — |
-| 4-11 | 分解能帯域幅とサンプル数 | | | | |
-| 4-12 | SFDR | | | | |
+| 4-11 | [分解能帯域幅とサンプル数](02-analog-discovery/04-spectrum/11-rbw-samples.md) | ✓ | [ ] | — | — |
+| 4-12 | [SFDR](02-analog-discovery/04-spectrum/12-sfdr.md) | ✓ | [ ] | — | — |
 | 4-13 | 抵抗の熱雑音と 1/f ノイズ (増幅して) | | | | |
 | 4-14 | 2 トーンで相互変調 (IMD) の入口 | | | | |
 | 4-15 | PWM のスペクトルとローパス | | | | |
@@ -466,9 +466,9 @@
 | 5-10 | [CR 発振器の帰還路をループを切って測る](02-analog-discovery/05-network/10-cr-oscillator-loop.md) | ✓ | [ ] | — | — |
 | 5-11 | [ツイン T ノッチ](02-analog-discovery/05-network/11-twin-t-notch.md) | ✓ | [ ] | — | — |
 | 5-12 | [外部発振器モード (Wavegen を使わない)](02-analog-discovery/05-network/12-external-oscillator-mode.md) | ✓ | [ ] | — | — |
-| 5-13 | 反転増幅の入力インピーダンスと周波数 | | | | |
-| 5-14 | ボルテージフォロアの容量負荷とピーキング | | | | |
-| 5-15 | サレンキー LPF の Q | | | | |
+| 5-13 | [反転増幅の入力インピーダンスと周波数](02-analog-discovery/05-network/13-inverting-input-impedance.md) | ✓ | [ ] | — | — |
+| 5-14 | [ボルテージフォロアの容量負荷とピーキング](02-analog-discovery/05-network/14-follower-capacitive-load.md) | ✓ | [ ] | — | — |
+| 5-15 | [サレンキー LPF の Q](02-analog-discovery/05-network/15-sallen-key-q.md) | ✓ | [ ] | — | — |
 | 5-16 | 状態変数フィルタ | | | | |
 | 5-17 | 位相余裕 (ループを切る) | | | | |
 | 5-18 | トランスの周波数特性 | | | | |
@@ -489,10 +489,10 @@
 | 6-6 | [電解とセラミックの違い](02-analog-discovery/06-impedance/06-electrolytic-vs-ceramic.md) | ✓ | [ ] | — | — |
 | 6-7 | [Open / Short 補償](02-analog-discovery/06-impedance/07-open-short-compensation.md) | ✓ | [ ] | — | — |
 | 6-8 | [バーアンテナの L と Q](02-analog-discovery/06-impedance/08-bar-antenna-l-q.md) | ✓ | [ ] | — | — |
-| 6-9 | セラミックの DC バイアス依存 (X7R) | | | | |
-| 6-10 | 25 MHz まで — 0.1 µF の SRF | | | | |
-| 6-11 | 水晶の fs / fp (10 MHz 以下) | | | | |
-| 6-12 | フェライトビーズ (10 MHz まで) | | | | |
+| 6-9 | [セラミックの DC バイアス依存 (X7R)](02-analog-discovery/06-impedance/09-ceramic-dc-bias.md) | ✓ | [ ] | — | — |
+| 6-10 | [25 MHz まで — 0.1 µF の SRF](02-analog-discovery/06-impedance/10-srf-25mhz.md) | ✓ | [ ] | — | — |
+| 6-11 | [水晶の fs / fp (10 MHz 以下)](02-analog-discovery/06-impedance/11-crystal-fs-fp.md) | ✓ | [ ] | — | — |
+| 6-12 | [フェライトビーズ (10 MHz まで)](02-analog-discovery/06-impedance/12-ferrite-bead.md) | ✓ | [ ] | — | — |
 | 6-13 | スピーカーのインピーダンス曲線 | | | | |
 | 6-14 | 圧電ブザーの共振 | | | | |
 | 6-15 | 電池の内部抵抗 (AC) | | | | |
@@ -512,7 +512,7 @@
 | 7-8 | [セットアップ・ホールド時間を測る](02-analog-discovery/07-logic/08-setup-hold.md) | ✓ | [ ] | — | — |
 | 7-9 | [チャタリングを捕まえる](02-analog-discovery/07-logic/09-switch-bounce.md) | ✓ | [ ] | — | — |
 | 7-10 | [PWM のデューティを測る](02-analog-discovery/07-logic/10-pwm-duty.md) | ✓ | [ ] | — | — |
-| 7-11 | 74HC595 を叩いて 7 セグを点ける | | | | |
+| 7-11 | [74HC595 を叩いて 7 セグを点ける](02-analog-discovery/07-logic/11-shift-register-7seg.md) | ✓ | [ ] | — | — |
 | 7-12 | ゲートの伝搬遅延を Pattern + Scope で | | | | |
 | 7-13 | I2C のプルアップと立ち上がり (アナログ ch 併用) | | | | |
 | 7-14 | 1-Wire (DS18B20) | | | | |
@@ -520,7 +520,7 @@
 | 7-16 | パターンで状態機械 (ROM もどき) | | | | |
 | 7-17 | デバウンス回路の評価 (Static I/O + Scope) | | | | |
 | 7-18 | マイコンの起動ログ (UART) を長時間 Record | | | | |
-| 7-19 | 真理値表を当てる — Pattern で入力を全部出し、Logic で 74HC00 の出力と突き合わせる | | | | |
+| 7-19 | [真理値表を当てる — Pattern で入力を全部出し、Logic で 74HC00 の出力と突き合わせる](02-analog-discovery/07-logic/19-nand-truth-table.md) | ✓ | [ ] | — | — |
 | 7-20 | 静止電流で品種を見分ける — 74LS00 と 74HC00 の電源電流をシャントで測る | | | | |
 | 7-21 | Pico の ADC の特性 (直線性・雑音) | | | | |
 | 7-22 | PWM + RC で DAC | | | | |
@@ -542,8 +542,8 @@
 | 8-7 | [同じ回路を perfboard で作って比べる](02-analog-discovery/08-breadboard-limits/07-perfboard-comparison.md) | ✓ | [ ] | — | — |
 | 8-8 | [同じスルーを BNC で 25 MHz まで、LiteVNA64 で 1〜100 MHz](02-analog-discovery/08-breadboard-limits/08-bnc-vs-nanovna.md) | ✓ | [ ] | — | — |
 | 8-9 | デカップリングの置き場所 (近い / 遠い) | | | | |
-| 8-10 | GND の取り回し — 1 点接地とループ | | | | |
-| 8-11 | 長いワイヤのアンテナ効果 (放送波の混入) | | | | |
+| 8-10 | [GND の取り回し — 1 点接地とループ](02-analog-discovery/08-breadboard-limits/10-ground-loop.md) | ✓ | [ ] | — | — |
+| 8-11 | [長いワイヤのアンテナ効果 (放送波の混入)](02-analog-discovery/08-breadboard-limits/11-wire-antenna.md) | ✓ | [ ] | — | — |
 | 8-12 | 電源レールのノイズ (スイッチング電源を載せる) | | | | |
 | 8-13 | perfboard の GND 面 (銅テープ) の効果 | | | | |
 | 8-14 | 10 MHz の方形波が届くジャンパの長さ | | | | |
@@ -558,8 +558,8 @@
 | 9-4 | [2 トーン IMD (Wavegen 2 ch + FFT)](02-analog-discovery/09-amplifiers/04-two-tone-imd.md) | ✓ | [ ] | — | — |
 | 9-5 | [THD vs 出力](02-analog-discovery/09-amplifiers/05-thd-vs-output.md) | ✓ | [ ] | — | — |
 | 9-6 | [Tracer でトランジスタの Ic–Vce 曲線](02-analog-discovery/09-amplifiers/06-tracer-ic-vce.md) | ✓ | [ ] | — | — |
-| 9-7 | hFE の実測 | | | | |
-| 9-8 | MOSFET の Id–Vgs | | | | |
+| 9-7 | [hFE の実測](02-analog-discovery/09-amplifiers/07-hfe.md) | ✓ | [ ] | — | — |
+| 9-8 | [MOSFET の Id–Vgs](02-analog-discovery/09-amplifiers/08-mosfet-id-vgs.md) | ✓ | [ ] | — | — |
 | 9-9 | 位相余裕 (ループを切る) | | | | |
 | 9-10 | 入力インピーダンス (直列抵抗法) | | | | |
 | 9-11 | 出力インピーダンス (負荷法) | | | | |
@@ -575,8 +575,8 @@
 | --- | --- | --- | --- | --- | --- |
 | 10-1 | [リップルを FFT で](02-analog-discovery/10-power-noise/01-ripple-fft.md) | ✓ | [ ] | — | — |
 | 10-2 | [負荷過渡応答](02-analog-discovery/10-power-noise/02-load-transient.md) | ✓ | [ ] | — | — |
-| 10-3 | レギュレータの PSRR | | | | |
-| 10-4 | 出力インピーダンス vs 周波数 | | | | |
+| 10-3 | [レギュレータの PSRR](02-analog-discovery/10-power-noise/03-psrr.md) | ✓ | [ ] | — | — |
+| 10-4 | [出力インピーダンス vs 周波数](02-analog-discovery/10-power-noise/04-output-impedance.md) | ✓ | [ ] | — | — |
 | 10-5 | デカップリングの効果 | | | | |
 | 10-6 | スイッチングノイズ | | | | |
 | 10-7 | LDO vs スイッチング | | | | |

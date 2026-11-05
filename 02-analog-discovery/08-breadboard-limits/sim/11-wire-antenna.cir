@@ -1,0 +1,17 @@
+* 8-11 長いワイヤのアンテナ効果 (等価回路)。誘起電圧 e = 電界 × 実効高 (実効値で 1 V 相当に置いた AC 源を e 倍)、
+* ワイヤの容量 Cant を通して節点 n へ。n の負荷は Scope の入力 1 MΩ ∥ 24 pF と、挿すときは RT 1 kΩ。
+* case 1: 短い 10 cm (e 0.5 mV、Cant 1.5 pF)、case 2: 長い 1 m (e 5 mV、10 pF)、case 3: 長い 1 m + RT 1k (仮定の値)
+.param case=1
+.param e={if(case<1.5,0.5m,5m)}
+.param ca={if(case<1.5,1.5p,10p)}
+.param rt={if(case>2.5,1k,1e12)}
+V1 a 0 AC {e}
+Cant a n {ca}
+Rin n 0 1meg
+Cin n 0 24p
+Rt n 0 {rt}
+.step param case list 1 2 3
+.ac lin 3 593k 595k
+.meas ac vn FIND mag(v(n)) AT=594k
+.meas ac pn FIND ph(v(n)) AT=594k
+.end

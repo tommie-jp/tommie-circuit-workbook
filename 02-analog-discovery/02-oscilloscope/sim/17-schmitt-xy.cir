@@ -1,0 +1,30 @@
+* 2-17 非反転のシュミットトリガ (図1)。W1 = 三角波 100 Hz・振幅 1.5 V、R1 10k (入力)、R2 47k (正帰還)、- 入力は GND、電源 +-5 V
+* LM358 は 4-8 と同じ 1 極の汎用模型 (仮定。実測ではない)。出力 High = V+ - 1.5 V、Low は軽い負荷なので V- + 0.02 V (データシートの VOL の最大 20 mV) と仮定
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.02
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+Vp vp 0 5
+Vn vn 0 -5
+* 三角波: t = 0 で -1.5 V、5 ms で +1.5 V、10 ms で -1.5 V
+VW1 in 0 PULSE(-1.5 1.5 0 5m 5m 0 10m)
+R1 in p 10k
+R2 o p 47k
+XU1 p 0 o vp vn OPA
+.ic V(o)=-4.98
+.tran 0 40m 0 2u
+.meas tran vhi MAX V(o) FROM=20m TO=40m
+.meas tran vlo MIN V(o) FROM=20m TO=40m
+.meas tran vup FIND V(in) WHEN V(o)=0 RISE=2
+.meas tran vdn FIND V(in) WHEN V(o)=0 FALL=2
+.meas tran tup FIND time WHEN V(o)=0 RISE=2
+.meas tran tdn FIND time WHEN V(o)=0 FALL=2
+.meas tran tslew TRIG V(o) VAL=-3 RISE=2 TARG V(o) VAL=2.5 RISE=2
+.end

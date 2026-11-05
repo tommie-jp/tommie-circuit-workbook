@@ -1,0 +1,44 @@
+* 10-4 7805 の出力インピーダンスを Network で測る (図1)
+* 7805 の模型は 03-psrr.cir と同じ (仮定): 8 mohm + 0.32 uH (1.2 ohm と並列)、消費電流 5 mA
+* W1 -> C4 (10 uF) -> R4 (100 ohm) -> OUT。Z = 100 ohm x V(out,vm) / V(j,out)
+* .step k: 1 = C2 0.1 uF だけ、2 = C2 なし、3 = C2 + 100 uF の電解 (ESR 0.3 ohm、仮定)
+.param k=1
+.param c2={if(k==2,1p,0.1u)} ce={if(k==3,100u,1p)}
+Vp vp 0 5
+Vm vm 0 -5
+Rs vp in 100
+Cin in vm 0.33u
+Ea a1 vm in vm 8.91e-5
+Ed d 0 in vm 1
+Cz d zz {8.91e-5/(2*pi*2e3)}
+Rz zz 0 1
+B5 int vm V=5+V(a1,vm)+V(zz)
+Lo int a 0.32u
+Rhf int a 1.2
+Ro a b 8m
+Vsense b out 0
+B1 in vm I=5m+I(Vsense)
+C2 out vm {c2}
+Ce out e {ce}
+Re e vm 0.3
+RL out vm 1k
+VW1 w 0 AC 1
+C4 w j 10u
+R4 j out 100
+.step param k list 1 2 3
+.ac dec 50 100 1meg
+.meas ac z1k FIND 100*mag(V(out,vm)/V(j,out)) AT 1k
+.meas ac z10k FIND 100*mag(V(out,vm)/V(j,out)) AT 10k
+.meas ac z100k FIND 100*mag(V(out,vm)/V(j,out)) AT 100k
+.meas ac z300k FIND 100*mag(V(out,vm)/V(j,out)) AT 300k
+.meas ac z1meg FIND 100*mag(V(out,vm)/V(j,out)) AT 1meg
+.meas ac zmax MAX 100*mag(V(out,vm)/V(j,out))
+.meas ac fmax WHEN 100*mag(V(out,vm)/V(j,out))=zmax
+.meas ac v1_1k FIND mag(V(j,out)) AT 1k
+.meas ac v2_10k FIND mag(V(out,vm)) AT 10k
+.meas ac z100 FIND 100*mag(V(out,vm)/V(j,out)) AT 100
+.meas ac z300 FIND 100*mag(V(out,vm)/V(j,out)) AT 300
+.meas ac z3k FIND 100*mag(V(out,vm)/V(j,out)) AT 3k
+.meas ac z30k FIND 100*mag(V(out,vm)/V(j,out)) AT 30k
+.meas ac z600k FIND 100*mag(V(out,vm)/V(j,out)) AT 600k
+.end

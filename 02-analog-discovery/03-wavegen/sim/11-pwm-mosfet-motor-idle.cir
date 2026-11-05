@@ -1,0 +1,17 @@
+* 3-11 Wavegen を止めて W1 が Offset の 2.5 V に留まったとき (ゲート 2.5 V の直流)
+* 同じ模型で、2N7000 の VGS(th) を典型 2.1 V・1.2 V・下限 0.8 V に振る (データシートの範囲 0.8〜3 V)。停動。実測ではない
+.param vt=2.1
+.model NM2N7000 NMOS (VTO={vt} KP=0.0926 LAMBDA=0.01)
+VB vb 0 5
+R3 vb m1 15
+Rm m1 d 11.8
+M1 d g 0 0 NM2N7000
+R1 g gi 100
+R2 g 0 10k
+VIN gi 0 2.5
+* 走らせ方: vt = 2.1・1.2・0.8 を 1 つずつ
+.op
+.meas op id FIND I(R3)
+.meas op vds FIND V(d)
+.meas op pq PARAM id*vds
+.end

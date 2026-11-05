@@ -1,0 +1,23 @@
+* 3-11 PWM 波形で MOSFET 経由のモータ (図1)。回路の教科書の 7-2 と同じ模型
+* 停動 (逆起電力 0)。巻線 11.8 ohm、L 1 mH は仮定。2N7000 は VGS = 4.5 V で 4.5 ohm になる近似 (仮定)。実測ではない
+* D1 は図1 のとおりモータ (巻線) だけに並列 (R3 の下流)。OFF の間の電流は R3 を通らずに D1 とモータを回る
+* duty = 25 / 50 / 75 / 100 %、周波数 1 kHz と 20 kHz。W1 は 0 / 5 V の方形波
+.model NM2N7000 NMOS (VTO=2.1 KP=0.0926 LAMBDA=0.01 CGSO=20p CGDO=5p)
+.model D1N4001 D (IS=14.11n N=1.984 RS=33.89m CJO=25.89p M=0.4423 VJ=0.3905 TT=5.7u BV=50)
+.param duty=0.5 f=1k
+VB vb 0 5
+R3 vb m1 15
+Rm m1 m2 11.8
+Lm m2 d 1m
+D1 d m1 D1N4001
+M1 d g 0 0 NM2N7000
+R1 g gi 100
+R2 g 0 10k
+VIN gi 0 PULSE(0 5 0 10n 10n {duty/f} {1/f})
+* 走らせ方: f = 1k・20k、duty = 0.25・0.5・0.75・0.999 の組を 1 つずつ (.step の代わりにパラメータを替えて回した)
+.tran 0 20m 0 1u
+.meas tran imot AVG I(Rm) FROM=10m TO=20m
+.meas tran ipk MAX I(Rm) FROM=10m TO=20m
+.meas tran isup AVG I(R3) FROM=10m TO=20m
+.meas tran vdmax MAX V(d) FROM=10m TO=20m
+.end

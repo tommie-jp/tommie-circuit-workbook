@@ -1,0 +1,21 @@
+* 2-18 電源投入の突入電流 (図1)。V+ 5 V (AD3 Supplies、内部抵抗 0 と仮定) -> SW1 -> R1 220 -> C1 100u // RL 1k
+* SW1 は理想のスイッチ (接点のはね無し、Ron 10 mohm)。1 ms で入れ、201 ms で離し、251 ms でもう一度入れる (離して 50 ms 後に入れ直す)
+* C1 の ESR・漏れ電流は無視 (仮定。実測ではない)
+.model SWM SW(Ron=0.01 Roff=1G Vt=0.5 Vh=0)
+VP vp 0 5
+VC ctl 0 PWL(0 0 1m 0 1.001m 1 201m 1 201.001m 0 251m 0 251.001m 1 600m 1)
+S1 vp s ctl 0 SWM
+R1 s c 220
+C1 c 0 100u IC=0
+RL c 0 1k
+.ic V(c)=0
+.tran 0 600m 0 20u
+.meas tran ipk MAX I(R1) FROM=1m TO=5m
+.meas tran itau FIND I(R1) AT=19.03m
+.meas tran ifin FIND I(R1) AT=200m
+.meas tran vcfin FIND V(c) AT=200m
+.meas tran t63 TRIG I(R1) VAL=22.7m FALL=1 TARG I(R1) VAL='4.098m+18.63m*0.3679' FALL=1
+.meas tran vcre FIND V(c) AT=251m
+.meas tran ipk2 MAX I(R1) FROM=251m TO=255m
+.meas tran q1 INTEG I(R1) FROM=1m TO=201m
+.end

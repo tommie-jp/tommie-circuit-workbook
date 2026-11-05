@@ -1,0 +1,60 @@
+* 12-4 電子ホタル (図1)。5 V 単電源、LM358 の 2 回路で積分 (U1A) + シュミット (U1B) の三角波、Q1 (2SC1815) と D1・D2 で LED の電流を作る
+* Vref = 5 V x 18k / (33k + 18k)。積分は R4 1 MΩ・C1 1 µF、シュミットは R1 68k (TRI から)・R2 100k (SQ から)
+* オペアンプは 05-power-supplies/sim/12-battery-checker.cir と同じ汎用模型 (LM358 相当の仮定: GBW 1 MHz、SR 0.3 V/us、
+* 出力 High は V+ - 1.5 V、Low は V- + 0.1 V。入力バイアス電流は無し)。緑の LED は 05-power-supplies/sim/12-battery-checker.cir と同じ仮定の模型。実測ではない
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5)
+.model D4148 D(IS=2.52n N=1.752 RS=0.568 CJO=4p TT=20n BV=100)
+.model LEDG D (IS=4.0e-19 N=2.14 RS=0)
+VCC vcc 0 5
+R5 vcc ref 33k
+R6 ref 0 18k
+* 積分 (U1A): - 入力に R4 (SQ から) と C1 (TRI から)、+ 入力は Vref
+R4 sq inm 1Meg
+C1 inm tri 1u
+XU1A ref inm tri vcc 0 OPA
+* シュミット (U1B): + 入力に R1 (TRI) と R2 (SQ)、- 入力は Vref
+R1 tri p 68k
+R2 sq p 100k
+XU1B p ref sq vcc 0 OPA
+* LED の駆動: Q1 のベースに TRI、エミッタから D1・D2・R3 で GND。コレクタに LED (5 V から)
+Q1 c tri e Q1815
+D1 e d D4148
+D2 d f D4148
+R3 f 0 {re}
+DL vcc c LEDG
+.param re=68
+.ic V(tri)=1
+.tran 0 30 0 1m
+.meas tran vref AVG V(ref) FROM=10 TO=30
+.meas tran trimax MAX V(tri) FROM=10 TO=30
+.meas tran trimin MIN V(tri) FROM=10 TO=30
+.meas tran sqmax MAX V(sq) FROM=10 TO=30
+.meas tran sqmin MIN V(sq) FROM=10 TO=30
+.meas tran t1 WHEN V(sq)=1.8 RISE=3
+.meas tran t2 WHEN V(sq)=1.8 RISE=4
+.meas tran per PARAM t2-t1
+.meas tran tf WHEN V(sq)=1.8 FALL=3
+.meas tran thi PARAM tf-t1
+.meas tran iledmax MAX I(DL) FROM=10 TO=30
+.meas tran iledavg AVG I(DL) FROM=10 TO=30
+.meas tran ton1 WHEN I(DL)=0.1m RISE=4
+.meas tran toff1 WHEN I(DL)=0.1m FALL=4
+.meas tran toff2 WHEN I(DL)=0.1m FALL=5
+.meas tran ondur PARAM toff2-ton1
+.meas tran vfled FIND V(vcc)-V(c) WHEN I(DL)=10m RISE=4
+.meas tran tricon FIND V(tri) WHEN I(DL)=0.1m RISE=4
+.meas tran vepk MAX V(f) FROM=10 TO=30
+.meas tran icc AVG I(VCC) FROM=10 TO=30
+.meas tran vcemin MIN V(c)-V(e) FROM=10 TO=30
+.end

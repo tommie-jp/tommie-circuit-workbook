@@ -1,0 +1,16 @@
+* 6-10 0.1 µF の SRF (25 MHz まで)。W1 の振幅 1 V、基準抵抗 Rref 100、DUT = 0.1u + ESL 2.2n + ESR 0.03 (ESL・ESR は本文の仮定)
+* LTspice のコイルは既定で Rser 1m を持つので Rser=0 と書く (ESR は Resr だけ)
+* CH1 = v(in) (W1 の出口)、CH2 = v(a) (DUT の両端)。DUT の Z = v(a) / ((v(in) - v(a)) / Rref)
+V1 in 0 AC 1
+Rref in a 100
+Lesl a b 2.2n Rser=0
+Resr b c 0.03
+C1 c 0 0.1u
+.ac dec 400 100k 25meg
+.meas ac z100k FIND mag(100*v(a)/(v(in)-v(a))) AT=100k
+.meas ac z1M FIND mag(100*v(a)/(v(in)-v(a))) AT=1meg
+.meas ac ch2_1M FIND mag(v(a)) AT=1meg
+.meas ac z25M FIND mag(100*v(a)/(v(in)-v(a))) AT=25meg
+.meas ac zmin MIN mag(100*v(a)/(v(in)-v(a)))
+
+.end
