@@ -1,0 +1,23 @@
+* 10-8 グラウンドループ (図1)。A = AD3 の GND (節 0)、B = センサーの GND (節 b)
+* k: 1 = RG1 だけ (共通の GND の線)、2 = RG1 + RG2 (GND の線が 2 本のループ)、3 = 一点接地 (Q1 の帰りは RG1 で A へ、センサーは RG2 で A へ)
+* 2N7000 は 02-transistors/sim/05-mosfet-switch.cir と同じ仮定の模型
+.param k=1
+.model M2N7000 NMOS (LEVEL=1 VTO=2.1 KP=0.1 LAMBDA=0.01 CBD=10p)
+VP vp 0 5
+VW1 g 0 PULSE(0 5 0 1u 1u 0.5m 1m)
+R1 vp d 220
+M1 d g qs qs M2N7000
+* Q1 の S は k=3 のとき別の線 (RG1) で A へ、それ以外は B へ
+Rqs qs b {if(k==3,1e9,1u)}
+RG1a qs 0 {if(k==3,1,1e9)}
+RG1 b 0 {if(k==3,1e9,1)}
+RG2 b 0 {if(k==1,1e9,1)}
+R2 vp s 47k
+R3 s b 1k
+.tran 0 5m 0 1u
+.meas tran ch1hi FIND V(s) AT 4.25m
+.meas tran ch1lo FIND V(s) AT 4.75m
+.meas tran ch2hi FIND V(s,b) AT 4.25m
+.meas tran ch2lo FIND V(s,b) AT 4.75m
+.meas tran iload FIND I(R1) AT 4.25m
+.end

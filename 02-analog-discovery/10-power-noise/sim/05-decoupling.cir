@@ -1,0 +1,27 @@
+* 10-5 電源の RC デカップリング (図1)。W1 = 雑音の乗った電源の代わり、R1 100 ohm の先の VCC を CH2 で読む
+* k: 1 = コンデンサなし、2 = 0.1 uF のセラミック、3 = 100 uF の電解、4 = 100 uF の電解 + 10 uF のセラミック
+* 電解の ESR 0.3 ohm・ESL 10 nH、セラミックの ESR 5 mohm・ESL 3 nH は仮定 (リードとブレッドボードを含む目安)
+.param k=1
+.param ccer={if(k==2,0.1u,if(k==4,10u,1p))} cel={if(k>=3,100u,1p)}
+VW1 w 0 AC 1
+R1 w vcc 100
+Ce vcc e1 {cel}
+Re e1 e2 0.3
+Le e2 0 10n
+Cc vcc c1 {ccer}
+Rc c1 c2 5m
+Lc c2 0 3n
+.ac dec 50 10 1meg
+.meas ac g120 FIND db(V(vcc)/V(w)) AT 120
+.meas ac g1k FIND db(V(vcc)/V(w)) AT 1k
+.meas ac g10k FIND db(V(vcc)/V(w)) AT 10k
+.meas ac g100k FIND db(V(vcc)/V(w)) AT 100k
+.meas ac g1meg FIND db(V(vcc)/V(w)) AT 1meg
+.meas ac g30 FIND db(V(vcc)/V(w)) AT 30
+.meas ac g300 FIND db(V(vcc)/V(w)) AT 300
+.meas ac g3k FIND db(V(vcc)/V(w)) AT 3k
+.meas ac g30k FIND db(V(vcc)/V(w)) AT 30k
+.meas ac g300k FIND db(V(vcc)/V(w)) AT 300k
+.meas ac g10 FIND db(V(vcc)/V(w)) AT 10
+.meas ac f3db WHEN db(V(vcc)/V(w))=-3 FALL=1
+.end

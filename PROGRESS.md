@@ -15,12 +15,12 @@
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 | 実測 | 1.0 まで |
 | --- | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 232 | 227 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 5 |
-| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 162 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 40 |
+| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 172 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 30 |
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1118** | **780** | **0** | **0** | **0** | |
+| **計** | **1118** | **790** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -577,10 +577,10 @@
 | 10-2 | [負荷過渡応答](02-analog-discovery/10-power-noise/02-load-transient.md) | ✓ | [ ] | — | — |
 | 10-3 | [レギュレータの PSRR](02-analog-discovery/10-power-noise/03-psrr.md) | ✓ | [ ] | — | — |
 | 10-4 | [出力インピーダンス vs 周波数](02-analog-discovery/10-power-noise/04-output-impedance.md) | ✓ | [ ] | — | — |
-| 10-5 | デカップリングの効果 | | | | |
-| 10-6 | スイッチングノイズ | | | | |
-| 10-7 | LDO vs スイッチング | | | | |
-| 10-8 | グラウンドループ | | | | |
+| 10-5 | [デカップリングの効果](02-analog-discovery/10-power-noise/05-decoupling.md) | ✓ | [ ] | — | — |
+| 10-6 | [スイッチングノイズ](02-analog-discovery/10-power-noise/06-switching-noise.md) | ✓ | [ ] | — | — |
+| 10-7 | [LDO vs スイッチング](02-analog-discovery/10-power-noise/07-ldo-vs-switching.md) | ✓ | [ ] | — | — |
+| 10-8 | [グラウンドループ](02-analog-discovery/10-power-noise/08-ground-loop.md) | ✓ | [ ] | — | — |
 
 ### 第 11 章 自動化
 
@@ -588,12 +588,12 @@
 | --- | --- | --- | --- | --- | --- |
 | 11-1 | [Script で掃引と測定を自動化 (1-5 の続き)](02-analog-discovery/11-automation/01-script-sweep.md) | ✓ | [ ] | — | — |
 | 11-2 | [WaveForms SDK (Python) の最初](02-analog-discovery/11-automation/02-sdk-first-steps.md) | ✓ | [ ] | — | — |
-| 11-3 | 部品 10 個のバッチ測定 | | | | |
-| 11-4 | CSV をグラフにする (matplotlib) | | | | |
-| 11-5 | SDK でオシロを取り込み、FFT を自分で書く | | | | |
-| 11-6 | Script で合否判定 (検査もどき) | | | | |
-| 11-7 | ロガーの長期記録 (1 日) | | | | |
-| 11-8 | 測った値を tommie-fence の図に注釈で載せる | | | | |
+| 11-3 | [部品 10 個のバッチ測定](02-analog-discovery/11-automation/03-batch-measurement.md) | ✓ | [ ] | — | — |
+| 11-4 | [CSV をグラフにする (matplotlib)](02-analog-discovery/11-automation/04-csv-matplotlib.md) | ✓ | [ ] | — | — |
+| 11-5 | [SDK でオシロを取り込み、FFT を自分で書く](02-analog-discovery/11-automation/05-sdk-fft.md) | ✓ | [ ] | — | — |
+| 11-6 | [Script で合否判定 (検査もどき)](02-analog-discovery/11-automation/06-script-pass-fail.md) | ✓ | [ ] | — | — |
+| 11-7 | [ロガーの長期記録 (1 日)](02-analog-discovery/11-automation/07-long-logger.md) | ✓ | [ ] | — | — |
+| 11-8 | [測った値を tommie-fence の図に注釈で載せる](02-analog-discovery/11-automation/08-annotate-measured.md) | ✓ | [ ] | — | — |
 
 ## NanoVNA と tinySA の教科書
 

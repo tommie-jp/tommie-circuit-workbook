@@ -1,0 +1,8 @@
+* 11-3 部品のバッチ測定 (図1)。W1 (1 V・1 kHz) -> R1 1 kohm (基準) -> R2 (被測定の抵抗) -> GND
+* CH1 = W1、CH2 = R2 の上。Rx = R1 * V2 / (V1 - V2)
+.param rx=1k
+VW1 w 0 AC 1
+R1 w x 1k
+R2 x 0 {rx}
+.ac dec 10 100 10k
+.end

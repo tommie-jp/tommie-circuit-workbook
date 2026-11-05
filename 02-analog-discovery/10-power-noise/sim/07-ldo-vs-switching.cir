@@ -1,0 +1,31 @@
+* 10-7 降圧モジュールを 7.5 V に合わせ、その後ろに 7805 を置く (図1 の C の組)
+* 降圧は 06-switching-noise.cir と同じ仮定の模型、7805 は 03-psrr.cir と同じ仮定の模型 (リップル除去 81 dB、2 kHz から 20 dB/dec で悪くなる)
+.param D=0.27
+Vin in 0 12
+Cin in 0 220u
+Vg g 0 PULSE(0 1 0 10n 10n {D/150k} {1/150k})
+S1 in sw g 0 SWMOD
+.model SWMOD SW(Ron=0.2 Roff=1Meg Vt=0.5 Vh=0)
+D1 0 sw DSCH
+.model DSCH D(IS=50u N=1.1 RS=20m CJO=300p)
+L1 sw l1 33u
+RL1 l1 vb 0.1
+Co vb c1 220u
+Rco c1 c2 0.1
+Lco c2 0 10n
+* 7805 (入力 vb、GND は 0)
+C7in vb 0 0.33u
+Ea a1 0 vb 0 8.91e-5
+Ed d 0 vb 0 1
+Cz d zz {8.91e-5/(2*pi*2e3)}
+Rz zz 0 1
+B5 int 0 V=5+V(a1)+V(zz)-8.91e-5*7.5
+Lo int a 0.32u
+Rhf int a 1.2
+Ro a b 8m
+Vsense b out 0
+B1 vb 0 I=5m+I(Vsense)
+C7out out 0 0.1u
+Rload out 0 100
+.tran 0 60m 59.9m 5n
+.end

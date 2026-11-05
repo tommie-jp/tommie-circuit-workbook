@@ -1,0 +1,9 @@
+* 11-7 ロガー (図1)。V+ 5 V -> NTC (10 kohm at 25 C、B = 3435 K、仮定) -> 節 t -> R1 10 kohm -> GND
+* CH1 = V(t)、CH2 = V+。tc は NTC の温度 [C]
+.param tc=25
+.param rn={10k*exp(3435*(1/(tc+273.15)-1/298.15))}
+VP vp 0 5
+RN vp t {rn}
+R1 t 0 10k
+.op
+.end

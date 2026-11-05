@@ -1,0 +1,23 @@
+* 10-6 降圧モジュール (LM2596、150 kHz) の出力の雑音 (図1)
+* モジュールの中身は仮定: L1 33 uH (巻き線 0.1 ohm)、出力 220 uF (ESR 0.1 ohm・ESL 10 nH)、入力 220 uF、
+* ショットキー (1N5824 に近い IS・N の汎用模型)、スイッチは ON 0.2 ohm。帰還は省き、出力が 5 V になる D を固定で与える
+.param D=0.172
+Vin in 0 12
+Cin in 0 220u
+Vg g 0 PULSE(0 1 0 10n 10n {D/150k} {1/150k})
+S1 in sw g 0 SWMOD
+.model SWMOD SW(Ron=0.2 Roff=1Meg Vt=0.5 Vh=0)
+D1 0 sw DSCH
+.model DSCH D(IS=50u N=1.1 RS=20m CJO=300p)
+L1 sw l1 33u
+RL1 l1 out 0.1
+Co out c1 220u
+Rco c1 c2 0.1
+Lco c2 0 10n
+Rload out 0 100
+.tran 0 60m 59.9m 5n
+.meas tran vavg AVG V(out) FROM=59.9m TO=60m
+.meas tran vpp PP V(out) FROM=59.9m TO=60m
+.meas tran ipk MAX I(L1) FROM=59.9m TO=60m
+.meas tran iin AVG I(Vin) FROM=59.9m TO=60m
+.end

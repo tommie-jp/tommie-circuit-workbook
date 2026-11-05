@@ -38,9 +38,9 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 7 | ロジックとプロトコル | 4 | 10 | 26 | 26 | 12 |
 | 8 | ブレッドボードの限界と perfboard | 4 | 8 | 14 | 14 | 14 |
 | 9 | アンプの特性 | 2 | 6 | 16 | 16 | 8 |
-| 10 | 電源と雑音 | 1 | 2 | 8 | 8 | 4 |
-| 11 | 自動化 | 1 | 2 | 8 | 8 | 2 |
-| **計** | | **50** | **100** | **202** | **202** | **162** |
+| 10 | 電源と雑音 | 1 | 2 | 8 | 8 | 8 |
+| 11 | 自動化 | 1 | 2 | 8 | 8 | 8 |
+| **計** | | **50** | **100** | **202** | **202** | **172** |
 
 ## 第 0 章 道具と安全
 
@@ -286,10 +286,10 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 10-2 | [負荷過渡応答](10-power-noise/02-load-transient.md) | 入門 | BB | |
 | 10-3 | [レギュレータの PSRR](10-power-noise/03-psrr.md) | 中級 | BB | |
 | 10-4 | [出力インピーダンス vs 周波数](10-power-noise/04-output-impedance.md) | 中級 | BB | |
-| 10-5 | デカップリングの効果 | 中級 | BB | |
-| 10-6 | スイッチングノイズ | 中級 | BB | |
-| 10-7 | LDO vs スイッチング | 中級 | BB | |
-| 10-8 | グラウンドループ | 中級 | BB | |
+| 10-5 | [デカップリングの効果](10-power-noise/05-decoupling.md) | 中級 | BB | |
+| 10-6 | [スイッチングノイズ](10-power-noise/06-switching-noise.md) | 中級 | BB | |
+| 10-7 | [LDO vs スイッチング](10-power-noise/07-ldo-vs-switching.md) | 中級 | BB | |
+| 10-8 | [グラウンドループ](10-power-noise/08-ground-loop.md) | 中級 | BB | |
 
 ## 第 11 章 自動化
 
@@ -297,11 +297,11 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | --- | --- | --- | --- | --- |
 | 11-1 | [Script で掃引と測定を自動化 (1-5 の続き)](11-automation/01-script-sweep.md) | 必須 | BB | |
 | 11-2 | [WaveForms SDK (Python) の最初](11-automation/02-sdk-first-steps.md) | 入門 | BB | |
-| 11-3 | 部品 10 個のバッチ測定 | 中級 | BB | |
-| 11-4 | CSV をグラフにする (matplotlib) | 中級 | — | |
-| 11-5 | SDK でオシロを取り込み、FFT を自分で書く | 中級 | — | |
-| 11-6 | Script で合否判定 (検査もどき) | 中級 | BB | |
-| 11-7 | ロガーの長期記録 (1 日) | 中級 | BB | |
-| 11-8 | 測った値を tommie-fence の図に注釈で載せる | 中級 | — | |
+| 11-3 | [部品 10 個のバッチ測定](11-automation/03-batch-measurement.md) | 中級 | BB | |
+| 11-4 | [CSV をグラフにする (matplotlib)](11-automation/04-csv-matplotlib.md) | 中級 | — | |
+| 11-5 | [SDK でオシロを取り込み、FFT を自分で書く](11-automation/05-sdk-fft.md) | 中級 | — | |
+| 11-6 | [Script で合否判定 (検査もどき)](11-automation/06-script-pass-fail.md) | 中級 | BB | |
+| 11-7 | [ロガーの長期記録 (1 日)](11-automation/07-long-logger.md) | 中級 | BB | |
+| 11-8 | [測った値を tommie-fence の図に注釈で載せる](11-automation/08-annotate-measured.md) | 中級 | — | |
 
 <!-- toc:end -->
