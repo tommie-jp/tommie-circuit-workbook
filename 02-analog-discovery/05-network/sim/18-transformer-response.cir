@@ -1,0 +1,18 @@
+* 5-18 トランスの周波数特性。FT37-43 に 20 回 : 20 回 (L 各 140 µH = AL 350 nH/回² の目安)
+* 結合係数 k = 0.99 と巻線抵抗 0.1 Ω は仮定 (実測ではない)。コアの損失・巻線の容量は入れていない
+* r は信号源の直列抵抗 Rs と負荷 RL (同じ値)。100 と 1k に振った (run_experiments の assign)
+.param r=100
+V1 w 0 AC 1
+Rs w p {r}
+L1 p 0 140u Rser=0.1
+L2 s 0 140u Rser=0.1
+K1 L1 L2 0.99
+RL s 0 {r}
+.ac dec 400 1k 100meg
+.meas ac gmid MAX mag(v(s))
+.meas ac fl WHEN mag(v(s))='gmid*0.707107' RISE=1
+.meas ac fh WHEN mag(v(s))='gmid*0.707107' FALL=1
+.meas ac g10k FIND mag(v(s)) AT=10k
+.meas ac g1m FIND mag(v(s)) AT=1meg
+.meas ac g10m FIND mag(v(s)) AT=10meg
+.end

@@ -1,0 +1,20 @@
+* 5-20 10:1 プローブ込みの NA。DUT は RC ローパス (100 kΩ・100 pF、f_c 15.9 kHz)
+* CH2 の入力は 1 MΩ || Ct。Ct = 24 pF (AD3 の仕様) + 90 pF (プローブか同軸の線。仮定) = 114 pF
+* mode 1 = 1:1 (CH2 を同軸で直に)、mode 10 = 10:1 プローブ (先 9 MΩ || Ctip、Ctip = Ct/9 x m)。表示は 10 倍して読む (B1)
+* m は補正のずれ (1 = 合っている、1.2 = 補正しすぎ、0.8 = 足りない)
+.param mode=10 m=1 ct=114p
+V1 in 0 AC 1
+R1 in x 100k
+C1 x 0 100p
+R11 x a 1m
+Rtip a s {if(mode==10,9meg,0.001)}
+Ctip a s {if(mode==10,ct/9*m,1f)}
+Rin s 0 1meg
+Cin s 0 {ct}
+B1 o 0 V={if(mode==10,10,1)}*V(s)
+.ac dec 400 10 1meg
+.meas ac gdc FIND mag(v(o)) AT=10
+.meas ac g1k FIND mag(v(o)) AT=1k
+.meas ac g10k FIND mag(v(o)) AT=10k
+.meas ac g100k FIND mag(v(o)) AT=100k
+.end

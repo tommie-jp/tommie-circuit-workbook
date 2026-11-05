@@ -1,0 +1,34 @@
+* 5-22 25 MHz まで (BNC、perfboard)。3 次のバターワース LPF (220 pF - 1.0 µH - 220 pF、50 Ω 系、f_c 約 15 MHz)
+* W1 は BNC アダプタのジャンパで 0 Ω。CH1 は W1 の BNC の T 分岐 (w、CH1 までの線は短く無視)。
+* 同軸 30 cm (遅れ 1.52 ns) で基板の J1 へ、基板の上の R1 51 Ω が信号源の抵抗。J2 から同軸 30 cm で CH2、CH2 の手前に 50 Ω のスルー終端
+* CH1・CH2 は 1 MΩ || 24 pF (AD3 の仕様)。部品は理想の L・C、同軸は損失なし (仮定)。cab を 1f にすると同軸なし
+* 比較用に、同じ LPF を理想の 50 Ω 系に入れた S21 (= 2 V(q)/V(e2)) も解く
+.param cab=1.52n
+V1 w 0 AC 1
+R1in w 0 1meg
+C1in w 0 24p
+T1 w 0 r 0 Z0=50 Td={cab}
+R1 r a 51
+C1 a 0 220p
+L1 a b 1u
+C2 b 0 220p
+T2 b 0 o 0 Z0=50 Td={cab}
+Rt o 0 50
+R2in o 0 1meg
+C2in o 0 24p
+V2 e2 0 AC 1
+Rs2 e2 p 50
+Cx1 p 0 220p
+Lx1 p q 1u
+Cx2 q 0 220p
+Rl2 q 0 50
+.ac dec 400 100k 30meg
+.meas ac g1m FIND mag(v(o)/v(w)) AT=1meg
+.meas ac g10m FIND mag(v(o)/v(w)) AT=10meg
+.meas ac g15m FIND mag(v(o)/v(w)) AT=15meg
+.meas ac g25m FIND mag(v(o)/v(w)) AT=25meg
+.meas ac s1m FIND mag(2*v(q)) AT=1meg
+.meas ac s10m FIND mag(2*v(q)) AT=10meg
+.meas ac s15m FIND mag(2*v(q)) AT=15meg
+.meas ac s25m FIND mag(2*v(q)) AT=25meg
+.end

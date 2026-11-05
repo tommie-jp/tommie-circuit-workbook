@@ -1,0 +1,15 @@
+* 5-19 同軸ケーブル 1 m (50 Ω、短縮率 0.66 -> 遅れ 5.05 ns) を 10 MHz まで。W1 は 0 Ω (BNC アダプタのジャンパ)
+* 先は CH2 (1 MΩ || 24 pF、AD3 の仕様) だけ (開放) か、50 Ω の終端を足す。rt は 1g (開放) か 50 に振った
+* 線路は損失なし (仮定。RG-58 の損失は 10 MHz・1 m で 0.02 dB ほど)
+.param rt=50
+V1 in 0 AC 1
+T1 in 0 out 0 Z0=50 Td=5.05n
+Rsc out 0 1meg
+Csc out 0 24p
+Rt out 0 {rt}
+.ac dec 400 100k 30meg
+.meas ac g1m FIND mag(v(out)) AT=1meg
+.meas ac g10m FIND mag(v(out)) AT=10meg
+.meas ac p10m FIND ph(v(out)) AT=10meg
+.meas ac p1m FIND ph(v(out)) AT=1meg
+.end

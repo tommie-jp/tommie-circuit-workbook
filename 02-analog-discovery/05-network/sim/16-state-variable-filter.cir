@@ -1,0 +1,33 @@
+* 5-16 状態変数フィルタ (KHN)。R1 = R2 = R5 = 10k (加算)、R6 = R7 = 10k・C1 = C2 = 10n (積分 2 個、f0 = 1.59 kHz)
+* Q = (R3 + R4)/(3 R4)。R4 = 1k、r3 を 15k (Q 5.33) と 2k (Q 1.00) に振った (run_experiments の assign)
+* オペアンプは 1 次の模型 (DC 利得 100 dB、GBW 1 MHz = LM324 の代表値。仮定で実測ではない)
+.subckt OA p n o
+G1 0 x p n 1m
+Rd x 0 100meg
+Cd x 0 159.15p
+E1 o 0 x 0 1
+.ends
+.param r3=15k
+V1 in 0 AC 1
+R1 in s 10k
+R5 s hp 10k
+R2 s lp 10k
+X1 pp s hp OA
+R3 bp pp {r3}
+R4 pp 0 1k
+R6 hp n2 10k
+C1 n2 bp 10n
+X2 0 n2 bp OA
+R7 bp n3 10k
+C2 n3 lp 10n
+X3 0 n3 lp OA
+.ac dec 400 100 100k
+.meas ac lp100 FIND mag(v(lp)) AT=100
+.meas ac hp100k FIND mag(v(hp)) AT=100k
+.meas ac bpk MAX mag(v(bp))
+.meas ac bpf0 FIND mag(v(bp)) AT=1591.5
+.meas ac lpf0 FIND mag(v(lp)) AT=1591.5
+.meas ac hpf0 FIND mag(v(hp)) AT=1591.5
+.meas ac fl WHEN mag(v(bp))='bpk*0.707107' RISE=1
+.meas ac fh WHEN mag(v(bp))='bpk*0.707107' FALL=1
+.end

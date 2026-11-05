@@ -1,0 +1,23 @@
+* 5-17 位相余裕 (ループを切る)。5-14 のフォロアの帰還を直流だけ 1 MΩ で閉じ、交流は W1 を 1 µF で - 入力へ注入する
+* CH1 = - 入力 (n)、CH2 = 出力 (a)。H = V(a)/V(n) = -T (ループ利得の符号を反した物)。|H| = 1 の所の位相がそのまま位相余裕
+* オペアンプは 5-14 と同じ線形の模型 (仮定。実測ではない): GBW 1.2 MHz、第 2 極 1.63 MHz、R_O 270 Ω
+* cl は出力の容量 (CH2 の 24 pF を含む)、riso は 0.001 (直結) か 1k (このときも CH2 は U1 の出力 a)
+.param cl=494p riso=0.001
+V1 w 0 AC 1
+Cinj w n 1u
+Rdc a n 1meg
+G1 0 x 0 n 1m
+Rx x 0 100meg
+Cx x 0 132.63p
+E2 y1 0 x 0 1
+R2 y1 y 1k
+C2 y 0 97.64p
+E3 y3 0 y 0 1
+Ro y3 a 270
+Riso a c {riso}
+CL c 0 {cl}
+.ac dec 400 1k 10meg
+.meas ac g10k FIND mag(v(a)/v(n)) AT=10k
+.meas ac fc WHEN mag(v(a)/v(n))=1
+.meas ac pm FIND ph(v(a)/v(n)) WHEN mag(v(a)/v(n))=1
+.end

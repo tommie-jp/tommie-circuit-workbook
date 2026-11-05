@@ -1,0 +1,18 @@
+* 5-21 バーアンテナ + バリコンの同調曲線。W1 から Rinj 470 kΩ で同調回路 (L 330 µH || C) へ弱く注入し、両端を CH2 で見る
+* L 330 µH と Q 100 (同調の周波数で) は 6-8 の目安 (仮定。実測ではない)。浮遊容量 10 pF (仮定) と CH2 の 1 MΩ || 24 pF を足す
+* cv はバリコンの容量。260p・100p・20p に振った (run_experiments の assign)
+.param cv=260p
+.param ct={cv+10p+24p}
+.param f0={1/(2*pi*sqrt(330u*ct))}
+.param rs={2*pi*f0*330u/100}
+V1 w 0 AC 1
+Rinj w t 470k
+L1 t m 330u
+Rs m 0 {rs}
+Cv t 0 {cv}
+Cst t 0 10p
+Rsc t 0 1meg
+Csc t 0 24p
+.ac dec 2000 200k 3meg
+.meas ac gpk MAX mag(v(t))
+.end

@@ -15,12 +15,12 @@
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 | 実測 | 1.0 まで |
 | --- | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 232 | 227 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 5 |
-| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 155 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 47 |
+| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 162 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 40 |
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1118** | **773** | **0** | **0** | **0** | |
+| **計** | **1118** | **780** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -469,13 +469,13 @@
 | 5-13 | [反転増幅の入力インピーダンスと周波数](02-analog-discovery/05-network/13-inverting-input-impedance.md) | ✓ | [ ] | — | — |
 | 5-14 | [ボルテージフォロアの容量負荷とピーキング](02-analog-discovery/05-network/14-follower-capacitive-load.md) | ✓ | [ ] | — | — |
 | 5-15 | [サレンキー LPF の Q](02-analog-discovery/05-network/15-sallen-key-q.md) | ✓ | [ ] | — | — |
-| 5-16 | 状態変数フィルタ | | | | |
-| 5-17 | 位相余裕 (ループを切る) | | | | |
-| 5-18 | トランスの周波数特性 | | | | |
-| 5-19 | ケーブル 1 m の 10 MHz まで | | | | |
-| 5-20 | 10:1 プローブ込みの NA | | | | |
-| 5-21 | バーアンテナ + バリコンの同調曲線 | | | | |
-| 5-22 | 25 MHz まで (BNC、perfboard) | | | | |
+| 5-16 | [状態変数フィルタ](02-analog-discovery/05-network/16-state-variable-filter.md) | ✓ | [ ] | — | — |
+| 5-17 | [位相余裕 (ループを切る)](02-analog-discovery/05-network/17-phase-margin.md) | ✓ | [ ] | — | — |
+| 5-18 | [トランスの周波数特性](02-analog-discovery/05-network/18-transformer-response.md) | ✓ | [ ] | — | — |
+| 5-19 | [ケーブル 1 m の 10 MHz まで](02-analog-discovery/05-network/19-coax-1m.md) | ✓ | [ ] | — | — |
+| 5-20 | [10:1 プローブ込みの NA](02-analog-discovery/05-network/20-probe-10x-na.md) | ✓ | [ ] | — | — |
+| 5-21 | [バーアンテナ + バリコンの同調曲線](02-analog-discovery/05-network/21-bar-antenna-tuning.md) | ✓ | [ ] | — | — |
+| 5-22 | [25 MHz まで (BNC、perfboard)](02-analog-discovery/05-network/22-25mhz-bnc-perfboard.md) | ✓ | [ ] | — | — |
 
 ### 第 6 章 インピーダンス測定
 
