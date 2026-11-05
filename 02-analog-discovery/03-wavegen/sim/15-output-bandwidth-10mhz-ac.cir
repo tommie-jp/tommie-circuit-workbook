@@ -1,0 +1,14 @@
+* 3-15 同じ 2 段の模型の周波数特性 (正弦の振幅の比)
+V1 in 0 AC 1
+R1 in a 1k
+C1 a 0 {1/(2*pi*1k*12meg)}
+E1 b 0 a 0 1
+R2 b out 1k
+C2 out 0 {1/(2*pi*1k*30meg)}
+.ac dec 200 100k 100meg
+.meas ac g10 FIND mag(v(out)) AT=10meg
+.meas ac g30 FIND mag(v(out)) AT=30meg
+.meas ac g50 FIND mag(v(out)) AT=50meg
+.meas ac g1 FIND mag(v(out)) AT=1meg
+.meas ac f3db WHEN mag(v(out))=0.707107
+.end

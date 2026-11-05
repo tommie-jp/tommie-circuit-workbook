@@ -1,0 +1,17 @@
+* 2-20 方形波 50 Hz・0〜2 V を R1 10k・C1 100n に通す (理想の素子)。2 周期目の立ち下がり (t = 30 ms) から放電を読む
+* ln(V / 2 V) の傾きが -1/tau になるかを、0.5 ms と 3.5 ms の 2 点、および 1 ms ごとの値で確かめる
+V1 in 0 PULSE(0 2 0 1n 1n 10m 20m)
+R1 in c 10k
+C1 c 0 100n
+.tran 0 60m 0 1u
+.meas tran v0 FIND V(c) AT=29.999m
+.meas tran va FIND V(c) AT=30.5m
+.meas tran vb FIND V(c) AT=33.5m
+.meas tran v1 FIND V(c) AT=31m
+.meas tran v5 FIND V(c) AT=35m
+.meas tran v7 FIND V(c) AT=37m
+.meas tran slope PARAM '(ln(vb/2)-ln(va/2))/3m'
+.meas tran tau PARAM '-1/slope'
+.meas tran lna PARAM 'ln(va/2)'
+.meas tran lnb PARAM 'ln(vb/2)'
+.end

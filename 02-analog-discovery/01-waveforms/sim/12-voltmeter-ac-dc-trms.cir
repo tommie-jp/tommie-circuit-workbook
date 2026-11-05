@@ -1,0 +1,24 @@
+* 1-12 W1 (1 kHz) を R1 1k・C1 1u の RC ローパスに通し、入力 (in) と C1 の両端 (out) の DC (平均)・True RMS を読む
+* 正弦波 (振幅 1 V・オフセット 0.5 V) と方形波 (0〜2 V) を別々の回路で。CH2 の入力 1 MΩ も負荷に入れる
+* AC RMS は sqrt(TRMS^2 - DC^2) で出す (.meas の式)
+V1 in1 0 SINE(0.5 1 1k)
+R1 in1 o1 1k
+C1 o1 0 1u
+Rs1 o1 0 1meg
+V2 in2 0 PULSE(0 2 0 1n 1n 0.5m 1m)
+R2 in2 o2 1k
+C2 o2 0 1u
+Rs2 o2 0 1meg
+.tran 0 60m 0 1u
+.meas tran dc_in1 AVG v(in1) FROM=40m TO=60m
+.meas tran rms_in1 RMS v(in1) FROM=40m TO=60m
+.meas tran dc_o1 AVG v(o1) FROM=40m TO=60m
+.meas tran rms_o1 RMS v(o1) FROM=40m TO=60m
+.meas tran ac_o1 PARAM sqrt(rms_o1**2-dc_o1**2)
+.meas tran dc_in2 AVG v(in2) FROM=40m TO=60m
+.meas tran rms_in2 RMS v(in2) FROM=40m TO=60m
+.meas tran dc_o2 AVG v(o2) FROM=40m TO=60m
+.meas tran rms_o2 RMS v(o2) FROM=40m TO=60m
+.meas tran ac_o2 PARAM sqrt(rms_o2**2-dc_o2**2)
+.meas tran pp_o2 PP v(o2) FROM=40m TO=60m
+.end

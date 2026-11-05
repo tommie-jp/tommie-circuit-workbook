@@ -15,12 +15,12 @@
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 | 実測 | 1.0 まで |
 | --- | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 232 | 224 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 8 |
-| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 130 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 72 |
+| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 143 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 59 |
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1118** | **745** | **0** | **0** | **0** | |
+| **計** | **1118** | **758** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -362,12 +362,12 @@
 | 1-8 | [電源の電圧と直列抵抗で LED の電流を決める](02-analog-discovery/01-waveforms/08-current-limit-led.md) | ✓ | [ ] | — | — |
 | 1-9 | [データロガーで温度 (LM35) を 10 分](02-analog-discovery/01-waveforms/09-logger-lm35.md) | ✓ | [ ] | — | — |
 | 1-10 | [デバイスマネージャ — 計器ごとのバッファ長の配分を切り替える](02-analog-discovery/01-waveforms/10-device-manager-buffer.md) | ✓ | [ ] | — | — |
-| 1-11 | Supplies のトラッキング (± 対称) | | | | |
-| 1-12 | 電圧計の AC / DC / True RMS | | | | |
-| 1-13 | ロガーを Script から回して CSV に追記する | | | | |
-| 1-14 | 計器を同時に走らせる (Scope + Spectrum + Logger) | | | | |
-| 1-15 | プロジェクトとプリセットで設定を使い回す | | | | |
-| 1-16 | Raspberry Pi で WaveForms を動かす (Linux 版) | | | | |
+| 1-11 | [Supplies のトラッキング (± 対称)](02-analog-discovery/01-waveforms/11-supplies-tracking.md) | ✓ | [ ] | — | — |
+| 1-12 | [電圧計の AC / DC / True RMS](02-analog-discovery/01-waveforms/12-voltmeter-ac-dc-trms.md) | ✓ | [ ] | — | — |
+| 1-13 | [ロガーを Script から回して CSV に追記する](02-analog-discovery/01-waveforms/13-logger-script-csv.md) | ✓ | [ ] | — | — |
+| 1-14 | [計器を同時に走らせる (Scope + Spectrum + Logger)](02-analog-discovery/01-waveforms/14-simultaneous-instruments.md) | ✓ | [ ] | — | — |
+| 1-15 | [プロジェクトとプリセットで設定を使い回す](02-analog-discovery/01-waveforms/15-project-presets.md) | ✓ | [ ] | — | — |
+| 1-16 | [Raspberry Pi で WaveForms を動かす (Linux 版)](02-analog-discovery/01-waveforms/16-raspberry-pi-linux.md) | ✓ | [ ] | — | — |
 
 ### 第 2 章 オシロスコープ
 
@@ -392,9 +392,9 @@
 | 2-17 | [シュミットトリガのヒステリシスを XY で](02-analog-discovery/02-oscilloscope/17-schmitt-xy.md) | ✓ | [ ] | — | — |
 | 2-18 | [電源投入の突入電流 (Single トリガ)](02-analog-discovery/02-oscilloscope/18-inrush-single.md) | ✓ | [ ] | — | — |
 | 2-19 | [リレーの接点バウンス](02-analog-discovery/02-oscilloscope/19-relay-bounce.md) | ✓ | [ ] | — | — |
-| 2-20 | 充放電を Math の log で直線にする | | | | |
-| 2-21 | FIR フィルタ ch でノイズを除く | | | | |
-| 2-22 | ロックインアンプ ch で埋もれた信号を取り出す | | | | |
+| 2-20 | [充放電を Math の log で直線にする](02-analog-discovery/02-oscilloscope/20-rc-log-line.md) | ✓ | [ ] | — | — |
+| 2-21 | [FIR フィルタ ch でノイズを除く](02-analog-discovery/02-oscilloscope/21-fir-filter.md) | ✓ | [ ] | — | — |
+| 2-22 | [ロックインアンプ ch で埋もれた信号を取り出す](02-analog-discovery/02-oscilloscope/22-lockin.md) | ✓ | [ ] | — | — |
 | 2-23 | [デジタル ch (バスの値) でトリガする](02-analog-discovery/02-oscilloscope/23-digital-bus-trigger.md) | ✓ | [ ] | — | — |
 | 2-24 | [立ち上がり時間から帯域を逆算する (tr = 0.35 / BW)](02-analog-discovery/02-oscilloscope/24-rise-time-bandwidth.md) | ✓ | [ ] | — | — |
 | 2-25 | プローブの GND リードのリンギング | | | | |
@@ -420,10 +420,10 @@
 | 3-12 | [任意波形でステップ応答 (RC・RLC)](02-analog-discovery/03-wavegen/12-step-response-rc-rlc.md) | ✓ | [ ] | — | — |
 | 3-13 | [変調度と側波帯 (FFT と対)](02-analog-discovery/03-wavegen/13-am-depth-sidebands.md) | ✓ | [ ] | — | — |
 | 3-14 | [位相変調と PSK](02-analog-discovery/03-wavegen/14-pm-psk.md) | ✓ | [ ] | — | — |
-| 3-15 | 出力の帯域 (12 MHz) — 10 MHz の方形波はどう見えるか | | | | |
-| 3-16 | DC オフセットでバイアス点を振る (トランジスタの動作点) | | | | |
-| 3-17 | 波形発生器をシリアル信号源にする (Pattern の代替) | | | | |
-| 3-18 | 外部トリガ (T1) で同期する | | | | |
+| 3-15 | [出力の帯域 (12 MHz) — 10 MHz の方形波はどう見えるか](02-analog-discovery/03-wavegen/15-output-bandwidth-10mhz-square.md) | ✓ | [ ] | — | — |
+| 3-16 | [DC オフセットでバイアス点を振る (トランジスタの動作点)](02-analog-discovery/03-wavegen/16-dc-offset-bias-point.md) | ✓ | [ ] | — | — |
+| 3-17 | [波形発生器をシリアル信号源にする (Pattern の代替)](02-analog-discovery/03-wavegen/17-wavegen-serial-source.md) | ✓ | [ ] | — | — |
+| 3-18 | [外部トリガ (T1) で同期する](02-analog-discovery/03-wavegen/18-external-trigger-t1.md) | ✓ | [ ] | — | — |
 
 ### 第 4 章 FFT とスペクトラム
 

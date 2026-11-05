@@ -43,7 +43,7 @@ wires:
 | --- | --- | --- |
 | Wavegen W1 | Carrier Sine 10 kHz、Amplitude 1 V。変調 PM: Sine 100 Hz、偏移 57.3° (1 rad) | Carrier 同じ。変調 PM: **Square 1 kHz**、偏移 **90°** |
 | Wavegen W2 | Sine 10 kHz、Amplitude 1 V、変調なし。W1 と同期 (1-7) | 同じ |
-| Scope | CH1・CH2: Range 500 mV/div。Time 20 µs/div。トリガ CH2 立ち上がり 0 V | Time 200 µs/div、トリガ同じ |
+| Scope | CH1・CH2: Range 500 mV/div。Time 20 µs/div。トリガ CH2 立ち上がり 0 V | Time 100 µs/div、トリガ同じで位置 −3 div |
 | Spectrum | — | Source CH1、Start 0 Hz・Stop 20 kHz、Window Flat-top、単位 dBm |
 
 PM の偏移を度で書くか rad で書くか、方形波の変調で ±90° になるか 0〜90° になるかは WaveForms の版で違うかもしれない (**目安**)。
@@ -59,12 +59,12 @@ W1 と W2 は同期させないと、基準との位相差が少しずつ流れ�
 ```scope
 # オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図2 BPSK — 500 µs ごとに CH1 の向きが反転する (CH2 は基準)
-time: 200us/div
-trigger: ch2 rising 0V
+time: 100us/div
+trigger: ch2 rising 0V at -3div
 ch1: {wave: "= 1V * clip(1000 * sin(2 * pi * 1kHz * t), -1, 1) * cos(2 * pi * 10kHz * t)", range: 500mV/div, position: 2div}
 ch2: {wave: sine 10kHz 1V, range: 500mV/div, position: -2div}
 cursors: [0, 500us]
-measure: [vpp, freq]
+measure: [vpp]
 ```
 
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/03-wavegen/scope/14-pm-psk.svg)
@@ -84,8 +84,8 @@ ref: 13dBm
 signal:
   - sine 9kHz 0.6366V
   - sine 11kHz 0.6366V
-  - sine 7kHz 0.2122V
-  - sine 13kHz 0.2122V
+  - sine 7kHz 0.21221V
+  - sine 13kHz 0.21221V
   - sine 5kHz 0.1273V
   - sine 15kHz 0.1273V
 markers: [11kHz, 13kHz, 15kHz, 10kHz]

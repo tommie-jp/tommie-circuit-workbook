@@ -1,0 +1,11 @@
+* 1-14 W1 (1 kHz・0〜2 V の方形波) を R1 1k・C1 100n (f-3dB = 1.59 kHz) に通す。CH2 の入力 1 MΩ も負荷に入れる
+* .tran: C1 の両端の平均 (Logger の DC)・実効値・Vpp を定常 (40〜50 ms) で読む
+V1 in 0 PULSE(0 2 0 1n 1n 0.5m 1m)
+R1 in o 1k
+C1 o 0 100n
+Rs o 0 1meg
+.tran 0 50m 0 0.5u
+.meas tran dc_o AVG v(o) FROM=40m TO=50m
+.meas tran rms_o RMS v(o) FROM=40m TO=50m
+.meas tran pp_o PP v(o) FROM=40m TO=50m
+.end

@@ -1,0 +1,19 @@
+* 3-16 DC オフセットでバイアス点を振る (図1)。W1 -> RB 1k -> 2SC1815 のベース、RE 1k、RC 2.2k、V+ 5 V
+* 2SC1815 は他の題と同じ近似のモデル (BF 250 は仮定)。実測ではない
+* W1 = オフセット voff + 振幅 0.3 V・1 kHz の正弦
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.param voff=1.4 amp=0.3
+VCC vcc 0 5
+VW w 0 SINE({voff} {amp} 1k)
+RB w b 1k
+Q1 c b e Q1815
+RE e 0 1k
+RC vcc c 2.2k
+.tran 0 5m 3m 1u
+.meas tran vcmax MAX V(c)
+.meas tran vcmin MIN V(c)
+.meas tran vcavg AVG V(c)
+.meas tran vcpp PARAM vcmax-vcmin
+.meas tran ivcc MAX -I(VCC)
+* 走らせ方: voff = 0.8・1.4・2.0 を 1 つずつ。amp = 0 にすると動作点 (直流) が読める
+.end

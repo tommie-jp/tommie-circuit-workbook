@@ -1,0 +1,26 @@
+* 2-22 埋もれた信号 (図1)。W1 1 kHz・1 V -> R1 100k、W2 3.7 kHz・1 V (妨害) -> R2 10k、混ぜた点 n から R3 100 ohm で GND。Scope の入力 1 Mohm を負荷に置く
+* ロックインの計算 (Scope の中の数の計算) を、振る舞いの電源で真似る: n に sqrt(2) sin / cos を掛け、2 段の RC (各 tau 10 ms、約 16 Hz) で均し、R = sqrt(X^2 + Y^2)
+* 仮定: 参照は W1 と同じ位相の理想の正弦。WaveForms の実装 (フィルタの形) とは同じではない。実測ではない
+V1 w1 0 SINE(0 1 1k)
+V2 w2 0 SINE(0 1 3.7k)
+R1 w1 n 100k
+R2 w2 n 10k
+R3 n 0 100
+Rin n 0 1Meg
+Bx x 0 V=V(n)*sqrt(2)*sin(2*pi*1k*time)
+By y 0 V=V(n)*sqrt(2)*cos(2*pi*1k*time)
+Rx1 x x1 10k
+Cx1 x1 0 1u
+Rx2 x1 x2 10k
+Cx2 x2 0 1u
+Ry1 y y1 10k
+Cy1 y1 0 1u
+Ry2 y1 y2 10k
+Cy2 y2 0 1u
+Br r 0 V=sqrt(V(x2)**2+V(y2)**2)
+.tran 0 1 0 5u
+.meas tran vsig_pp PP V(n) FROM=0.9 TO=1
+.meas tran rout AVG V(r) FROM=0.8 TO=1
+.meas tran rrip PP V(r) FROM=0.8 TO=1
+.meas tran xout AVG V(x2) FROM=0.8 TO=1
+.end

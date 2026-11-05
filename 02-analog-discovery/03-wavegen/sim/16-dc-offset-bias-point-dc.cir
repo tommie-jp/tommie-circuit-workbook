@@ -1,0 +1,17 @@
+* 3-16 直流の伝達特性 (W1 の直流 0〜3 V に対するコレクタの電圧)。図1 と同じ回路・同じモデル (仮定)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+VCC vcc 0 5
+VW w 0 1.4
+RB w b 1k
+Q1 c b e Q1815
+RE e 0 1k
+RC vcc c 2.2k
+.dc VW 0 3 0.05
+.meas dc vc05 FIND V(c) AT=0.5
+.meas dc vc08 FIND V(c) AT=0.8
+.meas dc vc14 FIND V(c) AT=1.4
+.meas dc vc20 FIND V(c) AT=2.0
+.meas dc vc25 FIND V(c) AT=2.5
+.meas dc vce25 FIND V(c)-V(e) AT=2.5
+.meas dc vsat WHEN V(c)-V(e)=0.3
+.end

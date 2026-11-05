@@ -1,0 +1,13 @@
+* 2-21 W1 (1 kHz、1 V) と W2 (50 kHz、0.5 V) を R1・R2 10k で混ぜる (図1)。Scope の入力 1 Mohm (並列の容量は無視) を負荷に置く
+* FIR フィルタは Scope の中の数の計算なので SPICE では解かない (本文で窓関数の FIR を算術で確かめた)
+.param sel=1
+V1 w1 0 AC {sel==1 ? 1 : 0} SINE(0 1 1k)
+V2 w2 0 AC {sel==2 ? 0.5 : 0} SINE(0 0.5 50k)
+R1 w1 n 10k
+R2 w2 n 10k
+Rin n 0 1Meg
+.step param sel list 1 2
+.ac list 1k 50k
+.meas ac g1k FIND mag(V(n)) AT=1k
+.meas ac g50k FIND mag(V(n)) AT=50k
+.end

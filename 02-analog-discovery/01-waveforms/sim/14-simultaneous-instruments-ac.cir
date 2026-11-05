@@ -1,0 +1,12 @@
+* 1-14 同じ R1 1k・C1 100n の |H| を 1・3・5・7 kHz で読む (方形波の奇数次の高調波が受ける減衰)
+V1 in 0 AC 1
+R1 in o 1k
+C1 o 0 100n
+Rs o 0 1meg
+.ac dec 200 100 100k
+.meas ac h1 FIND mag(v(o)) AT=1k
+.meas ac h3 FIND mag(v(o)) AT=3k
+.meas ac h5 FIND mag(v(o)) AT=5k
+.meas ac h7 FIND mag(v(o)) AT=7k
+.meas ac f3 WHEN mag(v(o))=0.70675
+.end

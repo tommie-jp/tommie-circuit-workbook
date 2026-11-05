@@ -29,9 +29,9 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 章 | 題名 | 必須 | 入門 | 中級 | 発展 | 済 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 0 | 道具と安全 | 4 | 6 | 10 | 10 | 10 |
-| 1 | WaveForms の基本 | 6 | 10 | 16 | 16 | 10 |
-| 2 | オシロスコープ | 8 | 16 | 28 | 28 | 21 |
-| 3 | 波形発生器 | 5 | 10 | 18 | 18 | 14 |
+| 1 | WaveForms の基本 | 6 | 10 | 16 | 16 | 16 |
+| 2 | オシロスコープ | 8 | 16 | 28 | 28 | 24 |
+| 3 | 波形発生器 | 5 | 10 | 18 | 18 | 18 |
 | 4 | FFT とスペクトラム | 5 | 10 | 20 | 20 | 12 |
 | 5 | ネットワークアナライザ | 6 | 12 | 22 | 22 | 15 |
 | 6 | インピーダンス測定 | 4 | 8 | 16 | 16 | 12 |
@@ -40,7 +40,7 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 9 | アンプの特性 | 2 | 6 | 16 | 16 | 8 |
 | 10 | 電源と雑音 | 1 | 2 | 8 | 8 | 4 |
 | 11 | 自動化 | 1 | 2 | 8 | 8 | 2 |
-| **計** | | **50** | **100** | **202** | **202** | **130** |
+| **計** | | **50** | **100** | **202** | **202** | **143** |
 
 ## 第 0 章 道具と安全
 
@@ -71,12 +71,12 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 1-8 | [電源の電圧と直列抵抗で LED の電流を決める](01-waveforms/08-current-limit-led.md) | 入門 | BB | |
 | 1-9 | [データロガーで温度 (LM35) を 10 分](01-waveforms/09-logger-lm35.md) | 入門 | BB | |
 | 1-10 | [デバイスマネージャ — 計器ごとのバッファ長の配分を切り替える](01-waveforms/10-device-manager-buffer.md) | 入門 | BB | AD3 |
-| 1-11 | Supplies のトラッキング (± 対称) | 中級 | BB | AD3 |
-| 1-12 | 電圧計の AC / DC / True RMS | 中級 | BB | |
-| 1-13 | ロガーを Script から回して CSV に追記する | 中級 | BB | |
-| 1-14 | 計器を同時に走らせる (Scope + Spectrum + Logger) | 中級 | BB | |
-| 1-15 | プロジェクトとプリセットで設定を使い回す | 中級 | — | |
-| 1-16 | Raspberry Pi で WaveForms を動かす (Linux 版) | 中級 | — | |
+| 1-11 | [Supplies のトラッキング (± 対称)](01-waveforms/11-supplies-tracking.md) | 中級 | BB | AD3 |
+| 1-12 | [電圧計の AC / DC / True RMS](01-waveforms/12-voltmeter-ac-dc-trms.md) | 中級 | BB | |
+| 1-13 | [ロガーを Script から回して CSV に追記する](01-waveforms/13-logger-script-csv.md) | 中級 | BB | |
+| 1-14 | [計器を同時に走らせる (Scope + Spectrum + Logger)](01-waveforms/14-simultaneous-instruments.md) | 中級 | BB | |
+| 1-15 | [プロジェクトとプリセットで設定を使い回す](01-waveforms/15-project-presets.md) | 中級 | — | |
+| 1-16 | [Raspberry Pi で WaveForms を動かす (Linux 版)](01-waveforms/16-raspberry-pi-linux.md) | 中級 | — | |
 
 ## 第 2 章 オシロスコープ
 
@@ -101,9 +101,9 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 2-17 | [シュミットトリガのヒステリシスを XY で](02-oscilloscope/17-schmitt-xy.md) | 中級 | BB | |
 | 2-18 | [電源投入の突入電流 (Single トリガ)](02-oscilloscope/18-inrush-single.md) | 中級 | BB | |
 | 2-19 | [リレーの接点バウンス](02-oscilloscope/19-relay-bounce.md) | 中級 | BB | |
-| 2-20 | 充放電を Math の log で直線にする | 中級 | BB | |
-| 2-21 | FIR フィルタ ch でノイズを除く | 中級 | BB | AD3 |
-| 2-22 | ロックインアンプ ch で埋もれた信号を取り出す | 中級 | BB | AD3 |
+| 2-20 | [充放電を Math の log で直線にする](02-oscilloscope/20-rc-log-line.md) | 中級 | BB | |
+| 2-21 | [FIR フィルタ ch でノイズを除く](02-oscilloscope/21-fir-filter.md) | 中級 | BB | AD3 |
+| 2-22 | [ロックインアンプ ch で埋もれた信号を取り出す](02-oscilloscope/22-lockin.md) | 中級 | BB | AD3 |
 | 2-23 | [デジタル ch (バスの値) でトリガする](02-oscilloscope/23-digital-bus-trigger.md) | 中級 | BB | |
 | 2-24 | [立ち上がり時間から帯域を逆算する (tr = 0.35 / BW)](02-oscilloscope/24-rise-time-bandwidth.md) | 中級 | — | |
 | 2-25 | プローブの GND リードのリンギング | 中級 | BB | |
@@ -129,10 +129,10 @@ Analog Discovery 2 / 3 と付属ソフトウェア WaveForms で、DC〜10 MHz �
 | 3-12 | [任意波形でステップ応答 (RC・RLC)](03-wavegen/12-step-response-rc-rlc.md) | 中級 | BB | |
 | 3-13 | [変調度と側波帯 (FFT と対)](03-wavegen/13-am-depth-sidebands.md) | 中級 | — | |
 | 3-14 | [位相変調と PSK](03-wavegen/14-pm-psk.md) | 中級 | — | |
-| 3-15 | 出力の帯域 (12 MHz) — 10 MHz の方形波はどう見えるか | 中級 | — | |
-| 3-16 | DC オフセットでバイアス点を振る (トランジスタの動作点) | 中級 | BB | |
-| 3-17 | 波形発生器をシリアル信号源にする (Pattern の代替) | 中級 | BB | |
-| 3-18 | 外部トリガ (T1) で同期する | 中級 | — | |
+| 3-15 | [出力の帯域 (12 MHz) — 10 MHz の方形波はどう見えるか](03-wavegen/15-output-bandwidth-10mhz-square.md) | 中級 | — | |
+| 3-16 | [DC オフセットでバイアス点を振る (トランジスタの動作点)](03-wavegen/16-dc-offset-bias-point.md) | 中級 | BB | |
+| 3-17 | [波形発生器をシリアル信号源にする (Pattern の代替)](03-wavegen/17-wavegen-serial-source.md) | 中級 | BB | |
+| 3-18 | [外部トリガ (T1) で同期する](03-wavegen/18-external-trigger-t1.md) | 中級 | — | |
 
 ## 第 4 章 FFT とスペクトラム
 

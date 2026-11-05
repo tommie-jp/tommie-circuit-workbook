@@ -25,19 +25,19 @@ WaveForms の **Calibration (校正)** で自分で校正し直せる。基準�
 # 回路図 (tommie-fence の circuit フェンス)
 title: 図1 W1 の直流を DMM と CH1 で同時に読む
 parts:
-  W1: vsource 1,1 1,3 l=$\mathrm{W1}$
-  M1: voltmeter 3,1 3,3 l=$\mathrm{DMM}$
-  M2: voltmeter 5,1 5,3 l=$\mathrm{CH1}$
-  G1: ground 1,3
+  W1: vsource 1,2 1,4 l=$\mathrm{W1}$
+  M1: voltmeter 3,2 3,4 l=$\mathrm{DMM}$
+  M2: voltmeter 5,2 5,4 l=$\mathrm{CH1}$
+  G1: ground 1,4
 wires:
-  - 1,1 -- 3,1 -- 5,1
-  - 1,3 -- 3,3 -- 5,3
+  - 1,2 -- 3,2 -- 5,2
+  - 1,4 -- 3,4 -- 5,4
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/00-tools/circuit/10-calibration.svg)
 
 - W1 (Wavegen の DC) を、DMM と CH1 (1+、1− は GND) に同時に当てる。DMM の − は AD3 の GND
-- DMM は直流電圧のレンジ。入力抵抗は 10 MΩ 級なので、W1 の電流はほぼ流れない
+- DMM は直流電圧のレンジ。入力抵抗は 10 MΩ (メガオーム) 級なので、W1 の電流はほぼ流れない
 
 この題は実体配線図とオシロの図を付けない — 基板を使わず、付属ワイヤの先に DMM の測定棒を当てるだけで、
 見るのは直流の電圧 (時間で変わらない) だけだから。

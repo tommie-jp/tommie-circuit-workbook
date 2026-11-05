@@ -1,0 +1,26 @@
+* 3-17 波形発生器をシリアル信号源にする。W1 が RS-232 の向きの ±5 V で 'A' (0x41、9600 bit/s、8N1) を出す
+* R1 10k -> 2SC1815 のベース、D1 1N4148 でベースの負を止める、R2 4.7k で 3.3 V へ (コレクタ = DIO0)
+* 2SC1815 は他の題と同じ近似のモデル、DIO0 の入力は 1 Mohm のプルダウン (仕様) と 10 pF (仮定)。実測ではない
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.model D1N4148 D(Is=2.52n Rs=0.568 N=1.752 Cjo=4p M=0.4 tt=20n Iave=200m Vpk=75)
+.param tb=104.17u
+VCC v33 0 3.3
+* ビット (W1): 待機 -5、スタート +5、d0 -5、d1〜d5 +5、d6 -5、d7 +5、ストップ -5。辺は 1 us
+VW w 0 PWL(0 -5 {tb} -5 {tb+1u} 5 {2*tb} 5 {2*tb+1u} -5 {3*tb} -5 {3*tb+1u} 5 {8*tb} 5 {8*tb+1u} -5 {9*tb} -5 {9*tb+1u} 5 {10*tb} 5 {10*tb+1u} -5)
+R1 w b 10k
+D1 0 b D1N4148
+Q1 c b 0 Q1815
+R2 v33 c 4.7k
+RD c 0 1meg
+CD c 0 10p
+.tran 0 1.5m 0 0.2u
+.meas tran vlow FIND V(c) AT=150u
+.meas tran vhigh FIND V(c) AT=50u
+.meas tran vbneg MIN V(b)
+.meas tran iw MAX I(R1)
+.meas tran iwn MIN I(R1)
+.meas tran tfall WHEN V(c)=1.65 FALL=1
+.meas tran trise WHEN V(c)=1.65 RISE=1
+.meas tran dfall PARAM tfall-tb
+.meas tran drise PARAM trise-2*tb
+.end

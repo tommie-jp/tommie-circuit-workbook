@@ -1,0 +1,20 @@
+* 3-15 出力の帯域 (12 MHz) — 10 MHz の方形波はどう見えるか
+* W1 (BNC アダプタ有り、-3 dB 12 MHz) と Scope (BNC アダプタ有り、-3 dB 30 MHz) をそれぞれ 1 次のローパスと仮定し、バッファで 2 段に重ねる
+* 仕様の 3 点 (W1: 1 MHz -0.1 dB、4 MHz -0.5 dB、12 MHz -3 dB) は 1 次の形に完全には乗らないので仮定。実測ではない
+* 入力は振幅 1 V (2 Vpp) の理想の方形波 (角 0.1 ns)
+.param f=10meg
+V1 in 0 PULSE(-1 1 0 0.1n 0.1n {0.5/f-0.1n} {1/f})
+R1 in a 1k
+C1 a 0 {1/(2*pi*1k*12meg)}
+E1 b 0 a 0 1
+R2 b out 1k
+C2 out 0 {1/(2*pi*1k*30meg)}
+.tran 0 {30/f} {20/f} 0.05n
+.meas tran vmax MAX V(out)
+.meas tran vmin MIN V(out)
+.meas tran vpp PARAM vmax-vmin
+.meas tran t10 WHEN V(out)=vmin+0.1*vpp RISE=1
+.meas tran t90 WHEN V(out)=vmin+0.9*vpp RISE=1
+.meas tran trise PARAM t90-t10
+* 走らせ方: f = 10meg と 1meg を 1 つずつ。正弦 10 MHz の利得は別に .ac で見る (下)
+.end
