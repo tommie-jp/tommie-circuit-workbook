@@ -1,0 +1,10 @@
+* 4-16 直流を切るコンデンサ Cb (1 µF) と AD3 の入力 (1 MΩ ∥ 24 pF) の高域通過。降圧モジュールの中身は模型にしない
+V1 out 0 AC 1
+Cb out ch1 1u
+Rin ch1 0 1Meg
+Cin ch1 0 24p
+.ac dec 50 0.01 10Meg
+.meas ac f3 WHEN mag(V(ch1))=0.7071 RISE=1
+.meas ac g50 FIND mag(V(ch1)) AT 50
+.meas ac g150k FIND mag(V(ch1)) AT 150k
+.end

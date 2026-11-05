@@ -1,0 +1,12 @@
+* 7-20 静止電流をシャントで読む。IC は電源電流 Icc の電流源で置き換えた (仮定: データシートの typical)
+* LS: Icc = 2.4 mA (ICCL) / 0.8 mA (ICCH)、R1 = 47 ohm。HC: Icc = 2 uA (25 °C の最大)、R1 = 10k
+* Rsc は AD3 の Scope の入力 1 Mohm (1+ から GND)
+.param icc=2.4m rs=47
+V1 vcc 0 5
+Iic vcc ngnd {icc}
+R1 ngnd 0 {rs}
+Rsc ngnd 0 1Meg
+.meas op vsh FIND V(ngnd) AT 0
+.meas op vic FIND V(vcc,ngnd) AT 0
+.op
+.end

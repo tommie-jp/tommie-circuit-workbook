@@ -1,0 +1,15 @@
+* 7-21 Pico 2 の ADC0 (GP26) の入力: W1 の三角波 (3.3 Hz、0.1〜3.2 V) → R1 1k → GP26、C1 100n
+* Rin は ADC の入力インピーダンス (データシートの最小 100 kohm。仮定: 抵抗として効く最悪)
+.param T={1/3.3}
+V1 w1 0 PULSE(0.1 3.2 0 {T/2} {T/2} 0 {T})
+R1 w1 gp 1k
+C1 gp 0 100n
+Rin gp 0 {rin}
+.param rin=100k
+.tran 0 2 0 20u
+.meas tran vmax MAX V(gp) FROM 1 TO 2
+.meas tran vmin MIN V(gp) FROM 1 TO 2
+.meas tran tin WHEN V(w1)=1.65 RISE=4
+.meas tran tout WHEN V(gp)=1.65 RISE=4
+.meas tran lag PARAM tout-tin
+.end

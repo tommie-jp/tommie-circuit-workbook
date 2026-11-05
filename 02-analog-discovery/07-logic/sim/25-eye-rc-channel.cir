@@ -1,0 +1,10 @@
+* 7-25 アイパターンのまね。1 Mbit/s の 0/3.3 V のビット列 → R1 1k → C1 (+ Scope の 24 pF)
+* 並び (1 ビット 1 us): 0 | 1 0 0 1 1 1 0 1 0 ... (図3 と同じ)。GPIO の出力抵抗は無視 (仮定)
+.param c=1024p
+V1 tx 0 PWL(0 0 2u 0 2.002u 3.3 3u 3.3 3.002u 0 5u 0 5.002u 3.3 8u 3.3 8.002u 0 9u 0 9.002u 3.3 10u 3.3 10.002u 0)
+R1 tx out 1k
+C1 out 0 {c}
+.tran 0 14u 0 2n
+.meas tran v1 FIND V(out) AT 3u
+.meas tran v0 FIND V(out) AT 9u
+.end

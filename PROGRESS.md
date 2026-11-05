@@ -15,12 +15,12 @@
 | 冊 | 計画 | 作成 | 目で確認 | Fable で確認 | 実測 | 1.0 まで |
 | --- | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 232 | 227 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 5 |
-| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 172 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 30 |
+| [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 187 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 15 |
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 29 | 26 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 230 | 148 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1118** | **790** | **0** | **0** | **0** | |
+| **計** | **1118** | **805** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -441,14 +441,14 @@
 | 4-10 | [マイクの音のスペクトル](02-analog-discovery/04-spectrum/10-mic-spectrum.md) | ✓ | [ ] | — | — |
 | 4-11 | [分解能帯域幅とサンプル数](02-analog-discovery/04-spectrum/11-rbw-samples.md) | ✓ | [ ] | — | — |
 | 4-12 | [SFDR](02-analog-discovery/04-spectrum/12-sfdr.md) | ✓ | [ ] | — | — |
-| 4-13 | 抵抗の熱雑音と 1/f ノイズ (増幅して) | | | | |
-| 4-14 | 2 トーンで相互変調 (IMD) の入口 | | | | |
-| 4-15 | PWM のスペクトルとローパス | | | | |
-| 4-16 | スイッチング電源のノイズのスペクトル | | | | |
-| 4-17 | ピークホールドとウォーターフォール | | | | |
-| 4-18 | 位相雑音のまね (裾の広がり) | | | | |
-| 4-19 | AM ラジオの IF 455 kHz を見る | | | | |
-| 4-20 | マイクの周波数特性 (ピンクノイズ) | | | | |
+| 4-13 | [抵抗の熱雑音と 1/f ノイズ (増幅して)](02-analog-discovery/04-spectrum/13-thermal-noise.md) | ✓ | [ ] | — | — |
+| 4-14 | [2 トーンで相互変調 (IMD) の入口](02-analog-discovery/04-spectrum/14-two-tone-imd.md) | ✓ | [ ] | — | — |
+| 4-15 | [PWM のスペクトルとローパス](02-analog-discovery/04-spectrum/15-pwm-lowpass.md) | ✓ | [ ] | — | — |
+| 4-16 | [スイッチング電源のノイズのスペクトル](02-analog-discovery/04-spectrum/16-smps-noise-spectrum.md) | ✓ | [ ] | — | — |
+| 4-17 | [ピークホールドとウォーターフォール](02-analog-discovery/04-spectrum/17-peak-hold-waterfall.md) | ✓ | [ ] | — | — |
+| 4-18 | [位相雑音のまね (裾の広がり)](02-analog-discovery/04-spectrum/18-phase-noise-mimic.md) | ✓ | [ ] | — | — |
+| 4-19 | [AM ラジオの IF 455 kHz を見る](02-analog-discovery/04-spectrum/19-am-radio-if-455k.md) | ✓ | [ ] | — | — |
+| 4-20 | [マイクの周波数特性 (ピンクノイズ)](02-analog-discovery/04-spectrum/20-mic-pink-noise.md) | ✓ | [ ] | — | — |
 
 ### 第 5 章 ネットワークアナライザ
 
@@ -521,13 +521,13 @@
 | 7-17 | デバウンス回路の評価 (Static I/O + Scope) | | | | |
 | 7-18 | マイコンの起動ログ (UART) を長時間 Record | | | | |
 | 7-19 | [真理値表を当てる — Pattern で入力を全部出し、Logic で 74HC00 の出力と突き合わせる](02-analog-discovery/07-logic/19-nand-truth-table.md) | ✓ | [ ] | — | — |
-| 7-20 | 静止電流で品種を見分ける — 74LS00 と 74HC00 の電源電流をシャントで測る | | | | |
-| 7-21 | Pico の ADC の特性 (直線性・雑音) | | | | |
-| 7-22 | PWM + RC で DAC | | | | |
-| 7-23 | クロックのオーバーシュートとリンギング | | | | |
-| 7-24 | ジッタ | | | | |
-| 7-25 | アイパターンのまね | | | | |
-| 7-26 | ADC のサンプリングとエイリアスを Pico で | | | | |
+| 7-20 | [静止電流で品種を見分ける — 74LS00 と 74HC00 の電源電流をシャントで測る](02-analog-discovery/07-logic/20-quiescent-current-ls-hc.md) | ✓ | [ ] | — | — |
+| 7-21 | [Pico の ADC の特性 (直線性・雑音)](02-analog-discovery/07-logic/21-pico-adc-linearity.md) | ✓ | [ ] | — | — |
+| 7-22 | [PWM + RC で DAC](02-analog-discovery/07-logic/22-pwm-rc-dac.md) | ✓ | [ ] | — | — |
+| 7-23 | [クロックのオーバーシュートとリンギング](02-analog-discovery/07-logic/23-clock-overshoot-ringing.md) | ✓ | [ ] | — | — |
+| 7-24 | [ジッタ](02-analog-discovery/07-logic/24-jitter.md) | ✓ | [ ] | — | — |
+| 7-25 | [アイパターンのまね](02-analog-discovery/07-logic/25-eye-pattern.md) | ✓ | [ ] | — | — |
+| 7-26 | [ADC のサンプリングとエイリアスを Pico で](02-analog-discovery/07-logic/26-adc-sampling-alias.md) | ✓ | [ ] | — | — |
 
 ### 第 8 章 ブレッドボードの限界と perfboard
 

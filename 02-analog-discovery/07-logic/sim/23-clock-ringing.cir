@@ -1,0 +1,14 @@
+* 7-23 クロックのリンギングの模型。GP16 (12 mA 駆動) → R1 → L1 22u → C1 220p + Scope の 24 pF
+* GPIO の出力抵抗 Rout 40 ohm (仮定。データシートの VOH・VOL から 42〜57 ohm 以下)、L1 の直流抵抗は無視
+.param rs=0
+V1 src 0 PULSE(0 3.3 0 2n 2n 5u 10u)
+Rout src gp 40
+R1 gp a {rs+1m}
+L1 a out 22u
+C1 out 0 244p
+.tran 0 10u 0 1n
+.meas tran vmax MAX V(out) FROM 0 TO 5u
+.meas tran t1 WHEN V(out)=3.3 RISE=1
+.meas tran t2 WHEN V(out)=3.3 RISE=2
+.meas tran fring PARAM 1/(t2-t1)
+.end

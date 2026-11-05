@@ -1,0 +1,29 @@
+* 4-13 抵抗の熱雑音を TL072 の 2 段 (各 101 倍) で増やす。.noise で出力の雑音密度を求める
+* オペアンプは仮定の模型: 1 次遅れ (A0 = 2e5、GBW 5.25 MHz、TL07x の新しいダイの代表値) の電圧制御電圧源。
+* 入力の電圧雑音は白色の部分 18.4 nV/rtHz だけ (1/f は入れない): 20.4 kΩ の熱雑音の電圧を E で + 入力に直列に足す
+* 入力の電流雑音 80 fA/rtHz: 1 kΩ の熱雑音 (4.07 nV/rtHz) を G (19.66 µS) で電流にして + 入力へ流す
+* Cin = 5 pF は + 入力の浮遊容量 (仮定: TL072 の 1 pF とブレッドボード・抵抗のリード)
+.param R=1Meg
+.temp 27
+.step param R list 1 10k 100k 1Meg
+Vs 0 b AC 1
+Rdut in b {R}
+Cin in 0 5p
+* 1 段め (U1B)
+En1 p1 in nz1 0 1
+Rn1 nz1 0 20.4k
+Gi1 0 in ni1 0 19.66u
+Rni1 ni1 0 1k
+E1 o1 0 LAPLACE {V(p1)-V(n1)} = {2e5/(1+s/(2*pi*26.25))}
+Rf1 o1 n1 100k
+Rg1 n1 g1 1k
+Cg1 g1 0 47u
+* 2 段め (U1A)
+En2 p2 o1 nz2 0 1
+Rn2 nz2 0 20.4k
+E2 out 0 LAPLACE {V(p2)-V(n2)} = {2e5/(1+s/(2*pi*26.25))}
+Rf2 out n2 100k
+Rg2 n2 g2 1k
+Cg2 g2 0 47u
+.noise V(out) Vs dec 50 1 1Meg
+.end

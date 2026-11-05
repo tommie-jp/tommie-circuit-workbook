@@ -1,0 +1,13 @@
+* 4-15 2 段の RC の利得 (.ac)。入力は 1 V
+V1 pwm 0 AC 1
+R1 pwm m 1k
+C1 m 0 1u
+R2 m out 10k
+C2 out 0 100n
+RL out 0 1Meg
+.ac dec 100 10 100k
+.meas ac h10k FIND mag(V(out)) AT 10k
+.meas ac h20k FIND mag(V(out)) AT 20k
+.meas ac h30k FIND mag(V(out)) AT 30k
+.meas ac f3 WHEN mag(V(out))=0.7071 FALL=1
+.end

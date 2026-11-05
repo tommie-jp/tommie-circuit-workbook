@@ -1,0 +1,12 @@
+* 7-26 入力側: W1 → R1 1k → GP26 (Scope 24 pF、ADC の入力 100 kohm は最悪の仮定)
+* 出力側: GP16 の PWM → R2 10k → C2 10n → Scope 2+ (1 Mohm)。標本化と ZOH は算術で別に掛ける
+Vw w1 0 AC 1
+R1 w1 gp 1k
+Cin gp 0 24p
+Rin gp 0 100k
+Vp pwm 0 AC 1
+R2 pwm out 10k
+C2 out 0 10n
+Rsc out 0 1Meg
+.ac list 500 9.5k 10.5k 146.48k
+.end

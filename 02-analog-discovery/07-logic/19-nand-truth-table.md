@@ -189,7 +189,7 @@ trigger: B rising at 0s
 # オシロスコープの画面 (tommie-fence の scope フェンス)
 title: 図4 A (CH1) と Y (CH2) の電圧 — Y は 0〜3.3 V で 500 Hz
 time: 500us/div
-trigger: ch1 rising 1.65V at -4div
+trigger: ch2 rising 1.65V at -3div
 ch1: {wave: square 1kHz 1.65V offset 1.65V, range: 1V/div, position: 0.5div}
 ch2: {wave: square 500Hz 1.65V offset 1.65V | delay 500us, range: 1V/div, position: -3.5div}
 cursors: [250us, 750us]
@@ -199,13 +199,14 @@ measure: [vmax, vmin, freq]
 ![オシロスコープの画面](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/scope/19-nand-truth-table.svg)
 
 Y は「A と B が違うときだけ 1」なので、組 10 と 01 の 1 ms だけ H になり、周期 2 ms (500 Hz) の方形波に見える。
+**トリガは Y (CH2) で掛ける。** A (1 kHz) の立ち上がりは 2 ms の間に 2 回あり、片方は Y の立ち下がりの前、もう片方は Y の H の途中なので、A で掛けると Y の画面が 2 通りに入れ替わって止まらない。
 
 ## 部品
 
 | 部品 | 値・型番 | 備考 |
 | --- | --- | --- |
 | U1 | 74HC00 (SN74HC00N) | 2 入力 NAND × 4。DIP14 |
-| 電源 | 3.3 V (AD3 の Supplies の V+) | DIO の H (3.3 V) にそろえる。消費は µA で、Supplies の 250 mW に遠く収まる |
+| 電源 | 3.3 V (AD3 の Supplies の V+) | DIO の H (3.3 V) にそろえる。消費は µA (マイクロアンペア) で、Supplies の 250 mW に遠く収まる |
 | 線 | ジャンパ線 | 色は図2 のとおり (節点ごとに 1 色) |
 
 ## 見るべき値

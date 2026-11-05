@@ -1,0 +1,12 @@
+* 7-22 PWM + RC の DAC。GP16 の PWM (146.48 kHz、0/3.3 V) → R1 10k → C1 100n、AD3 の Scope 2+ の 1 Mohm
+* GPIO の出力抵抗は無視した (仮定。10 kohm に比べて小さい)
+.param T={1024/150e6} D=0.5
+V1 pwm 0 PULSE(0 3.3 0 2n 2n {D*T-2n} {T})
+R1 pwm out 10k
+C1 out 0 100n
+Rsc out 0 1Meg
+.tran 0 20m 0 20n
+.meas tran vavg AVG V(out) FROM 15m TO 20m
+.meas tran vpp PP V(out) FROM 15m TO 20m
+.meas tran t63 WHEN V(out)={0.632*3.3*D*1e6/1.01e6} RISE=1
+.end

@@ -1,0 +1,11 @@
+* 4-19 W1・W2 を 3 kΩ ずつで足し、セラミックフィルタの入力 (通過帯域では 1.5 kΩ と仮定) に入れたときの CH1 の電圧
+* フィルタそのものの模型は無い。通過帯域の入力を 1.5 kΩ の抵抗で置き換えた (仮定)
+VW1 w1 0 AC 1
+VW2 w2 0 AC 0
+R1 w1 in 3k
+R2 w2 in 3k
+RIN in 0 1.5k
+RCH1 in 0 1Meg
+.ac lin 3 454k 456k
+.meas ac vin FIND mag(V(in)) AT 455k
+.end

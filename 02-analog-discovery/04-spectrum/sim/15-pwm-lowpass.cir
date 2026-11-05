@@ -1,0 +1,10 @@
+* 4-15 PWM (10 kHz、0〜3.3 V、デューティ 25 %) を 2 段の RC (各 159 Hz) に通す
+* 過渡解析で出力の直流と残りの波 (リプル) を、.ac (別の行) で 2 段の RC の利得を見る
+VPWM pwm 0 PULSE(0 3.3 0 10n 10n 24.98u 100u)
+R1 pwm m 1k
+C1 m 0 1u
+R2 m out 10k
+C2 out 0 100n
+RL out 0 1Meg
+.tran 0 60m 40m 0.1u
+.end
