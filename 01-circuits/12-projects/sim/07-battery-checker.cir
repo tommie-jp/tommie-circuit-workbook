@@ -1,0 +1,60 @@
+* 12-7 電池チェッカー (図1)。5 V、分圧 36k / 1k / 1k / 1k / 10k で 1.327・1.224・1.122・1.020 V
+* 電池は起電力 VOC と内部抵抗 4.7 Ω (半分ほど使った単 3 アルカリの仮定)。S1 を押すと RL 33 Ω がつながる (press=1)
+* LM324 の 4 回路は 05-power-supplies/sim/12-battery-checker.cir と同じ汎用模型 (仮定: 出力 High は V+ - 1.5 V、Low は 0.1 V)
+* 比べ方: 電池を - 入力、しきい値を + 入力。電池がしきい値より高いと出力が Low になり、5 V → 330 Ω → LED → 出力に電流が流れる (LED は他の題と同じ仮定の模型)
+.subckt OPA inp inm out vp vn PARAMS: gbw=1Meg sr=0.3Meg hi=1.5 lo=0.1
+.param cc=1n
+.param gm={6.2832*gbw*cc}
+.param imax={sr*cc}
+.param rr={1e5/gm}
+B1 0 n2 I = limit(gm*(V(inp)-V(inm)), -imax, imax)
+C1 n2 0 {cc}
+R1 n2 0 {rr}
+B3 n2 0 I = max(0,V(n2)-(V(vp)-hi)) - max(0,(V(vn)+lo)-V(n2))
+B2 out 0 V = limit(V(n2), V(vn)+lo, V(vp)-hi)
+.ends
+.model LEDG D (IS=4.0e-19 N=2.14 RS=0 CJO=30p)
+.model LEDY D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.model LEDR D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.param press=1
+VCC vcc 0 5
+RA vcc t4 36k
+RB t4 t3 1k
+RC t3 t2 1k
+RD t2 t1 1k
+RE t1 0 10k
+VOC emf 0 1.35
+Rint emf bat 4.7
+RL bat 0 {if(press>0.5,33,1G)}
+XU1B t4 bat o1 vcc 0 OPA
+XU1A t3 bat o2 vcc 0 OPA
+XU1D t2 bat o3 vcc 0 OPA
+XU1C t1 bat o4 vcc 0 OPA
+R1 vcc a1 330
+D1 a1 o1 LEDG
+R2 vcc a2 330
+D2 a2 o2 LEDG
+R3 vcc a3 330
+D3 a3 o3 LEDY
+R4 vcc a4 330
+D4 a4 o4 LEDR
+.step param press list 0 1
+.dc VOC 0.9 1.6 0.001
+.meas dc vt4 FIND V(t4) AT=1.35
+.meas dc vt3 FIND V(t3) AT=1.35
+.meas dc vt2 FIND V(t2) AT=1.35
+.meas dc vt1 FIND V(t1) AT=1.35
+.meas dc vbat135 FIND V(bat) AT=1.35
+.meas dc vbat155 FIND V(bat) AT=1.55
+.meas dc il155 FIND I(RL) AT=1.55
+.meas dc prl155 FIND I(RL)*I(RL)*33 AT=1.55
+.meas dc on1 FIND V(bat) WHEN V(o1)=2.5 FALL=1
+.meas dc on2 FIND V(bat) WHEN V(o2)=2.5 FALL=1
+.meas dc on3 FIND V(bat) WHEN V(o3)=2.5 FALL=1
+.meas dc on4 FIND V(bat) WHEN V(o4)=2.5 FALL=1
+.meas dc id1 FIND I(D1) AT=1.55
+.meas dc id4 FIND I(D4) AT=1.55
+.meas dc id1off FIND I(D1) AT=0.9
+.meas dc n135 FIND (V(o1)<2.5)+(V(o2)<2.5)+(V(o3)<2.5)+(V(o4)<2.5) AT=1.35
+.meas dc icc FIND -I(VCC) AT=1.55
+.end

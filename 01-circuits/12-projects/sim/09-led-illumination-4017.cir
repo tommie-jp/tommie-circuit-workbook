@@ -1,0 +1,88 @@
+* 12-9 LED イルミネーション (4017)。40106 の RC 発振 (100 kΩ・2.2 µF) → 4017 (Q7 を RESET に戻して 7 進) → ULN2003A → LED (150 Ω)
+* 40106 は LTspice の SCHMITT (しきい値 2.9 V / 1.9 V = TI の典型値、出力 0/5 V、出力抵抗 300 Ω の仮定)
+* 4017 は 10-logic/sim/19-dice.cir と同じ D-FF 5 段 + 解読 (Q7 を RESET へ)。各出力は 5 V の源 + 出力抵抗 400 Ω
+*   (データシートの 5 V・4.6 V で 1 mA (典型) から決めた仮定)
+* ULN2003A の 1 回路は、データシートの等価回路 (入力 2.7 kΩ、ベースと GND の間 7.2 kΩ・3 kΩ のダーリントン) を汎用の NPN で組んだ仮定の模型
+* LED は赤 (他の題と同じ仮定の模型)。実測ではない
+.model QN NPN (IS=1e-14 BF=150 VAF=100 RB=10 RC=1 CJE=5p CJC=3p TF=1n)
+.model LEDR D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.subckt ULN in c
+Rin in b1 2.7k
+R72 b1 0 7.2k
+Qa c b1 e1 QN
+R3k e1 0 3k
+Qb c e1 0 QN
+.ends
+VCC vcc 0 5
+* 40106 の RC 発振
+Rf clk cap 100k
+Cf cap 0 2.2u
+A1 cap 0 0 0 0 clk 0 0 SCHMITT Vt=2.4 Vh=0.5 Vhigh=5 Vlow=0 Rout=300 Td=1u Tau=1u Tripdt=1u
+Cclk clk 0 100p
+* 4017 (D-FF 5 段のジョンソンカウンタ + 解読。Q7 で RESET)
+A2 d5b 0 clk 0 rst d1b d1 0 DFLOP Vhigh=5 Vlow=0 Td=100n
+A3 d1 0 clk 0 rst d2b d2 0 DFLOP Vhigh=5 Vlow=0 Td=100n
+A4 d2 0 clk 0 rst d3b d3 0 DFLOP Vhigh=5 Vlow=0 Td=100n
+A5 d3 0 clk 0 rst d4b d4 0 DFLOP Vhigh=5 Vlow=0 Td=100n
+A6 d4 0 clk 0 rst d5b d5 0 DFLOP Vhigh=5 Vlow=0 Td=100n
+Bq0 q0 0 V=5*(V(d1)<2.5 & V(d5)<2.5)
+Bq1 q1 0 V=5*(V(d1)>2.5 & V(d2)<2.5)
+Bq2 q2 0 V=5*(V(d2)>2.5 & V(d3)<2.5)
+Bq3 q3 0 V=5*(V(d3)>2.5 & V(d4)<2.5)
+Bq4 q4 0 V=5*(V(d4)>2.5 & V(d5)<2.5)
+Bq5 q5 0 V=5*(V(d1)>2.5 & V(d5)>2.5)
+Bq6 q6 0 V=5*(V(d1)<2.5 & V(d2)>2.5)
+Bq7 q7 0 V=5*(V(d2)<2.5 & V(d3)>2.5)
+Rr q7 rst 20
+Cr rst 0 1n
+* 出力抵抗 400 Ω → ULN の入力 → LED (150 Ω)
+Ro0 q0 i0 400
+X0 i0 k0 ULN
+R0 vcc a0 150
+D0 a0 k0 LEDR
+Ro1 q1 i1 400
+X1 i1 k1 ULN
+R1 vcc a1 150
+D1 a1 k1 LEDR
+Ro2 q2 i2 400
+X2 i2 k2 ULN
+R2 vcc a2 150
+D2 a2 k2 LEDR
+Ro3 q3 i3 400
+X3 i3 k3 ULN
+R3 vcc a3 150
+D3 a3 k3 LEDR
+Ro4 q4 i4 400
+X4 i4 k4 ULN
+R4 vcc a4 150
+D4 a4 k4 LEDR
+Ro5 q5 i5 400
+X5 i5 k5 ULN
+R5 vcc a5 150
+D5 a5 k5 LEDR
+Ro6 q6 i6 400
+X6 i6 k6 ULN
+R6 vcc a6 150
+D6 a6 k6 LEDR
+Bsum on 0 V=(I(D0)>5m)+(I(D1)>5m)+(I(D2)>5m)+(I(D3)>5m)+(I(D4)>5m)+(I(D5)>5m)+(I(D6)>5m)
+.ic V(cap)=1.9
+.tran 0 4 0 0.5m
+.meas tran c1 WHEN V(clk)=2.5 RISE=3
+.meas tran c2 WHEN V(clk)=2.5 RISE=4
+.meas tran tclk PARAM c2-c1
+.meas tran f1 WHEN V(clk)=2.5 FALL=3
+.meas tran thigh PARAM f1-c1
+.meas tran o1 WHEN I(D0)=5m RISE=2
+.meas tran o2 WHEN I(D0)=5m RISE=3
+.meas tran tcyc PARAM o2-o1
+.meas tran iled MAX I(D0) FROM 1 TO 4
+.meas tran vce MIN V(k0) FROM 1 TO 4
+.meas tran vin MAX V(i0) FROM 1 TO 4
+.meas tran iin MAX I(Ro0) FROM 1 TO 4
+.meas tran onmin MIN V(on) FROM 1 TO 4
+.meas tran onmax MAX V(on) FROM 1 TO 4
+.meas tran icc AVG I(VCC) FROM 1 TO 4
+.meas tran t1 WHEN I(D1)=5m RISE=2
+.meas tran t2 WHEN I(D2)=5m RISE=2
+.meas tran t6 WHEN I(D6)=5m RISE=2
+.end

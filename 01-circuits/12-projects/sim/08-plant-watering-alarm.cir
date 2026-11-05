@@ -1,0 +1,39 @@
+* 12-8 植物の水やりアラーム (図1)。Q2・Q3 の無安定マルチバイブレータで LED を短く点滅させ、土が湿っている間は Q1 が Q3 のベースを GND に押さえて止める
+* 土の抵抗 rs を .step で振る (乾いた土は 1 GΩ で代表)。VR1 (B50K) は可変抵抗として 25 kΩ (中ほど) の仮定
+* Q1〜Q3 は 2SC1815 の代用 (02-transistors/sim と同じ)、赤い LED は他の題と同じ仮定の模型。実測ではない
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n BVEBO=5)
+.model LEDR D (IS=1.7e-18 N=2.14 RS=0 CJO=30p)
+.param rs=1G vr=25k
+VCC vcc 0 5
+* 電極: 5 V → R1 10k → 土 (rs) → Q1 のベース、VR1 でベースを GND へ
+R1 vcc p1 10k
+Rsoil p1 b1 {rs}
+RVR b1 0 {vr}
+Q1 b3 b1 0 Q1815
+* 無安定マルチバイブレータ
+R2 vcc c2 4.7k
+R3 vcc b2 47k
+R4 vcc b3 100k
+C1 c2 b3 22u
+C2 c3 b2 4.7u
+Q2 c2 b2 0 Q1815
+Q3 c3 b3 0 Q1815
+R5 vcc a 330
+D1 a c3 LEDR
+* 土の抵抗は 1G (乾き)・1Meg・300k・100k・30k (湿り) の 5 通りを別々に解いた (.param rs を書き換える)
+.tran 0 12 0 1m
+.meas tran ipk MAX I(D1) FROM=4 TO=12
+.meas tran iavg AVG I(D1) FROM=4 TO=12
+.meas tran t1 WHEN I(D1)=4m RISE=3
+.meas tran t2 WHEN I(D1)=4m RISE=4
+.meas tran per PARAM t2-t1
+.meas tran tf WHEN I(D1)=4m FALL=4
+.meas tran ton PARAM tf-t1
+.meas tran vb1 AVG V(b1) FROM=4 TO=12
+.meas tran vb3min MIN V(b3) FROM=4 TO=12
+.meas tran iq1 AVG I(R1) FROM=4 TO=12
+.meas tran icc AVG I(VCC) FROM=4 TO=12
+.meas tran vc3max MAX V(c3) FROM=4 TO=12
+.meas tran vc3min MIN V(c3) FROM=4 TO=12
+.meas tran vb3max MAX V(b3) FROM=4 TO=12
+.end
