@@ -211,6 +211,7 @@ npm run check -- --verbose   # ネットリストも出す。意図した回路�
 | --- | --- | --- | --- |
 | 置き場・front matter・フェンスの読み・計画とのずれ | `scripts/check.mjs` | `npm run check` (`all`) | — |
 | 回路図と実体配線図のつながりの一致 | `scripts/netlist-parity.mjs` | `npm run parity` (`all`) | — |
+| 図の崩れ (部品の重なり・線が胴を通る・十字・名札の衝突) が増えていないか | `scripts/fence-check.mjs` (tommie-fence の `fence-check`) | `npm run check` (`all`)。公開側の monorepo が隣に無ければ飛ばす | — |
 | アナログ回路の数 | LTspice (または算術) | 手元 | `## LTspice での確かめ` |
 | Verilog | iverilog・Verilator・Yosys・cocotb | 手元 | `## シミュレーションでの確かめ` |
 | Pico 2 のプログラム (C・MicroPython) | SDK のモック・`machine` のスタブ・PIO エミュレータ (`tests/pico/`) | `npm run pico:test` (`all`) | `## プログラムでの確かめ` |
@@ -220,6 +221,8 @@ npm run check -- --verbose   # ネットリストも出す。意図した回路�
 - 期待値は、題の「見るべき値」の表の数と同じ量 (周期・パルス幅・周波数・並び) で書く。レジスタの値にしない
 - 確かめていない物は節に書く。「対象外」は見出しに `(対象外)` と理由を付ける
 - `npm run audit` が、節のある題・対象外の題・未確認の題を数える (言うだけで落とさない)
+- 図の崩れは基準 `fence-check.json` に**無い件だけ**を落とす。図を直して件が消えたら `npm run fence-check -- --write` で基準から消す
+  (基準は減るだけ)。わざと残す件は `fence-check-allow.json` に理由をつけて書く
 - Pico 2 のテストの足し方は [tests/pico/README.md](tests/pico/README.md)
 
 ## ライセンス

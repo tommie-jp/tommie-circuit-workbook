@@ -2,6 +2,7 @@ import { spawnSync } from 'node:child_process';
 import { ROOT, readEntries } from './collect.mjs';
 import { duplicateIds } from './entry.mjs';
 import { FENCES, cliPath, fencesIn, tallySaid } from './fences.mjs';
+import { problemOf, runFenceCheck } from './fence-check.mjs';
 import { withFigures } from './figures.mjs';
 import { PLAN_FILE } from './plan.mjs';
 import { checkPlantuml } from './plantuml.mjs';
@@ -66,6 +67,15 @@ function main(args) {
       console.error(`--- ${fence}: ${path}\n${one.stderr.trimEnd()}`);
       problems.push(`${path}: ${fence} フェンスに読めない行があります (上の出力)`);
     }
+  }
+
+  // 図の崩れは基準 (fence-check.json) に無い件だけを問題にする (52 の docs/150)。
+  const layout = runFenceCheck();
+  if (layout.skipped !== null) console.log(layout.skipped);
+  const layoutProblem = problemOf(layout.status);
+  if (layoutProblem !== null) {
+    console.error(`--- fence-check\n${layout.stdout.trimEnd()}${layout.stderr.trim() === '' ? '' : `\n${layout.stderr.trimEnd()}`}`);
+    problems.push(layoutProblem);
   }
 
   for (const [dir, { errors }] of mergedRows()) {

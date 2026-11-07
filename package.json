@@ -17,6 +17,7 @@
     "figures": "node scripts/figures.mjs",
     "parity": "node scripts/netlist-parity.mjs",
     "audit": "node scripts/audit-figures.mjs",
+    "fence-check": "node scripts/fence-check.mjs",
     "lint": "markdownlint '**/*.md' --ignore node_modules --ignore out",
     "test": "node --test scripts/*.test.mjs",
     "all": "npm test && npm run lint && npm run check && npm run parity && npm run en:check && npm run pico:test",
