@@ -33,7 +33,7 @@
     "i18n:stale": "node scripts/en-check.mjs --stale"
   },
   "devDependencies": {
-    "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.60.0/breadboard-fence-0.60.0.tgz",
+    "breadboard-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/breadboard-fence-v0.61.0/breadboard-fence-0.61.0.tgz",
     "circuit-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/circuit-fence-v0.48.0/circuit-fence-0.48.0.tgz",
     "copper-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/copper-fence-v0.12.0/copper-fence-0.12.0.tgz",
     "graph-fence": "https://github.com/tommie-jp/tommie-fence/releases/download/graph-fence-v0.5.0/graph-fence-0.5.0.tgz",
