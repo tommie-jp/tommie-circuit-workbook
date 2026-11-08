@@ -1,3 +1,4 @@
 { "allow": [
-  {"file": "01-circuits/13-bench-supply/06-output-resistance.md", "title": "図2 CH1 は + の線、CH2 は - の線の両端 (端子とブレッドボードの間)", "sheet": null, "kind": "crossing", "a": "wire(AD.W1-b15)", "b": "wire(AD.GND--t18)", "reason": "W1 の線と AD.2- → PSU.- の線の重なり (wire-overlap、片方が隠れる) を消すために、AD のピンを GND・W1 の順に替え、跨ぎの印のある交差を 1 つ受け入れた。電源装置と AD のピンの並び 28 通りを試し、交差を増やさずに重なりを消す並びは無かった。2- は端子の側で測る題なので電源装置の端子から外せない (52 の docs/150 §8.1)"}
+  {"file": "01-circuits/13-bench-supply/06-output-resistance.md", "title": "図2 CH1 は + の線、CH2 は - の線の両端 (端子とブレッドボードの間)", "sheet": null, "kind": "crossing", "a": "wire(AD.W1-b15)", "b": "wire(AD.GND--t18)", "reason": "W1 の線と AD.2- → PSU.- の線の重なり (wire-overlap、片方が隠れる) を消すために、AD のピンを GND・W1 の順に替え、跨ぎの印のある交差を 1 つ受け入れた。電源装置と AD のピンの並び 28 通りを試し、交差を増やさずに重なりを消す並びは無かった。2- は端子の側で測る題なので電源装置の端子から外せない (52 の docs/150 §8.1)"},
+  {"file": "01-circuits/00-measure/10-logic-probe.md", "title": "図2 LM393 の左にしきい値と LED、右に入力の X とイヤホン", "sheet": null, "kind": "caption", "a": "caption:E1", "b": "R4", "reason": "E1 のラベルに想定インピーダンス (数百kΩ) を足して名札が長くなった。右端では切れ、ずらす先は列 25 の白い線と R4 の胴に挟まれていて、R4 の胴の上端に 1 px 接するこの位置しか無い。字は線にも胴にも掛からず読める (52 の docs/152)"}
 ] }
