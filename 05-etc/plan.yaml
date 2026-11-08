@@ -17,6 +17,7 @@
 - { id: 2-9, tier: 300, board: [BB, PF], title: 時報の状態遷移を基板に組む — 4 ユニットの実体配線図と AD3 での試験 }
 - { id: 2-10, tier: 300, board: PF, title: 組み立て — 受信・検波・状態遷移のユニバーサル基板をつなぐ }
 - { id: 2-11, tier: 300, scale: large, board: PF, title: 時計をユニバーサル基板に組む — 窓判定と同期・設定の 3 枚 }
+- { id: 2-12, tier: 300, board: BB, title: アンテナの比較 — フェライトバー・空芯ループ・ロングワイヤの実効高 }
 - { id: 3-1, tier: 300, board: BB, title: 1 石ミキサー — 2SC1815 で中波を 455 kHz の IF に変える }
 - { id: 3-2, tier: 300, board: BB, title: 差動対のミキサー — 2SC1815 の差動対とカレントミラーで RF を打ち消す }
 - { id: 3-3, tier: 300, board: —, title: 3 つのミキサーをシミュレーションで比べる — 変換利得・漏れ・P1dB }

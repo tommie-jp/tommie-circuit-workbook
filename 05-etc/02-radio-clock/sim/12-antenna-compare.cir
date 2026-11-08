@@ -1,0 +1,60 @@
+* 2-12 アンテナの比較: 2-2 の同調回路 (L = 260 uH、C = 276 pF、負荷つき Q = 50) に起電力を直列に入れたときの共振と、
+* 実効高・送信ループの磁界・起電力の算術。数は見積り (フェライトの mu_i = 400、巻数 60 回は仮定) で実測ではない
+.param mu0=4*pi*1e-7 fc=594k lam=299792458/fc
+.param mui=400 drod=0.01 Arod=pi*(drod/2)**2 Lt=260u N8=60
+* 棒の実効透磁率: mu_rod = mu_i / (1 + Nz (mu_i - 1))、Nz = (ln(2m) - 1) / m^2、m = 長さ / 直径
+.func murod(l) {mui/(1+((ln(2*l/drod)-1)/(l/drod)**2)*(mui-1))}
+.func mubundle(n) {mui/(1+((ln(2*0.08/(drod*sqrt(n)))-1)/(0.08/(drod*sqrt(n)))**2)*(mui-1))}
+* 同調回路 (直列の起電力 1 V、コイルの損失 9.7 Ω で無負荷 Q = 100、次段の負荷 97 kΩ で Q = 50)
+V1 in 0 AC 1
+Rs in a 9.7
+L1 a tank 260u
+C1 tank 0 276p
+Rp tank 0 97k
+.ac lin 4001 560k 630k
+.meas ac vpk MAX mag(V(tank))
+.meas ac fres WHEN mag(V(tank))=vpk
+.meas ac f1 WHEN mag(V(tank))=vpk/sqrt(2) RISE=1
+.meas ac f2 WHEN mag(V(tank))=vpk/sqrt(2) FALL=1
+.meas ac bw PARAM f2-f1
+.meas ac qload PARAM fres/bw
+* 同調の C (L = 260 uH、594 kHz)
+.meas ac c594 PARAM 1/((2*pi*fc)**2*Lt)
+* 実効高 h_e = 2 pi N mu A / lambda (m)。棒は 8 cm 60 回を基準に、長い棒は L を保つよう巻数を sqrt(mu) で減らす
+.meas ac lambda PARAM lam
+.meas ac mu8 PARAM murod(0.08)
+.meas ac mu16 PARAM murod(0.16)
+.meas ac mu24 PARAM murod(0.24)
+.meas ac mu32 PARAM murod(0.32)
+.meas ac he8 PARAM 2*pi*N8*murod(0.08)*Arod/lam
+.meas ac he16 PARAM 2*pi*N8*sqrt(murod(0.08)/murod(0.16))*murod(0.16)*Arod/lam
+.meas ac he24 PARAM 2*pi*N8*sqrt(murod(0.08)/murod(0.24))*murod(0.24)*Arod/lam
+.meas ac he32 PARAM 2*pi*N8*sqrt(murod(0.08)/murod(0.32))*murod(0.32)*Arod/lam
+.meas ac db16 PARAM 20*log10(he16/he8)
+.meas ac db32 PARAM 20*log10(he32/he8)
+* 束 (8 cm を 2・3・4 本): mu*A の比を dB (L を保つので 10 log)
+.meas ac bundle2 PARAM 10*log10(mubundle(2)*2/murod(0.08))
+.meas ac bundle4 PARAM 10*log10(mubundle(4)*4/murod(0.08))
+* 空芯ループ 1 辺 a: 1 回の L1 = (2 mu0 a / pi) (ln(a/r) - 0.774)、r = 0.5 mm。N = sqrt(Lt / L1)
+.func lloop(a) {2*mu0*a/pi*(ln(a/0.5m)-0.774)}
+.meas ac l1loop30 PARAM lloop(0.3)
+.meas ac nloop30 PARAM sqrt(Lt/lloop(0.3))
+.meas ac lloop14 PARAM 14**2*lloop(0.3)
+.meas ac he30 PARAM 2*pi*14*0.09/lam
+.meas ac he100 PARAM 2*pi*sqrt(Lt/lloop(1))*1/lam
+.meas ac db30 PARAM 20*log10(he30/he8)
+.meas ac db100 PARAM 20*log10(he100/he8)
+* 送信ループ (1 回、半径 0.1 m) に 2 V / 220 Ω を流し、軸上 1 m の磁界 B = mu0 I a^2 / (2 (a^2 + r^2)^1.5)、同じ強さの平面波の E = c B
+.meas ac itx PARAM 2/220
+.meas ac btx PARAM mu0*(2/220)*0.1**2/(2*(0.1**2+1**2)**1.5)
+.meas ac etx PARAM 299792458*mu0*(2/220)*0.1**2/(2*(0.1**2+1**2)**1.5)
+.meas ac ltx PARAM mu0*0.1*(ln(8*0.1/0.5m)-2)
+* 起電力 e = 2 pi f N mu A B (棒)、2 pi f N A B (ループ)。同調回路の電圧は Q (50) 倍、タップで 1/6、Q1 で約 60 倍
+.meas ac erod PARAM 2*pi*fc*N8*murod(0.08)*Arod*btx
+.meas ac eloop PARAM 2*pi*fc*14*0.09*btx
+.meas ac vcrod PARAM erod*50/6*60
+.meas ac vcloop PARAM eloop*50/6*60
+* 継ぎ目の隙間 g の損 (16 cm): 内部の磁路 l/mu_i と隙間 g と外の磁路 (l/mu_rod - l/mu_i) の直列
+.meas ac mugap01 PARAM 0.16/(0.16/mui+0.1m+(0.16/murod(0.16)-0.16/mui))
+.meas ac mugap05 PARAM 0.16/(0.16/mui+0.5m+(0.16/murod(0.16)-0.16/mui))
+.end

@@ -7,7 +7,7 @@ tier: 50
 source: 自作
 board: BB
 era: 古
-ja: ce16c3495602916ca8870c5a05f1005c1307e20f
+ja: 37ba2fcf00a56bfdd653b0ca9d6cd5e6e2bacd29
 ---
 
 # 9-2 Germanium Radio
@@ -135,7 +135,7 @@ wires:
 
 ![Breadboard wiring diagram](https://tommie-jp.github.io/tommie-circuit-workbook/en/01-circuits/09-rf/breadboard/02-crystal-radio.svg)
 
-- **The antenna wire is 5–10 m** of insulated wire, strung outdoors or by a window. The longer it is, the more stations you can receive.
+- **The antenna wire is 5–10 m** of insulated wire, strung outdoors or by a window. The longer it is, the more stations you can receive. How it compares with a ferrite bar and an air-core loop is in 2-12 of 05-etc ([2-12](../../../05-etc/02-radio-clock/12-antenna-compare.md), Japanese only).
 - Connect the top −t rail (blue) to a **real earth ground**. Run a wire to a water pipe or a ground rod
   (this is not only the common line of the circuit; it is a path that really sends current into the earth).
 - Columns 3 and 5 are the antenna net (ANT, A of VC1, the left pin of L1, the anode of D1, the upper pin of RS).
