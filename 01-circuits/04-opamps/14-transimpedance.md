@@ -91,7 +91,7 @@ parts:
   Rf: resistor b16 b10 10k cap=left
   Cf: capacitor d16 d10 100p cap=left
   D2: photodiode c19(A) c16(K) BPW34
-  D1: led c21(A) c23(K) red cap=above
+  D1: led c21(A) c23(K) red cap=above i=6.4mA
   R1: resistor d21 d25 330
 wires:
   - AD3.V- -- -b1 blue

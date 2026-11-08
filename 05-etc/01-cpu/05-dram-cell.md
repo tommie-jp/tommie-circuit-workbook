@@ -220,7 +220,7 @@ parts:
   U3: dip8 @ e21 MCP6002
   S3: button @ f27
   R5: resistor b32 b35 820
-  D1: led a35(A) -t35(K) red
+  D1: led a35(A) -t35(K) red i=3.8mA
   R3: resistor a38 +t38 10k
   R4: resistor c38 c41 3.3k
 wires:

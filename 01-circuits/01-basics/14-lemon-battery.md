@@ -74,7 +74,7 @@ parts:
   B2: battery d9(+) d6(-) 0.9V
   B3: battery b12(+) b9(-) 0.9V
   B4: battery d15(+) d12(-) 0.9V
-  D1: led c17 c20 red
+  D1: led c17 c20 red i=0.44mA
   AD:
     type: device
     at: top

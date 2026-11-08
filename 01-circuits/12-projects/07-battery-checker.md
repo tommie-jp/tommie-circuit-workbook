@@ -113,13 +113,13 @@ parts:
   RD: resistor l8 n8 1k
   RE: resistor l7 l5 10k
   R1: resistor j22 j20 330
-  D1: led j19 j17 green
+  D1: led j19 j17 green i=8.5mA
   R2: resistor p22 p20 330
-  D2: led p19 p17 green
+  D2: led p19 p17 green i=8.5mA
   R3: resistor r22 r20 330
-  D3: led r19 r17 yellow
+  D3: led r19 r17 yellow i=8.8mA
   R4: resistor h22 h20 330
-  D4: led h19 h17 red
+  D4: led h19 h17 red i=8.8mA
   BT1: sip2 c8
   S1: button f9
   RL: resistor i7 k7 33

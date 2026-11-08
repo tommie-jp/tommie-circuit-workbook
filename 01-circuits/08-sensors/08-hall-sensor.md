@@ -69,7 +69,7 @@ parts:
     pins: [V+, GND]
   U1: ic3 b8(VCC) b9(GND) b10(OUT) A3144
   R1: resistor b13 b17 330
-  D1: led e17(A) e10(K) red
+  D1: led e17(A) e10(K) red i=8.5mA
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black

@@ -241,11 +241,11 @@ title: 図3 GND は − のレールに。状態の LED は右の 27〜36 列。
 board: full
 parts:
   MCU: pico2 @ h5
-  D1: led g27(A) g28(K) green cap=below:0,1
+  D1: led g27(A) g28(K) green cap=below:0,1 i=3.9mA
   R1: resistor j28 -b28 330
-  D2: led g31(A) g32(K) yellow cap=below:0,1
+  D2: led g31(A) g32(K) yellow cap=below:0,1 i=3.9mA
   R2: resistor j32 -b32 330
-  D3: led g35(A) g36(K) red cap=below:0,1
+  D3: led g35(A) g36(K) red cap=below:0,1 i=3.9mA
   R3: resistor j36 -b36 330
   DP:
     type: device

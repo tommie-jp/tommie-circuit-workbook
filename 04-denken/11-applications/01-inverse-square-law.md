@@ -64,7 +64,7 @@ parts:
     label: 電池 4.5V
     pins: ["+", "-"]
   R1: resistor d3 d8 240
-  D1: led/5mm b8(A) b10(K)
+  D1: led/5mm b8(A) b10(K) i=10mA
   SUP:
     type: device
     at: top

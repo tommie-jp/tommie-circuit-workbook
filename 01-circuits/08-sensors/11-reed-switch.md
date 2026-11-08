@@ -93,7 +93,7 @@ parts:
   U1: dip14 @ e16 74HC14
   C2: capacitor/ceramic c13 c16 100n
   R3: resistor i17 i24 1k cap=above
-  D1: led h24(A) h27(K) red
+  D1: led h24(A) h27(K) red i=2.8mA
   SC:
     type: device
     at: bottom

@@ -72,7 +72,7 @@ parts:
   S1: slide-switch e15(1) e16(C) e17(2)
   C1: capacitor/electrolytic h16(+) h19(-) 1000uF
   R2: resistor a19 a24 1k
-  D1: led b24(A) b25(K) red
+  D1: led b24(A) b25(K) red i=3mA
   PS:
     type: device
     at: top

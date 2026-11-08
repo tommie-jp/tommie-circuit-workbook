@@ -77,7 +77,7 @@ parts:
   R1: resistor b6 b10 10k
   Q1: transistor h6(B) h7(C) h8(E) 2SC1815
   R2: resistor i12 i16 330
-  D1: led g16(A) g7(K) red
+  D1: led g16(A) g7(K) red i=9mA
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black

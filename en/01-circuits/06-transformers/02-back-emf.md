@@ -65,7 +65,7 @@ parts:
   S1: switch b3 b5
   R1: resistor b8 b12 180 cap=above:1,0
   L1: inductor/axial b15 b20 100m
-  D1: led d20(A) d15(K)
+  D1: led d20(A) d15(K) i=24mA
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black

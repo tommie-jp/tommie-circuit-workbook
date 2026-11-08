@@ -87,13 +87,13 @@ parts:
     label: AD3 Scope
     pins: [1+, 1-, 2-, 2+]
   R1: resistor b2 b5 330
-  D1: led c5(A) c7(K) red
+  D1: led c5(A) c7(K) red i=8.5mA
   R4: resistor b8 b12 100k
   C1: capacitor/electrolytic a7(+) a11(-) 10uF
   R3: resistor b18 b22 100k
   C2: capacitor/electrolytic a23(+) a19(-) 10uF
   R2: resistor b25 b28 330
-  D2: led c25(A) c23(K) red
+  D2: led c25(A) c23(K) red i=8.5mA
   Q1: transistor h6(E) h7(C) h8(B) 2SC1815
   Q2: transistor h22(B) h23(C) h24(E) 2SC1815
 wires:

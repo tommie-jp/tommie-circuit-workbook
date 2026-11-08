@@ -83,7 +83,7 @@ parts:
   Q1: transistor m8 l8 k8 2SC1815
   R4: resistor l16 l12 10k
   Q2: transistor r8 q8 p8 2SC1815
-  D2: led q14 q11 white
+  D2: led q14 q11 white i=9.5mA
   R5: resistor s16 s14 47
   BT1: sip2 w10
 wires:

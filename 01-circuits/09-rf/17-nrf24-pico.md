@@ -196,7 +196,7 @@ parts:
   C1: capacitor/electrolytic f40 f43 10u
   C2: capacitor/ceramic h40 h43 100n
   R1: resistor i24 i28 330
-  D1: led g28 g31
+  D1: led g28 g31 i=3.9mA
 wires:
   - MCU.3V3 -- +t9 red
   - MCU.GND38 -- -t7 black

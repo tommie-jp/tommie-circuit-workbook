@@ -123,13 +123,13 @@ parts:
   MCU: pico2 @ h5
   U1: dip16 @ e30 r180 74HC595
   RA: resistor j42 -b42 330
-  DA: led h40(A) h42(K) red
+  DA: led h40(A) h42(K) red i=3.9mA
   RB: resistor a42 -t42 330
-  DB: led d40(A) d42(K) red
+  DB: led d40(A) d42(K) red i=3.9mA
   RC: resistor a46 -t46 330
-  DC: led d44(A) d46(K) red
+  DC: led d44(A) d46(K) red i=3.9mA
   RD: resistor a50 -t50 330
-  DD: led d48(A) d50(K) red
+  DD: led d48(A) d50(K) red i=3.9mA
   AD:
     type: device
     at: bottom

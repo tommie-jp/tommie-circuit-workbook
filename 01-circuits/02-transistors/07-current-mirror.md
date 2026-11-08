@@ -92,7 +92,7 @@ parts:
   RREF: resistor b6 b11 560
   Q1: transistor e10(E) e11(C) e12(B) 2SC1815
   Q2: transistor e13(B) e14(C) e15(E) 2SC1815
-  D1: led c17(A) c14(K) red
+  D1: led c17(A) c14(K) red i=7.6mA
   RS: resistor b22 b17 47
   AD:
     type: device

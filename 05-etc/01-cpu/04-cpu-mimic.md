@@ -463,13 +463,13 @@ parts:
   S2: button @ e22
   R12: resistor j26 +b26 10k
   R24: resistor e43 g43 820
-  D24: led c43(A) c44(K) red
+  D24: led c43(A) c44(K) red i=3.8mA
   R23: resistor e46 g46 820
-  D23: led c46(A) c47(K) red
+  D23: led c46(A) c47(K) red i=3.8mA
   R22: resistor e49 g49 820
-  D22: led c49(A) c50(K) red
+  D22: led c49(A) c50(K) red i=3.8mA
   R21: resistor e52 g52 820
-  D21: led c52(A) c53(K) red
+  D21: led c52(A) c53(K) red i=3.8mA
 wires:
   - IN.+5V -- +t5 red
   - IN.GND -- -t6 black

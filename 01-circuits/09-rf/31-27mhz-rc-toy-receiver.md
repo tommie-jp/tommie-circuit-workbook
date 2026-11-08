@@ -221,7 +221,7 @@ parts:
   Rt1: resistor e12 i12 100k
   Rt2: resistor k12 q12 1k
   Rled: resistor d15 h15 470
-  LED: led i15 m15 red
+  LED: led i15 m15 red i=3.2mA
 wires:
   - AD.V+ -- c4 red
   - c4 -- c9 red

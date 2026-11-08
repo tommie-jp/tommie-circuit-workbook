@@ -78,7 +78,7 @@ parts:
   C1: capacitor/electrolytic c12(+) -t13 1F cap=below
   SW1: switch c16 c19
   R1: resistor b19 b23 220
-  D2: led c23(A) c26(K) red
+  D2: led c23(A) c26(K) red i=13.5mA
 wires:
   - d8 -- d10 orange
   - e10 -- e12 orange

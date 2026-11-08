@@ -356,17 +356,17 @@ parts:
   U1: dip16 @ e27 74HC283
   U3: dip14 @ e39 74HC86
   R13: resistor e48 g48 820
-  D4: led h48(A) h49(K) red
+  D4: led h48(A) h49(K) red i=3.8mA
   R12: resistor e51 g51 820
-  D3: led i51(A) i52(K) red
+  D3: led i51(A) i52(K) red i=3.8mA
   R11: resistor e54 g54 820
-  D2: led h54(A) h55(K) red
+  D2: led h54(A) h55(K) red i=3.8mA
   R10: resistor e57 g57 820 cap=right
-  D1: led h57(A) h58(K) red
+  D1: led h57(A) h58(K) red i=3.8mA
   R14: resistor e59 g59 820 cap=right
-  D5: led i59(A) i60(K) green cap=below:0.5,0
+  D5: led i59(A) i60(K) green cap=below:0.5,0 i=3.5mA
   R15: resistor e61 g61 820 cap=right
-  D6: led h61(A) h62(K) yellow cap=below:0.2,0
+  D6: led h61(A) h62(K) yellow cap=below:0.2,0 i=3.5mA
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black

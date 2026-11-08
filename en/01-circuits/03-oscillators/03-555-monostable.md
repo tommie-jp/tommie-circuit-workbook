@@ -89,7 +89,7 @@ parts:
   SW1: button @ f4
   R2: resistor g11 g7 10k
   R3: resistor g12 g16 330
-  D1: led h16(A) h19(K) red
+  D1: led h16(A) h19(K) red i=6mA
 wires:
   - AD3.V+ -- +t2 red
   - AD3.GND -- -t3 black

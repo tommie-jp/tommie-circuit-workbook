@@ -82,7 +82,7 @@ parts:
   Q1: transistor e12(B) e13(C) e14(E) 2SC1815
   Q2: transistor e17(B) e18(C) e19(E) 2SC1815
   RC: resistor b25 b20 470
-  D1: led c20(A) c18(K) red
+  D1: led c20(A) c18(K) red i=4.7mA
   TP1:
     type: device
     at: top

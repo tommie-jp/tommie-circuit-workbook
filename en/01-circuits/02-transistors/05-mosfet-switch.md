@@ -79,7 +79,7 @@ title: Fig. 2 Switching with a 2N7000
 board: half
 parts:
   R1: resistor b5 b8 330
-  D1: led c8(A) c9(K) red
+  D1: led c8(A) c9(K) red i=9.1mA
   Q1: transistor e13(D) e14(G) e15(S) 2N7000
   RG: resistor b21 b14 220
   RPD: resistor a14 -t14 100k

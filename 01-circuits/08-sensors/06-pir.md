@@ -70,7 +70,7 @@ parts:
     label: HC-SR501 (PIR モジュール)
     pins: [VCC, OUT, GND]
   R1: resistor c10 c14 150
-  D1: led e14(A) e18(K) red
+  D1: led e14(A) e18(K) red i=8.7mA
   AD:
     type: device
     at: bottom

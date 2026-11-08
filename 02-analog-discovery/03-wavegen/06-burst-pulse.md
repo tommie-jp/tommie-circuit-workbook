@@ -48,7 +48,7 @@ title: 図2 ブレッドボードと Analog Discovery 3
 board: half
 parts:
   R1: resistor c5 c10 100
-  D1: led d10(A) d12(K) red
+  D1: led d10(A) d12(K) red i=10mA
   AD:
     type: device
     at: top

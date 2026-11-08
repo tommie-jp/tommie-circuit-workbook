@@ -60,7 +60,7 @@ title: 図2 ブレッドボードで LED とボタンをつなぐ
 board: half
 parts:
   R1: resistor c3 c8 470
-  D1: led d8(A) d10(K) red
+  D1: led d8(A) d10(K) red i=2.8mA
   SW1: button @ e20
   R2: resistor j20 j25 10k
   AD:

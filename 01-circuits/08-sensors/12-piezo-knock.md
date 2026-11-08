@@ -115,7 +115,7 @@ parts:
   R4: resistor g25 g29 100k
   R5: resistor j25 -b25 10k
   R6: resistor d15 d19 1k
-  D4: led h19(A) h20(K) red cap=above
+  D4: led h19(A) h20(K) red cap=above i=3mA
   C2: capacitor/ceramic b18 b20 100n
   SC:
     type: device

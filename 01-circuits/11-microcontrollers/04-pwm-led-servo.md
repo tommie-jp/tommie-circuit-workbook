@@ -92,7 +92,7 @@ board: full
 parts:
   MCU: pico2 @ h5
   R1: resistor i24 i28 330 cap=above
-  D1: led h28(A) h30(K) red
+  D1: led h28(A) h30(K) red i=3.9mA
   PS:
     type: device
     at: bottom

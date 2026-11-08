@@ -46,7 +46,7 @@ title: 図2 ブレッドボードで LED の電流を測る (2-4 と同じ)
 board: half
 parts:
   R1: resistor b8 b12 330
-  D1: led c12(A) c14(K) red
+  D1: led c12(A) c14(K) red i=9.1mA
   Rs: resistor e14 e18 1R
   AD:
     type: device

@@ -63,9 +63,9 @@ title: 図2 色の違う LED と逆向きの LED
 board: half
 parts:
   R1: resistor b5 b8 330
-  D1: led c8(A) c9(K) red
+  D1: led c8(A) c9(K) red i=9.1mA
   R2: resistor b12 b15 330
-  D2: led c15(A) c16(K) blue
+  D2: led c15(A) c16(K) blue i=5.5mA
   R3: resistor b19 b22 330
   D3: led c23(A) c22(K) red
   PS:

@@ -98,7 +98,7 @@ parts:
   Rg: resistor g46 g41 220
   Q1: transistor b40(S) b41(G) b42(D) 2N7000
   RLED: resistor b52 b49 470
-  DLED: led c49(A) c46(K) red
+  DLED: led c49(A) c46(K) red i=6.4mA
   PS:
     type: device
     at: top
@@ -182,7 +182,7 @@ parts:
   Rg: resistor l10 p10 220
   Q1: transistor o8 p8 q8 2N7000
   RLED: resistor r14 r12 470
-  DLED: led r11 r9 red
+  DLED: led r11 r9 red i=6.4mA
 wires:
   # Power rail (row 18, top) and GND rail (row 5, bottom)
   - VCC -- b18 red

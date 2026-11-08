@@ -142,11 +142,11 @@ board: full
 parts:
   MCU: pico2 @ h5
   SW1: button @ e1
-  D1: led f30(A) f32(K) green
+  D1: led f30(A) f32(K) green i=3.9mA
   R1: resistor j32 -b32 330
-  D2: led f36(A) f38(K) yellow
+  D2: led f36(A) f38(K) yellow i=3.9mA
   R2: resistor j38 -b38 330
-  D3: led g42(A) g44(K) red
+  D3: led g42(A) g44(K) red i=3.9mA
   R3: resistor j44 -b44 330
   AD:
     type: device

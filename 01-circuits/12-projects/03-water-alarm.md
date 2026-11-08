@@ -115,7 +115,7 @@ parts:
   Q2: transistor i10 h10 g10 2SC1815
   Buzzer: buzzer n15 n12
   RLED: resistor r17 r15 330
-  DLED: led r14 r12 red
+  DLED: led r14 r12 red i=6.7mA
 wires:
   - P1.W -- f17
   - j17 -- n17 red

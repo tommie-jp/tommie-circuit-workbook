@@ -84,7 +84,7 @@ parts:
   R3: resistor a25 -t25 10k
   Rpu: resistor c11 c7 10k cap=above
   R4: resistor d11 d5 1k
-  D1: led +t4 a4 red
+  D1: led +t4 a4 red i=3mA
 wires:
   - AD3.V+ -- +t2 red
   - AD3.GND -- -t3 black

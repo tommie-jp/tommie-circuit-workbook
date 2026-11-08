@@ -103,7 +103,7 @@ parts:
   C1: capacitor/ceramic i8 i10 1u
   U1: dip14 @ e14 74HC14
   R3: resistor i15 i22 330
-  D1: led g22(A) g25(K) red
+  D1: led g22(A) g25(K) red i=9mA
 wires:
   - PS.V+ -- +t1 red
   - PS.GND -- -t2 black

@@ -134,17 +134,17 @@ parts:
   SW: button @ e9
   RPD: resistor j11 -b11 10k
   U2: dip16 @ e22 CD4017
-  L1: led f14(A) e14(K) red
+  L1: led f14(A) e14(K) red i=2.2mA
   RL1: resistor a14 -t14 1k
-  L2: led f17(A) e17(K) red
+  L2: led f17(A) e17(K) red i=2.2mA
   RL2: resistor a17 -t17 1k
-  L3: led f20(A) e20(K) red
+  L3: led f20(A) e20(K) red i=2.2mA
   RL3: resistor a20 -t20 1k
-  L4: led f32(A) e32(K) red
+  L4: led f32(A) e32(K) red i=2.2mA
   RL4: resistor a32 -t32 1k
-  L5: led e35(A) f35(K) red
+  L5: led e35(A) f35(K) red i=2.2mA
   RL5: resistor j35 -b35 1k
-  L6: led f38(A) e38(K) red
+  L6: led f38(A) e38(K) red i=2.2mA
   RL6: resistor a38 -t38 1k
 wires:
   - PS.V+ -- +t2 red

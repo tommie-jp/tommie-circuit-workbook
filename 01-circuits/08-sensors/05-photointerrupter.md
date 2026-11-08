@@ -73,10 +73,10 @@ parts:
     label: Analog Discovery 3 (Supplies)
     pins: [V+, GND]
   R1: resistor b3 b6 220
-  D1: led d6(A) d9(K)
+  D1: led d6(A) d9(K) i=17.3mA
   R2: resistor b12 b16 10k
   Q1: phototransistor d16(C) d19(E)
-  D2: led d26(A) d22(K) red
+  D2: led d26(A) d22(K) red i=8.5mA
   R4: resistor b26 b29 330
   R3: resistor g16 g20 10k
   Q2: transistor h21(B) h22(C) h23(E) 2SC1815

@@ -92,7 +92,7 @@ parts:
     at: top
     label: Analog Discovery 3
     pins: [1+, 2+, 1-, 2-, GND]
-  D1: led c10(A) c11(K) red
+  D1: led c10(A) c11(K) red i=10mA
   RS: resistor e11 e15 10
 wires:
   - PSU.+ -- +t3 red

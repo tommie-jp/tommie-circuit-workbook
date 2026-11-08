@@ -55,7 +55,7 @@ title: 図2 ブレッドボードで抵抗ありで LED を V+ につなぐ
 board: half
 parts:
   R1: resistor b5 b8 330
-  D1: led c8(A) c10(K) red
+  D1: led c8(A) c10(K) red i=9.1mA
   AD:
     type: device
     at: top

@@ -53,9 +53,9 @@ title: Fig. 2 One column is one net
 board: half
 parts:
   R1: resistor b8 b13 330
-  D1: led d13(A) d14(K) red
+  D1: led d13(A) d14(K) red i=9.1mA
   R2: resistor c8 c4 330
-  D2: led e4(A) e3(K) green
+  D2: led e4(A) e3(K) green i=8.8mA
   PS:
     type: device
     at: top

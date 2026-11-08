@@ -138,13 +138,13 @@ parts:
     label: AD3 Scope
     pins: [1-, 1+, 2+, 2-]
   RQ1: resistor a32 a34 1k
-  DQ1: led c34(A) c36(K) red
+  DQ1: led c34(A) c36(K) red i=2.2mA
   RQ2: resistor a38 a40 1k
-  DQ2: led c40(A) c42(K) red
+  DQ2: led c40(A) c42(K) red i=2.2mA
   RQ3: resistor a44 a46 1k
-  DQ3: led c46(A) c48(K) red
+  DQ3: led c46(A) c48(K) red i=2.2mA
   RQ4: resistor a50 a52 1k
-  DQ4: led c52(A) c54(K) red
+  DQ4: led c52(A) c54(K) red i=2.2mA
 wires:
   - PS.V+ -- +t1 red
   - PS.GND -- -t2 black

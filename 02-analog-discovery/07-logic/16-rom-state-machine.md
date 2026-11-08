@@ -84,11 +84,11 @@ parts:
   SW1: button @ e5
   R1: resistor h7 h10 10k
   RR: resistor i12 i15 1k
-  DR: led h15(A) h17(K) red
+  DR: led h15(A) h17(K) red i=1.3mA
   RY: resistor i18 i21 1k
-  DY: led h21(A) h23(K) yellow
+  DY: led h21(A) h23(K) yellow i=1.3mA
   RG: resistor i24 i27 1k
-  DG: led h27(A) h29(K) green
+  DG: led h27(A) h29(K) green i=1.3mA
   AD:
     type: device
     at: bottom

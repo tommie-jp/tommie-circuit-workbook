@@ -101,7 +101,7 @@ parts:
     label: AD3 Scope (OUT の電圧を見る)
     pins: [1+, 1-]
   Rled: resistor c10 c14 390
-  Dled: led b14(A) b18(K) red
+  Dled: led b14(A) b18(K) red i=4.9mA
 wires:
   - M1.B+ -- PK.+ red
   - M1.B- -- PK.- black

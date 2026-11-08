@@ -139,11 +139,11 @@ parts:
   U2: dip14 @ e38 CD4071
   U3: dip14 @ e52 CD4069
   R1: resistor g26 g33 1k
-  D1: led h33(A) h35(K) red
+  D1: led h33(A) h35(K) red i=2.2mA
   R2: resistor g40 g45 1k
-  D2: led h45(A) h46(K) red
+  D2: led h45(A) h46(K) red i=2.2mA
   R3: resistor g53 g60 1k
-  D3: led h60(A) h62(K) red
+  D3: led h60(A) h62(K) red i=2.2mA
   PS:
     type: device
     at: top

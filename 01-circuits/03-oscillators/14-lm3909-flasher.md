@@ -95,9 +95,9 @@ parts:
     label: AD3 (V− −5V・CH2)
     pins: [2+, V-, 2-]
   U1: dip8 @ e10 LM3909
-  D1: led b12(A) b10(K) red
+  D1: led b12(A) b10(K) red i=45mA
   CT: capacitor/electrolytic i11(+) i8(-) 330uF
-  D2: led b20(A) b22(K) red
+  D2: led b20(A) b22(K) red i=11mA
   RS: resistor g22 g27 10
 wires:
   - AD.V+ -- +t2 red

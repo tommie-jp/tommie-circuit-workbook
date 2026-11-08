@@ -56,7 +56,7 @@ title: 図2 ブレッドボードで V+ から 330 Ω と LED を GND へ
 board: half
 parts:
   R1: resistor c5 c10 330
-  D1: led d10(A) d14(K) red
+  D1: led d10(A) d14(K) red i=9.1mA
   AD:
     type: device
     at: top

@@ -143,13 +143,13 @@ board: full
 parts:
   U1: pico2 @ g15
   R4: resistor g3 c3 330
-  D4: led b3(A) b4(K) red
+  D4: led b3(A) b4(K) red i=4mA
   R3: resistor g6 c6 330
-  D3: led b6(A) b7(K) red
+  D3: led b6(A) b7(K) red i=4mA
   R2: resistor g9 c9 330
-  D2: led b9(A) b10(K) red
+  D2: led b9(A) b10(K) red i=4mA
   R1: resistor g12 c12 330
-  D1: led b12(A) b13(K) red
+  D1: led b12(A) b13(K) red i=4mA
   SW1: dip-switch4 @ e37 r180
   AD:
     type: device

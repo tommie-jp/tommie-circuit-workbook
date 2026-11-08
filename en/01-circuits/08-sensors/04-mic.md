@@ -75,7 +75,7 @@ parts:
   R2: resistor b12 b16 100k
   MK1: mic h7 h10
   Q1: transistor h12(B) h13(C) h14(E) 2SC1815
-  D1: led f18(A) f13(K) red
+  D1: led f18(A) f13(K) red i=4.3mA
   R3: resistor h18 h22 220
 wires:
   - AD.V+ -- +t1 red
@@ -193,7 +193,7 @@ parts:
   RS: resistor i3 i7 10k
   RD: resistor h7 h10 100
   Q1: transistor h12(B) h13(C) h14(E) 2SC1815
-  D1: led f18(A) f13(K) red
+  D1: led f18(A) f13(K) red i=4.3mA
   R3: resistor h18 h22 220
 wires:
   - AD.V+ -- +b1 red

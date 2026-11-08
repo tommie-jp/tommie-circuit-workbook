@@ -104,7 +104,7 @@ parts:
     label: AD3 Wavegen と Scope
     pins: [W1, 1-, 2-, 2+, 1+]
   R1: resistor b2 b5 330
-  D1: led c5(A) c7(K) red
+  D1: led c5(A) c7(K) red i=8.6mA
   C1: capacitor/electrolytic a7(+) a11(-) 10uF
   R2: resistor b11 b15 47k
   RC2: resistor b18 b21 1k

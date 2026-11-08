@@ -341,21 +341,21 @@ sheets:
       S2: slide-switch c39(1) c40(C) c41(2)
       S3: slide-switch c36(1) c37(C) c38(2)
       R0: resistor e63 f63 330
-      D0: led a63(A) -t63(K)
+      D0: led a63(A) -t63(K) i=3.9mA
       R1: resistor e61 f61 330
-      D1: led a61(A) -t61(K)
+      D1: led a61(A) -t61(K) i=3.9mA
       R2: resistor e59 f59 330
-      D2: led a59(A) -t59(K)
+      D2: led a59(A) -t59(K) i=3.9mA
       R3: resistor e57 f57 330
-      D3: led a57(A) -t57(K)
+      D3: led a57(A) -t57(K) i=3.9mA
       R4: resistor e55 f55 330
-      D4: led a55(A) -t55(K)
+      D4: led a55(A) -t55(K) i=3.9mA
       R5: resistor e53 f53 330
-      D5: led a53(A) -t53(K)
+      D5: led a53(A) -t53(K) i=3.9mA
       R6: resistor e51 f51 330
-      D6: led a51(A) -t51(K)
+      D6: led a51(A) -t51(K) i=3.9mA
       R7: resistor e49 f49 330
-      D7: led a49(A) -t49(K)
+      D7: led a49(A) -t49(K) i=3.9mA
     wires:
       - b7 -- +t7 red
       - a5 -- -t5 black

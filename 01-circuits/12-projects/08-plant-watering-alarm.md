@@ -97,7 +97,7 @@ parts:
   R3: resistor m16 m13 47k
   R4: resistor o16 o13 100k
   R5: resistor q16 q14 330
-  D1: led q13 q11 red
+  D1: led q13 q11 red i=8.7mA
   C1: capacitor/electrolytic k12 n12 22u
   C2: capacitor/electrolytic q10 m10 4.7u
   Q2: transistor j8 k8 l8 2SC1815

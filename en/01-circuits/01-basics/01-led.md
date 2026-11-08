@@ -46,7 +46,7 @@ title: Fig. 2 Building it on the breadboard
 board: half
 parts:
   R1: resistor b5 b10 330
-  D1: led c10(A) c11(K) red
+  D1: led c10(A) c11(K) red i=9.1mA
   PS:
     type: device
     at: top

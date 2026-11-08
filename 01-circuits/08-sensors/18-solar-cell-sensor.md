@@ -78,7 +78,7 @@ parts:
     label: Analog Discovery 3 (W1・CH2)
     pins: [GND, 2+, W1, 2-]
   R2: resistor c22 c26 220
-  D2: led b26(A) b28(K) white
+  D2: led b26(A) b28(K) white i=9mA
   PV1: solar g14 g8
   R1: resistor i14 -b14 100
   SC:

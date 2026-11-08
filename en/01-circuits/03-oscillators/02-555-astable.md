@@ -92,7 +92,7 @@ parts:
   C1: capacitor/electrolytic i9(+) i5(-) 10uF
   Cc: capacitor d13 d20 10n
   R1: resistor g12 g16 220
-  D1: led h16(A) h19(K) red
+  D1: led h16(A) h19(K) red i=6.8mA
 wires:
   - AD3.V+ -- +t2 red
   - AD3.GND -- -t3 black
