@@ -117,7 +117,7 @@ parts:
   R4: resistor g24 g28 1M
   C3: capacitor/film b24 b28 100n cap=below:2,0
   R6: resistor a28 -t28 10k
-  E1: speaker e28 e30 l=イヤホン
+  E1: speaker e28 e30 l=イヤホン(数百kΩ) cap=below:-2,1
   AD:
     type: device
     at: top
