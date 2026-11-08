@@ -23,8 +23,9 @@ parts:
   AD:
     type: device
     at: 1,1
+    turn: mirror
     label: Analog Discovery
-    pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
+    pins: [2+, V+, W1, 1+, GND, 1-, 2-]
   Q1: npn 11,6 2SC1815
   R1: resistor 9,3 9,6 39k
   R2: resistor 9,6 9,9 12k
@@ -33,16 +34,17 @@ parts:
   Cin: capacitor 3,6 9,6 1u
 wires:
   - AD.V+ -| 9,3
-  - AD.V+ -| 14,3
+  - 9,3 -- 14,3
   - AD.W1 -| 3,6
   - AD.1+ -| 3,6
   - 9,6 |- Q1.B
   - 14,6 |- Q1.C
   - 17,6 -- 15,6 -- 15,7 -- 11,7 -- Q1.E
   - AD.2+ -| 20,5 -| 14,6
-  - AD.1- |- 9,9
-  - AD.2- |- 9,9
-  - AD.GND |- 9,9
+  - AD.GND -| 2.5,9
+  - AD.1- -| 2.5,9
+  - AD.2- -| 2.5,9
+  - 2.5,9 -- 9,9
   - 9,9 -- 17,9
 ```
 

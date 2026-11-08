@@ -23,13 +23,16 @@ title: 図1 Pico 2 の UART0 を AD3 で受ける
 parts:
   AD:
     type: device
-    at: 1,1
+    at: 1,2
+    turn: mirror
     label: Analog Discovery
-    pins: [GND, DIO0]
-  MCU: pico2 5,3
+    pins: [DIO0, GND]
+  MCU: pico2 5,4
 wires:
-  - AD.DIO0 -| MCU.GP0
-  - AD.GND -| MCU.GND3
+  - AD.DIO0 -| 3,1.75
+  - 3,1.75 -- MCU.GP0
+  - AD.GND -| 3,2.25
+  - 3,2.25 -- MCU.GND3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/03-uart-pico.svg)

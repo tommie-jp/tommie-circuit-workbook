@@ -28,14 +28,15 @@ parts:
   AD:
     type: device
     at: 1,2
+    turn: mirror
     label: Analog Discovery
-    pins: [V+, GND, W1, 1+, 1-, 2+, 2-]
-  Rb: resistor 5,1.25 5,5 220k
+    pins: [GND, 1-, 2-, 1+, W1, 2+, V+]
+  Rb: resistor 5,2.75 5,5 220k
   Q1: npn 9,6 2SC1815
   Rs: resistor 15,3 18,3 100
   G1: ground 21,6
 wires:
-  - AD.V+ -- 5,1.25
+  - AD.V+ -- 5,2.75
   - 5,5 |- Q1.B
   - AD.W1 -| 15,3
   - AD.2+ -| 15,3

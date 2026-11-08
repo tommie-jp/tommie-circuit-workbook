@@ -24,8 +24,9 @@ parts:
   AD:
     type: device
     at: 1,1
+    turn: mirror
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [GND, 2-, 2+, 1-, W1, 1+]
   R1: resistor 3,3 6,3 150
   Zrail: inductor 9,3 12,3 23n l=$\mathrm{Z_{rail}}$
   G1: ground 14,3

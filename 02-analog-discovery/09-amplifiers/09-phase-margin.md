@@ -31,8 +31,9 @@ parts:
   AD:
     type: device
     at: 1,2
+    turn: mirror
     label: Analog Discovery
-    pins: [V+, W1, 1+, 1-, 2+, 2-, GND]
+    pins: [2+, 1-, 1+, V+, W1, 2-, GND]
   Cin: capacitor 6,6 8,6 1u
   R1: resistor 8,4 8,6 100k
   R2: resistor 9,6 9,8 100k

@@ -27,13 +27,14 @@ parts:
   AD:
     type: device
     at: 1,1
+    turn: mirror
     label: Analog Discovery
-    pins: [GND, DIO0, DIO1]
+    pins: [DIO0, DIO1, GND]
   MCU: pico2 5,3
 wires:
-  - AD.DIO0 -| MCU.GP0
-  - AD.DIO1 -| MCU.GP1
-  - AD.GND -| MCU.GND3
+  - AD.DIO0 -- MCU.GP0
+  - AD.DIO1 -- MCU.GP1
+  - AD.GND -- MCU.GND3
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/06-uart-echo.svg)

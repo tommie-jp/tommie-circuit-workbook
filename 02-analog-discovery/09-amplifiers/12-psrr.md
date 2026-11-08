@@ -31,8 +31,9 @@ parts:
   AD:
     type: device
     at: 1,1
+    turn: mirror
     label: Analog Discovery
-    pins: [W1, 1+, 2+, 1-, V+, 2-, GND]
+    pins: [W1, 1+, 2+, V+, 1-, 2-, GND]
   U1: dip8 12,7 LM358
   R1: resistor 6,5 6,7.4 33k
   R2: resistor 6,7.4 6,9.5 22k

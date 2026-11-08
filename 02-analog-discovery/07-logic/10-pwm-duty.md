@@ -24,14 +24,15 @@ parts:
   AD:
     type: device
     at: 1,1
+    turn: mirror
     label: Analog Discovery
-    pins: [DIO0, GND]
-  R1: resistor 1,14 3,14 1k
-  D1: led 3,14 5,14 red
-  G1: ground 5,14
+    pins: [GND, DIO0]
+  R1: resistor 3,4 5,4 1k
+  D1: led 5,4 7,4 red
+  G1: ground 7,4
 wires:
-  - AD.DIO0 -| 1,14
-  - AD.GND -| 5,14
+  - AD.DIO0 -| 3,4
+  - AD.GND -| 7,4
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/10-pwm-duty.svg)

@@ -25,25 +25,27 @@ parts:
   AD:
     type: device
     at: 1,1
+    turn: mirror
     label: Analog Discovery
     pins: [W1, GND, 1+, 1-, 2+, 2-]
   ADP:
     type: device
-    at: 9,1
+    at: 9,1.25
     label: Z Analyzer Adapter
     pins: [W1, GND, 1+, 1-, 2+, 2-, DUT+, DUT-]
   DUT:
     type: device
-    at: 17,1
+    at: 5.5,4
+    turn: r90
     label: DUT
-    pins: [P1, P2]
+    pins: [P2, P1]
 wires:
-  - AD.W1 -| ADP.W1
-  - AD.GND -| ADP.GND
-  - AD.1+ -| ADP.1+
-  - AD.1- -| ADP.1-
-  - AD.2+ -| ADP.2+
-  - AD.2- -| ADP.2-
+  - AD.W1 -- ADP.W1
+  - AD.GND -- ADP.GND
+  - AD.1+ -- ADP.1+
+  - AD.1- -- ADP.1-
+  - AD.2+ -- ADP.2+
+  - AD.2- -- ADP.2-
   - ADP.DUT+ -| DUT.P1
   - ADP.DUT- -| DUT.P2
 ```

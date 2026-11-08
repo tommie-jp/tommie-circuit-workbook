@@ -25,8 +25,9 @@ parts:
   AD:
     type: device
     at: 1,1
+    turn: mirror
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [GND, 2-, 2+, 1-, W1, 1+]
   Rref: resistor 3,3 6,3 1k
   Rdut: resistor 9,3 12,3 1k l=$\mathrm{R_{DUT}}$
   G1: ground 14,3

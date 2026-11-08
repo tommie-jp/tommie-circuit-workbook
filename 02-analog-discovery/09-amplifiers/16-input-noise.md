@@ -28,6 +28,7 @@ parts:
   AD:
     type: device
     at: 1,1
+    turn: mirror
     label: Analog Discovery
     pins: [V+, 2+, 2-, GND]
   U1: dip8 12,7 LM358

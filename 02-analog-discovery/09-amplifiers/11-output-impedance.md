@@ -28,6 +28,7 @@ parts:
   AD:
     type: device
     at: 1,1
+    turn: mirror
     label: Analog Discovery
     pins: [2+, V+, W1, 1+, 1-, 2-, GND]
   Cin: ecap 7,6 5,6 10u

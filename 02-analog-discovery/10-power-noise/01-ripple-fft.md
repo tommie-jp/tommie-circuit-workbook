@@ -21,24 +21,29 @@ board: BB
 # 回路図 (tommie-fence の circuit フェンス)
 title: 図1 ブリッジ整流と平滑
 parts:
-  V1: sine 5,1 5,5 12.7
-  D1: diode 5,1 9,1 1N4007
-  D2: diode 5,5 9,1 1N4007
-  D3: diode 12,5 5,1 1N4007
-  D4: diode 12,5 5,5 1N4007
-  Csmooth: capacitor 9,1 12,5 470u
-  Rload: resistor 9,8 12,8 1k
+  V1: sine 4,2 4,6 12.7
+  D1: diode 4,2 6,4 1N4007
+  D2: diode 4,6 6,4 1N4007
+  D3: diode 2,4 4,2 1N4007
+  D4: diode 2,4 4,6 1N4007
+  Csmooth: capacitor 8,4 8,9 470u
+  Rload: resistor 10,4 10,9 1k
   AD:
     type: device
-    at: 1,11
+    at: 14,6.5
     label: Analog Discovery
-    pins: [GND, 1+, 1-]
+    pins: [1+, 1-, GND]
 wires:
-  - 9,1 -- 9,8
-  - 12,5 -- 12,8
-  - AD.1+ -| 9,8
-  - AD.1- -| 12,8
-  - AD.GND -| 12,8
+  - 6,4 -- 8,4
+  - 8,4 -- 10,4
+  - 10,4 -- 11.5,4
+  - 2,4 -- 2,9
+  - 2,9 -- 8,9
+  - 8,9 -- 10,9
+  - 10,9 -- 12.5,9
+  - AD.1+ -| 11.5,4
+  - AD.1- -| 12.5,9
+  - AD.GND -| 12.5,9
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/10-power-noise/circuit/01-ripple-fft.svg)

@@ -24,15 +24,16 @@ parts:
   AD:
     type: device
     at: 1,1
+    turn: mirror
     label: Analog Discovery
-    pins: [DIO0, GND, V+]
-  R1: resistor 1,14 3,14 10k
-  SW1: button 3,14 5,14
-  G1: ground 5,14
+    pins: [GND, DIO0, V+]
+  R1: resistor 3,4 5,4 10k
+  SW1: button 5,4 7,4
+  G1: ground 7,4
 wires:
-  - AD.V+ -| 1,14
-  - AD.DIO0 -| 3,14
-  - AD.GND -| 5,14
+  - AD.V+ -| 3,4
+  - AD.DIO0 -| 5,4
+  - AD.GND -| 7,4
 ```
 
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/02-analog-discovery/07-logic/circuit/09-switch-bounce.svg)

@@ -25,8 +25,9 @@ parts:
   AD:
     type: device
     at: 1,1
+    turn: mirror
     label: Analog Discovery
-    pins: [W1, GND, 1+, 1-, 2+, 2-]
+    pins: [GND, 1-, 2-, 2+, W1, 1+]
   Cstray: capacitor 3,3 9,3 2.5p l=$\mathrm{C_{stray}}$
   Rterm: resistor 9,3 12,3 100
   G1: ground 12,3

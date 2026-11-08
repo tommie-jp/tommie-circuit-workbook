@@ -24,6 +24,7 @@ parts:
   AD:
     type: device
     at: 1,1
+    turn: mirror
     label: Analog Discovery
     pins: [V-, 1+, V+, 2+, W1, 2-, 1-, GND]
   Q1: npn 10,4 2SC1815
