@@ -186,7 +186,7 @@ parts:
   RL9: resistor j50 -b50 1k
 wires:
   - PS.V+ -- +t2 red
-  - PS.GND -- -t3 black
+  - PS.GND -- -t4 black
   - +t63 -- +b63 red
   - -t62 -- -b62 black
   - a1 -- +t1 red

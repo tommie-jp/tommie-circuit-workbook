@@ -97,7 +97,7 @@ wires:
   - SC.1+ -- a36 green
   - SC.2+ -- a37 yellow
   - SC.1- -- -t43 black
-  - SC.2- -- -t44 black
+  - SC.2- -- -t45 black
 ```
 
 ![ブレッドボードの実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/01-circuits/11-microcontrollers/breadboard/05-i2c-temperature.svg)
