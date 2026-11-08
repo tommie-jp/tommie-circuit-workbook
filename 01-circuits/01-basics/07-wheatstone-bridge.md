@@ -72,7 +72,7 @@ parts:
   RX: resistor d24 d28 680
   SC:
     type: device
-    at: bottom
+    at: top
     label: AD3 Scope (DC 電圧計)
     pins: [1+, 1-]
   PS:
