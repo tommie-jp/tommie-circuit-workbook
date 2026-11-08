@@ -119,6 +119,7 @@ style:
 # ブレッドボードの実体配線図 (tommie-fence の breadboard フェンス)
 title: 図2 full のブレッドボードに 74HC4060・74HC393・74HC08・74HC390 を左から
 board: full
+parts-list: symbols
 parts:
   U1: dip16 @ e5 74HC4060
   U2: dip14 @ e18 74HC393
