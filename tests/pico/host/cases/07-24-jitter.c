@@ -4,6 +4,7 @@
 #include "pico/stdlib.h"
 #include "hardware/pwm.h"
 #include <math.h>
+#include <stdlib.h>   /* llabs (CI の gcc は宣言が無いと止まる) */
 static uint64_t next_isr = 0;
 static int64_t seen_delay = 0;   /* 本文の timer は main の中の変数なので、生きているうちに読む */
 static void isr(void) {
