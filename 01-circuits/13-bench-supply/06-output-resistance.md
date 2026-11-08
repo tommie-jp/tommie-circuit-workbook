@@ -80,7 +80,7 @@ parts:
     type: device
     at: top
     label: Analog Discovery 3 (W1 と Scope)
-    pins: [1+, 2-, 1-, W1, GND, 2+]
+    pins: [1+, 2-, 1-, GND, W1, 2+]
   RL: resistor/half d10 d16 56 cap=left
   Q1: transistor e14 e15 e16 2N7000
   RG: resistor c15 c12 100k cap=above
