@@ -107,6 +107,7 @@
 - { id: 5-25, tier: 100, board: BB, device: PICO, title: TD4 で入力を使う — DIP スイッチの値に 1 を足して LED に出す }
 - { id: 5-26, tier: 100, board: —, device: PICO, title: $display・$finish・$readmemh を Pico で使う — ビルドして確かめ、ROM は initial に埋める }
 - { id: 5-27, tier: 100, board: BB, device: PICO, title: 7 セグと押しボタンを確かめる — エミュレータで数え方、実機で電流と跳ね }
+- { id: 5-28, tier: 200, board: BB, device: PICO, title: 学習ボードをブレッドボードで組む — 7 セグ 4 桁・LED 8 個・スイッチ 8 個 }
 - { id: 6-1, tier: 50, board: —, device: SIM, title: 状態機械の書き方 — 状態のレジスタと、次の状態の case }
 - { id: 6-2, tier: 50, board: BB, device: PICO, title: 信号機 — 青・黄・赤と歩行者ボタン }
 - { id: 6-3, tier: 50, board: BB, device: PICO, title: 押しボタンのチャタリングを取る }
