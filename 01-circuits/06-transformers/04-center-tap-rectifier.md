@@ -106,7 +106,7 @@ parts:
     pins: [1+, 2+, 1-, 2-]
   D1: diode b8(A) b12(K) 1N4001
   D2: diode d14(A) d12(K) 1N4001
-  C1: capacitor/electrolytic a20(+) -t20(-) 1000u
+  C1: capacitor/electrolytic a20(+) -t20(-) 1000u v=25V
   RL: resistor/half d20 d24 220
 wires:
   - V1.OUT1 -- a8 yellow

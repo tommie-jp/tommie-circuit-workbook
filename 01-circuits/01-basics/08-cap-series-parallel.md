@@ -87,8 +87,8 @@ board: half
 parts:
   S1: button @ e5
   R1: resistor g7 g12 1k
-  C1: capacitor/electrolytic h12(+) h15(-) 100uF
-  C2: capacitor/electrolytic h18(+) h21(-) 100uF
+  C1: capacitor/electrolytic h12(+) h15(-) 100uF v=16V
+  C2: capacitor/electrolytic h18(+) h21(-) 100uF v=16V
   PS:
     type: device
     at: top
@@ -122,8 +122,8 @@ board: half
 parts:
   S1: button @ e5
   R2: resistor g7 g12 1k
-  C3: capacitor/electrolytic h12(+) h15(-) 100uF
-  C4: capacitor/electrolytic f15(+) f18(-) 100uF
+  C3: capacitor/electrolytic h12(+) h15(-) 100uF v=16V
+  C4: capacitor/electrolytic f15(+) f18(-) 100uF v=16V
   PS:
     type: device
     at: top
@@ -155,8 +155,8 @@ title: 図5 並列の C1・C2 に Analog Discovery をつなぐ
 board: half
 parts:
   R1: resistor c5 c10 1k
-  C1: capacitor/electrolytic d10(+) d13(-) 100uF
-  C2: capacitor/electrolytic b10(+) b16(-) 100uF
+  C1: capacitor/electrolytic d10(+) d13(-) 100uF v=16V
+  C2: capacitor/electrolytic b10(+) b16(-) 100uF v=16V
   AD:
     type: device
     at: top

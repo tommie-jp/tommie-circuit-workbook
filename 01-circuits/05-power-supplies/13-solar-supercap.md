@@ -75,10 +75,10 @@ parts:
     pins: ["-", "+"]
   D1: schottky b4(A) b8(K) 1N5819
   DZ: zener a10(K) -t10 5.1V
-  C1: capacitor/electrolytic c12(+) -t13 1F cap=below
+  C1: capacitor/electrolytic c12(+) -t13 1F cap=below v=5.5V
   SW1: switch c16 c19
   R1: resistor b19 b23 220
-  D2: led c23(A) c26(K) red i=13.5mA
+  D2: led c23(A) c26(K) red i=13.5mA vf=1.9V
 wires:
   - d8 -- d10 orange
   - e10 -- e12 orange

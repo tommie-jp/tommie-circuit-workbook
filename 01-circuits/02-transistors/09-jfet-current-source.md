@@ -99,7 +99,7 @@ parts:
     at: top
     label: AD3 Scope (DC 電圧計)
     pins: [1+, 1-]
-  D1: led b7(A) b12(K) red i=0.82mA
+  D1: led b7(A) b12(K) red i=0.82mA vf=2.0V
   J1: transistor e10(S) e11(G) e12(D) 2SK30A
   RS: resistor a10 -t10 470
 wires:

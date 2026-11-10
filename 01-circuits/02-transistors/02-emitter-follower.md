@@ -80,10 +80,10 @@ board: half
 parts:
   R1: resistor b5 b10 22k
   R2: resistor a10 -t10 10k
-  CIN: capacitor/electrolytic d4(-) d10(+) 10uF
+  CIN: capacitor/electrolytic d4(-) d10(+) 10uF v=16V
   Q1: transistor e10(B) e12(C) e14(E) 2SC1815
   RE: resistor a14 -t14 1k
-  COUT: capacitor/electrolytic b14(+) b18(-) 10uF
+  COUT: capacitor/electrolytic b14(+) b18(-) 10uF v=16V
   RL: resistor a18 -t18 1k
   AD:
     type: device
@@ -160,10 +160,10 @@ board: half
 parts:
   R1: resistor b5 b10 22k
   R2: resistor a10 -t10 10k
-  CIN: capacitor/electrolytic d4(-) d10(+) 10uF
+  CIN: capacitor/electrolytic d4(-) d10(+) 10uF v=16V
   Q1: transistor e10(B) e12(C) e14(E) 2SC1815
   RE: resistor a14 -t14 1k
-  COUT: capacitor/electrolytic b14(+) b18(-) 10uF
+  COUT: capacitor/electrolytic b14(+) b18(-) 10uF v=16V
   CH0:
     type: device
     at: top

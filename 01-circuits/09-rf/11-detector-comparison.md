@@ -189,7 +189,7 @@ parts:
   Q1: transistor e19(B) e20(C) e21(E) 2SC1815 cap=below
   CIN: capacitor/ceramic d5 d9 0.1u
   RE: resistor a21 -t21 4.7k cap=right
-  CE: capacitor/electrolytic b21(+) b29(-) 100uF
+  CE: capacitor/electrolytic b21(+) b29(-) 100uF v=16V
   CC: capacitor/ceramic c20 c23 2.2n cap=right
 wires:
   - AD.V+ -- +t1 red

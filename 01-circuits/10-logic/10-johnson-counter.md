@@ -162,27 +162,27 @@ parts:
   U555: dip8 @ e3 NE555
   R1: resistor b4 b1 10k
   R2: resistor c4 c8 68k
-  C1: capacitor/electrolytic i8 i11 2.2u
+  C1: capacitor/electrolytic i8 i11 2.2u v=16V
   U2: dip16 @ e22 CD4017
-  L0: led f14(A) e14(K) red i=2.2mA
+  L0: led f14(A) e14(K) red i=2.2mA vf=1.8V
   RL0: resistor a14 -t14 1k
-  L1: led f17(A) e17(K) red i=2.2mA
+  L1: led f17(A) e17(K) red i=2.2mA vf=1.8V
   RL1: resistor a17 -t17 1k
-  L2: led f20(A) e20(K) red i=2.2mA
+  L2: led f20(A) e20(K) red i=2.2mA vf=1.8V
   RL2: resistor a20 -t20 1k
-  L3: led f32(A) e32(K) red i=2.2mA
+  L3: led f32(A) e32(K) red i=2.2mA vf=1.8V
   RL3: resistor a32 -t32 1k
-  L4: led e35(A) f35(K) red i=2.2mA
+  L4: led e35(A) f35(K) red i=2.2mA vf=1.8V
   RL4: resistor j35 -b35 1k
-  L5: led f38(A) e38(K) red i=2.2mA
+  L5: led f38(A) e38(K) red i=2.2mA vf=1.8V
   RL5: resistor a38 -t38 1k
-  L6: led f41(A) e41(K) red i=2.2mA
+  L6: led f41(A) e41(K) red i=2.2mA vf=1.8V
   RL6: resistor a41 -t41 1k
-  L7: led f44(A) e44(K) red i=2.2mA
+  L7: led f44(A) e44(K) red i=2.2mA vf=1.8V
   RL7: resistor a44 -t44 1k
-  L8: led e47(A) f47(K) red i=2.2mA
+  L8: led e47(A) f47(K) red i=2.2mA vf=1.8V
   RL8: resistor j47 -b47 1k
-  L9: led e50(A) f50(K) red i=2.2mA
+  L9: led e50(A) f50(K) red i=2.2mA vf=1.8V
   RL9: resistor j50 -b50 1k
 wires:
   - PS.V+ -- +t2 red

@@ -123,7 +123,7 @@ parts:
   U555: dip8 @ e5 NE555
   R1: resistor b6 b3 10k
   R2: resistor c6 c9 47k
-  C1: capacitor/electrolytic i9 i12 10u
+  C1: capacitor/electrolytic i9 i12 10u v=16V
   RRST: resistor c17 c14 10k
   SWRST: button @ e17
   U40: dip16 @ e22 CD4040
@@ -138,13 +138,13 @@ parts:
     label: AD3 Scope
     pins: [1-, 1+, 2+, 2-]
   RQ1: resistor a32 a34 1k
-  DQ1: led c34(A) c36(K) red i=2.2mA
+  DQ1: led c34(A) c36(K) red i=2.2mA vf=1.8V
   RQ2: resistor a38 a40 1k
-  DQ2: led c40(A) c42(K) red i=2.2mA
+  DQ2: led c40(A) c42(K) red i=2.2mA vf=1.8V
   RQ3: resistor a44 a46 1k
-  DQ3: led c46(A) c48(K) red i=2.2mA
+  DQ3: led c46(A) c48(K) red i=2.2mA vf=1.8V
   RQ4: resistor a50 a52 1k
-  DQ4: led c52(A) c54(K) red i=2.2mA
+  DQ4: led c52(A) c54(K) red i=2.2mA vf=1.8V
 wires:
   - PS.V+ -- +t1 red
   - PS.GND -- -t2 black

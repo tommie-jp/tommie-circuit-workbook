@@ -94,7 +94,7 @@ parts:
     at: bottom
     label: AD3 (Wavegen と Scope)
     pins: [2+, 1-, W1, 1+, 2-]
-  CB: capacitor/electrolytic b3(+) b6(-) 470uF
+  CB: capacitor/electrolytic b3(+) b6(-) 470uF v=16V
   L1: inductor/toroid b10 b14 FT37-43 80t
   R1: resistor c14 c18 15
   DF: diode d18 d20 1N4148 cap=below:3,0

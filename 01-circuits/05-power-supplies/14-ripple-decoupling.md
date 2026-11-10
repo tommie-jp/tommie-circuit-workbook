@@ -79,7 +79,7 @@ parts:
     label: Analog Discovery 3 (W1・CH1)
     pins: [1-, 1+, W1]
   RW: resistor c4 c8 2.2
-  CB: capacitor/electrolytic +t12(+) -t12(-) 100uF
+  CB: capacitor/electrolytic +t12(+) -t12(-) 100uF v=16V
   CD: capacitor +t15 -t15 0.1uF
   RD: resistor b20 b26 220
   Q1: transistor f24 f25 f26 2N7000 cap=below:2,0

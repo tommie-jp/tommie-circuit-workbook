@@ -95,7 +95,7 @@ parts:
     pins: [V+, GND, 1-, 2-, 1+, 2+]
   Q1: transistor h9 h10 h11 2SC1815 cap=right
   RE: resistor i9 i5 1k
-  CE: capacitor/electrolytic f9(+) f5(-) 100uF
+  CE: capacitor/electrolytic f9(+) f5(-) 100uF v=16V
   R2: resistor j11 -b11 10k cap=right
   RC: resistor b6 b10 4.7k
   R1: resistor b11 b15 33k

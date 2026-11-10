@@ -114,13 +114,13 @@ parts:
     pins: [V+, GND, DIO6, DIO5, DIO4, DIO3, DIO0, DIO1, DIO2]
   U1: dip16 @ e34 74HC595
   RA: resistor c35 c32 330
-  DA: led b32(A) b29(K) red i=9.1mA
+  DA: led b32(A) b29(K) red i=9.1mA vf=2.0V
   RB: resistor c27 c24 330
-  DB: led b24(A) b21(K) red i=9.1mA
+  DB: led b24(A) b21(K) red i=9.1mA vf=2.0V
   RC: resistor c19 c16 330
-  DC: led b16(A) b13(K) red i=9.1mA
+  DC: led b16(A) b13(K) red i=9.1mA vf=2.0V
   RD: resistor c11 c8 330
-  DD: led b8(A) b5(K) red i=9.1mA
+  DD: led b8(A) b5(K) red i=9.1mA vf=2.0V
   SER: switch h44 h47
   RpdS: resistor i44 i41 10k
   SRCLK: button @ e50

@@ -46,7 +46,7 @@ title: 図2 ブレッドボードに組む
 board: half
 parts:
   R1: resistor b5 b10 330
-  D1: led c10(A) c11(K) red i=9.1mA
+  D1: led c10(A) c11(K) red i=9.1mA vf=2.0V
   PS:
     type: device
     at: top

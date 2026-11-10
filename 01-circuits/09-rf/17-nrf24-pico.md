@@ -158,7 +158,7 @@ parts:
     at: bottom
     label: nRF24L01+ (技適付き)
     pins: [SCK, MOSI, MISO, CSN, CE, VCC, GND, IRQ]
-  C1: capacitor/electrolytic f40 f43 10u
+  C1: capacitor/electrolytic f40 f43 10u v=16V
   C2: capacitor/ceramic h40 h43 100n
   SW1: button @ e26
 wires:
@@ -193,10 +193,10 @@ parts:
     at: bottom
     label: nRF24L01+ (技適付き)
     pins: [SCK, MOSI, MISO, CSN, CE, VCC, GND, IRQ]
-  C1: capacitor/electrolytic f40 f43 10u
+  C1: capacitor/electrolytic f40 f43 10u v=16V
   C2: capacitor/ceramic h40 h43 100n
   R1: resistor i24 i28 330
-  D1: led g28 g31 i=3.9mA
+  D1: led g28 g31 i=3.9mA vf=2.0V
 wires:
   - MCU.3V3 -- +t9 red
   - MCU.GND38 -- -t7 black

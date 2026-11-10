@@ -1110,7 +1110,7 @@ parts:
   S14: switch e4 e7
   C14: capacitor/ceramic b10 b12 1u
   R15: resistor b15 b19 100k
-  C15: capacitor/electrolytic d15 d18 10u
+  C15: capacitor/electrolytic d15 d18 10u v=16V
   U45: dip14 @ e24 CD40106B
   U41: dip14 @ e34 74HC32
   U44: dip14 @ e44 74HC74

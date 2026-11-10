@@ -52,7 +52,7 @@ title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
   R1: resistor f5 f7 1k
-  D1: led/5mm g7(A) g9(K) red i=1.3mA
+  D1: led/5mm g7(A) g9(K) red i=1.3mA vf=2.0V
   AD:
     type: device
     at: bottom

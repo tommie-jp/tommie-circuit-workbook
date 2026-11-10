@@ -76,11 +76,11 @@ parts:
   Q1: transistor e12(B) e16(C) e20(E) 2SC1815
   RB1: resistor +t8 b8 47k
   RB2: resistor a12 -t12 10k
-  C1: capacitor/electrolytic d8 g8 10u
+  C1: capacitor/electrolytic d8 g8 10u v=16V
   RC: resistor +t16 b16 1k
-  C2: capacitor/electrolytic c16 c13 10u
+  C2: capacitor/electrolytic c16 c13 10u v=16V
   RE: resistor b20 -t20 100
-  CE: capacitor/electrolytic d20 d26 100u
+  CE: capacitor/electrolytic d20 d26 100u v=16V
   R1: resistor h3 h8 1k
   R2: resistor i13 i8 1k
   AD:

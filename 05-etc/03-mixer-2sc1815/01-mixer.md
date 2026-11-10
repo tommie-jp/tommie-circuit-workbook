@@ -178,7 +178,7 @@ parts:
   L2: inductor h37 h44 100u
   R8: resistor g44 g48 51
   C6: capacitor/ceramic g55 g58 100n
-  C7: capacitor/electrolytic i55 i58 10u
+  C7: capacitor/electrolytic i55 i58 10u v=16V
   AD:
     type: device
     at: bottom

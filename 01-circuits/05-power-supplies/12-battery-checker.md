@@ -101,11 +101,11 @@ parts:
   RC: resistor d9 d13 2k
   RD: resistor a13 -t13 10k
   R1: resistor i14 i10 330
-  D1: led j10(A) j6(K) green i=4.5mA
+  D1: led j10(A) j6(K) green i=4.5mA vf=2.0V
   R2: resistor j20 j24 330
-  D2: led h24(A) h27(K) yellow i=4.5mA
+  D2: led h24(A) h27(K) yellow i=4.5mA vf=2.0V
   R3: resistor b20 b24 330
-  D3: led c24(A) c27(K) red i=4.5mA
+  D3: led c24(A) c27(K) red i=4.5mA vf=2.0V
 wires:
   - AD.V+ -- +t3 red
   - AD.GND -- -t4 black

@@ -100,7 +100,7 @@ parts:
   Cf: capacitor/ceramic i8 i13 22p
   PD1: photodiode h20 h17
   R2: resistor c22 c26 330
-  D2: led b26(A) b28(K) red i=6.4mA
+  D2: led b26(A) b28(K) red i=6.4mA vf=1.9V
   SC:
     type: device
     at: bottom

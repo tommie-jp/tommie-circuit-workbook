@@ -74,8 +74,8 @@ parts:
     label: Analog Discovery 3 (CH2)
     pins: [2+, 2-]
   U1: dip8 @ e10 ICL7660
-  C1: capacitor/electrolytic h11(+) h13(-) 10uF
-  C2: capacitor/electrolytic -t16(+) a16(-) 10uF
+  C1: capacitor/electrolytic h11(+) h13(-) 10uF v=16V
+  C2: capacitor/electrolytic -t16(+) a16(-) 10uF v=16V
   RL: resistor a20 -t21 1k
 wires:
   - AD.V+ -- +t5 red

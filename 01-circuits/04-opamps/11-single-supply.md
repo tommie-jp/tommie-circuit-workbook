@@ -100,7 +100,7 @@ parts:
   U1: dip8 @ e10 LM358
   R1: resistor j12 +b12 10k
   R2: resistor j14 -b14 10k
-  Cbyp: capacitor/electrolytic h14(+) h17(-) 10u
+  Cbyp: capacitor/electrolytic h14(+) h17(-) 10u v=16V
   Rbias: resistor b13 b8 100k
   Rg: resistor d12 d8 10k cap=left
   Cin: capacitor d13 d16 1u

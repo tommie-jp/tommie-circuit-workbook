@@ -288,13 +288,13 @@ parts:
   S1: button @ f35
   R6: resistor a37 +t37 10k cap=left
   R10: resistor b46 b43 820 cap=below:-1.5,0
-  D4: led a43(A) -t43(K) red i=3.8mA
+  D4: led a43(A) -t43(K) red i=3.8mA vf=1.9V
   R9: resistor b51 b48 820
-  D3: led a48(A) -t48(K) red i=3.8mA
+  D3: led a48(A) -t48(K) red i=3.8mA vf=1.9V
   R8: resistor e54 g54 820
-  D2: led c54(A) c55(K) red i=3.8mA
+  D2: led c54(A) c55(K) red i=3.8mA vf=1.9V
   R7: resistor e57 g57 820
-  D1: led c57(A) c58(K) red i=3.8mA
+  D1: led c57(A) c58(K) red i=3.8mA vf=1.9V
 wires:
   - AD.V+ -- +t62 red
   - AD.GND -- -t61 black

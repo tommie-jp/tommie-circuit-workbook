@@ -79,7 +79,7 @@ parts:
   R3: resistor b15 b18 100k
   Q2: transistor c20(B) c21(C) c22(E) 2SC1815
   R1: resistor g4 g8 1M
-  D1: led h25(A) h21(K) red i=8.5mA
+  D1: led h25(A) h21(K) red i=8.5mA vf=2.0V
   R4: resistor f25 f28 330
 wires:
   - AD.V+ -- +t1 red

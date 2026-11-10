@@ -58,7 +58,7 @@ points:
 parts:
   J1: sma/female-edge a10 011 09
   J2: sma/female-edge x10 y9
-  C1: capacitor/electrolytic f10 f7 10u
+  C1: capacitor/electrolytic f10 f7 10u v=16V
   C2: capacitor/ceramic k10 k7 100n
 wires:
   - a10 -- f10

@@ -90,7 +90,7 @@ parts:
   R1: resistor f1 f6 1k
   D1: diode i10(A) i13(K) 1N4148
   R2: resistor g17 g21 330
-  D2: led h21(A) h22(K) red i=9mA
+  D2: led h21(A) h22(K) red i=9mA vf=2.0V
 wires:
   - PSU.+ -- +t2 red
   - PSU.- -- -t3 black

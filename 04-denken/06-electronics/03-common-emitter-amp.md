@@ -76,8 +76,8 @@ parts:
   R2: resistor d22 d19 10k
   RC: resistor b30 b23 2.2k
   RE: resistor d24 d28 470
-  Cin: capacitor/electrolytic c22(+) c5 10u
-  Cout: capacitor/electrolytic c23(+) c38 10u
+  Cin: capacitor/electrolytic c22(+) c5 10u v=16V
+  Cout: capacitor/electrolytic c23(+) c38 10u v=16V
   Q1: transistor e22(B) e23(C) e24(E) 2SC1815
   AD:
     type: device

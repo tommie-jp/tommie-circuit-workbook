@@ -279,7 +279,7 @@ parts:
   RE2: resistor h33 h36 430
   CE: capacitor/ceramic f33 f36 1u
   C6: capacitor/ceramic g43 g46 100n
-  C7: capacitor/electrolytic i43 i46 10u
+  C7: capacitor/electrolytic i43 i46 10u v=16V
   CT: capacitor/ceramic c47 c50 100n
   LT: inductor b50 b53 220u
   CTK: capacitor/ceramic d50 d53 560p

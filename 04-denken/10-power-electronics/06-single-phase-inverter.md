@@ -75,8 +75,8 @@ title: 図2 ブレッドボードと Analog Discovery
 # 赤レール = 5 V (AD の V+)、青レール = GND。上下は 29・30 列でつなぐ
 board: half
 parts:
-  D1: led b16(A) b18(K) red i=14mA
-  D2: led d18(A) d16(K) red i=14mA
+  D1: led b16(A) b18(K) red i=14mA vf=1.9V
+  D2: led d18(A) d16(K) red i=14mA vf=1.9V
   R1: resistor h10 h16 220
   DRV:
     type: device

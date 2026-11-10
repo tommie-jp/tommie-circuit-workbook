@@ -69,7 +69,7 @@ parts:
   D4: diode d8(A) d11(K) 1N4001
   D1: diode g5(A) g8(K) 1N4001
   D2: diode i11(A) i8(K) 1N4001
-  C1: capacitor/electrolytic g16(+) g20(-) 1000uF
+  C1: capacitor/electrolytic g16(+) g20(-) 1000uF v=25V
   RL: resistor i16 i20 220
   GEN:
     type: device

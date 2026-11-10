@@ -144,7 +144,7 @@ parts:
   Rgpd: resistor o6 o3 100k
   Q1: transistor s4 s5 s6 2N7000
   RLED: resistor w17 w15 330
-  DLED: led w14 w12 red i=9.1mA
+  DLED: led w14 w12 red i=9.1mA vf=2.0V
 wires:
   # 5V (17 行・赤)、VL 3.3V (15 行・橙)、GND (1 行・黒) の筋
   - PWR -- m17 red

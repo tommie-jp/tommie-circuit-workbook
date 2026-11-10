@@ -77,9 +77,9 @@ board: half
 parts:
   U1: regulator/to220 c8(in) c9(gnd) c10(out) AMS1117-3.3
   Cin: capacitor g5 g8 10uF
-  Cout: capacitor/electrolytic g10 g13 22uF
+  Cout: capacitor/electrolytic g10 g13 22uF v=16V
   Rled: resistor b14 b20 150
-  Dled: led d20(A) d23(K) red i=8.7mA
+  Dled: led d20(A) d23(K) red i=8.7mA vf=2.0V
   AD:
     type: device
     at: bottom
@@ -136,9 +136,9 @@ parts:
   J2: usb-c/female t5 u5 v5 w5
   U1: regulator i14 j14 k14
   Cin: capacitor g14 g11 10u
-  Cout: capacitor/electrolytic n17 n13 22u
+  Cout: capacitor/electrolytic n17 n13 22u v=16V
   Rled: resistor q17 q14 150
-  Dled: led q12 q9 red i=8.7mA
+  Dled: led q12 q9 red i=8.7mA vf=2.0V
 wires:
   - e5 -- e6 black
   - e6 -- g6 black

@@ -107,12 +107,12 @@ board: half
 parts:
   U1: dip8 @ e12 LM393
   R8: resistor b5 b9 680
-  D2: led c9 c13 green i=4.4mA
+  D2: led c9 c13 green i=4.4mA vf=2.1V
   RC: resistor a14 -t14 3.0k
   RB: resistor c14 c18 3.0k cap=above
   RA: resistor b18 b22 4.3k
   R7: resistor h4 h8 680
-  D1: led g8 g12 red i=4.4mA
+  D1: led g8 g12 red i=4.4mA vf=1.9V
   R5: resistor j24 -b24 1M
   R4: resistor g24 g28 1M
   C3: capacitor/film b24 b28 100n cap=below:2,0

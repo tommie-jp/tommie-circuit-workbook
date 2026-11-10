@@ -86,7 +86,7 @@ parts:
   R1: resistor d10 d14 100
   R2: resistor i10 i15 10k
   Q1: transistor g15(B) g16(C) g17(E) 2SC1815
-  D1: led c17(A) c16(K) red i=9mA
+  D1: led c17(A) c16(K) red i=9mA vf=1.8V
   R3: resistor b17 b21 330
   AD:
     type: device

@@ -112,7 +112,7 @@ parts:
   D1: schottky d25 d28 1N5819
   CF: capacitor a28 -t28 1u
   R2: resistor b28 b30 47
-  DL: led d30(A) d29(K) red i=6.2mA
+  DL: led d30(A) d29(K) red i=6.2mA vf=1.8V
 wires:
   - AD.V+ -- +t3 red
   - AD.GND -- -t4 black

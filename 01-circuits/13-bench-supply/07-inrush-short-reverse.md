@@ -80,7 +80,7 @@ parts:
     label: Analog Discovery 3 (CH1)
     pins: [1+, 1-]
   D1: schottky c5(A) c9(K) 1N5819
-  C1: capacitor/electrolytic +t12(+) -t12(-) 470uF
+  C1: capacitor/electrolytic +t12(+) -t12(-) 470uF v=16V
   RL: resistor +t16 -t16 1k
   RS: resistor c20 c24 1
 wires:

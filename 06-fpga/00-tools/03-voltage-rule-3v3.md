@@ -74,7 +74,7 @@ board: full
 parts:
   MCU: pico2 @ h5
   R1: resistor a30 a33 330
-  D1: led c33(A) c36(K) red i=3.9mA
+  D1: led c33(A) c36(K) red i=3.9mA vf=2.0V
   AD:
     type: device
     at: top

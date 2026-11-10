@@ -114,15 +114,15 @@ parts:
   RC1: resistor a17 +t17 4.7k
   RE1A: resistor c18 c21 100
   RE1B: resistor a21 -t21 910
-  CE1: capacitor/electrolytic d21(+) d24(-) 100uF
+  CE1: capacitor/electrolytic d21(+) d24(-) 100uF v=16V
   C12: capacitor c26 c30 1uF
   R3: resistor a30 +t30 20k
   R4: resistor b30 b34 10k
   Q2: transistor d38(B) d39(C) d40(E) 2SC1815 cap=below
   RC2: resistor a39 +t39 2.2k
   RE2: resistor j40 -b40 1k
-  CE2: capacitor/electrolytic h40(+) h44(-) 100uF
-  CF: capacitor/electrolytic g39(+) g35(-) 10uF
+  CE2: capacitor/electrolytic h40(+) h44(-) 100uF v=16V
+  CF: capacitor/electrolytic g39(+) g35(-) 10uF v=16V
   RF: resistor h35 h30 2.2k
   AD:
     type: device

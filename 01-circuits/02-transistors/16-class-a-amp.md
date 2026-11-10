@@ -79,12 +79,12 @@ A 級の効率の上限は、負荷を抵抗で直に受ける形で 25 %、定�
 title: 図2 A 級のエミッタフォロアとスピーカー
 board: half
 parts:
-  CIN: capacitor/electrolytic c9(+) c5(-) 10uF
+  CIN: capacitor/electrolytic c9(+) c5(-) 10uF v=16V
   R1: resistor a9 +t9 1.2k
   R2: resistor b9 b13 1.8k
   Q1: transistor e16(B) e17(C) e18(E) 2SC1815 cap=below
   RE: resistor a18 -t18 56
-  COUT: capacitor/electrolytic c18(+) c23(-) 470uF
+  COUT: capacitor/electrolytic c18(+) c23(-) 470uF v=16V
   SP: speaker b23 b27
   AD:
     type: device

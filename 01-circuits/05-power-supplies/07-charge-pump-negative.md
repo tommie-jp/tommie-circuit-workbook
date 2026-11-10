@@ -102,7 +102,7 @@ parts:
   Cp: capacitor h18 h22 1u
   D1: diode i22(A) -b22(K) 1N4148
   D2: diode g26(A) g22(K) 1N4148
-  Co: capacitor/electrolytic -b26(+) i26(-) 10u
+  Co: capacitor/electrolytic -b26(+) i26(-) 10u v=16V
   RL: resistor i30 -b30 1k
 wires:
   - BAT.+9V -- +t1 red

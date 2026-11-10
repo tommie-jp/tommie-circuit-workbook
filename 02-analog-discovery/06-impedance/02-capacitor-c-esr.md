@@ -55,7 +55,7 @@ title: 図2 ブレッドボードと Analog Discovery
 board: half
 parts:
   Rref: resistor c5 c10 33
-  Cdut: capacitor/electrolytic d10(+) d14(-) 4.7uF
+  Cdut: capacitor/electrolytic d10(+) d14(-) 4.7uF v=16V
   AD:
     type: device
     at: top

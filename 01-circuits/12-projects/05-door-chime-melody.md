@@ -81,7 +81,7 @@ parts:
   SW1: button b13
   R1: resistor e11 h11 1k
   DZ: zener j6 j10 3.0V
-  C1: capacitor/electrolytic l11 l7 100u
+  C1: capacitor/electrolytic l11 l7 100u v=16V
   U1: ic3 p9 o9 n9 UM66T
   R2: resistor q7 u7 4.7k
   Q1: transistor x7 w7 v7 2SC1815

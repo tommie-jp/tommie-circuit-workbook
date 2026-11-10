@@ -79,12 +79,12 @@ board: half
 parts:
   RS: resistor c3 c8 22k
   S2: switch e3 e8
-  Cin: capacitor/electrolytic c12(+) c9 10u
+  Cin: capacitor/electrolytic c12(+) c9 10u v=16V
   R1: resistor a12 +t12 47k
   R2: resistor j12 -b12 47k
   Q1: transistor e14(B) e15(C) e16(E) 2SC1815 cap=below
   RE: resistor a17 -t17 1k
-  Cout: capacitor/electrolytic c16(+) c20 100u
+  Cout: capacitor/electrolytic c16(+) c20 100u v=16V
   S1: switch c21 c23
   RL: resistor d23 d28 100
   AD:

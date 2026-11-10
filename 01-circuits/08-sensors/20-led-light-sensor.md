@@ -82,10 +82,10 @@ parts:
     label: Analog Discovery 3 (Supplies・W1・CH2)
     pins: [V+, GND, 2+, W1, 2-]
   Q1: transistor f15 f16 f17 2SC1815
-  D1: led i17(A) i20(K) red
+  D1: led i17(A) i20(K) red vf=2.0V
   RC: resistor h16 h23 10k cap=above
   R2: resistor c22 c26 330
-  D2: led b26(A) b28(K) red i=6.4mA
+  D2: led b26(A) b28(K) red i=6.4mA vf=2.0V
   SC:
     type: device
     at: bottom

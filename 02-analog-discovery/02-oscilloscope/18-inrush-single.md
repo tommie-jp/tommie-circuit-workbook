@@ -62,7 +62,7 @@ parts:
     pins: [V+, GND, 1-, 1+, 2+, 2-]
   SW1: button @ f10
   R1: resistor c12 c18 220
-  C1: capacitor/electrolytic b18 b21 100u cap=below:2,0
+  C1: capacitor/electrolytic b18 b21 100u cap=below:2,0 v=10V
   RL: resistor d18 d24 1k
 wires:
   - AD.V+ -- +t4 red

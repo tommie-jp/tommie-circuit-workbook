@@ -96,7 +96,7 @@ parts:
   Rref: resistor c27 c23 10k
   Rh: resistor d11 d23 100k
   R1: resistor c11 c9 220
-  D1: led b9(A) b6(K) red i=6.8mA
+  D1: led b9(A) b6(K) red i=6.8mA vf=2.0V
   DP: diode d6(A) d9(K) 1N4148
 wires:
   - AD3.V+ -- +t2 red

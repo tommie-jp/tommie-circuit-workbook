@@ -73,9 +73,9 @@ wires:
 title: 図2 ブレッドボードと Analog Discovery (RL は抜き差しする)
 board: half
 parts:
-  Cin: capacitor/electrolytic c20(+) c16(-) 10uF
+  Cin: capacitor/electrolytic c20(+) c16(-) 10uF v=16V
   R1: resistor b24 b20 22k
-  Cout: capacitor/electrolytic d22(+) d27(-) 100uF
+  Cout: capacitor/electrolytic d22(+) d27(-) 100uF v=16V
   RL: resistor a27 -t27 47
   Q1: transistor g20(B) g21(C) g22(E) 2SC1815
   R2: resistor h20 h15 10k

@@ -94,11 +94,11 @@ parts:
   R3: resistor a13 -t13 12k
   R2: resistor b13 b17 6.8k
   R1: resistor a17 +t17 22k
-  CB: capacitor/electrolytic c17(+) c20(-) 10uF
+  CB: capacitor/electrolytic c17(+) c20(-) 10uF v=16V
   Q1: transistor g11 g12 g13 2SC1815 cap=left
   Q2: transistor g15 g16 g17 2SC1815
   RE: resistor j11 -b11 820 cap=right
-  CE: capacitor/electrolytic i11(+) i7(-) 100uF
+  CE: capacitor/electrolytic i11(+) i7(-) 100uF v=16V
   RC: resistor j16 +b16 2.2k
   AD:
     type: device

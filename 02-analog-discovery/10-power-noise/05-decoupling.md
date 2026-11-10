@@ -63,7 +63,7 @@ parts:
     label: Analog Discovery 3
     pins: [GND, W1, 1+, 2+, 1-, 2-]
   R1: resistor c4 c8 100
-  C2: capacitor/electrolytic +t13(+) -t13(-) 100uF
+  C2: capacitor/electrolytic +t13(+) -t13(-) 100uF v=16V
   C3: capacitor +t17 -t17 10uF
   C1: capacitor +t21 -t21 0.1uF
 wires:

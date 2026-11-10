@@ -70,7 +70,7 @@ parts:
   Cout: capacitor f10 f13 0.1uF
   RL: resistor f14 f18 1k
   Rled: resistor h14 h20 680
-  Dled: led f20(A) f23(K) red i=4.4mA
+  Dled: led f20(A) f23(K) red i=4.4mA vf=2.0V
   AD:
     type: device
     at: bottom
@@ -130,7 +130,7 @@ parts:
   Cout: capacitor/ceramic k9 k6 0.1u
   RL: resistor m9 m5 1k
   Rled: resistor p9 p6 680
-  Dled: led p5 p3 red i=4.4mA
+  Dled: led p5 p3 red i=4.4mA vf=2.0V
 wires:
   - b15 -- b17 red
   - b17 -- e17 red

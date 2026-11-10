@@ -76,7 +76,7 @@ parts:
     pins: [V+, V-, W1, 1+, 2+, 1-, 2-]
   U1: regulator/to220 f15 f16 f17 7805
   R3: resistor f4 f8 150
-  C3: capacitor/electrolytic i11(+) i8(-) 100uF
+  C3: capacitor/electrolytic i11(+) i8(-) 100uF v=16V
   R1: resistor g7 g11 100
   C1: capacitor i15 i16 0.33uF cap=left
   C2: capacitor g16 g17 0.1uF cap=right

@@ -87,10 +87,10 @@ parts:
   R1: resistor b2 b6 10k
   R2: resistor c6 c10 10k
   RC1: resistor b13 b16 220
-  D1: led c16(A) c17(K) red cap=below:-1,0 i=4.1mA
+  D1: led c16(A) c17(K) red cap=below:-1,0 i=4.1mA vf=2.0V
   RE: resistor b20 b23 220
   RC2: resistor b25 b28 220
-  D2: led c28(A) c29(K) red cap=below:-1,0 i=4.1mA
+  D2: led c28(A) c29(K) red cap=below:-1,0 i=4.1mA vf=2.0V
   VR1: potentiometer b32(1) b33(w) b34(3) 10k
   Q1: transistor g25(B) g26(C) g27(E) 2SC1815
   Q2: transistor g31(B) g30(C) g29(E) 2SC1815

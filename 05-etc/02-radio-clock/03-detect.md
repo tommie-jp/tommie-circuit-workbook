@@ -303,7 +303,7 @@ parts:
   Rf: resistor i8 i12 100k
   Ra: resistor a15 +t15 10k
   Rb: resistor b15 b18 10k
-  Cb: capacitor/electrolytic d15 d20 10u
+  Cb: capacitor/electrolytic d15 d20 10u v=16V
   R6: resistor j20 +b20 6.2k
   VR1: potentiometer g20(A) g22(W) g24(B) 2k
   R7: resistor j24 -b24 5.6k
@@ -362,7 +362,7 @@ parts:
   Rf: resistor h8 l8 100k
   Ra: resistor p17 p15 10k
   Rb: resistor p13 p4 10k
-  Cb: capacitor/electrolytic r13 r4 10u
+  Cb: capacitor/electrolytic r13 r4 10u v=16V
   R6: resistor s17 s14 6.2k
   VR1: potentiometer/trimmer s12 t12 u12 2k
   R7: resistor u10 u4 5.6k

@@ -593,8 +593,8 @@ parts:
   C32: capacitor/ceramic h30 h33 1u
   VR1: potentiometer f33(1) f34(W) f35(3) 10k
   U4: dip8 @ e38 LM386
-  C35: capacitor/electrolytic +t37 -t37 100u
-  C33: capacitor/electrolytic d41 d46 220u
+  C35: capacitor/electrolytic +t37 -t37 100u v=16V
+  C33: capacitor/electrolytic d41 d46 220u v=16V
   R32: resistor b41 b44 10
   C34: capacitor/ceramic a44 -t44 47n
 wires:

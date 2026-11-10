@@ -500,7 +500,7 @@ parts:
     at: top
     label: スピーカー 8Ω
     pins: ["1", "2"]
-  C1: capacitor/electrolytic d4 d1 10u
+  C1: capacitor/electrolytic d4 d1 10u v=16V
   Rb2: resistor b4 b2 22k
   D3: diode a9(A) a5(K) 1N4148 cap=below:1,1
   D2: diode c13(A) c9(K) 1N4148
@@ -510,7 +510,7 @@ parts:
   Q5: transistor g13(B) g14(C) g15(E) 2SC2120 cap=below:3,1
   Q6: transistor g21(B) g22(C) g23(E) 2SA950
   Rf: resistor a19 a23 30k
-  C2: capacitor/electrolytic b23 b27 220u
+  C2: capacitor/electrolytic b23 b27 220u v=16V
 wires:
   - PWR.+5V -- +t3 red
   - PWR.GND -- -t4 black

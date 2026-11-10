@@ -350,13 +350,13 @@ sheets:
         pins: [CLR, P0, P1, P2]
       U1: dip16 @ e10 74HC163
       R4: resistor e18 g18 820
-      D4: led h18(A) h19(K) red i=3.8mA
+      D4: led h18(A) h19(K) red i=3.8mA vf=1.9V
       R3: resistor e21 g21 820
-      D3: led h21(A) h22(K) red i=3.8mA
+      D3: led h21(A) h22(K) red i=3.8mA vf=1.9V
       R2: resistor e24 g24 820
-      D2: led h24(A) h25(K) red i=3.8mA
+      D2: led h24(A) h25(K) red i=3.8mA vf=1.9V
       R1: resistor e27 g27 820
-      D1: led h27(A) h28(K) red i=3.8mA
+      D1: led h27(A) h28(K) red i=3.8mA vf=1.9V
     wires:
       - AD.V+ -- +t1 red
       - AD.GND -- -t2 black

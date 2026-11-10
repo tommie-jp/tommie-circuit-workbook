@@ -222,7 +222,7 @@ parts:
   C2: capacitor/ceramic h47 h33 10n
   R3: resistor i47 i51 51
   C6: capacitor/ceramic f10 f6 100n
-  C7: capacitor/electrolytic h10 h6 10u
+  C7: capacitor/electrolytic h10 h6 10u v=16V
   AD:
     type: device
     at: bottom
@@ -326,7 +326,7 @@ parts:
   C4: capacitor/ceramic q17 t17 10n
   C5: capacitor/ceramic t11 w11 1.2n
   C6: capacitor/ceramic f12 c12 100n
-  C7: capacitor/electrolytic d9 d6 10u
+  C7: capacitor/electrolytic d9 d6 10u v=16V
   L1: inductor m17 m14 220u
   L2: inductor t10 w10 100u
   FL1: sip3 t15 r90 SFU455B

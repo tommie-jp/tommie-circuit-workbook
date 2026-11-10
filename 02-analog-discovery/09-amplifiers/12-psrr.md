@@ -93,10 +93,10 @@ parts:
   U1: dip8 @ e12 r180 LM358
   R1: resistor c3 c8 33k
   R2: resistor d8 d12 22k
-  Cb: capacitor/electrolytic a8(+) -t8(-) 10uF
+  Cb: capacitor/electrolytic a8(+) -t8(-) 10uF v=16V
   Rf: resistor h17 h20 100k
   Rg: resistor i20 i24 1k
-  Cg: capacitor/electrolytic g24(+) g27(-) 10uF
+  Cg: capacitor/electrolytic g24(+) g27(-) 10uF v=16V
   AD:
     type: device
     at: top

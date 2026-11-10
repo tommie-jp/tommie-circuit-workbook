@@ -78,7 +78,7 @@ board: half
 parts:
   T1: transformer c5(A1) c7(A2) c9(B1) c11(B2)
   Rb: resistor b9 b18 2.2k
-  D1: led g7(A) g3(K) white
+  D1: led g7(A) g3(K) white vf=3.0V
   Q1: transistor g16(E) g17(C) g18(B) 2SC1815
   BAT:
     type: device

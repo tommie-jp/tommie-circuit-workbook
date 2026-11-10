@@ -68,7 +68,7 @@ parts:
   R1: resistor b3 b7 10k
   CDS1: photoresistor d7 d12 GL5528
   Q1: transistor h7(B) h8(C) h9(E) 2SC1815
-  D1: led f13(A) f8(K) red i=9mA
+  D1: led f13(A) f8(K) red i=9mA vf=2.0V
   R2: resistor h13 h17 330
 wires:
   - AD.V+ -- +t1 red

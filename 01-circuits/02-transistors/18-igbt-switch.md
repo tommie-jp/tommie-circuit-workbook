@@ -81,7 +81,7 @@ parts:
   Q1: transistor/to220 f8(G) f9(C) f10(E) IRGB4062D cap=right
   RG: resistor g3 g8 2.2k
   RGE: resistor j7 -b7 10k
-  D1: led g13(A) g9(K) red i=8.9mA
+  D1: led g13(A) g9(K) red i=8.9mA vf=2.0V
   R1: resistor j13 +b13 820
   AD:
     type: device

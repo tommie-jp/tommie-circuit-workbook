@@ -92,7 +92,7 @@ parts:
     pins: [1+, 1-]
   Rload: resistor/half c10 c14 100
   Rled: resistor c18 c21 330
-  Dled: led b21(A) b24(K) red i=9.1mA
+  Dled: led b21(A) b24(K) red i=9.1mA vf=2.0V
 wires:
   - ADP.12V -- M1.IN+ red
   - ADP.GND -- -t1 black

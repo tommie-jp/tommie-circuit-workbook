@@ -105,11 +105,11 @@ points:
   TP_W1: p11
 parts:
   U1: dip8 h12 LM386
-  C1: capacitor/electrolytic g9 g12 10u
-  C2: capacitor/electrolytic i14 e14 10u
-  C3: capacitor/electrolytic c16 c13 100u
+  C1: capacitor/electrolytic g9 g12 10u v=16V
+  C2: capacitor/electrolytic i14 e14 10u v=16V
+  C3: capacitor/electrolytic c16 c13 100u v=16V
   C4: capacitor b16 b13 0.1u
-  C6: capacitor/electrolytic o11 o8 220u
+  C6: capacitor/electrolytic o11 o8 220u v=16V
   R2: resistor w12 w9 10
   C5: capacitor w8 w6 47n
   R1: resistor p8 p11 10k

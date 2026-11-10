@@ -92,11 +92,11 @@ parts:
   U2: dip14 @ e33 74HC32
   U3: dip14 @ e48 74HC04
   R1: resistor j25 j29 1k
-  D1: led f29(A) f31(K) red i=3mA
+  D1: led f29(A) f31(K) red i=3mA vf=1.9V
   R2: resistor j40 j44 1k
-  D2: led f44(A) f46(K) red i=3mA
+  D2: led f44(A) f46(K) red i=3mA vf=1.9V
   R3: resistor j55 j59 1k
-  D3: led f59(A) f61(K) red i=3mA
+  D3: led f59(A) f61(K) red i=3mA vf=1.9V
   AD:
     type: device
     at: bottom

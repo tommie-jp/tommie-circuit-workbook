@@ -83,13 +83,13 @@ title: 図2 ローサイド (左) とハイサイド (右) を 1 枚のブレッ
 board: half
 parts:
   R1: resistor f2 f5 330
-  D1: led f6(A) f9(K) red i=9.1mA
+  D1: led f6(A) f9(K) red i=9.1mA vf=2.0V
   Q1: transistor h9(D) h10(G) h11(S) 2N7000
   Rg1: resistor b10 b13 100
   Rpd1: resistor d10 d12 10k
   Q2: transistor h19(S) h20(G) h21(D) BSS84
   R2: resistor f22 f25 330
-  D2: led f26(A) f29(K) red i=9.1mA
+  D2: led f26(A) f29(K) red i=9.1mA vf=2.0V
   Rg2: resistor b17 b20 100
   Rpu2: resistor d18 d20 10k
   AD:

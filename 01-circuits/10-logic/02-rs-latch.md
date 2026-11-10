@@ -97,9 +97,9 @@ parts:
   RR: resistor b36 b34 10k
   U1: dip14 @ e20 CD4011
   RQ: resistor h16 h11 1k
-  DQ: led g11(A) g8(K) red i=2.2mA
+  DQ: led g11(A) g8(K) red i=2.2mA vf=1.8V
   RQb: resistor h30 h35 1k
-  DQb: led i35(A) i39(K) red i=2.2mA
+  DQb: led i35(A) i39(K) red i=2.2mA vf=1.8V
   PS:
     type: device
     at: top

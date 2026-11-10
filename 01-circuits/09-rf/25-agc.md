@@ -117,13 +117,13 @@ parts:
   Q1: transistor d19(B) d20(C) d21(E) 2SC1815
   RE1: resistor b21 b25 100
   RE2: resistor a25 -t25 390
-  CE: capacitor/electrolytic c25(+) c28(-) 10uF
+  CE: capacitor/electrolytic c25(+) c28(-) 10uF v=16V
   D2: diode g13(A) g17(K) 1N4148
   CC: capacitor/ceramic h17 h20 10n cap=below:0.5,0
   D1: diode i17(A) i14(K) 1N4148 cap=below:1,0
   COUT: capacitor/ceramic g20 g24 100n
   RB: resistor a13 -t13 4.7k
-  CG: capacitor/electrolytic h13(+) h9(-) 10uF
+  CG: capacitor/electrolytic h13(+) h9(-) 10uF v=16V
 wires:
   - AD.V+ -- +t1 red
   - AD.GND -- -t2 black

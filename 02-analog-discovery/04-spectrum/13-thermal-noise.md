@@ -72,10 +72,10 @@ parts:
   Rf1: resistor b16 b21 100k
   RD: resistor d17 d25 100k
   Rg1: resistor d16 d8 1k
-  Cg1: capacitor/electrolytic b8 -t8 47u
+  Cg1: capacitor/electrolytic b8 -t8 47u v=16V
   Rf2: resistor g14 g9 100k
   Rg2: resistor h15 h21 1k
-  Cg2: capacitor/electrolytic i21 -b21 47u
+  Cg2: capacitor/electrolytic i21 -b21 47u v=16V
   AD:
     type: device
     at: top

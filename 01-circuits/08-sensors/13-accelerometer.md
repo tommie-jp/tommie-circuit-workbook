@@ -99,7 +99,7 @@ parts:
   R2: resistor j12 -b12 11k
   U1: dip8 @ e14 LM393
   C2: capacitor/ceramic c11 c14 100n
-  D1: led g19(A) g14(K) red i=3mA
+  D1: led g19(A) g14(K) red i=3mA vf=2.0V
   R3: resistor i19 i24 1k
   SC:
     type: device

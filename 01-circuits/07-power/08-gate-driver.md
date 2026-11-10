@@ -90,7 +90,7 @@ title: 図2 TC4427 と IRF520 を組む (+ レールが 12 V)
 board: half
 parts:
   U1: dip8 @ e10 TC4427
-  C1: capacitor/electrolytic b12(+) b6(-) 10uF cap=above
+  C1: capacitor/electrolytic b12(+) b6(-) 10uF cap=above v=25V
   C2: capacitor/ceramic d12 d6 100n cap=below:-2,0
   Rg: resistor c13 c16 100
   Q1: transistor/to220 h17 h18 h19 IRF520

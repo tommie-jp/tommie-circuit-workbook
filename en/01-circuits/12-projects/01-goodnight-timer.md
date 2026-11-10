@@ -94,11 +94,11 @@ parts:
   Rtrig: resistor b2 b5 100k
   SWtrig: button @ e3
   Rt: resistor b15 b12 4.7M
-  Ct: capacitor/electrolytic c11 c8 220u
+  Ct: capacitor/electrolytic c11 c8 220u v=25V
   Rg: resistor g46 g41 220
   Q1: transistor b40(S) b41(G) b42(D) 2N7000
   RLED: resistor b52 b49 470
-  DLED: led c49(A) c46(K) red i=6.4mA
+  DLED: led c49(A) c46(K) red i=6.4mA vf=2.0V
   PS:
     type: device
     at: top
@@ -178,11 +178,11 @@ parts:
   Rtrig: resistor b18 b15 100k
   SWtrig: button b9
   Rt: resistor g18 g15 4.7M
-  Ct: capacitor/electrolytic u15 u13 220u
+  Ct: capacitor/electrolytic u15 u13 220u v=25V
   Rg: resistor l10 p10 220
   Q1: transistor o8 p8 q8 2N7000
   RLED: resistor r14 r12 470
-  DLED: led r11 r9 red i=6.4mA
+  DLED: led r11 r9 red i=6.4mA vf=2.0V
 wires:
   # Power rail (row 18, top) and GND rail (row 5, bottom)
   - VCC -- b18 red

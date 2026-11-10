@@ -70,9 +70,9 @@ board: half
 parts:
   R1: resistor b10 b15 1k
   S1: slide-switch e15(1) e16(C) e17(2)
-  C1: capacitor/electrolytic h16(+) h19(-) 1000uF
+  C1: capacitor/electrolytic h16(+) h19(-) 1000uF v=16V
   R2: resistor a19 a24 1k
-  D1: led b24(A) b25(K) red i=3mA
+  D1: led b24(A) b25(K) red i=3mA vf=2.0V
   PS:
     type: device
     at: top

@@ -144,7 +144,7 @@ sheets:
     parts:
       U1: dip14 f12 CD40106B
       RF: resistor e7 g7 100k
-      CF: capacitor/electrolytic d9 d6 2.2u
+      CF: capacitor/electrolytic d9 d6 2.2u v=16V
     wires:
       - PWR -- f17 red
       - f12 -- f13 red

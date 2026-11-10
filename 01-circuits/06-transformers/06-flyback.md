@@ -108,7 +108,7 @@ parts:
   CC: capacitor g13 g16 10n cap=above
   RC: resistor h13 h16 10k
   D2: schottky c21 c25 1N5819
-  CO: capacitor/electrolytic d25(+) d28(-) 10uF
+  CO: capacitor/electrolytic d25(+) d28(-) 10uF v=25V
   RL: resistor b25 b29 1.2k
 wires:
   - AD.V+ -- +t1 red

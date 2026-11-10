@@ -106,7 +106,7 @@ parts:
   R4: resistor c11 c8 1M
   C1: capacitor f8 h8 1u
   Q1: transistor r11 q11 p11 2SC1815
-  D3: led q16 q13 green i=11mA
+  D3: led q16 q13 green i=11mA vf=2.1V
   D1: diode r10 t10 1N4148
   D2: diode u10 w10 1N4148
   R3: resistor x10 x6 68

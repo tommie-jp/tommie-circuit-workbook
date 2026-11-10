@@ -76,7 +76,7 @@ parts:
   Rb: resistor b11 b17 1k
   Q1: transistor d15 d16 d17 2SC1815
   Rs: resistor j15 -b15 100 cap=left
-  D1: led +b18 j18 red cap=right i=10mA
+  D1: led +b18 j18 red cap=right i=10mA vf=2.0V
 wires:
   - AD3.V+ -- +t2 red
   - AD3.GND -- -t3 black

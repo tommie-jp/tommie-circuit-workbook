@@ -88,10 +88,10 @@ parts:
   U1: dip8 @ e10 NE555
   Ra: resistor b7 b11 10k
   Rb: resistor a11 a15 47k
-  C1: capacitor/electrolytic i9(+) i5(-) 10uF
+  C1: capacitor/electrolytic i9(+) i5(-) 10uF v=16V
   Cc: capacitor d13 d20 10n
   R1: resistor g12 g16 220
-  D1: led h16(A) h19(K) red i=6.8mA
+  D1: led h16(A) h19(K) red i=6.8mA vf=2.0V
 wires:
   - AD3.V+ -- +t2 red
   - AD3.GND -- -t3 black

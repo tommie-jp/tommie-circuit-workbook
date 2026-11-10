@@ -344,7 +344,7 @@ points:
   GND: a11
 parts:
   R15: resistor c17 c21 100k
-  C15: capacitor/electrolytic e17 e14 10u
+  C15: capacitor/electrolytic e17 e14 10u v=16V
   R14: resistor i17 i21 10k
   S14: switch k17 k14
   C14: capacitor/ceramic m17 m15 1u

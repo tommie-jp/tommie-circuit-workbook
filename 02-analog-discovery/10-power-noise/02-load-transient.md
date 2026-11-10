@@ -88,7 +88,7 @@ parts:
   D3: diode/do41 b3(A) b6(K)
   D4: diode/do41 b17(A) b14(K)
   Rload: resistor i10 i6 1k
-  Csmooth: capacitor/electrolytic g10(+) g14(-) 470uF
+  Csmooth: capacitor/electrolytic g10(+) g14(-) 470uF v=25V
   Radd: resistor b30 b26 470
   Q1: transistor g24(S) g25(G) g26(D) 2N7000
   Rg: resistor b21 b25 1k

@@ -81,7 +81,7 @@ parts:
   PTC1: thermistor-ptc b3 b7 MF-R005
   TVS1: zener c7(K) c11(A) P6KE6.8A
   R1: resistor a7 a14 330 cap=above
-  D2: led c14(A) c17(K) red i=9mA
+  D2: led c14(A) c17(K) red i=9mA vf=2.0V
   RS: resistor h11 -b11 1 cap=left
 wires:
   - PSU.- -- -t2 black

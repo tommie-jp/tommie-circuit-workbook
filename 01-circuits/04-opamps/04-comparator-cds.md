@@ -91,7 +91,7 @@ parts:
   RFIX: resistor h13 h9 10k
   VR1: potentiometer b26(1) b27(W) b28(3) 10k
   R1: resistor c11 c9 220
-  D1: led b9(A) b6(K) red i=6.8mA
+  D1: led b9(A) b6(K) red i=6.8mA vf=2.0V
   DP: diode d6(A) d9(K) 1N4148
 wires:
   - AD3.V+ -- +t2 red

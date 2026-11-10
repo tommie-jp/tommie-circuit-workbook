@@ -122,9 +122,9 @@ parts:
   U2: dip14 @ e26 74HC74
   C4: capacitor/ceramic c23 c26 100n
   R3: resistor h30 h35 1k
-  D1: led i35(A) i37(K) red i=3mA
+  D1: led i35(A) i37(K) red i=3mA vf=2.0V
   R4: resistor g31 g40 1k
-  D2: led h40(A) h42(K) green i=3mA
+  D2: led h40(A) h42(K) green i=3mA vf=2.0V
   M1:
     type: device
     at: bottom

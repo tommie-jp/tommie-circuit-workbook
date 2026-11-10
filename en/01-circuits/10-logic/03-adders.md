@@ -126,15 +126,15 @@ parts:
   RpdC: resistor a12 -t12 10k
   U1: dip14 @ e14 CD4070
   RS1: resistor d21 d25 1k
-  DS1: led e25(A) e26(K) red i=2.2mA
+  DS1: led e25(A) e26(K) red i=2.2mA vf=1.8V
   RS: resistor d28 d32 1k
-  DS: led e32(A) e33(K) red i=2.2mA
+  DS: led e32(A) e33(K) red i=2.2mA vf=1.8V
   U2: dip14 @ e37 CD4081
   RC1: resistor a45 a48 1k
-  DC1: led b48(A) b49(K) red i=2.2mA
+  DC1: led b48(A) b49(K) red i=2.2mA vf=1.8V
   U3: dip14 @ e51 CD4071
   RCO: resistor a58 a61 1k
-  DCO: led b61(A) b62(K) red i=2.2mA
+  DCO: led b61(A) b62(K) red i=2.2mA vf=1.8V
   PS:
     type: device
     at: top

@@ -84,12 +84,12 @@ parts:
     pins: [2+, 1+, 1-, 2-]
   U1: dip8 @ e10 NE555
   R1: resistor b7 b11 100k
-  C1: capacitor/electrolytic b12(+) b15(-) 10uF
+  C1: capacitor/electrolytic b12(+) b15(-) 10uF v=16V
   Cc: capacitor d13 d20 10n
   SW1: button @ f4
   R2: resistor g11 g7 10k
   R3: resistor g12 g16 330
-  D1: led h16(A) h19(K) red i=6mA
+  D1: led h16(A) h19(K) red i=6mA vf=2.0V
 wires:
   - AD3.V+ -- +t2 red
   - AD3.GND -- -t3 black

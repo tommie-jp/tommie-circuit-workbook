@@ -128,7 +128,7 @@ parts:
   RS: resistor e9 g9 1k cap=left
   Cout: capacitor/ceramic a12 a15 0.1u
   Rload: resistor c12 c16 15k
-  Csup: capacitor/electrolytic b16 b20 10u
+  Csup: capacitor/electrolytic b16 b20 10u v=16V
 wires:
   - VC1.E -- -t7 black
   - VC1.A -- a9 yellow

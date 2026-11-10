@@ -94,7 +94,7 @@ parts:
   C1: capacitor/ceramic h4 h8 10n
   Rf: resistor i8 i13 100k
   R2: resistor h15 h20 1k
-  D1: led f20(A) f22(K) red i=1.8mA
+  D1: led f20(A) f22(K) red i=1.8mA vf=2.0V
   SC:
     type: device
     at: bottom

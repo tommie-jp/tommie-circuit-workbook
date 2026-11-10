@@ -165,14 +165,14 @@ parts:
   Q1: transistor e7(B) e10(C) e13(E) 2SC1815
   Rc1: resistor a10 +t10 2.2k
   RE1: resistor a13 -t13 470
-  CE1: capacitor/electrolytic a14 -t14 100u
+  CE1: capacitor/electrolytic a14 -t14 100u v=16V
   C2: capacitor/ceramic d10 d19 0.01u
   R4: resistor a17 -t17 22k
   R3: resistor a19 +t19 82k
   Q2: transistor e19(B) e21(C) e23(E) 2SC1815
   Rc2: resistor a21 +t21 2.2k
   RE2: resistor a23 -t23 470
-  CE2: capacitor/electrolytic a24 -t24 100u
+  CE2: capacitor/electrolytic a24 -t24 100u v=16V
   D1: diode d21(A) d27(K) 1N60
   C4: capacitor/ceramic a27 -t27 0.01u
   R5: resistor a29 -t29 100k
@@ -253,14 +253,14 @@ parts:
   Q1: transistor g10 g11 g12 2SC1815
   Rc1: resistor g17 g13 2.2k
   RE1: resistor g9 g2 470
-  CE1: capacitor/electrolytic i9 i2 100u
+  CE1: capacitor/electrolytic i9 i2 100u v=16V
   C2: capacitor/ceramic i12 l12 0.01u
   R3: resistor m17 m13 82k
   R4: resistor m12 m2 22k
   Q2: transistor o11 o12 o13 2SC1815
   Rc2: resistor o17 o14 2.2k
   RE2: resistor o10 o2 470
-  CE2: capacitor/electrolytic q10 q2 100u
+  CE2: capacitor/electrolytic q10 q2 100u v=16V
   D1: diode s13 s9 1N60
   C4: capacitor/ceramic u9 u2 0.01u
   R5: resistor w9 w2 100k

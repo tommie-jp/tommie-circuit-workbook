@@ -80,7 +80,7 @@ parts:
   Q1: transistor c5(S) c6(G) c7(D) 2N7000
   D1: schottky c9(A) c13(K) 1N5819
   L1: inductor/axial g9 g17 1m
-  Cout: capacitor/electrolytic b13(+) b17(-) 10u
+  Cout: capacitor/electrolytic b13(+) b17(-) 10u v=16V
   RL: resistor i17 i13 100
   AD:
     type: device

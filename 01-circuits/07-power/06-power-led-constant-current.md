@@ -73,7 +73,7 @@ title: 図2 perfboard に組む (部品面から見た図)
 parts:
   U1: ic3/to220 e4 e5 e6 LM317
   R1: resistor f8 i8 3.6
-  D1: led j8 m8 white i=350mA
+  D1: led j8 m8 white i=350mA vf=3.2V
   PSU:
     type: device
     at: top

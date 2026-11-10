@@ -64,7 +64,7 @@ parts:
   D3: diode -t12(A) a12(K) 1N4148
   D4: diode g18(A) g4(K) 1N4148
   D5: diode a18(A) -t18(K) 1N4148
-  C1: capacitor/electrolytic d12(+) d18(-) 100u
+  C1: capacitor/electrolytic d12(+) d18(-) 100u v=16V
   RL: resistor i12 i18 1500
   AD:
     type: device

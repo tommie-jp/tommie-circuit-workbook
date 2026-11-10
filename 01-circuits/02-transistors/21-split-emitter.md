@@ -102,7 +102,7 @@ parts:
   CIN: capacitor d5(-) d9(+) 1uF
   RE1: resistor b21 b24 100
   RE2: resistor a24 -t24 910 cap=left
-  CE: capacitor/electrolytic c24(+) c27(-) 100uF
+  CE: capacitor/electrolytic c24(+) c27(-) 100uF v=16V
   COUT: capacitor g20(+) g27(-) 1uF
   AD:
     type: device

@@ -116,9 +116,9 @@ parts:
     pins: [V+, GND, 2+, W1, 1+, 1-, 2-]
   U1: dip14 @ e8 CD4013B
   RQ2: resistor b9 b6 1k
-  DQ2: led d6(A) d3(K) red i=2.2mA
+  DQ2: led d6(A) d3(K) red i=2.2mA vf=1.8V
   RQ1: resistor i8 i5 1k
-  DQ1: led g5(A) g2(K) red i=2.2mA
+  DQ1: led g5(A) g2(K) red i=2.2mA vf=1.8V
   SWC1: button @ e17
   RpdC1: resistor i17 i20 10k
   SWC2: button @ e21

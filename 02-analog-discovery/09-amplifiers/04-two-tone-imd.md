@@ -87,7 +87,7 @@ parts:
   R2: resistor c10 c14 100k
   Rf: resistor h19 h22 10k
   Rg: resistor i22 i26 1k
-  Cg: capacitor/electrolytic g26(+) g29(-) 10uF
+  Cg: capacitor/electrolytic g26(+) g29(-) 10uF v=16V
   AD:
     type: device
     at: top

@@ -101,7 +101,7 @@ parts:
   Q1: transistor e14(B) e15(C) e16(E) 2SA1015
   RB1: resistor a14 +t14 10k
   RL: resistor b15 b21 470
-  D1: led c21(A) c23(K) red i=6.0mA
+  D1: led c21(A) c23(K) red i=6.0mA vf=2.0V
   AD:
     type: device
     at: top
