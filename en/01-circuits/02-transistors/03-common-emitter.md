@@ -95,10 +95,10 @@ parts:
   R2: resistor c9 c13 10k
   RC: resistor b15 b20 2.2k
   Q1: transistor e19(B) e20(C) e21(E) 2SC1815 cap=below
-  CIN: capacitor d5(-) d9(+) 1uF
+  CIN: capacitor/film d5 d9 1uF
   RE: resistor a21 -t21 1k cap=left
   CE: capacitor/electrolytic b21(+) b26(-) 100uF cap=above v=16V
-  COUT: capacitor d20(+) d27(-) 1uF
+  COUT: capacitor/film d20 d27 1uF
   AD:
     type: device
     at: top
@@ -126,12 +126,12 @@ As in Fig. 2, the 5 V goes from the supply output V+ (red) of the Analog Discove
 (set V+ to 5 V in Supplies in WaveForms). This circuit draws only about 1 mA, so V+ is enough.
 
 - **Q1 is in the upper block** (`e19` B, `e20` C, `e21` E). No wire has to cross the center gap
-- **Base (column 9)**: the bottom end of `R1`, the top end of `R2` and the + side of `CIN` are in the same column. One orange wire (`e9`–`d19`) goes to B of Q1
-- **Collector (column 20)**: the bottom end of `RC` and the + side of `COUT` are in the same column as C of Q1
+- **Base (column 9)**: the bottom end of `R1`, the top end of `R2` and the right end of `CIN` are in the same column. One orange wire (`e9`–`d19`) goes to B of Q1
+- **Collector (column 20)**: the bottom end of `RC` and the left end of `COUT` are in the same column as C of Q1
 - **Emitter (column 21)**: `RE` is inserted vertically down to the − rail, and the + side of `CE` is in the same column
-- **Input (column 5)**: the − side of `CIN`. Plug W1 (yellow) into `a5` and 2+ of CH2 (blue) into `a4`, and
+- **Input (column 5)**: the left end of `CIN`. Plug W1 (yellow) into `a5` and 2+ of CH2 (blue) into `a4`, and
   carry it across with `e4`–`e5`
-- **Output (column 27)**: the − side of `COUT`. Plug 1+ of CH1 (orange) into `a27`
+- **Output (column 27)**: the right end of `COUT`. Plug 1+ of CH1 (orange) into `a27`
 - GND, 2− and 1− of the AD (black) go to the top − rail
 
 ## Viewing on the oscilloscope
@@ -160,8 +160,8 @@ Instead of W1, CH1 and CH2 of the AD, connect a VNA (LiteVNA64) (Fig. 4) and loo
 transmission (S21) from 50 kHz to 100 MHz (Fig. 5).
 How to read S21, S11 and the Smith chart, and the THRU calibration, are the same as in 2-2.
 
-- Connect CH0 (through an attenuator) to the − side of `CIN` (input, column 5) and
-  CH1 to the − side of `COUT` (output, column 27) (Fig. 4). Use SMA-to-clip cables for the breadboard and plug **the center conductor and
+- Connect CH0 (through an attenuator) to the left end of `CIN` (input, column 5) and
+  CH1 to the right end of `COUT` (output, column 27) (Fig. 4). Use SMA-to-clip cables for the breadboard and plug **the center conductor and
   the shield as a pair**. Put the shield in the − rail right next to the signal hole and keep the wires as short as possible (a long GND
   return distorts the response from around 10 MHz)
 - The VNA output is lower than 0 dBm (1 mW) but varies with model and frequency (0-3 of the NanoVNA book).
@@ -179,10 +179,10 @@ parts:
   R2: resistor c9 c13 10k
   RC: resistor b15 b20 2.2k
   Q1: transistor e19(B) e20(C) e21(E) 2SC1815 cap=below
-  CIN: capacitor d5(-) d9(+) 1uF
+  CIN: capacitor/film d5 d9 1uF
   RE: resistor a21 -t21 1k cap=left
   CE: capacitor/electrolytic b21(+) b26(-) 100uF cap=above v=16V
-  COUT: capacitor d20(+) d27(-) 1uF
+  COUT: capacitor/film d20 d27 1uF
   AD:
     type: device
     at: top

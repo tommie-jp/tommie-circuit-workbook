@@ -99,11 +99,11 @@ parts:
   R2: resistor c9 c13 10k
   RC: resistor b15 b20 2.2k
   Q1: transistor e19(B) e20(C) e21(E) 2SC1815 cap=below
-  CIN: capacitor d5(-) d9(+) 1uF
+  CIN: capacitor/film d5 d9 1uF
   RE1: resistor b21 b24 100
   RE2: resistor a24 -t24 910 cap=left
   CE: capacitor/electrolytic c24(+) c27(-) 100uF v=16V
-  COUT: capacitor g20(+) g27(-) 1uF
+  COUT: capacitor/film g20 g27 1uF
   AD:
     type: device
     at: top

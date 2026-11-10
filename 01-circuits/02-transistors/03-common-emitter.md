@@ -95,10 +95,10 @@ parts:
   R2: resistor c9 c13 10k
   RC: resistor b15 b20 2.2k
   Q1: transistor e19(B) e20(C) e21(E) 2SC1815 cap=below
-  CIN: capacitor d5(-) d9(+) 1uF
+  CIN: capacitor/film d5 d9 1uF
   RE: resistor a21 -t21 1k cap=left
   CE: capacitor/electrolytic b21(+) b26(-) 100uF cap=above v=16V
-  COUT: capacitor d20(+) d27(-) 1uF
+  COUT: capacitor/film d20 d27 1uF
   AD:
     type: device
     at: top
@@ -126,12 +126,12 @@ wires:
 (WaveForms の Supplies で V+ を 5 V にする)。この回路が流すのは 1 mA ほどなので V+ で足りる。
 
 - **Q1 は上のブロック** (`e19` B・`e20` C・`e21` E)。溝をまたぐ線が要らない
-- **ベース (列 9)**: `R1` の下端・`R2` の上端・`CIN` の + 側が同じ列。橙の線 1 本 (`e9`–`d19`) で Q1 の B へ
-- **コレクタ (列 20)**: `RC` の下端と `COUT` の + 側が、Q1 の C と同じ列
+- **ベース (列 9)**: `R1` の下端・`R2` の上端・`CIN` の右端が同じ列。橙の線 1 本 (`e9`–`d19`) で Q1 の B へ
+- **コレクタ (列 20)**: `RC` の下端と `COUT` の左端が、Q1 の C と同じ列
 - **エミッタ (列 21)**: `RE` を − レールへ縦に挿し、`CE` の + 側も同じ列
-- **入力 (列 5)**: `CIN` の − 側。W1 (黄) を `a5` に、CH2 の 2+ (青) は `a4` に挿して
+- **入力 (列 5)**: `CIN` の左端。W1 (黄) を `a5` に、CH2 の 2+ (青) は `a4` に挿して
   `e4`–`e5` で渡す
-- **出力 (列 27)**: `COUT` の − 側。CH1 の 1+ (橙) を `a27` に挿す
+- **出力 (列 27)**: `COUT` の右端。CH1 の 1+ (橙) を `a27` に挿す
 - AD の GND・2−・1− (黒) は上の − レールへ
 
 ## オシロで見る
@@ -159,7 +159,7 @@ measure: [vpp, freq, phase]
 AD の W1・CH1・CH2 の代わりに VNA (LiteVNA64) をつなぎ (図4)、50 kHz〜100 MHz の通り方 (S21) を見る (図5)。
 S21・S11・Smith チャートの読み方と THRU の校正は 2-2 と同じ。
 
-- `CIN` の − 側 (入力の列 5) に CH0 (アッテネータを通す)、`COUT` の − 側 (出力の列 27) に
+- `CIN` の左端 (入力の列 5) に CH0 (アッテネータを通す)、`COUT` の右端 (出力の列 27) に
   CH1 をつなぐ (図4)。ブレッドボードへは SMA-クリップのケーブルで、**芯線と外皮を組で**挿す。外皮は信号の穴のすぐ隣の
   − レールへ、線はできるだけ短く (GND の戻りが長いと 10 MHz あたりから特性が崩れる)
 - VNA の出力は 0 dBm (1 mW) より小さいが、機種と周波数で変わる (NanoVNA の教科書の 0-3)。
@@ -177,10 +177,10 @@ parts:
   R2: resistor c9 c13 10k
   RC: resistor b15 b20 2.2k
   Q1: transistor e19(B) e20(C) e21(E) 2SC1815 cap=below
-  CIN: capacitor d5(-) d9(+) 1uF
+  CIN: capacitor/film d5 d9 1uF
   RE: resistor a21 -t21 1k cap=left
   CE: capacitor/electrolytic b21(+) b26(-) 100uF cap=above v=16V
-  COUT: capacitor d20(+) d27(-) 1uF
+  COUT: capacitor/film d20 d27 1uF
   AD:
     type: device
     at: top
