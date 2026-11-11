@@ -19,8 +19,8 @@
 | [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 30 | 27 | 0 | 0 | 0 | — |
-| [FPGA の教科書](06-fpga/README.md) | 231 | 149 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1120** | **822** | **0** | **0** | **0** | |
+| [FPGA の教科書](06-fpga/README.md) | 243 | 161 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
+| **計** | **1132** | **834** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -1513,3 +1513,20 @@
 | 12-8 | [リバーシを PC から指す — play.py で対戦し、200 局で回路と C を突き合わせる](06-fpga/12-projects/08-reversi-play-pc.md) | ✓ | [ ] | — | — |
 | 12-9 | [リバーシの UART を Logic で読む — 読み下しの足し方と状態の 3 本](06-fpga/12-projects/09-reversi-uart-logic.md) | ✓ | [ ] | — | — |
 | 12-10 | [Pong の信号を Logic Analyzer で見る — 遊んでいる最中にトリガーで止める](06-fpga/12-projects/10-pong-logic-analyzer.md) | ✓ | [ ] | — | — |
+
+### 第 13 章 Linux を起こす — RISC-V の RTL を PC とブラウザで回す
+
+| # | 題 | 作成 | 目で確認 | Fable で確認 | 実測 |
+| --- | --- | --- | --- | --- | --- |
+| 13-1 | [ブラウザで RISC-V の Linux に触る — 保存した所から BusyBox のシェル](06-fpga/13-linux/01-browser-linux-shell.md) | ✓ | [ ] | — | — |
+| 13-2 | [Verilator で Linux を起こす — シェルまで 3.3 億クロック、約 14 分](06-fpga/13-linux/02-verilator-linux-boot.md) | ✓ | [ ] | — | — |
+| 13-3 | [起動の記録を読む — OpenSBI・カーネル・init・シェルの区切り](06-fpga/13-linux/03-read-boot-log.md) | ✓ | [ ] | — | — |
+| 13-4 | [--timing を外して時計を C++ で回す — クロック単位で同じ動き](06-fpga/13-linux/04-clock-in-cpp.md) | ✓ | [ ] | — | — |
+| 13-5 | [UART の受信を模型に足す — 打った字がシェルに届くまで](06-fpga/13-linux/05-uart-rx.md) | ✓ | [ ] | — | — |
+| 13-6 | [模型を保存して読み戻す — --savable と、続けた場合との一致](06-fpga/13-linux/06-save-restore.md) | ✓ | [ ] | — | — |
+| 13-7 | [保存ファイルを小さくする — 336 MB が gzip で 8.3 MB](06-fpga/13-linux/07-shrink-state.md) | ✓ | [ ] | — | — |
+| 13-8 | [Wasm で回す — PC の約 0.9 倍の速さ](06-fpga/13-linux/08-wasm.md) | ✓ | [ ] | — | — |
+| 13-9 | [打鍵から割り込みまでを波形で見る](06-fpga/13-linux/09-key-to-interrupt.md) | ✓ | [ ] | — | — |
+| 13-10 | [ls が U モードで動く所を見る — システムコールと sret](06-fpga/13-linux/10-ls-user-mode.md) | ✓ | [ ] | — | — |
+| 13-11 | [レジスタの欄 — 書き戻しの記録から x0〜x31 を組み立てる](06-fpga/13-linux/11-register-panel.md) | ✓ | [ ] | — | — |
+| 13-12 | [init からシェルまでの待機 — SD の読みの後で次の tick まで寝る](06-fpga/13-linux/12-init-to-shell-wait.md) | ✓ | [ ] | — | — |

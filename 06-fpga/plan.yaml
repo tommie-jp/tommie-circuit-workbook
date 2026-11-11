@@ -233,3 +233,16 @@
 - { id: 12-8, tier: 300, board: BB, device: PICO, title: リバーシを PC から指す — play.py で対戦し、200 局で回路と C を突き合わせる }
 - { id: 12-9, tier: 300, board: BB, device: PICO, title: リバーシの UART を Logic で読む — 読み下しの足し方と状態の 3 本 }
 - { id: 12-10, tier: 300, board: —, device: WEB, title: Pong の信号を Logic Analyzer で見る — 遊んでいる最中にトリガーで止める }
+# 第 13 章は既製の RV64GC のコア (mmRISC-2) で Linux を起こし、中を覗く。道具は tommie-jp/soft-fpga-riscv-linux。
+- { id: 13-1, tier: 300, board: —, device: WEB, title: ブラウザで RISC-V の Linux に触る — 保存した所から BusyBox のシェル }
+- { id: 13-2, tier: 300, board: —, device: SIM, title: Verilator で Linux を起こす — シェルまで 3.3 億クロック、約 14 分 }
+- { id: 13-3, tier: 300, board: —, device: SIM, title: 起動の記録を読む — OpenSBI・カーネル・init・シェルの区切り }
+- { id: 13-4, tier: 300, board: —, device: SIM, title: --timing を外して時計を C++ で回す — クロック単位で同じ動き }
+- { id: 13-5, tier: 300, board: —, device: SIM, title: UART の受信を模型に足す — 打った字がシェルに届くまで }
+- { id: 13-6, tier: 300, board: —, device: SIM, title: 模型を保存して読み戻す — --savable と、続けた場合との一致 }
+- { id: 13-7, tier: 300, board: —, device: SIM, title: 保存ファイルを小さくする — 336 MB が gzip で 8.3 MB }
+- { id: 13-8, tier: 300, board: —, device: WEB, title: Wasm で回す — PC の約 0.9 倍の速さ }
+- { id: 13-9, tier: 300, board: —, device: WEB, title: 打鍵から割り込みまでを波形で見る }
+- { id: 13-10, tier: 300, board: —, device: WEB, title: ls が U モードで動く所を見る — システムコールと sret }
+- { id: 13-11, tier: 300, board: —, device: WEB, title: レジスタの欄 — 書き戻しの記録から x0〜x31 を組み立てる }
+- { id: 13-12, tier: 300, board: —, device: SIM, title: init からシェルまでの待機 — SD の読みの後で次の tick まで寝る }

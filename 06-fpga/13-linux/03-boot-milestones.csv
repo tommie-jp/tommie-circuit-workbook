@@ -1,0 +1,13 @@
+key,real_s,kernel_s,cycles,cycles_kind,what
+load,0.8,,0,exact,模型が走り始める (像を主記憶へ書いた)
+opensbi,11.3,,4038462,interpolated,OpenSBI の名乗り
+kernel,24.6,0.000000,9153846,interpolated,カーネルの最初の行
+clock,63.6,0.000016,24214559,interpolated,カーネルの時計が動き出す
+plic,131.5,0.519990,50295203,interpolated,PLIC (割り込みコントローラ) を見つける
+console,294.5,1.756236,112084942,interpolated,本番のコンソールに替わる
+mmc,343.7,2.140500,131314741,interpolated,SD カードのドライバ
+card,365.9,2.317146,140156863,interpolated,SD カードを見つける
+mount,411.0,2.675088,158032129,interpolated,ext4 を mount
+init,417.4,2.727134,160614754,interpolated,init を起こす
+shell,857.1,,333597350,interpolated,シェルの名乗り
+prompt,859.0,,334348446,exact,プロンプトで止まる

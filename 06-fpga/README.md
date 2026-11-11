@@ -4,12 +4,12 @@
 > この教科書は AI (Claude) が書いたもので、人間の専門家の校正を受けていない。
 > 回路・数値・手順が間違っている可能性がある。組む前に自分で確かめてほしい。
 
-**書きかけ。** 必須 50 は全部書けている。入門・中級は第 11 章 (CPU を作る) の 11-12 までと第 12 章 (作品) を書き終えた (11-13〜11-18 の RISC-V は計画だけ)。ほかの章の残りは計画 `plan.yaml` の題名だけ (下の目次の「済」)。
+**書きかけ。** 必須 50 は全部書けている。入門・中級は第 11 章 (CPU を作る) の 11-12 までと第 12 章 (作品)・第 13 章 (Linux を起こす) を書き終えた (11-13〜11-18 の RISC-V は計画だけ)。ほかの章の残りは計画 `plan.yaml` の題名だけ (下の目次の「済」)。
 第 5 章から先の Pico 2・Tang Nano 9K の題は**実機で組んでいない**。PC のシミュレーションと
 ビルド・合成で確かめた範囲で、実機で測る数は「測って書く」として空けてある。題名と並びはこれから変わる。
 
 1 本の Verilog を **ブラウザ → Raspberry Pi Pico 2 → 実物の FPGA** の 3 つの所で動かし、
-同じ信号を Analog Discovery 3 の Logic で測って比べる。第 0〜12 章。
+同じ信号を Analog Discovery 3 の Logic で測って比べる。第 0〜13 章。
 
 - **Soft-FPGA** は、Verilog を [Verilator](https://veripool.org/guide/latest/) で C++ にして、
   FPGA の無い所で回路を計算で真似る方式。ブラウザで内部の信号を見る
@@ -19,6 +19,9 @@
   第 4〜7 章は Soft-FPGA で動かす (Pico 2)。第 8〜12 章は実物の FPGA と応用
 - **機種の印は動かす所**: SIM = PC の Verilator だけ、WEB = ブラウザの soft-fpga、
   PICO = Pico 2 の Soft-FPGA、FPGA = 実物の FPGA。印の無い題は組まない題
+- **第 13 章は Linux**。既製の RV64GC のコア ([mmRISC-2](https://github.com/munetomo-maruyama/mmRISC-2)) の RTL を Verilator で回して
+  Linux を起こし、起動を済ませた状態をブラウザで読み戻して、シェルの裏で動く CPU の中を見る。道具は
+  [soft-fpga-riscv-linux](https://github.com/tommie-jp/soft-fpga-riscv-linux)。買う物は無い (PC とブラウザだけ)
 - **FPGA のボードが要るのは第 8 章から**。どれを買うかは 8-2 で比べる
   (この本の図と手順は Sipeed Tang Nano 9K で書く)
 - **電源は 3.3 V** (Pico 2 の 3V3、FPGA のピン)。教科書の既定の 5 V から外すのは、
@@ -56,7 +59,8 @@
 | 10 | メモリと演算 | 2 | 4 | 14 | 14 | 4 |
 | 11 | CPU を作る | 0 | 3 | 12 | 20 | 14 |
 | 12 | 作品 | 0 | 0 | 0 | 10 | 10 |
-| **計** | | **50** | **118** | **213** | **231** | **149** |
+| 13 | Linux を起こす — RISC-V の RTL を PC とブラウザで回す | 0 | 0 | 0 | 12 | 12 |
+| **計** | | **50** | **118** | **213** | **243** | **161** |
 
 ## 第 0 章 道具と準備
 
@@ -353,5 +357,22 @@
 | 12-8 | [リバーシを PC から指す — play.py で対戦し、200 局で回路と C を突き合わせる](12-projects/08-reversi-play-pc.md) | 発展 | BB | PICO |
 | 12-9 | [リバーシの UART を Logic で読む — 読み下しの足し方と状態の 3 本](12-projects/09-reversi-uart-logic.md) | 発展 | BB | PICO |
 | 12-10 | [Pong の信号を Logic Analyzer で見る — 遊んでいる最中にトリガーで止める](12-projects/10-pong-logic-analyzer.md) | 発展 | — | WEB |
+
+## 第 13 章 Linux を起こす — RISC-V の RTL を PC とブラウザで回す
+
+| # | 題 | 段 | 基板 | 機種 |
+| --- | --- | --- | --- | --- |
+| 13-1 | [ブラウザで RISC-V の Linux に触る — 保存した所から BusyBox のシェル](13-linux/01-browser-linux-shell.md) | 発展 | — | WEB |
+| 13-2 | [Verilator で Linux を起こす — シェルまで 3.3 億クロック、約 14 分](13-linux/02-verilator-linux-boot.md) | 発展 | — | SIM |
+| 13-3 | [起動の記録を読む — OpenSBI・カーネル・init・シェルの区切り](13-linux/03-read-boot-log.md) | 発展 | — | SIM |
+| 13-4 | [--timing を外して時計を C++ で回す — クロック単位で同じ動き](13-linux/04-clock-in-cpp.md) | 発展 | — | SIM |
+| 13-5 | [UART の受信を模型に足す — 打った字がシェルに届くまで](13-linux/05-uart-rx.md) | 発展 | — | SIM |
+| 13-6 | [模型を保存して読み戻す — --savable と、続けた場合との一致](13-linux/06-save-restore.md) | 発展 | — | SIM |
+| 13-7 | [保存ファイルを小さくする — 336 MB が gzip で 8.3 MB](13-linux/07-shrink-state.md) | 発展 | — | SIM |
+| 13-8 | [Wasm で回す — PC の約 0.9 倍の速さ](13-linux/08-wasm.md) | 発展 | — | WEB |
+| 13-9 | [打鍵から割り込みまでを波形で見る](13-linux/09-key-to-interrupt.md) | 発展 | — | WEB |
+| 13-10 | [ls が U モードで動く所を見る — システムコールと sret](13-linux/10-ls-user-mode.md) | 発展 | — | WEB |
+| 13-11 | [レジスタの欄 — 書き戻しの記録から x0〜x31 を組み立てる](13-linux/11-register-panel.md) | 発展 | — | WEB |
+| 13-12 | [init からシェルまでの待機 — SD の読みの後で次の tick まで寝る](13-linux/12-init-to-shell-wait.md) | 発展 | — | SIM |
 
 <!-- toc:end -->

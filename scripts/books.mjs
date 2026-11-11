@@ -148,6 +148,7 @@ export const BOOKS = [
       [10, 'memory-arithmetic', 'メモリと演算'],
       [11, 'cpu', 'CPU を作る'],
       [12, 'projects', '作品'],
+      [13, 'linux', 'Linux を起こす — RISC-V の RTL を PC とブラウザで回す'],
     ],
   },
 ].map((book) => ({
