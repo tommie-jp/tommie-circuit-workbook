@@ -95,17 +95,18 @@ parts:
     pins: [RF, GND]
   GU3: ground 17,15
   V3V3: vcc 1,8 3.3V
-  V3V3: vcc 7,8 3.3V
+  V3V3: vcc 7,7.8 3.3V
 wires:
   - U1.3V3 -| 1,8
-  - 7,8 |- U2.VCC
-  - U1.GP2 -| 7.5,8.3 |- U2.SCLK
+  - 7,7.8 -- U2.VCC
+  - U1.GP2 -| 5.5,8.3 |- U2.SCLK
   - U1.GP3 -| 6.5,8.7 |- U2.SDATA
-  - U1.GP5 -| 5.5,9.3 |- U2.FSYNC
-  - U1.GND8 -| 8.5,10
-  - U2.DGND -| 8.5,10
-  - U2.AGND -| 8.5,10
-  - 8.5,10 -- 8.5,12
+  - U1.GP5 -| 7.5,9.3 |- U2.FSYNC
+  - U2.DGND -| 8.5,9.8
+  - U2.AGND -- 8.5,9.8
+  - 8.5,9.8 -- 8.5,10.2
+  - U1.GND8 -- 8.5,10.2
+  - 8.5,10.2 -- 8.5,12
   - U2.OUT |- U3.RF
   - U3.GND -| 17,15
 notes:
