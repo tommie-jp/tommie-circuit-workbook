@@ -470,12 +470,12 @@ parts:
   C9: capacitor/ceramic k16 k13 220p
   X3: crystal/hc49 l16 n16 4.9152M
   C10: capacitor/ceramic o16 o13 220p
-  X4: crystal/hc49 p16 r16 4.9152M
-  C11: capacitor/ceramic s16 u16 220p
+  X4: crystal/hc49 q16 s16 4.9152M
+  C11: capacitor/ceramic t16 u16 220p
   L2: inductor/toroid v16 z16 FT37-61 18t
   C12: capacitor/ceramic z15 z13 47p
   U2: dip8 aa19 SA612
-  C13: capacitor/ceramic ab15 ab13 10n
+  C13: capacitor/ceramic ab14 ac14 10n
   C14: capacitor/ceramic y22 y25 100n
   C15: capacitor/electrolytic w22 w25 10u v=16V
   C16: capacitor/ceramic ac20 ac22 1n
@@ -489,12 +489,12 @@ wires:
   - j16 -- k16 orange
   - k16 -- l16 orange
   - n16 -- o16 orange
-  - o16 -- p16 orange
-  - r16 -- s16 orange
+  - o16 -- q16 orange
+  - s16 -- t16 orange
   - u16 -- v16 orange
   - z16 -- aa16 yellow
   - z16 -- z15 yellow
-  - ab16 -- ab15 blue
+  - ab16 -- ab14 blue
   - GND -- a13 black
   - a13 -- g13 black
   - g13 -- k13 black
@@ -502,7 +502,8 @@ wires:
   - o13 -- z13 black
   - z13 -- ab13 black
   - ab13 -- ac13 black
-  - ac16 -- ac13 black
+  - ac16 -- ac14 black
+  - ac14 -- ac13 black
   - ac13 -- ae13 black
   - ae13 -- ae25 black
   - ae25 -- ad25 black

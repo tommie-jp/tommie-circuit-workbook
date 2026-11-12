@@ -183,11 +183,11 @@ board:
   slots: on
 parts:
   J1: sma/female-edge a12 011
-  C1: capacitor/ceramic g12 i12 4.7p
-  L1: inductor/toroid j12 j9 T37-2 32t
-  C2: capacitor/ceramic l12 l9 62p
-  C3: capacitor/ceramic m12 m9 22p
-  VC1: capacitor n9 n6 260p
+  C1: capacitor/ceramic e12 g12 4.7p
+  L1: inductor/toroid h12 h9 T37-2 32t
+  C2: capacitor/ceramic j12 j9 62p
+  C3: capacitor/ceramic l12 l9 22p
+  VC1: capacitor m9 m6 260p
   C4: capacitor/ceramic o12 q12 47p
   C5: capacitor/ceramic q10 t10 220p
   C6: capacitor/ceramic u10 u7 470p
@@ -198,7 +198,7 @@ parts:
   R4: resistor m21 m18 51k
   R5: resistor h19 h23 10k
   VR1: potentiometer/knob k18 j18 i18 10k
-  C8: capacitor/electrolytic g16 g19 10u
+  C8: capacitor/electrolytic f16 f19 10u
   C9: capacitor/electrolytic o21 o23 100u
   R6: resistor k21 k25 220
   C7: capacitor/ceramic w13 w10 2.2n
@@ -211,19 +211,20 @@ parts:
   C14: capacitor/ceramic ad8 ad6 47n
   C15: capacitor/electrolytic x25 x23 100u
   C16: capacitor/ceramic u25 u23 100n
-  J3: usb-c/female b5 c5 d5 e5
+  J3: usb-c/female a20 a21 a22 a23
   PH:
     type: device
-    at: ab-2
+    at: ad-2
     label: ヘッドホン 32Ω
     pins: GND TIP
 wires:
-  - b5 -- b6 black
-  - b6 -- f6 black
-  - f6 -- j6 black
-  - j6 -- l6 black
-  - l6 -- n6 black
-  - n6 -- u6 black
+  - a20 -- c20 black
+  - c20 -- c13 black
+  - c13 -- 013 black
+  - b6 -- h6 black
+  - h6 -- j6 black
+  - j6 -- m6 black
+  - m6 -- u6 black
   - u6 -- v6 black
   - v6 -- w6 black
   - w6 -- ab6 black
@@ -231,24 +232,26 @@ wires:
   - ac6 -- ad6 black
   - 011 -- b11 black
   - b11 -- b6 black
+  - h9 -- h6 black
   - j9 -- j6 black
-  - l9 -- l6 black
   - u7 -- u6 black
   - w10 -- w6 black
-  - ac9 -- ac6 black
-  - ab9 -- ac9 black
-  - f6 -- f23 black
-  - f23 -- g23 black
-  - g23 -- h23 black
+  - ac9 -- ac8 black
+  - ab9 -- ab8 black
+  - ab8 -- ac8 black
+  - ab8 -- ab6 black
+  - c20 -- c23 black
+  - c23 -- f23 black
+  - f23 -- h23 black
   - h23 -- o23 black
   - o23 -- u23 black
   - u23 -- x23 black
   - x23 -- aa23 black
-  - g19 -- g23 black
+  - f19 -- f23 black
   - aa16 -- aa23 black
   - ad9 -- ad8 black
-  - e5 -- e25 red
-  - e25 -- k25 red
+  - a23 -- a25 red
+  - a25 -- k25 red
   - k25 -- u25 red
   - u25 -- x25 red
   - x25 -- ab25 red
@@ -261,18 +264,19 @@ wires:
   - i18 -- h18 orange
   - h18 -- h19 orange
   - j18 -- j16 orange
-  - j16 -- g16 orange
+  - j16 -- f16 orange
   - j16 -- q16 orange
-  - a12 -- g12 white
-  - i12 -- j12 yellow
+  - a12 -- e12 white
+  - g12 -- h12 yellow
+  - h12 -- j12 yellow
   - j12 -- l12 yellow
-  - l12 -- m12 yellow
-  - m12 -- o12 yellow
-  - m9 -- n9 yellow
+  - l12 -- o12 yellow
+  - l9 -- m9 yellow
   - q12 -- r12 blue
   - q12 -- q13 blue
   - q12 -- q10 blue
-  - t12 -- t10 green
+  - t12 -- u12 green
+  - u12 -- u10 green
   - t10 -- u10 green
   - u10 -- v10 green
   - s12 -- s13 white
@@ -287,11 +291,11 @@ wires:
   - ad12 -- ae12 white
   - ae12 -- ae5 white
   - PH.TIP -- ae2 white
-  - PH.GND -- ab6 black
+  - PH.GND -- ad6 black
 notes:
-  - text b3 red large bold: IN 5V
+  - text d21 red large bold: IN 5V
   - mark ae2 yellow
-  - text ad3 red large bold: 1+
+  - text ac3 red large bold: 1+
   - mark z6 yellow
   - text z5 red large bold center: 1-
 ```
@@ -300,19 +304,19 @@ notes:
 
 - 基板は 7×9 cm (31 列 × 26 行、縁のパッド付き)。5×7 cm では、同調回路の周りに余白を取ると LM386 までが 1 枚に載らなかった。
   7 MHz はユニバーサル基板の範囲 (10 MHz 以下・短い配線) の内。ブレッドボードは穴の間の容量 (数 pF) が C1 や C3 と同じ桁なので使わない
-- **下の 6 行目と上の 23 行目が GND の筋** (黒)、**25 行目が 5 V の筋** (赤)。上下の GND は F 列でつなぐ。
+- **下の 6 行目と上の 23 行目が GND の筋** (黒)、**25 行目が 5 V の筋** (赤)。上下の GND は J1 (SMA) の凹の金物でつなぐ。
+  上の筋は C 列を下りて凹の上の先端 (0 列 13 行) へ、下の筋は B 列を上がって下の先端 (0 列 11 行) へ。凹は 1 つの金物なので、これで上下がつながり、配線どうしはどこも交差しない。
   検波段の電源 (R6 の先) は 21 行目の赤い線
-- **黄の線が同調回路の熱い側** (I12〜O12)。ここに指やドライバーを近づけると同調がずれるので、線は短く、ほかの線から離す
-- J1 (SMA) の中心導体から C1 までの白い線が、5 V の縦の線 (E 列) と GND の縦の線 (F 列) を跨ぐ。跨ぐのは C1 の**アンテナ側**
-  (50 Ω の側) なので、同調には響かない。被覆線で渡す
+- **黄の線が同調回路の熱い側** (G12〜O12)。ここに指やドライバーを近づけると同調がずれるので、線は短く、ほかの線から離す
+- J1 (SMA) の中心導体から C1 までの白い線 (A12〜E12) は、どの線も跨がない。電源の縦の線を C1 の左に通さないため、USB-C は左上に置いた
 - R6 は GND の筋 (23 行目) を跨いで立つ (K25〜K21)。抵抗のリードで線を跨ぐ形
-- **VC1 はポリバリコン**。図は固定コンデンサの形で描いてある (N9〜N6)。実物は基板の端に両面テープで留め、2 本の端子を短い線で
-  N9 と N6 へつなぐ。つまみの軸に手を近づけると同調が動くときは、ローター側 (軸とつながる端子) を N6 (GND) にする
+- **VC1 はポリバリコン**。図は固定コンデンサの形で描いてある (M9〜M6)。実物は基板の端に両面テープで留め、2 本の端子を短い線で
+  M9 と M6 へつなぐ。つまみの軸に手を近づけると同調が動くときは、ローター側 (軸とつながる端子) を M6 (GND) にする
 - **VR1 (再生) は基板に立てる** (K18・J18・I18)。細かく合わせたいときは多回転の品にする
-- Q1 は **T12 が E、S12 が C、R12 が B**。2SC1815 のピンは平らな面 (印字面) を手前にして左から E・C・B なので、平らな面を図の上 (26 行目の側) へ向けて挿す。向きは図の胴の形ではなく、この穴の名前で確かめる
-- ヘッドホンは 3.5 mm のジャックを基板の外に置き、L と R を並列にして AE2 (TIP) と AB6 (GND) へつなぐ
+- Q1 は **T12 が E、S12 が C、R12 が B** (E は U12 へ出して下ろす)。2SC1815 のピンは平らな面 (印字面) を手前にして左から E・C・B なので、平らな面を図の上 (26 行目の側) へ向けて挿す。向きは図の胴の形ではなく、この穴の名前で確かめる
+- ヘッドホンは 3.5 mm のジャックを基板の外に置き、L と R を並列にして AE2 (TIP) と AD6 (GND) へつなぐ
 - 黄色の丸は AD3 を挟む点: **1+ は AE2** (ヘッドホンの信号)、**1− は Z6** (GND)。W1 は基板に直接つながず、図3 の減衰器を通して J1 へ入れる
-- 電源は左下の USB-C から 5 V (無音のとき 5 mA 前後。LM386 の静止電流が大半)
+- 電源は左上の USB-C から 5 V (変換基板を左の縁に横向きに挿す。A23 が V、A20 が GND。無音のとき 5 mA 前後。LM386 の静止電流が大半)
 
 ## 計器の設定
 

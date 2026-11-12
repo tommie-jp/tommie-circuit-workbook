@@ -217,7 +217,7 @@ parts:
   C13: capacitor/electrolytic l17 l19 10u v=16V
   CA: capacitor/ceramic t18 s18 100p
   CB: capacitor/ceramic r18 p18 100p
-  X1: crystal/hc49 t19 t21 7.03M
+  X1: crystal/hc49 u18 u20 7.03M
   L1: inductor/toroid v22 y22 FT37-61 29t
   VC1:
     type: device
@@ -233,7 +233,7 @@ parts:
   R1: resistor ac16 ac13 10
   C9: capacitor/ceramic ac12 ac11 47n
   C8: capacitor/electrolytic ad16 ad14 220u v=16V
-  J2: sip4 aa10 AE-PHONE-JACK-DIP blue
+  J2: sip4 aa8 AE-PHONE-JACK-DIP blue
   C10: capacitor/electrolytic v6 v7 100u v=16V
   C11: capacitor/ceramic x6 x7 100n
   J3: usb-c/female b5 c5 d5 e5
@@ -259,7 +259,8 @@ wires:
   - q7 -- t7 black
   - t7 -- v7 black
   - v7 -- x7 black
-  - x7 -- ab7 black
+  - x7 -- z7 black
+  - z7 -- ab7 black
   - ab7 -- ac7 black
   - 012 -- a12 black
   - a12 -- a7 black
@@ -275,10 +276,13 @@ wires:
   - n20 -- n24 black
   - p18 -- p24 black
   - z19 -- z24 black
+  - ab8 -- ab7 black
+  - ac8 -- ac7 black
   - ab13 -- ab10 black
-  - ab10 -- ac10 black
-  - ac10 -- ac7 black
+  - ab10 -- z10 black
+  - z10 -- z7 black
   - ac11 -- ac10 black
+  - ac10 -- ab10 black
   - a13 -- g13 white
   - k13 -- m13 yellow
   - m13 -- o13 yellow
@@ -289,11 +293,11 @@ wires:
   - q10 -- s10 green
   - s10 -- s13 green
   - t16 -- t18 orange
-  - t18 -- t19 orange
+  - t18 -- u18 orange
   - s16 -- s18 blue
   - s18 -- r18 blue
-  - t21 -- t22 orange
-  - t22 -- v22 orange
+  - u20 -- u22 orange
+  - u22 -- v22 orange
   - VC1.A -- y22 orange
   - VC1.E -- z24 black
   - u13 -- u11 white
@@ -313,10 +317,10 @@ wires:
   - ab16 -- ac16 orange
   - ac16 -- ad16 orange
   - ac13 -- ac12 white
-  - ad14 -- ad10 orange
-  - ad10 -- ad9 orange
+  - ad14 -- ad9 orange
+  - ad9 -- ad8 orange
   - ad9 -- aa9 orange
-  - aa9 -- aa10 orange
+  - aa9 -- aa8 orange
 notes:
   - mark ad12 yellow
   - text ae12 red large bold right: 1+
@@ -336,13 +340,15 @@ style:
   VXO の C<sub>B</sub>・VC1、U1 のパスコン (C12・C13)、U2 の C7 は 24 行へ落とす
 - **同調回路**: T1 は G〜K 列。リンク (4 回) が g13・g10、2 次 (32 回) が k13・k10。熱い側は 13 行 (黄) を U1 の 1 ピンへ、
   冷たい側は 10 行 (緑) を回って 2 ピンへ。TC1 はトリマ (図は固定のコンデンサの形で描いてある)
-- **VXO**: U1 の 6 ピン (t16) から t18 の C<sub>A</sub>、X1 (t19〜t21)、L1 (v22〜y22) と上へ並べた (橙)。7 ピン (s16) は s18 で C<sub>A</sub> と C<sub>B</sub> へ (青)。
+- **VXO**: U1 の 6 ピン (t16) から t18 の C<sub>A</sub>、隣の列の X1 (u18〜u20)、L1 (v22〜y22) と上へ並べた (橙)。7 ピン (s16) は s18 で C<sub>A</sub> と C<sub>B</sub> へ (青)。
   **X1 から L1 までの線は短く**する。ここは浮遊容量 1 pF で 200 Hz 動く (VC1 を抜いた側、計算値)
 - **VC1 はパネルに付け、2 本の線で基板へ**つなぐ。A (固定の羽根) を L1 の端 y22 へ、E (回る羽根・軸) を GND の z24 へ。線は 5 cm 以内に
-- **J2** は 3.5 mm ジャックの DIP 化キット。L と R を 9 行の線で束ねてある (ステレオのヘッドホンの両耳で鳴る)。
+- **J2** は 3.5 mm ジャックの DIP 化キット。ピンは 8 行で、ジャックの口が基板の下の縁を向く。
+  L と R を 9 行の線で束ねてある (ステレオのヘッドホンの両耳で鳴る)。2 本の GND のピンはすぐ下の 7 行へ落とし、
+  U2 の 4 ピン (ab13) の GND は 10 行と Z 列を回って 7 行へ入る (束ねた線を渡らない)。
   キットの基板はピンヘッダの上に浮くので、下を電源と GND の線が通る
-- **跨ぎは 4 か所**: VBUS が 7 行の GND を渡る e7、アンテナの線が VBUS を渡る e13、VC1 の A の線が 24 行の GND を渡る y24、
-  J2 の L と R を束ねる線が GND を渡る ac9。どれも被覆線で渡る
+- **跨ぎは 3 か所**: VBUS が 7 行の GND を渡る e7、アンテナの線が VBUS を渡る e13、VC1 の A の線が 24 行の GND を渡る y24。
+  どれも被覆線で渡る
 - 動かないときは 3 つに分けて見る: ① J2 に指を触れて (または U2 の入力に AD3 の W1 の 700 Hz を入れて) 音が出るか (音声段)、
   ② 別の受信機か tinySA を基板に近づけて 7.02 MHz 付近に局発が見えるか (VXO)、③ 下の AD3 の信号が聞こえるか (同調とミキサー)
 

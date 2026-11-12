@@ -247,9 +247,9 @@ parts:
   C1: capacitor/ceramic j11 j9 100p
   TC1: capacitor/ceramic k11 k9 50p
   U1: dip8 m13 SA612
-  C2: capacitor/ceramic n9 n8 10n
-  R1: resistor f14 i14 100
-  C5: capacitor/electrolytic j13 j15 10u
+  C2: capacitor/ceramic m8 o8 10n
+  R1: resistor e14 h14 100
+  C5: capacitor/electrolytic i13 i15 10u
   C4: capacitor/ceramic k13 k15 100n
   R2: resistor b17 e17 1k
   R3: resistor e16 b16 100
@@ -265,7 +265,7 @@ parts:
   C15: capacitor/electrolytic t5 t4 220u
   R5: resistor s4 p4 10
   C14: capacitor/ceramic o4 o6 47n
-  J3: sip4 t2 AE-PHONE-JACK-DIP blue
+  J3: sip4 u2 AE-PHONE-JACK-DIP blue
 wires:
   - b5 -- b6 black
   - a6 -- b6 black
@@ -283,28 +283,26 @@ wires:
   - a15 -- a16 black
   - 016 -- a16 black
   - b16 -- a16 black
-  - a15 -- j15 black
-  - j15 -- k15 black
+  - a15 -- i15 black
+  - i15 -- k15 black
   - a8 -- c8 black
   - c8 -- f8 black
-  - f8 -- n8 black
-  - n8 -- o8 black
+  - o6 -- o8 black
   - o8 -- s8 black
   - o10 -- o8 black
   - s8 -- s13 black
   - s13 -- t13 black
   - v8 -- v6 black
-  - u2 -- u6 black
+  - v2 -- v6 black
   - e5 -- e7 red
   - e7 -- p7 red
   - p7 -- r7 red
   - r7 -- u7 red
   - u7 -- u10 red
   - e7 -- e14 red
-  - e14 -- f14 red
-  - i14 -- i13 orange
-  - i13 -- j13 orange
-  - j13 -- k13 orange
+  - h14 -- h13 orange
+  - h13 -- i13 orange
+  - i13 -- k13 orange
   - k13 -- m13 orange
   - a10 -- b10 white
   - b10 -- c10 white
@@ -318,7 +316,9 @@ wires:
   - l10 -- m10 yellow
   - i9 -- j9 white
   - j9 -- k9 white
-  - k9 -- n9 white
+  - k9 -- m9 white
+  - m9 -- n9 white
+  - m9 -- m8 white
   - n9 -- n10 white
   - a17 -- b17 green
   - e16 -- e17 green
@@ -341,10 +341,11 @@ wires:
   - t10 -- t9 pink
   - t9 -- t5 pink
   - s4 -- t4 pink
-  - t4 -- t2 pink
-  - t2 -- t1 pink
-  - t1 -- w1 pink
-  - w1 -- w2 pink
+  - t4 -- t1 pink
+  - t1 -- u1 pink
+  - u1 -- u2 pink
+  - u1 -- x1 pink
+  - x1 -- x2 pink
   - p4 -- o4 white
 notes:
   - mark b13 yellow
@@ -360,12 +361,12 @@ notes:
 
 - **左の縁に入口が 2 つ**: 上の J2 が局発、下の J1 がアンテナ (どちらも端面実装の SMA)。信号は左から右へ流れ、右下の J3 (3.5 mm ジャック) から音が出る
 - **電源は左下の USB-C (J4)**。赤い線が 5 V で、7 行を右へ走って LM386 (U2) の 6 番へ、E 列を上って R1 から SA612 (U1) の 8 番へ行く。
-  黒い線が GND で、6 行と 8 行と左端の A 列。D+ と D− は使わない
-- **線が跨ぐ所は 5 つ** (弧で描いた所)。E 列の 5 V が GND (6 行・8 行) とアンテナ側の線 (11 行) を、T 列の音声出力が 5 V (7 行) と GND (6 行) を跨ぐ。
+  黒い線が GND で、6 行と 8 行と左端の A 列。8 行は T1 の輪の下をくぐらせず、F8 で止めて、右の側は O 列で 6 行から上げる。D+ と D− は使わない
+- **線が跨ぐ所は 6 つ** (弧で描いた所)。E 列の 5 V が GND (6 行・8 行) とアンテナ側の線 (11 行) を、O 列の GND が 5 V (7 行) を、T 列の音声出力が 5 V (7 行) と GND (6 行) を跨ぐ。
   どれも直流か低いインピーダンスの線どうしで、同調回路の熱い側 (黄色) は跨がせていない。被覆線で渡す
 - **T1** は F〜I 列。リンクが F11・F8、2 次が I11 (IN_A の側)・I9 (IN_B の側)。**TC1** (K 列) は図では固定のコンデンサの形で描いてある (トリマはフェンスに未登録)
 - **U2 (LM386) は 180° 回して挿す** (切り欠きが右)。1 番が右上の W13 で、出力 (5 番) と電源 (6 番) が下の列に来て、電源の線と J3 に近くなる
-- **J3** は秋月のジャックの DIP 化キットで、基板の下の縁から外へ張り出す。L と R を 1 行の線で結び、両耳に同じ音を出す
+- **J3** は秋月のジャックの DIP 化キットで、U〜X 列の 2 行に挿し、基板の右下の角から外へ張り出す。L と R を 1 行の線で結び、両耳に同じ音を出す
 - **黄色の丸は AD3 を挟む穴**。`W1` (B13、R4 の先)・`1+` (S4、音声出力)・`GND` (X6)。測るときだけ挟む
 - U1 の上 (L〜P 列の 14〜16 行) は空けてある。[6-6](06-vxo.md) で水晶の VXO の部品を足す場所
 
