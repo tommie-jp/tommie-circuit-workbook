@@ -20,6 +20,117 @@ board: —
 この第 6 章は**受信機**で、いちばん作りやすい物から順に並べる。第 7 章が送信機、第 8 章がアンテナと仕上げ (まだ書いていない)。
 受信だけなら免許は要らない。この章の回路は電波を出さない。
 
+## 道のり — 中波ラジオからトランシーバまで
+
+アマチュア無線の自作を、作りやすい物から順に 4 つの段階に分ける。段階の区切りは回路の難しさではなく、
+**電波を出すか**と**免許が要るか**に置いた。①②は聞くだけ、③はアンテナをつながずダミーロード (50 Ω の抵抗) に送るだけ、
+④で初めてアンテナから電波を出す。終点は受信機と送信機を 1 枚にしたトランシーバ (8-4) で、その先はこの本では扱わない。
+
+```plantuml
+@startuml
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName "Noto Sans CJK JP"
+skinparam rectangle {
+  RoundCorner 6
+}
+skinparam packageStyle rectangle
+
+package "① 中波を聞く\n(免許は要らない)" as P1 {
+  rectangle "1 ゲルマラジオ\n(01-circuits 9-2)" as GE #E8F0FE
+  rectangle "2 1 石ラジオ\n(01-circuits 9-3)" as TR1 #E8F0FE
+}
+package "② 7 MHz を聞く\n(免許は要らない)" as P2 {
+  rectangle "3 アンテナと同調\n(6-2・6-3)" as ANT #FFF8E1
+  rectangle "4 ダイレクトコンバージョン\n最初の 1 台 (6-5)" as DC #E8F0FE
+  rectangle "脇道: VXO・再生式\n(6-6・6-8)" as VXO #FFFFFF
+}
+package "③ ダミーロードに送る\n(アンテナをつながない)" as P3 {
+  rectangle "5 ダミーロードと電力計\n(7-2)" as DL #E6F4EA
+  rectangle "6 1 石の送信機と LPF\n数十 mW (7-3・7-4)" as TX1 #FDECEA
+  rectangle "7 2 石 0.3 W と\nキーイング (7-5・7-6)" as TX2 #FDECEA
+}
+package "④ 交信する\n(従事者免許と局の免許)" as P4 {
+  rectangle "8 SWR ブリッジと\nダイポール (8-1・8-2)" as SWR #FFF8E1
+  rectangle "脇道: CW 用スーパー\n(6-9・6-10)" as SH #FFFFFF
+  rectangle "9 トランシーバ\n(8-3・8-4)" as TRX #F3E5F5
+}
+package "その先\n(この本の外)" as P5 {
+  rectangle "ほかのバンド\n3.5・10・14 MHz" as BAND #FFFFFF
+  rectangle "SSB・デジタル (FT8)\nI/Q は 01-circuits 第 14 章" as SSB #FFFFFF
+}
+
+GE --> TR1
+TR1 --> ANT
+ANT --> DC
+DC --> VXO
+DC --> DL
+DL --> TX1
+TX1 --> TX2
+TX2 --> SWR
+VXO --> SH
+SH --> TRX
+SWR --> TRX
+TRX ..> BAND
+TRX ..> SSB
+@enduml
+```
+
+![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/06-ham-receiver/plantuml/01-block-1.svg)
+
+箱の頭の数字 (1〜9) が本筋の作る順。白い箱は脇道で、組まなくても先へ進める。
+送信の決まり (免許・保証認定・スプリアス) は 7-1 で扱う (第 7・8 章はまだ書いていない)。
+
+**難しさは、次の 6 つのうち当てはまる数で数える** (0〜6 点)。書き手の感覚ではなく、題を見れば誰でも同じ点になる物を選んだ。
+
+| 記号 | 当てはまると 1 点 | 難しくなる理由 |
+| --- | --- | --- |
+| A | 3 MHz を超える | ブレッドボードが使えず、ユニバーサル基板に短い線で組む |
+| B | 計器で合わせる所がある | 同調・帯域・バイアスを、測りながら追い込む |
+| C | tinySA Ultra か LiteVNA64 が要る | Analog Discovery 3 だけでは確かめられない |
+| D | 2 つ以上のユニットを合わせる | 動かないときに疑う所が増える |
+| E | 0.1 W 以上を扱う | 発熱、高調波、石を壊す負荷の外れ |
+| F | 能動素子がある | 電源とバイアスが要り、発振することがある |
+
+| 順 | 作る物 | 題 | A | B | C | D | E | F | 点 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | ゲルマラジオ | [01-circuits 9-2](../../01-circuits/09-rf/02-crystal-radio.md) | | | | | | | 0 |
+| 2 | 1 石ラジオ | [01-circuits 9-3](../../01-circuits/09-rf/03-one-transistor-radio.md) | | | | | | ○ | 1 |
+| 3 | アンテナと同調 | [6-2](02-wire-antenna.md)・[6-3](03-input-tuning.md) | ○ | ○ | ○ | | | | 3 |
+| 4 | ダイレクトコンバージョン受信機 | [6-5](05-direct-conversion.md) | ○ | | | ○ | | ○ | 3 |
+| 5 | ダミーロードと電力計 | 7-2 | ○ | | ○ | | | | 2 |
+| 6 | 1 石の送信機とローパスフィルタ | 7-3・7-4 | ○ | ○ | ○ | | | ○ | 4 |
+| 7 | 2 石 0.3 W とキーイング | 7-5・7-6 | ○ | ○ | ○ | | ○ | ○ | 5 |
+| 8 | SWR ブリッジとダイポール | 8-1・8-2 | ○ | ○ | ○ | | | | 3 |
+| 9 | トランシーバ | 8-3・8-4 | ○ | ○ | ○ | ○ | ○ | ○ | 6 |
+
+5 番から先の点は、まだ書いていない題の計画から付けた見込み。題を書いたら付け直す。
+
+```graph
+# グラフ (tommie-fence の graph フェンス)
+title: 作る順と難しさ — 測る道具を作る題 (5・8) で一度下がる
+x: 作る順 番 1..9
+y:
+  - 難しさ 点 0..6
+lines:
+  難しさ 点:
+    - 1 0: ゲルマラジオ
+    - 2 1: 1 石ラジオ
+    - 3 3: アンテナと同調
+    - 4 3: 最初の 1 台
+    - 5 2: ダミーロード
+    - 6 4: 1 石の送信機
+    - 7 5: 2 石 0.3 W
+    - 8 3: SWR ブリッジ
+    - 9 6: トランシーバ
+```
+
+![グラフ](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/06-ham-receiver/graph/01-block.svg)
+
+- **いちばん大きい段差は 2 → 3** (中波から 7 MHz へ)。基板と計器が一度に替わる。3 を単独の題にして、同調回路だけを LiteVNA64 で合わせる練習に充ててある
+- **4 (最初の 1 台) は 3 と同じ点**。3 で同調を済ませてあるので、足すのは IC と局発だけになる
+- **5 と 8 で点が下がる**。ダミーロード・電力計・SWR ブリッジは受動部品だけの測る道具で、次の題 (6・9) を確かめるのに使う
+
 ## 前提知識
 
 この章は、次の題を読んで (できれば組んで) いることを前提にする。同じ説明は繰り返さず、題を指す。
@@ -107,7 +218,7 @@ LO --> MIX
 @enduml
 ```
 
-![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/06-ham-receiver/plantuml/01-block-1.svg)
+![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/06-ham-receiver/plantuml/01-block-2.svg)
 
 **スーパーヘテロダイン (6-10)**: いったん中間周波 (4.9152 MHz の水晶で作るフィルタの中心、4.9155 MHz) に変え、帯域 460 Hz ほどの水晶ラダーフィルタ (6-9) に通してから、
 もう一度混ぜて音にする。フィルタが逆サイドを落とすので、1 つの信号は 1 か所でしか聞こえない。IC は 3 個 (局発を除く)。
@@ -140,7 +251,7 @@ BFO --> MIX2
 @enduml
 ```
 
-![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/06-ham-receiver/plantuml/01-block-2.svg)
+![ブロック図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/06-ham-receiver/plantuml/01-block-3.svg)
 
 **再生式 (6-8)** は別の系統で、1 石の検波回路に正帰還を掛けて感度と選択度を稼ぐ。部品はいちばん少ないが、調整に慣れが要る。
 
