@@ -1,0 +1,31 @@
+* 6-6 VXO: コルピッツ + 水晶 + L1 + VC1 が発振を始めるか、OSC_B の振幅はどれだけかを過渡解析で見る
+* SA612 の内蔵の発振用トランジスタは一般的な小信号 NPN で代用した (内部の定数は公開の模型が無い)。
+* バイアスは「ベース約 VCC-1.3 V、エミッタに 25 kohm」の見積りで、エミッタ電流は約 0.12 mA
+* 周波数はこのデッキでは読まない (刻み 2 ns の台形積分は共振周波数を約 0.06 % 低く見せる)。周波数は 06-vxo-ac.cir で読む
+.param VC=100p LX=47u RL1=26
+.model QOSC NPN(IS=1e-16 BF=100 VAF=50 RB=50 CJE=0.5p CJC=0.3p TF=30p)
+VCC vcc 0 5
+RB1 vcc b 18k
+RB2 b 0 51k
+Q1 vcc b e QOSC
+RE e 0 25k
+CA b e 100p
+CB e 0 100p
+* 水晶 (b - x)
+Lm b m1 25.64761488m Rser=1u
+Cm m1 m2 20f
+Rs m2 x 20
+C0 b x 5p
+L1 x c {LX} Rser={RL1}
+Cvc c 0 {VC}
+Cst c 0 10p
+.ic V(c)=10m
+.options method=trap
+.tran 0 10m 0 2n
+.meas TRAN vb_pp PP V(b) FROM 9.9m TO 10m
+.meas TRAN ve_pp PP V(e) FROM 9.9m TO 10m
+.meas TRAN vb_pp_2m PP V(b) FROM 1.9m TO 2m
+.meas TRAN vb_pp_5m PP V(b) FROM 4.9m TO 5m
+.meas TRAN ie_avg AVG I(RE) FROM 9.9m TO 10m
+.meas TRAN vb_avg AVG V(b) FROM 9.9m TO 10m
+.end

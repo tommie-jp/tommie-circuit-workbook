@@ -1,0 +1,38 @@
+* 6-4 音声段 (図1)。LM386 は振る舞いの模型 (仮定): 入力は 2・3 番とも 50 kΩ で GND、
+* 差動の利得 200 倍 (46 dB、1-8 番間に 10 uF)、帯域 30 kHz の 1 極 (資料の 300 kHz @ 20 倍から GBW 一定と置いた)、
+* 出力の直流 2.5 V、出力抵抗 0.2 Ω。ひずみ・雑音は入っていない。実測ではない
+* 入力側: W1 -> R3 150k -> A。R1・R2 1.5k は SA612 の OUT_A・OUT_B (各 1.5 kΩ) の代わり。C1 47n が A-B 間
+.param CC=10n RLOAD=33
+Vw w 0 DC 0 AC 1
+R3 w a 150k
+R1 a 0 1.5k
+R2 b 0 1.5k
+C1 a b 47n
+C2 a p {CC}
+C3 b m {CC}
+Rip p 0 50k
+Rim m 0 50k
+Gm 0 n1 p m 1m
+Rn n1 0 200k
+Cn n1 0 {1/(6.2832*30k*200k)}
+Eo x 0 n1 0 1
+Vdc y x DC 2.5
+Ro y out 0.2
+C6 out o 220u
+RL o 0 {RLOAD}
+R4 out z 10
+C7 z 0 47n
+.ac dec 200 10 100k
+.step param RLOAD list 33 8.2
+.meas ac gmax MAX mag(V(o))
+.meas ac fpk WHEN mag(V(o))=gmax
+.meas ac g700 FIND mag(V(o)) AT=700
+.meas ac fl WHEN mag(V(o))=0.7071*gmax RISE=1
+.meas ac fh WHEN mag(V(o))=0.7071*gmax FALL=1
+.meas ac g100 FIND mag(V(o)) AT=100
+.meas ac g300 FIND mag(V(o)) AT=300
+.meas ac g3k FIND mag(V(o)) AT=3k
+.meas ac g50 FIND mag(V(o)) AT=50
+.meas ac vd700 FIND mag(V(p)-V(m)) AT=700
+.meas ac va700 FIND mag(V(a)-V(b)) AT=700
+.end

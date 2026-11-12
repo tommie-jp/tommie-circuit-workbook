@@ -1,0 +1,38 @@
+* 6-9 水晶ラダーフィルタ (4.9152 MHz x 4, C 220 pF x 5): 50 Ω 系の治具 (両端に直列 150 Ω)。図3 の dut: と同じ回路
+* 水晶は見積りの等価回路 Cm 15 fF / Lm 69.898 mH / Rs 30 Ω / C0 4 pF。S21 = 2*V(out)/Vs
+* LTspice のコイルの既定の直列抵抗は Rser=1u で消してある (理想の模型どうしの比べ。実測ではない)
+.ac lin 8001 4911514 4919514
+Vs s 0 AC 1
+Rs s in 50
+R1 in a0 150
+C1 a0 n1 2.200e-10
+Cm1 n1 x1a 1.500000e-14
+Rm1 x1a x1b 30
+Lm1 x1b n2 6.989830045e-02 Rser=1u
+Co1 n1 n2 4.000e-12
+C2 n2 0 2.200e-10
+Cm2 n2 x2a 1.500000e-14
+Rm2 x2a x2b 30
+Lm2 x2b n3 6.989830045e-02 Rser=1u
+Co2 n2 n3 4.000e-12
+C3 n3 0 2.200e-10
+Cm3 n3 x3a 1.500000e-14
+Rm3 x3a x3b 30
+Lm3 x3b n4 6.989830045e-02 Rser=1u
+Co3 n3 n4 4.000e-12
+C4 n4 0 2.200e-10
+Cm4 n4 x4a 1.500000e-14
+Rm4 x4a x4b 30
+Lm4 x4b n5 6.989830045e-02 Rser=1u
+Co4 n4 n5 4.000e-12
+C5 n5 b0 2.200e-10
+R2 b0 out 150
+RL out 0 50
+.meas AC lo FIND V(out) AT 4915283
+.meas AC pk FIND V(out) AT 4915514
+.meas AC hi FIND V(out) AT 4915744
+.meas AC m1400 FIND V(out) AT 4914114
+.meas AC p1400 FIND V(out) AT 4916914
+.meas AC m700 FIND V(out) AT 4914814
+.meas AC p700 FIND V(out) AT 4916214
+.end

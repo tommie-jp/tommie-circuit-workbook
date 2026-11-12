@@ -1,0 +1,48 @@
+* 6-8 regenerative detector: operating point vs VW
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+VCC vcc 0 5
+L1 tank 0 4.096u Rser=1.22
+C2 tank 0 62p
+CVC tank 0 18p
+C4 tank b 47p
+C5 b e 220p
+C6 e 0 470p
+R2 e 0 4.7k
+R1 w b 100k
+R3 vcc c 22k
+C7 c 0 2.2n
+Q1 c b e Q1815
+RANT a a1 50
+C1 a1 tank 4.7p
+VW w 0 1
+VANT a 0 0
+.dc VW 0.2 2.0 0.005
+.meas dc ve0 find v(e) at 0.3
+.meas dc vc0 find v(c) at 0.3
+.meas dc ve1 find v(e) at 0.7
+.meas dc vc1 find v(c) at 0.7
+.meas dc ve2 find v(e) at 0.8
+.meas dc vc2 find v(c) at 0.8
+.meas dc ve3 find v(e) at 0.9
+.meas dc vc3 find v(c) at 0.9
+.meas dc ve4 find v(e) at 0.95
+.meas dc vc4 find v(c) at 0.95
+.meas dc ve5 find v(e) at 1.0
+.meas dc vc5 find v(c) at 1.0
+.meas dc ve6 find v(e) at 1.02
+.meas dc vc6 find v(c) at 1.02
+.meas dc ve7 find v(e) at 1.03
+.meas dc vc7 find v(c) at 1.03
+.meas dc ve8 find v(e) at 1.04
+.meas dc vc8 find v(c) at 1.04
+.meas dc ve9 find v(e) at 1.05
+.meas dc vc9 find v(c) at 1.05
+.meas dc ve10 find v(e) at 1.06
+.meas dc vc10 find v(c) at 1.06
+.meas dc ve11 find v(e) at 1.1
+.meas dc vc11 find v(c) at 1.1
+.meas dc ve12 find v(e) at 1.2
+.meas dc vc12 find v(c) at 1.2
+.meas dc ve13 find v(e) at 1.4
+.meas dc vc13 find v(c) at 1.4
+.end

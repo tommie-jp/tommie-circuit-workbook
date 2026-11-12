@@ -1,0 +1,32 @@
+* 6-8 regenerative detector: transient (am100)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+VCC vcc 0 5
+L1 tank 0 4.096u Rser=1.22
+C2 tank 0 62p
+CVC tank 0 18p
+C4 tank b 47p
+C5 b e 220p
+C6 e 0 470p
+R2 e 0 4.7k
+R1 w b 100k
+R3 vcc c 22k
+C7 c 0 2.2n
+Q1 c b e Q1815
+RANT a a1 50
+C1 a1 tank 4.7p
+VW w 0 1.0
+BANT a 0 V=1m*(1+0.3*sin(2*pi*1k*time))*sin(2*pi*7149260*time)
+* audio path to LM386 +INPUT (50k)
+C10 c au 10n ic=3.153
+.ic v(c)=3.153
+RIN au 0 50k
+.options reltol=1e-4
+.tran 0 6m 0 1n uic
+.meas tran tkpp0 pp v(tank) from {6m-3*2m} to {6m-2*2m}
+.meas tran tkpp pp v(tank) from {6m-2m} to 6m
+.meas tran aupp pp v(au) from {6m-2m} to 6m
+.meas tran vcavg avg v(c) from {6m-2m} to 6m
+.meas tran t1 find time when v(tank)=0 rise=1 td={6m-2m}
+.meas tran t2 find time when v(tank)=0 rise=1001 td={6m-2m}
+.meas tran aurms rms v(au) from {6m-2m} to 6m
+.end

@@ -29,3 +29,26 @@
 - { id: 5-4, tier: 300, board: PF, title: フレームを読み下す — マンチェスターを PIO で復号し、MAC と IP のヘッダを USB シリアルに出す }
 - { id: 5-5, tier: 300, board: PF, title: ARP と ping に答える — Pico 2 に IP アドレスを持たせ、応答までの時間をオシロで測る }
 - { id: 5-6, tier: 300, board: PF, title: パルストランスを足す — トランス内蔵の RJ45 に差し替えて絶縁し、波形の違いを比べる }
+- { id: 6-1, tier: 300, board: —, title: 7 MHz の CW 受信機のブロック図 — 前提知識と、中波から変わること }
+- { id: 6-2, tier: 300, board: —, title: 最初のアンテナ — 室内のワイヤ 5 m とカウンターポイズを tinySA で確かめる }
+- { id: 6-3, tier: 300, board: PF, title: 入力の同調回路 — T37-2 のトロイダルコイルを NanoVNA で 7 MHz に合わせる }
+- { id: 6-4, tier: 300, board: BB, title: 音声段 — LM386 で 46 dB、CW の 700 Hz の周りだけを通す }
+- { id: 6-5, tier: 300, board: [PF, BB], title: ダイレクトコンバージョン受信機 — SA612 と Si5351 と LM386 で 7 MHz の CW を聞く }
+- { id: 6-6, tier: 300, board: PF, title: 局発を水晶の VXO に替える — マイコン無しで 7.030 MHz の水晶を数 kHz 引っぱる }
+- { id: 6-7, tier: 300, board: —, title: 同調式のスモールループ — 直径 60 cm の輪とバリコンで 7 MHz に合わせ、ヌルでノイズを消す }
+- { id: 6-8, tier: 300, board: PF, title: 再生式受信機 — 1 石の再生検波と LM386 で短波放送と CW を聞く }
+- { id: 6-9, tier: 300, board: PF, title: 水晶ラダーフィルタ — 4.9152 MHz の水晶 4 個で CW の帯域を作り NanoVNA で測る }
+- { id: 6-10, tier: 300, board: PF, title: CW 用スーパーヘテロダイン — SA612 2 個と水晶ラダーフィルタで逆サイドの混信を落とす }
+- { id: 7-1, tier: 300, board: —, title: 送信の前に — 免許・保証認定・スプリアスの決まりと、ダミーロードで実験する約束 }
+- { id: 7-2, tier: 300, board: PF, title: 50 Ω のダミーロードと、ダイオード検波の電力計 }
+- { id: 7-3, tier: 300, board: PF, title: 水晶発振 1 石の CW 送信機 — 数十 mW をダミーロードで見る }
+- { id: 7-4, tier: 300, board: PF, title: ローパスフィルタ — 5 素子で高調波を落とし、tinySA で前後を比べる }
+- { id: 7-5, tier: 300, board: PF, title: 発振と終段の 2 石 — 2N3866 で 0.3 W 前後 }
+- { id: 7-6, tier: 300, board: PF, title: キーイングの整形 — キークリックをオシロと tinySA で見る }
+- { id: 7-7, tier: 300, board: PF, title: Si5351 と BS170 の E 級終段 }
+- { id: 7-8, tier: 300, board: BB, title: Pico 2 のキーヤー — パドルの入力と速度の設定 }
+- { id: 8-1, tier: 300, board: PF, title: SWR ブリッジを作り、NanoVNA の値と比べる }
+- { id: 8-2, tier: 300, board: —, title: 半波長ダイポールと EFHW (49:1 トランス) を NanoVNA で合わせる }
+- { id: 8-3, tier: 300, board: PF, title: 送受の切り替え (セミブレークイン) とサイドトーン }
+- { id: 8-4, tier: 300, board: PF, title: 組み立て — 受信機と送信機を 1 枚にした 7 MHz の CW トランシーバ }
+- { id: 8-5, tier: 300, board: BB, title: CW を Pico 2 で読む — 音を FFT して符号を字にする }

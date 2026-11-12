@@ -1,0 +1,22 @@
+* 6-6 VXO: 水晶 X1 + L1 + VC1 + コルピッツの CA・CB を 1 周の直列回路にして、電流が最大になる周波数 (= 発振周波数) を AC 解析で読む
+* 水晶は 7 MHz の HC-49/U の典型の見積り: Cm 20 fF, C0 5 pF, Rs 20 ohm, 刻印 7.030 MHz (負荷 20 pF) から fs = 7027189 Hz, Lm = 25.64761488 mH (桁を落とすと fs が数十 Hz ずれる)
+* L1 は FT37-61 に 29 回 (46 uH の見積り。47 uH と置く)、Q 80 と見積もって直列抵抗 26 ohm。浮遊容量 10 pF を VC1 と並列に置く
+.param VC=100p LX=47u RL1=26
+V1 a a2 AC 1
+* 水晶 (a - b)
+Lm a m1 25.64761488m Rser=1u
+Cm m1 m2 20f
+Rs m2 b 20
+C0 a b 5p
+* 直列のコイルとバリコン (b - c - 0)
+L1 b c {LX} Rser={RL1}
+Cvc c 0 {VC}
+Cst c 0 10p
+* コルピッツの 2 本 (a2 - e - 0)
+CA a2 e 100p
+CB e 0 100p
+* 周は a -> 水晶 -> L1 -> VC1 -> 0 -> CB -> CA -> a2 -> V1 -> a
+.ac lin 40001 7.010Meg 7.034Meg
+.meas AC ipk MAX mag(I(V1))
+.meas AC fosc WHEN mag(I(V1))=ipk
+.end

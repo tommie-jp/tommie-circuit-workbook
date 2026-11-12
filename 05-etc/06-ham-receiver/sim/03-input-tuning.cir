@@ -1,0 +1,28 @@
+* 6-3 入力の同調回路: 図1 の回路 (T37-2 に 2 次 32 回・リンク 4 回、C1 100 pF + TC1、R1 1.5 kΩ) を AC 解析で確かめる
+* 50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(out)/Vs、CH0 から見た Z = 50·V(in)/(Vs−V(in))
+* コイルの無負荷 Q は 150 と置き (見積り)、2 次に並列の 27.4 kΩ で表す。巻線の直列抵抗は Rser=1u に固定
+* 結合係数 kk は 1 (理想) と 0.9 (漏れのある場合の見積り) を回す。ct は C1 + TC1 + 浮遊の合計
+.param kk=1 ct=122.68p
+Vs s 0 AC 1
+Rs s in 50
+L1 in 0 64n Rser=1u
+L2 hot 0 4.096u Rser=1u
+K1 L1 L2 {kk}
+Rq hot 0 27.4k
+Ct hot 0 {ct}
+R1 hot out 1.5k
+RL out 0 50
+.ac lin 5801 1e6 30e6
+.meas AC pk MAX mag(V(out))
+.meas AC fpk WHEN mag(V(out))=pk
+.meas AC s21_1m FIND V(out) AT 1e6
+.meas AC s21_7m FIND V(out) AT 7e6
+.meas AC s21_7m1 FIND V(out) AT 7.1e6
+.meas AC s21_7m45 FIND V(out) AT 7.45e6
+.meas AC s21_14m2 FIND V(out) AT 14.2e6
+.meas AC s21_21m3 FIND V(out) AT 21.3e6
+.meas AC in_7m1 FIND V(in) AT 7.1e6
+.meas AC hot_7m1 FIND V(hot) AT 7.1e6
+.meas AC flo WHEN mag(V(out))=pk/sqrt(2) RISE=1
+.meas AC fhi WHEN mag(V(out))=pk/sqrt(2) FALL=1
+.end

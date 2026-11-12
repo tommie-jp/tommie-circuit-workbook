@@ -1,0 +1,24 @@
+* 6-8 regenerative detector: small-signal Q vs regeneration (VW)
+.model Q1815 NPN (IS=2e-14 BF=250 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+VCC vcc 0 5
+L1 tank 0 4.096u Rser=1.22
+C2 tank 0 62p
+CVC tank 0 18p
+C4 tank b 47p
+C5 b e 220p
+C6 e 0 470p
+R2 e 0 4.7k
+R1 w b 100k
+R3 vcc c 22k
+C7 c 0 2.2n
+Q1 c b e Q1815
+RANT a a1 50
+C1 a1 tank 4.7p
+VW w 0 {VW}
+VANT a 0 AC 1
+.ac lin 70001 6.9Meg 7.6Meg
+.step param VW list 0.3 0.7 0.8 0.9 0.95 1.0 1.02 1.03 1.04 1.05 1.06 1.1
+.meas ac pk max mag(v(tank))
+.meas ac fpk when mag(v(tank))=pk
+.meas ac bw trig mag(v(tank))=pk/sqrt(2) rise=1 targ mag(v(tank))=pk/sqrt(2) fall=last
+.end

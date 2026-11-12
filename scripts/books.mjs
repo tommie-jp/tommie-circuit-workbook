@@ -118,7 +118,7 @@ export const BOOKS = [
     number: 5,
     slug: 'etc',
     title: '番外の工作',
-    summary: '4 冊の部品を組み合わせて作る工作。CPU もどき、中波ラジオの時報で動く時計、2SC1815 のミキサー、デュアルゲート FET ミキサー、ディスクリート部品と Raspberry Pi Pico 2 で作る 10BASE-T',
+    summary: '4 冊の部品を組み合わせて作る工作。CPU もどき、中波ラジオの時報で動く時計、2SC1815 のミキサー、デュアルゲート FET ミキサー、ディスクリート部品と Raspberry Pi Pico 2 で作る 10BASE-T、アマチュア無線の 7 MHz の CW 受信機',
     columns: ['board'],
     chapters: [
       [1, 'cpu', 'CPU もどき'],
@@ -126,6 +126,9 @@ export const BOOKS = [
       [3, 'mixer-2sc1815', '2SC1815 のミキサー'],
       [4, 'mixer-dual-gate-fet', 'デュアルゲート FET ミキサー (参考)'],
       [5, 'ethernet-10base-t', '10BASE-T のイーサネット'],
+      [6, 'ham-receiver', 'アマチュア無線の自作 ① 7 MHz の CW 受信機'],
+      [7, 'ham-transmitter', 'アマチュア無線の自作 ② 7 MHz の CW 送信機'],
+      [8, 'ham-antenna-transceiver', 'アマチュア無線の自作 ③ アンテナと仕上げ'],
     ],
   },
   {

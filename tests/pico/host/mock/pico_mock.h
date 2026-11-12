@@ -85,6 +85,7 @@ typedef struct {
     uint8_t uart_rx[1024]; uint nrx, rx_pos;
     uint8_t i2c_reply[16]; uint n_i2c_reply;
     uint i2c_writes, i2c_reads;
+    struct { uint8_t addr, n; uint8_t d[15]; } i2c_w[2048]; uint n_i2c_w;   /* i2c_write_blocking の中身 (先頭 15 バイトまで)。6-5 */
     uint spi_baud; uint calls;
     uint dma_claimed;
     /* DMA / IRQ / PIO / SPI */
