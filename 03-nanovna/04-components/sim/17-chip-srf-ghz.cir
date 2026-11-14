@@ -1,0 +1,35 @@
+* 4-17 チップ部品 (0603 / 0805) の SRF を GHz で: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* すべて理想の模型 (実測ではない)
+
+.ac dec 2000 1e+08 3.1e+09
+* 図3: shunt C 10p esr 0.2 esl 0.9n
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+C1_0_0 n0_0 m1_0_0 1.000000000e-11
+R1_1_0 m1_0_0 m1_1_0 2.000000000e-01
+L1_2_0 m1_1_0 0 9.000000000e-10 Rser=1u
+RL_0 n0_0 0 50
+.meas AC s21_0_0 FIND 2*V(n0_0)/V(s_0) AT 5e+08
+.meas AC s21_0_1 FIND 2*V(n0_0)/V(s_0) AT 1.6776e+09
+.meas AC s21_0_2 FIND 2*V(n0_0)/V(s_0) AT 3e+09
+* 図4: shunt C 10p esr 0.2 esl 1.1n
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+C1_0_1 n0_1 m1_0_1 1.000000000e-11
+R1_1_1 m1_0_1 m1_1_1 2.000000000e-01
+L1_2_1 m1_1_1 0 1.100000000e-09 Rser=1u
+RL_1 n0_1 0 50
+.meas AC s21_1_0 FIND 2*V(n0_1)/V(s_1) AT 5e+08
+.meas AC s21_1_1 FIND 2*V(n0_1)/V(s_1) AT 1.5175e+09
+.meas AC s21_1_2 FIND 2*V(n0_1)/V(s_1) AT 3e+09
+* 本文の表: via 1 本 shunt C 10p esr 0.2 esl 1.4n
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+C1_0_2 n0_2 m1_0_2 1.000000000e-11
+R1_1_2 m1_0_2 m1_1_2 2.000000000e-01
+L1_2_2 m1_1_2 0 1.400000000e-09 Rser=1u
+RL_2 n0_2 0 50
+.meas AC s21_2_0 FIND 2*V(n0_2)/V(s_2) AT 1.3451e+09
+.end

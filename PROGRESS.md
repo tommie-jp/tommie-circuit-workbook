@@ -16,11 +16,11 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 232 | 227 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 5 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 202 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 0 |
-| [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 117 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 108 |
+| [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 123 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 102 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 53 | 37 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 243 | 161 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1155** | **844** | **0** | **0** | **0** | |
+| **計** | **1155** | **850** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -695,12 +695,12 @@
 | 4-14 | [トロイダルコアの材質比較](03-nanovna/04-components/14-toroid-materials.md) | ✓ | [ ] | — | — |
 | 4-15 | [リレー・スイッチの S21](03-nanovna/04-components/15-relay-switch.md) | ✓ | [ ] | — | — |
 | 4-16 | [perfboard のパターンの容量](03-nanovna/04-components/16-perfboard-capacitance.md) | ✓ | [ ] | — | — |
-| 4-17 | チップ部品 (0603 / 0805) の SRF を GHz で | | | | |
-| 4-18 | フェライトビーズの GHz 特性 | | | | |
-| 4-19 | 空芯コイルの Q を 1 GHz 手前まで | | | | |
-| 4-20 | 抵抗のリード品とチップ品 (GHz) | | | | |
-| 4-21 | コンデンサの Q と誘電体 (C0G vs X7R) | | | | |
-| 4-22 | 電解 vs OS-CON vs セラミック | | | | |
+| 4-17 | [チップ部品 (0603 / 0805) の SRF を GHz で](03-nanovna/04-components/17-chip-srf-ghz.md) | ✓ | [ ] | — | — |
+| 4-18 | [フェライトビーズの GHz 特性](03-nanovna/04-components/18-ferrite-bead-ghz.md) | ✓ | [ ] | — | — |
+| 4-19 | [空芯コイルの Q を 1 GHz 手前まで](03-nanovna/04-components/19-air-coil-q.md) | ✓ | [ ] | — | — |
+| 4-20 | [抵抗のリード品とチップ品 (GHz)](03-nanovna/04-components/20-lead-vs-chip-resistor.md) | ✓ | [ ] | — | — |
+| 4-21 | [コンデンサの Q と誘電体 (C0G vs X7R)](03-nanovna/04-components/21-c0g-vs-x7r-q.md) | ✓ | [ ] | — | — |
+| 4-22 | [電解 vs OS-CON vs セラミック](03-nanovna/04-components/22-elec-oscon-ceramic.md) | ✓ | [ ] | — | — |
 | 4-23 | 巻線抵抗のインダクタンス | | | | |
 | 4-24 | ケーブルを部品として — 容量 / m とインダクタンス / m | | | | |
 | 4-25 | PIN ダイオード / RF スイッチ | | | | |
