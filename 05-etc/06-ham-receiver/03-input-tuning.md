@@ -126,7 +126,7 @@ parts:
   J1: sma/female-edge a10 09
   T1: transformer/toroid f10 f7 j10 j7 T37-2 4t:32t
   C1: capacitor l10 l7 100p
-  TC1: capacitor n10 n7 50p
+  TC1: capacitor/trimmer n10 n8 50p
   R1: resistor p10 s10 1k5
   J2: sma/female-edge x10 y9
 wires:
@@ -145,13 +145,11 @@ wires:
   - f7 -- f5 black
   - j7 -- j5 black
   - l7 -- l5 black
-  - n7 -- n5 black
+  - n8 -- n5 black
   - y9 -- w9 black
   - w9 -- w5 black
 notes:
-  - text r13 yellow bold center: TC1 はトリマ (図は固定の形)
   - text h14 yellow bold center: 左がリンク4回・右が2次32回
-  - arrow n13 n11 yellow
   - arrow h13 h12 yellow
 ```
 
@@ -159,8 +157,8 @@ notes:
 
 - 基板は 5×7 cm を横に使う。10 行が信号の通り道、5 行が GND の筋 (黒)。両端の SMA の外皮を 9 行から 5 行へ落とす
 - **T1** は F 列にリンク (F10 が J1 側、F7 が GND)、J 列に 2 次 (J10 が熱い側、J7 が GND)。コアは基板から浮かせず、寝かせて置く
-- **TC1 はトリマコンデンサ**。フェンスにトリマの形が無いので、図では固定のセラミックコンデンサの形で描いてある。
-  実物は 2 ピン (ローターの側を GND の N7 へ)。ローターを GND にすると、ドライバを当てても同調が動きにくい
+- **TC1 はトリマコンデンサ** (N10・N8。ピンの間隔が 5 mm なので 1 穴空ける)。
+  ローターの側を GND の N8 へ挿し、N8 から N5 の GND へ黒の線で下ろす。ローターを GND にすると、ドライバを当てても同調が動きにくい
 - 熱い側 (J10〜P10) は 7 穴ぶんだけ。ここに付く浮遊容量は全部が同調の容量に足されるので、線を延ばさない
 - この基板は測るための治具で、6-5 の受信機は別の基板に組む。**T1・C1・TC1 は外して 6-5 に移してよい** (移すと浮遊が変わるので、TC1 は受信機の上でもう一度合わせる)
 

@@ -210,7 +210,7 @@ parts:
   J1: sma/female-edge a13 014 012
   T1: transformer/toroid g13 g10 k13 k10 T37-2 4t:32t
   C1: capacitor/ceramic m13 m10 100p
-  TC1: capacitor o13 o10 50p
+  TC1: capacitor/trimmer o13 o11 50p
   C2: capacitor/ceramic q10 q7 10n
   U1: dip8 r16 SA612
   C12: capacitor/ceramic n17 n20 100n
@@ -290,6 +290,7 @@ wires:
   - k10 -- m10 green
   - m10 -- o10 green
   - o10 -- q10 green
+  - o11 -- o10 green
   - q10 -- s10 green
   - s10 -- s13 green
   - t16 -- t18 orange
@@ -326,8 +327,6 @@ notes:
   - text ae12 red large bold right: 1+
   - mark i7 yellow
   - text i8 red large bold center: GND
-  - text m15 yellow bold center: TC1 はトリマ (図は固定の形)
-  - arrow o15 o14 yellow
 style:
   back: on
 ```
@@ -339,7 +338,7 @@ style:
 - **GND**: 7 行を端から端まで (黒)。上の 24 行にも GND の筋を通し、J1 の金物 (012 と 014 は 1 つの金物) を通って 7 行とつながる。
   VXO の C<sub>B</sub>・VC1、U1 のパスコン (C12・C13)、U2 の C7 は 24 行へ落とす
 - **同調回路**: T1 は G〜K 列。リンク (4 回) が g13・g10、2 次 (32 回) が k13・k10。熱い側は 13 行 (黄) を U1 の 1 ピンへ、
-  冷たい側は 10 行 (緑) を回って 2 ピンへ。TC1 はトリマ (図は固定のコンデンサの形で描いてある)
+  冷たい側は 10 行 (緑) を回って 2 ピンへ。TC1 はトリマ (O13・O11。ピンの間隔が 5 mm なので 1 穴空け、O11 から O10 の緑の線へ短い線でつなぐ)
 - **VXO**: U1 の 6 ピン (t16) から t18 の C<sub>A</sub>、隣の列の X1 (u18〜u20)、L1 (v22〜y22) と上へ並べた (橙)。7 ピン (s16) は s18 で C<sub>A</sub> と C<sub>B</sub> へ (青)。
   **X1 から L1 までの線は短く**する。ここは浮遊容量 1 pF で 200 Hz 動く (VC1 を抜いた側、計算値)
 - **VC1 はパネルに付け、2 本の線で基板へ**つなぐ。A (固定の羽根) を L1 の端 y22 へ、E (回る羽根・軸) を GND の z24 へ。線は 5 cm 以内に

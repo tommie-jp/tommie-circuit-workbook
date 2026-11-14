@@ -164,6 +164,7 @@ parts:
   M1:
     type: device
     at: 12,9
+    model: ADAFRUIT-2045
     label: Si5351A
     pins: [VIN, SDA, SCL, GND, CLK0]
   V3V3: vcc 1,8 3.3V
@@ -245,7 +246,7 @@ parts:
   VR1: potentiometer/knob c10 c9 c8 1k
   T1: transformer/toroid f11 f8 i11 i9 T37-2 4t:32t
   C1: capacitor/ceramic j11 j9 100p
-  TC1: capacitor/ceramic k11 k9 50p
+  TC1: capacitor/trimmer k11 k9 50p
   U1: dip8 m13 SA612
   C2: capacitor/ceramic m8 o8 10n
   R1: resistor e14 h14 100
@@ -354,7 +355,6 @@ notes:
   - text x5 red large bold center: GND
   - mark s4 yellow
   - text r5 red large bold center: 1+
-  - text k3: TC1 (K 列) はトリマコンデンサ
 ```
 
 ![ユニバーサル基板の実体配線図](https://tommie-jp.github.io/tommie-circuit-workbook/05-etc/06-ham-receiver/perfboard/05-direct-conversion.svg)
@@ -364,7 +364,7 @@ notes:
   黒い線が GND で、6 行と 8 行と左端の A 列。8 行は T1 の輪の下をくぐらせず、F8 で止めて、右の側は O 列で 6 行から上げる。D+ と D− は使わない
 - **線が跨ぐ所は 6 つ** (弧で描いた所)。E 列の 5 V が GND (6 行・8 行) とアンテナ側の線 (11 行) を、O 列の GND が 5 V (7 行) を、T 列の音声出力が 5 V (7 行) と GND (6 行) を跨ぐ。
   どれも直流か低いインピーダンスの線どうしで、同調回路の熱い側 (黄色) は跨がせていない。被覆線で渡す
-- **T1** は F〜I 列。リンクが F11・F8、2 次が I11 (IN_A の側)・I9 (IN_B の側)。**TC1** (K 列) は図では固定のコンデンサの形で描いてある (トリマはフェンスに未登録)
+- **T1** は F〜I 列。リンクが F11・F8、2 次が I11 (IN_A の側)・I9 (IN_B の側)。**TC1** (K11・K9) はトリマコンデンサ。ピンの間隔が 5 mm なので 1 穴空けて挿す
 - **U2 (LM386) は 180° 回して挿す** (切り欠きが右)。1 番が右上の W13 で、出力 (5 番) と電源 (6 番) が下の列に来て、電源の線と J3 に近くなる
 - **J3** は秋月のジャックの DIP 化キットで、U〜X 列の 2 行に挿し、基板の右下の角から外へ張り出す。L と R を 1 行の線で結び、両耳に同じ音を出す
 - **黄色の丸は AD3 を挟む穴**。`W1` (B13、R4 の先)・`1+` (S4、音声出力)・`GND` (X6)。測るときだけ挟む
@@ -383,6 +383,7 @@ parts:
   M1:
     type: device
     at: bottom
+    model: ADAFRUIT-2045
     label: Si5351A モジュール
     pins: [SDA, SCL, GND, VIN, CLK0]
   RX:
@@ -663,7 +664,7 @@ measure: [vpp, freq]
 | U1 | SA612A (NE612・NE602 も同じ) | ミキサー。DIP 8 ピン。面実装品しか無ければ変換基板に載せる |
 | U2 | LM386N-1 | 音声段。6-4 と同じ |
 | U3 | Raspberry Pi Pico 2 | 局発の設定。USB から給電 |
-| M1 | Si5351A モジュール (25 MHz 水晶つき、I2C アドレス 0x60) | Adafruit の基板と同じ 7 ピン (VIN GND SDA SCL と CLK0〜2) の品。※ **実物で確かめる: ピンの並びと SMA の有無は基板で違う。基板の印字で確かめる。VIN に 3.3 V を入れてよいかも、品の説明で確かめる** |
+| M1 | Si5351A モジュール (Adafruit 2045、25 MHz 水晶つき、I2C アドレス 0x60) | 7 ピンの並びは印字の左から 0 (CLK0)・1 (CLK1)・2 (CLK2)・SCL・SDA・GND・VIN (Adafruit の基板データで確かめた)。基板に 3.3 V のレギュレータと I2C のレベル変換があり、VIN は 3〜5 V なので Pico 2 の 3.3 V で動く (Adafruit の説明)。同じ並びの紫の互換基板 (CJMCU-5351) でもよい。秋月の AE-Si5351A-B は 8 ピンで並びが違い、電源も 3.3 V だけ |
 | T1 | T37-2 に φ0.3 mm の UEW を 2 次 32 回・リンク 4 回 | 6-3 と同じ (約 4.1 µH) |
 | C1 | 100 pF (C0G、記号 101) | 同調 |
 | TC1 | トリマコンデンサ 最大 50 pF | 同調の合わせ込み。7.1 MHz で合計 約 123 pF |

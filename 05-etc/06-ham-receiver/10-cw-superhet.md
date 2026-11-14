@@ -378,7 +378,7 @@ parts:
   J1: sma/female-edge a10 09
   T1: transformer/toroid d10 d7 h10 h7 T37-2 4t:32t
   C1: capacitor/ceramic j10 j7 100p
-  TC1: capacitor/ceramic l10 l7 50p
+  TC1: capacitor/trimmer l10 l8 50p
   C2: capacitor/ceramic n7 n4 10n
   U1: dip8 o13 SA612
   C3: capacitor/ceramic m16 m18 100n
@@ -396,6 +396,7 @@ wires:
   - h7 -- j7 blue
   - j7 -- l7 blue
   - l7 -- n7 blue
+  - l8 -- l7 blue
   - n7 -- p7 blue
   - p7 -- p10 blue
   - 09 -- a9 black
@@ -430,7 +431,6 @@ notes:
   - text w8 red large bold center: 1+
   - mark x5 yellow
   - text w5 red large bold left: 1-
-  - text i4 yellow bold center: TC1 はトリマ (図は固定の形)
   - parts
 style:
   back: on
@@ -441,7 +441,7 @@ style:
 - 番地は基板の刷りどおり (英字が列、数字が下からの行)。J1 は端面の SMA で、アンテナか試験の信号をつなぐ
 - GND は 2 行 (下) と 18 行 (上) の筋で、右端の X 列でつないだ。上の筋には C3・C4 と R2 が落ちる
 - +5 V は左の縁の銅箔 (16 行) から赤い線で U1 の 8 番へ。LO (w15)・IF (w9) と GND (y2) は、基板の外へ出る線を半田付けする穴
-- T1 は左がリンク 4 回 (d10・d7)、右が 2 次 32 回 (h10・h7)。**TC1 はトリマコンデンサ** (フェンスに形が無いので固定の形で描いた)
+- T1 は左がリンク 4 回 (d10・d7)、右が 2 次 32 回 (h10・h7)。**TC1 はトリマコンデンサ** (L10・L8。ピンの間隔が 5 mm なので 1 穴空け、L8 から L7 の青の線へ短い線でつなぐ)
 - L1 (FT37-61 に 18 回) は s10 と w10 の間。C6 (47 pF) は U1 の 4 番のすぐ下
 - 黄色の丸は Analog Discovery 3 で挟む所 (1+ が IF、1− が GND)。半田付けはしない
 
