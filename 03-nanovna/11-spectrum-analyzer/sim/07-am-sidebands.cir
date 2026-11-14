@@ -1,0 +1,13 @@
+* 11-7 AM 変調の側波帯: 回路の教科書の 9-7 の 555 (PIN 3 の方形波、686 kHz、デューティ 52 %) を、
+* PIN 8 の電圧 4.4 V × (1 + m sin 2π·1 kHz·t) で振った AM とみなし、9-29 の Rsa 10 kΩ + Csa 0.01 µF 越しに tinySA の 50 Ω で受ける
+* 555 の出力の High = PIN 8 の電圧、Low = 0 V と置いた (TLC555 の CMOS 出力。仮定)。m は本文の 0.08 と 0.3
+* 686 kHz は 1 kHz の 686 倍なので、.four の基本を 1 kHz にすると搬送波 = 686 次、側波 = 685・687 次、3 倍の高調波の側波 = 2057・2059 次で読める
+.param m=0.3
+Vsq sq 0 PULSE(0 1 0 5n 5n {0.52/686k-5n} {1/686k})
+B1 p3 0 V=4.4*(1+m*sin(2*pi*1k*time))*V(sq)
+Rsa p3 x 10k
+Csa x o 0.01u
+Rin o 0 50
+.tran 0 3m 2m 5n
+.four 1k 2060 V(o)
+.end

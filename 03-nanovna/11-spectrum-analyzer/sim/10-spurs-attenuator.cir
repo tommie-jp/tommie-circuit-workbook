@@ -1,0 +1,12 @@
+* 11-10 スプリアスとイメージ: tinySA の入口 (ミキサー) を 3 次の歪みを持つ増幅とみなし、内部の減衰 att を 0・10・20 dB に変えて 3 次の高調波を読む
+* 入口の模型 y = x − a3·x³ (x = 減衰の後の電圧)。IIP3 = +15 dBm (公式の仕様) から a3 = 4 / (3·A_IP3²)、A_IP3 = √(2·50·31.62 mW) = 1.778 V → a3 = 0.4217 (仮定の模型)
+* 画面の読みは減衰を補正する (÷ k)。信号は AD3 の W1 (1 MHz・1 V、出力 0 Ω) を 220 Ω 越しに 50 Ω へ: 0.1852 V_peak = −4.65 dBm
+.param att=0 k={10**(-att/20)} a3=0.4217
+V1 w 0 SINE(0 1 1Meg)
+R1 w in 220
+Rin in 0 50
+B1 y 0 V=(k*V(in) - a3*(k*V(in))**3)/k
+.tran 0 12u 10u 0.5n
+.options plotwinsize=0 numdgt=15 reltol=1e-6
+.four 1Meg 5 V(y)
+.end

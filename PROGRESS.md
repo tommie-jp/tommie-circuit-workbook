@@ -16,11 +16,11 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 232 | 227 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 5 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 202 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 0 |
-| [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 123 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 102 |
+| [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 141 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 84 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 53 | 37 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 243 | 161 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1155** | **850** | **0** | **0** | **0** | |
+| **計** | **1155** | **868** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -724,16 +724,16 @@
 | 5-10 | [特性インピーダンスの測定 (Zoc と Zsc から)](03-nanovna/05-transmission-lines/10-z0-from-zoc-zsc.md) | ✓ | [ ] | — | — |
 | 5-11 | [ケーブルの温度](03-nanovna/05-transmission-lines/11-cable-temperature.md) | ✓ | [ ] | — | — |
 | 5-12 | [平行 2 線 (ラダーライン)](03-nanovna/05-transmission-lines/12-ladder-line.md) | ✓ | [ ] | — | — |
-| 5-13 | GHz でのケーブル損失 (2.4 GHz) | | | | |
-| 5-14 | U.FL ピグテールの損失 | | | | |
-| 5-15 | マイクロストリップの Zo と FR4 の誘電率 | | | | |
-| 5-16 | コプレーナ線路 | | | | |
-| 5-17 | セミリジッドと柔らかいケーブルの位相安定性 | | | | |
-| 5-18 | ケーブルを曲げると何が変わるか | | | | |
-| 5-19 | コネクタの質 (真鍮 vs 金メッキ) を GHz で | | | | |
-| 5-20 | TDR の分解能と帯域 (H4 vs V2) | | | | |
-| 5-21 | スルーホール (via) の不連続 | | | | |
-| 5-22 | 遅延線を群遅延で | | | | |
+| 5-13 | [GHz でのケーブル損失 (2.4 GHz)](03-nanovna/05-transmission-lines/13-cable-loss-ghz.md) | ✓ | [ ] | — | — |
+| 5-14 | [U.FL ピグテールの損失](03-nanovna/05-transmission-lines/14-ufl-pigtail.md) | ✓ | [ ] | — | — |
+| 5-15 | [マイクロストリップの Zo と FR4 の誘電率](03-nanovna/05-transmission-lines/15-microstrip-z0-er.md) | ✓ | [ ] | — | — |
+| 5-16 | [コプレーナ線路](03-nanovna/05-transmission-lines/16-coplanar.md) | ✓ | [ ] | — | — |
+| 5-17 | [セミリジッドと柔らかいケーブルの位相安定性](03-nanovna/05-transmission-lines/17-phase-stability.md) | ✓ | [ ] | — | — |
+| 5-18 | [ケーブルを曲げると何が変わるか](03-nanovna/05-transmission-lines/18-cable-bend.md) | ✓ | [ ] | — | — |
+| 5-19 | [コネクタの質 (真鍮 vs 金メッキ) を GHz で](03-nanovna/05-transmission-lines/19-connector-quality.md) | ✓ | [ ] | — | — |
+| 5-20 | [TDR の分解能と帯域 (H4 vs V2)](03-nanovna/05-transmission-lines/20-tdr-resolution.md) | ✓ | [ ] | — | — |
+| 5-21 | [スルーホール (via) の不連続](03-nanovna/05-transmission-lines/21-via-discontinuity.md) | ✓ | [ ] | — | — |
+| 5-22 | [遅延線を群遅延で](03-nanovna/05-transmission-lines/22-delay-line.md) | ✓ | [ ] | — | — |
 
 ### 第 6 章 フィルタ
 
@@ -865,14 +865,14 @@
 | 11-3 | [ノイズフロアとアッテネータ — 小さい信号をどこまで見られるか](03-nanovna/11-spectrum-analyzer/03-noise-floor-attenuator.md) | ✓ | [ ] | — | — |
 | 11-4 | [NanoVNA の出力を測る — 周波数と電力と高調波](03-nanovna/11-spectrum-analyzer/04-nanovna-output.md) | ✓ | [ ] | — | — |
 | 11-5 | [方形波の高調波 — 555 と CMOS の発振器](03-nanovna/11-spectrum-analyzer/05-square-wave-harmonics.md) | ✓ | [ ] | — | — |
-| 11-6 | FM 送信機の出力と高調波 | | | | |
-| 11-7 | AM 変調の側波帯 | | | | |
-| 11-8 | フィルタの通過特性を信号発生器 + スペアナで (スカラー) | | | | |
-| 11-9 | 信号発生器を兼ねる機種 — 出力の確かさ | | | | |
-| 11-10 | スプリアスとイメージ — 見えている山は本物か | | | | |
-| 11-11 | ゼロスパン — 時間の軸で見る | | | | |
-| 11-12 | アンテナで受ける — FM 放送帯と 430 MHz | | | | |
-| 11-13 | PC から操作して記録する | | | | |
+| 11-6 | [FM 送信機の出力と高調波](03-nanovna/11-spectrum-analyzer/06-fm-transmitter-output.md) | ✓ | [ ] | — | — |
+| 11-7 | [AM 変調の側波帯](03-nanovna/11-spectrum-analyzer/07-am-sidebands.md) | ✓ | [ ] | — | — |
+| 11-8 | [フィルタの通過特性を信号発生器 + スペアナで (スカラー)](03-nanovna/11-spectrum-analyzer/08-scalar-filter.md) | ✓ | [ ] | — | — |
+| 11-9 | [信号発生器を兼ねる機種 — 出力の確かさ](03-nanovna/11-spectrum-analyzer/09-generator-accuracy.md) | ✓ | [ ] | — | — |
+| 11-10 | [スプリアスとイメージ — 見えている山は本物か](03-nanovna/11-spectrum-analyzer/10-spurs-and-images.md) | ✓ | [ ] | — | — |
+| 11-11 | [ゼロスパン — 時間の軸で見る](03-nanovna/11-spectrum-analyzer/11-zero-span.md) | ✓ | [ ] | — | — |
+| 11-12 | [アンテナで受ける — FM 放送帯と 430 MHz](03-nanovna/11-spectrum-analyzer/12-antenna-receive.md) | ✓ | [ ] | — | — |
+| 11-13 | [PC から操作して記録する](03-nanovna/11-spectrum-analyzer/13-pc-logging.md) | ✓ | [ ] | — | — |
 | 11-14 | [微弱電波の電界強度を見積もる — アンテナ係数とケーブルの損失](03-nanovna/11-spectrum-analyzer/14-field-strength.md) | ✓ | [ ] | — | — |
 | 11-15 | [ループアンテナの自己共振を NanoVNA で測る — S11 と S21 の 4 つの読み方](03-nanovna/11-spectrum-analyzer/15-loop-self-resonance.md) | ✓ | [ ] | — | — |
 

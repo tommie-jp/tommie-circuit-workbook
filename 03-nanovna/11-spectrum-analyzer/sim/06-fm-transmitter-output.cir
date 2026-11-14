@@ -1,0 +1,33 @@
+* 11-6 FM 送信機の出力と高調波: 回路の教科書の 9-4 (図1、コルピッツ) のアンテナ線を外し、Cant 2.2 pF から 20 dB パッド (43・11・43 Ω) を通して tinySA (50 Ω) へ直につなぐ
+* Q3355 は 2SC3355 の代用 (9-4 の sim/04-fm-transmitter.cir と同じ仮定のモデル。実測ではない)。浮遊容量・ピンのインダクタンスは入れない (9-4 の理想の場合)
+* 発振が落ち着いた 4〜5 µs で、パッドの先 V(o) の周期と .four (基本波と 2〜5 次) を読む。電力は V_peak^2 / (2×50 Ω)
+* L1 は 9-4 の 260 nH のままだと 50 Ω をつないだ負荷で 69.2 MHz に下がるので、コイルを広げて 80 MHz に合わせ直した値 (196.9 nH) にする (.step 相当の確かめは本文)
+.model Q3355 NPN (IS=2e-14 BF=100 NF=1 VAF=100 IKF=0.15 RB=20 RE=1 RC=5 CJE=1p CJC=0.6p TF=23p TR=50n)
+.param f0=80.0Meg lt=196.9n
+VCC vcc 0 PULSE(0 5 0 50n 50n 1)
+Cb vcc 0 0.1u
+L1 vcc c {lt} Rser=0
+C1 c e 22p
+C2 e 0 47p
+Re e 0 470
+Q1 c b e Q3355
+Rb1 vcc b 10k
+Rb2 b 0 2.4k
+C3 b 0 1n
+Cant c a 2.2p
+* 20 dB パッド (入口 52.8 Ω) と tinySA の入力 50 Ω
+Rp1 a p 43
+Rp2 p 0 11
+Rp3 p o 43
+Rsa o 0 50
+.tran 0 5u 0 0.05n
+.meas tran per TRIG V(c) VAL=5 TD=4u RISE=1 TARG V(c) VAL=5 TD=4u RISE=41
+.meas tran fosc PARAM 40/per
+.meas tran vcpp PP V(c) FROM=4u TO=5u
+.meas tran vcmax MAX V(c) FROM=4u TO=5u
+.meas tran vcmin MIN V(c) FROM=4u TO=5u
+.meas tran vopp PP V(o) FROM=4u TO=5u
+.meas tran ic AVG I(Re) FROM=4u TO=5u
+.four {f0} 5 10 V(o)
+.four {f0} 5 10 V(c)
+.end

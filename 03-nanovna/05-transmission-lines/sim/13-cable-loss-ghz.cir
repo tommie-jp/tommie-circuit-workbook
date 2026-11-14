@@ -1,0 +1,33 @@
+* 5-13 GHz でのケーブル損失 (2.4 GHz): vna フェンスの dut: と、損失を入れた線路 (LTRA) を AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(out)/Vs (.meas は |S21| を線形で出す。dB は 20·log10 で読む)
+* 図2: line 50 1m vf 0.66 (損失なしの T 素子)
+* RG-58 の LTRA: 1 m あたりの R = 2·Z0·(αc+αd) (Np/m)。LTspice の LTRA は G を持てないので、誘電体の損失も R に寄せた (損失が小さいとき α = R/(2Z0) + G·Z0/2 で同じ)。αc は周波数で変わるので周波数ごとに 1 本 (仮定の寸法は本文)
+.ac lin 2951 50e6 3e9
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T1_0 n0_0 0 n1_0 0 Z0=50 TD=5.053874e-09
+RL_0 n1_0 0 50
+.meas AC t900 FIND mag(2*V(n1_0)) AT 900e6
+.meas AC t2400 FIND mag(2*V(n1_0)) AT 2.4e9
+* 900 MHz: αc=0.03903 Np/m, αd=0.002861 Np/m
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+O1 n0_1 0 n1_1 0 lt1
+RL_1 n1_1 0 50
+.model lt1 LTRA(len=1 R=4.18929 L=2.52694e-07 C=1.01077e-10)
+.meas AC l1 FIND mag(2*V(n1_1)) AT 9e+08
+* 1500 MHz: αc=0.05039 Np/m, αd=0.004768 Np/m
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+O2 n0_2 0 n1_2 0 lt2
+RL_2 n1_2 0 50
+.model lt2 LTRA(len=1 R=5.51582 L=2.52694e-07 C=1.01077e-10)
+.meas AC l2 FIND mag(2*V(n1_2)) AT 1.5e+09
+* 2400 MHz: αc=0.06374 Np/m, αd=0.007628 Np/m
+Vs_3 s_3 0 AC 1
+Rs_3 s_3 n0_3 50
+O3 n0_3 0 n1_3 0 lt3
+RL_3 n1_3 0 50
+.model lt3 LTRA(len=1 R=7.13678 L=2.52694e-07 C=1.01077e-10)
+.meas AC l3 FIND mag(2*V(n1_3)) AT 2.4e+09
+.end

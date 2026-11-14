@@ -42,15 +42,15 @@ GHz 帯の作法をまとめる。
 | 2 | 画面と PC ソフト | 5 | 10 | 16 | 16 | 10 |
 | 3 | 治具 | 6 | 10 | 18 | 18 | 10 |
 | 4 | 部品の周波数特性 | 8 | 16 | 28 | 28 | 22 |
-| 5 | 伝送線路 | 6 | 12 | 22 | 22 | 12 |
+| 5 | 伝送線路 | 6 | 12 | 22 | 22 | 22 |
 | 6 | フィルタ | 6 | 12 | 24 | 24 | 12 |
 | 7 | アンテナ | 6 | 12 | 26 | 26 | 12 |
 | 8 | アンプと能動回路の S パラメータ | 3 | 10 | 22 | 22 | 12 |
 | 9 | GHz 帯の作法 | 1 | 5 | 16 | 16 | 5 |
 | 10 | 自動化 | 0 | 0 | 8 | 8 | 0 |
-| 11 | スペクトラムアナライザ — tinySA と同じ種類の計器 | 0 | 5 | 13 | 15 | 7 |
+| 11 | スペクトラムアナライザ — tinySA と同じ種類の計器 | 0 | 5 | 13 | 15 | 15 |
 | 12 | Smith チャート — 読み方から整合まで | 1 | 4 | 6 | 6 | 6 |
-| **計** | | **50** | **111** | **223** | **225** | **123** |
+| **計** | | **50** | **111** | **223** | **225** | **141** |
 
 ## 第 0 章 道具と安全
 
@@ -179,16 +179,16 @@ GHz 帯の作法をまとめる。
 | 5-10 | [特性インピーダンスの測定 (Zoc と Zsc から)](05-transmission-lines/10-z0-from-zoc-zsc.md) | 入門 | H4 | — |
 | 5-11 | [ケーブルの温度](05-transmission-lines/11-cable-temperature.md) | 入門 | H4 | — |
 | 5-12 | [平行 2 線 (ラダーライン)](05-transmission-lines/12-ladder-line.md) | 入門 | H4 | — |
-| 5-13 | GHz でのケーブル損失 (2.4 GHz) | 中級 | V2 | — |
-| 5-14 | U.FL ピグテールの損失 | 中級 | V2 | — |
-| 5-15 | マイクロストリップの Zo と FR4 の誘電率 | 中級 | V2 | CB |
-| 5-16 | コプレーナ線路 | 中級 | V2 | CB |
-| 5-17 | セミリジッドと柔らかいケーブルの位相安定性 | 中級 | V2 | — |
-| 5-18 | ケーブルを曲げると何が変わるか | 中級 | H4 | — |
-| 5-19 | コネクタの質 (真鍮 vs 金メッキ) を GHz で | 中級 | V2 | — |
-| 5-20 | TDR の分解能と帯域 (H4 vs V2) | 中級 | V2 | — |
-| 5-21 | スルーホール (via) の不連続 | 中級 | V2 | CB |
-| 5-22 | 遅延線を群遅延で | 中級 | H4 | — |
+| 5-13 | [GHz でのケーブル損失 (2.4 GHz)](05-transmission-lines/13-cable-loss-ghz.md) | 中級 | V2 | — |
+| 5-14 | [U.FL ピグテールの損失](05-transmission-lines/14-ufl-pigtail.md) | 中級 | V2 | — |
+| 5-15 | [マイクロストリップの Zo と FR4 の誘電率](05-transmission-lines/15-microstrip-z0-er.md) | 中級 | V2 | CB |
+| 5-16 | [コプレーナ線路](05-transmission-lines/16-coplanar.md) | 中級 | V2 | CB |
+| 5-17 | [セミリジッドと柔らかいケーブルの位相安定性](05-transmission-lines/17-phase-stability.md) | 中級 | V2 | — |
+| 5-18 | [ケーブルを曲げると何が変わるか](05-transmission-lines/18-cable-bend.md) | 中級 | H4 | — |
+| 5-19 | [コネクタの質 (真鍮 vs 金メッキ) を GHz で](05-transmission-lines/19-connector-quality.md) | 中級 | V2 | — |
+| 5-20 | [TDR の分解能と帯域 (H4 vs V2)](05-transmission-lines/20-tdr-resolution.md) | 中級 | V2 | — |
+| 5-21 | [スルーホール (via) の不連続](05-transmission-lines/21-via-discontinuity.md) | 中級 | V2 | CB |
+| 5-22 | [遅延線を群遅延で](05-transmission-lines/22-delay-line.md) | 中級 | H4 | — |
 
 ## 第 6 章 フィルタ
 
@@ -320,14 +320,14 @@ GHz 帯の作法をまとめる。
 | 11-3 | [ノイズフロアとアッテネータ — 小さい信号をどこまで見られるか](11-spectrum-analyzer/03-noise-floor-attenuator.md) | 入門 | SA | BB |
 | 11-4 | [NanoVNA の出力を測る — 周波数と電力と高調波](11-spectrum-analyzer/04-nanovna-output.md) | 入門 | SA | — |
 | 11-5 | [方形波の高調波 — 555 と CMOS の発振器](11-spectrum-analyzer/05-square-wave-harmonics.md) | 入門 | SA | BB |
-| 11-6 | FM 送信機の出力と高調波 | 中級 | SA | BB |
-| 11-7 | AM 変調の側波帯 | 中級 | SA | BB |
-| 11-8 | フィルタの通過特性を信号発生器 + スペアナで (スカラー) | 中級 | SA | PF |
-| 11-9 | 信号発生器を兼ねる機種 — 出力の確かさ | 中級 | SA | — |
-| 11-10 | スプリアスとイメージ — 見えている山は本物か | 中級 | SA | — |
-| 11-11 | ゼロスパン — 時間の軸で見る | 中級 | SA | BB |
-| 11-12 | アンテナで受ける — FM 放送帯と 430 MHz | 中級 | SA | — |
-| 11-13 | PC から操作して記録する | 中級 | SA | — |
+| 11-6 | [FM 送信機の出力と高調波](11-spectrum-analyzer/06-fm-transmitter-output.md) | 中級 | SA | BB |
+| 11-7 | [AM 変調の側波帯](11-spectrum-analyzer/07-am-sidebands.md) | 中級 | SA | BB |
+| 11-8 | [フィルタの通過特性を信号発生器 + スペアナで (スカラー)](11-spectrum-analyzer/08-scalar-filter.md) | 中級 | SA | PF |
+| 11-9 | [信号発生器を兼ねる機種 — 出力の確かさ](11-spectrum-analyzer/09-generator-accuracy.md) | 中級 | SA | — |
+| 11-10 | [スプリアスとイメージ — 見えている山は本物か](11-spectrum-analyzer/10-spurs-and-images.md) | 中級 | SA | — |
+| 11-11 | [ゼロスパン — 時間の軸で見る](11-spectrum-analyzer/11-zero-span.md) | 中級 | SA | BB |
+| 11-12 | [アンテナで受ける — FM 放送帯と 430 MHz](11-spectrum-analyzer/12-antenna-receive.md) | 中級 | SA | — |
+| 11-13 | [PC から操作して記録する](11-spectrum-analyzer/13-pc-logging.md) | 中級 | SA | — |
 | 11-14 | [微弱電波の電界強度を見積もる — アンテナ係数とケーブルの損失](11-spectrum-analyzer/14-field-strength.md) | 発展 | SA | — |
 | 11-15 | [ループアンテナの自己共振を NanoVNA で測る — S11 と S21 の 4 つの読み方](11-spectrum-analyzer/15-loop-self-resonance.md) | 発展 | SA | — |
 

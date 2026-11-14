@@ -1,0 +1,30 @@
+* 11-8 フィルタの通過特性を信号発生器 + スペアナで: 6-1 の 7 次 LC ローパスを、発生器 (50 Ω) と tinySA (50 Ω) の間に入れたときの S21 (dB) を点ごとに読む
+* 理想の模型 (6-1 の sim/01-lc-lowpass.cir と同じ値。コイルは Rser=1u)。tinySA の読み = スルーの読み P0 + S21
+* S21 = 2·V(out)/Vs。.meas は |V(n3)| (S21 = 20 log10(2|V(n3)|) dB は本文で換算)
+.ac lin 9000 1e6 91e6
+Vs s 0 AC 1
+Rs s n0 50
+C1 n0 0 47p
+L2 n0 n1 330n Rser=1u
+C3 n1 0 200p
+L4 n1 n2 560n Rser=1u
+C5 n2 0 200p
+L6 n2 n3 330n Rser=1u
+C7 n3 0 47p
+RL n3 0 50
+.meas AC s21_5 FIND mag(V(n3)) AT 5e6
+.meas AC s21_10 FIND mag(V(n3)) AT 10e6
+.meas AC s21_15 FIND mag(V(n3)) AT 15e6
+.meas AC s21_20 FIND mag(V(n3)) AT 20e6
+.meas AC s21_25 FIND mag(V(n3)) AT 25e6
+.meas AC s21_28p4 FIND mag(V(n3)) AT 28.4e6
+.meas AC s21_30 FIND mag(V(n3)) AT 30e6
+.meas AC s21_35 FIND mag(V(n3)) AT 35e6
+.meas AC s21_40 FIND mag(V(n3)) AT 40e6
+.meas AC s21_45 FIND mag(V(n3)) AT 45e6
+.meas AC s21_50 FIND mag(V(n3)) AT 50e6
+.meas AC s21_60 FIND mag(V(n3)) AT 60e6
+.meas AC s21_70 FIND mag(V(n3)) AT 70e6
+.meas AC s21_80 FIND mag(V(n3)) AT 80e6
+.meas AC s21_90 FIND mag(V(n3)) AT 90e6
+.end

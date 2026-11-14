@@ -1,0 +1,11 @@
+* 11-9 信号発生器を兼ねる機種: tinySA Ultra の出力 (50 Ω の源、設定 -19 dBm) を 50 Ω の貫通型終端で受け、AD3 の Scope (1 MΩ) で電圧を読む
+* 源の開放電圧 = 2 × (50 Ω に -19 dBm を出す peak 35.48 mV) = 70.96 mV。AD3 の入力の容量とケーブルは合わせて 30 pF と置いた (仮定)
+.param vemf=70.96m cin=30p
+V1 s 0 AC {vemf}
+Rs s o 50
+Rt o 0 50
+Rin o 0 1Meg
+Cin o 0 {cin}
+.ac lin 1 1Meg 1Meg
+.meas AC vo FIND mag(V(o)) AT 1Meg
+.end

@@ -1,0 +1,22 @@
+* 5-19 コネクタの質 (真鍮 vs 金メッキ) を GHz で: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S11 = 2·V(n0)/Vs − 1、S21 = 2·V(n1)/Vs (.meas は大きさを線形で出す)
+* 中継の不連続は直列の L の等価回路 (仮定)。LTspice のコイルの直列抵抗は 1 µΩ に固定
+.ac lin 2951 50e6 3e9
+* 図2: series L 1n (安い真鍮・ニッケルメッキの中継)
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+L1_0 n0_0 n1_0 1n Rser=1u
+RL_0 n1_0 0 50
+* 図3: series L 0.2n (金メッキの規格品の中継)
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+L1_1 n0_1 n1_1 0.2n Rser=1u
+RL_1 n1_1 0 50
+.meas AC a1 FIND mag(2*V(n0_0)-1) AT 1e9
+.meas AC a2 FIND mag(2*V(n0_0)-1) AT 2.4e9
+.meas AC a3 FIND mag(2*V(n0_0)-1) AT 3e9
+.meas AC t3 FIND mag(2*V(n1_0)) AT 3e9
+.meas AC b1 FIND mag(2*V(n0_1)-1) AT 1e9
+.meas AC b2 FIND mag(2*V(n0_1)-1) AT 2.4e9
+.meas AC b3 FIND mag(2*V(n0_1)-1) AT 3e9
+.end

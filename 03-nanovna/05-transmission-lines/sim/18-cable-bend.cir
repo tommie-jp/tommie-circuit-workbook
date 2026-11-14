@@ -1,0 +1,15 @@
+* 5-18 ケーブルを曲げると何が変わるか: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0。S11 = 2·V(n0)/Vs − 1 (.meas は |S11| を線形で出す。dB は 20·log10 で読む)
+* 線路は損失なしの T 素子。潰れた所は 40 Ω・2 cm の線で表す (仮定)
+.ac lin 15000 1e6 1.5e9
+* 図2: line 50 1m vf 0.66 / line 40 2cm vf 0.66 / line 50 1m vf 0.66 / series R 50 / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T1_0 n0_0 0 n1_0 0 Z0=50 TD=5.054001e-09
+T2_0 n1_0 0 n2_0 0 Z0=40 TD=1.010800e-10
+T3_0 n2_0 0 n3_0 0 Z0=50 TD=5.054001e-09
+R4_0 n3_0 0 50
+.meas AC s300 FIND mag(2*V(n0_0)-1) AT 300e6
+.meas AC s900 FIND mag(2*V(n0_0)-1) AT 900e6
+.meas AC s1500 FIND mag(2*V(n0_0)-1) AT 1.5e9
+.end

@@ -1,0 +1,27 @@
+* 5-16 コプレーナ線路: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S11 = 2·V(n0)/Vs − 1、S21 = 2·V(n1)/Vs (.meas は大きさを線形で出す。dB は 20·log10 で読む)
+* 線路は損失なしの T 素子。Z0 と速度係数は CPWG (表も裏も地) の等角写像の式 (本文) による
+.ac lin 29501 50e6 3e9
+* 図3: line 38.2 40mm vf 0.581
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T1_0 n0_0 0 n1_0 0 Z0=38.2 TD=2.296483e-10
+RL_0 n1_0 0 50
+.meas AC s11_0_0 FIND mag(2*V(n0_0)-1) AT 1.09e9
+.meas AC s21_0_0 FIND mag(2*V(n1_0)) AT 1.09e9
+.meas AC s11_0_1 FIND mag(2*V(n0_0)-1) AT 2.18e9
+.meas AC s21_0_1 FIND mag(2*V(n1_0)) AT 2.18e9
+.meas AC s11_0_2 FIND mag(2*V(n0_0)-1) AT 3e9
+.meas AC s21_0_2 FIND mag(2*V(n1_0)) AT 3e9
+* 図4: line 51.1 40mm vf 0.586
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T1_1 n0_1 0 n1_1 0 Z0=51.1 TD=2.276888e-10
+RL_1 n1_1 0 50
+.meas AC s11_1_0 FIND mag(2*V(n0_1)-1) AT 1.09e9
+.meas AC s21_1_0 FIND mag(2*V(n1_1)) AT 1.09e9
+.meas AC s11_1_1 FIND mag(2*V(n0_1)-1) AT 2.18e9
+.meas AC s21_1_1 FIND mag(2*V(n1_1)) AT 2.18e9
+.meas AC s11_1_2 FIND mag(2*V(n0_1)-1) AT 3e9
+.meas AC s21_1_2 FIND mag(2*V(n1_1)) AT 3e9
+.end

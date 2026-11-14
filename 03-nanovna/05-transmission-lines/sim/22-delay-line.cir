@@ -1,0 +1,23 @@
+* 5-22 遅延線を群遅延で: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(n1)/Vs
+* 群遅延は S21 の位相を ±25 kHz の 2 点で読み、差を周波数の差で割って出す (.meas の結果は大きさで返るので、位相には +1000 を足して符号を残す)
+* 線路は損失なしの T 素子 (5 m、vf 0.66)
+.ac list 49.975e6 50e6 50.025e6 138.479e6 138.504e6 138.529e6 148.372e6 148.397e6 148.422e6 149.975e6 150e6 150.025e6
+* 図2: line 50 5m vf 0.66
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T1_0 n0_0 0 n1_0 0 Z0=50 TD=2.527001e-08
+RL_0 n1_0 0 50
+* 図3: line 75 5m vf 0.66
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T1_1 n0_1 0 n1_1 0 Z0=75 TD=2.527001e-08
+RL_1 n1_1 0 50
+.meas AC p0a FIND ph(V(n1_0))+1000 AT 49.975e6
+.meas AC p0b FIND ph(V(n1_0))+1000 AT 50.025e6
+.meas AC p0 FIND ph(V(n1_0))+1000 AT 50e6
+.meas AC p1a FIND ph(-V(n1_1))+1000 AT 138.479e6
+.meas AC p1b FIND ph(-V(n1_1))+1000 AT 138.529e6
+.meas AC p2a FIND ph(V(n1_1))+1000 AT 148.372e6
+.meas AC p2b FIND ph(V(n1_1))+1000 AT 148.422e6
+.end

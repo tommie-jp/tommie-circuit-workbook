@@ -1,0 +1,17 @@
+* 11-11 ゼロスパン: 686 kHz の AM (搬送波 13.91 mV_peak = −27.1 dBm、m = 0.3、1 kHz。11-7 の値) を、
+* スペアナの検波の模型 (686 kHz で I/Q に下ろし、RBW の半分を角にした 1 次の RC で絞り、√(I²+Q²) で包絡線) に通す
+* RBW の模型は 1 次の RC (仮定。tinySA の本当のフィルタの形ではない)。rbw = 10 kHz と 200 Hz の 2 通り
+.param m=0.3 A=13.91m fc=686k rbw=10k
+B1 am 0 V=A*(1+m*sin(2*pi*1k*time))*cos(2*pi*fc*time)
+BI i0 0 V=2*V(am)*cos(2*pi*fc*time)
+BQ q0 0 V=-2*V(am)*sin(2*pi*fc*time)
+RI i0 i 1k
+CI i 0 {1/(2*pi*1k*rbw/2)}
+RQ q0 q 1k
+CQ q 0 {1/(2*pi*1k*rbw/2)}
+B2 env 0 V=sqrt(V(i)**2+V(q)**2)/sqrt(2)
+.tran 0 12m 0 20n
+.meas tran emax MAX V(env) FROM=10m TO=12m
+.meas tran emin MIN V(env) FROM=10m TO=12m
+.meas tran mread PARAM (emax-emin)/(emax+emin)
+.end

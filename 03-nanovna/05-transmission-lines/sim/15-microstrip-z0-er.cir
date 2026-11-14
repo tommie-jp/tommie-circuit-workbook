@@ -1,0 +1,20 @@
+* 5-15 マイクロストリップの Zo と FR4 の誘電率: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0。Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* 線路は損失なしの T 素子 (Z0 50 Ω、50 mm、vf 0.548 = 幅 3.06 mm・厚さ 1.6 mm・比誘電率 4.4 の Hammerstad の式)。先の縁の効果は見ない
+.ac lin 14001 100e6 1.5e9
+* 図3: line 50 50mm vf 0.548 / open
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T1_0 n0_0 0 n1_0 0 Z0=50 TD=3.043389e-10
+Rend_0 n1_0 0 1G
+* 図4: line 50 50mm vf 0.548 / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T1_1 n0_1 0 n1_1 0 Z0=50 TD=3.043389e-10
+Rend_1 n1_1 0 1u
+.meas AC xoc FIND im(50*V(n0_0)/(1-V(n0_0))) AT 400e6
+.meas AC xsc FIND im(50*V(n0_1)/(1-V(n0_1))) AT 400e6
+.meas AC roc FIND re(50*V(n0_0)/(1-V(n0_0))) AT 400e6
+.meas AC foc WHEN im(50*V(n0_0)/(1-V(n0_0)))=0 CROSS=1
+.meas AC xoc821 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 821e6
+.end

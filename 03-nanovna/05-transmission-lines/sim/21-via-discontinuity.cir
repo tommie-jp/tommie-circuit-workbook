@@ -1,0 +1,28 @@
+* 5-21 スルーホール (via) の不連続: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0。Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z (1 端子の dut は最後を短絡)
+* via は直列の L の等価回路 (1 本 1 nH、近い 2 本 0.6 nH。本文の式の見積り)。LTspice のコイルの直列抵抗は 1 µΩ に固定
+* 線路は損失なしの T 素子 (30 mm、vf 0.548)
+.ac lin 2951 50e6 3e9
+* 図3: line 50 30mm vf 0.548 / series L 1n / short (ポート延長の前)
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T1_0 n0_0 0 n1_0 0 Z0=50 TD=1.826081e-10
+L2_0 n1_0 0 1n Rser=1u
+* 図4: series L 1n / short (ポート延長の後、via 1 本)
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+L1_1 n0_1 0 1n Rser=1u
+* 表: series L 0.6n / short (via 2 本)
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+L1_2 n0_2 0 0.6n Rser=1u
+.meas AC r1 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 1e9
+.meas AC r2 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 2.4e9
+.meas AC r3 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 3e9
+.meas AC x1 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 1e9
+.meas AC x2 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 2.4e9
+.meas AC x3 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 3e9
+.meas AC y1 FIND im(50*V(n0_2)/(1-V(n0_2))) AT 1e9
+.meas AC y2 FIND im(50*V(n0_2)/(1-V(n0_2))) AT 2.4e9
+.meas AC y3 FIND im(50*V(n0_2)/(1-V(n0_2))) AT 3e9
+.end
