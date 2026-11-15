@@ -1,0 +1,85 @@
+* 4-26 トランス型バランの S21 と平衡度: 平衡度を結合コイル (K) と巻線間の容量で確かめる
+* 1:1 の 2 本撚り 8 回 (FT37-43)。L1 = L2 = 22.45 µH、k = 22.4 / 22.45 (相互 22.4 µH、漏れ 50 nH ずつ。4-10 と同じ値)
+* 巻線間の容量 Cw (目安): 巻き始めどうし (A1–B1) と巻き終わりどうし (A2–B2) に 5 pF ずつ。Cw=0 で理想
+* 測り方 P: CH1 を B1 (P) に、B2 (N) は 50 Ω で GND へ。測り方 N: CH1 を B2 に、B1 は 50 Ω で GND へ
+* A2 は GND。S21 = 2·V(CH1 の点)。測る量は |S21| (…m) と位相 (…p、度)。P は p…、N は n…、図3 の理想は i…
+* すべて理想の模型 (実測ではない)
+.param Cw=5p
+.ac dec 400 1e5 3e8
+* 図3 の理想 (Cw なし): vna フェンスの dut: series L 50n / shunt L 22.4u / series L 50n / series R 50
+Vs0 s0 0 AC 1
+Rs0 s0 i1 50
+La i1 i2 50n Rser=1u
+Lb i2 0 22.4u Rser=1u
+Lc i2 i3 50n Rser=1u
+Rr i3 o0 50
+RL0 o0 0 50
+* 測り方 P
+Vs1 s1 0 AC 1
+Rs1 s1 a1 50
+L1a a1 0 22.45u Rser=1u
+L2a b1 b2 22.45u Rser=1u
+K1 L1a L2a 0.997772829
+Ca1 a1 b1 {Cw}
+Ca2 0 b2 {Cw}
+RLp b1 0 50
+Rn b2 0 50
+* 測り方 N
+Vs2 s2 0 AC 1
+Rs2 s2 a1n 50
+L1b a1n 0 22.45u Rser=1u
+L2b b1n b2n 22.45u Rser=1u
+K2 L1b L2b 0.997772829
+Cb1 a1n b1n {Cw}
+Cb2 0 b2n {Cw}
+Rp2 b1n 0 50
+RLn b2n 0 50
+.meas AC im0 FIND mag(2*V(o0)) AT 1e+06
+.meas AC ip0 FIND ph(V(o0)) AT 1e+06
+.meas AC pm0 FIND mag(2*V(b1)) AT 1e+06
+.meas AC pp0 FIND ph(V(b1)) AT 1e+06
+.meas AC nm0 FIND mag(2*V(b2n)) AT 1e+06
+.meas AC np0 FIND ph(V(b2n)) AT 1e+06
+.meas AC im1 FIND mag(2*V(o0)) AT 3e+06
+.meas AC ip1 FIND ph(V(o0)) AT 3e+06
+.meas AC pm1 FIND mag(2*V(b1)) AT 3e+06
+.meas AC pp1 FIND ph(V(b1)) AT 3e+06
+.meas AC nm1 FIND mag(2*V(b2n)) AT 3e+06
+.meas AC np1 FIND ph(V(b2n)) AT 3e+06
+.meas AC im2 FIND mag(2*V(o0)) AT 1e+07
+.meas AC ip2 FIND ph(V(o0)) AT 1e+07
+.meas AC pm2 FIND mag(2*V(b1)) AT 1e+07
+.meas AC pp2 FIND ph(V(b1)) AT 1e+07
+.meas AC nm2 FIND mag(2*V(b2n)) AT 1e+07
+.meas AC np2 FIND ph(V(b2n)) AT 1e+07
+.meas AC im3 FIND mag(2*V(o0)) AT 3e+07
+.meas AC ip3 FIND ph(V(o0)) AT 3e+07
+.meas AC pm3 FIND mag(2*V(b1)) AT 3e+07
+.meas AC pp3 FIND ph(V(b1)) AT 3e+07
+.meas AC nm3 FIND mag(2*V(b2n)) AT 3e+07
+.meas AC np3 FIND ph(V(b2n)) AT 3e+07
+.meas AC im4 FIND mag(2*V(o0)) AT 5e+07
+.meas AC ip4 FIND ph(V(o0)) AT 5e+07
+.meas AC pm4 FIND mag(2*V(b1)) AT 5e+07
+.meas AC pp4 FIND ph(V(b1)) AT 5e+07
+.meas AC nm4 FIND mag(2*V(b2n)) AT 5e+07
+.meas AC np4 FIND ph(V(b2n)) AT 5e+07
+.meas AC im5 FIND mag(2*V(o0)) AT 7e+07
+.meas AC ip5 FIND ph(V(o0)) AT 7e+07
+.meas AC pm5 FIND mag(2*V(b1)) AT 7e+07
+.meas AC pp5 FIND ph(V(b1)) AT 7e+07
+.meas AC nm5 FIND mag(2*V(b2n)) AT 7e+07
+.meas AC np5 FIND ph(V(b2n)) AT 7e+07
+.meas AC im6 FIND mag(2*V(o0)) AT 1e+08
+.meas AC ip6 FIND ph(V(o0)) AT 1e+08
+.meas AC pm6 FIND mag(2*V(b1)) AT 1e+08
+.meas AC pp6 FIND ph(V(b1)) AT 1e+08
+.meas AC nm6 FIND mag(2*V(b2n)) AT 1e+08
+.meas AC np6 FIND ph(V(b2n)) AT 1e+08
+.meas AC im7 FIND mag(2*V(o0)) AT 1.5e+08
+.meas AC ip7 FIND ph(V(o0)) AT 1.5e+08
+.meas AC pm7 FIND mag(2*V(b1)) AT 1.5e+08
+.meas AC pp7 FIND ph(V(b1)) AT 1.5e+08
+.meas AC nm7 FIND mag(2*V(b2n)) AT 1.5e+08
+.meas AC np7 FIND ph(V(b2n)) AT 1.5e+08
+.end

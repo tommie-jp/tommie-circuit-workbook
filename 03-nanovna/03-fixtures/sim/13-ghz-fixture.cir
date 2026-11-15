@@ -1,0 +1,73 @@
+* 3-13 GHz の治具: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡か開放)。Vs = 1。S11 = 2·V(n0) − 1、S21 = 2·V(out)、Zin = 50·V(n0)/(1 − V(n0))
+* LTspice のコイルは Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+.ac list 1e+09 1.7e+09 3e+09
+* 図3 線 12 mm: shunt C 0.3p / line 50 12mm vf 0.548 / shunt C 0.3p
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+Cx00_0 n0_0 0 3e-13
+T1_0 n0_0 0 m1_0 0 Z0=50.0 TD=7.30432325e-11
+Cx20_0 m1_0 0 3e-13
+RL_0 m1_0 0 50
+.meas AC g0_0 FIND mag(2*V(n0_0)-1) AT 1e+09
+.meas AC zr0_0 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 1e+09
+.meas AC zi0_0 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 1e+09
+.meas AC s0_0 FIND mag(2*V(m1_0)) AT 1e+09
+.meas AC g0_1 FIND mag(2*V(n0_0)-1) AT 1.7e+09
+.meas AC zr0_1 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 1.7e+09
+.meas AC zi0_1 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 1.7e+09
+.meas AC s0_1 FIND mag(2*V(m1_0)) AT 1.7e+09
+.meas AC g0_2 FIND mag(2*V(n0_0)-1) AT 3e+09
+.meas AC zr0_2 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 3e+09
+.meas AC zi0_2 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 3e+09
+.meas AC s0_2 FIND mag(2*V(m1_0)) AT 3e+09
+* 図4 線 50 mm: shunt C 0.3p / line 50 50mm vf 0.548 / shunt C 0.3p
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+Cx00_1 n0_1 0 3e-13
+T1_1 n0_1 0 m1_1 0 Z0=50.0 TD=3.04346802e-10
+Cx20_1 m1_1 0 3e-13
+RL_1 m1_1 0 50
+.meas AC g1_0 FIND mag(2*V(n0_1)-1) AT 1e+09
+.meas AC zr1_0 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 1e+09
+.meas AC zi1_0 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 1e+09
+.meas AC s1_0 FIND mag(2*V(m1_1)) AT 1e+09
+.meas AC g1_1 FIND mag(2*V(n0_1)-1) AT 1.7e+09
+.meas AC zr1_1 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 1.7e+09
+.meas AC zi1_1 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 1.7e+09
+.meas AC s1_1 FIND mag(2*V(m1_1)) AT 1.7e+09
+.meas AC g1_2 FIND mag(2*V(n0_1)-1) AT 3e+09
+.meas AC zr1_2 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 3e+09
+.meas AC zi1_2 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 3e+09
+.meas AC s1_2 FIND mag(2*V(m1_1)) AT 3e+09
+* 補償つき 12 mm: shunt C 0.3p / series L 0.75n / line 50 12mm vf 0.548 / series L 0.75n / shunt C 0.3p
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+Cx00_2 n0_2 0 3e-13
+Lx10_2 n0_2 m1_2 7.5e-10 Rser=1u
+T2_2 m1_2 0 m2_2 0 Z0=50.0 TD=7.30432325e-11
+Lx30_2 m2_2 m3_2 7.5e-10 Rser=1u
+Cx40_2 m3_2 0 3e-13
+RL_2 m3_2 0 50
+.meas AC g2_0 FIND mag(2*V(n0_2)-1) AT 1e+09
+.meas AC zr2_0 FIND re(50*V(n0_2)/(1-V(n0_2))) AT 1e+09
+.meas AC zi2_0 FIND im(50*V(n0_2)/(1-V(n0_2))) AT 1e+09
+.meas AC s2_0 FIND mag(2*V(m3_2)) AT 1e+09
+.meas AC g2_1 FIND mag(2*V(n0_2)-1) AT 1.7e+09
+.meas AC zr2_1 FIND re(50*V(n0_2)/(1-V(n0_2))) AT 1.7e+09
+.meas AC zi2_1 FIND im(50*V(n0_2)/(1-V(n0_2))) AT 1.7e+09
+.meas AC s2_1 FIND mag(2*V(m3_2)) AT 1.7e+09
+.meas AC g2_2 FIND mag(2*V(n0_2)-1) AT 3e+09
+.meas AC zr2_2 FIND re(50*V(n0_2)/(1-V(n0_2))) AT 3e+09
+.meas AC zi2_2 FIND im(50*V(n0_2)/(1-V(n0_2))) AT 3e+09
+.meas AC s2_2 FIND mag(2*V(m3_2)) AT 3e+09
+* 根元 1 つ: shunt C 0.3p
+Vs_3 s_3 0 AC 1
+Rs_3 s_3 n0_3 50
+Cx00_3 n0_3 0 3e-13
+RL_3 n0_3 0 50
+.meas AC g3_0 FIND mag(2*V(n0_3)-1) AT 3e+09
+.meas AC zr3_0 FIND re(50*V(n0_3)/(1-V(n0_3))) AT 3e+09
+.meas AC zi3_0 FIND im(50*V(n0_3)/(1-V(n0_3))) AT 3e+09
+.meas AC s3_0 FIND mag(2*V(n0_3)) AT 3e+09
+.end

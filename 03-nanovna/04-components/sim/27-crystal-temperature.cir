@@ -1,0 +1,30 @@
+* 4-27 温度で水晶の f が動く: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* すべて理想の模型 (実測ではない)。.meas は |S21| (s21m) と位相 (s21p、度)
+.ac lin 10001 10001500 10002500
+* 図3: 25 °C: series C 12f esl 21.1m esr 25 cp 4p
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+C1_0_0 n0_0 m1_0_0 1.200000000e-14
+R1_1_0 m1_0_0 m1_1_0 2.500000000e+01
+L1_2_0 m1_1_0 n1_0 2.110000000e-02 Rser=1u
+C1p_0 n0_0 n1_0 4.000000000e-12
+RL_0 n1_0 0 50
+.meas AC s21m0_0 FIND mag(2*V(n1_0)) AT 10001985
+.meas AC s21p0_0 FIND ph(V(n1_0)) AT 10001985
+.meas AC s21m0_1 FIND mag(2*V(n1_0)) AT 10002033
+.meas AC s21p0_1 FIND ph(V(n1_0)) AT 10002033
+* 図4: 55 °C: series C 12f esl 21.100202561m esr 25 cp 4p
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+C1_0_1 n0_1 m1_0_1 1.200000000e-14
+R1_1_1 m1_0_1 m1_1_1 2.500000000e+01
+L1_2_1 m1_1_1 n1_1 2.110020256e-02 Rser=1u
+C1p_1 n0_1 n1_1 4.000000000e-12
+RL_1 n1_1 0 50
+.meas AC s21m1_0 FIND mag(2*V(n1_1)) AT 10001985
+.meas AC s21p1_0 FIND ph(V(n1_1)) AT 10001985
+.meas AC s21m1_1 FIND mag(2*V(n1_1)) AT 10002033
+.meas AC s21p1_1 FIND ph(V(n1_1)) AT 10002033
+.end

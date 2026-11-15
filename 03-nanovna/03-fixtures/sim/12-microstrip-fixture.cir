@@ -1,0 +1,43 @@
+* 3-12 マイクロストリップの治具: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡か開放)。Vs = 1。S11 = 2·V(n0) − 1、S21 = 2·V(out)、Zin = 50·V(n0)/(1 − V(n0))
+* LTspice のコイルは Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+.ac list 1e+08 8.21e+08 8.36e+08 1.5e+09 1.67e+09
+* 図3 幅 3.06 mm: line 50.02 50mm vf 0.548
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T0_0 n0_0 0 m1_0 0 Z0=50.02 TD=3.04346802e-10
+RL_0 m1_0 0 50
+.meas AC g0_0 FIND mag(2*V(n0_0)-1) AT 1e+08
+.meas AC zr0_0 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 1e+08
+.meas AC zi0_0 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 1e+08
+.meas AC s0_0 FIND mag(2*V(m1_0)) AT 1e+08
+.meas AC g0_1 FIND mag(2*V(n0_0)-1) AT 8.21e+08
+.meas AC zr0_1 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 8.21e+08
+.meas AC zi0_1 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 8.21e+08
+.meas AC s0_1 FIND mag(2*V(m1_0)) AT 8.21e+08
+.meas AC g0_2 FIND mag(2*V(n0_0)-1) AT 1.5e+09
+.meas AC zr0_2 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 1.5e+09
+.meas AC zi0_2 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 1.5e+09
+.meas AC s0_2 FIND mag(2*V(m1_0)) AT 1.5e+09
+* 図4 幅 2.0 mm: line 63.5 50mm vf 0.557
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T0_1 n0_1 0 m1_1 0 Z0=63.5 TD=2.9942917e-10
+RL_1 m1_1 0 50
+.meas AC g1_0 FIND mag(2*V(n0_1)-1) AT 1e+08
+.meas AC zr1_0 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 1e+08
+.meas AC zi1_0 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 1e+08
+.meas AC s1_0 FIND mag(2*V(m1_1)) AT 1e+08
+.meas AC g1_1 FIND mag(2*V(n0_1)-1) AT 8.36e+08
+.meas AC zr1_1 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 8.36e+08
+.meas AC zi1_1 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 8.36e+08
+.meas AC s1_1 FIND mag(2*V(m1_1)) AT 8.36e+08
+.meas AC g1_2 FIND mag(2*V(n0_1)-1) AT 1.67e+09
+.meas AC zr1_2 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 1.67e+09
+.meas AC zi1_2 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 1.67e+09
+.meas AC s1_2 FIND mag(2*V(m1_1)) AT 1.67e+09
+.meas AC g1_3 FIND mag(2*V(n0_1)-1) AT 1.5e+09
+.meas AC zr1_3 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 1.5e+09
+.meas AC zi1_3 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 1.5e+09
+.meas AC s1_3 FIND mag(2*V(m1_1)) AT 1.5e+09
+.end

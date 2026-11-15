@@ -1,0 +1,39 @@
+* 7-25 RFID 13.56 MHz のループ: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0。1 端子の dut は最後を短絡。Zin = 50·V(n0)/(Vs−V(n0))、SWR は |Γ| = |2·V(n0) − 1| から
+* ループは 1 µH (Rser=1u) に損失 0.5 Ω を直列。すべて理想の模型 (実測ではない)
+.ac lin 15001 12800000 14300000
+* 図3: series C 39p / shunt C 100p / series R 3.3 / series L 1u esr 0.5 / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+C1_0 n0_0 a_0 39p
+C2_0 a_0 0 100p
+R1_0 a_0 b_0 3.3
+Rl_0 b_0 c_0 0.5
+L1_0 c_0 0 1u Rser=1u
+.meas AC swr0_0 FIND (1+mag(2*V(n0_0)-1))/(1-mag(2*V(n0_0)-1)) AT 13320000
+.meas AC r0_0 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 13320000
+.meas AC x0_0 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 13320000
+.meas AC swr0_1 FIND (1+mag(2*V(n0_0)-1))/(1-mag(2*V(n0_0)-1)) AT 13560000
+.meas AC r0_1 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 13560000
+.meas AC x0_1 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 13560000
+.meas AC swr0_2 FIND (1+mag(2*V(n0_0)-1))/(1-mag(2*V(n0_0)-1)) AT 13760000
+.meas AC r0_2 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 13760000
+.meas AC x0_2 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 13760000
+* 図4: series C 39p / shunt C 100p / series L 1u esr 0.5 / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+C1_1 n0_1 a_1 39p
+C2_1 a_1 0 100p
+R1_1 a_1 b_1 1u
+Rl_1 b_1 c_1 0.5
+L1_1 c_1 0 1u Rser=1u
+.meas AC swr1_0 FIND (1+mag(2*V(n0_1)-1))/(1-mag(2*V(n0_1)-1)) AT 13320000
+.meas AC r1_0 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 13320000
+.meas AC x1_0 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 13320000
+.meas AC swr1_1 FIND (1+mag(2*V(n0_1)-1))/(1-mag(2*V(n0_1)-1)) AT 13560000
+.meas AC r1_1 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 13560000
+.meas AC x1_1 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 13560000
+.meas AC swr1_2 FIND (1+mag(2*V(n0_1)-1))/(1-mag(2*V(n0_1)-1)) AT 13760000
+.meas AC r1_2 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 13760000
+.meas AC x1_2 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 13760000
+.end

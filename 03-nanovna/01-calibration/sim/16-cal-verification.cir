@@ -1,0 +1,49 @@
+* 1-16 校正の検証: 標準 A (51 Ω + 2 nH の仮定)、標準 B (27・36・27 Ω の T 型の先を短絡)、3-5 のアッテネータの S21
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。re と im を別に .meas で読む (結果が絶対値で返る道具があるので、どちらも +10 して読み、10 を引く)。コイルは Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+.ac list 10000000 100000000 300000000
+* 標準 A (図4): series L 2n / series R 51 / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+L1_0_0 n0_0 n1_0 2e-09 Rser=1u
+R2_0_0 n1_0 n2_0 51
+Rshort_0 n2_0 0 1u
+.meas AC r0_0 FIND re(V(n0_0))+10 AT 10000000
+.meas AC i0_0 FIND im(V(n0_0))+10 AT 10000000
+.meas AC r0_1 FIND re(V(n0_0))+10 AT 100000000
+.meas AC i0_1 FIND im(V(n0_0))+10 AT 100000000
+.meas AC r0_2 FIND re(V(n0_0))+10 AT 300000000
+.meas AC i0_2 FIND im(V(n0_0))+10 AT 300000000
+* 標準 B (図3): series R 27 / shunt R 36 / series R 27 / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+R1_0_1 n0_1 n1_1 27
+R2_0_1 n1_1 0 36
+R3_0_1 n1_1 n3_1 27
+Rshort_1 n3_1 0 1u
+.meas AC r1_0 FIND re(V(n0_1))+10 AT 10000000
+.meas AC i1_0 FIND im(V(n0_1))+10 AT 10000000
+.meas AC r1_1 FIND re(V(n0_1))+10 AT 100000000
+.meas AC i1_1 FIND im(V(n0_1))+10 AT 100000000
+.meas AC r1_2 FIND re(V(n0_1))+10 AT 300000000
+.meas AC i1_2 FIND im(V(n0_1))+10 AT 300000000
+* 3-5 のアッテネータ: series R 27 / shunt R 36 / series R 27
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+R1_0_2 n0_2 n1_2 27
+R2_0_2 n1_2 0 36
+R3_0_2 n1_2 n3_2 27
+Rl_2 n3_2 0 50
+.meas AC r2_0 FIND re(V(n0_2))+10 AT 10000000
+.meas AC i2_0 FIND im(V(n0_2))+10 AT 10000000
+.meas AC o2_0 FIND re(V(n3_2))+10 AT 10000000
+.meas AC p2_0 FIND im(V(n3_2))+10 AT 10000000
+.meas AC r2_1 FIND re(V(n0_2))+10 AT 100000000
+.meas AC i2_1 FIND im(V(n0_2))+10 AT 100000000
+.meas AC o2_1 FIND re(V(n3_2))+10 AT 100000000
+.meas AC p2_1 FIND im(V(n3_2))+10 AT 100000000
+.meas AC r2_2 FIND re(V(n0_2))+10 AT 300000000
+.meas AC i2_2 FIND im(V(n0_2))+10 AT 300000000
+.meas AC o2_2 FIND re(V(n3_2))+10 AT 300000000
+.meas AC p2_2 FIND im(V(n3_2))+10 AT 300000000
+.end

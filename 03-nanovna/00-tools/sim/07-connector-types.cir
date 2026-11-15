@@ -1,0 +1,70 @@
+* 0-7 コネクタの種類と変換 (図2〜図4): アダプタの仮定の模型
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。re と im を別に .meas で読む (結果が絶対値で返る道具があるので、どちらも +10 して読み、10 を引く)。コイルは Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+.ac list 100000000 500000000 1000000000 1500000000
+* 図2 SMA→BNC→SMA: line 50 25mm vf 0.7 / series L 0.5n / line 50 25mm vf 0.7
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T1_0 n0_0 0 n1_0 0 Z0=50.0 TD=1.191300340e-10
+L2_0_0 n1_0 n2_0 5e-10 Rser=1u
+T3_0 n2_0 0 n3_0 0 Z0=50.0 TD=1.191300340e-10
+Rl_0 n3_0 0 50
+.meas AC r0_0 FIND re(V(n0_0))+10 AT 100000000
+.meas AC i0_0 FIND im(V(n0_0))+10 AT 100000000
+.meas AC o0_0 FIND re(V(n3_0))+10 AT 100000000
+.meas AC p0_0 FIND im(V(n3_0))+10 AT 100000000
+.meas AC r0_1 FIND re(V(n0_0))+10 AT 500000000
+.meas AC i0_1 FIND im(V(n0_0))+10 AT 500000000
+.meas AC o0_1 FIND re(V(n3_0))+10 AT 500000000
+.meas AC p0_1 FIND im(V(n3_0))+10 AT 500000000
+.meas AC r0_2 FIND re(V(n0_0))+10 AT 1000000000
+.meas AC i0_2 FIND im(V(n0_0))+10 AT 1000000000
+.meas AC o0_2 FIND re(V(n3_0))+10 AT 1000000000
+.meas AC p0_2 FIND im(V(n3_0))+10 AT 1000000000
+.meas AC r0_3 FIND re(V(n0_0))+10 AT 1500000000
+.meas AC i0_3 FIND im(V(n0_0))+10 AT 1500000000
+.meas AC o0_3 FIND re(V(n3_0))+10 AT 1500000000
+.meas AC p0_3 FIND im(V(n3_0))+10 AT 1500000000
+* 図3 75 Ω の線 3 cm: line 75 3cm vf 0.7
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T1_1 n0_1 0 n1_1 0 Z0=75.0 TD=1.429560408e-10
+Rl_1 n1_1 0 50
+.meas AC r1_0 FIND re(V(n0_1))+10 AT 100000000
+.meas AC i1_0 FIND im(V(n0_1))+10 AT 100000000
+.meas AC o1_0 FIND re(V(n1_1))+10 AT 100000000
+.meas AC p1_0 FIND im(V(n1_1))+10 AT 100000000
+.meas AC r1_1 FIND re(V(n0_1))+10 AT 500000000
+.meas AC i1_1 FIND im(V(n0_1))+10 AT 500000000
+.meas AC o1_1 FIND re(V(n1_1))+10 AT 500000000
+.meas AC p1_1 FIND im(V(n1_1))+10 AT 500000000
+.meas AC r1_2 FIND re(V(n0_1))+10 AT 1000000000
+.meas AC i1_2 FIND im(V(n0_1))+10 AT 1000000000
+.meas AC o1_2 FIND re(V(n1_1))+10 AT 1000000000
+.meas AC p1_2 FIND im(V(n1_1))+10 AT 1000000000
+.meas AC r1_3 FIND re(V(n0_1))+10 AT 1500000000
+.meas AC i1_3 FIND im(V(n0_1))+10 AT 1500000000
+.meas AC o1_3 FIND re(V(n1_1))+10 AT 1500000000
+.meas AC p1_3 FIND im(V(n1_1))+10 AT 1500000000
+* 図4 RP-SMA の取り違え: series C 0.1p
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+C1_0_2 n0_2 n1_2 1e-13
+Rl_2 n1_2 0 50
+.meas AC r2_0 FIND re(V(n0_2))+10 AT 100000000
+.meas AC i2_0 FIND im(V(n0_2))+10 AT 100000000
+.meas AC o2_0 FIND re(V(n1_2))+10 AT 100000000
+.meas AC p2_0 FIND im(V(n1_2))+10 AT 100000000
+.meas AC r2_1 FIND re(V(n0_2))+10 AT 500000000
+.meas AC i2_1 FIND im(V(n0_2))+10 AT 500000000
+.meas AC o2_1 FIND re(V(n1_2))+10 AT 500000000
+.meas AC p2_1 FIND im(V(n1_2))+10 AT 500000000
+.meas AC r2_2 FIND re(V(n0_2))+10 AT 1000000000
+.meas AC i2_2 FIND im(V(n0_2))+10 AT 1000000000
+.meas AC o2_2 FIND re(V(n1_2))+10 AT 1000000000
+.meas AC p2_2 FIND im(V(n1_2))+10 AT 1000000000
+.meas AC r2_3 FIND re(V(n0_2))+10 AT 1500000000
+.meas AC i2_3 FIND im(V(n0_2))+10 AT 1500000000
+.meas AC o2_3 FIND re(V(n1_2))+10 AT 1500000000
+.meas AC p2_3 FIND im(V(n1_2))+10 AT 1500000000
+.end

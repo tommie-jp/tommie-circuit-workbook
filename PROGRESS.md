@@ -16,11 +16,11 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | [回路の教科書](01-circuits/README.md) | 232 | 227 | 0 | 0 | 0 | 必須の実測 50・入門の確認 64・中級の執筆 5 |
 | [Analog Discovery の教科書](02-analog-discovery/README.md) | 202 | 202 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 0 |
-| [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 141 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 84 |
+| [NanoVNA と tinySA の教科書](03-nanovna/README.md) | 225 | 167 | 0 | 0 | 0 | 必須の実測 50・入門の確認 61・中級の執筆 58 |
 | [電験三種の教科書](04-denken/README.md) | 200 | 100 | 0 | 0 | 0 | 必須の実測 50・入門の確認 50・中級の執筆 100 |
 | [番外の工作](05-etc/README.md) | 53 | 37 | 0 | 0 | 0 | — |
 | [FPGA の教科書](06-fpga/README.md) | 243 | 161 | 0 | 0 | 0 | 必須の実測 50・入門の確認 68・中級の執筆 76 |
-| **計** | **1155** | **868** | **0** | **0** | **0** | |
+| **計** | **1155** | **894** | **0** | **0** | **0** | |
 
 ## 回路の教科書
 
@@ -607,8 +607,8 @@
 | 0-4 | [静電気とアンテナの帯電 — 放電してから繋ぐ](03-nanovna/00-tools/04-esd-antenna-discharge.md) | ✓ | [ ] | — | — |
 | 0-5 | [電池・充電・ファームウェアの更新](03-nanovna/00-tools/05-battery-firmware.md) | ✓ | [ ] | — | — |
 | 0-6 | ケーブルの種類 (RG316 / RG174 / セミリジッド) と GHz での差 | | | | |
-| 0-7 | コネクタの種類 (SMA / RP-SMA / U.FL / BNC / N) と変換 | | | | |
-| 0-8 | 測定の再現性 — 同じ物を 10 回測る | | | | |
+| 0-7 | [コネクタの種類 (SMA / RP-SMA / U.FL / BNC / N) と変換](03-nanovna/00-tools/07-connector-types.md) | ✓ | [ ] | — | — |
+| 0-8 | [測定の再現性 — 同じ物を 10 回測る](03-nanovna/00-tools/08-repeatability.md) | ✓ | [ ] | — | — |
 
 ### 第 1 章 校正
 
@@ -625,11 +625,11 @@
 | 1-9 | [校正の有効期間 — 温度と時間](03-nanovna/01-calibration/09-cal-lifetime.md) | ✓ | [ ] | — | — |
 | 1-10 | [ポート延長 (電気長)](03-nanovna/01-calibration/10-port-extension.md) | ✓ | [ ] | — | — |
 | 1-11 | GHz での校正 — 付属キットの限界 | | | | |
-| 1-12 | 校正標準のオフセット (Open の容量・Short の誘導) と定義 | | | | |
-| 1-13 | 校正の点数 (101 vs 1001) と Saver の分割掃引 | | | | |
+| 1-12 | [校正標準のオフセット (Open の容量・Short の誘導) と定義](03-nanovna/01-calibration/12-cal-standard-definitions.md) | ✓ | [ ] | — | — |
+| 1-13 | [校正の点数 (101 vs 1001) と Saver の分割掃引](03-nanovna/01-calibration/13-cal-points-segments.md) | ✓ | [ ] | — | — |
 | 1-14 | 校正なしで測るとどう見えるか | | | | |
-| 1-15 | Enhanced response / 12 項校正 | | | | |
-| 1-16 | 校正の検証 — 別の Load とアッテネータで | | | | |
+| 1-15 | [Enhanced response / 12 項校正](03-nanovna/01-calibration/15-enhanced-response.md) | ✓ | [ ] | — | — |
+| 1-16 | [校正の検証 — 別の Load とアッテネータで](03-nanovna/01-calibration/16-cal-verification.md) | ✓ | [ ] | — | — |
 
 ### 第 2 章 画面と PC ソフト
 
@@ -646,7 +646,7 @@
 | 2-9 | [NanoVNA-Saver の校正と平均化](03-nanovna/02-display/09-saver-calibration-averaging.md) | ✓ | [ ] | — | — |
 | 2-10 | [スクリーンショットと記録](03-nanovna/02-display/10-screenshot-records.md) | ✓ | [ ] | — | — |
 | 2-11 | NanoVNA-QT | | | | |
-| 2-12 | NanoVNA-App | | | | |
+| 2-12 | [NanoVNA-App](03-nanovna/02-display/12-nanovna-app.md) | ✓ | [ ] | — | — |
 | 2-13 | Touchstone を Python (scikit-rf) で読む | | | | |
 | 2-14 | 群遅延の表示 | | | | |
 | 2-15 | マーカーの検索 — 最小 SWR、−3 dB 点 | | | | |
@@ -666,11 +666,11 @@
 | 3-8 | [De-embedding — 治具の S2P を引く](03-nanovna/03-fixtures/08-de-embedding.md) | ✓ | [ ] | — | — |
 | 3-9 | [SMA オス / メスとケーブルの再現性](03-nanovna/03-fixtures/09-sma-repeatability.md) | ✓ | [ ] | — | — |
 | 3-10 | [市販のテストボードと自作の比較](03-nanovna/03-fixtures/10-commercial-test-board.md) | ✓ | [ ] | — | — |
-| 3-11 | 銅張り基板に直付け (Manhattan 式) の治具 | | | | |
-| 3-12 | マイクロストリップの治具 — FR4 で 50 Ω の幅を計算して作る | | | | |
-| 3-13 | GHz の治具 — 端面 SMA + 短いマイクロストリップ | | | | |
+| 3-11 | [銅張り基板に直付け (Manhattan 式) の治具](03-nanovna/03-fixtures/11-manhattan-fixture.md) | ✓ | [ ] | — | — |
+| 3-12 | [マイクロストリップの治具 — FR4 で 50 Ω の幅を計算して作る](03-nanovna/03-fixtures/12-microstrip-fixture.md) | ✓ | [ ] | — | — |
+| 3-13 | [GHz の治具 — 端面 SMA + 短いマイクロストリップ](03-nanovna/03-fixtures/13-ghz-fixture.md) | ✓ | [ ] | — | — |
 | 3-14 | 治具の S パラを Touchstone で保存して使い回す | | | | |
-| 3-15 | 3 端子部品の治具 (トランジスタ・SAW) | | | | |
+| 3-15 | [3 端子部品の治具 (トランジスタ・SAW)](03-nanovna/03-fixtures/15-three-terminal-fixture.md) | ✓ | [ ] | — | — |
 | 3-16 | バイアス T — 能動部品に DC を与える | | | | |
 | 3-17 | 平衡素子の治具 (バラン付き) | | | | |
 | 3-18 | 温度をかける治具 (ヒーター) | | | | |
@@ -701,12 +701,12 @@
 | 4-20 | [抵抗のリード品とチップ品 (GHz)](03-nanovna/04-components/20-lead-vs-chip-resistor.md) | ✓ | [ ] | — | — |
 | 4-21 | [コンデンサの Q と誘電体 (C0G vs X7R)](03-nanovna/04-components/21-c0g-vs-x7r-q.md) | ✓ | [ ] | — | — |
 | 4-22 | [電解 vs OS-CON vs セラミック](03-nanovna/04-components/22-elec-oscon-ceramic.md) | ✓ | [ ] | — | — |
-| 4-23 | 巻線抵抗のインダクタンス | | | | |
-| 4-24 | ケーブルを部品として — 容量 / m とインダクタンス / m | | | | |
-| 4-25 | PIN ダイオード / RF スイッチ | | | | |
-| 4-26 | トランス型バランの S21 と平衡度 | | | | |
-| 4-27 | 温度で水晶の f が動く | | | | |
-| 4-28 | 部品 10 個のばらつき (バッチ) | | | | |
+| 4-23 | [巻線抵抗のインダクタンス](03-nanovna/04-components/23-wirewound-resistor.md) | ✓ | [ ] | — | — |
+| 4-24 | [ケーブルを部品として — 容量 / m とインダクタンス / m](03-nanovna/04-components/24-cable-lc-per-meter.md) | ✓ | [ ] | — | — |
+| 4-25 | [PIN ダイオード / RF スイッチ](03-nanovna/04-components/25-pin-diode-switch.md) | ✓ | [ ] | — | — |
+| 4-26 | [トランス型バランの S21 と平衡度](03-nanovna/04-components/26-transformer-balun.md) | ✓ | [ ] | — | — |
+| 4-27 | [温度で水晶の f が動く](03-nanovna/04-components/27-crystal-temperature.md) | ✓ | [ ] | — | — |
+| 4-28 | [部品 10 個のばらつき (バッチ)](03-nanovna/04-components/28-batch-variation.md) | ✓ | [ ] | — | — |
 
 ### 第 5 章 伝送線路
 
@@ -780,19 +780,19 @@
 | 7-10 | [λ/4 グラウンドプレーン](03-nanovna/07-antennas/10-ground-plane.md) | ✓ | [ ] | — | — |
 | 7-11 | [手・近くの物の影響](03-nanovna/07-antennas/11-hand-effect.md) | ✓ | [ ] | — | — |
 | 7-12 | [433 / 920 MHz のモジュール用アンテナ (LoRa)](03-nanovna/07-antennas/12-lora-module-antenna.md) | ✓ | [ ] | — | — |
-| 7-13 | 2.4 GHz Wi-Fi / BLE ホイップ | | | | |
-| 7-14 | 基板の逆 F アンテナ (PIFA) | | | | |
-| 7-15 | パッチアンテナ 2.4 GHz | | | | |
+| 7-13 | [2.4 GHz Wi-Fi / BLE ホイップ](03-nanovna/07-antennas/13-wifi-ble-whip.md) | ✓ | [ ] | — | — |
+| 7-14 | [基板の逆 F アンテナ (PIFA)](03-nanovna/07-antennas/14-pcb-ifa.md) | ✓ | [ ] | — | — |
+| 7-15 | [パッチアンテナ 2.4 GHz](03-nanovna/07-antennas/15-patch-2g4.md) | ✓ | [ ] | — | — |
 | 7-16 | GPS 1.575 GHz セラミックアンテナ | | | | |
 | 7-17 | Wi-Fi ルータの外部アンテナ (RP-SMA) | | | | |
-| 7-18 | 2.4 GHz の整合 (π ネットワーク、チップ部品) | | | | |
-| 7-19 | スロットアンテナ | | | | |
+| 7-18 | [2.4 GHz の整合 (π ネットワーク、チップ部品)](03-nanovna/07-antennas/18-pi-match-2g4.md) | ✓ | [ ] | — | — |
+| 7-19 | [スロットアンテナ](03-nanovna/07-antennas/19-slot-antenna.md) | ✓ | [ ] | — | — |
 | 7-20 | 八木の給電点 (430 MHz) | | | | |
-| 7-21 | アンテナ間の結合 — S21 で距離と偏波 | | | | |
-| 7-22 | 放射効率のまね (Wheeler cap) | | | | |
+| 7-21 | [アンテナ間の結合 — S21 で距離と偏波](03-nanovna/07-antennas/21-antenna-coupling-s21.md) | ✓ | [ ] | — | — |
+| 7-22 | [放射効率のまね (Wheeler cap)](03-nanovna/07-antennas/22-wheeler-cap.md) | ✓ | [ ] | — | — |
 | 7-23 | 1.2 GHz のコリニア | | | | |
-| 7-24 | 同軸込みの SWR と給電点の SWR (ケーブル損失で良く見える) | | | | |
-| 7-25 | RFID 13.56 MHz のループ | | | | |
+| 7-24 | [同軸込みの SWR と給電点の SWR (ケーブル損失で良く見える)](03-nanovna/07-antennas/24-swr-through-lossy-cable.md) | ✓ | [ ] | — | — |
+| 7-25 | [RFID 13.56 MHz のループ](03-nanovna/07-antennas/25-rfid-13mhz-loop.md) | ✓ | [ ] | — | — |
 | 7-26 | NFC タグの共振 | | | | |
 
 ### 第 8 章 アンプと能動回路の S パラメータ

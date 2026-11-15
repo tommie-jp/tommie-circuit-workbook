@@ -1,0 +1,23 @@
+* 1-13 校正の点数 (図2・図3): 1 m・VF 0.66 の校正ケーブルの先を開放
+* 99.89 MHz と 108.88 MHz は 101 点 (1〜900 MHz) の隣り合う校正の点、104.385 MHz はその真ん中。直線の補間の縮みは算術で出す
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。re と im を別に .meas で読む (結果が絶対値で返る道具があるので、どちらも +10 して読み、10 を引く)。コイルは Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+.ac list 99890000 100000000 104385000 104500000 108880000 109000000
+* 1 m の先を開放: line 50 1m vf 0.66 / open
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T1_0 n0_0 0 n1_0 0 Z0=50.0 TD=5.054001442e-09
+Ropen_0 n1_0 0 1T
+.meas AC r0_0 FIND re(V(n0_0))+10 AT 100000000
+.meas AC i0_0 FIND im(V(n0_0))+10 AT 100000000
+.meas AC r0_1 FIND re(V(n0_0))+10 AT 104500000
+.meas AC i0_1 FIND im(V(n0_0))+10 AT 104500000
+.meas AC r0_2 FIND re(V(n0_0))+10 AT 109000000
+.meas AC i0_2 FIND im(V(n0_0))+10 AT 109000000
+.meas AC r0_3 FIND re(V(n0_0))+10 AT 99890000
+.meas AC i0_3 FIND im(V(n0_0))+10 AT 99890000
+.meas AC r0_4 FIND re(V(n0_0))+10 AT 108880000
+.meas AC i0_4 FIND im(V(n0_0))+10 AT 108880000
+.meas AC r0_5 FIND re(V(n0_0))+10 AT 104385000
+.meas AC i0_5 FIND im(V(n0_0))+10 AT 104385000
+.end

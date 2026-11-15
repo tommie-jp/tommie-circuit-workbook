@@ -1,0 +1,30 @@
+* 4-28 部品 10 個のばらつき (バッチ): vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* すべて理想の模型 (実測ではない)。.meas は Z の実部・虚部 (zr・zx) か S21・S11 の実部・虚部を出す
+.ac dec 2000 5e+06 1.5e+07
+* 図3: series C 100p esl 5n / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+C1_0_0 n0_0 m1_0_0 1.000000000e-10
+L1_1_0 m1_0_0 n1_0 5.000000000e-09 Rser=1u
+Rend_0 n1_0 0 1u
+.meas AC zr0_0 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 10000000
+.meas AC zx0_0 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 10000000
+* 表 (−5%): series C 95p esl 5n / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+C1_0_1 n0_1 m1_0_1 9.500000000e-11
+L1_1_1 m1_0_1 n1_1 5.000000000e-09 Rser=1u
+Rend_1 n1_1 0 1u
+.meas AC zr1_0 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 10000000
+.meas AC zx1_0 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 10000000
+* 表 (+5%): series C 105p esl 5n / short
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+C1_0_2 n0_2 m1_0_2 1.050000000e-10
+L1_1_2 m1_0_2 n1_2 5.000000000e-09 Rser=1u
+Rend_2 n1_2 0 1u
+.meas AC zr2_0 FIND re(50*V(n0_2)/(1-V(n0_2))) AT 10000000
+.meas AC zx2_0 FIND im(50*V(n0_2)/(1-V(n0_2))) AT 10000000
+.end

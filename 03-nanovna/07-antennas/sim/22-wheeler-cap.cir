@@ -1,0 +1,35 @@
+* 7-22 放射効率のまね (Wheeler cap): vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0。1 端子の dut は最後を短絡。Zin = 50·V(n0)/(Vs−V(n0))、SWR は |Γ| = |2·V(n0) − 1| から
+* キャップの中は放射抵抗 12 Ω を 0 にした模型 (損失 3 Ω だけ)。コイルは Rser=1u。すべて理想の模型 (実測ではない)
+.ac lin 3001 420000000 450000000
+* 図2: series R 15 / series L 200n / series C 0.669p / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0 n0_0 n1_0 15
+L1_0 n1_0 n2_0 200n Rser=1u
+C1_0 n2_0 0 0.669p
+.meas AC swr0_0 FIND (1+mag(2*V(n0_0)-1))/(1-mag(2*V(n0_0)-1)) AT 430000000
+.meas AC r0_0 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 430000000
+.meas AC x0_0 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 430000000
+.meas AC swr0_1 FIND (1+mag(2*V(n0_0)-1))/(1-mag(2*V(n0_0)-1)) AT 435000000
+.meas AC r0_1 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 435000000
+.meas AC x0_1 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 435000000
+.meas AC swr0_2 FIND (1+mag(2*V(n0_0)-1))/(1-mag(2*V(n0_0)-1)) AT 440000000
+.meas AC r0_2 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 440000000
+.meas AC x0_2 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 440000000
+* 図3: series R 3 / series L 200n / series C 0.669p / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+R1_1 n0_1 n1_1 3
+L1_1 n1_1 n2_1 200n Rser=1u
+C1_1 n2_1 0 0.669p
+.meas AC swr1_0 FIND (1+mag(2*V(n0_1)-1))/(1-mag(2*V(n0_1)-1)) AT 430000000
+.meas AC r1_0 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 430000000
+.meas AC x1_0 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 430000000
+.meas AC swr1_1 FIND (1+mag(2*V(n0_1)-1))/(1-mag(2*V(n0_1)-1)) AT 435000000
+.meas AC r1_1 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 435000000
+.meas AC x1_1 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 435000000
+.meas AC swr1_2 FIND (1+mag(2*V(n0_1)-1))/(1-mag(2*V(n0_1)-1)) AT 440000000
+.meas AC r1_2 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 440000000
+.meas AC x1_2 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 440000000
+.end

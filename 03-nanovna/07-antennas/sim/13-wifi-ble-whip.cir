@@ -1,0 +1,28 @@
+* 7-13 2.4 GHz Wi-Fi / BLE ホイップ: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0。1 端子の dut は最後を短絡。Zin = 50·V(n0)/(1−V(n0))、Γ = 2·V(n0) − 1
+* コイルは Rser=1u に固定。すべて理想の模型 (実測ではない)
+.ac lin 10001 2.0G 3.0G
+* 図2: 1/4 波長の棒 — series R 36 / series L 14n / series C 0.304p / short
+Vs_a s_a 0 AC 1
+Rs_a s_a na 50
+R1a na n1a 36
+L1a n1a n2a 14n Rser=1u
+C1a n2a 0 0.304p
+* 図3: ばねの短いアンテナ — series R 30 / series L 47n / series C 0.0905p / short
+Vs_b s_b 0 AC 1
+Rs_b s_b nb 50
+R1b nb n1b 30
+L1b n1b n2b 47n Rser=1u
+C1b n2b 0 0.0905p
+.meas AC ga_2402 FIND mag(2*V(na)-1) AT 2402e6
+.meas AC ga_2440 FIND mag(2*V(na)-1) AT 2440e6
+.meas AC ga_2480 FIND mag(2*V(na)-1) AT 2480e6
+.meas AC xa_2402 FIND im(50*V(na)/(1-V(na))) AT 2402e6
+.meas AC xa_2480 FIND im(50*V(na)/(1-V(na))) AT 2480e6
+.meas AC gb_2402 FIND mag(2*V(nb)-1) AT 2402e6
+.meas AC gb_2440 FIND mag(2*V(nb)-1) AT 2440e6
+.meas AC gb_2480 FIND mag(2*V(nb)-1) AT 2480e6
+.meas AC xb_2402 FIND im(50*V(nb)/(1-V(nb))) AT 2402e6
+.meas AC xb_2480 FIND im(50*V(nb)/(1-V(nb))) AT 2480e6
+.meas AC rb_2480 FIND re(50*V(nb)/(1-V(nb))) AT 2480e6
+.end

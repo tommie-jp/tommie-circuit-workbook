@@ -1,0 +1,37 @@
+* 0-8 測定の再現性 (図2・図3): 10 dB アッテネータ (理屈どおりの T 型 25.97 / 35.14 / 25.97 Ω)、図3 は先を短絡
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。re と im を別に .meas で読む (結果が絶対値で返る道具があるので、どちらも +10 して読み、10 を引く)。コイルは Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+.ac list 100000000 300000000 900000000
+* 図2 アッテネータ: series R 25.97 / shunt R 35.14 / series R 25.97
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0_0 n0_0 n1_0 25.97
+R2_0_0 n1_0 0 35.14
+R3_0_0 n1_0 n3_0 25.97
+Rl_0 n3_0 0 50
+.meas AC r0_0 FIND re(V(n0_0))+10 AT 100000000
+.meas AC i0_0 FIND im(V(n0_0))+10 AT 100000000
+.meas AC o0_0 FIND re(V(n3_0))+10 AT 100000000
+.meas AC p0_0 FIND im(V(n3_0))+10 AT 100000000
+.meas AC r0_1 FIND re(V(n0_0))+10 AT 300000000
+.meas AC i0_1 FIND im(V(n0_0))+10 AT 300000000
+.meas AC o0_1 FIND re(V(n3_0))+10 AT 300000000
+.meas AC p0_1 FIND im(V(n3_0))+10 AT 300000000
+.meas AC r0_2 FIND re(V(n0_0))+10 AT 900000000
+.meas AC i0_2 FIND im(V(n0_0))+10 AT 900000000
+.meas AC o0_2 FIND re(V(n3_0))+10 AT 900000000
+.meas AC p0_2 FIND im(V(n3_0))+10 AT 900000000
+* 図3 アッテネータ + Short: series R 25.97 / shunt R 35.14 / series R 25.97 / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+R1_0_1 n0_1 n1_1 25.97
+R2_0_1 n1_1 0 35.14
+R3_0_1 n1_1 n3_1 25.97
+Rshort_1 n3_1 0 1u
+.meas AC r1_0 FIND re(V(n0_1))+10 AT 100000000
+.meas AC i1_0 FIND im(V(n0_1))+10 AT 100000000
+.meas AC r1_1 FIND re(V(n0_1))+10 AT 300000000
+.meas AC i1_1 FIND im(V(n0_1))+10 AT 300000000
+.meas AC r1_2 FIND re(V(n0_1))+10 AT 900000000
+.meas AC i1_2 FIND im(V(n0_1))+10 AT 900000000
+.end

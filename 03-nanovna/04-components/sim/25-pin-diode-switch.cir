@@ -1,0 +1,64 @@
+* 4-25 PIN ダイオード / RF スイッチ: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡)。S21 = 2·V(out)/Vs、Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* LTspice のコイルは既定で 1 mΩ 台の直列抵抗が付くので、すべて Rser=1u に固定している (ESR は dut の esr で書く)
+* すべて理想の模型 (実測ではない)。.meas は Z の実部・虚部 (zr・zx) か S21・S11 の実部・虚部を出す
+.ac dec 2000 500000 3e+07
+* 図3: オン: series C 100n / shunt L 100u esr 430 cp 3p / series R 1 esl 7n / shunt L 100u cp 3p / series C 100n
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+C1_0_0 n0_0 n1_0 1.000000000e-07
+L2_0_0 n1_0 m2_0_0 1.000000000e-04 Rser=1u
+R2_1_0 m2_0_0 0 4.300000000e+02
+C2p_0 n1_0 0 3.000000000e-12
+R3_0_0 n1_0 m3_0_0 1.000000000e+00
+L3_1_0 m3_0_0 n2_0 7.000000000e-09 Rser=1u
+L4_0_0 n2_0 0 1.000000000e-04 Rser=1u
+C4p_0 n2_0 0 3.000000000e-12
+C5_0_0 n2_0 n3_0 1.000000000e-07
+RL_0 n3_0 0 50
+.meas AC s21re0_0 FIND re(2*V(n3_0)) AT 1e+06
+.meas AC s21im0_0 FIND im(2*V(n3_0)) AT 1e+06
+.meas AC s11re0_0 FIND re(2*V(n0_0)-1) AT 1e+06
+.meas AC s11im0_0 FIND im(2*V(n0_0)-1) AT 1e+06
+.meas AC s21re0_1 FIND re(2*V(n3_0)) AT 3.5e+06
+.meas AC s21im0_1 FIND im(2*V(n3_0)) AT 3.5e+06
+.meas AC s11re0_1 FIND re(2*V(n0_0)-1) AT 3.5e+06
+.meas AC s11im0_1 FIND im(2*V(n0_0)-1) AT 3.5e+06
+.meas AC s21re0_2 FIND re(2*V(n3_0)) AT 1.4e+07
+.meas AC s21im0_2 FIND im(2*V(n3_0)) AT 1.4e+07
+.meas AC s11re0_2 FIND re(2*V(n0_0)-1) AT 1.4e+07
+.meas AC s11im0_2 FIND im(2*V(n0_0)-1) AT 1.4e+07
+.meas AC s21re0_3 FIND re(2*V(n3_0)) AT 2.8e+07
+.meas AC s21im0_3 FIND im(2*V(n3_0)) AT 2.8e+07
+.meas AC s11re0_3 FIND re(2*V(n0_0)-1) AT 2.8e+07
+.meas AC s11im0_3 FIND im(2*V(n0_0)-1) AT 2.8e+07
+* 図4: オフ: 真ん中を series C 15p esl 7n にしたもの
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+C1_0_1 n0_1 n1_1 1.000000000e-07
+L2_0_1 n1_1 m2_0_1 1.000000000e-04 Rser=1u
+R2_1_1 m2_0_1 0 4.300000000e+02
+C2p_1 n1_1 0 3.000000000e-12
+C3_0_1 n1_1 m3_0_1 1.500000000e-11
+L3_1_1 m3_0_1 n2_1 7.000000000e-09 Rser=1u
+L4_0_1 n2_1 0 1.000000000e-04 Rser=1u
+C4p_1 n2_1 0 3.000000000e-12
+C5_0_1 n2_1 n3_1 1.000000000e-07
+RL_1 n3_1 0 50
+.meas AC s21re1_0 FIND re(2*V(n3_1)) AT 1e+06
+.meas AC s21im1_0 FIND im(2*V(n3_1)) AT 1e+06
+.meas AC s11re1_0 FIND re(2*V(n0_1)-1) AT 1e+06
+.meas AC s11im1_0 FIND im(2*V(n0_1)-1) AT 1e+06
+.meas AC s21re1_1 FIND re(2*V(n3_1)) AT 3.5e+06
+.meas AC s21im1_1 FIND im(2*V(n3_1)) AT 3.5e+06
+.meas AC s11re1_1 FIND re(2*V(n0_1)-1) AT 3.5e+06
+.meas AC s11im1_1 FIND im(2*V(n0_1)-1) AT 3.5e+06
+.meas AC s21re1_2 FIND re(2*V(n3_1)) AT 1.4e+07
+.meas AC s21im1_2 FIND im(2*V(n3_1)) AT 1.4e+07
+.meas AC s11re1_2 FIND re(2*V(n0_1)-1) AT 1.4e+07
+.meas AC s11im1_2 FIND im(2*V(n0_1)-1) AT 1.4e+07
+.meas AC s21re1_3 FIND re(2*V(n3_1)) AT 2.8e+07
+.meas AC s21im1_3 FIND im(2*V(n3_1)) AT 2.8e+07
+.meas AC s11re1_3 FIND re(2*V(n0_1)-1) AT 2.8e+07
+.meas AC s11im1_3 FIND im(2*V(n0_1)-1) AT 2.8e+07
+.end

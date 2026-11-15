@@ -1,0 +1,25 @@
+* 7-14 基板の逆 F アンテナ (PIFA): vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0。dut は L ∥ R ∥ C を GND へ (series L 0.3n rp 55 cp C + short)
+* Zin = 50·V/(1−V)、Γ = 2·V − 1。コイルは Rser=1u。理想の模型 (実測ではない)
+.ac lin 10001 2.0G 3.0G
+* 図4: 切りそろえた後 — L 0.3n ∥ R 55 ∥ C 14.2p
+Vs_a s_a 0 AC 1
+Rs_a s_a na 50
+L1a na 0 0.3n Rser=1u
+R1a na 0 55
+C1a na 0 14.2p
+* 図3: 組んだまま (腕が長い) — L 0.3n ∥ R 55 ∥ C 15.6p
+Vs_b s_b 0 AC 1
+Rs_b s_b nb 50
+L1b nb 0 0.3n Rser=1u
+R1b nb 0 55
+C1b nb 0 15.6p
+.meas AC ga_2402 FIND mag(2*V(na)-1) AT 2402e6
+.meas AC ga_2440 FIND mag(2*V(na)-1) AT 2440e6
+.meas AC ga_2480 FIND mag(2*V(na)-1) AT 2480e6
+.meas AC ra_2440 FIND re(50*V(na)/(1-V(na))) AT 2440e6
+.meas AC gb_2330 FIND mag(2*V(nb)-1) AT 2330e6
+.meas AC gb_2402 FIND mag(2*V(nb)-1) AT 2402e6
+.meas AC gb_2440 FIND mag(2*V(nb)-1) AT 2440e6
+.meas AC gb_2480 FIND mag(2*V(nb)-1) AT 2480e6
+.end

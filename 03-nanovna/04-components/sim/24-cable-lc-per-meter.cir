@@ -1,0 +1,24 @@
+* 4-24 ケーブルを部品として: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0。Zin = 50·V(n0)/(Vs−V(n0)) = CH0 から見た Z
+* 伝送線路は損失なしの T 素子 (Z0 50 Ω、1 m・vf 0.66 → TD = 1 / (0.66 c) = 5.054 ns)。すべて理想の模型 (実測ではない)
+* .meas は Z の実部・虚部 (zr・zx)
+.ac dec 2000 1e+06 3e+07
+* 図2: line 50 1m vf 0.66 / open
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T1_0 n0_0 0 x1_0 0 Z0=50.0 TD=5.054001e-09
+Ropen_0 x1_0 0 1G
+.meas AC zr0_0 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 5e+06
+.meas AC zx0_0 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 5e+06
+.meas AC zr0_1 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 2e+07
+.meas AC zx0_1 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 2e+07
+* 図3: line 50 1m vf 0.66 / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T1_1 n0_1 0 x1_1 0 Z0=50.0 TD=5.054001e-09
+Rend_1 x1_1 0 1u
+.meas AC zr1_0 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 5e+06
+.meas AC zx1_0 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 5e+06
+.meas AC zr1_1 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 2e+07
+.meas AC zx1_1 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 2e+07
+.end

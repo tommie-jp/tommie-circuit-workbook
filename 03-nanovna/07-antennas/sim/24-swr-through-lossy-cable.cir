@@ -1,0 +1,56 @@
+* 7-24 同軸込みの SWR と給電点の SWR: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0。1 端子の dut は最後を短絡 (か開放)。Zin = 50·V(n0)/(Vs−V(n0))、SWR は |Γ| = |2·V(n0) − 1| から
+* 同軸は損失なしの T 素子 (Z0 50 Ω、10 m / (0.66 c) で TD = 50.5400 ns)、損は 3 dB の π 型 (292・17.6・292 Ω)
+* コイルは Rser=1u。すべて理想の模型 (実測ではない)
+.ac lin 7001 400000000 470000000
+* 図2: series R 36 / series L 180n / series C 0.82p / short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+R1_0 n0_0 n1_0 36
+L1_0 n1_0 n2_0 180n Rser=1u
+C1_0 n2_0 0 0.82p
+.meas AC swr0_0 FIND (1+mag(2*V(n0_0)-1))/(1-mag(2*V(n0_0)-1)) AT 430000000
+.meas AC r0_0 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 430000000
+.meas AC x0_0 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 430000000
+.meas AC swr0_1 FIND (1+mag(2*V(n0_0)-1))/(1-mag(2*V(n0_0)-1)) AT 435000000
+.meas AC r0_1 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 435000000
+.meas AC x0_1 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 435000000
+.meas AC swr0_2 FIND (1+mag(2*V(n0_0)-1))/(1-mag(2*V(n0_0)-1)) AT 440000000
+.meas AC r0_2 FIND re(50*V(n0_0)/(1-V(n0_0))) AT 440000000
+.meas AC x0_2 FIND im(50*V(n0_0)/(1-V(n0_0))) AT 440000000
+* 図3: line 50 10m vf 0.66 / shunt R 292 / series R 17.6 / shunt R 292 / series R 36 / series L 180n / series C 0.82p / short
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T1_1 n0_1 0 a_1 0 Z0=50 TD=5.054001e-08
+Ra_1 a_1 0 292
+Rb_1 a_1 b_1 17.6
+Rc_1 b_1 0 292
+R1_1 b_1 n1_1 36
+L1_1 n1_1 n2_1 180n Rser=1u
+C1_1 n2_1 0 0.82p
+.meas AC swr1_0 FIND (1+mag(2*V(n0_1)-1))/(1-mag(2*V(n0_1)-1)) AT 430000000
+.meas AC r1_0 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 430000000
+.meas AC x1_0 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 430000000
+.meas AC swr1_1 FIND (1+mag(2*V(n0_1)-1))/(1-mag(2*V(n0_1)-1)) AT 435000000
+.meas AC r1_1 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 435000000
+.meas AC x1_1 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 435000000
+.meas AC swr1_2 FIND (1+mag(2*V(n0_1)-1))/(1-mag(2*V(n0_1)-1)) AT 440000000
+.meas AC r1_2 FIND re(50*V(n0_1)/(1-V(n0_1))) AT 440000000
+.meas AC x1_2 FIND im(50*V(n0_1)/(1-V(n0_1))) AT 440000000
+* 図4: line 50 10m vf 0.66 / shunt R 292 / series R 17.6 / shunt R 292 / open
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+T1_2 n0_2 0 a_2 0 Z0=50 TD=5.054001e-08
+Ra_2 a_2 0 292
+Rb_2 a_2 b_2 17.6
+Rc_2 b_2 0 292
+.meas AC swr2_0 FIND (1+mag(2*V(n0_2)-1))/(1-mag(2*V(n0_2)-1)) AT 430000000
+.meas AC r2_0 FIND re(50*V(n0_2)/(1-V(n0_2))) AT 430000000
+.meas AC x2_0 FIND im(50*V(n0_2)/(1-V(n0_2))) AT 430000000
+.meas AC swr2_1 FIND (1+mag(2*V(n0_2)-1))/(1-mag(2*V(n0_2)-1)) AT 435000000
+.meas AC r2_1 FIND re(50*V(n0_2)/(1-V(n0_2))) AT 435000000
+.meas AC x2_1 FIND im(50*V(n0_2)/(1-V(n0_2))) AT 435000000
+.meas AC swr2_2 FIND (1+mag(2*V(n0_2)-1))/(1-mag(2*V(n0_2)-1)) AT 440000000
+.meas AC r2_2 FIND re(50*V(n0_2)/(1-V(n0_2))) AT 440000000
+.meas AC x2_2 FIND im(50*V(n0_2)/(1-V(n0_2))) AT 440000000
+.end

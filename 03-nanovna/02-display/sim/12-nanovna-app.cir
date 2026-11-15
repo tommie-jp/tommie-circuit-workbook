@@ -1,0 +1,24 @@
+* 2-12 NanoVNA-App (図2): 6-3 の LC バンドパスを LTspice の AC 解析で確かめる
+* 50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1
+* LTspice のコイルは既定で直列抵抗が付くので Rser=1u に固定。理想の模型 (実測ではない)
+* .meas で読む周波数の点だけを解く
+.ac list 20.04e6 21.22e6 21.91e6 22.3e6
+* shunt L 39n / shunt C 1500p / series L 6.8u / series C 8.2p / shunt L 39n / shunt C 1500p
+Vs s 0 AC 1
+Rs s n0 50
+L1 n0 0 39n Rser=1u
+C1 n0 0 1500p
+L2 n0 n1 6.8u Rser=1u
+C2 n1 n2 8.2p
+L3 n2 0 39n Rser=1u
+C3 n2 0 1500p
+RL n2 0 50
+.meas AC s21_1 FIND mag(2*V(n2)) AT 20.04e6
+.meas AC s11_1 FIND mag(2*V(n0)-1) AT 20.04e6
+.meas AC s21_2 FIND mag(2*V(n2)) AT 21.22e6
+.meas AC s11_2 FIND mag(2*V(n0)-1) AT 21.22e6
+.meas AC s21_3 FIND mag(2*V(n2)) AT 21.91e6
+.meas AC s11_3 FIND mag(2*V(n0)-1) AT 21.91e6
+.meas AC s21_4 FIND mag(2*V(n2)) AT 22.3e6
+.meas AC s11_4 FIND mag(2*V(n0)-1) AT 22.3e6
+.end

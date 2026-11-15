@@ -1,0 +1,63 @@
+* 1-12 校正標準の定義: Open を定義 A (4 mm + 50 fF) と定義 B (遅延だけ 21.56 ps = 4.5246 mm) で、Short (4 mm)・Load (50 Ω + 0.3 nH)・100 Ω
+* 定義を入れた校正の写し方は、Saver の式で作った標準器の値から算術で解く (LTspice の対象外)
+* vna フェンスの dut: を LTspice の AC 解析にかけて、図の読み値と比べる。50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端 (1 端子の dut は最後を短絡または開放)
+* S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1。re と im を別に .meas で読む (結果が絶対値で返る道具があるので、どちらも +10 して読み、10 を引く)。コイルは Rser=1u に固定。伝送線路は損失なしの T 素子。理想の模型 (実測ではない)
+.ac list 1000000000 2000000000 3000000000
+* Open 定義 A (図2): line 50 4mm vf 0.7 / shunt C 50f / open
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T1_0 n0_0 0 n1_0 0 Z0=50.0 TD=1.906080544e-11
+C2_0_0 n1_0 0 5e-14
+Ropen_0 n1_0 0 1T
+.meas AC r0_0 FIND re(V(n0_0))+10 AT 1000000000
+.meas AC i0_0 FIND im(V(n0_0))+10 AT 1000000000
+.meas AC r0_1 FIND re(V(n0_0))+10 AT 2000000000
+.meas AC i0_1 FIND im(V(n0_0))+10 AT 2000000000
+.meas AC r0_2 FIND re(V(n0_0))+10 AT 3000000000
+.meas AC i0_2 FIND im(V(n0_0))+10 AT 3000000000
+* Open 定義 B (図3): line 50 4.5246mm vf 0.7 / open
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T1_1 n0_1 0 n1_1 0 Z0=50.0 TD=2.156063007e-11
+Ropen_1 n1_1 0 1T
+.meas AC r1_0 FIND re(V(n0_1))+10 AT 1000000000
+.meas AC i1_0 FIND im(V(n0_1))+10 AT 1000000000
+.meas AC r1_1 FIND re(V(n0_1))+10 AT 2000000000
+.meas AC i1_1 FIND im(V(n0_1))+10 AT 2000000000
+.meas AC r1_2 FIND re(V(n0_1))+10 AT 3000000000
+.meas AC i1_2 FIND im(V(n0_1))+10 AT 3000000000
+* Short: line 50 4mm vf 0.7 / short
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+T1_2 n0_2 0 n1_2 0 Z0=50.0 TD=1.906080544e-11
+Rshort_2 n1_2 0 1u
+.meas AC r2_0 FIND re(V(n0_2))+10 AT 1000000000
+.meas AC i2_0 FIND im(V(n0_2))+10 AT 1000000000
+.meas AC r2_1 FIND re(V(n0_2))+10 AT 2000000000
+.meas AC i2_1 FIND im(V(n0_2))+10 AT 2000000000
+.meas AC r2_2 FIND re(V(n0_2))+10 AT 3000000000
+.meas AC i2_2 FIND im(V(n0_2))+10 AT 3000000000
+* Load: series R 50 esl 0.3n / short
+Vs_3 s_3 0 AC 1
+Rs_3 s_3 n0_3 50
+R1_0_3 n0_3 x1_0_3 50
+L1_1_3 x1_0_3 n1_3 3e-10 Rser=1u
+Rshort_3 n1_3 0 1u
+.meas AC r3_0 FIND re(V(n0_3))+10 AT 1000000000
+.meas AC i3_0 FIND im(V(n0_3))+10 AT 1000000000
+.meas AC r3_1 FIND re(V(n0_3))+10 AT 2000000000
+.meas AC i3_1 FIND im(V(n0_3))+10 AT 2000000000
+.meas AC r3_2 FIND re(V(n0_3))+10 AT 3000000000
+.meas AC i3_2 FIND im(V(n0_3))+10 AT 3000000000
+* 100 Ω: series R 100 / short
+Vs_4 s_4 0 AC 1
+Rs_4 s_4 n0_4 50
+R1_0_4 n0_4 n1_4 100
+Rshort_4 n1_4 0 1u
+.meas AC r4_0 FIND re(V(n0_4))+10 AT 1000000000
+.meas AC i4_0 FIND im(V(n0_4))+10 AT 1000000000
+.meas AC r4_1 FIND re(V(n0_4))+10 AT 2000000000
+.meas AC i4_1 FIND im(V(n0_4))+10 AT 2000000000
+.meas AC r4_2 FIND re(V(n0_4))+10 AT 3000000000
+.meas AC i4_2 FIND im(V(n0_4))+10 AT 3000000000
+.end

@@ -1,0 +1,43 @@
+* 7-18 2.4 GHz の整合 (π ネットワーク、チップ部品): vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0 (ポート延長で基準面を C1 の位置へ動かした後)。Zin = 50·V/(1−V)、Γ = 2·V − 1
+* C1 と L2 の間の 2 mm は損失の無い T 素子 (50 Ω、速度係数 0.55 → Td = 0.002 / (0.55 × 299792458) = 12.130 ps)
+* アンテナは L2 の右の位置で見た直列 RLC (R 15 / L 3n / C 1.165p)。コイルは Rser=1u。理想の模型 (実測ではない)
+.ac lin 10001 2.0G 3.0G
+* 図3: 整合なし (L2 = 0 Ω、C1・C3 なし) — line 2mm → アンテナ
+Vs_a s_a 0 AC 1
+Rs_a s_a na 50
+Ta na 0 ta 0 Z0=50 Td=12.130p
+Ra ta n1a 15
+La n1a n2a 3n Rser=1u
+Ca n2a 0 1.165p
+* 図4: 式どおりの値 — shunt C 2.0p → line 2mm → series L 2.2n → アンテナ
+Vs_b s_b 0 AC 1
+Rs_b s_b nb 50
+C1b nb 0 2.0p
+Tb nb 0 tb 0 Z0=50 Td=12.130p
+L2b tb m_b 2.2n Rser=1u
+Rb m_b n1b 15
+Lb n1b n2b 3n Rser=1u
+Cb n2b 0 1.165p
+* 図5: 測って詰めた値 — shunt C 1.8p → line 2mm → series L 1.5n → アンテナ
+Vs_c s_c 0 AC 1
+Rs_c s_c nc 50
+C1c nc 0 1.8p
+Tc nc 0 tc 0 Z0=50 Td=12.130p
+L2c tc m_c 1.5n Rser=1u
+Rc m_c n1c 15
+Lc n1c n2c 3n Rser=1u
+Cc n2c 0 1.165p
+.meas AC ga_2402 FIND mag(2*V(na)-1) AT 2402e6
+.meas AC ga_2440 FIND mag(2*V(na)-1) AT 2440e6
+.meas AC ga_2480 FIND mag(2*V(na)-1) AT 2480e6
+.meas AC ra_2440 FIND re(50*V(na)/(1-V(na))) AT 2440e6
+.meas AC gb_2402 FIND mag(2*V(nb)-1) AT 2402e6
+.meas AC gb_2440 FIND mag(2*V(nb)-1) AT 2440e6
+.meas AC gb_2480 FIND mag(2*V(nb)-1) AT 2480e6
+.meas AC rb_2440 FIND re(50*V(nb)/(1-V(nb))) AT 2440e6
+.meas AC gc_2402 FIND mag(2*V(nc)-1) AT 2402e6
+.meas AC gc_2440 FIND mag(2*V(nc)-1) AT 2440e6
+.meas AC gc_2480 FIND mag(2*V(nc)-1) AT 2480e6
+.meas AC rc_2440 FIND re(50*V(nc)/(1-V(nc))) AT 2440e6
+.end

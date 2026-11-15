@@ -1,0 +1,28 @@
+* 7-21 アンテナ間の結合 — S21 で距離と偏波: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(out)/Vs
+* 空気の線路は損失なしの T 素子 (TD = d/c)。損は整合した π 型減衰器。すべて理想の模型 (実測ではない)
+* 群遅延は 434.5 MHz と 435.5 MHz の位相の差から τ = −Δφ / (2π·1 MHz) で出す
+.ac lin 7001 400000000 470000000
+* 図2: line 50 1m vf 1 / shunt R 59.6 / series R 283.5 / shunt R 59.6
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T1_0 n0_0 0 n1_0 0 Z0=50 TD=3.33564e-9
+Ra_0 n1_0 0 59.6
+Rb_0 n1_0 o_0 283.5
+Rc_0 o_0 0 59.6
+RL_0 o_0 0 50
+.meas AC s21_0 FIND 20*log10(mag(2*V(o_0))) AT 435000000
+.meas AC pa_0 FIND ph(V(o_0)) AT 434500000
+.meas AC pb_0 FIND ph(V(o_0)) AT 435500000
+* 図3: line 50 2m vf 1 / shunt R 54.6 / series R 570.3 / shunt R 54.6
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T1_1 n0_1 0 n1_1 0 Z0=50 TD=6.67128e-9
+Ra_1 n1_1 0 54.6
+Rb_1 n1_1 o_1 570.3
+Rc_1 o_1 0 54.6
+RL_1 o_1 0 50
+.meas AC s21_1 FIND 20*log10(mag(2*V(o_1))) AT 435000000
+.meas AC pa_1 FIND ph(V(o_1)) AT 434500000
+.meas AC pb_1 FIND ph(V(o_1)) AT 435500000
+.end
