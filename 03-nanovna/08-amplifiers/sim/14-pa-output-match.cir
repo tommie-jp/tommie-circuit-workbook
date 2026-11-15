@@ -1,0 +1,23 @@
+* 8-14 小電力パワーアンプの出力整合 (144 MHz): Q1 の代わりに 100 Ω (RD) を付けた出力の整合回路を、出力の SMA から .ac で見る
+* 信号源 2 V (AC)・50 Ω を出力の SMA に (入射波 1): S11 = V(o) − 1
+* .param cob で Q1 の出力容量 (2SC3355 の Cob 0.65 pF 代表、1 pF の目安) を足した場合も見る。コイルは損失なしの理想
+.param cob=0
+Vs s 0 AC 2
+Rs s o 50
+C3 o m 1n
+L2 m c 56n Rser=0
+C2 c 0 15p
+Ccob c 0 {cob+1e-18}
+L1 c v 330n Rser=0
+C4 v 0 1n
+RD c 0 100
+.ac lin 2501 50Meg 300Meg
+.meas ac s11_100 FIND mag(V(o)-1) AT 100Meg
+.meas ac s11_130 FIND mag(V(o)-1) AT 130Meg
+.meas ac s11_144 FIND mag(V(o)-1) AT 144Meg
+.meas ac s11_160 FIND mag(V(o)-1) AT 160Meg
+.meas ac zre FIND re(V(o)/I(Rs)) AT 144Meg
+.meas ac zim FIND im(V(o)/I(Rs)) AT 144Meg
+.meas ac s11min MIN mag(V(o)-1)
+.meas ac fmin WHEN mag(V(o)-1)=s11min
+.end

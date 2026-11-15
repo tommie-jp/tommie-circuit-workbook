@@ -1,0 +1,27 @@
+* 6-22 コムラインの模型: vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω 電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(out)/Vs、S11 は V(n0) から
+* コイルは Rser=1u に固定。伝送線路は損失なしの T 素子。すべて理想の模型 (実測ではない)
+* 共振器は 94.9 Ω・vf 0.563 の線路 (等価回路)。2 本の線路の結合は CK にまとめた (結合線路そのものは LTspice に素子が無いので本文の算術で確かめた)
+.ac dec 4000 2.156e+09 2.754e+09
+* 図3: shunt line 94.9 1.70mm vf 0.563 short / line 94.9 8.89mm vf 0.563 / shunt C 0.446p / series C 0.0631p / shunt C 0.446p / line 94.9 8.89mm vf 0.563 / shunt line 94.9 1.70mm vf 0.563 short
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T1_0 n0_0 0 st1_0 0 Z0=94.9 Td=1.007209524e-11
+R1e_0 st1_0 0 1u
+T2_0 n0_0 0 n2_0 0 Z0=94.9 Td=5.267113333e-11
+C30_0 n2_0 0 4.460000000e-13
+C40_0 n2_0 n4_0 6.310000000e-14
+C50_0 n4_0 0 4.460000000e-13
+T6_0 n4_0 0 n6_0 0 Z0=94.9 Td=5.267113333e-11
+T7_0 n6_0 0 st7_0 0 Z0=94.9 Td=1.007209524e-11
+R7e_0 st7_0 0 1u
+RL_0 n6_0 0 50
+.meas AC s11_0_0 FIND mag(2*V(n0_0)-1) AT 2.2e+09
+.meas AC s21_0_0 FIND mag(2*V(n6_0)) AT 2.2e+09
+.meas AC s11_0_1 FIND mag(2*V(n0_0)-1) AT 2.4e+09
+.meas AC s21_0_1 FIND mag(2*V(n6_0)) AT 2.4e+09
+.meas AC s11_0_2 FIND mag(2*V(n0_0)-1) AT 2.4835e+09
+.meas AC s21_0_2 FIND mag(2*V(n6_0)) AT 2.4835e+09
+.meas AC s11_0_3 FIND mag(2*V(n0_0)-1) AT 2.7e+09
+.meas AC s21_0_3 FIND mag(2*V(n6_0)) AT 2.7e+09
+.end

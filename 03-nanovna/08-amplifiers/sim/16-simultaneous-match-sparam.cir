@@ -1,0 +1,36 @@
+* 8-16 入出力を同時に整合する: 2SC3355 の段 (バイアスと安定化の抵抗を含めた 2 ポート) の S パラメータを .ac で読む
+* 前向き: P1 に信号源 2 V・50 Ω (入射波 1)、P2 は 50 Ω。S11 = V(p1) − 1、S21 = V(p2)
+* 後ろ向き: P2 に信号源、P1 は 50 Ω。S22 = V(q2) − 1、S12 = V(q1)
+* Q3355 は 2SC3355 の代わりの仮定の模型 (01-circuits の 9-4 と同じ値。fT 約 7 GHz、hFE 100)。実測ではない
+.model Q3355 NPN (IS=2e-14 BF=100 NF=1 VAF=100 IKF=0.15 RB=20 RE=1 RC=5 CJE=1p CJC=0.6p TF=23p TR=50n)
+.param rs=470 re=22
+.subckt AMP in out v5
+Cin in b 100n
+R1 v5 b 6.8k
+R2 b 0 2.2k
+Q1 c b e Q3355
+RE e 0 {re}
+L1 v5 c 10u Rser=0.5
+RS c x {rs}
+CS x 0 100n
+Cout c out 100n
+.ends
+V5 v5 0 5
+Vs s 0 AC 2
+Rs s p1 50
+X1 p1 p2 v5 AMP
+RL p2 0 50
+VsB sB 0 AC 2
+RsB sB q2 50
+X2 q1 q2 v5 AMP
+RLB q1 0 50
+.ac list 21Meg
+.meas ac s11r FIND re(V(p1)-1) AT 21Meg
+.meas ac s11i FIND im(V(p1)-1) AT 21Meg
+.meas ac s21r FIND re(V(p2)) AT 21Meg
+.meas ac s21i FIND im(V(p2)) AT 21Meg
+.meas ac s12r FIND re(V(q1)) AT 21Meg
+.meas ac s12i FIND im(V(q1)) AT 21Meg
+.meas ac s22r FIND re(V(q2)-1) AT 21Meg
+.meas ac s22i FIND im(V(q2)-1) AT 21Meg
+.end

@@ -1,0 +1,78 @@
+* 8-10 方向性結合器 (2 つのトランス、FT37-43)。S21・S31・S41・S11 を .ac で読む
+* 信号源 Vs = 2 V (AC)、Rs = 50 Ω なので入射波は 1: S21 = V(p2)、S31 = V(p3)、S41 = V(p4)、S11 = V(p1) − 1
+* T1 (電流): 主線 1 回 (La1) と、中点のある 10 + 10 回 (Lb1・Lc1)。T2 (電圧): 20 回 (Lv2) を主線から GND へ、1 回 (Ls2) を T1 の中点へ
+* FT37-43 の AL を 350 nH/回² とした仮定 (1 回 0.35 µH・10 回 35 µH・20 回 140 µH)。結合係数 k は仮定 (下の .param)
+.param k=0.99
+* ---- 前向き: CH0 を P1 に、P2・P3・P4 を 50 Ω で終端 ----
+Vs s 0 AC 2
+Rs s p1 50
+La1 p1 p2 0.35u Rser=0
+Lb1 p3 ct 35u Rser=0
+Lc1 ct p4 35u Rser=0
+K1 La1 Lb1 Lc1 {k}
+Lv2 p2 0 140u Rser=0
+Ls2 ct 0 0.35u Rser=0
+K2 Lv2 Ls2 {k}
+R2 p2 0 50
+R3 p3 0 50
+R4 p4 0 50
+* ---- 逆向き: CH0 を P2 に、P1・P3・P4 を 50 Ω で終端 (P3 に漏れる量 = アイソレーション) ----
+VsR sR 0 AC 2
+RsR sR q2 50
+La1R q1 q2 0.35u Rser=0
+Lb1R q3 ctR 35u Rser=0
+Lc1R ctR q4 35u Rser=0
+K1R La1R Lb1R Lc1R {k}
+Lv2R q2 0 140u Rser=0
+Ls2R ctR 0 0.35u Rser=0
+K2R Lv2R Ls2R {k}
+R1R q1 0 50
+R3R q3 0 50
+R4R q4 0 50
+.ac dec 200 300k 100Meg
+.meas ac s21_0p5 FIND mag(V(p2)) AT 500k
+.meas ac s31_0p5 FIND mag(V(p3)) AT 500k
+.meas ac s41_0p5 FIND mag(V(p4)) AT 500k
+.meas ac s11_0p5 FIND mag(V(p1)-1) AT 500k
+.meas ac s32_0p5 FIND mag(V(q3)) AT 500k
+.meas ac s21_1 FIND mag(V(p2)) AT 1Meg
+.meas ac s31_1 FIND mag(V(p3)) AT 1Meg
+.meas ac s41_1 FIND mag(V(p4)) AT 1Meg
+.meas ac s11_1 FIND mag(V(p1)-1) AT 1Meg
+.meas ac s32_1 FIND mag(V(q3)) AT 1Meg
+.meas ac s21_2 FIND mag(V(p2)) AT 2Meg
+.meas ac s31_2 FIND mag(V(p3)) AT 2Meg
+.meas ac s41_2 FIND mag(V(p4)) AT 2Meg
+.meas ac s11_2 FIND mag(V(p1)-1) AT 2Meg
+.meas ac s32_2 FIND mag(V(q3)) AT 2Meg
+.meas ac s21_3p5 FIND mag(V(p2)) AT 3.5Meg
+.meas ac s31_3p5 FIND mag(V(p3)) AT 3.5Meg
+.meas ac s41_3p5 FIND mag(V(p4)) AT 3.5Meg
+.meas ac s11_3p5 FIND mag(V(p1)-1) AT 3.5Meg
+.meas ac s32_3p5 FIND mag(V(q3)) AT 3.5Meg
+.meas ac s21_7 FIND mag(V(p2)) AT 7Meg
+.meas ac s31_7 FIND mag(V(p3)) AT 7Meg
+.meas ac s41_7 FIND mag(V(p4)) AT 7Meg
+.meas ac s11_7 FIND mag(V(p1)-1) AT 7Meg
+.meas ac s32_7 FIND mag(V(q3)) AT 7Meg
+.meas ac s21_14 FIND mag(V(p2)) AT 14Meg
+.meas ac s31_14 FIND mag(V(p3)) AT 14Meg
+.meas ac s41_14 FIND mag(V(p4)) AT 14Meg
+.meas ac s11_14 FIND mag(V(p1)-1) AT 14Meg
+.meas ac s32_14 FIND mag(V(q3)) AT 14Meg
+.meas ac s21_21 FIND mag(V(p2)) AT 21Meg
+.meas ac s31_21 FIND mag(V(p3)) AT 21Meg
+.meas ac s41_21 FIND mag(V(p4)) AT 21Meg
+.meas ac s11_21 FIND mag(V(p1)-1) AT 21Meg
+.meas ac s32_21 FIND mag(V(q3)) AT 21Meg
+.meas ac s21_30 FIND mag(V(p2)) AT 30Meg
+.meas ac s31_30 FIND mag(V(p3)) AT 30Meg
+.meas ac s41_30 FIND mag(V(p4)) AT 30Meg
+.meas ac s11_30 FIND mag(V(p1)-1) AT 30Meg
+.meas ac s32_30 FIND mag(V(q3)) AT 30Meg
+.meas ac s21_50 FIND mag(V(p2)) AT 50Meg
+.meas ac s31_50 FIND mag(V(p3)) AT 50Meg
+.meas ac s41_50 FIND mag(V(p4)) AT 50Meg
+.meas ac s11_50 FIND mag(V(p1)-1) AT 50Meg
+.meas ac s32_50 FIND mag(V(q3)) AT 50Meg
+.end

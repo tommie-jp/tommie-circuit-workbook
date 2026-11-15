@@ -1,0 +1,64 @@
+* 8-16 入出力を同時に整合する: 16-simultaneous-match-sparam.cir の段に、入力の L 形 (Li 直列・Ci 並列) と出力の L 形 (Co 並列・Lo 直列) を付けて .ac で見る
+* 前向き: P1 に信号源 2 V・50 Ω、P2 は 50 Ω。S11 = V(p1) − 1、S21 = V(p2)。後ろ向き: S22 = V(q2) − 1
+* Q3355 は仮定の模型 (sparam のデッキと同じ)。コイルの損失は Rser で仮定 (Q 約 100 の目安)
+.model Q3355 NPN (IS=2e-14 BF=100 NF=1 VAF=100 IKF=0.15 RB=20 RE=1 RC=5 CJE=1p CJC=0.6p TF=23p TR=50n)
+.param li=1.65u ci=28.5p lo=1.12u co=44.6p rq=0
+* 部品の値は 2 本ずつで作る: Li 1.5 µH + 150 nH、Ci 27 pF + 1.5 pF、Lo 1.0 µH + 120 nH、Co 39 pF + 5.6 pF。計算の値 (1.67 µH・28.4 pF・1.13 µH・44.7 pF) は .param を替えて回す
+.subckt AMP in out v5
+Cin in b 100n
+R1 v5 b 6.8k
+R2 b 0 2.2k
+Q1 c b e Q3355
+RE e 0 22
+L1 v5 c 10u Rser=0.5
+RS c x 470
+CS x 0 100n
+Cout c out 100n
+.ends
+.subckt MATCHED p1 p2 v5
+Li p1 a {li} Rser={rq*li*1.32e6}
+Ci a 0 {ci}
+X a o v5 AMP
+Co o 0 {co}
+Lo o p2 {lo} Rser={rq*lo*1.32e6}
+.ends
+V5 v5 0 5
+Vs s 0 AC 2
+Rs s p1 50
+XM p1 p2 v5 MATCHED
+RL p2 0 50
+VsB sB 0 AC 2
+RsB sB q2 50
+XMB q1 q2 v5 MATCHED
+RLB q1 0 50
+.ac lin 401 15Meg 27Meg
+.meas ac s11_15 FIND mag(V(p1)-1) AT 15Meg
+.meas ac s21_15 FIND mag(V(p2)) AT 15Meg
+.meas ac s22_15 FIND mag(V(q2)-1) AT 15Meg
+.meas ac s11_17 FIND mag(V(p1)-1) AT 17Meg
+.meas ac s21_17 FIND mag(V(p2)) AT 17Meg
+.meas ac s22_17 FIND mag(V(q2)-1) AT 17Meg
+.meas ac s11_19 FIND mag(V(p1)-1) AT 19Meg
+.meas ac s21_19 FIND mag(V(p2)) AT 19Meg
+.meas ac s22_19 FIND mag(V(q2)-1) AT 19Meg
+.meas ac s11_20 FIND mag(V(p1)-1) AT 20Meg
+.meas ac s21_20 FIND mag(V(p2)) AT 20Meg
+.meas ac s22_20 FIND mag(V(q2)-1) AT 20Meg
+.meas ac s11_21 FIND mag(V(p1)-1) AT 21Meg
+.meas ac s21_21 FIND mag(V(p2)) AT 21Meg
+.meas ac s22_21 FIND mag(V(q2)-1) AT 21Meg
+.meas ac s11_22 FIND mag(V(p1)-1) AT 22Meg
+.meas ac s21_22 FIND mag(V(p2)) AT 22Meg
+.meas ac s22_22 FIND mag(V(q2)-1) AT 22Meg
+.meas ac s11_23 FIND mag(V(p1)-1) AT 23Meg
+.meas ac s21_23 FIND mag(V(p2)) AT 23Meg
+.meas ac s22_23 FIND mag(V(q2)-1) AT 23Meg
+.meas ac s11_25 FIND mag(V(p1)-1) AT 25Meg
+.meas ac s21_25 FIND mag(V(p2)) AT 25Meg
+.meas ac s22_25 FIND mag(V(q2)-1) AT 25Meg
+.meas ac s11_27 FIND mag(V(p1)-1) AT 27Meg
+.meas ac s21_27 FIND mag(V(p2)) AT 27Meg
+.meas ac s22_27 FIND mag(V(q2)-1) AT 27Meg
+.meas ac s12_21 FIND mag(V(q1)) AT 21Meg
+.meas ac s21max MAX mag(V(p2))
+.end

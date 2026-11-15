@@ -1,0 +1,36 @@
+* 8-11 ウィルキンソン分配器 (2.4 GHz)。損失の無い伝送線路 T で S パラメータを .ac で読む
+* 信号源 2 V (AC)・50 Ω で入射波を 1 にし、ほかの端子は 50 Ω で終端: S21 = V(p2)、S11 = V(p1) − 1
+* 腕は Z0 と遅延を .param で替える。設計の値 (70.7 Ω・90° = 104.17 ps) と、71.0 Ω で 2° 長い場合 (92° = 106.48 ps)
+.param za=70.7 td=104.17p
+* ---- P1 から入れる ----
+Vs s 0 AC 2
+Rs s p1 50
+T1 p1 0 p2 0 Z0={za} Td={td}
+T2 p1 0 p3 0 Z0={za} Td={td}
+Rw p2 p3 100
+R2 p2 0 50
+R3 p3 0 50
+* ---- P2 から入れる (S22 と、P3 への漏れ = アイソレーション S32) ----
+VsB sB 0 AC 2
+RsB sB q2 50
+T1B q1 0 q2 0 Z0={za} Td={td}
+T2B q1 0 q3 0 Z0={za} Td={td}
+RwB q2 q3 100
+R1B q1 0 50
+R3B q3 0 50
+.ac lin 401 1G 3G
+.meas ac s21_2g FIND mag(V(p2)) AT 2G
+.meas ac s21_2p4 FIND mag(V(p2)) AT 2.4G
+.meas ac s21_2p8 FIND mag(V(p2)) AT 2.8G
+.meas ac s31_2p4 FIND mag(V(p3)) AT 2.4G
+.meas ac s11_2g FIND mag(V(p1)-1) AT 2G
+.meas ac s11_2p4 FIND mag(V(p1)-1) AT 2.4G
+.meas ac s11_2p8 FIND mag(V(p1)-1) AT 2.8G
+.meas ac s22_2g FIND mag(V(q2)-1) AT 2G
+.meas ac s22_2p4 FIND mag(V(q2)-1) AT 2.4G
+.meas ac s22_2p8 FIND mag(V(q2)-1) AT 2.8G
+.meas ac s32_2g FIND mag(V(q3)) AT 2G
+.meas ac s32_2p4 FIND mag(V(q3)) AT 2.4G
+.meas ac s32_2p8 FIND mag(V(q3)) AT 2.8G
+.meas ac s12_2p4 FIND mag(V(q1)) AT 2.4G
+.end

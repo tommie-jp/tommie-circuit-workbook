@@ -1,0 +1,31 @@
+* 8-18 エミッタフォロアの出力インピーダンス: エミッタから CH0 で覗いた Z を .ac で読む (1 ポート)
+* 信号源 2 V (AC)・50 Ω で入射波 1: S11 = V(o) − 1、Z = V(o)/I(Rs)。ベースの信号源抵抗 RB を .param で替える
+* Q1815 は 2SC1815 の代わりの仮定の模型 (8-1 などと同じ値。hFE 200、fT 約 80 MHz)。実測ではない
+.model Q1815 NPN (IS=2e-14 BF=200 NF=1 VAF=100 IKF=0.15 RB=30 RE=1 RC=5 CJE=8p CJC=2p TF=2n TR=50n)
+.param rb=1k
+VCC vcc 0 5
+CV vcc 0 100n
+R1 vcc a 10k
+R2 a 0 10k
+CB a 0 100n
+RB a b {rb}
+Q1 vcc b e Q1815
+RE e 0 180
+Cout e o 1u
+Vs s 0 DC 0 AC 2
+Rs s o 50
+.op
+.ac dec 100 100k 30Meg
+.meas ac zr_100k FIND re(V(o)/I(Rs)) AT 100k
+.meas ac zi_100k FIND im(V(o)/I(Rs)) AT 100k
+.meas ac zr_1m FIND re(V(o)/I(Rs)) AT 1Meg
+.meas ac zi_1m FIND im(V(o)/I(Rs)) AT 1Meg
+.meas ac zr_10m FIND re(V(o)/I(Rs)) AT 10Meg
+.meas ac zi_10m FIND im(V(o)/I(Rs)) AT 10Meg
+.meas ac zr_30m FIND re(V(o)/I(Rs)) AT 30Meg
+.meas ac zi_30m FIND im(V(o)/I(Rs)) AT 30Meg
+.meas ac s11_100k FIND mag(V(o)-1) AT 100k
+.meas ac s11_1m FIND mag(V(o)-1) AT 1Meg
+.meas ac s11_10m FIND mag(V(o)-1) AT 10Meg
+.meas ac s11_30m FIND mag(V(o)-1) AT 30Meg
+.end
