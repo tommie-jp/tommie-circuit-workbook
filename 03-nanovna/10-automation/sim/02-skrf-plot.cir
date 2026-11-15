@@ -1,0 +1,31 @@
+* 10-2 Touchstone を scikit-rf で図にする: 6-1 の 7 次ローパス (47p/330n/200p/560n/200p/330n/47p)
+* 50 Ω の電源 (Vs・Rs) と 50 Ω の終端。S21 = 2·V(out)/Vs、S11 = 2·V(in)/Vs − 1
+* 回路 a: 理想 (コイルの直列抵抗は 1 µΩ に固定)。回路 b: 試験に使った合成の「実測」 (28.4 MHz で Q 約 50 のコイル: 330 nH に 1.18 Ω、560 nH に 2.0 Ω。仮定)
+.ac list 20000000 28400000 40000000
+Vsa sa 0 AC 1
+Rsa sa ina 50
+C1a ina 0 47p
+L2a ina na2 330n Rser=1u
+C3a na2 0 200p
+L4a na2 na4 560n Rser=1u
+C5a na4 0 200p
+L6a na4 outa 330n Rser=1u
+C7a outa 0 47p
+RLa outa 0 50
+Vsb sb 0 AC 1
+Rsb sb inb 50
+C1b inb 0 47p
+L2b inb nb2 330n Rser=1.18
+C3b nb2 0 200p
+L4b nb2 nb4 560n Rser=2.0
+C5b nb4 0 200p
+L6b nb4 outb 330n Rser=1.18
+C7b outb 0 47p
+RLb outb 0 50
+.meas AC a21_20M FIND V(outa)*2 AT 20000000
+.meas AC a21_28M4 FIND V(outa)*2 AT 28400000
+.meas AC a21_40M FIND V(outa)*2 AT 40000000
+.meas AC b21_20M FIND V(outb)*2 AT 20000000
+.meas AC b21_28M4 FIND V(outb)*2 AT 28400000
+.meas AC b21_40M FIND V(outb)*2 AT 40000000
+.end

@@ -1,0 +1,19 @@
+* 10-5 校正データの管理: 検証用の 100 Ω を、正しい校正 (a) と、30 cm の校正で 1 m のケーブルを使った場合 (b) で見る
+* 1 A の交流の電流源で入口の電圧を読むと、それが入口の Z。(b) は 70 cm (vf 0.66、片道 3.538 ns) の理想の線路 (T 素子) の先に 100 Ω
+* 理想の模型 (実測ではない)
+.ac list 10000000 100000000
+Ia 0 za AC 1
+Ra za 0 100
+Ib 0 zb AC 1
+T1 zb 0 mb 0 Z0=50 Td=3.538n
+Rb mb 0 100
+.meas AC a_re10 FIND re(V(za)) AT 10000000
+.meas AC a_im10 FIND im(V(za)) AT 10000000
+.meas AC a_re100 FIND re(V(za)) AT 100000000
+.meas AC b_re10 FIND re(V(zb)) AT 10000000
+.meas AC b_im10 FIND im(V(zb)) AT 10000000
+.meas AC b_ph10 FIND ph(V(zb)) AT 10000000
+.meas AC b_re100 FIND re(V(zb)) AT 100000000
+.meas AC b_im100 FIND im(V(zb)) AT 100000000
+.meas AC b_ph100 FIND ph(V(zb)) AT 100000000
+.end

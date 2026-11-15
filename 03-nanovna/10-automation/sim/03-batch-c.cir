@@ -1,0 +1,36 @@
+* 10-3 部品 10 個のバッチ測定: 直列治具 (線 45 nH、目安) に 100 pF (ESL 5 nH、目安) を挿す
+* 50 Ω の電源 (Vs・Rs) と 50 Ω の終端。S21 = 2·V(out)/Vs。10 MHz の実部・虚部を読み、Z = 2·50·(1 − S21)/S21 から C を出す
+* 回路 w: 部品の代わりの銅線 (治具の線だけ)。回路 a・b・c: 95・100・105 pF。理想の模型 (実測ではない)
+.ac list 10000000
+Vsw sw 0 AC 1
+Rsw sw inw 50
+Lfw inw outw 45n Rser=1u
+RLw outw 0 50
+Vsa sa 0 AC 1
+Rsa sa ina 50
+Lfa ina ma 45n Rser=1u
+Ca ma na 95p
+Lea na outa 5n Rser=1u
+RLa outa 0 50
+Vsb sb 0 AC 1
+Rsb sb inb 50
+Lfb inb mb 45n Rser=1u
+Cb mb nb 100p
+Leb nb outb 5n Rser=1u
+RLb outb 0 50
+Vsc sc 0 AC 1
+Rsc sc inc 50
+Lfc inc mc 45n Rser=1u
+Cc mc nc 105p
+Lec nc outc 5n Rser=1u
+RLc outc 0 50
+.meas AC w_re FIND re(V(outw)*2) AT 10000000
+.meas AC w_im FIND im(V(outw)*2) AT 10000000
+.meas AC a_re FIND re(V(outa)*2) AT 10000000
+.meas AC a_im FIND im(V(outa)*2) AT 10000000
+.meas AC b_re FIND re(V(outb)*2) AT 10000000
+.meas AC b_im FIND im(V(outb)*2) AT 10000000
+.meas AC b_mag FIND V(outb)*2 AT 10000000
+.meas AC c_re FIND re(V(outc)*2) AT 10000000
+.meas AC c_im FIND im(V(outc)*2) AT 10000000
+.end

@@ -1,0 +1,40 @@
+* 10-7 AD 本の測定と突き合わせる: 3 次ローパス (680 pF / 3.3 µH / 680 pF)
+* 回路 v: VNA。50 Ω の電源と 50 Ω の終端。S21 = 2·V(outv)/Vs
+* 回路 h: AD3 の測る量。入口を電圧源で決め (CH1 が測る電圧)、出口は 50 Ω だけ。H = V(outh)/V(inh)
+* 回路 a: 回路 h の出口に AD3 の CH2 の入力 (1 MΩ ∥ 24 pF、AD の教科書の 8-8 の値) を足す
+* 理想の模型 (実測ではない)
+.ac list 1000000 3000000 5000000 7000000 10000000
+Vsv sv 0 AC 1
+Rsv sv inv 50
+C1v inv 0 680p
+L1v inv outv 3.3u Rser=1u
+C2v outv 0 680p
+RLv outv 0 50
+Vh inh 0 AC 1
+C1h inh 0 680p
+L1h inh outh 3.3u Rser=1u
+C2h outh 0 680p
+RLh outh 0 50
+Va ina 0 AC 1
+C1a ina 0 680p
+L1a ina outa 3.3u Rser=1u
+C2a outa 0 680p
+RLa outa 0 50
+Rina outa 0 1Meg
+Cina outa 0 24p
+.meas AC v1 FIND V(outv)*2 AT 1000000
+.meas AC v3 FIND V(outv)*2 AT 3000000
+.meas AC v5 FIND V(outv)*2 AT 5000000
+.meas AC v7 FIND V(outv)*2 AT 7000000
+.meas AC v10 FIND V(outv)*2 AT 10000000
+.meas AC h1 FIND V(outh) AT 1000000
+.meas AC h3 FIND V(outh) AT 3000000
+.meas AC h5 FIND V(outh) AT 5000000
+.meas AC h7 FIND V(outh) AT 7000000
+.meas AC h10 FIND V(outh) AT 10000000
+.meas AC a1 FIND V(outa) AT 1000000
+.meas AC a3 FIND V(outa) AT 3000000
+.meas AC a5 FIND V(outa) AT 5000000
+.meas AC a7 FIND V(outa) AT 7000000
+.meas AC a10 FIND V(outa) AT 10000000
+.end
