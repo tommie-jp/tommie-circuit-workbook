@@ -27,6 +27,16 @@ jobs:
       - run: npm ci
       # ```plantuml のブロック図を描く (日本語のフォントは図の寸法に要る)。
       - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends plantuml graphviz fonts-noto-cjk
+      # 回路図の TeX → SVG の控え (scripts/render.mjs の .cache/circuit-tex)。run をまたいで残す —
+      # 同じ図は描き直さない (1 枚 0.8 秒、全部で 10 分を越える)。鍵は circuit-fence の版 (版が変わると
+      # 中身は使われないので、版ごとに分ける)。直前の run の控えから始め、増えた分を新しい控えにしまう。
+      - id: circuit-version
+        run: echo "version=$(node -p "require('circuit-fence/package.json').version")" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v6
+        with:
+          path: .cache/circuit-tex
+          key: circuit-tex-${{ steps.circuit-version.outputs.version }}-${{ github.run_id }}
+          restore-keys: circuit-tex-${{ steps.circuit-version.outputs.version }}-
       # circuit はフォントを埋め込む。埋め込まないと GitHub で Ω や µ が化ける。
       - run: npm run render -- --embed-fonts
       # 英語版 (en/) の図は out/en/ に書き出す。

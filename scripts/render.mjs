@@ -11,6 +11,13 @@ import { renderPlantuml } from './plantuml.mjs';
 const CACHE_DIR = join('out', '.cache');
 const CACHE_FILE = join(CACHE_DIR, 'render-manifest.json');
 
+/**
+ * 回路図の TeX → SVG (1 枚 0.8 秒ほど) の控えの置き場。circuit-fence の `--cache` に渡す (CLI が
+ * `CIRCUIT_FENCE_CACHE` を読む)。**図は同じ TeX なら同じ**なので、章の中の 1 題を直しても、ほかの図は描き直さない。
+ * `out/` の外に置く (`out/` は Pages に載る)。環境変数で置き場を変えられる。処理系の版が変われば中身は使われない。
+ */
+const TEX_CACHE_DIR = process.env.CIRCUIT_FENCE_CACHE ?? join(ROOT, '.cache', 'circuit-tex');
+
 /** `out` の下の SVG で、日本語の字を含む物のファイル名。 */
 function japaneseLeft(out) {
   if (!existsSync(out)) return [];
@@ -93,7 +100,7 @@ function main(args) {
         ...(embedFonts && fence === 'circuit' ? ['--embed-fonts'] : []),
         ...(english && fence !== 'circuit' ? ['--lang', 'en'] : []),
       ],
-      { cwd: ROOT, encoding: 'utf8' },
+      { cwd: ROOT, encoding: 'utf8', env: { ...process.env, CIRCUIT_FENCE_CACHE: TEX_CACHE_DIR } },
     );
     if (run.status !== 0) {
       failed += 1;

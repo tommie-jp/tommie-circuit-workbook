@@ -10,3 +10,5 @@ __pycache__/
 .playwright-mcp/
 .ltspice-mcp/
 ltspice-mcp.toml
+# 回路図の TeX → SVG の控え (scripts/render.mjs)
+.cache/
