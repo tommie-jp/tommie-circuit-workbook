@@ -165,7 +165,7 @@ sheets:
         label: 基板 2 へ (下)
         pins: [CLR, P0, P1, P2]
       U1: dip16 @ e10 74HC163
-      R4: resistor e18 g18 820
+      R4: resistor e18 g18 820 cap=right
       D4: led h18(A) h19(K) red i=3.8mA vf=1.9V
       R3: resistor e21 g21 820
       D3: led h21(A) h22(K) red i=3.8mA vf=1.9V

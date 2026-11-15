@@ -91,7 +91,7 @@ wires:
   - AD.1+ -- a13 orange
   - AD.1- -- -t14 black
   - a18 -- -t18 black
-  - AD.2+ -- j10 blue [h-103, v289, h190]
+  - AD.2+ -- j10 blue [h-103, v323, h190]
   - AD.2- -- -b22 black
   - j13 -- -b13 black
   - j19 -- -b19 black

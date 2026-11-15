@@ -341,7 +341,7 @@ wires:
   - AD.W1 -- a5 green
   - c5 -- i4 green [h-70, v136, h50]
   - j6 -- j13 blue [v-10, h140]
-  - b4 -- g13 blue [h130, v116, h50]
+  - b4 -- g13 blue [h130, v130, h50]
   - d7 -- h12 purple [h50, v96, h50]
   - a8 -- j3 white [v10, h-150, v176, h50]
   - AD.W2 -- a9 yellow

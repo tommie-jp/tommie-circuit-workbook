@@ -398,7 +398,7 @@ wires:
   - AD.DIO3 -- i35 green [v-16, h32, v-130, h-90]
   - AD.DIO2 -- h36 green [v-20, h12, v-146, h-90]
   - AD.DIO1 -- g37 green [v-20, h-8, v-166, h-90]
-  - AD.DIO0 -- g30 green [v-20, h12, v-223, h-260, v77, h-30]
+  - AD.DIO0 -- g30 green [v-20, h12, v-247, h-260, v101, h-30]
   - AD.DIO7 -- d56 green [v-46, h246, v-216]
   - AD.DIO6 -- c54 green [v-36, h226, v-246]
   - AD.DIO5 -- b52 green [v-26, h206, v-276]

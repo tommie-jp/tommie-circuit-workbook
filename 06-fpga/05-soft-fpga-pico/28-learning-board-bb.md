@@ -363,8 +363,8 @@ sheets:
       - a32 -- -t32 black
       - a29 -- -t29 black
       - a26 -- -t26 black
-      - a21 -- g24 green [h40, v140]
-      - b22 -- h27 green [h10, v140]
+      - a21 -- g24 green [h40, v160]
+      - b22 -- h27 green [h10, v160]
       - i22 -- i30 green
       - j21 -- j33 green
       - a45 -- -t45 black
