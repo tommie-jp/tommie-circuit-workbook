@@ -1,0 +1,30 @@
+* 6-17 QRP 送信機の高調波フィルタ 7 MHz (図3): vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1 (Er が作る V(r))
+* コイルは T37-2 に 19 回 (1.444 µH)、Q 150 (7.1 MHz、目安) の直列抵抗 0.43 Ω。LTspice のコイルの既定の直列抵抗は Rser=1u に固定。理想の模型 (実測ではない)
+.ac list 7.1e+06 8.6e+06 1.42e+07 2.13e+07
+* 図3 C-L-C-L-C
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+C0_0 n0_0 0 4.700000000e-10
+L1_0 n0_0 m1_0 1.444000000e-06 Rser=1u
+Re1_0 m1_0 n1_0 4.300000000e-01
+C2_0 n1_0 0 8.200000000e-10
+L3_0 n1_0 m3_0 1.444000000e-06 Rser=1u
+Re3_0 m3_0 n2_0 4.300000000e-01
+C4_0 n2_0 0 4.700000000e-10
+RL_0 n2_0 0 50
+Vh_0 h_0 0 AC 0.5
+Er_0 r_0 0 n0_0 h_0 2
+.meas AC a0_0 FIND V(n0_0) AT 7.1e+06
+.meas AC c0_0 FIND V(n2_0) AT 7.1e+06
+.meas AC r0_0 FIND V(r_0) AT 7.1e+06
+.meas AC a0_1 FIND V(n0_0) AT 8.6e+06
+.meas AC c0_1 FIND V(n2_0) AT 8.6e+06
+.meas AC r0_1 FIND V(r_0) AT 8.6e+06
+.meas AC a0_2 FIND V(n0_0) AT 1.42e+07
+.meas AC c0_2 FIND V(n2_0) AT 1.42e+07
+.meas AC r0_2 FIND V(r_0) AT 1.42e+07
+.meas AC a0_3 FIND V(n0_0) AT 2.13e+07
+.meas AC c0_3 FIND V(n2_0) AT 2.13e+07
+.meas AC r0_3 FIND V(r_0) AT 2.13e+07
+.end

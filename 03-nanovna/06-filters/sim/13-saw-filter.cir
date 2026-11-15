@@ -1,0 +1,65 @@
+* 6-13 SAW フィルタ (図3・図4): vna フェンスの dut: (SAW の等価回路) を LTspice の AC 解析で確かめる
+* 50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1 (Er が作る V(r))
+* コイルは Rser=1u に固定し、損失は dut の esr を直列の抵抗で入れた。等価回路は形の目安で、SAW の中身ではない (実測ではない)
+.ac list 4.3144e+08 4.3392e+08 4.3643e+08 4.54e+08 8.92e+08 9.15e+08 9.28e+08 9.4e+08
+* 図3 SF2136E の等価回路 (3 段)
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+L0_0 n0_0 m0_0 1.178000000e-10 Rser=1u
+Re0_0 m0_0 0 3.620000000e-04
+C1_0 n0_0 0 1.142000000e-09
+L2_0 n0_0 m2_0 1.961000000e-06 Rser=1u
+Re2_0 m2_0 n1_0 6.030000000e+00
+C3_0 n1_0 n2_0 6.860000000e-14
+L4_0 n2_0 m4_0 1.178000000e-10 Rser=1u
+Re4_0 m4_0 0 3.620000000e-04
+C5_0 n2_0 0 1.142000000e-09
+RL_0 n2_0 0 50
+Vh_0 h_0 0 AC 0.5
+Er_0 r_0 0 n0_0 h_0 2
+.meas AC a0_0 FIND V(n0_0) AT 4.3144e+08
+.meas AC c0_0 FIND V(n2_0) AT 4.3144e+08
+.meas AC r0_0 FIND V(r_0) AT 4.3144e+08
+.meas AC a0_1 FIND V(n0_0) AT 4.3392e+08
+.meas AC c0_1 FIND V(n2_0) AT 4.3392e+08
+.meas AC r0_1 FIND V(r_0) AT 4.3392e+08
+.meas AC a0_2 FIND V(n0_0) AT 4.3643e+08
+.meas AC c0_2 FIND V(n2_0) AT 4.3643e+08
+.meas AC r0_2 FIND V(r_0) AT 4.3643e+08
+.meas AC a0_3 FIND V(n0_0) AT 4.54e+08
+.meas AC c0_3 FIND V(n2_0) AT 4.54e+08
+.meas AC r0_3 FIND V(r_0) AT 4.54e+08
+* 図4 SF2098E の等価回路 (5 段)
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+L0_1 n0_1 m0_1 1.783000000e-10 Rser=1u
+Re0_1 m0_1 0 1.900000000e-03
+C1_1 n0_1 0 1.697000000e-10
+L2_1 n0_1 m2_1 3.058000000e-07 Rser=1u
+Re2_1 m2_1 n1_1 3.250000000e+00
+C3_1 n1_1 n2_1 9.894000000e-14
+L4_1 n2_1 m4_1 1.197000000e-10 Rser=1u
+Re4_1 m4_1 0 1.270000000e-03
+C5_1 n2_1 0 2.527000000e-10
+L6_1 n2_1 m6_1 3.058000000e-07 Rser=1u
+Re6_1 m6_1 n3_1 3.250000000e+00
+C7_1 n3_1 n4_1 9.894000000e-14
+L8_1 n4_1 m8_1 1.783000000e-10 Rser=1u
+Re8_1 m8_1 0 1.900000000e-03
+C9_1 n4_1 0 1.697000000e-10
+RL_1 n4_1 0 50
+Vh_1 h_1 0 AC 0.5
+Er_1 r_1 0 n0_1 h_1 2
+.meas AC a1_0 FIND V(n0_1) AT 8.92e+08
+.meas AC c1_0 FIND V(n4_1) AT 8.92e+08
+.meas AC r1_0 FIND V(r_1) AT 8.92e+08
+.meas AC a1_1 FIND V(n0_1) AT 9.15e+08
+.meas AC c1_1 FIND V(n4_1) AT 9.15e+08
+.meas AC r1_1 FIND V(r_1) AT 9.15e+08
+.meas AC a1_2 FIND V(n0_1) AT 9.28e+08
+.meas AC c1_2 FIND V(n4_1) AT 9.28e+08
+.meas AC r1_2 FIND V(r_1) AT 9.28e+08
+.meas AC a1_3 FIND V(n0_1) AT 9.4e+08
+.meas AC c1_3 FIND V(n4_1) AT 9.4e+08
+.meas AC r1_3 FIND V(r_1) AT 9.4e+08
+.end

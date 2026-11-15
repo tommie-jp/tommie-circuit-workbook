@@ -1,0 +1,86 @@
+* 6-18 同軸スタブのノッチ 144 / 430 MHz (図4・図5 と、先に 33 pF を付けたスタブ): LTspice の AC 解析
+* 50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1 (Er が作る V(r))
+* ケーブルは 50 Ω・vf 0.66 の損失なしの T 素子。開放は 1 TΩ。最後の 2 つは先に 33 pF (理想、と ESL 0.5 nH つき) を付けた 127.5 mm のスタブ。理想の模型 (実測ではない)
+.ac list 1.44e+08 1.45e+08 1.46e+08 4.3e+08 4.35e+08 4.4e+08
+* 図4 435 MHz の λ/4 開放スタブ (113.7 mm)
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T0_0 n0_0 0 f0_0 0 Z0=50 TD=5.746399640e-10
+Rop0_0 f0_0 0 1e12
+RL_0 n0_0 0 50
+Vh_0 h_0 0 AC 0.5
+Er_0 r_0 0 n0_0 h_0 2
+.meas AC a0_0 FIND V(n0_0) AT 1.44e+08
+.meas AC c0_0 FIND V(n0_0) AT 1.44e+08
+.meas AC r0_0 FIND V(r_0) AT 1.44e+08
+.meas AC a0_1 FIND V(n0_0) AT 1.46e+08
+.meas AC c0_1 FIND V(n0_0) AT 1.46e+08
+.meas AC r0_1 FIND V(r_0) AT 1.46e+08
+.meas AC a0_2 FIND V(n0_0) AT 4.3e+08
+.meas AC c0_2 FIND V(n0_0) AT 4.3e+08
+.meas AC r0_2 FIND V(r_0) AT 4.3e+08
+.meas AC a0_3 FIND V(n0_0) AT 4.4e+08
+.meas AC c0_3 FIND V(n0_0) AT 4.4e+08
+.meas AC r0_3 FIND V(r_0) AT 4.4e+08
+* 図5 145 MHz の λ/4 開放スタブ (341.1 mm)
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T0_1 n0_1 0 f0_1 0 Z0=50 TD=1.723919892e-09
+Rop0_1 f0_1 0 1e12
+RL_1 n0_1 0 50
+Vh_1 h_1 0 AC 0.5
+Er_1 r_1 0 n0_1 h_1 2
+.meas AC a1_0 FIND V(n0_1) AT 1.44e+08
+.meas AC c1_0 FIND V(n0_1) AT 1.44e+08
+.meas AC r1_0 FIND V(r_1) AT 1.44e+08
+.meas AC a1_1 FIND V(n0_1) AT 1.46e+08
+.meas AC c1_1 FIND V(n0_1) AT 1.46e+08
+.meas AC r1_1 FIND V(r_1) AT 1.46e+08
+.meas AC a1_2 FIND V(n0_1) AT 4.3e+08
+.meas AC c1_2 FIND V(n0_1) AT 4.3e+08
+.meas AC r1_2 FIND V(r_1) AT 4.3e+08
+.meas AC a1_3 FIND V(n0_1) AT 4.4e+08
+.meas AC c1_3 FIND V(n0_1) AT 4.4e+08
+.meas AC r1_3 FIND V(r_1) AT 4.4e+08
+* 先に 33 pF を付けたスタブ (127.5 mm)
+Vs_2 s_2 0 AC 1
+Rs_2 s_2 n0_2 50
+T0_2 n0_2 0 f0_2 0 Z0=50 TD=6.443851839e-10
+Cend0_2 f0_2 0 3.300000000e-11
+RL_2 n0_2 0 50
+Vh_2 h_2 0 AC 0.5
+Er_2 r_2 0 n0_2 h_2 2
+.meas AC a2_0 FIND V(n0_2) AT 1.44e+08
+.meas AC c2_0 FIND V(n0_2) AT 1.44e+08
+.meas AC r2_0 FIND V(r_2) AT 1.44e+08
+.meas AC a2_1 FIND V(n0_2) AT 1.45e+08
+.meas AC c2_1 FIND V(n0_2) AT 1.45e+08
+.meas AC r2_1 FIND V(r_2) AT 1.45e+08
+.meas AC a2_2 FIND V(n0_2) AT 1.46e+08
+.meas AC c2_2 FIND V(n0_2) AT 1.46e+08
+.meas AC r2_2 FIND V(r_2) AT 1.46e+08
+.meas AC a2_3 FIND V(n0_2) AT 4.3e+08
+.meas AC c2_3 FIND V(n0_2) AT 4.3e+08
+.meas AC r2_3 FIND V(r_2) AT 4.3e+08
+.meas AC a2_4 FIND V(n0_2) AT 4.35e+08
+.meas AC c2_4 FIND V(n0_2) AT 4.35e+08
+.meas AC r2_4 FIND V(r_2) AT 4.35e+08
+.meas AC a2_5 FIND V(n0_2) AT 4.4e+08
+.meas AC c2_5 FIND V(n0_2) AT 4.4e+08
+.meas AC r2_5 FIND V(r_2) AT 4.4e+08
+* 同じ、33 pF に ESL 0.5 nH
+Vs_3 s_3 0 AC 1
+Rs_3 s_3 n0_3 50
+T0_3 n0_3 0 f0_3 0 Z0=50 TD=6.443851839e-10
+Cend0_3 f0_3 q0_3 3.300000000e-11
+Lend0_3 q0_3 0 5.000000000e-10 Rser=1u
+RL_3 n0_3 0 50
+Vh_3 h_3 0 AC 0.5
+Er_3 r_3 0 n0_3 h_3 2
+.meas AC a3_0 FIND V(n0_3) AT 1.45e+08
+.meas AC c3_0 FIND V(n0_3) AT 1.45e+08
+.meas AC r3_0 FIND V(r_3) AT 1.45e+08
+.meas AC a3_1 FIND V(n0_3) AT 4.35e+08
+.meas AC c3_1 FIND V(n0_3) AT 4.35e+08
+.meas AC r3_1 FIND V(r_3) AT 4.35e+08
+.end

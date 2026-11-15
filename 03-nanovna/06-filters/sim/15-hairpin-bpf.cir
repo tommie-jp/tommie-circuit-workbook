@@ -1,0 +1,32 @@
+* 6-15 2.4 GHz ヘアピンのバンドパス (図3): vna フェンスの dut: (3 段チェビシェフ 0.1 dB の等価回路、共振器の Q 70) を LTspice の AC 解析で確かめる
+* 50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1 (Er が作る V(r))
+* 結合線路そのものは SPICE で扱わない (隙間とタップの位置は本文の近似式の計算)。等価回路は形の目安 (実測ではない)
+.ac list 2.35e+09 2.45e+09 2.55e+09 2.7e+09
+* 図3 ヘアピン 3 段の等価回路
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+L0_0 n0_0 m0_0 2.570000000e-10 Rser=1u
+Re0_0 m0_0 0 5.650000000e-02
+C1_0 n0_0 0 1.642000000e-11
+L2_0 n0_0 m2_0 4.565000000e-08 Rser=1u
+Re2_0 m2_0 n1_0 1.000000000e+01
+C3_0 n1_0 n2_0 9.243000000e-14
+L4_0 n2_0 m4_0 2.570000000e-10 Rser=1u
+Re4_0 m4_0 0 5.650000000e-02
+C5_0 n2_0 0 1.642000000e-11
+RL_0 n2_0 0 50
+Vh_0 h_0 0 AC 0.5
+Er_0 r_0 0 n0_0 h_0 2
+.meas AC a0_0 FIND V(n0_0) AT 2.35e+09
+.meas AC c0_0 FIND V(n2_0) AT 2.35e+09
+.meas AC r0_0 FIND V(r_0) AT 2.35e+09
+.meas AC a0_1 FIND V(n0_0) AT 2.45e+09
+.meas AC c0_1 FIND V(n2_0) AT 2.45e+09
+.meas AC r0_1 FIND V(r_0) AT 2.45e+09
+.meas AC a0_2 FIND V(n0_0) AT 2.55e+09
+.meas AC c0_2 FIND V(n2_0) AT 2.55e+09
+.meas AC r0_2 FIND V(r_0) AT 2.55e+09
+.meas AC a0_3 FIND V(n0_0) AT 2.7e+09
+.meas AC c0_3 FIND V(n2_0) AT 2.7e+09
+.meas AC r0_3 FIND V(r_0) AT 2.7e+09
+.end

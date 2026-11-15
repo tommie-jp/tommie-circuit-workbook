@@ -1,0 +1,53 @@
+* 6-14 ステップインピーダンスのローパス (図4・図5): vna フェンスの dut: (損失なしの線路 7 本) と、もとの LC (図1) を LTspice の AC 解析で確かめる
+* 50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1 (Er が作る V(r))
+* 線路は損失なしの T 素子 (TD = 長さ / (vf·c))。段差の不連続は入れていない。理想の模型 (実測ではない)
+.ac list 5e+08 1e+09 1.2e+09 1.5e+09 2.32e+09 3.34e+09
+* 図4・図5 線路 7 本
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T0_0 n0_0 0 n1_0 0 Z0=49.9 TD=4.869548835e-11
+T1_0 n1_0 0 n2_0 0 Z0=20 TD=3.871150041e-11
+T2_0 n2_0 0 n3_0 0 Z0=99.7 TD=1.266846215e-10
+T3_0 n3_0 0 n4_0 0 Z0=20 TD=1.251671847e-10
+T4_0 n4_0 0 n5_0 0 Z0=99.7 TD=1.266846215e-10
+T5_0 n5_0 0 n6_0 0 Z0=20 TD=3.871150041e-11
+T6_0 n6_0 0 n7_0 0 Z0=49.9 TD=4.869548835e-11
+RL_0 n7_0 0 50
+Vh_0 h_0 0 AC 0.5
+Er_0 r_0 0 n0_0 h_0 2
+.meas AC a0_0 FIND V(n0_0) AT 5e+08
+.meas AC c0_0 FIND V(n7_0) AT 5e+08
+.meas AC r0_0 FIND V(r_0) AT 5e+08
+.meas AC a0_1 FIND V(n0_0) AT 1e+09
+.meas AC c0_1 FIND V(n7_0) AT 1e+09
+.meas AC r0_1 FIND V(r_0) AT 1e+09
+.meas AC a0_2 FIND V(n0_0) AT 1.2e+09
+.meas AC c0_2 FIND V(n7_0) AT 1.2e+09
+.meas AC r0_2 FIND V(r_0) AT 1.2e+09
+.meas AC a0_3 FIND V(n0_0) AT 1.5e+09
+.meas AC c0_3 FIND V(n7_0) AT 1.5e+09
+.meas AC r0_3 FIND V(r_0) AT 1.5e+09
+.meas AC a0_4 FIND V(n0_0) AT 2.32e+09
+.meas AC c0_4 FIND V(n7_0) AT 2.32e+09
+.meas AC r0_4 FIND V(r_0) AT 2.32e+09
+.meas AC a0_5 FIND V(n0_0) AT 3.34e+09
+.meas AC c0_5 FIND V(n7_0) AT 3.34e+09
+.meas AC r0_5 FIND V(r_0) AT 3.34e+09
+* 図1 もとの LC (5 次バターワース)
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+C0_1 n0_1 0 1.970000000e-12
+L1_1 n0_1 n1_1 1.290000000e-08 Rser=1u
+C2_1 n1_1 0 6.370000000e-12
+L3_1 n1_1 n2_1 1.290000000e-08 Rser=1u
+C4_1 n2_1 0 1.970000000e-12
+RL_1 n2_1 0 50
+Vh_1 h_1 0 AC 0.5
+Er_1 r_1 0 n0_1 h_1 2
+.meas AC a1_0 FIND V(n0_1) AT 1e+09
+.meas AC c1_0 FIND V(n2_1) AT 1e+09
+.meas AC r1_0 FIND V(r_1) AT 1e+09
+.meas AC a1_1 FIND V(n0_1) AT 1.5e+09
+.meas AC c1_1 FIND V(n2_1) AT 1.5e+09
+.meas AC r1_1 FIND V(r_1) AT 1.5e+09
+.end

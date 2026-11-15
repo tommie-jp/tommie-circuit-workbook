@@ -1,0 +1,49 @@
+* 6-16 2.4 GHz の開放スタブのノッチ (図3・図4): vna フェンスの dut: を LTspice の AC 解析で確かめる
+* 50 Ω の電源 (Vs・Rs) から CH0、CH1 は 50 Ω で終端。S21 = 2·V(out)/Vs、S11 = 2·V(n0)/Vs − 1 (Er が作る V(r))
+* 線路は損失なしの T 素子 (TD = 長さ / (vf·c))。スタブの先の開放は 1 TΩ。T 字の分かれ目の不連続は入れていない。理想の模型 (実測ではない)
+.ac list 1.575e+09 2.4e+09 2.45e+09 2.4835e+09
+* 図3 50 Ω のスタブ
+Vs_0 s_0 0 AC 1
+Rs_0 s_0 n0_0 50
+T0_0 n0_0 0 n1_0 0 Z0=50 TD=7.304323253e-11
+T1_0 n1_0 0 f1_0 0 Z0=50 TD=1.020170481e-10
+Rop1_0 f1_0 0 1e12
+T2_0 n1_0 0 n2_0 0 Z0=50 TD=7.304323253e-11
+RL_0 n2_0 0 50
+Vh_0 h_0 0 AC 0.5
+Er_0 r_0 0 n0_0 h_0 2
+.meas AC a0_0 FIND V(n0_0) AT 1.575e+09
+.meas AC c0_0 FIND V(n2_0) AT 1.575e+09
+.meas AC r0_0 FIND V(r_0) AT 1.575e+09
+.meas AC a0_1 FIND V(n0_0) AT 2.4e+09
+.meas AC c0_1 FIND V(n2_0) AT 2.4e+09
+.meas AC r0_1 FIND V(r_0) AT 2.4e+09
+.meas AC a0_2 FIND V(n0_0) AT 2.45e+09
+.meas AC c0_2 FIND V(n2_0) AT 2.45e+09
+.meas AC r0_2 FIND V(r_0) AT 2.45e+09
+.meas AC a0_3 FIND V(n0_0) AT 2.4835e+09
+.meas AC c0_3 FIND V(n2_0) AT 2.4835e+09
+.meas AC r0_3 FIND V(r_0) AT 2.4835e+09
+* 図4 100 Ω のスタブ
+Vs_1 s_1 0 AC 1
+Rs_1 s_1 n0_1 50
+T0_1 n0_1 0 n1_1 0 Z0=50 TD=7.304323253e-11
+T1_1 n1_1 0 f1_1 0 Z0=99.7 TD=1.020450438e-10
+Rop1_1 f1_1 0 1e12
+T2_1 n1_1 0 n2_1 0 Z0=50 TD=7.304323253e-11
+RL_1 n2_1 0 50
+Vh_1 h_1 0 AC 0.5
+Er_1 r_1 0 n0_1 h_1 2
+.meas AC a1_0 FIND V(n0_1) AT 1.575e+09
+.meas AC c1_0 FIND V(n2_1) AT 1.575e+09
+.meas AC r1_0 FIND V(r_1) AT 1.575e+09
+.meas AC a1_1 FIND V(n0_1) AT 2.4e+09
+.meas AC c1_1 FIND V(n2_1) AT 2.4e+09
+.meas AC r1_1 FIND V(r_1) AT 2.4e+09
+.meas AC a1_2 FIND V(n0_1) AT 2.45e+09
+.meas AC c1_2 FIND V(n2_1) AT 2.45e+09
+.meas AC r1_2 FIND V(r_1) AT 2.45e+09
+.meas AC a1_3 FIND V(n0_1) AT 2.4835e+09
+.meas AC c1_3 FIND V(n2_1) AT 2.4835e+09
+.meas AC r1_3 FIND V(r_1) AT 2.4835e+09
+.end
