@@ -184,7 +184,7 @@ markers:
 ## 計算 (scikit-rf)
 
 Python の scikit-rf で、保存した 2 つのファイルから治具を引く (Python で Touchstone を
-読むところは 2-13)。
+読むところは 10-2)。
 
 ```python
 import skrf as rf

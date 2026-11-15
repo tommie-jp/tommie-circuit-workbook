@@ -66,7 +66,7 @@ notes:
 ![回路図](https://tommie-jp.github.io/tommie-circuit-workbook/03-nanovna/01-calibration/circuit/13-cal-points-segments.svg)
 
 T1 は校正ケーブル。往復の遅れは 2 × 1 m ÷ (0.66 × c) = 10.1 ns。ケーブルの先を開放にすると、
-誤差の項の位相の回り方がそのまま S11 に見える (校正を外した状態で見るなら 1-14)。
+誤差の項の位相の回り方がそのまま S11 に見える。
 
 ## 掃引の設定
 

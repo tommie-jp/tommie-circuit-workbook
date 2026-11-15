@@ -25,7 +25,7 @@ NanoVNA-Saver の校正 (2-9) は Save calibration でファイルに残せる�
 | --- | --- | --- |
 | キット・ケーブル・範囲 | ファイル名 | `cal_kitA_cab30cm_1M-300M.cal` |
 | 点数・日付・室温・本体の版 | Saver の校正の窓の Notes (ファイルの `!` の行に入る) | `キット A (付属)、ケーブル 30 cm (RG174)、1-300 MHz 101 点` |
-| どの測定でどの校正を使ったか | 測定のフォルダの `README.txt` (10-1) | `10-3-*.s2p は cal_kitA_cab30cm_1M-300M.cal` |
+| どの測定でどの校正を使ったか | 測定のフォルダの `README.txt` | `10-3-*.s2p は cal_kitA_cab30cm_1M-300M.cal` |
 
 - Saver の校正ファイルはテキストで、頭の `# Calibration data for NanoVNA-Saver` の次に Notes が `!` の行で並び、
   `# Hz ShortR ShortI OpenR OpenI LoadR LoadI` (2 ポートならさらに `ThroughR` … `IsolationI`) の見出しの後に、

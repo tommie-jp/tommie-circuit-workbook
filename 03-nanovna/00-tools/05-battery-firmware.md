@@ -60,7 +60,7 @@ H4 の中のマイコン (STM32) は、**DFU** (Device Firmware Update) とい�
 - **H4 用のファイルを使う。** NanoVNA-H (2.8 インチ) 用の `H.bin` を H4 に
   書かない (画面の大きさも中身も違う)
 - 版によってメニューの名前や場所が変わる。この教科書のメニューの名前は
-  DiSlord 版 (NanoVNA-D) のもの (版の違いは 2-16)
+  DiSlord 版 (NanoVNA-D) のもの
 
 ## 回路図
 
