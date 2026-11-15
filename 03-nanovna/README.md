@@ -37,20 +37,20 @@ GHz 帯の作法をまとめる。
 
 | 章 | 題名 | 必須 | 入門 | 中級 | 発展 | 済 |
 | --- | --- | --- | --- | --- | --- | --- |
-| 0 | 道具と安全 | 3 | 5 | 8 | 8 | 7 |
-| 1 | 校正 | 5 | 10 | 16 | 16 | 14 |
-| 2 | 画面と PC ソフト | 5 | 10 | 16 | 16 | 11 |
-| 3 | 治具 | 6 | 10 | 18 | 18 | 14 |
+| 0 | 道具と安全 | 3 | 5 | 7 | 7 | 7 |
+| 1 | 校正 | 5 | 10 | 14 | 14 | 14 |
+| 2 | 画面と PC ソフト | 5 | 10 | 11 | 11 | 11 |
+| 3 | 治具 | 6 | 10 | 14 | 14 | 14 |
 | 4 | 部品の周波数特性 | 8 | 16 | 28 | 28 | 28 |
 | 5 | 伝送線路 | 6 | 12 | 22 | 22 | 22 |
-| 6 | フィルタ | 6 | 12 | 24 | 24 | 20 |
-| 7 | アンテナ | 6 | 12 | 26 | 26 | 21 |
-| 8 | アンプと能動回路の S パラメータ | 3 | 10 | 22 | 22 | 18 |
-| 9 | GHz 帯の作法 | 1 | 5 | 16 | 16 | 5 |
-| 10 | 自動化 | 0 | 0 | 8 | 8 | 6 |
+| 6 | フィルタ | 6 | 12 | 20 | 20 | 20 |
+| 7 | アンテナ | 6 | 12 | 21 | 21 | 21 |
+| 8 | アンプと能動回路の S パラメータ | 3 | 10 | 18 | 18 | 18 |
+| 9 | GHz 帯の作法 | 1 | 5 | 11 | 11 | 5 |
+| 10 | 自動化 | 0 | 0 | 6 | 6 | 6 |
 | 11 | スペクトラムアナライザ — tinySA と同じ種類の計器 | 0 | 5 | 13 | 15 | 15 |
 | 12 | Smith チャート — 読み方から整合まで | 1 | 4 | 6 | 6 | 6 |
-| **計** | | **50** | **111** | **223** | **225** | **187** |
+| **計** | | **50** | **111** | **191** | **193** | **187** |
 
 ## 第 0 章 道具と安全
 
@@ -61,7 +61,6 @@ GHz 帯の作法をまとめる。
 | 0-3 | [出力レベルと CH1 の最大入力 — アンプの出力にはアッテネータ](00-tools/03-output-level.md) | 必須 | H4 | — |
 | 0-4 | [静電気とアンテナの帯電 — 放電してから繋ぐ](00-tools/04-esd-antenna-discharge.md) | 入門 | H4 | — |
 | 0-5 | [電池・充電・ファームウェアの更新](00-tools/05-battery-firmware.md) | 入門 | H4 | — |
-| 0-6 | ケーブルの種類 (RG316 / RG174 / セミリジッド) と GHz での差 | 中級 | V2 | — |
 | 0-7 | [コネクタの種類 (SMA / RP-SMA / U.FL / BNC / N) と変換](00-tools/07-connector-types.md) | 中級 | H4 | — |
 | 0-8 | [測定の再現性 — 同じ物を 10 回測る](00-tools/08-repeatability.md) | 中級 | H4 | — |
 
@@ -79,10 +78,8 @@ GHz 帯の作法をまとめる。
 | 1-8 | [Load の 50 Ω を DC で測って確かめる](01-calibration/08-load-dc-check.md) | 入門 | H4 | — |
 | 1-9 | [校正の有効期間 — 温度と時間](01-calibration/09-cal-lifetime.md) | 入門 | H4 | — |
 | 1-10 | [ポート延長 (電気長)](01-calibration/10-port-extension.md) | 入門 | H4 | — |
-| 1-11 | GHz での校正 — 付属キットの限界 | 中級 | V2 | — |
 | 1-12 | [校正標準のオフセット (Open の容量・Short の誘導) と定義](01-calibration/12-cal-standard-definitions.md) | 中級 | V2 | — |
 | 1-13 | [校正の点数 (101 vs 1001) と Saver の分割掃引](01-calibration/13-cal-points-segments.md) | 中級 | H4 | — |
-| 1-14 | 校正なしで測るとどう見えるか | 中級 | H4 | — |
 | 1-15 | [Enhanced response / 12 項校正](01-calibration/15-enhanced-response.md) | 中級 | V2 | — |
 | 1-16 | [校正の検証 — 別の Load とアッテネータで](01-calibration/16-cal-verification.md) | 中級 | H4 | PF |
 
@@ -100,12 +97,7 @@ GHz 帯の作法をまとめる。
 | 2-8 | [4 トレースの割り当て (S11 / S21 × 形式)](02-display/08-four-traces.md) | 入門 | H4 | — |
 | 2-9 | [NanoVNA-Saver の校正と平均化](02-display/09-saver-calibration-averaging.md) | 入門 | H4 | — |
 | 2-10 | [スクリーンショットと記録](02-display/10-screenshot-records.md) | 入門 | H4 | — |
-| 2-11 | NanoVNA-QT | 中級 | V2 | — |
 | 2-12 | [NanoVNA-App](02-display/12-nanovna-app.md) | 中級 | H4 | — |
-| 2-13 | Touchstone を Python (scikit-rf) で読む | 中級 | H4 | — |
-| 2-14 | 群遅延の表示 | 中級 | H4 | — |
-| 2-15 | マーカーの検索 — 最小 SWR、−3 dB 点 | 中級 | H4 | — |
-| 2-16 | ファームウェアの違い (DiSlord 版など) | 中級 | H4 | — |
 
 ## 第 3 章 治具
 
@@ -124,11 +116,7 @@ GHz 帯の作法をまとめる。
 | 3-11 | [銅張り基板に直付け (Manhattan 式) の治具](03-fixtures/11-manhattan-fixture.md) | 中級 | H4 | CB |
 | 3-12 | [マイクロストリップの治具 — FR4 で 50 Ω の幅を計算して作る](03-fixtures/12-microstrip-fixture.md) | 中級 | H4 | CB |
 | 3-13 | [GHz の治具 — 端面 SMA + 短いマイクロストリップ](03-fixtures/13-ghz-fixture.md) | 中級 | V2 | CB |
-| 3-14 | 治具の S パラを Touchstone で保存して使い回す | 中級 | H4 | PF |
 | 3-15 | [3 端子部品の治具 (トランジスタ・SAW)](03-fixtures/15-three-terminal-fixture.md) | 中級 | H4 | PF |
-| 3-16 | バイアス T — 能動部品に DC を与える | 中級 | H4 | PF |
-| 3-17 | 平衡素子の治具 (バラン付き) | 中級 | H4 | PF |
-| 3-18 | 温度をかける治具 (ヒーター) | 中級 | H4 | PF |
 
 ## 第 4 章 部品の周波数特性
 
@@ -212,12 +200,8 @@ GHz 帯の作法をまとめる。
 | 6-16 | [2.4 GHz ノッチ (スタブ)](06-filters/16-stub-notch-2g4.md) | 中級 | V2 | CB |
 | 6-17 | [QRP 送信機の高調波フィルタ (7 MHz、2 倍・3 倍を見る)](06-filters/17-qrp-harmonic-lpf.md) | 中級 | H4 | PF |
 | 6-18 | [同軸スタブのノッチ (144 / 430 MHz)](06-filters/18-coax-stub-notch.md) | 中級 | H4 | — |
-| 6-19 | 温度による変化 | 中級 | H4 | PF |
-| 6-20 | ヘリカルフィルタ | 中級 | H4 | CB |
 | 6-21 | [入出力の整合 (50 Ω 以外) がフィルタをどう歪めるか](06-filters/21-termination-mismatch.md) | 中級 | H4 | PF |
 | 6-22 | [コムラインの模型](06-filters/22-combline-model.md) | 中級 | V2 | CB |
-| 6-23 | GPS 1.575 GHz の SAW | 中級 | V2 | CB |
-| 6-24 | Wi-Fi 2.4 GHz の帯域外減衰 | 中級 | V2 | CB |
 
 ## 第 7 章 アンテナ
 
@@ -238,17 +222,12 @@ GHz 帯の作法をまとめる。
 | 7-13 | [2.4 GHz Wi-Fi / BLE ホイップ](07-antennas/13-wifi-ble-whip.md) | 中級 | V2 | — |
 | 7-14 | [基板の逆 F アンテナ (PIFA)](07-antennas/14-pcb-ifa.md) | 中級 | V2 | CB |
 | 7-15 | [パッチアンテナ 2.4 GHz](07-antennas/15-patch-2g4.md) | 中級 | V2 | CB |
-| 7-16 | GPS 1.575 GHz セラミックアンテナ | 中級 | V2 | CB |
-| 7-17 | Wi-Fi ルータの外部アンテナ (RP-SMA) | 中級 | V2 | — |
 | 7-18 | [2.4 GHz の整合 (π ネットワーク、チップ部品)](07-antennas/18-pi-match-2g4.md) | 中級 | V2 | CB |
 | 7-19 | [スロットアンテナ](07-antennas/19-slot-antenna.md) | 中級 | V2 | CB |
-| 7-20 | 八木の給電点 (430 MHz) | 中級 | H4 | — |
 | 7-21 | [アンテナ間の結合 — S21 で距離と偏波](07-antennas/21-antenna-coupling-s21.md) | 中級 | H4 | — |
 | 7-22 | [放射効率のまね (Wheeler cap)](07-antennas/22-wheeler-cap.md) | 中級 | H4 | — |
-| 7-23 | 1.2 GHz のコリニア | 中級 | H4 | — |
 | 7-24 | [同軸込みの SWR と給電点の SWR (ケーブル損失で良く見える)](07-antennas/24-swr-through-lossy-cable.md) | 中級 | H4 | — |
 | 7-25 | [RFID 13.56 MHz のループ](07-antennas/25-rfid-13mhz-loop.md) | 中級 | H4 | PF |
-| 7-26 | NFC タグの共振 | 中級 | H4 | — |
 
 ## 第 8 章 アンプと能動回路の S パラメータ
 
@@ -262,15 +241,11 @@ GHz 帯の作法をまとめる。
 | 8-6 | [LNA (MMIC) の S21 / S11](08-amplifiers/06-mmic-lna.md) | 入門 | H4 | CB |
 | 8-7 | [ミキサのポート間アイソレーション](08-amplifiers/07-mixer-isolation.md) | 入門 | H4 | PF |
 | 8-8 | [リレー / PIN スイッチのアイソレーション](08-amplifiers/08-switch-isolation.md) | 入門 | H4 | PF |
-| 8-9 | GHz の LNA モジュール (SPF5189Z など) | 中級 | V2 | CB |
 | 8-10 | [方向性結合器](08-amplifiers/10-directional-coupler.md) | 中級 | H4 | CB |
 | 8-11 | [ウィルキンソン分配器 (マイクロストリップ、2.4 GHz)](08-amplifiers/11-wilkinson-divider.md) | 中級 | V2 | CB |
-| 8-12 | サーキュレータ / アイソレータ (借り物) | 中級 | V2 | — |
 | 8-13 | [ダイオード検波器の S11](08-amplifiers/13-diode-detector-s11.md) | 中級 | H4 | PF |
 | 8-14 | [小電力パワーアンプの出力整合](08-amplifiers/14-pa-output-match.md) | 中級 | H4 | CB |
-| 8-15 | 整合回路の設計と実測 (Smith チャート上で) | 中級 | H4 | PF |
 | 8-16 | [入出力を同時に整合する](08-amplifiers/16-simultaneous-match.md) | 中級 | H4 | PF |
-| 8-17 | S パラメータを Touchstone で回路シミュレータへ | 中級 | H4 | — |
 | 8-18 | [エミッタフォロアの出力インピーダンス](08-amplifiers/18-emitter-follower-zout.md) | 中級 | H4 | PF |
 | 8-19 | [広帯域帰還アンプ — 帰還抵抗とエミッタ抵抗で入出力を 50 Ω にそろえる (2N5109・4:1 トランス)](08-amplifiers/19-feedback-amplifier.md) | 中級 | LV64 | PF |
 | 8-20 | [コレクタ負荷を差し替える — 抵抗とチョークで S21 の利得と帯域を比べる (1.9 MHz 帯)](08-amplifiers/20-collector-loads.md) | 入門 | LV64 | BB |
@@ -286,14 +261,9 @@ GHz 帯の作法をまとめる。
 | 9-3 | [GND を面で取る — perfboard と銅張りの差を S21 で](09-ghz/03-ground-plane.md) | 入門 | V2 | CB |
 | 9-4 | [ダイナミックレンジの帯域依存 — H4 (70 / 60 / 40 dB) と V2 を測る](09-ghz/04-dynamic-range.md) | 入門 | V2 | — |
 | 9-5 | [手・体・机の影響 — 放射する物を測るとき](09-ghz/05-hand-body-desk.md) | 入門 | V2 | — |
-| 9-6 | コネクタの締め付け (トルク) と再現性 | 中級 | V2 | — |
-| 9-7 | FR4 の誘電率 — 長さの違う 2 本の線路で | 中級 | V2 | CB |
-| 9-8 | ケーブルの曲げ・温度で位相が動く | 中級 | V2 | — |
 | 9-9 | ノイズと平均化 — GHz で S21 −60 dB を読む | 中級 | V2 | — |
 | 9-10 | 高調波方式のスプリアス応答 — H4 の 300 / 900 MHz の段 | 中級 | H4 | — |
-| 9-11 | U.FL / IPEX の扱い (抜き差し回数) | 中級 | V2 | — |
 | 9-12 | Wi-Fi の混入 — 2.4 GHz を測ると周りの電波が乗る | 中級 | V2 | — |
-| 9-13 | 4.4 GHz の壁 — 5 GHz Wi-Fi は測れないことを確かめる | 中級 | V2 | — |
 | 9-14 | GHz での TDR (分解能) | 中級 | V2 | — |
 | 9-15 | マイクロストリップの放射 (開放端) | 中級 | V2 | CB |
 | 9-16 | 測った S パラを回路シミュレータ (QucsStudio) で使う — GHz LNA の整合 | 中級 | V2 | — |
@@ -302,10 +272,8 @@ GHz 帯の作法をまとめる。
 
 | # | 題 | 段 | 機種 | 基板 |
 | --- | --- | --- | --- | --- |
-| 10-1 | NanoVNA-Saver で掃引と保存を繰り返す | 中級 | H4 | — |
 | 10-2 | [Touchstone を scikit-rf で図にする](10-automation/02-skrf-plot.md) | 中級 | H4 | — |
 | 10-3 | [部品 10 個のバッチ測定](10-automation/03-batch-measurement.md) | 中級 | H4 | PF |
-| 10-4 | 温度掃引の記録 | 中級 | H4 | PF |
 | 10-5 | [校正データの管理 — キット・ケーブルごと](10-automation/05-cal-file-management.md) | 中級 | H4 | — |
 | 10-6 | [シリアルコマンドで直接制御 (Python)](10-automation/06-serial-commands.md) | 中級 | H4 | — |
 | 10-7 | [AD 本の測定と突き合わせる (1〜10 MHz)](10-automation/07-ad-vs-vna.md) | 中級 | H4 | PF |

@@ -26,7 +26,6 @@
 - { id: 1-13, tier: 200, board: —, device: SIM, title: ラッチを作ってしまう書き方 — else の無い if }
 - { id: 1-14, tier: 200, board: —, device: SIM, title: バレルシフタ }
 - { id: 1-15, tier: 200, board: —, device: SIM, title: 桁上げ先見の加算器 — リップルと段数を比べる }
-- { id: 1-16, tier: 200, board: —, device: SIM, title: ALU — 加減算・論理・フラグ }
 - { id: 1-17, tier: 200, board: —, device: SIM, title: 3 ステートと双方向のピン (inout) }
 - { id: 1-18, tier: 200, board: —, device: SIM, title: function と localparam で書き直す }
 - { id: 2-1, tier: 50, board: —, device: SIM, title: D フリップフロップ — always @(posedge clk) }
@@ -44,7 +43,6 @@
 - { id: 2-13, tier: 200, board: —, device: WEB, title: LFSR — 擬似乱数 }
 - { id: 2-14, tier: 200, board: —, device: SIM, title: グレイコードのカウンタ }
 - { id: 2-15, tier: 200, board: BB, device: PICO, title: 7 セグのダイナミック点灯 }
-- { id: 2-16, tier: 200, board: BB, device: PICO, title: ロータリーエンコーダを読む }
 - { id: 2-17, tier: 200, board: —, device: SIM, title: 分周した信号をクロックに使わない理由 }
 - { id: 2-18, tier: 200, board: —, device: SIM, title: 初期値 — initial とリセットの違い }
 - { id: 2-19, tier: 200, board: —, device: SIM, title: パイプライン — 長い組み合わせをレジスタで切る }
@@ -96,7 +94,6 @@
 - { id: 5-14, tier: 100, board: BB, device: PICO, title: USB シリアルで内部の信号を出す }
 - { id: 5-15, tier: 100, board: BB, device: PICO, title: 7 セグと押しボタンを付ける }
 - { id: 5-16, tier: 100, board: BB, device: PICO, title: ブラウザと Pico 2 で同じ Verilog を動かして波形を比べる }
-- { id: 5-17, tier: 200, board: BB, device: PICO, title: 外の基準にクロックを合わせる — 32.768 kHz の発振器と GPS の 1PPS }
 - { id: 5-18, tier: 200, board: BB, device: PICO, title: 外から来るクロックで 1 歩ずつ動かす }
 - { id: 5-19, tier: 200, board: BB, device: PICO, title: 2 つのコアで回す — コア 1 を eval 専用にする }
 - { id: 5-20, tier: 200, board: BB, device: PICO, title: 速い所を PIO に任せる — UART の送信 }
@@ -123,7 +120,6 @@
 - { id: 6-13, tier: 200, board: BB, device: PICO, title: 時報の状態遷移を Verilog に移す — 440 Hz を 3 回数えて 880 Hz }
 - { id: 6-14, tier: 200, board: BB, device: PICO, title: キーパッドの走査 }
 - { id: 6-15, tier: 200, board: BB, device: PICO, title: 文字の LCD を初期化する手順 }
-- { id: 6-16, tier: 200, board: BB, device: PICO, title: 電子サイコロ }
 - { id: 6-17, tier: 100, board: BB, device: PICO, title: 99 秒タイマーを Pico 2 で動かす — Soft-FPGA の主ループとクロックの固定 }
 - { id: 6-18, tier: 100, board: BB, device: PICO, title: 長押しと短押しを Pico 2 で動かす — ボタン 1 つと LED 3 個 }
 - { id: 6-19, tier: 100, board: BB, device: PICO, title: 99 秒タイマーを組む — 7 セグ 2 個の直結と圧電サウンダ }
@@ -141,7 +137,6 @@
 - { id: 7-11, tier: 200, board: BB, device: PICO, title: テキストのプロトコルを解く — RUP }
 - { id: 7-12, tier: 200, board: BB, device: FPGA, title: WS2812 — 800 kHz のタイミングを作る }
 - { id: 7-13, tier: 200, board: BB, device: PICO, title: 赤外線リモコンの受信 }
-- { id: 7-14, tier: 200, board: BB, device: FPGA, title: PS/2 キーボード }
 - { id: 7-15, tier: 200, board: BB, device: PICO, title: マンチェスタ符号 }
 - { id: 7-16, tier: 200, board: —, device: SIM, title: CRC を回路で計算する }
 - { id: 7-17, tier: 200, board: BB, device: PICO, title: Soft-FPGA の UART は何 bps まで出るか }
@@ -183,7 +178,6 @@
 - { id: 9-9, tier: 200, board: —, device: FPGA, title: タイミングの制約を書く }
 - { id: 9-10, tier: 200, board: —, device: FPGA, title: パイプラインで最高の周波数を上げる }
 - { id: 9-11, tier: 200, board: —, device: FPGA, title: リセットの解除をクロックに合わせる }
-- { id: 9-12, tier: 200, board: BB, device: FPGA, title: クロックのスキューとジッタ }
 - { id: 9-13, tier: 200, board: BB, device: FPGA, title: 外の IC とのセットアップ — 入出力の遅れ }
 - { id: 9-14, tier: 200, board: BB, device: PICO, title: Soft-FPGA にタイミングはあるか — 計算の順と遅れ }
 - { id: 9-15, tier: 100, board: —, device: SIM, title: リングオシレータの模型 — 遅れの無いシミュレーションでは発振しない }
@@ -198,7 +192,6 @@
 - { id: 10-9, tier: 200, board: BB, device: FPGA, title: 1 ビットの ΔΣ DAC — RC で均して AD3 のスペクトルで見る }
 - { id: 10-10, tier: 200, board: BB, device: FPGA, title: PWM の DAC とひずみ }
 - { id: 10-11, tier: 200, board: —, device: SIM, title: CORDIC }
-- { id: 10-12, tier: 200, board: BB, device: FPGA, title: 周波数カウンタ }
 - { id: 10-13, tier: 200, board: —, device: FPGA, title: 読み口と書き口が別の RAM }
 - { id: 10-14, tier: 200, board: —, device: SIM, title: 64 ビットで盤面を持つ — ビットボードの演算 }
 - { id: 11-1, tier: 100, board: —, device: WEB, title: TD4 の構成 — 4 ビットのレジスタ・加算器・ROM }
